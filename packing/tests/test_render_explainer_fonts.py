@@ -537,6 +537,178 @@ def test_host_selects_saved_geometry_and_ignores_a_stale_variants_failure() -> N
     assert completed.returncode == 0, completed.stderr
 
 
+def test_host_batches_keep_queued_and_unsubmitted_boot_work_pending() -> None:
+    """A decoded formula can finish between batches without completing the page early."""
+    setup = dedent("""
+        const assert = require('node:assert/strict');
+        const tasks = [], calls = [];
+        class MessageChannel {
+          constructor() {
+            this.port1 = {close() {}};
+            this.port2 = {close() {}, postMessage: () => {
+              tasks.push(() => this.port1.onmessage());
+            }};
+          }
+        }
+        const document = {documentElement: {dataset: {}}};
+        const nodes = Array.from({length: 35}, (_, index) => ({
+          index, dataset: {}, querySelectorAll: () => [],
+        }));
+        let finishLast;
+        globalThis.kpressMathText = {render(source, target) {
+          calls.push(target.index);
+          if (target === nodes.at(-1)) {
+            return new Promise(resolve => { finishLast = resolve; });
+          }
+          return Promise.resolve();
+        }};
+        const flush = async () => { for (let i = 0; i < 8; i++) await Promise.resolve(); };
+    """)
+    exercise = dedent("""
+        (async () => {
+          const finishBootstrap = squaresMath.reserve();
+          let complete = false;
+          const settled = squaresMath.settled().then(() => { complete = true; });
+          await flush();
+          assert.equal(complete, false, 'later boot scripts have not submitted their work');
+          const batch = squaresMath.batch(nodes.map(el => () => squaresMath.render(el, 'x')));
+          let submitted = false;
+          const submission = squaresMath.submitted().then(() => { submitted = true; });
+          assert.equal(calls.length, 0, 'queued work is registered before its first job');
+          await flush();
+          assert.equal(calls.length, 16, 'one browser task has a bounded formula count');
+          assert.equal(nodes[0].dataset.squaresMathReady, 'true',
+            'an early formula can finish while later formulas are still queued');
+          finishBootstrap();
+          await flush();
+          assert.equal(complete, false, 'the queue survives release of the boot reservation');
+          assert.equal(submitted, false, 'the fallback-font probe must not alter queued work');
+          assert.equal(tasks.length, 1);
+          tasks.shift()(); await flush();
+          assert.equal(calls.length, 32);
+          assert.equal(complete, false);
+          tasks.shift()(); await flush();
+          assert.equal(calls.length, nodes.length);
+          await submission;
+          assert.equal(submitted, true, 'font inspections finish while responses remain held');
+          assert.equal(complete, false, 'the last issued formula still needs its font');
+          finishLast();
+          await batch;
+          await settled;
+          assert.equal(complete, true);
+          assert.deepEqual(calls, nodes.map(el => el.index));
+          await assert.rejects(squaresMath.batch([() => { throw new Error('bad job'); }]));
+          await squaresMath.settled();
+          process.stdout.write('complete');
+        })().catch(error => { console.error(error); process.exitCode = 1; });
+    """)
+    completed = node(
+        ["-"],
+        return_completed_process=True,
+        input=setup + render_explainer.host_math_init() + exercise,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert completed.stdout == "complete"
+
+
+def test_static_math_prioritizes_active_panels_and_preserves_native_fallback() -> None:
+    """The real static producer uses semantic priority and waits for queued boot work."""
+    source = render_explainer.TEMPLATE.read_text()
+    start = source.index("  const render = squaresMath.render;\n  async function typeset() {")
+    typeset = source[start : source.index("  /* One copy of each figure", start)]
+    setup = dedent("""
+        const assert = require('node:assert/strict');
+        const jobs = [], calls = [], completed = [];
+        const makeNode = (name, {hidden = false, panel = false, native = false,
+            display = false} = {}) => {
+          const box = {dataset: {kpressMathSource: name}, textContent: 'prepared markup'};
+          const el = {name, dataset: native ? {kpressMath: display ? 'display' : 'inline',
+              kpressMathRendered: 'true'} : box.dataset,
+            classList: {contains: value => value === (native ? 'kpress-math' :
+              display ? 'tex-d' : 'tex')},
+            querySelector: () => box,
+            closest: selector => selector === '.cert-figure[hidden]' ? (hidden ? {} : null)
+              : selector === '.panel' ? (panel ? {} : null) : null};
+          if (!native) el.textContent = box.textContent;
+          return el;
+        };
+        const nodes = [
+          makeNode('hidden panel', {hidden: true, panel: true}),
+          makeNode('body', {native: true}),
+          makeNode('panel first', {panel: true}),
+          makeNode('display', {display: true}),
+          makeNode('failed native', {native: true, display: true}),
+          makeNode('panel second', {panel: true}),
+          makeNode('hidden body', {hidden: true}),
+        ];
+        const document = {querySelectorAll(selector) {
+          assert.equal(selector, '.tex, .tex-d, .kpress-math'); return nodes;
+        }, documentElement: {classList: {add: value => completed.push(value)}}};
+        const window = {kpressInitTooltips() {completed.push('tooltips');},
+          kpressInitCodeCopy() {completed.push('copy');}};
+        const kpressMathText = {complete() {completed.push('fonts');}};
+        let finishBatch, finishBootstrap;
+        const squaresMath = {
+          render(el, source, display) {
+            calls.push({source, display}); return Promise.resolve(source !== 'failed native');
+          },
+          batch(queued) {
+            jobs.push(...queued);
+            return new Promise(resolve => { finishBatch = resolve; });
+          },
+          settled() {return new Promise(resolve => { finishBootstrap = resolve; });},
+        };
+        const flush = async () => { for (let i = 0; i < 4; i++) await Promise.resolve(); };
+    """)
+    exercise = dedent("""
+        (async () => {
+          const done = typeset();
+          assert.equal(calls.length, 0, 'collecting math does not synchronously render it');
+          await Promise.all(jobs.map(job => job()));
+          assert.deepEqual(calls.map(call => call.source), [
+            'panel first', 'panel second', 'body', 'display', 'failed native',
+            'hidden panel', 'hidden body',
+          ]);
+          assert.equal(calls.find(call => call.source === 'display').display, true);
+          assert.equal(calls.find(call => call.source === 'failed native').display, true);
+          assert.equal(nodes[1].dataset.kpressMathRendered, 'true');
+          assert.equal(nodes[4].dataset.kpressMathRendered, undefined,
+            'a failed native formula keeps its semantic fallback');
+          finishBatch(); await flush();
+          assert.deepEqual(completed, [], 'the later certificate boots have not settled');
+          finishBootstrap(); await done;
+          assert.deepEqual(completed, ['fonts', 'math-ready', 'tooltips', 'copy']);
+          process.stdout.write('complete');
+        })().catch(error => { console.error(error); process.exitCode = 1; });
+    """)
+    completed = node(
+        ["-"],
+        return_completed_process=True,
+        input=setup + typeset + exercise,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert completed.stdout == "complete"
+
+
+def test_math_bootstrap_reservation_surrounds_independent_certificate_scripts() -> None:
+    """The final release still executes if one certificate's script throws."""
+    source = render_explainer.TEMPLATE.read_text()
+    scripts = re.findall(r"<script>(.*?)</script>", source, flags=re.DOTALL)
+    reserve = next(i for i, script in enumerate(scripts) if "squaresMath.reserve()" in script)
+    shared = next(i for i, script in enumerate(scripts) if "async function typeset()" in script)
+    boot = next(i for i, script in enumerate(scripts) if "/* Certificate {{ID}} */" in script)
+    release = next(i for i, script in enumerate(scripts) if "finishMathBootstrap();" in script)
+    assert reserve < shared < boot < release
+    assert scripts[release].strip() == "finishMathBootstrap();"
+    assert scripts[shared].index("show(location.hash.slice(1), false);") < scripts[
+        shared
+    ].index("typeset();")
+
+
 def test_heat_map_waits_for_math_and_cancels_a_hidden_certificates_queued_draw() -> None:
     """Expensive canvas work starts after the required math settles and a paint occurs."""
     source = render_explainer.TEMPLATE.read_text()

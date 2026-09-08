@@ -25,6 +25,7 @@ import pytest
 from nodejs_wheel import node
 
 from devtools.check_print_layout import (
+    _ACTIVE_MATH_TEXT,  # pyright: ignore[reportPrivateUsage]
     _PROBE,  # pyright: ignore[reportPrivateUsage]
     _PROVER_LAYOUT,  # pyright: ignore[reportPrivateUsage]
     _ROTATION_TARGET,  # pyright: ignore[reportPrivateUsage]
@@ -406,20 +407,25 @@ const panel = {getBoundingClientRect: () => ({top: broken ? 20 : 300, left: 0, r
 const stage = {getBoundingClientRect: () => ({bottom: 300})};
 const item = {
   whiteSpace: broken ? 'normal' : 'nowrap',
+  closest: () => null,
   getBoundingClientRect: () => ({left: broken ? -20 : 20, right: broken ? 450 : 380}),
   querySelector: selector => selector === '.katex' ? mass : item,
+  querySelectorAll: selector => [selector === '.katex' ? mass : item],
 };
 const digit = {children: [], textContent: '4001', fontSize: broken ? '14px' : '20px'};
-const mass = {fontSize: '20px', querySelectorAll: () => [digit], querySelector: () => ({})};
+const mass = {fontSize: '20px', closest: () => null,
+  querySelectorAll: () => [digit], querySelector: () => ({})};
 const hidden = {getClientRects: () => broken ? [{}] : []};
 const figure = {
   getClientRects: () => [{}],
   querySelector: selector => ({
     '.panel': panel, '.stage': stage, '.math-item': item, '.mass-val .katex': mass,
   })[selector],
-  querySelectorAll: selector => selector === '.math-item' ? [item] : [hidden],
+  querySelectorAll: selector => ({
+    '.math-item': [item], '.mass-val .katex': [mass], '[hidden]': [hidden],
+  })[selector],
 };
-const document = {querySelectorAll: () => [figure]};
+const document = {documentElement: {dataset: {}}, querySelectorAll: () => [figure]};
 const getComputedStyle = el => el;
 """
         f"\nprocess.stdout.write(JSON.stringify(({_PROVER_LAYOUT})()));\n"
@@ -440,6 +446,38 @@ const getComputedStyle = el => el;
         "the half-tangent fraction has reduced-size numerator or denominator",
         "a hidden status or verdict still occupies a visible box",
     }
+
+
+def test_minimum_mass_reads_only_the_selected_semantic_fraction() -> None:
+    """Clipped active MathML survives; inactive font variants cannot add extra terms."""
+    script = r"""
+const assert = require('node:assert/strict');
+const document = {documentElement: {dataset: {}}};
+const make = (contexts, textContent) => ({textContent, closest: () => ({
+  dataset: {squaresMathContexts: contexts}, parentElement: null,
+})});
+const nodes = [
+  make('custom-serif custom-sans', '7'), make('custom-serif custom-sans', '8'),
+  make('system-serif system-sans', '9'), make('system-serif system-sans', '10'),
+];
+"""
+    script += f"const terms = ({_ACTIVE_MATH_TEXT});\n"
+    script += r"""
+for (const prose of ['serif', 'sans']) {
+  document.documentElement.dataset.kpressProseFont = prose;
+  document.documentElement.dataset.kpressFontSet = 'custom';
+  assert.deepEqual(terms(nodes), ['7', '8']);
+  document.documentElement.dataset.kpressFontSet = 'system';
+  assert.deepEqual(terms(nodes), ['9', '10']);
+}
+// Wrong active content must remain observable to the certificate comparison.
+nodes[2].textContent = '999';
+assert.deepEqual(terms(nodes), ['999', '10']);
+"""
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 @pytest.mark.parametrize("broken", [False, True], ids=["usable", "known-touch-defects"])

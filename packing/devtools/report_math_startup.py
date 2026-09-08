@@ -108,6 +108,123 @@ def spread(values: list[float]) -> str:
     return f"{statistics.median(values):.1f} ({min(values):.1f} to {max(values):.1f})"
 
 
+def _nonnegative(value: object) -> float | None:
+    if (
+        isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        and math.isfinite(value)
+        and value >= 0
+    ):
+        return float(value)
+    return None
+
+
+def _startup_observation(run: dict[str, Any]) -> dict[str, float]:
+    """Optional diagnostics never change the registered decision or drop partial samples."""
+    values: dict[str, float] = {}
+    runtime = _nonnegative(run.get("metrics", {}).get("runtime_available_ms"))
+    if runtime is not None:
+        values["runtime"] = runtime
+    for key in ("katex_calls", "render_calls", "hydrate_calls"):
+        count = _nonnegative(run.get("counters", {}).get(key))
+        if count is not None and count.is_integer():
+            values[key] = count
+    fonts = run.get("fonts")
+    if isinstance(fonts, list):
+        values["font_calls"] = len(fonts)
+        durations = []
+        for font in fonts:
+            if not isinstance(font, dict) or font.get("outcome") != "resolved":
+                break
+            start, end = _nonnegative(font.get("start_ms")), _nonnegative(font.get("end_ms"))
+            if start is None or end is None or end < start:
+                break
+            durations.append(end - start)
+        if durations and len(durations) == len(fonts):
+            values["font_median"] = statistics.median(durations)
+            values["font_max"] = max(durations)
+    targets = run.get("targets")
+    if not isinstance(targets, list) or len(targets) != 14:
+        return values
+    if not all(isinstance(target, dict) for target in targets):
+        return values
+    slug = targets[0].get("slug")
+    if not isinstance(slug, str) or not slug:
+        return values
+    readouts = {f"s-{key}-{slug}" for key in ("phi", "theta", "d", "D", "B", "prod")}
+    expected = readouts | {f"figure6-{slug}-label-{index}" for index in range(8)}
+    times: dict[str, float] = {}
+    for target in targets:
+        identifier = target.get("id")
+        time = _nonnegative(target.get("first_visible_ms"))
+        if (
+            not isinstance(identifier, str)
+            or identifier in times
+            or time is None
+            or target.get("slug") != slug
+            or target.get("correct") is not True
+            or target.get("exposed") is not True
+        ):
+            return values
+        times[identifier] = time
+    ready = _nonnegative(run.get("metrics", {}).get("parameters_ready_ms"))
+    if (
+        times.keys() == expected
+        and ready is not None
+        and math.isclose(max(times.values()), ready, rel_tol=0, abs_tol=1e-6)
+    ):
+        values["readouts_ready"] = max(times[key] for key in readouts)
+        values["readouts_gap"] = ready - values["readouts_ready"]
+    return values
+
+
+def startup_diagnostics(runs: list[dict[str, Any]]) -> list[str]:
+    """Compare complete optional observations, preserving each run's weighting."""
+    arms = [
+        [_startup_observation(run) for run in runs if run.get("label") == label]
+        for label in ("control", "candidate")
+    ]
+    if not all(arms):
+        return []
+    rows = []
+    for key, label in (
+        ("runtime", "Runtime available (ms)"),
+        ("katex_calls", "KaTeX render calls"),
+        ("render_calls", "Runtime render calls"),
+        ("hydrate_calls", "Runtime hydrate calls"),
+        ("font_calls", "Font load calls"),
+        ("font_median", "Per-run median font promise (ms)"),
+        ("font_max", "Per-run longest font promise (ms)"),
+        ("readouts_ready", "All six dynamic readouts exposed (ms)"),
+        ("readouts_gap", "Dynamic readouts to all fourteen (ms)"),
+    ):
+        if all(key in observation for arm in arms for observation in arm):
+            control, candidate = [spread([value[key] for value in arm]) for arm in arms]
+            rows.append(f"| {label} | {control} | {candidate} |")
+    if not rows:
+        return []
+    lines = [
+        "",
+        "Startup diagnostics, median (minimum to maximum) across runs:",
+        "",
+        "| Observation | Control | Candidate |",
+        "| --- | --- | --- |",
+        *rows,
+        "",
+    ]
+    if any("font promise" in row for row in rows):
+        lines.extend(
+            [
+                (
+                    "Font promise durations include JavaScript scheduling; "
+                    "they are not isolated font-decoding measurements."
+                ),
+                "",
+            ]
+        )
+    return lines
+
+
 def geometry_result(
     reports: list[dict[str, Any]], hypothesis: dict[str, Any]
 ) -> tuple[list[str], list[str]]:
@@ -318,6 +435,7 @@ def render(root: Path = CAMPAIGN) -> str:
                         f"{spread(result['sampler']['control'])}, "
                         f"candidate {spread(result['sampler']['candidate'])}."
                     )
+                lines.extend(startup_diagnostics(runs))
             verdict = "accepted" if passes and all(passes) else "rejected"
             if experiment["correctness"] != "passed":
                 verdict = f"correctness {experiment['correctness']}"

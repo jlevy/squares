@@ -106,6 +106,20 @@ seconds, including 889 reachable behavioral tests in 50.28 seconds.
 Its [receipt](runs/push-9baa6e08-corrections-passed.log.gz) records the scoped replay;
 the earlier full selection’s failure remains retained above.
 
+The first hosted dispatch at `25e66d7b` exposed the platform and scheduling defects
+retained in exp-005 and exp-006. The repaired local geometry matrix passes all
+twenty-nine cells; the changed scheduling path also passes its delayed-font and fallback
+controls. The stable hosted candidate still needs its own complete matrix.
+H-005 was registered at 20:08:15 UTC before timing that candidate.
+
+The ordinary full checkpoint at `25e66d7b` passed all sixty-nine Linux steps with no
+internal skips, plus four macOS portability steps.
+Its [complete receipts](runs/packing-validation-34270139620.tar.gz) preserve the checked
+source, commands, outputs and coverage proof from
+[run 34270139620](https://github.com/jlevy/squares/actions/runs/34270139620). Later
+publication and checker changes require their affected tests and final Pages checks;
+this checkpoint does not by itself certify those changes.
+
 ## Measurement protocol
 
 Run `python -m devtools.check_math_startup` through the frozen project environment from

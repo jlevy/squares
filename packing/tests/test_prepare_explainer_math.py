@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from pathlib import Path
 from textwrap import dedent
+from typing import TYPE_CHECKING, cast
 
 import pytest
+
+if TYPE_CHECKING:
+    from playwright.async_api import Route
 
 from devtools import prepare_explainer_math, render_explainer
 from devtools.prepare_explainer_math import (
@@ -159,6 +164,8 @@ def test_geometry_oracle_requires_hidden_then_visible_unchanged_boxes_and_line_b
     assert any(
         "reserved width differs" in message for message in geometry_findings(before, after)
     )
+    after[0] = {**after[0], "text_rendering": "auto"}
+    assert any("geometricPrecision" in message for message in geometry_findings(before, after))
 
 
 def test_font_hold_rewrites_actual_math_transfers_and_leaves_reading_faces_embedded() -> None:
@@ -171,6 +178,43 @@ def test_font_hold_rewrites_actual_math_transfers_and_leaves_reading_faces_embed
     assert output.count("data:font/woff2;base64,YWJj") == 1
     assert sorted(fonts.values()) == [b"abc", b"def"]
     assert all(url in output for url in fonts)
+
+
+def test_held_font_responses_all_start_before_any_waits_for_completion() -> None:
+    """Serialized WebKit fulfills can spend the real runtime's entire font timeout."""
+    started: set[str] = set()
+    payloads: dict[str, bytes] = {}
+
+    async def exercise() -> None:
+        all_started = asyncio.Event()
+
+        class Request:
+            def __init__(self, url: str) -> None:
+                self.url = url
+
+        class HeldResponse:
+            def __init__(self, url: str) -> None:
+                self.request = Request(url)
+
+            async def fulfill(
+                self, *, body: bytes, content_type: str, headers: dict[str, str]
+            ) -> None:
+                assert content_type == "font/woff2"
+                assert headers == {"access-control-allow-origin": "*"}
+                started.add(self.request.url)
+                if len(started) == 3:
+                    all_started.set()
+                await all_started.wait()
+                payloads[self.request.url] = body
+
+        fonts = {f"font-{index}": bytes([index]) for index in range(3)}
+        held = cast("list[Route]", [HeldResponse(url) for url in fonts])
+        await asyncio.wait_for(
+            prepare_explainer_math.release_held_fonts(held, fonts), timeout=1
+        )
+        assert payloads == fonts
+
+    asyncio.run(exercise())
 
 
 @pytest.mark.parametrize("font_set", ["custom", "system"])
@@ -246,6 +290,15 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
             "prose_font": "sans",
             "font_set": "system",
             "held_fonts": 1,
+            "font_timing": {
+                "first_math_request_ms": 20,
+                "first_font_request_ms": 30,
+                "release_started_ms": 200,
+                "release_completed_ms": 210,
+                "held_ms": 170,
+                "release_ms": 10,
+                "rejections": [],
+            },
             "before": [],
             "after": [],
             "early_visible": [],
@@ -267,6 +320,17 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
         }
 
     monkeypatch.setattr(prepare_explainer_math, "check_geometry", check)
+    monkeypatch.setattr(
+        prepare_explainer_math,
+        "check_preparation_metrics",
+        lambda **_options: {
+            "positive": {"fontSize": 18, "width": 72, "linearWidth": 72},
+            "controls": {
+                "hinted_metrics": {"error": "math preparation requires geometricPrecision"},
+                "nonlinear_scaling": {"error": "math width does not scale linearly"},
+            },
+        },
+    )
     arguments = [
         str(source),
         "--self-test",
@@ -289,7 +353,12 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
     assert report["font_set"] == "system"
     assert report["prose_font"] == "sans"
     assert report["coverage_after"]["unreserved"] == []
+    assert report["font_timing"]["held_ms"] == 170
+    assert report["font_timing"]["release_ms"] == 10
+    assert report["font_timing"]["rejections"] == []
     assert "missing_reservation" in report["controls"]
+    assert report["preparation_metrics"]["positive"]["linearWidth"] == 72
+    assert {"hinted_metrics", "nonlinear_scaling"} <= report["controls"].keys()
     for control in report["controls"].values():
         assert control["rejected"] is True
         assert control["report"]["findings"]

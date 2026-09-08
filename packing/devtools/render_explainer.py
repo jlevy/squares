@@ -1204,7 +1204,47 @@ HOST_MATH_INIT = r"""
   // The same one-mu spacing the SVG labels use for an italic function name.
   const kern = source => String(source).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
   const pending = new Set();
+  const submitting = new Set();
   const versions = new WeakMap();
+  function track(result, waiting = pending) {
+    waiting.add(result);
+    result.then(() => waiting.delete(result), () => waiting.delete(result));
+    return result;
+  }
+  // Reserve work before its producer runs, including later certificate scripts.
+  function reserve() {
+    let release;
+    const result = new Promise(resolve => { release = resolve; });
+    track(result);
+    track(result, submitting);
+    return release;
+  }
+  function nextTask() {
+    return new Promise(resolve => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = () => {
+        channel.port1.close(); channel.port2.close(); resolve();
+      };
+      channel.port2.postMessage(null);
+    });
+  }
+  function batch(jobs) {
+    const finishSubmission = reserve();
+    // Register the whole queue before its first job runs. A task boundary lets
+    // completed formulas reveal while later formulas are still being submitted.
+    return track(Promise.resolve().then(async () => {
+      const issued = [];
+      try {
+        for (let start = 0; start < jobs.length; start += 16) {
+          if (start) await nextTask();
+          for (const job of jobs.slice(start, start + 16)) issued.push(job());
+        }
+      } finally {
+        finishSubmission();
+      }
+      await Promise.all(issued);
+    }));
+  }
   function render(el, source, display) {
     const version = (versions.get(el) || 0) + 1;
     versions.set(el, version);
@@ -1228,14 +1268,14 @@ HOST_MATH_INIT = r"""
       el.dataset.squaresMathReady = 'true';
       return false;
     });
-    pending.add(result);
-    result.finally(() => pending.delete(result));
-    return result;
+    return track(result);
   }
-  async function settled() {
-    while (pending.size) await Promise.all([...pending]);
+  async function drain(waiting) {
+    while (waiting.size) await Promise.all([...waiting]);
   }
-  globalThis.squaresMath = { render, settled, context };
+  const submitted = () => drain(submitting);
+  const settled = () => drain(pending);
+  globalThis.squaresMath = { render, reserve, batch, submitted, settled, context };
 })();
 """
 

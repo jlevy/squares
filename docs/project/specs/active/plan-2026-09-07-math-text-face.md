@@ -9,15 +9,17 @@ status: active
 
 **Date:** 2026-09-07 (last updated 2026-09-08)
 
-**Status:** The serif integration merged as
-[squares #114](https://github.com/jlevy/squares/pull/114). The sans adoption and loading
-fixes are implemented in [squares #128](https://github.com/jlevy/squares/pull/128).
-Local Chromium, Firefox, and WebKit checks cover delayed fonts, caption faces, early
-input, and the no-JavaScript fallback.
-The shared runtime and missing-stylesheet fallback merged in
-[kpress #59](https://github.com/jlevy/kpress/pull/59) and
-[kpress #60](https://github.com/jlevy/kpress/pull/60), with all upstream checks passing.
-This repository pins their merged source at `7b20ae70`.
+**Status:** The serif integration merged in
+[Squares #114](https://github.com/jlevy/squares/pull/114), and the sans adoption and
+no-swap fixes merged in [Squares #128](https://github.com/jlevy/squares/pull/128). The
+shared runtime follow-up merged in
+[KPress #61](https://github.com/jlevy/kpress/pull/61), followed by its architecture
+update in [KPress #64](https://github.com/jlevy/kpress/pull/64). This repository pins
+their merged source at `6e173fa`. Prepared startup and saved-setting support are
+implemented; the Squares release and hosted H-003/H-004 results remain pending.
+The
+[font and math loading architecture](../../../../vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md)
+owns the shared rendering, readiness, and preparation contracts.
 
 **Workflow entry:** feature implementation from spec.
 **Tracking:** epic `think-rk9v`; squares tasks `think-58av` (integration, closed),
@@ -669,22 +671,49 @@ different relation for every reader.
 The fix that would settle it is a sans that carries the three characters — Source Sans 3
 does upstream, and the woff2 kpress ships is a Latin subset that does not.
 
-## Startup and layout follow-up, 2026-09-08
+## Startup and Layout Follow-Up, 2026-09-08
 
 The owner confirmed that the deployed `33cd4760` page no longer swaps math faces, then
 reported slow parameter appearance and neighboring text moving as math arrives.
 `think-qcmi` tracks this W7 continuation, with `think-yygv` for the measurement tool,
 `think-lkjf` for Squares preparation and scheduling, and `think-gnl0` for the shared
-KPress runtime. The upstream counterpart is `kpr-prsb`.
+KPress runtime. The upstream counterpart is `kpr-prsb`; `think-fatc` covers preparation
+for every saved font setting and complete geometry coverage.
+
+The publication command, `python -m devtools.render_explainer --prepare-math`, now
+reserves the measured width, height and baseline of each unbreakable math base.
+It prepares all four combinations of custom/system fonts and serif/sans prose.
+CSS selects the matching variant before first paint, while inactive variants stay
+outside layout and the accessibility tree.
+Matching hydration preserves these boxes and natural line breaks.
+The
+[KPress architecture](../../../../vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md)
+defines the shared contract; Squares owns preparation under its publication styles.
+
+The original HTML includes the default certificate figures and initial parameter math.
+Each formula becomes visible when its required glyph fonts are ready, independently of
+other formulas. Initial parameter rendering precedes screen heat-map work, which waits
+for math to settle; print retains an explicit completion path.
+Readable fallback, latest input and certificate switching remain checked behaviors.
+List bullets retain KPress’s square dimensions and use the requested downward optical
+offset in both screen and print.
+
+Pages checks one prepared artifact across Chromium, Firefox and WebKit, at desktop and
+mobile widths under all four saved settings, plus all four settings in Chromium print.
+The geometry guard requires every expected visible math base, checks variant selection
+and duplicate IDs, and retains negative controls for removed widths, consistently wrong
+widths and missing entire reservations.
+First-exposure, early-input, no-JavaScript, font-failure and alternate-certificate
+checks remain part of publication validation.
 
 The
-[bounded integration plan and experiment record](../../../../packing/benchmarks/math-startup/README.md)
-retain the control, competing designs, and acceptance criteria.
-The proposed change ships measured space for each unbreakable math base, hydrates
-matching initial markup, waits only for fonts an expression uses, and computes initial
-readouts before heat maps.
-This section records the work in progress; deployment and performance claims require the
-completed browser checks and paired results.
+[integration plan and experiment record](../../../../packing/benchmarks/math-startup/README.md)
+retain the control, failed intermediate runtime and measured default-profile result.
+The initial full-observer timing comparison remains under review because observer cost
+and the host regime prevent an unqualified latency claim.
+The hosted H-003 parameter-only comparison, complete H-004 saved-setting verdict and
+Squares release verification remain pending.
+Implemented checks do not substitute for those results.
 
 ## Open Questions
 

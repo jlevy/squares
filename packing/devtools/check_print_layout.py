@@ -37,6 +37,7 @@ from typing import NotRequired, TypedDict
 
 from playwright.sync_api import CDPSession, Locator, Page, ViewportSize
 
+from devtools.check_math_loading import ACTIVE_MATH_VARIANT
 from devtools.render_explainer import WALKTHROUGH
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
@@ -472,6 +473,7 @@ SELF_CHECK_BULLET_CLASS = f"{SELF_CHECK_CLASS}-bullet"
 #: intended them. The active certificate is checked at each screen width.
 _PROVER_LAYOUT = r"""() => {
   const found = [];
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
   for (const figure of document.querySelectorAll('figure[data-figure="5"]')) {
     if (!figure.getClientRects().length) continue;
     const panel = figure.querySelector('.panel');
@@ -482,15 +484,15 @@ _PROVER_LAYOUT = r"""() => {
     for (const item of figure.querySelectorAll('.math-item')) {
       if (getComputedStyle(item).whiteSpace !== 'nowrap')
         found.push('a direction item permits an internal line break');
-      const ink = item.querySelector('.katex-html') || item;
+      const ink = activeMath(item, '.katex-html') || item;
       const box = ink.getBoundingClientRect();
       if (box.left < left - 1 || box.right > right + 1)
         found.push('a direction item overflows the control panel');
-      const math = item.querySelector('.katex');
+      const math = activeMath(item, '.katex');
       if (math && math.querySelector('.mfrac')) fraction(math, 'half-tangent');
     }
     if (!figure.querySelector('.math-item')) found.push('direction items are missing');
-    fraction(figure.querySelector('.mass-val .katex'), 'mass');
+    fraction(activeMath(figure, '.mass-val .katex'), 'mass');
     for (const hidden of figure.querySelectorAll('[hidden]')) {
       if (hidden.getClientRects().length)
         found.push('a hidden status or verdict still occupies a visible box');
@@ -498,7 +500,15 @@ _PROVER_LAYOUT = r"""() => {
   }
   return found;
 
+  function activeMath(root, selector) {
+    return [...root.querySelectorAll(selector)].find(activeVariant);
+  }
+
   function fraction(mass, label) {
+    if (!mass) {
+      found.push(`the ${label} math is missing`);
+      return;
+    }
     const digits = [...mass.querySelectorAll('.katex-html .mfrac .mord')]
       .filter(el => !el.children.length && /[0-9]/.test(el.textContent));
     const size = parseFloat(getComputedStyle(mass).fontSize);
@@ -506,7 +516,15 @@ _PROVER_LAYOUT = r"""() => {
         el => parseFloat(getComputedStyle(el).fontSize) < size * .95))
       found.push(`the ${label} fraction has reduced-size numerator or denominator`);
   }
-}"""
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
+
+
+#: Semantic MathML is clipped even for active math, so select its profile from metadata
+#: rather than visual visibility. Dormant variants must not duplicate fraction terms.
+_ACTIVE_MATH_TEXT = r"""nodes => {
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
+  return nodes.filter(activeVariant).map(node => node.textContent);
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 
 def prover_findings(page: Page) -> list[str]:
@@ -585,7 +603,9 @@ def prover_findings(page: Page) -> list[str]:
             found.append(prefix + "the ordinary on-net minimum shows a stale verdict")
         if canvas.evaluate("el => el.toDataURL()") == initial_bitmap:
             found.append(prefix + "the minimum button does not change the opening pose")
-        terms = figure.locator(f"#mv-{slug} .katex-mathml mfrac mn").all_text_contents()
+        terms = figure.locator(f"#mv-{slug} .katex-mathml mfrac mn").evaluate_all(
+            _ACTIVE_MATH_TEXT
+        )
         minimum_mass = Fraction(int(terms[0]), int(terms[1])) if len(terms) == 2 else None
         if slug in known_minima and minimum_mass != known_minima[slug]:
             found.append(prefix + "the minimum button disagrees with the retained certificate")

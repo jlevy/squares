@@ -16,6 +16,7 @@ from devtools.report_math_startup import (
     interval,
     paired_result,
     render,
+    startup_diagnostics,
 )
 
 
@@ -55,6 +56,89 @@ def test_no_change_cannot_pass_the_registered_threshold() -> None:
     for pair in range(0, len(runs), 2):
         runs[pair + 1]["metrics"] = deepcopy(runs[pair]["metrics"])
     assert not paired_result(runs, RULE)["passes"]
+
+
+def diagnostic_samples() -> list[dict[str, Any]]:
+    runs = samples()
+    for run in runs:
+        ready = run["metrics"]["parameters_ready_ms"]
+        run["metrics"]["runtime_available_ms"] = 40
+        run["counters"] = {"katex_calls": 0, "render_calls": 0, "hydrate_calls": 211}
+        run["fonts"] = [
+            {"start_ms": 10, "end_ms": 20, "outcome": "resolved"},
+            {"start_ms": 15, "end_ms": 45, "outcome": "resolved"},
+        ]
+        run["targets"] = [
+            {
+                "id": identifier,
+                "slug": "19-5",
+                "correct": True,
+                "exposed": True,
+                "first_visible_ms": ready - 20 if identifier.startswith("s-") else ready,
+            }
+            for identifier in [
+                *(f"figure6-19-5-label-{index}" for index in range(8)),
+                *(f"s-{key}-19-5" for key in ("phi", "theta", "d", "D", "B", "prod")),
+            ]
+        ]
+    return runs
+
+
+def test_startup_diagnostics_derive_promise_durations_and_complete_readout_gap() -> None:
+    runs = diagnostic_samples()
+    original = deepcopy(runs)
+    decision = paired_result(runs, RULE)
+    text = "\n".join(startup_diagnostics(runs))
+    assert "| Runtime available (ms) | 40.0 (40.0 to 40.0) |" in text
+    assert "| Runtime hydrate calls | 211.0 (211.0 to 211.0) |" in text
+    assert "| Font load calls | 2.0 (2.0 to 2.0) |" in text
+    assert "| Per-run median font promise (ms) | 20.0 (20.0 to 20.0) |" in text
+    assert "| Per-run longest font promise (ms) | 30.0 (30.0 to 30.0) |" in text
+    assert "| All six dynamic readouts exposed (ms) | 630.0 (80.0 to 1180.0) |" in text
+    assert "| Dynamic readouts to all fourteen (ms) | 20.0 (20.0 to 20.0) |" in text
+    assert "not isolated font-decoding measurements" in text
+    assert runs == original
+    assert paired_result(runs, RULE) == decision
+
+
+def test_startup_diagnostics_are_optional_for_older_reports() -> None:
+    assert startup_diagnostics(samples()) == []
+
+
+@pytest.mark.parametrize("defect", ["missing", "negative", "pending"])
+def test_font_diagnostics_do_not_drop_incomplete_or_invalid_requests(defect: str) -> None:
+    runs = diagnostic_samples()
+    font = runs[0]["fonts"][0]
+    if defect == "missing":
+        del font["end_ms"]
+    elif defect == "negative":
+        font["end_ms"] = 0
+    else:
+        font["outcome"] = "pending"
+    text = "\n".join(startup_diagnostics(runs))
+    assert "Font load calls" in text
+    assert "Per-run median font promise" not in text
+    assert "Per-run longest font promise" not in text
+
+
+@pytest.mark.parametrize("defect", ["missing", "duplicate", "slug", "incorrect", "time"])
+def test_readout_diagnostics_require_all_fourteen_mapped_targets(defect: str) -> None:
+    runs = diagnostic_samples()
+    targets = runs[0]["targets"]
+    if defect == "missing":
+        targets.pop()
+    elif defect == "duplicate":
+        targets[-1]["id"] = targets[-2]["id"]
+    elif defect == "slug":
+        targets[-1]["slug"] = "381-100"
+    elif defect == "incorrect":
+        targets[-1]["correct"] = False
+    else:
+        targets[0]["first_visible_ms"] += 1
+    text = "\n".join(startup_diagnostics(runs))
+    assert "Runtime hydrate calls" in text
+    assert "dynamic readouts" not in text
+    assert "Dynamic readouts to all fourteen" not in text
 
 
 def test_parameter_confirmation_refuses_wrong_mode_and_excessive_observer_cost() -> None:

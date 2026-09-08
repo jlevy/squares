@@ -3,7 +3,11 @@
 KaTeX's HTML has measured vertical struts, but its glyph runs still have intrinsic
 width. A hidden TeX or MathML fallback therefore cannot reserve the final layout.
 The publication build typesets each supported font preference in pinned Chromium and
-measures each unbreakable ``.base`` separately. Its fixed outer box keeps that width,
+measures each unbreakable ``.base`` separately. The host requires
+``text-rendering: geometricPrecision`` during preparation and reading: hinted glyph
+advances are not linear across font sizes or platforms. A second measurement at 16
+times the font size checks that the saved em width scales within one CSS pixel.
+Its fixed outer box keeps that width,
 height, and baseline while
 the selectable HTML inside waits for its fonts. Keeping separate bases preserves
 KaTeX's line-break opportunities and leaves glyph ink free to overhang the box.
@@ -21,11 +25,13 @@ The shared font and hydration contract is documented at
 from __future__ import annotations
 
 import argparse
+import asyncio
 import base64
 import json
 import os
 import re
 import sys
+import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from html import escape
@@ -33,7 +39,10 @@ from html.parser import HTMLParser
 from itertools import pairwise
 from pathlib import Path
 from textwrap import dedent
-from typing import TypedDict, cast, override
+from typing import TYPE_CHECKING, NotRequired, TypedDict, cast, override
+
+if TYPE_CHECKING:
+    from playwright.async_api import Route
 
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
@@ -172,8 +181,50 @@ def prepared_html(source: str, slots: list[MathSlot], fragments: list[PreparedFr
     return result
 
 
+_LINEAR_BASE_GEOMETRY = dedent("""
+    (base) => {
+      const style = getComputedStyle(base);
+      const fontSize = parseFloat(style.fontSize);
+      const width = base.getBoundingClientRect().width;
+      if (style.textRendering.toLowerCase() !== 'geometricprecision') {
+        throw new Error('math preparation requires geometricPrecision, got '
+          + style.textRendering + ': ' + base.textContent);
+      }
+      const scale = 16;
+      // A fresh same-parent sample keeps selector context and leaves the live
+      // formula and its layout untouched.
+      const probe = base.cloneNode(true);
+      probe.style.setProperty('font-size', (fontSize * scale) + 'px', 'important');
+      probe.style.position = 'absolute';
+      probe.style.visibility = 'hidden';
+      base.after(probe);
+      let linearWidth, scaledFontSize;
+      try {
+        scaledFontSize = parseFloat(getComputedStyle(probe).fontSize);
+        linearWidth = probe.getBoundingClientRect().width / scale;
+      } finally {
+        probe.remove();
+      }
+      if (!(fontSize > 0 && width > 0 && linearWidth > 0)) {
+        throw new Error('empty or hidden linear math geometry: ' + base.textContent);
+      }
+      if (Math.abs(scaledFontSize - fontSize * scale) > 0.01) {
+        throw new Error('math scaling sample did not use the requested font size: '
+          + scaledFontSize + 'px instead of ' + (fontSize * scale) + 'px');
+      }
+      if (Math.abs(width - linearWidth) > 1) {
+        throw new Error('math width does not scale linearly: ' + width + 'px at '
+          + fontSize + 'px versus ' + linearWidth + 'px normalized from '
+          + scaledFontSize + 'px: ' + base.textContent);
+      }
+      return {fontSize, width, linearWidth, textRendering: style.textRendering};
+    }
+""")
+
+
 _MEASURE_MATH = dedent(r"""
     (attributeNames) => {
+      const linearGeometry = __LINEAR_BASE_GEOMETRY__;
       const fixed = value => {
         if (!Number.isFinite(value)) throw new Error('non-finite math geometry');
         return Number(value.toFixed(8)) + 'em';
@@ -201,7 +252,8 @@ _MEASURE_MATH = dedent(r"""
           if (!bases.length) throw new Error('KaTeX emitted no measurable base');
           for (let part = 0; part < bases.length; part++) {
             const base = bases[part], child = clonedBases[part];
-            const fontSize = parseFloat(getComputedStyle(base).fontSize);
+            const measured = linearGeometry(base);
+            const fontSize = measured.fontSize;
             const parentSize = parseFloat(getComputedStyle(base.parentElement).fontSize);
             const marker = document.createElement('span');
             marker.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;'
@@ -215,6 +267,10 @@ _MEASURE_MATH = dedent(r"""
             }
             const box = document.createElement('span');
             box.className = 'squares-math-box';
+            box.dataset.squaresMathMeasuredSize = String(fontSize);
+            box.dataset.squaresMathMeasuredWidth = String(measured.width);
+            box.dataset.squaresMathLinearWidth = String(measured.linearWidth);
+            box.dataset.squaresMathTextRendering = measured.textRendering;
             box.style.cssText = 'display:inline-block;position:relative;'
               + 'font-size:' + fixed(fontSize / parentSize) + ';'
               + 'width:' + fixed(rect.width / fontSize) + ';'
@@ -241,7 +297,7 @@ _MEASURE_MATH = dedent(r"""
       }
       return result;
     }
-""")
+""").replace("__LINEAR_BASE_GEOMETRY__", _LINEAR_BASE_GEOMETRY)
 
 
 _COMBINE_MATH_VARIANTS = dedent("""
@@ -388,6 +444,13 @@ class GeometryBox(TypedDict):
     baseline: float
     intrinsic_width: float
     hidden: bool
+    text: NotRequired[str]
+    font_size: NotRequired[float]
+    text_rendering: NotRequired[str]
+    prepared_font_size: NotRequired[float | None]
+    prepared_width: NotRequired[float | None]
+    prepared_linear_width: NotRequired[float | None]
+    prepared_text_rendering: NotRequired[str | None]
 
 
 class GeometryReport(TypedDict):
@@ -398,6 +461,7 @@ class GeometryReport(TypedDict):
     prose_font: str
     font_set: str
     held_fonts: int
+    font_timing: FontHoldTiming
     before: list[GeometryBox]
     after: list[GeometryBox]
     early_visible: list[ReadyMathBox]
@@ -406,6 +470,28 @@ class GeometryReport(TypedDict):
     environment: BrowserEnvironment
     source_identity: PageIdentity
     findings: list[str]
+
+
+class MathFontRejection(TypedDict):
+    source: str
+    elapsed_ms: float
+    reason: str
+
+
+class FontRequestTrace(TypedDict):
+    time_origin_ms: float
+    first_math_request_ms: float | None
+    rejections: list[MathFontRejection]
+
+
+class FontHoldTiming(TypedDict):
+    first_math_request_ms: float | None
+    first_font_request_ms: float | None
+    release_started_ms: float
+    release_completed_ms: float
+    held_ms: float | None
+    release_ms: float
+    rejections: list[MathFontRejection]
 
 
 class MathCoverage(TypedDict):
@@ -477,6 +563,8 @@ def geometry_findings(
     if not after or any(box["hidden"] for box in after):
         findings.append("prepared math did not become visible after fonts arrived")
     for box in after:
+        if box.get("text_rendering", "geometricPrecision").lower() != "geometricprecision":
+            findings.append(f"base {box['key']}: math does not use geometricPrecision")
         delta = abs(box["width"] - box["intrinsic_width"])
         if delta > tolerance:
             findings.append(
@@ -549,11 +637,19 @@ _GEOMETRY_SETUP = dedent("""
 _GEOMETRY_SNAPSHOT = dedent("""
     () => globalThis.__squaresGeometryBoxes.filter(box => box.isConnected).map(box => {
       const rect = box.getBoundingClientRect(), style = getComputedStyle(box);
+      const base = box.firstElementChild, baseStyle = getComputedStyle(base);
+      const measured = name => box.dataset[name] ? Number(box.dataset[name]) : null;
       return {key: Number(box.dataset.squaresGeometryKey),
         group: Number(box.dataset.squaresGeometryGroup), x: rect.x, y: rect.y,
         width: rect.width, height: rect.height,
         baseline: rect.bottom + parseFloat(style.verticalAlign),
-        intrinsic_width: box.firstElementChild.getBoundingClientRect().width,
+        intrinsic_width: base.getBoundingClientRect().width,
+        text: base.textContent, font_size: parseFloat(baseStyle.fontSize),
+        text_rendering: baseStyle.textRendering,
+        prepared_font_size: measured('squaresMathMeasuredSize'),
+        prepared_width: measured('squaresMathMeasuredWidth'),
+        prepared_linear_width: measured('squaresMathLinearWidth'),
+        prepared_text_rendering: box.dataset.squaresMathTextRendering || null,
         hidden: style.visibility === 'hidden'};
     })
 """)
@@ -672,7 +768,81 @@ _GEOMETRY_EARLY_READY = dedent("""
 """)
 
 
+_GEOMETRY_FONT_TRACE = dedent("""
+    (() => {
+      const trace = globalThis.__squaresGeometryFontTrace = {
+        time_origin_ms: performance.timeOrigin, first_math_request_ms: null, rejections: []
+      };
+      let runtime;
+      Object.defineProperty(globalThis, 'kpressMathText', {
+        configurable: true,
+        get() { return runtime; },
+        set(api) {
+          runtime = api;
+          for (const name of ['render', 'hydrate']) {
+            const original = api[name];
+            api[name] = function(...args) {
+              const start = performance.now();
+              trace.first_math_request_ms ??= start;
+              const result = original.apply(this, args);
+              result.then(undefined, error => {
+                trace.rejections.push({source: String(args[0]),
+                  elapsed_ms: performance.now() - start, reason: String(error)});
+              });
+              return result;
+            };
+          }
+        }
+      });
+    })();
+""")
+
+
+async def release_held_fonts(held: list[Route], font_data: dict[str, bytes]) -> None:
+    """Start every response together, without serial browser acknowledgements."""
+    await asyncio.gather(
+        *(
+            route.fulfill(
+                body=font_data[route.request.url],
+                content_type="font/woff2",
+                headers={"access-control-allow-origin": "*"},
+            )
+            for route in held
+        )
+    )
+
+
 def check_geometry(
+    source: str,
+    *,
+    browser_name: str = "chromium",
+    width: int = 1280,
+    medium: str = "screen",
+    break_reservation: bool = False,
+    wrong_reservation: bool = False,
+    missing_reservation: bool = False,
+    alternate_certificate: bool = False,
+    prose_font: str = "serif",
+    font_set: str = "custom",
+) -> GeometryReport:
+    """Keep the synchronous CLI boundary while releasing font transfers concurrently."""
+    return asyncio.run(
+        _check_geometry_async(
+            source,
+            browser_name=browser_name,
+            width=width,
+            medium=medium,
+            break_reservation=break_reservation,
+            wrong_reservation=wrong_reservation,
+            missing_reservation=missing_reservation,
+            alternate_certificate=alternate_certificate,
+            prose_font=prose_font,
+            font_set=font_set,
+        )
+    )
+
+
+async def _check_geometry_async(
     source: str,
     *,
     browser_name: str = "chromium",
@@ -692,17 +862,25 @@ def check_geometry(
     The negative control removes one reservation during that phase; the checker must
     reject it. Neither test alteration reaches the artifact on disk.
     """
-    from playwright.sync_api import Route, sync_playwright  # noqa: PLC0415
+    from playwright.async_api import async_playwright  # noqa: PLC0415
 
     instrumented, font_data = held_math_fonts(
-        font_preference_html(source, prose_font=prose_font, font_set=font_set)
+        font_preference_html(
+            _head_script(source, _GEOMETRY_FONT_TRACE),
+            prose_font=prose_font,
+            font_set=font_set,
+        )
     )
     held: list[Route] = []
     released = False
+    first_request: float | None = None
 
-    def route_font(route: Route) -> None:
+    async def route_font(route: Route) -> None:
+        nonlocal first_request
+        if first_request is None:
+            first_request = time.time() * 1000
         if released:
-            route.fulfill(
+            await route.fulfill(
                 body=font_data[route.request.url],
                 content_type="font/woff2",
                 headers={"access-control-allow-origin": "*"},
@@ -710,23 +888,29 @@ def check_geometry(
         else:
             held.append(route)
 
-    with sync_playwright() as driver:
+    async with async_playwright() as driver:
         browser_type = getattr(driver, browser_name)
         executable = os.environ.get(BROWSER_OVERRIDE) if browser_name == "chromium" else None
-        browser = browser_type.launch(executable_path=executable)
+        browser = await browser_type.launch(executable_path=executable)
         browser_version = browser.version
         try:
-            page = browser.new_page(viewport={"width": width, "height": 960})
-            page.emulate_media(media=medium, reduced_motion="reduce", color_scheme="light")
-            page.route(f"{_FONT_URL}*", route_font)
-            page.set_content(instrumented, wait_until="domcontentloaded")
+            page = await browser.new_page(viewport={"width": width, "height": 960})
+            await page.emulate_media(
+                media=medium, reduced_motion="reduce", color_scheme="light"
+            )
+            await page.route(f"{_FONT_URL}*", route_font)
+            await page.set_content(instrumented, wait_until="domcontentloaded")
             if alternate_certificate:
-                page.locator('.cert-toggle button[aria-pressed="false"]').first.evaluate(
+                await page.locator('.cert-toggle button[aria-pressed="false"]').first.evaluate(
                     "button => button.click()"
                 )
+            # Every queued hydration must inspect the real computed font before the
+            # temporary monospace override below. Submission does not wait for the
+            # font responses held here; older artifacts submitted synchronously.
+            await page.evaluate("() => globalThis.squaresMath?.submitted?.()")
             # Reading fonts can change ordinary prose widths too. Settle those first,
             # without waiting for the math requests deliberately held by this probe.
-            page.evaluate(
+            await page.evaluate(
                 dedent("""
                 async () => {
                   await Promise.all([...document.fonts].filter(face =>
@@ -740,17 +924,17 @@ def check_geometry(
             if missing_reservation:
                 # Remove a complete reservation before discovery. A checker that
                 # measures only surviving boxes would silently accept this subset.
-                page.evaluate(
+                await page.evaluate(
                     "const box = [...document.querySelectorAll('.squares-math-box')]"
                     ".find(node => node.getBoundingClientRect().width > 0);"
                     "const base = box.firstElementChild; base.style.position = '';"
                     "box.replaceWith(base)"
                 )
-            coverage_before = cast("MathCoverage", page.evaluate(_MATH_COVERAGE))
-            page.evaluate(_GEOMETRY_SETUP)
+            coverage_before = cast("MathCoverage", await page.evaluate(_MATH_COVERAGE))
+            await page.evaluate(_GEOMETRY_SETUP)
             source_identity = cast(
                 "PageIdentity",
-                page.evaluate(
+                await page.evaluate(
                     dedent("""
                     () => ({title: document.title,
                       publication_date: document.querySelector(
@@ -760,20 +944,22 @@ def check_geometry(
                 """)
                 ),
             )
-            early_visible = cast("list[ReadyMathBox]", page.evaluate(_GEOMETRY_EARLY_READY))
+            early_visible = cast(
+                "list[ReadyMathBox]", await page.evaluate(_GEOMETRY_EARLY_READY)
+            )
             if wrong_reservation:
-                page.evaluate(
+                await page.evaluate(
                     "const box = globalThis.__squaresGeometryBoxes[0]; "
                     "box.style.width = (box.getBoundingClientRect().width + 12) + 'px'"
                 )
-            substitution = page.add_style_tag(
+            substitution = await page.add_style_tag(
                 content=(
                     ".squares-math-box > .base, .squares-math-box > .base * "
                     "{ font-family: monospace !important; }"
                 )
             )
             if break_reservation:
-                page.evaluate(
+                await page.evaluate(
                     dedent("""
                     () => {
                       const box = globalThis.__squaresGeometryBoxes[0];
@@ -784,10 +970,10 @@ def check_geometry(
                     }
                 """)
                 )
-            before = cast("list[GeometryBox]", page.evaluate(_GEOMETRY_SNAPSHOT))
-            substitution.evaluate("node => node.remove()")
+            before = cast("list[GeometryBox]", await page.evaluate(_GEOMETRY_SNAPSHOT))
+            await substitution.evaluate("node => node.remove()")
             if break_reservation:
-                page.evaluate(
+                await page.evaluate(
                     dedent("""
                     () => {
                       const [box, style, childStyle] = globalThis.__brokenGeometry;
@@ -798,18 +984,18 @@ def check_geometry(
                 )
             held_count = len(held)
             released = True
-            for route in held:
-                route.fulfill(
-                    body=font_data[route.request.url],
-                    content_type="font/woff2",
-                    headers={"access-control-allow-origin": "*"},
-                )
-            page.wait_for_selector(READY, timeout=60_000)
-            page.evaluate(SETTLED)
-            after = cast("list[GeometryBox]", page.evaluate(_GEOMETRY_SNAPSHOT))
-            coverage_after = cast("MathCoverage", page.evaluate(_MATH_COVERAGE))
+            release_started = time.time() * 1000
+            await release_held_fonts(held, font_data)
+            release_completed = time.time() * 1000
+            await page.wait_for_selector(READY, timeout=60_000)
+            await page.evaluate(SETTLED)
+            after = cast("list[GeometryBox]", await page.evaluate(_GEOMETRY_SNAPSHOT))
+            coverage_after = cast("MathCoverage", await page.evaluate(_MATH_COVERAGE))
+            font_trace = cast(
+                "FontRequestTrace", await page.evaluate("__squaresGeometryFontTrace")
+            )
         finally:
-            browser.close()
+            await browser.close()
     early_ready = frozenset(
         box["key"]
         for box in early_visible
@@ -842,6 +1028,19 @@ def check_geometry(
         "prose_font": prose_font,
         "font_set": font_set,
         "held_fonts": held_count,
+        "font_timing": {
+            "first_math_request_ms": font_trace["first_math_request_ms"],
+            "first_font_request_ms": (
+                first_request - font_trace["time_origin_ms"]
+                if first_request is not None
+                else None
+            ),
+            "release_started_ms": release_started - font_trace["time_origin_ms"],
+            "release_completed_ms": release_completed - font_trace["time_origin_ms"],
+            "held_ms": release_started - first_request if first_request is not None else None,
+            "release_ms": release_completed - release_started,
+            "rejections": font_trace["rejections"],
+        },
         "before": before,
         "after": after,
         "early_visible": early_visible,
@@ -970,6 +1169,55 @@ def check_host_math(source: str, *, browser_name: str = "chromium") -> HostMathR
     }
 
 
+def check_preparation_metrics(*, browser_name: str = "chromium") -> dict[str, object]:
+    """Exercise the build's scaling oracle on real linear and fixed-pixel geometry."""
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    with sync_playwright() as driver:
+        browser = getattr(driver, browser_name).launch(
+            executable_path=os.environ.get(BROWSER_OVERRIDE)
+            if browser_name == "chromium"
+            else None
+        )
+        try:
+            page = browser.new_page()
+            page.set_content(
+                '<span id="base" style="display:inline-block;white-space:nowrap;'
+                'font:18px monospace;text-rendering:geometricPrecision">mmmmiiii</span>'
+            )
+            result = cast(
+                "dict[str, object]",
+                page.evaluate(
+                    dedent("""
+                    () => {
+                      const measure = __LINEAR_BASE_GEOMETRY__;
+                      const base = document.querySelector('#base');
+                      const positive = measure(base);
+                      const controls = {};
+                      for (const [name, property, value] of [
+                        ['hinted_metrics', 'textRendering', 'auto'],
+                        ['nonlinear_scaling', 'paddingLeft', '8px']
+                      ]) {
+                        const old = base.style[property];
+                        base.style[property] = value;
+                        try {
+                          controls[name] = {measurement: measure(base), error: null};
+                        } catch (error) {
+                          controls[name] = {error: String(error)};
+                        } finally {
+                          base.style[property] = old;
+                        }
+                      }
+                      return {positive, controls};
+                    }
+                    """).replace("__LINEAR_BASE_GEOMETRY__", _LINEAR_BASE_GEOMETRY)
+                ),
+            )
+            return {"browser": browser_name, "browser_version": browser.version, **result}
+        finally:
+            browser.close()
+
+
 def main(argv: list[str] | None = None) -> int:
     """Check prepared geometry; publication remains the renderer CLI's one write."""
     from devtools.check_math_startup import instrument_provenance  # noqa: PLC0415
@@ -1003,7 +1251,26 @@ def main(argv: list[str] | None = None) -> int:
         font_set=args.font_set,
     )
     controls: dict[str, object] = {}
+    preparation: dict[str, object] | None = None
     if args.self_test:
+        preparation = check_preparation_metrics(browser_name=args.browser)
+        metric_controls = cast("dict[str, dict[str, object]]", preparation["controls"])
+        for name, expected in (
+            ("hinted_metrics", "requires geometricPrecision"),
+            ("nonlinear_scaling", "does not scale linearly"),
+        ):
+            error = metric_controls[name].get("error")
+            rejected = isinstance(error, str) and expected in error
+            controls[name] = {
+                "rejected": rejected,
+                "report": {
+                    **metric_controls[name],
+                    "findings": [error] if error else [],
+                    "environment": report["environment"],
+                },
+            }
+            if not rejected:
+                report["findings"].append(f"the {name} negative control was not rejected")
         control = check_geometry(
             source,
             browser_name=args.browser,
@@ -1062,6 +1329,8 @@ def main(argv: list[str] | None = None) -> int:
         },
         "controls": controls,
     }
+    if preparation is not None:
+        output["preparation_metrics"] = preparation
     if args.host_check:
         host_source = font_preference_html(
             source, prose_font=args.prose_font, font_set=args.font_set

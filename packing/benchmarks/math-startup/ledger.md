@@ -39,9 +39,1576 @@ Decision: **accepted**. Accept the reserved initial geometry; all registered bro
 ## exp-004: First paired startup comparison with full anchor sampling
 
 - 390px: control 379.9 (374.9 to 398.4), candidate 325.0 (263.8 to 357.3); paired change -14.2% (95% interval -16.1% to -11.9%; 12 pairs).
+
+Startup diagnostics, median (minimum to maximum) across runs:
+
+| Observation | Control | Candidate |
+| --- | --- | --- |
+| Runtime available (ms) | 45.4 (42.2 to 57.5) | 58.0 (48.4 to 188.7) |
+| KaTeX render calls | 199.0 (199.0 to 199.0) | 0.0 (0.0 to 0.0) |
+| Runtime render calls | 211.0 (211.0 to 211.0) | 0.0 (0.0 to 0.0) |
+| Runtime hydrate calls | 0.0 (0.0 to 0.0) | 211.0 (211.0 to 211.0) |
+| Font load calls | 36.0 (36.0 to 36.0) | 540.0 (540.0 to 540.0) |
+| Per-run median font promise (ms) | 120.7 (115.0 to 125.1) | 9.3 (8.1 to 10.1) |
+| Per-run longest font promise (ms) | 126.0 (120.1 to 130.4) | 74.0 (19.9 to 94.0) |
+| All six dynamic readouts exposed (ms) | 379.9 (374.9 to 398.4) | 254.6 (231.8 to 279.0) |
+| Dynamic readouts to all fourteen (ms) | 0.0 (0.0 to 0.0) | 72.9 (0.0 to 92.6) |
+
+Font promise durations include JavaScript scheduling; they are not isolated font-decoding measurements.
+
 - 1280px: control 426.1 (412.0 to 439.9), candidate 374.6 (299.1 to 393.4); paired change -11.4% (95% interval -15.2% to -10.7%; 12 pairs).
 
+Startup diagnostics, median (minimum to maximum) across runs:
+
+| Observation | Control | Candidate |
+| --- | --- | --- |
+| Runtime available (ms) | 45.2 (42.8 to 56.5) | 53.8 (46.6 to 161.9) |
+| KaTeX render calls | 199.0 (199.0 to 199.0) | 0.0 (0.0 to 0.0) |
+| Runtime render calls | 211.0 (211.0 to 211.0) | 0.0 (0.0 to 0.0) |
+| Runtime hydrate calls | 0.0 (0.0 to 0.0) | 211.0 (211.0 to 211.0) |
+| Font load calls | 36.0 (36.0 to 36.0) | 540.0 (540.0 to 540.0) |
+| Per-run median font promise (ms) | 168.4 (160.8 to 183.5) | 9.1 (8.0 to 9.4) |
+| Per-run longest font promise (ms) | 173.4 (165.7 to 188.4) | 90.6 (18.0 to 148.0) |
+| All six dynamic readouts exposed (ms) | 426.1 (412.0 to 439.9) | 304.4 (276.7 to 321.3) |
+| Dynamic readouts to all fourteen (ms) | 0.0 (0.0 to 0.0) | 72.2 (0.0 to 84.8) |
+
+Font promise durations include JavaScript scheduling; they are not isolated font-decoding measurements.
+
+
 Decision: **needs review**. The registered numerical criterion passes in this instrumented regime, but differential observer overhead and pre-paint text measurements require an instrumentation audit before a reader-latency claim.
+
+## exp-005: First hosted parameter-only comparison
+
+- 390px: control 619.8 (600.8 to 649.8), candidate 515.8 (504.9 to 522.3); paired change -17.8% (95% interval -18.0% to -16.4%; 12 pairs).
+  Recorded sampler work: control 3.0 (2.9 to 3.8), candidate 7.9 (6.9 to 8.3).
+
+Startup diagnostics, median (minimum to maximum) across runs:
+
+| Observation | Control | Candidate |
+| --- | --- | --- |
+| Runtime available (ms) | 81.0 (76.6 to 83.7) | 293.5 (286.6 to 324.1) |
+| KaTeX render calls | 199.0 (199.0 to 205.0) | 0.0 (0.0 to 0.0) |
+| Runtime render calls | 211.0 (211.0 to 217.0) | 0.0 (0.0 to 0.0) |
+| Runtime hydrate calls | 0.0 (0.0 to 0.0) | 211.0 (211.0 to 211.0) |
+| Font load calls | 36.0 (36.0 to 36.0) | 540.0 (540.0 to 540.0) |
+| Per-run median font promise (ms) | 170.2 (159.5 to 174.2) | 17.9 (17.2 to 19.3) |
+| Per-run longest font promise (ms) | 178.1 (167.3 to 182.2) | 40.9 (39.8 to 44.9) |
+| All six dynamic readouts exposed (ms) | 619.8 (600.8 to 649.8) | 356.6 (351.2 to 362.2) |
+| Dynamic readouts to all fourteen (ms) | 0.0 (0.0 to 0.0) | 157.5 (148.3 to 163.0) |
+
+Font promise durations include JavaScript scheduling; they are not isolated font-decoding measurements.
+
+- 1280px: control 616.7 (603.0 to 636.4), candidate 633.7 (598.6 to 669.2); paired change 1.6% (95% interval -0.6% to 5.0%; 12 pairs).
+  Recorded sampler work: control 3.0 (2.9 to 3.6), candidate 6.9 (6.4 to 8.2).
+
+Startup diagnostics, median (minimum to maximum) across runs:
+
+| Observation | Control | Candidate |
+| --- | --- | --- |
+| Runtime available (ms) | 79.7 (78.8 to 82.9) | 448.0 (415.1 to 487.6) |
+| KaTeX render calls | 205.0 (205.0 to 205.0) | 0.0 (0.0 to 0.0) |
+| Runtime render calls | 217.0 (217.0 to 217.0) | 0.0 (0.0 to 0.0) |
+| Runtime hydrate calls | 0.0 (0.0 to 0.0) | 211.0 (211.0 to 211.0) |
+| Font load calls | 36.0 (36.0 to 36.0) | 540.0 (540.0 to 540.0) |
+| Per-run median font promise (ms) | 171.7 (160.9 to 177.2) | 17.9 (16.8 to 20.7) |
+| Per-run longest font promise (ms) | 179.4 (168.5 to 184.7) | 42.8 (40.2 to 45.6) |
+| All six dynamic readouts exposed (ms) | 616.7 (603.0 to 636.4) | 482.9 (478.2 to 520.8) |
+| Dynamic readouts to all fourteen (ms) | 0.0 (0.0 to 0.0) | 147.5 (112.4 to 166.5) |
+
+Font promise durations include JavaScript scheduling; they are not isolated font-decoding measurements.
+
+
+Decision: **correctness failed**. The observations pass the registered instrumentation checks, but the desktop confidence interval fails the speed criterion and the same candidate fails independent geometry checks. Retain both widths without replacing observations or adding pairs.
+
+## exp-006: First hosted saved-setting geometry matrix
+
+- firefox 1280px screen custom-sans: 261 bases; maximum movement 0.500px; maximum final width error 2.133px.
+- firefox 1280px screen custom-serif: 261 bases; maximum movement 0.500px; maximum final width error 4.800px.
+- firefox 1280px screen system-sans: 261 bases; maximum movement 0.384px; maximum final width error 7.150px.
+- firefox 1280px screen system-serif: 261 bases; maximum movement 0.384px; maximum final width error 7.150px.
+- firefox 390px screen custom-sans: 261 bases; maximum movement 0.500px; maximum final width error 2.133px.
+- firefox 390px screen custom-serif: 261 bases; maximum movement 0.500px; maximum final width error 4.800px.
+- firefox 390px screen system-sans: 261 bases; maximum movement 0.385px; maximum final width error 7.150px.
+- firefox 390px screen system-serif: 261 bases; maximum movement 0.385px; maximum final width error 7.150px.
+- webkit 1280px screen custom-sans: 261 bases; maximum movement 0.500px; maximum final width error 2.031px.
+- webkit 1280px screen system-sans: 261 bases; maximum movement 0.500px; maximum final width error 7.203px.
+- webkit 1280px screen system-serif: 261 bases; maximum movement 0.500px; maximum final width error 7.203px.
+- webkit 390px screen system-sans: 261 bases; maximum movement 0.500px; maximum final width error 7.203px.
+- webkit 390px screen system-serif: 261 bases; maximum movement 0.500px; maximum final width error 7.203px.
+
+Decision: **correctness failed**. The partial hosted matrix reports real width errors and WebKit formula loss; Chromium geometry was blocked by an earlier interaction-check failure. Missing cells and failed observations remain failures, not inferred passes.
+
+- firefox 1280px screen custom-sans: base 79: reserved width differs from glyphs by 1.267px
+- firefox 1280px screen custom-sans: base 94: reserved width differs from glyphs by 2.000px
+- firefox 1280px screen custom-sans: base 121: reserved width differs from glyphs by 1.233px
+- firefox 1280px screen custom-sans: base 146: reserved width differs from glyphs by 1.033px
+- firefox 1280px screen custom-sans: base 151: reserved width differs from glyphs by 1.267px
+- firefox 1280px screen custom-sans: base 226: reserved width differs from glyphs by 1.017px
+- firefox 1280px screen custom-sans: base 238: reserved width differs from glyphs by 2.133px
+- firefox 1280px screen custom-sans: measured geometry exceeds 1px
+- firefox 1280px screen custom-serif: base 0: reserved width differs from glyphs by 1.167px
+- firefox 1280px screen custom-serif: base 1: reserved width differs from glyphs by 1.200px
+- firefox 1280px screen custom-serif: base 2: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 3: reserved width differs from glyphs by 3.100px
+- firefox 1280px screen custom-serif: base 16: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 32: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 33: reserved width differs from glyphs by 2.400px
+- firefox 1280px screen custom-serif: base 34: reserved width differs from glyphs by 1.200px
+- firefox 1280px screen custom-serif: base 35: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 36: reserved width differs from glyphs by 1.200px
+- firefox 1280px screen custom-serif: base 41: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 42: reserved width differs from glyphs by 2.400px
+- firefox 1280px screen custom-serif: base 43: reserved width differs from glyphs by 1.200px
+- firefox 1280px screen custom-serif: base 57: reserved width differs from glyphs by 1.117px
+- firefox 1280px screen custom-serif: base 70: reserved width differs from glyphs by 2.383px
+- firefox 1280px screen custom-serif: base 71: reserved width differs from glyphs by 3.200px
+- firefox 1280px screen custom-serif: base 74: reserved width differs from glyphs by 3.200px
+- firefox 1280px screen custom-serif: base 76: reserved width differs from glyphs by 2.800px
+- firefox 1280px screen custom-serif: base 77: reserved width differs from glyphs by 2.400px
+- firefox 1280px screen custom-serif: base 79: reserved width differs from glyphs by 1.267px
+- firefox 1280px screen custom-serif: base 87: reserved width differs from glyphs by 2.800px
+- firefox 1280px screen custom-serif: base 90: reserved width differs from glyphs by 3.200px
+- firefox 1280px screen custom-serif: base 91: reserved width differs from glyphs by 1.017px
+- firefox 1280px screen custom-serif: base 92: reserved width differs from glyphs by 1.583px
+- firefox 1280px screen custom-serif: base 93: reserved width differs from glyphs by 2.400px
+- firefox 1280px screen custom-serif: base 94: reserved width differs from glyphs by 2.000px
+- firefox 1280px screen custom-serif: base 130: reserved width differs from glyphs by 1.417px
+- firefox 1280px screen custom-serif: base 146: reserved width differs from glyphs by 1.017px
+- firefox 1280px screen custom-serif: base 160: reserved width differs from glyphs by 1.117px
+- firefox 1280px screen custom-serif: base 203: reserved width differs from glyphs by 4.800px
+- firefox 1280px screen custom-serif: base 225: reserved width differs from glyphs by 1.517px
+- firefox 1280px screen custom-serif: base 227: reserved width differs from glyphs by 2.383px
+- firefox 1280px screen custom-serif: base 228: reserved width differs from glyphs by 3.200px
+- firefox 1280px screen custom-serif: base 230: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 231: reserved width differs from glyphs by 2.400px
+- firefox 1280px screen custom-serif: base 232: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 233: reserved width differs from glyphs by 2.400px
+- firefox 1280px screen custom-serif: base 239: reserved width differs from glyphs by 3.550px
+- firefox 1280px screen custom-serif: base 245: reserved width differs from glyphs by 2.800px
+- firefox 1280px screen custom-serif: base 246: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 247: reserved width differs from glyphs by 2.400px
+- firefox 1280px screen custom-serif: base 248: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen custom-serif: base 249: reserved width differs from glyphs by 1.200px
+- firefox 1280px screen custom-serif: base 252: reserved width differs from glyphs by 1.200px
+- firefox 1280px screen custom-serif: measured geometry exceeds 1px
+- firefox 1280px screen system-sans: base 0: reserved width differs from glyphs by 1.650px
+- firefox 1280px screen system-sans: base 1: reserved width differs from glyphs by 1.400px
+- firefox 1280px screen system-sans: base 3: reserved width differs from glyphs by 3.983px
+- firefox 1280px screen system-sans: base 6: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 7: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 8: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 15: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 18: reserved width differs from glyphs by 1.633px
+- firefox 1280px screen system-sans: base 20: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 28: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 33: reserved width differs from glyphs by 4.133px
+- firefox 1280px screen system-sans: base 34: reserved width differs from glyphs by 1.400px
+- firefox 1280px screen system-sans: base 36: reserved width differs from glyphs by 2.200px
+- firefox 1280px screen system-sans: base 42: reserved width differs from glyphs by 4.133px
+- firefox 1280px screen system-sans: base 43: reserved width differs from glyphs by 1.400px
+- firefox 1280px screen system-sans: base 47: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-sans: base 56: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 57: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen system-sans: base 66: reserved width differs from glyphs by 1.467px
+- firefox 1280px screen system-sans: base 68: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 70: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-sans: base 71: reserved width differs from glyphs by 1.900px
+- firefox 1280px screen system-sans: base 73: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 74: reserved width differs from glyphs by 4.150px
+- firefox 1280px screen system-sans: base 76: reserved width differs from glyphs by 3.600px
+- firefox 1280px screen system-sans: base 77: reserved width differs from glyphs by 3.050px
+- firefox 1280px screen system-sans: base 78: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 87: reserved width differs from glyphs by 4.400px
+- firefox 1280px screen system-sans: base 90: reserved width differs from glyphs by 4.533px
+- firefox 1280px screen system-sans: base 91: reserved width differs from glyphs by 1.600px
+- firefox 1280px screen system-sans: base 93: reserved width differs from glyphs by 1.600px
+- firefox 1280px screen system-sans: base 94: reserved width differs from glyphs by 3.600px
+- firefox 1280px screen system-sans: base 109: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 110: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-sans: base 111: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 117: reserved width differs from glyphs by 1.050px
+- firefox 1280px screen system-sans: base 118: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 127: reserved width differs from glyphs by 1.500px
+- firefox 1280px screen system-sans: base 128: reserved width differs from glyphs by 1.783px
+- firefox 1280px screen system-sans: base 129: reserved width differs from glyphs by 1.950px
+- firefox 1280px screen system-sans: base 130: reserved width differs from glyphs by 1.883px
+- firefox 1280px screen system-sans: base 155: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-sans: base 157: reserved width differs from glyphs by 2.083px
+- firefox 1280px screen system-sans: base 159: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 160: reserved width differs from glyphs by 1.567px
+- firefox 1280px screen system-sans: base 203: reserved width differs from glyphs by 7.150px
+- firefox 1280px screen system-sans: base 206: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 208: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-sans: base 212: reserved width differs from glyphs by 1.117px
+- firefox 1280px screen system-sans: base 225: reserved width differs from glyphs by 2.233px
+- firefox 1280px screen system-sans: base 226: reserved width differs from glyphs by 2.717px
+- firefox 1280px screen system-sans: base 227: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-sans: base 228: reserved width differs from glyphs by 1.900px
+- firefox 1280px screen system-sans: base 231: reserved width differs from glyphs by 3.850px
+- firefox 1280px screen system-sans: base 233: reserved width differs from glyphs by 3.850px
+- firefox 1280px screen system-sans: base 237: reserved width differs from glyphs by 4.333px
+- firefox 1280px screen system-sans: base 238: reserved width differs from glyphs by 2.350px
+- firefox 1280px screen system-sans: base 239: reserved width differs from glyphs by 5.250px
+- firefox 1280px screen system-sans: base 245: reserved width differs from glyphs by 4.400px
+- firefox 1280px screen system-sans: base 247: reserved width differs from glyphs by 3.850px
+- firefox 1280px screen system-sans: base 249: reserved width differs from glyphs by 2.200px
+- firefox 1280px screen system-sans: base 252: reserved width differs from glyphs by 1.650px
+- firefox 1280px screen system-sans: measured geometry exceeds 1px
+- firefox 1280px screen system-serif: base 0: reserved width differs from glyphs by 1.650px
+- firefox 1280px screen system-serif: base 1: reserved width differs from glyphs by 1.400px
+- firefox 1280px screen system-serif: base 3: reserved width differs from glyphs by 3.983px
+- firefox 1280px screen system-serif: base 6: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 7: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 8: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 15: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 18: reserved width differs from glyphs by 1.633px
+- firefox 1280px screen system-serif: base 20: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 28: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 33: reserved width differs from glyphs by 4.133px
+- firefox 1280px screen system-serif: base 34: reserved width differs from glyphs by 1.400px
+- firefox 1280px screen system-serif: base 36: reserved width differs from glyphs by 2.200px
+- firefox 1280px screen system-serif: base 42: reserved width differs from glyphs by 4.133px
+- firefox 1280px screen system-serif: base 43: reserved width differs from glyphs by 1.400px
+- firefox 1280px screen system-serif: base 47: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-serif: base 56: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 57: reserved width differs from glyphs by 1.283px
+- firefox 1280px screen system-serif: base 66: reserved width differs from glyphs by 1.467px
+- firefox 1280px screen system-serif: base 68: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 70: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-serif: base 71: reserved width differs from glyphs by 1.900px
+- firefox 1280px screen system-serif: base 73: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 74: reserved width differs from glyphs by 4.150px
+- firefox 1280px screen system-serif: base 76: reserved width differs from glyphs by 3.600px
+- firefox 1280px screen system-serif: base 77: reserved width differs from glyphs by 3.050px
+- firefox 1280px screen system-serif: base 78: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 87: reserved width differs from glyphs by 4.400px
+- firefox 1280px screen system-serif: base 90: reserved width differs from glyphs by 4.533px
+- firefox 1280px screen system-serif: base 91: reserved width differs from glyphs by 1.600px
+- firefox 1280px screen system-serif: base 93: reserved width differs from glyphs by 1.600px
+- firefox 1280px screen system-serif: base 94: reserved width differs from glyphs by 3.600px
+- firefox 1280px screen system-serif: base 109: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 110: reserved width differs from glyphs by 1.100px
+- firefox 1280px screen system-serif: base 111: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 117: reserved width differs from glyphs by 1.050px
+- firefox 1280px screen system-serif: base 118: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 127: reserved width differs from glyphs by 1.500px
+- firefox 1280px screen system-serif: base 128: reserved width differs from glyphs by 1.783px
+- firefox 1280px screen system-serif: base 129: reserved width differs from glyphs by 1.950px
+- firefox 1280px screen system-serif: base 130: reserved width differs from glyphs by 1.883px
+- firefox 1280px screen system-serif: base 155: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-serif: base 157: reserved width differs from glyphs by 2.083px
+- firefox 1280px screen system-serif: base 159: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 160: reserved width differs from glyphs by 1.567px
+- firefox 1280px screen system-serif: base 203: reserved width differs from glyphs by 7.150px
+- firefox 1280px screen system-serif: base 206: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 208: reserved width differs from glyphs by 1.300px
+- firefox 1280px screen system-serif: base 212: reserved width differs from glyphs by 1.117px
+- firefox 1280px screen system-serif: base 225: reserved width differs from glyphs by 2.233px
+- firefox 1280px screen system-serif: base 226: reserved width differs from glyphs by 2.717px
+- firefox 1280px screen system-serif: base 227: reserved width differs from glyphs by 1.183px
+- firefox 1280px screen system-serif: base 228: reserved width differs from glyphs by 1.900px
+- firefox 1280px screen system-serif: base 231: reserved width differs from glyphs by 3.850px
+- firefox 1280px screen system-serif: base 233: reserved width differs from glyphs by 3.850px
+- firefox 1280px screen system-serif: base 237: reserved width differs from glyphs by 4.333px
+- firefox 1280px screen system-serif: base 238: reserved width differs from glyphs by 2.350px
+- firefox 1280px screen system-serif: base 239: reserved width differs from glyphs by 5.250px
+- firefox 1280px screen system-serif: base 245: reserved width differs from glyphs by 4.400px
+- firefox 1280px screen system-serif: base 247: reserved width differs from glyphs by 3.850px
+- firefox 1280px screen system-serif: base 249: reserved width differs from glyphs by 2.200px
+- firefox 1280px screen system-serif: base 252: reserved width differs from glyphs by 1.650px
+- firefox 1280px screen system-serif: measured geometry exceeds 1px
+- firefox 390px screen custom-sans: base 79: reserved width differs from glyphs by 1.267px
+- firefox 390px screen custom-sans: base 94: reserved width differs from glyphs by 2.000px
+- firefox 390px screen custom-sans: base 121: reserved width differs from glyphs by 1.233px
+- firefox 390px screen custom-sans: base 146: reserved width differs from glyphs by 1.033px
+- firefox 390px screen custom-sans: base 151: reserved width differs from glyphs by 1.267px
+- firefox 390px screen custom-sans: base 226: reserved width differs from glyphs by 1.017px
+- firefox 390px screen custom-sans: base 238: reserved width differs from glyphs by 2.133px
+- firefox 390px screen custom-sans: measured geometry exceeds 1px
+- firefox 390px screen custom-serif: base 0: reserved width differs from glyphs by 1.167px
+- firefox 390px screen custom-serif: base 1: reserved width differs from glyphs by 1.200px
+- firefox 390px screen custom-serif: base 2: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 3: reserved width differs from glyphs by 3.100px
+- firefox 390px screen custom-serif: base 16: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 32: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 33: reserved width differs from glyphs by 2.400px
+- firefox 390px screen custom-serif: base 34: reserved width differs from glyphs by 1.200px
+- firefox 390px screen custom-serif: base 35: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 36: reserved width differs from glyphs by 1.200px
+- firefox 390px screen custom-serif: base 41: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 42: reserved width differs from glyphs by 2.400px
+- firefox 390px screen custom-serif: base 43: reserved width differs from glyphs by 1.200px
+- firefox 390px screen custom-serif: base 57: reserved width differs from glyphs by 1.117px
+- firefox 390px screen custom-serif: base 70: reserved width differs from glyphs by 2.383px
+- firefox 390px screen custom-serif: base 71: reserved width differs from glyphs by 3.200px
+- firefox 390px screen custom-serif: base 74: reserved width differs from glyphs by 3.200px
+- firefox 390px screen custom-serif: base 76: reserved width differs from glyphs by 2.800px
+- firefox 390px screen custom-serif: base 77: reserved width differs from glyphs by 2.400px
+- firefox 390px screen custom-serif: base 79: reserved width differs from glyphs by 1.267px
+- firefox 390px screen custom-serif: base 87: reserved width differs from glyphs by 2.800px
+- firefox 390px screen custom-serif: base 90: reserved width differs from glyphs by 3.200px
+- firefox 390px screen custom-serif: base 91: reserved width differs from glyphs by 1.017px
+- firefox 390px screen custom-serif: base 92: reserved width differs from glyphs by 1.583px
+- firefox 390px screen custom-serif: base 93: reserved width differs from glyphs by 2.400px
+- firefox 390px screen custom-serif: base 94: reserved width differs from glyphs by 2.000px
+- firefox 390px screen custom-serif: base 130: reserved width differs from glyphs by 1.417px
+- firefox 390px screen custom-serif: base 146: reserved width differs from glyphs by 1.017px
+- firefox 390px screen custom-serif: base 160: reserved width differs from glyphs by 1.117px
+- firefox 390px screen custom-serif: base 203: reserved width differs from glyphs by 4.800px
+- firefox 390px screen custom-serif: base 225: reserved width differs from glyphs by 1.517px
+- firefox 390px screen custom-serif: base 227: reserved width differs from glyphs by 2.383px
+- firefox 390px screen custom-serif: base 228: reserved width differs from glyphs by 3.200px
+- firefox 390px screen custom-serif: base 230: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 231: reserved width differs from glyphs by 2.400px
+- firefox 390px screen custom-serif: base 232: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 233: reserved width differs from glyphs by 2.400px
+- firefox 390px screen custom-serif: base 239: reserved width differs from glyphs by 3.550px
+- firefox 390px screen custom-serif: base 245: reserved width differs from glyphs by 2.800px
+- firefox 390px screen custom-serif: base 246: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 247: reserved width differs from glyphs by 2.400px
+- firefox 390px screen custom-serif: base 248: reserved width differs from glyphs by 1.283px
+- firefox 390px screen custom-serif: base 249: reserved width differs from glyphs by 1.200px
+- firefox 390px screen custom-serif: base 252: reserved width differs from glyphs by 1.200px
+- firefox 390px screen custom-serif: measured geometry exceeds 1px
+- firefox 390px screen system-sans: base 0: reserved width differs from glyphs by 1.650px
+- firefox 390px screen system-sans: base 1: reserved width differs from glyphs by 1.400px
+- firefox 390px screen system-sans: base 3: reserved width differs from glyphs by 3.983px
+- firefox 390px screen system-sans: base 6: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 7: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 8: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 15: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 18: reserved width differs from glyphs by 1.633px
+- firefox 390px screen system-sans: base 20: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 28: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 33: reserved width differs from glyphs by 4.133px
+- firefox 390px screen system-sans: base 34: reserved width differs from glyphs by 1.400px
+- firefox 390px screen system-sans: base 36: reserved width differs from glyphs by 2.200px
+- firefox 390px screen system-sans: base 42: reserved width differs from glyphs by 4.133px
+- firefox 390px screen system-sans: base 43: reserved width differs from glyphs by 1.400px
+- firefox 390px screen system-sans: base 47: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-sans: base 56: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 57: reserved width differs from glyphs by 1.283px
+- firefox 390px screen system-sans: base 66: reserved width differs from glyphs by 1.467px
+- firefox 390px screen system-sans: base 68: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 70: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-sans: base 71: reserved width differs from glyphs by 1.900px
+- firefox 390px screen system-sans: base 73: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 74: reserved width differs from glyphs by 4.150px
+- firefox 390px screen system-sans: base 76: reserved width differs from glyphs by 3.600px
+- firefox 390px screen system-sans: base 77: reserved width differs from glyphs by 3.050px
+- firefox 390px screen system-sans: base 78: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 87: reserved width differs from glyphs by 4.400px
+- firefox 390px screen system-sans: base 90: reserved width differs from glyphs by 4.533px
+- firefox 390px screen system-sans: base 91: reserved width differs from glyphs by 1.600px
+- firefox 390px screen system-sans: base 93: reserved width differs from glyphs by 1.600px
+- firefox 390px screen system-sans: base 94: reserved width differs from glyphs by 3.600px
+- firefox 390px screen system-sans: base 109: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 110: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-sans: base 111: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 117: reserved width differs from glyphs by 1.050px
+- firefox 390px screen system-sans: base 118: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 127: reserved width differs from glyphs by 1.500px
+- firefox 390px screen system-sans: base 128: reserved width differs from glyphs by 1.783px
+- firefox 390px screen system-sans: base 129: reserved width differs from glyphs by 1.950px
+- firefox 390px screen system-sans: base 130: reserved width differs from glyphs by 1.883px
+- firefox 390px screen system-sans: base 155: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-sans: base 157: reserved width differs from glyphs by 2.083px
+- firefox 390px screen system-sans: base 159: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 160: reserved width differs from glyphs by 1.567px
+- firefox 390px screen system-sans: base 203: reserved width differs from glyphs by 7.150px
+- firefox 390px screen system-sans: base 206: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 208: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-sans: base 212: reserved width differs from glyphs by 1.117px
+- firefox 390px screen system-sans: base 225: reserved width differs from glyphs by 2.233px
+- firefox 390px screen system-sans: base 226: reserved width differs from glyphs by 2.717px
+- firefox 390px screen system-sans: base 227: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-sans: base 228: reserved width differs from glyphs by 1.900px
+- firefox 390px screen system-sans: base 231: reserved width differs from glyphs by 3.850px
+- firefox 390px screen system-sans: base 233: reserved width differs from glyphs by 3.850px
+- firefox 390px screen system-sans: base 237: reserved width differs from glyphs by 4.333px
+- firefox 390px screen system-sans: base 238: reserved width differs from glyphs by 2.350px
+- firefox 390px screen system-sans: base 239: reserved width differs from glyphs by 5.250px
+- firefox 390px screen system-sans: base 245: reserved width differs from glyphs by 4.400px
+- firefox 390px screen system-sans: base 247: reserved width differs from glyphs by 3.850px
+- firefox 390px screen system-sans: base 249: reserved width differs from glyphs by 2.200px
+- firefox 390px screen system-sans: base 252: reserved width differs from glyphs by 1.650px
+- firefox 390px screen system-sans: measured geometry exceeds 1px
+- firefox 390px screen system-serif: base 0: reserved width differs from glyphs by 1.650px
+- firefox 390px screen system-serif: base 1: reserved width differs from glyphs by 1.400px
+- firefox 390px screen system-serif: base 3: reserved width differs from glyphs by 3.983px
+- firefox 390px screen system-serif: base 6: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 7: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 8: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 15: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 18: reserved width differs from glyphs by 1.633px
+- firefox 390px screen system-serif: base 20: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 28: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 33: reserved width differs from glyphs by 4.133px
+- firefox 390px screen system-serif: base 34: reserved width differs from glyphs by 1.400px
+- firefox 390px screen system-serif: base 36: reserved width differs from glyphs by 2.200px
+- firefox 390px screen system-serif: base 42: reserved width differs from glyphs by 4.133px
+- firefox 390px screen system-serif: base 43: reserved width differs from glyphs by 1.400px
+- firefox 390px screen system-serif: base 47: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-serif: base 56: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 57: reserved width differs from glyphs by 1.283px
+- firefox 390px screen system-serif: base 66: reserved width differs from glyphs by 1.467px
+- firefox 390px screen system-serif: base 68: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 70: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-serif: base 71: reserved width differs from glyphs by 1.900px
+- firefox 390px screen system-serif: base 73: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 74: reserved width differs from glyphs by 4.150px
+- firefox 390px screen system-serif: base 76: reserved width differs from glyphs by 3.600px
+- firefox 390px screen system-serif: base 77: reserved width differs from glyphs by 3.050px
+- firefox 390px screen system-serif: base 78: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 87: reserved width differs from glyphs by 4.400px
+- firefox 390px screen system-serif: base 90: reserved width differs from glyphs by 4.533px
+- firefox 390px screen system-serif: base 91: reserved width differs from glyphs by 1.600px
+- firefox 390px screen system-serif: base 93: reserved width differs from glyphs by 1.600px
+- firefox 390px screen system-serif: base 94: reserved width differs from glyphs by 3.600px
+- firefox 390px screen system-serif: base 109: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 110: reserved width differs from glyphs by 1.100px
+- firefox 390px screen system-serif: base 111: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 117: reserved width differs from glyphs by 1.050px
+- firefox 390px screen system-serif: base 118: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 127: reserved width differs from glyphs by 1.500px
+- firefox 390px screen system-serif: base 128: reserved width differs from glyphs by 1.783px
+- firefox 390px screen system-serif: base 129: reserved width differs from glyphs by 1.950px
+- firefox 390px screen system-serif: base 130: reserved width differs from glyphs by 1.883px
+- firefox 390px screen system-serif: base 155: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-serif: base 157: reserved width differs from glyphs by 2.083px
+- firefox 390px screen system-serif: base 159: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 160: reserved width differs from glyphs by 1.567px
+- firefox 390px screen system-serif: base 203: reserved width differs from glyphs by 7.150px
+- firefox 390px screen system-serif: base 206: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 208: reserved width differs from glyphs by 1.300px
+- firefox 390px screen system-serif: base 212: reserved width differs from glyphs by 1.117px
+- firefox 390px screen system-serif: base 225: reserved width differs from glyphs by 2.233px
+- firefox 390px screen system-serif: base 226: reserved width differs from glyphs by 2.717px
+- firefox 390px screen system-serif: base 227: reserved width differs from glyphs by 1.183px
+- firefox 390px screen system-serif: base 228: reserved width differs from glyphs by 1.900px
+- firefox 390px screen system-serif: base 231: reserved width differs from glyphs by 3.850px
+- firefox 390px screen system-serif: base 233: reserved width differs from glyphs by 3.850px
+- firefox 390px screen system-serif: base 237: reserved width differs from glyphs by 4.333px
+- firefox 390px screen system-serif: base 238: reserved width differs from glyphs by 2.350px
+- firefox 390px screen system-serif: base 239: reserved width differs from glyphs by 5.250px
+- firefox 390px screen system-serif: base 245: reserved width differs from glyphs by 4.400px
+- firefox 390px screen system-serif: base 247: reserved width differs from glyphs by 3.850px
+- firefox 390px screen system-serif: base 249: reserved width differs from glyphs by 2.200px
+- firefox 390px screen system-serif: base 252: reserved width differs from glyphs by 1.650px
+- firefox 390px screen system-serif: measured geometry exceeds 1px
+- webkit 1280px screen custom-sans: base 79: reserved width differs from glyphs by 1.281px
+- webkit 1280px screen custom-sans: base 94: reserved width differs from glyphs by 2.000px
+- webkit 1280px screen custom-sans: base 117: reserved width differs from glyphs by 1.031px
+- webkit 1280px screen custom-sans: base 121: reserved width differs from glyphs by 1.266px
+- webkit 1280px screen custom-sans: base 132: reserved width differs from glyphs by 1.016px
+- webkit 1280px screen custom-sans: base 146: reserved width differs from glyphs by 1.078px
+- webkit 1280px screen custom-sans: base 151: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-sans: base 214: reserved width differs from glyphs by 1.016px
+- webkit 1280px screen custom-sans: base 226: reserved width differs from glyphs by 1.109px
+- webkit 1280px screen custom-sans: base 238: reserved width differs from glyphs by 2.031px
+- webkit 1280px screen custom-sans: measured geometry exceeds 1px
+- webkit 1280px screen custom-serif: incomplete after formula coverage
+- webkit 1280px screen custom-serif: prepared math boxes disappeared or were never measured
+- webkit 1280px screen custom-serif: base 0: reserved width differs from glyphs by 1.188px
+- webkit 1280px screen custom-serif: base 1: reserved width differs from glyphs by 1.188px
+- webkit 1280px screen custom-serif: base 2: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 3: reserved width differs from glyphs by 3.141px
+- webkit 1280px screen custom-serif: base 16: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 32: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 33: reserved width differs from glyphs by 2.422px
+- webkit 1280px screen custom-serif: base 34: reserved width differs from glyphs by 1.188px
+- webkit 1280px screen custom-serif: base 35: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 36: reserved width differs from glyphs by 1.203px
+- webkit 1280px screen custom-serif: base 41: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 42: reserved width differs from glyphs by 2.422px
+- webkit 1280px screen custom-serif: base 43: reserved width differs from glyphs by 1.188px
+- webkit 1280px screen custom-serif: base 57: reserved width differs from glyphs by 1.141px
+- webkit 1280px screen custom-serif: base 70: reserved width differs from glyphs by 2.344px
+- webkit 1280px screen custom-serif: base 71: reserved width differs from glyphs by 3.219px
+- webkit 1280px screen custom-serif: base 74: reserved width differs from glyphs by 3.219px
+- webkit 1280px screen custom-serif: base 76: reserved width differs from glyphs by 2.828px
+- webkit 1280px screen custom-serif: base 77: reserved width differs from glyphs by 2.406px
+- webkit 1280px screen custom-serif: base 87: reserved width differs from glyphs by 2.828px
+- webkit 1280px screen custom-serif: base 90: reserved width differs from glyphs by 3.234px
+- webkit 1280px screen custom-serif: base 91: reserved width differs from glyphs by 1.016px
+- webkit 1280px screen custom-serif: base 92: reserved width differs from glyphs by 1.516px
+- webkit 1280px screen custom-serif: base 93: reserved width differs from glyphs by 2.422px
+- webkit 1280px screen custom-serif: base 94: reserved width differs from glyphs by 2.000px
+- webkit 1280px screen custom-serif: base 130: reserved width differs from glyphs by 1.438px
+- webkit 1280px screen custom-serif: base 146: reserved width differs from glyphs by 1.062px
+- webkit 1280px screen custom-serif: base 160: reserved width differs from glyphs by 1.125px
+- webkit 1280px screen custom-serif: base 203: reserved width differs from glyphs by 4.859px
+- webkit 1280px screen custom-serif: base 225: reserved width differs from glyphs by 1.438px
+- webkit 1280px screen custom-serif: base 227: reserved width differs from glyphs by 2.344px
+- webkit 1280px screen custom-serif: base 228: reserved width differs from glyphs by 3.219px
+- webkit 1280px screen custom-serif: base 230: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 231: reserved width differs from glyphs by 2.406px
+- webkit 1280px screen custom-serif: base 232: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 233: reserved width differs from glyphs by 2.406px
+- webkit 1280px screen custom-serif: base 245: reserved width differs from glyphs by 2.828px
+- webkit 1280px screen custom-serif: base 246: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 247: reserved width differs from glyphs by 2.406px
+- webkit 1280px screen custom-serif: base 248: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen custom-serif: base 249: reserved width differs from glyphs by 1.203px
+- webkit 1280px screen custom-serif: base 252: reserved width differs from glyphs by 1.203px
+- webkit 1280px screen custom-serif: base 82: x moved 107.891px
+- webkit 1280px screen custom-serif: base 83: x moved 699.969px
+- webkit 1280px screen custom-serif: base 83: y moved 68.922px
+- webkit 1280px screen custom-serif: base 83: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 84: y moved 68.922px
+- webkit 1280px screen custom-serif: base 84: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 85: y moved 68.922px
+- webkit 1280px screen custom-serif: base 85: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 86: y moved 68.922px
+- webkit 1280px screen custom-serif: base 86: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 87: y moved 68.922px
+- webkit 1280px screen custom-serif: base 87: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 88: y moved 68.922px
+- webkit 1280px screen custom-serif: base 88: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 89: y moved 68.922px
+- webkit 1280px screen custom-serif: base 89: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 90: y moved 68.922px
+- webkit 1280px screen custom-serif: base 90: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 91: y moved 68.922px
+- webkit 1280px screen custom-serif: base 91: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 92: y moved 68.922px
+- webkit 1280px screen custom-serif: base 92: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 93: y moved 68.922px
+- webkit 1280px screen custom-serif: base 93: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 94: y moved 68.922px
+- webkit 1280px screen custom-serif: base 94: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 95: y moved 68.922px
+- webkit 1280px screen custom-serif: base 95: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 96: y moved 68.922px
+- webkit 1280px screen custom-serif: base 96: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 97: y moved 68.922px
+- webkit 1280px screen custom-serif: base 97: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 98: x moved 61.812px
+- webkit 1280px screen custom-serif: base 98: y moved 68.922px
+- webkit 1280px screen custom-serif: base 98: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 99: x moved 61.812px
+- webkit 1280px screen custom-serif: base 99: y moved 68.922px
+- webkit 1280px screen custom-serif: base 99: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 100: x moved 61.812px
+- webkit 1280px screen custom-serif: base 100: y moved 68.922px
+- webkit 1280px screen custom-serif: base 100: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 101: x moved 61.812px
+- webkit 1280px screen custom-serif: base 101: y moved 68.922px
+- webkit 1280px screen custom-serif: base 101: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 104: y moved 68.922px
+- webkit 1280px screen custom-serif: base 104: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 105: y moved 68.922px
+- webkit 1280px screen custom-serif: base 105: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 106: y moved 68.922px
+- webkit 1280px screen custom-serif: base 106: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 107: y moved 68.922px
+- webkit 1280px screen custom-serif: base 107: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 108: y moved 68.922px
+- webkit 1280px screen custom-serif: base 108: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 109: y moved 68.922px
+- webkit 1280px screen custom-serif: base 109: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 110: y moved 68.922px
+- webkit 1280px screen custom-serif: base 110: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 111: y moved 68.922px
+- webkit 1280px screen custom-serif: base 111: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 112: y moved 68.922px
+- webkit 1280px screen custom-serif: base 112: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 113: y moved 68.922px
+- webkit 1280px screen custom-serif: base 113: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 114: y moved 68.922px
+- webkit 1280px screen custom-serif: base 114: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 115: y moved 68.922px
+- webkit 1280px screen custom-serif: base 115: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 116: y moved 68.922px
+- webkit 1280px screen custom-serif: base 116: baseline moved 68.922px
+- webkit 1280px screen custom-serif: base 117: y moved 68.422px
+- webkit 1280px screen custom-serif: base 117: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 118: y moved 68.422px
+- webkit 1280px screen custom-serif: base 118: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 119: y moved 68.422px
+- webkit 1280px screen custom-serif: base 119: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 120: y moved 68.422px
+- webkit 1280px screen custom-serif: base 120: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 121: y moved 68.422px
+- webkit 1280px screen custom-serif: base 121: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 122: y moved 68.422px
+- webkit 1280px screen custom-serif: base 122: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 123: y moved 68.422px
+- webkit 1280px screen custom-serif: base 123: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 124: y moved 68.422px
+- webkit 1280px screen custom-serif: base 124: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 125: y moved 68.422px
+- webkit 1280px screen custom-serif: base 125: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 126: y moved 68.422px
+- webkit 1280px screen custom-serif: base 126: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 127: y moved 68.422px
+- webkit 1280px screen custom-serif: base 127: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 128: y moved 68.422px
+- webkit 1280px screen custom-serif: base 128: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 129: y moved 68.422px
+- webkit 1280px screen custom-serif: base 129: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 130: y moved 68.422px
+- webkit 1280px screen custom-serif: base 130: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 131: y moved 68.422px
+- webkit 1280px screen custom-serif: base 131: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 132: y moved 68.422px
+- webkit 1280px screen custom-serif: base 132: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 133: y moved 68.422px
+- webkit 1280px screen custom-serif: base 133: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 134: y moved 68.422px
+- webkit 1280px screen custom-serif: base 134: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 135: y moved 68.422px
+- webkit 1280px screen custom-serif: base 135: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 136: y moved 68.422px
+- webkit 1280px screen custom-serif: base 136: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 137: y moved 68.422px
+- webkit 1280px screen custom-serif: base 137: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 138: y moved 68.422px
+- webkit 1280px screen custom-serif: base 138: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 139: y moved 68.422px
+- webkit 1280px screen custom-serif: base 139: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 140: y moved 68.422px
+- webkit 1280px screen custom-serif: base 140: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 141: y moved 68.422px
+- webkit 1280px screen custom-serif: base 141: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 142: y moved 68.422px
+- webkit 1280px screen custom-serif: base 142: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 143: y moved 68.422px
+- webkit 1280px screen custom-serif: base 143: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 144: y moved 68.422px
+- webkit 1280px screen custom-serif: base 144: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 145: y moved 68.422px
+- webkit 1280px screen custom-serif: base 145: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 146: y moved 68.422px
+- webkit 1280px screen custom-serif: base 146: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 147: y moved 68.422px
+- webkit 1280px screen custom-serif: base 147: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 148: y moved 68.422px
+- webkit 1280px screen custom-serif: base 148: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 149: y moved 68.422px
+- webkit 1280px screen custom-serif: base 149: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 150: y moved 68.422px
+- webkit 1280px screen custom-serif: base 150: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 151: y moved 68.422px
+- webkit 1280px screen custom-serif: base 151: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 152: y moved 68.422px
+- webkit 1280px screen custom-serif: base 152: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 153: y moved 68.422px
+- webkit 1280px screen custom-serif: base 153: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 154: y moved 68.422px
+- webkit 1280px screen custom-serif: base 154: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 155: y moved 68.422px
+- webkit 1280px screen custom-serif: base 155: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 156: y moved 68.422px
+- webkit 1280px screen custom-serif: base 156: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 157: y moved 68.422px
+- webkit 1280px screen custom-serif: base 157: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 158: y moved 68.422px
+- webkit 1280px screen custom-serif: base 158: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 159: y moved 68.422px
+- webkit 1280px screen custom-serif: base 159: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 160: y moved 68.422px
+- webkit 1280px screen custom-serif: base 160: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 161: y moved 68.422px
+- webkit 1280px screen custom-serif: base 161: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 162: y moved 68.422px
+- webkit 1280px screen custom-serif: base 162: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 163: y moved 68.422px
+- webkit 1280px screen custom-serif: base 163: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 164: y moved 68.422px
+- webkit 1280px screen custom-serif: base 164: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 165: y moved 68.422px
+- webkit 1280px screen custom-serif: base 165: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 166: y moved 68.422px
+- webkit 1280px screen custom-serif: base 166: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 167: y moved 68.422px
+- webkit 1280px screen custom-serif: base 167: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 168: y moved 68.422px
+- webkit 1280px screen custom-serif: base 168: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 170: y moved 68.422px
+- webkit 1280px screen custom-serif: base 170: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 172: y moved 68.422px
+- webkit 1280px screen custom-serif: base 172: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 174: y moved 68.422px
+- webkit 1280px screen custom-serif: base 174: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 175: y moved 68.422px
+- webkit 1280px screen custom-serif: base 175: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 176: y moved 68.422px
+- webkit 1280px screen custom-serif: base 176: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 177: y moved 68.422px
+- webkit 1280px screen custom-serif: base 177: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 178: y moved 68.422px
+- webkit 1280px screen custom-serif: base 178: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 179: y moved 68.422px
+- webkit 1280px screen custom-serif: base 179: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 180: y moved 68.422px
+- webkit 1280px screen custom-serif: base 180: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 181: y moved 68.422px
+- webkit 1280px screen custom-serif: base 181: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 182: y moved 68.422px
+- webkit 1280px screen custom-serif: base 182: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 183: y moved 68.422px
+- webkit 1280px screen custom-serif: base 183: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 184: y moved 68.422px
+- webkit 1280px screen custom-serif: base 184: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 185: y moved 68.422px
+- webkit 1280px screen custom-serif: base 185: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 186: y moved 68.422px
+- webkit 1280px screen custom-serif: base 186: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 187: y moved 68.422px
+- webkit 1280px screen custom-serif: base 187: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 188: y moved 68.422px
+- webkit 1280px screen custom-serif: base 188: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 189: y moved 68.422px
+- webkit 1280px screen custom-serif: base 189: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 190: y moved 68.422px
+- webkit 1280px screen custom-serif: base 190: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 191: y moved 68.422px
+- webkit 1280px screen custom-serif: base 191: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 193: x moved 48.422px
+- webkit 1280px screen custom-serif: base 193: y moved 68.422px
+- webkit 1280px screen custom-serif: base 193: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 194: x moved 28.031px
+- webkit 1280px screen custom-serif: base 194: y moved 68.422px
+- webkit 1280px screen custom-serif: base 194: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 195: x moved 28.031px
+- webkit 1280px screen custom-serif: base 195: y moved 68.422px
+- webkit 1280px screen custom-serif: base 195: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 196: x moved 28.047px
+- webkit 1280px screen custom-serif: base 196: y moved 68.422px
+- webkit 1280px screen custom-serif: base 196: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 197: x moved 28.047px
+- webkit 1280px screen custom-serif: base 197: y moved 68.422px
+- webkit 1280px screen custom-serif: base 197: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 198: y moved 68.422px
+- webkit 1280px screen custom-serif: base 198: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 199: y moved 68.422px
+- webkit 1280px screen custom-serif: base 199: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 200: y moved 68.422px
+- webkit 1280px screen custom-serif: base 200: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 201: y moved 68.422px
+- webkit 1280px screen custom-serif: base 201: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 202: y moved 68.422px
+- webkit 1280px screen custom-serif: base 202: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 203: y moved 68.422px
+- webkit 1280px screen custom-serif: base 203: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 204: y moved 68.422px
+- webkit 1280px screen custom-serif: base 204: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 205: y moved 68.422px
+- webkit 1280px screen custom-serif: base 205: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 206: y moved 68.422px
+- webkit 1280px screen custom-serif: base 206: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 207: y moved 68.422px
+- webkit 1280px screen custom-serif: base 207: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 208: y moved 68.422px
+- webkit 1280px screen custom-serif: base 208: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 209: y moved 68.422px
+- webkit 1280px screen custom-serif: base 209: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 210: y moved 68.422px
+- webkit 1280px screen custom-serif: base 210: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 211: y moved 68.422px
+- webkit 1280px screen custom-serif: base 211: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 212: y moved 68.422px
+- webkit 1280px screen custom-serif: base 212: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 213: y moved 68.422px
+- webkit 1280px screen custom-serif: base 213: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 214: y moved 68.422px
+- webkit 1280px screen custom-serif: base 214: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 215: y moved 68.422px
+- webkit 1280px screen custom-serif: base 215: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 216: y moved 68.422px
+- webkit 1280px screen custom-serif: base 216: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 217: y moved 68.422px
+- webkit 1280px screen custom-serif: base 217: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 218: y moved 68.422px
+- webkit 1280px screen custom-serif: base 218: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 219: y moved 68.422px
+- webkit 1280px screen custom-serif: base 219: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 220: y moved 68.422px
+- webkit 1280px screen custom-serif: base 220: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 221: y moved 68.422px
+- webkit 1280px screen custom-serif: base 221: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 222: y moved 68.422px
+- webkit 1280px screen custom-serif: base 222: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 223: y moved 68.422px
+- webkit 1280px screen custom-serif: base 223: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 224: y moved 68.422px
+- webkit 1280px screen custom-serif: base 224: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 225: y moved 68.422px
+- webkit 1280px screen custom-serif: base 225: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 226: y moved 68.422px
+- webkit 1280px screen custom-serif: base 226: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 227: y moved 68.422px
+- webkit 1280px screen custom-serif: base 227: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 228: y moved 68.422px
+- webkit 1280px screen custom-serif: base 228: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 229: y moved 68.422px
+- webkit 1280px screen custom-serif: base 229: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 230: y moved 68.422px
+- webkit 1280px screen custom-serif: base 230: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 231: y moved 68.422px
+- webkit 1280px screen custom-serif: base 231: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 232: y moved 68.422px
+- webkit 1280px screen custom-serif: base 232: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 233: y moved 68.422px
+- webkit 1280px screen custom-serif: base 233: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 234: y moved 68.422px
+- webkit 1280px screen custom-serif: base 234: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 235: y moved 68.422px
+- webkit 1280px screen custom-serif: base 235: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 236: y moved 68.422px
+- webkit 1280px screen custom-serif: base 236: baseline moved 68.422px
+- webkit 1280px screen custom-serif: base 240: y moved 31.656px
+- webkit 1280px screen custom-serif: base 240: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 242: y moved 31.656px
+- webkit 1280px screen custom-serif: base 242: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 243: y moved 31.656px
+- webkit 1280px screen custom-serif: base 243: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 244: y moved 31.656px
+- webkit 1280px screen custom-serif: base 244: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 245: y moved 31.656px
+- webkit 1280px screen custom-serif: base 245: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 246: y moved 31.656px
+- webkit 1280px screen custom-serif: base 246: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 247: y moved 31.656px
+- webkit 1280px screen custom-serif: base 247: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 248: y moved 31.656px
+- webkit 1280px screen custom-serif: base 248: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 249: y moved 31.656px
+- webkit 1280px screen custom-serif: base 249: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 250: y moved 31.656px
+- webkit 1280px screen custom-serif: base 250: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 251: y moved 31.656px
+- webkit 1280px screen custom-serif: base 251: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 252: y moved 31.656px
+- webkit 1280px screen custom-serif: base 252: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 253: y moved 31.656px
+- webkit 1280px screen custom-serif: base 253: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 254: y moved 31.656px
+- webkit 1280px screen custom-serif: base 254: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 255: y moved 31.656px
+- webkit 1280px screen custom-serif: base 255: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 256: y moved 31.656px
+- webkit 1280px screen custom-serif: base 256: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 257: y moved 31.656px
+- webkit 1280px screen custom-serif: base 257: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 258: y moved 31.656px
+- webkit 1280px screen custom-serif: base 258: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 259: y moved 31.656px
+- webkit 1280px screen custom-serif: base 259: baseline moved 31.656px
+- webkit 1280px screen custom-serif: base 260: y moved 31.656px
+- webkit 1280px screen custom-serif: base 260: baseline moved 31.656px
+- webkit 1280px screen custom-serif: formula 154: line wrapping changed
+- webkit 1280px screen custom-serif: formula 198: line wrapping changed
+- webkit 1280px screen custom-serif: formula 477: line wrapping changed
+- webkit 1280px screen custom-serif: visible mathematics has no prepared formula: ['\\mu\\!\\left([0,L]^2\\right) = 43391/4000 = 10.84775', '\\theta \\approx 15.7224^{\\circ}', '\\varphi', '\\varphi', '\\theta', '\\varphi']
+- webkit 1280px screen custom-serif: missing boxes or real held font requests
+- webkit 1280px screen system-sans: base 0: reserved width differs from glyphs by 1.688px
+- webkit 1280px screen system-sans: base 1: reserved width differs from glyphs by 1.391px
+- webkit 1280px screen system-sans: base 3: reserved width differs from glyphs by 4.031px
+- webkit 1280px screen system-sans: base 6: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 7: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 8: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 15: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 18: reserved width differs from glyphs by 1.656px
+- webkit 1280px screen system-sans: base 20: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 28: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 33: reserved width differs from glyphs by 4.172px
+- webkit 1280px screen system-sans: base 34: reserved width differs from glyphs by 1.391px
+- webkit 1280px screen system-sans: base 36: reserved width differs from glyphs by 2.203px
+- webkit 1280px screen system-sans: base 42: reserved width differs from glyphs by 4.172px
+- webkit 1280px screen system-sans: base 43: reserved width differs from glyphs by 1.391px
+- webkit 1280px screen system-sans: base 47: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen system-sans: base 56: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-sans: base 57: reserved width differs from glyphs by 1.328px
+- webkit 1280px screen system-sans: base 66: reserved width differs from glyphs by 1.453px
+- webkit 1280px screen system-sans: base 68: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 70: reserved width differs from glyphs by 1.125px
+- webkit 1280px screen system-sans: base 71: reserved width differs from glyphs by 1.906px
+- webkit 1280px screen system-sans: base 73: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-sans: base 74: reserved width differs from glyphs by 4.156px
+- webkit 1280px screen system-sans: base 76: reserved width differs from glyphs by 3.609px
+- webkit 1280px screen system-sans: base 77: reserved width differs from glyphs by 3.047px
+- webkit 1280px screen system-sans: base 78: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-sans: base 87: reserved width differs from glyphs by 4.422px
+- webkit 1280px screen system-sans: base 90: reserved width differs from glyphs by 4.594px
+- webkit 1280px screen system-sans: base 91: reserved width differs from glyphs by 1.578px
+- webkit 1280px screen system-sans: base 93: reserved width differs from glyphs by 1.578px
+- webkit 1280px screen system-sans: base 94: reserved width differs from glyphs by 3.594px
+- webkit 1280px screen system-sans: base 109: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-sans: base 110: reserved width differs from glyphs by 1.125px
+- webkit 1280px screen system-sans: base 111: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-sans: base 117: reserved width differs from glyphs by 1.062px
+- webkit 1280px screen system-sans: base 118: reserved width differs from glyphs by 1.281px
+- webkit 1280px screen system-sans: base 125: reserved width differs from glyphs by 1.016px
+- webkit 1280px screen system-sans: base 127: reserved width differs from glyphs by 1.500px
+- webkit 1280px screen system-sans: base 128: reserved width differs from glyphs by 1.781px
+- webkit 1280px screen system-sans: base 129: reserved width differs from glyphs by 1.875px
+- webkit 1280px screen system-sans: base 130: reserved width differs from glyphs by 1.797px
+- webkit 1280px screen system-sans: base 155: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen system-sans: base 157: reserved width differs from glyphs by 1.969px
+- webkit 1280px screen system-sans: base 159: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-sans: base 160: reserved width differs from glyphs by 1.641px
+- webkit 1280px screen system-sans: base 203: reserved width differs from glyphs by 7.203px
+- webkit 1280px screen system-sans: base 206: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-sans: base 208: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-sans: base 212: reserved width differs from glyphs by 1.172px
+- webkit 1280px screen system-sans: base 225: reserved width differs from glyphs by 2.109px
+- webkit 1280px screen system-sans: base 226: reserved width differs from glyphs by 2.594px
+- webkit 1280px screen system-sans: base 227: reserved width differs from glyphs by 1.125px
+- webkit 1280px screen system-sans: base 228: reserved width differs from glyphs by 1.906px
+- webkit 1280px screen system-sans: base 231: reserved width differs from glyphs by 3.859px
+- webkit 1280px screen system-sans: base 233: reserved width differs from glyphs by 3.859px
+- webkit 1280px screen system-sans: base 237: reserved width differs from glyphs by 4.203px
+- webkit 1280px screen system-sans: base 238: reserved width differs from glyphs by 2.078px
+- webkit 1280px screen system-sans: base 239: reserved width differs from glyphs by 5.172px
+- webkit 1280px screen system-sans: base 245: reserved width differs from glyphs by 4.422px
+- webkit 1280px screen system-sans: base 247: reserved width differs from glyphs by 3.859px
+- webkit 1280px screen system-sans: base 249: reserved width differs from glyphs by 2.203px
+- webkit 1280px screen system-sans: base 252: reserved width differs from glyphs by 1.641px
+- webkit 1280px screen system-sans: measured geometry exceeds 1px
+- webkit 1280px screen system-serif: base 0: reserved width differs from glyphs by 1.688px
+- webkit 1280px screen system-serif: base 1: reserved width differs from glyphs by 1.391px
+- webkit 1280px screen system-serif: base 3: reserved width differs from glyphs by 4.031px
+- webkit 1280px screen system-serif: base 6: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 7: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 8: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 15: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 18: reserved width differs from glyphs by 1.656px
+- webkit 1280px screen system-serif: base 20: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 28: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 33: reserved width differs from glyphs by 4.172px
+- webkit 1280px screen system-serif: base 34: reserved width differs from glyphs by 1.391px
+- webkit 1280px screen system-serif: base 36: reserved width differs from glyphs by 2.203px
+- webkit 1280px screen system-serif: base 42: reserved width differs from glyphs by 4.172px
+- webkit 1280px screen system-serif: base 43: reserved width differs from glyphs by 1.391px
+- webkit 1280px screen system-serif: base 47: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen system-serif: base 56: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-serif: base 57: reserved width differs from glyphs by 1.328px
+- webkit 1280px screen system-serif: base 66: reserved width differs from glyphs by 1.453px
+- webkit 1280px screen system-serif: base 68: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 70: reserved width differs from glyphs by 1.125px
+- webkit 1280px screen system-serif: base 71: reserved width differs from glyphs by 1.906px
+- webkit 1280px screen system-serif: base 73: reserved width differs from glyphs by 1.094px
+- webkit 1280px screen system-serif: base 74: reserved width differs from glyphs by 4.156px
+- webkit 1280px screen system-serif: base 76: reserved width differs from glyphs by 3.609px
+- webkit 1280px screen system-serif: base 77: reserved width differs from glyphs by 3.047px
+- webkit 1280px screen system-serif: base 78: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-serif: base 87: reserved width differs from glyphs by 4.422px
+- webkit 1280px screen system-serif: base 90: reserved width differs from glyphs by 4.594px
+- webkit 1280px screen system-serif: base 91: reserved width differs from glyphs by 1.578px
+- webkit 1280px screen system-serif: base 93: reserved width differs from glyphs by 1.578px
+- webkit 1280px screen system-serif: base 94: reserved width differs from glyphs by 3.594px
+- webkit 1280px screen system-serif: base 109: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-serif: base 110: reserved width differs from glyphs by 1.125px
+- webkit 1280px screen system-serif: base 111: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-serif: base 117: reserved width differs from glyphs by 1.062px
+- webkit 1280px screen system-serif: base 118: reserved width differs from glyphs by 1.281px
+- webkit 1280px screen system-serif: base 125: reserved width differs from glyphs by 1.016px
+- webkit 1280px screen system-serif: base 127: reserved width differs from glyphs by 1.500px
+- webkit 1280px screen system-serif: base 128: reserved width differs from glyphs by 1.781px
+- webkit 1280px screen system-serif: base 129: reserved width differs from glyphs by 1.875px
+- webkit 1280px screen system-serif: base 130: reserved width differs from glyphs by 1.797px
+- webkit 1280px screen system-serif: base 155: reserved width differs from glyphs by 1.250px
+- webkit 1280px screen system-serif: base 157: reserved width differs from glyphs by 1.969px
+- webkit 1280px screen system-serif: base 159: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-serif: base 160: reserved width differs from glyphs by 1.641px
+- webkit 1280px screen system-serif: base 203: reserved width differs from glyphs by 7.203px
+- webkit 1280px screen system-serif: base 206: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-serif: base 208: reserved width differs from glyphs by 1.312px
+- webkit 1280px screen system-serif: base 212: reserved width differs from glyphs by 1.172px
+- webkit 1280px screen system-serif: base 225: reserved width differs from glyphs by 2.109px
+- webkit 1280px screen system-serif: base 226: reserved width differs from glyphs by 2.594px
+- webkit 1280px screen system-serif: base 227: reserved width differs from glyphs by 1.125px
+- webkit 1280px screen system-serif: base 228: reserved width differs from glyphs by 1.906px
+- webkit 1280px screen system-serif: base 231: reserved width differs from glyphs by 3.859px
+- webkit 1280px screen system-serif: base 233: reserved width differs from glyphs by 3.859px
+- webkit 1280px screen system-serif: base 237: reserved width differs from glyphs by 4.203px
+- webkit 1280px screen system-serif: base 238: reserved width differs from glyphs by 2.078px
+- webkit 1280px screen system-serif: base 239: reserved width differs from glyphs by 5.172px
+- webkit 1280px screen system-serif: base 245: reserved width differs from glyphs by 4.422px
+- webkit 1280px screen system-serif: base 247: reserved width differs from glyphs by 3.859px
+- webkit 1280px screen system-serif: base 249: reserved width differs from glyphs by 2.203px
+- webkit 1280px screen system-serif: base 252: reserved width differs from glyphs by 1.641px
+- webkit 1280px screen system-serif: measured geometry exceeds 1px
+- webkit 390px screen custom-sans: prepared math boxes disappeared or were never measured
+- webkit 390px screen custom-sans: base 79: reserved width differs from glyphs by 1.281px
+- webkit 390px screen custom-sans: base 94: reserved width differs from glyphs by 2.000px
+- webkit 390px screen custom-sans: base 117: reserved width differs from glyphs by 1.031px
+- webkit 390px screen custom-sans: base 121: reserved width differs from glyphs by 1.266px
+- webkit 390px screen custom-sans: base 132: reserved width differs from glyphs by 1.016px
+- webkit 390px screen custom-sans: base 146: reserved width differs from glyphs by 1.078px
+- webkit 390px screen custom-sans: base 151: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-sans: base 214: reserved width differs from glyphs by 1.016px
+- webkit 390px screen custom-sans: base 226: reserved width differs from glyphs by 1.109px
+- webkit 390px screen custom-sans: base 240: y moved 36.812px
+- webkit 390px screen custom-sans: base 240: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 241: y moved 36.812px
+- webkit 390px screen custom-sans: base 241: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 242: y moved 36.812px
+- webkit 390px screen custom-sans: base 242: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 243: y moved 36.812px
+- webkit 390px screen custom-sans: base 243: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 244: y moved 36.812px
+- webkit 390px screen custom-sans: base 244: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 245: y moved 36.812px
+- webkit 390px screen custom-sans: base 245: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 246: y moved 36.812px
+- webkit 390px screen custom-sans: base 246: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 247: y moved 36.812px
+- webkit 390px screen custom-sans: base 247: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 248: y moved 36.812px
+- webkit 390px screen custom-sans: base 248: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 249: y moved 36.812px
+- webkit 390px screen custom-sans: base 249: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 250: y moved 36.812px
+- webkit 390px screen custom-sans: base 250: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 251: y moved 36.812px
+- webkit 390px screen custom-sans: base 251: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 252: y moved 36.812px
+- webkit 390px screen custom-sans: base 252: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 253: y moved 36.812px
+- webkit 390px screen custom-sans: base 253: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 254: y moved 36.812px
+- webkit 390px screen custom-sans: base 254: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 255: y moved 36.812px
+- webkit 390px screen custom-sans: base 255: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 256: y moved 36.812px
+- webkit 390px screen custom-sans: base 256: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 257: y moved 36.812px
+- webkit 390px screen custom-sans: base 257: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 258: y moved 36.812px
+- webkit 390px screen custom-sans: base 258: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 259: y moved 36.812px
+- webkit 390px screen custom-sans: base 259: baseline moved 36.812px
+- webkit 390px screen custom-sans: base 260: y moved 36.812px
+- webkit 390px screen custom-sans: base 260: baseline moved 36.812px
+- webkit 390px screen custom-sans: formula 478: line wrapping changed
+- webkit 390px screen custom-sans: missing boxes or real held font requests
+- webkit 390px screen custom-serif: incomplete after formula coverage
+- webkit 390px screen custom-serif: prepared math boxes disappeared or were never measured
+- webkit 390px screen custom-serif: base 0: reserved width differs from glyphs by 1.188px
+- webkit 390px screen custom-serif: base 1: reserved width differs from glyphs by 1.188px
+- webkit 390px screen custom-serif: base 2: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 3: reserved width differs from glyphs by 3.141px
+- webkit 390px screen custom-serif: base 16: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 32: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 33: reserved width differs from glyphs by 2.422px
+- webkit 390px screen custom-serif: base 34: reserved width differs from glyphs by 1.188px
+- webkit 390px screen custom-serif: base 35: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 36: reserved width differs from glyphs by 1.203px
+- webkit 390px screen custom-serif: base 41: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 42: reserved width differs from glyphs by 2.422px
+- webkit 390px screen custom-serif: base 43: reserved width differs from glyphs by 1.188px
+- webkit 390px screen custom-serif: base 57: reserved width differs from glyphs by 1.141px
+- webkit 390px screen custom-serif: base 70: reserved width differs from glyphs by 2.344px
+- webkit 390px screen custom-serif: base 71: reserved width differs from glyphs by 3.219px
+- webkit 390px screen custom-serif: base 74: reserved width differs from glyphs by 3.219px
+- webkit 390px screen custom-serif: base 76: reserved width differs from glyphs by 2.828px
+- webkit 390px screen custom-serif: base 77: reserved width differs from glyphs by 2.406px
+- webkit 390px screen custom-serif: base 87: reserved width differs from glyphs by 2.828px
+- webkit 390px screen custom-serif: base 90: reserved width differs from glyphs by 3.234px
+- webkit 390px screen custom-serif: base 91: reserved width differs from glyphs by 1.016px
+- webkit 390px screen custom-serif: base 92: reserved width differs from glyphs by 1.516px
+- webkit 390px screen custom-serif: base 93: reserved width differs from glyphs by 2.422px
+- webkit 390px screen custom-serif: base 94: reserved width differs from glyphs by 2.000px
+- webkit 390px screen custom-serif: base 130: reserved width differs from glyphs by 1.438px
+- webkit 390px screen custom-serif: base 146: reserved width differs from glyphs by 1.062px
+- webkit 390px screen custom-serif: base 160: reserved width differs from glyphs by 1.125px
+- webkit 390px screen custom-serif: base 203: reserved width differs from glyphs by 4.859px
+- webkit 390px screen custom-serif: base 225: reserved width differs from glyphs by 1.438px
+- webkit 390px screen custom-serif: base 227: reserved width differs from glyphs by 2.344px
+- webkit 390px screen custom-serif: base 228: reserved width differs from glyphs by 3.219px
+- webkit 390px screen custom-serif: base 230: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 231: reserved width differs from glyphs by 2.406px
+- webkit 390px screen custom-serif: base 232: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 233: reserved width differs from glyphs by 2.406px
+- webkit 390px screen custom-serif: base 245: reserved width differs from glyphs by 2.828px
+- webkit 390px screen custom-serif: base 246: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 247: reserved width differs from glyphs by 2.406px
+- webkit 390px screen custom-serif: base 248: reserved width differs from glyphs by 1.250px
+- webkit 390px screen custom-serif: base 249: reserved width differs from glyphs by 1.203px
+- webkit 390px screen custom-serif: base 252: reserved width differs from glyphs by 1.203px
+- webkit 390px screen custom-serif: base 82: y moved 25.266px
+- webkit 390px screen custom-serif: base 82: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 83: y moved 25.266px
+- webkit 390px screen custom-serif: base 83: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 84: y moved 25.266px
+- webkit 390px screen custom-serif: base 84: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 85: y moved 25.266px
+- webkit 390px screen custom-serif: base 85: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 86: y moved 25.266px
+- webkit 390px screen custom-serif: base 86: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 87: y moved 25.266px
+- webkit 390px screen custom-serif: base 87: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 88: y moved 25.266px
+- webkit 390px screen custom-serif: base 88: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 89: y moved 25.266px
+- webkit 390px screen custom-serif: base 89: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 90: y moved 25.266px
+- webkit 390px screen custom-serif: base 90: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 91: y moved 25.266px
+- webkit 390px screen custom-serif: base 91: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 92: y moved 25.266px
+- webkit 390px screen custom-serif: base 92: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 93: y moved 25.266px
+- webkit 390px screen custom-serif: base 93: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 94: y moved 25.266px
+- webkit 390px screen custom-serif: base 94: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 95: y moved 25.266px
+- webkit 390px screen custom-serif: base 95: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 96: y moved 25.266px
+- webkit 390px screen custom-serif: base 96: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 97: y moved 25.266px
+- webkit 390px screen custom-serif: base 97: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 98: x moved 63.000px
+- webkit 390px screen custom-serif: base 98: y moved 25.266px
+- webkit 390px screen custom-serif: base 98: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 99: x moved 63.000px
+- webkit 390px screen custom-serif: base 99: y moved 25.266px
+- webkit 390px screen custom-serif: base 99: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 100: x moved 63.000px
+- webkit 390px screen custom-serif: base 100: y moved 25.266px
+- webkit 390px screen custom-serif: base 100: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 101: x moved 63.000px
+- webkit 390px screen custom-serif: base 101: y moved 25.266px
+- webkit 390px screen custom-serif: base 101: baseline moved 25.266px
+- webkit 390px screen custom-serif: base 104: y moved 63.328px
+- webkit 390px screen custom-serif: base 104: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 105: y moved 63.328px
+- webkit 390px screen custom-serif: base 105: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 106: y moved 63.328px
+- webkit 390px screen custom-serif: base 106: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 107: y moved 63.328px
+- webkit 390px screen custom-serif: base 107: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 108: y moved 63.328px
+- webkit 390px screen custom-serif: base 108: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 109: y moved 63.328px
+- webkit 390px screen custom-serif: base 109: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 110: y moved 63.328px
+- webkit 390px screen custom-serif: base 110: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 111: y moved 63.328px
+- webkit 390px screen custom-serif: base 111: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 112: y moved 63.328px
+- webkit 390px screen custom-serif: base 112: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 113: y moved 63.328px
+- webkit 390px screen custom-serif: base 113: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 114: y moved 63.328px
+- webkit 390px screen custom-serif: base 114: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 115: y moved 63.328px
+- webkit 390px screen custom-serif: base 115: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 116: y moved 63.328px
+- webkit 390px screen custom-serif: base 116: baseline moved 63.328px
+- webkit 390px screen custom-serif: base 117: y moved 62.828px
+- webkit 390px screen custom-serif: base 117: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 118: y moved 62.828px
+- webkit 390px screen custom-serif: base 118: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 119: y moved 62.828px
+- webkit 390px screen custom-serif: base 119: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 120: y moved 62.828px
+- webkit 390px screen custom-serif: base 120: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 121: y moved 62.828px
+- webkit 390px screen custom-serif: base 121: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 122: y moved 62.828px
+- webkit 390px screen custom-serif: base 122: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 123: y moved 62.828px
+- webkit 390px screen custom-serif: base 123: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 124: y moved 62.828px
+- webkit 390px screen custom-serif: base 124: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 125: y moved 62.828px
+- webkit 390px screen custom-serif: base 125: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 126: y moved 62.828px
+- webkit 390px screen custom-serif: base 126: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 127: y moved 62.828px
+- webkit 390px screen custom-serif: base 127: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 128: y moved 62.828px
+- webkit 390px screen custom-serif: base 128: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 129: y moved 62.828px
+- webkit 390px screen custom-serif: base 129: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 130: y moved 62.828px
+- webkit 390px screen custom-serif: base 130: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 131: y moved 62.828px
+- webkit 390px screen custom-serif: base 131: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 132: y moved 62.828px
+- webkit 390px screen custom-serif: base 132: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 133: y moved 62.828px
+- webkit 390px screen custom-serif: base 133: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 134: y moved 62.828px
+- webkit 390px screen custom-serif: base 134: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 135: y moved 62.828px
+- webkit 390px screen custom-serif: base 135: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 136: y moved 62.828px
+- webkit 390px screen custom-serif: base 136: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 137: y moved 62.828px
+- webkit 390px screen custom-serif: base 137: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 138: y moved 62.828px
+- webkit 390px screen custom-serif: base 138: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 139: y moved 62.828px
+- webkit 390px screen custom-serif: base 139: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 140: y moved 62.828px
+- webkit 390px screen custom-serif: base 140: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 141: y moved 62.828px
+- webkit 390px screen custom-serif: base 141: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 142: y moved 62.828px
+- webkit 390px screen custom-serif: base 142: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 143: y moved 62.828px
+- webkit 390px screen custom-serif: base 143: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 144: y moved 62.828px
+- webkit 390px screen custom-serif: base 144: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 145: y moved 62.828px
+- webkit 390px screen custom-serif: base 145: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 146: y moved 62.828px
+- webkit 390px screen custom-serif: base 146: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 147: y moved 62.828px
+- webkit 390px screen custom-serif: base 147: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 148: y moved 62.828px
+- webkit 390px screen custom-serif: base 148: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 149: y moved 62.828px
+- webkit 390px screen custom-serif: base 149: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 150: y moved 62.828px
+- webkit 390px screen custom-serif: base 150: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 151: y moved 62.828px
+- webkit 390px screen custom-serif: base 151: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 152: y moved 62.828px
+- webkit 390px screen custom-serif: base 152: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 153: y moved 62.828px
+- webkit 390px screen custom-serif: base 153: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 154: y moved 62.828px
+- webkit 390px screen custom-serif: base 154: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 155: y moved 62.828px
+- webkit 390px screen custom-serif: base 155: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 156: y moved 62.828px
+- webkit 390px screen custom-serif: base 156: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 157: y moved 62.828px
+- webkit 390px screen custom-serif: base 157: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 158: y moved 62.828px
+- webkit 390px screen custom-serif: base 158: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 159: y moved 62.828px
+- webkit 390px screen custom-serif: base 159: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 160: y moved 62.828px
+- webkit 390px screen custom-serif: base 160: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 161: y moved 62.828px
+- webkit 390px screen custom-serif: base 161: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 162: y moved 62.828px
+- webkit 390px screen custom-serif: base 162: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 163: y moved 62.828px
+- webkit 390px screen custom-serif: base 163: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 164: y moved 62.828px
+- webkit 390px screen custom-serif: base 164: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 165: y moved 62.828px
+- webkit 390px screen custom-serif: base 165: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 166: y moved 62.828px
+- webkit 390px screen custom-serif: base 166: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 167: y moved 62.828px
+- webkit 390px screen custom-serif: base 167: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 168: y moved 62.828px
+- webkit 390px screen custom-serif: base 168: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 170: y moved 62.828px
+- webkit 390px screen custom-serif: base 170: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 172: y moved 62.828px
+- webkit 390px screen custom-serif: base 172: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 174: y moved 62.828px
+- webkit 390px screen custom-serif: base 174: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 175: y moved 62.828px
+- webkit 390px screen custom-serif: base 175: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 176: y moved 62.828px
+- webkit 390px screen custom-serif: base 176: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 177: y moved 62.828px
+- webkit 390px screen custom-serif: base 177: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 178: y moved 62.828px
+- webkit 390px screen custom-serif: base 178: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 179: y moved 62.828px
+- webkit 390px screen custom-serif: base 179: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 180: y moved 62.828px
+- webkit 390px screen custom-serif: base 180: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 181: y moved 62.828px
+- webkit 390px screen custom-serif: base 181: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 182: y moved 62.828px
+- webkit 390px screen custom-serif: base 182: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 183: y moved 62.828px
+- webkit 390px screen custom-serif: base 183: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 184: y moved 62.828px
+- webkit 390px screen custom-serif: base 184: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 185: y moved 62.828px
+- webkit 390px screen custom-serif: base 185: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 186: y moved 62.828px
+- webkit 390px screen custom-serif: base 186: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 187: y moved 62.828px
+- webkit 390px screen custom-serif: base 187: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 188: y moved 62.828px
+- webkit 390px screen custom-serif: base 188: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 189: y moved 62.828px
+- webkit 390px screen custom-serif: base 189: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 190: y moved 62.828px
+- webkit 390px screen custom-serif: base 190: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 191: y moved 62.828px
+- webkit 390px screen custom-serif: base 191: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 193: x moved 18.406px
+- webkit 390px screen custom-serif: base 193: y moved 62.828px
+- webkit 390px screen custom-serif: base 193: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 194: y moved 62.828px
+- webkit 390px screen custom-serif: base 194: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 195: y moved 62.828px
+- webkit 390px screen custom-serif: base 195: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 196: y moved 62.828px
+- webkit 390px screen custom-serif: base 196: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 197: y moved 62.828px
+- webkit 390px screen custom-serif: base 197: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 198: y moved 62.828px
+- webkit 390px screen custom-serif: base 198: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 199: y moved 62.828px
+- webkit 390px screen custom-serif: base 199: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 200: y moved 62.828px
+- webkit 390px screen custom-serif: base 200: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 201: y moved 62.828px
+- webkit 390px screen custom-serif: base 201: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 202: y moved 62.828px
+- webkit 390px screen custom-serif: base 202: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 203: y moved 62.828px
+- webkit 390px screen custom-serif: base 203: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 204: y moved 62.828px
+- webkit 390px screen custom-serif: base 204: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 205: y moved 62.828px
+- webkit 390px screen custom-serif: base 205: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 206: y moved 62.828px
+- webkit 390px screen custom-serif: base 206: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 207: y moved 62.828px
+- webkit 390px screen custom-serif: base 207: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 208: y moved 62.828px
+- webkit 390px screen custom-serif: base 208: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 209: y moved 62.828px
+- webkit 390px screen custom-serif: base 209: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 210: y moved 62.828px
+- webkit 390px screen custom-serif: base 210: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 211: y moved 62.828px
+- webkit 390px screen custom-serif: base 211: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 212: y moved 62.828px
+- webkit 390px screen custom-serif: base 212: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 213: y moved 62.828px
+- webkit 390px screen custom-serif: base 213: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 214: y moved 62.828px
+- webkit 390px screen custom-serif: base 214: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 215: y moved 62.828px
+- webkit 390px screen custom-serif: base 215: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 216: y moved 62.828px
+- webkit 390px screen custom-serif: base 216: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 217: y moved 62.828px
+- webkit 390px screen custom-serif: base 217: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 218: y moved 62.828px
+- webkit 390px screen custom-serif: base 218: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 219: y moved 62.828px
+- webkit 390px screen custom-serif: base 219: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 220: y moved 62.828px
+- webkit 390px screen custom-serif: base 220: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 221: y moved 62.828px
+- webkit 390px screen custom-serif: base 221: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 222: y moved 62.828px
+- webkit 390px screen custom-serif: base 222: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 223: y moved 62.828px
+- webkit 390px screen custom-serif: base 223: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 224: y moved 62.828px
+- webkit 390px screen custom-serif: base 224: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 225: y moved 62.828px
+- webkit 390px screen custom-serif: base 225: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 226: y moved 62.828px
+- webkit 390px screen custom-serif: base 226: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 227: y moved 62.828px
+- webkit 390px screen custom-serif: base 227: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 228: y moved 62.828px
+- webkit 390px screen custom-serif: base 228: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 229: y moved 62.828px
+- webkit 390px screen custom-serif: base 229: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 230: y moved 62.828px
+- webkit 390px screen custom-serif: base 230: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 231: y moved 62.828px
+- webkit 390px screen custom-serif: base 231: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 232: y moved 62.828px
+- webkit 390px screen custom-serif: base 232: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 233: y moved 62.828px
+- webkit 390px screen custom-serif: base 233: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 234: y moved 62.828px
+- webkit 390px screen custom-serif: base 234: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 235: y moved 62.828px
+- webkit 390px screen custom-serif: base 235: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 236: y moved 62.828px
+- webkit 390px screen custom-serif: base 236: baseline moved 62.828px
+- webkit 390px screen custom-serif: base 240: y moved 26.062px
+- webkit 390px screen custom-serif: base 240: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 242: y moved 26.062px
+- webkit 390px screen custom-serif: base 242: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 243: y moved 26.062px
+- webkit 390px screen custom-serif: base 243: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 244: y moved 26.062px
+- webkit 390px screen custom-serif: base 244: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 245: y moved 26.062px
+- webkit 390px screen custom-serif: base 245: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 246: y moved 26.062px
+- webkit 390px screen custom-serif: base 246: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 247: y moved 26.062px
+- webkit 390px screen custom-serif: base 247: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 248: y moved 26.062px
+- webkit 390px screen custom-serif: base 248: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 249: y moved 26.062px
+- webkit 390px screen custom-serif: base 249: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 250: y moved 26.062px
+- webkit 390px screen custom-serif: base 250: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 251: y moved 26.062px
+- webkit 390px screen custom-serif: base 251: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 252: y moved 26.062px
+- webkit 390px screen custom-serif: base 252: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 253: y moved 26.062px
+- webkit 390px screen custom-serif: base 253: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 254: y moved 26.062px
+- webkit 390px screen custom-serif: base 254: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 255: y moved 26.062px
+- webkit 390px screen custom-serif: base 255: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 256: y moved 26.062px
+- webkit 390px screen custom-serif: base 256: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 257: y moved 26.062px
+- webkit 390px screen custom-serif: base 257: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 258: y moved 26.062px
+- webkit 390px screen custom-serif: base 258: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 259: y moved 26.062px
+- webkit 390px screen custom-serif: base 259: baseline moved 26.062px
+- webkit 390px screen custom-serif: base 260: y moved 26.062px
+- webkit 390px screen custom-serif: base 260: baseline moved 26.062px
+- webkit 390px screen custom-serif: formula 154: line wrapping changed
+- webkit 390px screen custom-serif: formula 198: line wrapping changed
+- webkit 390px screen custom-serif: formula 477: line wrapping changed
+- webkit 390px screen custom-serif: visible mathematics has no prepared formula: ['\\mu\\!\\left([0,L]^2\\right) = 43391/4000 = 10.84775', '\\theta \\approx 15.7224^{\\circ}', '\\varphi', '\\varphi', '\\theta', '\\varphi']
+- webkit 390px screen custom-serif: missing boxes or real held font requests
+- webkit 390px screen system-sans: base 0: reserved width differs from glyphs by 1.688px
+- webkit 390px screen system-sans: base 1: reserved width differs from glyphs by 1.391px
+- webkit 390px screen system-sans: base 3: reserved width differs from glyphs by 4.031px
+- webkit 390px screen system-sans: base 6: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 7: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 8: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 15: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 18: reserved width differs from glyphs by 1.656px
+- webkit 390px screen system-sans: base 20: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 28: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 33: reserved width differs from glyphs by 4.172px
+- webkit 390px screen system-sans: base 34: reserved width differs from glyphs by 1.391px
+- webkit 390px screen system-sans: base 36: reserved width differs from glyphs by 2.203px
+- webkit 390px screen system-sans: base 42: reserved width differs from glyphs by 4.172px
+- webkit 390px screen system-sans: base 43: reserved width differs from glyphs by 1.391px
+- webkit 390px screen system-sans: base 47: reserved width differs from glyphs by 1.250px
+- webkit 390px screen system-sans: base 56: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-sans: base 57: reserved width differs from glyphs by 1.328px
+- webkit 390px screen system-sans: base 66: reserved width differs from glyphs by 1.453px
+- webkit 390px screen system-sans: base 68: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 70: reserved width differs from glyphs by 1.125px
+- webkit 390px screen system-sans: base 71: reserved width differs from glyphs by 1.906px
+- webkit 390px screen system-sans: base 73: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-sans: base 74: reserved width differs from glyphs by 4.156px
+- webkit 390px screen system-sans: base 76: reserved width differs from glyphs by 3.609px
+- webkit 390px screen system-sans: base 77: reserved width differs from glyphs by 3.047px
+- webkit 390px screen system-sans: base 78: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-sans: base 87: reserved width differs from glyphs by 4.422px
+- webkit 390px screen system-sans: base 90: reserved width differs from glyphs by 4.594px
+- webkit 390px screen system-sans: base 91: reserved width differs from glyphs by 1.578px
+- webkit 390px screen system-sans: base 93: reserved width differs from glyphs by 1.578px
+- webkit 390px screen system-sans: base 94: reserved width differs from glyphs by 3.594px
+- webkit 390px screen system-sans: base 109: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-sans: base 110: reserved width differs from glyphs by 1.125px
+- webkit 390px screen system-sans: base 111: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-sans: base 117: reserved width differs from glyphs by 1.062px
+- webkit 390px screen system-sans: base 118: reserved width differs from glyphs by 1.281px
+- webkit 390px screen system-sans: base 125: reserved width differs from glyphs by 1.016px
+- webkit 390px screen system-sans: base 127: reserved width differs from glyphs by 1.500px
+- webkit 390px screen system-sans: base 128: reserved width differs from glyphs by 1.781px
+- webkit 390px screen system-sans: base 129: reserved width differs from glyphs by 1.875px
+- webkit 390px screen system-sans: base 130: reserved width differs from glyphs by 1.797px
+- webkit 390px screen system-sans: base 155: reserved width differs from glyphs by 1.250px
+- webkit 390px screen system-sans: base 157: reserved width differs from glyphs by 1.969px
+- webkit 390px screen system-sans: base 159: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-sans: base 160: reserved width differs from glyphs by 1.641px
+- webkit 390px screen system-sans: base 203: reserved width differs from glyphs by 7.203px
+- webkit 390px screen system-sans: base 206: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-sans: base 208: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-sans: base 212: reserved width differs from glyphs by 1.172px
+- webkit 390px screen system-sans: base 225: reserved width differs from glyphs by 2.109px
+- webkit 390px screen system-sans: base 226: reserved width differs from glyphs by 2.594px
+- webkit 390px screen system-sans: base 227: reserved width differs from glyphs by 1.125px
+- webkit 390px screen system-sans: base 228: reserved width differs from glyphs by 1.906px
+- webkit 390px screen system-sans: base 231: reserved width differs from glyphs by 3.859px
+- webkit 390px screen system-sans: base 233: reserved width differs from glyphs by 3.859px
+- webkit 390px screen system-sans: base 237: reserved width differs from glyphs by 4.203px
+- webkit 390px screen system-sans: base 238: reserved width differs from glyphs by 2.078px
+- webkit 390px screen system-sans: base 239: reserved width differs from glyphs by 5.172px
+- webkit 390px screen system-sans: base 245: reserved width differs from glyphs by 4.422px
+- webkit 390px screen system-sans: base 247: reserved width differs from glyphs by 3.859px
+- webkit 390px screen system-sans: base 249: reserved width differs from glyphs by 2.203px
+- webkit 390px screen system-sans: base 252: reserved width differs from glyphs by 1.641px
+- webkit 390px screen system-sans: measured geometry exceeds 1px
+- webkit 390px screen system-serif: base 0: reserved width differs from glyphs by 1.688px
+- webkit 390px screen system-serif: base 1: reserved width differs from glyphs by 1.391px
+- webkit 390px screen system-serif: base 3: reserved width differs from glyphs by 4.031px
+- webkit 390px screen system-serif: base 6: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 7: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 8: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 15: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 18: reserved width differs from glyphs by 1.656px
+- webkit 390px screen system-serif: base 20: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 28: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 33: reserved width differs from glyphs by 4.172px
+- webkit 390px screen system-serif: base 34: reserved width differs from glyphs by 1.391px
+- webkit 390px screen system-serif: base 36: reserved width differs from glyphs by 2.203px
+- webkit 390px screen system-serif: base 42: reserved width differs from glyphs by 4.172px
+- webkit 390px screen system-serif: base 43: reserved width differs from glyphs by 1.391px
+- webkit 390px screen system-serif: base 47: reserved width differs from glyphs by 1.250px
+- webkit 390px screen system-serif: base 56: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-serif: base 57: reserved width differs from glyphs by 1.328px
+- webkit 390px screen system-serif: base 66: reserved width differs from glyphs by 1.453px
+- webkit 390px screen system-serif: base 68: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 70: reserved width differs from glyphs by 1.125px
+- webkit 390px screen system-serif: base 71: reserved width differs from glyphs by 1.906px
+- webkit 390px screen system-serif: base 73: reserved width differs from glyphs by 1.094px
+- webkit 390px screen system-serif: base 74: reserved width differs from glyphs by 4.156px
+- webkit 390px screen system-serif: base 76: reserved width differs from glyphs by 3.609px
+- webkit 390px screen system-serif: base 77: reserved width differs from glyphs by 3.047px
+- webkit 390px screen system-serif: base 78: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-serif: base 87: reserved width differs from glyphs by 4.422px
+- webkit 390px screen system-serif: base 90: reserved width differs from glyphs by 4.594px
+- webkit 390px screen system-serif: base 91: reserved width differs from glyphs by 1.578px
+- webkit 390px screen system-serif: base 93: reserved width differs from glyphs by 1.578px
+- webkit 390px screen system-serif: base 94: reserved width differs from glyphs by 3.594px
+- webkit 390px screen system-serif: base 109: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-serif: base 110: reserved width differs from glyphs by 1.125px
+- webkit 390px screen system-serif: base 111: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-serif: base 117: reserved width differs from glyphs by 1.062px
+- webkit 390px screen system-serif: base 118: reserved width differs from glyphs by 1.281px
+- webkit 390px screen system-serif: base 125: reserved width differs from glyphs by 1.016px
+- webkit 390px screen system-serif: base 127: reserved width differs from glyphs by 1.500px
+- webkit 390px screen system-serif: base 128: reserved width differs from glyphs by 1.781px
+- webkit 390px screen system-serif: base 129: reserved width differs from glyphs by 1.875px
+- webkit 390px screen system-serif: base 130: reserved width differs from glyphs by 1.797px
+- webkit 390px screen system-serif: base 155: reserved width differs from glyphs by 1.250px
+- webkit 390px screen system-serif: base 157: reserved width differs from glyphs by 1.969px
+- webkit 390px screen system-serif: base 159: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-serif: base 160: reserved width differs from glyphs by 1.641px
+- webkit 390px screen system-serif: base 203: reserved width differs from glyphs by 7.203px
+- webkit 390px screen system-serif: base 206: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-serif: base 208: reserved width differs from glyphs by 1.312px
+- webkit 390px screen system-serif: base 212: reserved width differs from glyphs by 1.172px
+- webkit 390px screen system-serif: base 225: reserved width differs from glyphs by 2.109px
+- webkit 390px screen system-serif: base 226: reserved width differs from glyphs by 2.594px
+- webkit 390px screen system-serif: base 227: reserved width differs from glyphs by 1.125px
+- webkit 390px screen system-serif: base 228: reserved width differs from glyphs by 1.906px
+- webkit 390px screen system-serif: base 231: reserved width differs from glyphs by 3.859px
+- webkit 390px screen system-serif: base 233: reserved width differs from glyphs by 3.859px
+- webkit 390px screen system-serif: base 237: reserved width differs from glyphs by 4.203px
+- webkit 390px screen system-serif: base 238: reserved width differs from glyphs by 2.078px
+- webkit 390px screen system-serif: base 239: reserved width differs from glyphs by 5.172px
+- webkit 390px screen system-serif: base 245: reserved width differs from glyphs by 4.422px
+- webkit 390px screen system-serif: base 247: reserved width differs from glyphs by 3.859px
+- webkit 390px screen system-serif: base 249: reserved width differs from glyphs by 2.203px
+- webkit 390px screen system-serif: base 252: reserved width differs from glyphs by 1.641px
+- webkit 390px screen system-serif: measured geometry exceeds 1px
+- missing registered browser/width cells: [('chromium', 390, 'custom-sans'), ('chromium', 390, 'custom-serif'), ('chromium', 390, 'system-sans'), ('chromium', 390, 'system-serif'), ('chromium', 1280, 'custom-sans'), ('chromium', 1280, 'custom-serif'), ('chromium', 1280, 'system-sans'), ('chromium', 1280, 'system-serif'), ('webkit', 390, 'custom-sans'), ('webkit', 390, 'custom-serif'), ('webkit', 1280, 'custom-serif')]
+- missing rejected movement or stable-wrong-width control
+- missing rejected pre-discovery reservation control
+- missing registered print font settings
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
