@@ -588,6 +588,13 @@ the scaled cores), the general site-invisible-overlap mechanism holds, adding st
 sites left the value at `11.07` with the generator stopping on its 32-row pricing cap,
 and the exact census exceeds one million near-tight cells with no clustering on Trump’s
 cores, recorded as the obstruction to the exact cover.
+[Session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md)
+replayed every count in H-131 exactly and widened the robust end band far past H-130’s
+`3°`: no packing at `96/25` has every folded angle in `[0°, 10.3875°] ∪ [43.0737°, 45°]`
+(Theorem C, grid 119, mass `11083/1024`), with `[0°, 1.7139°] ∪ [43.5293°, 45°]` the
+first rung on grid 79; the dual of the band toward `40.19°` puts its weight near the
+axis, not at Trump’s angle, and `ceiling.py` decides that none of those duals is a
+continuum obstruction, so the band’s true value stays open from below.
 
 **Selected next entry:** `think-znzj` is BC-303, the first-wave selection with
 independent review, which reads every lane’s exact results once sessions 100, 101, 102
@@ -3209,9 +3216,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 116 | 29,906 | 16,863 | 349 | 2,824 | 171.02 h |
+| claimed by a session | 117 | 30,216 | 16,969 | 351 | 2,856 | 172.54 h |
 | claimed by none | 42 | 8,737 | 5,134 | 136 | 760 | 43.37 h |
-| **measured** | **158** | **38,643** | **21,997** | **485** | **3,584** | **214.39 h** |
+| **measured** | **159** | **38,953** | **22,103** | **487** | **3,616** | **215.91 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3242,8 +3249,9 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | 4 | 23 | 3,244 | 1,801 | 45 | 22.09 h |
 | [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
+| [session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md) | 2 | 1 | 310 | 106 | 2 | 1.52 h |
 | [session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md) | 1 | 1 | 164 | 63 | 0 | 0.94 h |
-| *shared by 28 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| *shared by 29 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3275,9 +3283,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 53 |
+| measured | 54 |
 | unmeasured | 45 |
-| **total** | **98** |
+| **total** | **99** |
 
 <!-- END GENERATED: session-close-report -->
 

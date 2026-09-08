@@ -120,7 +120,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 0
     question: How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point band, and where does the fractional obstruction live in angle?
     hypotheses: [H-130, H-131]
@@ -140,6 +140,27 @@ agenda:
     program: n11-structure-and-conditional-dots
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
+    - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
+    outcomes:
+    - scope: The registered replay and the end-band widening at 96/25 in session-102 (2026-09-08, one worker, grid 79 then grid 119)
+      classification: achieved
+      result: >-
+        Every count in H-131 and both Section 2.3 end bands replay exactly through
+        decide_class_program with masses equal to the planning lane's to the fraction. The
+        robust end band widens far past 3 degrees: Theorem A excludes [0, 1.7139] union
+        [43.5293, 45] on grid 79 (mass 5529/512), Theorem B [0, 10.3875] union [43.5293, 45]
+        (mass 351/32), and Theorem C on grid 119 [0, 10.3875] union [43.0737, 45] (mass
+        11083/1024, least core 4101/4096, 296 atoms), all in folded degrees with closed ends
+        stated exactly. The 45-degree end binds. The dual of the band toward 40.19 degrees
+        carries 7.47 of its 11.25 units within 1.32 degrees of the axis and only 0.45 near
+        Trump's angle, and ceiling.py decides all three duals' continuum depth exactly with
+        scaled totals below 5.5, so on these site sets the obstruction is a site-set artefact
+        and the true class values of the bands toward 40.19 degrees stay open from below.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
+      - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
+      disposition: continue
+      follow_up: think-ndqj
     next_evidence: The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target.
   - id: BC-296
     purpose: research

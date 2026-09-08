@@ -43,7 +43,11 @@ hypothesis:
     at grid 79 (mass 10.702) with no Stromquist input; the next widenings were not
     refuted on that grid. Anything at or beyond 3° is a theorem of a new kind below U
     and the first rung of the band ladder. H-036 asks 0.25° at 3.878 and stays open;
-    the method here transfers to it.
+    the method here transfers to it. Confirmed in session-102 (lane B, 2026-09-08), decided
+    exactly: [0°, 1.7139°] ∪ [43.5293°, 45°] on grid 79 (Theorem A, α + β = 3.18°), then
+    [0°, 10.3875°] ∪ [43.5293°, 45°] (Theorem B) and, on grid 119, [0°, 10.3875°] ∪
+    [43.0737°, 45°] (Theorem C, α + β = 12.31°); the experiment record is allocated at
+    integration.
 ---
 # H-130 — The First Rung of the Band Ladder
 

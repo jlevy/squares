@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 98
+count: 99
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 53
+  sessions_measured: 54
   sessions_unmeasured: 45
   attributed:
-    rollups: 116
-    turns: 29906
-    tool_calls: 16863
-    tool_errors: 349
-    one_off_code: 2824
-    wall_hours: 171.02
+    rollups: 117
+    turns: 30216
+    tool_calls: 16969
+    tool_errors: 351
+    one_off_code: 2856
+    wall_hours: 172.54
   unattributed:
     rollups: 42
     turns: 8737
@@ -28,12 +28,12 @@ totals:
     one_off_code: 760
     wall_hours: 43.37
   measured:
-    rollups: 158
-    turns: 38643
-    tool_calls: 21997
-    tool_errors: 485
-    one_off_code: 3584
-    wall_hours: 214.39
+    rollups: 159
+    turns: 38953
+    tool_calls: 22103
+    tool_errors: 487
+    one_off_code: 3616
+    wall_hours: 215.91
 codex_receipts:
   attributed: 25
   unattributed: 0
@@ -1550,6 +1550,20 @@ sessions:
   unmeasured_reason: >-
     declares no rollups
   rollups: []
+  codex_receipts: []
+- id: session-102
+  title: "Angle-band theorems at 96/25"
+  status: stopped
+  primary_bead: think-ndqj
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-ae5b122129d330f9e.yaml
+  turns: 310
+  tool_calls: 106
+  tool_errors: 2
+  one_off_code: 32
+  wall_hours: 1.52
   codex_receipts: []
 - id: session-103
   title: "The exactly-eleven plateau at 191/50 as a site artefact (BC-297, H-133)"

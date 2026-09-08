@@ -121,11 +121,11 @@ session:
     The receipt is a harness-generated efficiency rollup of this session's own log, written by
     devtools.log_rollup at the last commit; it is an active-session lower bound, not a final
     cost.
-  resource_rollups: [packing/campaign/resource-usage/agent-a2247da4712316276.yaml]
-  certification_pending: think-ndqj
-  stop_reason: Stopped at the lane's fixed clock with the exit reached; no full gate was run in this lane (the coordinator owns integration and the pull-request surface), so certification is pending under think-ndqj.
+  resource_rollups: [packing/campaign/resource-usage/agent-ae5b122129d330f9e.yaml]
+  certification_pending: think-kbci
+  stop_reason: Stopped at the lane's fixed clock with the exit reached; no full gate was run in this lane (the coordinator owns integration and the pull-request surface), so certification is pending under the agenda's coordinating bead think-kbci; the lane's own bead think-ndqj is complete.
   next_action: >-
-    Under think-ndqj, allocate experiment ids for Theorems A and B and the H-131 replay, sweep the end band at grid 119 and 159 from k = 9, run the band toward 40.19° at grid 119, and certify the branch on the pull-request surface.
+    Under think-kbci the coordinator allocates experiment ids for Theorems A, B and C and the H-131 replay and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads this lane and decides whether the end band continues at grid 119 and 159 from k = 9 and whether the band toward 40.19° runs at grid 119.
 ---
 # Angle-Band Theorems at `96/25`
 

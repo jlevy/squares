@@ -45,6 +45,9 @@ hypothesis:
     experiment record before the counts are cited as results. The floors are sharp in
     kind: nine squares at any common tilt up to 30° fit in the container, so no covering
     method gets a near-axis count below nine, and the only room is the band's width.
+    Replayed under session-102 (lane B, 2026-09-08): every count reproduces exactly with
+    the planning lane's masses to the fraction, on the stated site set; the experiment
+    record is allocated at integration.
 ---
 # H-131 — Exact Counts by Angle at `96/25`
 
