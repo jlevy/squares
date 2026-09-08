@@ -255,6 +255,10 @@ def test_a_face_the_page_ships_is_not_reported() -> None:
     ):
         assert shipped(name), name
     assert host_font_bead("PTSerif-Bold") is None
+    # The screen probe's shape for the same faces: Blink answers with the instance a
+    # variable face is at, which is neither the family nor a PostScript name.
+    assert shipped("Source Sans 3 ExtraLight")
+    assert shipped("PT Serif")
 
 
 def test_the_atlas_figures_helvetica_is_the_documented_exception() -> None:
@@ -273,6 +277,38 @@ def test_the_atlas_figures_helvetica_is_the_documented_exception() -> None:
     assert not shipped("DejaVuSans-Bold")
 
 
+def test_the_exception_covers_three_families_and_not_their_namesakes() -> None:
+    """A listed name is that family's faces, not every family whose name starts with it.
+
+    Bare `startswith` gave each entry a family tree, and all three of these are fonts a
+    machine really has: Helvetica Neue ships with macOS, Arial Unicode MS with Office,
+    Liberation Sans Narrow with the Liberation set the runner draws the atlas in. None of
+    them is the figure's face, so a page that drew from one would be a finding.
+
+    The rule is the host's names only. A name the page owns stays a prefix, because the
+    page owns everything under it and the probes answer in two shapes -- `KaTeX_Size2`
+    puts the style in the family, and Blink names a variable instance rather than a face.
+    """
+    assert not shipped("HelveticaNeue-Bold")
+    assert not shipped("ArialUnicodeMS")
+    assert not shipped("LiberationSansNarrow")
+    assert shipped("Helvetica-BoldOblique")
+    assert shipped("KaTeX_Size2-Regular")
+
+
+def test_the_generic_host_sans_is_a_finding_on_both_platforms() -> None:
+    """The face a relation face that stopped loading comes back as, either side of CI.
+
+    macOS draws it as outline paths, because the system sans is variable; a Linux runner
+    embeds DejaVu Sans, and `pages.yml` runs both halves of the guard there. Listing the
+    Linux name as pending is what made the guard weakest on the machine that gates it,
+    so the assertion is that neither name is shipped and neither is waiting on a bead.
+    """
+    for family in (".SFNS-Regular", ".SF NS", "DejaVuSans-Bold", "DejaVu Sans"):
+        assert not shipped(family), family
+        assert host_font_bead(family) is None, family
+
+
 @pytest.mark.parametrize(
     ("family", "bead"),
     [
@@ -280,18 +316,17 @@ def test_the_atlas_figures_helvetica_is_the_documented_exception() -> None:
         ("DejaVuSansMono", "kpr-v731"),
         ("DejaVu Sans Mono", "kpr-v731"),
         ("Georgia", "kpr-2tmj and kpr-asj4"),
-        ("DejaVuSerif-Italic", "kpr-2tmj and kpr-asj4"),
+        ("LiberationSerif-Italic", "kpr-2tmj and kpr-asj4"),
     ],
 )
 def test_a_host_face_a_bead_is_removing_is_pending_rather_than_a_failure(
     family: str, bead: str
 ) -> None:
-    """The two roles kpress has not covered yet, and the same roles on another machine.
+    """The two roles kpress has not covered yet, and the same two on the Linux runner.
 
-    Spaces come out before the prefix match, so one mapping answers a PDF's
-    `DejaVuSansMono` and a browser's `DejaVu Sans Mono`. The longest prefix wins, which
-    is what keeps the mono substitutes from being read as the serif ones: `DejaVuSans`
-    is listed, and `DejaVuSansMono` still lands on the mono bead.
+    Spaces come out before the match, so one mapping answers a PDF's `DejaVuSansMono`
+    and a browser's `DejaVu Sans Mono`, and a style suffix answers under its family:
+    `LiberationSerif-Italic` is the same pending serif as `LiberationSerif`.
     """
     assert not shipped(family)
     assert host_font_bead(family) == bead

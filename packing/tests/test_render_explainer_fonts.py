@@ -46,6 +46,7 @@ from pathlib import Path
 import pytest
 from kpress.format import assets as kpress_assets
 
+from devtools import render_explainer
 from devtools.render_explainer import (
     RELATION_FACES,
     RELATION_FAMILIES,
@@ -398,6 +399,41 @@ def test_the_relation_face_joins_the_screen_sans_at_the_sans_weight_range() -> N
     assert css.count(f"size-adjust: {RELATION_SIZE_ADJUST}%;") == len(RELATION_FAMILIES)
     assert css.count('url("data:font/woff2;base64,') == len(RELATION_FAMILIES)
     assert '.woff2")' not in css
+
+
+def test_a_family_kpress_no_longer_declares_fails_the_render(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`RELATION_FAMILIES` is a copy of kpress's name, so it is checked against kpress.
+
+    The failure it prevents is silent in every other instrument: a renamed family leaves
+    `relation_face_css` declaring a face nothing on the page can reach, the render still
+    reproduces byte for byte, the assertions above still hold -- they read the emitted
+    CSS, which is where the stale name is -- and the three relation characters go back to
+    the reader's own machine. kpress has renamed a sans family here once already.
+
+    A synthetic stylesheet rather than kpress's, because the rename is the input: the
+    same two lines with one name changed are the before and the after.
+    """
+    static = kpress_static()
+
+    def kpress_declares(names: tuple[str, ...]) -> None:
+        css = "\n".join(
+            f'@font-face {{ font-family: "{name}"; src: url("sans.woff2"); }}' for name in names
+        )
+
+        def stylesheet(_static: Path, text: str = css) -> str:
+            return text
+
+        monkeypatch.setattr(render_explainer, "kpress_css", stylesheet)
+
+    kpress_declares(RELATION_FAMILIES)
+    faces = relation_face_css(static).count("@font-face")
+    assert faces == len(RELATION_FACES) * len(RELATION_FAMILIES)
+
+    kpress_declares(tuple(f"{name} Next" for name in RELATION_FAMILIES))
+    with pytest.raises(SystemExit, match="RELATION_FAMILIES is stale"):
+        relation_face_css(static)
 
 
 def test_the_relation_subset_carries_the_three_glyphs_and_its_own_name() -> None:

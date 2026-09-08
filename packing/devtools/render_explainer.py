@@ -957,6 +957,36 @@ RELATION_SIZE_ADJUST = 70
 RELATION_FAMILIES: tuple[str, ...] = ("Source Sans 3 Variable",)
 
 
+def _relation_families_reachable(css: str) -> None:
+    """Fail the render when kpress no longer declares a family the relation face joins.
+
+    The name above is a copy of kpress's, and a copy of a name is a thing that goes
+    stale: kpress renamed the print sans family once already (`think-9r58`), and a
+    screen rename would leave `relation_face_css` emitting an `@font-face` on a family
+    nothing in the page names. The render would still reproduce byte for byte, every
+    browser-free test would still pass, and the three relation characters would go back
+    to the reader's own machine -- caught, if at all, only by the browser guards.
+
+    So the family is checked against the stylesheet it is a copy of, the way
+    `_font_face_reachable` checks a KaTeX face before inlining it. A `@font-face` block
+    declaring the family is what makes it reachable: it is the evidence that kpress
+    still ships faces under this name, and it moves under exactly the rename this
+    guards against.
+    """
+    declared = {
+        family.group(1).strip().strip('"')
+        for block in FONT_FACE_BLOCK.findall(css)
+        for family in [FONT_FACE_FAMILY.search(block)]
+        if family is not None
+    }
+    missing = [family for family in RELATION_FAMILIES if family not in declared]
+    if missing:
+        raise SystemExit(
+            f"kpress declares no @font-face for {', '.join(missing)}, so the relation face "
+            f"would join a family nothing on the page names; RELATION_FAMILIES is stale"
+        )
+
+
 def relation_face_css(static: Path) -> str:
     """The relation glyphs as `@font-face` rules on the families the page already ships.
 
@@ -978,15 +1008,18 @@ def relation_face_css(static: Path) -> str:
     in `render_explainer_pdf` has no way to tell that from a face off the reader's
     machine. Measured: the subset embedded under that name until the table was kept.
 
-    Every face is declared once per family, which duplicates its bytes across the screen
-    name and the print name. That is 2.7 KB rather than 1.4 KB, and it is the cost of not
-    restating kpress's font stack in this page: the screen stack names only
-    `Source Sans 3 Variable` and the print stack puts `KPress Print Sans` in front of it,
-    so a face declared on one is unreachable in the other medium.
+    One `@font-face` per name in `RELATION_FAMILIES`, which is one name: the screen
+    family, which the print stack also carries, so a single declaration is reachable in
+    both media. Declaring the relation on `KPress Print Sans` beside it is the reading
+    the print stack invites and the one that took the sans out of the PDF as outline
+    paths -- the measurement is under `RELATION_FAMILIES`. That name is a copy of
+    kpress's, so `_relation_families_reachable` reads kpress's own stylesheets first and
+    fails the render if the family is gone, rather than emitting a face nothing reaches.
     """
     from fontTools import subset  # noqa: PLC0415
     from fontTools.ttLib import TTFont  # noqa: PLC0415
 
+    _relation_families_reachable(kpress_css(static))
     ranges = ", ".join(f"U+{point:04X}" for point in RELATION_POINTS)
     rules: list[str] = []
     for face, weights in RELATION_FACES:

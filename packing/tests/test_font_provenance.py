@@ -66,8 +66,14 @@ def test_a_host_face_a_bead_is_removing_is_not_a_finding() -> None:
 
 
 def test_a_face_from_the_readers_machine_that_nobody_chose_is_a_finding() -> None:
-    """The macOS system sans drew the three relation glyphs until they were given one."""
+    """The macOS system sans drew the three relation glyphs until they were given one.
+
+    And the generic sans of the Linux runner that gates this probe beside it: that name
+    was listed as pending once, which made the same regression a finding on the
+    developer's machine and a pass on CI's.
+    """
     assert _unshipped([_face(".SF NS", custom=False)]) == [".SF NS"]
+    assert _unshipped([_face("DejaVu Sans", custom=False)]) == ["DejaVu Sans"]
 
 
 def test_each_family_is_reported_once_however_many_faces_of_it_answer() -> None:

@@ -487,9 +487,10 @@ def weights(page_path: Path) -> dict[str, list[Declared]]:
     """Every family, weight and style the page draws in, per medium, with its source.
 
     Both media from one load, screen first, because switching to print is one call and
-    reloading is fifteen seconds. The markers the screen pass stamps are left on the
-    elements: the print pass overwrites the ones it wants and never reads a stale one,
-    since it looks each element up by the value it has just written.
+    reloading is fifteen seconds. What that costs is one line inside `_WEIGHTS_PROBE`,
+    which clears its own markers before each pass for the reason recorded there: the
+    numbering restarts at 0 every medium, so a marker the screen pass left behind is
+    what `DOM.querySelector` answers with, being earlier in document order.
     """
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 

@@ -345,21 +345,36 @@ purpose — one sans bold is the rule, not one weight for two families.
 `render_explainer_pdf --check` now reads every font dictionary in the export, embedded
 and outline alike, and fails on any family that is not one the page ships.
 `allowed_families()` is `PTSerif`, `SourceSans3`, `KPressPrintSans`, `KaTeX_`,
-`LocalPunct`, `KPressMathText`, and `Helvetica` as the 100-best atlas figure’s
-documented exception: its labels are baked into `known-best-1-100.svg` by
-`build_known_best_atlas.py` and stay by the owner’s decision, so no bead removes it.
-`KPressPrintSans` is where the export’s sans actually is, and the list gets it from
-kpress rather than spelling it, through `sans_instances.postscript_prefix`;
-`SourceSans3` stays beside it, because a print run that missed the instances falls back
-to the variable face and the guard has to know that name too.
+`LocalPunct`, `KPressMathText`, and then `Helvetica`, `Arial` and `LiberationSans` as
+the 100-best atlas figure’s documented exception: its labels are baked into
+`known-best-1-100.svg` by `build_known_best_atlas.py` under the stack
+`Helvetica, Arial, sans-serif`, so the face in the file is whichever of the three the
+drawing machine has — Helvetica on a Mac, Arial on Windows, and Liberation Sans on a
+Linux runner, where fontconfig aliases both names to the metric-compatible substitute.
+All three are the one figure, and it stays by the owner’s decision, so no bead removes
+it. The three are matched as host families rather than by bare prefix, so the exception
+admits `Helvetica-BoldOblique` and not `HelveticaNeue`, `ArialUnicodeMS` or
+`LiberationSansNarrow`, each of which is a font a real machine has.
+The names the page owns stay prefixes, because the page owns everything under them and
+the two probes answer in two shapes: a PostScript face in the PDF, and in the browser
+the instance a variable face is at, `Source Sans 3 ExtraLight`. `KPressPrintSans` is
+where the export’s sans actually is, and the list gets it from kpress rather than
+spelling it, through `sans_instances.postscript_prefix`; `SourceSans3` stays beside it,
+because a print run that missed the instances falls back to the variable face and the
+guard has to know that name too.
 
 `EXPECTED_HOST_FONTS` is the temporary list beside it, dated 2026-09-07, each entry
 naming the bead it waits on: `Menlo` for the inline code, on `kpr-v731`, and `Georgia`
 for the list marker and kpress’s `local("Georgia")` quotation marks, on `kpr-2tmj` and
 `kpr-asj4`. The check passes with these present and reports them as pending, so the
 guard could land before the fixes it waits for; `think-9r58` empties the mapping.
-Each entry carries the substitutes a Linux runner would answer with, since the names in
-it are the host’s.
+Each entry carries the substitute the Linux runner answers with, since the names in it
+are the host’s: `DejaVuSansMono` and `LiberationSerif`, both of them there because
+`pages.yml` reported them.
+A plausible substitute nobody has measured is left off, since a listed name is a face
+the guard stops looking at; the generic Linux sans was listed once, and it is the exact
+face a relation face that stopped loading comes back as on the machine that gates the
+check.
 
 `inspect_explainer_typography --check-supporting` asks the same question of the screen.
 It walks every element in `.cert-page` that holds text and asserts through

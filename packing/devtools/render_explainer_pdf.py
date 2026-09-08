@@ -239,27 +239,27 @@ def allowed_families() -> tuple[str, ...]:
 #: waiting for. Recorded 2026-09-07; `think-9r58` adopts the kpress fixes and empties
 #: this mapping.
 #:
-#: Two entries are the roles and the rest are the same roles on another machine. The
-#: names are the host's, so they are the host's names: macOS answers `ui-monospace` with
-#: Menlo and `local("Georgia")` with Georgia, and a Linux runner answers both from
-#: whatever fontconfig aliases them to. Longest prefix first, so the mono substitutes are
-#: not read as the serif ones.
+#: Two entries are the roles and two are the same roles on another machine. The names are
+#: the host's, so they are the host's names: macOS answers `ui-monospace` with Menlo and
+#: `local("Georgia")` with Georgia, and the Linux runner that gates this answers the same
+#: two with DejaVu Sans Mono and Liberation Serif.
+#:
+#: Measured rather than anticipated, and that is the rule for adding to it. A name here
+#: is a face the guard stops looking at, so a plausible substitute nobody has seen is a
+#: hole rather than insurance -- the generic Linux sans was listed once, and it is the
+#: exact face a relation face that stopped loading would come back as on the runner. An
+#: unlisted substitute on some other machine fails the check and names itself, which is
+#: how the two below were found (`pages.yml`, run 34174661935).
 EXPECTED_HOST_FONTS: dict[str, str] = {
     # Inline code: kpress ships no mono face, so the stack ends at `ui-monospace`.
     "Menlo": "kpr-v731",
-    "SFMono": "kpr-v731",
     "DejaVuSansMono": "kpr-v731",
-    "LiberationMono": "kpr-v731",
-    "NotoSansMono": "kpr-v731",
     # Two roles under one family, and two beads: the list marker U+25AA (`kpr-2tmj`, which
     # draws it in CSS instead), and kpress's `LocalPunct`, which is `local("Georgia")` over
     # six quotation code points (`kpr-asj4`, which gives those to PT Serif). The screen
     # probe finds the quotation marks in every other paragraph; the PDF finds the markers.
     "Georgia": "kpr-2tmj and kpr-asj4",
-    "DejaVuSerif": "kpr-2tmj and kpr-asj4",
-    "DejaVuSans": "kpr-2tmj and kpr-asj4",
     "LiberationSerif": "kpr-2tmj and kpr-asj4",
-    "NotoSerif": "kpr-2tmj and kpr-asj4",
 }
 
 
@@ -273,14 +273,33 @@ def family_of(base_font: str) -> str:
 
 
 def _listed(family: str, names: Iterable[str]) -> str | None:
-    """The longest listed prefix this family starts with, or `None`.
-
-    Prefixes, because Chromium writes a face and not a family: `SourceSans3-550`,
-    `PTSerif-BoldItalic`, `KaTeX_Main-Regular`. Longest first, so `DejaVuSansMono` is not
-    read as `DejaVuSans`.
-    """
-    matches = [name for name in names if family.startswith(name)]
+    """The listed name this family is a face of, or `None`. Longest match wins."""
+    matches = [name for name in names if _is_face_of(family, name)]
     return max(matches, key=len) if matches else None
+
+
+def _is_face_of(family: str, name: str) -> bool:
+    """Whether `family` is `name` itself, or a face of it, and by which of two rules.
+
+    A name the page owns is a prefix, because the page owns everything under it and the
+    names that come back are not one shape. Chromium writes a PostScript face into the
+    PDF (`PTSerif-Italic`, `KPressPrintSans-410Italic`) and Blink answers the screen
+    probe with the instance a variable face is at (`Source Sans 3 ExtraLight`, which is
+    `SourceSans3` at 275). Neither is a family name, and both are ours.
+
+    Every other name here is a host family -- the atlas figure's three and the pending
+    substitutes -- and there a longer name is a different font, so it matches only
+    itself and its `-` styles. Bare `startswith` gave each one a family tree of fonts a
+    real machine has: `Helvetica` admitted `HelveticaNeue`, `Arial` admitted
+    `ArialUnicodeMS`, `LiberationSans` admitted `LiberationSansNarrow`, and
+    `DejaVuSansMono` had to be read before `DejaVuSans` to land on the right bead.
+    """
+    if not family.startswith(name):
+        return False
+    if name in owned_faces():
+        return True
+    remainder = family[len(name) :]
+    return not remainder or remainder.startswith("-")
 
 
 def host_font_bead(family: str) -> str | None:
