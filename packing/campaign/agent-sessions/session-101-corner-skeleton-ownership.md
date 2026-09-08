@@ -46,10 +46,22 @@ session:
     fallback: >-
       Publish the best unconverged mass with its site set and rows as the scoped
       obstruction, and leave the theorem conditional.
-    outcome: OUTCOME_PLACEHOLDER
+    outcome: >-
+      Decided against the hypothesis on the retained shrink and net. On the density-matched
+      site set (637 orbits after column generation) the least four-bound measure has exact
+      rationalised mass 23596423/2000000 = 11.7982 (valid by the sweep on Conditions 1, 3, 4,
+      5; corner weights 600001/4000000), the five-bound 47276821/4000000 = 11.8192, the free
+      22524199/2000000 = 11.2621 on the same site set and rows, price 33507/62500 = 0.536112;
+      the priced program M - w_c leaves the corner orbit at zero at any price, so the position
+      and not the bound is what fails. FLOORTOKEN From the free measure, Lemma C' for sets
+      proves the four-corner pair containment theorem at 96/25: four distinct squares each
+      containing one of its corner's two marks (3152/3175, 2336/3175), (2336/3175, 3152/3175),
+      pair mass 106251/400000 above epsilon = 524199/2000000 by 441/125000. RUN5TOKEN
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
-    stop_reason: STOP_PLACEHOLDER
+    stop_reason: >-
+      The cell's question is decided and its falsifier met; the remaining computation
+      (a settled dual for the floor) does not fit the block and is handed on.
     next_action: >-
       Write the record, validate the records tier, commit on lane/bc-293-corner-skeleton.
   - workflow: documentation-pass
@@ -61,7 +73,7 @@ session:
     objective: >-
       Write the result section and this record, run the records tier, commit; no research
       in this phase.
-    status: completed
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: The runs are terminal; what remains is the record and its validation.
     budget_minutes: 40
@@ -71,7 +83,11 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: The lane clock ends before the records tier is green.
     fallback: Commit what is written and name the failing check in the report.
-    outcome: FINAL_PLACEHOLDER
+    outcome: >-
+      Result section appended to lane C's report with the derivation, every run's inputs and
+      exact verdicts, the price, the pair theorem, the floor, the obstructions and the scripts;
+      the three load-bearing measures exported beside it; this record written; the records
+      tier run with the three integration-time failures named. DRYRUNTOKEN
     evidence:
     - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
     stop_reason: The lane clock; nothing further is planned in this session.
@@ -96,13 +112,19 @@ session:
     before: >-
       Unmeasured; H-128 registered on 2026-09-08 with the 3.85 free run at 11.23 unconverged
       as the only neighbour.
-    after: AFTER_PLACEHOLDER
+    after: >-
+      11.7982115 exactly (23596423/2000000), valid, above the 11.15 criterion; the free value on
+      the same site set 11.2620995 and, after nine more column rounds, 11.18961275; every reading
+      an upper reading on a finite site set. FLOORSHORT
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
   - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
   checks:
-  - CHECKS_PLACEHOLDER
+  - Every final measure of runs 1, 2, 4, 5 and 6 decided by certificate.verify(workers=1); Conditions 1, 3, 4, 5 hold for each, Condition 2 fails as the mass says.
+  - The corner-orbit premise d^2 = 4633032392704/1385114794281 > 2B^2 = 99540529/50000000 and the pair premises decided in Fraction arithmetic before any run.
+  - Run 4 replayed run 2's LP objectives to the last printed digit.
+  - uv run --frozen --all-extras --group dev packing-validate --records on the lane commit; expected failures named in the result section (close report and SYNOPSIS drift, and the rollup, all rendered by the coordinator at integration); no full gate run, certification pending under think-1136.
   stop_reason: >-
     The lane's bounded question is decided and recorded; the session stops at its clock
     without a full gate run, so certification is pending under think-1136, and no resource
@@ -119,7 +141,13 @@ The lane's result, with every input, every exact verdict and the scripts, is the
 This record is the handoff: what was attempted, what came back, and what should happen
 next.
 
-SUMMARY_PLACEHOLDER
+In one sentence: the bounded measure H-128 asked for does not exist on the retained shrink
+and net at the precision this block could buy (the least valid four-bound measure has mass
+`23596423/2000000 ≈ 11.798`, against the `11.15` criterion, and pricing the corner orbit
+shows the position rather than the bound is the obstacle), but the free measure at `96/25`
+proves a weaker four-corner theorem outright: four distinct squares each containing one of
+two marks near its corner. The price `M(forced) − M(free)` is `33507/62500 = 0.536112` on
+one site set. The floor for the net is the unfinished part.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
