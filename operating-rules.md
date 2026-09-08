@@ -48,7 +48,7 @@ tool from them:
   and `count:` in `defects.yaml` has to move with three aggregates in `SYNOPSIS.md`.
   Both were multi-file heredocs whose only check was a later gate step.
 
-## OR-2: Run three to five sub-agents, at a thinking level matched to the task
+## OR-2: Run three to five sub-agents, at a model and thinking level matched to the task
 
 Read-only investigation and disjoint writes parallelise; shared records, integration,
 commits, and external updates stay with the coordinator.
@@ -57,6 +57,22 @@ reconciliation costs more than it buys.
 
 Pick the thinking level by difficulty: **extra** for anything carrying a proof
 obligation, **max** for the hardest mathematics and review findings.
+
+Pick the model the same way, and say which in the dispatch.
+**Fable at extra or max thinking** takes anything mathematical: a proof obligation, a
+counterexample that has to be trusted, an adversarial review of a claimed result, a
+feasibility map that a later session will plan against.
+**Opus at high or max** takes the mechanical and maintenance work: a CI repair, record
+bookkeeping, identifier allocation, regenerated views, an editorial pass.
+The tiers are not interchangeable in either direction.
+Mechanical work does not need the expensive reasoning, and a mathematical lane run at
+the mechanical tier returns confident prose the coordinator then has to re-derive, which
+is the same cost as not delegating.
+`OR-10` carries the cross-harness table: Codex Max corresponds to Fable, and Codex High
+or Extra High to Opus Extra High or Max.
+Added 2026-09-08 at the owner’s request, in the session that dispatched four Fable lanes
+on the `n = 11` structural questions and two Opus lanes on the CI repair and the record
+bookkeeping.
 
 A sub-agent’s report is evidence, not a verdict.
 One in
@@ -74,12 +90,28 @@ strongly enough to survive being checked, so verify a parse claim by parsing rat
 by reading. The same reports were otherwise excellent, which is the point — a report can
 be right about five real defects and confidently wrong about a sixth.
 
-## OR-3: Never wait on a gate with nothing else in flight
+## OR-3: Never wait on a gate with nothing else in flight; run CI beside the research
 
 Launch it in the background and keep the next slice moving.
 Never poll it, and never start one against a tree you are about to change: a gate whose
 inputs move underneath it has to be run again, so it spends the eight minutes and buys
 nothing.
+
+**Hosted CI and the slow local checks run beside the research, never ahead of it.** Push
+at the first commit that is worth a hosted run and let the pull-request surface and the
+deferred checkpoint run while the sub-agents work.
+Read the verdicts at the next block boundary from the gate’s own receipts — the
+`validation-timings-*` artifacts every job uploads carry each step’s wall and each
+subprocess’s log — rather than by watching the run, so a red check is diagnosed from
+receipts that already exist.
+The deferred checkpoint takes 27 to 37 minutes on the hosted runner (runs
+[34171566965](https://github.com/jlevy/squares/actions/runs/34171566965) and
+[34177317419](https://github.com/jlevy/squares/actions/runs/34177317419)), longer than a
+research slice, so a coordinator that waited for it before dispatching would spend a
+slice on nothing. On 2026-09-08 the four mathematical lanes and the CI repair lane were
+dispatched while PR 121’s deferred run was still in flight, and the repair was designed
+from the receipts of a run that had finished an hour earlier.
+Added that day at the owner’s request.
 
 **Run `packing-validate --records` before a push, and push before the slower checks
 finish** so CI runs concurrently with them rather than after them.
@@ -127,13 +159,29 @@ Independently tracked work picks W1–W10 from
 Bounded delegated work inherits the parent phase unless it opens its own tracked
 session. [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts) owns the full contracts.
 
-## OR-6: Plan multi-hour work in slices before starting it
+## OR-6: Plan multi-hour work in slices before starting it, as parallel lanes with disjoint deliverables
 
 Unless the user sets another cadence, target an integration checkpoint within about four
 hours and cap each slice at 30 minutes, per the
 [bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle).
 Thirty minutes is a ceiling, not a quota: close a slice as soon as its bounded output is
 complete. Replan at each boundary from measured time, and only forward.
+
+**Map the coming sessions as parallel lanes, not as one clock with helpers.** A research
+agenda that can run in parallel names, for each lane, the exact question, the entry
+conditions, the exit that counts — a theorem, a counterexample, or a scoped obstruction
+— the instrument, the falsifier, the budget, and the files it owns.
+Lanes are disjoint in deliverables and in files, share nothing but read-only records,
+and carry a `parallel_group` in the agenda so the map can show them side by side; one
+coordinator owns identifiers, shared registries, integration and commits, which is
+Agenda 029’s division of labour generalised.
+A lane written that way can be handed to a fresh session on either harness without the
+coordinator present, and that is what lets several run at once.
+Agenda 029 planned three workers inside one eight-hour clock with sequential second and
+third blocks; on 2026-09-08 the owner asked for the sessions themselves to be mapped so
+they run in parallel, and
+[Agenda 030](packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md) is
+the first written to this rule.
 
 Plan each selected research direction end to end: known or source controls, a frozen
 bounded target attempt, independent verification, and an evidential disposition that
