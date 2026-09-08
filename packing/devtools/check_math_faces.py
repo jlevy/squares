@@ -70,11 +70,44 @@ from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 SANS_FACE = "Source Sans 3"
 PROSE_FACE = "PT Serif"
 
+#: A 4096px sample bounds a whole pixel's rounding error below 0.00025em. This
+#: tolerance also covers rounding in the font metric table, while staying about 29
+#: times below the D advance difference between the wrong 400 and required 650 slots.
+BOLD_ADVANCE_TOLERANCE_EM = 0.0005
+
 #: kpress's math markup, which the walk climbs through to find the words. The list is the
 #: renderer's, since the init walks the same wrappers for the same reason.
 PROBE_ARGUMENTS: dict[str, object] = {
     "wrappers": MATH_WRAPPERS,
+    "advance_tolerance": BOLD_ADVANCE_TOLERANCE_EM,
 }
+
+
+#: The same measurement strategy as pinned KPress's tests/math_font_probe.py. Linux
+#: Chromium can snap a normal-size glyph's advance to a whole pixel, which erased the
+#: difference between the 400 and 650 D. Copy the resolved face into a large hidden
+#: sample and measure in em; the actual formula keeps its original layout and size.
+FONT_ADVANCE = r"""(element) => {
+  const size = 4096;
+  const style = getComputedStyle(element);
+  const probe = document.createElement('span');
+  probe.textContent = element.textContent;
+  Object.assign(probe.style, {
+    position: 'fixed', visibility: 'hidden', display: 'inline-block',
+    whiteSpace: 'pre', width: 'max-content', maxWidth: 'none',
+    fontFamily: style.fontFamily, fontStyle: style.fontStyle,
+    fontWeight: style.fontWeight, fontStretch: style.fontStretch,
+    fontKerning: style.fontKerning, fontFeatureSettings: style.fontFeatureSettings,
+    fontVariationSettings: style.fontVariationSettings,
+    fontSize: `${size}px`,
+  });
+  document.body.append(probe);
+  try {
+    return probe.getBoundingClientRect().width / size;
+  } finally {
+    probe.remove();
+  }
+}"""
 
 
 class Report(TypedDict):
@@ -109,9 +142,10 @@ class Report(TypedDict):
 #: page happens to contain. The probe span is appended to the same container, so it
 #: inherits the same font stack and the same size, and it is removed again; nothing here
 #: leaves a mark on the page beyond the marks the page itself made.
-PROBE = r"""({ wrappers }) => {
+PROBE = r"""({ wrappers, advance_tolerance }) => {
   const findings = [];
   const boldAdvances = [];
+  const fontAdvance = __FONT_ADVANCE_FUNCTION__;
   const nodes = [...document.querySelectorAll('.katex')];
   const sans = (node) => !!node.closest('[data-kpress-math-face="sans"]');
   const marked = nodes.filter(sans);
@@ -175,8 +209,8 @@ PROBE = r"""({ wrappers }) => {
           + where(run));
       }
       /* A declared family alone cannot tell a real 650 instance from synthetic bold.
-         Compare a visible upright Latin glyph with the 650 advance in KPress's table.
-         Blink rounds inline advances to 1/64px; larger disagreement is a wrong face. */
+         Compare its resolved face with the 650 advance in KPress's table. The enlarged
+         sample preserves the distinction when small glyphs are snapped to whole pixels. */
       if (style.fontStyle === 'normal' && /^[A-Za-z]$/.test(run.textContent)
           && run.checkVisibility({ visibilityProperty: true })) {
         const table = globalThis.kpressKatexTextMetrics?.sans?.['Main-Bold'];
@@ -185,12 +219,12 @@ PROBE = r"""({ wrappers }) => {
           findings.push('no 650 metric for sans bold ' + run.textContent);
           continue;
         }
-        const actual = run.getBoundingClientRect().width;
-        const expected = metric[4] * parseFloat(style.fontSize);
-        boldAdvances.push(run.textContent + ': ' + actual + 'px | 650: ' + expected + 'px');
-        if (Math.abs(actual - expected) > 1 / 64) {
+        const actual = fontAdvance(run);
+        const expected = metric[4];
+        boldAdvances.push(run.textContent + ': ' + actual + 'em | 650: ' + expected + 'em');
+        if (Math.abs(actual - expected) > advance_tolerance) {
           findings.push('sans bold glyph does not match its 650 metrics: '
-            + run.textContent + ' draws ' + actual + 'px, expected ' + expected + 'px');
+            + run.textContent + ' draws ' + actual + 'em, expected ' + expected + 'em');
         }
       }
     }
@@ -269,7 +303,7 @@ PROBE = r"""({ wrappers }) => {
   }
   return { nodes: nodes.length, marked: marked.length, tables,
     bold_advances: boldAdvances, findings };
-}"""
+}""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE)
 
 
 def _run(page: object, findings: list[str], medium: str) -> Report:
@@ -544,12 +578,18 @@ def self_test() -> None:
                 """() => {
                   const bold = document.querySelector('.mathbf');
                   bold.textContent = 'D';
-                  const advance = bold.getBoundingClientRect().width
-                    / parseFloat(getComputedStyle(bold).fontSize);
+                  // Reproduce Linux's small-glyph rounding without depending on the
+                  // host rasterizer. Measuring the original run again must not pass.
+                  const bounding = bold.getBoundingClientRect.bind(bold);
+                  bold.getBoundingClientRect = () => {
+                    const rect = bounding();
+                    return new DOMRect(rect.x, rect.y, Math.round(rect.width), rect.height);
+                  };
+                  const advance = (__FONT_ADVANCE_FUNCTION__)(bold);
                   globalThis.kpressKatexTextMetrics = {
                     sans: {'Main-Bold': {68: [0, 0, 0, 0, advance]}}
                   };
-                }"""
+                }""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE)
             )
             matching_advance: Report = page.evaluate(PROBE, arguments)
             if not matching_advance.get("bold_advances") or any(
