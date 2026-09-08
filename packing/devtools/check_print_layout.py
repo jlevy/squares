@@ -494,6 +494,32 @@ _PROVER_LAYOUT = r"""() => {
 }"""
 
 
+_DIAG_118 = r"""slug => {
+  const el = document.getElementById('kval-' + slug);
+  const figure = el.closest('.cert-figure');
+  return {
+    innerText: el.innerText, text: el.textContent, children: [...el.children].map(c => ({
+      cls: c.className, pending: c.dataset.kpressMathPending ?? null,
+      vis: getComputedStyle(c).visibility, inline: c.style.getPropertyValue('visibility'),
+      display: getComputedStyle(c).display, rects: c.getClientRects().length,
+      katex: !!c.querySelector('.katex'), text: c.textContent.slice(0, 60)
+    })),
+    elVis: getComputedStyle(el).visibility, elDisplay: getComputedStyle(el).display,
+    elRects: el.getClientRects().length,
+    figureVis: figure ? getComputedStyle(figure).display : null,
+    figureHidden: figure ? figure.hidden : null,
+    rootPending: document.documentElement.dataset.kpressMathPending ?? null,
+    mathReady: document.documentElement.classList.contains('math-ready'),
+    slider: document.getElementById('kslider-' + slug)?.value,
+    waitBad: (globalThis.kpressMathFaceWait || []).filter(e => e.outcome !== 'loaded')
+      .map(e => [String(e.request).slice(0, 70), e.outcome, String(e.detail).slice(0, 120)])
+      .slice(0, 8),
+    faces: [...document.fonts].filter(f => f.status !== 'loaded')
+      .map(f => `${f.family} ${f.style} ${f.weight} ${f.status}`),
+  };
+}"""
+
+
 def prover_findings(page: Page) -> list[str]:
     """Exercise Figure 5 through its public controls in the already open browser.
 
@@ -623,6 +649,10 @@ def prover_findings(page: Page) -> list[str]:
                 found.append(
                     prefix + f"direction 118 has the wrong half-tangent or angle: {direction!r}"
                 )
+                # TEMPORARY diagnostic, removed before the pull request.
+                import json as _json  # noqa: PLC0415
+
+                print("DIAG", _json.dumps(page.evaluate(_DIAG_118, slug)))
         for width in (1280, 375):
             page.set_viewport_size({"width": width, "height": 900})
             page.evaluate(SETTLED)

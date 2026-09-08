@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [webkit, chromium]
+        browser: [chromium]
     defaults:
       run:
         working-directory: packing
@@ -36,26 +36,11 @@ jobs:
 
       - run: uv run --frozen --group dev python -m devtools.render_explainer
 
-      - name: Diagnostic, the real check flow
-        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --width 390 --repeat 6 --events
-
-      - name: Print-layout readout probe
-        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --print-probe --repeat 6
-
-      - name: Real check, three times
+      - name: Real print layout, eight times
         continue-on-error: true
         run: |
-          for i in 1 2 3; do
-            echo "=== attempt $i ==="
-            uv run --frozen --group dev python -m devtools.check_math_loading \
-              --browser ${{ matrix.browser }} --width 390 | tail -6 || echo "FAILED $i"
-          done
-
-      - name: Real print layout, three times
-        continue-on-error: true
-        run: |
-          for i in 1 2 3; do
+          uv run --frozen --group dev python -m playwright install --only-shell chromium
+          for i in 1 2 3 4 5 6 7 8; do
             echo "=== print attempt $i ==="
-            uv run --frozen --group dev python -m playwright install --only-shell chromium >/dev/null
             uv run --frozen --group dev python -m devtools.check_print_layout || echo "FAILED $i"
           done
