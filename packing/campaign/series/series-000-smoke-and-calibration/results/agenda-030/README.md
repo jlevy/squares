@@ -29,6 +29,12 @@ nothing else in this directory.
 The coordinator registers each new document in `docs/project/document-map.yaml` and
 re-renders the map at integration.
 
+- [Lane F, the exactly-eleven plateau at `191/50`](lane-f-plateau-at-3-82.md) (BC-297,
+  H-133): Trump’s clamped cores are not site-free on any reconstructible site set; the
+  plateau’s duals are near-axis fractional families with exact depth near two; the
+  tight-cell census of the one exactly decided measure is recorded as the obstruction to
+  the exact cover.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
