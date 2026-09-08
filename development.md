@@ -168,7 +168,7 @@ alone is not full pre-merge evidence.
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
 | `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 260 s | 162.62 s on CI, one reading over the 324-case corpus in run `34133437296` |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 69 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across two jobs; not clocked whole |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across three jobs; not clocked whole |
 
 The `--geometry` baseline is the geometric mean of four readings at the reference shape.
 The `--suite` baseline is one hosted reading over the 324-case corpus; its earlier
@@ -324,6 +324,26 @@ The [dated measurement above](#the-tiers) is about 27 minutes and predates the s
 All three jobs need profiling: improving only the exhaustive job can leave the
 integration work on the critical path.
 A duration does not establish that the work is irreducible.
+
+**The daily backstop took the same split, on its own failure.** The non-pull-request
+path of [`packing-validation.yml`](.github/workflows/packing-validation.yml) — the daily
+schedule, `workflow_dispatch`, and pushes to `main` — still ran every deferral in one
+four-CPU `validate` job, and
+[34185998810](https://github.com/jlevy/squares/actions/runs/34185998810) failed there
+the way 34177317419 had failed in `deferred-steps` hours earlier: the slow lane killed
+at 1801.0 s against its 1800 s budget while the escape screen ran beside it to 1794.1 s,
+six seconds inside its own, with the atlas rebuild at 778.9 s and the negative controls
+at 606.1 s — each well above its serial reading — and 3234.8 s of the 3600 s ceiling
+spent. So the lane moved to a `slow-lane` job on that path too, and what is left in
+`validate` runs serially at `--jobs 1 --inner-jobs 2`. The arithmetic is that run’s own
+`validation-timings-validate-1` receipts read against run 34183723509’s: 6226.0 s of
+step time over 68 steps, less the lane’s 1801.0 s, with the five long deferrals at the
+2174.8 s they measure serially rather than the 3445.4 s they cost crowded, leaves 979.6
+s for the other 62 steps and predicts 3154.4 s — under both the ceiling and the 3234.8 s
+that run already walled with the lane inside it.
+Keeping two outer slots was refused on the reading 34181619739 supplied: without the
+lane they put the escape screen back beside the atlas rebuild and the negative controls,
+which is the arrangement that killed it there.
 
 **To run it on a pull request, add the `deep-gate` label.**
 
@@ -512,8 +532,9 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 Pushes to `main`, manual dispatches, and the daily schedule run the ordinary full
-checkpoint on Linux in two jobs: `validate` runs everything except exhaustive exact
-tests, and `exhaustive` runs those tests.
+checkpoint on Linux in three jobs since 2026-09-08: `validate` runs everything except
+the exhaustive exact tests and the slow behavioural lane and runs it serially,
+`exhaustive` runs those tests, and `slow-lane` runs that lane.
 macOS runs four portability checks.
 Neither workflow invocation enables the golden rebuild or strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
