@@ -320,6 +320,7 @@ def test_a_face_the_page_ships_is_not_reported() -> None:
         f"{postscript_prefix()}-410Italic",
         "KaTeX_Main-Bold",
         "LocalPunct",
+        "KPressQuotes-Regular",
     ):
         assert shipped(name), name
     assert host_font_bead("PTSerif-Bold") is None
@@ -383,21 +384,35 @@ def test_the_generic_host_sans_is_a_finding_on_both_platforms() -> None:
         ("Menlo-Regular", "kpr-v731"),
         ("DejaVuSansMono", "kpr-v731"),
         ("DejaVu Sans Mono", "kpr-v731"),
-        ("Georgia", "kpr-2tmj and kpr-asj4"),
-        ("LiberationSerif-Italic", "kpr-2tmj and kpr-asj4"),
     ],
 )
 def test_a_host_face_a_bead_is_removing_is_pending_rather_than_a_failure(
     family: str, bead: str
 ) -> None:
-    """The two roles kpress has not covered yet, and the same two on the Linux runner.
+    """The one role kpress has not covered yet, and the same role on the Linux runner.
 
     Spaces come out before the match, so one mapping answers a PDF's `DejaVuSansMono`
-    and a browser's `DejaVu Sans Mono`, and a style suffix answers under its family:
-    `LiberationSerif-Italic` is the same pending serif as `LiberationSerif`.
+    and a browser's `DejaVu Sans Mono`, and a style suffix answers under its family.
+
+    `Georgia` and `LiberationSerif` were here too until `kpr-2tmj` and `kpr-asj4` landed:
+    the list marker is drawn in CSS now rather than set as U+25AA, and the quotation marks
+    come from the shipped `KPress Quotes`. Neither is pending any more, and
+    `test_a_face_kpress_now_ships_is_no_longer_pending` is what says so.
     """
     assert not shipped(family)
     assert host_font_bead(family) == bead
+
+
+@pytest.mark.parametrize("family", ["Georgia", "LiberationSerif-Italic"])
+def test_a_face_kpress_now_ships_is_no_longer_pending(family: str) -> None:
+    """A name off the pending list is a face the guard starts looking at again.
+
+    Leaving it listed would be the more comfortable mistake and the worse one: an entry
+    here is a family `--check` stops reporting, so a quotation mark that went back to the
+    reader's own serif would pass in silence.
+    """
+    assert not shipped(family)
+    assert host_font_bead(family) is None
 
 
 def test_a_family_no_bead_expects_fails_the_check_and_is_named() -> None:
@@ -422,13 +437,11 @@ def test_the_pending_faces_pass_and_are_reported_with_their_beads() -> None:
     waiting = (
         _descriptor(7, "Menlo-Regular", program=True)
         + _font(1, "Type0", 7, face="TAAAAA+Menlo-Regular")
-        + _descriptor(8, "Georgia", program=True)
-        + _font(3, "Type0", 8, face="UAAAAA+Georgia")
         + EMBEDDED_SERIF
     )
     unexpected, pending = provenance(waiting)
     assert unexpected == []
-    assert pending == {"Georgia": "kpr-2tmj and kpr-asj4", "Menlo-Regular": "kpr-v731"}
+    assert pending == {"Menlo-Regular": "kpr-v731"}
     assert font_findings(waiting) == []
 
 

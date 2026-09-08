@@ -54,6 +54,17 @@ _DATES = re.compile(rb"/(CreationDate|ModDate) \(D:[^)]{0,32}\)")
 #: KaTeX has typeset; `document.fonts.ready` settles when the inlined faces are applied.
 READY = "html.math-ready"
 
+#: Media changes and ResizeObserver callbacks can start asynchronous math renders.
+#: Let layout dispatch them, then await those renders and the faces they request.
+SETTLED = """async () => {
+  void document.documentElement.offsetHeight;
+  await new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done)));
+  await globalThis.squaresMath?.settled();
+  await document.fonts.ready;
+  await new Promise(done => requestAnimationFrame(done));
+  await globalThis.squaresMath?.settled();
+}"""
+
 #: A browser the environment supplies, for hosts that have one and cannot run
 #: `playwright install` -- a sandbox with a preloaded cache, a distribution package, a CI
 #: image that pins its own. Left unset, the driver finds the build its own pin names,
@@ -187,6 +198,7 @@ def render_pdf_bytes() -> bytes:
             page.evaluate(_ABSOLUTE_LINKS, SITE_URL)
             page.add_style_tag(content=print_face_css())
             page.evaluate(_FACES_APPLIED, [list(_MARGIN_BOX_TOKENS), _MARGIN_BOX_SAMPLE])
+            page.evaluate(SETTLED)
             return page.pdf(
                 print_background=True,
                 prefer_css_page_size=True,
@@ -228,7 +240,21 @@ _OBJECT_BODY = re.compile(rb"(?ms)^\d+\s+0\s+obj\b(.*?)endobj")
 #: written to remove, coming back: a print run that missed them fell back to the
 #: variable font. Prefixes, because an instanced or subsetted face is named from its
 #: family with the axis or the style appended.
-_FIXED_FACES = ("PTSerif", "SourceSans3", "KaTeX_", "LocalPunct", "KPressMathText")
+#:
+#: `KPressQuotes` is the six-glyph face kpress now ships for the quotation marks and the
+#: apostrophe, leading the prose stack through `--kpress-font-punctuation`. It replaces
+#: `LocalPunct`, which was `local("Georgia")` and drew those marks from whatever the
+#: reader's machine had -- the reason `Georgia` was on `EXPECTED_HOST_FONTS` and the
+#: reason the shell overrode the prose stack for print. Both are gone; `LocalPunct` stays
+#: on this list only until a kpress that still declares it can no longer be checked out.
+_FIXED_FACES = (
+    "PTSerif",
+    "SourceSans3",
+    "KaTeX_",
+    "LocalPunct",
+    "KPressMathText",
+    "KPressQuotes",
+)
 
 
 @cache
@@ -301,16 +327,16 @@ def allowed_families() -> tuple[str, ...]:
 #: exact face a relation face that stopped loading would come back as on the runner. An
 #: unlisted substitute on some other machine fails the check and names itself, which is
 #: how the two below were found (`pages.yml`, run 34174661935).
+#:
+#: `Georgia` and its Linux substitute `LiberationSerif` came off on 2026-09-08, when
+#: `kpr-2tmj` and `kpr-asj4` landed and the gitlink moved to them: the list marker is
+#: drawn in CSS now instead of set as U+25AA, and the quotation marks come from the
+#: shipped `KPress Quotes` rather than from `local("Georgia")`. Neither family appears in
+#: the export any more, so listing them would only widen the guard.
 EXPECTED_HOST_FONTS: dict[str, str] = {
     # Inline code: kpress ships no mono face, so the stack ends at `ui-monospace`.
     "Menlo": "kpr-v731",
     "DejaVuSansMono": "kpr-v731",
-    # Two roles under one family, and two beads: the list marker U+25AA (`kpr-2tmj`, which
-    # draws it in CSS instead), and kpress's `LocalPunct`, which is `local("Georgia")` over
-    # six quotation code points (`kpr-asj4`, which gives those to PT Serif). The screen
-    # probe finds the quotation marks in every other paragraph; the PDF finds the markers.
-    "Georgia": "kpr-2tmj and kpr-asj4",
-    "LiberationSerif": "kpr-2tmj and kpr-asj4",
 }
 
 

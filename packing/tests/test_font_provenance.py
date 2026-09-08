@@ -49,13 +49,20 @@ def test_a_face_the_document_carries_is_accepted() -> None:
 
 
 def test_a_font_face_whose_source_is_the_hosts_own_is_not_the_pages() -> None:
-    """kpress's `LocalPunct` is `local("Georgia")` over six quotation code points.
+    """A `@font-face` is not enough: what the guard asks is which file was opened.
 
-    Blink reports it as a custom font, because a `@font-face` rule declared it, and as
-    the family `Georgia`, because that is the file it opened. Trusting `isCustomFont`
-    alone would pass the reader's own serif as the page's.
+    kpress's `LocalPunct` was the case this rule was written for. It was a real
+    `@font-face` whose source was `local("Georgia")`, so Blink reported it as a custom
+    font -- a rule declared it -- and as the family `Georgia`, because that is what it
+    opened. Trusting `isCustomFont` alone would have passed the reader's own serif as the
+    page's.
+
+    kpress ships those six glyphs now (`KPress Quotes`, `kpr-asj4`), so `Georgia` is no
+    longer excused by a bead either, and both directions of the rule are here: a name the
+    page never chose is a finding whether or not a `@font-face` declared it.
     """
-    assert _unshipped([_face("Georgia", custom=True)]) == []
+    assert _unshipped([_face("Georgia", custom=True)]) == ["Georgia"]
+    assert _unshipped([_face("KPress Quotes", custom=True)]) == []
     assert _unshipped([_face("Wingdings", custom=True)]) == ["Wingdings"]
 
 

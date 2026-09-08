@@ -7,27 +7,38 @@ status: active
 ---
 # Feature: Math Text Face Integration
 
-**Date:** 2026-09-07 (last updated 2026-09-07)
+**Date:** 2026-09-07 (last updated 2026-09-08)
 
-**Status:** Implemented (2026-09-07) and open as
-[jlevy/squares#114](https://github.com/jlevy/squares/pull/114), under senior review.
-The Safari and Firefox checks by hand are the only work left.
+**Status:** The serif integration merged as
+[squares #114](https://github.com/jlevy/squares/pull/114). The sans adoption and loading
+fixes are implemented in [squares #128](https://github.com/jlevy/squares/pull/128).
+Local Chromium, Firefox, and WebKit checks cover delayed fonts, caption faces, early
+input, and the no-JavaScript fallback.
+The shared runtime and missing-stylesheet fallback merged in
+[kpress #59](https://github.com/jlevy/kpress/pull/59) and
+[kpress #60](https://github.com/jlevy/kpress/pull/60), with all upstream checks passing.
+This repository pins their merged source at `7b20ae70`.
 
 **Workflow entry:** feature implementation from spec.
 **Tracking:** epic `think-rk9v`; squares tasks `think-58av` (integration, closed),
-`think-do8b` (devtool, closed) and `think-0vju` (verification, open — it carries the
-Safari and Firefox checks).
+`think-do8b` (devtool, closed) and `think-0vju` (browser and PDF verification).
+The font epic `think-phgo` carries the rest: `think-n4y7` (sans math), `think-q5df`
+(paint once) and `think-9r58` (marker, quotes, mono).
+The 2026-09-08 review follows W7, pipeline improvement, under `think-z7ab`, with
+`think-r54y` for the visible native fallback, `think-ysjq` for shared rendering
+readiness, `think-3xrc` for browser gates, and `think-h31m` for CI integration.
+`think-7r2x` covers stock-font opt-outs inside sans ancestors and footnote previews.
+`think-ws53` covers matching stock metrics when custom font declarations are absent.
 The feature itself is tracked in kpress’s own tbd as epic `kpr-sc4f`, with sans math
-deferred as `kpr-7f9z`. Greek sizing, deferred as `kpr-c2tr` when this plan was written,
-shipped inside the kpress feature and that bead is closed.
+shipped through `kpr-7f9z`. Greek sizing, deferred as `kpr-c2tr` when this plan was
+written, shipped inside the kpress feature and that bead is closed.
 
 ## Overview
 
 The explainer page sets prose in PT Serif and mathematics in KaTeX, and the two disagree
 in x-height and weight.
-The research that diagnosed it and the feature that fixes it live in kpress, on the
-vendored `squares/page-fixes` branch, because both are about kpress typography rather
-than this paper:
+The research that diagnosed it and the feature that fixes it live in kpress, because
+both are about kpress typography rather than this paper:
 [the research brief](../../../../vendor/kpress/docs/project/research/research-2026-09-07-math-text-face.md)
 and [the feature plan](../../../../vendor/kpress/docs/math-text-face.plan.md).
 What the feature does, why, and how it is built are those two documents’ to state; this
@@ -49,9 +60,9 @@ design live afterwards.
 ## Non-Goals
 
 - The feature itself, its option, its CSS and its metrics generator: kpress’s plan.
-- Sans math: deferred, tracked in kpress as `kpr-7f9z`. Greek sizing shipped inside the
-  kpress feature (KaTeX’s Greek scaled to PT Serif’s x-height and cap height inside the
-  composite), so it is not a squares concern.
+- Glyph design and metric generation remain in kpress, including the sans composite.
+  Greek uses KaTeX glyphs scaled to the surrounding face; adopting a different Greek
+  design would be a separate typography change.
 
 ## Background
 
@@ -167,8 +178,9 @@ Nothing the page says about mathematics itself changed.
   fontTools in the dev group, pinned past the 14-day cool-off.
 - Validation: `render_explainer --check`, `sans_instances --check`,
   `render_explainer_pdf --check`, `check_print_layout`,
-  `inspect_explainer_typography --check-supporting`; the Pages workflow already checks
-  out the submodule and installs the headless shell, so it needs no change.
+  `inspect_explainer_typography --check-supporting`, `check_math_faces`; the Pages
+  workflow already checks out the submodule and installs the headless shell, so the only
+  change it needed was the last of those.
   None of these are `packing-validate` tiers: the explainer is built and checked in
   `.github/workflows/pages.yml`, which is where `sans_instances --check` belongs too,
   after the browser is installed and before the PDF is drawn, since it needs both the
@@ -271,10 +283,10 @@ One phase; the kpress feature landed first.
 - [x] Confirm the PDF `--check` on the pinned headless shell in CI: run 34161478114
   reports two agreeing renders over 16 pages, with the print layout clean.
 - [x] Open a pull request that leads with what the branch cost and links the two kpress
-  documents: [#114](https://github.com/jlevy/squares/pull/114), open and under review.
-- [ ] Verify in Safari and Firefox (Playwright WebKit and Firefox builds, or by hand).
-  Chromium is verified through the render, print-layout and PDF checks; the other two
-  engines are open under `think-0vju`.
+  documents: [#114](https://github.com/jlevy/squares/pull/114), merged.
+- [x] Verify in Playwright WebKit and Firefox, including delayed fonts and mobile width,
+  alongside Chromium. The 2026-09-08 local checks pass; the Pages workflow also runs both
+  additional engines before deployment.
 
 ## Testing Strategy
 
@@ -327,6 +339,172 @@ kind: the three `KPressPrintSans` weights and the italic, the four PT Serif face
 KaTeX faces, the atlas figure’s Helvetica, and Menlo and Georgia while `kpr-v731`,
 `kpr-2tmj` and `kpr-asj4` are open.
 
+### Sans mathematics, the shipped quotation marks, and one paint
+
+kpress landed the second composite, `KPress Math Text Sans`, along with the shipped
+quotation face and the CSS-drawn list marker
+([kpress #57](https://github.com/jlevy/kpress/pull/57), gitlink `7fcc226`). Squares
+adopts them through #128.
+
+**Which face, per expression.** The composite is applied on a
+`data-kpress-math-face="sans"` mark, and kpress stamps that mark in the same call that
+installs the sans metric tables, so the drawn face and the numbers it is laid out from
+come out of one decision.
+The page embeds kpress’s `katex-math-runtime.js` and calls its public
+`kpressMathText.render` API for both article formulas and interactive readouts.
+Kpress owns font readiness, metric selection, and revealing the finished expression.
+The host supplies its context callback because its `.tex` spans and figure controls
+extend kpress’s native markup.
+
+A node is in a sans context if kpress’s roles say so **or** if the words around it are
+measurably sans: the first family of the container’s computed `font-family` against the
+first family of the `--kpress-font-sans` in scope on the same element, both read from
+the same medium, so the test follows the print stack under print without naming either.
+The measured half is this page’s and it is a measurement rather than a list because the
+page has a dozen containers kpress has never heard of — the mass line, the field
+tooltip’s panel, the direction readouts, the captions’ key-value rows.
+A list would have been wrong the day it was written: the page’s own
+`--kpress-katex-size-sans` rule, the nearest thing it had to a statement of this, misses
+the six direction readouts that its own `--kpress-font-sans` rule covers.
+The walk climbs past `.kpress-math`, `.kpress-math-render`, `.tex`, `.tex-d` and
+`.katex`, which declare the prose face themselves; asking one of those answers for the
+formula rather than for the sentence around it, and it put all five footnote expressions
+on the wrong side when it was tried.
+
+Two defects came out of that walk and both are fixed here.
+The five footnote expressions above, and the three direction readouts, which `updateK`
+built as detached spans and typeset before attaching: a detached element has no cascade,
+so `closest` found no ancestor and `getComputedStyle` answered with nothing, and those
+three came out of the serif composite inside a sans panel.
+They are attached before they are typeset now.
+
+**What the initial adoption cost.** This historical comparison ends at the original #128
+implementation, `c1dab812`, before the shared-runtime corrections below.
+Both sides were measured on one host and browser in one session:
+
+| Measured 2026-09-08 | Before | After |
+| --- | ---: | ---: |
+| Page | 1,478,860 B | 1,725,338 B |
+| Page, gzipped | 714,206 B | 867,547 B |
+| PDF | 817,108 B | 819,392 B |
+| Inlined faces | 24 | 30 |
+
+The sans composite is 6 of those faces and 174,568 B of base64: the Source Sans Latin
+pair, their two KaTeX Greek partners, and kpress’s two static print instances at 400,
+which are what put `KPressPrintSans-400` and `KPressPrintSans-400Italic` in the export
+instead of Type3 outline paths.
+Every one of them is a second copy of bytes the page already carries, which is what
+makes the prune worth taking to the weight rather than only to the style: the 650 slots
+go, and with them 93,684 B of stylesheet.
+KaTeX reaches a bold table from `\mathbf`, `\boldsymbol` and `\textbf` only, and the
+page sets none of the three in a sans context — its three `\mathbf{D}_4` are prose.
+That is a claim about what the built page renders, so `check_math_faces` holds it rather
+than a comment. The italic 650 slot would have gone anyway on the partner rule, since
+`KaTeX_Math-BoldItalic` is outside `KATEX_FACES`. The remaining duplication is
+`kpr-hhdc` and `think-f8q9`, unchanged.
+
+The PDF moved 2,284 B for a strictly better file: two embedded print-sans instances
+more, `KPressQuotes-Regular` for the marks, and `Georgia`’s 16 KB gone.
+
+**Font readiness.** The shared runtime typesets each expression while hidden, loads the
+faces its rendered glyphs require, and then reveals it.
+This page also requests all embedded faces: it already carries their bytes, and early
+slider, resize, theme, and print callbacks can introduce a different construct.
+The native enhancer and custom host use the same rendering API. Repeated calls on one
+readout retain the latest requested expression.
+If a required face fails or exceeds the wait deadline, native math retains its semantic
+MathML and custom formulas retain their raw TeX fallback.
+
+The head bootstrap hides semantic MathML during successful enhancement, preserving its
+space until the finished expression is ready.
+Without JavaScript, both native MathML and custom TeX remain visible.
+The bootstrap watchdog restores the fallback if enhancement fails before completion.
+The `math-ready` class marks initial completion; PDF export and browser probes also
+await `squaresMath.settled()` after layout and input events, because those events can
+schedule more formulas after the initial class is set.
+
+**The quotation marks.** The shell’s print-only prose override is gone.
+It existed because kpress borrowed Georgia’s marks through a `local("Georgia")` face, so
+a printed page took its apostrophes from whatever the reader owned; kpress ships them
+now (`KPress Quotes`, six glyphs of Source Serif 4, 968 B of base64), and keeping the
+override would have dropped the shipped face and sent print back to PT Serif’s own
+marks. `Georgia` and `LiberationSerif` came off `EXPECTED_HOST_FONTS` with it, so the
+guard looks at that family again; `Menlo` stays, on `kpr-v731`. `KPressQuotes` joined
+the owned faces.
+
+**What holds it.** `check_math_faces` is the new gate, and it exists because none of the
+three questions is readable in the rendered HTML. It walks every `.katex` node in both
+media and compares the mark against the face the words around it resolve to; it
+re-typesets one caption fraction and one prose fraction from their own TeX under each
+metric set and requires the live geometry to match the set the context asks for and to
+differ from the other (0.818 em against 0.8614 em, so there is something to tell apart);
+it reads Latin and digit runs through `CSS.getPlatformFontsForNode`, which answers
+`Source Sans 3 ExtraLight` for the screen caption and `PT Serif` for the prose.
+The print caption uses `KPressPrintSans-400`. It samples the first CSS-exposed formula
+rather than counting insertion of a hidden staging node as a paint.
+It also fails when the page’s init did not run at all — one inlined IIFE, and a
+reference error inside it leaves every other gate green while every formula falls back
+to the serif composite.
+That is not hypothetical: it happened once on this branch, caught by nothing else.
+`sans_instances` was regenerated against the new kpress and its six instances came out
+byte-identical, so kpress dropping its own 700 weight did not move this page’s set.
+
+`check_math_loading` delays the browser’s font-load promises, sends slider input and
+resize/print events during that delay, and checks for exposed KaTeX or native MathML.
+After release it checks final readouts and font status, then repeats with JavaScript
+disabled to verify readable fallback content.
+The Pages workflow runs the loading check in Chromium, Firefox, and WebKit, and requires
+those jobs before deployment.
+Both font checkers accept the deployed page URL as well as local HTML, so the same
+loading and actual-face probes can verify the published artifact.
+These are controlled readiness tests, not measurements of network download speed or a
+claim that every source of page layout shift has been eliminated.
+
+### Why the merged fixes still showed a swap
+
+The review reproduced the reported behavior against the original #128 page at `c1dab812`
+as well as inspecting what was deployed from main at `2980c5bc`. The changes had reached
+different stages:
+
+| Change | What it fixed | What remained |
+| --- | --- | --- |
+| [Squares #114](https://github.com/jlevy/squares/pull/114) | PT Serif composite and matching KaTeX metrics | Sans contexts and asynchronous rendering |
+| [Squares #118](https://github.com/jlevy/squares/pull/118) | Static sans instances embedded in PDF | Served HTML behavior intentionally unchanged |
+| [Squares #119](https://github.com/jlevy/squares/pull/119) | Sans weights and font provenance | The older kpress pin still lacked sans-math adoption |
+| [Kpress #58](https://github.com/jlevy/kpress/pull/58), included in #57 | Initial composite-font wait | Native fallback exposure and custom host callbacks |
+| Original squares #128 | Sans captions and a partial host wait | Still open during review; the wait missed construct faces and early callbacks |
+
+The composites select PT Serif or Source Sans WOFF2 files for Latin letters and digits
+through `@font-face` rules and Unicode ranges.
+They are not new font binaries with those glyphs physically merged into KaTeX. Greek,
+operators, and extensible constructions retain KaTeX glyphs by design.
+Inlining the source files removes network requests but does not make browser decoding
+synchronous; even a physically merged file would need decoding before use.
+
+The original host wait covered Main, Math, and the composite slots, but not all AMS,
+calligraphic, or Size1–4 construct faces.
+An initial `ResizeObserver` callback could render Figure 6 before the boot wait.
+Native MathML was also visible before enhancement, producing a native-to-KaTeX change
+even when the first KaTeX insertion had loaded fonts.
+The old insertion check could pass while those paths were still visible.
+The shared runtime and delayed-font browser checks cover those paths together.
+
+The final review also reproduced a missing-stylesheet failure in KPress: its custom
+metric tables could remain selected while the browser drew stock KaTeX glyphs.
+KPress #60 selects stock families and their original metrics together when a composite
+family has no registered declarations, independently for serif and sans contexts.
+A declared face that fails to load preserves the semantic fallback when the formula
+requires it; an unused failed weight does not discard otherwise usable custom math.
+Browser regressions cover both cases with actual missing font files.
+
+The integration preserves the work merged in Squares #120 and includes the CI repairs
+from #122 and #123. The full checkpoint runs the slow lane, exhaustive tests, and
+translation screen in separate jobs, with the remaining checks in a fourth job.
+The workflow guards resolve the commands through the validator and require complete,
+non-overlapping coverage.
+The CI defect is recorded as D-484; the numerical source and earlier defect records from
+#120 remain intact.
+
 Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
 
 - `think-988s`, this branch: the page’s own print sans instances injected at PDF time
@@ -346,10 +524,13 @@ Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
 - `think-f8q9`: subset the eight inlined KaTeX faces to the glyphs the page’s
   mathematics uses, after kpress ships the composite’s own subsets (`kpr-hhdc`, which
   recovers most of the 216 KB).
-- `think-9r58`: adopt kpress’s mono face (`kpr-v731`, Source Code Pro until `kpr-aq8o`
-  decides the final face), its CSS-drawn list marker (`kpr-2tmj`) and PT Serif quotation
-  marks (`kpr-asj4`); then the shell’s print-only prose override goes, and
-  `EXPECTED_HOST_FONTS` empties.
+- `think-n4y7` and `think-q5df`, this branch: the sans composite, the per-node table
+  selection, and the paint-once wait (the section above).
+- `think-9r58`, the marker and the quotes half done on this branch: kpress’s CSS-drawn
+  list marker (`kpr-2tmj`) and its shipped quotation face (`kpr-asj4`) are adopted, the
+  shell’s print-only prose override is gone, and `EXPECTED_HOST_FONTS` is down to
+  `Menlo` and `DejaVuSansMono`. The mono half waits on `kpr-v731` (Planetaire Mono Text
+  at 0.87), and with it the last two entries.
 
 ### One bold, one medium
 
@@ -416,6 +597,11 @@ guard could land before the fixes it waits for; `think-9r58` empties the mapping
 Each entry carries the substitute the Linux runner answers with, since the names in it
 are the host’s: `DejaVuSansMono` and `LiberationSerif`, both of them there because
 `pages.yml` reported them.
+Both `Georgia` entries came off on 2026-09-08, when `kpr-2tmj` and `kpr-asj4` landed and
+the gitlink moved to them; `Menlo` and its substitute are what is left.
+Taking a name off is the half that matters and the half nobody is prompted to do: an
+entry here is a family the guard stops looking at, so a quotation mark that went back to
+the reader’s own serif would have passed in silence.
 A plausible substitute nobody has measured is left off, since a listed name is a face
 the guard stops looking at; the generic Linux sans was listed once, and it is the exact
 face a relation face that stopped loading comes back as on the machine that gates the
@@ -429,11 +615,12 @@ Two details are load-bearing and both were measured rather than assumed.
 The answer is asked for per element, because kpress’s viewport is a containment boundary
 and a subtree aggregate taken at `body` comes back empty — a walk that trusted it would
 report a clean page it never looked at.
-And `isCustomFont` alone is not enough: `LocalPunct` is a real `@font-face` whose source
-is `local("Georgia")`, so Blink calls the reader’s own serif a custom font.
-kpress’s chrome around the document is out of scope, deliberately: the tooltip and the
-theme control are set in `system-ui` because they are the reader’s interface, and none
-of it prints.
+And `isCustomFont` alone is not enough: `LocalPunct` was a real `@font-face` whose
+source was `local("Georgia")`, so Blink called the reader’s own serif a custom font.
+kpress ships those six glyphs now, so that particular face is gone and the rule it
+taught is not. kpress’s chrome around the document is out of scope, deliberately: the
+tooltip and the theme control are set in `system-ui` because they are the reader’s
+interface, and none of it prints.
 
 The guard earned its keep on the branch that added it.
 The relation face below, declared at `100 900` against Source Sans 3’s own `200 900`,
@@ -485,7 +672,9 @@ does upstream, and the woff2 kpress ships is a Latin subset that does not.
 ## Open Questions
 
 - Whether captions and panels keep the math text face or revert to the KaTeX faces (see
-  Background).
+  Background). Adopting the sans composite settles the version of this that was about
+  mixing two text faces inside one caption; what is left is the narrower question of
+  whether a caption wants mathematics in its own face at all.
 
 ## References
 
@@ -496,7 +685,8 @@ does upstream, and the woff2 kpress ships is a Latin subset that does not.
   [`render_explainer_pdf.py`](../../../../packing/devtools/render_explainer_pdf.py),
   [`sans_instances.py`](../../../../packing/devtools/sans_instances.py),
   [`check_print_layout.py`](../../../../packing/devtools/check_print_layout.py),
-  [`inspect_explainer_typography.py`](../../../../packing/devtools/inspect_explainer_typography.py).
+  [`inspect_explainer_typography.py`](../../../../packing/devtools/inspect_explainer_typography.py),
+  [`check_math_faces.py`](../../../../packing/devtools/check_math_faces.py).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

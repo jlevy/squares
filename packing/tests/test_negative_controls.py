@@ -31,6 +31,31 @@ from devtools.run_negative_controls import (
 from sqpack.yamlio import safe_load
 
 
+@pytest.fixture(scope="module")
+def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, set[Path]]:
+    """Reuse one real worker snapshot; each mutation restores its target in `finally`."""
+    tree = tmp_path_factory.mktemp("control-snapshot") / "snapshot"
+    retained: list[Path] = []
+    select = controls.snapshot_pruned_targets
+
+    def capture_targets() -> list[Path]:
+        targets = select()
+        retained.extend(targets)
+        return targets
+
+    # Keep the copier's actual selection for the workflow assertion instead of walking
+    # and parsing every campaign document and results record a second time in the test.
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(controls, "snapshot_pruned_targets", capture_targets)
+        clone_tree(tree)
+    workflows = {
+        path.relative_to(controls.REPO)
+        for path in retained
+        if path.is_relative_to(controls.REPO / ".github/workflows")
+    }
+    return tree, workflows
+
+
 def test_oversized_snapshot_is_refused_before_cloning(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -334,9 +359,10 @@ def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
     assert controls.linked_pruned_targets() == [needed]
 
 
-def test_unmutated_results_checker_is_green_inside_a_worker(tmp_path: Path) -> None:
-    tree = tmp_path / "snapshot"
-    clone_tree(tree)
+def test_unmutated_results_checker_is_green_inside_a_worker(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, _workflows = control_snapshot
     completed = subprocess.run(
         [sys.executable, "-m", "devtools.check_results"],
         cwd=tree / "packing",
@@ -348,10 +374,12 @@ def test_unmutated_results_checker_is_green_inside_a_worker(tmp_path: Path) -> N
 
 
 def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    control_snapshot: tuple[Path, set[Path]], monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    tree = tmp_path / "snapshot"
-    clone_tree(tree)
+    # Main measured this call at 14.44s against the 12s quick-lane ceiling. The snapshot
+    # and its selection are shared setup; the real clean check, mutation and restoration
+    # remain measured here, with no relaxed ceiling or slow-lane deferral.
+    tree, selected_workflows = control_snapshot
     work = tree / HERE
     synopsis = tree / "SYNOPSIS.md"
     original = synopsis.read_bytes()
@@ -372,11 +400,6 @@ def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
     for name in ("deep-gate.yml", "branch-mergeability.yml"):
         relative = Path(".github/workflows") / name
         assert (tree / relative).read_bytes() == (controls.REPO / relative).read_bytes()
-    selected_workflows = {
-        path.relative_to(controls.REPO)
-        for path in controls.snapshot_pruned_targets()
-        if path.is_relative_to(controls.REPO / ".github/workflows")
-    }
     copied_workflows = {
         path.relative_to(tree)
         for path in (tree / ".github/workflows").rglob("*")

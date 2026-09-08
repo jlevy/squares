@@ -3658,7 +3658,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 483 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 484 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -3666,8 +3666,17 @@ and checked in the gate.
 | soundness | 98 | asserted something false about the mathematics |
 | validity | 122 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 185 | recorded something its own evidence contradicts |
-| robustness | 60 | did not finish, or finished only by luck |
+| robustness | 61 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
+
+One entry is filed under a class it only half fits, and the table reads accordingly.
+[D-484](defects.md) carries two defects with a single cause: an escape screen that
+finished only when the runner was kind, which is `robustness`, and a behavioural lane
+that completed but cost 1020.77 s where 718.52 s was available, which is `performance`
+in [D-456](defects.md)’s sense.
+It is filed as `robustness`, for the half that took `main` red, so the `performance` row
+here reads one low. The entry names that call rather than leaving it implicit; the
+alternative was two ids sharing every other field.
 
 Two observations the log exists to make.
 
@@ -3675,7 +3684,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-two defects in 483, and no soundness defect
+**The automated gate has caught seventy-three defects in 484, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

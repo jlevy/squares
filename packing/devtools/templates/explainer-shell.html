@@ -768,8 +768,9 @@ body {
 .math-reference { white-space: nowrap; }
 
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
-.tex, .tex-d { visibility: hidden; }
-.math-ready .tex, .math-ready .tex-d { visibility: visible; }
+/* The head bootstrap marks pending enhancement and clears it on failure. Without
+   JavaScript, raw TeX remains legible alongside KPress's semantic MathML. */
+html[data-kpress-math-pending] :is(.tex, .tex-d) { visibility: hidden; }
 /* Wide equations scroll sideways; the block keeps headroom for fractions, since
    overflow-x: auto also clips vertically and the display margin is zeroed. */
 .tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; padding-block: 0.45rem; }
@@ -887,13 +888,19 @@ body {
      and being print-only it leaves the screen's hinted rendering alone. */
   .kpress { text-rendering: geometricPrecision; }
 
-  /* kpress borrows Georgia's quotes into the PT Serif stack through a `LocalPunct`
-     @font-face whose `src` is `local("Georgia")`. On a machine without Georgia the
-     face simply fails and nothing changes; on the Mac and Windows machines most
-     readers print from it loads, and every apostrophe and quotation mark in the
-     prose then comes from a different face at different metrics. Print should not
-     depend on which fonts the reader happens to own. */
-  .kpress { --kpress-host-font-prose: "PT Serif", Georgia, "Times New Roman", serif; }
+  /* Quotation marks used to be overridden here. kpress borrowed Georgia's into the PT
+     Serif stack through a `LocalPunct` @font-face whose `src` was `local("Georgia")`,
+     so on the Mac and Windows machines most readers print from, every apostrophe and
+     quotation mark came from a face the reader happened to own -- at its own metrics,
+     and impossible to embed in the PDF. This scope replaced the prose stack for print
+     to keep that out of the printed page.
+
+     kpress ships the marks now (`KPress Quotes`, six glyphs of Source Serif 4 at about
+     700 bytes, leading the prose stack through `--kpress-font-punctuation`), so the
+     override would do the opposite of what it was for: naming the stack again would
+     drop the shipped face and send print back to PT Serif's own marks. It is gone, and
+     `render_explainer_pdf --fonts` is what holds the result -- no Georgia in the
+     export, and `KPressQuotes` embedded. */
 
   /* Ragged right. kpress justifies printed prose and asks for automatic
      hyphenation to keep the lines even, but hyphenation needs dictionaries the
@@ -1104,13 +1111,10 @@ const nearly = text => `{\\approx}\\,${text}`;
 const degTex = (a, places, exact = a === 0) => (exact ? deg(a, places) : nearly(deg(a, places)));
 const degRel = (a, places, exact = a === 0) => `${exact ? '=' : '\\approx'} ${deg(a, places)}`;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-/* A function name set in italic leans into the parenthesis after it, so `s(n)` sets
-   the bracket against the letter's terminal. One mu is the smallest space TeX offers,
-   and the same offset the drawn figures use, so the prose, the captions and the
-   diagrams space it alike. `cos(x)` is untouched: the letter is not on its own. */
-const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-const tex = (el, s, d) => { try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
-                            catch (e) { el.textContent = s; } };
+/* The shared renderer gates every call, including the ResizeObserver's initial
+   redraw and input received while fonts are loading. It selects the context's face
+   and metrics together before revealing the result. */
+const tex = squaresMath.render;
 /* A readout that is replaced rather than slid fades in (see `.swap`); one
    that already shows the text is left alone, so leaving and re-entering a
    figure does not blink it. */
@@ -1431,9 +1435,18 @@ function updateK() {
        `\\theta ${degRel(angle, 4)}^{\\circ}`]
     : [`\\theta ${degRel(angle, 4)}^{\\circ}`, `\\text{nearest net } k = ${curK}`,
        `\\theta_k ${degRel(2 * Math.atan(netT(curK)), 4)}^{\\circ}`];
-  el.replaceChildren(...parts.map(part => {
-    const span = document.createElement('span'); span.className = 'math-item'; tex(span, part); return span;
-  }));
+  /* Attached before it is typeset, not after. `tex` asks the cascade which face the
+     words around the expression are in, and a detached span has no cascade: `closest`
+     finds no ancestor and `getComputedStyle` answers with nothing, so these three
+     readouts came out of the serif composite inside a sans panel. `replaceChildren`
+     with the empty list first, so the row is still replaced rather than appended to. */
+  el.replaceChildren();
+  for (const part of parts) {
+    const span = document.createElement('span');
+    span.className = 'math-item';
+    el.append(span);
+    tex(span, part);
+  }
   document.getElementById('kslider-{{SLUG}}').setAttribute('aria-valuetext', onNet
     ? `Direction ${curK} of ${STEPS}; angle ${deg(angle, 4)} degrees`
     : `Nearest net direction ${curK}; square is off the net at ${deg(angle, 4)} degrees`);
@@ -1637,7 +1650,9 @@ function boot() {
   drawField(); document.getElementById('kslider-{{SLUG}}').value = String(curK);
   refresh(true); shrinkDraw();
 }
-boot();
+/* Warm the common math faces before the first draw. The render API also waits at
+   every actual render call, so resize, theme, print, and input events are covered. */
+squaresMath.ready.then(boot);
 const repaint = () => { heat = null; boot(); };
 if (window.matchMedia) {
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -1678,31 +1693,43 @@ window.addEventListener('afterprint', repaint);
   window.matchMedia('print').addEventListener('change', sizeDiagramLabels);
   document.fonts.ready.then(sizeDiagramLabels);
   sizeDiagramLabels();
-  const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-  const render = (el, s, d) => { try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
-                                 catch (e) { el.textContent = s; } };
-  document.querySelectorAll('.tex').forEach(el => {
-    if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; render(el, el.textContent, false); }
-  });
-  document.querySelectorAll('.tex-d').forEach(el => {
-    if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
-  });
-  /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
-     and the element marked rendered, which is what shows it and hides the
-     MathML that stands in when there is no script. */
-  document.querySelectorAll('.kpress-math').forEach(el => {
-    const box = el.querySelector('.kpress-math-render');
-    if (!box || el.dataset.kpressMathRendered) return;
-    const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
-    render(box, src, el.dataset.kpressMath === 'display');
-    el.dataset.kpressMathRendered = 'true';
-  });
-  document.documentElement.classList.add('math-ready');
+  const render = squaresMath.render;
+  async function typeset() {
+    const pending = [];
+    document.querySelectorAll('.tex').forEach(el => {
+      if (!el.dataset.done && !el.querySelector('.katex')) {
+        pending.push(render(el, el.textContent, false).then(() => { el.dataset.done = '1'; }));
+      }
+    });
+    document.querySelectorAll('.tex-d').forEach(el => {
+      if (!el.dataset.done) {
+        pending.push(render(el, el.textContent, true).then(() => { el.dataset.done = '1'; }));
+      }
+    });
+    /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
+       and the element marked rendered, which is what shows it and hides the
+       MathML that stands in when there is no script. */
+    document.querySelectorAll('.kpress-math').forEach(el => {
+      const box = el.querySelector('.kpress-math-render');
+      if (!box || el.dataset.kpressMathRendered) return;
+      const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
+      pending.push(render(box, src, el.dataset.kpressMath === 'display').then(rendered => {
+        if (rendered) el.dataset.kpressMathRendered = 'true';
+      }));
+    });
+    await Promise.all(pending);
+    await squaresMath.settled();
+    kpressMathText.complete();
+    document.documentElement.classList.add('math-ready');
 
-  /* Footnote hover previews, kpress's own, bundled into this page. Booted after
-     the static math so the preview clones already carry rendered formulas. */
-  if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
-  if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
+    /* Footnote hover previews, kpress's own, bundled into this page. Booted after
+       the static math so the preview clones already carry rendered formulas. */
+    if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
+    if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
+  }
+  /* PDF and layout tools wait for math-ready, which follows the completed static
+     renders and the initial interactive readouts. */
+  squaresMath.ready.then(typeset);
 
   /* One copy of each figure per certificate. The switch beside every figure
      shows one certificate's copies and records it in the hash, so a link can

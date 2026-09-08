@@ -27,6 +27,7 @@ from devtools.render_explainer_pdf import (
     BROWSER_OVERRIDE,
     PAGE,
     READY,
+    SETTLED,
     host_font_bead,
     shipped,
 )
@@ -337,11 +338,7 @@ def inspect(
                 if medium == "print":
                     page.emulate_media(media="print")
                     page.set_viewport_size(PRINT_VIEWPORT)
-                page.evaluate("document.fonts.ready")
-                page.evaluate(
-                    "() => new Promise(done => requestAnimationFrame("
-                    "() => requestAnimationFrame(done)))"
-                )
+                page.evaluate(SETTLED)
                 probe: Probe = page.evaluate(
                     _PROBE,
                     {

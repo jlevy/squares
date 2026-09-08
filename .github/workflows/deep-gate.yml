@@ -91,11 +91,9 @@ concurrency:
 
 jobs:
   deferred-steps:
-    # Five of the seven deferrals: `negative controls`, `n=40 rigidity bracket still
-    # reproduces`, and the three the widened known-best corpus put here on
-    # 2026-09-07 -- `known-best n=1..324 atlas rebuild`, `single-square translation
-    # escape screen` and `exact rational grid replay`. The slow behavioural and
-    # exhaustive tiers each have a separate job below.
+    # Four of the seven deferrals: negative controls, the n=40 rigidity bracket,
+    # the known-best atlas rebuild and exact rational grid replay. The slow lane,
+    # exhaustive tier and translation screen each have a separate job below.
     #
     # The three new ones are here on their own measurements, taken at n=1..324 on an idle
     # ten-cpu box and retained in `packing/benchmarks/gate-cost-at-324/`: 691.19s for the
@@ -107,8 +105,8 @@ jobs:
     # on every pull request -- and this selection is the exact complement of those, not a
     # rerun of them.
     #
-    # The slow lane now runs in `deferred-slow-lane`; the five numeric checks remain
-    # here. Grid replay's prior pooled reading was 18.79s over 36.65s of cpu for all
+    # The slow lane runs in `deferred-slow-lane` and the screen has its own job;
+    # the four remaining numeric checks run here. Grid replay's prior pooled reading was 18.79s over 36.65s of cpu for all
     # 305 witnesses. The serial schedule below adds its wall instead of hiding it.
     #
     # `--only` rather than a tier flag, and unlike in `packing-validation.yml` that is
@@ -118,15 +116,15 @@ jobs:
     # `devtools/gate-budgets.yaml`, and `_tier_id` returns `None` for an `--only` run so
     # nothing is judged against a ceiling it does not have. What bounds these steps is
     # their own `budget_seconds`, which `_execute_step` raises the subprocess timeout to
-    # -- 1800s for the negative controls and for the whole escape screen. That is the same
-    # arrangement the `exhaustive` job in `packing-validation.yml` already runs under.
+    # -- 1800s for the negative controls; the screen carries its own cap in its job.
+    # The exhaustive job in `packing-validation.yml` uses the same arrangement.
     #
     # The names are typed here and cannot drift silently:
     # `test_the_deep_gate_runs_exactly_what_the_pull_request_defers` parses these commands
     # with the CLI's own parser, resolves them through its own selector, and requires the
-    # union to equal the set no pull-request job runs. A seventh deferral added tomorrow
+    # union to equal the set no pull-request job runs. Another deferral added tomorrow
     # fails that test until it is added here, which is the property the daily backstop
-    # never had. It also requires the three job selections to be pairwise disjoint.
+    # never had. It also requires the four job selections to be pairwise disjoint.
     #
     # PR #116's run 34181619739 killed the escape screen at its 1800s budget while
     # the atlas rebuild and negative controls shared the other outer slot. Two pools
@@ -176,7 +174,6 @@ jobs:
           --only "negative controls"
           --only "n=40 rigidity bracket still reproduces"
           --only "known-best n=1..324 atlas rebuild"
-          --only "single-square translation escape screen"
           --only "exact rational grid replay"
           --jobs 1 --inner-jobs 2
 
@@ -298,6 +295,72 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+  screen:
+    # The escape screen alone, mirroring the post-merge `screen` job, and split here for
+    # the same reason `D-484` split it there: it is a process pool sized by `PACK_JOBS`,
+    # the original shared selection put it beside five other deferrals at
+    # `--inner-jobs 2`, giving it two workers. This job uses `--inner-jobs 4` and
+    # supplies four workers.
+    #
+    # Run 34177317419 killed the screen at the shared 900s cap on commit 831697c0.
+    # Post-merge run 34176106076 finished the same code at 858.62s an hour earlier.
+    # The runners and job selections differed, so those readings do not isolate the
+    # cause of the variance. This job gives the pre-merge gate the same screen command
+    # and pool allocation as the post-merge gate.
+    #
+    # This deep-gate job has three hosted readings, also used as the proxy for the
+    # post-merge job's identical shape: 944s on run 34188003140, 861s on run 34189176373
+    # and 949s on run 34190285360 -- spread 1.10x, geometric mean 917.09s, two of three above
+    # the 900s cap this step no longer runs under (`SCREEN_BUDGET_SECONDS` is 1800s). The
+    # one local reading, 794.5s at four workers on a four-cpu development box, is the
+    # number to argue from least: the hosted runs sit 1.08x to 1.19x above it.
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || contains(github.event.pull_request.labels.*.name, 'deep-gate')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # `github.event.inputs` rather than the `inputs` context: the latter is
+          # documented as available only to a dispatched or reusable workflow, and
+          # this step also runs on `pull_request`, where the event
+          # payload simply carries no inputs and this renders empty.
+          ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
+          # This selection has no historical-content review. Keep its shallow checkout;
+          # the vendored submodule is still required to resolve the environment.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the single-square translation escape screen
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "single-square translation escape screen"
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   deep-gate-required:
     # One context for the whole deep surface, exactly as `packing-required` is one
     # context for the whole pull-request surface -- and for the same recorded reason.
@@ -329,7 +392,7 @@ jobs:
     if: >-
       !cancelled() && (github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate'))
-    needs: [deferred-steps, deferred-slow-lane, exhaustive-tier]
+    needs: [deferred-steps, deferred-slow-lane, exhaustive-tier, screen]
     runs-on: ubuntu-latest
     steps:
       - name: Require every deep-gate prerequisite
@@ -337,7 +400,9 @@ jobs:
           DEFERRED_RESULT: ${{ needs.deferred-steps.result }}
           SLOW_RESULT: ${{ needs.deferred-slow-lane.result }}
           EXHAUSTIVE_RESULT: ${{ needs.exhaustive-tier.result }}
+          SCREEN_RESULT: ${{ needs.screen.result }}
         run: |
           test "$DEFERRED_RESULT" = "success"
           test "$SLOW_RESULT" = "success"
           test "$EXHAUSTIVE_RESULT" = "success"
+          test "$SCREEN_RESULT" = "success"

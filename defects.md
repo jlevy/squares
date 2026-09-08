@@ -2,7 +2,7 @@
 
 # Defect log
 
-483 defects recorded across the packing toolchain.
+484 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 62 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 72 | the automated test suite |
+| `gate` | 73 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 72 of 483, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 73 of 484, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 72 of 483, and none of
 | quench | 23 |
 | verifier | 12 |
 | record | 152 |
-| tooling | 174 |
+| tooling | 175 |
 | docs | 111 |
 
 ## By kind
@@ -45,7 +45,7 @@ The line worth reading twice: **the automated gate caught 72 of 483, and none of
 | soundness | 98 |
 | validity | 122 |
 | bookkeeping | 185 |
-| robustness | 60 |
+| robustness | 61 |
 | performance | 18 |
 
 ## Fixed, but nothing stops it coming back
@@ -729,6 +729,7 @@ This is the actionable list.
 | [D-481](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | 2026-09-07 | record | bookkeeping | conservative | `review` | medium | fixed | The n26–27 source fields omitted Green's stronger reported lower bound |
 | [D-482](packing/devtools/audit_ds7_lower_bounds.py) | 2026-09-07 | record | bookkeeping | conservative | `review` | medium | fixed | Expanded frontier source fields omitted stronger indexed lower-bound reports |
 | [D-483](packing/devtools/check_case_prose.py) | 2026-09-07 | record | bookkeeping | conservative | `review` | medium | fixed | Case prose accepted a stale exact verified bound as a rounded current value |
+| [D-484](packing/src/sqpack/cli/validate.py) | 2026-09-08 | tooling | robustness | conservative | `gate` | high | fixed | The slow behavioural lane ran serially and the escape screen shared its runner |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

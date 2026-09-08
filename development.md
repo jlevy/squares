@@ -167,7 +167,7 @@ alone is not full pre-merge evidence.
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
 | `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 205 s | 102.8 s on CI, the mean of four readings |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 69 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across three jobs; not clocked whole |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across four jobs; not clocked whole |
 
 Two of the four PR partition costs are geometric means of four readings at the reference
 shape, not maxima. Hosted variation remains material: unchanged atlas code ranged from
@@ -229,14 +229,27 @@ test satisfies exactly one, so no test can be in two lanes and none can be in ze
 
 | Lane | Marker | Tests | Runs in | Bound |
 | --- | --- | ---: | --- | --- |
-| quick | neither | 2,197 | PR fast surface | fails a test whose `call` phase reaches 12 s |
-| slow | `slow` | 95 | full checkpoint | fails a test whose `call` phase is under 1 s |
+| quick | neither | 3,944 | PR fast surface | fails a test whose `call` phase reaches 12 s |
+| slow | `slow` | 97 | full checkpoint, under xdist in CI | fails a test whose `call` phase is under 1 s |
 | exhaustive | `exhaustive_exact` | 55 | its own CI job | its own 3600 s budget |
 
-Counts are from
-[main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801), not
-fixed test membership.
-The marker expressions determine current membership.
+Counts are a `--collect-only` of the three marker expressions on 2026-09-08, against the
+n = 1..324 corpus.
+They sum to the 4,096 tests the suite collects, which is the partition
+property above; they are not a fixed membership, and they move with the corpus.
+[Main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801)
+reported 2,197 quick and 95 slow on 2026-09-06, before the corpus expansion of
+2026-09-07. The marker expressions determine current membership.
+
+**The slow lane’s xdist is conditional on the shape it is run in.** Both lanes size
+their workers as `cpus - jobs + 1`, so the two CI jobs that carry the slow lane run it
+at three workers on four cpus, while `packing-validate` with no `--jobs` defaults jobs
+to the cpu count, leaves one worker, and runs the lane in a single process exactly as it
+did before [D-484](defects.md).
+The change bites only where `--jobs` is below the cpu count, so the default local full
+gate is unimproved. The 718.52 s against 1020.77 s that argued for it was measured at
+four workers, a shape no gate runs; at three workers on a contended box the same tests
+were 795.11 s, about 1.28x.
 
 **Both bounds are enforced, in opposite directions.** A quick test that grows past the
 ceiling fails the pull request in the week it grows; a deferred test that drops below
@@ -252,6 +265,12 @@ single-square translation escape screen, and the whole exact rational grid repla
 These are the seven steps outside the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
+
+It runs them in four jobs, mirroring the post-merge gate: `deferred-slow-lane`,
+`exhaustive-tier`, and [D-484](defects.md)’s `screen`, with `deferred-steps` carrying
+the other four checks.
+`deep-gate-required` waits on all four — a split job that nothing waits on is an
+advisory check, which is [D-380](defects.md)’s shape.
 
 The last three joined on 2026-09-07 because the corpus tripled, not because the gate
 changed its mind about them.
@@ -469,10 +488,23 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 Pushes to `main`, manual dispatches, and the daily schedule run the ordinary full
-checkpoint on Linux in three jobs: `validate` runs everything except slow and exhaustive
-exact tests; `slow-lane` and `exhaustive` run those two lanes separately.
-macOS runs four portability checks.
-These invocations enable neither the golden rebuild nor the strict checkpoint.
+checkpoint on Linux in four jobs: `validate` excludes the slow lane, exhaustive exact
+tests, and whole translation escape screen.
+`slow-lane`, `exhaustive`, and `screen` run those three selections separately.
+The two solo jobs are solo for different reasons.
+`exhaustive` is a verdict split, carried as `think-tr2z`: the tier was 1943 s of the
+complete surface’s 2755 s wall, just over seventy per cent of it, and killed at its
+budget it reported nothing about the sixty steps beside it.
+That kill is [D-456](defects.md), which re-measured the tier at 2036 s on four cores and
+raised its budget rather than splitting it.
+`screen` is a worker split ([D-484](defects.md)): the step is a process pool sized by
+`PACK_JOBS`, and beside the rest of the gate at `--inner-jobs 2` it gets two of the
+runner’s four. What the other two workers buy is not established.
+The three hosted readings of the split job are 944 s, 861 s and 949 s, none of them
+below the 858.62 s the step cost at two workers on a different runner, so the argument
+for the split is the pool it was not filling and the cap it kept failing against, not a
+measured speedup. macOS runs four portability checks.
+Neither workflow invocation enables the golden rebuild or strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
 labelled or dispatched deferred checkpoint.
 
@@ -482,21 +514,29 @@ whichever test starts first.
 Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
 `slow`; remove that marker when its measured cost falls below the floor.
 The marker registry tests enforce both declarations.
-Quick tests use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs` controls other
-internal pools, including the negative-control pool.
+Both behavioural lanes use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs`
+controls other internal pools, including the negative-control pool.
+The slow lane ran in a single process until [D-484](defects.md): `BC-214` split the
+lanes and gave xdist to the quick half only, leaving the half selected for costing the
+most as the one place in the gate that ran a test suite serially.
 Avoid assuming that either flag alone caps total host concurrency.
 
-The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
-runners expose four CPUs, and no second outer step competes for that budget.
-The integration and deferred numeric checks run one step at a time with
-`--jobs 1 --inner-jobs 2`; their isolated slow lanes use the same worker settings.
-This keeps the full translation screen from competing with another numeric pool.
-The screen exceeded even its 1800-second budget when two pools shared a hosted runner in
-[run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739).
-Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
-grid-memory budget. The four-worker exhaustive setting preserves the parallelism
-previously available when certificate pools ignored `PACK_JOBS`; it is not a measured
-speedup claim.
+The screen and exhaustive jobs use `--jobs 1 --inner-jobs 4` on the hosted four-CPU
+runners. The slow lane also has its own job, using `--jobs 1 --inner-jobs 2`: xdist
+supplies four test workers, while tests that create their own pools retain two inner
+workers. The remaining integration and deferred numeric checks run one step at a time
+with `--jobs 1 --inner-jobs 2`, preserving PR #120’s response to the concurrent
+corpus-pool timeout in
+[run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739). The
+workflow tests derive selections through the CLI and require complete, disjoint coverage
+in both workflows. They also require full Git history wherever the slow retained-theorem
+review runs.
+
+These allocations preserve both integration fixes; their combined wall time needs fresh
+hosted validation.
+They do not establish a total process bound when tests spawn pools, or
+a speedup. Certificate pools still enforce actual CPU availability, the four-worker
+maximum, and the grid-memory budget.
 
 CPU observations are diagnostic only.
 Process counters can charge a child’s setup to the call that reaps it and omit
