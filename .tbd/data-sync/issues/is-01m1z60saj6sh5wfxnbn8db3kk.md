@@ -5,11 +5,11 @@ title: Merge latest upstream into the Stromquist n26 review branch
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-09-08T00:17:21.745Z
-updated_at: 2026-09-08T00:45:07.848Z
+updated_at: 2026-09-08T06:20:11.156Z
 ---
 Apply the requested tbd merge-upstream shortcut to codex/stromquist-n26-verification / PR120.
 
@@ -24,4 +24,4 @@ Apply the requested tbd merge-upstream shortcut to codex/stromquist-n26-verifica
 
 ## Notes
 
-Fetched and reviewed origin/main at 2869652618a09d183b8fba3b4237577b402d2f6b, 35 incoming commits. Merged tree has all four generated conflicts resolved by their renderers. User then requested broader consistency and current best-known n26 search; session100 owns this continuation, with three agents. No improved n26 candidate found; exact MinMax normalization and the wider DS7 lower-source correction are being integrated under think-4g6w. Remaining: combined review, validation, commit, push, final hosted CI, tracking sync.
+User explicitly authorized final review and merge of PR120 on 2026-09-08. Current main89bedd68 merges cleanly. Sessions105/106 and ideas129/130 avoid PR116/121 and connected constraints assignments. Review sweep found no GitHub formal, inline, PR-comment or open-issue findings. Remaining work: finish narrow print dependency review, passing prepush and complete hosted validation, push and merge exact reviewed head, then synchronize tracking.
