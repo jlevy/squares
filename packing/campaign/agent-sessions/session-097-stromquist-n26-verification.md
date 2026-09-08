@@ -322,7 +322,7 @@ session:
     Dated-source corrections are explicit additions; generated views are refreshed. The selected BC-264 research allocation is retained.'
   stop_reason: The requested source audits, exact n26 verification, bounded mathematical directions and reviewed integration are complete; future proof recovery,
     theorem adoption and target optimization have separate named dependencies.
-  next_action: Publish this review and verify hosted checks; retain BC-264 as the selected research slice. think-z0fi implements and controls the specified n26 family,
+  next_action: Publish this review and verify hosted checks; retain think-mq0d (BC-264) as the selected research slice. think-z0fi implements and controls the specified n26 family,
     think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
