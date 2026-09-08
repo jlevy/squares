@@ -500,10 +500,11 @@ raised its budget rather than splitting it.
 `screen` is a worker split ([D-484](defects.md)): the step is a process pool sized by
 `PACK_JOBS`, and beside the rest of the gate at `--inner-jobs 2` it gets two of the
 runner’s four. What the other two workers buy is not established.
-The three hosted readings of the split job are 944 s, 861 s and 949 s, none of them
-below the 858.62 s the step cost at two workers on a different runner, so the argument
-for the split is the pool it was not filling and the cap it kept failing against, not a
-measured speedup. macOS runs four portability checks.
+The four hosted readings of the split job are 944 s, 861 s, 949 s and 947 s, none of
+them below the 858.62 s the step cost at two workers on a different runner, so the
+argument for the split is the pool it was not filling and the cap it kept failing
+against, not a measured speedup.
+macOS runs four portability checks.
 Neither workflow invocation enables the golden rebuild or strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
 labelled or dispatched deferred checkpoint.

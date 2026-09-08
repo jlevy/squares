@@ -15908,14 +15908,15 @@ defects:
     Nothing is masked today -- the last full reading had no member under the floor and its
     cheapest at 2.07s -- but the two-sided rule that keeps the lanes honest is now measured
     under a shape that flatters it.
-    Measured after, screen: three hosted readings of the split job, all of them at four
-    workers -- 944s on run 34188003140, 861s on run 34189176373 and 949s on run 34190285360
-    -- a 1.102x spread with a geometric mean of 917.09s. That is 1.0190x the 900s cap the
-    step had been running under, so what the sample supports is that the step usually
-    exceeds that cap: two of the three readings are above it. It does not support a rate.
-    "At 900 it fails about half the time" was written here from n=2 and is withdrawn; n=3
-    cannot measure a failure percentage either, and the honest statement is a direction
-    with the sample size attached.
+    Measured after, screen: four hosted readings of the split job, all of them at four
+    workers -- 944s on run 34188003140, 861s on run 34189176373, 949s on run 34190285360,
+    and 947s on run 34214731500, the first post-merge `screen` job on main -- a 1.102x
+    spread with a geometric mean of 924.5s. That is 1.027x the 900s cap the step had been
+    running under, so what the sample supports is that the step usually exceeds that cap:
+    three of the four readings are above it. It does not support a rate. "At 900 it fails
+    about half the time" was written here from n=2 and is withdrawn; n=4 cannot measure a
+    failure percentage either, and the honest statement is a direction with the sample
+    size attached.
     That conclusion was fragile when it was written, and the record says so rather than
     presenting 917.09s as though it had always been solid. On the first two readings the
     geometric mean was 901.55s -- 1.5s above the cap, not the "within a second" this entry
@@ -15923,7 +15924,7 @@ defects:
     900s and inverted every claim resting on it. The third reading was 949s, so it did not.
     That is luck rather than design. The budget raise is load-bearing on the evidence as it
     now stands; what would earn the claim is more readings, not this paragraph.
-    1800s is 1.9627x the mean, which is inside the max_headroom 2.0 in
+    1800s is 1.947x the mean, which is inside the max_headroom 2.0 in
     devtools/gate-budgets.yaml. Read that as an analogy and nothing more: check_gate_budgets
     applies max_headroom to the tier entries in that file, a step's budget_seconds is not
     one of them, and budget_seconds appears nowhere in sqpack/gate_budgets.py or devtools/,
@@ -15944,6 +15945,18 @@ defects:
     lane's xdist workers beside another outer slot pushed no step past its cap on this run,
     and the thinnest margin left was the atlas rebuild's 246s. That is one run, which is
     where D-472 applies rather than a claim of comfort.
+    Measured after, the reconciled gate: main's first post-merge run on the merged structure
+    -- run 34214731500 at 33cd4760, with the slow lane, the screen and the exhaustive tier
+    each on their own runner and everything else in `validate` at PR #120's
+    `--jobs 1 --inner-jobs 2` -- passed every job. Its wall is set by `validate`, 1795.48s
+    by the gate's own clock, now the longest job ahead of the exhaustive job's 1691s. At
+    `--jobs 1` that wall is the sum of the steps rather than the longer of two partitions,
+    and the four largest -- the n=1..324 atlas rebuild 452.60s, negative controls 370.18s,
+    the n=40 bracket 220.27s and the quick lane 140.43s -- are 1183s of it. That is the
+    measured cost of the serialization PR #120 chose after run 34181619739 killed the screen
+    beside two pools of two: a gate that finishes over one that raced its caps. Recorded as
+    the first reading of that trade and not as a verdict on it. One run. Beside it the
+    slow lane alone measured 863s of job wall and the screen 947s of step, as above.
     Two limitations, stated plainly because the first draft of this entry guarded against
     the unflattering inference while keeping the flattering framing. First, the screen is
     not shown to be faster at four workers than at two. The 858.62s it cost at two workers
