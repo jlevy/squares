@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [webkit, firefox]
+        browser: [webkit, chromium]
     defaults:
       run:
         working-directory: packing
@@ -36,11 +36,11 @@ jobs:
 
       - run: uv run --frozen --group dev python -m devtools.render_explainer
 
-      - name: Fixture, swap against block
-        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --fixture
+      - name: Diagnostic, the real check flow
+        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --width 390 --repeat 6 --events
 
-      - name: Diagnostic, held loads
-        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --width 390 --repeat 6
+      - name: Print-layout readout probe
+        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --print-probe --repeat 6
 
       - name: Real check, three times
         continue-on-error: true
@@ -48,5 +48,14 @@ jobs:
           for i in 1 2 3; do
             echo "=== attempt $i ==="
             uv run --frozen --group dev python -m devtools.check_math_loading \
-              --browser ${{ matrix.browser }} --width 390 | tail -20 || echo "FAILED $i"
+              --browser ${{ matrix.browser }} --width 390 | tail -6 || echo "FAILED $i"
+          done
+
+      - name: Real print layout, three times
+        continue-on-error: true
+        run: |
+          for i in 1 2 3; do
+            echo "=== print attempt $i ==="
+            uv run --frozen --group dev python -m playwright install --only-shell chromium >/dev/null
+            uv run --frozen --group dev python -m devtools.check_print_layout || echo "FAILED $i"
           done

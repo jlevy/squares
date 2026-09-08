@@ -3,6 +3,8 @@
 Removed before the pull request. Prints one JSON object per repetition.
 """
 
+# ruff: noqa: E501, B023
+
 from __future__ import annotations
 
 import argparse
@@ -13,7 +15,13 @@ import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from devtools.check_math_loading import FIRST_PAINT_SCRIPT, HOLD_FONTS_SCRIPT, page_url
+from devtools.check_math_loading import (
+    EARLY_EVENTS,
+    FIRST_PAINT_SCRIPT,
+    HOLD_FONTS_SCRIPT,
+    OBSERVATION_MS,
+    page_url,
+)
 from devtools.render_explainer_pdf import PAGE, READY, SETTLED
 
 #: Timestamp every face transition and record what the first visible formula was.
@@ -157,7 +165,61 @@ def fixture(browser_name: str) -> dict[str, object]:
                 browser.close()
 
 
-def one(browser_name: str, width: int, *, hold: bool, index: int) -> dict[str, object]:
+PRINT_PROBE = r"""async () => {
+  const slider = document.getElementById('kslider-19-5');
+  slider.value = String(Math.min(118, Number(slider.max)));
+  slider.dispatchEvent(new Event('input', {bubbles: true}));
+  void document.documentElement.offsetHeight;
+  await new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done)));
+  await globalThis.squaresMath?.settled();
+  await document.fonts.ready;
+  await new Promise(done => requestAnimationFrame(done));
+  await globalThis.squaresMath?.settled();
+  const el = document.getElementById('kval-19-5');
+  return {
+    innerText: el.innerText, textLength: el.textContent.length,
+    children: [...el.children].map(child => ({
+      cls: child.className, pending: child.dataset.kpressMathPending ?? null,
+      visibility: getComputedStyle(child).visibility,
+      inline: child.style.getPropertyValue('visibility'),
+      text: child.textContent.slice(0, 40), katex: !!child.querySelector('.katex')
+    })),
+    rootPending: document.documentElement.dataset.kpressMathPending ?? null,
+    waitBad: (globalThis.kpressMathFaceWait || []).filter(e => e.outcome === 'error')
+      .map(e => `${e.request}: ${e.detail}`).slice(0, 5),
+  };
+}"""
+
+
+def print_probe(browser_name: str, repeat: int) -> list[dict[str, object]]:
+    """Replay check_print_layout's direction-118 readout in the browser the build uses."""
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    out: list[dict[str, object]] = []
+    with sync_playwright() as driver:
+        for index in range(repeat):
+            browser = getattr(driver, browser_name).launch()
+            try:
+                page = browser.new_page(viewport={"width": 1280, "height": 900})
+                errors: list[str] = []
+                page.on("pageerror", lambda error: errors.append(str(error)))
+                page.add_init_script(WATCH)
+                page.goto(page_url(PAGE), wait_until="domcontentloaded")
+                page.wait_for_selector(READY, timeout=60_000)
+                page.evaluate(SETTLED)
+                result = page.evaluate(PRINT_PROBE)
+                result["index"] = index
+                result["errors"] = errors
+                result["readyLog"] = page.evaluate("() => globalThis.__readyLog")
+                out.append(result)
+            finally:
+                browser.close()
+    return out
+
+
+def one(
+    browser_name: str, width: int, *, hold: bool, index: int, events: bool = False
+) -> dict[str, object]:
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     with sync_playwright() as driver:
@@ -171,7 +233,11 @@ def one(browser_name: str, width: int, *, hold: bool, index: int) -> dict[str, o
             page.add_init_script(WATCH)
             page.add_init_script(FIRST_NODE)
             page.goto(page_url(PAGE), wait_until="domcontentloaded")
-            page.wait_for_timeout(200)
+            if events:
+                page.evaluate(EARLY_EVENTS)
+                page.set_viewport_size({"width": max(1, width - 1), "height": 720})
+                page.set_viewport_size({"width": width, "height": 720})
+            page.wait_for_timeout(OBSERVATION_MS)
             if hold:
                 page.evaluate("globalThis.__mathLoadControl.release()")
             page.wait_for_selector(READY, timeout=60_000)
@@ -197,6 +263,7 @@ def one(browser_name: str, width: int, *, hold: bool, index: int) -> dict[str, o
                 "math_ready_at_paint": None if paint is None else paint["mathReady"],
                 "ready_log_at_paint": None if paint is None else paint["readyLog"],
                 "first_paint_bad": bad,
+                "fallback": page.evaluate("() => globalThis.__mathLoadingState.fallback"),
                 "probe": probe,
                 "page_errors": errors,
                 "host_after": host(),
@@ -212,13 +279,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--repeat", type=int, default=3)
     parser.add_argument("--no-hold", action="store_true")
     parser.add_argument("--fixture", action="store_true")
+    parser.add_argument("--events", action="store_true")
+    parser.add_argument("--print-probe", action="store_true")
     args = parser.parse_args(argv)
     print(json.dumps({"host_before": host()}))
     if args.fixture:
         print(json.dumps(fixture(args.browser), indent=1))
         return 0
+    if args.print_probe:
+        for row in print_probe(args.browser, args.repeat):
+            print(json.dumps(row))
+        return 0
     for index in range(args.repeat):
-        result = one(args.browser, args.width, hold=not args.no_hold, index=index)
+        result = one(
+            args.browser, args.width, hold=not args.no_hold, index=index, events=args.events
+        )
         print(json.dumps(result, indent=1))
         sys.stdout.flush()
     return 0
