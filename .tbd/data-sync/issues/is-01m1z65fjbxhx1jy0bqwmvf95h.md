@@ -5,7 +5,7 @@ title: Audit recent research token cost and mathematical return
 kind: task
 status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
   - is-01m1z6ft0grfy1tht4jxspdnd7
   - is-01m1z6ftdp1nss4rmxw8mvfvt3
 created_at: 2026-09-08T00:19:55.593Z
-updated_at: 2026-09-08T00:34:01.852Z
+updated_at: 2026-09-08T00:36:53.363Z
 closed_at: 2026-09-08T00:32:52.854Z
 close_reason: "W4 review complete: actual visible tool logs and committed clock mechanisms confirm scientific cutoff enforcement but no shared cumulative recovery cap in the inspected window. Review committed and pushed as2cb9c9ba on PR116; cost figures retain scope and lower-bound limitations. Follow-up proposals think-ycuo and think-6l2l remain open; no policy or scientific guard implementation performed. Focused evidence/prose review and formatting passed; publication checks are pending, not a merge-ready claim."
 resolution: null
@@ -24,4 +24,4 @@ W4 process-review, expanded by the user to inspect actual logs and explain wheth
 
 ## Notes
 
-Review and publication completed before the00:37:27 UTC diagnostic cap. Commit2cb9c9ba pushed to PR116 and PR description updated with findings and cost limitations; beads synced. Documentation-only push gate from packing/ remains running as native exec24256 (uv run --frozen --all-extras --group dev packing-validate --push --since91b77ab1 --jobs2 --inner-jobs1; flags were passed as separate tokens). Publication follow-up remains with existing think-m2lx; no need to reopen research or this completed diagnostic review. Current CI is not assumed passed. Proposed corrections think-ycuo and think-6l2l remain unimplemented.
+W4 review finished within00:22:27–00:37:27 UTC allowance. Review committed2cb9c9ba, required document-map registration394451a4, both pushed to PR116. Actual native24256 is FINISHED exit1:216.46s,558 tests passed,one deselected; sole failed step unmapped durable review. Fixed map and generated synopsis; focused documentation check passes625 docs and softschema repair-check valid/no repairs. No corrected full gate claimed. GitHub mergeability run34173607274 reports conflicts in SYNOPSIS.md,development.md,packing/campaign/ledger.md,packing/campaign/session-close-report.yaml,packing/devtools/gate-budgets.yaml. Existing think-m2lx owns integration follow-up; review does not expand into merging. Root PR validation paragraph updated with actual status. Proposed process corrections think-ycuo and think-6l2l remain open and unimplemented.
