@@ -106,6 +106,7 @@ def probe(**over: object) -> Probe:
     row: Probe = {
         "centred": [],
         "markers": [],
+        "bullets": [],
         "footnotes": [],
         "boxed": [],
         "overflow": [],
@@ -158,6 +159,23 @@ def test_a_marker_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(markers=[marker(markerCentre=100.0 + off)]))
 
 
+def test_centered_bullets_must_still_be_visible_squares() -> None:
+    """The glyph-centering override stretched drawn squares into centered vertical bars."""
+    square = {"path": "ul[0] > li[0]", "width": 3.3, "height": 3.3, "painted": True}
+    assert not findings(both(markers=[marker()], bullets=[square]))
+    for change in (
+        {"height": 25.0},
+        {"height": 0.0},
+        {"width": 0.0},
+        {"painted": False},
+    ):
+        found = findings(both(markers=[marker()], bullets=[{**square, **change}]))
+        assert len(found) == 2
+        assert found[0].startswith("screen: list bullet")
+        assert found[1].startswith("print: list bullet")
+        assert all("ul[0] > li[0]" in line for line in found)
+
+
 def probe_function(name: str) -> str:
     """One helper's shipped source, so what runs here is what runs in the browser."""
     source = re.search(rf"  function {name}\([^)]*\) \{{.*?\n  \}}", _PROBE, re.DOTALL)
@@ -182,6 +200,38 @@ def first_line_box(setup: str) -> dict[str, float]:
         + "\nconsole.log(JSON.stringify(firstLineBox(el)));\n"
     )
     return json.loads(run_node(script))
+
+
+def test_bullet_probe_measures_boxes_and_keeps_missing_markers() -> None:
+    """A missing pseudo-element must reach the guard; ordered and hidden items must not."""
+    script = dedent("""
+        const sig = () => 'ul[0] > li[0]';
+        const round = value => Math.round((value || 0) * 100) / 100;
+        const item = {parentElement: {tagName: 'UL'}, getClientRects: () => [{}]};
+        const square = {content: '\"\"', display: 'block', visibility: 'visible',
+          opacity: '1', backgroundColor: 'rgb(10, 10, 10)', width: '3.3px', height: '3.3px'};
+    """) + probe_function("bulletBox")
+    script += dedent("""
+        const variants = [square, {...square, height: '25px'},
+          {...square, content: 'none', width: 'auto', height: 'auto'},
+          {...square, display: 'none'}, {...square, backgroundColor: 'rgba(0, 0, 0, 0)'}];
+        console.log(JSON.stringify({
+          boxes: variants.map(before => bulletBox(item, before)),
+          ordered: bulletBox({...item, parentElement: {tagName: 'OL'}}, square),
+          hidden: bulletBox({...item, getClientRects: () => []}, square),
+        }));
+    """)
+    result = json.loads(run_node(script))
+    assert result["ordered"] is None
+    assert result["hidden"] is None
+    square, *broken = result["boxes"]
+    assert square == {"path": "ul[0] > li[0]", "width": 3.3, "height": 3.3, "painted": True}
+    assert not findings(both(bullets=[square]))
+    for bullet in broken:
+        assert bullet is not None
+        found = findings(both(bullets=[bullet]))
+        assert len(found) == 2
+        assert all("list bullet" in line for line in found)
 
 
 def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() -> None:
