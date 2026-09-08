@@ -459,33 +459,16 @@ body {
   padding-block-start: 0;
 }
 
-/* The list bullet, centred on the line it marks rather than offset from a type size.
+/* Centre kpress's painted square on the first line, preserving its 0.226em sides.
+   Half the line height minus half the square's height gives its top offset. Setting
+   the square itself to 1lh stretches it into a vertical bar.
 
-   kpress draws it as an absolutely positioned `::before` -- `list-style-type: none`,
-   `content: "\25AA\FE0E"` -- and places it with `top: calc(var(--kpress-font-size-base)
-   * 0.1)`. That constant is tuned for one type size, and the print block sets a
-   different one, so in the PDF the bullet sat about 2.2px low, reading as sitting on
-   the baseline instead of on the middle of the line. It was 2.5px low on screen too.
-
-   The fix is to stop expressing the position as a fraction of a font size at all: give
-   the marker a box exactly one line box tall, pin it to the top of the first line, and
-   centre the glyph inside it. Then it is right at any type size and any leading.
-
-   `line-height: 1lh` on the `li` is what makes `1lh` on the marker mean the line the
-   marker belongs to. Without it the marker's own smaller `font-size` rescales the
-   inherited unitless line-height and its box comes out short. On the `line-height`
-   property `lh` resolves against the parent's computed line-height rather than the
-   element's, which is what avoids the circularity; here the two differ by 0.02px.
-
-   Measured, marker centre against the first line box's centre, before and after:
-   screen +0.35px to -0.09px, print -1.88px to -0.01px. `check_print_layout` keeps it
-   there, in both media. */
+   The explicit line height keeps the marker's smaller font size from rescaling the
+   inherited leading. `check_print_layout` checks its position and square shape on
+   screen and in print. */
 .cert-page.kpress-prose ul > li { line-height: 1lh; }
 .cert-page.kpress-prose ul > li::before {
-  align-items: center;
-  display: flex;
-  height: 1lh;
-  top: 0;
+  top: calc(0.5lh - 0.113em);
 }
 
 .line-fig { padding: 1.3rem 1.1rem 0.4rem; }
