@@ -194,7 +194,8 @@ FONT_LOAD_OBSERVER = r"""load => {
   };
 }"""
 
-FIRST_PAINT_SCRIPT = r"""
+FIRST_PAINT_SCRIPT = (
+    r"""
 (() => {
   globalThis.__mathFirstPaint = null;
   const state = globalThis.__mathLoadingState = {
@@ -250,8 +251,9 @@ FIRST_PAINT_SCRIPT = r"""
   };
   requestAnimationFrame(sample);
 })();
-""".replace("__EXPOSED__", EXPOSED).replace("__REQUIRED_FONTS__", REQUIRED_FONTS).replace(
-    "__FONT_LOAD_OBSERVER__", FONT_LOAD_OBSERVER
+""".replace("__EXPOSED__", EXPOSED)
+    .replace("__REQUIRED_FONTS__", REQUIRED_FONTS)
+    .replace("__FONT_LOAD_OBSERVER__", FONT_LOAD_OBSERVER)
 )
 
 #: Gate successful loads only when CSS actually matches a declared face. Empty

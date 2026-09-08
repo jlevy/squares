@@ -175,9 +175,7 @@ def test_numbered_markers_do_not_have_to_be_square() -> None:
 
 @pytest.mark.parametrize("base_size", [16.0, 18.0])
 def test_painted_markers_use_the_requested_optical_offset(base_size: float) -> None:
-    adjusted = marker(
-        markerCentre=100 + base_size * 0.04, baseFontSize=base_size, painted=True
-    )
+    adjusted = marker(markerCentre=100 + base_size * 0.04, baseFontSize=base_size, painted=True)
     assert not findings(both(markers=[adjusted]))
     for displacement in (-1.01, 1.01):
         wrong = {**adjusted, "markerCentre": adjusted["markerCentre"] + displacement}

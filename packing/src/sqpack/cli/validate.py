@@ -3787,7 +3787,16 @@ def _push_test_step(base: str) -> Step:
     def action(context: Context) -> str:
         return _run(
             context,
-            (sys.executable, "-m", "devtools.reachable_tests", "--run", "--since", base),
+            (
+                sys.executable,
+                "-m",
+                "devtools.reachable_tests",
+                "--run",
+                "--since",
+                base,
+                "--workers",
+                str(_pytest_workers(context.jobs)),
+            ),
         )
 
     return Step(

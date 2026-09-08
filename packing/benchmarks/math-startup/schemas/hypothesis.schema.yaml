@@ -20,6 +20,8 @@ properties:
   maximum_math_box_displacement_px: {type: number, minimum: 0}
   minimum_pairs: {type: integer, minimum: 12}
   maximum_ci95_change_pct: {type: number, exclusiveMaximum: 0}
+  required_mode: {enum: [full, parameters]}
+  maximum_sampler_fraction: {type: number, exclusiveMinimum: 0, maximum: 1}
 allOf:
   - if:
       properties: {criterion: {const: geometry}}

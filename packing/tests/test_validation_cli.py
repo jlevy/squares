@@ -1783,6 +1783,57 @@ def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     )
 
 
+@pytest.mark.parametrize("summary", ["everything", "narrow 7"])
+def test_push_tests_forward_the_shared_worker_allocation(
+    monkeypatch: pytest.MonkeyPatch, summary: str
+) -> None:
+    """The reachable runner must not become a serial copy of the quick and slow lanes."""
+
+    def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del args, kwargs
+        return subprocess.CompletedProcess(
+            args=("reachable-tests",), returncode=0, stdout=f"{summary}\n", stderr=""
+        )
+
+    commands: list[tuple[str, ...]] = []
+    sized_for: list[int] = []
+
+    def capture(context: validate.Context, command: tuple[str, ...]) -> str:
+        del context
+        commands.append(command)
+        return "selected tests passed"
+
+    def four_workers(jobs: int) -> int:
+        sized_for.append(jobs)
+        return 4
+
+    monkeypatch.setattr(validate.subprocess, "run", probe)
+    monkeypatch.setattr(validate, "_run", capture)
+    monkeypatch.setattr(validate, "_pytest_workers", four_workers)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=2,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+
+    assert validate._push_test_step("origin/main").action(context) == "selected tests passed"
+    assert sized_for == [2]
+    assert commands == [
+        (
+            sys.executable,
+            "-m",
+            "devtools.reachable_tests",
+            "--run",
+            "--since",
+            "origin/main",
+            "--workers",
+            "4",
+        )
+    ]
+
+
 def test_the_edit_tier_cannot_under_run() -> None:
     """Tiers must nest, or a narrower tier could contain a step a wider one lacks.
 

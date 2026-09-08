@@ -73,6 +73,39 @@ def test_complete_first_frame_is_valid_without_a_movement_or_latency_verdict() -
     assert startup_findings(report, width=1280, height=720) == []
 
 
+def test_parameter_mode_requires_math_but_explicitly_omits_all_page_geometry() -> None:
+    report = clean_report()
+    report["mode"] = "parameters"
+    report["anchors"] = []
+    report["counters"]["anchor_samples"] = 0
+    report["metrics"].pop("first_prose_math_ms")
+    report["metrics"].pop("first_caption_math_ms")
+    assert startup_findings(report, width=1280, height=720) == []
+    report["targets"][0]["exposed"] = False
+    assert any(
+        "incorrect parameter math: target-0" in finding
+        for finding in startup_findings(report, width=1280, height=720)
+    )
+
+
+@pytest.mark.parametrize("mode", ["full", "parameters"])
+def test_a_late_additional_target_invalidates_an_otherwise_complete_run(mode: str) -> None:
+    report = clean_report()
+    report["mode"] = mode
+    report["targets"].append({"id": "late-target", "correct": True, "exposed": True})
+    assert "expected 14 active parameter targets, found 15" in startup_findings(
+        report, width=1280, height=720
+    )
+
+
+def test_unknown_measurement_mode_cannot_silently_skip_coverage() -> None:
+    report = clean_report()
+    report["mode"] = "unknown"
+    assert "unknown startup measurement mode: unknown" in startup_findings(
+        report, width=1280, height=720
+    )
+
+
 def test_initially_hidden_figures_remain_measurable_but_final_selection_is_required() -> None:
     report = clean_report()
     report["snapshots"][0].update(active_certificates=[], math_ready=False)
@@ -197,6 +230,22 @@ def test_matched_runs_are_sequential_and_reverse_order_without_discarding_failur
     assert [run["pair"] for run in report["runs"]] == [1, 1, 2, 2, 3, 3]
     assert report["findings"] == ["candidate pair 2: known fault"]
     assert report["summary"]["candidate"]["parameters_ready_ms"]["count"] == 3
+
+
+def test_parameter_mode_is_forwarded_and_retained_in_paired_reports(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    modes: list[object] = []
+
+    def measure(_path: Path | str, **options: object) -> JsonRecord:
+        modes.append(options["mode"])
+        return {"mode": options["mode"], "metrics": {}, "findings": []}
+
+    monkeypatch.setattr(check_math_startup, "measure_startup", measure)
+    report = run_measurements({"page": "/tmp/page.html"}, runs=2, mode="parameters")
+    assert modes == ["parameters", "parameters"]
+    assert report["mode"] == "parameters"
+    assert all(run["mode"] == "parameters" for run in report["runs"])
 
 
 def test_pass_through_instrumentation_keeps_native_promises_and_return_values() -> None:

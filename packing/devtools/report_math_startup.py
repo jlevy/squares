@@ -40,6 +40,8 @@ def paired_result(runs: list[dict[str, Any]], hypothesis: dict[str, Any]) -> dic
     metric = hypothesis["metric"]
     regimes: set[str] = set()
     for run in runs:
+        if run.get("mode", "full") != hypothesis.get("required_mode", "full"):
+            raise ValueError("measurement mode differs from the registered mode")
         label, pair = run["label"], run["pair"]
         if label not in {"control", "candidate"} or label in pairs[pair]:
             raise ValueError("unknown or duplicate pair arm")
@@ -74,6 +76,21 @@ def paired_result(runs: list[dict[str, Any]], hypothesis: dict[str, Any]) -> dic
     control = [pair["control"]["metrics"][metric] for pair in pairs.values()]
     candidate = [pair["candidate"]["metrics"][metric] for pair in pairs.values()]
     changes = [100 * (new - old) / old for old, new in zip(control, candidate, strict=True)]
+    sampler: dict[str, list[float]] = {}
+    if "maximum_sampler_fraction" in hypothesis:
+        for label, values in (("control", control), ("candidate", candidate)):
+            costs = [pair[label]["metrics"].get("sampler_total_ms") for pair in pairs.values()]
+            if any(
+                not isinstance(cost, (int, float)) or not math.isfinite(cost) or cost < 0
+                for cost in costs
+            ):
+                raise ValueError("missing or invalid sampler cost")
+            sampler[label] = costs
+            if (
+                statistics.median(costs) / statistics.median(values)
+                > hypothesis["maximum_sampler_fraction"]
+            ):
+                raise ValueError(f"{label}: sampler overhead exceeds the registered fraction")
     lower, upper = interval(changes)
     return {
         "pairs": len(pairs),
@@ -82,6 +99,7 @@ def paired_result(runs: list[dict[str, Any]], hypothesis: dict[str, Any]) -> dic
         "change_pct": statistics.median(changes),
         "ci95": (lower, upper),
         "passes": upper <= hypothesis["maximum_ci95_change_pct"],
+        "sampler": sampler,
     }
 
 
@@ -223,7 +241,14 @@ def render(root: Path = CAMPAIGN) -> str:
             if experiment["correctness"] != "passed":
                 verdict = f"correctness {experiment['correctness']}"
         else:
-            hypothesis = hypotheses["H-002"]
+            latency = [
+                hypotheses[key]
+                for key in experiment["hypotheses"]
+                if hypotheses[key]["criterion"] == "paired_latency"
+            ]
+            if len(latency) != 1:
+                raise ValueError("comparison must name exactly one latency hypothesis")
+            hypothesis = latency[0]
             if set(by_width) != set(hypothesis["widths"]):
                 problems.append("comparison does not cover every registered width")
             for width, runs in sorted(by_width.items()):
@@ -239,6 +264,12 @@ def render(root: Path = CAMPAIGN) -> str:
                     f"{spread(result['candidate'])}; paired change {result['change_pct']:.1f}% "
                     f"(95% interval {lo:.1f}% to {hi:.1f}%; {result['pairs']} pairs)."
                 )
+                if result["sampler"]:
+                    lines.append(
+                        "  Recorded sampler work: control "
+                        f"{spread(result['sampler']['control'])}, "
+                        f"candidate {spread(result['sampler']['candidate'])}."
+                    )
             verdict = "accepted" if passes and all(passes) else "rejected"
             if experiment["correctness"] != "passed":
                 verdict = f"correctness {experiment['correctness']}"

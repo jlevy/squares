@@ -54,6 +54,22 @@ def test_no_change_cannot_pass_the_registered_threshold() -> None:
     assert not paired_result(runs, RULE)["passes"]
 
 
+def test_parameter_confirmation_refuses_wrong_mode_and_excessive_observer_cost() -> None:
+    rule = {**RULE, "required_mode": "parameters", "maximum_sampler_fraction": 0.1}
+    runs = samples()
+    with pytest.raises(ValueError, match="mode"):
+        paired_result(runs, rule)
+    for run in runs:
+        run["mode"] = "parameters"
+        run["metrics"]["sampler_total_ms"] = 1
+    assert paired_result(runs, rule)["passes"]
+    for run in runs:
+        if run["label"] == "candidate":
+            run["metrics"]["sampler_total_ms"] = run["metrics"]["parameters_ready_ms"] * 0.2
+    with pytest.raises(ValueError, match="sampler overhead"):
+        paired_result(runs, rule)
+
+
 @pytest.mark.parametrize("defect", ["missing", "duplicate", "regime", "zero", "invalid"])
 def test_invalid_measurements_are_not_dropped(defect: str) -> None:
     runs = samples()

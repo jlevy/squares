@@ -20,9 +20,10 @@ The twelve interleaved pairs at each width use the frozen deployed `33cd4760` co
 and prepared `dc2eb681` candidate with KPress `345b9eb`. All delegate browsers and heavy
 checks were idle throughout both windows.
 Both complete reports are retained, including all observations and source/process
-provenance.
-No invalid observations were removed and no pairs were added after looking at
-the result. The independent correctness matrix passed before timing.
+provenance. A later process inspection found unrelated CPU-heavy work on the shared Mac.
+Delegate idleness did not establish the intended isolated host regime.
+No invalid observations were removed and no pairs were added after looking at the
+result. The independent correctness matrix passed before timing.
 
 The sampling overhead is material and differs between arms: full-page anchor discovery
 and range measurements do more work on the prepared DOM. Some recorded text movement

@@ -73,7 +73,7 @@ def test_every_browser_checks_the_same_prepared_publication() -> None:
     ]
     assert len(uploads) == 1
     assert uploads[0]["path"] == "packing/site"
-    for name in ("build", "font-loading"):
+    for name in ("build", "font-loading", "startup-timing"):
         needs = jobs[name]["needs"]
         assert producer in ([needs] if isinstance(needs, str) else needs)
         downloads = [
@@ -123,3 +123,84 @@ def test_prepared_geometry_checks_cover_each_browser_and_their_controls() -> Non
             )
             assert any("--print" in command for command in commands)
             assert any("--alternate-certificate" in command for command in commands)
+
+
+def test_dispatch_timing_uses_frozen_pairs_and_retains_failed_measurements() -> None:
+    """Timing must use the published artifact on a separate runner, with no speed gate."""
+    workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))
+    jobs = workflow["jobs"]
+    job = jobs["startup-timing"]
+    assert job["if"] == "github.event_name == 'workflow_dispatch'"
+    assert job["needs"] == "prepare"
+    assert job["runs-on"] == jobs["build"]["runs-on"]
+    assert "strategy" not in job, "both widths must run sequentially on one fresh runner"
+    assert not job.get("continue-on-error")
+    assert job["defaults"]["run"]["working-directory"] == "packing"
+    steps = job["steps"]
+    for step in steps:
+        if "uses" in step:
+            assert re.fullmatch(r"[\w/-]+@[0-9a-f]{40}", step["uses"])
+    setups = [step for step in steps if step.get("uses", "").startswith("astral-sh/setup-uv@")]
+    assert len(setups) == 1
+    reference = next(
+        step
+        for step in jobs["prepare"]["steps"]
+        if step.get("uses", "").startswith("astral-sh/setup-uv@")
+    )
+    assert setups[0]["uses"] == reference["uses"]
+    assert setups[0]["with"] == reference["with"]
+
+    module = "devtools.check_math_startup"
+
+    def commands(job_name: str) -> list[tuple[dict[str, object], list[str]]]:
+        return [
+            (step, shlex.split(line))
+            for step in jobs[job_name]["steps"]
+            for line in step.get("run", "").splitlines()
+            if f"python -m {module} " in line
+        ]
+
+    def option(command: list[str], flag: str) -> str | None:
+        return command[command.index(flag) + 1] if flag in command else None
+
+    timing = commands("startup-timing")
+    assert timing
+    assert all(option(command, "--mode") == "parameters" for _, command in timing)
+    controls = [(step, command) for step, command in timing if "--self-test" in command]
+    assert len(controls) == 1
+    assert controls[0][0]["id"] == "timing-controls"
+    assert option(controls[0][1], "--output") == "/tmp/math-startup-timing/controls.json"
+    assert any(
+        "--self-test" in command and option(command, "--mode") == "parameters"
+        for _, command in commands("build")
+    ), "the low-overhead observer's controls must also run on ordinary pull requests"
+
+    pairs = [(step, command) for step, command in timing if "--self-test" not in command]
+    assert [option(command, "--width") for _, command in pairs] == ["1280", "390"]
+    for step, command in pairs:
+        assert command[:6] == ["uv", "run", "--frozen", "--group", "dev", "python"]
+        assert option(command, "--runs") == "12"
+        assert option(command, "--browser") == "chromium"
+        assert option(command, "--candidate") == "site/index.html"
+        assert option(command, "--control") == "/tmp/math-startup-timing/control-33cd4760.html"
+        assert option(command, "--output") == (
+            f"/tmp/math-startup-timing/startup-{option(command, '--width')}.json"
+        )
+        assert not step.get("continue-on-error"), "invalid measurements must fail the job"
+    assert (
+        pairs[1][0]["if"] == "${{ !cancelled() && steps.timing-controls.outcome == 'success' }}"
+    )
+    shell = "\n".join(step.get("run", "") for step in steps)
+    assert "python -m playwright install --only-shell chromium" in shell
+    assert (
+        "gzip --decompress --stdout benchmarks/math-startup/fixtures/control-33cd4760.html.gz"
+        " > /tmp/math-startup-timing/control-33cd4760.html"
+    ) in shell
+    assert "cp site/index.html /tmp/math-startup-timing/candidate.html" in shell
+    uploads = [
+        step for step in steps if step.get("uses", "").startswith("actions/upload-artifact@")
+    ]
+    assert len(uploads) == 1
+    assert uploads[0]["if"] == "always()"
+    assert uploads[0]["with"]["path"] == "/tmp/math-startup-timing"
+    assert uploads[0]["with"]["if-no-files-found"] == "error"

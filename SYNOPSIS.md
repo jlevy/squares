@@ -205,6 +205,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
+| [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
+| [Math Startup Ledger](packing/benchmarks/math-startup/ledger.md) | generated status view | generated | generated | — |
 | [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
 | [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | research synthesis | supporting | maintained | — |
@@ -405,6 +408,9 @@ case or experiment separately.
 | [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
 | [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | [Change-Scoped Exhaustive Validation](docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md) | dated review record | record | retained | — |
+| `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
+| `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
+| `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |

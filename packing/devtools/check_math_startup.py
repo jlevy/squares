@@ -13,6 +13,15 @@ follows persistent adjacent text characters, including their positions relative 
 the containing block. Text-range bottoms are baseline proxies, not font baselines.
 Layout and latency remain descriptive: this tool does not invent a performance
 acceptance threshold. Missing math, anchors, or instrumentation invalidates a run.
+
+The explicit ``parameters`` mode measures only the fourteen parameter targets. It
+omits all-page text discovery and geometry, retaining the same source and exposure
+checks once each target can be visible, and stops frame sampling when all fourteen
+are readable. This records an animation-frame paint opportunity, not a compositor
+presentation or first-contentful-paint timestamp. Final settlement rediscovers and
+validates every target; ``finish_validation_ms`` records that later work separately
+from ``sampler_total_ms``. Its timings form a separate instrument regime; compare
+control and candidate within that mode, never across modes.
 """
 
 from __future__ import annotations
@@ -35,6 +44,7 @@ from devtools.check_math_loading import EXPOSED, page_url
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
 type BrowserName = Literal["chromium", "firefox", "webkit"]
+type MeasurementMode = Literal["full", "parameters"]
 type JsonRecord = dict[str, Any]
 
 EXPECTED_PARAMETERS = 14
@@ -42,10 +52,12 @@ EXPECTED_PARAMETERS = 14
 #: Installed before parsing. Wrappers observe the original calls and return their
 #: original promises, preserving resolution order and rejection behavior. No waits,
 #: styles, input events, or rendering mutations are introduced by the instrument.
-STARTUP_SCRIPT = r"""
+_STARTUP_SCRIPT = r"""
 (() => {
+  const mode = '__MODE__', full = mode === 'full';
   const clock = () => performance.now();
   const state = globalThis.__mathStartup = {
+    mode,
     metrics: {instrumentation_installed_ms: clock()},
     counters: {frames: 0, font_hooks: 0, katex_hooks: 0, runtime_hooks: 0,
       katex_calls: 0, ready_calls: 0, render_calls: 0, hydrate_calls: 0,
@@ -189,6 +201,13 @@ STARTUP_SCRIPT = r"""
   const visibleMath = node => {
     const maths = [...node.querySelectorAll('.katex')];
     return maths.length > 0 && !node.querySelector('.katex-error') && maths.every(math => {
+      // The publication's pending rule necessarily hides these targets. Avoid
+      // forcing prepared-page layout merely to measure an invisible formula.
+      // Eligible targets still undergo the same actual exposure checks below.
+      if (!full && document.documentElement.hasAttribute('data-kpress-math-pending')) {
+        const target = math.closest('.tex,.tex-d,[data-kpress-math-prepared="true"]');
+        if (target && target.dataset.squaresMathReady !== 'true') return false;
+      }
       const html = math.querySelector('.katex-html');
       return html && html.textContent.trim() && exposed(html) && annotation(math).every(Boolean)
         && annotation(math).length > 0;
@@ -207,7 +226,8 @@ STARTUP_SCRIPT = r"""
       math_ready: document.documentElement.classList.contains('math-ready'),
       certificate_elements: document.querySelectorAll('.cert-figure').length,
       active_certificates: [...new Set([...document.querySelectorAll('.cert-figure')]
-        .filter(active).map(node => node.dataset.cert))]};
+        .filter(node => full ? active(node) : !node.closest('[hidden]'))
+        .map(node => node.dataset.cert))]};
   };
   let prose = [], captions = [], parameters = [];
   const targetTimes = new WeakMap(), anchorNodes = new WeakMap(), tracked = [];
@@ -281,14 +301,18 @@ STARTUP_SCRIPT = r"""
     }
   }
   function discover() {
-    prose = [...document.querySelectorAll('.kpress-prose p')].filter(node =>
-      !node.closest('.cert-figure,figcaption,.kpress-figcaption') && active(node));
-    captions = [...document.querySelectorAll('.kpress-figcaption,figcaption')].filter(active);
-    const figure = [...document.querySelectorAll('figure[data-figure="6"]')].find(active);
+    if (full) {
+      prose = [...document.querySelectorAll('.kpress-prose p')].filter(node =>
+        !node.closest('.cert-figure,figcaption,.kpress-figcaption') && active(node));
+      captions = [...document.querySelectorAll('.kpress-figcaption,figcaption')].filter(active);
+    }
+    const figure = [...document.querySelectorAll('figure[data-figure="6"]')]
+      .find(node => full ? active(node) : !node.closest('[hidden]'));
     // Keep labels before readouts so the eight published label contracts are stable.
     parameters = figure ? [...figure.querySelectorAll('.panel .ctl .caps, .panel .kv dt'),
       ...figure.querySelectorAll('.panel .kv dd')] : [];
-    discoverAnchors(); dirty = false;
+    if (full) discoverAnchors();
+    dirty = false;
   }
   function sampleAnchors(at) {
     const blocks = new Map();
@@ -325,8 +349,8 @@ STARTUP_SCRIPT = r"""
     if (state.stop) return;
     const start = clock(); state.counters.frames++; first('first_frame_ms', start);
     pending(); if (dirty) discover();
-    sampleAnchors(start);
-    if (state.anchors.some(anchor => anchor.samples)) {
+    if (full) sampleAnchors(start);
+    if (full && state.anchors.some(anchor => anchor.samples)) {
       first('first_anchor_frame_ms', start);
       const current = snapshot(), previous = state.snapshots.at(-1);
       const changed = !previous || Object.keys(current).some(key => key !== 'at_ms'
@@ -345,6 +369,11 @@ STARTUP_SCRIPT = r"""
       return correct;
     });
     if (ready.some(Boolean)) first('first_parameter_math_ms', start);
+    // Scroll offsets can flush layout too. In parameter mode take the first
+    // state snapshot only after a target already required an exposure check.
+    if (!full && ready.some(Boolean) && !state.snapshots.length) {
+      state.snapshots.push(snapshot());
+    }
     if (parameters.length === 14 && ready.every(Boolean)) first('parameters_ready_ms', start);
     else if (state.anchors.some(anchor => anchor.samples)) {
       state.pre_reveal_frame_observed = true;
@@ -352,14 +381,18 @@ STARTUP_SCRIPT = r"""
     const duration = clock() - start;
     metrics.sampler_total_ms = (metrics.sampler_total_ms || 0) + duration;
     metrics.sampler_max_ms = Math.max(metrics.sampler_max_ms || 0, duration);
-    requestAnimationFrame(sample);
+    if (full || metrics.parameters_ready_ms == null) requestAnimationFrame(sample);
   }
   requestAnimationFrame(sample);
   state.finish = () => {
+    const validationStart = clock();
     drainObservers.forEach(drain => drain());
     state.stop = true; pending(); mutations.disconnect();
     observers.forEach(observer => observer.disconnect());
     originals.forEach(restore => restore());
+    // Parameter-mode sampling stopped at first readiness. Re-read final coverage
+    // so a later addition, removal, or reclassification cannot evade validation.
+    discover();
     state.snapshots.push(snapshot());
     first('observation_end_ms');
     state.targets = parameters.map((node, index) => ({
@@ -409,38 +442,49 @@ STARTUP_SCRIPT = r"""
     metrics.anchor_max_start_x_px = anchorMax('max_start_x_px');
     metrics.anchor_max_start_y_px = anchorMax('max_start_y_px');
     metrics.anchor_max_bottom_px = anchorMax('max_bottom_px');
+    if (!full) for (const name of ['anchor_max_displacement_px',
+      'anchor_max_local_displacement_px', 'anchor_max_start_x_px',
+      'anchor_max_start_y_px', 'anchor_max_bottom_px']) metrics[name] = null;
     state.source = {url: location.href, title: document.title,
       revision_url: document.querySelector(
         'a[href*="github.com/jlevy/squares/blob/"]')?.href || null};
+    metrics.finish_validation_ms = clock() - validationStart;
     return {...state, finish: undefined};
   };
 })();
 """.replace("__EXPOSED__", EXPOSED)
 
+STARTUP_SCRIPT = _STARTUP_SCRIPT.replace("__MODE__", "full")
+
 
 def startup_findings(report: JsonRecord, *, width: int, height: int) -> list[str]:
     """Reject incomplete measurements; speed and movement need a separate criterion."""
     findings: list[str] = []
+    mode = report.get("mode", "full")
+    if mode not in ("full", "parameters"):
+        findings.append(f"unknown startup measurement mode: {mode}")
+    full = mode != "parameters"
     counters = report.get("counters", {})
     for name, minimum in {
         "frames": 1,
         "font_hooks": 2,
         "katex_hooks": 1,
         "runtime_hooks": 2,
-        "anchor_samples": 1,
+        **({"anchor_samples": 1} if full else {}),
     }.items():
         if counters.get(name, 0) < minimum:
             findings.append(f"missing instrumentation: {name}")
     if counters.get("render_calls", 0) + counters.get("hydrate_calls", 0) == 0:
         findings.append("no observed math rendering or hydration activity")
     metrics = report.get("metrics", {})
-    for name in (
+    milestones = [
         "instrumentation_installed_ms",
-        "first_prose_math_ms",
-        "first_caption_math_ms",
         "parameters_ready_ms",
         "math_ready_marker_ms",
-    ):
+    ]
+    if full:
+        milestones.extend(("first_prose_math_ms", "first_caption_math_ms"))
+    for name in milestones:
         value = metrics.get(name)
         if not isinstance(value, (int, float)) or not math.isfinite(value):
             findings.append(f"missing startup milestone: {name}")
@@ -457,7 +501,7 @@ def startup_findings(report: JsonRecord, *, width: int, height: int) -> list[str
     anchors = report.get("anchors", [])
     findings.extend(
         f"no readable neighboring text anchors: {category}"
-        for category in ("prose", "caption", "parameter")
+        for category in (("prose", "caption", "parameter") if full else ())
         if not any(
             anchor.get("category") == category and anchor.get("samples", 0)
             for anchor in anchors
@@ -506,6 +550,7 @@ def measure_startup(
     width: int = 1280,
     height: int = 720,
     browser_name: BrowserName = "chromium",
+    mode: MeasurementMode = "full",
     timeout_ms: int = 60_000,
 ) -> JsonRecord:
     """Observe one untouched navigation in a fresh browser process and context."""
@@ -520,7 +565,7 @@ def measure_startup(
             page.set_default_timeout(timeout_ms)
             errors: list[str] = []
             page.on("pageerror", lambda error: errors.append(str(error)))
-            page.add_init_script(STARTUP_SCRIPT)
+            page.add_init_script(_STARTUP_SCRIPT.replace("__MODE__", mode))
             timeout: str | None = None
             try:
                 page.goto(page_url(path), wait_until="domcontentloaded")
@@ -615,6 +660,7 @@ def run_measurements(
     width: int = 1280,
     height: int = 720,
     browser_name: BrowserName = "chromium",
+    mode: MeasurementMode = "full",
 ) -> JsonRecord:
     """Measure matched pairs sequentially, reversing their order on alternate pairs."""
     observations: list[JsonRecord] = []
@@ -624,12 +670,13 @@ def run_measurements(
             order.reverse()
         for label, path in order:
             report = measure_startup(
-                path, width=width, height=height, browser_name=browser_name
+                path, width=width, height=height, browser_name=browser_name, mode=mode
             )
             observations.append({"pair": pair + 1, "label": label, **report})
     return {
         "schema_version": 1,
         "measurement": "natural-math-startup",
+        "mode": mode,
         "instrument": instrument_provenance(observations),
         "performance_verdict": "not evaluated; acceptance criterion belongs to the experiment",
         "runs": observations,
@@ -706,7 +753,10 @@ globalThis.kpressMathText = {
   complete() { delete document.documentElement.dataset.kpressMathPending; }
 };
 const ready = mode === 'no-warmup' ? gate : kpressMathText.ready();
-globalThis.squaresMath = {ready, settled: () => Promise.resolve()};
+let releaseLateTarget;
+const lateTarget = mode === 'late-target'
+  ? new Promise(resolve => { releaseLateTarget = resolve; }) : Promise.resolve();
+globalThis.squaresMath = {ready, settled: () => lateTarget};
 document.fonts.load('16px serif');
 ready.then(async () => {
   for (const node of document.querySelectorAll('.tex')) {
@@ -719,53 +769,87 @@ ready.then(async () => {
   }
   if (mode === 'width-change') document.querySelector('.shift .tex').style.width = '180px';
   kpressMathText.complete(); document.documentElement.classList.add('math-ready');
+  if (mode === 'late-target') {
+    const addAfterFirstReadiness = () => {
+      if (globalThis.__mathStartup.metrics.parameters_ready_ms == null) {
+        requestAnimationFrame(addAfterFirstReadiness); return;
+      }
+      const extra = document.createElement('dd'); extra.id = 'late-target';
+      document.querySelector('.panel .kv').append(extra);
+      kpressMathText.render('0', extra).then(releaseLateTarget);
+    };
+    requestAnimationFrame(addAfterFirstReadiness);
+  }
 });
 </script></body></html>""".replace("__MODE__", mode)
 
 
-def self_test(*, browser_name: BrowserName = "chromium") -> JsonRecord:
+def self_test(
+    *, browser_name: BrowserName = "chromium", mode: MeasurementMode = "full"
+) -> JsonRecord:
     """Run real positive and negative pages; a fast pytest run does not need a browser."""
     observations: JsonRecord = {}
     findings: list[str] = []
     with TemporaryDirectory(prefix="math-startup-controls-") as directory:
-        for mode in (
+        controls = (
             "control",
             "no-warmup",
             "delayed",
-            "width-change",
             "missing-math",
-            "missing-anchors",
             "missing-counters",
-        ):
-            path = Path(directory) / f"{mode}.html"
-            path.write_text(browser_fixture(mode))
-            observations[mode] = measure_startup(
-                path, browser_name=browser_name, timeout_ms=5_000
+            "late-target",
+            *(("width-change", "missing-anchors") if mode == "full" else ()),
+        )
+        for control in controls:
+            path = Path(directory) / f"{control}.html"
+            path.write_text(browser_fixture(control))
+            observations[control] = measure_startup(
+                path, browser_name=browser_name, mode=mode, timeout_ms=5_000
             )
-    for mode in ("control", "no-warmup", "delayed", "width-change"):
-        findings.extend(f"{mode}: {message}" for message in observations[mode]["findings"])
+    for control in (
+        "control",
+        "no-warmup",
+        "delayed",
+        *(("width-change",) if mode == "full" else ()),
+    ):
+        findings.extend(
+            f"{control}: {message}" for message in observations[control]["findings"]
+        )
     if observations["no-warmup"]["counters"]["ready_calls"] != 0:
         findings.append("the no-warmup control unexpectedly called the warmup API")
+    for control, run in observations.items():
+        duration = run["metrics"].get("finish_validation_ms")
+        if (
+            not isinstance(duration, (int, float))
+            or not math.isfinite(duration)
+            or duration < 0
+        ):
+            findings.append(f"{control}: missing final-validation cost")
     baseline = observations["control"]["metrics"]
     delayed = observations["delayed"]["metrics"]
-    changed = observations["width-change"]
     if delayed.get("parameters_ready_ms", 0) - baseline.get("parameters_ready_ms", 0) < 150:
         findings.append("the delayed control did not record the known 300 ms delay")
-    if baseline.get("anchor_max_displacement_px", math.inf) > 0.1:
-        findings.append("the stable control reported neighboring text movement")
-    if changed["metrics"].get("anchor_max_local_displacement_px", 0) < 100:
-        findings.append("the width-change control did not detect adjacent text movement")
-    if not changed.get("pre_reveal_frame_observed"):
-        findings.append("the width-change control missed the readable pre-reveal frame")
-    for mode, required in {
+    if mode == "full":
+        changed = observations["width-change"]
+        if baseline.get("anchor_max_displacement_px", math.inf) > 0.1:
+            findings.append("the stable control reported neighboring text movement")
+        if changed["metrics"].get("anchor_max_local_displacement_px", 0) < 100:
+            findings.append("the width-change control did not detect adjacent text movement")
+        if not changed.get("pre_reveal_frame_observed"):
+            findings.append("the width-change control missed the readable pre-reveal frame")
+    elif any(run["counters"]["anchor_samples"] for run in observations.values()):
+        findings.append("parameter mode unexpectedly sampled all-page text anchors")
+    for control, required in {
         "missing-math": "incorrect parameter math",
-        "missing-anchors": "neighboring text anchors: prose",
         "missing-counters": "missing instrumentation: font_hooks",
+        "late-target": "expected 14 active parameter targets, found 15",
+        **({"missing-anchors": "neighboring text anchors: prose"} if mode == "full" else {}),
     }.items():
-        if not any(required in message for message in observations[mode]["findings"]):
-            findings.append(f"{mode}: the negative control was not rejected")
+        if not any(required in message for message in observations[control]["findings"]):
+            findings.append(f"{control}: the negative control was not rejected")
     return {
         "schema_version": 1,
+        "mode": mode,
         "instrument": instrument_provenance(list(observations.values())),
         "self_test": observations,
         "findings": findings,
@@ -783,6 +867,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--browser", choices=("chromium", "firefox", "webkit"), default="chromium"
     )
+    parser.add_argument("--mode", choices=("full", "parameters"), default="full")
     parser.add_argument("--output", type=Path)
     parser.add_argument(
         "--self-test", action="store_true", help="Exercise retained browser controls"
@@ -793,7 +878,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if bool(args.control) != bool(args.candidate) or (args.page and args.control):
         parser.error("use a page, or both --control and --candidate")
     report = (
-        self_test(browser_name=args.browser)
+        self_test(browser_name=args.browser, mode=args.mode)
         if args.self_test
         else run_measurements(
             {"control": args.control, "candidate": args.candidate}
@@ -803,6 +888,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             width=args.width,
             height=args.height,
             browser_name=args.browser,
+            mode=args.mode,
         )
     )
     encoded = json.dumps(report, indent=2) + "\n"

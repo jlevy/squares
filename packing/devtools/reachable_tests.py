@@ -250,6 +250,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--since", metavar="REF", default="origin/main")
     parser.add_argument(
+        "--workers",
+        metavar="N",
+        type=int,
+        default=1,
+        help="pytest processes; the validation gate passes its shared worker allocation",
+    )
+    parser.add_argument(
         "--summary",
         action="store_true",
         help="print one machine-readable line: 'everything' or the selected count",
@@ -260,6 +267,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="run pytest on the selection (the whole non-exhaustive suite when everything)",
     )
     namespace = parser.parse_args(argv)
+    if namespace.workers < 1:
+        parser.error("--workers must be a positive integer")
 
     selection = select_tests(changed_paths(namespace.since))
     if namespace.summary:
@@ -292,6 +301,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         *targets,
         "-m",
         "not exhaustive_exact",
+        *(("-n", str(namespace.workers)) if namespace.workers > 1 else ()),
     )
     return subprocess.run(command, cwd=ROOT, check=False).returncode
 

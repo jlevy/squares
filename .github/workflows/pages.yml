@@ -254,6 +254,7 @@ jobs:
       - name: Check normal math startup and the measurement controls
         run: |
           uv run --frozen --group dev python -m devtools.check_math_startup --self-test
+          uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --self-test
           uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --output /tmp/math-startup-desktop.json
           uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --width 390 --output /tmp/math-startup-mobile.json
 
@@ -316,6 +317,78 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_math_loading --browser ${{ matrix.browser }} --width 390
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 1280 --host-check
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 390
+
+  # A dedicated runner keeps PDF export and the other browser jobs from competing
+  # with this descriptive timing experiment. Only an explicit dispatch runs it.
+  startup-timing:
+    if: github.event_name == 'workflow_dispatch'
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium browser
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
+      - name: Prepare retained timing inputs
+        run: |
+          mkdir -p /tmp/math-startup-timing
+          cp site/index.html /tmp/math-startup-timing/candidate.html
+          gzip --decompress --stdout benchmarks/math-startup/fixtures/control-33cd4760.html.gz > /tmp/math-startup-timing/control-33cd4760.html
+
+      - name: Check the parameter-only measurement controls
+        id: timing-controls
+        run: uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --self-test --output /tmp/math-startup-timing/controls.json
+
+      # The tool alternates control/candidate order on successive pairs. Invalid
+      # measurements fail the job; numerical speed acceptance is evaluated from
+      # these retained observations under the registered experiment criterion.
+      - name: Measure twelve desktop startup pairs
+        run: uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --control /tmp/math-startup-timing/control-33cd4760.html --candidate site/index.html --runs 12 --width 1280 --browser chromium --output /tmp/math-startup-timing/startup-1280.json
+
+      - name: Measure twelve mobile startup pairs
+        # Retain both widths even if the desktop observations are invalid, provided
+        # the instrument's controls passed. A failure still leaves the job red.
+        if: ${{ !cancelled() && steps.timing-controls.outcome == 'success' }}
+        run: uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --control /tmp/math-startup-timing/control-33cd4760.html --candidate site/index.html --runs 12 --width 390 --browser chromium --output /tmp/math-startup-timing/startup-390.json
+
+      - name: Retain raw timings and both input pages
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-startup-timing
+          path: /tmp/math-startup-timing
+          if-no-files-found: error
+          retention-days: 7
 
   deploy:
     needs: [build, font-loading]
