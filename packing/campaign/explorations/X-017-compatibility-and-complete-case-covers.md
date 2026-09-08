@@ -406,10 +406,10 @@ closure needs a below-$U$ family or an additional equality argument.
 [feature design](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md)
 proves that center-polynomial features of total degree at most three cannot satisfy the
 compatible-pair sign condition, for any diagonal bound.
-A mixed-sign second difference on nine touching axis-aligned squares annihilates those
-features and contradicts positive semidefiniteness.
-This is an analytic family obstruction, not a sampled failure or a refutation of all
-interaction kernels.
+A mixed-sign second difference on nine compatible axis-aligned squares, including their
+legal touching pairs, annihilates those features and contradicts positive
+semidefiniteness. This is an analytic family obstruction, not a sampled failure or a
+refutation of all interaction kernels.
 
 The same report fixes one richer eleven-feature, sixteen-parameter $D_4$ family.
 [H125](../hypotheses/H-125-biquadratic-two-pose-kernel.md) records that narrower claim

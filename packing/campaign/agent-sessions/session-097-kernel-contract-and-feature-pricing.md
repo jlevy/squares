@@ -342,7 +342,9 @@ session:
     outcome: GO frozen 21:56:54 UTC; actual interval 21:48:04–21:56:54. Full producer, tests and wire inspected. Direct projected PSD bounds H125, not LP optimality or all weaker-relaxation matrices. No code edit or scientific invocation.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md]
     files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md]
-    checks: [72 declared source-free tests passed in 16.93 external wall seconds; Ruff, format check and BasedPyright clean; Flowmark passed.]
+    checks:
+    - 72 declared source-free tests passed in 16.93 external wall seconds; Ruff, format check and BasedPyright clean; Flowmark passed.
+    - These figures and the per-file figures recorded for the same two suites come from separate invocations and cannot be compared with each other; re-measuring the same command on 2026-09-08 gave 72 passed in 0.50 seconds pytest and 0.81 seconds external wall warm, against 2.27 and 3.27 seconds on the first cold run, on a different host, so it corrects neither earlier reading.
     uncertainty: Actual engine/protocol gates, publication and external whole-child supervision remain required before science.
     elapsed_seconds: 530
     elapsed_quality: operator_reported_approximate
@@ -519,9 +521,9 @@ session:
   - Prospective protocol424adf85 failed its records gate in170.62 seconds and push gate in396.61 seconds (403.25 external wall,227.85 user,35.71 system). Both failed only the stale synopsis round-count mutation anchor;645 reachable tests passed and three were deselected in303.47 seconds. The22:20 launch cutoff passed without protocol publication or scientific invocation. Exp129 records a blocked dependency guard and zero scientific time; its whole-child allowances remain unspent. The correction must earn its own passing checks and cannot retroactively admit the expired target.
   - The privacy-reduced active-task receipt through22:33:04 UTC completed with exit0 in70.55 external wall seconds (33.13 user,3.35 system). It remains a lower bound excluding later finalization; scientific time is not substituted for the cost of development, review or validation.
   - Actual PR116 engine workflow34166034785 failed validate only because the published Session097 still had phase4 active after its deadline; all163 anchors passed. Sweeps correctness passed but58.38s was below the old107.05s baseline's stale band. Suite, geometry, macOS and mergeability passed; full/deferred jobs were skipped. Think-c03a owns a six-sample baseline refresh, not weaker checks or a speedup claim.
-  certification_pending: think-mq0d
+  certification_pending: think-m2lx
   stop_reason: Bounded research and record writers are stopped at the final checkpoint freeze; the scientific guard is terminal and corrected validation/publication are pending under think-m2lx. No passing full gate or successful session completion is claimed.
-  next_action: Continue BC-264 under think-mq0d by resolving the operational certification and draft-publication prerequisites retained in this record. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation.
+  next_action: Continue BC-264 under think-mq0d, whose operational certification and draft-publication prerequisites are retained in this record and owned by think-m2lx. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation.
 ---
 # Kernel Contract and Feature Pricing
 
@@ -547,7 +549,7 @@ Earlier orientation and upstream maintenance are outside this session’s cost i
 
 PR116 is integrating `origin/main` at `831697c0` into `codex/n11-kernel-pricing`,
 including the landed atlas expansion (PR111) and publication fixes (PR117). Session097
-remains stopped with `certification_pending: think-mq0d`. H125 is untested: exp129 never
+remains stopped with `certification_pending: think-m2lx`. H125 is untested: exp129 never
 invoked and retains its blocked dependency outcome and zero scientific time.
 This integration does not reopen its expired allocation.
 
@@ -747,8 +749,9 @@ retains the contract diagnosis.
 
 The separately declared23:21:36–23:51:36 UTC efficiency review admitted a narrow W4
 repair after two independent max-thinking reviews,463 and160 seconds.
-The record now declares its certification debt under the existing BC264 owner,
-`think-mq0d`, and retains the actual failed `d6f0c403` full-gate declaration.
+The record now declares its certification debt under the bead that owns the outstanding
+publication and certification work, `think-m2lx`, and retains the actual failed
+`d6f0c403` full-gate declaration.
 It remains stopped and explicitly uncertified.
 No earlier pass is borrowed, no deadline is extended, and no scientific invocation is
 admitted by the record repair.
