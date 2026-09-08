@@ -1,0 +1,8 @@
+{
+  "name": "search engine (sqsearch)",
+  "output": "  ok   simplified SAT == naive SAT  (max diff 6.661e-16)\n  ok   grid(4) valid at s=2  (s=2)\n  ok   grid(4) invalid at s=2-1e-9\n  ok   tilted unit square fits sqrt(2)  (0.000e0)\n  ok   and not sqrt(2)-1e-9\n  ok   overlap depth 0.5 -> penalty 0.25  (0.250000)\n  ok   chain reproducible from (seed, chain)  (2.79391704363121596e0)\n  ok   pair-test meter covers ordinary and basin-entry search  (ordinary 54, entry 54, expected 54)\n  ok   distinct chains explore differently  (2.793917044 vs 2.828439597)\n  ok   positive control: recovers s(5)  (2.707123142 vs 2.707106781, gap +1.64e-5)\n  ok   and never beats it\n  ok   reported packing is overlap-free  (overlap 0.00e0)\n  ok   reported overlap is recomputed, not accumulated  (0.00e0 vs stored 0.00e0)\n  ok   reported packing fits its reported side  (2.707123141908 <= 2.707123141908)\nSELFTEST PASSED",
+  "reason": "",
+  "run_id": "c4cec457a4a54015a84b67fda9eec81c",
+  "seconds": 1.4696564999976545,
+  "status": "passed"
+}

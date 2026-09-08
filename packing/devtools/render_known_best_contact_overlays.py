@@ -16,6 +16,11 @@ from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
 from devtools.build_known_best_atlas import frame_from_witness
+from sqpack.known_best import (
+    calibration_entries,
+    declared_calibration_label,
+    require_calibration_label,
+)
 from sqpack.render import render_packing_svg
 from sqpack.render.model import (
     ContainerWall,
@@ -41,6 +46,17 @@ SCHEMA = ATLAS_ROOT / "contact-overlay-gallery.schema.yaml"
 WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 GENERATOR = "python -m devtools.render_known_best_contact_overlays"
 SWEEP_NAME = "registered-angle-contact"
+
+
+def corpus_entries(manifest: Path = CORPUS) -> tuple[dict[str, Any], ...]:
+    """The manifest's calibration entries, and nothing past them.
+
+    This gallery is calibration-only: it pictures a census designed against the corpus it
+    reads, so it stays at `CALIBRATION_CORPUS` while the manifest widens around it
+    (`D4`).
+    """
+    atlas = json.loads(manifest.read_text(encoding="utf-8"))["atlas"]
+    return calibration_entries(atlas["entries"])
 
 
 def _centre(square: SquareGeometry) -> Point2:
@@ -181,10 +197,17 @@ def _selected_entries(
 
 
 def expected_outputs() -> tuple[dict[str, Any], dict[Path, str]]:
-    corpus = json.loads(CORPUS.read_text(encoding="utf-8"))["atlas"]
-    source_kinds = {entry["n"]: entry["source"]["kind"] for entry in corpus["entries"]}
-    witness_paths = {entry["n"]: ROOT / entry["witness"]["path"] for entry in corpus["entries"]}
+    entries = corpus_entries()
+    source_kinds = {entry["n"]: entry["source"]["kind"] for entry in entries}
+    witness_paths = {entry["n"]: ROOT / entry["witness"]["path"] for entry in entries}
     census = json.loads(CENSUS.read_text(encoding="utf-8"))
+    # The gallery's own schema pins its inputs by name rather than by range, so this is
+    # where a widened census would otherwise arrive unannounced: the five strata are
+    # selected from the census, and a census over more cases would pick from more of them.
+    require_calibration_label(
+        declared_calibration_label(census["corpus"], source="chunk-components.json corpus"),
+        source="chunk-components.json corpus",
+    )
     sweep = next(sweep for sweep in census["contact_sweeps"] if sweep["name"] == SWEEP_NAME)
     selections = _selected_entries(sweep["entries"], source_kinds)
     renderings: dict[Path, str] = {}

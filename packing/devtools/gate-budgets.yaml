@@ -117,7 +117,26 @@ tiers:
   # 409.0s, 177.02s, now 502.3s. The register has been right every time and the tier has
   # kept moving underneath it, which is what a cost register on a subsystem two sessions
   # are editing at once actually looks like.
-  ceiling_seconds: 700.0
+  #
+  # 600s from 2026-09-07, and the reason is that the tier lost its two most expensive
+  # steps. `known-best n=1..324 atlas rebuild` and `single-square translation escape
+  # screen` moved to the deferred surface and two sampled steps arrived; run whole on an
+  # idle ten-cpu box at this reference's flags the tier is now 229.05s, of which the two
+  # samples are 103.59s and 69.70s because `--inner-jobs 1` gives each pool one worker.
+  # 700s against that is a hang detector rather than a ceiling. 600s is about 2.6x the
+  # local reading, which is the room a tier nobody clocks on CI needs for a runner of
+  # unknown speed, and it is still under the step time this tier costs serially. It is
+  # not tightened further because no reading at the reference shape exists to tighten it
+  # against -- that is a measurement to take, not a number to guess, which is `OR-14`.
+  #
+  # A third step left the same day and this ceiling did not move for it either. `exact
+  # verification` now runs the grid replay sampled and `exact rational grid replay` runs
+  # it whole on the deferred surface, which takes 30.61s of local step time out of this
+  # tier -- the `checks` entry below carries the readings. The tier was not re-clocked
+  # whole for it: a 229.05s reading that a step-time subtraction predicts at about 198s
+  # is not a reading, and the number that matters here is still the missing one at the
+  # reference shape.
+  ceiling_seconds: 600.0
   # Cleared twice for the same reason, and the reason is a good one both times: the figure
   # measured a tier that no longer exists. BC-214 cleared 1369.60s (CI run 33982455466)
   # when it moved every test at or above QUICK_TEST_WALL_BACKSTOP_SECONDS out of the quick lane.
@@ -135,14 +154,16 @@ tiers:
   # the quick lane was asking for one worker per cpu while two other steps ran beside it.
   # Recording the faster of two readings from an unstable configuration is how a band gets
   # set to a number the tier cannot hold, so the record is the stable configuration's.
-  measured_seconds: 502.3
-  measured_on: '2026-09-06'
-  measured_where: >-
-    CI run for commit 5cad7540, job `validate`, GitHub's Linux runner reporting 4 cpus,
-    at `--jobs 3 --inner-jobs 1`. 502.30s of wall over roughly 1,100s of step time, of
-    which `known-best n=1..100 atlas` is 254.92s and `prospective n=101..324 source map
-    and safe seed` is 213.19s -- the two steps main promoted on 2026-09-05, and together
-    more than the whole tier cost before they arrived.
+  # Cleared a third time on 2026-09-07, on the same rule and a new cause: the corpus
+  # widened to n=1..324 and the two sweeps that grew with it were split, so `--fast` is
+  # not the union it was when 502.3s was taken. `known-best n=1..100 atlas` and
+  # `single-square translation escape screen` left the surface for the deferred one and
+  # two sampled steps arrived in their place; the `sweeps` entry below carries the
+  # readings and the argument. The gate prints the line to paste the first time a run at
+  # this reference shape measures the tier whole again.
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
   # The reference moves with the invocation it describes. A record taken at `--jobs 3`
   # cannot be compared against a `--jobs 2` reference, and leaving the old one here is how
   # a band stays permanently unenforced: every run reports "not the reference shape" and
@@ -222,19 +243,64 @@ tiers:
   # pool stops parallelising altogether, so serial degeneration fails here rather than
   # passing quietly. The old 300s no longer had that last property once nine steps left
   # the tier, which is why it moved down rather than staying put.
+  #
+  # --- 2026-09-07: the corpus tripled and the drift rule said so ---------------------
+  #
+  # This is the first entry in the register whose record was cleared by its own rule
+  # firing rather than by a re-scoping noticed by hand. `KNOWN_BEST_CORPUS` widened from
+  # n=1..100 to n=1..324, and on commit `2841eec9` this job ran 189.09s against the
+  # 99.39s below -- 1.90x, where 1.5x fails -- and 6s under a 195s ceiling. The gate's
+  # own verdict named the step: `exact verification` was 133.4s of it, 70.6 per cent.
+  #
+  # Measured on an idle ten-cpu box, three readings apiece, everything retained under
+  # `benchmarks/gate-cost-at-324/runs/`:
+  #
+  #   `--checks --jobs 3 --inner-jobs 1`   120.03s wall over 219.76s of step time
+  #     `exact verification`                86.71s of it (84.21s run alone)
+  #       `check_basic_bounds`              34.81s -- the only member that grew
+  #       the sixteen other subcommands     49.40s -- fixed cases, corpus-independent
+  #
+  # The CI ratio this box shows is 1.58 in both places at once, which is what makes it
+  # usable: 189.09/120.03 for the tier and 133.4/84.21 for the step.
+  #
+  # `check_basic_bounds` was pooled before it was thinned, as `OR-13` asks. It now sizes
+  # a `ProcessPoolExecutor` from `sqpack.workers.worker_count`: 34.81s serial, 18.58s at
+  # two workers, 9.97s at four, over 34.8s, 36.6s and 38.5s of cpu, and the whole run's
+  # stdout is byte-for-byte identical at one worker and at four. That bought this job
+  # nothing and was still worth doing -- every pull-request tier passes `--inner-jobs 1`,
+  # so `PACK_JOBS` is 1 here by design, and what the pool decides is that the deferred
+  # copy costs the deep gate 18.79s at its `--jobs 2 --inner-jobs 2` rather than 34.81s,
+  # measured there.
+  #
+  # So the replay is sampled here and whole on the deferred surface, as `exact rational
+  # grid replay`. Every case's declared bounds are still compared against their closed
+  # forms -- 0.14s, never left -- and every ninth grid case is still replayed exactly, at
+  # 4.15s in place of 34.81s. Measured whole afterwards on the same box, three readings:
+  #
+  #   `--checks --jobs 3 --inner-jobs 1`    87.56s wall over 186.86s of step time
+  #     `exact verification`                55.10s, and no longer this tier's floor
+  #
+  # 195s stands, and it is a decision rather than an oversight. Scaled by that same 1.58
+  # the prediction for the reference runner is about 138s, so the ceiling is a 1.41x band
+  # around it: it clears a runner a third slower (184s), and it is far below the roughly
+  # 295s of step time this tier costs on that runner if its pool stops parallelising, so
+  # serial degeneration fails here rather than passing quietly. Tightening it against a
+  # prediction rather than a reading is what `OR-14` calls advertising an aspiration --
+  # and the first run at the reference shape prints the line to write, at which point
+  # rule 2 re-argues this number against a real one.
   ceiling_seconds: 195.0
-  # Hosted samples at the reference shape establish the baseline below.
-  measured_seconds: 99.39
-  measured_on: '2026-09-06'
-  measured_where: >-
-    The geometric mean of four readings at the reference shape -- 106.35, 106.02, 80.62 and 107.33 --
-    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
-    Observed spread 1.33x. The centre of the band, not an edge: recording the
-    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
-    fast runner, because a record at the top of the band starves that rule by as much
-    as it feeds the drift rule. At four samples every margin is at least 1.25x.
-    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
-    the argument for `think-be1s` rather than a property of these numbers.
+  # Cleared, on the same rule that cleared 1369.60s and 409.0s from the `fast` entry and
+  # 107.05s from `sweeps`: the figure measures a tier that no longer exists. It measured
+  # this one twice over -- the four readings predate the corpus widening, and the widened
+  # tier then lost 34.81s of local step time to the deferred surface -- so keeping it
+  # would fail the drift rule on the tier as it was and the stale rule on the tier as it
+  # is. The 189.09s CI reading is not written here either, and deliberately: it is a
+  # reading at the reference shape of the tier this change replaced, so recording it
+  # would arm the stale rule against every honest run of the new one. The gate prints the
+  # line to paste the first time a run at the reference shape measures the new tier.
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
     The part of the pull-request surface that is none of the other three: every floor,
@@ -331,17 +397,25 @@ tiers:
   # four are worth about 2.6x against one here. The two readings 30 per cent apart are
   # why 240s is not tightened to the faster of them: that is what a shared box does to a
   # wall, and a band set to a good day fails on an ordinary one.
-  ceiling_seconds: 205.0
+  #
+  # 2026-09-07: the corpus tripled (n = 1..324) and the lane's tests that iterate it grew
+  # with it. The first hosted reading at the reference shape, run 34133437296, was
+  # 162.62s, all tests passing, which failed the drift rule against the 102.83s record
+  # (1.58x) rather than the ceiling. The record below is that reading; the ceiling moves
+  # to 260s, 1.6x the reading and under the 2x headroom rule, because the same lane has
+  # shown a 1.52x hosted spread and a band set to one reading fails on an ordinary day.
+  ceiling_seconds: 260.0
   # Hosted samples at the reference shape establish the baseline below.
-  measured_seconds: 102.83
-  measured_on: '2026-09-06'
+  measured_seconds: 162.62
+  measured_on: '2026-09-07'
   measured_where: >-
-    The geometric mean of four readings at the reference shape -- 102.50, 123.53, 108.44 and 81.43 --
-    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
-    Observed spread 1.52x. The centre of the band, not an edge: recording the
-    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
-    fast runner, because a record at the top of the band starves that rule by as much
-    as it feeds the drift rule. At four samples every margin is at least 1.25x.
+    One reading at the reference shape, 162.62s in run 34133437296, the first hosted run
+    of the lane over the 324-case corpus; the earlier four-sample mean of 102.83s
+    (102.50, 123.53, 108.44 and 81.43 across runs 34023002068, 34032566385, 34037168378
+    and 34040196689, spread 1.52x) described the hundred-case corpus. The centre of the
+    band, not an edge: recording the maximum was tried first and left `geometry` 1.21x
+    from failing the stale rule on a fast runner, because a record at the top of the band
+    starves that rule by as much as it feeds the drift rule.
     **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
     the argument for `think-be1s` rather than a property of these numbers.
   # `inner_jobs: 1`, not 4, because that is what the workflow passes. The xdist worker
@@ -402,29 +476,87 @@ tiers:
   # costs if the pool stops parallelising, so serial degeneration still fails here, and
   # it still has to hold whatever the escape screen costs on a bad day -- which is why it
   # is not tightened to the new prediction.
-  ceiling_seconds: 194.0
-  measured_seconds: 97.07
-  measured_on: '2026-09-07'
-  measured_where: >-
-    The geometric mean of six reference-shape readings is 97.07455 seconds, recorded
-    as 97.07. Retained samples 108.91, 108.62, 106.15 and 104.57 are from runs
-    34023002068, 34032566385, 34037168378 and 34040196689. Added samples are 109.16
-    at c3a4e8ec in run 34164869950 and 58.38 at d6f0c403 in run 34166034785.
-    The two added runs used the same four full sweep steps, jobs 4, inner_jobs 2,
-    ubuntu-24.04 image 20260831.293.1, runner 2.337.0, Python 3.14.7 and the same
-    successful uv cache key. Their source delta changed no sweep implementation,
-    workflow or dependency inputs. Hardware and load equivalence remain unknown;
-    this refresh is not an optimization claim. Observed spread is 1.87x, and the
-    fastest sample is only just above the unchanged 0.6 stale floor. The 194-second
-    ceiling remains below twice the rounded mean. Preserve all samples as the mean
-    evolves; the historical `think-be1s` reference concerns a richer band model.
+  #
+  # Historical calibration of the former n=1..100, four-full-sweep workload: 108.91,
+  # 108.62, 106.15 and 104.57s in runs 34023002068, 34032566385, 34037168378 and
+  # 34040196689, plus 109.16s at c3a4e8ec in run 34164869950 and 58.38s at d6f0c403
+  # in run 34166034785. Six-sample geometric mean 97.07455s (recorded as 97.07), spread
+  # 1.87x. The two added runs shared the workload, jobs 4, inner_jobs 2, runner image,
+  # Python version and successful dependency-cache key; hardware and load equivalence
+  # remain unknown. This was a baseline refresh, with no optimization claim. Neither
+  # that baseline nor its 194s ceiling calibrates the sampled n=1..324 tier below.
+  #
+  # --- 2026-09-07: the corpus tripled and two of these four steps are new -----------
+  #
+  # `KNOWN_BEST_CORPUS` widened from n=1..100 to n=1..324 -- 324 cases and 52,650
+  # squares against 100 and 5,050 -- and the record above measures a tier that no longer
+  # exists, for the third time in this entry's life and for the first time on a reason
+  # that is not the gate's own. Measured on an idle ten-cpu box at this tier's own shape,
+  # on commit `2841eec9`, with every reading retained under
+  # `benchmarks/gate-cost-at-324/runs/`. Each is at n=1..324 under the step name the tier
+  # carried that day -- the atlas step was still called `known-best n=1..100 atlas` when
+  # it was clocked, and renaming it in a record of what it cost would misstate what was
+  # measured.
+  #
+  #   `single-square translation escape screen`   766.26s  (110.66s at n=1..100)
+  #   `known-best n=1..100 atlas`                 703.28s  ( 75.88s at n=1..100)
+  #     of which `build_known_best_atlas --check`  691.19s
+  #     the seven other subcommands                12.09s
+  #   `known-best chunk census`                     40.03s (geometric mean of three)
+  #
+  # Two things follow, and the second is the one that keeps the coverage. The screen is
+  # not merely dear: 766.26s is within 134s of the gate's own 900s per-step subprocess
+  # timeout, on a box faster than the runner that timeout was set for. And the atlas step
+  # is one member and seven passengers -- 98.3 per cent in `build_known_best_atlas
+  # --check`, and five of the seven pinned at CALIBRATION_CORPUS by `D4` so they cannot
+  # grow with the corpus at all.
+  #
+  # So the two re-derivations moved to the deferred surface and their record layers
+  # stayed, as `known-best atlas records and sample` and `translation escape screen
+  # records and sample`. Each rebuilds everything that is not per-case geometry and then
+  # re-derives a fixed recorded sample of the cases; `think-lmlr` and
+  # `test_the_pull_request_surface_defers_only_what_was_measured` carry the argument.
+  #
+  # The sample strides are set against this tier's floor rather than chosen. The floor is
+  # `known-best chunk census`, which `D4` pins so it will not grow. Measured at
+  # `PACK_JOBS=2` on the same box: the atlas sample 47.01s of wall over 86.81s of cpu at
+  # every ninth case (36 of 324), and the screen sample 43.83s over 63.84s at every
+  # twenty-seventh record (12 of 324). A screened record's work grows with the square of
+  # n, which is why the two strides differ: the same 36 records cost 220.43s of cpu in
+  # the screen against 86.81s in the atlas.
+  #
+  # Measured whole afterwards at this tier's shape on the same box, lightly contended:
+  # 58.48s of wall over 145.39s of step time -- the atlas sample 58.48s, the screen
+  # sample 44.65s, the census 42.11s, the retired prospective seed 0.15s. So the atlas
+  # sample does set this tier's wall rather than sitting under the census, by about a
+  # third of it, and the tier lands at 28 per cent of its ceiling. That is the headroom
+  # the stride is allowed to spend and no more: a denser sample would start buying cases
+  # the deferred rebuild already covers, at a tier wall that is not the surface's floor
+  # in either case.
+  #
+  # `build_known_best_atlas` also gained the `--jobs` option the escape screen already
+  # had, so `--inner-jobs 2` now reaches three of the four steps rather than one. On the
+  # same idle box its whole check went 691.19s serial to 184.34s at four workers -- 3.75x
+  # -- over 688.74s of cpu against the 691.19s the serial run spent, so the pool divided
+  # the work rather than adding any, and `--check` still passed, which is what makes the
+  # parallel build byte-identical rather than merely fast.
+  ceiling_seconds: 210.0
+  # Cleared, and the reason is the one that cleared 1369.60s and 409.0s from the `fast`
+  # entry: the figure measured a tier that no longer exists. Two of these four steps are
+  # new names running different work, so 107.05s is not a record of this tier, and
+  # leaving it here would fail the stale rule on every honest run of the new one. The
+  # gate prints the line to paste the first time it runs at the reference shape.
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
   reference: {jobs: 4, inner_jobs: 2, cpus: 4}
   argument: >-
-    The pull request's record sweeps, on their own runner: the known-best atlas, its
-    chunk census, the prospective safe seed, and the translation-escape screen. Each
-    re-derives a retained atlas from the witnesses under it and compares it byte for
-    byte, which is both why they are expensive and why they stay on every pull request --
-    a change that retains a witness or edits a source map is exactly what breaks them.
+    The pull request's record sweeps, on their own runner: the known-best atlas's record
+    layer and a sampled rebuild, its chunk census, the prospective safe seed, and the
+    translation-escape screen's record layer and a sampled replay. Each re-derives a
+    retained atlas from the witnesses under it and compares it byte for byte, which is
+    both why they are expensive and why they stay on every pull request -- a change that
+    retains a witness or edits a source map is exactly what breaks them.
     Two things about this tier are worth not rediscovering. Its wall is one step's wall:
     four units on four cpus saturates the outer pool, so `--jobs` is already spent and
     the only lever left is the longest unit's own cost -- which is why `--inner-jobs 2`
@@ -432,6 +564,14 @@ tiers:
     surface's floor. And this tier is what removes the contention that failed five
     ordinary tests against the quick lane's 5s per-test ceiling -- those tests were never
     slow, they were sharing four cpus with 468s of atlas rendering.
+    210s stands through the 2026-09-07 re-scoping without being re-tightened, and that is
+    a decision rather than an oversight. The predicted wall is the census's, near 90s on
+    this runner, so a ceiling at 210s has real margin for a slow day; and it is still
+    below the step time this tier costs if its pool stops parallelising altogether --
+    about 400s once the two sampled steps lose their inner workers -- so serial
+    degeneration fails here rather than passing quietly, which is the regression a
+    ceiling on an outer-parallel tier is actually for. Tightening it against a prediction
+    rather than a reading is what `OR-14` calls advertising an aspiration.
 
 - id: push
   command: packing-validate --push

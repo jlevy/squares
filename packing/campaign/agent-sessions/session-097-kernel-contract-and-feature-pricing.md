@@ -543,6 +543,34 @@ The rounded `20:57:00` delegation times identify the allocated window, not measu
 worker starts; each terminal receipt will retain its actual observed start and end.
 Earlier orientation and upstream maintenance are outside this session’s cost interval.
 
+## Current Integration Handoff
+
+PR116 is integrating `origin/main` at `28696526` into `codex/n11-kernel-pricing`.
+Session097 remains stopped with `certification_pending: think-mq0d`. H125 is untested:
+exp129 never invoked and retains its blocked dependency outcome and zero scientific
+time. This integration does not reopen its expired allocation.
+
+The new integration CI is pending.
+The matched historical fast run `34171519040` and deferred run `34171566965` checked
+`d3ca1052`, combining `91b77ab1` and `373beb36`; their coverage does not certify this
+integration. The earlier failed gates below retain their actual outcomes.
+Full validation may run asynchronously when an explicit protocol permits it; complete
+passing coverage is required before merge.
+
+PR111 now owns Session099. The earlier namespace inventories below are dated receipts,
+not current availability or reservations.
+Before allocating another record, re-audit main, open PRs and the current registry.
+The next research entry remains BC264 under `think-mq0d`, with a fresh bounded
+allocation and prospective protocol required before any first scientific invocation.
+Check current process state independently; historical native-task and gate receipts do
+not establish that an old process remains available or running.
+
+The
+[research-throughput review](../../../docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md)
+records proposed all-in recovery accounting and guard fixes.
+Those proposals are not implemented by this integration and do not change launch or
+acceptance requirements.
+
 ## Checkpoint Plan
 
 | Slice | Maximum allocation | Required evidence and next decision |
@@ -589,15 +617,13 @@ The subsequent source-free build checkpoint registers H125 from a dated X017 fol
 using the next available hypothesis ID from the complete 21:18 inventory of main and
 open PR110/111/114/115. The fresh 22:00:19 check precedes the complete exp129
 allocation. No new exploration, agenda or BC ID is allocated.
-Next candidates are exp130, Session099, X019, BC283 and Agenda029, not reserved ranges.
-Subsequent IDs need a fresh ownership check and a complete record.
-PR110 reserves BC269–282 and leaves BC264 to this owner.
-The22:32 audit found PR110 had resolved its Session096 collision by taking Session098.
-PR111’s remote head now instead carries an atlas Session097, which collides with this
-branch’s already published Session097. The incoming owner retains its work and must
-rekey that record before integration; this branch does not overwrite it, renumber its
-own published session or merge unlanded code.
-Main remainsa5e9dbfd.
+The September 7 inventories identified exp130, Session099, X019, BC283 and Agenda029 as
+candidates at that time, without reserving them.
+PR110 then reserved BC269–282 and left BC264 to this owner.
+The 22:32 audit found PR110 had resolved its Session096 collision by taking Session098;
+PR111 then carried an atlas Session097 that collided with this branch’s published
+Session097. Main at that audit was `a5e9dbfd`. The current ownership and allocation
+requirements are in the integration handoff above.
 
 On interruption, first read this session, `think-c53m` and `think-mq0d`, and check each
 author’s freeze status.

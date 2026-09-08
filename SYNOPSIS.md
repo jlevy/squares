@@ -215,12 +215,14 @@ case or experiment separately.
 | [An Explicit Five-Point Piercing Obstruction Near Side Three](docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md) | dated review record | record | retained | — |
 | [Stromquist’s Segment Helper: An Independent Derivation](docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md) | dated review record | record | retained | — |
 | [Strategic Mathematical Review: Hybrid Exclusion and Few-Angle Structure at n = 11](docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md) | dated review record | supporting | maintained | — |
+| [Review: Credit-Line Review of the Generated Atlas Records 101–324](docs/project/reviews/review-2026-09-07-atlas-101-324-credit-lines.md) | dated review record | record | retained | — |
 | [Validation Efficiency Implementation Review](docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md) | dated review record | record | retained | — |
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
 | [Reuse Float Midpoint-to-Cell Lookup](packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md) | research synthesis | record | retained | — |
 | [Reuse Bridge Row Inventory](packing/benchmarks/validation-efficiency/experiments/VE-002-bridge.md) | research synthesis | record | retained | — |
 | [Validation Efficiency Campaign](packing/benchmarks/validation-efficiency/README.md) | component scope and use | supporting | maintained | — |
 | [Validation Efficiency Results](packing/benchmarks/validation-efficiency/report.md) | generated status view | generated | generated | — |
+| [Gate Cost at the Widened Corpus](packing/benchmarks/gate-cost-at-324/README.md) | research synthesis | record | retained | — |
 | [Exhaustive Checkpoint Exploration](docs/project/reviews/review-2026-09-06-validation-exhaustive-cost.md) | dated review record | record | retained | — |
 | [Slow-lane and mutation-control inspection](docs/project/reviews/review-2026-09-06-validation-slow-and-controls-cost.md) | dated review record | record | retained | — |
 | [Proposal: Testing and CI Performance Guidance](docs/project/reviews/review-2026-09-06-tbd-testing-and-ci-performance-proposal.md) | dated review record | record | retained | — |
@@ -229,7 +231,7 @@ case or experiment separately.
 | [Tutorial: Square Packing from First Principles](TUTORIAL.md) | first-principles tutorial | supporting | maintained | — |
 | [Packing Atlas](packing/atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](packing/atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
-| [Known-Best Packing Atlas, `n = 1..100`](packing/atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
+| [Known-Best Packing Atlas, `n = 1..324`](packing/atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
 | [Composite figure playbook](packing/atlas/known-best/FIGURE-PLAYBOOK.md) | component scope and use | supporting | maintained | — |
 | [Prospective Packing Atlas, `n = 101..324`](packing/atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](packing/atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
@@ -320,6 +322,7 @@ case or experiment separately.
 | [Research: Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | research synthesis | supporting | maintained | — |
 | [Research: Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | research synthesis | supporting | maintained | — |
 | [Research: A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | research synthesis | supporting | maintained | — |
+| [Research: Public Sources for Square-Packing Records Beyond `n = 100`](docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md) | research synthesis | supporting | maintained | — |
 | [Review: Loop Speed, Iteration Cost, and What Actually Gates the Research (PR #17)](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | dated review record | record | superseded | [Packing Development Guide](development.md) |
 | [Review: The Experiment Loop, the Campaign, and the Consolidation (PR #5)](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | dated review record | record | superseded | [The `s(n)` Research Campaign: W6 Runbook](packing/campaign/README.md) |
 | [Review: The Mathematical Frontier, Its Gaps, and How to Search It Fast](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -394,6 +397,7 @@ case or experiment separately.
 | [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
 | [Feature: Validation Efficiency and Checkpoints](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md) | implementation plan | current | transient | — |
 | [Plan: Research Lanes Beyond 3.81](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | supporting | transient | — |
+| [Plan: Extend the Known-Best Atlas to `n = 324`, and Draw the Poster](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) | implementation plan | current | transient | — |
 | [Feature: Math Text Face Integration](docs/project/specs/active/plan-2026-09-07-math-text-face.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
@@ -544,6 +548,25 @@ stop. Long autonomous sessions use the same rule; autonomy changes the duration 
 controller, not permission to blur contracts.
 
 ### Current Handoff
+
+**Atlas expansion to `n = 324`, owner-directed, beside the research line.**
+[The plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) under
+epic `think-0juv` and
+[session-099](packing/campaign/agent-sessions/session-099-atlas-expansion-to-324.md)
+widened the frontier register and the known-best atlas from `n = 1..100` to `1..324`,
+the end of the catalogue’s audited range, on
+[PR 111](https://github.com/jlevy/squares/pull/111). The unseen-corpus baseline is
+commit `6e21c4ca`; the calibration-only layers stay pinned to the first hundred.
+The `known-best-1-324` poster ships beside the untouched 1-100 figure, the prospective
+seed is retired to a pointer, and the sweeps tier is re-priced from measurement with two
+deferred steps.
+PR 111 landed on main at `28696526`. The exact grid replay is also priced
+and deferred, with sampled replay retained on every pull request.
+The plan still records owner questions about the derived-facts retention route (`D2`)
+for the 123 catalogue cases, a caveated `325..400` extension, and a 2x poster raster;
+merging this research line does not answer those questions or authorize an extension.
+PR 116 must obtain its own matching fast and deferred coverage after integration.
+This line does not preempt the research selection below.
 
 **Focused parallel strategy prepared.**
 [X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md)
@@ -1359,12 +1382,15 @@ stays refused. CG-010 is structurally complete under `BC-030`; BC-016 is blocked
 `think-3yv8` on retained poses, an executable glued row, symbolic tie labels, and a
 receipt checker, while BC-017 under `think-u97a` remains the ready constructive W7 lane.
 
-All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
-house renderings. The source-complete corpus is calibration evidence, not an unseen
-holdout and not a new proof of optimality.
-The atlas source inventory retains attributed Kingbird-derived numerical facts but no
-raw Kingbird SVG because the review located no express redistribution terms; that
-conservative repository policy is not a legal conclusion.
+All `n = 1..324` frontier entries now point to normalized witnesses and deterministic
+house renderings. The first hundred are calibration evidence, not an unseen holdout and
+not a new proof of optimality; `n = 101..324`, promoted on 2026-09-07 under the
+[expansion plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md)
+and frozen at commit `6e21c4ca`, is the unseen corpus a confirmatory run may use once
+its instrument and grammar are frozen, and the calibration-only layers stay pinned to
+the first hundred. The atlas source inventory retains attributed Kingbird-derived
+numerical facts but no raw Kingbird SVG because the review located no express
+redistribution terms; that conservative repository policy is not a legal conclusion.
 A broad same-angle contact census covers 1,780 of 1,860 non-grid squares, but the
 stricter bar/L/rectangle partition establishes 3 of 36 non-grid cases inside its narrow
 budget. Two cases are conclusively outside that budget, 23 have no partition in the
@@ -3192,8 +3218,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 52 |
-| unmeasured | 44 |
-| **total** | **96** |
+| unmeasured | 45 |
+| **total** | **97** |
 
 <!-- END GENERATED: session-close-report -->
 

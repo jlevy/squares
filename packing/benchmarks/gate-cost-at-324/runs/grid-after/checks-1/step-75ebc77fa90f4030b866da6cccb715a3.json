@@ -1,0 +1,8 @@
+{
+  "name": "terminal sessions name what they cost",
+  "output": "  46 terminal sessions declare 162 resource rollups, all present\n  44 closed before the field existed and are not checked: session-001, session-002, session-003, session-004, session-005, session-006, session-007, session-008, session-009, session-010, session-011, session-012, session-013, session-014, session-015, session-016, session-017, session-018, session-019, session-020, session-021, session-022, session-023, session-024, session-025, session-026, session-027, session-028, session-029, session-030, session-031, session-032, session-033, session-034, session-035, session-036, session-037, session-038, session-039, session-040, session-041, session-042, session-043, session-044",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 0.6105877079971833,
+  "status": "passed"
+}
