@@ -253,6 +253,27 @@ SLOW_TEST_FLOOR_SECONDS = 1.0
 #: weeks. The tier already runs only after merge, so the move that scales is to give it
 #: its own job rather than a larger share of this one (think-tr2z).
 EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
+#: The whole single-square translation screen's cap, and a constant of its own rather
+#: than a third reader of `FAST_SUITE_BUDGET_SECONDS`. The two agree today and nothing
+#: connects them: that one bounds a behavioural suite whose membership is a marker
+#: expression, this one bounds a single sweep whose cost is a function of
+#: `KNOWN_BEST_CORPUS`. The next argument to move either is an argument about one of
+#: them alone, and a shared constant would make a corpus widening read as a decision
+#: about the lanes.
+#:
+#: 858.62s on CI on 2026-09-08 -- the post-merge checkpoint's `validate` job, four cpus
+#: at `--jobs 2 --inner-jobs 2`, run 34176106076, read from that run's own
+#: `validation-timings-validate-1` receipts -- against 766.26s idle locally at
+#: `n=1..324` (`benchmarks/gate-cost-at-324/`). 1800s is 2.10x the CI reading, inside
+#: the 1.77x-to-2x margin the budgets above carry over their own measurements.
+#:
+#: It is declared because the shared 900s cap had stopped bounding the step and started
+#: bounding the runner it happened to get. The same tree passed the post-merge job with
+#: 41s to spare and timed out in the deferred checkpoint (run 34177317419, job
+#: `deferred-steps`), where six deferrals shared one four-cpu runner with nothing cheap
+#: left to overlap. `.github/workflows/deep-gate.yml` fixed the contention; this fixes
+#: the ceiling that was 41s from failing either way.
+ESCAPE_SCREEN_BUDGET_SECONDS = 1800.0
 
 
 class _ProcessRegistry:
@@ -1682,10 +1703,12 @@ def _translation_escape_sample(context: Context) -> str:
 
     Deferring the whole re-screen is argued on
     `test_the_pull_request_surface_defers_only_what_was_measured`: 766.26s at `n=1..324`
-    against a 210s ceiling, and within 134s of the gate's own per-step subprocess timeout
-    on a box faster than CI's. What stays here is everything that is not per-record
-    geometry -- the aggregate against its own cases, the method block, the schema, the
-    per-certificate claims -- and a fixed recorded slice of the records replayed in full.
+    against a 210s ceiling, and within 134s of the 900s per-step subprocess timeout the
+    gate shared then -- which the whole screen went on to exceed on CI, and which is why
+    it now declares `ESCAPE_SCREEN_BUDGET_SECONDS`. What stays here is everything that is
+    not per-record geometry -- the aggregate against its own cases, the method block, the
+    schema, the per-certificate claims -- and a fixed recorded slice of the records
+    replayed in full.
 
     The corpus findings stay on the pull-request surface with it. They are read out of
     the retained document, which this step rebuilds from its own records, so a screen
@@ -2819,9 +2842,19 @@ STEPS: tuple[Step, ...] = (
     # The whole re-screen, off the pull-request surface since 2026-09-07 and on its own
     # measurement: 766.26s at `n=1..324` against that job's 210s ceiling, and within 134s
     # of this gate's own per-step subprocess timeout on a box faster than CI's.
+    #
+    # That last clause was the warning and on 2026-09-08 it came true. The step measured
+    # 858.62s in the post-merge checkpoint (run 34176106076) -- 41s inside the shared
+    # 900s cap -- and was killed at 900s in the deferred checkpoint on the same tree
+    # (run 34177317419), where it shared four cpus with five other deferrals. So it is
+    # the fourth step to declare a budget and the first that is not a whole suite; why
+    # that extends the set rather than raising the shared cap for the other sixty-five
+    # steps is argued on `test_only_the_steps_that_outgrew_the_shared_cap_carry_budgets`,
+    # and the number itself on `ESCAPE_SCREEN_BUDGET_SECONDS`.
     Step(
         "single-square translation escape screen",
         _translation_escape_screen,
+        budget_seconds=ESCAPE_SCREEN_BUDGET_SECONDS,
         touches=(
             *_CORE,
             "packing/atlas/known-best/*",
@@ -3874,7 +3907,7 @@ def _submission_order(selected: Sequence[Step]) -> list[Step]:
     whose wall time is one long step would have started paying for the short ones.
 
     `budget_seconds` is the ordering key because it is already the file's declaration
-    that a step runs long, argued next to each of the three that carry one; nothing here
+    that a step runs long, argued next to each of the four that carry one; nothing here
     guesses a duration. Descending, so the longest budget goes first, and stable, so
     everything unbudgeted keeps declared order.
 

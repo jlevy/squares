@@ -30,6 +30,18 @@ name: Deferred checkpoint
 # the unstated assumption that a deferred step only has to be reported eventually. It has
 # to be reported before the merge. It does not have to be reported on every push.
 #
+# **Why there are three jobs and not two.** Since 2026-09-08 the slow behavioural lane
+# has a runner to itself. Run 34177317419, dispatched against PR #116's merge ref, failed
+# `deferred-steps` with nothing wrong but two subprocess timeouts -- `single-square
+# translation escape screen` at the shared 900s cap and `slow behavioral tests` at its
+# own 1800s budget -- while the same two steps passed the same day in the post-merge
+# checkpoint (run 34176106076, job `validate`, four cpus at `--jobs 2 --inner-jobs 2`) at
+# 858.62s and 1271.96s. What differs between the two runs is contention rather than the
+# tree: since the known-best corpus tripled to n = 1..324 in PR #111 this workflow's
+# selection is 3131.92s of measured step time, and in one job it has nothing cheap left
+# to interleave. The split is argued on `deferred-slow-lane` below; the escape screen's
+# own ceiling is argued in `sqpack/cli/validate.py`.
+#
 # Reviewers request this advisory evidence by label or dispatch. It does not enforce a
 # merge prerequisite. This personal repository cannot enable GitHub's organization-only
 # merge queue; future queue adoption also requires workflow changes because GitHub shares
@@ -91,12 +103,13 @@ concurrency:
 
 jobs:
   deferred-steps:
-    # Six of the seven deferrals: `negative controls` (543.67s), `slow behavioral tests`
-    # (890s of a 1,038s suite, in 92 of 2,251 tests), `n=40 rigidity bracket still
-    # reproduces` (221.36s), and the three the widened known-best corpus put here on
-    # 2026-09-07 -- `known-best n=1..324 atlas rebuild`, `single-square translation
-    # escape screen` and `exact rational grid replay`. The seventh is `exhaustive-tier`
-    # below.
+    # Five of the seven deferrals: `negative controls` (347.17s), `n=40 rigidity bracket
+    # still reproduces` (221.09s), and the three the widened known-best corpus put here
+    # on 2026-09-07 -- `known-best n=1..324 atlas rebuild` (407.15s), `single-square
+    # translation escape screen` (858.62s) and `exact rational grid replay` (25.93s).
+    # The sixth is `deferred-slow-lane` and the seventh is `exhaustive-tier`, both below.
+    # Those five figures are one reading each, from run 34176106076's own
+    # `validation-timings-validate-1` receipts on 2026-09-08, taken at this job's shape.
     #
     # The three new ones are here on their own measurements, taken at n=1..324 on an idle
     # ten-cpu box and retained in `packing/benchmarks/gate-cost-at-324/`: 691.19s for the
@@ -109,10 +122,10 @@ jobs:
     # rerun of them.
     #
     # The grid replay costs this job nothing on the clock. It is 34.81s serial beside a
-    # 890s slow lane, and its own pool takes it to 18.79s -- measured here, at this job's
-    # own `--jobs 2 --inner-jobs 2`, replaying all 305 witnesses over 36.65s of cpu. A
-    # step that finishes inside the wall a longer step already sets is free in the sense
-    # that decides where work goes.
+    # step that is now 858.62s, and its own pool takes it to 18.79s -- measured here, at
+    # this job's own `--jobs 2 --inner-jobs 2`, replaying all 305 witnesses over 36.65s
+    # of cpu; 25.93s in run 34176106076. A step that finishes inside the wall a longer
+    # step already sets is free in the sense that decides where work goes.
     #
     # `--only` rather than a tier flag, and unlike in `packing-validation.yml` that is
     # the correct instrument here. There, `--only` on a pull-request job would have left
@@ -121,25 +134,28 @@ jobs:
     # `devtools/gate-budgets.yaml`, and `_tier_id` returns `None` for an `--only` run so
     # nothing is judged against a ceiling it does not have. What bounds these steps is
     # their own `budget_seconds`, which `_execute_step` raises the subprocess timeout to
-    # -- 1800s for the negative controls and for the slow lane. That is the same
-    # arrangement the `exhaustive` job in `packing-validation.yml` already runs under.
+    # -- 1800s for the negative controls and, since 2026-09-08, 1800s for the escape
+    # screen, which until then ran on the shared 900s cap it was measured 41s inside.
+    # That is the same arrangement the `exhaustive` job in `packing-validation.yml`
+    # already runs under.
     #
     # The names are typed here and cannot drift silently:
     # `test_the_deep_gate_runs_exactly_what_the_pull_request_defers` parses these commands
     # with the CLI's own parser, resolves them through its own selector, and requires the
-    # union to equal the set no pull-request job runs. A seventh deferral added tomorrow
+    # union to equal the set no pull-request job runs. An eighth deferral added tomorrow
     # fails that test until it is added here, which is the property the daily backstop
-    # never had.
+    # never had, and the same test requires these three selections to be disjoint so a
+    # step cannot be paid for in two jobs.
     #
-    # `--jobs 2 --inner-jobs 2`: this job's wall is one step's wall. `slow behavioral
-    # tests` runs pytest in a single process -- the xdist lane is the quick one -- so it
-    # is 890s that no amount of outer parallelism shortens, and the rest finish underneath
-    # it on the second slot. `--inner-jobs 2` now also reaches the two steps that arrived
-    # on 2026-09-07: both size their pools from `PACK_JOBS`, and the atlas rebuild is
-    # 348.15s at two workers against 691.19s serial on an idle ten-cpu box, so on this
-    # runner it lands well inside both the slow lane's 890s and the gate's own 900s
-    # per-step timeout. A third slot buys nothing and costs contention, which is
-    # `BC-218`'s finding one level down.
+    # `--jobs 2 --inner-jobs 2`: five steps, 1859.96s of measured step time, and one of
+    # them is 858.62s of it. Two outer slots put the screen on one and the other four
+    # (1001.34s between them) on the second, so this job's wall is about a thousand
+    # seconds -- half of `exhaustive-tier`, which decides when the gate finishes either
+    # way. `--inner-jobs 2` is what the two steps that arrived on 2026-09-07 read: both
+    # size their pools from `PACK_JOBS`, and the atlas rebuild is 348.15s at two workers
+    # against 691.19s serial on an idle ten-cpu box. Two slots times two workers is the
+    # runner's four cpus; a third outer slot buys nothing and takes cpus from the pools,
+    # which is `BC-218`'s finding one level down.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
@@ -159,8 +175,13 @@ jobs:
           # this step also runs on `pull_request`, where the event
           # payload simply carries no inputs and this renders empty.
           ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
-          # The slow retained-theorem review compares exact historical Git contents;
-          # those objects must exist even though this selection omits provenance.
+          # Kept at full history although the review that argued for it -- the slow
+          # retained-theorem review, which reads exact historical Git contents -- left
+          # with the slow lane on 2026-09-08. The five steps here reach git only through
+          # the negative controls' timing provenance, which is HEAD-relative, but those
+          # controls also run 163 declared mutations with commands of their own.
+          # Narrowing this checkout is a separate change, and it needs its own evidence
+          # rather than a line in a timeout fix.
           fetch-depth: 0
           # kpress is installed from the vendored submodule.
           submodules: true
@@ -177,17 +198,106 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      - name: Run the deferred steps that are not the exhaustive tier
+      - name: Run the deferred steps outside the slow lane and the exhaustive tier
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate
           --only "negative controls"
-          --only "slow behavioral tests"
           --only "n=40 rigidity bracket still reproduces"
           --only "known-best n=1..324 atlas rebuild"
           --only "single-square translation escape screen"
           --only "exact rational grid replay"
           --jobs 2 --inner-jobs 2
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  deferred-slow-lane:
+    # `slow behavioral tests` alone, on a runner of its own since 2026-09-08, because
+    # that is the day it and the escape screen both died of sharing one.
+    #
+    # The evidence is two runs on the same tree. Run 34177317419, dispatched against
+    # PR #116's merge ref, failed `deferred-steps` with two subprocess timeouts and
+    # nothing else wrong: this lane at 1800s, its own `FAST_SUITE_BUDGET_SECONDS`, and
+    # the escape screen at the 900s cap it then shared with every other step. Run
+    # 34176106076, the post-merge checkpoint that day, ran both to completion in its
+    # `validate` job at the same four cpus and the same `--jobs 2 --inner-jobs 2`:
+    # 1271.96s here and 858.62s there. The difference is not the tree and not the shape,
+    # it is what they were sharing a runner with -- sixty-odd steps costing seconds each
+    # there, five deferrals costing 1859.96s here. Since PR #111 tripled the known-best
+    # corpus to n = 1..324 there is nothing cheap left to interleave, and both of the two
+    # long steps ran past their caps.
+    #
+    # A second job costs billed minutes -- its own checkout, its own `uv sync`, and two
+    # lanes that no longer overlap -- and buys an uncontended wall. It buys no wall on
+    # the gate itself: 1271.96s here against 1943.05s in `exhaustive-tier`, which decides
+    # when the deep gate reports either way. `OR-14` is the rule this follows: put the
+    # parallelism where the wall is. The wall this moves is a step's, not the run's, and
+    # a step that is killed reports nothing about the five beside it -- which is `D-456`
+    # again, one workflow further out.
+    #
+    # `--jobs 1`: one step, so the outer pool has nothing to schedule.
+    #
+    # `--inner-jobs 2` rather than 1, and this is the part a single-process lane makes
+    # easy to get wrong. Pytest does run in one process here -- the xdist lane is the
+    # quick one, which this workflow never runs -- but the lane's two corpus-scaled tests
+    # pool their own work through `PACK_JOBS`, and they are 660.6s of the 1260.5s the
+    # junit receipt records over 97 tests:
+    # `test_known_best_composite_contains_every_case_and_square` at 472.8s, which builds
+    # the whole n=1..324 atlas at 691.19s serial against 348.15s at two workers, and
+    # `test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports` at 187.8s.
+    # `--inner-jobs 1` would hand back about as much wall as this job removes. Four
+    # workers on four cpus is what `exhaustive-tier` does and is deliberately not done
+    # here: no reading of this lane exists at four, and a timeout fix is not where an
+    # unmeasured speedup belongs.
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || contains(github.event.pull_request.labels.*.name, 'deep-gate')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # `github.event.inputs` rather than the `inputs` context: the latter is
+          # documented as available only to a dispatched or reusable workflow, and
+          # this step also runs on `pull_request`, where the event
+          # payload simply carries no inputs and this renders empty.
+          ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
+          # Full history moved here with the step that needs it. The slow lane contains
+          # `test_full_retained_review_and_three_falsifying_controls`, and the review
+          # under it reads two historical commits -- `f9ba790a` and `01ca830a` --
+          # through `git_content`, so a shallow checkout would fail it on a missing
+          # object rather than on the mathematics.
+          fetch-depth: 0
+          # kpress is installed from the vendored submodule.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the slow behavioural lane
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "slow behavioral tests"
+          --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -207,10 +317,13 @@ jobs:
     # beside `deferred-steps` in one job it would do that here too, and the deep gate's
     # whole value is naming *which* deferral broke before the merge rather than after it.
     #
-    # It costs a second runner and no wall: 1943.05s here against about 890s there, so
-    # the gate finishes when this job does either way. `BC-218` priced a second job at
-    # "+3 billed minutes and zero wall" and took it; this one is dearer in minutes and
-    # buys a separable verdict, on a workflow requested by label or dispatch.
+    # It costs a second runner and no wall: 1943.05s here against about 1000s in
+    # `deferred-steps` and 1271.96s in `deferred-slow-lane`, so the gate finishes when
+    # this job does whatever the others do. `BC-218` priced a second job at "+3 billed
+    # minutes and zero wall" and took it; this one is dearer in minutes and buys a
+    # separable verdict, on a workflow requested by label or dispatch. The 2026-09-08
+    # split above is the same trade made a third time, and for the sharper reason: the
+    # steps it separated were not merely late, they were being killed.
     #
     # Hosted provenance reports four available CPUs. This isolated job gives its
     # certificate pool up to four workers; actual CPU and grid-memory caps still apply.
@@ -280,7 +393,11 @@ jobs:
     #   1. On a pull request with no `deep-gate` label, the `if` below is false and this
     #      job is *skipped*. A skipped job reports a conclusion; a check that never runs
     #      is what sits pending forever, and that is why the label is tested in the job
-    #      condition rather than in the `pull_request` trigger's filters.
+    #      condition rather than in the `pull_request` trigger's filters. The condition
+    #      is typed identically in all four jobs, and
+    #      `test_an_unlabelled_opened_pull_request_reports_skipped_deep_jobs` compares
+    #      each one against the exact string, so a job added to this workflow cannot
+    #      arrive with a looser one -- which is what the 2026-09-08 split had to satisfy.
     #   2. This workflow does not become a prerequisite of `packing-required`, and
     #      `packing-validation.yml` is untouched. If it did, every pull request would
     #      wait 32 minutes for the surface this file exists to keep off every pull
@@ -288,18 +405,27 @@ jobs:
     #
     # `!cancelled()` rather than `always()`, again for `D-380`: `cancel-in-progress` is
     # on for pull requests above, so supersession is routine, and a superseded run must
-    # leave this unreported rather than report a hard failure. A genuine failure in
-    # either job is not `cancelled()`, so it still fails here.
+    # leave this unreported rather than report a hard failure. A genuine failure in any
+    # of the three jobs is not `cancelled()`, so it still fails here.
+    #
+    # Three prerequisites since 2026-09-08 and still one context. The job split that
+    # gave the slow lane its own runner changed what has to be waited on, not what is
+    # reported, which is exactly the condition `BC-218` attached to splitting at all.
+    # `test_the_deep_gate_reports_one_context_and_never_leaves_it_pending` reads `needs`
+    # against the job list rather than a typed set, so a fourth job joins this gate or
+    # fails that test; it cannot quietly go unrequired.
     if: >-
       !cancelled() && (github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate'))
-    needs: [deferred-steps, exhaustive-tier]
+    needs: [deferred-steps, deferred-slow-lane, exhaustive-tier]
     runs-on: ubuntu-latest
     steps:
       - name: Require every deep-gate prerequisite
         env:
           DEFERRED_RESULT: ${{ needs.deferred-steps.result }}
+          SLOW_LANE_RESULT: ${{ needs.deferred-slow-lane.result }}
           EXHAUSTIVE_RESULT: ${{ needs.exhaustive-tier.result }}
         run: |
           test "$DEFERRED_RESULT" = "success"
+          test "$SLOW_LANE_RESULT" = "success"
           test "$EXHAUSTIVE_RESULT" = "success"
