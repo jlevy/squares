@@ -59,7 +59,8 @@ session:
       45544013/4000000 (depth at most 15999983/16000000 at every site) charging the corner
       pair 1.002367 (dead), the P10-avoiders 3.608, and the grazing classes 0.841, 0.822,
       0.000 and 0.142 (corner, wall-middle, row-outer, row-inner), so on this site set only
-      the row types can carry a branch-2 measure, with necessary thresholds 1.39 and 1.51.
+      the row types can carry a branch-2 measure, with necessary thresholds 1.39 and 1.45
+      (1.51 for a K4-symmetric measure on the row-inner type).
       Theorem G.6: an exact contained unit square at tilt 13.0477 degrees (tan(psi/2) =
       137/1198, centre (53/35, 1398/985)) avoids all ten points with its centre outside both
       wall rectangles, so the wall-rectangle localisation holds for no band reaching 13.05
@@ -132,8 +133,8 @@ session:
 Research lane BC-299 of
 [Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md), on
 [H-126](../hypotheses/H-126-insertion-saturation-corner-structure.md) and
-[H-111](../hypotheses/H-111-resource-anchor-case-exclusion.md), run as one 2.5-hour block
-on one worker of a shared four-core host.
+[H-111](../hypotheses/H-111-resource-anchor-case-exclusion.md), run as one 2.5-hour
+block on one worker of a shared four-core host.
 The result document is
 [lane G](../series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md);
 this record carries the clocks, the stop conditions and what was checked.

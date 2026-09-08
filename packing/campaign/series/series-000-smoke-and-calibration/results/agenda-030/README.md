@@ -42,10 +42,11 @@ nothing else in this directory.
 
 - [Lane G, what the segment cover and the corner pair localise at `96/25`](lane-g-anchors-at-q.md)
   (BC-299, H-126, H-111): every core avoiding Stromquist’s ten points grazes a segment
-  within `1/100`, so Lemma B’s branch 1 is free and the anchor is a thin grazing class in
-  one of four types; the corner square is not pinned; an anchor proved by the ownership
-  lemma is unpriceable on its own site set (charge `1.0024`); only the row types survive
-  the free dual’s reading; an exact interior escape at `13.05°` answers the band question.
+  within `1/100`, so Lemma B’s branch 1 is free and the anchor is a thin grazing class
+  in one of four types; the corner square is not pinned; an anchor proved by the
+  ownership lemma is unpriceable on its own site set (charge `1.0024`); only the row
+  types survive the free dual’s reading; an exact interior escape at `13.05°` answers
+  the band question.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
