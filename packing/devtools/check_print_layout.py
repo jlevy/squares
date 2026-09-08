@@ -517,6 +517,21 @@ _DIAG_118 = r"""slug => {
     mainTextLength: (document.querySelector('main')?.innerText || '').length,
     firstKatexText: el.querySelector('.katex-html')?.innerText ?? null,
     mathmlText: el.querySelector('.katex-mathml')?.innerText ?? null,
+    subtree: (() => {
+      const first = el.firstElementChild;
+      if (!first) return null;
+      const rows = [];
+      const walk = node => {
+        if (rows.length > 40) return;
+        const style = getComputedStyle(node);
+        rows.push([node.tagName, String(node.className).slice(0, 24), style.display,
+          style.visibility, style.fontSize, style.position, style.overflow,
+          node.getClientRects().length, node.textContent.length, node.innerText.length]);
+        for (const child of node.children) walk(child);
+      };
+      walk(first);
+      return {html: first.outerHTML.slice(0, 500), rows};
+    })(),
     ancestors: (() => {
       const rows = [];
       for (let node = el; node; node = node.parentElement) {
