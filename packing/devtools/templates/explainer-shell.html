@@ -768,8 +768,9 @@ body {
 .math-reference { white-space: nowrap; }
 
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
-.tex, .tex-d { visibility: hidden; }
-.math-ready .tex, .math-ready .tex-d { visibility: visible; }
+/* The head bootstrap marks pending enhancement and clears it on failure. Without
+   JavaScript, raw TeX remains legible alongside KPress's semantic MathML. */
+html[data-kpress-math-pending] :is(.tex, .tex-d) { visibility: hidden; }
 /* Wide equations scroll sideways; the block keeps headroom for fractions, since
    overflow-x: auto also clips vertically and the display margin is zeroed. */
 .tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; padding-block: 0.45rem; }
@@ -1110,20 +1111,10 @@ const nearly = text => `{\\approx}\\,${text}`;
 const degTex = (a, places, exact = a === 0) => (exact ? deg(a, places) : nearly(deg(a, places)));
 const degRel = (a, places, exact = a === 0) => `${exact ? '=' : '\\approx'} ${deg(a, places)}`;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-/* A function name set in italic leans into the parenthesis after it, so `s(n)` sets
-   the bracket against the letter's terminal. One mu is the smallest space TeX offers,
-   and the same offset the drawn figures use, so the prose, the captions and the
-   diagrams space it alike. `cos(x)` is untouched: the letter is not on its own. */
-const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-/* Every render on this page goes through `installTablesFor` first. KaTeX lays out from
-   a metric table held in its own singleton, so the table has to be the right one at the
-   moment `render` is called: this figure's readouts sit in the sans panels and its
-   captions, and their mathematics is measured for Source Sans and marked so the
-   stylesheet draws it from the sans composite. See `math_text_init` in
-   `render_explainer.py`. */
-const tex = (el, s, d) => { if (globalThis.kpressMathText) kpressMathText.installTablesFor(el);
-                            try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
-                            catch (e) { el.textContent = s; } };
+/* The shared renderer gates every call, including the ResizeObserver's initial
+   redraw and input received while fonts are loading. It selects the context's face
+   and metrics together before revealing the result. */
+const tex = squaresMath.render;
 /* A readout that is replaced rather than slid fades in (see `.swap`); one
    that already shows the text is left alone, so leaving and re-entering a
    figure does not blink it. */
@@ -1659,13 +1650,9 @@ function boot() {
   drawField(); document.getElementById('kslider-{{SLUG}}').value = String(curK);
   refresh(true); shrinkDraw();
 }
-/* The first boot waits on the math faces, the later ones do not. `refresh` typesets
-   this figure's readouts, so booting before the composite's slots have decoded paints
-   their digits in the next family of the stack and repaints them a moment later --
-   which is what the owner saw as every formula's digits changing font on load. The
-   promise is already settled by the time a repaint runs, and it resolves at the
-   ceiling whatever happens, so nothing here can be held back indefinitely. */
-(globalThis.kpressMathFaces || Promise.resolve()).then(boot);
+/* Warm the common math faces before the first draw. The render API also waits at
+   every actual render call, so resize, theme, print, and input events are covered. */
+squaresMath.ready.then(boot);
 const repaint = () => { heat = null; boot(); };
 if (window.matchMedia) {
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -1706,20 +1693,18 @@ window.addEventListener('afterprint', repaint);
   window.matchMedia('print').addEventListener('change', sizeDiagramLabels);
   document.fonts.ready.then(sizeDiagramLabels);
   sizeDiagramLabels();
-  const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-  /* As in the certificate script: the metric table is chosen per node, because a
-     caption's mathematics is measured for the caption's own face and the prose's for
-     PT Serif. `installTablesFor` also marks the node, which is what the stylesheet
-     draws the sans composite on. */
-  const render = (el, s, d) => { if (globalThis.kpressMathText) kpressMathText.installTablesFor(el);
-                                 try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
-                                 catch (e) { el.textContent = s; } };
-  function typeset() {
+  const render = squaresMath.render;
+  async function typeset() {
+    const pending = [];
     document.querySelectorAll('.tex').forEach(el => {
-      if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; render(el, el.textContent, false); }
+      if (!el.dataset.done && !el.querySelector('.katex')) {
+        pending.push(render(el, el.textContent, false).then(() => { el.dataset.done = '1'; }));
+      }
     });
     document.querySelectorAll('.tex-d').forEach(el => {
-      if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
+      if (!el.dataset.done) {
+        pending.push(render(el, el.textContent, true).then(() => { el.dataset.done = '1'; }));
+      }
     });
     /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
        and the element marked rendered, which is what shows it and hides the
@@ -1728,12 +1713,13 @@ window.addEventListener('afterprint', repaint);
       const box = el.querySelector('.kpress-math-render');
       if (!box || el.dataset.kpressMathRendered) return;
       const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
-      render(box, src, el.dataset.kpressMath === 'display');
-      el.dataset.kpressMathRendered = 'true';
+      pending.push(render(box, src, el.dataset.kpressMath === 'display').then(rendered => {
+        if (rendered) el.dataset.kpressMathRendered = 'true';
+      }));
     });
-    /* Leave the serif set installed, as kpress's own loop does: anything typeset
-       later without asking gets the reading face's numbers, which is the default. */
-    if (globalThis.kpressMathText) kpressMathText.restore();
+    await Promise.all(pending);
+    await squaresMath.settled();
+    kpressMathText.complete();
     document.documentElement.classList.add('math-ready');
 
     /* Footnote hover previews, kpress's own, bundled into this page. Booted after
@@ -1741,12 +1727,9 @@ window.addEventListener('afterprint', repaint);
     if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
     if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
   }
-  /* Held until the faces the mathematics will be drawn from have loaded, or until the
-     ceiling; `math-ready` therefore means "typeset, in the faces it will keep" rather
-     than "typeset, and about to repaint". `render_explainer_pdf` and
-     `check_print_layout` both wait on that class, so the print pass gets the settled
-     page for free. */
-  (globalThis.kpressMathFaces || Promise.resolve()).then(typeset);
+  /* PDF and layout tools wait for math-ready, which follows the completed static
+     renders and the initial interactive readouts. */
+  squaresMath.ready.then(typeset);
 
   /* One copy of each figure per certificate. The switch beside every figure
      shows one certificate's copies and records it in the hash, so a link can

@@ -29,9 +29,11 @@ painted in whatever faces have decoded by then, and each composite's slots are s
 `@font-face` rules fetched only when a formula first asks for them. Rendering as soon as
 the DOM is ready therefore paints the digits from the next family in the stack and
 repaints them a moment later, which the owner saw on the built page and on the live site
-as every formula's digits changing font on load (`think-q5df`). An init script records,
-at the instant the first `.katex` node enters the document, the status of every face the
-mathematics will be drawn from; each one has to be loaded already.
+as every formula's digits changing font on load (`think-q5df`). An init script samples
+the first CSS-visible `.katex` node and records the status of every embedded math face;
+each one has to be loaded already. Hidden staging nodes do not count as visible
+formulas. The separate delayed-font checker also verifies that native MathML and early
+interactive renders stay hidden during this wait.
 
 A fourth thing falls out of the first: the page's init has to have RUN. It is one
 `(() => { ... })()` inlined into the page, and a reference error inside it leaves the
@@ -54,9 +56,10 @@ import os
 from pathlib import Path
 from typing import NotRequired, TypedDict
 
+from devtools.check_math_loading import FIRST_PAINT_SCRIPT
 from devtools.check_print_layout import PRINT_VIEWPORT
 from devtools.render_explainer import MATH_WRAPPERS
-from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
+from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
 #: The faces the composites draw their Latin and digits from, by the prefix Blink answers
 #: `CSS.getPlatformFontsForNode` with. A variable face comes back as the instance it is at
@@ -65,23 +68,10 @@ from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
 SANS_FACE = "Source Sans 3"
 PROSE_FACE = "PT Serif"
 
-#: What the paint-once wait covers, and therefore what has to be loaded before the first
-#: expression is inserted: both composites, plus the two KaTeX families every rule in
-#: `katex-text-face.css` names after them. The construct-specific KaTeX families (AMS,
-#: Size1-4, Caligraphic, Fraktur, Script, SansSerif, Typewriter) are deliberately outside
-#: the wait -- kpress's "Paints once" says why -- so they are outside this too.
-WAITED_FAMILIES = (
-    "KPress Math Text",
-    "KPress Math Text Sans",
-    "KaTeX_Main",
-    "KaTeX_Math",
-)
-
 #: kpress's math markup, which the walk climbs through to find the words. The list is the
 #: renderer's, since the init walks the same wrappers for the same reason.
 PROBE_ARGUMENTS: dict[str, object] = {
     "wrappers": MATH_WRAPPERS,
-    "waited": list(WAITED_FAMILIES),
 }
 
 
@@ -95,41 +85,6 @@ class Report(TypedDict):
     first_paint: NotRequired[dict[str, object]]
     findings: list[str]
 
-
-#: Records the first `.katex` node to enter the document, and the status of every face at
-#: that instant. Installed before any of the page's own scripts run.
-#:
-#: The observer is attached to `document` rather than to `document.documentElement`,
-#: because an init script runs at document creation and the root element may not exist
-#: yet; observing the document covers its creation as well as everything under it.
-FIRST_PAINT_SCRIPT = """
-(() => {
-  globalThis.__mathFirstPaint = null;
-  const observer = new MutationObserver((records) => {
-    if (globalThis.__mathFirstPaint) return;
-    for (const record of records) {
-      for (const node of record.addedNodes) {
-        if (node.nodeType !== 1) continue;
-        const isMath = node.classList.contains("katex")
-          || (node.querySelector && node.querySelector(".katex"));
-        if (!isMath) continue;
-        const faces = [];
-        document.fonts.forEach((face) => faces.push({
-          family: face.family,
-          style: face.style,
-          weight: face.weight,
-          unicodeRange: face.unicodeRange,
-          status: face.status,
-        }));
-        globalThis.__mathFirstPaint = { at: performance.now(), faces };
-        observer.disconnect();
-        return;
-      }
-    }
-  });
-  observer.observe(document, { childList: true, subtree: true });
-})();
-"""
 
 #: The walk. Returns one `{ nodes, marked, tables, findings }` per medium.
 #:
@@ -150,7 +105,7 @@ FIRST_PAINT_SCRIPT = """
 #: page happens to contain. The probe span is appended to the same container, so it
 #: inherits the same font stack and the same size, and it is removed again; nothing here
 #: leaves a mark on the page beyond the marks the page itself made.
-PROBE = r"""({ wrappers, waited }) => {
+PROBE = r"""({ wrappers }) => {
   const findings = [];
   const nodes = [...document.querySelectorAll('.katex')];
   const sans = (node) => !!node.closest('[data-kpress-math-face="sans"]');
@@ -225,7 +180,7 @@ PROBE = r"""({ wrappers, waited }) => {
     /* The seam picks the set from the element it is handed, so it is handed one that
        lives where the set under test does; `probe` then only has to be somewhere the
        size and the stack are the node's own. */
-    seam.installTablesFor(host);
+    seam.installTablesFor(host, globalThis.squaresMath?.context);
     try {
       katex.render(source(node), probe, { throwOnError: false });
     } catch (error) {
@@ -258,13 +213,14 @@ PROBE = r"""({ wrappers, waited }) => {
   }
   seam.restore();
 
-  /* Painted once: every face the wait covers, loaded before the first expression. */
+  /* The self-contained page must decode its math faces before exposing any formula. */
   const paint = globalThis.__mathFirstPaint;
   if (!paint) {
     findings.push('nothing recorded the first mathematics node; the init script did not run');
   } else {
     const late = paint.faces
-      .filter((face) => waited.includes(face.family) && face.status !== 'loaded')
+      .filter((face) => (face.family.startsWith('KaTeX_')
+        || face.family.startsWith('KPress Math Text')) && face.status !== 'loaded')
       .map((face) => face.family + ' ' + face.style + ' ' + face.weight
         + ' (' + face.status + ')');
     if (late.length) {
@@ -281,9 +237,9 @@ def _run(page: object, findings: list[str], medium: str) -> Report:
     from playwright.sync_api import Page  # noqa: PLC0415
 
     assert isinstance(page, Page)
-    page.evaluate("document.fonts.ready")
+    page.evaluate(SETTLED)
     page.evaluate(
-        "() => new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done)))"
+        "globalThis.__mathLoadingState && (globalThis.__mathLoadingState.stop = true)"
     )
     probe: Report = page.evaluate(PROBE, PROBE_ARGUMENTS)
     findings.extend(f"{medium}: {finding}" for finding in probe["findings"])
@@ -293,14 +249,11 @@ def _run(page: object, findings: list[str], medium: str) -> Report:
 #: One letter or digit of a formula, marked so CDP can find it. The composite claims the
 #: Latin ranges and the digits and nothing else, so a run of operators or Greek would
 #: answer with a KaTeX face whichever composite is in force and prove nothing.
-_MARK = """({ marked, mark }) => {
-  const scope = marked
-    ? '[data-kpress-math-face="sans"] .katex'
-    : '.kpress-prose > p .katex';
+_MARK = """({ scope, mark }) => {
   for (const node of document.querySelectorAll(scope)) {
-    if (!marked && node.closest('[data-kpress-math-face="sans"]')) continue;
+    if (!node.checkVisibility({ visibilityProperty: true })) continue;
     for (const run of node.querySelectorAll('.mord')) {
-      if (run.children.length === 0 && /^[0-9A-Za-z]+$/.test(run.textContent.trim())) {
+      if (run.children.length === 0 && /^[0-9A-Za-z.]+$/.test(run.textContent.trim())) {
         run.id = mark;
         return run.textContent.trim();
       }
@@ -310,7 +263,7 @@ _MARK = """({ marked, mark }) => {
 }"""
 
 
-def _drawn_face(page: object, *, marked: bool) -> tuple[str | None, list[str]]:
+def _drawn_face(page: object, *, scope: str) -> tuple[str | None, list[str]]:
     """The face Blink actually draws one Latin run of a formula from, and its text.
 
     `CSS.getPlatformFontsForNode` is the only answer that is not a restatement of the
@@ -322,7 +275,7 @@ def _drawn_face(page: object, *, marked: bool) -> tuple[str | None, list[str]]:
 
     assert isinstance(page, Page)
     mark = "kpress-math-face-probe"
-    text = page.evaluate(_MARK, {"marked": marked, "mark": mark})
+    text = page.evaluate(_MARK, {"scope": scope, "mark": mark})
     if text is None:
         return None, []
     session = page.context.new_cdp_session(page)
@@ -340,6 +293,31 @@ def _drawn_face(page: object, *, marked: bool) -> tuple[str | None, list[str]]:
             " if (el) el.removeAttribute('id'); }",
             mark,
         )
+
+
+def _check_drawn(page: object, findings: list[str], medium: str) -> list[str]:
+    """Sample actual captions, prose, and an interactive readout in each medium."""
+    drawn: list[str] = []
+    sans_prefix = SANS_FACE if medium == "screen" else "KPress Print Sans"
+    contexts = [
+        ("caption", ".kpress-figcaption .katex", sans_prefix),
+        ("prose", ".kpress-prose > p .katex", PROSE_FACE),
+    ]
+    # The interactive panels are intentionally omitted from the printed paper.
+    if medium == "screen":
+        contexts.append(("readout", '[id^="s-phi-"] .katex', sans_prefix))
+    for kind, scope, wanted in contexts:
+        text, faces = _drawn_face(page, scope=scope)
+        if text is None:
+            findings.append(f"{medium}: no {kind} formula with a Latin run to draw from")
+            continue
+        drawn.append(f"{medium} {kind}: {text!r} from {', '.join(faces) or 'nothing'}")
+        if not any(face.startswith(wanted) for face in faces):
+            findings.append(
+                f"{medium}: {kind} mathematics is drawn from {faces or 'nothing'}, "
+                f"not from {wanted}"
+            )
+    return drawn
 
 
 def check(path: Path = PAGE, *, width: int = 1280) -> Report:
@@ -363,23 +341,11 @@ def check(path: Path = PAGE, *, width: int = 1280) -> Report:
             report["nodes"] = screen["nodes"]
             report["marked"] = screen["marked"]
             report["tables"] = screen["tables"]
-            drawn: list[str] = []
-            for marked, wanted in ((True, SANS_FACE), (False, PROSE_FACE)):
-                kind = "caption" if marked else "prose"
-                text, faces = _drawn_face(page, marked=marked)
-                if text is None:
-                    findings.append(f"screen: no {kind} formula with a Latin run to draw from")
-                    continue
-                drawn.append(f"{kind}: {text!r} from {', '.join(faces) or 'nothing'}")
-                if not any(face.startswith(wanted) for face in faces):
-                    findings.append(
-                        f"screen: {kind} mathematics is drawn from {faces or 'nothing'}, "
-                        f"not from {wanted}"
-                    )
-            report["drawn"] = drawn
+            report["drawn"] = _check_drawn(page, findings, "screen")
             page.emulate_media(media="print")
             page.set_viewport_size(PRINT_VIEWPORT)
             _run(page, findings, "print")
+            report["drawn"].extend(_check_drawn(page, findings, "print"))
             paint = page.evaluate(
                 "() => globalThis.__mathFirstPaint && { at: globalThis.__mathFirstPaint.at, "
                 "faces: globalThis.__mathFirstPaint.faces.length }"

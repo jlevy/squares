@@ -40,16 +40,17 @@ from __future__ import annotations
 
 import base64
 import io
+import json
 import re
 from pathlib import Path
+from textwrap import dedent
 
 import pytest
 from kpress.format import assets as kpress_assets
+from nodejs_wheel import node
 
 from devtools import render_explainer
 from devtools.render_explainer import (
-    FACE_WAIT_FLOOR_MS,
-    KPRESS_INIT_CONSTANTS,
     RELATION_FACES,
     RELATION_FAMILIES,
     RELATION_POINTS,
@@ -61,7 +62,6 @@ from devtools.render_explainer import (
     katex_css,
     katex_js,
     kpress_css,
-    kpress_init_constants,
     kpress_static,
     relation_face_css,
 )
@@ -386,6 +386,7 @@ BAD_ASSET_LISTS: list[tuple[str, list[str], str]] = [
         [
             "katex/katex-text-metrics.js",
             "katex/katex.min.js",
+            "katex/katex-math-runtime.js",
             "katex/katex-init.js",
         ],
         "which cannot be right",
@@ -409,6 +410,71 @@ def test_the_metric_tables_must_follow_the_bundle_they_patch(
     monkeypatch.setattr(kpress_assets, "KATEX_JS_ASSETS", listed)
     with pytest.raises(SystemExit, match=complaint):
         katex_js(tmp_path)
+
+
+def test_host_context_and_kerning_reach_the_shared_math_renderer() -> None:
+    """The host contributes its custom wrappers and TeX spacing to the shared API.
+
+    Figure readouts are custom sans components, while native math wrappers reset the
+    font to prose. The context callback must look through those wrappers without
+    changing ordinary prose or detached nodes into sans mathematics.
+    """
+    setup = dedent(r"""
+        const assert = require('node:assert/strict');
+        const calls = [];
+        let finish;
+        const sans = {nodeType: 1, parentElement: null, matches: () => false,
+          fontFamily: '"Source Sans 3 Variable", sans-serif'};
+        const prose = {...sans, fontFamily: '"PT Serif", serif'};
+        const wrapper = parent => ({nodeType: 1, parentElement: parent,
+          matches: () => true, dataset: {}});
+        const nodes = [wrapper(wrapper(sans)), wrapper(prose), wrapper(null)];
+        const document = {querySelectorAll: () => nodes};
+        const getComputedStyle = el => ({fontFamily: el.fontFamily,
+          getPropertyValue: () => '"Source Sans 3 Variable", sans-serif'});
+        globalThis.kpressMathText = {
+          ready(nodes, context) {
+            assert.equal(context.allEmbeddedFonts, true);
+            calls.push({contexts: nodes.map(context.isSansContext)});
+            return Promise.resolve();
+          },
+          render(source, target, options, context) {
+            calls.push({source, display: options.displayMode,
+              sans: context.isSansContext(target)});
+            if (target === nodes[1]) return new Promise(resolve => { finish = resolve; });
+            return Promise.resolve();
+          },
+        };
+    """)
+    exercise = dedent(r"""
+        (async () => {
+          await squaresMath.ready;
+          await squaresMath.render(nodes[0], 's(11) + cos(x)', true);
+          const delayed = squaresMath.render(nodes[1], 'n(2)', false);
+          let completed = false;
+          const settled = squaresMath.settled().then(() => { completed = true; });
+          await Promise.resolve();
+          assert.equal(completed, false, 'initial readouts are still being rendered');
+          finish();
+          await delayed;
+          await settled;
+          assert.equal(completed, true);
+          process.stdout.write(JSON.stringify(calls));
+        })();
+    """)
+    completed = node(
+        ["-"],
+        return_completed_process=True,
+        input=setup + render_explainer.host_math_init() + exercise,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout) == [
+        {"contexts": [True, False, False]},
+        {"source": r"s\mkern1mu(11) + cos(x)", "display": True, "sans": True},
+        {"source": r"n\mkern1mu(2)", "display": False, "sans": False},
+    ]
 
 
 def _sans_face(family: str, weight: int) -> str:
@@ -589,60 +655,23 @@ def test_the_relation_subset_carries_the_three_glyphs_and_its_own_name() -> None
     assert len(base64.b64decode(encoded.group(1))) < 2000
 
 
-def test_the_math_init_takes_its_decisions_from_kpress_rather_than_copying_them() -> None:
-    """The page runs its own render loop and must not have its own opinions.
-
-    kpress's `katex-init.js` cannot drive this page -- the article's `.tex` spans and the
-    figures' readouts are neither of the two node shapes its loop knows -- so the loop is
-    the page's. Everything in that file that is a DECISION is spliced out of it instead of
-    copied: which contexts are sans, which faces the render waits on, at which weights,
-    and for how long. A copy of any of those would drift the day kpress changed it, and
-    the sans-role list is one kpress's own design says exists in that file and nowhere
-    else.
-    """
-    constants, wait = kpress_init_constants(kpress_static())
-    for name in KPRESS_INIT_CONSTANTS:
-        assert f"const {name} =" in constants, name
-    # The two that decide what is drawn: kpress's sans roles, and each composite's own
-    # weights. The sans slots are 400 and 650, not 400 and 700, because that is where its
-    # metric tables are built.
-    assert ".kpress-figcaption" in constants
-    assert "650 1em 'KPress Math Text Sans'" in constants
-    assert "700 1em 'KPress Math Text'" in constants
-    assert wait >= FACE_WAIT_FLOOR_MS
-
-
-def test_a_reshaped_kpress_init_fails_the_render_rather_than_splicing_nothing(
-    tmp_path: Path,
+def test_the_shared_math_runtime_is_embedded_without_rewriting_its_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """A splice that quietly comes back empty is the failure this refusal exists for.
-
-    `SANS_CONTEXT` reaching the page as an empty string would match no element, every
-    caption would be laid out from PT Serif's numbers and drawn from Source Sans, and
-    nothing without a browser would notice.
-    """
-    init = tmp_path / "katex"
-    init.mkdir()
-    (init / "katex-init.js").write_text("const SANS_CONTEXT = '.gone';\n", encoding="utf-8")
-    with pytest.raises(SystemExit, match="no longer declares"):
-        kpress_init_constants(tmp_path)
-
-
-def test_the_wait_ceiling_never_falls_below_the_block_period(tmp_path: Path) -> None:
-    """kpress's ceiling is used, and floored: `font-display: block` is three seconds.
-
-    A shorter wait would hand the reader back the repaint the block period was already
-    preventing, so a lower value upstream raises this side's floor rather than lowering
-    its ceiling.
-    """
-    source = (kpress_static() / render_explainer.KATEX_INIT).read_text(encoding="utf-8")
-    init = tmp_path / "katex"
-    init.mkdir()
-    (init / "katex-init.js").write_text(
-        source.replace(
-            f"const FACE_WAIT_MS = {FACE_WAIT_FLOOR_MS};", "const FACE_WAIT_MS = 50;"
+    """Runtime changes upstream reach the host without another JavaScript implementation."""
+    scripts = {
+        "katex/katex.min.js": "/* vendor bundle */",
+        "katex/katex-text-metrics.js": "/* profile tables */",
+        "katex/katex-math-runtime.js": (
+            "/* shared runtime */\nconst changedShape = {\n  ready: true,\n};"
         ),
-        encoding="utf-8",
+        "katex/katex-init.js": "/* native auto-render loop */",
+    }
+    monkeypatch.setattr(kpress_assets, "KATEX_JS_ASSETS", list(scripts))
+    for name, source in scripts.items():
+        asset = tmp_path / name
+        asset.parent.mkdir(exist_ok=True)
+        asset.write_text(source, encoding="utf-8")
+    assert katex_js(tmp_path) == "\n".join(
+        [*list(scripts.values())[:-1], render_explainer.host_math_init()]
     )
-    _, wait = kpress_init_constants(tmp_path)
-    assert wait == FACE_WAIT_FLOOR_MS

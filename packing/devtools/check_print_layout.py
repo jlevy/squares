@@ -38,7 +38,7 @@ from typing import NotRequired, TypedDict
 from playwright.sync_api import CDPSession, Locator, Page, ViewportSize
 
 from devtools.render_explainer import WALKTHROUGH
-from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
+from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
 
 class Centred(TypedDict):
@@ -416,13 +416,6 @@ _PROBE = r"""() => {
 }"""
 
 
-#: Two frames, so the media switch and the viewport change have both been laid out
-#: before anything is measured. `evaluate` alone does not guarantee a flush after
-#: `emulate_media`, and a rect read from the previous layout is the classic flake here.
-_SETTLED = """() => new Promise(
-  (done) => requestAnimationFrame(() => requestAnimationFrame(done)),
-)"""
-
 #: What `--self-check` puts in front of the gate, and what it holds the gate to naming.
 #: 42px is the overflow the display equation shipped with, and the number the reviewer
 #: reproduced this defect at: in a 576px print column it is a 618px block, and Chromium
@@ -482,7 +475,7 @@ def prover_findings(page: Page) -> list[str]:
     """
     page.emulate_media(media="screen", reduced_motion="reduce")
     page.set_viewport_size({"width": 1280, "height": 900})
-    page.evaluate(_SETTLED)
+    page.evaluate(SETTLED)
     slugs: list[str] = page.locator(".cert-figure").evaluate_all(
         "els => [...new Set(els.map(el => el.dataset.cert))]"
     )
@@ -538,6 +531,7 @@ def prover_findings(page: Page) -> list[str]:
         ):
             found.append(prefix + "the opening pose is not an admissible net placement")
         reset.click()
+        page.evaluate(SETTLED)
         if not status.is_visible() or not status.inner_text().strip():
             found.append(prefix + "reset gives no status feedback")
         if slider.input_value() != "0":
@@ -557,6 +551,7 @@ def prover_findings(page: Page) -> list[str]:
         if not verdict.is_visible():
             found.append(prefix + "an outside-domain placement has no verdict")
         reset.click()
+        page.evaluate(SETTLED)
         if figure.locator(f"#mv-{slug}").inner_text() != minimum:
             found.append(prefix + "reset does not restore the certificate's minimum mass")
         scan.click()
@@ -591,13 +586,16 @@ def prover_findings(page: Page) -> list[str]:
         # only the much shorter zero readout which cannot expose the wrap defect.
         slider.evaluate("el => { el.value = String(Math.min(118, Number(el.max))); }")
         slider.dispatch_event("input")
+        page.evaluate(SETTLED)
         if slider.get_attribute("max") == "180":
             direction = figure.locator(f"#kval-{slug}").inner_text()
             if not all(value in direction for value in ("12219313", "45000000", "30.3836")):
-                found.append(prefix + "direction 118 has the wrong half-tangent or angle")
+                found.append(
+                    prefix + f"direction 118 has the wrong half-tangent or angle: {direction!r}"
+                )
         for width in (1280, 375):
             page.set_viewport_size({"width": width, "height": 900})
-            page.evaluate(_SETTLED)
+            page.evaluate(SETTLED)
             layout: list[str] = page.evaluate(_PROVER_LAYOUT)
             found.extend(prefix + f"{width}px: {failure}" for failure in layout)
         page.set_viewport_size({"width": 1280, "height": 900})
@@ -626,7 +624,7 @@ def prover_findings(page: Page) -> list[str]:
                 found.append(prefix + "free rotation does not report an off-net direction")
             for width in (1280, 375):
                 page.set_viewport_size({"width": width, "height": 900})
-                page.evaluate(_SETTLED)
+                page.evaluate(SETTLED)
                 layout = page.evaluate(_PROVER_LAYOUT)
                 found.extend(prefix + f"off-net {width}px: {failure}" for failure in layout)
         page.set_viewport_size({"width": 1280, "height": 900})
@@ -668,9 +666,9 @@ def _touch_gesture(
                 "Input.dispatchTouchEvent",
                 {"type": "touchMove", "touchPoints": [{"x": x, "y": y, "id": 1}]},
             )
-            page.evaluate(_SETTLED)
+            page.evaluate(SETTLED)
     session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
-    page.evaluate(_SETTLED)
+    page.evaluate(SETTLED)
 
 
 def _control_angle(control: Locator, *, prover: bool) -> float:
@@ -701,7 +699,7 @@ def touch_findings(page: Page) -> list[str]:
                     found.append(prefix + "no visible rotation button before the first touch")
                     continue
                 canvas.evaluate("el => el.scrollIntoView({block: 'center'})")
-                page.evaluate(_SETTLED)
+                page.evaluate(SETTLED)
                 control = page.locator(f"#{control_name}-{slug}")
                 if number == 5:
                     control.evaluate("el => { el.value = '0'; }")
@@ -718,7 +716,7 @@ def touch_findings(page: Page) -> list[str]:
                 before = _control_angle(control, prover=number == 5)
                 # Native taps wait for a stable, hittable target after scrolling.
                 handle.tap()
-                page.evaluate(_SETTLED)
+                page.evaluate(SETTLED)
                 if _control_angle(control, prover=number == 5) == before:
                     found.append(
                         prefix + "tapping the rotation button does not turn the square"
@@ -742,7 +740,7 @@ def touch_findings(page: Page) -> list[str]:
                 if _control_angle(control, prover=number == 5) == before:
                     found.append(prefix + "the rotation button does not support arrow keys")
                 canvas.evaluate("el => el.scrollIntoView({block: 'center'})")
-                page.evaluate(_SETTLED)
+                page.evaluate(SETTLED)
                 box = canvas.bounding_box()
                 assert box is not None
                 scroll = """() => (document.querySelector('[data-kpress-viewport]')
@@ -807,7 +805,7 @@ def measure(page_url: str, *, inject: str | None = None, spec: object = None) ->
             page.evaluate("document.fonts.ready")
             if inject is not None:
                 page.evaluate(inject, spec)
-            page.evaluate(_SETTLED)
+            page.evaluate(SETTLED)
             printed: Probe = page.evaluate(_PROBE)
             controls = prover_findings(page)
             mobile = browser.new_page(

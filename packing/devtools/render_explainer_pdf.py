@@ -54,6 +54,17 @@ _DATES = re.compile(rb"/(CreationDate|ModDate) \(D:[^)]{0,32}\)")
 #: KaTeX has typeset; `document.fonts.ready` settles when the inlined faces are applied.
 READY = "html.math-ready"
 
+#: Media changes and ResizeObserver callbacks can start asynchronous math renders.
+#: Let layout dispatch them, then await those renders and the faces they request.
+SETTLED = """async () => {
+  void document.documentElement.offsetHeight;
+  await new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done)));
+  await globalThis.squaresMath?.settled();
+  await document.fonts.ready;
+  await new Promise(done => requestAnimationFrame(done));
+  await globalThis.squaresMath?.settled();
+}"""
+
 #: A browser the environment supplies, for hosts that have one and cannot run
 #: `playwright install` -- a sandbox with a preloaded cache, a distribution package, a CI
 #: image that pins its own. Left unset, the driver finds the build its own pin names,
@@ -187,6 +198,7 @@ def render_pdf_bytes() -> bytes:
             page.evaluate(_ABSOLUTE_LINKS, SITE_URL)
             page.add_style_tag(content=print_face_css())
             page.evaluate(_FACES_APPLIED, [list(_MARGIN_BOX_TOKENS), _MARGIN_BOX_SAMPLE])
+            page.evaluate(SETTLED)
             return page.pdf(
                 print_background=True,
                 prefer_css_page_size=True,

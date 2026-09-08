@@ -26,6 +26,10 @@ name: Certificate page
       - packing/devtools/render_explainer_pdf.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
+      - packing/devtools/check_math_faces.py
+      - packing/devtools/check_math_loading.py
+      - packing/devtools/compare_math_fonts.py
+      - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -54,6 +58,10 @@ name: Certificate page
       - packing/devtools/render_explainer_pdf.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
+      - packing/devtools/check_math_faces.py
+      - packing/devtools/check_math_loading.py
+      - packing/devtools/compare_math_fonts.py
+      - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -181,14 +189,58 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_math_faces --self-test
           uv run --frozen --group dev python -m devtools.check_math_faces
 
+      - name: Check font loading before the first visible formula and early input
+        run: |
+          uv run --frozen --group dev python -m devtools.check_math_loading --self-test
+          uv run --frozen --group dev python -m devtools.check_math_loading
+
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: packing/site
 
+  font-loading:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [firefox, webkit]
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned browser and its system libraries
+        run: uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Render the page and check mobile font loading
+        run: |
+          uv run --frozen --group dev python -m devtools.render_explainer
+          uv run --frozen --group dev python -m devtools.check_math_loading --browser ${{ matrix.browser }} --width 390
+
   deploy:
-    needs: build
+    needs: [build, font-loading]
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
