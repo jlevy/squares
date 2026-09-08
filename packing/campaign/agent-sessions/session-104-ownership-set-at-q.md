@@ -58,7 +58,7 @@ session:
       branch-and-bound over test squares driven by the falsifier as a cutting-plane loop.
     commitment: BC-302
     bead: think-qfog
-    status: PHASE2_STATUS
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: The engine is verified; the block's question needs the candidate sets and their escapes.
     budget_minutes: 90
@@ -68,57 +68,76 @@ session:
     validation_command: uv run --frozen --all-extras --group dev python candidates.py, minimax.py, loop.py (scratch directory, project interpreter); every reported escape re-verified by escape_engine.exact_verify.
     kill_condition: A candidate set with no verified escape at step 0.02 and angle step 1.5 degrees, which switches the lane to the proof attempt.
     fallback: Publish the catalogue at its current scope with the resolution of every non-refutation.
-    outcome: PHASE2_OUTCOME
+    outcome: >-
+      Every point set tested has an exactly verified escape (W11 0.41449, G11 0.06310,
+      P10 and P10 plus one 0.03188, the polished K4 optimum 0.01401, the free optimum
+      0.01720); an independent standard-library reader agrees on all 22 catalogued
+      escapes; the exact branch-and-bound loop stayed alive (150 tests, 151 nodes) and
+      was stopped. Segment marks: Stromquist's ten points as horizontal segments of
+      length 1/10 have no escape at steps 0.02/1.5 and 0.01/0.75 degrees, and an interval
+      reader over pose space certifies the cover (404613 boxes, 184756 leaves, 0
+      failures), re-checked exactly leaf by leaf and discard by discard and sampled at
+      6000 poses; length 9/100 certifies, 8/100 does not, 7/100 escapes.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
-    stop_reason: PHASE2_STOP
+    stop_reason: The block's question is answered at its scope, with a certified survivor for the segment form and an exact escape for every point set.
     next_action: Write the lane document, the README line and this record; validate the records tier; commit.
   - workflow: documentation-pass
     focus: correctness
     recording: contemporaneous
-    clock_role: finalization
+    clock_role: work
     objective: The lane document, the one-line README entry, this record, the records-tier validation and the commit.
     commitment: BC-302
     bead: think-qfog
-    status: PHASE3_STATUS
+    status: in_progress
     entered_by: planned_checkpoint
     switch_reason: The computations are at their block scope; the remaining time is the record.
-    budget_minutes: 30
-    started_at: 'PHASE3_START'
-    deadline_at: '2026-09-08T07:08:00Z'
+    budget_minutes: 45
+    started_at: '2026-09-08T05:25:00Z'
+    deadline_at: '2026-09-08T06:10:00Z'
     expected_output: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md and this record.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: The block's deadline.
     fallback: Commit what is written with the checkpoint file naming what is missing.
-    outcome: PHASE3_OUTCOME
+    outcome: >-
+      Lane document with the theorem, the reader's soundness argument, the catalogue and
+      every script and output in its appendix; one README line; this record; the records
+      tier run from the worktree before the final commit, its result in checks. The phase
+      stays open for the coordinator's integration, the ledger re-render and the rollup.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
-    stop_reason: PHASE3_STOP
+    stop_reason: null
     next_action: The coordinator integrates the branch, allocates an experiment id if the frozen claim is registered, and closes this record with the harness rollup under think-qfog.
   primary_bead: think-qfog
   status: in_progress
   budget:
     wall_minutes: 150
     checkpoint_minutes: 30
-    finalization_minutes: 30
   stop_conditions:
   - The block's 2.5-hour clock; no extension for a promising result.
   - An escape is a result only when verified exactly; a no-escape reading carries its resolution and is never a theorem.
   - No identifiers allocated, no shared registry edited, no push.
   progress:
-    metric: PROGRESS_METRIC
+    metric: candidate mark sets decided (exact escape, certified cover, or unrefuted with resolution)
     before: >-
       H-134 registered with a prior of about thirty per cent; the only escape instrument
       is exp-121's fixed-candidate checker; no candidate eleven-mark set at 96/25 has been
       tested.
-    after: PROGRESS_AFTER
+    after: >-
+      Thirteen point sets decided negatively by exact escapes (best clearance 0.01401);
+      one ten-segment set and two eleven-mark segment sets certified robustly
+      unavoidable at 3/500 by an exact interval reader; one set (length 8/100)
+      unrefuted and uncertified; three structural lemmas proved (no LP obstruction, ten
+      forced marks, symmetry). H-134's segment form is met; the claim to freeze is
+      Theorem E.4 of the lane document, which needs an experiment id.
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
   checks:
-  - CHECKS_LINE
+  - packing-validate --records from the lane worktree before the final commit (4 cpus, about 44 s wall) passes every step except three that need the coordinator's integration re-renders and that this lane may not perform, namely the document map row for the lane document (check_documentation), the session-close report and SYNOPSIS render (close_session --render), and the ledger render (packing-ledger render); the session record's own checks (schema, clocks, gate, rollups) pass. A first run had also failed on a YAML colon in this record's phase-2 stop_reason, fixed before this run.
+  - Engine self-tests (selftest.py) passed; the independent reader agreed on all 22 catalogued escapes; the interval reader's exact mode re-decided 184756 leaves and 17551 discards with no failure; 6000 sampled poses inside certified leaves were within 3/500 of a mark by the falsifier's exact distance.
   resource_rollups: []
   stop_reason: null
   next_action: >-
@@ -128,7 +147,17 @@ session:
 ---
 # session-104 — A Robust Unavoidable Set of at Most Eleven Marks at 96/25
 
-SESSION_BODY
+The lane’s question, engine, catalogue, theorem and obstructions are in
+[the lane document](../series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md);
+the checkpoint file in the scratch directory records the three thirty-minute checkpoints
+and the coordinator’s steering at 05:11 UTC (one computation at a time from then on,
+with the load beside every wall time), which was followed.
+
+What changed in H-134’s standing: its claim is met by ten short segments, not by points
+from the atom skeleton, and the proof is a computation with an exact re-check rather
+than Stromquist’s hand lemmas.
+The record does not mark the hypothesis accepted; that is the coordinator’s call after
+an independent replay under an experiment id, which this session did not allocate.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
