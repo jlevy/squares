@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import ast
+import io
+import json
 import os
 import re
+import shlex
 import subprocess
 import sys
+from contextlib import redirect_stdout
 from pathlib import Path
 from typing import cast
 
@@ -14,6 +18,7 @@ import pytest
 import yaml
 
 from devtools.check_readme import meaningful_top_level_entries
+from sqpack.cli import validate
 from sqpack.project import ProjectLayoutError, require_project_root
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -170,19 +175,41 @@ def test_readme_inventory_ignores_cache_only_legacy_directories(tmp_path: Path) 
     assert meaningful_top_level_entries(repository) == {"README.md", "current"}
 
 
-def test_deferred_slow_review_has_its_required_git_history() -> None:
-    workflow = VALIDATION_WORKFLOW.with_name("deep-gate.yml")
+def _selected_steps(command: str) -> set[str]:
+    """Resolve a workflow command through the CLI's read-only selection interface."""
+    tokens = shlex.split(command)
+    arguments = tokens[tokens.index("packing-validate") + 1 :]
+    stdout = io.StringIO()
+    with redirect_stdout(stdout):
+        status = validate.main(["--list", "--format", "json", *arguments])
+    assert status == 0, f"the CLI refused the workflow command: {command}"
+    return {str(entry["name"]) for entry in json.loads(stdout.getvalue())}
+
+
+@pytest.mark.parametrize("workflow_name", ["deep-gate.yml", "packing-validation.yml"])
+def test_deferred_slow_review_has_its_required_git_history(workflow_name: str) -> None:
+    """The historical review follows the slow lane when it moves between jobs."""
+    workflow = VALIDATION_WORKFLOW.with_name(workflow_name)
     jobs = _mapping(_mapping(yaml.safe_load(workflow.read_text()))["jobs"])
-    deferred = _mapping(jobs["deferred-steps"])
-    raw_steps = deferred["steps"]
-    assert isinstance(raw_steps, list)
-    steps = [_mapping(step) for step in raw_steps]
-    assert any('"slow behavioral tests"' in str(step.get("run", "")) for step in steps)
+    carriers: dict[str, list[dict[str, object]]] = {}
+    for job_name, job in jobs.items():
+        raw_steps = _mapping(job)["steps"]
+        assert isinstance(raw_steps, list)
+        steps = [_mapping(step) for step in raw_steps]
+        for step in steps:
+            command = step.get("run")
+            if not isinstance(command, str) or "packing-validate" not in shlex.split(command):
+                continue
+            if "slow behavioral tests" in _selected_steps(command):
+                assert job_name not in carriers, f"{job_name} runs the slow lane twice"
+                carriers[job_name] = steps
+    assert len(carriers) == 1, f"the slow lane runs in {sorted(carriers) or 'no job'}"
+    [(job_name, steps)] = carriers.items()
     checkout = next(
         step for step in steps if str(step.get("uses", "")).startswith("actions/checkout@")
     )
     assert _mapping(checkout.get("with") or {}).get("fetch-depth") == 0, (
-        "the slow retained-theorem review reads exact historical Git objects"
+        f"{job_name} runs the slow retained-theorem review, which reads historical Git objects"
     )
 
 
@@ -332,14 +359,12 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    # `--skip`, because the exhaustive exact tier is the `exhaustive` job's whole
-    # selection and 1943s is not a bill to pay twice. That the two selections still
-    # partition `STEPS` is checked against the CLI's own selector in
-    # `test_the_post_merge_jobs_partition_the_gate`; what is pinned here is that this
-    # command is the one that leaves the tier out.
+    # The slow and exhaustive lanes have their own jobs. The three selections partition
+    # `STEPS` through the CLI's selector in `test_the_post_merge_jobs_partition_the_gate`;
+    # this command excludes both lanes and runs the remaining checks serially.
     assert " ".join(str(full_step["run"]).split()) == (
         'uv run --frozen --all-extras --group dev packing-validate --skip "exhaustive '
-        'exact behavioral tests" --jobs 2 --inner-jobs 2'
+        'exact behavioral tests" --skip "slow behavioral tests" --jobs 1 --inner-jobs 2'
     )
 
     # The exhaustive exact tier, split onto its own runner on 2026-09-05 (think-tr2z) so

@@ -196,6 +196,7 @@ session:
   - packing/campaign/agent-sessions/session-106-validation/push-a70716c6-interrupted.json
   - packing/campaign/agent-sessions/session-106-validation/push-6c678ff8.json
   - packing/campaign/agent-sessions/session-106-validation/full-46ee41af-failed.json
+  - packing/campaign/agent-sessions/session-106-validation/push-4efa2e5f-interrupted.json
   checks:
   - Before this prospective session, the records baseline passed at clean dae6bb8d; origin/main at 28696526 was fetched and reviewed. Generated merge conflicts were resolved by their renderers, preserving both branches' records.
   - The coordinator reproduced 55 exact source omissions against dae6bb8d through n100 and upstream 28696526 above n100; the opaque n21 display is the fifty-sixth corrected reported field. The final named-candidate audit passes through n324 with no omitted stronger report.
@@ -219,6 +220,7 @@ session:
   - Before the fifth phase's original 06:48 deadline, its estimate is extended by sixty minutes to cover the full hosted checkpoint and the authorized merge. The local pre-push result is complete; only the new record edits need a further affected check before publishing the stable checkpoint source.
   - The full hosted checkpoint at 46ee41af completed all 69 Linux steps with 68 passing and one failing at the existing 900-second escape-screen timeout. All 4214 tests passed across disjoint quick, slow and exhaustive lanes, with no skipped tests; macOS passed all four checks. The sweep remains incomplete. Before the fifth phase deadline, its estimate is extended by sixty minutes to repair that measured timeout, integrate main 2980c5bc with PR119 fonts, and validate the affected surfaces before the authorized merge.
   - Main 2980c5bc merged without conflicts as 36c20d5e; the source acknowledgment and qualified caption survive PR119 font integration. The escape screen now has its own 1800-second budget. Independent review verified a separate 1800-second screen timeout in hosted run 34181619739, so both workflows adopt PR116's measured serial numeric schedule and isolated slow lane. The 69-step full partition and 62-step PR surface remain unchanged.
+  - Pre-push at 4efa2e5f passed forty-four steps before the coordinator interrupted its behavioral step to repair two stale module-boundary assertions found by independent review. They still named the former shared slow job and full command. The attempt is retained as interrupted; no passing combined result is claimed. The separate escape replay initially refused the active gate marker before executing, and remains queued until the pre-push run finishes.
   stop_reason: null
   next_action: Complete and merge PR120 as the user authorized, then consult the landed BC-264 handoff under think-mq0d. PR116 completes pricing; further H125 work requires a fresh allocation and admission rather than restarting the historical allocation.
 ---
