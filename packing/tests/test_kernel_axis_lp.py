@@ -74,6 +74,18 @@ def test_source_admission_refuses_before_solver(monkeypatch: pytest.MonkeyPatch)
         kernel.bounded(1.0)
 
 
+def test_scientific_roster_construction_is_refused_by_the_source_free_fixture() -> None:
+    """The guard is structural: the declared side reaches the factory, not a copy of it.
+
+    Before the roster moved behind ``scientific_source``, this admission built the
+    five-grid pool inline and the autouse fixture never ran, so the suite's source-free
+    guarantee held only because no control happened to pass the declared side.
+    """
+    contained = ((Fraction(1, 2), Fraction(1, 2)),)
+    with pytest.raises(AssertionError, match="scientific source construction is forbidden"):
+        kernel.build_problem(Fraction(96, 25), contained, source=kernel.SCIENTIFIC_SOURCE)
+
+
 def test_feature_pair_form_and_joint_quarter_turn() -> None:
     side = Fraction(4)
     left = (Fraction(1), Fraction(3, 2))
