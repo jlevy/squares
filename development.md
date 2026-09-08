@@ -309,10 +309,12 @@ These are single hosted readings from that run’s own `validation-timings-valid
 receipts, not baselines.
 
 A third runner costs billed minutes — its own checkout and sync, and two lanes that no
-longer overlap — and buys an uncontended wall rather than a shorter one: the gate still
-reports when `exhaustive-tier` finishes at about 1943 s. That is `OR-14` applied where
-the wall actually is, and the alternative — a larger budget for a step that was not
-slow, only crowded — would have measured the runner instead of the step.
+longer overlap — and buys an uncontended wall rather than a shorter one: the gate now
+reports when the serial five-step job finishes, about 1860 s of measured step time
+against the exhaustive tier’s 1563 s in the same run.
+That is `OR-14` applied where the wall actually is, and the alternative — a larger
+budget for a step that was not slow, only crowded — would have measured the runner
+instead of the step.
 The escape screen did take a declared budget the same day, for the separate reason that
 its own ceiling was the shared 900-second default it had measured 41 s inside; that
 [ceiling is described with the other budgets](#what-each-tier-costs-and-where-its-ceiling-lives).
@@ -528,11 +530,19 @@ Avoid assuming that either flag alone caps total host concurrency.
 
 The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
 runners expose four CPUs, and no second outer step competes for that budget.
-The concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`. The
-deferred slow lane, isolated since 2026-09-08, uses `--jobs 1 --inner-jobs 2`: pytest
-runs that lane in one process, so the outer pool has nothing to schedule, but its two
-corpus-scaled tests size their own pools from `PACK_JOBS`, and one worker would return
-the wall the split was made to remove.
+The concurrent integration job retains `--jobs 2 --inner-jobs 2`. The deferred slow
+lane, isolated since 2026-09-08, uses `--jobs 1 --inner-jobs 2`: pytest runs that lane
+in one process, so the outer pool has nothing to schedule, but its two corpus-scaled
+tests size their own pools from `PACK_JOBS`, and one worker would return the wall the
+split was made to remove.
+The deferred five-step job uses the same `--jobs 1 --inner-jobs 2`, serially: its first
+run at two outer slots,
+[34181619739](https://github.com/jlevy/squares/actions/runs/34181619739), killed the
+escape screen at its 1800 s budget while the atlas rebuild (848.74 s) and the negative
+controls (608.55 s) ran beside it at two workers each, more than twice the screen’s
+858.62 s reading, so two pools side by side on four hosted vCPUs is contention.
+Serial at two workers is the shape every one of the five readings was taken at, and its
+measured sum of 1859.96 s is about five minutes more than the exhaustive tier.
 Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
 grid-memory budget. This allocation preserves the parallelism previously available when
 certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.

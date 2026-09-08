@@ -122,10 +122,10 @@ jobs:
     # rerun of them.
     #
     # The grid replay costs this job nothing on the clock. It is 34.81s serial beside a
-    # step that is now 858.62s, and its own pool takes it to 18.79s -- measured here, at
-    # this job's own `--jobs 2 --inner-jobs 2`, replaying all 305 witnesses over 36.65s
-    # of cpu; 25.93s in run 34176106076. A step that finishes inside the wall a longer
-    # step already sets is free in the sense that decides where work goes.
+    # step that is now 858.62s, and its own pool takes it to 18.79s -- measured at two
+    # inner workers, replaying all 305 witnesses over 36.65s of cpu; 25.93s in run
+    # 34176106076. Now that the job runs its steps serially it is 25.93s of wall rather
+    # than none, which is still the smallest step here by a factor of eight.
     #
     # `--only` rather than a tier flag, and unlike in `packing-validation.yml` that is
     # the correct instrument here. There, `--only` on a pull-request job would have left
@@ -147,15 +147,26 @@ jobs:
     # never had, and the same test requires these three selections to be disjoint so a
     # step cannot be paid for in two jobs.
     #
-    # `--jobs 2 --inner-jobs 2`: five steps, 1859.96s of measured step time, and one of
-    # them is 858.62s of it. Two outer slots put the screen on one and the other four
-    # (1001.34s between them) on the second, so this job's wall is about a thousand
-    # seconds -- half of `exhaustive-tier`, which decides when the gate finishes either
-    # way. `--inner-jobs 2` is what the two steps that arrived on 2026-09-07 read: both
-    # size their pools from `PACK_JOBS`, and the atlas rebuild is 348.15s at two workers
-    # against 691.19s serial on an idle ten-cpu box. Two slots times two workers is the
-    # runner's four cpus; a third outer slot buys nothing and takes cpus from the pools,
-    # which is `BC-218`'s finding one level down.
+    # `--jobs 1 --inner-jobs 2`: five steps run one after another, each with the runner
+    # to itself and the two-worker pool its reading was taken at. The first version of
+    # this job ran them on two outer slots and predicted a wall of about a thousand
+    # seconds from the sum of its readings; run 34181619739 refuted the arithmetic. With
+    # the escape screen on one slot and the atlas rebuild (848.74s) then the negative
+    # controls (608.55s) on the other -- two pools of two workers on four vcpus -- the
+    # screen was killed at its new 1800s budget, more than twice its 858.62s reading,
+    # while `deferred-slow-lane` (1356s) and `exhaustive-tier` (1563s) both passed on
+    # their own runners. The four hosted vcpus do not carry four busy numeric workers at
+    # single-worker speed, so two pools side by side is contention, not parallelism.
+    #
+    # Serial is the measured shape: 858.62s, 407.15s, 347.17s, 221.09s and 25.93s were
+    # all read at two workers with the machine otherwise quiet (run 34176106076), and
+    # their sum, 1859.96s, is what this job now costs -- about five minutes more than
+    # `exhaustive-tier`, so it decides the gate's wall by that margin. `--inner-jobs 2`
+    # is what the two corpus-scaled steps read: both size their pools from `PACK_JOBS`,
+    # and the atlas rebuild is 348.15s at two workers against 691.19s serial on an idle
+    # ten-cpu box. A fourth runner for the screen alone would buy those five minutes
+    # back for about fifteen billed minutes a run; take it when a labelled run's wall
+    # matters more than its cost, and take it on a reading, not on this note.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
@@ -207,7 +218,7 @@ jobs:
           --only "known-best n=1..324 atlas rebuild"
           --only "single-square translation escape screen"
           --only "exact rational grid replay"
-          --jobs 2 --inner-jobs 2
+          --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -317,9 +328,10 @@ jobs:
     # beside `deferred-steps` in one job it would do that here too, and the deep gate's
     # whole value is naming *which* deferral broke before the merge rather than after it.
     #
-    # It costs a second runner and no wall: 1943.05s here against about 1000s in
-    # `deferred-steps` and 1271.96s in `deferred-slow-lane`, so the gate finishes when
-    # this job does whatever the others do. `BC-218` priced a second job at "+3 billed
+    # It costs a second runner and, since `deferred-steps` went serial, about five
+    # minutes of wall: 1563s here in run 34181619739 against 1859.96s of measured step
+    # time there and 1356s in `deferred-slow-lane`, so the gate now finishes when
+    # `deferred-steps` does. `BC-218` priced a second job at "+3 billed
     # minutes and zero wall" and took it; this one is dearer in minutes and buys a
     # separable verdict, on a workflow requested by label or dispatch. The 2026-09-08
     # split above is the same trade made a third time, and for the sharper reason: the
