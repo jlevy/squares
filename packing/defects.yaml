@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 480
+count: 481
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15753,3 +15753,48 @@ defects:
     marker. The existing mixed-math and next-line control remains active.
   bead: think-vzld
   recorded_in: packing/devtools/check_print_layout.py
+- id: D-481
+  title: The slow behavioural lane ran serially and the escape screen shared its runner
+  date: '2026-09-08'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: from BC-214 for the lane, and from the n=1..324 expansion for the screen
+  severity: high
+  status: fixed
+  what: >-
+    Two steps of the post-merge gate were given less parallelism than the runner had.
+    BC-214 split the behavioural suite into a quick lane and a slow lane, but only the
+    quick lane's command carried xdist, so the half selected for costing the most was
+    the one place in the gate that ran a test suite in a single process: 1020.77s
+    serially over 97 tests on a four-cpu box. The whole single-square translation escape
+    screen is a process pool sized by PACK_JOBS, and beside the rest of the gate at
+    `--inner-jobs 2` it got two workers where the runner has four.
+  consequence: >-
+    Both steps were killed at their subprocess caps on run 34172652457, taking main red
+    after the n=1..324 corpus expansion: 1801.00s and 901.00s, which are the caps and not
+    measurements. On run 34176106076 the identical code drew a faster runner and both
+    finished, the screen at 858.62s with 41s of margin. So the gate's colour was being
+    decided by which runner a merge drew, and the truncated readings could not say by how
+    much either step had really grown.
+  fix: >-
+    Give both lanes the same `_xdist_distribution` helper, so the slow lane is sized by
+    `cpus - jobs + 1` like the quick one. Split the escape screen onto its own post-merge
+    job at `--jobs 1 --inner-jobs 4`, which is four pool workers instead of two, and skip
+    it in the complete integration surface so it is not paid for twice. Give it an
+    explicit 1800s budget, since `--only` reports no tier and leaves no gate-budgets.yaml
+    ceiling behind it.
+    Measured after: the same 97 tests pass under xdist and cost 718.52s at four workers
+    against 1020.77s serially on the same box, a 1.42x rather than the 4x the worker
+    count suggests. One reading per configuration, both with light work in flight, so
+    that is the sign and not a measurement (D-472); where the rest of the parallelism
+    goes is left open on think-ph9v.
+  regression: >-
+    packing/tests/test_validation_cli.py::test_the_post_merge_jobs_partition_the_gate
+    resolves all three post-merge commands through the CLI's own selector and requires
+    them to partition STEPS, so a step cannot land in two jobs or none.
+    packing/tests/test_module_boundaries.py pins both solo commands and the two-skip
+    integration command.
+  bead: think-ph9v
+  recorded_in: packing/src/sqpack/cli/validate.py

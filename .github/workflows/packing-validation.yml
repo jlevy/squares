@@ -227,6 +227,7 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --skip "exhaustive exact behavioral tests"
+          --skip "single-square translation escape screen"
           --jobs 2 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs
@@ -493,6 +494,64 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --only "exhaustive exact behavioral tests"
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  screen:
+    # The whole single-square translation escape screen, on its own runner, for the reason
+    # the exhaustive tier is on its own runner: it is an embarrassingly parallel step whose
+    # worker count is the only thing that moves its wall, and beside the rest of the gate
+    # it cannot have one.
+    #
+    # `D-481` is what this fixes. The n=1..324 expansion (#111) took the corpus from about
+    # 100 records to 318 screened, and the step went from comfortably inside the shared
+    # 900s subprocess cap to killed at it -- 901.00s on run 34172652457, which is the cap
+    # and not a measurement of anything. The cap was not the mistake; sharing a runner was.
+    # At `--jobs 2 --inner-jobs 2` the screen gets two pool workers and pays contention for
+    # them, and no `--jobs` setting on that job can give it more without oversubscribing
+    # the other slot (`BC-218`).
+    #
+    # Alone at `--jobs 1 --inner-jobs 4` it gets four, which is what `PACK_JOBS` hands
+    # `sqpack.workers.worker_count` and what the pool then asks for. Measured 794.5s at
+    # four workers on a four-cpu development box against the same 318 records.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # Shallow is enough: the provenance step that needs full history is not in this
+        # selection. kpress is vendored at vendor/kpress and installed from that path, so
+        # the environment does not resolve without the submodule checked out.
+        with:
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the single-square translation escape screen
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "single-square translation escape screen"
           --jobs 1 --inner-jobs 4
 
       - name: Preserve validation timings and partial logs

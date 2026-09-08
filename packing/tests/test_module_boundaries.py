@@ -332,14 +332,15 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    # `--skip`, because the exhaustive exact tier is the `exhaustive` job's whole
-    # selection and 1943s is not a bill to pay twice. That the two selections still
-    # partition `STEPS` is checked against the CLI's own selector in
-    # `test_the_post_merge_jobs_partition_the_gate`; what is pinned here is that this
-    # command is the one that leaves the tier out.
+    # Two `--skip`s, one per step that has its own runner: the exhaustive exact tier
+    # (1943s, think-tr2z) and the translation escape screen (`D-481`), neither of them a
+    # bill to pay twice. That the three selections still partition `STEPS` is checked
+    # against the CLI's own selector in `test_the_post_merge_jobs_partition_the_gate`;
+    # what is pinned here is that this command is the one that leaves both out.
     assert " ".join(str(full_step["run"]).split()) == (
         'uv run --frozen --all-extras --group dev packing-validate --skip "exhaustive '
-        'exact behavioral tests" --jobs 2 --inner-jobs 2'
+        'exact behavioral tests" --skip "single-square translation escape screen" '
+        "--jobs 2 --inner-jobs 2"
     )
 
     # The exhaustive exact tier, split onto its own runner on 2026-09-05 (think-tr2z) so
@@ -362,6 +363,29 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         (
             'uv run --frozen --all-extras --group dev packing-validate --only "exhaustive '
             'exact behavioral tests" --jobs 1 --inner-jobs 4'
+        )
+    ]
+
+    # The translation escape screen, split onto its own runner by `D-481`. The reason is
+    # not the exhaustive tier's: the screen reports a single verdict either way, and what
+    # it gains alone is workers. `--inner-jobs 4` is the whole point of the job -- it is
+    # what `PACK_JOBS` hands the screen's process pool, and beside the rest of the gate at
+    # `--inner-jobs 2` the same step was killed at the shared 900s cap.
+    screen_job = _mapping(jobs["screen"])
+    assert screen_job["if"] == "github.event_name != 'pull_request'"
+    assert "continue-on-error" not in screen_job
+    screen_steps = screen_job["steps"]
+    assert isinstance(screen_steps, list)
+    screen_commands = [
+        " ".join(str(_mapping(step)["run"]).split())
+        for step in screen_steps
+        if isinstance(_mapping(step).get("run"), str)
+        and "packing-validate" in str(_mapping(step)["run"])
+    ]
+    assert screen_commands == [
+        (
+            "uv run --frozen --all-extras --group dev packing-validate --only "
+            '"single-square translation escape screen" --jobs 1 --inner-jobs 4'
         )
     ]
 

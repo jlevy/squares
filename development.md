@@ -230,7 +230,7 @@ test satisfies exactly one, so no test can be in two lanes and none can be in ze
 | Lane | Marker | Tests | Runs in | Bound |
 | --- | --- | ---: | --- | --- |
 | quick | neither | 2,197 | PR fast surface | fails a test whose `call` phase reaches 12 s |
-| slow | `slow` | 95 | full checkpoint | fails a test whose `call` phase is under 1 s |
+| slow | `slow` | 95 | full checkpoint, under xdist | fails a test whose `call` phase is under 1 s |
 | exhaustive | `exhaustive_exact` | 55 | its own CI job | its own 3600 s budget |
 
 Counts are from
@@ -469,8 +469,15 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 Pushes to `main`, manual dispatches, and the daily schedule run the ordinary full
-checkpoint on Linux in two jobs: `validate` runs everything except exhaustive exact
-tests, and `exhaustive` runs those tests.
+checkpoint on Linux in three jobs: `validate` runs everything except the two steps
+below, `exhaustive` runs the exhaustive exact tests, and `screen` runs the whole
+single-square translation escape screen.
+The two solo jobs are solo for different reasons.
+`exhaustive` is a verdict split ([D-456](defects.md)): at 1943 s it had been half the
+surface’s wall, and killed at its budget it reported nothing about the sixty steps
+beside it. `screen` is a worker split ([D-481](defects.md)): the step is embarrassingly
+parallel, so the only thing that moves its wall is the worker count, and beside the rest
+of the gate at `--inner-jobs 2` it gets two.
 macOS runs four portability checks.
 Neither workflow invocation enables the golden rebuild or strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
@@ -482,16 +489,24 @@ whichever test starts first.
 Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
 `slow`; remove that marker when its measured cost falls below the floor.
 The marker registry tests enforce both declarations.
-Quick tests use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs` controls other
-internal pools, including the negative-control pool.
+Both behavioural lanes use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs`
+controls other internal pools, including the negative-control pool.
+The slow lane ran in a single process until [D-481](defects.md): `BC-214` split the
+lanes and gave xdist to the quick half only, leaving the half selected for costing the
+most as the one place in the gate that ran a test suite serially.
 Avoid assuming that either flag alone caps total host concurrency.
 
-The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
-runners expose four CPUs, and no second outer step competes for that budget.
-The concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`.
-Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
-grid-memory budget. This allocation preserves the parallelism previously available when
-certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
+The isolated jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted runners expose
+four CPUs, and no second outer step competes for that budget.
+That is the shape of any job whose selection is a single step — the two exhaustive tiers
+and, since [D-481](defects.md), `screen` — and
+`test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools` reads it off the
+selection rather than off the job name, so a third such job cannot arrive at the wrong
+size unnoticed. The concurrent integration and deferred jobs retain
+`--jobs 2 --inner-jobs 2`. Certificate pools also enforce actual CPU availability, the
+four-worker maximum, and the grid-memory budget.
+This allocation preserves the parallelism previously available when certificate pools
+ignored `PACK_JOBS`; it is not a measured speedup claim.
 
 CPU observations are diagnostic only.
 Process counters can charge a child’s setup to the call that reaps it and omit

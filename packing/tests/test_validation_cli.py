@@ -224,11 +224,33 @@ def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
             assert upload[0]["with"]["path"] == "${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}"
 
 
-def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
+def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
+    """A job that owns its runner asks for all of it; a job that shares does not.
+
+    The shape is read off the selection rather than off the job name, because the name is
+    a label and the selection is the thing that decides. A `--only` naming exactly one
+    step is a job with nothing else on the runner, so `--jobs 1 --inner-jobs 4` is the
+    host's four cpus and not an oversubscription. Anything that shares -- the integration
+    surface behind its `--skip`s, or a `--only` naming several steps -- stays at
+    `--jobs 2 --inner-jobs 2`, where two outer slots of two workers is again about the cpu
+    count rather than half again over it (`BC-218`).
+
+    `D-481` is why this is a rule over selections instead of a list of exhaustive jobs.
+    The escape screen became the second step to own a runner, and under the old matching
+    -- which tested for the exhaustive tier by name -- it would have been skipped
+    silently, along with the integration surface whose `--skip` list it lengthened.
+
+    `macos-portability` is excluded by name, as it is in `_workflow_selections` and for
+    the same reason: it is a second architecture deliberately duplicating four steps the
+    Linux jobs also run, on a different host class, so the cpu arithmetic here is not the
+    arithmetic it is sized against.
+    """
     checked: set[tuple[str, str]] = set()
     for workflow in (WORKFLOW, WORKFLOW.parent / "deep-gate.yml"):
         document = safe_load(workflow.read_text())
         for name, job in document["jobs"].items():
+            if name == "macos-portability":
+                continue
             for step in job.get("steps", []):
                 tokens = shlex.split(str(step.get("run", "")))
                 if "packing-validate" not in tokens:
@@ -236,17 +258,17 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
                 namespace = validate._parser().parse_args(
                     tokens[tokens.index("packing-validate") + 1 :]
                 )
-                if namespace.only == ["exhaustive exact behavioral tests"]:
+                only = namespace.only or []
+                if len(only) == 1:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
-                elif namespace.skip == ["exhaustive exact behavioral tests"] or (
-                    "negative controls" in namespace.only
-                ):
+                elif namespace.skip or len(only) > 1:
                     assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
                 else:
                     continue
                 checked.add((workflow.name, name))
     assert checked == {
         ("packing-validation.yml", "exhaustive"),
+        ("packing-validation.yml", "screen"),
         ("packing-validation.yml", "validate"),
         ("deep-gate.yml", "exhaustive-tier"),
         ("deep-gate.yml", "deferred-steps"),
@@ -727,6 +749,10 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
 
     validate._slow_tests(context)
 
+    # `_xdist_distribution` rather than a literal `-n`, because the count is the host's
+    # and this test runs on hosts of several sizes. That it is the *same* helper the quick
+    # lane calls is the assertion that matters: `D-481` is what happens when the two lanes
+    # are split and only one of them is given workers.
     assert observed == (
         sys.executable,
         "-m",
@@ -735,6 +761,7 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         "tests",
         "-m",
         "slow and not exhaustive_exact",
+        *validate._xdist_distribution(1),
         "--durations=0",
         "--durations-min=0",
     )
@@ -1515,7 +1542,7 @@ def test_a_step_that_exceeds_its_own_budget_still_fails(
     assert "timed out after 0.2 seconds" in summary.results[0].reason
 
 
-def test_only_the_whole_suite_steps_carry_budgets() -> None:
+def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
     """A budget is an exception, so the set of them is worth watching.
 
     If a second step acquires one, that is a signal the shared cap is wrong rather than
@@ -1545,6 +1572,24 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     at `QUICK_TEST_WALL_BACKSTOP_SECONDS` is no longer a step the shared cap is wrong for. An
     exception that is no longer needed is not harmless -- it is a guard switched off.
 
+    The fourth arrived on 2026-09-08 with `D-481`, and the paragraph above said a fourth
+    would mean the shared cap is wrong. That warning was written when every budgeted step
+    shared a runner with fifty-seven short ones, and it is right about that case. The
+    escape screen is not that case, and the difference is worth being precise about
+    rather than waving through: `--only` puts it alone on its own post-merge job, so it
+    is not holding an exception carved out of a guard the short steps depend on. There
+    are no short steps beside it. Its budget is the *only* bound on that job, because a
+    single-step `--only` selection reports no tier and so has no `gate-budgets.yaml`
+    ceiling behind it either.
+
+    So the set is two rules rather than one, and the exhaustive tier belongs to the
+    second as much as the screen does. A step in the shared job earns a budget by running
+    a whole suite, where a cap wide enough for it would stop guarding the other
+    fifty-seven. A step that owns a job carries one because nothing else does. Raising
+    the shared cap would answer neither: it would loosen the guard in the shared job,
+    which is the trade this test exists to refuse, and it would not bound the solo jobs
+    at all.
+
     Recorded honestly: the second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
     """
@@ -1552,9 +1597,12 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
         step.name: step.budget_seconds for step in validate.STEPS if step.budget_seconds
     }
     assert budgeted == {
+        # Whole suites in the shared job.
         "negative controls": 1800,
         "slow behavioral tests": 1800,
+        # Alone on a post-merge job, where this number is the whole guard.
         "exhaustive exact behavioral tests": 3600,
+        "single-square translation escape screen": 1800,
     }
 
 
@@ -2103,28 +2151,31 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
 
 
 def test_the_post_merge_jobs_partition_the_gate() -> None:
-    """The two jobs a merge runs must together select every step, and none twice.
+    """The jobs a merge runs must together select every step, and none twice.
 
     think-tr2z split the exhaustive tier onto its own runner so that it reports its own
     verdict against its own budget; `--skip` on the other job is what stops it being paid
-    for twice. Both halves of that are a name typed into a YAML file, so this reads the
-    workflow, parses each command with the CLI's own parser, and resolves it through the
-    CLI's own selector: a step added to `STEPS` lands in one job or the other, and a
-    rename that breaks the split fails here rather than after a merge.
+    for twice. `D-481` split the translation escape screen off for a different reason --
+    not its verdict but its worker count, which beside the rest of the gate is two and
+    alone is four. Every part of both splits is a name typed into a YAML file, so this
+    reads the workflow, parses each command with the CLI's own parser, and resolves it
+    through the CLI's own selector: a step added to `STEPS` lands in exactly one job, and
+    a rename that breaks the split fails here rather than after a merge.
 
-    A merge still runs the gate as one job plus the exhaustive tier, not as the pull
-    request's four parts. The `geometry`, `suite` and `sweeps` jobs are pull-request only,
-    and the complete integration surface here already contains every step they would have
-    run.
+    A merge still runs the gate as the complete integration surface plus the two steps
+    that earned their own runner, not as the pull request's four parts. The `geometry`,
+    `suite` and `sweeps` jobs are pull-request only, and the complete integration surface
+    here already contains every step they would have run.
     """
     selections = _workflow_selections(pull_request=False)
 
-    assert set(selections) == {"validate", "exhaustive"}
+    assert set(selections) == {"validate", "exhaustive", "screen"}
     assert selections["exhaustive"] == {"exhaustive exact behavioral tests"}
-    assert not selections["validate"] & selections["exhaustive"]
-    assert selections["validate"] | selections["exhaustive"] == {
-        step.name for step in validate.STEPS
-    }
+    assert selections["screen"] == {"single-square translation escape screen"}
+    solo = selections["exhaustive"] | selections["screen"]
+    assert not selections["exhaustive"] & selections["screen"]
+    assert not selections["validate"] & solo
+    assert selections["validate"] | solo == {step.name for step in validate.STEPS}
 
 
 def test_the_longest_steps_are_submitted_first() -> None:
@@ -2147,12 +2198,16 @@ def test_the_longest_steps_are_submitted_first() -> None:
     """
     order = [step.name for step in validate._submission_order(validate.STEPS)]
 
-    assert order[:3] == [
+    assert order[:4] == [
         "exhaustive exact behavioral tests",  # 3600s
+        # The three 1800s steps, in declaration order, because the sort is stable and a
+        # tie is not a ranking. Which of them starts first does not matter to the wall:
+        # two of the four have their own post-merge runner and are alone on it.
+        "single-square translation escape screen",  # 1800s, `D-481`
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
-    assert order[3:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
+    assert order[4:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
 
 
 def test_submission_order_does_not_change_the_reported_order(
