@@ -27,7 +27,7 @@ formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive normally stores an original
 source, a cleaned `.md` transcription, and a faithful `.raw.md` extraction.
-Nineteen entries currently fall short in ways worth naming rather than hiding:
+Thirty-four entries currently fall short in ways worth naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
   `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
@@ -45,6 +45,31 @@ Nineteen entries currently fall short in ways worth naming rather than hiding:
   faithful extraction, no cleaned transcription yet.
   All fourteen were read directly from the PDF, and the claims resting on them were
   checked there.
+- The fifteen search-method sources retained on 2026-09-08 for
+  [the annealing report](../../docs/project/research/research-2026-09-08-annealing-for-square-packing.md)
+  are **raw-only** on the same terms:
+  `ye-huang-lu-2013-iterated-tabu-search-unequal-circles`,
+  `gensane-2004-dense-packings-equal-spheres-cube`,
+  `addis-locatelli-schoen-2008-disk-packing-square`,
+  `grosso-jamali-locatelli-schoen-2010-packing-equal-unequal-circles`,
+  `lai-hao-xiao-glover-2023-perturbation-thresholding-search`,
+  `odriozola-2009-replica-exchange-hard-spheres`,
+  `johnson-aragon-mcgeoch-schevon-1989-annealing-part-i`,
+  `johnson-aragon-mcgeoch-schevon-1991-annealing-part-ii`,
+  `blair-santangelo-machta-2012-packing-squares-in-a-torus`,
+  `berthold-kamp-mexi-pokutta-polik-2026-global-optimization-combinatorial-geometry`,
+  `berthold-kamp-mexi-pokutta-polik-2026-out-of-the-box-packing-problems`,
+  `ninarello-berthier-coslovich-2017-next-generation-glass-transition`,
+  `xu-xiao-amos-2008-simulated-annealing-weighted-polygon-packing`,
+  `anderson-irrgang-glotzer-2016-scalable-metropolis-hard-shapes`, and
+  `gardeyn-vandenberghe-wauters-2025-sparrow-2d-nesting`. These are method sources
+  rather than results about congruent squares, and a cleaned transcription would buy
+  little: the report’s readings from them are specific numbered observations and tables.
+  Three of those readings were checked against the retained bytes and the check is
+  recorded in
+  [the acquisition packet](web/annealing-methods-audit-2026-09-08/README.md); the rest
+  are cited from abstracts, tables, or the report’s own reading, and the packet says
+  which.
 - `gobel-1979-geometrical-packing-and-covering-problems` is **PDF-only**: the source is
   retained, but neither a cleaned transcription nor a faithful extraction has been
   produced. Claims resting on it must be checked against the page images.
@@ -132,6 +157,10 @@ grep -n "sqrt" packing/resources/papers/stromquist-2003-*.raw.md
 ## Papers
 
 Citation keys match those used in the research document.
+This table holds sources about packing congruent squares.
+Two further tables below hold method analogues from adjacent problems:
+[rigidity and verification](#rigidity-and-verification-method-sources), and
+[search and annealing](#search-and-annealing-method-sources).
 
 | Key | Title | Authors | Year | Venue | File stem |
 | --- | --- | --- | --- | --- | --- |
@@ -197,6 +226,36 @@ hypotheses to be matched to the square pose chart and its nonsmooth feature chan
 | **[Donev et al. 2007]** | Underconstrained Jammed Packings of Nonspherical Hard Particles: Ellipses and Ellipsoids | A. Donev, R. Connelly, F. H. Stillinger, S. Torquato | 2007 | Phys. Rev. E 75, 051304 | `donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings` |
 | **[Connelly notes]** | Packings of Circles and Spheres, Lectures III and IV | R. Connelly | undated | Institut Henri Poincaré lecture slides | `connelly-packings-of-circles-and-spheres-lecture-notes` |
 
+## Search and Annealing Method Sources
+
+Retained on 2026-09-08 for
+[Annealing for Square Packing](../../docs/project/research/research-2026-09-08-annealing-for-square-packing.md).
+Only two of them are about squares at all, and neither sets a record for `s(n)`. They
+are here because the report’s argument is about **search methods**, and the methods that
+set packing records were developed on circles, disks and spheres, or measured on graph
+problems. Every entry is raw-only.
+The retrieval receipts, the checked readings, and the sources that could not be
+retrieved are in
+[`web/annealing-methods-audit-2026-09-08`](web/annealing-methods-audit-2026-09-08/README.md).
+
+| Key | Title | Authors | Year | Venue | File stem |
+| --- | --- | --- | --- | --- | --- |
+| **[Gensane 2004]** | Dense Packings of Equal Spheres in a Cube | T. Gensane | 2004 | Electron. J. Combin. 11, #R33 | `gensane-2004-dense-packings-equal-spheres-cube` |
+| **[Addis–Locatelli–Schoen 2008]** | Disk Packing in a Square: A New Global Optimization Approach | B. Addis, M. Locatelli, F. Schoen | 2008 | INFORMS J. Comput. 20(4), 516–524 (preprint) | `addis-locatelli-schoen-2008-disk-packing-square` |
+| **[Grosso et al. 2010]** | Solving the problem of packing equal and unequal circles in a circular container | A. Grosso, A. R. M. J. U. Jamali, M. Locatelli, F. Schoen | 2010 | J. Global Optim. 47, 63–81 (preprint) | `grosso-jamali-locatelli-schoen-2010-packing-equal-unequal-circles` |
+| **[Ye–Huang–Lü 2013]** | Iterated Tabu Search Algorithm for Packing Unequal Circles in a Circle | F. Ye, W. Huang, Z. Lü | 2013 | arXiv:1306.0694 | `ye-huang-lu-2013-iterated-tabu-search-unequal-circles` |
+| **[Lai et al. 2023]** | Perturbation-based thresholding search for packing equal circles and spheres | X. Lai, J.-K. Hao, R. Xiao, F. Glover | 2023 | INFORMS J. Comput. (accepted manuscript) | `lai-hao-xiao-glover-2023-perturbation-thresholding-search` |
+| **[Odriozola 2009]** | Replica Exchange Monte Carlo applied to Hard Spheres | G. Odriozola | 2009 | J. Chem. Phys. 131, 144107; arXiv:1010.2923 | `odriozola-2009-replica-exchange-hard-spheres` |
+| **[Johnson et al. Part I]** | Optimization by Simulated Annealing: An Experimental Evaluation; Part I, Graph Partitioning | D. S. Johnson, C. R. Aragon, L. A. McGeoch, C. Schevon | 1989 | Oper. Res. 37(6), 865–892 | `johnson-aragon-mcgeoch-schevon-1989-annealing-part-i` |
+| **[Johnson et al. Part II]** | Optimization by Simulated Annealing: An Experimental Evaluation; Part II, Graph Coloring and Number Partitioning | D. S. Johnson, C. R. Aragon, L. A. McGeoch, C. Schevon | 1991 | Oper. Res. 39(3), 378–406 | `johnson-aragon-mcgeoch-schevon-1991-annealing-part-ii` |
+| **[Blair et al. 2012]** | Packing Squares in a Torus | D. W. Blair, C. Santangelo, J. Machta | 2012 | arXiv:1110.5348; J. Stat. Mech. | `blair-santangelo-machta-2012-packing-squares-in-a-torus` |
+| **[Xu–Xiao–Amos 2008]** | Simulated Annealing for Weighted Polygon Packing | Y.-C. Xu, R.-B. Xiao, M. Amos | 2008 | arXiv:0809.5005 | `xu-xiao-amos-2008-simulated-annealing-weighted-polygon-packing` |
+| **[Anderson et al. 2016]** | Scalable Metropolis Monte Carlo for simulation of hard shapes (HOOMD-blue HPMC) | J. A. Anderson, M. E. Irrgang, S. C. Glotzer | 2016 | Comput. Phys. Commun. 204, 21–30; arXiv:1509.04692 | `anderson-irrgang-glotzer-2016-scalable-metropolis-hard-shapes` |
+| **[Ninarello et al. 2017]** | Models and algorithms for the next generation of glass transition studies | A. Ninarello, L. Berthier, D. Coslovich | 2017 | Phys. Rev. X 7, 021039; arXiv:1704.08864 | `ninarello-berthier-coslovich-2017-next-generation-glass-transition` |
+| **[Berthold et al. 2026a]** | Global Optimization for Combinatorial Geometry Problems Revisited in the Era of LLMs | T. Berthold, D. Kamp, G. Mexi, S. Pokutta, I. Pólik | 2026 | arXiv:2601.05943 | `berthold-kamp-mexi-pokutta-polik-2026-global-optimization-combinatorial-geometry` |
+| **[Berthold et al. 2026b]** | Out-of-the-Box Global Optimization for Packing Problems: New Models and Improved Solutions | T. Berthold, D. Kamp, G. Mexi, S. Pokutta, I. Pólik | 2026 | arXiv:2605.04850 | `berthold-kamp-mexi-pokutta-polik-2026-out-of-the-box-packing-problems` |
+| **[Sparrow 2025]** | An open-source heuristic to reboot 2D nesting research | J. Gardeyn, G. Vanden Berghe, T. Wauters | 2025 | arXiv:2509.13329 | `gardeyn-vandenberghe-wauters-2025-sparrow-2d-nesting` |
+
 ## Web Sources
 
 | Key | What | Source | File stem (in `web/`) |
@@ -216,7 +275,10 @@ hypotheses to be matched to the square pose chart and its nonsmooth feature chan
 | **[Burns n17 addendum 2026-09-07]** | The rest of Burns’s series: the introduction post, the near-record arrangement’s coordinates file and five figures, the two post images, a replay receipt for the retained `4.4811` verifier, and a Squarl repository pointer; extends `[Burns–Massaccesi n17]` without editing its frozen README | sam-burns.com; github.com/sam-bee/squarl | `burns-n17-series-addendum-2026-09-07/` |
 | **[GitHub n17 certificates 2026]** | Three August 2026 GitHub certificate repositories for `s(17)` found outside the indexed corpus: Mira’s exact 16-point pose-space certificates (`4.450837`, then `4.468292` with triangle-piercing leaves), Fort’s `4.456575` on the same architecture, and anabologyco-maker’s weighted-measure candidate `9141/2000 = 4.5705` with an exact orientation partition and a Lean layer; retained with their checkers, replay scripts and receipts | github.com | `n17-github-certificates-2026/` |
 | **[De Winter 2026]** | Mutable author report of proposed construction improvements at `n = 68, 126, 206`; coordinates unavailable and values unreplayed | researchgate.net | `de-winter-improved-packings-2026/` |
+| **[Schadt n29 2025]** | Thomas Schadt’s `n = 29` record repository: the packing, its Python verifier, the rendered SVG, and his four-sentence methodology note | github.com/BalthasarStrauss | `schadt-s29-2025/` |
+| **[Squarl n17 2026]** | Sam Burns’s open `n = 17` pipeline documentation at a pinned commit: the formulation and move set, the deep-polish architecture and its tolerances, the final nine-hour production search’s own accounting, and the earlier topology drain | github.com/sam-bee/squarl | `squarl-n17-2026/` |
 | **[Literature refresh 2026-09-05]** | Frozen arXiv, Crossref, OpenAlex, and Zenodo receipts; additions, currentness checks, and nearby-problem exclusions | primary sources and scholarly indexes | `literature-refresh-2026-09-05/` |
+| **[Annealing methods audit 2026-09-08]** | Frozen arXiv, Crossref and OpenAlex receipts for the search-method corpus; the fifteen-paper acquisition manifest, three readings checked against the retained bytes, the screened-out adjacent problems, and the open-access verdict on every source that could not be retrieved | primary sources and scholarly indexes | `annealing-methods-audit-2026-09-08/` |
 | **[`s(11)` lower-bound audit 2026]** | Exact-value, reciprocal, catalogue, citation-chain, and method-lineage search supporting the scoped novelty claim for `381/100` | primary papers; author pages; scholarly indexes; public catalogues | `s11-lower-bound-literature-audit-2026/` |
 | **[`s(11)` exact-endpoint audit 2026-09-06]** | Dated exact-value and topic-query receipt for `38100*sqrt(8100042893309449)/899996306539`; a bounded currentness check, not absolute-priority proof | arXiv; Crossref; OpenAlex; general web index | `s11-exact-endpoint-literature-audit-2026-09-06/` |
 | **[Finite-case literature audit 2026]** | Repeatable queries and bounded negative result for recent papers on the prioritized cases | arxiv.org; combinatorics.org; author pages | `finite-case-literature-audit-2026/` |
@@ -273,6 +335,22 @@ The short version below is kept for readers of this archive.
 | Brooks, Smith, Stone & Tutte, *The dissection of rectangles into squares*, Duke Math. J. 7 (1940) | Project Euclid; not open access |
 | Gustafsson & Thulin (1980), *Ronden* | Swedish company periodical; Ellsworth notes he has not read it directly either |
 
+Six search-method sources were attempted on **2026-09-08** and not retrieved.
+[The annealing audit packet](web/annealing-methods-audit-2026-09-08/README.md) records
+each attempt, its HTTP result, and its open-access verdict from the retained OpenAlex
+probe; the short version is that Basurto et al.
+2024 (J. Chem. Phys.
+161:044110) and Oakley et al.
+2013 (Phys. Chem. Chem.
+Phys. 15:3965) are nominally hybrid open access but returned HTTP 403, and that Basurto
+et al. 2026 (Comput.
+Phys. Commun. 320:109990), Müller et al.
+2009 (Phys. Rev. E 79:021102), Gomes & Oliveira 2006 (Eur.
+J. Oper. Res. 171:811) and the TAMSASS-PECS chapter are closed.
+These are not in
+[`../frontier/source-availability.yaml`](../frontier/source-availability.yaml), which
+tracks sources bearing on square-packing bounds; these bear on search method.
+
 ## Provenance and Licence
 
 The original archive was retrieved on **2026-08-22** from the URLs recorded in each
@@ -297,8 +375,12 @@ and
 records their implications for the research program.
 The review retains source-level formula slips as explicit reading notes and leaves the
 PDFs and raw OCR unchanged.
-Archive PDFs are marked binary in the repository’s `.gitattributes`; this prevents Git
-from interpreting compressed scan streams as text without changing any source bytes.
+The fifteen search-method papers and the Squarl documentation were retrieved on
+**2026-09-08**; every URL, timestamp and SHA-256 is in
+[the audit packet](web/annealing-methods-audit-2026-09-08/README.md), and each `.raw.md`
+is `pdftotext -layout` on its retained PDF. Archive PDFs are marked binary in the
+repository’s `.gitattributes`; this prevents Git from interpreting compressed scan
+streams as text without changing any source bytes.
 The arXiv and Electronic Journal of Combinatorics items are open access; the Stanford
 technical report and PMC item are publicly posted.
 Retained for private research use.

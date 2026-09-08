@@ -241,7 +241,7 @@ relevant source audit.
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for `n = 1…100`, with reported and verified bounds kept separate |
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, and raw extractions |
-| [**Reports**](#reports) | Seven research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
+| [**Reports**](#reports) | Nine research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
 | [**Code and development guide**](development.md) | Exact verification, search, promotion, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
@@ -382,7 +382,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These eight research reports are the durable topical syntheses:
+These nine research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -394,6 +394,7 @@ These eight research reports are the durable topical syntheses:
 | [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | Basin cartography, structural diversity, relaxation ladders, and search strategy |
 | [Public Sources Beyond n = 100](docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md) | Which catalogues carry geometry above 100, their reuse terms, and why 324 is a source boundary |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | Historical corrections, the three memo arguments, and a reusable conditional counting control |
+| [Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | What “solve to `n = 100`” actually asks for, what the record engines do, and why the move set rather than the cooling schedule is the binding constraint |
 
 The reports distinguish formal proof, finite numerical checks, and source reports.
 The [document map](SYNOPSIS.md#document-map) identifies every maintained guide, dated
@@ -613,7 +614,7 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── development.md          Python setup, engineering boundaries, and validation
 ├── defects.md              Generated view of packing/defects.yaml
 ├── docs/project/           Reports, reviews, specs, postmortems, and dated handoffs
-├── docs/project/research/  The seven research reports listed above
+├── docs/project/research/  The nine research reports listed above
 ├── packing/                Code, data, and the research record
 │   ├── campaign/           Hypotheses, experiments, sessions, agendas, and ledger
 │   ├── frontier/           Per-case claims, evidence, generated views, and results

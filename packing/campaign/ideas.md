@@ -104,7 +104,7 @@ finite-refiner residual motivates H-021 through H-023 but is not a runnable basi
 experiment. It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a
 structural prior an unconstrained search does not exploit.
 
-The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 20 search
+The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 22 search
 families drawn from this problem and adjacent optimization practice; it is a working
 map, not an exhaustive history.
 `strategy_refs` on each hypothesis cites into it, so the ledger can report which whole

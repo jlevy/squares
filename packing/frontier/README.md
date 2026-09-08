@@ -192,7 +192,7 @@ uv run --frozen python -m devtools.check_source_coverage
 
 [`search-strategies.yaml`](search-strategies.yaml) and
 [`proof-strategies.yaml`](proof-strategies.yaml) carry two working inventories of the
-field and adjacent methods: 20 search strategies and 30 proof strategies or candidates.
+field and adjacent methods: 22 search strategies and 30 proof strategies or candidates.
 They are broad research maps, not claims of an exhaustive history; several entries are
 explicitly unused on this problem.
 Each entry has an `id`, `name`, `mechanism`, `family`, a status (`outcome` for search,
