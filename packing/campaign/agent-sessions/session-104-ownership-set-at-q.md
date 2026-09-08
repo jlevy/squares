@@ -137,6 +137,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
   checks:
   - packing-validate --records from the lane worktree before the final commit (4 cpus, about 44 s wall) passes every step except three that need the coordinator's integration re-renders and that this lane may not perform, namely the document map row for the lane document (check_documentation), the session-close report and SYNOPSIS render (close_session --render), and the ledger render (packing-ledger render); the session record's own checks (schema, clocks, gate, rollups) pass. A first run had also failed on a YAML colon in this record's phase-2 stop_reason, fixed before this run.
+  - A second interval reader with the Hausdorff bound (cover_reader2.py) was written; its float cover did not finish in two bounded runs of 9 and 7 minutes at load 10 to 14, and its full exact pass was stopped after 10 minutes, so it is recorded as not completed and is the next session's first replay.
   - Engine self-tests (selftest.py) passed; the independent reader agreed on all 22 catalogued escapes; the interval reader's exact mode re-decided 184756 leaves and 17551 discards with no failure; 6000 sampled poses inside certified leaves were within 3/500 of a mark by the falsifier's exact distance.
   resource_rollups: []
   stop_reason: null

@@ -356,6 +356,18 @@ should demand before the theorem is used.
 At length `8/100` the reader’s floor was too coarse for a slack of `0.002`; a finer
 floor would decide it and was not run.
 
+*A second reader, written and not completed.* `cover_reader2.py` (Appendix) certifies a
+box by a different bound, the Hausdorff one on the Euclidean distance itself:
+`dist(Q(P), m) ≤ dist(Q(P₀), m) + hx + hy + √2·ht`, decided exactly as
+`dist² ≤ (δ − hx − hy − 14143/10000·ht)²` with the vertex formulas of `reader.py` and no
+detour through `f` and `τ`. Its float cover did not finish within two bounded runs of
+`9` and `7` minutes at load `10` to `14`: the bound’s L1 centre term is looser than the
+frame bound’s, so it needs more boxes, and its per-box cost is about sixty
+point-to-segment distances against the first reader’s ten frame evaluations.
+The full exact pass it started at 05:30 was stopped after ten minutes.
+It is the replay the next session runs first, with a vectorised cover or a coarser first
+level.
+
 ### 6.3 What Theorem E.4 buys
 
 - **Localisation for route (a).** In any packing of eleven unit squares in `S` each
@@ -2590,6 +2602,131 @@ G7: centre (2754/829, 968/623) t = 0
 G8: centre (419/809, 419/809) t = 0
 G9: centre (1909/835, 1909/835) t = 41/99
 G10: centre (968/623, 968/623) t = 41/99
+```
+
+### `cover_reader2.py`
+
+```text
+"""Second, independent interval reader for Theorem E.4 with a different bound.
+
+Hausdorff bound: moving the centre by (dx, dy) and rotating by dtheta about the centre
+moves every point of the unit square by at most sqrt(dx^2 + dy^2) + (sqrt2/2)|dtheta|,
+and |dtheta| = 2|atan t - atan t0| <= 2 ht, so for every pose P in a box with
+half-widths (ht, hx, hy) about P0
+    dist(Q(P), m) <= dist(Q(P0), m) + hx + hy + sqrt2 * ht     (Euclidean <= L1).
+A box is certified by a mark m when  dist(Q(P0), m) + hx + hy + (14143/10000) ht <= delta,
+decided exactly as  dist^2 <= (delta - hx - hy - (14143/10000) ht)^2  with a nonnegative
+base, where dist^2 between the closed square and a closed segment is the minimum over
+the segment's endpoints of the point-to-square squared distance and over the square's
+corners of the point-to-segment squared distance (the distance between two convex
+polygons is attained at a vertex of one of them).  The float cover uses the same
+formulas in doubles with a 1e-9 allowance; the exact stage re-decides every certified
+leaf and every discarded box in fractions.Fraction with no allowance.  Discards, the
+domain and the splitting rule are as in cover_reader.py; nothing from it is imported.
+"""
+import sys, json, math, time, argparse
+from fractions import Fraction as F
+Q = 96 / 25; DELTA = 3 / 500; EPS = 1e-9; C_T = 14143 / 10000
+QF = F(96, 25); DELTAF = F(3, 500); C_TF = F(14143, 10000)
+def load(path):
+    out = []
+    for m in json.load(open(path)):
+        if m["kind"] == "point":
+            a = (F(m["xy"][0]), F(m["xy"][1])); out.append((a, a))
+        else:
+            out.append(((F(m["a"][0]), F(m["a"][1])), (F(m["b"][0]), F(m["b"][1]))))
+    return out
+def corners(cx, cy, c, s):
+    return [(cx + (a * c - b * s) / 2, cy + (a * s + b * c) / 2) for a, b in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+def seg_d2(p, a, b, zero):
+    ax, ay = a; bx, by = b; px, py = p; dx, dy = bx - ax, by - ay
+    L2 = dx * dx + dy * dy
+    if L2 == zero:
+        return (px - ax) ** 2 + (py - ay) ** 2
+    lam = ((px - ax) * dx + (py - ay) * dy) / L2
+    lam = min(max(lam, zero), zero + 1)
+    qx, qy = ax + lam * dx, ay + lam * dy
+    return (px - qx) ** 2 + (py - qy) ** 2
+def inside(cs, p):
+    for i in range(4):
+        (x1, y1), (x2, y2) = cs[i], cs[(i + 1) % 4]
+        if (x2 - x1) * (p[1] - y1) - (y2 - y1) * (p[0] - x1) < 0:
+            return False
+    return True
+def pt_sq_d2(cs, p, zero):
+    if inside(cs, p):
+        return zero
+    return min(seg_d2(p, cs[i], cs[(i + 1) % 4], zero) for i in range(4))
+def seg_sq_d2(cs, a, b, zero):
+    cands = [pt_sq_d2(cs, a, zero), pt_sq_d2(cs, b, zero)]
+    if a != b:
+        cands += [seg_d2(c, a, b, zero) for c in cs]
+    return min(cands)
+def frame(t):
+    d = 1 + t * t; return (1 - t * t) / d, 2 * t / d
+def w_half(t):
+    c, s = frame(t); return (c + s) / 2
+def decide(marks, t1, t2, x1, x2, y1, y2, exact):
+    """'discard' | 'ok' | 'split' with the arithmetic chosen by `exact`."""
+    if exact:
+        t1, t2, x1, x2, y1, y2 = (F(v) for v in (t1, t2, x1, x2, y1, y2)); zero = F(0); q = QF; delta = DELTAF; ct = C_TF; eps = F(0)
+        mk = marks
+    else:
+        zero = 0.0; q = Q; delta = DELTA; ct = C_T; eps = EPS
+        mk = [((float(a[0]), float(a[1])), (float(b[0]), float(b[1]))) for a, b in marks]
+    wmin = min(w_half(t1), w_half(t2))
+    if x2 < wmin - eps or x1 > q - wmin + eps or y2 < wmin - eps or y1 > q - wmin + eps:
+        return "discard"
+    t0, x0, y0 = (t1 + t2) / 2, (x1 + x2) / 2, (y1 + y2) / 2
+    ht, hx, hy = (t2 - t1) / 2, (x2 - x1) / 2, (y2 - y1) / 2
+    base = delta - hx - hy - ct * ht - eps
+    if base < zero:
+        return "split"
+    c, s = frame(t0); cs = corners(x0, y0, c, s)
+    for a, b in mk:
+        if seg_sq_d2(cs, a, b, zero) <= base * base:
+            return "ok"
+    return "split"
+def run(marks, floor, exact, sample=0):
+    stack = [(0.0, 1.0, 0.5, Q - 0.5, 0.5, Q - 0.5)]; leaves = []; discards = []; failed = 0; nodes = 0; t0 = time.time()
+    while stack:
+        box = stack.pop(); nodes += 1
+        st = decide(marks, *box, exact=False)
+        if st == "discard": discards.append(box); continue
+        if st == "ok": leaves.append(box); continue
+        t1, t2, x1, x2, y1, y2 = box; ht, hx, hy = (t2 - t1) / 2, (x2 - x1) / 2, (y2 - y1) / 2
+        if max(3 * ht, hx, hy) < floor: failed += 1; continue
+        dim = max((3 * ht, "t"), (hx, "x"), (hy, "y"))[1]
+        if dim == "t": tm = (t1 + t2) / 2; stack += [(t1, tm, x1, x2, y1, y2), (tm, t2, x1, x2, y1, y2)]
+        elif dim == "x": xm = (x1 + x2) / 2; stack += [(t1, t2, x1, xm, y1, y2), (t1, t2, xm, x2, y1, y2)]
+        else: ym = (y1 + y2) / 2; stack += [(t1, t2, x1, x2, y1, ym), (t1, t2, x1, x2, ym, y2)]
+    res = {"nodes": nodes, "certified_leaves": len(leaves), "discarded": len(discards), "failed": failed, "wall_s": round(time.time() - t0, 1)}
+    if exact and failed == 0:
+        import random
+        t0 = time.time()
+        chosen = leaves if not sample else random.Random(11).sample(leaves, min(sample, len(leaves)))
+        bad = sum(decide(marks, *b, exact=True) != "ok" for b in chosen)
+        badd = sum(decide(marks, *b, exact=True) != "discard" for b in discards)
+        res["exact_recheck"] = {"leaves_checked": len(chosen), "of": len(leaves), "failed": bad, "discards": len(discards), "discards_failed": badd, "wall_s": round(time.time() - t0, 1)}
+    return res
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser(); ap.add_argument("marks"); ap.add_argument("--floor", type=float, default=2e-4); ap.add_argument("--exact", action="store_true"); ap.add_argument("--sample", type=int, default=0); ap.add_argument("--out")
+    a = ap.parse_args(); res = run(load(a.marks), a.floor, a.exact, a.sample); res["marks"] = a.marks
+    print(json.dumps(res, indent=1))
+    if a.out: json.dump(res, open(a.out, "w"), indent=1)
+    sys.exit(0 if res["failed"] == 0 and res.get("exact_recheck", {"failed": 0, "discards_failed": 0})["failed"] == 0 else 1)
+```
+
+### `cover2-S10-l0.1.log`
+
+Output as run (the bounded retry; the earlier full exact pass was stopped).
+
+```text
+load: 13.43,
+Tue Sep  8 05:51:43 UTC 2026
+exit 124
+Tue Sep  8 05:58:43 UTC 2026
+load: 9.63,
 ```
 
 <!-- This document follows common-doc-guidelines.md.
