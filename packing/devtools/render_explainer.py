@@ -38,12 +38,14 @@ import shutil
 import struct
 import subprocess
 import sys
-from collections.abc import Sequence
+from collections import Counter
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import cache
 from math import isqrt
 from pathlib import Path
+from textwrap import indent
 from typing import NamedTuple, TypedDict
 
 from strif import atomic_output_file
@@ -827,34 +829,129 @@ COMPOSITE_SLOT_FACES = {
     ("normal", "700"): "KaTeX_Main-Bold",
     ("italic", "700"): "KaTeX_Math-BoldItalic",
 }
+
+#: The same table for `KPress Math Text Sans`, the second composite, which draws the
+#: letters and digits of mathematics from Source Sans 3 wherever the words around them
+#: are sans. Its slots are pinned at 400 and at kpress's sans bold token, 650, rather
+#: than at 400 and 700: a KaTeX metric table describes one face *and one weight*, and
+#: the sans tables are generated at those two.
+SANS_COMPOSITE_SLOT_FACES = {
+    ("normal", "400"): "KaTeX_Main-Regular",
+    ("italic", "400"): "KaTeX_Math-Italic",
+    ("normal", "650"): "KaTeX_Main-Bold",
+    ("italic", "650"): "KaTeX_Math-BoldItalic",
+}
+
+#: The sans slots this page draws from, and the reason the other two go.
+#:
+#: Every face of the sans composite is a SECOND data-URI copy of bytes the page already
+#: carries: its Latin halves are the same two `source-sans-3-latin-wght-*.woff2` files
+#: the prose stack inlines, its Greek halves the same KaTeX faces, and its `@media print`
+#: halves static instances of the same variable face. So a slot kept unused is 20-40 KB
+#: of base64 on every copy of the page ever served, and the prune is worth taking to the
+#: weight rather than only to the style.
+#:
+#: KaTeX reaches a bold table from `\mathbf`, `\boldsymbol` and `\textbf` alone, and this
+#: page sets none of them in a sans context: its three `\mathbf{D}_4` are in prose, which
+#: is the serif composite's. `check_math_faces` in `inspect_explainer_typography` is what
+#: holds that -- it fails on a `.mathbf`, `.boldsymbol` or `.textbf` under any node the
+#: init marked sans -- because the condition is about what the built page renders and
+#: cannot be read off the template. Dropping the pair also drops kpress's two 650 print
+#: instances with it, since those are the same slots under `@media print`.
+#:
+#: The italic slots pair with `KaTeX_Math-Italic` and `KaTeX_Math-BoldItalic`, and the
+#: second is outside `KATEX_FACES`, so the italic 650 slot would go on the partner rule
+#: whatever this set said. It is named here as well so the set reads as the two slots the
+#: page draws, rather than as one prune with a second one hidden behind it.
+SANS_COMPOSITE_SLOTS_DRAWN: frozenset[tuple[str, str]] = frozenset(
+    {("normal", "400"), ("italic", "400")}
+)
+
 _WEIGHT_TOKENS = {"normal": "400", "bold": "700"}
+
+
+class Composite(NamedTuple):
+    """One of kpress's math text composites, as the prune and its staleness guard read it.
+
+    `slots` is the KaTeX face under each style-and-weight slot; `drawn` is the subset of
+    those slots this page can reach; `blocks` is how many `@font-face` rules kpress
+    declares for the family, which is what the guard holds the copy to.
+    """
+
+    slots: Mapping[tuple[str, str], str]
+    drawn: frozenset[tuple[str, str]]
+    blocks: int
+
+
+#: kpress's composites by the EXACT family each declares, which is the whole of why this
+#: mapping exists. The count guard used to ask whether `"KPress Math Text" in block`, and
+#: the sans composite's family starts with that string: the check saw 20 faces of one
+#: composite, refused the render, and did so before anything else could report what had
+#: actually changed (kpress #57 senior review, K57-R2). A family is matched, not searched
+#: for.
+#:
+#: `blocks` is two per slot for the serif composite -- the reading face over Latin and
+#: digits, the KaTeX face over Greek -- and two per slot plus one static print instance
+#: per slot for the sans, which kpress layers over the same Latin ranges under
+#: `@media print` so a printed page embeds a font rather than the Type3 outline paths
+#: Chromium writes for a variable face away from its default position.
+COMPOSITES: Mapping[str, Composite] = {
+    "KPress Math Text": Composite(
+        slots=COMPOSITE_SLOT_FACES,
+        drawn=frozenset(COMPOSITE_SLOT_FACES),
+        blocks=2 * len(COMPOSITE_SLOT_FACES),
+    ),
+    "KPress Math Text Sans": Composite(
+        slots=SANS_COMPOSITE_SLOT_FACES,
+        drawn=SANS_COMPOSITE_SLOTS_DRAWN,
+        blocks=3 * len(SANS_COMPOSITE_SLOT_FACES),
+    ),
+}
+
+
+def _face_family(block: str) -> str | None:
+    """The family a `@font-face` block declares, unquoted, or `None` when it names none."""
+    family = FONT_FACE_FAMILY.search(block)
+    return None if family is None else family.group(1).strip().strip('"')
+
+
+def _composite_slot(block: str) -> tuple[str, str]:
+    """The style-and-weight slot a composite's `@font-face` block belongs to."""
+    style = re.search(r"font-style:\s*([a-z]+)", block)
+    weight = re.search(r"font-weight:\s*([a-z0-9]+)", block)
+    return (
+        style.group(1) if style else "normal",
+        _WEIGHT_TOKENS.get(weight.group(1), weight.group(1)) if weight else "400",
+    )
 
 
 def _font_face_reachable(block: str) -> bool:
     """Whether a `@font-face` block names a face this page can reach.
 
-    Three kinds of block are known: a KaTeX face, kept if the page can reach it; a
-    face of kpress's `KPress Math Text` composite, kept if its slot's KaTeX partner
-    is; and nothing else. A composite under another name (the planned sans one, say)
-    fails the render rather than being inlined unread at 30-40 KB a face.
+    Three kinds of block are known: a face of one of kpress's math text composites, kept
+    if the page draws that slot and the slot's KaTeX partner is reachable; a KaTeX face,
+    kept if the page can reach it; and nothing else. A composite under a third name fails
+    the render rather than being inlined unread at 20-40 KB a face.
     """
+    family = _face_family(block)
+    composite = COMPOSITES.get(family) if family is not None else None
+    if composite is not None:
+        # The composite is asked FIRST, and the KaTeX rule below only afterwards. A
+        # composite's Greek half names a KaTeX woff2 in its `src`, so the other order
+        # answers for it on the partner's reachability alone and keeps the Greek half of
+        # a slot whose reading-face half has just been pruned -- glyphs laid out from a
+        # table for a face the page no longer draws, which is the one state the design
+        # forbids.
+        slot = _composite_slot(block)
+        partner = composite.slots.get(slot)
+        return slot in composite.drawn and (partner is None or partner in KATEX_FACES)
     ref = re.search(r"(KaTeX_[A-Za-z0-9-]+)\.woff2", block)
     if ref is not None:
         return ref.group(1) in KATEX_FACES
-    family = FONT_FACE_FAMILY.search(block)
-    if family is None or family.group(1) != '"KPress Math Text"':
-        raise SystemExit(
-            f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "
-            f"{family.group(1) if family else block.strip()[:60]}"
-        )
-    style = re.search(r"font-style:\s*([a-z]+)", block)
-    weight = re.search(r"font-weight:\s*([a-z0-9]+)", block)
-    slot = (
-        style.group(1) if style else "normal",
-        _WEIGHT_TOKENS.get(weight.group(1), weight.group(1)) if weight else "400",
+    raise SystemExit(
+        f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "
+        f"{family or block.strip()[:60]}"
     )
-    partner = COMPOSITE_SLOT_FACES.get(slot)
-    return partner is None or partner in KATEX_FACES
 
 
 def katex_css(static: Path) -> str:
@@ -871,17 +968,24 @@ def katex_css(static: Path) -> str:
     parts = []
     for name in KATEX_CSS_ASSETS:
         css = (static / name).read_text(encoding="utf-8")
-        # The prune reads the composite through `COMPOSITE_SLOT_FACES`, a copy of
-        # kpress's slot table. A slot added upstream would be kept unread at
-        # 30-40 KB a face, so the copy is checked against the stylesheet it mirrors.
-        composite = sum(
-            1 for block in FONT_FACE_BLOCK.findall(css) if "KPress Math Text" in block
+        # The prune reads each composite through `COMPOSITES`, a copy of kpress's slot
+        # tables. A slot added upstream would be kept unread at 20-40 KB a face, so the
+        # copy is checked against the stylesheet it mirrors -- by exact family, because
+        # one composite's name is a prefix of the other's.
+        declared = Counter(
+            family
+            for block in FONT_FACE_BLOCK.findall(css)
+            for family in [_face_family(block)]
+            if family in COMPOSITES
         )
-        if composite and composite != 2 * len(COMPOSITE_SLOT_FACES):
-            raise SystemExit(
-                f"{name} declares {composite} faces of KPress Math Text; the renderer "
-                f"knows {len(COMPOSITE_SLOT_FACES)} slots of two. Update COMPOSITE_SLOT_FACES."
-            )
+        for family, composite in COMPOSITES.items():
+            count = declared[family]
+            if count and count != composite.blocks:
+                raise SystemExit(
+                    f"{name} declares {count} faces of {family}; the renderer knows "
+                    f"{len(composite.slots)} slots and expects {composite.blocks} faces. "
+                    f"Update COMPOSITES."
+                )
         pruned = FONT_FACE_BLOCK.sub(
             lambda match: match.group(0) if _font_face_reachable(match.group(0)) else "", css
         )
@@ -1075,53 +1179,282 @@ def relation_face_css(static: Path) -> str:
     )
 
 
-#: KaTeX lays out from its own metric table, so kpress's tables for the reading face
-#: are installed before the page draws anything. The page renders its mathematics
-#: itself (`tex()` in the shell) rather than through kpress's `katex-init.js`, which
-#: is why the call lives here; the policy is that script's, copied. The tables are
-#: skipped when the wrapper or any ancestor opts out with
-#: `data-kpress-math-text="katex"` or runs on system fonts (the wrapper's baked
-#: `data-kpress-fonts` or the reader's persisted `data-kpress-font-set`, which the
-#: bootstrap stamps on <html>), because the stylesheet reverts to the KaTeX faces
-#: there and PT Serif's numbers would measure glyphs that are not drawn. And when
-#: the face is wanted but the tables cannot be applied, the face is turned off too,
-#: by stamping the opt-out the stylesheet reads: faces without metrics is the one
-#: state the design forbids.
-APPLY_TEXT_METRICS = """
+#: kpress's own math init, which this page does not run and does take its constants from.
+#:
+#: The page finds and renders its own mathematics (`tex()` and `render()` in the shell)
+#: because it has three kinds of math node kpress's loop does not know -- `.tex` and
+#: `.tex-d` in the article, and the readouts the interactive figures re-typeset on every
+#: pointer move -- so `katex-init.js` cannot drive it. Everything in it that is a
+#: DECISION rather than a loop is spliced out of the file instead of copied, so the two
+#: cannot disagree about which contexts are sans, which faces the render waits on, or how
+#: long it waits.
+KATEX_INIT = "katex/katex-init.js"
+
+#: What is taken, in the order the emitted script declares it. Each is one top-level
+#: `const NAME = ...;` in `katex-init.js`, and each is a decision rather than a mechanism:
+#:
+#: - `TEXT_FACE_OPT_OUT`, the three attributes that turn the face off.
+#: - `SANS_CONTEXT`, the roles whose mathematics is set in the sans. kpress's design says
+#:   this list exists in that file and nowhere else -- the stylesheet keys on the
+#:   `data-kpress-math-face="sans"` the script stamps rather than naming a role -- and a
+#:   copy here would be a third place for it to be wrong in.
+#: - `FACE_SAMPLE`, the four characters that reach both halves of every composite slot.
+#: - `KATEX_FAMILIES`, the two families every rule in `katex-text-face.css` names after
+#:   the composite.
+#: - `COMPOSITE_FONTS`, each composite's four slots as `font` shorthands, at that
+#:   composite's own weights: the serif at 400 and 700, the sans at 400 and 650. A
+#:   shorthand at the wrong weight waits on the other slot's face.
+#: - `FACE_WAIT_MS`, the ceiling on the wait.
+KPRESS_INIT_CONSTANTS: tuple[str, ...] = (
+    "TEXT_FACE_OPT_OUT",
+    "SANS_CONTEXT",
+    "FACE_SAMPLE",
+    "KATEX_FAMILIES",
+    "COMPOSITE_FONTS",
+    "FACE_WAIT_MS",
+)
+
+#: The floor under kpress's ceiling. `font-display: block` gives a face three seconds
+#: before it swaps anyway, so a wait shorter than that would hand the reader a repaint
+#: the block period was already preventing. kpress's own value is the ceiling used; this
+#: is what the render refuses to go below if kpress ever lowers it.
+FACE_WAIT_FLOOR_MS = 3000
+
+#: kpress's math markup, which the sans test walks up through rather than reading.
+#:
+#: The face of the words around an expression is what decides which composite draws it,
+#: and the elements between the two are not words: `.kpress-math` and
+#: `.kpress-math-render` are kpress's own wrappers and declare `--kpress-font-prose`
+#: themselves, so a footnote's mathematics -- sans words, by every rule on the page --
+#: reads as serif if the question is asked of the element the formula sits directly in.
+#: Measured on the built page: five expressions in the footnote section, every one of
+#: them wrong in that direction. `.tex` and `.tex-d` are this page's equivalents, and
+#: `.katex` is KaTeX's own root, where `katex-text-face.css` puts the composite -- asking
+#: that one would answer with the choice already made.
+MATH_WRAPPERS = ".katex, .kpress-math, .kpress-math-render, .tex, .tex-d"
+
+
+def _init_constant(source: str, name: str) -> str:
+    """One top-level `const NAME = ...;` declaration, verbatim, out of kpress's init.
+
+    Matched to the first `;` that ends a line, which is what closes a declaration in that
+    file and never what closes an inner one: the object literal's entries end in commas
+    and its own brace sits on a line of its own.
+    """
+    match = re.search(rf"^const {name} =.*?;$", source, re.DOTALL | re.MULTILINE)
+    if match is None:
+        raise SystemExit(
+            f"kpress's {KATEX_INIT} no longer declares `const {name}`; the page's math "
+            f"init reads it from there rather than keeping a copy. Check the file."
+        )
+    return match.group(0)
+
+
+def kpress_init_constants(static: Path) -> tuple[str, int]:
+    """kpress's math-init decisions as JavaScript, and the face wait its ceiling implies.
+
+    Both are read rather than copied, and both are checked for shape on the way through:
+    a `SANS_CONTEXT` that has lost the caption role, or a `FACE_WAIT_MS` that is not a
+    number, would otherwise reach the page as a selector that matches nothing or a
+    `setTimeout` that fires immediately.
+    """
+    source = (static / KATEX_INIT).read_text(encoding="utf-8")
+    declarations = [_init_constant(source, name) for name in KPRESS_INIT_CONSTANTS]
+    spliced = "\n".join(declarations)
+    if ".kpress-figcaption" not in spliced or "kpress-footnotes" not in spliced:
+        raise SystemExit(
+            f"kpress's SANS_CONTEXT no longer names the caption and footnote roles; "
+            f"{KATEX_INIT} has been reshaped and the splice needs re-reading"
+        )
+    wait = re.search(r"^const FACE_WAIT_MS = (\d+);$", source, re.MULTILINE)
+    if wait is None:
+        raise SystemExit(f"kpress's FACE_WAIT_MS in {KATEX_INIT} is no longer a plain number")
+    return spliced, max(int(wait.group(1)), FACE_WAIT_FLOOR_MS)
+
+
+#: The page's math init: kpress's decisions, this page's render loop.
+#:
+#: WHETHER the tables are used is one decision for the page, under kpress's three
+#: opt-outs. WHICH set is used is decided per rendered node, because a caption's
+#: mathematics is set in the caption's own face: `installTablesFor` installs the node's
+#: set, marks the node so `katex-text-face.css` draws the matching composite on it, and
+#: leaves the serif set installed once the page's own loop calls `restore()`. Both halves
+#: come out of one call, so the drawn face and the metric table cannot disagree.
+#:
+#: A node is in a sans context if kpress says its role is, OR if the words around it are
+#: measurably sans. The second half is this page's, and it is a measurement rather than a
+#: list because the page has a dozen containers of its own that kpress has never heard of
+#: -- the mass line under the prover, the field tooltip's panel, the direction readouts
+#: beside the slider, the key-value rows in the figure captions -- and a second list would
+#: be a second thing to keep in step with the stylesheet. So the question is asked of the
+#: cascade instead: the first family of the container's computed `font-family` against the
+#: first family of the `--kpress-font-sans` in scope on the same element. Both sides come
+#: from the same medium's computed values, so the test reads the print stack under print
+#: and the screen stack on screen without naming either. A list would have been wrong on
+#: the day it was written: the shell's `--kpress-katex-size-sans` rule, which is the
+#: page's nearest thing to a statement of this, misses the six direction readouts that its
+#: own `--kpress-font-sans` rule covers.
+#:
+#: PAINTS ONCE. KaTeX renders into the live DOM, so an expression is painted in whatever
+#: faces have decoded by then, and each composite's slots are separate `@font-face` rules
+#: from the prose faces, matched only when a formula first asks for them. Rendering as
+#: soon as the DOM is ready therefore paints the digits from the next family in the stack
+#: and repaints them a moment later, which the owner saw as every formula's digits
+#: changing font on load. So `kpressMathFaces` settles when the faces the page will draw
+#: from have loaded, or after the ceiling, and the shell's two render sites wait on it.
+#:
+#: Both composites are waited on rather than only the sets the page's nodes ask for,
+#: which is where this departs from kpress. kpress conditions the wait because a composite
+#: the page never draws from would cost a font round trip; here every face is a data URI
+#: in this document, so asking for one costs a decode and no request at all, and the
+#: unconditional form has no notion of "this page has sans mathematics" to get wrong.
+MATH_TEXT_INIT = """
 (() => {
-  const optOut = [
-    '[data-kpress-math-text="katex"]',
-    '[data-kpress-fonts="system"]',
-    '[data-kpress-font-set="system"]',
-  ].join(", ");
+  /* Ahead of the splice: kpress's `COMPOSITE_FONTS` keys its two lists off these two
+     names, and a `const` is in its temporal dead zone until its own declaration runs. */
+  const SERIF_SET = "prose", SANS_SET = "sans", SCALE_KEY = "scale";
+%(constants)s
+  const MATH_WRAPPERS = "%(wrappers)s";
+  const WAIT_MS = %(wait)d;
+  let installedSet = null;
+
+  function tablesFor(set) {
+    const metrics = globalThis.kpressKatexTextMetrics;
+    const tables = set === SANS_SET ? (metrics && metrics[SANS_SET]) : metrics;
+    return tables && typeof tables === "object" ? tables : null;
+  }
+
+  function installTables(set) {
+    if (installedSet === set) return true;
+    const tables = tablesFor(set);
+    const install = typeof katex === "undefined" ? undefined : katex.__setFontMetrics;
+    if (!tables || typeof install !== "function") return false;
+    for (const [face, table] of Object.entries(tables)) {
+      if (face !== SANS_SET && face !== SCALE_KEY) install.call(katex, face, table);
+    }
+    installedSet = set;
+    return true;
+  }
+
+  const firstFamily = (value) => (value || "").split(",")[0].trim().replace(/^["']|["']$/g, "");
+
+  /* Whether the WORDS around this expression are sans: kpress's roles, or the cascade.
+     The walk skips kpress's math wrappers, which declare the prose face themselves and
+     would answer for the formula rather than for the sentence it sits in. */
+  function sansContext(node) {
+    if (node.closest && node.closest(SANS_CONTEXT)) return true;
+    let el = node;
+    while (el && el.matches && el.matches(MATH_WRAPPERS)) el = el.parentElement;
+    if (!el || !el.nodeType || el.nodeType !== 1) return false;
+    const style = getComputedStyle(el);
+    const sans = firstFamily(style.getPropertyValue("--kpress-font-sans"));
+    return !!sans && firstFamily(style.fontFamily) === sans;
+  }
+
+  /* The set this node's context asks for, and the mark the stylesheet draws it on.
+     One call, so the face and the metrics are chosen together; the mark goes on
+     before the render, so no `.katex` ever exists inside an unmarked sans node. */
+  function installTablesFor(node) {
+    if (!installedSet || !node) return null;
+    const set = sansContext(node) ? SANS_SET : SERIF_SET;
+    if (!installTables(set)) return null;
+    if (set === SANS_SET && node.dataset) node.dataset.kpressMathFace = SANS_SET;
+    return set;
+  }
+
+  /* Leave the serif set behind, as kpress's loop does: anything that renders later
+     without asking gets the reading face's numbers, which is the default. */
+  function restore() { if (installedSet) installTables(SERIF_SET); }
+
   const wrapper = document.querySelector(".kpress");
-  if (!wrapper || wrapper.closest(optOut)) return;
-  const tables = globalThis.kpressKatexTextMetrics;
-  const install = typeof katex === "undefined" ? undefined : katex.__setFontMetrics;
-  if (!tables || typeof install !== "function") {
-    document.documentElement.dataset.kpressMathText = "katex";
-    console.warn("kpress: math text face metrics unavailable; KaTeX's own faces restored");
-    return;
+  const wanted = !!wrapper && !wrapper.closest(TEXT_FACE_OPT_OUT);
+  if (wanted) {
+    /* Both sets are required. The sans faces without the sans tables would draw Source
+       Sans and lay out PT Serif inside every caption, which is the one state the design
+       forbids just as firmly as faces without metrics anywhere else. */
+    if (!tablesFor(SANS_SET) || !installTables(SERIF_SET)) {
+      installedSet = null;
+      document.documentElement.dataset.kpressMathText = "katex";
+      console.warn("kpress: math text face metrics unavailable; KaTeX's own faces restored");
+    }
   }
-  for (const [face, table] of Object.entries(tables)) {
-    if (face !== "scale") install.call(katex, face, table);
+  globalThis.kpressMathText = { installTablesFor, restore };
+
+  const faceKey = (face) => [face.family, face.style, face.weight, face.unicodeRange].join("|");
+
+  /* What the wait asked for and what came back, on `globalThis.kpressMathFaceWait`:
+     one `{ request, outcome, faces }` per request, in the order they were made.
+     `outcome` is `pending` until it settles and then `loaded`, `empty` (it matched no
+     face) or `error`. A page whose mathematics repaints is read here first. */
+  function mathFaceLoads() {
+    const fonts = document.fonts;
+    if (!fonts || typeof fonts.load !== "function" || typeof fonts.forEach !== "function") {
+      return null;
+    }
+    const record = [];
+    globalThis.kpressMathFaceWait = record;
+    const loads = [];
+    const track = (request, matched) => {
+      const entry = { request, outcome: "pending", faces: [] };
+      record.push(entry);
+      loads.push(matched.then(
+        (faces) => {
+          entry.faces = faces.map(faceKey);
+          entry.outcome = faces.length ? "loaded" : "empty";
+        },
+        (error) => { entry.outcome = "error"; entry.detail = String(error); },
+      ));
+    };
+    fonts.forEach((face) => {
+      if (KATEX_FAMILIES.includes(face.family) && typeof face.load === "function") {
+        track(faceKey(face), face.load().then((loaded) => [loaded]));
+      }
+    });
+    if (wanted) {
+      for (const set of [SERIF_SET, SANS_SET]) {
+        for (const spec of COMPOSITE_FONTS[set]) track(spec, fonts.load(spec, FACE_SAMPLE));
+      }
+    }
+    return loads;
   }
+
+  const loads = mathFaceLoads();
+  /* Both handlers settle: a face that fails to load must not take the mathematics with
+     it, and neither must a ceiling that is reached. */
+  globalThis.kpressMathFaces = loads === null
+    ? Promise.resolve()
+    : Promise.race([
+        Promise.all(loads),
+        new Promise((resolve) => setTimeout(resolve, WAIT_MS)),
+      ]).then(() => undefined, () => undefined);
 })();
 """
 
 
+def math_text_init(static: Path) -> str:
+    """`MATH_TEXT_INIT` with kpress's own constants spliced in."""
+    constants, wait = kpress_init_constants(static)
+    return MATH_TEXT_INIT % {
+        "constants": indent(constants, "  "),
+        "wrappers": MATH_WRAPPERS,
+        "wait": wait,
+    }
+
+
 def katex_js(static: Path) -> str:
-    """KaTeX, then kpress's metric tables for the math text face, then their install.
+    """KaTeX, then kpress's metric tables for the math text face, then the page's init.
 
     Both scripts come from kpress's own list, and their order in it is asserted: the
     tables have to follow the bundle they patch. The list's `auto-render.min.js` and
     `katex-init.js` are left out on purpose, since the page finds and renders its
-    own mathematics; the install call takes the init script's one remaining job.
+    own mathematics; `math_text_init` takes that script's remaining jobs -- installing
+    the tables, choosing a set per node, and holding the first render until the faces
+    it will draw from have loaded -- and splices its decisions out of it.
     """
     from kpress.format.assets import KATEX_JS_ASSETS  # noqa: PLC0415
 
     bundle, metrics = "katex/katex.min.js", "katex/katex-text-metrics.js"
-    for name in (bundle, metrics):
+    for name in (bundle, metrics, KATEX_INIT):
         if name not in KATEX_JS_ASSETS:
             raise SystemExit(f"kpress no longer lists {name}; the math text face has moved")
     if KATEX_JS_ASSETS.index(metrics) < KATEX_JS_ASSETS.index(bundle):
@@ -1130,7 +1463,7 @@ def katex_js(static: Path) -> str:
         (
             (static / bundle).read_text(encoding="utf-8"),
             (static / metrics).read_text(encoding="utf-8"),
-            APPLY_TEXT_METRICS,
+            math_text_init(static),
         )
     )
 

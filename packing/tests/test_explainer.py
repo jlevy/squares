@@ -660,3 +660,49 @@ def test_the_page_stamps_the_commit_it_is_built_from(page: str, document: str) -
     assert edition.startswith(lead), edition
     assert f"({edition})" in page
     assert f"({edition})" in document
+
+
+def test_no_mathematics_is_typeset_before_the_faces_it_will_be_drawn_from(page: str) -> None:
+    """The ordering the owner's font-swap report turns on, asserted on the built page.
+
+    KaTeX renders into the live DOM, so an expression is painted in whatever faces have
+    decoded by then. Both of the page's render sites therefore wait on
+    `globalThis.kpressMathFaces`, which the init settles once the composites and the two
+    KaTeX families the stylesheet names after them have loaded -- or at the ceiling, so
+    a face that never arrives cannot take the mathematics with it.
+
+    Three things are checked here and one is not. The init has to declare the wait, both
+    render sites have to be behind it, and `math-ready` -- the class the PDF pass and the
+    print-layout check both wait on -- has to be set inside the gated block rather than
+    beside it, or the print pass would get a page whose mathematics is still to come.
+    What is NOT here is whether the faces were in fact loaded when the first expression
+    was inserted; that is a measurement, and `devtools.check_math_faces` takes it in a
+    browser with an init script recording the moment.
+    """
+    assert "globalThis.kpressMathFaces = loads === null" in page
+    gate = "(globalThis.kpressMathFaces || Promise.resolve()).then("
+    # One per interactive figure script -- the page emits one per certificate -- and one
+    # for the shared static-math pass.
+    assert page.count(gate) == page.count("katex.render(")
+    gated = page.split(gate + "typeset)", maxsplit=1)[0]
+    typeset = gated.rsplit("function typeset() {", maxsplit=1)[-1]
+    assert "math-ready" in typeset, "math-ready is set outside the block that waits"
+
+
+def test_every_expression_is_typeset_through_the_seam_that_chooses_its_metric_table(
+    page: str,
+) -> None:
+    """`katex.render` is never called without installing the tables for that node first.
+
+    The tables are a KaTeX singleton, so the set installed at the moment `render` is
+    called is the set the boxes are measured from. A call that skips `installTablesFor`
+    lays its expression out from whatever the last node happened to want -- and in a
+    caption that means Source Sans drawn over PT Serif's numbers, which is the one state
+    the design forbids. Two helpers wrap every call the page makes -- `tex` in each
+    interactive figure script and `render` in the shared static pass -- and this asserts
+    that no call was added beside them.
+    """
+    calls = page.count("katex.render(")
+    installs = page.count("kpressMathText.installTablesFor(")
+    assert calls >= 2
+    assert installs == calls, f"{calls} render calls, {installs} of them through the seam"

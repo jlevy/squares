@@ -887,13 +887,19 @@ body {
      and being print-only it leaves the screen's hinted rendering alone. */
   .kpress { text-rendering: geometricPrecision; }
 
-  /* kpress borrows Georgia's quotes into the PT Serif stack through a `LocalPunct`
-     @font-face whose `src` is `local("Georgia")`. On a machine without Georgia the
-     face simply fails and nothing changes; on the Mac and Windows machines most
-     readers print from it loads, and every apostrophe and quotation mark in the
-     prose then comes from a different face at different metrics. Print should not
-     depend on which fonts the reader happens to own. */
-  .kpress { --kpress-host-font-prose: "PT Serif", Georgia, "Times New Roman", serif; }
+  /* Quotation marks used to be overridden here. kpress borrowed Georgia's into the PT
+     Serif stack through a `LocalPunct` @font-face whose `src` was `local("Georgia")`,
+     so on the Mac and Windows machines most readers print from, every apostrophe and
+     quotation mark came from a face the reader happened to own -- at its own metrics,
+     and impossible to embed in the PDF. This scope replaced the prose stack for print
+     to keep that out of the printed page.
+
+     kpress ships the marks now (`KPress Quotes`, six glyphs of Source Serif 4 at about
+     700 bytes, leading the prose stack through `--kpress-font-punctuation`), so the
+     override would do the opposite of what it was for: naming the stack again would
+     drop the shipped face and send print back to PT Serif's own marks. It is gone, and
+     `render_explainer_pdf --fonts` is what holds the result -- no Georgia in the
+     export, and `KPressQuotes` embedded. */
 
   /* Ragged right. kpress justifies printed prose and asks for automatic
      hyphenation to keep the lines even, but hyphenation needs dictionaries the
@@ -1109,7 +1115,14 @@ const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).
    and the same offset the drawn figures use, so the prose, the captions and the
    diagrams space it alike. `cos(x)` is untouched: the letter is not on its own. */
 const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-const tex = (el, s, d) => { try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
+/* Every render on this page goes through `installTablesFor` first. KaTeX lays out from
+   a metric table held in its own singleton, so the table has to be the right one at the
+   moment `render` is called: this figure's readouts sit in the sans panels and its
+   captions, and their mathematics is measured for Source Sans and marked so the
+   stylesheet draws it from the sans composite. See `math_text_init` in
+   `render_explainer.py`. */
+const tex = (el, s, d) => { if (globalThis.kpressMathText) kpressMathText.installTablesFor(el);
+                            try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
                             catch (e) { el.textContent = s; } };
 /* A readout that is replaced rather than slid fades in (see `.swap`); one
    that already shows the text is left alone, so leaving and re-entering a
@@ -1431,9 +1444,18 @@ function updateK() {
        `\\theta ${degRel(angle, 4)}^{\\circ}`]
     : [`\\theta ${degRel(angle, 4)}^{\\circ}`, `\\text{nearest net } k = ${curK}`,
        `\\theta_k ${degRel(2 * Math.atan(netT(curK)), 4)}^{\\circ}`];
-  el.replaceChildren(...parts.map(part => {
-    const span = document.createElement('span'); span.className = 'math-item'; tex(span, part); return span;
-  }));
+  /* Attached before it is typeset, not after. `tex` asks the cascade which face the
+     words around the expression are in, and a detached span has no cascade: `closest`
+     finds no ancestor and `getComputedStyle` answers with nothing, so these three
+     readouts came out of the serif composite inside a sans panel. `replaceChildren`
+     with the empty list first, so the row is still replaced rather than appended to. */
+  el.replaceChildren();
+  for (const part of parts) {
+    const span = document.createElement('span');
+    span.className = 'math-item';
+    el.append(span);
+    tex(span, part);
+  }
   document.getElementById('kslider-{{SLUG}}').setAttribute('aria-valuetext', onNet
     ? `Direction ${curK} of ${STEPS}; angle ${deg(angle, 4)} degrees`
     : `Nearest net direction ${curK}; square is off the net at ${deg(angle, 4)} degrees`);
@@ -1637,7 +1659,13 @@ function boot() {
   drawField(); document.getElementById('kslider-{{SLUG}}').value = String(curK);
   refresh(true); shrinkDraw();
 }
-boot();
+/* The first boot waits on the math faces, the later ones do not. `refresh` typesets
+   this figure's readouts, so booting before the composite's slots have decoded paints
+   their digits in the next family of the stack and repaints them a moment later --
+   which is what the owner saw as every formula's digits changing font on load. The
+   promise is already settled by the time a repaint runs, and it resolves at the
+   ceiling whatever happens, so nothing here can be held back indefinitely. */
+(globalThis.kpressMathFaces || Promise.resolve()).then(boot);
 const repaint = () => { heat = null; boot(); };
 if (window.matchMedia) {
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -1679,30 +1707,46 @@ window.addEventListener('afterprint', repaint);
   document.fonts.ready.then(sizeDiagramLabels);
   sizeDiagramLabels();
   const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-  const render = (el, s, d) => { try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
+  /* As in the certificate script: the metric table is chosen per node, because a
+     caption's mathematics is measured for the caption's own face and the prose's for
+     PT Serif. `installTablesFor` also marks the node, which is what the stylesheet
+     draws the sans composite on. */
+  const render = (el, s, d) => { if (globalThis.kpressMathText) kpressMathText.installTablesFor(el);
+                                 try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
                                  catch (e) { el.textContent = s; } };
-  document.querySelectorAll('.tex').forEach(el => {
-    if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; render(el, el.textContent, false); }
-  });
-  document.querySelectorAll('.tex-d').forEach(el => {
-    if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
-  });
-  /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
-     and the element marked rendered, which is what shows it and hides the
-     MathML that stands in when there is no script. */
-  document.querySelectorAll('.kpress-math').forEach(el => {
-    const box = el.querySelector('.kpress-math-render');
-    if (!box || el.dataset.kpressMathRendered) return;
-    const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
-    render(box, src, el.dataset.kpressMath === 'display');
-    el.dataset.kpressMathRendered = 'true';
-  });
-  document.documentElement.classList.add('math-ready');
+  function typeset() {
+    document.querySelectorAll('.tex').forEach(el => {
+      if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; render(el, el.textContent, false); }
+    });
+    document.querySelectorAll('.tex-d').forEach(el => {
+      if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
+    });
+    /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
+       and the element marked rendered, which is what shows it and hides the
+       MathML that stands in when there is no script. */
+    document.querySelectorAll('.kpress-math').forEach(el => {
+      const box = el.querySelector('.kpress-math-render');
+      if (!box || el.dataset.kpressMathRendered) return;
+      const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
+      render(box, src, el.dataset.kpressMath === 'display');
+      el.dataset.kpressMathRendered = 'true';
+    });
+    /* Leave the serif set installed, as kpress's own loop does: anything typeset
+       later without asking gets the reading face's numbers, which is the default. */
+    if (globalThis.kpressMathText) kpressMathText.restore();
+    document.documentElement.classList.add('math-ready');
 
-  /* Footnote hover previews, kpress's own, bundled into this page. Booted after
-     the static math so the preview clones already carry rendered formulas. */
-  if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
-  if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
+    /* Footnote hover previews, kpress's own, bundled into this page. Booted after
+       the static math so the preview clones already carry rendered formulas. */
+    if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
+    if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
+  }
+  /* Held until the faces the mathematics will be drawn from have loaded, or until the
+     ceiling; `math-ready` therefore means "typeset, in the faces it will keep" rather
+     than "typeset, and about to repaint". `render_explainer_pdf` and
+     `check_print_layout` both wait on that class, so the print pass gets the settled
+     page for free. */
+  (globalThis.kpressMathFaces || Promise.resolve()).then(typeset);
 
   /* One copy of each figure per certificate. The switch beside every figure
      shows one certificate's copies and records it in the hash, so a link can
