@@ -16,7 +16,7 @@ clock.
 
 | Lane, claim | My replay | Verdict |
 | --- | --- | --- |
-| E (session-104), Theorem E.4: the ten horizontal segments of length `1/10` centred on Stromquist’s Figure-13 points at `96/25` are robustly unavoidable at tolerance `3/500`, and at the sharper `√2·2121/500000` | a new interval reader over a symmetry-reduced pose space with a rigid-motion Lipschitz bound on the *signed* Euclidean distance; every certified leaf and every discard re-decided in `Fraction`; the cover’s volume identity checked exactly | **agrees**, at both constants, with 24,381 boxes and 10,960 certified leaves (the lane needed 404,613 and 184,756); also decides the `9/100` set and the `8/100` set the lane left unresolved, and finds exact escapes at `7/100` as the lane did |
+| E (session-104), Theorem E.4: the ten horizontal segments of length `1/10` centred on Stromquist’s Figure-13 points at `96/25` are robustly unavoidable at tolerance `3/500`, and at the sharper `√2·2121/500000` | a new interval reader over a symmetry-reduced pose space with a rigid-motion Lipschitz bound on the *signed* Euclidean distance; every certified leaf and every discard re-decided in `Fraction`; the cover’s volume identity checked exactly | **agrees**, at both constants, with 24,381 boxes and 10,960 certified leaves (the lane needed 404,613 and 184,756); also decides the `9/100` set and the `8/100` set the lane left unresolved (the lane’s own reader then confirms `8/100` at a finer floor, so it is two-reader too), and finds exact escapes at `7/100` as the lane did |
 | C (session-101), the four-corner pair containment theorem at `96/25` | `sqpack.fractional.certificate.verify` on the exported free measure, then the ownership step re-derived from the mass gap and exact distances | **agrees**: mass `22524199/2000000`, valid, margin `441/125000` |
 | B (session-102, exp-130), Theorem C: `[0°, 10.3875°] ∪ [43.0737°, 45°]` excluded at `96/25` on grid 119 | the site set rebuilt, the class program proposed and decided by `decide_class_program` through my own driver | **agrees**, and reaches the lane’s rationalised point to the fraction: mass `11083/1024` over 296 atoms, least core `4101/4096`, all conditions holding |
 
@@ -148,7 +148,12 @@ resting near the bottom wall) at distance `0.006365 > 3/500`.
 **Verdict on E.4: agrees.** The ten segments of length `1/10` are robustly unavoidable
 at `3/500`, and at the lane’s sharper constant, on a domain that covers every contained
 pose with no failure; the same holds at `9/100`, as the lane found, and at `8/100`,
-which the lane’s reader left with 3,626 boxes at its floor.
+which the lane’s reader left with 3,626 boxes at its floor `2·10⁻⁴`. Run again at floor
+`5·10⁻⁵` on the `8/100` set (`set-S10-l0.08.json`, Appendix), the lane’s reader
+certifies it as well: 809,879 nodes, 366,454 certified leaves, 38,486 discards, no
+failure, every leaf and discard re-decided exactly in its own exact mode, 13.7 s for the
+cover and 193.9 s for the exact pass at load 2.5. So the `8/100` companion has two
+independent readers, like the `1/10` and `9/100` sets.
 The pose the lane’s reader certified that mine refutes: none.
 
 The first version of my exact stage used `√2 ≤ 14143/10000` and rejected one leaf at the
@@ -247,10 +252,9 @@ the lane’s 584 s at load 8.
 
 - **Lane E, the threshold in the segment length.** The lane places it in
   `(7/100, 9/100]` because its reader left `8/100` at the floor.
-  My reader decides `8/100` with no failure, so the threshold is in `(7/100, 8/100]`.
-  The lane read its `8/100` result as needing a finer floor; what it needed was a
-  smaller Lipschitz constant, since at the lane’s floor the bound’s own slack, not the
-  floor, was the limit.
+  My reader decides `8/100` with no failure, and the lane’s reader confirms it at floor
+  `5·10⁻⁵`, so the threshold is in `(7/100, 8/100]`. The lane’s reading that a finer
+  floor would decide it was right; it was not run.
 - **Lane E, the certified domain.** The far-wall sliver of Section 2.5. Harmless for the
   H-134 statement at `3/500`, a literal gap for the theorem’s sharper constant, closed
   here.
@@ -336,10 +340,11 @@ Theorem E.4, in this exact form, with two independent readers agreeing (the lane
 > every packing of eleven unit squares at side at most `96/25` is within `3/500` of one
 > of these ten segments, and some segment is within `3/500` of two of them.
 
-The same statement holds with the segments shortened to `9/100` (both readers) and to
-`8/100` (this reader only, so that companion is certified but not yet independently
-replayed). It needs an experiment id, the lane’s `set-S10-l0.1.json` and both readers as
-its record, and no registry entry beyond that: it changes no bound on `s(11)`.
+The same statement holds with the segments shortened to `9/100` and to `8/100` (both
+readers; the lane’s at floor `5·10⁻⁵` for `8/100`), and fails at `7/100`, where both
+readers find exact escapes.
+It needs an experiment id, the lane’s `set-S10-l0.1.json` and both readers as its
+record, and no registry entry beyond that: it changes no bound on `s(11)`.
 
 The corner-pair theorem (Section 3) is the second claim worth freezing, with the
 exported measure as its whole record; it is cheaper to register than E.4 and should be.
@@ -348,8 +353,6 @@ exported measure as its whole record; it is cheaper to register than E.4 and sho
 
 - Theorem C’s replay took the block’s one long computation (333 s of row loop); it
   agreed to the fraction.
-- The `8/100` companion has one reader; a second reader of a different design (the
-  lane’s, run at a finer floor, or a third) would freeze it.
 - No pose the lane certified was refuted, and no falsifier of any of the three claims
   occurred.
 - Not done: any new mathematics on the ownership question, any run of the polisher, the
@@ -1153,6 +1156,151 @@ summary-delta-hl7-200.json: {"mode": "delta-hl7-200", "delta": "3/500", "floor":
 summary-delta-hl9-200.json: {"mode": "delta-hl9-200", "delta": "3/500", "floor": 6.103515625e-05, "nodes": 29939, "certified": 13556, "discarded": 1414, "failures": 0, "exact_rejected_leaves": 0, "exact_rejected_discards": 0, "volume_ok": true, "float_seconds": 0.4, "exact_seconds": 0.6, "exact_escapes_among_failures": 0, "exact_escapes_among_rejected_leaves": 0}
 summary-delta.json: {"mode": "delta", "delta": "3/500", "floor": 6.103515625e-05, "nodes": 24381, "certified": 10960, "discarded": 1231, "failures": 0, "exact_rejected_leaves": 0, "exact_rejected_discards": 0, "volume_ok": true, "float_seconds": 0.2, "exact_seconds": 0.5, "exact_escapes_among_failures": 0}
 summary-lane-hl1-20.json: {"mode": "lane-hl1-20", "delta": "sqrt(4498641/125000000000)", "floor": 6.103515625e-05, "nodes": 24381, "certified": 10960, "discarded": 1231, "failures": 0, "exact_rejected_leaves": 0, "exact_rejected_discards": 0, "volume_ok": true, "float_seconds": 0.2, "exact_seconds": 0.5, "exact_escapes_among_failures": 0, "exact_escapes_among_rejected_leaves": 0}
+```
+
+### `set-S10-l0.08.json` (the 8/100 marks, in the lane reader’s format)
+
+```text
+[
+ {
+  "kind": "segment",
+  "a": [
+   "24/25",
+   "1"
+  ],
+  "b": [
+   "26/25",
+   "1"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "47/25",
+   "1"
+  ],
+  "b": [
+   "49/25",
+   "1"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "14/5",
+   "1"
+  ],
+  "b": [
+   "72/25",
+   "1"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "1/2",
+   "48/25"
+  ],
+  "b": [
+   "29/50",
+   "48/25"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "71/50",
+   "48/25"
+  ],
+  "b": [
+   "3/2",
+   "48/25"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "117/50",
+   "48/25"
+  ],
+  "b": [
+   "121/50",
+   "48/25"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "163/50",
+   "48/25"
+  ],
+  "b": [
+   "167/50",
+   "48/25"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "24/25",
+   "71/25"
+  ],
+  "b": [
+   "26/25",
+   "71/25"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "47/25",
+   "71/25"
+  ],
+  "b": [
+   "49/25",
+   "71/25"
+  ]
+ },
+ {
+  "kind": "segment",
+  "a": [
+   "14/5",
+   "71/25"
+  ],
+  "b": [
+   "72/25",
+   "71/25"
+  ]
+ }
+]
+```
+
+### `lane-reader-l0.08.json` (the lane’s `cover_reader.py` at floor 5e-5 on the 8/100 set)
+
+Run as `python lane_cover_reader.py set-S10-l0.08.json --floor 0.00005 --exact --limit
+12000000`, with `lane_cover_reader.py` the text of lane E’s `cover_reader.py` appendix,
+unchanged.
+
+```text
+{
+ "nodes": 809879,
+ "certified_leaves": 366454,
+ "discarded": 38486,
+ "failed": 0,
+ "wall_s": 13.7,
+ "floor": 5e-05,
+ "tau": 0.004242,
+ "eps": 1e-09,
+ "min_leaf_halfwidth": 1.52587890625e-05,
+ "exact_recheck": {
+  "leaves": 366454,
+  "failed": 0,
+  "discards": 38486,
+  "discards_failed": 0,
+  "wall_s": 193.9
+ },
+ "marks": "/tmp/claude-0/-home-user-squares/9010767e-5bb7-5e7d-99d2-858400f3969a/scratchpad/lane-303/set-S10-l0.08.json"
+}
 ```
 
 <!-- This document follows common-doc-guidelines.md.

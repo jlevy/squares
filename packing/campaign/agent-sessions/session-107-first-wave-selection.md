@@ -51,7 +51,8 @@ session:
       [1/2, 2] (justified by the segment set''s two reflections), every leaf and discard
       re-decided in Fraction, volume identity 243/128 exact, 0.2 s float and 0.5 s exact
       at load 0.95; the 9/100 set replays and the 8/100 set the lane left unresolved is
-      decided (39,515 boxes, 18,004 leaves, no failure), while 7/100 produces 1,405,220
+      decided (39,515 boxes, 18,004 leaves, no failure; the lane''s own reader then confirms
+      it at floor 5e-5 with 366,454 leaves and a clean exact pass), while 7/100 produces 1,405,220
       floor boxes with exact escapes, so the threshold in the length is in (7/100, 8/100].
       The corner-pair theorem agrees: verify gives mass 22524199/2000000 with Conditions
       1, 3, 4, 5 holding (least cell 800003/800000, 14.9 s at load 1.65), the eight pair
@@ -123,7 +124,8 @@ session:
       Theorem C), each decided by its own lane's reader or driver only; no selection.
     after: All three replayed with independent readers and exact verdicts (two agree
       outright; Theorem C's verdict is in the document), one companion claim decided that
-      the lane could not (segments of length 8/100), one defect in a lane reader recorded
+      the lane could not (segments of length 8/100, then confirmed by the lane's reader
+      at a finer floor), one defect in a lane reader recorded
       and closed, the candidates ranked with accept rules, the strongest claim stated
       exactly.
   delegations: []
