@@ -1,0 +1,8 @@
+{
+  "name": "results rungs are earned and the view agrees",
+  "output": "22 registered results: every declared rung passes its structural checks, every path and produced_by id resolves, every reader-tier mention exists\npacking/frontier/RESULTS.md agrees with results.yaml",
+  "reason": "",
+  "run_id": "0224631f59cc43a5b3ae7ad92b6d2018",
+  "seconds": 0.2900582919974113,
+  "status": "passed"
+}

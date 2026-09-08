@@ -1,0 +1,8 @@
+{
+  "name": "strategy catalogues",
+  "output": "  search: 20 strategies, 4 families, all fields populated\n  proof: 30 strategies, 6 families, all fields populated",
+  "reason": "",
+  "run_id": "c4cec457a4a54015a84b67fda9eec81c",
+  "seconds": 0.002077541998005472,
+  "status": "passed"
+}

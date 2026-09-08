@@ -47,6 +47,11 @@ from typing import Any
 
 from strif import atomic_output_file
 
+from sqpack.known_best import (
+    calibration_entries,
+    declared_calibration_label,
+    require_calibration_label,
+)
 from sqpack.witness import load_witness, materialize_witness
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -73,14 +78,27 @@ geometry. Nothing here is a feasibility claim, so a tolerance is the honest inst
 DIGITS = 60
 
 
-def manifest() -> dict[int, dict[str, Any]]:
-    entries = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
-    return {int(entry["n"]): entry for entry in entries}
+def manifest(path: pathlib.Path = MANIFEST) -> dict[int, dict[str, Any]]:
+    """The manifest's calibration entries, by `n`, and nothing past them.
+
+    This taxonomy names the shapes it found in the corpus it was written against, so it
+    is a calibration instrument and stays at `CALIBRATION_CORPUS` while the manifest
+    widens around it (`D4`). `certify_assembly_coverage` reads the corpus through this
+    function and inherits the same boundary.
+    """
+    entries = json.loads(path.read_text(encoding="utf-8"))["atlas"]["entries"]
+    return {int(entry["n"]): entry for entry in calibration_entries(entries)}
 
 
 def band() -> list[dict[str, Any]]:
-    bands = json.loads(CENSUS.read_text(encoding="utf-8"))["bands"]
-    for band in bands:
+    census = json.loads(CENSUS.read_text(encoding="utf-8"))
+    # The census is the taxonomy's whole input, so its scope is the taxonomy's scope.
+    # Without this a widened census would arrive as more rows rather than as an error.
+    require_calibration_label(
+        declared_calibration_label(census["corpus"], source="chunk-components.json corpus"),
+        source="chunk-components.json corpus",
+    )
+    for band in census["bands"]:
         if band["name"] == BAND:
             return list(band["entries"])
     raise ValueError(f"census has no {BAND} band")

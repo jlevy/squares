@@ -1,0 +1,8 @@
+{
+  "name": "lint floor (rust)",
+  "output": "clippy clean at warnings-as-errors; rustfmt clean",
+  "reason": "",
+  "run_id": "832fdce8527f4260b4e2f7cc6edcd35a",
+  "seconds": 0.629082291998202,
+  "status": "passed"
+}

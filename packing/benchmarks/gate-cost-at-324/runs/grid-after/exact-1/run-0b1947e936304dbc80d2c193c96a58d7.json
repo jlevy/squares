@@ -1,0 +1,20 @@
+{
+  "available_cpus": 10,
+  "commit": "1f43689527c490e47dc428eb73fcb2bc56f1aa44",
+  "dirty_diff_sha256": "1696ff72aff211671344dedb40bacb7a6b3f05225a6fc45ebd4bfc37ccae8dbf",
+  "environment": {
+    "PACK_JOBS": "1"
+  },
+  "git_status": " M .github/workflows/deep-gate.yml\n M packing/devtools/check_basic_bounds.py\n M packing/src/sqpack/cli/validate.py\n M packing/src/sqpack/known_best.py\n M packing/tests/test_deep_gate_workflow.py\n M packing/tests/test_frontier_assurance_contract.py\n M packing/tests/test_validation_cli.py\n",
+  "inner_jobs": 1,
+  "interpreter": "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing/.venv/bin/python3",
+  "jobs": 3,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "run_id": "1acdba949c354fc4a623668b0e7d955b",
+  "selected_steps": [
+    "exact verification"
+  ],
+  "started_at": "2026-09-07T14:49:24.271392+00:00",
+  "untracked_hashes": {}
+}

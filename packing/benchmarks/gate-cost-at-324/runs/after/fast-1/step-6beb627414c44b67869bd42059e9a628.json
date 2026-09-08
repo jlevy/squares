@@ -1,0 +1,8 @@
+{
+  "name": "differential: search energy vs validity oracle",
+  "output": "  20000 near-contact pairs: 16891 overlapping, 0 touching\n  sqsearch pair energy and sqpack validity agree on every pair",
+  "reason": "",
+  "run_id": "a82de8840fc84413b6854db00771e37b",
+  "seconds": 0.3187062090000836,
+  "status": "passed"
+}
