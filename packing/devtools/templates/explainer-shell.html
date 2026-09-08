@@ -785,10 +785,12 @@ body {
 
 /* Measured bases reserve ascent and descent too. Empty inline carriers must not
    add a font-dependent strut when a fallback face changes, especially in print's
-   tighter lines. Keep KaTeX's original line height inside the absolute glyph base. */
+   tighter lines. Preparation copies each base's measured height and depth onto
+   its existing KaTeX strut, which also fixes the glyph baseline when print
+   changes the font size. */
 .kpress [data-kpress-math-prepared="true"] .katex,
 .kpress [data-kpress-math-prepared="true"] .katex-html { line-height: 0 !important; }
-.kpress [data-kpress-math-prepared="true"] .base { line-height: 1.2 !important; }
+.kpress [data-kpress-math-prepared="true"] .base { line-height: 0 !important; }
 
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
 /* Saved preferences are stamped in the head. Select their measured math before

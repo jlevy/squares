@@ -278,6 +278,13 @@ _MEASURE_MATH = dedent(r"""
               + 'width:' + fixed(rect.width / fontSize) + ';'
               + 'height:' + fixed(rect.height / fontSize) + ';'
               + 'vertical-align:' + fixed((baseline - rect.bottom) / fontSize) + ';';
+            // The same em strut must anchor the actual glyphs and their reserved
+            // box. A font's line strut rounds differently at print sizes; keep
+            // its measured extent explicitly, including short punctuation bases.
+            const strut = child.querySelector(':scope > .strut');
+            if (!strut) throw new Error('KaTeX emitted no baseline strut');
+            strut.style.height = fixed(rect.height / fontSize);
+            strut.style.verticalAlign = fixed((baseline - rect.bottom) / fontSize);
             child.replaceWith(box);
             box.append(child);
             child.style.position = 'absolute';

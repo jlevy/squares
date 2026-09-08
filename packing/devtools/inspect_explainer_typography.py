@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 from pathlib import Path
 from typing import Literal, NotRequired, TypedDict
@@ -75,6 +76,11 @@ class MathContext(TypedDict):
     context_weight: str
     text_rendering: str
     context_text_rendering: str
+    baseline_offset: NotRequired[float | None]
+    unboxed_baseline_offset: NotRequired[float | None]
+    baseline_prepared: NotRequired[bool]
+    display_math: NotRequired[bool]
+    caption: NotRequired[str]
 
 
 def math_size_findings(rows: list[MathContext], *, require_roles: bool = False) -> list[str]:
@@ -97,9 +103,43 @@ def math_size_findings(rows: list[MathContext], *, require_roles: bool = False) 
     return findings
 
 
+def math_baseline_findings(rows: list[MathContext]) -> list[str]:
+    """Compare inline caption baselines, allowing four Chromium layout units of rounding."""
+    findings = []
+    for row in rows:
+        if row["role"] != "caption" or row.get("display_math", False):
+            continue
+        offset = row.get("baseline_offset")
+        if offset is None or not math.isfinite(offset):
+            findings.append(f"caption math {row['source']!r}: no measured baseline")
+        elif abs(offset) > 1 / 16:
+            findings.append(
+                f"caption math {row['source']!r}: baseline differs from surrounding text "
+                f"by {offset:.4f}px"
+            )
+    return findings
+
+
 _MATH_CONTEXTS = r"""({wrappers, crops}) => {
   const selected = new Set();
   const rows = [];
+  const marker = () => {
+    const span = document.createElement('span');
+    span.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;'
+      + 'border:0;line-height:0;vertical-align:baseline;visibility:hidden;';
+    return span;
+  };
+  const baseline = (math, wrapper) => {
+    const last = [...math.querySelectorAll('.katex-html .base')].at(-1);
+    if (!last) return null;
+    const inner = marker(), outer = marker();
+    last.append(inner);
+    wrapper.after(outer);
+    const offset = inner.getBoundingClientRect().top - outer.getBoundingClientRect().top;
+    inner.remove();
+    outer.remove();
+    return offset;
+  };
   for (const math of document.querySelectorAll('.katex')) {
     if (!math.getClientRects().length || getComputedStyle(math).visibility !== 'visible'
         || math.closest('[hidden]')) continue;
@@ -107,15 +147,41 @@ _MATH_CONTEXTS = r"""({wrappers, crops}) => {
     while (context && context.matches(wrappers + ', .katex-display'))
       context = context.parentElement;
     if (!context) continue;
+    const display = !!math.closest('.katex-display, .tex-d, .kpress-math-display');
     const role = math.closest('.kpress-figcaption') ? 'caption'
-      : math.closest('.katex-display, .tex-d, .kpress-math-display') ? 'display' : 'inline';
+      : display ? 'display' : 'inline';
     const style = getComputedStyle(math), surrounding = getComputedStyle(context);
-    rows.push({role,
+    const row = {role, display_math: display,
       source: math.querySelector('annotation')?.textContent || math.textContent,
       size: parseFloat(style.fontSize), context_size: parseFloat(surrounding.fontSize),
       family: style.fontFamily, context_family: surrounding.fontFamily,
       weight: style.fontWeight, context_weight: surrounding.fontWeight,
-      text_rendering: style.textRendering, context_text_rendering: surrounding.textRendering});
+      text_rendering: style.textRendering, context_text_rendering: surrounding.textRendering};
+    if (role === 'caption' && !display) {
+      row.caption = math.closest('.kpress-figcaption').textContent.trim().slice(0, 180);
+      row.baseline_prepared = !!math.closest('[data-kpress-math-prepared="true"]');
+      let wrapper = math;
+      while (wrapper.parentElement?.matches(wrappers)) wrapper = wrapper.parentElement;
+      row.baseline_offset = baseline(math, wrapper);
+      if (row.baseline_prepared) {
+        const copy = wrapper.cloneNode(true);
+        copy.removeAttribute('data-kpress-math-prepared');
+        copy.removeAttribute('data-squares-math-key');
+        copy.querySelectorAll('[data-kpress-math-prepared]').forEach(
+          element => element.removeAttribute('data-kpress-math-prepared'));
+        for (const box of copy.querySelectorAll('.squares-math-box')) {
+          const base = box.firstElementChild;
+          for (const property of ['position', 'left', 'top']) base.style[property] = '';
+          box.replaceWith(base);
+        }
+        wrapper.replaceWith(copy);
+        const candidate = copy.matches('.katex') ? copy : [...copy.querySelectorAll('.katex')]
+          .find(element => element.getClientRects().length);
+        row.unboxed_baseline_offset = candidate ? baseline(candidate, copy) : null;
+        copy.replaceWith(wrapper);
+      }
+    }
+    rows.push(row);
     if (crops && !selected.has(role)) {
       const block = math.closest('p, figcaption, .tex-d, .kpress-math-display') || context;
       block.dataset.squaresTypographyCrop = role;
@@ -429,7 +495,10 @@ def inspect(
                 if check_math:
                     findings.extend(
                         f"{medium}: {finding}"
-                        for finding in math_size_findings(rows, require_roles=True)
+                        for finding in (
+                            math_size_findings(rows, require_roles=True)
+                            + math_baseline_findings(rows)
+                        )
                     )
                 if math_crops:
                     math_crops.mkdir(parents=True, exist_ok=True)
@@ -452,7 +521,7 @@ def inspect(
             browser.close()
 
 
-def self_test() -> None:
+def self_test(path: Path = PAGE) -> None:
     """Check that the browser gate accepts agreement and rejects known defects."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
@@ -548,9 +617,105 @@ def self_test() -> None:
                 hidden, require_roles=True
             ):
                 raise SystemExit("math-size self-test accepted a hidden caption role")
+            # Use the real publication's fonts and the same preparation operation;
+            # punctuation and nested layouts must survive scaling to print size too.
+            from devtools.prepare_explainer_math import (  # noqa: PLC0415
+                _MATH_ATTRIBUTES,  # pyright: ignore[reportPrivateUsage]
+                _MEASURE_MATH,  # pyright: ignore[reportPrivateUsage]
+            )
+
+            page.goto(path.resolve().as_uri(), wait_until="load")
+            page.wait_for_selector(READY, timeout=60_000)
+            page.evaluate(SETTLED)
+            sources = [
+                ".",
+                ",",
+                r"\cdot",
+                r"x^2",
+                r"\frac{x+1}{2}",
+                r"\sqrt{x_2}",
+                r"\displaystyle\sum_{i=1}^{n} x_i",
+                r"\smash{x}",
+                r"\quad",
+            ]
+            page.evaluate(
+                r"""async sources => {
+                  const caption = document.createElement('figcaption');
+                  caption.className = 'kpress-figcaption';
+                  caption.dataset.baselineFixture = 'true';
+                  document.querySelector('.cert-page').append(caption);
+                  globalThis.baselineOriginalStruts = [];
+                  for (const [index, source] of sources.entries()) {
+                    const target = document.createElement('span');
+                    target.className = 'tex';
+                    target.dataset.squaresMathKey = String(index);
+                    caption.append('Reference ', target, ' text.',
+                      document.createElement('br'));
+                    await squaresMath.render(target, source, false);
+                    baselineOriginalStruts.push([...target.querySelectorAll('.base > .strut')]
+                      .map(strut => strut.getAttribute('style')));
+                  }
+                }""",
+                sources,
+            )
+            fragments = page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES))
+            page.evaluate(
+                """fragments => {
+                  for (const fragment of fragments) {
+                    const target = document.querySelector(
+                      '[data-squares-math-key="' + fragment.key + '"]');
+                    target.innerHTML = fragment.html;
+                    for (const [name, value] of Object.entries(fragment.attributes))
+                      target.setAttribute(name, value);
+                    target.removeAttribute('data-squares-math-key');
+                  }
+                }""",
+                fragments,
+            )
+            for medium in ("screen", "print"):
+                page.emulate_media(media=medium)
+                page.evaluate(SETTLED)
+                baselines: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
+                failures = math_baseline_findings(baselines)
+                if failures:
+                    raise SystemExit(
+                        f"{medium} baseline self-test rejected valid math: {failures}"
+                    )
+                if not set(sources) <= {row["source"] for row in baselines}:
+                    raise SystemExit("baseline self-test did not observe every real KaTeX case")
+            fixture_caption = page.locator("[data-baseline-fixture]")
+            prepared_fixture = fixture_caption.inner_html()
+            fixture_caption.evaluate(
+                """caption => {
+                  const targets = [...caption.querySelectorAll('.tex')];
+                  for (const [index, target] of targets.entries()) {
+                    const bases = [...target.querySelectorAll('.base')];
+                    for (const [part, base] of bases.entries()) {
+                      base.style.setProperty('line-height', '1.2', 'important');
+                      base.querySelector(':scope > .strut').setAttribute(
+                        'style', baselineOriginalStruts[index][part]);
+                    }
+                  }
+                }"""
+            )
+            old_strut: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
+            if not math_baseline_findings(old_strut):
+                raise SystemExit("baseline self-test accepted the original font-line-strut bug")
+            fixture_caption.evaluate(
+                "(caption, html) => { caption.innerHTML = html; }", prepared_fixture
+            )
+            page.add_style_tag(
+                content="[data-baseline-fixture] .base { transform: translateY(-2px) }"
+            )
+            shifted: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
+            if len(math_baseline_findings(shifted)) != len(sources):
+                raise SystemExit("baseline self-test missed an upward shift of caption math")
         finally:
             browser.close()
-    print("typography self-test passed: valid, inconsistent, and missing-caption fixtures")
+    print(
+        "typography self-test passed: supporting text, contextual sizes, "
+        f"{len(sources)} baseline cases, original-strut and raised-glyph controls"
+    )
 
 
 def main() -> None:
@@ -562,7 +727,7 @@ def main() -> None:
     parser.add_argument(
         "--check-math",
         action="store_true",
-        help="Require inline and display math to use the surrounding text size",
+        help="Require contextual math size and aligned inline caption baselines",
     )
     parser.add_argument(
         "--math-crops",
@@ -582,7 +747,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     if args.self_test:
-        self_test()
+        self_test(args.page)
         return
     if args.width <= 0:
         parser.error("--width must be positive")

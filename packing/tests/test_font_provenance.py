@@ -35,6 +35,7 @@ from devtools.inspect_explainer_typography import (
     MathContext,
     _text_bearing,
     _unshipped,
+    math_baseline_findings,
     math_size_findings,
 )
 
@@ -66,6 +67,15 @@ def test_math_size_policy_applies_to_inline_display_and_caption_contexts() -> No
     assert math_size_findings(rows[:2], require_roles=True) == [
         "no visible caption math to verify"
     ]
+    caption = rows[-1]
+    for offset in (0, -1 / 64, 1 / 64):
+        assert math_baseline_findings([{**caption, "baseline_offset": offset}]) == []
+    # Recorded print regression, a deliberately raised formula, and missing evidence.
+    for offset in (-0.21875, -2, None, float("nan")):
+        assert math_baseline_findings([{**caption, "baseline_offset": offset}])
+    assert math_baseline_findings([caption])
+    assert math_baseline_findings([{**rows[1], "baseline_offset": -2}]) == []
+    assert math_baseline_findings([{**caption, "display_math": True}]) == []
 
 
 def _face(family: str, *, custom: bool, glyphs: int = 10) -> dict[str, object]:
