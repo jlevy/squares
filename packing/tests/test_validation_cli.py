@@ -1515,7 +1515,7 @@ def test_a_step_that_exceeds_its_own_budget_still_fails(
     assert "timed out after 0.2 seconds" in summary.results[0].reason
 
 
-def test_only_the_whole_suite_steps_carry_budgets() -> None:
+def test_only_the_steps_that_outgrew_the_shared_cap_carry_budgets() -> None:
     """A budget is an exception, so the set of them is worth watching.
 
     If a second step acquires one, that is a signal the shared cap is wrong rather than
@@ -1532,8 +1532,8 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     The exhaustive exact tier became the third on 2026-09-05, and it is the same class:
     a whole suite, of complete finite certificate decisions, that measured 892 s on CI's
     runner against the 900 s cap it had been inheriting -- eight seconds from failing on
-    every merge to main. A fourth budgeted step would mean the cap is wrong rather than
-    that another suite is heavy, and should raise the cap instead of extending this set.
+    every merge to main. The rule proposed then was that a fourth budgeted step would
+    mean the shared cap needed revisiting instead of extending this set.
     The step `--push` builds outside this tuple is not a fourth: when its selector
     expands to the whole suite it runs the quick and slow lanes together, so it takes the
     constant that bounds both (D-432), which the next test holds.
@@ -1547,15 +1547,55 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
 
     Recorded honestly: the second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
+
+    The fourth is a corpus sweep, rather than a suite: the whole translation escape
+    screen at `n=1..324` timed out after 900s in hosted run 34196436989. It now carries
+    the independent 1800s budget used by PR #116. The shared cap remains 900s for
+    ordinary checks, including the sampled screen; a larger corpus does not justify
+    extending every subprocess's deadline.
     """
     budgeted = {
         step.name: step.budget_seconds for step in validate.STEPS if step.budget_seconds
     }
     assert budgeted == {
         "negative controls": 1800,
+        "single-square translation escape screen": 1800,
         "slow behavioral tests": 1800,
         "exhaustive exact behavioral tests": 3600,
     }
+
+
+@pytest.mark.parametrize(
+    ("timeout_seconds", "explicit", "expected_timeout"),
+    [(900.0, False, 1800.0), (7.0, True, 7.0), (2400.0, True, 2400.0)],
+)
+def test_whole_escape_screen_uses_its_budget_unless_the_operator_sets_a_cap(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    timeout_seconds: float,
+    explicit: bool,
+    expected_timeout: float,
+) -> None:
+    observed: list[float] = []
+
+    def probe(context: validate.Context, module: str, *arguments: str) -> str:
+        assert module == "devtools.screen_translation_escape"
+        assert arguments == ("--check",)
+        observed.append(context.timeout_seconds)
+        return f"translation escape screen check passed: {validate._screen_findings()}"
+
+    monkeypatch.setattr(validate, "_module", probe)
+    step = next(
+        step
+        for step in validate.STEPS
+        if step.name == "single-square translation escape screen"
+    )
+    context = _budget_context(timeout_seconds=timeout_seconds, explicit=explicit)
+    result = validate._execute_step_result(step, context)
+
+    assert result.status == "passed"
+    assert observed == [expected_timeout]
+    assert context.timeout_seconds == timeout_seconds
 
 
 @pytest.mark.parametrize(
@@ -2147,12 +2187,13 @@ def test_the_longest_steps_are_submitted_first() -> None:
     """
     order = [step.name for step in validate._submission_order(validate.STEPS)]
 
-    assert order[:3] == [
+    assert order[:4] == [
         "exhaustive exact behavioral tests",  # 3600s
+        "single-square translation escape screen",  # 1800s, first in declared order
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
-    assert order[3:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
+    assert order[4:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
 
 
 def test_submission_order_does_not_change_the_reported_order(

@@ -10,7 +10,7 @@ session:
   title: n26 source consistency and upstream integration
   date: '2026-09-07'
   started_at: '2026-09-08T00:34:07Z'
-  deadline_at: '2026-09-08T08:04:07Z'
+  deadline_at: '2026-09-08T09:04:07Z'
   branch: codex/stromquist-n26-verification
   goal: Merge the latest upstream atlas expansion, broaden the current n26 best-known search, and reconcile source-reported lower bounds without promoting missing proofs.
   workflow_phases:
@@ -106,9 +106,9 @@ session:
     status: in_progress
     entered_by: user_request
     switch_reason: The owner explicitly requested that PR120 be fully committed, current with main, and adapted for the intended PR116 and PR121 landings.
-    budget_minutes: 95
+    budget_minutes: 155
     started_at: '2026-09-08T06:13:27Z'
-    deadline_at: '2026-09-08T07:48:27Z'
+    deadline_at: '2026-09-08T08:48:27Z'
     expected_output: A pushed mergeable PR120, final hosted check results, and reviewed compatibility and cost records.
     validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib PYTEST_ADDOPTS='-n 2 --dist worksteal --maxfail=1' uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
     kill_condition: A failed assertion, missing coverage, or unresolved record conflict blocks certification.
@@ -122,7 +122,7 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-106.yaml
   status: in_progress
   budget:
-    wall_minutes: 450
+    wall_minutes: 510
     orientation_minutes: 10
     checkpoint_minutes: 30
     slice_minutes: 30
@@ -195,6 +195,7 @@ session:
   - packing/campaign/agent-sessions/session-106-validation/push-b7b0576b-interrupted.json
   - packing/campaign/agent-sessions/session-106-validation/push-a70716c6-interrupted.json
   - packing/campaign/agent-sessions/session-106-validation/push-6c678ff8.json
+  - packing/campaign/agent-sessions/session-106-validation/full-46ee41af-failed.json
   checks:
   - Before this prospective session, the records baseline passed at clean dae6bb8d; origin/main at 28696526 was fetched and reviewed. Generated merge conflicts were resolved by their renderers, preserving both branches' records.
   - The coordinator reproduced 55 exact source omissions against dae6bb8d through n100 and upstream 28696526 above n100; the opaque n21 display is the fifty-sixth corrected reported field. The final named-candidate audit passes through n324 with no omitted stronger report.
@@ -216,6 +217,7 @@ session:
   - Pre-push validation at clean 6c678ff8 passes all 45 steps in 1229.07 seconds, including 4159 non-exhaustive tests in 1227.96 seconds. The broader test selection follows the Pages workflow change. Two fontTools warnings enable the GIL; no assertion failed. The 3-CPU operator shape differs from the 2-CPU reference, so the 1800-second tier band is reported rather than enforced; command deadlines and assertions remain active.
   - Fresh HTML and PDF checks pass at 6c678ff8. The 17-page PDF reproduces after timestamp normalization, embeds 24 fonts and has no shipped face drawn as Type3. The layout check covers 5895 blocks, 23 list markers and 20 footnote references. Agent visual review covers pages 1, 2, 4, 15, 16, 17; the coordinator also inspected the caption and acknowledgment pages. Host fallback faces remain outside the shipped-face assertion.
   - Before the fifth phase's original 06:48 deadline, its estimate is extended by sixty minutes to cover the full hosted checkpoint and the authorized merge. The local pre-push result is complete; only the new record edits need a further affected check before publishing the stable checkpoint source.
+  - The full hosted checkpoint at 46ee41af completed all 69 Linux steps with 68 passing and one failing at the existing 900-second escape-screen timeout. All 4214 tests passed across disjoint quick, slow and exhaustive lanes, with no skipped tests; macOS passed all four checks. The sweep remains incomplete. Before the fifth phase deadline, its estimate is extended by sixty minutes to repair that measured timeout, integrate main 2980c5bc with PR119 fonts, and validate the affected surfaces before the authorized merge.
   stop_reason: null
   next_action: Complete and merge PR120 as the user authorized, then consult the landed BC-264 handoff under think-mq0d. PR116 completes pricing; further H125 work requires a fresh allocation and admission rather than restarting the historical allocation.
 ---

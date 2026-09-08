@@ -1,0 +1,79 @@
+{
+  "run_id": 34196436989,
+  "commit": "46ee41afde9894d05cd26a3003a54f8f6199af0d",
+  "jobs": {
+    "validate": {
+      "selected": 68,
+      "statuses": {
+        "passed": 67,
+        "failed": 1
+      },
+      "nonpassing": [
+        {
+          "name": "single-square translation escape screen",
+          "status": "failed",
+          "reason": "command timed out after 900 seconds: /home/runner/work/squares/squares/packing/.venv/bin/python -m devtools.screen_translation_escape --check\n/home/runner/work/_temp/uv-python-dir/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/multiprocessing/resource_tracker.py:475: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown: {'/mp-jjgxvq0n', '/mp-rl5qaw6i', '/mp-qqm4tkhi', '/mp-sid6nx56', '/mp-rx4gm515'}\n  warnings.warn(",
+          "seconds": 901.00229625
+        }
+      ],
+      "jobs": 2,
+      "inner_jobs": 2,
+      "available_cpus": 4
+    },
+    "exhaustive": {
+      "selected": 1,
+      "statuses": {
+        "passed": 1
+      },
+      "nonpassing": [],
+      "jobs": 1,
+      "inner_jobs": 4,
+      "available_cpus": 4
+    },
+    "macos-portability": {
+      "selected": 4,
+      "statuses": {
+        "passed": 4
+      },
+      "nonpassing": [],
+      "jobs": 4,
+      "inner_jobs": 1,
+      "available_cpus": 3
+    }
+  },
+  "pytest_suites": [
+    {
+      "job": "validate",
+      "file": "/private/tmp/session106-full-hosted-34196436989/validate/command-b79796dd078243ae8c5e47f51204f295.junit.xml",
+      "tests": 97,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "job": "validate",
+      "file": "/private/tmp/session106-full-hosted-34196436989/validate/command-ad5752c5b79e440184cfde8ef5f540cb.junit.xml",
+      "tests": 4062,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "job": "exhaustive",
+      "file": "/private/tmp/session106-full-hosted-34196436989/exhaustive/command-a4374d40be36474e880013616eea5fa2.junit.xml",
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    }
+  ],
+  "linux_total": 69,
+  "linux_statuses": {
+    "passed": 68,
+    "failed": 1
+  },
+  "unique_passed_pytest_nodes": 4214,
+  "pytest_lanes_disjoint": true,
+  "description": "Hosted full checkpoint at 46ee41af: all 69 Linux steps completed, 68 passed, one escape-screen timeout. All 4214 tests passed with no skipped tests. This is a failed checkpoint.",
+  "workflow_url": "https://github.com/jlevy/squares/actions/runs/34196436989"
+}
