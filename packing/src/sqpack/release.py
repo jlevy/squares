@@ -10,7 +10,7 @@ from __future__ import annotations
 
 #: The edition the figures and the explainer state. Choose at most one patch bump per
 #: merge, and keep the version fixed while revising that pull request.
-PUBLICATION_VERSION = "v0.2.4"
+PUBLICATION_VERSION = "v0.3.0"
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
 #: join below then drops it and the stray space with it, so going final is one edit.
@@ -28,7 +28,7 @@ PUBLICATION_STATUS = "DRAFT"
 #: the exception, and deliberately: it is rendered on every deploy and stamps the commit
 #: it is built from (`render_explainer.page_edition`), so its hash moves with every push
 #: while this one moves when an edition is cut.
-PUBLICATION_REVISION = "cef19bfe"
+PUBLICATION_REVISION = "33cd4760"
 
 #: The version, written the one way it is ever written: `v0.1.0-3bd273e6`. Semver core,
 #: then the revision, in the shape a build identifier takes everywhere else.
@@ -47,4 +47,4 @@ PUBLICATION_STAMP = f"{PUBLICATION_VERSION}-{PUBLICATION_REVISION}"
 PUBLICATION_EDITION = " ".join(part for part in (PUBLICATION_STATUS, PUBLICATION_STAMP) if part)
 
 #: The date that edition carries, written the way a reader reads it.
-PUBLICATION_DATE = "September 7, 2026"
+PUBLICATION_DATE = "September 8, 2026"

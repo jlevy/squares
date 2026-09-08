@@ -69,16 +69,9 @@ certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 
 <div class="boxed-text">
 
-*The results here are from a flexible but defined
-**[agentic research framework](https://github.com/jlevy/squares)** that is likely to be
-useful for creative mathematical or technical problems of other sorts.
-The project’s original prose and code, including this paper, were written by agents
-under occasional human direction.
-The framework organizes agent work to reduce the need for oversight and uses several
-agent tools, notably **[tbd](https://github.com/jlevy/tbd)** for task tracking,
-**[Softschema](https://github.com/jlevy/softschema)** for structuring results, and
-**[Practical Prose](https://github.com/jlevy/practical-prose)** to improve writing
-quality.*
+*All of this project’s documents and code, including this paper, are written by agents.
+The repository uses a flexible but defined **agentic research framework**, which is
+fully documented in [the repository](https://github.com/jlevy/squares).*
 
 </div>
 
@@ -88,13 +81,32 @@ These include improved lower bounds for $n = 12$, $17$, and $19$.[^other-results
 atlas of best known packings for every $n$ from 1 to 100 in Figure 2 comes from the same
 research agenda and currently includes {{N_STARRED}} new lower bounds.
 
-The repository includes a comprehensive survey of previous research, the atlas of
-packings, a hypothesis registry, an experiment ledger, exact verifiers, and a retention
-gate that labels results according to epistemic status (levels of verification,
-confirmation, and significance).
-Work is planned on a regular cadence (such as 8 to 12 hours) and broken into several
-defined workflows (research survey, correctness verification, research loop,
-optimization loop, and a few others).
+The repository includes:
+
+- A comprehensive survey of previous research
+- The atlas of packings
+- A hypothesis registry
+- An experiment ledger
+- Exact verifiers and other tools
+- A retention gate that labels results according to epistemic status (levels of
+  verification, confirmation, significance, and novelty)
+
+Work is planned on a regular cadence, typically in blocks of 8 to 12 hours, with
+strategic human input on priorities and insights.
+Agents then break the work into defined workflows, including research survey,
+correctness verification, research loop, and optimization loop.
+
+The framework relies on several agent tools for better engineering and workflows,
+notably **[tbd](https://github.com/jlevy/tbd)** for task tracking,
+**[Softschema](https://github.com/jlevy/softschema)** for structuring results, and
+**[Practical Prose](https://github.com/jlevy/practical-prose)** to improve writing
+quality.
+
+Even with the best agents, research requires strategic human input.
+The framework lets that input focus on strategy, while agents build on accumulated
+results and tools in a research flywheel.
+This approach is likely to be useful for other creative mathematical or technical
+problems.
 
 ## The Square Packing Problem
 
@@ -671,13 +683,12 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     [Memo II]({{PRIOR_TEN_MEMO_URL}}), October 15, 1984, proves the ten-square result,
     later published in his [{{PRIOR_YEAR}} paper]({{PRIOR_URL}}).
 
-[^novelty]: No intervening improvement on Stromquist’s bound, stated in
-    {{PRIOR_MEMO_YEAR}} and published in {{PRIOR_YEAR}}, is known to us.
-    The search behind that statement, recorded in the repository, covered the project’s
-    literature archive and source register, then arXiv, Crossref, OpenAlex and Semantic
-    Scholar, author pages and the public packing catalogues, through September 4, 2026.
-    It did not exhaust subscription-only indexes, theses and proceedings, or unindexed
-    sources.
+[^novelty]: Our
+    [search through September 4, 2026]({{ARCHIVE_URL}}/web/s11-lower-bound-literature-audit-2026)
+    found no earlier improvement on Stromquist’s bound, stated in {{PRIOR_MEMO_YEAR}}
+    and published in {{PRIOR_YEAR}}. We checked the project’s sources, scholarly
+    indexes, author pages, and public packing catalogues, but may have missed work in
+    subscription-only indexes, theses, proceedings, or unindexed sources.
 
 [^repair]: The bound is correct, but the project found that Stromquist’s printed
     argument does not close at his Figure 14 and repaired it with a source-distinct
