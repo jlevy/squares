@@ -7,84 +7,84 @@ rollup:
   source:
     harness: claude-code
     filename: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15.jsonl
-    sha256: 84ade9976b72d5c32d18075841185401ec4cc9030d1d4bc56229e62cd4bf2ef2
-    bytes: 29042512
-    records: 3229
+    sha256: 4a7915e0686aba1c0e5415bdea6e5497b1dddcf00da79019e0b4656516528b37
+    bytes: 32698151
+    records: 4220
     session_id: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15
     harness_versions:
     - 2.1.260
   span:
     started_at: '2026-09-07T16:22:16.206Z'
-    ended_at: '2026-09-07T22:06:39.553Z'
-    wall_seconds: 20663.347
+    ended_at: '2026-09-07T23:42:42.351Z'
+    wall_seconds: 26426.145
   turns:
-    assistant: 901
+    assistant: 1138
     sidechain: 0
     by_model:
-      claude-fable-5-1: 901
+      claude-fable-5-1: 1138
     by_thinking_level:
-      xhigh: 901
+      xhigh: 1138
     by_model_and_thinking_level:
-      claude-fable-5-1 @ xhigh: 901
+      claude-fable-5-1 @ xhigh: 1138
     by_branch:
       claude/kpress-pt-serif-fonts-1ec7e6: 787
-      claude/print-sans-faces: 94
-      squares/print-sans-faces: 20
+      claude/print-sans-faces: 284
+      squares/print-sans-faces: 67
     latency:
-      count: 901
-      total_seconds: 12016.593
-      median_seconds: 4.77
+      count: 1138
+      total_seconds: 13916.328
+      median_seconds: 4.772
       max_seconds: 1686.652
   tokens:
-    cache_creation_input_tokens: 4290225
-    cache_read_input_tokens: 433076801
-    ephemeral_1h_input_tokens: 4290225
+    cache_creation_input_tokens: 4956823
+    cache_read_input_tokens: 537393996
+    ephemeral_1h_input_tokens: 4956823
     ephemeral_5m_input_tokens: 0
-    input_tokens: 22004
-    output_tokens: 2572546
-    thinking_tokens: 1039231
+    input_tokens: 26024
+    output_tokens: 3047840
+    thinking_tokens: 1197904
   tokens_by_thinking_level:
     xhigh:
-      cache_creation_input_tokens: 4290225
-      cache_read_input_tokens: 433076801
-      ephemeral_1h_input_tokens: 4290225
+      cache_creation_input_tokens: 4956823
+      cache_read_input_tokens: 537393996
+      ephemeral_1h_input_tokens: 4956823
       ephemeral_5m_input_tokens: 0
-      input_tokens: 22004
-      output_tokens: 2572546
-      thinking_tokens: 1039231
+      input_tokens: 26024
+      output_tokens: 3047840
+      thinking_tokens: 1197904
   tool_calls:
-    total: 450
-    total_seconds: 2792.404
-    share_of_wall: 0.1351
-    errors: 12
-    denied: 0
+    total: 544
+    total_seconds: 4631.119
+    share_of_wall: 0.1752
+    errors: 18
+    denied: 3
     unpaired_results: 68
-    outstanding_at_snapshot: 2
+    outstanding_at_snapshot: 1
     one_off_code:
-      count: 113
-      total_seconds: 823.778
-      median_seconds: 5.074
-      max_seconds: 96.247
+      count: 129
+      total_seconds: 1503.487
+      median_seconds: 5.313
+      max_seconds: 155.198
     by_tool:
       Bash:
-        count: 350
-        total_seconds: 2646.785
-        median_seconds: 3.804
+        count: 423
+        total_seconds: 4360.168
+        median_seconds: 4.03
         max_seconds: 169.51
       Agent:
-        count: 20
-        total_seconds: 53.426
-        median_seconds: 2.446
-        max_seconds: 7.197
+        count: 32
+        total_seconds: 163.65
+        median_seconds: 2.447
+        max_seconds: 83.737
       mcp__Claude_Browser__browser_batch:
         count: 4
         total_seconds: 31.026
         median_seconds: 5.327
         max_seconds: 17.439
       SendUserFile:
-        count: 5
-        total_seconds: 17.999
-        median_seconds: 1.331
+        count: 6
+        total_seconds: 18.785
+        median_seconds: 1.199
         max_seconds: 12.393
       mcp__Claude_Browser__navigate:
         count: 2
@@ -97,15 +97,30 @@ rollup:
         median_seconds: 4.964
         max_seconds: 5.292
       Read:
-        count: 37
-        total_seconds: 7.369
+        count: 39
+        total_seconds: 7.828
         median_seconds: 0.072
         max_seconds: 2.131
+      WebFetch:
+        count: 1
+        total_seconds: 7.607
+        median_seconds: 7.607
+        max_seconds: 7.607
       Write:
-        count: 13
-        total_seconds: 5.13
-        median_seconds: 0.049
+        count: 14
+        total_seconds: 5.221
+        median_seconds: 0.05
         max_seconds: 4.553
+      ToolSearch:
+        count: 4
+        total_seconds: 3.662
+        median_seconds: 0.085
+        max_seconds: 3.466
+      Monitor:
+        count: 1
+        total_seconds: 2.53
+        median_seconds: 2.53
+        max_seconds: 2.53
       mcp__Claude_Browser__preview_stop:
         count: 1
         total_seconds: 2.324
@@ -121,11 +136,6 @@ rollup:
         total_seconds: 0.039
         median_seconds: 0.039
         max_seconds: 0.039
-      ToolSearch:
-        count: 1
-        total_seconds: 0.027
-        median_seconds: 0.027
-        max_seconds: 0.027
     by_command:
       ? unset && R() && R && R && R && R && R && R && (R && R && Menlo && Georgia && ls &&
         (uv && reachable && cairo && All && passed && R && git && git
@@ -139,11 +149,51 @@ rollup:
         total_seconds: 158.143
         median_seconds: 158.143
         max_seconds: 158.143
+      (uv && (uv && All && passed && git && git && git && git && merge && gh:
+        count: 1
+        total_seconds: 155.198
+        median_seconds: 155.198
+        max_seconds: 155.198
+      make && fail && drift && make && git && git && git && gh && Error:
+        count: 1
+        total_seconds: 136.084
+        median_seconds: 136.084
+        max_seconds: 136.084
+      git && git && .venv:
+        count: 1
+        total_seconds: 135.287
+        median_seconds: 135.287
+        max_seconds: 135.287
+      ? git && git && python3 && theirs && print(resolved:, && ruff && basedpyright && git
+        && (uv && failed && make && make && [0-9]+ && git && git && git
+      : count: 1
+        total_seconds: 128.66
+        median_seconds: 128.66
+        max_seconds: 128.66
+      ? "mkdir && unset && python && the && \n        the && font-weight: && src: && }} &&\
+        \ font-weight: && font-style: && src: && }} && src: && unicode-range: && }} && width:\
+        \ && font-size: && line-height: && color: && background: && }} && color: && margin:\
+        \ && letter-spacing: && text-transform: && }} && }} && }} && }} && div>\n && pg &&\
+        \ pg.evaluate(document.fonts.ready) && b.close()"
+      : count: 1
+        total_seconds: 124.921
+        median_seconds: 124.921
+        max_seconds: 124.921
+      the && the && source && keep && drop:
+        count: 1
+        total_seconds: 119.385
+        median_seconds: 119.385
+        max_seconds: 119.385
       (make && (make && failed && Tests:
         count: 1
         total_seconds: 106.55
         median_seconds: 106.55
         max_seconds: 106.55
+      git && git && git && (make && (make && [0-9]+:
+        count: 1
+        total_seconds: 103.975
+        median_seconds: 103.975
+        max_seconds: 103.975
       packing-validate && ✗ && error && not && packing-validate:
         count: 1
         total_seconds: 98.785
@@ -159,6 +209,22 @@ rollup:
         total_seconds: 96.247
         median_seconds: 96.247
         max_seconds: 96.247
+      gh pr:
+        count: 21
+        total_seconds: 85.46
+        median_seconds: 2.809
+        max_seconds: 24.377
+      git && git && git && unset && ruff && ruff && basedpyright && pytest && R() && R && R && R && R && R && (R:
+        count: 2
+        total_seconds: 80.882
+        median_seconds: 40.441
+        max_seconds: 57.666
+      ? python3 && s && print(resolved) && git && git && git && git && git && git && unset
+        && R() && R && R && R && R && R && R && (R && pytest && git
+      : count: 1
+        total_seconds: 80.484
+        median_seconds: 80.484
+        max_seconds: 80.484
       git && packing-validate:
         count: 1
         total_seconds: 55.489
@@ -169,27 +235,59 @@ rollup:
         total_seconds: 52.592
         median_seconds: 52.592
         max_seconds: 52.592
+      python3 && s && print(test patched) && ruff && pytest && git && git && git && git && git && git:
+        count: 1
+        total_seconds: 52.039
+        median_seconds: 52.039
+        max_seconds: 52.039
+      tbd && in_progress && ~ && show && *sans math* && *Future*) && *) && tbd:
+        count: 1
+        total_seconds: 48.978
+        median_seconds: 48.978
+        max_seconds: 48.978
+      git && git && git && git && git && git && unset && R() && R && R && R && R && R && (R && R && pytest && git && git && git:
+        count: 1
+        total_seconds: 46.74
+        median_seconds: 46.74
+        max_seconds: 46.74
       packing-validate && fail && cairo:
         count: 1
         total_seconds: 45.661
         median_seconds: 45.661
         max_seconds: 45.661
-      gh pr:
-        count: 14
-        total_seconds: 42.188
-        median_seconds: 2.711
-        max_seconds: 11.005
       f && done) && devtools.close_session && devtools.close_session && devtools.render_pr_rollup && git:
         count: 1
         total_seconds: 39.565
         median_seconds: 39.565
         max_seconds: 39.565
+      tbd && tbd:
+        count: 6
+        total_seconds: 38.739
+        median_seconds: 2.879
+        max_seconds: 24.382
+      ? ']+ && font-display:[^ && ]+ && paste && unset && python && KaTeX_Main && PT && const
+        && {t: && pg && pg.evaluate(document.fonts.ready) && samples.append(pg.evaluate(PROBE))
+        && loaded && loading && [print(    , && cdp.send(DOM.enable) && cdp.send(CSS.enable)'
+      : count: 1
+        total_seconds: 38.569
+        median_seconds: 38.569
+        max_seconds: 38.569
       ? unset && devtools.render_explainer && devtools.check_print_layout && devtools.inspect_explainer_typography
         && devtools.render_explainer_pdf
       : count: 2
         total_seconds: 36.2
         median_seconds: 18.1
         max_seconds: 20.833
+      tbd create:
+        count: 3
+        total_seconds: 35.769
+        median_seconds: 11.265
+        max_seconds: 15.452
+      api && curl && composite && math-text && pdf && curl:
+        count: 1
+        total_seconds: 34.694
+        median_seconds: 34.694
+        max_seconds: 34.694
       python3:
         count: 3
         total_seconds: 32.462
@@ -200,6 +298,11 @@ rollup:
         total_seconds: 32.431
         median_seconds: 16.215
         max_seconds: 20.867
+      tbd && show && show && open && in_progress) && *Firefox*) && *) && tbd && tbd:
+        count: 1
+        total_seconds: 29.179
+        median_seconds: 29.179
+        max_seconds: 29.179
       ls:
         count: 8
         total_seconds: 29.157
@@ -210,6 +313,11 @@ rollup:
         total_seconds: 28.095
         median_seconds: 28.095
         max_seconds: 28.095
+      pr && api && api && merged* && failed*) && git && gh:
+        count: 2
+        total_seconds: 27.405
+        median_seconds: 13.702
+        max_seconds: 14.378
       ? 'font-style: && font-weight: && src: && unicode-range: && }} && font-style: && font-weight:
         && src: && unicode-range: && }} && font-style: && font-weight: && src: && unicode-range:
         && }} && font-style: && font-weight: && src: && unicode-range: && }} && .kpress &&
@@ -222,10 +330,16 @@ rollup:
         median_seconds: 26.218
         max_seconds: 26.218
       sed:
-        count: 19
-        total_seconds: 25.293
-        median_seconds: 0.404
+        count: 20
+        total_seconds: 25.472
+        median_seconds: 0.339
         max_seconds: 3.505
+      ? git && git && git && Merge && Already && git && make && make && devtools.katex_text_metrics
+        && devtools.instance_sans && git && git && gh && merge && it && recorded
+      : count: 1
+        total_seconds: 25.414
+        median_seconds: 25.414
+        max_seconds: 25.414
       ? 'python3 && s && print(pages.yml: step inserted before ''Draw the PDF of the page'')
         && s && assert && Measured && Web && PDF && PT && 164 && 92 && KaTeX && 181 && 25
         && KPress && 216 && none && Source && 75 && 345 && Inline && system && Menlo, && List
@@ -235,281 +349,187 @@ rollup:
         total_seconds: 24.217
         median_seconds: 24.217
         max_seconds: 24.217
+      devtools.close_session && devtools.close_session && devtools.render_pr_rollup && git:
+        count: 1
+        total_seconds: 23.7
+        median_seconds: 23.7
+        max_seconds: 23.7
       ? devtools.render_explainer && devtools.render_explainer && devtools.check_print_layout
         && devtools.inspect_explainer_typography && devtools.render_explainer_pdf && ls
       : count: 1
         total_seconds: 22.226
         median_seconds: 22.226
         max_seconds: 22.226
-      ? mk() && [epic] Every glyph from a shipped face, on screen and in print && tbd && tbd
-        && is && declare && Decide the final mono face && Draw the list marker as a box, not
-        a glyph && katex_text_metrics.py && tbd && tbd
-      : count: 1
-        total_seconds: 21.326
-        median_seconds: 21.326
-        max_seconds: 21.326
-      mk() && tbd && any && Adopt kpress's mono face, box list marker and PT Serif quotes in the explainer && tbd:
-        count: 1
-        total_seconds: 21.3
-        median_seconds: 21.3
-        max_seconds: 21.3
-      head:
-        count: 8
-        total_seconds: 20.518
-        median_seconds: 2.953
-        max_seconds: 5.199
-      ? 'python && the && n)}, s)
-
-        assert m, token && print(css patched) && the && print(docs patched) && flowmark &&
-        uv.toml && uv.toml && uv.toml && uv.toml && unset && devtools.render_explainer &&
-        python3 && ctx && p && p.wait_for_timeout(200) && nxt && nb && after'
-      : count: 1
-        total_seconds: 18.783
-        median_seconds: 18.783
-        max_seconds: 18.783
-      ? unset && devtools.render_explainer && devtools.render_explainer && pytest && failed
-        && devtools.check_print_layout && devtools.render_explainer_pdf && devtools.close_session
-        && ruff && ruff && basedpyright && devtools.check_documentation
-      : count: 1
-        total_seconds: 17.889
-        median_seconds: 17.889
-        max_seconds: 17.889
-      tbd && tbd && tbd:
-        count: 2
-        total_seconds: 17.379
-        median_seconds: 8.689
-        max_seconds: 15.937
-      python3 && python:
-        count: 1
-        total_seconds: 17.046
-        median_seconds: 17.046
-        max_seconds: 17.046
-      open:
-        count: 4
-        total_seconds: 16.613
-        median_seconds: 3.853
-        max_seconds: 6.203
-      ? devtools.render_explainer && devtools.check_print_layout && devtools.inspect_explainer_typography
-        && devtools.render_explainer_pdf && devtools.compare_math_fonts
-      : count: 1
-        total_seconds: 16.613
-        median_seconds: 16.613
-        max_seconds: 16.613
-      ? 'python3 && range.selectNodeContents(el) && const && r.height) && (!rects.length)
-        && const && const && top: && range.selectNodeContents(el) && const && r.height) &&
-        (!rects.length) && const && const && top: && p.write_text(s) && print(checker patched)
-        && ruff && unset && devtools.check_print_layout && devtools.check_print_layout &&
-        pytest && failed'
-      : count: 1
-        total_seconds: 16.276
-        median_seconds: 16.276
-        max_seconds: 16.276
-      devtools.check_print_layout && devtools.check_print_layout && devtools.inspect_explainer_typography:
-        count: 1
-        total_seconds: 16.247
-        median_seconds: 16.247
-        max_seconds: 16.247
-      uv run python:
-        count: 5
-        total_seconds: 16.122
-        median_seconds: 3.168
-        max_seconds: 4.881
-      devtools.close_session && devtools.close_session && git && git:
-        count: 1
-        total_seconds: 15.829
-        median_seconds: 15.829
-        max_seconds: 15.829
-      mkdir && cp && python:
-        count: 1
-        total_seconds: 15.796
-        median_seconds: 15.796
-        max_seconds: 15.796
-      ? unset && devtools.render_explainer && devtools.render_explainer_pdf && devtools.inspect_explainer_typography
-        && git && git && open
-      : count: 1
-        total_seconds: 15.206
-        median_seconds: 15.206
-        max_seconds: 15.206
-      ? unset && devtools.render_explainer && devtools.render_explainer && devtools.check_print_layout
-        && devtools.inspect_explainer_typography && devtools.render_explainer_pdf && devtools.close_session
-        && ls
-      : count: 1
-        total_seconds: 15.025
-        median_seconds: 15.025
-        max_seconds: 15.025
-      ? ls && python3 && round(v) && 0) && ,  && out.pageOverflow && (out.pageOverflow &&
-        const && const && (over && (!widest && over && out.widest && out && round(v) && 0)
-        && the && print(checker patched) && ruff && basedpyright && unset && devtools.check_print_layout
-        && cp && devtools.render_explainer && devtools.check_print_layout && cp && devtools.render_explainer
-        && git
-      : count: 1
-        total_seconds: 14.85
-        median_seconds: 14.85
-        max_seconds: 14.85
-      tbd && tbd:
-        count: 5
-        total_seconds: 14.357
-        median_seconds: 1.017
-        max_seconds: 7.606
-      make && Lint && error && Error && ✖ && Supply-chain && metrics && git:
-        count: 1
-        total_seconds: 14.355
-        median_seconds: 14.355
-        max_seconds: 14.355
-      tbd && tbd && npm && t && npm:
-        count: 1
-        total_seconds: 13.703
-        median_seconds: 13.703
-        max_seconds: 13.703
     by_command_family:
       other:
-        count: 83
-        total_seconds: 907.675
+        count: 101
+        total_seconds: 1328.827
         median_seconds: 4.873
         max_seconds: 169.51
       toolchain:
-        count: 113
-        total_seconds: 761.307
-        median_seconds: 4.516
-        max_seconds: 95.419
+        count: 126
+        total_seconds: 1190.797
+        median_seconds: 4.817
+        max_seconds: 136.084
       vcs:
-        count: 57
-        total_seconds: 488.43
-        median_seconds: 3.548
+        count: 88
+        total_seconds: 1176.266
+        median_seconds: 4.042
         max_seconds: 158.143
       project:
-        count: 19
-        total_seconds: 277.7
-        median_seconds: 5.232
+        count: 20
+        total_seconds: 301.4
+        median_seconds: 5.844
         max_seconds: 98.785
-      inspection:
-        count: 69
-        total_seconds: 148.491
-        median_seconds: 0.404
-        max_seconds: 18.491
       filesystem:
-        count: 9
-        total_seconds: 63.182
-        median_seconds: 5.215
-        max_seconds: 15.796
+        count: 10
+        total_seconds: 188.103
+        median_seconds: 5.98
+        max_seconds: 124.921
+      inspection:
+        count: 79
+        total_seconds: 177.305
+        median_seconds: 1.921
+        max_seconds: 18.491
     invoked:
-      echo: 580
-      grep: 419
-      cd: 389
-      tail: 365
-      head: 330
-      sed: 151
-      python3: 68
-      ls: 63
-      the: 62
-      const: 57
+      echo: 687
+      grep: 503
+      cd: 476
+      tail: 454
+      head: 388
+      sed: 162
+      python3: 75
+      the: 72
+      gh pr: 72
+      ls: 66
+      const: 60
       uv uv.toml: 52
-      gh pr: 51
-      uv run python: 47
-      cat: 44
-      awk: 37
+      uv run python: 50
+      awk: 50
+      git status: 49
+      cat: 48
+      R: 47
+      wc: 43
+      sort: 42
+      '}}': 39
+      git log: 38
+      cut: 37
       uv run python -m devtools.render_explainer: 36
-      git status: 35
-      wc: 33
-      sort: 25
-      unset: 25
-      '}}': 22
-      git add: 22
-      'font-weight:': 21
-      cut: 21
-      git kpress: 20
-      'font-style:': 20
-      export: 20
-      git commit: 20
-      tbd update: 18
+      git add: 34
+      unset: 34
+      git commit: 30
+      export: 28
+      git push: 27
+      git kpress: 25
+      'font-weight:': 25
+      tbd update: 24
+      open: 22
+      'font-style:': 21
+      'src:': 20
+      s: 20
+      set: 20
+      sleep: 20
+      git fetch: 19
+      uv run python -m devtools.close_session: 19
+      git diff: 18
       python: 18
-      git log: 18
       cp: 17
       uv run python -m devtools.check_print_layout: 16
       uv run python -m devtools.render_explainer_pdf: 16
-      git push: 16
+      'color:': 16
       rm: 15
-      open: 15
-      uv run python -m devtools.close_session: 15
+      ruff format: 15
+      '[0-9]+': 15
+      uv run pytest: 15
       best: 15
-      s: 14
-      R: 14
+      uniq: 14
       tbd shortcut: 13
-      'src:': 13
-      ruff format: 13
+      git show: 13
+      a: 13
+      make lint-check: 13
+      failed: 13
+      '})': 13
       p: 13
       'text-decoration:': 13
+      'unicode-range:': 12
       uv run python -m devtools.check_documentation: 12
-      git diff: 12
-      uniq: 11
-      a: 11
-      failed: 11
-      '[0-9]+': 11
-      '})': 11
+      tbd show: 12
+      basedpyright: 12
+      Error: 12
+      tbd list: 11
+      make test: 11
+      uv run python -m devtools.render_pr_rollup: 11
       y: 11
       from: 11
-      basedpyright: 10
-      Error: 10
-      'color:': 10
+      tbd create: 10
+      assert: 10
+      xargs: 10
       '*': 9
       uvx flowmark: 9
-      sleep: 9
       npx: 9
-      uv run python -m devtools.render_pr_rollup: 9
       crop: 9
-      'unicode-range:': 8
+      gsub(\n: 9
+      tr: 8
       tbd close: 8
-      tbd list: 8
-      set: 8
-      tbd show: 8
-      make lint-check: 8
+      ruff check: 8
       uv run python -m devtools.inspect_explainer_typography: 8
-      assert: 8
       runInitScript(): 8
+      R(): 8
       page: 8
-      tbd create: 7
-      make test: 7
+      uv run python -m devtools.instance_sans: 8
+      mkdir: 7
+      gh run: 7
       'font-feature-settings:': 7
       p.wait_for_timeout(300): 7
-      uv run python -m devtools.instance_sans: 7
+      pg: 7
+      uv run basedpyright: 7
+      git worktree: 7
+      (make: 7
       git ls-files: 6
       .kpress: 6
-      mkdir: 6
       metrics: 6
-      ruff check: 6
+      t: 6
       ERROR): 6
+      passed: 6
+      error: 6
       KaTeX: 6
       Test: 6
       Lint: 6
-      uv run pytest: 6
+      tbd sync: 6
+      git merge: 6
+      pg.evaluate(document.fonts.ready): 6
       box: 6
       x: 6
-      git show: 5
+      uv run ruff format: 6
+      merge: 6
+      git submodule: 5
       kpress: 5
-      error: 5
+      PT: 5
       Supply-chain: 5
       print(patched): 5
+      an: 5
       import: 5
       expect(globalThis.katex.__setFontMetrics).not.toHaveBeenCalled(): 5
       expect(globalThis.renderMathInElement).toHaveBeenCalledTimes(1): 5
+      b.close(): 5
       w,: 5
       doc: 5
       bb: 5
       scale: 5
-      uv run basedpyright: 5
-      git submodule: 4
-      tr: 4
+      (R: 5
+      (uv: 5
+      api: 5
+      curl: 5
+      'background:': 5
       python3 -m devtools.check_print_layout: 4
-      t: 4
-      PT: 4
+      run: 4
       +%s): 4
       uv run packing-validate: 4
-      passed: 4
       Slot: 4
       Reading: 4
-      git fetch: 4
       uv run python -m devtools.log_rollup: 4
       n: 4
+      let: 4
       mountMath(): 4
       u: 4
       ✖: 4
@@ -517,21 +537,29 @@ rollup:
       print(template patched): 4
       ref.hover(): 4
       p.wait_for_timeout(200): 4
-      pg: 4
+      'padding:': 4
+      git: 4
+      'font-size:': 4
+      'line-height:': 4
       qlmanage: 4
       c: 4
       ms,: 4
       d: 4
+      pdf: 4
       (cd: 4
+      select(.isResolved: 4
+      not)]: 4
       katex: 3
       '@font-face': 3
       tbd template: 3
       git check-ignore: 3
       'size-adjust:': 3
+      top:0: 3
+      left:0: 3
+      z-index:9999: 3
       uv run python -m devtools.render_document_map: 3
       launch: 3
       and: 3
-      run: 3
       tbd ready: 3
       uvx codespell@2.4.2: 3
       ✗: 3
@@ -543,44 +571,43 @@ rollup:
       '`katex_js`': 3
       '`katex_css`': 3
       every: 3
-      an: 3
-      let: 3
+      katex_text_metrics.py: 3
+      fail: 3
+      gh api: 3
       typeof: 3
       ', ': 3
-      gh run: 3
       its: 3
       'font-variant-caps:': 3
       EOF: 3
       ctx: 3
       ref.scroll_into_view_if_needed(): 3
       'border-radius:': 3
+      print(test patched): 3
       index.html).resolve().as_uri(),: 3
-      git: 3
       ).trim().slice(0,: 3
-      b.close(): 3
-      pg.evaluate(document.fonts.ready): 3
+      print(resolved): 3
+      'margin:': 3
       strip.append((s[font][:20],: 3
       w: 3
       sheet.paste(mc,: 3
       d.text((x,: 3
       print(sheet written): 3
-      pdf: 3
       b: 3
-      uv run ruff format: 3
       normal: 3
       '380': 3
-      gsub(\n: 3
-      merge: 3
-      git worktree: 3
       done): 3
-      (make: 3
+      show: 3
+      'width:': 3
+      'letter-spacing:': 3
+      'text-transform:': 3
+      'height:': 3
+      'gap:': 3
       font-sans: 2
+      LocalPunct: 2
       Georgia: 2
       find: 2
       text: 2
-      top:0: 2
-      left:0: 2
-      z-index:9999: 2
+      color:#fff: 2
       '120': 2
       which: 2
       argparse: 2
@@ -605,8 +632,10 @@ rollup:
       def: 2
       print(parity test narrowed): 2
       Ranges: 2
+      A: 2
       Tests: 2
       ✓: 2
+      uv run python -m devtools.compare_math_fonts: 2
       (tmp_path: 2
       None): 2
       gh auth: 2
@@ -622,71 +651,41 @@ rollup:
       '`katex`),': 2
       goldens: 2
       '`python': 2
-      fontTools: 2
-      wrapper.dataset.kpressFonts: 2
-      katex_text_metrics.py: 2
-      fail: 2
-      ^-: 2
-      create: 2
-      CSS: 2
-      raise: 2
-      applyTextMetrics(nodes): 2
-      katex.__setFontMetrics: 2
-      (const: 2
-      expect(document.documentElement.dataset.kpressMathText).toBe(katex): 2
-      FAIL: 2
-      'off': 2
-      print: 2
-      that: 2
-      '`katex`': 2
-      range.selectNodeContents(el): 2
-      r.height): 2
-      (!rects.length): 2
-      'top:': 2
-      print(checker patched): 2
-      tbd sync: 2
-      reachable: 2
-      p.wait_for_timeout(250): 2
-      li.scroll_into_view_if_needed(): 2
-      back.hover(): 2
-      'border-color:': 2
-      a,: 2
-      '[c.color,': 2
-      (other): 602
+      (other): 760
     invoked_families:
-      other: 1572
-      inspection: 1480
-      shell: 1009
-      toolchain: 279
-      vcs: 236
-      project: 139
-      filesystem: 38
+      other: 1943
+      inspection: 1773
+      shell: 1236
+      vcs: 376
+      toolchain: 343
+      project: 148
+      filesystem: 39
     by_shell_shape:
       compound:
-        count: 209
-        total_seconds: 1603.549
-        median_seconds: 3.25
+        count: 262
+        total_seconds: 2620.501
+        median_seconds: 3.441
         max_seconds: 169.51
       python_heredoc:
-        count: 106
-        total_seconds: 790.998
-        median_seconds: 5.248
-        max_seconds: 96.247
+        count: 120
+        total_seconds: 1443.302
+        median_seconds: 5.427
+        max_seconds: 155.198
       heredoc:
-        count: 14
-        total_seconds: 212.419
-        median_seconds: 4.604
+        count: 15
+        total_seconds: 219.785
+        median_seconds: 5.128
         max_seconds: 158.143
       python_inline:
-        count: 7
-        total_seconds: 32.78
-        median_seconds: 2.491
-        max_seconds: 13.703
-      pipeline:
         count: 9
-        total_seconds: 6.251
-        median_seconds: 0.2
-        max_seconds: 2.473
+        total_seconds: 60.185
+        median_seconds: 2.664
+        max_seconds: 14.378
+      pipeline:
+        count: 13
+        total_seconds: 18.137
+        median_seconds: 0.261
+        max_seconds: 3.306
       simple:
         count: 5
         total_seconds: 0.788
@@ -694,21 +693,21 @@ rollup:
         max_seconds: 0.194
     by_thinking_level:
       xhigh:
-        count: 450
-        total_seconds: 2792.404
-        median_seconds: 3.145
+        count: 544
+        total_seconds: 4631.119
+        median_seconds: 3.249
         max_seconds: 169.51
     shell_traits:
-      pipes: 346
-      redirects_output: 118
-      substitutes: 30
+      pipes: 414
+      redirects_output: 146
+      substitutes: 53
   session_events:
     compact_boundaries: 1
-    stop_hook_summaries: 36
+    stop_hook_summaries: 56
     queue_operations:
-      enqueue: 94
-      dequeue: 51
-      remove: 42
+      enqueue: 178
+      remove: 98
+      dequeue: 80
   semantics:
     wall_seconds: First to last timestamped record. It is elapsed session time and includes
       every interval in which nothing was running, so it is an upper bound on work and never

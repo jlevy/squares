@@ -497,8 +497,12 @@ def test_a_unitsquare_case_takes_its_bound_and_its_blocker_from_the_release() ->
         assert reported["construction_method"] == "unknown", n
         assert reported["witnesses"] == [f"W-known-best-n{n:03d}"], n
         # A release that publishes no certificate blocks on evidence, not on mathematics.
-        assert [blocker["kind"] for blocker in payload["blockers"]] == ["source-evidence"], n
+        assert all(blocker["kind"] == "source-evidence" for blocker in payload["blockers"]), n
         assert payload["blockers"][0]["evidence"] is reported["evidence"], n
+        if n == 103:
+            assert payload["blockers"][1]["evidence"] == ["E-green-ds7-theorem9-reported-lower"]
+        else:
+            assert len(payload["blockers"]) == 1
         assert payload["conjectured_optimum"] is None, n
         assert [resource["key"] for resource in payload["resources"]] == [
             "[Kingbird]",
@@ -831,10 +835,13 @@ def test_the_summary_counts_the_methods_and_names_what_is_left_unknown() -> None
     assert "103" in unresolved
 
 
-def test_nagamochi_values_carry_the_two_precisions_the_register_uses() -> None:
-    """13 significant figures reported, 12 verified, trailing zeros dropped in both."""
+def test_reported_green_bound_preserves_the_verified_nagamochi_precision() -> None:
+    """The source lane can improve without changing the certified theorem's digits."""
     payload = safe_load(_regenerate(50).split("---\n")[1])["packing"]
-    assert payload["reported_lower_bound"]["value"] == "7.082762530298"
+    assert payload["reported_lower_bound"]["value"] == "7.317426011159"
+    assert payload["reported_lower_bound"]["evidence"] == [
+        "E-green-ds7-theorem9-reported-lower"
+    ]
     assert payload["verified_lower_bound"]["value"] == "7.0827625303"
     assert (
         payload["verified_lower_bound"]["exact_form"] == "sqrt(50 - 2*floor(sqrt(50)) + 1) + 1"

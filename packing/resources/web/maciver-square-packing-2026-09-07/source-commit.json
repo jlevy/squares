@@ -1,0 +1,113 @@
+{
+  "sha": "9e2cd597047e040a63b7dcd103e79962cfc2d781",
+  "node_id": "C_kwDOTyOjodoAKDllMmNkNTk3MDQ3ZTA0MGE2M2I3ZGNkMTAzZTc5OTYyY2ZjMmQ3ODE",
+  "commit": {
+    "author": {
+      "name": "David R. MacIver",
+      "email": "david@drmaciver.com",
+      "date": "2026-08-10T13:30:26Z"
+    },
+    "committer": {
+      "name": "David R. MacIver",
+      "email": "david@drmaciver.com",
+      "date": "2026-08-10T13:30:26Z"
+    },
+    "message": "site: link the textbook and ship its PDF in the Pages build\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+    "tree": {
+      "sha": "f1ba3d1d71873fa8b4a257eb30ca837248b8a649",
+      "url": "https://api.github.com/repos/DRMacIver/square-packing-research/git/trees/f1ba3d1d71873fa8b4a257eb30ca837248b8a649"
+    },
+    "url": "https://api.github.com/repos/DRMacIver/square-packing-research/git/commits/9e2cd597047e040a63b7dcd103e79962cfc2d781",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/DRMacIver/square-packing-research/commits/9e2cd597047e040a63b7dcd103e79962cfc2d781",
+  "html_url": "https://github.com/DRMacIver/square-packing-research/commit/9e2cd597047e040a63b7dcd103e79962cfc2d781",
+  "comments_url": "https://api.github.com/repos/DRMacIver/square-packing-research/commits/9e2cd597047e040a63b7dcd103e79962cfc2d781/comments",
+  "author": {
+    "login": "DRMacIver",
+    "id": 28623,
+    "node_id": "MDQ6VXNlcjI4NjIz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/28623?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/DRMacIver",
+    "html_url": "https://github.com/DRMacIver",
+    "followers_url": "https://api.github.com/users/DRMacIver/followers",
+    "following_url": "https://api.github.com/users/DRMacIver/following{/other_user}",
+    "gists_url": "https://api.github.com/users/DRMacIver/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/DRMacIver/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/DRMacIver/subscriptions",
+    "organizations_url": "https://api.github.com/users/DRMacIver/orgs",
+    "repos_url": "https://api.github.com/users/DRMacIver/repos",
+    "events_url": "https://api.github.com/users/DRMacIver/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/DRMacIver/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "DRMacIver",
+    "id": 28623,
+    "node_id": "MDQ6VXNlcjI4NjIz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/28623?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/DRMacIver",
+    "html_url": "https://github.com/DRMacIver",
+    "followers_url": "https://api.github.com/users/DRMacIver/followers",
+    "following_url": "https://api.github.com/users/DRMacIver/following{/other_user}",
+    "gists_url": "https://api.github.com/users/DRMacIver/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/DRMacIver/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/DRMacIver/subscriptions",
+    "organizations_url": "https://api.github.com/users/DRMacIver/orgs",
+    "repos_url": "https://api.github.com/users/DRMacIver/repos",
+    "events_url": "https://api.github.com/users/DRMacIver/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/DRMacIver/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "c53f4f5523ea56c1898f475e4e4b4c4a10c5adfe",
+      "url": "https://api.github.com/repos/DRMacIver/square-packing-research/commits/c53f4f5523ea56c1898f475e4e4b4c4a10c5adfe",
+      "html_url": "https://github.com/DRMacIver/square-packing-research/commit/c53f4f5523ea56c1898f475e4e4b4c4a10c5adfe"
+    }
+  ],
+  "stats": {
+    "total": 15,
+    "additions": 14,
+    "deletions": 1
+  },
+  "files": [
+    {
+      "sha": "6f6e1e0c55fa1a7acd8749b47111bab7a010b0f0",
+      "filename": ".github/workflows/pages.yml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "blob_url": "https://github.com/DRMacIver/square-packing-research/blob/9e2cd597047e040a63b7dcd103e79962cfc2d781/.github%2Fworkflows%2Fpages.yml",
+      "raw_url": "https://github.com/DRMacIver/square-packing-research/raw/9e2cd597047e040a63b7dcd103e79962cfc2d781/.github%2Fworkflows%2Fpages.yml",
+      "contents_url": "https://api.github.com/repos/DRMacIver/square-packing-research/contents/.github%2Fworkflows%2Fpages.yml?ref=9e2cd597047e040a63b7dcd103e79962cfc2d781",
+      "patch": "@@ -29,6 +29,7 @@ jobs:\n           cp papers/center-area-lemma/paper.pdf _site/pdf/center-area-lemma.pdf\n           cp papers/s17-lower-bound/paper.pdf _site/pdf/s17-lower-bound.pdf\n           cp papers/nmax/paper.pdf _site/pdf/nmax.pdf\n+          cp textbook/main.pdf _site/pdf/centre-area-lemma-textbook.pdf\n       - uses: actions/upload-pages-artifact@v3\n         with:\n           path: _site"
+    },
+    {
+      "sha": "d37df503a71a97230116b87cc277091a002087b0",
+      "filename": "site/index.html",
+      "status": "modified",
+      "additions": 13,
+      "deletions": 1,
+      "changes": 14,
+      "blob_url": "https://github.com/DRMacIver/square-packing-research/blob/9e2cd597047e040a63b7dcd103e79962cfc2d781/site%2Findex.html",
+      "raw_url": "https://github.com/DRMacIver/square-packing-research/raw/9e2cd597047e040a63b7dcd103e79962cfc2d781/site%2Findex.html",
+      "contents_url": "https://api.github.com/repos/DRMacIver/square-packing-research/contents/site%2Findex.html?ref=9e2cd597047e040a63b7dcd103e79962cfc2d781",
+      "patch": "@@ -10,7 +10,7 @@\n <body>\n <h1>Square Packing Research</h1>\n \n-<div class=\"disclaimer\"><strong>AI-generated research.</strong> The papers and pages on this site were produced with a mix of ChatGPT and Claude Fable, working over a larger body of AI-generated research, and have <strong>not yet been adequately human reviewed</strong>. Some core results are machine-checked in Lean&nbsp;4 (noted per paper); everything else — prose proofs, exposition, and these overview pages — should be treated with appropriate skepticism until human review is complete.</div>\n+<div class=\"disclaimer\"><strong>AI-generated research.</strong> The papers, textbook, and pages on this site were produced with a mix of ChatGPT and Claude Fable, working over a larger body of AI-generated research, and have <strong>not yet been adequately human reviewed</strong>. Some core results are machine-checked in Lean&nbsp;4 (noted per paper); everything else — prose proofs, exposition, and these overview pages — should be treated with appropriate skepticism until human review is complete.</div>\n \n <p>Three papers on packing unit squares into larger regions, centred on the classical\n question: what is the side \\(s(n)\\) of the smallest square that contains \\(n\\)\n@@ -53,6 +53,18 @@ <h2><a href=\"nmax/\">Counting Unit Squares by Their Centers</a></h2>\n <a href=\"pdf/nmax.pdf\">PDF</a></p>\n </div>\n \n+<div class=\"paper-card\">\n+<h2><a href=\"pdf/centre-area-lemma-textbook.pdf\">The Centre-Area Lemma: From First Principles (textbook)</a></h2>\n+<p>A 195-page textbook companion to the centre-area lemma paper, starting from\n+first-year-undergraduate mathematics and building everything the proof needs:\n+convex sets and support functions, separating branches, configuration-space\n+calculus, compactness and first-order optimality, the Farkas lemma, and the\n+reciprocal force diagram, ending with a full proof of the lemma. Each chapter\n+has worked examples and exercises.</p>\n+<p class=\"links\"><a href=\"pdf/centre-area-lemma-textbook.pdf\">PDF</a> ·\n+<a href=\"https://github.com/DRMacIver/square-packing-research/tree/main/textbook\">Source</a></p>\n+</div>\n+\n <footer>\n <p>David R. MacIver, 2026. Source, Lean formalization, and verification audits:\n <a href=\"https://github.com/DRMacIver/square-packing-research\">DRMacIver/square-packing-research</a>."
+    }
+  ]
+}

@@ -212,10 +212,8 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --checks --jobs 3 --inner-jobs 1
 
-      # Everything except the exhaustive exact tier, which is the `exhaustive` job below,
-      # and the slow behavioural lane, which is `slow-lane` beside it. `--skip` is what
-      # stops either running here as well: without it three jobs would pay for the same
-      # steps. The three selections partition the gate, and
+      # Everything except the two isolated behavioural lanes below. The three selections
+      # partition the gate without paying for any step twice, and
       # `test_the_post_merge_jobs_partition_the_gate` is what keeps them a partition when a
       # step is added.
       #
@@ -224,43 +222,61 @@ jobs:
       # is not allowed: a tier is a filter nothing checks the complement of, so it is how a
       # step ends up in neither surface, which is the gap `D-455` and `D-456` came through.
       #
-      # **The slow lane left on 2026-09-08, because this path had just failed the way the
-      # deep gate failed hours earlier.** Run 34185998810, a dispatch on
-      # `claude/squares-n11-constraints-wl9atd`, ran this step at `--jobs 2 --inner-jobs 2`
-      # on four vcpus: `slow behavioral tests` was killed at 1801.00s against its 1800s
-      # budget while `single-square translation escape screen` ran beside it to 1794.06s --
-      # six seconds inside its own -- and the atlas rebuild (778.88s) and the negative
-      # controls (606.08s) both came in well above their serial readings. One step failed,
-      # and the five deferrals beside it were reported by a job that had already spent
-      # 3234.76s of a 3600s ceiling. That is `deep-gate.yml`'s run 34177317419 one workflow
-      # further out, and it takes the same fix: the lane to its own runner, and what is
-      # left here run one step at a time.
-      #
-      # **`--jobs 1` rather than 2, and the arithmetic is that run's own receipts.** Its 68
-      # steps cost 6226.03s of step time. Move the lane's 1801.00s to its own job and
-      # 4425.03s is left, of which the five long deferrals were 3445.44s crowded and are
-      # 2174.84s serial -- measured at exactly this shape by `deep-gate.yml`'s
-      # `deferred-steps` in run 34183723509: 1069.84s, 476.20s, 374.98s, 227.15s, 26.67s.
-      # The other 62 steps were 979.59s here, which bounds from above what they cost with
-      # the runner to themselves. Serial therefore predicts 2174.84 + 979.59 = 3154.43s
-      # against the `full` tier's 3600s ceiling -- 87.6 per cent of it, and 80.33s under
-      # the 3234.76s this job already walled with the lane still inside it.
-      #
-      # **What `--jobs 2` would have kept is the other timeout.** With the lane gone, two
-      # outer slots put the escape screen beside the atlas rebuild and the negative
-      # controls at two inner workers each, which is the arrangement run 34181619739
-      # refuted in `deferred-steps`: the screen killed at 1800s against an uncontended
-      # 858.62s. Here it has already read 1794.06s. Six seconds is not a margin.
-      #
-      # Serial costs wall, and this is the path that can afford it. Nothing waits on the
-      # daily schedule or on a push to `main`, which is the trade the header of this file
-      # already makes for the whole deferred surface.
+      # Run numeric steps serially at two inner workers. PR #116's run 34181619739
+      # timed out the escape screen at 1800s with two numeric pools sharing a runner;
+      # the serial deferred replay in run 34183723509 completed it in 1069.84s.
+      # The slow lane also gets its own runner: run 34177317419 timed it out at 1800s
+      # while it shared the deferred job. This changes scheduling, not coverage.
       - name: Run the complete integration surface
         if: "github.event_name != 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --skip "exhaustive exact behavioral tests"
           --skip "slow behavioral tests"
+          --skip "single-square translation escape screen"
+          --jobs 1 --inner-jobs 2
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  slow-lane:
+    # The full slow lane stays off the ordinary pull-request surface. Its corpus tests
+    # use PACK_JOBS internally, so retain two inner workers on this isolated runner.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Retained-theorem reviews read historical Git objects.
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the slow behavioural lane
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "slow behavioral tests"
           --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs
@@ -488,8 +504,8 @@ jobs:
     # its output still in an unflushed pipe (D-456), so `validate` went red on three
     # consecutive merges while saying nothing at all about the sixty other steps, and a
     # real failure arriving behind it would have looked identical. Split, this job answers
-    # one question -- do the complete finite certificate decisions still pass -- while
-    # `slow-lane` below answers the behavioural one and `validate` answers the rest.
+    # one question -- do the complete finite certificate decisions still pass -- and the
+    # job above answers the rest.
     #
     # No `packing-required` dependency: it does not run on pull requests, because at half
     # an hour it is the one step whose cost rules it out of the pull-request tier. The
@@ -538,37 +554,31 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-  slow-lane:
-    # `slow behavioral tests` alone, on a runner of its own since 2026-09-08, for the
-    # reason `deep-gate.yml`'s `deferred-slow-lane` exists and on the same day's readings.
+  screen:
+    # The whole single-square translation escape screen, on its own runner, for the reason
+    # the exhaustive tier is on its own runner: its process pool is sized by PACK_JOBS,
+    # and beside the rest of the gate it receives two workers instead of four.
+    # A same-runner comparison is still needed to measure how the screen scales.
     #
-    # Run 34185998810 dispatched this workflow against
-    # `claude/squares-n11-constraints-wl9atd` and the gate killed this lane at 1801.00s,
-    # its own `FAST_SUITE_BUDGET_SECONDS`, while `single-square translation escape screen`
-    # ran beside it to 1794.06s. Run 34176106076, this workflow's own post-merge checkpoint
-    # earlier the same day, ran the same lane to completion in the `validate` job at
-    # 1271.96s with the screen at 858.62s beside it -- four vcpus and
-    # `--jobs 2 --inner-jobs 2` both times. Two readings of one job at one shape, 1.4x
-    # apart, on a lane whose own work did not change between them. Since PR #111 tripled
-    # the known-best corpus to n = 1..324 this lane shares its outer slots with steps of
-    # its own size rather than with sixty cheap ones, and four vcpus do not carry two such
-    # steps at single-step speed. Which of the pair dies at its budget is then luck:
-    # `deep-gate.yml` lost the screen to the same arrangement in run 34177317419, and the
-    # backstop lost the lane in this one.
+    # `D-484` is what this fixes. The n=1..324 expansion (#111) took the corpus from about
+    # 100 records to 318 screened, and the step went from comfortably inside the shared
+    # 900s subprocess cap to killed at it -- 901.00s on run 34172652457, which is the cap
+    # and not an uncensored duration. The split and the higher cap are evaluated together.
+    # At `--jobs 2 --inner-jobs 2` the screen gets two pool workers and pays contention for
+    # them, and no `--jobs` setting on that job can give it more without oversubscribing
+    # the other slot (`BC-218`).
     #
-    # A second runner buys an uncontended wall for a step that was otherwise reporting
-    # nothing at all, and buys the deferrals beside it a job that still reports when this
-    # one fails -- `D-456` again, one workflow further out. It buys no wall on this path:
-    # `validate` is predicted at 3154.43s serial against this lane's 1271.96s uncontended
-    # reading, so the workflow still finishes when `validate` does. Nobody waits on either;
-    # what the split changes is whether a failure can be named.
+    # Alone at `--jobs 1 --inner-jobs 4` it gets four, which is what `PACK_JOBS` hands
+    # `sqpack.workers.worker_count` and what the pool then asks for.
     #
-    # `--jobs 1 --inner-jobs 2`, typed as `deep-gate.yml` types it and for the argument
-    # written out there: one step leaves the outer pool nothing to schedule, and the lane's
-    # two corpus-scaled tests pool their own work through `PACK_JOBS` -- the atlas one is
-    # 691.19s serial against 348.15s at two workers -- so `--inner-jobs 1` would hand back
-    # about as much wall as the split buys. Four workers on four vcpus is what `exhaustive`
-    # does and is deliberately not done here: no reading of this lane exists at four.
+    # The identical deep-gate job provides three hosted proxy readings: 944s on run
+    # 34188003140, 861s on run 34189176373 and 949s on run 34190285360 -- spread 1.10x,
+    # geometric mean 917.09s. Two of the three are above the 900s cap the step used to run
+    # under, which is why `SCREEN_BUDGET_SECONDS` raises it to 1800s rather than leaving
+    # the split to do the work alone. There is also one local reading, 794.5s at four
+    # workers on a four-cpu development box over the same 318 records; the hosted runs sit
+    # 1.08x to 1.19x above it, so it is a development number and not the measurement to
+    # size this job from.
     if: "github.event_name != 'pull_request'"
     runs-on: ubuntu-latest
     defaults:
@@ -577,15 +587,10 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # Shallow is enough: the provenance step that needs full history is not in this
+        # selection. kpress is vendored at vendor/kpress and installed from that path, so
+        # the environment does not resolve without the submodule checked out.
         with:
-          # Full history, like `validate` and like the deep gate's own slow lane. The lane
-          # contains `test_full_retained_review_and_three_falsifying_controls`, and the
-          # review under it reads two historical commits through `git_content`, so a
-          # shallow checkout would fail it on a missing object rather than on the
-          # mathematics.
-          fetch-depth: 0
-          # kpress is vendored at vendor/kpress and installed from that path, so
-          # the environment does not resolve without the submodule checked out.
           submodules: true
 
       - name: Install uv and Python 3.14
@@ -600,11 +605,11 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      - name: Run the slow behavioural lane
+      - name: Run the single-square translation escape screen
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --only "slow behavioral tests"
-          --jobs 1 --inner-jobs 2
+          packing-validate --only "single-square translation escape screen"
+          --jobs 1 --inner-jobs 4
 
       - name: Preserve validation timings and partial logs
         if: always()

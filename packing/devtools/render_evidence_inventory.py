@@ -37,9 +37,8 @@ EVIDENCE = ROOT / "frontier" / "evidence.yaml"
 FRONTIER = ROOT / "frontier"
 OUTPUT = FRONTIER / "INVENTORY.md"
 
-#: Every block on a case record that can name evidence. Counting citations across all
-#: hundred is what turns "this record is load-bearing" from an impression into a number,
-#: and the numbers are not close: one record carries 88 cases and the next carries 2.
+#: Every bound or rigidity block that can name evidence. Counting citations across the
+#: full frontier measures how many case conclusions depend on each evidence record.
 EVIDENCE_BLOCKS = (
     "reported_upper_bound",
     "verified_upper_bound",
@@ -87,7 +86,7 @@ def ours(record: dict) -> bool:
 
 
 def dependents() -> Counter:
-    """How many of the hundred cases cite each evidence record, over every block."""
+    """Count cases citing each evidence record across bound and rigidity blocks."""
     counts: Counter = Counter()
     for path in sorted(FRONTIER.glob("n-*.md")):
         case = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
@@ -178,10 +177,10 @@ def render() -> str:
     lines += [
         "",
         (
-            "The `cases` column is how many of the hundred frontier records cite each "
+            "The `cases` column is how many frontier records cite each "
             "piece of evidence, and it is the reason to read this table rather than count "
             "records. Ranked below are the *formal* records only: a `reported` record "
-            "cited by ninety-eight cases is the catalogue everyone reports from and is "
+            "cited across the frontier may be a shared catalogue and is "
             "labelled as such, which is the register working rather than risk. The risk is "
             "a verified claim resting on an argument nobody has examined."
         ),
@@ -220,7 +219,7 @@ def render() -> str:
         "",
     ]
 
-    # Rank the FORMAL records only. A `reported` record cited by ninety-eight cases is the
+    # Rank the FORMAL records only. A `reported` record cited across the frontier is the
     # catalogue everyone reports from, and it is labelled reported -- that is not
     # concentrated risk, it is the register working. The risk is a *verified* claim resting
     # on an argument nobody has examined, so that is what this ranks.
@@ -233,8 +232,8 @@ def render() -> str:
         lines.append(f"| `{record['id']}` | {count} | {whose} | {review} |")
 
     # The narrative is about the most-cited record we did NOT produce. A verified record of
-    # our own being cited ninety-three times is the grid bound doing its job; a verified
-    # record from elsewhere being cited eighty-eight times is a dependency.
+    # our own cited across the frontier can be the grid bound doing its job; a verified
+    # record from elsewhere cited across the same frontier is an external dependency.
     borrowed = [pair for pair in ranked if not ours(pair[1])]
     top_count, top = borrowed[0] if borrowed else ranked[0]
     review = top.get("external_review")
@@ -263,7 +262,7 @@ def render() -> str:
         "",
         (
             f"The most-cited argument this repository did not produce is `{top['id']}`, "
-            f"carrying {top_count} of the hundred cases. {read_line}"
+            f"carrying {top_count} frontier cases. {read_line}"
         ),
         "",
         (

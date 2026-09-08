@@ -57,12 +57,12 @@ WHAT A RESULT MEANS, AND WHAT IT DOES NOT
 
 EXCLUSIONS
 
-`n = 68` and `n = 69` are excluded, and the exclusion is measured rather than asserted:
-their witnesses are UnitSquare renderings whose corners are not exact unit squares
-(edge lengths differ at ~1e-8), which is 22 orders of magnitude worse than every other
-record in the corpus.  Below that residual contacts stop registering, so nearly every
-square reports movable -- a witness-fidelity artifact, not a finding.  Tracked as
-think-ecqk.
+A witness is excluded when its measured square-shape residual exceeds the declared
+limit.  The retained screen records each exclusion and its residual; the current
+exclusions are `n = 68, 69, 103, 105, 110, 131`.  Below a witness's shape residual,
+contacts can stop registering and apparent motion can reflect witness fidelity rather
+than geometric freedom.  The original UnitSquare exclusions at `n = 68` and `n = 69`
+are tracked as think-ecqk.
 
 Usage:
     uv run --frozen python -m devtools.screen_translation_escape --update

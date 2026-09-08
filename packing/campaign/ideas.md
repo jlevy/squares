@@ -316,6 +316,49 @@ The agenda is prepared; none of the new instruments is declared ready.
 | 114 | Close a rank-nine released-contact domain | registered | [H-120](hypotheses/H-120-rank-nine-release-exclusion.md) | Prove a new continuous sublevel exclusion with all feature and local-chart seams retained. |
 | 115 | An axis-plus-one global minimizing representative | registered | [H-121](hypotheses/H-121-axis-plus-one-minimizer.md) | Establish an existential global reduction; restricted-family value proofs remain a separate obligation. |
 
+### MacIver Method Intake
+
+The
+[MacIver source review](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md)
+routes these methods to existing questions.
+The source and formal replay dependency `think-sske` precedes adoption of its geometric
+lemmas; the public Lean build is external evidence, and the full n17 computational proof
+has a separate artifact-recovery gap.
+No instrument readiness or target allocation changes here.
+
+- [H-111](hypotheses/H-111-resource-anchor-case-exclusion.md): conditional point losses
+  and the co-hit matching bound can inform complete resource-and-anchor cases.
+  Every geometric forcing clause and the case cover still need proof.
+- [H-118](hypotheses/H-118-capacity-versus-coupled-lp.md): the center-area lemma and
+  very-narrow strip law supply concrete candidate local cuts.
+  The review retains exact rational controls.
+  Acceptance still needs a natural target domain and an exact surviving witness for the
+  declared coupled LP on that same domain; stronger cuts than an incircle or rectangle
+  bound alone do not settle H-118.
+- [H-119](hypotheses/H-119-shared-anchor-correlation.md): the n17 paper’s
+  [exact translation support functions](https://github.com/DRMacIver/square-packing-research/blob/9e2cd597047e040a63b7dcd103e79962cfc2d781/papers/s17-lower-bound/paper.pdf)
+  suggest how to retain correlated translation domains.
+  This is a candidate technique after a common-anchor loss is diagnosed, not evidence of
+  the required uniform capture gap or the independent-minimum comparator’s limitation.
+
+## Stromquist’s Twenty-Six-Square Construction
+
+Stromquist’s suggestion (private communication, September 2026) prompted the
+[exact source review](../../docs/project/research/research-2026-09-07-stromquist-n26-verification.md).
+His historical packing is valid and superseded by Friedman’s current construction.
+The
+[directions review](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md)
+separates the useful next dependencies from the restricted deformation already excluded.
+
+| # | Idea | Status | Record | Crux |
+| --- | --- | --- | --- | --- |
+| 129 | Change contacts or split the central block in an n26 packing search | shaped | `think-z0fi` | The [specified family](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#first-released-contact-family) has nine translation/side variables, one common angle, and four released pair branches. Build the affine LP adapter and replay its controls before the proposed sample; driver readiness remains false. |
+| 130 | Recover Green’s n26–27 lower-bound proof or reconstruct its point cover | shaped | `think-0x08` | The survey reports approximately 5.3918. Recover the missing geometry and proof; [MacIver’s defect accounting](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md#defect-charging-and-a-co-hit-graph) suggests conditional loss clauses but supplies no n26 scaffold or theorem. |
+
+The coordinator renumbered these two source ideas from 119/120 to 129/130 while
+preparing PR120 for integration with PR116 and PR121. Their connected constraints work
+publishes ideas through 128; the source proposals and their owning beads are unchanged.
+
 ## Open questions
 
 Not claims, so they cannot be hypotheses.
@@ -385,6 +428,13 @@ No research has started under this plan.
 
 Killed without spending a round, with the reason.
 This section is why the campaign does not rediscover its own mistakes.
+
+- **Rotate or translate Friedman’s intact n26 central block while retaining the two
+  specified opposite corner-triplet separations.** The
+  [exact support inequality](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#a-closed-direction-rigid-central-block-rotation)
+  gives the current side as the minimum of that family, attained at 45 degrees.
+  This excludes only the declared separations and rigid block; idea 129 releases those
+  assumptions.
 
 - **`14 + 20 = 34` proves Trump is isostatic.** The verifier’s twenty is a count of
   boundary corner coordinates.

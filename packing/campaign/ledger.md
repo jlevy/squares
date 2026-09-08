@@ -117,6 +117,8 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-102](agent-sessions/session-102-angle-band-theorems-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 2 | think-ndqj | Under think-kbci the coordinator allocates experiment ids for Theorems A, B and C and the H-131 replay and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads this lane and decides whether the end band continues at grid 119 and 159 from k = 9 and whether the band toward 40.19° runs at grid 119. |
 | [session-103](agent-sessions/session-103-plateau-artefact-at-3-82.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-4uon | Under think-4uon the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate and dispositions H-133 in BC-303 (think-znzj). |
 | [session-104](agent-sessions/session-104-ownership-set-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 3 | think-qfog | Under think-kbci the coordinator integrates the lane branch, registers the document, attaches the harness rollup, allocates the experiment id for Theorem E.4 and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the independent replay with the Hausdorff-bound reader is the next session's first step. |
+| [session-105](agent-sessions/session-105-stromquist-n26-verification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-zi3g | Publish this review and verify hosted checks; retain think-mq0d (BC-264) as the selected research slice. think-z0fi implements and controls the specified n26 family, think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption. |
+| [session-106](agent-sessions/session-106-n26-source-consistency.md) | completed | contemporaneous | `factual-review` (correctness) | `pipeline-improvement` (correctness) | 5 | think-4v5w | Merge PR120 after the final record commit passes its affected and hosted checks, then close think-4v5w, think-4g6w and think-7tus. Further H125 work remains conditional on the landed PR116/BC-264 handoff, a fresh allocation and admission under think-mq0d; source-recovery and released-contact follow-ups remain open. |
 
 ### Workflow summary
 
@@ -125,13 +127,13 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 2 | 1 | 13 | 1 |
-| `factual-review` | 3 | 0 | 44 | 2 |
+| `factual-review` | 4 | 0 | 46 | 2 |
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 15 | 4 | 74 | 7 |
-| `pipeline-improvement` | 25 | 0 | 128 | 1 |
-| `documentation-pass` | 1 | 0 | 13 | 1 |
+| `pipeline-improvement` | 26 | 0 | 134 | 1 |
+| `documentation-pass` | 1 | 0 | 16 | 1 |
 | `review-planning-oversight` | 0 | 0 | 3 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 

@@ -12,9 +12,18 @@ PDFs, unaltered OCR, and checked reading aids.
 His correspondence, supplied by the project owner, prompted this review of what the
 memoranda establish, what they assert, and what this project has independently verified.
 
-## The Likely Small Revision
+## The Author’s Clarification and the Historical Corrections
 
-The strongest candidate is the date of the previous lower bound for eleven squares.
+In a subsequent note supplied by the project owner on September 7, Stromquist clarified
+that his intended small improvement was the twenty-six-square packing in Memo III. He
+also said that the comparison could be mistaken and that he had not checked his
+eighteen- or twenty-six-square packings against Friedman’s page.
+This supersedes the earlier inference in this review that he meant the eleven-square
+chronology. The
+[dedicated n=26 verification](research-2026-09-07-stromquist-n26-verification.md) checks
+the construction and the current catalogue independently.
+
+The chronology correction remains supported by the source.
 [Memo III](../../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf),
 dated November 15, 1984, states on printed page 10 that general packings require
 
@@ -27,7 +36,6 @@ restricted-orientation argument can be adapted; it does not supply that general 
 The journal presentation appeared in 2003. The chronology is therefore *stated in 1984,
 published in 2003*. The scan, rather than the damaged OCR, was checked for this formula.
 
-This is an inference about Stromquist’s hint, not a confirmation of his intent.
 The long research report already acknowledged the 1984 assertion, but the README and
 explainer’s introductory chronology did not.
 The project owner identified the current [explainer](https://jlevy.github.io/squares/)
@@ -80,11 +88,18 @@ treating a source-method correction as a new proof.
 
 Memo III, pp. 2–5, labels the eighteen-square construction `(7 + sqrt(7))/2` new; the
 current source register credits Pertti Hämäläinen in 1980 for the same value and
-arrangement. Retain that priority and record the historical discrepancy pending an
-author’s clarification.
-The memo’s twenty-six-square construction, approximately `5.650629`, is larger than
-Friedman’s 1997 `(7 + 3sqrt(2))/2`, approximately `5.621320344`. It belongs in the
-historical archive and does not replace the current record.
+arrangement. The
+[subsequent source audit](research-2026-09-07-stromquist-n26-verification.md) resolves
+this as independent rediscovery: Gardner’s later account and Ellsworth’s catalogue
+metadata acknowledge Stromquist’s 1984 construction while preserving Hämäläinen’s
+earlier priority.
+The memo’s twenty-six-square construction, approximately `5.650629`, is
+larger than Friedman’s 1997 `(7 + 3sqrt(2))/2`, approximately `5.621320344`. Ellsworth’s
+[historical catalogue](https://kingbird.myphotos.cc/packing/squares_in_squares__compared.html)
+already credits the cubic-root construction to Stromquist in 1984 and lists the later
+Friedman improvement alongside it.
+The [follow-up verification](research-2026-09-07-stromquist-n26-verification.md)
+addresses the author’s clarification; the current upper bound remains unchanged.
 The current attributions are supported by
 [Friedman’s survey, Figures 7 and 9](https://erich-friedman.github.io/papers/squares/squares.html).
 
@@ -219,11 +234,12 @@ marks, the center-block implication `EH => EHJK`, and the final eight-point cove
 These remaining dependencies are tracked as `think-0krc`. They lead toward a validated
 helper component for later pairwise or conditional weighted searches.
 
-Several matters still need Stromquist’s clarification: which small revision he intended;
-the intern’s name and the original no-pure-dots argument; whether the unrestricted
-eleven-square adaptation was written down before 2003; and whether further memos or
-proofs of the briefly asserted small cases survive.
-The eighteen-square construction’s discovery history is another question for him.
+Stromquist’s later note resolves which small revision he intended, and the
+[n26 review](research-2026-09-07-stromquist-n26-verification.md) also resolves the
+eighteen-square construction’s independent-rediscovery attribution.
+The remaining historical questions are the intern’s name and the original no-pure-dots
+argument; whether the unrestricted eleven-square adaptation was written down before
+2003; and whether further memos or proofs of the briefly asserted small cases survive.
 These historical questions are not premises of the results above.
 
 Memo III, p. 12, proposes a fourth memorandum on asymptotics or computerized searches
