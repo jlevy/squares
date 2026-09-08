@@ -2342,8 +2342,11 @@ def test_the_longest_steps_are_submitted_first() -> None:
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
-    assert order[3] == "exact verification"
-    assert order[4:] == [
+    # The first unbudgeted step, promoted ahead of declaration order by `start_early`.
+    # Index 4 and not 3: the four budgeted steps above occupy 0..3, and this boundary
+    # moves whenever a step gains or loses a budget.
+    assert order[4] == "exact verification"
+    assert order[5:] == [
         step.name
         for step in validate.STEPS
         if step.budget_seconds is None and step.name != "exact verification"
