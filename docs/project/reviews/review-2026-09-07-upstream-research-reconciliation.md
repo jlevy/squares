@@ -1,5 +1,237 @@
 # Research Strategy and Upstream Reconciliation, September 7
 
+## Reassessment: Organize Around a Better n11 Bound
+
+The September 8, 00:30 UTC reassessment is a W10 strategy discussion under `think-7wqt`,
+prompted by the concern that small completed tasks have displaced the central
+mathematical questions.
+Three independent assessments examined global geometry, kernel strength and the
+cost/results record.
+This section revises the portfolio recommendation; the BC283 reconciliation below
+remains its dated historical snapshot.
+These proposals allocate no new scientific IDs, renew no expired protocol and transfer
+no running agent’s ownership.
+
+The concern is supported by the results.
+T018/T022 improved the unrestricted lower bound to $3.810025723614703\ldots$, against
+Trump’s upper bound $3.877083590022814\ldots$. Subsequent work has produced real
+mathematics: continuous conditional exclusions, counterexamples to inadequate geometric
+models, and a broad cubic-feature obstruction.
+It has not improved that bracket.
+BC282 decides no target fiber, and PR116’s exp129 made no scientific invocation.
+A completed instrument or restricted lemma is useful preparation; its larger
+mathematical obligation remains.
+
+The earlier recommendation to prefer a cheap family rejection was too narrow as a
+portfolio strategy.
+A discriminator deserves attention when its answer changes a campaign
+capable of producing a global result.
+Repeatedly preparing the next small discriminator can consume the campaign without
+addressing that result.
+
+The cost receipts show substantial attention: PR110’s session092 records 19.1 recursive
+agent-hours and session098 records 4.3; PR116’s session097 snapshot records 5.9. These
+are incomplete receipts with declared attribution, not a division of mathematical and
+administrative effort.
+They establish no percentage wasted.
+PR119’s font work has a separate publication product and should not be charged as an
+unsuccessful n11 proof.
+See the
+[092 receipt](../../../packing/campaign/resource-usage/codex-task-tree-session-092.yaml),
+[098 receipt](../../../packing/campaign/resource-usage/codex-task-tree-session-098.yaml)
+and [PR116](https://github.com/jlevy/squares/pull/116).
+
+### The Missing Global Argument
+
+The primary proposed campaign should seek a complete no-fit proof at **3.84**, the
+existing X017 target.
+Success would raise the lower bound substantially.
+It is an ambition, with no established whole-problem runtime or prediction of overnight
+success.
+An intermediate certified improvement above the present lower bound also counts;
+the target should not make a smaller genuine theorem invisible.
+
+There are two ways the retained geometry could establish such a result:
+
+- A complete domain cover assigns every hypothetical eleven-square packing to an
+  excluded case. The
+  [X017 anchor/resource pilot](../../../packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
+  already proposes this.
+  Translating a packing down until one square touches the bottom gives a global starting
+  point. The anchor’s position and angle must remain variable; its full residual domain
+  and every boundary remain in the cover.
+  The 4+7 capacity theorem can close cases satisfying its guards, while the complement
+  stays explicit. Coupled translation bounds and exact contact arguments are alternative
+  ways to close surviving cases.
+  A finite sample of anchors cannot supply the coverage theorem.
+- A global structural theorem reduces the problem to tractable families.
+  The
+  [H121 proposal](../../../packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md)
+  says some minimizer has orientations $\{0,\theta\}$ modulo square symmetry.
+  Even that would require handling every multiplicity, beyond the six-plus-five Trump
+  family. A broader low-angle/dispersed-angle dichotomy is another possible route, but
+  both branches would need proofs.
+  The missing mechanism is a finite feasible motion through changing contacts, or
+  another global representative argument.
+  Sparse stress and an infinitesimal flex do not establish it.
+
+Prefer the complete-cover route as the starting architecture because it exposes the
+unhandled domain without assuming a normal form.
+Give structural reasoning sustained attention where it could collapse that domain.
+The first investment should be in a universal geometric implication that reduces the
+cover, not a brute-force subdivision of all 33 pose coordinates.
+Further Trump-specific interval work should have a stated consumer in this argument.
+Completing an attractive restricted family alone would leave the same global gap.
+
+The disk counterexample suggests where stronger geometry must retain information: each
+square has one angle that must satisfy its walls and every neighbor simultaneously.
+Allowing a different favorable orientation for each constraint creates arrangements that
+actual squares cannot realize.
+This is a useful design clue, not a theorem that one particular encoding will close the
+problem.
+
+### Make the Kernel Campaign Test Its Method
+
+The kernel route has a global end product of its own: at side 3.84, an exact kernel with
+$K-1\succeq0$, compatible-pair values at most zero and diagonal $B<11$. The packing
+inequality below then excludes eleven squares.
+H125 currently offers only a necessary finite test of one feature family; passing its
+relaxation cannot produce that positive result.
+Its owner’s already-built test remains reasonable marginal work under a fresh admission,
+but should not automatically lead to a sequence of larger polynomial families.
+
+An elementary diagnostic makes the representation issue precise.
+For axis-aligned squares at $L=96/25$, each center coordinate lies in an interval of
+length $71/25$. Partition it into three disjoint intervals of span $71/75<1$, using
+half-open endpoints and assigning the final endpoint to the last interval.
+The resulting nine center cells give a color $c(P)$ to each axis-aligned pose.
+Two poses with the same color overlap.
+Define
+
+$$
+K(P,Q)=9\,\mathbf{1}_{c(P)=c(Q)}.
+$$
+
+Its diagonal is nine, and compatible pairs have value zero.
+For any finite real coefficients, let $S_c$ be their sum in cell $c$. Then
+$9\sum_c S_c^2-(\sum_c S_c)^2\ge0$ by Cauchy–Schwarz, proving $K-1\succeq0$. The stated
+kernel theorem requires no continuity, so this discontinuous kernel is valid on the
+entire axis-only domain.
+This argument was checked independently during this strategy review; it is a diagnostic
+derivation, not a new unrestricted packing bound.
+
+Consequently an axis-only obstruction for H125 would identify a feature restriction: the
+unrestricted kernel method already handles that whole domain with diagonal nine.
+No unrestricted finite-matrix relaxation on that axis pool can force a diagonal of
+eleven. Localized occupancy features can express geometry that the failed low-degree
+polynomials miss. Extending this idea to independently rotated squares is the hard,
+unresolved step.
+
+A proposed broader discriminator uses an exact pool containing **rotated poses** and
+allows an unrestricted matrix $K$, with $K-J\succeq0$, certified compatible-pair entries
+at most zero and diagonal at most $b$. Every global kernel restricts to this matrix
+problem. An exact certificate forcing $b\ge11$ would obstruct the entire stated kernel
+method at that side, independently of polynomial features.
+The source and solver for this proposal have not been built or run.
+Compatibility must be exact; unknown pairs can safely be omitted, while an incorrectly
+added compatible pair could create a false obstruction.
+Numerical infeasibility is insufficient.
+
+A concrete proposed certificate would give nonnegative $\alpha_i$ and edge weights
+$\beta_{ij}$ with $\sum_i\alpha_i=1$ and
+$M=\operatorname{diag}(\alpha)+\tfrac12\sum_{\{i,j\}}\beta_{ij}(e_ie_j^T+e_je_i^T)\succeq0$.
+The finite constraints imply
+$b\ge\langle M,K\rangle\ge\langle M,J\rangle=1+\sum\beta_{ij}$. Thus an exact
+certificate with $\sum\beta_{ij}\ge10$ would settle the method obstruction.
+No such certificate is known from this review.
+The unrestricted problem has more freedom than H125 and may be harder to refute, despite
+its stronger possible conclusion.
+
+If a useful finite matrix survives, it supplies candidate structure rather than a
+continuum theorem. Its wall/contact dependence should guide the representation, and
+candidate construction must be developed together with the continuous pair proof,
+including touching configurations.
+This distinguishes a method-wide limitation, an interpretable feature limitation and a
+credible positive candidate.
+Any of those would inform a large campaign more than instrument completion alone.
+
+### A Constructive Challenge in Parallel
+
+The second proposed scientific front should seek an independently verified packing of
+eleven squares below $3.877083590022814\ldots$. This directly tests whether
+concentrating on Trump’s family has concealed a different construction.
+Use the existing search and polishing tools with coordinated angle splitting and contact
+release, and include an unmerged-angle search arm: automatic angle merging can suppress
+the departures being investigated.
+Unrestricted starts must accompany perturbations of Trump.
+
+Its end product is a rigorous better upper bound.
+Useful intermediate evidence is a distinct competitive contact family or an exact
+counterexample to a stated universal structural implication.
+Search failure proves no lower bound.
+A high-angle feasible packing alone does not refute H121’s existential claim about some
+minimizer. Numerical improvements need independent containment and nonoverlap
+verification before promotion.
+The
+[X018 structural proposal](../../../packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md)
+already supports this adversarial role; blind additional restarts without a changed
+search mechanism are not the recommendation.
+
+### Proposed Eight-Hour Focus
+
+Use two scientific fronts: a global lower-bound campaign and a constructive challenge.
+Within the lower-bound campaign, geometry and kernels compete for continued attention on
+their connection to the full theorem.
+They should not grow into independent queues of unconnected prerequisites.
+Retain one coordinator and three sustained assignments: global geometry, kernel
+strength, and construction search.
+Match the highest available reasoning effort to proof architecture and adversarial
+mathematical review; use ordinary runner effort for executing and recording frozen
+computations.
+
+| Checkpoint | Evidence to preserve and decision |
+| --- | --- |
+| 0–2 hours | State the complete root domain and precise missing structural implication; assess the kernel representation against rotated geometry; begin valid construction search through existing instruments. Preserve actual mathematical deductions and target invocations, including refusals. Choose the main lower-bound mechanism from that evidence |
+| 2–5 hours | Concentrate on that mechanism. Seek closed cases with their full remainder accounted for, a global kernel candidate with a credible boundary proof, or an exact broad obstruction. Continue independent construction search. At hour five, retain a route because its mathematical evidence changed, not because setup consumed time |
+| 5–7 hours | Pursue the retained proof or construction and independently challenge its crucial step. If the global target is out of reach, finish a well-scoped structural theorem, method obstruction or exact counterexample that changes the next campaign; leave unresolved domains explicit |
+| 7–8 hours | Verify candidate claims, preserve the research record and commit the checkpoint. State any improved bound, the strongest established theorem, the remaining global gap and the next consequential decision |
+
+These are proposed checkpoint intervals, not measured costs or executable allocations.
+The proof campaign may fail to reach a new bound in eight hours.
+Its intermediate work should still answer why a whole route can advance or cannot,
+instead of ending with another untested instrument.
+Keep short recoverable internal slices without turning each into a new agenda.
+Reuse the existing review, exploration files and record tools.
+
+The immediate coordinating entry is W10 codification of this revised proposal, if
+adopted, against the current owners and source-bound admissions.
+H118/H120 target work stays parked; the source-helper lane continues under its own
+owner. The new proposal does not restart them.
+PR116’s full checkpoint may run asynchronously under its current contract; it is not an
+extra first-invocation guard.
+Required scientific controls and independent acceptance remain mandatory.
+Batch documentation and publication work at checkpoints rather than treating every
+unchanged CI wait as a new research block.
+
+### Branch Comparison at This Reassessment
+
+Main is now `28696526`, after PR111 merged at 00:14 UTC on September 8. Our published
+head `da4e67cb` and kernel head `91b77ab1` share `373beb36` (PR114). At this snapshot
+our branch has 37 commits absent from the kernel branch; the kernel branch has 10 absent
+from ours. Both lack the 35 commits newly on main.
+GitHub reports both PR110 and PR116 as conflicting with main, despite their previous
+required CI passes. Fresh integration and combined-tree validation are needed before
+either can land.
+
+PR111 expands the atlas to 324 and changes validation selection, budgets and workflows;
+the earlier 100-case timing evidence does not describe that workload.
+It also lands the atlas’s corrected session099 allocation.
+The current distinct session identities are kernel097, our residual098 and atlas099. The
+earlier atlas collision described below is historical, not still unresolved.
+No branch integration or scientific run was performed in this reassessment.
+
+## Earlier BC283 Reconciliation
+
 This review reconciles PR110 at `ecd4a035` with main through `373beb36`, including
 PR112, PR115 and PR114. PR114 landed during the final publication checks and was merged
 cleanly; the earlier checkpoint used `a5e9dbfd`. The GitHub survey covers PRs closed
