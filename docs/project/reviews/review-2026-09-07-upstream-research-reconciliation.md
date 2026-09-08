@@ -183,8 +183,10 @@ Use two scientific fronts: a global lower-bound campaign and a constructive chal
 Within the lower-bound campaign, geometry and kernels compete for continued attention on
 their connection to the full theorem.
 They should not grow into independent queues of unconnected prerequisites.
-Retain one coordinator and three sustained assignments: global geometry, kernel
-strength, and construction search.
+Start with one coordinator and three assignments: global geometry, kernel strength, and
+construction search.
+At the hour-two selection, move the nonselected lower-bound assignment to independent
+challenge and verification of the selected mechanism.
 Match the highest available reasoning effort to proof architecture and adversarial
 mathematical review; use ordinary runner effort for executing and recording frozen
 computations.
@@ -203,8 +205,9 @@ instead of ending with another untested instrument.
 Keep short recoverable internal slices without turning each into a new agenda.
 Reuse the existing review, exploration files and record tools.
 
-The immediate coordinating entry is W10 codification of this revised proposal, if
-adopted, against the current owners and source-bound admissions.
+This section codifies the revised recommendation.
+Adoption would proceed to a fresh execution allocation through the current owners and
+source-bound admissions; this review creates no such allocation.
 H118/H120 target work stays parked; the source-helper lane continues under its own
 owner. The new proposal does not restart them.
 PR116’s full checkpoint may run asynchronously under its current contract; it is not an
@@ -215,13 +218,15 @@ unchanged CI wait as a new research block.
 
 ### Branch Comparison at This Reassessment
 
-Main is now `28696526`, after PR111 merged at 00:14 UTC on September 8. Our published
-head `da4e67cb` and kernel head `91b77ab1` share `373beb36` (PR114). At this snapshot
-our branch has 37 commits absent from the kernel branch; the kernel branch has 10 absent
-from ours. Both lack the 35 commits newly on main.
+Main is now `28696526`, after PR111 merged at 00:14 UTC on September 8. Our compared
+research checkpoint `da4e67cb` and the reviewed kernel checkpoint `91b77ab1` share
+`373beb36` (PR114). Between these frozen checkpoints, our branch has 37 commits absent
+from the kernel branch; the kernel branch has 10 absent from ours.
+Both lack the 35 commits newly on main.
 GitHub reports both PR110 and PR116 as conflicting with main, despite their previous
 required CI passes. Fresh integration and combined-tree validation are needed before
-either can land.
+either can land. PR116 advanced to `2cb9c9ba` during review; the counts and prior CI
+evidence above remain attached to `91b77ab1`, not that newer head.
 
 PR111 expands the atlas to 324 and changes validation selection, budgets and workflows;
 the earlier 100-case timing evidence does not describe that workload.
