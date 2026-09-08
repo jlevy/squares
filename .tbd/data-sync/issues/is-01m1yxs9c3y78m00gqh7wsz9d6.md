@@ -5,7 +5,7 @@ title: "[epic] Explainer fonts: every glyph from a shipped face on web and PDF"
 kind: epic
 status: open
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels:
   - explainer
@@ -24,6 +24,8 @@ child_order_hints:
   - is-01m20v1mq20k9d9p1wg9s5qdsq
   - is-01m21fpg092b0z9ggdwk57hdpa
 created_at: 2026-09-07T21:53:27.418Z
-updated_at: 2026-09-08T21:44:59.143Z
+updated_at: 2026-09-08T22:00:23.117Z
 ---
-Rule (owner, 2026-09-07): the explainer resolves every text run to a face the page ships (PT Serif, Source Sans 3, the KaTeX faces and the KPress Math Text composite, and kpress's mono face once it ships), on screen and in the PDF; the one exception is the 100-best atlas figure, whose Helvetica is baked in by its own pipeline (build_known_best_atlas.py) and stays. Measured 2026-09-07 on the 946 KB PDF: sans as 345 KB of Type3 paths (think-988s), Menlo 56 KB for 134 characters of inline code on pages 6, 14, 15, Georgia 16 KB for 48 list bullets on the same pages, Helvetica 54 KB on page 3 (the atlas, accepted). Web page 1,418 KB with 636 KB of fonts, of which 216 KB is the composite's duplicate copies. Children: think-988s, the provenance guard, the KaTeX subsetting, and adopting kpress's mono, marker, and quote fixes.
+Rule (owner, 2026-09-07): the explainer resolves every text run to a face the page ships (PT Serif, Source Sans 3, the KaTeX faces and the KPress Math Text composite, and kpress's mono face once it ships), on screen and in the PDF; the one exception is the 100-best atlas figure, whose Helvetica is baked in by its own pipeline (build_known_best_atlas.py) and stays. Measured 2026-09-07 on the 946 KB PDF: sans as 345 KB of Type3 paths (think-988s), Menlo 5.6 KB for 134 characters of inline code on pages 6, 14, 15 (the 56 KB first recorded here was a slipped decimal; PR #134 measured the replacement subset at 3,600 B, and the export's 2,029 B saving puts Menlo's at 5,629 B), Georgia 16 KB for 48 list bullets on the same pages, Helvetica 54 KB on page 3 (the atlas, accepted). Web page 1,418 KB with 636 KB of fonts, of which 216 KB is the composite's duplicate copies. Children: think-988s, the provenance guard, the KaTeX subsetting, and adopting kpress's mono, marker, and quote fixes.
+
+The atlas figure's exception is tracked as think-czt4 since 2026-09-08, and ATLAS_FACES holds the two faces the figure has been measured drawing with rather than its whole fallback chain, so a third face in its labels is a finding.
