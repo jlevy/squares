@@ -341,13 +341,14 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-qfog` to begin the ownership
-continuation after merge publication.
-The corrected checkpoint is certified by its retained raw full log and structured
-component receipts. Agenda 030’s first wave ran as sessions 100 to 104 and its second as
-sessions 107 to 109; BC-303 replayed the strongest claims independently and funded the
-segment-mark cover toward an ownership argument as the next sustained block, with the
-`B = 1` depth polisher as the efficiency block.
+For the next supervised exact-research goal, select BC-305, `think-qfog`, for the
+ownership continuation in Agenda 031. This work is now in progress on a separate branch
+stacked on PR 127, with a separate usage interval from 23:23:55 UTC. The corrected
+checkpoint is certified by its retained raw full log and structured component receipts.
+Agenda 030’s first wave ran as sessions 100 to 104 and its second as sessions 107 to
+109; BC-303 replayed the strongest claims independently and funded the segment-mark
+cover toward an ownership argument as the next sustained block, with the `B = 1` depth
+polisher as the efficiency block.
 BC-304 has dispositioned every cell and carried the unfinished complements of BC-292 and
 BC-299 forward. The pairwise compatibility argument continues from the independently
 replayed ten-segment theorem; the rounded-cover helper is retracted.

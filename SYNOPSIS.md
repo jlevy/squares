@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives seventeen confirmed hypotheses, thirteen refuted
-hypotheses, one open hypothesis, twenty-five open questions, and forty-four blocked
+hypotheses, two open hypotheses, twenty-five open questions, and forty-four blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -422,6 +422,16 @@ case or experiment separately.
 | [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
 | [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | [Change-Scoped Exhaustive Validation](docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md) | dated review record | record | retained | — |
+| [Adjacent Corner Pairs Can Each Have Two Owners](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/adjacent-corner-two-owner-counterexample.md) | research synthesis | record | retained | — |
+| [BC-305 Ownership Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/bc-305-ownership-results.md) | research synthesis | record | retained | — |
+| [Fixed Outer Pairs Exclude Two Distinct Bottom Corner Owners](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/fixed-outer-pairs-bottom-corner-incompatibility.md) | research synthesis | record | retained | — |
+| [Independent Review of the New Outer-Segment Constraints](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/new-outer-constraints-review.md) | research synthesis | record | retained | — |
+| [Outer-Middle Segment Capacity Is Two](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-middle-capacity-two-proof.md) | research synthesis | record | retained | — |
+| [Outer Pair and Two Corner Owners Coexist](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-corner-counterexample.md) | research synthesis | record | retained | — |
+| [Exact Outer-Pair Exclusions for a Broad Same-Sign Angle Band](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-equal-angle-and-cell-exclusions.md) | research synthesis | record | retained | — |
+| [Review of the Fixed-Angle Outer-Pair Screen](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-screen-contract-review.md) | research synthesis | record | retained | — |
+| [The Remaining Eight Segments Have Sharp Capacity Four](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/remaining-eight-segment-capacity-four.md) | research synthesis | record | retained | — |
+| [Shared Segments Restrict Separating Supports](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/shared-segment-support-bounds.md) | research synthesis | record | retained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -631,18 +641,30 @@ not certify an upper bound.
 The depth polisher will start from that retained control; its missing scratch state is
 not a runnable handoff.
 
-**Selected next entry:** `think-qfog` continues BC-302 at the missing pairwise
-compatibility step after merge publication.
-BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
-complements of BC-292 and BC-299 forward.
+**Selected next entry:** `think-qfog` is carrying BC-302 into BC-305 on
+`codex/n11-ownership-continuation`, stacked on PR 127 while that handoff remains open.
+[Agenda 031](packing/campaign/agendas/agenda-031-ownership-and-pricing.md) and
+[session 111](packing/campaign/agent-sessions/session-111-ownership-and-pricing.md)
+retain the reviewed local results and fund one prospective full-support pricing test.
+[X-022](packing/campaign/explorations/X-022-segment-ownership-continuation.md) gives
+sharp capacities of two owners on the outer middle-row segments and four on the other
+eight, necessary support and signed-angle restrictions, two local counterexamples, and
+one fixed-pattern exclusion.
+None composes into a global exclusion at `96/25`. The integrated tools pass 60 controls;
+both counterexample readers and six deliberately broken examples replay as expected.
+H-135 remains untested pending its published instrument and prospective exp-134
+allocation. BC-304 has dispositioned every first- and second-wave cell and carries the
+unfinished complements of BC-292 and BC-299 forward.
 The corrected checkpoint is certified by the retained raw full log and structured
 component receipts composing all 69 steps; the earlier `ef8a2e72` full invocation
-remains failed. The owner authorized correcting and validating the stack, merging PRs
-116, 121 and 127 in order, then continuing on a new branch.
-The [handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
+remains failed. PRs 116 and 121 have merged; the owner selected a separate continuation
+PR stacked on PR 127, with usage tallied across the non-overlapping cutoff at
+2026-09-08T23:23:55Z. Preparation before that cutoff stays in session 110 even when its
+artifacts first appear in the continuation PR. The
+[handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
 records the corrections and the funded continuation.
 [Session 110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md)
-records the correction checkpoint and its remaining certification work.
+records the certified correction checkpoint and the handoff-review usage interval.
 
 **Agenda 030’s selection, made.**
 [Session-107](packing/campaign/agent-sessions/session-107-first-wave-selection.md)
@@ -3142,11 +3164,12 @@ round that names the hypothesis, control roles included.
 | [H-127](packing/campaign/hypotheses/H-127-corner-class-surplus-at-q.md) | blocked | Pricing the four corner blockers’ cores at 96/25 gives a covering surplus; the region-class row generator is not built | 0 | — |
 | [H-128](packing/campaign/hypotheses/H-128-corner-skeleton-ownership.md) | unresolved | A valid measure at 96/25 with T-018’s corner atoms at weight 3/20 and mass below 11.15 exists; the unsuccessful finite support does not refute this claim | 1 | 63.5m wall |
 | [H-129](packing/campaign/hypotheses/H-129-unit-shrink-fractional-value-near-u.md) | blocked | The unit-square fractional value at 3.87 stays below eleven; a lower family at least eleven obstructs the specified one-body certificate, while a smaller family is inconclusive | 0 | — |
-| [H-130](packing/campaign/hypotheses/H-130-robust-end-band-theorem-at-q.md) | confirmed | A robust band of 3° around 0° and 45° is excluded at 96/25; decided exactly in exp-130, out to [0°, 10.3875°] ∪ [43.0737°, 45°] on grid 119 | 1 | 37.2m wall |
-| [H-131](packing/campaign/hypotheses/H-131-near-axis-counts-at-q.md) | confirmed | At most nine squares within 6.45° of the axes and ten within 10.39° at 96/25; replayed exactly under exp-131 | 1 | 31.2m wall |
+| [H-130](packing/campaign/hypotheses/H-130-robust-end-band-theorem-at-q.md) | confirmed | The exact end-cell union of Theorem C is excluded at 96/25; grid-119 degree boundaries are approximately 10.387466° and 43.0737° | 1 | 37.2m wall |
+| [H-131](packing/campaign/hypotheses/H-131-near-axis-counts-at-q.md) | confirmed | The registered exact cell counts replay at 96/25 and U; at q, cells 0–24 contain at most nine squares and cells 0–39 at most ten | 1 | 31.2m wall |
 | [H-132](packing/campaign/hypotheses/H-132-rectangle-no-fit-at-q.md) | blocked | Eleven squares do not fit in 3.84 × 3.81; the rectangle centre domain is not built | 0 | — |
 | [H-133](packing/campaign/hypotheses/H-133-plateau-site-artefact.md) | open question | Is the exactly-eleven plateau at 191/50 a site artefact of Trump-shaped cores in site-free strips? | 0 | — |
 | [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
+| [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | open | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 0 | Unspent |
 
 ### Confirmed
 
@@ -3387,13 +3410,14 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-097.yaml` | session-097 | 973 | 7.51 h | 3.69 h | 4.3 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
-| `codex-task-tree-session-110.yaml` | session-110 | 940 | 6.73 h | 2.58 h | 2.58 h | yes |
+| `codex-task-tree-session-110.yaml` | session-110 | 1,169 | 7.88 h | 2.96 h | 2.96 h | yes |
+| `codex-task-tree-session-111.yaml` | session-111 | 60 | 0.43 h | 0.21 h | 0.21 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 63 |
+| measured | 64 |
 | unmeasured | 45 |
-| **total** | **108** |
+| **total** | **109** |
 
 <!-- END GENERATED: session-close-report -->
 

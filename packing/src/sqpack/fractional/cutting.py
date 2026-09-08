@@ -162,15 +162,19 @@ def support_entries(
     duals: np.ndarray,
     half_tangents: tuple[Fraction, ...],
     *,
-    support_cap: int,
+    support_cap: int | None,
     weight_denominator: int,
 ) -> tuple[SupportEntry, ...]:
-    """The heaviest ``support_cap`` rows of the dual, with exact weights on a
-    common denominator."""
+    """The selected dual rows with exact weights on a common denominator.
+
+    ``None`` retains every positive row; integer caps preserve the cutting
+    loop's historical bounded-support behavior.
+    """
 
     order = [index for index in np.argsort(-duals) if duals[index] > 1e-9]
+    selected = order if support_cap is None else order[:support_cap]
     entries: list[SupportEntry] = []
-    for index in order[:support_cap]:
+    for index in selected:
         # One common denominator for every weight, so that a depth -- a sum of
         # weights -- stays a small rational instead of an lcm of many.
         weight = Fraction(round(float(duals[index]) * weight_denominator), weight_denominator)
