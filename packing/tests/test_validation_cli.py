@@ -32,7 +32,7 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 }
 
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
-"""The gate's own workflow, read by the test that keeps its two post-merge jobs a
+"""The gate's own workflow, read by the test that keeps its post-merge jobs a
 partition of `STEPS`. Repository-relative from `packing/tests/`, so two levels up."""
 
 
@@ -731,7 +731,23 @@ def test_the_quick_lane_worker_count_follows_the_machine_and_is_never_zero(
 def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """The slow lane asks for the workers `_pytest_workers` sizes from this run's `--jobs`.
+
+    Asserted as the literal `-n 4` with `_pytest_workers` pinned to four, exactly as
+    `test_fast_behavioral_step_excludes_exhaustive_exact_tests` pins it for the quick lane,
+    because the pin is what makes the assertion mean anything. This test used to build its
+    expected tuple from `*validate._xdist_distribution(1)` -- the helper the code under
+    test calls -- and so asserted nothing on any host where that helper answers `()`: one
+    cpu, or every cpu already claimed by `--jobs`. A `_slow_tests` with its workers deleted
+    passed it on a one-cpu view of this box, and that is `D-481` exactly: the two lanes
+    split, and only one of them given workers.
+
+    The call is recorded too, because the count has to be sized from this run's `--jobs`
+    and not from a constant: the lane is one of the `jobs`, and `cpus - jobs + 1` is what
+    it is owed beside whatever else the runner is doing.
+    """
     observed: tuple[str, ...] | None = None
+    sized_for: list[int] = []
 
     def capture(context: validate.Context, command: tuple[str, ...], **_kwargs: object) -> str:
         del context
@@ -739,21 +755,23 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         observed = command
         return "==== slowest durations ====\n(0 durations < 0.005s hidden.)"
 
+    def four_workers(jobs: int) -> int:
+        sized_for.append(jobs)
+        return 4
+
     monkeypatch.setattr(validate, "_run", capture)
+    monkeypatch.setattr(validate, "_pytest_workers", four_workers)
     context = validate.Context(
         deep=False,
         strict=False,
-        jobs=1,
+        jobs=2,
         inner_jobs=1,
         environment=os.environ.copy(),
     )
 
     validate._slow_tests(context)
 
-    # `_xdist_distribution` rather than a literal `-n`, because the count is the host's
-    # and this test runs on hosts of several sizes. That it is the *same* helper the quick
-    # lane calls is the assertion that matters: `D-481` is what happens when the two lanes
-    # are split and only one of them is given workers.
+    assert sized_for == [2]
     assert observed == (
         sys.executable,
         "-m",
@@ -762,7 +780,8 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         "tests",
         "-m",
         "slow and not exhaustive_exact",
-        *validate._xdist_distribution(1),
+        "-n",
+        "4",
         "--durations=0",
         "--durations-min=0",
     )
@@ -1576,20 +1595,26 @@ def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
     The fourth arrived on 2026-09-08 with `D-481`, and the paragraph above said a fourth
     would mean the shared cap is wrong. That warning was written when every budgeted step
     shared a runner with fifty-seven short ones, and it is right about that case. The
-    escape screen is not that case, and the difference is worth being precise about
-    rather than waving through: `--only` puts it alone on its own post-merge job, so it
-    is not holding an exception carved out of a guard the short steps depend on. There
-    are no short steps beside it. Its budget is the *only* bound on that job, because a
-    single-step `--only` selection reports no tier and so has no `gate-budgets.yaml`
-    ceiling behind it either.
+    escape screen earned its budget elsewhere: `--only` puts it alone on its own
+    post-merge job, where a single-step selection reports no tier and has no
+    `gate-budgets.yaml` ceiling behind it, so on that job this number is the whole guard.
+    But a budget is a property of the step and not of the job. `_execute_step_result`
+    raises the cap for this step in every run whose cap nobody set by hand, through
+    `--timeout-seconds` or its environment variable -- and that includes the full gate,
+    `packing-validate` with no flags, 69 steps, the one AGENTS.md sends every agent
+    through at a merge checkpoint. There the screen sits beside 68 short steps, and a hung
+    screen takes 1800s to die instead of 900s, under the `full` tier's 3600s ceiling. That
+    is what the fourth budget costs, and it is not nothing: a hang detector loosened by
+    900s in the run with the most steps in it. It is paid only when the screen hangs, and
+    it moves no other step's cap.
 
     So the set is two rules rather than one, and the exhaustive tier belongs to the
     second as much as the screen does. A step in the shared job earns a budget by running
-    a whole suite, where a cap wide enough for it would stop guarding the other
-    fifty-seven. A step that owns a job carries one because nothing else does. Raising
-    the shared cap would answer neither: it would loosen the guard in the shared job,
-    which is the trade this test exists to refuse, and it would not bound the solo jobs
-    at all.
+    a whole suite, where a cap wide enough for it would stop guarding the short steps
+    beside it. A step that owns a job carries one because nothing else bounds that job --
+    and carries it into every other run too, which is the cost priced above. Raising the
+    shared cap would answer neither: it would loosen the guard in the shared job, which is
+    the trade this test exists to refuse, and it would not bound the solo jobs at all.
 
     Recorded honestly: the second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
@@ -1601,7 +1626,8 @@ def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
         # Whole suites in the shared job.
         "negative controls": 1800,
         "slow behavioral tests": 1800,
-        # Alone on a post-merge job, where this number is the whole guard.
+        # Each alone on a post-merge job, where this number is the whole guard -- and
+        # the step's wherever else it runs, the full gate included.
         "exhaustive exact behavioral tests": 3600,
         "single-square translation escape screen": 1800,
     }
