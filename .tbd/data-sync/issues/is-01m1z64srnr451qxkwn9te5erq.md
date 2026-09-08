@@ -3,13 +3,17 @@ type: is
 id: is-01m1z64srnr451qxkwn9te5erq
 title: Integrate the newly merged 324-case atlas into the v0.2.4 explainer PR
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 labels: []
 dependencies: []
 created_at: 2026-09-08T00:19:33.268Z
-updated_at: 2026-09-08T01:01:09.201Z
+updated_at: 2026-09-08T01:30:10.657Z
+closed_at: 2026-09-08T01:30:10.657Z
+close_reason: "PR #117 merged normally, without admin override, as 831697c04b3fba59cbd8d7ec69a1a6092386f751. Pages run 34176106065 succeeded; check_published_site passed 32/32 against that exact merge commit, confirming DRAFT v0.2.4-831697c0, the 17-page PDF, Markdown, seven atlas assets and all pinned links. v0.2.4 stayed fixed throughout final revisions. The redundant local validation rerun was stopped at the user’s request; completed hosted checks supplied the final gate evidence. Oversized publication-only reachable-test selection remains open under think-dyyc."
+resolution: null
+duplicate_of: null
 ---
 Continue PR #117 via merge-upstream after main advanced from 373beb36 to 28696526 during closeout. Preserve the revised opening, Figure 1/2 numbering, framework box, representative lower bounds, and Figure 5/touch fixes while integrating the 324-case atlas. Regenerate publication artifacts with v0.2.4 fixed, use three independent integration reviews, and run the required publication, atlas, browser and hosted checks. The user has now explicitly asked to merge when ready. Finish the pre-push rerun, push the reviewed commits, confirm CI and mergeability, merge PR #117, verify the deployed web/PDF/assets against the merge commit, and close/sync completed beads. Do not bump the patch version again.
 
