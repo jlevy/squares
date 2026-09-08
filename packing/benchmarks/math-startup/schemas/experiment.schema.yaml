@@ -17,3 +17,4 @@ properties:
     items: {type: string, minLength: 1}
   judgment: {type: string, minLength: 1}
   correctness: {enum: [pending, passed, failed]}
+  needs_review: {type: boolean}

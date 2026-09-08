@@ -244,6 +244,8 @@ def render(root: Path = CAMPAIGN) -> str:
                 verdict = f"correctness {experiment['correctness']}"
             if problems:
                 verdict = "invalid"
+        if verdict == "accepted" and experiment.get("needs_review", False):
+            verdict = "needs review"
         lines.extend(["", f"Decision: **{verdict}**. {experiment['judgment']}", ""])
         if problems:
             lines.extend([f"- {problem}" for problem in problems] + [""])

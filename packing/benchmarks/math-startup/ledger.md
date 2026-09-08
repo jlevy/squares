@@ -36,6 +36,13 @@ Decision: **correctness failed**. Reject this intermediate runtime; the geometry
 
 Decision: **accepted**. Accept the reserved initial geometry; all registered browser/width cells retain their layout across real font arrival, with unchanged wrapping and rejected fault controls.
 
+## exp-004: First paired startup comparison with full anchor sampling
+
+- 390px: control 379.9 (374.9 to 398.4), candidate 325.0 (263.8 to 357.3); paired change -14.2% (95% interval -16.1% to -11.9%; 12 pairs).
+- 1280px: control 426.1 (412.0 to 439.9), candidate 374.6 (299.1 to 393.4); paired change -11.4% (95% interval -15.2% to -10.7%; 12 pairs).
+
+Decision: **needs review**. The registered numerical criterion passes in this instrumented regime, but differential observer overhead and pre-paint text measurements require an instrumentation audit before a reader-latency claim.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
