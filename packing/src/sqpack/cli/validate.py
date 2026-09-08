@@ -3789,7 +3789,22 @@ def _push_test_step(base: str) -> Step:
     def action(context: Context) -> str:
         return _run(
             context,
-            (sys.executable, "-m", "devtools.reachable_tests", "--run", "--since", base),
+            (
+                sys.executable,
+                "-m",
+                "devtools.reachable_tests",
+                "--run",
+                "--since",
+                base,
+                # The same distribution both behavioural lanes take, forwarded because the
+                # selector's runner cannot work it out: `cpus - jobs + 1` is about how many
+                # outer slots this run has busy, which only the caller knows. Without it the
+                # step ran in one process at every shape, `--jobs 1` included, which is
+                # `D-488`. The selector expands to everything for any workflow or
+                # suite-configuration change, so the serial case was the whole non-exhaustive
+                # suite -- quick lane and slow lane together.
+                *_xdist_distribution(context.jobs),
+            ),
         )
 
     return Step(

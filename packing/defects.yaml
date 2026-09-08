@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 487
+count: 488
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15908,32 +15908,36 @@ defects:
     Nothing is masked today -- the last full reading had no member under the floor and its
     cheapest at 2.07s -- but the two-sided rule that keeps the lanes honest is now measured
     under a shape that flatters it.
-    Measured after, screen: three hosted readings of the split job, all of them at four
-    workers -- 944s on run 34188003140, 861s on run 34189176373 and 949s on run 34190285360
-    -- a 1.102x spread with a geometric mean of 917.09s. That is 1.0190x the 900s cap the
-    step had been running under, so what the sample supports is that the step usually
-    exceeds that cap: two of the three readings are above it. It does not support a rate.
-    "At 900 it fails about half the time" was written here from n=2 and is withdrawn; n=3
-    cannot measure a failure percentage either, and the honest statement is a direction
-    with the sample size attached.
+    Measured after, screen: four hosted readings of the split job, all of them at four
+    workers -- 944s on run 34188003140, 861s on run 34189176373, 949s on run 34190285360,
+    and 947s on run 34214731500, the first post-merge `screen` job on main -- a 1.102x
+    spread with a geometric mean of 924.5s. That is 1.027x the 900s cap the step had been
+    running under, so what the sample supports is that the step's cost is centred above
+    that cap, with three of the four readings over it. It does not support a rate. "At 900
+    it fails about half the time" was written here from n=2 and is withdrawn; n=4 cannot
+    measure a failure percentage either, and the honest statement is a direction with the
+    sample size attached.
     That conclusion was fragile when it was written, and the record says so rather than
-    presenting 917.09s as though it had always been solid. On the first two readings the
+    presenting the mean -- 917.09s on the first three readings, 924.5s on four -- as though
+    it had always been solid. On the first two readings the
     geometric mean was 901.55s -- 1.5s above the cap, not the "within a second" this entry
     first claimed -- and any third reading below 896.9s would have pulled the mean under
     900s and inverted every claim resting on it. The third reading was 949s, so it did not.
     That is luck rather than design. The budget raise is load-bearing on the evidence as it
     now stands; what would earn the claim is more readings, not this paragraph.
-    1800s is 1.9627x the mean, which is inside the max_headroom 2.0 in
+    1800s is 1.947x the mean, which is inside the max_headroom 2.0 in
     devtools/gate-budgets.yaml. Read that as an analogy and nothing more: check_gate_budgets
     applies max_headroom to the tier entries in that file, a step's budget_seconds is not
     one of them, and budget_seconds appears nowhere in sqpack/gate_budgets.py or devtools/,
     so nothing compares this number against a measurement. The ratio is chosen for
     consistency with the tier policy and it is unenforced.
     Measured after, job level: deep-gate run 34190285360, on the head that also splits the
-    screen out of the deep gate, finished every job green -- deferred-steps 1454s, screen
-    949s, the exhaustive tier passing, deep-gate-required PASS -- against run 34177317419,
-    where deferred-steps failed at 2245s. So the job went from failing at 2245s to passing
-    at 1454s, and the 791s cannot be attributed to either change: the 2245s baseline
+    screen out of the deep gate, finished every job green -- deferred-steps 1454s and
+    screen 949s between their step boundaries, the exhaustive tier passing,
+    deep-gate-required PASS -- against run 34177317419, where deferred-steps failed at
+    2224s by the same clock (2245s as a GitHub job wall, which an earlier draft of this
+    sentence set against the 1454s step figure). So the job went from failing at 2224s to
+    passing at 1454s, and the 770s cannot be attributed to either change: the 2224s baseline
     contains two killed steps whose 901.00s and 1801.00s are caps rather than durations,
     and two things landed between the runs, the screen leaving the job and the slow lane
     gaining xdist. Nothing measured here separates them. Inside that job, at
@@ -15944,16 +15948,39 @@ defects:
     lane's xdist workers beside another outer slot pushed no step past its cap on this run,
     and the thinnest margin left was the atlas rebuild's 246s. That is one run, which is
     where D-472 applies rather than a claim of comfort.
+    Measured after, the reconciled gate: main's first post-merge run on the merged structure
+    -- run 34214731500 at 33cd4760, with the slow lane, the screen and the exhaustive tier
+    each on their own runner and everything else in `validate` at PR #120's
+    `--jobs 1 --inner-jobs 2` -- passed every job. On this run its wall is set by
+    `validate`: 1795.48s by the gate's own clock against the exhaustive tier's 1668.47s on
+    the same clock, or 1819s against 1691s as GitHub job walls, which add the runner's
+    setup and teardown. Each figure here names its clock because the first draft of this
+    paragraph set the gate clock against a job wall and understated that gap by about 23s.
+    At `--jobs 1` the gate's wall is the serial engine build plus the sum of the steps
+    rather than the longer of two partitions: `cargo build` took 13.60s before the first
+    step, the 66 steps sum to 1781.83s, and the four largest -- the n=1..324 atlas rebuild
+    452.60s, negative controls 370.18s, the n=40 bracket 220.27s and the quick lane 140.43s
+    -- are 1183s of that. That is the measured cost of the serialization PR #120 chose
+    after run 34181619739 killed the screen beside two pools of two: a gate that finishes
+    over one that raced its caps. Recorded as the first reading of that trade and not as a
+    verdict on it, and "longest job" is a statement about this run alone: on the five green
+    post-merge runs before the corpus expansion the exhaustive job was the longer of the
+    two on three (job walls 1671s against 1334s, 1649s against 1250s, 1620s against 1032s)
+    and `validate` on two (1293s against 1153s, 1327s against 1186s), and the exhaustive
+    job alone ranged from 1153s to 1700s over those five runs and the two green post-merge
+    runs since, a spread wider than the 128s between the two jobs here. Beside it on this
+    run the slow lane measured 863s of job wall and the screen 947s between its step
+    boundaries, as above.
     Two limitations, stated plainly because the first draft of this entry guarded against
     the unflattering inference while keeping the flattering framing. First, the screen is
     not shown to be faster at four workers than at two. The 858.62s it cost at two workers
-    on run 34176106076 is below all three four-worker readings; that comparison is
+    on run 34176106076 is below all four four-worker readings; that comparison is
     confounded, by runner draw and by job composition both, but the confound cuts both ways
     and cannot be spent only against the direction one prefers. What the hosted evidence
     supports is that at four workers the step is not measurably faster than it was at two,
     and may be slower. It does refute the 613-846s this entry first predicted by applying
     the lane's 1.42x to 858.62s. Second, and for the same reason, the claim that neither
-    step scales with its worker count is withdrawn for the screen: its three readings are
+    step scales with its worker count is withdrawn for the screen: its four readings are
     all at one worker count and cannot bear on scaling, and the only cross-worker
     comparison available is the confounded one just described. An entry cannot disqualify a
     comparison and then conclude from it. The scaling claim stands for the slow lane alone,
@@ -16064,3 +16091,134 @@ defects:
     saved prose preferences in screen and print media.
   bead: think-4c0o
   recorded_in: docs/project/reviews/review-2026-09-08-paper-font-merge.md
+- id: D-488
+  title: The pre-push tier ran its whole-suite step in one process and could not finish it
+  date: '2026-09-08'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: gate
+  recurrence_of: D-432
+  latent_for: >-
+    Eight days for the missing flag -- BC-086's selector, commit cce3f051, is committed
+    2026-08-31T01:33:41Z and no revision of it has ever passed a distribution -- and four
+    days for the timeout it causes, which D-432 closed on 2026-09-05 by raising this step's
+    cap to 1800s. D-484 fixed the same missing flag in the slow lane on 2026-09-08 without
+    the sweep that would have found this one beside it.
+  severity: high
+  status: fixed
+  what: >-
+    `devtools.reachable_tests --run` built its pytest command with no `-n`, and
+    `sqpack.cli.validate._push_test_step` passed none, so the pre-push tier's
+    `reachable behavioral tests` step ran in a single process at every `--jobs` value.
+    That includes `--jobs 1`, which is the shape `_xdist_distribution` documents as the
+    way to get four workers on a four-cpu box: the rule existed, both lanes took it, and
+    this path silently did not. The expensive case is the whole-suite fallback, which the
+    selector chooses for any change to a workflow file or to suite configuration -- and
+    that fallback is `-m "not exhaustive_exact"`, the quick lane and the slow lane
+    together, so the one command with no distribution was again the one selected for
+    costing the most. That case carries `FAST_SUITE_BUDGET_SECONDS`, and one process is
+    not enough to finish it inside that cap, so the tier did not merely run slowly: it
+    could not pass.
+    The missing flag is the mechanism; the cause is that this step has now outgrown a fixed
+    budget twice. D-432 is the same step, the same trigger and the same symptom four days
+    ago -- a suite-configuring file selects everything, the run is killed, and the failing
+    test cannot be named -- and it was closed by raising the cap from 900s to 1800s on a
+    reading of "1,034s on four cores at 1,781 passing tests", with the conclusion "with the
+    budget in place the whole-suite fallback finishes". The same selection is now 4,248
+    non-exhaustive tests, 2.4x that, and it does not finish. Headroom was bought twice and
+    a measurement was armed neither time: `push` still carries `measured_seconds: null` in
+    devtools/gate-budgets.yaml, so the drift and stale rules that would have said the step
+    was approaching its cap have never been armed.
+  consequence: >-
+    For a broad change the tier cannot pass at all. On this four-cpu box, a
+    `packing-validate --push` for a branch touching two workflow comments selected
+    everything -- the selector says why, `.github/workflows/deep-gate.yml configures the
+    suite` -- and the step was killed at its own 1800s cap: `command timed out after 1800
+    seconds`, recorded as 1801.10s of a 2111.64s tier. That 1801.10s is a cap and not a
+    duration, so how long the serial suite would have taken is not measured here and is
+    not claimed. Two consequences follow from a censored step rather than a slow one: the
+    pre-push floor a contributor is told to run before every push returns red on a change
+    that is fine, and it returns red without naming a failing test, which is the D-432
+    shape the shared cap exists to avoid.
+    Contributor time only. `--push` is a contributor tier and neither workflow invokes it,
+    so nothing hosted was slower and nothing went unchecked; the same branch's hosted
+    surface was green throughout.
+    What the flag buys, on the same tree the serial arm was censored on: the same
+    selection at four workers is 4246 passed in 1403.48s, which is inside the 1800s cap
+    with 397s to spare. So the fix makes the tier passable for a broad change, which is
+    the claim that matters; the speedup itself is bounded below rather than measured,
+    since 1800s is all the serial arm establishes -- at least 1.28x, and no more can be
+    said from a censored reading.
+    A controlled arm is available at a smaller size. On the same box, the 805 tests
+    selected by this change's Python files alone cost 138.59s in one process and 57.99s at
+    four workers, a 2.39x with the worker count as the only deliberate change; an
+    independent replay over the branch's current 907-test selection read 141.80s against
+    67.19s, 2.11x, with identical pass and fail sets. Two readings 12% apart is the D-472
+    lesson in miniature and neither is a rate. Both arms ran with a whole-suite validation
+    in flight on the same box, which is a load rather than a constant; the bias is
+    conservative, since contention costs four workers more than it costs one, so a quiet
+    box would not read lower. Both figures sit with D-484's finding
+    that this suite does not scale with worker count the way the count suggests -- 1.42x
+    for the slow lane at four workers there, a lower bound of 1.28x for the whole suite
+    here -- and 397s of margin under a cap is not comfort. That is think-uswr's question.
+  fix: >-
+    Give the selector's runner a `-n/--numprocesses` argument, defaulting to 1, and have
+    `_push_test_step` forward `_xdist_distribution(context.jobs)` -- the same helper and
+    therefore the same `cpus - jobs + 1` rule both behavioural lanes take. The count stays
+    the caller's to choose: it is a statement about how many outer slots this run already
+    has busy, which the selector cannot see, and defaulting it inside `devtools` would
+    have oversubscribed the box whenever the tier ran with a wide outer pool (BC-218).
+    The sweep that produced this entry checked all five pytest call sites in the gate.
+    The two behavioural lanes carry the distribution; the `--collect-only` probe in the
+    slow lane's exit-5 handler must stay serial, because a serial exit code is the only
+    thing that disambiguates pytest's 5 and disambiguating it is the probe's whole purpose;
+    the push tier is fixed here; and the exhaustive tier is one process, its parallelism
+    meant to come from the `--inner-jobs 4` both workflows pass it, though no comment in
+    `_exhaustive_exact_tests` says so and "deliberate" is read off the workflows rather
+    than the code. That last one is not obviously earning its keep and is not touched here:
+    on run 34214731500 its job cost 1668.47s by the gate's clock against pytest's own
+    "55 passed, 4246 deselected in 1666.88s", so its wall is the sum of its tests by
+    construction. Whether the inner pool is reached has to be read in the implementation
+    rather than in the tests, which was this paragraph's first error: among the code the
+    exhaustive selection reaches, only sqpack/fractional/certificate.py imports
+    `worker_count`, and the longest single member,
+    tests/test_n40_rigidity.py::test_the_record_round_trips at 250.73s, runs
+    devtools/assess_n40_rigidity.py, which imports no pool at all. So most of that wall is
+    one busy cpu on a four-cpu runner. That is think-cefd and it needs measurement, not a
+    flag.
+    What this fix does not reach, and the reason think-uswr exists: at the default local
+    shape, `packing-validate --push` with no `--jobs`, jobs defaults to the cpu count and
+    `cpus - jobs + 1` is still 1, so the default run is as serial as before. The rule is
+    right for a step running beside `jobs - 1` busy slots and this tier is not that shape
+    -- its behavioural step is submitted first and outlives every other step in the tier.
+    The same holds for this tier's declared reference shape, {jobs: 2, inner_jobs: 1,
+    cpus: 2}, which yields one worker too, so the one shape whose ceiling is enforced is
+    not a shape the fix reaches. Making `--jobs 1` actually deliver four workers is what
+    this entry fixes; deciding what the tier should default to is a separate question, and
+    it now has a measurement attached to it.
+    Two costs of the flag, neither a reason to withhold it. Under xdist pytest drops the
+    deselected count from its summary, so a bare exit 5 reads the same for "nothing was
+    selected" as for "the workers died". This path fails closed where `_slow_tests` does
+    not, since `_run` raises on any non-zero exit and there is no false green, but the
+    operator loses a signal on the very step whose D-432 complaint was that a red run named
+    nothing. And a narrow push selection takes no `.gate-running` marker, on the argument
+    that it is seconds of read-only work; with a distribution that can now be `cpus` test
+    processes beside a full gate holding the marker, which is the oversubscription
+    `_pytest_workers` exists to avoid, entering by the door the load lock deliberately
+    leaves open. Both belong with think-uswr.
+  regression: >-
+    packing/tests/test_reachable_tests.py::test_the_selection_runs_under_the_workers_the_caller_asks_for
+    pins the runner's side: the caller's count reaches pytest, and one worker asks for
+    nothing rather than paying for an xdist protocol with no concurrency behind it.
+    packing/tests/test_reachable_tests.py::test_the_push_step_forwards_the_distribution_both_lanes_use
+    pins the caller's side, which is the half that was missing, by resolving the real step
+    and reading the command it runs with `_pytest_workers` pinned rather than restated.
+    packing/tests/test_reachable_tests.py::test_the_runner_wires_its_argument_to_the_command_it_builds
+    pins the join between them, which the first two leave open: a runner that accepts `-n`
+    and builds its command with a literal passes both of them, and that is this entry's own
+    shape one layer in. None of the three guards the cause. A test cannot notice the day
+    the suite outgrows 1800s at four workers; only a `measured_seconds` for the push tier
+    in devtools/gate-budgets.yaml would, and arming it is think-uswr's.
+  bead: think-uswr
+  recorded_in: packing/devtools/reachable_tests.py

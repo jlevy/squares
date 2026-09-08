@@ -494,6 +494,26 @@ _PROVER_LAYOUT = r"""() => {
 }"""
 
 
+def _readout_text(readout: Locator) -> str:
+    """Read a typeset readout by its text, not by Chromium's rendered-text collection.
+
+    `inner_text` is the wrong instrument for KaTeX markup. Measured on ubuntu-latest,
+    seven times across 72 runs of this check: the direction readout answers `""` from
+    `innerText` -- on the first read, on a retry, and after a forced reflow -- while its
+    `textContent` carries all 134 characters, every element from the readout up to
+    `<html>` is displayed, visible, opaque, unanimated and has a client rect, and
+    `_PROVER_LAYOUT` goes on to find that subtree's fraction digits laid out at full
+    size. The document's own `innerText` is short by exactly those characters. Nothing
+    is wrong with the page; the collection returns nothing for it. Recorded in
+    think-kdkq.
+
+    `textContent` is a superset of what a reader sees here -- KaTeX's MathML annotation
+    and the glyph spans -- and is what the terms check above already reads, through
+    `all_text_contents`.
+    """
+    return readout.evaluate("el => el.textContent")
+
+
 def prover_findings(page: Page) -> list[str]:
     """Exercise Figure 5 through its public controls in the already open browser.
 
@@ -574,7 +594,7 @@ def prover_findings(page: Page) -> list[str]:
         minimum_mass = Fraction(int(terms[0]), int(terms[1])) if len(terms) == 2 else None
         if slug in known_minima and minimum_mass != known_minima[slug]:
             found.append(prefix + "the minimum button disagrees with the retained certificate")
-        minimum = figure.locator(f"#mv-{slug}").inner_text()
+        minimum = _readout_text(figure.locator(f"#mv-{slug}"))
         canvas.click(position={"x": 20, "y": 20})
         if status.is_visible() and status.inner_text().strip():
             found.append(prefix + "moving the square leaves reset feedback visible")
@@ -582,7 +602,7 @@ def prover_findings(page: Page) -> list[str]:
             found.append(prefix + "an outside-domain placement has no verdict")
         reset.click()
         page.evaluate(SETTLED)
-        if figure.locator(f"#mv-{slug}").inner_text() != minimum:
+        if _readout_text(figure.locator(f"#mv-{slug}")) != minimum:
             found.append(prefix + "reset does not restore the certificate's minimum mass")
         scan.click()
         if not status.is_visible() or not status.inner_text().strip():
@@ -618,7 +638,7 @@ def prover_findings(page: Page) -> list[str]:
         slider.dispatch_event("input")
         page.evaluate(SETTLED)
         if slider.get_attribute("max") == "180":
-            direction = figure.locator(f"#kval-{slug}").inner_text()
+            direction = _readout_text(figure.locator(f"#kval-{slug}"))
             if not all(value in direction for value in ("12219313", "45000000", "30.3836")):
                 found.append(
                     prefix + f"direction 118 has the wrong half-tangent or angle: {direction!r}"
