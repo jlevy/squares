@@ -111,7 +111,10 @@ def validate_poses(side: Fraction, poses: tuple[Pose, ...], source: str) -> None
     if poses != tuple(sorted(set(poses))):
         raise GuardError("poses must be sorted and distinct")
     if source == SCIENTIFIC_SOURCE:
-        if side != Fraction(96, 25) or poses != five_grid_poses(side):
+        # Screen the side first so a foreign one never reaches the factory, then admit
+        # the roster only through it. A control that forbids the factory then refuses
+        # every scientific construction structurally, not by its choice of test data.
+        if side != Fraction(96, 25) or poses != scientific_source()[1]:
             raise GuardError("scientific source must be the full fixed five-grid roster")
     elif source != SYNTHETIC_SOURCE:
         raise GuardError("unknown source identity")
