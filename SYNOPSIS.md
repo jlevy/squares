@@ -664,7 +664,7 @@ helper. Its
 retains the remaining geometric replay under `think-0krc`; the selected target-research
 entry remains BC-264. All 66 full-checkpoint steps passed at `dd92b2a0`.
 
-[Session097](packing/campaign/agent-sessions/session-097-stromquist-n26-verification.md)
+[Session105](packing/campaign/agent-sessions/session-105-stromquist-n26-verification.md)
 follows the author’s clarification about `n=26`. Its
 [verification report](docs/project/research/research-2026-09-07-stromquist-n26-verification.md)
 checks Stromquist’s historical packing exactly and confirms that Friedman’s current
@@ -3205,7 +3205,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
-| `codex-task-tree-session-097.yaml` | session-097 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
+| `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

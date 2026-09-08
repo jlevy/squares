@@ -1,12 +1,12 @@
 ---
-title: session-100 — n26 source consistency and upstream integration
+title: session-106 — n26 source consistency and upstream integration
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-100
+  id: session-106
   title: n26 source consistency and upstream integration
   date: '2026-09-07'
   started_at: '2026-09-08T00:34:07Z'
@@ -74,7 +74,7 @@ session:
     fallback: Preserve failed receipts, fix the narrow surface, and continue independent source and visual review while validation runs.
     outcome: The six integration failures were repaired and the second upstream merge committed as b7b0576b. Forty-four pre-push checks passed. The remaining behavioral step displayed two failures and was interrupted on resumption to diagnose them; no passing pre-push or hosted certification is claimed.
     evidence:
-    - packing/campaign/agent-sessions/session-100-validation/push-b7b0576b-interrupted.json
+    - packing/campaign/agent-sessions/session-106-validation/push-b7b0576b-interrupted.json
     stop_reason: The owner interrupted the turn during the gate and resumed at 05:15 UTC. The run crossed that unobserved interval; its elapsed wall window is not treated as continuous agent work. Observed behavioral failures require a fresh repair slice.
     next_action: Review hosted validation, retain the exact commit and coverage, then complete the documentation and tracking closeout.
   - workflow: pipeline-improvement
@@ -82,7 +82,7 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Isolate and repair the two observed behavioral failures, validate the affected tests and merged tree, push the branch, and launch hosted full validation.
-    status: in_progress
+    status: stopped
     entered_by: user_request
     switch_reason: The owner requested continuation after the interrupted turn. The calendar window is extended to include that interruption and the remaining validation; earlier failed and incomplete receipts are retained.
     budget_minutes: 60
@@ -92,10 +92,31 @@ session:
     validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib PYTEST_ADDOPTS='-n 2 --dist worksteal' uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
     kill_condition: Any assertion failure blocks certification; resolve the observed failure before replaying its dependent surface.
     fallback: Preserve the failed receipt, narrow to the implicated test or contract, and continue independent review while the check runs.
+    outcome: The two generator failures were repaired. The resumed pre-push run passed forty-four steps but exposed two undeclared DS7 consumers in the behavioral step; it was interrupted after the failure was localized. Both consumers are now declared with their assurance limits, and all twenty-nine focused contract and audit tests pass. A repeated corpus load was reduced from 132 loads to one per test without changing assertions.
+    evidence:
+    - packing/campaign/agent-sessions/session-106-validation/push-a70716c6-interrupted.json
+    - packing/tests/test_verified_upper_bound_contract.py
+    stop_reason: The owner requested a fresh merge and compatibility review for PR116 and PR121. Source sessions and ideas have been renumbered to avoid their assignments; the next slice integrates the newer main and publishes the reviewed tree.
+    next_action: Record hosted coverage and complete publication, cumulative resource accounting, and tracker synchronization.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Commit the reviewed fixes, merge current origin/main, verify compatibility with PR116 and PR121, and push PR120 with passing validation.
+    status: in_progress
+    entered_by: user_request
+    switch_reason: The owner explicitly requested that PR120 be fully committed, current with main, and adapted for the intended PR116 and PR121 landings.
+    budget_minutes: 35
+    started_at: '2026-09-08T06:13:27Z'
+    deadline_at: '2026-09-08T06:48:27Z'
+    expected_output: A pushed mergeable PR120, final hosted check results, and reviewed compatibility and cost records.
+    validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib PYTEST_ADDOPTS='-n 2 --dist worksteal --maxfail=1' uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
+    kill_condition: A failed assertion, missing coverage, or unresolved record conflict blocks certification.
+    fallback: Preserve the failure, repair its narrow cause, and continue independent PR and source review while checks run.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Record hosted coverage and complete publication, cumulative resource accounting, and tracker synchronization.
+    next_action: Retain exact hosted source identities and coverage, then complete cumulative accounting and tracker synchronization.
   primary_bead: think-4v5w
   status: in_progress
   budget:
@@ -109,7 +130,7 @@ session:
   - A source gap is recorded with its exact claim scope and next dependency; absence of a retrieved improvement is never a proof of optimality.
   progress:
     metric: Agreement of retained source bounds, exact comparisons, and reader-facing conclusions.
-    before: Session097 verified Stromquist but did not claim an exhaustive literature search. The incoming atlas spans n1 through n324 and exposes additional omitted DS7 reported lower bounds.
+    before: Session105 verified Stromquist but did not claim an exhaustive literature search. The incoming atlas spans n1 through n324 and exposes additional omitted DS7 reported lower bounds.
     after: null
   delegations:
   - task: Audit current n26 sources and recent public solver or proof projects
@@ -168,8 +189,9 @@ session:
   - docs/project/research/research-2026-09-07-n26-best-known-audit.md
   - packing/frontier/ds7-lower-bound-audit.json
   - packing/cases/stromquist/n26-source-scores.json
-  - packing/campaign/agent-sessions/session-100-validation/push-9e785948-merge-failed.json
-  - packing/campaign/agent-sessions/session-100-validation/push-b7b0576b-interrupted.json
+  - packing/campaign/agent-sessions/session-106-validation/push-9e785948-merge-failed.json
+  - packing/campaign/agent-sessions/session-106-validation/push-b7b0576b-interrupted.json
+  - packing/campaign/agent-sessions/session-106-validation/push-a70716c6-interrupted.json
   checks:
   - Before this prospective session, the records baseline passed at clean dae6bb8d; origin/main at 28696526 was fetched and reviewed. Generated merge conflicts were resolved by their renderers, preserving both branches' records.
   - The coordinator reproduced 55 exact source omissions against dae6bb8d through n100 and upstream 28696526 above n100; the opaque n21 display is the fifty-sixth corrected reported field. The final named-candidate audit passes through n324 with no omitted stronger report.
@@ -183,15 +205,23 @@ session:
   - After continuation, collection mapped the two observed failures to the n50 prose and whole-record golden checks. Both reproduced in a 1.73-second focused replay. Inserted source notes had straight apostrophes where the commit formatter used smart quotes. The renderer now requests the same smart-quote formatting, leaving source frontmatter unchanged.
   - The complete focused generator file passes all 63 tests in 10.97 seconds after that repair; Ruff, formatting, and BasedPyright pass. The source-score, memo, DS7, and exact-fraction checks retain their earlier passing receipts.
   - The resumed pre-push replay uses two pytest workers through PYTEST_ADDOPTS with work stealing, alongside the gate's two outer jobs and one inner job. Coverage and timeout limits remain unchanged; this operator-declared runtime option is recorded here because the gate's environment receipt does not collect PYTEST_ADDOPTS.
+  - The a70716c6 replay passed forty-four steps and failed the undeclared-consumer contract before interruption, with 1 failed and 1032 passed tests. The two new audit consumers are now declared; the focused contract and DS7 replay passed all 29 tests in 379.57 seconds. Its census test took 363.82 seconds because it repeatedly reloaded the full corpus.
+  - The reviewed census repair preserves all 324-case assertions and loads the corpus once per test. The two affected tests pass in 3.10 seconds, with the census call taking 1.17 seconds; these observations use different invocation scopes and are not a controlled speedup ratio. Ruff, BasedPyright and whitespace checks pass.
+  - Sessions 105/106 and ideas 129/130 avoid the published and explicitly assigned identifiers on PR116, PR121 and their connected constraints work. All fifteen moved validation and cost receipts retain identical bytes. Defects 481–483 remain unchanged pending actual upstream integration.
   stop_reason: null
   next_action: Complete the user-selected n26 review and upstream merge, then retain think-mq0d (BC-264) as the separate selected research continuation.
 ---
 # N26 Source Consistency and Upstream Integration
 
+The coordinator renamed this source record from `session-100` to `session-106` while
+preparing PR120 for integration with PR116 and PR121. The connected constraints work
+explicitly assigns sessions 100–104. The validation directory now uses `session-106`;
+its retained receipts preserve the original identifiers, timestamps and measurements.
+
 The user requested the `tbd merge-upstream` shortcut and a broader check that Friedman’s
 n26 construction remains best known.
 This W2 factual review continues
-[session-097](session-097-stromquist-n26-verification.md).
+[session-105](session-105-stromquist-n26-verification.md).
 It records work from its declared start; the earlier merge orientation and preliminary
 searches are identified as prior evidence, not backdated into a prospective phase.
 

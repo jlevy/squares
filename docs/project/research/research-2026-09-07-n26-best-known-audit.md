@@ -140,12 +140,25 @@ retains the JSON and recent repository extracts.
 | Primary publication or announcement | Date supported by the source | Relevance to n = 26 |
 | --- | --- | --- |
 | [Gensane and Ryckelynck, *Improved Dense Packings of Congruent Squares in a Square*](https://link.springer.com/article/10.1007/s00454-004-1129-z) | Online October 20, 2004; July 2005 journal issue | Announces improvements for 11, 29, and 37 squares and an alternative for 18. The [archived text](../../../packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md) has case discussions for 11, 17, 18, 29, and 37, with no n = 26 improvement. |
-| [Kearney and Shiu, *Efficient Packing of Unit Squares in a Square*](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v9i1r14) | February 11, 2002 | Proves the 6- and 7-square optima and gives constructions for large $n^2+1$ problems. The abstract supplies no n = 26 improvement. |
+| [Kearney and Shiu, *Efficient Packing of Unit Squares in a Square*](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v9i1r14) | February 11, 2002 | Full paper checked for transfer to 26 squares. Theorem 2 applies at parameter 5, but its upper estimate exceeds 6. The explicit seed constructions and their stated extensions supply no improvement on $U$; details below. |
 | [Arslanov, Mustafin, and Shangitbayev, *Improved Packings of n(n−1) Unit Squares in a Square*](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v28i4p22) | November 5, 2021 | Its [full paper](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v28i4p22/pdf/) includes 26 unit squares in a $4\times8$ rectangle, used as a component in larger constructions. This is not an n = 26 square-container record. |
 | [Bui, *Square Packing with O(x^0.6) Wasted Area*](https://arxiv.org/abs/2508.04603) | August 6, 2025, first arXiv submission | Asymptotic large-square construction. No explicit improved n = 26 packing was identified in the checked source. |
 | [McClenagan, *Optimally Packing a Large Square by Unit Squares*](https://arxiv.org/abs/2602.01484) | February 1, 2026, first arXiv submission | Asymptotic wasted-area theorem, not a reported n = 26 record. |
 | [UnitSquare Results, Release 1](https://www.hmbelvedere.com/) | July 29, 2026 | Announces six upper improvements, for 68, 69, 103, 105, 110, and 131 squares. No n = 26 claim. Verification assurances remain source-reported in this search. |
 | [Joost de Winter, *Improved Packings of 68, 126 and 206 Unit Squares in a Square*](https://www.researchgate.net/publication/411979559_An_improved_packing_of_206_unit_squares_in_a_square) | Author-uploaded August 14, 2026; constructions dated August 7–14 | Announces those three counts. No n = 26 improvement. Search-index rendering of the author-uploaded source inspected; the [existing source record](../../../packing/resources/web/de-winter-improved-packings-2026/README.md) documents conflicting live revisions and unavailable coordinates. |
+
+Kearney and Shiu’s
+[Theorem 2, printed page 2](../../../packing/resources/papers/kearney-shiu-2002-efficient-packing-unit-squares.pdf),
+applies to every positive integer parameter, so a large-size restriction does not
+exclude 26 squares. At parameter 5 it gives $s(26)<5+3/10^{1/3}+3/10^{2/3}$, whose right
+side exceeds 6 and is weaker than $U$. Section 4’s Pell seeds have parameters
+$2,8,42,\ldots$; its separate symbol $k=5$ belongs to parameter 8, hence 65 squares.
+Extending the parameter-2 seed gives $s(26)\le5+1/\sqrt2$, larger than $U$ by
+$(3-2\sqrt2)/2>0$. Section 5’s seeds, from Equation (10), are $1,12,55,\ldots$; the
+stated interpolation gives no better result at parameter 5. Section 6 refines parameter
+43, or 1850 squares.
+This checks the published constructions and transfer rules, without exhausting their
+possible modifications.
 
 The current [MathWorld table](https://mathworld.wolfram.com/SquarePacking.html) also
 gives exact $U$ and no optimality asterisk for n = 26. It is secondary corroboration and

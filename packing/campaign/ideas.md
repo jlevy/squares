@@ -350,8 +350,12 @@ separates the useful next dependencies from the restricted deformation already e
 
 | # | Idea | Status | Record | Crux |
 | --- | --- | --- | --- | --- |
-| 119 | Change contacts or split the central block in an n26 packing search | shaped | `think-z0fi` | The [specified family](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#first-released-contact-family) has nine translation/side variables, one common angle, and four released pair branches. Build the affine LP adapter and replay its controls before the proposed sample; driver readiness remains false. |
-| 120 | Recover Green’s n26–27 lower-bound proof or reconstruct its point cover | shaped | `think-0x08` | The survey reports approximately 5.3918. Recover the missing geometry and proof; [MacIver’s defect accounting](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md#defect-charging-and-a-co-hit-graph) suggests conditional loss clauses but supplies no n26 scaffold or theorem. |
+| 129 | Change contacts or split the central block in an n26 packing search | shaped | `think-z0fi` | The [specified family](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#first-released-contact-family) has nine translation/side variables, one common angle, and four released pair branches. Build the affine LP adapter and replay its controls before the proposed sample; driver readiness remains false. |
+| 130 | Recover Green’s n26–27 lower-bound proof or reconstruct its point cover | shaped | `think-0x08` | The survey reports approximately 5.3918. Recover the missing geometry and proof; [MacIver’s defect accounting](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md#defect-charging-and-a-co-hit-graph) suggests conditional loss clauses but supplies no n26 scaffold or theorem. |
+
+The coordinator renumbered these two source ideas from 119/120 to 129/130 while
+preparing PR120 for integration with PR116 and PR121. Their connected constraints work
+publishes ideas through 128; the source proposals and their owning beads are unchanged.
 
 ## Open questions
 
@@ -391,7 +395,7 @@ This section is why the campaign does not rediscover its own mistakes.
   specified opposite corner-triplet separations.** The
   [exact support inequality](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#a-closed-direction-rigid-central-block-rotation)
   gives the current side as the minimum of that family, attained at 45 degrees.
-  This excludes only the declared separations and rigid block; idea 119 releases those
+  This excludes only the declared separations and rigid block; idea 129 releases those
   assumptions.
 
 - **`14 + 20 = 34` proves Trump is isostatic.** The verifier’s twenty is a count of

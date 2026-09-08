@@ -17,7 +17,7 @@ Its dated search coverage and exact normalization of recent scores support retai
 Friedman’s value as best known; they do not establish optimality.
 
 **Owner:** `think-zi3g`. The
-[session record](../../../packing/campaign/agent-sessions/session-097-stromquist-n26-verification.md)
+[session record](../../../packing/campaign/agent-sessions/session-105-stromquist-n26-verification.md)
 retains delegation, validation, and the integration checkpoint.
 
 ## What the Author Meant

@@ -1,12 +1,12 @@
 ---
-title: session-097 — Stromquist n26 verification and MacIver source audit
+title: session-105 — Stromquist n26 verification and MacIver source audit
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-097
+  id: session-105
   title: Stromquist n26 verification and MacIver source audit
   date: '2026-09-07'
   started_at: '2026-09-07T22:04:11Z'
@@ -82,9 +82,9 @@ session:
       tests passed their assertions. Two negative controls timed out at 120 seconds and then passed unchanged in serial replay. Thirteen quick tests exceeded the
       12-second wall guard. No logic failure was found; a passing fast checkpoint remains required.'
     evidence:
-    - packing/campaign/agent-sessions/session-097-validation/full-48a4544f.json
-    - packing/campaign/agent-sessions/session-097-validation/reducible-control-48a4544f.jsonl
-    - packing/campaign/agent-sessions/session-097-validation/pivot-control-48a4544f.jsonl
+    - packing/campaign/agent-sessions/session-105-validation/full-48a4544f.json
+    - packing/campaign/agent-sessions/session-105-validation/reducible-control-48a4544f.jsonl
+    - packing/campaign/agent-sessions/session-105-validation/pivot-control-48a4544f.jsonl
     stop_reason: The new user source request was reviewed alongside the full run; final integration and time-guard rechecking proceed in a separate phase.
     next_action: Run the unchanged fast surface with lower process concurrency after integrating the reviewed source additions.
   - workflow: factual-review
@@ -132,7 +132,7 @@ session:
       comparison is reported, not enforced, for this local shape. Earlier CPU4 and native runs are retained as failures of the stale-budget check and one 12.81-second
       test guard respectively. No tests, guards, timeouts or baseline changed.
     evidence:
-    - packing/campaign/agent-sessions/session-097-validation/fast-final-bdc28e89.json
+    - packing/campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json
     stop_reason: The scientific source integration and local fast checkpoint are accepted; main has since received typography changes touching the acknowledgment
       renderer.
     next_action: Integrate the new main branch, verify the acknowledgment in its typography, and finish publication.
@@ -157,7 +157,7 @@ session:
       the acknowledgment on page 14 and its commit-pinned link. Pre-push at 0e766bfd passed all 45 selected steps in 163.51 seconds. Independent integration review
       accepted after identifying one stale CPU-setting sentence, corrected in this closeout.
     evidence:
-    - packing/campaign/agent-sessions/session-097-validation/push-0e766bfd.json
+    - packing/campaign/agent-sessions/session-105-validation/push-0e766bfd.json
     - packing/devtools/templates/explainer-article.md
     stop_reason: The source review, mathematical verification and upstream integration are complete. Closure metadata verification and publication follow the measured
       interval.
@@ -325,9 +325,15 @@ session:
   next_action: Publish this review and verify hosted checks; retain think-mq0d (BC-264) as the selected research slice. think-z0fi implements and controls the specified n26 family,
     think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption.
   resource_rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-105.yaml
 ---
 # Stromquist n26 Verification
+
+The coordinator renamed this source record from `session-097` to `session-105` while
+preparing PR120 for integration with PR116 and PR121. PR116 already assigns
+`session-097` to the kernel work.
+The validation directory and resource receipt now use `session-105`; their contents
+retain the original identifiers, timestamps and measurements.
 
 The user selected this source review directly after clarifying Stromquist’s intended
 hint.

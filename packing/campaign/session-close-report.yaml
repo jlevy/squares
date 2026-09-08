@@ -1521,26 +1521,6 @@ sessions:
     active_union_hours: 1.4
     wall_hours: 1.4
     snapshot_incomplete: true
-- id: session-097
-  title: "Stromquist n26 verification and MacIver source audit"
-  status: completed
-  primary_bead: think-zi3g
-  phases: 6
-  measured: true
-  rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
-  turns: null
-  tool_calls: null
-  tool_errors: null
-  one_off_code: null
-  wall_hours: null
-  codex_receipts:
-  - path: packing/campaign/resource-usage/codex-task-tree-session-097.yaml
-    model_responses: 667
-    agent_hours: 3.77
-    active_union_hours: 1.92
-    wall_hours: 1.92
-    snapshot_incomplete: true
 - id: session-099
   title: "Atlas expansion to n = 324 and the poster composite"
   status: in_progress
@@ -1551,11 +1531,31 @@ sessions:
     declares no rollups
   rollups: []
   codex_receipts: []
-- id: session-100
+- id: session-105
+  title: "Stromquist n26 verification and MacIver source audit"
+  status: completed
+  primary_bead: think-zi3g
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-105.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-105.yaml
+    model_responses: 667
+    agent_hours: 3.77
+    active_union_hours: 1.92
+    wall_hours: 1.92
+    snapshot_incomplete: true
+- id: session-106
   title: "n26 source consistency and upstream integration"
   status: in_progress
   primary_bead: think-4v5w
-  phases: 4
+  phases: 5
   measured: false
   unmeasured_reason: >-
     declares no rollups
