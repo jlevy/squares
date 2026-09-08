@@ -222,9 +222,10 @@ jobs:
       # is not allowed: a tier is a filter nothing checks the complement of, so it is how a
       # step ends up in neither surface, which is the gap `D-455` and `D-456` came through.
       #
-      # Run numeric steps serially at two inner workers. PR #116's run 34181619739
-      # timed out the escape screen at 1800s with two numeric pools sharing a runner;
-      # the serial deferred replay in run 34183723509 completed it in 1069.84s.
+      # Run numeric steps serially at two inner workers. Run 34181619739, on PR #121's
+      # branch after it took PR #116's job split, timed out the escape screen at 1800s
+      # with two numeric pools sharing a runner; the serial deferred replay in run
+      # 34183723509 completed it in 1069.84s.
       # The slow lane also gets its own runner: run 34177317419 timed it out at 1800s
       # while it shared the deferred job. This changes scheduling, not coverage.
       - name: Run the complete integration surface
