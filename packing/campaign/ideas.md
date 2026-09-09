@@ -456,6 +456,19 @@ below are what remains once that route is closed.
 | 140 | Re-optimise the covering LP on a finer net | registered | [H-144](hypotheses/H-144-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
 | 141 | Where does the point-atom ceiling begin? | registered | [H-145](hypotheses/H-145-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
 
+## Two Lines at Eleven — X-024
+
+[X-024](explorations/X-024-two-lines-at-eleven.md) reads this branch’s unconditional
+certificate line and PR 137’s conditional owner case split together, says what each
+established and where they meet in the same objects, and picks the unconditional line as
+the one to push here.
+Both rows below are the same integrality gap seen from the two sides.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 142 | Threshold atoms inside an owner class’s residual cover | registered | [H-146](hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point cover of seven is the conditional form of the ceiling the unconditional line just passed; the discriminator is whether threshold atoms bring its budget below seven. |
+| 143 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | registered | [H-147](hypotheses/H-147-threshold-certificate-past-3-82.md) | The endpoint at 3.82 is exact and its margin is 0.0327; the same loop at a larger side and the finer-net shrink of T-024 are the two untried mechanisms, and neither is capped by the point-atom ceiling. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

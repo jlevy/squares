@@ -141,7 +141,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives twenty-one confirmed hypotheses, sixteen refuted
-hypotheses, two open hypotheses, twenty-six open questions, and forty-six blocked
+hypotheses, two open hypotheses, twenty-six open questions, and forty-seven blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -3315,9 +3315,11 @@ round that names the hypothesis, control roles included.
 | [H-140](packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md) | refuted | Unchanged rationalized fixed-corner residual weights cover the complete181-direction net | 1 | 18.65s wall |
 | [H-141](packing/campaign/hypotheses/H-141-four-owner-footprint-matched-gain.md) | confirmed | Four guaranteed endpoint footprints improve the matched numerical cover beyond four bare owned marks | 1 | 9.12s wall |
 | [H-142](packing/campaign/hypotheses/H-142-five-dot-full-net-cover.md) | confirmed | The fixed five-dot four-owner proposal covers all361canonical directions | 1 | 28.95s wall |
-| [H-143](packing/campaign/hypotheses/H-143-threshold-certificate-at-191-50.md) | blocked | Rank-one threshold atoms admit a certificate of budget below eleven at 191/50, where the point atoms provably do not; the search loop is unpromoted | 0 | — |
+| [H-143](packing/campaign/hypotheses/H-143-threshold-certificate-at-191-50.md) | result registered | Rank-one threshold atoms admit a certificate of budget below eleven at 191/50, where the point atoms provably do not; the frozen family has budget 10.967323 and is registered as [T-025](packing/frontier/RESULTS.md) | 0 | — |
 | [H-144](packing/campaign/hypotheses/H-144-reoptimised-certificate-on-a-finer-net.md) | open | Re-optimising the covering LP on a net of 720 or more directions at the sharpened shrink passes a dilation supremum of 3.82 | 0 | — |
 | [H-145](packing/campaign/hypotheses/H-145-where-the-point-atom-ceiling-begins.md) | open question | Where does the point-atom ceiling begin in side, and does any weight-eleven family at 191/50 survive a larger shrink? | 0 | — |
+| [H-146](packing/campaign/hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
+| [H-147](packing/campaign/hypotheses/H-147-threshold-certificate-past-3-82.md) | blocked | The threshold-atom language certifies a side above 191/50, by the same loop at a larger side or by the finer-net shrink; the separation loop that would produce the atoms is unbuilt | 0 | — |
 
 ### Confirmed
 
