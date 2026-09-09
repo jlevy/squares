@@ -175,8 +175,9 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-319
-    next_evidence: H149/exp151 refuted after seven directions. H150/exp152 tests the exact intersection
-      of the exp149 and exp151 escaping cores before trying another sixth-site location.
+    next_evidence: Exp152 accepts a nonempty necessary site region. H151/exp153 now computes the complete
+      fixed-D sixth-site feasible region by exact support extrema, with independent full-net union confirmation
+      for any candidate.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -193,10 +194,15 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-151-selected-six-dot-cover.json
     - packing/campaign/hypotheses/H-150-sixth-site-two-core-screen.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-152-sixth-site-two-core-screen.json
+    - packing/campaign/hypotheses/H-151-direct-sixth-site-feasibility.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md
+    - packing/cases/n11_five_dot_cover/direct-sixth-site-contract.md
     hypotheses:
     - H-148
     - H-149
     - H-150
+    - H-151
   - id: BC-321
     purpose: research
     owner_focus: insight
@@ -296,11 +302,14 @@ The current proof excludes one specified four-owner geometric branch at side 3.8
 global lower bound remains about 3.8100257236. The main gap is a general argument
 covering every possible owner configuration, not another check of the same branch.
 
-**Entry point: W6 research loop.** Session121 continues on the fresh stacked owner-core
-compatibility branch after PR142 readiness.
-Its two-hour plan runs from 17:21:40 to 19:21:40 UTC, with slices of at most 30 minutes
-and no new target after 19:06:40 UTC. Earlier expired windows remain historical; no
-experiment budget or result is reset.
+**Entry point: W6 research loop.** Session121 completed its four slices at18:48:31 UTC;
+Session122 continues the full-family calculation on the stacked owner-core compatibility
+branch after PR142 readiness.
+Session121’s original ceiling remains19:21:40 UTC, but its four slices finished early.
+Session122 runs from18:48:31 to20:18:31 UTC with a20:03:31 scientific cutoff.
+Its first source slice preserves the already declared19:06:40 deadline; later slices are
+allocated at evidence checkpoints, each at most30minutes. No scientific process
+allowance or observed result is reset.
 The 30-minute heartbeat supplements continuous work and must not duplicate a launched
 target.
 

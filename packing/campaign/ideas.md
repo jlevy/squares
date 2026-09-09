@@ -454,6 +454,12 @@ prevent those local facts from being mistaken for a global exclusion.
 every additional single site with D fixed; nonempty gives only a necessary candidate.
 |
 
+| 147 | Solve any-sixth-site feasibility directly by exact support extrema | registered
+| [H-151](hypotheses/H-151-direct-sixth-site-feasibility.md) | Intersect requirements
+from the entire original-D-missed domain; empty prefix refutes the family, full nonempty
+requires independent cover confirmation.
+|
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

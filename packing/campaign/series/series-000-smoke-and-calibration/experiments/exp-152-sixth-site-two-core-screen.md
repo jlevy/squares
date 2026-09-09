@@ -20,6 +20,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python 3.14; one process
     selftest_passed: true
+    engine_commit: 0a4fe687b93a80abb2aac229ab41a7285f530967
   instance:
     axis: n
     point: 11
@@ -49,21 +50,44 @@ experiment:
       No retry, third core, angle sweep or cover call. Phase4 latest launch18:53:07 UTC to fit before18:54:09
       UTC.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-152-sixth-site-two-core-screen.json
-  results: []
+    commit: 0a4fe687b93a80abb2aac229ab41a7285f530967
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Can one replacement site hit both retained escaping cores?
+    outcome: criterion_met
+    checked_by: Exact closed intersection has dimension two and four vertices. Its canonical vertex mean
+      independently lies in both saved cores; both original escape authority replays pass.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: The exact closed intersection is nonempty, with all retained vertices and the canonical
       candidate independently checked inside both cores.
-    reason: Prospective and unrun; the fixed sixth site failed, but whether some replacement hits both
-      escaping cores remains unknown.
-  lease:
-    expires: '2026-09-09T18:54:09Z'
-    host: local
+    reason: A nonempty two-dimensional four-vertex region survives the two necessary core constraints.
+      This accepts only the two-witness screen, not any all-direction cover or tuple exclusion.
+  effort:
+    timebox: One 60-second external process plus two-second grace and 30-second internal guard; no retry.
+    wall_seconds: 9.84
+    stopped_by: criterion
 ---
 # Exp152: Screen Every Replacement Sixth Site Against Two Escapes
 
-**Prospective and unrun.** Bind exp149 and exp151, replay both escapes against their
-original D and D-plus-x149 domains, then intersect the two exact closed B-cores.
+**Accepted necessary screen.** The one run launched at 18:46:33 UTC on 2026-09-09 from
+clean published source `0a4fe687b93a80abb2aac229ab41a7285f530967`, exited zero in 9.84
+seconds, and produced a receipt byte-identical to captured stdout.
+The intersection is two-dimensional with four vertices, and its canonical vertex mean
+passes independent closed membership in both cores.
+Geometry measured 0.0038895409961696714 seconds; driver process time was
+9.174816749989986 seconds.
+
+These two escapes do not rule out relocating the sixth dot.
+The surviving region is only necessary: H151/exp153 separately computes constraints from
+the full missed-core domain and confirms any resulting cover.
+
+## Frozen Prospective Protocol
+
+Bind exp149 and exp151, replay both escapes against their original D and D-plus-x149
+domains, then intersect the two exact closed B-cores.
 Use closed clipping that preserves points and segments.
 
 Accept only a nonempty intersection with independently checked vertices and canonical

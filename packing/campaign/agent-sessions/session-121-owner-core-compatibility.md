@@ -111,7 +111,7 @@ session:
       to select a bounded next cover or obstruction argument.
     commitment: BC-320
     bead: think-ykd6
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The fixed six-dot cover refuted at owner-006, providing the second necessary core constraint.
     budget_minutes: 30
@@ -125,13 +125,15 @@ session:
       unregistered successor.
     fallback: Retain partial preparation or outcome and carry only genuinely unfinished future work to
       a fresh allocation.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Use the exact intersection result to choose relocation, weighted search, or a joint-owner
-      discriminator; retain global routing gap.
+    outcome: Exp152 accepted a nonempty two-dimensional four-vertex intersection in9.84seconds, source0a4fe687b93a80abb2aac229ab41a7285f530967,
+      launch18:46:33UTC. Interpretation closed18:48:31UTC.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-152-sixth-site-two-core-screen.json
+    stop_reason: The two-witness screen completed and selected direct full-family feasibility.
+    next_action: Prepare the separately registered H151/exp153 direct support instrument and run only
+      if its full allowance fits.
   primary_bead: think-ykd6
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 120
     max_cycles: 4
@@ -148,8 +150,8 @@ session:
   progress:
     metric: Resolve whether the exact exp149 escape survives individual owner-core constraints.
     before: Exp149 refuted fixed five-dot coverage for tuple (0,0,0,7); no compatibility target has run.
-    after: Both individual-owner tightening and fixed D+x149 failed; two exact escapes now constrain every
-      possible replacement sixth site.
+    after: Exp150 refuted individual-owner exclusion, exp151 refuted the fixed added site, and exp152
+      accepted a nonempty two-core quadrilateral. The selected full-family calculation continues in Session122.
   delegations:
   - status: completed
     recording: contemporaneous
@@ -334,19 +336,24 @@ session:
   - packing/campaign/hypotheses/H-150-sixth-site-two-core-screen.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md
   - packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-152-sixth-site-two-core-screen.json
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-121-compatibility-target.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-121-six-dot.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-121-two-core.yaml
   checks:
   - PR142 head 8a35b482 passed matching fast and deferred validation and is ready for review.
   - New source changes begin on the stacked successor after PR142 readiness.
   - Six-dot source admitted at blobs 06bb100a94a35bdd78138d5467a450343a497476 (module) and 4b757fca7b9374c0bf8d4cb578ee0091526bd6b9
     (tests).
   - Two-core source admitted at 1868f3df5297e93ce8a6d6c4d17ba475ee88b8d3; tests 0cd1ce1bcdf4abcb4630343a332dcdbe9ea2488f.
-  stop_reason: null
-  next_action: Use the exact intersection result to choose relocation, weighted search, or a joint-owner
-    discriminator; retain global routing gap.
+  stop_reason: The four declared slices completed by18:48:31 UTC with exp150/151 refutations and exp152
+    necessary-screen acceptance. Direct full-family source preparation continues without pausing in Session122.
+    Publication certification is pending.
+  next_action: Continue BC-320 in Session122 under think-ykd6; think-ta8s owns matching full checkpoint
+    evidence before PR145 readiness.
+  certification_pending: think-ta8s
 ---
 # Session121: Test the Owner-Core Constraint
 
@@ -368,6 +375,12 @@ judgments and PRs.
 The broader census and full-support pricing remain deferred.
 Existing accepted and negative results are carried forward.
 No change to the global n11 bound is assumed.
+
+The four-slice research block closed at18:48:31 UTC with its original deadline
+unchanged. [Session122](session-122-direct-sixth-site-feasibility.md) takes the newly
+selected full-family calculation and subsequent publication work; this is continuous
+work with a nonoverlapping accounting boundary.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -341,19 +341,23 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H150/exp152
-tests whether any replacement sixth site can hit both saved escaping cores.
-PR142 completed matching fast and deferred validation and is ready; Session121 continues
-on the stacked branch `codex/n11-owner-core-compatibility`. Exp145 independently
-confirmed the selected five-dot cover, exp146 enlarged twelve of sixteen wall-aware
-owner footprints, and exp147 found no additional tuple by component containment.
+For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H151/exp153
+computes the complete feasible region for any sixth site with the original D fixed.
+PR142 completed matching fast and deferred validation and is ready; Session121 closed
+its four slices and separately tallied Session122 continues on the stacked branch
+`codex/n11-owner-core-compatibility`. Exp145 independently confirmed the selected
+five-dot cover, exp146 enlarged twelve of sixteen wall-aware owner footprints, and
+exp147 found no additional tuple by component containment.
 Exp148 retained a partial fixed-pattern screen.
 Exp149 then refuted the selected tuple `(0,0,0,7)` at owner-000 with an exact positive
 deficit and validated rational strict escape.
 Exp150 then refuted individual-owner exclusion of this escape: all four classes admit a
 strictly separated B-core, with exact independent replay.
-The six-dot follow-up must cover all 361 directions before it excludes this tuple; H146
-remains unresolved. The global n11 bracket is unchanged.
+Exp151 refuted the fixed sixth site, and exp152 retained a nonempty necessary two-core
+quadrilateral. Exp153 now tests the entire sixth-site family with D fixed; a positive
+answer needs all361 support directions and independent cover confirmation.
+H146 remains unresolved.
+The global n11 bracket is unchanged.
 PR137 retains the original sprint; PR142 stacks the separately tallied continuation.
 Draft PR145 carries the compatibility and six-dot work, with separate usage intervals.
 

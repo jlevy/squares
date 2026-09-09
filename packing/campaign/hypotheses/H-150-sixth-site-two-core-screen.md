@@ -50,7 +50,9 @@ The
 fixes the exact screen.
 [Source admission](../../cases/n11_five_dot_cover/sixth-site-screen-source-admission.md)
 is GO: 10 screen controls pass, and the independent combined suite passed 23 tests in
-0.99 seconds. No target has run.
+0.99 seconds. Exp152 now accepts this necessary screen: the exact intersection is a
+two-dimensional quadrilateral with a verified common site.
+No full cover follows.
 The
 [convex feasibility analysis](../../cases/n11_five_dot_cover/sixth-site-cutting-contract.md)
 explains a conditional bounded continuation and why three cores can certify
