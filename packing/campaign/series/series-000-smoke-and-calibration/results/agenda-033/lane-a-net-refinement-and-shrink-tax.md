@@ -1,4 +1,4 @@
-# Agenda 032, lane A: net refinement, frozen-measure expansion, and the shrink tax on the frozen T-018 atoms
+# Agenda 033, lane A: net refinement, frozen-measure expansion, and the shrink tax on the frozen T-018 atoms
 
 Retained measurement-lane report for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by a
@@ -7,8 +7,8 @@ The spike ran as “spike A/C” because it carried direction D2 (frozen-measure
 wave C) alongside D1 and D3; the report is reproduced as delivered, with its own status
 labels, and X-023 carries the coordinator’s reading.
 The 720-step and 1440-step certificates measured in Part A2 were since frozen, decided
-and registered as `T-023`, whose proof packet is
-[`t-023-dilation-limit-proof.md`](../../../../../cases/n11_fractional_certificate/t-023-dilation-limit-proof.md);
+and registered as `T-024`, whose proof packet is
+[`t-024-dilation-limit-proof.md`](../../../../../cases/n11_fractional_certificate/t-024-dilation-limit-proof.md);
 the numbers below are this lane’s measurement, not that packet’s statement, and nothing
 here is a registered round or a new bound.
 

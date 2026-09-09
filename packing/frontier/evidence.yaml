@@ -2020,11 +2020,11 @@ evidence:
         dilation argument are T-022's; the endpoint is new.
       gaps: >-
         A bounded search of one general index. Apparent novelty is not a priority claim.
-    certificate: cases/n11_fractional_certificate/t-023-net1440-dilation-limit-corollary.json
-    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate-381-100-net1440.json --source-name packing/cases/n11_fractional_certificate/certificate-381-100-net1440.json --check-limit-record cases/n11_fractional_certificate/t-023-net1440-dilation-limit-corollary.json
+    certificate: cases/n11_fractional_certificate/t-024-net1440-dilation-limit-corollary.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate-381-100-net1440.json --source-name packing/cases/n11_fractional_certificate/certificate-381-100-net1440.json --check-limit-record cases/n11_fractional_certificate/t-024-net1440-dilation-limit-corollary.json
     replay_status: passed
     proof:
-      source: cases/n11_fractional_certificate/t-023-dilation-limit-proof.md
+      source: cases/n11_fractional_certificate/t-024-dilation-limit-proof.md
       theorem: >-
         The 1440-step re-certification of the retained atoms and the sharpened
         containment lemma imply s(11) >= 3175000*sqrt(518400042893309449)/598960960743657.
@@ -2136,11 +2136,11 @@ evidence:
         its source rung is the one the standalone reader decides.
       gaps: >-
         A bounded search of one general index. Apparent novelty is not a priority claim.
-    certificate: cases/n11_fractional_certificate/t-023-dilation-limit-corollary.json
-    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate-381-100-net720.json --source-name packing/cases/n11_fractional_certificate/certificate-381-100-net720.json --check-limit-record cases/n11_fractional_certificate/t-023-dilation-limit-corollary.json
+    certificate: cases/n11_fractional_certificate/t-024-dilation-limit-corollary.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate-381-100-net720.json --source-name packing/cases/n11_fractional_certificate/certificate-381-100-net720.json --check-limit-record cases/n11_fractional_certificate/t-024-dilation-limit-corollary.json
     replay_status: passed
     proof:
-      source: cases/n11_fractional_certificate/t-023-dilation-limit-proof.md
+      source: cases/n11_fractional_certificate/t-024-dilation-limit-proof.md
       theorem: >-
         The 720-step re-certification of the retained atoms and the sharpened
         containment lemma imply s(11) >= 38100000*sqrt(129600042893309449)/3594594251080001.

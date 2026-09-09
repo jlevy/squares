@@ -1984,7 +1984,7 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     the same refusal applies to the record layer of all three, which is why the record
     layer stayed and only the per-case re-derivation left.
 
-    **An eighth and a ninth arrived on 2026-09-09 with `T-023`.** The two `finer-net
+    **An eighth and a ninth arrived on 2026-09-09 with `T-024`.** The two `finer-net
     dilation-limit record` steps are `devtools.dilation_corollary --check-limit-record`
     on the two finer-net re-certifications of the retained `n = 11` atoms, and each
     check replays all five source conditions over 721 or 1441 directions before

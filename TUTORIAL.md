@@ -94,7 +94,7 @@ its search strategy.
 
 The technical record retains the refinement `s(11) ≥ 3.816609502788862…` in the
 [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
-[T-023](packing/cases/n11_fractional_certificate/t-023-dilation-limit-proof.md) proof
+[T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
 packets. It is a weak limit bound and does not decide fit at that endpoint; the table
 uses the simpler certificate bound proved below.
 

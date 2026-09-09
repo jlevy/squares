@@ -1,4 +1,4 @@
-# T-023 Dilation-Limit Corollary on a Finer Net, Derived from T-018’s Atoms
+# T-024 Dilation-Limit Corollary on a Finer Net, Derived from T-018’s Atoms
 
 The retained T-018 atoms, placed on a finer direction net at a larger shrunken side and
 rescaled by one rational factor, form a certificate of the retained form whose sharpened
@@ -9,7 +9,7 @@ s(11) >= 3175000*sqrt(518400042893309449)/598960960743657
       = 3.81660950278886223509...
 ```
 
-T-023 is a limit corollary, not a certificate at the displayed endpoint.
+T-024 is a limit corollary, not a certificate at the displayed endpoint.
 It neither decides whether eleven squares fit at that endpoint nor proves a strict lower
 bound. It moves the exact lower endpoint by `0.0065838` beyond T-022.
 
@@ -128,7 +128,7 @@ admits; the 1440-step net adds a direction near `28.3°` that the 720-step cross
 shrink does not cover, so it pays `5.69 · 10^-5` in `B` to halve `D`, and the net gain
 over `C_720` is `0.00087918` in side against the `0.0011` a fixed crossing would have
 given. The exact ceiling family retained at
-`campaign/series/series-000-smoke-and-calibration/results/agenda-032/ceiling-family-191-50.json`
+`campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json`
 shows that no certificate of this one-body form, at any shrink and on any net containing
 its six directions, can pass unit side `3.8288`, that is `L < 3.8288 · B`. The
 unit-equivalent side of `C_1440` and `C_720` is `3.8177` and `3.8179`, about `0.011`
@@ -146,13 +146,13 @@ uv run --frozen --all-extras --group dev python -m devtools.decide_certificate \
 uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary \
   cases/n11_fractional_certificate/certificate-381-100-net1440.json \
   --source-name packing/cases/n11_fractional_certificate/certificate-381-100-net1440.json \
-  --check-limit-record cases/n11_fractional_certificate/t-023-net1440-dilation-limit-corollary.json
+  --check-limit-record cases/n11_fractional_certificate/t-024-net1440-dilation-limit-corollary.json
 ```
 
 The first decides the certificate by both routes (about ten minutes on one core), and
 the second replays Conditions 1 to 5 from the bytes and re-derives the limit record.
 The same two commands with `certificate-381-100-net720.json` and
-`t-023-dilation-limit-corollary.json` decide the 720-step rung, and
+`t-024-dilation-limit-corollary.json` decide the 720-step rung, and
 
 ```bash
 uv run --frozen --all-extras --group dev python cases/n11_fractional_certificate/verify_claim.py \

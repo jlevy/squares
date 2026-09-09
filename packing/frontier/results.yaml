@@ -1184,7 +1184,7 @@ results:
       supremum. Direction-specific cores, two-core endpoint averaging, or exact
       fixed-atom core shrinkage might extract more from the same data; the present
       argument cannot prove a strict bound at its own endpoint.
-  - id: T-023
+  - id: T-024
     claim: >-
       s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862,
       as a weak limit corollary of T-018's retained atoms re-certified on a finer
@@ -1241,10 +1241,10 @@ results:
       - E-n011-fractional-net720-dilation-limit
     artifacts:
       - packing/cases/n11_fractional_certificate/certificate-381-100-net1440.json
-      - packing/cases/n11_fractional_certificate/t-023-net1440-dilation-limit-corollary.json
+      - packing/cases/n11_fractional_certificate/t-024-net1440-dilation-limit-corollary.json
       - packing/cases/n11_fractional_certificate/certificate-381-100-net720.json
-      - packing/cases/n11_fractional_certificate/t-023-dilation-limit-corollary.json
-      - packing/cases/n11_fractional_certificate/t-023-dilation-limit-proof.md
+      - packing/cases/n11_fractional_certificate/t-024-dilation-limit-corollary.json
+      - packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md
       - packing/devtools/measure_net_refinement.py
       - packing/devtools/dilation_corollary.py
       - packing/devtools/decide_certificate.py
@@ -1267,7 +1267,7 @@ results:
       intermediate direction, so the gain is entirely the shrink the finer net admits,
       and the exact ceiling family at 191/50 caps every one-body point certificate at
       unit side 3.8288 on any net containing its six directions. The next movement is
-      therefore a re-optimised certificate at a finer net (H-137), which the covering
+      therefore a re-optimised certificate at a finer net (H-144), which the covering
       LP on the frozen sites already shows to be below eleven at 720 steps, and past
-      the cap the threshold atoms of H-136. The endpoint itself remains a weak limit
+      the cap the threshold atoms of H-143. The endpoint itself remains a weak limit
       with no endpoint certificate and no strict inequality.

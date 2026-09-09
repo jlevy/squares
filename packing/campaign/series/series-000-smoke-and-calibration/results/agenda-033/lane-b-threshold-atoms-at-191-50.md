@@ -1,4 +1,4 @@
-# Agenda 032, lane B: threshold atoms at 191/50
+# Agenda 033, lane B: threshold atoms at 191/50
 
 Retained measurement-lane report for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by

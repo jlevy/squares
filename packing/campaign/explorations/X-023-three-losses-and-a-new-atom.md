@@ -39,7 +39,7 @@ exploration:
   - packing/src/sqpack/fractional/certificate.py
   - packing/src/sqpack/fractional/sweep.py
   - packing/src/sqpack/fractional/ceiling.py
-  proposes: [H-136, H-137, H-138]
+  proposes: [H-143, H-144, H-145]
 ---
 # X-023 — Three Losses and a New Atom: Where the Next Stretch of s(11) Comes From
 
@@ -217,7 +217,7 @@ that kills it; the wave-one spikes are marked.
 
 This section is filled as each spike reports; a row without a settled number is still
 running. The lane reports are retained under
-[`results/agenda-032/`](../series/series-000-smoke-and-calibration/results/agenda-032/)
+[`results/agenda-033/`](../series/series-000-smoke-and-calibration/results/agenda-033/)
 with their scripts.
 
 **The ceiling at `3.82` is a theorem.** Spike B’s combined loop, after one exact
@@ -228,9 +228,9 @@ directions, weight `1/8` each, total exactly `11`, with exact maximum depth `1` 
 `sqpack.fractional.ceiling.verify_ceiling` proves it (`net` regime, D4-symmetric
 measures), and the coordinator replayed the frozen bytes (SHA-256 `95cf0647…6427`,
 retained as
-[`ceiling-family-191-50.json`](../series/series-000-smoke-and-calibration/results/agenda-032/ceiling-family-191-50.json)
+[`ceiling-family-191-50.json`](../series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json)
 with its
-[replay receipt](../series/series-000-smoke-and-calibration/results/agenda-032/ceiling-family-191-50-replay.json)).
+[replay receipt](../series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50-replay.json)).
 By weak duality no D4-symmetric point-atom measure of mass below eleven covers every
 closed `9977/10000`-square at a net angle in `[0, 191/50]^2`, on this net or any net
 containing those six directions; the statement transfers upward in `L` and downward in
@@ -254,10 +254,10 @@ The dilation supremum `(381/100) · sqrt(1 + D_N^2) / (B_cross(N)(1 + D_N))` is 
 `3.81353994` at `360`, `3.81573032` at `720` and `3.81660950` at `1440`, against T-022’s
 `3.810025723614703`. The retention packet froze both certificates at their crossing
 shrinks, decided each through the two-route gate, and derived each dilation corollary;
-the `1440` rung is registered as `T-023`, `s(11) >= 3.816609502788862...`, with the
+the `1440` rung is registered as `T-024`, `s(11) >= 3.816609502788862...`, with the
 `720` rung, the one the standalone reader also decides, retained beside it.
 The proof packet is
-[`t-023-dilation-limit-proof.md`](../../cases/n11_fractional_certificate/t-023-dilation-limit-proof.md).
+[`t-024-dilation-limit-proof.md`](../../cases/n11_fractional_certificate/t-024-dilation-limit-proof.md).
 The ceiling above says the same atoms can never be dilated past `3.8288 · B_max(N)`, and
 the unit-equivalent side of these certificates, `3.8177` to `3.8179`, sits `0.011` below
 that cap.

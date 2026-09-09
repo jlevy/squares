@@ -234,7 +234,7 @@ Counts below are computed from the artifacts, not asserted.
 Of the 265 open cases, **258** have Nagamochi’s formula as their independently verified
 lower bound. The other seven use weighted fractional unavoidable-set certificates held
 here: `n = 11` at the exact dilation limit approximately `3.816609502789` and `n = 12`
-at `99/25` (`T-023`, `T-017`); `n = 17` and `n = 18` at `459/100` (`T-019`); `n = 19` at
+at `99/25` (`T-024`, `T-017`); `n = 17` and `n = 18` at `459/100` (`T-019`); `n = 19` at
 `24/5` (`T-020`); and `n = 20` and `n = 21` at `97/20` (`T-021`). Within the original
 `n ≤ 100` corpus, the corresponding Nagamochi count fell from sixty-three before
 2026-09-03 to fifty-eight after those adoptions.

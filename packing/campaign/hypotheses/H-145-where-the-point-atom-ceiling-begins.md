@@ -1,12 +1,12 @@
 ---
-title: H-138 — where does the point-atom ceiling begin?
+title: H-145 — where does the point-atom ceiling begin?
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
   envelope: hypothesis
   status: enforced
 hypothesis:
-  id: H-138
+  id: H-145
   kind: open_question
   claim: >-
     Two questions about the edge of the exact ceiling at 191/50. First: what is the least
@@ -48,11 +48,11 @@ hypothesis:
     also under a ceiling is the cheapest discriminating measurement lane E left open: if
     it is, the 5,700 seconds spent on its row completion are answered rather than merely
     unfinished. The second question is the one that decides whether the finer-net route of
-    H-137 has room at 3.82 at all: the ceiling transfers to every smaller B and every
+    H-144 has room at 3.82 at all: the ceiling transfers to every smaller B and every
     larger L, so a family that holds at B near one would close 3.82 for every net
     containing its directions and every admissible shrink.
 ---
-# H-138 — Where the Ceiling Starts, and What It Is Attached To
+# H-145 — Where the Ceiling Starts, and What It Is Attached To
 
 The exact depth-one family at `191/50` is a statement about a side, a shrink and a net,
 not about a site set, and its edges are not known.
@@ -64,7 +64,7 @@ exact maximum depth of `7/4`.
 Both edges are cheap to probe and neither has been probed.
 [X-023](../explorations/X-023-three-losses-and-a-new-atom.md) records the ceiling and
 its transfer rules; the
-[ceiling reader’s report](../series/series-000-smoke-and-calibration/results/agenda-032/ceiling-reader-191-50.md)
+[ceiling reader’s report](../series/series-000-smoke-and-calibration/results/agenda-033/ceiling-reader-191-50.md)
 names the two bisections that would settle these questions and times a single decision
 at under a second. This is registered as an open question rather than a hypothesis
 because neither half has a predicted answer worth writing down: the first asks for a

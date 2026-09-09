@@ -2099,7 +2099,7 @@ def _exact_grid_replay(context: Context) -> str:
 
 
 def _finer_net_limit_record(context: Context, steps: int, record: str) -> str:
-    """One of T-023's limit records, replayed from its source certificate in full.
+    """One of T-024's limit records, replayed from its source certificate in full.
 
     Each record is derived from a re-certification of the retained T-018 atoms on a
     finer direction net, and `--check-limit-record` replays all five source conditions
@@ -2131,11 +2131,11 @@ def _finer_net_limit_record(context: Context, steps: int, record: str) -> str:
 
 
 def _finer_net_limit_record_720(context: Context) -> str:
-    return _finer_net_limit_record(context, 720, "t-023-dilation-limit-corollary.json")
+    return _finer_net_limit_record(context, 720, "t-024-dilation-limit-corollary.json")
 
 
 def _finer_net_limit_record_1440(context: Context) -> str:
-    return _finer_net_limit_record(context, 1440, "t-023-net1440-dilation-limit-corollary.json")
+    return _finer_net_limit_record(context, 1440, "t-024-net1440-dilation-limit-corollary.json")
 
 
 def _verifier_limits(context: Context) -> str:
@@ -3242,7 +3242,7 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/check_rational_witness_independent.py",
         ),
     ),
-    # T-023's limit records replay their five source conditions over 721 and 1441
+    # T-024's limit records replay their five source conditions over 721 and 1441
     # directions, 173s and 352s on one core; the docstring on `_finer_net_limit_record`
     # carries the measurements and the cheap stand-in the pull-request surface keeps.
     # Each touches what `exact verification` touches.

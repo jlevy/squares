@@ -435,9 +435,9 @@ below are what remains once that route is closed.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
-| 132 | A threshold certificate at 3.82 | registered | [H-136](hypotheses/H-136-threshold-certificate-at-191-50.md) | The point method is capped at eleven there by an exact depth-one family; that same family is cut by 2-of-3 atoms at charge 5/4, so the new language is not capped with it. |
-| 133 | Re-optimise the covering LP on a finer net | registered | [H-137](hypotheses/H-137-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
-| 134 | Where does the point-atom ceiling begin? | registered | [H-138](hypotheses/H-138-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
+| 139 | A threshold certificate at 3.82 | registered | [H-143](hypotheses/H-143-threshold-certificate-at-191-50.md) | The point method is capped at eleven there by an exact depth-one family; that same family is cut by 2-of-3 atoms at charge 5/4, so the new language is not capped with it. |
+| 140 | Re-optimise the covering LP on a finer net | registered | [H-144](hypotheses/H-144-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
+| 141 | Where does the point-atom ceiling begin? | registered | [H-145](hypotheses/H-145-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
 
 ## Dead ends
 

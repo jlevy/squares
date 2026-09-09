@@ -1,12 +1,12 @@
 ---
-title: H-137 — a re-optimised point certificate on a finer net approaches the cap
+title: H-144 — a re-optimised point certificate on a finer net approaches the cap
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
   envelope: hypothesis
   status: enforced
 hypothesis:
-  id: H-137
+  id: H-144
   kind: hypothesis
   claim: >-
     The covering LP re-optimised on a net of 720 or more directions at the sharpened
@@ -65,7 +65,7 @@ hypothesis:
     costs no coverage on the frozen atoms: with the sharpened shrink of each net the
     least mass stays 4001/4000 at every net up to 2880 steps.
 ---
-# H-137 — What the Finer Net Is Worth Once the Measure Moves
+# H-144 — What the Finer Net Is Worth Once the Measure Moves
 
 The shrink is a tax of `L(1/B - 1)` in side, paid once, and a finer direction net buys
 it back: `0.0088` at `3.82` on the retained net, `0.0011` at 1440 steps.
@@ -81,7 +81,7 @@ Scaled to unit squares it caps the one-body point method at side `3.8288`, so a
 certificate on a finer net has about `0.012` of unit side left, and the question this
 claim asks is how much of it the LP takes.
 
-[Lane T](../series/series-000-smoke-and-calibration/results/agenda-032/lane-t-theory-cuts-and-routes.md)
+[Lane T](../series/series-000-smoke-and-calibration/results/agenda-033/lane-t-theory-cuts-and-routes.md)
 proves the cap applies to every sound core rule, not only to the concentric square core,
 so a refutation here is a refutation of the whole one-body family at that side.
 

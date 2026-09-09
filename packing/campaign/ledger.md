@@ -759,9 +759,9 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
-| H-136 | blocked | proof | The rank-one threshold-atom closure -- point atoms together with (S, k |  | 0 |  |  |
-| H-137 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
-| H-138 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
+| H-143 | blocked | proof | The rank-one threshold-atom closure -- point atoms together with (S, k |  | 0 |  |  |
+| H-144 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
+| H-145 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

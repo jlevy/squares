@@ -1,4 +1,4 @@
-# Agenda 032, lane T: what the certificate language can and cannot do past 3.82
+# Agenda 033, lane T: what the certificate language can and cannot do past 3.82
 
 Retained analysis-lane report for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by a

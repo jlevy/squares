@@ -92,7 +92,7 @@ concurrency:
 jobs:
   deferred-steps:
     # Six of the nine deferrals: negative controls, the n=40 rigidity bracket,
-    # the known-best atlas rebuild, exact rational grid replay, and T-023's two
+    # the known-best atlas rebuild, exact rational grid replay, and T-024's two
     # finer-net dilation-limit records (173s and 352s on one core, each a full
     # five-condition replay of a 721- or 1441-direction certificate). The slow lane,
     # exhaustive tier and translation screen each have a separate job below.

@@ -1,4 +1,4 @@
-# Agenda 032: reconciliation against the in-flight upstream branches, 2026-09-09
+# Agenda 033: reconciliation against the in-flight upstream branches, 2026-09-09
 
 Retained read-only review by an Opus sub-agent for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), made from the
@@ -7,7 +7,17 @@ No git state was changed; everything is `git show`, `git diff` and
 `git merge-tree --write-tree` against remote refs.
 The report is reproduced as delivered; the coordinator acted on its first recommendation
 (X-022 became X-023 and `results/agenda-031/` became `results/agenda-032/`) before
-committing it.
+committing it, and the same directory became `results/agenda-033/` later on 2026-09-09,
+once PR 137 advanced and took `agenda-032` as well.
+
+**Amended later on 2026-09-09, after PR 137 moved past the head this report read.**
+`origin/codex/n11-ownership-continuation` has since registered its own `T-023` (a
+five-dot four-owner branch exclusion), `H-136` through `H-142`, `agenda-032` and its
+results directory, and `ideas.md` rows through 138. PR 137 wins every collision, so this
+branch renumbered a second time: its result became `T-024`, its three hypotheses became
+`H-143` to `H-145`, its results directory became `results/agenda-033/`, and its idea
+rows became 139 to 141. The allocations this branch took are updated below; every column
+reporting an upstream ref still reads as of `a1fc0306`.
 
 **Headline: every identifier this branch had allocated was already taken by
 `origin/codex/n11-ownership-continuation` (PR 137, head `a1fc0306`, one commit ahead of
@@ -22,13 +32,13 @@ unrun pricing round was funded to explore.
 | --- | --- | --- | --- |
 | `X-022` | `explorations/X-022-segment-ownership-continuation.md`, “Segment Ownership Constraints After the PR 127 Review”, dated 2026-09-08, `proposes: [H-135]` | the three-losses exploration, dated 2026-09-09 | **Renumbered to X-023.** Upstream is a day earlier, is the funded PR 127 continuation, and is already cited from its own agenda, ledger, `ideas.md` and SYNOPSIS. |
 | `agenda-031` | `agendas/agenda-031-ownership-and-pricing.md` (status `active`, BC-305 to BC-308) plus `results/agenda-031/` holding 18 ownership files | this branch’s results directory | **Moved to `results/agenda-032/`**; `agenda-032` is taken when an agenda is registered. The two result sets shared a directory name but no filenames, so a merge would have silently mixed two unrelated agendas’ evidence. |
-| `H-135` | `hypotheses/H-135-paired-full-support-pricing.md`, registered 2026-09-08, lane `proof`, open | “H-135 onward” | **Start at H-136.** |
+| `H-135` | `hypotheses/H-135-paired-full-support-pricing.md`, registered 2026-09-08, lane `proof`, open | “H-135 onward” | **Start at H-143.** |
 | `BC-305` | agenda-031 BC-305 (ownership replay, in progress, bead `think-qfog`); BC-306 (ready, `think-7lp3`), BC-307 (tentative), BC-308 (blocked) | “BC-305 onward” | **Start at BC-309.** |
 | `session-111` | `session-111-ownership-and-pricing.md` on the ownership branch **and** `session-111-font-startup-stability.md` on `origin/codex/math-startup-stability`, both dated 2026-09-08 | none yet | Not ours to fix; flagged: session-111 is double-allocated between two upstream branches. This branch takes session-112 onward. |
 | `exp-134`, `exp-135` | `exp-134` preregistered by BC-306/H-135 (never launched); `exp-135` named as BC-307’s reserve | none yet | **Start at exp-136.** |
-| `T-023` | free on all seven refs | the finer-net dilation bound | No collision. |
+| `T-024` | free on all seven refs | the finer-net dilation bound | Renumbered with the amendment above; no collision at `T-024`. |
 | next defect id | free: main and the ownership branch both stop at D-488 | none | No action. |
-| idea row `131` | ownership adds idea 131 | none yet | **Start at 132.** |
+| idea row `131` | ownership adds idea 131 | none yet | **Start at 139.** |
 | devtool filenames | `corner_ownership_audit.py`, `outer_pair_corner_audit.py`, `outer_segment_pair_screen.py`, `price_cutting_state_dual.py` | `decide_threshold_certificate.py`, `measure_net_refinement.py`, `expand_frozen_measure.py`, `polish_ceiling_family.py`, `independent_ceiling_reader.py` | No collision. |
 
 `origin/codex/n11-structural-dot-plans` adds one commit past merged PR 121 (`c08a9016`):
@@ -61,14 +71,14 @@ marks and inside the gap main already left; nothing collides.
 | Family | main | this branch | ownership | dot-plans | hybrid | pr-stack-ci | math-startup | **Next free** |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `X-0xx` | X-021 | X-023 | X-022 | X-019 | X-018 | X-018 | — | **X-024** |
-| `agenda-0xx` | 030 | (032 reserved) | 031 | 029 | 028 | 028 | 030 | **agenda-033 after 032** |
-| `H-1xx` | H-134 | H-134 | H-135 | H-126 | H-124 | H-124 | H-134 | **H-136** |
+| `agenda-0xx` | 030 | (033 reserved) | 031 | 029 | 028 | 028 | 030 | **agenda-034 after 033** |
+| `H-1xx` | H-134 | H-134 | H-135 | H-126 | H-124 | H-124 | H-134 | **H-143** |
 | `BC-3xx` | BC-304 | BC-304 | BC-308 | BC-290 | BC-283 | BC-283 | BC-304 | **BC-309** |
 | `session-1xx` | 110 | 110 | 111 | 099 | 098 | 106 | 111 | **session-112** |
 | `exp-1xx` | exp-133 | exp-133 | exp-135 | exp-130 | exp-129 | exp-129 | exp-133 | **exp-136** |
-| `T-0xx` | T-022 | T-022 | T-022 | T-022 | T-022 | T-022 | T-022 | **T-023** |
+| `T-0xx` | T-022 | T-022 | T-022 | T-022 | T-022 | T-022 | T-022 | **T-024** |
 | defects | D-488 | D-488 | D-488 | D-480 | D-480 | D-488 | D-488 | the one after D-488 |
-| `ideas.md` row | 130 | 130 | 131 | — | 118 | 118 | — | **132** |
+| `ideas.md` row | 130 | 130 | 131 | — | 118 | 118 | — | **139** |
 
 ## 4. Textual merge exposure
 
@@ -77,7 +87,7 @@ marks and inside the gap main already left; nothing collides.
 (`SYNOPSIS.md`); `n11-hybrid-overnight` nine conflicts in shared registries and
 generated views; `review-pr-stack-ci-0dorfw` eight; `math-startup-stability` clean.
 None of `threshold.py`, the new devtools, `test_fractional_threshold.py`, or the
-agenda-032 results is touched by any upstream branch.
+agenda-033 results is touched by any upstream branch.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

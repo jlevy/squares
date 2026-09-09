@@ -1,12 +1,12 @@
 ---
-title: H-136 — a threshold certificate exists at 191/50 with the retained shrink and net
+title: H-143 — a threshold certificate exists at 191/50 with the retained shrink and net
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
   envelope: hypothesis
   status: enforced
 hypothesis:
-  id: H-136
+  id: H-143
   kind: hypothesis
   claim: >-
     The rank-one threshold-atom closure -- point atoms together with (S, k) threshold
@@ -72,7 +72,7 @@ hypothesis:
     rows whose overlaps sit in slivers no site samples. The loop had not converged at its
     budget, so nothing here is evidence either way about the claim.
 ---
-# H-136 — A Certificate the Ceiling Does Not Cap
+# H-143 — A Certificate the Ceiling Does Not Cap
 
 The exact depth-one family at `191/50` closes the point-atom route there: no
 D4-symmetric measure of mass below eleven covers every closed `9977/10000`-square at a
@@ -91,9 +91,9 @@ refill it three times; that is the measurement this claim was compressed out of,
 decides nothing.
 
 The two lane reports behind it are
-[lane E](../series/series-000-smoke-and-calibration/results/agenda-032/lane-e-lp-runs-61-16-and-191-50.md),
+[lane E](../series/series-000-smoke-and-calibration/results/agenda-033/lane-e-lp-runs-61-16-and-191-50.md),
 which shows the point-side loop descending to a floor it cannot cross, and
-[lane M0](../series/series-000-smoke-and-calibration/results/agenda-032/lane-m0-fixed-support-polish-191-50.md),
+[lane M0](../series/series-000-smoke-and-calibration/results/agenda-033/lane-m0-fixed-support-polish-191-50.md),
 which prices the clique that the threshold language expresses.
 
 <!-- This document follows common-doc-guidelines.md.

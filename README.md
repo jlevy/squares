@@ -93,7 +93,7 @@ Results first established here, as far as the recorded source searches show:
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
   Two refinements, recorded in the
   [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
-  [T-023](packing/cases/n11_fractional_certificate/t-023-dilation-limit-proof.md) proof
+  [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
   packets, give `s(11) ≥ 3.816609502788862…` as a weak limit bound; neither decides fit
   at its endpoint. The certificate at `3.81` supplies the proof explained here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
