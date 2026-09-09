@@ -1,7 +1,7 @@
-# Agenda 031, ceiling reader: an independent exact decision of the 191/50 ceiling family
+# Agenda 032, ceiling reader: an independent exact decision of the 191/50 ceiling family
 
 Retained replay report for
-[X-022](../../../../explorations/X-022-three-losses-and-a-new-atom.md), written by a
+[X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by a
 Fable sub-agent on 2026-09-09 from the statement alone: the reader imports nothing from
 `sqpack` and was written before the repository’s verifier was read.
 The reader is promoted as `packing/devtools/independent_ceiling_reader.py`; its result

@@ -1,15 +1,15 @@
-# Agenda 031, lane T: what the certificate language can and cannot do past 3.82
+# Agenda 032, lane T: what the certificate language can and cannot do past 3.82
 
 Retained analysis-lane report for
-[X-022](../../../../explorations/X-022-three-losses-and-a-new-atom.md), written by a
+[X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by a
 Fable sub-agent at maximum effort on 2026-09-09 under the breadth survey the owner
 requested. Read-only on the repository; its four scripts and their outputs ran from the
 untracked scratchpad and are reproduced in the appendix so every number can be
-recomputed. The report is reproduced as delivered, with its own status labels; X-022
+recomputed. The report is reproduced as delivered, with its own status labels; X-023
 carries the coordinator’s reading of it.
 Nothing here is a registered round or a new bound.
 The ceiling family this lane asked for (M0 of its plan) was produced by spike B and
-replayed by the coordinator; see X-022.
+replayed by the coordinator; see X-023.
 
 Labels: PROVED (proof here), EXACT (rational decision by repository primitives), CHECKED
 (float script retained), RECORD (retained file), PLAUSIBLE, SPECULATIVE, OPEN.

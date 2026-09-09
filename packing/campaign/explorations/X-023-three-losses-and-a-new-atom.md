@@ -1,12 +1,12 @@
 ---
-title: "X-022 — three losses and a new atom: where the next stretch of s(11) comes from"
+title: "X-023 — three losses and a new atom: where the next stretch of s(11) comes from"
 softschema:
   contract: packing.squares:Exploration/v1
   schema: ../schemas/exploration.schema.yaml
   envelope: exploration
   status: enforced
 exploration:
-  id: X-022
+  id: X-023
   title: "Three Losses and a New Atom: Where the Next Stretch of s(11) Comes From"
   date: '2026-09-09'
   author: Claude coordinator (Fable), with two Opus agents for mechanical work and three Fable agents for measurement and mathematics
@@ -41,7 +41,7 @@ exploration:
   - packing/src/sqpack/fractional/ceiling.py
   proposes: []
 ---
-# X-022 — Three Losses and a New Atom: Where the Next Stretch of s(11) Comes From
+# X-023 — Three Losses and a New Atom: Where the Next Stretch of s(11) Comes From
 
 **The certificate that proved `s(11) >= 3.81` loses side in three separable places, and
 each loss has its own remedy.** The shrink `B = 9977/10000` costs a fixed `0.23%` of
@@ -217,7 +217,7 @@ that kills it; the wave-one spikes are marked.
 
 This section is filled as each spike reports; a row without a settled number is still
 running. The lane reports are retained under
-[`results/agenda-031/`](../series/series-000-smoke-and-calibration/results/agenda-031/)
+[`results/agenda-032/`](../series/series-000-smoke-and-calibration/results/agenda-032/)
 with their scripts.
 
 **The ceiling at `3.82` is a theorem.** Spike B’s combined loop, after one exact
@@ -228,9 +228,9 @@ directions, weight `1/8` each, total exactly `11`, with exact maximum depth `1` 
 `sqpack.fractional.ceiling.verify_ceiling` proves it (`net` regime, D4-symmetric
 measures), and the coordinator replayed the frozen bytes (SHA-256 `95cf0647…6427`,
 retained as
-[`ceiling-family-191-50.json`](../series/series-000-smoke-and-calibration/results/agenda-031/ceiling-family-191-50.json)
+[`ceiling-family-191-50.json`](../series/series-000-smoke-and-calibration/results/agenda-032/ceiling-family-191-50.json)
 with its
-[replay receipt](../series/series-000-smoke-and-calibration/results/agenda-031/ceiling-family-191-50-replay.json)).
+[replay receipt](../series/series-000-smoke-and-calibration/results/agenda-032/ceiling-family-191-50-replay.json)).
 By weak duality no D4-symmetric point-atom measure of mass below eleven covers every
 closed `9977/10000`-square at a net angle in `[0, 191/50]^2`, on this net or any net
 containing those six directions; the statement transfers upward in `L` and downward in

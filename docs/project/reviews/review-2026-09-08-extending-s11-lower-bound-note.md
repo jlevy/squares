@@ -4,8 +4,8 @@
 2026-09-08.** It was written against repository snapshot `7ef80525`, before PRs 116, 121
 and 127 landed, and is checked in here verbatim as a record so that its proposals can be
 cited and dispositioned. It adjudicates nothing and changes no bound.
-The integration decisions belong to the exploration the coordinator is writing, X-022 at
-`packing/campaign/explorations/X-022-...`, not to this record.
+The integration decisions belong to the exploration the coordinator is writing, X-023 at
+`packing/campaign/explorations/X-023-...`, not to this record.
 
 ## Assessment
 
