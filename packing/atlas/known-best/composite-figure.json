@@ -581,16 +581,15 @@
           "state": "minimal-polynomial"
         },
         "lower": {
-          "display": "s(11) ≥ 3.816609",
+          "display": "s(11) ≥ 3.82",
           "evidence": [
-            "E-n011-fractional-net1440-certificate",
-            "E-n011-fractional-net1440-dilation-limit",
-            "E-n011-fractional-net1440-interval-decision"
+            "E-n011-threshold-certificate",
+            "E-n011-threshold-interval-decision"
           ],
           "first_proved_here": true,
           "provenance": "frontier",
           "shown": true,
-          "value": "3.816609502788862"
+          "value": "3.82"
         },
         "n": 11,
         "optimality": {

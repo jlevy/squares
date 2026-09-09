@@ -444,6 +444,10 @@ documents:
     role: research-report
     authority: record
     lifecycle: retained
+  - path: packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
+    role: research-report
+    authority: record
+    lifecycle: retained
   - path: packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
     role: generated-view
     authority: generated

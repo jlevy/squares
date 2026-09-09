@@ -849,6 +849,15 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             # 34139067270) before the surface copy was cut to the atlas sample's stride.
             "test_every_known_best_witness_agrees_with_its_manifest_entry",
         },
+        # 47s of call time across 1: the interval route over the whole doubled net of the
+        # retained threshold certificate, 361 directions and 1,639,903 boxes at one
+        # worker. Not a shared build -- the file's other seven tests sweep one direction
+        # or decide a small fixture and cost 2.7s between them -- so this pays only for
+        # itself, and the two-route gate it is half of is a command in the proof packet
+        # rather than a test at all.
+        "test_n11_threshold_certificate.py": {
+            "test_the_case_package_replays_the_retained_bytes_by_the_interval_route",  # 46.7s
+        },
         # 2s of call time across 1, and it is the boundary case the band exists for.
         # 2.22s locally, 6.43s on CI -- slower cores and two lanes beside it -- so it sat
         # under the 5s ceiling everywhere it had been run and over it where it counted.

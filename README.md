@@ -95,7 +95,11 @@ Results first established here, as far as the recorded source searches show:
   [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
   [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
   packets, give `s(11) ≥ 3.816609502788862…` as a weak limit bound; neither decides fit
-  at its endpoint. The certificate at `3.81` supplies the proof explained here.
+  at its endpoint. The verified bound now stands at `191/50 = 3.82`, on a certificate of
+  a different kind — point atoms plus *threshold atoms*, whose budget rule is what
+  carries the side past the point method’s proved ceiling — stated for a stranger in the
+  [T-025 proof packet](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md).
+  The certificate at `3.81` supplies the proof explained here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
   bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s `4.5058`,
   taken from a source rather than proved here.

@@ -95,8 +95,12 @@ its search strategy.
 The technical record retains the refinement `s(11) ≥ 3.816609502788862…` in the
 [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
 [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
-packets. It is a weak limit bound and does not decide fit at that endpoint; the table
-uses the simpler certificate bound proved below.
+packets. It is a weak limit bound and does not decide fit at that endpoint.
+The strongest verified bound is `s(11) ≥ 191/50 = 3.82`, proved by the threshold
+certificate of
+[T-025](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md),
+which adds atoms of a second kind to the ones explained here.
+The table uses the simpler certificate bound proved below.
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** is the distance between the best upper and lower bounds, which

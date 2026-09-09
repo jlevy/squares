@@ -1329,3 +1329,81 @@ results:
       LP on the frozen sites already shows to be below eleven at 720 steps, and past
       the cap the threshold atoms of H-143. The endpoint itself remains a weak limit
       with no endpoint certificate and no strict inequality.
+  - id: T-025
+    claim: >-
+      s(11) >= 191/50 = 3.82, by a threshold certificate: 584 point atoms of mass
+      271052551/31250000 and 320 threshold atoms, every one 2-of-3, of budget
+      143352577/62500000, on the D4-symmetric site set at shrunken side 9977/10000 and
+      the 181-direction net. A threshold atom (S, k, w) charges w to every admissible
+      core holding at least k points of S and costs w floor(|S| / k) of the budget, so
+      the family's total budget is 685457679/62500000 = 10.967322864, strictly below 11,
+      while every event cell at every net direction carries charge at least
+      100000203/100000000. The counting argument then rules out eleven unit squares with
+      pairwise disjoint interiors in a container of side 191/50. This is an endpoint
+      certificate at the container side itself, not a limit: it proves no strict
+      inequality at 3.82 and carries no dilation family.
+    scope:
+      n_values:
+        - 11
+    verification: V4
+    confirmation: C5
+    significance:
+      score: 5
+      rationale: >-
+        The rubric's S5 anchor is movement on a central open case, and this raises the
+        verified lower endpoint of the smallest open case by 0.0033905 beyond T-024 and
+        by 0.0311456 beyond Stromquist, leaving the interval [3.82, 3.877084] and a gap
+        of 0.057084. What earns the score beyond the arithmetic is the architecture: the
+        exact depth-one ceiling family retained at this same side proves that no
+        D4-symmetric point-atom measure of mass below eleven exists here, so no
+        certificate of the earlier one-body form could have reached it, and the threshold
+        atoms carry 2.293641 of this budget that the point method cannot have. It is the
+        first certificate of a new kind in this project, decided from frozen bytes by two
+        routes and reviewed adversarially before registration.
+      scored: '2026-09-09'
+      by: repository replay of the two-route retention gate, against a source-distinct adversarial review of the theorem
+    novelty: apparently-novel
+    composition: >-
+      One certificate, decided twice. Conditions 1, 1', 2', 3 and 4 are closed-form
+      consequences of the frozen bytes and were recomputed without sqpack in the review;
+      Condition 5' is decided by the exact event-cell sweep of sqpack.fractional.threshold,
+      whose dense-grid and slab evaluations agree at every direction and whose witness
+      charge is re-evaluated by membership counting, and independently by the interval
+      branch and bound of sqpack.fractional.threshold_interval over the doubled net, which
+      never invokes the D4 argument. The two share the loader, the conditions and the net,
+      and no part of how Condition 5' is decided; the gate refuses the record unless both
+      accept and agree on the least charge exactly. C5 rests on those two machine routes
+      together with the mapped adversarial review of the theorem, which found no soundness
+      defect and whose open items -- the second route, the controls, and a stranger-facing
+      statement in a case directory -- this registration closes.
+    evidence:
+      - E-n011-threshold-certificate
+      - E-n011-threshold-interval-decision
+    review_artifact: docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md
+    produced_by:
+      hypothesis: H-143
+    artifacts:
+      - packing/cases/n11_threshold_certificate/certificate.json
+      - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
+      - packing/devtools/decide_threshold_certificate.py
+      - packing/src/sqpack/fractional/threshold.py
+      - packing/src/sqpack/fractional/threshold_interval.py
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json
+    controls:
+      - packing/tests/test_n11_threshold_certificate.py
+      - packing/tests/test_decide_threshold_certificate.py
+      - packing/tests/test_fractional_threshold.py
+      - packing/tests/test_fractional_threshold_interval.py
+    next_rung: >-
+      Push the side with the same loop: the LP that produced these atoms is run again at
+      a larger side, and the ceiling family says the answer cannot come from point atoms
+      alone. Two mechanisms are unmeasured on this certificate. The finer-net shrink of
+      T-024 applies to threshold certificates unchanged -- Condition 4 ties the shrink to
+      the net's largest half-gap tangent whatever the atoms are -- and would turn this
+      endpoint into a strictly larger weak limit, which nobody has measured here. And no
+      standalone reader outside this repository decides a threshold certificate: the
+      retained verify_claim.py reads point atoms only, so a stranger cannot yet check
+      these bytes without trusting this project's own code, which is the gap that keeps
+      the architecture short of what the point-atom rungs have. The endpoint itself is
+      exact and needs no limit argument, so no dilation record belongs at this rung.

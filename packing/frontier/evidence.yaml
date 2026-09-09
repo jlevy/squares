@@ -2171,6 +2171,119 @@ evidence:
       so this evidence supplies no endpoint certificate, no endpoint fit decision, and
       no strict inequality, and it uses no compactness or attainment theorem.
     source_reviewed: '2026-09-09'
+  - id: E-n011-threshold-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The corpus of E-n011-fractional-net1440-certificate: the retained literature
+        archive under packing/resources/, the frontier source register, the 2026-09-04
+        s(11) audit, the 2026-09-05 literature refresh, the 2026-09-06 exact-endpoint
+        query receipt, and the 2026-09-09 bounded web search that entry records.
+      searched: >-
+        The 2026-09-09 bounded web search under E-n011-fractional-net1440-certificate
+        found no lower bound on s(11) above Stromquist's outside this repository. It
+        covered the topic query for s(11) lower bounds and fractional unavoidable-set
+        certificates; the side 191/50 = 3.82 is this project's own next rung and was not
+        searched separately.
+      novel_object: >-
+        The threshold atoms themselves: rank-1 Chvatal-Gomory cuts on the certificate
+        side, charging w to every core holding at least k points of S and costing
+        w floor(|S| / k) of the budget. The unavoidable-set counting argument, the
+        event-cell sweep and the interval route are not new objects; a certificate whose
+        budget rests on the floor rule, and the side it reaches, are.
+      gaps: >-
+        A bounded search of one general index, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed
+        sources, code-hosting sites, private correspondence, or unpublished work.
+        Apparent novelty is not a priority claim.
+    certificate: cases/n11_threshold_certificate/certificate.json
+    replay: uv run --frozen --all-extras --group dev python -m cases.n11_threshold_certificate
+    replay_status: passed
+    proof:
+      source: cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
+      theorem: >-
+        A family of point atoms and threshold atoms satisfying Conditions 1, 1', 2', 3, 4
+        and 5' admits no n unit squares with pairwise disjoint interiors in the container,
+        so this family proves s(11) >= 191/50.
+      scope: >-
+        An endpoint certificate at the container side itself, for the frozen atoms, shrink
+        9977/10000 and 181-direction net. No strict inequality and no dilation limit.
+      pinpoints: >-
+        The Theorem, The Proof, Frozen Premises, Two Decisions of Condition 5', Review,
+        Scope and Replay.
+      assumptions:
+        - A core concentric with a unit square at a net direction lies inside it when B(1 + D) < 1.
+        - Cores of squares with disjoint interiors are pairwise disjoint.
+        - A threshold atom charges at most floor(|S| / k) pairwise disjoint cores.
+        - The charge is monotone in the trace, so its minimum is attained on an open event cell.
+    limitations: >-
+      Decides Conditions 1, 1', 2', 3 and 4 in closed form and Condition 5' by the exact
+      event-cell sweep, over 584 point atoms in 79 D4 orbits of mass 271052551/31250000 =
+      8.673682 and 320 threshold atoms in 40 orbits, every one 2-of-3, of budget
+      143352577/62500000 = 2.293641. The total budget is 685457679/62500000 = 10.967323,
+      strictly below 11 with margin 2042321/62500000 = 0.032677, and the least charge over
+      every event cell at every one of the 181 net directions is 100000203/100000000 =
+      1.000002, attained at direction 69. The container side is L = 191/50, the shrunken
+      side B = 9977/10000, the largest half-gap tangent D = 207107/90000000 and
+      B(1 + D) = 899996306539/900000000000 < 1. The bound is the container side itself: an
+      endpoint, with no strict inequality and no limit argument. The frozen bytes, SHA-256
+      3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f4bad5c, are the lane-B
+      candidate of agenda-033 copied unchanged into the case package, and were decided by
+      devtools.decide_threshold_certificate, which rereads the file and prints RETAINABLE
+      only when both routes accept and agree on the least charge: the exact sweep in 110 s
+      with dense-grid and slab evaluations agreeing at every direction and the charge at
+      the witness re-evaluated by membership counting, beside the interval route recorded
+      under E-n011-threshold-interval-decision, on two workers of a four-cpu host. No
+      standalone reader outside this repository decides a threshold certificate yet, and
+      the dilation argument of T-024 has not been measured on this one. The theorem was
+      reviewed adversarially before registration in
+      docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md, which found
+      no soundness defect; the exact depth-one ceiling family at the same side shows no
+      point-atom certificate of the earlier form exists here, which is why the threshold
+      atoms are load-bearing rather than decorative.
+    source_reviewed: '2026-09-09'
+  - id: E-n011-threshold-interval-decision
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Burns–Massaccesi n17]'
+    certificate: cases/n11_threshold_certificate/certificate.json
+    replay: uv run --frozen --all-extras --group dev python -m cases.n11_threshold_certificate --quick
+    replay_status: passed
+    limitations: >-
+      The second decision of the retained threshold certificate's frozen bytes, by the
+      interval branch and bound of sqpack.fractional.threshold_interval: directed-rounding
+      interval arithmetic with no interval library, Condition 5' decided over boxes of
+      centres on the doubled net of 361 directions, so the D4 reflection argument and
+      Condition 1' are never invoked for this decision. A threshold atom counts for a box
+      only when at least k of its points have coverage rectangles whose inner enclosures
+      contain the whole box, which is a lower bound by construction, and an unresolved
+      point is dropped rather than assumed. It shares the loader, the closed-form
+      conditions, the weight scale and the net with the exact route, and no part of how
+      Condition 5' is decided. On this file it certified all 361 directions in 1,639,903
+      boxes with none stalled and no direction exhausting its box budget, and its
+      enclosure of the least charge has width zero at 100000203/100000000 = 1.000002, the
+      value the exact sweep reports; the per-direction minima take two values only, that
+      one at 86 directions and 1000002031/1000000000 at the other 275. It adds no bound of
+      its own and no protection against a wrong theorem statement, which both routes
+      share; the theorem itself is what the 2026-09-09 review attacked.
+    source_reviewed: '2026-09-09'
   - id: E-n017-fractional-certificate
     claim: lower-bound
     scope:
