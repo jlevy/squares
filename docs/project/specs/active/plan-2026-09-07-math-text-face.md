@@ -915,7 +915,7 @@ Those artifacts predate the 0.82 mono integration.
 The final rebuild, artifact review, and deployment remain pending.
 
 KPress [PR #68](https://github.com/jlevy/kpress/pull/68), tested branch commit
-`f776e21083479cf6c12e6d20f26f75ca46c50c5f`, branch
+`400a9fca7546e233d49444456d1c6d4209392ed3`, branch
 `codex/reader-reload-baseline-contract`. Squares may pin this filed PR’s branch commit;
 both repositories will merge their PRs with merge commits.
 The candidate includes the then-current KPress main and the merged
@@ -943,6 +943,12 @@ installation, and test execution and updates the assertion to the generated metr
 The focused browser case passes locally and all 57 required browser cases collect.
 Astra’s source review found no product blocker and requested one historical-context
 correction in the print-sans research narrative; that correction is in the same commit.
+The next hosted run cleared those failures and reached 56 of 57 browser cases before a
+Linux WebKit rapid pane+fragment reload exposed a missed-`pageshow` race.
+Commit `400a9fc` schedules the existing guarded restore when a pane module initializes
+after the event; normal pre-event initialization and document hosts are unchanged.
+Astra reviewed the repair, and all 27 history unit cases plus the exact WebKit
+regression pass locally.
 
 ### Current Changes and Ownership
 
