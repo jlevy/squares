@@ -4054,13 +4054,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 488 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 489 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 98 | asserted something false about the mathematics |
-| validity | 123 | was correct, but the measurement did not bear on the question |
+| validity | 124 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 185 | recorded something its own evidence contradicts |
 | robustness | 64 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
@@ -4080,7 +4080,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-four defects in 488, and no soundness defect
+**The automated gate has caught seventy-four defects in 489, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -4089,6 +4089,24 @@ Gates confirm what you already thought to check; these were found by devices bui
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
+
+**[D-489](defects.md) is open, and it is the log’s clearest case of a guard that reads
+like soundness and acts like a filter.** `devtools/screen_corner_dual_salvage.py`
+screens a retained depth-one family against an owner class’s guaranteed patch and reads
+the survivor weight as a weak-duality lower bound on that class’s residual cover value.
+Its source predicate requires the source receipt’s `failures` to be exactly
+`["K3 total weight at least n"]` — the failure a family records when its total weight is
+*below* `n` — so it accepts only a family that falls short of the mass the bound is made
+of, and refuses every proved ceiling family.
+Three experiments therefore measured the wrong object: exp-137, exp-138 and exp-141 all
+ran on a family `0.6158` short of eleven, and both of their reported shortfalls are
+smaller than that deficit, so `obstructs: false` on all forty-eight rows was the
+source’s missing mass rather than a fact about conditioning.
+Re-run on the mass-eleven ceiling family the same filter reads survivor weight exactly
+ten at four of the sixteen classes, which reverses the reading — and that measurement
+was available the day the instrument was built.
+It is `validity` in the `flattering` direction, because a negative screen reads as
+“nothing blocks this route”, and the truth is that four classes block it exactly.
 
 **[D-470](defects.md) records a deferred exhaustive test that still asserted the rung
 `T-021` displaced.** The full gate caught the stale transcription after the PR 83 merge;

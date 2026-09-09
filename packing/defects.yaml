@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 488
+count: 489
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -16222,3 +16222,73 @@ defects:
     in devtools/gate-budgets.yaml would, and arming it is think-uswr's.
   bead: think-uswr
   recorded_in: packing/devtools/reachable_tests.py
+- id: D-489
+  title: The corner-dual salvage screen can only accept a family that already fails the mass threshold
+  date: '2026-09-09'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    One day and three experiments. The predicate is committed with the instrument on
+    2026-09-08 and exp-137, exp-138 and exp-141 all ran against it that day; a read-only
+    strategy review on 2026-09-09 tried to re-run the same screen on a better source,
+    was refused by the predicate, and read the refusal as the tell.
+  severity: high
+  status: outstanding
+  bead: think-rm5c
+  what: >-
+    `devtools/screen_corner_dual_salvage.py:_source_receipt` requires the source family's
+    own `verify_ceiling` receipt to carry `failures == ["K3 total weight at least n"]`
+    exactly. That is the failure a family records when its total weight is BELOW n, so
+    the predicate accepts only a family that falls short of mass n and refuses every
+    proved ceiling family, whose `failures` list is empty. The screen's whole purpose is
+    weak duality -- delete from a depth-one family the members meeting a class's
+    guaranteed patch and read the survivor weight as a lower bound on that class's
+    residual cover value -- and that bound is only as strong as the source family's mass.
+    Hard-wiring the source to a family that is short of n therefore hard-wires the
+    instrument to produce a weak bound, and the check reads as if it were a soundness
+    guard.
+    The check next to it is the right shape: `max_depth == "1"` is what deletion-only
+    inheritance actually needs. The mass clause is not a guard on validity at all; it is
+    a guard that admits only the sources that cannot answer the question.
+  consequence: >-
+    Three experiments measured the wrong object and one strategic reading was built on
+    them. exp-137 (sixteen one-corner classes) and exp-138 (65,536 four-corner
+    combinations) both screened
+    `.../results/agenda-025/bc-232-leg-01-family.json`, of mass
+    21342289572/2055263195 = 10.384212, which is 1265605573/2055263195 = 0.6158 short of
+    eleven. Their reported shortfalls are 10 - 9.417433 = 0.582567 for the best one-corner
+    class and 7 - 6.517094 = 0.482906 for the four-corner minimum, and BOTH ARE SMALLER
+    THAN THAT DEFICIT: the entire negative reading is the source family's missing mass,
+    not a property of conditioning. exp-141 independently audited exp-137 with 147,456
+    exact SAT checks and agreed, because the arithmetic was never wrong -- only the source
+    was. Every one of those runs reports `obstructs: false` on all 48 one-corner rows and
+    `obstructed_count: 0` on all three four-corner arms, and X-024 carried that forward as
+    "the retained family obstructs no class", which made the conditional owner programme
+    look open when it is not.
+    Re-run on the mass-eleven ceiling family
+    (`.../results/agenda-033/ceiling-family-191-50.json`, total exactly 11, exact maximum
+    depth exactly 1), the same `screen_footprint` reads survivor weight EXACTLY 10 at four
+    of the sixteen one-corner classes and exactly 7 at the corresponding four-corner
+    combination -- so those classes are obstructed against their own thresholds and no
+    point cover can close them. That measurement reversed the campaign's direction on
+    conditioning; it could have been made on 2026-09-08 with the instrument as built if
+    the predicate had admitted the family.
+    The direction is flattering rather than conservative because the error made a route
+    look viable: a negative screen reads as "nothing here blocks the conditional
+    programme", and the truth is that four classes block it exactly.
+  fix: >-
+    none yet. The predicate should require what deletion-only inheritance needs and no
+    more -- an exact `max_depth` of 1 on a `net`, `symmetric_only` receipt -- and should
+    accept any `failures` list, since a family that PASSES the mass threshold is the
+    strictly better source for this instrument, not a disqualified one. The natural shape
+    is to keep the depth clauses, drop the equality on `failures`, and instead record the
+    source's total weight in the receipt beside each survivor weight so a reader can see
+    at a glance how much of the shortfall is the source's. Carried as `think-rm5c`.
+  regression: >-
+    none. Nothing in `packing/tests/test_screen_corner_dual_salvage.py` exercises a source
+    family of mass n, and no control compares a screen's survivor weight against its own
+    source's total, which is the one arithmetic that would have made the deficit visible
+    in the receipt.
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md
