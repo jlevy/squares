@@ -242,23 +242,37 @@ sets that stopped at exactly `11.000000` were reading this ceiling; BC-200’s `
 was above it because its site set was not at its optimum.
 An independent reader written from the statement is being run.
 
-**The frozen atoms transfer to every finer net and dilate to about `3.8168`.** With the
-original shrink the least mass at every finer net is `96377/100000` at an intermediate
-direction; with the sharpened-test shrink of each net it is `4001/4000` at every net up
-to `2880` steps, so the certificate holds at `(381/100, B_max(N), N)` for
-`N ∈ {360, 720, 1440, 2880}`. The crossing shrink, the least `B` with least mass above
-`M/11` at net `N`, is `0.9979242` at `360` and lies in `(0.9979236, 0.997925]` at `720`
-(the added directions never bind), so the dilation supremum `L · B_max(N) / B_cross(N)`
-is about `3.8135` at `360`, `3.8157` at `720`, and `3.8168` at `1440` if the crossing
-holds there, against T-022’s `3.810026`. The retention packet (a frozen certificate at
-the crossing shrink on the finer net, decided through the two-route gate, and the
-dilation corollary) is the next deliverable, and the ceiling above says the same atoms
-can never be dilated past `3.8288 · B_max(N)`.
+**The frozen atoms transfer to every finer net and dilate to `3.8166` at `1440`
+directions.** With the original shrink the least mass at every finer net is
+`96377/100000` at an intermediate direction; with the sharpened-test shrink of each net
+it is `4001/4000` at every net up to `2880` steps, so the certificate holds at
+`(381/100, B_max(N), N)` for `N ∈ {360, 720, 1440, 2880}`. The crossing shrink, the
+least `B` (to `10^-6`) whose least mass over the net exceeds `M/11`, is
+`4989621/5000000` at `360` and `9979243/10000000` at `720` (the added directions never
+bind there), and `2494953/2500000 = 0.9979812` at `1440`, where they do.
+The dilation supremum `(381/100) · sqrt(1 + D_N^2) / (B_cross(N)(1 + D_N))` is then
+`3.81353994` at `360`, `3.81573032` at `720` and `3.81660950` at `1440`, against T-022’s
+`3.810025723614703`. The retention packet (a frozen certificate at the crossing shrink
+on the finer net, decided through the two-route gate, and the dilation corollary) is in
+progress; the `720` certificate has been accepted by both routes in its scratch run and
+its formal report is pending.
+The ceiling above says the same atoms can never be dilated past `3.8288 · B_max(N)`, and
+the unit-equivalent side of these certificates, `3.8177` to `3.8179`, sits `0.011` below
+that cap.
+
+**Two of the note’s geometric refinements are inert on the frozen atoms.** Enlarging the
+container about the centred measure reaches its first bad cell after
+`δ* = 5.4926 × 10^-6` of side (at `L* = 176536859/46335000 = 3.81001099`, direction
+`0`): the four corner atoms of weight `917/6250` sit on the far corner of the
+corner-snug axis core, whose mass drops to `85353/100000` the moment the walls move, and
+composing the expansion with T-022’s dilation gives `3.81003671`, a gain of `10^-5`.
+Parent-feasible centre domains remove `541,048` of the `567,130,649` reachable cells at
+the sharpened inset and improve the least mass at no direction; it stays `4001/4000`.
 
 | Spike | Question | Reading | Status |
 | --- | --- | --- | --- |
-| A, net refinement | does a finer net cost coverage; does its larger shrink recover it? | see above: transfers at every net; crossing `0.9979242`; dilation to `3.8135` (`360`), `3.8157` (`720`), about `3.8168` (`1440`) | EXACT (sweeps); `1440` bracket running |
-| C, frozen expansion | at what side does a cell at mass `≤ M/11` become reachable? | after `5.5 × 10^-6`: the four corner atoms of weight `917/6250` sit on the far corner of the corner-snug axis core, whose mass drops to `85353/100000` the moment the walls move | EXACT; dead |
+| A, net refinement | does a finer net cost coverage; does its larger shrink recover it? | see above: transfers at every net; crossings `0.9979242`, `0.9979243`, `0.9979812`; dilation suprema `3.81354`, `3.81573`, `3.81661` | EXACT (sweeps and crossings); retention packet running |
+| C, frozen expansion and parent domains | at what side does a cell at mass `≤ M/11` become reachable; do parent-feasible domains raise the least mass? | first bad cell after `5.4926 × 10^-6`, composed supremum `3.81003671`; parent-feasible domains improve no direction | EXACT; both dead |
 | B, threshold atoms | are two-of-three atoms violated by the retained dual; does adding them lower the restricted value? | `3504` violated atoms (`438` orbits) on the `191/50` family, maximum charge `1.078511`; `52088` (`6471` orbits) on the unit family, maximum `1.184795`; `92%` of the violation on mixed near-axis and tilted triples; no two-of-five violation. On BC-200’s sites the value falls from `11.055617` to exactly `11.000000` with pair-centroid atoms (the ceiling), and the ceiling family is separated by interior-vertex atoms at charge `5/4`; with those the restricted value reads `10.926982` with rows still incomplete | EXACT (charges, ceiling); LP running |
 | E, `61/16` row completion; `3.82` cutting loop | does the unconverged `3.8125` state complete below eleven; does full-dual pricing move the `3.82` value? | the `3.82` loop read `11.055617`, `11.038636`, `11.024472`, `11.009981`, `11.009995` over five iterations with rows unconverged, consistent with the ceiling; the `61/16` completion is still running | running |
 | T, theory | what can one-body core choices buy; where is the plateau evidence; what cuts fit the dual? | the sandwich lemma caps every core-choice idea by the shrink tax; direction-dependent weights never help; a half-integral witness is always cut by one odd-cycle atom | PROVED |
