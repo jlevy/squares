@@ -1,5 +1,5 @@
 ---
-title: "agenda-033 \u2014 overnight owner-geometry research at n = 11"
+title: agenda-033 — overnight owner-geometry research at n = 11
 softschema:
   contract: packing.squares:ExperimentAgenda/v1
   schema: ../schemas/agenda.schema.yaml
@@ -99,12 +99,15 @@ agenda:
     bead: think-waix
     depends_on:
     - BC-317
-    next_evidence: The isolated adapter passed eight focused controls, lint and types; Astra Max identified
-      three small source-admission guards. Session117 reviews the repaired nine-control source before a
-      separate H145/exp147 source freeze. No target relation has run.
+    next_evidence: All three source-review guards and nine synthetic controls pass. Session117 freezes
+      H145/exp147 before the one 128-slot target; no target relation has been evaluated.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
+    hypotheses:
+    - H-145
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md
   - id: BC-319
     purpose: research
     owner_focus: insight

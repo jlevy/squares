@@ -131,6 +131,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-114](agent-sessions/session-114-independent-owner-audit.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (process) | 4 | think-yhw2 | BC-316 under think-yhw2: carry the unchanged published exp145 into Session115, then continue the reviewed wall-aware geometry agenda. In parallel, think-ta8s obtains and reconciles the new stacked milestone checkpoint. |
 | [session-115](agent-sessions/session-115-wall-aware-owner-footprints.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (insight) | 3 | think-waix | BC-317 under think-waix: Session116 publishes the controlled source and runs the unchanged exp146 under a fresh forward allocation. In parallel think-ta8s reconciles the new source checkpoint. |
 | [session-116](agent-sessions/session-116-resumed-wall-research.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-waix | Certification under think-ta8s: publish this H144/BC322 result checkpoint and retain its matching hosted status. BC-318 under think-waix then reviews and adopts the three isolated guard repairs, freezes the admitted source and prospective exp147, and evaluates the bounded containment target once. |
+| [session-117](agent-sessions/session-117-wall-owner-containment.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-waix | Complete the three reviewed BC318 guards, publish H145/exp147, then execute the single containment target. |
 
 ### Workflow summary
 
@@ -143,7 +144,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 18 | 4 | 82 | 7 |
+| `research-loop` | 19 | 4 | 83 | 7 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
@@ -688,7 +689,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
-| BC-318 | research | 11 | in_progress | 1 | think-waix | The isolated adapter passed eight focused controls, lint and types; Astra Max identified three small source-admission guards. Session117 reviews the repaired nine-control source before a separate H145/exp147 source freeze. No target relation has run. |
+| BC-318 | research | 11 | in_progress | 1 | think-waix | All three source-review guards and nine synthetic controls pass. Session117 freezes H145/exp147 before the one 128-slot target; no target relation has been evaluated. |
 | BC-319 | research | 11 | blocked | 1 | think-ykd6 | Preregister the smallest additional-class test after the containment result. |
 | BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
@@ -699,7 +700,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 102 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 103 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -825,6 +826,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
 | H-143 | confirmed | proof | For the unchanged four endpoint patches and five dots from exp143, the |  | 1 |  | 39s wall |
 | H-144 | confirmed | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  | 26s wall |
+| H-145 | running | proof | The frozen wall-aware owner footprints inherit at least one additional |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -966,6 +968,12 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-147 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-145 | Prospective and unrun. Source review requires three bounded guard repairs before clean publication and the single target. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -986,7 +994,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-102 rounds, 2152.1 agent-minutes, 1364.0 wall-minutes.
+103 rounds, 2152.1 agent-minutes, 1364.0 wall-minutes.
 
 ## Exploration reports not yet codified
 
