@@ -341,12 +341,18 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-yhw2`: generalize Agenda032’s
-exact five-dot conditional exclusion after the completed two-hour session113. First
-finish independent union-domain confirmation, then reuse global symmetries and
-occupied-union containment across admissible owner classes before new LP searches.
+For the next supervised exact-research goal, complete BC-323 under `think-ta8s` by
+publishing the exp149 result and obtaining one matching deferred checkpoint.
+Then open a fresh stacked branch for BC-320. Exp145 independently confirmed the selected
+five-dot cover, exp146 enlarged twelve of sixteen wall-aware owner footprints, and
+exp147 found no additional tuple by component containment.
+Exp148 retained a partial fixed-pattern screen.
+Exp149 then refuted the selected tuple `(0,0,0,7)` at owner-000 with an exact positive
+deficit and validated rational strict escape.
+BC-320 will test that saved escape against every retained snapped-owner frame in each
+selected class before registering any broader target; H146 remains unresolved.
 The global n11 bracket is unchanged.
-PR137 retains the full sprint and separate usage.
+PR137 retains the original sprint; PR142 stacks the separately tallied continuation.
 
 The preceding work reached three checkpoints in sequence.
 Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s

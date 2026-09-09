@@ -2895,8 +2895,91 @@ evidence:
       verifies the complete finite-net residual cover only. It does not by itself
       prove owner-footprint containment, the physical-angle transfer, LP optimality,
       or exclusion of every owner combination. The union decomposition and exact
-      sweep reuse the repository implementation; an independent union checker has
-      not run the target. No additional target was run when this evidence was registered.
+      sweep reuse the repository implementation. The subsequent independent union
+      replay is recorded separately as E-n011-five-dot-independent-union. No additional
+      target was run when this original evidence was registered.
+    source_reviewed: '2026-09-09'
+
+  - id: E-n011-five-dot-independent-union
+    claim: derived-structure
+    scope: {n_values: [11]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-145-independent-five-dot-union.json
+    replay: >-
+      cd packing && /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 5m
+      .venv/bin/python3 -m cases.n11_five_dot_cover.independent_union
+      campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json
+      --expect-receipt-blob cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19
+      --expect-directions 361 --max-subsets-per-direction 511 --deadline-seconds 240
+      --output /tmp/squares-t023-independent-union.json
+    replay_status: passed
+    limitations: >-
+      Exp145 at c59d28a770d8261b39d030050d8dc3f0eb8dde43 independently generated the
+      net and computed exact convex intersections and inclusion-exclusion. All 361
+      uncovered areas were zero; the process took 39.06 seconds. This implementation
+      imports no production residual-domain or event-grid geometry. It shares the
+      retained rational input patches/dots and the analytic owner and physical-angle
+      transfer premises. This confirms finite-net coverage without determining an LP
+      optimum, extending owner-case coverage, or promoting the composed theorem's
+      confirmation rung automatically. The driver requires a fresh output path.
+    source_reviewed: '2026-09-09'
+
+  - id: E-n011-wall-owner-footprints
+    claim: derived-structure
+    scope: {n_values: [11]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    certificate: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json
+    replay: >-
+      cd packing && /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 5m
+      .venv/bin/python3 -m devtools.wall_owner_footprints
+      --expect-git-revision 915758898a97c92793f51e62b7a6b17f846895ca
+      --deadline-seconds 240 --output /tmp/squares-wall-footprints-replay.json
+    replay_status: passed
+    limitations: >-
+      Run from a clean checkout of the declared source revision and use a fresh output.
+      Exp146 completed all16 bottom-left classes at q=96/25, B=9977/10000 in25.69seconds:
+      twelve proper footprint inclusions, four equal footprints, no impossible class.
+      Both marks have strict gain in sectors1 through6; sectors0 and7 are unchanged.
+      All181 retained signed frames per class had nonempty center sets. The constructor
+      uses exact rational support extrema and production geometry; it is not an
+      independent implementation. The universal common-footprint implication is the
+      audited wall-constructor contract. This evidence alone neither extends the
+      five-dot exclusion to another tuple nor changes T023 or the global bound.
+    source_reviewed: '2026-09-09'
+
+  - id: E-n011-wall-owner-containment
+    claim: derived-structure
+    scope:
+      n_values:
+      - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    certificate: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-147-wall-owner-containment.json
+    replay: cd packing && /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 120s .venv/bin/python3
+      -m devtools.wall_owner_containment campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json
+      campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json
+      --replay-receipt campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
+      --coverage-receipt campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-145-independent-five-dot-union.json
+      --expect-endpoint-blob cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19 --expect-wall-blob e54fa98133db5f2135cae8875188f51b7db26e12
+      --expect-wall-source 915758898a97c92793f51e62b7a6b17f846895ca --expect-replay-blob e445cca80d95c77226cdf324414ab269152e26d0
+      --expect-coverage-blob 4688678bfd4e64d9cb345b48f065c1c82bebdea0 --expect-git-revision e72102e15897dc33e59fcd82818a7ca9174d3cd0
+      --deadline-seconds 60 --output /tmp/squares-wall-containment-replay.json
+    replay_status: passed
+    limitations: 'Complete128-slot component-containment test at the declared clean source: eight containments,120failures,
+      two baseline tuples, zero additional tuples. This is a bounded negative for inheriting either retained
+      certificate family; it does not refute direct five-dot coverage or certify physical feasibility. Labels
+      overlap, and T023 and the global n11 bound remain unchanged.'
     source_reviewed: '2026-09-09'
 
   - id: E-n011-five-dot-physical-transfer

@@ -368,10 +368,9 @@ Other conditional cover values, none of them owner classes:
 
 ### The one per-class table that exists: the dual side, all sixteen classes
 
-[`agenda-032/exp-137-corner-dual-salvage.json.gz`](../agenda-032/exp-137-corner-dual-salvage.json.gz),
-produced by `devtools/screen_corner_dual_salvage.py` (exp-137, 53.38 s) and
-independently audited by `devtools/audit_corner_dual_salvage.py` (exp-141, 55.70 s,
-147,456 exact SAT checks).
+`agenda-032/exp-137-corner-dual-salvage.json.gz`, produced by
+`devtools/screen_corner_dual_salvage.py` (exp-137, 53.38 s) and independently audited by
+`devtools/audit_corner_dual_salvage.py` (exp-141, 55.70 s, 147,456 exact SAT checks).
 
 Source: the retained depth-one family
 [`agenda-025/bc-232-leg-01-family.json`](../agenda-025/bc-232-leg-01-family.json), 768

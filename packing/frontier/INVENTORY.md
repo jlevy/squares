@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **76** evidence records. **60** are formal; **54** of those were established here.
+- **79** evidence records. **63** are formal; **57** of those were established here.
 - **11** rest on an argument made elsewhere, of which **8** have been read by nobody here.
-- **26** claim to be first established here. **5** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **26** claim to be first established here. **8** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -95,13 +95,16 @@ results, it is a statement about what this repository has itself examined.
 | `E-n020-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-fractional-interval-decision` | 6 | lower-bound | verified | strict inequalities only | here | - | previously-published |
 | `E-n011-five-dot-full-net` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
+| `E-n011-five-dot-independent-union` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
+| `E-n011-wall-owner-footprints` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
+| `E-n011-wall-owner-containment` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
 | `E-n011-five-dot-physical-transfer` | 0 | derived-structure | verified | whatever its theorem states | here | - | apparently-novel |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 12, verified 60
-- **method**: exact-algebraic 46, interval-certified 6, numerical-multiprecision 4, proof-audited 2, published-proof 6, reported 12
-- **novelty**: apparently-novel 26, common-knowledge 4, not assessed 5, previously-published 41
+- **assurance**: numerically-checked 4, reported 12, verified 63
+- **method**: exact-algebraic 49, interval-certified 6, numerical-multiprecision 4, proof-audited 2, published-proof 6, reported 12
+- **novelty**: apparently-novel 26, common-knowledge 4, not assessed 8, previously-published 41
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

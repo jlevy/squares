@@ -19,14 +19,17 @@ its results directory and its idea rows each moved up one allocation.
 The allocations this branch took are updated below; every column reporting an upstream
 ref still reads as of `a1fc0306`.
 
-**Amended a third time on 2026-09-09, before PR 145’s head was merged.** The same codex
-line advanced through PR 142 and PR 145, taking `H-143` through `H-151`, `agenda-033`
-and an agenda document to go with it, `session-114` through `session-122`, and
-`ideas.md` rows through 147. This branch renumbered a third time, so every identifier it
-owns reads at its final value throughout this document: hypotheses `H-152` through
-`H-157`, results directory `results/agenda-034/`, session record `session-123`, and idea
-rows 148 to 153. The upstream columns are unchanged and still read as of `a1fc0306`; the
-dated reconciliation for PR 145 in this directory carries the third audit in full.
+**Amended a third time on 2026-09-09, when PR 142 was merged.** The same codex line
+advanced through PR 142 and PR 145, taking `H-143` through `H-151`, `agenda-033` and an
+agenda document to go with it, `session-114` through `session-122`, and `ideas.md` rows
+through 147. This branch renumbered a third time, clearing all of it, so every
+identifier it owns reads at its final value throughout this document: hypotheses `H-152`
+through `H-157`, results directory `results/agenda-034/`, session record `session-123`,
+and idea rows 148 to 153. Only PR 142 was then merged; PR 145 is a draft whose last
+session is still running, so the slots it holds upstream are left empty here rather than
+filled. The upstream columns are unchanged and still read as of `a1fc0306`;
+[`reconciliation-upstream-142-2026-09-09.md`](reconciliation-upstream-142-2026-09-09.md)
+carries the third audit in full and says why 145 was left out.
 
 **Headline: every identifier this branch had allocated was already taken by
 `origin/codex/n11-ownership-continuation` (PR 137, head `a1fc0306`, one commit ahead of

@@ -566,6 +566,65 @@ def test_rollup_freezes_a_live_tree_at_an_explicit_cutoff(tmp_path: Path) -> Non
     assert root["children"] == []
 
 
+def test_legacy_child_retains_a_turn_when_client_duration_excludes_wall_pauses(
+    tmp_path: Path,
+) -> None:
+    root_id = "00000000-0000-0000-0000-000000000023"
+    child_id = "00000000-0000-0000-0000-000000000024"
+    turn_id = "turn-with-pauses"
+    epoch_ms = int(datetime.fromisoformat("2026-08-25T00:00:00.000Z").timestamp() * 1000)
+    _write_log(
+        tmp_path / "root.jsonl",
+        [_session_meta(root_id, timestamp="2026-08-25T00:00:00.000Z")],
+    )
+    _write_log(
+        tmp_path / "legacy-child.jsonl",
+        [
+            _session_meta(
+                child_id,
+                timestamp="2026-08-25T00:00:00.000Z",
+                parent_id=root_id,
+                agent_path="/root/legacy",
+            ),
+            _event(
+                "2026-08-25T00:00:00.000Z",
+                "task_started",
+                turn_id=turn_id,
+            ),
+            _turn_context(
+                turn_id,
+                timestamp="2026-08-25T00:00:00.000Z",
+                model="gpt-test",
+                effort="high",
+            ),
+            _item(
+                "CollabAgentToolCall",
+                timestamp="2026-08-25T00:00:08.000Z",
+                turn_id=turn_id,
+                started_ms=epoch_ms + 2_000,
+                completed_ms=epoch_ms + 8_000,
+                tool="wait",
+            ),
+            _event(
+                "2026-08-25T00:00:10.000Z",
+                "task_complete",
+                turn_id=turn_id,
+                duration_ms=7_000,
+            ),
+        ],
+    )
+
+    receipt = build_delta(
+        tmp_path,
+        root_id,
+        start="2026-08-25T00:00:05.000Z",
+        end="2026-08-25T00:00:10.000Z",
+    )
+
+    assert receipt["rollup"]["delta"]["agent_active_seconds"] == 5.0
+    assert receipt["rollup"]["delta"]["tool_seconds_by_category"]["agent_wait"] == 3.0
+
+
 def test_rollup_treats_missing_or_invalid_native_timing_as_unavailable(
     tmp_path: Path,
 ) -> None:

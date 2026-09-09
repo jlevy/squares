@@ -238,6 +238,11 @@ def test_controltiming_provenance_binds_dirty_and_untracked_source(
 
 # A size no accident produces, so a byte that moves the count can be attributed.
 CACHE_PROBE_BYTES = b"n" * 1_000_003
+CORNER_DUAL_SALVAGE_RECEIPT = (
+    ROOT
+    / "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+    / "exp-137-corner-dual-salvage.json.gz"
+)
 # One temporary directory under `packing/`, where the walk counts it, holding a file
 # the count must see and four caches it must not. Removed in `finally`, and named so a
 # leftover from a killed run says what it was.
@@ -268,7 +273,26 @@ def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() ->
         in PRUNE
     )
     assert ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025" in PRUNE
+    assert CORNER_DUAL_SALVAGE_RECEIPT in PRUNE
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+def test_dual_salvage_receipt_is_not_a_mutation_worker_input(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    relative = CORNER_DUAL_SALVAGE_RECEIPT.relative_to(controls.REPO)
+    packing_relative = CORNER_DUAL_SALVAGE_RECEIPT.relative_to(ROOT).as_posix()
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+
+    assert CORNER_DUAL_SALVAGE_RECEIPT.is_file()
+    assert all(
+        (ROOT / control["file"]).resolve() != CORNER_DUAL_SALVAGE_RECEIPT
+        for control in specification["controls"]
+    )
+    assert all(packing_relative not in control["run"] for control in specification["controls"])
+    assert relative not in copied_targets
+    assert not (tree / relative).exists()
 
 
 def test_math_startup_reports_are_pruned_but_record_sources_survive(
