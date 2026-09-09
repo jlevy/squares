@@ -412,8 +412,9 @@ documents:
     lifecycle: retained
   - path: docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md
     role: handoff
-    authority: current
-    lifecycle: maintained
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
   - path: packing/cases/n11_fractional_certificate/thirdparty/README.md
     role: component-guide
     authority: record
@@ -515,6 +516,7 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/receipts-and-multi-domain-review.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md, role: research-report, authority: record, lifecycle: retained}
 collections:
   - pattern: packing/benchmarks/math-startup/experiments/*.md
     role: experiment-record

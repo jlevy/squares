@@ -5,6 +5,14 @@ reasoning. No target was run and no numerical outcome was selected.
 The proposed rectangles and residual-domain formulas require implementation controls and
 exact replay before becoming pipeline evidence.
 
+**Scheduling amendment after exp141:** the filter-first order below is historical.
+The audited point-only filters already leave the retained, unchanged-weight family below
+the required thresholds; stronger obstacles only delete more of that weight.
+Repeating those filters cannot reach the thresholds.
+The [current gaps and routes analysis](../gaps-to-global-bound.md) prioritizes
+certificate reuse and conditional covers, followed by refinement of unresolved classes.
+The geometric constructions below remain available under their stated hypotheses.
+
 ## Recommendation
 
 Use centre-and-angle classes when the sector footprint is too weak.

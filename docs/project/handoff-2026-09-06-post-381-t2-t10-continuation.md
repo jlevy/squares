@@ -1,5 +1,9 @@
 # Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10
 
+**Historical handoff, superseded:** the
+[current handoff](../../SYNOPSIS.md#current-handoff) governs new work.
+The instructions and clock below are retained as the record of the September 6 recovery.
+
 The current operator handoff requires PR 97 to land before the selected research starts
 on a new branch and PR. This planning branch runs no successor experiment.
 

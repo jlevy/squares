@@ -96,10 +96,13 @@ session:
     recording: contemporaneous
     phase: 1
     status: completed
-    outcome: Completed exact repair, full-net reader and independent audit instrument with controls; target
-      audit remains separately admitted.
+    outcome: Completed the exact repair, full-net reader and independent audit instrument with controls.
+      Exp141 then audited the retained exp137 receipt in55.70seconds and cleared the exp137 and exp138
+      review flags while preserving both negative verdicts.
     evidence:
     - packing/devtools/run_residual_cover_pilot.py
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-141-corner-dual-salvage-audit.json
     files:
     - packing/devtools/run_residual_cover_pilot.py
     - packing/tests/test_run_residual_cover_pilot.py
@@ -110,7 +113,8 @@ session:
     - packing/devtools/audit_corner_dual_salvage.py
     - packing/tests/test_audit_corner_dual_salvage.py
     checks: []
-    uncertainty: Target outcomes are recorded separately.
+    uncertainty: The audit inherits the source family's exact depth-one premise and does not independently
+      prove the endpoint-containment theorem.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Successor dispatch recorded separately below.
@@ -129,8 +133,8 @@ session:
     - packing/tests/test_screen_corner_dual_salvage.py
     - packing/devtools/verify_residual_cover_pilot.py
     - packing/tests/test_verify_residual_cover_pilot.py
-    - packing/devtools/verify_corner_dual_salvage.py
-    - packing/tests/test_verify_corner_dual_salvage.py
+    - packing/devtools/audit_corner_dual_salvage.py
+    - packing/tests/test_audit_corner_dual_salvage.py
     excluded_commands:
     - Scientific target invocation
     - Shared campaign records and Git mutation
@@ -293,8 +297,9 @@ session:
     recording: contemporaneous
     phase: 1
     status: completed
-    outcome: Delivered the exact replay wrapper or PR publication checkpoint. Later independent union-audit
-      work remained outside the target launch window.
+    outcome: Delivered the source-bound exact endpoint replay wrapper and controls. The later exp144 target
+      used it to verify the unchanged five dots on all361directions; the independent union-domain audit
+      remained outside the launch window.
     evidence:
     - packing/devtools/replay_owner_footprint_cover.py
     files: &id005
@@ -322,14 +327,16 @@ session:
     recording: contemporaneous
     phase: 1
     status: completed
-    outcome: Delivered the exact replay wrapper or PR publication checkpoint. Later independent union-audit
-      work remained outside the target launch window.
+    outcome: Published validated checkpoints44bf815f and5195c94c, then final commitdabab2d6; updated PR137's
+      body and confirmed the remote head. The publication tail followed the measured Session113 cutoff.
     evidence:
-    - packing/devtools/replay_owner_footprint_cover.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md
     files: &id006
     - /private/tmp/pr137-final-body.md
     checks: []
-    uncertainty: Target outcomes are recorded separately.
+    uncertainty: The final publication tail is intentionally excluded from the frozen Session113 usage
+      receipt, which remains a lower bound.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: 'think-yhw2: finish independent union-domain confirmation, then generalize certified
@@ -353,7 +360,13 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-142-one-owner-completion.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-143-h141-four-owner-footprint-matched-gain.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
   checks:
   - 'Entry: retained exp135 failure and original seven-control repair handoff; new integration validation
@@ -362,24 +375,31 @@ session:
     invocation failed lint and two stale record/control anchors.
   - Focused repairs:14owner/residual controls passed in2.47seconds;9dual-screen controls passed; updated
     synopsis and163control anchors agree; both changed negative controls fire with project Python.
-  - Exact dualproducer exp137 ran once at223c969d in53.38seconds; both claims have pending independent
-    audit, with0thresholdqualifyingclasses.
+  - Exact dualproducer exp137 ran once at223c969d in53.38seconds with0thresholdqualifyingclasses; exp141's55.70second
+    independent audit matched every receipt and cleared the exp137 and exp138 review flags.
   - Current fullnetwrapper/genericrunner controls:13tests passed in2.20seconds; Ruff and formatcheck clean.
   - Frozen44bf815f push tier passed45of69steps in116.75seconds;1077tests passed,3deselected. Earlier92e8217d115.56second
     invocation failed3steps from concurrent source/record edits; the frozen repeat passes.
   - 'full gate: fast at 5195c94c: passed (hosted checks suite geometry and sweeps components all succeeded)'
   - Exact exp144 complete361directions, minimum beta, normalized5; independent analytic transfer reviewed.
-  - Deferred checkpoint34310826705 at e334 passed all components. The later integrated checkpoint34312252411
-    has three passing lanes and exhaustive verification still running at05:10Z.
   - Final delta push against5195c94c passed45of69selected steps in127.89seconds,880tests passed and3deselected.
   - Deferred checkpoint34312252411 passed all components on actual merge snapshotaabaac6a1b276533a7cc7bc42a1f6704aea5ce71,
     containing44bf815f and maina679e152. Later5195 adds the separately tested exact wrapper and records.
+  - The records baseline passed every record step. Its separate PATH-only Ruff failure was repaired, and
+    the focused project records-lint step passed.
+  - Post-sprint amendment T-023, its explanatory figure and related documentation add no experiment or
+    resource charge to this session's frozen cutoff.
   stop_reason: Research launch window ended; all launched experiments are terminal and the sprint is closed
     with a ranked continuation.
-  next_action: 'think-yhw2: finish independent union-domain confirmation, then generalize certified small
-    dot patterns across admissible owner classes.'
+  next_action: 'think-yhw2: independently audit the union and five-dot replay, reuse the certificate through
+    valid symmetries and exact containment, then search only uncovered classes under fresh preregistration
+    and separately recorded usage.'
 ---
 # Session 113: Conditional-Owner Sprint
+
+Session113 is complete.
+The opening account below is historical; the post-sprint amendment and completed agenda
+give the current milestone and next selection.
 
 The owner requested two hours starting at03:18:37Z. The same native task tree continues,
 with a new nonoverlapping usage interval and Agenda032. Instrument and mathematical
@@ -397,8 +417,31 @@ through04:12Z for the exact-reader and generic-LP wrappers.
 This update was made before the earlier04:06Z delegation cutoff; scientific target
 guards and the two-hour sprint deadline are unchanged.
 
-The final fifteen minutes are reserved for actual verification, retained outcomes and PR
-publication.
+The final fifteen minutes were reserved for actual verification, retained outcomes and
+PR publication.
+
+## Post-Sprint Documentation Amendment
+
+After the measured Session113 interval closed, [T-023](../../frontier/RESULTS.md)
+registered the selected branch exclusion at V3/C3/S3. The
+[exp144 protocol](../series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md),
+[exact receipt](../series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json),
+[endpoint proof](../series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md),
+[transfer proof](../series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md),
+and
+[figure](../series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg)
+make the milestone reviewable.
+The
+[gaps and routes analysis](../series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md)
+explains what further case coverage or structural proof would be needed to improve the
+global bound, without registering or claiming new experimental outcomes.
+This amendment adds no experiment or resource cost to Session113.
+
+The next slice remains `think-yhw2`: integrate and source-bind an independent
+union-domain replay, preregister its audit, transport the patches and dots under valid
+symmetries and exact union containment, and run new pattern searches only for owner
+classes left uncovered.
+That slice receives fresh experiment identities and a separate usage interval.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

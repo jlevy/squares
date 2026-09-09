@@ -139,14 +139,14 @@ agenda:
     - 11
     state: complete
     priority: 2
-    question: Does a promising conditional numerical cover survive rational reconstruction, the full direction
-      net and all required owner classes?
+    question: Does the selected five-dot endpoint-footprint proposal survive rational reconstruction,
+      the full direction net and the analytic transfer for its specified four-owner class combination?
     budget: Conditional promotion only within the remaining sprint work window; publish finite settings
       before invoking any target reader.
-    entry: Completed positiveexp136 candidate and exact fullnet reader; any laterBC312 promotion requires
-      a separately selected protocol.
-    exit: A precise finite-direction or all-angle conditional certificate, counterexample or unresolved
-      receipt; no extrapolation from one branch to an exhaustive theorem.
+    entry: Completed exp143 five-dot candidate for one reflected m1/j0 four-owner class combination and
+      an exact full-net reader; any broader owner-class claim requires a separate protocol.
+    exit: A precise finite-direction or all-angle certificate, counterexample or unresolved receipt for
+      the selected proposal; no extrapolation from one branch to an exhaustive theorem.
     bead: think-9cpg
     workflows:
     - factual-review
@@ -154,20 +154,25 @@ agenda:
     depends_on:
     - BC-310
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp144 certifies five dots over all361directions; reviewed transfer excludes this selected
-      four-owner branch. Generalize under think-yhw2.
+    next_evidence: Exp144 certifies five dots over all361directions; reviewed transfer excludes the selected
+      reflected m1/j0 four-owner branch. Post-sprint claim T-023 records the exact scope.
     hypotheses:
     - H-140
     - H-142
     artifacts: &id004
+    - packing/campaign/hypotheses/H-142-five-dot-full-net-cover.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg
+    - packing/frontier/results.yaml
     outcomes:
-    - scope: Does a promising conditional numerical cover survive rational reconstruction, the full direction
-        net and all required owner classes?
+    - scope: Does the selected five-dot endpoint-footprint proposal survive rational reconstruction,
+        the full direction net and the analytic transfer for its specified four-owner class combination?
       classification: achieved
-      result: Exp144 certifies five dots over all361directions; reviewed transfer excludes this selected
-        four-owner branch. Generalize under think-yhw2.
+      result: Exp144 certifies five dots over all361directions; reviewed transfer excludes the selected
+        reflected m1/j0 four-owner branch. Post-sprint claim T-023 records the exact scope.
       evidence: *id004
       disposition: retire-success
       follow_up: null
@@ -249,9 +254,9 @@ agenda:
       decision: updated
       reason: Updated sprint results and selected continuation.
     - path: TUTORIAL.md
-      decision: checked-current
-      reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
-        by this scoped result.
+      decision: updated
+      reason: A post-sprint documentation amendment adds the branch-specific five-dot argument while
+        preserving the unchanged global bracket.
     - path: conventions.md
       decision: checked-current
       reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
@@ -266,23 +271,35 @@ agenda:
         by this scoped result.
     changes:
     - name: conditional-five-dot-exclusion
-      result: Exact full361five-dot coverage plus reviewed strict-core transfer excludes one four-owner
-        branch; globaln11bracket unchanged.
+      result: Exact full361 five-dot coverage plus reviewed strict-core transfer excludes the selected
+        reflected m1/j0 four-owner branch; the global n11 bracket is unchanged.
       paths:
+      - packing/campaign/hypotheses/H-142-five-dot-full-net-cover.md
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg
+      - packing/frontier/results.yaml
     validation:
     - scope: published5195checkpoint
       status: passed
       evidence: Local push129.33seconds,1082tests; hosted fast components all success. Earlier e334 deferred
         checkpoint all success; newer integrated deferred checkpoint34312252411 subsequently passed all lanes on merge snapshotaabaac6a. Final delta push passed127.89seconds with880tests.
+    - scope: pre-amendment-record-baseline
+      status: passed
+      evidence: Before the post-sprint documentation amendment, the records baseline passed every record
+        step. Its separate PATH-only Ruff failure was repaired, and the focused project records-lint
+        step passed.
     replanning:
       candidates:
       - bead: think-yhw2
         workflow: insight-iteration
         priority: 1
-        rationale: Finish independent union-domain audit and reuse certified small dot patterns over admissible
-          owner classes before newLPs.
+        rationale: First finish an independent union-domain audit; then transport certified patterns by
+          valid symmetries and exact footprint-union containment; run newLPs only for uncovered classes.
       - bead: think-7lp3
         workflow: efficiency-loop
         priority: 2
@@ -291,23 +308,35 @@ agenda:
       selected:
         bead: think-yhw2
         workflow: insight-iteration
-        rationale: The sprint produced an exact conditional exclusion; the next bottleneck is broader
-          owner-class coverage.
+        rationale: The sprint produced an exact conditional exclusion; the next slice independently audits
+          the union, reuses it by symmetry and containment, and searches only uncovered owner classes.
       operator_input:
         status: confirmed
-        note: User selected a two-hour sprint on geometric conditioning and parallel experiments; this
-          is the evidence-based next slice, with no extra target launched after the cutoff.
+        note: User selected a two-hour sprint on geometric conditioning and parallel experiments. The
+          post-sprint T-023 and figure amendment adds no target or Session113 cost. Any next-slice target
+          needs fresh preregistration and separate usage.
 ---
 # Agenda032: Completed Conditional-Owner Sprint
 
 The two-hour sprint produced an exact five-dot conditional exclusion for one four-owner
-branch. See the
+branch, now registered as [T-023](../../frontier/RESULTS.md).
+See the
 [sprint report](../series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md)
 for the complete explanation, successful and negative experiments, and next priorities.
+The
+[gaps and routes analysis](../series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md)
+distinguishes broader case coverage, stronger geometric restrictions and alternative
+covering targets, with a next test and remaining uncertainty for each route.
 The independent union-domain confirmation did not run; no exp145 was registered.
 The next selected bead is `think-yhw2`. The global n11 bracket is unchanged.
+T-023 and the report’s figure are post-sprint documentation amendments and add no work
+to Session113’s measured interval.
 
-## Retained opening plan and intermediate checkpoints
+## Historical Opening Plan and Intermediate Checkpoints
+
+This section preserves the state seen at the sprint’s opening and intermediate
+checkpoints. Its pending verbs and proposed decisions are historical; the completed map
+above and the sprint report give the terminal outcomes.
 
 The owner requested this two-hour sprint at **03:18:37Z on September 9, 2026**. The work
 window ends at **05:03:37Z**, followed by fifteen minutes for finalization.
@@ -315,7 +344,7 @@ Session 113 owns this interval; session 112 retains the earlier continuation.
 The opening map was assembled while three disjoint instrument and mathematical lanes
 worked; no new sprint numerical target was used to choose the hypotheses below.
 
-## Opening results and next allocation
+## Historical Opening Results and Allocation
 
 Exp136 completed both numerical arms in3.06seconds and met H136’s criterion:
 `Mglobal − Mresidual − 4 = 0.17660343270100132`. Residualmass is7.804878048780487, above
@@ -349,7 +378,10 @@ triangle inside its core.
 Four literal flush corner squares remain an experimental conditional example, not a
 proved normalization of arbitrary packings.
 
-## Hypotheses and decisions
+## Historical Preregistered Questions and Decisions
+
+The table below preserves the accept rules and next decisions as they stood before the
+later targets. It is not the current handoff.
 
 | Question | Evidence and accept rule | Next decision |
 | --- | --- | --- |
@@ -365,7 +397,7 @@ guaranteed occupied regions must still be measured.
 A depth-one fractional family supplies an all-site lower bound on cover mass, even
 though it need not be a physical packing.
 
-## Sprint execution
+## Historical Sprint Execution Plan
 
 Sol extra high owns numerical separator repair and the exact fractional-family screening
 instrument. A second Sol extra high owns generic footprint geometry and its independent
@@ -380,6 +412,17 @@ execute independently.
 Their results select the next cover comparison or proof strengthening.
 CI and publication proceed beside those research lanes.
 Experiment clocks remain independent of this agenda’s overall budget.
+
+## Next Slice
+
+`think-yhw2` owns the continuation.
+First integrate and source-bind an independent implementation of the residual-domain
+union and five-dot replay, then preregister and run its audit.
+If it agrees, transport the four patches and five dots together under valid container
+symmetries and reuse the certificate only when exact footprint-union containment permits
+it. Keep an explicit ledger of covered and uncovered owner-class combinations.
+Search for new five- or six-dot patterns only for uncovered classes, under fresh
+hypotheses and experiment protocols with usage recorded outside Session113.
 
 ## Earlier agenda disposition
 

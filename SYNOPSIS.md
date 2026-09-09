@@ -94,6 +94,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-013](packing/frontier/RESULTS.md) | 40 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel’s n = 40 packing is infinitesimally flexible -- seven verified independent first-order flexes turn the sixteen-square tilted block -- and every retained flex is refused at second order by a verified non-negative self-stress, exactly over Q(sqrt 2), so no first-order argument can establish rigidity here. |
 | [T-015](packing/frontier/RESULTS.md) | 17 | `V4` | `C3` | `S3` | `previously-published` | s(17) >= 22529/5000 = 4.5058, by Massaccesi’s 168-atom fractional unavoidable-set certificate (2026) on Burns’s architecture: total mass 203/12 < 17 and mass at least 1 in every closed unit square of [0, 22529/5000]^2, reduced exactly to 181 rational directions and finitely many event cells, replayed here by the source verifier and by an accumulation-independent repository instrument. |
 | [T-016](packing/frontier/RESULTS.md) | 18, 19 | `V4` | `C3` | `S3` | `previously-published` | s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a packing of n >= 17 unit squares contains a packing of 17). |
+| [T-023](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S3` | `apparently-novel` | At q = 96/25, if four distinct unit squares have selected strict cores of side B = 9977/10000 containing, respectively, the four closed rational patches in arms.endpoint.footprint_union of the retained exp143 receipt, at most five further unit squares fit. |
 | [T-006](packing/frontier/RESULTS.md) | 13 | `V3` | `C1` | `S3` | `previously-published` | s(13) = 4 (Bentz 2010, Theorem 9). |
 | [T-007](packing/frontier/RESULTS.md) | 4-100 | `V3` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 100, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V4` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
@@ -440,7 +441,7 @@ case or experiment separately.
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
-| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | current | maintained | — |
+| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
@@ -492,7 +493,8 @@ case or experiment separately.
 | [Multiple Owner-Footprint Domain Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/multiple-footprint-domain-contract.md) | research synthesis | record | retained | — |
 | [Exp139, Exp140, and Multi-Owner Domain Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/receipts-and-multi-domain-review.md) | research synthesis | record | retained | — |
 | [Exp143 Five-Dot Candidate: Mathematical Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md) | research synthesis | record | retained | — |
-| [What the Owner-Conditioned Cover Sprint Has Established](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md) | research synthesis | record | retained | — |
+| [Five Dots Exclude One Four-Owner Branch at $q=3.84$](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md) | research synthesis | record | retained | — |
+| [From One Excluded Branch to a Stronger Eleven-Square Bound](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md) | research synthesis | record | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
@@ -640,10 +642,17 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 [Session113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md)
-closed Agenda032 with exp144’s exact five-dot exclusion of one four-owner branch.
+closed Agenda032 with [T-023](packing/frontier/RESULTS.md), the five-dot exclusion of
+one specified four-owner branch at side `96/25 = 3.84`. The composed result is V3/C3,
+significance S3: exact full-net coverage plus audited geometric transfer, with no change
+to the global bound.
 The
 [sprint report](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md)
 explains the full result and next `think-yhw2` selection.
+The
+[gaps and routes analysis](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md)
+separates certificate assurance, exhaustive case coverage and stronger geometric
+restrictions, including what could improve the bound at a different target side.
 
 **Math startup release checkpoint.**
 [Session 111](packing/campaign/agent-sessions/session-111-font-startup-stability.md)
@@ -719,56 +728,51 @@ not certify an upper bound.
 The depth polisher will start from that retained control; its missing scratch state is
 not a runnable handoff.
 
-**Selected next entry:** `think-yhw2`, the owner-requested two-hour conditional-owner
-sprint in [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md)
-and
-[session-113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md),
-runs from03:18:37Z to05:18:37Z. Separator repair, exact fractional-family obstruction
-screens, and general owner-footprint geometry proceed in parallel on
-`codex/n11-ownership-continuation`, [PR137](https://github.com/jlevy/squares/pull/137).
-PR127 merged as `6aa9e72c`; PR137 targets main.
-[Session-112](packing/campaign/agent-sessions/session-112-ownership-and-pricing.md)
-retains the earlier continuation and its usage through03:18:37Z; main’s independent font
-session111 keeps its original identifier and receipt.
-The
-[sector lemma](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md)
-gives sixteen exhaustive selected-owner classes at one corner, each with a rational
-triangle of area `B²/16`. This supports a general branch program without assuming four
-literal flush corners.
-The fixed-corner pilot is numerically positive.
-The exact reused-family screen found no obstruction in any selected class;
-independentaudit is pending.
-Exactfullnet and genericownerpilot protocols are registered separately.
-[X-022](packing/campaign/explorations/X-022-segment-ownership-continuation.md) gives
-sharp capacities of two owners on the outer middle-row segments and four on the other
-eight, necessary support and signed-angle restrictions, two local counterexamples, and
-one fixed-pattern exclusion and its robust perturbation supplement.
-None composes into a global exclusion at `96/25`. The expanded instruments pass 64
-controls; both counterexample readers and six deliberately broken examples replay as
-expected.
-H-135 remains untested; H-136 has an unresolved first pilot and a prospectively
-declared repaired repeat.
-Exp-134’s exact transport control passed with depth one and unchanged mass
-`21342289572/2055263195` in 135.91 seconds.
-Its pricing target was never invoked: the owner prioritized BC-309 before launch, so
-BC-306 and exp-134 are blocked pending a fresh forward allocation while the published
-protocol remains unchanged.
-Exp135 ran once: unrestricted numerical mass11.981481481481488; residual separator
-failure, no matched score.
-Exp136 completed in3.06seconds: global11.981481481481488, residual7.804878048780487,
-score0.17660343270100132. Exact replay remains separate.
-BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
-complements of BC-292 and BC-299 forward.
-The corrected checkpoint is certified by the retained raw full log and structured
-component receipts composing all 69 steps; the earlier `ef8a2e72` full invocation
-remains failed. PRs 116, 121 and 127 have merged; the separate continuation PR retains
-usage tallied across the non-overlapping cutoff at 2026-09-08T23:23:55Z. Preparation
-before that cutoff stays in session 110 even when its artifacts first appear in the
-continuation PR. The
-[handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
-records the corrections and the funded continuation.
-[Session 110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md)
-records the certified correction checkpoint and the handoff-review usage interval.
+**Selected next entry:** `think-yhw2`, generalize the five-dot four-owner exclusion.
+The two-hour sprint in
+[Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
+complete. Exp141 independently confirmed the retained-family negative screens; exp142
+completed the one-owner numerical comparison; exp143 found the four-owner five-dot
+candidate; exp144 checked those unchanged dots on all 361 canonical orientations.
+The footprint-containment and strict-core arguments supply the physical implication
+recorded as T-023. The independent residual-domain union implementation has not run this
+target.
+
+The next slice has an ordered exit condition:
+
+1. Integrate and test the independent union checker, freeze its source and controls,
+   then preregister its replay of the retained four patches and five dots.
+   Resolve any discrepancy before using the result to exclude more cases.
+2. Transform patches and dots together under valid container symmetries, and check
+   exactly when a new guaranteed occupied union contains a certified union.
+   Retain a ledger identifying covered and uncovered owner combinations.
+3. Search for new five- or six-dot patterns only on uncovered cases, recording exact
+   escaping cores when a candidate fails.
+   Refine owner position and angle where the coarse classes remain insufficient.
+
+A global exclusion requires this ledger to cover every admissible owner combination.
+The next experiments require fresh hypotheses or explicitly scoped successors,
+prospective criteria, published source, and a separate session usage interval.
+The figure and T-023 registration are post-sprint documentation amendments and are not
+charged into the frozen session113 receipt through `2026-09-09T05:16:31Z`. The separate
+post-sprint usage delta was refused for non-monotone wait timing; `think-86ax` tracks
+its repair and remeasurement, so no additional total is claimed.
+
+[PR137](https://github.com/jlevy/squares/pull/137), on
+`codex/n11-ownership-continuation`, is the single continuation milestone and targets
+`main`. PRs 116, 121 and 127 have merged; PR127 merged as `6aa9e72c`.
+[Session112](packing/campaign/agent-sessions/session-112-ownership-and-pricing.md)
+retains the earlier research continuation through `03:18:37Z`; main’s independent font
+session111 retains its own identifier and receipt.
+[Session110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md) and
+the [handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
+preserve the original stack review and its separately tallied cost.
+
+Full-support pricing H-135 remains an unrun reserve under `think-7lp3`. Exp134’s exact
+transport control passed with depth one and unchanged mass `21342289572/2055263195` in
+135.91 seconds, but the pricing target was never invoked.
+Neither that administrative stop nor the deferred H-125 kernel is a negative scientific
+result. The owner-case continuation above takes priority.
 
 **Agenda 028’s restricted-family results.**
 [Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) and

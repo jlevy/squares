@@ -348,7 +348,7 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-032 | `BC-310` | complete | Can exact event reconstruction repair the thin-cell separator and permit a fresh matched… |
 | agenda-032 | `BC-311` | complete | Does deleting poses that meet guaranteed owner footprints from the retained depth-one fractional… |
 | agenda-032 | `BC-312` | complete | Do guaranteed area footprints improve the covering objective beyond merely owning a point? |
-| agenda-032 | `BC-313` | complete | Does a promising conditional numerical cover survive rational reconstruction, the full direction… |
+| agenda-032 | `BC-313` | complete | Does the selected five-dot endpoint-footprint proposal survive rational reconstruction, the full… |
 | agenda-032 | `BC-314` | complete | What did the sprint establish, what did each branch cost, and what should run next? |
 | agenda-032 | `BC-315` | complete | Do four guaranteed occupied regions improve the matched cover beyond four bare marks? |
 

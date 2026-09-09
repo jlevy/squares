@@ -16,7 +16,7 @@ Independent domain-union confirmation is deferred to the next slice; no exp145 t
 was registered or launched.
 This review did not rerun the target.
 
-[Exp144 exact receipt](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json)
+[Exp144 exact receipt](../exp-144-four-owner-endpoint-full-net-replay.json)
 
 ## The Exact Candidate
 

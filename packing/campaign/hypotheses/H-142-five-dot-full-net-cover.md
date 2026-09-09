@@ -58,6 +58,11 @@ Exp144 confirms the claim on all361directions. The common minimum equals beta, s
 normalized cover is exactly five dots.
 The conditional physical implication uses the separately reviewed containment and
 strict-core transfer.
+The composed branch exclusion is registered as [T-023](../../frontier/RESULTS.md), with
+the
+[illustrated sprint report](../series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md)
+explaining how the finite check and geometric premises fit together.
+This post-sprint link does not change the registered hypothesis or its accept rule.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

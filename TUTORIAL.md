@@ -358,25 +358,55 @@ Only proved restrictions on corner ownership, wall contacts, angles, or compatib
 may remove poses. Every hypothetical packing must belong to a case, and its certificate
 must cover every legal core throughout that case’s continuous parameter range.
 
-For example, fix four mutually compatible poses `A₁, …, A₄`. Every remaining square must
-avoid their interiors.
-Put atoms in the remainder and require every admissible strict inner core there to cover
-mass at least one. Total mass below seven excludes seven further squares in that fixed
-branch. This differs from assigning extra demand to a corner class: conditioning removes
-poses that overlap the four fixed squares.
+A **strict core** is a slightly smaller square—side `9977/10000` here—placed strictly
+inside a physical unit square.
+The strict inset makes the closed cores of non-overlapping physical squares disjoint,
+including at their boundaries.
+A **corner owner** is one of four distinct physical unit squares whose selected core
+contains a chosen **mark**, a specified point near a container corner.
+The owner may still move and rotate within its case.
+A **guaranteed footprint** is a fixed closed polygon that lies inside the owner’s
+selected core for every pose allowed by the case.
+It records area that is certainly occupied even though the owner’s exact pose is
+unknown.
 
-Deleting the mass inside four fixed interiors automatically saves at least four units
-from any unconditional measure, since each fixed square contains a covered core and the
-remaining compatible cores avoid those interiors.
-The contradiction threshold also falls from 11 to 7, so only savings beyond four units
-improve the proof margin.
+![Diagram of four green guaranteed footprints and five red dots: eleven squares minus four owners leaves seven residual cores, but disjoint cores cannot share any of the five dots.](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg)
 
-A global argument cannot assume four flush axis-aligned corner squares.
-The known corner-owner statement allows the owners’ poses to vary, so the cases must
-cover those continuous possibilities.
-Each case still needs exact event-cell, boundary, and all-angle verification.
-Pricing improves the one-square covering resource; the structural cases supply the
-multi-square compatibility that an unconditional LP does not express.
+*The proved five-dot exclusion for one selected four-owner branch at `L = 96/25`. The
+corner shapes are the regions guaranteed to lie in the four owner cores; the five dots
+pierce every selected remaining net core.
+The drawing explains the logic; the linked records supply the exact check and the
+geometric proof that extends it to every physical angle.*
+
+Here is the counting argument for that branch.
+
+1. Four distinct corner owners are already identified, so an eleven-square packing would
+   have `11 − 4 = 7` other squares.
+2. Every strict core of a remaining square must avoid the four guaranteed footprints.
+3. Use the five fixed dots shown in the figure.
+   Their exact coordinates and the full worked example are in the
+   [sprint report](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md).
+4. The
+   [exact full-net replay](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json)
+   checks all 361 chosen core orientations and finds that every admissible remaining net
+   core contains at least one of those dots.
+   The reviewed shrink-and-snap argument transfers the finite orientation check to
+   physical squares at every angle
+   ([five-dot transfer review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md)).
+5. **No dot can serve two cores:** each strict core lies inside a different physical
+   square’s interior, and those interiors do not overlap.
+   Five dots can therefore meet at most five residual cores, fewer than the seven the
+   branch requires.
+
+This proves that an eleven-square packing at side `96/25` cannot belong to this selected
+branch. The result is registered as [T-023](packing/frontier/RESULTS.md).
+It does not prove a new lower bound for `s(11)`. The corner-owner theorem permits other
+owner classes and sectors, so a global result would need conditional exclusions whose
+cases cover every permitted combination.
+The
+[numerical source receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json)
+records how the five dots were found; the exact replay and transfer review establish the
+covering claim.
 
 ## 2. The Configuration Space
 

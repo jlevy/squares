@@ -127,7 +127,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
 | [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Historical at this checkpoint: resume think-mq0d for BC-264 subject to its allocation and admission requirements. Agenda030 subsequently superseded that selection with think-qfog; the current SYNOPSIS governs new work. This publication repair does not reprioritize research or authorize a target run. |
 | [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
-| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: finish independent union-domain confirmation, then generalize certified small dot patterns across admissible owner classes. |
+| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: independently audit the union and five-dot replay, reuse the certificate through valid symmetries and exact containment, then search only uncovered classes under fresh preregistration and separately recorded usage. |
 
 ### Workflow summary
 
@@ -673,7 +673,7 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | BC-310 | tool_validation | 11 | complete | 1 | think-9yvj | Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487, gap0.17660343270100132. BC313 owns exact/full-net promotion. |
 | BC-311 | research | 11 | complete | 1 | think-mwxg | The independent audit confirms all subthreshold survivor results. Stop unchanged-weight deletion filters. |
 | BC-312 | research | 11 | complete | 1 | think-9cpg | One-owner numerical comparison accepted: point11.5745, triangle10.5556, endpoint10.3889. Endpoint remains above10. |
-| BC-313 | research | 11 | complete | 2 | think-9cpg | Exp144 certifies five dots over all361directions; reviewed transfer excludes this selected four-owner branch. Generalize under think-yhw2. |
+| BC-313 | research | 11 | complete | 2 | think-9cpg | Exp144 certifies five dots over all361directions; reviewed transfer excludes the selected reflected m1/j0 four-owner branch. Post-sprint claim T-023 records the exact scope. |
 | BC-315 | research | 11 | complete | 1 | think-9cpg | Four-owner numerical comparison accepted: point9, triangle6, endpoint5. Exp144 verifies the fixed five-dot candidate on the complete net. |
 | BC-314 | measurement_validation | 11 | complete | 1 | think-ns6k | Publish final results and separately attributed usage; next selection think-yhw2. |
 
@@ -804,7 +804,7 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | H-139 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 2 |  | 41s wall |
 | H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
 | H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
-| H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 |  | 29s wall |
+| H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
 
 ## Needs review — held for a human, not decided
 

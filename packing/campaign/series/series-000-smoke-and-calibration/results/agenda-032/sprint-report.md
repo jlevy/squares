@@ -1,235 +1,259 @@
-# What the Owner-Conditioned Cover Sprint Has Established
+# Five Dots Exclude One Four-Owner Branch at $q=3.84$
 
-The sprint has excluded a genuine four-owner case at $q=96/25=3.84$: five rational dots
-meet every allowable remaining core in that case.
-Exp144 verified the complete 361-direction net exactly; the reviewed owner-footprint and
-strict-core arguments transfer that result to physical squares at arbitrary angles.
-An independent check of the residual-domain union is deferred to the next slice.
-This is a conditional branch theorem, not an exclusion of eleven squares from the
-container in general.
-The case comes from a premise proved for every hypothetical eleven-square packing: four
-distinct squares own specified corner marks.
-Turning that premise into occupied area has now produced a substantial numerical gain.
+This sprint proved that one specified four-owner branch cannot occur in a packing of
+eleven unit squares inside a square of side $q=96/25=3.84$. The certificate uses four
+guaranteed occupied regions and five fixed points.
+It does not cover every possible choice of owners, marks, and orientation classes, so it
+does not change the global bound for eleven squares.
 
-## The Problem and the Covering Method
+## Why This Branch Is Impossible
 
-We replace each physical unit square by a slightly smaller, concentric core of side
-$B=9977/10000$, with a nearby orientation from the retained rational net.
-The shrink leaves the selected core strictly inside its parent.
-This lets us use exact rational geometry while retaining a rigorous route back to
-arbitrary physical angles.
+All lengths are in units of the side of a packed square.
 
-A weighted-dot cover puts nonnegative mass at chosen points and requires every allowable
-core to contain at least one unit of mass.
-Eleven disjoint cores would then require at least eleven units altogether.
-A globally valid cover of mass below eleven would therefore exclude the packing.
+1. **Start with eleven squares.** Suppose eleven unit squares fit without overlapping
+   inside the square container of side $3.84$.
 
-Conditioning changes which cores the cover must meet.
-If four distinct cores are already identified, and we know regions that those cores
-occupy, the other seven cores must avoid those regions.
-A cover of all these remaining possibilities with available mass below seven would
-exclude that conditional case.
-To prove the general result, the cases must cover every possible packing, and every case
-must be excluded.
+2. **Select four owners.** An **owner** is one of four distinct packed squares selected
+   using a prescribed **mark**, a point near a container corner.
+   An **owner class** restricts the square’s position and orientation relative to its
+   mark. The precise inner-core condition is given below.
+   This branch uses the reflected copy of one prescribed class at each corner.
+   The general owner theorem provides the four distinct owners, but does not force every
+   packing into this particular four-class combination.
 
-The proved corner-pair premise supplies four distinct owners, each containing at least
-one of two marks near its corner.
-It does not place four unit squares flush against the container.
-See the
-[BC303 corner-pair replay](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md).
+3. **Use the area each owner must occupy.** Every owner allowed by one of these classes
+   contains a closed rational **patch**, shown in green below.
+   The bottom-left patch is the overlap of two half-side squares anchored at its mark,
+   one at $0^\circ$ and one just below $45^\circ$. The geometric proof shows that this
+   overlap remains occupied between those retained endpoints.
+   Reflecting this construction gives the other three patches.
+   The four selected owners therefore occupy all four green patches.
 
-## Why Owning a Point Is Not Enough
+![Diagram of a 3.84-square container with four green occupied patches A through D, five red proof dots, an inset showing a patch as the overlap of two endpoint squares, and the count seven required versus five dots.](four-owner-five-dot.svg)
 
-A useful new sanity check explains why the owner premise needs geometry.
-Suppose a residual cover meets every core avoiding an owned mark $m$. Adding a
-unit-weight dot at $m$ makes it a global cover: any core either contains the mark or was
-already covered. Consequently the true matched optima satisfy
+*The certified branch.
+The four green patches are guaranteed occupied by four distinct owners.
+The five red points meet every permitted remaining core after the exact orientation
+check and geometric transfer.
+The inset shows how two extreme owner orientations force one common patch.*
 
-$$
-\tau_{\mathrm{global}}\leq\tau_{\mathrm{point}}+1.
-$$
+4. **Cover the seven remaining squares with five dots.** Removing the four owners leaves
+   seven packed squares.
+   Inside each, choose an **inner core**, a concentric square of side $0.9977$ that lies
+   strictly inside its unit-square parent.
+   The seven remaining cores are called **residual cores**; they must avoid the four
+   closed green patches.
+   The exact check and the angle-transfer proof together show that every permitted
+   residual core contains at least one of the five fixed red points.
+   Such a point is called a **piercing dot**.
 
-For four owned marks, the added cost is at most four.
-Point conditioning alone therefore cannot improve the exclusion margin beyond the
-reduction in the number of cores we have to cover.
-We need the owner’s occupied area, its allowed position and angle, or another geometric
-restriction to obtain additional power.
-This is an exact construction; comparing two unfinished numerical objectives is not a
-test of the optimum inequality.
-See the
-[point-extension lemma](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/point-extension-lemma.md).
+5. **Count.** The packed unit-square parents have disjoint interiors.
+   Their strictly contained inner cores are therefore separated and cannot share a dot.
+   Seven residual cores would need seven distinct piercing dots, but only five exist.
+   This contradiction excludes the prescribed four-owner branch.
 
-We now have guaranteed occupied footprints.
-From a mark inside a core, choose the two perpendicular directions toward its centre.
-At least half a core side is available along each direction, so an anchored quarter of
-the core is occupied.
-Splitting these directions into eight sectors gives a rational triangle common to every
-pose in each sector.
-Intersecting the two endpoint quarter-squares enlarges that triangle to a common
-quadrilateral. These regions lie inside the selected owner core itself.
+No optimization claim is needed for this argument.
+The result excludes one branch; it does not complete the owner case split or change the
+global packing bound.
 
-Two possible marks and eight sectors give sixteen exhaustive classes per corner, or
-$16^4=65{,}536$ raw four-owner combinations.
-Closed sector boundaries can belong to both adjacent classes.
-A footprint’s area does not guarantee that it contains one unit of cover mass: four
-distinct owners justify the remaining count of seven, but small footprints do not
-automatically save four units of weight.
-See the
-[triangle proof](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md)
-and
-[enlarged-footprint contract](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-footprint-contract.md).
+## Why the Check Covers Every Angle
 
-## What the Experiments Say
-
-**Exp136 found a numerical gain in the fixed-corner example.** On matched finite support
-and directions, the unrestricted objective was about $11.981481$ and the residual
-objective about $7.804878$. The reduction exceeded the four-owner count by about
-$0.176603$. This is evidence that occupied-region conditioning can improve the numerical
-comparison. The residual mass still exceeds seven, and the difference between two primal
-solutions is not an exact optimum-gap proof.
-This special case does not establish the general owner premise.
-[Exp136 record](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md)
-
-**Exp137 and exp138 failed to recover an obstruction from the existing fractional
-family.** A fractional family is a weighted collection of possible cores with total
-weight through any point at most one.
-Its total weight gives a lower bound on the mass any cover needs; it is not a physical
-packing. The shared exact producer filtered an existing family against every declared
-owner-footprint class.
-None of the sixteen one-owner endpoint classes retained weight at least ten, and none of
-the $65{,}536$ four-owner classes retained weight at least seven.
-The records retain independent receipt-audit obligations, so these are scoped producer
-results pending that audit.
-[Exp137](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md),
-[exp138](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md)
-
-The point controls already retained only about $9.417433$ for one owner and $6.517094$
-for four. Any larger obstacle containing the same marks deletes at least those same
-poses. With the weights unchanged, its surviving mass can only fall.
-Subject to the pending receipt audit, this closes further deletion-only refinements of
-this family as a route to the ten- or seven-unit obstruction.
-It does not show that a useful cover exists, or that a newly optimized fractional family
-could not obstruct one.
-
-**Exp139 supplied an exact conditional cover, with an honest normalization cost.** The
-unchanged rationalized exp136 residual weights have mass $7.804903$. Their exact minimum
-coverage over the full folded net is $760979/800000$, below one, so the raw cover failed
-verification. Dividing all weights by that positive minimum produces a feasible
-normalized cover of exact mass
+The exact computation works with rational geometry.
+Its **direction net** is a finite list of 361 canonical square orientations, where
+orientations that differ by a quarter turn represent the same square.
+The chosen core side
 
 $$
-\frac{31219612}{3804895}\approx8.205118.
+B=9977/10000
 $$
 
-Here the fixed obstacles and verified weighted measure have the required square
-symmetries. Together with the strict-core shrink inequality, the complete net check
-transfers to all physical angles in the literal four-flush-corner case.
-The effective mass remains above seven, so this yields no eleven-square exclusion and no
-exact optimum-gap claim.
-It does show that the numerical candidate can be turned into a rigorously interpretable
-conditional cover without solving another LP.
-[Exp139 record](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md)
+is small enough that every physical unit square, at any angle, strictly contains a
+same-centre side-$B$ core at a nearby net orientation.
+This strict containment also gives every residual core positive clearance from the
+closed owner patches.
 
-**Exp140 left the generic area comparison unresolved.** Its unrestricted arm converged
-numerically, but the point arm reached the sixty-round limit with minimum coverage about
-$0.955338$. Neither the triangle nor the enlarged-footprint arm ran.
-The clean process exit is not a completed experiment, and the unfinished point objective
-is not a feasible-cover result.
-The limitation was the iteration allowance, reached in seconds, rather than exhausted
-wall time.
-[Exp140 record](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md)
+For the bottom-left owner, the selected core contains $m_1=(3152/3175,2336/3175)$.
+Choose its two perpendicular signed axes so that the displacement from this mark to the
+core centre has nonnegative projections on both axes.
+Order them so that the second is a counterclockwise quarter-turn of the first.
+The first axis has direction $0\leq\theta\leq\theta_*$, where $\theta_*$ is the retained
+rational endpoint just below $45^\circ$. Neither axis needs to point directly at the
+core centre. Horizontal and vertical reflections give the other three owner classes and
+patches.
 
-## The Completed Area Comparisons
+For a fixed orientation, an **event cell** is a region of possible core centres in which
+the set of contained dots does not change.
+The exp144 reader checked every reachable event cell in the strict residual domain for
+each of the 361 orientations, without using a symmetry fold.
+Its five rational dots are
 
-**Exp142 isolated a clear one-owner area gain.** All four arms converged numerically:
-unrestricted $11.884615$, point $11.574515$, triangle $10.555556$, and enlarged
-footprint $10.388889$. The enlarged footprint improves on the bare point by about
-$1.185626$. This measures the extra value of occupied area.
-It still misses the ten-unit threshold for excluding a one-owner case.
-The comparison uses the same available support and nine residual directions; the owner
-footprints themselves come from the full manifest.
-[Exp142 protocol](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-142-one-owner-completion.md)
+| Dot | Coordinates |
+| ---: | --- |
+| 1 | $(73/75,187/90)$ |
+| 2 | $(793/450,43/15)$ |
+| 3 | $(48/25,48/25)$ |
+| 4 | $(187/90,73/75)$ |
+| 5 | $(43/15,793/450)$ |
 
-**Exp143 produced the strongest candidate: five dots for four guaranteed owners.** For
-four reflected copies of the prescribed $m_1$, sector-zero class, all four arms
-converged: unrestricted $11.884615$, point $9$, triangle $6$, and enlarged footprint
-$5$. The area arms passed below the seven-unit residual threshold on the nine-direction
-screen. The point-extension and nested-domain numerical sanity checks passed.
+The reader initially assigned every dot the same weight
 
-The enlarged-footprint candidate is especially simple.
-It has five rational sites, each with the same rounded weight $\beta=1000001/1000000$.
-Its exact saved mass is $5\beta$, not exactly five.
-But every core collects an integer multiple of $\beta$. If a complete exact replay over
-all 361 residual orientations proves a positive minimum, that minimum is at least
-$\beta$. Dividing by $\beta$ then gives five unit dots meeting every relevant core.
-At most five pairwise disjoint residual cores could fit, whereas an eleven-square
-packing in this branch requires seven.
-No LP optimality proof is needed for that counting contradiction.
+$$
+\beta=\frac{1000001}{1000000}.
+$$
 
-Exp143 supplied the numerical candidate; exp144 supplied its exact replay.
-The full net is essential because the five-dot measure and the obstacle union do not
-share the symmetries needed to justify the folded shortcut.
-[Exp143 raw receipt](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json)
+Every core’s covered weight is an integer multiple of $\beta$, and the exact minimum
+over the complete net is $\beta>0$. Dividing all five weights by $\beta$ therefore gives
+five unit-weight dots while preserving coverage.
 
-**Exp144 passed the exact full-net check.** The source-bound reader completed all 361
-orientations in about 12.76 seconds.
-Every direction has exact minimum coverage $1000001/1000000=\beta$, and the normalized
-total mass is exactly five.
-Independent receipt scrutiny confirmed all indices and labels once each, positive
-reachable-cell counts, and the source blob against both the saved exp143 file and its
-recorded Git commit.
-The reader evaluated 589,549 dense event cells in total.
-[Exp144 receipt](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json)
+The remaining transfer is geometric.
+Every physical parent contains its selected net core, every selected owner contains its
+green patch, and every actual remaining core lies in the strict residual domain.
+Nonnegative weights and closed-core incidence extend event-cell coverage to event
+boundaries. Thus the finite exact check applies to the physical squares at arbitrary
+angles.
 
-The computation proves coverage of the finite net.
-The separate mathematical argument supplies the physical implication: each unit parent
-contains a selected net core strictly; each owner footprint lies in its selected owner
-core; and the remaining selected cores avoid those footprints with positive clearance.
-Thus every remaining core contains one of the five dots.
-Pairwise disjoint cores cannot share a dot, so at most five remain.
-An eleven-square packing in this four-owner branch would require seven and is therefore
-impossible. The general packing bracket does not change: other owner combinations have
-not all been excluded.
-An independent domain-union instrument and confirmation are deferred to the next slice;
-no exp145 target was registered or launched.
+The evidence has three separate parts:
 
-## What Deserves the Next Effort
+- The [exp144 receipt](exp-144-four-owner-endpoint-full-net-replay.json) proves positive
+  five-dot coverage on all 361 rational-net orientations.
+- The [endpoint-footprint review](proofs/endpoint-footprint-review.md) proves the common
+  patch between the retained endpoint orientations.
+- The [five-dot transfer review](proofs/five-dot-transfer-review.md) checks the saved
+  dots, strict residual domain, full-net requirement, and transfer to arbitrary physical
+  angles.
 
-The immediate assurance priority is the independent domain-union confirmation.
-The next research priority is extending the certificate before a broad LP campaign.
-Transform the dots and owner regions together under valid container symmetries.
-Reuse a certified pattern for any class whose guaranteed occupied union contains the
-certified obstacle union.
-Prune classes only with an exact impossibility argument, such as incompatible required
-owner footprints or an empty legal-owner pose domain.
-Shared marks or overlapping class labels do not create additional owners.
+## How the Certificate Was Found
 
-Build a small portfolio of dot patterns, starting with the certified five dots and their
-symmetry images. Six unit dots also suffice for a seven-core contradiction.
-Test unresolved classes against these patterns, retain exact uncovered-core witnesses,
-and optimize only the cases still uncovered.
-Reuse direction geometry and event partitions where their contracts agree.
-This can exploit shared geometry and avoid blindly solving all $65{,}536$ combinations.
+The sprint separated numerical searches, exact finite checks, and analytic transfer so
+that each result keeps its proper scope.
+A cover’s **mass** is the total weight assigned to all its dots.
+A **numerical** result here is a floating-point covering calculation on a stated finite
+set of sites and orientations; it finds candidates but does not certify them.
+An **exact** result uses rational arithmetic for every case in its declared finite
+domain.
 
-If small guaranteed footprints lose too much information, the next mathematical
-refinement is to partition owner position and angle more tightly.
-A smaller pose class gives a larger common occupied intersection, or allows a stronger
-condition that a remaining core must coexist with at least one legal owner pose.
-These are ways to strengthen the conditional covering problem.
-More deletion of the same weighted fractional family cannot supply the missing
-obstruction; changing that direction would require new poses or newly optimized weights
-with a valid depth bound.
+| Experiments | Result | Evidential scope |
+| --- | --- | --- |
+| [exp135](../../experiments/exp-135-fixed-corner-residual-cover-pilot.md), [exp136](../../experiments/exp-136-repaired-fixed-corner-pilot.md) | The first fixed-corner run exposed a thin-cell defect. The repaired nine-orientation run needed about $7.804878$ units of covering weight for the remaining cores. | Numerical pilot for four literal flush corner squares; no exact or generic-owner conclusion. |
+| [exp137](../../experiments/exp-137-corner-dual-salvage.md), [exp138](../../experiments/exp-138-four-owner-dual-salvage.md), [exp141](../../experiments/exp-141-independent-dual-salvage-audit.md) | An existing fractional family—a weighted collection of possible cores with total weight through any point at most one—retained less than the required weight after the owner restrictions. Exp141 independently confirmed the saved result. | Exact negative result for that source family; it does not prove that a residual cover exists or rule out new cores and weights. |
+| [exp139](../../experiments/exp-139-fixed-corner-full-net-replay.md) | The weakest core received only $760979/800000$ weight. Scaling every weight so that weakest value became one gave total weight $31219612/3804895\approx8.205118$. | Exact cover for the literal four-flush-corner case, still above the required total of seven. |
+| [exp140](../../experiments/exp-140-h139-owner-footprint-matched-gain.md), [exp142](../../experiments/exp-142-one-owner-completion.md) | Exp140 stopped before its area cases ran. Exp142 completed four nine-orientation programs: no owner restriction $11.884615$, avoid the mark $11.574515$, avoid a guaranteed triangle $10.555556$, and avoid the larger patch $10.388889$. | Numerical evidence that known occupied area helps for one owner; the larger-patch result remains above the required total of ten. |
+| [exp143](../../experiments/exp-143-h141-four-owner-footprint-matched-gain.md), [exp144](../../experiments/exp-144-five-dot-full-net-replay.md) | The four-owner numerical screen found the five-dot candidate on nine orientations. Exact exp144 then checked the unchanged dots on all 361 orientations. | Exp143 found the candidate; exp144 plus the analytic transfer proves the single branch exclusion above. |
 
-The remaining proof obligations are substantive: cover every possible owner case, check
-successful candidates over the complete required orientation family, retain strict-core
-transfer, and get the effective mass below the correct remaining-core count.
-The sprint has clarified and instrumented those obligations.
-The completed comparisons and exact replay justify pursuing conditional geometry: the
-program now has a concrete branch exclusion to extend.
+The exp144 reader evaluated 589,549 dense event cells and reported 12.76 seconds inside
+the exact loop; the externally measured bounded process took 28.95 seconds.
+The source-bound receipt records five dots of total mass $5\beta$ and exact minimum
+$\beta$, hence normalized mass five.
 
-The untested independent-audit draft and proposed controls are retained as text in
+The point-extension lemma explains why footprints matter.
+Adding one unit-weight dot at an owned mark turns any cover of the cores avoiding that
+mark into a global cover.
+One mark can therefore account for at most one unit of saving, and four marks for at
+most four. The larger reductions in the patch calculations come from guaranteed occupied
+area. See the [point-extension lemma](proofs/point-extension-lemma.md) and the
+[owner-footprint contract](proofs/owner-footprint-contract.md).
+
+## Scope, Assurance, and Next Work
+
+The composed result is registered as [T-023](../../../../../frontier/RESULTS.md), at
+**V3/C3, significance S3**. Here V3 means that the complete physical implication
+includes audited analytic proof; C3 records the exact replay and its controls, without
+claiming independent methods.
+The finite-net part alone reaches V4, exact computational verification.
+The two evidence entries preserve this distinction, and
+[H-142](../../../../hypotheses/H-142-five-dot-full-net-cover.md), BC-313, session113 and
+exp144 identify the hypothesis, agenda cell, session and experiment that produced it.
+
+The branch uses one choice among $16^4=65{,}536$ raw four-owner class combinations.
+The owner theorem supplies four distinct owners but does not supply this particular
+four-class combination in every packing.
+Nor does the exact replay assert that seven additional unit squares can coexist with the
+owners; it proves that they cannot in the conditioned branch.
+The global $n=11$ bracket is unchanged.
+
+### What Is Missing for a Stronger Global Bound
+
+The main gap is **case coverage**. The owner theorem puts every hypothetical packing
+into some permitted owner combination; T-023 excludes only one specified combination.
+To exclude all eleven-square packings at side $3.84$, every permitted combination must
+either receive a valid residual cover or be ruled out by another geometric argument.
+A complete exclusion at any side above the current lower bound $3.810025723614703\ldots$
+would already improve the result.
+
+The next uncertainty is whether guaranteed patches retain enough geometric information.
+A cover must catch every individually permitted residual core, including cores that
+could never coexist in a seven-square packing.
+Failure to find a cover can therefore mean that the relaxation is too weak, that the
+chosen dots are inadequate, or that the search is incomplete.
+It does not by itself mean that the branch admits a packing.
+
+The [gaps and routes to a global bound](gaps-to-global-bound.md) explains the
+alternatives: reuse the existing certificate across more classes, find new weighted
+covers, refine owner poses or add compatibility restrictions, combine structural
+exclusions, and reconsider the target side or the unconditional pricing reserve.
+Each route has a different missing premise and a different next test.
+The five-dot result demonstrates one useful instance; it does not yet establish how many
+further cases these routes can settle.
+
+### Ordered Continuation
+
+The immediate assurance task is an independent implementation of the footprint-union and
+five-dot check.
+A draft was archived as untested before a late temporary-work report said
+that four controls plus the formatter, linter, and type checker passed.
+It was not integrated, no exp145 was registered or run, and it is not additional
+scientific evidence.
+The retained draft is in
 [unrun-independent-audit](unrun-independent-audit/check_five_dot_cover.py.txt).
-They are next-slice engineering material, not additional evidence.
+
+After the independent check, the next research task is to extend the certificate across
+owner classes before launching a broad LP campaign:
+
+1. Transform the four footprints and five dots together under valid container
+   symmetries.
+2. Reuse the certificate when a new guaranteed footprint union contains a certified
+   union, checking union containment exactly.
+3. Screen unresolved classes with a small portfolio of five- and six-dot patterns and
+   retain exact uncovered-core witnesses.
+4. Refine owner position and angle only where the coarse classes leave uncovered cases.
+
+Shared marks or overlapping class labels do not create additional owners.
+Every successful candidate still needs a complete orientation check and the strict-core
+transfer, and the final case ledger must cover every possible owner combination before a
+global exclusion can follow.
+
+The campaign record and the
+[session113 report](../../../../agent-sessions/session-113-conditional-owner-sprint.md)
+retain the full commands, source commits, wall times, model populations, token counts,
+and negative results.
+At the sprint closeout, the change-scoped push gate passed 45 selected checks in 127.89
+seconds, including 880 tests; the integrated hosted full validation also passed its
+exhaustive tests. The later publication CI found absolute local links in this report and
+the transfer review.
+The post-sprint milestone corrects them and adds a regression check that rejects such
+links even when they resolve on the author’s computer.
+The measured session interval ended at 05:16:31Z with 7,074 seconds of coordinator
+elapsed time, 25,148.756 seconds of summed agent work, 973 responses, and 518,705 output
+tokens, of which 177,319 were reasoning output.
+The publication tail followed the cutoff, so these usage figures remain a lower bound on
+the full interval. The figure, tutorial revision and T-023 registration are post-sprint
+documentation work; they add no experiment run and are not included in the frozen
+session113 usage receipt.
+The separate native usage attempt for `05:16:31Z–05:55:48Z` failed validation:
+`devtools.codex_task_tree_delta` reported that cumulative agent-wait seconds decreased
+from `2208.02` to `1840.904`. No new delta receipt or cost total was accepted.
+`think-86ax` tracks the accounting repair and subsequent remeasurement; the frozen
+sprint receipt remains unchanged.
+The completed [Agenda032](../../../../agendas/agenda-032-conditional-owner-sprint.md)
+and [current handoff](../../../../../../SYNOPSIS.md#current-handoff) assign the next
+ordered slice to `think-yhw2`, with fresh preregistration and separately tallied usage.
+
+The committed figure is a static SVG with no JavaScript.
+From `packing/`, regenerate it and its PNG preview with:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.render_owner_five_dot_figure --png
+```
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

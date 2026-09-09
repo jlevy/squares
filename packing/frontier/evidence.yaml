@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-09-07'
+last_reviewed: '2026-09-09'
 evidence:
   - id: E-green-ds7-theorem9-reported-lower
     claim: lower-bound
@@ -2180,3 +2180,96 @@ evidence:
       requires the certified lower bound to reach mass 1 in both modes, and the retained
       certificates are re-decided under it by the replay this entry names.
     source_reviewed: '2026-09-04'
+
+  - id: E-n011-five-dot-full-net
+    claim: derived-structure
+    scope: {n_values: [11]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    certificate: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
+    replay: >-
+      cd packing && uv run --frozen --all-extras --group dev python
+      -m devtools.replay_owner_footprint_cover
+      campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json
+      --expect-receipt-blob cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19 --scope full
+      --max-atoms 1000 --max-event-cells 5000000 --max-total-event-cells 10000000
+      --deadline-seconds 240 --output /tmp/squares-t023-replay.json
+    replay_status: passed
+    limitations: >-
+      Exp144 at source 5195c94c checked all 361 unique canonical orientations, with
+      exact minimum 1000001/1000000 at every direction for five dots of that common
+      weight. Dividing by the common weight gives five unit dots. This evidence
+      verifies the complete finite-net residual cover only. It does not by itself
+      prove owner-footprint containment, the physical-angle transfer, LP optimality,
+      or exclusion of every owner combination. The union decomposition and exact
+      sweep reuse the repository implementation; an independent union checker has
+      not run the target. No additional target was run when this evidence was registered.
+    source_reviewed: '2026-09-09'
+
+  - id: E-n011-five-dot-physical-transfer
+    claim: derived-structure
+    scope: {n_values: [11]}
+    assurance: verified
+    method: proof-audited
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    replay_status: not-attempted
+    proof:
+      source: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
+      theorem: >-
+        Four distinct selected strict cores containing the four retained endpoint
+        footprints leave room for at most five further physical unit squares in
+        [0,96/25]^2. In particular, the corresponding eleven-square branch is excluded.
+      scope: >-
+        The four explicit exp143 patches and five explicit exp143 dots at q=96/25,
+        with B=9977/10000. The reflected m1/sector-zero owner conditions imply the
+        footprint-containment premise. No exhaustive owner-class result is asserted.
+      pinpoints: >-
+        The Exact Candidate; Which Branch This Would Exclude; Full-Angle and Boundary
+        Transfer. Universal endpoint containment is proved in the sibling
+        endpoint-footprint-review.md; corner-owner class construction is in the
+        agenda-031 corner-owner-sector-footprints.md proof.
+      assumptions:
+        - Packed physical unit squares have pairwise disjoint interiors and lie in the closed container.
+        - Each selected rational-net core is concentric with and strictly inside its parent; B(1+D)<1 with D=207107/90000000.
+        - Four distinct selected cores contain the four closed saved footprints respectively.
+        - The complete finite-net coverage statement is E-n011-five-dot-full-net.
+        - Nonnegative point weights and closed-core incidence extend coverage from reachable open event cells to their event boundaries.
+      audit_record: >-
+        Session113 coordinator review and source-distinct analytic scrutiny by the
+        existing GPT-6 Astra extra-high agent, retained in five-dot-transfer-review.md
+        and endpoint-footprint-review.md. The post-sprint diagram/claim review checked
+        reflections, exact coordinates, strict separation, scope and composition.
+        This is not an independent implementation of the domain-union computation.
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained square-packing archive and source comparison in
+        packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md,
+        especially Stromquist 2003 Theorem 1 and Figures 8-12.
+      searched: >-
+        This assessment reuses the retained comparison between unavoidable-point
+        ownership and forced occupied segments and compares the explicit new
+        footprint/five-dot instance with that lineage. No new bibliographic or
+        exact-coordinate priority search was performed for this milestone.
+      novel_object: >-
+        The explicit four-rational-footprint, five-rational-dot conditional
+        certificate at q=96/25 confirmed by exp144; not ownership arguments,
+        unavoidable points, or the general weighted-cover method.
+      gaps: >-
+        The retained review does not establish absolute priority or exhaust papers,
+        unindexed work or unpublished constructions. Apparent novelty applies only
+        to this instance within the reviewed material.
+    limitations: >-
+      The universal geometric steps are audited prose proofs, not machine-checked
+      statements. The exact replay's continuum_angle_transfer_checked=false is
+      retained: that program checks only the net, and this analytic evidence supplies
+      the physical implication. The composed T-023 therefore declares V3/C3 rather
+      than V4 or C5. The four-owner premise has compatible parent examples; existence
+      of seven additional squares is neither assumed nor asserted. Other owner
+      combinations remain open and no n=11 verified bound field changes.
+    source_reviewed: '2026-09-09'

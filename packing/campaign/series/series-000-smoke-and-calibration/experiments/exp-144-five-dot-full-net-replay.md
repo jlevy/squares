@@ -87,7 +87,19 @@ The four-owner part has a compatible physical realization; seven additional squa
 not asserted to fit.
 One branch exclusion is not an exhaustive n11 theorem.
 
-Commit and push source, reader, controls, and protocol before the one target run.
+**Post-sprint registration, 2026-09-09:** [T-023](../../../../frontier/RESULTS.md)
+composes this finite-net result with the
+[endpoint-footprint proof](../results/agenda-032/proofs/endpoint-footprint-review.md)
+and [physical transfer proof](../results/agenda-032/proofs/five-dot-transfer-review.md).
+Its V3/C3 scope is the specified four-patch branch; the finite check alone is V4/C3. The
+[raw receipt](../results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json)
+and [illustrated sprint report](../results/agenda-032/sprint-report.md) retain the
+calculation and explain the counting argument.
+Registration adds no target run and does not alter this experiment’s criterion, measured
+28.95-second wall time, or session113 usage cutoff.
+
+The following launch instructions are historical: commit and push source, reader,
+controls, and protocol before the one target run.
 Preserve launch source, UTC, dirty state, exit, process time, and each direction’s exact
 result. A reported zero should be turned into a geometric witness under a separate
 diagnostic protocol, not silently retried with moved dots.
