@@ -506,6 +506,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       <!-- Revision 15: the law gets a line of its own; the solver and the two graphs share
            the next, so a wide plot is not squeezed beside three narrow boxes. -->
       <div class="row">
+        <div class="subpanel groupbox" id="wall-box">
+          <span class="box-title">walls</span>
+          <div class="group-body">
+            <div class="law-row"><span>rigidity</span><input type="range" id="wall-rigidity" aria-label="the overhang tolerated before the wall pushes hard"><span class="law-val" id="wall-rigidity-val"></span></div>
+            <div class="law-row"><span>repulsion</span><input type="range" id="wall-repulsion" aria-label="the wall's push when a corner is outside"><span class="law-val" id="wall-repulsion-val"></span></div>
+            <div class="law-row"><span>attraction</span><input type="range" id="wall-attraction" aria-label="the wall's pull on a square that is close but inside"><span class="law-val" id="wall-attraction-val"></span></div>
+            <div class="law-row"><span>range</span><input type="range" id="wall-range" aria-label="how far from the wall its pull reaches"><span class="law-val" id="wall-range-val"></span></div>
+          </div>
+        </div>
         <div class="subpanel groupbox" id="solver-box">
           <span class="box-title">solver</span>
           <div class="group-body">
@@ -1795,16 +1804,56 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     soft: { rigidity: 0.35, repulsion: 400, attraction: 0, range: 0 },
     sticky: { rigidity: 0.08, repulsion: 2500, attraction: 120, range: 0.25 },
   };
-  const lawSteep = () => LAW_STEEP_MAX * Math.max(0, 1 - LAW.rigidity / LAW_TOL0);
-  const lawAttracts = () => LAW.attraction > 0 && LAW.range > 0;
-  function lawForce(d) {
+  // Revision 15: the law is a function of the signed gap, and there are two relationships it can
+  // describe -- square against square, and square against wall. They are the same shape and want
+  // different numbers, so the shape takes the law it is evaluating rather than reading one global.
+  // The owner's reasoning: a wall is not a neighbour, so borrowing the pair's settings for it was
+  // a coincidence of implementation rather than a claim about the physics.
+  const steepOf = (L) => LAW_STEEP_MAX * Math.max(0, 1 - L.rigidity / LAW_TOL0);
+  const attractsOf = (L) => L.attraction > 0 && L.range > 0;
+  function forceOf(L, d) {
     if (d <= 0) {
-      const p = -d, tol = LAW.rigidity;
-      return LAW.repulsion * (Math.min(p, tol) + lawSteep() * Math.max(0, p - tol));
+      const p = -d, tol = L.rigidity;
+      return L.repulsion * (Math.min(p, tol) + steepOf(L) * Math.max(0, p - tol));
     }
-    if (!lawAttracts() || d >= LAW.range) return 0;
-    const u = d / LAW.range;
-    return -LAW.attraction * 4 * u * (1 - u);
+    if (!attractsOf(L) || d >= L.range) return 0;
+    const u = d / L.range;
+    return -L.attraction * 4 * u * (1 - u);
+  }
+  const lawSteep = () => steepOf(LAW);
+  const lawAttracts = () => attractsOf(LAW);
+  const lawForce = (d) => forceOf(LAW, d);
+  // The walls' own law. The defaults reproduce the shipped behaviour exactly: the old wall was
+  // `PHYS.wall * min(overhang, PHYS.wallCap)`, which is this shape with a knee at the cap and no
+  // steepening past it, since a rigidity above LAW_TOL0 gives a slope of zero there. Attraction is
+  // off, so a wall still only pushes until the owner asks otherwise.
+  const WALL_DEFAULT = { rigidity: 0.25, repulsion: 2500, attraction: 0, range: 0 };
+  const WALL_BOUNDS = {
+    rigidity: [0.002, 0.5],
+    repulsion: [0, 8000],     // zero is a legitimate setting here: walls that do not push at all
+    attraction: [0, 400],
+    range: [0, 0.5],
+  };
+  const WALLLAW = Object.assign({}, WALL_DEFAULT);
+  const wallForce = (d) => forceOf(WALLLAW, d);
+  const wallAttracts = () => attractsOf(WALLLAW);
+  function setWallLaw(next) {
+    const o = next || {};
+    for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
+      if (o[key] === undefined) continue;
+      const v = Number(o[key]);
+      if (!isFinite(v)) continue;
+      const [lo, hi] = WALL_BOUNDS[key];
+      const q = (key === 'repulsion' || key === 'attraction') ? 1 : 1000;
+      WALLLAW[key] = Math.round(Math.max(lo, Math.min(hi, v)) * q) / q;
+    }
+    // The same tail setLaw runs: the trajectory cache is keyed by the law, so a changed wall law
+    // needs its run rebuilt exactly as a changed pair law does.
+    markGapBar();
+    if (isPhysical(state.style)) ensureTrajectory(state.pair, state.style);
+    updateSegments();
+    render();
+    return Object.assign({}, WALLLAW);
   }
   // How many substeps the integrator needs to hold this law.
   //
@@ -1831,7 +1880,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     return Math.max(1, Math.min(LAW_SUB_MAX, Math.ceil(dt / limit)));
   }
   // Everything a run has to be keyed by: two runs with the same signature draw the same trajectory.
-  const lawKey = () => LAW.rigidity + ':' + LAW.repulsion + ':' + LAW.attraction + ':' + LAW.range;
+  const lawKey = () => LAW.rigidity + ':' + LAW.repulsion + ':' + LAW.attraction + ':' + LAW.range
+    + '|w' + WALLLAW.rigidity + ':' + WALLLAW.repulsion + ':' + WALLLAW.attraction + ':' + WALLLAW.range;
   // The blind run (revision 6, feature 3): the simulation is told nothing about where the squares
   // are meant to end up. It starts from the packing of n in a container inflated by `inflate`,
   // drops the new square into the emptiest place a coarse grid can find, and then closes the walls
@@ -2156,10 +2206,14 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         for (let q = 0; q < 4; q++) {
           const s1 = q & 1 ? -1 : 1, s2 = q & 2 ? -1 : 1;
           const vx = X[i] + h * (s1 * cs - s2 * sn), vy = Y[i] + h * (s1 * sn + s2 * cs);
-          if (vx < 0) push(i, vx, vy, PHYS.wall * Math.min(-vx, PHYS.wallCap) + (VX[i] < 0 ? -PHYS.contactDamping * VX[i] : 0), 0);
-          if (vx > side) push(i, vx, vy, -(PHYS.wall * Math.min(vx - side, PHYS.wallCap) + (VX[i] > 0 ? PHYS.contactDamping * VX[i] : 0)), 0);
-          if (vy < 0) push(i, vx, vy, 0, PHYS.wall * Math.min(-vy, PHYS.wallCap) + (VY[i] < 0 ? -PHYS.contactDamping * VY[i] : 0));
-          if (vy > side) push(i, vx, vy, 0, -(PHYS.wall * Math.min(vy - side, PHYS.wallCap) + (VY[i] > 0 ? PHYS.contactDamping * VY[i] : 0)));
+          // Revision 15: the walls run their own law. Overhang is a negative gap and clearance a
+          // positive one, exactly as for a pair, so one function serves both and a wall can be made to
+          // pull a square flush as well as push it back in. The defaults reproduce the old push to the bit.
+          const wr = wallAttracts() ? WALLLAW.range : 0;
+          if (vx < wr) push(i, vx, vy, wallForce(vx) + (vx < 0 && VX[i] < 0 ? -PHYS.contactDamping * VX[i] : 0), 0);
+          if (side - vx < wr) push(i, vx, vy, -(wallForce(side - vx) + (vx > side && VX[i] > 0 ? PHYS.contactDamping * VX[i] : 0)), 0);
+          if (vy < wr) push(i, vx, vy, 0, wallForce(vy) + (vy < 0 && VY[i] < 0 ? -PHYS.contactDamping * VY[i] : 0));
+          if (side - vy < wr) push(i, vx, vy, 0, -(wallForce(side - vy) + (vy > side && VY[i] > 0 ? PHYS.contactDamping * VY[i] : 0)));
         }
       }
       // Pairwise push-apart, each unordered pair once, through the grid.
@@ -3216,10 +3270,14 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         for (let q = 0; q < 4; q++) {
           const s1 = q & 1 ? -1 : 1, s2 = q & 2 ? -1 : 1;
           const vx = X[i] + h * (s1 * cs - s2 * sn), vy = Y[i] + h * (s1 * sn + s2 * cs);
-          if (vx < 0) optPush(o, i, vx, vy, PHYS.wall * Math.min(-vx, PHYS.wallCap) + (VX[i] < 0 ? -PHYS.contactDamping * VX[i] : 0), 0);
-          if (vx > o.side) optPush(o, i, vx, vy, -(PHYS.wall * Math.min(vx - o.side, PHYS.wallCap) + (VX[i] > 0 ? PHYS.contactDamping * VX[i] : 0)), 0);
-          if (vy < 0) optPush(o, i, vx, vy, 0, PHYS.wall * Math.min(-vy, PHYS.wallCap) + (VY[i] < 0 ? -PHYS.contactDamping * VY[i] : 0));
-          if (vy > o.side) optPush(o, i, vx, vy, 0, -(PHYS.wall * Math.min(vy - o.side, PHYS.wallCap) + (VY[i] > 0 ? PHYS.contactDamping * VY[i] : 0)));
+          // Revision 15: the walls run their own law. Overhang is a negative gap and clearance a
+          // positive one, exactly as for a pair, so one function serves both and a wall can be made to
+          // pull a square flush as well as push it back in. The defaults reproduce the old push to the bit.
+          const wr = wallAttracts() ? WALLLAW.range : 0;
+          if (vx < wr) optPush(o, i, vx, vy, wallForce(vx) + (vx < 0 && VX[i] < 0 ? -PHYS.contactDamping * VX[i] : 0), 0);
+          if (o.side - vx < wr) optPush(o, i, vx, vy, -(wallForce(o.side - vx) + (vx > o.side && VX[i] > 0 ? PHYS.contactDamping * VX[i] : 0)), 0);
+          if (vy < wr) optPush(o, i, vx, vy, 0, wallForce(vy) + (vy < 0 && VY[i] < 0 ? -PHYS.contactDamping * VY[i] : 0));
+          if (o.side - vy < wr) optPush(o, i, vx, vy, 0, -(wallForce(o.side - vy) + (vy > o.side && VY[i] > 0 ? PHYS.contactDamping * VY[i] : 0)));
         }
       }
       // Push-apart, each unordered pair once, through a grid broad phase rebuilt per step.
@@ -4089,6 +4147,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       document.getElementById('law-' + key + '-val').textContent =
         key === 'rigidity' || key === 'range' ? fmt(LAW[key], 3) : String(Math.round(LAW[key]));
     }
+    // The walls' law, the same four numbers for the other relationship a square has.
+    for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
+      const el = document.getElementById('wall-' + key);
+      const [lo, hi] = WALL_BOUNDS[key];
+      el.min = String(lo);
+      el.max = String(hi);
+      el.step = (key === 'repulsion') ? '50' : (key === 'attraction' ? '5' : '0.001');
+      if (document.activeElement !== el) el.value = String(WALLLAW[key]);
+      document.getElementById('wall-' + key + '-val').textContent =
+        (key === 'repulsion' || key === 'attraction') ? String(Math.round(WALLLAW[key])) : fmt(WALLLAW[key], 3);
+    }
     document.querySelectorAll('#law-preset-seg button').forEach((b) => {
       const preset = LAW_PRESETS[b.dataset.law];
       b.classList.toggle('on', preset !== undefined && ['rigidity', 'repulsion', 'attraction', 'range']
@@ -4804,6 +4873,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // Revision 11: the one force law, its presets, its sampled shape, and the two draggable control
     // points of the plot driven without a pointer.
     setLaw, law: lawState, setLawPreset, lawPresets: () => Object.keys(LAW_PRESETS), lawCurve, lawForce, dragLaw,
+    // Revision 15: the walls' own law, the same shape for the other relationship a square has.
+    setWallLaw, wallLaw: () => Object.assign({}, WALLLAW), wallForce,
     // Revision 11: who attracts whom. Orthogonal to the law: repulsion is never masked.
     setRelationship, relationship: relationshipState, relationships: () => RELATIONSHIPS.slice(),
     setTargetGraph, targetGraph: () => targetGraphFor(state.pair).slice(),
@@ -4874,6 +4945,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   document.getElementById('anneal').addEventListener('input', (ev) => setAnneal(ev.target.value));
   for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
     document.getElementById('law-' + key).addEventListener('input', (ev) => { const o = {}; o[key] = ev.target.value; setLaw(o); });
+  }
+  for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
+    document.getElementById('wall-' + key).addEventListener('input', (ev) => { const o = {}; o[key] = ev.target.value; setWallLaw(o); });
   }
   document.querySelectorAll('#law-preset-seg button').forEach((b) => b.addEventListener('click', () => setLawPreset(b.dataset.law)));
   document.querySelectorAll('#rel-seg button').forEach((b) => b.addEventListener('click', () => setRelationship(b.dataset.rel)));

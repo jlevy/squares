@@ -191,7 +191,10 @@ def main() -> int:
         sliders = page.evaluate(
             "() => Array.from(document.querySelectorAll('#controls input[type=range]')).map(e => e.id)"
         )
-        check(sorted(sliders) == ["anneal", "grow-rate", "grow-size", "law-attraction", "law-range", "law-repulsion", "law-rigidity", "speed"],
+        check(sorted(sliders) == ["anneal", "grow-rate", "grow-size", "law-attraction", "law-range",
+                                  "law-repulsion", "law-rigidity", "speed",
+                                  # Revision 15: the walls got their own law of the same shape.
+                                  "wall-attraction", "wall-range", "wall-repulsion", "wall-rigidity"],
               f"the controls carry a slider that is none of the speed, annealing and law dials: {sliders}")
         check("seek" in api, "the API lost seek when the scrubber went")
         # The controls may not push the stage off the window.
@@ -1187,7 +1190,11 @@ def main() -> int:
         check(moved["back"] == moved["mid"], f"the law does not round-trip through law(): {moved}")
         check(moved["junk"] == moved["mid"] and moved["none"] == moved["mid"],
               f"a setter given junk or nothing moved the law: {moved}")
-        check(moved["stray"] == "0.123:3333:250:0.375", f"an unknown preset is not a no-op: {moved['stray']}")
+        # Revision 15: the cache key carries the walls' own law after a "|w", since a changed wall
+        # law needs its run rebuilt too. The claim here is about the pair law, so it reads the
+        # pair's segment rather than the whole key, which would fail on an unrelated change.
+        check(moved["stray"].split("|")[0] == "0.123:3333:250:0.375",
+              f"an unknown preset is not a no-op: {moved['stray']}")
 
         # 10e. The law is in the trajectory cache key. Two laws draw two trajectories, and the same
         # law set twice draws the same one byte for byte: the cache is keyed rather than cleared, so
