@@ -8,8 +8,8 @@ softschema:
 agenda:
   id: agenda-028
   title: Hybrid Strength and Angular Release
-  updated: '2026-09-07'
-  status: active
+  updated: '2026-09-08'
+  status: paused
   objective: >-
     Execute a focused parallel n11 program from PR108: decide whether one local
     resource representation adds strength over a fair coupled outer LP, and test
@@ -613,11 +613,11 @@ agenda:
     program: n11-hybrid-strength-and-angular-release
     artifacts:
     - docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md
-    next_evidence: Planning assessment and independent reviews are complete. Publish under think-dwq8 with source-bound validation. Session097 stopped after exp129 missed its launch cutoff; H125 remains untested. Follow checkpoint publication under think-m2lx, then the existing BC264 owner think-mq0d assesses a fresh bounded first invocation after admission requirements pass. Retain the independent helper lane and parked H118/H120 targets; this block renews no scientific allocation.
+    next_evidence: Planning assessment and independent reviews are complete. This September 7 decision selected the existing BC264 owner think-mq0d after checkpoint publication under think-m2lx; Agenda030 later superseded that handoff with think-qfog. Retain the independent helper lane and parked H118/H120 targets; this block renews no scientific allocation.
     outcomes:
     - scope: First-principles strategic reconciliation and next-entry decision
       classification: achieved
-      result: Two independent source assessments and two synthesis reviews distinguish bound improvements, restricted geometry, refuted auxiliary models, the fixed-support ceiling, inconclusive searches and unopened targets. The decision retains BC264 under its existing owner, a separate geometric-helper lane, and explicit H118/H120 re-entry gates. Landed096, kernel097 and our residual098 remain distinct; BC283 is planning only.
+      result: Two independent source assessments and two synthesis reviews distinguish bound improvements, restricted geometry, refuted auxiliary models, the fixed-support ceiling, inconclusive searches and unopened targets. The September 7 decision retained BC264 under its existing owner, a separate geometric-helper lane, and explicit H118/H120 re-entry gates; Agenda030 later superseded that handoff. Landed096, kernel097 and our residual098 remain distinct; BC283 is planning only.
       evidence:
       - docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md
       disposition: retire-success
@@ -632,7 +632,8 @@ the owner asked to continue.
 The owner subsequently authorized continuation in
 [session-098](../agent-sessions/session-098-residual-skeleton.md).
 BC282 now has an independently accepted exact translation reduction; its full target
-remains unadmitted. The agenda remains active for its explicitly deferred questions.
+remains unadmitted. The agenda is paused, with its deferred questions governed by their
+explicit re-entry conditions.
 [X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the critical
 review, priority rationale and mapping from #108. Epic `think-pxv5` owns this agenda.
 

@@ -1,0 +1,21 @@
+{
+  "available_cpus": 10,
+  "commit": "cbe9fd76ee05a6d82804d45075454edd105398a8",
+  "dirty_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "environment": {
+    "PACK_JOBS": "2"
+  },
+  "git_status": "",
+  "inner_jobs": 2,
+  "interpreter": "/Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python",
+  "jobs": 2,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "run_id": "7b682b036f3e4ac1bc63522b2e25cfe5",
+  "selected_steps": [
+    "slow behavioral tests",
+    "exhaustive exact behavioral tests"
+  ],
+  "started_at": "2026-09-08T22:18:17.284200+00:00",
+  "untracked_hashes": {}
+}

@@ -29,6 +29,7 @@ import sqpack.research.quench as quench_module
 from sqpack.research.quench import (
     CellSolveResult,
     FixedPointResult,
+    QuenchResult,
     _free_sweep,  # pyright: ignore[reportPrivateUsage]
     _OutOfTimeError,  # pyright: ignore[reportPrivateUsage]
     _solve_adjacent_cell_closure,  # pyright: ignore[reportPrivateUsage]
@@ -117,6 +118,14 @@ def check_quench_deterministic() -> str | None:
     return None
 
 
+def _quench_diagnostic(result: QuenchResult, baseline: float) -> str:
+    return (
+        f"reason={result.reason!r}, converged={result.converged}, "
+        f"side_gap={result.side - baseline:+.2e}, lp_solves={result.lp_solves}, "
+        f"angle_steps={result.angle_steps}, cell_changes={result.cell_changes}"
+    )
+
+
 def check_angle_search_converges() -> str | None:
     """D-016 and D-019: the angle search once stalled early, and once could not stop.
 
@@ -131,17 +140,20 @@ def check_angle_search_converges() -> str | None:
     if abs(r.side - TRUMP) > 1e-9:
         return (
             f"D-016: quench from a 1e-3 perturbation reached {r.side - TRUMP:+.2e}, "
-            f"outside 1e-9; the angle search has stalled early again"
+            f"outside 1e-9; {_quench_diagnostic(r, TRUMP)}"
         )
     if "time budget" in r.reason:
-        return "D-019: the angle search hit its wall budget on a cell that should converge"
+        return (
+            "D-019: the angle search hit its wall budget on a cell that should converge; "
+            f"{_quench_diagnostic(r, TRUMP)}"
+        )
     # D-019 specifically: angles far from zero must not defeat the line search.
     far = [v + 4 * math.pi for v in t]
     r2 = quench_bracket(x, y, far, time_budget=60)
     if "time budget" in r2.reason:
         return (
-            "D-019: angles offset by four full turns defeat the line search; "
-            "the folding or the tolerance scaling has regressed"
+            "D-019: angles offset by two full turns hit the quench wall budget; "
+            f"{_quench_diagnostic(r2, TRUMP)}"
         )
     return None
 
@@ -190,7 +202,10 @@ def check_cell_solve_is_not_a_quench() -> str | None:  # noqa: PLR0911
         return (
             f"D-029: the fixed-angle cell solve reached {cell_side - analytic:+.2e} of the "
             "analytic optimum. It is supposed to be unable to -- if it now can, the "
-            "measurement that separates a cell from a basin has stopped separating them"
+            "measurement that separates a cell from a basin has stopped separating them; "
+            f"reason={solved.reason!r}, settled={solved.settled}, "
+            f"side_gap={cell_side - analytic:+.2e}, solves={solved.solves}, "
+            f"changes={solved.changes}"
         )
 
     closures = []
@@ -211,10 +226,19 @@ def check_cell_solve_is_not_a_quench() -> str | None:  # noqa: PLR0911
     if r.side - analytic > 1e-12:
         return (
             f"D-029: quench_bracket on exp-002 seed 2 reached only {r.side - analytic:+.2e}; "
-            "the angle half has regressed, and n = 10 would read as an exploration failure"
+            f"outside 1e-12; {_quench_diagnostic(r, analytic)}, "
+            f"closure_count={len(closures)}"
         )
     if not closures:
-        return "D-168: n=10 no longer exercises the adjacent-cell closure control"
+        observation = (
+            "wall budget exhausted before adjacent-cell closure coverage"
+            if "time budget" in r.reason
+            else "no adjacent-cell closure observed"
+        )
+        return (
+            f"D-168: n=10 {observation}; {_quench_diagnostic(r, analytic)}, "
+            f"closure_count={len(closures)}"
+        )
     return None
 
 

@@ -26,6 +26,8 @@ from nodejs_wheel import node
 
 from devtools.check_print_layout import (
     _PROBE,  # pyright: ignore[reportPrivateUsage]
+    _PROVER_LAYOUT,  # pyright: ignore[reportPrivateUsage]
+    _ROTATION_TARGET,  # pyright: ignore[reportPrivateUsage]
     BOXED_TOLERANCE_PX,
     TOLERANCE_PX,
     Boxed,
@@ -37,6 +39,34 @@ from devtools.check_print_layout import (
     Probe,
     findings,
 )
+from devtools.render_explainer_pdf import SETTLED
+
+
+def test_layout_settlement_waits_for_pending_math() -> None:
+    """Two animation frames cannot finish a readout still waiting for its font."""
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        let finish;
+        const pendingMath = new Promise(resolve => { finish = resolve; });
+        const document = {documentElement: {offsetHeight: 100},
+          fonts: {ready: Promise.resolve()}};
+        const requestAnimationFrame = callback => queueMicrotask(callback);
+        globalThis.squaresMath = {settled: () => pendingMath};
+        let done = false;
+    """)
+    script += f"const settled = ({SETTLED})().then(() => {{ done = true; }});\n"
+    script += dedent("""
+        setImmediate(async () => {
+          assert.equal(done, false, 'math is still pending after the layout frames');
+          finish();
+          await settled;
+          assert.equal(done, true);
+        });
+    """)
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def block(**over: object) -> Centred:
@@ -76,6 +106,7 @@ def probe(**over: object) -> Probe:
     row: Probe = {
         "centred": [],
         "markers": [],
+        "bullets": [],
         "footnotes": [],
         "boxed": [],
         "overflow": [],
@@ -128,6 +159,23 @@ def test_a_marker_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(markers=[marker(markerCentre=100.0 + off)]))
 
 
+def test_centered_bullets_must_still_be_visible_squares() -> None:
+    """The glyph-centering override stretched drawn squares into centered vertical bars."""
+    square = {"path": "ul[0] > li[0]", "width": 3.3, "height": 3.3, "painted": True}
+    assert not findings(both(markers=[marker()], bullets=[square]))
+    for change in (
+        {"height": 25.0},
+        {"height": 0.0},
+        {"width": 0.0},
+        {"painted": False},
+    ):
+        found = findings(both(markers=[marker()], bullets=[{**square, **change}]))
+        assert len(found) == 2
+        assert found[0].startswith("screen: list bullet")
+        assert found[1].startswith("print: list bullet")
+        assert all("ul[0] > li[0]" in line for line in found)
+
+
 def probe_function(name: str) -> str:
     """One helper's shipped source, so what runs here is what runs in the browser."""
     source = re.search(rf"  function {name}\([^)]*\) \{{.*?\n  \}}", _PROBE, re.DOTALL)
@@ -152,6 +200,38 @@ def first_line_box(setup: str) -> dict[str, float]:
         + "\nconsole.log(JSON.stringify(firstLineBox(el)));\n"
     )
     return json.loads(run_node(script))
+
+
+def test_bullet_probe_measures_boxes_and_keeps_missing_markers() -> None:
+    """A missing pseudo-element must reach the guard; ordered and hidden items must not."""
+    script = dedent("""
+        const sig = () => 'ul[0] > li[0]';
+        const round = value => Math.round((value || 0) * 100) / 100;
+        const item = {parentElement: {tagName: 'UL'}, getClientRects: () => [{}]};
+        const square = {content: '\"\"', display: 'block', visibility: 'visible',
+          opacity: '1', backgroundColor: 'rgb(10, 10, 10)', width: '3.3px', height: '3.3px'};
+    """) + probe_function("bulletBox")
+    script += dedent("""
+        const variants = [square, {...square, height: '25px'},
+          {...square, content: 'none', width: 'auto', height: 'auto'},
+          {...square, display: 'none'}, {...square, backgroundColor: 'rgba(0, 0, 0, 0)'}];
+        console.log(JSON.stringify({
+          boxes: variants.map(before => bulletBox(item, before)),
+          ordered: bulletBox({...item, parentElement: {tagName: 'OL'}}, square),
+          hidden: bulletBox({...item, getClientRects: () => []}, square),
+        }));
+    """)
+    result = json.loads(run_node(script))
+    assert result["ordered"] is None
+    assert result["hidden"] is None
+    square, *broken = result["boxes"]
+    assert square == {"path": "ul[0] > li[0]", "width": 3.3, "height": 3.3, "painted": True}
+    assert not findings(both(bullets=[square]))
+    for bullet in broken:
+        assert bullet is not None
+        found = findings(both(bullets=[bullet]))
+        assert len(found) == 2
+        assert all("list bullet" in line for line in found)
 
 
 def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() -> None:
@@ -278,6 +358,105 @@ def test_a_label_off_the_centre_of_its_own_box_is_a_finding(off: float) -> None:
 @pytest.mark.parametrize("off", [0.0, 0.02, -0.5])
 def test_a_label_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(boxed=[boxed(offset=off)]))
+
+
+def test_prover_failures_are_reported_without_the_optional_layout_sweep() -> None:
+    measured = both()
+    measured["controls"] = [
+        "Figure 5 (19-5): restoring the field uses a stale direction bitmap"
+    ]
+    assert findings(measured) == measured["controls"]
+    assert findings(measured, every=True) == measured["controls"]
+
+
+@pytest.mark.parametrize("broken", [False, True], ids=["valid", "known-defects"])
+def test_prover_layout_probe_accepts_valid_boxes_and_rejects_known_defects(
+    *, broken: bool
+) -> None:
+    """Run the browser's own predicate on contrasting geometry and font measurements.
+
+    The Pages job supplies real DOM geometry; these controls prove that the predicate
+    refuses the earlier side panel, small fraction, broken math, and ignored hidden
+    attribute without requiring every pytest host to install a browser.
+    """
+    script = (
+        f"const broken = {json.dumps(broken)};\n"
+        r"""
+const panel = {getBoundingClientRect: () => ({top: broken ? 20 : 300, left: 0, right: 400})};
+const stage = {getBoundingClientRect: () => ({bottom: 300})};
+const item = {
+  whiteSpace: broken ? 'normal' : 'nowrap',
+  getBoundingClientRect: () => ({left: broken ? -20 : 20, right: broken ? 450 : 380}),
+  querySelector: selector => selector === '.katex' ? mass : item,
+};
+const digit = {children: [], textContent: '4001', fontSize: broken ? '14px' : '20px'};
+const mass = {fontSize: '20px', querySelectorAll: () => [digit], querySelector: () => ({})};
+const hidden = {getClientRects: () => broken ? [{}] : []};
+const figure = {
+  getClientRects: () => [{}],
+  querySelector: selector => ({
+    '.panel': panel, '.stage': stage, '.math-item': item, '.mass-val .katex': mass,
+  })[selector],
+  querySelectorAll: selector => selector === '.math-item' ? [item] : [hidden],
+};
+const document = {querySelectorAll: () => [figure]};
+const getComputedStyle = el => el;
+"""
+        f"\nprocess.stdout.write(JSON.stringify(({_PROVER_LAYOUT})()));\n"
+    )
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    measured: list[str] = json.loads(completed.stdout)
+    if not broken:
+        assert measured == []
+        return
+    assert set(measured) == {
+        "control panel is beside the graphic",
+        "a direction item permits an internal line break",
+        "a direction item overflows the control panel",
+        "the mass fraction has reduced-size numerator or denominator",
+        "the half-tangent fraction has reduced-size numerator or denominator",
+        "a hidden status or verdict still occupies a visible box",
+    }
+
+
+@pytest.mark.parametrize("broken", [False, True], ids=["usable", "known-touch-defects"])
+def test_rotation_target_probe_requires_a_large_named_unobstructed_touch_target(
+    *, broken: bool
+) -> None:
+    script = (
+        f"const broken = {json.dumps(broken)};\n"
+        r"""
+const handle = {
+  getBoundingClientRect: () => ({x: 10, y: 20, width: broken ? 43 : 44, height: 44}),
+  tagName: broken ? 'DIV' : 'BUTTON',
+  getAttribute: () => broken ? '' : 'Rotate the unit square',
+  contains: () => !broken,
+  touchAction: broken ? 'pan-y' : 'none',
+  closest: () => ({querySelector: () => ({touchAction: broken ? 'none' : 'pan-y'})}),
+};
+const document = {elementFromPoint: () => handle};
+const getComputedStyle = el => el;
+"""
+        f"\nprocess.stdout.write(JSON.stringify(({_ROTATION_TARGET})(handle)));\n"
+    )
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    measured: list[str] = json.loads(completed.stdout)
+    if not broken:
+        assert measured == []
+        return
+    assert set(measured) == {
+        "rotation target is smaller than 44px",
+        "rotation target is not a named native button",
+        "rotation target is covered by another element",
+        "rotation target allows the browser to cancel its touch drag",
+        "the canvas no longer permits vertical touch scrolling",
+    }
 
 
 def test_a_document_wider_than_the_page_is_reported_with_the_scale_chromium_applies() -> None:

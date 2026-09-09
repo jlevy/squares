@@ -1104,20 +1104,28 @@ agenda:
         priority: 1
         rationale: >-
           Added at Session092's handoff, not backdated to this agenda's own W10.
-          BC-282 designs the complete residual ten-square skeleton after the
-          independently audited partial release exclusions. Allocate 20 minutes
-          for the design and 10 for independent admission before any later target.
-      selected:
-        bead: think-mq0d
-        workflow: insight-iteration
+          BC-282 designed the complete residual ten-square skeleton after the
+          independently audited partial release exclusions. Session098 later
+          completed the exact translation/fiber reduction and independent admission;
+          the larger target was not admitted.
+      - bead: think-yrw1
+        workflow: review-planning-oversight
+        priority: 0
         rationale: >-
-          Updated at session098’s checkpoint, not backdated to this agenda’s W10.
-          BC282’s exact translation/fiber reduction is independently accepted,
-          but its full target is not admitted. Comparative review parks further
-          local H120/H118 targets. The existing BC264 entry remains the next
-          portfolio pricing priority under its separate owner: first accept the
-          kernel-specific contract, fix features and price full pair verification.
-          No new target, ID, degree escalation or automatic dispatch is authorized.
+          Added on 2026-09-08 when Agenda 030's first wave closed and BC-303 made its
+          selection, not backdated to this agenda's W10. BC-304 dispositioned every cell
+          of that agenda and handed on the funded blocks.
+      selected:
+        bead: think-yrw1
+        workflow: review-planning-oversight
+        rationale: >-
+          BC-303 selected BC-304 to review and disposition every Agenda 030 cell.
+          BC-304 completed that closeout and selected `think-qfog` for the pairwise
+          compatibility continuation. Session098 had already accepted BC282's exact
+          translation/fiber reduction without admitting its full target, parking
+          further local H120/H118 work. BC264 retains its stopped pricing checkpoint
+          under its separate owner. This field records the completed Agenda 030
+          closeout; it does not authorize another target or automatic dispatch.
       operator_input:
         status: unavailable
         note: >-

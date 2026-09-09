@@ -1,5 +1,20 @@
 # Research Strategy and Upstream Reconciliation, September 7
 
+## Integration Update: September 8
+
+PRs 111, 114, 116, 117, 118, 120, 121, 127, 128, 129, 130, 131, 132, 134, 136, and 138
+have since landed on `main`. PR110’s Agenda 028 results remain valid at their declared
+restricted scope and complement Agenda 030’s later segment, corner, angle, and ownership
+results. They do not improve the global `n = 11` bracket.
+
+The current research handoff is Agenda 030’s `think-qfog` pairwise-compatibility
+continuation. Agenda 028 remains paused, with H118 and H120 re-entry conditioned on the
+missing comparators and complete templates recorded in sessions 092 and 098. The BC264
+recommendation and open-PR inventory below describe the September 7 snapshot; they no
+longer select current work.
+VE004’s timing result likewise remains evidence for its frozen 48-check workload rather
+than a measurement of the merged 324-case validation tree.
+
 ## Reassessment: Organize Around a Better n11 Bound
 
 The September 8, 00:30 UTC reassessment is a W10 strategy discussion under `think-7wqt`,

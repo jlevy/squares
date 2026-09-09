@@ -3,12 +3,19 @@ softschema:
   schema: document-map.schema.yaml
   status: enforced
 
-last_reviewed: '2026-09-07'
+last_reviewed: '2026-09-08'
 scope: >
   Durable Markdown owned by packing. Source-faithful archive content is
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-08-pr127-research-readiness.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-09-07-n26-best-known-audit.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-maciver-square-packing.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-09-07-stromquist-n26-verification.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md, role: review, authority: record, lifecycle: retained}
@@ -60,6 +67,7 @@ documents:
   - {path: docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md, role: review, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-atlas-101-324-credit-lines.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/validation-efficiency/ideas.md, role: plan, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md, role: research-report, authority: record, lifecycle: retained}
@@ -68,6 +76,7 @@ documents:
   - {path: packing/benchmarks/validation-efficiency/experiments/VE-004-checks-start-order.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/validation-efficiency/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/validation-efficiency/report.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/benchmarks/gate-cost-at-324/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-06-validation-exhaustive-cost.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-06-validation-slow-and-controls-cost.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-06-tbd-testing-and-ci-performance-proposal.md, role: review, authority: record, lifecycle: retained}
@@ -143,6 +152,17 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md, role: research-report, authority: record, lifecycle: retained}
@@ -165,6 +185,7 @@ documents:
   - {path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md, role: research-report, authority: supporting, lifecycle: maintained}
   - path: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
     role: review
     authority: record
@@ -370,6 +391,10 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-08-paper-font-merge.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/three-lane-research-method.md
     role: component-guide
     authority: record
@@ -433,6 +458,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md, role: plan, authority: supporting, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-07-math-text-face.md, role: plan, authority: current, lifecycle: transient}
   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan

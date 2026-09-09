@@ -20,20 +20,25 @@ This looks.
 
 The waiting is the PDF exporter's, deliberately: a check that measures a differently
 settled page than the one that gets drawn is measuring a document nobody reads.
+The same browser also exercises Figure 5 after those measurements, including its
+certificate controls, feedback, field cache, and layout at desktop and phone widths.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections.abc import Sequence
+from fractions import Fraction
 from pathlib import Path
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
-from playwright.sync_api import ViewportSize
+from playwright.sync_api import CDPSession, Locator, Page, ViewportSize
 
-from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
+from devtools.render_explainer import WALKTHROUGH
+from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
 
 class Centred(TypedDict):
@@ -55,6 +60,15 @@ class Marker(TypedDict):
     lineCentre: float
     fontSize: float
     lineHeight: float
+
+
+class Bullet(TypedDict):
+    """A drawn unordered-list marker, including one whose CSS no longer paints it."""
+
+    path: str
+    width: float
+    height: float
+    painted: bool
 
 
 class Footnote(TypedDict):
@@ -87,6 +101,7 @@ class Probe(TypedDict):
 
     centred: list[Centred]
     markers: list[Marker]
+    bullets: list[Bullet]
     footnotes: list[Footnote]
     boxed: list[Boxed]
     overflow: list[Overflow]
@@ -103,6 +118,7 @@ class Measured(TypedDict):
 
     screen: Probe
     print: Probe
+    controls: NotRequired[list[str]]
 
 
 #: One CSS pixel, which at the print body size is six percent of an em: well under what
@@ -119,6 +135,9 @@ TOLERANCE_PX = 1.0
 #: one-pixel tolerance would have called clean.
 BOXED_TOLERANCE_PX = 0.5
 
+#: Both dimensions come from the same computed box; only rounding needs tolerance.
+BULLET_TOLERANCE_PX = 0.1
+
 #: The measure the PDF actually has, in CSS pixels. `emulate_media` switches which media
 #: queries match; it does not paginate and it does not apply the `@page` box. So the
 #: default 1280px viewport leaves the column at whatever `--kpress-measure` caps it to --
@@ -131,7 +150,7 @@ PRINT_VIEWPORT: ViewportSize = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120
 #: apart: the whole point is comparing like with like across `emulateMedia`.
 _PROBE = r"""() => {
   const out = {
-    centred: [], markers: [], footnotes: [], boxed: [], overflow: [],
+    centred: [], markers: [], bullets: [], footnotes: [], boxed: [], overflow: [],
     pageOverflow: 0, widest: null,
     /* Named so a viewport that did not take is visible in the output rather than
        silently making every horizontal answer wrong. */
@@ -167,12 +186,14 @@ _PROBE = r"""() => {
   /* Markers. The list bullet is not a `::marker`: kpress sets `list-style-type: none`
      and draws an absolutely positioned `::before`, so there is no marker box to
      measure. Its top edge is the `li`'s content-box top plus the pseudo-element's own
-     `top`, and its height is its line box, which is what `lineHeight` computes to. The
-     line it should sit on is the `li`'s first line box, taken as a Range over the first
-     text node rather than as the `li`'s own box, which spans every line. */
+     `top`; its computed height measures the painted square or the numbered marker's
+     box. The line it should sit on is the `li`'s first line box, taken as a Range over
+     the first text node rather than as the `li`'s own box, which spans every line. */
   for (const li of document.querySelectorAll('.kpress li')) {
     const before = getComputedStyle(li, '::before');
     const own = getComputedStyle(li);
+    const bullet = bulletBox(li, before);
+    if (bullet) out.bullets.push(bullet);
     /* `top` is measured from the containing block's padding edge, and the containing
        block is the `li` only while it is positioned. If kpress ever drops that, the
        offset is against something else and this arithmetic would quietly measure the
@@ -286,6 +307,20 @@ _PROBE = r"""() => {
   return out;
 
   function round(v) { return Math.round((v || 0) * 100) / 100; }
+
+  /* A centered rectangle can still be a vertical bar. Record shape and paint before
+     the centering probe skips missing pseudo-elements; ordered markers are text. */
+  function bulletBox(li, before) {
+    if (li.parentElement?.tagName !== 'UL' || !li.getClientRects().length) return null;
+    return {
+      path: sig(li),
+      width: round(parseFloat(before.width)),
+      height: round(parseFloat(before.height)),
+      painted: before.content === '""' && before.display !== 'none'
+        && before.visibility === 'visible' && Number(before.opacity) > 0
+        && !['transparent', 'rgba(0, 0, 0, 0)'].includes(before.backgroundColor),
+    };
+  }
 
   /* The run that reaches farthest past the page, among the runs that can put it there.
      Among: a box whose ink an ancestor clips away has nothing past that ancestor's edge
@@ -410,25 +445,376 @@ _PROBE = r"""() => {
 }"""
 
 
-#: Two frames, so the media switch and the viewport change have both been laid out
-#: before anything is measured. `evaluate` alone does not guarantee a flush after
-#: `emulate_media`, and a rect read from the previous layout is the classic flake here.
-_SETTLED = """() => new Promise(
-  (done) => requestAnimationFrame(() => requestAnimationFrame(done)),
-)"""
-
 #: What `--self-check` puts in front of the gate, and what it holds the gate to naming.
 #: 42px is the overflow the display equation shipped with, and the number the reviewer
 #: reproduced this defect at: in a 576px print column it is a 618px block, and Chromium
 #: would print the whole document at 93.2%.
 SELF_CHECK_PX = 42.0
 SELF_CHECK_CLASS = "print-layout-self-check"
+SELF_CHECK_BULLET_CLASS = f"{SELF_CHECK_CLASS}-bullet"
+
+#: Geometry and computed type sizes, rather than a match on the stylesheet that
+#: intended them. The active certificate is checked at each screen width.
+_PROVER_LAYOUT = r"""() => {
+  const found = [];
+  for (const figure of document.querySelectorAll('figure[data-figure="5"]')) {
+    if (!figure.getClientRects().length) continue;
+    const panel = figure.querySelector('.panel');
+    const stage = figure.querySelector('.stage');
+    if (panel.getBoundingClientRect().top < stage.getBoundingClientRect().bottom - 1)
+      found.push('control panel is beside the graphic');
+    const {left, right} = panel.getBoundingClientRect();
+    for (const item of figure.querySelectorAll('.math-item')) {
+      if (getComputedStyle(item).whiteSpace !== 'nowrap')
+        found.push('a direction item permits an internal line break');
+      const ink = item.querySelector('.katex-html') || item;
+      const box = ink.getBoundingClientRect();
+      if (box.left < left - 1 || box.right > right + 1)
+        found.push('a direction item overflows the control panel');
+      const math = item.querySelector('.katex');
+      if (math && math.querySelector('.mfrac')) fraction(math, 'half-tangent');
+    }
+    if (!figure.querySelector('.math-item')) found.push('direction items are missing');
+    fraction(figure.querySelector('.mass-val .katex'), 'mass');
+    for (const hidden of figure.querySelectorAll('[hidden]')) {
+      if (hidden.getClientRects().length)
+        found.push('a hidden status or verdict still occupies a visible box');
+    }
+  }
+  return found;
+
+  function fraction(mass, label) {
+    const digits = [...mass.querySelectorAll('.katex-html .mfrac .mord')]
+      .filter(el => !el.children.length && /[0-9]/.test(el.textContent));
+    const size = parseFloat(getComputedStyle(mass).fontSize);
+    if (!digits.length || digits.some(
+        el => parseFloat(getComputedStyle(el).fontSize) < size * .95))
+      found.push(`the ${label} fraction has reduced-size numerator or denominator`);
+  }
+}"""
+
+
+def _readout_text(readout: Locator) -> str:
+    """Read a typeset readout by its text, not by Chromium's rendered-text collection.
+
+    `inner_text` is the wrong instrument for KaTeX markup. Measured on ubuntu-latest,
+    seven times across 72 runs of this check: the direction readout answers `""` from
+    `innerText` -- on the first read, on a retry, and after a forced reflow -- while its
+    `textContent` carries all 134 characters, every element from the readout up to
+    `<html>` is displayed, visible, opaque, unanimated and has a client rect, and
+    `_PROVER_LAYOUT` goes on to find that subtree's fraction digits laid out at full
+    size. The document's own `innerText` is short by exactly those characters. Nothing
+    is wrong with the page; the collection returns nothing for it. Recorded in
+    think-kdkq.
+
+    `textContent` is a superset of what a reader sees here -- KaTeX's MathML annotation
+    and the glyph spans -- and is what the terms check above already reads, through
+    `all_text_contents`.
+    """
+    return readout.evaluate("el => el.textContent")
+
+
+def prover_findings(page: Page) -> list[str]:
+    """Exercise Figure 5 through its public controls in the already open browser.
+
+    A bitmap comparison follows two paths to the same state: restore a field after
+    changing direction while it was hidden, then rebuild it at that direction. A
+    stale cache differs. Neither path reads the page's private geometric variables.
+    These checks run after the print measurements, so their interaction cannot change
+    the state whose print layout is being inspected.
+    """
+    page.emulate_media(media="screen", reduced_motion="reduce")
+    page.set_viewport_size({"width": 1280, "height": 900})
+    page.evaluate(SETTLED)
+    slugs: list[str] = page.locator(".cert-figure").evaluate_all(
+        "els => [...new Set(els.map(el => el.dataset.cert))]"
+    )
+    if not slugs:
+        return ["Figure 5: no certificate figures were found"]
+    records = (json.loads(path.read_text("utf-8")) for path in WALKTHROUGH)
+    known_minima = {
+        record["outer_side"].replace("/", "-"): Fraction(record["least_cell_mass"])
+        for record in records
+    }
+    found: list[str] = []
+    for slug in slugs:
+        prefix = f"Figure 5 ({slug}): "
+        page.locator(
+            f'figure[data-figure="5"] .cert-toggle button[data-cert="{slug}"]:visible'
+        ).click()
+        selection: bool = page.evaluate(
+            """slug => [...document.querySelectorAll('.cert-figure')].every(
+              el => el.hidden === (el.dataset.cert !== slug)) &&
+              [...document.querySelectorAll('.cert-toggle button')].every(
+              el => el.getAttribute('aria-pressed') === String(el.dataset.cert === slug))
+              && location.hash === '#' + slug""",
+            slug,
+        )
+        if not selection:
+            found.append(prefix + "certificate visibility, selection, and URL disagree")
+        focused: bool = page.evaluate(
+            """slug => document.activeElement.matches('.cert-toggle button') &&
+              document.activeElement.dataset.cert === slug &&
+              document.activeElement.getClientRects().length > 0""",
+            slug,
+        )
+        if not focused:
+            found.append(prefix + "certificate switching leaves focus on a hidden control")
+        figure = page.locator(f'.cert-figure[data-cert="{slug}"] figure[data-figure="5"]')
+        if figure.count() != 1 or not figure.is_visible():
+            found.append(prefix + "the selected certificate has no visible prover")
+            continue
+        reset = figure.locator(f"#btn-tight-{slug}")
+        scan = figure.locator(f"#btn-scan-{slug}")
+        field = figure.locator(f"#btn-heat-{slug}")
+        slider = figure.locator(f"#kslider-{slug}")
+        status = figure.locator(f"#status-{slug}")
+        hint = figure.locator(f"#hint-{slug}")
+        canvas = figure.locator("canvas")
+        verdict = figure.locator(f"#vd-{slug}")
+        instruction = hint.inner_text()
+        initial_bitmap: str = canvas.evaluate("el => el.toDataURL()")
+        if slider.input_value() == "0" or _control_angle(slider, prover=True) == 0:
+            found.append(prefix + "the opening pose is axis-aligned")
+        if verdict.is_visible() or "off the net" in (
+            slider.get_attribute("aria-valuetext") or ""
+        ):
+            found.append(prefix + "the opening pose is not an admissible net placement")
+        reset.click()
+        page.evaluate(SETTLED)
+        if not status.is_visible() or not status.inner_text().strip():
+            found.append(prefix + "reset gives no status feedback")
+        if slider.input_value() != "0":
+            found.append(prefix + "reset does not restore direction zero")
+        if verdict.is_visible():
+            found.append(prefix + "the ordinary on-net minimum shows a stale verdict")
+        if canvas.evaluate("el => el.toDataURL()") == initial_bitmap:
+            found.append(prefix + "the minimum button does not change the opening pose")
+        terms = figure.locator(f"#mv-{slug} .katex-mathml mfrac mn").all_text_contents()
+        minimum_mass = Fraction(int(terms[0]), int(terms[1])) if len(terms) == 2 else None
+        if slug in known_minima and minimum_mass != known_minima[slug]:
+            found.append(prefix + "the minimum button disagrees with the retained certificate")
+        minimum = _readout_text(figure.locator(f"#mv-{slug}"))
+        canvas.click(position={"x": 20, "y": 20})
+        if status.is_visible() and status.inner_text().strip():
+            found.append(prefix + "moving the square leaves reset feedback visible")
+        if not verdict.is_visible():
+            found.append(prefix + "an outside-domain placement has no verdict")
+        reset.click()
+        page.evaluate(SETTLED)
+        if _readout_text(figure.locator(f"#mv-{slug}")) != minimum:
+            found.append(prefix + "reset does not restore the certificate's minimum mass")
+        scan.click()
+        if not status.is_visible() or not status.inner_text().strip():
+            found.append(prefix + "the raster scan gives no status feedback")
+        slider.evaluate("(el, value) => { el.value = value; }", slider.get_attribute("max"))
+        slider.dispatch_event("input")
+        if status.is_visible() and status.inner_text().strip():
+            found.append(prefix + "changing direction leaves scan feedback visible")
+        field.check()
+        visible_bitmap: str = canvas.evaluate("el => el.toDataURL()")
+        field.uncheck()
+        if canvas.evaluate("el => el.toDataURL()") == visible_bitmap:
+            found.append(prefix + "unchecking mass shading leaves the field unchanged")
+        slider.evaluate("el => { el.value = '0'; }")
+        slider.dispatch_event("input")
+        field.check()
+        replays: bool = figure.evaluate(
+            """figure => {
+              const canvas = figure.querySelector('canvas');
+              const restored = canvas.toDataURL();
+              figure.querySelector('input[type=range]').dispatchEvent(
+                new Event('input', {bubbles: true}));
+              return canvas.toDataURL() === restored;
+            }"""
+        )
+        if not replays:
+            found.append(prefix + "restoring the field uses a stale direction bitmap")
+        if hint.inner_text() != instruction:
+            found.append(prefix + "an action overwrites the permanent instructions")
+        # This is the reported long half-tangent, 12219313/45000000, rather than
+        # only the much shorter zero readout which cannot expose the wrap defect.
+        slider.evaluate("el => { el.value = String(Math.min(118, Number(el.max))); }")
+        slider.dispatch_event("input")
+        page.evaluate(SETTLED)
+        if slider.get_attribute("max") == "180":
+            direction = _readout_text(figure.locator(f"#kval-{slug}"))
+            if not all(value in direction for value in ("12219313", "45000000", "30.3836")):
+                found.append(
+                    prefix + f"direction 118 has the wrong half-tangent or angle: {direction!r}"
+                )
+        for width in (1280, 375):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.evaluate(SETTLED)
+            layout: list[str] = page.evaluate(_PROVER_LAYOUT)
+            found.extend(prefix + f"{width}px: {failure}" for failure in layout)
+        page.set_viewport_size({"width": 1280, "height": 900})
+        slider.evaluate("el => { el.value = '0'; }")
+        slider.dispatch_event("input")
+        box = canvas.bounding_box()
+        if box is not None:
+            # Center the square, then drag the visible top handle into the reflected
+            # angle range. These are pointer locations in the displayed instrument;
+            # they do not call or expose its private geometry functions.
+            canvas.click(position={"x": box["width"] / 2, "y": box["height"] / 2})
+            box = canvas.bounding_box()
+            assert box is not None
+            handle = figure.locator(f"#prove-rotate-{slug}")
+            target = handle.bounding_box() if handle.count() else None
+            if target is None:
+                found.append(prefix + "the rotation handle is missing")
+                continue
+            page.mouse.move(
+                target["x"] + target["width"] / 2, target["y"] + target["height"] / 2
+            )
+            page.mouse.down()
+            page.mouse.move(box["x"] + box["width"] * 0.3, box["y"] + box["height"] * 0.4)
+            page.mouse.up()
+            if "off the net" not in (slider.get_attribute("aria-valuetext") or ""):
+                found.append(prefix + "free rotation does not report an off-net direction")
+            for width in (1280, 375):
+                page.set_viewport_size({"width": width, "height": 900})
+                page.evaluate(SETTLED)
+                layout = page.evaluate(_PROVER_LAYOUT)
+                found.extend(prefix + f"off-net {width}px: {failure}" for failure in layout)
+        page.set_viewport_size({"width": 1280, "height": 900})
+    return found
+
+
+_ROTATION_TARGET = """handle => {
+  const found = [], box = handle.getBoundingClientRect();
+  if (box.width < 44 || box.height < 44) found.push('rotation target is smaller than 44px');
+  if (handle.tagName !== 'BUTTON' || !handle.getAttribute('aria-label'))
+    found.push('rotation target is not a named native button');
+  const hit = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
+  if (!handle.contains(hit)) found.push('rotation target is covered by another element');
+  if (getComputedStyle(handle).touchAction !== 'none')
+    found.push('rotation target allows the browser to cancel its touch drag');
+  const canvas = handle.closest('.stage').querySelector('canvas');
+  if (getComputedStyle(canvas).touchAction !== 'pan-y')
+    found.push('the canvas no longer permits vertical touch scrolling');
+  return found;
+}"""
+
+
+def _touch_gesture(
+    page: Page,
+    session: CDPSession,
+    start: tuple[float, float],
+    end: tuple[float, float] | None = None,
+) -> None:
+    """Send real browser touch input, paced by animation frames rather than sleeps."""
+    session.send(
+        "Input.dispatchTouchEvent",
+        {"type": "touchStart", "touchPoints": [{"x": start[0], "y": start[1], "id": 1}]},
+    )
+    if end is not None:
+        for step in range(1, 7):
+            x = start[0] + (end[0] - start[0]) * step / 6
+            y = start[1] + (end[1] - start[1]) * step / 6
+            session.send(
+                "Input.dispatchTouchEvent",
+                {"type": "touchMove", "touchPoints": [{"x": x, "y": y, "id": 1}]},
+            )
+            page.evaluate(SETTLED)
+    session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
+    page.evaluate(SETTLED)
+
+
+def _control_angle(control: Locator, *, prover: bool) -> float:
+    if not prover:
+        return float(control.input_value()) / 10
+    text = control.get_attribute("aria-valuetext") or ""
+    match = re.search(r"([0-9]+(?:\.[0-9]+)?) degrees", text)
+    if match is None:
+        raise ValueError(f"net direction control has no readable angle: {text!r}")
+    return float(match.group(1))
+
+
+def touch_findings(page: Page) -> list[str]:
+    """Tap, drag, keyboard, and ordinary swipes on both figures and certificates."""
+    session = page.context.new_cdp_session(page)
+    slugs: list[str] = page.locator(".cert-figure").evaluate_all(
+        "els => [...new Set(els.map(el => el.dataset.cert))]"
+    )
+    found: list[str] = []
+    try:
+        for slug in slugs:
+            page.locator(f'.cert-toggle button[data-cert="{slug}"]:visible').first.tap()
+            for number, name, control_name in ((5, "prove", "kslider"), (6, "shrink", "phi")):
+                prefix = f"Figure {number} touch ({slug}): "
+                canvas = page.locator(f"#{name}-{slug}")
+                handle = page.locator(f"#{name}-rotate-{slug}")
+                if not handle.count() or not handle.is_visible():
+                    found.append(prefix + "no visible rotation button before the first touch")
+                    continue
+                canvas.evaluate("el => el.scrollIntoView({block: 'center'})")
+                page.evaluate(SETTLED)
+                control = page.locator(f"#{control_name}-{slug}")
+                if number == 5:
+                    control.evaluate("el => { el.value = '0'; }")
+                    control.dispatch_event("input")
+                    box = canvas.bounding_box()
+                    assert box is not None
+                    _touch_gesture(
+                        page,
+                        session,
+                        (box["x"] + box["width"] / 2, box["y"] + box["height"] / 2),
+                    )
+                target_findings: list[str] = handle.evaluate(_ROTATION_TARGET)
+                found.extend(prefix + failure for failure in target_findings)
+                before = _control_angle(control, prover=number == 5)
+                # Native taps wait for a stable, hittable target after scrolling.
+                handle.tap()
+                page.evaluate(SETTLED)
+                if _control_angle(control, prover=number == 5) == before:
+                    found.append(
+                        prefix + "tapping the rotation button does not turn the square"
+                    )
+                before = _control_angle(control, prover=number == 5)
+                target, box = handle.bounding_box(), canvas.bounding_box()
+                assert target is not None
+                assert box is not None
+                _touch_gesture(
+                    page,
+                    session,
+                    (target["x"] + target["width"] / 2, target["y"] + target["height"] / 2),
+                    (box["x"] + box["width"] * 0.3, box["y"] + box["height"] * 0.4),
+                )
+                if abs(_control_angle(control, prover=number == 5) - before) < 0.5:
+                    found.append(
+                        prefix + "touch dragging the handle does not rotate the square"
+                    )
+                before = _control_angle(control, prover=number == 5)
+                handle.press("ArrowRight")
+                if _control_angle(control, prover=number == 5) == before:
+                    found.append(prefix + "the rotation button does not support arrow keys")
+                canvas.evaluate("el => el.scrollIntoView({block: 'center'})")
+                page.evaluate(SETTLED)
+                box = canvas.bounding_box()
+                assert box is not None
+                scroll = """() => (document.querySelector('[data-kpress-viewport]')
+                  || document.scrollingElement).scrollTop"""
+                prior_scroll: float = page.evaluate(scroll)
+                _touch_gesture(
+                    page,
+                    session,
+                    (box["x"] + box["width"] * 0.8, box["y"] + box["height"] * 0.8),
+                    (box["x"] + box["width"] * 0.8, box["y"] + box["height"] * 0.2),
+                )
+                if page.evaluate(scroll) - prior_scroll < 20:
+                    found.append(prefix + "an ordinary canvas swipe does not scroll the page")
+    finally:
+        session.detach()
+    return found
+
 
 #: A block the print column cannot contain, appended to the page. Given its margins and
 #: its width outright, because the column centres its blocks and caps their measure: a
 #: block merely handed a width comes back centred at half the overhang, which is how the
-#: first draft of this control quietly measured nothing.
-_OVERSHOOT = r"""(spec) => {
+#: first draft of this control quietly measured nothing. The same pass stretches one
+#: real list bullet to reproduce the glyph-to-box regression without another browser.
+_SELF_CHECK_DEFECTS = r"""(spec) => {
   const root = document.documentElement;
   const page = document.querySelector('.kpress');
   if (!page) throw new Error('no .kpress column to overflow');
@@ -442,6 +828,15 @@ _OVERSHOOT = r"""(spec) => {
      `over` is the one that reaches `over` past it from wherever the column starts. */
   const start = el.getBoundingClientRect().left;
   el.style.setProperty('width', `${root.clientWidth + spec.over - start}px`, 'important');
+  const bullet = page.querySelector('ul > li');
+  if (!bullet) throw new Error('no unordered-list bullet to stretch');
+  bullet.classList.add(spec.bullet);
+  const style = document.createElement('style');
+  style.textContent = `.${spec.bullet}::before {
+    content: "" !important; background: currentColor !important;
+    width: 3px !important; height: 1lh !important; top: 0 !important;
+  }`;
+  document.head.appendChild(style);
 }"""
 
 
@@ -470,9 +865,20 @@ def measure(page_url: str, *, inject: str | None = None, spec: object = None) ->
             page.evaluate("document.fonts.ready")
             if inject is not None:
                 page.evaluate(inject, spec)
-            page.evaluate(_SETTLED)
+            page.evaluate(SETTLED)
             printed: Probe = page.evaluate(_PROBE)
-            return {"screen": screen, "print": printed}
+            controls = prover_findings(page)
+            mobile = browser.new_page(
+                viewport={"width": 375, "height": 812},
+                is_mobile=True,
+                has_touch=True,
+                reduced_motion="reduce",
+            )
+            mobile.goto(page_url, wait_until="load")
+            mobile.wait_for_selector(READY, timeout=60_000)
+            mobile.evaluate("document.fonts.ready")
+            controls.extend(touch_findings(mobile))
+            return {"screen": screen, "print": printed, "controls": controls}
         finally:
             browser.close()
 
@@ -481,7 +887,7 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
     """Everything the two passes say is wrong, as lines a reader can act on."""
     screen = measured["screen"]
     printed = measured["print"]
-    found: list[str] = []
+    found: list[str] = list(measured.get("controls", []))
 
     # `.centred` is the page's declaration that a block is centred in every medium, so
     # it is the thing to hold it to. Everything here runs in both media: a defect that is
@@ -499,6 +905,14 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             for row in probe["markers"]
             if abs(row["markerCentre"] - row["lineCentre"]) > TOLERANCE_PX
         )
+        for bullet in probe["bullets"]:
+            if not bullet["painted"] or min(bullet["width"], bullet["height"]) <= 0:
+                found.append(f"{medium}: list bullet is missing ({bullet['path']})")
+            elif abs(bullet["width"] - bullet["height"]) > BULLET_TOLERANCE_PX:
+                found.append(
+                    f"{medium}: list bullet is {bullet['width']:.2f} by "
+                    f"{bullet['height']:.2f}px instead of square ({bullet['path']})"
+                )
         # Under one em there is no word in front of the reference, only stray punctuation
         # that wrapped down with it, and it reads as opening the line.
         found.extend(
@@ -556,7 +970,7 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
 
 
 def self_check(page_url: str) -> int:
-    """Put a known overflow in front of the gate, and hold the gate to naming it.
+    """Put an overflow and a stretched bullet in front of the gate and require both.
 
     A check that has only ever passed cannot tell itself apart from one that cannot fail,
     and this one has a second way to be useless: it can fail loudly at the right size and
@@ -572,8 +986,12 @@ def self_check(page_url: str) -> int:
     """
     measured = measure(
         page_url,
-        inject=_OVERSHOOT,
-        spec={"over": SELF_CHECK_PX, "name": SELF_CHECK_CLASS},
+        inject=_SELF_CHECK_DEFECTS,
+        spec={
+            "over": SELF_CHECK_PX,
+            "name": SELF_CHECK_CLASS,
+            "bullet": SELF_CHECK_BULLET_CLASS,
+        },
     )
     printed = measured["print"]
     column = printed["viewport"]
@@ -607,6 +1025,13 @@ def self_check(page_url: str) -> int:
         wrong.append(
             f"the named culprit overhangs by {widest['over']:.2f}px, not {SELF_CHECK_PX}"
         )
+    if not any(
+        line.startswith("print: list bullet")
+        and "instead of square" in line
+        and SELF_CHECK_BULLET_CLASS in line
+        for line in found
+    ):
+        wrong.append("the gate did not report the stretched unordered-list bullet")
 
     for line in wrong:
         print(f"self-check failed: {line}")
@@ -614,7 +1039,7 @@ def self_check(page_url: str) -> int:
         return 1
     print(
         f"self-check passed: the gate fails on a {SELF_CHECK_PX:.0f}px overflow, reports the "
-        f"{scale} scale, and names the block that caused it"
+        f"{scale} scale, names the block that caused it, and rejects the stretched bullet"
     )
     return 0
 
@@ -631,7 +1056,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--self-check",
         action="store_true",
-        help="overflow the print column on purpose, and check the gate fails and names it",
+        help="inject an overflow and a stretched bullet, and check the gate names both",
     )
     args = parser.parse_args(argv)
 

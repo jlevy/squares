@@ -9,9 +9,15 @@ change nobody can attribute must select everything.
 
 from __future__ import annotations
 
+import os
+import subprocess
+from collections.abc import Sequence
+from types import SimpleNamespace
+
 import pytest
 
-from devtools.reachable_tests import select_tests
+from devtools import reachable_tests
+from devtools.reachable_tests import pytest_command, select_tests
 from sqpack.cli import validate
 
 
@@ -105,3 +111,97 @@ def test_push_is_its_own_tier() -> None:
         assert "--push is its own tier" in str(error)
     else:  # pragma: no cover - the refusal is the contract
         raise AssertionError("--push combined with --fast must be refused")
+
+
+def test_the_selection_runs_under_the_workers_the_caller_asks_for() -> None:
+    """`D-488`: the runner carried no distribution, so every push ran its tests serially.
+
+    The number is the caller's to choose -- `cpus - jobs + 1` is about how many outer
+    slots are already busy, which this module cannot see -- so what is pinned here is
+    that the caller's answer reaches pytest, and that one worker asks for nothing rather
+    than paying for an xdist protocol with no concurrency behind it.
+    """
+    serial = pytest_command(["tests"], 1)
+    assert "-n" not in serial
+    assert serial[-2:] == ("-m", "not exhaustive_exact")
+
+    parallel = pytest_command(["tests"], 4)
+    assert parallel[-2:] == ("-n", "4")
+    assert parallel[: len(serial)] == serial
+
+
+def test_the_push_step_forwards_the_distribution_both_lanes_use(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The step the pre-push tier builds must carry the flag, not merely accept one.
+
+    `D-488` lived in the gap between those two: `devtools.reachable_tests` grew no
+    distribution and `sqpack.cli.validate` passed none, so the rule `_xdist_distribution`
+    documents -- four workers at `--jobs 1` on a four-cpu box -- was silently not applied
+    on the one tier a contributor runs before every push. Pinning the caller's side as
+    well as the runner's is what stops the flag from being dropped again on one side.
+
+    `_pytest_workers` is pinned rather than read, so the assertion does not restate the
+    formula under test and does not depend on how many cpus the box running it has.
+    """
+
+    def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del args, kwargs
+        return subprocess.CompletedProcess(
+            args=("reachable-tests",), returncode=0, stdout="everything\n", stderr=""
+        )
+
+    monkeypatch.setattr(validate.subprocess, "run", probe)
+    step = validate._push_test_step("origin/main")
+
+    seen: list[tuple[str, ...]] = []
+
+    def capture(_context: validate.Context, command: tuple[str, ...]) -> str:
+        seen.append(tuple(command))
+        return ""
+
+    monkeypatch.setattr(validate, "_run", capture)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda jobs: 7 if jobs == 1 else 1)
+
+    def context(jobs: int) -> validate.Context:
+        return validate.Context(
+            deep=False, strict=False, jobs=jobs, inner_jobs=1, environment=dict(os.environ)
+        )
+
+    step.action(context(1))
+    step.action(context(4))
+
+    assert seen[0][-2:] == ("-n", "7"), seen[0]
+    assert "-n" not in seen[1], seen[1]
+    assert "--run" in seen[0]
+    assert "--since" in seen[0]
+
+
+def test_the_runner_wires_its_argument_to_the_command_it_builds(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The join between the two halves, which the other two tests leave unpinned.
+
+    Both of them can pass while `main` builds its command with a literal instead of
+    `namespace.numprocesses` -- the CLI would accept `-n` and silently drop it, which is
+    D-488's own shape one layer in: an argument that exists and does not arrive. This
+    reads the argv the runner actually hands to `subprocess.run`.
+    """
+    selection = SimpleNamespace(everything=True, tests=(), reason="everything here")
+    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: ["x"])
+    monkeypatch.setattr(reachable_tests, "select_tests", lambda _paths: selection)
+
+    seen: list[tuple[str, ...]] = []
+
+    def capture(command: Sequence[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del kwargs
+        seen.append(tuple(command))
+        return subprocess.CompletedProcess(args=tuple(command), returncode=0)
+
+    monkeypatch.setattr(reachable_tests.subprocess, "run", capture)
+
+    assert reachable_tests.main(["--run", "--since", "origin/main", "-n", "3"]) == 0
+    assert reachable_tests.main(["--run", "--since", "origin/main"]) == 0
+
+    assert seen[0][-2:] == ("-n", "3"), seen[0]
+    assert "-n" not in seen[1], seen[1]

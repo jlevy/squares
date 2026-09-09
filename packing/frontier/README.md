@@ -1,7 +1,7 @@
 # Frontier: What Is Known About `s(n)`, Case by Case
 
 `s(n)` is the side of the smallest square holding `n` non-overlapping unit squares.
-This folder is the structured claim register for each `n ≤ 100`. Each case keeps the
+This folder is the structured claim register for each `n ≤ 324`. Each case keeps the
 best bounds reported by the named public sources separate from the strongest bounds
 supported by formal evidence.
 It also records numerical checks, verification origin, conflicts, blockers, review date,
@@ -25,7 +25,7 @@ Each manifest entry binds an `n`, evidence tier, view level, alt text, retained 
 matching frontier file, and exact regeneration command.
 That keeps a figure discoverable without making presentation data authoritative over a
 case’s mathematical frontmatter.
-The complete `n = 1…100` visual index lives in the
+The complete `n = 1…324` visual index lives in the
 [`known-best` atlas](../atlas/known-best/README.md); specialized examples and diagnostic
 views live in the [renderer gallery](../atlas/rendering/README.md).
 
@@ -58,7 +58,7 @@ uv run --frozen python -m devtools.render_research_tables --check
 ```
 
 Five reader views are generated this way: [`STATUS.md`](STATUS.md), the open frontier
-(65 rows), the solved cases (35), and the search and proof strategy catalogues (20 and
+(265 rows), the solved cases (59), and the search and proof strategy catalogues (20 and
 30). Editing a fact means editing the data here and re-rendering; editing a generated
 table by hand will be caught.
 
@@ -81,7 +81,7 @@ at `status: enforced`.
 
 | File(s) | Profile | Schema |
 | --- | --- | --- |
-| `n-001.md` … `n-100.md` | `frontmatter-md` | `square-packing-case.schema.yaml` |
+| `n-001.md` … `n-324.md` | `frontmatter-md` | `square-packing-case.schema.yaml` |
 | `search-strategies.yaml`, `proof-strategies.yaml` | `pure-yaml` | `strategy-catalogue.schema.yaml` |
 | `asymptotic-waste-bounds.yaml` | `pure-yaml` | `asymptotic-waste-bounds.schema.yaml` |
 | `source-availability.yaml` | `pure-yaml` | `source-availability.schema.yaml` |
@@ -124,14 +124,14 @@ The ones that carry the most weight:
 - `verified_upper_bound` and `verified_lower_bound` contain only formally supported
   bounds. They are a ceiling and a floor, not the value of `s(n)`. The certified ceiling
   may be a weaker rational construction or the exact grid when the tighter public pose
-  is only numerical: for 30 of the 100 cases it is *larger* than the best-known side
+  is only numerical: for 145 of the 324 cases it is *larger* than the best-known side
   recorded two fields above it, by up to `0.46`, and each of those cases says so in its
   own body and carries a `mathematics` blocker.
   An `exact_form` on the ceiling is the exact form of the ceiling; `s(n)` is known
   exactly only when `status` is `proved`.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
   bounds match exactly.
-  There are currently 35 proved and 65 open formal cases.
+  There are currently 59 proved and 265 open formal cases.
 - `reported_upper_bound.catalogue_rigid` transcribes what the catalogue says about
   rigidity, in the catalogue’s own three-valued vocabulary: `rigid`, `semi-rigid`, or
   `not-stated`. `not-stated` is source silence and never a claim that a packing can
@@ -162,17 +162,30 @@ verification.
 [`source-coverage.yaml`](source-coverage.yaml) is a dated claim about a named source
 set, not a claim that a web search exhausted every publication.
 It records each source’s scope, review date, retained first-party material, evidence,
-replay disposition, in-horizon overrides, and relevant claims beyond `n = 100`.
+replay disposition, in-horizon overrides, and relevant claims beyond `n = 324`.
 
-The current baseline reparses the retained Kingbird catalogue through `n = 100`, applies
-the newer UnitSquare reports at `n = 68` and `n = 69`, retains its four beyond-horizon
-claims, and records the Schadt `n = 29` repository as a superseded numerical witness.
+The current baseline reparses the retained Kingbird catalogue through `n = 324`, applies
+the newer UnitSquare reports at `n = 68, 69, 103, 105, 110, 131`, and records the Schadt
+`n = 29` repository as a superseded numerical witness.
+All six UnitSquare cases are now inside the corpus; the selected source register has no
+remaining beyond-horizon claims.
 The check is local and deterministic; refreshing a public source is a dated W1 research
 survey, not a network operation hidden inside ordinary validation.
 
 ```shell
 uv run --frozen python -m devtools.check_source_coverage
 ```
+
+The separate [DS7 lower-bound audit](../devtools/audit_ds7_lower_bounds.py), with its
+[retained comparison report](ds7-lower-bound-audit.json), checks every case through
+`n = 324` against Green’s reported Theorems 9 and 10, usable exact Table 2 entries, and
+the already indexed `4.5705` external report for `n = 17,18`. It uses exact rational
+enclosures for theorem comparisons and keeps Table 2’s three decimal-only rows outside
+that arithmetic. The `n = 21` decimal remains opaque reported metadata; the malformed
+`n = 82–85` table expression is excluded in favor of the separate Theorem 9
+specialization. None of these source corrections changes a verified bound or supplies
+Green’s missing proof.
+This is an audit of those named sources, not every publication.
 
 ## Adding or Reviewing a Result
 
@@ -218,18 +231,20 @@ lower-bound side has underused methods.
 
 Counts below are computed from the artifacts, not asserted.
 
-Of the 65 open cases, **58** have Nagamochi’s formula as their best proved lower bound.
-The other seven use weighted fractional unavoidable-set certificates held here: `n = 11`
-at `381/100` and `n = 12` at `99/25` (`T-018`, `T-017`); `n = 17` and `n = 18` at
-`459/100` (`T-019`); `n = 19` at `24/5` (`T-020`); and `n = 20` and `n = 21` at `97/20`
-(`T-021`). Before 2026-09-03 the number governed by Nagamochi was sixty-three; the
-remaining fifty-eight still have not moved.
+Of the 265 open cases, **258** have Nagamochi’s formula as their independently verified
+lower bound. The other seven use weighted fractional unavoidable-set certificates held
+here: `n = 11` at the exact dilation limit approximately `3.810025723615` and `n = 12`
+at `99/25` (`T-018`, `T-017`); `n = 17` and `n = 18` at `459/100` (`T-019`); `n = 19` at
+`24/5` (`T-020`); and `n = 20` and `n = 21` at `97/20` (`T-021`). Within the original
+`n ≤ 100` corpus, the corresponding Nagamochi count fell from sixty-three before
+2026-09-03 to fifty-eight after those adoptions.
 The count is checked against the case records by `devtools.check_nagamochi_bounds`
 (`D-430`), because the earlier figure of sixty-three outlived the first adoption by a
 day.
 
-Of the 65 open cases, 31 are still held by the trivial grid.
-The remaining 34 carry non-grid constructions: 14 hand-built, 10 from simulated
+Of the 265 open cases, 120 are still held by the trivial grid.
+The other 145 carry non-grid constructions.
+Within `n ≤ 100`, the 34 non-grid open cases comprise 14 hand-built, 10 from simulated
 annealing (nine of the ten dated 2024–2026; `n = 53` is Cantrell’s from 2002), 5
 diagonal strips, 3 extensions of smaller records, and 2 whose method the source does not
 record (`n = 68, 69`).
@@ -278,7 +293,7 @@ spread across them is now a factor of three and a half.
 The baseline upper bounds, degrees, minimal polynomials, rigidity annotations, analytic
 status, and attributions were parsed from the retained Kingbird catalogue.
 `uv run --frozen python -m devtools.audit_kingbird_catalogue --rigidity` re-reads the
-rigidity annotations from that archive and checks them against all 100 records, so a
+rigidity annotations from that archive and checks them against the case records, so a
 dropped or invented transcription fails instead of being migrated forward.
 Newer first-party claims are selected through the source-coverage record rather than
 silently overwriting that baseline.

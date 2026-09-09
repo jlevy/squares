@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Squares in Squares: Göbel strips</title>
+    <link rel="icon" href="favicon_Göbel_strip.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon_Göbel_strip.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/copy-tex.min.js" integrity="sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMathInElement(document.body, {
+                // customized options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                ],
+                macros: {
+                    "\\Nn": "{#1\\small{\\ldots}}",
+                },
+                // • rendering keys, e.g.:
+                throwOnError : false
+            });
+            for (const toggle of document.getElementsByClassName('toggle')) {
+                toggle.addEventListener('click', toggleEquation);
+                toggle.addEventListener('dblclick', function(event) {
+                    event.preventDefault();
+                    toggleEquation();
+                });
+            }
+        });
+        function toggleEquation() {
+            const frame1 = this.getElementsByClassName('frame1')[0];
+            const frames = this.getElementsByClassName('frames');
+
+            let j = -1;
+            for (let i=0; i<frames.length; i++) {
+                if (frames[i].classList.contains('toggled')) {
+                    j = i; break;
+                }
+            }
+            if (j < 0) {
+                frame1   .classList.toggle('toggled');
+                frames[0].classList.toggle('toggled');
+            } else {
+                frames[j].classList.toggle('toggled');
+                if (j+1 == frames.length) {
+                    frame1.classList.toggle('toggled');
+                } else {
+                    frames[j+1].classList.toggle('toggled');
+                }
+            }
+        }
+
+        // SVG Edit Mode Toggle
+        let openSVGsInEditMode = false;
+        function toggleSVGEditMode() {
+            openSVGsInEditMode = !openSVGsInEditMode;
+            const button = document.getElementById('svgEditToggle');
+            if (button) {
+                button.textContent = openSVGsInEditMode ? 'SVG Edit Mode: ON' : 'SVG Edit Mode: OFF';
+                button.classList.toggle('active', openSVGsInEditMode);
+            }
+        }
+        // Intercept clicks on SVG links
+        document.addEventListener('click', function(e) {
+            if (!openSVGsInEditMode) return;
+            // Find if we clicked on a link or inside one
+            let target = e.target.closest('a');
+            if (!target) return;
+            const href = target.getAttribute('href');
+            if (!href) return;
+            // Check if it's an SVG file
+            if (href.toLowerCase().endsWith('.svg')) {
+                e.preventDefault();
+                // Add #edit hash if not already present
+                const url = href.includes('#') ? href : href + '#edit';
+                window.open(url, target.getAttribute('target') || '_self');
+            }
+        });
+    </script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<style>
+body {
+    font-family: serif;
+}
+embed {
+    pointer-events: none;
+}
+.svg-table {
+    table-layout: auto;
+    width: max-content;
+    overflow-x: auto;
+    border-spacing: 1.333em 0;
+}
+.svg-box {
+    height: 9.6667em;
+}
+.box {
+    width: 19.333em;
+}
+.desc {
+    align: center;
+    vertical-align: top;
+    padding-top: 0.333em;
+}
+.katex {
+    font-size: 1em;
+}
+.toggle {
+    cursor: pointer;
+}
+.frame1         {display: inline;}
+.frame1.toggled {display: none;  }
+.frames         {display: none;  }
+.frames.toggled {display: inline;}
+#svgEditToggle {
+  font-size: medium;
+}
+</style>
+
+<center><font size="+4">Squares in Squares</font><font size="+3"><br>Göbel strips<br></font>
+<font size="+1">SVG, high-precision, and categorized list by <a href="https://github.com/Davidebyzero" style="text-decoration:none">David Ellsworth</a><br>
+based on <a href="https://web.archive.org/web/20230530194618/https://erich-friedman.github.io/packing/squinsqu/" style="text-decoration:none">original</a> compiled by <a href="https://erich-friedman.github.io/" style="text-decoration:none">Erich Friedman</a></font>
+</center><p>
+
+<font size="+1">This is a list of Göbel strip packings, shown alongside their alternative packings or rearrangements.
+For the main list, see <a href="squares_in_squares.html">Squares in Squares</a> or <a href="squares_in_squares__triangular_table.html">Squares in Squares: Triangular Table View</a>.</p><p>
+
+Where the word "alternative" is used, this designates an alternative packing, which is enclosed within the same-sized bounding square as another packing, but cannot be reached by continuously translating and/or rotating the squares in that packing.
+When the packing can be reached by such continuous transformations, the word "rearrangement" is used.</p><p>
+
+For more information on each packing, view its SVG's source code. In browsers that don't provide an easy way to do this, you can prepend the URL with "<code>view-source:</code>" (without the quotes).</p><p>
+
+Generalizing from Frits Göbel's findings, with $a \in \mathbb{Z}^+$ and $b=1\!+\!\lfloor{(a\!-\!1)\sqrt 2}\rfloor$, a Göbel strip consists of $n = (a\!+\!1)a\!+\!2\!+\!b$ unit squares packed inside a square of side $s = a\!+\!1\!+\!{1\over 2}\sqrt 2$.
+This is accomplished by placing a 1-width strip of $b$ squares at a $45°$ angle in the center, flanked by two unrotated squares at the corners, and sandwiched by two unrotated "staircases" each having $a$ steps.
+This yields the best known packing for all $a\!\lt\!44$ except for $a\!=\!3$.</p><p>
+
+Most Göbel strips also have a "simplified" alternative packing or rearrangement in which the $45°$ strip can contain $b\!+\!2$ squares, without any unrotated squares flanking it at the corners.
+If $(3+2\lfloor{(a-1)\sqrt 2}\rfloor)\sqrt 2-4a > 0$, then this is not possible at all, and it can contain no more than $b$ squares.
+Otherwise, if $(3+\lfloor{(a-1)\sqrt 2}\rfloor)\sqrt 2-2a-2 > 0$, then the strip can only contain $b\!+\!1$ squares, and needs to be flanked at one corner by an unrotated square.
+</p><p>
+
+David W. Cantrell found in 2005 that there are alternative packings with minimal rotated squares for $s(27)$ and later, filling them out up to $s(84)$.
+David Ellsworth noticed that the $s(52)$ with minimal rotated squares is rigid (which coincides with its Göbel strip counterpart have very little space to slide), and later found that the pattern of rigid packings continues for every $a ≡ 1\!\mod\!5$.</p><p>
+
+David Ellsworth found in 2024 that whereas the general formula for the number of minimal rotated squares (i.e. number of copies of $s(5)$ in the packing) is $\lfloor{(2a+3)/5}\rfloor$,
+the number of rotated squares needed to match the efficiency of the Göbel strip is $\lfloor{(a-1)\sqrt 2}\rfloor+2-a$.
+Up to and including $s(331)$, these two formulae agree with each other (because $\sqrt 2\!-\!1 \approx 0.4$), but at $s(369)$, they differ for the first time.
+Following that point there are only $26$ more minimal rotated square packings for which they agree (out of $53$), the last one being $s(5213)$.
+This includes all of the rigid ones, which is not a coincidence – they have the least wasted space.
+<!-- (which applies to their Göbel strip counterparts as well)-->
+But since Göbel strips are inoptimal starting at $s(2043)$ or possibly earlier, there are actually only at most $9$ alternative packings with minimal rotated squares for Göbel strips that may be optimal that are lost due to the divergence between the two formulae:
+$s(369)$, $s(586)$, $s(853)$, $s(974)$, $s(1170)$, $s(1311)$, $s(1537)$, $s(1698)$, and $s(1954)$.</p><p>
+
+Starting at $s(18)$, there is another type of Göbel strip, in which the strip is $b+1$ squares long, and is touched by the two unrotated squares in the corners, not the two "staircases" as the others are.
+These have $n = (a\!+\!1)a\!+\!3\!+\!b$ and $s = 2\!+\!(b\!+\!1){1\over 2}\sqrt 2$,
+and have a chance at being optimal when $\{s-{1\over 2}\sqrt 2\}$ is small. For example, with $a=13$, $n=202$ and $\{s-{1\over 2}\sqrt 2\} \approx 0.02081528$ which is indeed small.</p><p></p>
+
+Zoom:
+<button onclick="zoom_0_25()" ><font size="+0">0.25×</font></button>&thinsp;
+<button onclick="zoom_0_333()"><font size="+0">1/3× </font></button>&thinsp;
+<button onclick="zoom_0_5()"  ><font size="+0">0.5× </font></button>&thinsp;
+<button onclick="zoom_0_667()"><font size="+0">2/3× </font></button>&thinsp;
+<button onclick="zoom_0_75()" ><font size="+0">3/4× </font></button>&thinsp;
+<button onclick="zoomReset()" ><font size="+0">1×   </font></button>&thinsp;
+<button onclick="zoom_1_5()"  ><font size="+0">1.5× </font></button>&thinsp;
+<button onclick="zoom_2()"    ><font size="+0">2×   </font></button></font>
+&emsp;
+<button id="svgEditToggle" onclick="toggleSVGEditMode()">SVG Edit Mode: OFF</button>
+<p></p><hr><p></p>
+
+<script>
+    let currentZoom = 1;
+
+    function zoom(x) {
+        zoomee  = document.querySelector('.container');
+        wrapper = document.querySelector('.wrapper');
+        zoomee .style.transformOrigin = 'top left';
+        zoomee .style.transform = x==1 ? '' : 'scale(' + x + ')';
+        wrapper.style.height    = x==1 ? '' : (zoomee.offsetHeight * x) + 'px';
+    }
+    function zoom_0_25 () {zoom(1/4)}
+    function zoom_0_333() {zoom(1/3)}
+    function zoom_0_5  () {zoom(1/2)}
+    function zoom_0_667() {zoom(2/3)}
+    function zoom_0_75 () {zoom(3/4)}
+    function zoomReset () {zoom(1  )}
+    function zoom_1_5  () {zoom(3/2)}
+    function zoom_2    () {zoom(2  )}
+</script>
+
+<div class="wrapper">
+<div class="container">
+
+<p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">5.<br><a href="square-5.svg"><div class="svg-box"><embed src="square-5.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s =  2 + { 1\over 2}\sqrt 2 = \Nn{2.70710678118654}$<br>Rigid.<br>Proved by Frits Göbel<br>in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">10.<br><a href="square-10.svg"><div class="svg-box"><embed src="square-10.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-10s.svg"><div class="svg-box"><embed src="square-10s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-10b.svg"><div class="svg-box"><embed src="square-10b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 3 + {1\over 2}\sqrt 2 = \Nn{3.70710678118654}$<br>Found by Frits Göbel<br>in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 3 + {1\over 2}\sqrt 2 = \Nn{3.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 3 + {1\over 2}\sqrt 2 = \Nn{3.70710678118654}$<br>Alternative with minimal rotated squares.<br>Adds an "L" to $s(5)$.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">17.<br><a href="square-17_r1a.svg"><div class="svg-box"><embed src="square-17_r1a.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-17_r1s.svg"><div class="svg-box"><embed src="square-17_r1s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-17_r1.svg"><div class="svg-box"><embed src="square-17_r1.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-17_r2.svg"><div class="svg-box"><embed src="square-17_r2.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-17.svg"><div class="svg-box"><embed src="square-17.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 4          + {1\over 2}\sqrt 2 = \Nn{4.70710678118654}$<br>Found by Frits Göbel in early 1979.<br>Not optimal.
+</font></td><td></td><td class="desc"><font size="+1">$s = 4          + {1\over 2}\sqrt 2 = \Nn{4.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 4          + {1\over 2}\sqrt 2 = \Nn{4.70710678118654}$<br>Alternative with minimal rotated squares.<br>Adds two "L"s to $s(5)$.
+</font></td><td></td><td class="desc"><font size="+1">$s = {7\over 3} + {5\over 3}\sqrt 2 = \Nn{4.69035593728849}$<br>Found by Pertti Hämäläinen<br>in 1980.<br>Beats the Göbel strip.
+</font></td><td></td><td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{18}🔒 = \Nn{4.67553009360455}$</span>
+    <span class="frames">$4775s^{18}-190430s^{17}+3501307s^{16}-39318012s^{15}+300416928s^{14}-1640654808s^{13}+6502333062s^{12}-18310153596s^{11}+32970034584s^{10}-18522084588s^9-93528282146s^8+350268230564s^7-662986732745s^6+808819596154s^5-660388959899s^4+358189195800s^3-126167814419s^2+26662976550s-2631254953=0$</span>
+</span><br>Improved by John Bidwell<br>in 1998.<br>Beats the Göbel strip.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">(18.)<br><a href="square-18_r1.svg"><div class="svg-box"><embed src="square-18_r1.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-18_r1r.svg"><div class="svg-box"><embed src="square-18_r1r.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-18.svg"><div class="svg-box"><embed src="square-18.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 2          + 2         \sqrt 2 = \Nn{4.82842712474619}$<br>Found by Frits Göbel<br>in early 1979.<br>Not optimal.
+</font></td><td></td><td class="desc"><font size="+1">$s = 2          + 2         \sqrt 2 = \Nn{4.82842712474619}$<br><a href="squares_in_squares__rigid.html">Rigid</a> alternative found by David Ellsworth in December 2024.<br>Not optimal.
+</font></td><td></td><td class="desc"><font size="+1">$s = {7\over 2} + {1\over 2}\sqrt 7 = \Nn{4.82287565553229}$<br>Found by Pertti Hämäläinen<br>in 1980.<br>Beats the Göbel strip.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">27.<br><a href="square-27.svg"><div class="svg-box"><embed src="square-27.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-27s.svg"><div class="svg-box"><embed src="square-27s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-27b.svg"><div class="svg-box"><embed src="square-27b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr        align="center">
+                     <td class="desc"><font size="+1">$s = 5 + {1\over 2}\sqrt 2 = \Nn{5.70710678118654}$<br>Found by Frits Göbel<br>in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 5 + {1\over 2}\sqrt 2 = \Nn{5.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 5 + {1\over 2}\sqrt 2 = \Nn{5.70710678118654}$<br>Alternative with minimal rotated squares found by David W. Cantrell<br>in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">38.<br><a href="square-38.svg"><div class="svg-box"><embed src="square-38.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-38s.svg"><div class="svg-box"><embed src="square-38s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-38b.svg"><div class="svg-box"><embed src="square-38b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-38c.svg"><div class="svg-box"><embed src="square-38c.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 6 + {1\over 2}\sqrt 2 = \Nn{6.70710678118654}$<br>Found by Frits Göbel<br>in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 6 + {1\over 2}\sqrt 2 = \Nn{6.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 6 + {1\over 2}\sqrt 2 = \Nn{6.70710678118654}$<br>Mirror-symmetric alternative with minimal rotated squares found by<br>David W. Cantrell in 2005.
+</font></td><td></td><td class="desc"><font size="+1">$s = 6 + {1\over 2}\sqrt 2 = \Nn{6.70710678118654}$<br>Rotationally symmetric rearrangement of alternative with minimal rotated squares by David Ellsworth in December 2024.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">52.<br><a href="square-52.svg"><div class="svg-box"><embed src="square-52.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-52b.svg"><div class="svg-box"><embed src="square-52b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 7 + {1\over 2}\sqrt 2 = \Nn{7.70710678118654}$<br>Found by Frits Göbel<br>in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 7 + {1\over 2}\sqrt 2 = \Nn{7.70710678118654}$<br>Rigid alternative with minimal rotated squares found by David W. Cantrell<br>in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">67.<br><a href="square-67.svg"><div class="svg-box"><embed src="square-67.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-67s.svg"><div class="svg-box"><embed src="square-67s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-67b.svg"><div class="svg-box"><embed src="square-67b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-67c.svg"><div class="svg-box"><embed src="square-67c.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 8 + {1\over 2}\sqrt 2 = \Nn{8.70710678118654}$<br>Found by Evert Stenlund<br>in early 1980, extending the $s(52)$<br>found by Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 8 + {1\over 2}\sqrt 2 = \Nn{8.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 8 + {1\over 2}\sqrt 2 = \Nn{8.70710678118654}$<br>Alternative constructed by adding an "L" to the $s(52)$ found by Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 8 + {1\over 2}\sqrt 2 = \Nn{8.70710678118654}$<br>Alternative with minimal rotated squares found by David W. Cantrell<br>in June 2023.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">84.<br><a href="square-84.svg"><div class="svg-box"><embed src="square-84.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-84s.svg"><div class="svg-box"><embed src="square-84s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-84b.svg"><div class="svg-box"><embed src="square-84b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-84c.svg"><div class="svg-box"><embed src="square-84c.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-84d.svg"><div class="svg-box"><embed src="square-84d.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 9 + {1\over 2}\sqrt 2 = \Nn{9.70710678118654}$<br>Found by Evert Stenlund<br>in early 1980, extending the $s(52)$<br>found by Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 9 + {1\over 2}\sqrt 2 = \Nn{9.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 9 + {1\over 2}\sqrt 2 = \Nn{9.70710678118654}$<br>Rearrangement. Can also be constructed by adding an "L" to the $s(67)$ that extends the $s(52)$ found by Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 9 + {1\over 2}\sqrt 2 = \Nn{9.70710678118654}$<br>Alternative constructed by adding two "L"s to the $s(52)$ found by Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 9 + {1\over 2}\sqrt 2 = \Nn{9.70710678118654}$<br>Alternative with minimal rotated squares found by David W. Cantrell<br>in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">(85.)<br><a href="square-85_r1.svg"><div class="svg-box"><embed src="square-85_r1.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-85b.svg"><div class="svg-box"><embed src="square-85b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-85c.svg"><div class="svg-box"><embed src="square-85c.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s =  2          + {11\over 2}\sqrt 2 = \Nn{9.77817459305202}$<br>Found by Evert Stenlund<br>in early 1980.<br>Extends the $s(18)$ found by<br>Frits Göbel in early 1979.<br>Not optimal.
+</font></td><td></td><td class="desc"><font size="+1">$s = {11\over 2} +  3         \sqrt 2 = \Nn{9.74264068711928}$<br>Found by Erich Friedman<br>in 1997.<br>Beats the Göbel strip.
+</font></td><td></td><td class="desc"><font size="+1">$s = {11\over 2} +  3         \sqrt 2 = \Nn{9.74264068711928}$<br>Alternative with minimal rotated squares.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">104.<br><a href="square-104.svg"><div class="svg-box"><embed src="square-104.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-104s.svg"><div class="svg-box"><embed src="square-104s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-104b.svg"><div class="svg-box"><embed src="square-104b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 10 + {1\over 2}\sqrt 2 = \Nn{10.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 10 + {1\over 2}\sqrt 2 = \Nn{10.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 10 + {1\over 2}\sqrt 2 = \Nn{10.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">125.<br><a href="square-125.svg"><div class="svg-box"><embed src="square-125.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-125s.svg"><div class="svg-box"><embed src="square-125s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-125b.svg"><div class="svg-box"><embed src="square-125b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 11 + {1\over 2}\sqrt 2 = \Nn{11.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 11 + {1\over 2}\sqrt 2 = \Nn{11.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 11 + {1\over 2}\sqrt 2 = \Nn{11.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">149.<br><a href="square-149.svg"><div class="svg-box"><embed src="square-149.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-149s.svg"><div class="svg-box"><embed src="square-149s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-149b.svg"><div class="svg-box"><embed src="square-149b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 12 + {1\over 2}\sqrt 2 = \Nn{12.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 12 + {1\over 2}\sqrt 2 = \Nn{12.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 12 + {1\over 2}\sqrt 2 = \Nn{12.70710678118654}$<br>Rigid alternative with minimal rotated squares found by David Ellsworth in November 2024, based on the rigid $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">174.<br><a href="square-174.svg"><div class="svg-box"><embed src="square-174.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-174s.svg"><div class="svg-box"><embed src="square-174s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-174b.svg"><div class="svg-box"><embed src="square-174b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 13 + {1\over 2}\sqrt 2 = \Nn{13.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 13 + {1\over 2}\sqrt 2 = \Nn{13.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 13 + {1\over 2}\sqrt 2 = \Nn{13.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">201.<br><a href="square-201.svg"><div class="svg-box"><embed src="square-201.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-201s.svg"><div class="svg-box"><embed src="square-201s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-201b.svg"><div class="svg-box"><embed src="square-201b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-201d.svg"><div class="svg-box"><embed src="square-201d.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-201c.svg"><div class="svg-box"><embed src="square-201c.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 14 + {1\over 2}\sqrt 2 = \Nn{14.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 14 + {1\over 2}\sqrt 2 = \Nn{14.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 14 + {1\over 2}\sqrt 2 = \Nn{14.70710678118654}$<br>Mirror-symmetric alternative with minimal rotated squares arranged by David Ellsworth in December 2024, based on the technique found by David W. Cantrell in 2005.
+</font></td><td></td><td class="desc"><font size="+1">$s = 14 + {1\over 2}\sqrt 2 = \Nn{14.70710678118654}$<br>Rotationally symmetric alternative with minimal rotated squares arranged by David W. Cantrell in December 2024.
+</font></td><td></td><td class="desc"><font size="+1">$s = 14 + {1\over 2}\sqrt 2 = \Nn{14.70710678118654}$<br>Alternative combining the $s(52)$ rigid alternative with minimal rotated squares found by David W. Cantrell in 2005, and the $s(51)$ found by Károly Hajba<br>in July 2009.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">(202.)<br><a href="square-202_r1.svg"><div class="svg-box"><embed src="square-202_r1.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-202_r2.svg"><div class="svg-box"><embed src="square-202_r2.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-202.svg"><div class="svg-box"><embed src="square-202.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = {21\over 2} + 3 \sqrt 2 = \Nn{14.74264068711928}$<br>Found by David Ellsworth in November 2024, by extending the $s(85)$ found by Erich Friedman in 1997.<br>Didn't set a record.
+</font></td><td></td><td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{8}🔒 = \Nn{14.73657855744445}$</span>
+    <span class="frames">$776s^4-(33320+336\sqrt{2})s^3+(528568+7752\sqrt{2})s^2-(3662244+43296\sqrt{2})s+9301325-28968\sqrt{2}=0$</span>
+    <span class="frames">$6208s^8-533120s^7+19900352s^6-421620160s^5+5543230416s^4-46288934864s^3+239607688384s^2-702396496296s+891886272841=0$</span>
+</span><br>Improved by David Ellsworth in November 2024, by adapting the technique from the $s(37)$ found by<br>David W. Cantrell in September 2002.<br>Didn't set a record.
+</font></td><td></td><td class="desc"><font size="+1">$s =  2          + 9 \sqrt 2 = \Nn{14.72792206135785}$<br>Extends the $s(18)$ found by<br>Frits Göbel in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">231.<br><a href="square-231.svg"><div class="svg-box"><embed src="square-231.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-231s.svg"><div class="svg-box"><embed src="square-231s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-231b.svg"><div class="svg-box"><embed src="square-231b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 15 + {1\over 2}\sqrt 2 = \Nn{15.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 15 + {1\over 2}\sqrt 2 = \Nn{15.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 15 + {1\over 2}\sqrt 2 = \Nn{15.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">262.<br><a href="square-262.svg"><div class="svg-box"><embed src="square-262.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-262s.svg"><div class="svg-box"><embed src="square-262s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-262b.svg"><div class="svg-box"><embed src="square-262b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 16 + {1\over 2}\sqrt 2 = \Nn{16.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 16 + {1\over 2}\sqrt 2 = \Nn{16.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 16 + {1\over 2}\sqrt 2 = \Nn{16.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">296.<br><a href="square-296.svg"><div class="svg-box"><embed src="square-296.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-296s.svg"><div class="svg-box"><embed src="square-296s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-296b.svg"><div class="svg-box"><embed src="square-296b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 17 + {1\over 2}\sqrt 2 = \Nn{17.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 17 + {1\over 2}\sqrt 2 = \Nn{17.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 17 + {1\over 2}\sqrt 2 = \Nn{17.70710678118654}$<br>Rigid alternative with minimal rotated squares, based on the rigid $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">331.<br><a href="square-331.svg"><div class="svg-box"><embed src="square-331.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-331s.svg"><div class="svg-box"><embed src="square-331s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-331b.svg"><div class="svg-box"><embed src="square-331b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 18 + {1\over 2}\sqrt 2 = \Nn{18.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 18 + {1\over 2}\sqrt 2 = \Nn{18.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 18 + {1\over 2}\sqrt 2 = \Nn{18.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">369.<br><a href="square-369.svg"><div class="svg-box"><embed src="square-369.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">368.<br><a href="square-369_no_min_rot.svg"><div class="svg-box"><embed src="square-369_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 19 + {1\over 2}\sqrt 2 = \Nn{19.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 19 + {1\over 2}\sqrt 2 = \Nn{19.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">408.<br><a href="square-408.svg"><div class="svg-box"><embed src="square-408.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-408s.svg"><div class="svg-box"><embed src="square-408s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-408b.svg"><div class="svg-box"><embed src="square-408b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 20 + {1\over 2}\sqrt 2 = \Nn{20.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 20 + {1\over 2}\sqrt 2 = \Nn{20.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 20 + {1\over 2}\sqrt 2 = \Nn{20.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">449.<br><a href="square-449.svg"><div class="svg-box"><embed src="square-449.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-449s.svg"><div class="svg-box"><embed src="square-449s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-449b.svg"><div class="svg-box"><embed src="square-449b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 21 + {1\over 2}\sqrt 2 = \Nn{21.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 21 + {1\over 2}\sqrt 2 = \Nn{21.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 21 + {1\over 2}\sqrt 2 = \Nn{21.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">493.<br><a href="square-493.svg"><div class="svg-box"><embed src="square-493.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-493s.svg"><div class="svg-box"><embed src="square-493s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-493b.svg"><div class="svg-box"><embed src="square-493b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 22 + {1\over 2}\sqrt 2 = \Nn{22.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 22 + {1\over 2}\sqrt 2 = \Nn{22.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 22 + {1\over 2}\sqrt 2 = \Nn{22.70710678118654}$<br>Rigid alternative with minimal rotated squares, based on the rigid $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">538.<br><a href="square-538.svg"><div class="svg-box"><embed src="square-538.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-538s.svg"><div class="svg-box"><embed src="square-538s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-538b.svg"><div class="svg-box"><embed src="square-538b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 23 + {1\over 2}\sqrt 2 = \Nn{23.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 23 + {1\over 2}\sqrt 2 = \Nn{23.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 23 + {1\over 2}\sqrt 2 = \Nn{23.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">586.<br><a href="square-586.svg"><div class="svg-box"><embed src="square-586.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-586s.svg"><div class="svg-box"><embed src="square-586s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">585.<br><a href="square-586_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-586_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 24 + {1\over 2}\sqrt 2 = \Nn{24.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 24 + {1\over 2}\sqrt 2 = \Nn{24.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 24 + {1\over 2}\sqrt 2 = \Nn{24.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">635.<br><a href="square-635.svg"><div class="svg-box"><embed src="square-635.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-635s.svg"><div class="svg-box"><embed src="square-635s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-635b.svg"><div class="svg-box"><embed src="square-635b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 25 + {1\over 2}\sqrt 2 = \Nn{25.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 25 + {1\over 2}\sqrt 2 = \Nn{25.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 25 + {1\over 2}\sqrt 2 = \Nn{25.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">686.<br><a href="square-686.svg"><div class="svg-box"><embed src="square-686.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-686s.svg"><div class="svg-box"><embed src="square-686s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-686b.svg"><div class="svg-box"><embed src="square-686b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 26 + {1\over 2}\sqrt 2 = \Nn{26.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 26 + {1\over 2}\sqrt 2 = \Nn{26.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 26 + {1\over 2}\sqrt 2 = \Nn{26.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<!--
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">(687.)<br><a href="square-687.svg"><div class="svg-box"><embed src="square-687.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 2 + {35\over 2}\sqrt 2 = \Nn{26.74873734152916}$<br>Extends the $s(18)$ found by<br>Frits Göbel in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+-->
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">740.<br><a href="square-740.svg"><div class="svg-box"><embed src="square-740.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-740s.svg"><div class="svg-box"><embed src="square-740s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-740b.svg"><div class="svg-box"><embed src="square-740b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 27 + {1\over 2}\sqrt 2 = \Nn{27.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 27 + {1\over 2}\sqrt 2 = \Nn{27.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 27 + {1\over 2}\sqrt 2 = \Nn{27.70710678118654}$<br>Rigid alternative with minimal rotated squares, based on the rigid $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">795.<br><a href="square-795.svg"><div class="svg-box"><embed src="square-795.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-795s.svg"><div class="svg-box"><embed src="square-795s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-795b.svg"><div class="svg-box"><embed src="square-795b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 28 + {1\over 2}\sqrt 2 = \Nn{28.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 28 + {1\over 2}\sqrt 2 = \Nn{28.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 28 + {1\over 2}\sqrt 2 = \Nn{28.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">853.<br><a href="square-853.svg"><div class="svg-box"><embed src="square-853.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-853s.svg"><div class="svg-box"><embed src="square-853s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">852.<br><a href="square-853_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-853_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 29 + {1\over 2}\sqrt 2 = \Nn{29.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 29 + {1\over 2}\sqrt 2 = \Nn{29.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 29 + {1\over 2}\sqrt 2 = \Nn{29.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">912.<br><a href="square-912.svg"><div class="svg-box"><embed src="square-912.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-912s.svg"><div class="svg-box"><embed src="square-912s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-912b.svg"><div class="svg-box"><embed src="square-912b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 30 + {1\over 2}\sqrt 2 = \Nn{30.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 30 + {1\over 2}\sqrt 2 = \Nn{30.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 30 + {1\over 2}\sqrt 2 = \Nn{30.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">974.<br><a href="square-974.svg"><div class="svg-box"><embed src="square-974.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">973.<br><a href="square-974_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-974_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 31 + {1\over 2}\sqrt 2 = \Nn{31.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 31 + {1\over 2}\sqrt 2 = \Nn{31.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1037.<br><a href="square-1037.svg"><div class="svg-box"><embed src="square-1037.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1037s.svg"><div class="svg-box"><embed src="square-1037s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1037b.svg"><div class="svg-box"><embed src="square-1037b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 32 + {1\over 2}\sqrt 2 = \Nn{32.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 32 + {1\over 2}\sqrt 2 = \Nn{32.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 32 + {1\over 2}\sqrt 2 = \Nn{32.70710678118654}$<br>Rigid alternative with minimal rotated squares, based on the rigid $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1102.<br><a href="square-1102.svg"><div class="svg-box"><embed src="square-1102.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1102s.svg"><div class="svg-box"><embed src="square-1102s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1102b.svg"><div class="svg-box"><embed src="square-1102b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 33 + {1\over 2}\sqrt 2 = \Nn{33.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 33 + {1\over 2}\sqrt 2 = \Nn{33.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 33 + {1\over 2}\sqrt 2 = \Nn{33.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1170.<br><a href="square-1170.svg"><div class="svg-box"><embed src="square-1170.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1170s.svg"><div class="svg-box"><embed src="square-1170s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">1169.<br><a href="square-1170_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-1170_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 34 + {1\over 2}\sqrt 2 = \Nn{34.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 34 + {1\over 2}\sqrt 2 = \Nn{34.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 34 + {1\over 2}\sqrt 2 = \Nn{34.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1239.<br><a href="square-1239.svg"><div class="svg-box"><embed src="square-1239.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1239s.svg"><div class="svg-box"><embed src="square-1239s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1239b.svg"><div class="svg-box"><embed src="square-1239b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 35 + {1\over 2}\sqrt 2 = \Nn{35.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 35 + {1\over 2}\sqrt 2 = \Nn{35.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 35 + {1\over 2}\sqrt 2 = \Nn{35.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1311.<br><a href="square-1311.svg"><div class="svg-box"><embed src="square-1311.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">1310.<br><a href="square-1311_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-1311_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 36 + {1\over 2}\sqrt 2 = \Nn{36.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 36 + {1\over 2}\sqrt 2 = \Nn{36.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1384.<br><a href="square-1384.svg"><div class="svg-box"><embed src="square-1384.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1384s.svg"><div class="svg-box"><embed src="square-1384s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1384b.svg"><div class="svg-box"><embed src="square-1384b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 37 + {1\over 2}\sqrt 2 = \Nn{37.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 37 + {1\over 2}\sqrt 2 = \Nn{37.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 37 + {1\over 2}\sqrt 2 = \Nn{37.70710678118654}$<br>Rigid alternative with minimal rotated squares, based on the rigid $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1459.<br><a href="square-1459.svg"><div class="svg-box"><embed src="square-1459.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1459s.svg"><div class="svg-box"><embed src="square-1459s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1459b.svg"><div class="svg-box"><embed src="square-1459b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 38 + {1\over 2}\sqrt 2 = \Nn{38.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 38 + {1\over 2}\sqrt 2 = \Nn{38.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 38 + {1\over 2}\sqrt 2 = \Nn{38.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<!--
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">(1460.)<br><a href="square-1460.svg"><div class="svg-box"><embed src="square-1460.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 2 +  26        \sqrt 2 = \Nn{38.76955262170047}$<br>Extends the $s(18)$ found by<br>Frits Göbel in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+-->
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1537.<br><a href="square-1537.svg"><div class="svg-box"><embed src="square-1537.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1537s.svg"><div class="svg-box"><embed src="square-1537s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">1536.<br><a href="square-1537_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-1537_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 39 + {1\over 2}\sqrt 2 = \Nn{39.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 39 + {1\over 2}\sqrt 2 = \Nn{39.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 39 + {1\over 2}\sqrt 2 = \Nn{39.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1616.<br><a href="square-1616.svg"><div class="svg-box"><embed src="square-1616.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1616s.svg"><div class="svg-box"><embed src="square-1616s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1616b.svg"><div class="svg-box"><embed src="square-1616b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 40 + {1\over 2}\sqrt 2 = \Nn{40.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 40 + {1\over 2}\sqrt 2 = \Nn{40.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 40 + {1\over 2}\sqrt 2 = \Nn{40.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1698.<br><a href="square-1698.svg"><div class="svg-box"><embed src="square-1698.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1698s.svg"><div class="svg-box"><embed src="square-1698s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">1697.<br><a href="square-1698_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-1698_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 41 + {1\over 2}\sqrt 2 = \Nn{41.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 41 + {1\over 2}\sqrt 2 = \Nn{41.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 41 + {1\over 2}\sqrt 2 = \Nn{41.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1781.<br><a href="square-1781.svg"><div class="svg-box"><embed src="square-1781.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1781s.svg"><div class="svg-box"><embed src="square-1781s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1781b.svg"><div class="svg-box"><embed src="square-1781b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 42 + {1\over 2}\sqrt 2 = \Nn{42.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 42 + {1\over 2}\sqrt 2 = \Nn{42.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 42 + {1\over 2}\sqrt 2 = \Nn{42.70710678118654}$<br>Rigid alternative with minimal rotated squares, based on the rigid $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1866.<br><a href="square-1866.svg"><div class="svg-box"><embed src="square-1866.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1866s.svg"><div class="svg-box"><embed src="square-1866s.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-1866b.svg"><div class="svg-box"><embed src="square-1866b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 43 + {1\over 2}\sqrt 2 = \Nn{43.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 43 + {1\over 2}\sqrt 2 = \Nn{43.70710678118654}$<br>simplified
+</font></td><td></td><td class="desc"><font size="+1">$s = 43 + {1\over 2}\sqrt 2 = \Nn{43.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">(1867.)<br><a href="square-1867.svg"><div class="svg-box"><embed src="square-1867.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 2 + {59\over 2}\sqrt 2 = \Nn{43.71930009000630}$<br>Extends the $s(18)$ found by<br>Frits Göbel in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1954.<br><a href="square-1954.svg"><div class="svg-box"><embed src="square-1954.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">1953.<br><a href="square-1954_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-1954_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 44 + {1\over 2}\sqrt 2 = \Nn{44.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 44 + {1\over 2}\sqrt 2 = \Nn{44.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">2043.<br><a href="square-2043_r0.svg"><div class="svg-box"><embed src="square-2043_r0.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+<!--
+</td><td class="box"><font size="+3"><br><a href="square-2043_r0b.svg"><div class="svg-box"><embed src="square-2043_r0b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+-->
+</td><td class="box"><font size="+3"><br><a href="square-2043.svg"><div class="svg-box"><embed src="square-2043.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 45 + {1\over 2}\sqrt 2 = \Nn{45.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Not optimal.
+<!--
+</font></td><td></td><td class="desc"><font size="+1">$s = 45 + {1\over 2}\sqrt 2 = \Nn{45.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+-->
+</font></td><td></td><td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{12}🔒 = \Nn{45.69644276992823}$</span>
+    <span class="frames">$4s^{12}-1608s^{11}+293084s^{10}-31920420s^9+2301941449s^8-114905182392s^7+4022452365218s^6-97595016541596s^5+1574653827588509s^4-15396232508703888s^3+72639007870740216s^2-58090491554723760s+46014771089277232=0$</span>
+</span><br>Found by David Ellsworth<br>in December 2024.<br>Beats the Göbel strip.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">2135.<br><a href="square-2135_r0.svg"><div class="svg-box"><embed src="square-2135_r0.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-2135.svg"><div class="svg-box"><embed src="square-2135.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 46 + {1\over 2}\sqrt 2 = \Nn{46.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Not optimal.
+</font></td><td></td><td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{4}🔒 = \Nn{46.69429881401871}$</span>
+    <span class="frames">$s^4-123s^3+5644s^2-127660s+1423760=0$</span>
+</span><br>Found by David Ellsworth<br>in December 2024.<br>Beats the Göbel strip.
+</font></td></tr></tbody></table></font></p>
+
+<!--
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">2938.<br><a href="square-2938.svg"><div class="svg-box"><embed src="square-2938.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3">2937.<br><a href="square-2938_no_min_rot.svg"><div style="height: 9.667em"><embed src="square-2938_no_min_rot.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 54 + {1\over 2}\sqrt 2 = \Nn{54.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.
+</font></td><td></td><td class="desc"><font size="+1">$s = 54 + {1\over 2}\sqrt 2 = \Nn{54.70710678118654}$<br>No alternative with minimal<br>rotated squares exists, as found by<br>David Ellsworth in December 2024.<br>(SVG not made yet)
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">3047.<br><a href="square-3047_r0.svg"><div class="svg-box"><embed src="square-3047_r0.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-3047_r0b.svg"><div class="svg-box"><embed src="square-3047_r0b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-3047.svg"><div class="svg-box"><embed src="square-3047.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 55 + {1\over 2}\sqrt 2 = \Nn{55.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Not optimal.
+</font></td><td></td><td class="desc"><font size="+1">$s = 55 + {1\over 2}\sqrt 2 = \Nn{55.70710678118654}$<br>Alternative with minimal rotated squares<br>(SVG not made yet)
+</font></td><td></td><td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{4}🔒 = \Nn{55.70125932997413}$</span>
+    <span class="frames">$2s^4-278s^3+13811s^2-326982s+4154328=0$</span>
+</span><br>Beats the Göbel strip.
+</font></td></tr></tbody></table></font></p>
+-->
+
+</div>
+</div>
+
+<p></p><hr><p><font size="+1">
+
+<font size="+1">
+For more details, see Erich Friedman's paper on the subject:
+<a href="https://erich-friedman.github.io/papers/squares/squares.html">Packing Unit Squares in Squares: A Survey and New Results</a> (or <a href="squares.html">David Ellsworth's edit</a>).</font></font></p><p><font size="+1"><font size="+1">
+
+
+</font></font></p></body></html>

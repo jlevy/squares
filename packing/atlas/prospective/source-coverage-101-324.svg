@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="1440" height="1030" viewBox="0 0 1440 1030" role="img" aria-labelledby="figure-title figure-description">
   <title id="figure-title">Source coverage for square packings beyond one hundred</title>
-  <desc id="figure-description">An audited grid for n equals 101 through 324. Ninety-seven exact grids and four licensed SVG constructions are retained locally. Public SVG geometry was located and parsed for the other 123 cases, but retention is deferred pending license review. No case in the audited range lacks selected geometry.</desc>
+  <desc id="figure-description">An audited grid for n equals 101 through 324. Ninety-seven exact grids and four licensed SVG constructions are retained locally. Public SVG geometry was located and parsed for the other 123 cases; their derived numerical facts are approved for acquisition under the known-best retention policy as of 2026-09-07, and raw SVGs stay unretained. No case in the audited range lacks selected geometry.</desc>
   <metadata>
     <sqpack:profile version="7">
       <sqpack:coordinates>document-grid; row-major n=101..324</sqpack:coordinates>
@@ -35,7 +35,7 @@
     <rect x="734" y="127" width="310" height="82" rx="12" fill="#ffedd5" />
     <rect x="734" y="127" width="8" height="82" rx="4" fill="#d97706" />
     <text x="760" y="166" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" font-weight="700" fill="#7c2d12">123</text>
-    <text x="760" y="192" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#7c2d12">public SVGs, license deferred</text>
+    <text x="760" y="192" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#7c2d12">public SVGs, derived facts pending acquisition</text>
   </g>
   <g data-feature="coverage-stat" data-coverage="no-located-source">
     <rect x="1071" y="127" width="310" height="82" rx="12" fill="#e2e8f0" />
@@ -939,6 +939,6 @@
     <rect x="1290" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
     <text x="1328" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">324</text>
   </g>
-  <text x="60" y="974" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#475569">The orange cells are a local retention-policy gap, not a gap in located public geometry.</text>
+  <text x="60" y="974" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#475569">The orange cells await the derived-facts acquisition pass; raw SVGs stay unretained. None is a gap in located public geometry.</text>
   <text x="60" y="1002" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#64748b">Availability audit 2026-08-26 · Kingbird 114/114 distinct SVG groups parsed · UnitSquare 4/4 declared hashes matched</text>
 </svg>

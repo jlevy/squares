@@ -45,15 +45,18 @@ import math
 import sys
 from collections.abc import Sequence
 from decimal import Decimal, InvalidOperation
+from functools import cache
 from pathlib import Path
 
 import yaml
 from strif import atomic_output_file
 
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
+EVIDENCE = ROOT / "frontier/evidence.yaml"
 SCREEN = ROOT / "atlas/known-best/translation-escape-screen.json"
 GENERATOR = "python -m devtools.assess_frontier_rigidity"
 
@@ -72,6 +75,39 @@ SCREEN_REPLAY = (
     "uv run --frozen --all-extras --group dev python -m "
     "devtools.screen_translation_escape --check"
 )
+
+
+@cache
+def tiling_cases() -> tuple[int, ...]:
+    """Every `n` in the corpus the tiling argument settles, checked against the register.
+
+    The argument is elementary and follows the corpus rather than the calibration
+    boundary: `k*k` unit squares of total area `k^2` in a verified `k` by `k` container
+    have no slack anywhere, and that is as true at `k = 18` as at `k = 10`. So the set is
+    derived from `KNOWN_BEST_CORPUS` here.
+
+    It is then compared with what `E-perfect-square-tiling-rigid` says it covers, because
+    the evidence record is what a reader of a case is pointed at. A corpus that has grown
+    past the registered scope must have the record widened deliberately, with its
+    `source_reviewed` and `limitations` re-read; deriving both from the same constant
+    would let the citation silently claim cases nobody registered.
+    """
+    derived = tuple(n for n in KNOWN_BEST_CORPUS.numbers if math.isqrt(n) ** 2 == n)
+    evidence = safe_load(EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    entry = next((item for item in evidence if item["id"] == TILING_EVIDENCE), None)
+    if entry is None:
+        raise RigidityAssessmentError(f"{TILING_EVIDENCE} is not in frontier/evidence.yaml")
+    registered = tuple(int(value) for value in entry["scope"]["n_values"])
+    if registered != derived:
+        unregistered = sorted(set(derived) - set(registered))
+        stale = sorted(set(registered) - set(derived))
+        raise RigidityAssessmentError(
+            f"{TILING_EVIDENCE} covers n = {list(registered)} while the perfect squares of "
+            f"{KNOWN_BEST_CORPUS.label} are n = {list(derived)} (unregistered "
+            f"{unregistered}, outside the corpus {stale}); widen the evidence record "
+            "before writing tiling rigidity into cases it does not cover"
+        )
+    return derived
 
 
 def screen_cases() -> tuple[dict[int, dict], list[int]]:
@@ -106,7 +142,7 @@ def rigidity_for(
 ) -> dict | None:
     """The block this tool would write for `n`, or None to leave the record alone."""
     root = math.isqrt(n)
-    if root * root == n:
+    if n in tiling_cases():
         # The tiling argument rests on the side being exactly k, which is a property of
         # this record and not of n. Read it rather than assume it.
         upper = _exact_side(record, "verified_upper_bound")
@@ -225,7 +261,7 @@ def plan() -> list[tuple[int, Path, str, str]]:
     """(n, path, current text, desired text) for every record this tool would touch."""
     cases, excluded = screen_cases()
     entries: list[tuple[int, Path, str, str]] = []
-    for n in range(1, 101):
+    for n in KNOWN_BEST_CORPUS.numbers:
         path = FRONTIER / f"n-{n:03d}.md"
         text = path.read_text(encoding="utf-8")
         record = _record(text)
@@ -282,7 +318,7 @@ def review() -> None:
     cases, excluded = screen_cases()
     buckets: dict[str, list[int]] = {}
     skipped: list[int] = []
-    for n in range(1, 101):
+    for n in KNOWN_BEST_CORPUS.numbers:
         text = (FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
         record = _record(text)
         held = _existing_evidence(record)

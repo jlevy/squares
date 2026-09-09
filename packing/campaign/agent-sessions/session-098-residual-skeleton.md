@@ -32,7 +32,7 @@ session:
     kill_condition: Original 17:40 cutoff, a mere restatement of BC281, a fitted subinterval, or an omitted SAT alternative. No scientific target or adapter implementation.
     fallback: Preserve the exact missing implication and reprice a changed direction rather than retry BC281.
     outcome: All three reports froze within their original caps. The design derives an exact joint-translation/fiber representation and distinguishes a sufficient six-source chain from complete24-interval coverage. Uniform templates and bounded active-facet transitions remain missing; the author recommends no target allocation.
-    evidence: &id004
+    evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md
@@ -130,9 +130,10 @@ session:
     status: completed
     recording: contemporaneous
     outcome: Frozen17:38:53; exact domain and fiber reduction, missing templates; recommends no target.
-    evidence: &id001
+    evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md
-    files: *id001
+    files:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md
     checks:
     - Native source links, common-doc footer, whitespace and Flowmark checks passed.
     uncertainty: Complete skeleton determination and design admission remain open.
@@ -158,9 +159,10 @@ session:
     status: completed
     recording: contemporaneous
     outcome: Frozen17:27:17; exact inherited scope and failed-transfer inventory; new design unread.
-    evidence: &id002
+    evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md
-    files: *id002
+    files:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md
     checks:
     - Native source links, common-doc footer, whitespace and Flowmark checks passed.
     uncertainty: Complete skeleton determination and design admission remain open.
@@ -186,9 +188,10 @@ session:
     status: completed
     recording: contemporaneous
     outcome: Frozen17:26:12; complete40/45 domain and projection inclusion; new design unread.
-    evidence: &id003
+    evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md
-    files: *id003
+    files:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md
     checks:
     - Native source links, common-doc footer, whitespace and Flowmark checks passed.
     uncertainty: Complete skeleton determination and design admission remain open.
@@ -312,7 +315,11 @@ session:
     excluded_commands:
     - All file or Git mutations
     - Scientific target, new proof or code execution
-  outputs: *id004
+  outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
   checks:
   - Baseline013e772a is clean and pushed. Its code parentaeef535f passed all66 full checks in1752.00 seconds; the final documentation delta passed45 push checks in140.20 seconds and hosted CI.
   - Local and source worktree inventories end at session095. The complete paginated PR111 file inventory contains session093-atlas-expansion-to-324, not session096; this branch allocates the next sequential session096. The external093 naming collision with landed source work is separate from this allocation.

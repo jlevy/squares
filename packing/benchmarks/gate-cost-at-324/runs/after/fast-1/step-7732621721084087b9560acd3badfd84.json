@@ -1,0 +1,8 @@
+{
+  "name": "soundness perimeter",
+  "output": "  22 configurations from every emitting component pass sqpack at tol 1e-10",
+  "reason": "",
+  "run_id": "a82de8840fc84413b6854db00771e37b",
+  "seconds": 28.275531625004078,
+  "status": "passed"
+}

@@ -110,7 +110,8 @@ PRUNE = frozenset(
         # list on 2026-08-27, when merging the atlas SVG work pushed the snapshot to
         # 42,441,211 bytes against a 41,943,040 cap. They are the direct analogue of the
         # prospective renderings already listed here: generated SVG output, checked by the
-        # `deterministic SVG rendering` and `known-best n=1..100 atlas` steps, and named by
+        # `deterministic SVG rendering`, `known-best atlas records and sample` and
+        # `known-best n=1..324 atlas rebuild` steps, and named by
         # no control in `controls.yaml`. The two controls that do target
         # `atlas/known-best/` reach small JSON files at its top level, which stay.
         #
@@ -122,11 +123,19 @@ PRUNE = frozenset(
         # The link-preview card joins its three siblings on 2026-09-05, on exactly their
         # grounds: a generated export of the same drawing, carrying the same source
         # receipt the same `--check` replays, named by no control. 0.2 MB.
+        #
+        # The poster's two binary exports join them on 2026-09-07 on the same grounds and
+        # for the same reason, a size larger. Its SVG deliberately does not: the two
+        # composite vectors are what `build_known_best_atlas --check` compares in full,
+        # and whether 6 MB of one of them belongs in every private worker's snapshot is a
+        # measurement against the cap, not a line to add while adding the poster.
         ROOT / "atlas/known-best/contact-overlays",
         ROOT / "atlas/known-best/known-best-1-100-card.png",
         ROOT / "atlas/known-best/known-best-1-100.pdf",
         ROOT / "atlas/known-best/known-best-1-100.png",
         ROOT / "atlas/known-best/known-best-1-100@2x.png",
+        ROOT / "atlas/known-best/known-best-1-324.pdf",
+        ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/rendering",
         ROOT / "atlas/prospective/rendering",
         # `site` is a stronger case than any of the above and is here for a different
@@ -297,7 +306,25 @@ ROOT_DOCUMENTS = (
 # Compressing the retained summary to xz would leave only about 40 KiB of headroom.
 # Allow 80 MiB as measured storage headroom, not a speed target. Raising this guard
 # does not increase the bytes actually copied; dependency-policy work is separate.
-SNAPSHOT_MAX_BYTES = 80 * 1024 * 1024
+#
+# 2026-09-07, with the corpus at n = 1..324 and the poster composite: 90,858,775 bytes.
+# The growth is witnesses/known-best (7.6 MB for 324 cases, the source of record for the
+# catalogue-derived ones, which the sampled atlas step rebuilds inside a worker), the
+# poster SVG (6.2 MB, generated, but inline-linked from the atlas README and therefore
+# copied back by `linked_pruned_targets` even when pruned -- pruning it was tried and
+# moved nothing), and the escape screen record (3.1 MB). No further safe prune was found;
+# a link checker that tolerated pruned targets would be the next one. Allow 96 MiB.
+#
+# 2026-09-08, after the retained research state was linked into the checked record:
+# 106,107,961 bytes. This is tracked source and declared checker input, not cache drift.
+# The largest copied-back dependencies are exp-059's registered completion record
+# (10,923,451 bytes) and BC-232's linked resumable state (5,248,062); the largest files
+# on the unpruned source surface are the known-best chunk components (9,672,604), poster
+# SVG (6,198,351), exp-042 result (5,740,789), and chunk partitions (5,220,955). Dropping
+# any of them would either remove a declared dependency or change the source surface the
+# controls exercise. Allow 128 MiB: three portable workers remain bounded at 384 MiB,
+# while the bytes actually cloned remain the measured source size.
+SNAPSHOT_MAX_BYTES = 128 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

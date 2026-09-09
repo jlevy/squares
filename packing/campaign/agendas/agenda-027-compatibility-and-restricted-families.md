@@ -20,7 +20,8 @@ agenda:
     explicit useful residuals. Session092 accepted the direct contracts and
     shared geometry controls; complete consumer attachment and broad pilots remain
     open. Session095 completed BC259 support-ceiling adoption and BC265 comparative
-    design, selecting future BC264 pricing. Each lane retains its own allocation.
+    design. Session097 completed BC264 pricing without launching Exp129. Each lane
+    retains its own allocation.
   items:
   - id: BC-258
     purpose: research
@@ -154,6 +155,7 @@ agenda:
     artifacts:
     - packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md
     - packing/resources/papers/n11-complete-research-bundle-2026-09-07/updates/enumeration_addendum.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md
     parallel_group: agenda027-direct-contracts
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
@@ -161,7 +163,7 @@ agenda:
       BC-264 consumes the kernel subset. Physical stationarity is reviewed separately
       under BC-267 and is not a gate on direct all-feasible exclusions.
     outcomes:
-    - scope: Direct case, uniform Farkas, resource, capacity and anchor implications used by Agenda028
+    - scope: Direct case, uniform Farkas, resource, capacity, and anchor implications used by Agenda028
       classification: achieved
       result: >-
         Independently accepted with explicit complete-domain, touching, common-budget
@@ -171,16 +173,21 @@ agenda:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
       disposition: retire-success
       follow_up: null
-    - scope: Pair-kernel and stationary or finite-motion implications
-      classification: never-opened
+    - scope: Pair-kernel implication, joint symmetry, and exact finite objective-certificate contract
+      classification: achieved
       result: >-
-        The focused review did not assess these implications. BC264 must obtain
-        independent kernel acceptance before its target; BC267 retains physical
-        stationarity review. Completion of the direct review does not satisfy them.
+        Session097 independently accepted this kernel-specific subset and a source-free
+        finite instrument build. It did not accept the scientific target or a continuum
+        certificate.
       evidence:
-      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
-      disposition: defer-dependency
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md
+      disposition: continue
       follow_up: think-mq0d
+    note: >-
+      Session092 did not assess the kernel, stationary, or finite-motion implications.
+      Session097 later closed the kernel-specific subset. Physical stationarity and
+      finite-motion claims remain under BC267 and do not follow from either accepted
+      subset.
   - id: BC-261
     purpose: tool_validation
     owner_focus: correctness
@@ -282,12 +289,12 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: tentative
+    state: in_progress
     priority: 2
     question: >-
       Does one small fixed feature family for H-114 have an exact obstruction,
       or a b < 11 candidate with a credible continuum certification route?
-    hypotheses: [H-114]
+    hypotheses: [H-114, H-125]
     budget: >-
       One 30-minute feature and separator price before any target allocation.
       Freeze a narrower family claim and scientific cap; no automatic degree
@@ -302,7 +309,7 @@ agenda:
       certified b < 11 bound. Report which output was achieved.
     bead: think-mq0d
     workflows: [insight-iteration, research-loop, factual-review]
-    depends_on: [BC-260]
+    depends_on: []
     parallel_group: agenda027-pair-kernel
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
@@ -316,6 +323,28 @@ agenda:
       left unresolved. Freeze one feature family, exact PSD/necessary-constraint
       acceptance and the full diagonal/pair verification price. Stop if these
       do not fit the slice; no degree escalation or general hierarchy build.
+      The user then explicitly requested continuation. Session097 opened
+      this source-free pricing on codex/n11-kernel-pricing, with max feature author
+      think-mkik and independent max reviewer think-b271, under think-c53m.
+      The first slice's original cap was 21:27 UTC on September 7; no target was admitted.
+      Pricing finished at 21:23:55 with a proved cubic center-feature obstruction
+      and one eleven-feature, 16-parameter D4 family. The finite LP and independent
+      exact reader completed separate source-free builds before 22:00;
+      all 75 controls and independent max code/protocol reviews passed.
+      Engine d6f0c403 passed its immutable push gate. Exp129 did not launch:
+      protocol 424adf85 failed its records/push gates on a stale synopsis control,
+      so the 22:20 launch cutoff passed with zero scientific time. H125 is untested;
+      the unspent first invocation requires a fresh explicit allocation and passing
+      published admission, not a restart under the expired clock. No degree
+      escalation or continuum build is admitted.
+      The accepted kernel-specific artifact now supplies the entry contract, so
+      the coarse dependency on all of BC260 is removed for this cell only.
+      Other BC260 implications retain their own review status. H125 records the
+      concrete family prospectively; its source-free instrument is ready but the
+      operational launch guard is blocked. Keep this cell open at that precise scope.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md
   - id: BC-265
     purpose: research
     owner_focus: insight
@@ -460,20 +489,25 @@ agenda:
 ---
 # Agenda 027 — Compatibility and Restricted Families
 
-**Selected work has executed; the rest requires its own allocation.** Session095
-completed BC259’s independent support-ceiling adoption and BC265’s comparative design.
-BC264 is its selected future pricing entry.
-Session092 accepted the shared BC260 contracts and BC261 direct geometry controls;
-complete consumer attachment remains open.
+**Selected work has executed; the rest requires its own allocation.**
+[Session 092](../agent-sessions/session-092-hybrid-overnight.md) accepted BC260’s direct
+case, Farkas, and resource subset for Agenda028 and BC261’s direct geometry controls.
+Complete consumer-specific attachment remains open under that interface owner.
+Session095 completed BC259’s independent support-ceiling adoption and BC265’s
+comparative design. Session097 completed BC264’s pricing: a cubic-feature obstruction is
+proved and a fixed eleven-feature family has independently reviewed finite instruments
+with 75 source-free controls.
+Exp129 did not launch because its protocol’s records and push gates failed on a stale
+documentation-control anchor before the launch cutoff.
+H125 remains untested and both scientific allowances are unspent.
+A feasible LP would remain inconclusive.
+The next admission must use a fresh allocation after the checkpoint checks pass,
+preserving the original non-invocation rather than extending its clock.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.
 Epic `think-sz5t` owns the program; `think-adfk` owns the completed intake and planning.
-[Session 092](../agent-sessions/session-092-hybrid-overnight.md) accepted BC260’s case,
-Farkas and resource subset for the concrete Agenda028 consumers, plus BC261’s direct
-geometry controls. Complete consumer-specific attachment remains open under that single
-interface owner. Other contract subsets and the broad pilots retain their separate
-readiness decisions.
+Other contract subsets and the broad pilots retain their separate readiness decisions.
 
 ## Parallel Ownership
 

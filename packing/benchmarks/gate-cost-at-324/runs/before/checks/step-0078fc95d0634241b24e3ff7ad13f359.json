@@ -1,0 +1,8 @@
+{
+  "name": "n=5 rigidity certificates still verify",
+  "output": "  n=5 cone reproduces: 14 coordinates pinned with exact Farkas certificates, 1 free\n  1 of 1 free directions obstructed at second order by a verified self-stress",
+  "reason": "",
+  "run_id": "c4cec457a4a54015a84b67fda9eec81c",
+  "seconds": 0.3840802079939749,
+  "status": "passed"
+}

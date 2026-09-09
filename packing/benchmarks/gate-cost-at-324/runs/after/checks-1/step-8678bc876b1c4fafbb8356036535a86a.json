@@ -1,0 +1,8 @@
+{
+  "name": "synopsis agrees with the artifacts",
+  "output": "  documentation map covers 816 durable documents; footers and links resolve\n  SYNOPSIS.md agrees with the artifacts, the ledger and the defect log",
+  "reason": "",
+  "run_id": "0224631f59cc43a5b3ae7ad92b6d2018",
+  "seconds": 2.177487207998638,
+  "status": "passed"
+}

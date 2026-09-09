@@ -402,13 +402,14 @@ Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanica
 
 ### Selected Continuation After Session 090
 
-At Session095's handoff, the selected coordinating entry was BC-264 under
-`think-mq0d`: price one H114 feature family and its missing kernel-specific contract
-within a 30-minute slice. This is the historical selection; the owner's live session097
-has since completed pricing and begun source-free implementation. The current
-[SYNOPSIS handoff](../../../SYNOPSIS.md#current-handoff) and owner record govern further
-dispatch; do not restart that original slice. BC265’s independent design is complete; a calibration falsifier has less direct
-value than this bound-capable mechanism and is not selected automatically.
+At Session095’s handoff, the selected coordinating entry was BC-264 under `think-mq0d`:
+price one H114 feature family and its missing kernel-specific contract within a
+30-minute slice. This is the historical selection; the owner’s live session097 has since
+completed pricing and begun source-free implementation.
+The current [SYNOPSIS handoff](../../../SYNOPSIS.md#current-handoff) and owner record
+govern further dispatch; do not restart that original slice.
+BC265’s independent design is complete; a calibration falsifier has less direct value
+than this bound-capable mechanism and is not selected automatically.
 H101’s stronger common-support obstruction remains a conditional fallback without a
 candidate. Exp128 established fixed-support optimum11 and closed BC259/H099. This is a
 source-free entry at that checkpoint, not a newly funded target.

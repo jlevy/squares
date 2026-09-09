@@ -70,13 +70,14 @@ collect this opt-in workload.
 
 ## Disposition
 
-The first control observation, `a742211d2fb644eb835a6255a8e9268b`, failed at
-`47970489`: 47 of 48 checks passed, but the documentation checker refused this unmapped
-experiment document. The invocation completed normally in 99.48 seconds including the
-pytest driver. There was no timeout or interrupted child.
+The first control observation, `a742211d2fb644eb835a6255a8e9268b`, failed at `47970489`:
+47 of 48 checks passed, but the documentation checker refused this unmapped experiment
+document.
+The invocation completed normally in 99.48 seconds including the pytest driver.
+There was no timeout or interrupted child.
 
-Stop this comparison without a candidate observation or acceptance claim. Retain the
-failed observation in the [generated report](../report.md) and its
+Stop this comparison without a candidate observation or acceptance claim.
+Retain the failed observation in the [generated report](../report.md) and its
 [native checkpoint](../checkpoints/VE-003-control-setup.tar.gz).
 [VE-004](VE-004-checks-start-order.md) repairs the shared document map before a fresh,
 prospectively registered comparison with the same workload and acceptance rule.

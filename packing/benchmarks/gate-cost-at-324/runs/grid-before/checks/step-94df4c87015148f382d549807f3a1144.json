@@ -1,0 +1,8 @@
+{
+  "name": "assembly coverage agrees with the contract",
+  "output": "  assembly coverage reproduces: 17 certificates and 13 typed limitations over n <= 30",
+  "reason": "",
+  "run_id": "dfc2af6473f442278c81d327debf3aaa",
+  "seconds": 0.42131220900046173,
+  "status": "passed"
+}

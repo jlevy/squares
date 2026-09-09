@@ -1,0 +1,8 @@
+{
+  "name": "generated tables in sync with frontier/",
+  "output": "  6 generated report tables and frontier/STATUS.md match frontier/ (391 data rows)",
+  "reason": "",
+  "run_id": "c4cec457a4a54015a84b67fda9eec81c",
+  "seconds": 0.7758895420047338,
+  "status": "passed"
+}

@@ -16,6 +16,7 @@ import sys
 import time
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from textwrap import dedent
 
 import pytest
 
@@ -24,8 +25,15 @@ from sqpack.cli import validate
 from sqpack.cli.validate import main
 from sqpack.yamlio import safe_load
 
+#: (proved, open) at each corpus the frontier-corpus step has summarized.
+FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
+    "n=1..100": (35, 65),
+    "n=1..200": (47, 153),
+    "n=1..324": (59, 265),
+}
+
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
-"""The gate's own workflow, read by the test that keeps its two post-merge jobs a
+"""The gate's own workflow, read by the test that keeps its post-merge jobs a
 partition of `STEPS`. Repository-relative from `packing/tests/`, so two levels up."""
 
 
@@ -217,11 +225,31 @@ def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
             assert upload[0]["with"]["path"] == "${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}"
 
 
-def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
+def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
+    """Each isolated selection retains its declared worker allocation.
+
+    The screen and exhaustive tier use four inner workers. The slow lane has xdist
+    workers of its own and retains the two-worker inner cap from PR #120. The other
+    numeric checks run serially with two inner workers, preserving that PR's response
+    to the simultaneous corpus-pool timeout. These flags do not establish a speedup
+    or a total process bound when tests create their own pools.
+
+    `D-484` is why this is a rule over selections instead of a list of exhaustive jobs.
+    The escape screen became the second step to own a runner, and under the old matching
+    -- which tested for the exhaustive tier by name -- it would have been skipped
+    silently, along with the integration surface whose `--skip` list it lengthened.
+
+    `macos-portability` is excluded by name, as it is in `_workflow_selections` and for
+    the same reason: it is a second architecture deliberately duplicating four steps the
+    Linux jobs also run, on a different host class, so the cpu arithmetic here is not the
+    arithmetic it is sized against.
+    """
     checked: set[tuple[str, str]] = set()
     for workflow in (WORKFLOW, WORKFLOW.parent / "deep-gate.yml"):
         document = safe_load(workflow.read_text())
         for name, job in document["jobs"].items():
+            if name == "macos-portability":
+                continue
             for step in job.get("steps", []):
                 tokens = shlex.split(str(step.get("run", "")))
                 if "packing-validate" not in tokens:
@@ -229,20 +257,25 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
                 namespace = validate._parser().parse_args(
                     tokens[tokens.index("packing-validate") + 1 :]
                 )
-                if namespace.only == ["exhaustive exact behavioral tests"]:
+                only = namespace.only or []
+                if only == ["slow behavioral tests"]:
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
+                elif len(only) == 1:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
-                elif namespace.skip == ["exhaustive exact behavioral tests"] or (
-                    "negative controls" in namespace.only
-                ):
-                    assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                elif namespace.skip or len(only) > 1:
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 else:
                     continue
                 checked.add((workflow.name, name))
     assert checked == {
         ("packing-validation.yml", "exhaustive"),
+        ("packing-validation.yml", "screen"),
+        ("packing-validation.yml", "slow-lane"),
         ("packing-validation.yml", "validate"),
         ("deep-gate.yml", "exhaustive-tier"),
         ("deep-gate.yml", "deferred-steps"),
+        ("deep-gate.yml", "screen"),
+        ("deep-gate.yml", "deferred-slow-lane"),
     }
 
 
@@ -701,7 +734,23 @@ def test_the_quick_lane_worker_count_follows_the_machine_and_is_never_zero(
 def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """The slow lane asks for the workers `_pytest_workers` sizes from this run's `--jobs`.
+
+    Asserted as the literal `-n 4` with `_pytest_workers` pinned to four, exactly as
+    `test_fast_behavioral_step_excludes_exhaustive_exact_tests` pins it for the quick lane,
+    because the pin is what makes the assertion mean anything. This test used to build its
+    expected tuple from `*validate._xdist_distribution(1)` -- the helper the code under
+    test calls -- and so asserted nothing on any host where that helper answers `()`: one
+    cpu, or every cpu already claimed by `--jobs`. A `_slow_tests` with its workers deleted
+    passed it on a one-cpu view of this box, and that is `D-484` exactly: the two lanes
+    split, and only one of them given workers.
+
+    The call is recorded too, because the count has to be sized from this run's `--jobs`
+    and not from a constant: the lane is one of the `jobs`, and `cpus - jobs + 1` is what
+    it is owed beside whatever else the runner is doing.
+    """
     observed: tuple[str, ...] | None = None
+    sized_for: list[int] = []
 
     def capture(context: validate.Context, command: tuple[str, ...], **_kwargs: object) -> str:
         del context
@@ -709,17 +758,23 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         observed = command
         return "==== slowest durations ====\n(0 durations < 0.005s hidden.)"
 
+    def four_workers(jobs: int) -> int:
+        sized_for.append(jobs)
+        return 4
+
     monkeypatch.setattr(validate, "_run", capture)
+    monkeypatch.setattr(validate, "_pytest_workers", four_workers)
     context = validate.Context(
         deep=False,
         strict=False,
-        jobs=1,
+        jobs=2,
         inner_jobs=1,
         environment=os.environ.copy(),
     )
 
     validate._slow_tests(context)
 
+    assert sized_for == [2]
     assert observed == (
         sys.executable,
         "-m",
@@ -728,6 +783,8 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         "tests",
         "-m",
         "slow and not exhaustive_exact",
+        "-n",
+        "4",
         "--durations=0",
         "--durations-min=0",
     )
@@ -749,6 +806,11 @@ def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
     def broken(*_args: object, **_kwargs: object) -> str:
         raise validate.StepFailureError("command exited 1: pytest\n1 failed, 3 passed")
 
+    def broken_collection(_context: validate.Context, command: tuple[str, ...]) -> str:
+        if "--collect-only" in command:
+            raise validate.StepFailureError("command exited 2: pytest\ncollection failed")
+        return deselected()
+
     context = validate.Context(
         deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
     )
@@ -759,6 +821,65 @@ def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
     monkeypatch.setattr(validate, "_run", broken)
     with pytest.raises(validate.StepFailureError):
         validate._slow_tests(context)
+
+    monkeypatch.setattr(validate, "_run", broken_collection)
+    with pytest.raises(validate.StepFailureError, match="command exited 2"):
+        validate._slow_tests(context)
+
+
+@pytest.mark.parametrize("worker_failure", [False, True], ids=["empty", "worker-failure"])
+def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, worker_failure: bool
+) -> None:
+    """xdist can return exit 5 after all workers fail before collecting any tests."""
+    tests = tmp_path / "tests"
+    tests.mkdir()
+    (tmp_path / "pytest.ini").write_text("[pytest]\nmarkers = slow: deferred tests\n")
+    if worker_failure:
+        (tmp_path / "conftest.py").write_text(
+            dedent("""
+                import pytest
+
+                def pytest_configure(config):
+                    if hasattr(config, "workerinput"):
+                        raise pytest.UsageError("worker cannot collect the slow lane")
+                """)
+        )
+    (tests / "test_slow.py").write_text(
+        "import pytest\n"
+        + ("@pytest.mark.slow\n" if worker_failure else "")
+        + "def test_selected():\n    pass\n"
+    )
+    commands: list[tuple[str, ...]] = []
+    run = validate._run
+
+    def run_here(context: validate.Context, command: tuple[str, ...]) -> str:
+        commands.append(command)
+        return run(context, command, cwd=tmp_path)
+
+    monkeypatch.setattr(validate, "_run", run_here)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
+    environment = os.environ.copy()
+    for name in ("PYTEST_ADDOPTS", "PYTEST_XDIST_WORKER", "PACKING_VALIDATION_ARTIFACT_DIR"):
+        environment.pop(name, None)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=environment,
+        timeout_seconds=30,
+    )
+    if worker_failure:
+        with pytest.raises(validate.StepFailureError, match="command exited 5") as raised:
+            validate._slow_tests(context)
+        assert "worker cannot collect the slow lane" in str(raised.value)
+    else:
+        assert "no test is deferred" in validate._slow_tests(context)
+    assert len(commands) == 2
+    assert "-n" in commands[0]
+    assert "--collect-only" in commands[1]
+    assert "-n" not in commands[1]
 
 
 #: Node ids taken verbatim from this project's own pytest, not invented: a parametrized
@@ -1423,8 +1544,15 @@ def test_frontier_contract_accepts_the_declared_schema_metadata(
 
     assert status == 0
     assert stderr == ""
-    assert "100 artifacts, n = 1..100; formal lane: 35 proved, 65 open" in stdout
-    assert "reported lane: 35 proved, 65 open" in stdout
+    # The corpus summary is a corpus fact and follows KNOWN_BEST_CORPUS; the split is
+    # pinned per corpus so a record silently changing status still fails (think-93on).
+    proved, open_cases = FRONTIER_LANE_SPLIT[validate.KNOWN_BEST_CORPUS.label]
+    corpus = validate.KNOWN_BEST_CORPUS
+    assert (
+        f"{corpus.count} artifacts, n = {corpus.label[2:]}; formal lane: "
+        f"{proved} proved, {open_cases} open"
+    ) in stdout
+    assert f"reported lane: {proved} proved, {open_cases} open" in stdout
 
 
 def _budget_context(*, timeout_seconds: float, explicit: bool) -> validate.Context:
@@ -1501,7 +1629,7 @@ def test_a_step_that_exceeds_its_own_budget_still_fails(
     assert "timed out after 0.2 seconds" in summary.results[0].reason
 
 
-def test_only_the_whole_suite_steps_carry_budgets() -> None:
+def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
     """A budget is an exception, so the set of them is worth watching.
 
     If a second step acquires one, that is a signal the shared cap is wrong rather than
@@ -1518,8 +1646,8 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     The exhaustive exact tier became the third on 2026-09-05, and it is the same class:
     a whole suite, of complete finite certificate decisions, that measured 892 s on CI's
     runner against the 900 s cap it had been inheriting -- eight seconds from failing on
-    every merge to main. A fourth budgeted step would mean the cap is wrong rather than
-    that another suite is heavy, and should raise the cap instead of extending this set.
+    every merge to main. The rule proposed then was that a fourth budgeted step would
+    mean the shared cap needed revisiting instead of extending this set.
     The step `--push` builds outside this tuple is not a fourth: when its selector
     expands to the whole suite it runs the quick and slow lanes together, so it takes the
     constant that bounds both (D-432), which the next test holds.
@@ -1531,17 +1659,84 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     at `QUICK_TEST_WALL_BACKSTOP_SECONDS` is no longer a step the shared cap is wrong for. An
     exception that is no longer needed is not harmless -- it is a guard switched off.
 
+    The fourth arrived on 2026-09-08 with `D-484`, and the paragraph above said a fourth
+    would mean the shared cap is wrong. That warning was written when every budgeted step
+    shared a runner with fifty-seven short ones, and it is right about that case. The
+    escape screen earned its budget elsewhere: `--only` puts it alone on its own
+    post-merge job, where a single-step selection reports no tier and has no
+    `gate-budgets.yaml` ceiling behind it, so on that job this number is the whole guard.
+    But a budget is a property of the step and not of the job. `_execute_step_result`
+    raises the cap for this step in every run whose cap nobody set by hand, through
+    `--timeout-seconds` or its environment variable -- and that includes the full gate,
+    `packing-validate` with no flags, 69 steps, the one AGENTS.md sends every agent
+    through at a merge checkpoint. There the screen sits beside 68 short steps, and a hung
+    screen takes 1800s to die instead of 900s, under the `full` tier's 3600s ceiling. That
+    is what the fourth budget costs, and it is not nothing: a hang detector loosened by
+    900s in the run with the most steps in it. It is paid only when the screen hangs, and
+    it moves no other step's cap.
+
+    So the set is two rules rather than one, and the exhaustive tier belongs to the
+    second as much as the screen does. A step in the shared job earns a budget by running
+    a whole suite, where a cap wide enough for it would stop guarding the short steps
+    beside it. A step that owns a job carries one because nothing else bounds that job --
+    and carries it into every other run too, which is the cost priced above. Raising the
+    shared cap would answer neither: it would loosen the guard in the shared job, which is
+    the trade this test exists to refuse, and it would not bound the solo jobs at all.
+
     Recorded honestly: the second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
+
+    The fourth is a corpus sweep, rather than a suite: the whole translation escape
+    screen at `n=1..324` timed out after 900s in hosted run 34196436989. It now carries
+    the independent 1800s budget used by PR #116. The shared cap remains 900s for
+    ordinary checks, including the sampled screen; a larger corpus does not justify
+    extending every subprocess's deadline.
     """
     budgeted = {
         step.name: step.budget_seconds for step in validate.STEPS if step.budget_seconds
     }
     assert budgeted == {
+        # Whole suites in the shared job.
         "negative controls": 1800,
         "slow behavioral tests": 1800,
+        # Each alone on a post-merge job, where this number is the whole guard -- and
+        # the step's wherever else it runs, the full gate included.
         "exhaustive exact behavioral tests": 3600,
+        "single-square translation escape screen": 1800,
     }
+
+
+@pytest.mark.parametrize(
+    ("timeout_seconds", "explicit", "expected_timeout"),
+    [(900.0, False, 1800.0), (7.0, True, 7.0), (2400.0, True, 2400.0)],
+)
+def test_whole_escape_screen_uses_its_budget_unless_the_operator_sets_a_cap(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    timeout_seconds: float,
+    explicit: bool,
+    expected_timeout: float,
+) -> None:
+    observed: list[float] = []
+
+    def probe(context: validate.Context, module: str, *arguments: str) -> str:
+        assert module == "devtools.screen_translation_escape"
+        assert arguments == ("--check",)
+        observed.append(context.timeout_seconds)
+        return f"translation escape screen check passed: {validate._screen_findings()}"
+
+    monkeypatch.setattr(validate, "_module", probe)
+    step = next(
+        step
+        for step in validate.STEPS
+        if step.name == "single-square translation escape screen"
+    )
+    context = _budget_context(timeout_seconds=timeout_seconds, explicit=explicit)
+    result = validate._execute_step_result(step, context)
+
+    assert result.status == "passed"
+    assert observed == [expected_timeout]
+    assert context.timeout_seconds == timeout_seconds
 
 
 @pytest.mark.parametrize(
@@ -1699,6 +1894,82 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     checks job, the suite job, the sweeps job)` rather than one job's queue -- has moved.
     There is a fourth, and this is that argument.
 
+    **A fifth and a sixth arrived on 2026-09-07, and what moved was the corpus rather
+    than the gate.** The known-best atlas went from `n=1..100` to `n=1..324` -- 324 cases
+    and 52,650 squares against 100 and 5,050 -- and two sweeps grew with it. Measured on
+    an idle ten-cpu box at the sweeps job's own shape (`--jobs 4 --inner-jobs 2`), on
+    commit `2841eec9`, with every reading retained under
+    `benchmarks/gate-cost-at-324/runs/`:
+
+    - `single-square translation escape screen` at **766.26s**, against 110.66s at
+      `n=1..100`. It is already pooled and the pool is already sized by the tier's
+      `--inner-jobs`, so this is what the lever buys, not what it costs unpulled. It is
+      also within 134s of the gate's own 900s per-step subprocess timeout on a box faster
+      than CI's, which is a step that has stopped fitting rather than one that is merely
+      dear.
+    - `known-best n=1..324 atlas rebuild` at **691.19s** of that step's 703.28s, against
+      75.88s for the whole step at `n=1..100`. The seam is measured, not guessed: the
+      seven other subcommands in the step cost 12.09s between them, and five of them are
+      pinned at `CALIBRATION_CORPUS` by `D4` and cannot grow with the corpus at all.
+
+    Both were made faster before either was deferred, which is the order `OR-13` asks
+    for. `build_known_best_atlas` was given the process pool `screen_translation_escape`
+    already had: 691.19s serial, 348.15s at two workers, 184.34s at four, over 677.66s
+    and 688.74s of cpu against the serial run's 691.19s -- the pool divides the work
+    rather than adding any, and `--check` passes at every count, which is what makes the
+    parallel build byte-identical rather than merely quick. 184.34s is still most of the
+    sweeps job's 210s ceiling on a box faster than the runner, so the speedup changes
+    where the deferral lands rather than whether it is needed. It does decide the deep
+    gate's shape: at that job's `--inner-jobs 2` the rebuild is 348.15s here, comfortably
+    inside both the slow lane's 890s and the gate's own 900s per-step timeout.
+
+    Neither is deferred without a stand-in, which is the difference between this and
+    dropping a check. `known-best atlas records and sample` and `translation escape
+    screen records and sample` are new steps on the sweeps job, and each re-derives the
+    whole of its record layer -- the manifest but for its entries, the source index and
+    every upstream digest, every frontier link, every composite receipt; the screen's
+    aggregate, method block, schema and per-certificate claims -- and then rebuilds a
+    fixed, recorded sample of the cases in full. So the drift `D-369` counts still fails
+    a pull request in the minute it is introduced, and only per-case geometry waits for
+    the deep gate.
+
+    **A seventh arrived the same day, from the same corpus and on a different job.**
+    `exact rational grid replay` is `devtools.check_basic_bounds` run whole, and it was
+    the corpus-scaling member of `exact verification` on the `checks` job. What that job
+    did on CI at commit `2841eec9` is the whole argument: 189.09s against a 195s ceiling
+    and a recorded 99.39s, with the gate's own verdict naming `exact verification` as
+    133.4s of it -- 70.6 per cent. Measured on an idle ten-cpu box, three readings
+    apiece, with everything retained under `benchmarks/gate-cost-at-324/runs/`:
+
+    - the step, 84.56s, 84.11s and 83.95s, spread 0.7 per cent;
+    - `check_basic_bounds` inside it, 34.70s, 34.94s and 34.80s -- 41 per cent of the
+      step, against 3.58s when `D-370` moved it here at `n=1..100`;
+    - the sixteen other subcommands, 49.4s between them, every one a fixed case that
+      cannot grow with the corpus.
+
+    The cost is quadratic in the corpus's last `n` -- `verify_grid` buckets its pair
+    enumeration, so a case is linear in its own `n` and the corpus is the sum -- which
+    the tool's own `--max-n` measures: 2.75s at `n=1..100`, 12.65s at `n=1..200`, 34.81s
+    at `n=1..324`. A widening to 400 would put it near 53s without anything else
+    changing.
+
+    It was made faster before it was deferred, and the speedup is why the deep gate can
+    afford it. The replay is a map over independent cases, so it now asks
+    `sqpack.workers.worker_count` for its pool exactly as `screen_translation_escape` and
+    `build_known_best_atlas` do: 34.81s serial, 18.58s at two workers, 9.97s at four,
+    over 34.8s, 36.6s and 38.5s of cpu, and the whole run's stdout is byte-for-byte
+    identical at one worker and at four. What that does not do is help the job it was on:
+    every pull-request tier passes `--inner-jobs 1`, so `PACK_JOBS` is 1 and the pooled
+    step is the serial step there by design. The pool decides where the deferred copy can
+    live, not whether the deferral is needed.
+
+    The stand-in is the complement rather than a sample of the step. Every one of the 324
+    cases still has its declared upper, area and Nagamochi bounds compared against their
+    closed forms -- that half is 0.14s and never left -- and every ninth grid case is
+    still replayed exactly, at 4.15s in place of 34.81s. What waits for the deep gate is
+    the other eight ninths of the per-case geometry, on witnesses whose non-overlap is a
+    property of the lattice they are built on.
+
     Nothing was deferred on 2026-09-06, and that is the point of recording it here. The
     tier had reached 501.97s and the obvious 468.11s of it to drop were the two atlas
     sweeps main had just promoted; the measurement refused that too. Those two are the
@@ -1708,7 +1979,10 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     with the cheapest half of the evidence. The cost was bought from concurrency instead:
     a second runner, and then a third for the behavioural lane, both argued in
     `test_the_pull_request_runs_its_sweeps_and_its_suite_apart`, which changes when a
-    check runs but not whether. This set has held at four across both changes.
+    check runs but not whether. This set held at four across both changes, and what took
+    it to seven a day later was not a decision to carry less but a corpus that tripled:
+    the same refusal applies to the record layer of all three, which is why the record
+    layer stayed and only the per-case re-derivation left.
 
     `slow behavioral tests` is `BC-214`. It is not a step that was never decided: it is
     the half of the behavioural suite that carries the wall, split out by measurement
@@ -1740,8 +2014,11 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
         "negative controls",
         "n=40 rigidity bracket still reproduces",
         "slow behavioral tests",
+        "known-best n=1..324 atlas rebuild",
+        "single-square translation escape screen",
+        "exact rational grid replay",
     }
-    # And the same four are what `--fast` leaves out, so the flag and the workflow cannot
+    # And the same set is what `--fast` leaves out, so the flag and the workflow cannot
     # drift apart: a step marked `fast` that no pull-request job invokes is deferred in
     # fact and promoted on paper, which is the state think-k4fb found and this pins shut.
     assert deferred == {step.name for step in validate.STEPS if not step.fast}
@@ -1760,21 +2037,33 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     --inner-jobs 1` at 221.70s of wall over 58 steps, and `--sweeps --jobs 4
     --inner-jobs 1` at 110.66s over four.
 
-    The sweeps, 313.95s of step time between them:
+    The sweeps were 313.95s of step time between them while the corpus was a hundred
+    cases: the escape screen 110.66s, the chunk census 90.38s, `known-best n=1..100
+    atlas` 75.88s, the prospective seed 37.03s.
 
-    - `single-square translation escape screen`, 110.66s. The longest single unit
-      anywhere on the pull-request surface, this job's wall, and therefore the floor
-      under the whole surface.
-    - `known-best chunk census`, 90.38s.
-    - `known-best n=1..100 atlas`, 75.88s -- the eight subcommands left after the census
-      was split out of it.
-    - `prospective n=101..324 safe seed`, 37.03s.
+    Two of those four names are gone, and the corpus is why rather than the gate. At
+    `n=1..324` the screen is 766.26s and the atlas step 703.28s on an idle ten-cpu box at
+    this job's own shape, against a 210s ceiling, and
+    `test_the_pull_request_surface_defers_only_what_was_measured` carries both readings
+    and the argument for moving the per-case re-derivation to the deep gate. What runs
+    here now:
 
-    They are one kind of work: each re-derives a retained atlas from the hundred-odd
-    witnesses under it and compares it byte for byte. That matters more than the ranking,
-    because a rule keyed on kind survives a step getting faster, and a rule keyed on
-    today's top four does not -- as this list has already shown, the prospective seed
-    having gone from the longest of the four to the shortest.
+    - `known-best chunk census`, unchanged. `D4` pins it at `CALIBRATION_CORPUS`, so a
+      widening corpus does not reach it, and three readings on 2026-09-07 agreed to
+      within 0.07s at 40.03s.
+    - `known-best atlas records and sample`, the 12.09s of subcommands that did not grow
+      with the corpus plus a sampled rebuild in place of the 691.19s whole one.
+    - `translation escape screen records and sample`, the retained screen rebuilt from
+      its own records plus a sampled replay.
+    - `prospective n=101..324 safe seed`, now about 0.07s. Where a step runs is not what
+      makes it cheap, so a step that has become free is left where it is rather than
+      moved for tidiness.
+
+    They are one kind of work: each re-derives a retained atlas from the witnesses under
+    it and compares it byte for byte. That matters more than the ranking, because a rule
+    keyed on kind survives a step getting faster, and a rule keyed on today's top four
+    does not -- as this list has already shown, the prospective seed having gone from the
+    longest of the four to the shortest and then to nothing at all.
 
     The suite is one step and its rule is arithmetic rather than kind:
 
@@ -1826,8 +2115,8 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     assert {step.name for step in validate.STEPS if step.sweep} == {
         "prospective n=101..324 safe seed",
         "known-best chunk census",
-        "single-square translation escape screen",
-        "known-best n=1..100 atlas",
+        "translation escape screen records and sample",
+        "known-best atlas records and sample",
     }
     assert {step.name for step in validate.STEPS if step.suite} == {
         "fast behavioral tests",
@@ -1964,8 +2253,8 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
     reports four and the register records four, and a runner that changed size would
     show up as an unenforced band rather than as a wrong one.
 
-    The post-merge commands are out of scope rather than exempt. Both are narrowed --
-    `--skip` on one, `--only` on the other -- so neither is a clean reading of a whole
+    The post-merge commands are out of scope rather than exempt. All are narrowed --
+    `--skip` on the broad job, `--only` on the isolated lanes -- so none reads a whole
     tier, which is the same reason the `full` entry says only its ceiling applies.
     """
     register = gate_budgets.load()
@@ -1995,28 +2284,33 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
 
 
 def test_the_post_merge_jobs_partition_the_gate() -> None:
-    """The two jobs a merge runs must together select every step, and none twice.
+    """The jobs a merge runs must together select every step, and none twice.
 
     think-tr2z split the exhaustive tier onto its own runner so that it reports its own
     verdict against its own budget; `--skip` on the other job is what stops it being paid
-    for twice. Both halves of that are a name typed into a YAML file, so this reads the
-    workflow, parses each command with the CLI's own parser, and resolves it through the
-    CLI's own selector: a step added to `STEPS` lands in one job or the other, and a
-    rename that breaks the split fails here rather than after a merge.
+    for twice. `D-484` split the translation escape screen off for a different reason --
+    not its verdict but its worker count, which beside the rest of the gate is two and
+    alone is four. Every part of both splits is a name typed into a YAML file, so this
+    reads the workflow, parses each command with the CLI's own parser, and resolves it
+    through the CLI's own selector: a step added to `STEPS` lands in exactly one job, and
+    a rename that breaks the split fails here rather than after a merge.
 
-    A merge still runs the gate as one job plus the exhaustive tier, not as the pull
-    request's four parts. The `geometry`, `suite` and `sweeps` jobs are pull-request only,
-    and the complete integration surface here already contains every step they would have
-    run.
+    The slow lane also has its own runner. The complete integration surface excludes
+    all three isolated selections. The `geometry`,
+    `suite` and `sweeps` jobs are pull-request only, and the complete integration surface
+    here already contains every step they would have run.
     """
     selections = _workflow_selections(pull_request=False)
 
-    assert set(selections) == {"validate", "exhaustive"}
+    assert set(selections) == {"validate", "exhaustive", "screen", "slow-lane"}
     assert selections["exhaustive"] == {"exhaustive exact behavioral tests"}
-    assert not selections["validate"] & selections["exhaustive"]
-    assert selections["validate"] | selections["exhaustive"] == {
-        step.name for step in validate.STEPS
-    }
+    assert selections["screen"] == {"single-square translation escape screen"}
+    assert selections["slow-lane"] == {"slow behavioral tests"}
+    names = list(selections)
+    for index, job in enumerate(names):
+        for other in names[index + 1 :]:
+            assert not selections[job] & selections[other], f"{job} and {other} overlap"
+    assert set().union(*selections.values()) == {step.name for step in validate.STEPS}
 
 
 def test_the_longest_steps_are_submitted_first() -> None:
@@ -2039,13 +2333,18 @@ def test_the_longest_steps_are_submitted_first() -> None:
     """
     order = [step.name for step in validate._submission_order(validate.STEPS)]
 
-    assert order[:3] == [
+    assert order[:4] == [
         "exhaustive exact behavioral tests",  # 3600s
+        # The three 1800s steps, in declaration order, because the sort is stable and a
+        # tie is not a ranking. Which of them starts first does not matter to the wall:
+        # three of the four have their own post-merge runner and are alone on it.
+        "single-square translation escape screen",  # 1800s, `D-484`
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
-    assert order[3] == "exact verification"
-    assert order[4:] == [
+    budgeted_count = sum(step.budget_seconds is not None for step in validate.STEPS)
+    assert order[budgeted_count] == "exact verification"
+    assert order[budgeted_count + 1 :] == [
         step.name
         for step in validate.STEPS
         if step.budget_seconds is None and step.name != "exact verification"
@@ -2150,10 +2449,10 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
         # locally, at `PACK_JOBS=1` and one subcommand at a time, the census was 94.85s of
         # the undivided known-best step's 133.22s and the seed 88.37s of the prospective
         # step's 88.76s.
-        "known-best n=1..100 atlas",  # 148.50s undivided, about 43s without the census
-        "known-best chunk census",  # about 106s of that 148.50s
+        "known-best atlas records and sample",  # 12.09s of records plus a sampled rebuild
+        "known-best chunk census",  # 40.03s, pinned at CALIBRATION_CORPUS by D4
         "prospective n=101..324 safe seed",  # 102.10s of the 102.56s
-        "single-square translation escape screen",  # 73.07s
+        "translation escape screen records and sample",  # the retained screen, plus a replay
         "historical regressions",  # 29.35s
         "deterministic SVG rendering",  # 26.39s
         "D-034's n=5 identity pair still reproduces",  # 23.54s

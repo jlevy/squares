@@ -1,0 +1,1806 @@
+command exited 1: /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python -m devtools.run_negative_controls devtools/controls.yaml -j 2
+negative-control snapshot source is 106107961 bytes; cap is 100663296
+command exited 1: /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python -m pytest -q tests -m not exhaustive_exact and not slow -n 8 -p devtools.cpu_durations --durations=0 --durations-min=12 --cpu-durations=0 --cpu-durations-min=6
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [  1%]
+........................................................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  6%]
+........................................................................ [  8%]
+........................................................................ [ 10%]
+........................................................................ [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 15%]
+..........F............................................................. [ 16%]
+........................................................................ [ 18%]
+........................................................................ [ 20%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 25%]
+........................................................................ [ 26%]
+........................................................................ [ 28%]
+........................................................................ [ 30%]
+........................................................................ [ 32%]
+........................................................................ [ 33%]
+........................................................................ [ 35%]
+........................................................................ [ 37%]
+........................................................................ [ 38%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 43%]
+........................................................................ [ 45%]
+........................................................................ [ 47%]
+........................................................................ [ 48%]
+........................................................................ [ 50%]
+........................................................................ [ 52%]
+........................................................................ [ 53%]
+........................................................................ [ 55%]
+........................................................................ [ 57%]
+........................................................................ [ 59%]
+........................................................................ [ 60%]
+........................................................................ [ 62%]
+........................................................................ [ 64%]
+........................................................................ [ 65%]
+................F....................................................... [ 67%]
+........................................................................ [ 69%]
+........................................................................ [ 70%]
+........................................................................ [ 72%]
+........................................................................ [ 74%]
+........................................................................ [ 75%]
+....................................F................................... [ 77%]
+........................................................................ [ 79%]
+........................................................................ [ 80%]
+........................................................................ [ 82%]
+........................................................................ [ 84%]
+........................................................................ [ 85%]
+........................................................................ [ 87%]
+........................................................................ [ 89%]
+........................................................................ [ 91%]
+........................................................................ [ 92%]
+........................................................................ [ 94%]
+........................................................................ [ 96%]
+........................................................................ [ 97%]
+........................................................................ [ 99%]
+......................                                                   [100%]
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+=================================== FAILURES ===================================
+__________________________ test_every_anchor_resolves __________________________
+[gw7] darwin -- Python 3.14.7 /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python
+
+    def test_every_anchor_resolves() -> None:
+>       assert main() == 0
+E       assert 1 == 0
+E        +  where 1 = main()
+
+tests/test_control_anchors.py:27: AssertionError
+----------------------------- Captured stdout call -----------------------------
+1 of 163 negative controls cannot fire:
+  synopsis handoff - W10 selected entry is replaced by a deferred candidate: anchor appears 0 times in ../SYNOPSIS.md, expected 1
+      first line of the anchor: **Selected next entry:** `think-yrw1`
+
+  A control whose anchor does not match is not testing anything.
+___ test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots ____
+[gw5] darwin -- Python 3.14.7 /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python
+
+    def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() -> None:
+        assert ROOT / "atlas/prospective/rendering" in PRUNE
+        assert ROOT / "witnesses/prospective" in PRUNE
+        assert ROOT / "atlas/known-best/rendering" in PRUNE
+        assert ROOT / "atlas/known-best/contact-overlays" in PRUNE
+        assert (
+            ROOT
+            / "campaign/series/series-000-smoke-and-calibration/results"
+            / "bc-200-state-191-50.json"
+            in PRUNE
+        )
+        assert ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025" in PRUNE
+>       assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+E       assert 106107961 < 100663296
+E        +  where 106107961 = snapshot_source_bytes()
+
+tests/test_negative_controls.py:275: AssertionError
+________ test_synopsis_snapshot_is_clean_before_its_registered_mutation ________
+[gw5] darwin -- Python 3.14.7 /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python
+
+control_snapshot = (PosixPath('/private/var/folders/ms/fjn8hgyd24d3jv6w65dw37hh0000gp/T/pytest-of-levy/pytest-1073/popen-gw5/control-snap...rgeability.yml'), PosixPath('.github/workflows/deep-gate.yml'), PosixPath('.github/workflows/packing-validation.yml')})
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x5e17bed9460>
+
+    def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
+        control_snapshot: tuple[Path, set[Path]], monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        # Main measured this call at 14.44s against the 12s quick-lane ceiling. The snapshot
+        # and its selection are shared setup; the real clean check, mutation and restoration
+        # remain measured here, with no relaxed ceiling or slow-lane deferral.
+        tree, selected_workflows = control_snapshot
+        work = tree / HERE
+        synopsis = tree / "SYNOPSIS.md"
+        original = synopsis.read_bytes()
+        environment = {
+            **os.environ,
+            "PYTHONPATH": os.pathsep.join((str(work / "src"), str(work))),
+        }
+        baseline = subprocess.run(
+            [sys.executable, "-m", "devtools.check_synopsis"],
+            cwd=work,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+>       assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+E       AssertionError: SYNOPSIS.md has drifted from the artifacts:
+E           SYNOPSIS.md: exp-133 shown as 'rejected', artifact says 'unresolved'
+E           SYNOPSIS.md: H-128 shown as 'refuted', ledger says 'unresolved'
+E           SYNOPSIS.md: H-129 shown as 'open', ledger says 'blocked'
+E           SYNOPSIS.md: H-134 shown as 'needs review', ledger says 'confirmed'
+E           SYNOPSIS.md: hypothesis-status aggregate does not match campaign/ledger.md; expected 'The generated ledger currently derives seventeen confirmed hypotheses, thirteen refuted hypotheses, one open hypothesis, twenty-five open questions, and forty-four blocked hypotheses.'
+E           agenda-030-parallel-structural-lanes-at-n11.md: selected bead think-qfog disagrees with latest terminal session bead think-yrw1
+E           SYNOPSIS.md: Current Handoff must contain exactly one canonical Selected next entry marker for think-yrw1; found []
+E           SYNOPSIS.md: Current Handoff does not name BC-304 bead think-yrw1
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python', '-m', 'devtools.check_syn...ted next entry marker for think-yrw1; found []\n  SYNOPSIS.md: Current Handoff does not name BC-304 bead think-yrw1\n").returncode
+
+tests/test_negative_controls.py:398: AssertionError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'fontTools.misc.bezierTools', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================ slowest observed cpu durations (lower bounds) =================
+Incomplete descendant accounting; do not use for total CPU thresholds.
+(12809 CPU lower bounds < 6s or beyond --cpu-durations hidden.)
+13.64s cpu-lower-bound setup    tests/test_n5_local_rigidity.py::test_the_determination_never_claims_isolation
+============================== slowest durations ===============================
+32.59s setup    tests/test_n5_local_rigidity.py::test_the_determination_never_claims_isolation
+
+(12809 durations < 12s hidden.)
+=========================== short test summary info ============================
+FAILED tests/test_control_anchors.py::test_every_anchor_resolves - assert 1 == 0
+FAILED tests/test_negative_controls.py::test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots
+FAILED tests/test_negative_controls.py::test_synopsis_snapshot_is_clean_before_its_registered_mutation
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+3 failed, 4267 passed, 8 warnings, 8 errors in 137.18s (0:02:17)
+command exited 1: /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python -m pytest -q tests -m slow and not exhaustive_exact -n 8 --durations=0 --durations-min=0
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [ 75%]
+.......................                                                  [100%]
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'fontTools.misc.bezierTools', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================== slowest durations ===============================
+96.56s call     tests/test_promote_exact_phase1.py::test_promote_exact_phase1
+85.05s call     tests/test_review_trump_local_theorem.py::test_full_retained_review_and_three_falsifying_controls
+62.70s call     tests/test_promote_exact_lp.py::test_promote_exact_lp
+59.15s call     tests/test_exact_construction_price.py::test_the_record_round_trips
+56.16s call     tests/test_contact_assembly_labels.py::test_every_rich_d4_and_relabeling_image_has_one_label
+48.66s call     tests/test_promote_elimination.py::test_promote_elimination
+47.13s call     tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+46.55s call     tests/test_promote_solve.py::test_promote_solve
+45.79s call     tests/test_fractional_sweep_integer.py::test_the_n17_certificate_verifies_in_the_fast_tier_now
+45.42s call     tests/test_render_colors.py::test_right_angles_and_diagonals_are_pinned_across_the_atlas
+43.97s setup    tests/test_n5_local_rigidity.py::test_every_control_rejects
+42.55s call     tests/test_schema_validator_equivalence.py::test_mutations_actually_break_something
+36.96s call     tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+36.14s call     tests/test_minus_w_bridge.py::test_the_bridge_agrees
+35.93s call     tests/test_promote_system.py::test_promote_system
+35.57s call     tests/test_fractional_sweep_integer.py::test_the_parallel_direction_loop_matches_the_serial_one
+34.77s call     tests/test_promote_system_degree.py::test_promote_system_degree
+32.99s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[translation-escape-screen.json]
+31.95s call     tests/test_n54_source_contract.py::test_author_cli_is_stdout_only_and_identical_under_optimization
+26.81s call     tests/test_n5_local_rigidity.py::test_every_control_rejects
+24.31s call     tests/test_n54_source_contract_independent.py::test_author_and_verifier_are_normal_optimized_byte_identical
+23.43s call     tests/test_n54_source_contract.py::test_synthetic_fixture_evaluates_exactly_in_assignment_order
+22.50s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-partitions.json]
+20.47s call     tests/test_fractional_interval.py::test_the_burns_control_stalls_the_interval_route_only_at_direction_zero
+20.40s call     tests/test_audit_n54_source_formula.py::test_n54_source_formula_cli_agrees_under_optimization
+16.13s call     tests/test_fractional_certificate.py::test_the_burns_control_is_accepted_at_a_least_mass_above_one
+16.13s call     tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees
+16.06s call     tests/test_audit_n54_source_formula.py::test_changed_minimal_polynomial_is_refused
+13.81s call     tests/test_green17.py::test_interval_audit_certifies_an_interior_side
+12.92s setup    tests/test_n54_source_contract_independent.py::test_author_and_verifier_are_normal_optimized_byte_identical
+12.45s call     tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+11.02s call     tests/test_n40_rigidity.py::test_only_tight_rows_enter_the_obstruction
+11.02s call     tests/test_n54_source_contract.py::test_field_receipt_digest_drift_is_refused
+10.78s call     tests/test_fractional_certificate.py::test_containment_at_exactly_one_is_refused
+10.02s call     tests/test_check_declared_bounds.py::test_n68_depth_bound_is_named_by_its_refusal_test
+9.98s call     tests/test_motion_lab.py::test_motion_lab_is_environment_independent
+9.79s call     tests/test_motion_lab.py::test_rendered_lab_is_deterministic_retained_and_offline
+9.57s call     tests/test_n40_rigidity.py::test_the_witness_is_a_motion_checked_from_the_pose
+8.95s call     tests/test_n54_source_contract.py::test_audited_receipt_binds_exact_field_builtins_and_digest
+8.34s call     tests/test_n40_rigidity.py::test_the_witness_turns_every_block_square_at_the_same_rate
+7.58s call     tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung
+7.55s call     tests/test_n54_source_contract.py::test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts
+7.17s call     tests/test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field
+6.98s call     tests/test_gobel_family.py::test_the_record_round_trips
+6.81s call     tests/test_n5_local_rigidity.py::test_a_declared_count_disagreement_blocks_readiness
+6.55s call     tests/test_n54_source_contract.py::test_canonical_json_round_trip_and_float_refusal
+6.54s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_supports_direct_stable_identity_lookup
+6.50s call     tests/test_n54_source_contract.py::test_exact_evaluation_refuses_an_algebraically_zero_denominator
+6.09s call     tests/test_fractional_interval.py::test_both_n12_certificates_certify_every_direction_of_the_sub_net
+5.98s call     tests/test_trump_isolation_radius.py::test_gap_and_symmetry_certificates_hold
+5.96s call     tests/test_fractional_interval.py::test_box_bounds_bracket_the_exact_mass_at_sampled_centres
+5.64s call     tests/test_bentz46.py::test_certificate_builds_and_charges_every_point
+5.37s call     tests/test_n40_rigidity.py::test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted
+5.23s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte
+5.21s call     tests/test_bentz46.py::test_certificate_refuses_a_displaced_point
+4.86s call     tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-7]
+4.72s call     tests/test_gobel_family.py::test_the_new_sizes_are_built_here_and_not_merely_asserted
+4.63s call     tests/test_motion_lab_interactive.py::test_service_serves_live_and_exact_profiles_with_scenario_refresh
+4.58s call     tests/test_fractional_certificate.py::test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover
+4.50s call     tests/test_n40_rigidity.py::test_the_null_space_is_what_makes_the_candidate_exact
+4.06s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_cross_field_mutations_fail
+4.05s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_show_is_read_only_and_explicitly_abstract
+3.52s call     tests/test_n40_rigidity.py::test_the_contact_model_is_measured_not_assumed
+3.42s call     tests/test_campaign_runner_trust_boundary.py::test_each_cell_gets_its_own_share_of_the_timebox
+3.31s setup    tests/test_motion_lab.py::test_rendered_lab_is_deterministic_retained_and_offline
+3.21s call     tests/test_n17_weighted_certificate_successor.py::test_real_ancestry_verifies_without_evaluating_a_direction
+3.01s call     tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-5]
+2.35s call     tests/test_validation_cli.py::test_run_timeout_terminates_child_and_reports_captured_output
+2.30s call     tests/test_validation_cli.py::test_run_selected_interrupt_stops_detached_production_process
+1.92s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[composite-figure.json]
+1.89s call     tests/test_verified_upper_bound_contract.py::test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports
+1.29s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-scaffolds-size5.json]
+0.99s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability-101-324.json]
+0.92s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json0]
+0.36s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[document-map.yaml]
+0.34s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[defects.yaml]
+0.29s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-evidence-profile.json]
+0.29s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[session-close-report.yaml]
+0.24s setup    tests/test_campaign_runner_trust_boundary.py::test_each_cell_gets_its_own_share_of_the_timebox
+0.22s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-structures.json]
+0.13s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-full-cell-control.json]
+0.09s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[evidence.yaml]
+0.05s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[schadt-n029-2025-decimal.yaml]
+0.04s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-assembly-grammar.yaml]
+0.03s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[codex-task-tree-session-071.yaml]
+0.03s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[search-strategies.yaml]
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[results.yaml]
+0.02s setup    tests/test_n5_local_rigidity.py::test_a_declared_count_disagreement_blocks_readiness
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[codex-task-tree-session-071.yaml]
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-coverage.yaml]
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-009.md]
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[covering-values.yaml]
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[agent-aa151b341a1282a9c.yaml]
+0.01s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json0]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[overlap-negative-control.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-001.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-enumeration-pricing.json]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[asymptotic-waste-bounds.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[rotated-n001-sqrt2.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-overlays.json]
+0.01s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[results.yaml]
+0.01s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-full-cell-control.json]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json1]
+0.01s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[defects.yaml]
+0.01s setup    tests/test_green17.py::test_interval_audit_certifies_an_interior_side
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[session-close-report.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[asymptotic-waste-bounds.yaml]
+0.00s teardown tests/test_fractional_certificate.py::test_the_burns_control_is_accepted_at_a_least_mass_above_one
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-scaffolds-size5.json]
+0.00s setup    tests/test_validation_cli.py::test_run_timeout_terminates_child_and_reports_captured_output
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[covering-values.yaml]
+0.00s setup    tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-partitions.json]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-structures.json]
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_show_is_read_only_and_explicitly_abstract
+0.00s teardown tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-009.md]
+0.00s setup    tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability-101-324.json]
+0.00s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_show_is_read_only_and_explicitly_abstract
+0.00s setup    tests/test_validation_cli.py::test_run_selected_interrupt_stops_detached_production_process
+0.00s teardown tests/test_fractional_interval.py::test_the_burns_control_stalls_the_interval_route_only_at_direction_zero
+0.00s setup    tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-5]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[schadt-n029-2025-decimal.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-overlays.json]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json1]
+0.00s setup    tests/test_promote_solve.py::test_promote_solve
+0.00s teardown tests/test_motion_lab.py::test_rendered_lab_is_deterministic_retained_and_offline
+0.00s setup    tests/test_motion_lab.py::test_motion_lab_is_environment_independent
+0.00s teardown tests/test_validation_cli.py::test_run_timeout_terminates_child_and_reports_captured_output
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[rotated-n001-sqrt2.yaml]
+0.00s setup    tests/test_fractional_interval.py::test_box_bounds_bracket_the_exact_mass_at_sampled_centres
+0.00s teardown tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+0.00s teardown tests/test_contact_assembly_labels.py::test_every_rich_d4_and_relabeling_image_has_one_label
+0.00s teardown tests/test_exact_construction_price.py::test_the_record_round_trips
+0.00s setup    tests/test_render_colors.py::test_right_angles_and_diagonals_are_pinned_across_the_atlas
+0.00s setup    tests/test_promote_elimination.py::test_promote_elimination
+0.00s setup    tests/test_promote_system_degree.py::test_promote_system_degree
+0.00s teardown tests/test_motion_lab.py::test_motion_lab_is_environment_independent
+0.00s teardown tests/test_bentz46.py::test_certificate_refuses_a_displaced_point
+0.00s setup    tests/test_n54_source_contract.py::test_field_receipt_digest_drift_is_refused
+0.00s setup    tests/test_fractional_interval.py::test_the_burns_control_stalls_the_interval_route_only_at_direction_zero
+0.00s teardown tests/test_audit_n54_source_formula.py::test_changed_minimal_polynomial_is_refused
+0.00s teardown tests/test_n54_source_contract.py::test_author_cli_is_stdout_only_and_identical_under_optimization
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-evidence-profile.json]
+0.00s setup    tests/test_n40_rigidity.py::test_the_witness_is_a_motion_checked_from_the_pose
+0.00s setup    tests/test_minus_w_bridge.py::test_the_bridge_agrees
+0.00s setup    tests/test_n40_rigidity.py::test_only_tight_rows_enter_the_obstruction
+0.00s setup    tests/test_promote_exact_phase1.py::test_promote_exact_phase1
+0.00s teardown tests/test_minus_w_bridge.py::test_the_bridge_agrees
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[document-map.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[composite-figure.json]
+0.00s setup    tests/test_bentz46.py::test_certificate_refuses_a_displaced_point
+0.00s teardown tests/test_audit_n54_source_formula.py::test_n54_source_formula_cli_agrees_under_optimization
+0.00s teardown tests/test_validation_cli.py::test_run_selected_interrupt_stops_detached_production_process
+0.00s setup    tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+0.00s setup    tests/test_motion_lab_interactive.py::test_service_serves_live_and_exact_profiles_with_scenario_refresh
+0.00s teardown tests/test_promote_exact_lp.py::test_promote_exact_lp
+0.00s teardown tests/test_review_trump_local_theorem.py::test_full_retained_review_and_three_falsifying_controls
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[evidence.yaml]
+0.00s teardown tests/test_promote_solve.py::test_promote_solve
+0.00s teardown tests/test_fractional_sweep_integer.py::test_the_parallel_direction_loop_matches_the_serial_one
+0.00s setup    tests/test_bentz46.py::test_certificate_builds_and_charges_every_point
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-evidence-profile.json]
+0.00s teardown tests/test_fractional_certificate.py::test_containment_at_exactly_one_is_refused
+0.00s setup    tests/test_promote_exact_lp.py::test_promote_exact_lp
+0.00s teardown tests/test_promote_elimination.py::test_promote_elimination
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[agent-aa151b341a1282a9c.yaml]
+0.00s setup    tests/test_n54_source_contract.py::test_canonical_json_round_trip_and_float_refusal
+0.00s teardown tests/test_n54_source_contract.py::test_audited_receipt_binds_exact_field_builtins_and_digest
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-coverage.yaml]
+0.00s setup    tests/test_n54_source_contract.py::test_synthetic_fixture_evaluates_exactly_in_assignment_order
+0.00s setup    tests/test_n40_rigidity.py::test_the_contact_model_is_measured_not_assumed
+0.00s setup    tests/test_verified_upper_bound_contract.py::test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-full-cell-control.json]
+0.00s setup    tests/test_promote_system.py::test_promote_system
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-001.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-enumeration-pricing.json]
+0.00s setup    tests/test_fractional_certificate.py::test_containment_at_exactly_one_is_refused
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-assembly-grammar.yaml]
+0.00s teardown tests/test_promote_system.py::test_promote_system
+0.00s setup    tests/test_gobel_family.py::test_the_new_sizes_are_built_here_and_not_merely_asserted
+0.00s setup    tests/test_fractional_certificate.py::test_the_burns_control_is_accepted_at_a_least_mass_above_one
+0.00s setup    tests/test_exact_construction_price.py::test_the_record_round_trips
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[translation-escape-screen.json]
+0.00s setup    tests/test_gobel_family.py::test_the_record_round_trips
+0.00s setup    tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[overlap-negative-control.yaml]
+0.00s setup    tests/test_fractional_sweep_integer.py::test_the_parallel_direction_loop_matches_the_serial_one
+0.00s setup    tests/test_review_trump_local_theorem.py::test_full_retained_review_and_three_falsifying_controls
+0.00s setup    tests/test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field
+0.00s setup    tests/test_fractional_certificate.py::test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover
+0.00s setup    tests/test_check_declared_bounds.py::test_n68_depth_bound_is_named_by_its_refusal_test
+0.00s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_cross_field_mutations_fail
+0.00s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte
+0.00s setup    tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-7]
+0.00s setup    tests/test_n54_source_contract.py::test_exact_evaluation_refuses_an_algebraically_zero_denominator
+0.00s setup    tests/test_n54_source_contract.py::test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts
+0.00s setup    tests/test_n54_source_contract.py::test_author_cli_is_stdout_only_and_identical_under_optimization
+0.00s setup    tests/test_audit_n54_source_formula.py::test_n54_source_formula_cli_agrees_under_optimization
+0.00s setup    tests/test_audit_n54_source_formula.py::test_changed_minimal_polynomial_is_refused
+0.00s teardown tests/test_campaign_runner_trust_boundary.py::test_each_cell_gets_its_own_share_of_the_timebox
+0.00s teardown tests/test_n54_source_contract.py::test_synthetic_fixture_evaluates_exactly_in_assignment_order
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[search-strategies.yaml]
+0.00s setup    tests/test_contact_assembly_labels.py::test_every_rich_d4_and_relabeling_image_has_one_label
+0.00s setup    tests/test_fractional_interval.py::test_both_n12_certificates_certify_every_direction_of_the_sub_net
+0.00s teardown tests/test_fractional_sweep_integer.py::test_the_n17_certificate_verifies_in_the_fast_tier_now
+0.00s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_supports_direct_stable_identity_lookup
+0.00s setup    tests/test_n54_source_contract.py::test_audited_receipt_binds_exact_field_builtins_and_digest
+0.00s setup    tests/test_trump_isolation_radius.py::test_gap_and_symmetry_certificates_hold
+0.00s teardown tests/test_n54_source_contract_independent.py::test_author_and_verifier_are_normal_optimized_byte_identical
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json1]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_mutations_actually_break_something
+0.00s teardown tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+0.00s teardown tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees
+0.00s teardown tests/test_bentz46.py::test_certificate_builds_and_charges_every_point
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[translation-escape-screen.json]
+0.00s teardown tests/test_verified_upper_bound_contract.py::test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports
+0.00s teardown tests/test_promote_exact_phase1.py::test_promote_exact_phase1
+0.00s teardown tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung
+0.00s teardown tests/test_n5_local_rigidity.py::test_every_control_rejects
+0.00s teardown tests/test_n40_rigidity.py::test_only_tight_rows_enter_the_obstruction
+0.00s setup    tests/test_n17_weighted_certificate_successor.py::test_real_ancestry_verifies_without_evaluating_a_direction
+0.00s teardown tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-5]
+0.00s teardown tests/test_fractional_certificate.py::test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover
+0.00s setup    tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+0.00s setup    tests/test_n40_rigidity.py::test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted
+0.00s teardown tests/test_trump_isolation_radius.py::test_gap_and_symmetry_certificates_hold
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-scaffolds-size5.json]
+0.00s setup    tests/test_n40_rigidity.py::test_the_null_space_is_what_makes_the_candidate_exact
+0.00s teardown tests/test_n17_weighted_certificate_successor.py::test_real_ancestry_verifies_without_evaluating_a_direction
+0.00s teardown tests/test_fractional_interval.py::test_both_n12_certificates_certify_every_direction_of_the_sub_net
+0.00s setup    tests/test_n40_rigidity.py::test_the_witness_turns_every_block_square_at_the_same_rate
+0.00s teardown tests/test_n40_rigidity.py::test_the_contact_model_is_measured_not_assumed
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[document-map.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability-101-324.json]
+0.00s setup    tests/test_fractional_sweep_integer.py::test_the_n17_certificate_verifies_in_the_fast_tier_now
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-009.md]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-assembly-grammar.yaml]
+0.00s teardown tests/test_n5_local_rigidity.py::test_a_declared_count_disagreement_blocks_readiness
+0.00s teardown tests/test_n54_source_contract.py::test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_supports_direct_stable_identity_lookup
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[codex-task-tree-session-071.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_mutations_actually_break_something
+0.00s teardown tests/test_motion_lab_interactive.py::test_service_serves_live_and_exact_profiles_with_scenario_refresh
+0.00s teardown tests/test_promote_system_degree.py::test_promote_system_degree
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-partitions.json]
+0.00s teardown tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-7]
+0.00s teardown tests/test_gobel_family.py::test_the_record_round_trips
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[session-close-report.yaml]
+0.00s teardown tests/test_fractional_interval.py::test_box_bounds_bracket_the_exact_mass_at_sampled_centres
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-overlays.json]
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte
+0.00s teardown tests/test_n54_source_contract.py::test_field_receipt_digest_drift_is_refused
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json0]
+0.00s teardown tests/test_n54_source_contract.py::test_exact_evaluation_refuses_an_algebraically_zero_denominator
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-enumeration-pricing.json]
+0.00s teardown tests/test_n40_rigidity.py::test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[composite-figure.json]
+0.00s teardown tests/test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[asymptotic-waste-bounds.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-001.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[overlap-negative-control.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[evidence.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[defects.yaml]
+0.00s teardown tests/test_n54_source_contract.py::test_canonical_json_round_trip_and_float_refusal
+0.00s teardown tests/test_green17.py::test_interval_audit_certifies_an_interior_side
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-coverage.yaml]
+0.00s teardown tests/test_check_declared_bounds.py::test_n68_depth_bound_is_named_by_its_refusal_test
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-structures.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[search-strategies.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[covering-values.yaml]
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_cross_field_mutations_fail
+0.00s teardown tests/test_n40_rigidity.py::test_the_null_space_is_what_makes_the_candidate_exact
+0.00s teardown tests/test_n40_rigidity.py::test_the_witness_turns_every_block_square_at_the_same_rate
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[schadt-n029-2025-decimal.yaml]
+0.00s teardown tests/test_render_colors.py::test_right_angles_and_diagonals_are_pinned_across_the_atlas
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[agent-aa151b341a1282a9c.yaml]
+0.00s teardown tests/test_n40_rigidity.py::test_the_witness_is_a_motion_checked_from_the_pose
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[results.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[rotated-n001-sqrt2.yaml]
+0.00s teardown tests/test_gobel_family.py::test_the_new_sizes_are_built_here_and_not_merely_asserted
+=========================== short test summary info ============================
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+95 passed, 8 warnings, 8 errors in 255.45s (0:04:15)
+command exited 2: /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python -m pytest -q tests -m exhaustive_exact --durations=0 --durations-min=0
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_known_best_atlas.py ________________
+tests/test_known_best_atlas.py:14: in <module>
+    import cairosvg
+.venv/lib/python3.14t/site-packages/cairosvg/__init__.py:25: in <module>
+    from . import surface  # noqa isort:skip
+    ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14t/site-packages/cairosvg/surface.py:9: in <module>
+    import cairocffi as cairo
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:60: in <module>
+    cairo = dlopen(
+.venv/lib/python3.14t/site-packages/cairocffi/__init__.py:57: in dlopen
+    raise OSError(error_message)  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   OSError: no library called "cairo-2" was found
+E   no library called "cairo" was found
+E   no library called "libcairo-2" was found
+E   cannot load library 'libcairo.so.2': dlopen(libcairo.so.2, 0x0002): tried: 'libcairo.so.2' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.so.2' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.so.2' (no such file), '/usr/lib/libcairo.so.2' (no such file, not in dyld cache), 'libcairo.so.2' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.so.2'
+E   cannot load library 'libcairo.2.dylib': dlopen(libcairo.2.dylib, 0x0002): tried: 'libcairo.2.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo.2.dylib' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo.2.dylib' (no such file), '/usr/lib/libcairo.2.dylib' (no such file, not in dyld cache), 'libcairo.2.dylib' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo.2.dylib'
+E   cannot load library 'libcairo-2.dll': dlopen(libcairo-2.dll, 0x0002): tried: 'libcairo-2.dll' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibcairo-2.dll' (no such file), '/Users/levy/.local/share/uv/python/cpython-3.14.7+freethreaded-macos-aarch64-none/lib/libcairo-2.dll' (no such file), '/usr/lib/libcairo-2.dll' (no such file, not in dyld cache), 'libcairo-2.dll' (no such file).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'libcairo-2.dll'
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'fontTools.misc.bezierTools', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_known_best_atlas.py - OSError: no library called "cairo-2" w...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+4365 deselected, 1 warning, 1 error in 16.89s
+command exited 1: /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python -m devtools.check_documentation
+FAIL document map covers paths more than once: ['packing/campaign/agent-sessions/session-110-pr127-handoff-review.md']
+command exited 1: /Users/levy/.codex/worktrees/88e2/squares/packing/.venv/bin/python -m devtools.check_control_anchors
+1 of 163 negative controls cannot fire:
+  synopsis handoff - W10 selected entry is replaced by a deferred candidate: anchor appears 0 times in ../SYNOPSIS.md, expected 1
+      first line of the anchor: **Selected next entry:** `think-yrw1`
+
+  A control whose anchor does not match is not testing anything.
+
+== building sqsearch ==
+built sqsearch/target/release/sqsearch
+
+== soundness perimeter ==
+  22 configurations from every emitting component pass sqpack at tol 1e-10
+
+== lint floor (ruff) ==
+All checks passed!
+1456 files already formatted
+
+== type floor (basedpyright) ==
+0 errors, 0 warnings, 0 notes
+
+== basin atlas ==
+  ok    a real quench converges and feeds the store  [side 2.145353719496 (>= proved s(4) = 2), converged=True]
+  ok    re-offering a known endpoint key raises its frequency, never adds a row  [6 rows, 12 proposals]
+  ok    adding never removes an existing basin  [6 unique identities in 6 rows]
+  ok    the written file validates against the declared contract  [validates]
+  ok    save then load is the identity  [12 proposals, 6 basins]
+  ok    merging a store with itself doubles frequencies and adds no rows  [6 rows, 24 total frequency]
+  ok    the store counts non-convergence rather than hiding it  [5/6 converged. The strict/deep golden path carries the real census-scale regression; what is enforced HERE is that a false convergence field is counted (D-030)]
+
+  store: 6 endpoint rows from 6 offered; the one real quench converged at 2.145353719496. Deep golden regeneration carries the real census-scale check.
+ATLAS CHECKS PASSED
+
+== basin event record and replay ==
+BASIN EVENT SELFTEST PASSED
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
+REPLAYED 1 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
+REPLAYED 3 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
+REPLAYED 3 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
+REPLAYED 1 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
+REPLAYED 4 basin events from campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
+
+== historical regressions ==
+  8 regression checks pass (D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-164, D-168, D-169, D-171, D-199)
+
+== small-n exact models and local geometry ==
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.01075,
+  "n": 3,
+  "record_replayed": true,
+  "schema_version": 1,
+  "selftests": {
+    "collapsed_label_components_are_rejected": true,
+    "constant_closed_family_certificate_is_rejected": true,
+    "deleted_family_edge_is_rejected": true,
+    "duplicate_or_missing_cells_are_rejected": true,
+    "labelled_and_unlabelled_source_scopes_are_separate": true,
+    "lowered_slider_overlap_is_rejected": true,
+    "nonaxis_center_boundary_equality_is_rejected": true,
+    "packing_glyphs_use_pure_black_boundaries": true,
+    "stale_svg_is_rejected": true,
+    "unreduced_display_parameter_is_rejected": true
+  },
+  "svg_replayed": true
+}
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.112306,
+  "n": 4,
+  "record_replayed": true,
+  "schema_version": 1,
+  "selftests": {
+    "branch_alias_multiplicity_is_checked": true,
+    "combined_stabilizer_is_full_D4": true,
+    "missing_grid_state_is_rejected": true,
+    "positive_dimensional_branch_is_rejected": true,
+    "shifted_grid_overlap_is_rejected": true,
+    "unreported_source_f_vector_remains_null": true
+  },
+  "svg_replayed": false
+}
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.139238,
+  "floating_unresolved": 16,
+  "n3_component_count": 1,
+  "n3_contact_strata": 2,
+  "n4_component_count": 1,
+  "record_replayed": true,
+  "record_written": false,
+  "schema_version": 1,
+  "selftests": {
+    "contact_keys_as_components": true,
+    "f64_event_forced_assigned": true,
+    "geometric_keys_as_components": true,
+    "labelled_scope_as_quotient": true,
+    "n4_labelled_states_as_components": true,
+    "n5_event_forced_assigned": true,
+    "samples_as_components": true
+  }
+}
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.039289,
+  "parameter": "u in [0, 3*sqrt(2)/2 - 2]",
+  "record_replayed": true,
+  "record_written": false,
+  "selftests": {
+    "disconnected_key_labels_do_not_block_exact_path": true,
+    "invalid_endpoint_is_rejected": true,
+    "missing_path_certificate_is_rejected": true,
+    "shared_contact_key_alone_is_not_the_certificate": true,
+    "wrong_source_D4_action_is_rejected": true
+  },
+  "strata": [
+    {
+      "active_row_count": 11,
+      "linear_face_nullity": 0,
+      "name": "A",
+      "rank_with_fixed_side": 11
+    },
+    {
+      "active_row_count": 10,
+      "linear_face_nullity": 1,
+      "name": "interior",
+      "rank_with_fixed_side": 10
+    },
+    {
+      "active_row_count": 11,
+      "linear_face_nullity": 0,
+      "name": "B",
+      "rank_with_fixed_side": 11
+    }
+  ]
+}
+{
+  "boundary_fixtures": 4,
+  "determination_outcome": "criterion_met",
+  "dimension_lower_bound": 2,
+  "elapsed_seconds": 0.067438,
+  "record_replayed": true,
+  "record_written": false,
+  "selftests": {
+    "excessive_angle_is_rejected": true,
+    "signed_instead_of_absolute_support_is_rejected": true,
+    "uniform_dual_drift_is_rejected": true,
+    "unshrunk_left_endpoint_is_rejected": true
+  }
+}
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.069468,
+  "nonlinear_continuation": "unresolved",
+  "owner_axis_branches_per_stratum": 2,
+  "record_replayed": true,
+  "record_written": false,
+  "selftests": {
+    "first_order_evidence_cannot_claim_continuation": true,
+    "missing_owner_axis_branch_is_rejected": true,
+    "missing_tied_support_row_is_rejected": true,
+    "non_sheet_direction_has_diagonal_angle_motion": true,
+    "stale_endpoint_contact_row_is_rejected": true,
+    "wrong_angle_sign_violates_an_active_row": true
+  },
+  "strata": 3,
+  "tied_support_rows_per_owner_branch": 2
+}
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.014149,
+  "obstructed_owner_branches": 2,
+  "record_replayed": true,
+  "record_written": false,
+  "selftests": {
+    "component_isolation_overclaim_is_rejected": true,
+    "missing_owner_branch_is_rejected": true,
+    "missing_pair_2_4_row_is_rejected": true,
+    "nonpositive_owner4_coefficient_is_rejected": true,
+    "nonpositive_relative_margin_is_rejected": true,
+    "wrong_common_angle_direction_is_rejected": true
+  },
+  "strata": 3
+}
+{"controls": {"dropped_transverse_generator_rejected": true, "duplicated_owner_record_rejected": true, "lineality_separates_from_pointed_generator": true, "minus_W_claim_rejected": true, "missing_owner_record_rejected": true, "nonlinear_lift_claim_rejected": true, "orthant_has_declared_rays": true, "rigid_cone_has_no_pointed_ray": true, "sheet_as_transverse_rejected": true, "transverse_as_sheet_rejected": true}, "elapsed_seconds": 0.553035, "matrix_count": 6, "record_replayed": true, "record_written": false}
+{
+  "affine_dimension": 5,
+  "controls": {
+    "R6_without_dx4_rejected": true,
+    "added_B_slide_correction_rejected": true,
+    "false_zero_axis_claim_rejected": true,
+    "missing_owner_branch_rejected": true,
+    "omitted_A_slide_correction_rejected": true,
+    "overlong_interior_path_rejected": true,
+    "perturbed_LP_dual_coefficient_rejected": true,
+    "perturbed_owner3_stress_multiplier_rejected": true,
+    "removed_nonredundant_inequality_rejected": true,
+    "scope_promotion_rejected": true
+  },
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 2.333084,
+  "path_count": 12,
+  "record_replayed": true,
+  "record_written": false
+}
+{"status": "PASS", "cases": 6, "controls": 20}
+
+== deterministic SVG rendering ==
+SVG RENDERING CHECKS PASSED: 88 controls
+
+== known-best atlas records and sample ==
+known-best atlas sample check passed: 36 of 324 cases rebuilt (every 9th from n=1), 324 manifest entries, sources, links, and 2 composites
+composite figure record check passed: matches the frontier and catalogue
+composite PDF check passed: known-best-1-100.pdf matches the current known-best-1-100.svg
+composite PDF check passed: known-best-1-324.pdf matches the current known-best-1-324.svg
+known-best contact overlay check passed: 5 house-rendered calibration strata
+known-best chunk evidence profile check passed: 36 non-grid calibration cases
+contact enumeration pricing check passed in 9.68s
+contact full-cell control check passed
+contact structures check passed
+
+== known-best n=1..324 atlas rebuild ==
+known-best atlas check passed: 324 sources/plans, witnesses, renders, 2 composites, and links
+
+== known-best chunk census ==
+chunk census check passed: components, contacts, and bounded lattice partitions for 100 records
+
+== prospective n=101..324 source map ==
+prospective source map check passed: 224 cases, availability and SVG
+
+== prospective n=101..324 safe seed ==
+prospective atlas seed check passed: 0 witnesses and 0 house renderings retained; retired 2026-09-07, superseded by atlas/known-best/manifest.json
+
+== translation escape screen records and sample ==
+translation escape screen sample check passed: 12 of 324 records replayed (every 27th from n=1); retained screen: 318 records screened, 114 with a square that separates (2714 squares), 296 with a square that translates at all (5323 squares), excluded: n=68, n=69, n=103, n=105, n=110, n=131
+
+== single-square translation escape screen ==
+translation escape screen check passed: 318 records screened, 114 with a square that separates (2714 squares), 296 with a square that translates at all (5323 squares), excluded: n=68, n=69, n=103, n=105, n=110, n=131
+
+== abstract size-five contact-scaffold atlas ==
+contact scaffold atlas check passed: 21 topologies, 11013 abstract orbits
+
+== negative controls ==
+
+== fixed-angle cell is an LP, rebuilt independently ==
+The cell, read off the exact certificate
+  distinct angles:  [0.0, 40.18193729] deg
+  tilted squares:   [6, 7, 8, 9, 10]
+  axis choices:     55 pairs
+  LP shape:         23 variables, 1056 constraints  (= 16 x (11 + 55))
+
+Solving it, without telling the solver where the squares go
+  LP optimum        s = 3.8770835900228136
+  exact value       s = 3.8770835900228140
+  |difference|        = 4.441e-16
+  worst centre error  = 1.110e-15
+
+The cell as a function of its one free angle
+      a (deg)         phi(a)        phi(a) - s*
+    39.000000   3.880706142326   +3.623e-03
+    39.500000   3.879169268857   +2.086e-03
+    40.000000   3.877638844995   +5.553e-04
+    40.100000   3.877333546175   +2.500e-04
+    40.181937   3.877083590023   -4.441e-16  <- Trump
+    40.300000   3.877877577363   +7.940e-04
+    40.500000   3.879235737993   +2.152e-03
+    41.000000   3.882703521786   +5.620e-03
+    42.000000   3.889950463054   +1.287e-02
+
+  argmin over [38, 42] deg, 2001 samples: a = 40.182000 deg
+  Trump's angle:                          a = 40.181937 deg
+
+Shape of the minimum: one-sided slopes
+        h (deg)       left /deg      right /deg     left /rad    right /rad
+          1e-02   3.049623e-03   6.702833e-03      0.1747       0.3840
+          1e-03   3.049503e-03   6.700977e-03      0.1747       0.3839
+          1e-04   3.049491e-03   6.700791e-03      0.1747       0.3839
+          1e-05   3.049490e-03   6.700772e-03      0.1747       0.3839
+
+  ratio right/left = 2.1973
+  H-019 / exp-010, via sqpack.research.quench: 0.1747, 0.3841, ratio 2.198
+
+ALL CHECKS PASSED
+
+== fast behavioral tests ==
+
+== slow behavioral tests ==
+
+== exhaustive exact behavioral tests ==
+
+== bead tree ==
+  2152 beads from tbd-sync
+  report 14 in-progress bead(s) named only by terminal agenda cells
+    think-4o6l  BC-031 complete  Missing resources: acquire the 11 cited sources not in the archive
+    think-ouf0  BC-008 complete, BC-015 complete  Engine anchors: sqsearch must recover s(n) at the trivial n, and budget must be monotone
+    think-1s0h  BC-029 complete, BC-037 complete  Measure terminal flatness and connectivity before defining basin identity
+    think-xzew  BC-007 complete  Baseline and profile the end-to-end research loop
+    think-ykt7  BC-034 complete  Advance the asymptotic waste and finite-transfer lane
+    think-wbra  BC-001 complete, BC-003 complete, BC-004 complete, BC-005 complete, BC-006 complete  Rebuild the small-n basin calibration after typed termination
+    think-75ll  BC-032 complete, BC-045 complete  Bridge numerical witnesses to exact or interval-certified certificates
+    think-kr1d  BC-024 complete  W3: chunk taxonomy census over the imported n <= 100 record corpus
+    think-whwc  BC-027 complete  Run the balanced ten-hour square-packing research agenda
+    think-q6vy  BC-101 complete  Lane A2: certified lower bounds past Nagamochi at the Green Table-2 sizes
+    think-0z9b  BC-102 complete  Lane A3: a bespoke certified lower bound at n = 12 (H-039, with H-006's generator)
+    think-l48p  BC-100 complete  Lane B1: the H-044 verdict -- upgrade the chunk census to the registered partition solver
+    think-614o  BC-201 complete  BC-201: census of near-tight event cells on the retained 381/100 certificate
+    think-6zei  BC-284 complete  Plan the n11 structural-restriction campaign
+  report 72 in-progress bead(s) named by no agenda cell
+    think-r1yl  Efficiency (Infrastructure): trustworthy experimental throughput
+    think-rthe  Profile and reduce negative-control latency
+    think-2w1a  Maintain the review, defect logbook, and bead reconciliation map
+    think-m79h  Define lane-specific agent handoffs and evidence contracts
+    think-ydus  Unattended square-packing research readiness
+    think-1sxv  Define the unattended research agenda and hypothesis portfolio
+    think-9qz0  solve_to_fixed_point decides convergence by exact float equality of the cell tuple
+    think-1q3g  Test angle-active stationarity along the exact n=5 face
+    think-yi6x  Stabilize n4 and n10 fixed-cell acceptance without weakening the screen
+    think-tx0b  Bound packing validation steps and reap timed-out process groups
+    think-3cbq  Run session-010: eight-hour mixed pipeline and mathematical portfolio
+    think-jqkv  Review and land the final upstream packing PR before session-010
+    think-ot1s  Adapt PR 26 to the W7 taxonomy and current validation entry points
+    think-l7hi  Tier packing CI into fast Linux and selected macOS lanes
+    think-23td  Spec: Generalized square-packing Motion Lab
+    think-plcj  Publish the Agenda 016 contract and handoff
+    think-gml2  Reconcile stacked PR 80 with latest PR 78 and complete adversarial s(11) review
+    think-aads  Address the 2026-09-06 Claude Code adversarial review of the explainer
+    think-6ity  A3: state every hypothesis in the Five Conditions box
+    think-9a8f  A5: 'Condition 5 says every event cell carries mass at least 1' lacks the reachability qualifier
+    think-4cn4  A7: 'A wrong linear program will be rejected by the verifier'
+    think-lhds  A8: mu(Q) names a minimum with Q unbound
+    think-e0gc  A9: the sweep-exactness argument skips the finiteness clause
+    think-hzdx  A10: 'the four lines bounding the admissible centers' is not what the verifier adds
+    think-skwu  B2: verify_claim.py surfaces its own self-check failure as a traceback, not a verdict
+    think-tp23  B3: the two standard-library verifiers accept different inputs
+    think-y1w8  B4: certificate.py says the certificate proves s(n) > L; everything else says >=
+    think-zoa8  C1: the method's originators are never named on the page
+    think-sa2c  C3: name the two Condition 5 routes on the page
+    think-32ii  C4: 'one of 21 new results' overcounts what is new
+    think-t6iv  C6: two verifiers, two runtimes, neither named
+    think-c282  C7: state the basis of the novelty claim
+    think-70nc  C8: optional footnote on what the displaced bound rested on
+    think-f3tl  D2: 'Why the Net Has 181 Directions' promises more than the section shows
+    think-2jha  D3: the Markdown edition's credits run together, figure-only captions describe what it cannot show, Figure 3's preposition
+    think-r2m3  D4: Figure 6's caption is opaque about the side it quotes
+    think-o1x1  D5: 'The project proves two bounds' without saying why the weaker one is kept
+    think-ki4x  D6: wording nits
+    think-jgnv  Execute Agenda 024 from T+2 through T+10
+    think-0p1m  Manage the next stronger-certificate research blocks
+    think-v55y  Manage the next structural and high-upside research blocks
+    think-f5t7  Monitor landed upstream changes through the integrated research handoff
+    think-zq2u  Quantify a strict improvement past T-022 by shrinking the certified core
+    think-3ir7  Reconcile credit interruption and checkpoint recovered Agenda 024 work
+    think-xsma  Test a refined-containment core shrink beyond T-022
+    think-rwte  W5 efficiency block: fast feedback and justified validation checkpoints
+    think-jogv  W5: propose reusable testing and CI performance guidance upstream to tbd
+    think-hmtc  Address shortcomings from the published square-packing adversarial review
+    think-0qcu  Complete the finite-support ceiling instrument before its target run
+    think-uutz  Review the Burns n = 17 page against the n = 17 record: coverage audit and integration items
+    think-sz5t  Agenda 027: independent compatibility and restricted-family program
+    think-pxv5  Agenda 028: hybrid-strength comparisons and angular release at n11
+    think-0juv  [epic] Extend the known-best atlas to n = 324 and draw the poster composite
+    think-sge8  Freeze and publish Session094 readiness with immutable validation
+    think-c53m  Session097: resume BC264 kernel pricing and publish an integrated checkpoint
+    think-m2lx  Publish and validate Session097 integrated research checkpoint
+    think-9r58  Adopt kpress's mono face, box list marker and PT Serif quotes in the explainer
+    think-ph9v  Diagnose full-checkpoint historical regressions and test timeouts
+    think-qcmi  Prevent math startup from shifting neighboring text and reduce parameter delay
+    think-yygv  Measure normal math startup and neighboring text movement
+    think-lkjf  Reserve initial math geometry and remove host startup barriers
+    think-tpsi  Show the default certificate figures in the initial published HTML
+    think-06te  Lower list bullets slightly to align with the text crossbars
+    think-2njp  Prevent startup tooling from selecting a serial full push suite
+    think-53a7  Measure parameter startup without pre-paint anchor overhead
+    think-fatc  Preserve prepared math geometry under saved font preferences
+    think-yx4g  Review PR 127 research stack and determine n11 continuation readiness
+    think-nnvo  Keep queued math hidden through bootstrap recovery
+    think-jk1r  Stabilize prepared math line carriers during print font loading
+    think-pbpp  Preserve reading position when the explainer reloads
+    think-zmdp  Restore the intended visual weight of PT Serif math
+    think-3k14  Match inline and display math to the surrounding text size
+  ok  no open bead under a closed parent, no duplicate open siblings
+
+== golden basin maps (proved cases, checked against mathematics) ==
+  7 ladder rungs and 11 stored endpoint rows agree with the proved values, their closed forms and their recorded validity
+  (fast path; `packing-validate --deep` rebuilds and compares the map)
+
+== basin identity ==
+  ok    certificate retains node attributes after individualization  [K3: uniform differs from one marked vertex, invariant under relabelling]
+  ok    invariant under all 8 container symmetries  [1 key pair(s); 8 independent images]
+  ok    invariant under square relabelling  [permutation [3, 6, 1, 5, 9, 8, 0, 4, 2, 7, 10]]
+  ok    invariant under a quarter turn of one square
+  ok    an angle one ULP below pi/2 keys as one at zero  [the quantizer must treat the angle as periodic, not as a line]
+  ok    a perturbed-then-quenched copy keys as the same basin  [same, gap to Trump -2.160e-11]
+  ok    a different arrangement keys differently  [n=11 rigid vs n=16 grid: different]
+  ok    at the same n, the annealer's basin differs from Trump's  [gap +3.733e-02, 4 contacts vs Trump's 14]
+
+  Trump n=11: 14 contacts, angle classes (5, 6), geometric 1ac271c4b727…
+CANONICAL CHECKS PASSED
+
+== soft-schema validation ==
+  324 frontmatter-md artifacts + 566 pure-yaml datasets validate against their declared schemas
+  schemas in use: ['../schemas/claude-efficiency-rollup.schema.yaml', '../schemas/codex-task-tree-delta.schema.yaml', '../witness.schema.yaml', 'asymptotic-waste-bounds.schema.yaml', 'chunk-evidence-profile.schema.yaml', 'chunk-partition-atlas.schema.yaml', 'composite-figure.schema.yaml', 'contact-assembly-grammar.schema.yaml', 'contact-enumeration-pricing.schema.yaml', 'contact-full-cell-control.schema.yaml', 'contact-overlay-gallery.schema.yaml', 'contact-scaffold-atlas.schema.yaml', 'contact-structure.schema.yaml', 'covering-values.schema.yaml', 'defects.schema.yaml', 'document-map.schema.yaml', 'frontier-evidence.schema.yaml', 'known-best-atlas.schema.yaml', 'prospective-atlas-seed.schema.yaml', 'prospective-source-availability.schema.yaml', 'results.schema.yaml', 'schemas/session-close-report.schema.yaml', 'source-availability.schema.yaml', 'source-coverage.schema.yaml', 'square-packing-case.schema.yaml', 'strategy-catalogue.schema.yaml', 'translation-escape-screen.schema.yaml', 'witness.schema.yaml']
+  source coverage reconciled: 324 cases, 6 newer in-horizon reports, 0 tracked beyond horizon
+  catalogue transcription reconciled: 174 entries reparsed, 183 cases matched to a block, 648 printed facts checked, 0 divergences
+
+== derivation (needs sympy) ==
+published minimal polynomial of s
+  irreducible over Q: True
+  real roots: [-1.8530324789725078629, 3.8770835900228141773]
+
+s as a rational function of u: (6u + 4) / (-u^2 + 2u + 1)
+cleared polynomial in u has degree 16
+
+irreducible factors over Q:
+  degree 8: [5, -10, -2, 14, 12, -6, 2, 2, -1]
+      real root -0.5460939816602248825636953
+      real root 0.3657693076046772933885450
+  degree 8: [1373, -4318, -15386, -29302, -16044, -4914, -1414, -186, 31]
+      real root 0.08667571693896588186829271
+      real root 5.784029672526773245921044
+
+minimal polynomial of u = tan(a/2), highest degree first:
+  [5, -10, -2, 14, 12, -6, 2, 2, -1]
+matches cases.trump11.packing.U_MIN_POLY: True
+
+== search engine (sqsearch) ==
+  ok   simplified SAT == naive SAT  (max diff 6.661e-16)
+  ok   grid(4) valid at s=2  (s=2)
+  ok   grid(4) invalid at s=2-1e-9
+  ok   tilted unit square fits sqrt(2)  (0.000e0)
+  ok   and not sqrt(2)-1e-9
+  ok   overlap depth 0.5 -> penalty 0.25  (0.250000)
+  ok   chain reproducible from (seed, chain)  (2.79391704363121596e0)
+  ok   pair-test meter covers ordinary and basin-entry search  (ordinary 54, entry 54, expected 54)
+  ok   distinct chains explore differently  (2.793917044 vs 2.828439597)
+  ok   positive control: recovers s(5)  (2.707123142 vs 2.707106781, gap +1.64e-5)
+  ok   and never beats it
+  ok   reported packing is overlap-free  (overlap 0.00e0)
+  ok   reported overlap is recomputed, not accumulated  (0.00e0 vs stored 0.00e0)
+  ok   reported packing fits its reported side  (2.707123141908 <= 2.707123141908)
+SELFTEST PASSED
+
+== lint floor (rust) ==
+clippy clean at warnings-as-errors; rustfmt clean
+
+== Trump exact branchwise linearized cones ==
+{
+  "branch_count": 128,
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 15.660226,
+  "exact_nonzero_directions": 0,
+  "exact_zero_certificates": 128,
+  "raw_branch_count": 512,
+  "record_replayed": true,
+  "schema_version": 1,
+  "selftests": {
+    "duplicate_branch_records_are_rejected": true,
+    "flexible_cone_has_no_positive_stress": true,
+    "rigid_cone_has_positive_stress": true,
+    "trump_wall_omission_has_exact_nonzero_direction": true,
+    "u_interval_contains_exactly_one_root": true,
+    "u_polynomial_irreducible_over_Q": true,
+    "u_polynomial_squarefree": true
+  },
+  "unresolved_cones": 0
+}
+
+== H-041 Stromquist repaired-cover exact certificate ==
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.465059,
+  "hypothesis": "H-041",
+  "record_replayed": true,
+  "schema_version": 1,
+  "selftests": {
+    "bad_threshold_rejected": true,
+    "d4_misuse_rejected": true,
+    "duplicate_record_node_rejected": true,
+    "duplicated_edge_rejected": true,
+    "duplicated_face_rejected": true,
+    "extraneous_root_rejected": true,
+    "omitted_edge_rejected": true,
+    "omitted_face_rejected": true,
+    "outside_tiling_vertex_rejected": true,
+    "printed_g_080_full_cover_rejected": true,
+    "printed_g_080_threshold_failure_certified": true,
+    "source_path_drift_rejected": true,
+    "weakened_capacity_rejected": true
+  }
+}
+
+== H-010 Stromquist printed-cover exact rejection ==
+{
+  "determination_outcome": "refuted",
+  "elapsed_seconds": 0.308132,
+  "hypothesis_id": "H-010",
+  "minimum_avoidance_margin_point": "G",
+  "record_replayed": true,
+  "record_written": false,
+  "schema_version": 1,
+  "selftests": {
+    "box_side_is_strictly_greater_than_one": true,
+    "exact_witness_avoids_all_printed_points": true,
+    "figure13_K4_not_D4": true,
+    "figure13_escape_contains_A_triple": true,
+    "figure13_strict_escape_avoids_all_ten": true,
+    "left_shift_witness_mutation_is_rejected": true,
+    "lemma4_squared_root_negative_control": true,
+    "standalone_twelve_point_pigeonhole_does_not_close": true,
+    "three_point_capacity_closes_conditionally": true,
+    "two_point_capacity_mutation_does_not_close": true
+  }
+}
+
+== exact verification ==
+known-best n=11 rational control check passed
+limit record agrees with the source certificate: cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json
+replayed 34 of 305 exact rational grid witnesses (every 9th grid case, from the first) and checked basic bound instantiations for 324 cases
+Exact verification of Trump's 11-square packing
+VALID: 11 squares, 55 pairs tested
+  container: 20 corner coordinates exactly on the boundary
+  pairs:     14 separated with zero gap, 41 strictly
+  field:     Q(u), degree 8, u = tan(a/2)
+  interval refinements needed: 0
+  wall time: 0.276 s
+  P(s) == 0 for the published degree-8 polynomial: True
+  s = 3.87708359002281417730789706010096270637645566846
+  published (Ellsworth, 33 digits):
+      3.87708359002281417730789706010096
+VALID: 5 squares, 10 pairs tested
+  container: 16 corner coordinates exactly on the boundary
+  pairs:     4 separated with zero gap, 6 strictly
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+negative control: duplicated square rejected
+VALID: 10 squares, 45 pairs tested
+  container: 24 corner coordinates exactly on the boundary
+  pairs:     11 separated with zero gap, 34 strictly
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+negative control: duplicated square rejected
+VALID: 40 squares, 780 pairs tested
+  container: 48 corner coordinates exactly on the boundary
+  pairs:     98 separated with zero gap, 682 strictly
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+negative control: duplicated square rejected
+agrees with the retained witness to 6.0384286065624924610385364664052401853504307578592229922493134471685500000000000000000000E-31 -- the witness's own rounding
+VALID: 65 squares, 2080 pairs tested
+  container: 64 corner coordinates exactly on the boundary
+  pairs:     172 separated with zero gap, 1908 strictly
+n=65: agrees with the retained witness to 4.80357582031155762981705831045851621816269131268201182181493E-33
+n=65: negative control rejected a duplicated square
+VALID: 89 squares, 3916 pairs tested
+  container: 64 corner coordinates exactly on the boundary
+  pairs:     256 separated with zero gap, 3660 strictly
+n=89: agrees with the retained witness to 3.27499385156381931825611839019650695064115341972086220934925E-33
+n=89: negative control rejected a duplicated square
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+VALID: 82 squares, 3321 pairs tested
+  container: 70 corner coordinates exactly on the boundary
+  pairs:     224 separated with zero gap, 3097 strictly
+n=82: negative control rejected a duplicated square
+n=82: negative control rejected a tenth column square
+n=82: witness side is the exact side, rounded up by 4.80357582031155762981705830E-33
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+VALID: 27 squares, 351 pairs tested
+  container: 40 corner coordinates exactly on the boundary
+  pairs:     54 separated with zero gap, 297 strictly
+n=27: negative controls rejected a duplicate and diamond 6
+n=27: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30
+VALID: 38 squares, 703 pairs tested
+  container: 48 corner coordinates exactly on the boundary
+  pairs:     89 separated with zero gap, 614 strictly
+n=38: negative controls rejected a duplicate and diamond 7
+n=38: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30
+VALID: 52 squares, 1326 pairs tested
+  container: 56 corner coordinates exactly on the boundary
+  pairs:     129 separated with zero gap, 1197 strictly
+n=52: negative controls rejected a duplicate and diamond 9
+n=52: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30
+VALID: 67 squares, 2211 pairs tested
+  container: 64 corner coordinates exactly on the boundary
+  pairs:     178 separated with zero gap, 2033 strictly
+n=67: negative controls rejected a duplicate and diamond 10
+n=67: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30
+VALID: 84 squares, 3486 pairs tested
+  container: 72 corner coordinates exactly on the boundary
+  pairs:     235 separated with zero gap, 3251 strictly
+n=84: negative controls rejected a duplicate and diamond 11
+n=84: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+VALID: 26 squares, 325 pairs tested
+  container: 36 corner coordinates exactly on the boundary
+  pairs:     52 separated with zero gap, 273 strictly
+n=26: negative controls rejected a duplicate and column square 6
+n=26: witness side is the exact side, rounded off by 5.45288214549218693457789023498E-30
+VALID: 85 squares, 3570 pairs tested
+  container: 68 corner coordinates exactly on the boundary
+  pairs:     236 separated with zero gap, 3334 strictly
+n=85: negative controls rejected a duplicate and column square 10
+n=85: witness side is the exact side, rounded off by 9.0576429098437386915578046996E-31
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+VALID: 19 squares, 171 pairs tested
+  container: 28 corner coordinates exactly on the boundary
+  pairs:     31 separated with zero gap, 140 strictly
+n=19: negative control rejected a duplicated square
+VALID: 66 squares, 2145 pairs tested
+  container: 60 corner coordinates exactly on the boundary
+  pairs:     166 separated with zero gap, 1979 strictly
+n=66: negative control rejected a duplicated square
+field preconditions: x^2-2 irreducible; (1,2) isolates its positive root
+VALID: 18 squares, 153 pairs tested
+  container: 28 corner coordinates exactly on the boundary
+  pairs:     26 separated with zero gap, 127 strictly
+n=18: negative control rejected a duplicated square
+VALID: 86 squares, 3655 pairs tested
+  container: 70 corner coordinates exactly on the boundary
+  pairs:     237 separated with zero gap, 3418 strictly
+n=86: negative control rejected a duplicated square
+field preconditions: x^2-7 irreducible; (2,3) isolates its positive root
+VERIFIED
+  id: W-known-best-n011-rational
+  n: 11
+  side: 242317724376425886081743566256327981772437642588608174356625631/62500000000000000000000000000000000000000000000000000000000000
+  method: exact-algebraic
+  pairs tested: 55
+  limits: Verifies witness feasibility and its upper bound, not global optimality.
+VERIFIED: 11 squares, 55 pairs
+  exact side: 242317724376425886081743566256327981772437642588608174356625631/62500000000000000000000000000000000000000000000000000000000000
+  minimum pair gap: 1519512263966091128213801849300527626481514060792209640222207706804795100331104585791871729247623946841063/15195565104714582909375242395223498805354675864626240937439374127902896200000000000000000000000000000000000000000000000000000000000000000
+VERIFIED
+  id: W-schadt-n029-2025-decimal-rational
+  n: 29
+  side: 2966942899906512939318226046481160904289990651293931822604648091421/500000000000000000000000000000000000000000000000000000000000000000
+  method: exact-algebraic
+  pairs tested: 406
+  limits: Verifies witness feasibility and its upper bound, not global optimality.
+VERIFIED: 29 squares, 406 pairs
+  exact side: 2966942899906512939318226046481160904289990651293931822604648091421/500000000000000000000000000000000000000000000000000000000000000000
+  minimum pair gap: 199989999999999999999999999999999999/2000000000000000000000000000000000000000000000000000000000000000000
+
+== exact rational grid replay ==
+replayed 305 exact rational grid witnesses and checked basic bound instantiations for 324 cases
+
+== verifier perturbation limits ==
+exact verifier, unperturbed packing: accept
+  delta = 1e-6    REJECT
+  delta = 1e-12   REJECT
+  delta = 1e-15   REJECT
+  delta = 1e-18   REJECT
+  delta = 1e-30   REJECT
+  delta = 1e-100  REJECT
+
+float64 separating-axis test:
+  tol=1e-09    valid packing: accept   1e-6: REJECT  1e-9: REJECT  1e-12: accept  1e-15: accept  1e-18: accept
+  tol=1e-12    valid packing: accept   1e-6: REJECT  1e-9: REJECT  1e-12: REJECT  1e-15: accept  1e-18: accept
+  tol=0        valid packing: REJECT   1e-6: REJECT  1e-9: REJECT  1e-12: REJECT  1e-15: REJECT  1e-18: REJECT
+
+A float verifier that accepts the true packing also accepts overlaps
+below its tolerance; one that rejects those overlaps also rejects the
+true packing. That is why exactness here is about representation, not precision.
+
+== frontier corpus ==
+  324 artifacts, n = 1..324; formal lane: 59 proved, 265 open
+  reported lane: 59 proved, 265 open; 258 formal-open cases use Nagamochi
+  n=29 source numerically checked: 29 squares, 406 pairs, six classes
+  named-source reconciliation is enforced by soft-schema validation
+
+== frontier rigidity assessed here ==
+frontier rigidity check passed: every block matches the derivationassessed: 18 locally-rigid, 296 not-rigid, 7 undetermined, 3 left to a stronger argument
+  locally-rigid     18
+  not-rigid        296
+  undetermined       7
+    n = [28, 68, 69, 103, 105, 110, 131]
+  left to a stronger argument: n = [5, 11, 40]
+  screen excluded: n = [68, 69, 103, 105, 110, 131]
+
+== generated tables in sync with frontier/ ==
+  6 generated report tables and frontier/STATUS.md match frontier/ (392 data rows)
+
+== strategy catalogues ==
+  search: 20 strategies, 4 families, all fields populated
+  proof: 30 strategies, 6 families, all fields populated
+
+== defect log ==
+  defects.md matches defects.yaml (488 defects)
+  every generated view is exempt from the Markdown formatter
+
+== skills mirrored between .agents and .claude ==
+hand-written skills in sync
+
+== synopsis agrees with the artifacts ==
+
+== README agrees with the directory ==
+  README.md agrees with the directory, reports, defect source, work model and its own links
+
+== AGENTS.md mirrors the operating rules ==
+  AGENTS.md mirrors all 16 rules in operating-rules.md
+
+== agenda map agrees with the agendas ==
+  agenda map matches 285 commitments across 30 agendas: 6 in progress, 19 ready, 59 blocked, 139 complete
+
+== D-034's n=5 identity pair still reproduces ==
+  D-034's n=5 pair reproduces: 2 endpoints, keys unchanged
+
+== the decimal route still cannot price an exact pose ==
+  exact-construction price reproduces: reach 0 at the retained precision for all 4 sizes
+
+== work accounting agrees on one unit ==
+  work accounting reproduces: 1 shared unit, 4 roles the solver collapses
+
+== assembly coverage agrees with the contract ==
+  assembly coverage reproduces: 17 certificates and 13 typed limitations over n <= 30
+
+== chunk taxonomy agrees with the corpus ==
+  chunk taxonomy reproduces: 3 source strata, 109 components in the residue
+
+== session clocks are readable ==
+  108 session artifacts, 473 phases, 450 carrying a clock: every declared start is one that could have been read
+  note: session-044-agenda006-continuation.md phase 7 starts before phase 6; a delegated lane run in a worktree does this legitimately
+  elapsed against budget in session-110-pr127-handoff-review.md:
+
+== n=5 rigidity certificates still verify ==
+  n=5 cone reproduces: 14 coordinates pinned with exact Farkas certificates, 1 free
+  1 of 1 free directions obstructed at second order by a verified self-stress
+
+== every session's cost is attributed ==
+  the close report and its synopsis view agree with 108 sessions
+60 rollups no session declares (pre-field sessions do this legitimately):
+    11222fc8-7b65-5cb8-8e3b-982ecf899ca8.yaml    span starts 2026-09-05
+    35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15.yaml    span starts 2026-09-07
+    5cd11e53-fb82-4a28-ab2a-0c26f16fe7e5.yaml    span starts 2026-08-30
+    9010767e-5bb7-5e7d-99d2-858400f3969a.yaml    span starts 2026-09-08
+    a0db9ee15ade6fe61.yaml                       span starts 2026-09-07
+    a111e1d2fa5f53b01.yaml                       span starts 2026-09-07
+    a12ef962d0a15bebf.yaml                       span starts 2026-09-07
+    a1a476c8731055c17.yaml                       span starts 2026-09-07
+    a239063cb08b29168.yaml                       span starts 2026-09-07
+    a26ec030a56b8440c.yaml                       span starts 2026-09-07
+    a36e7ccaf6b631c9b.yaml                       span starts 2026-09-07
+    a43bae08bfc5ff474.yaml                       span starts 2026-09-07
+    a46a0ec9964123329.yaml                       span starts 2026-09-07
+    a47a35ef4431682e7.yaml                       span starts 2026-09-07
+    a4e2e0cfd6ec7807f.yaml                       span starts 2026-09-07
+    a55a92f0c5d0a6bd3.yaml                       span starts 2026-09-07
+    a5e7f904f3399f8f6.yaml                       span starts 2026-09-07
+    a5f694d0e668eb739.yaml                       span starts 2026-09-07
+    a64b38456e125068f.yaml                       span starts 2026-09-07
+    a6c89c40072f7c002.yaml                       span starts 2026-09-07
+    a78f6ef8b49142830.yaml                       span starts 2026-09-07
+    a7a7ceaa7bd33b8b3.yaml                       span starts 2026-09-07
+    a85c772de5ad30e5d.yaml                       span starts 2026-09-07
+    a89d83a407053fb83.yaml                       span starts 2026-09-07
+    a8d329430c32a2e6d.yaml                       span starts 2026-09-07
+    a8d7d80db12f3d174.yaml                       span starts 2026-09-07
+    a8db29bb0095a31b4.yaml                       span starts 2026-09-07
+    a9b9b284ad2dfc7c9.yaml                       span starts 2026-09-07
+    a9e1902ee68a8be1e.yaml                       span starts 2026-09-07
+    a9f86294dfc3c1a2f.yaml                       span starts 2026-09-07
+    aa2932cd1b7d84502.yaml                       span starts 2026-09-07
+    aa96ae9ba0acbfe88.yaml                       span starts 2026-09-07
+    ab433852149216fca.yaml                       span starts 2026-09-07
+    ab9f4da0aa95625f4.yaml                       span starts 2026-09-07
+    aba98822ec70381be.yaml                       span starts 2026-09-07
+    ac7ba8e2e36a59c3f.yaml                       span starts 2026-09-07
+    ad4f6b7a8ea346050.yaml                       span starts 2026-09-07
+    ad87a13807cdd996d.yaml                       span starts 2026-09-07
+    ad9ea87d53de3f375.yaml                       span starts 2026-09-07
+    addd7880d2ee9e4e8.yaml                       span starts 2026-09-07
+    ae2b98d674d84437d.yaml                       span starts 2026-09-07
+    ae423b4491880dd7a.yaml                       span starts 2026-09-07
+    af9cf70e49498fdcd.yaml                       span starts 2026-09-07
+    aff0747e3336f450e.yaml                       span starts 2026-09-07
+    aff102ab8ef57c5af.yaml                       span starts 2026-09-07
+    agent-a0a4b8f10faa3af55.yaml                 span starts 2026-09-08
+    agent-a29aa05c090097181.yaml                 span starts 2026-08-29
+    agent-a2b26389a68623fec.yaml                 span starts 2026-08-29
+    agent-a34297660e2292e07.yaml                 span starts 2026-09-08
+    agent-a352dd4b254da0afc.yaml                 span starts 2026-09-08
+    agent-a498c3f37ac3199b7.yaml                 span starts 2026-08-29
+    agent-a4a75cb3921cba0d8.yaml                 span starts 2026-08-29
+    agent-a5700fa32f52e605d.yaml                 span starts 2026-09-08
+    agent-a7c3f30347ea4640b.yaml                 span starts 2026-08-29
+    agent-a84da2374f947e8a6.yaml                 span starts 2026-08-29
+    agent-a84fbe513c757c899.yaml                 span starts 2026-09-08
+    agent-a93d11365c62eefe2.yaml                 span starts 2026-08-29
+    agent-a95ec8524a719d868.yaml                 span starts 2026-09-08
+    agent-aaaf4d68d6a5916dd.yaml                 span starts 2026-08-29
+    agent-ae78a4077b6ecafac.yaml                 span starts 2026-08-29
+
+107 terminal sessions, all declaring rollups that exist
+
+== the branch cost rollup renders ==
+  the branch cost rollup renders for 31 branches, and for none
+
+== control anchors still resolve ==
+
+== tier ceilings are declared and not slack ==
+gate budget declaration passed: 9 tiers, 2 with a recorded cost, all ceilings within 2x of it, all named in development.md
+
+== the borrowed lower bounds re-derive ==
+307 lower bounds re-derived from Theorem 2, all agreeing, none inverted; the README, case-body, citation (319) and operative (307) counts agree with the records
+
+== the inventory agrees with the register ==
+inventory agrees with 62 evidence records
+
+== results rungs are earned and the view agrees ==
+22 registered results: every declared rung passes its structural checks, every path and produced_by id resolves, every reader-tier mention exists
+packing/frontier/RESULTS.md agrees with results.yaml
+
+== the synopsis headline carries every result ==
+  synopsis headline carries all 22 registered results
+
+== exact certificates are named by their records ==
+10 case packages certify 18 sizes, every one cited by its record
+  cases/gobel10 -> [10]
+  cases/gobel40 -> [40]
+  cases/gobel5 -> [5]
+  cases/gobel82 -> [82]
+  cases/gobel_family -> [65, 89]
+  cases/gobel_offcentre -> [26, 85]
+  cases/gobel_strip -> [27, 38, 52, 67, 84]
+  cases/lifted_q2 -> [19, 66]
+  cases/lifted_q7 -> [18, 86]
+  cases/trump11 -> [11]
+
+== rung figures agree with their certificates ==
+  22 results and 42 certificate-bearing evidence entries checked, 18 certificate artifacts recomputed from their own atoms, all quoted figures and fraction-decimal claims agree (results.yaml, evidence.yaml, defects.yaml)
+
+== case prose agrees with its own front matter ==
+  324 case files checked, every quoted bound figure and fraction-decimal claim in their prose agrees with their own front matter
+
+== terminal sessions name what they cost ==
+  63 terminal sessions declare 179 resource rollups, all present
+  44 closed before the field existed and are not checked: session-001, session-002, session-003, session-004, session-005, session-006, session-007, session-008, session-009, session-010, session-011, session-012, session-013, session-014, session-015, session-016, session-017, session-018, session-019, session-020, session-021, session-022, session-023, session-024, session-025, session-026, session-027, session-028, session-029, session-030, session-031, session-032, session-033, session-034, session-035, session-036, session-037, session-038, session-039, session-040, session-041, session-042, session-043, session-044
+
+== terminal sessions name the gate that certified them ==
+  11 terminal sessions name a full-gate run on a commit in their history
+  10 stopped sessions remain UNCERTIFIED; follow-up owners:
+    session-097 -> think-m2lx
+    session-100 -> think-7lp3
+    session-101 -> think-kbci
+    session-102 -> think-kbci
+    session-103 -> think-4uon
+    session-104 -> think-kbci
+    session-107 -> think-kbci
+    session-108 -> think-kbci
+    session-109 -> think-kbci
+    session-110 -> think-yx4g
+  86 closed before the rule existed and are not checked: session-001..session-086 (86 sessions)
+
+== Goebel's family reaches the sizes it reaches ==
+  Goebel family reproduces: 12 sizes below 100, optimal at [5, 40, 65, 89], exact and unbuilt at []
+
+== n=40 rigidity bracket still reproduces ==
+  n=40 contact model reproduces: 208 of 608 incidences are not contacts, 42 of 98 touching pairs are disjunctive
+  witness reproduces: 16 squares turn, exact on all 248 single-axis rows, admissible at all 42 corner pairs
+
+== differential: search energy vs validity oracle ==
+  20000 near-contact pairs: 16891 overlapping, 0 touching
+  sqsearch pair energy and sqpack validity agree on every pair
+
+== provenance: recorded commits are reachable ==
+  UNAVAILABLE exp-001-baseline-sweep.md -> d6a1057 (historical loss is annotated)
+  ok          exp-002-baseline-n10-positive-control.md -> 1e70bc8
+  ok          exp-003-baseline-n11-target.md -> 1e70bc8
+  ok          exp-004-baseline-n12-negative-control.md -> 1e70bc8
+  ok          exp-005-basin-entry-n11.md -> 41b3e18
+  ok          exp-006-lp-quench-n5-n10-n11.md -> 8b450a1
+  ok          exp-007-quench-bracket-n5.md -> 8b450a1
+  ok          exp-008-quench-bracket-n10.md -> 8b450a1
+  ok          exp-009-quench-bracket-n11.md -> 8b450a1
+  ok          exp-010-angle-kink-n11.md -> 8b450a1
+  ok          exp-011-h-020-n17.md -> 60a50cc
+  ok          exp-012-h-024-n29-angle-classes.md -> 5384209
+  ok          exp-013-h-026-trump-tangent.md -> faba023
+  ok          exp-014-h-032-n3-optimal-moduli.md -> 257cb0d
+  ok          exp-015-h-032-n4-optimal-moduli.md -> 257cb0d
+  ok          exp-016-h-010-stromquist-printed-figure14.md -> 178fc6b
+  ok          exp-017-h-041-stromquist-repaired-figure14.md -> c6d036b
+  ok          exp-018-h-021-n3-basin-event-calibration.md -> ee3acc1
+  ok          exp-019-h-021-n4-basin-event-calibration.md -> ee3acc1
+  ok          exp-020-h-021-n5-basin-event-calibration.md -> ee3acc1
+  ok          exp-021-h-021-n3-basin-event-v3.md -> 8f20908
+  ok          exp-022-h-021-n3-basin-event-v3-completion.md -> 8f20908
+  ok          exp-023-h-021-n4-basin-event-v3.md -> 8f20908
+  ok          exp-024-h-021-n4-basin-event-v3-repair.md -> f15d036
+  ok          exp-025-h-021-n5-basin-event-v3.md -> 5ab8dab
+  ok          exp-026-h-021-n6-basin-event-v3.md -> da6bac3
+  ok          exp-027-h-021-n6-basin-event-v3-retention.md -> a3be8e4
+  ok          exp-028-h-021-n7-basin-event-v3.md -> ce84ef6
+  ok          exp-029-h-021-n8-basin-event-v3.md -> 69c6008
+  ok          exp-030-h-021-n9-basin-event-v3.md -> 56bf66c
+  ok          exp-031-h-002-n10-source-return.md -> dab797c
+  ok          exp-032-h-021-terminal-component-controls.md -> d3d4ace
+  ok          exp-033-h-023-n5-equal-side-face.md -> 26360f1
+  ok          exp-034-h-023-n5-angle-sheet.md -> 329b848
+  ok          exp-035-h-023-n5-tangent-cones.md -> aa63cf4
+  ok          exp-036-h-023-n5-second-order-obstruction.md -> f2d2e53
+  ok          exp-037-h-042-n29-numerical-angle-classes.md -> ae034ba
+  ok          exp-038-h-023-n5-tangent-inventory.md -> b8d0104
+  ok          exp-039-h-023-n5-fixed-angle-polytope.md -> 27b999e
+  ok          exp-042-h-023-n5-endpoint-aware-rotating-paths.md -> 2980fdc
+  ok          exp-047-h-053-unitsquare-rigid-pose-serialization.md -> d7c94590
+  ok          exp-048-h-054-n50-exact-rational-reconstruction.md -> d7c94590
+  ok          exp-049-h-052-n17-independent-certificate-agreement.md -> d7c94590
+  ok          exp-050-h-054-n50-source-semantics-e1-localization.md -> e21598f6
+  ok          exp-051-h-053-n68-refusal-localization.md -> e21598f6
+  ok          exp-052-h-052-n17-resumable-certificate-agreement.md -> e21598f6
+  ok          exp-053-h-057-n17-parent-bound-parallel-speedup.md -> 909efafa0773fbea23b24de072ef59a03a01317a
+  ok          exp-054-h-058-n68-one-parent-production-serialization.md -> 909efafa
+  ok          exp-055-h-059-n50-producer-refusal-ordering.md -> 81177148e404aa283c2a6ec7d696f2b39a9e361c
+  ok          exp-056-h-052-n17-sequential-larger-prefix.md -> 11ce70ee
+  ok          exp-057-h-058-n68-one-parent-localization.md -> 11ce70ee
+  ok          exp-059-h-052-n17-fresh-successor-completion.md -> 2f112f4c
+  ok          exp-070-h-064-n11-fractional-resume.md -> 04e6a2ce8ed20640598f2cd687c1e1dfd3141e92
+  ok          exp-071-h-070-n11-inset-seed-release.md -> 04e6a2ce8ed20640598f2cd687c1e1dfd3141e92
+  ok          exp-110-h-090-core-shrink.md -> 48a161ba570d053d054eb1942f6e315929c6250b
+  ok          exp-111-h-091-core-shrink.md -> aeb683d5e02913504af663aa39e42f577e19a346
+  ok          exp-113-h-099-trump-support-screen.md -> e70458a9c40cfab46d2f2233b0dfbb47501a4de8
+  ok          exp-114-h-104-fixed-side-auxiliaries.md -> e45c8a633090476121701d94d50c034e85e3f7c7
+  ok          exp-115-h-105-fixed-candidate-pair-obstruction.md -> cf299e6c7516c2ad41ba05c8e4ac8bb3ca16b5c6
+  ok          exp-116-h-093-scalar-61-16.md -> 4d305597a505ebfbe85f1851fa7148374661e622
+  ok          exp-117-h-106-continuous-near-axis.md -> cf0f4d4c5b4c540225d53f4724496ba33442607c
+  ok          exp-118-h-107-fixed-site-completion.md -> 46f38ab4
+  ok          exp-119-h-108-near45-a3-forcing.md -> bdc687841467599231b59447b38f9037625deb43
+  ok          exp-120-h-109-near45-a1-a2-forcing.md -> 57ad0deaa0fb9f57ccec7b606171de0507422c82
+  ok          exp-121-h-110-fixed-p12-escape.md -> 961d9923
+  ok          exp-122-diamond-conditional-cover-screen.md -> c4a69e3e
+  ok          exp-123-near45-localization.md -> 3ea8e346
+  ok          exp-124-full-square-compatibility-screen.md -> a75d751a
+  ok          exp-125-h124-complete-residual-cover.md -> 7daa7c55
+  ok          exp-126-h099-complete-graph-candidate.md -> 7daa7c55
+  ok          exp-127-h124-collision-augmented-axis-cover.md -> 3bec06e2
+  ok          exp-128-h099-seven-row-support-ceiling.md -> a94e57fe
+  ok          exp-129-h125-finite-kernel-obstruction.md -> d6f0c403
+  ok          exp-130-h130-robust-end-band-at-q.md -> f010f32f
+  ok          exp-131-h131-near-axis-counts-replay-at-q.md -> f010f32f
+  ok          exp-132-h134-segment-mark-cover-at-q.md -> d04205fb
+  ok          exp-133-h128-corner-skeleton-verdict-at-q.md -> 22884081
+  checked all 77 declared engine commits
+
+== campaign record ==
+OK 1 series, 20 reports, 110 hypotheses, 89 rounds, 108 agent sessions, 30 agendas, 2 logbook entries
+  time-based refusals: 2 judged, 0 uncheckable (HEAD committed 2026-09-08T14:29:19-07:00)
+  242 declared packing-CLI invocations parse against their own CLIs
+
+== where the time went ==
+  1305.49s  single-square translation escape screen
+   700.26s  known-best n=1..324 atlas rebuild
+   255.77s  slow behavioral tests
+   194.75s  n=40 rigidity bracket still reproduces
+   137.81s  fast behavioral tests
+   101.47s  type floor (basedpyright)
+    94.25s  exact verification
+    93.14s  translation escape screen records and sample
+  1313.94s  TOTAL (wall)
+
+== the tier against its ceiling ==
+  1313.94s  wall of a 3600s ceiling (36%), never recorded at this shape
+  note: no cost is recorded for the full tier at 2 cpus, --jobs 2 --inner-jobs 1; write `measured_seconds: 1313.9` into /Users/levy/.codex/worktrees/88e2/squares/packing/devtools/gate-budgets.yaml to arm the drift rule
+  note: within the declared band, but this run's shape (10 cpus, 3 jobs, 2 inner) is not the full tier's reference (2 cpus, --jobs 2 --inner-jobs 1), so the band was reported and not enforced
+
+6 STEPS FAILED:
+  - negative controls
+  - fast behavioral tests
+  - slow behavioral tests
+  - exhaustive exact behavioral tests
+  - synopsis agrees with the artifacts
+  - control anchors still resolve

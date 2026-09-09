@@ -1,0 +1,8 @@
+{
+  "name": "basin identity",
+  "output": "  ok    certificate retains node attributes after individualization  [K3: uniform differs from one marked vertex, invariant under relabelling]\n  ok    invariant under all 8 container symmetries  [1 key pair(s); 8 independent images]\n  ok    invariant under square relabelling  [permutation [3, 6, 1, 5, 9, 8, 0, 4, 2, 7, 10]]\n  ok    invariant under a quarter turn of one square\n  ok    an angle one ULP below pi/2 keys as one at zero  [the quantizer must treat the angle as periodic, not as a line]\n  ok    a perturbed-then-quenched copy keys as the same basin  [same, gap to Trump -2.160e-11]\n  ok    a different arrangement keys differently  [n=11 rigid vs n=16 grid: different]\n  ok    at the same n, the annealer's basin differs from Trump's  [gap +3.733e-02, 4 contacts vs Trump's 14]\n\n  Trump n=11: 14 contacts, angle classes (5, 6), geometric 1ac271c4b727\u2026\nCANONICAL CHECKS PASSED",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 3.246704958000919,
+  "status": "passed"
+}

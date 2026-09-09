@@ -33,6 +33,20 @@ at side about `5.650629`, with tilt about `27.583°`. These are construction
 claims, not proofs of optimality. The figures compare both with Göbel's
 earlier `0°`/`45°` packings.
 
+**Verification follow-up, 2026-09-07:** the
+[exact reconstruction](../../cases/stromquist/memo3_n26.py) verifies all 26 unit squares,
+every wall, and all 325 pairs at the unique real root of
+`s^3 - 14s^2 + 67s - 112`, approximately `5.650629191439388`.
+The coordinate formulas and cubic come from Ellsworth's 2023 reconstruction, rather
+than an equation printed in this memo.
+Its six offset dominoes match Figure 4(b).
+[Ellsworth's historical catalogue](https://kingbird.myphotos.cc/packing/squares_in_squares__compared.html)
+already credits Stromquist in 1984 and records Friedman's smaller 1997 side
+`(7 + 3sqrt(2))/2`.
+The [dedicated source review](../../../docs/project/research/research-2026-09-07-stromquist-n26-verification.md)
+also resolves the `n = 18` history as an independent rediscovery, preserving
+Hämäläinen's 1980 priority. The original scan and raw OCR remain unchanged.
+
 For `n = 11`, the memo credits Mats Gustafsson and Magnus Thulin's packing,
 reported by Gardner in November 1980 (pp. 2–4). It says they learned the
 problem through the Swedish company periodical *Ronden*. This preserves the
