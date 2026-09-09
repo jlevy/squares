@@ -191,10 +191,18 @@ def main() -> int:
         sliders = page.evaluate(
             "() => Array.from(document.querySelectorAll('#controls input[type=range]')).map(e => e.id)"
         )
-        check(sorted(sliders) == ["anneal", "grow-rate", "grow-size", "law-attraction", "law-range",
-                                  "law-repulsion", "law-rigidity", "speed",
-                                  # Revision 15: the walls got their own law of the same shape.
-                                  "wall-attraction", "wall-range", "wall-repulsion", "wall-rigidity"],
+        # Revision 16: the law sliders are generated from the page's own parameter table, so this
+        # asks the page which ones that table implies rather than restating a list that has needed
+        # editing every time a law or a parameter was added. What is actually being checked is
+        # that nothing else is a slider -- that the timeline scrubber is gone and has not returned
+        # under another name -- so only the handful outside the laws is written out here.
+        derived = page.evaluate(
+            "() => { const A = window.atlasTransitions; const laws = A.lawNames ? A.lawNames() : [];"
+            "  const keys = A.lawParams ? A.lawParams() : [];"
+            "  const out = []; for (const n of laws) for (const k of keys) out.push(A.lawPrefix(n) + '-' + k);"
+            "  return out; }"
+        )
+        check(sorted(sliders) == sorted(derived + ["anneal", "grow-rate", "grow-size", "speed"]),
               f"the controls carry a slider that is none of the speed, annealing and law dials: {sliders}")
         check("seek" in api, "the API lost seek when the scrubber went")
         # The controls may not push the stage off the window.
@@ -1193,7 +1201,8 @@ def main() -> int:
         # Revision 15: the cache key carries the walls' own law after a "|w", since a changed wall
         # law needs its run rebuilt too. The claim here is about the pair law, so it reads the
         # pair's segment rather than the whole key, which would fail on an unrelated change.
-        check(moved["stray"].split("|")[0] == "0.123:3333:250:0.375",
+        pair_segment = next(s for s in moved["stray"].split("|") if s.startswith("pair:"))
+        check(pair_segment == "pair:0.123:3333:250:0.375",
               f"an unknown preset is not a no-op: {moved['stray']}")
 
         # 10e. The law is in the trajectory cache key. Two laws draw two trajectories, and the same

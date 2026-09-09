@@ -500,10 +500,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
             </svg>
           </div>
           <div class="law-body">
-            <div class="law-row"><span>rigidity</span><input type="range" id="law-rigidity" aria-label="the penetration tolerated before the repulsion climbs"><span class="law-val" id="law-rigidity-val"></span></div>
-            <div class="law-row"><span>repulsion</span><input type="range" id="law-repulsion" aria-label="the push when penetrating"><span class="law-val" id="law-repulsion-val"></span></div>
-            <div class="law-row"><span>attraction</span><input type="range" id="law-attraction" aria-label="the pull when separated but close"><span class="law-val" id="law-attraction-val"></span></div>
-            <div class="law-row"><span>range</span><input type="range" id="law-range" aria-label="the gap width the attraction acts over"><span class="law-val" id="law-range-val"></span></div>
+            <div class="law-rows" data-law="pair"></div>
             <div class="law-presets">
               <span class="seg" id="law-preset-seg">
                 <button data-law="rigid" title="A knee at four thousandths of a side and a strong push: effectively rigid">rigid</button>
@@ -517,10 +514,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         <div class="subpanel groupbox" id="wall-box">
           <span class="box-title">walls</span>
           <div class="group-body stack">
-            <div class="law-row"><span>rigidity</span><input type="range" id="wall-rigidity" aria-label="the overhang tolerated before the wall pushes hard"><span class="law-val" id="wall-rigidity-val"></span></div>
-            <div class="law-row"><span>repulsion</span><input type="range" id="wall-repulsion" aria-label="the wall's push when a corner is outside"><span class="law-val" id="wall-repulsion-val"></span></div>
-            <div class="law-row"><span>attraction</span><input type="range" id="wall-attraction" aria-label="the wall's pull on a square that is close but inside"><span class="law-val" id="wall-attraction-val"></span></div>
-            <div class="law-row"><span>range</span><input type="range" id="wall-range" aria-label="how far from the wall its pull reaches"><span class="law-val" id="wall-range-val"></span></div>
+            <div class="law-rows" data-law="wall"></div>
           </div>
         </div>
       </div>
@@ -1795,6 +1789,30 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // Below the shipped rigidity the slope past the knee climbs linearly to LAW_STEEP_MAX, so the
   // hardest setting is a knee at two thousandths of a side with eight times the stiffness past it:
   // effectively rigid at this timestep, and measured stable.
+  // ------------------------------------------------------------------ the laws, declared once
+  //
+  // A law is four numbers describing a force against a signed gap, and there are two of them,
+  // because a square has two relationships: with another square, and with a wall. They were
+  // written out twice -- markup, sync loop, wiring, cache key, reset, API -- and every one of
+  // those was a place to forget one. The wall law's controls did nothing on their first build
+  // for exactly that reason: the setter existed and was never exposed.
+  //
+  // So the parameters are a table and everything else reads it. Adding a fifth parameter, or a
+  // third law, is a row here; the sliders, their labels and steps, the readouts, the trajectory
+  // cache key, the reset and the API method all follow. Nothing downstream enumerates them, so
+  // nothing downstream can fall out of step -- and a check that wanted to know "what parameters
+  // are there" asks this rather than listing what it saw.
+  const LAW_PARAMS = [
+    { key: 'rigidity',   label: 'rigidity',   step: 0.001, decimals: 3,
+      says: 'the penetration tolerated before the repulsion climbs' },
+    { key: 'repulsion',  label: 'repulsion',  step: 50,    decimals: 0,
+      says: 'the push when penetrating' },
+    { key: 'attraction', label: 'attraction', step: 5,     decimals: 0,
+      says: 'the pull when separated but close; zero is none' },
+    { key: 'range',      label: 'range',      step: 0.005, decimals: 3,
+      says: 'the gap width the attraction acts over; zero beyond' },
+  ];
+  const LAW_KEYS = LAW_PARAMS.map((d) => d.key);
   const LAW_TOL0 = 0.15, LAW_STEEP_MAX = 8;
   const LAW_DEFAULT = { rigidity: 0.15, repulsion: 2500, attraction: 0, range: 0 };
   const LAW_BOUNDS = {
@@ -1851,17 +1869,36 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     range: [0, 0.5],
   };
   const WALLLAW = Object.assign({}, WALL_DEFAULT);
+  // The two laws, and everything a generic routine needs to serve either: where its controls
+  // live, what its bounds are, and what it means. `pair` is masked by the relationship graph;
+  // `wall` never is, because a wall is not something a square can be told to ignore.
+  const LAWS = {
+    pair: { name: 'pair', law: LAW,     bounds: LAW_BOUNDS,  defaults: LAW_DEFAULT,
+            prefix: 'law',  says: 'square against square, masked by the relationship graph' },
+    wall: { name: 'wall', law: WALLLAW, bounds: WALL_BOUNDS, defaults: WALL_DEFAULT,
+            prefix: 'wall', says: 'square against wall, never masked' },
+  };
+  const lawSpec = (name) => LAWS[name] || LAWS.pair;
+  // The cache key is the concatenation of every law's every parameter, in table order, so a law
+  // or a parameter added above is in the key without anyone remembering to put it there.
+  const lawsKey = () => Object.keys(LAWS).map((n) => {
+    const s = LAWS[n];
+    return n + ':' + LAW_KEYS.map((k) => s.law[k]).join(':');
+  }).join('|');
   const wallForce = (d) => forceOf(WALLLAW, d);
   const wallAttracts = () => attractsOf(WALLLAW);
-  function setWallLaw(next) {
-    const o = next || {};
-    for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
-      if (o[key] === undefined) continue;
-      const v = Number(o[key]);
+  // One setter for any law: which one is an argument, not a copy of this function.
+  function setLawOf(name, next) {
+    const spec = lawSpec(name), o = next || {};
+    for (const d of LAW_PARAMS) {
+      if (o[d.key] === undefined) continue;
+      const v = Number(o[d.key]);
       if (!isFinite(v)) continue;
-      const [lo, hi] = WALL_BOUNDS[key];
-      const q = (key === 'repulsion' || key === 'attraction') ? 1 : 1000;
-      WALLLAW[key] = Math.round(Math.max(lo, Math.min(hi, v)) * q) / q;
+      const [lo, hi] = spec.bounds[d.key];
+      // Rounded to the slider's own resolution, so the number shown is the number in use and a
+      // law reached twice keys the cache identically both times.
+      const q = Math.pow(10, d.decimals);
+      spec.law[d.key] = Math.round(Math.max(lo, Math.min(hi, v)) * q) / q;
     }
     // The same tail setLaw runs: the trajectory cache is keyed by the law, so a changed wall law
     // needs its run rebuilt exactly as a changed pair law does.
@@ -1869,8 +1906,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     if (isPhysical(state.style)) ensureTrajectory(state.pair, state.style);
     updateSegments();
     render();
-    return Object.assign({}, WALLLAW);
+    return Object.assign({}, spec.law);
   }
+  const setWallLaw = (next) => setLawOf('wall', next);
   // How many substeps the integrator needs to hold this law.
   //
   // Semi-implicit Euler is stable only while dt < 2/omega, and omega = sqrt(k/m). The law's
@@ -1896,8 +1934,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     return Math.max(1, Math.min(LAW_SUB_MAX, Math.ceil(dt / limit)));
   }
   // Everything a run has to be keyed by: two runs with the same signature draw the same trajectory.
-  const lawKey = () => LAW.rigidity + ':' + LAW.repulsion + ':' + LAW.attraction + ':' + LAW.range
-    + '|w' + WALLLAW.rigidity + ':' + WALLLAW.repulsion + ':' + WALLLAW.attraction + ':' + WALLLAW.range;
+  const lawKey = () => lawsKey();
   // The blind run (revision 6, feature 3): the simulation is told nothing about where the squares
   // are meant to end up. It starts from the packing of n in a container inflated by `inflate`,
   // drops the new square into the emptiest place a coarse grid can find, and then closes the walls
@@ -4110,6 +4147,37 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     }
     clock.textContent = fmt(state.t, 3) + ' / ' + fmt(duration(), 3) + ' s';
   }
+  // The sliders are built from the table, not written out. A container says which law it is for
+  // and the rows follow, which is why there is no list of slider ids anywhere: the ids are a
+  // function of the table, so they cannot disagree with it.
+  document.querySelectorAll('.law-rows').forEach((host) => {
+    const spec = lawSpec(host.dataset.law);
+    host.innerHTML = LAW_PARAMS.map((d) => {
+      const id = spec.prefix + '-' + d.key;
+      return '<div class="law-row"><span>' + d.label + '</span>'
+        + '<input type="range" id="' + id + '" aria-label="' + d.says + '">'
+        + '<span class="law-val" id="' + id + '-val"></span></div>';
+    }).join('');
+    host.querySelectorAll('input[type=range]').forEach((el) => {
+      const key = el.id.slice(spec.prefix.length + 1);
+      el.addEventListener('input', (ev) => setLawOf(spec.name, { [key]: ev.target.value }));
+    });
+  });
+  // And syncing them is the same walk: every law, every parameter, no enumeration by hand.
+  function syncLawRows() {
+    for (const name of Object.keys(LAWS)) {
+      const spec = LAWS[name];
+      for (const d of LAW_PARAMS) {
+        const el = document.getElementById(spec.prefix + '-' + d.key);
+        if (!el) continue;
+        const [lo, hi] = spec.bounds[d.key];
+        el.min = String(lo); el.max = String(hi); el.step = String(d.step);
+        if (document.activeElement !== el) el.value = String(spec.law[d.key]);
+        document.getElementById(spec.prefix + '-' + d.key + '-val').textContent =
+          d.decimals ? fmt(spec.law[d.key], d.decimals) : String(Math.round(spec.law[d.key]));
+      }
+    }
+  }
   const styleSelect = document.getElementById('style-select');
   function updateSegments() {
     // Revision 14: which solver runs is strategy, so the select sits with the law and the graph —
@@ -4152,28 +4220,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     document.getElementById('anneal-info').textContent = state.anneal + ' \u00b7 shake \u00d7'
       + fmt(an.amplitude, 2) + ', decay ^' + fmt(an.decayPower, 2) + ', ' + fmt(an.span, 2) + ' move'
       + (isPhysical(state.style) ? '' : ' (styles B and C only)');
-    // The force law: four sliders, three presets and the plot, all one state.
-    for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
-      const el = document.getElementById('law-' + key);
-      const [lo, hi] = LAW_BOUNDS[key];
-      el.min = String(lo);
-      el.max = String(hi);
-      el.step = key === 'rigidity' ? '0.001' : (key === 'range' ? '0.005' : (key === 'repulsion' ? '50' : '5'));
-      if (document.activeElement !== el) el.value = String(LAW[key]);
-      document.getElementById('law-' + key + '-val').textContent =
-        key === 'rigidity' || key === 'range' ? fmt(LAW[key], 3) : String(Math.round(LAW[key]));
-    }
-    // The walls' law, the same four numbers for the other relationship a square has.
-    for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
-      const el = document.getElementById('wall-' + key);
-      const [lo, hi] = WALL_BOUNDS[key];
-      el.min = String(lo);
-      el.max = String(hi);
-      el.step = (key === 'repulsion') ? '50' : (key === 'attraction' ? '5' : '0.001');
-      if (document.activeElement !== el) el.value = String(WALLLAW[key]);
-      document.getElementById('wall-' + key + '-val').textContent =
-        (key === 'repulsion' || key === 'attraction') ? String(Math.round(WALLLAW[key])) : fmt(WALLLAW[key], 3);
-    }
+    syncLawRows();
     document.querySelectorAll('#law-preset-seg button').forEach((b) => {
       const preset = LAW_PRESETS[b.dataset.law];
       b.classList.toggle('on', preset !== undefined && ['rigidity', 'repulsion', 'attraction', 'range']
@@ -4906,6 +4953,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     setLaw, law: lawState, setLawPreset, lawPresets: () => Object.keys(LAW_PRESETS), lawCurve, lawForce, dragLaw,
     // Revision 15: the walls' own law, the same shape for the other relationship a square has.
     setWallLaw, wallLaw: () => Object.assign({}, WALLLAW), wallForce,
+    // The table itself, so a caller (or a check) can ask what parameters and laws exist
+    // rather than keeping its own copy of the answer.
+    lawNames: () => Object.keys(LAWS), lawParams: () => LAW_KEYS.slice(),
+    lawPrefix: (n) => lawSpec(n).prefix, setLawOf,
     // Revision 11: who attracts whom. Orthogonal to the law: repulsion is never masked.
     setRelationship, relationship: relationshipState, relationships: () => RELATIONSHIPS.slice(),
     setTargetGraph, targetGraph: () => targetGraphFor(state.pair).slice(),
@@ -4974,12 +5025,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   document.getElementById('blind-toggle').addEventListener('change', (ev) => setBlind(ev.target.checked));
   document.getElementById('blind-inflate').addEventListener('change', (ev) => setBlindInflate(ev.target.value));
   document.getElementById('anneal').addEventListener('input', (ev) => setAnneal(ev.target.value));
-  for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
-    document.getElementById('law-' + key).addEventListener('input', (ev) => { const o = {}; o[key] = ev.target.value; setLaw(o); });
-  }
-  for (const key of ['rigidity', 'repulsion', 'attraction', 'range']) {
-    document.getElementById('wall-' + key).addEventListener('input', (ev) => { const o = {}; o[key] = ev.target.value; setWallLaw(o); });
-  }
   document.querySelectorAll('#law-preset-seg button').forEach((b) => b.addEventListener('click', () => setLawPreset(b.dataset.law)));
   document.querySelectorAll('#rel-seg button').forEach((b) => b.addEventListener('click', () => setRelationship(b.dataset.rel)));
   document.getElementById('grow-size').addEventListener('input', (ev) => setGrowth({ size: ev.target.value }));
