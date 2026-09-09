@@ -37,6 +37,7 @@ from typing import NotRequired, TypedDict
 
 from playwright.sync_api import CDPSession, Locator, Page, ViewportSize
 
+from devtools.check_math_loading import ACTIVE_MATH_VARIANT
 from devtools.render_explainer import WALKTHROUGH
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
@@ -59,7 +60,11 @@ class Marker(TypedDict):
     markerCentre: float
     lineCentre: float
     fontSize: float
+    baseFontSize: float
     lineHeight: float
+    width: float
+    height: float
+    painted: bool
 
 
 class Bullet(TypedDict):
@@ -128,6 +133,11 @@ class Measured(TypedDict):
 #: pixel is finer than that construction is self-consistent to.
 TOLERANCE_PX = 1.0
 
+#: The requested optical adjustment below the geometric line centre. Keep the
+#: existing one-pixel tolerance around that target, rather than relaxing it to
+#: accommodate the adjustment. Numbered markers retain the geometric target.
+MARKER_OPTICAL_OFFSET_EM = 0.04
+
 #: Half of that, for a label against the box drawn around it. Tighter because the
 #: measurement is tighter: both sides are rects from one layout, with none of the
 #: marker check's mismatch between a marker box and a line box. It has to be tighter to
@@ -135,8 +145,9 @@ TOLERANCE_PX = 1.0
 #: one-pixel tolerance would have called clean.
 BOXED_TOLERANCE_PX = 0.5
 
-#: Both dimensions come from the same computed box; only rounding needs tolerance.
-BULLET_TOLERANCE_PX = 0.1
+#: The two dimensions use the same CSS length, so only subpixel rounding can
+#: distinguish them. A line-height override once turned a 3.7px square into a 27px bar.
+BULLET_TOLERANCE_PX = 0.05
 
 #: The measure the PDF actually has, in CSS pixels. `emulate_media` switches which media
 #: queries match; it does not paginate and it does not apply the `@page` box. So the
@@ -187,8 +198,9 @@ _PROBE = r"""() => {
      and draws an absolutely positioned `::before`, so there is no marker box to
      measure. Its top edge is the `li`'s content-box top plus the pseudo-element's own
      `top`; its computed height measures the painted square or the numbered marker's
-     box. The line it should sit on is the `li`'s first line box, taken as a Range over
-     the first text node rather than as the `li`'s own box, which spans every line. */
+     box. A painted square must retain its own height, not the line box's height. The
+     line it should sit on is the `li`'s first line box, taken as a Range over the first
+     text node rather than as the `li`'s own box, which spans every line. */
   for (const li of document.querySelectorAll('.kpress li')) {
     const before = getComputedStyle(li, '::before');
     const own = getComputedStyle(li);
@@ -213,7 +225,11 @@ _PROBE = r"""() => {
       markerCentre: round(top + height / 2),
       lineCentre: round((line.top + line.bottom) / 2),
       fontSize: round(parseFloat(before.fontSize)),
-      lineHeight: round(height),
+      baseFontSize: round(parseFloat(getComputedStyle(li.closest('.kpress')).fontSize)),
+      lineHeight: round(line.bottom - line.top),
+      width: round(parseFloat(before.width) || 0),
+      height: round(height),
+      painted: before.content === '""' && before.backgroundColor !== 'rgba(0, 0, 0, 0)',
     });
   }
 
@@ -407,17 +423,24 @@ _PROBE = r"""() => {
      falsely reported a 2.2px marker offset. Group runs starting in the topmost rect's
      upper half; the next line starts a full line height below it.
 
-     A zero-line-height footnote is raised without enlarging that line, but its ink
-     still appears in Range rects. Remove its owned rectangles before grouping, not
-     other inline boxes that really can enlarge the line. Count duplicate rectangles
-     so an unrelated box with the same geometry is not removed along with the ref. */
+     A zero-line-height footnote and clipped accessibility MathML can have Range
+     rectangles outside the line without enlarging it. Remove only those owned
+     rectangles before grouping. Visible MathML fallback and ordinary inline boxes
+     still contribute. Count duplicates so an unrelated box with the same geometry
+     is not removed along with an overlay. */
   function firstLineBox(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
     const excluded = new Map();
     const key = (r) => [r.top, r.right, r.bottom, r.left].join(',');
-    for (const ref of el.querySelectorAll('sup.kpress-footnote-ref')) {
-      if (parseFloat(getComputedStyle(ref).lineHeight) !== 0) continue;
+    const overlays = [...el.querySelectorAll('sup.kpress-footnote-ref')]
+      .filter(ref => parseFloat(getComputedStyle(ref).lineHeight) === 0);
+    for (const ref of el.querySelectorAll('.katex-mathml, .kpress-math-semantic')) {
+      const style = getComputedStyle(ref);
+      if (style.position === 'absolute'
+          && (style.clip !== 'auto' || style.clipPath !== 'none')) overlays.push(ref);
+    }
+    for (const ref of overlays) {
       const reference = document.createRange();
       reference.selectNode(ref);
       for (const rect of reference.getClientRects()) {
@@ -457,6 +480,7 @@ SELF_CHECK_BULLET_CLASS = f"{SELF_CHECK_CLASS}-bullet"
 #: intended them. The active certificate is checked at each screen width.
 _PROVER_LAYOUT = r"""() => {
   const found = [];
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
   for (const figure of document.querySelectorAll('figure[data-figure="5"]')) {
     if (!figure.getClientRects().length) continue;
     const panel = figure.querySelector('.panel');
@@ -467,15 +491,15 @@ _PROVER_LAYOUT = r"""() => {
     for (const item of figure.querySelectorAll('.math-item')) {
       if (getComputedStyle(item).whiteSpace !== 'nowrap')
         found.push('a direction item permits an internal line break');
-      const ink = item.querySelector('.katex-html') || item;
+      const ink = activeMath(item, '.katex-html') || item;
       const box = ink.getBoundingClientRect();
       if (box.left < left - 1 || box.right > right + 1)
         found.push('a direction item overflows the control panel');
-      const math = item.querySelector('.katex');
+      const math = activeMath(item, '.katex');
       if (math && math.querySelector('.mfrac')) fraction(math, 'half-tangent');
     }
     if (!figure.querySelector('.math-item')) found.push('direction items are missing');
-    fraction(figure.querySelector('.mass-val .katex'), 'mass');
+    fraction(activeMath(figure, '.mass-val .katex'), 'mass');
     for (const hidden of figure.querySelectorAll('[hidden]')) {
       if (hidden.getClientRects().length)
         found.push('a hidden status or verdict still occupies a visible box');
@@ -483,7 +507,15 @@ _PROVER_LAYOUT = r"""() => {
   }
   return found;
 
+  function activeMath(root, selector) {
+    return [...root.querySelectorAll(selector)].find(activeVariant);
+  }
+
   function fraction(mass, label) {
+    if (!mass) {
+      found.push(`the ${label} math is missing`);
+      return;
+    }
     const digits = [...mass.querySelectorAll('.katex-html .mfrac .mord')]
       .filter(el => !el.children.length && /[0-9]/.test(el.textContent));
     const size = parseFloat(getComputedStyle(mass).fontSize);
@@ -491,7 +523,28 @@ _PROVER_LAYOUT = r"""() => {
         el => parseFloat(getComputedStyle(el).fontSize) < size * .95))
       found.push(`the ${label} fraction has reduced-size numerator or denominator`);
   }
-}"""
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
+
+
+#: Semantic MathML is clipped even for active math, so select its profile from metadata
+#: rather than visual visibility. Dormant variants must not duplicate fraction terms.
+_ACTIVE_MATH_TEXT = r"""nodes => {
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
+  return nodes.filter(activeVariant).map(node => node.textContent);
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
+
+
+_READOUT_TEXT = r"""el => {
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  let text = '';
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    const parent = node.parentElement;
+    if (parent && activeVariant(parent) && !parent.closest('.katex-mathml'))
+      text += node.textContent;
+  }
+  return text;
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 
 def _readout_text(readout: Locator) -> str:
@@ -507,11 +560,12 @@ def _readout_text(readout: Locator) -> str:
     is wrong with the page; the collection returns nothing for it. Recorded in
     think-kdkq.
 
-    `textContent` is a superset of what a reader sees here -- KaTeX's MathML annotation
-    and the glyph spans -- and is what the terms check above already reads, through
-    `all_text_contents`.
+    Read glyph and raw fallback text from the active font profile. Dormant prepared
+    variants and the clipped MathML annotation cannot supply an expected value when
+    the displayed formula is wrong. This uses the same profile selection as the
+    semantic fraction check above, without depending on rendered-text collection.
     """
-    return readout.evaluate("el => el.textContent")
+    return readout.evaluate(_READOUT_TEXT)
 
 
 def prover_findings(page: Page) -> list[str]:
@@ -590,7 +644,9 @@ def prover_findings(page: Page) -> list[str]:
             found.append(prefix + "the ordinary on-net minimum shows a stale verdict")
         if canvas.evaluate("el => el.toDataURL()") == initial_bitmap:
             found.append(prefix + "the minimum button does not change the opening pose")
-        terms = figure.locator(f"#mv-{slug} .katex-mathml mfrac mn").all_text_contents()
+        terms = figure.locator(f"#mv-{slug} .katex-mathml mfrac mn").evaluate_all(
+            _ACTIVE_MATH_TEXT
+        )
         minimum_mass = Fraction(int(terms[0]), int(terms[1])) if len(terms) == 2 else None
         if slug in known_minima and minimum_mass != known_minima[slug]:
             found.append(prefix + "the minimum button disagrees with the retained certificate")
@@ -840,7 +896,80 @@ _SELF_CHECK_DEFECTS = r"""(spec) => {
 }"""
 
 
-def measure(page_url: str, *, inject: str | None = None, spec: object = None) -> Measured:
+_MARKER_OPTICAL_GEOMETRY = r"""selector => {
+  const item = document.querySelector(selector);
+  const walker = document.createTreeWalker(item, NodeFilter.SHOW_TEXT);
+  let text;
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.textContent.trim() && !node.parentElement.closest('.katex,math')
+        && node.parentElement.checkVisibility({visibilityProperty:true})) {
+      text = node; break;
+    }
+  }
+  const range = document.createRange(); range.selectNodeContents(text);
+  const initialText = [...range.getClientRects()].map(rect => rect.toJSON());
+  const baseline = document.createElement('span');
+  baseline.style.cssText = 'display:inline-block;width:0;height:0;padding:0;'
+    + 'margin:0;line-height:0;vertical-align:baseline';
+  text.parentElement.insertBefore(baseline, text);
+  const y = baseline.getBoundingClientRect().top;
+  const sampledText = [...range.getClientRects()].map(rect => rect.toJSON());
+  baseline.remove();
+  const before = getComputedStyle(item, '::before'), box = item.getBoundingClientRect();
+  const height = parseFloat(before.height), width = parseFloat(before.width);
+  const top = box.top + parseFloat(before.top);
+  const font = getComputedStyle(text.parentElement), fontSize = parseFloat(font.fontSize);
+  return {content: before.content, width, height, top, centre: top + height / 2,
+    baseline: y, fontSize, aboveBaselineEm: (y - top - height / 2) / fontSize,
+    initialText, sampledText, item: box.toJSON(), fontFamily: font.fontFamily,
+    fontWeight: font.fontWeight,
+    math: [...item.querySelectorAll('.kpress-math, .katex, .katex-mathml, .katex-html, '
+      + '.squares-math-box, .base, math')].map(node => {
+      const style = getComputedStyle(node), range = document.createRange();
+      range.selectNode(node);
+      return {tag: node.tagName, classes: node.className, position: style.position,
+        lineHeight: style.lineHeight, clip: style.clip, clipPath: style.clipPath,
+        rects: [...range.getClientRects()].map(rect => rect.toJSON())};
+    })};
+}"""
+
+
+def save_marker_preview(
+    page: Page,
+    directory: Path,
+    medium: str,
+    *,
+    selector: str = ".cert-page.kpress-prose ul > li",
+) -> None:
+    """Keep a prose bullet's ink and measured optical alignment together."""
+    directory.mkdir(parents=True, exist_ok=True)
+    item = page.locator(selector).first
+    item.scroll_into_view_if_needed()
+    measured: dict[str, object] = page.evaluate(_MARKER_OPTICAL_GEOMETRY, selector)
+    if measured["initialText"] != measured["sampledText"]:
+        raise AssertionError("the baseline probe changed the text's layout")
+    box = item.bounding_box()
+    assert box is not None
+    page.screenshot(
+        path=directory / f"marker-{medium}.png",
+        clip={
+            "x": max(0, box["x"] - 25),
+            "y": max(0, box["y"] - 8),
+            "width": box["width"] + 35,
+            "height": box["height"] + 16,
+        },
+    )
+    (directory / f"marker-{medium}.json").write_text(json.dumps(measured, indent=2) + "\n")
+
+
+def measure(
+    page_url: str,
+    *,
+    inject: str | None = None,
+    spec: object = None,
+    marker_artifacts: Path | None = None,
+) -> Measured:
     """The probe's answer under each medium, from one browser and one load.
 
     `inject` runs in the print pass, after the media switch and the viewport change and
@@ -854,12 +983,14 @@ def measure(page_url: str, *, inject: str | None = None, spec: object = None) ->
     with sync_playwright() as driver:
         browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
         try:
-            page = browser.new_page()
+            page = browser.new_page(device_scale_factor=3 if marker_artifacts else 1)
             page.emulate_media(media="screen", reduced_motion="reduce")
             page.goto(page_url, wait_until="load")
             page.wait_for_selector(READY, timeout=60_000)
             page.evaluate("document.fonts.ready")
             screen: Probe = page.evaluate(_PROBE)
+            if marker_artifacts is not None:
+                save_marker_preview(page, marker_artifacts, "screen")
             page.emulate_media(media="print", reduced_motion="reduce")
             page.set_viewport_size(PRINT_VIEWPORT)
             page.evaluate("document.fonts.ready")
@@ -867,6 +998,8 @@ def measure(page_url: str, *, inject: str | None = None, spec: object = None) ->
                 page.evaluate(inject, spec)
             page.evaluate(SETTLED)
             printed: Probe = page.evaluate(_PROBE)
+            if marker_artifacts is not None:
+                save_marker_preview(page, marker_artifacts, "print")
             controls = prover_findings(page)
             mobile = browser.new_page(
                 viewport={"width": 375, "height": 812},
@@ -898,13 +1031,15 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             for row in probe["centred"]
             if row["declared"] and row["shown"] and row["align"] != "center"
         )
-        found.extend(
-            f"{medium}: list marker off the line's centre by "
-            f"{row['markerCentre'] - row['lineCentre']:+.2f}px "
-            f"({row['path']}, {row['fontSize']}px on a {row['lineHeight']}px line)"
-            for row in probe["markers"]
-            if abs(row["markerCentre"] - row["lineCentre"]) > TOLERANCE_PX
-        )
+        for row in probe["markers"]:
+            optical = row["baseFontSize"] * MARKER_OPTICAL_OFFSET_EM if row["painted"] else 0
+            offset = row["markerCentre"] - row["lineCentre"] - optical
+            if abs(offset) > TOLERANCE_PX:
+                target = "optical centre" if row["painted"] else "line's centre"
+                found.append(
+                    f"{medium}: list marker off the {target} by {offset:+.2f}px "
+                    f"({row['path']}, {row['fontSize']}px on a {row['lineHeight']}px line)"
+                )
         for bullet in probe["bullets"]:
             if not bullet["painted"] or min(bullet["width"], bullet["height"]) <= 0:
                 found.append(f"{medium}: list bullet is missing ({bullet['path']})")
@@ -1049,6 +1184,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--page", type=Path, default=PAGE, help="the rendered page to measure")
     parser.add_argument("--json", action="store_true", help="print the raw measurements")
     parser.add_argument(
+        "--marker-artifacts",
+        type=Path,
+        help="Save screen/print bullet images and baseline measurements",
+    )
+    parser.add_argument(
         "--all",
         action="store_true",
         help="also report every block centred on screen and not in print",
@@ -1066,7 +1206,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.self_check:
         return self_check(args.page.resolve().as_uri())
 
-    measured = measure(args.page.resolve().as_uri())
+    measured = measure(args.page.resolve().as_uri(), marker_artifacts=args.marker_artifacts)
     if args.json:
         print(json.dumps(measured, indent=2, sort_keys=True))
         return 0

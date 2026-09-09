@@ -401,23 +401,32 @@ tiers:
   # 2026-09-07: the corpus tripled (n = 1..324) and the lane's tests that iterate it grew
   # with it. The first hosted reading at the reference shape, run 34133437296, was
   # 162.62s, all tests passing, which failed the drift rule against the 102.83s record
-  # (1.58x) rather than the ceiling. The record below is that reading; the ceiling moves
-  # to 260s, 1.6x the reading and under the 2x headroom rule, because the same lane has
+  # (1.58x) rather than the ceiling. The record became that reading; the ceiling moved
+  # to 260s, 1.6x the reading and under the 2x headroom rule, because the same lane had
   # shown a 1.52x hosted spread and a band set to one reading fails on an ordinary day.
-  ceiling_seconds: 260.0
-  # Hosted samples at the reference shape establish the baseline below.
-  measured_seconds: 162.62
-  measured_on: '2026-09-07'
+  #
+  # 2026-09-08 (think-uwow): two consecutive hosted runs of the current 4,283-test lane
+  # cost 158.64s and 88.84s at the reference shape. The geometric mean is 118.72s;
+  # 237s rounds down from twice that mean. The unchanged drift rule fails above 178.08s
+  # and the stale rule below 71.232s, so both observations fit without weakening policy.
+  ceiling_seconds: 237.0
+  measured_seconds: 118.72
+  measured_on: '2026-09-08'
   measured_where: >-
-    One reading at the reference shape, 162.62s in run 34133437296, the first hosted run
-    of the lane over the 324-case corpus; the earlier four-sample mean of 102.83s
-    (102.50, 123.53, 108.44 and 81.43 across runs 34023002068, 34032566385, 34037168378
-    and 34040196689, spread 1.52x) described the hundred-case corpus. The centre of the
-    band, not an edge: recording the maximum was tried first and left `geometry` 1.21x
-    from failing the stale rule on a fast runner, because a record at the top of the band
-    starves that rule by as much as it feeds the drift rule.
-    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
-    the argument for `think-be1s` rather than a property of these numbers.
+    Geometric mean of two consecutive current-suite observations on 2026-09-08:
+    158.64s in run 34285770932/job 102260892830 at dfa0a422f6dcd22dda7ed00ddb4763b65f4aac75,
+    and 88.84s in run 34288782986/job 102270405743 at a10569d1ccf47522d6ef2de8e6ddf39a42b0c095.
+    Both passed all 4,283 selected tests with Python 3.14.7, four reported CPUs, and
+    `packing-validate --suite --jobs 1 --inner-jobs 1`, which supplies four xdist workers.
+    The gate walls include pytest startup; pytest itself reported 157.76s and 88.23s.
+    Workflow, dependency lock, and selection code were unchanged between the two commits.
+    The Ubuntu 24.04 runner images were 20260831.293.1 and 20260907.300.1 respectively;
+    this 1.79x spread records hosted variation and does not establish a code speedup.
+    The previous 162.62s observation in run 34133437296 on 2026-09-07 remains history
+    of the first post-corpus-growth lane, outside this mean of the current selection.
+    The earlier four-sample mean of 102.83s described the hundred-case corpus.
+    `think-uwow` tracks this refresh; `think-be1s` retains the policy follow-up to
+    represent observed variation as a band. Refresh the mean as comparable samples accrue.
   # `inner_jobs: 1`, not 4, because that is what the workflow passes. The xdist worker
   # count comes from `--jobs` through `_pytest_workers`, not from `--inner-jobs`, and a
   # reference that named the worker count instead of the invocation would match no run

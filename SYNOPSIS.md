@@ -207,6 +207,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
+| [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
+| [Math Startup Ledger](packing/benchmarks/math-startup/ledger.md) | generated status view | generated | generated | — |
 | [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
@@ -468,6 +471,9 @@ case or experiment separately.
 | [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
 | [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | [Change-Scoped Exhaustive Validation](docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md) | dated review record | record | retained | — |
+| `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
+| `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
+| `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -610,6 +616,14 @@ stop. Long autonomous sessions use the same rule; autonomy changes the duration 
 controller, not permission to blur contracts.
 
 ### Current Handoff
+
+**Math startup release checkpoint.**
+[Session 111](packing/campaign/agent-sessions/session-111-font-startup-stability.md)
+records the prepared geometry, parameter-first hydration, reload restoration, and the
+local browser and PDF evidence for [PR 135](https://github.com/jlevy/squares/pull/135).
+PR 135 subsequently landed on `main` at `171bba33`; its post-merge CI, Pages deployment,
+live publication checks, and delayed-font smoke test passed, closing the release work
+under `think-qcmi`. The research priorities below are unchanged.
 
 **Parallel structural lanes at `n = 11`, first wave terminal.**
 [X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
@@ -868,14 +882,12 @@ The dependency guard gives no mathematical verdict on H125 or continuum certific
 Its new checkpoint is separate from the completed eight-active-hour block.
 
 [Session096](packing/campaign/agent-sessions/session-096-stromquist-memos-and-helpers.md)
-reviewed Stromquist’s three memos and independently checked the five-point obstruction
-and local segment helper.
-The
+reviewed Stromquist’s three memos, corrected the paper’s chronology and five case-proof
+descriptions, and independently checked a five-dot obstruction and the local segment
+helper. Its
 [source brief](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
-retains exact geometric replay and remaining Memo I implications under `think-0krc`.
-Finite incidence controls do not establish the missing geometric premises.
-This lane can proceed independently of BC264; neither PR112 nor PR115 changes a packing
-bound.
+retains the remaining geometric replay under `think-0krc`; the selected target-research
+entry remains BC-264. All 66 full-checkpoint steps passed at `dd92b2a0`.
 
 [Session105](packing/campaign/agent-sessions/session-105-stromquist-n26-verification.md)
 follows the author’s clarification about `n=26`. Its
@@ -3455,12 +3467,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
 | `codex-task-tree-session-110.yaml` | session-110 | 940 | 6.73 h | 2.58 h | 2.58 h | yes |
+| `codex-task-tree-session-111.yaml` | session-111 | 2,798 | 20.24 h | 6.22 h | 6.23 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 65 |
+| measured | 66 |
 | unmeasured | 45 |
-| **total** | **110** |
+| **total** | **111** |
 
 <!-- END GENERATED: session-close-report -->
 

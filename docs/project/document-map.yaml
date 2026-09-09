@@ -9,6 +9,9 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packing/benchmarks/math-startup/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/benchmarks/math-startup/ideas.md, role: plan, authority: supporting, lifecycle: maintained}
+  - {path: packing/benchmarks/math-startup/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-08-pr127-research-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md, role: review, authority: record, lifecycle: retained}
@@ -491,6 +494,24 @@ documents:
     authority: record
     lifecycle: retained
 collections:
+  - pattern: packing/benchmarks/math-startup/experiments/*.md
+    role: experiment-record
+    authority: record
+    lifecycle: retained
+    contract: squares.math-startup.experiment.v1
+    schema: packing/benchmarks/math-startup/schemas/experiment.schema.yaml
+  - pattern: packing/benchmarks/math-startup/explorations/*.md
+    role: exploration-report
+    authority: record
+    lifecycle: retained
+    contract: squares.math-startup.exploration.v1
+    schema: packing/benchmarks/math-startup/schemas/exploration.schema.yaml
+  - pattern: packing/benchmarks/math-startup/hypotheses/*.md
+    role: hypothesis-record
+    authority: definitive
+    lifecycle: maintained
+    contract: squares.math-startup.hypothesis.v1
+    schema: packing/benchmarks/math-startup/schemas/hypothesis.schema.yaml
   - pattern: packing/frontier/n-*.md
     role: frontier-case
     authority: definitive

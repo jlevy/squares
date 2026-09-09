@@ -98,36 +98,6 @@ GENERATOR = REPO / "vendor" / "kpress" / "devtools" / "instance_sans.py"
 #: A weight and a style, as CSS asks for them.
 type Face = tuple[int, str]
 
-#: The faces this page prints in, and `--check` refuses any request the set does not
-#: answer. One weight per role and no others: the paper profile's own three tokens,
-#: light 410, medium 550 and bold 680, declared in `explainer-shell.html`. kpress's own
-#: instances are at kpress's tokens -- 370, 400, 550, 600, 650, 700 -- a different set
-#: for a different document, which is why this page instances its own.
-#:
-#: 600 was here until 2026-09-07, for kpress's literal on the footnote controls, which
-#: the profile now maps to its medium: a fourth weight on this page's sans, two instanced
-#: faces in the PDF, for thirty superscript figures and the arrows back from the sources.
-#:
-#: Both styles of each, though the probe finds a request only for 410 italic: `font-style`
-#: inherits, so any of these weights becomes italic the moment a word inside it is
-#: emphasised, and a missing instance would put that run back on the variable font and
-#: back into outlines. An instance nothing asks for costs 15 KB on disk and nothing in
-#: the PDF, since a declared face that draws no glyph is not embedded.
-PRINT_FACES: tuple[Face, ...] = (
-    (410, "normal"),
-    (410, "italic"),
-    (550, "normal"),
-    (550, "italic"),
-    (680, "normal"),
-    (680, "italic"),
-)
-
-#: The one request answered by a face that is not an exact match, and where it lands.
-#: CSS Fonts 4 searches a desired weight in [400, 500] upward to 500 before it looks
-#: down, so 400 takes the 410 instance rather than falling to 550. Ten units is under a
-#: fifth of the gap to the next token and does not show at the size these run at.
-SUBSTITUTED: dict[int, int] = {400: 410}
-
 
 class Generator(Protocol):
     """The part of kpress's `instance_sans` this tool uses, so the loaded module has one.
@@ -138,6 +108,7 @@ class Generator(Protocol):
     """
 
     FAMILY: str
+    REGULAR_WEIGHT: int
     instance_face: Callable[[Path, int], bytes]
     instance_name: Callable[[int, str], str]
     variable_face: Callable[[str, Path], Path]
@@ -163,6 +134,23 @@ def generator() -> Generator:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return cast(Generator, module)
+
+
+#: Regular weight belongs to KPress's token and matching font/metric generator.
+#: The paper retains its medium and bold roles. Both styles are needed because
+#: emphasis inherits weight; a missing static face would return PDF text to outlines.
+PRINT_FACES: tuple[Face, ...] = (
+    (generator().REGULAR_WEIGHT, "normal"),
+    (generator().REGULAR_WEIGHT, "italic"),
+    (550, "normal"),
+    (550, "italic"),
+    (680, "normal"),
+    (680, "italic"),
+)
+
+#: Page-margin text can request the initial 400. CSS searches upward to 500 before
+#: downward in this interval, so the shared regular instance answers that request.
+SUBSTITUTED: dict[int, int] = {400: generator().REGULAR_WEIGHT}
 
 
 def print_family() -> str:

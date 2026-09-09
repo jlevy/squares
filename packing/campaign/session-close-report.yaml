@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 110
+count: 111
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 65
+  sessions_measured: 66
   sessions_unmeasured: 45
   attributed:
     rollups: 123
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3920
     wall_hours: 230.77
 codex_receipts:
-  attributed: 30
+  attributed: 31
   unattributed: 0
-  measured: 30
+  measured: 31
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1762,4 +1762,24 @@ sessions:
     agent_hours: 6.73
     active_union_hours: 2.58
     wall_hours: 2.58
+    snapshot_incomplete: true
+- id: session-111
+  title: "Prepared math startup and publication integration"
+  status: stopped
+  primary_bead: think-qcmi
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+    model_responses: 2798
+    agent_hours: 20.24
+    active_union_hours: 6.22
+    wall_hours: 6.23
     snapshot_incomplete: true
