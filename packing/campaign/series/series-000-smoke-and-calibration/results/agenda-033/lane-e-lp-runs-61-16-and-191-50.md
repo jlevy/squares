@@ -9,8 +9,12 @@ Retained beside it: the frozen depth-one family at `191/50`
 ([`lane-e-cutting-191-50-family.json`](lane-e-cutting-191-50-family.json)), the loop’s
 summary ([`lane-e-cutting-191-50-summary.json`](lane-e-cutting-191-50-summary.json)),
 and the row-completion receipt at `61/16`
-([`lane-e-completion-61-16-receipt.json`](lane-e-completion-61-16-receipt.json)); the 3
-MB loop state and the 4.5 MB completion input are not retained.
+([`lane-e-completion-61-16-receipt.json`](lane-e-completion-61-16-receipt.json)),
+slimmed to its decision-bearing content (parameters, status, stop reason, row solution,
+round timings, timing; 201,836 bytes) with a `not_retained` block recording the full
+receipt’s SHA-256 `1af8c4dedc8089796c99efa64ab74a57fc3dc62552001a75b623f59629f7efc7`,
+its 12,584,012 bytes, and what its dropped input, site-orbit and per-row blocks held;
+the 3 MB loop state and the 4.5 MB completion input are not retained.
 Nothing here is a registered round or a new bound.
 The ceiling family it cites lives at `ceiling-family-191-50.json` in this directory (the
 lane wrote `agenda-031`, the directory’s name before the reconciliation renumbering).
@@ -181,6 +185,9 @@ All under
 
 - `completion-61-16/receipt.json` — job 1, 12.5 MB: parameters, `round_timings`,
   `row_solution`, all 13,393 `exact_rows`, the site orbits.
+  Only its decision-bearing content is retained here, as
+  `lane-e-completion-61-16-receipt.json`; the 24,653-site, 11,885-row input block, the
+  3,180 site orbits and the two per-row dumps (12.4 MB of the 12.6 MB) are not.
   `completion-61-16/input.json` is the byte copy of the source state; `stdout.log` holds
   the one-line verdict.
 - `cutting-191-50-summary.json`, `-state.json` (5 iterations, 17,449 sites, 11,589
