@@ -1,0 +1,8 @@
+{
+  "name": "known-best atlas records and sample",
+  "output": "known-best atlas sample check passed: 36 of 324 cases rebuilt (every 9th from n=1), 324 manifest entries, sources, links, and 2 composites\ncomposite figure record check passed: matches the frontier and catalogue\ncomposite PDF check passed: known-best-1-100.pdf matches the current known-best-1-100.svg\ncomposite PDF check passed: known-best-1-324.pdf matches the current known-best-1-324.svg\nknown-best contact overlay check passed: 5 house-rendered calibration strata\nknown-best chunk evidence profile check passed: 36 non-grid calibration cases\ncontact enumeration pricing check passed in 10.70s\ncontact full-cell control check passed\ncontact structures check passed",
+  "reason": "",
+  "run_id": "cff3023c333949f090f088fb57734a96",
+  "seconds": 86.05113433298538,
+  "status": "passed"
+}

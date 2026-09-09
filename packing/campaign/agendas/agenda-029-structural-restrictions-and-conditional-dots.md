@@ -8,8 +8,8 @@ softschema:
 agenda:
   id: agenda-029
   title: Structural Restrictions and Conditional Dots
-  updated: '2026-09-07'
-  status: paused
+  updated: '2026-09-08'
+  status: superseded
   objective: >-
     Prepare a coordinated n11 campaign connecting proved corner, contact and angle
     restrictions to stronger conditional dot certificates. Use three preliminary
@@ -35,12 +35,24 @@ agenda:
     artifacts:
     - packing/campaign/explorations/X-019-structural-restrictions-and-conditional-dots.md
     - packing/campaign/hypotheses/H-126-insertion-saturation-corner-structure.md
+    outcomes:
+    - scope: The Agenda 029 planning block and its reviewed structural-research handoff
+      classification: achieved
+      result: >-
+        X-019, H-126 and the three-block research plan were reviewed and published without
+        opening a scientific target. Agenda 030 later replaced the sequential execution
+        plan with parallel lanes while retaining the same global question.
+      evidence:
+      - packing/campaign/explorations/X-019-structural-restrictions-and-conditional-dots.md
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      disposition: retire-success
+      follow_up: null
     next_evidence: Await the user's research-start instruction; then the coordinator dispatches the block-one lanes below.
   - id: BC-285
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: What quantitative corner-frame restrictions follow from insertion saturation at 96/25?
     hypotheses: [H-126]
@@ -56,14 +68,28 @@ agenda:
     bead: think-pbv4
     workflows: [insight-iteration, factual-review]
     depends_on: []
+    discharged_by: BC-293
     parallel_group: agenda029-corners
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The useful corner restriction requested by the Agenda 029 corner lane
+      classification: achieved
+      result: >-
+        BC-293 independently retained the corner-pair containment theorem: every packing
+        of eleven unit squares at 96/25 has four distinct squares, one for each corner,
+        containing one of that corner's selected marks. The separate corner-class pricing
+        and its unrun complementary branches remain stopped under BC-292.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
+      - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
+      disposition: retire-success
+      follow_up: null
     next_evidence: Give BC287 a precise capture-relevant consequence, and bring its global relevance to block-one selection.
   - id: BC-286
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: stopped
     priority: 1
     question: Can complete angle-count cases at 96/25 gain a useful exclusion from class-dependent dot thresholds?
     hypotheses: [H-102]
@@ -81,12 +107,35 @@ agenda:
     depends_on: []
     parallel_group: agenda029-compositions
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The exact end-band and registered near-axis count subproblem transferred to BC-295
+      classification: achieved
+      result: >-
+        BC-295 replayed the registered counts and proved exact end-band exclusions at
+        96/25 on the stated grids. Those results settle their own angle-cell scopes and
+        do not close the complete composition split requested here.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
+      - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
+      disposition: retire-success
+      follow_up: null
+    - scope: The full near-axis composition split and class-weighted fractional-packing boundary
+      classification: never-opened
+      result: >-
+        BC-296 never opened. No composition census, survivor family or boundary of the
+        class-weighted packing polytope was produced, so every untested composition and
+        its geometric complement remain available only through fresh prospective work.
+      evidence:
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
+      follow_up: think-n6fr
     next_evidence: Return actual closed profiles and the complementary counts, or identify which missing geometric restriction would change the outcome.
   - id: BC-287
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: stopped
     priority: 0
     question: Can the global four-blocker description support a useful continuous frame-conditioned dot contradiction?
     hypotheses: [H-111, H-119]
@@ -105,12 +154,27 @@ agenda:
     depends_on: []
     parallel_group: agenda029-capture
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The frame-conditioned capture route transferred to BC-294 and BC-299
+      classification: time-limited
+      result: >-
+        The successor work retained an exact localization theorem and scoped one-body
+        measurements, but it did not produce a two-branch certificate or close the escape
+        class. Session 108 ended before its second LP and final validation; session 100's
+        named scratch state is absent. Ownership, compatibility and the unrun complement
+        remain open.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md
+      - packing/campaign/agent-sessions/session-108-anchors-at-q.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: continue
+      follow_up: think-4ifm
     next_evidence: Bring one consequential certificate or concrete geometric bottleneck to BC289; preserve BC261's single interface owner.
   - id: BC-288
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: tentative
+    state: stopped
     priority: 2
     question: Can forced edge-contact components or a finite feasible reduction constrain minimizing angle complexity?
     hypotheses: [H-117, H-121]
@@ -128,12 +192,33 @@ agenda:
     depends_on: []
     parallel_group: agenda029-angle-reserve
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The contact lemmas proved during the structural survey
+      classification: achieved
+      result: >-
+        X-021 retains the proved contact and angle facts at their stated scope. They are
+        inputs to later work and do not imply a finite global reduction or a minimizing
+        angle-complexity theorem.
+      evidence:
+      - packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md
+      disposition: retire-success
+      follow_up: null
+    - scope: The adversarial witness search, mixed-pocket realization and finite feasible reduction
+      classification: never-opened
+      result: >-
+        BC-300 remained tentative and no target search ran. No exact witness, no-witness
+        result, mixed-pocket realization or merging lemma was produced.
+      evidence:
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
+      follow_up: think-dfof
     next_evidence: Compare its actual implication for H117/H121 with the certificate leads before allocating sustained work.
   - id: BC-289
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: blocked
+    state: complete
     priority: 0
     question: What is the strongest consequential theorem or obstruction the best first-block lead can establish?
     hypotheses: [H-126, H-102, H-111, H-117, H-121]
@@ -150,14 +235,26 @@ agenda:
     bead: think-4elv
     workflows: [review-planning-oversight, insight-iteration, research-loop, factual-review]
     depends_on: []
-    blocked_on: First-block evidence and disposition; no route is selected or funded by this planning checkpoint.
+    discharged_by: BC-303
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: Selection and independent replay of the strongest first-wave results
+      classification: achieved
+      result: >-
+        BC-303 independently replayed the segment-localization, corner-pair and angle-cell
+        results, corrected their scopes and selected ownership compatibility as the
+        principal continuation, with fractional depth as the efficiency lane.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md
+      - packing/campaign/agent-sessions/session-107-first-wave-selection.md
+      disposition: retire-success
+      follow_up: null
     next_evidence: Freeze the strongest claim and remaining proof obligations for block three; readiness alone cannot justify expansion.
   - id: BC-290
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: complete
     priority: 0
     question: What survives independent checking, and what does it change about the global n11 problem?
     budget: Shared two-hour block three, with the final hour reserved for independent verification, integration and publication.
@@ -169,22 +266,109 @@ agenda:
     bead: think-nlji
     workflows: [factual-review, documentation-pass, review-planning-oversight]
     depends_on: [BC-289]
+    discharged_by: BC-304
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: Independent handoff review, bound impact, domain accounting and next selection
+      classification: achieved
+      result: >-
+        BC-304 preserves the exact ten-segment localization theorem and the transported
+        exp-070 depth-one control, retracts or narrows the unsupported helper claims, and
+        records that no certified lower or upper bound changed. It names the unfinished
+        domains and selects the guarded pair-compatibility question as the next principal
+        insight lane. Merge and the corrected-tree checkpoint remain pending.
+      evidence:
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      - packing/campaign/agent-sessions/session-110-pr127-handoff-review.md
+      disposition: retire-success
+      follow_up: null
     next_evidence: User reviews the mathematical result and next selection; no automatic new family or extension to rescue a missed target.
+  closeout:
+    documentation_review:
+    - path: README.md
+      decision: checked-current
+      reason: The certified packing bracket is unchanged, so the reader-facing summary needs no bound edit.
+    - path: SYNOPSIS.md
+      decision: updated
+      reason: The generated agenda and session views will record the supersession and current handoff.
+    - path: TUTORIAL.md
+      decision: checked-current
+      reason: No tutorial algorithm or user workflow changed in this superseded planning agenda.
+    - path: conventions.md
+      decision: checked-current
+      reason: Existing evidential-status and historical-record rules already require these scoped dispositions.
+    - path: development.md
+      decision: checked-current
+      reason: The established validation and generated-view entry points remain the closeout commands.
+    - path: operating-rules.md
+      decision: updated
+      reason: The parallel-lane and model-routing policy used by Agenda 030 is now recorded there.
+    changes:
+    - name: agenda-supersession
+      result: >-
+        Agenda 030 replaced the sequential execution plan; satisfied exits now point to
+        their later evidence and partial or unopened work remains stopped at its actual scope.
+      paths:
+      - packing/campaign/agendas/agenda-029-structural-restrictions-and-conditional-dots.md
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+    - name: handoff-review
+      result: >-
+        The independent review preserves the surviving exact results, retracts unsupported
+        implications and names every remaining complement without changing the bracket.
+      paths:
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      - packing/campaign/agent-sessions/session-110-pr127-handoff-review.md
+    validation:
+    - scope: corrected-integration-checkpoint
+      status: pending
+      evidence: >-
+        The corrected integration tree has not yet completed its own full packing-validate
+        checkpoint. Earlier c89c7646 records and focused tests and the 8176e389 deferred
+        checkpoint are historical baselines only.
+    replanning:
+      candidates:
+      - bead: think-qfog
+        workflow: insight-iteration
+        priority: 1
+        rationale: >-
+          Continue from the completed ten-segment theorem at a distinct scope: build a
+          guarded pair reader for compatibility and ownership without assuming unique hits.
+      - bead: think-7lp3
+        workflow: efficiency-loop
+        priority: 1
+        rationale: >-
+          Start from the retained 10.3842 depth-one control and measure full-dual pricing
+          before any separately registered target continuation.
+      - bead: think-kx2l
+        workflow: insight-iteration
+        priority: 2
+        rationale: >-
+          Retain the corner-class support question and missing site-set complement
+          behind the two higher-priority lanes.
+      selected:
+        bead: think-qfog
+        workflow: insight-iteration
+        rationale: >-
+          The segment theorem survives independent replay and exposes a precise missing
+          compatibility step whose resolution can change the ownership case split.
+      operator_input:
+        status: confirmed
+        note: The owner authorized closeout, merge once the corrected tree is ready, and continuation on a new branch.
 ---
 # Agenda 029 — Structural Restrictions and Conditional Dots
 
-**This agenda is prepared, paused and unstarted.** BC-284 owns the present W10
-strategy/planning block.
-The proposed research begins only when the user asks an agent to start it.
-No scientific source, target, experiment, session or overnight automation is opened by
-publishing these plans.
+**This agenda is superseded by Agenda 030.** BC-284 completed the planning block without
+opening a scientific target.
+Agenda 030 replaced the sequential execution plan, retained the same global question,
+and now records which exits were met and which complementary domains remain stopped or
+never opened.
 
 [X-019](../explorations/X-019-structural-restrictions-and-conditional-dots.md) supplies
 the mathematical rationale, proofs of the elementary starting facts, previous-result map
 and alternative avenues.
-This agenda is the operational handoff, owned by `think-p137`; its first three research
-commitments can proceed independently.
+This document remains the historical operational handoff.
+Its terminal frontmatter is the current disposition map; the original allocation below
+records what was proposed.
 
 ## Allocation and Parallel Ownership
 

@@ -1,0 +1,499 @@
+
+== slow behavioral tests ==
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [ 74%]
+.........................                                                [100%]
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'fontTools.misc.bezierTools', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================== slowest durations ===============================
+569.71s call     tests/test_known_best_atlas.py::test_known_best_composite_contains_every_case_and_square
+162.61s call     tests/test_promote_exact_phase1.py::test_promote_exact_phase1
+83.60s call     tests/test_exact_construction_price.py::test_the_record_round_trips
+80.47s call     tests/test_contact_assembly_labels.py::test_every_rich_d4_and_relabeling_image_has_one_label
+70.78s call     tests/test_fractional_sweep_integer.py::test_the_n17_certificate_verifies_in_the_fast_tier_now
+67.04s call     tests/test_promote_elimination.py::test_promote_elimination
+60.73s call     tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+59.02s call     tests/test_review_trump_local_theorem.py::test_full_retained_review_and_three_falsifying_controls
+58.02s call     tests/test_promote_exact_lp.py::test_promote_exact_lp
+56.85s setup    tests/test_n5_local_rigidity.py::test_every_control_rejects
+51.66s call     tests/test_promote_system.py::test_promote_system
+48.91s call     tests/test_render_colors.py::test_right_angles_and_diagonals_are_pinned_across_the_atlas
+48.21s call     tests/test_n54_source_contract.py::test_author_cli_is_stdout_only_and_identical_under_optimization
+46.42s call     tests/test_schema_validator_equivalence.py::test_mutations_actually_break_something
+43.99s call     tests/test_fractional_sweep_integer.py::test_the_parallel_direction_loop_matches_the_serial_one
+42.79s call     tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+39.80s call     tests/test_promote_system_degree.py::test_promote_system_degree
+36.89s call     tests/test_promote_solve.py::test_promote_solve
+35.90s call     tests/test_n54_source_contract_independent.py::test_author_and_verifier_are_normal_optimized_byte_identical
+35.76s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[translation-escape-screen.json]
+29.44s call     tests/test_n54_source_contract.py::test_synthetic_fixture_evaluates_exactly_in_assignment_order
+29.00s call     tests/test_fractional_interval.py::test_the_burns_control_stalls_the_interval_route_only_at_direction_zero
+28.56s call     tests/test_n5_local_rigidity.py::test_every_control_rejects
+27.11s call     tests/test_known_best_atlas.py::test_every_known_best_witness_agrees_with_its_manifest_entry
+20.19s call     tests/test_audit_n54_source_formula.py::test_changed_minimal_polynomial_is_refused
+19.25s call     tests/test_audit_n54_source_formula.py::test_n54_source_formula_cli_agrees_under_optimization
+18.42s call     tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees
+18.05s call     tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+17.53s setup    tests/test_n54_source_contract_independent.py::test_author_and_verifier_are_normal_optimized_byte_identical
+17.44s call     tests/test_fractional_certificate.py::test_the_burns_control_is_accepted_at_a_least_mass_above_one
+17.40s call     tests/test_fractional_certificate.py::test_containment_at_exactly_one_is_refused
+16.18s call     tests/test_n54_source_contract.py::test_canonical_json_round_trip_and_float_refusal
+16.10s call     tests/test_n40_rigidity.py::test_the_witness_is_a_motion_checked_from_the_pose
+16.06s call     tests/test_n54_source_contract.py::test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts
+16.03s call     tests/test_n40_rigidity.py::test_only_tight_rows_enter_the_obstruction
+15.54s call     tests/test_n54_source_contract.py::test_exact_evaluation_refuses_an_algebraically_zero_denominator
+14.96s call     tests/test_n40_rigidity.py::test_the_witness_turns_every_block_square_at_the_same_rate
+14.94s call     tests/test_n54_source_contract.py::test_audited_receipt_binds_exact_field_builtins_and_digest
+14.66s call     tests/test_n54_source_contract.py::test_field_receipt_digest_drift_is_refused
+13.94s call     tests/test_minus_w_bridge.py::test_the_bridge_agrees
+13.55s call     tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung
+13.54s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-partitions.json]
+12.99s call     tests/test_green17.py::test_interval_audit_certifies_an_interior_side
+12.54s call     tests/test_gobel_family.py::test_the_new_sizes_are_built_here_and_not_merely_asserted
+11.92s call     tests/test_motion_lab.py::test_motion_lab_is_environment_independent
+11.05s call     tests/test_check_declared_bounds.py::test_n68_depth_bound_is_named_by_its_refusal_test
+10.55s call     tests/test_n5_local_rigidity.py::test_a_declared_count_disagreement_blocks_readiness
+10.07s call     tests/test_fractional_interval.py::test_box_bounds_bracket_the_exact_mass_at_sampled_centres
+9.70s call     tests/test_n40_rigidity.py::test_the_null_space_is_what_makes_the_candidate_exact
+9.08s call     tests/test_n40_rigidity.py::test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted
+8.30s call     tests/test_gobel_family.py::test_the_record_round_trips
+8.02s call     tests/test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field
+7.88s call     tests/test_motion_lab.py::test_rendered_lab_is_deterministic_retained_and_offline
+7.65s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_supports_direct_stable_identity_lookup
+6.44s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_cross_field_mutations_fail
+6.19s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte
+6.11s call     tests/test_bentz46.py::test_certificate_refuses_a_displaced_point
+5.44s call     tests/test_contact_scaffold_atlas.py::test_contact_scaffold_show_is_read_only_and_explicitly_abstract
+5.33s call     tests/test_trump_isolation_radius.py::test_gap_and_symmetry_certificates_hold
+5.04s call     tests/test_fractional_certificate.py::test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover
+5.03s call     tests/test_n40_rigidity.py::test_the_contact_model_is_measured_not_assumed
+5.00s call     tests/test_fractional_interval.py::test_both_n12_certificates_certify_every_direction_of_the_sub_net
+4.45s call     tests/test_n17_weighted_certificate_successor.py::test_real_ancestry_verifies_without_evaluating_a_direction
+4.12s call     tests/test_bentz46.py::test_certificate_builds_and_charges_every_point
+3.67s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[composite-figure.json]
+3.35s call     tests/test_campaign_runner_trust_boundary.py::test_each_cell_gets_its_own_share_of_the_timebox
+3.19s call     tests/test_motion_lab_interactive.py::test_service_serves_live_and_exact_profiles_with_scenario_refresh
+3.03s call     tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-7]
+2.83s setup    tests/test_motion_lab.py::test_rendered_lab_is_deterministic_retained_and_offline
+2.49s call     tests/test_validation_cli.py::test_run_selected_interrupt_stops_detached_production_process
+2.30s call     tests/test_validation_cli.py::test_run_timeout_terminates_child_and_reports_captured_output
+2.30s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-scaffolds-size5.json]
+1.96s call     tests/test_verified_upper_bound_contract.py::test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports
+1.86s call     tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-5]
+1.45s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json0]
+0.56s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability-101-324.json]
+0.42s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[defects.yaml]
+0.40s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[session-close-report.yaml]
+0.33s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-evidence-profile.json]
+0.31s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[document-map.yaml]
+0.26s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-full-cell-control.json]
+0.23s setup    tests/test_campaign_runner_trust_boundary.py::test_each_cell_gets_its_own_share_of_the_timebox
+0.18s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[schadt-n029-2025-decimal.yaml]
+0.14s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[evidence.yaml]
+0.13s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-structures.json]
+0.06s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[results.yaml]
+0.06s setup    tests/test_n5_local_rigidity.py::test_a_declared_count_disagreement_blocks_readiness
+0.03s setup    tests/test_motion_lab.py::test_motion_lab_is_environment_independent
+0.03s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[overlap-negative-control.yaml]
+0.03s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability-101-324.json]
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-assembly-grammar.yaml]
+0.02s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_cross_field_mutations_fail
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[covering-values.yaml]
+0.02s setup    tests/test_n40_rigidity.py::test_the_null_space_is_what_makes_the_candidate_exact
+0.02s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-coverage.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[search-strategies.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-enumeration-pricing.json]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[codex-task-tree-session-071.yaml]
+0.01s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-evidence-profile.json]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-009.md]
+0.01s setup    tests/test_known_best_atlas.py::test_every_known_best_witness_agrees_with_its_manifest_entry
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[rotated-n001-sqrt2.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[agent-aa151b341a1282a9c.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability.yaml]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[asymptotic-waste-bounds.yaml]
+0.01s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-enumeration-pricing.json]
+0.01s teardown tests/test_n54_source_contract.py::test_audited_receipt_binds_exact_field_builtins_and_digest
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-001.yaml]
+0.01s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-overlays.json]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-overlays.json]
+0.01s call     tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json1]
+0.01s setup    tests/test_fractional_sweep_integer.py::test_the_parallel_direction_loop_matches_the_serial_one
+0.01s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_show_is_read_only_and_explicitly_abstract
+0.00s teardown tests/test_n5_local_rigidity.py::test_every_control_rejects
+0.00s setup    tests/test_validation_cli.py::test_run_selected_interrupt_stops_detached_production_process
+0.00s setup    tests/test_n40_rigidity.py::test_only_tight_rows_enter_the_obstruction
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[codex-task-tree-session-071.yaml]
+0.00s setup    tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-5]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[covering-values.yaml]
+0.00s setup    tests/test_validation_cli.py::test_run_timeout_terminates_child_and_reports_captured_output
+0.00s setup    tests/test_promote_exact_lp.py::test_promote_exact_lp
+0.00s teardown tests/test_audit_n54_source_formula.py::test_n54_source_formula_cli_agrees_under_optimization
+0.00s setup    tests/test_contact_assembly_labels.py::test_every_rich_d4_and_relabeling_image_has_one_label
+0.00s setup    tests/test_render_colors.py::test_right_angles_and_diagonals_are_pinned_across_the_atlas
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json1]
+0.00s setup    tests/test_n54_source_contract.py::test_author_cli_is_stdout_only_and_identical_under_optimization
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_show_is_read_only_and_explicitly_abstract
+0.00s setup    tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-7]
+0.00s setup    tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-assembly-grammar.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-partitions.json]
+0.00s setup    tests/test_fractional_interval.py::test_box_bounds_bracket_the_exact_mass_at_sampled_centres
+0.00s setup    tests/test_fractional_certificate.py::test_containment_at_exactly_one_is_refused
+0.00s teardown tests/test_render_colors.py::test_right_angles_and_diagonals_are_pinned_across_the_atlas
+0.00s setup    tests/test_fractional_sweep_integer.py::test_the_n17_certificate_verifies_in_the_fast_tier_now
+0.00s teardown tests/test_promote_system.py::test_promote_system
+0.00s teardown tests/test_fractional_certificate.py::test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover
+0.00s teardown tests/test_exact_construction_price.py::test_the_record_round_trips
+0.00s teardown tests/test_n54_source_contract.py::test_author_cli_is_stdout_only_and_identical_under_optimization
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[document-map.yaml]
+0.00s setup    tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees
+0.00s setup    tests/test_bentz46.py::test_certificate_builds_and_charges_every_point
+0.00s setup    tests/test_schema_validator_equivalence.py::test_mutations_actually_break_something
+0.00s teardown tests/test_motion_lab.py::test_motion_lab_is_environment_independent
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[schadt-n029-2025-decimal.yaml]
+0.00s setup    tests/test_fractional_certificate.py::test_the_burns_control_is_accepted_at_a_least_mass_above_one
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[covering-values.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[overlap-negative-control.yaml]
+0.00s teardown tests/test_promote_elimination.py::test_promote_elimination
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json1]
+0.00s teardown tests/test_campaign_runner_trust_boundary.py::test_each_cell_gets_its_own_share_of_the_timebox
+0.00s setup    tests/test_fractional_certificate.py::test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover
+0.00s setup    tests/test_n54_source_contract.py::test_canonical_json_round_trip_and_float_refusal
+0.00s teardown tests/test_n54_source_contract_independent.py::test_author_and_verifier_are_normal_optimized_byte_identical
+0.00s setup    tests/test_known_best_atlas.py::test_known_best_composite_contains_every_case_and_square
+0.00s setup    tests/test_audit_n54_source_formula.py::test_n54_source_formula_cli_agrees_under_optimization
+0.00s setup    tests/test_n40_rigidity.py::test_the_witness_is_a_motion_checked_from_the_pose
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[defects.yaml]
+0.00s teardown tests/test_fractional_interval.py::test_the_burns_control_stalls_the_interval_route_only_at_direction_zero
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[overlap-negative-control.yaml]
+0.00s teardown tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+0.00s setup    tests/test_fractional_interval.py::test_the_burns_control_stalls_the_interval_route_only_at_direction_zero
+0.00s setup    tests/test_minus_w_bridge.py::test_the_bridge_agrees
+0.00s teardown tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[translation-escape-screen.json]
+0.00s teardown tests/test_fractional_sweep_integer.py::test_the_parallel_direction_loop_matches_the_serial_one
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-scaffolds-size5.json]
+0.00s teardown tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[search-strategies.yaml]
+0.00s setup    tests/test_trump_isolation_radius.py::test_gap_and_symmetry_certificates_hold
+0.00s setup    tests/test_promote_elimination.py::test_promote_elimination
+0.00s teardown tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees
+0.00s setup    tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+0.00s setup    tests/test_n40_rigidity.py::test_the_witness_turns_every_block_square_at_the_same_rate
+0.00s teardown tests/test_fractional_sweep_integer.py::test_the_n17_certificate_verifies_in_the_fast_tier_now
+0.00s setup    tests/test_review_trump_local_theorem.py::test_full_retained_review_and_three_falsifying_controls
+0.00s teardown tests/test_contact_assembly_labels.py::test_every_rich_d4_and_relabeling_image_has_one_label
+0.00s setup    tests/test_bentz46.py::test_certificate_refuses_a_displaced_point
+0.00s teardown tests/test_green17.py::test_interval_audit_certifies_an_interior_side
+0.00s setup    tests/test_n54_source_contract.py::test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts
+0.00s setup    tests/test_promote_solve.py::test_promote_solve
+0.00s setup    tests/test_gobel_family.py::test_the_new_sizes_are_built_here_and_not_merely_asserted
+0.00s setup    tests/test_promote_system_degree.py::test_promote_system_degree
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[results.yaml]
+0.00s teardown tests/test_gobel_family.py::test_the_new_sizes_are_built_here_and_not_merely_asserted
+0.00s teardown tests/test_audit_n54_source_formula.py::test_changed_minimal_polynomial_is_refused
+0.00s teardown tests/test_promote_exact_phase1.py::test_promote_exact_phase1
+0.00s setup    tests/test_promote_system.py::test_promote_system
+0.00s teardown tests/test_known_best_atlas.py::test_every_known_best_witness_agrees_with_its_manifest_entry
+0.00s teardown tests/test_promote_exact_lp.py::test_promote_exact_lp
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability.yaml]
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_supports_direct_stable_identity_lookup
+0.00s teardown tests/test_n54_source_contract.py::test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts
+0.00s teardown tests/test_n54_source_contract.py::test_synthetic_fixture_evaluates_exactly_in_assignment_order
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[agent-aa151b341a1282a9c.yaml]
+0.00s setup    tests/test_n54_source_contract.py::test_synthetic_fixture_evaluates_exactly_in_assignment_order
+0.00s teardown tests/test_review_trump_local_theorem.py::test_full_retained_review_and_three_falsifying_controls
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[rotated-n001-sqrt2.yaml]
+0.00s teardown tests/test_n54_source_contract.py::test_exact_evaluation_refuses_an_algebraically_zero_denominator
+0.00s setup    tests/test_green17.py::test_interval_audit_certifies_an_interior_side
+0.00s setup    tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+0.00s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte
+0.00s setup    tests/test_n17_weighted_certificate_successor.py::test_real_ancestry_verifies_without_evaluating_a_direction
+0.00s teardown tests/test_n5_local_rigidity.py::test_a_declared_count_disagreement_blocks_readiness
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[asymptotic-waste-bounds.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[composite-figure.json]
+0.00s setup    tests/test_promote_exact_phase1.py::test_promote_exact_phase1
+0.00s setup    tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json0]
+0.00s setup    tests/test_verified_upper_bound_contract.py::test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports
+0.00s setup    tests/test_fractional_interval.py::test_both_n12_certificates_certify_every_direction_of_the_sub_net
+0.00s setup    tests/test_motion_lab_interactive.py::test_service_serves_live_and_exact_profiles_with_scenario_refresh
+0.00s setup    tests/test_n40_rigidity.py::test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[translation-escape-screen.json]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[session-close-report.yaml]
+0.00s setup    tests/test_n54_source_contract.py::test_exact_evaluation_refuses_an_algebraically_zero_denominator
+0.00s setup    tests/test_check_declared_bounds.py::test_n68_depth_bound_is_named_by_its_refusal_test
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[agent-aa151b341a1282a9c.yaml]
+0.00s teardown tests/test_fractional_certificate.py::test_the_burns_control_is_accepted_at_a_least_mass_above_one
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-full-cell-control.json]
+0.00s setup    tests/test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[evidence.yaml]
+0.00s setup    tests/test_audit_n54_source_formula.py::test_changed_minimal_polynomial_is_refused
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-coverage.yaml]
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-001.yaml]
+0.00s setup    tests/test_n54_source_contract.py::test_field_receipt_digest_drift_is_refused
+0.00s setup    tests/test_exact_construction_price.py::test_the_record_round_trips
+0.00s setup    tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_supports_direct_stable_identity_lookup
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-structures.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[manifest.json0]
+0.00s teardown tests/test_fractional_certificate.py::test_containment_at_exactly_one_is_refused
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-009.md]
+0.00s teardown tests/test_n40_rigidity.py::test_the_witness_turns_every_block_square_at_the_same_rate
+0.00s setup    tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[schadt-n029-2025-decimal.yaml]
+0.00s teardown tests/test_n40_rigidity.py::test_only_tight_rows_enter_the_obstruction
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_cross_field_mutations_fail
+0.00s teardown tests/test_n40_rigidity.py::test_the_witness_is_a_motion_checked_from_the_pose
+0.00s teardown tests/test_n40_rigidity.py::test_the_null_space_is_what_makes_the_candidate_exact
+0.00s teardown tests/test_check_declared_bounds.py::test_n68_depth_bound_is_named_by_its_refusal_test
+0.00s setup    tests/test_n40_rigidity.py::test_the_contact_model_is_measured_not_assumed
+0.00s teardown tests/test_validation_cli.py::test_run_selected_interrupt_stops_detached_production_process
+0.00s teardown tests/test_motion_lab.py::test_rendered_lab_is_deterministic_retained_and_offline
+0.00s setup    tests/test_n54_source_contract.py::test_audited_receipt_binds_exact_field_builtins_and_digest
+0.00s setup    tests/test_gobel_family.py::test_the_record_round_trips
+0.00s teardown tests/test_n40_rigidity.py::test_the_retained_rays_are_rebuilt_from_the_pose_not_trusted
+0.00s teardown tests/test_validation_cli.py::test_run_timeout_terminates_child_and_reports_captured_output
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[results.yaml]
+0.00s teardown tests/test_known_best_atlas.py::test_known_best_composite_contains_every_case_and_square
+0.00s teardown tests/test_gobel_family.py::test_the_record_round_trips
+0.00s teardown tests/test_contact_scaffold_atlas.py::test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte
+0.00s teardown tests/test_n17_weighted_certificate_successor.py::test_real_ancestry_verifies_without_evaluating_a_direction
+0.00s teardown tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+0.00s teardown tests/test_n40_rigidity.py::test_the_contact_model_is_measured_not_assumed
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-full-cell-control.json]
+0.00s teardown tests/test_n54_source_contract.py::test_canonical_json_round_trip_and_float_refusal
+0.00s teardown tests/test_bentz46.py::test_certificate_refuses_a_displaced_point
+0.00s teardown tests/test_trump_isolation_radius.py::test_gap_and_symmetry_certificates_hold
+0.00s teardown tests/test_fractional_interval.py::test_both_n12_certificates_certify_every_direction_of_the_sub_net
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-structures.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-scaffolds-size5.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-evidence-profile.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-overlays.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability-101-324.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[evidence.yaml]
+0.00s teardown tests/test_n54_source_contract.py::test_field_receipt_digest_drift_is_refused
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-001.yaml]
+0.00s teardown tests/test_verified_upper_bound_contract.py::test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports
+0.00s teardown tests/test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field
+0.00s teardown tests/test_fractional_interval.py::test_box_bounds_bracket_the_exact_mass_at_sampled_centres
+0.00s teardown tests/test_bentz46.py::test_certificate_builds_and_charges_every_point
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[rotated-n001-sqrt2.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[session-close-report.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[n-009.md]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_mutations_actually_break_something
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[search-strategies.yaml]
+0.00s teardown tests/test_minus_w_bridge.py::test_the_bridge_agrees
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-enumeration-pricing.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[composite-figure.json]
+0.00s teardown tests/test_promote_system_degree.py::test_promote_system_degree
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[document-map.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[chunk-partitions.json]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[contact-assembly-grammar.yaml]
+0.00s teardown tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-7]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[defects.yaml]
+0.00s teardown tests/test_motion_lab_interactive.py::test_service_serves_live_and_exact_profiles_with_scenario_refresh
+0.00s teardown tests/test_gobel_family_construction.py::test_each_new_size_verifies_exactly[4-5]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-coverage.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[codex-task-tree-session-071.yaml]
+0.00s teardown tests/test_promote_solve.py::test_promote_solve
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[asymptotic-waste-bounds.yaml]
+0.00s teardown tests/test_schema_validator_equivalence.py::test_validators_agree_on_mutations[source-availability.yaml]
+97 passed, 9 warnings in 625.50s (0:10:25)
+
+== exhaustive exact behavioral tests ==
+.......................................................                  [100%]
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'fontTools.misc.bezierTools', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================== slowest durations ===============================
+202.88s call     tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_admissible_on_every_retained_certificate
+171.70s call     tests/test_n40_rigidity.py::test_the_record_round_trips
+99.21s call     tests/test_fractional_interval.py::test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net
+82.36s call     tests/test_fractional_interval.py::test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net
+71.77s call     tests/test_fractional_certificate.py::test_the_retained_n12_certificate_is_accepted
+69.64s call     tests/test_minimal_verify.py::test_the_retained_bytes_are_verified_on_the_full_net
+69.33s call     tests/test_decide_certificate.py::test_a_retained_rung_passes_both_routes_and_they_agree
+62.40s call     tests/test_exact_jets.py::test_n5_wall_and_contact_gradients_match_authoritative_source_rows
+53.21s call     tests/test_fractional_interval.py::test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net
+42.00s call     tests/test_fractional_certificate.py::test_the_n20_certificate_is_accepted
+38.02s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[container side 4, atoms translated by +1/10]
+36.46s call     tests/test_verify_claim.py::test_the_stated_benign_lightening_keeps_every_condition
+36.39s call     tests/test_verify_claim.py::test_the_19_5_rung_is_accepted_on_the_full_net
+36.35s call     tests/test_verify_claim.py::test_the_stated_orbit_lightening_fails_condition_5_alone
+36.06s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weights of its whole orbit lowered by 1/10000]
+35.99s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[its whole orbit dropped]
+35.12s call     tests/test_fractional_certificate.py::test_the_n17_certificate_is_accepted
+27.53s call     tests/test_fractional_certificate.py::test_the_n11_certificate_is_accepted
+25.78s call     tests/test_decide_certificate.py::test_quick_mode_says_it_cannot_retain
+23.88s call     tests/test_fractional_interval.py::test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net
+22.38s call     tests/test_n11_thirdparty_verify.py::test_the_package_decides_its_own_shipped_certificate
+17.04s call     tests/test_minus_w_row_inventory.py::test_shared_row_inventory_is_exact_isolated_and_builds_once_per_stratum
+16.87s call     tests/test_fractional_certificate.py::test_the_n11_calibration_rung_verifies_on_the_full_net
+16.58s call     tests/test_fractional_interval.py::test_the_393_100_certificate_is_accepted_on_the_full_doubled_net
+14.63s call     tests/test_fractional_certificate.py::test_the_full_retained_certificate_is_accepted
+13.07s call     tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-B]
+12.74s call     tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-interior]
+12.70s setup    tests/test_minus_w_owner4.py::test_positive_w_owner4_control_exhausts_three_strata_and_rejects_zero_w
+12.60s call     tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-interior]
+12.51s call     tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-B]
+12.47s setup    tests/test_minus_w_scale.py::test_positive_w_control_has_exact_three_by_five_inventory
+11.95s call     tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-A]
+11.91s call     tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-A]
+8.13s call     tests/test_minus_w_stress.py::test_uniform_weight_rescaling_fails_exact_normalization
+7.93s call     tests/test_minus_w_sheet.py::test_bad_center_correction_is_rejected_by_same_row_evaluator
+7.93s call     tests/test_minus_w_sheet.py::test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners
+6.30s call     tests/test_fractional_interval.py::test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net
+4.43s call     tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-B-17]
+4.40s call     tests/test_minus_w_owner4.py::test_positive_w_owner4_control_exhausts_three_strata_and_rejects_zero_w
+4.29s call     tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[B-19]
+4.20s call     tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-interior-15]
+4.18s call     tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[interior-17]
+4.12s call     tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-interior-15]
+4.11s call     tests/test_minus_w_stress.py::test_real_production_weight_perturbation_breaks_cancellation
+4.11s call     tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-B-17]
+4.07s call     tests/test_minus_w_scale.py::test_positive_w_control_has_exact_three_by_five_inventory
+3.99s call     tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-A-17]
+3.97s call     tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-A-17]
+3.96s call     tests/test_minus_w_row_jets.py::test_sat_row_retains_exact_center_angle_cross_curvature
+3.91s call     tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[A-19]
+0.02s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[B raised to 1/(1 + D), so B(1 + D) = 1]
+0.02s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weights scaled so the total is exactly n]
+0.02s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[angle limit 41/100, short of tan(pi/8)]
+0.01s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weight of that atom lowered by 1/10000]
+0.01s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[that atom dropped]
+0.01s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[that atom shifted by +1/1000 in x]
+0.01s call     tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[container side 4, atoms unchanged]
+0.00s setup    tests/test_verify_claim.py::test_the_19_5_rung_is_accepted_on_the_full_net
+0.00s setup    tests/test_verify_claim.py::test_the_stated_orbit_lightening_fails_condition_5_alone
+0.00s setup    tests/test_decide_certificate.py::test_quick_mode_says_it_cannot_retain
+0.00s teardown tests/test_decide_certificate.py::test_quick_mode_says_it_cannot_retain
+0.00s setup    tests/test_fractional_certificate.py::test_the_n20_certificate_is_accepted
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[angle limit 41/100, short of tan(pi/8)]
+0.00s setup    tests/test_decide_certificate.py::test_a_retained_rung_passes_both_routes_and_they_agree
+0.00s setup    tests/test_fractional_certificate.py::test_the_n17_certificate_is_accepted
+0.00s teardown tests/test_fractional_certificate.py::test_the_retained_n12_certificate_is_accepted
+0.00s setup    tests/test_fractional_certificate.py::test_the_full_retained_certificate_is_accepted
+0.00s teardown tests/test_exact_jets.py::test_n5_wall_and_contact_gradients_match_authoritative_source_rows
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weights of its whole orbit lowered by 1/10000]
+0.00s setup    tests/test_minimal_verify.py::test_the_retained_bytes_are_verified_on_the_full_net
+0.00s teardown tests/test_decide_certificate.py::test_a_retained_rung_passes_both_routes_and_they_agree
+0.00s teardown tests/test_minus_w_owner4.py::test_positive_w_owner4_control_exhausts_three_strata_and_rejects_zero_w
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[B raised to 1/(1 + D), so B(1 + D) = 1]
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weights scaled so the total is exactly n]
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[that atom dropped]
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[that atom shifted by +1/1000 in x]
+0.00s teardown tests/test_fractional_certificate.py::test_the_n11_calibration_rung_verifies_on_the_full_net
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[container side 4, atoms translated by +1/10]
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[its whole orbit dropped]
+0.00s setup    tests/test_verify_claim.py::test_the_stated_benign_lightening_keeps_every_condition
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weight of that atom lowered by 1/10000]
+0.00s setup    tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[container side 4, atoms unchanged]
+0.00s teardown tests/test_fractional_certificate.py::test_the_n17_certificate_is_accepted
+0.00s setup    tests/test_fractional_interval.py::test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net
+0.00s setup    tests/test_exact_jets.py::test_n5_wall_and_contact_gradients_match_authoritative_source_rows
+0.00s setup    tests/test_fractional_interval.py::test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net
+0.00s teardown tests/test_fractional_certificate.py::test_the_n20_certificate_is_accepted
+0.00s setup    tests/test_fractional_interval.py::test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net
+0.00s teardown tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_admissible_on_every_retained_certificate
+0.00s setup    tests/test_fractional_certificate.py::test_the_n11_calibration_rung_verifies_on_the_full_net
+0.00s teardown tests/test_fractional_interval.py::test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net
+0.00s setup    tests/test_n40_rigidity.py::test_the_record_round_trips
+0.00s setup    tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[B-19]
+0.00s setup    tests/test_fractional_certificate.py::test_the_n11_certificate_is_accepted
+0.00s setup    tests/test_minus_w_row_inventory.py::test_shared_row_inventory_is_exact_isolated_and_builds_once_per_stratum
+0.00s teardown tests/test_fractional_certificate.py::test_the_n11_certificate_is_accepted
+0.00s setup    tests/test_fractional_interval.py::test_the_393_100_certificate_is_accepted_on_the_full_doubled_net
+0.00s setup    tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-A-17]
+0.00s setup    tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-A-17]
+0.00s teardown tests/test_n11_thirdparty_verify.py::test_the_package_decides_its_own_shipped_certificate
+0.00s setup    tests/test_n11_thirdparty_verify.py::test_the_package_decides_its_own_shipped_certificate
+0.00s setup    tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-B-17]
+0.00s setup    tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[A-19]
+0.00s setup    tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-interior]
+0.00s setup    tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-B-17]
+0.00s setup    tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-interior-15]
+0.00s setup    tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-interior-15]
+0.00s setup    tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-A]
+0.00s setup    tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-B]
+0.00s setup    tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[interior-17]
+0.00s setup    tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-B]
+0.00s teardown tests/test_minimal_verify.py::test_the_retained_bytes_are_verified_on_the_full_net
+0.00s setup    tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-interior]
+0.00s setup    tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-A]
+0.00s setup    tests/test_fractional_sweep_integer.py::test_every_reported_witness_is_admissible_on_every_retained_certificate
+0.00s setup    tests/test_fractional_certificate.py::test_the_retained_n12_certificate_is_accepted
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[container side 4, atoms translated by +1/10]
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[its whole orbit dropped]
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weights scaled so the total is exactly n]
+0.00s setup    tests/test_minus_w_stress.py::test_real_production_weight_perturbation_breaks_cancellation
+0.00s setup    tests/test_fractional_interval.py::test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net
+0.00s teardown tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-B]
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[B raised to 1/(1 + D), so B(1 + D) = 1]
+0.00s setup    tests/test_minus_w_sheet.py::test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners
+0.00s teardown tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-B-17]
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weights of its whole orbit lowered by 1/10000]
+0.00s setup    tests/test_fractional_interval.py::test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[weight of that atom lowered by 1/10000]
+0.00s teardown tests/test_verify_claim.py::test_the_stated_orbit_lightening_fails_condition_5_alone
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[angle limit 41/100, short of tan(pi/8)]
+0.00s setup    tests/test_minus_w_stress.py::test_uniform_weight_rescaling_fails_exact_normalization
+0.00s setup    tests/test_minus_w_row_jets.py::test_sat_row_retains_exact_center_angle_cross_curvature
+0.00s teardown tests/test_minus_w_stress.py::test_uniform_weight_rescaling_fails_exact_normalization
+0.00s setup    tests/test_minus_w_sheet.py::test_bad_center_correction_is_rejected_by_same_row_evaluator
+0.00s teardown tests/test_verify_claim.py::test_the_stated_benign_lightening_keeps_every_condition
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[that atom dropped]
+0.00s teardown tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-B-17]
+0.00s teardown tests/test_verify_claim.py::test_the_19_5_rung_is_accepted_on_the_full_net
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[that atom shifted by +1/1000 in x]
+0.00s teardown tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-A]
+0.00s teardown tests/test_verify_claim.py::test_every_falsification_is_refused_on_the_expected_condition[container side 4, atoms unchanged]
+0.00s teardown tests/test_n40_rigidity.py::test_the_record_round_trips
+0.00s teardown tests/test_fractional_interval.py::test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net
+0.00s teardown tests/test_fractional_certificate.py::test_the_full_retained_certificate_is_accepted
+0.00s teardown tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-interior-15]
+0.00s teardown tests/test_fractional_interval.py::test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net
+0.00s teardown tests/test_minus_w_scale.py::test_positive_w_control_has_exact_three_by_five_inventory
+0.00s teardown tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[A-19]
+0.00s teardown tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[interior-17]
+0.00s teardown tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-interior-15]
+0.00s teardown tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner4:a+-A-17]
+0.00s teardown tests/test_fractional_interval.py::test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net
+0.00s teardown tests/test_minus_w_row_jets.py::test_owner_rows_match_complete_authoritative_inventory[owner3:a+-A-17]
+0.00s teardown tests/test_minus_w_stress.py::test_real_production_weight_perturbation_breaks_cancellation
+0.00s teardown tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-interior]
+0.00s teardown tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-interior]
+0.00s teardown tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner3:a+-B]
+0.00s teardown tests/test_minus_w_row_inventory.py::test_shared_row_inventory_is_exact_isolated_and_builds_once_per_stratum
+0.00s teardown tests/test_minus_w_row_jets.py::test_active_rows_expose_both_owner_alternatives[B-19]
+0.00s teardown tests/test_minus_w_sheet.py::test_bad_center_correction_is_rejected_by_same_row_evaluator
+0.00s teardown tests/test_minus_w_stress.py::test_w_curvature_is_even_nonzero_and_quadratically_scaled[owner4:a+-A]
+0.00s teardown tests/test_fractional_interval.py::test_the_393_100_certificate_is_accepted_on_the_full_doubled_net
+0.00s teardown tests/test_minus_w_sheet.py::test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners
+0.00s teardown tests/test_minus_w_row_jets.py::test_sat_row_retains_exact_center_angle_cross_curvature
+0.00s teardown tests/test_fractional_interval.py::test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net
+55 passed, 4401 deselected, 1 warning in 1542.17s (0:25:42)
+
+== where the time went ==
+  1542.95s  exhaustive exact behavioral tests
+   625.87s  slow behavioral tests
+  1542.95s  TOTAL (wall)
+
+== the tier against its ceiling ==
+  1542.95s  wall, against no declared ceiling
+  note: this run is a subset of a tier, so no declared ceiling applies; 'exhaustive exact behavioral tests' is 1543.0s of it (100.0%); 'slow behavioral tests' is 625.9s of it (40.6%)
+
+2 of 69 STEPS PASSED (--only ['slow behavioral tests', 'exhaustive exact behavioral tests']; this is not the full gate)

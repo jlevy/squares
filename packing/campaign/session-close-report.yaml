@@ -7,37 +7,37 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 100
+count: 109
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 55
+  sessions_measured: 64
   sessions_unmeasured: 45
   attributed:
-    rollups: 115
-    turns: 29742
-    tool_calls: 16800
-    tool_errors: 349
-    one_off_code: 2808
-    wall_hours: 170.08
+    rollups: 123
+    turns: 31555
+    tool_calls: 17503
+    tool_errors: 365
+    one_off_code: 2974
+    wall_hours: 179.02
   unattributed:
-    rollups: 53
-    turns: 9920
-    tool_calls: 5828
-    tool_errors: 135
-    one_off_code: 885
-    wall_hours: 46.72
+    rollups: 60
+    turns: 11110
+    tool_calls: 6539
+    tool_errors: 156
+    one_off_code: 946
+    wall_hours: 51.75
   measured:
-    rollups: 168
-    turns: 39662
-    tool_calls: 22628
-    tool_errors: 484
-    one_off_code: 3693
-    wall_hours: 216.8
+    rollups: 183
+    turns: 42665
+    tool_calls: 24042
+    tool_errors: 521
+    one_off_code: 3920
+    wall_hours: 230.77
 codex_receipts:
-  attributed: 28
+  attributed: 29
   unattributed: 0
-  measured: 28
+  measured: 29
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1551,6 +1551,76 @@ sessions:
     declares no rollups
   rollups: []
   codex_receipts: []
+- id: session-100
+  title: "Duality kill tests and the B = 1 value at 96/25"
+  status: stopped
+  primary_bead: think-7lp3
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a2247da4712316276.yaml
+  turns: 342
+  tool_calls: 113
+  tool_errors: 6
+  one_off_code: 20
+  wall_hours: 1.78
+  codex_receipts: []
+- id: session-101
+  title: "Corner-skeleton ownership at 96/25"
+  status: stopped
+  primary_bead: think-1136
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a64c5adbf66c1e348.yaml
+  turns: 273
+  tool_calls: 137
+  tool_errors: 7
+  one_off_code: 32
+  wall_hours: 1.64
+  codex_receipts: []
+- id: session-102
+  title: "Angle-band theorems at 96/25"
+  status: stopped
+  primary_bead: think-ndqj
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-ae5b122129d330f9e.yaml
+  turns: 310
+  tool_calls: 106
+  tool_errors: 2
+  one_off_code: 32
+  wall_hours: 1.52
+  codex_receipts: []
+- id: session-103
+  title: "The exactly-eleven plateau at 191/50 as a site artefact (BC-297, H-133)"
+  status: stopped
+  primary_bead: think-4uon
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-ade07b22e00a3de2a.yaml
+  turns: 164
+  tool_calls: 63
+  tool_errors: 0
+  one_off_code: 16
+  wall_hours: 0.94
+  codex_receipts: []
+- id: session-104
+  title: "A robust unavoidable set of at most eleven marks at 96/25 (BC-302, H-134)"
+  status: stopped
+  primary_bead: think-qfog
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-ac15f8bb6100170a0.yaml
+  turns: 238
+  tool_calls: 83
+  tool_errors: 1
+  one_off_code: 33
+  wall_hours: 1.38
+  codex_receipts: []
 - id: session-105
   title: "Stromquist n26 verification and MacIver source audit"
   status: completed
@@ -1592,20 +1662,82 @@ sessions:
     wall_hours: 8.0
     snapshot_incomplete: true
 - id: session-107
-  title: "Prepared math startup and publication integration"
+  title: "Independent replays of the first wave and the selection (BC-303)"
   status: stopped
-  primary_bead: think-qcmi
-  phases: 3
+  primary_bead: think-znzj
+  phases: 2
   measured: true
   rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session-107.yaml
+  - packing/campaign/resource-usage/agent-a045cfe6da5811e19.yaml
+  turns: 202
+  tool_calls: 82
+  tool_errors: 0
+  one_off_code: 13
+  wall_hours: 0.58
+  codex_receipts: []
+- id: session-108
+  title: "What the segment cover and the corner pair localise at 96/25 (BC-299, H-126, H-111)"
+  status: stopped
+  primary_bead: think-4ifm
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-aabf7fb69affb7684.yaml
+  turns: 128
+  tool_calls: 52
+  tool_errors: 0
+  one_off_code: 5
+  wall_hours: 0.57
+  codex_receipts: []
+- id: session-109
+  title: "The corner-class LP under the corner-pair condition at 96/25 (BC-292, H-126, H-127)"
+  status: stopped
+  primary_bead: think-kx2l
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a0db35ca8af021cbd.yaml
+  turns: 156
+  tool_calls: 67
+  tool_errors: 0
+  one_off_code: 15
+  wall_hours: 0.53
+  codex_receipts: []
+- id: session-110
+  title: "PR 127 handoff review and merge corrections"
+  status: stopped
+  primary_bead: think-yx4g
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-110.yaml
   turns: null
   tool_calls: null
   tool_errors: null
   one_off_code: null
   wall_hours: null
   codex_receipts:
-  - path: packing/campaign/resource-usage/codex-task-tree-session-107.yaml
+  - path: packing/campaign/resource-usage/codex-task-tree-session-110.yaml
+    model_responses: 940
+    agent_hours: 6.73
+    active_union_hours: 2.58
+    wall_hours: 2.58
+    snapshot_incomplete: true
+- id: session-111
+  title: "Prepared math startup and publication integration"
+  status: stopped
+  primary_bead: think-qcmi
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-111.yaml
     model_responses: 2798
     agent_hours: 20.24
     active_union_hours: 6.22

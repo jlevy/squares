@@ -1,0 +1,27 @@
+{
+  "status": "certified",
+  "proved": true,
+  "outer_side": "96/25",
+  "segment_length": "1/10",
+  "delta": "3/500",
+  "floor": 6.103515625e-05,
+  "node_budget": 100000,
+  "nodes": 24381,
+  "certified": 10960,
+  "discarded": 1231,
+  "failures": 0,
+  "exact_rejected_leaves": 0,
+  "exact_rejected_discards": 0,
+  "volume": "243/128",
+  "domain_volume": "243/128",
+  "volume_ok": true,
+  "float_seconds": 0.082,
+  "exact_seconds": 0.512,
+  "source": {
+    "historical_commit": "c89c7646",
+    "historical_path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md",
+    "tool_path": "packing/devtools/segment_cover_replay.py",
+    "checkout_commit": "883d5ef8d4b971057977cd0c3c42f900f937f1de",
+    "checkout_dirty": true
+  }
+}

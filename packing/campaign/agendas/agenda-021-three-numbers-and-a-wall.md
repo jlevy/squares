@@ -1099,9 +1099,16 @@ agenda:
           Price one small H114 feature family and its missing kernel-specific
           contract before any target. This has a direct-bound mechanism, unlike
           merely refuting the particular old-support calibration.
+      - bead: think-yrw1
+        workflow: review-planning-oversight
+        priority: 0
+        rationale: >-
+          Added on 2026-09-08 when Agenda 030's first wave closed and BC-303 made its
+          selection, not backdated to this agenda's W10. BC-304 dispositions every cell of
+          that agenda and hands on the funded blocks.
       selected:
-        bead: think-mq0d
-        workflow: insight-iteration
+        bead: think-yrw1
+        workflow: review-planning-oversight
         rationale: >-
           Session095 exp128 closes BC259/H099 at fixed-support optimum11.
           Its comparative design selects BC264's existing 30-minute feature and

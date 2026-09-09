@@ -321,7 +321,17 @@ ROOT_DOCUMENTS = (
 # copied back by `linked_pruned_targets` even when pruned -- pruning it was tried and
 # moved nothing), and the escape screen record (3.1 MB). No further safe prune was found;
 # a link checker that tolerated pruned targets would be the next one. Allow 96 MiB.
-SNAPSHOT_MAX_BYTES = 96 * 1024 * 1024
+#
+# 2026-09-08, after the retained research state was linked into the checked record:
+# 106,107,961 bytes. This is tracked source and declared checker input, not cache drift.
+# The largest copied-back dependencies are exp-059's registered completion record
+# (10,923,451 bytes) and BC-232's linked resumable state (5,248,062); the largest files
+# on the unpruned source surface are the known-best chunk components (9,672,604), poster
+# SVG (6,198,351), exp-042 result (5,740,789), and chunk partitions (5,220,955). Dropping
+# any of them would either remove a declared dependency or change the source surface the
+# controls exercise. Allow 128 MiB: three portable workers remain bounded at 384 MiB,
+# while the bytes actually cloned remain the measured source size.
+SNAPSHOT_MAX_BYTES = 128 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

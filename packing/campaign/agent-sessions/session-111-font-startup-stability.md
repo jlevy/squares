@@ -1,12 +1,12 @@
 ---
-title: session-107 — prepared math startup and publication integration
+title: session-111 — prepared math startup and publication integration
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-107
+  id: session-111
   title: Prepared math startup and publication integration
   date: '2026-09-08'
   started_at: '2026-09-08T15:49:00Z'
@@ -193,7 +193,7 @@ session:
   - packing/benchmarks/math-startup/experiments/exp-007-queued-hosted-parameter-pairs.md
   - packing/benchmarks/math-startup/experiments/exp-008-queued-hosted-font-geometry.md
   - packing/benchmarks/math-startup/hypotheses/H-006-queued-recovery-startup.md
-  - packing/campaign/resource-usage/codex-task-tree-session-107.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
   - packing/benchmarks/math-startup/runs/push-rendering-final-failed.log.gz
   - packing/benchmarks/math-startup/runs/push-dab2a381-oracle-passed.log.gz
   - packing/devtools/check_scroll_restoration.py
@@ -219,8 +219,8 @@ session:
   - The local 2474530b publication was opened from port 64618 as HTML and matching PDF. The PDF has 17 tagged Letter pages, 822549 bytes and 26 embedded subsets; two renders agree and all pages passed visual review. Menlo remains the existing host-font exception kpr-v731. This local artifact precedes the oracle-only dab2a381 correction and is not a deployed Pages verification.
   - PR 135 remains open. Pages dispatch 34283695063 and PR checks passed at dab2a381; main subsequently advanced to 7ef80525 through PR 134, adopting Planetaire Mono and a new KPress pin. That integration and its affected validation are ongoing. PR 135 merge and deployment remain pending.
   resource_rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session-107.yaml
-  stop_reason: Source preparation and local validation are complete through the 22:02:43 UTC cost cutoff. Session107 stops at this checkpoint; hosted checks passed at dab2a381, while PR 134 integration and its affected validation remain ongoing in PR 135. Retained hosted results, the authorized merge and deployed verification remain release closeout work. No research priority is changed.
+  - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+  stop_reason: Source preparation and local validation are complete through the 22:02:43 UTC cost cutoff. Session111 stops at this checkpoint; hosted checks passed at dab2a381, while later main integration and its affected validation remain ongoing in PR 135. Retained hosted results, the authorized merge and deployed verification remain release closeout work. No research priority is changed.
   next_action: Resume think-mq0d for BC-264's existing 30-minute H114 feature and kernel-contract pricing slice, subject to the current allocation and admission requirements. This publication repair does not reprioritize research or authorize a target run.
 ---
 # Prepared Math Startup and Publication Checkpoint
@@ -282,7 +282,7 @@ validation record can reach a terminal checkpoint while those release actions re
 explicit. Both this session and its final phase are stopped, since the wider release
 objective is unfinished.
 
-The [recursive resource receipt](../resource-usage/codex-task-tree-session-107.yaml)
+The [recursive resource receipt](../resource-usage/codex-task-tree-session-111.yaml)
 uses the actual cutoff 22:02:43 UTC on September 8, 2026. It contains generated,
 privacy-reduced totals only.
 Three task sessions were live at capture, so the receipt is incomplete and its totals
