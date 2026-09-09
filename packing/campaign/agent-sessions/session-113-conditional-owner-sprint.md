@@ -60,13 +60,13 @@ session:
       new sprint target has run.
     after: null
   delegations:
-  - task: Repair residual separator, build exact dual screen, then expose exact cover replay CLI
+  - task: Build exact replay instruments and independently audit the retained dualscreen receipt
     operator: GPT-5.6 Sol, extra high; residual_separator_repair
     recording: contemporaneous
     phase: 1
     status: in_progress
-    outcome: Repair passed7controls; exact dualscreen passed9controls. Exp136 completed with numericalgap
-      improvement0.1766034327. Exactcover replay wrapper is now in progress.
+    outcome: Fixedpilotrepair, nine-control dualscreen and six-control fullnetwrapper are complete. Independent
+      screenaudit instrument in progress.
     evidence: []
     files: &id001
     - packing/devtools/run_residual_cover_pilot.py
@@ -75,15 +75,17 @@ session:
     - packing/tests/test_screen_corner_dual_salvage.py
     - packing/devtools/verify_residual_cover_pilot.py
     - packing/tests/test_verify_residual_cover_pilot.py
+    - packing/devtools/verify_corner_dual_salvage.py
+    - packing/tests/test_verify_corner_dual_salvage.py
     checks: []
     uncertainty: Instrument integration and target outcomes are pending.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Return independently reviewable contracts and controls; no scientific targets without
       the coordinator protocol.
-    budget_minutes: 31
+    budget_minutes: 49
     started_at: '2026-09-09T03:41:00Z'
-    deadline_at: '2026-09-09T04:12:00Z'
+    deadline_at: '2026-09-09T04:30:00Z'
     expected_output: Reviewed exact contract and focused controls; retain earlier dispatch history in
       native logs.
     validation_command: Focused project Python3.14 pytest, Ruff and BasedPyright for owned code.
@@ -93,28 +95,31 @@ session:
     excluded_commands:
     - Scientific target invocation
     - Shared campaign records and Git mutation
-  - task: Build exact owner footprints, then generic matched conditional-cover runner
+  - task: Finish generic conditionalLP, preregister its comparison and prepare PRpublication
     operator: GPT-5.6 Sol, extra high; owner_footprint_engine
     recording: contemporaneous
     phase: 1
     status: in_progress
-    outcome: Geometry passed7controls with361canonicaldirections and16ownerclasses; genericfour-arm LP
-      instrument in progress.
+    outcome: Genericgeometry and repairedfour-arm runner pass14combinedcontrols. H139/exp140 prospective
+      records ready; PRmetadata update next.
     evidence: []
     files: &id002
     - packing/devtools/owner_footprints.py
     - packing/tests/test_owner_footprints.py
     - packing/devtools/run_owner_footprint_cover.py
     - packing/tests/test_run_owner_footprint_cover.py
+    - packing/campaign/hypotheses/H-139-owner-footprint-matched-gain.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md
+    - /private/tmp/pr137-sprint-update.md
     checks: []
     uncertainty: Instrument integration and target outcomes are pending.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Return independently reviewable contracts and controls; no scientific targets without
       the coordinator protocol.
-    budget_minutes: 31
+    budget_minutes: 49
     started_at: '2026-09-09T03:41:00Z'
-    deadline_at: '2026-09-09T04:12:00Z'
+    deadline_at: '2026-09-09T04:30:00Z'
     expected_output: Reviewed exact contract and focused controls; retain earlier dispatch history in
       native logs.
     validation_command: Focused project Python3.14 pytest, Ruff and BasedPyright for owned code.
@@ -160,6 +165,8 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md
   checks:
   - 'Entry: retained exp135 failure and original seven-control repair handoff; new integration validation
     pending.'
@@ -167,6 +174,9 @@ session:
     invocation failed lint and two stale record/control anchors.
   - Focused repairs:14owner/residual controls passed in2.47seconds;9dual-screen controls passed; updated
     synopsis and163control anchors agree; both changed negative controls fire with project Python.
+  - Exact dualproducer exp137 ran once at223c969d in53.38seconds; both claims have pending independent
+    audit, with0thresholdqualifyingclasses.
+  - Current fullnetwrapper/genericrunner controls:13tests passed in2.20seconds; Ruff and formatcheck clean.
   stop_reason: null
   next_action: Run the admitted exact dualscreen; independently verify the positive fixed-corner pilot
     and prepare the genericownercomparison.

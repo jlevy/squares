@@ -21,6 +21,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python3.14.7; one process
     selftest_passed: true
+    engine_commit: 223c969d
   instance:
     axis: n
     point: 11
@@ -43,15 +44,31 @@ experiment:
       -m devtools.screen_corner_dual_salvage campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-01-family.json
       --footprint-kinds point,triangle,endpoint --corner-counts 1,4 --target-side 96/25 --expect-source-blob
       8a0bf1a264a1361649bc0acd0f70907ba8125f2f --out campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-137-corner-dual-salvage.json.gz
-  lease:
-    expires: '2026-09-09T04:15:00Z'
-  results: []
+    commit: 223c969d
+  results:
+  - shape: determination
+    role: outcome
+    question: The minimum endpoint survivor mass over all65536four-owner combinations is at least7.
+    outcome: criterion_missed
+    checked_by: Exact source-bound producer summaries and complete class records; independent audit pending.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: The minimum endpoint survivor mass over all65536four-owner combinations is at least7.
-    reason: Prospective exact screen; no target masks or masses have been evaluated.
+    reason: Complete exact producer screen found0of65536endpoint combinations with massatleast7; maximum13394344077/2055263195
+      and minimum1642317587/2055263195. Sharedproducerchargedtoexp137; no secondprocess. Independent retained-receipt
+      audit pending.
+    needs_review: true
+  effort:
+    timebox: One shared five-minute producer ownedbyexp137; no duplicateprocessfor138
+    wall_seconds: 0
+    stopped_by: criterion
 ---
 # Exp138: Four-Owner Verdict from the Shared Screen
+
+Complete exact producer screen found0of65536endpoint combinations with massatleast7;
+maximum13394344077/2055263195 and minimum1642317587/2055263195.
+Sharedproducerchargedtoexp137; no secondprocess.
+Independent receipt audit is pending; this verdict has needs_review enabled.
 
 This separate prospective verdict applies H138 to the four-owner portion of exp137’s
 single producer receipt.

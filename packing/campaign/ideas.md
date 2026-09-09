@@ -436,6 +436,8 @@ prevent those local facts from being mistaken for a global exclusion.
 | 132 | Compare a fixed-corner residual cover with its unrestricted control | registered | [H-136](hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | On one fixed grid and nine retained directions, test whether avoiding four flush corner units lowers the numerical covering objective by more than four; this is a conditional mechanism screen, not a normalization of arbitrary packings. |
 | 133 | Reuse exact fractional packings to obstruct one-owner covers on all supports | registered | [H-137](hypotheses/H-137-single-owner-dual-salvage.md) | Delete poses meeting each guaranteed footprint; an exact surviving mass of ten blocks that residual-ten cover. |
 | 134 | Screen all four-owner footprint combinations by shared exact deletion masks | registered | [H-138](hypotheses/H-138-four-owner-dual-salvage.md) | Test the minimum surviving mass over all65536 combinations against seven, retaining negative or unresolved outcomes. |
+| 135 | Compare owned-point and area-footprint covers on matched independent sites | registered | [H-139](hypotheses/H-139-owner-footprint-matched-gain.md) | Four numerical arms distinguish geometry gain from the change in remaining-square count. |
+| 136 | Check the fixed-corner rational candidate across every retained direction | registered | [H-140](hypotheses/H-140-fixed-corner-full-net-cover.md) | Exact full-net minimum tests the unchanged weights; positive minima also permit a separately labeled normalized feasible mass. |
 
 ## Dead ends
 

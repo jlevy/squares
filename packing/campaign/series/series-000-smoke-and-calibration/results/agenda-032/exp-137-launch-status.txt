@@ -1,0 +1,6 @@
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-137-launch-head.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-137-launch-status.txt
+?? devtools/run_owner_footprint_cover.py
+?? devtools/verify_residual_cover_pilot.py
+?? tests/test_run_owner_footprint_cover.py
+?? tests/test_verify_residual_cover_pilot.py

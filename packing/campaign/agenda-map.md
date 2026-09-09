@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** in_progress, **19** ready, **12** tentative, **60** blocked, **53** stopped, **141** complete.
+- **10** in_progress, **19** ready, **11** tentative, **60** blocked, **53** stopped, **142** complete.
 
 - **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-306`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -56,11 +56,10 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-028 | `BC-275` | ready | 1 | efficiency | measurement_validation | Which mathematical result per unit of attention warrants the next overnight allocation? | `think-1v6g` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
-| agenda-032 | `BC-310` | in_progress | 1 | correctness | tool_validation | Can exact event reconstruction repair the thin-cell separator and permit a fresh matched fixed-corner pilot? | `think-9yvj` |
 | agenda-032 | `BC-311` | in_progress | 1 | efficiency | research | Does deleting poses that meet guaranteed owner footprints from the retained depth-one fractional family… | `think-mwxg` |
 | agenda-032 | `BC-312` | in_progress | 1 | insight | research | Do guaranteed area footprints improve the covering objective beyond merely owning a point? | `think-9cpg` |
 | agenda-032 | `BC-314` | in_progress | 1 | process | measurement_validation | What did the sprint establish, what did each branch cost, and what should run next? | `think-ns6k` |
-| agenda-032 | `BC-313` | tentative | 2 | correctness | research | Does a promising conditional numerical cover survive rational reconstruction, the full direction net and all… | `think-9cpg` |
+| agenda-032 | `BC-313` | in_progress | 2 | correctness | research | Does a promising conditional numerical cover survive rational reconstruction, the full direction net and all… | `think-9cpg` |
 
 ## Blocked, and on what
 
@@ -182,7 +181,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-029 | superseded |  |  |  |  | 3 | 4 | 7 |
 | agenda-030 | completed |  |  |  |  | 7 | 7 | 14 |
 | agenda-031 | paused |  |  |  | 1 | 2 | 2 | 5 |
-| agenda-032 | active | 4 |  | 1 |  |  |  | 5 |
+| agenda-032 | active | 4 |  |  |  |  | 1 | 5 |
 
 ## By program
 
@@ -345,13 +344,13 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-031 | `BC-307` | stopped | Should H-125's finite kernel test be renewed after the two funded lanes report? |
 | agenda-031 | `BC-309` | complete | Can fixed corner geometry improve a weighted covering argument beyond the four units accounted for… |
 | agenda-031 | `BC-308` | stopped | What did the funded continuation establish, what remains unresolved, and which next entry should be… |
-| agenda-032 | `BC-310` | in_progress | Can exact event reconstruction repair the thin-cell separator and permit a fresh matched… |
+| agenda-032 | `BC-310` | complete | Can exact event reconstruction repair the thin-cell separator and permit a fresh matched… |
 | agenda-032 | `BC-311` | in_progress | Does deleting poses that meet guaranteed owner footprints from the retained depth-one fractional… |
 | agenda-032 | `BC-312` | in_progress | Do guaranteed area footprints improve the covering objective beyond merely owning a point? |
-| agenda-032 | `BC-313` | tentative | Does a promising conditional numerical cover survive rational reconstruction, the full direction… |
+| agenda-032 | `BC-313` | in_progress | Does a promising conditional numerical cover survive rational reconstruction, the full direction… |
 | agenda-032 | `BC-314` | in_progress | What did the sprint establish, what did each branch cost, and what should run next? |
 
-Open frontier: `BC-306`, `BC-310`, `BC-311`, `BC-312`, `BC-313`, `BC-314`.
+Open frontier: `BC-306`, `BC-311`, `BC-312`, `BC-313`, `BC-314`.
 
 ### `reach-table-ladder`
 

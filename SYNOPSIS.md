@@ -441,6 +441,7 @@ case or experiment separately.
 | [Endpoint Footprint Proof Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md) | research synthesis | record | retained | — |
 | [Generic Owner-Footprint Cover: Sprint Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-footprint-contract.md) | research synthesis | record | retained | — |
 | [Owner-Pose Refinement Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-pose-refinement-contract.md) | research synthesis | record | retained | — |
+| [Fixed-Four-Corner Cover Transfer Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/fixed-cover-transfer-review.md) | research synthesis | record | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
@@ -676,7 +677,10 @@ The
 gives sixteen exhaustive selected-owner classes at one corner, each with a rational
 triangle of area `B²/16`. This supports a general branch program without assuming four
 literal flush corners.
-The new sprint targets remain unrun at registration.
+The fixed-corner pilot is numerically positive.
+The exact reused-family screen found no obstruction in any selected class;
+independentaudit is pending.
+Exactfullnet and genericownerpilot protocols are registered separately.
 [X-022](packing/campaign/explorations/X-022-segment-ownership-continuation.md) gives
 sharp capacities of two owners on the outer middle-row segments and four on the other
 eight, necessary support and signed-angle restrictions, two local counterexamples, and
@@ -3213,8 +3217,10 @@ round that names the hypothesis, control roles included.
 | [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
 | [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | blocked | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 1 | Unspent |
 | [H-136](packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | confirmed | On the declared 19-by-19 site grid and nine retained directions at side 96/25, the converged numerical covering objective for cores avoiding four fixed flush corner unit squares is more than 4.001 below the matched unrestricted objective | 2 | 5.60s wall |
-| [H-137](packing/campaign/hypotheses/H-137-single-owner-dual-salvage.md) | running | At least one of sixteen endpoint-footprint classes retains depth-one mass at least ten | 1 | Unspent |
-| [H-138](packing/campaign/hypotheses/H-138-four-owner-dual-salvage.md) | running | Every four-corner endpoint combination retains depth-one mass at least seven | 1 | Unspent |
+| [H-137](packing/campaign/hypotheses/H-137-single-owner-dual-salvage.md) | needs review | At least one of sixteen endpoint-footprint classes retains depth-one mass at least ten | 1 | 53.38s wall |
+| [H-138](packing/campaign/hypotheses/H-138-four-owner-dual-salvage.md) | needs review | Every four-corner endpoint combination retains depth-one mass at least seven | 1 | shared exp137 |
+| [H-139](packing/campaign/hypotheses/H-139-owner-footprint-matched-gain.md) | running | Enlarging an owned point to its endpoint footprint reduces the matched numerical cover mass by more than0.001 | 1 | Unspent |
+| [H-140](packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md) | running | Unchanged rationalized fixed-corner residual weights cover the complete181-direction net | 1 | Unspent |
 
 ### Confirmed
 
@@ -3479,9 +3485,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 94 rounds registered in `series-000`.
+There are 96 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1359.5 wall-minutes.
+They record 2152.1 agent-minutes and 1360.4 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3613,8 +3619,10 @@ archive beside it.
 | [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Owner reprioritized BC-309 before launch; no LP target invoked; protocol retained pending a fresh forward allocation | blocked |
 | [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md) | 11 | target | H-136 | Matched unrestricted and four-fixed-corner residual covering programs on one 19-by-19 grid and nine retained directions | Global numerical convergence; residual thin-cell separator failure, no paired score | unresolved |
 | [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md) | 11 | target | H-136 | Matched repaired replay on unchanged support, directions and guards | Both arms converged; matched gap improvement0.1766034327, residual mass7.804878 above7 | accepted |
-| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | Prospective protocol; not invoked | in-progress |
-| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | Prospective protocol; no second process or duplicate cost | in-progress |
+| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | No endpointclass retains mass10; exact producer completed, independentaudit pending | rejected |
+| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpointcombination retains mass7; independentaudit pending; processchargedonce | rejected |
+| [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md) | 11 | target | H-140 | Exact full181net replay of unchanged residualatoms fromexp136 | Prospective protocol, uninvoked | in-progress |
+| [exp-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md) | 11 | target | H-139 | Matched unrestricted/point/triangle/endpoint covers on independent369site support andnine directions | Prospective protocol, uninvoked | in-progress |
 
 ### Cost and provenance
 
@@ -3712,12 +3720,14 @@ archive beside it.
 | exp-134 | one 30-minute pricing process and two-second TERM grace; uninvoked | — | — | — | `82df41bd` |
 | exp-135 | two sequential 120-second arms; stopped at separator guard | 2.54 s | — | guard | `513d3831` |
 | exp-136 | same fixed support/directions; repaired separator | 3.06 s | — | criterion | `03d2925e` |
-| exp-137 | one five-minute exact screen; uninvoked | — | — | — | — |
-| exp-138 | shared exp137 producer; no duplicate process charge | — | — | — | — |
+| exp-137 | one exact sharedproducer, five-minute limit | 53.38 s | — | criterion | `223c969d` |
+| exp-138 | same producer as137; no duplicatecharge | 0 s | — | criterion | `223c969d` |
+| exp-139 | one five-minute exactfullnet reader; uninvoked | — | — | — | — |
+| exp-140 | four120secondnumericalarms, ten-minute externallimit; uninvoked | — | — | — | — |
 
-### What the 94 rounds jointly establish
+### What the 96 rounds jointly establish
 
-The 94 rounds use 2152.1 agent-minutes and 1359.5 wall-minutes under the campaign’s
+The 96 rounds use 2152.1 agent-minutes and 1360.4 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

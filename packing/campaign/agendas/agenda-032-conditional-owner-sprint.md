@@ -19,7 +19,7 @@ agenda:
     owner_focus: correctness
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Can exact event reconstruction repair the thin-cell separator and permit a fresh matched
       fixed-corner pilot?
@@ -38,7 +38,11 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Independent exact minimum control, matched replay and a source-bound raw receipt.
+    next_evidence: 'Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487,
+      gap0.17660343270100132. BC313 owns exact/full-net promotion.'
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-136-paired-cover.json
   - id: BC-311
     purpose: research
     owner_focus: efficiency
@@ -63,8 +67,8 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Published screening protocol, exact SAT controls, and branch-indexed survivor mass
-      receipts.
+    next_evidence: Exp137/138 foundnoobstruction in anyclass; independent receipt audit pending. Further
+      fixed-weight deletion is dominated by the point-only result.
     hypotheses:
     - H-137
     - H-138
@@ -91,23 +95,24 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Reviewed footprint proof and controlled exact geometry module, followed by a predeclared
-      branch experiment if admitted.
+    next_evidence: Exp140 is the prospective matched four-arm pilot after controlled genericexact-fallback
+      integration.
     hypotheses:
     - H-111
+    - H-139
   - id: BC-313
     purpose: research
     owner_focus: correctness
     instances:
     - 11
-    state: tentative
+    state: in_progress
     priority: 2
     question: Does a promising conditional numerical cover survive rational reconstruction, the full direction
       net and all required owner classes?
     budget: Conditional promotion only within the remaining sprint work window; publish finite settings
       before invoking any target reader.
-    entry: A completed promising BC-310 or BC-312 comparison, its exact support and weights, and the independent
-      reader contract.
+    entry: Completed positiveexp136 candidate and exact fullnet reader; any laterBC312 promotion requires
+      a separately selected protocol.
     exit: A precise finite-direction or all-angle conditional certificate, counterexample or unresolved
       receipt; no extrapolation from one branch to an exhaustive theorem.
     bead: think-9cpg
@@ -116,10 +121,11 @@ agenda:
     - research-loop
     depends_on:
     - BC-310
-    - BC-312
     program: n11-structure-and-conditional-dots
-    next_evidence: Actual numerical candidate and remaining runtime determine which single promotion is
-      justified.
+    next_evidence: Exp139 exactfull181net replay of unchanged exp136residualatoms; report rawminimum and
+      positive-minimum normalizedfeasiblemass separately.
+    hypotheses:
+    - H-140
   - id: BC-314
     purpose: measurement_validation
     owner_focus: process
@@ -150,6 +156,28 @@ window ends at **05:03:37Z**, followed by fifteen minutes for finalization.
 Session 113 owns this interval; session 112 retains the earlier continuation.
 The opening map was assembled while three disjoint instrument and mathematical lanes
 worked; no new sprint numerical target was used to choose the hypotheses below.
+
+## Opening results and next allocation
+
+Exp136 completed both numerical arms in3.06seconds and met H136’s criterion:
+`Mglobal − Mresidual − 4 = 0.17660343270100132`. Residualmass is7.804878048780487, above
+the thresholdseven. Exp139 independently checks its rationalized candidate on all181net
+directions before making an exact covering claim.
+
+Exp137’s53.38second exact producer found no one-corner or four-corner obstruction from
+the retained source family.
+Exp138 carries the separate four-owner verdict and charges no duplicate process time.
+Both await independent receipt audit.
+The point-only survivor masses are already below10and7, so stronger nested footprints
+cannot make this fixed-weight deletion screen pass.
+Stop those filters and prioritize exp140’s direct conditional optimization.
+Re-optimizing the fractional family would be a different experiment.
+
+The new centre-and-angle refinement contract retains larger rectangles in256owner
+classes, but its proposed additional fixed-family filters are now dominated.
+Keep the geometry for conditional LP refinement.
+A four-footprint domain construction is being reviewed as a second possible extension;
+neither extension has run a target.
 
 ## What is established
 

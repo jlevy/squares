@@ -21,6 +21,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python3.14.7; one process
     selftest_passed: true
+    engine_commit: 223c969d
   instance:
     axis: n
     point: 11
@@ -44,16 +45,33 @@ experiment:
       family, or repeated full arrangement verification. Retain compressed raw class receipts and process/exit
       evidence.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-137-corner-dual-salvage.json.gz
-  lease:
-    expires: '2026-09-09T04:15:00Z'
-  results: []
+    commit: 223c969d
+  results:
+  - shape: determination
+    role: outcome
+    question: The maximum endpoint one-corner survivor mass is at least10. H138 has its own prospective
+      verdict record exp138 over the same producer receipt.
+    outcome: criterion_missed
+    checked_by: Exact source-bound producer summaries and complete class records; independent audit pending.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: The maximum endpoint one-corner survivor mass is at least10. H138 has its own prospective
       verdict record exp138 over the same producer receipt.
-    reason: Prospective exact screen; no target masks or masses have been evaluated.
+    reason: Complete exact producer screen found0of16endpoint classes with massatleast10; maximum77421212793/8221052780.
+      This particular retained-family obstruction conjecture fails; the conditionalcover method remains
+      open. Independent retained-receipt audit pending.
+    needs_review: true
+  effort:
+    timebox: One shared five-minute producer ownedbyexp137; no duplicateprocessfor138
+    wall_seconds: 53.38
+    stopped_by: criterion
 ---
 # Exp137: Exact Fractional-Family Obstruction Screen
+
+Complete exact producer screen found0of16endpoint classes with massatleast10;
+maximum77421212793/8221052780. This particular retained-family obstruction conjecture
+fails; the conditionalcover method remains open.
+Independent receipt audit is pending; this verdict has needs_review enabled.
 
 This protocol is recorded before target filtering.
 The unchanged source family has Git blob `8a0bf1a264a1361649bc0acd0f70907ba8125f2f` and
