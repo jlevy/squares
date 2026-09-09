@@ -290,14 +290,19 @@ Retained beside this report:
     Section 2: it scales the `191/50` checkpoint into the new container, checks every
     carried row exactly, runs the sweep-and-solve loop in one warm HiGHS handle, dumps
     the dual at a plateau, and runs the optional atom-separation round of F3. F1 through
-    F6 and both addenda are its output.
+    F6 and the first addendum are its output.
   - [`lane-a3-lp-sites.py.txt`](lane-a3-lp-sites.py.txt) — the same LP, sweep and solver
     with the site oracle of the second addendum added: arrangement vertices of the dual
     family screened in floats, exact depth decided in `Fraction`s, the deepest orbits
-    entered as columns. S1 through S4 are its output.
-  - [`lane-a3-atoms-on-family.py.txt`](lane-a3-atoms-on-family.py.txt) — spike B’s
-    interior-vertex two-of-three generator run on a family file, the separation step
-    behind F3 and the `vertex_cap = 24` reading.
+    entered as columns. S1, S2 and S4 are its output; S3 reads the plateau reader on the
+    scaled ceiling families, which were built outside these five scripts.
+  - [`lane-a3-atoms-on-family.py.txt`](lane-a3-atoms-on-family.py.txt) — the same
+    interior-vertex two-of-three generator `lp383.py` calls for F3, as a standalone
+    runner over any family file.
+    It is retained as the instrument for the measurement S4 names rather than for a
+    reading of its own: pointed at the `1/25`-integral family it logged its geometry and
+    vertex stages (280 placements, 11,252 edges, 283,832 vertices) and was stopped
+    before it returned atoms.
   - [`lane-a3-freeze383.py.txt`](lane-a3-freeze383.py.txt) — the freezer of the
     protocol’s first branch: it turns a checkpoint into a threshold-certificate record
     with the bump, the upward rounding, the D4 expansion and the declared budget.

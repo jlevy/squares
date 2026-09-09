@@ -354,9 +354,9 @@ The tool is an extension of a **copy** of
 [`packing/devtools/polish_ceiling_family.py`](../../../../../devtools/polish_ceiling_family.py),
 taken unmodified; the tracked file was not touched.
 The copy was compared byte for byte when the code was retained and is **identical** to
-the tracked file as committed at `7ccb679c` — the commit that added the tool, made 65
-minutes after the copy was taken from the then-uncommitted working tree — so the copy
-itself is not retained: it holds nothing the repository does not already carry.
+the tracked file as committed at `7ccb679c` — the commit that added the tool, made just
+over an hour after the copy was taken from the then-uncommitted working tree — so the
+copy itself is not retained: it holds nothing the repository does not already carry.
 The extension is a separate module, [`lane-a5-cap-lp.py.txt`](lane-a5-cap-lp.py.txt),
 which imports `placement_orbits` from the tracked tool and rebuilds the program around
 the atom rows. It reuses the repository’s own primitives throughout:
