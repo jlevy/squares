@@ -476,6 +476,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
             <button data-initial="previous" title="The retained packing of n-1 with the new square added">previous packing</button>
             <button data-initial="random" title="n squares at seeded pseudo-random centres and angles in a box larger than the record">random</button>
             <button data-initial="grid" title="n squares axis-aligned in rows from the bottom-left, in the grid's own box">ordered fill</button>
+            <button data-initial="record" title="The retained best-known packing of n itself, in its own box. Press play to see whether the current law holds a known optimum still">best known</button>
           </span>
         </label>
         <button id="optimize" class="primary" title="Run the current settings from the chosen start until pause">Optimize</button>
@@ -3120,7 +3121,13 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const GROWTH = Object.assign({}, GROWTH_DEFAULT);
   const growKey = () => (GROWTH.on ? GROWTH.size + ':' + GROWTH.rate + ':' + GROWTH.rule : 's' + GROWTH.size);
 
-  const INITIALS = ['previous', 'random', 'grid'];
+  // The starting arrangements. `record` is last because it is the least common: you do not
+  // usually start from the answer. Its use is diagnostic, and it is the sharpest test of a force
+  // law there is -- put a known optimum on the stage, press play, and see whether the law holds
+  // it. A law that slides off a packing nobody can beat is telling you about itself, not about
+  // the packing. (The two-sided form, which distinguishes a rigid record from one with rattlers,
+  // is think-dpmt; this is the button that makes it a thing you can do by hand.)
+  const INITIALS = ['previous', 'random', 'grid', 'record'];
   const OPT = {
     stepsPerSecond: 120,   // the simulated rate, the same dt the cached simulator integrates at
     budgetMs: 9,           // the wall clock one frame's chunk of steps may take
@@ -3152,7 +3159,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // Two names each: the button's, which has room to say what the start is, and the stage's, which
   // has one 28 px row of the panel and has to leave space for the clock, the step count and the
   // hand-edited mark on the same line.
-  const initialLabel = { previous: 'previous packing', random: 'random', grid: 'ordered fill' };
+  const initialLabel = { previous: 'previous packing', random: 'random', grid: 'ordered fill', record: 'best known' };
   const initialShort = { previous: 'previous', random: 'random', grid: 'grid' };
   // The page's own generator, seeded so a start is reproducible from n and the kind alone.
   function seededRandom(seedN) {
@@ -3189,6 +3196,14 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         X[i] = lerp(lo, hi, rnd());
         Y[i] = lerp(lo, hi, rnd());
         TH[i] = rnd() * 90 * DEG;
+      }
+    } else if (kind === 'record') {
+      // The retained packing of n, exactly as the atlas holds it, in its own container. Every
+      // square is placed, so there is no arriving square to drop and nothing to make room for.
+      side = B.side;
+      for (let i = 0; i < N; i++) {
+        const b = B.squares[i];
+        X[i] = b[0]; Y[i] = b[1]; TH[i] = b[2] * DEG;
       }
     } else if (springs) {
       side = B.side;

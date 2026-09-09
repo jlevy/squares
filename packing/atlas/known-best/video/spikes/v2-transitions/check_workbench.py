@@ -437,8 +437,11 @@ def main() -> int:
         # ---- step 6 (revision 9): initial conditions and the open-ended Optimize run.
         for name in ("setInitial", "initial", "optimize", "optimizeState", "optimizeStep", "setSpeed", "speed"):
             check(name in api, f"the API lacks {name}")
-        check(page.evaluate("atlasTransitions.initials()") == ["previous", "random", "grid"],
-              "the three initial conditions are not previous / random / grid")
+        # Revision 16: `record` joined them, the retained packing of n itself. It is last because
+        # it is the least common start and its use is diagnostic rather than exploratory: put a
+        # known optimum on the stage and see whether the law holds it.
+        check(page.evaluate("atlasTransitions.initials()") == ["previous", "random", "grid", "record"],
+              "the initial conditions are not previous / random / grid / record")
         check(page.evaluate("atlasTransitions.initial()") == "previous", "the default start is not the previous packing")
         # Revision 9 removed the snap checkbox because an open-ended run had nothing to snap to.
         # Revision 11 brings it back as one of the two chart options, beside the contact bias, and
