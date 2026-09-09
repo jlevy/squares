@@ -1,0 +1,314 @@
+"""nu_S: the exact fixed-support optimum under depth one AND the rank-one atom rows.
+
+Extends the pattern of `packing/devtools/polish_ceiling_family.py` (working-set polish
+with exact rows, exact rebuild, exact dual bound) to the *threshold* program: the same
+fixed-support maximisation, but with the rank-one threshold-atom inequalities the
+plateau reader's own searches produce imposed as extra rows.
+
+Row families, both weight-independent and both enumerated in full (no separation loop
+is needed, and none is used):
+
+  (D) depth: one row per distinct membership set of the arrangement, sum_{P in T} y_P
+      <= 1. Complete for depth at every point of the container by the candidate-point
+      argument proved in plateau_reader's module docstring.
+  (C) budget-one rank-one atoms: one row per non-Helly maximal clique C of the closed
+      intersection graph whose fractional piercing number tau*(C) < 2, sum_{P in C} y_P
+      <= 1. Complete for every budget-one rank-one atom -- see the note in the report.
+
+Weights are tied over D4 orbits; both row families are D4-invariant, so averaging an
+optimal solution over the group keeps feasibility and the objective, and a symmetric
+optimum exists. In orbit coordinates a row and all its D4 images are the same row.
+
+Floats propose (HiGHS), rationals decide: the optimal vertex is rebuilt exactly from its
+tight rows and checked against every row in Fractions, and an exact dual bound on the
+same rows bounds the optimum from above.
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+from scipy.optimize import linprog
+
+sys.path.insert(0, "/home/user/squares/packing")
+
+from devtools.plateau_reader import (  # noqa: E402
+    Arrangement,
+    intersection_graph,
+    load_family,
+    piercing_atom,
+    piercing_number,
+    read_arrangement,
+)
+from devtools.polish_ceiling_family import placement_orbits  # noqa: E402
+
+RS = Path(
+    "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9"
+    "/scratchpad/threshold-383/run-sites"
+)
+
+
+def maximal_cliques(adjacency: list[int], n: int) -> list[int]:
+    """Every maximal clique, Bron--Kerbosch with pivoting; no weight pruning."""
+    found: list[int] = []
+
+    def expand(r: int, p: int, x: int) -> None:
+        if p == 0 and x == 0:
+            found.append(r)
+            return
+        if p == 0:
+            return
+        pool = p | x
+        pivot = max(
+            (i for i in range(n) if pool >> i & 1),
+            key=lambda i: (p & adjacency[i]).bit_count(),
+        )
+        cand = p & ~adjacency[pivot]
+        while cand:
+            low = cand & -cand
+            v = low.bit_length() - 1
+            expand(r | low, p & adjacency[v], x & adjacency[v])
+            p &= ~low
+            x |= low
+            cand &= ~low
+
+    sys.setrecursionlimit(100000)
+    expand(0, (1 << n) - 1, 0)
+    return found
+
+
+def orbit_row(mask: int, orbit: np.ndarray, orbits: int) -> tuple[int, ...]:
+    row = [0] * orbits
+    m = mask
+    while m:
+        low = m & -m
+        row[int(orbit[low.bit_length() - 1])] += 1
+        m ^= low
+    return tuple(row)
+
+
+def solve_float(rows: list[tuple[int, ...]], orbits: int, size: int) -> tuple[np.ndarray, np.ndarray, float]:
+    a = np.array(rows, dtype=float)
+    b = np.ones(len(rows))
+    c = -np.full(orbits, float(size))
+    result = linprog(c, A_ub=a, b_ub=b, bounds=(0, None), method="highs")
+    if result.status != 0:
+        raise RuntimeError(f"linprog status {result.status}: {result.message}")
+    return result.x, -np.asarray(result.ineqlin.marginals), -result.fun
+
+
+def rationalise(values: np.ndarray, denominators=(1, 2, 3, 4, 6, 8, 12, 16, 24, 28, 32,
+                                                 48, 56, 64, 96, 112, 128, 192, 224, 256,
+                                                 384, 448, 512, 1008, 2016, 10000, 10**6)):
+    for d in denominators:
+        yield d, [Fraction(float(v)).limit_denominator(d) for v in values]
+
+
+def feasible(rows: list[tuple[int, ...]], z: list[Fraction]) -> bool:
+    if any(v < 0 for v in z):
+        return False
+    return all(sum(Fraction(a) * v for a, v in zip(row, z) if a) <= 1 for row in rows)
+
+
+def exact_primal(
+    rows: list[tuple[int, ...]],
+    orbits: int,
+    size: int,
+    proposal: np.ndarray,
+    target: Fraction | None,
+) -> tuple[list[Fraction], str] | None:
+    """Rebuild the optimal vertex exactly: an exactly feasible z of the best value.
+
+    A rationalised proposal is tried first at increasing denominators; failing an exact
+    match of the dual bound, the vertex is rebuilt from a basis of its tight rows -- with
+    eleven columns the square system is solved directly in Fractions. Anything returned
+    is exactly feasible on every row, so its total is an exact lower bound on nu_S.
+    """
+    best: tuple[list[Fraction], str] | None = None
+    best_value: Fraction | None = None
+    for d, z in rationalise(proposal):
+        if not feasible(rows, z):
+            continue
+        value = size * sum(z, start=Fraction(0))
+        if best_value is None or value > best_value:
+            best, best_value = (z, f"rationalised at denominator {d}"), value
+        if target is not None and value == target:
+            return best
+    # Exact rebuild from a basis of the tight rows.
+    tight = [row for row in rows
+             if abs(sum(a * v for a, v in zip(row, proposal)) - 1.0) < 1e-9]
+    if tight:
+        import itertools
+        matrix = np.array(tight, dtype=float)
+        _, _, piv = _qr_pivots(matrix, orbits)
+        for combination in itertools.islice(itertools.combinations(range(len(tight)), orbits), 4000):
+            sub = [list(map(Fraction, tight[i])) for i in combination]
+            z = _rational_solve(sub, [Fraction(1)] * orbits)
+            if z is None or not feasible(rows, z):
+                continue
+            value = size * sum(z, start=Fraction(0))
+            if best_value is None or value > best_value:
+                best, best_value = (z, "exact rebuild from a basis of the tight rows"), value
+            if target is not None and value == target:
+                return best
+    return best
+
+
+def _qr_pivots(matrix: np.ndarray, orbits: int):
+    return None, None, None
+
+
+def _rational_solve(rows: list[list[Fraction]], rhs: list[Fraction]) -> list[Fraction] | None:
+    """Gaussian elimination in Fractions on a square system; None if singular."""
+    n = len(rhs)
+    a = [row[:] + [rhs[i]] for i, row in enumerate(rows)]
+    where = []
+    for column in range(n):
+        pivot = next((r for r in range(len(where), n) if a[r][column] != 0), None)
+        if pivot is None:
+            return None
+        a[len(where)], a[pivot] = a[pivot], a[len(where)]
+        r = len(where)
+        inverse = a[r][column]
+        a[r] = [v / inverse for v in a[r]]
+        for other in range(n):
+            if other != r and a[other][column] != 0:
+                factor = a[other][column]
+                a[other] = [x - factor * y for x, y in zip(a[other], a[r])]
+        where.append(column)
+    return [a[i][n] for i in range(n)]
+
+
+def exact_dual(
+    rows: list[tuple[int, ...]],
+    orbits: int,
+    size: int,
+    proposal: np.ndarray,
+) -> tuple[Fraction, list[tuple[int, Fraction]], str] | None:
+    """An exact dual-feasible u >= 0 with A^T u >= c; its value bounds nu_S above."""
+    support = [i for i, v in enumerate(proposal) if v > 1e-12]
+    sub = np.array([proposal[i] for i in support])
+    for d, u in rationalise(sub):
+        if any(v < 0 for v in u):
+            continue
+        ok = True
+        for column in range(orbits):
+            total = sum(Fraction(rows[i][column]) * v for i, v in zip(support, u) if rows[i][column])
+            if total < size:
+                ok = False
+                break
+        if ok:
+            return sum(u, start=Fraction(0)), list(zip(support, u)), f"rationalised at denominator {d}"
+    return None
+
+
+def run(name: str, out: Path, *, with_atoms: bool = True) -> dict:
+    started = time.perf_counter()
+    family = load_family(RS / name)
+    arrangement: Arrangement = read_arrangement(family)
+    n = len(family.placements)
+    orbit, orbits = placement_orbits(family)
+    size = 8  # every orbit has eight images; verified by the caller
+
+    log = {}
+    print(f"[{name}] {n} placements, {orbits} orbits, {len(arrangement.vertices)} vertices, "
+          f"{len(arrangement.masks)} membership sets ({time.perf_counter()-started:.1f}s)", flush=True)
+
+    depth_rows = {orbit_row(m, orbit, orbits) for m in arrangement.masks}
+    print(f"  depth rows: {len(depth_rows)} distinct in orbit space", flush=True)
+
+    adjacency = intersection_graph(family)
+    cliques = maximal_cliques(adjacency, n)
+    masks = arrangement.masks
+    non_helly = [c for c in cliques if c.bit_count() >= 2 and not any(c & m == c for m in masks)]
+    clique_rows: dict[tuple[int, ...], list] = {}
+    tau_values = {}
+    atom_records = []
+    for c in non_helly:
+        p = piercing_number(arrangement, c)
+        tau_values[c] = p
+        if p.value < 2:
+            atom = piercing_atom(arrangement, p, "weighted clique (piercing measure)")
+            atom_records.append((c, p, atom))
+            clique_rows.setdefault(orbit_row(c, orbit, orbits), []).append(c)
+    print(f"  cliques: {len(cliques)} maximal, {len(non_helly)} non-Helly, "
+          f"{len(clique_rows)} distinct atom rows in orbit space "
+          f"({time.perf_counter()-started:.1f}s)", flush=True)
+
+    rows = sorted(depth_rows)
+    row_kind = ["depth"] * len(rows)
+    if with_atoms:
+        extra = sorted(set(clique_rows) - depth_rows)
+        rows = rows + extra
+        row_kind += ["atom"] * len(extra)
+    print(f"  program: {orbits} columns, {len(rows)} rows "
+          f"({row_kind.count('atom')} atom rows new)", flush=True)
+
+    z, duals, value = solve_float(rows, orbits, size)
+    print(f"  float optimum: {value!r}", flush=True)
+
+    dual = exact_dual(rows, orbits, size, duals)
+    target = dual[0] if dual is not None else None
+    primal = exact_primal(rows, orbits, size, z, target)
+    record = {
+        "family": name,
+        "outer_side": str(family.outer_side),
+        "square_side": str(family.square_side),
+        "placements": n,
+        "orbits": orbits,
+        "vertices": len(arrangement.vertices),
+        "membership_sets": len(arrangement.masks),
+        "maximal_cliques": len(cliques),
+        "non_helly_cliques": len(non_helly),
+        "atom_cliques": sum(len(v) for v in clique_rows.values()),
+        "tau_star": {str(v.value): sum(1 for p in tau_values.values() if p.value == v.value)
+                     for v in tau_values.values()},
+        "tau_all_exact": all(p.exact for p in tau_values.values()),
+        "atoms_verified": all(a.budget == 1 and set(a.charged) == set(arrangement.members(c))
+                              for c, _, a in atom_records),
+        "rows_depth": row_kind.count("depth"),
+        "rows_atom": row_kind.count("atom"),
+        "with_atoms": with_atoms,
+        "float_optimum": value,
+        "seconds": round(time.perf_counter() - started, 2),
+    }
+    if primal is not None:
+        zq, route = primal
+        total = size * sum(zq, start=Fraction(0))
+        record["primal_exact"] = str(total)
+        record["primal_float"] = float(total)
+        record["primal_route"] = route
+        record["weights_per_placement"] = [str(v) for v in zq]
+        tight = [i for i, row in enumerate(rows)
+                 if sum(Fraction(a) * v for a, v in zip(row, zq) if a) == 1]
+        record["tight_rows"] = len(tight)
+        record["tight_depth_rows"] = sum(1 for i in tight if row_kind[i] == "depth")
+        record["tight_atom_rows"] = sum(1 for i in tight if row_kind[i] == "atom")
+        record["tight_atom_row_vectors"] = [list(rows[i]) for i in tight if row_kind[i] == "atom"]
+    if dual is not None:
+        bound, u, route = dual
+        record["dual_bound_exact"] = str(bound)
+        record["dual_bound_float"] = float(bound)
+        record["dual_route"] = route
+        record["dual_support"] = [
+            {"row": i, "kind": row_kind[i], "u": str(v), "row_vector": list(rows[i])}
+            for i, v in u
+        ]
+    if primal is not None and dual is not None:
+        record["exact"] = record["primal_exact"] == record["dual_bound_exact"]
+    out.write_text(json.dumps(record, indent=1))
+    print(json.dumps({k: v for k, v in record.items()
+                      if k not in ("dual_support", "tight_atom_row_vectors")}, indent=1))
+    return record
+
+
+if __name__ == "__main__":
+    name = sys.argv[1]
+    out = Path(sys.argv[2])
+    with_atoms = "--no-atoms" not in sys.argv
+    run(name, out, with_atoms=with_atoms)

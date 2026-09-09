@@ -16,10 +16,11 @@ budget-one class, falling to exactly `10` once the floor atoms are imposed.
 So no cap at either side, and real room rather than a nearly-capped method.**
 
 Retained beside this report: the two exact results with their tight rows and priced
-duals, the two no-atom controls, the two `32/3` optima as ceiling records, and the two
-sharpening loops, listed under [Files](#files).
-Not retained (scratch only): the clique census with every `tau*`, the reader’s verdicts
-on the two optima, the union-support working set, and the tool itself.
+duals, the two no-atom controls, the two `32/3` optima as ceiling records, the two
+sharpening loops, and the ten scripts that produced them, listed under [Files](#files).
+Not retained (scratch only): the clique census output with every `tau*` (0.4 s to
+rebuild from the retained script), the reader’s verdicts on the two optima, and the
+union-support working set’s rounds.
 
 Labels: **EXACT** (decided in rational arithmetic by repository primitives), **CHECKED**
 (float computation, script retained), **RECORD** (read from a retained file), **OPEN**.
@@ -352,13 +353,19 @@ at either side. **No cap is established.**
 The tool is an extension of a **copy** of
 [`packing/devtools/polish_ceiling_family.py`](../../../../../devtools/polish_ceiling_family.py),
 taken unmodified; the tracked file was not touched.
-It reuses the repository’s own primitives throughout: `plateau_reader.read_arrangement`
-for the exact arrangement and its membership sets, `plateau_reader.intersection_graph` /
-`piercing_number` / `piercing_atom` / `verify_atom` for the clique atoms,
-`polish_ceiling_family.placement_orbits` for the D4 tie, and
-`sqpack.fractional.ceiling.verify_ceiling` (through the reader) for the depth verdict.
-Run as `packing/.venv/bin/python3` (Python 3.14) from `packing/`, never the `python3` on
-`PATH`. At most two worker processes at a time.
+The copy was compared byte for byte when the code was retained and is **identical** to
+the tracked file as committed at `7ccb679c` — the commit that added the tool, made 65
+minutes after the copy was taken from the then-uncommitted working tree — so the copy
+itself is not retained: it holds nothing the repository does not already carry.
+The extension is a separate module, [`lane-a5-cap-lp.py.txt`](lane-a5-cap-lp.py.txt),
+which imports `placement_orbits` from the tracked tool and rebuilds the program around
+the atom rows. It reuses the repository’s own primitives throughout:
+`plateau_reader.read_arrangement` for the exact arrangement and its membership sets,
+`plateau_reader.intersection_graph` / `piercing_number` / `piercing_atom` /
+`verify_atom` for the clique atoms, `polish_ceiling_family.placement_orbits` for the D4
+tie, and `sqpack.fractional.ceiling.verify_ceiling` (through the reader) for the depth
+verdict. Run as `packing/.venv/bin/python3` (Python 3.14) from `packing/`, never the
+`python3` on `PATH`. At most two worker processes at a time.
 
 ## 9. Timings and what did not work
 
@@ -454,11 +461,75 @@ Retained beside this report:
 - [`lane-a5-k6-loop-153-40.json`](lane-a5-k6-loop-153-40.json) and
   [`lane-a5-k6-loop-383-100.json`](lane-a5-k6-loop-383-100.json) — the sharpening
   sequences of §5 and every atom each round added, down to `10`.
+- The ten scripts:
+  - [`lane-a5-cap-lp.py.txt`](lane-a5-cap-lp.py.txt) — the `nu_S` program itself, and
+    the extension §8 describes: the fixed-support maximisation under the depth rows and
+    the complete budget-one atom rows, solved in floats, rebuilt exactly in `Fraction`s
+    and closed against an exact rational dual bound.
+    F1, F2, F3, F7 and F8 are its output.
+  - [`lane-a5-tau-scan.py.txt`](lane-a5-tau-scan.py.txt) — the clique census the atom
+    rows are built from: every maximal clique by Bron–Kerbosch with no weight prune, the
+    Helly test, and exact `tau*` on every non-Helly clique.
+    The 233 and 152 of §9 are its counts.
+  - [`lane-a5-orbits.py.txt`](lane-a5-orbits.py.txt) — checks that each ceiling family
+    is D4-closed and reports its orbit sizes and distinct weights, which is the fact
+    F9’s averaging argument needs.
+  - [`lane-a5-build-optimum.py.txt`](lane-a5-build-optimum.py.txt) — writes an optimum
+    as a ceiling record and describes the redistribution off `1/8`, so that the
+    unmodified reader could be pointed at it in §5.
+  - [`lane-a5-diagnose.py.txt`](lane-a5-diagnose.py.txt) — where the tight and priced
+    rows sit and where the weight goes: §4 and the central clique of F7.
+  - [`lane-a5-k6-loop.py.txt`](lane-a5-k6-loop.py.txt) — the sharpening loop of §5:
+    solve exactly, rebuild the optimum as a family, run the plateau reader on it, turn
+    every violated floor atom into a row on the full support, repeat.
+    F6’s descent to exactly `10` at both sides is its output.
+  - [`lane-a5-final-family.py.txt`](lane-a5-final-family.py.txt) — writes the last
+    family of a `K6` loop as a ceiling record, for a deeper reader pass over it.
+  - [`lane-a5-certify-k6.py.txt`](lane-a5-certify-k6.py.txt) — reconstructs a loop’s
+    final row set and bounds it with an exact rational dual, which is what makes F6’s
+    `10` an exact upper bound rather than a float reading.
+  - [`lane-a5-union-support2.py.txt`](lane-a5-union-support2.py.txt) — the union working
+    set of §6 on the 344 placements: the round loop with an exact dual bound taken each
+    round.
+  - [`lane-a5-certify-union.py.txt`](lane-a5-certify-union.py.txt) — certifies the union
+    program’s value on the row set the working set closed on: F10’s `21749/1980` rests
+    on it.
 
-Not retained (scratch only): the clique census with every `tau*` (0.4 s to rebuild), the
-unmodified reader’s two verdict reports on the `32/3` optima and their logs, the union
-working set’s rounds, and the tool itself — a copy of `polish_ceiling_family.py` with
-the atom rows added, which is a scratch extension rather than a promoted instrument.
+The scripts are retained with a `.py.txt` extension, as
+[lane X3](lane-x3-containment-atoms-do-not-cut.md) and
+`agenda-032/unrun-independent-audit/` already do: they are scratch measurement scripts,
+not importable project modules, and the repository’s Python surface is held at zero Ruff
+and BasedPyright findings over every tracked `.py` file.
+Their bytes are as delivered; nothing was reformatted.
+
+They are **a record of how the measurement was made, not a supported tool.** Each was
+run from a scratch directory against the repository at commit `7ccb679c`, and every one
+hard-codes the absolute scratch path twice over: its own directory, so that `cap_lp` can
+be imported, and lane A3’s run directory, where the two ceiling families were read from.
+Nothing in the repository imports any of them, and nothing should.
+`cap_lp.py` is the one that could become a tool; promoting it needs its own tests and
+review, and is carried as `think-p1sf` rather than done here.
+
+Two earlier versions were superseded during the run, checked rather than assumed, and
+are not retained:
+
+- `union_support.py`, superseded by `union_support2.py`. The later file is the earlier
+  one plus an exact rational dual bound taken every round and a row dump, and F10’s
+  `21749/1980` is read from the later file’s output.
+- `cliques.py`, superseded twenty-three seconds later by `tau_scan.py`. The later file
+  keeps the same Bron–Kerbosch enumeration and Helly test, drops the diagnostic prints,
+  and adds the exact `tau*` and the JSON census the atom rows are built from.
+
+Also not retained: `show_record.py`, a pretty-printer for the fields of a ceiling
+record, which stands behind no finding; and `polish_copy.py`, the 39 KB copy §8
+describes, which is byte-identical to the tracked
+`packing/devtools/polish_ceiling_family.py` at `7ccb679c`, is imported by none of the
+ten retained scripts — the ones that need `placement_orbits` import the tracked module —
+and would duplicate tracked code and nothing else.
+
+Not retained (scratch only): the clique census output with every `tau*` (0.4 s to
+rebuild from `lane-a5-tau-scan.py.txt`), the unmodified reader’s two verdict reports on
+the `32/3` optima and their logs, and the union working set’s rounds.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

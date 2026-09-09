@@ -1,0 +1,41 @@
+"""Split the oracle reports' violated atoms into seed files by source, deduped on D4 orbit."""
+from __future__ import annotations
+import json, sys
+from collections import Counter
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from flooratoms import FloorAtom
+
+NEW = Fraction(153, 40)
+
+def collect(paths, keep):
+    seen, out = set(), []
+    for path in paths:
+        for record in json.loads(Path(path).read_text()).get("violated_atoms", []):
+            if not keep(record["source"]):
+                continue
+            points = tuple((Fraction(p["x"]), Fraction(p["y"])) for p in record["points"])
+            mults = tuple(int(p["multiplicity"]) for p in record["points"])
+            atom = FloorAtom(points, mults, int(record["threshold"]))
+            key = min(im.key for im in atom.images(NEW))
+            if key in seen:
+                continue
+            seen.add(key)
+            entry = atom.to_record()
+            entry.update(source=record["source"], family=record["family"],
+                         floor_violation=record["floor_violation"], floor_charge=record["floor_charge"],
+                         charged=len(record["charged_placements"]), orbit_size=len(atom.orbit(NEW)))
+            out.append(entry)
+    return out
+
+reports = ["oracle-k4k5.json", "oracle-k6.json"]
+small = collect(reports, lambda s: not s.startswith("k6"))
+big = collect(reports, lambda s: s.startswith("k6"))
+Path("seed-k4k5.json").write_text(json.dumps(small, indent=1))
+Path("seed-k6.json").write_text(json.dumps(big, indent=1))
+Path("seed-all.json").write_text(json.dumps(small + big, indent=1))
+for name, group in (("k4k5", small), ("k6", big)):
+    print(f"{name}: {len(group)} distinct orbits; sources {dict(Counter(e['source'] for e in group))}; "
+          f"violations {dict(Counter(e['floor_violation'] for e in group))}; "
+          f"sizes {sorted({len(e['points']) for e in group})}; orbit sizes {sorted({e['orbit_size'] for e in group})}")

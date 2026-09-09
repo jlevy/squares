@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+"""Render an lp383.py trajectory.json as the report's Markdown table (and timings)."""
+import json, sys
+from fractions import Fraction
+t = json.load(open(sys.argv[1]))
+print("| stage | rows | objective | site / atom support (atom budget) | dual support | least charge (direction) | violated cells (directions) | LP | sweep |")
+print("| --- | ---: | ---: | --- | ---: | --- | --- | ---: | ---: |")
+lp = sw = 0.0
+for e in t["trajectory"]:
+    s = e["stage"]
+    if "lp_seconds" in e:
+        lp += e["lp_seconds"]
+        print(f"| {s} | {e['rows']:,} | {e['objective']:.9f} | {e['site_support']} / {e['positive_atoms']} of {e['atom_orbits']} ({e['atom_budget']:.6f}) | {e['dual_support']} |  |  | {e['lp_seconds']:.1f} s, {e['simplex_iterations']:,} it |  |")
+    elif "sweep_seconds" in e:
+        sw += e["sweep_seconds"]
+        hit = e["directions_hit"]; cap = e.get("cap_bound", [])
+        hs = ", ".join(map(str, hit)) if len(hit) <= 12 else f"{len(hit)} directions"
+        print(f"| {s} |  |  | {e['point_atoms']} points + {e['threshold_atoms']} threshold, budget {e['budget']:.9f} |  | {e['least_charge_exact']} = {e['least_charge']:.9f} ({e['least_direction']}) | {e['violated_cells']} ({hs}){'; cap bound in %d' % len(cap) if cap else ''} |  | {e['sweep_seconds']:.0f} s |")
+    else:
+        print(f"| {s} |  |  | {json.dumps({k: v for k, v in e.items() if k not in ('stage', 'wall', 'seconds')})} |  |  |  |  | {e.get('seconds', 0):.0f} s |")
+print(f"\nnote: {t['note']}; meta: {t['meta']}; LP total {lp:.0f} s; sweeps total {sw:.0f} s")

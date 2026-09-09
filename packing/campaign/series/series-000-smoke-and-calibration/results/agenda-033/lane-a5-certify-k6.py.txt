@@ -1,0 +1,72 @@
+"""Certify the sharpening loop's final value exactly: reconstruct its rows, bound the dual.
+
+The loop's record keeps every non-depth row with its budget; the depth rows are the
+arrangement's membership sets, which are reproduced from the family. A rational
+dual-feasible u >= 0 with A^T u >= c gives an exact upper bound sum b_i u_i on the value
+of the program, hence on the fixed-support optimum under the whole rank-one class.
+"""
+import ast, json, sys
+from fractions import Fraction
+from pathlib import Path
+import numpy as np
+from scipy.optimize import linprog
+sys.path.insert(0, "/home/user/squares/packing")
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+from devtools.plateau_reader import load_family, read_arrangement
+from devtools.polish_ceiling_family import placement_orbits
+from cap_lp import orbit_row, RS
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+name, tag = sys.argv[1], sys.argv[2]
+loop = json.loads((OUT / f"k6-loop-{tag}.json").read_text())
+fam = load_family(RS / name)
+arr = read_arrangement(fam)
+orbit, orbits = placement_orbits(fam)
+rows = {}
+for m in arr.masks:
+    rows.setdefault(orbit_row(m, orbit, orbits), 1)
+for key, kind in loop["row_kinds"].items():
+    row = tuple(ast.literal_eval(key))
+    budget = 1 if kind == "clique" else int(kind.split("budget=")[1])
+    if row not in rows or rows[row] > budget:
+        rows[row] = budget
+keys = sorted(rows)
+print(f"{tag}: reconstructed {len(keys)} rows "
+      f"(loop's last round had {loop['history'][-1]['rows']})")
+A = np.array(keys, dtype=float)
+b = np.array([rows[k] for k in keys], dtype=float)
+res = linprog(-np.full(orbits, 8.0), A_ub=A, b_ub=b, bounds=(0, None), method="highs")
+print("float value:", -res.fun)
+duals = -np.asarray(res.ineqlin.marginals)
+support = [i for i, v in enumerate(duals) if v > 1e-12]
+ladder = [1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,18,20,21,22,24,28,30,33,35,36,40,42,44,48,
+          55,56,60,63,66,70,72,77,80,84,88,90,96,99,105,110,112,120,126,132,140,144,154,
+          165,168,176,180,198,210,220,231,240,252,264,280,308,315,330,360,385,396,420,440,
+          462,495,504,528,560,616,630,660,693,720,770,792,840,924,990,1008,1080,1155,1260,
+          1320,1386,1540,1584,1680,1848,1980,2310,2520,2772,3080,3465,3960,4620,5040,5544,
+          6930,7920,9240,10080,13860,27720,10**5,10**6,10**7]
+best = None
+for d in ladder:
+    u = [Fraction(float(duals[i])).limit_denominator(d) for i in support]
+    if any(v < 0 for v in u):
+        continue
+    if all(sum(Fraction(keys[i][col]) * v for i, v in zip(support, u) if keys[i][col]) >= 8
+           for col in range(orbits)):
+        bound = sum(Fraction(rows[keys[i]]) * v for i, v in zip(support, u))
+        if best is None or bound < best[0]:
+            best = (bound, d)
+print("best EXACT dual bound:", best[0] if best else None,
+      f"= {float(best[0]):.10f}" if best else "", f"(ladder {best[1]})" if best else "")
+# exact primal: rationalise the solution and check every row
+from cap_lp import rationalise
+bestp = None
+for d, z in rationalise(res.x):
+    if any(v < 0 for v in z):
+        continue
+    if all(sum(Fraction(a) * v for a, v in zip(k, z) if a) <= rows[k] for k in keys):
+        val = 8 * sum(z, start=Fraction(0))
+        if bestp is None or val > bestp[0]:
+            bestp = (val, d, z)
+print("best EXACT feasible primal:", bestp[0] if bestp else None,
+      f"= {float(bestp[0]):.10f}" if bestp else "")
+if best and bestp:
+    print("bracket:", bestp[0], "<= value <=", best[0], " equal:", bestp[0] == best[0])

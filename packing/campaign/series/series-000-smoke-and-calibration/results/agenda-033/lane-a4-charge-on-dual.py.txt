@@ -1,0 +1,23 @@
+"""Exact charge of each seeded atom on a dual family: does this dual violate it?"""
+from __future__ import annotations
+import json, sys
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools.plateau_reader import WeightedPoint, verify_atom
+from sqpack.fractional.ceiling import CeilingCertificate
+
+fam = CeilingCertificate.from_record(json.loads(Path(sys.argv[1]).read_text()))
+seeds = json.loads(Path(sys.argv[2]).read_text())
+print(f"family {len(fam.placements)} placements, total {fam.total_weight} ({float(fam.total_weight):.9f})")
+viol = 0
+for entry in seeds:
+    points = [WeightedPoint((Fraction(x), Fraction(y)), int(a))
+              for (x, y), a in zip(entry["points"], entry["multiplicities"], strict=True)]
+    v = verify_atom(fam, points, int(entry["threshold"]), label=entry["source"])
+    tag = "VIOLATED" if v.violated else "satisfied"
+    viol += v.violated
+    print(f"{entry['source']:>16}  |S|={len(points):>3} a(S)={v.budget * entry['threshold']:>4}~ t={v.threshold} "
+          f"budget {v.budget:>3}  floor charge {str(v.floor_charge):>12} = {float(v.floor_charge):>10.5f}  "
+          f"violation {str(v.floor_violation):>10} = {float(v.floor_violation):>9.5f}  {tag}")
+print(f"{viol} of {len(seeds)} seeded atoms are violated by this family")

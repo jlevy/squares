@@ -1,0 +1,205 @@
+"""Does enlarging the support to the union with the 1/25 plateau family reach eleven?
+
+Support: the 88 ceiling placements at 153/40 together with the 280 placements of
+`family-at-n-1-exact25.json` (geometry only -- that record is not a depth-one family;
+`verify_ceiling` refuses it at depth 28/25 -- so only its placements are taken).
+
+A larger support can only raise nu_S, so the question is whether the union reaches 11.
+The program is the same one: maximise the total weight subject to depth at most one and
+the rank-one atom rows. Rows are added on a working set, exactly as
+`polish_ceiling_family` does, but the depth check runs on the arrangement of the
+*active* support (the placements the current solution actually uses), which is what
+`verify_ceiling` decides completely and is far smaller than the union's own arrangement.
+
+Every row is valid, so the linear program's value is an upper bound on the union's
+optimum at every round: a value below 11 is decisive (the union cannot reach 11), and
+the verified family at the end is an exact lower bound.
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+import numpy as np
+from scipy.optimize import linprog
+sys.path.insert(0, "/home/user/squares/packing")
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+from devtools.plateau_reader import (
+    IntegerSquare, ReaderOptions, integer_vertex, load_family, read_arrangement,
+    read_plateau,
+)
+from devtools.polish_ceiling_family import d4_placement_images, placement_key
+from sqpack.fractional.ceiling import CeilingCertificate, verify_ceiling
+from cap_lp import RS
+
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+DEADLINE = float(sys.argv[1]) if len(sys.argv) > 1 else 1200.0
+started = time.perf_counter()
+
+base = load_family(RS / "ceiling-family-153-40.json")
+extra_record = json.loads((RS / "family-at-n-1-exact25.json").read_text())
+extra_record["placements"] = [[p[0], p[1], p[2], "1/1000", p[4]] for p in extra_record["placements"]]
+extra = CeilingCertificate.from_record(extra_record)
+assert extra.outer_side == base.outer_side and extra.square_side == base.square_side
+
+geometry: dict = {}
+order = []
+for p in list(base.placements) + list(extra.placements):
+    k = placement_key(p)
+    if k not in geometry:
+        geometry[k] = p
+        order.append(k)
+placements = [geometry[k] for k in order]
+n = len(placements)
+print(f"union support: {len(base.placements)} + {len(extra.placements)} -> {n} distinct "
+      f"({time.perf_counter()-started:.1f}s)", flush=True)
+
+# D4 orbits over the union
+index = {k: i for i, k in enumerate(order)}
+orbit = [-1] * n
+orbits = 0
+closed = True
+for i, p in enumerate(placements):
+    if orbit[i] >= 0:
+        continue
+    for image in d4_placement_images(p, base.outer_side):
+        j = index.get(image)
+        if j is None:
+            closed = False
+        else:
+            orbit[j] = orbits
+    orbits += 1
+print(f"D4 closed: {closed}; orbits: {orbits}", flush=True)
+if not closed:
+    print("the union is not D4 closed: solving in the full column space")
+
+squares = [IntegerSquare.of(p) for p in placements]
+
+
+def row_of_point(point) -> tuple[int, ...]:
+    v = integer_vertex(point)
+    row = [0] * (orbits if closed else n)
+    for i, sq in enumerate(squares):
+        if sq.contains(v):
+            row[orbit[i] if closed else i] += 1
+    return tuple(row)
+
+
+def record_of(weights: list[Fraction]) -> CeilingCertificate:
+    rows = [[str(p.half_tangent), str(p.centre_x), str(p.centre_y), str(w), str(p.side)]
+            for p, w in zip(placements, weights) if w != 0]
+    return CeilingCertificate.from_record({
+        "n": 11, "outer_side": str(base.outer_side), "square_side": str(base.square_side),
+        "half_tangents": extra_record["half_tangents"], "placements": rows,
+        "total_weight": str(sum(weights, start=Fraction(0)))})
+
+
+columns = orbits if closed else n
+multiplicity = [sum(1 for o in orbit if o == c) for c in range(orbits)] if closed else [1]*n
+objective = np.array([float(m) for m in multiplicity])
+
+# Seed: the depth rows of the base family's own arrangement, plus every placement corner.
+rows: dict[tuple[int, ...], int] = {}
+kinds: dict[tuple[int, ...], str] = {}
+base_arr = read_arrangement(base)
+seed = list(base_arr.representative.values())
+for p in placements:
+    seed.extend(p.corners())
+print(f"seed points: {len(seed)} ({time.perf_counter()-started:.1f}s)", flush=True)
+for point in seed:
+    r = row_of_point(point)
+    if any(r):
+        rows.setdefault(r, 1)
+        kinds.setdefault(r, "depth")
+print(f"seed rows: {len(rows)} ({time.perf_counter()-started:.1f}s)", flush=True)
+
+history = []
+for rnd in range(40):
+    if time.perf_counter() - started > DEADLINE:
+        print("deadline reached", flush=True)
+        break
+    keys = sorted(rows)
+    a = np.array(keys, dtype=float)
+    b = np.array([rows[k] for k in keys], dtype=float)
+    result = linprog(-objective, A_ub=a, b_ub=b, bounds=(0, None), method="highs")
+    assert result.status == 0, result.message
+    value = -result.fun
+    # An exact dual-feasible u >= 0 with A^T u >= c certifies sum b_i u_i >= nu_union.
+    duals = -np.asarray(result.ineqlin.marginals)
+    support = [i for i, v in enumerate(duals) if v > 1e-12]
+    bound = None
+    for d in (1, 2, 3, 4, 6, 8, 12, 13, 24, 25, 26, 39, 48, 52, 75, 78, 96, 100, 156, 300,
+              312, 624, 975, 1200, 10000, 10**6):
+        u = [Fraction(float(duals[i])).limit_denominator(d) for i in support]
+        if any(v < 0 for v in u):
+            continue
+        if all(sum(Fraction(keys[i][col]) * v for i, v in zip(support, u) if keys[i][col])
+               >= multiplicity[col] for col in range(columns)):
+            bound = sum(Fraction(rows[keys[i]]) * v for i, v in zip(support, u))
+            break
+    print(f"    exact dual bound: {bound} ({float(bound) if bound is not None else None})",
+          flush=True)
+    z = [Fraction(float(v)).limit_denominator(10**6) for v in result.x]
+    weights = [z[orbit[i]] if closed else z[i] for i in range(n)]
+    print(f"  round {rnd}: rows {len(rows)}  float value {value!r}  "
+          f"active {sum(1 for w in weights if w != 0)} placements "
+          f"({time.perf_counter()-started:.1f}s)", flush=True)
+    history.append({"round": rnd, "rows": len(rows), "float_value": value,
+                    "exact_dual_bound": str(bound) if bound is not None else None,
+                    "active": sum(1 for w in weights if w != 0)})
+    if value < 11 - 1e-7:
+        print("  *** the value is below eleven: the union cannot reach eleven ***", flush=True)
+    trial = record_of(weights)
+    verdict = verify_ceiling(trial)
+    print(f"    verify_ceiling: total {verdict.total_weight}, max depth {verdict.max_depth}, "
+          f"{verdict.vertices} vertices ({time.perf_counter()-started:.1f}s)", flush=True)
+    fresh = 0
+    if verdict.max_depth > 1:
+        from devtools.polish_ceiling_family import Arrangement as PArr  # noqa: F401
+        from sqpack.fractional.ceiling import arrangement_lines, container_vertices
+        active = [p for p, w in zip(placements, weights) if w != 0]
+        sub = CeilingCertificate.from_record({
+            "n": 11, "outer_side": str(base.outer_side), "square_side": str(base.square_side),
+            "half_tangents": extra_record["half_tangents"],
+            "placements": [[str(p.half_tangent), str(p.centre_x), str(p.centre_y),
+                            str(w), str(p.side)] for p, w in zip(placements, weights) if w != 0],
+            "total_weight": "0"})
+        pts = container_vertices(sub, arrangement_lines(sub))
+        deep = []
+        for point in pts:
+            depth = sum((w for p, w, sq in zip(placements, weights, squares)
+                         if w != 0 and sq.contains(integer_vertex(point))), start=Fraction(0))
+            if depth > 1:
+                deep.append(point)
+        for point in deep:
+            r = row_of_point(point)
+            if any(r) and r not in rows:
+                rows[r] = 1
+                kinds[r] = "depth"
+                fresh += 1
+        print(f"    depth: {len(deep)} violated vertices, {fresh} new rows "
+              f"({time.perf_counter()-started:.1f}s)", flush=True)
+    else:
+        report = read_plateau(trial, ReaderOptions(skip_lines=True, time_limit=30.0))
+        for atom in report.violated:
+            pts = [(p.point, p.multiplicity) for p in atom.points]
+            coefficients = [sum(m for pt, m in pts if p.contains(*pt)) // atom.threshold
+                            for p in placements]
+            r = tuple(sum(coefficients[i] for i in range(n) if (orbit[i] if closed else i) == c)
+                      for c in range(columns))
+            if any(r) and (r not in rows or rows[r] > atom.budget):
+                rows[r] = atom.budget
+                kinds[r] = f"atom t={atom.threshold} budget={atom.budget}"
+                fresh += 1
+        print(f"    atoms: {len(report.violated)} violated, {fresh} new rows "
+              f"({time.perf_counter()-started:.1f}s)", flush=True)
+        history[-1]["feasible_total"] = str(sum(weights, start=Fraction(0)))
+    history[-1]["fresh_rows"] = fresh
+    if fresh == 0:
+        print("  no new row: the loop has closed", flush=True)
+        break
+
+(OUT / "union2-153-40.json").write_text(json.dumps(
+    {"support": n, "orbits": orbits, "d4_closed": closed, "history": history,
+     "rows": [{"row": list(k), "rhs": rows[k], "kind": kinds[k]} for k in sorted(rows)]},
+    indent=1))
+print("wrote", OUT / "union2-153-40.json", flush=True)

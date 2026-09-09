@@ -1,0 +1,36 @@
+"""Certify the union program's value exactly on the row set the working set closed on."""
+import json, sys
+from fractions import Fraction
+from pathlib import Path
+import numpy as np
+from scipy.optimize import linprog
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+rec = json.loads((OUT / "union2-153-40.json").read_text())
+rows = rec["rows"]
+orbits = rec["orbits"]
+A = np.array([r["row"] for r in rows], dtype=float)
+b = np.array([r["rhs"] for r in rows], dtype=float)
+c = np.full(orbits, 8.0)          # every orbit has eight images
+res = linprog(-c, A_ub=A, b_ub=b, bounds=(0, None), method="highs")
+print("rows", len(rows), "columns", orbits, "float value", -res.fun)
+duals = -np.asarray(res.ineqlin.marginals)
+support = [i for i, v in enumerate(duals) if v > 1e-12]
+print("dual support size", len(support))
+ladder = [1,2,3,4,5,6,8,10,12,15,20,24,25,30,40,48,50,60,75,80,100,120,150,165,180,200,
+          220,240,264,275,300,330,360,396,440,495,550,600,660,720,825,880,900,990,1100,
+          1188,1320,1650,1980,2200,2475,2640,3300,3960,4950,5940,7920,9900,11880,19800,
+          10**5, 10**6, 10**7]
+best = None
+for d in ladder:
+    u = [Fraction(float(duals[i])).limit_denominator(d) for i in support]
+    if any(v < 0 for v in u):
+        continue
+    ok = all(sum(Fraction(rows[i]["row"][col]) * v for i, v in zip(support, u)
+                 if rows[i]["row"][col]) >= 8 for col in range(orbits))
+    if ok:
+        bound = sum(Fraction(rows[i]["rhs"]) * v for i, v in zip(support, u))
+        if best is None or bound < best[0]:
+            best = (bound, d)
+print("best exact dual bound:", best[0] if best else None,
+      f"= {float(best[0]) if best else None}", f"(denominator ladder {best[1]})" if best else "")
+print("below eleven:", (best[0] < 11) if best else None)

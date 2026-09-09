@@ -1,0 +1,162 @@
+"""Chvatal-Gomory floor atoms with integer multiplicities, as LP columns.
+
+A floor atom is ``(S, a, t)``: integer multiplicities ``a_s > 0`` on a finite point set
+``S`` and a threshold ``t >= 2``.  It charges a core ``P`` the amount ``floor(a(P) / t)``
+with ``a(P) = sum_{s in P} a_s``, and its budget is ``floor(a(S) / t)``: for pairwise
+disjoint cores ``sum_P floor(a(P)/t) <= floor(sum_P a(P) / t) <= floor(a(S)/t)`` because
+the floor is superadditive and disjoint cores have disjoint traces on ``S``.  So the atom
+is a valid inequality of the packing problem and a legal column of the covering LP, at
+cost equal to its budget -- exactly `sqpack.fractional.threshold.ThresholdAtom` generalised
+from ``[a(P) >= t]`` to ``floor(a(P)/t)``, which is what `devtools.plateau_reader`'s K6
+returns.  With every multiplicity one and ``t <= |S| < 2t`` the two coincide.
+
+Columns are built with the same float geometry and the same `COVER_SLACK` loosening as
+`sepcore.atom_columns`, so the LP sees at least the exact charge, as the record requires.
+"""
+
+from __future__ import annotations
+
+import sys
+from dataclasses import dataclass
+from fractions import Fraction
+from typing import Any
+
+import numpy as np
+from scipy import sparse
+
+sys.path.insert(0, "/home/user/squares/packing")
+
+from sqpack.fractional.certificate import d4_images  # noqa: E402
+from sqpack.fractional.cutting import COVER_SLACK  # noqa: E402
+from sqpack.fractional.generate import direction_net  # noqa: E402
+
+Point = tuple[Fraction, Fraction]
+
+
+@dataclass(frozen=True)
+class FloorAtom:
+    points: tuple[Point, ...]
+    multiplicities: tuple[int, ...]
+    threshold: int
+
+    def __post_init__(self) -> None:
+        if len(self.points) != len(self.multiplicities):
+            raise ValueError("one multiplicity per point")
+        if len(set(self.points)) != len(self.points):
+            raise ValueError("a floor atom's points must be distinct")
+        if self.threshold < 2:
+            raise ValueError("a threshold below two gives a cut the point constraints imply")
+        if any(a <= 0 for a in self.multiplicities):
+            raise ValueError("multiplicities must be positive")
+
+    @property
+    def total(self) -> int:
+        return sum(self.multiplicities)
+
+    @property
+    def budget(self) -> int:
+        return self.total // self.threshold
+
+    @property
+    def key(self) -> tuple[tuple[tuple[Point, int], ...], int]:
+        return tuple(sorted(zip(self.points, self.multiplicities, strict=True))), self.threshold
+
+    def images(self, outer_side: Fraction) -> tuple[FloorAtom, ...]:
+        per_point = [d4_images(x, y, outer_side) for x, y in self.points]
+        return tuple(
+            FloorAtom(tuple(images[g] for images in per_point), self.multiplicities, self.threshold)
+            for g in range(8)
+        )
+
+    def orbit(self, outer_side: Fraction) -> tuple[FloorAtom, ...]:
+        seen: dict[Any, FloorAtom] = {}
+        for image in self.images(outer_side):
+            seen.setdefault(image.key, image)
+        return tuple(seen.values())
+
+    def to_record(self) -> dict[str, Any]:
+        return {
+            "points": [[str(x), str(y)] for x, y in self.points],
+            "multiplicities": list(self.multiplicities),
+            "threshold": self.threshold,
+            "total_multiplicity": self.total,
+            "budget": self.budget,
+        }
+
+    @classmethod
+    def from_record(cls, record: dict[str, Any]) -> FloorAtom:
+        return cls(
+            tuple((Fraction(x), Fraction(y)) for x, y in record["points"]),
+            tuple(int(a) for a in record["multiplicities"]),
+            int(record["threshold"]),
+        )
+
+
+def floor_atom_columns(
+    orbits: list[tuple[FloorAtom, ...]],
+    exact_rows: list[tuple[int, Fraction, Fraction]],
+    half_tangents: tuple[Fraction, ...],
+    square_side: Fraction,
+    *,
+    slack: float = COVER_SLACK,
+) -> tuple[sparse.csr_matrix, np.ndarray]:
+    """Coefficient matrix [rows x orbits] and cost vector for floor-atom orbit columns.
+
+    Coefficient: ``sum_{images} floor(a(P) / t)`` for the row's core ``P``, with the LP's
+    loosening.  Cost: ``|orbit| * floor(a(S) / t)``, the orbit's budget per unit weight.
+    """
+    directions = direction_net(half_tangents)
+    n_rows = len(exact_rows)
+    images: list[FloorAtom] = []
+    orbit_of: list[int] = []
+    for o, orbit in enumerate(orbits):
+        for image in orbit:
+            images.append(image)
+            orbit_of.append(o)
+    costs = np.array([len(orbit) * orbit[0].budget for orbit in orbits], dtype=float)
+    if not images or n_rows == 0:
+        return sparse.csr_matrix((n_rows, len(orbits))), costs
+    max_size = max(len(im.points) for im in images)
+    pts = np.full((len(images), max_size, 2), np.nan)
+    mults = np.zeros((len(images), max_size), dtype=np.int64)
+    ks = np.array([im.threshold for im in images], dtype=np.int64)
+    for a, im in enumerate(images):
+        for b, (x, y) in enumerate(im.points):
+            pts[a, b] = (float(x), float(y))
+            mults[a, b] = im.multiplicities[b]
+    orbit_of_arr = np.array(orbit_of)
+    row_dirs = np.array([r[0] for r in exact_rows])
+    xs = np.array([float(r[1]) for r in exact_rows])
+    ys = np.array([float(r[2]) for r in exact_rows])
+    half = float(square_side) / 2 + slack
+    rows_out: list[np.ndarray] = []
+    cols_out: list[np.ndarray] = []
+    vals_out: list[np.ndarray] = []
+    for d, direction in enumerate(directions):
+        which = np.flatnonzero(row_dirs == d)
+        if which.size == 0:
+            continue
+        cos, sin = float(direction.ux), float(direction.uy)
+        pu = pts[..., 0] * cos + pts[..., 1] * sin
+        pv = -pts[..., 0] * sin + pts[..., 1] * cos
+        cu = xs[which] * cos + ys[which] * sin
+        cv = -xs[which] * sin + ys[which] * cos
+        inside = (np.abs(pu[None, :, :] - cu[:, None, None]) <= half) & (
+            np.abs(pv[None, :, :] - cv[:, None, None]) <= half
+        )
+        held = (inside * mults[None, :, :]).sum(axis=2)          # (rows_d, images)
+        charge = held // ks[None, :]
+        r, im = np.nonzero(charge)
+        if r.size == 0:
+            continue
+        rows_out.append(which[r])
+        cols_out.append(orbit_of_arr[im])
+        vals_out.append(charge[r, im].astype(float))
+    if not rows_out:
+        return sparse.csr_matrix((n_rows, len(orbits))), costs
+    matrix = sparse.coo_matrix(
+        (np.concatenate(vals_out), (np.concatenate(rows_out), np.concatenate(cols_out))),
+        shape=(n_rows, len(orbits)),
+    ).tocsr()
+    matrix.sum_duplicates()
+    return matrix, costs

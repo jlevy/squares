@@ -29,11 +29,13 @@ instrument pointed at a second dual.
 >   budget-one class or the rank-one closure stops at `153/40`. A bypassed gate does not
 >   become a claimed cap, and **no statement in this report may be quoted as one.**
 
-Retained beside this report: the small violated atoms and the before/after duals, listed
-under [Files](#8-files).
+Retained beside this report: the small violated atoms, the before/after duals and the
+eight scripts that produced every reading, listed under [Files](#8-files).
 Not retained (scratch only): the two oracle reports, the five `K6` seed files, the two
 LP run directories with their site, row and atom matrices, and the abandoned second
-round.
+round. The lane also kept a working method note in scratch; it is not retained because
+its substance is already here — the bypass and the mask reduction in Section 2, the warm
+and cold duals of the same optimal face in P9, and the freeze-reach gap in P10.
 
 Labels: **EXACT** (a rational decision by a repository primitive, script retained),
 **CHECKED** (a float LP reading, script retained), **RECORD** (retained files),
@@ -296,13 +298,58 @@ Retained beside this report:
 - [`lane-a4-dual-153-40-seeded.json`](lane-a4-dual-153-40-seeded.json) — the dual of the
   seeded solve, 42 rows, after the atoms.
   P7 is the comparison of these two files.
+- The eight scripts, in the order the run used them:
+  - [`lane-a4-probe-arrangement.py.txt`](lane-a4-probe-arrangement.py.txt) — builds the
+    family’s arrangement and reports its size: the 283,832 vertices and 22,201 distinct
+    membership sets of P1.
+  - [`lane-a4-oracle-reader.py.txt`](lane-a4-oracle-reader.py.txt) — the driver this
+    whole report rests on: `K4`, `K5` and `K6` run as separation oracles with the `K2`
+    depth gate bypassed, on the 965 inclusion-maximal membership sets, every returned
+    atom re-verified by the reader’s own `verify_atom`. P1 through P4 are its output,
+    and its module docstring restates the warning above.
+  - [`lane-a4-summarise.py.txt`](lane-a4-summarise.py.txt) — the compact tables of what
+    the oracle reader found, as Section 1’s numbers were read off them.
+  - [`lane-a4-flooratoms.py.txt`](lane-a4-flooratoms.py.txt) — the Chvátal–Gomory floor
+    atom as an LP column: the `(S, a, t)` record, the superadditivity argument in its
+    docstring, and a column builder using the same float geometry and `COVER_SLACK`
+    loosening as `sepcore.atom_columns`.
+  - [`lane-a4-split-seeds.py.txt`](lane-a4-split-seeds.py.txt) — splits the oracle
+    reports’ violated atoms into seed files by source, deduplicated on D4 orbit; it
+    produced the 19 small atoms and, separately, the five `K6` giants.
+  - [`lane-a4-lp-atoms.py.txt`](lane-a4-lp-atoms.py.txt) — the solver driver of Section
+    2: lane A3’s site loop plus `--seed-atoms`, which D4-expands floor atoms into a
+    third column block priced at the orbit budget, and `--solve-only`. P6 and P7 are its
+    output, and the control run is the same file with `--seed-atoms` absent.
+  - [`lane-a4-charge-on-dual.py.txt`](lane-a4-charge-on-dual.py.txt) — the exact charge
+    of each seeded atom on a dual family, so that violation is decided rather than
+    inferred: the zero-of-24 reading in P7 and the 19-of-24 reading in P9.
+  - [`lane-a4-excess-and-sites.py.txt`](lane-a4-excess-and-sites.py.txt) — exact maximum
+    depth of a dual family, its witness, and the exact distance from that witness to the
+    nearest LP site: P8.
+
+The scripts are retained with a `.py.txt` extension, as
+[lane X3](lane-x3-containment-atoms-do-not-cut.md) and
+`agenda-032/unrun-independent-audit/` already do: they are scratch measurement scripts,
+not importable project modules, and the repository’s Python surface is held at zero Ruff
+and BasedPyright findings over every tracked `.py` file.
+Their bytes are as delivered; nothing was reformatted.
+
+They are **a record of how the measurement was made, not a supported tool.** Each was
+run from a scratch directory against the repository at commit `7ccb679c`; five of them
+put the repository on `sys.path` by its absolute path, and `lp_atoms.py` resolves the
+scratch layout around it, including spike B’s `sepcore`, which is not retained.
+`oracle_reader.py` deliberately bypasses a gate the supported reader enforces, which is
+exactly why it must not be mistaken for the reader:
+`packing/devtools/plateau_reader.py`, whose exact searches it calls unchanged, is the
+supported instrument.
+Nothing in the repository imports any of them, and nothing should.
 
 Not retained (scratch only): the two oracle reports (`K4`/`K5` at 180 KB and `K6` at 2.7
 MB), the five `K6` floor-atom seed files (1.3 MB — their violations, point counts,
 budgets and charges are in P4 and every one carried primal weight zero), the two LP run
 directories with their site, row and atom matrices and their primal vectors, the trimmed
-`sites-1` checkpoint, the exact depth-and-nearest-site logs behind P8, and the two
-abandoned second-round jobs.
+`sites-1` checkpoint, the exact depth-and-nearest-site logs behind P8, the working
+method note, and the two abandoned second-round jobs.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

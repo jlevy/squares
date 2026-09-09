@@ -16,10 +16,11 @@ The one statement with a sign is negative (F1): on this column set the
 method does not reach `383/100`.
 
 Retained beside this report: the plateau duals, the `1/25`-integral family the site
-chase produced, the plateau-reader verdicts and the three trajectories, listed under
-[Files](#files). The LP checkpoints (`sites.json`, `atoms.json`, `rows.json`, `x.npy`,
-`duals.npy`, together about 60 MB), the symmetrised families above 150 KB, the driver
-scripts and the run logs are not retained (scratch only).
+chase produced, the plateau-reader verdicts, the three trajectories and the five driver
+scripts, listed under [Files](#files).
+The LP checkpoints (`sites.json`, `atoms.json`, `rows.json`, `x.npy`, `duals.npy`,
+together about 60 MB), the symmetrised families above 150 KB and the run logs are not
+retained (scratch only).
 
 Labels: EXACT (a rational decision by a repository primitive), CHECKED (a float LP or
 sweep reading), RECORD (retained files), OPEN.
@@ -222,6 +223,43 @@ vertices 65 s + exact recheck 29 s = 204 s; warm LP with 300 site columns 825 s;
 on the heavy family 30 s (`exact25`) and about 30 s (`heavy`); reader on the two scaled
 ceiling families 4 s each; building the scaled families under 1 s.
 
+## The protocol, as pre-registered
+
+The lane wrote its protocol before its first solve and kept it in scratch; its substance
+is recorded here, because the file itself is not retained.
+Two were written. The first attempt (07:19 UTC) got no further than the protocol before
+an API outage; the second (10:09 UTC) kept its object, its rows decision and its labels
+and restated the timing, and is the one the run followed.
+The first is superseded and not retained.
+
+What the protocol fixed in advance was the object (Section 2), the rows deviation
+(Section 2), the stop rules and what each outcome would produce.
+The stop rules: a full sweep finding no cell below `1 - 1e-6` (rows complete), the
+objective reaching `11 - 1e-9`, or the loop deadline.
+The deadline is checked only between phases, so a sweep is never interrupted, a sweep is
+not started unless the previous sweep’s wall time fits before the deadline, and a
+partial sweep is never reported as complete.
+
+Three branches were declared before the first solve, which is what makes F1 a reading
+rather than a choice made once the number was known:
+
+- **Rows complete below eleven**: freeze the checkpoint with `freeze383.py` (every
+  positive weight times `1 + 2e-6`, rounded up at scale `1e-9`, D4-expanded, budget
+  declared) and decide the frozen bytes with
+  `PACK_JOBS=2 uv run --frozen --all-extras --group dev python -m devtools.decide_threshold_certificate --workers 2 CANDIDATE.json`,
+  reporting verdict, least charge, total budget and SHA-256. Nothing is a bound until
+  the gate accepts the frozen bytes.
+- **Objective at eleven**: dump the dual at once, then one round of atom separation if
+  at least 40 minutes remain before the loop deadline, then rows-only completion.
+  This is the branch that ran.
+- **Deadline without either**: OPEN, with the trajectory and no completeness claim.
+
+The gate command above was never run in this lane, because the first branch was never
+reached; it is recorded so that the unrun step is as legible as the run ones.
+The plateau reader was invoked as
+`plateau_reader.py FAMILY.json --out OUT.json --time-limit SECONDS --cg-thresholds 2,3`,
+so every `K6` reading here searched thresholds 2 and 3 only.
+
 ## Files
 
 Retained beside this report:
@@ -247,11 +285,44 @@ Retained beside this report:
   [`lane-a3-trajectory-383-100.json`](lane-a3-trajectory-383-100.json),
   [`lane-a3-trajectory-153-40.json`](lane-a3-trajectory-153-40.json) and
   [`lane-a3-trajectory-153-40-sites.json`](lane-a3-trajectory-153-40-sites.json).
+- The five driver scripts:
+  - [`lane-a3-lp383.py.txt`](lane-a3-lp383.py.txt) — the rows-only threshold LP of
+    Section 2: it scales the `191/50` checkpoint into the new container, checks every
+    carried row exactly, runs the sweep-and-solve loop in one warm HiGHS handle, dumps
+    the dual at a plateau, and runs the optional atom-separation round of F3. F1 through
+    F6 and both addenda are its output.
+  - [`lane-a3-lp-sites.py.txt`](lane-a3-lp-sites.py.txt) — the same LP, sweep and solver
+    with the site oracle of the second addendum added: arrangement vertices of the dual
+    family screened in floats, exact depth decided in `Fraction`s, the deepest orbits
+    entered as columns. S1 through S4 are its output.
+  - [`lane-a3-atoms-on-family.py.txt`](lane-a3-atoms-on-family.py.txt) — spike B’s
+    interior-vertex two-of-three generator run on a family file, the separation step
+    behind F3 and the `vertex_cap = 24` reading.
+  - [`lane-a3-freeze383.py.txt`](lane-a3-freeze383.py.txt) — the freezer of the
+    protocol’s first branch: it turns a checkpoint into a threshold-certificate record
+    with the bump, the upward rounding, the D4 expansion and the declared budget.
+    It was never run here, because the value never went below eleven.
+  - [`lane-a3-trajectory-table.py.txt`](lane-a3-trajectory-table.py.txt) — renders a
+    run’s `trajectory.json` as the Markdown table of Section 3.
+
+The five scripts are retained with a `.py.txt` extension, as
+[lane X3](lane-x3-containment-atoms-do-not-cut.md) and
+`agenda-032/unrun-independent-audit/` already do: they are scratch measurement scripts,
+not importable project modules, and the repository’s Python surface is held at zero Ruff
+and BasedPyright findings over every tracked `.py` file.
+Their bytes are as delivered; nothing was reformatted.
+
+They are **a record of how the measurement was made, not a supported tool.** Each was
+run from a scratch directory against the repository at commit `7ccb679c`, and each takes
+its inputs as command-line arguments but resolves its imports from the scratch layout it
+ran in: `lp383.py`, `lp_sites.py` and `atoms_on_family.py` reach a sibling `spike-b/`
+directory for `sepcore`, which is not retained — lane B’s own Files section records it
+as scratch-only. Nothing in the repository imports any of them, and nothing should.
 
 Not retained (scratch only): the three LP checkpoints with their sites, atoms, rows and
 solution arrays (about 60 MB), the symmetrised families above 150 KB, the 400 added atom
-orbits, the drivers `lp383.py`, `lp_sites.py`, `freeze383.py`, `trajectory_table.py` and
-`atoms_on_family.py`, the two protocols and every run log.
+orbits, every run log, the two protocol files (their substance is above), and the three
+shell wrappers around the freeze, the gate and the reader (their commands are above).
 The instrument this lane leans on is retained: `packing/devtools/plateau_reader.py`,
 promoted by lane T2 and reported in
 [`lane-t2-plateau-reader.md`](lane-t2-plateau-reader.md).
