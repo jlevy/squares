@@ -70,10 +70,9 @@ html, body { height: auto; overflow: visible; }
 /* One accent, everywhere. kpress ships a separate link blue and sets it on
    `:root`, on `.kpress`, and again per theme and palette on attribute selectors,
    all of which outrank `body`; the popovers it appends carry `.kpress-tooltip`
-   and their own resolved-theme attribute. Anything reading the token got the
-   blue, which is why a footnote popover drew a blue rule down its edge while
-   the text beside it was teal. Redeclare the token in the same places kpress
-   does, so the page's accent is what every consumer of it resolves. */
+   and their own resolved-theme attribute. Redeclare the token in the same
+   places kpress does, so links and controls inside those popovers resolve the
+   same accent as the surrounding page. */
 :root,
 .kpress,
 .kpress-page-main,
