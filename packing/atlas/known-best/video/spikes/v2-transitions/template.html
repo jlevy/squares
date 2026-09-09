@@ -469,17 +469,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         <button id="optimize" class="primary" title="Run the current settings from the chosen start until pause">Optimize</button>
       </div>
       <div class="row">
-        <div class="subpanel groupbox" id="solver-box">
-          <span class="box-title">solver</span>
-          <div class="group-body">
-            <select id="style-select" aria-label="which solver runs">
-              <option value="tween">A · tween</option>
-              <option value="physics">B · physics</option>
-              <option value="bodies">C · bodies</option>
-            </select>
-            <span class="hint readout readout-line" id="solver-note"></span>
-          </div>
-        </div>
         <div class="subpanel lawbox" id="law-box">
           <div class="law-plot-wrap">
             <span class="box-title">force law</span>
@@ -511,6 +500,21 @@ input[type=number] { width: 64px; padding: 4px 6px; }
               </span>
               <span class="hint readout readout-line" id="law-info"></span>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- Revision 15: the law gets a line of its own; the solver and the two graphs share
+           the next, so a wide plot is not squeezed beside three narrow boxes. -->
+      <div class="row">
+        <div class="subpanel groupbox" id="solver-box">
+          <span class="box-title">solver</span>
+          <div class="group-body">
+            <select id="style-select" aria-label="which solver runs">
+              <option value="tween">A · tween</option>
+              <option value="physics">B · physics</option>
+              <option value="bodies">C · bodies</option>
+            </select>
+            <span class="hint readout readout-line" id="solver-note"></span>
           </div>
         </div>
         <div class="subpanel relbox">
@@ -4038,6 +4042,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // and Pack offers two of the three, the tween being an interpolation toward an answer Pack has
     // not got. The option is taken out of the list rather than left selectable and inert.
     const offered = solversFor(state.mode);
+    // The select is the one place the value is written, so it is the one place the invariant is
+    // kept: a style this mode does not offer is coerced here rather than only on the transition
+    // that could have introduced it. The transition path missed the case that matters most --
+    // the page opens in Pack with the tween already selected as the first style, so no mode
+    // change ever ran and the chooser showed A while offering only B and C.
+    if (!offered.includes(state.style)) {
+      state.style = offered.includes('physics') ? 'physics' : offered[0];
+      solverNote = TWEEN_NOTE;
+    }
     Array.from(styleSelect.options).forEach((o) => {
       const ok = offered.includes(o.value);
       o.hidden = !ok;
@@ -4650,7 +4663,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // still calls it keeps working; it is the one place the old name survives.
   function setMode(next) {
     const want = (next === 'animate' || next === 'sweep') ? 'animate' : 'pack';
-    if (want === state.mode) { updateSegments(); return state.mode; }
+    if (want === state.mode) { updateSegments(); return state.mode; }  // updateSegments coerces the style
     if (state.mode === 'animate') state.animate = { from: state.range.from, to: state.range.to };
     state.mode = want;
     pause();

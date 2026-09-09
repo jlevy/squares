@@ -209,19 +209,19 @@ def main() -> int:
               f"the workbench does not open on the one-step range 17 to 17: {opened}")
         st = page.evaluate("atlasTransitions.state()")
         check(st["n"] == 16, f"n = 17 does not show the step 16 -> 17 (the pair starts at {st['n']})")
-        # Revision 10: the page opens in Pack, where the label names the size, not the step; Sweep
+        # Revision 10: the page opens in Pack, where the label names the size, not the step; Animate
         # keeps the step wording. Both are read here so the two modes cannot drift apart silently.
         label = page.evaluate("document.getElementById('step-label').textContent")
         check("17" in label and "16" not in label, f"the Pack label does not name the size alone: {label!r}")
-        # Sweep has never been entered on this page, so this is where it opens on the whole corpus.
-        page.evaluate("atlasTransitions.setMode('sweep')")
+        # Animate has never been entered on this page, so this is where it opens on the whole corpus.
+        page.evaluate("atlasTransitions.setMode('animate')")
         opening = page.evaluate("atlasTransitions.range()")
         check(opening["from"] == page.evaluate("atlasTransitions.pairs()[0].n + 1")
               and opening["to"] == page.evaluate("atlasTransitions.pairs().slice(-1)[0].n + 1"),
-              f"Sweep does not open on the whole corpus the first time: {opening}")
+              f"Animate does not open on the whole corpus the first time: {opening}")
         page.evaluate("atlasTransitions.setRange(17, 17)")
         label = page.evaluate("document.getElementById('step-label').textContent")
-        check("16" in label and "17" in label, f"the Sweep label does not name both ends: {label!r}")
+        check("16" in label and "17" in label, f"the Animate label does not name both ends: {label!r}")
         page.evaluate("atlasTransitions.setMode('pack')")
         for want in (5, 10, 11, 26, 29, 100, 110, 272):
             got = page.evaluate(f"atlasTransitions.setStepN({want})")
@@ -616,10 +616,10 @@ def main() -> int:
             "() => Array.from(document.querySelectorAll('#mode-tabs button'))"
             "  .map(b => [b.dataset.mode, b.textContent.trim(), b.getAttribute('aria-pressed')])"
         )
-        check([t[0] for t in tabs] == ["pack", "sweep"], f"the sub-panel does not carry two modes: {tabs}")
+        check([t[0] for t in tabs] == ["pack", "animate"], f"the sub-panel does not carry two modes: {tabs}")
         check(tabs[0][2] == "true" and tabs[1][2] == "false", f"the pressed tab is not Pack: {tabs}")
         # Pack is one number: the second box, the separator, the corpus button and the two figures
-        # that price a fixed-length run are Sweep's.
+        # that price a fixed-length run are Animate's.
         packing = page.evaluate(
             "() => ['range-to', 'range-sep', 'range-all', 'range-duration', 'range-position', 'step-chips']"
             "  .map(id => [id, document.getElementById(id).hidden])"
@@ -649,21 +649,21 @@ def main() -> int:
         page.wait_for_timeout(500)
         after = page.evaluate("() => { const A = window.atlasTransitions; const s = A.optimizeState().steps; A.pause(); return s; }")
         check(after > before, f"the transport did not resume the run: {before} -> {after}")
-        # Sweep: a range, always, and the pieces Pack hides come back. It comes back on the range it
+        # Animate: a range, always, and the pieces Pack hides come back. It comes back on the range it
         # was last left on rather than on whatever Pack collapsed to.
-        page.evaluate("atlasTransitions.setMode('sweep'); atlasTransitions.setRange(30, 90)")
-        page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setMode('sweep')")
+        page.evaluate("atlasTransitions.setMode('animate'); atlasTransitions.setRange(30, 90)")
+        page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setMode('animate')")
         rng = page.evaluate("atlasTransitions.range()")
-        check(page.evaluate("atlasTransitions.mode()") == "sweep", "setMode('sweep') did not select Sweep")
+        check(page.evaluate("atlasTransitions.mode()") == "animate", "setMode('animate') did not select Animate")
         check(rng["from"] == 30 and rng["to"] == 90,
-              f"Sweep did not come back on the range it was left on: {rng}")
-        sweeping = page.evaluate(
+              f"Animate did not come back on the range it was left on: {rng}")
+        animating = page.evaluate(
             "() => ['range-to', 'range-sep', 'range-all', 'range-duration', 'range-position', 'step-chips']"
             "  .map(id => [id, document.getElementById(id).hidden])"
         )
-        check(dict(sweeping) == {"range-to": False, "range-sep": False, "range-all": False,
+        check(dict(animating) == {"range-to": False, "range-sep": False, "range-all": False,
                                  "range-duration": False, "range-position": False, "step-chips": True},
-              f"Sweep shows the wrong pieces of the chooser: {sweeping}")
+              f"Animate shows the wrong pieces of the chooser: {animating}")
         # A shared strategy setting survives a switch in both directions, which is the whole point of
         # the modes being two aspects of one page rather than two pages.
         page.evaluate(
@@ -672,7 +672,7 @@ def main() -> int:
             " atlasTransitions.setDesaturate(false); atlasTransitions.setRange(30, 60)"
         )
         kept = page.evaluate(
-            "() => { const A = window.atlasTransitions; A.setMode('pack'); A.setMode('sweep');"
+            "() => { const A = window.atlasTransitions; A.setMode('pack'); A.setMode('animate');"
             "  const s = A.state(); return {style: s.style, anneal: s.anneal, speed: s.speed,"
             "    initial: s.initial, desaturate: s.desaturate, range: A.range()}; }"
         )
@@ -680,15 +680,15 @@ def main() -> int:
               and kept["initial"] == "random" and kept["desaturate"] is False,
               f"a mode switch lost a shared setting: {kept}")
         check(kept["range"]["from"] == 30 and kept["range"]["to"] == 60,
-              f"Sweep did not remember the range it was left on: {kept['range']}")
-        # `setRange` still works as it did; a range wider than one step names Sweep, since Pack has
+              f"Animate did not remember the range it was left on: {kept['range']}")
+        # `setRange` still works as it did; a range wider than one step names Animate, since Pack has
         # no way to show one.
         forced = page.evaluate(
             "() => { const A = window.atlasTransitions; A.setMode('pack'); A.setRange(40, 44);"
             "  return {mode: A.mode(), range: A.range()}; }"
         )
-        check(forced["mode"] == "sweep" and forced["range"]["steps"] == 5,
-              f"a wide range set from Pack did not put the page in Sweep: {forced}")
+        check(forced["mode"] == "animate" and forced["range"]["steps"] == 5,
+              f"a wide range set from Pack did not put the page in Animate: {forced}")
         page.evaluate("atlasTransitions.setStyle('tween'); atlasTransitions.setAnneal(3); atlasTransitions.setSpeed(1)")
         page.evaluate("atlasTransitions.setDesaturate(true); atlasTransitions.setInitial('previous')")
         page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17)")
@@ -840,7 +840,11 @@ def main() -> int:
 
         # 9b. A square whose angle does not move keeps its hue through a step. n = 110 carries twelve
         # angle classes and a real rotation, so the frame is not one colour throughout.
-        page.evaluate("atlasTransitions.setStepN(110); atlasTransitions.setStyle('tween'); atlasTransitions.seek(0)")
+        # Revision 14: a step is Animate's, and it is asked for here. Pack has all n squares on the
+        # stage from the first frame and never plays a transition, so scrubbing one there would find
+        # a still arrangement and the check would prove nothing (measured: it found nothing turning).
+        page.evaluate("atlasTransitions.setMode('animate'); atlasTransitions.setStepN(110);"
+                      " atlasTransitions.setStyle('tween'); atlasTransitions.seek(0)")
         span = page.evaluate("atlasTransitions.duration()")
         snaps = []
         for fraction in (0.0, 0.15, 0.35, 0.5, 0.62, 0.75, 0.88, 1.0):
@@ -973,8 +977,12 @@ def main() -> int:
 
         # A settle that turns the squares does not repaint them. n = 110 has a real rotation in it,
         # and the run is left free so the physics, not the record, decides where it lands.
+        # Revision 14: a settle is a step's, so this is Animate's stage — with the standardising off,
+        # because it is Animate that repaints a *resting* frame in the angle map and this check is
+        # about the identity greens holding. 9f puts it back on and proves it fires.
         page.evaluate(
-            "atlasTransitions.setStepN(110); atlasTransitions.setStyle('bodies');"
+            "atlasTransitions.setMode('animate'); atlasTransitions.setAnimateStandardize(false);"
+            " atlasTransitions.setStepN(110); atlasTransitions.setStyle('bodies');"
             " atlasTransitions.setSnap(false); atlasTransitions.setDesaturate(false);"
             " atlasTransitions.seek(0)"
         )
@@ -1000,7 +1008,8 @@ def main() -> int:
         page.evaluate("atlasTransitions.setStepN(29); atlasTransitions.setStyle('tween');"
                       " atlasTransitions.setSnap(true); atlasTransitions.seek(atlasTransitions.duration())")
         frame_one = {r[0]: r[2] for r in page.evaluate(DRAWN)}
-        page.evaluate("atlasTransitions.setInitial('grid'); atlasTransitions.optimizeStep(600)")
+        page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(29);"
+                      " atlasTransitions.setInitial('grid'); atlasTransitions.optimizeStep(600)")
         frame_two = {r[0]: r[2] for r in page.evaluate(DRAWN)}
         check(len(frame_one) == 29 and len(frame_two) == 29,
               f"the two frames of n = 29 drew {len(frame_one)} and {len(frame_two)} squares")
@@ -1025,33 +1034,33 @@ def main() -> int:
         check(len(set(shaded["fills"])) == len(set(shaded["contacts"])),
               f"the angle map's ordered fill is {len(set(shaded['fills']))} fills for {len(set(shaded['contacts']))} contact counts")
 
-        # 9f (revision 12): the Sweep exception, and it belongs to Sweep alone. In Sweep the resting
+        # 9f (revision 12): the Animate exception, and it belongs to Animate alone. In Animate the resting
         # frame is repainted in the standard angle map while the motion stays identity-coloured; in
         # Pack nothing is repainted, whatever the setting says.
         page.evaluate("atlasTransitions.setInitial('previous'); atlasTransitions.setColorScheme('identity');"
-                      " atlasTransitions.setMode('sweep'); atlasTransitions.setRange(29, 29);"
+                      " atlasTransitions.setMode('animate'); atlasTransitions.setRange(29, 29);"
                       " atlasTransitions.setStyle('tween'); atlasTransitions.setSnap(true);"
-                      " atlasTransitions.setSweepStandardize(true)")
-        check(page.evaluate("atlasTransitions.sweepStandardize()") is True,
-              "the Sweep standardising is not on by default")
+                      " atlasTransitions.setAnimateStandardize(true)")
+        check(page.evaluate("atlasTransitions.animateStandardize()") is True,
+              "the Animate standardising is not on by default")
         span = page.evaluate("atlasTransitions.duration()")
         page.evaluate(f"atlasTransitions.seek({span})")
         rest = page.evaluate("atlasTransitions.colour()")
         check(rest["painted"] == "angle-stable" and rest["scheme"] == "identity",
-              f"a resting Sweep frame is painted {rest['painted']} with the scheme on {rest['scheme']}")
+              f"a resting Animate frame is painted {rest['painted']} with the scheme on {rest['scheme']}")
         page.evaluate(f"atlasTransitions.seek({span * 0.55})")
         mid = page.evaluate("atlasTransitions.colour()")
-        check(mid["painted"] == "identity", f"a moving Sweep frame is painted {mid['painted']}, not in identity")
-        page.evaluate("atlasTransitions.setSweepStandardize(false)")
+        check(mid["painted"] == "identity", f"a moving Animate frame is painted {mid['painted']}, not in identity")
+        page.evaluate("atlasTransitions.setAnimateStandardize(false)")
         page.evaluate(f"atlasTransitions.seek({span})")
         check(page.evaluate("atlasTransitions.colour().painted") == "identity",
-              "turning the Sweep standardising off still repaints the resting frame")
-        page.evaluate("atlasTransitions.setSweepStandardize(true); atlasTransitions.setMode('pack');"
+              "turning the Animate standardising off still repaints the resting frame")
+        page.evaluate("atlasTransitions.setAnimateStandardize(true); atlasTransitions.setMode('pack');"
                       " atlasTransitions.setStepN(29); atlasTransitions.seek(atlasTransitions.duration())")
         check(page.evaluate("atlasTransitions.colour().painted") == "identity",
-              "Pack repaints its resting frame, which is Sweep's setting and not Pack's")
-        check(page.evaluate("document.getElementById('sweep-standard-toggle').disabled") is True,
-              "the Sweep standardising box is live in Pack")
+              "Pack repaints its resting frame, which is Animate's setting and not Pack's")
+        check(page.evaluate("document.getElementById('animate-standard-toggle').disabled") is True,
+              "the Animate standardising box is live in Pack")
         page.evaluate("atlasTransitions.setDesaturate(true); atlasTransitions.setColorScheme('identity');"
                       " atlasTransitions.setStepN(17)")
 
@@ -1402,9 +1411,12 @@ def main() -> int:
         # n = 110's run-order pair 46-54 (the frame's squares 17 and 7, whose centres are 1.00415
         # apart at 63.93 and 64.22 degrees) is a contact in the frame's order and not in the run's.
         short = []
+        page.evaluate("atlasTransitions.setMode('animate')")
         for n in (5, 10, 11, 17, 26, 29, 100, 110, 172, 272, 324):
             if page.evaluate(f"atlasTransitions.setStepN({n})") != n:
                 continue
+            # Revision 14: the retained frame is what a step comes to rest on, so it is Animate's
+            # settled stage that is read here. Pack's own stage is a starting arrangement.
             page.evaluate("atlasTransitions.seek(atlasTransitions.duration())")
             rel = page.evaluate("atlasTransitions.relationship()")
             check(abs(rel["side"] - rel["record"]) < 1e-9,
@@ -1441,7 +1453,8 @@ def main() -> int:
         # still ride the correspondence overlay and are still drawn only where the pull reaches,
         # a completely connected block being thousands of pairs that are not doing anything.
         page.evaluate(
-            "atlasTransitions.setLawPreset('sticky'); atlasTransitions.setStepN(29);"
+            "atlasTransitions.setMode('animate');"
+            " atlasTransitions.setLawPreset('sticky'); atlasTransitions.setStepN(29);"
             " atlasTransitions.setOverlay(false); atlasTransitions.setTargetSource('record');"
             " atlasTransitions.seek(atlasTransitions.duration())"
         )
@@ -1611,7 +1624,7 @@ def main() -> int:
         # buttons, so a figure gaining a digit slid every control after it sideways under the
         # cursor. Every button's bounding box is captured at two instants of a run and compared,
         # for both of the page's playbacks — Pack's open-ended optimisation, whose clock, step
-        # count, overlap and target fraction all move, and a Sweep, which additionally crosses a
+        # count, overlap and target fraction all move, and a Animate, which additionally crosses a
         # pair boundary and so redraws every readout in the panel rather than only the live ones.
         BOXES = (
             "() => Array.from(document.querySelectorAll('#controls button')).map((b, i) => {"
@@ -1638,19 +1651,19 @@ def main() -> int:
         page.evaluate("atlasTransitions.optimizeStep(2400)")
         check(first_clock != page.evaluate("document.getElementById('clock').textContent"),
               "the clock did not change over the run, so the no-reflow check proves nothing")
-        # The Sweep half: a range played across a pair boundary, where the whole panel is rewritten.
+        # The Animate half: a range played across a pair boundary, where the whole panel is rewritten.
         page.evaluate("atlasTransitions.setInitial('previous'); atlasTransitions.setLawPreset('default');"
-                      " atlasTransitions.setRelationship('general'); atlasTransitions.setMode('sweep');"
+                      " atlasTransitions.setRelationship('general'); atlasTransitions.setMode('animate');"
                       " atlasTransitions.setRange(16, 30); atlasTransitions.playRange();"
                       " atlasTransitions.pause(); atlasTransitions.seek(0.4)")
         early = page.evaluate(BOXES)
         page.evaluate("atlasTransitions.goTo(28); atlasTransitions.seek(1.9)")
         late = page.evaluate(BOXES)
         moved = [(a, b) for a, b in zip(early, late) if a != b]
-        check(moved == [], f"a control moved while a Sweep run played: {moved[:3]}")
+        check(moved == [], f"a control moved while a Animate run played: {moved[:3]}")
         # And the same for the settings a press changes: switching the style, the size, the law
         # preset, the graph or growth rewrites the whole panel, and none of it may move a control.
-        # (Pack and Sweep are exempt: they deliberately show different controls.)
+        # (Pack and Animate are exempt: they deliberately show different controls.)
         page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17);"
                       " atlasTransitions.setStyle('tween'); atlasTransitions.setAnneal(3);"
                       " atlasTransitions.setLawPreset('default'); atlasTransitions.setRelationship('general');"
@@ -1691,7 +1704,7 @@ def main() -> int:
                       " atlasTransitions.setStepN(17); atlasTransitions.seek(0)")
 
         # ---- step 13 (revision 12): no position bar in Pack. Pack is one fixed n, so the bar that
-        # carries the corpus's scale has nothing to say about it. Sweep keeps it. The property that
+        # carries the corpus's scale has nothing to say about it. Animate keeps it. The property that
         # matters alongside is that hiding it moves nothing else: the bar is absolutely positioned
         # inside the stage, so the stage, the panel and the controls are the same box either way.
         def geometry() -> dict:
@@ -1711,10 +1724,10 @@ def main() -> int:
         packed = geometry()
         check(not packed["shown"], "the position bar is still drawn in Pack")
         check(packed["numerals"] == 0, f"Pack still draws {packed['numerals']} scale numerals")
-        page.evaluate("atlasTransitions.setMode('sweep'); atlasTransitions.setRange(2, 100)")
+        page.evaluate("atlasTransitions.setMode('animate'); atlasTransitions.setRange(2, 100)")
         swept = geometry()
-        check(swept["shown"], "the position bar is gone from Sweep as well")
-        check(swept["numerals"] > 3, f"Sweep draws only {swept['numerals']} scale numerals")
+        check(swept["shown"], "the position bar is gone from Animate as well")
+        check(swept["numerals"] > 3, f"Animate draws only {swept['numerals']} scale numerals")
         for key in ("stage", "facts", "controls", "read", "svg"):
             check(packed[key] == swept[key],
                   f"hiding the bar moved the {key}: {packed[key]} against {swept[key]}")
@@ -2002,11 +2015,19 @@ def main() -> int:
             boxes[size] = staged()["box"]
         check(len(set(boxes.values())) == 1,
               f"the starting container moved with the size, which no growth run does: {boxes}")
-        # Back at full size the previous-packing start is the timeline again, and the squares with
-        # it: the staging is reversible, and it is not a one-way door.
+        # Revision 14 drops the condition revision 13 put on that staging: Pack shows its n squares
+        # from the first frame at every size, so a full size leaves the arrangement on the stage
+        # rather than uncovering the timeline underneath it. Leaving Pack is what gives the timeline
+        # back, and that is the reversibility that matters.
         page.evaluate("atlasTransitions.setGrowth({size: 1})")
+        check(page.evaluate("atlasTransitions.optimizeState().on") is True,
+              "a full starting size unstaged Pack, which no longer shows all n squares")
+        page.evaluate("atlasTransitions.setMode('animate')")
         check(page.evaluate("atlasTransitions.optimizeState().on") is False,
-              "a full starting size left the previous-packing start staged as a run")
+              "leaving Pack did not give the step animation back")
+        page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17)")
+        check(page.evaluate("atlasTransitions.optimizeState().on") is True,
+              "entering Pack did not stage the arrangement again")
         # The three starting-arrangement buttons have the same duty and are checked the same way:
         # each takes effect on the drawing at once, with nothing played.
         page.evaluate("atlasTransitions.setGrowth({on: false, size: 1}); atlasTransitions.setStepN(17);"
@@ -2023,6 +2044,230 @@ def main() -> int:
               "going back to the previous-packing start did not go back to its arrangement")
         page.evaluate("atlasTransitions.setInitial('previous'); atlasTransitions.setGrowth({on: false, size: 1});"
                       " atlasTransitions.setStepN(17); atlasTransitions.seek(0)")
+
+        # ---- step 16 (revision 14): in Pack, n squares are on the stage from the first frame. The
+        # owner: "if 17 is set below in pack mode why does the diagram show 16 to begin with". They
+        # did: the pool held seventeen and sixteen were drawn, because Pack opened on the timeline,
+        # which stages the seventeenth square's *arrival* — a transition model in a mode that has no
+        # transitions. The property is counted rather than argued: what is drawn, at rest and after a
+        # restart, under every start.
+        VISIBLE = (
+            "() => Array.from(document.querySelectorAll('#squares g[data-identity]'))"
+            "  .filter((e) => e.style.display !== 'none'"
+            "     && Number(e.getAttribute('opacity') === null ? 1 : e.getAttribute('opacity')) > 0.01"
+            "     && e.firstElementChild.getBoundingClientRect().width > 0).length"
+        )
+        page.evaluate("atlasTransitions.stopAll(); atlasTransitions.setMode('pack');"
+                      " atlasTransitions.setGrowth({on: false, size: 1}); atlasTransitions.setStyle('bodies')")
+        starts = page.evaluate("atlasTransitions.initials()")
+        counted = {}
+        for n in (5, 11, 17, 29, 100):
+            if page.evaluate(f"atlasTransitions.setStepN({n})") != n:
+                continue
+            for kind in starts:
+                page.evaluate(f"atlasTransitions.setInitial({kind!r})")
+                at_rest = page.evaluate(VISIBLE)
+                check(at_rest == n, f"Pack at n = {n} from the {kind} start draws {at_rest} squares, not {n}")
+                if "restart" in api:
+                    page.evaluate("atlasTransitions.restart()")
+                    after = page.evaluate(VISIBLE)
+                    check(after == n,
+                          f"Pack at n = {n} from the {kind} start draws {after} squares after a restart, not {n}")
+                    check(not page.evaluate("atlasTransitions.state().playing"),
+                          f"a restart from a paused stage at n = {n} started the clock")
+                counted[(n, kind)] = at_rest
+        check(len(counted) >= 12, f"only {len(counted)} start-and-size pairs were counted")
+        # And the step header goes with the step: `16 -> 17 · matched · max move …` describes a
+        # transition, and Pack makes none. Animate keeps it, and hiding it moves nothing, the tag
+        # being absolutely positioned on the stage.
+        tag = page.evaluate(
+            "() => { const A = window.atlasTransitions; const e = document.getElementById('kind-tag');"
+            "  const box = () => document.getElementById('stage').getBoundingClientRect().toJSON();"
+            "  A.setMode('pack'); A.setStepN(17);"
+            "  const packed = {hidden: e.getClientRects().length === 0, stage: box()};"
+            "  A.setMode('animate');"
+            "  const swept = {hidden: e.getClientRects().length === 0, stage: box(), text: e.textContent};"
+            "  A.setMode('pack'); A.setStepN(17); return {packed, swept}; }"
+        )
+        check(tag["packed"]["hidden"], "Pack still draws the step header")
+        check(not tag["swept"]["hidden"], "Animate lost the step header as well")
+        check("→" in tag["swept"]["text"], f"the step header does not name a step: {tag['swept']['text']!r}")
+        check(tag["packed"]["stage"] == tag["swept"]["stage"],
+              f"hiding the step header moved the stage: {tag['packed']['stage']} against {tag['swept']['stage']}")
+
+        # ---- step 17 (revision 14): restart, beside play and pause. The owner asked for it there,
+        # and then for the thought behind it: "perhaps the restart makes more sense for Pack than
+        # for Animate." One definition serves both — **back to the beginning of whatever play would
+        # play** — so the transport keeps its shape across the modes. What is checked is that
+        # definition, and that it is not the other reset: restart puts the picture back and keeps
+        # every setting, where `reset` puts the parameters back and leaves the picture alone.
+        check("restart" in api, "the API lacks restart")
+        seat = page.evaluate(
+            "() => { const bs = Array.from(document.querySelectorAll('#controls button'));"
+            "  const i = bs.findIndex((b) => b.id === 'restart'), j = bs.findIndex((b) => b.id === 'play');"
+            "  const r = bs[i].getBoundingClientRect(), q = bs[j].getBoundingClientRect();"
+            "  return {i, j, sameRow: Math.abs(r.top - q.top) < 2, gap: r.left - q.right,"
+            "    glyph: bs[i].querySelector('svg') !== null, name: bs[i].getAttribute('aria-label')}; }"
+        )
+        check(seat["i"] == seat["j"] + 1 and seat["sameRow"] and 0 <= seat["gap"] < 40,
+              f"restart is not beside play and pause: {seat}")
+        check(seat["glyph"] and seat["name"] == "Restart",
+              f"restart is not drawn in the transport's own convention: {seat}")
+        packed_restart = page.evaluate(
+            "() => { const A = window.atlasTransitions;"
+            "  A.setMode('pack'); A.setStepN(17); A.setInitial('grid'); A.setLawPreset('sticky');"
+            "  A.setAnneal(7); A.optimizeStep(600);"
+            "  const before = {steps: A.optimizeState().steps, pull: A.law().attraction, anneal: A.anneal().level};"
+            "  const said = A.restart();"
+            "  return {before, said, after: {steps: A.optimizeState().steps, on: A.optimizeState().on,"
+            "    pull: A.law().attraction, anneal: A.anneal().level, playing: A.state().playing}}; }"
+        )
+        check(packed_restart["before"]["steps"] >= 600, f"the Pack run did not run: {packed_restart['before']}")
+        check(packed_restart["after"]["steps"] == 0 and packed_restart["after"]["on"],
+              f"restart in Pack did not go back to the start of the run: {packed_restart['after']}")
+        check(packed_restart["after"]["pull"] == packed_restart["before"]["pull"]
+              and packed_restart["after"]["anneal"] == packed_restart["before"]["anneal"],
+              f"restart in Pack changed a setting: {packed_restart}")
+        check(not packed_restart["after"]["playing"], "restart from a paused run started the clock")
+        # A run that was playing keeps playing, from the top: it is a transport control.
+        page.evaluate("atlasTransitions.optimize(true)")
+        page.wait_for_timeout(350)
+        rolling = page.evaluate(
+            "() => { const A = window.atlasTransitions; const was = A.state().playing;"
+            "  A.restart(); return {was, playing: A.state().playing, steps: A.optimizeState().steps}; }"
+        )
+        page.wait_for_timeout(300)
+        check(rolling["was"] and rolling["playing"] and rolling["steps"] == 0,
+              f"restart did not put a playing run back to the top and keep it rolling: {rolling}")
+        check(page.evaluate("atlasTransitions.optimizeState().steps") > 0,
+              "the restarted run did not carry on")
+        page.evaluate("atlasTransitions.pause()")
+        # In Animate the beginning is the first step of the range, not this step's own zero.
+        animate_restart = page.evaluate(
+            "() => { const A = window.atlasTransitions; A.setMode('animate'); A.setRange(16, 40);"
+            "  A.goTo(28); A.seek(1.4);"
+            "  const before = {n: A.stepN(), t: A.state().t};"
+            "  A.restart();"
+            "  return {before, after: {n: A.stepN(), t: A.state().t}, first: A.range().first,"
+            "    pair: A.state().pair}; }"
+        )
+        check(animate_restart["before"]["n"] == 29 and animate_restart["before"]["t"] > 1,
+              f"the Animate run was not away from its first step: {animate_restart['before']}")
+        check(animate_restart["after"]["n"] == 16 and animate_restart["after"]["t"] == 0
+              and animate_restart["pair"] == animate_restart["first"],
+              f"restart in Animate did not go to the first step of the range: {animate_restart}")
+        # And the two are different controls: reset puts the parameters back and leaves the picture,
+        # restart puts the picture back and leaves the parameters.
+        parted = page.evaluate(
+            "() => { const A = window.atlasTransitions; A.setMode('pack'); A.setStepN(17);"
+            "  A.setInitial('grid'); A.setLawPreset('sticky'); A.optimizeStep(400);"
+            "  const before = {steps: A.optimizeState().steps, pull: A.law().attraction};"
+            "  A.reset();"
+            "  return {before, reset: {steps: A.optimizeState().steps, pull: A.law().attraction,"
+            "    playing: A.state().playing}}; }"
+        )
+        check(parted["reset"]["pull"] == 0 and parted["before"]["pull"] > 0,
+              f"reset did not put the law back: {parted}")
+        check(not parted["reset"]["playing"], "reset started the clock")
+        page.evaluate("atlasTransitions.setLawPreset('default'); atlasTransitions.setAnneal(3);"
+                      " atlasTransitions.setInitial('previous'); atlasTransitions.setStepN(17)")
+
+        # ---- step 18 (revision 14): every control sits with the axis it belongs to. A mode is a
+        # choice on three independent axes — scope (one n, or a range), strategy (the law, the
+        # graph, growth, annealing, and which solver runs) and presentation (colour, timing,
+        # phasing, desaturation) — so a control belongs to an axis and not to the mode that
+        # happened to introduce it. Three consequences are checked here.
+        #
+        # 18a. The solver choice is strategy: it left the step-animation group for the row that
+        # carries the force law and the relationship graph.
+        placed = page.evaluate(
+            "() => { const sel = document.getElementById('style-select');"
+            "  const box = sel.closest('.subpanel');"
+            "  const row = box.parentElement;"
+            "  const title = (e) => { const t = e.querySelector('.box-title'); return t ? t.textContent.trim() : null; };"
+            "  return {title: title(box), inStepGroup: box.id === 'step-anim-box',"
+            "    siblings: Array.from(row.children).filter((e) => e.classList.contains('subpanel')).map(title),"
+            "    width: getComputedStyle(sel).width}; }"
+        )
+        check(not placed["inStepGroup"],
+              "the solver select is still inside the step-animation group")
+        # Revision 15: the law took a line of its own, so the solver's neighbours are the two
+        # graphs rather than the law. What matters is the axis, not the adjacency: the solver is
+        # strategy, so it sits among the strategy boxes and not in the step-animation group.
+        # Asserting who it sat next to made a layout choice look like an invariant.
+        check("who attracts whom" in placed["siblings"] or "force law" in placed["siblings"],
+              f"the solver select is not among the strategy boxes: {placed}")
+        check(placed["width"].endswith("px") and float(placed["width"][:-2]) > 0,
+              f"the solver select has no width of its own, so hiding an option would resize it: {placed}")
+        # 18b. The tween is not a solver: it interpolates toward a known answer, and Pack has no
+        # answer to interpolate toward. It is taken out of Pack's choices rather than left
+        # selectable and inert, and a page arriving in Pack carrying it falls back and says so.
+        offered = page.evaluate(
+            "() => { const A = window.atlasTransitions;"
+            "  const shown = () => Array.from(document.getElementById('style-select').options)"
+            "    .filter((o) => !o.hidden && !o.disabled).map((o) => o.value);"
+            "  A.setMode('animate'); A.setStyle('tween');"
+            "  const animating = {shown: shown(), solvers: A.solvers(), style: A.state().style,"
+            "    note: document.getElementById('solver-note').textContent};"
+            "  A.setMode('pack'); A.setStepN(17);"
+            "  const packing = {shown: shown(), solvers: A.solvers(), style: A.state().style,"
+            "    note: document.getElementById('solver-note').textContent};"
+            "  A.setStyle('bodies');"
+            "  const chosen = {style: A.state().style, note: document.getElementById('solver-note').textContent};"
+            "  A.setStyle('tween');"
+            "  const asked = {style: A.state().style, note: document.getElementById('solver-note').textContent};"
+            "  A.setMode('animate');"
+            "  const back = {shown: shown(), style: A.state().style, note: document.getElementById('solver-note').textContent};"
+            "  A.setMode('pack'); A.setStepN(17); A.setStyle('bodies');"
+            "  return {animating, packing, chosen, asked, back}; }"
+        )
+        check(offered["animating"]["shown"] == ["tween", "physics", "bodies"]
+              and offered["animating"]["solvers"] == ["tween", "physics", "bodies"],
+              f"Animate does not offer all three solvers: {offered['animating']}")
+        check(offered["packing"]["shown"] == ["physics", "bodies"]
+              and offered["packing"]["solvers"] == ["physics", "bodies"],
+              f"Pack still offers the tween: {offered['packing']}")
+        check(offered["packing"]["style"] == "physics" and "tween" in offered["packing"]["note"],
+              f"entering Pack on the tween did not fall back to the physics and say so: {offered['packing']}")
+        check(offered["chosen"]["note"] == "",
+              f"the fallback note outlived the next choice: {offered['chosen']}")
+        check(offered["asked"]["style"] == "physics" and "tween" in offered["asked"]["note"],
+              f"setStyle('tween') in Pack left the tween selected: {offered['asked']}")
+        check(offered["back"]["shown"] == ["tween", "physics", "bodies"] and offered["back"]["note"] == "",
+              f"leaving Pack did not give the tween back: {offered['back']}")
+        # 18c. Timing and phasing are Animate's: dwell, move, settle, the motion phasing and the
+        # full beat all describe a step, and Pack has none. The group is hidden there — and hidden
+        # *in place*, because taking its box out of the wrapping row would rewrap the panel, shorten
+        # the controls and resize the stage, which is the reflow rule revision 12 established.
+        timing_group = page.evaluate(
+            "() => { const A = window.atlasTransitions; const box = document.getElementById('step-anim-box');"
+            "  const geo = () => { const r = (id) => { const b = document.getElementById(id).getBoundingClientRect();"
+            "      return [b.x, b.y, b.width, b.height]; };"
+            "    const b = box.getBoundingClientRect();"
+            "    return {stage: r('stage'), controls: r('controls'), facts: r('facts'), svg: r('packing-svg'),"
+            "      shake: r('shake-box'), law: r('law-box'), box: [b.x, b.y, b.width, b.height],"
+            "      visibility: getComputedStyle(box).visibility, display: getComputedStyle(box).display,"
+            "      focusable: box.contains(document.activeElement),"
+            "      holds: ['t-dwell', 't-move', 't-settle', 'phase-seg', 'fullbeat-toggle']"
+            "        .every((id) => box.contains(document.getElementById(id)))}; };"
+            "  A.setMode('animate'); const animating = geo();"
+            "  A.setMode('pack'); A.setStepN(17); const packing = geo();"
+            "  return {animating, packing}; }"
+        )
+        check(timing_group["animating"]["holds"],
+              "the timing and phasing controls are not all in the step-animation group")
+        check(timing_group["animating"]["visibility"] == "visible",
+              "Animate hides its own timing group")
+        check(timing_group["packing"]["visibility"] == "hidden",
+              f"Pack still shows the timing group: {timing_group['packing']['visibility']}")
+        check(timing_group["packing"]["display"] != "none",
+              "the timing group is hidden by removal, which rewraps the panel and resizes the stage")
+        for key in ("stage", "controls", "facts", "svg", "shake", "law", "box"):
+            check(timing_group["packing"][key] == timing_group["animating"][key],
+                  f"hiding the timing group moved the {key}: "
+                  f"{timing_group['packing'][key]} against {timing_group['animating'][key]}")
+        page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17);"
+                      " atlasTransitions.setStyle('bodies')")
 
         browser.close()
 
@@ -2046,7 +2291,7 @@ def main() -> int:
         "hand that picks the topmost square, pins it against its neighbours, turns it on shift, "
         "moves the readout as it goes, marks the run hand-edited and regresses no key; and the two "
         "modes — Pack showing one n whose ends never come apart and whose transport is the "
-        "open-ended run reported as a seconds counter, Sweep showing a range and remembering it, "
+        "open-ended run reported as a seconds counter, Animate showing a range and remembering it, "
         "with every shared setting surviving a switch either way and the scrubber gone; and the "
         "colouring being the angle map and nothing else — every retained frame from 5 to 324 "
         "painted exactly as colour() says, each class taking the slot its own centre alone gives, "
@@ -2059,7 +2304,7 @@ def main() -> int:
         "identity by default — 42 greens inside the teal-to-citron band, all distinct, the "
         "closest two 0.0237 apart in OkLab and consecutive identities five times further, a "
         "square keeping its fill through a settle that turns it, two frames of one n painting "
-        "a square the same, no contact shading under identity, and Sweep alone repainting its "
+        "a square the same, no contact shading under identity, and Animate alone repainting its "
         "resting frame in the angle map; "
         "one editable force law matching the written-out formula at every sampled gap under all "
         "four of default, rigid, soft and sticky — continuous at touching, flat at and past its "
@@ -2083,7 +2328,7 @@ def main() -> int:
         "two chart options driving the snap and the contact bias; "
         "no control moving while either playback runs or when the style, the dial, the preset, the "
         "graph, growth or n is changed, every live readout in a fixed slot or on a line of its own; "
-        "no position bar in Pack, in a run or in a capture, Sweep keeping it, and the stage, panel "
+        "no position bar in Pack, in a run or in a capture, Animate keeping it, and the stage, panel "
         "and controls the same box either way; and a contact graph drawn by hand — a real pointer "
         "press, drag and release adding an edge and the same gesture taking it away, the square "
         "drag untouched beside it, the graph normalised and held per n, reaching the mask by the "
