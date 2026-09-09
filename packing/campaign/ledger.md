@@ -128,6 +128,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Historical at this checkpoint: resume think-mq0d for BC-264 subject to its allocation and admission requirements. Agenda030 subsequently superseded that selection with think-qfog; the current SYNOPSIS governs new work. This publication repair does not reprioritize research or authorize a target run. |
 | [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
 | [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: independently audit the union and five-dot replay, reuse the certificate through valid symmetries and exact containment, then search only uncovered classes under fresh preregistration and separately recorded usage. |
+| [session-114](agent-sessions/session-114-independent-owner-audit.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (correctness) | 3 | think-yhw2 | Publish and execute exp145 under its unchanged guards, then continue agenda033 in a successor session. |
 
 ### Workflow summary
 
@@ -140,8 +141,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 34 | 1 |
-| `research-loop` | 17 | 4 | 78 | 7 |
-| `pipeline-improvement` | 26 | 1 | 138 | 4 |
+| `research-loop` | 17 | 4 | 79 | 7 |
+| `pipeline-improvement` | 27 | 1 | 140 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
 | `review-planning-oversight` | 0 | 0 | 8 | 0 |
@@ -677,11 +678,26 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | BC-315 | research | 11 | complete | 1 | think-9cpg | Four-owner numerical comparison accepted: point9, triangle6, endpoint5. Exp144 verifies the fixed five-dot candidate on the complete net. |
 | BC-314 | measurement_validation | 11 | complete | 1 | think-ns6k | Publish final results and separately attributed usage; next selection think-yhw2. |
 
+### [agenda-033](agendas/agenda-033-overnight-owner-geometry.md) — Overnight Owner-Geometry Research
+
+Status: **active**. Make the largest defensible progress toward stronger n11 lower bounds by independently auditing the five-dot branch exclusion, strengthening forced-owner geometry using the walls, and expanding certified cases only where exact evidence supports it. Preserve unchanged global bounds until an exhaustive physical argument exists.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-316 | measurement_validation | 11 | in_progress | 1 | think-yhw2 | Publish the controlled checker and prospective exp145, then invoke once. |
+| BC-317 | research | 11 | blocked | 1 | think-waix | Build the reusable exact footprint constructor, preserving nonempty degenerate legal-center sets. |
+| BC-318 | research | 11 | blocked | 1 | think-waix | Use Cartesian products of component containment to identify cheap new branch exclusions. |
+| BC-319 | research | 11 | blocked | 1 | think-ykd6 | Preregister the smallest additional-class test after the containment result. |
+| BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
+| BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
+| BC-322 | measurement_validation | 11 | ready | 1 | think-ta8s | Keep one principal compute queue and run source review/CI beside it; preserve separate accounting cutoffs. |
+| BC-323 | measurement_validation | 11 | tentative | 1 | think-ta8s | Update the draft PR at coherent checkpoints, then close the agenda and pause its heartbeat at the morning boundary. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 100 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 101 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -805,6 +821,7 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
 | H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
 | H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
+| H-143 | running | proof | For the unchanged four endpoint patches and five dots from exp143, the |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -944,6 +961,12 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-145 | series-000 | 11 | GPT-6 Astra coordinator; instrument by GPT-5.6 Sol extra high; mathematical review by GPT-6 Astra max | H-143 | Prospective protocol only. Passing instrument and protocol must be committed and pushed before the one target invocation. No target has run. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -964,7 +987,7 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 
 ## Effort
 
-100 rounds, 2152.1 agent-minutes, 1363.0 wall-minutes.
+101 rounds, 2152.1 agent-minutes, 1363.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

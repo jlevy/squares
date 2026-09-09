@@ -81,6 +81,10 @@ This keeps straightforward tasks quick and token-efficient while funding the jud
 which the research depends.
 The owner specified the OpenAI and Claude choices during the PR 127 handoff review on
 2026-09-08, extending that day’s Fable/Opus dispatch policy.
+When the coordinator uses lower thinking, delegate strategic decisions to Astra at max.
+The owner explicitly selected that routing for the
+[overnight continuation](packing/campaign/agent-sessions/session-114-independent-owner-audit.md)
+on 2026-09-09; it overrides the default extra-high mathematical row for that work.
 
 A sub-agent’s report is evidence, not a verdict.
 One in

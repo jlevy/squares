@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 113
+count: 114
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 68
-  sessions_unmeasured: 45
+  sessions_unmeasured: 46
   attributed:
     rollups: 123
     turns: 31555
@@ -36,8 +36,8 @@ totals:
     wall_hours: 230.77
 codex_receipts:
   attributed: 33
-  unattributed: 0
-  measured: 33
+  unattributed: 1
+  measured: 34
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1823,3 +1823,13 @@ sessions:
     active_union_hours: 1.97
     wall_hours: 1.97
     snapshot_incomplete: true
+- id: session-114
+  title: "Independent five-dot audit and owner-case readiness"
+  status: in_progress
+  primary_bead: think-yhw2
+  phases: 3
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

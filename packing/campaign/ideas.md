@@ -440,6 +440,7 @@ prevent those local facts from being mistaken for a global exclusion.
 | 136 | Check the fixed-corner rational candidate across every retained direction | registered | [H-140](hypotheses/H-140-fixed-corner-full-net-cover.md) | Exact full-net minimum tests the unchanged weights; positive minima also permit a separately labeled normalized feasible mass. |
 | 137 | Compare four guaranteed occupied regions with four bare marks | registered | [H-141](hypotheses/H-141-four-owner-footprint-matched-gain.md) | One compatible owner configuration tests the residual-seven mechanism before any exhaustive branch expansion. |
 | 138 | Verify the five-dot four-owner candidate on the complete net | registered | [H-142](hypotheses/H-142-five-dot-full-net-cover.md) | A positive full361minimum turns the numerical branch candidate into a five-dot conditional exclusion under the reviewed transfer. |
+| 139 | Independently decide the same five-dot cover by polygon-union area | registered | [H-143](hypotheses/H-143-independent-five-dot-union.md) | Exact inclusion-exclusion avoids the original residual-union decomposition and weighted event grid; source and synthetic controls must be admitted before replay. |
 
 ## Dead ends
 

@@ -223,7 +223,10 @@ def _native_duration_matches_interval(task: TaskWindow) -> bool:
         return True
     interval_ms = max(0.0, task.end_ms - task.start_ms)
     tolerance_ms = max(1_000.0, 0.05 * max(interval_ms, task.client_duration_ms))
-    return abs(task.client_duration_ms - interval_ms) <= tolerance_ms
+    # The client duration can exclude pauses within an owned turn, while replayed
+    # history is identifiable by an impossible duration longer than its compressed
+    # log interval.
+    return task.client_duration_ms <= interval_ms + tolerance_ms
 
 
 def _partition_intervals(
