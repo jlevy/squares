@@ -131,7 +131,9 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-114](agent-sessions/session-114-independent-owner-audit.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (process) | 4 | think-yhw2 | BC-316 under think-yhw2: carry the unchanged published exp145 into Session115, then continue the reviewed wall-aware geometry agenda. In parallel, think-ta8s obtains and reconciles the new stacked milestone checkpoint. |
 | [session-115](agent-sessions/session-115-wall-aware-owner-footprints.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (insight) | 3 | think-waix | BC-317 under think-waix: Session116 publishes the controlled source and runs the unchanged exp146 under a fresh forward allocation. In parallel think-ta8s reconciles the new source checkpoint. |
 | [session-116](agent-sessions/session-116-resumed-wall-research.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-waix | Certification under think-ta8s: publish this H144/BC322 result checkpoint and retain its matching hosted status. BC-318 under think-waix then reviews and adopts the three isolated guard repairs, freezes the admitted source and prospective exp147, and evaluates the bounded containment target once. |
-| [session-117](agent-sessions/session-117-wall-owner-containment.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-waix | BC-319 under think-ykd6: admit source and freeze a fresh fixed-pattern experiment; preserve think-ta8s checkpoint certification debt. |
+| [session-117](agent-sessions/session-117-wall-owner-containment.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-waix | BC-319 under think-ykd6: test the explicit small tuple(0,0,0,7) in fresh H147/exp149, selected by the analytic transported witnesses. Certification remains under think-ta8s. |
+| [session-118](agent-sessions/session-118-selected-wall-tuple.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification under think-ta8s: publish the Session117/118 results and admitted H147/exp149 source. BC-319 under think-ykd6 continues in Session119 with unchanged criteria. |
+| [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Publish the source/protocol checkpoint, then run exp149 once before16:29:54UTC. |
 
 ### Workflow summary
 
@@ -144,7 +146,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 19 | 4 | 84 | 7 |
+| `research-loop` | 21 | 4 | 86 | 7 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
@@ -690,7 +692,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
 | BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed128 relations, covered only two baseline tuples and added none. BC319 tests direct fixed-dot coverage. |
-| BC-319 | research | 11 | in_progress | 1 | think-ykd6 | H146/exp148 freezes the reviewed nine-seed witness bank and one candidate after source admission; target unrun. |
+| BC-319 | research | 11 | in_progress | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels; no complete seed/candidate. Analytic D-preserving transport rejects61440 labels. H147/exp149 now prospectively freezes the selected tuple(0,0,0,7) for a complete361-direction check; do not extend exp148. |
 | BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
@@ -700,7 +702,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 104 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 105 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -827,7 +829,8 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-143 | confirmed | proof | For the unchanged four endpoint patches and five dots from exp143, the |  | 1 |  | 39s wall |
 | H-144 | confirmed | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  | 26s wall |
 | H-145 | refuted | proof | The frozen wall-aware owner footprints inherit at least one additional |  | 1 |  | 41s wall |
-| H-146 | running | proof | The unchanged five-dot pattern D covers at least one wall-footprint tu |  | 1 |  |  |
+| H-146 | unresolved | proof | The unchanged five-dot pattern D covers at least one wall-footprint tu |  | 1 |  | 1.2m wall |
+| H-147 | running | proof | The unchanged five-dot pattern D covers the full residual-core centre  |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -871,7 +874,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (23)
+### unresolved (24)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -898,6 +901,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
 | exp-135 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-136 | The unrestricted arm converged, but the residual separator stopped at direction113 because a reachable cell had no representable interior witness. The paired score was not measured. This is an instrument limitation, not negative evidence about geometric conditioning. |
 | exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Process exit0 preserved a valid partial receipt, but it did not mean scientific completion: only unrestricted converged. Point exhausted60 rounds without convergence, triangle and endpoint were not run, and the primary difference was not measured. The partial point objective is not a covering value or negative result for H139. |
+| exp-148 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-146 | The seed-stage guard expired before any complete seed direction or candidate check. Two valid retained escapes give reusable negative evidence for49152 labels, but neither a new cover nor an all-label refutation was completed. |
 
 ### blocked (9)
 
@@ -974,7 +978,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-148 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-146 | Prospective and unrun. The complete negative exp147 result selects direct coverage with the unchanged dots. |
+| exp-149 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-147 | Prospective and unrun. Analytic transport of retained exp148 witnesses selects this small explicit tuple before a general caching rewrite. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -993,10 +997,11 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-129 | H-125 |  | dependency |  |  |
 | exp-134 | H-135 |  | dependency |  |  |
 | exp-140 | H-139 | 16s wall | timebox | Exp142 freshly restarts the same four arms with 300 rounds a |  |
+| exp-148 | H-146 | 1.2m wall | timebox | Exp149 tests the separately registered explicit tuple(0,0,0, |  |
 
 ## Effort
 
-104 rounds, 2152.1 agent-minutes, 1364.7 wall-minutes.
+105 rounds, 2152.1 agent-minutes, 1365.9 wall-minutes.
 
 ## Exploration reports not yet codified
 

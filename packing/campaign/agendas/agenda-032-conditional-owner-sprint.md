@@ -1,5 +1,5 @@
 ---
-title: "agenda-032 \u2014 two-hour conditional-owner sprint at n = 11"
+title: agenda-032 — two-hour conditional-owner sprint at n = 11
 softschema:
   contract: packing.squares:ExperimentAgenda/v1
   schema: ../schemas/agenda.schema.yaml
@@ -168,8 +168,8 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg
     - packing/frontier/results.yaml
     outcomes:
-    - scope: Does the selected five-dot endpoint-footprint proposal survive rational reconstruction,
-        the full direction net and the analytic transfer for its specified four-owner class combination?
+    - scope: Does the selected five-dot endpoint-footprint proposal survive rational reconstruction, the
+        full direction net and the analytic transfer for its specified four-owner class combination?
       classification: achieved
       result: Exp144 certifies five dots over all361directions; reviewed transfer excludes the selected
         reflected m1/j0 four-owner branch. Post-sprint claim T-023 records the exact scope.
@@ -255,8 +255,8 @@ agenda:
       reason: Updated sprint results and selected continuation.
     - path: TUTORIAL.md
       decision: updated
-      reason: A post-sprint documentation amendment adds the branch-specific five-dot argument while
-        preserving the unchanged global bracket.
+      reason: A post-sprint documentation amendment adds the branch-specific five-dot argument while preserving
+        the unchanged global bracket.
     - path: conventions.md
       decision: checked-current
       reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
@@ -287,14 +287,20 @@ agenda:
     - scope: published5195checkpoint
       status: passed
       evidence: Local push129.33seconds,1082tests; hosted fast components all success. Earlier e334 deferred
-        checkpoint all success; newer integrated deferred checkpoint34312252411 subsequently passed all lanes on merge snapshotaabaac6a. Final delta push passed127.89seconds with880tests.
+        checkpoint all success; newer integrated deferred checkpoint34312252411 subsequently passed all
+        lanes on merge snapshotaabaac6a. Final delta push passed127.89seconds with880tests.
     - scope: pre-amendment-record-baseline
       status: passed
       evidence: Before the post-sprint documentation amendment, the records baseline passed every record
-        step. Its separate PATH-only Ruff failure was repaired, and the focused project records-lint
-        step passed.
+        step. Its separate PATH-only Ruff failure was repaired, and the focused project records-lint step
+        passed.
     replanning:
       candidates:
+      - bead: think-ykd6
+        workflow: research-loop
+        priority: 1
+        rationale: Exp148 partial evidence and analytic transport select the explicit small tuple under
+          BC319.
       - bead: think-waix
         workflow: research-loop
         priority: 1
@@ -311,11 +317,11 @@ agenda:
         rationale: Full-support pricing remains uninvoked; retain it behind the newly successful geometric
           conditioning mechanism.
       selected:
-        bead: think-waix
+        bead: think-ykd6
         workflow: research-loop
-        rationale: Updated at the Session115 handoff on2026-09-09. The original think-yhw2 selection produced
-          the independent exact union confirmation; its next concrete subtask is BC317 wall-aware geometry,
-          resumed in Session116 after the user-confirmed network outage. The original sprint result is unchanged.
+        rationale: Updated after Session117. Original audit and subsequent wall/containment tasks completed
+          through exp147; exp148 and analytic transport now select BC319 under think-ykd6. Original sprint
+          outcomes and cost remain unchanged.
       operator_input:
         status: confirmed
         note: User selected a two-hour sprint on geometric conditioning and parallel experiments. The

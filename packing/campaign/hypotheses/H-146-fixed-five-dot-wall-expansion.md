@@ -52,6 +52,11 @@ The [reviewed strategy](../../cases/n11_five_dot_cover/after-wall-gain-strategy.
 nine fixed directions to collect reusable witnesses, then tests only the first surviving
 new tuple on the complete direction net.
 
+Exp148 returned partial at its seed-stage guard in 74.03 seconds.
+Two checked escapes reject 49,152 labels, but no seed direction finished and no
+candidate was checked.
+The existence hypothesis remains unresolved.
+
 One failed candidate does not refute existence over the other tuples.
 Refutation needs checked escapes for all nonbaseline labels.
 Any new cover remains a conditional packing exclusion; the global case-coverage gap and

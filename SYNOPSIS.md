@@ -143,7 +143,7 @@ refuted hypotheses, one open hypothesis, twenty-five open questions, and forty-f
 blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
 remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
 scientific invocation; this does not refute its claim.
-One hypothesis is running; none is waiting on review and eight are unresolved.
+One hypothesis is running; none is waiting on review and nine are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -208,6 +208,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [After exp148: Transport the Witnesses, Then Remove Repeated Preparation](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) | research synthesis | record | retained | — |
+| [Selected-Cover Adapter: Source Admission](packing/cases/n11_five_dot_cover/selected-cover-source-admission.md) | dated review record | record | retained | — |
 | [Fixed-Pattern Adapter: Source Admission](packing/cases/n11_five_dot_cover/fixed-pattern-source-admission.md) | dated review record | record | retained | — |
 | [BC318 Adapter: Mathematical Source Admission](packing/cases/n11_five_dot_cover/wall-containment-source-admission.md) | dated review record | record | retained | — |
 | [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
@@ -780,10 +782,22 @@ The active Session117 continuation is BC-319 under `think-ykd6`, with
 [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md)
 registered under H-146. It keeps the five dots fixed, builds a reusable exact witness
 bank, and permits one surviving tuple check.
-No target witness has yet been computed.
+Exp148 retained two exact witnesses before its seed deadline: 49,152 labels rejected,
+16,382 nonbaseline labels remaining, no candidate attempted.
+H-146 remains unresolved.
 
-**Selected next entry:** `think-waix`, BC-318: test whether the accepted wall-aware
-footprints extend the five-dot exclusion by exact component containment.
+[Session119](packing/campaign/agent-sessions/session-119-selected-wall-tuple-continuation.md)
+continues the source-admitted work from
+[Session118](packing/campaign/agent-sessions/session-118-selected-wall-tuple.md).
+[Exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md)
+was partial. The separate
+[analytic transport](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) rejects
+61,440 labels for fixed D, leaving 4,094 nonbaseline labels.
+[Exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md)
+under H-147 fixes tuple `(0,0,0,7)` for a complete 361-direction check with the
+unchanged five dots.
+
+**Selected next entry:** `think-ykd6`, BC-319: test the explicit small surviving tuple.
 The two-hour sprint in
 [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
 complete. Exp141 independently confirmed the retained-family negative screens; exp142
@@ -3364,7 +3378,8 @@ round that names the hypothesis, control roles included.
 | [H-143](packing/campaign/hypotheses/H-143-independent-five-dot-union.md) | confirmed | Independent exact polygon union covers the same contained-core domains in all 361 directions | 1 | All 361 deficits zero; 39.06s process |
 | [H-144](packing/campaign/hypotheses/H-144-wall-aware-owner-footprint-gain.md) | confirmed | Container walls strictly enlarge twelve of sixteen coarse owner footprints | 1 | 25.69s wall |
 | [H-145](packing/campaign/hypotheses/H-145-wall-owner-containment-expansion.md) | refuted | Wall-aware footprints extend a five-dot exclusion by component containment | 1 | 40.88s wall |
-| [H-146](packing/campaign/hypotheses/H-146-fixed-five-dot-wall-expansion.md) | running | The fixed five dots exclude another wall-owner tuple | 1 | — |
+| [H-146](packing/campaign/hypotheses/H-146-fixed-five-dot-wall-expansion.md) | unresolved | The fixed five dots exclude another wall-owner tuple | 1 | 74.03s wall |
+| [H-147](packing/campaign/hypotheses/H-147-selected-wall-tuple-cover.md) | running | The unchanged five-dot pattern covers the selected wall-owner tuple `(0,0,0,7)` | 1 | — |
 
 ### Confirmed
 
@@ -3614,13 +3629,15 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-114.yaml` | session-114 | 330 | 2.25 h | 0.81 h | 0.81 h | yes |
 | `codex-task-tree-session-115.yaml` | session-115 | 213 | 19.6 h | 6.7 h | 6.7 h | yes |
 | `codex-task-tree-session-116.yaml` | session-116 | 304 | 8.45 h | 0.82 h | 0.82 h | yes |
+| `codex-task-tree-session-117.yaml` | session-117 | 371 | 2.16 h | 0.75 h | 0.75 h | yes |
+| `codex-task-tree-session-118.yaml` | session-118 | 59 | 0.38 h | 0.16 h | 0.16 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 71 |
+| measured | 73 |
 | unmeasured | 46 |
-| **total** | **117** |
+| **total** | **119** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3636,9 +3653,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 104 rounds registered in `series-000`.
+There are 105 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1364.7 wall-minutes.
+They record 2152.1 agent-minutes and 1365.9 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3781,7 +3798,8 @@ archive beside it.
 | [exp-145](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md) | 11 | target | H-143 | Independent exact rational polygon inclusion-exclusion | All 361 exact deficits zero; unchanged geometry | accepted |
 | [exp-146](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md) | 11 | target | H-144 | Exact container-clipped support rectangles over every retained frame | Complete16:12 enlarged,4equal,0impossible | accepted |
 | [exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md) | 11 | target | H-145 | Exact 128-slot component containment and union-of-products count | All128 complete; only2baseline tuples;0new | rejected |
-| [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md) | 11 | target | H-146 | Nine-seed witness bank and one surviving tuple full-net check | Prospective and unrun | in-progress |
+| [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md) | 11 | target | H-146 | Nine-seed witness bank and one surviving tuple full-net check | Partial seed bank;49152 labels rejected;no candidate | unresolved |
+| [exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md) | 11 | target | H-147 | Exact complete-net cover of the selected wall tuple `(0,0,0,7)` | Prospective and unrun | in-progress |
 
 ### Cost and provenance
 
@@ -3890,11 +3908,12 @@ archive beside it.
 | exp-145 | one five-minute guarded replay | 39.06s | — | criterion | `c59d28a7` |
 | exp-146 | one five-minute guarded constructor | 25.69s | — | criterion | `91575889` |
 | exp-147 | one 120-second external process; 60-second internal guard after input loading | 40.88s | — | criterion | `e72102e1` |
-| exp-148 | one five-minute process; shared 240-second internal and 60-second seed guards | — | — | unrun | pending source publication |
+| exp-148 | one five-minute process; shared 240-second internal and 60-second seed guards | 74.03s | — | timebox | `3bbb6987` |
+| exp-149 | one five-minute external process; 240-second internal guard after input loading | — | — | unrun | pending source publication |
 
-### What the 104 rounds jointly establish
+### What the 105 rounds jointly establish
 
-The 104 rounds use 2152.1 agent-minutes and 1364.7 wall-minutes under the campaign’s
+The 105 rounds use 2152.1 agent-minutes and 1365.9 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

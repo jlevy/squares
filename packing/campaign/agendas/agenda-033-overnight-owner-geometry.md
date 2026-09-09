@@ -133,15 +133,19 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-318
-    next_evidence: H146/exp148 freezes the reviewed nine-seed witness bank and one candidate after source
-      admission; target unrun.
+    next_evidence: 'Exp148 partial: two checked witnesses reject49152 labels; no complete seed/candidate.
+      Analytic D-preserving transport rejects61440 labels. H147/exp149 now prospectively freezes the
+      selected tuple(0,0,0,7) for a complete361-direction check; do not extend exp148.'
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
     hypotheses:
     - H-146
+    - H-147
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-148-fixed-five-dot-wall-expansion.json
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md
   - id: BC-320
     purpose: research
     owner_focus: insight

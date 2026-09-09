@@ -341,7 +341,7 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, continue from BC-318 under `think-waix`:
+For the next supervised exact-research goal, continue from BC-319 under `think-ykd6`:
 generalize Agenda032’s exact five-dot conditional exclusion after the completed two-hour
 session113. Exp145 has independently confirmed the complete finite cover.
 Session116 resumed Agenda033 after the user-confirmed network outage and accepted H144:

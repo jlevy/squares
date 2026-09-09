@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 117
+count: 119
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 71
+  sessions_measured: 73
   sessions_unmeasured: 46
   attributed:
     rollups: 123
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3920
     wall_hours: 230.77
 codex_receipts:
-  attributed: 36
+  attributed: 38
   unattributed: 1
-  measured: 37
+  measured: 39
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1885,9 +1885,49 @@ sessions:
     snapshot_incomplete: true
 - id: session-117
   title: "Transfer wall-aware owner exclusions"
-  status: in_progress
+  status: stopped
   primary_bead: think-waix
   phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-117.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-117.yaml
+    model_responses: 371
+    agent_hours: 2.16
+    active_union_hours: 0.75
+    wall_hours: 0.75
+    snapshot_incomplete: true
+- id: session-118
+  title: "Test the small surviving wall-owner tuple"
+  status: stopped
+  primary_bead: think-ykd6
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-118.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-118.yaml
+    model_responses: 59
+    agent_hours: 0.38
+    active_union_hours: 0.16
+    wall_hours: 0.16
+    snapshot_incomplete: true
+- id: session-119
+  title: "Publish and test the selected wall tuple"
+  status: in_progress
+  primary_bead: think-ykd6
+  phases: 1
   measured: false
   unmeasured_reason: >-
     declares no rollups

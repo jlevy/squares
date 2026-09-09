@@ -21,6 +21,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python 3.14; one process
     selftest_passed: true
+    engine_commit: 3bbb6987b5e752bcb0367e6b067707e941193454
   instance:
     axis: n
     point: 11
@@ -49,22 +50,53 @@ experiment:
       clock and60-second seed-stage guard. No retry, tuning, resume or second candidate. Launch by16:05:07UTC
       to fit the full allowance before16:10:09UTC.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-148-fixed-five-dot-wall-expansion.json
-  results: []
+    commit: 3bbb6987b5e752bcb0367e6b067707e941193454
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Did a nonbaseline tuple complete the required all361 exact cover check?
+    outcome: criterion_missed
+    checked_by: Seed-stage cooperative deadline returned partial after two retained independently checked
+      witnesses. Their product union rejects49152 labels, leaving16382 nonbaseline labels unclassified.
+      No seed direction completed and no candidate was selected.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: At least one nonbaseline tuple completes all361 unique required directions with
       exact zero uncovered area and all input, witness and transfer guards valid.
-    reason: Prospective and unrun. The complete negative exp147 result selects direct coverage with the
-      unchanged dots.
-  lease:
-    expires: '2026-09-09T16:10:09Z'
-    host: local
+    reason: The seed-stage guard expired before any complete seed direction or candidate check. Two valid
+      retained escapes give reusable negative evidence for49152 labels, but neither a new cover nor an
+      all-label refutation was completed.
+    resume_from: Exp149 tests the separately registered explicit tuple(0,0,0,7) without extending or
+      completing this partial seed bank.
+  effort:
+    timebox: One five-minute external process, shared240-second internal and60-second seed guards; no
+      retry.
+    wall_seconds: 74.03
+    stopped_by: timebox
 ---
-# Exp148: Fixed Dots, Reusable Escapes, One Candidate
+# Exp148: A Partial Witness Bank
 
-**Prospective and unrun.** Publish admitted source and this protocol before one target.
-Capture its exact published revision, clean tree, UTC start, process exit and elapsed
-seconds outside the repository.
+**Unresolved.** The one run launched at 16:01:18 UTC from clean published
+`3bbb6987b5e752bcb0367e6b067707e941193454` and returned exit 2 after 74.03 seconds.
+The seed guard stopped the run after two useful axis-aligned witnesses, with zero
+completed seed directions and no selected candidate.
+Their exact product union rejects 49,152 class labels for this fixed pattern, leaving
+16,382 nonbaseline labels.
+The bank reports 66.18489845798467 seconds; the driver reports 73.42410541698337 seconds
+including input loading.
+
+The retained JSON is byte-identical to stdout.
+It preserves the two rational centres, four masks per witness, input provenance and the
+exact failure bitset.
+The cooperative guard was checked after an exact operation crossed its deadline; the
+external ceiling was respected.
+This is useful partial evidence, not a completed nine-direction screen or a refutation
+of the existence of an additional cover.
+
+**Prospective history, now discharged.** Publish admitted source and this protocol
+before one target. Capture its exact published revision, clean tree, UTC start, process
+exit and elapsed seconds outside the repository.
 Input blobs and upstream source revisions are fixed in the command.
 Use a fresh output; never retry or overwrite the target.
 

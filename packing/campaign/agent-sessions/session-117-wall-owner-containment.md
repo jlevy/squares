@@ -52,7 +52,7 @@ session:
       one fresh bounded experiment.
     commitment: BC-319
     bead: think-ykd6
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Complete component containment added no tuple; the reviewed strategy selects direct
       coverage with the five dots fixed.
@@ -65,12 +65,16 @@ session:
     kill_condition: No target before admitted controls and published prospective protocol; latest launch16:05:07UTC.
     fallback: Retain unrun or partial status and exact missing obligation without extending the registered
       target.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Publish the next exact result and reconcile the remaining case-coverage gap.
+    outcome: 'Exp148 returned partial after74.03seconds: two checked witnesses reject49152 labels,16382
+      nonbaseline labels remain,zero seed directions completed,no candidate selected.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-148-fixed-five-dot-wall-expansion.json
+    - packing/cases/n11_five_dot_cover/fixed-pattern-source-admission.md
+    stop_reason: The unchanged60-second seed guard expired; H146 remains unresolved.
+    next_action: Use the retained witnesses and reviewed symmetry corollary, then fix repeated per-direction
+      work before a separately allocated successor; do not rerun exp148.
   primary_bead: think-waix
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 60
     max_cycles: 4
@@ -88,25 +92,43 @@ session:
     metric: Additional certified owner tuples beyond the two baseline exclusions.
     before: 'H144 accepted: twelve larger guaranteed footprints, four unchanged, none impossible. Mathematical
       source review admits BC318 after three small guard corrections; no target containment evaluated.'
-    after: 'H145 refuted: zero additional tuple by component containment. The fixed-dot witness bank and
-      one-candidate source is undergoing controls and Astra Max review.'
+    after: 'H145 refuted with no component-containment expansion. H146 unresolved: two retained strict
+      escapes reject49152 labels before the seed deadline; no candidate attempted. Astra Max confirms
+      a separate analytic symmetry corollary rejects61440 labels, leaving4094 nonbaseline labels; it is
+      not additional executed coverage.'
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-147-wall-owner-containment.json
   - packing/cases/n11_five_dot_cover/wall-containment-source-admission.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-148-fixed-five-dot-wall-expansion.json
   checks:
   - Predecessor Session116 ends at 15:25:09 UTC, the exact boundary for this session usage interval.
   - Astra Max source review ran eight target-blind tests in 4.60 seconds and found three required guard
     corrections; no target relations were run.
-  - The records tier failed in 29.48 seconds only because SYNOPSIS lacked an exp147 cost row and exact Current
-    Handoff identifier; the targeted synopsis repair passed.
+  - The records tier failed in 29.48 seconds only because SYNOPSIS lacked an exp147 cost row and exact
+    Current Handoff identifier; the targeted synopsis repair passed.
   - The pre-push tier passed 45 selected steps in 114.39 seconds, including 890 behavioral tests with3deselected
     and1warning. This is a named push tier, not the full gate.
   - Post-hook synopsis and documentation checks passed at e72102e15897dc33e59fcd82818a7ca9174d3cd0.
-  - Exp147 launched 15:47:15 UTC from the clean published source and exited 0 in 40.88 seconds; internal 33.43337650000467 seconds.
-  stop_reason: null
-  next_action: 'BC-319 under think-ykd6: admit source and freeze a fresh fixed-pattern experiment; preserve
-    think-ta8s checkpoint certification debt.'
+  - Exp147 launched 15:47:15 UTC from the clean published source and exited 0 in 40.88 seconds; internal
+    33.43337650000467 seconds.
+  - Fixed-pattern source:21 combined containment/fixed tests passed in4.59seconds; Ruff and BasedPyright
+    passed. Astra Max independently passed12 fixed controls in0.90seconds.
+  - The fixed-pattern pre-push tier passed45 selected steps in138.29seconds, including946tests,4deselected
+    and1warning. This is not a full gate.
+  - The final review title changed its generated document-map row. That stale map check failed, then the
+    single generated row was refreshed and documentation/synopsis checks passed before target launch.
+  - Exp148 launched16:01:18UTC from clean published 3bbb6987b5e752bcb0367e6b067707e941193454; exit2,74.03seconds,
+    typedpartial seeddeadline. Retained JSON equals stdout.
+  - Native usage closes at2026-09-09T16:10:19Z; Session118 begins at exactly that boundary. Original Session117
+    deadline and16:10:09 research cutoff are retained.
+  stop_reason: Exp147 completed negative and exp148 retained a valid partial witness bank; continued research
+    is separately allocated in Session118 from16:10:19UTC.
+  next_action: 'BC-319 under think-ykd6: test the explicit small tuple(0,0,0,7) in fresh H147/exp149,
+    selected by the analytic transported witnesses. Certification remains under think-ta8s.'
+  certification_pending: think-ta8s
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-117.yaml
 ---
 # Session117: Transfer the Wall-Aware Exclusions
 
