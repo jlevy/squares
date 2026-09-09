@@ -1033,9 +1033,10 @@ and `kpr-n1j6` (reader reload).
 `kpr-6q53` tracks the unified typography design map.
 `kpr-i91n` (PR #52 reconciliation) is closed and synced.
 
-Keep `think-x65m` open for the owner’s rectangular-looking bullets under “Elements of
-the project.” All 29 visible markers have square CSS boxes in ten observations across
-desktop/narrow, device scales 1/2, and print.
+`think-x65m`, the owner’s rectangular-looking bullets under “Elements of the project,”
+is closed after verification.
+All 29 visible markers have square CSS boxes in ten observations across desktop/narrow,
+device scales 1/2, and print.
 The parent and nested items measure 3.65625 by 3.65625 CSS pixels on screen and 3.25 by
 3.25 in print.
 A slight tall appearance occurs in some crops; a tested 73px scroll change
@@ -1051,14 +1052,12 @@ neither is required to finish this publication slice.
 
 ### Non-Obvious Setup and Retained Evidence
 
-Use normal CPython 3.14, never PATH `python3` or the free-threaded 3.14t selected by
-some uv environments.
-The working environment on this machine is `/private/tmp/squares-font-review-py314`;
-KPress candidate checkout is `/private/tmp/kpress-reader-reload`. From `packing/`, run
-frozen project commands with `PYTHON_CPU_COUNT=4`,
-`UV_PROJECT_ENVIRONMENT=/private/tmp/squares-font-review-py314`, and on macOS
-`DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib`. Do not commit or format while
-repository-snapshot tests are running.
+Use the repository’s Python 3.14 environment at `packing/.venv`, never PATH `python3`.
+KPress is the `vendor/kpress` submodule.
+Put local caches, review crops, generated previews, and other disposable evidence under
+the repository’s gitignored `attic/`. From `packing/`, run frozen project commands with
+`PYTHON_CPU_COUNT=4` and, on macOS, `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib`. Do
+not commit or format while repository-snapshot tests are running.
 
 The retained startup campaign is
 [packing/benchmarks/math-startup](../../../../packing/benchmarks/math-startup/README.md).
@@ -1068,10 +1067,9 @@ rule. H-004 had zero measured movement in all 29 cells on both Linux and macOS. 
 records and raw observations were committed in `dfa0a422`. These are historical
 source-qualified results, not a timing claim for this checkpoint.
 
-Local optical evidence lives under `/private/tmp/squares-planetaire-before`,
-`/private/tmp/squares-code-balanced-padding-review`, and
-`/private/tmp/squares-elements-marker-scale-review`. Reproduce it with the retained
-tools rather than depending on those temporary files.
+Local optical evidence belongs under `attic/`, including the Planetaire, balanced code
+padding, and list-marker review crops.
+Reproduce it with the retained tools rather than depending on disposable files.
 
 ## References
 
