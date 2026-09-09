@@ -17,10 +17,11 @@ agenda:
     shared-angle theorem; retain a small independent pair-kernel discriminator and
     candidate-led successors. Review contributed evidence at its own scope, build only
     the interfaces selected pilots need, and expand on closed continuous domains or
-    explicit useful residuals. Its original preparation launched no experiments.
-    Session095 subsequently selected BC259 adoption and BC265 comparative design;
-    other selected cells remain independently owned by Session092. Read each cell's
-    actual protocol rather than treating this activation as blanket launch authority.
+    explicit useful residuals. Session092 accepted the direct contracts and
+    shared geometry controls; complete consumer attachment and broad pilots remain
+    open. Session095 completed BC259 support-ceiling adoption and BC265 comparative
+    design. Session097 completed BC264 pricing without launching Exp129. Each lane
+    retains its own allocation.
   items:
   - id: BC-258
     purpose: research
@@ -131,7 +132,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Which direct resource, anchor, case-composition, angular-transfer, uniform
@@ -161,17 +162,37 @@ agenda:
       BC-261 consumes only the accepted case/Farkas and required resource subset;
       BC-264 consumes the kernel subset. Physical stationarity is reviewed separately
       under BC-267 and is not a gate on direct all-feasible exclusions.
+    outcomes:
+    - scope: Direct case, uniform Farkas, resource, capacity, and anchor implications used by Agenda028
+      classification: achieved
+      result: >-
+        Independently accepted with explicit complete-domain, touching, common-budget
+        and coefficient-error premises. This is proof-contract acceptance, not
+        implementation acceptance or a target result.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Pair-kernel implication, joint symmetry, and exact finite objective-certificate contract
+      classification: achieved
+      result: >-
+        Session097 independently accepted this kernel-specific subset and a source-free
+        finite instrument build. It did not accept the scientific target or a continuum
+        certificate.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md
+      disposition: continue
+      follow_up: think-mq0d
     note: >-
-      Session097 independently accepted the kernel implication, joint symmetry and
-      exact finite objective-certificate contract. This closes only that subset of
-      BC260; it does not disposition the other owner's direct-contract review or
-      accept a continuum certificate. The separate post-freeze review admits a
-      source-free finite instrument build, not its scientific target.
+      Session092 did not assess the kernel, stationary, or finite-motion implications.
+      Session097 later closed the kernel-specific subset. Physical stationarity and
+      finite-motion claims remain under BC267 and do not follow from either accepted
+      subset.
   - id: BC-261
     purpose: tool_validation
     owner_focus: correctness
     instances: [3, 4, 11]
-    state: blocked
+    state: in_progress
     priority: 0
     question: >-
       Can the existing geometry and fixed-angle LP export one independently checked
@@ -305,14 +326,14 @@ agenda:
       The user then explicitly requested continuation. Session097 opened
       this source-free pricing on codex/n11-kernel-pricing, with max feature author
       think-mkik and independent max reviewer think-b271, under think-c53m.
-      The first slice's original cap was21:27 UTC on September7; no target was admitted.
-      Pricing finished at21:23:55 with a proved cubic center-feature obstruction
-      and one eleven-feature16-parameter D4 family. The finite LP and independent
-      exact reader completed separate source-free builds before22:00;
-      all75 controls and independent max code/protocol reviews passed.
+      The first slice's original cap was 21:27 UTC on September 7; no target was admitted.
+      Pricing finished at 21:23:55 with a proved cubic center-feature obstruction
+      and one eleven-feature, 16-parameter D4 family. The finite LP and independent
+      exact reader completed separate source-free builds before 22:00;
+      all 75 controls and independent max code/protocol reviews passed.
       Engine d6f0c403 passed its immutable push gate. Exp129 did not launch:
-      protocol424adf85 failed its records/push gates on a stale synopsis control,
-      so the22:20 launch cutoff passed with zero scientific time. H125 is untested;
+      protocol 424adf85 failed its records/push gates on a stale synopsis control,
+      so the 22:20 launch cutoff passed with zero scientific time. H125 is untested;
       the unspent first invocation requires a fresh explicit allocation and passing
       published admission, not a restart under the expired clock. No degree
       escalation or continuum build is admitted.
@@ -468,12 +489,16 @@ agenda:
 ---
 # Agenda 027 — Compatibility and Restricted Families
 
-**Selected work has executed; the rest requires its own allocation.** Session095
-completed BC259’s independent support-ceiling adoption and BC265’s comparative design.
-Session097 completed BC264’s pricing: a cubic-feature obstruction is proved and a fixed
-eleven-feature family has independently reviewed finite instruments with75 source-free
-controls. Exp129 did not launch because its protocol checks had not passed by the launch
-cutoff; both ultimately failed a stale documentation-control anchor.
+**Selected work has executed; the rest requires its own allocation.**
+[Session 092](../agent-sessions/session-092-hybrid-overnight.md) accepted BC260’s direct
+case, Farkas, and resource subset for Agenda028 and BC261’s direct geometry controls.
+Complete consumer-specific attachment remains open under that interface owner.
+Session095 completed BC259’s independent support-ceiling adoption and BC265’s
+comparative design. Session097 completed BC264’s pricing: a cubic-feature obstruction is
+proved and a fixed eleven-feature family has independently reviewed finite instruments
+with 75 source-free controls.
+Exp129 did not launch because its protocol’s records and push gates failed on a stale
+documentation-control anchor before the launch cutoff.
 H125 remains untested and both scientific allowances are unspent.
 A feasible LP would remain inconclusive.
 The next admission must use a fresh allocation after the checkpoint checks pass,
@@ -482,6 +507,7 @@ preserving the original non-invocation rather than extending its clock.
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.
 Epic `think-sz5t` owns the program; `think-adfk` owns the completed intake and planning.
+Other contract subsets and the broad pilots retain their separate readiness decisions.
 
 ## Parallel Ownership
 

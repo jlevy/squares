@@ -3,9 +3,13 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from pathlib import Path
 
+import pytest
+
 from devtools.codex_log_rollup import build_rollup, render_markdown
+from devtools.codex_task_tree_delta import build_delta
 
 
 def _write_log(path: Path, records: list[dict[str, object]]) -> None:
@@ -690,8 +694,11 @@ def test_rollup_counts_current_compaction_items_without_double_counting_legacy_e
     assert own["compaction_event_count"] == 1
 
 
+@pytest.mark.parametrize("include_foreign_metadata", [False, True])
 def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
     tmp_path: Path,
+    *,
+    include_foreign_metadata: bool,
 ) -> None:
     root_id = "00000000-0000-0000-0000-000000000030"
     child_id = "00000000-0000-0000-0000-000000000031"
@@ -722,14 +729,18 @@ def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
                 parent_id=root_id,
                 agent_path="/root/legacy",
             ),
-            inherited_meta,
+            *([inherited_meta] if include_foreign_metadata else []),
             _event(
                 "2026-08-25T00:00:02.002Z",
                 "task_started",
                 turn_id="inherited-turn",
             ),
             _event("2026-08-25T00:00:02.003Z", "thread_settings_applied"),
-            inherited_meta | {"timestamp": "2026-08-25T00:00:02.004Z"},
+            *(
+                [inherited_meta | {"timestamp": "2026-08-25T00:00:02.004Z"}]
+                if include_foreign_metadata
+                else []
+            ),
             _event("2026-08-25T00:00:02.005Z", "thread_settings_applied"),
             _event(
                 "2026-08-25T00:00:02.006Z",
@@ -840,3 +851,104 @@ def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
             "max_seconds": 2.0,
         }
     ]
+
+
+@pytest.mark.parametrize("include_foreign_metadata", [False, True])
+def test_legacy_child_keeps_fixed_cutoff_receipt_after_late_compaction(
+    tmp_path: Path, *, include_foreign_metadata: bool
+) -> None:
+    root_id = "00000000-0000-0000-0000-000000000040"
+    child_id = "00000000-0000-0000-0000-000000000041"
+    start = "2026-08-25T00:00:01.000Z"
+    cutoff = "2026-08-25T00:00:06.000Z"
+    epoch_ms = int(datetime.fromisoformat("2026-08-25T00:00:00.000Z").timestamp() * 1000)
+    _write_log(
+        tmp_path / "root.jsonl",
+        [_session_meta(root_id, timestamp="2026-08-25T00:00:00.000Z")],
+    )
+    child_log = tmp_path / "child.jsonl"
+    _write_log(
+        child_log,
+        [
+            _session_meta(
+                child_id,
+                timestamp="2026-08-25T00:00:02.000Z",
+                parent_id=root_id,
+                agent_path="/root/child",
+            ),
+            *(
+                [_session_meta(root_id, timestamp="2026-08-25T00:00:02.000Z")]
+                if include_foreign_metadata
+                else []
+            ),
+            _event("2026-08-25T00:00:02.000Z", "task_started", turn_id="owned-turn"),
+            _turn_context(
+                "owned-turn",
+                timestamp="2026-08-25T00:00:02.000Z",
+                model="gpt-test",
+                effort="high",
+            ),
+            _token_count(
+                timestamp="2026-08-25T00:00:04.000Z",
+                input_tokens=100,
+                cached_tokens=50,
+                output_tokens=7,
+                reasoning_tokens=3,
+            ),
+            _event(
+                "2026-08-25T00:00:05.000Z",
+                "task_complete",
+                turn_id="owned-turn",
+                duration_ms=3_000,
+            ),
+        ],
+    )
+    before_append = build_delta(tmp_path, root_id, start=start, end=cutoff)
+    initial_delta = before_append["rollup"]["delta"]
+    assert initial_delta["session_count"] == 1
+    assert initial_delta["completed_task_count"] == 1
+    assert initial_delta["agent_active_seconds"] == 3.0
+    assert initial_delta["models"][0]["tokens"]["output"] == 7
+
+    later_records = [
+        _event("2026-08-25T00:00:07.000Z", "task_started", turn_id="followup-turn"),
+        _turn_context(
+            "followup-turn",
+            timestamp="2026-08-25T00:00:07.000Z",
+            model="gpt-test",
+            effort="high",
+        ),
+        {"timestamp": "2026-08-25T00:00:09.000Z", "type": "compacted", "payload": {}},
+        {"timestamp": "2026-08-25T00:00:09.000Z", "type": "world_state", "payload": {}},
+        _turn_context(
+            "followup-turn",
+            timestamp="2026-08-25T00:00:09.000Z",
+            model="gpt-test",
+            effort="high",
+        ),
+        _event("2026-08-25T00:00:09.000Z", "thread_settings_applied"),
+        _item(
+            "ContextCompaction",
+            timestamp="2026-08-25T00:00:09.000Z",
+            turn_id="followup-turn",
+            started_ms=epoch_ms + 8_000,
+            completed_ms=epoch_ms + 9_000,
+        ),
+        _event(
+            "2026-08-25T00:00:10.000Z",
+            "task_complete",
+            turn_id="followup-turn",
+            duration_ms=3_000,
+        ),
+    ]
+    with child_log.open("a", encoding="utf-8") as handle:
+        handle.writelines(f"{json.dumps(record)}\n" for record in later_records)
+
+    assert build_delta(tmp_path, root_id, start=start, end=cutoff) == before_append
+    refreshed = build_delta(tmp_path, root_id, start=start, end="2026-08-25T00:00:10.000Z")
+    refreshed_delta = refreshed["rollup"]["delta"]
+    assert refreshed_delta["completed_task_count"] == 2
+    assert refreshed_delta["agent_active_seconds"] == 6.0
+    assert refreshed_delta["compaction_event_count"] == 1
+    assert refreshed_delta["compaction_seconds"] == 1.0
+    assert refreshed_delta["models"][0]["tokens"]["output"] == 7

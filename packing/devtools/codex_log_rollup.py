@@ -453,6 +453,7 @@ def _legacy_history_start_line(path: Path, session_id: str) -> int | None:
 
     last_foreign_meta_line: int | None = None
     settings_lines: list[int] = []
+    compaction_settings_pending = False
     try:
         with path.open(encoding="utf-8") as handle:
             for line_number, line in enumerate(handle):
@@ -463,17 +464,28 @@ def _legacy_history_start_line(path: Path, session_id: str) -> int | None:
                 payload = record.get("payload")
                 if not isinstance(payload, dict):
                     continue
-                if record.get("type") == "session_meta" and payload.get("id") != session_id:
+                record_type = record.get("type")
+                if record_type == "session_meta" and payload.get("id") != session_id:
                     last_foreign_meta_line = line_number
-                if (
-                    record.get("type") == "event_msg"
+                if record_type == "compacted":
+                    compaction_settings_pending = True
+                elif (
+                    record_type == "event_msg"
                     and payload.get("type") == "thread_settings_applied"
                 ):
-                    settings_lines.append(line_number)
+                    # Compaction reapplies context/settings without transferring ownership.
+                    if not compaction_settings_pending:
+                        settings_lines.append(line_number)
+                    compaction_settings_pending = False
+                elif record_type not in {"world_state", "turn_context"}:
+                    compaction_settings_pending = False
     except OSError, UnicodeDecodeError:
         return None
     if last_foreign_meta_line is None:
-        return settings_lines[0] if settings_lines else None
+        # Settings can first appear during a later compaction. They establish no
+        # inherited prefix without foreign metadata; retain the owned-turn and
+        # native-duration replay checks in _parse_session instead.
+        return None
     return next(
         (line for line in settings_lines if line > last_foreign_meta_line),
         last_foreign_meta_line,

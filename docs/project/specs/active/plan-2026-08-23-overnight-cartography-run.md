@@ -343,17 +343,29 @@ of it.
 
 For the next supervised exact-research goal, select `think-qfog` to begin the ownership
 continuation after merge publication.
-The corrected checkpoint is certified by its retained raw full log and structured
-component receipts. Agenda 030’s first wave ran as sessions 100 to 104 and its second as
-sessions 107 to 109; BC-303 replayed the strongest claims independently and funded the
+The preceding work reached three checkpoints in sequence.
+Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s
+direct geometry controls.
+Session097 completed BC264’s source-free feature and kernel-contract pricing but did not
+run its scientific target.
+Session098 completed BC282’s exact open-fiber reduction and independent admission, which
+refused the larger target and parked local H120/H118 work.
+Its re-entry conditions remain in
+[X018](../../../../packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md#bc282-checkpoint-and-current-allocation).
+
+Agenda 030’s first wave ran as sessions 100 to 104 and its second as sessions 107
+through 109. BC-303 replayed the strongest claims independently and funded the
 segment-mark cover toward an ownership argument as the next sustained block, with the
 `B = 1` depth polisher as the efficiency block.
 BC-304 has dispositioned every cell and carried the unfinished complements of BC-292 and
 BC-299 forward. The pairwise compatibility argument continues from the independently
 replayed ten-segment theorem; the rounded-cover helper is retracted.
-BC-264’s H114 feature and kernel-contract pricing keeps its stopped checkpoint and its
-certification prerequisite, recorded in its own agenda, and is sequenced after that
-closeout rather than displaced; its requirements are unchanged.
+The corrected Agenda 030 checkpoint is certified by its retained raw full log and
+structured component receipts.
+BC-264’s H114 feature and kernel-contract pricing keeps its stopped checkpoint and
+certification prerequisite in
+[Agenda027](../../../../packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md).
+It is sequenced after this closeout; its requirements are unchanged.
 Exp128 established the attained optimum eleven on H099’s old support, closing BC259.
 Keep H101’s common-support obstruction as a conditional fallback without claiming a
 candidate. Session094 independently certified the diagonal compatibility branch;
@@ -361,6 +373,8 @@ Session095’s fixed collision-augmented axis cover returned `no_chain` without 
 H124 and restricted H036 remain unresolved, and that representation receives no retry.
 Do not repeat a completed experiment or create another candidate without a registered
 result; a float optimum is never a result.
+See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the current evidence
+and allocation boundaries.
 
 ## The numeric runner launch gate
 
