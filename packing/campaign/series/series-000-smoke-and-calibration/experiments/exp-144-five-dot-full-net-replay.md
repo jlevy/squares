@@ -21,6 +21,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python3.14.7; one process
     selftest_passed: true
+    engine_commit: 5195c94c
   instance:
     axis: n
     point: 11
@@ -43,17 +44,34 @@ experiment:
       five atoms,361nonempty directions,2457maximum cells and589549total. No target minimum inspected
       before registration.'
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
-  results: []
+    commit: 5195c94c38c93f058894feb8679e49b0c4446823
+  results:
+  - shape: determination
+    role: outcome
+    question: Do the unchanged five dots cover every strict residual core on all361directions?
+    outcome: criterion_met
+    checked_by: Exact complete replay:361 unique directions, minimum1000001/1000000 at every direction;
+      normalized total5. Source blobcc66f06ddd3f7cc52d8a06d30a3920ba8e992c19,589549densecells. Separate
+      reviewed endpoint and strict-core transfer gives the conditional physical exclusion.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Complete all361directions and obtain exact minimum covered mass strictly greater
       than zero for the unchanged five equal-weight atoms.
-    reason: Prospective full-net replay. Only source reconstruction and geometry cell counts have been
-      inspected; no target minimum has been evaluated.
-  lease:
-    expires: '2026-09-09T05:03:37Z'
+    reason: All361directions have exact positive minimum beta=1000001/1000000. The five unit dots cover
+      the residual net. Reviewed endpoint containment and strict-core transfer exclude the selected four-owner
+      branch, which would need seven residual cores. No universal n11 exclusion.
+  effort:
+    timebox: Five-minute external guard and240second exact-loop guard
+    wall_seconds: 28.95
+    stopped_by: criterion
 ---
 # Exp144: Exact Five-Dot Replay
+
+**Completed:** all361directions passed at source5195c94c in28.95seconds. Every minimum
+is beta; normalization gives exactly five unit dots.
+The source path in the raw reader receipt is relative to the packing build directory;
+its Gitblob and this record identify the repository-relative source unambiguously.
+That display convention remains a small reader follow-up, not a changed input.
 
 The numerical exp143 candidate has five atoms of common weight `beta = 1000001/1000000`.
 Its total is `1000001/200000`. Every exact core mass is an integer multiple of beta.

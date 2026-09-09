@@ -127,7 +127,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
 | [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Historical at this checkpoint: resume think-mq0d for BC-264 subject to its allocation and admission requirements. Agenda030 subsequently superseded that selection with think-qfog; the current SYNOPSIS governs new work. This publication repair does not reprioritize research or authorize a target run. |
 | [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
-| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-8m28 | Retain full-net negative and incomplete generic pilot, audit exact screen, and admit a controlled four-owner pilot before the research cutoff. |
+| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: finish independent union-domain confirmation, then generalize certified small dot patterns across admissible owner classes. |
 
 ### Workflow summary
 
@@ -144,7 +144,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `pipeline-improvement` | 26 | 1 | 138 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
-| `review-planning-oversight` | 0 | 0 | 7 | 0 |
+| `review-planning-oversight` | 0 | 0 | 8 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -666,16 +666,16 @@ Status: **paused**. Publish the exact ownership results derived during PR 127 re
 
 ### [agenda-032](agendas/agenda-032-conditional-owner-sprint.md) — Two-Hour Conditional-Owner Sprint
 
-Status: **active**. Test whether unavoidable corner owners make residual covering arguments stronger at L = 96/25, using exact fractional-family obstructions before costly cover searches. Preserve scope, failed instrumentation, separate usage, and an executable next agenda. No global bound changes without exact exhaustive evidence.
+Status: **completed**. Test whether unavoidable corner owners make residual covering arguments stronger at L = 96/25, using exact fractional-family obstructions before costly cover searches. Preserve scope, failed instrumentation, separate usage, and an executable next agenda. No global bound changes without exact exhaustive evidence.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-310 | tool_validation | 11 | complete | 1 | think-9yvj | Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487, gap0.17660343270100132. BC313 owns exact/full-net promotion. |
 | BC-311 | research | 11 | complete | 1 | think-mwxg | The independent audit confirms all subthreshold survivor results. Stop unchanged-weight deletion filters. |
 | BC-312 | research | 11 | complete | 1 | think-9cpg | One-owner numerical comparison accepted: point11.5745, triangle10.5556, endpoint10.3889. Endpoint remains above10. |
-| BC-313 | research | 11 | in_progress | 2 | think-9cpg | Exp139 rejected the unscaled fixed-corner proposal and gave normalized8.2051. Exp144 now tests the five-dot four-owner endpoint candidate on full361directions. |
+| BC-313 | research | 11 | complete | 2 | think-9cpg | Exp144 certifies five dots over all361directions; reviewed transfer excludes this selected four-owner branch. Generalize under think-yhw2. |
 | BC-315 | research | 11 | complete | 1 | think-9cpg | Four-owner numerical comparison accepted: point9, triangle6, endpoint5. Exp144 verifies the fixed five-dot candidate on the complete net. |
-| BC-314 | measurement_validation | 11 | in_progress | 1 | think-ns6k | Updated session 113, generated campaign views, actual validation receipts and PR 137. |
+| BC-314 | measurement_validation | 11 | complete | 1 | think-ns6k | Publish final results and separately attributed usage; next selection think-yhw2. |
 
 ## Series
 
@@ -804,7 +804,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | H-139 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 2 |  | 41s wall |
 | H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
 | H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
-| H-142 | running | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 |  |  |
+| H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 |  | 29s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -889,7 +889,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 | exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
-### accepted (33)
+### accepted (34)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -926,6 +926,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-136 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-113 | H-136 | The predeclared numerical paired margin is positive by0.17660343270100132. Residual mass remains above7; this is a finite-support finite-direction mechanism result, not a packing exclusion or exact optimum-gap bound. |
 | exp-142 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | All four numerical arms converged; point-minus-endpoint gain1.185626102292769>0.001. Point-extension and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net verification remains separate. |
 | exp-143 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-141 | All four numerical arms converged; point-minus-endpoint gain4.0>0.001. Point-extension and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net verification remains separate. |
+| exp-144 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-142 | All361directions have exact positive minimum beta=1000001/1000000. The five unit dots cover the residual net. Reviewed endpoint containment and strict-core transfer exclude the selected four-owner branch, which would need seven residual cores. No universal n11 exclusion. |
 
 ### baseline (11)
 
@@ -942,12 +943,6 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-144 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-142 | Prospective full-net replay. Only source reconstruction and geometry cell counts have been inspected; no target minimum has been evaluated. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -969,7 +964,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 
 ## Effort
 
-100 rounds, 2152.1 agent-minutes, 1362.5 wall-minutes.
+100 rounds, 2152.1 agent-minutes, 1363.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

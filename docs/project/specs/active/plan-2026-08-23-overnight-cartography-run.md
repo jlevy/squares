@@ -341,12 +341,12 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-8m28`, Agenda032’s two-hour
-conditional-owner sprint in session113, from03:18:37Z to05:18:37Z. Session112 retains
-the earlier continuation.
-Exp136 completed its numerical pilot; exp139 found a full-net coverage deficit, and
-exp140 remains unresolved after a round-limit stop.
-PR137 is the single continuation, with usage separated at the sprint boundary.
+For the next supervised exact-research goal, select `think-yhw2`: generalize Agenda032’s
+exact five-dot conditional exclusion after the completed two-hour session113. First
+finish independent union-domain confirmation, then reuse global symmetries and
+occupied-union containment across admissible owner classes before new LP searches.
+The global n11 bracket is unchanged.
+PR137 retains the full sprint and separate usage.
 
 The preceding work reached three checkpoints in sequence.
 Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s

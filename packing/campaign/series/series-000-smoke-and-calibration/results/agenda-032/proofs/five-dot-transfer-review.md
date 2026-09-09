@@ -1,16 +1,22 @@
 # Exp143 Five-Dot Candidate: Mathematical Review
 
 **Status:** independent analytic and saved-atom scrutiny by the existing GPT-6 Astra
-agent at extra-high reasoning, 2026-09-09. The coordinator completed a separate
-algebraic review before exp144: the endpoint vertices satisfy every intermediate
-quarter-square inequality, the net shrink is strict, and positive equal-weight coverage
-gives the five-dot pigeonhole exclusion.
-No coverage target, numerical optimization, or full-net replay was run here.
+agent at extra-high reasoning, 2026-09-09. The coordinator performs the requested max
+review. No coverage target, numerical optimization, or full-net replay was run here.
 
-The candidate is potentially a conditional packing certificate.
-It is not yet a certificate: the producer checked nine residual orientations, and its
-exact-validation field is null.
-The following reduction specifies the decisive exact check.
+The producer checked nine residual orientations.
+Subsequently, exp144 completed the full 361-direction exact replay with minimum $\beta$
+in every direction and normalized mass five.
+Receipt scrutiny confirmed indices 0 through 360 and their labels exactly once, positive
+reachable-cell counts, and source blob `cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19`
+against both the saved exp143 file and commit
+`5195c94c38c93f058894feb8679e49b0c4446823`. The mathematical transfer below therefore
+gives a conditional exclusion of this owner branch.
+Independent domain-union confirmation is deferred to the next slice; no exp145 target
+was registered or launched.
+This review did not rerun the target.
+
+[Exp144 exact receipt](/Users/levy/.codex/worktrees/88e2/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json)
 
 ## The Exact Candidate
 

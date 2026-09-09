@@ -54,6 +54,11 @@ retained in the five-dot review.
 A negative result refutes this candidate; it does not refute the numerical gain or the
 broader conditional-cover method.
 
+Exp144 confirms the claim on all361directions. The common minimum equals beta, so the
+normalized cover is exactly five dots.
+The conditional physical implication uses the separately reviewed containment and
+strict-core transfer.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

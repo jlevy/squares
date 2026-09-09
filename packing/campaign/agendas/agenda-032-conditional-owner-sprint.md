@@ -9,7 +9,7 @@ agenda:
   id: agenda-032
   title: Two-Hour Conditional-Owner Sprint
   updated: '2026-09-09'
-  status: active
+  status: completed
   objective: Test whether unavoidable corner owners make residual covering arguments stronger at L = 96/25,
     using exact fractional-family obstructions before costly cover searches. Preserve scope, failed instrumentation,
     separate usage, and an executable next agenda. No global bound changes without exact exhaustive evidence.
@@ -40,9 +40,18 @@ agenda:
     program: n11-structure-and-conditional-dots
     next_evidence: 'Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487,
       gap0.17660343270100132. BC313 owns exact/full-net promotion.'
-    artifacts:
+    artifacts: &id001
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-136-paired-cover.json
+    outcomes:
+    - scope: Can exact event reconstruction repair the thin-cell separator and permit a fresh matched
+        fixed-corner pilot?
+      classification: achieved
+      result: 'Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487,
+        gap0.17660343270100132. BC313 owns exact/full-net promotion.'
+      evidence: *id001
+      disposition: retire-success
+      follow_up: null
   - id: BC-311
     purpose: research
     owner_focus: efficiency
@@ -72,10 +81,19 @@ agenda:
     hypotheses:
     - H-137
     - H-138
-    artifacts:
+    artifacts: &id002
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md
+    outcomes:
+    - scope: Does deleting poses that meet guaranteed owner footprints from the retained depth-one fractional
+        family already rule out useful covers for those branches?
+      classification: bounded-negative
+      result: The independent audit confirms all subthreshold survivor results. Stop unchanged-weight
+        deletion filters.
+      evidence: *id002
+      disposition: retire-negative
+      follow_up: null
   - id: BC-312
     purpose: research
     owner_focus: insight
@@ -104,14 +122,22 @@ agenda:
     hypotheses:
     - H-111
     - H-139
-    artifacts:
+    artifacts: &id003
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-142-one-owner-completion.md
+    outcomes:
+    - scope: Do guaranteed area footprints improve the covering objective beyond merely owning a point?
+      classification: achieved
+      result: 'One-owner numerical comparison accepted: point11.5745, triangle10.5556, endpoint10.3889.
+        Endpoint remains above10.'
+      evidence: *id003
+      disposition: retire-success
+      follow_up: null
   - id: BC-313
     purpose: research
     owner_focus: correctness
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 2
     question: Does a promising conditional numerical cover survive rational reconstruction, the full direction
       net and all required owner classes?
@@ -128,11 +154,23 @@ agenda:
     depends_on:
     - BC-310
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp139 rejected the unscaled fixed-corner proposal and gave normalized8.2051. Exp144
-      now tests the five-dot four-owner endpoint candidate on full361directions.
+    next_evidence: Exp144 certifies five dots over all361directions; reviewed transfer excludes this selected
+      four-owner branch. Generalize under think-yhw2.
     hypotheses:
     - H-140
     - H-142
+    artifacts: &id004
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
+    outcomes:
+    - scope: Does a promising conditional numerical cover survive rational reconstruction, the full direction
+        net and all required owner classes?
+      classification: achieved
+      result: Exp144 certifies five dots over all361directions; reviewed transfer excludes this selected
+        four-owner branch. Generalize under think-yhw2.
+      evidence: *id004
+      disposition: retire-success
+      follow_up: null
   - id: BC-315
     purpose: research
     owner_focus: insight
@@ -159,14 +197,22 @@ agenda:
       the fixed five-dot candidate on the complete net.'
     hypotheses:
     - H-141
-    artifacts:
+    artifacts: &id005
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-143-h141-four-owner-footprint-matched-gain.md
+    outcomes:
+    - scope: Do four guaranteed occupied regions improve the matched cover beyond four bare marks?
+      classification: achieved
+      result: 'Four-owner numerical comparison accepted: point9, triangle6, endpoint5. Exp144 verifies
+        the fixed five-dot candidate on the complete net.'
+      evidence: *id005
+      disposition: retire-success
+      follow_up: null
   - id: BC-314
     purpose: measurement_validation
     owner_focus: process
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: What did the sprint establish, what did each branch cost, and what should run next?
     budget: Integration and CI run beside research; final fifteen minutes from 05:03:37Z to 05:18:37Z
@@ -182,9 +228,86 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Updated session 113, generated campaign views, actual validation receipts and PR 137.
+    next_evidence: Publish final results and separately attributed usage; next selection think-yhw2.
+    artifacts: &id006
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
+    - packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md
+    outcomes:
+    - scope: What did the sprint establish, what did each branch cost, and what should run next?
+      classification: achieved
+      result: Publish final results and separately attributed usage; next selection think-yhw2.
+      evidence: *id006
+      disposition: retire-success
+      follow_up: null
+  closeout:
+    documentation_review:
+    - path: README.md
+      decision: checked-current
+      reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
+        by this scoped result.
+    - path: SYNOPSIS.md
+      decision: updated
+      reason: Updated sprint results and selected continuation.
+    - path: TUTORIAL.md
+      decision: checked-current
+      reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
+        by this scoped result.
+    - path: conventions.md
+      decision: checked-current
+      reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
+        by this scoped result.
+    - path: development.md
+      decision: checked-current
+      reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
+        by this scoped result.
+    - path: operating-rules.md
+      decision: checked-current
+      reason: No global bracket, basic tutorial, development contract, or operating-rule change is required
+        by this scoped result.
+    changes:
+    - name: conditional-five-dot-exclusion
+      result: Exact full361five-dot coverage plus reviewed strict-core transfer excludes one four-owner
+        branch; globaln11bracket unchanged.
+      paths:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
+    validation:
+    - scope: published5195checkpoint
+      status: passed
+      evidence: Local push129.33seconds,1082tests; hosted fast components all success. Earlier e334 deferred
+        checkpoint all success; newer integrated deferred checkpoint34312252411 subsequently passed all lanes on merge snapshotaabaac6a. Final delta push passed127.89seconds with880tests.
+    replanning:
+      candidates:
+      - bead: think-yhw2
+        workflow: insight-iteration
+        priority: 1
+        rationale: Finish independent union-domain audit and reuse certified small dot patterns over admissible
+          owner classes before newLPs.
+      - bead: think-7lp3
+        workflow: efficiency-loop
+        priority: 2
+        rationale: Full-support pricing remains uninvoked; retain it behind the newly successful geometric
+          conditioning mechanism.
+      selected:
+        bead: think-yhw2
+        workflow: insight-iteration
+        rationale: The sprint produced an exact conditional exclusion; the next bottleneck is broader
+          owner-class coverage.
+      operator_input:
+        status: confirmed
+        note: User selected a two-hour sprint on geometric conditioning and parallel experiments; this
+          is the evidence-based next slice, with no extra target launched after the cutoff.
 ---
-# Agenda 032: Conditional Owners at n = 11
+# Agenda032: Completed Conditional-Owner Sprint
+
+The two-hour sprint produced an exact five-dot conditional exclusion for one four-owner
+branch. See the
+[sprint report](../series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md)
+for the complete explanation, successful and negative experiments, and next priorities.
+The independent union-domain confirmation did not run; no exp145 was registered.
+The next selected bead is `think-yhw2`. The global n11 bracket is unchanged.
+
+## Retained opening plan and intermediate checkpoints
 
 The owner requested this two-hour sprint at **03:18:37Z on September 9, 2026**. The work
 window ends at **05:03:37Z**, followed by fifteen minutes for finalization.

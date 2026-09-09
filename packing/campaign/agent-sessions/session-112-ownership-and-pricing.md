@@ -1,5 +1,5 @@
 ---
-title: session-112 — n = 11 ownership and pricing continuation
+title: "session-112 \u2014 n = 11 ownership and pricing continuation"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -583,6 +583,7 @@ session:
     arithmetic checker; geometric proof obligations are stated separately.'
   - 'Expanded integrated instruments at 82df41bd: 64 focused tests passed in 2.46 seconds, including historical
     Git-blob, sparse traversal, malformed revision, arithmetic and usage-cutoff controls.'
+  - 'full gate: fast at 5195c94c: passed (continuation checkpoint covers the inherited source and repairs)'
   stop_reason: The owner started a new two-hour sprint at03:18:37Z after exp135 stopped unresolved. Its
     numerical result and new analytic footprint lemma are retained; the new integration checkpoint is
     assigned to think-8m28.
@@ -590,7 +591,6 @@ session:
     experiments and publish the merged checkpoint.'
   started_at: '2026-09-08T23:23:55Z'
   deadline_at: '2026-09-09T04:23:55Z'
-  certification_pending: think-8m28
 ---
 # Session 112 — Ownership and Pricing Continuation
 

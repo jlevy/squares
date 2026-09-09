@@ -514,6 +514,7 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/multiple-footprint-domain-contract.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/receipts-and-multi-domain-review.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md, role: research-report, authority: record, lifecycle: retained}
 collections:
   - pattern: packing/benchmarks/math-startup/experiments/*.md
     role: experiment-record

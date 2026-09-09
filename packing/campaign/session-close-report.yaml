@@ -1805,9 +1805,9 @@ sessions:
     snapshot_incomplete: true
 - id: session-113
   title: "Two-hour n = 11 conditional-owner sprint"
-  status: in_progress
+  status: completed
   primary_bead: think-8m28
-  phases: 1
+  phases: 2
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-113.yaml
@@ -1818,8 +1818,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-113.yaml
-    model_responses: 320
-    agent_hours: 2.37
-    active_union_hours: 1.23
-    wall_hours: 1.23
+    model_responses: 973
+    agent_hours: 6.99
+    active_union_hours: 1.97
+    wall_hours: 1.97
     snapshot_incomplete: true
