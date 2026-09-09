@@ -3163,6 +3163,7 @@ round that names the hypothesis, control roles included.
 | [H-136](packing/campaign/hypotheses/H-136-wall-pressure-dense-objective.md) | refuted | The isotropic compaction surrogate optimizes a disc rather than a square and regresses both proved controls | 1 | 39.1m wall |
 | [H-137](packing/campaign/hypotheses/H-137-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart on four cells of five at equal refined optima, with disjoint ranges on two | 1 | 81.2m wall |
 | [H-138](packing/campaign/hypotheses/H-138-cooling-schedule-length.md) | refuted | A tenfold anneal length moves three cells of eleven against the six declared, and recovers three quarters of what the new move family recovers | 1 | 71.3m wall |
+| [H-139](packing/campaign/hypotheses/H-139-projection-search-reaches-feasibility.md) | unresolved | Every run ends on an exactly feasible packing, 28 of 28 against 0 of 48 for the penalty physics, but only one cell of four comes within a per cent | 1 | 15.6m wall |
 | [H-127](packing/campaign/hypotheses/H-127-corner-class-surplus-at-q.md) | blocked | Pricing the four corner blockers’ cores at 96/25 gives a covering surplus; the region-class row generator is not built | 0 | — |
 | [H-128](packing/campaign/hypotheses/H-128-corner-skeleton-ownership.md) | unresolved | A valid measure at 96/25 with T-018’s corner atoms at weight 3/20 and mass below 11.15 exists; the unsuccessful finite support does not refute this claim | 1 | 63.5m wall |
 | [H-129](packing/campaign/hypotheses/H-129-unit-shrink-fractional-value-near-u.md) | blocked | The unit-square fractional value at 3.87 stays below eleven; a lower family at least eleven obstructs the specified one-body certificate, while a smaller family is inconclusive | 0 | — |
@@ -3434,9 +3435,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 94 rounds registered in `series-000`.
+There are 95 rounds registered in `series-000`.
 
-They record 2417.1 agent-minutes and 1656.8 wall-minutes.
+They record 2512.1 agent-minutes and 1672.5 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3566,6 +3567,7 @@ archive beside it.
 | [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-round-1-pressure.md) | 11 | target | H-136 | Constant wall-pressure term against the stock energy on eleven non-grid cells | One cell improves and three regress; every n=5 seed returns 2*sqrt(2) and every n=11 seed the grid | rejected |
 | [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-basin-hopping.md) | 11 | target | H-137 | 500 refined local optima per condition over the LP-in-cell quench | Basin hopping wins four cells of five; every emitted pose repaired and independently re-verified | accepted |
 | [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-round-1-schedule.md) | 11 | target | H-138 | Anneal length crossed with move set, two levels each | Both factors move the result and combine; the first factorial crossing found for this problem | rejected |
+| [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-projection-search.md) | 11 | target | H-139 | Divide and concur with relaxed-reflect-reflect over a bounded container, against the penalty calibration | The first search here whose every output is a packing an independent oracle confirms; it leaves the trivial grid on all four cells and stalls 1.2 to 2.8 per cent above three of them | unresolved |
 | [exp-130](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-130-h130-robust-end-band-at-q.md) | 11 | proof | H-130 | Class program on end-cell unions, composition (11, 0), decided exactly by decide_class_program | Robust end band excluded at 96/25: [0°, 1.7139°] ∪ [43.5293°, 45°] on grid 79, then [0°, 10.3875°] ∪ [43.0737°, 45°] on grid 119 | accepted |
 | [exp-131](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-131-h131-near-axis-counts-replay-at-q.md) | 11 | proof | H-131 | Registered replay of the near-axis and near-diagonal count classes through decide_class_program | Every count reproduces exactly: at most nine within 6.4537°, ten within 10.3875°, nine within 2.155° of 45°, ten within 2.44° of 40.19°, ten in [30.01°, 45°] | accepted |
 | [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-h134-segment-mark-cover-at-q.md) | 11 | proof | H-134 | Interval reader over pose space with every certified leaf re-decided exactly; the falsifier engine’s exact escapes for point sets | Ten segments of length 1/10 on Stromquist’s ten points at 96/25 are unavoidable at tolerance 3/500; the independent replay confirms the cover and closes the missing far-wall sliver | accepted |
@@ -3669,10 +3671,11 @@ archive beside it.
 | exp-136 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells | 2349.0 s | 25 m | criterion | `9ae7700` |
 | exp-137 | 1,000 refined local optima, 500 per condition | 4871.0 s | 40 m | criterion | `9ae7700` |
 | exp-138 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 4281.0 s | 45 m | criterion | `9ae7700` |
+| exp-139 | 48 to 95 solver calls per ratchet run, 5,000 iterations each at most, 28 runs over two arms | 937.0 s | 95 m | criterion | `ffa6d01` |
 
-### What the 94 rounds jointly establish
+### What the 95 rounds jointly establish
 
-The 94 rounds use 2417.1 agent-minutes and 1656.8 wall-minutes under the campaign’s
+The 95 rounds use 2512.1 agent-minutes and 1672.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

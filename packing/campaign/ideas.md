@@ -276,6 +276,7 @@ Row 86 belongs to the pending refined-core transport.
 | 120 | Give every square a nonzero derivative with an aggregate wall-pressure term | registered | [H-136](hypotheses/H-136-wall-pressure-dense-objective.md) | The cheap surrogate for the inflation formulation, ablatable against it; the reported side stays required_side so the term can never flatter a result. |
 | 121 | Spend the budget in refined local optima rather than moves | registered | [H-137](hypotheses/H-137-basin-hopping-over-the-lp-quench.md) | Basin hopping against multistart over the LP-in-cell quench, in the currency Ellsworth’s published statistics use. |
 | 122 | Separate cooling-schedule LENGTH from cooling-schedule SHAPE | registered | [H-138](hypotheses/H-138-cooling-schedule-length.md) | Registered mid-calibration after the ablation meant to refute a schedule explanation produced one; four temperature changes did nothing and a tenfold anneal length left the grid. |
+| 123 | Search by projection instead of by an objective | registered | [H-139](hypotheses/H-139-projection-search-reaches-feasibility.md) | The one mechanism in the 2026-09-09 simulation survey with a cold whole-benchmark result on the sibling problem, and the only search here whose output is a packing by construction rather than by tolerance. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.

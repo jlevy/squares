@@ -644,7 +644,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 94 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 95 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -764,6 +764,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | H-136 | refuted | search | Adding an aggregate inward wall-pressure term to the annealing energy, | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 25m agent + 39.1m wall |
 | H-137 | confirmed | search | At an equal budget of refined local optima, basin hopping -- perturbin | n: 5 10 11* 17 19 | 1 |  | 40m agent + 81.2m wall |
 | H-138 | refuted | search | Raising only the anneal length from 400,000 to 4,000,000 steps per res | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 45m agent + 71.3m wall |
+| H-139 | unresolved | search | Divide and concur searched with relaxed-reflect-reflect, run cold over | n: 5 10 11* 17 | 1 |  | 95m agent + 15.6m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -805,7 +806,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (21)
+### unresolved (22)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -830,6 +831,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-126 | series-000 | 11 | Session094 coordinator, BC243; max mathematical judgment | H-099 | The conservative graph contains a reported overweight clique, so this sufficient depth certificate failed. No common geometric interior was certified and no independent target reader ran. H099 and its fixed-support bracket remain unresolved and unchanged. |
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
 | exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
+| exp-139 | series-000 | 11 | claude-opus-5 | H-139 | The guard clause is met decisively and is the point of the round: 16 of 16 runs end on packings that an independent oracle confirms, against 0 of 48 for the penalty physics, which settles the precondition the 2026-09-08 calibration failed. The accuracy clause is missed by three cells of four. The failure is localised rather than diffuse -- every failed run failed at the first tightening and never moved -- so the repair is in the container schedule and the restart policy, not in the projections. |
 
 ### blocked (8)
 
@@ -915,7 +917,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 
 ## Effort
 
-94 rounds, 2417.1 agent-minutes, 1656.8 wall-minutes.
+95 rounds, 2512.1 agent-minutes, 1672.5 wall-minutes.
 
 ## Exploration reports not yet codified
 
