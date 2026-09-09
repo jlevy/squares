@@ -438,6 +438,7 @@ prevent those local facts from being mistaken for a global exclusion.
 | 134 | Screen all four-owner footprint combinations by shared exact deletion masks | registered | [H-138](hypotheses/H-138-four-owner-dual-salvage.md) | Test the minimum surviving mass over all65536 combinations against seven, retaining negative or unresolved outcomes. |
 | 135 | Compare owned-point and area-footprint covers on matched independent sites | registered | [H-139](hypotheses/H-139-owner-footprint-matched-gain.md) | Four numerical arms distinguish geometry gain from the change in remaining-square count. |
 | 136 | Check the fixed-corner rational candidate across every retained direction | registered | [H-140](hypotheses/H-140-fixed-corner-full-net-cover.md) | Exact full-net minimum tests the unchanged weights; positive minima also permit a separately labeled normalized feasible mass. |
+| 137 | Compare four guaranteed occupied regions with four bare marks | registered | [H-141](hypotheses/H-141-four-owner-footprint-matched-gain.md) | One compatible owner configuration tests the residual-seven mechanism before any exhaustive branch expansion. |
 
 ## Dead ends
 

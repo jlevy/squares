@@ -22,6 +22,12 @@ import numpy as np
 from scipy.optimize import linprog
 from strif import atomic_write_text
 
+from devtools.multi_owner_domains import (
+    MultiFootprintDomain,
+    centre_in_strict_multi_footprint_domain,
+    compatible_m1_j0_footprints,
+    multi_footprint_domain,
+)
 from devtools.owner_footprints import (
     CORE_SIDE,
     OUTER_SIDE,
@@ -66,7 +72,8 @@ class Arm:
     sites: SiteSet
     removed_sites: tuple[Point, ...]
     pieces_by_direction: tuple[tuple[Polygon, ...], ...]
-    domains_by_direction: tuple[StrictResidualDomain | None, ...]
+    domains_by_direction: tuple[StrictResidualDomain | MultiFootprintDomain | None, ...]
+    footprints: tuple[Polygon, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -171,6 +178,23 @@ def _singleton_subset(
     return SiteSet(sites.outer_side, retained), removed
 
 
+def _singleton_subset_union(
+    sites: SiteSet, footprints: tuple[Polygon, ...]
+) -> tuple[SiteSet, tuple[Point, ...]]:
+    if any(len(orbit) != 1 for orbit in sites.orbits):
+        raise ValueError("owner-footprint arms require independent singleton variables")
+    removed = tuple(
+        orbit[0]
+        for orbit in sites.orbits
+        if any(point_in_closed_convex_polygon(orbit[0], footprint) for footprint in footprints)
+    )
+    removed_set = set(removed)
+    retained = tuple(orbit for orbit in sites.orbits if orbit[0] not in removed_set)
+    if not retained:
+        raise ValueError("footprint union removes the entire candidate support")
+    return SiteSet(sites.outer_side, retained), removed
+
+
 def build_arms(
     owner_class: OwnerClass,
     sites: SiteSet,
@@ -210,7 +234,68 @@ def build_arms(
                 raise ValueError(f"{label} has an empty residual domain at {direction.label}")
             pieces.append(direction_pieces)
             domains.append(domain)
-        arms.append(Arm(label, footprint, arm_sites, removed, tuple(pieces), tuple(domains)))
+        arms.append(
+            Arm(
+                label,
+                footprint,
+                arm_sites,
+                removed,
+                tuple(pieces),
+                tuple(domains),
+                () if footprint is None else (footprint,),
+            )
+        )
+    return tuple(arms)
+
+
+def build_four_owner_arms(
+    sites: SiteSet,
+    directions: tuple[Direction, ...],
+    *,
+    square_side: Fraction = CORE_SIDE,
+    direction_manifest: OwnerBranchManifest | None = None,
+) -> tuple[Arm, ...]:
+    """Build matched arms for four compatible reflected m1/j0 owner footprints."""
+
+    manifest = direction_manifest or owner_branch_manifest()
+    footprint_sets: dict[str, tuple[Polygon, ...]] = {
+        "unrestricted": (),
+        **{
+            kind: compatible_m1_j0_footprints(kind, manifest=manifest) for kind in ARM_ORDER[1:]
+        },
+    }
+    arms: list[Arm] = []
+    for label in ARM_ORDER:
+        footprints = footprint_sets[label]
+        arm_sites, removed = _singleton_subset_union(sites, footprints)
+        pieces: list[tuple[Polygon, ...]] = []
+        domains: list[StrictResidualDomain | MultiFootprintDomain | None] = []
+        for direction in directions:
+            if not footprints:
+                direction_pieces = (
+                    container_centre_polygon(sites.outer_side, square_side, direction),
+                )
+                domain = None
+            else:
+                domain = multi_footprint_domain(
+                    sites.outer_side, square_side, direction, footprints
+                )
+                direction_pieces = domain.components
+            if not direction_pieces and not footprints:
+                raise ValueError(f"{label} has an empty residual domain at {direction.label}")
+            pieces.append(direction_pieces)
+            domains.append(domain)
+        arms.append(
+            Arm(
+                label,
+                None,
+                arm_sites,
+                removed,
+                tuple(pieces),
+                tuple(domains),
+                footprints,
+            )
+        )
     return tuple(arms)
 
 
@@ -222,6 +307,9 @@ def estimate_complexity(
     half = square_side / 2
     estimates: list[int] = []
     for direction, pieces in zip(directions, arm.pieces_by_direction, strict=True):
+        if not pieces:
+            estimates.append(0)
+            continue
         projected = tuple(
             (
                 direction.ux * x + direction.uy * y,
@@ -334,6 +422,8 @@ def _exact_witness_is_admissible(
     square_side: Fraction,
 ) -> bool:
     domain = arm.domains_by_direction[direction_index]
+    if isinstance(domain, MultiFootprintDomain):
+        return centre_in_strict_multi_footprint_domain(centre, domain)
     if domain is not None:
         return centre_in_strict_residual_domain(centre, domain)
     container = container_centre_polygon(arm.sites.outer_side, square_side, direction)
@@ -432,6 +522,8 @@ def solve_program(  # noqa: PLR0911 -- each stop preserves a distinct partial re
         violated = added = dense_cells = 0
         least = float("inf")
         for direction_index, direction in enumerate(directions):
+            if not arm.pieces_by_direction[direction_index]:
+                continue
             if time.perf_counter() >= deadline:
                 return stopped(f"deadline {deadline_seconds:g}s reached during separation")
             try:
@@ -460,6 +552,8 @@ def solve_program(  # noqa: PLR0911 -- each stop preserves a distinct partial re
                     held.add(key)
                     rows.append(row)
                     added += 1
+        if least == float("inf"):
+            least = 1.0
         least_covered = least
         if violated == 0 or (added == 0 and 1 - least <= LP_FEASIBILITY):
             objective = float(weights.sum())
@@ -586,6 +680,7 @@ def _fraction_polygon(polygon: Polygon | None) -> list[list[str]] | None:
 def _arm_record(arm: Arm, complexity: Complexity) -> dict[str, object]:
     return {
         "footprint": _fraction_polygon(arm.footprint),
+        "footprint_union": [_fraction_polygon(footprint) for footprint in arm.footprints],
         "available_sites": arm.sites.size + len(arm.removed_sites),
         "retained_singleton_variables": arm.sites.size,
         "removed_inside_closed_footprint": [[str(x), str(y)] for x, y in arm.removed_sites],
@@ -605,6 +700,7 @@ def build_receipt(
     grid_count: int = 19,
     inset: Fraction = Fraction(1, 2),
     folded_indices: tuple[int, ...] = DEFAULT_FOLDED_INDICES,
+    owner_count: int = 1,
 ) -> tuple[dict[str, object], tuple[Arm, ...], tuple[Direction, ...]]:
     """Build the frozen settings and complexity receipt without solving any arm."""
 
@@ -620,12 +716,23 @@ def build_receipt(
         inset=inset,
         mark=owner_class.mark,
     )
-    arms = build_arms(
-        owner_class,
-        sites,
-        directions,
-        direction_manifest=manifest,
-    )
+    if owner_count == 1:
+        arms = build_arms(
+            owner_class,
+            sites,
+            directions,
+            direction_manifest=manifest,
+        )
+    elif owner_count == 4:
+        if class_id != "bottom-left:m1:j0":
+            raise ValueError("the four-owner pilot is frozen to reflected m1/j0 classes")
+        arms = build_four_owner_arms(
+            sites,
+            directions,
+            direction_manifest=manifest,
+        )
+    else:
+        raise ValueError("owner_count must be 1 or 4")
     complexities = {arm.label: estimate_complexity(arm, CORE_SIDE, directions) for arm in arms}
     receipt: dict[str, object] = {
         "schema": "owner-footprint-cover/v1",
@@ -642,6 +749,8 @@ def build_receipt(
             "mark": [str(value) for value in owner_class.mark],
             "sector": owner_class.sector,
             "reflected_class_id": owner_class.reflected_class_id,
+            "owner_count": owner_count,
+            "four_owner_map": ("(x,y),(q-x,y),(x,q-y),(q-x,q-y)" if owner_count == 4 else None),
         },
         "settings": {
             "outer_side": str(OUTER_SIDE),
@@ -653,6 +762,8 @@ def build_receipt(
             "selected_canonical_directions": len(directions),
             "full_owner_orientation_count": manifest.directions.full_count,
             "owner_footprints_derived_from_full_manifest": True,
+            "owner_count": owner_count,
+            "residual_square_count": 11 - owner_count,
         },
         "direction_provenance": [
             {
@@ -764,6 +875,15 @@ def run_arms(
         "MP": objectives["endpoint"],
         "Mm_minus_MT": objectives["point"] - objectives["triangle"],
         "MT_minus_MP": objectives["triangle"] - objectives["endpoint"],
+        "M0_minus_Mm": objectives["unrestricted"] - objectives["point"],
+        "point_extension_upper_bound": settings.get("owner_count"),
+        "point_extension_guard_passed": (
+            objectives["unrestricted"] - objectives["point"]
+            <= float(settings.get("owner_count", 1)) + 1e-7
+        ),
+        "endpoint_below_residual_count": (
+            objectives["endpoint"] < float(settings.get("residual_square_count", 10))
+        ),
         "nested_monotonicity_observed": (
             objectives["endpoint"] <= objectives["triangle"] + 1e-7
             and objectives["triangle"] <= objectives["point"] + 1e-7
@@ -796,6 +916,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--class-id", default="bottom-left:m1:j0")
+    parser.add_argument("--owner-count", type=int, choices=(1, 4), default=1)
     parser.add_argument("--grid-count", type=int, default=19)
     parser.add_argument("--inset", type=Fraction, default=Fraction(1, 2))
     parser.add_argument("--folded-indices", type=_parse_indices, default=DEFAULT_FOLDED_INDICES)
@@ -828,6 +949,7 @@ def main(argv: list[str] | None = None) -> int:
         grid_count=args.grid_count,
         inset=args.inset,
         folded_indices=args.folded_indices,
+        owner_count=args.owner_count,
     )
     if not args.estimate_only:
         receipt = run_arms(

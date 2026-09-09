@@ -672,15 +672,16 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-310 | tool_validation | 11 | complete | 1 | think-9yvj | Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487, gap0.17660343270100132. BC313 owns exact/full-net promotion. |
 | BC-311 | research | 11 | in_progress | 1 | think-mwxg | Exp137/138 foundnoobstruction in anyclass; independent receipt audit pending. Further fixed-weight deletion is dominated by the point-only result. |
-| BC-312 | research | 11 | in_progress | 1 | think-9cpg | Exp140 is the prospective matched four-arm pilot after controlled genericexact-fallback integration. |
-| BC-313 | research | 11 | in_progress | 2 | think-9cpg | Exp139 exactfull181net replay of unchanged exp136residualatoms; report rawminimum and positive-minimum normalizedfeasiblemass separately. |
+| BC-312 | research | 11 | in_progress | 1 | think-9cpg | Exp140 is unresolved at its point-arm round limit. Exp142 retains the support and directions with more rounds; the four-owner successor is being admitted. |
+| BC-313 | research | 11 | in_progress | 2 | think-9cpg | Exp139 rejected the unscaled cover at minimum760979/800000. Rescaling gives a valid conditional all-angle cover of mass31219612/3804895, above7. |
+| BC-315 | research | 11 | in_progress | 1 | think-9cpg | Exp143 fresh matched numerical pilot; compare directly with exp142 single-owner mechanism. |
 | BC-314 | measurement_validation | 11 | in_progress | 1 | think-ns6k | Updated session 113, generated campaign views, actual validation receipts and PR 137. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 97 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 99 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -800,8 +801,9 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | H-136 | confirmed | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 2 |  | 6s wall |
 | H-137 | running | proof | At least one of the sixteen bottom-left endpoint-footprint classes ret |  | 2 |  | 53s wall |
 | H-138 | needs review | proof | Every one of the 65536 four-corner endpoint-footprint class combinatio |  | 1 |  |  |
-| H-139 | running | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  |  |
-| H-140 | running | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  |  |
+| H-139 | unresolved | proof | On the declared independent 369-site support and nine reflected direct |  | 2 |  | 16s wall |
+| H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
+| H-141 | running | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -813,7 +815,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 
 ## Rounds
 
-### rejected (19)
+### rejected (20)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -836,6 +838,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-128 | series-000 | 11 | Session095 coordinator, BC259; max mathematical judgment | H-099 | The full fixed-support upper bound is exactly11 and the independently reconstructed packing average attains11. Thus H099's mass-above-eleven claim is false for this support. No expanded-support, primal-density or global packing conclusion follows. |
 | exp-137 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-137 | Complete exact producer screen found0of16endpoint classes with massatleast10; maximum77421212793/8221052780. This particular retained-family obstruction conjecture fails; the conditionalcover method remains open. Independent retained-receipt audit pending. |
 | exp-138 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-138 | Complete exact producer screen found0of65536endpoint combinations with massatleast7; maximum13394344077/2055263195 and minimum1642317587/2055263195. Sharedproducerchargedtoexp137; no secondprocess. Independent retained-receipt audit pending. |
+| exp-139 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-140 | The complete exact replay found minimum760979/800000, which is belowone, so the unchanged exp136 residual weights fail H140. Their positive minimum yields normalized feasible mass31219612/3804895, above the conditional contradiction thresholdseven and without an optimum-gap claim. |
 
 ### abandoned (2)
 
@@ -844,7 +847,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (22)
+### unresolved (23)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -870,6 +873,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
 | exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
 | exp-135 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-136 | The unrestricted arm converged, but the residual separator stopped at direction113 because a reachable cell had no representable interior witness. The paired score was not measured. This is an instrument limitation, not negative evidence about geometric conditioning. |
+| exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Process exit0 preserved a valid partial receipt, but it did not mean scientific completion: only unrestricted converged. Point exhausted60 rounds without convergence, triangle and endpoint were not run, and the primary difference was not measured. The partial point objective is not a covering value or negative result for H139. |
 
 ### blocked (9)
 
@@ -941,9 +945,9 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-139 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-140 | Prospective exact verification; no target minimum evaluated. |
-| exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Prospective numerical comparison; no target arm or objective has been evaluated. |
 | exp-141 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-137 | Prospective independent receipt audit. Exp137 already reports a negative; this confirmation must retain that verdict if all exact checks pass, and stay unresolved if the audit fails. |
+| exp-142 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Prospective successor after exp140 reached its 60-round cap in 15.98 seconds; neither area arm ran. Only iteration allowances change. No successor target result has been inspected. |
+| exp-143 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-141 | Prospective numerical comparison; no target arm or objective has been evaluated. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -961,10 +965,11 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-118 | H-107 |  | dependency |  |  |
 | exp-129 | H-125 |  | dependency |  |  |
 | exp-134 | H-135 |  | dependency |  |  |
+| exp-140 | H-139 | 16s wall | timebox | Exp142 freshly restarts the same four arms with 300 rounds a |  |
 
 ## Effort
 
-97 rounds, 2152.1 agent-minutes, 1360.4 wall-minutes.
+99 rounds, 2152.1 agent-minutes, 1361.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

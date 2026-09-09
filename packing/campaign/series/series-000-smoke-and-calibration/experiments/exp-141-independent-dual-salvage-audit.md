@@ -46,7 +46,7 @@ experiment:
       arrangement-depth recomputation, LP or retry.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-141-corner-dual-salvage-audit.json
   lease:
-    expires: '2026-09-09T04:45:00Z'
+    expires: '2026-09-09T04:55:00Z'
   results: []
   verdict:
     decision: in-progress

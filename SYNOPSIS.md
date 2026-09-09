@@ -137,12 +137,12 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives eighteen confirmed hypotheses, thirteen refuted
+The generated ledger currently derives eighteen confirmed hypotheses, fourteen refuted
 hypotheses, one open hypothesis, twenty-five open questions, and forty-five blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
-Three hypotheses are running, one is waiting on review, and eight are unresolved.
+Two hypotheses are running, one is waiting on review, and nine are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -490,6 +490,7 @@ case or experiment separately.
 | [Fixed-Four-Corner Cover Transfer Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/fixed-cover-transfer-review.md) | research synthesis | record | retained | — |
 | [Point-Extension Lemma](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/point-extension-lemma.md) | research synthesis | record | retained | — |
 | [Multiple Owner-Footprint Domain Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/multiple-footprint-domain-contract.md) | research synthesis | record | retained | — |
+| [Exp139, Exp140, and Multi-Owner Domain Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/receipts-and-multi-domain-review.md) | research synthesis | record | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
@@ -3285,8 +3286,9 @@ round that names the hypothesis, control roles included.
 | [H-136](packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | confirmed | On the declared 19-by-19 site grid and nine retained directions at side 96/25, the converged numerical covering objective for cores avoiding four fixed flush corner unit squares is more than 4.001 below the matched unrestricted objective | 2 | 5.60s wall |
 | [H-137](packing/campaign/hypotheses/H-137-single-owner-dual-salvage.md) | running | At least one of sixteen endpoint-footprint classes retains depth-one mass at least ten | 2 | 53.38s wall |
 | [H-138](packing/campaign/hypotheses/H-138-four-owner-dual-salvage.md) | needs review | Every four-corner endpoint combination retains depth-one mass at least seven | 1 | shared exp137 |
-| [H-139](packing/campaign/hypotheses/H-139-owner-footprint-matched-gain.md) | running | Enlarging an owned point to its endpoint footprint reduces the matched numerical cover mass by more than0.001 | 1 | Unspent |
-| [H-140](packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md) | running | Unchanged rationalized fixed-corner residual weights cover the complete181-direction net | 1 | Unspent |
+| [H-139](packing/campaign/hypotheses/H-139-owner-footprint-matched-gain.md) | unresolved | Enlarging an owned point to its endpoint footprint reduces the matched numerical cover mass by more than0.001 | 2 | 15.98s wall |
+| [H-140](packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md) | refuted | Unchanged rationalized fixed-corner residual weights cover the complete181-direction net | 1 | 18.65s wall |
+| [H-141](packing/campaign/hypotheses/H-141-four-owner-footprint-matched-gain.md) | running | Four guaranteed endpoint footprints improve the matched numerical cover beyond four bare owned marks | 1 | Unspent |
 
 ### Confirmed
 
@@ -3554,9 +3556,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 97 rounds registered in `series-000`.
+There are 99 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1360.4 wall-minutes.
+They record 2152.1 agent-minutes and 1361.0 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3690,9 +3692,11 @@ archive beside it.
 | [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md) | 11 | target | H-136 | Matched repaired replay on unchanged support, directions and guards | Both arms converged; matched gap improvement0.1766034327, residual mass7.804878 above7 | accepted |
 | [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | No endpointclass retains mass10; exact producer completed, independentaudit pending | rejected |
 | [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpointcombination retains mass7; independentaudit pending; processchargedonce | rejected |
-| [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md) | 11 | target | H-140 | Exact full181net replay of unchanged residualatoms fromexp136 | Prospective protocol, uninvoked | in-progress |
-| [exp-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md) | 11 | target | H-139 | Matched unrestricted/point/triangle/endpoint covers on independent369site support andnine directions | Prospective protocol, uninvoked | in-progress |
+| [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md) | 11 | target | H-140 | Exact full181net replay of unchanged residualatoms fromexp136 | Exact minimum760979/800000; normalized conditional mass31219612/3804895 above7 | rejected |
+| [exp-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md) | 11 | target | H-139 | Matched unrestricted/point/triangle/endpoint covers on independent369site support andnine directions | Unrestricted converged; point hit60rounds; area arms unrun | unresolved |
 | [exp-141](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md) | 11 | target | H-137 | Independent exact reconstruction of the exp137 screen | Prospective receipt audit, uninvoked | in-progress |
+| [exp-142](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-142-one-owner-completion.md) | 11 | target | H-139 | Fresh one-owner matched comparison with300rounds and12rows per direction | Prospective successor, uninvoked | in-progress |
+| [exp-143](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-143-h141-four-owner-footprint-matched-gain.md) | 11 | target | H-141 | Four-owner matched point/triangle/endpoint comparison | Prospective protocol, uninvoked | in-progress |
 
 ### Cost and provenance
 
@@ -3792,13 +3796,15 @@ archive beside it.
 | exp-136 | same fixed support/directions; repaired separator | 3.06 s | — | criterion | `03d2925e` |
 | exp-137 | one exact sharedproducer, five-minute limit | 53.38 s | — | criterion | `223c969d` |
 | exp-138 | same producer as137; no duplicatecharge | 0 s | — | criterion | `223c969d` |
-| exp-139 | one five-minute exactfullnet reader; uninvoked | — | — | — | — |
-| exp-140 | four120secondnumericalarms, ten-minute externallimit; uninvoked | — | — | — | — |
+| exp-139 | exact181-direction replay | 18.65s wall | — | — | criterion |
+| exp-140 | four-arm pilot stopped at point round60 | 15.98s wall | — | — | timebox |
 | exp-141 | one five-minute independent exact audit; uninvoked | — | — | — | — |
+| exp-142 | four120secondarms under10minuteexternalguard; uninvoked | — | — | — | — |
+| exp-143 | four120secondarms under10minuteexternalguard; uninvoked | — | — | — | — |
 
-### What the 97 rounds jointly establish
+### What the 99 rounds jointly establish
 
-The 97 rounds use 2152.1 agent-minutes and 1360.4 wall-minutes under the campaign’s
+The 99 rounds use 2152.1 agent-minutes and 1361.0 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

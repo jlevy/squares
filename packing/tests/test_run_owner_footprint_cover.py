@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from fractions import Fraction
 
+from devtools.multi_owner_domains import multi_footprint_domain
 from devtools.owner_footprints import (
     OUTER_SIDE,
     Polygon,
@@ -15,6 +16,7 @@ from devtools.owner_footprints import (
 from devtools.run_owner_footprint_cover import (
     Arm,
     build_arms,
+    build_four_owner_arms,
     build_receipt,
     exact_minimum_covered_mass_on_pieces,
     main,
@@ -110,6 +112,40 @@ def test_default_estimate_receipt_freezes_nine_direction_four_arm_settings() -> 
         assert complexity["total_one_round"] < 30_000_000
 
 
+def test_four_owner_estimate_removes_each_union_once_and_stays_under_guards() -> None:
+    manifest = owner_branch_manifest(full_owner_direction_manifest())
+    directions = selected_reflected_directions(manifest)
+    sites = singleton_site_set(mark=manifest.classes[0].mark)
+    arms = build_four_owner_arms(
+        sites,
+        directions,
+        direction_manifest=manifest,
+    )
+    assert tuple(arm.label for arm in arms) == (
+        "unrestricted",
+        "point",
+        "triangle",
+        "endpoint",
+    )
+    assert tuple(len(arm.removed_sites) for arm in arms) == (0, 4, 8, 16)
+    assert all(arm.sites.size + len(arm.removed_sites) == 369 for arm in arms)
+    assert all(len(arm.footprints) == 4 for arm in arms[1:])
+
+    receipt, receipt_arms, receipt_directions = build_receipt(owner_count=4)
+    assert receipt_arms == arms
+    assert receipt_directions == directions
+    settings = receipt["settings"]
+    assert isinstance(settings, dict)
+    assert settings["owner_count"] == 4
+    assert settings["residual_square_count"] == 7
+    arm_records = receipt["arms"]
+    assert isinstance(arm_records, dict)
+    for record in arm_records.values():
+        complexity = record["complexity"]
+        assert complexity["maximum"] < 5_000_000
+        assert complexity["total_one_round"] < 30_000_000
+
+
 def test_exact_reader_keeps_separate_components_and_ignores_zero_area_piece() -> None:
     axis = rotation_from_half_tangent("axis", Fraction(0))
     quarter = Fraction(1, 4)
@@ -188,6 +224,19 @@ def test_small_solver_converges_and_exact_reader_replays_its_rationalisation() -
     )
     assert refused.stopped == "a placement covers no candidate site"
 
+    empty_arm = Arm("empty", None, sites, (), ((),), (None,))
+    empty = solve_program(
+        empty_arm,
+        Fraction(1),
+        (axis,),
+        max_rounds=2,
+        rows_per_direction=1,
+        deadline_seconds=10,
+        max_event_cells=100,
+    )
+    assert empty.converged
+    assert empty.objective == 0
+
 
 def test_sub_float_thin_cell_uses_exact_geometry_fallback() -> None:
     axis = rotation_from_half_tangent("axis", Fraction(0))
@@ -201,6 +250,32 @@ def test_sub_float_thin_cell_uses_exact_geometry_fallback() -> None:
     assert float(Fraction(2) + epsilon) == float(Fraction(2))
     sites = SiteSet(Fraction(4), (((Fraction(2), Fraction(2)),),))
     arm = Arm("thin", None, sites, (), ((thin,),), (None,))
+    solution = solve_program(
+        arm,
+        Fraction(1),
+        (axis,),
+        max_rounds=4,
+        rows_per_direction=1,
+        deadline_seconds=10,
+        max_event_cells=100,
+    )
+    assert solution.converged
+    assert solution.objective == 1
+
+
+def test_sub_float_thin_cell_uses_exact_multi_owner_admissibility() -> None:
+    axis = rotation_from_half_tangent("axis", Fraction(0))
+    epsilon = Fraction(1, 10**20)
+    thin: Polygon = (
+        (Fraction(2), Fraction(2)),
+        (Fraction(2) + epsilon, Fraction(2)),
+        (Fraction(2) + epsilon, Fraction(9, 4)),
+        (Fraction(2), Fraction(9, 4)),
+    )
+    footprint: Polygon = ((Fraction(0), Fraction(0)),)
+    domain = multi_footprint_domain(Fraction(4), Fraction(1), axis, (footprint,))
+    sites = SiteSet(Fraction(4), (((Fraction(2), Fraction(2)),),))
+    arm = Arm("thin-multi", None, sites, (), ((thin,),), (domain,), (footprint,))
     solution = solve_program(
         arm,
         Fraction(1),

@@ -21,6 +21,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python3.14.7; one process
     selftest_passed: true
+    engine_commit: e3340cac
   instance:
     axis: n
     point: 11
@@ -42,15 +43,35 @@ experiment:
       per direction, checkedbeforeallocation. Complete181directions required. Flushed per-direction progress
       survives interruption; no retries or weight changes.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-139-exact-full-net-residual.json
-  lease:
-    expires: '2026-09-09T04:35:00Z'
-  results: []
+    commit: e3340cac137b620c57a333f15cb70a3c60551c9e
+  results:
+  - shape: determination
+    role: outcome
+    question: Exact minimum covered mass over all181directions and their full residual centre domains
+    outcome: criterion_missed
+    checked_by: The source-bound exact reader completed all181directions with unchanged88atoms and found
+      minimum760979/800000 at directions27through32. The derived normalized mass is31219612/3804895.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Exact minimum over all181directions is at least1 for the unchanged residualatoms.
-    reason: Prospective exact verification; no target minimum evaluated.
+    reason: The complete exact replay found minimum760979/800000, which is belowone, so the unchanged
+      exp136 residual weights fail H140. Their positive minimum yields normalized feasible mass31219612/3804895,
+      above the conditional contradiction thresholdseven and without an optimum-gap claim.
+  effort:
+    timebox: One five-minute exact reader with1000atom and2million-event-cell guards
+    wall_seconds: 18.65
+    stopped_by: criterion
 ---
 # Exp139: Exact Full-Net Residual Replay
+
+The source-bound exact reader completed all181directions from published commit
+`e3340cac137b620c57a333f15cb70a3c60551c9e` in18.65seconds wall time.
+The unchanged 88atom residual measure has exact minimum `760979/800000` at direction
+indices27through32. That is belowone, so H140 is rejected.
+
+The positive minimum gives the separately declared normalized feasible mass
+`31219612/3804895`, about8.205. It remains above the conditional contradiction threshold
+ofseven and does not establish an optimum gap or packing exclusion.
 
 This verification follows the positive numerical exp136 result.
 The unchanged raw receipt is clean tracked Gitblob

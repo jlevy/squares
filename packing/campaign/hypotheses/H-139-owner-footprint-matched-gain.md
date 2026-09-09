@@ -30,7 +30,7 @@ hypothesis:
     available independent singleton variables; the nine canonical orientations
     whose folded sources are 0,45,90,135,180 or their reflections. One numerical
     row-generation run per unrestricted, point, triangle, and endpoint arm, with
-    120-second cooperative deadlines, sixty rounds, and three rows per direction.
+    120-second cooperative deadlines. Exp140 used sixty rounds and three rows per direction; the prospectively registered exp142 uses 300 rounds and twelve rows per direction after exp140 stopped incomplete.
     Every footprint is derived from the full 361-orientation owner manifest.
   instance:
     axis: n
@@ -46,13 +46,11 @@ hypothesis:
   replication: false
   registered: '2026-09-09'
   notes: >-
-    This finite-support, finite-direction numerical screen narrows H-111's general
-    resource-and-anchor question to one owner class and one fixed comparison. The
-    triangle and endpoint increments and M0 minus M_endpoint minus 1 are secondary
-    diagnostics. Acceptance is not an exact optimum-gap theorem, an all-direction
-    cover, or a conditional packing certificate. A completed gain at most 0.001
-    rejects this numerical claim. A timeout, guard refusal, separator failure, or
-    incomplete arm leaves it unresolved.
+    Exp140 left this claim unresolved. Unrestricted converged at11.884615384615401,
+    but point reached the60-round cap with least surveyed mass0.955338364468638 and
+    incomplete objective11.570153761669404. Triangle and endpoint were not run, so
+    the primary point-minus-endpoint gain was not measured. Exit0 records successful
+    partial checkpointing, not convergence.
 ---
 # H-139 — Matched Owner-Footprint Gain
 
@@ -74,6 +72,11 @@ All four arms must converge before the primary difference is read.
 The triangle increment, endpoint increment, and `M0 − M_endpoint − 1` show where any
 change occurs, but they cannot replace the primary criterion.
 The numerical result does not cover omitted directions or supply exact coverage.
+
+Exp140 left the claim unresolved.
+Unrestricted converged, but point stopped at its 60-round cap with least surveyed mass
+`0.955338364468638`. Triangle and endpoint were not started, so no primary gain exists.
+The point arm’s last objective is incomplete and does not count as a covering value.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

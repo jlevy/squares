@@ -95,8 +95,8 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp140 is the prospective matched four-arm pilot after controlled genericexact-fallback
-      integration.
+    next_evidence: Exp140 is unresolved at its point-arm round limit. Exp142 retains the support and directions
+      with more rounds; the four-owner successor is being admitted.
     hypotheses:
     - H-111
     - H-139
@@ -122,10 +122,35 @@ agenda:
     depends_on:
     - BC-310
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp139 exactfull181net replay of unchanged exp136residualatoms; report rawminimum and
-      positive-minimum normalizedfeasiblemass separately.
+    next_evidence: Exp139 rejected the unscaled cover at minimum760979/800000. Rescaling gives a valid
+      conditional all-angle cover of mass31219612/3804895, above7.
     hypotheses:
     - H-140
+  - id: BC-315
+    purpose: research
+    owner_focus: insight
+    instances:
+    - 11
+    state: in_progress
+    priority: 1
+    question: Do four guaranteed occupied regions improve the matched cover beyond four bare marks?
+    budget: One predeclared ten-minute four-arm pilot after 33 controlled geometry/runner checks; no branch
+      sweep.
+    entry: Exact vertical decomposition and reviewed point-extension contract, compatible reflected m1/j0
+      owner configuration.
+    exit: A complete matched numerical gain or a scoped negative/unresolved result; residual-seven and
+      all-direction claims remain separate.
+    bead: think-9cpg
+    workflows:
+    - insight-iteration
+    - pipeline-improvement
+    - research-loop
+    depends_on: []
+    parallel_group: conditional-sprint
+    program: n11-structure-and-conditional-dots
+    next_evidence: Exp143 fresh matched numerical pilot; compare directly with exp142 single-owner mechanism.
+    hypotheses:
+    - H-141
   - id: BC-314
     purpose: measurement_validation
     owner_focus: process

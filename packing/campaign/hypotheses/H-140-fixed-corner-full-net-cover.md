@@ -32,17 +32,20 @@ hypothesis:
   - published exp139 protocol before exact target replay
   replication: false
   registered: '2026-09-09'
-  notes: If raw minimum is positive but belowone, reject the unscaled claim and report the exact normalized
-    feasible mass total/minimum as a distinct derived bound. This gives a feasible conditionalcover, not
-    an optimum-gap proof or an exclusion unless its mass is belowseven.
+  notes: Exp139 rejected this claim. The complete exact181direction replay found minimum760979/800000
+    at directions27through32 for the unchanged88atoms. The separately declared normalized feasible mass
+    is31219612/3804895, above seven; it is not an optimum-gap proof or packing exclusion.
 ---
 # H140: Full-Net Fixed-Corner Cover
 
-The numerical nine-direction pilot is positive.
-This separate claim tests whether its unchanged rationalized residual weights already
-cover every omitted net direction.
-No full-net target minimum was inspected to choose the claim.
-The exact reader never resolves the LP or edits the atom weights.
+Exp139 rejected this claim after the source-bound exact reader completed
+all181directions. The unchanged rationalized residual weights attain minimum
+`760979/800000` at direction indices27through32, below the required massone.
+
+No full-net target minimum was inspected before registration, and the reader did not
+resolve the LP or edit the atom weights.
+The positive minimum gives normalized feasible mass `31219612/3804895`, above seven,
+without an optimum-gap or packing claim.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
