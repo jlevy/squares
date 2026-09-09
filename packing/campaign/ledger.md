@@ -125,7 +125,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
 | [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Resume think-mq0d for BC-264's existing 30-minute H114 feature and kernel-contract pricing slice, subject to the current allocation and admission requirements. This publication repair does not reprioritize research or authorize a target run. |
 | [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
-| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-8m28 | Complete opening controls and run independent prospectively declared targets. |
+| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-8m28 | Run the admitted exact dualscreen; independently verify the positive fixed-corner pilot and prepare the genericownercomparison. |
 
 ### Workflow summary
 
@@ -670,7 +670,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 92 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 94 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -787,9 +787,9 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
 | H-135 | blocked | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
-| H-136 | unresolved | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 2 |  | 3s wall |
-| H-137 | blocked | proof | At least one of the sixteen bottom-left endpoint-footprint classes ret |  | 0 |  |  |
-| H-138 | blocked | proof | Every one of the 65536 four-corner endpoint-footprint class combinatio |  | 0 |  |  |
+| H-136 | confirmed | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 2 |  | 6s wall |
+| H-137 | running | proof | At least one of the sixteen bottom-left endpoint-footprint classes ret |  | 1 |  |  |
+| H-138 | running | proof | Every one of the 65536 four-corner endpoint-footprint class combinatio |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -869,7 +869,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 | exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
-### accepted (30)
+### accepted (31)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -903,6 +903,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-130 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-130 | All three theorems meet H-130's total-width criterion: Theorems A, B and C clear the 3° bar by approximately 0.1846°, 8.8582° and 9.3138°. Theorem C also establishes the literal distance of 1.5° from both endpoints. Each is an exact decision of decide_class_program without using Stromquist's Theorem 3 or its lemmas. |
 | exp-131 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-131 | All eight counts are now decided under a registered round rather than cited from a planning lane, every exact mass reproduces the planning lane's to the fraction, and no declared falsifier occurred. The eight exact cell claims of H-131 are confirmed; the 2026-09-08 review corrects outward-rounded degree summaries without claiming a rerun. The certificate's site set does not restrict the resulting packing theorem within its exact angle domain. |
 | exp-132 | series-000 | 11 | the BC-302 lane agent of agenda-030, bead think-qfog, session-104; the record was written by a separate record lane from the frozen result section | H-134 | H-134's criterion is met in segment form: ten horizontal segments of length 1/10 on Stromquist's rows cover the whole pose space at tolerance 3/500, certified by an interval reader with every certified leaf and every discarded box re-decided in exact rational arithmetic and no failure, so every square of every packing of eleven unit squares at any side up to 96/25 is within 3/500 of a known mark; the point form of the same claim is untouched by this and stays open with thirteen candidate sets refuted. |
+| exp-136 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-113 | H-136 | The predeclared numerical paired margin is positive by0.17660343270100132. Residual mass remains above7; this is a finite-support finite-direction mechanism result, not a packing exclusion or exact optimum-gap bound. |
 
 ### baseline (11)
 
@@ -920,11 +921,12 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (1)
+### in-progress (2)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-136 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-113 | H-136 | Prospective repaired repeat of unresolved exp135; no target launched. Original support, directions, tolerances and accept margin unchanged. |
+| exp-137 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-137 | Prospective exact screen; no target masks or masses have been evaluated. |
+| exp-138 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-138 | Prospective exact screen; no target masks or masses have been evaluated. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -945,7 +947,7 @@ Status: **active**. Test whether unavoidable corner owners make residual coverin
 
 ## Effort
 
-92 rounds, 2152.1 agent-minutes, 1359.5 wall-minutes.
+94 rounds, 2152.1 agent-minutes, 1359.5 wall-minutes.
 
 ## Exploration reports not yet codified
 

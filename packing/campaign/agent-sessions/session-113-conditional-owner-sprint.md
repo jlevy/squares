@@ -60,27 +60,30 @@ session:
       new sprint target has run.
     after: null
   delegations:
-  - task: Repair exact residual separator and build the dual-salvage screen
+  - task: Repair residual separator, build exact dual screen, then expose exact cover replay CLI
     operator: GPT-5.6 Sol, extra high; residual_separator_repair
     recording: contemporaneous
     phase: 1
     status: in_progress
-    outcome: null
+    outcome: Repair passed7controls; exact dualscreen passed9controls. Exp136 completed with numericalgap
+      improvement0.1766034327. Exactcover replay wrapper is now in progress.
     evidence: []
     files: &id001
     - packing/devtools/run_residual_cover_pilot.py
     - packing/tests/test_run_residual_cover_pilot.py
     - packing/devtools/screen_corner_dual_salvage.py
     - packing/tests/test_screen_corner_dual_salvage.py
+    - packing/devtools/verify_residual_cover_pilot.py
+    - packing/tests/test_verify_residual_cover_pilot.py
     checks: []
     uncertainty: Instrument integration and target outcomes are pending.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Return independently reviewable contracts and controls; no scientific targets without
       the coordinator protocol.
-    budget_minutes: 25
+    budget_minutes: 31
     started_at: '2026-09-09T03:41:00Z'
-    deadline_at: '2026-09-09T04:06:00Z'
+    deadline_at: '2026-09-09T04:12:00Z'
     expected_output: Reviewed exact contract and focused controls; retain earlier dispatch history in
       native logs.
     validation_command: Focused project Python3.14 pytest, Ruff and BasedPyright for owned code.
@@ -90,25 +93,28 @@ session:
     excluded_commands:
     - Scientific target invocation
     - Shared campaign records and Git mutation
-  - task: Implement generic exact owner footprints and their geometry controls
+  - task: Build exact owner footprints, then generic matched conditional-cover runner
     operator: GPT-5.6 Sol, extra high; owner_footprint_engine
     recording: contemporaneous
     phase: 1
     status: in_progress
-    outcome: null
+    outcome: Geometry passed7controls with361canonicaldirections and16ownerclasses; genericfour-arm LP
+      instrument in progress.
     evidence: []
     files: &id002
     - packing/devtools/owner_footprints.py
     - packing/tests/test_owner_footprints.py
+    - packing/devtools/run_owner_footprint_cover.py
+    - packing/tests/test_run_owner_footprint_cover.py
     checks: []
     uncertainty: Instrument integration and target outcomes are pending.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Return independently reviewable contracts and controls; no scientific targets without
       the coordinator protocol.
-    budget_minutes: 25
+    budget_minutes: 31
     started_at: '2026-09-09T03:41:00Z'
-    deadline_at: '2026-09-09T04:06:00Z'
+    deadline_at: '2026-09-09T04:12:00Z'
     expected_output: Reviewed exact contract and focused controls; retain earlier dispatch history in
       native logs.
     validation_command: Focused project Python3.14 pytest, Ruff and BasedPyright for owned code.
@@ -152,11 +158,18 @@ session:
   outputs:
   - packing/campaign/agendas/agenda-032-conditional-owner-sprint.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md
   checks:
   - 'Entry: retained exp135 failure and original seven-control repair handoff; new integration validation
     pending.'
+  - Opening push at03d2925e predecessor tree:1091tests passed,3deselected in96.91seconds; full114.51second
+    invocation failed lint and two stale record/control anchors.
+  - Focused repairs:14owner/residual controls passed in2.47seconds;9dual-screen controls passed; updated
+    synopsis and163control anchors agree; both changed negative controls fire with project Python.
   stop_reason: null
-  next_action: Complete opening controls and run independent prospectively declared targets.
+  next_action: Run the admitted exact dualscreen; independently verify the positive fixed-corner pilot
+    and prepare the genericownercomparison.
 ---
 # Session 113: Conditional-Owner Sprint
 
@@ -171,6 +184,11 @@ integration to preserve both independent records.
 This identifier repair changes no clock or result.
 
 Use the agenda for the complete question/dependency map.
+After the completed opening instruments, their disjoint Sol allocations continue forward
+through04:12Z for the exact-reader and generic-LP wrappers.
+This update was made before the earlier04:06Z delegation cutoff; scientific target
+guards and the two-hour sprint deadline are unchanged.
+
 The final fifteen minutes are reserved for actual verification, retained outcomes and PR
 publication.
 

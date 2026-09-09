@@ -29,6 +29,7 @@ experiment:
     host_system: Darwin 25.5.0 arm64; ten logical CPUs; Python 3.14.7; one process, sequential arms, default
       solver threading
     selftest_passed: true
+    engine_commit: 03d2925e
   instance:
     axis: n
     point: 11
@@ -51,7 +52,14 @@ experiment:
       one direction subset, no target retries or tuning. An interrupted arm may lack its final solver
       point; preserve any completed arm and partial receipt and record the missing evidence explicitly.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-136-paired-cover.json
-  results: []
+    commit: 03d2925e
+  results:
+  - shape: determination
+    role: outcome
+    question: Did both arms converge with Mglobal minus Mresidual minus4 greater than0.001?
+    outcome: criterion_met
+    checked_by: 'Raw paired receipt: unrestricted11.981481481481488; residual7.804878048780487; matched
+      gap improvement0.17660343270100132. Both arms converged; no exact validation in this experiment.'
   complexity:
     lines_changed: 0
     new_dependencies: []
@@ -64,15 +72,24 @@ experiment:
       525625 unrestricted and 546121 residual; the corresponding sums over nine directions are 4206521
       and 4370649. No objective was evaluated to select this regime.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Both arms converge numerically and M_global minus M_residual minus 4 is strictly
       greater than 0.001
-    reason: Prospective repaired repeat of unresolved exp135; no target launched. Original support, directions,
-      tolerances and accept margin unchanged.
-  lease:
-    expires: '2026-09-09T04:03:37Z'
+    reason: The predeclared numerical paired margin is positive by0.17660343270100132. Residual mass remains
+      above7; this is a finite-support finite-direction mechanism result, not a packing exclusion or exact
+      optimum-gap bound.
+  effort:
+    timebox: Five-minute external timeout with two-second grace;120seconds perarm
+    wall_seconds: 3.06
+    stopped_by: criterion
 ---
 # Exp136: Repaired Fixed-Corner Pilot
+
+The published-source process completed successfully in3.06seconds. Both numerical arms
+converged: unrestricted11.981481481481488, residual7.804878048780487, and gap
+improvement0.17660343270100132. The original numerical criterion is accepted; exact
+verification is a separate promotion.
+Raw launch, exit, process and paired receipts are retained inresults/agenda032.
 
 This is a fresh experiment after exp135 stopped on an unrepresentable thin-cell witness.
 The repair has an independent synthetic regression control.

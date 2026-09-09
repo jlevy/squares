@@ -18,7 +18,7 @@ hypothesis:
     direction: at least seven
     threshold: '7'
   instrument: packing/devtools/screen_corner_dual_salvage.py with packing/devtools/owner_footprints.py
-  instrument_ready: false
+  instrument_ready: true
   regime: L=96/25, B=9977/10000; BC232 exp070 depth-one family translated by (1/100,1/100), scale1, full361
     canonical directions and full-net signed owner endpoints. Strict positive separation is required;
     touching is deleted.
