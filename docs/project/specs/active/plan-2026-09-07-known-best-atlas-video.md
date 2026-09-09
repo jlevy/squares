@@ -27,7 +27,10 @@ colour contract, which `sqpack/render/color.py` and its tests own; the safe SVG 
 which the
 [rendering toolkit plan](plan-2026-08-24-deterministic-svg-rendering-toolkit.md) owns;
 the page’s design system, which the vendored kpress owns; any claim about a packing,
-which stays with the frontier register.
+which stays with the frontier register; and, from 2026-09-08, the solver workbench Phase
+0 grew — the force law, the relationship graph, growth, the annealing dial, hand editing
+and the unbuilt Calibrate mode — which belongs to
+[`X-025`](../../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md).
 
 ## Overview
 
@@ -180,6 +183,11 @@ work best below 100. The record answers both.
   penalty under a cooling schedule, in floating point, and may not claim a record.
   The interactive free-quench lab drives that quench for at most twenty squares from a
   seeded random start and has no witness import.
+  *Overtaken 2026-09-08:* there is an integrator now, and Phase 0 wrote it.
+  The Version 2 prototype carries a fixed-timestep contact solver with an editable force
+  law, and it is a solver workbench rather than a video component; the section below on
+  what Phase 0 became records the split, and what the integrator measured is why `D11`
+  no longer investigates a relaxed intermediate.
 - No packing in the corpus has container slack: the translation-escape screen’s
   `min_container_slack` is zero or below in all 318 screened records, and what play
   exists is tangential sliding of 5,323 squares in 296 records.
@@ -483,6 +491,57 @@ Version 1 counts “the trivial grids” as 165 of 324 where the witnesses hold 
 grids; the 165 are the static-append steps (160 prefix and 5 shared-picture), and this
 document uses that name.
 
+#### What Phase 0 became, and where its parts now live (2026-09-08)
+
+Phase 0 asked for two spikes and got one spike and one instrument.
+The Version 1 candidate stopped where its brief did.
+The Version 2 candidate did not: across thirteen revisions it became a solver workbench,
+and this plan should name the drift rather than let “the transitions spike” keep
+standing for it.
+
+What it grew that no video needs: a contact force law with four editable parameters and
+a force-against-gap plot whose control points drag; a relationship graph that masks the
+attraction, over every pair, over the blocks, or over the retained packing’s own contact
+graph, which can also be drawn by hand on the stage; growth from a reduced starting size
+up to unit squares; open-ended optimisation with squares draggable mid-run; an annealing
+dial; and three named modes.
+
+Those modes are the shape of the split.
+**Pack** is one `n` with a person in the loop.
+**Animate** is a range rendered at speed with nobody intervening, and that is this
+video. **Calibrate**, unbuilt, sweeps the strategy over cases whose records are known.
+The middle mode was called Sweep until 2026-09-08 and is renamed Animate, because
+Calibrate is the mode that sweeps — over parameters — and two modes called sweep would
+be permanently ambiguous.
+[`X-025`](../../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md)
+sets out the three axes a mode is a choice on.
+
+**Ownership splits here.** This plan keeps the video artefacts and nothing else: the
+frame record and the player (Phase 1), the capture pipeline (Phase 2), the transition
+record and the tween (Phase 3), publication (Phase 4). The solver is not one of them.
+The force law, the relationship graph, growth, the annealing dial, the hand, Calibrate,
+and every research question they raised belong to `X-025` and to the beads under it.
+The prototype is one page today and the two owners share it; where they pull apart, the
+video’s needs decide what the retained player does and the workbench’s needs decide what
+the prototype does.
+
+**Three of Phase 0’s findings are negative, and they are worth keeping.** The research
+is recorded in `X-025`; what bears on this plan is folded into `D11` and `D16` below.
+Aimed straight at a known answer with the final snap disabled, the settle still rests
+one to 1.7 units away per square and 0.1 to 1.1 per cent wide, and run blind it loses
+every genuinely packed case, by up to 6.8 per cent at `307 → 308`. So no physics-driven
+tween replaces the interpolated one, and the plan’s rule that the frame at every integer
+`n` is the retained rendering’s geometry is what keeps Version 2 honest rather than a
+convenience.
+
+**And one is positive: the page is not slow.** Measured headless on the prototype, 120
+frames per second at both `n = 17` and `n = 272`, worst frame 10 ms, 358 DOM nodes, 10.7
+MB heap, and every API call under 2 ms.
+Apparent sluggishness during the session coincided with a five-minute load average of
+116 caused by another session, not with the page.
+Nothing in `D8`’s capture budget or the player’s byte budget needs to be reopened for
+draw cost; the capture’s cost is the screenshot, as `D8` already measures it.
+
 ## Design
 
 ### Decisions
@@ -743,8 +802,19 @@ labels the frames that pass as overlap-free and the rest as illustrative.
 This is the animation form of the registered but unbuilt `H-013` δ-continuation family
 and of `H-004`’s neighbour-transfer premise, and it never claims to search: both
 endpoints are given, and the model between them is a path, not a proposal.
-The sixth spike revision builds it for the sixteen collapse pairs and 100→101 and
-compares it with the block tween by eye and by the overlap census.
+*Measured 2026-09-08, and the investigation closes.* The prototype built a crude
+instance of exactly this loop: the container opens to 1.12 times the record’s side,
+holds while the arriving square inflates, then contracts toward the record’s side,
+pausing whenever two full-size squares overlap by more than 0.08. It loses.
+Run blind it ends worse than the record on every genuinely packed case, by up to 6.8 per
+cent at `307 → 308`; aimed at the known answer with the snap off, the settle still rests
+one to 1.7 units per square away.
+That is a result about constants chosen to look right in a video and never swept, not
+about the mechanism, and the prototype’s notes say so themselves.
+It is enough for this plan: Phase 3 does not ship a relaxed intermediate as a
+`tween_model` option, and the block tween of `D10` is what Version 2 draws.
+The mechanism keeps its research standing under `X-025`, as candidate `C6` against
+`H-013`, where the instrument and the kill condition live.
 Between `n` and `n + 1` each matched square’s centre moves linearly, its angle turns
 along the shorter arc modulo 90 degrees (at most 45 degrees, an exact tie resolved
 counter-clockwise as the spike did), the container side interpolates linearly, and the
@@ -816,6 +886,28 @@ of the page deploy on every push that touches its inputs.
 **D15: workflows.** Phase 0 is the two spikes under the `coding-spike` shortcut.
 Phases 1 to 4 are W7 pipeline-improvement; Phase 4 closes with a W8 documentation pass
 and a handoff entry.
+
+**D16: snapping is production correctness for Animate, and evidence of nothing.** Added
+2026-09-08, after Phase 0 built a solver and the two readings of its endpoint had to be
+told apart. The prototype can end a move by blending the physics onto the retained poses
+over the last fraction of the transition and finishing on them exactly.
+For this plan that is not a flourish, it is the requirement: a run across all 324
+records has to land each frame on what is actually known, which is the rule `D3` and
+`D11` already state as “the frame at every integer `n` is the retained rendering’s
+geometry and colours”.
+So the retained player snaps, always, and the snap is not a switch a capture can leave
+off.
+What the snap is not is evidence about the physics, because the physics did not find
+the endpoint; the prototype’s notes say so, and this session confirmed it from the other
+side — with the snap off and the run aimed straight at the known answer, the settle
+still rests one to 1.7 units per square away and 0.1 to 1.1 per cent wide.
+No capture, receipt or caption may present a settled frame as a solver result, and the
+`illustrative-tween` statement of `D12` covers a physics-settled frame exactly as it
+covers an interpolated one.
+The research use of the physics runs the other way, harvesting what the records’ contact
+structures are rather than trying to reach them, and that direction is `X-025`’s.
+*Rejected:* offering the snap as a switch in the retained player, which would let a
+capture drift off the record; and reading a snapped run as a check on the tween model.
 
 ### Components
 
@@ -931,6 +1023,14 @@ Closed 2026-09-07: both NOTES.md files read and cited in “Spike findings” wi
 coordinator’s own measurements; `D4`, `D5`, `D6`, `D8`, `D10` and `D11` revised; each
 spike’s code dispositioned there; `think-5oba` and `think-l78w` closed.
 
+Reopened and re-closed 2026-09-08, because the closure was premature on one side.
+The Version 2 candidate kept going after its bead closed and became a solver workbench;
+“What Phase 0 became” records the drift and the split of ownership, `D11` records what
+its physics measured and closes the relaxed-intermediate investigation, and `D16`
+records what its snap does and does not establish.
+The solver, its modes and its research questions leave this plan for `X-025` at this
+point; the video artefacts stay here and Phases 1 to 4 are unchanged in scope.
+
 ### Phase 1: The record and the Version 1 player
 
 - [ ] `known_best_video/record.py` and `build_known_best_video_data.py` with the schema;
@@ -995,10 +1095,13 @@ Closes on: `capture_known_best_video --stand-in --check` self-agreeing locally a
   reverse order selectable and the arrival-overlap census recorded; the scale-down beat
   as its own segment with `scale_seconds`, the stage margin it needs, and the census of
   early pairs whose growth exceeds the margin.
-- [ ] Spike: the relaxed intermediate of `D11` for the sixteen collapse pairs and
-  100→101, with `δ` swept, the per-frame `verify_packing` census, and a side-by-side
-  with the block tween; the outcome decides whether Phase 4 ships it as a `tween_model`
-  option.
+- [x] Spike: the relaxed intermediate of `D11`. Dropped 2026-09-08, not deferred.
+  Phase 0’s prototype ran the loop at `δ = 0.12` with a contraction that pauses on
+  overlap and lost every genuinely packed case, by up to 6.8 per cent; `D11` records the
+  measurement and the reasoning.
+  Phase 4 ships no `tween_model` option, the block tween of `D10` is what Version 2
+  draws, and the sweep over `δ` with the per-frame `verify_packing` census moves to
+  `X-025` as candidate `C6`, where `H-013` owns the kill condition.
 - [ ] The continuous-angle rule behind a record flag with its own label, so the owner
   judges 260→261 under both rules from the same player.
 
@@ -1077,6 +1180,13 @@ Nothing about the poster or the per-`n` renderings changes at any phase.
   the long arc through red and blue, because the owner reserved scarlet for “new” and
   the long arc painted 58° to 65° tilts in salmon beside the scarlet mark in 16 frames;
   mirror tilts then share a colour, which is the trade the sweep makes.
+  A third answer arrived with the prototype’s revision 12 and is now on the table:
+  colour by the persistent identity `D10` already requires, so a square keeps its colour
+  for the whole run and a viewer can follow one square from `n = 5` to `n = 324`. It has
+  a measured ceiling this plan would hit and the workbench does not: the prototype’s
+  green band holds 42 distinguishable entries, which repeats 7.7 times over 324 squares,
+  so identity colouring stops being an identity at large `n` unless a second channel
+  carries it. The bead for that ceiling is under `X-025`.
 - Publication: release assets linked from the site (`D14`), or the captures copied into
   the site deploy?
 - Frame rate: 30 frames per second, or 60 for the transition version, which doubles its
@@ -1099,12 +1209,18 @@ Nothing about the poster or the per-`n` renderings changes at any phase.
   the function-name kern
 - [`packing/atlas/rendering/README.md`](../../../../packing/atlas/rendering/README.md),
   the motion lab’s home and the raster-golden standing
+- [`X-025`](../../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md),
+  which owns the solver workbench Phase 0 grew, the three-axis decomposition of its
+  modes, and the research candidates its measurements bear on
+- [`packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md`](../../../../packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md),
+  revisions 6 to 13, the source for every workbench measurement quoted here
 - [`operating-rules.md`](../../../../operating-rules.md), OR-1, OR-9, OR-13, OR-14,
   OR-16
 - Beads: epic `think-hsdj` under `think-wfz1`; spikes `think-5oba` (Version 1) and
   `think-l78w` (Version 2); phases `think-4ew6`, `think-007q`, `think-krtt`,
   `think-gpfg`; `think-0juv` (the atlas expansion); `think-vb0v` (the motion lab spike);
-  defect `D-359`
+  defect `D-359`. The workbench beads are not here: they hang off `X-025`’s own epic,
+  which is the point of the split.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

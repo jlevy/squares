@@ -606,11 +606,25 @@ sweeping the settings rather than the cases.** *Claim.* Over a fixed set of case
 records are known, the fraction of runs landing within tolerance of the record varies
 systematically with the force law and the relationship setting, and some region of that
 parameter space is reliably better than the rest.
-*Evidence already in hand.* None.
-The observation prompting it is that the workbench now has enough parameters (rigidity,
-repulsion, attraction strength and range, the relationship mask, growth rule and rate,
-annealing level) that they form a space rather than a handful of switches, and that the
-same case settles to different container sides under different laws.
+*Evidence already in hand.* Two measurements, and together they say the space is real
+and has no single best point.
+Over 2,400 steps from a grid start, blind, the presets separate and they separate in
+opposite directions at two cells (`measure_law.py --laws`): at `n = 17` the rigid law is
+the only setting that leaves the trivial grid at all, reaching `4.756` against sticky’s
+`4.988` and the record’s `4.676`; at `n = 29` the same law jams at `6.402` where sticky
+sits at `5.986` against a record of `5.934`. A hard contact is a better search operator
+at one size and a worse one at another, on the same physics with nothing else changed,
+which is exactly the claim that some region of the space is better than the rest — and
+exactly the warning that the region is not a single setting.
+Against that, growth pays nothing yet (`measure_law.py --grow`): growing from a starting
+size of `0.3` to unit squares over 7,200 steps lands `n = 17` at `4.988` under both the
+`constant` and the `clean` rule, the same place the plain settle reaches and 6.7 per
+cent above the record.
+So one axis of the space is live and one is inert at these sizes and from this start,
+which is the kind of thing a sweep is for and a single run cannot say.
+The observation prompting the candidate stands: the workbench now has enough parameters
+(rigidity, repulsion, attraction strength and range, the relationship mask, growth rule
+and rate, annealing level) that they form a space rather than a handful of switches.
 *Instrument.* Partly.
 The workbench can run one setting at a time and report the gap; what is missing is a
 driver that sweeps settings across cases headlessly and tabulates hit rates, which is
@@ -653,7 +667,7 @@ That is a real technique and it is also a real hazard, so it belongs here as a d
 with a named difficulty rather than as a plan.
 
 *Where it would live, and why the name matters.* The workbench today has two modes, Pack
-for a single `n` and Sweep for a range.
+for a single `n` and Animate for a range.
 The form this takes is a third, **Calibrate**: choose the cases whose records you are
 optimising against, choose which parameters vary and over what ranges, run seeds per
 configuration, and rank by the fraction of runs landing within tolerance of the record
@@ -665,10 +679,44 @@ also what each is for.
 wanted, squares grabbed and moved by hand, the settle watched rather than scored.
 It is where the hand-hunting argument above actually cashes out, and its value is that a
 person can intervene mid-run.
-**Sweep** is the machine rendering what is already known across a range, at speed and
+**Animate** is the machine rendering what is already known across a range, at speed and
 without interaction, which is the video.
 **Calibrate** is the machine searching over its own settings, with nobody watching any
 single run.
+
+*On the second name.* Animate was called Sweep until 2026-09-08, and the rename is not
+cosmetic. Calibrate is the mode that sweeps — over parameters, not over `n` — and an
+instrument with two modes called sweep would be permanently ambiguous about which axis
+was moving.
+Animate says what that mode does, and leaves the word for the thing that does
+it.
+
+*The three axes, and why Calibrate is cheap when it comes.* A mode is not a feature.
+It is a choice on each of three axes, and every mode makes all three choices whether or
+not it exposes them.
+
+- **Scope** — what set of cases is in front of the instrument.
+  Pack takes one `n`. Animate takes a range.
+  Calibrate takes a set split into the cases it tunes on and the cases it holds back.
+- **Strategy** — how the physics runs: the force law’s four parameters, the relationship
+  graph, growth and its rule and rate, the annealing level, and which solver runs.
+- **Presentation** — what a viewer sees: the colour scheme, the timing, the motion
+  phasing, the desaturation while moving.
+
+Read down the axes and the modes fall out of them.
+Pack is one case, a strategy chosen by hand and changed mid-run, and presentation tuned
+for watching. Animate is a range, a strategy that has to be the same at every `n` or the
+frames are not comparable, and presentation tuned for a video.
+Calibrate is a split set, a strategy that varies by construction, and no presentation at
+all, because nobody is watching any single run.
+
+The decomposition also prices the third mode, which is the practical reason to write it
+down. **Calibrate is Pack’s strategy panel with a loop and a results table around it**:
+the same single-`n` settle, the same parameters behind the same setters, the same gap
+read at the end. Nothing new has to be modelled.
+That is why it is cheap once Pack is right, and it is also why Pack should be got right
+first: every part of Calibrate that turns out to be hard will be a part of Pack that was
+left approximate, and it will be discovered a thousand runs at a time.
 
 Mechanically it is Pack with a loop around it: the same single-`n` settle, repeated
 while the parameters sweep, keeping what performed best.
@@ -696,6 +744,23 @@ A mode called Backtest invites the best number on the screen to be read as the r
 The headline that mode reports should be the held-out score, and a winner whose held-out
 score collapses is the most useful thing it could show.
 
+*One question the mode cannot answer for itself: how often the split is declared.* Per
+run, the split is a parameter of the configuration and a session may carry several; per
+session, it is fixed once before the first run and every configuration that session
+tries is scored against the same held-out cases.
+Per session is the one to argue for, and the argument is one sentence: a split chosen
+after seeing results is not a split.
+Per-run declaration is a declaration in form and a search in practice — with 324 cases
+and a mode built to make re-running cheap, a person who dislikes a held-out score can
+redraw the line and go again, and nothing in the record would show that they had.
+The cost of per session is real and worth naming: it forfeits the ability to re-scope
+mid-afternoon, which matters most when the interesting cases are exactly the ones not
+known in advance. This is a question about how the instrument is used rather than about
+what it computes, so it is the owner’s, and it should be settled before Calibrate is
+built rather than after: the answer decides whether the split lives in the run record or
+in the session record, and retrofitting it the other way means every earlier number is
+unscored.
+
 **C0c. Enumerate the contact structures, then let the physics triage which are worth
 exact treatment.** *Claim.* Running the settle under each enumerated contact structure
 as its attraction mask separates the structures that realise from those that do not,
@@ -707,12 +772,53 @@ five-vertex topologies, and `src/sqpack/contact_realization.py` already turns a 
 into a realization with exact arithmetic.
 What is missing is a cheap filter in front of the exact step, which is what the
 workbench’s contact relationship would be.
-*Instrument.* Half exists.
+
+*Evidence measured since, and it is against the filter as built.* The contact
+relationship exists now, and it has been measured twice, negatively both times.
+Settled for 2,400 steps from a grid start under the sticky law
+(`measure_law.py --graphs`), the fraction of the target graph’s edges that are full-side
+contacts at the end is **1 of 4 at `n = 17` and 1 of 17 at `n = 29`** under the contact
+mask, against **2 of 4 and 7 of 17** for attracting every pair indiscriminately.
+Biasing toward the graph does worse than not biasing at all.
+The second measurement is the sharper one, because it starts from a configuration that
+already has the structure: under a hand-drawn ring joining each square to the next, from
+an ordered fill (`measure_law.py --drawn`), the run ends at **1 of 5 at `n = 5` and 0 of
+11 at `n = 11`** — and the ordered fill *starts* with 3 of 5 and 8 of 11 already
+realised, consecutive indices in a row-by-row fill being adjacent squares.
+The bias did not build a contact graph.
+It pulled one apart.
+
+Two measured reasons, and neither is a tuning problem.
+**The pull cannot reach**: target pairs end one to four units apart — `n = 29`’s pair
+`(0, 3)` at a gap of 3.91 — while the attraction acts over a quarter of a side, and
+raising the range to 2.0, past the shipped bound, moves the fraction 0/4 to 0/4 at
+`n = 17` and 0/17 to 3/17 at `n = 29`, inside the run-to-run spread.
+**And where a pair does meet, it meets corner-to-side**: `n = 17`’s target pair `(0, 4)`
+ends in contact at a gap of `−0.001` with its orientations 1.93° apart, where a
+full-side contact needs them inside 0.5°. The law has no torque term, so nothing rotates
+a pair into face-to-face registry.
+Two cautions on reading those fractions.
+`n = 100` reads 180 of 180 under every relationship, which is not the bias working — the
+grid start of 100 *is* the record, so its contact graph is realised before the run
+begins. And the full-side test is not symmetric in the pair: it reads the centre offset
+in the lower-indexed square’s frame, which leaves two of 322 retained frames one edge
+short of their own contact graph, a defect tracked separately and too small to move the
+numbers above.
+
+*Instrument.* Half exists, and the half that exists is now measured not to work.
 The enumeration, the exact realizer and the contact-graph attraction mask are all there;
 the driver that walks the enumeration, runs a settle per structure and tabulates which
 realised is not. *Criterion.* Precision and recall against the exact realizer on the
 size-five set, where the answer is already known for every orbit, before it is pointed
 at anything larger.
+*What the negative does to the candidate.* It does not kill it and it
+does reorder it. C0c rests on the settle-under-a-mask being a usable filter, and on the
+two cells where the answer is known the filter’s false-negative rate is near total: the
+retained record’s own contact graph, handed to the settle as its target, comes back
+essentially unrealised.
+Precision and recall measured today would be measuring a torque-free law rather than the
+idea. A pairwise torque term that turns two squares toward a shared edge is the missing
+half, and it is the prerequisite this candidate did not know it had.
 
 *The binding constraint is enumeration growth, and it is already priced.* The atlas is
 complete at size five, not at `n <= 30`; `contact-enumeration-pricing.json` records caps
@@ -725,12 +831,73 @@ realizer looks at next”.
 The physics never certifies anything: only the exact realizer does, and a structure the
 settle likes is a candidate, not a result.
 
-*Note on where snapping belongs.
-Ending a run on the retained packing is production machinery, not evidence: it is how a
-sweep animation across all 324 records lands each frame on what is actually known.
+*Note on where snapping belongs.* Ending a run on the retained packing is production
+machinery, not evidence: it is how an Animate run across all 324 records lands each
+frame on what is actually known.
 It says nothing about the physics, because the physics did not find the endpoint.
 Its research use is the reverse direction above, harvesting what the records’ structures
 are, rather than the forward one.
+The atlas video plan now carries the same statement as its own decision `D16`, so the
+production side and the research side cannot drift on what a snapped frame means.
+
+**C0d. A force law must hold a known optimum still.** *Claim.* Loaded with a retained
+best-known packing and run under the law with no target and no snap, the configuration
+does not drift: on a record with no movable square every square holds its pose exactly,
+and on a record with rattlers only the squares the translation-escape screen already
+identifies as free may move, with the container side never growing.
+
+*Why it goes before C0b rather than after.* It is a necessary condition, so it needs no
+discovery, no seeds and no budget argument.
+A law that cannot hold a known optimum still cannot find one, and every hit rate C0b’s
+sweep would report is uninterpretable until this passes.
+It is also the cheapest test in the catalogue — 318 loads and 318 settles, no search —
+and it is the only one for which the repository already holds the answer key.
+It is two-sided, which is what makes it a test rather than an assertion: on some records
+the law must hold everything, and on others it is allowed to move exactly the squares
+the corpus says are loose.
+
+*Evidence already in hand.* None on the claim; nobody has loaded a record into the
+solver and watched it sit.
+What is in hand is the answer key, verified here against
+[`translation-escape-screen.json`](../../atlas/known-best/translation-escape-screen.json)
+rather than taken on trust.
+Of 318 screened records — six are excluded for a witness shape residual above the limit,
+`n = 68, 69, 103, 105, 110, 131` — **296 have at least one square that can be
+translated**, 5,323 squares in all, of which **2,714 can be pushed clear of everything
+they touch**. So drift is not automatically a failure.
+The **22 records with no movable square** are the 18 perfect squares from `n = 1` to
+`n = 324` together with `n = 5, 11, 28, 40`, and those are the records on which any
+drift at all is a defect in the law.
+The largest absolute container slack anywhere is `3.7e-33`, so the container side is a
+hard ceiling on every record and a settle that grows it has overlapped something.
+
+*Instrument.* A small extension, and every part of it exists.
+The workbench already loads a retained packing as a starting arrangement, already runs a
+settle with the snap and the target off, and already reports the deepest overlap and the
+side the arrangement would need.
+What is missing is the driver: load each record, settle, report per-square displacement
+and turn against the loaded pose, and join the result against the screen’s own
+`movable_squares` list.
+That is the shape of the headless `measure_law.py` harness the prototype already
+carries.
+
+*Criterion.* Declared per record before the run.
+On a record with no movable square: maximum per-square displacement and turn below a
+stated tolerance, and the container side non-increasing.
+On a record with movable squares: every square that moved past tolerance appears in that
+`n`’s `movable_squares` list, and the container side is non-increasing.
+The headline is three counts — records held exactly, records where only listed squares
+moved, records that failed — rather than a mean, because the failure being looked for is
+categorical and a mean would hide a total failure at one `n` behind 300 successes.
+
+*Two confounds to handle before it runs.* The screen states its own one-sidedness: a
+miss proves only that one square cannot be **translated** at that tolerance, and
+rotation and coordinated multi-square motion are outside the test, so a square that
+turns in place is not a screen hit and needs its own tolerance rather than a pass.
+And 23 of the 318 records are recorded as not stable across the screen’s tolerances
+(`n = 132`, 154 to 156, 179 to 182, 206 to 210, 238 to 241, 270, 273, 297, 301, 305,
+307); those should be reported separately rather than scored, because on them the answer
+key is itself tolerance-dependent.
 
 **C1. Anneal length and move family interact, and the interaction is the finding.**
 *Claim.* At equal delivered budget, the improvement from the collective move and the
@@ -949,6 +1116,35 @@ renumbered, their verdicts stand, and rewriting a registered artifact to look ti
 worse than leaving an ugly one in place.
 The point is what the next round should look like.
 
+## What Is Tracked as Work, and Where
+
+Nothing above is registered, and none of it has an `H-` number.
+What does exist, from 2026-09-08, is a bead epic for the instrument, so that the
+workbench’s engineering does not live inside the atlas video plan that accidentally
+produced it.
+
+**Epic `think-qn6l`**, under the move-set campaign `think-5dt2`, with this document as
+its spec. Under it:
+
+- *In flight in the prototype:* `think-wklm` (Pack draws all `n` squares at rest,
+  restart beside play), `think-9j4w` (the Sweep-to-Animate rename, internals included),
+  `think-ic0g` (the solver choice joins the strategy group, the tween goes unavailable
+  in Pack, timing and phasing become Animate-only), `think-j30w` (a best-known start and
+  a re-randomising random start with a visible seed), `think-tswc` (steps per second
+  under Node, with no browser).
+- *Known defects, deferred deliberately:* `think-i52z` (the standing
+  `mark stroke is none` failure, stale needle or real regression), `think-9nil` (the
+  asymmetric full-side contact test), `think-yfhr` (the collision routine written
+  twice), `think-ng1e` (no undo on the drawn graph), `think-zt6u` (42 greens do not hold
+  324 identities), `think-7v26` (the rigidity slider reaches settings the fixed timestep
+  cannot hold).
+- *Not built:* `think-wffa` (Calibrate, candidate C0b) and `think-eq0n` (the
+  stationarity test, candidate C0d), the second blocking the first.
+
+The video artefacts stay with their own plan and are not repeated here: the frame record
+and player, the capture pipeline that turns Animate into a video file, the transition
+record and tween, and publication remain `think-hsdj`’s.
+
 ## What This Document Could Not Settle
 
 - **Whether the collective move is genuinely inert above `n = 26`.** The screen measures
@@ -971,6 +1167,11 @@ The point is what the next round should look like.
   `construction_method: hand-construction` for other people’s constructions.
   It has no convention for its own, and inventing one is a prerequisite for the
   workbench rather than a consequence of it.
+- **Whether Calibrate’s held-out split is declared per session or per run.** Argued for
+  per session under C0b, on the ground that a split chosen after seeing results is not a
+  split, but it is a question about how the instrument is used and it is the owner’s. It
+  has to be answered before Calibrate is built, because it decides whether the split
+  lives in the run record or the session record.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
