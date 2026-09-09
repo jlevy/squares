@@ -130,6 +130,10 @@ them with exact counterexample searches.
 This subsection is an optional proof deep dive.
 Readers who want the configuration and linear-programming foundations first can continue
 at [§2](#2-the-configuration-space) and return here later.
+After the proof,
+[the finite covering LP](#how-the-finite-covering-lp-searches-for-atoms) explains dual
+pricing and [conditional covers](#why-condition-on-corner-squares) from the same
+definitions.
 
 Every upper bound in this subject is a construction, and a construction can be handed
 over and checked. A lower bound has to exclude every packing at once, and this is the
@@ -239,6 +243,171 @@ the method-distinct interval branch and bound in
 certificate’s frozen bytes, agreeing on `4001/4000` to the digit.
 
 ![The T-018 certificate’s 1,121 weighted atoms with one exact Condition 5 witness, beside the shrink-and-snap containment step.](packing/cases/n11_fractional_certificate/t-018-proof-visual.svg)
+
+#### How the finite covering LP searches for atoms
+
+A **site** and a square **pose** play different roles.
+A site is a point where the search may put an atom.
+A pose is one square at one centre and angle.
+In the proof regime above, the admissible side-`B` net squares form a family containing
+all the strict inner cores used by the proof.
+Choose a finite site set `𝒳` and a finite pose set `𝒫`. The covering linear program is
+
+```text
+minimise    Σ { w(x) : x ∈ 𝒳 }
+subject to  Σ { w(x) : x ∈ 𝒳 and x ∈ Q } ≥ 1    for every Q ∈ 𝒫
+            w(x) ≥ 0                              for every x ∈ 𝒳.
+```
+
+The matrix has one row per pose and one column per site.
+Its objective asks for the least total dot weight that covers every held pose by at
+least one. This finite program is only the search problem.
+Omitting poses makes it easier, while restricting the atom locations to held sites makes
+it harder, so its value has no general ordering against the unrestricted continuum
+problem.
+
+The generator repairs the two omissions in opposite directions.
+**Row generation** searches all event cells for a pose whose current covered mass is
+below one and adds its constraint.
+Adding a row can raise the covering objective.
+**Column generation** adds a promising atom site, giving the primal more freedom, so the
+objective can fall or stay fixed.
+The finished certificate still needs the shrink, boundary, and all-angle arguments
+already given above.
+In particular, its closed side-`B` cores lie strictly inside the physical unit squares;
+otherwise two touching physical squares could share a boundary atom and invalidate the
+counting sum.
+
+The dual program explains which missing site to try.
+It puts a nonnegative weight `y(Q)` on each held pose and maximises their total weight,
+subject to
+
+```text
+depth_y(x) = Σ { y(Q) : Q ∈ 𝒫 and x ∈ Q } ≤ 1    for every held site x ∈ 𝒳.
+```
+
+The poses with `y(Q) > 0` form the dual’s **support**. The dual can be read as a
+**fractional packing**: poses may overlap, and fractions of many poses may pass through
+one point, provided their total depth at each held site is at most one.
+This is not a physical packing of disjoint unit squares.
+Duality says its total weight lower-bounds the minimum covering mass for the same finite
+rows and columns.
+
+Now evaluate `depth_y(x)` at a site not yet in `𝒳`. If it exceeds one, the current dual
+violates the constraint that this missing column would impose.
+Its reduced cost is `1 − depth_y(x)`, so negative reduced cost identifies a useful
+candidate atom location.
+This search for a missing site is called **pricing**. The symmetric implementation adds
+the point’s entire `D₄` orbit `O`, obtained by the container’s rotations and
+reflections, and checks that the whole orbit is absent.
+One orbit variable assigns the same per-point weight to its images: its objective cost
+is `|O|`, and its coefficient in pose row `Q` is the number of orbit points inside `Q`.
+The symmetrised dual has equal depth at all orbit images, so the orbit’s reduced cost is
+`|O|(1 − depth_y(x))` and has the same sign as the pointwise expression.
+Adding the orbit creates one primal orbit variable and one aggregated dual constraint.
+It need not force a strict objective change: a different old dual optimum may survive.
+Determining the new optimum requires resolving the enlarged LP.
+
+A support cap can hide that signal.
+For a toy point, suppose the first 32 support rows contribute depth `0.94` and the
+remaining positive rows contribute `0.12`. The capped family reports `0.94 ≤ 1`, while
+the full family reports `1.06 > 1` at the same point.
+Those numbers are illustrative, not a measured result.
+
+[H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) turns that
+example into a controlled test.
+It uses **one** finite LP solve and one largest-first sequence of positive dual entries
+retained under the protocol’s selection threshold, rationalised once; `paired32` takes
+the first 32 entries and `full` takes them all.
+Success requires one new point whose complete `D₄` orbit is absent and whose exact
+rational depths at the same point satisfy
+
+```text
+depth_paired32(x) ≤ 1 < depth_full(x).
+```
+
+That outcome would show that the 32-row cap hides a violation in this rationalised
+proposal. It would not establish a strict objective improvement, identify the cause of
+any historical stall, certify the rounded weights as a feasible or optimal dual, or
+prove a packing bound.
+Here “full” means the positive support of this one finite solution, not all square poses
+in the continuum. The dated
+[exp-134 protocol](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md)
+is published but unrun, so it carries no verdict.
+That experiment transports the retained state to unit-square poses for a pricing
+mechanism test; it is not the side-`B` primal-cover theorem used by T-018.
+
+The threshold explains what either side can eventually prove.
+An exact atomic cover of all admissible strict cores with total mass below 11, together
+with the transfer above, excludes eleven physical squares.
+Conversely, an exact fractional family of total weight at least 11 whose depth is at
+most one at **every** possible atom location would rule out that unconditional cover
+route for the fixed core family.
+It would not exhibit a physical packing or rule out other proofs.
+The
+[retained side-`B` depth-one baseline](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md)
+at `L = 191/50` has mass `21342289572/2055263195 ≈ 10.3842`, below 11, so it is
+inconclusive: it is neither the desired cover below 11 nor an obstruction at that
+threshold.
+
+#### Why condition on corner squares?
+
+An unconditional cover treats each square alone.
+Structural information can instead split the possible packings into cases and give each
+case its own atomic measure.
+Only proved restrictions on corner ownership, wall contacts, angles, or compatibility
+may remove poses. Every hypothetical packing must belong to a case, and its certificate
+must cover every legal core throughout that case’s continuous parameter range.
+
+A **strict core** is a slightly smaller square—side `9977/10000` here—placed strictly
+inside a physical unit square.
+The strict inset makes the closed cores of non-overlapping physical squares disjoint,
+including at their boundaries.
+A **corner owner** is one of four distinct physical unit squares whose selected core
+contains a chosen **mark**, a specified point near a container corner.
+The owner may still move and rotate within its case.
+A **guaranteed footprint** is a fixed closed polygon that lies inside the owner’s
+selected core for every pose allowed by the case.
+It records area that is certainly occupied even though the owner’s exact pose is
+unknown.
+
+![Diagram of four green guaranteed footprints and five red dots: eleven squares minus four owners leaves seven residual cores, but disjoint cores cannot share any of the five dots.](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg)
+
+*The proved five-dot exclusion for one selected four-owner branch at `L = 96/25`. The
+corner shapes are the regions guaranteed to lie in the four owner cores; the five dots
+pierce every selected remaining net core.
+The drawing explains the logic; the linked records supply the exact check and the
+geometric proof that extends it to every physical angle.*
+
+Here is the counting argument for that branch.
+
+1. Four distinct corner owners are already identified, so an eleven-square packing would
+   have `11 − 4 = 7` other squares.
+2. Every strict core of a remaining square must avoid the four guaranteed footprints.
+3. Use the five fixed dots shown in the figure.
+   Their exact coordinates and the full worked example are in the
+   [sprint report](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md).
+4. The
+   [exact full-net replay](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json)
+   checks all 361 chosen core orientations and finds that every admissible remaining net
+   core contains at least one of those dots.
+   The reviewed shrink-and-snap argument transfers the finite orientation check to
+   physical squares at every angle
+   ([five-dot transfer review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md)).
+5. **No dot can serve two cores:** each strict core lies inside a different physical
+   square’s interior, and those interiors do not overlap.
+   Five dots can therefore meet at most five residual cores, fewer than the seven the
+   branch requires.
+
+This proves that an eleven-square packing at side `96/25` cannot belong to this selected
+branch. The result is registered as [T-023](packing/frontier/RESULTS.md).
+It does not prove a new lower bound for `s(11)`. The corner-owner theorem permits other
+owner classes and sectors, so a global result would need conditional exclusions whose
+cases cover every permitted combination.
+The
+[numerical source receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json)
+records how the five dots were found; the exact replay and transfer review establish the
+covering claim.
 
 ## 2. The Configuration Space
 
@@ -1122,12 +1291,12 @@ Every word below is used narrowly here, and each earns a row by being one a gene
 reader would otherwise read loosely.
 Symbols are in [§10](#10-a-notation-card), and [`SYNOPSIS.md`](SYNOPSIS.md#terminology)
 is the authority for everything it defines.
-Two rows below are local to this document: **terminal set**, which the synopsis uses
-without defining, and **feasibility tolerance**, which belongs to the solver rather than
-to the project.
-The stationary-backbone terms are shared with the current exploration and
-agenda, but they describe a proposed completeness object rather than a built global
-enumerator. The order is by dependency, so it reads top to bottom.
+Several rows below are local to this document: the covering-LP terms introduced above,
+**terminal set**, which the synopsis uses without defining, and **feasibility
+tolerance**, which belongs to the solver rather than to the project.
+The stationary-backbone terms are shared with the current exploration and agenda, but
+they describe a proposed completeness object rather than a built global enumerator.
+The order is by dependency, so it reads top to bottom.
 
 Three words carry controlled multiple senses—**cell**, **quench** and
 **exploration**—and the rule for each is given with it.
@@ -1138,9 +1307,13 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 | **cell** | A choice of separating axis and order for every pair. Always the configuration-space object; write *instance cell* for a sweep position and *event cell* for a region of centres, never bare “cell” for either |
 | **atom** / **weight** | An exact point in a candidate container, and the nonnegative rational amount of bookkeeping mass assigned to it. An atom has no area and is not a packed square |
 | **atomic measure** / **mass** | The rule assigning a region the sum of the weights of its atoms, boundary atoms included; the mass is what that rule returns |
+| **site** / **pose** | A candidate atom location, and one square at one centre and angle. In the covering LP, sites are columns and poses are rows |
 | **direction net** | The finite set of exact square orientations a certificate checks. A strict shrink condition lets a nearby net direction stand in for any orientation at all |
 | **event cell** | One open region of admissible centres on which the set of atoms a square covers is constant. Not a configuration-space cell, and never written bare |
 | **weighted fractional unavoidable-set certificate** | A finite weighted atom set whose total mass is below `n` but whose mass is at least one in every prescribed inner square; with the direction and shrink conditions, that tension is a lower bound on `s(n)` |
+| **row generation** / **column generation** | Adding a deficient square-pose constraint, or adding a candidate atom site. Rows restrict the cover; columns give it more choices |
+| **dual depth** / **pricing** | The sum of dual pose weights covering one point, and the search for an absent site where that depth exceeds one |
+| **dual support** / **fractional packing** | The held poses with positive dual weight, and their interpretation as weighted, possibly overlapping squares whose depth is capped at one at the held sites. It is not a physical packing |
 | **quench** | The map sending a configuration to the local optimum a deterministic refinement carries it to, and this project’s implementation of it. Write *quench map* where the distinction matters. Includes the angle half |
 | **basin** / **point-basin** | The set of configurations one quench carries to a single returned pose. Defined relative to that quench, so a different refiner gives a different decomposition; too fine when one terminal component is a family |
 | **polish** | Refinement within the basin you are in. This is what the quench does, and all it does |
@@ -1187,10 +1360,13 @@ appear inside `oᵢₖ`.
 | `s(n)` | real | The optimal side: the smallest container that fits `n` unit squares |
 | `m` | integer | A perfect-square root, in `s(m²) = m` |
 | `K` | square | The candidate container `[0, L]²` a lower-bound certificate rules out |
-| `L` | positive rational | That container’s side; `381/100` in T-018 |
+| `L` | positive rational | A candidate container side; `381/100` in T-018 and `96/25` in the cited ownership work |
 | `z`, `w(z)` | point, nonnegative rational | An atom’s location and its weight |
 | `Q` | region | A region whose atomic mass is being measured, usually a closed side-`B` square |
 | `μ` | atomic measure | `μ(Q)` is the sum of `w(z)` over the atoms `z` in `Q` |
+| `𝒳`, `𝒫` | finite sets | The held atom sites and held square poses in a covering LP |
+| `y(Q)` | nonnegative real | The dual weight assigned to held pose `Q` |
+| `depth_y(x)` | nonnegative real | The sum of `y(Q)` over held poses containing point `x`; pricing searches for an absent site where it exceeds one |
 | `B` | positive rational | The shrunken square side in a certificate; `9977/10000` in T-018 |
 | `Pⱼ` | square | The closed side-`B` square placed strictly inside packed unit square `j` |
 | `tᵣ`, `θᵣ` | rational, angle | A net direction’s half-angle tangent and the direction itself: `θᵣ = 2 arctan(tᵣ)` |

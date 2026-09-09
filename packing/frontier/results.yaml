@@ -1184,6 +1184,64 @@ results:
       supremum. Direction-specific cores, two-core endpoint averaging, or exact
       fixed-atom core shrinkage might extract more from the same data; the present
       argument cannot prove a strict bound at its own endpoint.
+  - id: T-023
+    claim: >-
+      At q = 96/25, if four distinct unit squares have selected strict cores of side
+      B = 9977/10000 containing, respectively, the four closed rational patches in
+      arms.endpoint.footprint_union of the retained exp143 receipt, at most five
+      further unit squares fit. Thus the specified four-owner branch contains no
+      eleven-square packing. The five saved rational dots meet every admissible
+      remaining core on the complete 361-direction net; audited containment and
+      boundary arguments transfer this exact check to arbitrary physical angles.
+      This is a conditional exclusion and changes no global bound for s(11).
+    scope: {n_values: [11]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A substantive case exclusion at the central open size, demonstrating that
+        forced occupied area can make a five-dot counting argument sufficient.
+        It excludes one owner combination and does not move the global bound.
+      scored: '2026-09-09'
+      by: GPT-6 Astra extra-high mathematical review and coordinator review
+    novelty: apparently-novel
+    composition: >-
+      Exact full-net coverage and frozen-data identities are V4/C3. Universal owner
+      footprint containment, extension to event boundaries, and strict-core selection
+      for physical squares are audited analytic proof steps, so the composed theorem
+      is V3. C3 records the retained exact replay and its controls. No method-distinct
+      confirmation or mapped review-ready proof packet is claimed.
+    produced_by:
+      hypothesis: H-142
+      agenda_cell: BC-313
+      session: session-113
+      experiment: exp-144
+    evidence:
+      - E-n011-five-dot-full-net
+      - E-n011-five-dot-physical-transfer
+    artifacts:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
+    controls:
+      - packing/tests/test_owner_footprints.py
+      - packing/tests/test_multi_owner_domains.py
+      - packing/tests/test_replay_owner_footprint_cover.py
+    next_rung: >-
+      Complete an independent implementation of the residual-domain union and five-dot
+      replay under think-yhw2, then assemble a mapped review packet. A second exact
+      implementation increases assurance but alone does not earn C4, which requires
+      distinct methods. V4 for the whole theorem requires mechanizing the analytic
+      transfer. Wider owner-class coverage is a new research result, not a rung change.
+    notes: >-
+      Registered at the post-sprint milestone from exp144, without a new target run or
+      additional experiment cost. The exact exp143 source is Git blob
+      cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19. Apparent novelty concerns this explicit
+      patch-and-dot instance within the retained source comparison; no new priority
+      search was performed. The independent domain-union target remains unrun.
   - id: T-024
     claim: >-
       s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862,

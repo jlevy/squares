@@ -25,8 +25,10 @@ import pytest
 from nodejs_wheel import node
 
 from devtools.check_print_layout import (
+    _ACTIVE_MATH_TEXT,  # pyright: ignore[reportPrivateUsage]
     _PROBE,  # pyright: ignore[reportPrivateUsage]
     _PROVER_LAYOUT,  # pyright: ignore[reportPrivateUsage]
+    _READOUT_TEXT,  # pyright: ignore[reportPrivateUsage]
     _ROTATION_TARGET,  # pyright: ignore[reportPrivateUsage]
     BOXED_TOLERANCE_PX,
     TOLERANCE_PX,
@@ -87,7 +89,11 @@ def marker(**over: object) -> Marker:
         "markerCentre": 100.0,
         "lineCentre": 100.0,
         "fontSize": 13.2,
+        "baseFontSize": 16.0,
         "lineHeight": 20.5,
+        "width": 3.25,
+        "height": 3.25,
+        "painted": False,
     }
     return {**row, **over}  # pyright: ignore[reportReturnType]
 
@@ -159,12 +165,28 @@ def test_a_marker_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(markers=[marker(markerCentre=100.0 + off)]))
 
 
+def test_numbered_markers_do_not_have_to_be_square() -> None:
+    assert not findings(both(markers=[marker(height=22, width=10, painted=False)]))
+
+
+@pytest.mark.parametrize("base_size", [16.0, 18.0])
+def test_painted_markers_use_the_requested_optical_offset(base_size: float) -> None:
+    adjusted = marker(markerCentre=100 + base_size * 0.04, baseFontSize=base_size, painted=True)
+    assert not findings(both(markers=[adjusted]))
+    for displacement in (-1.01, 1.01):
+        wrong = {**adjusted, "markerCentre": adjusted["markerCentre"] + displacement}
+        found = findings(both(markers=[wrong]))
+        assert len(found) == 2
+        assert all("optical centre" in message for message in found)
+
+
 def test_centered_bullets_must_still_be_visible_squares() -> None:
     """The glyph-centering override stretched drawn squares into centered vertical bars."""
     square = {"path": "ul[0] > li[0]", "width": 3.3, "height": 3.3, "painted": True}
     assert not findings(both(markers=[marker()], bullets=[square]))
     for change in (
         {"height": 25.0},
+        {"height": 3.36},
         {"height": 0.0},
         {"width": 0.0},
         {"painted": False},
@@ -298,6 +320,44 @@ def test_zero_line_height_footnote_ink_does_not_move_the_marker_line() -> None:
     assert contributing == {"top": -8.515625, "bottom": 20}
 
 
+def test_clipped_mathml_does_not_move_the_marker_line_but_visible_fallback_does() -> None:
+    """Retained mass-condition geometry: hidden MathML rises above the real line."""
+    setup = """
+        const semantic = {style: {position: 'absolute', clip: 'rect(1px, 1px, 1px, 1px)',
+          clipPath: 'none'}, rects: [
+          {top: 1, bottom: 2, height: 1, width: 1, left: 600, right: 601},
+          {top: -3.6875, bottom: 18.3125, height: 22, width: 9, left: 600, right: 609},
+        ]};
+        const el = {querySelectorAll: selector => selector.startsWith('sup') ? [] : [semantic],
+          rects: [
+          {top: 1, bottom: 25, height: 24, width: 600, left: 0, right: 600},
+          {top: 1, bottom: 26.1875, height: 25.1875, width: 12, left: 600, right: 612},
+          ...semantic.rects,
+          {top: 4.015625, bottom: 25.609375, height: 21.59375, width: 9,
+            left: 600, right: 609},
+        ]};
+        const getComputedStyle = node => node.style;
+        const document = {createRange: () => {
+          let selected;
+          return {selectNodeContents(node) {selected = node;},
+            selectNode(node) {selected = node;}, getClientRects: () => selected.rects};
+        }};
+    """
+    line = first_line_box(setup)
+    assert line == {"top": 1, "bottom": 26.1875}
+    unchanged = marker(
+        markerCentre=14.217525,
+        lineCentre=(line["top"] + line["bottom"]) / 2,
+        baseFontSize=18,
+        painted=True,
+    )
+    assert not findings(both(markers=[unchanged]))
+    shifted = {**unchanged, "markerCentre": unchanged["markerCentre"] + 4}
+    assert len(findings(both(markers=[shifted]))) == 2
+    visible = first_line_box(setup.replace("position: 'absolute'", "position: 'static'"))
+    assert visible == {"top": -3.6875, "bottom": 26.1875}
+
+
 def test_a_footnote_reference_that_opens_its_line_is_a_finding() -> None:
     """Under one em in front of it, there is no word there -- only wrapped punctuation."""
     assert not findings(both(footnotes=[footnote(leadIn=300.0)]))
@@ -386,20 +446,25 @@ const panel = {getBoundingClientRect: () => ({top: broken ? 20 : 300, left: 0, r
 const stage = {getBoundingClientRect: () => ({bottom: 300})};
 const item = {
   whiteSpace: broken ? 'normal' : 'nowrap',
+  closest: () => null,
   getBoundingClientRect: () => ({left: broken ? -20 : 20, right: broken ? 450 : 380}),
   querySelector: selector => selector === '.katex' ? mass : item,
+  querySelectorAll: selector => [selector === '.katex' ? mass : item],
 };
 const digit = {children: [], textContent: '4001', fontSize: broken ? '14px' : '20px'};
-const mass = {fontSize: '20px', querySelectorAll: () => [digit], querySelector: () => ({})};
+const mass = {fontSize: '20px', closest: () => null,
+  querySelectorAll: () => [digit], querySelector: () => ({})};
 const hidden = {getClientRects: () => broken ? [{}] : []};
 const figure = {
   getClientRects: () => [{}],
   querySelector: selector => ({
     '.panel': panel, '.stage': stage, '.math-item': item, '.mass-val .katex': mass,
   })[selector],
-  querySelectorAll: selector => selector === '.math-item' ? [item] : [hidden],
+  querySelectorAll: selector => ({
+    '.math-item': [item], '.mass-val .katex': [mass], '[hidden]': [hidden],
+  })[selector],
 };
-const document = {querySelectorAll: () => [figure]};
+const document = {documentElement: {dataset: {}}, querySelectorAll: () => [figure]};
 const getComputedStyle = el => el;
 """
         f"\nprocess.stdout.write(JSON.stringify(({_PROVER_LAYOUT})()));\n"
@@ -420,6 +485,83 @@ const getComputedStyle = el => el;
         "the half-tangent fraction has reduced-size numerator or denominator",
         "a hidden status or verdict still occupies a visible box",
     }
+
+
+def test_minimum_mass_reads_only_the_selected_semantic_fraction() -> None:
+    """Clipped active MathML survives; inactive font variants cannot add extra terms."""
+    script = r"""
+const assert = require('node:assert/strict');
+const document = {documentElement: {dataset: {}}};
+const make = (contexts, textContent) => ({textContent, closest: () => ({
+  dataset: {squaresMathContexts: contexts}, parentElement: null,
+})});
+const nodes = [
+  make('custom-serif custom-sans', '7'), make('custom-serif custom-sans', '8'),
+  make('system-serif system-sans', '9'), make('system-serif system-sans', '10'),
+];
+"""
+    script += f"const terms = ({_ACTIVE_MATH_TEXT});\n"
+    script += r"""
+for (const prose of ['serif', 'sans']) {
+  document.documentElement.dataset.kpressProseFont = prose;
+  document.documentElement.dataset.kpressFontSet = 'custom';
+  assert.deepEqual(terms(nodes), ['7', '8']);
+  document.documentElement.dataset.kpressFontSet = 'system';
+  assert.deepEqual(terms(nodes), ['9', '10']);
+}
+// Wrong active content must remain observable to the certificate comparison.
+nodes[2].textContent = '999';
+assert.deepEqual(terms(nodes), ['999', '10']);
+"""
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
+def test_readout_text_excludes_dormant_variants_and_semantics_but_keeps_fallback() -> None:
+    """Hidden expected values cannot mask a wrong active readout or replace its glyphs."""
+    script = r"""
+const assert = require('node:assert/strict');
+const NodeFilter = {SHOW_TEXT: 4};
+const document = {
+  documentElement: {dataset: {}},
+  createTreeWalker: el => {
+    const nodes = el.nodes[Symbol.iterator]();
+    return {nextNode: () => nodes.next().value || null};
+  },
+};
+const make = (contexts, textContent, semantic = false) => ({
+  textContent,
+  parentElement: {closest: selector => selector === '.katex-mathml'
+    ? (semantic ? {} : null)
+    : (contexts ? {dataset: {squaresMathContexts: contexts}, parentElement: null} : null)},
+});
+const active = make('custom-serif custom-sans', 'wrong visible value');
+const readout = {nodes: [
+  make(null, 'direction: '), active,
+  make('custom-serif custom-sans', '12219313/45000000 30.3836', true),
+  make('system-serif system-sans', '12219313/45000000 30.3836'),
+]};
+"""
+    script += f"const text = ({_READOUT_TEXT});\n"
+    script += r"""
+for (const prose of ['serif', 'sans']) {
+  document.documentElement.dataset.kpressProseFont = prose;
+  document.documentElement.dataset.kpressFontSet = 'custom';
+  assert.equal(text(readout), 'direction: wrong visible value');
+  document.documentElement.dataset.kpressFontSet = 'system';
+  assert.equal(text(readout), 'direction: 12219313/45000000 30.3836');
+}
+// A fresh client render has no profile wrapper; a failed render preserves raw TeX.
+assert.equal(text({nodes: [make(null, 'x=2')]}), 'x=2');
+assert.equal(text({nodes: [make(null, String.raw`\frac{7}{8}`)]}), String.raw`\frac{7}{8}`);
+assert.equal(text({nodes: []}), '');
+"""
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 @pytest.mark.parametrize("broken", [False, True], ids=["usable", "known-touch-defects"])

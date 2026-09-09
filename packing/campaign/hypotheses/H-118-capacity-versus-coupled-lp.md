@@ -32,8 +32,10 @@ hypothesis:
   registered: '2026-09-07'
   notes: >-
     A narrow discriminator under H111, owned by Agenda028 rather than its broad
-    anchor pilot. No target domain has yet been selected. Freeze a prospective
-    bounded determination before running; failure does not settle all resources.
+    anchor pilot. A guarded eleven-square parent now has an independently
+    accepted direct geometric exclusion; its matching strong coupled-LP
+    representation and exact surviving relaxation witness remain missing.
+    No target comparison is admitted and no superiority verdict is claimed.
 ---
 # H-118 — Capacity Versus a Coupled Outer LP
 
@@ -54,6 +56,72 @@ An exact obstruction can reject the frozen finite resource family.
 A rigorously feasible packing in the target domain refutes its proposed exclusion.
 Unsuccessful search, loose bounds and timeout leave the question unresolved.
 Even an accepted comparison excludes only its domain, not all eleven-square packings.
+
+Session092’s
+[first domain analysis](../series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md)
+derives a complete three-band count split and exact feasible packings for all three
+isolated four-square subsystems.
+The central packing also admits a bottom anchor.
+These are analytical obstructions to those domain exclusions, with no target search.
+The
+[parent-fence argument](../series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md)
+and its
+[independent review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md)
+now supply such a restriction.
+Pose-dependent guards on four central-band squares leave every residual center in four
+explicit regions of diameter at most $999/1000$. At most four additional full squares
+fit, at any orientations; seven are impossible.
+The original central fixture satisfies the four-pose guards strictly, as does a
+continuous family. This excludes their extension to eleven squares.
+
+The outer bands and central guard-failure cases remain open.
+The first proposed closed remainder contained tautological vertex bounds whose failure
+children reproduced the parent.
+The independently checked equivalent 24-guard list corrects this representation while
+preserving the capacity theorem and every weak seam.
+
+The
+[comparator assessment](../series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md)
+requires the same nonlinear guards and applicable geometric deductions.
+A strong closure can already express the accepted regional capacity, making the central
+instance a shared-lemma or proof-cost comparison.
+No natural finite baseline and exact surviving point are frozen.
+BC277’s
+[boundary-band design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md)
+accept a compact eight-guard family, complete closed failure children and joint upper
+reflection. The strict four-pose fixture supplies no residual-capacity conclusion.
+BC278’s
+[independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md)
+accepts an exact seven-disk witness, a continuous family of selected poses around it,
+and a distinct strict seven-center octagon witness.
+Uniform disk and octagon capacities of six are therefore false on the admitted family.
+This also rules out fixing the disk obstruction by using the exact selected squares or
+tightening universal inner cores shared by every unrestricted residual orientation.
+
+The full-square question remains unresolved.
+Uniform bottom localization survives, and the disk witness cannot lift at its fixed
+centers: two centers on container boundaries force axis-aligned squares that overlap.
+This is evidence for considering wall-conditioned or joint residual-square constraints;
+it is not an exclusion of the whole full-square family.
+The bounded attempt is closed, and a new model or domain requires a separately priced
+decision. No strict comparison with a matched coupled LP has been made.
+The
+[midpoint allocation](../series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md)
+selects BC279’s exact common core conditioned on each center’s wall clearance.
+Its exact maximal-core identity and complete model passed independent admission.
+The bounded target attempt and
+[fresh audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md)
+accept two distinct exact six-core configurations, including every shared-normal pair
+certificate. A strict three-strip cover excludes adding a seventh to one fixed
+arrangement; rearranging those centers remains free in the actual target.
+Neither whole-model exclusion nor a seven-core witness was obtained.
+The six-core controls refute a bound below six, while capacity at most six remains
+unresolved even at their fixed four-pose configuration.
+BC279’s allocation is closed with those partial results; a future attempt needs a
+specific new implication or separately priced complete method.
+H118 remains open, and the global bracket is unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

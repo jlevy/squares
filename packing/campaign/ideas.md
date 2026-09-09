@@ -409,9 +409,9 @@ No research has started under this plan.
 [X-021](explorations/X-021-what-can-be-proved-about-eleven-squares.md) pursues X-019 as
 a programme: four mathematical lanes proved corner, angle, contact and ownership lemmas,
 measured what each buys at 96/25, and priced the closing route.
-The paused [Agenda 030](agendas/agenda-030-parallel-structural-lanes-at-n11.md) maps
-eleven research lanes with disjoint deliverables, nine of them ready to run at once.
-No research has started under this plan.
+The terminal [Agenda 030](agendas/agenda-030-parallel-structural-lanes-at-n11.md)
+records the eleven lanes and their dispositions.
+Agenda 031 continues its selected ownership and fractional-pricing work.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
@@ -423,6 +423,23 @@ No research has started under this plan.
 | 126 | The first rectangle bound for eleven | registered | [H-132](hypotheses/H-132-rectangle-no-fit-at-q.md) | A convex domain change; the largest H0 with no packing in 3.84 × H0 is the strongest symmetry-breaking premise available. |
 | 127 | Is the 3.82 plateau a site artefact? | registered | [H-133](hypotheses/H-133-plateau-site-artefact.md) | Trump-shaped cores overlapping in site-free strips would explain exactly eleven; thirty minutes to test. |
 | 128 | An eleven-mark ownership set at 96/25 | registered | [H-134](hypotheses/H-134-eleven-mark-ownership-set.md) | The one lemma that collapses the exact-side tree to about two to the twenty LPs; prior about thirty per cent. |
+
+## Ownership and Pricing Continuation — X-022
+
+[X-022](explorations/X-022-segment-ownership-continuation.md) retains sharp local owner
+capacities, necessary angle and support restrictions, and exact counterexamples that
+prevent those local facts from being mistaken for a global exclusion.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 131 | Test full dual support against its first 32 rows at the same new site | registered | [H-135](hypotheses/H-135-paired-full-support-pricing.md) | Solve the retained BC-232 state once, rationalise one support sequence, and replay both depths exactly at an orbit absent from the state. |
+| 132 | Compare a fixed-corner residual cover with its unrestricted control | registered | [H-136](hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | On one fixed grid and nine retained directions, test whether avoiding four flush corner units lowers the numerical covering objective by more than four; this is a conditional mechanism screen, not a normalization of arbitrary packings. |
+| 133 | Reuse exact fractional packings to obstruct one-owner covers on all supports | registered | [H-137](hypotheses/H-137-single-owner-dual-salvage.md) | Delete poses meeting each guaranteed footprint; an exact surviving mass of ten blocks that residual-ten cover. |
+| 134 | Screen all four-owner footprint combinations by shared exact deletion masks | registered | [H-138](hypotheses/H-138-four-owner-dual-salvage.md) | Test the minimum surviving mass over all65536 combinations against seven, retaining negative or unresolved outcomes. |
+| 135 | Compare owned-point and area-footprint covers on matched independent sites | registered | [H-139](hypotheses/H-139-owner-footprint-matched-gain.md) | Four numerical arms distinguish geometry gain from the change in remaining-square count. |
+| 136 | Check the fixed-corner rational candidate across every retained direction | registered | [H-140](hypotheses/H-140-fixed-corner-full-net-cover.md) | Exact full-net minimum tests the unchanged weights; positive minima also permit a separately labeled normalized feasible mass. |
+| 137 | Compare four guaranteed occupied regions with four bare marks | registered | [H-141](hypotheses/H-141-four-owner-footprint-matched-gain.md) | One compatible owner configuration tests the residual-seven mechanism before any exhaustive branch expansion. |
+| 138 | Verify the five-dot four-owner candidate on the complete net | registered | [H-142](hypotheses/H-142-five-dot-full-net-cover.md) | A positive full361minimum turns the numerical branch candidate into a five-dot conditional exclusion under the reviewed transfer. |
 
 ## Three Losses and a New Atom — X-023
 

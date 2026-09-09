@@ -302,6 +302,8 @@ def test_a_tree_with_no_git_history_leaves_ancestry_unresolved(monkeypatch, tmp_
     Grammar and presence still bind there; only the ancestry clause goes quiet, and it says
     so on stdout rather than passing in silence.
     """
+    # A snapshot under a checkout must not inherit that enclosing repository's history.
+    monkeypatch.setenv("GIT_CEILING_DIRECTORIES", str(tmp_path.resolve()))
     plain = tmp_path / "no-git"
     plain.mkdir()
     _record(
@@ -316,6 +318,7 @@ def test_a_tree_with_no_git_history_leaves_ancestry_unresolved(monkeypatch, tmp_
 
 
 def test_grammar_still_binds_where_ancestry_cannot_be_resolved(monkeypatch, tmp_path) -> None:
+    monkeypatch.setenv("GIT_CEILING_DIRECTORIES", str(tmp_path.resolve()))
     plain = tmp_path / "no-git"
     plain.mkdir()
     _record(

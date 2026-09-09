@@ -106,11 +106,13 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
 | [session-091](agent-sessions/session-091-structural-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
+| [session-092](agent-sessions/session-092-hybrid-overnight.md) | stopped | contemporaneous | `insight-iteration` (insight) | `efficiency-loop` (efficiency) | 20 | think-0yfe | After the final record-only push gate and publication, start a separately allocated BC-282 design from Agenda 028 and think-s6e7. Require the 20-minute complete skeleton/alternative table and 10-minute independent admission before any later target; no automatic retry or new eight-hour block. |
 | [session-093](agent-sessions/session-093-full-square-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-bmx9 | Select think-7e72 for independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt in the density lane. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session. |
 | [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 8 | think-63oj | Post-checkpoint amendment after Session095's accepted exp128 and independent BC265 design selects BC-264 under think-mq0d for the existing 30-minute H114 feature and kernel-contract pricing slice. No target or new block is activated. BC259 and the fixed collision-cover allocation are terminal; neither receives an unchanged retry. |
 | [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | completed | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 5 | think-ro0s | After final record-delta validation and publication, hand off future BC264/think-mq0d's existing30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; no new block, target or unchanged retry is activated here. |
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
 | [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 6 | think-c53m | Continue BC-264 under think-mq0d, whose operational certification and draft-publication prerequisites are retained in this record and owned by think-m2lx. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation. |
+| [session-098](agent-sessions/session-098-residual-skeleton.md) | stopped | contemporaneous | `insight-iteration` (correctness) | `documentation-pass` (correctness) | 4 | think-oli1 | After final-delta validation and publication, retain existing BC-264 / think-mq0d as the next portfolio pricing entry under its separate owner. Check live ownership and accept its kernel-specific prerequisites before at most30 minutes of feature and full-verification pricing; no automatic target or hierarchy. |
 | [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-10 (twice; the budget note rules out a third time and names what closes it, think-y0hr), until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
 | [session-100](agent-sessions/session-100-duality-kill-tests-and-unit-value.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-7lp3 | Coordinator: keep H-129 open and use the dated correction's retained exp-070 family, exact unit transport, and net-bound resume contract. The original scratch state has not been recovered. The certification debt under think-7lp3 clears only with the next qualifying gate on the integrated branch; source replay and instrument controls come before a separately registered target continuation. |
 | [session-101](agent-sessions/session-101-corner-skeleton-ownership.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (process) | 2 | think-1136 | Under think-kbci the coordinator attaches the resource rollup, allocates the experiment id for the corner-pair theorem and H-128's recorded verdict, and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the pair-priced margin (phase G) is the next session's first step. |
@@ -122,7 +124,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-107](agent-sessions/session-107-first-wave-selection.md) | stopped | contemporaneous | `factual-review` (correctness) | `review-planning-oversight` (insight) | 2 | think-znzj | Under think-kbci the coordinator integrates this record, attaches the resource receipt and runs the certifying gate; then funds the selected block under think-qfog and the efficiency block under think-7lp3, and runs BC-304 (think-yrw1) as the closeout. |
 | [session-108](agent-sessions/session-108-anchors-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-4ifm | Under think-kbci the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-111 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
 | [session-109](agent-sessions/session-109-corner-class-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-kx2l | Under think-kbci the coordinator integrates the lane section, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
-| [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | think-qfog starts the selected pairwise-compatibility continuation on a new codex branch after merge publication. |
+| [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
+| [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Historical at this checkpoint: resume think-mq0d for BC-264 subject to its allocation and admission requirements. Agenda030 subsequently superseded that selection with think-qfog; the current SYNOPSIS governs new work. This publication repair does not reprioritize research or authorize a target run. |
+| [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
+| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: independently audit the union and five-dot replay, reuse the certificate through valid symmetries and exact containment, then search only uncovered classes under fresh preregistration and separately recorded usage. |
 
 ### Workflow summary
 
@@ -131,15 +136,15 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 2 | 1 | 13 | 1 |
-| `factual-review` | 5 | 0 | 47 | 2 |
-| `insight-iteration` | 19 | 1 | 60 | 3 |
+| `factual-review` | 5 | 0 | 48 | 2 |
+| `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 17 | 4 | 76 | 7 |
-| `pipeline-improvement` | 26 | 0 | 134 | 1 |
-| `documentation-pass` | 1 | 0 | 16 | 1 |
+| `efficiency-loop` | 9 | 1 | 34 | 1 |
+| `research-loop` | 17 | 4 | 78 | 7 |
+| `pipeline-improvement` | 26 | 1 | 138 | 4 |
+| `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
-| `review-planning-oversight` | 0 | 0 | 4 | 0 |
+| `review-planning-oversight` | 0 | 0 | 8 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -574,14 +579,14 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 ### [agenda-027](agendas/agenda-027-compatibility-and-restricted-families.md) — Compatibility and Restricted Families
 
-Status: **active**. Prepare an independent alternative to the ongoing Agenda024-026 allocation, based on X-017 and the owner's contributed research bundle. Compare a complete resource/anchor exclusion at side 96/25 with a contact-independent six-axis-plus-five shared-angle theorem; retain a small independent pair-kernel discriminator and candidate-led successors. Review contributed evidence at its own scope, build only the interfaces selected pilots need, and expand on closed continuous domains or explicit useful residuals. Its original preparation launched no experiments. Session095 subsequently selected BC259 adoption and BC265 comparative design; other selected cells remain independently owned by Session092. Read each cell's actual protocol rather than treating this activation as blanket launch authority.
+Status: **active**. Prepare an independent alternative to the ongoing Agenda024-026 allocation, based on X-017 and the owner's contributed research bundle. Compare a complete resource/anchor exclusion at side 96/25 with a contact-independent six-axis-plus-five shared-angle theorem; retain a small independent pair-kernel discriminator and candidate-led successors. Review contributed evidence at its own scope, build only the interfaces selected pilots need, and expand on closed continuous domains or explicit useful residuals. Session092 accepted the direct contracts and shared geometry controls; complete consumer attachment and broad pilots remain open. Session095 completed BC259 support-ceiling adoption and BC265 comparative design. Session097 completed BC264 pricing without launching Exp129. Each lane retains its own allocation.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-258 | research | 11 | complete | 0 | think-adfk | BC-259, BC-260 and BC-267 are independently takeable reviews when this agenda is selected for execution. None requires the source run to finish. |
 | BC-259 | measurement_validation | 11 | complete | 0 | think-nwss | Exp128 independently accepts the fixed-support optimum11, refuting H099. Retire the unchanged support question and preserve exp113/115/126 history. BC265 prices any changed resource; no new pose, graph extension or target follows automatically from this accepted finite-support ceiling. |
-| BC-260 | measurement_validation | 11 | ready | 0 | think-ql1j | BC-261 consumes only the accepted case/Farkas and required resource subset; BC-264 consumes the kernel subset. Physical stationarity is reviewed separately under BC-267 and is not a gate on direct all-feasible exclusions. |
-| BC-261 | tool_validation | 3, 4, 11 | blocked | 0 | think-0w2c | Freeze the instrument and controls for BC-262/263 only after independent acceptance. If the shared abstraction grows before one real leaf closes, cut its scope to that leaf or retain a priced implementation blocker. |
+| BC-260 | measurement_validation | 11 | complete | 0 | think-ql1j | BC-261 consumes only the accepted case/Farkas and required resource subset; BC-264 consumes the kernel subset. Physical stationarity is reviewed separately under BC-267 and is not a gate on direct all-feasible exclusions. |
+| BC-261 | tool_validation | 3, 4, 11 | in_progress | 0 | think-0w2c | Freeze the instrument and controls for BC-262/263 only after independent acceptance. If the shared abstraction grows before one real leaf closes, cut its scope to that leaf or retain a priced implementation blocker. |
 | BC-262 | research | 11 | blocked | 1 | think-zz3t | Expand only for closed continuous domains or a simpler actionable remainder. If refinement leaves almost all minima zero or the same large residual, reprice a second anchor, a low-order no-good or a stronger representation. No midpoint result, core completion or solver timeout becomes a global verdict. |
 | BC-263 | research | 11 | blocked | 1 | think-gdr6 | Expand if a small reusable certificate family closes meaningful domains. Stop broadening if progress consists of sampled angles, one contact graph, or unrelated microscopic boxes. Keep the full H-112 claim unresolved until all angles and cases are covered; verify any counterexample first. |
 | BC-264 | research | 11 | in_progress | 2 | think-mq0d | Continue only if the chosen representation earns useful margin or closes a stated domain. An exact family obstruction redirects features; recurring unpriced pair violations redirect to conditional kernels or reusable cases. |
@@ -592,17 +597,25 @@ Status: **active**. Prepare an independent alternative to the ongoing Agenda024-
 
 ### [agenda-028](agendas/agenda-028-hybrid-strength-and-angular-release.md) — Hybrid Strength and Angular Release
 
-Status: **paused**. Prepare a focused parallel n11 program from PR108: decide whether one local resource representation adds strength over a fair coupled outer LP, and test one new closed contact-release domain. Preserve X017's broad cover and family pilots and X016's source continuation. Consume the existing shared geometry instrument, expand on useful closed domains, and allocate common-anchor or global representative work only on explicit evidence. Planning launches no targets.
+Status: **paused**. Execute a focused parallel n11 program from PR108: decide whether one local resource representation adds strength over a fair coupled outer LP, and test one new closed contact-release domain. Preserve X017's broad cover and family pilots and X016's source continuation. Consume the existing shared geometry instrument, expand on useful closed domains, and allocate common-anchor or global representative work only on explicit evidence. Session092 owns the authorized eight-hour block; target execution still requires accepted controls.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-269 | research | 11 | complete | 0 | think-urcm | Select BC270 and BC273 design with independent review; keep source ownership intact. |
-| BC-270 | measurement_validation | 3, 4, 11 | ready | 0 | think-9uv0 | Send precise leaf requirements to the BC261 owner. Adopt one reviewed instrument artifact; do not build another exporter or infer readiness from existing arithmetic helpers. If no useful domain is identified, retain the missing geometric premise and reallocate at BC275. |
-| BC-271 | research | 11 | blocked | 1 | think-6l39 | Expand one recurring useful domain or send a checked cut to BC262. One prescribed refinement with unchanged residual ends expansion of this representation at checkpoint. It does not reject H111 or all resource methods. |
+| BC-270 | measurement_validation | 3, 4, 11 | blocked | 0 | think-9uv0 | The central parent fence and corrected24-guard remainder are accepted. BC271 prices the missing same-domain comparator; the lower/upper bands and guard-failure cases remain open. No resource target is admitted; BC261 remains the sole interface owner. |
+| BC-271 | research | 11 | blocked | 1 | think-6l39 | Consume the central fence as a shared geometric lemma and give the next mathematical design to BC277's uncovered boundary-band parent. The reviewed strong comparator can express the same regional capacity; do not manufacture a weak LP for survival. H118 remains open without a natural finite baseline. |
 | BC-272 | research | 11 | tentative | 2 | think-cy6g | Return a useful certificate to the broad anchor pilot or retain the exact missing capture premise. Do not escalate to arbitrary measures or subdivisions within the frozen comparison. |
-| BC-273 | research | 11 | ready | 1 | think-1btr | Expand to a different released edge or wall pattern only if a reusable argument closes new geometry. If work returns only source-cell samples or already-closed local boxes, record that limitation and return to BC275. A finite-motion or stationary-minimizer claim needs separate premises. |
+| BC-273 | research | 11 | complete | 1 | think-1btr | BC275 reprices a changed block-angle, slide or wall/contact scope using the accepted ten-square cap contradiction. The full declared T+ is closed, including all square10 orientations; do not fund its cavity adapter or repeat the unchanged target. Global normal-form claims remain separate. |
 | BC-274 | research | 11 | tentative | 2 | think-5hmt | A global reduction earns an all-multiplicity family allocation with the Agenda027 owner. H112 alone covers only six-plus-five; H113 would suffice as a stronger full-family bound. Do not create a duplicate family run here. |
-| BC-275 | measurement_validation | 11 | ready | 1 | think-1v6g | Extend a frozen useful certificate queue, redirect mathematical attention to its bottleneck, or retain a named blocker and another independently useful slice. A self-chosen checkpoint is not termination of a later open-ended user mandate; never extend an exhausted scientific attempt silently. |
+| BC-275 | measurement_validation | 11 | complete | 1 | think-1v6g | Audit BC270's completed parent-fence design and BC276's separately frozen sibling attempt. The accepted cost correction at4ac71438 restores the historical membership; use the rebuilt live receipt and preserve its incomplete-snapshot and retrospective timing qualifications. |
+| BC-276 | research | 11 | complete | 1 | think-6pka | N and the complete signed short-slide parent S are independently closed. Preserve other block angles, longer slides and changed wall/contact patterns; reprice further structural work against direct parent compatibility rather than automatically expanding this source-feature family. |
+| BC-277 | measurement_validation | 11 | complete | 1 | think-os9k | Independent admission accepts the unchanged eight-guard domain, complete cover, reflection and controls. BC278 owns a separately committed analytical determination after record checks. No capacity result is supplied by admission. |
+| BC-278 | research | 11 | stopped | 1 | think-dtr6 | The bounded attempt and independent audit are terminal. Uniform disk and octagon capacities of six are refuted, while full-square D0/D2 remains unresolved. The midpoint efficiency review prices a changed square model against broader release angles; no unchanged retry or strict LP comparison is admitted. |
+| BC-279 | research | 11 | stopped | 1 | think-cwve | The fresh audit accepts both exact six-core controls and fixed-insertion obstruction. Whole M7 remains unresolved. Reprice a specific new moving-center implication or complete method before another attempt; no unchanged retry. |
+| BC-280 | measurement_validation | 11 | complete | 2 | think-7ylp | Independent domain admission is complete without defining correction. BC281 owns the separate complete determination after native protocol review and passing committed records. |
+| BC-281 | research | 11 | stopped | 1 | think-ilpc | Independent audit accepts the exact partial exclusions and broader necessary conditions. The complete closed remainder is [1/24,1/3] union [1/2,23/25], with both signs and all original conditions. BC282 selects a new design-only skeleton decision; no unchanged attempt is extended. |
+| BC-282 | measurement_validation | 11 | complete | 1 | think-s6e7 | Independent admission accepts the exact40/45 domain, ten closed envelope chambers and open translation-fiber equivalence. The six-source fence is sufficient but unproved; uniform templates, bounded facet transitions and a priced complete witness discriminator are missing. Session098 parks local target work; think-k54y retains exact re-entry prerequisites, while existing BC264 pricing remains separately owned. |
+| BC-283 | research | 11 | complete | 1 | think-dwq8 | Planning assessment and independent reviews are complete. This September 7 decision selected the existing BC264 owner think-mq0d after checkpoint publication under think-m2lx; Agenda030 later superseded that handoff with think-qfog. Retain the independent helper lane and parked H118/H120 targets; this block renews no scientific allocation. |
 
 ### [agenda-029](agendas/agenda-029-structural-restrictions-and-conditional-dots.md) — Structural Restrictions and Conditional Dots
 
@@ -639,11 +652,36 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | BC-303 | research | 11 | complete | 0 | think-znzj | The frozen claim for the next block and the remaining proof obligations. |
 | BC-304 | research | 11 | complete | 0 | think-yrw1 | The owner reviews the mathematical result and the next selection. |
 
+### [agenda-031](agendas/agenda-031-ownership-and-pricing.md) — Ownership Continuation and Paired Pricing at n = 11
+
+Status: **paused**. Publish the exact ownership results derived during PR 127 review, run the independent readers needed to use them safely, test one pointwise full-support pricing mechanism at q = 96/25, and assess the owner's fixed-four-corner residual-cover pilot. The bracket remains unchanged. No cell may infer a global packing certificate from a local proof, a numerical LP proposal, or a finite site set.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-305 | research | 11 | complete | 1 | think-qfog | Published proof files, exact reader receipts, and a scoped statement of the remaining global ownership problem. |
+| BC-306 | research | 11 | blocked | 1 | think-7lp3 | The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts, or a truthful never-opened disposition. |
+| BC-307 | research | 11 | stopped | 2 | think-98z2 | Reserve not opened; owner prioritized Agenda032 geometric conditioning. |
+| BC-308 | measurement_validation | 11 | stopped | 2 | think-9yow | Agenda032 BC314 owns remaining publication and certification; session112 stops with explicit pending certification. |
+| BC-309 | research | 11 | complete | 1 | think-3glv | Exp135 is unresolved after its retained separator guard. The completed instrument-feasibility lane transfers repair and fresh target work to Agenda032 BC310. |
+
+### [agenda-032](agendas/agenda-032-conditional-owner-sprint.md) — Two-Hour Conditional-Owner Sprint
+
+Status: **completed**. Test whether unavoidable corner owners make residual covering arguments stronger at L = 96/25, using exact fractional-family obstructions before costly cover searches. Preserve scope, failed instrumentation, separate usage, and an executable next agenda. No global bound changes without exact exhaustive evidence.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-310 | tool_validation | 11 | complete | 1 | think-9yvj | Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487, gap0.17660343270100132. BC313 owns exact/full-net promotion. |
+| BC-311 | research | 11 | complete | 1 | think-mwxg | The independent audit confirms all subthreshold survivor results. Stop unchanged-weight deletion filters. |
+| BC-312 | research | 11 | complete | 1 | think-9cpg | One-owner numerical comparison accepted: point11.5745, triangle10.5556, endpoint10.3889. Endpoint remains above10. |
+| BC-313 | research | 11 | complete | 2 | think-9cpg | Exp144 certifies five dots over all361directions; reviewed transfer excludes the selected reflected m1/j0 four-owner branch. Post-sprint claim T-023 records the exact scope. |
+| BC-315 | research | 11 | complete | 1 | think-9cpg | Four-owner numerical comparison accepted: point9, triangle6, endpoint5. Exp144 verifies the fixed five-dot candidate on the complete net. |
+| BC-314 | measurement_validation | 11 | complete | 1 | think-ns6k | Publish final results and separately attributed usage; next selection think-yhw2. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 89 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 100 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -759,6 +797,14 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
+| H-135 | blocked | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
+| H-136 | confirmed | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 2 |  | 6s wall |
+| H-137 | refuted | proof | At least one of the sixteen bottom-left endpoint-footprint classes ret |  | 2 |  | 1.8m wall |
+| H-138 | refuted | proof | Every one of the 65536 four-corner endpoint-footprint class combinatio |  | 1 |  |  |
+| H-139 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 2 |  | 41s wall |
+| H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
+| H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
+| H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
 | H-143 | blocked | proof | The rank-one threshold-atom closure -- point atoms together with (S, k |  | 0 |  |  |
 | H-144 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
 | H-145 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
@@ -771,7 +817,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 
 ## Rounds
 
-### rejected (17)
+### rejected (21)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -792,6 +838,10 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-115 | series-000 | 11 | Codex coordinator, max reasoning, think-whmn in Session089 | H-105 | Every eligible pair has an independently checked separating axis. This rejects H105 only; higher-order depth, candidate feasibility and H099 remain unresolved, and the fixed-support bracket stays [11,56/5]. |
 | exp-122 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-122 | The first frozen frame supplied one independently verified contained square disjoint from the diamond and avoiding all nine marks, refuting H122 only. |
 | exp-128 | series-000 | 11 | Session095 coordinator, BC259; max mathematical judgment | H-099 | The full fixed-support upper bound is exactly11 and the independently reconstructed packing average attains11. Thus H099's mass-above-eleven claim is false for this support. No expanded-support, primal-density or global packing conclusion follows. |
+| exp-137 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-137 | Complete exact producer screen found0of16endpoint classes with massatleast10; maximum77421212793/8221052780. This particular retained-family obstruction conjecture fails; the conditionalcover method remains open. Exp141 independently confirmed the source identities, directions, transports, positiveSAT gaps, masks, cardinalities, exact masses and summaries. |
+| exp-138 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-138 | Complete exact producer screen found0of65536endpoint combinations with massatleast7; maximum13394344077/2055263195 and minimum1642317587/2055263195. Sharedproducerchargedtoexp137; no secondprocess. Independent retained-receipt audit exp141 confirmed all exact checks. |
+| exp-139 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-140 | The complete exact replay found minimum760979/800000, which is belowone, so the unchanged exp136 residual weights fail H140. Their positive minimum yields normalized feasible mass31219612/3804895, above the conditional contradiction thresholdseven and without an optimum-gap claim. |
+| exp-141 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-137 | The audit completed against clean tracked receipt and source blobs at44bf815f and confirmed every recorded source identity, canonical direction, exact transport, positiveSAT gap, mask, cardinality, mass and summary. It therefore confirms exp137's subthreshold maximum and rejects H137; audit success does not reverse the mathematical verdict. The audit preserves the receipt's immutable source-era provisional label and does not itself establish the separately reviewed endpoint-containment theorem. |
 
 ### abandoned (2)
 
@@ -800,7 +850,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (21)
+### unresolved (23)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -825,8 +875,10 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-126 | series-000 | 11 | Session094 coordinator, BC243; max mathematical judgment | H-099 | The conservative graph contains a reported overweight clique, so this sufficient depth certificate failed. No common geometric interior was certified and no independent target reader ran. H099 and its fixed-support bracket remain unresolved and unchanged. |
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
 | exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
+| exp-135 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-136 | The unrestricted arm converged, but the residual separator stopped at direction113 because a reachable cell had no representable interior witness. The paired score was not measured. This is an instrument limitation, not negative evidence about geometric conditioning. |
+| exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Process exit0 preserved a valid partial receipt, but it did not mean scientific completion: only unrestricted converged. Point exhausted60 rounds without convergence, triangle and endpoint were not run, and the primary difference was not measured. The partial point objective is not a covering value or negative result for H139. |
 
-### blocked (8)
+### blocked (9)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -838,8 +890,9 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
+| exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
-### accepted (30)
+### accepted (34)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -873,6 +926,10 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-130 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-130 | All three theorems meet H-130's total-width criterion: Theorems A, B and C clear the 3° bar by approximately 0.1846°, 8.8582° and 9.3138°. Theorem C also establishes the literal distance of 1.5° from both endpoints. Each is an exact decision of decide_class_program without using Stromquist's Theorem 3 or its lemmas. |
 | exp-131 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-131 | All eight counts are now decided under a registered round rather than cited from a planning lane, every exact mass reproduces the planning lane's to the fraction, and no declared falsifier occurred. The eight exact cell claims of H-131 are confirmed; the 2026-09-08 review corrects outward-rounded degree summaries without claiming a rerun. The certificate's site set does not restrict the resulting packing theorem within its exact angle domain. |
 | exp-132 | series-000 | 11 | the BC-302 lane agent of agenda-030, bead think-qfog, session-104; the record was written by a separate record lane from the frozen result section | H-134 | H-134's criterion is met in segment form: ten horizontal segments of length 1/10 on Stromquist's rows cover the whole pose space at tolerance 3/500, certified by an interval reader with every certified leaf and every discarded box re-decided in exact rational arithmetic and no failure, so every square of every packing of eleven unit squares at any side up to 96/25 is within 3/500 of a known mark; the point form of the same claim is untouched by this and stays open with thirteen candidate sets refuted. |
+| exp-136 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-113 | H-136 | The predeclared numerical paired margin is positive by0.17660343270100132. Residual mass remains above7; this is a finite-support finite-direction mechanism result, not a packing exclusion or exact optimum-gap bound. |
+| exp-142 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | All four numerical arms converged; point-minus-endpoint gain1.185626102292769>0.001. Point-extension and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net verification remains separate. |
+| exp-143 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-141 | All four numerical arms converged; point-minus-endpoint gain4.0>0.001. Point-extension and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net verification remains separate. |
+| exp-144 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-142 | All361directions have exact positive minimum beta=1000001/1000000. The five unit dots cover the residual net. Reviewed endpoint containment and strict-core transfer exclude the selected four-owner branch, which would need seven residual cores. No universal n11 exclusion. |
 
 ### baseline (11)
 
@@ -905,10 +962,12 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-070 | H-064 | 109.3m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | After the T+2 landing, spend the remaining 135 one-core proc |
 | exp-118 | H-107 |  | dependency |  |  |
 | exp-129 | H-125 |  | dependency |  |  |
+| exp-134 | H-135 |  | dependency |  |  |
+| exp-140 | H-139 | 16s wall | timebox | Exp142 freshly restarts the same four arms with 300 rounds a |  |
 
 ## Effort
 
-89 rounds, 2152.1 agent-minutes, 1359.4 wall-minutes.
+100 rounds, 2152.1 agent-minutes, 1363.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

@@ -1,0 +1,10 @@
+ M campaign/agent-sessions/session-113-conditional-owner-sprint.md
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-141-launch-head.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-141-launch-status.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-142-launch-head.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-142-launch-status.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-launch-head.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-launch-status.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-launched-at.txt
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-process.log
+?? campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-stdout.jsonl

@@ -21,6 +21,7 @@ name: Certificate page
     paths:
       - packing/cases/n11_fractional_certificate/**
       - packing/devtools/render_explainer.py
+      - packing/devtools/prepare_explainer_math.py
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
@@ -29,6 +30,8 @@ name: Certificate page
       - packing/devtools/inspect_explainer_typography.py
       - packing/devtools/check_math_faces.py
       - packing/devtools/check_math_loading.py
+      - packing/devtools/check_math_startup.py
+      - packing/devtools/check_scroll_restoration.py
       - packing/devtools/compare_math_fonts.py
       - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
@@ -55,6 +58,7 @@ name: Certificate page
     paths:
       - packing/cases/n11_fractional_certificate/**
       - packing/devtools/render_explainer.py
+      - packing/devtools/prepare_explainer_math.py
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
@@ -63,6 +67,8 @@ name: Certificate page
       - packing/devtools/inspect_explainer_typography.py
       - packing/devtools/check_math_faces.py
       - packing/devtools/check_math_loading.py
+      - packing/devtools/check_math_startup.py
+      - packing/devtools/check_scroll_restoration.py
       - packing/devtools/compare_math_fonts.py
       - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
@@ -93,7 +99,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -115,12 +121,23 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
 
+      # Geometry is measured using the pinned browser during publication. Every
+      # browser check below consumes this one artifact, including its reserved boxes.
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the browser that measures the mathematics
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
       # The renderer re-decides Conditions 1 through 4 before it writes anything,
       # so a certificate those conditions refuse fails the build instead of being
       # published with an explanation of a bound it does not carry. Condition 5 is
       # a sweep per direction and the case replay gate owns it.
       - name: Render the page from the retained certificate
-        run: uv run --frozen --group dev python -m devtools.render_explainer
+        run: uv run --frozen --group dev python -m devtools.render_explainer --prepare-math
 
       # The page is not checked in, so this is where a render that did not reproduce
       # itself byte for byte would show: a second render has to match the first. The
@@ -129,9 +146,45 @@ jobs:
       # self-containment check is the renderer's, not a grep here.
       - name: Check the render is deterministic and self-contained
         run: |
-          uv run --frozen --group dev python -m devtools.render_explainer --check
+          uv run --frozen --group dev python -m devtools.render_explainer --prepare-math --check
           test -s site/index.html
           echo "one file, $(du -h site/index.html | cut -f1)"
+
+      - name: Share the prepared page with all browser checks
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: prepared-page
+          path: packing/site
+          if-no-files-found: error
+          retention-days: 7
+
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
 
       # Playwright's own Chromium, at the revision its pinned wheel names -- so the
       # browser moves when someone bumps that pin and not when a runner image rolls.
@@ -180,8 +233,8 @@ jobs:
       - name: Check paper typography on screen and in print
         run: |
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --self-test
-          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme light
-          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme dark --width 390
+          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --check-math --theme light
+          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --check-math --theme dark --width 390
 
       # Which composite draws each expression, which metric table laid it out, and
       # whether the faces were loaded before the first one was painted. None of the three
@@ -198,6 +251,59 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_math_loading --self-test
           uv run --frozen --group dev python -m devtools.check_math_loading
 
+      # Timings remain descriptive: machine speed is not a correctness gate. The
+      # probe's retained controls make missing targets or unobserved content fail.
+      - name: Check normal math startup and the measurement controls
+        run: |
+          uv run --frozen --group dev python -m devtools.check_math_startup --self-test
+          uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --self-test
+          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --output /tmp/math-startup-desktop.json
+          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --width 390 --output /tmp/math-startup-mobile.json
+
+      - name: Check reload preserves the reading position
+        run: |
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --self-test --output /tmp/scroll-restoration/chromium-1280.json
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --width 390 --output /tmp/scroll-restoration/chromium-390.json
+
+      - name: Retain Chromium reload observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: scroll-restoration-chromium
+          path: /tmp/scroll-restoration
+          if-no-files-found: error
+          retention-days: 7
+
+      # Saved font settings select different prepared variants before the page
+      # hydrates. Every setting must retain its own geometry on this same artifact.
+      - name: Check reserved math geometry under every saved font setting
+        run: |
+          mkdir -p /tmp/math-geometry
+          geometry_status=0
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --host-check --self-test --output /tmp/math-geometry/chromium-1280-custom-serif-screen-controls.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --width 390 --output /tmp/math-geometry/chromium-390-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --output /tmp/math-geometry/chromium-1280-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --output /tmp/math-geometry/chromium-1280-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --width 390 --output /tmp/math-geometry/chromium-390-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --output /tmp/math-geometry/chromium-1280-system-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-system-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --print --output /tmp/math-geometry/chromium-1280-custom-serif-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --print --output /tmp/math-geometry/chromium-1280-custom-sans-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --print --output /tmp/math-geometry/chromium-1280-system-serif-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --print --output /tmp/math-geometry/chromium-1280-system-sans-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --alternate-certificate --output /tmp/math-geometry/chromium-1280-custom-serif-screen-alternate-certificate.json || geometry_status=1
+          exit "$geometry_status"
+
+      - name: Retain Chromium geometry observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-geometry-chromium
+          path: /tmp/math-geometry
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
@@ -205,6 +311,7 @@ jobs:
           path: packing/site
 
   font-loading:
+    needs: prepare
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -238,10 +345,124 @@ jobs:
       - name: Install the pinned browser and its system libraries
         run: uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
 
-      - name: Render the page and check mobile font loading
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Check mobile font loading on the published artifact
         run: |
-          uv run --frozen --group dev python -m devtools.render_explainer
           uv run --frozen --group dev python -m devtools.check_math_loading --browser ${{ matrix.browser }} --width 390
+
+      - name: Check reload preserves the reading position in both viewports
+        run: |
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --browser ${{ matrix.browser }} --self-test --output /tmp/scroll-restoration/${{ matrix.browser }}-1280.json
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --browser ${{ matrix.browser }} --width 390 --output /tmp/scroll-restoration/${{ matrix.browser }}-390.json
+
+      - name: Retain browser reload observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: scroll-restoration-${{ matrix.browser }}
+          path: /tmp/scroll-restoration
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Check saved font settings retain geometry in both viewports
+        run: |
+          mkdir -p /tmp/math-geometry
+          geometry_status=0
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 1280 --host-check --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --prose-font sans --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --prose-font sans --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-system-sans-screen.json || geometry_status=1
+          exit "$geometry_status"
+
+      - name: Retain browser geometry observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-geometry-${{ matrix.browser }}
+          path: /tmp/math-geometry
+          if-no-files-found: error
+          retention-days: 7
+
+  # A dedicated runner keeps PDF export and the other browser jobs from competing
+  # with this descriptive timing experiment. Only an explicit dispatch runs it.
+  startup-timing:
+    if: github.event_name == 'workflow_dispatch'
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium browser
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
+      - name: Prepare retained timing inputs
+        run: |
+          mkdir -p /tmp/math-startup-timing
+          cp site/index.html /tmp/math-startup-timing/candidate.html
+          gzip --decompress --stdout benchmarks/math-startup/fixtures/control-33cd4760.html.gz > /tmp/math-startup-timing/control-33cd4760.html
+
+      - name: Check the parameter-only measurement controls
+        id: timing-controls
+        run: uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --self-test --output /tmp/math-startup-timing/controls.json
+
+      # The tool alternates control/candidate order on successive pairs. Invalid
+      # measurements fail the job; numerical speed acceptance is evaluated from
+      # these retained observations under the registered experiment criterion.
+      - name: Measure twelve desktop startup pairs
+        run: uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --control /tmp/math-startup-timing/control-33cd4760.html --candidate site/index.html --runs 12 --width 1280 --browser chromium --output /tmp/math-startup-timing/startup-1280.json
+
+      - name: Measure twelve mobile startup pairs
+        # Retain both widths even if the desktop observations are invalid, provided
+        # the instrument's controls passed. A failure still leaves the job red.
+        if: ${{ !cancelled() && steps.timing-controls.outcome == 'success' }}
+        run: uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --control /tmp/math-startup-timing/control-33cd4760.html --candidate site/index.html --runs 12 --width 390 --browser chromium --output /tmp/math-startup-timing/startup-390.json
+
+      - name: Retain raw timings and both input pages
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-startup-timing
+          path: /tmp/math-startup-timing
+          if-no-files-found: error
+          retention-days: 7
 
   deploy:
     needs: [build, font-loading]

@@ -1783,6 +1783,57 @@ def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     )
 
 
+@pytest.mark.parametrize("summary", ["everything", "narrow 7"])
+def test_push_tests_forward_the_shared_worker_allocation(
+    monkeypatch: pytest.MonkeyPatch, summary: str
+) -> None:
+    """The reachable runner must not become a serial copy of the quick and slow lanes."""
+
+    def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del args, kwargs
+        return subprocess.CompletedProcess(
+            args=("reachable-tests",), returncode=0, stdout=f"{summary}\n", stderr=""
+        )
+
+    commands: list[tuple[str, ...]] = []
+    sized_for: list[int] = []
+
+    def capture(context: validate.Context, command: tuple[str, ...]) -> str:
+        del context
+        commands.append(command)
+        return "selected tests passed"
+
+    def four_workers(jobs: int) -> int:
+        sized_for.append(jobs)
+        return 4
+
+    monkeypatch.setattr(validate.subprocess, "run", probe)
+    monkeypatch.setattr(validate, "_run", capture)
+    monkeypatch.setattr(validate, "_pytest_workers", four_workers)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=2,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+
+    assert validate._push_test_step("origin/main").action(context) == "selected tests passed"
+    assert sized_for == [2]
+    assert commands == [
+        (
+            sys.executable,
+            "-m",
+            "devtools.reachable_tests",
+            "--run",
+            "--since",
+            "origin/main",
+            "-n",
+            "4",
+        )
+    ]
+
+
 def test_the_edit_tier_cannot_under_run() -> None:
     """Tiers must nest, or a narrower tier could contain a step a wider one lacks.
 
@@ -2339,8 +2390,8 @@ def test_the_longest_steps_are_submitted_first() -> None:
     checks; the 2026-09-05 promotion put eleven steps and 476s there, which greedy
     submission would have spent delaying the suite's start rather than running beside it.
 
-    Ordering by declared budget rather than by a guessed duration keeps the file the only
-    place a step's cost is asserted.
+    Budget precedence remains ahead of early-start hints. The unbudgeted exact verifier
+    has a measured late tail, so it starts ahead of the remaining declaration-order work.
 
     `fast behavioral tests` is no longer in this list, and its absence is the point rather
     than an omission. It carried an 1800s exception to the shared cap for as long as it
@@ -2360,7 +2411,60 @@ def test_the_longest_steps_are_submitted_first() -> None:
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
-    assert order[4:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
+    budgeted_count = sum(step.budget_seconds is not None for step in validate.STEPS)
+    assert order[budgeted_count] == "exact verification"
+    assert order[budgeted_count + 1 :] == [
+        step.name
+        for step in validate.STEPS
+        if step.budget_seconds is None and step.name != "exact verification"
+    ]
+
+
+def test_early_start_preserves_failures_stable_ties_and_report_order(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    launched: list[str] = []
+
+    def step(
+        name: str,
+        exit_code: int = 0,
+        *,
+        early: bool = False,
+        budget: float | None = None,
+    ) -> validate.Step:
+        def action(context: validate.Context) -> str:
+            launched.append(name)
+            return validate._run(
+                context,
+                (sys.executable, "-c", f"import sys; print({name!r}); sys.exit({exit_code})"),
+            )
+
+        return validate.Step(name, action, fast=True, budget_seconds=budget, start_early=early)
+
+    steps = [
+        step("ordinary"),
+        step("early failure", 17, early=True),
+        step("also early", early=True),
+        step("budgeted", budget=2),
+        step("last ordinary"),
+    ]
+    summary = validate._run_selected(
+        steps, _budget_context(timeout_seconds=5, explicit=False), []
+    )
+    assert launched == ["budgeted", "early failure", "also early", "ordinary", "last ordinary"]
+    assert [result.name for result in summary.results] == [step.name for step in steps]
+    assert [result.status for result in summary.results] == [
+        "passed",
+        "failed",
+        "passed",
+        "passed",
+        "passed",
+    ]
+    assert "exited 17" in summary.results[1].reason
+    assert validate._render_text(summary, strict=False) == 1
+    output = capsys.readouterr().out
+    assert "1 STEP FAILED" in output
+    assert "STEPS PASSED" not in output
 
 
 def test_submission_order_does_not_change_the_reported_order(

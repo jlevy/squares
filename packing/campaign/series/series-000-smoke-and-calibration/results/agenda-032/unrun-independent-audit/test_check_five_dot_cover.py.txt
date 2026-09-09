@@ -1,0 +1,87 @@
+UNTESTED DRAFT: retained for think-yhw2; no controls or scientific target ran.
+Not an importable project module or supporting certificate evidence.
+
+"""Independent controls for the exact nine-obstacle five-dot checker."""
+
+from __future__ import annotations
+
+from fractions import Fraction
+from pathlib import Path
+
+import pytest
+from check_five_dot_cover import check_direction, require_five_equal_atoms
+
+from devtools.replay_owner_footprint_cover import BoundSource
+from devtools.run_owner_footprint_cover import Arm
+from sqpack.fractional.colgen import SiteSet
+from sqpack.fractional.model import Atom, rotation_from_half_tangent
+
+F = Fraction
+
+
+def test_one_dot_covers_the_whole_axis_centre_domain() -> None:
+    axis = rotation_from_half_tangent("axis", F(0))
+    result = check_direction(
+        F(2),
+        F(1),
+        axis,
+        (),
+        ((F(1), F(1)),),
+        max_polygons=9,
+        max_cuts=100,
+        max_pieces=100,
+    )
+    assert result.covered
+    assert result.witness_uv is None
+
+
+def test_uncovered_domain_returns_an_exact_strict_centroid_witness() -> None:
+    axis = rotation_from_half_tangent("axis", F(0))
+    result = check_direction(
+        F(4),
+        F(1),
+        axis,
+        (),
+        ((F(0), F(0)),),
+        max_polygons=9,
+        max_cuts=100,
+        max_pieces=100,
+    )
+    assert not result.covered
+    assert result.witness_uv is not None
+    u, v = result.witness_uv
+    assert F(1, 2) < u < F(7, 2)
+    assert F(1, 2) < v < F(7, 2)
+    assert not (abs(u) <= F(1, 2) and abs(v) <= F(1, 2))
+
+
+def _source(weights: tuple[Fraction, ...], owner_count: int = 4) -> BoundSource:
+    axis = rotation_from_half_tangent("axis", F(0))
+    sites = SiteSet(F(4), tuple((((F(i), F(1))),) for i in range(len(weights))))
+    footprints = tuple(((F(i), F(i)),) for i in range(4))
+    arm = Arm("endpoint", None, sites, (), ((),), (None,), footprints)
+    atoms = tuple(
+        Atom(str(index), F(index), F(1), weight) for index, weight in enumerate(weights)
+    )
+    return BoundSource(
+        Path("synthetic"),
+        "synthetic",
+        "synthetic",
+        {},
+        arm,
+        (axis,),
+        atoms,
+        sum(weights, start=F(0)),
+        owner_count,
+    )
+
+
+def test_source_contract_requires_four_owners_and_five_equal_positive_atoms() -> None:
+    beta = F(1_000_001, 1_000_000)
+    assert require_five_equal_atoms(_source((beta,) * 5)) == beta
+    with pytest.raises(ValueError, match="exactly five"):
+        require_five_equal_atoms(_source((beta,) * 4))
+    with pytest.raises(ValueError, match="common weight"):
+        require_five_equal_atoms(_source((beta, beta, beta, beta, F(1))))
+    with pytest.raises(ValueError, match="four-owner"):
+        require_five_equal_atoms(_source((beta,) * 5, owner_count=1))

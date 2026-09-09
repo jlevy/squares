@@ -2,7 +2,7 @@
 
 # Agenda map
 
-285 agenda commitments across 30 agendas, as declared in each agenda's own frontmatter.
+304 agenda commitments across 32 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **6** in_progress, **19** ready, **11** tentative, **59** blocked, **51** stopped, **139** complete.
+- **7** in_progress, **15** ready, **11** tentative, **60** blocked, **56** stopped, **155** complete.
 
-- **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -46,14 +46,11 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-026 | `BC-255` | in_progress | 1 | insight | research | What is the first complete proof obligation for a useful restricted structural theorem? | `think-dene` |
 | agenda-026 | `BC-256` | tentative | 2 | correctness | research | Does a verified packing refute the selected restricted structural claim? | `think-pjk7` |
 | agenda-026 | `BC-257` | tentative | 2 | insight | research | Which below-Trump density target and family justify a continuum proof attempt? | `think-k9zi` |
-| agenda-027 | `BC-260` | ready | 0 | correctness | measurement_validation | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… | `think-ql1j` |
+| agenda-027 | `BC-261` | in_progress | 0 | correctness | tool_validation | Can the existing geometry and fixed-angle LP export one independently checked uniform exclusion that composes… | `think-0w2c` |
 | agenda-027 | `BC-267` | ready | 1 | correctness | measurement_validation | Which physical normal-stationarity and stationary-value deductions survive independent review, and what exact… | `think-zq12` |
 | agenda-027 | `BC-268` | ready | 1 | insight | research | Which next slice earns allocation from the actual Agenda027 review and pilot evidence, whether the source… | `think-x61z` |
 | agenda-027 | `BC-264` | in_progress | 2 | insight | research | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with a… | `think-mq0d` |
 | agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
-| agenda-028 | `BC-270` | ready | 0 | correctness | measurement_validation | What frozen target-side comparison fairly tests H118 against coupled geometry? | `think-9uv0` |
-| agenda-028 | `BC-273` | ready | 1 | insight | research | Can H120 close a new rank-nine release domain at variable side below 96/25? | `think-1btr` |
-| agenda-028 | `BC-275` | ready | 1 | efficiency | measurement_validation | Which mathematical result per unit of attention warrants the next overnight allocation? | `think-1v6g` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
 
@@ -118,10 +115,11 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-026 | `BC-249` | 0 | `BC-224` | no | — |
 | agenda-026 | `BC-244` | 1 | `BC-243` | no | — |
 | agenda-026 | `BC-248` | 2 | `BC-246`, `BC-247` | no | An exact fractional measure of mass at least eleven for the chosen subproblem, no more than 2,311,290 of the present… |
-| agenda-027 | `BC-261` | 0 | `BC-260` | no | — |
 | agenda-027 | `BC-262` | 1 | `BC-261` | no | — |
 | agenda-027 | `BC-263` | 1 | `BC-261` | no | — |
+| agenda-028 | `BC-270` | 0 | — | no | A natural finite same-domain geometric baseline and exact LP survival witness are missing; the accepted central… |
 | agenda-028 | `BC-271` | 1 | `BC-270`, `BC-261` | no | — |
+| agenda-031 | `BC-306` | 1 | — | no | Fresh forward launch allocation after the owner-prioritized BC-309 pilot; exp-134 was never invoked and its original… |
 
 ## Discharged elsewhere
 
@@ -171,10 +169,12 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
 | agenda-026 | active | 2 | 2 | 2 | 3 |  | 5 | 14 |
-| agenda-027 | active | 1 | 3 | 1 | 3 |  | 3 | 11 |
-| agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
+| agenda-027 | active | 2 | 2 | 1 | 2 |  | 4 | 11 |
+| agenda-028 | paused |  |  | 2 | 2 | 3 | 8 | 15 |
 | agenda-029 | superseded |  |  |  |  | 3 | 4 | 7 |
 | agenda-030 | completed |  |  |  |  | 7 | 7 | 14 |
+| agenda-031 | paused |  |  |  | 1 | 2 | 2 | 5 |
+| agenda-032 | completed |  |  |  |  |  | 6 | 6 |
 
 ## By program
 
@@ -245,8 +245,8 @@ Open frontier: `BC-208`, `BC-207`.
 | --- | --- | --- | --- |
 | agenda-027 | `BC-258` | complete | How should the supplied research bundle change the set of alternative directions, after orientation… |
 | agenda-027 | `BC-259` | complete | Does independent source binding and geometric replay accept the contributed seven-row ceiling of… |
-| agenda-027 | `BC-260` | ready | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… |
-| agenda-027 | `BC-261` | blocked | Can the existing geometry and fixed-angle LP export one independently checked uniform exclusion… |
+| agenda-027 | `BC-260` | complete | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… |
+| agenda-027 | `BC-261` | in_progress | Can the existing geometry and fixed-angle LP export one independently checked uniform exclusion… |
 | agenda-027 | `BC-262` | blocked | At 96/25, does a frozen complete anchor domain admit an exact exclusion or useful explicit residual… |
 | agenda-027 | `BC-263` | blocked | Can uniform certificates close a nontrivial complete common-angle interval in H-112 without… |
 | agenda-027 | `BC-264` | in_progress | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with… |
@@ -255,7 +255,7 @@ Open frontier: `BC-208`, `BC-207`.
 | agenda-027 | `BC-267` | ready | Which physical normal-stationarity and stationary-value deductions survive independent review, and… |
 | agenda-027 | `BC-268` | ready | Which next slice earns allocation from the actual Agenda027 review and pilot evidence, whether the… |
 
-Open frontier: `BC-260`, `BC-261`, `BC-262`, `BC-263`, `BC-264`, `BC-266`, `BC-267`, `BC-268`.
+Open frontier: `BC-261`, `BC-262`, `BC-263`, `BC-264`, `BC-266`, `BC-267`, `BC-268`.
 
 ### `n11-density-stationarity-trump-capture`
 
@@ -283,14 +283,22 @@ Open frontier: `BC-243`, `BC-244`, `BC-246`, `BC-247`, `BC-248`, `BC-249`, `BC-2
 | agenda | id | state | question |
 | --- | --- | --- | --- |
 | agenda-028 | `BC-269` | complete | Which PR108 claims deserve independent identities and overnight allocation alongside the existing… |
-| agenda-028 | `BC-270` | ready | What frozen target-side comparison fairly tests H118 against coupled geometry? |
+| agenda-028 | `BC-270` | blocked | What frozen target-side comparison fairly tests H118 against coupled geometry? |
 | agenda-028 | `BC-271` | blocked | Does the frozen H118 comparison yield a new capacity exclusion or a useful scoped obstruction? |
 | agenda-028 | `BC-272` | tentative | Does retaining the common anchor remove a diagnosed H119 correlation loss? |
-| agenda-028 | `BC-273` | ready | Can H120 close a new rank-nine release domain at variable side below 96/25? |
+| agenda-028 | `BC-273` | complete | Can H120 close a new rank-nine release domain at variable side below 96/25? |
 | agenda-028 | `BC-274` | tentative | What concrete implication could establish or obstruct the existential H121 normal form? |
-| agenda-028 | `BC-275` | ready | Which mathematical result per unit of attention warrants the next overnight allocation? |
+| agenda-028 | `BC-275` | complete | Which mathematical result per unit of attention warrants the next overnight allocation? |
+| agenda-028 | `BC-276` | complete | Can the closed negative short-slide sibling complete H120's signed short-slide source-feature… |
+| agenda-028 | `BC-277` | complete | What complete boundary-band domain fairly tests complement capacity for seven residual full squares… |
+| agenda-028 | `BC-278` | stopped | Is the entire admitted boundary-band eleven-square child D0 empty, with its reflected upper child? |
+| agenda-028 | `BC-279` | stopped | Does the exact maximal wall-conditioned common-core model admit seven residual centers anywhere on… |
+| agenda-028 | `BC-280` | complete | What complete physical common-angle release domain with t in[0,1] can be admitted without losing… |
+| agenda-028 | `BC-281` | stopped | Is the entire full physical-angle signed short-slide source-feature family empty throughout… |
+| agenda-028 | `BC-282` | complete | Can the accepted new geometry support a complete, independently admissible residual ten-square… |
+| agenda-028 | `BC-283` | complete | What did the completed exploration efforts establish, and which existing parallel lanes now have… |
 
-Open frontier: `BC-270`, `BC-271`, `BC-272`, `BC-273`, `BC-274`, `BC-275`.
+Open frontier: `BC-270`, `BC-271`, `BC-272`, `BC-274`.
 
 ### `n11-post-381-portfolio`
 
@@ -332,8 +340,19 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-030 | `BC-302` | complete | Is there a robust unavoidable set of at most eleven marks at 96/25? |
 | agenda-030 | `BC-303` | complete | Which lane results earn the next sustained block, and what is the strongest claim to freeze? |
 | agenda-030 | `BC-304` | complete | What survives independent checking, what did it change about the global problem, and what is the… |
+| agenda-031 | `BC-305` | complete | Which reviewed segment and corner ownership constraints survive independent exact replay, and what… |
+| agenda-031 | `BC-306` | blocked | Does full retained-state dual support expose a pointwise new-site orbit missed at that same point… |
+| agenda-031 | `BC-307` | stopped | Should H-125's finite kernel test be renewed after the two funded lanes report? |
+| agenda-031 | `BC-309` | complete | Can fixed corner geometry improve a weighted covering argument beyond the four units accounted for… |
+| agenda-031 | `BC-308` | stopped | What did the funded continuation establish, what remains unresolved, and which next entry should be… |
+| agenda-032 | `BC-310` | complete | Can exact event reconstruction repair the thin-cell separator and permit a fresh matched… |
+| agenda-032 | `BC-311` | complete | Does deleting poses that meet guaranteed owner footprints from the retained depth-one fractional… |
+| agenda-032 | `BC-312` | complete | Do guaranteed area footprints improve the covering objective beyond merely owning a point? |
+| agenda-032 | `BC-313` | complete | Does the selected five-dot endpoint-footprint proposal survive rational reconstruction, the full… |
+| agenda-032 | `BC-314` | complete | What did the sprint establish, what did each branch cost, and what should run next? |
+| agenda-032 | `BC-315` | complete | Do four guaranteed occupied regions improve the matched cover beyond four bare marks? |
 
-Open frontier: none; every cell is terminal.
+Open frontier: `BC-306`.
 
 ### `reach-table-ladder`
 

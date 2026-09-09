@@ -8,15 +8,16 @@ softschema:
 agenda:
   id: agenda-028
   title: Hybrid Strength and Angular Release
-  updated: '2026-09-07'
+  updated: '2026-09-08'
   status: paused
   objective: >-
-    Prepare a focused parallel n11 program from PR108: decide whether one local
+    Execute a focused parallel n11 program from PR108: decide whether one local
     resource representation adds strength over a fair coupled outer LP, and test
     one new closed contact-release domain. Preserve X017's broad cover and family
     pilots and X016's source continuation. Consume the existing shared geometry
     instrument, expand on useful closed domains, and allocate common-anchor or
-    global representative work only on explicit evidence. Planning launches no targets.
+    global representative work only on explicit evidence. Session092 owns the
+    authorized eight-hour block; target execution still requires accepted controls.
   items:
   - id: BC-269
     purpose: research
@@ -53,11 +54,11 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 11]
-    state: ready
+    state: blocked
     priority: 0
     question: What frozen target-side comparison fairly tests H118 against coupled geometry?
     hypotheses: [H-118]
-    budget: One 30-minute mathematical protocol slice; one further slice only for a named missing premise.
+    budget: Two design slices of at most30minutes and a15-minute independent audit; the accepted fence review additionally prices one8-minute correction of its redundant closed-sibling representation, followed by coordinator review.
     entry: >-
       X018 assessment and source controls. Design can proceed before BC261; use
       only accepted geometry/resource implications in a final target protocol.
@@ -66,15 +67,44 @@ agenda:
       remainder, finite resource candidates, identical strong comparator and branch
       policy, two exact witness requirements, controls and separately priced replay.
     bead: think-9uv0
+    blocked_on: A natural finite same-domain geometric baseline and exact LP survival witness are missing; the accepted central capacity restriction is retained independently.
     workflows: [insight-iteration, factual-review]
     depends_on: []
     parallel_group: agenda028-capacity
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Send precise leaf requirements to the BC261 owner. Adopt one reviewed
-      instrument artifact; do not build another exporter or infer readiness from
-      existing arithmetic helpers. If no useful domain is identified, retain the
-      missing geometric premise and reallocate at BC275.
+      The central parent fence and corrected24-guard remainder are accepted.
+      BC271 prices the missing same-domain comparator; the lower/upper bands and
+      guard-failure cases remain open. No resource target is admitted; BC261
+      remains the sole interface owner.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+    outcomes:
+    - scope: Natural three-band four-square subsystems and a five-square anchored extension
+      classification: achieved
+      result: >-
+        Exact feasible diamond packings prove that every sound resource and
+        coupled geometric relaxation must retain these domains. The obstruction
+        holds beyond the selected 99-atom family; it does not resolve H118.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
+      disposition: continue
+      follow_up: think-9uv0
+    - scope: Guarded central four-square family and complete closed parent remainder
+      classification: achieved
+      result: >-
+        Independent audit accepts an orientation-uniform complement capacity of
+        at most4, excluding7 residual full squares. The exact central fixture
+        satisfies the four-pose guards strictly. Coordinator review accepts the
+        equivalent24-guard remainder, correcting tautological whole-parent
+        siblings. The matching coupled-LP survival witness remains missing.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+      disposition: continue
+      follow_up: think-6l39
   - id: BC-271
     purpose: research
     owner_focus: insight
@@ -100,9 +130,25 @@ agenda:
     parallel_group: agenda028-capacity
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Expand one recurring useful domain or send a checked cut to BC262. One
-      prescribed refinement with unchanged residual ends expansion of this
-      representation at checkpoint. It does not reject H111 or all resource methods.
+      Consume the central fence as a shared geometric lemma and give the next
+      mathematical design to BC277's uncovered boundary-band parent. The reviewed
+      strong comparator can express the same regional capacity; do not manufacture
+      a weak LP for survival. H118 remains open without a natural finite baseline.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
+    outcomes:
+    - scope: Admission of a strict central-fence strength comparison
+      classification: guard-refused
+      result: >-
+        No finite matrix or exact relaxation point is frozen. The recommended
+        geometric deduction closure includes the accepted four-region capacity,
+        so this instance becomes shared-lemma consumption or proof cost. A
+        larger nonlinear comparator build is not funded; the lower-band design
+        addresses a genuinely uncovered parent.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
+      disposition: defer-dependency
+      follow_up: think-os9k
   - id: BC-272
     purpose: research
     owner_focus: insight
@@ -132,7 +178,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: Can H120 close a new rank-nine release domain at variable side below 96/25?
     hypotheses: [H-120]
@@ -152,15 +198,39 @@ agenda:
       independently decided exclusion or verified counterexample at that scope.
       A domain design alone is readiness progress, not H120 acceptance.
     bead: think-1btr
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md
     workflows: [insight-iteration, factual-review, research-loop]
     depends_on: []
     parallel_group: agenda028-release
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Expand to a different released edge or wall pattern only if a reusable
-      argument closes new geometry. If work returns only source-cell samples or
-      already-closed local boxes, record that limitation and return to BC275.
-      A finite-motion or stationary-minimizer claim needs separate premises.
+      BC275 reprices a changed block-angle, slide or wall/contact scope using the
+      accepted ten-square cap contradiction. The full declared T+ is closed,
+      including all square10 orientations; do not fund its cavity adapter or
+      repeat the unchanged target. Global normal-form claims remain separate.
+    outcomes:
+    - scope: The full closed source-feature T+ at variable side from381/100 through96/25, block half-angle in[1/3,2/5], slides in[0,1/4] and every square10 orientation
+      classification: achieved
+      result: >-
+        Independent mathematical audit accepts a contradiction from the
+        ten-square skeleton's containment, complete necessary SAT alternatives
+        and top-cap geometry. The exact final gap is at least2/87. Square10
+        parameters are unused, so the original middle-angle target and both
+        angle siblings close together. Legal contacts and recontacts remain
+        included. This is an analytical proof, not a machine replay or global bound.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md
+      disposition: retire-success
+      follow_up: think-1v6g
   - id: BC-274
     purpose: research
     owner_focus: insight
@@ -191,7 +261,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: efficiency
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: Which mathematical result per unit of attention warrants the next overnight allocation?
     budget: A 20-minute integration reserve within the first four active hours, or earlier on decisive evidence.
@@ -207,25 +277,398 @@ agenda:
     depends_on: []
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Extend a frozen useful certificate queue, redirect mathematical attention
-      to its bottleneck, or retain a named blocker and another independently
-      useful slice. A self-chosen checkpoint is not termination of a later open-ended
-      user mandate; never extend an exhausted scientific attempt silently.
+      Audit BC270's completed parent-fence design and BC276's separately frozen
+      sibling attempt. The accepted cost correction at4ac71438 restores the
+      historical membership; use the rebuilt live receipt and preserve its
+      incomplete-snapshot and retrospective timing qualifications.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+    outcomes:
+    - scope: First two-hour publication and portfolio allocation
+      classification: achieved
+      result: >-
+        Published the accepted ten-square release contradiction at26679fa8 with
+        passing local and hosted checks. The independent portfolio challenge
+        prioritizes necessary eleven-square compatibility over hours of narrow
+        feature-box expansion. One negative-slide sibling can complete a signed
+        short-slide parent if independently accepted. The reproduced late-compaction
+        ownership defect is corrected at4ac71438 with independent review and49
+        focused tests. The rebuilt09:03:04 receipt retains24094.867agent-seconds
+        across9111.298elapsed seconds; no decreased total is a claimed improvement.
+      evidence:
+      - packing/campaign/agent-sessions/session-092-hybrid-overnight.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+      disposition: retire-success
+      follow_up: null
+  - id: BC-276
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: complete
+    priority: 1
+    question: Can the closed negative short-slide sibling complete H120's signed short-slide source-feature parent?
+    hypotheses: [H-120]
+    budget: Independent10-minute domain review, then a separately committed analytical attempt with25-minute author,20-minute concurrent adversary and20-minute independent audit.
+    entry: >-
+      Accepted BC273 all-v T+ exclusion and diagonal sign lemma, the BC275
+      complete N definition, independent domain/redundancy acceptance, and a
+      frozen protocol with actual starts and deadlines. Readiness here means
+      domain review; no target begins before protocol commit and record checks.
+    exit: >-
+      Independently reviewed exclusion of the whole N or an exact feasible
+      eleven-square witness in N, with all original walls, contact sides, variable
+      side,55 SAT clauses and closed seams. A ten-square skeleton witness alone
+      does not decide the eleven-square question. Partial proofs stay unresolved.
+    bead: think-6pka
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-273]
+    parallel_group: agenda028-release
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
+    next_evidence: >-
+      N and the complete signed short-slide parent S are independently closed.
+      Preserve other block angles, longer slides and changed wall/contact patterns;
+      reprice further structural work against direct parent compatibility rather
+      than automatically expanding this source-feature family.
+    outcomes:
+    - scope: Entire frozen negative short-slide N and its signed-parent union S
+      classification: achieved
+      result: >-
+        Both independent analytical arguments pass whole-domain review. Complete
+        SAT reductions and cap geometry force L at least4900/1261, exceeding96/25
+        by1444/31525. The accepted positive child and exact diagonal sign lemma
+        imply S is empty, including all square10 orientations and legal seams.
+        No global bracket change or machine proof replay is claimed.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
+      disposition: retire-success
+      follow_up: null
+  - id: BC-277
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [11]
+    state: complete
+    priority: 1
+    question: What complete boundary-band domain fairly tests complement capacity for seven residual full squares beyond the accepted central fence?
+    hypotheses: [H-118]
+    budget: One30-minute domain/guard design and15-minute independent admission review; a later target needs its own frozen protocol, price and independent audit.
+    entry: >-
+      Accepted complete three-band parent and exact lower fixture, central-fence
+      theorem and corrected remainder, and BC271's comparison assessment. The
+      lower and reflected upper parents are still uncovered; their target guards
+      and complement-capacity certificate do not yet exist.
+    exit: >-
+      One explicit finite closed four-pose family containing the retained lower
+      fixture, actual independent angles, complete parent/failure siblings and
+      joint reflection, control semantics and prospective capacity question; or
+      the precise missing premise. No target proof during this design.
+    bead: think-os9k
+    workflows: [insight-iteration, factual-review]
+    depends_on: []
+    parallel_group: agenda028-capacity
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
+    next_evidence: >-
+      Independent admission accepts the unchanged eight-guard domain, complete
+      cover, reflection and controls. BC278 owns a separately committed analytical
+      determination after record checks. No capacity result is supplied by admission.
+    outcomes:
+    - scope: Complete boundary-band four-pose domain and full eleven-square child
+      classification: achieved
+      result: >-
+        Independent admission accepts all eight guards, strict membership,
+        compactness,55 SAT clauses, closed failure children, joint upper reflection
+        and square/disk/octagon relaxation directions. Equality wording is qualified
+        without changing the formal cover. The capacity question remains unattempted.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
+      disposition: retire-success
+      follow_up: think-dtr6
+  - id: BC-278
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: stopped
+    priority: 1
+    question: Is the entire admitted boundary-band eleven-square child D0 empty, with its reflected upper child?
+    hypotheses: [H-118]
+    budget: One30-minute author and20-minute concurrent independent adversary, followed by20-minute fresh audit; all target and audit work ends by11:10UTC. Actual worker leases may be shorter.
+    entry: >-
+      Independent BC277 admission, immutable complete eight-guard domain and
+      prospective protocol, exact membership and relaxation controls, passing
+      record checks and separately recorded actual dispatch deadlines.
+    exit: >-
+      Independently accepted uniform exclusion of the whole D0 or exact verified
+      eleven-square witness, or a precise unresolved implication. A seven-center
+      disk or octagon witness decides only that surrogate, not full-square capacity.
+    bead: think-dtr6
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-277]
+    parallel_group: agenda028-capacity
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
+    next_evidence: >-
+      The bounded attempt and independent audit are terminal. Uniform disk and
+      octagon capacities of six are refuted, while full-square D0/D2 remains
+      unresolved. The midpoint efficiency review prices a changed square model
+      against broader release angles; no unchanged retry or strict LP comparison
+      is admitted.
+    outcomes:
+    - scope: Uniform disk and octagon sufficient bounds of six on the complete admitted boundary-band family
+      classification: bounded-negative
+      result: >-
+        Independent audit accepts an exact seven-disk witness and its continuous
+        selected-pose family, plus a distinct strict octagon witness. Both uniform
+        surrogate bounds of six are false. Exact selected-square geometry with
+        incircle-only residuals cannot close this family.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
+      disposition: retire-negative
+      follow_up: null
+    - scope: Complete full-square child D0 and its jointly reflected D2
+      classification: inconclusive
+      result: >-
+        All residual centers lie strictly above the accepted bottom barrier.
+        Two wall-forced squares overlap at the author's fixed disk centers, so
+        that witness does not lift. No uniform full-square capacity, exact
+        eleven-square witness or global lower-bound improvement is established.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
+      disposition: continue
+      follow_up: think-0yfe
+  - id: BC-279
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: stopped
+    priority: 1
+    question: Does the exact maximal wall-conditioned common-core model admit seven residual centers anywhere on the unchanged complete Gamma0?
+    hypotheses: [H-118]
+    budget: Concurrent15-minute native design,20-minute independent mathematical admission and15-minute predicate/control review; only after admission and a frozen passing-records protocol may one30-minute author and25-minute concurrent adversary run, followed by20-minute fresh audit. All target/audit work ends by12:40UTC; actual leases may be shorter.
+    entry: Audited BC278 disk/octagon obstruction, exact generic wall-conditioned core proposal, complete unchanged BC277 parent and midpoint allocation; scientific execution additionally requires independent admission, committed protocol and passing records.
+    exit: Independently accepted whole-model exclusion, exact seven-core witness, or precise unresolved implication. A positive excludes the full-square child by inclusion; a model witness does not establish actual eleven-square feasibility or strict H118 comparison.
+    bead: think-cwve
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-277]
+    parallel_group: agenda028-capacity
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md
+    next_evidence: The fresh audit accepts both exact six-core controls and fixed-insertion obstruction. Whole M7 remains unresolved. Reprice a specific new moving-center implication or complete method before another attempt; no unchanged retry.
+    outcomes:
+    - scope: Entire maximal wall-conditioned seven-core model on unchanged Gamma0
+      classification: inconclusive
+      result: Both independent attempts and the fresh audit finished within their caps. All graph values and39 same-normal certificates per configuration pass, as do the strict insertion cover and conditional wall-edge lemma. Neither a seven-core witness nor a uniform upper capacity bound is established.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md
+      disposition: continue
+      follow_up: think-0yfe
+  - id: BC-280
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [11]
+    state: complete
+    priority: 2
+    question: What complete physical common-angle release domain with t in[0,1] can be admitted without losing signed slides, source features or closed seams?
+    hypotheses: [H-120]
+    budget: One20-minute domain/control design in the spare independent slot during BC279 target work, then at most15 minutes of separately dispatched independent admission. Phase17 separately records15 minutes of prospective target-protocol design in parallel; no target determination is allocated here.
+    entry: Accepted BC273/BC276 signed middle-angle exclusion, exact source-feature equations and the midpoint's complete-chart alternative. Preserve the original side, slide, wall and contact pattern.
+    exit: A complete native domain, exact parent/control binding, closed angle/sign cover and independent admission or a precise failed premise; no new exclusion or packing witness.
+    bead: think-7ylp
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-273, BC-276]
+    parallel_group: agenda028-structure
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md
+    next_evidence: Independent domain admission is complete without defining correction. BC281 owns the separate complete determination after native protocol review and passing committed records.
+    outcomes:
+    - scope: Complete physical-angle signed short-slide source-feature domain and parent controls
+      classification: achieved
+      result: Independent source and domain reconstruction accepts all physical block and square10 angles,44 containment rows,55 complete SAT clauses, exact corner and lift maps, parent binding and eight closed angle-sign children. Only two middle children inherit exclusion; the remaining six are a new complete target.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md
+      disposition: retire-success
+      follow_up: think-ilpc
+  - id: BC-281
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: stopped
+    priority: 1
+    question: Is the entire full physical-angle signed short-slide source-feature family empty throughout side381/100 through96/25?
+    hypotheses: [H-120]
+    budget: At most30-minute analytical author and25-minute independent adversary, then20-minute fresh audit. A separately reviewed complete protocol, committed record and passing records precede dispatch; actual leases and latest launch are frozen there. All work ends before the existing14:11 final reserve, without retry or extension.
+    entry: Independently completed BC280 domain admission and exact inherited BC273/BC276 middle-angle scope. Fresh local and source inventory at12:21UTC found no BC281 or later native commitment; think-ilpc allocates this next sequential ID.
+    exit: Independently accepted complete exclusion, rigorously verified actual eleven-square packing in the unchanged domain, or exact partial implications and explicit unresolved remainder. No new global representative or unrestricted bound follows from family exclusion.
+    bead: think-ilpc
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-280]
+    parallel_group: agenda028-structure
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+    next_evidence: Independent audit accepts the exact partial exclusions and broader necessary conditions. The complete closed remainder is [1/24,1/3] union [1/2,23/25], with both signs and all original conditions. BC282 selects a new design-only skeleton decision; no unchanged attempt is extended.
+    outcomes:
+    - scope: Both signed closed axis neighborhoods and middle-angle extension, with exact necessary geometry
+      classification: achieved
+      result: Independent audit accepts exclusions on [0,1/24], [2/5,1/2] and [23/25,1], the full-chart count L>=2+2/(c+s), full-chart individual cap bound and the stated cap/SAT lemmas on c,s>=1/4. The stronger count does not require the four block contact equations, but retains six fixed axis squares and one common angle.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Entire full physical-angle signed short-slide source-feature family
+      classification: inconclusive
+      result: Both target reports and the fresh audit completed within their original caps, without a full exclusion or actual eleven-square witness. The surviving closed intervals retain all source conditions and every square10 pose. No global bound follows.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+      disposition: continue
+      follow_up: think-s6e7
+  - id: BC-282
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances:
+    - 11
+    state: complete
+    priority: 1
+    question: Can the accepted new geometry support a complete, independently admissible residual ten-square skeleton decision?
+    hypotheses:
+    - H-120
+    budget: 20-minute design and10-minute independent admission, including writing and checks, completed in session098. Two independent10-minute preparation inventories ran inside the design window. The proposed30/25/20-minute target was refused and remains unspent.
+    entry: The accepted BC281 partial audit and closed remainder selected BC282 under think-s6e7. The owner subsequently authorized continuation; session098 executed this separately from closed session092.
+    exit: Exact necessary skeleton projection with40 containment rows and45 full SAT clauses, complete closed angle/sign cover, scoped inherited lemmas and an alternative-obligation table naming a specific additional geometric implication. Otherwise retain the exact admission gap. A mere restatement or unchanged retry is refused.
+    bead: think-s6e7
+    workflows:
+    - insight-iteration
+    - factual-review
+    depends_on:
+    - BC-280
+    parallel_group: agenda028-structure
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
+    - packing/campaign/agent-sessions/session-098-residual-skeleton.md
+    next_evidence: Independent admission accepts the exact40/45 domain, ten closed envelope chambers and open translation-fiber equivalence. The six-source fence is sufficient but unproved; uniform templates, bounded facet transitions and a priced complete witness discriminator are missing. Session098 parks local target work; think-k54y retains exact re-entry prerequisites, while existing BC264 pricing remains separately owned.
+    outcomes:
+    - scope: Complete residual ten-square domain and exact joint-translation reduction
+      classification: achieved
+      result: Independent reconstruction accepts seven parameters,40 containment rows,45 complete pair clauses, ten closed envelope chambers,24 open collision intervals and exact fiber equivalence. Degenerate fibers and all legal touching are retained. No particular target fiber is proved covered.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Conditional complete skeleton target
+      classification: guard-refused
+      result: 'The independent reviewer declines the30/25/20 target allocation: neither bounded uniform chain templates and active-facet transitions nor a priced complete witness discriminator is supplied. No target ran; six-source-chain failure is not skeleton feasibility.'
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
+      disposition: defer-dependency
+      follow_up: think-k54y
+  - id: BC-283
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: complete
+    priority: 1
+    question: What did the completed exploration efforts establish, and which existing parallel lanes now have the most informative next discriminator?
+    budget: User-requested W10 planning slice through22:45UTC, followed by15minutes for documentation delta validation/publication; two independent six-minute mathematical assessments plus bounded allocation/CI audits. Continuing full validation is asynchronous evidence, not a scientific extension.
+    entry: Merged PRs105/107/108/109/112/113/115, retained X016/X017/X018 results and negatives, current frontiers, PR110 checkpoints, live PR116 ownership and shared reservations.
+    exit: First-principles account of proof mechanisms, evidence-qualified outcome mapping, completed versus active agenda status, disjoint IDs and a ranked next-entry/re-entry decision in the existing planning record.
+    bead: think-dwq8
+    workflows: [review-planning-oversight]
+    depends_on: []
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md
+    next_evidence: Planning assessment and independent reviews are complete. This September 7 decision selected the existing BC264 owner think-mq0d after checkpoint publication under think-m2lx; Agenda030 later superseded that handoff with think-qfog. Retain the independent helper lane and parked H118/H120 targets; this block renews no scientific allocation.
+    outcomes:
+    - scope: First-principles strategic reconciliation and next-entry decision
+      classification: achieved
+      result: Two independent source assessments and two synthesis reviews distinguish bound improvements, restricted geometry, refuted auxiliary models, the fixed-support ceiling, inconclusive searches and unopened targets. The September 7 decision retained BC264 under its existing owner, a separate geometric-helper lane, and explicit H118/H120 re-entry gates; Agenda030 later superseded that handoff. Landed096, kernel097 and our residual098 remain distinct; BC283 is planning only.
+      evidence:
+      - docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md
+      disposition: retire-success
+      follow_up: null
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
-**Prepared; no target experiment or overnight run has started.**
+**The first execution block is closed in
+[session-092](../agent-sessions/session-092-hybrid-overnight.md).** Its scientific
+audits completed before the usage interruption; final publication was recovered after
+the owner asked to continue.
+The owner subsequently authorized continuation in
+[session-098](../agent-sessions/session-098-residual-skeleton.md).
+BC282 now has an independently accepted exact translation reduction; its full target
+remains unadmitted. The agenda is paused, with its deferred questions governed by their
+explicit re-entry conditions.
 [X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the critical
 review, priority rationale and mapping from #108. Epic `think-pxv5` owns this agenda.
-W10 bead `think-urcm` owns its preparation.
+
+**Later strategy/planning block:** BC283 / `think-dwq8` reconciles the completed
+explorations from first principles and ranks existing parallel lanes at the owner’s
+request. Its
+[decision record](../../../docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
+keeps the original scientific clocks closed.
+It allocates no new mathematical hypothesis, experiment or scientific session.
+
+PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
+`codex/n11-hybrid-overnight` execution branch.
+The owner authorized approximately eight hours, 06:31–14:31 UTC on September 7, with
+pushed checkpoints at hours 2, 4, 6 and 8. The opening design and proof-contract review
+are retained.
+Independent geometry reconstruction and a complete two-square control cover
+are accepted at their direct scope.
+The first analytical release attempt is independently accepted: the ten-square skeleton
+is impossible throughout the declared $T_+$, for every square10 orientation.
+No numerical target experiment has been admitted.
 
 ## Independent Work, Shared Evidence
 
 X-016’s continuing source program retains H-110 and conditional compatibility.
 X-017 / Agenda 027 retains H-111–117, BC-258–268, the complete anchor and six-plus-five
 pilots, support adoption, physical KKT review, and the sole BC-261 geometry interface.
-This agenda adds X-018, H-118–121 and BC-269–275; it takes no experiment or session ID.
-Source session-091 is already occupied.
+This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. The
+execution adds the next sequential commitments BC276 under existing H120, BC277–279
+under existing H118, and BC280 full-angle domain admission and BC281’s prospective
+complete-domain determination under H120. No new hypothesis or experiment ID is needed
+for these extensions.
+Fresh source inventory at12:16 UTC places its continuation in sessions091,093–095,
+H122–124 and experiments121–127. Its owner independently reconciled the former
+unpublished H118 collision before publication; no cross-task message was sent.
+This execution retains session092 and allocates no new hypothesis or experiment ID.
 Recheck live allocations before claiming any later ID; a next-ID pointer is not a
 reservation.
 
@@ -240,7 +683,7 @@ cannot accidentally run the same comparison twice.
 
 ## First Checkpoint and Overnight Continuation
 
-The first four active hours are a planning horizon, not a predicted solver runtime.
+Session092’s four two-hour stages are planning horizons, not predicted solver runtimes.
 Work in slices of at most 30 minutes and integrate earlier when a decision is ready.
 Use the available three workers for capacity design, structural design and independent
 review, with the coordinator integrating evidence and arranging the shared interface.
@@ -254,11 +697,14 @@ before pricing a compute run on the same host.
 | First target | BC-271 runs one prospectively frozen determination | Independently replay it; run H-120 only after its separate readiness decision | New domain, scoped obstruction or explicit unresolved remainder |
 | Checkpoint | BC-275 compares strength, proof work and cost | Reconcile useful evidence with X-017; preserve the source continuation | Expand one demonstrated representation, or select the next missing mathematical premise |
 
-There is currently **no ready machine-only queue** for these new questions.
-The existing LP helper chooses branches from a feasible source pose and does not export
-the required infeasibility dual.
-Building and reviewing one real uniform leaf is the first enabling task.
-The unpublished spike receipts are not a substitute for it.
+There is currently **no ready eleven-square machine-only queue** for these questions.
+The direct instrument now exports exact infeasibility duals and independently
+reconstructs uniform rational cells, with a complete two-square control cover.
+An H120 adapter must still enclose the angle-dependent feature centers or keep them as
+variables with uniformly enclosed feature equations.
+The accepted fixed-center error estimate does not automatically cover that dependency.
+The accepted analytical contradiction closes this pilot without that adapter, so it
+earns no further implementation allocation for the unchanged domain.
 
 Once a producer and independent reader pass controls, a longer run can process one
 frozen exact-certificate queue while a separate adversary proposes packings in the same

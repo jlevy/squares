@@ -1,0 +1,227 @@
+UNTESTED DRAFT: retained for think-yhw2; no controls or scientific target ran.
+Not an importable project module or supporting certificate evidence.
+
+#!/usr/bin/env python3
+"""Independent exact five-dot cover check by nine-obstacle decomposition."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import time
+from dataclasses import dataclass
+from fractions import Fraction
+from pathlib import Path
+from typing import Any
+
+from strif import atomic_write_text
+
+from devtools.multi_owner_domains import (
+    centre_in_strict_multi_footprint_domain,
+    multi_footprint_domain,
+)
+from devtools.owner_footprints import CORE_SIDE, OUTER_SIDE, Point, Polygon
+from devtools.replay_owner_footprint_cover import BoundSource, load_bound_source
+from sqpack.fractional.model import Direction
+
+
+@dataclass(frozen=True, slots=True)
+class DirectionCheck:
+    """Exact cover result or an uncovered residual-core centre."""
+
+    covered: bool
+    cuts: int
+    pieces: int
+    witness_uv: Point | None = None
+
+
+def require_five_equal_atoms(source: BoundSource) -> Fraction:
+    """Bind the independent check to the registered five-equal-dot proposal."""
+
+    if source.owner_count != 4 or len(source.arm.footprints) != 4:
+        raise ValueError("source must be the four-owner endpoint arm")
+    if len(source.atoms) != 5:
+        raise ValueError("source must contain exactly five endpoint atoms")
+    weights = {atom.weight for atom in source.atoms}
+    if len(weights) != 1:
+        raise ValueError("the five endpoint atoms must have one exact common weight")
+    weight = next(iter(weights))
+    if weight <= 0:
+        raise ValueError("the common atom weight must be positive")
+    return weight
+
+
+def check_direction(
+    outer_side: Fraction,
+    square_side: Fraction,
+    direction: Direction,
+    owner_footprints: tuple[Polygon, ...],
+    dots: tuple[Point, ...],
+    *,
+    max_polygons: int,
+    max_cuts: int,
+    max_pieces: int,
+) -> DirectionCheck:
+    """Check one orientation without an incidence grid or covering weights."""
+
+    footprints = owner_footprints + tuple((dot,) for dot in dots)
+    if len(footprints) > max_polygons:
+        raise ValueError("owner and dot polygons exceed the declared guard")
+    domain = multi_footprint_domain(outer_side, square_side, direction, footprints)
+    if len(domain.cuts) > max_cuts:
+        raise ValueError("vertical-decomposition cuts exceed the declared guard")
+    if len(domain.components) > max_pieces:
+        raise ValueError("vertical-decomposition pieces exceed the declared guard")
+    if not domain.components:
+        return DirectionCheck(covered=True, cuts=len(domain.cuts), pieces=0)
+    component = domain.components[0]
+    count = len(component)
+    witness = (
+        sum((point[0] for point in component), start=Fraction(0)) / count,
+        sum((point[1] for point in component), start=Fraction(0)) / count,
+    )
+    if not centre_in_strict_multi_footprint_domain(witness, domain):
+        raise AssertionError("positive-area component centroid failed strict nine-obstacle SAT")
+    return DirectionCheck(
+        covered=False,
+        cuts=len(domain.cuts),
+        pieces=len(domain.components),
+        witness_uv=witness,
+    )
+
+
+def _physical_centre(direction: Direction, centre_uv: Point) -> Point:
+    u, v = centre_uv
+    return (
+        direction.ux * u + direction.vx * v,
+        direction.uy * u + direction.vy * v,
+    )
+
+
+def check_full_net(
+    source: BoundSource,
+    *,
+    max_polygons: int,
+    max_cuts: int,
+    max_pieces: int,
+    deadline_seconds: float,
+    checkpoint: Path,
+) -> dict[str, Any]:
+    """Check all 361 orientations, stopping only on an exact escape or a guard."""
+
+    common_weight = require_five_equal_atoms(source)
+    from devtools.owner_footprints import full_owner_direction_manifest  # noqa: PLC0415
+
+    directions = full_owner_direction_manifest().directions
+    dots = tuple((atom.x, atom.y) for atom in source.atoms)
+    result: dict[str, Any] = {
+        "schema": "five-dot-nine-obstacle-check/v1",
+        "status": "running",
+        "source": {
+            "path": source.path.as_posix(),
+            "git_commit": source.git_commit,
+            "git_blob": source.git_blob,
+            "owner_count": source.owner_count,
+            "atom_count": len(source.atoms),
+            "common_weight": str(common_weight),
+            "total_mass": str(source.total_mass),
+        },
+        "method": "exact vertical decomposition of four owner and five point obstacles",
+        "mass_grid_used": False,
+        "direction_count": len(directions),
+        "continuum_angle_transfer_checked": False,
+        "guards": {
+            "max_polygons": max_polygons,
+            "max_cuts_per_direction": max_cuts,
+            "max_pieces_per_direction": max_pieces,
+            "deadline_seconds": deadline_seconds,
+        },
+        "directions": [],
+        "summary": None,
+    }
+    atomic_write_text(checkpoint, json.dumps(result, indent=1) + "\n", make_parents=True)
+    started = time.perf_counter()
+    records = result["directions"]
+    assert isinstance(records, list)
+    maximum_cuts = maximum_pieces = 0
+    for index, direction in enumerate(directions):
+        if time.perf_counter() - started >= deadline_seconds:
+            result["status"] = "partial"
+            break
+        check = check_direction(
+            OUTER_SIDE,
+            CORE_SIDE,
+            direction,
+            source.arm.footprints,
+            dots,
+            max_polygons=max_polygons,
+            max_cuts=max_cuts,
+            max_pieces=max_pieces,
+        )
+        maximum_cuts = max(maximum_cuts, check.cuts)
+        maximum_pieces = max(maximum_pieces, check.pieces)
+        record: dict[str, Any] = {
+            "index": index,
+            "label": direction.label,
+            "covered": check.covered,
+            "cuts": check.cuts,
+            "pieces": check.pieces,
+        }
+        if check.witness_uv is not None:
+            xy = _physical_centre(direction, check.witness_uv)
+            record["uncovered_witness_uv"] = [str(value) for value in check.witness_uv]
+            record["uncovered_witness_xy"] = [str(value) for value in xy]
+            record["witness_verified_against_closed_polygons"] = 9
+        records.append(record)
+        result["summary"] = {
+            "checked_directions": len(records),
+            "all_covered": False if not check.covered else None,
+            "maximum_cuts": maximum_cuts,
+            "maximum_pieces": maximum_pieces,
+        }
+        atomic_write_text(checkpoint, json.dumps(result, indent=1) + "\n")
+        if not check.covered:
+            result["status"] = "complete"
+            break
+    else:
+        result["status"] = "complete"
+        result["summary"] = {
+            "checked_directions": len(records),
+            "all_covered": True,
+            "maximum_cuts": maximum_cuts,
+            "maximum_pieces": maximum_pieces,
+        }
+    result["wall_seconds"] = time.perf_counter() - started
+    atomic_write_text(checkpoint, json.dumps(result, indent=1) + "\n")
+    return result
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("receipt", type=Path)
+    parser.add_argument("--expect-source-blob", required=True)
+    parser.add_argument("--max-polygons", type=int, default=9)
+    parser.add_argument("--max-cuts", type=int, default=5_000)
+    parser.add_argument("--max-pieces", type=int, default=20_000)
+    parser.add_argument("--deadline-seconds", type=float, default=240)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args(argv)
+    if min(args.max_polygons, args.max_cuts, args.max_pieces) < 1:
+        parser.error("geometry guards must be positive")
+    if args.deadline_seconds <= 0:
+        parser.error("deadline-seconds must be positive")
+    source = load_bound_source(args.receipt, args.expect_source_blob)
+    result = check_full_net(
+        source,
+        max_polygons=args.max_polygons,
+        max_cuts=args.max_cuts,
+        max_pieces=args.max_pieces,
+        deadline_seconds=args.deadline_seconds,
+        checkpoint=args.output,
+    )
+    print(json.dumps(result, indent=1), flush=True)  # noqa: T201 - temporary CLI
+    return 0 if result["status"] == "complete" else 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

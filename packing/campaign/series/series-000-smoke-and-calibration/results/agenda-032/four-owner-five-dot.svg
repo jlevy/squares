@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="1100" height="922" viewBox="0 0 1100 922" role="img" aria-labelledby="figure-title figure-description" font-family="Arial, Helvetica, sans-serif">
+  <title id="figure-title">Five dots exclude one four-owner case</title>
+  <desc id="figure-description">The square container of side 3.84 contains four teal patches guaranteed to lie inside four distinct owner squares. Blue diamonds are their ownership marks. Five red dots meet every remaining selected inner core. Distinct cores cannot share a dot, so at most five further squares fit, while eleven total need seven. An inset shows the half-side square intersection that forces each patch. The result excludes this specified owner case, not every eleven-square packing.</desc>
+  <metadata>
+    <sqpack:profile version="7">
+      <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
+      <sqpack:value name="analytic-transfer">packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md</sqpack:value>
+      <sqpack:value name="branch">four reflected bottom-left:m1:j0 owner conditions</sqpack:value>
+      <sqpack:value name="exact-replay">packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json</sqpack:value>
+      <sqpack:value name="normalised-dot-weight">1</sqpack:value>
+      <sqpack:value name="proposal">packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json</sqpack:value>
+      <sqpack:value name="scope">existing conditional result; drawing does not rerun the proof</sqpack:value>
+    </sqpack:profile>
+  </metadata>
+  <rect width="1100" height="922" fill="white" />
+  <text x="36" y="45" font-size="29" fill="#22333d" font-weight="700" text-anchor="start">Five dots rule out one four-owner case</text>
+  <text x="36" y="78" font-size="19" fill="#536670" font-weight="400" text-anchor="start">The four owner squares may vary in position and angle within this case.</text>
+  <rect x="60" y="160" width="550" height="550" fill="white" stroke="#22333d" stroke-width="2" />
+  <text x="335" y="139" font-size="18" fill="#22333d" font-weight="400" text-anchor="middle">Container side 3.84</text>
+  <polygon points="202.1916010498687664041994751,604.6194225721784776902887139 252.7143262387122053765203799,554.0967728718834072541029785 231.7871374157541830708661417,533.1695527805118110236220472 202.1916010498687664041994751,533.1695527805118110236220472" fill="#c6e8df" stroke="#087d7a" stroke-width="2" data-footprint="A" data-exact-vertices="[[&quot;3152/3175&quot;, &quot;2336/3175&quot;], [&quot;1251225874449498/929936257500575&quot;, &quot;809779555054961729/743949006000460000&quot;], [&quot;1523220930453/1270000000000&quot;, &quot;3135879/2540000&quot;], [&quot;3152/3175&quot;, &quot;3135879/2540000&quot;]]">
+    <title>Patch A: inside its owner in every pose in this case</title>
+  </polygon>
+  <polygon points="417.2856737612877946234796201,554.0967728718834072541029785 467.8083989501312335958005249,604.6194225721784776902887139 467.8083989501312335958005249,533.1695527805118110236220472 438.2128625842458169291338583,533.1695527805118110236220472" fill="#c6e8df" stroke="#087d7a" stroke-width="2" data-footprint="B" data-exact-vertices="[[&quot;463945870870542/185987251500115&quot;, &quot;809779555054961729/743949006000460000&quot;], [&quot;1808/635&quot;, &quot;2336/3175&quot;], [&quot;1808/635&quot;, &quot;3135879/2540000&quot;], [&quot;3353579069547/1270000000000&quot;, &quot;3135879/2540000&quot;]]">
+    <title>Patch B: inside its owner in every pose in this case</title>
+  </polygon>
+  <polygon points="202.1916010498687664041994751,336.8304472194881889763779528 231.7871374157541830708661417,336.8304472194881889763779528 252.7143262387122053765203799,315.9032271281165927458970215 202.1916010498687664041994751,265.3805774278215223097112861" fill="#c6e8df" stroke="#087d7a" stroke-width="2" data-footprint="C" data-exact-vertices="[[&quot;3152/3175&quot;, &quot;6617721/2540000&quot;], [&quot;1523220930453/1270000000000&quot;, &quot;6617721/2540000&quot;], [&quot;1251225874449498/929936257500575&quot;, &quot;2046984627986804671/743949006000460000&quot;], [&quot;3152/3175&quot;, &quot;9856/3175&quot;]]">
+    <title>Patch C: inside its owner in every pose in this case</title>
+  </polygon>
+  <polygon points="417.2856737612877946234796201,315.9032271281165927458970215 438.2128625842458169291338583,336.8304472194881889763779528 467.8083989501312335958005249,336.8304472194881889763779528 467.8083989501312335958005249,265.3805774278215223097112861" fill="#c6e8df" stroke="#087d7a" stroke-width="2" data-footprint="D" data-exact-vertices="[[&quot;463945870870542/185987251500115&quot;, &quot;2046984627986804671/743949006000460000&quot;], [&quot;3353579069547/1270000000000&quot;, &quot;6617721/2540000&quot;], [&quot;1808/635&quot;, &quot;6617721/2540000&quot;], [&quot;1808/635&quot;, &quot;9856/3175&quot;]]">
+    <title>Patch D: inside its owner in every pose in this case</title>
+  </polygon>
+  <polygon points="202.1916010498687664041994751,599.6194225721784776902887139 207.1916010498687664041994751,604.6194225721784776902887139 202.1916010498687664041994751,609.6194225721784776902887139 197.1916010498687664041994751,604.6194225721784776902887139" fill="#2853a2" stroke="white" stroke-width="1.2" />
+  <text x="183" y="611" font-size="18" fill="#087d7a" font-weight="700" text-anchor="middle">A</text>
+  <polygon points="467.8083989501312335958005249,599.6194225721784776902887139 472.8083989501312335958005249,604.6194225721784776902887139 467.8083989501312335958005249,609.6194225721784776902887139 462.8083989501312335958005249,604.6194225721784776902887139" fill="#2853a2" stroke="white" stroke-width="1.2" />
+  <text x="487" y="611" font-size="18" fill="#087d7a" font-weight="700" text-anchor="middle">B</text>
+  <polygon points="202.1916010498687664041994751,260.3805774278215223097112861 207.1916010498687664041994751,265.3805774278215223097112861 202.1916010498687664041994751,270.3805774278215223097112861 197.1916010498687664041994751,265.3805774278215223097112861" fill="#2853a2" stroke="white" stroke-width="1.2" />
+  <text x="183" y="271" font-size="18" fill="#087d7a" font-weight="700" text-anchor="middle">C</text>
+  <polygon points="467.8083989501312335958005249,260.3805774278215223097112861 472.8083989501312335958005249,265.3805774278215223097112861 467.8083989501312335958005249,270.3805774278215223097112861 462.8083989501312335958005249,265.3805774278215223097112861" fill="#2853a2" stroke="white" stroke-width="1.2" />
+  <text x="487" y="271" font-size="18" fill="#087d7a" font-weight="700" text-anchor="middle">D</text>
+  <circle cx="199.4097222222222222222222222" cy="412.4016203703703703703703704" r="7" fill="#b63e24" data-dot="1" data-exact-x="73/75" data-exact-y="187/90">
+    <title>Dot 1: (73/75, 187/90), weight 1</title>
+  </circle>
+  <text x="212" y="402" font-size="18" fill="#b63e24" font-weight="650" text-anchor="start">1</text>
+  <circle cx="312.4016203703703703703703704" cy="299.4097222222222222222222222" r="7" fill="#b63e24" data-dot="2" data-exact-x="793/450" data-exact-y="43/15">
+    <title>Dot 2: (793/450, 43/15), weight 1</title>
+  </circle>
+  <text x="325" y="289" font-size="18" fill="#b63e24" font-weight="650" text-anchor="start">2</text>
+  <circle cx="335" cy="435" r="7" fill="#b63e24" data-dot="3" data-exact-x="48/25" data-exact-y="48/25">
+    <title>Dot 3: (48/25, 48/25), weight 1</title>
+  </circle>
+  <text x="348" y="425" font-size="18" fill="#b63e24" font-weight="650" text-anchor="start">3</text>
+  <circle cx="357.5983796296296296296296296" cy="570.5902777777777777777777778" r="7" fill="#b63e24" data-dot="4" data-exact-x="187/90" data-exact-y="73/75">
+    <title>Dot 4: (187/90, 73/75), weight 1</title>
+  </circle>
+  <text x="371" y="561" font-size="18" fill="#b63e24" font-weight="650" text-anchor="start">4</text>
+  <circle cx="470.5902777777777777777777778" cy="457.5983796296296296296296296" r="7" fill="#b63e24" data-dot="5" data-exact-x="43/15" data-exact-y="793/450">
+    <title>Dot 5: (43/15, 793/450), weight 1</title>
+  </circle>
+  <text x="484" y="448" font-size="18" fill="#b63e24" font-weight="650" text-anchor="start">5</text>
+  <text x="60" y="733" font-size="15" fill="#536670" font-weight="400" text-anchor="middle">0</text>
+  <text x="46" y="715" font-size="15" fill="#536670" font-weight="400" text-anchor="end">0</text>
+  <text x="203" y="733" font-size="15" fill="#536670" font-weight="400" text-anchor="middle">1</text>
+  <text x="46" y="572" font-size="15" fill="#536670" font-weight="400" text-anchor="end">1</text>
+  <text x="346" y="733" font-size="15" fill="#536670" font-weight="400" text-anchor="middle">2</text>
+  <text x="46" y="429" font-size="15" fill="#536670" font-weight="400" text-anchor="end">2</text>
+  <text x="490" y="733" font-size="15" fill="#536670" font-weight="400" text-anchor="middle">3</text>
+  <text x="46" y="285" font-size="15" fill="#536670" font-weight="400" text-anchor="end">3</text>
+  <rect x="60" y="755" width="18" height="14" fill="#c6e8df" stroke="#087d7a" />
+  <text x="88" y="768" font-size="17" fill="#22333d" font-weight="400" text-anchor="start">A–D: guaranteed occupied patches</text>
+  <circle cx="445" cy="762" r="6" fill="#b63e24" />
+  <text x="460" y="768" font-size="17" fill="#22333d" font-weight="400" text-anchor="start">1–5: proof dots</text>
+  <rect x="650" y="113" width="420" height="399" rx="12" fill="#f4f7f7" stroke="#d9e2e3" />
+  <text x="674" y="146" font-size="22" fill="#22333d" font-weight="650" text-anchor="start">How a patch is forced</text>
+  <text x="674" y="178" font-size="18" fill="#22333d" font-weight="400" text-anchor="start">The owner's core contains a square of</text>
+  <text x="674" y="202" font-size="18" fill="#22333d" font-weight="400" text-anchor="start">half its side, anchored at the mark.</text>
+  <polygon points="850,404 969.724,404 969.724,284.276 850,284.276" fill="none" stroke="#84939c" stroke-width="2" stroke-dasharray="" />
+  <polygon points="850,404 934.6577155164329333761653562,319.3424109749237510654749569 850.0001264913566844416403131,234.6846954584908176893096006 765.3424109749237510654749569,319.3422844835670666238346438" fill="none" stroke="#84939c" stroke-width="2" stroke-dasharray="6 4" />
+  <polygon points="850,404 934.6577155164329333761653562,319.3424109749237510654749569 899.591356936,284.276 850,284.276" fill="#c6e8df" stroke="#087d7a" stroke-width="2.5" />
+  <polygon points="850,399 855,404 850,409 845,404" fill="#2853a2" stroke="white" stroke-width="1.2" />
+  <text x="850" y="431" font-size="16" fill="#2853a2" font-weight="400" text-anchor="middle">mark</text>
+  <text x="985" y="290" font-size="16" fill="#536670" font-weight="400" text-anchor="start">0°</text>
+  <text x="773" y="252" font-size="16" fill="#536670" font-weight="400" text-anchor="end">≈45°</text>
+  <text x="674" y="465" font-size="17" fill="#22333d" font-weight="400" text-anchor="start">Two endpoint orientations are outlined.</text>
+  <text x="674" y="490" font-size="17" fill="#22333d" font-weight="400" text-anchor="start">The overlap survives between these angles.</text>
+  <rect x="650" y="530" width="420" height="243" rx="12" fill="#f4f7f7" stroke="#d9e2e3" />
+  <text x="674" y="564" font-size="22" fill="#22333d" font-weight="650" text-anchor="start">Why five dots suffice</text>
+  <text x="674" y="598" font-size="18" fill="#22333d" font-weight="400" text-anchor="start">An inner core is a slightly smaller</text>
+  <text x="674" y="622" font-size="18" fill="#22333d" font-weight="400" text-anchor="start">square strictly inside a unit square.</text>
+  <text x="674" y="663" font-size="18" fill="#22333d" font-weight="400" text-anchor="start">Each selected remaining core contains</text>
+  <text x="674" y="687" font-size="18" fill="#b63e24" font-weight="650" text-anchor="start">at least one of the five red dots.</text>
+  <text x="674" y="733" font-size="18" fill="#22333d" font-weight="400" text-anchor="start">Separated cores cannot share a dot.</text>
+  <rect x="30" y="799" width="1040" height="91" rx="12" fill="#f4f7f7" stroke="#d9e2e3" />
+  <text x="54" y="835" font-size="24" fill="#22333d" font-weight="650" text-anchor="start">11 total − 4 owners = 7 remaining</text>
+  <text x="54" y="867" font-size="18" fill="#22333d" font-weight="400" text-anchor="start">Each remaining core needs its own dot.</text>
+  <text x="830" y="838" font-size="29" fill="#b63e24" font-weight="700" text-anchor="middle">7 required &gt; 5 dots</text>
+  <text x="830" y="870" font-size="18" fill="#22333d" font-weight="400" text-anchor="middle">This case is impossible.</text>
+  <text x="550" y="914" font-size="15" fill="#536670" font-weight="400" text-anchor="middle">Exact coverage: 361 core directions; all physical angles follow by the proved inner-core transfer.</text>
+</svg>

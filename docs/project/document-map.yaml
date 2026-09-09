@@ -3,12 +3,15 @@ softschema:
   schema: document-map.schema.yaml
   status: enforced
 
-last_reviewed: '2026-09-06'
+last_reviewed: '2026-09-08'
 scope: >
   Durable Markdown owned by packing. Source-faithful archive content is
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packing/benchmarks/math-startup/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/benchmarks/math-startup/ideas.md, role: plan, authority: supporting, lifecycle: maintained}
+  - {path: packing/benchmarks/math-startup/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t-theory-cuts-and-routes.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-reader-191-50.md, role: research-report, authority: record, lifecycle: retained}
@@ -25,6 +28,50 @@ documents:
   - {path: docs/project/reviews/review-2026-09-07-maciver-square-packing.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-07-stromquist-n26-verification.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-07-stromquist-incorporation.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/stromquist-helper-arguments-math-review.md, role: review, authority: supporting, lifecycle: maintained}
@@ -37,6 +84,8 @@ documents:
   - {path: packing/benchmarks/validation-efficiency/ideas.md, role: plan, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/validation-efficiency/experiments/VE-002-bridge.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/validation-efficiency/experiments/VE-003-checks-start-order.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/validation-efficiency/experiments/VE-004-checks-start-order.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/validation-efficiency/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/validation-efficiency/report.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/gate-cost-at-324/README.md, role: research-report, authority: record, lifecycle: retained}
@@ -372,8 +421,9 @@ documents:
     lifecycle: retained
   - path: docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md
     role: handoff
-    authority: current
-    lifecycle: maintained
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
   - path: packing/cases/n11_fractional_certificate/thirdparty/README.md
     role: component-guide
     authority: record
@@ -457,7 +507,48 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/adjacent-corner-two-owner-counterexample.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/bc-305-ownership-results.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/fixed-outer-pairs-bottom-corner-incompatibility.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/new-outer-constraints-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-middle-capacity-two-proof.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-corner-counterexample.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-equal-angle-and-cell-exclusions.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-screen-contract-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/remaining-eight-segment-capacity-four.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/shared-segment-support-bounds.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/robust-outer-corner-incompatibility.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/dual-salvage-contract.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-footprint-contract.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-pose-refinement-contract.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/fixed-cover-transfer-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/point-extension-lemma.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/multiple-footprint-domain-contract.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/receipts-and-multi-domain-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md, role: research-report, authority: record, lifecycle: retained}
 collections:
+  - pattern: packing/benchmarks/math-startup/experiments/*.md
+    role: experiment-record
+    authority: record
+    lifecycle: retained
+    contract: squares.math-startup.experiment.v1
+    schema: packing/benchmarks/math-startup/schemas/experiment.schema.yaml
+  - pattern: packing/benchmarks/math-startup/explorations/*.md
+    role: exploration-report
+    authority: record
+    lifecycle: retained
+    contract: squares.math-startup.exploration.v1
+    schema: packing/benchmarks/math-startup/schemas/exploration.schema.yaml
+  - pattern: packing/benchmarks/math-startup/hypotheses/*.md
+    role: hypothesis-record
+    authority: definitive
+    lifecycle: maintained
+    contract: squares.math-startup.hypothesis.v1
+    schema: packing/benchmarks/math-startup/schemas/hypothesis.schema.yaml
   - pattern: packing/frontier/n-*.md
     role: frontier-case
     authority: definitive

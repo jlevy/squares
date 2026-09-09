@@ -31,11 +31,11 @@ painted in whatever faces have decoded by then, and each composite's slots are s
 `@font-face` rules fetched only when a formula first asks for them. Rendering as soon as
 the DOM is ready therefore paints the digits from the next family in the stack and
 repaints them a moment later, which the owner saw on the built page and on the live site
-as every formula's digits changing font on load (`think-q5df`). An init script samples
-the first CSS-visible `.katex` node and records the status of every embedded math face;
-each one has to be loaded already. Hidden staging nodes do not count as visible
-formulas. The separate delayed-font checker also verifies that native MathML and early
-interactive renders stay hidden during this wait.
+as every formula's digits changing font on load (`think-q5df`). An init script checks
+the glyph fonts required by each formula when it first becomes CSS-visible, retaining
+the first formula's observations and any later failures. Unused faces may remain
+unloaded. Hidden staging nodes do not count as visible formulas. The separate
+delayed-font checker also verifies native MathML and early interactive renders.
 
 A fourth thing falls out of the first: the page's init has to have RUN. It is one
 `(() => { ... })()` inlined into the page, and a reference error inside it leaves the
@@ -58,7 +58,7 @@ import os
 from pathlib import Path
 from typing import Literal, NotRequired, TypedDict
 
-from devtools.check_math_loading import FIRST_PAINT_SCRIPT, page_url
+from devtools.check_math_loading import ACTIVE_MATH_VARIANT, FIRST_PAINT_SCRIPT, page_url
 from devtools.check_print_layout import PRINT_VIEWPORT
 from devtools.render_explainer import MATH_WRAPPERS
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
@@ -146,7 +146,8 @@ PROBE = r"""({ wrappers, advance_tolerance }) => {
   const findings = [];
   const boldAdvances = [];
   const fontAdvance = __FONT_ADVANCE_FUNCTION__;
-  const nodes = [...document.querySelectorAll('.katex')];
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
+  const nodes = [...document.querySelectorAll('.katex')].filter(activeVariant);
   const sans = (node) => !!node.closest('[data-kpress-math-face="sans"]');
   const marked = nodes.filter(sans);
   const first = (value) => (value || '').split(',')[0].trim().replace(/^["']|["']$/g, '');
@@ -286,24 +287,34 @@ PROBE = r"""({ wrappers, advance_tolerance }) => {
   }
   seam.restore();
 
-  /* The self-contained page must decode its math faces before exposing any formula. */
+  /* Only the glyphs an exposed formula uses must be ready. Unused registered
+     styles may remain unloaded; demanding them would restore the startup barrier. */
   const paint = globalThis.__mathFirstPaint;
   if (!paint) {
     findings.push('nothing recorded the first mathematics node; the init script did not run');
   } else {
-    const late = paint.faces
-      .filter((face) => (face.family.startsWith('KaTeX_')
-        || face.family.startsWith('KPress Math Text')) && face.status !== 'loaded')
-      .map((face) => face.family + ' ' + face.style + ' ' + face.weight
-        + ' (' + face.status + ')');
+    if (!Array.isArray(paint.required) || !paint.required.length) {
+      findings.push('first mathematics paint has no required-glyph observations');
+    }
+    const late = (paint.required || [])
+      .filter(face => !face.ready).map(face => face.spec + ' [' + face.text + ']');
     if (late.length) {
       findings.push('mathematics was painted before ' + late.length + ' of its faces: '
         + late.join(', '));
     }
   }
+  const loading = globalThis.__mathLoadingState;
+  if (!loading || !(loading.mathFontChecks > 0)) {
+    findings.push('no first-visible-frame glyph font checks ran');
+  }
+  for (const failure of loading?.unreadyMath || []) {
+    findings.push('a formula appeared before its required glyph fonts: ' + failure);
+  }
   return { nodes: nodes.length, marked: marked.length, tables,
     bold_advances: boldAdvances, findings };
-}""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE)
+}""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE).replace(
+    "__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT
+)
 
 
 def _run(page: object, findings: list[str], medium: str) -> Report:
@@ -324,7 +335,9 @@ def _run(page: object, findings: list[str], medium: str) -> Report:
 #: Latin ranges and the digits and nothing else, so a run of operators or Greek would
 #: answer with a KaTeX face whichever composite is in force and prove nothing.
 _MARK = """({ scope, mark }) => {
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
   for (const node of document.querySelectorAll(scope)) {
+    if (!activeVariant(node)) continue;
     if (!node.checkVisibility({ visibilityProperty: true })) continue;
     for (const run of node.querySelectorAll('.mord')) {
       if (run.children.length === 0 && /^[0-9A-Za-z.]+$/.test(run.textContent.trim())) {
@@ -334,7 +347,7 @@ _MARK = """({ scope, mark }) => {
     }
   }
   return null;
-}"""
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 
 def _drawn_face(page: object, session: object, *, scope: str) -> tuple[str | None, list[str]]:
@@ -493,7 +506,9 @@ def check(path: Path | str = PAGE, *, width: int = 1280) -> Report:
                     paint = page.evaluate(
                         "() => globalThis.__mathFirstPaint && { "
                         "at: globalThis.__mathFirstPaint.at, "
-                        "faces: globalThis.__mathFirstPaint.faces.length }"
+                        "faces: globalThis.__mathFirstPaint.faces.length, "
+                        "required: globalThis.__mathFirstPaint.required, "
+                        "math_font_checks: globalThis.__mathLoadingState.mathFontChecks }"
                     )
                     report["first_paint"][prose_font] = paint or {}
                     # A reference error can leave a plausible page with the wrong tables.
@@ -539,7 +554,26 @@ def self_test() -> None:
                 "() => { globalThis.kpressMathText = "
                 "{ installTablesFor: () => null, restore: () => undefined }; }"
             )
+            page.evaluate(
+                """() => {
+                  const dormant = document.createElement('span');
+                  dormant.className = 'squares-math-variant';
+                  dormant.dataset.squaresMathContexts = 'custom-sans';
+                  dormant.style.display = 'none';
+                  dormant.innerHTML = '<span class="katex">dormant</span>';
+                  const certificate = document.createElement('div');
+                  certificate.hidden = true;
+                  certificate.innerHTML = '<p class="sans"><span class="katex" '
+                    + 'data-kpress-math-face="sans">hidden certificate</span></p>';
+                  document.body.append(dormant, certificate);
+                }"""
+            )
             unmarked: Report = page.evaluate(PROBE, arguments)
+            if unmarked["nodes"] != 3:
+                raise SystemExit(
+                    "math face self-test lost hidden certificate math "
+                    "or included a dormant variant"
+                )
             if not any("sans words, serif mathematics" in f for f in unmarked["findings"]):
                 raise SystemExit("math face self-test accepted serif math under sans words")
             page.evaluate(
@@ -559,6 +593,30 @@ def self_test() -> None:
             bold: Report = page.evaluate(PROBE, arguments)
             if not any("undeclared normal 650 slot" in f for f in bold["findings"]):
                 raise SystemExit("math face self-test accepted bold math in a sans context")
+            page.evaluate(
+                """() => {
+                  globalThis.__mathFirstPaint = {
+                    faces: [{family: 'KaTeX_Main', status: 'unloaded', weight: '700'}],
+                    required: [{spec: '16px serif', text: 'x', ready: true}]
+                  };
+                  globalThis.__mathLoadingState = {mathFontChecks: 1, unreadyMath: []};
+                }"""
+            )
+            unused: Report = page.evaluate(PROBE, arguments)
+            if any("was painted before" in f for f in unused["findings"]):
+                raise SystemExit("math face self-test rejected an unused unloaded font")
+            page.evaluate("__mathFirstPaint.required[0].ready = false")
+            required: Report = page.evaluate(PROBE, arguments)
+            if not any("was painted before" in f for f in required["findings"]):
+                raise SystemExit("math face self-test accepted an unavailable required font")
+            page.evaluate(
+                "__mathFirstPaint.required[0].ready = true; "
+                "__mathLoadingState.unreadyMath.push('late expression')"
+            )
+            later: Report = page.evaluate(PROBE, arguments)
+            if not any("a formula appeared before" in f for f in later["findings"]):
+                raise SystemExit("math face self-test missed a later formula's font failure")
+            page.evaluate("__mathLoadingState.unreadyMath = []")
             page.evaluate(
                 """() => {
                   document.fonts.add(new FontFace('KPress Math Text Sans', 'local(Arial)',
@@ -626,7 +684,10 @@ def self_test() -> None:
                 raise SystemExit("math face self-test lost print emulation across font samples")
         finally:
             browser.close()
-    print("math face self-test passed: init, face/slot mismatches, print font sampling")
+    print(
+        "math face self-test passed: init, face/slot mismatches, "
+        "first-visible glyph readiness, print font sampling"
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
