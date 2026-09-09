@@ -652,6 +652,29 @@ being optimised into a softened relative of it.
 That is a real technique and it is also a real hazard, so it belongs here as a direction
 with a named difficulty rather than as a plan.
 
+*Where it would live, and why the name matters.* The workbench today has two modes, Pack
+for a single `n` and Sweep for a range.
+The form this takes is a third, **Calibrate**: choose the cases whose records you are
+optimising against, choose which parameters vary and over what ranges, run seeds per
+configuration, and rank by the fraction of runs landing within tolerance of the record
+at a declared budget.
+
+The name was chosen over “backtest” deliberately.
+Backtesting is a finance term where running a strategy against history is routine and
+the overfitting risk is a footnote; here that risk is the main event.
+Calibration is both the accurate description, since the instrument is being set against
+known answers, and this repository’s existing word for it: the campaign’s series is
+`series-000-smoke-and-calibration`, and the atlas pins its calibration-only annotation
+layers to `n = 1..100` precisely so the rest stays an unseen corpus.
+
+The naming does real work.
+A mode called Calibrate that shows a calibration set and a held-out set side by side
+makes the hazard structural rather than a caution in prose: the question “which set did
+that number come from” is forced by the interface.
+A mode called Backtest invites the best number on the screen to be read as the result.
+The headline that mode reports should be the held-out score, and a winner whose held-out
+score collapses is the most useful thing it could show.
+
 *Note on where snapping belongs.* Ending a run on the retained packing is production
 machinery, not evidence: it is how a sweep animation across all 324 records lands each
 frame on what is actually known.
