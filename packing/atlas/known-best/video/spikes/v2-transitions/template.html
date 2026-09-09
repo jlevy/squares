@@ -46,7 +46,11 @@ body.capture { background: var(--paper); }
   box-shadow: 0 8px 40px rgba(23, 32, 42, 0.18);
 }
 body.capture #stage { box-shadow: none; }
-#packing-svg { position: absolute; left: 60px; top: 24px; width: 1000px; height: 1000px; display: block; }
+/* Revision 9: the squares can be picked up, so the surface takes pointer gestures rather than the
+   browser's pan and zoom, and says so with the cursor. */
+#packing-svg { position: absolute; left: 60px; top: 24px; width: 1000px; height: 1000px; display: block; touch-action: none; }
+#packing-svg #squares { cursor: grab; }
+body.dragging #packing-svg #squares { cursor: grabbing; }
 #links line { stroke: var(--paper); stroke-opacity: 0.85; stroke-width: 2; }
 #ghost rect { stroke: var(--muted); }
 #mark rect { stroke: none; }
@@ -60,11 +64,11 @@ body.capture #stage { box-shadow: none; }
 /* Revision 8, feature 4: how close the arrangement on the stage is to the best known, drawn on a
    scale that runs from the proved lower bound to comfortably past the record. The panel's top 200 px
    were empty, and this is what goes in them: the head row at 24, the bar at 66, the two tick numbers
-   below it, the whole thing ending at 166 with the eyebrow at 200. It belongs to the single-step
-   tab; on the sequence tab there is no one n to measure and it is hidden.
+   below it, the whole thing ending at 166 with the eyebrow at 200.
+   Revision 9 folds the two tabs into one view, so the bar is always drawn: the range is the spine and
+   its `to` end is the n the bar measures.
    The two numbers are the ones the panel itself prints, s(n) <= and s(n) >=, read from the record. */
 .gapbar { position: absolute; left: 6px; top: 24px; width: 694px; height: 150px; }
-body.tab-sequence .gapbar { display: none; }
 .gapbar-head {
   position: relative; height: 34px; line-height: 34px; font-family: var(--sans); font-size: 28px;
   font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--quiet); white-space: nowrap;
@@ -147,24 +151,14 @@ body.tab-sequence .gapbar { display: none; }
 .open-item { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
 .open-item svg { width: 32px; height: 32px; display: block; flex: none; }
 .open-none { font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
-/* Three legend lines, 42 px apart, under the open group (which ends at 816). Revision 7 makes all
-   three one line each — the third, which reports what a run that is not snapped to the record or a
-   blind run reached, was two lines and gave up the room to the live gap readout below it, which
-   now carries the numbers it used to spell out. So the stack ends at 950. */
-.legend { position: absolute; left: 6px; top: 826px; font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--muted); letter-spacing: 0.01em; }
-.legend-style { top: 868px; }
-.legend-note { top: 910px; }
-/* Revision 7, feature 3: how far off the best known the picture is, at every frame. Two rows at the
-   stage's smallest size in the same muted grey, 952-1028, and a thin trace of the gap over the
-   course of the move at the right of the first row. The progress bar begins at 1034. */
-.gap-read { position: absolute; left: 6px; top: 952px; width: 694px; height: 76px; }
-/* max-content so the row's box is its ink: the trace sits at the right of the first row and the
-   check that the two never meet has to measure the text, not the column. */
+/* Revision 9: the three legend lines that sat here (the scarlet convention, the active style, what a
+   free or blind run was doing) are gone. The stage carries facts about the packing and nothing that
+   explains itself; what they said is written down in NOTES.md instead. The live readout moves up
+   into the room they leave, 826 to 978, with the progress bar still beginning at 1034.
+   Revision 7, feature 3: how far off the best known the picture is, at every frame. */
+.gap-read { position: absolute; left: 6px; top: 826px; width: 694px; height: 152px; }
+/* max-content so the row's box is its ink, which is what the fit checks have to measure. */
 .gap-line { width: max-content; font-family: var(--sans); font-size: 28px; font-weight: 450; line-height: 38px; color: var(--muted); letter-spacing: 0.01em; white-space: nowrap; }
-.gap-spark { position: absolute; right: 0; top: 5px; width: 120px; height: 26px; display: block; }
-.gap-spark .base { stroke: var(--quiet-rule); stroke-width: 1; }
-.gap-spark .trace { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
-.gap-spark .head { fill: var(--ink); }
 /* The progress bar: a pure function of the clock, along the bottom of the stage. Revision 7 gives
    the track a scale instead of two end labels — a numeral every 25 with a major tick, a minor tick
    every 5 — and brings the riding n down into the numeral row, where it is the only bold, inked
@@ -187,34 +181,16 @@ body.tab-sequence .gapbar { display: none; }
 body.capture #kind-tag { display: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Revision 8: the workbench's tab bar, at the top of the page above the stage. It is chrome, so it
-   goes away with the controls in capture preview and a still is the stage and nothing else. The
-   two tabs change which controls are shown; the stage, the panel and the progress bar are shared. */
-#tabbar {
-  flex: none; width: 100%; box-sizing: border-box; padding: 8px 16px 0;
-  background: var(--chrome); border-bottom: 1px solid var(--rule);
-  display: flex; align-items: flex-end; gap: 6px;
-}
-body.capture #tabbar { display: none; }
-#tabbar .tab {
-  font: inherit; font-size: 15px; font-weight: 600; color: var(--muted); letter-spacing: 0.01em;
-  background: transparent; border: 1px solid transparent; border-bottom: 0;
-  border-radius: 6px 6px 0 0; padding: 8px 20px 7px; margin-bottom: -1px; cursor: pointer;
-}
-#tabbar .tab:hover { color: var(--ink); background: #eef0f2; }
-#tabbar .tab[aria-selected="true"] {
-  color: var(--ink); background: var(--paper); border-color: var(--rule); border-bottom-color: var(--paper);
-  box-shadow: inset 0 3px 0 0 var(--ink);
-}
-#tabbar .tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
-#tabbar .tab-hint { margin-left: auto; color: var(--muted); font-size: 12.5px; padding-bottom: 9px; }
+/* Revision 9: one view, no tabs. Stepping one n and running a range are the same operation over a
+   different span, so the range is the single spine: `from` and `to` are values of n stepped into,
+   and setting them equal is the old Single step tab. */
 #controls {
   flex: none; width: 100%; box-sizing: border-box; padding: 10px 16px 12px;
   background: var(--chrome); border-top: 1px solid var(--rule);
   display: flex; flex-direction: column; gap: 8px;
 }
 body.capture #controls { display: none; }
-#panel-single, #panel-sequence { display: flex; flex-direction: column; gap: 8px; }
+#panel { display: flex; flex-direction: column; gap: 8px; }
 [hidden] { display: none !important; }
 .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .row label { display: inline-flex; align-items: center; gap: 5px; color: var(--label); white-space: nowrap; }
@@ -225,8 +201,26 @@ button, select, input[type=number] {
 button:hover { background: #f3f5f7; }
 button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); min-width: 84px; }
 button.primary:hover { background: #2b3947; }
+/* Revision 9: the transport is the tape convention — a right-pointing triangle to play, two bars to
+   pause — drawn as inline SVG on one button that toggles. The glyphs are `fill: currentColor`, so
+   they take the button's ink in both states, and the accessible name is set from the script beside
+   the class that swaps them. Previous and next are `-` and `+`: they were solid triangles, which on
+   a transport row read as play. */
+button.transport {
+  min-width: 44px; padding: 5px 14px; display: inline-flex; align-items: center; justify-content: center;
+}
+button.transport svg { width: 18px; height: 18px; display: block; fill: currentColor; }
+button.transport .glyph-pause { display: none; }
+button.transport.is-playing .glyph-play { display: none; }
+button.transport.is-playing .glyph-pause { display: inline; }
+button.step-nudge { min-width: 36px; font-weight: 700; font-size: 15px; line-height: 1.1; text-align: center; }
 input[type=number] { width: 64px; padding: 4px 6px; }
 #scrub { flex: 1; min-width: 240px; accent-color: var(--ink); }
+/* Revision 9: how fast the virtual clock runs during playback, 0.05x to 2x on a logarithmic slider
+   so the slow end has as much travel as the fast one. It scales playback only — `seek(t)` is still a
+   pure function of its argument, so every instant renders identically and captures are untouched. */
+#speed { width: 130px; accent-color: var(--ink); }
+#speed-info { font-variant-numeric: tabular-nums; color: var(--label); min-width: 52px; }
 #clock { font-family: var(--mono); font-size: 13px; color: var(--label); min-width: 120px; text-align: right; }
 #pair-select { max-width: 480px; }
 .hint { color: var(--muted); font-size: 12.5px; }
@@ -235,27 +229,22 @@ input[type=number] { width: 64px; padding: 4px 6px; }
 .seg button + button { border-left: 1px solid #b9c0c8; }
 .seg button.on { background: var(--ink); color: var(--paper); }
 #pair-info { color: var(--label); font-size: 13px; }
-/* Revision 8, the single-step tab: the chooser for n, and the sparse cases worth looking at as a
-   row of chips. The step label names both ends, so which direction the tab shows is never in doubt. */
+/* The chooser for n, and the sparse cases worth looking at as a row of chips. A chip sets both ends
+   of the range to the same value, which is one step. */
 .chips { display: inline-flex; gap: 4px; flex-wrap: wrap; }
 .chips button { padding: 3px 9px; font-size: 13px; min-width: 38px; text-align: center; }
 .chips button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-#step-n { width: 78px; font-weight: 600; }
 .step-label { font-weight: 600; color: var(--ink); white-space: nowrap; }
 #step-note { font-style: italic; }
-/* The sequence tab: the range, its length in wall-clock seconds, and where the run stands in it. */
+/* The range: two boxes of n, its length in wall-clock seconds, and where a run stands in it. */
 #range-from, #range-to { width: 72px; font-weight: 600; }
+.range-sep { color: var(--label); }
 .range-figure { color: var(--label); white-space: nowrap; }
 .range-figure strong { color: var(--ink); font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body>
 <div id="viewport">
-  <div id="tabbar" role="tablist" aria-label="Workbench">
-    <button type="button" class="tab" id="tab-single" role="tab" aria-selected="true" aria-controls="panel-single">Single step</button>
-    <button type="button" class="tab" id="tab-sequence" role="tab" aria-selected="false" aria-controls="panel-sequence" tabindex="-1">Sequence</button>
-    <span class="tab-hint">t switches tabs; the look and timing settings below the tabs are shared by both</span>
-  </div>
   <div id="stage-wrap">
     <div id="stage" aria-label="Animated transition between consecutive best known packings">
       <svg id="packing-svg" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true">
@@ -294,17 +283,11 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         <div class="nline" aria-hidden="true"><span class="n-var">n</span><span class="n-eq">=</span></div>
         <div class="facts-layer" id="facts-a"></div>
         <div class="facts-layer" id="facts-b"></div>
-        <div class="legend">the arriving square is scarlet and settles to its colour</div>
-        <div class="legend legend-style" id="legend-style"></div>
-        <div class="legend legend-note" id="legend-note"></div>
         <div class="gap-read" id="gap-read">
           <div class="gap-line" id="gap-a"></div>
           <div class="gap-line" id="gap-b"></div>
-          <svg class="gap-spark" id="gap-spark" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true">
-            <line class="base" x1="0.5" y1="25.5" x2="119.5" y2="25.5" />
-            <polyline class="trace" id="gap-trace" points="" />
-            <circle class="head" id="gap-head" r="2.5" cx="1" cy="25" />
-          </svg>
+          <div class="gap-line" id="gap-c"></div>
+          <div class="gap-line" id="gap-d"></div>
         </div>
       </div>
       <div id="progress" aria-hidden="true">
@@ -317,41 +300,47 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     </div>
   </div>
   <div id="controls">
-    <div id="panel-single" role="tabpanel" aria-labelledby="tab-single">
+    <div id="panel">
       <div class="row">
-        <label for="step-n"><strong>n</strong></label>
-        <button id="prev" title="The step before (left arrow)">&#9664;</button>
-        <input type="number" id="step-n" step="1" aria-label="the value of n to step into">
-        <button id="next" title="The step after (right arrow)">&#9654;</button>
+        <label for="range-from"><strong>n</strong></label>
+        <button id="prev" class="step-nudge" title="The step before (left arrow)" aria-label="the step before">&minus;</button>
+        <input type="number" id="range-from" step="1" aria-label="the first value of n to step into">
+        <span class="range-sep">to</span>
+        <input type="number" id="range-to" step="1" aria-label="the last value of n to step into">
+        <button id="next" class="step-nudge" title="The step after (right arrow)" aria-label="the step after">+</button>
+        <button id="range-all" title="Widen the range to every step this page carries">whole corpus</button>
         <span class="step-label" id="step-label"></span>
-        <span class="hint">worth a look</span>
         <span class="chips" id="step-chips"></span>
       </div>
       <div class="row">
-        <button id="play" class="primary" title="Play or pause this step (space)">Play</button>
-        <input id="scrub" type="range" min="0" max="10000" step="1" value="0" aria-label="Scrub this step">
+        <button id="play" class="primary transport" title="Play or pause (space)" aria-label="Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path class="glyph-play" d="M7.5 4.5 L19.5 12 L7.5 19.5 Z" />
+            <g class="glyph-pause"><rect x="6.6" y="4.5" width="4.2" height="15" rx="1.1" /><rect x="13.2" y="4.5" width="4.2" height="15" rx="1.1" /></g>
+          </svg>
+        </button>
+        <input id="scrub" type="range" min="0" max="10000" step="1" value="0" aria-label="Scrub the current step">
         <span id="clock">0.000 / 0.000 s</span>
-        <label><input type="checkbox" id="advance-toggle" checked> run on into the next step</label>
-        <select id="pair-select" aria-label="Transition pair"></select>
+        <label title="How fast the clock runs while playing: 0.05x to watch a settle closely, 2x to skim">speed
+          <input type="range" id="speed" min="0" max="1000" step="1" aria-label="playback speed">
+          <span class="hint" id="speed-info"></span>
+        </label>
+        <span class="range-figure" id="range-duration"></span>
+        <span class="range-figure" id="range-position"></span>
+        <button id="refresh-gap" title="Redraw the gap bar against what is on the stage now">update gap bar</button>
+      </div>
+      <div class="row">
+        <label>start
+          <span class="seg" id="initial-seg">
+            <button data-initial="previous" title="The retained packing of n-1 with the new square added">previous packing</button>
+            <button data-initial="random" title="n squares at seeded pseudo-random centres and angles in a box larger than the record">random</button>
+            <button data-initial="grid" title="n squares axis-aligned in rows from the bottom-left, in the grid's own box">ordered fill</button>
+          </span>
+        </label>
+        <button id="optimize" class="primary" title="Run the current settings from the chosen start until pause">Optimize</button>
       </div>
       <div class="row">
         <span class="hint" id="step-note"></span>
-      </div>
-    </div>
-    <div id="panel-sequence" role="tabpanel" aria-labelledby="tab-sequence" hidden>
-      <div class="row">
-        <button id="play-range" class="primary" title="Run the whole range end to end">Play the range</button>
-        <button id="stop-all" title="Stop the continuous run">Stop</button>
-        <label>from <input type="number" id="range-from" step="1"></label>
-        <label>to <input type="number" id="range-to" step="1"></label>
-        <span class="range-figure" id="range-duration"></span>
-        <span class="range-figure" id="range-position"></span>
-      </div>
-      <div class="row">
-        <button id="play-all" title="Play on from where the run stands to the end of the range (a)">Play on from here</button>
-        <label>jump to n <input type="number" id="goto-n" step="1"></label>
-        <label><input type="checkbox" id="fullbeat-toggle"> full beat for static appends</label>
-        <span class="hint" id="continuous-info"></span>
       </div>
     </div>
     <div class="row">
@@ -378,7 +367,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         </span>
       </label>
       <label><input type="checkbox" id="desat-toggle" checked> desaturate while moving</label>
-      <label><input type="checkbox" id="snap-toggle" checked> snap to best known</label>
       <label><input type="checkbox" id="blind-toggle"> blind, no target</label>
       <label>inflate <input type="number" id="blind-inflate" min="1" max="2" step="0.01"></label>
       <label title="How hard and how long the two physical styles shake: 0 none, 3 the default, 10 the loudest and longest">annealing
@@ -389,11 +377,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       <label>dwell <input type="number" id="t-dwell" min="0" max="10" step="0.1"> s</label>
       <label>move <input type="number" id="t-move" min="0.1" max="10" step="0.1"> s</label>
       <label>settle <input type="number" id="t-settle" min="0" max="5" step="0.1"> s</label>
+      <label><input type="checkbox" id="fullbeat-toggle"> full beat for static appends</label>
       <label><input type="checkbox" id="capture-toggle"> capture preview</label>
-    </div>
-    <div class="row">
-      <span id="pair-info"></span>
-      <span class="hint">Keys: t tab, space play/pause, left/right pair, home start, p style, k colour rule, m motion, d desaturate, s snap, b blind, a play all, l correspondence, c capture preview. API: window.atlasTransitions.</span>
+      <span class="hint" id="continuous-info"></span>
     </div>
   </div>
 </div>
@@ -442,16 +428,21 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     decayPower: (L) => (L <= 3 ? 1.5 : 1.5 - (L - 3) * (1.15 / 7)),
     span: (L) => (L <= 3 ? 1 : 1 + (L - 3) * 0.1),
   };
+  // Revision 9: the playback speed. The ends are the owner's — slow enough to watch a settle
+  // (0.05x, twenty seconds of wall clock for a one-second move) and fast enough to skim (2x). The
+  // slider is logarithmic between them, so half way is the geometric mean rather than 1.02x, and
+  // 1x is a value the slider can actually land on because the readout rounds to two places.
+  const SPEED = { min: 0.05, max: 2, steps: 1000 };
+  const speedToSlider = (m) => Math.round((Math.log(m / SPEED.min) / Math.log(SPEED.max / SPEED.min)) * SPEED.steps);
+  const sliderToSpeed = (v) => SPEED.min * Math.pow(SPEED.max / SPEED.min, v / SPEED.steps);
   const DEG = Math.PI / 180;
   // Scarlet is defined once, in the stylesheet, and read back here for the fill tint.
   const SCARLET = getComputedStyle(document.documentElement).getPropertyValue('--new').trim();
 
   const state = {
-    // Revision 8: which of the workbench's two tabs is showing. The tab decides which controls are
-    // on screen and what playback is scoped to; everything about how the animation looks and
-    // behaves is global and survives a switch, because the owner tunes in one tab and runs in the
-    // other. The stage, the facts panel and the progress bar are shared furniture.
-    tab: 'single',
+    // Revision 9: one view. Revision 8's two tabs were the same operation over a different span, so
+    // the range below is the single spine and `tab` is gone from the page. The API keeps `setTab`
+    // and `tab` as no-ops for anything that still calls them.
     pair: 0,
     t: 0,
     playing: false,
@@ -469,9 +460,16 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // Continuous play across the whole sequence: on, whether static appends take the full beat, and
     // whether the next pair is simulated during this one's dwell.
     continuous: { on: false, fullBeat: false, prefetch: true },
-    // Revision 8: the sequence tab's range, as values of n rather than pair indices — from 1 to 100
-    // is the 99 steps that arrive at 2..100. Clamped to what the page carries by `setRange`.
-    range: { from: 1, to: 100 },
+    // Revision 9: the range, stated as the values of n stepped *into*, which is the unit the chooser
+    // and the chips have always used. 17 to 17 is the one step 16 -> 17 (the page's default), 2 to
+    // 324 is the whole corpus. Clamped to what the page carries by `setRange`.
+    range: { from: 17, to: 17 },
+    // Revision 9: the playback rate. It multiplies the wall-clock delta the animation clock is
+    // advanced by and the simulated time an open-ended run covers per frame, and nothing else.
+    speed: 1,
+    // Revision 9: what an open-ended Optimize run starts from, and whether one is on the stage.
+    initial: 'previous',
+    optimizing: false,
     liveN: null,
   };
 
@@ -838,8 +836,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // are measured against. Filled by whichever scene ran, so the readout is what is on the stage
   // rather than a second opinion about it.
   let poseX = null, poseY = null, poseA = null;
+  let sceneSide = 0;   // the container side the last frame drew, which is where a drag picks the run up
   let tgtX = null, tgtY = null, tgtA = null;
-  let sceneU = 0;   // how far into the move the drawn frame is, for the trace's head
   let currentTrajectory = null;   // the trajectory the physical scene last drew from, or null
 
   function buildPair() {
@@ -891,7 +889,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     tgtX = new Float64Array(p.n + 1); tgtY = new Float64Array(p.n + 1); tgtA = new Float64Array(p.n + 1);
     for (let i = 0; i < p.n; i++) { tgtX[i] = motion[i].b[0]; tgtY[i] = motion[i].b[1]; tgtA[i] = motion[i].b[2]; }
     tgtX[p.n] = newPose[0]; tgtY[p.n] = newPose[1]; tgtA[p.n] = newPose[2];
-    traceKey = '';
     if (B.ident[p.new] !== p.n + 1) throw new Error('the new square of ' + p.n + ' -> ' + (p.n + 1) + ' is not identity ' + (p.n + 1));
     newNode = nodeFor(p.n + 1);
     newRect = newNode.firstElementChild;
@@ -983,35 +980,34 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const off = smoothstep(ramp(t, sc.moveEnd, sc.end));
     return on * (1 - off);
   }
-  // Revision 8: which pairs playback is allowed to run over. On the sequence tab that is the range
-  // the owner picked; on the single-step tab it is the whole page, which is what it always was.
-  // The ends are the values of n this page can actually arrive at.
-  const RANGE_MIN = PAIRS[0].n;
+  // Revision 9: which steps playback is allowed to run over — always the range, there being one view.
+  // The ends are values of n stepped into, so RANGE_MIN is the first n the page can arrive at.
+  const RANGE_MIN = PAIRS[0].n + 1;
   const RANGE_MAX = PAIRS[PAIRS.length - 1].n + 1;
   function rangeBounds() {
     let first = -1, last = -1;
     for (let i = 0; i < PAIRS.length; i++) {
-      if (PAIRS[i].n >= state.range.from && PAIRS[i].n <= state.range.to - 1) {
+      const into = PAIRS[i].n + 1;
+      if (into >= state.range.from && into <= state.range.to) {
         if (first < 0) first = i;
         last = i;
       }
     }
-    // A range can miss every step a sparse page carries (`index.html` has nothing between 10 and 17,
-    // so 11 to 12 selects nothing). The scope is then the one nearest step, not the whole page: a
+    // A range can miss every step a sparse page carries (`index.html` has nothing between 11 and 17,
+    // so 13 to 14 selects nothing). The scope is then the one nearest step, not the whole page: a
     // run over an empty range should be short, never the entire sequence.
     if (first < 0) { first = pairForStepN(state.range.to); last = first; }
     return { first, last };
   }
   function scopeBounds() {
-    if (state.tab !== 'sequence') return { first: 0, last: PAIRS.length - 1 };
     return rangeBounds();
   }
-  // The span the progress bar's scale covers: the range on the sequence tab, the whole atlas
-  // otherwise. `progress` is measured against the same span, so the fill, the cursor and the riding
-  // n all read against the numerals actually drawn.
+  // The span the progress bar's scale covers: the range, read as the n it steps *from* through the n
+  // it steps into, so the whole corpus is the shipped 1..324 scale and a single step is its own two
+  // numerals. `progress` is measured against the same span, so the fill, the cursor and the riding n
+  // all read against the numerals actually drawn.
   function scaleSpanWanted() {
-    if (state.tab !== 'sequence') return { lo: 1, hi: N_MAX };
-    return { lo: state.range.from, hi: state.range.to };
+    return { lo: state.range.from - 1, hi: state.range.to };
   }
   function syncScale() {
     const want = scaleSpanWanted();
@@ -1023,7 +1019,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // last: a pure function of the pair and the clock.
   function progress() {
     const d = duration();
-    const within = d > 0 ? clamp01(state.t / d) : 0;
+    // An open-ended run has no position inside the step: it is the step's own n, done arriving.
+    const within = state.optimizing ? 1 : (d > 0 ? clamp01(state.t / d) : 0);
     return clamp01((PAIRS[state.pair].n + within - scaleLo) / (scaleHi - scaleLo));
   }
 
@@ -1504,24 +1501,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     return lerp(tr.sides[s0], tr.sides[s0 + 1], f - s0);
   }
 
-  // The third legend line, in the muted grey of the other two: what a run that is not snapped to
-  // the record reached, once its trajectory exists, and what it is about to do before that.
-  // Revision 7 keeps every one of these to a single row — the live gap readout below now spells the
-  // numbers out frame by frame, so the note only has to name what the run is doing.
-  const legendNote = document.getElementById('legend-note');
-  function missNote(tr) {
-    if (tr.mode === 'snap') return '';
-    const m = tr.miss;
-    if (tr.mode === 'blind') {
-      return 'blind run, no target: reached ' + fmt(m.side, 2) + ', the record ' + fmt(m.record, 2);
-    }
-    return 'no snap: the physics ended ' + fmt(m.centre, 3) + ' from the record at most';
-  }
-  function pendingNote(mode) {
-    if (mode === 'snap') return '';
-    if (mode === 'blind') return 'blind run: the box opens and the walls close in';
-    return 'no snap: the physics runs on its own';
-  }
+  // Revision 9: the three legend lines are gone from the stage. What a free or blind run reached is
+  // still on the API — `physics(index, style, mode).miss` — and the live readout below carries the
+  // same numbers frame by frame, so nothing had to be measured differently to drop the prose.
 
   // ---------------------------------------------------------------- the live gap (revision 7, feature 3)
   // How far off the best known the picture on the stage is, this frame: the largest distance a
@@ -1533,11 +1515,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // labelling, so the centre and angle errors are meaningless and only the box is reported.
   const gapA = document.getElementById('gap-a');
   const gapB = document.getElementById('gap-b');
-  const gapSpark = document.getElementById('gap-spark');
-  const gapTrace = document.getElementById('gap-trace');
-  const gapHead = document.getElementById('gap-head');
-  const SPARK_W = 120, SPARK_H = 26, SPARK_SAMPLES = 64;
-  let traceKey = '', traceVals = null, traceMax = 0, traceMs = 0;
+  const gapC = document.getElementById('gap-c');
+  const gapD = document.getElementById('gap-d');
   const gapOut = { centre: 0, angle: 0, side: 0 };
   function gapOf(px, py, pa) {
     let centre = 0, angle = 0, x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
@@ -1560,60 +1539,21 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     gapOut.side = Math.max(x1 - x0, y1 - y0);
     return gapOut;
   }
-  // The trace: the same gap sampled over the whole move, so the shape says whether it descends
-  // smoothly or bounces. It is a pure function of the pair, the style, the mode, the annealing level
-  // and the motion mode, so it is built once per combination and only the head moves per frame.
-  // A physical style's trace waits for its trajectory rather than forcing one during the dwell.
-  function ensureTrace(p, A, B, mode, tr) {
-    const physical = isPhysical(state.style);
-    if (physical && tr === null) { if (traceKey !== '') { traceKey = ''; gapSpark.style.visibility = 'hidden'; } return; }
-    const key = state.pair + '/' + state.style + '/' + mode + '/' + state.anneal + '/'
-      + (physical ? (mode === 'blind' ? BLIND.inflate : '') : state.phase);
-    if (key === traceKey) return;
-    traceKey = key;
-    const t0 = performance.now();
-    const N = p.n + 1;
-    const px = new Float64Array(N), py = new Float64Array(N), pa = new Float64Array(N);
-    const vals = new Float64Array(SPARK_SAMPLES + 1);
-    let top = 0;
-    for (let s = 0; s <= SPARK_SAMPLES; s++) {
-      const u = s / SPARK_SAMPLES;
-      if (physical) {
-        for (let i = 0; i < N; i++) {
-          const pose = samplePose(tr, u, i);
-          px[i] = pose[0]; py[i] = pose[1]; pa[i] = pose[2];
-        }
-      } else {
-        const pr = phaseProgress(u);
-        for (let i = 0; i < p.n; i++) {
-          const pose = tweenPose(motion[i], pr);
-          px[i] = pose[0]; py[i] = pose[1]; pa[i] = pose[2];
-        }
-        px[p.n] = newPose[0]; py[p.n] = newPose[1]; pa[p.n] = newPose[2];
-      }
-      const g = gapOf(px, py, pa);
-      const v = mode === 'blind' ? Math.max(0, (g.side / B.side - 1) * 100) : g.centre;
-      vals[s] = v;
-      if (v > top) top = v;
-    }
-    traceVals = vals;
-    traceMax = top;
-    const pts = [];
-    for (let s = 0; s <= SPARK_SAMPLES; s++) {
-      pts.push(fmt(1 + (s / SPARK_SAMPLES) * (SPARK_W - 2), 2) + ',' + fmt(traceY(vals[s]), 2));
-    }
-    gapTrace.setAttribute('points', pts.join(' '));
-    gapSpark.style.visibility = '';
-    traceMs = performance.now() - t0;
-  }
-  const traceY = (v) => SPARK_H - 2 - (traceMax > 0 ? v / traceMax : 0) * (SPARK_H - 5);
 
   // ---------------------------------------------------------------- the gap bar (revision 8, feature 4)
-  // One horizontal bar for the n the single-step tab is stepping into: the proved lower bound at the
-  // left, the best known as a labelled tick, the span between them shaded because that is the
-  // territory nobody has closed, and a hand riding the side the arrangement on the stage would
-  // actually need. Both numbers are the ones the panel prints two lines further down, `s(n) <= ...`
-  // and `s(n) >= ...`, read straight off the record rather than re-derived.
+  // One horizontal bar for the n the range steps into: the proved lower bound at the left, the best
+  // known as a labelled tick, the span between them shaded because that is the territory nobody has
+  // closed, and a hand on the side the arrangement on the stage would actually need. Both numbers
+  // are the ones the panel prints two lines further down, `s(n) <= ...` and `s(n) >= ...`, read
+  // straight off the record rather than re-derived.
+  // Revision 9: the hand is not redrawn every frame. The motion is already visible in the packing,
+  // so a second animated readout of it is noise. The bar redraws when the picture is not moving —
+  // through the dwell and from the moment the settle ends — at a step boundary, whenever a setting
+  // that changes the answer is touched, and on demand (`refreshGap()` and the button beside it).
+  // The two text rows below the bar stay live: they are numbers, not a moving indicator, and a drag
+  // has to show its effect on the required side at once.
+  let gapBarDirty = true;
+  function markGapBar() { gapBarDirty = true; }
   const GAPBAR = {
     width: 680,
     // The scale's headroom past the record: two and a half times the open gap, but never less than
@@ -1691,24 +1631,565 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     gapbarOut.lo = info.lo; gapbarOut.hi = info.hi;
     gapbarOut.side = g.side; gapbarOut.x = x / GAPBAR.width; gapbarOut.excess = excess; gapbarOut.met = met;
   }
-  function updateGap(p, A, B, mode, tr) {
+  // `still` is true where the picture is not in motion: through the dwell, and from the instant the
+  // settle ends. Those are the frames the bar is allowed to move on, along with the ones something
+  // has marked dirty (a step boundary, a setting, a pause, a seek, a drop, or `refreshGap()`).
+  function updateGap(p, A, B, mode, still) {
     const g = gapOf(poseX, poseY, poseA);
-    updateGapBar(p, B, g, mode);
+    if (gapBarDirty || still) { updateGapBar(p, B, g, mode); gapBarDirty = false; }
     const excess = (g.side / B.side - 1) * 100;
     gapA.textContent = mode === 'blind'
       ? 'no centre or angle gap: nothing corresponds'
       : 'gap to the record: centres ' + fmt(g.centre, 3) + ', angles ' + fmt(g.angle, 1) + '°';
     gapB.textContent = 'side ' + fmt(g.side, 3) + ' against the record ' + fmt(B.side, 3)
       + ', ' + (excess >= 0 ? '+' : '') + fmt(excess, 1) + ' per cent';
-    ensureTrace(p, A, B, mode, tr);
-    if (traceVals !== null && traceKey !== '') {
-      const u = clamp01(sceneU);
-      const f = u * SPARK_SAMPLES;
-      const s0 = Math.min(SPARK_SAMPLES - 1, Math.floor(f));
-      const v = lerp(traceVals[s0], traceVals[s0 + 1], f - s0);
-      gapHead.setAttribute('cx', fmt(1 + u * (SPARK_W - 2), 2));
-      gapHead.setAttribute('cy', fmt(traceY(v), 2));
+    // The third row belongs to an open-ended run: how long it has been going, how far it has got,
+    // and whether a hand touched it. Empty the rest of the time.
+    if (state.optimizing && opt !== null) {
+      gapC.textContent = 'optimize \u00b7 ' + initialShort[opt.kind] + ' \u00b7 ' + fmt(opt.time, 1)
+        + ' s \u00b7 ' + opt.steps + ' steps' + (opt.edited ? ' \u00b7 hand-edited' : '');
+      gapD.textContent = opt.best === Infinity
+        ? (isFinite(opt.pen)
+            ? 'no clean moment yet; deepest overlap ' + fmt(opt.pen, 3)
+            : 'not stepped yet; the record ' + fmt(opt.record, 3))
+        : 'smallest box ' + fmt(opt.best, 3) + ' at overlap ' + fmt(opt.bestPen, 3)
+          + ', the record ' + fmt(opt.record, 3);
+    } else {
+      gapC.textContent = '';
+      gapD.textContent = '';
     }
+  }
+
+  // ---------------------------------------------------------------- initial conditions and Optimize (revision 9)
+  // The cached simulator above answers one question: what does the step from n - 1 to n look like?
+  // Optimize answers a different one: from some arrangement of n squares, how small a box can this
+  // physics get them into, given as long as you like? That is an open-ended run, so it cannot be a
+  // precomputed span: state advances, in chunks sized to hold the frame budget, until pause.
+  //
+  // It is a separate stepper rather than a generalisation of `simulate`. `simulate` is a closed
+  // precompute whose output is cached, keyed and byte-compared by four checkers; opening it up to
+  // continuation would put every one of those measurements at risk for no gain here. The physics is
+  // the same physics — the same constants, the same separating-axis push-apart, the same walls, the
+  // same seeded jiggle — with one difference in the clock: the optimizer's time unit is one second
+  // of simulated time, where `simulate`'s is one move, so `PHYS`'s per-move constants read directly
+  // as per-second ones.
+  //
+  // Bodies are one per square, always. A block is a fact about one step's correspondence, not about
+  // an arrangement being shaken open-endedly, and the random and grid starts have none at all. What
+  // the style select does reach is the shake: style C's jiggle is twice style B's, as it is in the
+  // step animation.
+  const INITIALS = ['previous', 'random', 'grid'];
+  const OPT = {
+    stepsPerSecond: 120,   // the simulated rate, the same dt the cached simulator integrates at
+    budgetMs: 9,           // the wall clock one frame's chunk of steps may take
+    maxChunk: 400,
+    minChunk: 1,
+    // The walls close while the packing is not jamming and ease back out when it is, which is the
+    // inflate-and-contract cycle revision 7's annealing survey said the side actually responds to.
+    squeezeRate: 0.03,     // fraction of the side taken per simulated second while nothing overlaps
+    relaxRate: 0.03,       // and given back while something overlaps by more than jamTol
+    // The squeeze runs only while the arrangement is essentially clean and gives room back once it
+    // is properly jammed, so the equilibrium the cycle settles at is an overlap of a few
+    // thousandths rather than of the tolerance itself. Revision 6's blind run gated on 0.08 and its
+    // packings sat at 0.08 for that reason: a squeeze allowed up to a tolerance will use all of it.
+    squeezeTol: 0.004,
+    jamTol: 0.06,
+    minSide: 0.5,
+    // The shake anneals down to a floor rather than to nothing: the run never ends, so it must not
+    // go dead either.
+    tau: 2.0, floor: 0.15,
+    randomInflate: 1.25,   // the random start's box, comfortably larger than the record
+    // The deepest overlap an arrangement may have and still be worth recording as the smallest box
+    // the run reached. The shake never dies — it anneals to a floor — so with soft contacts the
+    // squares keep nudging into each other by a thousandth or two for as long as the run goes, and
+    // there is no instant at which the overlap is exactly nothing. Which is why the readout prints
+    // the overlap *beside* the box rather than calling the box a packing: a box below the record
+    // with an overlap in it is not a record, and the two numbers together say so.
+    feasible: 0.008,
+  };
+  // Two names each: the button's, which has room to say what the start is, and the stage's, which
+  // has one 28 px row of the panel and has to leave space for the clock, the step count and the
+  // hand-edited mark on the same line.
+  const initialLabel = { previous: 'previous packing', random: 'random', grid: 'ordered fill' };
+  const initialShort = { previous: 'previous', random: 'random', grid: 'grid' };
+  // The page's own generator, seeded so a start is reproducible from n and the kind alone.
+  function seededRandom(seedN) {
+    let seed = (Math.imul(seedN, 2654435761) + 0x9e3779b9) >>> 0;
+    return () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
+  }
+
+  // The arrangement of N = n + 1 squares an open-ended run starts from, in the renderer's own square
+  // order (square i of n, then the arriving square last), and the box it starts in.
+  //   previous  the retained packing of n with the new square added, which is what the page has
+  //             always shown; with the target springs on, in the record's own box.
+  //   random    N squares at seeded pseudo-random centres and angles in a box a quarter larger than
+  //             the record. Starting overlaps are expected and are what the run has to clear.
+  //   grid      N squares axis-aligned in rows from the bottom-left, the trivial grid, in the grid's
+  //             own box of side ceil(sqrt(N)).
+  function initialArrangement(kind, p, A, B, springs) {
+    const N = p.n + 1;
+    const X = new Float64Array(N), Y = new Float64Array(N), TH = new Float64Array(N);
+    let side;
+    if (kind === 'grid') {
+      const cols = Math.ceil(Math.sqrt(N));
+      side = Math.max(cols, Math.ceil(N / cols));
+      for (let i = 0; i < N; i++) {
+        X[i] = (i % cols) + 0.5;
+        Y[i] = Math.floor(i / cols) + 0.5;
+        TH[i] = 0;
+      }
+    } else if (kind === 'random') {
+      side = B.side * OPT.randomInflate;
+      const rnd = seededRandom(N);
+      // Inset by half a diagonal so a square at any angle starts inside the walls.
+      const lo = 0.70711, hi = Math.max(lo, side - 0.70711);
+      for (let i = 0; i < N; i++) {
+        X[i] = lerp(lo, hi, rnd());
+        Y[i] = lerp(lo, hi, rnd());
+        TH[i] = rnd() * 90 * DEG;
+      }
+    } else if (springs) {
+      side = B.side;
+      for (let i = 0; i < p.n; i++) { X[i] = A.squares[i][0]; Y[i] = A.squares[i][1]; TH[i] = A.squares[i][2] * DEG; }
+      const nb = B.squares[p.new];
+      X[p.n] = nb[0]; Y[p.n] = nb[1]; TH[p.n] = nb[2] * DEG;
+    } else {
+      // The blind start of revision 6, feature 3: the packing of n centred in an inflated box, the
+      // new square dropped upright wherever the coarse grid finds most room.
+      side = B.side * BLIND.inflate;
+      const shift = (side - A.side) / 2;
+      for (let i = 0; i < p.n; i++) { X[i] = A.squares[i][0] + shift; Y[i] = A.squares[i][1] + shift; TH[i] = A.squares[i][2] * DEG; }
+      const spot = emptiestSpot(X, Y, p.n, side);
+      X[p.n] = spot[0]; Y[p.n] = spot[1]; TH[p.n] = 0;
+    }
+    return { X, Y, TH, side };
+  }
+
+  let opt = null;   // the live run, or null
+
+  // Target springs only where there is a target: the previous packing with the blind box off. A
+  // random or grid start has no correspondence to the record's labelling, and a blind run is defined
+  // by not having one, so both of those are pure compaction — contacts, walls and the shake.
+  function optSprings(kind) { return kind === 'previous' && !state.blind; }
+
+  function newOptimizer(kind, startOverride) {
+    const p = PAIRS[state.pair];
+    const A = FRAMES[String(p.n)];
+    const B = FRAMES[String(p.n + 1)];
+    const N = p.n + 1;
+    const springs = optSprings(kind);
+    const start = startOverride || initialArrangement(kind, p, A, B, springs);
+    const o = {
+      kind, springs, n: N, pair: state.pair, record: B.side,
+      X: start.X, Y: start.Y, TH: start.TH,
+      VX: new Float64Array(N), VY: new Float64Array(N), W: new Float64Array(N),
+      COS: new Float64Array(N), SIN: new Float64Array(N),
+      FX: new Float64Array(N), FY: new Float64Array(N), TQ: new Float64Array(N),
+      TX: new Float64Array(N), TY: new Float64Array(N), TT: new Float64Array(N),
+      FQX: new Float64Array(N), FQY: new Float64Array(N), FQT: new Float64Array(N),
+      PHX: new Float64Array(N), PHY: new Float64Array(N), PHT: new Float64Array(N),
+      side: start.side, startSide: start.side,
+      time: 0, steps: 0, pen: Infinity, best: Infinity, bestAt: 0, bestPen: 0,
+      edited: false, held: -1, heldX: 0, heldY: 0, heldTH: 0,
+      msPerStep: 0.02,
+    };
+    if (springs) {
+      for (let i = 0; i < p.n; i++) {
+        const a = A.squares[i], b = B.squares[p.map[i]];
+        o.TX[i] = b[0]; o.TY[i] = b[1];
+        o.TT[i] = (a[2] + angleDelta(a[2], b[2])) * DEG;
+      }
+      const nb = B.squares[p.new];
+      o.TX[p.n] = nb[0]; o.TY[p.n] = nb[1]; o.TT[p.n] = nb[2] * DEG;
+    }
+    // The shake's phases, from the same generator the cached simulator draws from, seeded by n and
+    // the kind, so an un-dragged run repeats exactly given the same number of steps.
+    const rnd = seededRandom(N + INITIALS.indexOf(kind) * 7919);
+    const [hzLo, hzHi] = PHYS.jiggleHz;
+    for (let i = 0; i < N; i++) {
+      o.FQX[i] = 2 * Math.PI * lerp(hzLo, hzHi, rnd()); o.PHX[i] = 2 * Math.PI * rnd();
+      o.FQY[i] = 2 * Math.PI * lerp(hzLo, hzHi, rnd()); o.PHY[i] = 2 * Math.PI * rnd();
+      o.FQT[i] = 2 * Math.PI * lerp(hzLo, hzHi, rnd()); o.PHT[i] = 2 * Math.PI * rnd();
+    }
+    measureOptimizer(o);
+    return o;
+  }
+
+  // The side of the smallest axis-aligned box that holds the arrangement, and the deepest overlap in
+  // it: the two numbers that say how good it is. Taken at chunk boundaries, not per step.
+  function measureOptimizer(o) {
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    for (let i = 0; i < o.n; i++) {
+      const cs = Math.cos(o.TH[i]) * 0.5, sn = Math.sin(o.TH[i]) * 0.5;
+      for (let q = 0; q < 4; q++) {
+        const s1 = q & 1 ? -1 : 1, s2 = q & 2 ? -1 : 1;
+        const vx = o.X[i] + s1 * cs - s2 * sn, vy = o.Y[i] + s1 * sn + s2 * cs;
+        if (vx < x0) x0 = vx; if (vx > x1) x1 = vx;
+        if (vy < y0) y0 = vy; if (vy > y1) y1 = vy;
+      }
+    }
+    o.required = Math.max(x1 - x0, y1 - y0);
+    // Kept as well as the side: a square dragged outside the walls still has to be drawn, so the
+    // view is sized on the union of the box and whatever the hand has put outside it.
+    o.bx0 = x0; o.bx1 = x1; o.by0 = y0; o.by1 = y1;
+    // "Best" is the smallest box the run has held the squares in without them overlapping, which is
+    // the only figure that is a packing rather than a picture of one.
+    if (o.pen <= OPT.feasible && o.required < o.best) { o.best = o.required; o.bestAt = o.time; o.bestPen = o.pen; }
+    return o.required;
+  }
+
+  // One chunk of the open-ended run: `steps` fixed steps of 1 / OPT.stepsPerSecond simulated seconds
+  // each. Semi-implicit Euler, one body per square, exactly the forces the cached simulator applies.
+  function optAdvance(o, steps) {
+    const dt = 1 / OPT.stepsPerSecond;
+    const N = o.n;
+    const level = state.anneal;
+    const rigidStyle = state.style === 'bodies';
+    const amp = ANNEAL.amplitude(level);
+    const jig = (rigidStyle ? BODIES.jiggle : PHYS.jiggle) * amp;
+    const jigT = (rigidStyle ? BODIES.jiggleTorque : PHYS.jiggleTorque) * amp;
+    const decayPower = ANNEAL.decayPower(level);
+    const k = PHYS.omega * PHYS.omega;
+    const c = 2 * PHYS.zeta * PHYS.omega;
+    const ks = o.springs ? k : 0;
+    const cell = PHYS.cell;
+    const X = o.X, Y = o.Y, TH = o.TH, VX = o.VX, VY = o.VY, W = o.W;
+    const COS = o.COS, SIN = o.SIN, FX = o.FX, FY = o.FY, TQ = o.TQ;
+    for (let s = 0; s < steps; s++) {
+      // The shake anneals toward a floor rather than to nothing: an open-ended run must keep some
+      // energy or it is just a settle.
+      const decay = OPT.floor + (1 - OPT.floor) * Math.pow(1 / (1 + o.time / OPT.tau), decayPower);
+      let pen = 0;
+      for (let i = 0; i < N; i++) { FX[i] = 0; FY[i] = 0; TQ[i] = 0; COS[i] = Math.cos(TH[i]); SIN[i] = Math.sin(TH[i]); }
+      // The walls, at each corner of each square.
+      for (let i = 0; i < N; i++) {
+        const h = 0.5, cs = COS[i], sn = SIN[i];
+        for (let q = 0; q < 4; q++) {
+          const s1 = q & 1 ? -1 : 1, s2 = q & 2 ? -1 : 1;
+          const vx = X[i] + h * (s1 * cs - s2 * sn), vy = Y[i] + h * (s1 * sn + s2 * cs);
+          if (vx < 0) optPush(o, i, vx, vy, PHYS.wall * Math.min(-vx, PHYS.wallCap) + (VX[i] < 0 ? -PHYS.contactDamping * VX[i] : 0), 0);
+          if (vx > o.side) optPush(o, i, vx, vy, -(PHYS.wall * Math.min(vx - o.side, PHYS.wallCap) + (VX[i] > 0 ? PHYS.contactDamping * VX[i] : 0)), 0);
+          if (vy < 0) optPush(o, i, vx, vy, 0, PHYS.wall * Math.min(-vy, PHYS.wallCap) + (VY[i] < 0 ? -PHYS.contactDamping * VY[i] : 0));
+          if (vy > o.side) optPush(o, i, vx, vy, 0, -(PHYS.wall * Math.min(vy - o.side, PHYS.wallCap) + (VY[i] > 0 ? PHYS.contactDamping * VY[i] : 0)));
+        }
+      }
+      // Push-apart, each unordered pair once, through a grid broad phase rebuilt per step.
+      const dim = Math.max(2, Math.ceil((o.side + 4) / cell) + 1);
+      if (o.head === undefined || o.dim !== dim) { o.head = new Int32Array(dim * dim); o.next = new Int32Array(N); o.dim = dim; }
+      const head = o.head, next = o.next;
+      head.fill(-1);
+      const cellOf = (v) => Math.max(0, Math.min(dim - 1, Math.floor((v + 2) / cell)));
+      for (let i = 0; i < N; i++) {
+        const ci = cellOf(X[i]) + cellOf(Y[i]) * dim;
+        next[i] = head[ci]; head[ci] = i;
+      }
+      for (let i = 0; i < N; i++) {
+        const cx = cellOf(X[i]), cy = cellOf(Y[i]);
+        for (let oy = -1; oy <= 1; oy++) {
+          const yy = cy + oy;
+          if (yy < 0 || yy >= dim) continue;
+          for (let ox = -1; ox <= 1; ox++) {
+            const xx = cx + ox;
+            if (xx < 0 || xx >= dim) continue;
+            for (let j = head[xx + yy * dim]; j !== -1; j = next[j]) {
+              if (j <= i) continue;
+              const d = optCollide(o, i, j);
+              if (d > pen) pen = d;
+            }
+          }
+        }
+      }
+      // Integrate. A held square is pinned: it takes the cursor's pose and no force at all, so its
+      // neighbours are pushed aside by it rather than the other way round.
+      for (let i = 0; i < N; i++) {
+        if (i === o.held) {
+          X[i] = o.heldX; Y[i] = o.heldY; TH[i] = o.heldTH;
+          VX[i] = 0; VY[i] = 0; W[i] = 0;
+          continue;
+        }
+        const wob = jig * decay;
+        const ax = FX[i] - ks * (X[i] - o.TX[i]) - c * VX[i] + wob * Math.cos(o.FQX[i] * o.time + o.PHX[i]);
+        const ay = FY[i] - ks * (Y[i] - o.TY[i]) - c * VY[i] + wob * Math.cos(o.FQY[i] * o.time + o.PHY[i]);
+        VX[i] += ax * dt; VY[i] += ay * dt;
+        const sp = Math.hypot(VX[i], VY[i]);
+        if (sp > PHYS.maxSpeed) { VX[i] *= PHYS.maxSpeed / sp; VY[i] *= PHYS.maxSpeed / sp; }
+        X[i] += VX[i] * dt; Y[i] += VY[i] * dt;
+        const alpha = TQ[i] / PHYS.inertia - ks * angleDelta(o.TT[i] / DEG, TH[i] / DEG) * DEG - c * W[i]
+          + jigT * decay * Math.cos(o.FQT[i] * o.time + o.PHT[i]);
+        W[i] += alpha * dt;
+        if (W[i] > PHYS.maxSpin) W[i] = PHYS.maxSpin; else if (W[i] < -PHYS.maxSpin) W[i] = -PHYS.maxSpin;
+        TH[i] += W[i] * dt;
+      }
+      // The walls, where there is no target to hold the packing at the record's side: in while the
+      // squares are clear of each other, back out while something is jammed, so the run is an
+      // inflate-and-contract cycle rather than a one-way squeeze that can only fail.
+      if (!o.springs) {
+        let nextSide = o.side;
+        if (pen <= OPT.squeezeTol) nextSide = Math.max(OPT.minSide, o.side * (1 - OPT.squeezeRate * dt));
+        else if (pen > OPT.jamTol) nextSide = o.side * (1 + OPT.relaxRate * dt);
+        if (nextSide !== o.side) {
+          const shift = (nextSide - o.side) / 2;
+          for (let i = 0; i < N; i++) { X[i] += shift; Y[i] += shift; }
+          if (o.held >= 0) { o.heldX += shift; o.heldY += shift; }
+          o.side = nextSide;
+        }
+      }
+      o.pen = pen;
+      o.time += dt;
+      o.steps++;
+    }
+    measureOptimizer(o);
+  }
+  function optPush(o, i, px, py, fx, fy) {
+    o.FX[i] += fx; o.FY[i] += fy;
+    o.TQ[i] += PHYS.contactTorque * ((px - o.X[i]) * fy - (py - o.Y[i]) * fx);
+  }
+  // The separating-axis test of the cached simulator, on unit squares, returning the penetration.
+  let optSpx = 0, optSpy = 0;
+  function optSupport(o, i, nx, ny) {
+    const h = 0.5, cs = o.COS[i], sn = o.SIN[i];
+    const s1 = nx * cs + ny * sn >= 0 ? 1 : -1;
+    const s2 = -nx * sn + ny * cs >= 0 ? 1 : -1;
+    optSpx = o.X[i] + h * (s1 * cs - s2 * sn);
+    optSpy = o.Y[i] + h * (s1 * sn + s2 * cs);
+  }
+  function optCollide(o, i, j) {
+    const X = o.X, Y = o.Y, COS = o.COS, SIN = o.SIN;
+    const dx = X[j] - X[i], dy = Y[j] - Y[i];
+    if (dx * dx + dy * dy >= 2) return 0;
+    let best = Infinity, bnx = 0, bny = 0, owner = -1;
+    for (let a = 0; a < 4; a++) {
+      const own = a < 2 ? i : j;
+      const cs = COS[own], sn = SIN[own];
+      const ax = a & 1 ? -sn : cs, ay = a & 1 ? cs : sn;
+      const ri = (Math.abs(ax * COS[i] + ay * SIN[i]) + Math.abs(-ax * SIN[i] + ay * COS[i])) / 2;
+      const rj = (Math.abs(ax * COS[j] + ay * SIN[j]) + Math.abs(-ax * SIN[j] + ay * COS[j])) / 2;
+      const d = dx * ax + dy * ay;
+      const p = ri + rj - Math.abs(d);
+      if (p <= 1e-9) return 0;
+      if (p < best) { best = p; bnx = d < 0 ? -ax : ax; bny = d < 0 ? -ay : ay; owner = own; }
+    }
+    if (owner === i) optSupport(o, j, -bnx, -bny); else optSupport(o, i, bnx, bny);
+    const vn = (o.VX[j] - o.VX[i]) * bnx + (o.VY[j] - o.VY[i]) * bny;
+    const f = PHYS.contact * Math.min(best, PHYS.contactCap) + (vn < 0 ? -PHYS.contactDamping * vn : 0);
+    const fx = f * bnx, fy = f * bny;
+    optPush(o, j, optSpx, optSpy, fx, fy);
+    optPush(o, i, optSpx, optSpy, -fx, -fy);
+    return best;
+  }
+
+  // One frame of the open-ended run: as many fixed steps as the wall clock asked for, capped so a
+  // chunk holds the frame budget. The state after k steps is exact and repeatable; how many steps a
+  // second of wall clock buys is not, and that is the whole difference between this and `seek`.
+  function optimizeAdvance(dtSim) {
+    const o = opt;
+    if (o === null) return;
+    const cap = Math.max(OPT.minChunk, Math.min(OPT.maxChunk, Math.round(OPT.budgetMs / Math.max(o.msPerStep, 1e-4))));
+    const want = Math.max(OPT.minChunk, Math.min(cap, Math.round(dtSim * OPT.stepsPerSecond)));
+    const t0 = performance.now();
+    optAdvance(o, want);
+    const ms = performance.now() - t0;
+    o.msPerStep = o.msPerStep * 0.7 + (ms / want) * 0.3;
+    render();
+  }
+
+  // The chooser, the run, and what it is doing.
+  // One rule: the previous packing *is* the timeline's own start, so choosing it shows the step
+  // animation again; a random or grid start has nothing to do with the step, so it is put on the
+  // stage at once, paused, and Optimize is what sets it going. Optimize runs from whichever of the
+  // three is chosen, the previous packing included.
+  function setInitial(kind) {
+    const next = INITIALS.includes(kind) ? kind : INITIALS[0];
+    state.initial = next;
+    pause();
+    if (next === 'previous') {
+      state.optimizing = false;
+      opt = null;
+    } else {
+      state.optimizing = true;
+      opt = newOptimizer(next);
+    }
+    markGapBar();
+    updateSegments();
+    render();
+    return state.initial;
+  }
+  function optimize(on) {
+    if (on === false) {
+      pause();
+      state.optimizing = false;
+      opt = null;
+      markGapBar();
+      updateSegments();
+      render();
+      return optimizeState();
+    }
+    pause();
+    state.optimizing = true;
+    opt = newOptimizer(state.initial);
+    markGapBar();
+    updateSegments();
+    render();
+    play();
+    return optimizeState();
+  }
+  // For measurement and for tests: advance the run by an exact number of steps, with no clock in it.
+  function optimizeStep(steps) {
+    if (opt === null) return optimizeState();
+    optAdvance(opt, Math.max(1, Math.round(Number(steps) || 1)));
+    render();
+    return optimizeState();
+  }
+  // ---------------------------------------------------------------- the hand (revision 9)
+  // Press picks the topmost square under the cursor, drag moves it, shift rotates it about its own
+  // centre, release drops it. While it is held it is pinned: the run writes the cursor's pose into
+  // it every step and gives it no force at all, so its neighbours are pushed aside by it instead of
+  // it being pushed aside by them. On release it rejoins with zero velocity.
+  //
+  // A drag needs a live simulation to push anything, so grabbing a square while the timeline is
+  // playing or scrubbing hands the picture to an open-ended run seeded from the poses on the stage —
+  // no jump, and the run carries on from there. A run that has been touched is no longer a function
+  // of its seed, so it is marked, and the mark is on the stage: `hand-edited`.
+  function seedOptimizerFromScene() {
+    const p = PAIRS[state.pair];
+    const N = p.n + 1;
+    const X = new Float64Array(N), Y = new Float64Array(N), TH = new Float64Array(N);
+    for (let i = 0; i < N; i++) { X[i] = poseX[i]; Y[i] = poseY[i]; TH[i] = poseA[i] * DEG; }
+    const side = sceneSide > 0 ? sceneSide : FRAMES[String(p.n + 1)].side;
+    return newOptimizer(state.initial, { X, Y, TH, side });
+  }
+  // The topmost square whose own frame contains the world point, or -1. Drawing order is birth
+  // order, so the last match is the one on top.
+  function pickAt(wx, wy) {
+    if (poseX === null) return -1;
+    let found = -1;
+    for (let i = 0; i < poseX.length; i++) {
+      const c = Math.cos(poseA[i] * DEG), sn = Math.sin(poseA[i] * DEG);
+      const dx = wx - poseX[i], dy = wy - poseY[i];
+      const u = dx * c + dy * sn, v = -dx * sn + dy * c;
+      if (Math.abs(u) <= 0.5 && Math.abs(v) <= 0.5) found = i;
+    }
+    return found;
+  }
+  let grabOffX = 0, grabOffY = 0, grabAngle = 0, grabTH = 0, grabRotating = false;
+  function grab(index, wx, wy) {
+    const i = Math.round(Number(index));
+    if (!isFinite(i) || i < 0 || poseX === null || i >= poseX.length) return -1;
+    if (!(state.optimizing && opt !== null)) {
+      const was = state.playing;
+      pause();
+      state.optimizing = true;
+      opt = seedOptimizerFromScene();
+      if (was) play();
+    }
+    const o = opt;
+    o.held = i;
+    o.edited = true;
+    o.heldX = o.X[i]; o.heldY = o.Y[i]; o.heldTH = o.TH[i];
+    const px = wx === undefined ? o.X[i] : Number(wx);
+    const py = wy === undefined ? o.Y[i] : Number(wy);
+    grabOffX = px - o.X[i]; grabOffY = py - o.Y[i];
+    grabAngle = Math.atan2(py - o.Y[i], px - o.X[i]);
+    grabTH = o.TH[i];
+    grabRotating = false;
+    updateSegments();
+    render();
+    return i;
+  }
+  // Where the cursor is now. `rotating` swaps translation for a turn about the square's own centre,
+  // re-anchored the moment the modifier changes so the square never jumps as shift goes down.
+  function dragTo(wx, wy, rotating) {
+    const o = opt;
+    if (o === null || o.held < 0) return null;
+    const i = o.held;
+    const px = Number(wx), py = Number(wy);
+    if (!isFinite(px) || !isFinite(py)) return null;
+    const turning = !!rotating;
+    if (turning !== grabRotating) {
+      grabRotating = turning;
+      grabOffX = px - o.X[i]; grabOffY = py - o.Y[i];
+      grabAngle = Math.atan2(py - o.Y[i], px - o.X[i]);
+      grabTH = o.TH[i];
+    }
+    if (turning) {
+      o.heldTH = grabTH + (Math.atan2(py - o.Y[i], px - o.X[i]) - grabAngle);
+    } else {
+      o.heldX = px - grabOffX;
+      o.heldY = py - grabOffY;
+    }
+    // Written straight into the arrangement as well as held for the next step, so a drag with the
+    // run paused still moves the square and still moves the readout under it.
+    o.X[i] = o.heldX; o.Y[i] = o.heldY; o.TH[i] = o.heldTH;
+    o.VX[i] = 0; o.VY[i] = 0; o.W[i] = 0;
+    measureOptimizer(o);
+    render();
+    return { index: i, x: o.X[i], y: o.Y[i], angle: o.TH[i] / DEG };
+  }
+  function release() {
+    if (opt === null || opt.held < 0) return -1;
+    const i = opt.held;
+    opt.held = -1;
+    // The drop is a settled moment: the bar is allowed to move again.
+    markGapBar();
+    render();
+    return i;
+  }
+  function hand() {
+    return {
+      held: opt === null ? -1 : opt.held,
+      edited: opt !== null && opt.edited,
+      rotating: grabRotating,
+    };
+  }
+  function optimizeState() {
+    if (opt === null) return { on: false, initial: state.initial, edited: false };
+    return {
+      on: state.optimizing, running: state.playing, initial: opt.kind, springs: opt.springs,
+      n: opt.n, pair: opt.pair, time: opt.time, steps: opt.steps, side: opt.side,
+      required: opt.required, best: opt.best === Infinity ? null : opt.best, bestAt: opt.bestAt,
+      bestPenetration: opt.best === Infinity ? null : opt.bestPen, feasible: OPT.feasible,
+      record: opt.record, excess: (opt.required / opt.record - 1) * 100,
+      penetration: isFinite(opt.pen) ? opt.pen : null, edited: opt.edited, held: opt.held, msPerStep: opt.msPerStep,
+    };
+  }
+
+  // What an open-ended run looks like on the stage: the squares where the run has them, the box the
+  // walls are at, and the view sized to hold whichever of the box and the record is wider so the
+  // picture does not breathe as the walls close. The fills are the pair's own, drained while the run
+  // is going and locked back in on pause, as they are for the step animation.
+  function renderOptimizeScene(p, A, B) {
+    const o = opt;
+    const side = o.side;
+    // The view covers the walls and the squares both, so a square held outside the box stays on the
+    // stage instead of vanishing off the edge of it.
+    const lox = Math.min(0, o.bx0), hix = Math.max(side, o.bx1);
+    const loy = Math.min(0, o.by0), hiy = Math.max(side, o.by1);
+    const span = Math.max(hix - lox, hiy - loy, B.side);
+    const view = span * (1 + 2 * PAD);
+    const midX = (lox + hix) / 2, midY = (loy + hiy) / 2;
+    svg.setAttribute('viewBox', (midX - view / 2) + ' ' + (-midY - view / 2) + ' ' + view + ' ' + view);
+    containerRect.setAttribute('width', side);
+    containerRect.setAttribute('height', side);
+    sceneSide = side;
+    const drain = state.desaturate && state.playing ? 1 : 0;
+    for (let i = 0; i < motion.length; i++) {
+      const m = motion[i];
+      const ang = o.TH[i] / DEG;
+      poseX[i] = o.X[i]; poseY[i] = o.Y[i]; poseA[i] = ang;
+      m.node.setAttribute('transform', 'translate(' + o.X[i] + ' ' + o.Y[i] + ') rotate(' + ang + ')');
+      const fill = state.rule === 'house' ? m.b[3] : continuousFill(((ang % 90) + 90) % 90, m.b[4]);
+      m.rect.setAttribute('fill', desatHex(fill, drain));
+    }
+    const nb = newPose;
+    const ang = o.TH[p.n] / DEG;
+    poseX[p.n] = o.X[p.n]; poseY[p.n] = o.Y[p.n]; poseA[p.n] = ang;
+    newNode.setAttribute('opacity', 1);
+    newNode.setAttribute('transform', 'translate(' + o.X[p.n] + ' ' + o.Y[p.n] + ') rotate(' + ang + ')');
+    const finalFill = state.rule === 'house' ? nb[3] : continuousFill(((ang % 90) + 90) % 90, nb[4]);
+    newRect.setAttribute('fill', desatHex(finalFill, drain));
+    mark.setAttribute('opacity', 0);
+    linksGroup.setAttribute('opacity', 0);
+    ghost.setAttribute('opacity', 0);
   }
 
   // Styles B and C. The world-to-stage scale is held at n's through the move, so the container
@@ -1749,9 +2230,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     svg.setAttribute('viewBox', (side / 2 - view / 2) + ' ' + (-side / 2 - view / 2) + ' ' + view + ' ' + view);
     containerRect.setAttribute('width', side);
     containerRect.setAttribute('height', side);
+    sceneSide = side;
 
-    legendNote.textContent = tr !== null ? missNote(tr) : pendingNote(mode);
-    sceneU = tr === null ? (u <= 0 ? 0 : 1) : su;
     currentTrajectory = tr;
     const drain = desatLevel(sc, t);
     for (let i = 0; i < motion.length; i++) {
@@ -1808,15 +2288,20 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const sc = schedule();
     const t = state.t;
     const mode = simMode();
-    if (isPhysical(state.style)) renderPhysicsScene(p, A, B, tm, sc, t);
+    const optimizing = state.optimizing && opt !== null;
+    if (optimizing) renderOptimizeScene(p, A, B);
+    else if (isPhysical(state.style)) renderPhysicsScene(p, A, B, tm, sc, t);
     else renderTweenScene(p, A, B, tm, sc, t);
     // The live gap, from the poses the scene just drew. Style A never runs blind or free, so it is
-    // always measured against the record's own labelling.
-    updateGap(p, A, B, isPhysical(state.style) ? mode : 'snap', currentTrajectory);
+    // always measured against the record's own labelling. A run from a random or grid start, or a
+    // blind one, has no correspondence to that labelling, so only the box comparison means anything.
+    updateGap(p, A, B,
+      optimizing ? (opt.springs ? 'snap' : 'blind') : (isPhysical(state.style) ? mode : 'snap'),
+      optimizing ? !state.playing : (t <= sc.moveStart || t >= sc.end - 1e-9));
 
     // The panel's text leaves, then returns: the n layer is fully gone before the n + 1 layer begins,
     // so two numerals are never on the stage together. The numeral drifts a little on the way.
-    const q = sc.roll > 0 ? clamp01((t - sc.arrive) / sc.roll) : (t >= sc.arrive ? 1 : 0);
+    const q = optimizing ? 1 : (sc.roll > 0 ? clamp01((t - sc.arrive) / sc.roll) : (t >= sc.arrive ? 1 : 0));
     const out = clamp01(q / 0.45);
     const back = clamp01((q - 0.55) / 0.45);
     factsA.style.opacity = 1 - out;
@@ -1852,8 +2337,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // Where style A puts one square at a given point of the block motion: a block member rides its
   // block's rotation about the source pivot while the pivot slides to its target, plus its own
   // residual, so a block turns as one body; a square alone slides straight and turns about its own
-  // centre. Extracted from the renderer so the gap trace (feature 3) can sample the same path
-  // without drawing it.
+  // centre. Extracted from the renderer so the poses can be sampled without drawing them.
   const tweenPoseOut = [0, 0, 0];
   function tweenPose(m, pr) {
     let x, y;
@@ -1890,9 +2374,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     svg.setAttribute('viewBox', (side / 2 - view / 2) + ' ' + (-side / 2 - view / 2) + ' ' + view + ' ' + view);
     containerRect.setAttribute('width', side);
     containerRect.setAttribute('height', side);
+    sceneSide = side;
 
     // Style A is an interpolation, not a simulation: the snap and the blind run do not reach it.
-    legendNote.textContent = simMode() === 'snap' ? '' : 'style A interpolates: it lands on the record either way';
     let prevPose = null;
     const drain = desatLevel(sc, t);
     for (let i = 0; i < motion.length; i++) {
@@ -1917,9 +2401,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const settled = easeOut(ramp(t, sc.moveEnd, sc.end));
     const nb = newPose;
     // The arriving square is drawn at its final pose from the moment it appears, so it is on the
-    // record from the start as far as the gap is concerned; the trace's clock is the block motion.
+    // record from the start as far as the gap is concerned.
     poseX[p.n] = nb[0]; poseY[p.n] = nb[1]; poseA[p.n] = nb[2];
-    sceneU = u;
     currentTrajectory = null;
     const finalFill = state.rule === 'house' ? nb[3] : continuousFill(nb[2], nb[4]);
     if (k > 0) {
@@ -1954,66 +2437,43 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
 
   // ---------------------------------------------------------------- chrome
-  const pairSelect = document.getElementById('pair-select');
   const playButton = document.getElementById('play');
   const scrub = document.getElementById('scrub');
   const clock = document.getElementById('clock');
-  const pairInfo = document.getElementById('pair-info');
   const stage = document.getElementById('stage');
   const stageWrap = document.getElementById('stage-wrap');
   const controls = document.getElementById('controls');
-  const gotoInput = document.getElementById('goto-n');
   const continuousInfo = document.getElementById('continuous-info');
-  gotoInput.min = String(PAIRS[0].n);
-  gotoInput.max = String(PAIRS[PAIRS.length - 1].n);
-
-  PAIRS.forEach((p, i) => {
-    const opt = document.createElement('option');
-    opt.value = String(i);
-    opt.textContent = p.n + ' → ' + (p.n + 1) + '  ·  ' + p.kind + '  ·  max ' + fmt(p.stats.max_displacement, 2)
-      + '  ·  ' + p.stats.rotated + ' rotate  ·  ' + p.stats.block_count + ' blocks';
-    pairSelect.appendChild(opt);
-  });
+  const optimizeButton = document.getElementById('optimize');
 
   function updateChrome() {
     if (state.capture) return;
+    if (state.optimizing && opt !== null) {
+      clock.textContent = fmt(opt.time, 2) + ' s simulated';
+      return;
+    }
     const d = duration();
     scrub.value = String(Math.round((d > 0 ? state.t / d : 0) * 10000));
     clock.textContent = fmt(state.t, 3) + ' / ' + fmt(d, 3) + ' s';
   }
   const styleSelect = document.getElementById('style-select');
-  const legendStyle = document.getElementById('legend-style');
-  const STYLE_LEGEND = {
-    tween: 'style A, tween: squares and blocks slide into place',
-    physics: 'style B, physics: pushed apart and jiggled into place',
-    bodies: 'style C, bodies: blocks shaken as rigid bodies',
-  };
-  // Away from the default annealing level the second legend line says so, at the price of a shorter
-  // description: the two must share one line of the panel, and the dial is the thing that changed.
-  const STYLE_LEGEND_ANNEALED = {
-    physics: 'style B, physics: jiggled into place',
-    bodies: 'style C, bodies: blocks shaken as one',
-  };
-  function styleLegend() {
-    if (!isPhysical(state.style) || state.anneal === ANNEAL.dflt) return STYLE_LEGEND[state.style];
-    return STYLE_LEGEND_ANNEALED[state.style] + ' · annealing ' + state.anneal;
-  }
   function updateSegments() {
     styleSelect.value = state.style;
-    legendStyle.textContent = styleLegend();
     document.querySelectorAll('#rule-seg button').forEach((b) => b.classList.toggle('on', b.dataset.rule === state.rule));
     document.querySelectorAll('#phase-seg button').forEach((b) => b.classList.toggle('on', b.dataset.phase === state.phase));
     document.getElementById('desat-toggle').checked = state.desaturate;
-    document.getElementById('snap-toggle').checked = state.snap;
     document.getElementById('blind-toggle').checked = state.blind;
+    document.querySelectorAll('#initial-seg button').forEach((b) => b.classList.toggle('on', b.dataset.initial === state.initial));
+    optimizeButton.textContent = state.optimizing ? 'Restart optimize' : 'Optimize';
     document.getElementById('blind-inflate').value = BLIND.inflate;
     document.getElementById('anneal').value = String(state.anneal);
     const an = annealState();
     document.getElementById('anneal-info').textContent = state.anneal + ' \u00b7 shake \u00d7'
       + fmt(an.amplitude, 2) + ', decay ^' + fmt(an.decayPower, 2) + ', ' + fmt(an.span, 2) + ' move'
       + (isPhysical(state.style) ? '' : ' (styles B and C only)');
+    document.getElementById('speed').value = String(speedToSlider(state.speed));
+    document.getElementById('speed-info').textContent = '\u00d7' + state.speed.toFixed(2);
     document.getElementById('links-toggle').checked = state.links;
-    document.getElementById('advance-toggle').checked = state.autoAdvance;
     document.getElementById('capture-toggle').checked = state.capture;
     document.getElementById('t-dwell').value = state.timing.dwell;
     document.getElementById('t-move').value = state.timing.move;
@@ -2021,7 +2481,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // Under continuous play the sequence's own beat governs, so the three boxes are inert.
     ['t-dwell', 't-move', 't-settle'].forEach((id) => { document.getElementById(id).disabled = state.continuous.on; });
     document.getElementById('fullbeat-toggle').checked = state.continuous.fullBeat;
-    gotoInput.value = String(PAIRS[state.pair].n);
     updateStepChooser();
     updateRangeControls();
     const c = continuousState();
@@ -2029,29 +2488,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       + fmt(c.dwell, 1) + ' + ' + fmt(c.move, 1) + ' + ' + fmt(c.settle, 1) + ' s, static appends '
       + (c.fullBeat ? 'the same' : fmt(c.staticDwell, 1) + ' s and no move') + ' (' + c.staticPairs + ' of ' + c.pairs
       + ' pairs); this pair ' + fmt(duration(), 2) + ' s, ' + fmt(c.remaining, 0) + ' s left of ' + fmt(c.total, 0) + ' s';
-    playButton.textContent = state.playing ? 'Pause' : 'Play';
-    pairSelect.value = String(state.pair);
-    const p = PAIRS[state.pair];
-    const s = p.stats;
-    const kindText = p.kind === 'prefix'
-      ? 'grid prefix: every square keeps its pose, square ' + (p.n + 1) + ' is appended'
-      : p.kind === 'shared-picture'
-        ? 'shared picture: n is n+1 with one square removed (index ' + (p.new + 1) + ')'
-        : 'block-aware matching: ' + s.block_count + ' blocks carry ' + s.moving_in_block + ' of ' + s.moving
-          + ' moving squares, ' + s.moving_individually + ' move alone; residual after the block transform mean '
-          + fmt(s.block_residual_mean, 3) + ', max ' + fmt(s.block_residual_max, 3) + '; new square ' + (p.new + 1)
-          + ' by ' + p.new_rule + (p.new_tied > 1 ? ' (' + p.new_tied + ' tied)' : '') + '; it covers ' + s.arrival_overlaps
-          + ' unmoved squares at arrival';
-    pairInfo.textContent = 'Pair ' + (state.pair + 1) + ' of ' + PAIRS.length + ' — ' + kindText
-      + '. Mean move ' + fmt(s.mean_displacement, 2) + ', max ' + fmt(s.max_displacement, 2)
-      + ' units; ' + s.moved_over_1_0 + ' squares move over 1 unit, ' + s.rotated + ' rotate, '
-      + s.crossings + ' close passes. Tweens are illustrative; only the two end frames are packings.';
+    // The transport keeps its two glyphs in the markup and swaps which is drawn; its accessible name
+    // is set here, because the button carries no text of its own.
+    playButton.classList.toggle('is-playing', state.playing);
+    playButton.setAttribute('aria-label', state.playing ? 'Pause' : 'Play');
   }
-  // ---------------------------------------------------------------- the single-step chooser (revision 8)
-  // The tab is about one value of n, and the step it shows is the one that arrives at it: choosing
-  // 17 shows 16 -> 17. So the chooser's n is the pair's n plus one, and every line it writes names
-  // both ends rather than leaving the direction to be guessed. The interesting cases are sparse, so
-  // a row of chips carries the ones worth opening the page for.
+  // ---------------------------------------------------------------- the chooser for n (revision 9)
+  // One spine: a `from` and a `to`, both stated as the n being stepped *into*, so choosing 17 shows
+  // 16 -> 17 and 17 to 17 is one step. The interesting cases are sparse, so a row of chips carries
+  // the ones worth opening the page for, and a chip sets both ends at once.
   const DEFAULT_STEP_N = 17;
   const STEP_CHIPS = [5, 10, 11, 17, 26, 29, 100, 110, 272];
   // One line, for the n that has something to say about why it is worth playing with. 17 is the
@@ -2060,12 +2505,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     17: 'n = 17: the search engine here returned exactly the trivial 5 x 5 grid until a '
       + 'whole-configuration move was added, so this is the natural step to play the physics on.',
   };
-  const stepInput = document.getElementById('step-n');
   const stepLabel = document.getElementById('step-label');
   const stepNote = document.getElementById('step-note');
   const stepChips = document.getElementById('step-chips');
-  stepInput.min = String(PAIRS[0].n + 1);
-  stepInput.max = String(PAIRS[PAIRS.length - 1].n + 1);
   const stepN = () => PAIRS[state.pair].n + 1;
   // The pair that arrives at n, or the nearest one this page carries (the 25-pair demo build carries
   // 25 of the 323 steps, so a chip there lands on the closest step it has).
@@ -2077,11 +2519,11 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     }
     return best;
   }
+  // Choosing one n is the range collapsed onto it: the old Single step tab, with nothing else to it.
   function setStepN(n) {
     const want = Math.round(Number(n));
     if (!isFinite(want)) return stepN();
-    if (!state.continuous.on) pause();
-    select(pairForStepN(want));
+    setRange(want, want);
     return stepN();
   }
   for (const v of STEP_CHIPS) {
@@ -2095,13 +2537,13 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   function updateStepChooser() {
     const n = stepN();
-    if (document.activeElement !== stepInput) stepInput.value = String(n);
     stepLabel.textContent = 'showing the step ' + (n - 1) + ' → ' + n;
     stepNote.textContent = STEP_NOTES[n] || '';
-    for (const chip of stepChips.children) chip.classList.toggle('on', Number(chip.dataset.n) === n);
+    const single = state.range.from === state.range.to;
+    for (const chip of stepChips.children) chip.classList.toggle('on', single && Number(chip.dataset.n) === n);
   }
 
-  // ---------------------------------------------------------------- the sequence tab's controls
+  // ---------------------------------------------------------------- the range controls
   // The two range boxes, the run's length in wall-clock seconds before it is started, and where the
   // run stands inside it. The length is the honest one: it prices every pair in the range at the
   // beat it will actually play at, static appends and the annealing dial included.
@@ -2109,9 +2551,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const rangeTo = document.getElementById('range-to');
   const rangeDurationOut = document.getElementById('range-duration');
   const rangePosition = document.getElementById('range-position');
-  const playRangeButton = document.getElementById('play-range');
+  const rangeAllButton = document.getElementById('range-all');
   rangeFrom.min = rangeTo.min = String(RANGE_MIN);
   rangeFrom.max = rangeTo.max = String(RANGE_MAX);
+  rangeAllButton.textContent = 'whole corpus (' + RANGE_MIN + ' → ' + RANGE_MAX + ')';
   function clockText(seconds) {
     const s = Math.round(seconds);
     if (s < 90) return s + ' s';
@@ -2121,52 +2564,20 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const r = rangeState();
     if (document.activeElement !== rangeFrom) rangeFrom.value = String(r.from);
     if (document.activeElement !== rangeTo) rangeTo.value = String(r.to);
-    playRangeButton.textContent = 'Play ' + r.from + ' → ' + r.to;
-    rangeDurationOut.textContent = r.steps + (r.steps === 1 ? ' step, ' : ' steps, ') + clockText(r.duration)
-      + ' at the current beat';
-    rangePosition.textContent = r.inside
-      ? 'step ' + r.step + ' of ' + r.steps + ' · n = ' + PAIRS[state.pair].n + ' → ' + (PAIRS[state.pair].n + 1)
-      : 'the stage is outside the range (n = ' + PAIRS[state.pair].n + ')';
+    // One step is priced at the controls' own beat, a range at the sequence beat it will play at.
+    rangeDurationOut.textContent = r.steps === 1
+      ? '1 step, ' + fmt(duration(), 2) + ' s'
+      : r.steps + ' steps, ' + clockText(r.duration) + ' at the current beat';
+    rangePosition.textContent = r.steps === 1
+      ? ''
+      : (r.inside
+        ? 'step ' + r.step + ' of ' + r.steps + ' · n = ' + PAIRS[state.pair].n + ' → ' + (PAIRS[state.pair].n + 1)
+        : 'the stage is outside the range (n = ' + PAIRS[state.pair].n + ')');
   }
 
-  // ---------------------------------------------------------------- the tabs (revision 8)
-  // Two tabs over one stage: `single` plays one step of the sequence with every experiment control
-  // beside it, `sequence` runs a range of steps end to end. Switching tabs never touches a setting;
-  // it changes which controls are visible and what play is scoped to.
-  const TABS = ['single', 'sequence'];
-  const tabBar = document.getElementById('tabbar');
-  const tabButton = { single: document.getElementById('tab-single'), sequence: document.getElementById('tab-sequence') };
-  const tabPanel = { single: document.getElementById('panel-single'), sequence: document.getElementById('panel-sequence') };
-  function updateTabs() {
-    // The stage's own furniture follows the tab through one class: the gap bar is about one n, so
-    // it is drawn on the single-step tab and not on the sequence tab.
-    document.body.classList.toggle('tab-sequence', state.tab === 'sequence');
-    for (const name of TABS) {
-      const on = state.tab === name;
-      tabButton[name].setAttribute('aria-selected', on ? 'true' : 'false');
-      tabButton[name].tabIndex = on ? 0 : -1;
-      tabPanel[name].hidden = !on;
-    }
-  }
-  function setTab(name) {
-    const next = TABS.includes(name) ? name : TABS[0];
-    const changed = next !== state.tab;
-    state.tab = next;
-    updateTabs();
-    syncScale();
-    if (changed) {
-      // A tab switch stops a run rather than letting it play on out of sight, and re-lays the page
-      // out because the two panels are not the same height.
-      pause();
-      updateSegments();
-      layout();
-      render();
-    }
-    return state.tab;
-  }
   function layout() {
     const vw = window.innerWidth, vh = window.innerHeight;
-    const ch = state.capture ? 0 : controls.offsetHeight + tabBar.offsetHeight;
+    const ch = state.capture ? 0 : controls.offsetHeight;
     const s = Math.min(vw / 1920, (vh - ch) / 1080);
     stage.style.transform = 'scale(' + s + ')';
     stageWrap.style.width = (1920 * s) + 'px';
@@ -2182,7 +2593,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       let dt = (stamp - lastStamp) / 1000;
       if (dt > 0.1) dt = 0.1;
       if (dt < 0) dt = 0;
-      advance(dt);
+      // The speed multiplies the wall-clock delta, so it stretches or compresses playback without
+      // touching what any instant looks like. An open-ended run reads it as simulated seconds.
+      if (state.optimizing && opt !== null) optimizeAdvance(dt * state.speed);
+      else advance(dt * state.speed);
     }
     lastStamp = stamp;
     rafHandle = requestAnimationFrame(tick);
@@ -2226,7 +2640,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   function play() {
     if (state.playing) return;
-    if (state.t >= duration()) {
+    if (!state.optimizing && state.t >= duration()) {
       const next = state.pair + 1;
       if (state.autoAdvance && next <= scopeBounds().last && PAIRS[next].n === PAIRS[state.pair].n + 1) select(next);
       else state.t = 0;
@@ -2238,19 +2652,26 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   function pause() {
     state.playing = false;
+    markGapBar();
     if (rafHandle !== null) { cancelAnimationFrame(rafHandle); rafHandle = null; }
     lastStamp = null;
     updateSegments();
   }
   function seek(seconds) {
+    // Seeking is the timeline's own operation, so it is also how an open-ended run is left.
+    if (state.optimizing) { pause(); state.optimizing = false; opt = null; updateSegments(); }
     const d = duration();
     state.t = Math.max(0, Math.min(d, Number(seconds) || 0));
+    markGapBar();
     render();
   }
   function select(index) {
     index = Math.max(0, Math.min(PAIRS.length - 1, index | 0));
+    // A run belongs to one n; choosing another ends it.
+    if (state.optimizing) { state.optimizing = false; opt = null; }
     state.pair = index;
     state.t = 0;
+    markGapBar();
     buildPair();
     updateSegments();
     render();
@@ -2266,16 +2687,19 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     render();
   }
   function setColorRule(rule) {
+    markGapBar();
     state.rule = rule === 'house' ? 'house' : 'continuous';
     updateSegments();
     render();
   }
   function setPhase(phase) {
+    markGapBar();
     state.phase = PHASES.includes(phase) ? phase : PHASES[0];
     updateSegments();
     render();
   }
   function setStyle(style) {
+    markGapBar();
     const next = STYLES.includes(style) ? style : STYLES[0];
     if (next !== state.style) {
       // Each style drives the new square and the mark from scratch; drop what the other left on
@@ -2308,6 +2732,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     return { pair: index, n: tr.n, style: tr.style, mode: tr.mode, bodies: tr.bodies, steps: tr.steps, ms: tr.ms, bytes: tr.states.byteLength, maxSpeedPerMove: maxSpeed, maxPenetration: tr.maxPenetration, maxPenetrationLate: tr.maxPenetrationLate, anneal: tr.anneal, annealSpan: tr.annealSpan, annealAmplitude: tr.annealAmplitude, miss: Object.assign({}, tr.miss), final };
   }
   function setDesaturate(on) {
+    markGapBar();
     state.desaturate = !!on;
     updateSegments();
     render();
@@ -2315,6 +2740,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // With the snap off, styles B and C run to the end of the move with no blend and no snap, and the
   // pair comes to rest wherever the physics left it. Style A is unaffected.
   function setSnap(on) {
+    markGapBar();
     state.snap = !!on;
     if (isPhysical(state.style)) ensureTrajectory(state.pair, state.style);
     updateSegments();
@@ -2323,6 +2749,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // The blind run: the simulation is told nothing about where the squares belong. It overrides the
   // snap, there being nothing to snap to.
   function setBlind(on) {
+    markGapBar();
     state.blind = !!on;
     if (isPhysical(state.style)) ensureTrajectory(state.pair, state.style);
     updateSegments();
@@ -2332,6 +2759,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // and lengthens the run, so the trajectory cache is keyed by it and the clock has to be rescaled
   // where the move's length changes under a playing pair.
   function setAnneal(level) {
+    markGapBar();
     const v = Math.round(Number(level));
     const next = Math.max(ANNEAL.min, Math.min(ANNEAL.max, isFinite(v) ? v : state.anneal));
     if (next === state.anneal) return annealState();
@@ -2352,6 +2780,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     };
   }
   function setBlindInflate(factor) {
+    markGapBar();
     const v = Number(factor);
     BLIND.inflate = Math.max(1, Math.min(2, isFinite(v) ? v : BLIND.inflate));
     if (state.blind && isPhysical(state.style)) ensureTrajectory(state.pair, state.style);
@@ -2373,6 +2802,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     updateSegments();
     layout();
     render();
+  }
+  // The playback speed. It is clamped to the slider's ends and rounded to two places, so the value
+  // the readout shows is exactly the value in use.
+  function setSpeed(multiplier) {
+    const v = Number(multiplier);
+    const clamped = Math.max(SPEED.min, Math.min(SPEED.max, isFinite(v) ? v : state.speed));
+    state.speed = Math.round(clamped * 100) / 100;
+    updateSegments();
+    return state.speed;
   }
   function setAutoAdvance(on) {
     state.autoAdvance = !!on;
@@ -2434,19 +2872,31 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       timing: Object.assign({}, timing()), total: sequenceDuration(), remaining,
     };
   }
-  // ---------------------------------------------------------------- the sequence range (revision 8)
-  // The range is stated in values of n: from 1 to 100 is every step that arrives at 2..100. It is
-  // clamped to what the page carries and to from < to, and it scopes three things — which pairs a
-  // run may play, how long the run is, and what the progress bar's scale spans.
+  // ---------------------------------------------------------------- the range (revision 9: the spine)
+  // The range is stated in the values of n it steps *into*: 17 to 17 is the one step 16 -> 17, and 2
+  // to 324 is the whole corpus. It is clamped to what the page carries and to from <= to, and it
+  // scopes four things — which pairs a run may play, how long the run is, what the progress bar's
+  // scale spans, and which step the stage is on when the current one falls outside it.
   function setRange(from, to) {
     let lo = Math.round(Number(from));
     let hi = Math.round(Number(to));
     if (!isFinite(lo)) lo = state.range.from;
     if (!isFinite(hi)) hi = state.range.to;
-    lo = Math.max(RANGE_MIN, Math.min(RANGE_MAX - 1, lo));
-    hi = Math.max(lo + 1, Math.min(RANGE_MAX, hi));
+    lo = Math.max(RANGE_MIN, Math.min(RANGE_MAX, lo));
+    hi = Math.max(lo, Math.min(RANGE_MAX, hi));
+    const collapsed = lo === hi;
+    // A one-step range names a step the page actually carries: the demo build has 25 of the 323, so
+    // a chip for 272 collapses onto the nearest step it has rather than pointing at nothing.
+    if (collapsed) lo = hi = PAIRS[pairForStepN(lo)].n + 1;
     state.range.from = lo;
     state.range.to = hi;
+    // A one-step range is not a continuous run: the three timing boxes govern again.
+    if (collapsed && state.continuous.on) { pause(); state.continuous.on = false; }
+    const b = rangeBounds();
+    if (collapsed || state.pair < b.first || state.pair > b.last) {
+      if (!state.continuous.on) pause();
+      select(collapsed ? pairForStepN(lo) : b.first);
+    }
     syncScale();
     updateSegments();
     render();
@@ -2481,6 +2931,28 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     select(rangeBounds().first);
     return playAll();
   }
+  // Revision 9: one transport button for one view. The range is the span, so play runs whatever the
+  // range is — one step on the controls' own beat, or the whole range on the sequence's — and pause
+  // stops it where it stands. A range run that has reached its end starts again from the top.
+  function transport() {
+    if (state.playing) { pause(); return; }
+    // An open-ended run is resumed where it stands, never restarted and never scoped to a range.
+    if (state.optimizing && opt !== null) { play(); return; }
+    const b = rangeBounds();
+    if (b.last > b.first) {
+      if (!state.continuous.on || (state.pair >= b.last && state.t >= duration())) { playRange(); return; }
+    }
+    play();
+  }
+  // Revision 9: the range is the only span, so the tabs are gone from the page. These stay on the
+  // API as no-ops for anything that still calls them.
+  function setTab() { return 'single'; }
+  // Redraw the gap bar against whatever is on the stage right now, whether or not it is moving.
+  function refreshGap() {
+    markGapBar();
+    render();
+    return Object.assign({}, gapbarOut);
+  }
   // The pair that starts at n, or the nearest one this page carries.
   function goTo(n) {
     const want = Math.round(Number(n));
@@ -2496,15 +2968,25 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
 
   window.atlasTransitions = {
-    // Revision 8: the workbench's two tabs, and the single-step tab's chooser for n.
-    setTab, tab: () => state.tab,
+    // Revision 9: the tabs are gone; these are no-ops kept so nothing that called them breaks.
+    setTab, tab: () => 'single',
+    // The chooser for n, which is the range collapsed onto one value.
     setStepN, stepN,
-    // Revision 8: the sequence tab's range, and the run that plays it end to end.
-    setRange, range: rangeState, playRange,
-    // Revision 8, feature 4: what the gap bar is showing this frame.
-    gapBar: () => Object.assign({}, gapbarOut),
+    // The range — the single spine — and the run that plays it end to end.
+    setRange, range: rangeState, playRange, transport,
+    // Revision 8, feature 4: what the gap bar is showing. Revision 9: and the call that redraws it
+    // on demand, the bar having stopped following every frame of the motion.
+    gapBar: () => Object.assign({}, gapbarOut), refreshGap,
     seek, duration, play, pause, select, setTiming,
     setColorRule, setPhase, setStyle, setOverlay, setCapture, setAutoAdvance, setDesaturate, setSnap, setBlind, setBlindInflate,
+    // Revision 9: how fast the clock runs while playing. Playback only: seek(t) is unchanged.
+    setSpeed, speed: () => state.speed,
+    // Revision 9: what an open-ended run starts from, the run itself, and what it has reached.
+    setInitial, initial: () => state.initial, initials: () => INITIALS.slice(),
+    optimize, optimizeStep, optimizeState,
+    // Revision 9: the hand. `pickAt` takes world coordinates, which is what the drag handlers turn
+    // client coordinates into, so a test can drive a drag without a mouse.
+    pickAt, grab, dragTo, release, hand,
     // Revision 7, feature 2: the annealing dial.
     setAnneal, anneal: annealState,
     sequenceDuration, seekSequence, physics,
@@ -2523,70 +3005,102 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     identities: () => ({ from: FRAMES[String(PAIRS[state.pair].n)].ident.slice(), to: FRAMES[String(PAIRS[state.pair].n + 1)].ident.slice() }),
     newSquare: () => ({ index: PAIRS[state.pair].new, identity: PAIRS[state.pair].n + 1, rule: PAIRS[state.pair].new_rule, tied: PAIRS[state.pair].new_tied }),
     state: () => ({
-      tab: state.tab,
+      tab: 'single',
       pair: state.pair, n: PAIRS[state.pair].n, t: state.t, duration: duration(), playing: state.playing,
       rule: state.rule, phase: state.phase, style: state.style, links: state.links, capture: state.capture, timing: Object.assign({}, state.timing),
       desaturate: state.desaturate, snap: state.snap, blind: state.blind, blindInflate: BLIND.inflate, mode: simMode(),
-      anneal: state.anneal,
+      anneal: state.anneal, speed: state.speed,
+      initial: state.initial, optimizing: state.optimizing,
       shownN: state.liveN,
     }),
   };
 
   // ---------------------------------------------------------------- wiring
-  // The tabs: click, and the arrow keys inside the tablist, which is where a keyboard user expects
-  // them. The tablist's own handler stops the event before the page's left/right (previous and next
-  // pair) sees it, so a focused tab moves between tabs rather than between pairs.
-  for (const name of TABS) tabButton[name].addEventListener('click', () => { setTab(name); tabButton[name].focus(); });
-  tabBar.addEventListener('keydown', (ev) => {
-    let want = null;
-    if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') want = TABS[(TABS.indexOf(state.tab) + 1) % TABS.length];
-    else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') want = TABS[(TABS.indexOf(state.tab) + TABS.length - 1) % TABS.length];
-    else if (ev.key === 'Home') want = TABS[0];
-    else if (ev.key === 'End') want = TABS[TABS.length - 1];
-    if (want === null) return;
-    ev.preventDefault();
-    ev.stopPropagation();
-    setTab(want);
-    tabButton[want].focus();
-  });
-  document.getElementById('prev').addEventListener('click', () => { pause(); select(state.pair - 1); });
-  document.getElementById('next').addEventListener('click', () => { pause(); select(state.pair + 1); });
-  pairSelect.addEventListener('change', () => { pause(); select(Number(pairSelect.value)); });
-  playButton.addEventListener('click', () => (state.playing ? pause() : play()));
+  // Previous and next move the step the stage is on. Where the range is one step they carry it with
+  // them, so the pair and the range never disagree; inside a wider range they stay inside it.
+  function nudgeStep(delta) {
+    if (state.range.from === state.range.to) { setStepN(stepN() + delta); return; }
+    const b = rangeBounds();
+    pause();
+    select(Math.max(b.first, Math.min(b.last, state.pair + delta)));
+  }
+  document.getElementById('prev').addEventListener('click', () => nudgeStep(-1));
+  document.getElementById('next').addEventListener('click', () => nudgeStep(1));
+  rangeAllButton.addEventListener('click', () => setRange(RANGE_MIN, RANGE_MAX));
+  document.getElementById('refresh-gap').addEventListener('click', () => refreshGap());
+  playButton.addEventListener('click', () => transport());
   scrub.addEventListener('input', () => { pause(); seek((Number(scrub.value) / 10000) * duration()); });
   document.querySelectorAll('#rule-seg button').forEach((b) => b.addEventListener('click', () => setColorRule(b.dataset.rule)));
   document.querySelectorAll('#phase-seg button').forEach((b) => b.addEventListener('click', () => setPhase(b.dataset.phase)));
   styleSelect.addEventListener('change', () => setStyle(styleSelect.value));
   document.getElementById('desat-toggle').addEventListener('change', (ev) => setDesaturate(ev.target.checked));
-  document.getElementById('snap-toggle').addEventListener('change', (ev) => setSnap(ev.target.checked));
   document.getElementById('blind-toggle').addEventListener('change', (ev) => setBlind(ev.target.checked));
   document.getElementById('blind-inflate').addEventListener('change', (ev) => setBlindInflate(ev.target.value));
   document.getElementById('anneal').addEventListener('input', (ev) => setAnneal(ev.target.value));
+  document.querySelectorAll('#initial-seg button').forEach((b) => b.addEventListener('click', () => setInitial(b.dataset.initial)));
+  optimizeButton.addEventListener('click', () => optimize(true));
+  document.getElementById('speed').addEventListener('input', (ev) => setSpeed(sliderToSpeed(Number(ev.target.value))));
   document.getElementById('links-toggle').addEventListener('change', (ev) => setOverlay(ev.target.checked));
-  document.getElementById('advance-toggle').addEventListener('change', (ev) => setAutoAdvance(ev.target.checked));
   document.getElementById('capture-toggle').addEventListener('change', (ev) => setCapture(ev.target.checked));
   ['dwell', 'move', 'settle'].forEach((key) => {
     document.getElementById('t-' + key).addEventListener('change', (ev) => { const o = {}; o[key] = ev.target.value; setTiming(o); });
   });
-  document.getElementById('play-all').addEventListener('click', () => playAll());
-  document.getElementById('stop-all').addEventListener('click', () => stopAll());
   document.getElementById('fullbeat-toggle').addEventListener('change', (ev) => setContinuous({ fullBeat: ev.target.checked }));
-  gotoInput.addEventListener('change', () => { gotoInput.value = String(goTo(gotoInput.value)); });
-  stepInput.addEventListener('change', () => { stepInput.value = String(setStepN(stepInput.value)); });
-  rangeFrom.addEventListener('change', () => setRange(rangeFrom.value, state.range.to));
+  // Typing in `from` alone drags `to` with it while the two are equal, so a one-step range stays one
+  // step rather than silently widening.
+  rangeFrom.addEventListener('change', () => {
+    const single = state.range.from === state.range.to;
+    setRange(rangeFrom.value, single ? rangeFrom.value : state.range.to);
+  });
   rangeTo.addEventListener('change', () => setRange(state.range.from, rangeTo.value));
-  playRangeButton.addEventListener('click', () => playRange());
+  // The hand. Client coordinates go through the world group's own matrix, so the y flip, the
+  // viewBox and the stage's CSS scale are all accounted for in one step. Pointer capture keeps the
+  // drag alive when the cursor leaves the square, or the stage.
+  const worldGroup = document.getElementById('world');
+  function worldPoint(ev) {
+    const m = worldGroup.getScreenCTM();
+    if (m === null) return null;
+    const inv = m.inverse();
+    const pt = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(inv);
+    return [pt.x, pt.y];
+  }
+  svg.addEventListener('pointerdown', (ev) => {
+    if (ev.button !== 0) return;
+    const w = worldPoint(ev);
+    if (w === null) return;
+    const i = pickAt(w[0], w[1]);
+    if (i < 0) return;
+    ev.preventDefault();
+    svg.setPointerCapture(ev.pointerId);
+    document.body.classList.add('dragging');
+    grab(i, w[0], w[1]);
+  });
+  svg.addEventListener('pointermove', (ev) => {
+    if (opt === null || opt.held < 0) return;
+    const w = worldPoint(ev);
+    if (w === null) return;
+    ev.preventDefault();
+    dragTo(w[0], w[1], ev.shiftKey);
+  });
+  const endDrag = (ev) => {
+    if (opt === null || opt.held < 0) return;
+    if (svg.hasPointerCapture(ev.pointerId)) svg.releasePointerCapture(ev.pointerId);
+    document.body.classList.remove('dragging');
+    release();
+  };
+  svg.addEventListener('pointerup', endDrag);
+  svg.addEventListener('pointercancel', endDrag);
+
   window.addEventListener('keydown', (ev) => {
     if (ev.target && (ev.target.tagName === 'INPUT' || ev.target.tagName === 'SELECT') && ev.key !== 'Escape') {
       if (ev.key === ' ' || ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') ev.target.blur(); else return;
     }
     switch (ev.key) {
-      case ' ': ev.preventDefault(); state.playing ? pause() : play(); break;
-      case 'ArrowLeft': ev.preventDefault(); pause(); select(state.pair - 1); break;
-      case 'ArrowRight': ev.preventDefault(); pause(); select(state.pair + 1); break;
+      case ' ': ev.preventDefault(); transport(); break;
+      case 'ArrowLeft': ev.preventDefault(); nudgeStep(-1); break;
+      case 'ArrowRight': ev.preventDefault(); nudgeStep(1); break;
       case 'Home': ev.preventDefault(); seek(0); break;
       case 'End': ev.preventDefault(); seek(duration()); break;
-      case 't': setTab(state.tab === 'single' ? 'sequence' : 'single'); break;
       case 'p': setStyle(STYLES[(STYLES.indexOf(state.style) + 1) % STYLES.length]); break;
       case 'k': setColorRule(state.rule === 'house' ? 'continuous' : 'house'); break;
       case 'm': setPhase(PHASES[(PHASES.indexOf(state.phase) + 1) % PHASES.length]); break;
@@ -2601,11 +3115,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   });
   window.addEventListener('resize', layout);
 
-  updateTabs();
-  // The workbench opens on the step into DEFAULT_STEP_N where the page carries that exact step; the
-  // 25-pair demo build does not carry 16 -> 17, and opens where it always did, on its first pair.
-  const openAt = PAIRS.findIndex((p) => p.n + 1 === DEFAULT_STEP_N);
-  select(openAt >= 0 ? openAt : 0);
+  // The workbench opens on the one-step range into DEFAULT_STEP_N where the page carries that exact
+  // step; the 25-pair demo build does not carry 16 -> 17, so its range clamps to the nearest step
+  // it has and it opens there.
+  setRange(DEFAULT_STEP_N, DEFAULT_STEP_N);
   layout();
   // The scale's figure width is measured from the drawn numerals, so it has to be taken again once
   // the faces are in; re-rendering afterwards is a no-op on everything but the suppression.

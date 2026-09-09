@@ -1,5 +1,10 @@
-"""The panel's stacked lines must sit on their own rows and end above the progress bar, and the
-bar's own scale must never collide with the n riding the fill's leading edge.
+"""Nothing on the stage explains the stage, and what is left sits on its own row.
+
+Revision 8 called this the legend check: three stacked lines under the Open group naming the
+scarlet convention, the active style and what a free or blind run was doing. Revision 9 removed all
+three, so this is now the check that they stayed removed — no instruction survives a capture — and
+that the rows that remain (the live gap readout) keep clear of each other, of the progress bar and
+of the panel's edge. The bar's own scale must still never collide with the n riding the fill.
 
     packing/.venv/bin/python3 check_legend.py [index.html]
 """
@@ -9,6 +14,22 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 HERE = Path(__file__).resolve().parent
+
+# The lines revision 9 removed, by id and by the wording each carried. A page that grows any of
+# them back fails here rather than in a still nobody looks at twice.
+GONE_IDS = ("legend-style", "legend-note", "pair-info")
+GONE_WORDS = (
+    "the arriving square is scarlet",
+    "style A, tween",
+    "style B, physics",
+    "style C, bodies",
+    "no snap:",
+    "blind run",
+    "style A interpolates",
+    "Tweens are illustrative",
+    "block-aware matching",
+    "Keys:",
+)
 
 
 def main() -> int:
@@ -21,52 +42,104 @@ def main() -> int:
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(700)
         index_of = {q["n"]: q["index"] for q in page.evaluate("atlasTransitions.pairs()")}
+        for ident in GONE_IDS:
+            if page.evaluate(f"document.getElementById({ident!r}) !== null"):
+                bad.append(f"the removed line #{ident} is back in the page")
+        if page.evaluate("document.querySelectorAll('.legend').length") != 0:
+            bad.append("the legend stack is back on the stage")
         page.evaluate("atlasTransitions.setCapture(true)")
         for n in (100, 110, 307):
             if n not in index_of:
                 continue
             for style in ("tween", "physics", "bodies"):
                 for mode in ("snap", "free", "blind"):
-                    # Both ends of the annealing dial: away from the default level the style line
-                    # carries the level too, and it still has to fit on its own row.
+                    # Both ends of the annealing dial, at rest and in the middle of the move: no
+                    # wording anywhere on the stage, and the rows that remain stay on their rows.
                     for level in (3, 10):
-                        page.evaluate(
-                            "([i, s, m, L]) => { const A = window.atlasTransitions; A.select(i); A.setStyle(s);"
-                            " A.setSnap(m !== 'free'); A.setBlind(m === 'blind'); A.setAnneal(L); A.seek(2.8); }",
-                            [index_of[n], style, mode, level],
-                        )
-                        r = page.evaluate(
-                            "() => { const s = document.getElementById('stage').getBoundingClientRect();"
-                            " const k = s.width / 1920;"
-                            " const box = (sel) => { const b = document.querySelector(sel).getBoundingClientRect();"
-                            "   return {top: (b.top - s.top) / k, bottom: (b.bottom - s.top) / k, right: (b.right - s.left) / k, text: document.querySelector(sel).textContent}; };"
-                            " return {a: box('.legend:not(.legend-style):not(.legend-note)'), b: box('#legend-style'), c: box('#legend-note'),"
-                            "  d: box('#gap-a'), e: box('#gap-b'),"
-                            "  spark: (document.getElementById('gap-spark').getBoundingClientRect().left - s.left) / k,"
-                            "  sparkShown: getComputedStyle(document.getElementById('gap-spark')).visibility !== 'hidden',"
-                            "  bar: (document.getElementById('progress').getBoundingClientRect().top - s.top) / k,"
-                            "  pn: (document.getElementById('p-n').getBoundingClientRect().top - s.top) / k,"
-                            "  right: (document.getElementById('facts').getBoundingClientRect().right - s.left) / k}; }"
-                        )
-                        label = f"n={n} {style}/{mode} anneal {level}"
-                        # The whole stack: three legend lines then the two live-gap rows.
-                        lines = [r["a"], r["b"], r["c"], r["d"], r["e"]]
-                        if r["sparkShown"] and r["d"]["right"] > r["spark"] - 6:
-                            bad.append(f"{label}: the gap line runs into the trace ({r['d']['right']:.0f} vs {r['spark']:.0f}): {r['d']['text']!r}")
-                        for ln in lines:
-                            if ln["text"] and ln["bottom"] > r["bar"] - 0.5:
-                                bad.append(f"{label}: a panel row reaches the progress bar ({ln['bottom']:.0f} vs {r['bar']:.0f}): {ln['text']!r}")
-                        for i in range(len(lines) - 1):
-                            if lines[i]["text"] and lines[i + 1]["text"] and lines[i]["bottom"] > lines[i + 1]["top"] + 0.5:
-                                bad.append(f"{label}: legend line {i} (bottom {lines[i]['bottom']:.0f}) overlaps line {i + 1} (top {lines[i + 1]['top']:.0f}): {lines[i]['text']!r}")
-                        for i, ln in enumerate(lines):
-                            if ln["text"] and ln["bottom"] > r["pn"] - 0.5:
-                                bad.append(f"{label}: legend line {i} reaches the progress bar ({ln['bottom']:.0f} vs {r['pn']:.0f}): {ln['text']!r}")
-                            if ln["text"] and ln["right"] > r["right"] + 0.5:
-                                bad.append(f"{label}: legend line {i} runs past the panel ({ln['right']:.0f} vs {r['right']:.0f})")
+                        for at in (2.0, 2.8):
+                            page.evaluate(
+                                "([i, s, m, L, t]) => { const A = window.atlasTransitions; A.select(i); A.setStyle(s);"
+                                " A.setSnap(m !== 'free'); A.setBlind(m === 'blind'); A.setAnneal(L); A.seek(t); }",
+                                [index_of[n], style, mode, level, at],
+                            )
+                            label = f"n={n} {style}/{mode} anneal {level} at {at}"
+                            # The stage's whole text, as a viewer would read it off a still.
+                            stage_text = page.evaluate(
+                                "() => document.getElementById('stage').innerText.replace(/\\s+/g, ' ')"
+                            )
+                            for word in GONE_WORDS:
+                                if word.lower() in stage_text.lower():
+                                    bad.append(f"{label}: the stage still says {word!r}")
+                            r = page.evaluate(
+                                "() => { const s = document.getElementById('stage').getBoundingClientRect();"
+                                " const k = s.width / 1920;"
+                                " const box = (sel) => { const b = document.querySelector(sel).getBoundingClientRect();"
+                                "   return {top: (b.top - s.top) / k, bottom: (b.bottom - s.top) / k, right: (b.right - s.left) / k, text: document.querySelector(sel).textContent}; };"
+                                " return {open: box('.open'), d: box('#gap-a'), e: box('#gap-b'),"
+                                "  bar: (document.getElementById('progress').getBoundingClientRect().top - s.top) / k,"
+                                "  pn: (document.getElementById('p-n').getBoundingClientRect().top - s.top) / k,"
+                                "  right: (document.getElementById('facts').getBoundingClientRect().right - s.left) / k}; }"
+                            )
+                            lines = [r["d"], r["e"]]
+                            if r["open"]["bottom"] > lines[0]["top"] + 0.5:
+                                bad.append(f"{label}: the Open group runs into the readout ({r['open']['bottom']:.0f} vs {lines[0]['top']:.0f})")
+                            for i in range(len(lines) - 1):
+                                if lines[i]["text"] and lines[i + 1]["text"] and lines[i]["bottom"] > lines[i + 1]["top"] + 0.5:
+                                    bad.append(f"{label}: readout row {i} (bottom {lines[i]['bottom']:.0f}) overlaps row {i + 1} (top {lines[i + 1]['top']:.0f})")
+                            for i, ln in enumerate(lines):
+                                if ln["text"] and ln["bottom"] > r["pn"] - 0.5:
+                                    bad.append(f"{label}: readout row {i} reaches the progress bar ({ln['bottom']:.0f} vs {r['pn']:.0f}): {ln['text']!r}")
+                                if ln["text"] and ln["bottom"] > r["bar"] - 0.5:
+                                    bad.append(f"{label}: readout row {i} reaches the bar's band ({ln['bottom']:.0f} vs {r['bar']:.0f})")
+                                if ln["text"] and ln["right"] > r["right"] + 0.5:
+                                    bad.append(f"{label}: readout row {i} runs past the panel ({ln['right']:.0f} vs {r['right']:.0f})")
+        # The two rows an open-ended run adds, at both n the demo carries and every start.
+        for n in (17, 100, 307):
+            if n not in index_of:
+                continue
+            for kind in ("grid", "random", "previous"):
+                page.evaluate(
+                    "([n, k]) => { const A = window.atlasTransitions; A.setStepN(n); A.setInitial(k);"
+                    "  if (k === 'previous') { A.optimize(true); A.pause(); } A.optimizeStep(1200); }",
+                    [n, kind],
+                )
+                label = f"optimize n={n} from {kind}"
+                stage_text = page.evaluate("() => document.getElementById('stage').innerText.replace(/\\s+/g, ' ')")
+                for word in GONE_WORDS:
+                    if word.lower() in stage_text.lower():
+                        bad.append(f"{label}: the stage still says {word!r}")
+                r = page.evaluate(
+                    "() => { const s = document.getElementById('stage').getBoundingClientRect();"
+                    " const k = s.width / 1920;"
+                    " const box = (sel) => { const b = document.querySelector(sel).getBoundingClientRect();"
+                    "   return {top: (b.top - s.top) / k, bottom: (b.bottom - s.top) / k, right: (b.right - s.left) / k, text: document.querySelector(sel).textContent}; };"
+                    " return {rows: ['#gap-a', '#gap-b', '#gap-c', '#gap-d'].map(box),"
+                    "  open: box('.open'),"
+                    "  bar: (document.getElementById('progress').getBoundingClientRect().top - s.top) / k,"
+                    "  right: (document.getElementById('facts').getBoundingClientRect().right - s.left) / k}; }"
+                )
+                rows = r["rows"]
+                if r["open"]["bottom"] > rows[0]["top"] + 0.5:
+                    bad.append(f"{label}: the Open group runs into the readout")
+                for i, ln in enumerate(rows):
+                    if not ln["text"]:
+                        continue
+                    if ln["bottom"] > r["bar"] - 0.5:
+                        bad.append(f"{label}: readout row {i} reaches the bar ({ln['bottom']:.0f}): {ln['text']!r}")
+                    if ln["right"] > r["right"] + 0.5:
+                        bad.append(f"{label}: readout row {i} runs past the panel ({ln['right']:.0f} vs {r['right']:.0f}): {ln['text']!r}")
+                    if i and rows[i - 1]["text"] and rows[i - 1]["bottom"] > ln["top"] + 0.5:
+                        bad.append(f"{label}: readout row {i - 1} overlaps row {i}")
+                if not rows[2]["text"] or not rows[3]["text"]:
+                    bad.append(f"{label}: the run reports nothing: {[q['text'] for q in rows]}")
+        page.evaluate("atlasTransitions.setInitial('previous'); atlasTransitions.setCapture(false)")
         # The progress bar's scale (revision 7): at every n the page carries, and at the ends of the
         # sequence, the riding n must not touch a scale numeral and the scale must stay on the stage.
-        page.evaluate("atlasTransitions.setAnneal(3); atlasTransitions.stopAll()")
+        # Revision 9 makes the scale span the range, so this is the corpus range: the shipped bar.
+        page.evaluate(
+            "atlasTransitions.setAnneal(3); atlasTransitions.stopAll();"
+            " atlasTransitions.setRange(atlasTransitions.range().min, atlasTransitions.range().max)"
+        )
         probe = (
             "() => { const s = document.getElementById('stage').getBoundingClientRect();"
             " const k = s.width / 1920;"
@@ -111,9 +184,10 @@ def main() -> int:
             print(" -", b)
         return 1
     print(
-        "OK: three legend lines and the two live-gap rows, no overlap, clear of the trace, the progress bar "
-        "and the panel edge, over 54 combinations "
-        "of pair, style, mode and annealing level; "
+        "OK: no legend, style line, miss note, block-matching sentence or key hint anywhere on the "
+        "stage over 108 combinations of pair, style, mode, annealing level and instant, nor over an "
+        "open-ended run from each of the three starts; the live gap rows and the two an optimize run "
+        "adds clear of the Open group, of each other, of the progress bar and of the panel edge; "
         "the bar's scale keeps clear of the riding n and stays on the stage at every n probed"
     )
     return 0

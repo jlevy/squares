@@ -48,6 +48,9 @@ def main() -> int:
         n_max = page.evaluate("atlasTransitions.pairs().slice(-1)[0].n") + 1
 
         # ---- feature 1: the bar carries the whole scale, and it is a function of the clock alone.
+        # Revision 9 makes the scale span the chosen range, so the corpus range is what makes it the
+        # 1..324 bar this was written against; the page opens on a one-step range.
+        page.evaluate("atlasTransitions.setRange(atlasTransitions.range().min, atlasTransitions.range().max)")
         scale = page.evaluate(
             "() => Array.from(document.querySelectorAll('#p-scale .p-num')).map(e => ({"
             "  v: Number(e.textContent), left: parseFloat(e.style.left)}))"
@@ -205,19 +208,19 @@ def main() -> int:
             """([i]) => {
               const A = window.atlasTransitions;
               A.select(i); A.setStyle('bodies'); A.setSnap(true); A.seek(1.7);
-              const pts = document.getElementById('gap-trace').getAttribute('points');
               const t0 = performance.now();
               for (let k = 0; k < 200; k++) A.seek(1.2 + (k % 100) * 0.01);
               const per = (performance.now() - t0) / 200;
-              const same = document.getElementById('gap-trace').getAttribute('points') === pts;
-              return {per, same, points: pts.split(' ').length,
-                      head: document.getElementById('gap-head').getAttribute('cx')};
+              return {per, spark: document.getElementById('gap-spark') !== null,
+                      a: document.getElementById('gap-a').textContent,
+                      b: document.getElementById('gap-b').textContent};
             }""",
             [index_of[n]],
         )
-        check(cost["same"], "the trace is rebuilt while only the clock moves")
-        check(cost["points"] == 65, f"the trace has {cost['points']} samples")
-        print(f"  a whole frame at n={n} under style C, trace included: {cost['per']:.2f} ms")
+        # Revision 9 removed the per-frame sparkline: the motion is already visible in the packing.
+        check(not cost["spark"], "the per-frame sparkline is back")
+        check(cost["a"] and cost["b"], "the two live gap rows went empty")
+        print(f"  a whole frame at n={n} under style C: {cost['per']:.2f} ms")
         browser.close()
 
     if failures:

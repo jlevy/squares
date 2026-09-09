@@ -104,7 +104,7 @@ def main() -> int:
             page.evaluate(f"{api}.seek(1.7)")
             tween_fresh = page.evaluate(svg)
 
-            # The p key cycles tween -> physics -> bodies -> tween; the select and the legend follow.
+            # The p key cycles tween -> physics -> bodies -> tween; the select follows.
             for expected in ("physics", "bodies", "tween"):
                 page.keyboard.press("p")
                 check(page.evaluate(f"{api}.state().style") == expected, f"the p key did not reach {expected}")
@@ -112,8 +112,9 @@ def main() -> int:
                 page.evaluate(f"{api}.setStyle('{style}')")
                 check(page.evaluate(f"{api}.state().style") == style, f"setStyle('{style}') did not take")
                 check(page.evaluate("document.getElementById('style-select').value") == style, f"the select does not show {style}")
-                legend = page.evaluate("document.getElementById('legend-style').textContent")
-                check(legend.startswith(f"style {letter}"), f"legend line does not name style {letter}: {legend!r}")
+                # Revision 9 removed the legend line that named the style; the select is the one
+                # place the page says which style is on, and `state()` is the one place the API does.
+                check(page.evaluate(f"{api}.state().style") == style, f"state() does not report style {letter}")
 
             for style in ("physics", "bodies"):
                 page.evaluate(f"{api}.setStyle('{style}')")

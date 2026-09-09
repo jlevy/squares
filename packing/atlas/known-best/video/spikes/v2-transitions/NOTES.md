@@ -1593,6 +1593,350 @@ visible, and all read as images:
   grey out during a run, but a reader who has just set `move` to 3 s may expect the
   estimate to follow it.
 
+## Revision 9: one view, a solver playground
+
+The owner, after the revision-8 workbench: “let’s combine this all into a single tab, as
+I think it’s basically the same thing”; “don’t put help text in the main square … It
+should be self-evident”; and, on the run itself, “You should be able to snap to any
+particular one and then set the initial conditions from a chooser, which could be
+random, the previous number, or a simple ordered fill from the bottom.
+And then, when you click optimize, it would jiggle or optimize as needed.
+Based on which settings you’ve selected, and it would keep doing this until you hit
+pause again.”
+
+Landed on 2026-09-08 in seven steps, each rebuilt and driven headless before the next
+was started. `transition-stats.json` and `build_candidate.py` are untouched
+(byte-identical record); everything here is a property of the page.
+`index.html` grew from 561,629 to 588,299 bytes and `index-all.html` / `workbench.html`
+from 2,917,284 to 2,943,954.
+
+### 1. One view, and the range as the spine
+
+The owner is right that the two tabs were one operation: stepping one *n* and running a
+range differ only in the span.
+So the tab bar, the two `role="tabpanel"` panels and the roving tabindex are gone, and
+the **range is the single spine**.
+
+- **`from` and `to` are values of *n* stepped into**, which is the unit the chooser and
+  the chips always used: 17 to 17 is the one step 16 → 17, and 2 to 324 is the whole
+  corpus. That is a change of meaning for `setRange`, which in revision 8 took the *n* a
+  step starts at (1 to 100 was the 99 steps arriving at 2..100). `setRange(1, 100)`
+  still gives 99 steps, because it clamps to 2..100 — a coincidence worth knowing about
+  rather than relying on.
+- **Setting them equal is the old Single step tab.** A one-step range turns continuous
+  play off, so the three timing boxes govern again; a wider range plays on the
+  sequence’s beat. The page opens on **17 to 17**, and a one-step range snaps to a step
+  the page actually carries, so a chip for 272 in the 25-pair demo collapses onto the
+  nearest step it has rather than pointing at nothing.
+- **The chips set both ends.** `whole corpus (2 → 324)` is the one click that widens it.
+- **One transport.** `transport()` plays whatever the range is: one step on the
+  controls’ beat, the range end to end on the sequence’s, resuming a paused range run
+  where it stands and restarting one that has reached its end.
+  The `Play the range`, `Play on from here` and `Stop` buttons are gone; `playRange`,
+  `playAll` and `stopAll` stay on the API.
+- **The bar’s scale spans `from - 1` through `to`**, so the corpus range is exactly the
+  shipped 1..324 bar and a one-step range is its own two numerals with the fill sweeping
+  the whole track. `check_revision7.py` and `check_legend.py` now set the corpus range
+  before reading the scale.
+- **Retired from the page, kept on the API**: `setTab` (a no-op returning `'single'`),
+  `tab()` (always `'single'`), `state().tab` (always `'single'`), `goTo` (the
+  jump-to-*n* box is gone), `setAutoAdvance` (a one-step range has nothing to advance
+  into, so the checkbox was noise), and the pair `<select>` (323 options duplicating the
+  *n* boxes).
+
+The run duration readout prices one step at the controls’ beat and a range at the
+sequence’s; the `step k of m` position readout is drawn only when the range spans more
+than one step.
+
+### 2. Nothing on the stage explains the stage
+
+Removed: the legend line naming the scarlet convention, the line naming the active
+style, the line narrating what a free or blind run was doing, the sentence under the
+stage narrating the block matching (`#pair-info`), and the keyboard-hint line.
+Kept: the numeral, the `n =` line, both side lines, the badges, the Open group with its
+question-mark badges, the gap bar and the live numeric readouts.
+`review/r9-capture-clean.png` is the proof — a capture frame at the loudest settings
+(style C, no snap, annealing 10, mid motion) carrying the picture and its facts and not
+one instruction.
+
+Where the knowledge went, rather than being deleted:
+
+- **The scarlet convention** — the arriving square is tinted scarlet as it appears and
+  settles to its own colour — is revision 5, item 4, and the constants `TINT`,
+  `MARK_FADE`, `MARK_WIDE` and `MARK_THIN` in the template.
+- **What each style is** — A tween, B per-square physics, C rigid blocks shaken — is the
+  “Styles B and C” section above, and the Style select still names them (`A · tween`,
+  `B · physics`, `C · bodies`).
+- **What a free or blind run reached** is `physics(index, style, mode).miss` on the API
+  and the measured tables in revisions 6 and 7. The two live readout rows carry the same
+  numbers frame by frame, which is what made the sentence redundant.
+- **The block matching’s statistics** — how many blocks carry how many moving squares,
+  the residual, which square is new and by what rule, the arrival overlaps — are
+  `blocks()`, `blockOf()`, `newSquare()` and `pairs()` on the API, the record itself,
+  and the revision-5 tables.
+  The `kind-tag` at the top left of the stage still names the pair and its headline
+  statistics, and it is chrome: capture preview hides it.
+- **The keys** are unchanged and listed here: space play/pause, left/right step,
+  home/end, `p` style, `k` colour rule, `m` motion, `d` desaturate, `s` snap, `b` blind,
+  `a` play all, `l` correspondence, `c` capture preview.
+  `t` is gone with the tabs.
+
+`check_legend.py` was rewritten around this: it was the check that three legend lines
+fitted, and it is now the check that they, and their wording, are gone — over 108
+combinations of pair, style, mode, annealing level and instant, plus an open-ended run
+from each of the three starts.
+
+### 3. Transport glyphs
+
+The play control is one button carrying two inline SVG glyphs, a right-pointing triangle
+and two vertical bars, swapped by a class (`.transport.is-playing`) rather than by
+rewriting the button’s contents; both are `fill: currentColor`, so they take the
+button’s ink in either state.
+The button has no text, so its accessible name is set from the script beside the class.
+Previous and next are **&minus;** and **+**: they were solid triangles, which on a
+transport row read as play.
+Both carry an `aria-label`; every keyboard binding is unchanged.
+
+### 4. The gap bar stops animating
+
+The owner’s reason: the motion is already visible in the packing, so a second animated
+readout of it is noise.
+The hand now redraws only when the picture is not moving — through the dwell and from
+the instant the settle ends — at a step boundary, whenever a setting that changes the
+answer is touched (style, phase, colour, desaturation, snap, blind, inflation,
+annealing, pause, seek, a drop), and on demand: `refreshGap()` on the API and an
+`update gap bar` button.
+The per-frame sparkline (`#gap-spark`, `#gap-trace`, `#gap-head`, `ensureTrace`) is gone
+entirely, and with it the `sceneU` clock that only the trace’s head rode.
+The bar’s static content is untouched: the proved lower bound, the record tick, the
+shaded open span, the excess and the green check.
+
+Measured, not asserted: over a 2.5 s move at n = 101 under style C with the snap off,
+sampled every 60 ms, the hand takes **one** position across 34 mid-move samples while
+the live readout below it takes 28 distinct values; the hand catches up at the settle.
+`check_workbench.py` drives that.
+
+### 5. Speed, 0.05x to 2x
+
+`setSpeed(multiplier)` and `speed()`, a logarithmic slider
+(`SPEED = {min: 0.05, max: 2}`) so the slow end has as much travel as the fast one, with
+the multiplier printed beside it to two places — the value shown is the value in use,
+because the setter rounds to two places.
+It multiplies the wall-clock delta the animation clock is advanced by, and the simulated
+seconds an open-ended run covers per frame, and nothing else: `seek(t)` is still a pure
+function of its argument, so every instant renders identically and every capture is
+unaffected. Measured: 1.0 s of wall clock advances the clock 0.992 s at 1x, 0.250 s at
+0.25x and 1.986 s at 2x.
+
+### 6. Initial conditions, and Optimize
+
+`setInitial('previous' | 'random' | 'grid')` and `initial()`, as a three-way segmented
+control:
+
+- **previous packing** (the default) — the retained packing of *n* − 1 with the new
+  square added. This *is* the timeline’s own start, so choosing it puts the step
+  animation back on the stage.
+  With the blind box off it keeps the record’s poses as spring targets and the walls at
+  the record’s side; with blind on it is revision 6’s blind start (the packing centred
+  in a box inflated by `BLIND.inflate`, the new square dropped upright at
+  `emptiestSpot`) and the walls close.
+- **random** — *n* squares at centres drawn uniformly from the page’s own LCG, seeded by
+  *n* and the kind, inset half a diagonal from the walls so a square at any angle starts
+  inside, and angles uniform on 0..90°, in a box `OPT.randomInflate = 1.25` times the
+  record. Starting overlaps are expected and are what the run has to clear.
+- **ordered fill from the bottom** — *n* squares axis-aligned in rows from the
+  bottom-left, the trivial grid, in the grid’s own box of side `ceil(sqrt(n))`.
+
+Choosing random or grid puts the arrangement on the stage at once, paused, because
+neither has anything to do with the step animation; **Optimize** is what sets it going,
+from whichever of the three is chosen.
+
+**Optimize is an open-ended run.** It is a separate stepper (`optAdvance`), not a
+generalisation of `simulate`, and the reason is deliberate: `simulate` is a closed
+precompute whose output is cached, keyed, and byte-compared by four checkers, and
+opening it up to continuation would have put every one of those measurements at risk for
+no gain. The physics is the same physics — the same `PHYS` constants, the same
+separating-axis push-apart at the incident corner, the same wall springs, the same
+seeded jiggle — with one difference in the clock: the optimizer’s time unit is **one
+second of simulated time** where `simulate`’s is one move, so `PHYS`’s per-move
+constants read directly as per-second ones.
+`optimizeAdvance(dt)` takes `round(dt x speed x 120)` fixed steps a frame, capped by an
+EMA of the measured cost against `OPT.budgetMs = 9`, and state advances rather than
+being re-read from a cache.
+
+- **Bodies are one per square, always.** A block is a fact about one step’s
+  correspondence, not about an arrangement being shaken open-endedly, and the random and
+  grid starts have none.
+  What the style select does reach is the shake: style C’s jiggle is twice style B’s, as
+  in the step animation.
+- **Springs iff there is a target**: the previous packing with blind off.
+  Otherwise the walls close while the packing is clean (`pen <= OPT.squeezeTol = 0.004`,
+  at `OPT.squeezeRate` 3% of the side a second) and ease back out while it is jammed
+  (`pen > OPT.jamTol = 0.06`, at `OPT.relaxRate`), which is the inflate-and-contract
+  cycle revision 7’s annealing survey said the side actually responds to.
+  Revision 6’s blind run gated on 0.08 and its packings sat at 0.08 for exactly the
+  reason a squeeze allowed up to a tolerance will use all of it; gating at 0.004 puts
+  the equilibrium at a few thousandths instead.
+- **The shake anneals to a floor** (`OPT.floor = 0.15`, `OPT.tau = 2 s`) rather than to
+  nothing: the run never ends, so it must not go dead either.
+- **It reports continuously**, on two rows of the panel: the start, the elapsed
+  simulated time and the step count on one; the smallest box the run has held the
+  squares in, **the deepest overlap that box carried**, and the record on the other.
+  The overlap is printed beside the box on purpose.
+  With soft contacts and a shake that never dies there is no instant at which the
+  overlap is exactly nothing, so a box below the record is not a record and the two
+  numbers together say so — at n = 100 the grid start reaches a box of 9.98 with an
+  overlap of 0.005, and 0.005 across a row of ten squares is 0.045, more than the 0.018
+  the box appears to have gained.
+- **Play resumes, pause stops it where it stands.** Seeking is how the timeline is come
+  back to, and changing *n* ends the run.
+
+**The snap checkbox is gone from the page**, replaced by this: an open-ended run has no
+target to snap to, and the honest readout is the live gap.
+`setSnap` stays on the API and still governs the step animation, which is where a snap
+means anything.
+
+What it achieves, from `measure_optimize.py` (the tool, not a one-off), on the pinned
+headless shell:
+
+| n | start | steps/s at 2x | ms/step | start side | smallest box after 2400 steps | overlap there | record | excess |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 17 | previous | 241 | 0.003 | 4.676 | none clean | 0.097 | 4.676 | — |
+| 17 | random | 240 | 0.009 | 5.550 | 4.987 | 0.006 | 4.676 | +6.7% |
+| 17 | grid | 239 | 0.023 | 5.000 | 4.990 | 0.005 | 4.676 | +6.7% |
+| 100 | previous | 241 | 0.107 | 10.000 | 10.005 | 0.003 | 10.000 | +0.05% |
+| 100 | random | 240 | 0.062 | 12.242 | 11.869 | 0.005 | 10.000 | +18.7% |
+| 100 | grid | 240 | 0.047 | 10.000 | 9.984 | 0.005 | 10.000 | −0.16% |
+
+Two figures, because they answer different questions.
+**Throughput** is 120 fixed steps per simulated second times the speed multiplier — 240
+a second at 2x at both n = 17 and n = 100, and the frame budget never binds at 2x (0.107
+ms a step at n = 100 leaves room for 84 steps a frame against the 4 the clock asks for).
+**Progress** is deterministic in the step count and the same on any host.
+The answer to “does it get anywhere” is: it closes a grid or random start by six or
+seven per cent at n = 17 and stalls seven per cent above the record, which is the same
+wall revision 6’s blind runs hit and for the same reason — the objective is nearly flat
+away from the two or three squares that set the extremes.
+n = 17 from the previous packing never has a clean moment at all: at annealing 3 the
+record packing of 17 is not a fixed point of this physics, and it sits at a 0.097
+overlap.
+
+### 7. The hand
+
+Press picks the topmost square under the cursor (drawing order is birth order, so the
+last match is the one on top), drag moves it, shift turns it about its own centre,
+release drops it. Client coordinates go through `#world`’s own screen matrix, so the y
+flip, the viewBox and the stage’s CSS scale are all accounted for in one step; pointer
+capture keeps a drag alive when the cursor leaves the square or the stage.
+
+- **Pinned while held**: the run writes the cursor’s pose into the square every step,
+  zeroes its velocity and gives it no force at all, so its neighbours are pushed aside
+  by it rather than the other way round.
+  Measured: with a square held 0.7 units into its neighbour at n = 17 from the grid
+  start, 300 steps later the held square is exactly where the cursor left it and the
+  neighbour is not where it was.
+- **A drag needs a live simulation to push anything**, so grabbing a square while the
+  timeline is playing or paused hands the picture to an open-ended run seeded from the
+  poses on the stage — no jump, and if it was playing it keeps playing.
+- **The readout follows at once**: `dragTo` re-measures and re-renders, so a square
+  dragged out of the box takes the required side with it (5.000 to 8.000 in the check).
+  The view is sized on the union of the walls and the squares, so a square held outside
+  the box stays on the stage instead of vanishing off the edge of it.
+- `pickAt(x, y)`, `grab(index, x, y)`, `dragTo(x, y, rotating)`, `release()` and
+  `hand()` are on the API in world coordinates, which is what the pointer handlers turn
+  client coordinates into — so a test drives a drag without a mouse.
+
+**The determinism caveat.** An un-dragged run is deterministic in its step count: the
+start is a seeded arrangement, the jiggle draws from the same LCG the cached simulator
+uses, the step is fixed, and `optimizeStep(k)` reaches the same state every time.
+It is *not* deterministic in wall time — how many steps a second buys depends on the
+frame budget — and a **dragged** run is not reproducible from the seed at all, because
+the owner’s hand is an input the seed does not carry.
+So a touched run is marked `hand-edited` on the panel, beside the clock and the step
+count, and the mark stays for the life of the run: a screenshot of a dragged run cannot
+be mistaken for a clean one.
+`seek(t)` is untouched by any of this and remains a pure function of its argument.
+
+### Tests
+
+`check_workbench.py` was rewritten for the single view and now drives seven steps: the
+tab machinery gone with `setTab`/`tab` surviving as no-ops and every control in one
+panel; the chooser opening on n = 17 as the one-step range, nine chips each setting both
+ends, clamped both ways; the range widening to the corpus in one click, clamping,
+collapsing to one step, scoping the run and the scale; the gap bar as revision 8 left
+it; the bar holding still through the motion and catching up at the settle with the
+sparkline gone; the three initial conditions with the random one reproducible and the
+grid one the trivial grid, an open-ended run that accumulates steps, closes the walls
+and reports its box beside its overlap; and the hand, pinned, turning on shift, moving
+the readout, and regressing no key.
+
+`check_legend.py` was rewritten as described in step 2. `check_revision6.py`,
+`check_revision7.py` and `smoke_styles.py` needed the four references to elements this
+revision removed rewired to what replaced them — the miss to `physics(...).miss` and the
+live readout, the jump-to-*n* box to `state().n`, the style legend to `state().style`,
+the sparkline to a check that it stays gone — and the two that read the progress scale
+now set the corpus range first.
+All four pass. `measure_optimize.py` is the new measuring tool and is a tool, not a
+one-off.
+
+`test_candidate.py` reports one failure, the stale revision-2 needle
+`index.html lacks scarlet marks the new square`, which the revision-5 and revision-6
+notes already recorded; because it fires before the browser checks, those were driven
+directly and report only the other known-stale one, `mark stroke is none`. Three of its
+needles asserted the presence of exactly the prose the owner asked to remove
+(`class="legend"`, `id="legend-style"`, `Tweens are illustrative`) and now assert its
+removal instead; two assumptions the revision changed were updated with them — the
+pool’s size at 4 → 5 (the page opens on n = 17, so the pool already holds seventeen
+identities by then, and what 4 → 5 must show is identities 1..5 *visible*) and the
+progress bar’s span (set to the corpus range first).
+
+### Review stills
+
+All 1920 x 1080 from `capture_stills.py --r9`, four with the chrome showing because they
+are of the workbench and one in capture preview because that is its whole point; all
+read as images.
+
+| File | What to look at |
+| --- | --- |
+| `review/r9-single-view.png` | the one view on 17: one control set, no tabs, the range collapsed on 17 with the chips and `whole corpus (2 → 324)`, the play triangle and the &minus;/+ nudges, the speed slider at ×1.00, the start chooser and Optimize — and a stage carrying the numeral, the two side lines, the badges, the Open group, the gap bar green on the record, and no instruction anywhere |
+| `review/r9-initial-random.png` | the random start the moment it is chosen: 17 squares at seeded angles overlapping in a box a quarter larger than the record, the hand pinned off the right end of the bar at +18.7 per cent, and the panel saying `optimize · random · 0.0 s · 0 steps` over `not stepped yet` |
+| `review/r9-optimize-running.png` | the grid start 20 simulated seconds in: the walls closed onto the rows, two squares left standing proud at the top, and `smallest box 4.990 at overlap 0.005, the record 4.676` |
+| `review/r9-drag.png` | a square held well outside the container while the run closes the hole it left, the required side jumped to 6.701 (+43.3 per cent), and the run marked `hand-edited` |
+| `review/r9-capture-clean.png` | capture preview at the loudest settings, mid motion: the picture, the gap bar, the numeral, the side lines, the badges, the Open group and the two numeric rows. Nothing that explains |
+
+### What reads badly
+
+- **The optimizer duplicates the collision code.** `optCollide` and `optSupport` are
+  `simulate`’s separating-axis test written again for a live state rather than a
+  precomputed one. That was the deliberate trade — see step 6 — but it is two copies of
+  the most delicate arithmetic on the page, and a change to one has to be made to the
+  other. A shared `collide(ctx, i, j)` taking a context object is the fix, and it should
+  be made with the cached trajectories byte-compared either side.
+- **The walls can end up inside the packing.** The squeeze closes the box while the
+  deepest overlap is small, but the wall spring is capped, so squares poke a few
+  hundredths outside their own container and `review/r9-optimize-running.png` shows a
+  border cutting through a row.
+  Revision 6 noted the same thing about the blind run.
+  It reads as “this is not a packing”, which is true, but it is not deliberate.
+- **A one-step range gives the progress bar a two-numeral scale**, and the riding *n*
+  then prints the same value as the scale’s right end.
+  Honest, but it looks like a duplicate.
+- **Style C’s rigid blocks do not reach Optimize.** The style select changes the shake’s
+  amplitude and nothing else there.
+  For the previous-packing start the pair’s blocks do exist and could be bodies; for
+  random and grid they do not exist at all, and after a few seconds of shaking they
+  would not be the arrangement’s blocks anyway.
+- **`best` is a box, not a packing**, and the readout has to carry the overlap beside it
+  to say so. A better figure would be the smallest box the arrangement fits in after the
+  overlap is genuinely resolved, which needs a projection step the simulator does not
+  have.
+- **The shaded open span still reads a little like a progress fill**, as revision 8
+  recorded. The gap bar is otherwise unchanged.
+- **Nothing anneals the optimizer’s own schedule.** `OPT.squeezeRate`, `relaxRate`,
+  `squeezeTol`, `jamTol`, `tau` and `floor` are constants tuned by hand over about six
+  measured runs; there is no sweep tool for them the way
+  `experiment_block_matching.py --sweep` sweeps the matching.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

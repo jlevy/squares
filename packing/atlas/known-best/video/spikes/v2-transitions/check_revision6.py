@@ -80,7 +80,7 @@ def main() -> int:
                   A.select(i); A.setStyle(style); A.setBlind(false);
                   const snap = A.physics(i, style, 'snap'), free = A.physics(i, style, 'free');
                   A.setSnap(false); A.seek(A.duration());
-                  const note = document.getElementById('legend-note').textContent;
+                  const note = document.getElementById('gap-b').textContent;
                   const poses = Array.from(document.querySelectorAll('#squares g')).filter(g => g.style.display !== 'none')
                     .map(g => g.getAttribute('transform'));
                   A.setSnap(true); A.seek(A.duration());
@@ -93,7 +93,8 @@ def main() -> int:
             check(r["snapMiss"]["centre"] < 1e-9 and r["snapMiss"]["angle"] < 1e-9, f"{style}: the snapped run does not end on the record")
             check(r["freeMiss"]["centre"] > 0.01, f"{style}: the free run ends on the record exactly, which cannot be right")
             check(not r["same"], f"{style}: the snap makes no difference to the resting frame")
-            check(r["note"].startswith("no snap:"), f"{style}: the panel does not report the miss: {r['note']!r}")
+            # Revision 9 took the sentence off the stage; the live readout carries the same figure.
+            check(r["note"].startswith("side "), f"{style}: the panel does not report the side reached: {r['note']!r}")
         r = page.evaluate(
             "([i]) => { const A = window.atlasTransitions; A.select(i); A.setStyle('tween'); A.setSnap(false);"
             " A.seek(A.duration()); const free = Array.from(document.querySelectorAll('#squares g'))"
@@ -125,10 +126,14 @@ def main() -> int:
             check(m["excess"] < 25, f"blind {row['n']}: the blind run is {m['excess']:.1f}% worse, which looks broken")
         note = page.evaluate(
             "([i]) => { const A = window.atlasTransitions; A.select(i); A.setStyle('bodies'); A.setBlind(true);"
-            " A.seek(A.duration()); return document.getElementById('legend-note').textContent; }",
+            " A.seek(A.duration()); return {read: document.getElementById('gap-b').textContent,"
+            "   miss: A.physics(i, 'bodies', 'blind').miss}; }",
             [index_of[n]],
         )
-        check(note.startswith("blind run, no target: reached "), f"the blind panel line reads {note!r}")
+        # Revision 9 took the sentence off the stage; the two numbers it spelled out are the live
+        # readout's own, and the miss is on the API.
+        check(note["read"].startswith("side "), f"the blind readout reads {note['read']!r}")
+        check(note["miss"]["side"] > note["miss"]["record"], f"the blind run did not lose: {note['miss']}")
         det = page.evaluate(
             "([i]) => { const A = window.atlasTransitions; const a = A.physics(i, 'bodies', 'blind').miss.side;"
             " A.setBlindInflate(1.25); const b = A.physics(i, 'bodies', 'blind').miss.side;"
@@ -169,7 +174,8 @@ def main() -> int:
         check(page.evaluate("atlasTransitions.goTo(1e9)") == last, "goTo past the end does not clamp to the last pair")
         check(page.evaluate("atlasTransitions.goTo(-5)") == first, "goTo before the start does not clamp to the first pair")
         check(page.evaluate(f"atlasTransitions.goTo({n})") == n, f"goTo({n}) does not select it")
-        check(page.evaluate("document.getElementById('goto-n').value") == str(n), "the jump-to-n box does not follow the selection")
+        # Revision 9 dropped the jump-to-n box: one n spine, and `goTo` stays on the API.
+        check(page.evaluate("atlasTransitions.state().n") == n, "goTo did not move the stage to n")
         # A run really does cross pair boundaries, keeping the style and the settings.
         r = page.evaluate(
             """() => new Promise((resolve) => {

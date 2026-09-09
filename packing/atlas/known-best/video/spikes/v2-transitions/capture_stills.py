@@ -1,16 +1,20 @@
-"""The revision-6, revision-7 and revision-8 review stills, 1920x1080.
+"""The revision-6 to revision-9 review stills, 1920x1080.
 
     packing/.venv/bin/python3 capture_stills.py [name ...]
     packing/.venv/bin/python3 capture_stills.py --workbench
+    packing/.venv/bin/python3 capture_stills.py --r9
 
 A shot names the n it wants, the instant, and a setup snippet run after the pair is selected.
 Where the n is not in `index.html` the shot is taken from `index-all.html` instead.
 
 `--workbench` takes the revision-8 shots instead, from `workbench.html` and with the chrome
-*showing*: the point of those four is the workbench itself — the tabs, the two panels of controls
-and where they sit against the stage — so capture preview, which hides all of it, is exactly the
-wrong mode for them. Each is a single `WB_SHOTS` snippet driven through the API, so the frame is a
-pure function of the clock as everywhere else.
+*showing*: the point of those is the workbench itself — the controls and where they sit against the
+stage — so capture preview, which hides all of it, is exactly the wrong mode for them. Each is a
+single snippet driven through the API, so the frame is a pure function of what the snippet does.
+
+`--r9` takes the revision-9 shots the same way. Four of the five show the chrome, because they are
+of the workbench; the fifth is in capture preview on purpose — it is the proof that nothing
+explaining the page survives into a captured frame.
 """
 import sys
 from pathlib import Path
@@ -57,8 +61,61 @@ WB_SHOTS = {
 }
 
 
+# Revision 9. The single view, the three starts, the open-ended run and the hand. `capture` says
+# whether the shot is taken with the chrome hidden; only the last one is, and that is its whole point.
+R9_SHOTS = {
+    # The one view as it opens: one control set, the range collapsed on 17, the transport glyphs,
+    # the speed slider, the start chooser and Optimize, and a stage with no instructions on it.
+    "r9-single-view": (False, "A.setStepN(17); A.seek(A.duration());"),
+    # The random start, put on the stage the moment it is chosen and waiting to be optimised.
+    "r9-initial-random": (False, "A.setStepN(17); A.setInitial('random');"),
+    # The same run 20 simulated seconds in: the walls closed, and the panel reporting the clock, the
+    # step count, the smallest box it has held them in and the overlap in it.
+    "r9-optimize-running": (False, "A.setStepN(17); A.setInitial('grid'); A.optimizeStep(2400);"),
+    # A square held away from the packing while the run pushes its neighbours around: the readout
+    # jumps to the side the hand is asking for, and the run is marked hand-edited.
+    "r9-drag": (False, "A.setStepN(17); A.setInitial('grid'); A.optimizeStep(600);"
+                " A.grab(A.pickAt(0.5, 0.5), 0.5, 0.5); A.dragTo(6.2, 3.4, false); A.optimizeStep(120);"),
+    # Capture preview, mid motion, with everything that could narrate turned on: the picture and its
+    # facts, and not one line telling the viewer what to think.
+    "r9-capture-clean": (True, "A.setStepN(17); A.setStyle('bodies'); A.setSnap(false); A.setAnneal(10);"
+                         " A.setCapture(true); A.seek(2.2);"),
+}
+
+
+def shots(page, table, errors) -> None:
+    for name, (capture, setup) in table.items():
+        page.evaluate(
+            "([setup, capture]) => { const A = window.atlasTransitions;"
+            " A.stopAll(); A.setCapture(false); A.setStyle('tween'); A.setSnap(true); A.setBlind(false);"
+            " A.setDesaturate(true); A.setAnneal(3); A.setSpeed(1); A.setInitial('previous');"
+            " A.setRange(17, 17); A.seek(0); (new Function('A', setup))(A); }",
+            [setup, capture],
+        )
+        page.wait_for_timeout(250)
+        page.screenshot(path=str(REVIEW / f"{name}.png"))
+        print(f"{name}.png")
+
+
+def revision9() -> int:
+    """The revision-9 stills, from the workbench."""
+    REVIEW.mkdir(exist_ok=True)
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page(viewport={"width": 1920, "height": 1080})
+        errors: list[str] = []
+        page.on("console", lambda m: errors.append(f"console.{m.type}: {m.text}") if m.type == "error" else None)
+        page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+        page.goto(f"file://{HERE / 'workbench.html'}")
+        page.wait_for_timeout(900)
+        shots(page, R9_SHOTS, errors)
+        print("ERRORS:", errors or "none")
+        browser.close()
+    return 0
+
+
 def workbench() -> int:
-    """The revision-8 stills, with the tabs and the controls visible."""
+    """The revision-8 stills, with the controls visible."""
     REVIEW.mkdir(exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -84,6 +141,8 @@ def workbench() -> int:
 
 
 def main() -> int:
+    if "--r9" in sys.argv[1:]:
+        return revision9()
     if "--workbench" in sys.argv[1:]:
         return workbench()
     wanted = sys.argv[1:] or list(SHOTS)

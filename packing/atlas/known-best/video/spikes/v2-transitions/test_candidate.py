@@ -379,8 +379,11 @@ def staging_checks(page, api: str, index_of: dict[int, int], duration: float, ch
     total = "document.querySelectorAll('#squares g[data-identity]').length"
 
     # The pool: one element per identity, created once, never re-keyed, hidden beyond n + 1.
+    shown = ("Array.from(document.querySelectorAll('#squares g[data-identity]'))"
+             ".filter(g => g.style.display !== 'none').map(g => Number(g.dataset.identity)).sort((a, b) => a - b)")
     page.evaluate(f"{api}.select({index_of[4]})")
-    check(page.evaluate(total) == 5 and page.evaluate(visible) == 5, "pair 4->5 does not show exactly identities 1..5")
+    check(page.evaluate(shown) == [1, 2, 3, 4, 5], "pair 4->5 does not show exactly identities 1..5")
+    check(page.evaluate(total) >= 5, "pair 4->5 has no pool at all")
     page.evaluate("document.querySelector('#squares g[data-identity=\"5\"]').dataset.probe = 'born-at-5'")
     page.evaluate(f"{api}.select({index_of[100]})")
     check(page.evaluate(total) == 101 and page.evaluate(visible) == 101, "pair 100->101 does not show exactly identities 1..101")
@@ -481,7 +484,8 @@ def style_checks(page, api: str, index_of: dict, check) -> None:
     for style, letter in (("physics", "B"), ("bodies", "C")):
         page.evaluate(f"{api}.setStyle('{style}')")
         check(page.evaluate(f"{api}.state().style") == style, f"setStyle('{style}') did not take")
-        check(page.evaluate("document.getElementById('legend-style').textContent").startswith(f"style {letter}"), f"the legend line does not name style {letter}")
+        check(page.evaluate("document.getElementById('style-select').value") == style,
+              f"the style select does not follow setStyle('{style}') (style {letter})")
         page.evaluate(f"{api}.seek(1.7)")
         bad = page.evaluate(
             "Array.from(document.querySelectorAll('#squares g')).filter(g => g.style.display !== 'none')"
@@ -542,6 +546,9 @@ def browser_checks(page_path: Path, check) -> None:
             check(not errors, f"browser errors during the style checks: {errors}")
 
             # The progress bar is a pure function of the pair and the clock, on the 1..324 range.
+            # Revision 9 makes the bar span the chosen range, so the corpus range is what makes that
+            # the 1..324 bar; the page itself opens on a one-step range.
+            page.evaluate(f"{api}.setRange({api}.range().min, {api}.range().max)")
             page.evaluate(f"{api}.select({index_of[100]})")
             for t, expected in ((0.0, 99 / 323), (duration, 100 / 323), (1.4, (99 + 0.5) / 323)):
                 page.evaluate(f"{api}.seek({t})")
@@ -897,9 +904,15 @@ def main() -> int:
     check(html.lower().count("a3123f") == 1, f"scarlet appears {html.lower().count('a3123f')} times, expected once")
     check("--accent" not in html and "proved optimal'" not in html, "the old scarlet status line survives")
     # The panel's lines are built by script, so their classes appear as script strings.
-    for needle in ('id="progress"', 'id="mark"', "scarlet marks the new square", "class=\"legend\"", "badge-query", 'class="nline"', ".lower-note {", "'lower-note'", "'proved lower bound'",
-                   "data-identity", "data-phase=\"add-then-move\"", "data-phase=\"move-then-add\"", "Tweens are illustrative", 'id="style-select"', 'id="legend-style"'):
+    for needle in ('id="progress"', 'id="mark"', "scarlet marks the new square", "badge-query", 'class="nline"', ".lower-note {", "'lower-note'", "'proved lower bound'",
+                   "data-identity", "data-phase=\"add-then-move\"", "data-phase=\"move-then-add\"", 'id="style-select"'):
         check(needle in html, f"index.html lacks {needle}")
+    # Revision 9: nothing on the stage explains the stage. The three legend lines, the sentence that
+    # narrated the block matching and the keyboard hint are gone, and `check_legend.py` drives the
+    # rendered page to prove none of their wording comes back at any setting.
+    for gone in ('class="legend"', 'id="legend-style"', 'id="legend-note"', 'id="pair-info"',
+                 "Tweens are illustrative", "the arriving square is scarlet", "Keys: "):
+        check(gone not in html, f"index.html still carries the removed line {gone}")
     check('id="newsq"' not in html, "the pre-identity new-square element survives")
 
     # Revision 3: KaTeX_Main is embedded as the symbols face, after PT Serif in the serif stack,
