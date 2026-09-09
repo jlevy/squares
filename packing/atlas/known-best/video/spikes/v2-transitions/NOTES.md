@@ -1937,6 +1937,936 @@ read as images.
   measured runs; there is no sweep tool for them the way
   `experiment_block_matching.py --sweep` sweeps the matching.
 
+## Revision 11: colour by angle, one force law, a relationship graph, and growth
+
+The owner, in four instructions: “let’s just always color things in the different shades
+based on angle and see how that works, always, with square ones the first color and 45
+degree the second.
+and if they are fully adjacent then we can color by shade, as we do in
+our main atlas diagrams”; “there is the amount of overlap that’s allowed … and if they
+repel (if overlapped) or attract (if not but close) how much.
+also we should support the attraction/repulsion graph being customized”; “so it’s a
+force curve and a relationship graph, which could be general (all relate to all) or it
+could be specific (contact graph bias …)”; and “then we can have chart options to enable
+final snap to known solution or just bias toward a known contact graph”.
+
+Landed on 2026-09-08 in four steps, each rebuilt and driven headless before the next was
+started. `transition-stats.json` and `build_candidate.py` are untouched (byte-identical
+record); everything here is a property of the page.
+`index.html` grew from 602,982 to 660,580 bytes and `index-all.html` / `workbench.html`
+from 2,958,637 to 3,016,235.
+
+### 1. Colour is a function of the angle, shaded by contact
+
+One colouring, always on, no rule to choose.
+The `Colour` control is gone from the panel; `setColorRule` stays on the API and is a
+no-op returning `'angle'`, and `state().rule` is that constant.
+The `k` key binding went with the control.
+
+**Hue** is the palette slot of the square’s angle:
+
+- The angle is folded into a quarter turn, as `_square_orientation` in
+  `packing/src/sqpack/render/color.py` folds it.
+- A frame’s angles are grouped at `ANGLE_TOL = 0.5°` — the tolerance the page already
+  uses to say a packing has reached the record’s angles — and each class takes a
+  seam-safe mean representative, offsets folded into ±45° of the anchor before
+  averaging, exactly as `_orientation_representative` does.
+- A class within the tolerance of 0° takes **slot 0, teal `#1faa8e`**; within the
+  tolerance of 45°, **slot 1, citron `#c3c45f`**. The other eighteen slots partition the
+  quarter turn in five-degree bands, ascending, so slot 2 (`#aa5585`) starts the rest.
+
+**Shade** is the square’s full-side contact count, 0 to 4, indexing a five-shade family
+at `4 − contacts` — `_contact_shade` with `shades_per_hue = 5`. More contacts is darker.
+The 20 × 5 table in the page is not re-derived: it is the literal output of
+`square_fill_palette(hue_count=20, shades_per_hue=5)`, so the two pinned families keep
+their perceptual OkLCh ramps and the other eighteen their HSL ones.
+`test_candidate.py` re-imports `sqpack.render.color` and compares the table entry by
+entry.
+
+**The deliberate difference from the atlas.** The atlas assigns the unpinned hues by
+*descending angle-class size* (`HUE_ORDER_CONTRACT`), so the same physical angle takes
+different colours in different frames, and a square can change colour without moving.
+Here the slot is a function of the angle and of nothing else — not of the frame’s other
+classes, not of how many squares share the tilt.
+Ranking by angle instead of by size would not have fixed it: a rank still depends on
+what else the frame holds, and `measure_standardize.py --classes` measured a 24.3° class
+taking slot 2 in eight packings and slot 3 in a ninth.
+The five-degree bands are what make the answer for one class independent of the others.
+
+**Class counts on the retained frames**, from `atlasTransitions.colour()`:
+
+| n | angle classes | palette slots used | distinct fills drawn |
+| ---: | ---: | ---: | ---: |
+| 17 | 3 (0°, 39.81°, 53.38°) | 3 (0, 9, 12) | 5 |
+| 29 | 5 (0°, 17.51°, 64.94°, 65.69°, 69.20°) | 4 (0, 5, 14, 15) | 8 |
+| 100 | 1 (0°) | 1 (0) | 1 |
+| 272 | 17 | 9 | 18 |
+
+n = 100 is the trivial 10 × 10 grid: one orientation, every square with four full-side
+contacts, so it is one fill.
+That is not the grouping being too coarse — it is the packing being what it is, and the
+atlas paints it the same way.
+
+**The one hole, measured.** The slot is a step function with an edge every five degrees,
+and the tolerance for “the same tilt” is half a degree, so two classes the page itself
+calls the same angle can fall either side of an edge.
+Over ten retained frames there are 54 cross-frame agreements and exactly one
+disagreement: n = 29’s 64.939° class takes slot 14 and n = 110’s 65.130° class takes
+slot 15 — 0.19° apart, 0.06° from the band edge, two different hues for the same tilt.
+It is inherent to a discontinuous map with a non-zero match tolerance, not a regression
+to the old rule (`slot == slotForAngle(centre)` holds exactly everywhere).
+`check_workbench.py` encodes it: a disagreement is allowed only between neighbouring
+slots on either side of a band edge, capped at two occurrences, with the measured
+instance named.
+
+**Contacts are computed from the poses on the stage**, not read off the record, because
+the record has no answer for an arrangement the physics invented.
+Two squares share a whole side when their orientations agree within `ANGLE_TOL` and the
+offset between their centres, read in either one’s frame, is a unit along one axis and
+nothing across it; a wall contact is an axis-aligned square with a side on the boundary.
+The price is a tolerance: the atlas compares edge endpoints at 2e-6, which no live run
+will satisfy, and `CONTACT.gap` is 0.01 — a hundredth of a side, the scale a settled run
+of this physics sits at.
+Measured against the corpus, that reproduces the atlas’s own count on **97.4 per cent of
+the 52,650 squares of the 324 retained frames and never under-counts**; the 2.6 per cent
+are pairs within a hundredth of a side of touching that the atlas’s tolerance refuses.
+
+`colour()` reports the classes, their centres, their slots and every square’s contact
+count; `fillsFor(angles, contacts)` is the map as a pure function, testable with nothing
+on the stage.
+
+### 2. One force law
+
+The hard-coded contact stiffness, cap and damping are gone.
+What replaces them is one law, a function of the signed gap `d` along the separating
+axis the collision test already computes — negative is penetration of depth `p = −d`,
+zero is touching, positive is a gap:
+
+```
+d ≤ 0            f = repulsion × ( min(p, rigidity) + steep × max(0, p − rigidity) )
+0 < d < range    f = −attraction × 4u(1 − u),   u = d / range
+d ≥ range        f = 0
+```
+
+Positive pushes the pair apart, negative pulls it together, which is the sign the
+push-apart already used.
+A damping term, `PHYS.contactDamping = 20` against the closing speed, is added to it
+while the pair is penetrating, exactly as before.
+
+- **Continuous at zero**: the repulsion is `repulsion × min(0, …) = 0` at `p = 0` and
+  the attraction hump is `4u(1 − u) = 0` at `u = 0`, so the law meets itself at the
+  origin from both sides.
+- **Zero at the edge of the range**, again because `4u(1 − u) = 0` at `u = 1`.
+- **Attraction can never overcome repulsion at contact**, and this is structural rather
+  than tuned: the two pieces do not overlap.
+  For every `d ≤ 0` the force is the repulsion alone, so the net force at any
+  penetration is repulsive whatever the attraction is set to.
+  Two squares can be pulled up to touching and never through each other.
+
+**`steep` is derived, not a fifth parameter**:
+`steep = 8 × max(0, 1 − rigidity / 0.15)`. That is what lets the defaults be *exactly*
+the old law rather than approximately it.
+The old law was `PHYS.contact × min(p, PHYS.contactCap)` — linear to a cap and flat past
+it — so **rigidity 0.15 (the old cap) with repulsion 2500 (the old stiffness) gives
+steep 0 and reproduces it to the bit**. That is how the defaults were chosen: not by
+fitting, by identity.
+`check_revision6.py`, `check_revision7.py` and `smoke_styles.py` pass unchanged, and
+`check_revision7`’s “the default reproduces revision 6’s measurements exactly” still
+holds.
+
+| parameter | default | range | what it is |
+| --- | ---: | --- | --- |
+| rigidity | 0.15 | 0.002 – 0.4 | the penetration tolerated before the repulsion climbs steeply |
+| repulsion | 2500 | 200 – 8000 | the push per unit of tolerated penetration |
+| attraction | 0 | 0 – 400 | the pull when separated but close; zero is none |
+| range | 0 | 0 – 0.5 | the gap width the attraction acts over; zero beyond |
+
+Each has a setter and a getter (`setLaw`, `law()`), each is in the trajectory cache key,
+and each is rounded to its slider’s resolution so a law reached twice keys the same
+string both times. Presets: `rigid` (0.01, 4000, 0, 0), `soft` (0.35, 400, 0, 0),
+`sticky` (0.08, 2500, 120, 0.25).
+
+**The plot is live and its control points drag.** The panel draws force against the
+signed gap over the whole editable domain, −0.42 through +0.52, with the crossing marked
+in scarlet and the curve redrawn on every parameter change.
+Two handles *are* the four numbers: the **knee**’s position along the axis is the
+rigidity and its height the repulsion (its height is `repulsion × rigidity`, so moving
+it sideways at a fixed height is “the same push at a different depth”); the **pull**’s
+position is half the range and its depth the attraction.
+Dragging and the sliders write the same state through the same setter, so neither can
+get ahead of the other, and `dragLaw(which, gap,
+force)` drives a handle from a test with no pointer.
+The vertical axis is two half-scales — the push above the zero line on a ladder that
+keeps the current peak in the box, the pull below it on the attraction’s own fixed bound
+— because a rigid law’s push is two orders of magnitude above any pull and one scale
+would draw every pull as a flat line.
+The top of the push scale is printed, and it is **frozen for the length of a drag**: it
+follows the law’s own peak, and recomputing it mid-drag made the knee rubbery — dragging
+it past the shipped rigidity flattens the slope, which drops the peak, which drops the
+ladder rung, which moves the handle out from under the cursor.
+Measured before the fix: one drag of the knee up and to the left left the repulsion at
+209 where the same gesture now leaves it at 5,224.
+
+**What the readout gained.** A fifth live row,
+`deepest overlap 0.005 · 17 pairs pulling within
+0.25`, from the simulation’s own numbers: the optimizer’s for an open-ended run, the
+cached trajectory’s per-step arrays at the instant being drawn.
+Style A is an interpolation with no contacts, so under it the row is honestly empty.
+No overlap-resolution pass was added, so there is no pass count to report.
+
+**What the presets actually do** (`measure_law.py --laws`; grid start, blind, 2,400
+steps, which is 20 simulated seconds):
+
+| n | law | side reached | overlap | record | excess |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 17 | default | 4.990 | 0.0050 | 4.676 | +6.72% |
+| 17 | **rigid** | **4.756** | 0.0052 | 4.676 | **+1.71%** |
+| 17 | soft | 5.002 | 0.0088 | 4.676 | +6.99% |
+| 17 | **sticky** | **4.988** | 0.0048 | 4.676 | **+6.68%** |
+| 29 | default | 5.988 | 0.0047 | 5.934 | +0.91% |
+| 29 | **rigid** | **6.402** | 0.0044 | 5.934 | **+7.89%** |
+| 29 | soft | 6.001 | 0.0102 | 5.934 | +1.13% |
+| 29 | **sticky** | **5.986** | 0.0049 | 5.934 | +0.88% |
+
+The rigid law is the interesting one and it cuts both ways.
+At n = 17 it is the only setting that gets off the trivial grid at all —
+`review/r11-rigid.png` is a tilted seventeen at 4.756 against the grid’s 4.988 — and at
+n = 29 the same law jams at 6.402 where everything else sits under 6.00. A hard contact
+is a better search operator at one size and a worse one at another, on the same physics,
+with nothing else changed.
+
+**The hard end of the rigidity slider is unstable and the notes say so.** The timestep
+is fixed at 1/120 s. Below a knee of about a hundredth of a side the law is stiffer than
+the integrator holds: at rigidity 0.004 with repulsion 4000, n = 17 ends needing a side
+of 6.82 around a box of 5.34 with a 0.21 overlap — squares thrown out of the container.
+The slider still reaches there, because “the hardest setting is effectively rigid” was
+the request; the readout reports the overlap honestly, and the `rigid` preset stops at
+0.01, which is measured stable.
+
+### 3. The relationship graph
+
+Orthogonal to the law: the law is *what* the force is, the graph is *between whom*.
+
+- **Repulsion always applies to every pair.** No two squares may occupy the same space
+  whatever any graph says, so the mask is never consulted on the penetrating side of the
+  law.
+- **Attraction is masked by the graph.**
+
+`setRelationship('general' | 'groups' | 'contact')` and `relationship()`, with three
+graphs:
+
+- **general** — every pair attracts.
+  Today’s behaviour, and the default.
+- **groups** — one completely connected subgraph per block, taken from the page’s own
+  `blockOf()`, which already computes a grouping.
+  A square in no block is a group of one and attracts nobody, and so is the arriving
+  square, which no block of *n* carries.
+- **contact** — exactly the edges of a target graph.
+  The target is derived from the record: the contact graph of the retained packing of
+  the current *n*, read off the record’s own poses with the same full-side test the
+  colouring shades by, then relabelled into the run’s square order through the pair’s
+  correspondence (`map[i] → i`, and the arriving square to the last index).
+  `setTargetGraph(edges)` supplies a different one; `targetGraph()` reads the current
+  one back, and `relationship().edges` is its size.
+
+Target sizes, from the record: n = 17 → **4** edges, 26 → 26, 29 → **17**, 100 → 180,
+110 → 111, 272 → 322, 324 → 612. Settled on the retained frame itself the record should
+realise its own contact graph by construction, and over every n from 3 to 324 it does at
+**320 of 322** — n = 110 comes back 110 of 111 and n = 270 319 of 320, each one edge
+short.
+The reason is an asymmetry in the test, and it is worth naming: the offset between
+two centres is read *in the lower-indexed square’s frame*, and the target graph is
+stated in the record’s index order while the count is taken in the run’s, so relabelling
+can swap which square’s frame a borderline pair is judged in.
+Two frames in 322 have a pair close enough to the tolerance for that to matter.
+The fix is to accept the pair if either square’s frame passes; it is not made here
+because it would move the contact counts, and so the shades, under checks measured
+against this build.
+
+The mask is drawn on the stage through the **existing** correspondence-overlay control
+rather than a second one — `setOverlay(true)` or the `show correspondence` box — as
+dashed white lines on the pairs the attraction is actually reaching.
+Pairs the graph relates but that are nowhere near each other are not doing anything, and
+drawing them would say they were.
+A general relationship draws nothing, there being no mask to show.
+
+**The two chart options** are a pair of checkboxes beside the graph, and the notes have
+to be plain that they are different claims:
+
+- **snap to the known solution at the end** is revision 6’s `setSnap`, visible again now
+  that there is something to contrast it with.
+  It blends the physics onto the record’s poses over the last `PHYS.blend` of the move
+  and ends on them exactly.
+  **It ends on the record by construction and proves nothing about the physics.**
+- **bias toward the known contact graph** is the contact relationship.
+  It tells the settle which pairs should touch and leaves it to find the geometry;
+  nothing about the record’s coordinates enters the run.
+  Turning it on from a law with no attraction also applies the sticky preset’s pull,
+  because masking a force that is not there would do nothing — that is a convenience of
+  the control, not of the physics; `setRelationship('contact')` on the API changes the
+  graph and nothing else.
+  That convenience had a bug worth recording: `setLaw` runs `updateSegments`, which
+  writes the box’s checked state back from a relationship that has not been changed yet,
+  so re-reading `ev.target.checked` on the next line saw the box untick itself and
+  turned the bias straight off again.
+  A user’s first click brought the pull in and left the graph at general; the second
+  click, which reads as “off”, was what turned it on.
+  The wanted state is read once now, before anything is set, and `check_workbench.py`
+  drives the box with a real click rather than a synthetic event, which is what caught
+  it.
+
+**The evidence, and it is a negative one.** After 2,400 steps from the grid start under
+the sticky law (`measure_law.py --graphs`), counting how many of the target graph’s
+edges are full-side contacts at the end:
+
+| n | graph | contacts made | container side | record |
+| ---: | --- | ---: | ---: | ---: |
+| 17 | general | 2 of 4 | 4.988 | 4.676 |
+| 17 | groups | 2 of 4 | 4.991 | 4.676 |
+| 17 | **contact** | **1 of 4** | 4.989 | 4.676 |
+| 29 | general | 7 of 17 | 5.986 | 5.934 |
+| 29 | groups | 3 of 17 | 5.989 | 5.934 |
+| 29 | **contact** | **1 of 17** | 5.988 | 5.934 |
+
+**Biasing toward the contact graph does not realise it**, and it does worse than
+attracting everything.
+Two measured reasons, not guesses:
+
+1. **The pull cannot reach.** Reading the target pairs’ separating-axis gaps at the end
+   of a run, most of them are one to four units apart — n = 29’s pair (0, 3) ends at a
+   gap of 3.91 — and the attraction acts over a quarter of a side.
+   Raising the range to 2.0 (past the shipped bound, tried as an experiment) does not
+   help: the fraction goes 0/4 to 0/4 at n = 17 and 0/17 to 3/17 at n = 29, inside the
+   run-to-run spread.
+2. **A central pull does not align anything.** Where it *does* bring a pair together,
+   the pair touches corner-to-side.
+   n = 17’s target pair (0, 4) ends at a gap of −0.001 — in contact — with its two
+   orientations 1.93° apart, and a full-side contact needs them inside 0.5°. The law has
+   no torque term, so nothing rotates a pair into face-to-face registry.
+
+That is what the fraction is for, and it is worth having got a clear negative rather
+than a plausible-looking picture.
+n = 100 reads 180 of 180 under every relationship, and that is not the bias working: the
+grid start of 100 *is* the record, so its contact graph is realised before the run
+begins.
+
+### 4. Start small and grow, reset, pause
+
+**Growth** is a real method: the repository’s strategy catalogue lists billiard and
+inflation, citing Gensane and Ryckelynck, as a record-producing family, and the
+inflate-and-contract cycle the optimizer already ran is the contraction half of it.
+Every square in an open-ended run now carries the same size, a fraction of a unit side.
+
+- **starting size**, default **1.0** so nothing about the shipped page moves, adjustable
+  down to 0.3.
+- **grow** toggle, **growth rate** (per simulated second, 0.005 to 0.3, default 0.05),
+  and a **growth rule**: `constant` climbs whatever the arrangement is doing, `clean`
+  climbs only while the deepest overlap is inside `OPT.squeezeTol`, the same tolerance
+  the walls’ own squeeze is gated on.
+  Growth stops at one: a unit square is the goal, not a stage on the way to something
+  larger.
+- **The walls hold while the squares are growing.** Growth *is* the compaction, and the
+  first version let both run: measured, `clean` deadlocked at a size of 0.76 with the
+  walls taking every thousandth of slack the growth wanted.
+  The squeeze now resumes the moment the squares reach full size, which is exactly
+  inflate-then-contract.
+
+The readout’s fourth row becomes the growth report while growth is on, because “the
+smallest box” means something else when the squares are undersized:
+`size 0.62 growing · unit side 8.03 vs 4.68`. The figure the record can be compared with
+is the **unit side** — the tight box divided by the current size — and the size is
+printed beside it every time so the two are never separated.
+`growth()` reports `size`, `growing`, `stalled`, `done`, `side`, `sideAtSize`,
+`unitSide`, `record`, `penetration`, `clean`, `packing`, `suspect` and `excess`.
+
+**Reaching unit size with nothing overlapping is a genuine packing at that container**,
+and the page says so (`packing: true`). If it lands *below* a record it is not a find:
+`suspect` goes true and the readout adds `under the record: suspect an overlap`.
+
+What growth reaches (`measure_law.py --grow`; grid start, blind, size 0.3, rate 0.05,
+7,200 steps):
+
+| n | rule | size | tight box | unit side | record | overlap | packing | suspect |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| 17 | constant | 1.000 | 4.988 | 4.988 | 4.676 | 0.0051 | yes | no |
+| 17 | clean | 1.000 | 4.988 | 4.988 | 4.676 | 0.0053 | yes | no |
+| 29 | constant | 1.000 | 5.987 | 5.987 | 5.934 | 0.0053 | yes | no |
+| 29 | clean | 1.000 | 5.987 | 5.987 | 5.934 | 0.0055 | yes | no |
+
+So: at n = 17 growth from 0.3 reaches a full-size packing in 4.988 against the record’s
+4.676, 6.7 per cent worse — the same wall the ungrown grid start hits, and the same wall
+revision 6’s blind runs hit.
+Growth does not find anything the plain settle does not, at these sizes, from this
+start. It is a method the page now *has*, not a method that has paid here.
+
+**Reset** (`reset()`, and the `reset physics` button) puts every physics parameter back:
+the four law parameters, the relationship and its target, the annealing level, the blind
+box and its inflation, the snap, and every growth setting.
+It restarts the run from whatever is on the stage and does **not** touch *n*, the
+Pack-or-Sweep aspect, or which start is chosen.
+
+**Pause** already stopped an open-ended run where it stands and resumed cleanly —
+`transport()` resumes a live run rather than restarting it, and `check_workbench.py`
+drives that — and it still does with the law, the graph and growth in the loop, all
+three of which are read per step rather than captured at the start of a run.
+
+**The panel is grouped into six named boxes** and reads as one instrument: the mode tabs
+and the chooser for *n*; the transport with the speed, the start and Optimize; **force
+law** (the plot and its four sliders and three presets); **who attracts whom** (the
+graph and the two chart options); **start small and grow**; and then **the step
+animation**, **the shake** and **the view**. `layout()` now runs again when the faces
+land rather than only at load: the panel’s height is what the stage’s scale is computed
+from, and with six boxes the faces arriving changes how much the rows wrap — measured, a
+fresh load left the controls 45 px taller than the scale had allowed for and
+`overflow: hidden` clipped the bottom row until the window was resized.
+The controls cost 486 px of a 1080 px window, so the stage draws at 55 per cent.
+Nothing on the stage changed size: the type scale is still 28 / 34 / 44 / 96 px with
+nothing under 28.
+
+`state().mode` and `state().aspect`: revision 10 wrote `mode` into that object twice,
+once for the Pack-or-Sweep aspect and once for the simulation mode, and the later key
+silently won. `mode` is the simulation mode, as it has been since revision 6; the aspect
+is `aspect`, and `mode()` on the API.
+
+### Review stills
+
+All 1920 × 1080 from `capture_stills.py --r11`, all with the chrome showing because
+every one of them is about a control as much as about the picture.
+All read as images.
+
+| File | What to look at |
+| --- | --- |
+| `review/r11-angle-colour-n29.png` | the retained 29: five angle classes taking four palette families — teal for the upright squares, pink, blue-violet and gold for the three tilts — each shaded by its own contact count, and the same tilt the same colour throughout |
+| `review/r11-force-curve.png` | a law nothing like the default (rigidity 0.02, repulsion 5000, attraction 320, range 0.45): a steep wall left of zero, the scarlet crossing, a deep pull hump right of it, both handles on the curve, and the fifth readout row saying `21 pairs pulling within 0.45` |
+| `review/r11-rigid.png` | the rigid law off the grid at n = 17: a tilted seventeen at 4.756, +1.7 per cent, **eight** angle classes taking eight different palette families and eleven distinct fills |
+| `review/r11-sticky.png` | the same case, same step count, under the sticky law: still the grid, 4.988, +6.7 per cent, **one** angle class, one family, three shades. Two laws, one case, two different answers, and the colouring says so at a glance |
+| `review/r11-contact-bias.png` | the contact relationship with the mask drawn: dashed white lines on the pairs the attraction reaches, and `1 of 17 target contacts made` on the stage and in the panel |
+| `review/r11-grow-done.png` | growth run out: `size 1.000 full · unit side 4.988 vs 4.676`, the squares back at a unit side and the walls closing again |
+
+### Tests
+
+`check_workbench.py` gained three steps: the angle map (every retained frame from 5 to
+324 painted exactly as `colour()` says, each class taking the slot its own centre alone
+gives, a shared angle taking the same fill across frames but for the one band-edge
+straddle, `fillsFor` answering the same table whatever is on the stage, a held angle
+holding its hue across a step, all twenty families darkening from no contacts to four at
+a held hue, and no switch left); the force law; and the relationship graph.
+Its revision-9 assertion that the snap checkbox is gone from the page is now the
+assertion that both chart options are there and drive what they claim.
+
+`test_candidate.py`’s `hue_sweep` asserted every fill lay on the old teal-to-citron
+sweep and is now `colour_sweep`: it checks the page’s 20 × 5 table against
+`square_fill_palette(hue_count=20,
+shades_per_hue=5)` imported from `sqpack.render.color`, that every fill drawn over every
+pair at four instants is a table entry, that all twenty hue families are reached, and
+that neither the scarlet nor the green is ever a fill.
+Measured over `index-all.html`: 209,304 squares, **66 distinct fills**, 20 of 20
+families.
+It turns the desaturation off first, which is load-bearing — with the drain on,
+the same sweep sees 120 fills, 66 of which are in no family.
+
+One more needle was flipped, and it is the reason the suite now has a browser tier at
+all. `index.html lacks scarlet marks the new square` asserted the presence of a legend
+line revision 9 deliberately removed; because it fires before `if not failures:
+browser_checks(...)`, it had gated the entire browser tier off for two revisions.
+Revision 9 flipped three companions of it from presence to absence and left this one.
+It is flipped now, and the full run reports **one** failure, the second known-stale
+needle, `mark stroke is none` — `#mark rect { stroke: none; }` in the stylesheet makes
+the previous square’s outline invisible while the check still expects scarlet.
+That is a real regression in the picture, not only in the check, and it is left alone
+here because it is nothing to do with this revision: the arriving square’s *fill* still
+leans scarlet and settles to its own colour, which is the convention the stills show.
+
+`check_legend.py`, `check_revision6.py`, `check_revision7.py` and `smoke_styles.py` pass
+unchanged.
+`measure_law.py` is the new measuring tool and is a tool, not a one-off: every
+number in this section comes out of it or out of `check_workbench.py`.
+
+### What reads badly
+
+- **The contact bias does not work, and the page cannot say why on its own.** The
+  fraction is honest, but a reader looking at `1 of 17` has no way to see that the pairs
+  are four units apart and 27° out of alignment.
+  The two diagnoses in step 3 came from a Python script reading the drawn poses; they
+  belong on the API as a per-target-pair report.
+- **The full-side test is not symmetric in the pair.** It reads the centre offset in the
+  lower-indexed square’s frame, so two squares within the angle tolerance but not
+  identical can pass one way and fail the other.
+  Measured cost: two of the 322 retained frames come one edge short of their own contact
+  graph. Testing both frames and accepting either is the fix.
+- **Nothing in the law aligns orientations**, and a contact graph is a statement about
+  aligned sides. A torque term that turns a pair toward a shared edge is the obvious
+  missing half, and it would change the answer above.
+- **The optimizer still duplicates the collision code**, as revision 9 recorded, and
+  revision 11 made it worse: `collide` and `optCollide` now both carry the law, the mask
+  lookup and the size, written twice.
+  A shared `collide(ctx, i, j)` is still the fix and is now more overdue.
+- **The panel is 486 px tall** and the stage draws at 55 per cent of the 1920 × 1080
+  window. Six boxes is the honest amount of instrument, but the stage is the point of the
+  page and it is now the smaller half of it.
+- **The rigidity slider reaches a setting that throws squares out of the box.** It is
+  reported, not hidden, but a control whose hard end breaks the simulation is a trap for
+  anyone who has not read this section.
+- **`soft` is barely soft.** The resting overlap is set by `OPT.squeezeTol`, not by the
+  law, so a weak push shows up as 0.009 against 0.005 rather than as squares visibly
+  sinking into each other.
+  Making the law govern the resting overlap means gating the squeeze on the law rather
+  than on a constant.
+- **Growth pays nothing yet.** Both rules reach the same place the plain settle reaches,
+  because after the size hits one the squeeze dominates and washes the growth phase out.
+  A schedule that alternates growing and shaking, rather than growing once and then
+  contracting, is the version worth measuring.
+
+## Revision 12: colour is identity, the controls stop moving, and a contact graph you can draw
+
+The owner, in four instructions: “I want default to be greens and color is identity of
+the square, so same always.
+during sweeps we might have a color map assigned at the end so it matches our standard
+scheme and that’s fine but that’s a sweep mode thing”; “the labels should be stably
+placed, often below buttons, because if you are changing text around the buttons the
+text and buttons reflow and move things”; “we don’t need the bar at the bottom showing n
+values at all in Pack mode”; and “it would be nice if you can click and drag a link
+between any two boxes to add to their contact graph”.
+
+Landed on 2026-09-08 in four steps, each rebuilt and driven headless before the next was
+started. `transition-stats.json` and `build_candidate.py` are untouched (byte-identical
+record); everything here is a property of the page.
+`index.html` grew from 659,276 to 689,565 bytes and `index-all.html` / `workbench.html`
+from 3,014,931 to 3,045,220.
+
+### 1. Three colour schemes, and identity is the default
+
+`setColorScheme('identity' | 'angle-stable' | 'angle-continuous')` and `colorScheme()`.
+Revision 11’s `setColorRule` stays as a no-op alias that reports the scheme in force and
+changes nothing; `state().rule` is the scheme rather than the constant `'angle'`.
+
+- **identity** — the default.
+  Each square takes one colour of its own, keyed by the persistent identity the pool
+  already tracks, so it keeps it for a whole session and across a step from one *n* to
+  the next.
+- **angle (stable)** — revision 11’s discrete map: right angles teal, forty-five citron,
+  the other eighteen slots five degrees to a band from the mauve pink, shaded by the
+  full-side contact count.
+- **angle (continuous)** — the OkLCh ramp this page carried before revision 11, teal at
+  a right angle running to citron at 45 and back to teal at 90. Kept because a sweep of
+  tilts reads as a sweep of colour under it, which neither discrete map gives.
+
+**This is not an angle-derived colouring**, and that is the whole of the point.
+A square’s colour does not shift when it turns, when its neighbours move, or when the
+frame is recoloured for any other reason.
+`review/r12-identity-default.png` and `review/r12-identity-moving.png` are the same case
+a settle apart, with the desaturation off so the fills are *literally* equal: the
+squares have turned and slid and not one of them has changed colour.
+
+**How the greens are generated, and how many there are.** They are generated in the page
+rather than tabulated, from the two ends of the ramp the random arrangement used to
+show: teal `#1faa8e` is OkLCh (0.662, 0.119, 174.6°) and citron `#c3c45f` is (0.799,
+0.124, 109.4°), so the band is exactly 109.4 to 174.6 degrees of hue.
+The ramp is a staggered lattice — nine rows of rising lightness from 0.540 to 0.906,
+each row at a chroma its lightness can hold, each row cut into hue slots at the slot’s
+own centre, odd rows offset half a slot so no two rows line up.
+The two palest rows carry four and three slots rather than five, because hue separation
+scales with chroma and a pale row cannot hold five distinguishable greens.
+That is **42**. Identity *k* takes ramp entry `(k − 1) × 29 mod 42`: twenty-nine is
+co-prime with forty-two, so the sequence visits all forty-two before repeating, and it
+is near the ramp’s own golden section, so consecutive identities land far apart.
+
+The count is measured, not asserted.
+`measure_greens.py` reads the greens off the page and re-measures both numbers:
+
+| threshold in OkLab | mutually distinguishable |
+| --- | ---: |
+| 0.015 | 42 |
+| **0.020** (one just-noticeable step for patches this size) | **42** |
+| 0.025 | 40 |
+| 0.030 | 25 |
+
+The closest two of the 42 are **0.0237** apart (`#318053` against `#0e8263`), and the
+closest two *consecutive identities* are **0.1218** apart, five times that.
+Past 42 the greens repeat: at *n* = 324 the ramp turns 7.7 times, and 42 mutually
+distinguishable greens is what this band holds.
+`check_workbench.py` re-derives both numbers from the page rather than pinning the
+hexes.
+
+**Shade under identity: none, and that is a decision rather than an omission.** Under
+the two angle schemes the shade is the square’s full-side contact count, as revision 11
+and the atlas both have it.
+Under identity it is not.
+The reason is the definition: a contact count changes when a *neighbour* moves, so
+shading by it would move a square’s fill for a reason that has nothing to do with that
+square — which is exactly what identity colouring exists to prevent.
+A settle would repaint half the picture, and the check that “a square’s fill is
+unchanged across a settle in which its angle changes” could not hold.
+The identity green is the whole fill.
+Measured at *n* = 17 from the ordered fill: three different contact counts, and
+seventeen different greens — one a square — where the angle map paints the same frame in
+three shades of one hue.
+
+**The Sweep exception, and it belongs to Sweep alone.** In Sweep the *resting* frame is
+repainted in the standard angle map, so the frame a viewer is left looking at matches
+the atlas convention, while the motion between the two frames stays identity-coloured
+and therefore trackable.
+`setSweepStandardize(on)` / `sweepStandardize()`, default on, with a box beside the
+scheme chooser.
+**It is a presentation choice about a finished picture, not a claim about
+the physics**, and Pack — where nothing ever comes to a scheduled rest — never applies
+it, whatever the box says.
+`colour()` reports both `scheme` (what is chosen) and `painted` (what this frame was
+actually painted in), and they differ only where the standardising has fired.
+The box is *disabled* rather than hidden outside Sweep: a control that vanishes is a
+control that moves its neighbours, which is what step 2 is about.
+
+### 2. A readout that changes at runtime never changes size
+
+A real defect, and the owner’s diagnosis of it was exactly right: the live readouts sat
+inline with the buttons, so as a figure gained a digit every control after it slid
+sideways under the cursor while a run was playing.
+
+The rule now: **every readout that changes at runtime either takes a fixed slot wide
+enough for the widest value it can hold, or moves onto its own line below the control it
+belongs to** — the owner’s own suggestion, and the better one for anything that changes
+often.
+Figures are tabular throughout, so a slot’s width is a character count rather than
+a guess, and a value that overruns is clipped rather than allowed to push.
+Four readouts take the below-the-control form (the annealing report, the law’s summary,
+the step note, and the continuous beat); the rest take fixed slots.
+Two texts were shortened to fit: `range-duration` (“at this beat”, not “at the current
+beat”) and the law’s line (`knee 375 · slope ×1.0 past · no pull`). `Optimize` gets a
+fixed 152 px too, because it becomes `Restart optimize` the moment it is pressed and the
+button under the cursor should not resize itself.
+
+**One trap, and it cost a still to find.** A wrapping flex row’s intrinsic width is the
+sum of its items whether they wrap or not, so putting the annealing readout on a line
+*below* the dial still widened the box that held it — and the whole view box, colour
+chooser and all, slid sideways whenever the style changed and the text gained “(styles B
+and C only)”. The fix is a width on the box (`#shake-box`, 478 px), not on the line.
+Anything else placed below a control in a shrink-wrapping box will need the same.
+
+`check_workbench.py` step 12 holds it down, because this regression will come back.
+It captures **every** button’s bounding box at two instants and asserts they are
+identical:
+
+- across a **Pack** run (2,400 steps, with the clock, the step count, the overlap and
+  the target fraction all moving — verified to have moved, so the comparison has teeth);
+- across a **Sweep** run that crosses a pair boundary, which redraws the whole panel
+  rather than only the live rows;
+- and across the settings a press changes — the style, the annealing dial, the law
+  preset, the graph, growth, and *n* — none of which may move a control either.
+  Pack and Sweep are the one exemption: they deliberately show different controls.
+
+It also asserts, of every runtime readout by id, that it is in the fixed-slot class,
+that its overflow is hidden, and that it has a width of its own.
+The panel grew from 486 to 507 px, so the stage draws at 53 per cent of a 1080 px window
+rather than 55.
+
+### 3. No position bar in Pack
+
+Pack is one fixed *n*, so a bar carrying the corpus’s scale says nothing about it: the
+cursor sits on one value and never moves, and the scale under it prices a journey the
+page is not making. The bar is hidden whole, its numbered scale with it, and Sweep keeps
+it.
+It goes with the *mode*, not with the run: a Pack run playing does not bring it back,
+and neither does a capture — which is where a stray bar would be most visible, so the
+visibility is set before the capture guard rather than after it.
+
+Hiding it moves nothing, and that is by construction rather than by luck: the bar is
+absolutely positioned inside the 1920 × 1080 stage, so its box is in nobody’s flow and
+the panel above it ends at 1032 whether it is drawn or not.
+Step 13 measures that — the stage, the facts panel, the controls, the readout and the
+SVG are the same five boxes to the pixel in both modes.
+
+Two checkers measured the readout’s clearance by reading the bar’s own rectangle, and a
+hidden element has a zero rect, so both were reading a clearance of “everything
+collides”. `check_legend.py` and `test_candidate.py` now read the band the bar *would*
+occupy off the stylesheet where it is not drawn, which is the stricter reading anyway:
+the panel is held to the same line in both modes, so a switch to Sweep can never put the
+two on top of each other.
+
+### 4. A contact graph drawn by hand
+
+**Drawing.** Behind a `draw links` toggle in the view box: press on one square, release
+on another, and the edge is added; the same gesture where the edge exists takes it away.
+The pending edge follows the cursor from the square it started on.
+A release on empty paper, or on the square it started from, is not an edge.
+
+**How the two drags are kept apart.** Both gestures are press-drag-release on the same
+square, so the toggle decides which one a press starts and nothing is ever ambiguous:
+with `draw links` on no square is picked up at all, and with it off the drawing code is
+never entered. That is a deliberate choice over the alternatives (a modifier key, or a
+click on empty paper to start) — a mode you can see the state of beats a modifier you
+have to remember, and the cursor says which gesture is live.
+Nothing about the drag code changed, and `hand()` reports what it always did; step 14b
+drives both gestures with a real pointer and asserts that each does its own thing and
+neither does the other’s.
+
+**The drawn graph feeds the same mask.** The target graph was already pluggable, so a
+hand-drawn graph is the same object the record-derived one is: it reaches the physics
+through `targetGraphFor`, and nothing downstream is told which of the two it is looking
+at. Three sources, and the choice is exposed as a `target` chooser beside the graph:
+
+- `record` — the contact graph of the retained packing of this *n*, relabelled into the
+  run’s square order. Revision 11’s target, unchanged, and still the default.
+- `drawn` — the edges drawn by hand.
+  `edges()`, `setEdges(pairs)`, `clearEdges()`, `toggleEdge(a, b)`,
+  `setTargetSource(kind)`.
+- `given` — whatever `setTargetGraph(edges)` was handed, which still overrides both.
+
+**How it is stored.** A flat list of index pairs in the run’s own square order, lower
+index first, deduplicated, **held per packing size**: an index means a different square
+at a different *n*, so a graph drawn at 11 is not a graph at 5, and going back finds
+what was left there.
+`setEdges` accepts a flat list or a list of pairs, folds every edge to `a < b`, drops
+self-loops and duplicates, and drops any edge naming a square this *n* does not have.
+Because it is the same store the physics reads, **a random or enumerated graph handed to
+`setEdges` drives a run without touching anything** — which is what
+`measure_law.py --drawn` does.
+
+The trajectory cache is keyed by the graph’s **contents**, not by a revision counter:
+the key is a hash of the sorted edge set.
+That is not fussiness — the claim the cache has to hold up is “one graph, one run”, and
+drawing an edge and rubbing it out again has to land back on the run it started from,
+which a counter would key as a third.
+Step 14d measures it: three graphs are three keys, one graph reached twice is one key,
+and the record’s own graph *drawn by hand* drives byte-identically the run the
+record-derived target drives.
+
+**Always visible when active.** Whenever a contact relationship is in force the target
+graph is drawn on the stage, with no correspondence overlay needed, because it is what
+the run is being asked to realise.
+The two classes are drawn differently, because the difference is the measurement: an
+edge whose two squares share a whole side **right now** is a solid white line lying
+across the pair it joins, and one that is only wanted is a dashed dark line, usually
+long, crossing paper.
+White where it lies on a fill, dark where it crosses the page — each is drawn where it
+can be seen. Drawing mode shows whatever has been drawn even where the relationship is
+not reading it, because a drawing you cannot see is not a drawing.
+Revision 11’s picture is kept for the **groups** relationship exactly as it was: it
+rides the correspondence overlay and draws only the pairs the attraction is reaching, a
+completely connected block being thousands of pairs that are not doing anything.
+
+**Reported.** The fifth readout row is now
+`overlap 0.005 · 0 of 11 contacts · side 3.985` — how much of the target graph is in
+contact, out of how much, and the container side — and it is written whether or not
+anything is simulating, because it is a measurement of the picture rather than of a run.
+The panel’s own line names the source: `0 of 11 drawn contacts`.
+
+**What a drawn graph actually reaches** (`measure_law.py --drawn`; sticky law,
+ordered-fill start, blind, 2,400 steps, the ring joining each square to the next):
+
+| n | graph | edges | met at the start | met at the end | side | record | excess |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 5 | **ring** | 5 | 3 | **1** | 2.986 | 2.707 | +10.5% |
+| 5 | chain | 4 | 3 | 1 | 2.986 | 2.707 | +10.5% |
+| 11 | **ring** | 11 | 8 | **0** | 3.985 | 3.877 | +2.9% |
+| 11 | chain | 10 | 8 | 0 | 3.985 | 3.877 | +2.9% |
+
+So: **1 of 5 at *n* = 5 and 0 of 11 at *n* = 11**, and the column that matters is the
+one beside it. The ordered fill *starts* with three of the five and eight of the eleven
+already realised — consecutive indices in a grid filled row by row are literally
+adjacent squares — and the settle then destroys them.
+Biasing toward a contact graph does not build one; here it pulls one apart.
+That is revision 11’s negative result again, from the other direction, and for the same
+two reasons it recorded: the pull cannot reach pairs several units apart, and a central
+pull has no torque to rotate a pair into face-to-face registry.
+The drawn graph is worth having anyway — it is the mechanism the next experiment needs —
+but it is not evidence that the mechanism works.
+
+`reset()` puts the target back on the record’s graph and turns the drawing mode off, but
+**does not throw away the edges**: they are the owner’s work, like a dragged
+arrangement, which reset has never touched either.
+
+### Review stills
+
+All 1920 × 1080 from `capture_stills.py --r12`, all with the chrome showing.
+All read as images.
+
+| File | What to look at |
+| --- | --- |
+| `review/r12-identity-default.png` | the default: *n* = 29 settled, every square its own green, nothing about the colour reading off an angle |
+| `review/r12-identity-moving.png` | the same case mid-settle with the desaturation off: the squares have turned and moved and every one of them is the colour it was, the arriving square scarlet as a mark |
+| `review/r12-angle-stable.png` | the same case under the angle map, for comparison: teal uprights shaded by contacts, pink, violet and gold tilts — legible by angle, and two squares of one tilt indistinguishable |
+| `review/r12-pack-no-bar.png` | Pack at *n* = 17: the bottom band of the stage empty, the note on its own fixed line, nothing where the corpus scale used to be |
+| `review/r12-drawn-graph.png` | a ring of eleven edges drawn by hand on the retained frame of 11: one solid white edge in contact, ten dashed dark ones only wanted, and `1 of 11 contacts · side 3.877` on the stage |
+| `review/r12-drawn-optimized.png` | the same graph after 2,400 steps from the ordered fill: `overlap 0.005 · 0 of 11 contacts · side 3.985`, every edge dashed |
+
+### Tests
+
+`check_workbench.py` gained three steps and rewrote two.
+Step 9 selects `angle-stable` before it checks the angle map, and 9e and 9f are new: the
+identity scheme’s 42 greens and their measured separation, a square holding its fill
+through a settle that turns it, two frames of one *n* painting a square the same, no
+contact shading under identity, and the Sweep standardising firing in Sweep at rest and
+nowhere else. Step 11f was rewritten for the new stage graph.
+Steps 12, 13 and 14 are the three new features.
+`test_candidate.py`’s `colour_sweep` selects `angle-stable` before sweeping; it still
+sees 66 distinct fills over 20 of 20 hue families, which is the revision-11 number
+unchanged.
+
+The full `test_candidate.py` run reports **one** failure, the known-stale needle
+`mark stroke is
+none` — `#mark rect { stroke: none; }` makes the previous square’s outline invisible
+while the check still expects scarlet.
+It is a real regression in the picture, recorded in revision 11 and still nothing to do
+with this revision. Revision 11’s other stale needle is gone.
+`check_legend.py`, `check_revision6.py`, `check_revision7.py` and `smoke_styles.py`
+pass, the first after being taught to read the hidden bar’s reserved band off the
+stylesheet.
+`measure_greens.py` is new and is a tool: the two numbers this section quotes
+about the greens come out of it.
+`measure_law.py --drawn` is new for the same reason.
+
+### What reads badly
+
+- **42 greens for 324 squares.** The ramp repeats 7.7 times over the corpus, so at large
+  *n* two squares eight apart in identity are the same colour, and identity colouring
+  quietly stops being an identity.
+  The band is the constraint: greens alone do not hold 324 distinguishable colours, and
+  widening it past teal and citron stops being “greens”.
+  A second channel — the stroke, a mark, a shape — is the way out, and none was tried
+  here.
+- **The drawn graph has no undo.** Every other edit on this page is either a slider you
+  can put back or a drag you can redo; a mis-drawn edge can be toggled off, but `clear`
+  is all or nothing and a graph of thirty edges is thirty gestures to rebuild.
+- **The drawn graph is invisible unless the relationship is contact or drawing mode is
+  on.** Those are the two states where it means something, so the rule is defensible,
+  but a graph you drew and then switched away from is still in the store and gives no
+  sign of it beyond the `clear` button going live.
+- **A widened slot is a guess until something overruns it.** The widths were chosen by
+  measuring the widest value each readout can currently produce, and the check asserts
+  nothing overruns *today*; a longer message added later will clip silently rather than
+  fail. Asserting `scrollWidth <= clientWidth` for every readout across a sweep of
+  settings would close that, and the probe exists (it was used to pick the widths) but
+  is not in a checker.
+- **The Sweep standardising box is disabled in Pack rather than explained.** It reads as
+  a control that does not work rather than as one that belongs to the other mode.
+- **The identity scheme still desaturates while moving.** That is revision 6’s motion
+  cue and it is a separate feature, but it does mean the one thing identity colouring
+  promises — this square is always this colour — is true only of a resting frame unless
+  the drain is turned off.
+  The stills that make the point turn it off.
+- **`collide` and `optCollide` are still written twice**, as revisions 9 and 11 both
+  recorded, and the mask lookup they both carry is now reading a graph that a pointer
+  can change mid-run.
+
+## Revision 13: the starting size redraws the arrangement
+
+The owner, in one question: “when we change size in Pack mode it should change the size
+of the boxes in the initial arrangement right?”
+Yes, and it did not.
+Measured before the fix, on the revision 12 build: `setGrowth({size: 0.5})` stored the
+value and `growth().size` read back 0.5, but every drawn square stayed at 121.69 px —
+full width — at every size from 1 to 0.3, and only a started run ever shrank one.
+
+### Where the defect was, and where it was not
+
+Not in the growth machinery, and not in the two starts that have an arrangement of their
+own.
+`setGrowth` wrote the size into the live run (`opt.size`), and `renderOptimizeScene`
+has drawn that size as a `scale()` on every square since revision 11. So `random` and
+`ordered fill`, which both put a paused run on the stage the moment they are pressed,
+were already correct: measured across the same sweep, 116.84 → 58.42 → 35.05 px and
+97.35 → 48.67 → 29.20 px, exactly proportional.
+
+The defect was the **previous packing** start — the default — which has no arrangement
+of its own. It *is* the timeline’s own start, so choosing it shows the step animation
+rather than a run, and `opt` is null.
+The size was written into a run that did not exist, and the guard was narrower still
+(`opt.steps === 0`), so even a paused run that had stepped once ignored it.
+
+The three starting-arrangement buttons were checked for the same defect and do not have
+it: each already re-draws the stage the moment it is pressed, with nothing played.
+That is now asserted rather than assumed.
+
+### The rule
+
+**The starting size is a property of the arrangement on the stage, not of a run.** Two
+clauses carry it, and both are in `setGrowth` and `stageForSize`:
+
+- A run already on the stage takes the new size **where it stands, at any step count**,
+  unless it has grown.
+  The guard is `opt.grew === 0` rather than revision 12’s `opt.steps === 0`: a size the
+  run *reached* is the run’s own, and the setting then names what the next run will
+  begin at. With growth off `grew` stays zero for ever, so the stage tracks the slider
+  for the whole of such a run — and no drag is thrown away to do it, because only the
+  size changes, never a pose.
+- A Pack stage with no arrangement of its own **gets one**, paused at step zero, so the
+  size has something to be the size of.
+  In Pack, with the previous-packing start, the stage shows the run’s own starting
+  arrangement exactly while the starting size is below one; back at a full size it is
+  the timeline again. The staging is applied from all four sides that can change it — the
+  size, the start chooser, entering Pack, and changing *n* — and it is undone only from
+  a run that has not stepped and has not been edited, so a dragged arrangement or a run
+  in progress is never lost.
+
+Sweep is untouched: it plays a range of steps between two records, and growth has never
+been part of it.
+
+### What the view shows below a full size, and why that is the honest picture
+
+Small squares in a full-size frame — and the frame is **the run’s own starting box**,
+not the record of the *n* the timeline was showing:
+
+| start | the container at any size below one |
+| --- | --- |
+| previous packing | the record’s box for *n* + 1 (`B.side`), or that inflated by `BLIND.inflate` with the blind box on |
+| random | the record’s box inflated by `OPT.randomInflate` |
+| ordered fill | the trivial grid’s own box, side `ceil(sqrt(n + 1))` |
+
+The container **does not move with the size**, and that is not an omission: it is what a
+growth run actually does.
+While the squares are growing the walls hold, because revision 11 measured what happens
+when they do not — the `clean` rule deadlocked at a size of 0.76 with the walls taking
+every thousandth of slack the growth wanted.
+So the box a growth run starts in is the box it keeps until the squares reach full size,
+and the picture at 0.4 of a side is exactly the picture that run begins at.
+This is checked against a real run rather than claimed: the staged frame and the frame
+`optimize(true)` produces at step zero are compared square by square, transform for
+transform, and container for container, and they are identical.
+
+The figure that prices such a view against the record is not the drawn container but
+`growth().unitSide` — the tight box around the arrangement scaled up as if every square
+were a unit side — which the panel has reported since revision 11 and which is the only
+number on the page that is about a packing rather than a picture.
+
+### What holds it down
+
+`check_workbench.py` step 15. It reads the **rendered box** of every drawn square rather
+than the `scale()` in its transform, deliberately: that is the picture the owner is
+looking at, and it catches a scale that is written but not applied.
+Over all three starts, with growth off and on: the size is set to 0.9 and then to 0.45
+from a stage that has not stepped, and every square’s drawn width must halve, square for
+square, to within 2 × 10⁻³ — the failing build gives a ratio error of 0.5 for the
+previous-packing start, so the check has teeth.
+It also asserts that nothing was played, that the staged frame equals a real run’s first
+frame, that the container is unmoved across sizes 0.3, 0.6 and 0.9, that a full size
+restores the timeline, and that the three starting-arrangement buttons each draw a
+different picture at once and that returning to the previous packing returns to its own.
+
+`check_legend.py` and `/tmp/check_partial.py` pass unchanged, and no console error is
+raised on any path. `test_candidate.py` reports the one failure revision 12 already
+recorded as predating this work (`mark stroke is none`, the outline removed by
+`#mark rect { stroke: none; }`); nothing new.
+`transition-stats.json` and `build_candidate.py` are untouched, byte for byte.
+`index.html` grew from 689,565 to 692,592 bytes and `index-all.html` / `workbench.html`
+from 3,045,220 to 3,048,247.
+
+### What reads badly
+
+- **The threshold at a full size is a visible seam.** With the previous-packing start,
+  dragging the size from 1 to 0.99 swaps the stage from the step animation to the run’s
+  starting arrangement, which is a different picture — the new square is already placed
+  and the box is *n* + 1’s. It is the right picture for a size to apply to, and it is
+  reversible, but it is a jump rather than a fade, and nothing on the panel says it is
+  about to happen.
+- **The size slider is the only control that changes what kind of thing the stage is
+  showing.** Every other setting changes how the stage is drawn; this one can change
+  whether a timeline or an arrangement is under the cursor.
+  The `Optimize` button reading `Restart optimize` is the only sign, and it is a weak
+  one.
+- **A run that has grown ignores the slider, correctly, and says so nowhere.** Once
+  `grew` is past zero the stage stops tracking the control, and the only way to see why
+  is to read `growth()`.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

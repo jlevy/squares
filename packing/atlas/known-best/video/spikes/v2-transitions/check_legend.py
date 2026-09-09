@@ -15,6 +15,19 @@ from playwright.sync_api import sync_playwright
 
 HERE = Path(__file__).resolve().parent
 
+# Revision 12 hides the position bar in Pack, where a corpus-wide scale says nothing about one
+# fixed n. A hidden element has a zero rect, so the band it *would* occupy is read off the
+# stylesheet instead: the readout is held to the same line whether the bar is drawn or not, which
+# is the property that keeps a switch to Sweep from putting the two on top of each other.
+BAR_TOP = """(() => { const e = document.getElementById('progress');
+     const b = e.getBoundingClientRect();
+     return b.height > 0 ? (b.top - s.top) / k : parseFloat(getComputedStyle(e).top); })()"""
+RIDER_TOP = """(() => { const e = document.getElementById('p-n');
+     const b = e.getBoundingClientRect();
+     if (b.height > 0) return (b.top - s.top) / k;
+     const bar = document.getElementById('progress');
+     return parseFloat(getComputedStyle(bar).top) + parseFloat(getComputedStyle(e).top); })()"""
+
 # The lines revision 9 removed, by id and by the wording each carried. A page that grows any of
 # them back fails here rather than in a still nobody looks at twice.
 GONE_IDS = ("legend-style", "legend-note", "pair-info")
@@ -76,8 +89,8 @@ def main() -> int:
                                 " const box = (sel) => { const b = document.querySelector(sel).getBoundingClientRect();"
                                 "   return {top: (b.top - s.top) / k, bottom: (b.bottom - s.top) / k, right: (b.right - s.left) / k, text: document.querySelector(sel).textContent}; };"
                                 " return {open: box('.open'), d: box('#gap-a'), e: box('#gap-b'),"
-                                "  bar: (document.getElementById('progress').getBoundingClientRect().top - s.top) / k,"
-                                "  pn: (document.getElementById('p-n').getBoundingClientRect().top - s.top) / k,"
+                                "  bar: " + BAR_TOP + ","
+                                "  pn: " + RIDER_TOP + ","
                                 "  right: (document.getElementById('facts').getBoundingClientRect().right - s.left) / k}; }"
                             )
                             lines = [r["d"], r["e"]]
@@ -115,7 +128,7 @@ def main() -> int:
                     "   return {top: (b.top - s.top) / k, bottom: (b.bottom - s.top) / k, right: (b.right - s.left) / k, text: document.querySelector(sel).textContent}; };"
                     " return {rows: ['#gap-a', '#gap-b', '#gap-c', '#gap-d'].map(box),"
                     "  open: box('.open'),"
-                    "  bar: (document.getElementById('progress').getBoundingClientRect().top - s.top) / k,"
+                    "  bar: " + BAR_TOP + ","
                     "  right: (document.getElementById('facts').getBoundingClientRect().right - s.left) / k}; }"
                 )
                 rows = r["rows"]

@@ -3,6 +3,8 @@
     packing/.venv/bin/python3 capture_stills.py [name ...]
     packing/.venv/bin/python3 capture_stills.py --workbench
     packing/.venv/bin/python3 capture_stills.py --r9
+    packing/.venv/bin/python3 capture_stills.py --r11
+    packing/.venv/bin/python3 capture_stills.py --r12
 
 A shot names the n it wants, the instant, and a setup snippet run after the pair is selected.
 Where the n is not in `index.html` the shot is taken from `index-all.html` instead.
@@ -15,6 +17,10 @@ single snippet driven through the API, so the frame is a pure function of what t
 `--r9` takes the revision-9 shots the same way. Four of the five show the chrome, because they are
 of the workbench; the fifth is in capture preview on purpose — it is the proof that nothing
 explaining the page survives into a captured frame.
+
+`--r11` takes the revision-11 shots: the angle colouring, the force law and its plot, the
+relationship graph with its mask drawn, and growth run out. All show the chrome, because every one
+of them is about a control as much as about the picture.
 """
 import sys
 from pathlib import Path
@@ -83,12 +89,72 @@ R9_SHOTS = {
 }
 
 
+# Revision 11. The colouring, the force law and its plot, the relationship graph and its mask, and
+# growth. All show the chrome: every one of them is about a control as much as about the picture.
+R11_SHOTS = {
+    # The angle map at n = 29, settled on the retained frame: five angle classes taking four palette
+    # families, each shaded by the square's own full-side contact count.
+    "r11-angle-colour-n29": (False, "A.setStepN(29); A.seek(A.duration());"),
+    # A law that is nothing like the default: a hard knee and a long, strong pull, so the plot shows
+    # a steep wall on the left of zero and a deep hump on the right of it.
+    "r11-force-curve": (False, "A.setStepN(17); A.setLaw({rigidity: 0.02, repulsion: 5000,"
+                        " attraction: 320, range: 0.45}); A.setInitial('grid'); A.optimizeStep(600);"),
+    # The same case under two very different laws, settled the same number of steps.
+    "r11-rigid": (False, "A.setStepN(17); A.setLawPreset('rigid'); A.setInitial('grid'); A.optimizeStep(2400);"),
+    "r11-sticky": (False, "A.setStepN(17); A.setLawPreset('sticky'); A.setInitial('grid'); A.optimizeStep(2400);"),
+    # The contact relationship with the mask drawn: faint lines on the pairs the attraction reaches.
+    "r11-contact-bias": (False, "A.setStepN(29); A.setLawPreset('sticky'); A.setRelationship('contact');"
+                         " A.setOverlay(true); A.setInitial('grid'); A.optimizeStep(2400);"),
+    # Growth run out: the squares have reached a unit side and the walls have taken over again.
+    "r11-grow-done": (False, "A.setStepN(17); A.setGrowth({size: 0.3, rate: 0.05, rule: 'clean', on: true});"
+                      " A.setInitial('grid'); A.optimizeStep(7200);"),
+}
+
+
+# Revision 12. Colour is the square's identity by default, the controls do not reflow, Pack has no
+# position bar, and a contact graph can be drawn by hand between squares. All show the chrome.
+R12_SHOTS = {
+    # The default, settled: n = 29 in its identity greens, every square its own colour and nothing
+    # about the colouring reading off the angles.
+    "r12-identity-default": (False, "A.setColorScheme('identity'); A.setStepN(29); A.seek(A.duration());"),
+    # The same case in motion, with the desaturation off so the fills are *literally* the ones the
+    # settled frame shows: the squares turn and slide and not one of them changes colour.
+    "r12-identity-moving": (False, "A.setColorScheme('identity'); A.setStepN(29); A.setStyle('bodies');"
+                            " A.setSnap(false); A.setDesaturate(false); A.seek(A.duration() * 0.62);"),
+    # And the same case under revision 11's angle map, for comparison: the tilts are legible, but
+    # two squares of the same tilt are one colour and a square that turns changes colour.
+    "r12-angle-stable": (False, "A.setColorScheme('angle-stable'); A.setStepN(29); A.seek(A.duration());"),
+    # Pack, with no position bar: one fixed n has nothing to say about a corpus-wide scale.
+    "r12-pack-no-bar": (False, "A.setMode('pack'); A.setStepN(17); A.seek(A.duration());"),
+    # A contact graph drawn by hand — a ring joining each square to the next — on the retained
+    # frame of 11: the edges already in contact are solid and white, the ones only wanted are
+    # dashed and dark, and the readout counts the first kind.
+    "r12-drawn-graph": (False, "A.setColorScheme('identity'); A.setStepN(11); A.seek(A.duration());"
+                        " A.setDrawing(true);"
+                        " A.setEdges(Array.from({length: 11}, (_, i) => [i, (i + 1) % 11]));"
+                        " A.setRelationship('contact');"),
+    # The same graph after an Optimize run from the ordered fill: the fraction in the readout is
+    # what the bias actually reached.
+    "r12-drawn-optimized": (False, "A.setColorScheme('identity'); A.setStepN(11);"
+                            " A.setDrawing(true);"
+                            " A.setEdges(Array.from({length: 11}, (_, i) => [i, (i + 1) % 11]));"
+                            " A.setRelationship('contact'); A.setLawPreset('sticky');"
+                            " A.setInitial('grid'); A.optimizeStep(2400);"),
+}
+
+
 def shots(page, table, errors) -> None:
     for name, (capture, setup) in table.items():
         page.evaluate(
             "([setup, capture]) => { const A = window.atlasTransitions;"
             " A.stopAll(); A.setCapture(false); A.setStyle('tween'); A.setSnap(true); A.setBlind(false);"
             " A.setDesaturate(true); A.setAnneal(3); A.setSpeed(1); A.setInitial('previous');"
+            " if (A.reset) A.reset(); if (A.setOverlay) A.setOverlay(false);"
+            # revision 12: the scheme, the drawing mode and any drawn edges are reset between
+            # shots so one shot cannot leak into the next.
+            " if (A.setDrawing) { A.setDrawing(false); A.clearEdges(); }"
+            " if (A.setColorScheme) A.setColorScheme('identity');"
+            " if (A.setMode) A.setMode('pack');"
             " A.setRange(17, 17); A.seek(0); (new Function('A', setup))(A); }",
             [setup, capture],
         )
@@ -97,8 +163,8 @@ def shots(page, table, errors) -> None:
         print(f"{name}.png")
 
 
-def revision9() -> int:
-    """The revision-9 stills, from the workbench."""
+def from_workbench(table) -> int:
+    """Drive one table of shots against the workbench, chrome and all."""
     REVIEW.mkdir(exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -108,7 +174,7 @@ def revision9() -> int:
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         page.goto(f"file://{HERE / 'workbench.html'}")
         page.wait_for_timeout(900)
-        shots(page, R9_SHOTS, errors)
+        shots(page, table, errors)
         print("ERRORS:", errors or "none")
         browser.close()
     return 0
@@ -142,7 +208,11 @@ def workbench() -> int:
 
 def main() -> int:
     if "--r9" in sys.argv[1:]:
-        return revision9()
+        return from_workbench(R9_SHOTS)
+    if "--r11" in sys.argv[1:]:
+        return from_workbench(R11_SHOTS)
+    if "--r12" in sys.argv[1:]:
+        return from_workbench(R12_SHOTS)
     if "--workbench" in sys.argv[1:]:
         return workbench()
     wanted = sys.argv[1:] or list(SHOTS)

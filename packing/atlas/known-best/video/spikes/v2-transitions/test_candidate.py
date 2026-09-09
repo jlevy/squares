@@ -20,9 +20,10 @@ edge; the lower-bound line reads `s(n) ≥ value` for every open n with its note
 below and is empty at fixed height for a proved n, the value taken from the record's
 `lower.display`; KaTeX_Main is embedded as "Atlas Symbols" with the relation range and
 size-adjust, and the headless shell confirms through CDP that `≤`, `≥` and `√` are set
-in it; the `≈` badge is that face's outline; and no fill drawn by colour rule B, over
-every frame of index-all.html at rest and in motion, has an OkLCh hue outside the
-teal-to-citron sweep.
+in it; the `≈` badge is that face's outline; and every fill the page draws, over every
+frame of index-all.html at rest, at the arrival and mid block motion, is an entry of the
+20 x 5 shade table revision 11 colours by — the table being the atlas's own
+`square_fill_palette(hue_count=20, shades_per_hue=5)`, compared here against it.
 
 Revision 4 adds the type scale: the numeral is PT Serif Regular (weight 400) at 96 px
 and its box offset is the one the build derives from the regular face's digit bearings
@@ -89,24 +90,14 @@ NUMERAL_RATIO_MAX = 4.5
 BADGE_VOCABULARY = {("O", "solid"), ("=", "solid"), ("≈", "muted"), ("R", "solid"), ("R", "muted")}
 SYMBOL_RANGE = "U+2208, U+221A, U+2248, U+2264-2265, U+2308-230B"
 SIDE_DISPLAY = re.compile(r"^s\((\d+)\) ([=≤≥]) (.+)$")
-# The two house hues that bound colour rule B's sweep, OkLCh degrees of #1faa8e and #c3c45f,
-# with a tolerance for 8-bit rounding of the gamut-clipped fills.
-TEAL_HUE, CITRON_HUE, HUE_TOLERANCE = 174.63, 109.43, 1.5
-
-
-def oklch_hue(hex_colour: str) -> tuple[float, float]:
-    """(chroma, hue in degrees) of an sRGB hex colour in OkLCh."""
-    def linear(channel: int) -> float:
-        c = channel / 255
-        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
-
-    r, g, b = (linear(int(hex_colour[i : i + 2], 16)) for i in (1, 3, 5))
-    l_ = (0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b) ** (1 / 3)
-    m_ = (0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b) ** (1 / 3)
-    s_ = (0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b) ** (1 / 3)
-    a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_
-    bb = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_
-    return math.hypot(a, bb), (math.degrees(math.atan2(bb, a)) + 360) % 360
+# Revision 11's colouring, which replaced the teal-to-citron sweep: one map, always on, no rule
+# to choose. Hue is a function of the angle alone — the quarter turn cut into the two pinned
+# tilts and eighteen five-degree bands — and shade is the square's full-side contact count, over
+# the table `square_fill_palette(hue_count=20, shades_per_hue=5)` derives in
+# sqpack/render/color.py. The two colours the page reserves and no square may ever take: the
+# scarlet of the new-square mark and the one green that means "the best known arrangement".
+SHADE_HUES, SHADE_STEPS = 20, 5
+RESERVED_COLOURS = {"#a3123f", "#17794a"}
 
 
 def digest(path: Path) -> str:
@@ -262,11 +253,22 @@ def type_and_fit_sweep(browser, page_path: Path, check, expected_left: float) ->
                           numeralLeft: root.querySelector('.numeral').getBoundingClientRect().left });
             }
           }
-          const pn = document.getElementById('p-n').getBoundingClientRect();
-          const bar = document.getElementById('progress').getBoundingClientRect();
+          // Revision 12 hides the position bar in Pack, where a corpus-wide scale says nothing
+          // about one fixed n. A hidden element has a zero rect, so where it is not drawn the band
+          // it *would* occupy is read off the stylesheet: the panel is held to the same line
+          // whether the bar is drawn or not, which is what keeps a switch to Sweep from putting
+          // the two on top of each other.
+          const barEl = document.getElementById('progress');
+          const pnEl = document.getElementById('p-n');
+          const stageBox = document.getElementById('stage').getBoundingClientRect();
+          const drawn = barEl.getBoundingClientRect().height > 0;
+          const barTop = drawn ? barEl.getBoundingClientRect().top
+                               : stageBox.top + parseFloat(getComputedStyle(barEl).top);
+          const pnTop = drawn ? pnEl.getBoundingClientRect().top
+                              : barTop + parseFloat(getComputedStyle(pnEl).top);
           const box = facts.getBoundingClientRect();
           return { sizes: Array.from(sizes, ([s, k]) => [s, Array.from(k).sort()]).sort((a, b) => a[0] - b[0]),
-                   svgGlyphs, fits, pnTop: pn.top, barTop: bar.top, factsLeft: box.left, factsRight: box.right };
+                   svgGlyphs, fits, pnTop, barTop, factsLeft: box.left, factsRight: box.right };
         })()"""
     )
     page.close()
@@ -331,19 +333,35 @@ def platform_font_checks(browser, page_path: Path, index_of: dict[int, int], dur
     page.close()
 
 
-def hue_sweep(browser, page_path: Path, check) -> int:
-    """Every fill colour rule B draws over every pair of the page, at rest, at the arrival
-    instant and mid block motion, in one evaluate; returns how many distinct fills were seen.
-    The arriving square's fill leans toward scarlet on purpose and is left out (it is identity
-    n + 1 of the pair); hidden pool elements of later identities are left out as well."""
+def colour_sweep(browser, page_path: Path, check) -> tuple[int, int]:
+    """Every fill the page draws over every pair, at rest, at the arrival instant and mid block
+    motion, in one evaluate; returns (distinct fills, hue families reached).
+
+    Revision 11 replaced the teal-to-citron sweep with one map that is always on: the hue is the
+    palette slot of the square's angle and the shade is its full-side contact count, so every fill
+    on the stage must be an entry of the page's own 20 x 5 shade table — which is checked here
+    against the generator that produced it, `square_fill_palette` in sqpack/render/color.py.
+
+    Revision 12 made that map an *option* and the square's own identity the default, so the sweep
+    selects `angle-stable` before it starts: what is under test here is still the angle map, and
+    the identity greens are a different scheme with their own checks in `check_workbench.py`.
+
+    The arriving square is left out: its fill leans toward scarlet on purpose (it is identity
+    n + 1 of the pair), and so are the hidden pool elements of later identities. Revision 6's
+    desaturation is turned off for the sweep — it drains a fill's chroma while the pair moves, and
+    with it left on the same sweep puts 66 further colours on the stage that are nobody's palette
+    entry. The drain is a separate feature with its own checks; what is under test here is the map.
+    """
     page = browser.new_page(viewport={"width": 1920, "height": 1080}, device_scale_factor=1)
     page.goto(page_path.as_uri(), wait_until="load")
     page.evaluate("document.fonts.ready")
-    fills = page.evaluate(
+    swept = page.evaluate(
         """(() => {
           const api = window.atlasTransitions;
           api.setCapture(true);
-          api.setColorRule('continuous');
+          api.setDesaturate(false);
+          // Revision 12: the angle map is one of three schemes now, and not the default.
+          if (api.setColorScheme) api.setColorScheme('angle-stable');
           const seen = new Set();
           const collect = () => {
             const n = api.state().n;
@@ -357,18 +375,50 @@ def hue_sweep(browser, page_path: Path, check) -> int:
             const sc = api.schedule();
             for (const t of [0, sc.arrived, (sc.blocksStart + sc.blocksEnd) / 2, 2.8]) { api.seek(t); collect(); }
           }
-          return Array.from(seen);
+          const colour = api.colour();
+          const token = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+          return {
+            fills: Array.from(seen), shades: colour.shades, palette: colour.palette,
+            reserved: [token('--new'), token('--met')],
+          };
         })()"""
     )
     page.close()
-    check(len(fills) > 100, f"hue sweep saw only {len(fills)} distinct fills")
-    outside = []
-    for fill in fills:
-        chroma, hue = oklch_hue(fill)
-        if not (CITRON_HUE - HUE_TOLERANCE <= hue <= TEAL_HUE + HUE_TOLERANCE):
-            outside.append(f"{fill} (hue {hue:.1f}, chroma {chroma:.3f})")
-    check(not outside, f"rule B fills outside the teal-to-citron sweep: {outside[:8]}")
-    return len(fills)
+    fills, shades, palette = swept["fills"], swept["shades"], swept["palette"]
+
+    # 1. The table the page carries is the atlas's own, not a hand-typed copy that has drifted.
+    try:
+        from sqpack.render.color import square_fill_palette  # noqa: PLC0415
+
+        generated = [list(family) for family in square_fill_palette(hue_count=SHADE_HUES, shades_per_hue=SHADE_STEPS)]
+        check(shades == generated, f"the page's shade table is not square_fill_palette({SHADE_HUES}, {SHADE_STEPS})")
+    except ImportError:  # pragma: no cover - the project venv has sqpack importable
+        # Without sqpack the generator is out of reach, so only the table's shape can be checked,
+        # against the hue palette the page reports beside it: one family of five a palette slot.
+        check(
+            len(palette) == SHADE_HUES and [len(f) for f in shades] == [SHADE_STEPS] * SHADE_HUES,
+            f"the page carries {len(palette)} hues and shade families {[len(f) for f in shades]}",
+        )
+        print("  (sqpack is not importable: the shade table was checked for shape against the page's palette only)")
+
+    # 2. Every fill drawn is in the table, and the sweep sees a good spread of it. Measured:
+    # index-all.html's 323 pairs at four instants each draw 66 of the table's 100 shades and reach
+    # all 20 hue families; the 25-pair index.html draws 56 and reaches all 20. The floor is pinned
+    # under the smaller of the two. Not all 100 are reachable — three and four full-side contacts
+    # are rare away from the pinned tilts, so most families are only seen at their light end.
+    table = {shade for family in shades for shade in family}
+    stray = sorted(fill for fill in fills if fill not in table)
+    check(not stray, f"fills drawn that are in no shade family: {stray[:8]}")
+    families = sum(1 for family in shades if any(fill in family for fill in fills))
+    check(len(fills) >= 50, f"the colour sweep saw only {len(fills)} distinct fills")
+    check(families == len(shades), f"the sweep reached {families} of {len(shades)} hue families")
+
+    # 3. The two colours the page reserves are never a square's fill.
+    reserved = {colour.lower() for colour in swept["reserved"]}
+    check(reserved == RESERVED_COLOURS, f"the page's reserved colours are {sorted(reserved)}, expected {sorted(RESERVED_COLOURS)}")
+    taken = sorted(fill for fill in fills if fill.lower() in RESERVED_COLOURS)
+    check(not taken, f"a square is filled with a reserved colour (the scarlet mark or the met green): {taken}")
+    return len(fills), families
 
 
 def staging_checks(page, api: str, index_of: dict[int, int], duration: float, check) -> None:
@@ -687,10 +737,10 @@ def browser_checks(page_path: Path, check) -> None:
                 _, instants_all = type_and_fit_sweep(browser, HERE / "index-all.html", check, expected_left)
                 print(f"type and fit sweep over index-all.html: {instants_all} instants")
 
-            # Colour rule B over the whole corpus, from the all-pairs page when it is present.
+            # Revision 11's colouring over the whole corpus, from the all-pairs page when it is present.
             sweep_page = HERE / "index-all.html" if (HERE / "index-all.html").exists() else page_path
-            distinct = hue_sweep(browser, sweep_page, check)
-            print(f"hue sweep over {sweep_page.name}: {distinct} distinct rule-B fills, all within {CITRON_HUE}..{TEAL_HUE} degrees")
+            distinct, families = colour_sweep(browser, sweep_page, check)
+            print(f"colour sweep over {sweep_page.name}: {distinct} distinct fills, every one in the {SHADE_HUES}x{SHADE_STEPS} shade table, {families} hue families reached")
         finally:
             browser.close()
 
@@ -904,9 +954,14 @@ def main() -> int:
     check(html.lower().count("a3123f") == 1, f"scarlet appears {html.lower().count('a3123f')} times, expected once")
     check("--accent" not in html and "proved optimal'" not in html, "the old scarlet status line survives")
     # The panel's lines are built by script, so their classes appear as script strings.
-    for needle in ('id="progress"', 'id="mark"', "scarlet marks the new square", "badge-query", 'class="nline"', ".lower-note {", "'lower-note'", "'proved lower bound'",
+    for needle in ('id="progress"', 'id="mark"', "badge-query", 'class="nline"', ".lower-note {", "'lower-note'", "'proved lower bound'",
                    "data-identity", "data-phase=\"add-then-move\"", "data-phase=\"move-then-add\"", 'id="style-select"'):
         check(needle in html, f"index.html lacks {needle}")
+    # Revision 9 removed the legend line that named the scarlet convention, and three of its
+    # companions were flipped from presence to absence then. This one was left asserting the prose,
+    # and because it fires before the browser tier it gated the whole tier off for two revisions.
+    # Flipped here for the same reason the others were: the page is meant not to explain itself.
+    check("scarlet marks the new square" not in html, "the scarlet legend line is back on the stage")
     # Revision 9: nothing on the stage explains the stage. The three legend lines, the sentence that
     # narrated the block matching and the keyboard hint are gone, and `check_legend.py` drives the
     # rendered page to prove none of their wording comes back at any setting.
@@ -916,7 +971,7 @@ def main() -> int:
     check('id="newsq"' not in html, "the pre-identity new-square element survives")
 
     # Revision 3: KaTeX_Main is embedded as the symbols face, after PT Serif in the serif stack,
-    # with the relation range and the size adjustment; the two-tilde drawing is gone; rule B is symmetric.
+    # with the relation range and the size adjustment; and the two-tilde drawing is gone.
     katex_b64 = base64.b64encode(KATEX_MAIN.read_bytes()).decode("ascii")
     check(katex_b64 in html, "KaTeX_Main-Regular.woff2 is not embedded")
     face = re.search(r"@font-face\{font-family:'Atlas Symbols';[^}]*\}", html)
@@ -926,7 +981,13 @@ def main() -> int:
     check(re.search(r'--serif:\s*"PT Serif",\s*"Atlas Symbols"', html) is not None, "Atlas Symbols does not follow PT Serif in the serif stack")
     check(html.count("unicode-range:") == 5, f"{html.count('unicode-range:')} faces carry a unicode-range, expected 5")
     check("tildePath" not in html, "the two-tilde approximately-equal drawing survives")
-    check("Math.min(angle, 90 - angle)" in html and "LONG_ARC" not in html, "colour rule B is not the symmetric sweep")
+
+    # Revision 11: one colouring and no rule to choose. The angle map is in the page — the half-degree
+    # class tolerance, the slot a tilt takes, the eighteen free slots the quarter turn is cut into and
+    # the contact count's shade — and the teal-to-citron sweep it replaced is not.
+    for needle in ("const ANGLE_TOL = 0.5;", "function slotForAngle(", "const FREE_SLOTS = PALETTE.length - 2;", "function shadeForContacts("):
+        check(needle in html, f"index.html lacks the angle map's {needle}")
+    check("LONG_ARC" not in html and "Math.min(angle, 90 - angle)" not in html, "the old teal-to-citron sweep survives in the page")
 
     if not failures:
         browser_checks(HERE / "index.html", check)
@@ -942,7 +1003,7 @@ def main() -> int:
         "overlap census present; index.html offline; badges, star, open list and lower bounds match the record; scarlet defined once; "
         "KaTeX_Main embedded and setting the relations; browser: one element per identity created once, five motion modes with "
         "add-then-move the default, styles B and C ending on n+1's poses, the new square in before anything moves, blocks rigid mid motion, n-line above the numeral, "
-        "lower-bound slots fixed, progress bar clock-pure, facts layers never overlap, scarlet mark on schedule, rule B within teal..citron; "
+        f"lower-bound slots fixed, progress bar clock-pure, facts layers never overlap, scarlet mark on schedule, every fill in the {SHADE_HUES}x{SHADE_STEPS} angle-map shade table; "
         f"type scale {'/'.join(map(str, TYPE_SCALE))}, numeral {NUMERAL_PX} px at weight {NUMERAL_WEIGHT}, "
         "panel above the bar and every slot fixed over every embedded pair."
     )
