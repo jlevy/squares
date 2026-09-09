@@ -464,6 +464,8 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-footprint-contract.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-pose-refinement-contract.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/fixed-cover-transfer-review.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/point-extension-lemma.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/multiple-footprint-domain-contract.md, role: research-report, authority: record, lifecycle: retained}
 collections:
   - pattern: packing/benchmarks/math-startup/experiments/*.md
     role: experiment-record

@@ -142,7 +142,7 @@ hypotheses, one open hypothesis, twenty-five open questions, and forty-five bloc
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
-One hypothesis is running, none is waiting on review, and six are unresolved.
+Two hypotheses are running, two are waiting on review, and eight are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -3485,7 +3485,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 96 rounds registered in `series-000`.
+There are 97 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1360.4 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -3623,6 +3623,7 @@ archive beside it.
 | [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpointcombination retains mass7; independentaudit pending; processchargedonce | rejected |
 | [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md) | 11 | target | H-140 | Exact full181net replay of unchanged residualatoms fromexp136 | Prospective protocol, uninvoked | in-progress |
 | [exp-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md) | 11 | target | H-139 | Matched unrestricted/point/triangle/endpoint covers on independent369site support andnine directions | Prospective protocol, uninvoked | in-progress |
+| [exp-141](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md) | 11 | target | H-137 | Independent exact reconstruction of the exp137 screen | Prospective receipt audit, uninvoked | in-progress |
 
 ### Cost and provenance
 
@@ -3724,10 +3725,11 @@ archive beside it.
 | exp-138 | same producer as137; no duplicatecharge | 0 s | — | criterion | `223c969d` |
 | exp-139 | one five-minute exactfullnet reader; uninvoked | — | — | — | — |
 | exp-140 | four120secondnumericalarms, ten-minute externallimit; uninvoked | — | — | — | — |
+| exp-141 | one five-minute independent exact audit; uninvoked | — | — | — | — |
 
-### What the 96 rounds jointly establish
+### What the 97 rounds jointly establish
 
-The 96 rounds use 2152.1 agent-minutes and 1360.4 wall-minutes under the campaign’s
+The 97 rounds use 2152.1 agent-minutes and 1360.4 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
