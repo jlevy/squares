@@ -86,7 +86,7 @@ def pose_of(v: Array) -> Array:
     return np.stack([mean[..., 0], mean[..., 1], np.arctan2(num, den)], axis=-1)
 
 
-def _edge_axes(v: Array) -> Array:
+def edge_axes(v: Array) -> Array:
     """The four outward edge normals of each quadrilateral, shaped `(..., 4, 2)`."""
     e = np.roll(v, -1, axis=-2) - v
     u = np.stack([e[..., 1], -e[..., 0]], axis=-1)
@@ -95,7 +95,7 @@ def _edge_axes(v: Array) -> Array:
 
 def _axis_spans(va: Array, vb: Array) -> tuple[Array, Array, Array]:
     """Both corner sets resolved along every candidate separating direction."""
-    axes = np.concatenate([_edge_axes(va), _edge_axes(vb)], axis=-2)
+    axes = np.concatenate([edge_axes(va), edge_axes(vb)], axis=-2)
     return axes, np.einsum("pkc,pac->pka", axes, va), np.einsum("pkc,pac->pka", axes, vb)
 
 
@@ -210,6 +210,37 @@ def pair_separation(va: Array, vb: Array) -> Array:
 def wall_clearance(v: Array, side: float) -> Array:
     """Signed room each square has against the container: positive inside."""
     return np.minimum(v.min(axis=(-2, -1)), side - v.max(axis=(-2, -1)))
+
+
+def project_wall_contact(v: Array, side: float, band: float = 0.0) -> Array:
+    """Project corner sets onto "this square touches the container, to within `band`".
+
+    Rung four of the structure ladder. At `n = 11` the record has 34 incidences and only 14
+    of them are pair contacts; the other 20 hold squares against the boundary. A search
+    told the contact graph and nothing else realises the graph and still drifts off the
+    walls, which is why this exists.
+
+    The square translates toward whichever wall it is nearest, so the constraint says "be
+    against the boundary" without saying which side -- the loosest form that still pins the
+    configuration to the container.
+    """
+    room = np.stack(
+        [
+            v[..., 0].min(-1),
+            v[..., 1].min(-1),
+            side - v[..., 0].max(-1),
+            side - v[..., 1].max(-1),
+        ],
+        axis=-1,
+    )
+    nearest = room.argmin(-1)
+    gap = np.take_along_axis(room, nearest[..., None], -1)[..., 0]
+    push = np.maximum(0.0, gap - band)
+    axis = nearest % 2
+    sign = np.where(nearest < 2, -1.0, 1.0)
+    shift = np.zeros((*v.shape[:-2], 2))
+    np.put_along_axis(shift, axis[..., None], (sign * push)[..., None], -1)
+    return v + shift[..., None, :]
 
 
 def violation(poses: Array, side: float) -> float:

@@ -621,6 +621,60 @@ orders of magnitude larger and with no feasibility guarantee.
 The interesting reading is that the two are good at different things, and that a hybrid
 — project to feasibility, then anneal, then project again — is not yet on any list here.
 
+### A ladder of configuration constraints, and where memory sits on it
+
+The frame this thread list was missing.
+Structure is not on or off; it is a quantity, and the experiment worth running is which
+is the *lowest* rung that suffices — because the top of the ladder is the answer itself,
+and realising a full contact structure is a linear program rather than a search.
+
+| rung | what is declared | for `n = 11` |
+| ---: | --- | --- |
+| 0 | nothing | a cold random start |
+| 1 | a partition: which squares share an orientation, sizes only | two numbers, 6 and 5 |
+| 2 | the contact graph: which pairs touch | 14 edges |
+| 3 | the contact graph with types: which of those are face to face | 8 of the 14 |
+| 4 | additional geometric constraints: which squares lie on the container | the other 20 of 34 incidences |
+| 5 | additional memory constraints: repulsion from optima already visited | not built |
+
+Rung 3 is the one that buys the most per bit, and the reason is worth stating.
+An edge-edge contact pins the pair’s relative orientation to a quarter turn *without
+naming an angle*, so the orientation classes are derived from the structure rather than
+read off the record; a corner contact joins nothing, which leaves the hint loose exactly
+where the record is loose.
+That is the balance this exploration has been circling since the workbench sections:
+constrained enough to cut the search space, flexible enough to move near optimality.
+
+Every rung is declared as a **band, not an equality**, and that is not a detail.
+Declared exactly, the record becomes a *repelling* fixed point: started from Trump’s own
+`n = 11` packing with its fourteen contacts declared, the iteration drifts 0.0000 at 200
+steps, 0.0012 at 1,000 and 0.2839 at 4,000, deterministically, at every relaxation above
+`0.1`. Exact tangency makes the constraint sets meet non-transversally, the degenerate
+case the 2025 flow-limit paper excludes from its convergence results.
+The instrument is `devtools/sweep_structure_hints.py`; the controls beside each rung are
+a *rewired* graph of the same size whose edges do not touch at the record, and a
+*thinned* random subset, without which a result says only that constraints help and not
+that the structure did.
+
+**Rung 5 is metadynamics, and naming it connects a literature neither survey covered.**
+The idea: map the local optima a search keeps falling into, then repel from those
+specific configurations, so a run approaching an explored basin is pushed out of it —
+physics with memory.
+That is Laio and Parrinello’s history-dependent bias, deposited at visited points in a
+collective-variable space to fill basins.
+The closest thing either survey records is basin hopping
+([H-137](../hypotheses/H-137-basin-hopping-over-the-lp-quench.md)), which perturbs an
+incumbent rather than remembering where it has been.
+
+Its hard part is not the bias, it is the coordinate.
+Repelling in the raw `3n`-dimensional pose space is useless because the squares are
+interchangeable, so a relabelled copy of a visited optimum is a different point there
+and escapes the repulsion entirely.
+The variable has to be permutation-invariant, and the candidates are already in this
+repository and already listed in this document as the missing configuration distance:
+the contact-graph signature, the angle-class census, the chunk taxonomy.
+Tracked as `think-dh4k`.
+
 ## A Catalogue of Candidate Hypotheses
 
 These are candidates.

@@ -41,6 +41,7 @@ from devtools.divide_and_concur import (
     pose_of,
     project_contacts,
     project_pairs,
+    project_wall_contact,
     violation,
     wall_clearance,
 )
@@ -73,6 +74,7 @@ class Problem:
     contacts: list[tuple[int, int]] | None = None
     band: float = 0.02
     contact_weight: float = 1.0
+    walls: list[int] | None = None
     ra: Index = field(init=False)
     rb: Index = field(init=False)
     rw: Index = field(init=False)
@@ -145,6 +147,11 @@ class Problem:
                 x[self.ra[k]], x[self.rb[k]], self.band
             )
         out[self.rw] = np.clip(x[self.rw], 0.0, self.side)
+        if self.walls:
+            w = np.array(self.walls, dtype=np.intp)
+            out[self.rw[w]] = project_wall_contact(
+                np.clip(x[self.rw[w]], 0.0, self.side), self.side, self.band
+            )
         return out
 
     def reweight(self, x: Array, alpha: float, rate: float = 0.01) -> None:
@@ -189,6 +196,7 @@ def solve(
     contacts: list[tuple[int, int]] | None = None,
     band: float = 0.02,
     contact_weight: float = 1.0,
+    walls: list[int] | None = None,
     start: Array | None = None,
 ) -> Outcome:
     """One RRR run at a fixed container side.
@@ -206,7 +214,7 @@ def solve(
 
     `alpha` turns on the metric weighting: zero leaves every constraint equal.
     """
-    p = Problem(n, side, classes, contacts, band, contact_weight)
+    p = Problem(n, side, classes, contacts, band, contact_weight, walls)
     if start is None:
         start = np.stack(
             [
@@ -280,6 +288,11 @@ def ratchet(
     floor: float = 1e-3,
     jitter: float = 0.02,
     cold: float = 0.0,
+    band: float = 0.02,
+    contact_weight: float = 1.0,
+    classes: list[list[int]] | None = None,
+    contacts: list[tuple[int, int]] | None = None,
+    walls: list[int] | None = None,
 ) -> dict[str, Any]:
     """Tighten the container while the search keeps up, halving the step when it does not.
 
@@ -337,6 +350,11 @@ def ratchet(
                 alpha=alpha,
                 iters=iters,
                 monotone=monotone,
+                band=band,
+                contact_weight=contact_weight,
+                classes=classes,
+                contacts=contacts,
+                walls=walls,
                 start=start,
             )
             calls += 1
