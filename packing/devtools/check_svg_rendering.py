@@ -708,12 +708,15 @@ def run_animation_controls() -> dict[str, bool]:
 
 def _rendered_fixtures() -> dict[str, str]:
     from cases.stromquist.five_point_obstruction import SVG_ARTIFACT, control_svg
+    from devtools.render_owner_five_dot_figure import ARTIFACT as OWNER_FIVE_DOT_FIGURE
+    from devtools.render_owner_five_dot_figure import render_figure
     from devtools.render_packing_gallery import render_gallery
     from devtools.render_t018_proof_visual import ARTIFACT, render_visual
 
     rendered = render_gallery()
     rendered[ARTIFACT.name] = render_visual()
     rendered[SVG_ARTIFACT.name] = control_svg()
+    rendered[OWNER_FIVE_DOT_FIGURE.name] = render_figure()
     return rendered
 
 
@@ -765,6 +768,8 @@ def run_gallery_controls() -> dict[str, bool]:
     from devtools.build_known_best_atlas import COMPOSITES
     from devtools.map_prospective_sources import COVERAGE_OUTPUT
     from devtools.packing_render_adapters import frame_from_kingbird29
+    from devtools.render_owner_five_dot_figure import ARTIFACT as OWNER_FIVE_DOT_FIGURE
+    from devtools.render_owner_five_dot_figure import render_figure
     from devtools.render_packing_gallery import build_gallery_manifest
     from devtools.render_t018_proof_visual import ARTIFACT as T018_PROOF_VISUAL
     from sqpack.render import RenderSpec
@@ -840,6 +845,7 @@ def run_gallery_controls() -> dict[str, bool]:
             COVERAGE_OUTPUT.resolve(),
             T018_PROOF_VISUAL.resolve(),
             SVG_ARTIFACT.resolve(),
+            OWNER_FIVE_DOT_FIGURE.resolve(),
         }
     )
     comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
@@ -897,6 +903,8 @@ def run_gallery_controls() -> dict[str, bool]:
         <= document_svg_artifacts,
         "five_point_obstruction_svg_replays": SVG_ARTIFACT.is_file()
         and SVG_ARTIFACT.read_text(encoding="utf-8") == control_svg(),
+        "owner_five_dot_svg_replays": OWNER_FIVE_DOT_FIGURE.is_file()
+        and OWNER_FIVE_DOT_FIGURE.read_text(encoding="utf-8") == render_figure(),
         "frontier_cases_reference_gallery_artifacts_or_guide": all(
             embeds(f"packing/{example['frontier_case']}", example["artifact"])
             or references(f"packing/{example['frontier_case']}", "atlas/rendering/README.md")
