@@ -805,6 +805,11 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
 | H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
 | H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
+| H-143 | result registered | proof | The rank-one threshold-atom closure -- point atoms together with (S, k |  | 0 | T-025 |  |
+| H-144 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
+| H-145 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
+| H-146 | blocked | proof | For at least one four-owner class of PR 137's sixteen-per-corner struc |  | 0 |  |  |
+| H-147 | blocked | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

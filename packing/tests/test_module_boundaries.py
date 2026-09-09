@@ -849,6 +849,27 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             # 34139067270) before the surface copy was cut to the atlas sample's stride.
             "test_every_known_best_witness_agrees_with_its_manifest_entry",
         },
+        # 47s of call time across 1: the interval route over the whole doubled net of the
+        # retained threshold certificate, 361 directions and 1,639,903 boxes at one
+        # worker. Not a shared build -- the file's other seven tests sweep one direction
+        # or decide a small fixture and cost 2.7s between them -- so this pays only for
+        # itself, and the two-route gate it is half of is a command in the proof packet
+        # rather than a test at all.
+        "test_n11_threshold_certificate.py": {
+            "test_the_case_package_replays_the_retained_bytes_by_the_interval_route",  # 46.7s
+        },
+        # 9s of call time across 2: the two searches of the plateau reader that run over
+        # the whole 88-core ceiling family -- the rank-one Chvatal-Gomory separation at
+        # `t = 2` under its own 60s limit, and the complete two-of-three search over the
+        # family's 1,541 distinct membership sets. The file's module-scoped `ceiling`
+        # fixture is 1.04s and is not a shared build in the sense this registry warns
+        # about: the two ceiling tests left in the quick lane (1.10s and 0.72s of call,
+        # both under the 2s marking threshold) trigger it there anyway, so deferring
+        # these two moves no cost onto a neighbour.
+        "test_plateau_reader.py": {
+            "test_ceiling_family_separation_is_at_least_the_two_of_three_cut",  # 6.35s
+            "test_ceiling_family_two_of_three_is_exactly_five_quarters",  # 2.78s
+        },
         # 2s of call time across 1, and it is the boundary case the band exists for.
         # 2.22s locally, 6.43s on CI -- slower cores and two lanes beside it -- so it sat
         # under the 5s ceiling everywhere it had been run and over it where it counted.

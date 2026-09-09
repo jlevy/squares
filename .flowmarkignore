@@ -152,6 +152,14 @@ docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md
 # source body is intentionally preserved rather than retyped by the formatter.
 docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md
 
+# A contributed research note from an external agent session, checked in verbatim as a
+# dated record (received 2026-09-08). Measured on a copy in directory mode with the pinned
+# flowmark-rs 0.4.0 on 2026-09-09: 503 changed lines, almost all reflow, plus twelve
+# character-level edits inside the contributed body -- ten straight apostrophes retyped
+# as curly, one table separator row rewritten, one escaped period. Same rule as the
+# strategy review above: the source body is preserved rather than retyped.
+docs/project/reviews/review-2026-09-08-extending-s11-lower-bound-note.md
+
 # Vendored upstream repositories, checked out as submodules; their Markdown is the
 # upstream project's. flowmark skips a directory named `vendor` by default, but a
 # `--exclude` flag replaces that default list, so the exclusion is stated here too.

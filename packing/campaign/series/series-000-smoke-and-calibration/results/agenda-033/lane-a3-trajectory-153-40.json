@@ -1,0 +1,31 @@
+{
+ "trajectory": [
+  {
+   "stage": "rows-0",
+   "objective": 11.000000000000158,
+   "rows": 15021,
+   "site_orbits": 1950,
+   "sites": 15085,
+   "atom_orbits": 2566,
+   "atom_budget": 1.7017858840964104,
+   "positive_atoms": 17,
+   "site_support": 42,
+   "dual_support": 88,
+   "lp_seconds": 148.1824452869987,
+   "simplex_iterations": 8199,
+   "seconds": 175.38942405400303,
+   "wall": 1788951768.5763888
+  }
+ ],
+ "note": "at-n",
+ "meta": {
+  "scale": "765/764",
+  "carried_rows": 15021,
+  "dropped_rows": 0,
+  "old_rows": 15021,
+  "wall_start": 1788951593.1869617,
+  "final": "at-n",
+  "rows_complete": false,
+  "atom_rounds": 0
+ }
+}

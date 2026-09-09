@@ -54,7 +54,11 @@ from devtools.check_rung_figures import (
     superseded_rung_problems,
 )
 from devtools.check_synopsis import spell
-from devtools.dilation_corollary import LIMIT_RECORD_SCHEMA, PositiveQuadraticSurd
+from devtools.dilation_corollary import (
+    LIMIT_RECORD_SCHEMA,
+    THRESHOLD_LIMIT_RECORD_SCHEMA,
+    PositiveQuadraticSurd,
+)
 from devtools.render_certificate_reach import (
     covering_value_register,
     reported_covering_values,
@@ -673,6 +677,11 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
     binds that side. Ordinarily it is an endpoint certificate. T-022's typed exception is
     a weak limit record whose exact source hash, strict-family identity, and source mass
     are rechecked here; it is deliberately not treated as an endpoint certificate.
+    T-026's record is the same exception over a threshold source: the `v3` schema, whose
+    source block names the variant and whose decision carries the six threshold
+    conditions rather than five. Both are rechecked the same way, from the source bytes,
+    because the surd is a function of `B` and `D` alone whichever kind of atom carries
+    the charge.
     """
     evidence = _evidence_by_id()
     interval = _evidence("E-fractional-interval-decision")
@@ -698,7 +707,10 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
                 record = json.loads(target.read_text(encoding="utf-8"))
             except OSError, json.JSONDecodeError:
                 continue
-            if record.get("schema") != LIMIT_RECORD_SCHEMA:
+            if record.get("schema") not in (
+                LIMIT_RECORD_SCHEMA,
+                THRESHOLD_LIMIT_RECORD_SCHEMA,
+            ):
                 continue
             conclusion = record["conclusion"]
             assert conclusion["relation"] == ">="
@@ -728,7 +740,10 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
             assert conclusion["bounded_side_defining_polynomial"] == (
                 limit_side.defining_polynomial
             )
-            assert len(source["accepted_conditions"]) == 5
+            # A point source is decided on Conditions 1 to 5; a threshold source on
+            # Conditions 1, 1', 2', 3, 4 and 5', which is one more.
+            threshold = record["schema"] == THRESHOLD_LIMIT_RECORD_SCHEMA
+            assert len(source["accepted_conditions"]) == (6 if threshold else 5)
             cited[target.relative_to(REPO).as_posix()] = (limit_side.exact, source_figures)
         if not cited:
             continue

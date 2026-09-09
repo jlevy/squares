@@ -1,0 +1,12 @@
+{
+  "K": 180,
+  "control": true,
+  "B_own": "9977/10000",
+  "least_at_B_own": {
+    "exact": "100000203/100000000",
+    "float": 1.00000203
+  },
+  "argmin_at_B_own": 69,
+  "threshold_M_over_n": "685457679/687500000",
+  "passes_at_B_own": true
+}

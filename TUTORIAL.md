@@ -92,10 +92,20 @@ its search strategy.
 | proved lower bound explained here | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), an exact weighted atomic certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
 | gap between these bounds | about `0.067084` | still open |
 
-The technical record retains the small refinement `s(11) ≥ 3.810025723614703…` in the
-[T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md).
-It is a weak limit bound and does not decide fit at that endpoint; the table uses the
-simpler certificate bound proved below.
+The technical record retains the refinement `s(11) ≥ 3.816609502788862…` in the
+[T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
+[T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
+packets. It is a weak limit bound and does not decide fit at that endpoint.
+The strongest bound proved at a container side itself is `s(11) ≥ 191/50 = 3.82`, by the
+threshold certificate of
+[T-025](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md),
+which adds atoms of a second kind to the ones explained here.
+The strongest verified bound is
+`s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…`, those
+same atoms re-certified on a finer direction net and dilated
+([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)), and it
+is a weak limit bound like the two above.
+The table uses the simpler certificate bound proved below.
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** is the distance between the best upper and lower bounds, which

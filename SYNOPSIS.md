@@ -79,6 +79,9 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, as a weak limit corollary of T-018’s retained certificate. |
+| [T-025](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 191/50 = 3.82, by a threshold certificate: 584 point atoms of mass 271052551/31250000 and 320 threshold atoms, every one 2-of-3, of budget 143352577/62500000, on the D4-symmetric site set at shrunken side 9977/10000 and the 181-direction net. |
+| [T-024](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862, as a weak limit corollary of T-018’s retained atoms re-certified on a finer direction net. |
+| [T-026](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939, as a weak limit corollary of T-025’s threshold certificate re-certified on a finer direction net. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -139,7 +142,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives twenty-one confirmed hypotheses, sixteen refuted
-hypotheses, one open hypothesis, twenty-five open questions, and forty-five blocked
+hypotheses, two open hypotheses, twenty-six open questions, and forty-seven blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -212,7 +215,20 @@ case or experiment separately.
 | [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
 | [Math Startup Ledger](packing/benchmarks/math-startup/ledger.md) | generated status view | generated | generated | — |
 | [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane T: what the certificate language can and cannot do past 3.82](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t-theory-cuts-and-routes.md) | research synthesis | record | retained | — |
+| [Agenda 033, ceiling reader: an independent exact decision of the 191/50 ceiling family](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-reader-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 033: reconciliation against the in-flight upstream branches, 2026-09-09](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/reconciliation-upstream-2026-09-09.md) | dated review record | record | retained | — |
+| [Agenda 033, lane E: fixed-site row completion at 61/16 and the 3.82 cutting loop](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-e-lp-runs-61-16-and-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane M0: the exact fixed-support optimum of the 3.82 fractional packing](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-m0-fixed-support-polish-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane A: net refinement, frozen-measure expansion, and the shrink tax on the frozen T-018 atoms](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a-net-refinement-and-shrink-tax.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane B: threshold atoms at 191/50](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane T2: the cap of the threshold method and the next cut families](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-cap-and-next-cuts.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane T2: the plateau reader, exact feasibility of a point dual for the rank-one cut families](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-plateau-reader.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane A2: the frozen threshold certificate on finer direction nets](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md) | research synthesis | record | retained | — |
+| [Agenda 033, lane A3: the threshold loop at 383/100, and where it plateaus](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a3-threshold-loop-at-383-100.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
+| [Adversarial Review of the Threshold-Certificate Theorem and the 191/50 Candidate](docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md) | dated review record | record | retained | — |
+| [Contributed Research Note: Extending the Lower Bound for Eleven Squares](docs/project/reviews/review-2026-09-08-extending-s11-lower-bound-note.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
 | [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
 | [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
@@ -446,6 +462,9 @@ case or experiment separately.
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
 | [T-022 Dilation-Limit Corollary, Derived from T-018](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) | research synthesis | record | retained | — |
+| [T-024 Dilation-Limit Corollary on a Finer Net, Derived from T-018’s Atoms](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) | research synthesis | record | retained | — |
+| [T-025: A Threshold Certificate Proves `s(11) >= 191/50`](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md) | research synthesis | record | retained | — |
+| [T-026 Dilation-Limit Corollary of the Threshold Certificate on a Finer Net](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 381/100$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) | generated status view | generated | generated | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -2505,8 +2524,8 @@ no intervening improvement:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…` | [T-022](packing/frontier/RESULTS.md), a weak limit corollary of T-018’s first-party certificate and a sharpened containment lemma |
-| Bound gap | `0.067057866408` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…` | [T-026](packing/frontier/RESULTS.md), the weak dilation limit of T-025’s threshold certificate re-certified on a 1440-step direction net |
+| Bound gap | `0.050636179450` | the second-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -3302,6 +3321,11 @@ round that names the hypothesis, control roles included.
 | [H-140](packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md) | refuted | Unchanged rationalized fixed-corner residual weights cover the complete181-direction net | 1 | 18.65s wall |
 | [H-141](packing/campaign/hypotheses/H-141-four-owner-footprint-matched-gain.md) | confirmed | Four guaranteed endpoint footprints improve the matched numerical cover beyond four bare owned marks | 1 | 9.12s wall |
 | [H-142](packing/campaign/hypotheses/H-142-five-dot-full-net-cover.md) | confirmed | The fixed five-dot four-owner proposal covers all361canonical directions | 1 | 28.95s wall |
+| [H-143](packing/campaign/hypotheses/H-143-threshold-certificate-at-191-50.md) | result registered | Rank-one threshold atoms admit a certificate of budget below eleven at 191/50, where the point atoms provably do not; the frozen family has budget 10.967323 and is registered as [T-025](packing/frontier/RESULTS.md) | 0 | — |
+| [H-144](packing/campaign/hypotheses/H-144-reoptimised-certificate-on-a-finer-net.md) | open | Re-optimising the covering LP on a net of 720 or more directions at the sharpened shrink passes a dilation supremum of 3.82 | 0 | — |
+| [H-145](packing/campaign/hypotheses/H-145-where-the-point-atom-ceiling-begins.md) | open question | Where does the point-atom ceiling begin in side, and does any weight-eleven family at 191/50 survive a larger shrink? | 0 | — |
+| [H-146](packing/campaign/hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
+| [H-147](packing/campaign/hypotheses/H-147-threshold-certificate-past-3-82.md) | blocked | The threshold-atom language certifies a side above 191/50, by the same loop at a larger side or by the finer-net shrink; the separation loop that would produce the atoms is unbuilt | 0 | — |
 
 ### Confirmed
 
@@ -4542,8 +4566,17 @@ This project’s instances and generator moved seven registered cases in one day
 `2 + 4/sqrt(5)`, stated in 1984 and published in 2003; the recorded search found no
 intervening improvement.
 [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
-`3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
-The shared S5 rubric category does not make these contributions comparable in size.
+`3.810025723614703…`, and [T-024](packing/frontier/RESULTS.md) re-certifies the same
+atoms on a finer direction net and dilates them to `3.816609502788862…`; their proofs
+and endpoint limitations remain in the technical record.
+`s(11) >= 191/50` is [T-025](packing/frontier/RESULTS.md), a certificate of a new kind:
+threshold atoms, which charge a core holding at least `k` of a set’s points and cost
+only `floor(|S| / k)` of the budget, carry the side past the exact ceiling that the
+point-atom method provably cannot pass.
+[T-026](packing/frontier/RESULTS.md) then re-certifies those atoms on a 1440-step net
+and dilates them to `3.826447410572939…`, the verified lower bound of the case and a
+weak limit like T-022’s and T-024’s. The shared S5 rubric category does not make these
+contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
 was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
