@@ -52,15 +52,17 @@ experiment:
     question: The maximum endpoint one-corner survivor mass is at least10. H138 has its own prospective
       verdict record exp138 over the same producer receipt.
     outcome: criterion_missed
-    checked_by: Exact source-bound producer summaries and complete class records; independent audit pending.
+    checked_by: Exact source-bound producer summaries and complete class records; independently replayed
+      by exp141 at published source44bf815f.
   verdict:
     decision: rejected
     primary_criterion: The maximum endpoint one-corner survivor mass is at least10. H138 has its own prospective
       verdict record exp138 over the same producer receipt.
     reason: Complete exact producer screen found0of16endpoint classes with massatleast10; maximum77421212793/8221052780.
       This particular retained-family obstruction conjecture fails; the conditionalcover method remains
-      open. Independent retained-receipt audit pending.
-    needs_review: true
+      open. Exp141 independently confirmed the source identities, directions, transports, positiveSAT gaps,
+      masks, cardinalities, exact masses and summaries.
+    needs_review: false
   effort:
     timebox: One shared five-minute producer ownedbyexp137; no duplicateprocessfor138
     wall_seconds: 53.38
@@ -71,7 +73,8 @@ experiment:
 Complete exact producer screen found0of16endpoint classes with massatleast10;
 maximum77421212793/8221052780. This particular retained-family obstruction conjecture
 fails; the conditionalcover method remains open.
-Independent receipt audit is pending; this verdict has needs_review enabled.
+Exp141 independently confirmed the retained receipt, so this verdict no longer needs
+review.
 
 This protocol is recorded before target filtering.
 The unchanged source family has Git blob `8a0bf1a264a1361649bc0acd0f70907ba8125f2f` and

@@ -174,9 +174,11 @@ session:
     operator: GPT-5.6 Sol, extra high; residual_separator_repair
     recording: contemporaneous
     phase: 1
-    status: in_progress
-    outcome: null
-    evidence: []
+    status: completed
+    outcome: Exp139 rejection and exp140 unresolved outcome recorded; exp142 successor semantics reviewed.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md
     files: &id002
     - packing/campaign/hypotheses/H-139-owner-footprint-matched-gain.md
     - packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md
@@ -186,7 +188,7 @@ session:
     uncertainty: Target outcomes are recorded separately.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Return the bounded deliverable without a scientific target invocation.
+    next_action: Successor allocations below own remaining work.
     budget_minutes: 15
     started_at: '2026-09-09T04:30:00Z'
     deadline_at: '2026-09-09T04:45:00Z'
@@ -203,9 +205,11 @@ session:
     operator: GPT-5.6 Sol, extra high; owner_footprint_engine
     recording: contemporaneous
     phase: 1
-    status: in_progress
-    outcome: null
-    evidence: []
+    status: completed
+    outcome: Four-owner domain and runner completed;33 controls pass, source44bf815f.
+    evidence:
+    - packing/devtools/multi_owner_domains.py
+    - packing/devtools/run_owner_footprint_cover.py
     files: &id003
     - packing/devtools/multi_owner_domains.py
     - packing/tests/test_multi_owner_domains.py
@@ -215,7 +219,7 @@ session:
     uncertainty: Target outcomes are recorded separately.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Return the bounded deliverable without a scientific target invocation.
+    next_action: Successor allocations below own remaining work.
     budget_minutes: 15
     started_at: '2026-09-09T04:30:00Z'
     deadline_at: '2026-09-09T04:45:00Z'
@@ -232,16 +236,17 @@ session:
     operator: GPT-6 Astra, extra high; math_progress_audit
     recording: contemporaneous
     phase: 1
-    status: in_progress
-    outcome: null
-    evidence: []
+    status: completed
+    outcome: Transfer and multi-domain review retained; scientific summary prepared in TEMP.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/receipts-and-multi-domain-review.md
     files: &id004
     - /private/tmp/n11-multiple-footprint-domain-review.md
     checks: []
     uncertainty: Target outcomes are recorded separately.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Return the bounded deliverable without a scientific target invocation.
+    next_action: Successor allocations below own remaining work.
     budget_minutes: 12
     started_at: '2026-09-09T04:30:00Z'
     deadline_at: '2026-09-09T04:42:00Z'
@@ -251,6 +256,58 @@ session:
     kill_condition: Unresolved mathematical contract or failed control at deadline.
     fallback: Return partial instrument and concrete blocker; no target run.
     write_scope: *id004
+    excluded_commands:
+    - Scientific target invocation
+    - Shared campaign records and Git mutation
+  - task: Prepare source-bound generic exact endpoint replay wrapper in TEMP
+    operator: GPT-5.6 Sol, extra high; owner_footprint_engine
+    recording: contemporaneous
+    phase: 1
+    status: in_progress
+    outcome: null
+    evidence: []
+    files: &id005
+    - /private/tmp/squares-owner-exact-replay
+    checks: []
+    uncertainty: Target outcomes are recorded separately.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete the bounded deliverable; scientific targets require a separate root protocol.
+    budget_minutes: 13
+    started_at: '2026-09-09T04:45:00Z'
+    deadline_at: '2026-09-09T04:58:00Z'
+    expected_output: Reviewed exact contract and focused controls; retain earlier dispatch history in
+      native logs.
+    validation_command: Focused project Python3.14 pytest, Ruff and BasedPyright for owned code.
+    kill_condition: Unresolved mathematical contract or failed control at deadline.
+    fallback: Return partial instrument and concrete blocker; no target run.
+    write_scope: *id005
+    excluded_commands:
+    - Scientific target invocation
+    - Shared campaign records and Git mutation
+  - task: Push validated checkpoint and publish accurate PR137 results and usage
+    operator: GPT-5.6 Sol, extra high; residual_separator_repair
+    recording: contemporaneous
+    phase: 1
+    status: in_progress
+    outcome: null
+    evidence: []
+    files: &id006
+    - /private/tmp/pr137-final-body.md
+    checks: []
+    uncertainty: Target outcomes are recorded separately.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete the bounded deliverable; scientific targets require a separate root protocol.
+    budget_minutes: 18.6167
+    started_at: '2026-09-09T04:45:00Z'
+    deadline_at: '2026-09-09T05:03:37Z'
+    expected_output: Reviewed exact contract and focused controls; retain earlier dispatch history in
+      native logs.
+    validation_command: Focused project Python3.14 pytest, Ruff and BasedPyright for owned code.
+    kill_condition: Unresolved mathematical contract or failed control at deadline.
+    fallback: Return partial instrument and concrete blocker; no target run.
+    write_scope: *id006
     excluded_commands:
     - Scientific target invocation
     - Shared campaign records and Git mutation
@@ -271,6 +328,8 @@ session:
   - Exact dualproducer exp137 ran once at223c969d in53.38seconds; both claims have pending independent
     audit, with0thresholdqualifyingclasses.
   - Current fullnetwrapper/genericrunner controls:13tests passed in2.20seconds; Ruff and formatcheck clean.
+  - Frozen44bf815f push tier passed45of69steps in116.75seconds;1077tests passed,3deselected. Earlier92e8217d115.56second
+    invocation failed3steps from concurrent source/record edits; the frozen repeat passes.
   stop_reason: null
   next_action: Retain full-net negative and incomplete generic pilot, audit exact screen, and admit a
     controlled four-owner pilot before the research cutoff.

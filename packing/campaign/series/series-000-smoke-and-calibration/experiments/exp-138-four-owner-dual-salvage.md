@@ -50,14 +50,15 @@ experiment:
     role: outcome
     question: The minimum endpoint survivor mass over all65536four-owner combinations is at least7.
     outcome: criterion_missed
-    checked_by: Exact source-bound producer summaries and complete class records; independent audit pending.
+    checked_by: Exact source-bound producer summaries and complete class records; independently replayed
+      by exp141 at published source44bf815f.
   verdict:
     decision: rejected
     primary_criterion: The minimum endpoint survivor mass over all65536four-owner combinations is at least7.
     reason: Complete exact producer screen found0of65536endpoint combinations with massatleast7; maximum13394344077/2055263195
       and minimum1642317587/2055263195. Sharedproducerchargedtoexp137; no secondprocess. Independent retained-receipt
-      audit pending.
-    needs_review: true
+      audit exp141 confirmed all exact checks.
+    needs_review: false
   effort:
     timebox: One shared five-minute producer ownedbyexp137; no duplicateprocessfor138
     wall_seconds: 0
@@ -68,7 +69,8 @@ experiment:
 Complete exact producer screen found0of65536endpoint combinations with massatleast7;
 maximum13394344077/2055263195 and minimum1642317587/2055263195.
 Sharedproducerchargedtoexp137; no secondprocess.
-Independent receipt audit is pending; this verdict has needs_review enabled.
+Exp141 independently confirmed the complete retained receipt, so this verdict no longer
+needs review.
 
 This separate prospective verdict applies H138 to the four-owner portion of exp137’s
 single producer receipt.

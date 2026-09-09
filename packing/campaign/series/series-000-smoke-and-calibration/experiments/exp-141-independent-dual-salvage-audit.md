@@ -20,6 +20,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python3.14.7; one process
     selftest_passed: true
+    engine_commit: 44bf815f
   instance:
     axis: n
     point: 11
@@ -45,23 +46,48 @@ experiment:
       before decoding;1000sources,1000component screens,100000jointclasses perkind. No producer replay,
       arrangement-depth recomputation, LP or retry.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-141-corner-dual-salvage-audit.json
-  lease:
-    expires: '2026-09-09T04:55:00Z'
-  results: []
+    commit: 44bf815f
+  results:
+  - shape: determination
+    role: outcome
+    question: 'Original H137 claim: the audited maximum endpoint one-corner survivor mass is at least10.'
+    outcome: criterion_missed
+    checked_by: Independent exact receipt audit completed all147456SAT checks,192component screens and
+      three complete65536-class reconstructions with matching exact summaries.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: 'Original H137 claim: the audited maximum endpoint one-corner survivor mass is
       at least10. Audit success by itself does not make this mathematical claim true.'
-    reason: Prospective independent receipt audit. Exp137 already reports a negative; this confirmation
-      must retain that verdict if all exact checks pass, and stay unresolved if the audit fails.
+    reason: The audit completed against clean tracked receipt and source blobs at44bf815f and confirmed
+      every recorded source identity, canonical direction, exact transport, positiveSAT gap, mask,
+      cardinality, mass and summary. It therefore confirms exp137's subthreshold maximum and rejects H137;
+      audit success does not reverse the mathematical verdict. The audit preserves the receipt's immutable
+      source-era provisional label and does not itself establish the separately reviewed endpoint-containment
+      theorem.
+    needs_review: false
+  effort:
+    timebox: One independently bounded five-minute receipt audit; no producer, arrangement or LP replay
+    wall_seconds: 55.70
+    stopped_by: criterion
 ---
 # Exp141: Independent Dualscreen Replay
 
-Exp137 reports a negative result on H137, with its needs_review flag still set.
-This confirmatory experiment audits that immutable receipt; it is not a new unobserved
-discovery sample. Its mathematical verdict remains tied to H137’s original threshold.
+At registration, exp137 reported a negative result on H137 with its needs_review flag
+still set. This confirmatory experiment audits that immutable receipt; it is not a new
+unobserved discovery sample.
+Its mathematical verdict remains tied to H137’s original threshold.
 Passing the audit and confirming a subthreshold mass rejects H137; it does not accept
 the opposite claim by relabeling the hypothesis.
+
+The audit completed at published source `44bf815f` in55.70seconds. It checked768source
+placements,361canonical directions,192component screens,147456exact positive-gap SAT
+claims and all three sets of65536joint classes.
+Exact masks, masses and summaries matched.
+This confirms the rejected exp137 and exp138 verdicts and clears their review flags.
+The receipt keeps its immutable source-era provisional endpoint label.
+This audit does not itself establish the endpoint-containment theorem; the separate
+current analytic proof is recorded in
+[the endpoint-footprint review](../results/agenda-032/proofs/endpoint-footprint-review.md).
 
 The separate auditor reconstructs source poses and finite direction membership, checks
 every recorded strict separating witness, and independently validates every joint case

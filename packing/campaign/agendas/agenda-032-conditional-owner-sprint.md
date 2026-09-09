@@ -48,7 +48,7 @@ agenda:
     owner_focus: efficiency
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Does deleting poses that meet guaranteed owner footprints from the retained depth-one fractional
       family already rule out useful covers for those branches?
@@ -67,17 +67,21 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp137/138 foundnoobstruction in anyclass; independent receipt audit pending. Further
-      fixed-weight deletion is dominated by the point-only result.
+    next_evidence: The independent audit confirms all subthreshold survivor results. Stop unchanged-weight
+      deletion filters.
     hypotheses:
     - H-137
     - H-138
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md
   - id: BC-312
     purpose: research
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Do guaranteed area footprints improve the covering objective beyond merely owning a point?
     budget: Exact geometry and proof work beside BC-310 and BC-311; a small matched LP only after controls,
@@ -95,11 +99,13 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp140 is unresolved at its point-arm round limit. Exp142 retains the support and directions
-      with more rounds; the four-owner successor is being admitted.
+    next_evidence: 'One-owner numerical comparison accepted: point11.5745, triangle10.5556, endpoint10.3889.
+      Endpoint remains above10.'
     hypotheses:
     - H-111
     - H-139
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-142-one-owner-completion.md
   - id: BC-313
     purpose: research
     owner_focus: correctness
@@ -122,16 +128,17 @@ agenda:
     depends_on:
     - BC-310
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp139 rejected the unscaled cover at minimum760979/800000. Rescaling gives a valid
-      conditional all-angle cover of mass31219612/3804895, above7.
+    next_evidence: Exp139 rejected the unscaled fixed-corner proposal and gave normalized8.2051. Exp144
+      now tests the five-dot four-owner endpoint candidate on full361directions.
     hypotheses:
     - H-140
+    - H-142
   - id: BC-315
     purpose: research
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Do four guaranteed occupied regions improve the matched cover beyond four bare marks?
     budget: One predeclared ten-minute four-arm pilot after 33 controlled geometry/runner checks; no branch
@@ -148,9 +155,12 @@ agenda:
     depends_on: []
     parallel_group: conditional-sprint
     program: n11-structure-and-conditional-dots
-    next_evidence: Exp143 fresh matched numerical pilot; compare directly with exp142 single-owner mechanism.
+    next_evidence: 'Four-owner numerical comparison accepted: point9, triangle6, endpoint5. Exp144 verifies
+      the fixed five-dot candidate on the complete net.'
     hypotheses:
     - H-141
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-143-h141-four-owner-footprint-matched-gain.md
   - id: BC-314
     purpose: measurement_validation
     owner_focus: process

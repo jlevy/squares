@@ -439,6 +439,7 @@ prevent those local facts from being mistaken for a global exclusion.
 | 135 | Compare owned-point and area-footprint covers on matched independent sites | registered | [H-139](hypotheses/H-139-owner-footprint-matched-gain.md) | Four numerical arms distinguish geometry gain from the change in remaining-square count. |
 | 136 | Check the fixed-corner rational candidate across every retained direction | registered | [H-140](hypotheses/H-140-fixed-corner-full-net-cover.md) | Exact full-net minimum tests the unchanged weights; positive minima also permit a separately labeled normalized feasible mass. |
 | 137 | Compare four guaranteed occupied regions with four bare marks | registered | [H-141](hypotheses/H-141-four-owner-footprint-matched-gain.md) | One compatible owner configuration tests the residual-seven mechanism before any exhaustive branch expansion. |
+| 138 | Verify the five-dot four-owner candidate on the complete net | registered | [H-142](hypotheses/H-142-five-dot-full-net-cover.md) | A positive full361minimum turns the numerical branch candidate into a five-dot conditional exclusion under the reviewed transfer. |
 
 ## Dead ends
 

@@ -78,6 +78,10 @@ Unrestricted converged, but point stopped at its 60-round cap with least surveye
 `0.955338364468638`. Triangle and endpoint were not started, so no primary gain exists.
 The point arm’s last objective is incomplete and does not count as a covering value.
 
+Exp142 completed the unchanged geometric comparison: point11.574514991181658,
+triangle10.555555555555555, endpoint10.38888888888889. The numerical mechanism criterion
+is accepted; exp140 remains retained as an incomplete earlier run.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -30,6 +30,7 @@ experiment:
     host_system: Darwin 25.5.0 arm64; ten logical CPUs; Python 3.14.7; one process, sequential arms, default
       solver threading
     selftest_passed: true
+    engine_commit: 44bf815f
   instance:
     axis: n
     point: 11
@@ -53,7 +54,15 @@ experiment:
       round. Ten-minute external timeout plus two-second TERM grace; unchanged 5 million per-direction
       and 30 million per-round event guards. Fresh run from initial rows, no warm start or in-run tuning.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-142-owner-footprint-cover.json
-  results: []
+    commit: 44bf815fcf424469fddb2258548341c3d4c5b7f0
+  results:
+  - shape: determination
+    role: outcome
+    question: Do all arms converge with point-minus-endpoint gain above0.001?
+    outcome: criterion_met
+    checked_by: All four converged; M0=11.884615384615364, Mpoint=11.574514991181658, Mtriangle=10.555555555555555,
+      Mendpoint=10.38888888888889; gain=1.185626102292769. Point-extension and nested-monotonicity guards
+      pass. Numerical nine-direction scope only.
   complexity:
     new_dependencies: []
     new_failure_modes:
@@ -69,15 +78,28 @@ experiment:
       evaluated to select these settings. The controlled owner-count extension defaults to the unchanged
       single-owner path; 31 combined controls pass. Dry-run estimates remain unchanged.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: All four arms converge numerically and M_point minus M_endpoint is strictly greater
       than 0.001
-    reason: Prospective successor after exp140 reached its 60-round cap in 15.98 seconds; neither area
-      arm ran. Only iteration allowances change. No successor target result has been inspected.
-  lease:
-    expires: '2026-09-09T05:00:00Z'
+    reason: All four numerical arms converged; point-minus-endpoint gain1.185626102292769>0.001. Point-extension
+      and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net
+      verification remains separate.
+  effort:
+    timebox: Four120second arms,300rounds and12rows per direction under10minute external timeout
+    wall_seconds: 24.54
+    stopped_by: criterion
 ---
-# Exp142: Complete the One-Owner Comparison
+# Exp142: Completed Numerical Footprint Comparison
+
+Published source `44bf815f` completed the four arms in 24.54 seconds.
+Unrestricted mass is 11.884615384615364; point mass 11.574514991181658; triangle mass
+10.555555555555555; endpoint mass 10.38888888888889. The point-minus-endpoint gain is
+1.185626102292769, above the declared 0.001 threshold.
+Both internal comparison guards pass.
+
+The one-owner endpoint objective remains above the residual threshold of ten.
+
+The following prospective protocol is retained below, including its original limits.
 
 Exp140 remains unresolved, with its original partial receipt and cost intact.
 Its point arm exhausted sixty rounds after 9.62 seconds, before either area arm ran.

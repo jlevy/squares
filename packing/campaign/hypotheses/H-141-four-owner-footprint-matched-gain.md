@@ -79,6 +79,10 @@ cannot replace the primary criterion.
 The numerical result does not cover other owner branches, omitted directions, or exact
 coverage.
 
+Exp143 completed with point mass9, triangle mass6, and endpoint mass5. Both comparison
+guards pass. This accepts the numerical mechanism claim; exact coverage of omitted
+directions and other owner branches remains unproved.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
