@@ -411,6 +411,68 @@ def _dense_mass_grid(
     return u, v, u_events, v_events, mass
 
 
+def _exact_geometry_mass_grid(
+    points: tuple[Point, ...],
+    weights: np.ndarray,
+    direction: Direction,
+    square_side: Fraction,
+    pieces: tuple[Polygon, ...],
+) -> tuple[tuple[Point, ...], tuple[Fraction, ...], tuple[Fraction, ...], np.ndarray]:
+    """Rebuild one ambiguous event grid from the original rational sites."""
+
+    if len(points) != len(weights):
+        raise ValueError("exact site provenance does not match the float support")
+    live = weights > 0
+    if not live.any():
+        stride = max(1, math.ceil(len(points) / 600))
+        live = np.zeros(len(points), dtype=bool)
+        live[::stride] = True
+    projected = tuple(
+        (
+            direction.ux * x + direction.uy * y,
+            direction.vx * x + direction.vy * y,
+        )
+        for x, y in points
+    )
+    half = square_side / 2
+    u_events = tuple(
+        sorted(
+            {
+                u + offset
+                for (u, _), is_live in zip(projected, live, strict=True)
+                if is_live
+                for offset in (-half, half)
+            }
+            | {u for polygon in pieces for u, _ in polygon}
+        )
+    )
+    v_events = tuple(
+        sorted(
+            {
+                v + offset
+                for (_, v), is_live in zip(projected, live, strict=True)
+                if is_live
+                for offset in (-half, half)
+            }
+            | {v for polygon in pieces for _, v in polygon}
+        )
+    )
+    u_index = {value: index for index, value in enumerate(u_events)}
+    v_index = {value: index for index, value in enumerate(v_events)}
+    grid = np.zeros((len(u_events), len(v_events)))
+    for (u, v), weight, keep in zip(projected, weights, live, strict=True):
+        if not keep:
+            continue
+        left, right = u_index[u - half], u_index[u + half]
+        bottom, top = v_index[v - half], v_index[v + half]
+        grid[left, bottom] += weight
+        grid[right, bottom] -= weight
+        grid[left, top] -= weight
+        grid[right, top] += weight
+    mass = np.cumsum(np.cumsum(grid, axis=1), axis=0)[:-1, :-1]
+    return projected, u_events, v_events, mass
+
+
 def _witness_for_cell(
     pieces: tuple[FloatPolygon, ...],
     u0: float,
@@ -429,6 +491,143 @@ def _witness_for_cell(
         if u0 < centre[0] < u1 and v0 < centre[1] < v1:
             return float(centre[0]), float(centre[1])
     raise ValueError("reachable residual cell has no interior witness")
+
+
+def _exact_witness_for_cell(
+    pieces: tuple[Polygon, ...],
+    u0: Fraction,
+    u1: Fraction,
+    v0: Fraction,
+    v1: Fraction,
+) -> Point:
+    for polygon in pieces:
+        clipped = cast(Polygon, _with_cell_bounds(polygon, u0, u1, v0, v1))
+        if len(clipped) < 3 or _area_twice(clipped) == 0:
+            continue
+        centre = (
+            sum((u for u, _ in clipped), Fraction(0)) / len(clipped),
+            sum((v for _, v in clipped), Fraction(0)) / len(clipped),
+        )
+        if u0 < centre[0] < u1 and v0 < centre[1] < v1:
+            return centre
+    raise ValueError("exact reachable residual cell has no interior witness")
+
+
+def _core_is_admissible_exact(
+    centre_uv: Point,
+    direction: Direction,
+    outer_side: Fraction,
+    square_side: Fraction,
+    *,
+    residual: bool,
+) -> bool:
+    """Full exact SAT check, independent of the six-piece clipping formulas."""
+
+    cosine, sine = direction.ux, direction.uy
+    u, v = centre_uv
+    x, y = cosine * u - sine * v, sine * u + cosine * v
+    extent = square_side * (cosine + sine) / 2
+    if not (extent <= x <= outer_side - extent and extent <= y <= outer_side - extent):
+        return False
+    if not residual:
+        return True
+    half = square_side / 2
+    obstacles = (
+        (Fraction(1, 2), Fraction(1, 2)),
+        (outer_side - Fraction(1, 2), Fraction(1, 2)),
+        (Fraction(1, 2), outer_side - Fraction(1, 2)),
+        (outer_side - Fraction(1, 2), outer_side - Fraction(1, 2)),
+    )
+    axes = (
+        (Fraction(1), Fraction(0)),
+        (Fraction(0), Fraction(1)),
+        (cosine, sine),
+        (-sine, cosine),
+    )
+    for obstacle_x, obstacle_y in obstacles:
+        separated = False
+        for axis_x, axis_y in axes:
+            core_radius = half * (
+                abs(axis_x * cosine + axis_y * sine) + abs(-axis_x * sine + axis_y * cosine)
+            )
+            obstacle_radius = (abs(axis_x) + abs(axis_y)) / 2
+            gap = abs(axis_x * (x - obstacle_x) + axis_y * (y - obstacle_y))
+            if gap >= core_radius + obstacle_radius:
+                separated = True
+                break
+        if not separated:
+            return False
+    return True
+
+
+def _ranked_cells(
+    mass: np.ndarray, spans: tuple[tuple[int, int, int], ...], keep: int
+) -> tuple[list[tuple[float, int, int]], int]:
+    survey = max(keep * 4, keep)
+    ranked: list[tuple[float, int, int]] = []
+    for i, j0, j1 in spans:
+        column = mass[i, j0 : j1 + 1]
+        count = min(survey, column.size)
+        if count == column.size:
+            offsets = np.argsort(column)
+        else:
+            offsets = np.argpartition(column, count - 1)[:count]
+        ranked.extend((float(column[offset]), i, j0 + int(offset)) for offset in offsets)
+    ranked.sort()
+    return ranked, survey
+
+
+def _placement_cells_exact_geometry(
+    points: tuple[Point, ...],
+    weights: np.ndarray,
+    direction: Direction,
+    *,
+    outer_side: Fraction,
+    square_side: Fraction,
+    pieces: tuple[Polygon, ...],
+    residual: bool,
+    keep: int,
+    max_event_cells: int,
+) -> tuple[list[tuple[float, float, float, np.ndarray]], int]:
+    projected, u_events, v_events, mass = _exact_geometry_mass_grid(
+        points, weights, direction, square_side, pieces
+    )
+    dense_cells = int(mass.size)
+    if dense_cells > max_event_cells:
+        raise ValueError(
+            f"exact fallback for direction {direction.label} needs {dense_cells:,} dense "
+            f"event cells, above guard {max_event_cells:,}"
+        )
+    spans = reachable_spans(u_events, v_events, pieces)
+    if not spans:
+        raise ValueError("the exact selected centre domain reaches no event cell")
+    ranked, survey = _ranked_cells(mass, spans, keep)
+    found: list[tuple[float, float, float, np.ndarray]] = []
+    half = square_side / 2
+    for event_mass, i, j in ranked[: max(survey, keep)]:
+        centre = _exact_witness_for_cell(
+            pieces, u_events[i], u_events[i + 1], v_events[j], v_events[j + 1]
+        )
+        if not _core_is_admissible_exact(
+            centre, direction, outer_side, square_side, residual=residual
+        ):
+            raise ValueError("exact-event witness failed the independent SAT/containment check")
+        cu, cv = centre
+        covers = np.array(
+            [abs(u - cu) <= half and abs(v - cv) <= half for u, v in projected],
+            dtype=bool,
+        )
+        direct_mass = float(weights[covers].sum())
+        if abs(direct_mass - event_mass) > 1e-8:
+            raise ValueError(
+                f"exact-event mass {event_mass} disagrees with witness mass {direct_mass}"
+            )
+        found.append((direct_mass, float(cu), float(cv), covers))
+        if len(found) >= keep:
+            break
+    if not found:
+        raise ValueError("the exact event fallback found no witness for the least cells")
+    return found, dense_cells
 
 
 def _core_is_admissible_float(
@@ -486,8 +685,13 @@ def placement_cells_on_pieces(
     residual: bool,
     keep: int,
     max_event_cells: int,
+    exact_points: tuple[Point, ...] | None = None,
 ) -> tuple[list[tuple[float, float, float, np.ndarray]], int]:
-    """Least cells for one domain, plus the dense grid size allocated."""
+    """Least cells for one domain, plus the dense grid size allocated.
+
+    ``exact_points`` preserves the rational provenance of ``points``.  It is used only
+    when binary64 clipping cannot represent a ranked cell's interior witness.
+    """
 
     exact_pieces = (
         residual_domain_pieces(outer_side, square_side, direction)
@@ -507,27 +711,36 @@ def placement_cells_on_pieces(
     spans = reachable_spans(tuple(u_events), tuple(v_events), pieces)
     if not spans:
         raise ValueError("the selected centre domain reaches no event cell")
-    survey = max(keep * 4, keep)
-    ranked: list[tuple[float, int, int]] = []
-    for i, j0, j1 in spans:
-        column = mass[i, j0 : j1 + 1]
-        count = min(survey, column.size)
-        if count == column.size:
-            offsets = np.argsort(column)
-        else:
-            offsets = np.argpartition(column, count - 1)[:count]
-        ranked.extend((float(column[offset]), i, j0 + int(offset)) for offset in offsets)
-    ranked.sort()
+    ranked, survey = _ranked_cells(mass, spans, keep)
     found: list[tuple[float, float, float, np.ndarray]] = []
     half = float(square_side) / 2
     for event_mass, i, j in ranked[: max(survey, keep)]:
-        cu, cv = _witness_for_cell(
-            pieces,
-            float(u_events[i]),
-            float(u_events[i + 1]),
-            float(v_events[j]),
-            float(v_events[j + 1]),
-        )
+        try:
+            cu, cv = _witness_for_cell(
+                pieces,
+                float(u_events[i]),
+                float(u_events[i + 1]),
+                float(v_events[j]),
+                float(v_events[j + 1]),
+            )
+        except ValueError:
+            if exact_points is None:
+                raise
+            provenance = np.array([[float(x), float(y)] for x, y in exact_points])
+            if points.shape != provenance.shape or not np.array_equal(points, provenance):
+                message = "exact site provenance does not reproduce the float support"
+                raise ValueError(message) from None
+            return _placement_cells_exact_geometry(
+                exact_points,
+                weights,
+                direction,
+                outer_side=outer_side,
+                square_side=square_side,
+                pieces=exact_pieces,
+                residual=residual,
+                keep=keep,
+                max_event_cells=max_event_cells,
+            )
         if not _core_is_admissible_float(
             (cu, cv), direction, float(outer_side), float(square_side), residual=residual
         ):
@@ -604,6 +817,7 @@ def solve_program(  # noqa: PLR0911 -- each stop preserves a distinct partial re
                     residual=residual,
                     keep=rows_per_direction,
                     max_event_cells=max_event_cells,
+                    exact_points=sites.positions(),
                 )
             except (MemoryError, ValueError) as error:
                 least_covered = None if not math.isfinite(least) else least

@@ -1,5 +1,5 @@
 ---
-title: agenda-031 — ownership continuation and paired pricing at n = 11
+title: "agenda-031 \u2014 ownership continuation and paired pricing at n = 11"
 softschema:
   contract: packing.squares:ExperimentAgenda/v1
   schema: ../schemas/agenda.schema.yaml
@@ -8,8 +8,8 @@ softschema:
 agenda:
   id: agenda-031
   title: Ownership Continuation and Paired Pricing at n = 11
-  updated: '2026-09-08'
-  status: active
+  updated: '2026-09-09'
+  status: paused
   objective: Publish the exact ownership results derived during PR 127 review, run the independent readers
     needed to use them safely, test one pointwise full-support pricing mechanism at q = 96/25, and assess
     the owner's fixed-four-corner residual-cover pilot. The bracket remains unchanged. No cell may infer
@@ -82,7 +82,7 @@ agenda:
     owner_focus: correctness
     instances:
     - 11
-    state: tentative
+    state: stopped
     priority: 2
     question: Should H-125's finite kernel test be renewed after the two funded lanes report?
     hypotheses:
@@ -102,14 +102,13 @@ agenda:
     - BC-305
     - BC-306
     program: n11-structure-and-conditional-dots
-    next_evidence: Coordinator selection after both funded lanes, with fresh clocks and published-source
-      identity if opened.
+    next_evidence: Reserve not opened; owner prioritized Agenda032 geometric conditioning.
   - id: BC-308
     purpose: measurement_validation
     owner_focus: process
     instances:
     - 11
-    state: blocked
+    state: stopped
     priority: 2
     question: What did the funded continuation establish, what remains unresolved, and which next entry
       should be selected?
@@ -128,14 +127,14 @@ agenda:
     - BC-306
     - BC-309
     program: n11-structure-and-conditional-dots
-    next_evidence: Terminal BC-305, BC-306 and BC-309 artifacts, then the coordinator's reserve decision
-      and closeout selection.
+    next_evidence: Agenda032 BC314 owns remaining publication and certification; session112 stops with
+      explicit pending certification.
   - id: BC-309
     purpose: research
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     hypotheses:
     - H-136
@@ -161,9 +160,14 @@ agenda:
     - packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md
-    next_evidence: The feasibility assessment, exact obstacle-clipping contract and controls, followed
-      by a prospectively declared comparison of matched unconditional and residual covering masses.
+    next_evidence: Exp135 is unresolved after its retained separator guard. The completed instrument-feasibility
+      lane transfers repair and fresh target work to Agenda032 BC310.
 ---
+Superseded at the owner-requested two-hour sprint by
+[Agenda032](agenda-032-conditional-owner-sprint.md).
+Exp134 remains blocked and unrun; exp135 remains unresolved, with repair transferred
+rather than a silent retry.
+
 # Agenda 031 — Ownership and Pricing Continuation
 
 This is the distinct continuation of Agenda 030’s selected ownership and fractional

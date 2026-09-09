@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives seventeen confirmed hypotheses, thirteen refuted
-hypotheses, one open hypothesis, twenty-five open questions, and forty-five blocked
+hypotheses, one open hypothesis, twenty-five open questions, and forty-seven blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -656,36 +656,40 @@ not certify an upper bound.
 The depth polisher will start from that retained control; its missing scratch state is
 not a runnable handoff.
 
-**Selected next entry:** `think-qfog` was the session-110 handoff into BC-305 and is now
-complete at its local ownership scope.
-Session 112’s owner-prioritized continuation is BC-309, `think-3glv`, on
-`codex/n11-ownership-continuation` in
-[PR 137](https://github.com/jlevy/squares/pull/137). PR 127 has merged as `6aa9e72c`,
-and the continuation targets `main`.
-[Agenda 031](packing/campaign/agendas/agenda-031-ownership-and-pricing.md) and
-[session 112](packing/campaign/agent-sessions/session-112-ownership-and-pricing.md)
-retain the reviewed local results and BC-306’s unrun full-support pricing protocol.
-BC-309 first builds a small residual-cover comparison for four fixed corner squares.
-The global follow-up uses proved ownership classes and exhaustive geometric
-alternatives; it cannot assume every packing has four flush corners.
+**Selected next entry:** `think-8m28`, the owner-requested two-hour conditional-owner
+sprint in [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md)
+and
+[session-113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md),
+runs from03:18:37Z to05:18:37Z. Separator repair, exact fractional-family obstruction
+screens, and general owner-footprint geometry proceed in parallel on
+`codex/n11-ownership-continuation`, [PR137](https://github.com/jlevy/squares/pull/137).
+PR127 merged as `6aa9e72c`; PR137 targets main.
+[Session-112](packing/campaign/agent-sessions/session-112-ownership-and-pricing.md)
+retains the earlier continuation and its usage through03:18:37Z; main’s independent font
+session111 keeps its original identifier and receipt.
 The
-[corner-owner sector lemma](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md)
-gives each owned mark-and-sector class a rational triangle of area `B²/16` and leaves
-sixteen classes at one corner for the next discriminator; the analytic branch program
-has not run.
+[sector lemma](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md)
+gives sixteen exhaustive selected-owner classes at one corner, each with a rational
+triangle of area `B²/16`. This supports a general branch program without assuming four
+literal flush corners.
+The new sprint targets remain unrun at registration.
 [X-022](packing/campaign/explorations/X-022-segment-ownership-continuation.md) gives
 sharp capacities of two owners on the outer middle-row segments and four on the other
 eight, necessary support and signed-angle restrictions, two local counterexamples, and
 one fixed-pattern exclusion and its robust perturbation supplement.
 None composes into a global exclusion at `96/25`. The expanded instruments pass 64
 controls; both counterexample readers and six deliberately broken examples replay as
-expected. H-135 and H-136 remain untested.
+expected.
+H-135 remains untested; H-136 has an unresolved first pilot and a prospectively
+declared repaired repeat.
 Exp-134’s exact transport control passed with depth one and unchanged mass
 `21342289572/2055263195` in 135.91 seconds.
 Its pricing target was never invoked: the owner prioritized BC-309 before launch, so
 BC-306 and exp-134 are blocked pending a fresh forward allocation while the published
 protocol remains unchanged.
-Exp-135’s paired residual-cover target also remains uninvoked.
+Exp135 ran once: unrestricted numerical mass11.981481481481488; residual separator
+failure, no matched score.
+Exp136 is the fresh repaired repeat.
 BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
 complements of BC-292 and BC-299 forward.
 The corrected checkpoint is certified by the retained raw full log and structured
@@ -3203,7 +3207,9 @@ round that names the hypothesis, control roles included.
 | [H-133](packing/campaign/hypotheses/H-133-plateau-site-artefact.md) | open question | Is the exactly-eleven plateau at 191/50 a site artefact of Trump-shaped cores in site-free strips? | 0 | — |
 | [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
 | [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | blocked | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 1 | Unspent |
-| [H-136](packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | running | On the declared 19-by-19 site grid and nine retained directions at side 96/25, the converged numerical covering objective for cores avoiding four fixed flush corner unit squares is more than 4.001 below the matched unrestricted objective | 1 | Unspent |
+| [H-136](packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | unresolved | On the declared 19-by-19 site grid and nine retained directions at side 96/25, the converged numerical covering objective for cores avoiding four fixed flush corner unit squares is more than 4.001 below the matched unrestricted objective | 2 | 2.54s wall |
+| [H-137](packing/campaign/hypotheses/H-137-single-owner-dual-salvage.md) | blocked | At least one of sixteen endpoint-footprint classes retains depth-one mass at least ten | 0 | — |
+| [H-138](packing/campaign/hypotheses/H-138-four-owner-dual-salvage.md) | blocked | Every four-corner endpoint combination retains depth-one mass at least seven | 0 | — |
 
 ### Confirmed
 
@@ -3451,8 +3457,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 65 |
-| unmeasured | 45 |
-| **total** | **110** |
+| unmeasured | 46 |
+| **total** | **111** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3468,9 +3474,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 91 rounds registered in `series-000`.
+There are 92 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1359.4 wall-minutes.
+They record 2152.1 agent-minutes and 1359.5 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3600,7 +3606,8 @@ archive beside it.
 | [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-h134-segment-mark-cover-at-q.md) | 11 | proof | H-134 | Interval reader over pose space with every certified leaf re-decided exactly; the falsifier engine’s exact escapes for point sets | Ten segments of length 1/10 on Stromquist’s ten points at 96/25 are unavoidable at tolerance 3/500; the independent replay confirms the cover and closes the missing far-wall sliver | accepted |
 | [exp-133](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-133-h128-corner-skeleton-verdict-at-q.md) | 11 | proof | H-128 | Column generation with the corner orbit bounded below, swept exactly; the bounded dual’s floor | The tested support is unsuccessful, but its floor of 10.785 is below the 11.15 obstruction threshold; H-128 remains unresolved and the corner-pair theorem survives | unresolved |
 | [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Owner reprioritized BC-309 before launch; no LP target invoked; protocol retained pending a fresh forward allocation | blocked |
-| [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md) | 11 | target | H-136 | Matched unrestricted and four-fixed-corner residual covering programs on one 19-by-19 grid and nine retained directions | Prospective protocol; no target run or paired objective | in-progress |
+| [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md) | 11 | target | H-136 | Matched unrestricted and four-fixed-corner residual covering programs on one 19-by-19 grid and nine retained directions | Global numerical convergence; residual thin-cell separator failure, no paired score | unresolved |
+| [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md) | 11 | target | H-136 | Matched repaired replay on unchanged support, directions and guards | Prospective protocol; target not yet invoked | in-progress |
 
 ### Cost and provenance
 
@@ -3696,11 +3703,12 @@ archive beside it.
 | exp-132 | the interval reader’s cover, exact re-decision of 184,756 leaves and 17,551 discards, 6,000 sampled poses | 253.6 s | — | criterion | `d04205fb` |
 | exp-133 | the free, four-bound and priced column-generation measures swept exactly, and the bounded dual’s floor | 3813 s | — | criterion | `22884081` |
 | exp-134 | one 30-minute pricing process and two-second TERM grace; uninvoked | — | — | — | `82df41bd` |
-| exp-135 | two sequential 120-second arms, five-minute external timeout and two-second TERM grace; uninvoked | — | — | — | — |
+| exp-135 | two sequential 120-second arms; stopped at separator guard | 2.54 s | — | guard | `513d3831` |
+| exp-136 | fresh repaired repeat, five-minute external timeout; uninvoked | — | — | — | — |
 
-### What the 91 rounds jointly establish
+### What the 92 rounds jointly establish
 
-The 91 rounds use 2152.1 agent-minutes and 1359.4 wall-minutes under the campaign’s
+The 92 rounds use 2152.1 agent-minutes and 1359.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 110
+count: 111
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 65
-  sessions_unmeasured: 45
+  sessions_unmeasured: 46
   attributed:
     rollups: 123
     turns: 31555
@@ -1763,3 +1763,13 @@ sessions:
     active_union_hours: 3.78
     wall_hours: 3.91
     snapshot_incomplete: true
+- id: session-113
+  title: "Two-hour n = 11 conditional-owner sprint"
+  status: in_progress
+  primary_bead: think-8m28
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

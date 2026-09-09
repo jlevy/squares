@@ -125,6 +125,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
 | [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Resume think-mq0d for BC-264's existing 30-minute H114 feature and kernel-contract pricing slice, subject to the current allocation and admission requirements. This publication repair does not reprioritize research or authorize a target run. |
 | [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
+| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-8m28 | Complete opening controls and run independent prospectively declared targets. |
 
 ### Workflow summary
 
@@ -134,7 +135,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 2 | 1 | 13 | 1 |
 | `factual-review` | 5 | 0 | 47 | 2 |
-| `insight-iteration` | 20 | 1 | 61 | 3 |
+| `insight-iteration` | 21 | 1 | 62 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 30 | 1 |
 | `research-loop` | 17 | 4 | 78 | 7 |
@@ -643,21 +644,33 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 
 ### [agenda-031](agendas/agenda-031-ownership-and-pricing.md) — Ownership Continuation and Paired Pricing at n = 11
 
-Status: **active**. Publish the exact ownership results derived during PR 127 review, run the independent readers needed to use them safely, test one pointwise full-support pricing mechanism at q = 96/25, and assess the owner's fixed-four-corner residual-cover pilot. The bracket remains unchanged. No cell may infer a global packing certificate from a local proof, a numerical LP proposal, or a finite site set.
+Status: **paused**. Publish the exact ownership results derived during PR 127 review, run the independent readers needed to use them safely, test one pointwise full-support pricing mechanism at q = 96/25, and assess the owner's fixed-four-corner residual-cover pilot. The bracket remains unchanged. No cell may infer a global packing certificate from a local proof, a numerical LP proposal, or a finite site set.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-305 | research | 11 | complete | 1 | think-qfog | Published proof files, exact reader receipts, and a scoped statement of the remaining global ownership problem. |
 | BC-306 | research | 11 | blocked | 1 | think-7lp3 | The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts, or a truthful never-opened disposition. |
-| BC-307 | research | 11 | tentative | 2 | think-98z2 | Coordinator selection after both funded lanes, with fresh clocks and published-source identity if opened. |
-| BC-308 | measurement_validation | 11 | blocked | 2 | think-9yow | Terminal BC-305, BC-306 and BC-309 artifacts, then the coordinator's reserve decision and closeout selection. |
-| BC-309 | research | 11 | in_progress | 1 | think-3glv | The feasibility assessment, exact obstacle-clipping contract and controls, followed by a prospectively declared comparison of matched unconditional and residual covering masses. |
+| BC-307 | research | 11 | stopped | 2 | think-98z2 | Reserve not opened; owner prioritized Agenda032 geometric conditioning. |
+| BC-308 | measurement_validation | 11 | stopped | 2 | think-9yow | Agenda032 BC314 owns remaining publication and certification; session112 stops with explicit pending certification. |
+| BC-309 | research | 11 | complete | 1 | think-3glv | Exp135 is unresolved after its retained separator guard. The completed instrument-feasibility lane transfers repair and fresh target work to Agenda032 BC310. |
+
+### [agenda-032](agendas/agenda-032-conditional-owner-sprint.md) — Two-Hour Conditional-Owner Sprint
+
+Status: **active**. Test whether unavoidable corner owners make residual covering arguments stronger at L = 96/25, using exact fractional-family obstructions before costly cover searches. Preserve scope, failed instrumentation, separate usage, and an executable next agenda. No global bound changes without exact exhaustive evidence.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-310 | tool_validation | 11 | in_progress | 1 | think-9yvj | Independent exact minimum control, matched replay and a source-bound raw receipt. |
+| BC-311 | research | 11 | in_progress | 1 | think-mwxg | Published screening protocol, exact SAT controls, and branch-indexed survivor mass receipts. |
+| BC-312 | research | 11 | in_progress | 1 | think-9cpg | Reviewed footprint proof and controlled exact geometry module, followed by a predeclared branch experiment if admitted. |
+| BC-313 | research | 11 | tentative | 2 | think-9cpg | Actual numerical candidate and remaining runtime determine which single promotion is justified. |
+| BC-314 | measurement_validation | 11 | in_progress | 1 | think-ns6k | Updated session 113, generated campaign views, actual validation receipts and PR 137. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 91 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 92 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -774,7 +787,9 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
 | H-135 | blocked | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
-| H-136 | unresolved | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 1 |  | 3s wall |
+| H-136 | unresolved | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 2 |  | 3s wall |
+| H-137 | blocked | proof | At least one of the sixteen bottom-left endpoint-footprint classes ret |  | 0 |  |  |
+| H-138 | blocked | proof | Every one of the 65536 four-corner endpoint-footprint class combinatio |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -905,6 +920,12 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-136 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-113 | H-136 | Prospective repaired repeat of unresolved exp135; no target launched. Original support, directions, tolerances and accept margin unchanged. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -924,7 +945,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 
 ## Effort
 
-91 rounds, 2152.1 agent-minutes, 1359.5 wall-minutes.
+92 rounds, 2152.1 agent-minutes, 1359.5 wall-minutes.
 
 ## Exploration reports not yet codified
 

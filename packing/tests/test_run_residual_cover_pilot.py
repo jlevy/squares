@@ -19,7 +19,7 @@ from devtools.run_residual_cover_pilot import (
     unrestricted_domain_pieces,
 )
 from sqpack.fractional.colgen import site_set_from_grids
-from sqpack.fractional.generate import direction_net, placement_cells
+from sqpack.fractional.generate import direction_net, net_half_tangents, placement_cells
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
 
 SIDE = Fraction(96, 25)
@@ -221,6 +221,39 @@ def test_unrestricted_piece_separator_recovers_the_existing_float_minimum() -> N
     expected_rows = {(mass, tuple(mask.tolist())) for mass, *_, mask in expected}
     actual_rows = {(mass, tuple(mask.tolist())) for mass, *_, mask in actual}
     assert actual_rows == expected_rows
+
+
+def test_rotated_separator_recovers_cells_collapsed_by_float_geometry() -> None:
+    """A rational fallback retains minima from sub-ULP residual slivers."""
+
+    sites = site_set_from_grids(Fraction(4), (9,), Fraction(1, 2))
+    direction = direction_net(net_half_tangents(ANGLE_LIMIT, 180))[93]
+    points = sites.points()
+    weights = np.ones(sites.size)
+    expected, _ = exact_minimum_covered_mass(
+        tuple(
+            Atom(str(index), x, y, Fraction(1))
+            for index, (x, y) in enumerate(sites.positions())
+        ),
+        direction,
+        Fraction(4),
+        Fraction(1),
+        residual=True,
+    )
+    actual, _ = placement_cells_on_pieces(
+        points,
+        weights,
+        direction,
+        Fraction(4),
+        Fraction(1),
+        residual=True,
+        keep=100,
+        max_event_cells=500_000,
+        exact_points=sites.positions(),
+    )
+    assert len(actual) == 100
+    assert actual[0][0] == float(expected)
+    assert all(mass == float(weights[covers].sum()) for mass, _, _, covers in actual)
 
 
 def test_deadline_writes_both_partial_raw_arms_and_never_overwrites(tmp_path: Path) -> None:
