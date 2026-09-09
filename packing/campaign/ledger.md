@@ -916,6 +916,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-015 — The map and the three programs: where significant progress is likeliest next
+- X-022 — Three Losses and a New Atom: Where the Next Stretch of s(11) Comes From
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

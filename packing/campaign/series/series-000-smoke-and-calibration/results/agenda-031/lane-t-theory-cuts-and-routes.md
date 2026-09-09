@@ -363,3 +363,7 @@ may certify 3.82” is a coin flip; whether `ν_B(3.82) ≥ 11` at all is OPEN, 
 exist to decide.
 
 Next discriminating measurement: M0.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
