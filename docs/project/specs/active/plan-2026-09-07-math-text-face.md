@@ -912,7 +912,9 @@ Its rebuilt page passed the light desktop typography/provenance check: all 13 ca
 formulas and 11 inline-code spans have zero baseline offset in screen and print.
 Its refreshed PDF is 17 tagged Letter pages (816,939 bytes).
 Those artifacts predate the 0.82 mono integration.
-The final rebuild, artifact review, and deployment remain pending.
+The final artifact rebuilt from KPress head `515f4a0` is current and reproducible: two
+PDF renders agree at 814,757 bytes, with 17 pages, 24 embedded fonts, and no page-owned
+font outlines.
 
 KPress [PR #68](https://github.com/jlevy/kpress/pull/68), tested branch head `515f4a0e`,
 branch `codex/reader-reload-baseline-contract`. Squares may pin this filed PR’s branch
@@ -951,7 +953,9 @@ regression pass locally.
 The following hosted run passed the browser job, then found that the publish golden
 still named the pre-repair history asset.
 Commit `515f4a0` regenerates that one package-owned snapshot; its focused replay passes
-locally, and the full hosted matrix is the remaining upstream merge gate.
+locally. Hosted run
+[34302772413](https://github.com/jlevy/kpress/actions/runs/34302772413) passes all six
+jobs: lint, Python 3.12 through 3.14, browser, and distribution.
 
 ### Current Changes and Ownership
 
@@ -996,23 +1000,22 @@ locally, and the full hosted matrix is the remaining upstream merge gate.
 
 ### Remaining Work in Order
 
-1. The upstream documentation, review, and CI fixes are committed.
-   Wait for KPress PR #68’s hosted checks and merge its reviewed head with a merge
-   commit. The Squares gitlink may remain at the exact filed-PR branch commit it tests.
-2. Rebuild `render_explainer --prepare-math` and the PDF from the final source.
-   The local preview on port 64618 now serves `93cf54a9` HTML and its refreshed PDF. It
-   still uses the earlier `0dd60f9` dependency, including the 0.87 mono ratio.
-   Query-string labels do not identify file contents; inspect the edition stamp.
-3. Run the affected pre-push gate, existing typography self-test, light desktop and dark
-   narrow checks, math faces/loading/geometry/reload checks, print layout, and PDF
-   reproducibility/provenance checks.
-   Inspect captions, endnotes and code visually in the new PDF. The current role split
-   is already reviewed, but needs these checks on the rebuilt artifact.
-4. Update PR #135’s description with the final pin and exact validation evidence.
-   Keep its frozen cost receipt as a dated lower bound; do not regenerate it or relabel
-   older timings as measurements of the new source.
+1. Merge KPress PR #68’s green, reviewed head with a merge commit.
+   Squares pins that exact filed-PR head.
+2. Push this final Squares integration and wait for every hosted PR check.
+   The final local HTML and PDF are current.
+   Light desktop and dark narrow typography, math-face readiness, print layout, and
+   delayed-font startup pass.
+   Caption and endnote math inherit the 410 sans face and surrounding size; all caption
+   and inline-code baseline offsets are zero in screen and print.
+   Chromium, Firefox, and WebKit each report 347 held loads, 164 readable prepared
+   wrappers, and no early, fallback, unready, raw, or unreadable math.
+3. Merge Squares PR #135’s exact green head with a merge commit, verify the Pages
+   edition stamp and live math-loading smoke, then open the final HTML and PDF in the OS
+   default browser. Keep its frozen cost receipt as a dated lower bound; do not
+   regenerate it or relabel older timings as measurements of the new source.
    Wait for all PR checks, resolve any new main conflict, and merge the exact head.
-5. Wait for the main Pages deployment.
+4. Wait for the main Pages deployment.
    Run `check_published_site --commit FULL_SHA` and a live `check_math_loading` smoke.
    Open fresh local HTML and PDF URLs with the OS default browser, then close the
    resolved beads and sync.
