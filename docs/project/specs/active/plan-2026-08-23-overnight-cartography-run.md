@@ -341,12 +341,13 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-yhw2`: generalize Agenda032’s
-exact five-dot conditional exclusion after the completed two-hour session113. First
-finish independent union-domain confirmation, then reuse global symmetries and
-occupied-union containment across admissible owner classes before new LP searches.
+For the next supervised exact-research goal, continue from BC-316 under `think-yhw2`:
+generalize Agenda032’s exact five-dot conditional exclusion after the completed two-hour
+session113. Exp145 has independently confirmed the complete finite cover.
+Agenda033 now constructs the 16 common owner footprints with container constraints, then
+tests exact component containment against the certified tuples before new LP searches.
 The global n11 bracket is unchanged.
-PR137 retains the full sprint and separate usage.
+PR137 retains the original sprint; PR142 stacks the separately tallied continuation.
 
 The preceding work reached three checkpoints in sequence.
 Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s

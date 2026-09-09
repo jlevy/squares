@@ -20,6 +20,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python 3.14; one process
     selftest_passed: true
+    engine_commit: c59d28a770d8261b39d030050d8dc3f0eb8dde43
   instance:
     axis: n
     point: 11
@@ -43,21 +44,42 @@ experiment:
       internal deadline, and at most 511 nonempty subset masks per direction. No tuning, retry or resume.
       The full allowance must fit in the launching session.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-145-independent-five-dot-union.json
-  results: []
-  lease:
-    expires: '2026-09-09T15:00:00Z'
-    host: local; prospective reservation, no process launched
+    commit: c59d28a770d8261b39d030050d8dc3f0eb8dde43
+    dirty: true
+  results:
+  - shape: determination
+    role: outcome
+    question: Do the nine closed collision polygons cover the full legal-center rectangle in all 361 required
+      directions?
+    outcome: criterion_met
+    checked_by: 'Complete independent exact inclusion-exclusion: 361 unique retained labels, exact uncovered
+      area zero at every direction, at most 49 positive-area subset intersections in one direction, unchanged
+      exp143 input blob and published instrument source c59d28a770d8261b39d030050d8dc3f0eb8dde43.'
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Complete exactly the 361 required unique directions with exact zero uncovered area
       at every direction and valid source provenance.
-    reason: Prospective protocol only. Passing instrument and protocol must be committed and pushed before
-      the one target invocation. No target has run.
+    reason: All 361 required directions completed with exact zero uncovered area. The independent finite-net
+      calculation confirms the retained five-dot coverage; shared analytic owner and strict-core transfer
+      premises remain separate. No global bound or confirmation-rung change.
+  effort:
+    timebox: One five-minute external process and 240-second internal guard; no retry or resume.
+    wall_seconds: 39.06
+    stopped_by: criterion
 ---
 # Exp145: Independent Five-Dot Union Audit
 
-**Prospective; target unrun.** The instrument and this protocol must be committed and
-pushed before invocation.
+**Accepted in Session115:** the one run launched at 07:54:44 UTC from
+`c59d28a770d8261b39d030050d8dc3f0eb8dde43` and exited zero in 39.06 seconds.
+All 361 exact uncovered areas are zero; the largest positive-area intersection count is
+49\. The checker itself reports 38.742509042 seconds.
+
+Only Session114/115 bookkeeping and new result paths were dirty at launch; the
+instrument, prospective protocol and input were unchanged from the published freeze.
+The original criteria and launch instructions below are retained as history.
+
+**Prospective instructions, now discharged.** The instrument and this protocol must be
+committed and pushed before invocation.
 Record that exact launch commit, clean/dirty state, UTC start, exit status and process
 duration in the launch receipt.
 The input must retain Git blob `cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19`; the driver
@@ -84,8 +106,8 @@ Agreement adds independent finite geometric evidence; it does not automatically 
 confirmation to C4, certify an LP optimum, cover every owner class, or strengthen the
 global n11 bound.
 
-Session114 may launch only by 07:45:32 UTC, so the entire process allowance fits before
-its research cutoff.
+Session114 could launch only by 07:45:32 UTC, so the entire process allowance fits
+before its research cutoff.
 If publication misses that cutoff, retain this protocol unrun and allocate its unchanged
 allowance prospectively in a successor session under Agenda033.
 

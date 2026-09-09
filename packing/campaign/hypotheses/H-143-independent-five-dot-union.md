@@ -59,7 +59,10 @@ The instrument passed 19 synthetic controls, lint, type checking and independent
 Max mathematical review before target invocation.
 The prospective exp145 binds the published source and actual command; publication
 remains a launch prerequisite.
-No scientific target has run at this checkpoint.
+Exp145 subsequently passed in Session115: all 361 exact uncovered areas were zero in one
+39.06-second process from the published source.
+The hypothesis is confirmed for this fixed finite-net geometry; the composed T-023
+remains V3/C3.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

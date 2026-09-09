@@ -1,0 +1,9 @@
+ M SYNOPSIS.md
+ M packing/campaign/agent-sessions/session-114-independent-owner-audit.md
+ M packing/campaign/ledger.md
+ M packing/campaign/session-close-report.yaml
+?? packing/campaign/agent-sessions/session-115-wall-aware-owner-footprints.md
+?? packing/campaign/resource-usage/codex-task-tree-session-114.yaml
+?? packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/
+
+exit=0

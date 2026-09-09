@@ -20,7 +20,7 @@ agenda:
     owner_focus: correctness
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Does independent exact polygon inclusion-exclusion confirm the retained five-dot net?
     budget: One five-minute external process with 240-second internal guard after source freeze; readiness
@@ -30,18 +30,29 @@ agenda:
       partial or guard failures remain unresolved.
     bead: think-yhw2
     depends_on: []
-    next_evidence: Publish the controlled checker and prospective exp145, then invoke once.
+    next_evidence: Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage
+      checks and take the wall-aware constructor.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
     hypotheses:
     - H-143
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-145-independent-five-dot-union.json
+    outcomes:
+    - scope: Does independent exact polygon inclusion-exclusion confirm the retained five-dot net?
+      classification: achieved
+      result: Independent exact coverage accepted in 39.06 seconds; composed T023 and global bound unchanged.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-145-independent-five-dot-union.json
+      disposition: retire-success
+      follow_up: null
   - id: BC-317
     purpose: research
     owner_focus: insight
     instances:
     - 11
-    state: blocked
+    state: in_progress
     priority: 1
     question: Do the container walls enlarge any of the 16 coarse bottom-left common owner footprints,
       or rule out a class?
@@ -53,8 +64,8 @@ agenda:
     bead: think-waix
     depends_on:
     - BC-316
-    next_evidence: Build the reusable exact footprint constructor, preserving nonempty degenerate legal-center
-      sets.
+    next_evidence: Sol implements the conservative dimension-preserving constructor under Session115 phase2,
+      with Astra Max support/manifest/transport review.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots

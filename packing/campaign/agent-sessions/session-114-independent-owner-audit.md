@@ -80,7 +80,7 @@ session:
     objective: Publish the controlled independent instrument and prospective experiment, then perform
       one unchanged five-dot audit if its full guard fits.
     bead: think-yhw2
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Synthetic controls and independent Astra Max mathematical review now pass.
     budget_minutes: 13
@@ -93,12 +93,44 @@ session:
       so its full five-minute guard fits.
     fallback: Carry the unrun prospective protocol to the next session without resetting its source or
       changing criteria.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Publish the stacked draft PR and preserve a separate session usage interval.
+    outcome: Independent source and prospective exp145 published after passing controls and repaired record
+      checks. The Session114 target cutoff passed before publication, so no target ran.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md
+    stop_reason: Publication did not finish by the declared 07:45:32 UTC target cutoff; the full target
+      allowance remains unspent.
+    next_action: Carry the unchanged published protocol into Session115 under Agenda033.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: finalization
+    objective: Publish the source milestone, reconcile separate native usage, and hand the unchanged target
+      to the next session.
+    bead: think-ta8s
+    status: stopped
+    entered_by: evidence_checkpoint
+    switch_reason: The research cutoff has passed; the independent instrument is ready and the target
+      is unrun.
+    budget_minutes: 15
+    started_at: '2026-09-09T07:50:32Z'
+    deadline_at: '2026-09-09T08:05:32Z'
+    expected_output: Stacked draft PR, separate Session114 receipt and executable successor session; explicit
+      pending full-checkpoint evidence.
+    validation_command: packing-validate --records
+    kill_condition: Do not launch a new research target during finalization or claim unrun full CI passed.
+    fallback: Retain certification debt under think-ta8s while the successor continues authorized research.
+    outcome: Source milestone published as https://github.com/jlevy/squares/pull/142 at c59d28a770d8261b39d030050d8dc3f0eb8dde43.
+      Native session interval ends at 2026-09-09T07:53:52Z. Finalization ends early once the handoff is
+      concrete; no clock is extended.
+    evidence:
+    - packing/campaign/resource-usage/codex-task-tree-session-114.yaml
+    - packing/campaign/agendas/agenda-033-overnight-owner-geometry.md
+    stop_reason: The source and prospective handoff are complete; fast/deferred checkpoint evidence remains
+      pending on the new PR.
+    next_action: 'think-ta8s: reconcile the hosted checkpoint; Session115 executes exp145 and then the
+      wall-aware discriminator.'
   primary_bead: think-yhw2
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 60
     max_cycles: 4
@@ -115,7 +147,9 @@ session:
     metric: Independent coverage verdict and a sound economical continuation across owner classes.
     before: T-023 excludes one four-owner branch. The retained draft shares production union geometry;
       no independent target or additional owner-class census has run.
-    after: null
+    after: Source-independent exact checker with 19 controls and Astra Max GO; proved support-extrema
+      construction and economic next-case strategy; published prospective exp145, overnight agenda and
+      separate usage. Scientific target remains unrun.
   delegations:
   - task: Implement and control the source-independent rational polygon-union checker
     operator: GPT-5.6 Sol, extra high; independent_audit_readiness
@@ -180,13 +214,43 @@ session:
     excluded_commands:
     - Scientific target invocation
     - Shared records, Git and PR mutation
-  outputs: []
-  checks: []
-  stop_reason: null
-  next_action: Publish and execute exp145 under its unchanged guards, then continue agenda033 in a successor
-    session.
+  outputs:
+  - packing/cases/n11_five_dot_cover/independent_union.py
+  - packing/tests/test_independent_five_dot_union.py
+  - packing/cases/n11_five_dot_cover/union-contract.md
+  - packing/cases/n11_five_dot_cover/owner-case-census-design.md
+  - packing/cases/n11_five_dot_cover/overnight-strategy-review.md
+  - packing/campaign/agendas/agenda-033-overnight-owner-geometry.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md
+  - packing/campaign/resource-usage/codex-task-tree-pr137-publication-tail.yaml
+  checks:
+  - 19 exact synthetic checker controls pass in 0.93 seconds; Ruff and BasedPyright pass. Astra Max reviews
+    the repaired source and mathematical contract without evaluating target geometry.
+  - The earlier edit tier passed 44 selected steps in 73.75 seconds, as reported by the implementation
+    agent.
+  - 'Initial push invocation failed in 164.07 seconds: synopsis/command-record drift and one matching
+    behavioral failure; 1171 other reachable tests passed.'
+  - After record repair, the single failed behavioral test passed in 9.28 seconds. The updated round-aggregate
+    negative control fired in 3.851 seconds.
+  - Final pre-freeze records invocation passed 31 selected steps in 55.17 seconds. This is not full-checkpoint
+    evidence.
+  - 32 focused usage-meter tests passed before adoption; repaired publication-tail receipt validates.
+  - No target run, no C4 promotion, and no global n11 bound change.
+  stop_reason: The controlled source and overnight strategy are published, but target launch missed the
+    declared cutoff and the new PR checkpoint remains pending. Continue rather than extending this session.
+  next_action: 'BC-316 under think-yhw2: carry the unchanged published exp145 into Session115, then continue
+    the reviewed wall-aware geometry agenda. In parallel, think-ta8s obtains and reconciles the new stacked
+    milestone checkpoint.'
+  certification_pending: think-ta8s
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-114.yaml
 ---
 # Session114: Independent Audit Before Owner-Case Extension
+
+Stopped with a published source milestone and explicit pending certification.
+The target was not launched.
+Session115 continues the unchanged protocol; this is a handoff within the authorized
+overnight campaign, not the end of that campaign.
 
 **Entry point: W7, pipeline improvement.** This continues the selected
 [think-yhw2 handoff](../../../SYNOPSIS.md#current-handoff) on a fresh branch from
@@ -212,7 +276,8 @@ from that point to this session’s07:05:32Z start remains a separate interval, 
 repair tracked by `think-86ax`. This session does not extend the old sprint or change
 its accepted totals.
 The repaired native meter now retains the publication tail in a separate receipt; it
-does not alter Session113. Session114 still needs its own measured cutoff.
+does not alter Session113. Session114 now has its own measured cutoff at
+2026-09-09T07:53:52Z.
 
 The user subsequently authorized autonomous overnight continuation through 15:00 UTC (8
 a.m. Pacific), with 30-minute thread wakeups.

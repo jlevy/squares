@@ -1,9 +1,9 @@
 # Independent Polygon-Union Audit of the Five Dots
 
-**Status:** prospective mathematical contract for Session114. No independent target
-replay has run.
-This checks the finite-net portion of [T-023](../../frontier/RESULTS.md),
-using the same rational input patches and dots with a different geometric computation.
+**Status:** reviewed in Session114 and confirmed by the independent exp145 replay in
+Session115. All 361 exact uncovered areas were zero in one 39.06-second process.
+This checks the finite-net portion of [T-023](../../frontier/RESULTS.md), using the same
+rational input patches and dots with a different geometric computation.
 
 ## The Set the Checker Must Cover
 
