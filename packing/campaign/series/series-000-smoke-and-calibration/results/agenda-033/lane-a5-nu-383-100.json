@@ -1,0 +1,162 @@
+{
+ "family": "ceiling-family-383-100.json",
+ "outer_side": "383/100",
+ "square_side": "9977/10000",
+ "placements": 88,
+ "orbits": 11,
+ "vertices": 20504,
+ "membership_sets": 1517,
+ "maximal_cliques": 233,
+ "non_helly_cliques": 168,
+ "atom_cliques": 168,
+ "tau_star": {
+  "3/2": 120,
+  "5/3": 40,
+  "7/4": 8
+ },
+ "tau_all_exact": true,
+ "atoms_verified": true,
+ "rows_depth": 172,
+ "rows_atom": 10,
+ "with_atoms": true,
+ "float_optimum": 10.666666666666666,
+ "seconds": 3.1,
+ "primal_exact": "32/3",
+ "primal_float": 10.666666666666666,
+ "primal_route": "rationalised at denominator 12",
+ "weights_per_placement": [
+  "0",
+  "0",
+  "0",
+  "0",
+  "1/12",
+  "1/4",
+  "1/2",
+  "1/2",
+  "0",
+  "0",
+  "0"
+ ],
+ "tight_rows": 28,
+ "tight_depth_rows": 25,
+ "tight_atom_rows": 3,
+ "tight_atom_row_vectors": [
+  [
+   0,
+   0,
+   0,
+   0,
+   6,
+   2,
+   0,
+   0,
+   0,
+   2,
+   0
+  ],
+  [
+   0,
+   2,
+   0,
+   0,
+   0,
+   2,
+   1,
+   0,
+   2,
+   0,
+   0
+  ],
+  [
+   0,
+   2,
+   1,
+   0,
+   0,
+   2,
+   1,
+   0,
+   0,
+   2,
+   0
+  ]
+ ],
+ "dual_bound_exact": "32/3",
+ "dual_bound_float": 10.666666666666666,
+ "dual_route": "rationalised at denominator 3",
+ "dual_support": [
+  {
+   "row": 112,
+   "kind": "depth",
+   "u": "4",
+   "row_vector": [
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    0,
+    2
+   ]
+  },
+  {
+   "row": 148,
+   "kind": "depth",
+   "u": "8/3",
+   "row_vector": [
+    1,
+    0,
+    1,
+    1,
+    0,
+    2,
+    1,
+    0,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "row": 169,
+   "kind": "depth",
+   "u": "8/3",
+   "row_vector": [
+    2,
+    0,
+    2,
+    2,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "row": 172,
+   "kind": "atom",
+   "u": "4/3",
+   "row_vector": [
+    0,
+    0,
+    0,
+    0,
+    6,
+    2,
+    0,
+    0,
+    0,
+    2,
+    0
+   ]
+  }
+ ],
+ "exact": true
+}

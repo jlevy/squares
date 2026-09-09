@@ -1,0 +1,81 @@
+"""Cross-corner disjointness of the deleted sets, and the j3 survivor family."""
+from __future__ import annotations
+import json
+from fractions import Fraction
+from pathlib import Path
+
+from devtools.owner_footprints import owner_branch_manifest
+from devtools.screen_corner_dual_salvage import _base_polygon, _corner_polygon, screen_footprint
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+REPO = Path("/home/user/squares")
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/strategy-conditioning-ladder")
+SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/"
+              "ceiling-family-191-50.json")
+
+record = json.loads(SRC.read_text())
+moved = transport(record, Fraction(1), side=Fraction(96, 25))
+family = CeilingCertificate.from_record(moved)
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+axes = frozenset((d.ux, d.uy) for d in directions) | frozenset((d.vx, d.vy) for d in directions)
+CORNERS = ("bottom-left", "bottom-right", "top-left", "top-right")
+by_id = {c.class_id: c for c in manifest.classes}
+ALL = (1 << len(family.placements)) - 1
+
+def deleted_mask(class_id: str, corner: str, kind: str = "endpoint") -> int:
+    owner = by_id[class_id]
+    poly = _corner_polygon(_base_polygon(owner, kind, directions), corner, family.outer_side)
+    s = screen_footprint(family, poly, class_id=class_id, corner=corner, kind=kind,
+                         source_placements=family.placements, direction_axes=axes)
+    return ALL & ~s.mask
+
+def weight(mask: int) -> Fraction:
+    return sum((p.weight for i, p in enumerate(family.placements) if mask >> i & 1), Fraction(0))
+
+print("== per-corner deleted sets, endpoint footprint, class m1:j3 ==")
+masks = {c: deleted_mask("bottom-left:m1:j3", c) for c in CORNERS}
+for c, m in masks.items():
+    print(f"  {c:14s} deleted {bin(m).count('1'):2d} placements, weight {weight(m)}")
+pair_ok = True
+for i, a in enumerate(CORNERS):
+    for b in CORNERS[i + 1:]:
+        if masks[a] & masks[b]:
+            pair_ok = False
+            print(f"  OVERLAP {a} & {b}: {bin(masks[a] & masks[b]).count('1')}")
+print(f"  pairwise disjoint across corners: {pair_ok}")
+union = 0
+for m in masks.values():
+    union |= m
+print(f"  union deleted weight {weight(union)}  ->  four-corner survivor {11 - weight(union)}")
+
+print("\n== worst four-corner combinations over the 16x1 classes (endpoint) ==")
+best = {}
+for cid in by_id:
+    best[cid] = weight(deleted_mask(cid, "bottom-left"))
+mn = min(best.values())
+print(f"  min single-corner deletion {mn} attained by "
+      f"{[k for k, v in best.items() if v == mn]}")
+print(f"  => min four-corner deletion (additive) {4 * mn}, max four-corner survivor {11 - 4 * mn}")
+
+# survivor family for class m1:j3 at bottom-left only
+poly = _base_polygon(by_id["bottom-left:m1:j3"], "endpoint", directions)
+s = screen_footprint(family, poly, class_id="bottom-left:m1:j3", corner="bottom-left",
+                     kind="endpoint", source_placements=family.placements, direction_axes=axes)
+surv = [family.placements[e.source_index] for e in s.survivors]
+print(f"\nsurvivor family: {len(surv)} placements, weight {sum(p.weight for p in surv)}")
+out = {
+    "n": 11,
+    "outer_side": str(family.outer_side),
+    "square_side": str(family.square_side),
+    "half_tangents": [str(t) for t in family.half_tangents],
+    "placements": [[str(p.half_tangent), str(p.centre_x), str(p.centre_y),
+                    str(p.weight), str(p.side)] for p in surv],
+    "total_weight": str(sum((p.weight for p in surv), Fraction(0))),
+    "provenance": {"tool": "scratch replay of devtools.screen_corner_dual_salvage",
+                   "source": "agenda-033/ceiling-family-191-50.json transported to 96/25",
+                   "class": "bottom-left:m1:j3", "footprint": "endpoint"},
+}
+(OUT / "survivor-m1-j3.json").write_text(json.dumps(out, indent=1))
+print(f"wrote {OUT / 'survivor-m1-j3.json'}")
