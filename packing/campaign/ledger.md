@@ -112,8 +112,17 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
 | [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 6 | think-c53m | Continue BC-264 under think-mq0d, whose operational certification and draft-publication prerequisites are retained in this record and owned by think-m2lx. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation. |
 | [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-10 (twice; the budget note rules out a third time and names what closes it, think-y0hr), until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
+| [session-100](agent-sessions/session-100-duality-kill-tests-and-unit-value.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-7lp3 | Coordinator: keep H-129 open and use the dated correction's retained exp-070 family, exact unit transport, and net-bound resume contract. The original scratch state has not been recovered. The certification debt under think-7lp3 clears only with the next qualifying gate on the integrated branch; source replay and instrument controls come before a separately registered target continuation. |
+| [session-101](agent-sessions/session-101-corner-skeleton-ownership.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (process) | 2 | think-1136 | Under think-kbci the coordinator attaches the resource rollup, allocates the experiment id for the corner-pair theorem and H-128's recorded verdict, and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the pair-priced margin (phase G) is the next session's first step. |
+| [session-102](agent-sessions/session-102-angle-band-theorems-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 2 | think-ndqj | Under think-kbci the coordinator allocates experiment ids for Theorems A, B and C and the H-131 replay and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads this lane and decides whether the end band continues at grid 119 and 159 from k = 9 and whether the band toward 40.19° runs at grid 119. |
+| [session-103](agent-sessions/session-103-plateau-artefact-at-3-82.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-4uon | Under think-4uon the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate and dispositions H-133 in BC-303 (think-znzj). |
+| [session-104](agent-sessions/session-104-ownership-set-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 3 | think-qfog | Under think-kbci the coordinator integrates the lane branch, registers the document, attaches the harness rollup, allocates the experiment id for Theorem E.4 and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the independent replay with the Hausdorff-bound reader is the next session's first step. |
 | [session-105](agent-sessions/session-105-stromquist-n26-verification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-zi3g | Publish this review and verify hosted checks; retain think-mq0d (BC-264) as the selected research slice. think-z0fi implements and controls the specified n26 family, think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption. |
 | [session-106](agent-sessions/session-106-n26-source-consistency.md) | completed | contemporaneous | `factual-review` (correctness) | `pipeline-improvement` (correctness) | 5 | think-4v5w | Merge PR120 after the final record commit passes its affected and hosted checks, then close think-4v5w, think-4g6w and think-7tus. Further H125 work remains conditional on the landed PR116/BC-264 handoff, a fresh allocation and admission under think-mq0d; source-recovery and released-contact follow-ups remain open. |
+| [session-107](agent-sessions/session-107-first-wave-selection.md) | stopped | contemporaneous | `factual-review` (correctness) | `review-planning-oversight` (insight) | 2 | think-znzj | Under think-kbci the coordinator integrates this record, attaches the resource receipt and runs the certifying gate; then funds the selected block under think-qfog and the efficiency block under think-7lp3, and runs BC-304 (think-yrw1) as the closeout. |
+| [session-108](agent-sessions/session-108-anchors-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-4ifm | Under think-kbci the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-111 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
+| [session-109](agent-sessions/session-109-corner-class-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-kx2l | Under think-kbci the coordinator integrates the lane section, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
+| [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | think-qfog starts the selected pairwise-compatibility continuation on a new codex branch after merge publication. |
 
 ### Workflow summary
 
@@ -122,14 +131,15 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 2 | 1 | 13 | 1 |
-| `factual-review` | 4 | 0 | 46 | 2 |
+| `factual-review` | 5 | 0 | 47 | 2 |
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 10 | 4 | 68 | 7 |
+| `research-loop` | 17 | 4 | 76 | 7 |
 | `pipeline-improvement` | 26 | 0 | 134 | 1 |
-| `documentation-pass` | 1 | 0 | 13 | 1 |
-| `review-planning-oversight` | 0 | 0 | 3 | 0 |
+| `documentation-pass` | 1 | 0 | 16 | 1 |
+| `remediation` | 0 | 1 | 0 | 1 |
+| `review-planning-oversight` | 0 | 0 | 4 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -596,23 +606,44 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ### [agenda-029](agendas/agenda-029-structural-restrictions-and-conditional-dots.md) — Structural Restrictions and Conditional Dots
 
-Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner, contact and angle restrictions to stronger conditional dot certificates. Use three preliminary spikes, select the strongest one or two leads, and finish a consequential theorem or obstruction over three blocks of 3h, 3h and 2h. The numerical goal is a global exclusion at 96/25; partial results retain their complete scope and complement. This planning checkpoint launches no research.
+Status: **superseded**. Prepare a coordinated n11 campaign connecting proved corner, contact and angle restrictions to stronger conditional dot certificates. Use three preliminary spikes, select the strongest one or two leads, and finish a consequential theorem or obstruction over three blocks of 3h, 3h and 2h. The numerical goal is a global exclusion at 96/25; partial results retain their complete scope and complement. This planning checkpoint launches no research.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-284 | research | 11 | complete | 0 | think-6zei | Await the user's research-start instruction; then the coordinator dispatches the block-one lanes below. |
-| BC-285 | research | 11 | ready | 0 | think-pbv4 | Give BC287 a precise capture-relevant consequence, and bring its global relevance to block-one selection. |
-| BC-286 | research | 11 | ready | 1 | think-yv7r | Return actual closed profiles and the complementary counts, or identify which missing geometric restriction would change the outcome. |
-| BC-287 | research | 11 | ready | 0 | think-1rim | Bring one consequential certificate or concrete geometric bottleneck to BC289; preserve BC261's single interface owner. |
-| BC-288 | research | 11 | tentative | 2 | think-m6gb | Compare its actual implication for H117/H121 with the certificate leads before allocating sustained work. |
-| BC-289 | research | 11 | blocked | 0 | think-4elv | Freeze the strongest claim and remaining proof obligations for block three; readiness alone cannot justify expansion. |
-| BC-290 | research | 11 | blocked | 0 | think-nlji | User reviews the mathematical result and next selection; no automatic new family or extension to rescue a missed target. |
+| BC-285 | research | 11 | complete | 0 | think-pbv4 | Give BC287 a precise capture-relevant consequence, and bring its global relevance to block-one selection. |
+| BC-286 | research | 11 | stopped | 1 | think-yv7r | Return actual closed profiles and the complementary counts, or identify which missing geometric restriction would change the outcome. |
+| BC-287 | research | 11 | stopped | 0 | think-1rim | Bring one consequential certificate or concrete geometric bottleneck to BC289; preserve BC261's single interface owner. |
+| BC-288 | research | 11 | stopped | 2 | think-m6gb | Compare its actual implication for H117/H121 with the certificate leads before allocating sustained work. |
+| BC-289 | research | 11 | complete | 0 | think-4elv | Freeze the strongest claim and remaining proof obligations for block three; readiness alone cannot justify expansion. |
+| BC-290 | research | 11 | complete | 0 | think-nlji | User reviews the mathematical result and next selection; no automatic new family or extension to rescue a missed target. |
+
+### [agenda-030](agendas/agenda-030-parallel-structural-lanes-at-n11.md) — Parallel Structural Lanes at n = 11
+
+Status: **completed**. Run X-021's research sessions as parallel lanes with disjoint deliverables and files: nine measurement-or-theorem lanes that each decide one question about structural constraints on eleven-square packings at 96/25 and what the constraint buys a certificate, two lanes on the closing route, then one selection cell and one closeout. The numerical goal is unchanged from Agenda 029: a global exclusion at 96/25. Every lane records its site set or inputs with its result, because a non-refutation on a finite site set is never evidence. This planning checkpoint launches no research.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-291 | research | 11 | complete | 0 | think-cm07 | The owner's research-start instruction; then the coordinator allocates session ids and dispatches the ready lanes below. |
+| BC-292 | research | 11 | stopped | 0 | think-kx2l | Whether any corner information has value for a certificate at q; if the flush-four residual falls below seven, the first conditional exclusion with a named complement. |
+| BC-293 | research | 11 | complete | 0 | think-1136 | Pinned anchors for the frame-conditioned certificate (BC-287, H-111) and the two-pattern case split of the ownership-conditioned certificate. |
+| BC-294 | measurement_validation | 11 | stopped | 0 | think-7lp3 | Improve the retained 10.3842 control or certify an upper bound over the specified domain; test each proposed one-body or capture obstruction at its own scope. |
+| BC-295 | research | 11 | complete | 0 | think-ndqj | The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target. |
+| BC-296 | research | 11 | stopped | 1 | think-n6fr | Either the composition route ends at q with a certificate of its own impossibility, or the survivors become the branch list for geometric conditioning. |
+| BC-297 | measurement_validation | 11 | complete | 1 | think-4uon | Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree. |
+| BC-298 | research | 11 | stopped | 1 | think-jsi8 | Every wall within 3.84 − H0 of a square, both extents at least H0, and with the spanning lemma the strongest symmetry-breaking premise available. |
+| BC-299 | research | 11 | stopped | 1 | think-4ifm | The premise every conditional certificate needs, a square forced into a known box, combined with the nine-point band into a concrete two-branch split. |
+| BC-300 | research | 11 | stopped | 2 | think-dfof | Which corner branches cannot close near U, and whether the structural lane should spend time on elimination motions at all. |
+| BC-301 | research | 11 | stopped | 1 | think-lbqe | The only honest statement about the endpoint; if BC-294 kills capture, this reduces to the exact-side tree and needs BC-302 to be finite. |
+| BC-302 | research | 11 | complete | 1 | think-qfog | If it succeeds, route (a) collapses to about two to the twenty exact LPs; the prior is about thirty per cent. |
+| BC-303 | research | 11 | complete | 0 | think-znzj | The frozen claim for the next block and the remaining proof obligations. |
+| BC-304 | research | 11 | complete | 0 | think-yrw1 | The owner reviews the mathematical result and the next selection. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 85 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 89 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -720,6 +751,14 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 | H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
 | H-125 | blocked | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 1 |  |  |
 | H-126 | open question | proof | Which quantitative restrictions on the four distinct selected corner b |  | 0 |  |  |
+| H-127 | blocked | proof | At side 96/25 the corner-class covering program — every admissible cor |  | 0 |  |  |
+| H-128 | unresolved | proof | There is a valid D4-symmetric measure at side 96/25 on the retained sh |  | 1 |  | 63.5m wall |
+| H-129 | blocked | proof | The shrink-free covering value at side 3.87, with coverage required fo |  | 0 |  |  |
+| H-130 | confirmed | proof | Every packing of eleven unit squares at side at most 96/25 has a squar |  | 1 |  | 37.2m wall |
+| H-131 | confirmed | proof | In every packing of unit squares in the container of side 96/25, at mo |  | 1 |  | 31.2m wall |
+| H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
+| H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
+| H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -758,7 +797,7 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (20)
+### unresolved (21)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -782,6 +821,7 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 | exp-125 | series-000 | 11 | Session094 coordinator, BC255; max mathematical judgment | H-124 | The whole diagonal-band sufficient cover passes independent verification, but the axis-band sufficient cover returned no_chain. Both bands are required, so H124 and restricted H036 remain unresolved. No failed-cover counterexample or unrestricted bound is claimed. |
 | exp-126 | series-000 | 11 | Session094 coordinator, BC243; max mathematical judgment | H-099 | The conservative graph contains a reported overweight clique, so this sufficient depth certificate failed. No common geometric interior was certified and no independent target reader ran. H099 and its fixed-support bracket remain unresolved and unchanged. |
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
+| exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
 
 ### blocked (8)
 
@@ -796,7 +836,7 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 
-### accepted (27)
+### accepted (30)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -827,6 +867,9 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 | exp-120 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-109 | Independent exact A1 replay passed on both closed angle signs; the reviewed reflection establishes A2. |
 | exp-121 | series-000 | 11 | Codex coordinator, max mathematical judgment, Session091 BC-255 | H-110 | The independently reconstructed frozen square is contained in the box and strictly avoids all twelve unchanged points. |
 | exp-123 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-123 | The independent exact four-guard certificate and reviewed geometric reduction prove complete H123 localization on the actual near45 domain. |
+| exp-130 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-130 | All three theorems meet H-130's total-width criterion: Theorems A, B and C clear the 3° bar by approximately 0.1846°, 8.8582° and 9.3138°. Theorem C also establishes the literal distance of 1.5° from both endpoints. Each is an exact decision of decide_class_program without using Stromquist's Theorem 3 or its lemmas. |
+| exp-131 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-131 | All eight counts are now decided under a registered round rather than cited from a planning lane, every exact mass reproduces the planning lane's to the fraction, and no declared falsifier occurred. The eight exact cell claims of H-131 are confirmed; the 2026-09-08 review corrects outward-rounded degree summaries without claiming a rerun. The certificate's site set does not restrict the resulting packing theorem within its exact angle domain. |
+| exp-132 | series-000 | 11 | the BC-302 lane agent of agenda-030, bead think-qfog, session-104; the record was written by a separate record lane from the frozen result section | H-134 | H-134's criterion is met in segment form: ten horizontal segments of length 1/10 on Stromquist's rows cover the whole pose space at tolerance 3/500, certified by an interval reader with every certified leaf and every discarded box re-decided in exact rational arithmetic and no failure, so every square of every packing of eleven unit squares at any side up to 96/25 is within 3/500 of a known mark; the point form of the same claim is untouched by this and stays open with thirteen candidate sets refuted. |
 
 ### baseline (11)
 
@@ -862,7 +905,7 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 
 ## Effort
 
-85 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
+89 rounds, 2152.1 agent-minutes, 1359.4 wall-minutes.
 
 ## Exploration reports not yet codified
 

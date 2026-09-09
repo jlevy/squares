@@ -1,0 +1,8 @@
+{
+  "name": "terminal sessions name the gate that certified them",
+  "output": "  11 terminal sessions name a full-gate run on a commit in their history\n  10 stopped sessions remain UNCERTIFIED; follow-up owners:\n    session-097 -> think-m2lx\n    session-100 -> think-7lp3\n    session-101 -> think-kbci\n    session-102 -> think-kbci\n    session-103 -> think-4uon\n    session-104 -> think-kbci\n    session-107 -> think-kbci\n    session-108 -> think-kbci\n    session-109 -> think-kbci\n    session-110 -> think-yx4g\n  86 closed before the rule existed and are not checked: session-001..session-086 (86 sessions)",
+  "reason": "",
+  "run_id": "cff3023c333949f090f088fb57734a96",
+  "seconds": 4.994833125005243,
+  "status": "passed"
+}

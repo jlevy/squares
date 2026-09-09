@@ -25,11 +25,14 @@ for each rule. Edit there, not here.
 
 <!-- BEGIN OPERATING RULES SUMMARY -->
 - **OR-1:** Build the tool; never leave a measurement in one-off code.
-- **OR-2:** Run three to five sub-agents, at a thinking level matched to the task.
-- **OR-3:** Never wait on a gate with nothing else in flight.
+- **OR-2:** Run three to five sub-agents, at a model and thinking level matched to the
+  task.
+- **OR-3:** Never wait on a gate with nothing else in flight; run CI beside the
+  research.
 - **OR-4:** Take the next slice from the handoff, not from the backlog.
 - **OR-5:** Declare the workflow entry point before beginning.
-- **OR-6:** Plan multi-hour work in slices before starting it.
+- **OR-6:** Plan multi-hour work in slices before starting it, as parallel lanes with
+  disjoint deliverables.
 - **OR-7:** Run the documentation guidelines pass at block boundaries.
 - **OR-8:** A self-declared budget is not a stop condition.
 - **OR-9:** A pull request leads with what the branch cost.

@@ -1,0 +1,682 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-ac15f8bb6100170a0.jsonl
+    sha256: 0a20f3a260af2abbb2941d3cc433b06da239a9029a2a9381db5e1298a5e2844b
+    bytes: 1447111
+    records: 496
+    session_id: 9010767e-5bb7-5e7d-99d2-858400f3969a
+    harness_versions:
+    - 2.1.263
+  span:
+    started_at: '2026-09-08T04:38:18.317Z'
+    ended_at: '2026-09-08T06:01:14.567Z'
+    wall_seconds: 4976.25
+  turns:
+    assistant: 238
+    sidechain: 238
+    by_model:
+      claude-fable-5-1: 238
+    by_thinking_level:
+      xhigh: 238
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ xhigh: 238
+    by_branch:
+      claude/squares-n11-constraints-wl9atd: 230
+      codex/n11-kernel-pricing: 8
+    latency:
+      count: 238
+      total_seconds: 2787.268
+      median_seconds: 3.331
+      max_seconds: 179.292
+  tokens:
+    cache_creation_input_tokens: 3809906
+    cache_read_input_tokens: 46454997
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 3809906
+    input_tokens: 6896
+    output_tokens: 171065
+    thinking_tokens: 76173
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 3809906
+      cache_read_input_tokens: 46454997
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 3809906
+      input_tokens: 6896
+      output_tokens: 171065
+      thinking_tokens: 76173
+  tool_calls:
+    total: 83
+    total_seconds: 2187.975
+    share_of_wall: 0.4397
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 33
+      total_seconds: 1590.251
+      median_seconds: 2.092
+      max_seconds: 601.658
+    by_tool:
+      Bash:
+        count: 83
+        total_seconds: 2187.975
+        median_seconds: 1.506
+        max_seconds: 601.658
+    by_command:
+      ? dtheta && , && dtheta && 2 && atan && 2 && the && DELTA && EPS && C_T && DELTAF &&
+        C_TF && out.append((a, && bx, && px, && dx, && (1 && ok && zero && q && delta && ct
+        && eps && q && delta && ct && eps && cs && leaves && discards && failed && nodes &&
+        t0 && nodes && st && t1, && ht, && dim && stack && stack && stack && bad && ap.add_argument(marks)
+        && ap.add_argument(--floor, && ap.add_argument(--exact, && ap.add_argument(--out)
+        && res && res[marks] && python
+      : count: 1
+        total_seconds: 601.658
+        median_seconds: 601.658
+        max_seconds: 601.658
+      ? bad && ap.add_argument(--out),ap.add_argument(--exact, && ap.add_argument(--sample,
+        && run(load(a.marks), && res[marks] && print(sample option added:, && python
+      : count: 1
+        total_seconds: 561.649
+        median_seconds: 561.649
+        max_seconds: 561.649
+      timeout uv run python:
+        count: 2
+        total_seconds: 423.247
+        median_seconds: 211.623
+        max_seconds: 421.619
+      ? discarded && failed && nodes && t_start && discarded && discards && failed && nodes
+        && t_start && continue, && discards.append(box) && exact && bad && sys.path.insert(0,
+        && import && delta && marks && leaves && status, && t1, && ht, && stack && stack &&
+        stack && checked && bad && worst && cx && cy && cx && cy && {checked} && python &&
+        python
+      : count: 1
+        total_seconds: 116.564
+        median_seconds: 116.564
+        max_seconds: 116.564
+      sys.path.insert(0, && import && delta && U && V && res && esc && escapes && best && float && python:
+        count: 1
+        total_seconds: 80.725
+        median_seconds: 80.725
+        max_seconds: 80.725
+      ? "sys.path.insert(0, && import && delta && pos && mx && c, && w && cy && largest &&\
+        \ best && \n      fbest && python"
+      : count: 1
+        total_seconds: 52.222
+        median_seconds: 52.222
+        max_seconds: 52.222
+      uv run python:
+        count: 2
+        total_seconds: 49.843
+        median_seconds: 24.922
+        max_seconds: 48.628
+      the && the && one && one && this && print(record adjusted) && packing-validate:
+        count: 1
+        total_seconds: 46.265
+        median_seconds: 46.265
+        max_seconds: 46.265
+      python3 && the && packing-validate:
+        count: 1
+        total_seconds: 46.034
+        median_seconds: 46.034
+        max_seconds: 46.034
+      packing-validate && STEPS FAILED && synopsis && git && git:
+        count: 1
+        total_seconds: 39.652
+        median_seconds: 39.652
+        max_seconds: 39.652
+      ? "delta && qf, && w && C && U && full-resolution && \n      fbest && (uv"
+      : count: 1
+        total_seconds: 26.044
+        median_seconds: 26.044
+        max_seconds: 26.044
+      timeout uv run packing-validate:
+        count: 1
+        total_seconds: 25.432
+        median_seconds: 25.432
+        max_seconds: 25.432
+      minimax[.]py .* c2 2 1) && kill && pgrep && python:
+        count: 1
+        total_seconds: 12.108
+        median_seconds: 12.108
+        max_seconds: 12.108
+      ? "delta && escapes && best && \n            ffloat && w && chosen && chosen.append(j)\
+        \ && covered && hit[:, && U && V && python"
+      : count: 1
+        total_seconds: 8.461
+        median_seconds: 8.461
+        max_seconds: 8.461
+      ls && uptime:
+        count: 2
+        total_seconds: 6.558
+        median_seconds: 3.279
+        max_seconds: 5.233
+      sed:
+        count: 10
+        total_seconds: 5.915
+        median_seconds: 0.204
+        max_seconds: 1.476
+      ? python3 && python && python3 && print(assembler updated) && open(R,w).write(t.replace(old,new))
+        && print(README line added)
+      : count: 1
+        total_seconds: 5.172
+        median_seconds: 5.172
+        max_seconds: 5.172
+      delta && U && V && t && v_a && v_g && mid:
+        count: 1
+        total_seconds: 4.508
+        median_seconds: 4.508
+        max_seconds: 4.508
+      separating && three && (b) && alive && the && a && git && git:
+        count: 1
+        total_seconds: 4.342
+        median_seconds: 4.342
+        max_seconds: 4.342
+      cat:
+        count: 5
+        total_seconds: 3.259
+        median_seconds: 0.182
+        max_seconds: 1.638
+      ? sys.path.insert(0, && import && delta && escapes && best && float && U && V && q &&
+        delta2 && bx, && px, && bad && c && s && bad && python && python
+      : count: 1
+        total_seconds: 3.254
+        median_seconds: 3.254
+        max_seconds: 3.254
+      (uv && python:
+        count: 2
+        total_seconds: 2.999
+        median_seconds: 1.5
+        max_seconds: 1.506
+      ? u && 2 && v && 2 && u && + && v && serving && its && v && u && h && v0 && hp.append((-c,
+        && hp.append((s, && u && + && v && k && b && cc && R && fr && ys && self.cx, && e,
+        && self.n && self.budget && self.t0 && self.tb && self.timed_out && regs[i] && tch[i]
+        && delta && k && import && delta && cy && w && cy && sq.append(E.corners(F(T[cx]),
+        && python && python
+      : count: 1
+        total_seconds: 2.89
+        median_seconds: 2.89
+        max_seconds: 2.89
+      a && open(R,w).write(t) && also && the && 52 && close_session && open && git && length && git:
+        count: 1
+        total_seconds: 2.802
+        median_seconds: 2.802
+        max_seconds: 2.802
+      import && delta && tf && w && cands_y && cy2 && best && marks && near && out.append(c) && python:
+        count: 1
+        total_seconds: 2.794
+        median_seconds: 2.794
+        max_seconds: 2.794
+      import && sys.path.insert(0, && python:
+        count: 1
+        total_seconds: 2.767
+        median_seconds: 2.767
+        max_seconds: 2.767
+      ? cover_reader2[.]py) && kill && bad && ap.add_argument(--out),ap.add_argument(--exact,
+        && ap.add_argument(--sample, && run(load(a.marks), && res[marks] && print(sample option
+        added) && python
+      : count: 1
+        total_seconds: 2.299
+        median_seconds: 2.299
+        max_seconds: 2.299
+      ls && git && git && mkdir && nproc && uptime:
+        count: 1
+        total_seconds: 2.165
+        median_seconds: 2.165
+        max_seconds: 2.165
+      uptime:
+        count: 3
+        total_seconds: 2.115
+        median_seconds: 0.173
+        max_seconds: 1.771
+      print(k4 coarse phi per start:,:
+        count: 1
+        total_seconds: 2.092
+        median_seconds: 2.092
+        max_seconds: 2.092
+      ? the && since && three-column && the && K4B && also && 300 && 0.08 && the && localisation
+        && README && session && validation && commit. && git
+      : count: 1
+        total_seconds: 2.051
+        median_seconds: 2.051
+        max_seconds: 2.051
+      python3:
+        count: 1
+        total_seconds: 1.795
+        median_seconds: 1.795
+        max_seconds: 1.795
+      C && U && V && C && U && print(init-k4.json written from polish-k4:,:
+        count: 1
+        total_seconds: 1.749
+        median_seconds: 1.749
+        max_seconds: 1.749
+      an && length && one && this && nothing && one && one && python:
+        count: 1
+        total_seconds: 1.727
+        median_seconds: 1.727
+        max_seconds: 1.727
+      open(D,w).write(t) && A && open(R,w).write(r) && print(record updated):
+        count: 1
+        total_seconds: 1.649
+        median_seconds: 1.649
+        max_seconds: 1.649
+      ls && print(tests now, && ls && uptime:
+        count: 1
+        total_seconds: 1.63
+        median_seconds: 1.63
+        max_seconds: 1.63
+      cp && (uv && python:
+        count: 1
+        total_seconds: 1.628
+        median_seconds: 1.628
+        max_seconds: 1.628
+      print(sys.version) && print(numpy, && print(scipy, && x,y,w:
+        count: 1
+        total_seconds: 1.596
+        median_seconds: 1.596
+        max_seconds: 1.596
+      every && validate && commit. && the && no && a && no:
+        count: 1
+        total_seconds: 1.571
+        median_seconds: 1.571
+        max_seconds: 1.571
+      ? 'tag && delta && k && time_budget && iters && tests.append({name: && True && log.append(entry)
+        && json.dump(tests, && python'
+      : count: 1
+        total_seconds: 1.568
+        median_seconds: 1.568
+        max_seconds: 1.568
+    by_command_family:
+      other:
+        count: 45
+        total_seconds: 1570.599
+        median_seconds: 1.649
+        max_seconds: 601.658
+      toolchain:
+        count: 7
+        total_seconds: 526.091
+        median_seconds: 5.172
+        max_seconds: 421.619
+      project:
+        count: 2
+        total_seconds: 65.084
+        median_seconds: 32.542
+        max_seconds: 39.652
+      inspection:
+        count: 27
+        total_seconds: 23.152
+        median_seconds: 0.286
+        max_seconds: 5.233
+      filesystem:
+        count: 2
+        total_seconds: 3.049
+        median_seconds: 1.525
+        max_seconds: 1.628
+    invoked:
+      echo: 79
+      grep: 68
+      date: 60
+      cd: 53
+      cat: 52
+      the: 33
+      head: 30
+      sed: 30
+      export: 28
+      tee: 25
+      uv run python: 24
+      tail: 22
+      v: 19
+      u: 17
+      '11': 17
+      delta: 15
+      'no': 15
+      ls: 14
+      '2': 13
+      best: 12
+      uptime: 11
+      +: 10
+      import: 9
+      ≤: 9
+      stack: 9
+      awk: 8
+      −: 8
+      same: 8
+      —: 8
+      bad: 8
+      wc: 7
+      U: 7
+      (uv: 7
+      '10': 7
+      cy: 6
+      every: 6
+      'K4-symmetric:': 6
+      '5': 6
+      nodes: 6
+      timeout uv run python: 6
+      S10C: 6
+      it: 5
+      V: 5
+      w: 5
+      print(tests now,: 5
+      escape,: 5
+      Marks: 5
+      sys.path.insert(0,: 5
+      '`0.03188`': 5
+      polish: 5
+      one: 5
+      git status: 4
+      2,: 4
+      d: 4
+      a: 4
+      python3: 4
+      strict: 4
+      finds: 4
+      'Control:': 4
+      escape: 4
+      P10: 4
+      sleep: 4
+      cut: 4
+      each: 4
+      failed: 4
+      timeout uv run packing-validate: 4
+      git log: 3
+      git grep: 3
+      corners: 3
+      escapes: 3
+      qf,: 3
+      C: 3
+      k: 3
+      ',': 3
+      Set: 3
+      25,: 3
+      50,: 3
+      '`0.03238`': 3
+      kill: 3
+      pgrep: 3
+      '`0.01401`': 3
+      '22': 3
+      q: 3
+      bx,: 3
+      dtheta: 3
+      atan: 3
+      p: 3
+      discarded: 3
+      t_start: 3
+      t1,: 3
+      ht,: 3
+      also: 3
+      A: 3
+      '`3': 3
+      res[marks]: 3
+      mkdir: 2
+      c: 2
+      s: 2
+      ? "\n      fbest"
+      : 2
+      its: 2
+      v0: 2
+      b: 2
+      commit.: 2
+      cos: 2
+      sin: 2
+      '`': 2
+      duplicates: 2
+      (B): 2
+      ²`: 2
+      Test: 2
+      Expected: 2
+      Observed: 2
+      against: 2
+      Search: 2
+      Axis: 2
+      proved).**: 2
+      only: 2
+      wall: 2
+      Best: 2
+      Least: 2
+      '`0.41449`': 2
+      both: 2
+      'G11:': 2
+      '`(1.0009,': 2
+      'P10C:': 2
+      'repeat:': 2
+      mode: 2
+      rounds: 2
+      init: 2
+      hist: 2
+      marks: 2
+      ten: 2
+      '`polish.py`': 2
+      Family: 2
+      Parameters: 2
+      Starts: 2
+      Coarse: 2
+      '6': 2
+      '`0.0234`': 2
+      '`0.0064`': 2
+      Free: 2
+      The: 2
+      assigning: 2
+      fewer: 2
+      tolerance: 2
+      atoms: 2
+      two: 2
+      min–max: 2
+      float: 2
+      px,: 2
+      c,: 2
+      2): 2
+      DELTA: 2
+      EPS: 2
+      ex,: 2
+      du: 2
+      dv: 2
+      ok: 2
+      dim: 2
+      ap.add_argument(--floor,: 2
+      res: 2
+      or: 2
+      '`0.01720`': 2
+      S10: 2
+      none: 2
+      Free,: 2
+      Δθ: 2
+      open: 2
+      discards: 2
+      leaves: 2
+      cx: 2
+      length: 2
+      this: 2
+      ct: 2
+      eps: 2
+      ap.add_argument(--out),ap.add_argument(--exact,: 2
+      ap.add_argument(--sample,: 2
+      run(load(a.marks),: 2
+      open(D,w).write(t): 2
+      open(R,w).write(r): 2
+      print(record updated): 2
+      nproc: 1
+      ^: 1
+      print(sys.version): 1
+      print(numpy,: 1
+      print(scipy,: 1
+      x,y,w: 1
+      squared: 1
+      dist^2: 1
+      gap: 1
+      returns: 1
+      points: 1
+      shape: 1
+      dy: 1
+      (ay: 1
+      x2,: 1
+      try: 1
+      t: 1
+      v_a: 1
+      v_g: 1
+      mid: 1
+      ? "\n            ffloat"
+      : 1
+      chosen: 1
+      chosen.append(j): 1
+      covered: 1
+      hit[:,: 1
+      full-resolution: 1
+      find: 1
+      serving: 1
+      h: 1
+      hp.append((-c,: 1
+      hp.append((s,: 1
+      cc: 1
+      R: 1
+      fr: 1
+      ys: 1
+      self.cx,: 1
+      e,: 1
+      self.n: 1
+      self.budget: 1
+      self.t0: 1
+      self.tb: 1
+      self.timed_out: 1
+      regs[i]: 1
+      tch[i]: 1
+      sq.append(E.corners(F(T[cx]),: 1
+      tag: 1
+      time_budget: 1
+      iters: 1
+      'tests.append({name:': 1
+      'True': 1
+      log.append(entry): 1
+      json.dump(tests,: 1
+      validate: 1
+      separating: 1
+      three: 1
+      (b): 1
+      alive: 1
+      git commit: 1
+      print([x[name]: 1
+      M: 1
+      What: 1
+      proved,: 1
+      coordinates: 1
+      999,: 1
+      '`0.06486`': 1
+      '`(1,': 1
+      W11: 1
+      print(k4 coarse phi per start:,: 1
+      pkill: 1
+      tf: 1
+      cands_y: 1
+      cy2: 1
+      near: 1
+      out.append(c): 1
+      print(init-k4.json written from polish-k4:,: 1
+      (other): 114
+    invoked_families:
+      other: 830
+      inspection: 235
+      shell: 224
+      toolchain: 34
+      vcs: 12
+      project: 4
+      filesystem: 3
+    by_shell_shape:
+      python_heredoc:
+        count: 25
+        total_seconds: 1577.571
+        median_seconds: 2.89
+        max_seconds: 601.658
+      compound:
+        count: 40
+        total_seconds: 542.682
+        median_seconds: 1.224
+        max_seconds: 421.619
+      heredoc:
+        count: 10
+        total_seconds: 55.042
+        median_seconds: 1.523
+        max_seconds: 39.652
+      python_inline:
+        count: 8
+        total_seconds: 12.68
+        median_seconds: 1.536
+        max_seconds: 2.092
+    by_thinking_level:
+      xhigh:
+        count: 83
+        total_seconds: 2187.975
+        median_seconds: 1.506
+        max_seconds: 601.658
+    shell_traits:
+      pipes: 60
+      redirects_output: 41
+      substitutes: 17
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'
