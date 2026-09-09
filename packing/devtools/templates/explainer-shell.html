@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-kpress-theme="system" data-kpress-resolved-theme="light"
+<html lang="en" data-kpress-viewport data-kpress-theme="system" data-kpress-resolved-theme="light"
       data-kpress-palette="neutral" data-kpress-prose-font="serif" data-kpress-math-text="prose"
       data-kpress-mono-font="{{MONO_FONT}}">
 <head>
@@ -41,6 +41,13 @@
      for every reader, and outline paths in the PDF. See `relation_face_css`. -->
 <style>{{RELATION_CSS}}</style>
 <script>{{THEME_BOOTSTRAP}}</script>
+<script>
+/* CoreText uses linear advances with native hinting. Select it before body paint;
+   other platforms retain the explicit linear rendering policy below. */
+if (navigator.platform.startsWith('Mac')) {
+  document.documentElement.dataset.squaresNativeMathMetrics = 'true';
+}
+</script>
 <style>
 /* ============================================================
    This page on top of the kpress design system.
@@ -52,6 +59,13 @@
    is a kpress token, so the figures move with the system rather than beside
    it.
    ============================================================ */
+
+/* This standalone article scrolls the document, so the browser preserves its
+   reading position on reload and history traversal. KPress also supports host
+   panes, but its pane reset would leave the document at scroll position zero.
+   Keep main's width-query container without creating a second scroll context. */
+html, body { height: auto; overflow: visible; }
+.kpress-page-main.kpress-viewport { block-size: auto; overflow: visible; }
 
 /* One accent, everywhere. kpress ships a separate link blue and sets it on
    `:root`, on `.kpress`, and again per theme and palette on attribute selectors,
@@ -94,7 +108,7 @@ body {
 /* Paper typography profile; see paper-design.md beside this template.
    Keep the values and their scope together for review upstream to KPress:
    a 19px sans base against 18px prose, regular 410, medium 550, bold 680.
-   Figure text, captions and footnotes share one supporting-text role.
+   Captions and footnotes share a slightly smaller size than figure labels.
    Print keeps the same size ratio.
    Scope the bold token to sans components because KPress also uses it for serif
    emphasis. Diagram labels with explicit SVG weights join the same scale.
@@ -107,12 +121,14 @@ body {
    and the footnote controls at KPress's literal 600, which is neither token. */
 :root {
   --cert-font-scale-sans: calc(19 / 18);
-  --cert-font-weight-sans-light: 410;
+  --cert-font-weight-sans-light: var(--kpress-font-weight-sans-regular);
   --cert-font-weight-sans-medium: 550;
   --cert-font-weight-sans-bold: 680;
   --paper-title-scale: 1.5;
   --paper-subtitle-scale: 1.25;
   --paper-support-scale: 0.95;
+  --paper-note-scale: 0.92;
+  --paper-note-inset: 1.4rem;
   --paper-support-leading: 1.4;
 }
 /* Resolve the sans base in the prose scope so nested sans components all use
@@ -120,6 +136,7 @@ body {
 :root, .cert-page {
   --cert-font-size-sans-base: calc(var(--kpress-font-size-base) * var(--cert-font-scale-sans));
   --paper-font-size-support: calc(var(--cert-font-size-sans-base) * var(--paper-support-scale));
+  --paper-font-size-note: calc(var(--cert-font-size-sans-base) * var(--paper-note-scale));
   --paper-support-color: var(--kpress-doc-muted);
 }
 .cert-page :is(.credits, .kpress-figcaption, .kpress-footnotes, .colophon,
@@ -170,7 +187,7 @@ body {
 .kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
 .cert-page a, .kpress-tooltip a { text-decoration: none; }
 
-/* Supporting text uses one size, family, weight and color in both media.
+/* Supporting text shares its family, weight and color in both media.
    KPress's print text-role reset below turns the inherited gray into black. */
 .cert-page :is(.kpress-figcaption, .kpress-footnotes, .mass-line, .line-fig,
   .chart, .panel, .tip-panel),
@@ -182,6 +199,10 @@ body {
   line-height: var(--paper-support-leading);
   color: var(--paper-support-color);
 }
+.cert-page :is(.kpress-figcaption, .kpress-footnotes) {
+  font-size: var(--paper-font-size-note);
+  padding-inline: var(--paper-note-inset);
+}
 .cert-page :is(.kpress-figcaption, .kpress-footnotes) strong { color: inherit; }
 /* Sources, not controls: the ↑ after each footnote is kpress's footnote control and
    keeps the control styling (accent here, through the link alias above). */
@@ -191,7 +212,6 @@ body {
   text-decoration: none;
 }
 .cert-page :is(.kpress-figcaption, .kpress-footnotes, .mass-line, .panel) .katex {
-  font-size: var(--kpress-katex-size-sans);
   color: inherit;
 }
 .cert-page .kpress-footnotes code { color: inherit; }
@@ -460,16 +480,19 @@ body {
   padding-block-start: 0;
 }
 
-/* Centre kpress's painted square on the first line, preserving its 0.226em sides.
-   Half the line height minus half the square's height gives its top offset. Setting
-   the square itself to 1lh stretches it into a vertical bar.
+/* KPress paints a 0.226em square. Keep its actual height: the old glyph-era
+   height:1lh stretched that square into a full-line vertical bar.
 
-   The explicit line height keeps the marker's smaller font size from rescaling the
-   inherited leading. `check_print_layout` checks its position and square shape on
-   screen and in print. */
+   The item's resolved line-height keeps the marker's lh tied to the first text
+   line. Centre the square there, then lower its optical centre by 0.04 of the
+   body base: 0.72px at the 18px screen size and 0.64px at the 16px print size.
+   In the shipped PT Serif outlines, the A and E crossbars are centred 0.262em
+   and 0.357em above the baseline. The adjusted prose marker sits between them,
+   about 0.32em above the baseline in both media. */
 .cert-page.kpress-prose ul > li { line-height: 1lh; }
 .cert-page.kpress-prose ul > li::before {
-  top: calc(0.5lh - 0.113em);
+  height: 0.226em;
+  top: calc(0.5lh - 0.113em + var(--kpress-font-size-base) * 0.04);
 }
 
 .line-fig { padding: 1.3rem 1.1rem 0.4rem; }
@@ -512,7 +535,7 @@ body {
 .cert-page .kpress-figcaption {
   border-block-start: 0;
   margin-block-start: 0;
-  padding: 0.85rem 1.1rem 1rem;
+  padding-block: 0.85rem 1rem;
 }
 /* The caption label -- "Figure 5." and the sentence that names the figure -- is bold,
    and it is the same bold as the title credits and every other bold in the sans. KPress
@@ -576,7 +599,6 @@ body {
   line-height: 1.5;
 }
 .tip-panel .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
-.tip-panel .katex { font-size: 1.1em; }
 .panel {
   border-inline-start: 1px solid var(--kpress-doc-border);
   display: flex;
@@ -599,7 +621,6 @@ body {
   line-height: 1.1;
   min-height: 2.4em;
 }
-.mass-val .katex { font-size: 1em; }
 .mass-row { align-items: baseline; display: flex; flex-wrap: wrap; gap: 0.15rem 0.7rem; }
 .mass-dec {
   color: var(--kpress-doc-text);
@@ -751,20 +772,61 @@ body {
 /* Keep an inline result, its punctuation and its source reference together. */
 .math-reference { white-space: nowrap; }
 
+/* Every outer formula uses its surrounding text size, including displays and
+   saved system-font settings. KaTeX still controls scripts and large operators
+   inside that em. Override the stock face's legacy display-size compensation. */
+.cert-page .katex, .kpress-tooltip .katex { font-size: inherit !important; }
+
+/* Published math reserves widths in em. Linux Chromium's hinted advances can
+   round each glyph to a whole pixel, so a width measured there is wrong on
+   another platform or at another size. Override KaTeX's explicit `auto` for
+   both preparation and reading, including print. */
+.kpress .katex, .kpress-tooltip .katex { text-rendering: geometricPrecision; }
+/* On macOS, geometricPrecision also disables native hinting and visibly lightens
+   the unchanged PT Serif and Source Sans glyphs. CoreText already gives linear
+   advances under auto; the preparation guard verifies them at 16x as well. */
+@media screen {
+  html[data-squares-native-math-metrics] .kpress .katex,
+  html[data-squares-native-math-metrics] .kpress-tooltip .katex { text-rendering: auto; }
+}
+
+/* Measured bases reserve ascent and descent too. Empty inline carriers must not
+   add a font-dependent strut when a fallback face changes, especially in print's
+   tighter lines. Preparation copies each base's measured height and depth onto
+   its existing KaTeX strut, which also fixes the glyph baseline when print
+   changes the font size. */
+.kpress [data-kpress-math-prepared="true"] .katex,
+.kpress [data-kpress-math-prepared="true"] .katex-html { line-height: 0 !important; }
+.kpress [data-kpress-math-prepared="true"] .base { line-height: 0 !important; }
+
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
+/* Saved preferences are stamped in the head. Select their measured math before
+   first paint; inactive variants occupy no space and are never hydrated. */
+.squares-math-variant { display: none; }
+html:not([data-kpress-font-set="system"]):not([data-kpress-prose-font="sans"])
+  .squares-math-variant[data-squares-math-contexts~="custom-serif"],
+html:not([data-kpress-font-set="system"])[data-kpress-prose-font="sans"]
+  .squares-math-variant[data-squares-math-contexts~="custom-sans"],
+html[data-kpress-font-set="system"]:not([data-kpress-prose-font="sans"])
+  .squares-math-variant[data-squares-math-contexts~="system-serif"],
+html[data-kpress-font-set="system"][data-kpress-prose-font="sans"]
+  .squares-math-variant[data-squares-math-contexts~="system-sans"] { display: inline; }
 /* The head bootstrap marks pending enhancement and clears it on failure. Without
    JavaScript, raw TeX remains legible alongside KPress's semantic MathML. */
-html[data-kpress-math-pending] :is(.tex, .tex-d) { visibility: hidden; }
+html[data-kpress-math-pending]
+  :is(.tex, .tex-d, [data-kpress-math-prepared="true"]):not([data-squares-math-ready="true"]) {
+  visibility: hidden;
+}
+/* Once startup has queued a wrapper, the root watchdog cannot expose it before
+   its render runs. Include native MathML and descendants with explicit visibility. */
+.kpress [data-squares-math-queued], .kpress [data-squares-math-queued] * {
+  visibility: hidden !important;
+}
 /* Wide equations scroll sideways; the block keeps headroom for fractions, since
    overflow-x: auto also clips vertically and the display margin is zeroed. */
 .tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; padding-block: 0.45rem; }
 .tex-d .katex-display { margin: 0; }
 .caps .katex, .fig-title .katex, .legend .katex, .hint .katex { text-transform: none; }
-/* kpress sizes math to the face it sits in; the page's own sans contexts take
-   kpress's sans size, and its display blocks its display size. */
-.kv .katex, .mass-line .katex, .legend .katex, .hint .katex, .fig-title .katex,
-.caps .katex, .tip .katex { font-size: var(--kpress-katex-size-sans); }
-.cert-page .tex-d .katex { font-size: var(--kpress-katex-size-display); }
 .caps .katex { letter-spacing: 0; }
 /* ============================================================
    Print. kpress prints a document well: page margins, 11pt type,
@@ -774,14 +836,6 @@ html[data-kpress-math-pending] :is(.tex, .tex-d) { visibility: hidden; }
    follows is only what kpress does not cover.
    ============================================================ */
 @media print {
-  /* Without this the whole document prints as ONE page. kpress's page reset
-     holds `html, body { height: 100%; overflow: hidden }` for the scrolling
-     shell and its print stylesheet releases `.kpress-viewport` but not the
-     two elements above it, so the paginator sees a single viewport of
-     content and stops there. Measured before this rule: 1 page, and 92% of
-     the document absent. */
-  html, body { height: auto; overflow: visible; }
-
   /* Print shows one certificate, always the one the page opens on, so a
      printed copy does not depend on what the reader last clicked. */
   .cert-figure[data-cert="{{DEFAULT_SLUG}}"][hidden] { display: block !important; }
@@ -1058,8 +1112,8 @@ html[data-kpress-math-pending] :is(.tex, .tex-d) { visibility: hidden; }
 
 </style>
 </head>
-<body class="kpress-frame" data-kpress-frame>
-<main class="kpress-page-main kpress-viewport" data-kpress-viewport>
+<body>
+<main class="kpress-page-main kpress-viewport">
 <div class="kpress kpress-doc kpress-prose cert-page">
 {{BODY_HTML}}
 <p class="col colophon centred">Formatted and typeset with <a href="https://github.com/jlevy/flowmark"><strong>Flowmark</strong></a> and <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
@@ -1067,7 +1121,124 @@ html[data-kpress-math-pending] :is(.tex, .tex-d) { visibility: hidden; }
 
 </main>
 <script>{{KATEX_JS}}</script>
+<script>
+const finishMathBootstrap = squaresMath.reserve();
+</script>
 <script>{{KPRESS_CLIENT_JS}}</script>
+<script>
+/* ---------- shared: certificate picker and queued static math ---------- */
+(() => {
+  /* SVG font sizes use viewBox units. Compensate for the drawing scale so
+     labels have the same on-page size as captions, including during print. */
+  const diagrams = [...document.querySelectorAll('.line-fig svg, .chart svg')];
+  function sizeDiagramLabels() {
+    for (const svg of diagrams) {
+      if (!svg.getBoundingClientRect().width) continue;
+      const matrix = svg.getScreenCTM();
+      const scale = matrix && Math.hypot(matrix.c, matrix.d);
+      if (!scale) continue;
+      const size = parseFloat(getComputedStyle(svg.parentElement).fontSize) / scale;
+      svg.style.setProperty('--paper-diagram-font-size', `${size}px`);
+    }
+  }
+  const diagramObserver = new ResizeObserver(sizeDiagramLabels);
+  diagrams.forEach(svg => diagramObserver.observe(svg));
+  window.addEventListener('beforeprint', sizeDiagramLabels);
+  window.addEventListener('afterprint', sizeDiagramLabels);
+  window.matchMedia('print').addEventListener('change', sizeDiagramLabels);
+  document.fonts.ready.then(sizeDiagramLabels);
+  sizeDiagramLabels();
+  const render = squaresMath.render;
+  async function typeset() {
+    // DOM state chooses the priority without measuring every formula's layout.
+    // Keep document order within active panels, the visible paper, and hidden copies.
+    const groups = [[], [], []];
+    const nodes = [...document.querySelectorAll('.tex, .tex-d, .kpress-math')];
+    for (const el of nodes) {
+      el.dataset.squaresMathQueued = 'true';
+      const priority = el.closest('.cert-figure[hidden]') ? 2 : el.closest('.panel') ? 0 : 1;
+      groups[priority].push(async () => {
+        try {
+          if (!el.classList.contains('kpress-math')) {
+            if (el.dataset.done) return;
+            const source = el.dataset.kpressMathSource ?? el.textContent;
+            await render(el, source, el.classList.contains('tex-d'));
+            el.dataset.done = '1'; return;
+          }
+          // Native math keeps MathML available if the required font fails.
+          const box = el.querySelector('.kpress-math-render');
+          if (!box || box.dataset.done) return;
+          const src = box.dataset.kpressMathSource
+            ?? box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
+          await render(box, src, el.dataset.kpressMath === 'display').then(rendered => {
+            box.dataset.done = '1';
+            if (rendered) el.dataset.kpressMathRendered = 'true';
+            else delete el.dataset.kpressMathRendered;
+          });
+        } finally {
+          delete el.dataset.squaresMathQueued;
+        }
+      });
+    }
+    try {
+      await squaresMath.batch(groups.flat());
+    } finally {
+      // A producer failure releases unsubmitted fallbacks too. Issued renders
+      // retain KPress's own visibility gate until their required fonts settle.
+      for (const el of nodes) delete el.dataset.squaresMathQueued;
+    }
+    await squaresMath.settled();
+    kpressMathText.complete();
+    document.documentElement.classList.add('math-ready');
+
+    /* Footnote hover previews, kpress's own, bundled into this page. Booted after
+       the static math so the preview clones already carry rendered formulas. */
+    if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
+    if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
+  }
+  /* One copy of each figure per certificate. The switch beside every figure
+     shows one certificate's copies and records it in the hash, so a link can
+     open the page on either; the figure the reader switched from stays where
+     it was on screen. */
+  const switches = [...document.querySelectorAll('.cert-toggle button')];
+  const articles = [...document.querySelectorAll('.cert-figure')];
+  const slugs = [...new Set(articles.map(a => a.dataset.cert))];
+  const scroller = document.querySelector('[data-kpress-viewport]') || document.scrollingElement;
+  const figureKey = el => { const f = el.closest('figure'); return f ? f.dataset.figure || null : null; };
+  function show(slug, record, from) {
+    if (!slugs.includes(slug)) slug = slugs[0];
+    const restoreFocus = from && document.activeElement === from;
+    const key = from ? figureKey(from) : null, top = from ? from.getBoundingClientRect().top : 0;
+    for (const a of articles) {
+      const on = a.dataset.cert === slug;
+      if (on && a.hidden) { a.hidden = false; a.classList.remove('swap'); void a.offsetWidth; a.classList.add('swap'); }
+      else a.hidden = !on;
+    }
+    for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.cert === slug));
+    document.dispatchEvent(new Event('squares:certificatechange'));
+    if (key) {
+      const twin = [...document.querySelectorAll('.cert-figure:not([hidden]) figure')].find(f => figureKey(f) === key);
+      const button = twin && twin.querySelector('.cert-toggle button[aria-pressed="true"]');
+      if (button) {
+        if (restoreFocus) button.focus({ preventScroll: true });
+        scroller.scrollBy(0, button.getBoundingClientRect().top - top);
+      }
+    }
+    if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
+  }
+  switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
+  /* Only a hash naming a certificate switches the page. A footnote jump sets
+     the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
+  window.addEventListener('hashchange', () => {
+    const slug = location.hash.slice(1);
+    if (slugs.includes(slug)) show(slug, false);
+  });
+  show(location.hash.slice(1), false);
+  /* PDF and layout tools wait for math-ready, which follows the complete queue
+     and the initial readouts submitted by the later certificate boot scripts. */
+  typeset();
+})();
+</script>
 <!--BEGIN:SCRIPT-->
 <script>
 (() => {
@@ -1294,6 +1465,7 @@ const pv = document.getElementById('prove-{{SLUG}}'), pg = pv.getContext('2d');
 const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
 const RES = 230, TIGHT = {{TIGHT_JS}};
 let probe = [L * 0.22, L * 0.64], curK = Math.round(STEPS / 3), showHeat = true, heat = null;
+let heatQueued = false;
 /* Handle geometry in container units, so it scales with the drawing. */
 const HGAP = 0.3;
 let mode = 'none';
@@ -1422,15 +1594,16 @@ function updateK() {
   /* Attached before it is typeset, not after. `tex` asks the cascade which face the
      words around the expression are in, and a detached span has no cascade: `closest`
      finds no ancestor and `getComputedStyle` answers with nothing, so these three
-     readouts came out of the serif composite inside a sans panel. `replaceChildren`
-     with the empty list first, so the row is still replaced rather than appended to. */
-  el.replaceChildren();
-  for (const part of parts) {
-    const span = document.createElement('span');
-    span.className = 'math-item';
-    el.append(span);
-    tex(span, part);
+     readouts came out of the serif composite inside a sans panel. Reuse prepared
+     children on startup, retaining their measured boxes while fonts decode. */
+  let spans = [...el.children];
+  if (spans.length !== parts.length || spans.some(span => !span.classList.contains('math-item'))) {
+    spans = parts.map(() => {
+      const span = document.createElement('span'); span.className = 'math-item'; return span;
+    });
+    el.replaceChildren(...spans);
   }
+  parts.forEach((part, index) => tex(spans[index], part));
   document.getElementById('kslider-{{SLUG}}').setAttribute('aria-valuetext', onNet
     ? `Direction ${curK} of ${STEPS}; angle ${deg(angle, 4)} degrees`
     : `Nearest net direction ${curK}; square is off the net at ${deg(angle, 4)} degrees`);
@@ -1446,6 +1619,18 @@ function refresh(rebuild) {
   probe[1] = Math.min(L - h, Math.max(h, probe[1]));
   if (rebuild && showHeat) buildHeat();
   drawProver(); updateReadout(); updateK();
+}
+
+/* The initial readouts must get a paint before the 53,000-cell preview occupies
+   the main thread. The hidden certificate does no heat-map work until selected. */
+function scheduleHeat() {
+  const visible = () => !pv.closest('.cert-figure').hidden;
+  if (heatQueued || heat || !showHeat || !visible()) return;
+  heatQueued = true;
+  squaresMath.settled().then(() => requestAnimationFrame(() => setTimeout(() => {
+    heatQueued = false;
+    if (!heat && showHeat && visible()) { buildHeat(); drawProver(); }
+  }, 0)));
 }
 
 function toWorld(e) {
@@ -1632,11 +1817,16 @@ knets.forEach(b => b.addEventListener('click', () => {
 /* ---------- boot ---------- */
 function boot() {
   drawField(); document.getElementById('kslider-{{SLUG}}').value = String(curK);
-  refresh(true); shrinkDraw();
+  refresh(false); shrinkDraw();
+  if (window.matchMedia('print').matches) {
+    if (showHeat && !heat && pv.getClientRects().length) buildHeat();
+    drawProver();
+  } else scheduleHeat();
 }
-/* Warm the common math faces before the first draw. The render API also waits at
-   every actual render call, so resize, theme, print, and input events are covered. */
-squaresMath.ready.then(boot);
+/* Each render validates its actual faces; a prepared formula retains its measured
+   box while it hydrates. No unrelated font or heat map delays the first readout. */
+boot();
+document.addEventListener('squares:certificatechange', scheduleHeat);
 const repaint = () => { heat = null; boot(); };
 if (window.matchMedia) {
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -1655,104 +1845,7 @@ window.addEventListener('afterprint', repaint);
 </script>
 <!--END:SCRIPT-->
 <script>
-/* ---------- shared: static math, then the certificate picker ---------- */
-(() => {
-  /* SVG font sizes use viewBox units. Compensate for the drawing scale so
-     labels have the same on-page size as captions, including during print. */
-  const diagrams = [...document.querySelectorAll('.line-fig svg, .chart svg')];
-  function sizeDiagramLabels() {
-    for (const svg of diagrams) {
-      if (!svg.getBoundingClientRect().width) continue;
-      const matrix = svg.getScreenCTM();
-      const scale = matrix && Math.hypot(matrix.c, matrix.d);
-      if (!scale) continue;
-      const size = parseFloat(getComputedStyle(svg.parentElement).fontSize) / scale;
-      svg.style.setProperty('--paper-diagram-font-size', `${size}px`);
-    }
-  }
-  const diagramObserver = new ResizeObserver(sizeDiagramLabels);
-  diagrams.forEach(svg => diagramObserver.observe(svg));
-  window.addEventListener('beforeprint', sizeDiagramLabels);
-  window.addEventListener('afterprint', sizeDiagramLabels);
-  window.matchMedia('print').addEventListener('change', sizeDiagramLabels);
-  document.fonts.ready.then(sizeDiagramLabels);
-  sizeDiagramLabels();
-  const render = squaresMath.render;
-  async function typeset() {
-    const pending = [];
-    document.querySelectorAll('.tex').forEach(el => {
-      if (!el.dataset.done && !el.querySelector('.katex')) {
-        pending.push(render(el, el.textContent, false).then(() => { el.dataset.done = '1'; }));
-      }
-    });
-    document.querySelectorAll('.tex-d').forEach(el => {
-      if (!el.dataset.done) {
-        pending.push(render(el, el.textContent, true).then(() => { el.dataset.done = '1'; }));
-      }
-    });
-    /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
-       and the element marked rendered, which is what shows it and hides the
-       MathML that stands in when there is no script. */
-    document.querySelectorAll('.kpress-math').forEach(el => {
-      const box = el.querySelector('.kpress-math-render');
-      if (!box || el.dataset.kpressMathRendered) return;
-      const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
-      pending.push(render(box, src, el.dataset.kpressMath === 'display').then(rendered => {
-        if (rendered) el.dataset.kpressMathRendered = 'true';
-      }));
-    });
-    await Promise.all(pending);
-    await squaresMath.settled();
-    kpressMathText.complete();
-    document.documentElement.classList.add('math-ready');
-
-    /* Footnote hover previews, kpress's own, bundled into this page. Booted after
-       the static math so the preview clones already carry rendered formulas. */
-    if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
-    if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
-  }
-  /* PDF and layout tools wait for math-ready, which follows the completed static
-     renders and the initial interactive readouts. */
-  squaresMath.ready.then(typeset);
-
-  /* One copy of each figure per certificate. The switch beside every figure
-     shows one certificate's copies and records it in the hash, so a link can
-     open the page on either; the figure the reader switched from stays where
-     it was on screen. */
-  const switches = [...document.querySelectorAll('.cert-toggle button')];
-  const articles = [...document.querySelectorAll('.cert-figure')];
-  const slugs = [...new Set(articles.map(a => a.dataset.cert))];
-  const scroller = document.querySelector('[data-kpress-viewport]') || document.scrollingElement;
-  const figureKey = el => { const f = el.closest('figure'); return f ? f.dataset.figure || null : null; };
-  function show(slug, record, from) {
-    if (!slugs.includes(slug)) slug = slugs[0];
-    const restoreFocus = from && document.activeElement === from;
-    const key = from ? figureKey(from) : null, top = from ? from.getBoundingClientRect().top : 0;
-    for (const a of articles) {
-      const on = a.dataset.cert === slug;
-      if (on && a.hidden) { a.hidden = false; a.classList.remove('swap'); void a.offsetWidth; a.classList.add('swap'); }
-      else a.hidden = !on;
-    }
-    for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.cert === slug));
-    if (key) {
-      const twin = [...document.querySelectorAll('.cert-figure:not([hidden]) figure')].find(f => figureKey(f) === key);
-      const button = twin && twin.querySelector('.cert-toggle button[aria-pressed="true"]');
-      if (button) {
-        if (restoreFocus) button.focus({ preventScroll: true });
-        scroller.scrollBy(0, button.getBoundingClientRect().top - top);
-      }
-    }
-    if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
-  }
-  switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
-  /* Only a hash naming a certificate switches the page. A footnote jump sets
-     the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
-  window.addEventListener('hashchange', () => {
-    const slug = location.hash.slice(1);
-    if (slugs.includes(slug)) show(slug, false);
-  });
-  show(location.hash.slice(1), false);
-})();
+finishMathBootstrap();
 </script>
 </body>
 </html>

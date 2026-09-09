@@ -41,7 +41,7 @@ experiment:
       <= 1 and exact full depth > 1
     runs_per_condition: 1
     interleaved: false
-    operator: GPT-6 Astra, max; coordinator of session-111
+    operator: GPT-6 Astra, max; coordinator of session-112
     commit: 82df41bd7154903d4048fed0feef39b8bec794f8
     entry_point: packing/devtools/price_cutting_state_dual.py
     command: cd packing && /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 30m .venv/bin/python3

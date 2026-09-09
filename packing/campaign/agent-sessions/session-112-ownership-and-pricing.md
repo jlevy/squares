@@ -1,16 +1,16 @@
 ---
-title: session-111 — n = 11 ownership and pricing continuation
+title: session-112 — n = 11 ownership and pricing continuation
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-111
+  id: session-112
   title: n = 11 ownership continuation
   date: '2026-09-08'
   resource_rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-112.yaml
   branch: codex/n11-ownership-continuation
   goal: Retain and verify the new local ownership results, run the registered paired-pricing discriminator,
     publish the progress in a stacked PR, and tally continuation usage separately from the handoff preparation.
@@ -198,7 +198,7 @@ session:
       state. Exp-134 remained uninvoked.
     evidence:
     - https://github.com/jlevy/squares/pull/137
-    - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-112.yaml
     stop_reason: The explanation and published PR-context exit criteria were met before the deadline.
     next_action: Extract the owner-approved explanation into the tutorial and address the requested conditional
       covering argument for a partly filled container.
@@ -279,7 +279,7 @@ session:
       continuation on PR 137.
     commitment: BC-309
     bead: think-3glv
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: Instrument and independent controls are ready; the prospective pilot fixes one support,
       one direction subset and one numerical accept margin.
@@ -293,12 +293,17 @@ session:
       control fails.
     fallback: Preserve partial evidence and the precise unresolved disposition; no target tuning or retry
       in this experiment.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Freeze and publish the prospective checkpoint, then execute the registered pair.
+    outcome: Published instrument/protocol at513d3831. Exp135 launched03:17:16Z and stopped after2.54seconds
+      with global numerical convergence and residual direction113 witness ambiguity. Raw evidence retained
+      atf917b498; the paired score is unresolved. Owner selected a fresh two-hour sprint before final
+      result publication.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md
+    stop_reason: Owner-requested new sprint at03:18:37Z after the first pilot result.
+    next_action: 'think-8m28: repair the instrument under regression controls before a fresh declared
+      experiment, while developing general owner footprints.'
   primary_bead: think-3glv
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 300
     orientation_minutes: 15
@@ -315,8 +320,10 @@ session:
       96/25.
     before: The reviewed proofs and paired-pricing protocol exist as handoff-review drafts; no continuation
       experiment has run.
-    after: PR 127 merged as 6aa9e72c; draft PR 137 targets main. The retained BC-232 unit state is independently
-      replayed and exp-134 is prospectively registered. No LP solve or pricing target has run.
+    after: 'Retained new ownership and robust local theorems, tutorial foundations, six-piece residual
+      instrument and independently reviewed16-class corner-owner footprint construction. Exp134 was never
+      invoked. Exp135 ran once: global numerical mass11.981481481481488, residual separator guard failure,
+      no matched score or exact cover. Bracket unchanged.'
   delegations:
   - task: Integrate the reviewed instrument patches and their controls.
     operator: GPT-5.6 Sol, extra high; pricing_instrument_plan
@@ -456,12 +463,12 @@ session:
     operator: GPT-5.6 Sol, high; session_usage_audit
     recording: contemporaneous
     status: completed
-    outcome: The 23:23:55Z boundary has no overlap or gap, but the session-111 receipt is stale after
+    outcome: The 23:23:55Z boundary has no overlap or gap, but the session-112 receipt is stale after
       00:00:42Z and the third workflow phase remained in progress after its deadline. The audit also localized
       the remaining bead and agenda dispositions.
     evidence:
     - packing/campaign/resource-usage/codex-task-tree-session-110.yaml
-    - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+    - packing/campaign/resource-usage/codex-task-tree-session-112.yaml
     files: []
     checks:
     - Receipt delta and per-model totals were independently summed; reasoning output was treated as a
@@ -469,7 +476,7 @@ session:
     uncertainty: The refreshed live receipt will remain a lower bound while this session is active.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Regenerate the session-111 receipt at the publication cutoff and retain that cutoff in
+    next_action: Regenerate the session-112 receipt at the publication cutoff and retain that cutoff in
       the PR body.
     phase: 4
   - task: Audit the exact mathematical state and the branches after exp-134.
@@ -576,13 +583,22 @@ session:
     arithmetic checker; geometric proof obligations are stated separately.'
   - 'Expanded integrated instruments at 82df41bd: 64 focused tests passed in 2.46 seconds, including historical
     Git-blob, sparse traversal, malformed revision, arithmetic and usage-cutoff controls.'
-  stop_reason: null
-  next_action: Publish the instrument and exp-135 protocol, run its single paired screen, and retain the
-    actual result and reviewed general sector-footprint continuation.
+  stop_reason: The owner started a new two-hour sprint at03:18:37Z after exp135 stopped unresolved. Its
+    numerical result and new analytic footprint lemma are retained; the new integration checkpoint is
+    assigned to think-8m28.
+  next_action: 'think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class
+    experiments and publish the merged checkpoint.'
   started_at: '2026-09-08T23:23:55Z'
   deadline_at: '2026-09-09T04:23:55Z'
+  certification_pending: think-8m28
 ---
-# Session 111 — Ownership and Pricing Continuation
+# Session 112 — Ownership and Pricing Continuation
+
+This is the research continuation previously numbered111 on PR137. Merging main revealed
+its independent font-startup session111; this record and its native usage receipt were
+renamed112 without changing the underlying task, scientific protocols or historical
+clocks. Its accounting interval ends at2026-09-09T03:18:37Z. Later work belongs to the
+owner-requested two-hour sprint, session113, under think-8m28.
 
 At 2026-09-09T03:05Z, before any exp-135 target, the coordinator allocated a fresh sixty
 minutes of session planning for the owner’s added conditional-cover direction.
@@ -605,17 +621,22 @@ This interval excludes independent Claude activity.
 Its branch association is an operator declaration.
 
 The September 9 accounting audit found a change in the available native log population.
-The refreshed session-111 receipt through `01:37:54Z` no longer sees nineteen
+The historical session-112 snapshot through `01:37:54Z` no longer sees nineteen
 automatic-review or legacy child logs that the retained session-110 receipt included.
 The four substantive model buckets match exactly at the shared cutoff, but the older
 receipt additionally contains 161 automatic-review responses and 16,656 output tokens.
-The older session-111 snapshot through `00:00:42Z` likewise contained 35
+The older session-112 snapshot through `00:00:42Z` likewise contained 35
 automatic-review responses and 3,899 output tokens that the refreshed corpus no longer
 exposes. The scanner implementation is unchanged apart from its cutoff help text.
 Preserve the historical receipts in Git and report the two intervals separately; their
 headline totals must not be summed as a uniform exact census.
-The refreshed continuation receipt records 381 substantive responses and 209,950 output
-tokens and remains a lower bound on this Codex task tree, not the whole day’s activity.
+The final continuation receipt ends at `2026-09-09T03:18:37Z`: 843 responses, 422,605
+output tokens (170,737 reasoning tokens already included), and 27,071.985 agent-active
+seconds over a 14,082-second elapsed envelope.
+These totals include 16 currently available automatic-review responses.
+The native snapshot remains incomplete; report this observed population separately from
+historical receipts.
+Session 113 starts at that exact cutoff and owns the two-hour sprint.
 
 BC-305’s exact known-example checks validate the retained local statements and tools.
 PR 127 is merged, and the continuation is published in draft PR 137 on `main` with a

@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 109
+count: 110
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 64
+  sessions_measured: 65
   sessions_unmeasured: 45
   attributed:
     rollups: 123
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3920
     wall_hours: 230.77
 codex_receipts:
-  attributed: 29
+  attributed: 30
   unattributed: 0
-  measured: 29
+  measured: 30
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1724,10 +1724,10 @@ sessions:
     wall_hours: 2.96
     snapshot_incomplete: true
 - id: session-111
-  title: "n = 11 ownership continuation"
-  status: in_progress
-  primary_bead: think-3glv
-  phases: 9
+  title: "Prepared math startup and publication integration"
+  status: stopped
+  primary_bead: think-qcmi
+  phases: 3
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
@@ -1738,8 +1738,28 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-111.yaml
-    model_responses: 381
-    agent_hours: 4.42
-    active_union_hours: 2.16
-    wall_hours: 2.23
+    model_responses: 2798
+    agent_hours: 20.24
+    active_union_hours: 6.22
+    wall_hours: 6.23
+    snapshot_incomplete: true
+- id: session-112
+  title: "n = 11 ownership continuation"
+  status: stopped
+  primary_bead: think-3glv
+  phases: 9
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-112.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-112.yaml
+    model_responses: 843
+    agent_hours: 7.52
+    active_union_hours: 3.78
+    wall_hours: 3.91
     snapshot_incomplete: true

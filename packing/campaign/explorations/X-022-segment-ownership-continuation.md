@@ -33,7 +33,7 @@ exploration:
 These local theorems and exact counterexamples were developed during the PR 127 handoff
 review. They are analytic research results, not outcomes of a preregistered numerical
 round. Agenda 031 retains and validates them on the continuation branch.
-Their preparation is included in session 110’s usage; session 111 measures integration
+Their preparation is included in session 110’s usage; session 112 measures integration
 and subsequent work from 2026-09-08T23:23:55Z, without charging that preparation twice.
 
 The certified bracket remains unchanged, approximately 3.8100257236 to 3.8770835900;
@@ -88,7 +88,7 @@ This excludes the specified fixed cross-container pattern, including selected-co
 ownership and boundary touching.
 It does not extend to arbitrary placements of the outer owners.
 
-## Perturbation Strengthening in Session 111
+## Perturbation Strengthening in Session 112
 
 The
 [robust outer-corner proof](../series/series-000-smoke-and-calibration/results/agenda-031/proofs/robust-outer-corner-incompatibility.md)
@@ -99,7 +99,7 @@ sufficient condition.
 Any additional owner of a forced bottom mark contains the same closed radius-`1/100`
 disk in its interior, so the two additional opposite-bottom owners cannot coexist.
 
-This argument was developed after the usage cutoff and belongs to session 111. Its exact
+This argument was developed after the usage cutoff and belongs to session 112. Its exact
 arithmetic and polynomial identities have a retained guarded replay; the geometric proof
 uses separating axes and the support-function characterization of convex containment.
 The additional-owner assumptions remain essential, and the result does not exclude the

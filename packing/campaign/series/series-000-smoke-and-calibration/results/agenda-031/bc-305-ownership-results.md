@@ -91,7 +91,7 @@ Every additional owner of a forced bottom mark then contains the closed radius-`
 disk about the common point in its interior.
 Two additional opposite-bottom owners therefore overlap.
 
-This is a new analytic continuation result from session 111, with 23 rational
+This is a new analytic continuation result from session 112, with 23 rational
 inequalities and two polynomial identities replayed in the
 [arithmetic receipt](robust-outer-corner-arithmetic.json).
 The reader checks the arithmetic and algebra; the geometric proof is written separately.

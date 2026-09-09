@@ -123,7 +123,8 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-108](agent-sessions/session-108-anchors-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-4ifm | Under think-kbci the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-111 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
 | [session-109](agent-sessions/session-109-corner-class-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-kx2l | Under think-kbci the coordinator integrates the lane section, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
 | [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
-| [session-111](agent-sessions/session-111-ownership-and-pricing.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | Publish the instrument and exp-135 protocol, run its single paired screen, and retain the actual result and reviewed general sector-footprint continuation. |
+| [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Resume think-mq0d for BC-264's existing 30-minute H114 feature and kernel-contract pricing slice, subject to the current allocation and admission requirements. This publication repair does not reprioritize research or authorize a target run. |
+| [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
 
 ### Workflow summary
 
@@ -137,7 +138,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 30 | 1 |
 | `research-loop` | 17 | 4 | 78 | 7 |
-| `pipeline-improvement` | 26 | 0 | 135 | 1 |
+| `pipeline-improvement` | 26 | 1 | 135 | 4 |
 | `documentation-pass` | 1 | 0 | 17 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
 | `review-planning-oversight` | 0 | 0 | 7 | 0 |
@@ -773,7 +774,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
 | H-135 | blocked | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
-| H-136 | running | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 1 |  |  |
+| H-136 | unresolved | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 1 |  | 3s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -812,7 +813,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (21)
+### unresolved (22)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -837,6 +838,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-126 | series-000 | 11 | Session094 coordinator, BC243; max mathematical judgment | H-099 | The conservative graph contains a reported overweight clique, so this sufficient depth certificate failed. No common geometric interior was certified and no independent target reader ran. H099 and its fixed-support bracket remain unresolved and unchanged. |
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
 | exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
+| exp-135 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-136 | The unrestricted arm converged, but the residual separator stopped at direction113 because a reachable cell had no representable interior witness. The paired score was not measured. This is an instrument limitation, not negative evidence about geometric conditioning. |
 
 ### blocked (9)
 
@@ -850,7 +852,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
-| exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-111 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
+| exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
 ### accepted (30)
 
@@ -903,12 +905,6 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-135 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-111 | H-136 | Prospective protocol; no target has run. A completed paired score at most 0.001 rejects this finite numerical claim. A partial, guarded, errored or timed-out run stays unresolved. Source identity and passed controls will be retained before launch. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -928,7 +924,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 
 ## Effort
 
-91 rounds, 2152.1 agent-minutes, 1359.4 wall-minutes.
+91 rounds, 2152.1 agent-minutes, 1359.5 wall-minutes.
 
 ## Exploration reports not yet codified
 

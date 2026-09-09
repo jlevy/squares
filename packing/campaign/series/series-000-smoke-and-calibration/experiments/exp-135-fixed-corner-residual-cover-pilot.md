@@ -39,7 +39,7 @@ experiment:
       unit squares flush in the container corners
     runs_per_condition: 1
     interleaved: false
-    operator: GPT-6 Astra, max; coordinator of session-111
+    operator: GPT-6 Astra, max; coordinator of session-112
     entry_point: packing/devtools/run_residual_cover_pilot.py
     command: cd packing && /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 5m .venv/bin/python3
       -m devtools.run_residual_cover_pilot --side 96/25 --shrink 9977/10000 --grid-counts 19 --direction-steps

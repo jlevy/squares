@@ -99,7 +99,7 @@ session:
 
 **Usage and publication boundary, 2026-09-08.** The handoff-review receipt now closes at
 2026-09-08T23:23:55Z, when the continuation branch was created.
-Session 111 starts at the same cutoff and uses an after-minus-before delta, so the two
+Session 112 starts at the same cutoff and uses an after-minus-before delta, so the two
 intervals do not charge the same recorded completion twice.
 Analytic derivation and tool preparation before the cutoff remain in this interval even
 when first published in the stacked continuation PR. PRs 116 and 121 have merged; PR 127

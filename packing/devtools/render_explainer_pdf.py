@@ -99,11 +99,14 @@ _ABSOLUTE_LINKS = """(site) => {
 }"""
 
 
-#: The custom properties kpress's `@page` margin boxes name their families with, and a
+#: The family and weight properties KPress's `@page` margin boxes read, and a
 #: sample every face answers with its `unicode-range` so `document.fonts.load` actually
 #: fetches it. Read as the root's resolved values rather than as literal stacks, which
 #: is what covers a host that redirects the tokens.
-_MARGIN_BOX_TOKENS = ("--kpress-font-sans", "--kpress-font-prose")
+_MARGIN_BOX_TOKENS = (
+    ("--kpress-font-sans", "--kpress-font-weight-sans-regular"),
+    ("--kpress-font-prose", "--_kpress-font-weight-prose"),
+)
 _MARGIN_BOX_SAMPLE = "Aa Gg 0123"
 
 #: The added faces, settled -- both the ones the document tree asks for and the ones
@@ -137,12 +140,15 @@ _FACES_APPLIED = """async ([tokens, sample]) => {
   await new Promise((frame) => requestAnimationFrame(() => requestAnimationFrame(frame)));
   await document.fonts.ready;
   const root = getComputedStyle(document.documentElement);
-  const weight = root.fontWeight || '400';
   const stacks = tokens
-    .map((token) => root.getPropertyValue(token).trim())
-    .filter((stack) => stack.length > 0);
+    .map(([familyToken, weightToken]) => ({
+      family: root.getPropertyValue(familyToken).trim(),
+      weight: root.getPropertyValue(weightToken).trim() || root.fontWeight || '400',
+    }))
+    .filter((stack) => stack.family.length > 0);
   await Promise.all(stacks.map(
-    (stack) => document.fonts.load(`${weight} 1rem ${stack}`, sample).catch(() => undefined),
+    (stack) => document.fonts.load(`${stack.weight} 1rem ${stack.family}`, sample)
+      .catch(() => undefined),
   ));
   await document.fonts.ready;
   void document.documentElement.offsetHeight;

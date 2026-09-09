@@ -11,7 +11,9 @@ from __future__ import annotations
 
 import os
 import subprocess
+import sys
 from collections.abc import Sequence
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -72,11 +74,70 @@ def test_an_unmapped_python_root_is_still_refused_into_everything() -> None:
         "packing/tests/conftest.py",
         "packing/.python-version",
         ".github/workflows/packing-validation.yml",
+        ".github/workflows/pages.yml",
         "pyproject.toml",
     ],
 )
 def test_suite_configuration_selects_everything(path: str) -> None:
     assert select_tests([path]).everything
+
+
+@pytest.mark.parametrize("everything", [False, True])
+@pytest.mark.parametrize("workers", [1, 4])
+def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
+    monkeypatch: pytest.MonkeyPatch, *, everything: bool, workers: int
+) -> None:
+    selection = reachable_tests.TestSelection(
+        everything=everything,
+        reason="fixture selection",
+        tests=(
+            "packing/tests/test_reachable_tests.py",
+            "packing/tests/test_validation_cli.py",
+        ),
+    )
+    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: ["changed"])
+    monkeypatch.setattr(reachable_tests, "select_tests", lambda _changed: selection)
+    commands: list[tuple[str, ...]] = []
+
+    def capture(
+        command: tuple[str, ...], *, cwd: Path, check: bool
+    ) -> subprocess.CompletedProcess[str]:
+        assert cwd == reachable_tests.ROOT
+        assert not check
+        commands.append(command)
+        return subprocess.CompletedProcess(command, returncode=7)
+
+    monkeypatch.setattr(reachable_tests.subprocess, "run", capture)
+    assert reachable_tests.main(["--run", "--numprocesses", str(workers)]) == 7
+    targets = (
+        ("tests",)
+        if everything
+        else ("tests/test_reachable_tests.py", "tests/test_validation_cli.py")
+    )
+    assert commands == [
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            *targets,
+            "-m",
+            "not exhaustive_exact",
+            *(("-n", "4") if workers == 4 else ()),
+        )
+    ]
+
+
+@pytest.mark.parametrize("workers", ["0", "-1"])
+def test_invalid_worker_counts_are_refused_before_selection(
+    monkeypatch: pytest.MonkeyPatch, workers: str
+) -> None:
+    monkeypatch.setattr(
+        reachable_tests, "changed_paths", lambda _since: pytest.fail("must not select")
+    )
+    with pytest.raises(SystemExit) as error:
+        reachable_tests.main(["--run", "--numprocesses", workers])
+    assert error.value.code == 2
 
 
 def test_repository_walkers_run_for_any_change() -> None:

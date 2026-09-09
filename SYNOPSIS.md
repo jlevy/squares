@@ -207,6 +207,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
+| [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
+| [Math Startup Ledger](packing/benchmarks/math-startup/ledger.md) | generated status view | generated | generated | — |
 | [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
@@ -434,6 +437,9 @@ case or experiment separately.
 | [Shared Segments Restrict Separating Supports](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/shared-segment-support-bounds.md) | research synthesis | record | retained | — |
 | [A Robust Outer-Corner Incompatibility](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/robust-outer-corner-incompatibility.md) | research synthesis | record | retained | — |
 | [Corner-Owner Sector Footprints](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md) | research synthesis | record | retained | — |
+| `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
+| `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
+| `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -577,6 +583,13 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+**Math startup release checkpoint.**
+[Session 111](packing/campaign/agent-sessions/session-111-font-startup-stability.md)
+records the prepared geometry, parameter-first hydration, reload restoration, and the
+local browser and PDF evidence for [PR 135](https://github.com/jlevy/squares/pull/135).
+Current-main integration and affected validation remain release work under `think-qcmi`;
+the research priorities below are unchanged.
+
 **Parallel structural lanes at `n = 11`, first wave terminal.**
 [X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
 pursued X-019’s exploration with four Fable lanes in parallel and reports what can be
@@ -645,12 +658,12 @@ not a runnable handoff.
 
 **Selected next entry:** `think-qfog` was the session-110 handoff into BC-305 and is now
 complete at its local ownership scope.
-Session 111’s owner-prioritized continuation is BC-309, `think-3glv`, on
+Session 112’s owner-prioritized continuation is BC-309, `think-3glv`, on
 `codex/n11-ownership-continuation` in
 [PR 137](https://github.com/jlevy/squares/pull/137). PR 127 has merged as `6aa9e72c`,
 and the continuation targets `main`.
 [Agenda 031](packing/campaign/agendas/agenda-031-ownership-and-pricing.md) and
-[session 111](packing/campaign/agent-sessions/session-111-ownership-and-pricing.md)
+[session 112](packing/campaign/agent-sessions/session-112-ownership-and-pricing.md)
 retain the reviewed local results and BC-306’s unrun full-support pricing protocol.
 BC-309 first builds a small residual-cover comparison for four fixed corner squares.
 The global follow-up uses proved ownership classes and exhaustive geometric
@@ -3432,13 +3445,14 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
 | `codex-task-tree-session-110.yaml` | session-110 | 1,169 | 7.88 h | 2.96 h | 2.96 h | yes |
-| `codex-task-tree-session-111.yaml` | session-111 | 381 | 4.42 h | 2.16 h | 2.23 h | yes |
+| `codex-task-tree-session-111.yaml` | session-111 | 2,798 | 20.24 h | 6.22 h | 6.23 h | yes |
+| `codex-task-tree-session-112.yaml` | session-112 | 843 | 7.52 h | 3.78 h | 3.91 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 64 |
+| measured | 65 |
 | unmeasured | 45 |
-| **total** | **109** |
+| **total** | **110** |
 
 <!-- END GENERATED: session-close-report -->
 
