@@ -585,6 +585,80 @@ decides what could run next rather than what sounds best.
 
 ### Ready to formalise: the instrument exists or is a small extension
 
+**C0a. The contact structures of best-known packings are a harvestable dataset, and they
+are not arbitrary.** *Claim.* Extracting the full-side contact graph of all 324 retained
+packings yields a population of structures with shared features, and a structure that
+appears at one `n` recurs at others more often than a null model of random graphs at the
+same edge density would predict.
+*Evidence already in hand.* None directly, which is the point: nobody has looked.
+Adjacent evidence is that the contact atlas already enumerates structures for small `n`
+(`packing/atlas/known-best/contact-structures.json`, `contact-assembly-grammar.yaml`),
+so a harvested population has something to be compared against rather than described in
+isolation. *Instrument.* Exists and is a loop.
+The full-side contact test is already computed over every retained packing for the atlas
+shade rule, so the extraction is a pass over `witnesses/known-best/`, not a new
+capability. *Criterion.* Would have to name the recurrence measure and the null before
+looking, because a population of 324 graphs will show patterns whether or not any are
+real.
+
+**C0b. Which physics settings most reliably reach the optimum is itself measurable, by
+sweeping the settings rather than the cases.** *Claim.* Over a fixed set of cases whose
+records are known, the fraction of runs landing within tolerance of the record varies
+systematically with the force law and the relationship setting, and some region of that
+parameter space is reliably better than the rest.
+*Evidence already in hand.* None.
+The observation prompting it is that the workbench now has enough parameters (rigidity,
+repulsion, attraction strength and range, the relationship mask, growth rule and rate,
+annealing level) that they form a space rather than a handful of switches, and that the
+same case settles to different container sides under different laws.
+*Instrument.* Partly.
+The workbench can run one setting at a time and report the gap; what is missing is a
+driver that sweeps settings across cases headlessly and tabulates hit rates, which is
+the same shape as `devtools/run_arm_sweep.py` and could reuse it.
+*Criterion.* The honest one is a hit rate against the record over seeds and cases, at a
+declared budget, with the caveat that tuning on cases whose answers are known is fitting
+to a test set: any region found this way is a hypothesis about unseen `n`, not a result,
+and would have to be confirmed on cases held out from the tuning.
+That caveat is what makes this worth doing properly rather than casually, and it is why
+the observation belongs here rather than in a hypothesis today.
+
+*The larger form, which the owner named and which is not for today.* The sweep above
+treats the settings as a list to try.
+The ambition beyond it is a framework that models the strategies rather than enumerating
+them: represent a physics strategy as a point in a parameter space, score it by how
+reliably it reaches known optima, and then improve the strategy itself by iterating on
+that score. Three things are worth saying plainly before anyone builds it.
+
+First, this is hyperparameter search over a solver, and the repository already owns the
+machinery for running it honestly: the campaign’s hypothesis records, pre-declared
+accept rules and `devtools/run_arm_sweep.py` are the same shape, and a new framework
+should extend them rather than start a parallel one.
+
+Second, the failure mode is not subtle.
+Tuning on cases whose answers are known is fitting to a test set, and a setting that
+wins on the tuning cases has established nothing about unseen `n`. Any framework here
+needs a held-out split declared before the first run, and the honest headline is the
+score on the held-out cases, not the best score found.
+
+Third, on gradients.
+The simulator is a fixed-timestep program, so in principle the final container side is a
+differentiable function of the force law’s parameters and a gradient could be taken
+through the rollout rather than estimated by sampling.
+In practice contact events are discontinuities: a pair that touches in one rollout and
+misses in another gives a gradient that describes neither, and the objective is a max
+over a few extreme squares, which is exactly the flatness the move-set finding is about.
+Differentiable-physics work handles this with smoothed contacts, which changes the thing
+being optimised into a softened relative of it.
+That is a real technique and it is also a real hazard, so it belongs here as a direction
+with a named difficulty rather than as a plan.
+
+*Note on where snapping belongs.* Ending a run on the retained packing is production
+machinery, not evidence: it is how a sweep animation across all 324 records lands each
+frame on what is actually known.
+It says nothing about the physics, because the physics did not find the endpoint.
+Its research use is the reverse direction above, harvesting what the records’ structures
+are, rather than the forward one.
+
 **C1. Anneal length and move family interact, and the interaction is the finding.**
 *Claim.* At equal delivered budget, the improvement from the collective move and the
 improvement from a tenfold longer anneal are not additive, and the both-factors arm
