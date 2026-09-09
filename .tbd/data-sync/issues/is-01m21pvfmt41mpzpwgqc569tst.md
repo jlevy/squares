@@ -5,13 +5,13 @@ title: Keep list bullets square in Elements of the project and other contexts
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
-parent_id: is-01m20v1mq20k9d9p1wg9s5qdsq
+parent_id: is-01m1yxs9c3y78m00gqh7wsz9d6
 created_at: 2026-09-08T23:50:02.649Z
-updated_at: 2026-09-08T23:58:58.979Z
+updated_at: 2026-09-09T03:07:29.459Z
 ---
 Owner reports bullets under Elements of the project appear rectangular while others are square. Compare actual rendered marker width/height, layout and optical placement across serif/sans, screen/print and narrow views. Reuse the typography inspector; fix shared marker behavior upstream in KPress when applicable and verify no flex shrinking or line-height distortion. Preserve the already requested slight downward optical adjustment.
 
