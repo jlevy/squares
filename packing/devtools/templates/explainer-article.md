@@ -263,7 +263,7 @@ reflects onto that arc and covers the same mass.
 
 <!--BEGIN:FIGURE-->
 
-<figure data-figure="4">
+<figure class="apparatus" data-figure="4">
   <div class="split">
     <div class="stage"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas></div>
     <div class="panel">
@@ -279,7 +279,7 @@ reflects onto that arc and covers the same mass.
     <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 4. Conditions 1 and 2.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
+  <figcaption><strong>Figure 4.</strong> Conditions 1 and 2. The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The weights are a rationalized
   solution, on these sites, of the linear program described under Generator and Verifier. The container holds less
   mass than eleven unit squares with disjoint interiors would need. Condition 2 is that comparison.</figcaption>
@@ -317,7 +317,7 @@ a margin of {{LEAST_MARGIN}} of those units above the threshold.
 
 <!--BEGIN:FIGURE-->
 
-<figure class="prover" data-figure="5">
+<figure class="apparatus prover" data-figure="5">
   <div class="split">
     <div class="stage"><canvas class="draggable" id="prove-{{SLUG}}" width="1000" height="1000" aria-label="Movable square and covered-mass shading" aria-describedby="hint-{{SLUG}}"></canvas></div>
     <div class="panel">
@@ -356,7 +356,7 @@ a margin of {{LEAST_MARGIN}} of those units above the threshold.
     </div>
   </div>
   <div class="fig-choose"><span class="screen-only caps">Certificate shown in all figures</span>{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 5. Condition 5.</strong> The prover<span class="screen-only">: drag the square, watch the mass</span>.
+  <figcaption><strong>Figure 5.</strong> Condition 5. The prover<span class="screen-only">: drag the square, watch the mass</span>.
   The exact certificate guarantees covered mass at least 1 throughout the dashed domain at every net direction.
   The shading previews this mass. Outside the domain, the square extends beyond the container.</figcaption>
 </figure>
@@ -420,7 +420,7 @@ $$
 
 <!--BEGIN:FIGURE-->
 
-<figure data-figure="6">
+<figure class="apparatus" data-figure="6">
   <div class="split">
     <div class="stage"><canvas class="draggable" id="shrink-{{SLUG}}" width="800" height="800"></canvas></div>
     <div class="panel">
@@ -453,7 +453,7 @@ $$
     </div>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 6. Condition 4.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
+  <figcaption><strong>Figure 6.</strong> Condition 4. The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   The product <span class="tex">B(\cos d + \sin d)</span> must stay below 1. At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, that
   product’s largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> at <span class="tex">B = {{SHRINK_SIDE_TEX}}</span>, the side the figure
@@ -504,7 +504,7 @@ costs.
     <p class="figure-note">{{COARSEN_VERDICT}} Measured on the retained atoms, optimized against the full net.</p>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 7. Condition 4 → Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
+  <figcaption><strong>Figure 7.</strong> Condition 4 → Condition 5. Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
   <span class="tex">B</span> by {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass. This shows these atoms are tight
   against their own net, not that no coarser net could be made to work. It measures the slope of the trade.</figcaption>
 </figure>

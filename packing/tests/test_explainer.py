@@ -505,6 +505,52 @@ def _style_blocks(page: str) -> list[str]:
     return re.findall(r"<style>(.*?)</style>", page, re.DOTALL)
 
 
+def _figure_blocks(page: str) -> dict[int, tuple[str, str]]:
+    figures: dict[int, tuple[str, str]] = {}
+    for attributes, body in re.findall(r"<figure\b([^>]*)>(.*?)</figure>", page, re.DOTALL):
+        number = re.search(r"<strong>Figure (\d+)\.</strong>", body)
+        if number:
+            figures[int(number.group(1))] = (attributes, body)
+    return figures
+
+
+def test_only_composite_apparatus_has_the_panel_hairline(page: str) -> None:
+    """The three panelled figures are framed; packing drawings and charts stay open."""
+    figures = _figure_blocks(page)
+    assert figures.keys() == set(range(1, 8))
+    for number, (attributes, body) in figures.items():
+        framed = bool(re.search(r'\bclass="[^"]*\bapparatus\b', attributes))
+        assert framed is (number in {4, 5, 6}), number
+        assert ('class="panel"' in body) is framed, number
+
+    css = "\n".join(_style_blocks(page))
+    assert re.search(r"\.cert-page \.kpress-figure\s*\{\s*border:\s*0;\s*}", css)
+    assert re.search(
+        r"\.cert-page \.kpress-figure\.apparatus\s*\{\s*"
+        r"border:\s*1px solid var\(--kpress-doc-border\);\s*}",
+        css,
+    )
+
+
+def test_only_the_figure_number_prefix_is_bold_in_every_caption(page: str) -> None:
+    figures = _figure_blocks(page)
+    for number, (_attributes, body) in figures.items():
+        caption = re.search(r"<figcaption\b[^>]*>(.*?)</figcaption>", body, re.DOTALL)
+        assert caption, number
+        strong = re.findall(r"<strong>(.*?)</strong>", caption.group(1), re.DOTALL)
+        assert strong == [f"Figure {number}."], number
+
+
+def test_print_removes_only_inline_code_chip_decoration(page: str) -> None:
+    css = "\n".join(_style_blocks(page))
+    assert re.search(
+        r"@media print\s*\{.*?\.cert-page code:not\(pre code\)\s*\{\s*"
+        r"background:\s*transparent;\s*border:\s*0;\s*}",
+        css,
+        re.DOTALL,
+    )
+
+
 def test_the_page_stylesheet_has_no_orphaned_comment_delimiter(page: str) -> None:
     """A comment that ends early turns the prose after it into CSS, silently.
 

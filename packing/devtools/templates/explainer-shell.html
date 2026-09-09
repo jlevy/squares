@@ -524,24 +524,24 @@ body {
   letter-spacing: var(--kpress-caps-spacing);
   padding: 0.05rem 0.4rem;
 }
-/* No box around a figure, and no rule under it. kpress draws both, and on a page
-   this dense they add a grid of grey the content did not ask for; the figures are
-   already set apart by their own white space and by the caption's voice.
+/* Pure charts and packing drawings need no outer box. Composite apparatus uses the
+   same hairline as its internal panel so its diagram, readout and controls read as one
+   figure.
 
-   The padding stays. It was there to hold the caption off the border, and with the
-   border gone it does the work the border was doing: the caption sits inset from the
-   measure, so a reader can see where the figure ends and the prose resumes. */
+   Caption padding keeps borderless figures inset from the measure, so a reader can see
+   where the figure ends and the prose resumes. */
 .cert-page .kpress-figure { border: 0; }
+.cert-page .kpress-figure.apparatus {
+  border: 1px solid var(--kpress-doc-border);
+}
 .cert-page .kpress-figcaption {
   border-block-start: 0;
   margin-block-start: 0;
   padding-block: 0.85rem 1rem;
 }
-/* The caption label -- "Figure 5." and the sentence that names the figure -- is bold,
-   and it is the same bold as the title credits and every other bold in the sans. KPress
-   sets it to its medium, which is right for a caption that whispers and wrong for one
-   that labels: on this page the label is the figure's title, and a reader scanning for
-   Figure 7 was looking for the one weight the page uses to mean "start here". */
+/* The "Figure N." prefix is the caption label. It uses the title-credit bold so a
+   reader scanning for Figure 7 can find it; the condition and caption text stay at the
+   caption's regular weight. */
 .cert-page .kpress-figcaption strong {
   font-weight: var(--kpress-font-weight-sans-bold);
 }
@@ -846,6 +846,14 @@ html[data-kpress-math-pending]
      rule the chooser would otherwise leave under every figure. */
   .panel, .fig-choose, .cert-page input[type="range"], .screen-only,
   .cert-page figure .rotation-handle { display: none; }
+
+  /* Paper keeps inline code's Planetaire metrics and text role without drawing the
+     screen chip behind it. Only decoration changes, so family, color, size, weight,
+     baseline and wrapping continue to come from kpress and the surrounding role. */
+  .cert-page code:not(pre code) {
+    background: transparent;
+    border: 0;
+  }
 
   /* Stack the printable figure body and cap canvases so their captions fit. */
   .split { display: block; }
