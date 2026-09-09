@@ -1,0 +1,270 @@
+#!/usr/bin/env python3
+"""Spike B, task 3 (combined loop): sites + threshold atoms + rows at 3.82.
+
+Usage (from packing/):
+  .venv/bin/python3 lp_threshold2.py <state.json> <outdir> [--seed-atoms atoms.json]
+        [--iterations N] [--site-cap 120] [--atom-cap 400] [--deadline-min T]
+
+Each iteration: solve the covering LP on (site orbits, threshold-atom orbits) x rows;
+read the dual as an exact D4-symmetric family; (1) site separation exactly as the record's
+cutting loop (cutting.screened_separation: exact depth at arrangement vertices, the
+deepest `site-cap` vertices above 1 + 1e-6 become site orbits); (2) 2-of-3 threshold-atom
+separation (sepcore); (3) when the objective is below n, threshold-aware row generation
+with the exact slab sweep until no placement is charged below 1 - 1e-6. Rows only raise
+the value, so while it sits at or above n they are not needed to know that.
+Checkpoints: trajectory.json, atoms.json, sites.json, rows.json, x.npy, duals.npy.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from sepcore import FamilyGeometry, atom_columns, class_summary, family_from_dual  # noqa: E402
+
+from sqpack.fractional.ceiling import arrangement_lines  # noqa: E402
+from sqpack.fractional.colgen import SiteSet, site_set_from_points  # noqa: E402
+from sqpack.fractional.cutting import (  # noqa: E402
+    coverage_matrix,
+    load_state,
+    rows_from_exact,
+    screened_separation,
+)
+from sqpack.fractional.generate import direction_net, net_half_tangents  # noqa: E402
+from sqpack.fractional.model import Atom  # noqa: E402
+from sqpack.fractional.threshold import (  # noqa: E402
+    ThresholdAtom,
+    least_charged_slabs,
+    rectangle_terms,
+    sweep_slabs,
+    threshold_weight_scale,
+)
+
+N = 11
+B = Fraction(9977, 10000)
+ANGLE_LIMIT = Fraction(207107, 500000)
+STEPS = 180
+WEIGHT_DEN = 10**9
+
+
+def log(msg: str) -> None:
+    print(msg, flush=True)
+
+
+def solve(matrix, costs):
+    t = time.perf_counter()
+    result = linprog(c=costs, A_ub=-matrix, b_ub=-np.ones(matrix.shape[0]), bounds=(0.0, None), method="highs")
+    if not result.success:
+        raise RuntimeError(f"LP failed: {result.message}")
+    duals = np.maximum(-np.asarray(result.ineqlin.marginals, dtype=float), 0.0)
+    return np.asarray(result.x, dtype=float), duals, float(result.fun), time.perf_counter() - t
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("state")
+    ap.add_argument("outdir")
+    ap.add_argument("--seed-atoms", default=None)
+    ap.add_argument("--iterations", type=int, default=30)
+    ap.add_argument("--site-cap", type=int, default=120)
+    ap.add_argument("--atom-cap", type=int, default=400)
+    ap.add_argument("--rows-per-direction", type=int, default=3)
+    ap.add_argument("--row-rounds", type=int, default=6)
+    ap.add_argument("--deadline-min", type=float, default=150.0)
+    ap.add_argument("--resume", default=None, help="a lp-run2-style directory: sites.json, atoms.json, rows.json")
+    ap.add_argument("--vertex-cap", type=int, default=0)
+    ap.add_argument("--refine-above", type=float, default=0.85)
+    args = ap.parse_args()
+    out = Path(args.outdir)
+    out.mkdir(parents=True, exist_ok=True)
+    deadline = time.perf_counter() + args.deadline_min * 60
+    t0 = time.perf_counter()
+
+    outer, points, exact_rows = load_state(Path(args.state))
+    sites = site_set_from_points(outer, set(points))
+    if args.resume:
+        from sqpack.fractional.colgen import d4_orbit
+        rd = Path(args.resume)
+        flat = [(Fraction(a), Fraction(b)) for a, b in json.loads((rd / "sites.json").read_text())]
+        assert flat[: sites.size] == list(sites.positions())
+        tail = flat[sites.size :]
+        extra = []
+        k = 0
+        while k < len(tail):
+            orb = d4_orbit(tail[k][0], tail[k][1], outer)
+            assert tuple(tail[k : k + len(orb)]) == orb
+            extra.append(orb)
+            k += len(orb)
+        sites = SiteSet(outer, (*sites.orbits, *extra))
+        exact_rows = [(int(d), Fraction(x), Fraction(y)) for d, x, y in json.loads((rd / "rows.json").read_text())]
+        if args.seed_atoms is None:
+            args.seed_atoms = str(rd / "atoms.json")
+        log(f"resumed {len(extra)} added site orbits and {len(exact_rows)} rows from {rd}")
+    half_tangents = net_half_tangents(ANGLE_LIMIT, STEPS)
+    directions = direction_net(half_tangents)
+    rows = rows_from_exact(exact_rows, sites, half_tangents, B)
+    a_sites = sparse.csr_matrix(rows.matrix)
+    sizes = sites.sizes()
+    log(f"state: {sites.size} sites in {len(sites.orbits)} orbits, {len(exact_rows)} rows ({time.perf_counter()-t0:.1f}s)")
+
+    orbits: list[tuple[ThresholdAtom, ...]] = []
+    keys: set = set()
+    atom_meta: list[dict] = []
+    a_atoms = sparse.csr_matrix((len(exact_rows), 0))
+    atom_costs = np.zeros(0)
+    if args.seed_atoms:
+        seed = json.loads(Path(args.seed_atoms).read_text())
+        for e in seed["atoms"]:
+            atom = ThresholdAtom(tuple((Fraction(a), Fraction(b)) for a, b in e["points"]), e["threshold"], Fraction(1))
+            key = min(im.key for im in atom.images(outer))
+            if key in keys:
+                continue
+            keys.add(key)
+            orbits.append(atom.orbit(outer))
+            atom_meta.append({"charge_at_separation": e.get("charge_at_separation"), "classes": e.get("classes"), "angles": e.get("angles"), "seed": True})
+        a_atoms, atom_costs = atom_columns(orbits, exact_rows, half_tangents, B)
+        log(f"seeded {len(orbits)} atom orbits from {args.seed_atoms} ({time.perf_counter()-t0:.1f}s)")
+
+    trajectory: list[dict] = []
+    x = np.zeros(0)
+    duals = np.zeros(0)
+    obj = float("inf")
+
+    def checkpoint(note: str) -> None:
+        (out / "trajectory.json").write_text(json.dumps({"trajectory": trajectory, "note": note}, indent=1))
+        (out / "atoms.json").write_text(json.dumps({
+            "outer_side": str(outer), "square_side": str(B), "angle_limit": str(ANGLE_LIMIT), "direction_steps": STEPS,
+            "atoms": [{"points": [[str(px), str(py)] for px, py in orbit[0].points], "threshold": orbit[0].threshold,
+                        "orbit_size": len(orbit), **atom_meta[o]} for o, orbit in enumerate(orbits)],
+        }, indent=1))
+        (out / "sites.json").write_text(json.dumps([[str(px), str(py)] for orbit in sites.orbits for px, py in orbit]))
+        (out / "rows.json").write_text(json.dumps([[d, str(px), str(py)] for d, px, py in exact_rows]))
+        np.save(out / "x.npy", x)
+        np.save(out / "duals.npy", duals)
+
+    def resolve(stage: str) -> None:
+        nonlocal x, duals, obj
+        matrix = sparse.hstack([a_sites, a_atoms]).tocsr() if a_atoms.shape[1] else a_sites
+        costs = np.concatenate([sizes, atom_costs])
+        x, duals, obj, lp_s = solve(matrix, costs)
+        ns = len(sites.orbits)
+        atom_mass = float(atom_costs @ x[ns:]) if a_atoms.shape[1] else 0.0
+        pos_atoms = int((x[ns:] > 1e-12).sum())
+        pos_sites = int((x[:ns] > 1e-12).sum())
+        dual_support = int((duals > 1e-9).sum())
+        log(f"[{stage}] objective {obj:.9f}  sites {sites.size}/{ns} orbits (support {pos_sites})  atoms {a_atoms.shape[1]} orbits (support {pos_atoms}, budget {atom_mass:.6f})  rows {len(exact_rows)} (dual support {dual_support})  LP {lp_s:.1f}s  elapsed {time.perf_counter()-t0:.0f}s")
+        trajectory.append({"stage": stage, "objective": obj, "rows": len(exact_rows), "site_orbits": ns, "sites": sites.size, "atom_orbits": int(a_atoms.shape[1]), "atom_budget": atom_mass, "positive_atoms": pos_atoms, "site_support": pos_sites, "dual_support": dual_support, "seconds": time.perf_counter() - t0})
+        checkpoint(stage)
+
+    resolve("start")
+    for it in range(args.iterations):
+        if time.perf_counter() > deadline:
+            log("deadline"); break
+        fam = family_from_dual(exact_rows, duals, half_tangents, outer, B, n=N, weight_denominator=WEIGHT_DEN)
+        log(f"iteration {it}: dual family {len(fam.placements)} placements after D4, total {float(fam.total_weight):.6f}")
+        # (1) site separation: exact vertex depth, as cutting.cutting_plane_loop does
+        ts = time.perf_counter()
+        lines = arrangement_lines(fam)
+        sep = screened_separation(fam, lines, sites, cap=args.site_cap, select_above=Fraction(1000001, 1000000))
+        log(f"  sites: exact max depth {float(sep.max_depth):.6f} over {sep.vertices} vertices ({sep.decided} decided exactly), {sep.violating} above 1, {len(sep.chosen)} new orbits; {time.perf_counter()-ts:.0f}s")
+        trajectory.append({"stage": f"site-sep-{it}", "max_depth": float(sep.max_depth), "vertices": sep.vertices, "violating": sep.violating, "added": len(sep.chosen)})
+        added_sites = 0
+        if sep.chosen:
+            new_orbits = tuple(orbit for _, orbit in sep.chosen)
+            addition = coverage_matrix(exact_rows, SiteSet(outer, new_orbits), half_tangents, B)
+            a_sites = sparse.hstack([a_sites, sparse.csr_matrix(addition)]).tocsr()
+            sites = SiteSet(outer, (*sites.orbits, *new_orbits))
+            sizes = sites.sizes()
+            added_sites = len(new_orbits)
+        # (2) atom separation
+        geo = FamilyGeometry(fam, log)
+        floor = args.refine_above if len(fam.placements) > 400 else 0.0
+        found = geo.violated_2of3(outer_side=outer, log=log, vertex_cap=args.vertex_cap, refine_above=floor)
+        new = []
+        for a in found:
+            atom = ThresholdAtom(a["points"], a["threshold"], Fraction(1))
+            key = min(im.key for im in atom.images(outer))
+            if key in keys:
+                continue
+            keys.add(key)
+            new.append((atom.orbit(outer), a))
+            if len(new) >= args.atom_cap:
+                break
+        if found:
+            log(f"  atoms: top violation {float(found[0]['charge']) - 1:.6f}; {len(found)} violated orbits, {len(new)} new; classes {class_summary([a for _, a in new])}")
+        if new:
+            cols, costs = atom_columns([o for o, _ in new], exact_rows, half_tangents, B)
+            for o, a in new:
+                orbits.append(o)
+                atom_meta.append({"charge_at_separation": float(a["charge"]), "classes": a["classes"], "angles": [round(v, 2) for v in a["angles"]]})
+            a_atoms = sparse.hstack([a_atoms, cols]).tocsr()
+            atom_costs = np.concatenate([atom_costs, costs])
+        if added_sites == 0 and not new:
+            log("  nothing to add: the dual is a fractional packing at every vertex and satisfies every 2-of-3 cut on triangle representatives")
+            trajectory.append({"stage": f"converged-{it}", "objective": obj})
+            checkpoint("converged")
+            if obj >= N:
+                break
+        else:
+            resolve(f"iter-{it}")
+        # (3) rows, only once the value is below n
+        if obj < N - 1e-9:
+            for r in range(args.row_rounds):
+                if time.perf_counter() > deadline:
+                    break
+                ns = len(sites.orbits)
+                xs, xa = x[:ns], x[ns:]
+                point_atoms = tuple(a for a in (
+                    Atom(f"{o}:{k}", px, py, Fraction(math.ceil(w * WEIGHT_DEN), WEIGHT_DEN))
+                    for o, w in enumerate(xs) if w > 1e-12 for k, (px, py) in enumerate(sites.orbits[o])) if a.weight > 0)
+                t_atoms = tuple(a for a in (
+                    ThresholdAtom(im.points, im.threshold, Fraction(math.ceil(w * WEIGHT_DEN), WEIGHT_DEN))
+                    for o, w in enumerate(xa) if w > 1e-12 for im in orbits[o]) if a.weight > 0)
+                scale = threshold_weight_scale(point_atoms, t_atoms)
+                budget = sum(a.weight for a in point_atoms) + sum(a.budget for a in t_atoms)
+                new_rows = []
+                least, least_dir = None, None
+                ts = time.perf_counter()
+                for d, direction in enumerate(directions):
+                    terms = rectangle_terms(point_atoms, t_atoms, direction, outer, B, scale=scale)
+                    scores, _ = sweep_slabs(terms)
+                    m = Fraction(int(scores.min()), scale)
+                    if least is None or m < least:
+                        least, least_dir = m, d
+                    for _, (u, v) in least_charged_slabs(terms, direction, outer, B, keep=args.rows_per_direction, below=Fraction(1) - Fraction(1, 10**6)):
+                        new_rows.append((d, direction.ux * u - direction.uy * v, direction.uy * u + direction.ux * v))
+                    if time.perf_counter() > deadline:
+                        log(f"  deadline inside row sweep at direction {d}")
+                        break
+                log(f"  rows: measure {len(point_atoms)} sites + {len(t_atoms)} threshold atoms, budget {float(budget):.6f}; least charge {float(least):.9f} at direction {least_dir}; {len(new_rows)} violated cells; {time.perf_counter()-ts:.0f}s")
+                trajectory.append({"stage": f"sweep-{it}-{r}", "least_charge": float(least), "least_direction": least_dir, "violated_cells": len(new_rows), "budget": float(budget)})
+                if not new_rows:
+                    log(f"  ROWS COMPLETE at objective {obj:.9f}, budget {float(budget):.9f}")
+                    checkpoint("rows-complete")
+                    break
+                exact_rows.extend(new_rows)
+                a_sites = sparse.vstack([a_sites, sparse.csr_matrix(coverage_matrix(new_rows, sites, half_tangents, B))]).tocsr()
+                if a_atoms.shape[1]:
+                    cols, _ = atom_columns(orbits, new_rows, half_tangents, B)
+                    a_atoms = sparse.vstack([a_atoms, cols]).tocsr()
+                else:
+                    a_atoms = sparse.csr_matrix((len(exact_rows), 0))
+                resolve(f"rows-{it}-{r}")
+                if obj >= N - 1e-9:
+                    break
+    log(f"final objective {obj:.9f}; {len(exact_rows)} rows, {sites.size} sites, {len(orbits)} atom orbits; total {time.perf_counter()-t0:.0f}s")
+    checkpoint("final")
+
+
+if __name__ == "__main__":
+    main()

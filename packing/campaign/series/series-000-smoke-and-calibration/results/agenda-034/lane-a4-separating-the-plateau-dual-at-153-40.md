@@ -337,7 +337,8 @@ Their bytes are as delivered; nothing was reformatted.
 They are **a record of how the measurement was made, not a supported tool.** Each was
 run from a scratch directory against the repository at commit `7ccb679c`; five of them
 put the repository on `sys.path` by its absolute path, and `lp_atoms.py` resolves the
-scratch layout around it, including spike B’s `sepcore`, which is not retained.
+scratch layout around it, including spike B’s `sepcore`, retained beside lane B’s report
+as [`lane-b-sepcore.py.txt`](lane-b-sepcore.py.txt).
 `oracle_reader.py` deliberately bypasses a gate the supported reader enforces, which is
 exactly why it must not be mistaken for the reader:
 `packing/devtools/plateau_reader.py`, whose exact searches it calls unchanged, is the

@@ -321,8 +321,9 @@ They are **a record of how the measurement was made, not a supported tool.** Eac
 run from a scratch directory against the repository at commit `7ccb679c`, and each takes
 its inputs as command-line arguments but resolves its imports from the scratch layout it
 ran in: `lp383.py`, `lp_sites.py` and `atoms_on_family.py` reach a sibling `spike-b/`
-directory for `sepcore`, which is not retained — lane B’s own Files section records it
-as scratch-only. Nothing in the repository imports any of them, and nothing should.
+directory for `sepcore`, which is retained beside lane B’s report as
+[`lane-b-sepcore.py.txt`](lane-b-sepcore.py.txt), so the three are runnable from this
+directory. Nothing in the repository imports any of them, and nothing should.
 
 Not retained (scratch only): the three LP checkpoints with their sites, atoms, rows and
 solution arrays (about 60 MB), the symmetrised families above 150 KB, the 400 added atom

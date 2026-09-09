@@ -24,12 +24,16 @@ The ceiling family of Part 1 §3.3 was already retained in this directory as
 spike’s own copy (14,039 bytes, SHA-256
 `95cf06473f185764076d21021b75cc65962ef6b68dc717c045c2c7d76ae12427` on both), so it was
 not copied again and both parts link to the retained one.
+The ten scripts the two parts ran are retained beside them as `.py.txt`, listed under
+[Files](#files) with what each does and which finding it produced.
 Every other file either part names is not retained (scratch only); [Files](#files) lists
-them with the sizes that matter.
+those with the sizes that matter.
 
 ## Part 1 — Spike B: threshold atoms (rank-1 Chvátal–Gomory cuts) for the n = 11 certificate
 
-Scratch: `spike-b/` in the untracked scratchpad, not retained (scratch only).
+Scratch: `spike-b/` in the untracked scratchpad; eight of its nine scripts are retained
+here (see [Files](#files)) — all but the freeze, superseded by the `resume/` copy — and
+its logs, checkpoints and `.txt` readings are not.
 Branch `claude/n-11-stronger-result-d730ds` at `943f9cf`, nothing committed.
 One core (`PACK_JOBS=1`), scipy HiGHS for every LP. Labels: EXACT (rational decision),
 CHECKED (float computation, script retained), RECORD (retained file), OPEN.
@@ -458,10 +462,14 @@ Retained check: 161 s. Run 3: per-stage seconds in the table of 3.6.
 
 ## Part 2 — Resume of spike B run 3: rows-only completion at 191/50 and the decision
 
-Scratch: `spike-b/resume/` in the untracked scratchpad, not retained (scratch only).
-Scripts beside that report: `rows_only.py` (the rows-only driver), `freeze_candidate.py`
-(spike B’s freeze script with one line changed, Section 5), `freeze_and_decide.sh`.
-Logs: `lp-run4.log`, `decide-1.log`,
+Scratch: `spike-b/resume/` in the untracked scratchpad; both its Python scripts are
+retained here (see [Files](#files)), its wrapper, logs and checkpoint are not.
+Scripts beside that report: `rows_only.py` (the rows-only driver, retained as
+[`lane-b-rows-only.py.txt`](lane-b-rows-only.py.txt)), `freeze_candidate.py` (spike B’s
+freeze script with one line changed, Section 5, retained as
+[`lane-b-freeze-candidate.py.txt`](lane-b-freeze-candidate.py.txt)) and the
+`freeze_and_decide.sh` wrapper around them, whose two commands are under
+[Files](#files). Logs: `lp-run4.log`, `decide-1.log`,
 [`lane-b-decide-191-50.log`](lane-b-decide-191-50.log).
 State: `lp-run4/` (sites.json, atoms.json, rows.json, x.npy, duals.npy,
 trajectory.json). Candidate:
@@ -650,7 +658,144 @@ Retained in this directory:
   bytes, SHA-256 `95cf06473f185764076d21021b75cc65962ef6b68dc717c045c2c7d76ae12427` on
   both), so no second copy was made.
 
-Not retained (scratch only).
+### The scripts
+
+Ten scripts, 94,666 bytes, retained as `.py.txt` in the convention lanes A3, A4, A5, X1
+and X3 already use in this directory.
+Each is byte-identical to its scratch original; nothing was reformatted.
+The attributions below are read off the run logs rather than the file names.
+
+- [`lane-b-sepcore.py.txt`](lane-b-sepcore.py.txt) — 18,318 B. The shared separation
+  core: exact overlap graph, pairwise intersection polygons, representative and interior
+  candidate points, 2-of-3 charges over a whole family with an exact rational recheck of
+  every violation, and the LP-side bookkeeping that turns an atom orbit into a column.
+  It carries no finding of its own and is the instrument under F2, F3, F4, F6, F7 and
+  every row round of Part 2. It is also the one import the retained lane A3 and A4
+  drivers take from outside the repository —
+  [`lane-a3-lp383.py.txt`](lane-a3-lp383.py.txt),
+  [`lane-a3-lp-sites.py.txt`](lane-a3-lp-sites.py.txt),
+  [`lane-a3-atoms-on-family.py.txt`](lane-a3-atoms-on-family.py.txt) and
+  [`lane-a4-lp-atoms.py.txt`](lane-a4-lp-atoms.py.txt) all import it — so retaining it
+  is what makes those four runnable from this directory.
+  The retained bytes are the revision run 3 used (written 01:27 UTC, six minutes before
+  run 3 began): runs 1 and 2 ran earlier revisions of this same file, which were
+  overwritten in place and are gone.
+  Run 1’s crash traceback (§5.3) names a line inside `violated_2of3` that this revision
+  no longer has, which is what the fix it describes changed.
+- [`lane-b-sep-family.py.txt`](lane-b-sep-family.py.txt) — 15,363 B. Task 2: 2-of-3
+  atoms on every triangle of a retained depth-one family’s overlap graph, then 2-of-5 on
+  capped chordless 5-cycles, weights rounded down so a violation here is a violation
+  under the retained weights.
+  Produced **F2** in two runs: `sep-b19150.log` at 191/50 (760 placements, 10,043,912
+  triangles, maximum charge 1.078511, 3,504 violated and all 3,504 confirmed exactly,
+  total exact violation 55.025323736, no 2-of-5 violated among 2,000,000 cycles) and
+  `sep-unit127.log` on the unit control (768 placements, maximum 1.184795, 52,088
+  violated).
+- [`lane-b-lp-threshold.py.txt`](lane-b-lp-threshold.py.txt) — 11,794 B. Run 1’s driver:
+  fixed rows and sites, alternating 2-of-3 atom separation against the LP dual and
+  threshold-aware row generation.
+  Produced most of **F3** (`lp-run1.log`: the point-only control at 11.055616943 against
+  the record’s 11.055617, then exactly 11.000000000 in one round on 600 atom orbits with
+  16 active and budget 1.382681, and again at 945 orbits with 24 active and budget
+  1.690631) and the crash of §5.3 (`lp-run1-crashed.log`, a degenerate triangle of two
+  identical mirror images).
+  Not the whole of F3: run 1 separated the next 175 orbits and stopped without solving
+  them, so F3’s 1120-orbit reading is run 2’s and belongs to the loop below.
+  It is **not** superseded by the combined loop below, which dropped the point-only
+  control stage: this is the only script here that measures it.
+- [`lane-b-lp-threshold2.py.txt`](lane-b-lp-threshold2.py.txt) — 14,300 B. The combined
+  loop: exact site separation, 2-of-3 atom separation and threshold-aware rows in one
+  iteration, with seeding, `--resume` and a full checkpoint after every solve.
+  Produced run 2 (`lp-run2.log`): its iteration 0 carries **F3**’s last reading, the
+  1120-orbit round that run 1 separated but never solved (still exactly 11.000000000, 28
+  active, budget 2.117188), and its iteration 1 is the ceiling family of **F4** — exact
+  maximum depth 1.000000 over 20,376 vertices on an 88-placement dual, nothing left to
+  add. Produced run 3 (`lp-run3.log`): the three cycles of **F7** at 10.926981816,
+  10.948525770 and 10.956243518, each refilled by rows to exactly 11.000000000 on a
+  near-integral dual of 12, 14 and 9 rows, plus the fourth cycle the deadline cut at the
+  rows-3-4 checkpoint that Part 2 resumed.
+  As with `sepcore`, the retained bytes are run 3’s revision; run 2 ran an earlier one.
+- [`lane-b-rows-only.py.txt`](lane-b-rows-only.py.txt) — 16,681 B. Part 2’s driver:
+  reloads run 3’s checkpoint exactly as `--resume` does, rebuilds the covering LP, and
+  then runs row rounds only — no new sites, no new atoms — sweeping all 181 directions
+  with the exact slab sweep after every solve and keeping one HiGHS handle warm across
+  rounds. Produced Part 2 **F1**, **F2**, **F3** and **F9** (`lp-run4.log`: the saved
+  measure’s least charge 31232339/31250000 at direction 114 with 20 violated cells,
+  which is what makes run 3’s “ROWS COMPLETE” false; then +20 and +240 rows to 15,021,
+  rows complete at least charge 40000001/40000000 with the objective unmoved at
+  10.967300462; 3.5 s and 9 simplex iterations warm against 167.3 s and 12,658 cold).
+  Its `lp-run4/` checkpoint is the measure the candidate was frozen from.
+- [`lane-b-freeze-candidate.py.txt`](lane-b-freeze-candidate.py.txt) — 5,270 B. The
+  freeze: reads a checkpoint’s LP weights, multiplies by the bump, rounds up at scale
+  `1e9`, drops zeros, expands orbits to D4-closed lists and writes the record with
+  `atoms` and `threshold_atoms`. **This is the copy that produced the retained bytes**:
+  it is the `resume/` copy, and [`lane-b-decide-191-50.log`](lane-b-decide-191-50.log)
+  records it writing SHA-256 `3935651a…`, the candidate
+  `devtools.decide_threshold_certificate` then ACCEPTED — Part 2 **F4**. Spike B’s own
+  `freeze_candidate.py` (4,894 B) is superseded and not retained: it differs in the one
+  line **F8** describes, writing `provenance.lp_objective` as a JSON float, and the
+  candidate it wrote (`f10d0897…`) was refused by the strict parser before any condition
+  was checked (`decide-1.log`). The retained copy carries the fix and the comment
+  explaining it.
+- [`lane-b-sep-ceiling.py.txt`](lane-b-sep-ceiling.py.txt) — 5,141 B. 2-of-3, 2-of-5 and
+  3-of-5 separation on the frozen ceiling family with candidate points at the
+  arrangement vertices and the pair centroids.
+  Produced the first half of **F6** (`sep-ceiling.log`: 21,200 candidates, 15,136
+  containments decided exactly, 3,280 triangles, maximum charge `10/8 = 1.25`, 1,428
+  violated, best at triangle `(0, 40, 45)`). Its 5-cycle stage was stopped at 522,848
+  cycles, which §3.5 records.
+- [`lane-b-sep-ceiling-interior.py.txt`](lane-b-sep-ceiling-interior.py.txt) — 3,184 B.
+  The same separation with every candidate pulled off the placement boundaries towards
+  its pair polygon’s centroid.
+  Produced the interior half of **F6** (`sep-ceiling-interior.log`: maximum charge
+  `10/8 = 1.25` at each of the three pulls, 857 / 647 / 318 violated triangles, zero
+  ambiguous containments).
+- [`lane-b-dual-anatomy.py.txt`](lane-b-dual-anatomy.py.txt) — 3,418 B. Reads a
+  checkpoint’s `duals.npy` and reports the support rows and their weights, the
+  symmetrised family’s exact maximum depth at the sites and at the arrangement vertices,
+  and which heavy overlapping pairs contain no site.
+  Produced the two readings behind §3.2 and §3.3 (`dual-anatomy-run2-start.txt`: 18
+  support rows at weights 1.5 down to 0.25, exact maximum depth 1.125 over 70,628
+  vertices; `dual-anatomy-run2-iter0.txt`: the eleven support rows all at weight exactly
+  1, 88 placements, exact maximum depth 1 over 20,376 vertices, 48 of 824 overlapping
+  heavy pairs holding no site).
+- [`lane-b-check-retained.py.txt`](lane-b-check-retained.py.txt) — 1,197 B. The
+  consistency check of §5.1: at all 181 directions of the retained 1121-atom certificate
+  the threshold sweep with no threshold atoms must reproduce
+  `sweep.minimum_covered_mass`, by the dense grid and by the slab route.
+  Produced `check-retained.log`: least `4001/4000`, 0 mismatches, 160.9 s.
+
+They are **a record of how the measurement was made, not a supported tool.** Each was
+run from a scratch directory against the branch at `943f9cf` (Part 2 records only that
+it changed no git state), and each resolves its imports from the scratch layout it ran
+in: six of the ten reach a sibling `sepcore` — the two loop drivers, the resume driver,
+the two ceiling separations and the dual anatomy — which is why that file is retained
+first, and `sep_family.py`, `freeze_candidate.py` and `check_retained.py` import only
+the repository. Nothing in the repository imports any of them, and nothing should; the
+`.py.txt` extension is what keeps the repository’s Python surface at zero Ruff and
+BasedPyright findings over every tracked `.py` file.
+
+Three readings in Part 1 have no retained script behind them, because the code that
+produced them was written inline and never saved: `ceiling-verdict-run2-iter0.txt`
+(**F4**’s `verify_ceiling` verdict and the frozen family’s SHA-256),
+`ceiling-depth-vs-B.txt` (**F5**’s clamped depths at `B' = 0.998` and above) and
+`top-atom-exact.txt` (the exact `5/4` recheck of **F6**’s best atom).
+Their inputs are retained — the ceiling family is
+[`ceiling-family-191-50.json`](ceiling-family-191-50.json) and `verify_ceiling` is
+`sqpack.fractional.ceiling` — so each is re-runnable, but not from a file kept here.
+
+The `resume/freeze_and_decide.sh` wrapper is not retained; its two commands are, so the
+freeze and the decision are legible without it.
+From `packing/`, with `STATE` the repository-relative
+`campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json`:
+
+```bash
+.venv/bin/python3 freeze_candidate.py "$STATE" lp-run4 candidate.json --bump 1000002/1000000
+PACK_JOBS=3 uv run --frozen --all-extras --group dev python -m devtools.decide_threshold_certificate candidate.json
+```
+
+### Not retained (scratch only)
+
 The large ones, by size:
 
 - `sep-unit127.json`, 75,020,589 B — the separation output on the unit control family
@@ -665,16 +810,14 @@ The large ones, by size:
 - `lp-run2/`, 3,945,652 B, and `lp-run1/`, 1,645,715 B — the earlier checkpoints.
 - `lp-run1-atoms-seed.json`, 1,215,538 B — run 1’s atom columns.
 
-And the rest: the scripts `sep_family.py`, `sepcore.py`, `sep_ceiling.py`,
-`sep_ceiling_interior.py`, `lp_threshold.py`, `lp_threshold2.py`, `dual_anatomy.py`,
-`freeze_candidate.py`, `check_retained.py`, and in `resume/` `rows_only.py`, its
-one-line-changed `freeze_candidate.py` and `freeze_and_decide.sh`; the logs and readings
-`sep-b19150.log`, `sep-unit127.log`, `lp-run1.log`, `lp-run1-crashed.log`,
-`lp-run2.log`, `lp-run3.log`, `lp-run4.log`, `decide-1.log`, `check-retained.log`,
-`sep-ceiling.log`, `sep-ceiling-interior.log`, `ceiling-depth-vs-B.txt`,
-`ceiling-verdict-run2-iter0.txt`, `dual-anatomy-run2-start.txt`,
-`dual-anatomy-run2-iter0.txt`, `top-atom-exact.txt`; and the three parser fixtures
-`fixture-threshold.json`, `fixture-bad-dup.json`, `fixture-bad-float.json`.
+And the rest: spike B’s own `freeze_candidate.py`, superseded by the `resume/` copy
+above, and `resume/freeze_and_decide.sh`; the logs and readings `sep-b19150.log`,
+`sep-unit127.log`, `lp-run1.log`, `lp-run1-crashed.log`, `lp-run2.log`, `lp-run3.log`,
+`lp-run4.log`, `decide-1.log`, `check-retained.log`, `sep-ceiling.log`,
+`sep-ceiling-interior.log`, `ceiling-depth-vs-B.txt`, `ceiling-verdict-run2-iter0.txt`,
+`dual-anatomy-run2-start.txt`, `dual-anatomy-run2-iter0.txt`, `top-atom-exact.txt`; and
+the three parser fixtures `fixture-threshold.json`, `fixture-bad-dup.json`,
+`fixture-bad-float.json`.
 
 The library and tools the two parts describe are in the repository rather than in
 scratch: `packing/src/sqpack/fractional/threshold.py`,
