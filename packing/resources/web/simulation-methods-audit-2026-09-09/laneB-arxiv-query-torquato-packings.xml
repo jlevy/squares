@@ -1,0 +1,553 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/NDlgwQxv3N1jG/8MCS7ZykczMe0</id>
+  <title>arXiv Query: search_query=au:"Torquato S" AND abs:packings&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-09-09T07:24:11Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=au:%22Torquato+S%22+AND+abs:packings&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>24</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1610.07399v3</id>
+    <title>The Perfect Glass Paradigm: Disordered Hyperuniform Glasses Down to Absolute Zero</title>
+    <updated>2016-11-21T20:47:05Z</updated>
+    <link href="https://arxiv.org/abs/1610.07399v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1610.07399v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rapid cooling of liquids below a certain temperature range can result in a transition to glassy states. The traditional understanding of glasses includes their thermodynamic metastability with respect to crystals. However, here we present specific examples of interactions that eliminate the possibilities of crystalline and quasicrystalline phases, while creating mechanically stable amorphous glasses down to absolute zero temperature. We show that this can be accomplished by introducing a new ideal state of matter called a "perfect glass." A perfect glass represents a soft-interaction analog of the maximally random jammed (MRJ) packings of hard particles. These latter states can be regarded as the epitome of a glass since they are out of equilibrium, maximally disordered, hyperuniform, mechanically rigid with infinite bulk and shear moduli, and can never crystallize due to configuration-space trapping. Our model perfect glass utilizes two-, three-, and four-body soft interactions while simultaneously retaining the salient attributes of the MRJ state. These models constitute a theoretical proof of concept for perfect glasses and broaden our fundamental understanding of glass physics. A novel feature of equilibrium systems of identical particles interacting with the perfect-glass potential at positive temperature is that they have a non-relativistic speed of sound that is infinite.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-10-24T13:28:51Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Scientific Reports 6, 36963 (2016)</arxiv:journal_ref>
+    <author>
+      <name>G. Zhang</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1038/srep36963</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/srep36963" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1605.06716v1</id>
+    <title>A geometric-Structure Theory for maximally Random Jammed Packings</title>
+    <updated>2016-05-22T00:21:55Z</updated>
+    <link href="https://arxiv.org/abs/1605.06716v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1605.06716v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Maximally random jammed (MRJ) particle packings can be viewed as prototypical glasses in that they are maximally disordered while simultaneously being mechanically rigid. The prediction of the MRJ packing density phi, among other packing properties of frictionless particles, still poses many theoretical challenges, even for congruent spheres or disks. Using the geometric-structure approach, we derive for the first time a highly accurate formula for MRJ densities for a very wide class of twodimensional frictionless packings, namely, binary convex superdisks, with shapes that continuously interpolate between circles and squares.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-05-22T00:21:55Z</published>
+    <arxiv:comment>9 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Scientific Reports, 2015 5:16722</arxiv:journal_ref>
+    <author>
+      <name>Jianxiang Tian</name>
+    </author>
+    <author>
+      <name>Y. Xu</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1038/srep16722</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/srep16722" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1402.4883v1</id>
+    <title>Precise Algorithm to Generate Random Sequential Addition of Hard Hyperspheres at Saturation</title>
+    <updated>2014-02-20T03:57:19Z</updated>
+    <link href="https://arxiv.org/abs/1402.4883v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1402.4883v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Random sequential addition (RSA) time-dependent packing process, in which congruent hard hyperspheres are randomly and sequentially placed into a system without interparticle overlap, is a useful packing model to study disorder in high dimensions. Of particular interest is the infinite-time {\it saturation} limit in which the available space for another sphere tends to zero. However, the associated saturation density has been determined in all previous investigations by extrapolating the density results for near-saturation configurations to the saturation limit, which necessarily introduces numerical uncertainties. We have refined an algorithm devised by us [S. Torquato, O. Uche, and F.~H. Stillinger, Phys. Rev. E {\bf 74}, 061308 (2006)] to generate RSA packings of identical hyperspheres. The improved algorithm produce such packings that are guaranteed to contain no available space using finite computational time with heretofore unattained precision and across the widest range of dimensions ($2 \le d \le 8$). We have also calculated the packing and covering densities, pair correlation function $g_2(r)$ and structure factor $S(k)$ of the saturated RSA configurations. As the space dimension increases, we find that pair correlations markedly diminish, consistent with a recently proposed "decorrelation" principle, and the degree of "hyperuniformity" (suppression of infinite-wavelength density fluctuations) increases. We have also calculated the void exclusion probability in order to compute the so-called quantizer error of the RSA packings, which is related to the second moment of inertia of the average Voronoi cell. Our algorithm is easily generalizable to generate saturated RSA packings of nonspherical particles.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-02-20T03:57:19Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Physical Review E, 88, 053312 (2013)</arxiv:journal_ref>
+    <author>
+      <name>G. Zhang</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.88.053312</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.88.053312" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1009.1443v2</id>
+    <title>Reformulation of the Covering and Quantizer Problems as Ground States of Interacting Particles</title>
+    <updated>2010-11-19T15:21:56Z</updated>
+    <link href="https://arxiv.org/abs/1009.1443v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1009.1443v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We reformulate the covering and quantizer problems as the determination of the ground states of interacting particles in $\mathbb{R}^d$ that generally involve single-body, two-body, three-body, and higher-body interactions. This is done by linking the covering and quantizer problems to certain optimization problems involving the "void" nearest-neighbor functions that arise in the theory of random media and statistical mechanics. These reformulations, which again exemplifies the deep interplay between geometry and physics, allow one now to employ theoretical and numerical optimization techniques to analyze and solve these energy minimization problems. The covering and quantizer problems have relevance in numerous applications, including wireless communication network layouts, the search of high-dimensional data parameter spaces, stereotactic radiation therapy, data compression, digital communications, meshing of space for numerical analysis, and coding and cryptography, among other examples. The connections between the covering and quantizer problems and the sphere-packing and number-variance problems are discussed. We also show that disordered saturated sphere packings provide relatively thin (economical) coverings and may yield thinner coverings than the best known lattice coverings in sufficiently large dimensions. In the case of the quantizer problem, we derive improved upper bounds on the quantizer error using sphere-packing solutions, which are generally substantially sharper than an existing upper bound in low to moderately large dimensions. We also demonstrate that disordered saturated sphere packings yield relatively good quantizers. Finally, we remark on possible applications of our results for the detection of gravitational waves.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-09-08T02:37:55Z</published>
+    <arxiv:comment>52 pages, 9 figures, 8 tables; Changes reflect improvements made during the refereeing process</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>S. Torquato, "Reformulation of the covering and quantizer problems as ground states of interacting particles," Physical Review E, 82, 056109 (2010)</arxiv:journal_ref>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.82.056109</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.82.056109" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1005.0011v1</id>
+    <title>Exact Constructions of a Family of Dense Periodic Packings of Tetrahedra</title>
+    <updated>2010-04-30T20:09:20Z</updated>
+    <link href="https://arxiv.org/abs/1005.0011v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1005.0011v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The determination of the densest packings of regular tetrahedra (one of the five Platonic solids) is attracting great attention as evidenced by the rapid pace at which packing records are being broken and the fascinating packing structures that have emerged. Here we provide the most  general analytical formulation to date to construct dense periodic packings of tetrahedra with four particles per fundamental cell. This  analysis results in six-parameter family of dense tetrahedron packings that includes as special cases recently discovered "dimer" packings of tetrahedra, including the densest known packings with density $φ= 4000/4671 = 0.856347...$. This study strongly suggests that the latter set of packings are the densest among all packings with a four-particle basis. Whether they are the densest packings of tetrahedra among all packings is an open question, but we offer remarks about this issue. Moreover, we describe a procedure that provides estimates of upper bounds on the maximal density of tetrahedron packings, which could aid in assessing the packing efficiency of candidate dense packings.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-04-30T20:09:20Z</published>
+    <arxiv:comment>It contains 25 pages, 5 figures.</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 81, 041310 (2010)</arxiv:journal_ref>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.81.041310</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.81.041310" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1003.3604v1</id>
+    <title>Spherical codes, maximal local packing density, and the golden ratio</title>
+    <updated>2010-03-18T15:13:02Z</updated>
+    <link href="https://arxiv.org/abs/1003.3604v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1003.3604v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The densest local packing (DLP) problem in d-dimensional Euclidean space Rd involves the placement of N nonoverlapping spheres of unit diameter near an additional fixed unit-diameter sphere such that the greatest distance from the center of the fixed sphere to the centers of any of the N surrounding spheres is minimized. Solutions to the DLP problem are relevant to the realizability of pair correlation functions for packings of nonoverlapping spheres and might prove useful in improving upon the best known upper bounds on the maximum packing fraction of sphere packings in dimensions greater than three. The optimal spherical code problem in Rd involves the placement of the centers of N nonoverlapping spheres of unit diameter onto the surface of a sphere of radius R such that R is minimized. It is proved that in any dimension, all solutions between unity and the golden ratio to the optimal spherical code problem for N spheres are also solutions to the corresponding DLP problem. It follows that for any packing of nonoverlapping spheres of unit diameter, a spherical region of radius less than or equal to the golden ratio centered on an arbitrary sphere center cannot enclose a number of sphere centers greater than one more than the number that can be placed on the region's surface.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-03-18T15:13:02Z</published>
+    <arxiv:comment>12 pages, 1 figure. Accepted for publication in the Journal of Mathematical Physics</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>A. B. Hopkins</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1063/1.3372627</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.3372627" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1002.0604v1</id>
+    <title>Densest local sphere-packing diversity: General concepts and application to two dimensions</title>
+    <updated>2010-02-02T21:57:55Z</updated>
+    <link href="https://arxiv.org/abs/1002.0604v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1002.0604v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The densest local packings of N identical nonoverlapping spheres within a radius Rmin(N) of a fixed central sphere of the same size are obtained using a nonlinear programming method operating in conjunction with a stochastic search of configuration space. Knowledge of Rmin(N) in d-dimensional Euclidean space allows for the construction both of a realizability condition for pair correlation functions of sphere packings and an upper bound on the maximal density of infinite sphere packings. In this paper, we focus on the two-dimensional circular disk problem. We find and present the putative densest packings and corresponding Rmin(N) for selected values of N up to N = 348 and use this knowledge to construct such a realizability condition and upper bound. We additionally analyze the properties and characteristics of the maximally dense packings, finding significant variability in their symmetries and contact networks, and that the vast majority differ substantially from the triangular lattice even for large N. Our work has implications for packaging problems, nucleation theory, and surface physics.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-02-02T21:57:55Z</published>
+    <arxiv:comment>35 pages, 33 figures, 2 tables. Supporting material available at http://cherrypit.princeton.edu/</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>A. B. Hopkins</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.81.041305</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.81.041305" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1001.0423v1</id>
+    <title>Novel Features Arising in the Maximally Random Jammed Packings of Superballs</title>
+    <updated>2010-01-04T01:40:37Z</updated>
+    <link href="https://arxiv.org/abs/1001.0423v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1001.0423v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Dense random packings of hard particles are useful models of granular media and are closely related to the structure of nonequilibrium low-temperature amorphous phases of matter. Most work has been done for random jammed packings of spheres, and it is only recently that corresponding packings of nonspherical particles (e.g., ellipsoids) have received attention. Here we report a study of the maximally random jammed (MRJ) packings of binary superdisks and monodispersed superballs whose shapes are defined by |x_1|^2p+...+|x_2|^2p&lt;=1 with d = 2 and 3, respectively, where p is the deformation parameter with values in the interval (0, infinity). We find that the MRJ densities of such packings increase dramatically and nonanalytically as one moves away from the circular-disk and sphere point. Moreover, the disordered packings are hypostatic and the local arrangements of particles are necessarily nontrivially correlated to achieve jamming. We term such correlated structures "nongeneric". The degree of "nongenericity" of the packings is quantitatively characterized by determining the fraction of local coordination structures in which the central particles have fewer contacting neighbors than average. We also show that such seemingly special packing configurations are counterintuitively not rare. As the anisotropy of the particles increases, the fraction of rattlers decreases while the minimal orientational order increases. These novel characteristics result from the unique rotational symmetry breaking manner of the particles.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-01-04T01:40:37Z</published>
+    <arxiv:comment>20 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.81.041304</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.81.041304" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0912.4210v3</id>
+    <title>Analytical Constructions of a Family of Dense Tetrahedron Packings and the Role of Symmetry</title>
+    <updated>2010-01-02T21:30:27Z</updated>
+    <link href="https://arxiv.org/abs/0912.4210v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0912.4210v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The determination of the densest packings of regular tetrahedra (one of the five Platonic solids) is attracting great attention as evidenced by the rapid pace at which packing records are being broken and the fascinating packing structures that have emerged. We have discovered the densest known packings of regular tetrahedra with a density $φ= {12250/14319} = 0.855506...$. These packings are special cases of an analytical two-parameter family of dense periodic packings with four particles per fundamental cell that we have constructed here. From this family, we can recover a set of recent packing arrangements due to Kallus {\it et al.} [arXiv:0910.5226] with density $φ={100/117}=0.854700...$, which has higher symmetry than our densest packings, We also describe a procedure that could lead to rigorous upper bounds on the maximal density of tetrahedron packings, which could aid in assessing the packing efficiency of candidate dense packings.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-12-21T16:54:36Z</published>
+    <arxiv:comment>16 pages, 5 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0909.0940v3</id>
+    <title>Dense Packings of Polyhedra: Platonic and Archimedean Solids</title>
+    <updated>2009-09-09T21:59:40Z</updated>
+    <link href="https://arxiv.org/abs/0909.0940v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0909.0940v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We formulate the problem of generating dense packings of nonoverlapping, non-tiling polyhedra within an adaptive fundamental cell subject to periodic boundary conditions as an optimization problem, which we call the Adaptive Shrinking Cell (ASC) scheme. This novel optimization problem is solved here (using a variety of multi-particle initial configurations) to find the dense packings of each of the Platonic solids in three-dimensional Euclidean space R3 , except for the cube, which is the only Platonic solid that tiles space. We find the densest known packings of tetrahedra, icosahedra, dodecahedra, and octahedra with densities 0.823, 0.836, 0.904, and 0.947, respectively. It is noteworthy that the densest tetrahedral packing possesses no long-range order. Unlike the densest tetrahedral packing, which must not be a Bravais lattice packing, the densest packings of the other non-tiling Platonic solids that we obtain are their previously known optimal (Bravais) lattice packings. We also derive a simple upper bound on the maximal density of packings of congruent nonspherical particles, and apply it to Platonic solids, Archimedean solids, superballs and ellipsoids. Our simulation results, rigorous upper bounds, and other theoretical arguments lead us to the conjecture that the densest packings of Platonic and Archimedean solids with central symmetry are given by their corresponding densest lattice packings. In addition, we conjecture that the optimal packing of any convex, congruent polyhedron without central symmetry generally is not a lattice packing.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-09-04T19:43:51Z</published>
+    <arxiv:comment>To appear in Phys. Rev. E. The paper is a sequel of a recent Nature paper, i.e., Nature 460, 876 (2009). In this paper, we reported a new packing of tetrahedra with higher density 0.823 than that reported in Nature (0.782). The paper is 52 pages, including 14 figures and 4 tables</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.80.041104</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.80.041104" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0908.4107v1</id>
+    <title>Dense Packings of the Platonic and Archimedean Solids</title>
+    <updated>2009-08-27T23:05:48Z</updated>
+    <link href="https://arxiv.org/abs/0908.4107v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0908.4107v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Dense packings have served as useful models of the structure of liquid, glassy and crystal states of matter, granular media, heterogeneous materials, and biological systems. Probing the symmetries and other mathematical properties of the densest packings is a problem of long-standing interest in discrete geometry and number theory. The preponderance of previous work has focused on spherical particles, and very little is known about dense polyhedral packings. We formulate the problem of generating dense packings of polyhedra within an adaptive fundamental cell subject to periodic boundary conditions as an optimization problem, which we call the Adaptive Shrinking Cell (ASC) scheme. This novel optimization problem is solved here (using a variety of multi-particle initial configurations) to find dense packings of each of the Platonic solids in three-dimensional Euclidean space. We find the densest known packings of tetrahedra, octahedra, dodecahedra and icosahedra with densities $0.782...$, $0.947...$, $0.904...$, and $0.836...$, respectively. Unlike the densest tetrahedral packing, which must be a non-Bravais lattice packing, the densest packings of the other non-tiling Platonic solids that we obtain are their previously known optimal (Bravais) lattice packings. Our simulations results, rigorous upper bounds that we derive, and theoretical arguments lead us to the strong conjecture that the densest packings of the Platonic and Archimedean solids with central symmetry are given by their corresponding densest lattice packings. This is the analog of Kepler's sphere conjecture for these solids.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-08-27T23:05:48Z</published>
+    <arxiv:comment>18 pages, 4 figures. In the published version of this paper in Nature (described below), "P6" should be "A1" in Figure 1</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Nature, vol. 460, 876-879 (2009)</arxiv:journal_ref>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <arxiv:doi>10.1038/nature08239</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/nature08239" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0712.0420v1</id>
+    <title>Dense Packings of Superdisks and the Role of Symmetry</title>
+    <updated>2007-12-04T01:26:19Z</updated>
+    <link href="https://arxiv.org/abs/0712.0420v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0712.0420v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We construct the densest known two-dimensional packings of superdisks in the plane whose shapes are defined by |x^(2p) + y^(2p)| &lt;= 1, which contains both convex-shaped particles (p &gt; 0.5, with the circular-disk case p = 1) and concave-shaped particles (0 &lt; p &lt; 0.5). The packings of the convex cases with p 1 generated by a recently developed event-driven molecular dynamics (MD) simulation algorithm [Donev, Torquato and Stillinger, J. Comput. Phys. 202 (2005) 737] suggest exact constructions of the densest known packings. We find that the packing density (covering fraction of the particles) increases dramatically as the particle shape moves away from the "circular-disk" point (p = 1). In particular, we find that the maximal packing densities of superdisks for certain p 6 = 1 are achieved by one of the two families of Bravais lattice packings, which provides additional numerical evidence for Minkowski's conjecture concerning the critical determinant of the region occupied by a superdisk. Moreover, our analysis on the generated packings reveals that the broken rotational symmetry of superdisks influences the packing characteristics in a non-trivial way. We also propose an analytical method to construct dense packings of concave superdisks based on our observations of the structural properties of packings of convex superdisks.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-12-04T01:26:19Z</published>
+    <arxiv:comment>15 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.100.245504</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.100.245504" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0707.4263v1</id>
+    <title>Toward the Jamming Threshold of Sphere Packings: Tunneled Crystals</title>
+    <updated>2007-07-28T21:39:13Z</updated>
+    <link href="https://arxiv.org/abs/0707.4263v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0707.4263v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We have discovered a new family of three-dimensional crystal sphere packings that are strictly jammed (i.e., mechanically stable) and yet possess an anomalously low density. This family constitutes an uncountably infinite number of crystal packings that are subpackings of the densest crystal packings and are characterized by a high concentration of self-avoiding "tunnels" (chains of vacancies) that permeate the structures. The fundamental geometric characteristics of these tunneled crystals command interest in their own right and are described here in some detail. These include the lattice vectors (that specify the packing configurations), coordination structure, Voronoi cells, and density fluctuations. The tunneled crystals are not only candidate structures for achieving the jamming threshold (lowest-density rigid packing), but may have substantially broader significance for condensed matter physics and materials science.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-07-28T21:39:13Z</published>
+    <arxiv:comment>19 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <arxiv:doi>10.1063/1.2802184</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.2802184" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0705.1482v2</id>
+    <title>Estimates of the optimal density and kissing number of sphere packings in high dimensions</title>
+    <updated>2007-05-10T20:31:52Z</updated>
+    <link href="https://arxiv.org/abs/0705.1482v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0705.1482v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The problem of finding the asymptotic behavior of the maximal density of sphere packings in high Euclidean dimensions is one of the most fascinating and challenging problems in discrete geometry. One century ago, Minkowski obtained a rigorous lower bound that is controlled asymptotically by $1/2^d$, where $d$ is the Euclidean space dimension. An indication of the difficulty of the problem can be garnered from the fact that exponential improvement of Minkowski's bound has proved to be elusive, even though existing upper bounds suggest that such improvement should be possible. Using a statistical-mechanical procedure to optimize the density associated with a "test" pair correlation function and a conjecture concerning the existence of disordered sphere packings [S. Torquato and F. H. Stillinger, Experimental Math. {\bf 15}, 307 (2006)], the putative exponential improvement was found with an asymptotic behavior controlled by $1/2^{(0.77865...)d}$. Using the same methods, we investigate whether this exponential improvement can be further improved by exploring other test pair correlation functions correponding to disordered packings. We demonstrate that there are simpler test functions that lead to the same asymptotic result. More importantly, we show that there is a wide class of test functions that lead to precisely the same exponential improvement and therefore the asymptotic form $1/2^{(0.77865...)d}$ is much more general than previously surmised.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-05-10T14:10:42Z</published>
+    <arxiv:comment>23 pages, 4 figures, submitted to Phys. Rev. E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>A. Scardicchio</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1063/1.2897027</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.2897027" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0608362v1</id>
+    <title>Packing Hyperspheres in High-Dimensional Euclidean Spaces</title>
+    <updated>2006-08-16T18:44:40Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0608362v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0608362v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We present the first study of disordered jammed hard-sphere packings in four-, five- and six-dimensional Euclidean spaces. Using a collision-driven packing generation algorithm, we obtain the first estimates for the packing fractions of the maximally random jammed (MRJ) states for space dimensions $d=4$, 5 and 6 to be $φ_{MRJ} \simeq 0.46$, 0.31 and 0.20, respectively. To a good approximation, the MRJ density obeys the scaling form $φ_{MRJ}= c_1/2^d+(c_2 d)/2^d$, where $c_1=-2.72$ and $c_2=2.56$, which appears to be consistent with high-dimensional asymptotic limit, albeit with different coefficients. Calculations of the pair correlation function $g_{2}(r)$ and structure factor $S(k)$ for these states show that short-range ordering appreciably decreases with increasing dimension, consistent with a recently proposed ``decorrelation principle,'' which, among othe things, states that unconstrained correlations diminish as the dimension increases and vanish entirely in the limit $d \to \infty$. As in three dimensions (where $φ_{MRJ} \simeq 0.64$), the packings show no signs of crystallization, are isostatic, and have a power-law divergence in $g_{2}(r)$ at contact with power-law exponent $\simeq 0.4$. Across dimensions, the cumulative number of neighbors equals the kissing number of the conjectured densest packing close to where $g_{2}(r)$ has its first minimum. We obtain estimates for the freezing and melting desnities for the equilibrium hard-sphere fluid-solid transition, $φ_F \simeq 0.32$ and $φ_M \simeq 0.39$, respectively, for $d=4$, and $φ_F \simeq 0.19$ and $φ_M \simeq 0.24$, respectively, for $d=5$.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-08-16T18:44:40Z</published>
+    <arxiv:comment>28 pages, 9 figures. To appear in Physical Review E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>M. Skoge</name>
+    </author>
+    <author>
+      <name>A. Donev</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.74.041127</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.74.041127" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0608334v3</id>
+    <title>Hypoconstrained Jammed Packings of Nonspherical Hard Particles: Ellipses and Ellipsoids</title>
+    <updated>2006-12-19T20:36:08Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0608334v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0608334v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Continuing on recent computational and experimental work on jammed packings of hard ellipsoids [Donev et al., Science, vol. 303, 990-993] we consider jamming in packings of smooth strictly convex nonspherical hard particles. We explain why the isocounting conjecture, which states that for large disordered jammed packings the average contact number per particle is twice the number of degrees of freedom per particle (\bar{Z}=2d_{f}), does not apply to nonspherical particles. We develop first- and second-order conditions for jamming, and demonstrate that packings of nonspherical particles can be jammed even though they are hypoconstrained (\bar{Z}&lt;2d_{f}). We apply an algorithm using these conditions to computer-generated hypoconstrained ellipsoid and ellipse packings and demonstrate that our algorithm does produce jammed packings, even close to the sphere point. We also consider packings that are nearly jammed and draw connections to packings of deformable (but stiff) particles. Finally, we consider the jamming conditions for nearly spherical particles and explain quantitatively the behavior we observe in the vicinity of the sphere point.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-08-15T16:22:02Z</published>
+    <arxiv:comment>33 pages, third revision</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>A. Donev</name>
+    </author>
+    <author>
+      <name>R. Connelly</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.75.051304</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.75.051304" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0603316v1</id>
+    <title>Exactly Solvable Disordered Sphere-Packing Model in Arbitrary-Dimension Euclidean Spaces</title>
+    <updated>2006-03-11T21:11:49Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0603316v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0603316v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We introduce a generalization of the well-known random sequential addition (RSA) process for hard spheres in $d$-dimensional Euclidean space $\mathbb{R}^d$. We show that all of the $n$-particle correlation functions of this nonequilibrium model, in a certain limit called the "ghost" RSA packing, can be obtained analytically for all allowable densities and in any dimension. This represents the first exactly solvable disordered sphere-packing model in arbitrary dimension. The fact that the maximal density $φ(\infty)=1/2^d$ of the ghost RSA packing implies that there may be disordered sphere packings in sufficiently high $d$ whose density exceeds Minkowski's lower bound for Bravais lattices, the dominant asymptotic term of which is $1/2^d$. Indeed, we report on a conjectural lower bound on the density whose asymptotic behavior is controlled by $2^{-(0.77865...) d}$, thus providing the putative exponential improvement on Minkowski's 100-year-old bound. Our results suggest that the densest packings in sufficiently high dimensions may be disordered rather than periodic, implying the existence of disordered classical ground states for some continuous potentials.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-03-11T21:11:49Z</published>
+    <arxiv:comment>16 pages and 3 figures. This paper will be appearing in Physical Review E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.73.031106</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.73.031106" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0603183v1</id>
+    <title>Do Binary Hard Disks Exhibit an Ideal Glass Transition?</title>
+    <updated>2006-03-07T23:20:42Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0603183v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0603183v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We demonstrate that there is no ideal glass transition in a binary hard-disk mixture by explicitly constructing an exponential number of jammed packings with densities spanning the spectrum from the accepted ``amorphous'' glassy state to the phase-separated crystal. Thus the configurational entropy cannot be zero for an ideal amorphous glass, presumed distinct from the crystal in numerous theoretical and numerical estimates in the literature. This objection parallels our previous critique of the idea that there is a most-dense random (close) packing for hard spheres [Torquato et al, Phys. Rev. Lett., 84, 2064 (2000)].</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-03-07T23:20:42Z</published>
+    <arxiv:comment>Submitted for publication</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>A. Donev</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.96.225502</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.96.225502" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0508381v2</id>
+    <title>New Conjectural Lower Bounds on the Optimal Density of Sphere Packings</title>
+    <updated>2006-03-05T16:17:24Z</updated>
+    <link href="https://arxiv.org/abs/math/0508381v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0508381v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Sphere packings in high dimensions interest mathematicians and physicists and have direct applications in communications theory. Remarkably, no one has been able to provide exponential improvement on a 100-year-old lower bound on the maximal packing density due to Minkowski in $d$-dimensional Euclidean space $\Re^d$. The asymptotic behavior of this bound is controlled by $2^{-d}$ in high dimensions. Using an optimization procedure that we introduced earlier \cite{To02c} and a conjecture concerning the existence of disordered sphere packings in $\Re^d$, we obtain a provisional lower bound on the density whose asymptotic behavior is controlled by $2^{-0.7786... d}$, thus providing the putative exponential improvement of Minkowski's bound. The conjecture states that a hard-core nonnegative tempered distribution is a pair correlation function of a translationally invariant disordered sphere packing in $\Re^d$ for asymptotically large d if and only if the Fourier transform of the autocovariance function is nonnegative. The conjecture is supported by two explicit analytically characterized disordered packings, numerical simulations in low dimensions, known necessary conditions that only have relevance in very low dimensions, and the fact that we can recover the forms of known rigorous lower bounds. A byproduct of our approach is an asymptotic lower bound on the average kissing number whose behavior is controlled by $2^{0.2213... d}$, which is to be compared to the best known asymptotic lower bound on the individual kissing number of $2^{0.2075... d}$. Interestingly, our optimization procedure is precisely the dual of a primal linear program devised by Cohn and Elkies \cite{Co03} to obtain upper bounds on the density, and hence has implications for linear programming bounds.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-08-19T22:49:30Z</published>
+    <arxiv:comment>46 pages, 5 figures, 3 Tables. Note that the current title replaces the word "Provisional," which appeared in the original submission of August 19, 2005, with "Conjectural." The published version of this paper will be appearing in "Experimental Mathematics."</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0506707v1</id>
+    <title>Comment on "Jamming at zero temperature and zero applied stress: The epitome of disorder"</title>
+    <updated>2005-06-27T18:38:27Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0506707v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0506707v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  O'Hern, Silbert, Liu and Nagel [Phys. Rev. E. 68, 011306 (2003)] (OSLN) claim that a special point $J$ of a "jamming phase diagram" (in density, temperature, stress space) is related to random close packing of hard spheres, and that it represents, for their suggested definitions of jammed and random, the recently introduced maximally random jammed state. We point out several difficulties with their definitions and question some of their claims. Furthermore, we discuss the connections between their algorithm and other hard-sphere packing algorithms in the literature.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-06-27T18:38:27Z</published>
+    <arxiv:comment>4 pages of text, already published</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Phys. Rev. E, Vol. 70: 043301, 2004</arxiv:journal_ref>
+    <author>
+      <name>A. Donev</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>R. Connelly</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.70.043301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.70.043301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0506406v1</id>
+    <title>Unexpected Density Fluctuations in Jammed Disordered Sphere Packings</title>
+    <updated>2005-06-16T15:29:12Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0506406v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0506406v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We computationally study jammed disordered hard-sphere packings as large as a million particles. We show that the packings are saturated and hyperuniform, i.e., that local density fluctuations grow only as a logarithmically-augmented surface area rather than the volume of the window. The structure factor shows an unusual non-analytic linear dependence near the origin, $S(k)\sim|k|$. In addition to exponentially damped oscillations seen in liquids, this implies a weak power-law tail in the total correlation function, $h(r)\sim-r^{-4}$, and a long-ranged direct correlation function.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-06-16T15:29:12Z</published>
+    <arxiv:comment>Submitted for publication</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>A. Donev</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.95.090604</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.95.090604" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0408550v1</id>
+    <title>Pair Correlation Function Characteristics of Nearly Jammed Disordered and Ordered Hard-Sphere Packings</title>
+    <updated>2004-08-25T23:42:31Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0408550v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0408550v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study the approach to jamming in hard-sphere packings, and, in particular, the pair correlation function $g_{2}(r)$ around contact, both theoretically and computationally. Our computational data unambiguously separates the narrowing delta-function contribution to $g_{2}$ due to emerging interparticle contacts from the background contribution due to near contacts. The data also shows with unprecedented accuracy that disordered hard-sphere packings are strictly isostatic, i.e., the number of exact contacts in the jamming limit is exactly equal to the number of degrees of freedom, once rattlers are removed. For such isostatic packings, we derive a theoretical connection between the probability distribution of interparticle forces $P_{f}(f)$, which we measure computationally, and the contact contribution to $g_{2}$. We verify this relation for computationally-generated isostatic packings that are representative of the maximally jammed random state. We clearly observe a maximum in $P_{f}$ and a nonzero probability of zero force. We computationally observe an unusual power-law divergence in the near-contact contribution to $g_{2}$, persistent even in the jamming limit, with an exponent of -0.4. We also present the first computational data on the contact-contribution to $g_{2}$ for vacancy-diluted FCC crystal packings and also investigate partially crystallized packings along the transition from maximally disordered to fully ordered packings. Unlike previous studies, we find that ordering has a significant impact on the shape of $P_{f}$ for small forces.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-08-25T23:42:31Z</published>
+    <arxiv:comment>Submitted for publication</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>A. Donev</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.71.011105</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.71.011105" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0207084v2</id>
+    <title>Controlling the Short-Range Order and Packing Densities of Many-Particle Systems</title>
+    <updated>2002-08-11T21:01:22Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0207084v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0207084v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Questions surrounding the spatial disposition of particles in various condensed-matter systems continue to pose many theoretical challenges. This paper explores the geometric availability of amorphous many-particle configurations that conform to a given pair correlation function g(r). Such a study is required to observe the basic constraints of non-negativity for g(r) as well as for its structure factor S(k). The hard sphere case receives special attention, to help identify what qualitative features play significant roles in determining upper limits to maximum amorphous packing densities. For that purpose, a five-parameter test family of g's has been considered, which incorporates the known features of core exclusion, contact pairs, and damped oscillatory short-range order beyond contact. Numerical optimization over this five-parameter set produces a maximum-packing value for the fraction of covered volume, and about 5.8 for the mean contact number, both of which are within the range of previous experimental and simulational packing results. However, the corresponding maximum-density g(r) and S(k) display some unexpected characteristics. A byproduct of our investigation is a lower bound on the maximum density for random sphere packings in $d$ dimensions, which is sharper than a well-known lower bound for regular lattice packings for d &gt;= 3.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-07-02T20:36:00Z</published>
+    <arxiv:comment>Appeared in Journal of Physical Chemistry B, vol. 106, 8354 (2002). Note Errata for the journal article concerning typographical errors in Eq. (11) can be found at http://cherrypit.princeton.edu/papers.html However, the current draft on Cond-Mat (posted on August 8, 2002) is correct.</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0112319v1</id>
+    <title>Multiplicity of Generation, Selection, and Classification Procedures for Jammed Hard-Particle Packings</title>
+    <updated>2001-12-17T19:31:25Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0112319v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0112319v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Hard-particle packings have served as useful starting points to study the structure of diverse systems such as liquids, living cells, granular media, glasses, and amorphous solids. Howard Reiss has played a major role in helping to illuminate our understanding of hard-particle systems, which still offer scientists many interesting conundrums. Jammed configurations of hard particles are of great fundamental and practical interest. What one precisely means by a "jammed" configuration is quite subtle and considerable ambiguity remains in the literature on this question. We will show that there is a multiplicity of generation, selection, and classification procedures for jammed configurations of identical d-dimensional spheres. We categorize common ordered lattices according to our definitions and discuss implications for random disk and sphere packings. We also show how the concept of rigidity percolation (which has been used to understand the mechanical properties of network glasses) can be generalized to further characterize hard-sphere packings.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2001-12-17T19:31:25Z</published>
+    <arxiv:comment>18 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>The Journal of Physical Chemistry B; 2001; 105(47); 11849-11853</arxiv:journal_ref>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+  </entry>
+</feed>

@@ -387,7 +387,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These eleven research reports are the durable topical syntheses:
+These twelve research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -400,6 +400,7 @@ These eleven research reports are the durable topical syntheses:
 | [Public Sources Beyond n = 100](docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md) | Which catalogues carry geometry above 100, their reuse terms, and why 324 is a source boundary |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | Historical corrections, the three memo arguments, and a reusable conditional counting control |
 | [Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | What “solve to `n = 100`” actually asks for, what the record engines do, and why the move set rather than the cooling schedule is the binding constraint |
+| [Physics and Simulation Mechanisms for Square Packing](docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md) | Inflation, shrinking cells, constraint projection, contact solvers, smoothing continuation and differentiable simulation, and which of them could recover a record cold |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | Exact verification, comparison with the current record, source attribution, and bounded follow-up |
 | [The Best-Known n = 26 Packing](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | Dated literature and source search, exact score normalization, and the limits of the best-known claim |
 
@@ -621,7 +622,7 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── development.md          Python setup, engineering boundaries, and validation
 ├── defects.md              Generated view of packing/defects.yaml
 ├── docs/project/           Reports, reviews, specs, postmortems, and dated handoffs
-├── docs/project/research/  The eleven research reports listed above
+├── docs/project/research/  The twelve research reports listed above
 ├── packing/                Code, data, and the research record
 │   ├── campaign/           Hypotheses, experiments, sessions, agendas, and ledger
 │   ├── frontier/           Per-case claims, evidence, generated views, and results

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/vDnJaeOIhIOS/FErKh8fcoeStiY</id>
+  <title>arXiv Query: search_query=abs:"event-driven" AND abs:"packing" AND (abs:"polygon" OR abs:"polyhedra" OR abs:"nonspherical")&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:24:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22event-driven%22+AND+(abs:%22packing%22+AND+(abs:%22polygon%22+OR+(abs:%22polyhedra%22+OR+abs:%22nonspherical%22)))&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2111.14954v2</id>
+    <title>Characterization of Void Space, Large-Scale Structure, and Transport Properties of Maximally Random Jammed Packings of Superballs</title>
+    <updated>2022-05-06T16:43:30Z</updated>
+    <link href="https://arxiv.org/abs/2111.14954v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.14954v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dense, disordered packings of particles are useful models of low-temperature amorphous phases of matter, biological systems, granular media, and colloidal systems. The study of dense packings of nonspherical particles enables one to ascertain how rotational degrees of freedom affect packing behavior. Here, we study superballs, a large family of deformations of the sphere, defined in three dimensions by $|x_1|^{2p}+|x_2|^{2p}+|x_3|^{2p}\leq1$, where $p&gt;0$ is a deformation parameter indicating to what extent the shape deviates from a sphere. As $p$ increases from the sphere point ($p=1$), the superball attains cubic symmetry, and attains octahedral symmetry when $p&lt;1$. Previous characterization of superball packings has shown that they have a maximally random jammed (MRJ) state, whose properties (e.g., packing fraction $φ$) vary nonanalytically as $p$ diverges from unity. Here, we use an event-driven molecular dynamics algorithm to produce MRJ superball packings. We characterize their large-scale structure by examining the small-$Q$ behavior of their structure factors and spectral densities, which indicate these packings are effectively hyperuniform. We show that the mean width $\bar{w}$ is a useful length scale to make distances dimensionless in order to compare systematically superballs of different shape. We also compute the complementary cumulative pore-size distribution $F(δ)$ and find the pore sizes tend to decrease as $|1-p|$ increases. From $F(δ)$, we estimate the fluid permeability, mean survival time, and principal diffusion relaxation time of the packings. Additionally, we compute the diffusion spreadability and find the long-time power-law scaling indicates these packings are hyperuniform. Our results can be used to help inform the design of granular materials with targeted densities and transport properties.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-29T21:03:45Z</published>
+    <arxiv:comment>16 Pages, 17 Figures. SI: 4 Pages, 6 Figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review Materials, 6 025603 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Charles Emmett Maher</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevMaterials.6.025603</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevMaterials.6.025603" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0405089v1</id>
+    <title>Neighbor List Collision-Driven Molecular Dynamics Simulation for Nonspherical Particles. I. Algorithmic Details II. Applications to Ellipses and Ellipsoids</title>
+    <updated>2004-05-17T13:48:21Z</updated>
+    <link href="https://arxiv.org/abs/physics/0405089v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0405089v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In the first part of a series of two papers, we present in considerable detail a collision-driven molecular dynamics algorithm for a system of nonspherical particles, within a parallelepiped simulation domain, under both periodic or hard-wall boundary conditions. The algorithm extends previous event-driven molecular dynamics algorithms for spheres. We present a novel partial-update near-neighbor list (NNL) algorithm that is superior to previous algorithms at high densities, without compromising the correctness of the algorithm. This efficiency of the algorithm is further increased for systems of very aspherical particles by using bounding sphere complexes (BSC). In the second part of this series of papers we apply the algorithm presented in the first part of this series of papers to systems of hard ellipses and ellipsoids. The theoretical machinery needed to treat such particles, including the overlap potentials, is developed in full detail. We describe an algorithm for predicting the time of collision for two moving ellipses or ellipsoids. We present performance results for our implementation of the algorithm. The practical utility of the algorithm is demonstrated by presenting several interesting physical applications, including the generation of jammed packings inside spherical containers, the study of contact force chains in jammed packings, and melting the densest-known equilibrium crystals of prolate spheroids.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-17T13:48:21Z</published>
+    <arxiv:comment>Two-paper series, 45 pages per paper, 90 pages total. To be submitted to JCP</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <author>
+      <name>Aleksandar Donev</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+  </entry>
+</feed>

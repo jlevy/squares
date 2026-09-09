@@ -1,0 +1,949 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/JDl3qSlbSx4Ux/2PaYS1hKJn1+E</id>
+  <title>arXiv Query: search_query=all:"graduated non-convexity" OR all:"graduated nonconvexity"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:48Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22graduated+non-convexity%22+OR+all:%22graduated+nonconvexity%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.21008v1</id>
+    <title>Triangulation-Free Bundle Adjustment with Graduated Non-Convexity for Camera Pose Refinement from Coarse Priors</title>
+    <updated>2026-08-21T11:54:20Z</updated>
+    <link href="https://arxiv.org/abs/2608.21008v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.21008v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mobile AR frameworks attach a metric pose prior to every casual phone capture, and turning it into reconstruction-grade poses cheaply on CPU is the step before novel-view synthesis. The least a refiner owes an accurate prior is not to make it worse. The workhorse refiner does. On 15 ScanNet++ iPhone room captures, COLMAP triangulation plus prior-seeded bundle adjustment degrades an accurate ARKit prior in all 15, 0.55 degrees to 0.74 degrees by scene-mean.
+  The cause is the seeding. Structure is triangulated from the prior before anything is optimized, so the prior's error is baked into the structure the optimizer trusts. We remove the triangulation. Every keypoint owns a scalar depth along its own back-projected ray and each match contributes two symmetric cross-projection residuals, so structure is re-expressed at every iterate. The same solve holds the room prior at 0.57 degrees and never fails in 330 perturbed room runs, and at object scale reaches 0.265 degrees/1.80 mm from a prior at 0.456 degrees in a median of 10 s per scene on one CPU, against 2.5 GPU-hours for a learned refiner.
+  Because no structure is committed, the objective also admits graduated non-convexity, which measures how deep the defect goes. Classical refinement collapses past 1-2 degrees of prior error, barely beyond a real ARKit prior, and no classical refinement arm survives 32 degrees. Ours recovers 425 of 425 runs through 16 degrees/80 mm and 85% at 32 degrees/160 mm, and perturbed rooms through 32 degrees.
+  Nominal object-scale accuracy is on par rather than better, on a benchmark at its own noise floor, where classical bundle adjustment is a strong baseline absent from the literature. One scene fails for every solver already at zero perturbation. Re-mapping from position priors matches us in the prior's frame but discards it, so it cannot exploit a prior worth keeping or be warm-started.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-21T11:54:20Z</published>
+    <arxiv:comment>25 pages, 3 figures. 18-scene MobileBrick evaluation, 15-scene ScanNet++ room-scale campaign, plus LaMAR. Code to be released under Apache-2.0</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Nikolaos Kyriazis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.15959v1</id>
+    <title>Multibit Quantized Precoding for MU-mMIMO</title>
+    <updated>2026-07-17T13:47:46Z</updated>
+    <link href="https://arxiv.org/abs/2607.15959v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.15959v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a novel multibit quantized precoding method for the downlink of multi-user massive MIMO systems with low-resolution digital-to-analog converters. The new method, termed multibit quantized precoding (MQP), enforces the finite-alphabet constraint through an l0-norm penalty, approximated by a smooth surrogate so as to yield a reformulated problem, which is then convexized via fractional programming, ultimately extending quantized precoding beyond 1-bit alphabets. The regularization parameter of the proposed method is selected via a discrepancy principle integrated with graduated non-convexity continuation, resulting in a principled and reproducible hyperparameter tuning method and an efficient iterative algorithm with a closed-form, least-squares-type update per iteration. In order to further reduce the computational complexity of the method, we include a Gaussian belief propagation (GaBP) step for turning the least-squares update in linear-time. Simulations performed for systems with different sizes demonstrate that both methods, namely the MQP with and without GaBP, achieve competitive or superior error-rate performance compared to state-of-the-art quantized precoding algorithms under various channel conditions.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-17T13:47:46Z</published>
+    <arxiv:comment>Submitted to Transactions on Signal Processing</arxiv:comment>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Getuar Rexhepi</name>
+    </author>
+    <author>
+      <name>Shreesal Shrestha</name>
+    </author>
+    <author>
+      <name>Christoph Studer</name>
+    </author>
+    <author>
+      <name>Giuseppe Thadeu Freitas de Abreu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.00176v1</id>
+    <title>SHIFT: Robust Double Machine Learning for Average Dose-Response Functions under Heavy-Tailed Contamination</title>
+    <updated>2026-04-30T19:51:35Z</updated>
+    <link href="https://arxiv.org/abs/2605.00176v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.00176v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Double-machine-learning pipelines for the Average Dose-Response Function rely on kernel-weighted local-linear smoothers, which inherit unbounded functional influence: a single outlier within a kernel window biases the curve across the entire window. We introduce SHIFT (Self-calibrated Heavy-tail Inlier-Fit with Tempering), a robust DML estimator combining cross-fit nuisance orthogonalization with a kernel-local Welsch-loss second stage optimized by Graduated Non-Convexity, and -- the principal design choice -- a defensive OLS refit whose inlier cutoff is scaled by post-GNC residual MAD rather than the raw-outcome MAD. On a localized-contamination stress test at $p=0.25$ this design choice drops level-RMSE from 1.03 to 0.33 while leaving clean and uniformly-contaminated runs unchanged. Across 1,400 main-sweep fits, SHIFT has competitive worst-case shape recovery (RMSE $0.325$ at $p=0.25$, second to Huber-DML's $0.276$); among the three methods with worst-case RMSE below $0.35$, only SHIFT emits a non-uniform per-sample weight vector, recovering the ground-truth outlier mask at mean $F_1 \approx 0.96$ (range $0.945$--$0.968$) on Gaussian-jump DGPs. We pair the estimator with a six-technique Extreme Value Theory diagnostic suite (Hill, GPD-MLE/PWM, GEV, Mean Excess, parameter stability, causal tail coefficient) that lets a practitioner distinguish Frechet from Weibull regimes and choose between SHIFT and L1 alternatives on empirical grounds. Extensions to binary-treatment CATE (Huber pseudo-outcome X-Learner) and time-series ADRF (block-CV + rolling MAD) are included. A counter-intuitive ablation: linear nuisance models (Ridge, Lasso) outperform gradient-boosted nuisances for robust DML under uniform contamination, inverting the usual more-flexible-is-better heuristic.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-30T19:51:35Z</published>
+    <arxiv:comment>77 pages, 43 figures, 35 tables. Code and raw CSVs: https://github.com/EichiUehara/ADRF-Robust-DML</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Eichi Uehara</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.27175v1</id>
+    <title>Global Sampling-Based Trajectory Optimization for Contact-Rich Manipulation via KernelSOS</title>
+    <updated>2026-04-29T20:24:41Z</updated>
+    <link href="https://arxiv.org/abs/2604.27175v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.27175v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Contact-rich manipulation is challenging due to its high dimensionality, the requirement for long time horizons, and the presence of hybrid contact dynamics. Sampling-based methods have become a popular approach for this class of problems, but without explicit mechanisms for global exploration, they are susceptible to converging to poor local minima. In this paper, we introduce Global-MPPI, a unified trajectory optimization framework that integrates global exploration and local refinement. At the global level, we leverage kernel sum-of-squares optimization to identify globally promising regions of the solution space. To enable reliable performance for the non-smooth landscapes inherent to contact-rich manipulation, we introduce a graduated non-convexity strategy based on log-sum-exp smoothing, which transitions the optimization landscape from a smoothed surrogate to the original non-smooth objective. Finally, we employ the model-predictive path integral method to locally refine the solution. We evaluate Global-MPPI on high-dimensional, long-horizon contact-rich tasks, including the PushT task and dexterous in-hand manipulation. Experimental results demonstrate that our approach robustly uncovers high-quality solutions, achieving faster convergence and lower final costs compared to existing baseline methods.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-29T20:24:41Z</published>
+    <arxiv:comment>8 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Zhongqi Wei</name>
+    </author>
+    <author>
+      <name>Frederike Dümbgen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.14662v1</id>
+    <title>Advances in Global Solvers for 3D Vision</title>
+    <updated>2026-02-16T11:40:32Z</updated>
+    <link href="https://arxiv.org/abs/2602.14662v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.14662v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Global solvers have emerged as a powerful paradigm for 3D vision, offering certifiable solutions to nonconvex geometric optimization problems traditionally addressed by local or heuristic methods. This survey presents the first systematic review of global solvers in geometric vision, unifying the field through a comprehensive taxonomy of three core paradigms: Branch-and-Bound (BnB), Convex Relaxation (CR), and Graduated Non-Convexity (GNC). We present their theoretical foundations, algorithmic designs, and practical enhancements for robustness and scalability, examining how each addresses the fundamental nonconvexity of geometric estimation problems. Our analysis spans ten core vision tasks, from Wahba problem to bundle adjustment, revealing the optimality-robustness-scalability trade-offs that govern solver selection. We identify critical future directions: scaling algorithms while maintaining guarantees, integrating data-driven priors with certifiable optimization, establishing standardized benchmarks, and addressing societal implications for safety-critical deployment. By consolidating theoretical foundations, practical advances, and broader impacts, this survey provides a unified perspective and roadmap toward certifiable, trustworthy perception for real-world applications. A continuously-updated literature summary and companion code tutorials are available at https://github.com/ericzzj1989/Awesome-Global-Solvers-for-3D-Vision.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-16T11:40:32Z</published>
+    <arxiv:comment>Comprehensive survey; 37 pages, 7 figures, 3 tables. Project page with literature tracking and code tutorials: https://github.com/ericzzj1989/Awesome-Global-Solvers-for-3D-Vision</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zhenjun Zhao</name>
+    </author>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Bangyan Liao</name>
+    </author>
+    <author>
+      <name>Yingping Zeng</name>
+    </author>
+    <author>
+      <name>Shaocheng Yan</name>
+    </author>
+    <author>
+      <name>Yingdong Gu</name>
+    </author>
+    <author>
+      <name>Peidong Liu</name>
+    </author>
+    <author>
+      <name>Yi Zhou</name>
+    </author>
+    <author>
+      <name>Haoang Li</name>
+    </author>
+    <author>
+      <name>Javier Civera</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.06565v2</id>
+    <title>GNC-Pose: Geometry-Aware GNC-PnP for Accurate 6D Pose Estimation</title>
+    <updated>2026-04-29T03:33:10Z</updated>
+    <link href="https://arxiv.org/abs/2512.06565v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.06565v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present GNC-Pose, a fully learning-free monocular 6D object pose estimation pipeline for textured objects that combines rendering-based initialization, geometry-aware correspondence weighting, and robust GNC optimization. Starting from coarse 2D-3D correspondences obtained through feature matching and rendering-based alignment, our method builds upon the Graduated Non-Convexity (GNC) principle and introduces a geometry-aware, cluster-based weighting mechanism that assigns robust per point confidence based on the 3D structural consistency of the model. This geometric prior and weighting strategy significantly stabilizes the optimization under severe outlier contamination. A final LM refinement further improve accuracy. We tested GNC-Pose on The YCB Object and Model Set, despite requiring no learned features, training data, or category-specific priors, GNC-Pose achieves competitive accuracy compared with both learning-based and learning-free methods, and offers a simple, robust, and practical solution for learning-free 6D pose estimation.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-06T20:48:39Z</published>
+    <arxiv:comment>1 figures, 2 tables, 14pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>Proc. Int. Conf. Pattern Recognit. (ICPR), 2026</arxiv:journal_ref>
+    <author>
+      <name>Xiujin Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.19284v1</id>
+    <title>The Unified Non-Convex Framework for Robust Causal Inference: Overcoming the Gaussian Barrier and Optimization Fragility</title>
+    <updated>2025-11-24T16:32:07Z</updated>
+    <link href="https://arxiv.org/abs/2511.19284v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.19284v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This document proposes a Unified Robust Framework that re-engineers the estimation of the Average Treatment Effect on the Overlap (ATO). It synthesizes gamma-Divergence for outlier robustness, Graduated Non-Convexity (GNC) for global optimization, and a "Gatekeeper" mechanism to address the impossibility of higher-order orthogonality in Gaussian regimes.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-24T16:32:07Z</published>
+    <arxiv:comment>10 pages, 1 table</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Eichi Uehara</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.07743v1</id>
+    <title>SANDRO: a Robust Solver with a Splitting Strategy for Point Cloud Registration</title>
+    <updated>2025-03-10T18:00:47Z</updated>
+    <link href="https://arxiv.org/abs/2503.07743v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.07743v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Point cloud registration is a critical problem in computer vision and robotics, especially in the field of navigation. Current methods often fail when faced with high outlier rates or take a long time to converge to a suitable solution. In this work, we introduce a novel algorithm for point cloud registration called SANDRO (Splitting strategy for point cloud Alignment using Non-convex anD Robust Optimization), which combines an Iteratively Reweighted Least Squares (IRLS) framework with a robust loss function with graduated non-convexity. This approach is further enhanced by a splitting strategy designed to handle high outlier rates and skewed distributions of outliers. SANDRO is capable of addressing important limitations of existing methods, as in challenging scenarios where the presence of high outlier rates and point cloud symmetries significantly hinder convergence. SANDRO achieves superior performance in terms of success rate when compared to the state-of-the-art methods, demonstrating a 20% improvement from the current state of the art when tested on the Redwood real dataset and 60% improvement when tested on synthetic data.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-10T18:00:47Z</published>
+    <arxiv:comment>Accepted to the IEEE International Conference on Robotics and Automation (ICRA) 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Michael Adlerstein</name>
+    </author>
+    <author>
+      <name>João Carlos Virgolino Soares</name>
+    </author>
+    <author>
+      <name>Angelo Bratta</name>
+    </author>
+    <author>
+      <name>Claudio Semini</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.13978v3</id>
+    <title>FracGM: A Fast Fractional Programming Technique for Geman-McClure Robust Estimator</title>
+    <updated>2024-11-21T00:33:46Z</updated>
+    <link href="https://arxiv.org/abs/2409.13978v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.13978v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Robust estimation is essential in computer vision, robotics, and navigation, aiming to minimize the impact of outlier measurements for improved accuracy. We present a fast algorithm for Geman-McClure robust estimation, FracGM, leveraging fractional programming techniques. This solver reformulates the original non-convex fractional problem to a convex dual problem and a linear equation system, iteratively solving them in an alternating optimization pattern. Compared to graduated non-convexity approaches, this strategy exhibits a faster convergence rate and better outlier rejection capability. In addition, the global optimality of the proposed solver can be guaranteed under given conditions. We demonstrate the proposed FracGM solver with Wahba's rotation problem and 3-D point-cloud registration along with relaxation pre-processing and projection post-processing. Compared to state-of-the-art algorithms, when the outlier rates increase from 20% to 80%, FracGM shows 53% and 88% lower rotation and translation increases. In real-world scenarios, FracGM achieves better results in 13 out of 18 outcomes, while having a 19.43% improvement in the computation time.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-21T02:01:55Z</published>
+    <arxiv:comment>8 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>IEEE Robotics and Automation Letters, 9(12), 11666-11673, 2024</arxiv:journal_ref>
+    <author>
+      <name>Bang-Shien Chen</name>
+    </author>
+    <author>
+      <name>Yu-Kai Lin</name>
+    </author>
+    <author>
+      <name>Jian-Yu Chen</name>
+    </author>
+    <author>
+      <name>Chih-Wei Huang</name>
+    </author>
+    <author>
+      <name>Jann-Long Chern</name>
+    </author>
+    <author>
+      <name>Ching-Cherng Sun</name>
+    </author>
+    <arxiv:doi>10.1109/LRA.2024.3495372</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LRA.2024.3495372" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.16837v3</id>
+    <title>A Certifiable Algorithm for Simultaneous Shape Estimation and Object Tracking</title>
+    <updated>2024-12-05T22:23:59Z</updated>
+    <link href="https://arxiv.org/abs/2406.16837v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.16837v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Applications from manipulation to autonomous vehicles rely on robust and general object tracking to safely perform tasks in dynamic environments. We propose the first certifiably optimal category-level approach for simultaneous shape estimation and pose tracking of an object of known category (e.g. a car). Our approach uses 3D semantic keypoint measurements extracted from an RGB-D image sequence, and phrases the estimation as a fixed-lag smoothing problem. Temporal constraints enforce the object's rigidity (fixed shape) and smooth motion according to a constant-twist motion model. The solutions to this problem are the estimates of the object's state (poses, velocities) and shape (paramaterized according to the active shape model) over the smoothing horizon. Our key contribution is to show that despite the non-convexity of the fixed-lag smoothing problem, we can solve it to certifiable optimality using a small-size semidefinite relaxation. We also present a fast outlier rejection scheme that filters out incorrect keypoint detections with shape and time compatibility tests, and wrap our certifiable solver in a graduated non-convexity scheme. We evaluate the proposed approach on synthetic and real data, showcasing its performance in a table-top manipulation scenario and a drone-based vehicle tracking application.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-24T17:45:52Z</published>
+    <arxiv:comment>Accepted to IEEE RA-L. 11 pages, 6 figures (with appendix). Code released at https://github.com/MIT-SPARK/certifiable_tracking. Video available at https://youtu.be/eTIlVD9pDtc</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Robotics and Automation Letters, vol. 9, no. 12, pp. 11873-11880, Dec. 2024</arxiv:journal_ref>
+    <author>
+      <name>Lorenzo Shaikewitz</name>
+    </author>
+    <author>
+      <name>Samuel Ubellacker</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+    <arxiv:doi>10.1109/LRA.2024.3501684</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LRA.2024.3501684" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.11176v3</id>
+    <title>Outlier-Robust Long-Term Robotic Mapping Leveraging Ground Segmentation</title>
+    <updated>2024-05-27T11:54:28Z</updated>
+    <link href="https://arxiv.org/abs/2405.11176v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.11176v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite the remarkable advancements in deep learning-based perception technologies and simultaneous localization and mapping (SLAM), one can face the failure of these approaches when robots encounter scenarios outside their modeled experiences (here, the term modeling encompasses both conventional pattern finding and data-driven approaches). In particular, because learning-based methods are prone to catastrophic failure when operated in untrained scenes, there is still a demand for conventional yet robust approaches that work out of the box in diverse scenarios, such as real-world robotic services and SLAM competitions. In addition, the dynamic nature of real-world environments, characterized by changing surroundings over time and the presence of moving objects, leads to undesirable data points that hinder a robot from localization and path planning. Consequently, methodologies that enable long-term map management, such as multi-session SLAM and static map building, become essential. Therefore, to achieve a robust long-term robotic mapping system that can work out of the box, first, I propose (i) fast and robust ground segmentation to reject the ground points, which are featureless and thus not helpful for localization and mapping. Then, by employing the concept of graduated non-convexity (GNC), I propose (ii) outlier-robust registration with ground segmentation that overcomes the presence of gross outliers within the feature matching results, and (iii) hierarchical multi-session SLAM that not only uses our proposed GNC-based registration but also employs a GNC solver to be robust against outlier loop candidates. Finally, I propose (iv) instance-aware static map building that can handle the presence of moving objects in the environment based on the observation that most moving objects in urban environments are inevitably in contact with the ground.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-18T04:56:15Z</published>
+    <arxiv:comment>RSS Pioneers 2024 Research Statement</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Hyungtae Lim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.18699v2</id>
+    <title>Convergence Properties of Score-Based Models for Linear Inverse Problems Using Graduated Optimisation</title>
+    <updated>2024-08-12T18:12:44Z</updated>
+    <link href="https://arxiv.org/abs/2404.18699v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.18699v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The incorporation of generative models as regularisers within variational formulations for inverse problems has proven effective across numerous image reconstruction tasks. However, the resulting optimisation problem is often non-convex and challenging to solve. In this work, we show that score-based generative models (SGMs) can be used in a graduated optimisation framework to solve inverse problems. We show that the resulting graduated non-convexity flow converge to stationary points of the original problem and provide a numerical convergence analysis of a 2D toy example. We further provide experiments on computed tomography image reconstruction, where we show that this framework is able to recover high-quality images, independent of the initial value. The experiments highlight the potential of using SGMs in graduated optimisation frameworks. The source code is publicly available on GitHub.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-29T13:47:59Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Pascal Fernsel</name>
+    </author>
+    <author>
+      <name>Željko Kereta</name>
+    </author>
+    <author>
+      <name>Alexander Denker</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.18934v2</id>
+    <title>RELEAD: Resilient Localization with Enhanced LiDAR Odometry in Adverse Environments</title>
+    <updated>2024-03-15T10:55:39Z</updated>
+    <link href="https://arxiv.org/abs/2402.18934v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.18934v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LiDAR-based localization is valuable for applications like mining surveys and underground facility maintenance. However, existing methods can struggle when dealing with uninformative geometric structures in challenging scenarios. This paper presents RELEAD, a LiDAR-centric solution designed to address scan-matching degradation. Our method enables degeneracy-free point cloud registration by solving constrained ESIKF updates in the front end and incorporates multisensor constraints, even when dealing with outlier measurements, through graph optimization based on Graduated Non-Convexity (GNC). Additionally, we propose a robust Incremental Fixed Lag Smoother (rIFL) for efficient GNC-based optimization. RELEAD has undergone extensive evaluation in degenerate scenarios and has outperformed existing state-of-the-art LiDAR-Inertial odometry and LiDAR-Visual-Inertial odometry methods.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-29T08:01:47Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>published in ICRA 2024</arxiv:journal_ref>
+    <author>
+      <name>Zhiqiang Chen</name>
+    </author>
+    <author>
+      <name>Hongbo Chen</name>
+    </author>
+    <author>
+      <name>Yuhua Qi</name>
+    </author>
+    <author>
+      <name>Shipeng Zhong</name>
+    </author>
+    <author>
+      <name>Dapeng Feng</name>
+    </author>
+    <author>
+      <name>Wu Jin</name>
+    </author>
+    <author>
+      <name>Weisong Wen</name>
+    </author>
+    <author>
+      <name>Ming Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.06323v1</id>
+    <title>Kimera2: Robust and Accurate Metric-Semantic SLAM in the Real World</title>
+    <updated>2024-01-12T02:25:04Z</updated>
+    <link href="https://arxiv.org/abs/2401.06323v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.06323v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present improvements to Kimera, an open-source metric-semantic visual-inertial SLAM library. In particular, we enhance Kimera-VIO, the visual-inertial odometry pipeline powering Kimera, to support better feature tracking, more efficient keyframe selection, and various input modalities (eg monocular, stereo, and RGB-D images, as well as wheel odometry). Additionally, Kimera-RPGO and Kimera-PGMO, Kimera's pose-graph optimization backends, are updated to support modern outlier rejection methods - specifically, Graduated-Non-Convexity - for improved robustness to spurious loop closures. These new features are evaluated extensively on a variety of simulated and real robotic platforms, including drones, quadrupeds, wheeled robots, and simulated self-driving cars. We present comparisons against several state-of-the-art visual-inertial SLAM pipelines and discuss strengths and weaknesses of the new release of Kimera. The newly added features have been released open-source at https://github.com/MIT-SPARK/Kimera.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-12T02:25:04Z</published>
+    <arxiv:comment>Presented at ISER 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Marcus Abate</name>
+    </author>
+    <author>
+      <name>Yun Chang</name>
+    </author>
+    <author>
+      <name>Nathan Hughes</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.06765v1</id>
+    <title>Efficient Graduated Non-Convexity for Pose Graph Optimization</title>
+    <updated>2023-10-10T16:40:38Z</updated>
+    <link href="https://arxiv.org/abs/2310.06765v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.06765v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a novel approach to Graduated Non-Convexity (GNC) and demonstrate its efficacy through its application in robust pose graph optimization, a key component in SLAM backends. Traditional GNC methods often rely on heuristic methods for GNC schedule, updating control parameter μ for escalating the non-convexity. In contrast, our approach leverages the properties of convex functions and convex optimization to identify the boundary points beyond which convexity is no longer guaranteed, thereby eliminating redundant optimization steps in existing methodologies and enhancing both speed and robustness. We show that our method outperforms the state-of-the-art method in terms of speed and accuracy when used for robust back-end pose graph optimization via GNC. Our work builds upon and enhances the open-source riSAM framework. Our implementation can be accessed from: https://github.com/SNU-DLLAB/EGNC-PGO</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-10T16:40:38Z</published>
+    <arxiv:comment>6 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Wonseok Kang</name>
+    </author>
+    <author>
+      <name>Jaehyun Kim</name>
+    </author>
+    <author>
+      <name>Jiseong Chung</name>
+    </author>
+    <author>
+      <name>Seungwon Choi</name>
+    </author>
+    <author>
+      <name>Tae-wan Kim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2308.11444v2</id>
+    <title>Adaptive Graduated Non-Convexity for Pose Graph Optimization</title>
+    <updated>2023-09-23T15:15:14Z</updated>
+    <link href="https://arxiv.org/abs/2308.11444v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.11444v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a novel approach to robust pose graph optimization based on Graduated Non-Convexity (GNC). Unlike traditional GNC-based methods, the proposed approach employs an adaptive shape function using B-spline to optimize the shape of the robust kernel. This aims to reduce GNC iterations, boosting computational speed without compromising accuracy. When integrated with the open-source riSAM algorithm, the method demonstrates enhanced efficiency across diverse datasets. Accompanying open-source code aims to encourage further research in this area. https://github.com/SNU-DLLAB/AGNC-PGO</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-22T13:51:10Z</published>
+    <arxiv:comment>4 pages, 3 figures. Accepted for the workshop on Robotic Perception and Mapping(ROPEM): Frontier Vision &amp; Learning Techniques, organized at the 2023 International Conference on Intelligent Robots and Systems (IROS)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Seungwon Choi</name>
+    </author>
+    <author>
+      <name>Wonseok Kang</name>
+    </author>
+    <author>
+      <name>Jiseong Chung</name>
+    </author>
+    <author>
+      <name>Jaehyun Kim</name>
+    </author>
+    <author>
+      <name>Tae-wan Kim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2307.12116v1</id>
+    <title>Pyramid Semantic Graph-based Global Point Cloud Registration with Low Overlap</title>
+    <updated>2023-07-22T16:05:23Z</updated>
+    <link href="https://arxiv.org/abs/2307.12116v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2307.12116v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Global point cloud registration is essential in many robotics tasks like loop closing and relocalization. Unfortunately, the registration often suffers from the low overlap between point clouds, a frequent occurrence in practical applications due to occlusion and viewpoint change. In this paper, we propose a graph-theoretic framework to address the problem of global point cloud registration with low overlap. To this end, we construct a consistency graph to facilitate robust data association and employ graduated non-convexity (GNC) for reliable pose estimation, following the state-of-the-art (SoTA) methods.
+  Unlike previous approaches, we use semantic cues to scale down the dense point clouds, thus reducing the problem size. Moreover, we address the ambiguity arising from the consistency threshold by constructing a pyramid graph with multi-level consistency thresholds. Then we propose a cascaded gradient ascend method to solve the resulting densest clique problem and obtain multiple pose candidates for every consistency threshold. Finally, fast geometric verification is employed to select the optimal estimation from multiple pose candidates. Our experiments, conducted on a self-collected indoor dataset and the public KITTI dataset, demonstrate that our method achieves the highest success rate despite the low overlap of point clouds and low semantic quality. We have open-sourced our code https://github.com/HKUST-Aerial-Robotics/Pagor for this project.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-07-22T16:05:23Z</published>
+    <arxiv:comment>Accepted by IROS2023</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Zhijian Qiao</name>
+    </author>
+    <author>
+      <name>Zehuan Yu</name>
+    </author>
+    <author>
+      <name>Huan Yin</name>
+    </author>
+    <author>
+      <name>Shaojie Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.06869v5</id>
+    <title>An Adaptive Graduated Nonconvexity Loss Function for Robust Nonlinear Least Squares Solutions</title>
+    <updated>2024-07-30T16:08:52Z</updated>
+    <link href="https://arxiv.org/abs/2305.06869v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.06869v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many problems in robotics, such as estimating the state from noisy sensor data or aligning two point clouds, can be posed and solved as least-squares problems. Unfortunately, vanilla nonminimal solvers for least-squares problems are notoriously sensitive to outliers. As such, various robust loss functions have been proposed to reduce the sensitivity to outliers. Examples of loss functions include pseudo-Huber, Cauchy, and Geman-McClure. Recently, these loss functions have been generalized into a single loss function that enables the best loss function to be found adaptively based on the distribution of the residuals. However, even with the generalized robust loss function, most nonminimal solvers can only be solved locally given a prior state estimate due to the nonconvexity of the problem. The first contribution of this paper is to combine graduated nonconvexity (GNC) with the generalized robust loss function to solve least-squares problems without a prior state estimate and without the need to specify a loss function. Moreover, existing loss functions, including the generalized loss function, are based on Gaussian-like distribution. However, residuals are often defined as the squared norm of a multivariate error and distributed in a Chi-like fashion. The second contribution of this paper is to apply a norm-aware adaptive robust loss function within a GNC framework. The proposed approach enables a GNC formulation of a generalized loss function such that GNC can be readily applied to a wider family of loss functions. Furthermore, simulations and experiments demonstrate that the proposed method is more robust compared to non-GNC counterparts, and yields faster convergence times compared to other GNC formulations.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-11T15:11:15Z</published>
+    <arxiv:comment>Accepted to IEEE Transaction on Robotics 15 pages 11 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Kyungmin Jung</name>
+    </author>
+    <author>
+      <name>Thomas Hitchcox</name>
+    </author>
+    <author>
+      <name>James Richard Forbes</name>
+    </author>
+    <arxiv:doi>10.1109/TRO.2024.3434169</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TRO.2024.3434169" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.13962v2</id>
+    <title>4D iRIOM: 4D Imaging Radar Inertial Odometry and Mapping</title>
+    <updated>2023-04-03T03:53:59Z</updated>
+    <link href="https://arxiv.org/abs/2303.13962v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.13962v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Millimeter wave radar can measure distances, directions, and Doppler velocity for objects in harsh conditions such as fog. The 4D imaging radar with both vertical and horizontal data resembling an image can also measure objects' height. Previous studies have used 3D radars for ego-motion estimation. But few methods leveraged the rich data of imaging radars, and they usually omitted the mapping aspect, thus leading to inferior odometry accuracy. This paper presents a real-time imaging radar inertial odometry and mapping method, iRIOM, based on the submap concept. To deal with moving objects and multipath reflections, we use the graduated non-convexity method to robustly and efficiently estimate ego-velocity from a single scan. To measure the agreement between sparse non-repetitive radar scan points and submap points, the distribution-to-multi-distribution distance for matches is adopted. The ego-velocity, scan-to-submap matches are fused with the 6D inertial data by an iterative extended Kalman filter to get the platform's 3D position and orientation. A loop closure module is also developed to curb the odometry module's drift. To our knowledge, iRIOM based on the two modules is the first 4D radar inertial SLAM system. On our and third-party data, we show iRIOM's favorable odometry accuracy and mapping consistency against the FastLIO-SLAM and the EKFRIO. Also, the ablation study reveal the benefit of inertial data versus the constant velocity model, and scan-to-submap matching versus scan-to-scan matching.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-24T12:36:26Z</published>
+    <arxiv:comment>8 pages, 8 figures, 4 tables, the proofread version will appear on RA-L soon</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yuan Zhuang</name>
+    </author>
+    <author>
+      <name>Binliang Wang</name>
+    </author>
+    <author>
+      <name>Jianzhu Huai</name>
+    </author>
+    <author>
+      <name>Miao Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.01876v1</id>
+    <title>ORORA: Outlier-Robust Radar Odometry</title>
+    <updated>2023-03-03T12:14:03Z</updated>
+    <link href="https://arxiv.org/abs/2303.01876v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.01876v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Radar sensors are emerging as solutions for perceiving surroundings and estimating ego-motion in extreme weather conditions. Unfortunately, radar measurements are noisy and suffer from mutual interference, which degrades the performance of feature extraction and matching, triggering imprecise matching pairs, which are referred to as outliers. To tackle the effect of outliers on radar odometry, a novel outlier-robust method called \textit{ORORA} is proposed, which is an abbreviation of \textit{Outlier-RObust RAdar odometry}. To this end, a novel decoupling-based method is proposed, which consists of graduated non-convexity~(GNC)-based rotation estimation and anisotropic component-wise translation estimation~(A-COTE). Furthermore, our method leverages the anisotropic characteristics of radar measurements, each of whose uncertainty along the azimuthal direction is somewhat larger than that along the radial direction. As verified in the public dataset, it was demonstrated that our proposed method yields robust ego-motion estimation performance compared with other state-of-the-art methods. Our code is available at https://github.com/url-kaist/outlier-robust-radar-odometry.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-03T12:14:03Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Hyungtae Lim</name>
+    </author>
+    <author>
+      <name>Kawon Han</name>
+    </author>
+    <author>
+      <name>Gunhee Shin</name>
+    </author>
+    <author>
+      <name>Giseop Kim</name>
+    </author>
+    <author>
+      <name>Songcheol Hong</name>
+    </author>
+    <author>
+      <name>Hyun Myung</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.10502v1</id>
+    <title>Learning Gradually Non-convex Image Priors Using Score Matching</title>
+    <updated>2023-02-21T08:02:03Z</updated>
+    <link href="https://arxiv.org/abs/2302.10502v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.10502v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we propose a unified framework of denoising score-based models in the context of graduated non-convex energy minimization. We show that for sufficiently large noise variance, the associated negative log density -- the energy -- becomes convex. Consequently, denoising score-based models essentially follow a graduated non-convexity heuristic. We apply this framework to learning generalized Fields of Experts image priors that approximate the joint density of noisy images and their associated variances. These priors can be easily incorporated into existing optimization algorithms for solving inverse problems and naturally implement a fast and robust graduated non-convexity mechanism.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-21T08:02:03Z</published>
+    <arxiv:comment>13 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Erich Kobler</name>
+    </author>
+    <author>
+      <name>Thomas Pock</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.05020v4</id>
+    <title>Spectral Sparsification for Communication-Efficient Collaborative Rotation and Translation Estimation</title>
+    <updated>2023-08-16T16:20:51Z</updated>
+    <link href="https://arxiv.org/abs/2210.05020v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.05020v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose fast and communication-efficient optimization algorithms for multi-robot rotation averaging and translation estimation problems that arise from collaborative simultaneous localization and mapping (SLAM), structure-from-motion (SfM), and camera network localization applications. Our methods are based on theoretical relations between the Hessians of the underlying Riemannian optimization problems and the Laplacians of suitably weighted graphs. We leverage these results to design a collaborative solver in which robots coordinate with a central server to perform approximate second-order optimization, by solving a Laplacian system at each iteration. Crucially, our algorithms permit robots to employ spectral sparsification to sparsify intermediate dense matrices before communication, and hence provide a mechanism to trade off accuracy with communication efficiency with provable guarantees. We perform rigorous theoretical analysis of our methods and prove that they enjoy (local) linear rate of convergence. Furthermore, we show that our methods can be combined with graduated non-convexity to achieve outlier-robust estimation. Extensive experiments on real-world SLAM and SfM scenarios demonstrate the superior convergence rate and communication efficiency of our methods.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-10T21:28:49Z</published>
+    <arxiv:comment>Revised extended technical report (37 pages, 15 figures, 6 tables)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yulun Tian</name>
+    </author>
+    <author>
+      <name>Jonathan P. How</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.14359v2</id>
+    <title>Robust Incremental Smoothing and Mapping (riSAM)</title>
+    <updated>2023-04-27T15:45:24Z</updated>
+    <link href="https://arxiv.org/abs/2209.14359v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.14359v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a method for robust optimization for online incremental Simultaneous Localization and Mapping (SLAM). Due to the NP-Hardness of data association in the presence of perceptual aliasing, tractable (approximate) approaches to data association will produce erroneous measurements. We require SLAM back-ends that can converge to accurate solutions in the presence of outlier measurements while meeting online efficiency constraints. Existing robust SLAM methods either remain sensitive to outliers, become increasingly sensitive to initialization, or fail to provide online efficiency. We present the robust incremental Smoothing and Mapping (riSAM) algorithm, a robust back-end optimizer for incremental SLAM based on Graduated Non-Convexity. We demonstrate on benchmarking datasets that our algorithm achieves online efficiency, outperforms existing online approaches, and matches or improves the performance of existing offline methods.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-28T18:43:48Z</published>
+    <arxiv:comment>Accepted to ICRA 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Daniel McGann</name>
+    </author>
+    <author>
+      <name>John G. Rogers</name>
+    </author>
+    <author>
+      <name>Michael Kaess</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.08543v2</id>
+    <title>A Decoupled and Linear Framework for Global Outlier Rejection over Planar Pose Graph</title>
+    <updated>2023-03-19T04:31:35Z</updated>
+    <link href="https://arxiv.org/abs/2209.08543v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.08543v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a robust framework for the planar pose graph optimization contaminated by loop closure outliers. Our framework rejects outliers by first decoupling the robust PGO problem wrapped by a Truncated Least Squares kernel into two subproblems. Then, the framework introduces a linear angle representation to rewrite the first subproblem that is originally formulated with rotation matrices. The framework is configured with the Graduated Non-Convexity (GNC) algorithm to solve the two non-convex subproblems in succession without initial guesses. Thanks to the linearity properties of both the subproblems, our framework requires only linear solvers to optimally solve the optimization problems encountered in GNC. We extensively validate the proposed framework, named DEGNC-LAF (DEcoupled Graduated Non-Convexity with Linear Angle Formulation) in planar PGO benchmarks. It turns out that it runs significantly (sometimes up to over 30 times) faster than the standard and general-purpose GNC while resulting in high-quality estimates.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-18T11:49:44Z</published>
+    <arxiv:comment>7 pages, 4 figures. To appear in ICRA 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Tianyue Wu</name>
+    </author>
+    <author>
+      <name>Fei Gao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.13135v3</id>
+    <title>LAMP 2.0: A Robust Multi-Robot SLAM System for Operation in Challenging Large-Scale Underground Environments</title>
+    <updated>2022-07-09T00:09:57Z</updated>
+    <link href="https://arxiv.org/abs/2205.13135v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.13135v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Search and rescue with a team of heterogeneous mobile robots in unknown and large-scale underground environments requires high-precision localization and mapping. This crucial requirement is faced with many challenges in complex and perceptually-degraded subterranean environments, as the onboard perception system is required to operate in off-nominal conditions (poor visibility due to darkness and dust, rugged and muddy terrain, and the presence of self-similar and ambiguous scenes). In a disaster response scenario and in the absence of prior information about the environment, robots must rely on noisy sensor data and perform Simultaneous Localization and Mapping (SLAM) to build a 3D map of the environment and localize themselves and potential survivors. To that end, this paper reports on a multi-robot SLAM system developed by team CoSTAR in the context of the DARPA Subterranean Challenge. We extend our previous work, LAMP, by incorporating a single-robot front-end interface that is adaptable to different odometry sources and lidar configurations, a scalable multi-robot front-end to support inter- and intra-robot loop closure detection for large scale environments and multi-robot teams, and a robust back-end equipped with an outlier-resilient pose graph optimization based on Graduated Non-Convexity. We provide a detailed ablation study on the multi-robot front-end and back-end, and assess the overall system performance in challenging real-world datasets collected across mines, power plants, and caves in the United States. We also release our multi-robot back-end datasets (and the corresponding ground truth), which can serve as challenging benchmarks for large-scale underground SLAM.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-26T03:52:56Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yun Chang</name>
+    </author>
+    <author>
+      <name>Kamak Ebadi</name>
+    </author>
+    <author>
+      <name>Christopher E. Denniston</name>
+    </author>
+    <author>
+      <name>Muhammad Fadhil Ginting</name>
+    </author>
+    <author>
+      <name>Antoni Rosinol</name>
+    </author>
+    <author>
+      <name>Andrzej Reinke</name>
+    </author>
+    <author>
+      <name>Matteo Palieri</name>
+    </author>
+    <author>
+      <name>Jingnan Shi</name>
+    </author>
+    <author>
+      <name>Arghya Chatterjee</name>
+    </author>
+    <author>
+      <name>Benjamin Morrell</name>
+    </author>
+    <author>
+      <name>Ali-akbar Agha-mohammadi</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.04228v1</id>
+    <title>Practical, Fast and Robust Point Cloud Registration for 3D Scene Stitching and Object Localization</title>
+    <updated>2021-11-08T01:49:04Z</updated>
+    <link href="https://arxiv.org/abs/2111.04228v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.04228v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>3D point cloud registration ranks among the most fundamental problems in remote sensing, photogrammetry, robotics and geometric computer vision. Due to the limited accuracy of 3D feature matching techniques, outliers may exist, sometimes even in very large numbers, among the correspondences. Since existing robust solvers may encounter high computational cost or restricted robustness, we propose a novel, fast and highly robust solution, named VOCRA (VOting with Cost function and Rotating Averaging), for the point cloud registration problem with extreme outlier rates. Our first contribution is to employ the Tukey's Biweight robust cost to introduce a new voting and correspondence sorting technique, which proves to be rather effective in distinguishing true inliers from outliers even with extreme (99%) outlier rates. Our second contribution consists in designing a time-efficient consensus maximization paradigm based on robust rotation averaging, serving to seek inlier candidates among the correspondences. Finally, we apply Graduated Non-Convexity with Tukey's Biweight (GNC-TB) to estimate the correct transformation with the inlier candidates obtained, which is then used to find the complete inlier set. Both standard benchmarking and realistic experiments with application to two real-data problems are conducted, and we show that our solver VOCRA is robust against over 99% outliers and more time-efficient than the state-of-the-art competitors.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-08T01:49:04Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Lei Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.03349v2</id>
+    <title>Certifiably Optimal Outlier-Robust Geometric Perception: Semidefinite Relaxations and Scalable Global Optimization</title>
+    <updated>2022-05-29T23:37:55Z</updated>
+    <link href="https://arxiv.org/abs/2109.03349v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.03349v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose the first general and scalable framework to design certifiable algorithms for robust geometric perception in the presence of outliers. Our first contribution is to show that estimation using common robust costs, such as truncated least squares (TLS), maximum consensus, Geman-McClure, Tukey's biweight, among others, can be reformulated as polynomial optimization problems (POPs). By focusing on the TLS cost, our second contribution is to exploit sparsity in the POP and propose a sparse semidefinite programming (SDP) relaxation that is much smaller than the standard Lasserre's hierarchy while preserving empirical exactness, i.e., the SDP recovers the optimizer of the nonconvex POP with an optimality certificate. Our third contribution is to solve the SDP relaxations at an unprecedented scale and accuracy by presenting STRIDE, a solver that blends global descent on the convex SDP with fast local search on the nonconvex POP. Our fourth contribution is an evaluation of the proposed framework on six geometric perception problems including single and multiple rotation averaging, point cloud and mesh registration, absolute pose estimation, and category-level object pose and shape estimation. Our experiments demonstrate that (i) our sparse SDP relaxation is empirically exact with up to 60%-90% outliers across applications; (ii) while still being far from real-time, STRIDE is up to 100 times faster than existing SDP solvers on medium-scale problems, and is the only solver that can solve large-scale SDPs with hundreds of thousands of constraints to high accuracy; (iii) STRIDE safeguards existing fast heuristics for robust estimation (e.g., RANSAC or Graduated Non-Convexity), i.e., it certifies global optimality if the heuristic estimates are optimal, or detects and allows escaping local optima when the heuristic estimates are suboptimal.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-07T21:42:16Z</published>
+    <arxiv:comment>IEEE Transactions on Pattern Analysis and Machine Intelligence</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>IEEE Transactions on Pattern Analysis and Machine Intelligence, 2022</arxiv:journal_ref>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.00667v1</id>
+    <title>GNSS Outlier Mitigation Via Graduated Non-Convexity Factor Graph Optimization</title>
+    <updated>2021-09-02T01:59:03Z</updated>
+    <link href="https://arxiv.org/abs/2109.00667v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.00667v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate and globally referenced global navigation satellite system (GNSS) based vehicular positioning can be achieved in outlier-free open areas. However, the performance of GNSS can be significantly degraded by outlier measurements, such as multipath effects and non-line-of-sight (NLOS) receptions arising from signal reflections of buildings. Inspired by the advantage of batch historical data in resisting outlier measurements, in this paper, we propose a graduated non-convexity factor graph optimization (FGO-GNC) to improve the GNSS positioning performance, where the impact of GNSS outliers is mitigated by estimating the optimal weightings of GNSS measurements. Different from the existing local solutions, the proposed FGO-GNC employs the non-convex Geman McClure (GM) function to globally estimate the weightings of GNSS measurements via a coarse-to-fine relaxation. The effectiveness of the proposed method is verified through several challenging datasets collected in urban canyons of Hong Kong using automobile level and low-cost smartphone level GNSS receivers.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-02T01:59:03Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Weisong Wen</name>
+    </author>
+    <author>
+      <name>Guohao Zhang</name>
+    </author>
+    <author>
+      <name>Li-Ta Hsu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.14386v2</id>
+    <title>Kimera-Multi: Robust, Distributed, Dense Metric-Semantic SLAM for Multi-Robot Systems</title>
+    <updated>2021-12-17T22:20:22Z</updated>
+    <link href="https://arxiv.org/abs/2106.14386v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.14386v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents Kimera-Multi, the first multi-robot system that (i) is robust and capable of identifying and rejecting incorrect inter and intra-robot loop closures resulting from perceptual aliasing, (ii) is fully distributed and only relies on local (peer-to-peer) communication to achieve distributed localization and mapping, and (iii) builds a globally consistent metric-semantic 3D mesh model of the environment in real-time, where faces of the mesh are annotated with semantic labels. Kimera-Multi is implemented by a team of robots equipped with visual-inertial sensors. Each robot builds a local trajectory estimate and a local mesh using Kimera. When communication is available, robots initiate a distributed place recognition and robust pose graph optimization protocol based on a novel distributed graduated non-convexity algorithm. The proposed protocol allows the robots to improve their local trajectory estimates by leveraging inter-robot loop closures while being robust to outliers. Finally, each robot uses its improved trajectory estimate to correct the local mesh using mesh deformation techniques.
+  We demonstrate Kimera-Multi in photo-realistic simulations, SLAM benchmarking datasets, and challenging outdoor datasets collected using ground robots. Both real and simulated experiments involve long trajectories (e.g., up to 800 meters per robot). The experiments show that Kimera-Multi (i) outperforms the state of the art in terms of robustness and accuracy, (ii) achieves estimation errors comparable to a centralized SLAM system while being fully distributed, (iii) is parsimonious in terms of communication bandwidth, (iv) produces accurate metric-semantic 3D meshes, and (v) is modular and can be also used for standard 3D reconstruction (i.e., without semantic labels) or for trajectory estimation (i.e., without reconstructing a 3D mesh).</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-28T03:56:40Z</published>
+    <arxiv:comment>Accepted by IEEE Transactions on Robotics (18 pages, 15 figures)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yulun Tian</name>
+    </author>
+    <author>
+      <name>Yun Chang</name>
+    </author>
+    <author>
+      <name>Fernando Herrera Arias</name>
+    </author>
+    <author>
+      <name>Carlos Nieto-Granda</name>
+    </author>
+    <author>
+      <name>Jonathan P. How</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.08383v4</id>
+    <title>Optimal Pose and Shape Estimation for Category-level 3D Object Perception</title>
+    <updated>2023-09-17T02:31:15Z</updated>
+    <link href="https://arxiv.org/abs/2104.08383v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.08383v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a category-level perception problem, where one is given 3D sensor data picturing an object of a given category (e.g. a car), and has to reconstruct the pose and shape of the object despite intra-class variability (i.e. different car models have different shapes). We consider an active shape model, where -- for an object category -- we are given a library of potential CAD models describing objects in that category, and we adopt a standard formulation where pose and shape estimation are formulated as a non-convex optimization. Our first contribution is to provide the first certifiably optimal solver for pose and shape estimation. In particular, we show that rotation estimation can be decoupled from the estimation of the object translation and shape, and we demonstrate that (i) the optimal object rotation can be computed via a tight (small-size) semidefinite relaxation, and (ii) the translation and shape parameters can be computed in closed-form given the rotation. Our second contribution is to add an outlier rejection layer to our solver, hence making it robust to a large number of misdetections. Towards this goal, we wrap our optimal solver in a robust estimation scheme based on graduated non-convexity. To further enhance robustness to outliers, we also develop the first graph-theoretic formulation to prune outliers in category-level perception, which removes outliers via convex hull and maximum clique computations; the resulting approach is robust to 70%-90% outliers. Our third contribution is an extensive experimental evaluation. Besides providing an ablation study on a simulated dataset and on the PASCAL3D+ dataset, we combine our solver with a deep-learned keypoint detector, and show that the resulting approach improves over the state of the art in vehicle pose estimation in the ApolloScape datasets.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-16T21:41:29Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jingnan Shi</name>
+    </author>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+    <arxiv:doi>10.15607/RSS.2021.XVII.025</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.15607/RSS.2021.XVII.025" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.04357v2</id>
+    <title>IRON: Invariant-based Highly Robust Point Cloud Registration</title>
+    <updated>2021-03-24T07:46:14Z</updated>
+    <link href="https://arxiv.org/abs/2103.04357v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.04357v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we present IRON (Invariant-based global Robust estimation and OptimizatioN), a non-minimal and highly robust solution for point cloud registration with a great number of outliers among the correspondences. To realize this, we decouple the registration problem into the estimation of scale, rotation and translation, respectively. Our first contribution is to propose RANSIC (RANdom Samples with Invariant Compatibility), which employs the invariant compatibility to seek inliers from random samples and robustly estimates the scale between two sets of point clouds in the meantime. Once the scale is estimated, our second contribution is to relax the non-convex global registration problem into a convex Semi-Definite Program (SDP) in a certifiable way using Sum-of-Squares (SOS) Relaxation and show that the relaxation is tight. For robust estimation, we further propose RT-GNC (Rough Trimming and Graduated Non-Convexity), a global outlier rejection heuristic having better robustness and time-efficiency than traditional GNC, as our third contribution. With these contributions, we can render our registration algorithm, IRON. Through experiments over real datasets, we show that IRON is efficient, highly accurate and robust against as many as 99% outliers whether the scale is known or unknown, outperforming the existing state-of-the-art algorithms.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-07T13:46:56Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Lei Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.08524v2</id>
+    <title>Fast and Robust Certifiable Estimation of the Relative Pose Between Two Calibrated Cameras</title>
+    <updated>2021-06-11T18:19:59Z</updated>
+    <link href="https://arxiv.org/abs/2101.08524v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.08524v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work contributes an efficient algorithm to compute the Relative Pose problem (RPp) between calibrated cameras and certify the optimality of the solution, given a set of pair-wise feature correspondences affected by noise and probably corrupted by wrong matches. We propose a family of certifiers that is shown to increase the ratio of detected optimal solutions. This set of certifiers is incorporated into a fast essential matrix estimation pipeline that, given any initial guess for the RPp, refines it iteratively on the product space of 3D rotations and 2-sphere. In addition, this fast certifiable pipeline is integrated into a robust framework that combines Graduated Non-convexity and the Black-Rangarajan duality between robust functions and line processes.
+  We proved through extensive experiments on synthetic and real data that the proposed framework provides a fast and robust relative pose estimation. We make the code publicly available \url{https://github.com/mergarsal/FastCertRelPose.git}.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-01-21T10:07:05Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Mercedes Garcia-Salguero</name>
+    </author>
+    <author>
+      <name>Javier Gonzalez-Jimenez</name>
+    </author>
+    <arxiv:doi>10.1007/s10851-021-01044-0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10851-021-01044-0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.15109v3</id>
+    <title>Outlier-Robust Estimation: Hardness, Minimally Tuned Algorithms, and Applications</title>
+    <updated>2021-07-02T16:19:31Z</updated>
+    <link href="https://arxiv.org/abs/2007.15109v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.15109v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Nonlinear estimation in robotics and vision is typically plagued with outliers due to wrong data association, or to incorrect detections from signal processing and machine learning methods. This paper introduces two unifying formulations for outlier-robust estimation, Generalized Maximum Consensus (G-MC) and Generalized Truncated Least Squares (G-TLS), and investigates fundamental limits, practical algorithms, and applications. Our first contribution is a proof that outlier-robust estimation is inapproximable: in the worst case, it is impossible to (even approximately) find the set of outliers, even with slower-than-polynomial-time algorithms (particularly, algorithms running in quasi-polynomial time). As a second contribution, we review and extend two general-purpose algorithms. The first, Adaptive Trimming (ADAPT), is combinatorial, and is suitable for G-MC; the second, Graduated Non-Convexity (GNC), is based on homotopy methods, and is suitable for G-TLS. We extend ADAPT and GNC to the case where the user does not have prior knowledge of the inlier-noise statistics (or the statistics may vary over time) and is unable to guess a reasonable threshold to separate inliers from outliers (as the one commonly used in RANSAC). We propose the first minimally tuned algorithms for outlier rejection, that dynamically decide how to separate inliers from outliers. Our third contribution is an evaluation of the proposed algorithms on robot perception problems: mesh registration, image-based object detection (shape alignment), and pose graph optimization. ADAPT and GNC execute in real-time, are deterministic, outperform RANSAC, and are robust up to 80-90% outliers. Their minimally tuned versions also compare favorably with the state of the art, even though they do not rely on a noise bound for the inliers.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-29T21:06:13Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Pasquale Antonante</name>
+    </author>
+    <author>
+      <name>Vasileios Tzoumas</name>
+    </author>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.06769v2</id>
+    <title>One Ring to Rule Them All: Certifiably Robust Geometric Perception with Outliers</title>
+    <updated>2020-10-19T14:27:57Z</updated>
+    <link href="https://arxiv.org/abs/2006.06769v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.06769v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose the first general and practical framework to design certifiable algorithms for robust geometric perception in the presence of a large amount of outliers. We investigate the use of a truncated least squares (TLS) cost function, which is known to be robust to outliers, but leads to hard, nonconvex, and nonsmooth optimization problems. Our first contribution is to show that -for a broad class of geometric perception problems- TLS estimation can be reformulated as an optimization over the ring of polynomials and Lasserre's hierarchy of convex moment relaxations is empirically tight at the minimum relaxation order (i.e., certifiably obtains the global minimum of the nonconvex TLS problem). Our second contribution is to exploit the structural sparsity of the objective and constraint polynomials and leverage basis reduction to significantly reduce the size of the semidefinite program (SDP) resulting from the moment relaxation, without compromising its tightness. Our third contribution is to develop scalable dual optimality certifiers from the lens of sums-of-squares (SOS) relaxation, that can compute the suboptimality gap and possibly certify global optimality of any candidate solution (e.g., returned by fast heuristics such as RANSAC or graduated non-convexity). Our dual certifiers leverage Douglas-Rachford Splitting to solve a convex feasibility SDP. Numerical experiments across different perception problems, including single rotation averaging, shape alignment, 3D point cloud and mesh registration, and high-integrity satellite pose estimation, demonstrate the tightness of our relaxations, the correctness of the certification, and the scalability of the proposed dual certifiers to large problems, beyond the reach of current SDP solvers.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-11T19:46:42Z</published>
+    <arxiv:comment>NeurIPS 2020. 9 pages main results, 34 pages total. Code available at https://github.com/MIT-SPARK/CertifiablyRobustPerception</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <arxiv:journal_ref>34th Conference on Neural Information Processing Systems (NeurIPS 2020)</arxiv:journal_ref>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2001.07715v2</id>
+    <title>TEASER: Fast and Certifiable Point Cloud Registration</title>
+    <updated>2020-10-17T20:03:04Z</updated>
+    <link href="https://arxiv.org/abs/2001.07715v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2001.07715v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose the first fast and certifiable algorithm for the registration of two sets of 3D points in the presence of large amounts of outlier correspondences. We first reformulate the registration problem using a Truncated Least Squares (TLS) cost that is insensitive to a large fraction of spurious correspondences. Then, we provide a general graph-theoretic framework to decouple scale, rotation, and translation estimation, which allows solving in cascade for the three transformations. Despite the fact that each subproblem is still non-convex and combinatorial in nature, we show that (i) TLS scale and (component-wise) translation estimation can be solved in polynomial time via adaptive voting, (ii) TLS rotation estimation can be relaxed to a semidefinite program (SDP) and the relaxation is tight, even in the presence of extreme outlier rates, and (iii) the graph-theoretic framework allows drastic pruning of outliers by finding the maximum clique. We name the resulting algorithm TEASER (Truncated least squares Estimation And SEmidefinite Relaxation). While solving large SDP relaxations is typically slow, we develop a second fast and certifiable algorithm, named TEASER++, that uses graduated non-convexity to solve the rotation subproblem and leverages Douglas-Rachford Splitting to efficiently certify global optimality.
+  For both algorithms, we provide theoretical bounds on the estimation errors, which are the first of their kind for robust registration problems. Moreover, we test their performance on standard, object detection, and the 3DMatch benchmarks, and show that (i) both algorithms dominate the state of the art and are robust to more than 99% outliers, (ii) TEASER++ can run in milliseconds, and (iii) TEASER++ is so robust it can also solve problems without correspondences, where it largely outperforms ICP and it is more accurate than Go-ICP while being orders of magnitude faster.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-01-21T18:56:00Z</published>
+    <arxiv:comment>Accepted to IEEE Transactions on Robotics (T-RO). Code: https://github.com/MIT-SPARK/TEASER-plusplus. 20 pages main text, 24 pages appendix</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Transactions on Robotics (T-RO), 2020</arxiv:journal_ref>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Jingnan Shi</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1911.11924v2</id>
+    <title>In Perfect Shape: Certifiably Optimal 3D Shape Reconstruction from 2D Landmarks</title>
+    <updated>2020-03-21T17:20:41Z</updated>
+    <link href="https://arxiv.org/abs/1911.11924v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1911.11924v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the problem of 3D shape reconstruction from 2D landmarks extracted in a single image. We adopt the 3D deformable shape model and formulate the reconstruction as a joint optimization of the camera pose and the linear shape parameters. Our first contribution is to apply Lasserre's hierarchy of convex Sums-of-Squares (SOS) relaxations to solve the shape reconstruction problem and show that the SOS relaxation of minimum order 2 empirically solves the original non-convex problem exactly. Our second contribution is to exploit the structure of the polynomial in the objective function and find a reduced set of basis monomials for the SOS relaxation that significantly decreases the size of the resulting semidefinite program (SDP) without compromising its accuracy. These two contributions, to the best of our knowledge, lead to the first certifiably optimal solver for 3D shape reconstruction, that we name Shape*. Our third contribution is to add an outlier rejection layer to Shape* using a truncated least squares (TLS) robust cost function and leveraging graduated non-convexity to solve TLS without initialization. The result is a robust reconstruction algorithm, named Shape#, that tolerates a large amount of outlier measurements. We evaluate the performance of Shape* and Shape# in both simulated and real experiments, showing that Shape* outperforms local optimization and previous convex relaxation techniques, while Shape# achieves state-of-the-art performance and is robust against 70% outliers in the FG3DCar dataset.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-11-27T02:49:38Z</published>
+    <arxiv:comment>Camera-ready, CVPR 2020. 18 pages, 5 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2020</arxiv:journal_ref>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.08605v4</id>
+    <title>Graduated Non-Convexity for Robust Spatial Perception: From Non-Minimal Solvers to Global Outlier Rejection</title>
+    <updated>2020-06-11T20:09:58Z</updated>
+    <link href="https://arxiv.org/abs/1909.08605v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.08605v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Semidefinite Programming (SDP) and Sums-of-Squares (SOS) relaxations have led to certifiably optimal non-minimal solvers for several robotics and computer vision problems. However, most non-minimal solvers rely on least-squares formulations, and, as a result, are brittle against outliers. While a standard approach to regain robustness against outliers is to use robust cost functions, the latter typically introduce other non-convexities, preventing the use of existing non-minimal solvers. In this paper, we enable the simultaneous use of non-minimal solvers and robust estimation by providing a general-purpose approach for robust global estimation, which can be applied to any problem where a non-minimal solver is available for the outlier-free case. To this end, we leverage the Black-Rangarajan duality between robust estimation and outlier processes (which has been traditionally applied to early vision problems), and show that graduated non-convexity (GNC) can be used in conjunction with non-minimal solvers to compute robust solutions, without requiring an initial guess. Although GNC's global optimality cannot be guaranteed, we demonstrate the empirical robustness of the resulting robust non-minimal solvers in applications, including point cloud and mesh registration, pose graph optimization, and image-based object pose estimation (also called shape alignment). Our solvers are robust to 70-80% of outliers, outperform RANSAC, are more accurate than specialized local solvers, and faster than specialized global solvers. We also propose the first certifiably optimal non-minimal solver for shape alignment using SOS relaxation.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-18T17:50:04Z</published>
+    <arxiv:comment>10 pages, 5 figures, published at IEEE Robotics and Automation Letters (RA-L), 2020, Best Paper Award in Robot Vision at ICRA 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>IEEE Robotics and Automation Letters (RA-L), 2020</arxiv:journal_ref>
+    <author>
+      <name>Heng Yang</name>
+    </author>
+    <author>
+      <name>Pasquale Antonante</name>
+    </author>
+    <author>
+      <name>Vasileios Tzoumas</name>
+    </author>
+    <author>
+      <name>Luca Carlone</name>
+    </author>
+    <arxiv:doi>10.1109/LRA.2020.2965893</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LRA.2020.2965893" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1411.0763v1</id>
+    <title>A Weighted Common Subgraph Matching Algorithm</title>
+    <updated>2014-11-04T02:39:46Z</updated>
+    <link href="https://arxiv.org/abs/1411.0763v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1411.0763v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a weighted common subgraph (WCS) matching algorithm to find the most similar subgraphs in two labeled weighted graphs. WCS matching, as a natural generalization of the equal-sized graph matching or subgraph matching, finds wide applications in many computer vision and machine learning tasks. In this paper, the WCS matching is first formulated as a combinatorial optimization problem over the set of partial permutation matrices. Then it is approximately solved by a recently proposed combinatorial optimization framework - Graduated NonConvexity and Concavity Procedure (GNCCP). Experimental comparisons on both synthetic graphs and real world images validate its robustness against noise level, problem size, outlier number, and edge density.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-11-04T02:39:46Z</published>
+    <arxiv:comment>6 pages, 5 figures, the second round revision in IEEE TNNLS</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Xu Yang</name>
+    </author>
+    <author>
+      <name>Hong Qiao</name>
+    </author>
+    <author>
+      <name>Zhi-Yong Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1308.6388v1</id>
+    <title>GNCGCP - Graduated NonConvexity and Graduated Concavity Procedure</title>
+    <updated>2013-08-29T08:00:20Z</updated>
+    <link href="https://arxiv.org/abs/1308.6388v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1308.6388v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we propose the Graduated NonConvexity and Graduated Concavity Procedure (GNCGCP) as a general optimization framework to approximately solve the combinatorial optimization problems on the set of partial permutation matrices. GNCGCP comprises two sub-procedures, graduated nonconvexity (GNC) which realizes a convex relaxation and graduated concavity (GC) which realizes a concave relaxation. It is proved that GNCGCP realizes exactly a type of convex-concave relaxation procedure (CCRP), but with a much simpler formulation without needing convex or concave relaxation in an explicit way. Actually, GNCGCP involves only the gradient of the objective function and is therefore very easy to use in practical applications. Two typical NP-hard problems, (sub)graph matching and quadratic assignment problem (QAP), are employed to demonstrate its simplicity and state-of-the-art performance.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-08-29T08:00:20Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zhi-Yong Liu</name>
+    </author>
+    <author>
+      <name>Hong Qiao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0111121v1</id>
+    <title>New Advances in Bayesian Calculation for Linear and Nonlinear Inverse Problems</title>
+    <updated>2001-11-14T12:55:46Z</updated>
+    <link href="https://arxiv.org/abs/physics/0111121v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0111121v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The Bayesian approach has proved to be a coherent approach to handle ill posed Inverse problems. However, the Bayesian calculations need either an optimization or an integral calculation. The maximum a posteriori (MAP) estimation requires the minimization of a compound criterion which, in general, has two parts: a data fitting part and a prior part. In many situations the criterion to be minimized becomes multimodal. The cost of the Simulated Annealing (SA) based techniques is in general huge for inverse problems. Recently a deterministic optimization technique, based on Graduated Non Convexity (GNC), have been proposed to overcome this difficulty. The objective of this paper is to show two specific implementations of this technique for the following situations: -- Linear inverse problems where the solution is modeled as a piecewise continuous function. The non convexity of the criterion is then due to the special choice of the prior; -- A nonlinear inverse problem which arises in inverse scattering where the non convexity of the criterion is due to the likelihood part. Keywords: Inverse problems, Regularization, Bayesian calculation, Global optimization, Graduated Non Convexity.</summary>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2001-11-14T12:55:46Z</published>
+    <arxiv:comment>Presented at MaxEnt96. Appeared in Proceedings of the Maximum Entropy Conference, Berg-en-Dal, South Africa, M. Sears, V. Nedeljkovic, N.E. Pendock and S. Sibisi (Ed.), pp 92-102</arxiv:comment>
+    <arxiv:primary_category term="physics.data-an"/>
+    <author>
+      <name>A. Mohammad-Djafari</name>
+      <arxiv:affiliation>Laboratoire des Signaux et Systèmes, CNRS-UPS-SUPELEC, Gif-sur-Yvette, France</arxiv:affiliation>
+    </author>
+  </entry>
+</feed>

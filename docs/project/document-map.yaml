@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/research/research-2026-09-08-annealing-for-square-packing.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/known-best/video/spikes/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md, role: research-report, authority: record, lifecycle: retained}

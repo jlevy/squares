@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/tEL1YWQKOe22HwZ7scXTBNNfEfg</id>
+  <title>arXiv Query: search_query=au:"Elser V"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-09-09T07:25:32Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=au:%22Elser+V%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>5</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1912.07558v5</id>
+    <title>Glass phenomenology in the hard matrix model</title>
+    <updated>2021-08-02T10:23:29Z</updated>
+    <link href="https://arxiv.org/abs/1912.07558v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.07558v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a new toy model for the study of glasses: the hard-matrix model (HMM). This may be viewed as a single particle moving on $\mathrm{SO}(N)$, where there is a potential proportional to the 1-norm of the matrix. The ground states of the model are "crystals" where all matrix elements have the same magnitude. These are the Hadamard matrices when $N$ is divisible by four. Just as finding the latter has challenged mathematicians, our model fails to find them upon cooling and instead shows all the behaviors that characterize physical glasses. With simulations we have located the first-order crystallization temperature, the Kauzmann temperature where the glass would have the same entropy as the crystal, as well as the standard, measurement-time dependent glass transition temperature. Our model also brings to light a new kind of elementary excitation special to the glass phase: the "rubicon". In our model these are associated with the finite density of matrix elements near zero, the maximum in their contribution to the energy. Rubicons enable the system to cross between basins without thermal activation, a possibility not much discussed in the standard landscape picture. We use these modes to explain the slow dynamics in our model and speculate about their role in its quantum extension in the context of many-body localization.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-16T18:12:51Z</published>
+    <arxiv:comment>20 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>J. Dong</name>
+    </author>
+    <author>
+      <name>V. Elser</name>
+    </author>
+    <author>
+      <name>G. Gyawali</name>
+    </author>
+    <author>
+      <name>K. Y. Jee</name>
+    </author>
+    <author>
+      <name>J. Kent-Dobias</name>
+    </author>
+    <author>
+      <name>A. Mandaiya</name>
+    </author>
+    <author>
+      <name>M. Renz</name>
+    </author>
+    <author>
+      <name>Y. Su</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1808.01022v1</id>
+    <title>An enhanced formulation for solving graph coloring problems with the Douglas-Rachford algorithm</title>
+    <updated>2018-08-02T20:56:46Z</updated>
+    <link href="https://arxiv.org/abs/1808.01022v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1808.01022v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the behavior of the Douglas-Rachford algorithm on the graph vertex-coloring problem. Given a graph and a number of colors, the goal is to find a coloring of the vertices so that all adjacent vertex pairs have different colors. In spite of the combinatorial nature of this problem, the Douglas-Rachford algorithm was recently shown to be a successful heuristic for solving a wide variety of graph coloring instances, when the problem was cast as a feasibility problem on binary indicator variables. In this work we consider a different formulation, based on semidefinite programming. The much improved performance of the Douglas-Rachford algorithm, with this new approach, is demonstrated through various numerical experiments.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-08-02T20:56:46Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>F. J. Aragón Artacho</name>
+    </author>
+    <author>
+      <name>R. Campoy</name>
+    </author>
+    <author>
+      <name>V. Elser</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1003.0846v2</id>
+    <title>Cryptotomography: reconstructing 3D Fourier intensities from randomly oriented single-shot diffraction patterns</title>
+    <updated>2010-04-06T02:02:11Z</updated>
+    <link href="https://arxiv.org/abs/1003.0846v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1003.0846v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We reconstructed the 3D Fourier intensity distribution of mono-disperse prolate nano-particles using single-shot 2D coherent diffraction patterns collected at DESY's FLASH facility when a bright, coherent, ultrafast X-ray pulse intercepted individual particles of random, unmeasured orientations. This first experimental demonstration of cryptotomography extended the Expansion-Maximization-Compression (EMC) framework to accommodate unmeasured fluctuations in photon fluence and loss of data due to saturation or background scatter. This work is an important step towards realizing single-shot diffraction imaging of single biomolecules.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-03-03T19:55:48Z</published>
+    <arxiv:comment>4 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>N. D. Loh</name>
+    </author>
+    <author>
+      <name>M. Bogan</name>
+    </author>
+    <author>
+      <name>V. Elser</name>
+    </author>
+    <author>
+      <name>A. Barty</name>
+    </author>
+    <author>
+      <name>S. Boutet</name>
+    </author>
+    <author>
+      <name>S. Bajt</name>
+    </author>
+    <author>
+      <name>J. Hajdu</name>
+    </author>
+    <author>
+      <name>T. Ekeberg</name>
+    </author>
+    <author>
+      <name>F. R. N. C. Maia</name>
+    </author>
+    <author>
+      <name>J. Schulz</name>
+    </author>
+    <author>
+      <name>M. M. Seibert</name>
+    </author>
+    <author>
+      <name>B. Iwan</name>
+    </author>
+    <author>
+      <name>N. Timneanu</name>
+    </author>
+    <author>
+      <name>S. Marchesini</name>
+    </author>
+    <author>
+      <name>I. Schlichting</name>
+    </author>
+    <author>
+      <name>R. L. Shoeman</name>
+    </author>
+    <author>
+      <name>L. Lomb</name>
+    </author>
+    <author>
+      <name>M. Frank</name>
+    </author>
+    <author>
+      <name>M. Liang</name>
+    </author>
+    <author>
+      <name>H. N. Chapman</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.104.225501</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.104.225501" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0006469v1</id>
+    <title>Solving the phase problem in i(AlPdMn)</title>
+    <updated>2000-06-29T13:51:42Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0006469v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0006469v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We apply a new technique for ab initio phase determination [Acta Crystallogr. Sect. A, A55, 48 (1999)] to solve for the average structure of the icosahedral (i) phase of AlPdMn. After an introduction to the crystallographic phase problem and a description of the method, we present a brief report of our findings for the structure of i(AlPdMn). Despite the use of data from extremely high quality samples, we find strong evidence of disorder in the structure, lending support to the random tiling model of quasicrystal stabilization.</summary>
+    <category term="cond-mat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2000-06-29T13:51:42Z</published>
+    <arxiv:comment>4 pages, 3 .eps figures - submitted to PRL</arxiv:comment>
+    <arxiv:primary_category term="cond-mat"/>
+    <author>
+      <name>K. S. Brown</name>
+    </author>
+    <author>
+      <name>A. A. Avanesov</name>
+    </author>
+    <author>
+      <name>V. Elser</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0004126v1</id>
+    <title>Structure determinations for random-tiling quasicrystals</title>
+    <updated>2000-04-09T02:01:21Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0004126v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0004126v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  How, in principle, could one solve the atomic structure of a quasicrystal, modeled as a random tiling decorated by atoms, and what techniques are available to do it? One path is to solve the phase problem first, obtaining the density in a higher dimensional space which yields the_averaged_ scattering density in 3-dimensional space by the usual construction of an incommensurate cut. A novel direct method for this is summarized and applied to an i(AlPdMn) data set. This averaged density falls short of a true structure determination (which would reveal the typical_unaveraged_ atomic patterns.) We discuss the problematic validity of inferring an ideal structure by simply factoring out a ``perp-space'' Debye-Waller factor, and we test this using simulations of rhombohedral tilings. A second, ``unified'' path is to relate the measured and modeled intensities directly, by adjusting parameters in a simulation to optimize the fit. This approach is well suited for unifying structural information from diffraction and from minimizing total energies derived ultimately from ab-initio calculations. Finally, we discuss the special pitfalls of fitting random-tiling decagonal phases.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2000-04-09T02:01:21Z</published>
+    <arxiv:comment>19 pages, LaTeX. To appear, Z. Kristallogr</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>C. L. Henley</name>
+      <arxiv:affiliation>Cornell Univ.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>V. Elser</name>
+      <arxiv:affiliation>Cornell Univ.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>M. Mihalkovic</name>
+      <arxiv:affiliation>Cornell Univ.</arxiv:affiliation>
+    </author>
+  </entry>
+</feed>

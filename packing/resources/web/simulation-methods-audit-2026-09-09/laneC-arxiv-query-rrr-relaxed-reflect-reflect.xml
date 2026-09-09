@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/up5lKz/JQeL0VlgiqrsoUjb+P7Q</id>
+  <title>arXiv Query: search_query=all:"relaxed-reflect-reflect" OR all:"relaxed reflect reflect" OR all:"RRR algorithm"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:44Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22relaxed-reflect-reflect%22+OR+(all:%22relaxed+reflect+reflect%22+OR+all:%22RRR+algorithm%22)&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>7</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.12846v1</id>
+    <title>A refined CJ--SS--RR method with a reliable removal approach of spurious Ritz values for the Hermitian eigenvalue problem</title>
+    <updated>2026-05-13T00:44:15Z</updated>
+    <link href="https://arxiv.org/abs/2605.12846v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.12846v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Under the hypothesis that the deviations of the desired eigenvectors of the matrix $A$ from the underlying subspace tend to zero, the Ritz vectors may not converge and have poor or little accuracy. This phenomenon is not unusual and particularly occurs when the associated Ritz values are close, which is independent of the eigenvalue distribution of $A$. For the (block) SS--RR methods, there are possibly {\em more} Ritz values that converge to the same desired eigenvalue(s) counting multiplicity in the region of interest, meaning that some of the Ritz values must be spurious and the corresponding residual norms of the Ritz pairs may not be small. Consequently, the (block) SS--RR methods including the CJ--SS--RR method cannot base on the corresponding residual norms to effectively identify if the Ritz values in the region are genuine or spurious. This paper proposes refined SS--RR, abbreviated as SS--RRR, methods based on the refined Rayleigh--Ritz projection that compute the eigenpairs of large matrices with the eigenvalues located in the given region. We present a new approach to accurately implement the RRR methods more efficiently than ever before for a general subspace.Exploiting the unconditional convergence of the refined Ritz vectors when the subspace is sufficiently accurate, we propose a tune-free removal approach to effectively remove spurious Ritz values with a rigorous theory supported, and develop a restarted CJ--SS--RRR algorithm. Numerical experiments show that the restarted CJ--SS--RRR algorithm is more efficient and effective than the restarted CJ--SS--RR algorithm.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-13T00:44:15Z</published>
+    <arxiv:comment>24 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Zhongxiao Jia</name>
+    </author>
+    <author>
+      <name>Tianhang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.23843v1</id>
+    <title>The Flow-Limit of Reflect-Reflect-Relax: Existence, Stability, and Discrete-Time Behavior</title>
+    <updated>2025-12-29T20:17:58Z</updated>
+    <link href="https://arxiv.org/abs/2512.23843v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.23843v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the Reflect-Reflect-Relax (RRR) algorithm in its small-step (flow-limit) regime. In the smooth transversal setting, we show that the transverse dynamics form a hyperbolic sink, yielding exponential decay of a natural gap measure. Under uniform geometric assumptions, we construct a tubular neighborhood of the feasible manifold on which the squared gap defines a strict Lyapunov function, excluding recurrent dynamics and chaotic behavior within this basin.
+  In the discrete setting, the induced flow is piecewise constant on W-domains and supports Filippov sliding along convergent boundaries, leading to finite-time capture into a solution domain. We prove that small-step RRR is a forward-Euler discretization of this flow, so that solution times measured in rescaled units converge to a finite limit while iteration counts diverge, explaining the emergence of iteration-optimal relaxation parameters. Finally, we introduce a heuristic mesoscopic framework based on percolation and renormalization group to organize performance deterioration near the Douglas-Rachford limit.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-29T20:17:58Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Manish Krishan Lal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.04766v1</id>
+    <title>Phase Retrieval via Gain-Based Photonic XY-Hamiltonian Optimization</title>
+    <updated>2025-05-07T19:44:59Z</updated>
+    <link href="https://arxiv.org/abs/2505.04766v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.04766v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Phase-retrieval from coded diffraction patterns (CDP) is important to X-ray crystallography, diffraction tomography and astronomical imaging, yet remains a hard, non-convex inverse problem. We show that CDP recovery can be reformulated exactly as the minimisation of a continuous-variable XY Hamiltonian and solved by gain-based photonic networks. The coupled-mode equations we exploit are the natural mean-field dynamics of exciton-polariton condensate lattices, coupled-laser arrays and driven photon Bose-Einstein condensates, while other hardware such as the spatial photonic Ising machine can implement the same update rule through high-speed digital feedback, preserving full optical parallelism. Numerical experiments on images, two- and three-dimensional vortices and unstructured complex data demonstrate that the gain-based solver consistently outperforms the state-of-the-art Relaxed-Reflect-Reflect (RRR) algorithm in the medium-noise regime (signal-to-noise ratios 10--40 dB) and retains this advantage as problem size scales. Because the physical platform performs the continuous optimisation, our approach promises fast, energy-efficient phase retrieval on readily available photonic hardware. uch as two- and three-dimensional vortices, and unstructured random data. Moreover, the solver's accuracy remains high as problem sizes increase, underscoring its scalability.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.other" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.ET" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-07T19:44:59Z</published>
+    <arxiv:comment>11 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Richard Zhipeng Wang</name>
+    </author>
+    <author>
+      <name>Guangyao Li</name>
+    </author>
+    <author>
+      <name>Silvia Gentilini</name>
+    </author>
+    <author>
+      <name>Marcello Calvanese Strinati</name>
+    </author>
+    <author>
+      <name>Claudio Conti</name>
+    </author>
+    <author>
+      <name>Natalia G. Berloff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1911.13179v2</id>
+    <title>A note on Douglas-Rachford, gradients, and phase retrieval</title>
+    <updated>2020-06-04T04:36:44Z</updated>
+    <link href="https://arxiv.org/abs/1911.13179v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1911.13179v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The properties of gradient techniques for the phase retrieval problem have received a considerable attention in recent years. In almost all applications, however, the phase retrieval problem is solved using a family of algorithms that can be interpreted as variants of Douglas-Rachford splitting. In this work, we establish a connection between Douglas-Rachford and gradient algorithms. Specifically, we show that in some cases a generalization of Douglas-Rachford, called relaxed-reflect-reflect (RRR), can be viewed as gradient descent on a certain objective function. The solutions coincide with the critical points of that objective, which---in contrast to standard gradient techniques---are not its minimizers. Using the objective function, we give simple proofs of some basic properties of the RRR algorithm. Specifically, we describe its set of solutions, show a local convexity around any solution, and derive stability guarantees. Nevertheless, in its present state, the analysis does not elucidate the remarkable empirical performance of RRR and its global properties.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-11-29T16:24:54Z</published>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Eitan Levin</name>
+    </author>
+    <author>
+      <name>Tamir Bendory</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1911.00493v1</id>
+    <title>Learning Without Loss</title>
+    <updated>2019-10-29T19:20:08Z</updated>
+    <link href="https://arxiv.org/abs/1911.00493v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1911.00493v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore a new approach for training neural networks where all loss functions are replaced by hard constraints. The same approach is very successful in phase retrieval, where signals are reconstructed from magnitude constraints and general characteristics (sparsity, support, etc.). Instead of taking gradient steps, the optimizer in the constraint based approach, called relaxed-reflect-reflect (RRR), derives its steps from projections to local constraints. In neural networks one such projection makes the minimal modification to the inputs $x$, the associated weights $w$, and the pre-activation value $y$ at each neuron, to satisfy the equation $x\cdot w=y$. These projections, along with a host of other local projections (constraining pre- and post-activations, etc.) can be partitioned into two sets such that all the projections in each set can be applied concurrently, across the network and across all data in the training batch. This partitioning into two sets is analogous to the situation in phase retrieval and the setting for which the general purpose RRR optimizer was designed. Owing to the novelty of the method, this paper also serves as a self-contained tutorial. Starting with a single-layer network that performs non-negative matrix factorization, and concluding with a generative model comprising an autoencoder and classifier, all applications and their implementations by projections are described in complete detail. Although the new approach has the potential to extend the scope of neural networks (e.g. by defining activation not through functions but constraint sets), most of the featured models are standard to allow comparison with stochastic gradient descent.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-29T19:20:08Z</published>
+    <arxiv:comment>52 pages, 24 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.02463v1</id>
+    <title>Comparing Averaged Relaxed Cutters and Projection Methods: Theory and Examples</title>
+    <updated>2018-10-04T23:55:25Z</updated>
+    <link href="https://arxiv.org/abs/1810.02463v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.02463v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We focus on the convergence analysis of averaged relaxations of cutters, specifically for variants that---depending upon how parameters are chosen---resemble \emph{alternating projections}, the \emph{Douglas--Rachford method}, \emph{relaxed reflect-reflect}, or the \emph{Peaceman--Rachford} method. Such methods are frequently used to solve convex feasibility problems. The standard convergence analyses of projection algorithms are based on the \emph{firm nonexpansivity} property of the relevant operators. However if the projections onto the constraint sets are replaced by cutters (projections onto separating hyperplanes), the firm nonexpansivity is lost. We provide a proof of convergence for a family of related averaged relaxed cutter methods under reasonable assumptions, relying on a simple geometric argument. This allows us to clarify fine details related to the allowable choice of the relaxation parameters, highlighting the distinction between the exact (firmly nonexpansive) and approximate (strongly quasi-nonexpansive) settings. We provide illustrative examples and discuss practical implementations of the method.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-04T23:55:25Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>R. Díaz Millán</name>
+    </author>
+    <author>
+      <name>Scott B. Lindstrom</name>
+    </author>
+    <author>
+      <name>Vera Roshchina</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1601.03428v1</id>
+    <title>The complexity of bit retrieval</title>
+    <updated>2016-01-13T22:19:20Z</updated>
+    <link href="https://arxiv.org/abs/1601.03428v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1601.03428v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Bit retrieval is the problem of reconstructing a binary sequence from its periodic autocorrelation, with applications in cryptography and x-ray crystallography. After defining the problem, with and without noise, we describe and compare various algorithms for solving it. A geometrical constraint satisfaction algorithm, relaxed-reflect-reflect, is currently the best algorithm for noisy bit retrieval.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-01-13T22:19:20Z</published>
+    <arxiv:comment>42 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+  </entry>
+</feed>

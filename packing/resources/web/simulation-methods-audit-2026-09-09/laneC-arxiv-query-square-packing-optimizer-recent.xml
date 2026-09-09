@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/AjlWJ/xraGyY6cRgozHy6gslJt0</id>
+  <title>arXiv Query: search_query=all:"unit squares" AND all:"packing" AND all:"optimization"&amp;id_list=&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-09T07:31:35Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22unit+squares%22+AND+(all:%22packing%22+AND+all:%22optimization%22)&amp;start=0&amp;max_results=40&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>13</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.05093v1</id>
+    <title>LLM-Guided Program Evolution for Circle Packing: Breaking 10 Packomania Records for $28</title>
+    <updated>2026-09-04T12:48:13Z</updated>
+    <link href="https://arxiv.org/abs/2609.05093v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.05093v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Discovery Loop, a lightweight system that uses a large language model (LLM) to iteratively evolve optimization algorithms. Starting from a simple seed solver, the LLM proposes algorithmic improvements guided by a scoreboard of results and a history of prior ideas. Each candidate is evaluated against an independent verifier; improvements are kept and failures discarded. Applied to the Packomania circle-packing benchmark (csqv: maximize the sum of radii of N variable-radius circles in the unit square), the system improved the best known solutions for 10 values of N in the range 101-114, with gains of 2.4%-5.4% over prior records, all within 15 iterations and at a total LLM cost of $27.72. These results have been independently accepted by Packomania. We describe the method, analyze cost-efficiency dynamics including an adaptive plateau-detection mechanism, and discuss implications for democratizing automated scientific discovery.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-04T12:48:13Z</published>
+    <arxiv:comment>8 pages. Code and solutions: https://github.com/ucsandman/discovery-loop</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Wes Sander</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.01484v1</id>
+    <title>Optimally Packing a Large Square by Unit Squares</title>
+    <updated>2026-02-01T23:39:00Z</updated>
+    <link href="https://arxiv.org/abs/2602.01484v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.01484v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that a large square of sidelength $x$ can be packed by unit squares in a manner so that the wasted space $W(x) = O(x^{3/5})$.</summary>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-01T23:39:00Z</published>
+    <arxiv:comment>This work was extracted from the author's 2024 thesis available at https://unbc.arcabc.ca/dissertations-and-theses/15173 . Since then we have become aware of the 2025 paper arXiv:2508.04603 by Bui that shows a similar result by a different method</arxiv:comment>
+    <arxiv:primary_category term="math.AG"/>
+    <author>
+      <name>Rory McClenagan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.13032v2</id>
+    <title>Efficient UAV Coverage in Large Convex Quadrilateral Areas with Elliptical Footprints</title>
+    <updated>2026-01-26T14:47:12Z</updated>
+    <link href="https://arxiv.org/abs/2502.13032v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.13032v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Unmanned Aerial Vehicles (UAVs) have gained significant attention for improving wireless communication, especially in emergencies or as a complement to existing cellular infrastructure. This letter addresses the problem of efficiently covering a large convex quadrilateral using multiple UAVs, where each UAV generates elliptical coverage footprints based on its altitude and antenna tilt. The challenge is approached using circle-packing techniques within a unit square to arrange UAVs in an optimal configuration. Subsequently, a homography transformation is applied to map the unit square onto the quadrilateral area, ensuring that the UAVs' elliptical footprints cover the entire region. Numerical simulations demonstrate the effectiveness of the proposed method, providing insight into coverage density and optimal altitude configurations for different placement scenarios. The results highlight the scalability and potential for improving UAV-based communication systems, focusing on maximizing coverage efficiency in large areas with irregular shapes.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-18T16:47:56Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Alexander Vavoulas</name>
+    </author>
+    <author>
+      <name>Konstantinos K. Delibasis</name>
+    </author>
+    <author>
+      <name>Harilaos G. Sandalidis</name>
+    </author>
+    <author>
+      <name>George Nousias</name>
+    </author>
+    <author>
+      <name>Nicholas Vaiopoulos</name>
+    </author>
+    <arxiv:doi>10.1109/LWC.2026.3656481</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LWC.2026.3656481" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.06486v1</id>
+    <title>Coordinated Motion Planning: Multi-Agent Path Finding in a Densely Packed, Bounded Domain</title>
+    <updated>2024-09-10T13:15:32Z</updated>
+    <link href="https://arxiv.org/abs/2409.06486v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.06486v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study Multi-Agent Path Finding for arrangements of labeled agents in the interior of a simply connected domain: Given a unique start and target position for each agent, the goal is to find a sequence of parallel, collision-free agent motions that minimizes the overall time (the makespan) until all agents have reached their respective targets. A natural case is that of a simply connected polygonal domain with axis-parallel boundaries and integer coordinates, i.e., a simple polyomino, which amounts to a simply connected union of lattice unit squares or cells. We focus on the particularly challenging setting of densely packed agents, i.e., one per cell, which strongly restricts the mobility of agents, and requires intricate coordination of motion.
+  We provide a variety of novel results for this problem, including (1) a characterization of polyominoes in which a reconfiguration plan is guaranteed to exist; (2) a characterization of shape parameters that induce worst-case bounds on the makespan; (3) a suite of algorithms to achieve asymptotically worst-case optimal performance with respect to the achievable stretch for cases with severely limited maneuverability. This corresponds to bounding the ratio between obtained makespan and the lower bound provided by the max-min distance between the start and target position of any agent and our shape parameters.
+  Our results extend findings by Demaine et al. (SIAM Journal on Computing, 2019) who investigated the problem for solid rectangular domains, and in the closely related field of Permutation Routing, as presented by Alpert et al. (Computational Geometry, 2022) for convex pieces of grid graphs.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-10T13:15:32Z</published>
+    <arxiv:comment>21 pages, 14 figures, full version of an extended abstract that is to appear in the proceedings of the 35th International Symposium on Algorithms and Computation (ISAAC 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Sándor P. Fekete</name>
+    </author>
+    <author>
+      <name>Ramin Kosfeld</name>
+    </author>
+    <author>
+      <name>Peter Kramer</name>
+    </author>
+    <author>
+      <name>Jonas Neutzner</name>
+    </author>
+    <author>
+      <name>Christian Rieck</name>
+    </author>
+    <author>
+      <name>Christian Scheffer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.03091v1</id>
+    <title>The circle packing problem: a theoretical comparison of various convexification techniques</title>
+    <updated>2024-04-03T22:07:30Z</updated>
+    <link href="https://arxiv.org/abs/2404.03091v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.03091v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the problem of packing congruent circles with the maximum radius in a unit square as a mathematical optimization problem. Due to the presence of non-overlapping constraints, this problem is a notoriously difficult nonconvex quadratically constrained optimization problem, which possesses many local optima. We consider several popular convexification techniques, giving rise to linear programming relaxations and semidefinite programming relaxations for the circle packing problem. We compare the strength of these relaxations theoretically, thereby proving the conjectures by Anstreicher (JOGO, 2009). Our results serve as a theoretical justification for the ineffectiveness of existing machinery for convexification of non-overlapping constraints.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-03T22:07:30Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Aida Khajavirad</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.10356v1</id>
+    <title>Packing $1.35\cdot 10^{11}$ rectangles into a unit square</title>
+    <updated>2022-11-17T16:59:36Z</updated>
+    <link href="https://arxiv.org/abs/2211.10356v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.10356v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is known that $\sum\limits_{i=1}^{\infty} \frac{1}{i (i+1)} = 1$. In 1968, Meir and Moser asked for finding the smallest $ε$ such that all the rectangles of sizes $1/i \times 1/(i + 1)$ for $i = 1, 2, \ldots$, can be packed into a unit square or a rectangle of area $1 + ε$. In this paper, we show that we can pack the first $1.35\cdot10^{11}$ rectangles into the unit square and give an estimate for $ε$ from this packing.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-17T16:59:36Z</published>
+    <arxiv:comment>7 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Mingliang Zhu</name>
+    </author>
+    <author>
+      <name>Antal Joós</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.02827v1</id>
+    <title>Tight Approximation Algorithms for Geometric Bin Packing with Skewed Items</title>
+    <updated>2021-05-06T17:16:11Z</updated>
+    <link href="https://arxiv.org/abs/2105.02827v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.02827v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the Two-dimensional Bin Packing (2BP) problem, we are given a set of rectangles of height and width at most one and our goal is to find an axis-aligned nonoverlapping packing of these rectangles into the minimum number of unit square bins. The problem admits no APTAS and the current best approximation ratio is $1.406$ by Bansal and Khan [SODA'14]. A well-studied variant of the problem is Guillotine Two-dimensional Bin Packing (G2BP), where all rectangles must be packed in such a way that every rectangle in the packing can be obtained by recursively applying a sequence of end-to-end axis-parallel cuts, also called guillotine cuts. Bansal, Lodi, and Sviridenko [FOCS'05] obtained an APTAS for this problem. Let $λ$ be the smallest constant such that for every set $I$ of items, the number of bins in the optimal solution to G2BP for $I$ is upper bounded by $λ\operatorname{opt}(I) + c$, where $\operatorname{opt}(I)$ is the number of bins in the optimal solution to 2BP for $I$ and $c$ is a constant. It is known that $4/3 \le λ\le 1.692$. Bansal and Khan [SODA'14] conjectured that $λ= 4/3$. The conjecture, if true, will imply a $(4/3+\varepsilon)$-approximation algorithm for 2BP. According to convention, for a given constant $δ&gt;0$, a rectangle is large if both its height and width are at least $δ$, and otherwise it is called skewed. We make progress towards the conjecture by showing $λ= 4/3$ for skewed instance, i.e., when all input rectangles are skewed. Even for this case, the previous best upper bound on $λ$ was roughly 1.692. We also give an APTAS for 2BP for skewed instance, though general 2BP does not admit an APTAS.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-06T17:16:11Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Arindam Khan</name>
+    </author>
+    <author>
+      <name>Eklavya Sharma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1807.07626v1</id>
+    <title>Quasi-polynomial time approximation schemes for packing and covering problems in planar graphs</title>
+    <updated>2018-07-19T20:00:44Z</updated>
+    <link href="https://arxiv.org/abs/1807.07626v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1807.07626v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider two optimization problems in planar graphs. In Maximum Weight Independent Set of Objects we are given a graph $G$ and a family $\mathcal{D}$ of objects, each being a connected subgraph of $G$ with a prescribed weight, and the task is to find a maximum-weight subfamily of $\mathcal{D}$ consisting of pairwise disjoint objects. In Minimum Weight Distance Set Cover we are given an edge-weighted graph $G$, two sets $\mathcal{D},\mathcal{C}$ of vertices of $G$, where vertices of $\mathcal{D}$ have prescribed weights, and a nonnegative radius $r$. The task is to find a minimum-weight subset of $\mathcal{D}$ such that every vertex of $\mathcal{C}$ is at distance at most $r$ from some selected vertex. Via simple reductions, these two problems generalize a number of geometric optimization tasks, notably Maximum Weight Independent Set for polygons in the plane and Weighted Geometric Set Cover for unit disks and unit squares. We present quasi-polynomial time approximation schemes (QPTASs) for both of the above problems in planar graphs: given an accuracy parameter $ε&gt;0$ we can compute a solution whose weight is within multiplicative factor of $(1+ε)$ from the optimum in time $2^{\mathrm{poly}(1/ε,\log |\mathcal{D}|)}\cdot n^{\mathcal{O}(1)}$, where $n$ is the number of vertices of the input graph. Our main technical contribution is to transfer the techniques used for recursive approximation schemes for geometric problems due to Adamaszek, Har-Peled, and Wiese to the setting of planar graphs. In particular, this yields a purely combinatorial viewpoint on these methods.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-07-19T20:00:44Z</published>
+    <arxiv:comment>31 pages, 5 figures, accepted at ESA 2018</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Michał Pilipczuk</name>
+    </author>
+    <author>
+      <name>Erik Jan van Leeuwen</name>
+    </author>
+    <author>
+      <name>Andreas Wiese</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1606.03746v1</id>
+    <title>Optimal Packings of 22 and 33 Unit Squares in a Square</title>
+    <updated>2016-06-12T18:17:20Z</updated>
+    <link href="https://arxiv.org/abs/1606.03746v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1606.03746v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $s(n)$ be the side length of the smallest square into which $n$ non-overlapping unit squares can be packed. In 2010, the author showed that $s(13)=4$ and $s(46)=7$. Together with the result $s(6)=3$ by Keaney and Shiu, these results strongly suggest that $s(m^2-3)=m$ for $m\ge 3$, in particular for the values $m=5,6$, which correspond to cases that lie in between the previous results.
+  In this article we show that indeed $s(m^2-3)=m$ for $m=5,6$, implying that the most efficient packings of 22 and 33 squares are the trivial ones. To achieve our results, we modify the well-known method of sets of unavoidable points by replacing them with continuously varying families of such sets.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-06-12T18:17:20Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Wolfram Bentz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1412.4709v1</id>
+    <title>Polynomial-Time Approximation Schemes for Circle and Other Packing Problems</title>
+    <updated>2014-12-15T18:27:32Z</updated>
+    <link href="https://arxiv.org/abs/1412.4709v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1412.4709v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give an asymptotic approximation scheme (APTAS) for the problem of packing a set of circles into a minimum number of unit square bins. To obtain rational solutions, we use augmented bins of height $1+γ$, for some arbitrarily small number $γ&gt; 0$. Our algorithm is polynomial on $\log 1/γ$, and thus $γ$ is part of the problem input. For the special case that $γ$ is constant, we give a (one dimensional) resource augmentation scheme, that is, we obtain a packing into bins of unit width and height $1+γ$ using no more than the number of bins in an optimal packing. Additionally, we obtain an APTAS for the circle strip packing problem, whose goal is to pack a set of circles into a strip of unit width and minimum height. These are the first approximation and resource augmentation schemes for these problems.
+  Our algorithm is based on novel ideas of iteratively separating small and large items, and may be extended to a wide range of packing problems that satisfy certain conditions. These extensions comprise problems with different kinds of items, such as regular polygons, or with bins of different shapes, such as circles and spheres. As an example, we obtain APTAS's for the problems of packing d-dimensional spheres into hypercubes under the $L_p$-norm.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-12-15T18:27:32Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Flávio K. Miyazawa</name>
+    </author>
+    <author>
+      <name>Lehilton L. C. Pedrosa</name>
+    </author>
+    <author>
+      <name>Rafael C. S. Schouery</name>
+    </author>
+    <author>
+      <name>Maxim Sviridenko</name>
+    </author>
+    <author>
+      <name>Yoshiko Wakabayashi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1411.7819v2</id>
+    <title>Uniformity of point samples in metric spaces using gap ratio</title>
+    <updated>2015-12-04T12:33:13Z</updated>
+    <link href="https://arxiv.org/abs/1411.7819v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1411.7819v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Teramoto et al. defined a new measure called the gap ratio that measures the uniformity of a finite point set sampled from $\cal S$, a bounded subset of $\mathbb{R}^2$. We generalize this definition of measure over all metric spaces by appealing to covering and packing radius. The definition of gap ratio needs only a metric unlike discrepancy, a widely used uniformity measure, that depends on the notion of a range space and its volume. We also show some interesting connections of gap ratio to Delaunay triangulation and discrepancy in the Euclidean plane. The major focus of this work is on solving optimization related questions about selecting uniform point samples from metric spaces; the uniformity being measured using gap ratio. We consider discrete spaces like graph and set of points in the Euclidean space and continuous spaces like the unit square and path connected spaces. We deduce lower bounds, prove hardness and approximation hardness results. We show that a general approximation algorithm framework gives different approximation ratios for different metric spaces based on the lower bound we deduce. Apart from the above, we show existence of coresets for sampling uniform points from the Euclidean space -- for both the static and the streaming case. This leads to a $\left( 1+ε\right)$-approximation algorithm for uniform sampling from the Euclidean space.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-11-28T11:23:59Z</published>
+    <arxiv:comment>31 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Arijit Bishnu</name>
+    </author>
+    <author>
+      <name>Sameer Desai</name>
+    </author>
+    <author>
+      <name>Arijit Ghosh</name>
+    </author>
+    <author>
+      <name>Mayank Goswami</name>
+    </author>
+    <author>
+      <name>Subhabrata Paul</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1209.4053v1</id>
+    <title>A nonsmooth program for jamming hard spheres</title>
+    <updated>2012-09-18T18:49:08Z</updated>
+    <link href="https://arxiv.org/abs/1209.4053v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1209.4053v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study packings of $n$ hard spheres of equal radius in the $d$-dimensional unit cube. We present a nonsmooth function whose local extrema are the radii of jammed packings (where no subset of spheres can be moved keeping all others fixed) and show that for a fixed number of spheres there are only finitely many radii of such jammed configurations. We propose an algorithm for the maximization of this maximal radius function and present examples for 5 - 8 disks in the unit square and 4 - 6 spheres in the unit cube. The method allows straightforward generalization to packings of spheres in other compact containers.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-09-18T18:49:08Z</published>
+    <arxiv:comment>23 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <arxiv:journal_ref>Optimization Letters 8:13-33 (2014)</arxiv:journal_ref>
+    <author>
+      <name>Peter Hinow</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0903.2265v1</id>
+    <title>An Absolute 2-Approximation Algorithm for Two-Dimensional Bin Packing</title>
+    <updated>2009-03-13T11:39:14Z</updated>
+    <link href="https://arxiv.org/abs/0903.2265v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0903.2265v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We consider the problem of packing rectangles into bins that are unit squares, where the goal is to minimize the number of bins used. All rectangles have to be packed non-overlapping and orthogonal, i.e., axis-parallel. We present an algorithm for this problem with an absolute worst-case ratio of 2, which is optimal provided P != NP.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-03-13T11:39:14Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Rolf Harren</name>
+    </author>
+    <author>
+      <name>Rob van Stee</name>
+    </author>
+  </entry>
+</feed>

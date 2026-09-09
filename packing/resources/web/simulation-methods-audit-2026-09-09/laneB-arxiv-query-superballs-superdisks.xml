@@ -1,0 +1,1161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/0z9w04eWjQHxPBa8crCyPRE8ehU</id>
+  <title>arXiv Query: search_query=all:superball OR all:superballs OR all:superdisk OR all:superdisks&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:24:33Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:superball+OR+(all:superballs+OR+(all:superdisk+OR+all:superdisks))&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>45</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.18998v2</id>
+    <title>Searching for a superdisk in radio galaxy J0116-473</title>
+    <updated>2026-06-18T06:46:05Z</updated>
+    <link href="https://arxiv.org/abs/2606.18998v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.18998v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Superdisks have emerged as an active area of research in recent years, and J0116-473 represents a promising target for studying this extended structure. Our primary objective was to search for HI absorption associated with the suspected superdisk. However, no such absorption feature was detected, suggesting a low, or absence of neutral hydrogen content in the superdisk. In addition, we examined a compact point source located near the galaxy's core and the presumed plane of the superdisk, enabling us to search for HI absorption against this background continuum. We also present a detailed multi-band morphological analysis of the galaxy using Giant Metrewave Radio Telescope (GMRT) observations in Bands 3, 4, and 5. A spectral analysis of both the galaxy and the nearby point source was carried out using data from these three frequency bands. A systematic steepening of the spectral index is observed from the core toward the lobes, as expected for aging synchrotron-emitting plasma. We also found that the northern inner lobe exhibits a significantly steeper spectrum than its southern counterpart, possibly reflecting environmental effects associated with the proposed superdisk. Since superdisks are expected to contain hot, ionized gas, we additionally examined archival X-ray observations from the XMM-Newton telescope. Although diffuse X-ray emission associated with the radio lobes is visible, no significant emission is detected from the region corresponding to the suspected superdisk.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-17T12:24:59Z</published>
+    <arxiv:comment>13 pages, 5 figures, submitted to Journal of Astrophysics and Astronomy, comments are welcome</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Ankur Sinha</name>
+    </author>
+    <author>
+      <name>Riya Rathore</name>
+    </author>
+    <author>
+      <name>Narendra Nath Patra</name>
+    </author>
+    <author>
+      <name>Abhirup Datta</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.09785v2</id>
+    <title>Superball of Strings</title>
+    <updated>2026-05-05T08:07:36Z</updated>
+    <link href="https://arxiv.org/abs/2601.09785v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.09785v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>I solve the equations of the low-energy limit of string theory to obtain a solution corresponding to a microcanonical ensemble of highly-excited superstrings. This ``Superball of Strings'' is a static, spherically symmetric ``fuzzball'' of BPS strings with a size set by a random walk scaling. The solution can be embedded in string theory in a significant part of parameter space. While the solution does not constitute a Lorentzian interpretation for a Euclidean, horizonless solution by Chen, Maldacena, and Witten, a few connections are noted. A singular extremal black hole and the Superball of Strings exist as Supergravity solutions with the same asymptotic boundary conditions; however, I argue that the latter describes generic BPS microstates.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-14T19:00:02Z</published>
+    <arxiv:comment>32 pages, V2: added a comment about the sizes of solutions in different ensembles; matches to a published version</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>10.1007/JHEP05(2026)009</arxiv:journal_ref>
+    <author>
+      <name>Yoav Zigdon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.06918v1</id>
+    <title>Emergence of mixed orientational ordering in quasi-one-dimensional superdisk and superball fluids</title>
+    <updated>2025-10-08T11:49:56Z</updated>
+    <link href="https://arxiv.org/abs/2510.06918v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.06918v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We report the discovery of a mixed orientational structure in the quasi-one-dimensional fluid of hard non-spherical bodies with the exact calculation of the thermodynamic and structural quantities using the transfer operator method. The mixed arrangement, which is spatially uniform, but orientionally ordered, cannot be identified with conventional mesophases such as tetratic, cubatic and nematic. It is found that the particles form a mixed orientational arrangement with preferred parallel and perpendicular orientations in a channel, where the number of parallel and perpendicularly oriented particles is not equal even at the close packing density. The mixed structure can be stabilized with hard bodies having equal side lengths in parallel and perpendicular orientations along the channel. These conditions can be realized with colloidal superdisks (superballs) if the curvature of neighboring sides (faces) are different. We show that even a small stretching of the superparticle destabilizes mixed ordering due to perfect nematic order evolving upon approaching close-packing.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-08T11:49:56Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Sakineh Mizani</name>
+    </author>
+    <author>
+      <name>Martin Oettel</name>
+    </author>
+    <author>
+      <name>Péter Gurin</name>
+    </author>
+    <author>
+      <name>Szabolcs Varga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.25583v3</id>
+    <title>Contact Forces in Microgel Suspensions</title>
+    <updated>2025-11-01T03:11:48Z</updated>
+    <link href="https://arxiv.org/abs/2509.25583v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.25583v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Within a model where micrometer-size soft colloidal particles are viewed as liquid drops, we theoretically study the contact interaction between them. We compute the exact deformation energy across a broad range of indentations and for various model parameters, and we show that it can be reproduced using truncated superball and spheropolyhedral variational shapes in the attractive and the repulsive regime, respectively. At large surface tensions representative of microgels, this energy is pairwise additive well beyond small indentations and can be approximated by a power-law dependence on indentation with an exponent around 2.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-29T23:16:02Z</published>
+    <arxiv:comment>5 pages, 4 figures. Supplementary material available (21 pages, 17 figures)</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Fran Ivan Vrban</name>
+    </author>
+    <author>
+      <name>Antonio Šiber</name>
+    </author>
+    <author>
+      <name>Primož Ziherl</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.02838v2</id>
+    <title>Role of nanoparticle shape on the critical size for quasi-uniform ordering: from spheres to cubes through superballs</title>
+    <updated>2025-10-07T15:50:41Z</updated>
+    <link href="https://arxiv.org/abs/2508.02838v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.02838v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The equilibrium states of single-domain magnetite nanoparticles (NPs) result from a subtle interplay between size, geometry, and magnetocrystalline anisotropy. In this work, we present a micromagnetic study of shape-controlled magnetite NPs using the superball geometry, which provides a continuous interpolation between spheres and cubes. By isolating the influence of shape, we analyze the transition from quasi-uniform (single-domain) to vortex-like states as particle size increases, revealing critical sizes that depend on the superball exponent p. Our simulations show that faceted geometries promote the stabilization of vortex states at larger sizes, with marked distortions in the vortex core structure. The inclusion of cubic magnetocrystalline anisotropy, representative of magnetite, further lowers the critical size and introduces preferential alignment along the [111] easy axes. For isotropic shapes, the critical size for this transition increases with p, ranging from ~49 nm for spheres to ~56 nm for cubes, in agreement with experimental trends. In contrast, the presence of slight particle elongation increases the critical size and induces another preferential alignment direction. These results demonstrate that even small deviations from sphericity or aspect ratio significantly alter the magnetic ordering and stability of equilibrium magnetic states.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-04T19:06:06Z</published>
+    <arxiv:comment>13 pages, 12 figures, submitted to J. Magn. Magn. Mater</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>J. Magn. Magn. Mater. 638, 173751 (2026)</arxiv:journal_ref>
+    <author>
+      <name>Iago López-Vázquez</name>
+    </author>
+    <author>
+      <name>David Serantes</name>
+    </author>
+    <author>
+      <name>Òscar Iglesias</name>
+    </author>
+    <arxiv:doi>10.1016/j.jmmm.2025.173751</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jmmm.2025.173751" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.10742v2</id>
+    <title>Universality of the close packing properties and markers of isotropic-to-tetratic crossover in quasi-one-dimensional superdisk fluid</title>
+    <updated>2024-12-05T21:29:12Z</updated>
+    <link href="https://arxiv.org/abs/2409.10742v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.10742v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study equilibrium states and ordering regimes of a quasi-one-dimensional system of hard superdisks (anisotropic particles interpolating between disks and squares) where the centers of the particles are constrained to move on a line. A continuous change from a quasi-isotropic to a tetratic regime is found upon increasing the density. Somewhat unexpected, for isobaric states, systems with larger and more anisotropic particles in the tetratic regime are denser than systems with smaller and less anisotropic particles in a quasi-isotropic regime. Close packing behaviour is characterised by exponents describing the behaviour of the pressure, the angular fluctuations and the angular correlation length. We obtain two universal, shape-independent relations between them.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-16T21:21:04Z</published>
+    <arxiv:comment>Submission to SciPost</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>SciPost Phys. Core 8, 008 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Sakineh Mizani</name>
+    </author>
+    <author>
+      <name>Martin Oettel</name>
+    </author>
+    <author>
+      <name>Péter Gurin</name>
+    </author>
+    <author>
+      <name>Szabolcs Varga</name>
+    </author>
+    <arxiv:doi>10.21468/SciPostPhysCore.8.1.008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.21468/SciPostPhysCore.8.1.008" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.18892v2</id>
+    <title>Macroscopic emulation of microscopic magnetic particle systems</title>
+    <updated>2023-12-18T13:50:43Z</updated>
+    <link href="https://arxiv.org/abs/2310.18892v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.18892v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work we show that macroscopic experiments can be used to investigate microscopic systems. Such macroscopic experiments enable testing the assumptions and results obtained by theoretical considerations or simulations that can not be obtained under microscope (e.g., the orientation of a spherical particle). To emulate the dynamics of a single hematite cube immersed in water and subjected to a rotating magnetic field, a cubic magnet is firmly positioned in a 3D printed superball shell. The dimensionless parameters of the microscopic and macroscopic systems can be equalized by using a glycerol-water mixture instead of water as well as by the material and infill of the 3D printed shell. The pose of the superball is tracked using ArUco stickers which act as fiducial markers. It was found that there is a qualitative agreement between the macroscopic experiments and theoretical predictions. However, the reduced thermal effects in the macroscopic experiments lead to an increase in friction between the superball and the surface, thus shifting the critical frequency of the system. Since the shell is 3D printed, the given method can be extended to any shape and magnetization orientation.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-29T03:56:36Z</published>
+    <arxiv:comment>21 page, 6 figures, 1 table. Submitted to JMMM special issue ICMF 2023. Presented as poster in ICMF 2023</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Viesturs Spūlis</name>
+    </author>
+    <author>
+      <name>Daniels Gorovojs</name>
+    </author>
+    <author>
+      <name>Jānis Pudāns</name>
+    </author>
+    <author>
+      <name>Rolands Lopatko</name>
+    </author>
+    <author>
+      <name>Andris P. Stikuts</name>
+    </author>
+    <author>
+      <name>Mārtiņš Brics</name>
+    </author>
+    <author>
+      <name>Guntars Kitenbergs</name>
+    </author>
+    <author>
+      <name>Jānis Cīmurs</name>
+    </author>
+    <arxiv:doi>10.1016/j.jmmm.2023.171647</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jmmm.2023.171647" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.06296v2</id>
+    <title>Holographic Entropy Inequalities and Multipartite Entanglement</title>
+    <updated>2024-07-10T17:58:24Z</updated>
+    <link href="https://arxiv.org/abs/2309.06296v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.06296v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study holographic entropy inequalities and their structural properties by making use of a judicious grouping of terms into certain multipartite information quantities. This allows us to recast cumbersome entropic expressions into much simpler ones which share interestingly rigid structures. By performing a systematic search over some of these structures, we are able to discover more than 300 novel entropy inequalities for six parties, thereby demonstrating that these recastings provide a fruitful generating technique for uncovering new holographic entropy inequalities. In attempting to interpret the corresponding sign-definite quantities as correlation measures, we also obtain a no-go result: the superbalance property of holographic entropy inequalities turns out to preclude them from being monotonic under partial tracing. In the process, we also comment on the geometrical significance of multipartite information quantities and present various structural relations amongst them.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-12T15:00:32Z</published>
+    <arxiv:comment>v1: 40 pages, 384 inequalities. v2: 1877 inequalities (w/ numbering distinct from v1); new tables in App. C; link to living repository added</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>JHEP 08 (2024) 238</arxiv:journal_ref>
+    <author>
+      <name>Sergio Hernández-Cuenca</name>
+    </author>
+    <author>
+      <name>Veronika E. Hubeny</name>
+    </author>
+    <author>
+      <name>Frederic Jia</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP08(2024)238</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP08(2024)238" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.05719v2</id>
+    <title>On the lower bound for packing densities of superballs in high dimensions</title>
+    <updated>2022-06-18T08:44:37Z</updated>
+    <link href="https://arxiv.org/abs/2206.05719v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.05719v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Define the superball with radius $r$ and center ${\boldsymbol 0}$ in $\mathbb{R}^n$ to be the set $$ \left\{{\boldsymbol x}\in\mathbb{R}^n:\sum_{j=1}^{m}\left(x_{k_j+1}^2+x_{k_j+2}^2+\cdots+x_{k_{j+1}}^2\right)^{p/2}\leq r^p\right\},0=k_1&lt;k_2&lt;\cdots&lt;k_{m+1}=n, $$ which is a generalization of $\ell_p$-balls. We give two new proofs for the celebrated result that for $1&lt;p\leq2$, the translative packing density of superballs in $\mathbb{R}^n$ is $Ω(n/2^n)$. This bound was first obtained by Schmidt, with subsequent constant factor improvement by Rogers and Schmidt, respectively. Our first proof is based on the hard superball model, and the second proof is based on the independence number of a graph. We also investigate the entropy of packings, which measures how plentiful such packings are.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-12T11:34:32Z</published>
+    <arxiv:comment>31 pages; any comments are welcome</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Chengfei Xie</name>
+    </author>
+    <author>
+      <name>Gennian Ge</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.00528v1</id>
+    <title>The MURALES survey. VI. Properties and origin of the extended line emission structures in radio galaxies</title>
+    <updated>2022-04-01T15:36:46Z</updated>
+    <link href="https://arxiv.org/abs/2204.00528v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.00528v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This is the sixth paper presenting the results of the MUse RAdio Loud Emission line Snapshot survey (MURALES). We observed 37 radio sources from the 3C sample with z&lt;0.3 and declination &lt;20 degrees with the MUSE optical integral field spectrograph at the VLT. We here focus on the properties of the extended emission line regions (EELRs) that can be studied with unprecedented detail thanks to the depth of these observations. Line emission in the 10 FRIs is, in most cases, confined to within &lt;4 kpc, while large-scale (&gt;4 kpc) ionized gas is seen in all but two of the 26 FRIIs. It usually takes the form of elongated or filamentary structures, typically extending between 10 and 30 kpc, but also reaching distances of ~80 kpc. We find that 1) the large-scale ionized gas structures show a tendency to be oriented at large angles from the radio axis, and 2) the gas on a scale of a few kpc from the nucleus often shows ordered rotation with a kinematical axis forming a median angle of 65 degrees with the radio axis. We also discuss the velocity field and ionization properties of the EELRs. The observed emission line structures appear to be associated with gaseous "superdisks" formed after a gas rich merger. The different properties of the EELR can be explained with a combination of the source evolutionary state and the orientation of the "superdisk" with respect to the radio axis. The general alignment between the superdisks and radio axis might be produced by stable and coherent accretion maintained over long timescales.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-01T15:36:46Z</published>
+    <arxiv:comment>Pre-proofs version - Accepted for publication in A&amp;A</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <arxiv:journal_ref>A&amp;A 662, A23 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Barbara Balmaverde</name>
+      <arxiv:affiliation>INAF - Osservatorio Astrofisico di Torino, Via Osservatorio 20, I-10025 Pino Torinese, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alessandro Capetti</name>
+      <arxiv:affiliation>INAF - Osservatorio Astrofisico di Torino, Via Osservatorio 20, I-10025 Pino Torinese, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>R. D. Baldi</name>
+      <arxiv:affiliation>INAF- Istituto di Radioastronomia, Via Gobetti 101, I-40129 Bologna, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>S. Baum</name>
+      <arxiv:affiliation>Department of Physics and Astronomy, University of Manitoba, Winnipeg, MB R3T 2N2, Canada</arxiv:affiliation>
+    </author>
+    <author>
+      <name>M. Chiaberge</name>
+      <arxiv:affiliation>Space Telescope Science Institute, 3700 San Martin Dr., Baltimore, MD 21210, USA</arxiv:affiliation>
+      <arxiv:affiliation>Johns Hopkins University, 3400 N. Charles Street, Baltimore, MD 21218, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>R. Gilli</name>
+      <arxiv:affiliation>INAF - Osservatorio di Astrofisica e Scienza dello spazio di Bologna, Via Gobetti 93/3, I-40129 Bologna, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ana Jimenez-Gallardo</name>
+      <arxiv:affiliation>Dipartimento di Fisica, Universita' degli Studi di Torino, via Pietro Giuria 1, I-10125 Torino, Italy</arxiv:affiliation>
+      <arxiv:affiliation>INAF - Osservatorio Astrofisico di Torino, Via Osservatorio 20, I-10025 Pino Torinese, Italy</arxiv:affiliation>
+      <arxiv:affiliation>European Southern Observatory, Alonso de Cordova 3107, Vitacura, Region Metropolitana, Chile</arxiv:affiliation>
+      <arxiv:affiliation>Istituto Nazionale di Fisica Nucleare, Sezione di Torino, I-10125 Torino, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alessandro Marconi</name>
+      <arxiv:affiliation>Dipartimento di Fisica e Astronomia, Universita' di Firenze, via G. Sansone 1, 50019 Sesto Fiorentino</arxiv:affiliation>
+      <arxiv:affiliation>INAF - Osservatorio Astrofisico di Arcetri, Largo Enrico Fermi 5, I-50125 Firenze, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Francesco Massaro</name>
+      <arxiv:affiliation>Dipartimento di Fisica, Universita' degli Studi di Torino, via Pietro Giuria 1, I-10125 Torino, Italy</arxiv:affiliation>
+      <arxiv:affiliation>INAF - Osservatorio Astrofisico di Torino, Via Osservatorio 20, I-10025 Pino Torinese, Italy</arxiv:affiliation>
+      <arxiv:affiliation>Istituto Nazionale di Fisica Nucleare, Sezione di Torino, I-10125 Torino, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>E. Meyer</name>
+      <arxiv:affiliation>University of Maryland Baltimore County, 1000 Hilltop Circle, Baltimore, MD 21250, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>C. O'Dea</name>
+      <arxiv:affiliation>Department of Physics and Astronomy, University of Manitoba, Winnipeg, MB R3T 2N2, Canada</arxiv:affiliation>
+    </author>
+    <author>
+      <name>G. Speranza</name>
+      <arxiv:affiliation>Instituto de Astrofisica de Canarias, Calle Via Lactea, s/n, 38205, La Laguna, Tenerife, Spain</arxiv:affiliation>
+      <arxiv:affiliation>Departamento de Astrofisica, Universidad de La Laguna, 38206, La Laguna, Tenerife, Spain</arxiv:affiliation>
+    </author>
+    <author>
+      <name>E. Torresi</name>
+      <arxiv:affiliation>INAF - Osservatorio di Astrofisica e Scienza dello spazio di Bologna, Via Gobetti 93/3, I-40129 Bologna, Italy</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Giacomo Venturi</name>
+      <arxiv:affiliation>Instituto de Astrofisica, Facultad de Fisica, Pontificia Universidad Catolica de Chile, Casilla 306, Santiago 22, Chile</arxiv:affiliation>
+      <arxiv:affiliation>INAF - Osservatorio Astrofisico di Arcetri, Largo Enrico Fermi 5, I-50125 Firenze, Italy</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/202142823</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/202142823" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.14954v2</id>
+    <title>Characterization of Void Space, Large-Scale Structure, and Transport Properties of Maximally Random Jammed Packings of Superballs</title>
+    <updated>2022-05-06T16:43:30Z</updated>
+    <link href="https://arxiv.org/abs/2111.14954v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.14954v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dense, disordered packings of particles are useful models of low-temperature amorphous phases of matter, biological systems, granular media, and colloidal systems. The study of dense packings of nonspherical particles enables one to ascertain how rotational degrees of freedom affect packing behavior. Here, we study superballs, a large family of deformations of the sphere, defined in three dimensions by $|x_1|^{2p}+|x_2|^{2p}+|x_3|^{2p}\leq1$, where $p&gt;0$ is a deformation parameter indicating to what extent the shape deviates from a sphere. As $p$ increases from the sphere point ($p=1$), the superball attains cubic symmetry, and attains octahedral symmetry when $p&lt;1$. Previous characterization of superball packings has shown that they have a maximally random jammed (MRJ) state, whose properties (e.g., packing fraction $φ$) vary nonanalytically as $p$ diverges from unity. Here, we use an event-driven molecular dynamics algorithm to produce MRJ superball packings. We characterize their large-scale structure by examining the small-$Q$ behavior of their structure factors and spectral densities, which indicate these packings are effectively hyperuniform. We show that the mean width $\bar{w}$ is a useful length scale to make distances dimensionless in order to compare systematically superballs of different shape. We also compute the complementary cumulative pore-size distribution $F(δ)$ and find the pore sizes tend to decrease as $|1-p|$ increases. From $F(δ)$, we estimate the fluid permeability, mean survival time, and principal diffusion relaxation time of the packings. Additionally, we compute the diffusion spreadability and find the long-time power-law scaling indicates these packings are hyperuniform. Our results can be used to help inform the design of granular materials with targeted densities and transport properties.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-29T21:03:45Z</published>
+    <arxiv:comment>16 Pages, 17 Figures. SI: 4 Pages, 6 Figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review Materials, 6 025603 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Charles Emmett Maher</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevMaterials.6.025603</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevMaterials.6.025603" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.06139v4</id>
+    <title>Self-assembly of Colloidal Superballs Under Spherical Confinement of a Drying Droplet</title>
+    <updated>2021-12-14T19:24:34Z</updated>
+    <link href="https://arxiv.org/abs/2108.06139v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.06139v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Understanding the relationship between colloidal building block shape and self-assembled material structure is important for the development of novel materials by self-assembly. In this regard, colloidal superballs are unique building blocks because their shape can smoothly transition between spherical and cubic. Assembly of colloidal superballs under spherical confinement results in macroscopic clusters with ordered internal structure. By utilizing Small Angle X-Ray Scattering (SAXS), we probe the internal structure of colloidal superball dispersion droplets during confinement. We observe and identify four distinct drying regimes that arise during compression via evaporating droplets, and we track the development of the assembled macrostructure. As the superballs assemble, we found that they arrange into the predicted paracrystalline, rhombohedral C1-lattice that varies by the constituent superballs' shape. This provides insights in the behavior between confinement and particle shape that can be applied in the development of new functional materials.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-13T09:18:17Z</published>
+    <arxiv:comment>14 pages, 5 figures, supporting info, accepted for publication in JCISOpen</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Sarah N. Schyck</name>
+    </author>
+    <author>
+      <name>Janne-Mieke Meijer</name>
+    </author>
+    <author>
+      <name>Lucia Baldauf</name>
+    </author>
+    <author>
+      <name>Peter Schall</name>
+    </author>
+    <author>
+      <name>Andrei V. Petukhov</name>
+    </author>
+    <author>
+      <name>Laura Rossi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2011.08696v2</id>
+    <title>Three-step melting of hard superdisks in two dimensions</title>
+    <updated>2020-12-03T16:13:17Z</updated>
+    <link href="https://arxiv.org/abs/2011.08696v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2011.08696v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore the link between the melting scenarios of two-dimensional systems of hard disks and squares through replica-exchange Monte Carlo simulations of hard superdisks. The well-known melting scenarios are observed in the disk and square limits, while we observe an unusual three-step scenario for dual-shapes. We find that two mesophases mediate the melting: a hexatic phase and another fluid phase with a $D_2$ local symmetry, we call it rhombatic, where both bond and particle orientational orders are quasi-long-range. Our results show that not only can the melting process of liquid-crystal forming molecules be complicated, where elongated shapes stabilize several mesophases, but also that of anisotropic quasispherical molecules.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-11-17T15:24:16Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 102, 062603 (2020)</arxiv:journal_ref>
+    <author>
+      <name>Péter Gurin</name>
+    </author>
+    <author>
+      <name>Szabolcs Varga</name>
+    </author>
+    <author>
+      <name>Gerardo Odriozola</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.102.062603</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.102.062603" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.04558v2</id>
+    <title>Superbalance of Holographic Entropy Inequalities</title>
+    <updated>2020-07-07T17:37:59Z</updated>
+    <link href="https://arxiv.org/abs/2002.04558v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.04558v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The domain of allowed von Neumann entropies of a holographic field theory carves out a polyhedral cone -- the holographic entropy cone -- in entropy space. Such polyhedral cones are characterized by their extreme rays. For an arbitrary number of parties, it is known that the so-called perfect tensors are extreme rays. In this work, we constrain the form of the remaining extreme rays by showing that they correspond to geometries with vanishing mutual information between any two parties, ensuring the absence of Bell pair type entanglement between them. This is tantamount to proving that besides subadditivity, all non-redundant holographic entropy inequalities are superbalanced, i.e. not only do UV divergences cancel in the inequality itself (assuming smooth entangling surfaces), but also in the purification thereof.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-11T17:24:44Z</published>
+    <arxiv:comment>21 pages, 6 figures; v2: Minor clarification comments, version to appear in JHEP</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <author>
+      <name>Temple He</name>
+    </author>
+    <author>
+      <name>Veronika E. Hubeny</name>
+    </author>
+    <author>
+      <name>Mukund Rangamani</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP07(2020)245</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP07(2020)245" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.10361v2</id>
+    <title>Shape and Interaction Decoupling for Colloidal Pre-Assembly</title>
+    <updated>2021-08-13T12:09:16Z</updated>
+    <link href="https://arxiv.org/abs/1909.10361v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.10361v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Creating materials with structure that is independently controllable at a range of scales requires breaking naturally occurring hierarchies. Breaking these hierarchies can be achieved via the decoupling of building block attributes from structure during assembly. Here, we demonstrate both geometric and interaction decoupling in pre-assembled colloidal structures of cube-like particles with rounded edges. Through computer simulations and experiments, we show that compressing a small number of such cubes in spherical confinement results in clusters with highly reproducible structures that can be used as mesoscale building blocks to form the next level of structural hierarchy. These clusters demonstrate geometric decoupling between particle shape and cluster structure; namely, for clusters of up to nine particles, the colloidal superballs pack consistently like spheres, despite the presence of shape anisotropy and facets in the cubic-like particles. We confirm that cluster structure is also decoupled from inter-particle interaction, showing that the same structures arise from the spherical confinement of both non-magnetic and magnetic colloidal cubes with strong dipolar interactions. To highlight the potential of these superball clusters for hierarchical assembly, we demonstrate, using computer simulations, that clusters of six to nine particles can self-assemble into high-order structures that differ from those of similarly shaped particles without pre-assembly. These results demonstrate decoupling for anisotropic building blocks that can be further exploited for hierarchical materials development.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-23T13:42:16Z</published>
+    <arxiv:comment>8 pages, 6 figures, supporting info</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Science Advances, 2022, 8, 21, eabm0548</arxiv:journal_ref>
+    <author>
+      <name>Lucia Baldauf</name>
+    </author>
+    <author>
+      <name>Erin G. Teich</name>
+    </author>
+    <author>
+      <name>Peter Schall</name>
+    </author>
+    <author>
+      <name>Greg van Anders</name>
+    </author>
+    <author>
+      <name>Laura Rossi</name>
+    </author>
+    <arxiv:doi>10.1126/sciadv.abm0548</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1126/sciadv.abm0548" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.13151v1</id>
+    <title>Morphology and Kinetics of Random Sequential Adsorption of Superballs: From Hexapods to Cubes</title>
+    <updated>2019-05-30T16:14:43Z</updated>
+    <link href="https://arxiv.org/abs/1905.13151v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.13151v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Superballs represent a class of particles whose shapes are defined by ${|x|}^{2p}+{|y|}^{2p}+{|z|}^{2p} \le R^{2p}$, with $p\in(0,\infty)$ being the "deformation parameter". $0&lt;p&lt;0.5$ represents a family of hexapodlike (concave octahedrallike) particles, while for $0.5\leq p&lt;1$ and $p&gt;1$ one has, respectively, families of convex octahedrallike and cubelike particles, with $p=1,\;0.5$ and $\infty$ representing spheres, octahedra, and cubes. Colloidal zeolite suspensions, catalysis, and adsorption, as well as biomedical magnetic nanoparticles are but a few of the applications of packing of superballs. We introduce a universal method for simulating random sequential adsorption of superballs, which we refer to as "low-entropy" algorithm, in contrast with the conventional algorithm that represents a "high-entropy" method. The two algorithms yield, respectively, precise estimates of the jamming fraction $φ_\infty(p)$ and $ν(p)$, the exponent that characterizes the kinetics of adsorption at long times $t$, $φ(\infty)-φ(t)\sim t^{-ν(p)}$. Precise estimates of $φ_\infty(p)$ and $ν(p)$ are obtained and shown to be in agreement, in some special limits, with the existing analytical and numerical results.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-30T16:14:43Z</published>
+    <arxiv:comment>13 pages, 4 figures, 1 table, Submitted to Physical Review Letters</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 100, 020602 (2019)</arxiv:journal_ref>
+    <author>
+      <name>Pooria Yousefi</name>
+    </author>
+    <author>
+      <name>Hessam Malmir</name>
+    </author>
+    <author>
+      <name>Muhammad Sahimi</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.100.020602</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.100.020602" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.11126v4</id>
+    <title>On the lattice Hadwiger number of superballs and some other bodies</title>
+    <updated>2024-09-30T19:19:40Z</updated>
+    <link href="https://arxiv.org/abs/1905.11126v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.11126v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that the lattice Hadwiger number of superballs is exponential in the dimension. The same is true for some more general convex bodies.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-27T11:22:48Z</published>
+    <arxiv:comment>Unfortunately, the main result of the paper should be considered as not proven. Namely, the construction D applied to a code $C_0$ with many light vectors gives a lattice $L$ but there is no proof that the kissing number of $L$ is exponential. The initial impression that this lattice retains all the short vectors (light vectors considered as 0-1 vectors) from $C_0$ is definitely false</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Serge Vlăduţ</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1904.11462v2</id>
+    <title>Exponential improvements for superball packing upper bounds</title>
+    <updated>2020-02-13T23:44:05Z</updated>
+    <link href="https://arxiv.org/abs/1904.11462v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1904.11462v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that for all fixed $p &gt; 2$, the translative packing density of unit $\ell_p$-balls in $\mathbb{R}^n$ is at most $2^{(γ_p + o(1))n}$ with $γ_p &lt; - 1/p$. This is the first exponential improvement in high dimensions since van der Corput and Schaake (1936).</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-04-25T17:12:27Z</published>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Adv. Math. 365 (2020), 107056</arxiv:journal_ref>
+    <author>
+      <name>Ashwin Sah</name>
+    </author>
+    <author>
+      <name>Mehtaab Sawhney</name>
+    </author>
+    <author>
+      <name>David Stoner</name>
+    </author>
+    <author>
+      <name>Yufei Zhao</name>
+    </author>
+    <arxiv:doi>10.1016/j.aim.2020.107056</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.aim.2020.107056" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1812.06875v1</id>
+    <title>Search for HI emission from superdisk candidates associated with radio galaxies</title>
+    <updated>2018-12-17T16:32:01Z</updated>
+    <link href="https://arxiv.org/abs/1812.06875v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1812.06875v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Giant gaseous layers (termed "superdisk") have been hypothesized in the past to account for the strip-like radio emission gap (or straight-edged central brightness depression) observed between the twin radio lobes, in over a dozen relatively nearby powerful Fanaroff-Riley Class II radio galaxies. They could also provide a plausible alternative explanation for a range of observations. Although a number of explanations have been proposed for the origin of the superdisks, little is known about their material content. Some X-ray observations of superdisk candidates indicate the presence of hot gas, but a cool dusty medium also seems to be common in them. If they are made of entirely or partly neutral gas, it may be directly detectable and we report here a first attempt to detect/image any neutral hydrogen gas present in the superdisks that are inferred to be present in four nearby radio galaxies. We have not found a positive HI signal in any of the four sources, resulting in tight upper limits on the HI number density in the postulated superdisks, estimated directly from the central rms noise values of the final radio continuum subtracted image. The estimated ranges of the upper limit on neutral hydrogen number density and column density are $10^{-4}-10^{-3}$ atoms per cm$^3$ and $10^{19}-10^{20}$ atoms per cm$^{2}$, respectively. No positive HI signal is detected even after combining all the four available HI images (with inverse variance weighting). This clearly rules out an HI dominated superdisk as a viable model to explain these structures, however, the possibility of superdisk being made of warm/hot gas still remains open.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-12-17T16:32:01Z</published>
+    <arxiv:comment>9 pages, 4 figures, 2 Tables. Accepted for publication in Research in Astronomy and Astrophysics (RAA)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <arxiv:journal_ref>2019, Res. Astron. Astrophys., 19, 83</arxiv:journal_ref>
+    <author>
+      <name>Abhijeet Anand</name>
+    </author>
+    <author>
+      <name>Nirupam Roy</name>
+    </author>
+    <author>
+      <name> Gopal-Krishna</name>
+    </author>
+    <arxiv:doi>10.1088/1674-4527/19/6/83</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1674-4527/19/6/83" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.13262v1</id>
+    <title>Effect of Shape and Friction on the Packing and Flow of Granular Materials</title>
+    <updated>2018-10-31T13:03:25Z</updated>
+    <link href="https://arxiv.org/abs/1810.13262v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.13262v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The packing and flow of aspherical frictional particles are studied using discrete element simulations. Particles are superballs with shape $|x|^{s}+|y|^{s}+|z|^{s} = 1$ that varies from sphere ($s=2$) to cube ($s=\infty$), constructed with an overlapping-sphere model. Both packing fraction, $φ$, and coordination number, $z$, decrease monotonically with microscopic friction $μ$, for all shapes. However, this decrease is more dramatic for larger $s$ due to a reduction in the fraction of face-face contacts with increasing friction. For flowing grains, the dynamic friction $\tildeμ$ - the ratio of shear to normal stresses - depends on shape, microscopic friction and inertial number $I.$ For all shapes, $\tildeμ$ grows from its quasi-static value $\tildeμ_0$ as $(\tildeμ-\tildeμ_0) = dI^α,$ with different universal behavior for frictional and frictionless shapes. For frictionless shapes the exponent $α\approx 0.5$ and prefactor $d \approx 5\tildeμ_0$ while for frictional shapes $α\approx 1$ and $d$ varies only slightly. The results highlight that the flow exponents are universal and are consistent for all the shapes simulated here.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-31T13:03:25Z</published>
+    <arxiv:comment>6 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>K. Michael Salerno</name>
+    </author>
+    <author>
+      <name>Dan S. Bolintineanu</name>
+    </author>
+    <author>
+      <name>Gary S. Grest</name>
+    </author>
+    <author>
+      <name>Jeremy B. Lechman</name>
+    </author>
+    <author>
+      <name>Steven J. Plimpton</name>
+    </author>
+    <author>
+      <name>Ishan Srivastava</name>
+    </author>
+    <author>
+      <name>Leonardo E. Silbert</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.98.050901</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.98.050901" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.10878v1</id>
+    <title>New dense superball packings in three dimensions</title>
+    <updated>2018-06-28T11:09:28Z</updated>
+    <link href="https://arxiv.org/abs/1806.10878v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.10878v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we construct a new family of lattice packings for superballs in three dimensions (unit balls for the $l^p_3$ norm) with $p \in (1, 1.58]$. We conjecture that the family also exists for $p \in (1.58, \log_2 3 = 1.5849625\ldots]$. Like in the densest lattice packing of regular octahedra, each superball in our family of lattice packings has $14$ neighbors.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-28T11:09:28Z</published>
+    <arxiv:comment>11 pages, 4 tables, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Adv. Geom. 20 (2020), 473-482</arxiv:journal_ref>
+    <author>
+      <name>Maria Dostert</name>
+    </author>
+    <author>
+      <name>Frank Vallentin</name>
+    </author>
+    <arxiv:doi>10.1515/advgeom-2020-0002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1515/advgeom-2020-0002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.00966v1</id>
+    <title>Distributions and Integration in superspace</title>
+    <updated>2018-04-03T14:07:40Z</updated>
+    <link href="https://arxiv.org/abs/1804.00966v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.00966v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Distributions in superspace constitute a very useful tool for establishing an integration theory. In particular, distributions have been used to obtain a suitable extension of the Cauchy formula to superspace and to define integration over the superball and the supersphere through the Heaviside and Dirac distributions, respectively.
+  In this paper, we extend the distributional approach to integration over more general domains and surfaces in superspace. The notions of domain and surface in superspace are defined by smooth bosonic phase functions $g$. This allows to define domain integrals and oriented (as well as non-oriented) surface integrals in terms of the Heaviside and Dirac distributions of the superfunction $g$. It will be shown that the presented definition for the integrals does not depend on the choice of the phase function $g$ defining the corresponding domain or surface. In addition, some examples of integration over a super-paraboloid and a super-hyperboloid will be presented. Finally, a new distributional Cauchy-Pompeiu formula will be obtained, which generalizes and unifies the previously known approaches.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-03T14:07:40Z</published>
+    <arxiv:comment>25 pages</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <arxiv:journal_ref>J. Math. Phys. 59 (2018), no. 7, 073507</arxiv:journal_ref>
+    <author>
+      <name>Alí Guzmán Adán</name>
+    </author>
+    <author>
+      <name>Frank Sommen</name>
+    </author>
+    <arxiv:doi>10.1063/1.5030403</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.5030403" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1609.09049v3</id>
+    <title>Deep Reinforcement Learning for Tensegrity Robot Locomotion</title>
+    <updated>2017-03-08T01:52:36Z</updated>
+    <link href="https://arxiv.org/abs/1609.09049v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1609.09049v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tensegrity robots, composed of rigid rods connected by elastic cables, have a number of unique properties that make them appealing for use as planetary exploration rovers. However, control of tensegrity robots remains a difficult problem due to their unusual structures and complex dynamics. In this work, we show how locomotion gaits can be learned automatically using a novel extension of mirror descent guided policy search (MDGPS) applied to periodic locomotion movements, and we demonstrate the effectiveness of our approach on tensegrity robot locomotion. We evaluate our method with real-world and simulated experiments on the SUPERball tensegrity robot, showing that the learned policies generalize to changes in system parameters, unreliable sensor measurements, and variation in environmental conditions, including varied terrains and a range of different gravities. Our experiments demonstrate that our method not only learns fast, power-efficient feedback policies for rolling gaits, but that these policies can succeed with only the limited onboard sensing provided by SUPERball's accelerometers. We compare the learned feedback policies to learned open-loop policies and hand-engineered controllers, and demonstrate that the learned policy enables the first continuous, reliable locomotion gait for the real SUPERball robot. Our code and other supplementary materials are available from http://rll.berkeley.edu/drl_tensegrity</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-09-28T19:38:03Z</published>
+    <arxiv:comment>International Conference on Robotics and Automation (ICRA), 2017. Project website link is http://rll.berkeley.edu/drl_tensegrity</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Marvin Zhang</name>
+    </author>
+    <author>
+      <name>Xinyang Geng</name>
+    </author>
+    <author>
+      <name>Jonathan Bruce</name>
+    </author>
+    <author>
+      <name>Ken Caluwaerts</name>
+    </author>
+    <author>
+      <name>Massimo Vespignani</name>
+    </author>
+    <author>
+      <name>Vytas SunSpiral</name>
+    </author>
+    <author>
+      <name>Pieter Abbeel</name>
+    </author>
+    <author>
+      <name>Sergey Levine</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1605.06716v1</id>
+    <title>A geometric-Structure Theory for maximally Random Jammed Packings</title>
+    <updated>2016-05-22T00:21:55Z</updated>
+    <link href="https://arxiv.org/abs/1605.06716v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1605.06716v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Maximally random jammed (MRJ) particle packings can be viewed as prototypical glasses in that they are maximally disordered while simultaneously being mechanically rigid. The prediction of the MRJ packing density phi, among other packing properties of frictionless particles, still poses many theoretical challenges, even for congruent spheres or disks. Using the geometric-structure approach, we derive for the first time a highly accurate formula for MRJ densities for a very wide class of twodimensional frictionless packings, namely, binary convex superdisks, with shapes that continuously interpolate between circles and squares.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-05-22T00:21:55Z</published>
+    <arxiv:comment>9 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Scientific Reports, 2015 5:16722</arxiv:journal_ref>
+    <author>
+      <name>Jianxiang Tian</name>
+    </author>
+    <author>
+      <name>Y. Xu</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1038/srep16722</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/srep16722" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1510.02331v3</id>
+    <title>New upper bounds for the density of translative packings of three-dimensional convex bodies with tetrahedral symmetry</title>
+    <updated>2017-01-10T21:04:51Z</updated>
+    <link href="https://arxiv.org/abs/1510.02331v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1510.02331v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we determine new upper bounds for the maximal density of translative packings of superballs in three dimensions (unit balls for the $l^p_3$-norm) and of Platonic and Archimedean solids having tetrahedral symmetry. Thereby, we improve Zong's recent upper bound for the maximal density of translative packings of regular tetrahedra from $0.3840\ldots$ to $0.3745\ldots$, getting closer to the best known lower bound of $0.3673\ldots$
+  We apply the linear programming bound of Cohn and Elkies which originally was designed for the classical problem of densest packings of round spheres. The proofs of our new upper bounds are computational and rigorous. Our main technical contribution is the use of invariant theory of pseudo-reflection groups in polynomial optimization.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-10-08T14:13:30Z</published>
+    <arxiv:comment>30 pages, 6 tables, 3 figures, (v3) comments of referees incorporated</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Comput. Geom. 58 (2017), 449-481</arxiv:journal_ref>
+    <author>
+      <name>Maria Dostert</name>
+    </author>
+    <author>
+      <name>Cristóbal Guzmán</name>
+    </author>
+    <author>
+      <name>Fernando Mário de Oliveira Filho</name>
+    </author>
+    <author>
+      <name>Frank Vallentin</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-017-9882-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-017-9882-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1510.01240v2</id>
+    <title>State Estimation for Tensegrity Robots</title>
+    <updated>2016-02-19T06:36:38Z</updated>
+    <link href="https://arxiv.org/abs/1510.01240v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1510.01240v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tensegrity robots are a class of compliant robots that have many desirable traits when designing mass efficient systems that must interact with uncertain environments. Various promising control approaches have been proposed for tensegrity systems in simulation. Unfortunately, state estimation methods for tensegrity robots have not yet been thoroughly studied.
+  In this paper, we present the design and evaluation of a state estimator for tensegrity robots. This state estimator will enable existing and future control algorithms to transfer from simulation to hardware. Our approach is based on the unscented Kalman filter (UKF) and combines inertial measurements, ultra wideband time-of-flight ranging measurements, and actuator state information.
+  We evaluate the effectiveness of our method on the SUPERball, a tensegrity based planetary exploration robotic prototype. In particular, we conduct tests for evaluating both the robot's success in estimating global position in relation to fixed ranging base stations during rolling maneuvers as well as local behavior due to small-amplitude deformations induced by cable actuation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-10-05T17:14:30Z</published>
+    <arxiv:comment>accepted for publication at the IEEE International Conference on Robotics and Automation (ICRA) 2016</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Ken Caluwaerts</name>
+    </author>
+    <author>
+      <name>Jonathan Bruce</name>
+    </author>
+    <author>
+      <name>Jeffrey M. Friesen</name>
+    </author>
+    <author>
+      <name>Vytas SunSpiral</name>
+    </author>
+    <arxiv:doi>10.1109/ICRA.2016.7487331</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ICRA.2016.7487331" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1311.4786v1</id>
+    <title>Exact results for deposition of binary mixtures of superdisks on the plane</title>
+    <updated>2013-11-19T15:53:55Z</updated>
+    <link href="https://arxiv.org/abs/1311.4786v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1311.4786v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the deposition of binary mixtures of oriented superdisks on a plane. Superdisks are chosen as objects bounded by $|x|^{2p}+|y|^{2p}=1$, where parameter $p$ controls their size and shape. For single-type superdisks, the maximum packing and jamming densities are known to be nonanalytic at $p=0.5$. For binary mixtures, we discover that nonanalyticities form a locus of points separating "phase diagram" of shape combinations into regions with different excluded-area constructions. An analytical expression for this phase boundary and exact constructions of the excluded-areas are presented.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-11-19T15:53:55Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>N. M. Švrakić</name>
+    </author>
+    <author>
+      <name>B. N. Aleksić</name>
+    </author>
+    <author>
+      <name>M. Belić</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1305.6120v2</id>
+    <title>Kinetics of Deposition of Oriented Superdisks</title>
+    <updated>2013-11-19T14:15:38Z</updated>
+    <link href="https://arxiv.org/abs/1305.6120v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1305.6120v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We use numerical Monte Carlo simulation to study kinetics of deposition of oriented superdisks, bounded by the Lame curves of the form $|x|^{2p}+|y|^{2p}=1$, on regular planar substrate. It was recently shown that the maximum packing density, as well as jamming density $ρ_{J}$, exhibit discontinuous derivative at $p=0.5$, when the shape changes from convex to concave form. By careful examination of the late-stage approach to the jamming limit, we find that the leading term in temporal development is also nonanalytic at $p=0.5$, and offer heuristic excluded-area arguments for this behavior.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-05-27T06:25:16Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>B. N. Aleksić</name>
+    </author>
+    <author>
+      <name>N. M. Švrakić</name>
+    </author>
+    <author>
+      <name>M. Belić</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.88.062112</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.88.062112" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1208.3377v1</id>
+    <title>Entropy-Driven Phase Transitions in Colloidal Systems</title>
+    <updated>2012-08-16T14:09:26Z</updated>
+    <link href="https://arxiv.org/abs/1208.3377v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1208.3377v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This thesis can be divided into two independent parts. In the first part of this thesis, we focus on studying the kinetic pathways of nucleation in colloidal systems. In Chapter 2, we briefly introduce the relevant theory of nucleation, i.e., classic nucleation theory. Then in Chapter 3, we investigate the crystal nucleation in the "simplest" model system for colloids, i.e., the monodisperse hard-sphere system, by using three different simulation methods, i.e., molecular dynamics, forward flux sampling and umbrella sampling simulations. Subsequently, we apply our simulation methods to a more realistic system of colloidal hard spheres in Chapter 4. Furthermore, we study the nucleation in a variety of systems consisting of hard particles, i.e., hard dumbbells (Chapter 5), hard rods (Chapter 6), hard colloidal polymers (Chapter 7) and binary hard-sphere mixtures (Chapter 8). In the second part of this thesis, we study the phase behavior of several colloidal systems. In Chapter 9, we study the equilibrium phase diagram of colloidal hard superballs whose shape interpolates from cubes to octahedra via spheres. We investigate the micellization of asymmetric patchy dumbbells induced by the depletion attraction in Chapter 10.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-08-16T14:09:26Z</published>
+    <arxiv:comment>PhD thesis, Utrecht University, July 2012. 188 pages</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Ran Ni</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1111.4357v2</id>
+    <title>Phase diagram of colloidal hard superballs: from cubes via spheres to octahedra</title>
+    <updated>2012-01-13T18:18:12Z</updated>
+    <link href="https://arxiv.org/abs/1111.4357v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1111.4357v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The phase diagram of colloidal hard superballs, of which the shape interpolates between cubes and octahedra via spheres, is determined by free-energy calculations in Monte Carlo simulations. We discover not only a stable face-centered cubic (fcc) plastic crystal phase for near-spherical particles, but also a stable body-centered cubic (bcc) plastic crystal close to the octahedron shape, and in fact even coexistence of these two plastic crystals with a substantial density gap. The plastic fcc and bcc crystals are, however, unstable in the cube and octahedron limit, suggesting that the rounded corners of superballs play an important role in stablizing the rotator phases. In addition, we observe a two-step melting phenomenon for hard octahedra, in which the Minkowski crystal melts into a metastable bcc plastic crystal before melting into the fluid phase.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-11-18T13:29:24Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Soft Matter, 2012, 8, 8826</arxiv:journal_ref>
+    <author>
+      <name>Ran Ni</name>
+    </author>
+    <author>
+      <name>Anjan Prasad Gantapara</name>
+    </author>
+    <author>
+      <name>Joost de Graaf</name>
+    </author>
+    <author>
+      <name>René van Roij</name>
+    </author>
+    <author>
+      <name>Marjolein Dijkstra</name>
+    </author>
+    <arxiv:doi>10.1039/C2SM25813G</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1039/C2SM25813G" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1110.3989v1</id>
+    <title>Holy balls!</title>
+    <updated>2011-10-14T23:41:15Z</updated>
+    <link href="https://arxiv.org/abs/1110.3989v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1110.3989v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate the behavior of three balls skipping off of the water surface: a Superball, a racquetball, and a water bouncing ball (Waboba). The three balls have rebound coefficients of 0.9, 0.8 and 0.2, respectively. However, we notice that the Waboba bounces better than the others, but why? The Superball has a high coefficient of restitution, creating large rebounds. Here the impact is angled to the free surface, but the inelastic response and large mass ratio forces the ball underwater without skipping. The racquetball has a lower mass ratio and a more elastic response to impacts. Also thrown at a shallow angle, it bounces off of the surface of the water 1-3 times before coming to rest. The Waboba flattens inside the cavity allowing it to skip off of the surface more easily. The flattened ball looks more like a skipping stone than a sphere due to its large elastic deformation at impact. Examining the reaction of a skipping stone we see that the stone creates a cavity in which it planes, slipping out of it with some upward velocity. The Waboba behaves like a skipping stone planing on the surface of the water, allowing it to bounce upwards of 20 times and traveling nearly 60 meters. While some skill is needed to throw the Waboba across a pond, It adapts to each skip because of its elastic response, whereas the stone must be thrown perfectly in order to gain the best skipping advantage.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-10-14T23:41:15Z</published>
+    <arxiv:comment>2 Videos included: V040_Holyballs_fullsize.m4v and V040_Holyballs_small.m4v</arxiv:comment>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Michael Wright</name>
+    </author>
+    <author>
+      <name>Ken Langley</name>
+    </author>
+    <author>
+      <name>Jesse Belden</name>
+    </author>
+    <author>
+      <name>Tadd Truscott</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1104.4093v1</id>
+    <title>Hyperuniformity, quasi-long-range correlations, and void-space constraints in maximally random jammed particle packings. II. Anisotropy in particle shape</title>
+    <updated>2011-04-20T18:34:32Z</updated>
+    <link href="https://arxiv.org/abs/1104.4093v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.4093v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We extend the results from the first part of this series of two papers by examining hyperuniformity in heterogeneous media composed of impenetrable anisotropic inclusions. Specifically, we consider maximally random jammed packings of hard ellipses and superdisks and show that these systems both possess vanishing infinite-wavelength local-volume-fraction fluctuations and quasi-long-range pair correlations. Our results suggest a strong generalization of a conjecture by Torquato and Stillinger [Phys. Rev. E. 68, 041113 (2003)], namely that all strictly jammed saturated packings of hard particles, including those with size- and shape-distributions, are hyperuniform with signature quasi-long-range correlations. We show that our arguments concerning the constrained distribution of the void space in MRJ packings directly extend to hard ellipse and superdisk packings, thereby providing a direct structural explanation for the appearance of hyperuniformity and quasi-long-range correlations in these systems. Additionally, we examine general heterogeneous media with anisotropic inclusions and show for the first time that one can decorate a periodic point pattern to obtain a hard-particle system that is not hyperuniform with respect to local-volume-fraction fluctuations. This apparent discrepancy can also be rationalized by appealing to the irregular distribution of the void space arising from the anisotropic shapes of the particles. Our work suggests the intriguing possibility that the MRJ states of hard particles share certain universal features independent of the local properties of the packings, including the packing fraction and average contact number per particle.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-20T18:34:32Z</published>
+    <arxiv:comment>29 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Chase E. Zachary</name>
+    </author>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.83.051309</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.83.051309" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1008.2982v1</id>
+    <title>Jammed Hard-Particle Packings: From Kepler to Bernal and Beyond</title>
+    <updated>2010-08-17T22:49:45Z</updated>
+    <link href="https://arxiv.org/abs/1008.2982v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1008.2982v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This review describes the diversity of jammed configurations attainable by frictionless convex nonoverlapping (hard) particles in Euclidean spaces and for that purpose it stresses individual-packing geometric analysis. A fundamental feature of that diversity is the necessity to classify individual jammed configurations according to whether they are locally, collectively, or strictly jammed. Each of these categories contains a multitude of jammed configurations spanning a wide and (in the large system limit) continuous range of intensive properties, including packing fraction $φ$, mean contact number $Z$, and several scalar order metrics. Application of these analytical tools to spheres in three dimensions (an analog to the venerable Ising model) covers a myriad of jammed states, including maximally dense packings (as Kepler conjectured), low-density strictly-jammed tunneled crystals, and a substantial family of amorphous packings. With respect to the last of these, the current approach displaces the historically prominent but ambiguous idea of ``random close packing" (RCP) with the precise concept of ``maximally random jamming" (MRJ). This review also covers recent advances in understanding jammed packings of polydisperse sphere mixtures, as well as convex nonspherical particles, e.g., ellipsoids, ``superballs", and polyhedra. Because of their relevance to error-correcting codes and information theory, sphere packings in high-dimensional Euclidean spaces have been included as well. We also make some remarks about packings in (curved) non-Euclidean spaces. In closing this review, several basic open questions for future research to consider have been identified.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-08-17T22:49:45Z</published>
+    <arxiv:comment>37 figures, 6 tables; Reviews of Modern Physics, in press</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Reviews of Modern Physics, 82, 2633 (2010)</arxiv:journal_ref>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <arxiv:doi>10.1103/RevModPhys.82.2633</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/RevModPhys.82.2633" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1005.0534v1</id>
+    <title>Phase Behavior of Colloidal Superballs: Shape Interpolation from Spheres to Cubes</title>
+    <updated>2010-05-04T14:20:04Z</updated>
+    <link href="https://arxiv.org/abs/1005.0534v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1005.0534v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The phase behavior of hard superballs is examined using molecular dynamics within a deformable periodic simulation box. A superball's interior is defined by the inequality $|x|^{2q} + |y|^{2q} + |z|^{2q} \leq  1$, which provides a versatile family of convex particles ($q \geq 0.5$) with cube-like and octahedron-like shapes as well as concave particles ($q &lt; 0.5$) with octahedron-like shapes. Here, we consider the convex case with a deformation parameter q between the sphere point (q = 1) and the cube (q = 1). We find that the asphericity plays a significant role in the extent of cubatic ordering of both the liquid and crystal phases. Calculation of the first few virial coefficients shows that superballs that are visually similar to cubes can have low-density equations of state closer to spheres than to cubes. Dense liquids of superballs display cubatic orientational order that extends over several particle lengths only for large q. Along the ordered, high-density equation of state, superballs with 1 &lt; q &lt; 3 exhibit clear evidence of a phase transition from a crystal state to a state with reduced long-ranged orientational order upon the reduction of density. For $q \geq 3$, long-ranged orientational order persists until the melting transition. The width of coexistence region between the liquid and ordered, high-density phase decreases with q up to q = 4.0. The structures of the high-density phases are examined using certain order parameters, distribution functions, and orientational correlation functions. We also find that a fixed simulation cell induces artificial  phase transitions that are out of equilibrium. Current fabrication techniques allow for the synthesis of colloidal superballs, and thus the phase behavior of such systems can be investigated experimentally.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-05-04T14:20:04Z</published>
+    <arxiv:comment>33 pages, 14 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Robert D. Batten</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.81.061105</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.81.061105" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1001.0423v1</id>
+    <title>Novel Features Arising in the Maximally Random Jammed Packings of Superballs</title>
+    <updated>2010-01-04T01:40:37Z</updated>
+    <link href="https://arxiv.org/abs/1001.0423v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1001.0423v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Dense random packings of hard particles are useful models of granular media and are closely related to the structure of nonequilibrium low-temperature amorphous phases of matter. Most work has been done for random jammed packings of spheres, and it is only recently that corresponding packings of nonspherical particles (e.g., ellipsoids) have received attention. Here we report a study of the maximally random jammed (MRJ) packings of binary superdisks and monodispersed superballs whose shapes are defined by |x_1|^2p+...+|x_2|^2p&lt;=1 with d = 2 and 3, respectively, where p is the deformation parameter with values in the interval (0, infinity). We find that the MRJ densities of such packings increase dramatically and nonanalytically as one moves away from the circular-disk and sphere point. Moreover, the disordered packings are hypostatic and the local arrangements of particles are necessarily nontrivially correlated to achieve jamming. We term such correlated structures "nongeneric". The degree of "nongenericity" of the packings is quantitatively characterized by determining the fraction of local coordination structures in which the central particles have fewer contacting neighbors than average. We also show that such seemingly special packing configurations are counterintuitively not rare. As the anisotropy of the particles increases, the fraction of rattlers decreases while the minimal orientational order increases. These novel characteristics result from the unique rotational symmetry breaking manner of the particles.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-01-04T01:40:37Z</published>
+    <arxiv:comment>20 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.81.041304</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.81.041304" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0909.0940v3</id>
+    <title>Dense Packings of Polyhedra: Platonic and Archimedean Solids</title>
+    <updated>2009-09-09T21:59:40Z</updated>
+    <link href="https://arxiv.org/abs/0909.0940v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0909.0940v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We formulate the problem of generating dense packings of nonoverlapping, non-tiling polyhedra within an adaptive fundamental cell subject to periodic boundary conditions as an optimization problem, which we call the Adaptive Shrinking Cell (ASC) scheme. This novel optimization problem is solved here (using a variety of multi-particle initial configurations) to find the dense packings of each of the Platonic solids in three-dimensional Euclidean space R3 , except for the cube, which is the only Platonic solid that tiles space. We find the densest known packings of tetrahedra, icosahedra, dodecahedra, and octahedra with densities 0.823, 0.836, 0.904, and 0.947, respectively. It is noteworthy that the densest tetrahedral packing possesses no long-range order. Unlike the densest tetrahedral packing, which must not be a Bravais lattice packing, the densest packings of the other non-tiling Platonic solids that we obtain are their previously known optimal (Bravais) lattice packings. We also derive a simple upper bound on the maximal density of packings of congruent nonspherical particles, and apply it to Platonic solids, Archimedean solids, superballs and ellipsoids. Our simulation results, rigorous upper bounds, and other theoretical arguments lead us to the conjecture that the densest packings of Platonic and Archimedean solids with central symmetry are given by their corresponding densest lattice packings. In addition, we conjecture that the optimal packing of any convex, congruent polyhedron without central symmetry generally is not a lattice packing.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-09-04T19:43:51Z</published>
+    <arxiv:comment>To appear in Phys. Rev. E. The paper is a sequel of a recent Nature paper, i.e., Nature 460, 876 (2009). In this paper, we reported a new packing of tetrahedra with higher density 0.823 than that reported in Nature (0.782). The paper is 52 pages, including 14 figures and 4 tables</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.80.041104</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.80.041104" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0902.3089v1</id>
+    <title>Random Sequential Adsorption of Oriented Superdisks</title>
+    <updated>2009-02-18T20:59:43Z</updated>
+    <link href="https://arxiv.org/abs/0902.3089v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0902.3089v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this work we extend recent study of the properties of the dense packing of "superdisks," by Y. Jiao, F. H. Stillinger and S. Torquato, Phys. Rev. Lett. 100, 245504 (2008), to the jammed state formed by these objects in random sequential adsorption. The superdisks are two-dimensional shapes bound by the curves of the form |x|^(2p) + |y|^(2p) = 1, with p &gt; 0. We use Monte Carlo simulations and theoretical arguments to establish that p = 1/2 is a special point at which the jamming density has a discontinuous derivative as a function of p. The existence of this point can be also argued for by geometrical arguments.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-02-18T20:59:43Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 79, article 042103, 4 pages (2009)</arxiv:journal_ref>
+    <author>
+      <name>Oleksandr Gromenko</name>
+    </author>
+    <author>
+      <name>Vladimir Privman</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.79.042103</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.79.042103" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0902.1504v1</id>
+    <title>Optimal Packings of Superballs</title>
+    <updated>2009-02-09T19:40:25Z</updated>
+    <link href="https://arxiv.org/abs/0902.1504v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0902.1504v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Dense hard-particle packings are intimately related to the structure of low-temperature phases of matter and are useful models of heterogeneous materials and granular media. Most studies of the densest packings in three dimensions have considered spherical shapes, and it is only more recently that nonspherical shapes (e.g., ellipsoids) have been investigated. Superballs (whose shapes are defined by |x1|^2p + |x2|^2p + |x3|^2p &lt;= 1) provide a versatile family of convex particles (p &gt;= 0.5) with both cubic- and octahedral-like shapes as well as concave particles (0 &lt; p &lt; 0.5) with octahedral-like shapes. In this paper, we provide analytical constructions for the densest known superball packings for all convex and concave cases. The candidate maximally dense packings are certain families of Bravais lattice packings. The maximal packing density as a function of p is nonanalytic at the sphere-point (p = 1) and increases dramatically as p moves away from unity. The packing characteristics determined by the broken rotational symmetry of superballs are similar to but richer than their two-dimensional "superdisk" counterparts, and are distinctly different from that of ellipsoid packings. Our candidate optimal superball packings provide a starting point to quantify the equilibrium phase behavior of superball systems, which should deepen our understanding of the statistical thermodynamics of nonspherical-particle systems.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-02-09T19:40:25Z</published>
+    <arxiv:comment>28 pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <author>
+      <name>Frank Stillinger</name>
+    </author>
+    <author>
+      <name>Sal Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.79.041309</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.79.041309" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0808.0038v1</id>
+    <title>Superdisks and the structural asymmetry of radio galaxies</title>
+    <updated>2008-07-31T23:39:11Z</updated>
+    <link href="https://arxiv.org/abs/0808.0038v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0808.0038v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We present a sample of 16 radio galaxies, each of which is characterized by a wide, elongated emission gap with fairly sharp and straight edges between the two radio lobes. This particular subset of the 'superdisk' radio galaxies is chosen because of a highly asymmetric location of the host elliptical galaxy relative to the gap's central axis. In addition to posing a considerable challenge to the existing models, such a morphology also means that the two jets traverse highly unequal distances through the superdisk material. One thus has a possibility to directly investigate if the marked asymmetry between the two jets' interaction with the (much denser) ambient medium, during their propagation, has a significant import for the brightness of the hotspot forming near each jet's extremity. We also propose a new explanation for the formation of superdisks through the merger of a smaller elliptical galaxy with the massive host, in which the gas attached to the infalling galaxy deposits its angular momentum into the host's circumgalactic gas, thereby causing it to flatten into a fat pancake, or superdisk. The asymmetric location of the host galaxy can be assisted by the kick imparted to it during the merger. We also suggest a physical link between these radio galaxies and those with X-shaped and Z-symmetric radio lobes, commonly believed to arise from mergers of two galactic nuclei, each harboring a supermassive black hole.</summary>
+    <category term="astro-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-07-31T23:39:11Z</published>
+    <arxiv:comment>21 pages, 7 figures, to appear in New Astronomy, uses elsart.cls</arxiv:comment>
+    <arxiv:primary_category term="astro-ph"/>
+    <author>
+      <name> Gopal-Krishna</name>
+    </author>
+    <author>
+      <name>Paul J. Wiita</name>
+    </author>
+    <arxiv:doi>10.1016/j.newast.2008.05.004</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.newast.2008.05.004" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0802.2116v1</id>
+    <title>Superdisks in Radio Galaxies: Jet-Wind Interactions</title>
+    <updated>2008-02-14T23:32:17Z</updated>
+    <link href="https://arxiv.org/abs/0802.2116v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0802.2116v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Taking a clue from their sharp-edged (strip-like) morphology observed in several cases, a new mechanism is proposed for the formation of the emission gaps seen between the radio lobes of many powerful extragalactic double radio sources. Canonical understanding of the radio gaps invokes either blocking of the back-flowing lobe plasma by the denser interstellar medium (ISM) of the host galaxy, or "squeezing" of the radio bridge in the middle through buoyancy force exerted by either the ISM or the surrounding intra-cluster medium (ICM). These pictures encounter difficulties in explaining situations where the sharp-edged radio gaps associated with non-cluster radio galaxies have widths running into several tens (even hundreds) of kiloparsecs. More particularly, the required dense high-pressure ISM/ICM is likely to be lacking at least in the case of high-redshift radio galaxies. We propose here that radio emission gaps in at least such cases could arise from a dynamical interaction between the powerful thermal wind outflowing from the active galactic nucleus and the back-flowing synchrotron plasma in the two radio lobes, which occurs once the rapidly advancing jets have crossed out of the wind zone into the intergalactic medium. A simple analytical scheme is presented to explore the plausibility of the side-ways confinement of the thermal wind by the radio lobe pair, which would "freeze" pancake shaped conduits in the space, along which the hot, metal enriched wind from the AGN can escape (roughly orthogonal to the radio axis). Some other possible consequences of this scenario are pointed out.</summary>
+    <category term="astro-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-02-14T23:32:17Z</published>
+    <arxiv:comment>10 pages, 3 figures [one .jpg], official version published in MNRAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph"/>
+    <arxiv:journal_ref>Mon.Not.Roy.Astron.Soc.380:703,2007</arxiv:journal_ref>
+    <author>
+      <name> Gopal-Krishna</name>
+    </author>
+    <author>
+      <name>Paul J. Wiita</name>
+    </author>
+    <author>
+      <name>Santosh Joshi</name>
+    </author>
+    <arxiv:doi>10.1111/j.1365-2966.2007.12103.x</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1111/j.1365-2966.2007.12103.x" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0712.0420v1</id>
+    <title>Dense Packings of Superdisks and the Role of Symmetry</title>
+    <updated>2007-12-04T01:26:19Z</updated>
+    <link href="https://arxiv.org/abs/0712.0420v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0712.0420v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We construct the densest known two-dimensional packings of superdisks in the plane whose shapes are defined by |x^(2p) + y^(2p)| &lt;= 1, which contains both convex-shaped particles (p &gt; 0.5, with the circular-disk case p = 1) and concave-shaped particles (0 &lt; p &lt; 0.5). The packings of the convex cases with p 1 generated by a recently developed event-driven molecular dynamics (MD) simulation algorithm [Donev, Torquato and Stillinger, J. Comput. Phys. 202 (2005) 737] suggest exact constructions of the densest known packings. We find that the packing density (covering fraction of the particles) increases dramatically as the particle shape moves away from the "circular-disk" point (p = 1). In particular, we find that the maximal packing densities of superdisks for certain p 6 = 1 are achieved by one of the two families of Bravais lattice packings, which provides additional numerical evidence for Minkowski's conjecture concerning the critical determinant of the region occupied by a superdisk. Moreover, our analysis on the generated packings reveals that the broken rotational symmetry of superdisks influences the packing characteristics in a non-trivial way. We also propose an analytical method to construct dense packings of concave superdisks based on our observations of the structural properties of packings of convex superdisks.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-12-04T01:26:19Z</published>
+    <arxiv:comment>15 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.100.245504</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.100.245504" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0402048v5</id>
+    <title>A Billiard-Theoretic Approach to Elementary 1d Elastic Collisions</title>
+    <updated>2004-04-23T14:06:34Z</updated>
+    <link href="https://arxiv.org/abs/physics/0402048v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0402048v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A simple relation is developed between elastic collisions of freely-moving point particles in one dimension and a corresponding billiard system. For two particles with masses m_1 and m_2 on the half-line x&gt;0 that approach an elastic barrier at x=0, the corresponding billiard system is an infinite wedge. The collision history of the two particles can be easily inferred from the corresponding billiard trajectory. This connection nicely explains the classic demonstrations of the ``dime on the superball'' and the ``baseball on the basketball'' that are a staple in elementary physics courses. It is also shown that three elastic particles on an infinite line and three particles on a finite ring correspond, respectively, to the motion of a billiard ball in an infinite wedge and on on a triangular billiard table. It is shown how to determine the angles of these two sets in terms of the particle masses.</summary>
+    <category term="physics.ed-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-02-10T17:22:26Z</published>
+    <arxiv:comment>7 pages, 8 figures, 2-column revtex4 format, for submission to the American Journal of Physics. Introductory text, several references and one figure added in response to referee comments. A few more additions and corrections; final version for AJP. Yet a few more changes and one minor error corrected just before publication</arxiv:comment>
+    <arxiv:primary_category term="physics.ed-ph"/>
+    <arxiv:journal_ref>Am. J. Phys. 72, 1492-1498 (2004)</arxiv:journal_ref>
+    <author>
+      <name>S. Redner</name>
+    </author>
+    <arxiv:doi>10.1119/1.1738428</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1119/1.1738428" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/hep-th/0103102v2</id>
+    <title>Boundary Superstring Field Theory</title>
+    <updated>2001-05-07T21:13:52Z</updated>
+    <link href="https://arxiv.org/abs/hep-th/0103102v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-th/0103102v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Using the Batalin-Vilkovisky formalism we provide a detailed analysis of the NS sector of boundary superstring field theory. We construct explicitly the relevant BV structure and derive the master action. Furthermore, we show that this action is exactly equal to the superdisk worldsheet partition function as was recently conjectured.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2001-03-13T23:07:44Z</published>
+    <arxiv:comment>28 pages, harvmac. Some typos corrected. Some references and a new section with calculations in conformal perturbation theory have been added</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>Nucl.Phys. B619 (2001) 51-74</arxiv:journal_ref>
+    <author>
+      <name>Vasilis Niarchos</name>
+    </author>
+    <author>
+      <name>Nikolaos Prezas</name>
+    </author>
+    <arxiv:doi>10.1016/S0550-3213(01)00498-9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/S0550-3213(01)00498-9" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/9810230v1</id>
+    <title>Non-Abelian Q-balls in Supersymmetric Theories</title>
+    <updated>1998-10-02T15:42:02Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/9810230v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/9810230v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We demonstrate the existence of non-abelian non-topological solitons such as Q-balls in the spectrum of Wess-Zumino models with non-abelian global symmetries. We conveniently name them Q-superballs and identify them for short as Q-sballs. More specifically, we show that in contrast to the non-supersymmetric case, they arise in renormalizable potentials with cubic self-interactions of only one dimensionful parameter and for the entire parameter space of the model available. We solve the field equations and present the explicit form of the Q-sball solution. We compute its main physical properties and observe that in the supersymmetrically invariant vacuum Q-sballs form domains of manifestly broken sypersymmetry.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1998-10-02T15:42:02Z</published>
+    <arxiv:comment>12 pages, latex, no figures</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys.Lett. B444 (1998) 190-195</arxiv:journal_ref>
+    <author>
+      <name>M. Axenides</name>
+    </author>
+    <author>
+      <name>E. Floratos</name>
+    </author>
+    <author>
+      <name>A. Kehagias</name>
+    </author>
+    <arxiv:doi>10.1016/S0370-2693(98)01379-3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/S0370-2693(98)01379-3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/9808276v1</id>
+    <title>Superball dark matter</title>
+    <updated>1998-08-10T13:54:18Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/9808276v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/9808276v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Supersymmetric models predict a natural dark-matter candidate, stable baryonic Q-balls. They could be copiously produced in the early Universe as a by-product of the Affleck-Dine baryogenesis. I review the cosmological and astrophysical implications, methods of detection, and the present limits on this form of dark matter.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1998-08-10T13:54:18Z</published>
+    <arxiv:comment>15 pages, 5 figures; Invited talk at Second International Conference on Dark Matter in Astrophysics and Particle Physics (DARK-98), Heidelberg, Germany, July 20-25, 1998. (latex, psfig, epsf)</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <author>
+      <name>Alexander Kusenko</name>
+      <arxiv:affiliation>CERN</arxiv:affiliation>
+    </author>
+  </entry>
+</feed>

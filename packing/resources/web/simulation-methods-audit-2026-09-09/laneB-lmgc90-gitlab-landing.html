@@ -1,0 +1,434 @@
+
+
+
+<!DOCTYPE html>
+<html class="gl-system ui-neutral with-top-bar with-header page-theme-background page-with-panels with-gl-container-queries user-logged-out" lang="en">
+<head prefix="og: http://ogp.me/ns#">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>LMGC90 / LMGC90_user · GitLab</title>
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-9892dc17af892e03de41625c0ee325117a3b8ee4ba6005f3a3eac68510030aed.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-sans/GitLabSans-Italic-f96f17332d67b21ada2dfba5f0c0e1d5801eab99330472057bf18edd93d4ccf7.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-29c2152dac8739499dd0fe5cd37a486ebcc7d4798c9b6d3aeab65b3172375b05.woff2" rel="preload">
+<link as="font" crossorigin="" href="/assets/gitlab-mono/GitLabMono-Italic-af36701a2188df32a9dcea12e0424c380019698d4f76da9ad8ea2fd59432cf83.woff2" rel="preload">
+
+<script>
+//<![CDATA[
+window.gon={};gon.math_rendering_limits_enabled=true;gon.features={"allowIframesInMarkdown":false,"inlineBlame":true,"removeMonitorMetrics":true,"pageSpecificStyles":false,"vue3MigrateRepository":true};
+//]]>
+</script>
+
+<script>
+//<![CDATA[
+const root = document.documentElement;
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  root.classList.add('gl-dark');
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (e.matches) {
+    root.classList.add('gl-dark');
+  } else {
+    root.classList.remove('gl-dark');
+  }
+});
+
+//]]>
+</script>
+<script>
+//<![CDATA[
+var gl = window.gl || {};
+gl.startup_calls = {"/lmgc90/lmgc90_user/-/refs/master/logs_tree/?format=json\u0026offset=0\u0026ref_type=HEADS":{},"/lmgc90/lmgc90_user/-/blob/master/README.md?format=json\u0026ref_type=heads\u0026viewer=rich":{}};
+gl.startup_graphql_calls = null;
+
+if (gl.startup_calls && window.fetch) {
+  Object.keys(gl.startup_calls).forEach(apiCall => {
+   gl.startup_calls[apiCall] = {
+      fetchCall: fetch(apiCall, {
+        // Emulate XHR for Rails AJAX request checks
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        // fetch won’t send cookies in older browsers, unless you set the credentials init option.
+        // We set to `same-origin` which is default value in modern browsers.
+        // See https://github.com/whatwg/fetch/pull/585 for more information.
+        credentials: 'same-origin'
+      })
+    };
+  });
+}
+if (gl.startup_graphql_calls && window.fetch) {
+  const headers = {"X-CSRF-Token":"OJ5Vz8--JRN6gNCjaNWA7KXu2UfBec5QgtgZBknsl9H69ZflHToLVZ3BLMES3EqKAf6R1RkDCPTJ-mYYtEKQFA","x-gitlab-feature-category":"groups_and_projects"};
+  const url = `https://git-xen.lmgc.univ-montp2.fr/api/graphql`
+
+  const opts = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+    }
+  };
+
+  gl.startup_graphql_calls = gl.startup_graphql_calls.map(call => ({
+    ...call,
+    fetchCall: fetch(url, {
+      ...opts,
+      credentials: 'same-origin',
+      body: JSON.stringify(call)
+    })
+  }))
+}
+
+
+//]]>
+</script>
+
+
+
+<meta content="light dark" name="color-scheme">
+<link rel="stylesheet" href="/assets/application-6d6fcce8e795658e806b9708fca180a3dd4439986d86360ba5fffa816d50d351.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/application_dark-0196dff35ef20fee2ecdf7e7652a49dd4db51dd4ab1928fd21c7e16d9803dee8.css" media="(prefers-color-scheme: dark)" />
+<link rel="stylesheet" href="/assets/page_bundles/project-d8ddfdcca11af4ede140816f3befd2a538014d7403c28e0f3c62a50b61f93805.css" /><link rel="stylesheet" href="/assets/page_bundles/tree-82a2b0a643427b8cc237cf2437e78bf5ad46c53355f902927c25570510d6852a.css" /><link rel="stylesheet" href="/assets/page_bundles/commit_description-9e7efe20f0cef17d0606edabfad0418e9eb224aaeaa2dae32c817060fa60abcc.css" /><link rel="stylesheet" href="/assets/page_bundles/projects-2d5b0f8de7829b78958778a73c6202488874e74d1b301ae6c825cacadb153dfb.css" /><link rel="stylesheet" href="/assets/page_bundles/work_items-44ac6ef10b6c1a50a3c68696db6f2eee6ac41b0ed6ab194976aa423876428aaf.css" /><link rel="stylesheet" href="/assets/page_bundles/notes_shared-c9b57d9276475765933235e17bca90b09602a2cced07e212f2e2eb086555758e.css" />
+<link rel="stylesheet" href="/assets/tailwind-74edd6c374987d783763a46e94179ac005afc02f65680d52dcad43b62dd0154c.css" />
+
+
+<link rel="stylesheet" href="/assets/fonts-deb7ad1d55ca77c0172d8538d53442af63604ff490c74acc2859db295c125bdb.css" />
+<link rel="stylesheet" href="/assets/highlight/themes/white-c3211f67c1e8d8cfb47de179b2da35275ab7865cdf299ab44b4a8cc52d5cafd3.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" href="/assets/highlight/themes/dark-8cae80594d7953b52bc449bf1b4f2de402c87cc39fffc7aa0187b5f881c0cfd7.css" media="(prefers-color-scheme: dark)" />
+
+<script src="/assets/webpack/runtime.409fd098.bundle.js" defer="defer"></script>
+<script src="/assets/webpack/main.750ca651.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/tracker.1eb446cb.chunk.js" defer="defer"></script>
+<script>
+//<![CDATA[
+window.snowplowOptions = {"namespace":"gl","hostname":"git-xen.lmgc.univ-montp2.fr:443","postPath":"/-/collect_events","forceSecureTracker":true,"appId":"gitlab_sm"};
+gl = window.gl || {};
+gl.snowplowStandardContext = {"schema":"iglu:com.gitlab/gitlab_standard/jsonschema/1-1-8","data":{"environment":"self-managed","source":"gitlab-rails","correlation_id":"01M22HFJW93D7KHBMH5NX0V099","extra":{},"user_id":null,"global_user_id":null,"user_type":null,"is_gitlab_team_member":null,"namespace_id":30,"ultimate_parent_namespace_id":30,"project_id":75,"feature_enabled_by_namespace_ids":null,"realm":"self-managed","deployment_type":"self-managed","context_generated_at":"2026-09-09T07:35:24.449Z","organization_id":1}};
+gl.snowplowPseudonymizedPageUrl = "https://git-xen.lmgc.univ-montp2.fr/namespace30/project75";
+gl.maskedDefaultReferrerUrl = null;
+gl.ga4MeasurementId = 'G-ENFH3X7M5Y';
+gl.duoEvents = [];
+gl.onlySendDuoEvents = false;
+
+
+//]]>
+</script>
+
+
+
+<script src="/assets/webpack/commons-pages.groups.merge_requests-pages.groups.milestones.edit-pages.groups.milestones.new-pages.g-ee47bb0c.fa79f366.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.admin.deploy_keys.index-pages.admin.groups.index-pages.admin.projects.index-pages.admi-332afcc8.48ec767a.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-pages.registrations.new-pages.sessions.new-super_sidebar.bfa33404.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.search.show-pages.search.show.vue3-super_sidebar.10eecbb8.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/0dcf7166.63feabc4.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.search.show-super_sidebar.c7db91ab.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.dashboard.home-super_sidebar.38ee743b.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/super_sidebar.01edfde2.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects-pages.projects.activity-pages.projects.activity.vue3-pages.projects.alert_man-c86ff4ca.291bf2cc.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/8632254b.6f2ca0be.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/32327915.caf6ba4e.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.groups.saved_views.show-pages.groups.work_items-pages.groups.work_items.show-pages.pro-27e63f02.ad9e0449.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.blob.show.vue3-pages.projects.show-pages.projects.sn-97b21523.f68ab097.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.blob.show.vue3-pages.projects.show-pages.projects.sn-cc8dd3c5.5d928f0f.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/9440c85a.4376e654.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.blob.show.vue3-pages.projects.show-pages.projects.tr-82b4c390.6ff71417.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.blob.show.vue3-pages.projects.show-pages.projects.sn-47e53e7d.eacb38d0.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.edit-pages.projects.blob.new-pages.projects.blob.show-pages.projects.blo-ea607eb8.230e316d.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.blob.show.vue3-pages.projects.show-pages.projects.tr-c392bf45.2692de24.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.show-pages.projects.snippets.show-pages.projects.tre-c684fcf6.edcb2899.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.edit-pages.projects.blob.new-pages.projects.blob.show-pages.projects.sho-ec79e51c.35ce65d7.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.commits.show-pages.projects.show-pages.projects.tree.show.d3fded9d.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.show-pages.projects.tree.show.70a0354d.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/67e5e2cb.7ee79822.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/pages.projects.show.67e8ff16.chunk.js" defer="defer"></script>
+
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="LMGC90 / LMGC90_user · GitLab" property="og:title">
+<meta content="User version of LMGC90 project" property="og:description">
+<meta content="https://git-xen.lmgc.univ-montp2.fr/assets/twitter_card-570ddb06edf56a2312253c5872489847a0f385112ddbcd71ccfa1570febab5d2.jpg" property="og:image">
+<meta content="64" property="og:image:width">
+<meta content="64" property="og:image:height">
+<meta content="https://git-xen.lmgc.univ-montp2.fr/lmgc90/lmgc90_user" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="LMGC90 / LMGC90_user · GitLab" property="twitter:title">
+<meta content="User version of LMGC90 project" property="twitter:description">
+<meta content="https://git-xen.lmgc.univ-montp2.fr/assets/twitter_card-570ddb06edf56a2312253c5872489847a0f385112ddbcd71ccfa1570febab5d2.jpg" property="twitter:image">
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="zKiFMQKy5I-tSRVgGgZq1-5Y__rCiWakLueMvxgJPjoOw0cb0DbKyUoI6QJgD6CxSki3aBrzoABlxfOh5ac5_w" />
+<meta name="csp-nonce" />
+<meta name="action-cable-url" content="/-/cable" />
+<link href="/-/manifest.json" rel="manifest">
+<link rel="icon" type="image/png" href="/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a8cd39788c7c80d5b2b82aa5143ef.png" id="favicon" data-original-href="/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a8cd39788c7c80d5b2b82aa5143ef.png" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/apple-touch-icon-b049d4bc0dd9626f31db825d61880737befc7835982586d015bded10b4435460.png" />
+<link href="/search/opensearch.xml" rel="search" title="Search GitLab" type="application/opensearchdescription+xml">
+<link rel="alternate" type="application/atom+xml" title="LMGC90_user activity" href="/lmgc90/lmgc90_user.atom" />
+
+
+
+
+<meta content="User version of LMGC90 project" name="description">
+<meta content="#F1F0F6" media="(prefers-color-scheme: light)" name="theme-color">
+<meta content="#232128" media="(prefers-color-scheme: dark)" name="theme-color">
+</head>
+
+<body class="tab-width-8 gl-browser-generic gl-platform-other" data-group="lmgc90" data-group-full-path="lmgc90" data-namespace-id="30" data-page="projects:show" data-page-type-id="lmgc90_user" data-project="lmgc90_user" data-project-full-path="lmgc90/lmgc90_user" data-project-id="75">
+<div id="js-tooltips-container"></div>
+
+<script>
+//<![CDATA[
+gl = window.gl || {};
+gl.client = {"isGeneric":true,"isOther":true};
+
+
+//]]>
+</script>
+
+
+<header class="super-topbar js-super-topbar"></header>
+<div class="layout-page js-page-layout page-with-super-sidebar">
+<script>
+//<![CDATA[
+const outer = document.createElement('div');
+outer.style.visibility = 'hidden';
+outer.style.overflow = 'scroll';
+document.body.appendChild(outer);
+const inner = document.createElement('div');
+outer.appendChild(inner);
+const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+outer.parentNode.removeChild(outer);
+document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+
+//]]>
+</script><aside class="js-super-sidebar super-sidebar super-sidebar-loading" data-command-palette="{&quot;project_files_url&quot;:&quot;/lmgc90/lmgc90_user/-/files/master?format=json&quot;,&quot;project_blob_url&quot;:&quot;/lmgc90/lmgc90_user/-/blob/master&quot;}" data-is-saas="false" data-sidebar="{&quot;is_logged_in&quot;:false,&quot;compare_plans_url&quot;:&quot;https://about.gitlab.com/pricing&quot;,&quot;current_menu_items&quot;:[{&quot;id&quot;:&quot;project_overview&quot;,&quot;title&quot;:&quot;LMGC90_user&quot;,&quot;entity_id&quot;:75,&quot;link&quot;:&quot;/lmgc90/lmgc90_user&quot;,&quot;link_classes&quot;:&quot;shortcuts-project&quot;,&quot;is_active&quot;:true},{&quot;id&quot;:&quot;manage_menu&quot;,&quot;title&quot;:&quot;Manage&quot;,&quot;icon&quot;:&quot;users&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/activity&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;activity&quot;,&quot;title&quot;:&quot;Activity&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/activity&quot;,&quot;link_classes&quot;:&quot;shortcuts-project-activity&quot;,&quot;description&quot;:&quot;Track what your team is working on and stay informed of changes&quot;,&quot;library_icon&quot;:&quot;history&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;members&quot;,&quot;title&quot;:&quot;Members&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/project_members&quot;,&quot;description&quot;:&quot;Control who has access to your project and what they can do&quot;,&quot;library_icon&quot;:&quot;users&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;labels&quot;,&quot;title&quot;:&quot;Labels&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/labels&quot;,&quot;description&quot;:&quot;Organize and categorize work across your project with consistent labels&quot;,&quot;library_icon&quot;:&quot;labels&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;plan_menu&quot;,&quot;title&quot;:&quot;Plan&quot;,&quot;icon&quot;:&quot;planning&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/work_items&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;project_issue_list&quot;,&quot;title&quot;:&quot;Work items&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/work_items&quot;,&quot;link_classes&quot;:&quot;shortcuts-issues has-sub-items&quot;,&quot;pill_count_field&quot;:&quot;openWorkItemsCount&quot;,&quot;pill_count_dynamic&quot;:false,&quot;description&quot;:&quot;Plan, track, and manage work in one place&quot;,&quot;library_icon&quot;:&quot;work-items&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;boards&quot;,&quot;title&quot;:&quot;Issue boards&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/boards&quot;,&quot;link_classes&quot;:&quot;shortcuts-issue-boards&quot;,&quot;description&quot;:&quot;Visualize and manage work with kanban-style boards&quot;,&quot;library_icon&quot;:&quot;work-item-issue-board&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;milestones&quot;,&quot;title&quot;:&quot;Milestones&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/milestones&quot;,&quot;description&quot;:&quot;Plan releases and group work into time-based phases&quot;,&quot;library_icon&quot;:&quot;milestone&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;project_wiki&quot;,&quot;title&quot;:&quot;Wiki&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/wikis&quot;,&quot;link_classes&quot;:&quot;shortcuts-wiki&quot;,&quot;description&quot;:&quot;Create and manage documentation&quot;,&quot;library_icon&quot;:&quot;book&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;code_menu&quot;,&quot;title&quot;:&quot;Code&quot;,&quot;icon&quot;:&quot;code&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/merge_requests&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;project_merge_request_list&quot;,&quot;title&quot;:&quot;Merge requests&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/merge_requests&quot;,&quot;link_classes&quot;:&quot;shortcuts-merge_requests&quot;,&quot;pill_count_field&quot;:&quot;openMergeRequestsCount&quot;,&quot;pill_count_dynamic&quot;:false,&quot;description&quot;:&quot;Collaborate on code changes with built-in review tools&quot;,&quot;library_icon&quot;:&quot;merge-request&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;files&quot;,&quot;title&quot;:&quot;Repository&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/tree/master&quot;,&quot;link_classes&quot;:&quot;shortcuts-tree&quot;,&quot;description&quot;:&quot;Browse and manage repository files and code&quot;,&quot;library_icon&quot;:&quot;repository&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;branches&quot;,&quot;title&quot;:&quot;Branches&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/branches&quot;,&quot;description&quot;:&quot;Manage project branches and branch protection&quot;,&quot;library_icon&quot;:&quot;branch&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;commits&quot;,&quot;title&quot;:&quot;Commits&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/commits/master?ref_type=heads&quot;,&quot;link_classes&quot;:&quot;shortcuts-commits&quot;,&quot;description&quot;:&quot;View commit history and changes&quot;,&quot;library_icon&quot;:&quot;commit&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;tags&quot;,&quot;title&quot;:&quot;Tags&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/tags&quot;,&quot;description&quot;:&quot;Create and manage release tags&quot;,&quot;library_icon&quot;:&quot;tag&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;graphs&quot;,&quot;title&quot;:&quot;Repository graph&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/network/master?ref_type=heads&quot;,&quot;link_classes&quot;:&quot;shortcuts-network&quot;,&quot;description&quot;:&quot;Visualize repository commit history and branches&quot;,&quot;library_icon&quot;:&quot;repository-graph&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;compare&quot;,&quot;title&quot;:&quot;Compare revisions&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/compare?from=master\u0026to=master&quot;,&quot;description&quot;:&quot;Compare changes between revisions&quot;,&quot;library_icon&quot;:&quot;comparison&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;deploy_menu&quot;,&quot;title&quot;:&quot;Deploy&quot;,&quot;icon&quot;:&quot;deployments&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/releases&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;releases&quot;,&quot;title&quot;:&quot;Releases&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/releases&quot;,&quot;link_classes&quot;:&quot;shortcuts-deployments-releases&quot;,&quot;description&quot;:&quot;Create and manage project releases&quot;,&quot;library_icon&quot;:&quot;release&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;model_registry&quot;,&quot;title&quot;:&quot;Model registry&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/ml/models&quot;,&quot;description&quot;:&quot;Store and manage machine learning models&quot;,&quot;library_icon&quot;:&quot;model-registry&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;monitor_menu&quot;,&quot;title&quot;:&quot;Monitor&quot;,&quot;icon&quot;:&quot;monitor&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/incidents&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;incidents&quot;,&quot;title&quot;:&quot;Incidents&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/incidents&quot;,&quot;description&quot;:&quot;Manage incident response and resolution&quot;,&quot;library_icon&quot;:&quot;work-item-incident&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false},{&quot;id&quot;:&quot;analyze_menu&quot;,&quot;title&quot;:&quot;Analyze&quot;,&quot;icon&quot;:&quot;chart&quot;,&quot;avatar_shape&quot;:&quot;rect&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/value_stream_analytics&quot;,&quot;is_active&quot;:false,&quot;items&quot;:[{&quot;id&quot;:&quot;cycle_analytics&quot;,&quot;title&quot;:&quot;Value stream analytics&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/value_stream_analytics&quot;,&quot;link_classes&quot;:&quot;shortcuts-project-cycle-analytics&quot;,&quot;description&quot;:&quot;Analyze value stream and cycle time&quot;,&quot;library_icon&quot;:&quot;value-stream-analytics&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;contributors&quot;,&quot;title&quot;:&quot;Contributor analytics&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/graphs/master?ref_type=heads&quot;,&quot;description&quot;:&quot;Track and view member contributions and activity&quot;,&quot;library_icon&quot;:&quot;contributor-analytics&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;repository_analytics&quot;,&quot;title&quot;:&quot;Repository analytics&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/graphs/master/charts&quot;,&quot;link_classes&quot;:&quot;shortcuts-repository-charts&quot;,&quot;description&quot;:&quot;Analyze repository coverage, statistics, and metrics&quot;,&quot;library_icon&quot;:&quot;repository-analytics&quot;,&quot;is_active&quot;:false},{&quot;id&quot;:&quot;model_experiments&quot;,&quot;title&quot;:&quot;Model experiments&quot;,&quot;link&quot;:&quot;/lmgc90/lmgc90_user/-/ml/experiments&quot;,&quot;description&quot;:&quot;Track and manage machine learning experiments&quot;,&quot;library_icon&quot;:&quot;machine-learning&quot;,&quot;is_active&quot;:false}],&quot;separated&quot;:false}],&quot;current_context_header&quot;:&quot;Project&quot;,&quot;support_path&quot;:&quot;https://support.gitlab.com&quot;,&quot;display_whats_new&quot;:false,&quot;show_version_check&quot;:null,&quot;search&quot;:{&quot;search_context&quot;:{&quot;group&quot;:{&quot;id&quot;:30,&quot;name&quot;:&quot;LMGC90&quot;,&quot;full_name&quot;:&quot;LMGC90&quot;},&quot;group_metadata&quot;:{&quot;issues_path&quot;:&quot;/groups/lmgc90/-/issues&quot;,&quot;mr_path&quot;:&quot;/groups/lmgc90/-/merge_requests&quot;},&quot;project&quot;:{&quot;id&quot;:75,&quot;name&quot;:&quot;LMGC90_user&quot;},&quot;project_metadata&quot;:{&quot;mr_path&quot;:&quot;/lmgc90/lmgc90_user/-/merge_requests&quot;,&quot;issues_path&quot;:&quot;/lmgc90/lmgc90_user/-/issues&quot;},&quot;code_search&quot;:true,&quot;ref&quot;:&quot;master&quot;,&quot;scope&quot;:null,&quot;for_snippets&quot;:null}},&quot;panel_type&quot;:&quot;project&quot;,&quot;shortcut_links&quot;:[{&quot;title&quot;:&quot;Snippets&quot;,&quot;href&quot;:&quot;/explore/snippets&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-snippets&quot;},{&quot;title&quot;:&quot;Groups&quot;,&quot;href&quot;:&quot;/explore/groups&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-groups&quot;},{&quot;title&quot;:&quot;Projects&quot;,&quot;href&quot;:&quot;/explore/projects&quot;,&quot;css_class&quot;:&quot;dashboard-shortcuts-projects&quot;}],&quot;has_terms&quot;:false,&quot;allow_signup&quot;:&quot;false&quot;,&quot;pinned_items&quot;:[&quot;project_overview&quot;,&quot;members&quot;,&quot;project_issue_list&quot;,&quot;branches&quot;,&quot;project_merge_request_list&quot;,&quot;pipelines&quot;]}"></aside>
+
+<div class="broadcast-wrapper gl-rounded-lg gl-overflow-hidden">
+
+
+
+</div>
+<div class="panels-container gl-flex gl-gap-3">
+<div class="content-panels gl-flex-1 gl-w-full gl-flex gl-gap-3 gl-relative js-content-panels gl-@container/content-panels">
+<div class="paneled-view static-panel js-static-panel js-paneled-view content-wrapper">
+<div class="panel-header">
+<div class="panel-header-inner js-panel-header-inner">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LMGC90","item":"https://git-xen.lmgc.univ-montp2.fr/lmgc90"},{"@type":"ListItem","position":2,"name":"LMGC90_user","item":"https://git-xen.lmgc.univ-montp2.fr/lmgc90/lmgc90_user"}]}
+
+
+</script>
+<div data-testid="breadcrumb-links" id="js-vue-page-breadcrumbs-wrapper">
+<div data-breadcrumbs-json="[{&quot;text&quot;:&quot;LMGC90&quot;,&quot;href&quot;:&quot;/lmgc90&quot;,&quot;avatarPath&quot;:null},{&quot;text&quot;:&quot;LMGC90_user&quot;,&quot;href&quot;:&quot;/lmgc90/lmgc90_user&quot;,&quot;avatarPath&quot;:null}]" id="js-vue-page-breadcrumbs"></div>
+<div id="js-injected-page-breadcrumbs"></div>
+</div>
+<div id="js-page-breadcrumbs-extra"></div>
+
+
+
+<div class="panel-header-inner-actions">
+
+
+<div class="panel-header-inner-actions-portal-target js-panel-actions-portal-target"></div>
+</div>
+</div>
+</div>
+<div class="panel-content">
+<div class="panel-content-inner js-static-panel-inner">
+<div class="alert-wrapper alert-wrapper-top-space gl-flex gl-flex-col gl-gap-3 container-fluid container-limited">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="container-fluid container-limited project-highlight-puc">
+<main class="content gl-@container/panel" id="content-body" itemscope itemtype="http://schema.org/SoftwareSourceCode">
+<div id="js-drawer-container"></div>
+<div class="flash-container flash-container-page sticky" data-testid="flash-container">
+<div id="js-global-alerts"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<header class="project-home-panel js-show-on-project-root gl-mt-2">
+<div class="gl-flex gl-justify-between gl-flex-wrap gl-flex-col gl-gap-5 @sm/panel:gl-flex-row">
+<div class="home-panel-title-row gl-flex gl-items-center">
+<div aria-hidden="true" class="gl-avatar gl-avatar-s48 gl-self-start gl-shrink-0 gl-mr-4 gl-avatar-identicon gl-avatar-identicon-bg6" itemprop="image">
+L
+</div>
+
+<h1 class="home-panel-title gl-heading-1 gl-flex gl-items-center gl-flex-wrap gl-gap-3 gl-break-anywhere gl-mb-0" data-testid="project-name-content" itemprop="name">
+LMGC90_user
+<button class="has-tooltip gl-border-0 gl-bg-transparent gl-p-0 gl-leading-0 gl-text-inherit visibility-icon gl-inline-flex" data-container="body" data-placement="top" title="Public - The project can be accessed without any authentication." type="button" aria-label="Public - The project can be accessed without any authentication."><svg class="s16 gl-fill-icon-subtle" data-testid="earth-icon"><use href="/assets/icons-744c96d42bcc6345fdb1c870432a980c5f983ed177df344a4a5f94b625ac4ce8.svg#earth"></use></svg></button>
+
+
+</h1>
+</div>
+<div data-can-read-project="true" data-can-request-access="false" data-can-withdraw-access-request="false" data-dashboard-path="/dashboard/projects" data-is-project-empty="false" data-is-project-marked-for-deletion="false" data-project-full-path="lmgc90/lmgc90_user" data-project-id="75" data-project-name="LMGC90_user" data-project-visibility-level="public" data-request-access-path="/lmgc90/lmgc90_user/-/project_members/request_access" data-sign-in-path="/users/sign_in?redirect_to_referer=yes" data-star-count="2" data-starred="false" data-starrers-path="/lmgc90/lmgc90_user/-/starrers" data-withdraw-access-request-path="/lmgc90/lmgc90_user/-/project_members/leave" id="js-home-panel"></div>
+</div>
+
+</header>
+
+<div class="project-page-indicator js-show-on-project-root"></div>
+<div class="project-page-layout">
+<div class="project-page-layout-sidebar js-show-on-project-root gl-mt-5">
+<aside class="project-page-sidebar" data-testid="project-page-sidebar">
+<div class="project-page-sidebar-block home-panel-home-desc gl-py-4 gl-border-b gl-border-b-subtle !gl-pt-2">
+<h2 class="gl-text-base gl-font-bold gl-leading-reset gl-text-heading gl-m-0 gl-mb-1">Project information</h2>
+<div class="home-panel-description gl-break-words">
+<div class="home-panel-description-markdown read-more-container" data-read-more-height="320" itemprop="description">
+<div class="read-more-content read-more-content--has-scrim">
+<p data-sourcepos="1:1-1:30" dir="auto">User version of LMGC90 project</p>
+</div>
+<div class="js-read-more-trigger gl-hidden gl-w-full gl-h-8 gl-absolute gl-bottom-0 gl-z-2 gl-bg-default">
+<button aria-label="Expand project information" type="button" class="gl-button btn btn-md btn-link "><span class="gl-button-text">
+<svg class="s14" data-testid="chevron-down-icon"><use href="/assets/icons-744c96d42bcc6345fdb1c870432a980c5f983ed177df344a4a5f94b625ac4ce8.svg#chevron-down"></use></svg>
+Read more
+
+</span>
+
+</button></div>
+</div>
+</div>
+</div>
+<div class="project-page-sidebar-block gl-py-4 gl-border-b gl-border-b-subtle">
+<nav class="project-stats">
+<ul class="nav gl-gap-y-2 gl-gap-x-5">
+<li class="nav-item gl-leading-1">
+<a class="nav-link stat-link !gl-px-0 !gl-pb-2" href="/lmgc90/lmgc90_user/-/commits/master"><svg class="s16 gl-fill-icon-subtle gl-mr-3" data-testid="commit-icon"><use href="/assets/icons-744c96d42bcc6345fdb1c870432a980c5f983ed177df344a4a5f94b625ac4ce8.svg#commit"></use></svg><strong class="project-stat-value">93</strong> Commits</a>
+</li>
+<li class="nav-item gl-leading-1">
+<a class="nav-link stat-link !gl-px-0 !gl-pb-2" href="/lmgc90/lmgc90_user/-/branches"><svg class="s16 gl-fill-icon-subtle gl-mr-3" data-testid="branch-icon"><use href="/assets/icons-744c96d42bcc6345fdb1c870432a980c5f983ed177df344a4a5f94b625ac4ce8.svg#branch"></use></svg><strong class="project-stat-value">1</strong> Branch</a>
+</li>
+<li class="nav-item gl-leading-1">
+<a class="nav-link stat-link !gl-px-0 !gl-pb-2" href="/lmgc90/lmgc90_user/-/tags"><svg class="s16 gl-fill-icon-subtle gl-mr-3" data-testid="label-icon"><use href="/assets/icons-744c96d42bcc6345fdb1c870432a980c5f983ed177df344a4a5f94b625ac4ce8.svg#label"></use></svg><strong class="project-stat-value">8</strong> Tags</a>
+</li>
+</ul>
+
+</nav>
+</div>
+<div class="project-page-sidebar-block gl-py-4 gl-border-b gl-border-b-subtle">
+<div class="project-buttons gl-mb-2 js-show-on-project-root" data-testid="project-buttons">
+<ul class="nav gl-gap-y-2 gl-gap-x-5">
+<li class="nav-item gl-leading-1">
+<a class="nav-link stat-link !gl-px-0 !gl-pb-2 btn-default" data-event-tracking="click_readme_on_project_overview" data-event-label="view" href="/lmgc90/lmgc90_user/-/blob/master/README.md"><svg class="s16 gl-fill-icon-subtle gl-mr-3" data-testid="doc-text-icon"><use href="/assets/icons-744c96d42bcc6345fdb1c870432a980c5f983ed177df344a4a5f94b625ac4ce8.svg#doc-text"></use></svg>README</a>
+</li>
+</ul>
+
+</div>
+</div>
+
+
+<div class="project-page-sidebar-block gl-py-4">
+<p class="gl-font-bold gl-text-strong gl-m-0 gl-mb-1">Created on</p>
+<span>December 15, 2014</span>
+</div>
+</aside>
+
+</div>
+<div class="project-page-layout-content">
+<div class="project-show-files">
+<div class="gl-flex navigation-root">
+<div id="js-file-browser" style="width:320px"></div>
+<div class="gl-w-full gl-min-w-0">
+<div class="tree-holder gl-clearfix js-per-page gl-mt-4" data-blame-per-page="1000" id="tree-holder">
+<div data-breadcrumbs-can-collaborate="false" data-breadcrumbs-can-edit-tree="false" data-breadcrumbs-can-push-code="false" data-breadcrumbs-can-push-to-branch="false" data-breadcrumbs-new-blob-path="/lmgc90/lmgc90_user/-/new/master" data-breadcrumbs-new-branch-path="/lmgc90/lmgc90_user/-/branches/new" data-breadcrumbs-new-dir-path="/lmgc90/lmgc90_user/-/create_dir/master" data-breadcrumbs-new-tag-path="/lmgc90/lmgc90_user/-/tags/new" data-breadcrumbs-upload-path="/lmgc90/lmgc90_user/-/create/master" data-download-links="[{&quot;text&quot;:&quot;zip&quot;,&quot;path&quot;:&quot;/lmgc90/lmgc90_user/-/archive/master/lmgc90_user-master.zip?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.gz&quot;,&quot;path&quot;:&quot;/lmgc90/lmgc90_user/-/archive/master/lmgc90_user-master.tar.gz?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar.bz2&quot;,&quot;path&quot;:&quot;/lmgc90/lmgc90_user/-/archive/master/lmgc90_user-master.tar.bz2?ref_type=heads&quot;},{&quot;text&quot;:&quot;tar&quot;,&quot;path&quot;:&quot;/lmgc90/lmgc90_user/-/archive/master/lmgc90_user-master.tar?ref_type=heads&quot;}]" data-escaped-ref="master" data-http-url="https://git-xen.lmgc.univ-montp2.fr/lmgc90/lmgc90_user.git" data-project-id="75" data-project-path="lmgc90/lmgc90_user" data-project-root-path="/lmgc90/lmgc90_user" data-ref="master" data-ref-type="heads" data-root-ref="master" data-show-no-ssh-key-message="" data-ssh-url="git@git-xen.lmgc.univ-montp2.fr:lmgc90/lmgc90_user.git" data-user-settings-ssh-keys-path="/-/user_settings/ssh_keys" data-web-ide-button-default-branch="master" data-web-ide-button-options="{&quot;project_path&quot;:&quot;lmgc90/lmgc90_user&quot;,&quot;ref&quot;:&quot;master&quot;,&quot;is_fork&quot;:false,&quot;needs_to_fork&quot;:true,&quot;gitpod_enabled&quot;:false,&quot;is_blob&quot;:false,&quot;show_edit_button&quot;:false,&quot;show_web_ide_button&quot;:false,&quot;show_gitpod_button&quot;:false,&quot;show_pipeline_editor_button&quot;:false,&quot;web_ide_url&quot;:&quot;/-/ide/project/lmgc90/lmgc90_user/edit/master&quot;,&quot;edit_url&quot;:&quot;&quot;,&quot;pipeline_editor_url&quot;:&quot;/lmgc90/lmgc90_user/-/ci/editor?branch_name=master&quot;,&quot;gitpod_url&quot;:&quot;&quot;,&quot;user_preferences_gitpod_path&quot;:&quot;/-/profile/preferences#user_gitpod_enabled&quot;,&quot;user_profile_enable_gitpod_path&quot;:&quot;/-/user_settings/profile?user%5Bgitpod_enabled%5D=true&quot;,&quot;fork_path&quot;:&quot;/lmgc90/lmgc90_user/-/forks/new&quot;,&quot;fork_modal_id&quot;:null}" data-xcode-url="" id="js-repository-blob-header-app"></div>
+<div class="info-well project-last-commit gl-mt-5">
+<div class="gl-flex gl-items-center gl-justify-center gl-m-auto gl-min-h-9 @lg/panel:gl-min-h-[4.5rem]" data-history-link="/lmgc90/lmgc90_user/-/commits/master" data-ref-type="heads" id="js-last-commit">
+<div class="gl-spinner-container" role="status"><span aria-hidden class="gl-spinner gl-spinner-md gl-spinner-dark !gl-align-text-bottom"></span><span class="gl-sr-only !gl-absolute">Loading</span>
+</div>
+</div>
+</div>
+<div data-escaped-ref="master" data-full-name="LMGC90 / LMGC90_user" data-has-revs-file="false" data-project-path="lmgc90/lmgc90_user" data-project-short-path="lmgc90_user" data-ref="master" data-ref-type="heads" id="js-tree-list"></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+</main>
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+<div class="paneled-view-portal gl-@container/panel !gl-absolute gl-shadow-lg gl-bg-default @xl/content-panels:gl-w-1/2 @xl/content-panels:gl-shadow-none @xl/content-panels:!gl-relative @xl/content-panels:gl-bg-transparent gl-right-0" id="contextual-panel-portal"></div>
+</div>
+</div>
+
+</div>
+
+
+<script>
+//<![CDATA[
+if ('loading' in HTMLImageElement.prototype) {
+  document.querySelectorAll('img.lazy').forEach(img => {
+    img.loading = 'lazy';
+    let imgUrl = img.dataset.src;
+    // Only adding width + height for avatars for now
+    if (imgUrl.indexOf('/avatar/') > -1 && imgUrl.indexOf('?') === -1) {
+      const targetWidth = img.getAttribute('width') || img.width;
+      imgUrl += `?width=${targetWidth}`;
+    }
+    img.src = imgUrl;
+    img.removeAttribute('data-src');
+    img.classList.remove('lazy');
+    img.classList.add('js-lazy-loaded');
+    img.dataset.testid = 'js-lazy-loaded-content';
+  });
+}
+
+//]]>
+</script>
+<script>
+//<![CDATA[
+gl = window.gl || {};
+gl.experiments = {};
+
+
+//]]>
+</script>
+
+</body>
+</html>
+

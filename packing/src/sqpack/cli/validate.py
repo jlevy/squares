@@ -2207,7 +2207,7 @@ def _generated_tables(context: Context) -> str:
 
 def _strategy_catalogues(_context: Context) -> str:
     lines: list[str] = []
-    for kind, field_name, expected in (("search", "outcome", 22), ("proof", "status", 30)):
+    for kind, field_name, expected in (("search", "outcome", 28), ("proof", "status", 30)):
         path = PROJECT_ROOT / "frontier" / f"{kind}-strategies.yaml"
         data = safe_load(path.read_text(encoding="utf-8"))
         strategies = data["strategies"]

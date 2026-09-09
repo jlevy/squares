@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/oCv0C16XIGh/eZ3Y5Je/nFH1g+8</id>
+  <title>arXiv Query: search_query=all:"divide and concur"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:10Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22divide+and+concur%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>8</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.17493v2</id>
+    <title>Learning with Boolean threshold functions</title>
+    <updated>2026-08-22T16:07:53Z</updated>
+    <link href="https://arxiv.org/abs/2602.17493v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.17493v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a method for training neural networks on Boolean data in which the values at all nodes are strictly $\pm 1$, and the resulting models are typically equivalent to networks whose nonzero weights are also $\pm 1$. The method replaces loss minimization with a nonconvex constraint formulation. Each node implements a Boolean threshold function (BTF), and training is expressed through a divide-and-concur decomposition into two complementary constraints: one enforces local BTF consistency between inputs, weights, and output; the other imposes architectural concurrence, equating neuron outputs with downstream inputs and enforcing weight equality across training-data instantiations of the network. The reflect-reflect-relax (RRR) projection algorithm is used to reconcile these constraints.
+  Each BTF constraint includes a lower bound on the margin. When this bound is sufficiently large, the learned representations are provably sparse and equivalent to networks composed of simple logical gates with $\pm 1$ weights. Across a range of tasks -- including multiplier-circuit discovery, binary autoencoding, logic-network inference, and cellular automata learning -- the method achieves exact solutions or strong generalization in regimes where standard gradient-based methods struggle. These results demonstrate that projection-based constraint satisfaction provides a viable and conceptually distinct foundation for learning in discrete neural systems, with implications for interpretability and efficient inference.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-19T16:07:25Z</published>
+    <arxiv:comment>23 pages, 23 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+    <author>
+      <name>Manish Krishan Lal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.05189v1</id>
+    <title>Resolving Tangling in Multi-Conformer Refinement via Iterative Projections</title>
+    <updated>2025-09-05T15:39:36Z</updated>
+    <link href="https://arxiv.org/abs/2509.05189v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.05189v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The advent of advanced crystallographic techniques has shifted structural biology from static, single-conformer models toward probing protein dynamics. Extracting cooperative motions from temporally and spatially averaged electron density maps requires both high-resolution data and refinement algorithms capable of handling conformational heterogeneity. However, current refinement protocols often fail due to the tangling phenomenon, in which conformational states become improperly intertwined during optimization. Here, we present an automated refinement methodology based on iterative projections within the divide-and-concur framework. This approach enables seamless integration of geometric constraints with experimental density constraints derived from observed scattering amplitudes. By allowing each atom to satisfy density constraints independently, we show that this framework effectively circumvents tangling artifacts and achieves robust refinement performance, even for models initialized with R-factors as high as 12%. Just as iterative projections revolutionized phase retrieval in crystallography, we demonstrate that they can also address the optimization challenges in multi-conformational refinement. This work establishes a computational foundation for advancing crystallographic methodologies to resolve conformational heterogeneity and ultimately capture protein dynamics at atomic resolution.</summary>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-05T15:39:36Z</published>
+    <arxiv:primary_category term="q-bio.QM"/>
+    <author>
+      <name>Avinash Mandaiya</name>
+    </author>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.12222v4</id>
+    <title>Solving a directed percolation inverse problem</title>
+    <updated>2022-08-29T18:08:11Z</updated>
+    <link href="https://arxiv.org/abs/2201.12222v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.12222v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a directed percolation inverse problem for diode networks: Given information about which pairs of nodes allow current to percolate from one to the other, can one find a configuration of diodes consistent with the observed currents? We implement a divide-and-concur iterative projection method for solving the problem and demonstrate the supremacy of our method over an exhaustive approach for nontrivial instances of the problem. We find that the problem is most difficult when some but not all of the percolation data are hidden, and that the most difficult networks to reconstruct generally are those for which the currents are most sensitive to the addition or removal of a single diode.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-28T16:24:46Z</published>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <arxiv:journal_ref>Phys. Rev. E 106, 014305 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Sean Deyo</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.106.014305</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.106.014305" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.07341v3</id>
+    <title>Learning grammar with a divide-and-concur neural network</title>
+    <updated>2022-07-07T00:49:32Z</updated>
+    <link href="https://arxiv.org/abs/2201.07341v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.07341v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We implement a divide-and-concur iterative projection approach to context-free grammar inference. Unlike most state-of-the-art models of natural language processing, our method requires a relatively small number of discrete parameters, making the inferred grammar directly interpretable -- one can read off from a solution how to construct grammatically valid sentences. Another advantage of our approach is the ability to infer meaningful grammatical rules from just a few sentences, compared to the hundreds of gigabytes of training data many other models employ. We demonstrate several ways of applying our approach: classifying words and inferring a grammar from scratch, taking an existing grammar and refining its categories and rules, and taking an existing grammar and expanding its lexicon as it encounters new words in new data.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-18T22:42:43Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Phys. Rev. E 105, 064303 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Sean Deyo</name>
+    </author>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.105.064303</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.105.064303" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1305.1961v1</id>
+    <title>An Improved Three-Weight Message-Passing Algorithm</title>
+    <updated>2013-05-08T21:24:14Z</updated>
+    <link href="https://arxiv.org/abs/1305.1961v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1305.1961v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe how the powerful "Divide and Concur" algorithm for constraint satisfaction can be derived as a special case of a message-passing version of the Alternating Direction Method of Multipliers (ADMM) algorithm for convex optimization, and introduce an improved message-passing algorithm based on ADMM/DC by introducing three distinct weights for messages, with "certain" and "no opinion" weights, as well as the standard weight used in ADMM/DC. The "certain" messages allow our improved algorithm to implement constraint propagation as a special case, while the "no opinion" messages speed convergence for some problems by making the algorithm focus only on active constraints. We describe how our three-weight version of ADMM/DC can give greatly improved performance for non-convex problems such as circle packing and solving large Sudoku puzzles, while retaining the exact performance of ADMM for convex problems. We also describe the advantages of our algorithm compared to other message-passing algorithms based upon belief propagation.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-05-08T21:24:14Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Nate Derbinsky</name>
+    </author>
+    <author>
+      <name>José Bento</name>
+    </author>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+    <author>
+      <name>Jonathan S. Yedidia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1003.3301v2</id>
+    <title>A method for dense packing discovery</title>
+    <updated>2010-08-04T13:45:11Z</updated>
+    <link href="https://arxiv.org/abs/1003.3301v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1003.3301v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem of packing a system of particles as densely as possible is foundational in the field of discrete geometry and is a powerful model in the material and biological sciences. As packing problems retreat from the reach of solution by analytic constructions, the importance of an efficient numerical method for conducting \textit{de novo} (from-scratch) searches for dense packings becomes crucial. In this paper, we use the \textit{divide and concur} framework to develop a general search method for the solution of periodic constraint problems, and we apply it to the discovery of dense periodic packings. An important feature of the method is the integration of the unit cell parameters with the other packing variables in the definition of the configuration space. The method we present led to improvements in the densest-known tetrahedron packing which are reported in [arXiv:0910.5226]. Here, we use the method to reproduce the densest known lattice sphere packings and the best known lattice kissing arrangements in up to 14 and 11 dimensions respectively (the first such numerical evidence for their optimality in some of these dimensions). For non-spherical particles, we report a new dense packing of regular four-dimensional simplices with density $φ=128/219\approx0.5845$ and with a similar structure to the densest known tetrahedron packing.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-03-17T06:02:00Z</published>
+    <arxiv:comment>15 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Phys. Rev. E 82, 056707 (2010)</arxiv:journal_ref>
+    <author>
+      <name>Yoav Kallus</name>
+    </author>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+    <author>
+      <name>Simon Gravel</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.82.056707</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.82.056707" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1001.1730v1</id>
+    <title>Divide &amp; Concur and Difference-Map BP Decoders for LDPC Codes</title>
+    <updated>2010-01-11T22:19:54Z</updated>
+    <link href="https://arxiv.org/abs/1001.1730v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1001.1730v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The "Divide and Concur'' (DC) algorithm, recently introduced by Gravel and Elser, can be considered a competitor to the belief propagation (BP) algorithm, in that both algorithms can be applied to a wide variety of constraint satisfaction, optimization, and probabilistic inference problems. We show that DC can be interpreted as a message-passing algorithm on a constraint graph, which helps make the comparison with BP more clear. The "difference-map'' dynamics of the DC algorithm enables it to avoid "traps'' which may be related to the "trapping sets'' or "pseudo-codewords'' that plague BP decoders of low-density parity check (LDPC) codes in the error-floor regime.
+  We investigate two decoders for low-density parity-check (LDPC) codes based on these ideas. The first decoder is based directly on DC, while the second decoder borrows the important "difference-map'' concept from the DC algorithm and translates it into a BP-like decoder. We show that this "difference-map belief propagation'' (DMBP) decoder has dramatically improved error-floor performance compared to standard BP decoders, while maintaining a similar computational complexity. We present simulation results for LDPC codes on the additive white Gaussian noise and binary symmetric channels, comparing DC and DMBP decoders with other decoders based on BP, linear programming, and mixed-integer linear programming.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-01-11T22:19:54Z</published>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Jonathan S. Yedidia</name>
+    </author>
+    <author>
+      <name>Yige Wang</name>
+    </author>
+    <author>
+      <name>Stark C. Draper</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0801.0222v1</id>
+    <title>Divide and concur: A general approach to constraint satisfaction</title>
+    <updated>2007-12-31T17:30:40Z</updated>
+    <link href="https://arxiv.org/abs/0801.0222v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0801.0222v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Many difficult computational problems involve the simultaneous satisfaction of multiple constraints which are individually easy to satisfy. Such problems occur in diffractive imaging, protein folding, constrained optimization (e.g., spin glasses), and satisfiability testing. We present a simple geometric framework to express and solve such problems and apply it to two benchmarks. In the first application (3SAT, a boolean satisfaction problem), the resulting method exhibits similar performance scaling as a leading context-specific algorithm (walksat). In the second application (sphere packing), the method allowed us to find improved solutions to some old and well-studied optimization problems. Based upon its simplicity and observed efficiency, we argue that this framework provides a competitive alternative to stochastic methods such as simulated annealing.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-12-31T17:30:40Z</published>
+    <arxiv:comment>4 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <arxiv:journal_ref>Phys. Rev. E 78, 036706 (2008)</arxiv:journal_ref>
+    <author>
+      <name>Simon Gravel</name>
+    </author>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.78.036706</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.78.036706" title="doi"/>
+  </entry>
+</feed>

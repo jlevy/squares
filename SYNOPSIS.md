@@ -207,6 +207,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Research: Physics and Simulation Mechanisms for Square Packing](docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md) | research synthesis | supporting | maintained | — |
 | [Research: Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | research synthesis | supporting | maintained | — |
 | [Video Spikes: The Sources, Not the Pages](packing/atlas/known-best/video/spikes/README.md) | component scope and use | supporting | maintained | — |
 | [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md) | research synthesis | record | retained | — |

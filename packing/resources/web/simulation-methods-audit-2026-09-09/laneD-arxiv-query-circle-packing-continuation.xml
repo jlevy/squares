@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/hm5nirbihetiKgOnqmZkcl9dZi4</id>
+  <title>arXiv Query: search_query=all:"circle packing" AND all:"continuation"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:26Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22circle+packing%22+AND+all:%22continuation%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>17</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.13662v2</id>
+    <title>EurekAgent: Agent Environment Engineering is All You Need For Autonomous Scientific Discovery</title>
+    <updated>2026-06-12T02:37:51Z</updated>
+    <link href="https://arxiv.org/abs/2606.13662v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.13662v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM-based agents have shown increasing potential in automating scientific discovery. Given an optimizable metric and an execution environment, they can propose, validate, and iterate scientific solutions, and have produced results that outperform human-designed approaches. As model capabilities continue to improve, we argue that the bottleneck for autonomous scientific discovery is shifting from prescribing agent workflows to designing agent environments: the resources, constraints, and interfaces that shape agent behavior. We frame this as environment engineering: building environments that amplify productive behaviors, such as open-ended exploration, systematic artifact management, and inter-agent collaboration, while suppressing harmful behaviors, such as reward hacking and high-friction human oversight. We present EurekAgent, an environment-engineered agent system for metric-driven autonomous scientific discovery. EurekAgent engineers the environment along four dimensions: permissions engineering for bounded agent execution and isolated evaluation; artifact engineering for filesystem and Git-based collaboration; budget engineering for budget-aware exploration; and human-in-the-loop engineering for easy human supervision and intervention. EurekAgent sets new state-of-the-art results on multiple mathematics, kernel engineering, and machine learning tasks, including new state-of-the-art 26-circle packing results discovered with less than $11 in total API cost. We open-source our code and results, and call for environment engineering as a core research direction for developing reliable autonomous research agents.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-11T17:56:35Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Amy Xin</name>
+    </author>
+    <author>
+      <name>Jiening Siow</name>
+    </author>
+    <author>
+      <name>Junjie Wang</name>
+    </author>
+    <author>
+      <name>Zijun Yao</name>
+    </author>
+    <author>
+      <name>Fanjin Zhang</name>
+    </author>
+    <author>
+      <name>Jian Song</name>
+    </author>
+    <author>
+      <name>Lei Hou</name>
+    </author>
+    <author>
+      <name>Juanzi Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.00668v1</id>
+    <title>NCP: Neighborhood-Preserving Non-Uniform Circle Packing for Visualization</title>
+    <updated>2026-01-31T11:32:12Z</updated>
+    <link href="https://arxiv.org/abs/2602.00668v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.00668v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Circle packing is widely used in visualization due to its aesthetic appeal and simplicity, particularly in tasks where the spatial arrangement and relationships between data are of interest, such as understanding proximity relationships (e.g., images with categories) or analyzing quantitative data (e.g., housing prices). Many applications require preserving neighborhood relationships while encoding a quantitative attribute using radii for data analysis. To meet these two requirements simultaneously, we present a neighborhood-preserving non-uniform circle packing method, NCP. This method preserves neighborhood relationships between the data represented by non-uniform circles to comprehensively analyze similar data and an attribute of interest. We formulate neighborhood-preserving non-uniform circle packing as a planar graph embedding problem based on the circle packing theorem. This formulation leads to a non-convex optimization problem, which can be solved by the continuation method. We conduct a quantitative evaluation and present two use cases to demonstrate that our NCP method can effectively generate non-uniform circle packing results.</summary>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-31T11:32:12Z</published>
+    <arxiv:comment>Accepted by Computational Visual Media</arxiv:comment>
+    <arxiv:primary_category term="cs.HC"/>
+    <author>
+      <name>Duan Li</name>
+    </author>
+    <author>
+      <name>Jun Yuan</name>
+    </author>
+    <author>
+      <name>Xinyuan Guo</name>
+    </author>
+    <author>
+      <name>Xiting Wang</name>
+    </author>
+    <author>
+      <name>Yang Liu</name>
+    </author>
+    <author>
+      <name>Weikai Yang</name>
+    </author>
+    <author>
+      <name>Shixia Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.23473v1</id>
+    <title>ThetaEvolve: Test-time Learning on Open Problems</title>
+    <updated>2025-11-28T18:58:14Z</updated>
+    <link href="https://arxiv.org/abs/2511.23473v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.23473v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in large language models (LLMs) have enabled breakthroughs in mathematical discovery, exemplified by AlphaEvolve, a closed-source system that evolves programs to improve bounds on open problems. However, it relies on ensembles of frontier LLMs to achieve new bounds and is a pure inference system that models cannot internalize the evolving strategies. We introduce ThetaEvolve, an open-source framework that simplifies and extends AlphaEvolve to efficiently scale both in-context learning and Reinforcement Learning (RL) at test time, allowing models to continually learn from their experiences in improving open optimization problems. ThetaEvolve features a single LLM, a large program database for enhanced exploration, batch sampling for higher throughput, lazy penalties to discourage stagnant outputs, and optional reward shaping for stable training signals, etc. ThetaEvolve is the first evolving framework that enable a small open-source model, like DeepSeek-R1-0528-Qwen3-8B, to achieve new best-known bounds on open problems (circle packing and first auto-correlation inequality) mentioned in AlphaEvolve. Besides, across two models and four open tasks, we find that ThetaEvolve with RL at test-time consistently outperforms inference-only baselines, and the model indeed learns evolving capabilities, as the RL-trained checkpoints demonstrate faster progress and better final performance on both trained target task and other unseen tasks. We release our code publicly: https://github.com/ypwang61/ThetaEvolve</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-28T18:58:14Z</published>
+    <arxiv:comment>30 pages, link: https://github.com/ypwang61/ThetaEvolve</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yiping Wang</name>
+    </author>
+    <author>
+      <name>Shao-Rong Su</name>
+    </author>
+    <author>
+      <name>Zhiyuan Zeng</name>
+    </author>
+    <author>
+      <name>Eva Xu</name>
+    </author>
+    <author>
+      <name>Liliang Ren</name>
+    </author>
+    <author>
+      <name>Xinyu Yang</name>
+    </author>
+    <author>
+      <name>Zeyi Huang</name>
+    </author>
+    <author>
+      <name>Xuehai He</name>
+    </author>
+    <author>
+      <name>Luyao Ma</name>
+    </author>
+    <author>
+      <name>Baolin Peng</name>
+    </author>
+    <author>
+      <name>Hao Cheng</name>
+    </author>
+    <author>
+      <name>Pengcheng He</name>
+    </author>
+    <author>
+      <name>Weizhu Chen</name>
+    </author>
+    <author>
+      <name>Shuohang Wang</name>
+    </author>
+    <author>
+      <name>Simon Shaolei Du</name>
+    </author>
+    <author>
+      <name>Yelong Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.13446v1</id>
+    <title>Enumeration of paths in a hexagonal circle packing</title>
+    <updated>2025-11-17T14:51:55Z</updated>
+    <link href="https://arxiv.org/abs/2511.13446v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.13446v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate paths in the hexagonal circle packing and enumerate them with respect to width, height, number of steps, area, and kissing number. Functional equations and the kernel method yield closed bivariate generating functions together with coefficient formulas and asymptotics. We establish bijections with skew Dyck paths, constrained Motzkin paths, and peakless Motzkin paths, and show that several of the associated counting arrays are Riordan arrays. Continued-fraction expansions for the area and kissing-number enumerators are also obtained.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-17T14:51:55Z</published>
+    <arxiv:comment>24 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jean-Luc Baril</name>
+    </author>
+    <author>
+      <name>José Luis Ramí rez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.02050v1</id>
+    <title>An illustrated introduction to the arithmetic of Apollonian circle packings, continued fractions, and other thin orbits</title>
+    <updated>2024-12-03T00:14:29Z</updated>
+    <link href="https://arxiv.org/abs/2412.02050v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.02050v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>These notes cover and expand upon the material for two summer schools: The first, which was held at CIRM, Marseille, France, July 10-14, 2023, as part of "Renormalization and Visualization for packing, billiard and surfaces", was titled "Number theory as a door to geometry, dynamics and illustration". The second was held at NSU IMS in Singapore, June 3-7, 2024, as part of "Computational Aspects of Thin Groups", and was titled "Integral packings and number theory". Both courses were put together by a number theorist for students and researchers in other fields. They cover a web of ideas relating to Apollonian circle packings, integral orbits, thin groups, hyperbolic geometry, continued fractions, and Diophantine approximation. The connection of geometry and dynamics to number theory gives an opportunity to illustrate arithmetic by appealing to our visual intuition.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-03T00:14:29Z</published>
+    <arxiv:comment>66 pages, 40 figures</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Katherine E. Stange</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.06274v1</id>
+    <title>Boundary Value Problem and Discrete Schwarz-Pick Lemma for Generalized Hyperbolic Circle Packings</title>
+    <updated>2024-11-09T20:11:48Z</updated>
+    <link href="https://arxiv.org/abs/2411.06274v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.06274v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1991, Beardon and Stephenson [2] generalized the classical Schwarz-Pick lemma in hyperbolic geometry to the discrete Schwarz-Pick lemma for Andreev circle packings. This paper continues to investigate the discrete Schwarz-Pick lemma for generalized circle packings (including circle, horocycle or hypercycle) in hyperbolic background geometry. Since the discrete Schwarz-Pick lemma is to compare some geometric quantities of two generalized circle packings with different boundary values, we first show the existence and rigidity of generalized circle packings with boundary values, and then we introduce the method of combinatorial Calabi flows to find the generalized circle packings with boundary values. Moreover, motivated by the method of He [21], we propose the maximum principle for generalized circle packings. Finally, we use the maximum principle to prove the discrete Schwarz-Pick lemma for generalized circle packings.</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-09T20:11:48Z</published>
+    <arxiv:comment>29 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.DG"/>
+    <author>
+      <name>Guangming Hu</name>
+    </author>
+    <author>
+      <name>Ziping Lei</name>
+    </author>
+    <author>
+      <name>Yanlin Li</name>
+    </author>
+    <author>
+      <name>Hao Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.16618v1</id>
+    <title>An efficient optimization model and tabu search-based global optimization approach for continuous p-dispersion problem</title>
+    <updated>2024-05-26T16:25:55Z</updated>
+    <link href="https://arxiv.org/abs/2405.16618v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.16618v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Continuous p-dispersion problems with and without boundary constraints are NP-hard optimization problems with numerous real-world applications, notably in facility location and circle packing, which are widely studied in mathematics and operations research. In this work, we concentrate on general cases with a non-convex multiply-connected region that are rarely studied in the literature due to their intractability and the absence of an efficient optimization model. Using the penalty function approach, we design a unified and almost everywhere differentiable optimization model for these complex problems and propose a tabu search-based global optimization (TSGO) algorithm for solving them. Computational results over a variety of benchmark instances show that the proposed model works very well, allowing popular local optimization methods (e.g., the quasi-Newton methods and the conjugate gradient methods) to reach high-precision solutions due to the differentiability of the model. These results further demonstrate that the proposed TSGO algorithm is very efficient and significantly outperforms several popular global optimization algorithms in the literature, improving the best-known solutions for several existing instances in a short computational time. Experimental analyses are conducted to show the influence of several key ingredients of the algorithm on computational performance.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-26T16:25:55Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Xiangjing Lai</name>
+    </author>
+    <author>
+      <name>Zhenheng Lin</name>
+    </author>
+    <author>
+      <name>Jin-Kao Hao</name>
+    </author>
+    <author>
+      <name>Qinghua Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.17529v1</id>
+    <title>Decorated discrete conformal equivalence in non-Euclidean geometries</title>
+    <updated>2023-10-26T16:18:58Z</updated>
+    <link href="https://arxiv.org/abs/2310.17529v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.17529v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce decorated piecewise hyperbolic and spherical surfaces and discuss their discrete conformal equivalence. A decoration is a choice of circle about each vertex of the surface. Our decorated surfaces are closely related to inversive distance circle packings, canonical tessellations of hyperbolic surfaces, and hyperbolic polyhedra.
+  We prove the corresponding uniformization theorem. Furthermore, we show that on can deform continuously between decorated piecewise hyperbolic, Euclidean, and spherical surfaces sharing the same fundamental discrete conformal invariant. Therefore, there is one master theory of discrete conformal equivalence in different background geometries. Our approach is based on a variational principle, which also provides a way to compute the discrete uniformization and geometric transitions.</summary>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-26T16:18:58Z</published>
+    <arxiv:comment>41 pages, 10 figures. arXiv admin note: text overlap with arXiv:2305.10988</arxiv:comment>
+    <arxiv:primary_category term="math.GT"/>
+    <author>
+      <name>Alexander I. Bobenko</name>
+    </author>
+    <author>
+      <name>Carl O. R. Lutz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.03203v1</id>
+    <title>Adaptive Simulated Annealing with Greedy Search for the Circle Bin Packing Problem</title>
+    <updated>2021-08-06T16:57:57Z</updated>
+    <link href="https://arxiv.org/abs/2108.03203v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.03203v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a new bin packing problem, termed the circle bin packing problem with circular items (CBPP-CI). The problem involves packing all the circular items into multiple identical circle bins as compact as possible with the objective of minimizing the number of used bins. We first define the tangent occupying action (TOA) and propose a constructive greedy algorithm that sequentially packs the items into places tangent to the packed items or the bin boundaries. Moreover, to avoid falling into a local minimum trap and efficiently judge whether an optimal solution has been established, we continue to present the adaptive simulated annealing with greedy search (ASA-GS) algorithm that explores and exploits the search space efficiently. Specifically, we offer two novel local perturbation strategies to jump out of the local optimum and incorporate the greedy search to achieve faster convergence. The parameters of ASA-GS are adaptive according to the number of items so that they can be size-agnostic across the problem scale. We design two sets of new benchmark instances, and the empirical results show that ASA-GS completely outperforms the constructive greedy algorithm. Moreover, the packing density of ASA-GS on the top few dense bins is much higher than that of the state-of-the-art algorithm for the single circle packing problem, inferring the high quality of the packing solutions for CBPP-CI.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-06T16:57:57Z</published>
+    <arxiv:comment>14 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Yong Yuan</name>
+    </author>
+    <author>
+      <name>Kevin Tole</name>
+    </author>
+    <author>
+      <name>Fei Ni</name>
+    </author>
+    <author>
+      <name>Kun He</name>
+    </author>
+    <author>
+      <name>Zhengda Xiong</name>
+    </author>
+    <author>
+      <name>Jinfa Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.02403v1</id>
+    <title>A proof of the Koebe-Andre'ev-Thurston theorem via flow from tangency packings</title>
+    <updated>2020-07-05T18:15:53Z</updated>
+    <link href="https://arxiv.org/abs/2007.02403v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.02403v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, Connelly and Gortler gave a novel proof of the circle packing theorem for tangency packings by introducing a hybrid combinatorial-geometric operation, flip-and-flow, that allows two tangency packings whose contact graphs differ by a combinatorial edge flip to be continuously deformed from one to the other while maintaining tangencies across all of their common edges. Starting from a canonical tangency circle packing with the desired number of circles a finite sequence of flip-and-flow operations may be applied to obtain a circle packing for any desired (proper) contact graph with the same number of circles.
+  In this paper, we extend the Connelly-Gortler method to allow circles to overlap by angles up to $π/2$. As a result, we obtain a new proof of the general Koebe-Andre'ev-Thurston theorem for disk packings on $\mathbb{S}^2$ with overlaps and a numerical algorithm for computing them. Our development makes use of the correspondence between circles and disks on $\mathbb{S}^2$ and hyperplanes and half-spaces in the 4-dimensional Minkowski spacetime $\mathbb{R}^{1,3}$, which we illuminate in a preliminary section. Using this view we generalize a notion of convexity of circle polyhedra that has recently been used to prove the global rigidity of certain circle packings. Finally, we use this view to show that all convex circle polyhedra are infinitesimally rigid, generalizing a recent related result.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-05T18:15:53Z</published>
+    <arxiv:comment>37 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>John C. Bowers</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.02327v3</id>
+    <title>Packing Disks by Flipping and Flowing</title>
+    <updated>2020-05-27T15:32:36Z</updated>
+    <link href="https://arxiv.org/abs/1910.02327v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.02327v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We provide a new type of proof for the Koebe-Andreev-Thurston (KAT) planar circle packing theorem based on combinatorial edge-flips. In particular, we show that starting from a disk packing with a maximal planar contact graph $G$, one can remove any flippable edge $e^-$ of this graph and then continuously flow the disks in the plane, such that at the end of the flow, one obtains a new disk packing whose contact graph is the graph resulting from flipping the edge $e^-$ in $G$. This flow is parameterized by a single inversive distance.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-05T20:21:04Z</published>
+    <arxiv:comment>Published version</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Robert Connelly</name>
+    </author>
+    <author>
+      <name>Steven J. Gortler</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1906.01613v1</id>
+    <title>The Dirichlet problem for orthodiagonal maps</title>
+    <updated>2019-06-04T17:44:56Z</updated>
+    <link href="https://arxiv.org/abs/1906.01613v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1906.01613v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the discrete harmonic function corresponding to smooth Dirichlet boundary conditions on orthodiagonal maps, that is, plane graphs having quadrilateral faces with orthogonal diagonals, converges to its continuous counterpart as the mesh size goes to 0. This provides a convergence statement for discrete holomorphic functions, similar to the one obtained by Chelkak and Smirnov for isoradial graphs. We observe that by the double circle packing theorem, any finite, simple, 3-connected planar map admits an orthodiagonal representation.
+  Our result improves the work of Skopenkov and Werness by dropping all regularity assumptions required in their work and providing effective bounds. In particular, no bound on the vertex degrees is required. Thus, the result can be applied to models of random planar maps that with high probability admit orthodiagonal representation with mesh size tending to 0. In a companion paper, we show that this can be done for the discrete mating-of-trees random map model of Duplantier, Gwynne, Miller and Sheffield.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-06-04T17:44:56Z</published>
+    <arxiv:comment>44 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>Ori Gurel-Gurevich</name>
+    </author>
+    <author>
+      <name>Daniel C. Jerison</name>
+    </author>
+    <author>
+      <name>Asaf Nachmias</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.10369v1</id>
+    <title>Re$^3$counting the rationals</title>
+    <updated>2019-05-24T15:17:43Z</updated>
+    <link href="https://arxiv.org/abs/1905.10369v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.10369v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1999, Neil Calkin and Herbert Wilf wrote "Recounting the rationals" which gave an explicit bijection between the positive integers and the positive rationals. We find several different (some new) ways to construct this enumeration and thus create pointers for generalizing. Next, we use circle packings to generalize and find two other enumerations. Surprisingly, the three enumerations are all that are possible by using this technique. The proofs involve, among other things, "negative" continued fractions, Chebyshev polynomials, Euler's totient function, and generalizations of Stern's diatomic sequence. Finally we look at some of the remarkable similarities -- and differences -- of these sequences.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-24T15:17:43Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Sam Northshield</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1704.06896v2</id>
+    <title>Asymptotic Counting in Conformal Dynamical Systems</title>
+    <updated>2017-07-19T14:23:25Z</updated>
+    <link href="https://arxiv.org/abs/1704.06896v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1704.06896v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this article we consider the general setting of conformal graph directed Markov systems modeled by countable state symbolic subshifts of finite type. We deal with two classes of such systems: attracting and parabolic. The latter being treated by means of the former.
+  We prove fairly complete asymptotic counting results for multipliers and diameters associated with preimages or periodic orbits ordered hy a natural geometric weighting. We also prove the corresponding Central Limit Theorems describing the further features of the distribution of their weights.
+  These have direct applications to a variety of examples, including the case of Apollonian Circle Packings, Apollonian Triangle, expanding and parabolic rational functions, Farey maps, continued fractions, Mannenville-Pomeau maps, Schottky groups, Fuchsian groups, and many more. A fairly complete collection of asymptotic counting results for them is presented.
+  Our new approach is founded on spectral properties of complexified Ruelle--Perron--Frobenius operators and Tauberian theorems as used in classical problems of prime number theory.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-04-23T08:43:10Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Mark Pollicott</name>
+    </author>
+    <author>
+      <name>Mariusz Urbanski</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1306.0694v1</id>
+    <title>Iterated Tabu Search Algorithm for Packing Unequal Circles in a Circle</title>
+    <updated>2013-06-04T08:04:10Z</updated>
+    <link href="https://arxiv.org/abs/1306.0694v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1306.0694v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents an Iterated Tabu Search algorithm (denoted by ITS-PUCC) for solving the problem of Packing Unequal Circles in a Circle. The algorithm exploits the continuous and combinatorial nature of the unequal circles packing problem. It uses a continuous local optimization method to generate locally optimal packings. Meanwhile, it builds a neighborhood structure on the set of local minimum via two appropriate perturbation moves and integrates two combinatorial optimization methods, Tabu Search and Iterated Local Search, to systematically search for good local minima. Computational experiments on two sets of widely-used test instances prove its effectiveness and efficiency. For the first set of 46 instances coming from the famous circle packing contest and the second set of 24 instances widely used in the literature, the algorithm is able to discover respectively 14 and 16 better solutions than the previous best-known records.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-06-04T08:04:10Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Tao Ye</name>
+    </author>
+    <author>
+      <name>Wenqi Huang</name>
+    </author>
+    <author>
+      <name>Zhipeng Lu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1102.1628v2</id>
+    <title>Apollonian circle packings of the half-plane</title>
+    <updated>2012-09-14T15:50:27Z</updated>
+    <link href="https://arxiv.org/abs/1102.1628v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1102.1628v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider Apollonian circle packings of a half Euclidean plane. We give necessary and sufficient conditions for two such packings to be related by a Euclidean similarity (that is, by translations, reflections, rotations and dilations) and describe explicitly the group of self-similarities of a given packing. We observe that packings with a non-trivial self-similarity correspond to positive real numbers that are the roots of quadratic polynomials with rational coefficients. This is reflected in a close connection between Apollonian circle packings and continued fractions which allows us to completely classify such packings up to similarity.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-02-08T15:31:00Z</published>
+    <arxiv:comment>35 pages; final version -- minor improvements to the exposition from the first version</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Journal of Combinatorics 3 (2012), 1-49</arxiv:journal_ref>
+    <author>
+      <name>Michael Ching</name>
+    </author>
+    <author>
+      <name>John R. Doyle</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0304344v2</id>
+    <title>Periodicity and Circle Packing in the Hyperbolic Plane</title>
+    <updated>2003-09-03T00:28:27Z</updated>
+    <link href="https://arxiv.org/abs/math/0304344v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0304344v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We prove that given a fixed radius $r$, the set of isometry-invariant probability measures supported on ``periodic'' radius $r$-circle packings of the hyperbolic plane is dense in the space of all isometry-invariant probability measures on the space of radius $r$-circle packings. By a periodic packing, we mean one with cofinite symmetry group. As a corollary, we prove the maximum density achieved by isometry-invariant probability measures on a space of radius $r$-packings of the hyperbolic plane is the supremum of densities of periodic packings. We also show that the maximum density function varies continuously with radius.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2003-04-22T22:19:43Z</published>
+    <arxiv:comment>25 pages</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Lewis Bowen</name>
+    </author>
+  </entry>
+</feed>

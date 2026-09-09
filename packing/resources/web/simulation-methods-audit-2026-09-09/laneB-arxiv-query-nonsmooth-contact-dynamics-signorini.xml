@@ -1,0 +1,691 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/DKcQtJ8sBl5X+/Ke+9Vi8L71JeE</id>
+  <title>arXiv Query: search_query=all:"nonsmooth contact dynamics" OR all:"non-smooth contact dynamics" OR all:"Signorini" AND all:"Coulomb"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:13Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22nonsmooth+contact+dynamics%22+OR+(all:%22non-smooth+contact+dynamics%22+OR+(all:%22Signorini%22+AND+all:%22Coulomb%22))&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>27</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01355v1</id>
+    <title>The semi-explicit nonsmooth Newmark time integrator for robust unilateral contact in dynamic fragmentation simulations</title>
+    <updated>2026-05-31T17:18:48Z</updated>
+    <link href="https://arxiv.org/abs/2606.01355v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01355v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Numerical simulations of solids undergoing dynamic fragmentation, a problem characterized by dynamic fracture and dense contacts, require accurately capturing the transition from a solid continuum to interacting fragments. We use the finite-element method with the extrinsic cohesive zone model for fracture. For contact, conventional penalty-based methods often exhibit numerical instabilities in dynamic collision-rich settings. To address this, we adapt and validate a novel semi-explicit time-integration scheme: the Nonsmooth Newmark (NSN) method for unilateral contact. Based on Nonsmooth Contact Dynamics, this formulation strongly enforces contact constraints at the velocity level. Within this scheme, bulk dynamics and fracture are integrated explicitly, while contact is integrated implicitly. Benchmark tests demonstrate that the NSN scheme achieves accuracy comparable to established nonsmooth methods and outperforms penalty-based approaches by orders of magnitude. Although it incurs a higher per-step computational cost, its enhanced stability permits significantly larger time steps, yielding overall efficiency comparable to purely explicit approaches on 1D benchmarks. We applied this framework to 1D fragmentation in both free and confined expansions. Results reveal confinement shifts the fracture energy budget from local fragment kinetic energy to larger-scale global system kinetic energy. Counterintuitively, compared to fully elastic contact, adding contact dissipation reduces fracture energy yet increases the final fragment count. This contact dissipation reduces vibration within damaged fragments, allowing cleaner stress-wave propagation and better damage localization to drive full separation. These results establish the NSN scheme as a robust tool for generating high-fidelity fragmentation statistics.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-31T17:18:48Z</published>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <author>
+      <name>Thibault Ghesquière-Diérickx</name>
+    </author>
+    <author>
+      <name>Guillaume Anciaux</name>
+    </author>
+    <author>
+      <name>Vincent Acary</name>
+    </author>
+    <author>
+      <name>Jean-François Molinari</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.10930v5</id>
+    <title>Where to Touch, How to Contact: A Hierarchical RL-MPC Framework for Geometry-Aware Sim-to-Real Manipulation</title>
+    <updated>2026-08-19T22:14:35Z</updated>
+    <link href="https://arxiv.org/abs/2601.10930v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.10930v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A key challenge in contact-rich dexterous manipulation is the need to jointly reason over global geometry and nonsmooth contact dynamics. End-to-end policies bypass this complexity, but often require large amounts of data and transfer poorly from simulation to reality. We address the limitations with a simple insight: dexterous manipulation is inherently hierarchical--at a high level, a robot decides where to touch (geometry); at a low level it determines how to move the object through contact dynamics. Building on this insight, we propose a hierarchical RL--MPC framework in which a high-level reinforcement learning (RL) policy predicts a contact intention, a novel object-centric interface that specifies (i) an object-surface contact location and (ii) a post-contact object subgoal pose. Conditioned on the contact intention, a low-level contact-implicit model predictive control (MPC) optimizes local contact modes and real-time (re)plans through contact dynamics to generate robot actions that robustly move the object toward each subgoal. We evaluate the framework on non-prehensile tasks, including geometry-generalized pushing across diverse object shapes, pivoting/flipping-based object reorientation, and environment-assisted object repositioning. It achieves high success rate with substantially reduced data (40 times fewer RL decision steps and 2 times fewer control steps in the T-pushing comparison), highly robust performance, and zero-shot sim-to-real transfer.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-16T01:20:15Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Zhixian Xie</name>
+    </author>
+    <author>
+      <name>Yu Xiang</name>
+    </author>
+    <author>
+      <name>Michael Posa</name>
+    </author>
+    <author>
+      <name>Wanxin Jin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.17183v1</id>
+    <title>A Set-valued Impact Law Approach for Modeling and Analysis of Rigid Contact Universal Joint with Clearance</title>
+    <updated>2025-06-20T17:37:47Z</updated>
+    <link href="https://arxiv.org/abs/2506.17183v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.17183v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study presents a dynamic model of a universal joint (U-Joint) with radial clearance, focusing on the rigid unilateral frictional contacts at the crosspiece and yoke interfaces. Unlike previous models that neglect crosspiece inertia and interface friction, this work incorporates these effects using a set-valued impact law based on Signorini's condition with Coulomb friction, capturing the complex non-smooth dynamics introduced by radial clearance. Numerical simulations of a 2 degrees-of-freedom (DOF) shaft system reveal the critical influence of clearance on U-Joint dynamic behavior, including impact-induced oscillations, quasi-periodic motion, and chaotic dynamics, which are essential for accurate driveline modeling and real-time control in automotive, aerospace, and precision medical applications.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.CD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-20T17:37:47Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Junaid Ali</name>
+    </author>
+    <author>
+      <name>Gregory Shaver</name>
+    </author>
+    <author>
+      <name>Anil Bajaj</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.16843v1</id>
+    <title>Online Friction Coefficient Identification for Legged Robots on Slippery Terrain Using Smoothed Contact Gradients</title>
+    <updated>2025-02-24T05:01:37Z</updated>
+    <link href="https://arxiv.org/abs/2502.16843v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.16843v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes an online friction coefficient identification framework for legged robots on slippery terrain. The approach formulates the optimization problem to minimize the sum of residuals between actual and predicted states parameterized by the friction coefficient in rigid body contact dynamics. Notably, the proposed framework leverages the analytic smoothed gradient of contact impulses, obtained by smoothing the complementarity condition of Coulomb friction, to solve the issue of non-informative gradients induced from the nonsmooth contact dynamics. Moreover, we introduce the rejection method to filter out data with high normal contact velocity following contact initiations during friction coefficient identification for legged robots. To validate the proposed framework, we conduct the experiments using a quadrupedal robot platform, KAIST HOUND, on slippery and nonslippery terrain. We observe that our framework achieves fast and consistent friction coefficient identification within various initial conditions.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-24T05:01:37Z</published>
+    <arxiv:comment>8 pages, IEEE RA-L (2025) accepted</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Robotics and Automation Letters, April 2025, Volume 10, Issue 4, Pages: 3150-3157</arxiv:journal_ref>
+    <author>
+      <name>Hajun Kim</name>
+    </author>
+    <author>
+      <name>Dongyun Kang</name>
+    </author>
+    <author>
+      <name>Min-Gyu Kim</name>
+    </author>
+    <author>
+      <name>Gijeong Kim</name>
+    </author>
+    <author>
+      <name>Hae-Won Park</name>
+    </author>
+    <arxiv:doi>10.1109/LRA.2025.3541428</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LRA.2025.3541428" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.12833v1</id>
+    <title>A coupled FE-BE multi-scale method for the dynamics of jointed structures</title>
+    <updated>2025-01-22T12:19:57Z</updated>
+    <link href="https://arxiv.org/abs/2501.12833v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.12833v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The damping of built-up structures stems largely from the microscopic dry frictional interactions in the contact interfaces. The accurate prediction of friction damping has been an important scientific aim of the past several decades. Recent research indicates that very good agreement with vibration measurements is to be expected if the actual contact surface topography is sufficiently well known and finely resolved, and frictional-unilateral interactions are modeled in terms of the Coulomb-Signorini conditions. Resolving all relevant length scales in one finite element model leads to enormous or even prohibitive computation effort and regularization of the set-valued contact laws might be needed to ensure numerical stability. In this work, we propose a multi-scale approach: The stress and deformation field in the contact region is modeled using elastic half-space theory, implemented on a regular and fine grid of boundary elements (BE), so that the compliance matrix can be expressed in closed form. The vibration behavior of the remaining region is described using a relatively coarse finite element (FE) model, which is further reduced via component mode synthesis. The two models are coupled by enforcing compatibility and equilibrium conditions in the far field. The set-valued Coulomb-Signorini conditions are enforced robustly and efficiently using a projected over-relaxation scheme in conjunction with an appropriate active-set strategy. For the S4 beam benchmark, very good agreement with regard to the amplitude-dependent frequency and damping ratio of the first few modes is achieved, while the computation effort is reduced by several orders of magnitude compared to the full-FE reference. The proposed multi-scale method permits a very fine resolution of the contact surface topography without suffering from numerical instability.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-22T12:19:57Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Hendrik D. Linder</name>
+    </author>
+    <author>
+      <name>Johann Gross</name>
+    </author>
+    <author>
+      <name>Malte Krack</name>
+    </author>
+    <arxiv:doi>10.1016/j.jsv.2025.119301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jsv.2025.119301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.04599v1</id>
+    <title>A new class of history-dependent quasi variational-hemivariational inequalities with constraints</title>
+    <updated>2023-09-08T21:18:38Z</updated>
+    <link href="https://arxiv.org/abs/2309.04599v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.04599v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we consider an abstract class of time-dependent quasi variational-hemivariational inequalities which involves history-dependent operators and a set of unilateral constraints. First, we establish the existence and uniqueness of solution by using a recent result for elliptic variational-hemivariational inequalities in reflexive Banach spaces combined with a fixed-point principle for history-dependent operators. Then, we apply the abstract result to show the unique weak solvability to a quasistatic viscoelastic frictional contact problem. The contact law involves a unilateral Signorini-type condition for the normal velocity and the nonmonotone normal damped response condition while the friction condition is a version of the Coulomb law of dry friction in which the friction bound depends on the accumulated slip.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-08T21:18:38Z</published>
+    <arxiv:comment>15p</arxiv:comment>
+    <arxiv:primary_category term="math.AP"/>
+    <arxiv:journal_ref>Communications in Nonlinear Science and Numerical Simulation, Volume 114, November 2022, 106686</arxiv:journal_ref>
+    <author>
+      <name>S. Migorski</name>
+    </author>
+    <author>
+      <name>YR. Bai</name>
+    </author>
+    <author>
+      <name>SD. Zeng</name>
+    </author>
+    <arxiv:doi>10.1016/j.cnsns.2022.106686</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.cnsns.2022.106686" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.06372v3</id>
+    <title>Contact Models in Robotics: a Comparative Analysis</title>
+    <updated>2024-07-21T13:54:33Z</updated>
+    <link href="https://arxiv.org/abs/2304.06372v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.06372v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Physics simulation is ubiquitous in robotics. Whether in model-based approaches (e.g., trajectory optimization), or model-free algorithms (e.g., reinforcement learning), physics simulators are a central component of modern control pipelines in robotics. Over the past decades, several robotic simulators have been developed, each with dedicated contact modeling assumptions and algorithmic solutions. In this article, we survey the main contact models and the associated numerical methods commonly used in robotics for simulating advanced robot motions involving contact interactions. In particular, we recall the physical laws underlying contacts and friction (i.e., Signorini condition, Coulomb's law, and the maximum dissipation principle), and how they are transcribed in current simulators. For each physics engine, we expose their inherent physical relaxations along with their limitations due to the numerical techniques employed. Based on our study, we propose theoretically grounded quantitative criteria on which we build benchmarks assessing both the physical and computational aspects of simulation. We support our work with an open-source and efficient C++ implementation of the existing algorithmic variations. Our results demonstrate that some approximations or algorithms commonly used in robotics can severely widen the reality gap and impact target applications. We hope this work will help motivate the development of new contact models, contact solvers, and robotic simulators in general, at the root of recent progress in motion generation in robotics.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-13T09:50:45Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Quentin Le Lidec</name>
+    </author>
+    <author>
+      <name>Wilson Jallet</name>
+    </author>
+    <author>
+      <name>Louis Montaut</name>
+    </author>
+    <author>
+      <name>Ivan Laptev</name>
+    </author>
+    <author>
+      <name>Cordelia Schmid</name>
+    </author>
+    <author>
+      <name>Justin Carpentier</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.16298v2</id>
+    <title>Existence Results for the Time-incremental Elastic Contact Problem with Coulomb Friction in 2D</title>
+    <updated>2026-01-28T10:12:40Z</updated>
+    <link href="https://arxiv.org/abs/2303.16298v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.16298v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this article, the structure of the incremental quasistatic contact problem with Coulomb friction in linear elasticity (Signorini-Coulomb problem) is unraveled and sharp existence results are proved for the most general two-dimensional problem with arbitrary geometry and elasticity modulus tensor. The problem is reduced to a variational inequality involving a nonlinear operator which handles both elasticity and friction. This operator is proved to fall into the class of the so-called Leray-Lions operators, so that a result of Brézis can be invoked to solve the variational inequality. It turns out that one property in the definition of Leray-Lions operators is difficult to check and requires proving a new fine property of the linear elastic Neumann-to-Dirichlet operator. This fine property is only established in the case of the two-dimensional problem, limiting currently our existence result to that case. In the case of isotropic elasticity, either homogeneous or heterogeneous, the existence of solutions to the Signorini-Coulomb problem is proved for arbitrarily large friction coefficient. In the case of anisotropic elasticity, an example of nonexistence of a solution for large friction coefficient is exhibited and the existence of solutions is proved under an optimal condition for the friction coefficient.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-28T20:39:22Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Patrick Ballard</name>
+    </author>
+    <author>
+      <name>Flaviana Iurlano</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.05873v1</id>
+    <title>Simulation-based Bayesian inference for robotic grasping</title>
+    <updated>2023-03-10T11:56:56Z</updated>
+    <link href="https://arxiv.org/abs/2303.05873v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.05873v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>General robotic grippers are challenging to control because of their rich nonsmooth contact dynamics and the many sources of uncertainties due to the environment or sensor noise. In this work, we demonstrate how to compute 6-DoF grasp poses using simulation-based Bayesian inference through the full stochastic forward simulation of the robot in its environment while robustly accounting for many of the uncertainties in the system. A Riemannian manifold optimization procedure preserving the nonlinearity of the rotation space is used to compute the maximum a posteriori grasp pose. Simulation and physical benchmarks show the promising high success rate of the approach.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-10T11:56:56Z</published>
+    <arxiv:comment>5 pages, 4 figures, IROS 2022 Probabilistic Robotics at the age of Deep Learning workshop. arXiv admin note: substantial text overlap with arXiv:2109.14275</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Norman Marlier</name>
+    </author>
+    <author>
+      <name>Olivier Brüls</name>
+    </author>
+    <author>
+      <name>Gilles Louppe</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.10787v2</id>
+    <title>Global Planning for Contact-Rich Manipulation via Local Smoothing of Quasi-dynamic Contact Models</title>
+    <updated>2023-02-28T04:06:46Z</updated>
+    <link href="https://arxiv.org/abs/2206.10787v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.10787v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The empirical success of Reinforcement Learning (RL) in the setting of contact-rich manipulation leaves much to be understood from a model-based perspective, where the key difficulties are often attributed to (i) the explosion of contact modes, (ii) stiff, non-smooth contact dynamics and the resulting exploding / discontinuous gradients, and (iii) the non-convexity of the planning problem. The stochastic nature of RL addresses (i) and (ii) by effectively sampling and averaging the contact modes. On the other hand, model-based methods have tackled the same challenges by smoothing contact dynamics analytically. Our first contribution is to establish the theoretical equivalence of the two methods for simple systems, and provide qualitative and empirical equivalence on a number of complex examples. In order to further alleviate (ii), our second contribution is a convex, differentiable and quasi-dynamic formulation of contact dynamics, which is amenable to both smoothing schemes, and has proven through experiments to be highly effective for contact-rich planning. Our final contribution resolves (iii), where we show that classical sampling-based motion planning algorithms can be effective in global planning when contact modes are abstracted via smoothing. Applying our method on a collection of challenging contact-rich manipulation tasks, we demonstrate that efficient model-based motion planning can achieve results comparable to RL with dramatically less computation. Video: https://youtu.be/12Ew4xC-VwA</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-22T00:55:35Z</published>
+    <arxiv:comment>The first two authors contributed equally to this work</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Tao Pang</name>
+    </author>
+    <author>
+      <name>H. J. Terry Suh</name>
+    </author>
+    <author>
+      <name>Lujie Yang</name>
+    </author>
+    <author>
+      <name>Russ Tedrake</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.13679v1</id>
+    <title>Oedometric compression of a granular material: computation of energies involved during breakage with a discrete element modelling</title>
+    <updated>2022-03-21T08:52:43Z</updated>
+    <link href="https://arxiv.org/abs/2203.13679v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.13679v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A numerical model able to simulate the grain breakage with the discrete element method, using the "Non-Smooth Contact Dynamics" is presented. The model reproduces 3D grains having complex shapes and is tested in single grain and in oedometric compressions. Numerical simulations are then carried out to evaluate the different energies active during breakage (surface creation and redistribution energies). The surface creation energy is estimated. Results are closed to the ones found in the literature.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-21T08:52:43Z</published>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <arxiv:journal_ref>EPJ Web of Conferences, EDP Sciences, 2021, 249, pp.07008</arxiv:journal_ref>
+    <author>
+      <name>François Nader</name>
+      <arxiv:affiliation>GRG</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Claire Silvani</name>
+      <arxiv:affiliation>GRG</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Irini Djeran-Maigre</name>
+    </author>
+    <arxiv:doi>10.1051/epjconf/202124907008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/epjconf/202124907008" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.14275v1</id>
+    <title>Simulation-based Bayesian inference for multi-fingered robotic grasping</title>
+    <updated>2021-09-29T08:44:36Z</updated>
+    <link href="https://arxiv.org/abs/2109.14275v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.14275v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-fingered robotic grasping is an undeniable stepping stone to universal picking and dexterous manipulation. Yet, multi-fingered grippers remain challenging to control because of their rich nonsmooth contact dynamics or because of sensor noise. In this work, we aim to plan hand configurations by performing Bayesian posterior inference through the full stochastic forward simulation of the robot in its environment, hence robustly accounting for many of the uncertainties in the system. While previous methods either relied on simplified surrogates of the likelihood function or attempted to learn to directly predict maximum likelihood estimates, we bring a novel simulation-based approach for full Bayesian inference based on a deep neural network surrogate of the likelihood-to-evidence ratio. Hand configurations are found by directly optimizing through the resulting amortized and differentiable expression for the posterior. The geometry of the configuration space is accounted for by proposing a Riemannian manifold optimization procedure through the neural posterior. Simulation and physical benchmarks demonstrate the high success rate of the procedure.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-29T08:44:36Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Norman Marlier</name>
+    </author>
+    <author>
+      <name>Olivier Brüls</name>
+    </author>
+    <author>
+      <name>Gilles Louppe</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.05143v3</id>
+    <title>Bundled Gradients through Contact via Randomized Smoothing</title>
+    <updated>2022-01-22T03:55:01Z</updated>
+    <link href="https://arxiv.org/abs/2109.05143v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.05143v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The empirical success of derivative-free methods in reinforcement learning for planning through contact seems at odds with the perceived fragility of classical gradient-based optimization methods in these domains. What is causing this gap, and how might we use the answer to improve gradient-based methods? We believe a stochastic formulation of dynamics is one crucial ingredient. We use tools from randomized smoothing to analyze sampling-based approximations of the gradient, and formalize such approximations through the gradient bundle. We show that using the gradient bundle in lieu of the gradient mitigates fast-changing gradients of non-smooth contact dynamics modeled by the implicit time-stepping, or the penalty method. Finally, we apply the gradient bundle to optimal control using iLQR, introducing a novel algorithm which improves convergence over using exact gradients. Combining our algorithm with a convex implicit time-stepping formulation of contact, we show that we can tractably tackle planning-through-contact problems in manipulation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-11T00:03:28Z</published>
+    <arxiv:comment>The first two authors contributed equally. Accepted to Robotics and Automation Letters (RA-L)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>H. J. Terry Suh</name>
+    </author>
+    <author>
+      <name>Tao Pang</name>
+    </author>
+    <author>
+      <name>Russ Tedrake</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.03606v1</id>
+    <title>Three-dimensional compaction of soft granular packings</title>
+    <updated>2021-08-27T12:50:34Z</updated>
+    <link href="https://arxiv.org/abs/2109.03606v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.03606v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper analyzes the compaction behavior of assemblies composed of soft (elastic) spherical particles beyond the jammed state, using three-dimensional non-smooth contact dynamic simulations. The assemblies of particles are characterized using the evolution of the packing fraction, the coordination number, and the von Misses stress distribution within the particles as the confining stress increases. The packing fraction increases and tends toward a maximum value close to $1$, and the mean coordination number increases as a square root of the packing fraction. As the confining stress increases, a transition is observed from a granular-like material with exponential tails of the shear stress distributions to a continuous-like material characterized by Gaussian-like distributions of the shear stresses. We develop an equation that describes the evolution of the packing fraction as a function of the applied pressure. This equation, based on the micromechanical expression of the granular stress tensor, the limit of the Hertz contact law for small deformation, and the power-law relation between the packing fraction and the coordination of the particles, provides good predictions from the jamming point up to very high densities without the need of tuning any parameters.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-27T12:50:34Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Manuel Cárdenas-Barrantes</name>
+    </author>
+    <author>
+      <name>David Cantor</name>
+    </author>
+    <author>
+      <name>Jonathan Barés</name>
+    </author>
+    <author>
+      <name>Mathieu Renouf</name>
+    </author>
+    <author>
+      <name>Emilien Azéma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.04004v1</id>
+    <title>Toward understanding the self-adaptive dynamics of a harmonically forced beam with a sliding mass</title>
+    <updated>2020-12-28T20:15:04Z</updated>
+    <link href="https://arxiv.org/abs/2101.04004v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.04004v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A mechanical system consisting of an elastic beam under harmonic excitation and an attached sliding body is investigated. Recent experimental observations suggest that the system passively (self-)adapts the axial location of the slider to achieve and maintain a condition of self-resonance, which could be useful in applications such as energy harvesting. The purpose of this work is to provide a theoretical explanation of this phenomenon based on an appropriate model. A key feature of the proposed model is a small clearance between the slider and the beam. This clearance gives rise to backlash and frictional contact interactions, both of which are found to be essential for the self-adaptive behavior. Contact is modeled in terms of the Coulomb and Signorini laws, together with the Newton impact law. The set-valued character of the contact laws is accounted for in a measure differential inclusion formulation. Numerical integration is carried out using Moreau's time-stepping scheme. The proposed model reproduces qualitatively most experimental observations. However, although the system showed a distinct self-adaptive character, the behavior was found to be non-resonant for the considered set of parameters. Beside estimating the relationship between resonance frequency and slider location, the model permits predicting the operating limits with regard to excitation level and frequency. Finally, some specific dynamical phenomena such as hysteresis effects and transient resonance captures underline the rich dynamical behavior of the system.</summary>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-12-28T20:15:04Z</published>
+    <arxiv:comment>The final version of this article is available online at http://link.springer.com/article/10.1007/s00419-016-1218-5</arxiv:comment>
+    <arxiv:primary_category term="nlin.AO"/>
+    <arxiv:journal_ref>Archive of Applied Mechanics 87(4), 699-720, 2017</arxiv:journal_ref>
+    <author>
+      <name>Malte Krack</name>
+    </author>
+    <author>
+      <name>Noha Aboulfotoh</name>
+    </author>
+    <author>
+      <name>Jens Twiefel</name>
+    </author>
+    <author>
+      <name>Jörg Wallaschek</name>
+    </author>
+    <author>
+      <name>Lawrence A. Bergman</name>
+    </author>
+    <author>
+      <name>Alexander F. Vakakis</name>
+    </author>
+    <arxiv:doi>10.1007/s00419-016-1218-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00419-016-1218-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.02867v1</id>
+    <title>Compaction of mixtures of rigid and highly deformable particles: a micro-mechanical model</title>
+    <updated>2020-05-28T16:37:51Z</updated>
+    <link href="https://arxiv.org/abs/2006.02867v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.02867v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We analyze the isotropic compaction of mixtures composed of rigid and deformable incompressible particles by the non-smooth contact dynamics approach (NSCD). The deformable bodies are simulated using a hyper-elastic neo-Hookean constitutive law by means of classical finite elements. For mixtures that varied from totally rigid to totally deformable particles, we characterize the evolution of the packing fraction, the elastic modulus, and the connectivity as a function of the applied stresses when varying inter-particle coefficient of friction. We show first that the packing fraction increases and tends asymptotically to a maximum value $φ_{max}$, which depends on both the mixture ratio and the inter-particle friction. The bulk modulus is also shown to increase with the packing fraction and to diverges as it approaches $φ_{max}$. From the micro-mechanical expression of the granular stress tensor, we develop a model to describe the compaction behavior as a function of the applied pressure, the Young modulus of the deformable particles, and the mixture ratio. A bulk equation is also derived from the compaction equation. This model lays on the characterization of a single deformable particle under compression together with a power-law relation between connectivity and packing fraction. This compaction model, set by well-defined physical quantities, results in outstanding predictions from the jamming point up to very high densities and allows us to give a direct prediction of $φ_{max}$ as a function of both the mixture ratio and the friction coefficient.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-28T16:37:51Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 102, 032904 (2020)</arxiv:journal_ref>
+    <author>
+      <name>Manuel Cárdenas-Barrantes</name>
+    </author>
+    <author>
+      <name>David Cantor</name>
+    </author>
+    <author>
+      <name>Jonathan Barés</name>
+    </author>
+    <author>
+      <name>Mathieu Renouf</name>
+    </author>
+    <author>
+      <name>Emilien Azéma</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.102.032904</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.102.032904" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1901.09569v1</id>
+    <title>Behavior of confined granular beds under cyclic thermal loading</title>
+    <updated>2019-01-28T09:35:09Z</updated>
+    <link href="https://arxiv.org/abs/1901.09569v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1901.09569v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the mechanical behavior of a confined granular packing of irregular polyhedral particles under repeated heating and cooling cycles by means of numerical simulations with the Non-Smooth Contact Dynamics method. Assuming a homogeneous temperature distribution as well as constant temperature rate, we study the effect of the container shape, and coefficients of thermal expansions on the pressure buildup at the confining walls and the density evolution. We observe that small changes in the opening angle of the confinement can lead to a drastic peak pressure reduction. Furthermore, the displacement fields over several thermal cycles are obtained and we discover the formation of convection cells inside the granular material having the shape of a torus. The root mean square of the vorticity is then calculated from the displacement fields and a quadratic dependency on the ratio of thermal expansion coefficients is established.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-01-28T09:35:09Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Pavel S. Iliev</name>
+    </author>
+    <author>
+      <name>Elena Giacomazzi</name>
+    </author>
+    <author>
+      <name>Falk K. Wittel</name>
+    </author>
+    <author>
+      <name>Miller Mendoza</name>
+    </author>
+    <author>
+      <name>Andreas Haselbacher</name>
+    </author>
+    <author>
+      <name>Hans J. Herrmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1812.04691v1</id>
+    <title>Improved stabilization technique for frictional contact problems solved with hp-BEM</title>
+    <updated>2018-12-11T21:08:39Z</updated>
+    <link href="https://arxiv.org/abs/1812.04691v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1812.04691v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We improve the residual based stabilization technique for Signorini contact problems with Tresca friction in linear elasticity solved with $hp$-mixed BEM which has been recently analyzed by Banz et al.~in Numer.~Math.~135 (2017) pp.~217--263. The stabilization allows us to circumvent the discrete inf-sup condition and thus the primal and dual sets can be discretized independently. Compared to the above mentioned paper we are able to remove the dependency of the scaling parameter on the unknown Sobolev regularity of the exact solution and can thus also improve the convergence rate in the a priori error estimate. The second improvement is a rigorous a priori and a posteriori error analysis when the boundary integral operators in the stabilization term are approximated. The latter is of fundamental importance to keep the computational time small. We present numerical results in two and three dimensions to underline our theoretical findings, show the superiority of the $hp$-adaptive stabilized mixed scheme and the effect induced by approximating the stabilization term. Moreover, we show the applicability of the proposed method to the Coulomb frictional case for which we extend the a posteriori error analysis</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-12-11T21:08:39Z</published>
+    <arxiv:comment>31 pages, 10 Figures, journal article</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Lothar Banz</name>
+    </author>
+    <author>
+      <name>Gregor Milicic</name>
+    </author>
+    <author>
+      <name>Nina Ovcharova</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.06615v1</id>
+    <title>Homogenization of contact problem with Coulomb's friction on periodic cracks</title>
+    <updated>2018-11-15T22:24:18Z</updated>
+    <link href="https://arxiv.org/abs/1811.06615v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.06615v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the elasticity problem in a %heterogeneous domain with contact on multiple periodic open cracks. The contact is described by the Signorini and Coulomb-friction conditions. Problem is non-linear, the dissipative functional depends on the un-known solution and the existence of the solution for fixed period of the structure is usually proven by the fix-point argument in the Sobolev spaces with a little higher regularity, $H^{1+α}$. We rescaled norms, trace, jump and Korn inequalities in fractional Sobolev spaces with positive and negative exponent, using the unfolding technique, introduced by Griso, Cioranescu and Damlamian. Then we proved the existence and uniqieness of the solution for friction and period fixed. Then we proved the continuous dependency of the solution to the problem with Coulomb's friction on the given friction and then estimated the solution using fixed point theorem. However, we were not able to pass to the strong limit in the frictional dissipative term. For this reason, we regularized the problem by adding a fourth-order term, which increased the regularity of the solution and allowed the passing to the limit. This can be interpreted as micro-polar elasticity.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-15T22:24:18Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>G. Griso</name>
+    </author>
+    <author>
+      <name>J. Orlik</name>
+    </author>
+    <arxiv:doi>10.1002/mma.5749</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1002/mma.5749" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1507.05354v1</id>
+    <title>Kinematic flow patterns in slow deformation of a dense granular material</title>
+    <updated>2015-07-19T23:29:18Z</updated>
+    <link href="https://arxiv.org/abs/1507.05354v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.05354v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The kinematic flow pattern in slow deformation of a model dense granular medium is studied at high resolution using \emph{in situ} imaging, coupled with particle tracking. The deformation configuration is indentation by a flat punch under macroscopic plane-strain conditions. Using a general analysis method, velocity gradients and deformation fields are obtained from the disordered grain arrangement, enabling flow characteristics to be quantified. The key observations are the formation of a stagnation zone, as in dilute granular flow past obstacles; occurrence of vortices in the flow immediately underneath the punch; and formation of distinct shear bands adjoining the stagnation zone. The transient and steady state stagnation zone geometry, as well as the strength of the vortices and strain rates in the shear bands, are obtained from the experimental data. All of these results are well-reproduced in exact-scale Non-Smooth Contact Dynamics (NSCD) simulations. Full 3D numerical particle positions from the simulations allow extraction of flow features that are extremely difficult to obtain from experiments. Three examples of these, namely material free surface evolution, deformation of a grain column below the punch and resolution of velocities inside the primary shear band, are highlighted. The variety of flow features observed in this model problem also illustrates the difficulty involved in formulating a complete micromechanical analytical description of the deformation.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-19T23:29:18Z</published>
+    <arxiv:comment>16 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Granular Matter 17(5) 2015 553--565</arxiv:journal_ref>
+    <author>
+      <name>Koushik Viswanathan</name>
+    </author>
+    <author>
+      <name>Anirban Mahato</name>
+    </author>
+    <author>
+      <name>Tejas G. Murthy</name>
+    </author>
+    <author>
+      <name>Tomasz Koziara</name>
+    </author>
+    <author>
+      <name>Srinivasan Chandrasekar</name>
+    </author>
+    <arxiv:doi>10.1007/s10035-015-0576-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10035-015-0576-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1203.4655v1</id>
+    <title>Topological contact dynamics II: topological automorphisms, contact homeomorphisms, and non-smooth contact dynamical systems</title>
+    <updated>2012-03-21T05:53:52Z</updated>
+    <link href="https://arxiv.org/abs/1203.4655v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1203.4655v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This sequel to our previous paper [MS11b] continues the study of topological contact dynamics and applications to contact dynamics and topological dynamics. We provide further evidence that the topological automorphism groups of a contact structure and a contact form are the appropriate transformation groups of contact dynamical systems. The article includes an examination of the groups of time-one maps of topological contact and strictly contact isotopies, and the construction of a bi-invariant metric on the latter. Moreover, every topological contact or strictly contact dynamical system is arbitrarily close to a continuous contact or strictly contact dynamical system with the same end point. In particular, the above groups of time-one maps are independent of the choice of norm in the definition of the contact distance. On every contact manifold we construct topological contact dynamical systems with time-one maps that fail to be Lipschitz continuous, and smooth contact vector fields whose flows are topologically conjugate but not conjugate by a contact C^1-diffeomorphism.</summary>
+    <category term="math.SG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-03-21T05:53:52Z</published>
+    <arxiv:comment>39 pages, sequel to our previous paper arXiv:1110.6705v2 [math.SG]</arxiv:comment>
+    <arxiv:primary_category term="math.SG"/>
+    <author>
+      <name>Stefan Müller</name>
+    </author>
+    <author>
+      <name>Peter Spaeth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0904.4679v2</id>
+    <title>Relevance of visco-plastic theory in a multi-directional inhomogeneous granular flow</title>
+    <updated>2009-11-06T13:56:26Z</updated>
+    <link href="https://arxiv.org/abs/0904.4679v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0904.4679v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We confront a recent visco-plastic description of dense granular flows [P. Jop et al, Nature, {\bf 441} (2006) 727] with multi-directional inhomogeneous steady flows observed in non-smooth contact dynamics simulations of 2D half-filled rotating drums. Special attention is paid to check separately the two underlying fundamental statements into which the considered theory can be recast, namely (i) a single relation between the invariants of stress and strain rate tensors and (ii) the alignment between these tensors. Interestingly, the first prediction is fairly well verified over more than four decades of small strain rate, from the surface rapid flow to the quasi-static creep phase, where it is usually believed to fail because of jamming. On the other hand, the alignment between stress and strain rate tensors is shown to fail over the whole flow, what yields an apparent violation of the visco-plastic rheology when applied without care. In the quasi-static phase, the particularly large misalignment is conjectured to be related to transient dilatancy effects.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.other" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-04-29T19:06:37Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>P.-P. Cortet, D. Bonamy, F. Daviaud, O. Dauchot, B. Dubrulle, M. Renouf, EPL 88 14001 (2009)</arxiv:journal_ref>
+    <author>
+      <name>P. -P. Cortet</name>
+    </author>
+    <author>
+      <name>D. Bonamy</name>
+    </author>
+    <author>
+      <name>F. Daviaud</name>
+    </author>
+    <author>
+      <name>O. Dauchot</name>
+    </author>
+    <author>
+      <name>B. Dubrulle</name>
+    </author>
+    <author>
+      <name>M. Renouf</name>
+    </author>
+    <arxiv:doi>10.1209/0295-5075/88/14001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1209/0295-5075/88/14001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0804.0561v1</id>
+    <title>Realistic Haptic Rendering of Interacting Deformable Objects in Virtual Environments</title>
+    <updated>2008-04-03T13:49:51Z</updated>
+    <link href="https://arxiv.org/abs/0804.0561v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0804.0561v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A new computer haptics algorithm to be used in general interactive manipulations of deformable virtual objects is presented. In multimodal interactive simulations, haptic feedback computation often comes from contact forces. Subsequently, the fidelity of haptic rendering depends significantly on contact space modeling. Contact and friction laws between deformable models are often simplified in up to date methods. They do not allow a "realistic" rendering of the subtleties of contact space physical phenomena (such as slip and stick effects due to friction or mechanical coupling between contacts). In this paper, we use Signorini's contact law and Coulomb's friction law as a computer haptics basis. Real-time performance is made possible thanks to a linearization of the behavior in the contact space, formulated as the so-called Delassus operator, and iteratively solved by a Gauss-Seidel type algorithm. Dynamic deformation uses corotational global formulation to obtain the Delassus operator in which the mass and stiffness ratio are dissociated from the simulation time step. This last point is crucial to keep stable haptic feedback. This global approach has been packaged, implemented, and tested. Stable and realistic 6D haptic feedback is demonstrated through a clipping task experiment.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-04-03T13:49:51Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <arxiv:journal_ref>IEEE Transactions on Visualization and Computer Graphics 12, 1 (2006) 36-47</arxiv:journal_ref>
+    <author>
+      <name>Christian Duriez</name>
+      <arxiv:affiliation>INRIA Lille - Nord Europe</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Frédéric Dubois</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Abderrahmane Kheddar</name>
+      <arxiv:affiliation>JRL</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Claude Andriot</name>
+      <arxiv:affiliation>LIST</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0803.0191v2</id>
+    <title>Euler-like modelling of dense granular flows: application to a rotating drum</title>
+    <updated>2016-03-08T23:18:48Z</updated>
+    <link href="https://arxiv.org/abs/0803.0191v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0803.0191v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>General conservation equations are derived for 2D dense granular flows from the Euler equation within the Boussinesq approximation. In steady flows, the 2D fields of granular temperature, vorticity and stream function are shown to be encoded in two scalar functions only. We checked such prediction on steady surface flows in a rotating drum simulated through the Non-Smooth Contact Dynamics method. This result is non trivial because granular flows are dissipative and therefore not necessarily compatible with Euler equation. Finally, we briefly discuss some possible ways to predict theoretically these two functions using statistical mechanics.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-03-03T07:37:23Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>European Physical Journal B 68, 619 (2009)</arxiv:journal_ref>
+    <author>
+      <name>Daniel Bonamy</name>
+      <arxiv:affiliation>SPCSI</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pierre-Henri Chavanis</name>
+      <arxiv:affiliation>LPT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pierre Philippe Cortet</name>
+      <arxiv:affiliation>GIT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>François Daviaud</name>
+      <arxiv:affiliation>GIT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Bérengère Dubrulle</name>
+      <arxiv:affiliation>GIT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mathieu Renouf</name>
+      <arxiv:affiliation>LaMCoS</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1140/epjb/e2009-00123-6</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjb/e2009-00123-6" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0506796v1</id>
+    <title>Numerical simulation of 2D steady granular flows in rotating drum: On surface flows rheology</title>
+    <updated>2005-06-30T11:54:25Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0506796v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0506796v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The rheology of 2D steady surface flow of cohesionless cylinders in a rotating drum is investigated through {\em Non Smooth Contact Dynamics} simulations. Profile of volume fraction, translational and angular velocity, rms velocity, strain rate and stress tensor were measured at the midpoint along the length of the surface flowing layer where the flow is generally considered as steady and homogeneous. Analysis of these data and their inter-relations suggest the local inertial number - defined as the ratio between local inertial forces and local confinement forces - to be the relevant dimensionless parameter to describe the transition from the quasi-static part of the packing to the flowing part at the surface of the heap. Variations of the components of the stress tensor as well as the ones of rms velocity as a function of the inertial number are analysed within both the quasi-static and the flowing phases. Their implications are discussed.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-06-30T11:54:25Z</published>
+    <arxiv:comment>13 pages, 14 figures, 61 references, submitted to Phys. Fluids</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physics of Fluids 17 (2005) 103303</arxiv:journal_ref>
+    <author>
+      <name>Mathieu Renouf</name>
+      <arxiv:affiliation>IRISA / INRIA Rennes</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel Bonamy</name>
+      <arxiv:affiliation>SPCSI</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Frederic Dubois</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pierre Alart</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1063/1.2063347</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.2063347" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/nucl-ex/0504030v1</id>
+    <title>Fusion Induced by Radioactive Ion Beams</title>
+    <updated>2005-04-26T19:23:28Z</updated>
+    <link href="https://arxiv.org/abs/nucl-ex/0504030v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/nucl-ex/0504030v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The use of radioactive beams opens a new frontier for fusion studies. The coupling to the continuum can be explored with very loosely bound nuclei. Experiments were performed with beams of nuclei at or near the proton and neutron drip-lines to measure fusion and associated reactions in the vicinity of the Coulomb barrier. In addition, the fusion yield is predicted to be enhanced in reactions involving very neutron-rich unstable nuclei. Experimental measurements were carried out to investigate if it is feasible to use such beams to produce new heavy elements. The current status of these experimental activities is given in this review.</summary>
+    <category term="nucl-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-04-26T19:23:28Z</published>
+    <arxiv:comment>30 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="nucl-ex"/>
+    <arxiv:journal_ref>Int.J.Mod.Phys. E14 (2005) 1121-1150</arxiv:journal_ref>
+    <author>
+      <name>J. F. Liang</name>
+    </author>
+    <author>
+      <name>C. Signorini</name>
+    </author>
+    <arxiv:doi>10.1142/S021830130500382X</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1142/S021830130500382X" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0211696v1</id>
+    <title>The contact dynamics method for granular media</title>
+    <updated>2002-11-29T12:49:29Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0211696v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0211696v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper we review the simulation method of the non-smooth contact dynamics. This technique was designed to solve the unilateral and frictional contact problem for a large number of rigid bodies and has proved to be especially valuable in research of dense granular materials during the last decade. We present here the basic principles compared to other methods and the detailed description of a 3D algorithm. We point out an artifact manifesting itself in spurious sound waves and discuss the applicability of the method.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-11-29T12:49:29Z</published>
+    <arxiv:comment>for the proceedings of the 7th Granada Seminar, 23 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Tamas Unger</name>
+    </author>
+    <author>
+      <name>Janos Kertesz</name>
+    </author>
+    <arxiv:doi>10.1063/1.1571300</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.1571300" title="doi"/>
+  </entry>
+</feed>

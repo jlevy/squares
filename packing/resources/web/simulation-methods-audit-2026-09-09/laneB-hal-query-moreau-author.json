@@ -1,0 +1,435 @@
+{
+  "response":{
+    "numFound":157,
+    "start":0,
+    "maxScore":8.592905,
+    "numFoundExact":true,
+    "docs":[{
+      "docid":"2162006",
+      "label_s":"Jean Jacques Moreau. Inf-convolution, sous-additivité, convexité des fonctions numériques. Journal de Mathématiques Pures et Appliquées, 1970. &#x27E8;hal-02162006&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02162006v1",
+      "producedDateY_i":1970,
+      "files_s":["https://hal.science/hal-02162006/file/Inf-convolution_sous-additivit%C3%A9_convexit%C3%A9_Moreau_1970.pdf"]
+    },{
+      "docid":"1740619",
+      "label_s":"Jean Jacques Moreau. Contribution à la théorie des gaz de J. Duclaux. Journal de Chimie Physique et de Physico-Chimie Biologique, 1963, 60, pp.1185-1186. &#x27E8;10.1051/jcp/1963601185&#x27E9;. &#x27E8;hal-01740619&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01740619v1",
+      "doiId_s":"10.1051/jcp/1963601185",
+      "producedDateY_i":1963,
+      "files_s":["https://hal.science/hal-01740619/file/Contribution_th%C3%A9orie_gaz_de_Duclaux_Moreau_1963.pdf"]
+    },{
+      "docid":"1824588",
+      "label_s":"Jean Jacques Moreau. Facing the plurality of solutions in nonsmooth mechanics. Nonsmooth/Nonconvex Mechanics with Applications in Engineering, 2006, Thessalonique, Greece. pp.3-12. &#x27E8;hal-01824588&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01824588v1",
+      "producedDateY_i":2006,
+      "files_s":["https://hal.science/hal-01824588/file/Facing_plurality_solutions_nonsmooth_mechanics_Moreau_2006.pdf"]
+    },{
+      "docid":"2309485",
+      "label_s":"Jean Jacques Moreau. Compléments sur les multiapplications à rétraction finie. 1974. &#x27E8;hal-02309485&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309485v1",
+      "producedDateY_i":1974,
+      "files_s":["https://hal.science/hal-02309485/file/Compl%C3%A9ments_multiapplications_retraction_finie_Moreau_SAC_1974.pdf"]
+    },{
+      "docid":"2309451",
+      "label_s":"Jean Jacques Moreau. Rafle par un convexe variable (Première partie). 1971. &#x27E8;hal-02309451&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309451v1",
+      "producedDateY_i":1971,
+      "files_s":["https://hal.science/hal-02309451/file/Rafle_convexe_variable_partie-1_Moreau_SAC_1971.pdf"]
+    },{
+      "docid":"2309457",
+      "label_s":"Jean Jacques Moreau. Rafle par un convexe variable (Deuxième partie). 1972. &#x27E8;hal-02309457&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309457v1",
+      "producedDateY_i":1972,
+      "files_s":["https://hal.science/hal-02309457/file/Rafle_convexe_variable_partie-2_Moreau_SAC_1972.pdf"]
+    },{
+      "docid":"2309531",
+      "label_s":"Jean Jacques Moreau. Cinématique de variétés C¹ et transport de mesures scalaires. 1982. &#x27E8;hal-02309531&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309531v1",
+      "producedDateY_i":1982,
+      "files_s":["https://hal.science/hal-02309531/file/Cin%C3%A9matique_vari%C3%A9t%C3%A9_C1_transport_mesures_scalaires_Moreau_SAC_1982.pdf"]
+    },{
+      "docid":"1825251",
+      "label_s":"Jean Jacques Moreau. Indetermination due to dry friction in multibody dynamics. European Congress on Computational Methods in Applied Sciences and Engineering, Jul 2004, Jyväskylä, Finland. &#x27E8;hal-01825251&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01825251v1",
+      "producedDateY_i":2004,
+      "files_s":["https://hal.science/hal-01825251/file/Indetermination_dry_friction_Moreau_Eccomas_2004.pdf"]
+    },{
+      "docid":"2162149",
+      "label_s":"Jean Jacques Moreau. Distance à un convexe d'un espace normé et caractérisation de points proximaux. 1969. &#x27E8;hal-02162149&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02162149v1",
+      "producedDateY_i":1969,
+      "files_s":["https://hal.science/hal-02162149/file/Distance_convexe_espace_norm%C3%A9_Moreau_SAU_1969.pdf"]
+    },{
+      "docid":"1947768",
+      "label_s":"Jean Jacques Moreau. Tenseurs à structure isotrope. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1950, 230, pp.1734-1735. &#x27E8;hal-01947768&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01947768v1",
+      "producedDateY_i":1950,
+      "files_s":["https://hal.science/hal-01947768/file/Tenseurs_structure_isotrope_Moreau_CRAS_1950.pdf"]
+    },{
+      "docid":"1947739",
+      "label_s":"Jean Jacques Moreau. Sur l’interprétation tourbillonnaire des surfaces de glissement. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1949, 228, pp.1923-1925. &#x27E8;hal-01947739&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01947739v1",
+      "producedDateY_i":1949,
+      "files_s":["https://hal.science/hal-01947739/file/Sur_interpr%C3%A9tation_tourbillonaire_surface_glissement_Moreau_CRAS_1949.pdf"]
+    },{
+      "docid":"1868173",
+      "label_s":"Jean Jacques Moreau. Sélections de multiapplications à rétraction finie. Comptes rendus hebdomadaires des séances de l'Académie des sciences, 1973, 276, pp.265-268. &#x27E8;hal-01868173&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01868173v1",
+      "producedDateY_i":1973,
+      "files_s":["https://hal.science/hal-01868173/file/S%C3%A9lection_multiapplications_r%C3%A9traction_finie_Moreau_CRAS_1973.pdf"]
+    },{
+      "docid":"1789052",
+      "label_s":"Jean Jacques Moreau. Jump functions of a real interval to a Banach space. Annales de la Faculté des Sciences de Toulouse. Mathématiques., 1989, S10, pp.77-91. &#x27E8;hal-01789052&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01789052v1",
+      "producedDateY_i":1989,
+      "files_s":["https://hal.science/hal-01789052/file/Jump_functions_Banach_space_Moreau_1989.pdf"]
+    },{
+      "docid":"1789082",
+      "label_s":"Jean Jacques Moreau. Some numerical methods in multibody dynamics: application to granular materials. European Journal of Mechanics - A/Solids, 1994, 13 (4 - suppl), pp.93-114. &#x27E8;hal-01789082&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01789082v1",
+      "producedDateY_i":1994,
+      "files_s":["https://hal.science/hal-01789082/file/Some_numerical_methods_multibody_dynamics_Moreau_1994.pdf"]
+    },{
+      "docid":"2117797",
+      "label_s":"Jean Jacques Moreau. Une méthode de \"cinématique fonctionnelle\" en hydrodynamique. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1959, 249, pp.2156-2158. &#x27E8;hal-02117797&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02117797v1",
+      "producedDateY_i":1959,
+      "files_s":["https://hal.science/hal-02117797/file/M%C3%A9thode_cin%C3%A9matique_fonctionnelle_hydrodynamique_Moreau_CRAS_1959.pdf"]
+    },{
+      "docid":"1788488",
+      "label_s":"Jean Jacques Moreau. Majorantes surharmoniques minimales d'une fonction continue. Annales de l'Institut Fourier, 1971, 21 (2), pp.129 - 156. &#x27E8;10.5802/aif.375&#x27E9;. &#x27E8;hal-01788488&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01788488v1",
+      "doiId_s":"10.5802/aif.375",
+      "producedDateY_i":1971,
+      "files_s":["https://hal.science/hal-01788488/file/Majorantes_surharmoniques_minimales_Moreau_1971.pdf"]
+    },{
+      "docid":"1788906",
+      "label_s":"Jean Jacques Moreau. Variational properties of stationary inviscid incompressible flows with possible abrupt inhomogeneity or free surface. International Journal of Engineering Science, 1985, 23 (4), pp.461 - 481. &#x27E8;10.1016/0020-7225(85)90093-X&#x27E9;. &#x27E8;hal-01788906&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01788906v1",
+      "doiId_s":"10.1016/0020-7225(85)90093-X",
+      "producedDateY_i":1985,
+      "files_s":["https://hal.science/hal-01788906/file/Variational_properties_inviscid_flows_Moreau_1985_retouche.pdf"]
+    },{
+      "docid":"1824368",
+      "label_s":"Jean Jacques Moreau. La Convexité en Statique. Aubin, J. - P. Analyse Convexe et Ses Applications, Springer-Verlag, 1974, 978-3-662-00638-2. &#x27E8;hal-01824368&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01824368v1",
+      "producedDateY_i":1974,
+      "files_s":["https://hal.science/hal-01824368/file/Convexit%C3%A9_statique_Moreau_1974.pdf"]
+    },{
+      "docid":"2309529",
+      "label_s":"Jean Jacques Moreau. Variations horizontales première et seconde d'une intégrale de trace. 1981. &#x27E8;hal-02309529&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309529v1",
+      "producedDateY_i":1981,
+      "files_s":["https://hal.science/hal-02309529/file/Variations_horizontales_Moreau_SAC_1981.pdf"]
+    },{
+      "docid":"2309508",
+      "label_s":"Jean Jacques Moreau. Solutions du processus de rafle au sens des mesures différentielles. 1976. &#x27E8;hal-02309508&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309508v1",
+      "producedDateY_i":1976,
+      "files_s":["https://hal.science/hal-02309508/file/Solutions_processus_rafles_Moreau_SAC_1976.pdf"]
+    },{
+      "docid":"1877285",
+      "label_s":"Jean Jacques Moreau. Lois d'élasticité en grande déformation (exposé num. 12). Séminaire d'Analyse Convexe, 1979. &#x27E8;hal-01877285&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01877285v1",
+      "producedDateY_i":1979,
+      "files_s":["https://hal.science/hal-01877285/file/Mor-1979.pdf"]
+    },{
+      "docid":"2117407",
+      "label_s":"Jean Jacques Moreau. Invariants intégraux d'un ensemble de solutions des équations de l'hydrodynamique. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1959. &#x27E8;hal-02117407&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02117407v1",
+      "producedDateY_i":1959,
+      "files_s":["https://hal.science/hal-02117407/file/Invariants_int%C3%A9graux_%C3%A9quations_hydrodynamique_Moreau_CRAS_1959.pdf"]
+    },{
+      "docid":"1947908",
+      "label_s":"Jean Jacques Moreau. Sur la structure des tenseurs isotropes et des tenseurs de révolution. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1954, 238, pp.441-443. &#x27E8;hal-01947908&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01947908v1",
+      "producedDateY_i":1954,
+      "files_s":["https://hal.science/hal-01947908/file/Structure_tenseurs_isotropes_tenseurs_r%C3%A9volution_Moreau_CRAS_1954.pdf"]
+    },{
+      "docid":"1349849",
+      "label_s":"Jean Jacques Moreau. Problème  d'évolution  associé  à  un convexe  mobile  d'un  espace hilbertien.  Comptes rendus de l’Académie des sciences. Série IIb, Mécanique, 1973, 276, pp.791-794. &#x27E8;hal-01349849&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01349849v1",
+      "producedDateY_i":1973,
+      "files_s":["https://hal.science/hal-01349849/file/LLJLM2.pdf"]
+    },{
+      "docid":"1349847",
+      "label_s":"Jean Jacques Moreau. Numerical aspects of the sweeping process. Computer Methods in Applied Mechanics and Engineering, 1999, 177, pp.329-349. &#x27E8;10.1016/S0045-7825(98)00387-9&#x27E9;. &#x27E8;hal-01349847&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01349847v1",
+      "doiId_s":"10.1016/S0045-7825(98)00387-9",
+      "producedDateY_i":1999,
+      "files_s":["https://hal.science/hal-01349847/file/JJM2c.pdf"]
+    },{
+      "docid":"2161970",
+      "label_s":"Jean Jacques Moreau. Sous-différentiabilité. Colloquium on Convexity, 1967, Copenhague, Danemark. pp.185-201. &#x27E8;hal-02161970&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02161970v1",
+      "producedDateY_i":1967,
+      "files_s":["https://hal.science/hal-02161970/file/Sous_diff%C3%A9rentiabilit%C3%A9_Moreau_1967.pdf"]
+    },{
+      "docid":"2161908",
+      "label_s":"Jean Jacques Moreau. Convexity and duality. E. R. Caianiello. Functional Analysis and Optimization, Academic Press, 1966. &#x27E8;hal-02161908&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02161908v1",
+      "producedDateY_i":1966
+    },{
+      "docid":"4727157",
+      "label_s":"Jean Jacques Moreau. Principes extrémaux pour le problème de la naissance de la cavitation. Journal de Mécanique, 1966, 5 (4), pp.439-470. &#x27E8;hal-02161963&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02161963v1",
+      "producedDateY_i":1966,
+      "files_s":["https://hal.science/hal-02161963/file/Moreau1966.pdf"]
+    },{
+      "docid":"1864005",
+      "label_s":"Jean Jacques Moreau. Weak and Strong Solutions of Dual Problems. Contributions to Nonlinear Functional Analysis, Apr 1971, Madison, WI, United States. pp.181-214. &#x27E8;hal-01864005&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01864005v1",
+      "producedDateY_i":1971,
+      "files_s":["https://hal.science/hal-01864005/file/Weak_strong_solutions_Moreau_1971_retouche.pdf"]
+    },{
+      "docid":"2162190",
+      "label_s":"Jean Jacques Moreau. Distance à un convexe mobile d'un espace hilbertien. 1971. &#x27E8;hal-02162190&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02162190v1",
+      "producedDateY_i":1971,
+      "files_s":["https://hal.science/hal-02162190/file/Distance_convexe_mobile_espace_hilbertien_Moreau_SAC_1971.pdf"]
+    },{
+      "docid":"2162157",
+      "label_s":"Jean Jacques Moreau. Un cas d'addition des sous-différentiels. 1969. &#x27E8;hal-02162157&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02162157v1",
+      "producedDateY_i":1969,
+      "files_s":["https://hal.science/hal-02162157/file/Cas_addition_sous-diff%C3%A9rentiels_Moreau_SAU_1969.pdf"]
+    },{
+      "docid":"1878584",
+      "label_s":"Jean Jacques Moreau. Sur les mesures différentielles des fonctions vectorielles à variation localement bornée.. Séminaire d'Analyse Convexe, 1975, 5 (17), pp.39. &#x27E8;hal-01878584&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://inria.hal.science/hal-01878584v1",
+      "producedDateY_i":1975
+    },{
+      "docid":"1795424",
+      "label_s":"Jean Jacques Moreau. Numerical dynamics of granular materials. 3rd Contact Mechanics International Symposium, Jun 2001, Peniche, Portugal. pp.1-16, &#x27E8;10.1007/978-94-017-1154-8_1&#x27E9;. &#x27E8;hal-01795424&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01795424v1",
+      "doiId_s":"10.1007/978-94-017-1154-8_1",
+      "producedDateY_i":2001,
+      "files_s":["https://hal.science/hal-01795424/file/Numerical_dynamics_granular_materials_Moreau_2002.pdf"]
+    },{
+      "docid":"2117802",
+      "label_s":"Jean Jacques Moreau. Une spécification du potentiel-vecteur en hydrodynamique. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1959, 248, pp.3406-3408. &#x27E8;hal-02117802&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02117802v1",
+      "producedDateY_i":1959,
+      "files_s":["https://hal.science/hal-02117802/file/Sp%C3%A9cification_potentiel-vecteur_hydrodynamique_Moreau_CRAS_1959.pdf"]
+    },{
+      "docid":"1793413",
+      "label_s":"Jean Jacques Moreau. On Unilateral Constraints, Friction and Plasticity. Capriz, Gianfranco, Stampacchia, G. New Variational Techniques in Mathematical Physics, Springer, 2011. &#x27E8;hal-01793413&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01793413v1",
+      "producedDateY_i":2011,
+      "files_s":["https://hal.science/hal-01793413/file/Unilateral_constraints_friction_plasticity_Moreau_CIME_1973.pdf"]
+    },{
+      "docid":"1793645",
+      "label_s":"Jean Jacques Moreau. Application des algorithmes \"Contact Dynamics\" aux milieux granulaires. 14e Congrès Français de Mécanique, 1999, Toulouse, France. &#x27E8;hal-01793645&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01793645v1",
+      "producedDateY_i":1999,
+      "files_s":["https://hal.science/hal-01793645/file/Application_algorithmes_milieux_granulaires_Moreau_CFM_1999.pdf"]
+    },{
+      "docid":"2309466",
+      "label_s":"Jean Jacques Moreau. Rétraction d'une multiapplication. 1972. &#x27E8;hal-02309466&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309466v1",
+      "producedDateY_i":1972,
+      "files_s":["https://hal.science/hal-02309466/file/Retraction_multiapplication_Moreau_SAC_1972.pdf"]
+    },{
+      "docid":"1868113",
+      "label_s":"Jean Jacques Moreau. Remarques sur les fonctions à valeurs dans [-00, +00] définies sur un demi-groupe. Comptes rendus hebdomadaires des séances de l'Académie des sciences, 1963, 257, pp.3107-3109. &#x27E8;hal-01868113&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01868113v1",
+      "producedDateY_i":1963,
+      "files_s":["https://hal.science/hal-01868113/file/Remarques_fonctions_valeurs_demi-groupe_Moreau_CRAS_1963.pdf"]
+    },{
+      "docid":"1947721",
+      "label_s":"Jean Jacques Moreau. Le calcul tensoriel et les opérations vectorielles orientées. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1949, 228, pp.1472-1474. &#x27E8;hal-01947721&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01947721v1",
+      "producedDateY_i":1949,
+      "files_s":["https://hal.science/hal-01947721/file/Calcul_tensoriel_op%C3%A9rations_vectorielles_orient%C3%A9es_Moreau_CRAS_1949.pdf"]
+    },{
+      "docid":"1788889",
+      "label_s":"Jean Jacques Moreau. Duality Characterization of Strain Tensor Distributions in an Arbitrary Open Set. Journal of Mathematical Analysis and Applications, 1979, 72 (2), pp.160 - 170. &#x27E8;10.1016/0022-247X(79)90263-4&#x27E9;. &#x27E8;hal-01788889&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01788889v1",
+      "doiId_s":"10.1016/0022-247X(79)90263-4",
+      "producedDateY_i":1979,
+      "files_s":["https://hal.science/hal-01788889/file/Duality_characterization_strain_tensor_Moreau_1979.pdf"]
+    },{
+      "docid":"1788616",
+      "label_s":"Jean Jacques Moreau. Some Calculative Properties of Linear Viscosity. Zeitschrift für Angewandte Mathematik und Physik = Journal of Applied mathematics and physics = Journal de mathématiques et de physique appliquées, 1980, 31 (1), pp.181 - 184. &#x27E8;10.1007/BF01601712&#x27E9;. &#x27E8;hal-01788616&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01788616v1",
+      "doiId_s":"10.1007/BF01601712",
+      "producedDateY_i":1980,
+      "files_s":["https://hal.science/hal-01788616/file/Some_calculative_properties_linear_viscosity_Moreau_1980.pdf"]
+    },{
+      "docid":"1867195",
+      "label_s":"Jean Jacques Moreau. Fonctions convexes duales et points proximaux dans un espace hilbertien. Comptes rendus hebdomadaires des séances de l'Académie des sciences, 1962, 255, pp.2897-2899. &#x27E8;hal-01867195&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01867195v1",
+      "producedDateY_i":1962,
+      "files_s":["https://hal.science/hal-01867195/file/Fonctions_convexes_duales_points_proximaux_Moreau_CRAS_1962.pdf"]
+    },{
+      "docid":"1864051",
+      "label_s":"Jean Jacques Moreau. Variational characterization of inviscid incompressible flows with abrupt inhomogeneity or free surface. International Symposium on Free Boundary Problems, Jun 1984, Maubuisson-Carcans, France. pp.395-404. &#x27E8;hal-01864051&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01864051v1",
+      "producedDateY_i":1984,
+      "files_s":["https://hal.science/hal-01864051/file/Variational_characterization_inviscid_flows_Moreau_1984.pdf"]
+    },{
+      "docid":"1865239",
+      "label_s":"Jean Jacques Moreau. Constantes d'un îlot tourbillonnaire en fluide parfait barotrope. Comptes rendus hebdomadaires des séances de l'Académie des sciences, 1961, 252, pp.2810-2812. &#x27E8;hal-01865239&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01865239v1",
+      "producedDateY_i":1961,
+      "files_s":["https://hal.science/hal-01865239/file/Constantes_ilot_tourbillonnaire_Moreau_CRAS_1961.pdf"]
+    },{
+      "docid":"1947715",
+      "label_s":"Jean Jacques Moreau. Sur l’allure à l’infini d’un écoulement permanent lent. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1947, 224, pp.1469-1472. &#x27E8;hal-01947715&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01947715v1",
+      "producedDateY_i":1947,
+      "files_s":["https://hal.science/hal-01947715/file/Sur_allure_infini_ecoulement_permanent_lent_Moreau_CRAS_1947.pdf"]
+    },{
+      "docid":"1947761",
+      "label_s":"Jean Jacques Moreau. La symétrie de révolution en calcul tensoriel. Comptes Rendus de l'Academie des Sciences. Série IV, Physique, Astronomie, 1950, 231, pp.1028-1029. &#x27E8;hal-01947761&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01947761v1",
+      "producedDateY_i":1950,
+      "files_s":["https://hal.science/hal-01947761/file/Sym%C3%A9trie_r%C3%A9volution_calcul_tensoriel_Moreau_CRAS_1950.pdf"]
+    },{
+      "docid":"1737172",
+      "label_s":"Jean Jacques Moreau. Relations générales directes entre les actions aérodynamiques et les éléments tourbillonnaires. Colloque international de mécanique, 1950, Poitiers, France. &#x27E8;hal-01737172&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01737172v1",
+      "producedDateY_i":1950,
+      "files_s":["https://hal.science/hal-01737172/file/Relations_g%C3%A9n%C3%A9rales_directes_Moreau_1950.pdf"]
+    },{
+      "docid":"2309482",
+      "label_s":"Jean Jacques Moreau. Systèmes élastoplastiques de liberté finie. 1973. &#x27E8;hal-02309482&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309482v1",
+      "producedDateY_i":1973,
+      "files_s":["https://hal.science/hal-02309482/file/Syst%C3%A8mes_elastoplastiques_libert%C3%A9_finie_Moreau_SAC_1973.pdf"]
+    },{
+      "docid":"2309515",
+      "label_s":"Jean Jacques Moreau. Le calcul des variations horizontales et l'hydrodynamique. 1979. &#x27E8;hal-02309515&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309515v1",
+      "producedDateY_i":1979,
+      "files_s":["https://hal.science/hal-02309515/file/Calcul_variations_horizontales_hydrodynamique_Moreau_SAC_1979.pdf"]
+    },{
+      "docid":"1789023",
+      "label_s":"Jean Jacques Moreau. Le transport d'une mesure vectorielle par un fluide et le théorème de Kelvin-Helmholtz. Revue roumaine de mathématiques pures et appliquées, 1982, 27 (3), pp.375-383. &#x27E8;hal-01789023&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01789023v1",
+      "producedDateY_i":1982,
+      "files_s":["https://hal.science/hal-01789023/file/Transport_mesure_vectorielle_fluide_Moreau_1982.pdf"]
+    },{
+      "docid":"1864012",
+      "label_s":"Jean Jacques Moreau. Application of convex analysis to some problems of dry friction. Trends in Applications of Pure Mathematics to Mechanics, Sep 1977, Kozubnik, Poland. pp.263-280. &#x27E8;hal-01864012&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01864012v1",
+      "producedDateY_i":1977,
+      "files_s":["https://hal.science/hal-01864012/file/Application_convex_analysis_problems_dry_friction_Moreau_1979.pdf"]
+    },{
+      "docid":"738940",
+      "label_s":"Jean-Jacques Moreau. Comment utiliser différentes méthodes d'apprentissage lors des journées nationales d'enseignement en neurochirurgie : un bilan de sept ans. Pédagogie médicale, 2009, 10, pp.S44. &#x27E8;hal-00738940&#x27E9;",
+      "authFullName_s":["Jean-Jacques Moreau"],
+      "uri_s":"https://unilim.hal.science/hal-00738940v1",
+      "producedDateY_i":2009
+    },{
+      "docid":"1379713",
+      "label_s":"Jean Jacques Moreau. Quadratic Programming in Mechanics: Dynamics of One-Sided Constraints. SIAM Journal on Control and Optimization, 1966, 4 (1), pp.153 - 158. &#x27E8;10.1137/0304014&#x27E9;. &#x27E8;hal-01379713&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01379713v1",
+      "doiId_s":"10.1137/0304014",
+      "producedDateY_i":1966,
+      "files_s":["https://hal.science/hal-01379713/file/JJM.pdf"]
+    },{
+      "docid":"1825188",
+      "label_s":"Jean Jacques Moreau. Numerical investigation of shear zones in granular materials. HLRZ-Workshop on Friction, Arching, Contact Dynamics, 1997, Singapour, Singapore. pp.233-247. &#x27E8;hal-01825188&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01825188v1",
+      "producedDateY_i":1997,
+      "files_s":["https://hal.science/hal-01825188/file/Numerical_investigations_shear_zones_Moreau_1997.pdf"]
+    },{
+      "docid":"1824568",
+      "label_s":"Jean Jacques Moreau. An introduction to Unilateral Dynamics. Michel Frémond; Franco Maceri. Novel Approaches in Civil Engineering, Springer, pp.1-46, 2004, 978-3-642-07529-2. &#x27E8;10.1007/978-3-540-45287-4_1&#x27E9;. &#x27E8;hal-01824568&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01824568v1",
+      "doiId_s":"10.1007/978-3-540-45287-4_1",
+      "producedDateY_i":2004,
+      "files_s":["https://hal.science/hal-01824568/file/Introduction_Unilateral_Dynamics_2004.pdf"]
+    },{
+      "docid":"1824427",
+      "label_s":"Jean Jacques Moreau. Justification statistique de la loi de la diffusion. Colloque sur la Diffusion, Jun 1955, Montpellier, France. &#x27E8;hal-01824427&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01824427v1",
+      "producedDateY_i":1955,
+      "files_s":["https://hal.science/hal-01824427/file/Justification_statistique_loi_diffusion_1955.pdf"]
+    },{
+      "docid":"2309469",
+      "label_s":"Jean Jacques Moreau. Note complémentaire sur les intersections de convexes mobiles. 1973. &#x27E8;hal-02309469&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-02309469v1",
+      "producedDateY_i":1973,
+      "files_s":["https://hal.science/hal-02309469/file/Note_compl%C3%A9mentaire_intersections_convexes_mobiles_Moreau_SAC_1973.pdf"]
+    },{
+      "docid":"1864120",
+      "label_s":"Jean Jacques Moreau. Numerical study of an oscillator submitted to unilateral constraints and dry friction. Vibrations with Unilateral Constraints, Jun 1986, Villa Olmo, Italy. pp.69-71. &#x27E8;hal-01864120&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01864120v1",
+      "producedDateY_i":1986,
+      "files_s":["https://hal.science/hal-01864120/file/Numerical_study_oscillator_Moreau_1986.pdf"]
+    },{
+      "docid":"1788525",
+      "label_s":"Jean Jacques Moreau. Multiapplications à retraction finie. Annali della Scuola Normale Superiore di Pisa. Classe di Scienze, 1974, 1 (3-4), pp.169-203. &#x27E8;hal-01788525&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01788525v1",
+      "producedDateY_i":1974,
+      "files_s":["https://hal.science/hal-01788525/file/Multiapplications_retraction_finie_Moreau_1974.pdf"]
+    },{
+      "docid":"1788456",
+      "label_s":"Jean Jacques Moreau. Convexité et frottement. Séminaire sur la convexité et ses applications, Mar 1970, Montréal, Canada. &#x27E8;hal-01788456&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01788456v1",
+      "producedDateY_i":1970,
+      "files_s":["https://hal.science/hal-01788456/file/Convexit%C3%A9_frottement_Moreau_1970_V2.pdf"]
+    }]
+  }
+}
