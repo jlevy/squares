@@ -43,9 +43,9 @@ experiment:
       --expect-wall-source 915758898a97c92793f51e62b7a6b17f846895ca --expect-git-revision "$(git rev-parse
       HEAD)" --deadline-seconds 240 --output campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
     budget: One five-minute external process plus two-second grace and240-second cooperative internal
-      guard after input loading. No tuning, retry, resume, seed bank or second tuple. The original Session118
-      latest launch16:18:07UTC expired unrun; the fresh unchanged Session119 latest launch is16:29:54UTC
-      to fit before16:34:56UTC.
+      guard after input loading. No tuning, retry, resume, seed bank or second tuple. Session118's latest
+      launch16:18:07UTC and Session119's latest launch16:29:54UTC both expired unrun. The fresh unchanged
+      Session120 latest launch is16:59:48UTC to fit before17:04:50UTC.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
   results: []
   verdict:
@@ -55,14 +55,14 @@ experiment:
     reason: Prospective and unrun. Analytic transport of retained exp148 witnesses selects this small
       explicit tuple before a general caching rewrite.
   lease:
-    expires: '2026-09-09T16:34:56Z'
+    expires: '2026-09-09T17:04:50Z'
     host: local
 ---
 # Exp149: One Explicit Small Tuple
 
-**Prospective and unrun.** The original Session118 allocation expired without an
-invocation. Session119 carries the unchanged tuple, criteria and process allowance
-forward. Publish admitted source and this protocol before the one target invocation.
+**Prospective and unrun.** The Session118 and Session119 allocations expired without an
+invocation. Session120 carries the unchanged tuple, inputs, criteria and process
+allowance forward. Publish this allocation before the one target invocation.
 Capture the exact full published revision, clean Git state, UTC start, process status
 and elapsed time. Input blobs and constructor revision are fixed in the command.
 The tuple is fixed in the instrument, with no runtime selection mode.

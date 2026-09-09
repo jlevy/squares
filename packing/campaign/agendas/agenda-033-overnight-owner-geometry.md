@@ -135,7 +135,8 @@ agenda:
     - BC-318
     next_evidence: 'Exp148 partial: two checked witnesses reject49152 labels; no complete seed/candidate.
       Analytic D-preserving transport rejects61440 labels. H147/exp149 now prospectively freezes the
-      selected tuple(0,0,0,7) for a complete361-direction check; do not extend exp148.'
+      selected tuple(0,0,0,7) for a complete361-direction check. Its admitted source is published; Session120
+      supplies the execution-only allocation after two expired unrun windows. Do not extend exp148.'
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots

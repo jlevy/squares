@@ -786,9 +786,9 @@ Exp148 retained two exact witnesses before its seed deadline: 49,152 labels reje
 16,382 nonbaseline labels remaining, no candidate attempted.
 H-146 remains unresolved.
 
-[Session119](packing/campaign/agent-sessions/session-119-selected-wall-tuple-continuation.md)
-continues the source-admitted work from
-[Session118](packing/campaign/agent-sessions/session-118-selected-wall-tuple.md).
+[Session120](packing/campaign/agent-sessions/session-120-selected-wall-tuple-execution.md)
+continues the published work from
+[Session119](packing/campaign/agent-sessions/session-119-selected-wall-tuple-continuation.md).
 [Exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md)
 was partial. The separate
 [analytic transport](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) rejects
@@ -3631,13 +3631,14 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-116.yaml` | session-116 | 304 | 8.45 h | 0.82 h | 0.82 h | yes |
 | `codex-task-tree-session-117.yaml` | session-117 | 371 | 2.16 h | 0.75 h | 0.75 h | yes |
 | `codex-task-tree-session-118.yaml` | session-118 | 59 | 0.38 h | 0.16 h | 0.16 h | yes |
+| `codex-task-tree-session-119.yaml` | session-119 | 86 | 0.51 h | 0.25 h | 0.25 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 73 |
+| measured | 74 |
 | unmeasured | 46 |
-| **total** | **119** |
+| **total** | **120** |
 
 <!-- END GENERATED: session-close-report -->
 

@@ -133,7 +133,8 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-116](agent-sessions/session-116-resumed-wall-research.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-waix | Certification under think-ta8s: publish this H144/BC322 result checkpoint and retain its matching hosted status. BC-318 under think-waix then reviews and adopts the three isolated guard repairs, freezes the admitted source and prospective exp147, and evaluates the bounded containment target once. |
 | [session-117](agent-sessions/session-117-wall-owner-containment.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-waix | BC-319 under think-ykd6: test the explicit small tuple(0,0,0,7) in fresh H147/exp149, selected by the analytic transported witnesses. Certification remains under think-ta8s. |
 | [session-118](agent-sessions/session-118-selected-wall-tuple.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification under think-ta8s: publish the Session117/118 results and admitted H147/exp149 source. BC-319 under think-ykd6 continues in Session119 with unchanged criteria. |
-| [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Publish the source/protocol checkpoint, then run exp149 once before16:29:54UTC. |
+| [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Under think-ykd6, run the unchanged exp149 exactly once in Session120 before16:59:48UTC, then disposition H147 without inferring an H146 or global-bound verdict. |
+| [session-120](agent-sessions/session-120-selected-wall-tuple-execution.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Publish this forward allocation, then run exp149 once before16:59:48UTC. |
 
 ### Workflow summary
 
@@ -146,7 +147,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 21 | 4 | 86 | 7 |
+| `research-loop` | 22 | 4 | 87 | 7 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
@@ -692,7 +693,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
 | BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed128 relations, covered only two baseline tuples and added none. BC319 tests direct fixed-dot coverage. |
-| BC-319 | research | 11 | in_progress | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels; no complete seed/candidate. Analytic D-preserving transport rejects61440 labels. H147/exp149 now prospectively freezes the selected tuple(0,0,0,7) for a complete361-direction check; do not extend exp148. |
+| BC-319 | research | 11 | in_progress | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels; no complete seed/candidate. Analytic D-preserving transport rejects61440 labels. H147/exp149 now prospectively freezes the selected tuple(0,0,0,7) for a complete361-direction check. Its admitted source is published; Session120 supplies the execution-only allocation after two expired unrun windows. Do not extend exp148. |
 | BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
