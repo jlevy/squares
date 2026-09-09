@@ -900,25 +900,24 @@ the deployment, and open the final local HTML and PDF in the OS default browser.
 ### Branches and Validation Boundary
 
 Squares branch: `codex/math-startup-stability`,
-[PR #135](https://github.com/jlevy/squares/pull/135). The last fully hosted-green
-integration is `131b9758`, which merged current main `cd9e527b` and passed every
-publication, packing, and mergeability check.
-Its local pre-push passed 45 checks in 185.484 seconds.
-Those results precede the new support-text and 410-weight integration in this
-checkpoint. Use the PR’s current checks for its final head; do not transfer the older
-green status.
+[PR #135](https://github.com/jlevy/squares/pull/135). Commit `2d61e606` merges main
+`e8508598`, preserves both sides of the document map and current handoff, renumbers this
+font checkpoint to Session 111, and rebuilds the campaign ledger and close report to 109
+sessions. Its records tier and every hosted PR check pass: mergeability, validation,
+build, suite, geometry, sweeps, Firefox/WebKit font loading, and macOS portability.
 
 The new integration at `93cf54a9` passed 116 focused font, instance, and provenance
 tests, then all 45 affected pre-push checks and 1,035 reachable tests in 165.74 seconds.
 Its rebuilt page passed the light desktop typography/provenance check: all 13 caption
 formulas and 11 inline-code spans have zero baseline offset in screen and print.
 Its refreshed PDF is 17 tagged Letter pages (816,939 bytes).
-The full artifact review, final merged dependency pin, and deployment remain pending.
+Those artifacts predate the 0.82 mono integration.
+The final rebuild, artifact review, and deployment remain pending.
 
-KPress [PR #68](https://github.com/jlevy/kpress/pull/68), candidate
-`0dd60f9eaf13c982e0d3868c086747522cc01412`, branch
-`codex/reader-reload-baseline-contract`. Squares pins that committed candidate so the
-new `REGULAR_WEIGHT` consumer is usable.
+KPress [PR #68](https://github.com/jlevy/kpress/pull/68), tested branch commit
+`f776e21083479cf6c12e6d20f26f75ca46c50c5f`, branch
+`codex/reader-reload-baseline-contract`. Squares may pin this filed PR’s branch commit;
+both repositories will merge their PRs with merge commits.
 The candidate includes the then-current KPress main and the merged
 [PR #52](https://github.com/jlevy/kpress/pull/52), merge `149a0c1f`. PR #52’s research
 was reconciled with actual browser/PDF behavior and all six checks passed.
@@ -936,11 +935,14 @@ The Sol typography design-map follow-up, reviewed by Astra, is committed upstrea
 PR #68 head `9a24c2bbe688360b6d6d15ac0a069a43ac306f5e`, including the corrected design
 map. Only two generated snapshot conflicts occurred; regeneration and all 47 directly
 affected publishing, mono, and asset tests passed.
-The conflict had prevented the PR workflow from starting; check hosted status after this
-resolving push. Squares intentionally retains the tested `0dd60f9` candidate at this
-checkpoint. After PR #68 merges, update the pin and repeat the affected typography/PDF
-checks for the new 0.82 mono ratio; do not transfer the `93cf54a9` artifact results to
-it.
+Hosted run 34294273884 then found that the required browser surface selected `pdf` but
+not the `optimize` extra supplying Brotli, and that the new 410 instance measures the
+digit advance at 0.498em while one assertion still expected 0.497em at the tolerance
+boundary. Commit `f776e21` makes the extra selection consistent across sync, browser
+installation, and test execution and updates the assertion to the generated metric.
+The focused browser case passes locally and all 57 required browser cases collect.
+Astra’s source review found no product blocker and requested one historical-context
+correction in the print-sans research narrative; that correction is in the same commit.
 
 ### Current Changes and Ownership
 
@@ -985,13 +987,12 @@ it.
 
 ### Remaining Work in Order
 
-1. The upstream documentation follow-up is committed; inspect the final KPress PR diff
-   and wait for its hosted checks.
-   Merge it only at the reviewed head, then update the Squares gitlink to a merged
-   commit containing both that PR and PR #52.
+1. The upstream documentation, review, and CI fixes are committed.
+   Wait for KPress PR #68’s hosted checks and merge its reviewed head with a merge
+   commit. The Squares gitlink may remain at the exact filed-PR branch commit it tests.
 2. Rebuild `render_explainer --prepare-math` and the PDF from the final source.
    The local preview on port 64618 now serves `93cf54a9` HTML and its refreshed PDF. It
-   still uses the tested `0dd60f9` dependency, including the 0.87 mono ratio.
+   still uses the earlier `0dd60f9` dependency, including the 0.87 mono ratio.
    Query-string labels do not identify file contents; inspect the edition stamp.
 3. Run the affected pre-push gate, existing typography self-test, light desktop and dark
    narrow checks, math faces/loading/geometry/reload checks, print layout, and PDF
