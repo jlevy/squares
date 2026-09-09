@@ -1,0 +1,20 @@
+---
+type: is
+id: is-01m21n690s638a0kpj17prevpn
+title: Integrate current main without losing typography or research records
+kind: task
+status: in_progress
+priority: 1
+version: 3
+spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
+labels: []
+dependencies: []
+parent_id: is-01m20v1mq20k9d9p1wg9s5qdsq
+created_at: 2026-09-08T23:20:59.159Z
+updated_at: 2026-09-09T00:01:20.872Z
+---
+Main advanced during final validation with PRs 136, 116 and 121. Resolve the four conflicts in SYNOPSIS, document map, generated campaign ledger and explainer renderer, preserve both research and typography work, review the automatic print-layout merge, regenerate views and run appropriate affected validation. Caption agent owns renderer; root owns records. Continue PR135 through CI and deployment.
+
+## Notes
+
+Merged current main cd9e527b into131b9758, preserving per-formula math queue against incoming PR136 broad wait, keeping its stock-font-display:block change, and fixing active print-readout text filtering.96focused tests+45/45prepush checks passed185.484s; every hosted check at131b9758 nowgreen (Pages34291135872, Packing34291135875, mergeability34291133107). New user typography requests are a subsequent narrow slice.
