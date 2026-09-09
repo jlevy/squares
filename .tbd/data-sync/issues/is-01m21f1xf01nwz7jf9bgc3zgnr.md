@@ -3,18 +3,18 @@ type: is
 id: is-01m21f1xf01nwz7jf9bgc3zgnr
 title: Review math loading complexity before release
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 delegate: kpress_font_pipeline
 labels: []
 dependencies: []
 parent_id: is-01m20v1mq20k9d9p1wg9s5qdsq
 created_at: 2026-09-08T21:33:44.799Z
-updated_at: 2026-09-08T23:18:41.008Z
-closed_at: 2026-09-08T23:04:43.192Z
-close_reason: Independent architecture review completed and unused shipped diagnostics removed. KPress retains one client renderer with optional host preparation; new formulas require no font rebuild. The exact Linux artifact passed all 29 Mac geometry cases, and the final baseline fix reuses existing measured dimensions and KaTeX struts. Canonical architecture is merged in KPress PR64.
+updated_at: 2026-09-09T03:00:31.114Z
+closed_at: 2026-09-09T03:00:31.114Z
+close_reason: "Implemented, reviewed, merged in Squares PR #135 (merge 171bba339321b8d63d85a59ab5f2db946270be0e) with reusable work in KPress PR #68 (merge a6203389c0a6d1f6e542b1f50fa177121eae7f4a). All PR and post-merge CI passed; Pages serves edition 171bba33; live publication 34/34 and delayed-font smoke pass. HTML/PDF opened locally. Native reload retains 3000px exactly in Chromium, Firefox, and WebKit with JS on/off. Bullet raster-shape follow-up think-x65m remains open because measured geometry is already square."
 resolution: null
 duplicate_of: null
 ---
