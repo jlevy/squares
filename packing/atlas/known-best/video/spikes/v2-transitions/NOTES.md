@@ -2867,6 +2867,80 @@ from 3,045,220 to 3,048,247.
   `grew` is past zero the stage stops tracking the control, and the only way to see why
   is to read `growth()`.
 
+## Revision 16: a rough calibration, and what it says the instrument cannot yet do
+
+`calibrate.py` sweeps the mechanisms the page already carries against known records:
+eight arms over six non-grid cases, each started from an arrangement that is *not* the
+record, run open-ended, scored by the container it needs.
+It is the first rough pass at the Calibrate idea, and its headline is a precondition
+failure rather than a ranking.
+
+### Nothing it produces is a packing
+
+**Not one of the 48 runs ended feasible.** The least overlap seen anywhere was 0.0042 of
+a unit side, and the mean was 0.011. Every side the page reported describes an
+arrangement whose squares interpenetrate.
+
+That is not a budget problem, and the control says so.
+Holding `n = 11` from the grid start with the shake off and stepping thirteen times
+longer:
+
+| steps | overlap | side |
+| ---: | ---: | ---: |
+| 916 | 0.004578 | 3.98403 |
+| 2,417 | 0.004573 | 3.98403 |
+| 6,019 | 0.004572 | 3.98403 |
+| 12,021 | 0.004570 | 3.98403 |
+
+The overlap is a **floor, not a transient**. A penalty force reaches equilibrium where
+the springs’ push balances the walls’ compression, and at that point the residual
+overlap is the pressure divided by the stiffness.
+More time cannot remove it; only infinite stiffness could, and the timestep forbids that
+(see the substep note in revision 15).
+
+The stiffest law reachable makes it worse rather than better, because it keeps
+compressing:
+
+| steps | overlap | side |
+| ---: | ---: | ---: |
+| 918 | 0.006737 | 3.93224 |
+| 12,032 | 0.004858 | 3.88987 |
+
+**That last row is the trap this instrument exists to avoid.** The record at `n = 11` is
+3.87708, so 3.88987 reads as 0.33 per cent off a standing record.
+It is nothing of the kind: those squares overlap by five thousandths, and the number is
+small *because* they do.
+
+### What the sweep can still say
+
+With every arm infeasible, the comparison between arms is only about how they fail, but
+two differences are large enough to be worth keeping.
+
+**The starting arrangement dominates the law.** Mean excess over the record was 5.86 per
+cent from the trivial grid against 14.07 per cent from a random scatter, while the six
+laws spanned 5.67 to 6.22 per cent between them.
+A factor of two and a half against half a percentage point: what the run starts from
+matters far more than how it is tuned.
+
+**Shaking hurts at these budgets.** Ordered by mean excess from the grid start: rigid
+5.67, quiet 5.70, sticky 5.75, plain 5.78, soft 6.02, shaken 6.22. The strongest shake
+was the worst arm and carried four to ten times the overlap of the others.
+
+### What has to be true before a real Calibrate means anything
+
+A calibration ranks settings by how close they get to a known answer.
+That presumes the thing being ranked can produce an answer at all, and this one cannot:
+it produces infeasible arrangements whose reported side is below what geometry allows.
+
+So the projection work (`think-r2qd`) is not one improvement among several, it is the
+precondition. A constraint solved by projection has no resting overlap, so a run either
+reaches a feasible packing or visibly fails to, and only then is “how close did it get”
+a question with a meaning.
+
+The two guards this argues for are already filed: refusing a side below the area bound
+(`think-lp1x`), and refusing any sub-record side that carries overlap, which is the
+sharper case this sweep found.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
