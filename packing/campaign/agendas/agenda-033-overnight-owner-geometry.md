@@ -52,7 +52,7 @@ agenda:
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Do the container walls enlarge any of the 16 coarse bottom-left common owner footprints,
       or rule out a class?
@@ -64,19 +64,31 @@ agenda:
     bead: think-waix
     depends_on:
     - BC-316
-    next_evidence: 'Session116 resumes after the user-confirmed network outage: publish the admitted source,
-      run unchanged exp146 once, then classify all16 footprints. No target ran in Session115.'
+    next_evidence: Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting
+      checks pass. BC318 now tests containment expansion.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
     hypotheses:
     - H-144
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json
+    outcomes:
+    - scope: Do the container walls enlarge any of the 16 coarse bottom-left common owner footprints,
+        or rule out a class?
+      classification: achieved
+      result: All16 completed in25.69seconds;12 proper enlargements,4 equal,0 impossible. No additional
+        tuple or global bound certified.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json
+      disposition: retire-success
+      follow_up: null
   - id: BC-318
     purpose: research
     owner_focus: insight
     instances:
     - 11
-    state: blocked
+    state: in_progress
     priority: 1
     question: Can larger footprints inherit either certified patch union by exact component containment?
     budget: At most 2 times 4 times 16 exact convex containments before a large census; one bounded registered
@@ -87,7 +99,9 @@ agenda:
     bead: think-waix
     depends_on:
     - BC-317
-    next_evidence: Use Cartesian products of component containment to identify cheap new branch exclusions.
+    next_evidence: The isolated adapter passed eight focused controls, lint and types; Astra Max identified
+      three small source-admission guards. Session117 reviews the repaired nine-control source before a
+      separate H145/exp147 source freeze. No target relation has run.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -156,7 +170,7 @@ agenda:
     owner_focus: efficiency
     instances:
     - 11
-    state: ready
+    state: complete
     priority: 1
     question: Are compute, verification and coordination producing evidence efficiently?
     budget: One efficiency block in each four to eight research blocks; inspect work units and reuse passing
@@ -166,11 +180,25 @@ agenda:
       research.
     bead: think-ta8s
     depends_on: []
-    next_evidence: Keep one principal compute queue and run source review/CI beside it; preserve separate
-      accounting cutoffs.
+    next_evidence: Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway
+      mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB
+      cap; six focused controls and the392-row inventory pass.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/session116-negative-control-snapshot-measurement.log
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/session116-negative-control-prune-tests.log
+    outcomes:
+    - scope: Restore bounded mutation snapshots without dropping a registered control or evidence input.
+      classification: achieved
+      result: The exact exp137 receipt prune restores10,964,544bytes of measured headroom. Exp146 remains
+        present because it is registered frontier evidence; worker result and synopsis baselines pass.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/session116-negative-control-snapshot-measurement.log
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/session116-negative-control-prune-tests.log
+      disposition: retire-success
+      follow_up: null
   - id: BC-323
     purpose: measurement_validation
     owner_focus: process

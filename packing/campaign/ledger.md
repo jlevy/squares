@@ -130,7 +130,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: independently audit the union and five-dot replay, reuse the certificate through valid symmetries and exact containment, then search only uncovered classes under fresh preregistration and separately recorded usage. |
 | [session-114](agent-sessions/session-114-independent-owner-audit.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (process) | 4 | think-yhw2 | BC-316 under think-yhw2: carry the unchanged published exp145 into Session115, then continue the reviewed wall-aware geometry agenda. In parallel, think-ta8s obtains and reconciles the new stacked milestone checkpoint. |
 | [session-115](agent-sessions/session-115-wall-aware-owner-footprints.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (insight) | 3 | think-waix | BC-317 under think-waix: Session116 publishes the controlled source and runs the unchanged exp146 under a fresh forward allocation. In parallel think-ta8s reconciles the new source checkpoint. |
-| [session-116](agent-sessions/session-116-resumed-wall-research.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 2 | think-waix | BC-317 under think-waix: publish the controlled source and run exp146 once; use the result to select exact component containment or a revised research direction. |
+| [session-116](agent-sessions/session-116-resumed-wall-research.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-waix | Certification under think-ta8s: publish this H144/BC322 result checkpoint and retain its matching hosted status. BC-318 under think-waix then reviews and adopts the three isolated guard repairs, freezes the admitted source and prospective exp147, and evaluates the bounded containment target once. |
 
 ### Workflow summary
 
@@ -142,9 +142,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 5 | 0 | 48 | 2 |
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 9 | 1 | 34 | 1 |
+| `efficiency-loop` | 9 | 1 | 35 | 1 |
 | `research-loop` | 18 | 4 | 82 | 7 |
-| `pipeline-improvement` | 27 | 1 | 141 | 4 |
+| `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
 | `review-planning-oversight` | 1 | 0 | 10 | 0 |
@@ -687,12 +687,12 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
-| BC-317 | research | 11 | in_progress | 1 | think-waix | Session116 resumes after the user-confirmed network outage: publish the admitted source, run unchanged exp146 once, then classify all16 footprints. No target ran in Session115. |
-| BC-318 | research | 11 | blocked | 1 | think-waix | Use Cartesian products of component containment to identify cheap new branch exclusions. |
+| BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
+| BC-318 | research | 11 | in_progress | 1 | think-waix | The isolated adapter passed eight focused controls, lint and types; Astra Max identified three small source-admission guards. Session117 reviews the repaired nine-control source before a separate H145/exp147 source freeze. No target relation has run. |
 | BC-319 | research | 11 | blocked | 1 | think-ykd6 | Preregister the smallest additional-class test after the containment result. |
 | BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
-| BC-322 | measurement_validation | 11 | ready | 1 | think-ta8s | Keep one principal compute queue and run source review/CI beside it; preserve separate accounting cutoffs. |
+| BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
 | BC-323 | measurement_validation | 11 | tentative | 1 | think-ta8s | Update the draft PR at coherent checkpoints, then close the agenda and pause its heartbeat at the morning boundary. |
 
 ## Series
@@ -824,7 +824,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
 | H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
 | H-143 | confirmed | proof | For the unchanged four endpoint patches and five dots from exp143, the |  | 1 |  | 39s wall |
-| H-144 | running | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  |  |
+| H-144 | confirmed | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  | 26s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -909,7 +909,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 | exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
-### accepted (35)
+### accepted (36)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -948,6 +948,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-143 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-141 | All four numerical arms converged; point-minus-endpoint gain4.0>0.001. Point-extension and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net verification remains separate. |
 | exp-144 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-142 | All361directions have exact positive minimum beta=1000001/1000000. The five unit dots cover the residual net. Reviewed endpoint containment and strict-core transfer exclude the selected four-owner branch, which would need seven residual cores. No universal n11 exclusion. |
 | exp-145 | series-000 | 11 | GPT-6 Astra coordinator; instrument by GPT-5.6 Sol extra high; mathematical review by GPT-6 Astra max | H-143 | All 361 required directions completed with exact zero uncovered area. The independent finite-net calculation confirms the retained five-dot coverage; shared analytic owner and strict-core transfer premises remain separate. No global bound or confirmation-rung change. |
+| exp-146 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-144 | All sixteen classes completed with exact nesting; twelve wall-aware footprints properly contain their old endpoint footprints. Four are equal and none is impossible. This accepts the frozen geometric mechanism, without an extra covered tuple or a global bound change. |
 
 ### baseline (11)
 
@@ -964,12 +965,6 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-146 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-144 | The original Session115 allocation expired unrun during a network outage. User-authorized Session116 forward-allocates the unchanged single target after clean source publication; no target class evaluated yet. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -991,7 +986,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-102 rounds, 2152.1 agent-minutes, 1363.6 wall-minutes.
+102 rounds, 2152.1 agent-minutes, 1364.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

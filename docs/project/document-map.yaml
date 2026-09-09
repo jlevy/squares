@@ -443,6 +443,10 @@ documents:
     role: research-report
     authority: record
     lifecycle: retained
+  - path: packing/cases/n11_five_dot_cover/after-wall-gain-strategy.md
+    role: research-report
+    authority: record
+    lifecycle: retained
   - path: packing/cases/n11_five_dot_cover/wall-source-admission.md
     role: research-report
     authority: record

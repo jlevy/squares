@@ -21,6 +21,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python 3.14; one process
     selftest_passed: true
+    engine_commit: 915758898a97c92793f51e62b7a6b17f846895ca
   instance:
     axis: n
     point: 11
@@ -45,22 +46,46 @@ experiment:
       allocation expired unrun. Session116 forward-allocates the unchanged allowance; its latest launch
       is15:00:47UTC, fitting guard and grace before15:05:49UTC.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json
-  results: []
+    commit: 915758898a97c92793f51e62b7a6b17f846895ca
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Do all sixteen classes complete validly, with at least one strict footprint enlargement
+      or impossible class?
+    outcome: criterion_met
+    checked_by: Complete exact manifest:16 possible classes,12 proper inclusions,4 equal footprints and0
+      impossible. All old endpoint footprints are contained. Each class retains181 nonempty frames. The
+      unchanged classes are m1/m2 with j0 or j7.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: All sixteen classes complete validly with exact nesting for every feasible class,
       and at least one impossible class or one proper footprint inclusion.
-    reason: The original Session115 allocation expired unrun during a network outage. User-authorized
-      Session116 forward-allocates the unchanged single target after clean source publication; no target
-      class evaluated yet.
-  lease:
-    expires: '2026-09-09T15:05:49Z'
-    host: local
+    reason: All sixteen classes completed with exact nesting; twelve wall-aware footprints properly contain
+      their old endpoint footprints. Four are equal and none is impossible. This accepts the frozen geometric
+      mechanism, without an extra covered tuple or a global bound change.
+  effort:
+    timebox: One five-minute external process with240-second internal guard; no retry or resume.
+    wall_seconds: 25.69
+    stopped_by: criterion
 ---
-# Exp146: Test the Walls Across All Sixteen Classes
+# Exp146: Twelve Wall-Aware Footprints Grow
 
-**Prospective and unrun.** The original Session115 allocation expired during the
-user-confirmed network outage, with no invocation.
+**Accepted in Session116.** The one run launched at14:49:26UTC from clean published
+`915758898a97c92793f51e62b7a6b17f846895ca` and exited zero in25.69seconds. All16 classes
+completed:12 strict enlargements,4 equal footprints, no impossible classes.
+Both marks have strict gain in sectors j1 through j6; j0 and j7 are unchanged.
+Every class retained181 nonempty frames and passed exact old-footprint nesting.
+The driver reports24.122553458990296seconds internally.
+
+The retained JSON is byte-identical to captured stdout (`cmp` passed); it serves as both
+the full receipt and stdout record without storing a second5MiB copy.
+The launch metadata and process log are retained beside it.
+No extra owner tuple has yet inherited the five-dot exclusion.
+The original prospective instructions follow unchanged.
+
+**Prospective history, now discharged.** The original Session115 allocation expired
+during the user-confirmed network outage, with no invocation.
 Session116 now forward-allocates the unchanged protocol after the user’s explicit
 resumption request. Its target must launch by15:00:47UTC; the original cutoff below is
 retained as history.

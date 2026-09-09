@@ -52,9 +52,10 @@ The [constructor contract](../../cases/n11_five_dot_cover/wall-constructor-contr
 derives the exact support bounds.
 The [source review](../../cases/n11_five_dot_cover/wall-source-admission.md) approves
 the frozen mathematics subject to two synthetic controls, both now passed.
-Exp146 decides the finite all-sixteen mechanism.
-Transferring an existing exclusion requires a separate component-containment experiment
-under BC318.
+Exp146 confirmed the finite all-sixteen mechanism in25.69seconds: twelve footprints
+strictly enlarge, four remain equal and no class is impossible.
+The unchanged classes are both marks at sectors j0 and j7. Transferring an existing
+exclusion requires a separate component-containment experiment under BC318.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

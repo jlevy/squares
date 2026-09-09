@@ -2238,6 +2238,33 @@ evidence:
       confirmation rung automatically. The driver requires a fresh output path.
     source_reviewed: '2026-09-09'
 
+  - id: E-n011-wall-owner-footprints
+    claim: derived-structure
+    scope: {n_values: [11]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    certificate: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json
+    replay: >-
+      cd packing && /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 5m
+      .venv/bin/python3 -m devtools.wall_owner_footprints
+      --expect-git-revision 915758898a97c92793f51e62b7a6b17f846895ca
+      --deadline-seconds 240 --output /tmp/squares-wall-footprints-replay.json
+    replay_status: passed
+    limitations: >-
+      Run from a clean checkout of the declared source revision and use a fresh output.
+      Exp146 completed all16 bottom-left classes at q=96/25, B=9977/10000 in25.69seconds:
+      twelve proper footprint inclusions, four equal footprints, no impossible class.
+      Both marks have strict gain in sectors1 through6; sectors0 and7 are unchanged.
+      All181 retained signed frames per class had nonempty center sets. The constructor
+      uses exact rational support extrema and production geometry; it is not an
+      independent implementation. The universal common-footprint implication is the
+      audited wall-constructor contract. This evidence alone neither extends the
+      five-dot exclusion to another tuple nor changes T023 or the global bound.
+    source_reviewed: '2026-09-09'
+
   - id: E-n011-five-dot-physical-transfer
     claim: derived-structure
     scope: {n_values: [11]}
