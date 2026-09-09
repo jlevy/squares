@@ -5,7 +5,7 @@ title: A video of every known-best packing, n = 1..324, in two versions
 kind: epic
 status: open
 priority: 2
-version: 9
+version: 16
 spec_path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
 labels:
   - packing
@@ -18,8 +18,15 @@ child_order_hints:
   - is-01m1z694scw2vnhs9rdetpmfe8
   - is-01m1z6992dd1tvwmckn1j93zyf
   - is-01m1z69by99pw12bxj1kf1p0g5
+  - is-01m229am4r6vrcj7djyt78e85w
+  - is-01m229amjwvykvfz1jhnjxdap9
+  - is-01m229an1fw0az9jgk0wcbg8c4
+  - is-01m229b96qn93d8ykrag3jmste
+  - is-01m229b9jq524f0296mf95fxw0
+  - is-01m229b9y5bxr21t7kngnx4esn
+  - is-01m229ba9mph0h3pccfvyvhbxd
 created_at: 2026-09-08T00:21:36.326Z
-updated_at: 2026-09-09T04:10:09.219Z
+updated_at: 2026-09-09T05:13:15.828Z
 ---
 Two videos from one deterministic HTML player: a slideshow of all 324 known-best packings with the poster's card facts as readable text (Version 1), and an animated step from n to n+1 with squares sliding, turning and cross-fading (Version 2). The player reads composite-figure.json for facts, the witnesses for poses and the renderings for fills; frames are captured at seek(t) through the pinned Playwright headless shell and encoded by ffmpeg under a receipt; videos are release assets, never committed. Intermediate frames of Version 2 are labelled illustrative tweens. Owner-directed 2026-09-07; runs beside think-0juv. Plan: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
 
