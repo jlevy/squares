@@ -1,4 +1,4 @@
-# Agenda 033, lane E: fixed-site row completion at 61/16 and the 3.82 cutting loop
+# Agenda 034, lane E: fixed-site row completion at 61/16 and the 3.82 cutting loop
 
 Retained measurement-lane report for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by an

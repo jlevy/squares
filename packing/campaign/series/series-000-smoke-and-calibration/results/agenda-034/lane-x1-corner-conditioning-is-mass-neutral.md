@@ -1,4 +1,4 @@
-# Agenda 033, lane X1: corner conditioning is exactly mass-neutral
+# Agenda 034, lane X1: corner conditioning is exactly mass-neutral
 
 Retained strategy-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a Fable

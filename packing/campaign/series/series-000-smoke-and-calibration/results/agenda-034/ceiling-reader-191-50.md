@@ -1,4 +1,4 @@
-# Agenda 033, ceiling reader: an independent exact decision of the 191/50 ceiling family
+# Agenda 034, ceiling reader: an independent exact decision of the 191/50 ceiling family
 
 Retained replay report for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by a

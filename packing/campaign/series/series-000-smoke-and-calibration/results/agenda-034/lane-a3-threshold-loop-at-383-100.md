@@ -1,4 +1,4 @@
-# Agenda 033, lane A3: the threshold loop at 383/100, and where it plateaus
+# Agenda 034, lane A3: the threshold loop at 383/100, and where it plateaus
 
 Retained measurement-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a Fable

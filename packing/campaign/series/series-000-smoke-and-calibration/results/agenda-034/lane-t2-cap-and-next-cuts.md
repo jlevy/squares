@@ -1,4 +1,4 @@
-# Agenda 033, lane T2: the cap of the threshold method and the next cut families
+# Agenda 034, lane T2: the cap of the threshold method and the next cut families
 
 Retained analysis-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a Fable

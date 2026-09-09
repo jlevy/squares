@@ -1,4 +1,4 @@
-# Agenda 033, lane A5: the fixed-support maximum under the atom classes, and how far it is from a cap
+# Agenda 034, lane A5: the fixed-support maximum under the atom classes, and how far it is from a cap
 
 Retained measurement-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a sub-agent

@@ -1,4 +1,4 @@
-# Agenda 033, lane T2: the plateau reader, exact feasibility of a point dual for the rank-one cut families
+# Agenda 034, lane T2: the plateau reader, exact feasibility of a point dual for the rank-one cut families
 
 Retained instrument-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a Fable

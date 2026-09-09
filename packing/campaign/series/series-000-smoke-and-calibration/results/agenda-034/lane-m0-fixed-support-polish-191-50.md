@@ -1,4 +1,4 @@
-# Agenda 033, lane M0: the exact fixed-support optimum of the 3.82 fractional packing
+# Agenda 034, lane M0: the exact fixed-support optimum of the 3.82 fractional packing
 
 Retained measurement-lane report for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by a

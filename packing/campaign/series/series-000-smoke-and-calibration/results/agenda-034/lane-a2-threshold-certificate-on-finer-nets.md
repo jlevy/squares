@@ -1,4 +1,4 @@
-# Agenda 033, lane A2: the frozen threshold certificate on finer direction nets
+# Agenda 034, lane A2: the frozen threshold certificate on finer direction nets
 
 Retained measurement-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a Fable

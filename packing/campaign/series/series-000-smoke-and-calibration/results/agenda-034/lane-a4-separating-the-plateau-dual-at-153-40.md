@@ -1,4 +1,4 @@
-# Agenda 033, lane A4: separating the 1/25-integral dual at 153/40, K4, K5 and K6 with the depth gate bypassed
+# Agenda 034, lane A4: separating the 1/25-integral dual at 153/40, K4, K5 and K6 with the depth gate bypassed
 
 Retained measurement-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a sub-agent

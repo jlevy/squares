@@ -1,4 +1,4 @@
-# Agenda 033, lane X2: what the single-corner conditional argument already has
+# Agenda 034, lane X2: what the single-corner conditional argument already has
 
 Retained survey-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by an Opus

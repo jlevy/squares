@@ -1,4 +1,4 @@
-# Agenda 033, lane A: net refinement, frozen-measure expansion, and the shrink tax on the frozen T-018 atoms
+# Agenda 034, lane A: net refinement, frozen-measure expansion, and the shrink tax on the frozen T-018 atoms
 
 Retained measurement-lane report for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), written by a
