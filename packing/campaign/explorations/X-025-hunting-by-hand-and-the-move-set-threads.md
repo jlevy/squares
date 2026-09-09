@@ -576,6 +576,51 @@ Building this here means reconstructing a design from an abstract, and it presup
 the inflation formulation, because without a pressure there is nothing to ladder.
 Both of those are real costs and neither is a reason to drop the direction.
 
+### Search by projection, which turned out to be available immediately
+
+Written into this thread list on 2026-09-09 and answered the same day, which is why it
+reads differently from the rest.
+
+The
+[simulation survey](../../../docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md)
+ranks divide and concur first, and
+[exp-139](../series/series-000-smoke-and-calibration/experiments/exp-139-projection-search.md)
+ran it. The thing worth carrying into the rest of this document is not the sides it
+reached but what its failure mode says about everything else here.
+
+**A projection search has no tolerance dial, and that changes what a measurement
+means.** Twenty-eight runs, every one ending on an arrangement whose deepest overlap is
+the float `0.0`, re-checked by an oracle the search does not share.
+Set against a penalty physics that produced zero feasible arrangements in 48 runs and
+reported container sides *below* what geometry allows, this is the difference between an
+instrument and a plausible picture.
+Any thread above that ends in “and then we measure how close it gets” should be read as
+presupposing this property, and most of them currently do not have it.
+
+**It fails at the grid, like everything else here.** Every failed run failed at the
+first tightening.
+A grid of `k` squares in a row needs a container of exactly `k`, so the
+moment the schedule asks for less the whole topology is infeasible at once — no partial
+repair exists to find.
+That is [the seeding thread](#seeding-off-the-grid-above-n--27) arriving from a
+completely different direction, and it is now the third independent mechanism to hit the
+same wall. The wall is a property of the *starting configuration*, not of any move set,
+and this document should stop treating “escape the grid” as an annealing problem.
+
+**The dial that decides everything is the start policy, and it trades.** Fresh random
+starts buy escape; continuing the packing in hand buys refinement.
+At `n = 5` every mixed or fully cold run left the grid and none of them matched the
+single pure-continuation run that did.
+That shape — reliability and quality pulling opposite ways, with the mixture beating
+both endpoints at `n = 11` — is the same shape the hand-hunting argument above depends
+on, and it is the first quantitative evidence for it on this problem.
+
+**What it does not do is beat the engine.** `sqsearch` with a long schedule and the
+collective move reaches `4.7071` at `n = 17` where this reaches `4.8047`, at a budget
+orders of magnitude larger and with no feasibility guarantee.
+The interesting reading is that the two are good at different things, and that a hybrid
+— project to feasibility, then anneal, then project again — is not yet on any list here.
+
 ## A Catalogue of Candidate Hypotheses
 
 These are candidates.
