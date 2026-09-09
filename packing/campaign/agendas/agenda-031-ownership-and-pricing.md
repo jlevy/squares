@@ -12,9 +12,8 @@ agenda:
   status: active
   objective: Publish the exact ownership results derived during PR 127 review, run the independent readers
     needed to use them safely, test one pointwise full-support pricing mechanism at q = 96/25, and assess
-    the owner's fixed-four-corner residual-cover pilot. The
-    bracket remains unchanged. No cell may infer a global packing certificate from a local proof, a numerical
-    LP proposal, or a finite site set.
+    the owner's fixed-four-corner residual-cover pilot. The bracket remains unchanged. No cell may infer
+    a global packing certificate from a local proof, a numerical LP proposal, or a finite site set.
   items:
   - id: BC-305
     purpose: research
@@ -48,7 +47,7 @@ agenda:
     owner_focus: efficiency
     instances:
     - 11
-    state: in_progress
+    state: blocked
     priority: 1
     question: Does full retained-state dual support expose a pointwise new-site orbit missed at that same
       point by the first 32 rows?
@@ -76,6 +75,8 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md
     next_evidence: The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts,
       or a truthful never-opened disposition.
+    blocked_on: Fresh forward launch allocation after the owner-prioritized BC-309 pilot; exp-134 was
+      never invoked and its original lease expired.
   - id: BC-307
     purpose: research
     owner_focus: correctness
@@ -113,7 +114,8 @@ agenda:
     question: What did the funded continuation establish, what remains unresolved, and which next entry
       should be selected?
     budget: One bounded closeout and generated-view pass after BC-305, BC-306 and BC-309 terminate.
-    entry: Terminal records for BC-305, BC-306 and BC-309, and a truthful disposition for the optional reserve.
+    entry: Terminal records for BC-305, BC-306 and BC-309, and a truthful disposition for the optional
+      reserve.
     exit: Every Agenda 031 cell has a terminal outcome and disposition, partial and unrun work remains
       named, the session is closed against actual validation evidence, and generated campaign views are
       refreshed.
@@ -126,8 +128,8 @@ agenda:
     - BC-306
     - BC-309
     program: n11-structure-and-conditional-dots
-    next_evidence: Terminal BC-305, BC-306 and BC-309 artifacts, then the coordinator's reserve decision and closeout
-      selection.
+    next_evidence: Terminal BC-305, BC-306 and BC-309 artifacts, then the coordinator's reserve decision
+      and closeout selection.
   - id: BC-309
     purpose: research
     owner_focus: insight
@@ -137,16 +139,16 @@ agenda:
     priority: 1
     hypotheses:
     - H-136
-    question: Can fixed corner geometry improve a weighted covering argument beyond the four units
-      accounted for by four occupied squares, using a small extension of the retained engine?
-    budget: One thirty-minute instrument-feasibility slice from 2026-09-09T02:36:26Z, including
-      an independent geometry contract and focused controls. Any numerical target requires a fresh
-      prospective protocol with its own finite budget; none is authorized by this cell's instrument clock.
-    entry: The owner's fixed-four-corner proposal, Agenda 030 lane A S2 and Theorem B, the retained
-      side-B covering LP and sweep, and the exact domain correction from the handoff review.
-    exit: A reviewed residual-domain instrument and matched-comparison protocol, or a specific
-      implementation blocker and smaller alternative. A numerical screen is not an exact conditional
-      certificate, and four flush corners are not assumed to cover all possible packings.
+    question: Can fixed corner geometry improve a weighted covering argument beyond the four units accounted
+      for by four occupied squares, using a small extension of the retained engine?
+    budget: One thirty-minute instrument-feasibility slice from 2026-09-09T02:36:26Z, including an independent
+      geometry contract and focused controls. Any numerical target requires a fresh prospective protocol
+      with its own finite budget; none is authorized by this cell's instrument clock.
+    entry: The owner's fixed-four-corner proposal, Agenda 030 lane A S2 and Theorem B, the retained side-B
+      covering LP and sweep, and the exact domain correction from the handoff review.
+    exit: A reviewed residual-domain instrument and matched-comparison protocol, or a specific implementation
+      blocker and smaller alternative. A numerical screen is not an exact conditional certificate, and
+      four flush corners are not assumed to cover all possible packings.
     bead: think-3glv
     workflows:
     - pipeline-improvement

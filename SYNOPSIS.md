@@ -138,11 +138,11 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives seventeen confirmed hypotheses, thirteen refuted
-hypotheses, one open hypothesis, twenty-five open questions, and forty-four blocked
+hypotheses, one open hypothesis, twenty-five open questions, and forty-five blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
-Two hypotheses are running, none is waiting on review, and six are unresolved.
+One hypothesis is running, none is waiting on review, and six are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -651,10 +651,10 @@ Session 111’s owner-prioritized continuation is BC-309, `think-3glv`, on
 and the continuation targets `main`.
 [Agenda 031](packing/campaign/agendas/agenda-031-ownership-and-pricing.md) and
 [session 111](packing/campaign/agent-sessions/session-111-ownership-and-pricing.md)
-retain the reviewed local results and the independent prospective full-support pricing
-test, BC-306. BC-309 first builds a small residual-cover comparison for four fixed
-corner squares. The global follow-up uses proved ownership classes and exhaustive
-geometric alternatives; it cannot assume every packing has four flush corners.
+retain the reviewed local results and BC-306’s unrun full-support pricing protocol.
+BC-309 first builds a small residual-cover comparison for four fixed corner squares.
+The global follow-up uses proved ownership classes and exhaustive geometric
+alternatives; it cannot assume every packing has four flush corners.
 The
 [corner-owner sector lemma](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md)
 gives each owned mark-and-sector class a rational triangle of area `B²/16` and leaves
@@ -668,9 +668,11 @@ None composes into a global exclusion at `96/25`. The expanded instruments pass 
 controls; both counterexample readers and six deliberately broken examples replay as
 expected. H-135 and H-136 remain untested.
 Exp-134’s exact transport control passed with depth one and unchanged mass
-`21342289572/2055263195` in 135.91 seconds; its prospective pricing protocol is
-published at `3f597f34`, whose required hosted checks passed.
-Exp-134’s target and exp-135’s paired residual-cover target remain uninvoked.
+`21342289572/2055263195` in 135.91 seconds.
+Its pricing target was never invoked: the owner prioritized BC-309 before launch, so
+BC-306 and exp-134 are blocked pending a fresh forward allocation while the published
+protocol remains unchanged.
+Exp-135’s paired residual-cover target also remains uninvoked.
 BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
 complements of BC-292 and BC-299 forward.
 The corrected checkpoint is certified by the retained raw full log and structured
@@ -3187,7 +3189,7 @@ round that names the hypothesis, control roles included.
 | [H-132](packing/campaign/hypotheses/H-132-rectangle-no-fit-at-q.md) | blocked | Eleven squares do not fit in 3.84 × 3.81; the rectangle centre domain is not built | 0 | — |
 | [H-133](packing/campaign/hypotheses/H-133-plateau-site-artefact.md) | open question | Is the exactly-eleven plateau at 191/50 a site artefact of Trump-shaped cores in site-free strips? | 0 | — |
 | [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
-| [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | running | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 1 | Unspent |
+| [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | blocked | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 1 | Unspent |
 | [H-136](packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | running | On the declared 19-by-19 site grid and nine retained directions at side 96/25, the converged numerical covering objective for cores avoiding four fixed flush corner unit squares is more than 4.001 below the matched unrestricted objective | 1 | Unspent |
 
 ### Confirmed
@@ -3583,7 +3585,7 @@ archive beside it.
 | [exp-131](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-131-h131-near-axis-counts-replay-at-q.md) | 11 | proof | H-131 | Registered replay of the near-axis and near-diagonal count classes through decide_class_program | Every count reproduces exactly: at most nine within 6.4537°, ten within 10.3875°, nine within 2.155° of 45°, ten within 2.44° of 40.19°, ten in [30.01°, 45°] | accepted |
 | [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-h134-segment-mark-cover-at-q.md) | 11 | proof | H-134 | Interval reader over pose space with every certified leaf re-decided exactly; the falsifier engine’s exact escapes for point sets | Ten segments of length 1/10 on Stromquist’s ten points at 96/25 are unavoidable at tolerance 3/500; the independent replay confirms the cover and closes the missing far-wall sliver | accepted |
 | [exp-133](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-133-h128-corner-skeleton-verdict-at-q.md) | 11 | proof | H-128 | Column generation with the corner orbit bounded below, swept exactly; the bounded dual’s floor | The tested support is unsuccessful, but its floor of 10.785 is below the 11.15 obstruction threshold; H-128 remains unresolved and the corner-pair theorem survives | unresolved |
-| [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Prospective allocation; exact transport control replayed, pricing target uninvoked | in-progress |
+| [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Owner reprioritized BC-309 before launch; no LP target invoked; protocol retained pending a fresh forward allocation | blocked |
 | [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md) | 11 | target | H-136 | Matched unrestricted and four-fixed-corner residual covering programs on one 19-by-19 grid and nine retained directions | Prospective protocol; no target run or paired objective | in-progress |
 
 ### Cost and provenance

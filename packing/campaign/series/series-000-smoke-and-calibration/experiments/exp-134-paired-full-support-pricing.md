@@ -56,10 +56,14 @@ experiment:
       construction. The exact launch clock and process timing will be retained; the lease is ownership
       metadata, not permission to extend the process timeout.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/exp-134-paired-pricing.json
-  lease:
-    expires: '2026-09-09T02:40:00Z'
-    host: Darwin 25.5.0 arm64
-  results: []
+  results:
+  - shape: determination
+    role: guard
+    question: Was the registered target invoked under its original live allocation?
+    outcome: criterion_missed
+    checked_by: Session111 records no LP or pricing invocation. The owner reprioritized BC309, and the
+      unused operational lease expired at 2026-09-09T02:40Z. Scientific wall time is zero; preparation,
+      validation and coordination remain in session usage.
   complexity:
     lines_changed: 0
     new_dependencies: []
@@ -74,14 +78,24 @@ experiment:
       written before arrangement construction and contains every raw dual hex value and the full positive
       rationalised support. Both arms share that one sequence.
   verdict:
-    decision: in-progress
+    decision: blocked
     primary_criterion: at least one full-arm new-site orbit, absent from the input state, with exact same-point
       paired32 depth <= 1 < full depth
-    reason: No run has occurred. Only a completed exact same-witness replay can decide the pointwise mechanism;
-      guard_refused, TERM before a priced receipt, missing output or an execution error remains unresolved
-      and is not negative evidence.
+    reason: No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease
+      expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward
+      allocation. This is an administrative unrun disposition, not negative evidence about H-135.
+  effort:
+    timebox: One thirty-minute process with two-second grace; scientific allowance unspent
+    wall_seconds: 0
+    stopped_by: dependency
 ---
 # exp-134 — Prospective Paired Pricing Round
+
+The original allocation ended without a scientific invocation.
+The owner selected the conditional-cover pilot instead; this administrative block is not
+negative evidence about full-support pricing.
+The original scientific contract below is retained, with its full process allowance
+unspent and a fresh forward launch allocation required.
 
 The published instrument is commit `82df41bd7154903d4048fed0feef39b8bec794f8`. Its
 integrated controls and the publication check passed.

@@ -647,7 +647,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-305 | research | 11 | complete | 1 | think-qfog | Published proof files, exact reader receipts, and a scoped statement of the remaining global ownership problem. |
-| BC-306 | research | 11 | in_progress | 1 | think-7lp3 | The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts, or a truthful never-opened disposition. |
+| BC-306 | research | 11 | blocked | 1 | think-7lp3 | The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts, or a truthful never-opened disposition. |
 | BC-307 | research | 11 | tentative | 2 | think-98z2 | Coordinator selection after both funded lanes, with fresh clocks and published-source identity if opened. |
 | BC-308 | measurement_validation | 11 | blocked | 2 | think-9yow | Terminal BC-305, BC-306 and BC-309 artifacts, then the coordinator's reserve decision and closeout selection. |
 | BC-309 | research | 11 | in_progress | 1 | think-3glv | The feasibility assessment, exact obstacle-clipping contract and controls, followed by a prospectively declared comparison of matched unconditional and residual covering masses. |
@@ -772,7 +772,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
-| H-135 | running | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
+| H-135 | blocked | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
 | H-136 | running | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
@@ -838,7 +838,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
 | exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
 
-### blocked (8)
+### blocked (9)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -850,6 +850,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
+| exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-111 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
 ### accepted (30)
 
@@ -902,11 +903,10 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (2)
+### in-progress (1)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-111 | H-135 | No run has occurred. Only a completed exact same-witness replay can decide the pointwise mechanism; guard_refused, TERM before a priced receipt, missing output or an execution error remains unresolved and is not negative evidence. |
 | exp-135 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-111 | H-136 | Prospective protocol; no target has run. A completed paired score at most 0.001 rejects this finite numerical claim. A partial, guarded, errored or timed-out run stays unresolved. Source identity and passed controls will be retained before launch. |
 
 ## Resumable — stopped on the clock, not on an answer
@@ -924,6 +924,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-070 | H-064 | 109.3m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | After the T+2 landing, spend the remaining 135 one-core proc |
 | exp-118 | H-107 |  | dependency |  |  |
 | exp-129 | H-125 |  | dependency |  |  |
+| exp-134 | H-135 |  | dependency |  |  |
 
 ## Effort
 
