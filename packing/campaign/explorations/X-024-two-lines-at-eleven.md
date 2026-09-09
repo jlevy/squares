@@ -36,6 +36,11 @@ exploration:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-plateau-reader.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a3-threshold-loop-at-383-100.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x3-containment-atoms-do-not-cut.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json
   - docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md
@@ -72,6 +77,14 @@ The two lines are not competitors: the conditional route is the fallback if the
 unconditional LP stalls below `3.84`, and threshold atoms are the tool it would then
 need.
 
+**Corrected later the same day: there is no fallback.** The cheap discriminator was run
+and it is negative in the strongest available sense — corner conditioning is exactly
+mass-neutral at every rung, so the conditional route buys nothing and the rank-one cap
+`3.868983` applies to it verbatim.
+§5 carries the measurement and the three consequences; §4 is retained as the reasoning
+that led to it rather than as a live reading.
+The unconditional line is the only line.
+
 ## 1. What each line established
 
 ### The unconditional line (this branch)
@@ -96,8 +109,25 @@ them.
 | --- | --- | --- | --- |
 | `T-023` (PR 137): five dots exclude one four-owner branch | `96/25` | V3/C3/S3 | conditional on one of `65,536` raw owner-class combinations; “changes no global bound for `s(11)`” |
 | The corner-pair theorem and the sector footprints: four distinct owners in every eleven-square packing at `q`, sixteen classes per corner, each guaranteeing a closed rational patch | `96/25` | proved, reviewed twice by the same agent family | the exhaustive class structure; “There is presently no evidence that full case exhaustion is feasible” |
-| The deletion screens (exp-137, exp-138, exp-141): point-only filters of the retained depth-one family at `191/50`, translated to `q`, fall below ten for every one-owner class and below seven for every four-owner combination (maximum `13394344077/2055263195 = 6.517`) | `96/25` | exact, negative | “Stop unchanged-weight deletion filters”; the retained family obstructs no class |
+| The deletion screens (exp-137, exp-138, exp-141): point-only filters of a retained depth-one family at `191/50`, translated to `q`, fall below ten for every one-owner class and below seven for every four-owner combination (maximum `13394344077/2055263195 = 6.517`) | `96/25` | exact arithmetic on **the wrong source**; see the correction below | “Stop unchanged-weight deletion filters”; the retained family obstructs no class — **withdrawn**, see §5 |
 | The residual covers: numerical four-arm programs on nine directions, then the exact five-dot replay on all 361 orientations | `96/25` | exact for one class | the certified class only |
+
+> **Correction, 2026-09-09, and it is the reason [`D-489`](../../defects.yaml) was
+> filed.** The sentence above describes the screens as filters of “the retained
+> depth-one family at `191/50`”, which reads as the mass-eleven ceiling family.
+> They did not use it.
+> `screen_corner_dual_salvage._source_receipt` requires the source receipt’s `failures`
+> to be exactly `["K3 total weight at least n"]`, so it accepts only a family that fell
+> short of mass `n` and can never accept a proved ceiling family; exp-137 and exp-138
+> therefore ran on `agenda-025/bc-232-leg-01-family.json` of mass `10.3842`, `0.6158`
+> short of eleven, and both of their reported shortfalls (`0.5826` and `0.4829`) are
+> smaller than that deficit.
+> **Those negative readings are an artifact of the source, not a property of
+> conditioning.** Re-run on the mass-eleven family the same filter reads survivor weight
+> exactly `10` at four of the sixteen one-corner classes and exactly `7` at the
+> corresponding four-corner combination — see §5 and
+> [lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md).
+> Every citation of exp-137 or exp-138 in this document now carries this note.
 
 Their transfer from the finite net to physical angles is analytic (the `V3` half): every
 physical unit square contains a concentric `B`-square at a net direction, strictly
@@ -171,6 +201,11 @@ Its costs are the class count (up to `65,536` raw, fewer by symmetry and compati
 pruning, unmeasured), the analytic transfer steps that keep the composed theorem at
 `V3`, and the fact that a single uncovered class blocks the whole bound.
 
+**Superseded, later the same day.** Route B is obstructed at four of the sixteen classes
+by an exact witness, and route C is refuted as a *gain*: see §5. Both are recorded here
+as they were reasoned rather than deleted, because the correction is worth more than the
+tidier page.
+
 **C. Hybrid: threshold atoms inside the conditional tree, owner patches inside the
 unconditional certificate.** A conditional threshold certificate is one object: a class
 `c`, its forbidden region `F_c`, the threshold `n - 4`, and a family of point and
@@ -200,6 +235,16 @@ The reason it is large at all is where the mass goes: every dual read on either 
 at `3.82` and at `3.84`, puts its weight on wall squares and corner-region intruders,
 and the corner-pair theorem says four squares must be at the corners.
 Conditioning removes the expensive part of the cover.
+
+> **Superseded, 2026-09-09.** The paragraph above is arithmetic on the wrong family, and
+> the sentence “Conditioning removes the expensive part of the cover” is the claim §5
+> now refutes exactly.
+> The `1.566` figure is an upper bound from bc-293 on the *one certified class*; the
+> distribution over all sixteen classes at one corner, measured against the mass-eleven
+> ceiling family, runs from exactly `1` to `11/4`, and the case split is decided by the
+> minimum. One conditioned corner buys **exactly one unit**, which is exactly the unit of
+> threshold it costs. What follows in this section is retained as the reasoning that led
+> to the measurement, not as a live reading.
 
 Read as an engine, the strategy is: find structure every packing must have, enumerate
 its classes exhaustively, and in each class delete the guaranteed occupied region and
@@ -234,6 +279,57 @@ compute plus threshold atoms for the tail; if most sit near seven, the engine ne
 next layer of forced structure before it is affordable.
 The unified certificate format (E1) is the piece both lanes need and moves up with it.
 
+**Corner conditioning is exactly mass-neutral, measured later the same day, and this
+reverses the paragraph above.** The unconditional line is now the only line, and that is
+a measured conclusion rather than a preference.
+The mass-eleven ceiling family, transported to `96/25` by PR 137’s own transport and
+screened by PR 137’s own filter, carries weight **exactly 1** at each corner mark, and
+the four corner deletions are pairwise **disjoint** (no core meets two corner patches:
+the cross-corner distance `1.8545` exceeds the core diameter `B sqrt 2 = 1.4109`). So
+conditioning on `m` corners leaves survivor weight exactly `11 - m` against a threshold
+of `11 - m`: one corner 10 against 10, two corners 9 against 9, four corners 7 against
+7, identically at `191/50`, `153/40`, `383/100` and `96/25`. Four of the sixteen
+single-corner classes — `m1:j3`, `m1:j4`, `m2:j3`, `m2:j4` — sit at exactly the
+threshold, so **no point cover can close them**, and the point-cover route on a residual
+domain is closed. The mechanism is that the ceiling family is owner-saturated (lane T2’s
+C.1, `y(K_c) = 1` at every corner, now confirmed exactly): the patch lies inside the
+owner’s core and contains its mark, so it deletes at least the mark clique, which is
+exactly one unit, and for sectors `j3` and `j4` it reaches nothing else.
+The gain of a conditioning is only the patch’s reach beyond the mark, and for those
+classes that reach is exactly zero.
+Three consequences follow, and each is exact rather than argued.
+The rank-one bracket `3.868983` **transfers verbatim to the conditional method** at
+every `m`, because deleting the `m` owners of a `3.868983` packing leaves `n - m`
+pairwise disjoint admissible cores disjoint from the patches.
+There is **no lift that avoids the tree**: a single certificate valid for all sixteen
+classes must charge `R_{j3}`, whose point-covering value is at least 10, while it needs
+budget below 10 — lane T2’s C.3 at `m = 1`, now with a witness.
+And the hybrid buys nothing: the plateau reader on the 80-placement mass-10 survivor
+family reports depth exactly 1, two-of-three maximum `5/4`, heaviest rank-one clique
+`11/8` at `tau* = 5/3`, and violated floor atoms at `t = 2, 3, 4` — **the same values
+the full ceiling family carries.** Conditioning removed exactly one unit of mass and
+exactly none of the cut structure.
+The conditional programme also had no side but `96/25` — no ownership theorem exists in
+the tree anywhere else (lane X2 §3) — while `191/50` is already closed unconditionally
+by `T-025`, so its whole open window was `(3.82, 3.84]` even before the neutrality
+result.
+**Do not build any rung of the conditioning ladder**: not the single-corner rung,
+not the two-corner rung, not the wall-slot generalization, which is strictly worse
+because a mid-wall slot has more angular freedom and a thinner guaranteed patch than a
+corner. The measurement is retained as
+[lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md),
+with the inventory of what the conditional line already has in
+[lane X2](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md).
+`H-146` is dispositioned against it: its premise is refuted, its claim is not — the
+survivor family is a fractional packing and threshold atoms could still cut it — so it
+is retained with rewritten notes rather than deleted.
+
+**So slices B1 and C1 below are withdrawn as strategy, and the two lanes X1 and X2 are
+what replaced them.** Slice E1 stands on its own merits: lane A4 found that the reader
+separates atoms the certificate format cannot express, which is the blocker on turning
+any separation work into a bound, and that is now its own bead rather than a conditional
+prerequisite.
+
 The owner set the division of labour on 2026-09-09: this branch follows the
 unconditional line (slices A2 and A3, then the next atom families), and the conditional
 line continues on PR 137’s branch with its own agent.
@@ -247,11 +343,11 @@ domain.
 | A1 | `T-025` registered: case package, two evidence entries, the proof packet, the case page at `191/50` | the records tier and the gate on the frozen bytes | mechanical, Opus |
 | A2 | the frozen threshold certificate on the 720- and 1440-step nets at their crossing shrinks, and its dilation records | the two-route gate at each net; the endpoint about `3.8266` if it holds (H-147’s first reading) | mechanical, Opus |
 | A3 | the threshold loop at `383/100` from the accepted site and atom set, ninety minutes, rows complete or not | LP value below eleven with rows complete, frozen and decided; or a second plateau and its dual (H-147) | research, Fable |
-| A4 | the exact plateau reader: vertex membership sets, the two-of-three triple search, maximal cliques with exact piercing LPs, line chords, the CG-separation program, each returning an exact violated atom or a certificate of none | run on the `383/100` dual: two-of-three feasible (the plateau is a theorem and the reader names the cut) or not (the generator, not the language, was the limit) | this branch |
-| A5 | weighted clique atoms (three-of-five with a doubled point) and floor two-of-five atoms in the loop, with exact vertex-set separation | one atom round plus rows-only completion at `383/100`: below eleven, freeze and gate; at eleven, the reader’s next family | this branch |
-| B1 | the owner-class census at `96/25`: combinations modulo the container symmetries, compatibility pruning by exact footprint separation, the nine-direction residual point LP on a sample of a few hundred classes | the class count and the distribution of residual values against seven | conditional line (PR 137’s branch) |
+| A4 (**done**) | the exact plateau reader: vertex membership sets, the two-of-three triple search, maximal cliques with exact piercing LPs, line chords, the CG-separation program, each returning an exact violated atom or a certificate of none | run on the `383/100` dual: two-of-three feasible (the plateau is a theorem and the reader names the cut) or not (the generator, not the language, was the limit) | this branch; run instead on the `153/40` dual with the gate bypassed — every class violated, the LP unmoved |
+| A5 (**done**) | weighted clique atoms (three-of-five with a doubled point) and floor two-of-five atoms in the loop, with exact vertex-set separation | one atom round plus rows-only completion at `383/100`: below eleven, freeze and gate; at eleven, the reader’s next family | this branch; answered from the other side — the ceiling support reaches only `32/3`, so neither side is capped |
+| B1 (**withdrawn**) | the owner-class census at `96/25`: combinations modulo the container symmetries, compatibility pruning by exact footprint separation, the nine-direction residual point LP on a sample of a few hundred classes | the class count and the distribution of residual values against seven | conditional line (PR 137’s branch); a census cannot rescue a neutral ladder |
 | E1 | one certificate format for both lines: point and threshold atoms, an optional forbidden region, a budget threshold, one two-route gate | PR 137’s `T-023` re-decided by the unified gate to the same verdict | either branch; efficiency block |
-| C1 | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-146) | research, Fable |
+| C1 (**withdrawn**) | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-146) | research, Fable; `H-146`’s premise is refuted and the point-cover route on a residual domain is closed |
 
 Two things must not be conflated when the lines are reported together.
 PR 137’s `T-023` is conditional and does not move the bracket; `T-024` and the threshold
@@ -290,7 +386,45 @@ and about `1.10` at an interior meeting of the tilted pair, so neither is a frac
 packing and neither caps the method; the site chase that A4’s instrument made possible
 shrinks the deep region slowly, into a sliver `0.0006` wide at `800 s` of warm LP a
 round. What the two-of-three method reaches with its own sites and atoms is therefore
-open, and it is carried as slice A6 (`think-7rqw`), which is A3’s F7 and S4.
+open, and it is carried as slice A6 (`think-7rqw`), which is A3’s F7 and S4. `T-026` is
+registered at `V4`/`C4` — `C4` rather than `C5` because no source-distinct review of the
+corollary was sought — and it takes the bracket to
+`[3.826447410572939, 3.877083590022814]`, a gap of `0.050636`, the second-smallest open
+gap at `n <= 100` in this corpus.
+
+**Outcome of A4, A5 and the containment sweep, also the same day.** All three ran and
+all three are retained beside this document.
+A4 pointed the plateau reader at the `1/25`-integral dual at `153/40` with the `K2`
+depth gate bypassed, so every reading is a separation-oracle reading and **no
+non-violation there is a cap**
+([`lane-a4-separating-the-plateau-dual-at-153-40.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md)):
+twenty-four distinct D4 orbits are violated exactly — eighteen two-of-three at `33/100`,
+one budget-one clique atom at `1/2`, five Chvátal–Gomory floor atoms at `5.545` to
+`8.27` — fed back as priced columns the LP moves from `10.999999999999945` to
+`11.000000000000167`, and every one of the twenty-four carries primal weight exactly
+zero. The dual relocates instead: 64 rows become 42, the excess moves from the mid-wall
+sliver to the interior tilted pair near `(1.29, 1.85)`, deepens from `1.0963` to
+`1.1145`, and ends `0.0077` from any sampled site.
+So the atom language is not what pins `3.825`; the sites are, and chasing them vertex by
+vertex chases one vertex of a wide optimal face.
+A5 measured the fixed-support maximum on the ceiling support under depth-one plus the
+**complete** budget-one class
+([`lane-a5-the-fixed-support-maximum-under-the-atom-classes.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md)):
+`nu_S = 32/3` exactly at both `153/40` and `383/100`, falling to exactly `10` once the
+floor atoms are imposed, against `11` with the atom rows dropped.
+**Neither side is capped**, the shortfall is `1/3` on the budget-one class and `1` on
+the strongest row set measured, and the union with the `1/25` family’s placements is
+bounded above by `21749/1980 < 11` — so the barrier at these sides is not this family
+and not column generation on these supports.
+The containment sweep closes one more cut family
+([`lane-x3-containment-atoms-do-not-cut.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x3-containment-atoms-do-not-cut.md)):
+both plateau families carry exactly 3 in every wall strip against a capacity of exactly
+3, first exceeding 3 only above `2B`, and no axis-aligned box on an eight-step grid
+exceeds its capacity, so containment atoms — which would have been a cut outside the
+`3.868983` bracket — are not the missing cut and should not be built.
+A4’s P10 is the piece that now blocks everything: a `K5` clique atom carries
+multiplicities and a `K6` floor atom charges more than one per core, neither is a
+`ThresholdAtom`, so neither can be frozen or gated today even when it does cut.
 
 ## 6. What this document does not establish
 
@@ -306,6 +440,24 @@ any class other than the certified one admits a five-dot or a threshold cover; t
 `1.566` units per conditioned square is an upper bound from one retained certificate on
 one certified class, not a measurement of the tree.
 The hybrid tool does not exist yet.
+
+Four things the same-day lanes added, and their own limits.
+The neutrality result of §5 is a statement about **point covers on a residual domain**;
+it does not say a *threshold* certificate on a residual domain is impossible, only that
+its premise — that conditioning buys mass — is false, and that it costs sixteen times
+more than the unconditional route for no better reach.
+It also has one escape it does not close: if sectors `j3` and `j4` are empty, those four
+classes need no cover, and an emptiness proof would rescue the classes but not the
+method. A4’s readings are separation-oracle readings on a family of depth `28/25` with
+the gate bypassed: every violation there is sound and every non-violation decides
+nothing, so **no number in A4 is a cap at `153/40`**, and its LP value of eleven is a
+restricted optimum on one column set that bounds nothing from below.
+A5 establishes `nu_S` exactly on one support and its union with one other, and its `10`
+under the whole rank-one class rests on a time-limited K6 separator, so `10` is an exact
+upper bound and not a proved optimum; whether some *other* support reaches eleven at
+`153/40` or `383/100` is untouched, and that is still the question a cap would need.
+X3’s containment negative is exact on wall strips and on axis-aligned boxes over an
+eight-step grid; other regions and other capacity bounds are unmeasured.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
