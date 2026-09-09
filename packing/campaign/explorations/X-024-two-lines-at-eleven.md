@@ -32,6 +32,8 @@ exploration:
   - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t-theory-cuts-and-routes.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-cap-and-next-cuts.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-plateau-reader.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json
   - docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md
@@ -256,6 +258,15 @@ And their composed theorem is `V3` because its transfer is analytic, while the t
 theorem has a written proof reviewed adversarially and a machine decision of every
 condition; a hybrid certificate inherits the weaker of the two until the owner-class
 transfer is mechanised.
+
+Lane T2 is retained with this reading — the cap of the threshold method and the next cut
+families in
+[`lane-t2-cap-and-next-cuts.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-cap-and-next-cuts.md),
+the instrument it asked for in
+[`lane-t2-plateau-reader.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-plateau-reader.md)
+— and slice A4 is done: the plateau reader is promoted as
+`packing/devtools/plateau_reader.py` and its run on the `191/50` ceiling family is
+retained beside the family, so what remains at `383/100` is to point it at that dual.
 
 ## 6. What this document does not establish
 
