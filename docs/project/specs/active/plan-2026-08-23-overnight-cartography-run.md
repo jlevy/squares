@@ -341,8 +341,8 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H149/exp151
-tests the same tuple with the saved escape centre added as a sixth fixed dot.
+For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H150/exp152
+tests whether any replacement sixth site can hit both saved escaping cores.
 PR142 completed matching fast and deferred validation and is ready; Session121 continues
 on the stacked branch `codex/n11-owner-core-compatibility`. Exp145 independently
 confirmed the selected five-dot cover, exp146 enlarged twelve of sixteen wall-aware

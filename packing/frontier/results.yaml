@@ -1242,9 +1242,10 @@ results:
       the whole theorem requires mechanizing the analytic transfer. Exp146 enlarged
       twelve wall-aware footprints, but exp147 transferred no additional tuple.
       Exp149 refuted the selected five-dot extension and exp150 showed its escape
-      survives individual owner-core constraints. BC320 now tests a separately
-      registered six-dot cover on that tuple under H149/exp151; wider owner-class
-      coverage is a new research result, not a rung change.
+      survives individual owner-core constraints. Exp151 also refuted a
+      fixed sixth-site extension. BC320 now tests whether any replacement sixth
+      site can hit both saved escapes under H150/exp152; wider owner-class coverage
+      remains a new research result, not a rung change.
     notes: >-
       Registered at the post-sprint milestone from exp144, without a new target run or
       additional experiment cost. The exact exp143 source is Git blob

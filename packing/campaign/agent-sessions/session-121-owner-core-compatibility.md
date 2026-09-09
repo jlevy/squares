@@ -83,7 +83,7 @@ session:
     objective: Prepare, admit, publish and test the fixed six-dot cover selected by exp150.
     commitment: BC-320
     bead: think-ykd6
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Exp150 conclusively refuted individual-owner exclusion of the saved escape.
     budget_minutes: 30
@@ -96,10 +96,40 @@ session:
     kill_condition: Publish clean admitted source first; launch by 18:25:55 UTC to leave the full 302-second
       process allowance.
     fallback: Preserve completed source or partial/invalid result without retry; replan only future work.
+    outcome: 'Exp151 completed in 13.45 seconds: six initial zero deficits, then owner-006 strict escape
+      refuting H149. Source c8cd38dad502c78840144bcae42df4294ba7f3d0; launched18:22:02 UTC. Interpretation
+      closed18:24:09 UTC.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-151-selected-six-dot-cover.json
+    stop_reason: The one registered six-dot target completed conclusively.
+    next_action: Run the separately registered exact two-core necessary screen before another cover attempt.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Test whether any replacement sixth site can hit both escaping cores, then use that evidence
+      to select a bounded next cover or obstruction argument.
+    commitment: BC-320
+    bead: think-ykd6
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The fixed six-dot cover refuted at owner-006, providing the second necessary core constraint.
+    budget_minutes: 30
+    started_at: '2026-09-09T18:24:09Z'
+    deadline_at: '2026-09-09T18:54:09Z'
+    expected_output: A verified empty-intersection obstruction or nonempty exact candidate region; any
+      further target needs its own prospective criterion and remaining full process allowance.
+    validation_command: Point/segment-aware synthetic controls, Max source admission, publication checks,
+      then exp152 once under60/30-second guards.
+    kill_condition: Publish clean admitted source; exp152 launch by18:53:07 UTC, no automatic retry or
+      unregistered successor.
+    fallback: Retain partial preparation or outcome and carry only genuinely unfinished future work to
+      a fresh allocation.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Interpret the conditional six-dot result and select the next evidence-backed slice.
+    next_action: Use the exact intersection result to choose relocation, weighted search, or a joint-owner
+      discriminator; retain global routing gap.
   primary_bead: think-ykd6
   status: in_progress
   budget:
@@ -118,8 +148,8 @@ session:
   progress:
     metric: Resolve whether the exact exp149 escape survives individual owner-core constraints.
     before: Exp149 refuted fixed five-dot coverage for tuple (0,0,0,7); no compatibility target has run.
-    after: The saved escape survives all four individual snapped-owner constraints; the next discriminator
-      adds its centre as a sixth dot.
+    after: Both individual-owner tightening and fixed D+x149 failed; two exact escapes now constrain every
+      possible replacement sixth site.
   delegations:
   - status: completed
     recording: contemporaneous
@@ -233,6 +263,64 @@ session:
     - Private review notes only; shared repository source read-only.
     excluded_commands:
     - No target invocation, git commit/push, or campaign registry edits.
+  - status: completed
+    recording: contemporaneous
+    outcome: Two-core screen source and independent mathematical admission complete; target unrun.
+    evidence:
+    - packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md
+    checks:
+    - 'Sol: 10 screen tests passed in 0.94 seconds. Independent Max: 23 combined tests passed in 0.99
+      seconds. Ruff/format and types clean.'
+    uncertainty: The two-core intersection is unmeasured.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    phase: 4
+    budget_minutes: 30
+    started_at: '2026-09-09T18:24:09Z'
+    deadline_at: '2026-09-09T18:54:09Z'
+    kill_condition: No target evaluation before source admission and prospective publication.
+    fallback: Retain completed preparation and carry only unfinished future work into the next planned
+      slice.
+    task: Implement exact two-receipt sixth-site intersection screen and controls.
+    operator: GPT-5.6 Sol, extra high
+    files: &id003
+    - packing/devtools/wall_owner_sixth_site_screen.py
+    - packing/tests/test_wall_owner_sixth_site_screen.py
+    expected_output: An admitted point/segment-safe exact screen and the conditional next-step contract.
+    validation_command: Focused synthetic controls, types and source review only.
+    next_action: Coordinator publishes admitted source and executes the frozen screen.
+    write_scope: *id003
+    excluded_commands:
+    - No target invocation, registry edits, git commit or push.
+  - status: completed
+    recording: contemporaneous
+    outcome: Two-core screen source and independent mathematical admission complete; target unrun.
+    evidence:
+    - packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md
+    checks:
+    - 'Sol: 10 screen tests passed in 0.94 seconds. Independent Max: 23 combined tests passed in 0.99
+      seconds. Ruff/format and types clean.'
+    uncertainty: The two-core intersection is unmeasured.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    phase: 4
+    budget_minutes: 30
+    started_at: '2026-09-09T18:24:09Z'
+    deadline_at: '2026-09-09T18:54:09Z'
+    kill_condition: No target evaluation before source admission and prospective publication.
+    fallback: Retain completed preparation and carry only unfinished future work into the next planned
+      slice.
+    task: Admit the two-core screen and analyze bounded witness-driven single-site placement.
+    operator: GPT-6 Astra, max
+    files:
+    - packing/cases/n11_five_dot_cover/after-six-dot-refutation-strategy.md
+    expected_output: An admitted point/segment-safe exact screen and the conditional next-step contract.
+    validation_command: Focused synthetic controls, types and source review only.
+    next_action: Coordinator publishes admitted source and executes the frozen screen.
+    write_scope:
+    - Private mathematical notes only; shared source read-only.
+    excluded_commands:
+    - No target invocation, registry edits, git commit or push.
   outputs:
   - packing/campaign/hypotheses/H-148-wall-owner-escape-compatibility.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md
@@ -242,16 +330,23 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md
   - packing/cases/n11_five_dot_cover/after-exp150-decision-contract.md
   - packing/cases/n11_five_dot_cover/six-dot-source-admission.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-151-selected-six-dot-cover.json
+  - packing/campaign/hypotheses/H-150-sixth-site-two-core-screen.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md
+  - packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-121-compatibility-target.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-121-six-dot.yaml
   checks:
   - PR142 head 8a35b482 passed matching fast and deferred validation and is ready for review.
   - New source changes begin on the stacked successor after PR142 readiness.
   - Six-dot source admitted at blobs 06bb100a94a35bdd78138d5467a450343a497476 (module) and 4b757fca7b9374c0bf8d4cb578ee0091526bd6b9
     (tests).
+  - Two-core source admitted at 1868f3df5297e93ce8a6d6c4d17ba475ee88b8d3; tests 0cd1ce1bcdf4abcb4630343a332dcdbe9ea2488f.
   stop_reason: null
-  next_action: Interpret the conditional six-dot result and select the next evidence-backed slice.
+  next_action: Use the exact intersection result to choose relocation, weighted search, or a joint-owner
+    discriminator; retain global routing gap.
 ---
 # Session121: Test the Owner-Core Constraint
 

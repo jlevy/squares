@@ -449,6 +449,11 @@ prevent those local facts from being mistaken for a global exclusion.
 | 144 | Test whether an owner class excludes the saved escape | registered | [H-148](hypotheses/H-148-wall-owner-escape-compatibility.md) | Exact SAT extrema test all allowed owner cores; exp150 refutes the claim with four compatible witnesses. |
 | 145 | Add the saved escape as a sixth fixed dot | registered | [H-149](hypotheses/H-149-selected-six-dot-cover.md) | Retain the same tuple and five sites, add the bound escape centre, and require full-net exact coverage before any new conditional exclusion. |
 
+| 146 | Intersect the two escaping cores before relocating a sixth site | registered |
+[H-150](hypotheses/H-150-sixth-site-two-core-screen.md) | Empty intersection rules out
+every additional single site with D fixed; nonempty gives only a necessary candidate.
+|
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

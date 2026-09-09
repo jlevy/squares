@@ -175,9 +175,8 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-319
-    next_evidence: H149/exp151 fixes D plus the saved exp149 centre on the same tuple after exp150 refuted
-      H148. Admit and publish the thin six-dot wrapper before one 300-second external / 240-second internal
-      all-361 check.
+    next_evidence: H149/exp151 refuted after seven directions. H150/exp152 tests the exact intersection
+      of the exp149 and exp151 escaping cores before trying another sixth-site location.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -191,9 +190,13 @@ agenda:
     - packing/campaign/hypotheses/H-149-selected-six-dot-cover.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md
     - packing/cases/n11_five_dot_cover/after-exp150-decision-contract.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-151-selected-six-dot-cover.json
+    - packing/campaign/hypotheses/H-150-sixth-site-two-core-screen.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md
     hypotheses:
     - H-148
     - H-149
+    - H-150
   - id: BC-321
     purpose: research
     owner_focus: insight

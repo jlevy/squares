@@ -48,7 +48,8 @@ See the
 [admitted design](../../cases/n11_five_dot_cover/after-exp150-decision-contract.md).
 Source controls pass: 13 combined tests, clean Ruff and BasedPyright.
 [Independent source admission](../../cases/n11_five_dot_cover/six-dot-source-admission.md)
-is GO. No target has run.
+is GO. Exp151 now refutes this fixed six-dot set: its first six directions are covered,
+but owner-006 admits a replayed strict escape.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

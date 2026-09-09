@@ -138,11 +138,11 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives twenty-three confirmed hypotheses, nineteen
-refuted hypotheses, one open hypothesis, twenty-five open questions, and forty-five
-blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
-remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
-scientific invocation; this does not refute its claim.
+The generated ledger currently derives twenty-three confirmed hypotheses, twenty refuted
+hypotheses, one open hypothesis, twenty-five open questions, and forty-five blocked
+hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
+unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
+invocation; this does not refute its claim.
 One hypothesis is running; none is waiting on review and nine are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
@@ -208,6 +208,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Two-Escape Sixth-Site Screen: Source Admission](packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md) | dated review record | record | retained | — |
+| [Sixth-Site Feasibility and a Bounded Exact Cutting Loop](packing/cases/n11_five_dot_cover/sixth-site-cutting-contract.md) | dated review record | record | retained | — |
 | [Fixed Six-Dot Cover: Source Admission](packing/cases/n11_five_dot_cover/six-dot-source-admission.md) | dated review record | record | retained | — |
 | [If the Fixed Six-Dot Test Refutes](packing/cases/n11_five_dot_cover/after-six-dot-refutation-strategy.md) | dated review record | record | retained | — |
 | [After exp150: Fixed Six-Dot Cover Contract](packing/cases/n11_five_dot_cover/after-exp150-decision-contract.md) | dated review record | record | retained | — |
@@ -804,10 +806,11 @@ refutes H-147 at its first required direction: owner-000 has a positive exact un
 area and a retained rational strict escape for tuple `(0,0,0,7)`. H-146 remains
 unresolved over other tuples.
 
-**Selected next entry:** `think-ykd6`, BC-320: exp150 refutes H148 in 9.01 seconds.
-The saved escape admits a strictly separated owner B-core in all four selected classes.
-The next discriminator retains D and adds the saved centre as a sixth dot on the same
-configuration, with a separate prospective all-361-direction cover criterion.
+**Selected next entry:** `think-ykd6`, BC-320: H150/exp152 tests whether one replacement
+sixth site can hit both saved escaping cores.
+Exp150 refuted individual-owner exclusion; exp151 then refuted D plus the original
+escape centre at owner-006 after six covered directions.
+Neither negative result excludes the tuple or changes the global bound.
 [Session121](packing/campaign/agent-sessions/session-121-owner-core-compatibility.md)
 runs on `codex/n11-owner-core-compatibility`. PR142 is ready after matching fast and
 deferred validation; neither PR142 nor PR137 has merged.
@@ -3392,7 +3395,8 @@ round that names the hypothesis, control roles included.
 | [H-146](packing/campaign/hypotheses/H-146-fixed-five-dot-wall-expansion.md) | unresolved | The fixed five dots exclude another wall-owner tuple | 1 | 74.03s wall |
 | [H-147](packing/campaign/hypotheses/H-147-selected-wall-tuple-cover.md) | refuted | The unchanged five-dot pattern covers the selected wall-owner tuple `(0,0,0,7)` | 1 | 11.41s wall |
 | [H-148](packing/campaign/hypotheses/H-148-wall-owner-escape-compatibility.md) | refuted | At least one selected owner-core class excludes the exact exp149 escape | 1 | Four independently replayed compatible class witnesses; 9.01s |
-| [H-149](packing/campaign/hypotheses/H-149-selected-six-dot-cover.md) | running | D plus the saved escape centre covers the same selected tuple on all 361 directions | 1 | Unrun; source preparation |
+| [H-149](packing/campaign/hypotheses/H-149-selected-six-dot-cover.md) | refuted | D plus the saved escape centre covers the same selected tuple on all 361 directions | 1 | First deficit at owner-006; 13.45s |
+| [H-150](packing/campaign/hypotheses/H-150-sixth-site-two-core-screen.md) | running | One replacement site hits both exact escaping cores | 1 | Unrun; exact two-core screen |
 
 ### Confirmed
 
@@ -3647,6 +3651,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-119.yaml` | session-119 | 86 | 0.51 h | 0.25 h | 0.25 h | yes |
 | `codex-task-tree-session-120.yaml` | session-120 | 96 | 0.68 h | 0.2 h | 0.2 h | yes |
 | `codex-task-tree-session-121-compatibility-target.yaml` | session-121 | 115 | 0.52 h | 0.21 h | 0.21 h | yes |
+| `codex-task-tree-session-121-six-dot.yaml` | session-121 | 180 | 1.1 h | 0.39 h | 0.39 h | yes |
 | `codex-task-tree-session-121-source.yaml` | session-121 | 152 | 1.31 h | 0.45 h | 0.45 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
@@ -3671,9 +3676,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 107 rounds registered in `series-000`.
+There are 108 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1366.3 wall-minutes.
+They record 2152.1 agent-minutes and 1366.5 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3819,7 +3824,8 @@ archive beside it.
 | [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md) | 11 | target | H-146 | Nine-seed witness bank and one surviving tuple full-net check | Partial seed bank;49152 labels rejected;no candidate | unresolved |
 | [exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md) | 11 | target | H-147 | Exact complete-net cover of the selected wall tuple `(0,0,0,7)` | First direction has exact positive deficit and strict escape | rejected |
 | [exp-150](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md) | 11 | target | H-148 | Exact compatibility of the saved escape with entire allowed owner cores | Four classes admit individually compatible cores | rejected |
-| [exp-151](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md) | 11 | target | H-149 | Six fixed dots and four selected wall patches on the full net | Unrun; source preparation | in-progress |
+| [exp-151](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md) | 11 | target | H-149 | Six fixed dots and four selected wall patches on the full net | Six covered directions then a strict escape at owner-006 | rejected |
+| [exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md) | 11 | target | H-150 | Exact closed intersection of two escaping cores | Prospective and unrun | in-progress |
 
 ### Cost and provenance
 
@@ -3931,11 +3937,12 @@ archive beside it.
 | exp-148 | one five-minute process; shared 240-second internal and 60-second seed guards | 74.03s | — | timebox | `3bbb6987` |
 | exp-149 | one five-minute external process; 240-second internal guard after input loading | 11.41s | — | criterion | `5600c0fb` |
 | exp-150 | one 120-second external process; 90-second internal guard after input loading | 9.01s | — | criterion | `49b6d6ff` |
-| exp-151 | one 300-second external process; 240-second internal guard | — | — | unrun | — |
+| exp-151 | one 300-second external process; 240-second internal guard | 13.45s | — | criterion | `c8cd38da` |
+| exp-152 | one 60-second external process; 30-second internal guard | — | — | unrun | — |
 
-### What the 107 rounds jointly establish
+### What the 108 rounds jointly establish
 
-The 107 rounds use 2152.1 agent-minutes and 1366.3 wall-minutes under the campaign’s
+The 108 rounds use 2152.1 agent-minutes and 1366.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
