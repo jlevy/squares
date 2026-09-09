@@ -33,9 +33,24 @@ exploration:
 ---
 # X-018 — Hybrid Strength and Angular Release
 
-**Put the largest new allocation into a fair test of local compatibility, and a smaller
-independent allocation into angular structure.** The first asks whether a certified
-capacity can remove a continuous domain left by a strong geometric relaxation.
+**BC282 is complete: the exact translation reduction is accepted, and the full target is
+not admitted.** [Session098](../agent-sessions/session-098-residual-skeleton.md) parks
+further local H120 and H118 target work after independent admission and comparison.
+BC282 selected the existing, separately owned BC264 kernel lane.
+Its owner’s later session097/PR116 completed pricing and source-free implementation,
+then stopped after exp129 missed its launch cutoff.
+H125 remains untested.
+Follow its checkpoint publication and fresh-allocation requirements before dispatch.
+The user-requested
+[BC283 strategy review](../../../docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
+reconciles the two exploration efforts and preserves the parked H118/H120 targets.
+The [checkpoint decision](#bc282-checkpoint-and-current-allocation) records the new
+mathematics, re-entry conditions and allocation.
+
+The opening allocation put most attention into local compatibility and a smaller share
+into angular structure.
+The first asks whether a certified capacity can remove a continuous domain left by a
+strong geometric relaxation.
 The second asks whether releasing one of Trump’s angle-forcing contacts opens a
 tractable family beyond the retained local theorem.
 These are concrete ways to test the structural direction emerging from the last day’s
@@ -62,9 +77,9 @@ auxiliaries, a retained local Trump theorem, and more precise separation of supp
 optimization and compatibility obstacles.
 None yet supplies a global angle normal form or closes the remaining bound gap.
 
-The seven-row support proposal may settle the unchanged sixty-placement H-099 test
-cheaply if BC-259 independently accepts its source binding.
-That would retire a finite support, not all one-square resources.
+BC-259/exp-128 independently established optimum eleven on the unchanged sixty-placement
+H-099 support. PR 109 landed that result on `main` at `07e82d1e`. This retires that
+finite support; broader one-square resources remain possible.
 Likewise, unconverged scalar solves and expensive density controls do not prove a
 universal one-body barrier.
 Their present opportunity cost does favor testing configuration compatibility before
@@ -86,31 +101,167 @@ remaining problems are their domain and acceptance obligations, not a discovered
 algebraic contradiction.
 This is not adoption of a new theorem in the frontier register.
 
-The current `fixed_cell_lp()` chooses separation alternatives from a supplied feasible
-pose, and positive phase I raises `ExactLPError("infeasible")` without exporting its
-dual.
-BC-261 still needs arbitrary-descriptor assembly and an exact infeasibility receipt
-whose geometry an independent reader reconstructs.
-The solver’s message is not that certificate.
+At planning, `fixed_cell_lp()` chose alternatives from a supplied feasible pose and did
+not export an infeasibility dual.
+BC261 now supplies arbitrary selected-axis assembly, exact Farkas export, rational
+uniform rows and an independent geometry/arithmetic reader, with a complete two-square
+control cover. Its accepted scope is that direct interface.
+An eleven-square feature adapter and full case cover still need separate implementation
+and acceptance; the solver’s message alone is not a certificate.
 
-## Ranked Portfolio
+## Evidence From the Overnight Run
 
-| Priority | Avenue and owner | Most useful next result | Why allocate attention |
-| --- | --- | --- | --- |
-| First, continue | X-016 / Agenda 024 source coordinator | H-110’s fixed-candidate decision and the next conditional-compatibility or localization obligation | Builds directly on accepted auxiliary lemmas and an already active continuation; avoid competing with its work |
-| First, new discriminator | X-018 / H-118 | A target-side capacity exclusion with an exact surviving coupled outer-LP witness on the same domain, or a precise failure of the selected comparison | Determines whether a particular new cut earns expansion before a large tree is built |
-| First, direct-proof consumer | X-017 / H-111 and H-112 | A complete anchor case or contact-independent common-angle interval, with a useful explicit remainder | Converts accepted local methods into actual lower-bound domains; retains the shortest route to unrestricted progress |
-| Second, independent mathematics | X-018 / H-120, informed by H-121 | A closed released-contact domain outside retained local scope, or a specific obstruction to the proposed simplification | Tests new geometry and a potential reduction of angular complexity without waiting for a global cover |
-| Short closure task | X-017 / BC-259, H-099 | Independent acceptance or a missing binding in the proposed seven-row ceiling | May prevent spending the night on an unchanged support that has an exact obstruction |
-| Conditional next | X-018 / H-119 | A shared-anchor gain when independent minimization is the diagnosed bottleneck | A targeted response to evidence, rather than a third speculative engine |
+Session092 has independently closed two kinds of continuous geometry.
+The
+[central parent fence](../series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md)
+uses the actual four poses to leave four residual-center regions of diameter below one.
+Seven further full squares cannot fit, at any angles.
+Its equivalent 24-guard remainder retains the outer bands and central failure cases
+while removing the guarded fixture’s relative open family.
+This is a useful compatibility restriction; H118’s matching coupled-LP survival witness
+is still missing.
 
-Within the direct-proof consumer, first close the smaller priced continuous domain.
-Do not launch two large trees merely to give both pilots equal time.
-The highest potential payoff of the structural lane is a global representative theorem;
-its likelihood of closing overnight is unknown and its obligations are much larger than
-the first release test.
-These rankings are judgments about leverage and readiness, not measured success
-probabilities.
+The
+[signed-slide audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md)
+closes the whole declared source-feature parent with $a,b\in[-1/4,1/4]$, variable side
+between $381/100$ and $96/25$, block half-angle in $[1/3,2/5]$, and every square10
+orientation.
+Separate positive and negative proofs cover the two sign children; the block
+diagonals exclude mixed signs.
+The wall/contact assignments remain substantial restrictions.
+No finite-motion or global representative theorem follows.
+
+The global bracket is unchanged.
+These results favor spending the next principal allocation on an uncovered parent or a
+fair comparison with a concrete missing premise.
+Extending the completed feature box or building its unused cavity adapter would need a
+new scope-value argument.
+BC271 prices the comparison before any target or additional implementation, while the
+source’s H124 and density work continue separately.
+
+The next admitted boundary-band attempt reached a useful negative:
+[BC278’s independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md)
+accepts seven nonoverlapping residual disks on a continuous selected-pose family.
+Neither an octagon model nor exact selected-square geometry with residual incircles can
+prove a uniform capacity of six there.
+Those fixed centers cannot lift to full squares, because wall containment forces two
+axis-aligned squares to overlap.
+The actual eleven-square extension question remains open.
+The midpoint allocation therefore compares position-dependent wall constraints against a
+complete broader release-angle domain; further disk-only refinement is retired.
+The
+[adopted midpoint decision](../series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md)
+selects BC279’s maximal wall-conditioned common core for independent admission, with the
+complete physical release chart $t\in[0,1]$ as the next alternative.
+BC279’s independent bounded attempts have now frozen with exact six-core controls and
+the whole seven-core question unresolved; the
+[fresh audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md)
+accepts those partial results.
+An insertion obstruction for one fixed arrangement cannot establish capacity at most
+six. Another unchanged attempt has no new premise yet.
+
+BC280 independently admitted the complete physical chart $t\in[0,1]$ with the original
+wall/contact pattern and all eleven actual squares.
+BC281’s
+[fresh audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md)
+accepts both-sign exclusions on $[0,1/24]$, $[2/5,1/2]$ and $[23/25,1]$. Combined with
+the accepted middle interval, these leave
+
+$$
+t\in[1/24,1/3]\cup[1/2,23/25]
+$$
+
+with both slide signs, every original parameter and all actual-square conditions.
+Endpoints overlap proved regions.
+The full-family determination remains inconclusive.
+The audit also accepts $L\ge2+2/(c+s)$. This count needs only the six fixed axis squares
+and four independently positioned squares with one common orientation; their mutual
+block contact equations and slide bounds are unnecessary.
+Its wall and common-angle restrictions still prevent a global-bound inference.
+
+The source branch at `41afa5ec`, read at 13:13 UTC, records independent acceptance of
+exp128: the complete current Trump D4 support has optimum mass exactly eleven.
+Seven positive-incidence rows prove the ceiling and an independently reconstructed
+packing average attains it.
+This refutes H099 only on that fixed support.
+[PR109](https://github.com/jlevy/squares/pull/109) owns the result and subsequent
+BC265/H116 changed-resource comparison.
+The later source record at `65cfe6c5`, read at 15:38 UTC, closes that comparison and
+selects future BC264/H114 feature and kernel pricing; its proposed avoiding-pose
+fallback remains conditional.
+Its H124 collision-augmented exp127 remains unresolved with `no_chain` and no
+independent target reader.
+Neither source task is repeated here.
+
+## Final Allocation and Ranked Portfolio
+
+**The overnight close selected BC282’s residual-skeleton design.** The final W5
+assessment compared three disjoint read-only reviews with the accepted mathematics.
+It favors a small analytical admission before paying for a family adapter.
+This is a judgment about readiness and useful discrimination, not a measured success
+probability. The eight-hour run does not execute this successor.
+
+Delete only square10 and its conditions from the complete audited remainder to define a
+necessary ten-square skeleton with 40 containment rows and 45 full pair clauses.
+Every original target projects into it; the converse need not hold.
+Keep the original centers, variable side, fixed features, both signs and closed
+overlaps. The accepted new count, full-chart cap bound, and cap/SAT conditions on
+$c,s\ge1/4$ supply the new premises.
+Closed siblings outside that latter region remain mandatory.
+The exact controls at $t=1/5$ and $2/3$ show why the old final positive-gap bounds do
+not transfer from angle and side ranges alone.
+
+Price **20 minutes for design and 10 minutes for independent admission**, including
+writing and checks.
+Require a complete table of necessary SAT alternatives, their removal
+implications, domains and boundary changes.
+It must name a specific additional geometric implication; restating the old question or
+selecting a favorable interval fails admission.
+After that new premise is independently admitted, a separately frozen 30-minute author,
+25-minute adversary and 20-minute fresh audit would cost 105 worker-minutes in total
+including preparation, with an 80-minute sequential path.
+Those later allocations were proposed caps.
+Session098 independently refused the target; they remain unspent.
+
+A complete skeleton contradiction would finish the source-family exclusion.
+An exact feasible ten-square skeleton, checked against all 40/45 conditions, would
+instead show that square10 must enter the argument at that pose.
+It would refute the stronger proof strategy, not H120, and would give no packing upper
+bound. An actual eleven-square witness still needs all 44/55 conditions.
+An incomplete table remains a readiness gap.
+
+| Rank | Avenue and ownership | Next useful evidence and reconsideration condition |
+| --- | --- | --- |
+| Selected at the overnight close | X018 / BC282 / H120, `think-s6e7` | Complete residual-skeleton admission from the new exact premises. Refuse an unchanged retry or incomplete case table. |
+| Parallel, separately owned | Source X016 and X017 continuation / PR109 | Consume its accepted support optimum and completed BC265/H116 design; preserve the selected BC264/H114 pricing, H124 remainder and ownership. |
+| Next boundary preparation candidate | X018 / H118 | A 20-minute generic design and 15-minute independent audit of exact elimination of one residual angle while retaining walls and all ten actual neighbors. Require a finite event rule, all coefficient/root degeneracies, explicit case counts and a valid simultaneous-angle strictness control. No such rule or control is admitted yet. |
+| Deferred implementation | X017 / BC261, sole interface owner | Add independently enclosed retained-feature rows and a complete checked family cover only when a named consumer needs them. Estimated allocation through a first target audit is 220–250 worker-minutes; current small controls do not measure that cost. |
+| Preserved broad consumer | X017 / H111–112 | Complete anchor or contact-independent common-angle domains after their own controls. Do not duplicate them through the local release lane. |
+| Conditional only | X018 / H119 | A diagnosed common-anchor correlation loss with a sharp static comparator. No such diagnosis was obtained in this run. |
+| Deferred structural question | X018 / H121 | A concrete global representative or finite angle-elimination premise. The present wall-pattern exclusions do not supply one. |
+
+The boundary route has greater potential relevance to a necessary parent cover, but its
+current information does not justify another capacity attempt.
+Exact elimination would have to preserve one square’s same angle against all its
+neighbors; separate pairwise angle choices lose that information.
+Merely writing an existential constraint or invoking a general elimination engine
+supplies no new method.
+Its remaining continuous parameters and case growth must be priced before a target.
+
+The adapter alternative has three missing obligations: source-family inclusion,
+independent feature-error reconstruction and complete SAT/angle coverage.
+Retaining absolute centers can reuse the accepted physical row errors, but feature
+equations need their own errors.
+A complete known-middle-family calibration must precede any new remainder target.
+One successful selected leaf is insufficient.
+No second exporter, generic proof framework or numerical campaign is selected here.
+
+BC282 was assigned after a fresh local/source inventory at 13:24:29 UTC found no such
+commitment. X018 retains H118–121 and BC269–282; source H122–124, exp121–128 and
+sessions091/093/094/095 stay separate.
+This run uses session092 and no new H or experiment identifier.
+The next task starts from the owning agenda and bead; it does not restart BC281 or
+receive another eight hours from this handoff.
 
 ## The Comparison That Earns a Larger Run
 
@@ -219,18 +370,24 @@ Repeated returns to two angles are not evidence for H-121.
 | Six-plus-five and two arbitrary angles | Existing H-112/113, BC-263/266 | X-017 retains full-family ownership |
 | Support, physical KKT and alternative resources | Existing BC-259/267, H-114–116 | Consume accepted evidence; do not recreate their reviews or targets |
 
-The new allocation is **X-018, Agenda 028, H-118–121, BC-269–275**, owned by epic
+The planning allocation is **X-018, Agenda 028, H-118–121, BC-269–275**, owned by epic
 `think-pxv5`. The idea-board entries continue at 112–115. X-017 retains H-111–117 and
 BC-258–268; every PR105 allocation remains locked.
-No experiment or session identifier is allocated here.
-The live source continuation has already consumed session-091; future allocation must
-inspect live work again, rather than rely on an older next-ID pointer.
+Session092 added the next sequential BC276 for the negative-slide sibling under existing
+H120, then BC277 for boundary-band domain admission and BC278 for its conditional
+analytical determination under H118. These allocate no new hypothesis or experiment ID.
+Fresh local and source agenda inventory preceded each allocation; BC278 requires
+independent BC277 admission and a committed protocol with passing records before target
+work. Future allocation must inspect live work again, rather than rely on an older
+next-ID pointer.
 
-Live inspection found the task **Squares plan X-016** executing its source continuation.
-Agenda 027 was still recorded as prepared and paused.
-Keep its assignments stable so it can be selected independently; do not describe an
-unlaunched program as an active worker.
-Agenda 028 is likewise prepared, not launched.
+At planning, live inspection found the task **Squares plan X-016** executing its source
+continuation while Agenda 027’s broad pilots remained unlaunched.
+Session092 now executes Agenda 028 and the shared BC260/261 direct work, following the
+owner’s authorization and merged PR107. The broader Agenda 027 assignments remain
+available independently.
+Source sessions091 and093 and H122–124 are occupied as of the first checkpoint’s live
+inventory; our session092 and published H118–121 remain disjoint.
 The source review’s preference to fold everything into Agenda 027 is superseded by this
 ownership decision, while its mathematical derivations remain the source record.
 
@@ -256,6 +413,54 @@ An instrument-only block is enabling work; call it that and reprice the next
 mathematical decision.
 [Agenda 028](../agendas/agenda-028-hybrid-strength-and-angular-release.md) sets the
 opening sequence and the conditions for allocating a longer run.
+
+## BC282 Checkpoint and Current Allocation
+
+The
+[design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md)
+give an exact reduction of the full remaining ten-square domain.
+Ten closed chambers account for changes in the block’s extremal centers.
+For each fixed structural tuple, containment is one closed translation rectangle; each
+of the 24 axis/block pairs forbids an explicit open interval at a fixed translation
+height. A skeleton exists exactly when an allowed translation lies outside every
+forbidden interval. All 40 containment rows and 45 pair clauses remain accounted for,
+including touching, empty rectangles, singleton fibers and tied endpoints.
+
+This is accepted analytical structure, without a numerical run or machine proof replay.
+It establishes neither coverage of a target fiber nor a feasible skeleton.
+The proposed chain using at most six distinct axis owners is sufficient but unproved; a
+complete 24-interval chain may repeat source labels.
+Missing uniform templates and bounded endpoint changes prevent admission of the proposed
+75-worker-minute target.
+
+At BC282’s historical checkpoint, two further read-only comparisons agreed with the
+coordinator’s allocation.
+The later BC283 review above records the kernel owner’s subsequent progress; the old
+pricing slice must not be restarted:
+
+| Avenue | Current disposition and exact re-entry condition |
+| --- | --- |
+| Existing BC264 / H114, separately owned | Next portfolio priority: at most 30 minutes of feature and kernel-contract pricing. First accept the kernel-specific BC260 implications, fix features, exact PSD criteria and the full diagonal/pair verification price. Preparation does not authorize a target. |
+| H120 fixed-parameter skeleton witness | Parked in `think-k54y`. A justified tuple-selection rule, complete open-fiber discriminator, independent binding to the skeleton’s features and a credible verification price are missing. An exact ten-square witness would show that square10 must enter the argument. |
+| H120 uniform fiber cover | Parked. Require explicit uniform templates and bounded facet transitions; finiteness or failure of a six-source chain supplies neither coverage nor feasibility. |
+| H118 residual-angle elimination | Conditional alternative with broader parent-cover relevance. Its former 20+15-minute quote prices preparation only. Re-entry needs a finite rule preserving the same residual angle against walls and all ten neighbors, degeneracy coverage, a valid joint-angle control and a full target/audit price. |
+
+The central fence, six-core certificates and fixed-insertion obstruction do not supply
+H118’s missing event rule or resolve M7. Source exp127’s unverified `no_chain` result
+also supplies no transferable negative or geometric gap.
+The existing closed polygon coverer counts tangencies and cannot certify these open
+forbidden intervals unchanged.
+
+Allocate zero further local target minutes at this checkpoint.
+This is a readiness and opportunity-cost decision, not evidence that either mathematical
+route is impossible.
+Preserve the accepted reductions and the unchanged global n11 bracket.
+BC282 and session098 were the only new executed allocations at that checkpoint; no
+BC283, new hypothesis or experiment was then reserved.
+The later user-requested BC283 planning block changes no scientific allocation from that
+session. The continuation remains on PR110.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 111
+count: 113
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 65
-  sessions_unmeasured: 46
+  sessions_measured: 68
+  sessions_unmeasured: 45
   attributed:
     rollups: 123
     turns: 31555
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3920
     wall_hours: 230.77
 codex_receipts:
-  attributed: 30
+  attributed: 33
   unattributed: 0
-  measured: 30
+  measured: 33
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1441,6 +1441,26 @@ sessions:
     active_union_hours: 1.93
     wall_hours: 1.93
     snapshot_incomplete: true
+- id: session-092
+  title: "Eight-hour hybrid and release investigation"
+  status: stopped
+  primary_bead: think-0yfe
+  phases: 20
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-092.yaml
+    model_responses: 1723
+    agent_hours: 19.06
+    active_union_hours: 7.77
+    wall_hours: 9.72
+    snapshot_incomplete: true
 - id: session-093
   title: "Full-square compatibility and distinct density assessment"
   status: completed
@@ -1540,6 +1560,26 @@ sessions:
     agent_hours: 7.51
     active_union_hours: 3.69
     wall_hours: 4.3
+    snapshot_incomplete: true
+- id: session-098
+  title: "Residual ten-square skeleton admission"
+  status: stopped
+  primary_bead: think-oli1
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-098.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-098.yaml
+    model_responses: 590
+    agent_hours: 4.33
+    active_union_hours: 3.1
+    wall_hours: 3.15
     snapshot_incomplete: true
 - id: session-099
   title: "Atlas expansion to n = 324 and the poster composite"
@@ -1768,8 +1808,18 @@ sessions:
   status: in_progress
   primary_bead: think-8m28
   phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-113.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-113.yaml
+    model_responses: 320
+    agent_hours: 2.37
+    active_union_hours: 1.23
+    wall_hours: 1.23
+    snapshot_incomplete: true

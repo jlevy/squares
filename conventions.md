@@ -100,9 +100,13 @@ integrated PR so downstream agents can work around them.
 A next-ID pointer is not a reservation or permission to launch research: budgets, write
 scopes and experiment acceptance rules still require their usual prospective records.
 Do not reserve speculative blocks or add a second allocation ledger.
-Current research assignments are in
+The generated [agenda map](packing/campaign/agenda-map.md) lists current commitments and
+their owning agendas.
+The source program also records known parallel assignments in
 [Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#parallel-id-allocation).
-Defect IDs remain branch-provisional; do not reserve future defect IDs.
+Consult the live parallel PRs before assigning the next ID; a local generated view can
+lag another branch. Defect IDs remain branch-provisional; do not reserve future defect
+IDs.
 
 **Reserved ids.** The idea board’s machine-checked `reserved-ids` comments name
 particular upstream claims awaiting codification, not a worker’s future namespace.

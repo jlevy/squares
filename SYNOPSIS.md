@@ -142,7 +142,7 @@ hypotheses, one open hypothesis, twenty-five open questions, and forty-five bloc
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
-Two hypotheses are running, two are waiting on review, and eight are unresolved.
+Three hypotheses are running, one is waiting on review, and eight are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -217,6 +217,50 @@ case or experiment separately.
 | [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | research synthesis | supporting | maintained | — |
 | [Stromquist’s `n = 26` Packing: Directions and a Restricted-Family Obstruction](docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md) | dated review record | record | retained | — |
+| [Research Strategy and Upstream Reconciliation, September 7](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md) | dated review record | record | retained | — |
+| [BC-282: Residual Skeleton and a Proposed Translation Fence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md) | research synthesis | record | retained | — |
+| [BC-282: Independent Skeleton-Design Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md) | dated review record | record | retained | — |
+| [BC-282: Independent Residual-Domain Inventory](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md) | dated review record | record | retained | — |
+| [BC-282: Inherited Premise Inventory](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md) | dated review record | record | retained | — |
+| [BC-281: Independent Audit of the Partial Full-Angle Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md) | dated review record | record | retained | — |
+| [BC-281: Author’s Partial Full-Angle Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md) | research synthesis | record | retained | — |
+| [BC-281: Independent Full-Angle Adversarial Analysis](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md) | research synthesis | record | retained | — |
+| [BC-281: Independent Native Protocol and Control Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md) | dated review record | record | retained | — |
+| [BC-279: Independent Audit of the Two Six-Core Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md) | dated review record | record | retained | — |
+| [BC-280: Independent Admission of the Full-Angle Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md) | dated review record | record | retained | — |
+| [BC-281: Complete Physical-Angle Release Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md) | implementation plan | record | retained | — |
+| [BC-279: Author Result and Exact Six-Core Control](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md) | research synthesis | record | retained | — |
+| [BC-279 Adversary: Six Exact Wall Cores; the Seven-Core Question Remains Open](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md) | research synthesis | record | retained | — |
+| [BC-280: Full-Angle Signed-Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md) | implementation plan | record | retained | — |
+| [BC-278: Boundary-Band Author Result](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md) | research synthesis | record | retained | — |
+| [Midpoint Allocation: Wall Information Before Further Angle Expansion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md) | implementation plan | record | retained | — |
+| [BC-279: Maximal Wall-Core Protocol](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md) | implementation plan | record | retained | — |
+| [BC-279: Independent Mathematical Admission of the Wall Core](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md) | dated review record | record | retained | — |
+| [BC-279: Independent Wall-Core Predicate and Control Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md) | dated review record | record | retained | — |
+| [BC-278: An Exact Obstruction to the Octagon Capacity Method](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md) | research synthesis | record | retained | — |
+| [BC-278: Independent Audit of the Boundary-Band Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md) | dated review record | record | retained | — |
+| [BC-277: Independent Boundary-Band Admission Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md) | dated review record | record | retained | — |
+| [BC-278: Prospective Boundary-Band Extension Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md) | implementation plan | record | retained | — |
+| [BC-277: A Closed Boundary-Band Compatibility Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md) | research synthesis | record | retained | — |
+| [BC-271: Comparator Design and the Next Scope Decision](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md) | implementation plan | record | retained | — |
+| [BC-276: Independent Acceptance of the Negative-Slide Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md) | dated review record | record | retained | — |
+| [BC-270: A Parent Compatibility Restriction From the Other Seven Squares](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md) | research synthesis | record | retained | — |
+| [BC-270: Independent Review of the Parent Compatibility Fence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md) | dated review record | record | retained | — |
+| [BC-276: Negative-Slide Author’s Analytical Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md) | research synthesis | record | retained | — |
+| [BC-276: Independent Negative-Slide Adversary](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md) | research synthesis | record | retained | — |
+| [BC-276: Negative-Slide Domain Preflight](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md) | dated review record | record | retained | — |
+| [BC-275: First Checkpoint Allocation](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md) | implementation plan | record | retained | — |
+| [BC-276: Prospective Negative-Slide Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md) | implementation plan | record | retained | — |
+| [BC-273: Analytical Attempt on the Frozen Middle-Angle Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md) | research synthesis | record | retained | — |
+| [BC-273 — Independent Analytical Adversary](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md) | research synthesis | record | retained | — |
+| [BC-273: Independent Acceptance of the Analytical Release Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md) | dated review record | record | retained | — |
+| [BC-273: Independent Cap and Scope Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md) | dated review record | record | retained | — |
+| [BC-273: Prospective Analytical Release Attempt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md) | implementation plan | record | retained | — |
+| [BC-261: Independent Review of the Uniform Leaf Producer](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md) | dated review record | record | retained | — |
+| [BC-273: Independent Review of the Segment 9–10 Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md) | dated review record | record | retained | — |
+| [BC-270 — Capacity Comparison Design and Exact Domain Obstruction](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md) | research synthesis | record | retained | — |
+| [BC-273: A Closed Domain for Releasing Segment 9–10](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md) | research synthesis | record | retained | — |
+| [BC-260 Direct Hybrid Contracts](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md) | dated review record | record | retained | — |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
 | [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
 | [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
@@ -229,6 +273,8 @@ case or experiment separately.
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
 | [Reuse Float Midpoint-to-Cell Lookup](packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md) | research synthesis | record | retained | — |
 | [Reuse Bridge Row Inventory](packing/benchmarks/validation-efficiency/experiments/VE-002-bridge.md) | research synthesis | record | retained | — |
+| [Start Exact Verification Earlier](packing/benchmarks/validation-efficiency/experiments/VE-003-checks-start-order.md) | research synthesis | record | retained | — |
+| [Start Exact Verification Earlier: Corrected Setup](packing/benchmarks/validation-efficiency/experiments/VE-004-checks-start-order.md) | research synthesis | record | retained | — |
 | [Validation Efficiency Campaign](packing/benchmarks/validation-efficiency/README.md) | component scope and use | supporting | maintained | — |
 | [Validation Efficiency Results](packing/benchmarks/validation-efficiency/report.md) | generated status view | generated | generated | — |
 | [Gate Cost at the Widened Corpus](packing/benchmarks/gate-cost-at-324/README.md) | research synthesis | record | retained | — |
@@ -442,6 +488,8 @@ case or experiment separately.
 | [Generic Owner-Footprint Cover: Sprint Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-footprint-contract.md) | research synthesis | record | retained | — |
 | [Owner-Pose Refinement Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-pose-refinement-contract.md) | research synthesis | record | retained | — |
 | [Fixed-Four-Corner Cover Transfer Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/fixed-cover-transfer-review.md) | research synthesis | record | retained | — |
+| [Point-Extension Lemma](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/point-extension-lemma.md) | research synthesis | record | retained | — |
+| [Multiple Owner-Footprint Domain Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/multiple-footprint-domain-contract.md) | research synthesis | record | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
@@ -592,8 +640,9 @@ controller, not permission to blur contracts.
 [Session 111](packing/campaign/agent-sessions/session-111-font-startup-stability.md)
 records the prepared geometry, parameter-first hydration, reload restoration, and the
 local browser and PDF evidence for [PR 135](https://github.com/jlevy/squares/pull/135).
-Current-main integration and affected validation remain release work under `think-qcmi`;
-the research priorities below are unchanged.
+PR 135 subsequently landed on `main` at `171bba33`; its post-merge CI, Pages deployment,
+live publication checks, and delayed-font smoke test passed, closing the release work
+under `think-qcmi`. The research priorities below are unchanged.
 
 **Parallel structural lanes at `n = 11`, first wave terminal.**
 [X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
@@ -711,6 +760,23 @@ continuation PR. The
 records the corrections and the funded continuation.
 [Session 110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md)
 records the certified correction checkpoint and the handoff-review usage interval.
+
+**Agenda 028’s restricted-family results.**
+[Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) and
+[session 098](packing/campaign/agent-sessions/session-098-residual-skeleton.md) retain
+the independently reviewed work published on
+[PR 110](https://github.com/jlevy/squares/pull/110). The accepted results include the
+guarded central-parent exclusion, the signed short-slide exclusions, partial full-angle
+exclusions, exact counterexamples to the proposed disk and octagon capacity-six
+shortcuts, and the ten-square residual skeleton’s exact translation-fiber reduction.
+They apply only under their declared wall, contact, angle, or skeleton conditions and do
+not change the global `n = 11` bracket.
+The matched H-118 coupled-LP comparison and H-120 residual-family determination remain
+open, and Agenda 028 stays paused.
+Its dated
+[strategy review](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
+records the evidence available before Agenda 030; the current selection above governs
+new work.
 
 **Agenda 030’s selection, made.**
 [Session-107](packing/campaign/agent-sessions/session-107-first-wave-selection.md)
@@ -3217,7 +3283,7 @@ round that names the hypothesis, control roles included.
 | [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
 | [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | blocked | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 1 | Unspent |
 | [H-136](packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | confirmed | On the declared 19-by-19 site grid and nine retained directions at side 96/25, the converged numerical covering objective for cores avoiding four fixed flush corner unit squares is more than 4.001 below the matched unrestricted objective | 2 | 5.60s wall |
-| [H-137](packing/campaign/hypotheses/H-137-single-owner-dual-salvage.md) | needs review | At least one of sixteen endpoint-footprint classes retains depth-one mass at least ten | 1 | 53.38s wall |
+| [H-137](packing/campaign/hypotheses/H-137-single-owner-dual-salvage.md) | running | At least one of sixteen endpoint-footprint classes retains depth-one mass at least ten | 2 | 53.38s wall |
 | [H-138](packing/campaign/hypotheses/H-138-four-owner-dual-salvage.md) | needs review | Every four-corner endpoint combination retains depth-one mass at least seven | 1 | shared exp137 |
 | [H-139](packing/campaign/hypotheses/H-139-owner-footprint-matched-gain.md) | running | Enlarging an owned point to its endpoint footprint reduces the matched numerical cover mass by more than0.001 | 1 | Unspent |
 | [H-140](packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md) | running | Unchanged rationalized fixed-corner residual weights cover the complete181-direction net | 1 | Unspent |
@@ -3454,22 +3520,25 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
 | `codex-task-tree-session-091.yaml` | session-091 | 553 | 5.05 h | 1.93 h | 1.93 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 1,723 | 19.06 h | 7.77 h | 9.72 h | yes |
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
 | `codex-task-tree-session-097.yaml` | session-097 | 973 | 7.51 h | 3.69 h | 4.3 h | yes |
+| `codex-task-tree-session-098.yaml` | session-098 | 590 | 4.33 h | 3.1 h | 3.15 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
 | `codex-task-tree-session-110.yaml` | session-110 | 1,169 | 7.88 h | 2.96 h | 2.96 h | yes |
 | `codex-task-tree-session-111.yaml` | session-111 | 2,798 | 20.24 h | 6.22 h | 6.23 h | yes |
 | `codex-task-tree-session-112.yaml` | session-112 | 843 | 7.52 h | 3.78 h | 3.91 h | yes |
+| `codex-task-tree-session-113.yaml` | session-113 | 320 | 2.37 h | 1.23 h | 1.23 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 65 |
-| unmeasured | 46 |
-| **total** | **111** |
+| measured | 68 |
+| unmeasured | 45 |
+| **total** | **113** |
 
 <!-- END GENERATED: session-close-report -->
 

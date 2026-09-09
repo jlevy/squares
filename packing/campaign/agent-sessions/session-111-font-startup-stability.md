@@ -221,7 +221,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
   stop_reason: Source preparation and local validation are complete through the 22:02:43 UTC cost cutoff. Session111 stops at this checkpoint; hosted checks passed at dab2a381, while later main integration and its affected validation remain ongoing in PR 135. Retained hosted results, the authorized merge and deployed verification remain release closeout work. No research priority is changed.
-  next_action: Resume think-mq0d for BC-264's existing 30-minute H114 feature and kernel-contract pricing slice, subject to the current allocation and admission requirements. This publication repair does not reprioritize research or authorize a target run.
+  next_action: 'Historical at this checkpoint: resume think-mq0d for BC-264 subject to its allocation and admission requirements. Agenda030 subsequently superseded that selection with think-qfog; the current SYNOPSIS governs new work. This publication repair does not reprioritize research or authorize a target run.'
 ---
 # Prepared Math Startup and Publication Checkpoint
 
@@ -291,9 +291,14 @@ Descendant costs are already included; later release work must not be silently
 attributed to this receipt.
 Its generated cost block leads the pull request.
 
-The selected research continuation remains `think-mq0d` under BC-264. The synopsis
-retains its single canonical selected-entry marker and existing evidence.
-This repair creates no mathematical result and does not reprioritize that selection.
+At this checkpoint, the selected research continuation was `think-mq0d` under BC-264.
+This repair created no mathematical result and did not reprioritize that selection.
+
+**Post-integration note, September 8.** PR 135 subsequently merged as `171bba33`; its
+post-merge CI, Pages deployment, live publication checks, and delayed-font smoke test
+passed. Agenda 030’s later `think-qfog` selection supersedes the dated BC-264 handoff
+above. The current SYNOPSIS governs new work; this note changes neither the session’s
+historical evidence nor its cost boundary.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

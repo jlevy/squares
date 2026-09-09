@@ -69,7 +69,8 @@ session:
     status: completed
     outcome: Completed exact repair, full-net reader and independent audit instrument with controls; target
       audit remains separately admitted.
-    evidence: []
+    evidence:
+    - packing/devtools/run_residual_cover_pilot.py
     files:
     - packing/devtools/run_residual_cover_pilot.py
     - packing/tests/test_run_residual_cover_pilot.py
@@ -111,7 +112,8 @@ session:
     status: completed
     outcome: Completed generic runner and prospective exp140; pushed e3340cac and updated PR137. Four-owner
       geometry work continued in TEMP with exact controls.
-    evidence: []
+    evidence:
+    - packing/devtools/owner_footprints.py
     files: &id001
     - packing/devtools/owner_footprints.py
     - packing/tests/test_owner_footprints.py
@@ -170,7 +172,7 @@ session:
     - Shared campaign records and Git mutation
   - task: Record actual exp139/140 outcomes and diagnose incomplete exp140 without a retry
     operator: GPT-5.6 Sol, extra high; residual_separator_repair
-    recording: retrospective
+    recording: contemporaneous
     phase: 1
     status: in_progress
     outcome: null
@@ -199,7 +201,7 @@ session:
     - Shared campaign records and Git mutation
   - task: Integrate controlled four-footprint vertical decomposition and runner extension
     operator: GPT-5.6 Sol, extra high; owner_footprint_engine
-    recording: retrospective
+    recording: contemporaneous
     phase: 1
     status: in_progress
     outcome: null
@@ -228,7 +230,7 @@ session:
     - Shared campaign records and Git mutation
   - task: Review exact transfer, point-extension and four-obstacle contracts
     operator: GPT-6 Astra, extra high; math_progress_audit
-    recording: retrospective
+    recording: contemporaneous
     phase: 1
     status: in_progress
     outcome: null

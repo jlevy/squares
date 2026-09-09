@@ -19,21 +19,31 @@ hypothesis:
     Explicit variable-side release-domain equations and feature bounds, complete
     geometric alternatives, an exact or uniformly enclosed certificate and an
     independent reader; a separately controlled adversarial proposer.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     Eleven squares; retain six specified positive-length segments and nine flush
     wall incidences from the PR108 graph; preserve the release equality seam and
     coincident or axis angle cases; no minimizing-stationarity assumption
   instance: {axis: n, point: 11}
-  priority: 1
+  priority: 3
   cost_estimate: first a 30-minute closed-domain design; target and replay priced from controls
   prereqs: [frozen closed release domain and sibling scopes, accepted geometric implication and controls]
   replication: false
   registered: '2026-09-07'
   notes: >-
-    The direct-exclusion specialization of H-TBD-RELEASE, owned by BC273.
-    Exact box endpoints and positive segment-length bounds remain to be selected
-    before a prospective target determination. No finite-motion theorem is claimed.
+    The direct-exclusion specialization of H-TBD-RELEASE, owned by BC273 and BC276.
+    Session092's independently audited analytical contradiction excludes the
+    entire frozen middle-angle child and, because it uses only the ten-square
+    skeleton, the already-defined T+ for every square10 orientation. Readiness
+    refers to that analytical proof and audit, not an H120 uniform-LP adapter.
+    BC276 independently excludes the full negative short-slide sibling N;
+    together with the diagonal sign lemma this closes the signed short-slide
+    parent S. Other block angles, longer slides and changed wall/contact
+    patterns remain open. BC280 independently admits the complete physical block
+    chart t in[0,1]; BC281 separately prices its whole-family determination.
+    BC281 later retained accepted partial exclusions; session098 completes
+    BC282 with an independently accepted exact open-fiber reduction and a
+    target-readiness refusal. No finite-motion theorem or global bound is claimed.
 ---
 # H-120 — Rank-Nine Release Exclusion
 
@@ -61,6 +71,119 @@ This is narrower than all six-axis/four-plus-one configurations and cannot estab
 global few-angle representative.
 A finite-motion or original-minimizer-only stationary argument needs its own prospective
 premises and acceptance rule.
+
+Session092’s
+[release design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md)
+gives explicit ten-parameter equations, positive segment margins and the complete
+geometric definition of the selected pilot.
+The retained top-wall center alone puts the target outside the named local ball, as
+independently checked in the
+[direct-contract review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md).
+The
+[independent source-corner review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md)
+accepts the complete model, parent-control binding and strict cavity-cover equivalence.
+The rank-nine statement concerns the retained equality graph; allowed recontact can
+raise the full graph rank.
+
+The
+[analytical adversary’s argument](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md)
+now excludes the ten-square skeleton itself.
+The
+[independent whole-argument review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md)
+accepts every used separating alternative, exact range and legal-contact boundary; a
+[separate cap review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md)
+checks the delicate open-interior and closed-base distinction.
+The decisive inequalities require both $B+b\ge J$ and $B+b\le M$, with $J-M\ge2/87>0$
+over the declared domain.
+
+This answers the selected question affirmatively for the entire closed $T_+$:
+$381/100\le L\le96/25$, $1/3\le t\le2/5$, $0\le a,b\le1/4$, and the declared center,
+wall and contact-side conditions, for every $v\in[0,1]$. It includes the original
+$T_{\rm mid}$, both square10 angle siblings, both axis lifts, equal angles, zero-slide
+seams and allowed recontacts.
+No square10 condition is used in the contradiction, so the all-angle conclusion follows
+by projection rather than by an added target attempt.
+
+This is an independently audited analytical result, without a machine proof replay.
+It closes new continuous source-feature geometry beyond the named local ball, while
+leaving the global $n=11$ bracket unchanged.
+Different block angles, larger slides, degenerating segments, and changed contact-side
+or wall assignments remain explicit open scopes.
+The independent author’s partial compartment results are retained in its
+[separate report](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md).
+
+BC276’s
+[independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md)
+accepts both separately produced proofs of the entire negative sibling $N$, which
+changes only the slide bounds to $-1/4\le a,b\le0$. The new left-wall constraint and
+complete SAT reductions force $L\ge4900/1261>96/25$, with exact contradiction margin
+$1444/31525$. This is a necessary inequality inside the declared parameter box, not a
+new unrestricted lower bound.
+
+The diagonal nonoverlap conditions give $ab\ge0$ on $[-1/4,1/4]^2$. The complete signed
+short-slide parent is therefore $S=T_+\cup N$, with both children closed and all
+one-zero slide boundaries included.
+Both children are now excluded.
+The common block-angle interval, variable side, prescribed wall/contact pattern and
+every square10 orientation remain exactly as declared.
+These are analytical proofs with independent audits; no machine target, finite-motion
+theorem or global representative claim is added.
+
+BC280’s
+[full-angle domain](../series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md)
+retain all physical common angles through $t\in[0,1]$, both slide signs, variable side,
+all source features, 44 actual containment rows and 55 complete SAT clauses.
+At domain admission, two of the eight closed angle/sign children inherited the accepted
+middle-angle theorem and six remained unresolved.
+Interior quarter-turn lifts and label-specific recontact children retain their explicit
+conversion obligations.
+BC281’s
+[prospective protocol](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md)
+passed independent admission and all 31 immutable record checks before target work.
+Both the
+[author](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md)
+and
+[adversary](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md)
+have frozen inconclusive whole-domain reports within their original limits.
+The
+[fresh independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md)
+accepts both-sign exclusions on $[0,1/24]$, $[2/5,1/2]$ and $[23/25,1]$, together with
+the necessary inequality $L\ge2+2/(c+s)$ and the stated broader cap and SAT conditions.
+The counting inequality also applies to four independently positioned common-angle
+squares beside the six fixed axis squares, without the four block contact equations,
+contact sides or slide bounds.
+The fixed wall pattern and common angle remain required.
+
+Together with the accepted middle theorem, the complete closed remainder is
+$t\in[1/24,1/3]\cup[1/2,23/25]$, with both slide signs and all other original
+conditions. Endpoint overlap preserves every seam.
+BC281 stops inconclusively on its whole-domain criterion; no actual eleven-square
+witness or global-bound improvement is supplied.
+BC282’s
+[design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md)
+now give an exact joint-translation reduction: ten closed envelope chambers and 24 open
+collision intervals account for all 40 containment rows and 45 pair clauses.
+For fixed structural parameters, a skeleton exists exactly when one allowed translation
+lies outside every forbidden interval on its height fiber.
+Empty and singleton containment fibers, interval ties and legal touching retain their
+exact meanings.
+
+No target fiber has been shown covered or feasible.
+The proposed six-source covering chain is sufficient but unproved; general 24-interval
+covers may repeat source labels.
+The independent reviewer refuses the conditional target allocation because uniform
+templates, bounded facet transitions and a priced complete witness discriminator are
+missing. An exact ten-square witness would refute skeleton emptiness, not H120’s
+eleven-square exclusion.
+Session098 parks local target work and retains the re-entry prerequisites in
+`think-k54y`: a justified structural-tuple selection rule or bounded uniform templates,
+independent skeleton binding and a credible price through verification.
+Existing BC264 kernel pricing remains separately owned.
+No unchanged BC281 attempt or automatic target follows.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
