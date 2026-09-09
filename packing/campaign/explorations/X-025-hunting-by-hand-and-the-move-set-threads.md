@@ -675,9 +675,38 @@ A mode called Backtest invites the best number on the screen to be read as the r
 The headline that mode reports should be the held-out score, and a winner whose held-out
 score collapses is the most useful thing it could show.
 
-*Note on where snapping belongs.* Ending a run on the retained packing is production
-machinery, not evidence: it is how a sweep animation across all 324 records lands each
-frame on what is actually known.
+**C0c. Enumerate the contact structures, then let the physics triage which are worth
+exact treatment.** *Claim.* Running the settle under each enumerated contact structure
+as its attraction mask separates the structures that realise from those that do not,
+cheaply enough to order the exact realizer’s queue, and the ordering it produces is
+better than enumeration order.
+*Evidence already in hand.* The enumeration exists and is complete where it exists:
+`packing/atlas/enumerated/` holds 11,013 orbits over all 21 connected unlabeled
+five-vertex topologies, and `src/sqpack/contact_realization.py` already turns a scaffold
+into a realization with exact arithmetic.
+What is missing is a cheap filter in front of the exact step, which is what the
+workbench’s contact relationship would be.
+*Instrument.* Half exists.
+The enumeration, the exact realizer and the contact-graph attraction mask are all there;
+the driver that walks the enumeration, runs a settle per structure and tabulates which
+realised is not. *Criterion.* Precision and recall against the exact realizer on the
+size-five set, where the answer is already known for every orbit, before it is pointed
+at anything larger.
+
+*The binding constraint is enumeration growth, and it is already priced.* The atlas is
+complete at size five, not at `n <= 30`; `contact-enumeration-pricing.json` records caps
+of 100,000 canonical proposals, 100,000 LP solves and 10,000,000 raw orbit images, with
+a decision rule that refuses the legacy path when its exact orbit work exceeds the
+declared budget. So “enumerate all plausible contact groupings” is a small-`n` method
+whose ceiling has been measured rather than guessed, and the honest form of this
+candidate is not “enumerate and optimise” but “use the settle to decide what the exact
+realizer looks at next”.
+The physics never certifies anything: only the exact realizer does, and a structure the
+settle likes is a candidate, not a result.
+
+*Note on where snapping belongs.
+Ending a run on the retained packing is production machinery, not evidence: it is how a
+sweep animation across all 324 records lands each frame on what is actually known.
 It says nothing about the physics, because the physics did not find the endpoint.
 Its research use is the reverse direction above, harvesting what the records’ structures
 are, rather than the forward one.
