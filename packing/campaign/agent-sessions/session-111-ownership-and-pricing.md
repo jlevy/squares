@@ -254,8 +254,7 @@ session:
     expected_output: A reviewed exact residual-domain contract, a narrow paired-cover devtool with independent
       controls or a specific blocker, an agenda disposition, and a prospective numerical protocol if the
       instrument is ready.
-    validation_command: Focused residual-domain controls under project Python 3.14, then packing-validate
-      --push on the frozen integration checkpoint.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push --since 84755809
     kill_condition: The residual center-domain representation omits a legitimate core, fills a forbidden
       hole, lacks independent controls, or requires a broad refactor beyond the narrow prototype.
     fallback: Preserve the exact mathematical formulation and implementation blocker; choose a smaller
@@ -289,8 +288,7 @@ session:
     deadline_at: '2026-09-09T03:22:46Z'
     expected_output: A published source checkpoint, one paired receipt or explicit unresolved result,
       reviewed general branch lemma, updated tutorial and separate usage on PR 137.
-    validation_command: packing-validate --push --since 84755809; six residual controls; exp-135 five-minute
-      external process bound.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push --since 84755809
     kill_condition: An arm reaches its declared limit, source binding fails, or a geometry or validation
       control fails.
     fallback: Preserve partial evidence and the precise unresolved disposition; no target tuning or retry
