@@ -209,7 +209,9 @@ body.capture #kind-tag { display: none; }
 body.capture #controls { display: none; }
 #panel { display: flex; flex-direction: column; gap: 6px; }
 [hidden] { display: none !important; }
-.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.row { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+/* Revision 15: boxes in a row differ in height, and centring them made the panel read as
+   scattered rather than as rows. They hang from a common top instead. */
 .row label { display: inline-flex; align-items: center; gap: 5px; color: var(--label); white-space: nowrap; }
 button, select, input[type=number] {
   font: inherit; color: var(--ink); background: var(--paper); border: 1px solid #b9c0c8; border-radius: 4px;
@@ -292,7 +294,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
    holds the law and the graph. It is given a width of its own because a `select` is as wide as its
    widest *option*, and Pack offers one option fewer: without this, hiding `tween` would resize the
    control. */
-#solver-box { width: 152px; box-sizing: border-box; }
+#solver-box { width: 232px; box-sizing: border-box; }
+/* Revision 15: the note under the select was clipping mid-word in a 152px box. A fixed
+   slot keeps the controls still; it has to be wide enough to hold what it is given. */
+#solver-note { white-space: normal; }
 #style-select { width: 118px; }
 #solver-note { height: 15px; line-height: 15px; }
 /* The step animation's own group — dwell, move, settle, the motion phasing and the full beat —
@@ -301,7 +306,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
    controls would get shorter and the stage would grow — which is exactly the reflow revision 12
    forbids and step 13 measures. `visibility: hidden` leaves the footprint, takes the group off the
    hit test and out of the tab order, and moves nothing on the page. */
-#step-anim-box.is-off { visibility: hidden; }
+/* Revision 15: `visibility: hidden` kept this box's 1145px in the flow, so the row wrapped
+   around a box nobody could see and the view fell to a line of its own. It is a whole group
+   in its own row, so removing it moves nothing beside it. */
+#step-anim-box.is-off { display: none; }
 #pair-select { max-width: 480px; }
 .hint { color: var(--muted); font-size: 12.5px; }
 .seg { display: inline-flex; border: 1px solid #b9c0c8; border-radius: 4px; overflow: hidden; }
@@ -345,6 +353,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
    law, who attracts whom, and growth — and the boxes lay out in one row that wraps. */
 .groupbox { display: flex; flex-direction: column; align-self: flex-start; }
 .group-body { padding: 1px 10px 5px; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.group-body.stack { flex-direction: column; align-items: stretch; gap: 2px; }
+.group-body.stack .law-row { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--label); }
+.group-body.stack .law-row > span:first-child { width: 66px; text-align: right; }
+.group-body.stack .law-row input[type=range] { width: 118px; }
 .group-body label { display: inline-flex; align-items: center; gap: 5px; color: var(--label); white-space: nowrap; }
 .rel-body { padding: 1px 10px 5px; display: flex; flex-direction: column; gap: 2px; }
 .rel-body .law-row > span:first-child { min-width: 42px; }
@@ -447,8 +459,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         </button>
         <button id="restart" class="transport" title="Back to the beginning of what play would play: in Pack the starting arrangement with every setting kept, in Animate the first step of the range" aria-label="Restart">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <rect x="4.6" y="4.5" width="3.4" height="15" rx="1.1" />
-            <path d="M20 4.5 L20 19.5 L9.4 12 Z" />
+            <g class="glyph-play"><rect x="4.6" y="4.5" width="3.4" height="15" rx="1.1" /><path d="M20 4.5 L20 19.5 L9.4 12 Z" /></g>
+            <g class="glyph-pause"><path d="M12 5.2 a6.8 6.8 0 1 1 -6.8 6.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /><path d="M5.2 12 L5.2 6.6 L10.6 12 Z" /></g>
           </svg>
         </button>
         <span id="clock" class="readout">0.00 s &middot; 0 steps</span>
@@ -502,19 +514,19 @@ input[type=number] { width: 64px; padding: 4px 6px; }
             </div>
           </div>
         </div>
-      </div>
-      <!-- Revision 15: the law gets a line of its own; the solver and the two graphs share
-           the next, so a wide plot is not squeezed beside three narrow boxes. -->
-      <div class="row">
         <div class="subpanel groupbox" id="wall-box">
           <span class="box-title">walls</span>
-          <div class="group-body">
+          <div class="group-body stack">
             <div class="law-row"><span>rigidity</span><input type="range" id="wall-rigidity" aria-label="the overhang tolerated before the wall pushes hard"><span class="law-val" id="wall-rigidity-val"></span></div>
             <div class="law-row"><span>repulsion</span><input type="range" id="wall-repulsion" aria-label="the wall's push when a corner is outside"><span class="law-val" id="wall-repulsion-val"></span></div>
             <div class="law-row"><span>attraction</span><input type="range" id="wall-attraction" aria-label="the wall's pull on a square that is close but inside"><span class="law-val" id="wall-attraction-val"></span></div>
             <div class="law-row"><span>range</span><input type="range" id="wall-range" aria-label="how far from the wall its pull reaches"><span class="law-val" id="wall-range-val"></span></div>
           </div>
         </div>
+      </div>
+      <!-- Revision 15: the law gets a line of its own; the solver and the two graphs share
+           the next, so a wide plot is not squeezed beside three narrow boxes. -->
+      <div class="row">
         <div class="subpanel groupbox" id="solver-box">
           <span class="box-title">solver</span>
           <div class="group-body">
@@ -592,6 +604,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
           <label><input type="checkbox" id="fullbeat-toggle"> full beat for static appends</label>
         </div>
       </div>
+      </div>
+      <!-- Revision 15: the timing group is alone in its row, so removing it in Pack
+           cannot reflow anything beside it. -->
+      <div class="row">
       <div class="subpanel groupbox" id="shake-box">
         <span class="box-title">the shake</span>
         <div class="group-body">
@@ -4218,6 +4234,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // is set here, because the button carries no text of its own.
     playButton.classList.toggle('is-playing', state.playing);
     playButton.setAttribute('aria-label', state.playing ? 'Pause' : 'Play');
+    // The second button does two different things and should say which. Paused, it skips back to
+    // the start, so it draws the skip-to-start bar. Running, what it actually does is restart the
+    // run, so it draws a circling arrow. Same button, same action, honest glyph.
+    const restartButton = document.getElementById('restart');
+    restartButton.classList.toggle('is-playing', state.playing);
+    restartButton.setAttribute('aria-label', state.playing ? 'Restart the run' : 'Back to the start');
   }
   // ---------------------------------------------------------------- the chooser for n (revision 9)
   // One spine: a `from` and a `to`, both stated as the n being stepped *into*, so choosing 17 shows
@@ -4317,9 +4339,18 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         : 'outside the range (n = ' + PAIRS[state.pair].n + ')');
   }
 
+  // The last height the controls actually had. A hidden document is not laid out, so
+  // `offsetHeight` reads zero while the tab is in the background; the stage then scaled to the
+  // whole viewport and covered the controls, which came back only on a reload. Keep the last real
+  // measurement and never lay out from a hidden one.
+  let controlsHeight = 0;
   function layout() {
+    if (document.hidden) return;
     const vw = window.innerWidth, vh = window.innerHeight;
-    const ch = state.capture ? 0 : controls.offsetHeight;
+    let ch = state.capture ? 0 : controls.offsetHeight;
+    if (!state.capture) {
+      if (ch > 0) controlsHeight = ch; else ch = controlsHeight;
+    }
     const s = Math.min(vw / 1920, (vh - ch) / 1080);
     stage.style.transform = 'scale(' + s + ')';
     stageWrap.style.width = (1920 * s) + 'px';
@@ -5062,6 +5093,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     }
   });
   window.addEventListener('resize', layout);
+  // Coming back to the tab is exactly when the stale zero would have been applied.
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) layout(); });
 
   // The workbench opens on the one-step range into DEFAULT_STEP_N where the page carries that exact
   // step; the 25-pair demo build does not carry 16 -> 17, so its range clamps to the nearest step

@@ -1735,7 +1735,12 @@ def main() -> int:
         swept = geometry()
         check(swept["shown"], "the position bar is gone from Animate as well")
         check(swept["numerals"] > 3, f"Animate draws only {swept['numerals']} scale numerals")
-        for key in ("stage", "facts", "controls", "read", "svg"):
+        # Revision 15: the bar's own removal must not move the picture, which is what these read.
+        # `controls` is no longer among them: Pack drops the whole timing row as well, so its panel
+        # is deliberately shorter and the stage correspondingly larger. Comparing the two modes'
+        # control heights asserted that a mode with fewer controls must waste the space anyway,
+        # which is the reserved dead space the owner reported as a ragged layout.
+        for key in ("facts", "read", "svg"):
             check(packed[key] == swept[key],
                   f"hiding the bar moved the {key}: {packed[key]} against {swept[key]}")
         # It goes with the mode and not with the run: a Pack run playing does not bring it back, and
@@ -2118,7 +2123,11 @@ def main() -> int:
         )
         check(seat["i"] == seat["j"] + 1 and seat["sameRow"] and 0 <= seat["gap"] < 40,
               f"restart is not beside play and pause: {seat}")
-        check(seat["glyph"] and seat["name"] == "Restart",
+        # Revision 15: the owner's refinement -- the button does two things and should say which.
+        # Paused it skips back to the start; running, what it actually does is restart the run, so
+        # it swaps to a circling arrow and renames itself, exactly as play swaps to pause. The name
+        # is therefore state-dependent and the check reads the paused one.
+        check(seat["glyph"] and seat["name"] in ("Restart", "Back to the start"),
               f"restart is not drawn in the transport's own convention: {seat}")
         packed_restart = page.evaluate(
             "() => { const A = window.atlasTransitions;"
@@ -2255,6 +2264,8 @@ def main() -> int:
             "      shake: r('shake-box'), law: r('law-box'), box: [b.x, b.y, b.width, b.height],"
             "      visibility: getComputedStyle(box).visibility, display: getComputedStyle(box).display,"
             "      focusable: box.contains(document.activeElement),"
+            "      alone_in_row: Array.from(box.parentElement.children)"
+            "        .filter((e) => e.classList.contains('subpanel')).length === 1,"
             "      holds: ['t-dwell', 't-move', 't-settle', 'phase-seg', 'fullbeat-toggle']"
             "        .every((id) => box.contains(document.getElementById(id)))}; };"
             "  A.setMode('animate'); const animating = geo();"
@@ -2265,14 +2276,26 @@ def main() -> int:
               "the timing and phasing controls are not all in the step-animation group")
         check(timing_group["animating"]["visibility"] == "visible",
               "Animate hides its own timing group")
-        check(timing_group["packing"]["visibility"] == "hidden",
-              f"Pack still shows the timing group: {timing_group['packing']['visibility']}")
-        check(timing_group["packing"]["display"] != "none",
-              "the timing group is hidden by removal, which rewraps the panel and resizes the stage")
-        for key in ("stage", "controls", "facts", "svg", "shake", "law", "box"):
-            check(timing_group["packing"][key] == timing_group["animating"][key],
-                  f"hiding the timing group moved the {key}: "
-                  f"{timing_group['packing'][key]} against {timing_group['animating'][key]}")
+        check(timing_group["packing"]["visibility"] == "hidden"
+              or timing_group["packing"]["display"] == "none",
+              f"Pack still shows the timing group: {timing_group['packing']}")
+        # Revision 15: this used to require `visibility: hidden` so the group kept its width and
+        # the row could not rewrap. That reserved 1145 px of dead space in Pack and pushed the view
+        # onto a line of its own, which is the ragged layout the owner reported. The group is a
+        # whole row now, so removing it moves nothing beside it -- which is what the boxes below
+        # actually assert. The hidden box's own geometry is deliberately not among them: a box
+        # that is not drawn should not have any.
+        # What must hold is that removing the group cannot reflow anything beside it, which is
+        # guaranteed by it being the only panel in its row rather than by measuring neighbours.
+        # The panel is deliberately shorter in Pack and the stage correspondingly larger: a mode
+        # with fewer controls should give the packing more room, and pretending otherwise is what
+        # reserved the dead space in the first place. So the law, which shares no row with it,
+        # must not move; the shake, which follows it down the panel, is expected to rise.
+        check(timing_group["packing"]["alone_in_row"],
+              "the timing group shares its row, so hiding it would reflow its neighbours")
+        check(timing_group["packing"]["law"] == timing_group["animating"]["law"],
+              f"hiding the timing group moved the law: "
+              f"{timing_group['packing']['law']} against {timing_group['animating']['law']}")
         page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17);"
                       " atlasTransitions.setStyle('bodies')")
 
