@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** in_progress, **20** ready, **12** tentative, **60** blocked, **51** stopped, **139** complete.
+- **8** in_progress, **19** ready, **12** tentative, **60** blocked, **51** stopped, **139** complete.
 
 - **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -57,7 +57,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
 | agenda-031 | `BC-305` | in_progress | 1 | insight | research | Which reviewed segment and corner ownership constraints survive independent exact replay, and what global… | `think-qfog` |
-| agenda-031 | `BC-306` | ready | 1 | efficiency | research | Does full retained-state dual support expose a pointwise new-site orbit missed at that same point by the… | `think-7lp3` |
+| agenda-031 | `BC-306` | in_progress | 1 | efficiency | research | Does full retained-state dual support expose a pointwise new-site orbit missed at that same point by the… | `think-7lp3` |
 | agenda-031 | `BC-307` | tentative | 2 | correctness | research | Should H-125's finite kernel test be renewed after the two funded lanes report? | `think-98z2` |
 
 ## Blocked, and on what
@@ -179,7 +179,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
 | agenda-029 | superseded |  |  |  |  | 3 | 4 | 7 |
 | agenda-030 | completed |  |  |  |  | 7 | 7 | 14 |
-| agenda-031 | active | 1 | 1 | 1 | 1 |  |  | 4 |
+| agenda-031 | active | 2 |  | 1 | 1 |  |  | 4 |
 
 ## By program
 
@@ -338,7 +338,7 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-030 | `BC-303` | complete | Which lane results earn the next sustained block, and what is the strongest claim to freeze? |
 | agenda-030 | `BC-304` | complete | What survives independent checking, what did it change about the global problem, and what is the… |
 | agenda-031 | `BC-305` | in_progress | Which reviewed segment and corner ownership constraints survive independent exact replay, and what… |
-| agenda-031 | `BC-306` | ready | Does full retained-state dual support expose a pointwise new-site orbit missed at that same point… |
+| agenda-031 | `BC-306` | in_progress | Does full retained-state dual support expose a pointwise new-site orbit missed at that same point… |
 | agenda-031 | `BC-307` | tentative | Should H-125's finite kernel test be renewed after the two funded lanes report? |
 | agenda-031 | `BC-308` | blocked | What did the funded continuation establish, what remains unresolved, and which next entry should be… |
 

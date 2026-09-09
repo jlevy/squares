@@ -343,8 +343,9 @@ of it.
 
 For the next supervised exact-research goal, select BC-305, `think-qfog`, for the
 ownership continuation in Agenda 031. This work is now in progress on a separate branch
-stacked on PR 127, with a separate usage interval from 23:23:55 UTC. The corrected
-checkpoint is certified by its retained raw full log and structured component receipts.
+published as PR 137, now targeting main after PR 127 merged, with a separate usage
+interval from 23:23:55 UTC. The corrected checkpoint is certified by its retained raw
+full log and structured component receipts.
 Agenda 030’s first wave ran as sessions 100 to 104 and its second as sessions 107 to
 109; BC-303 replayed the strongest claims independently and funded the segment-mark
 cover toward an ownership argument as the next sustained block, with the `B = 1` depth

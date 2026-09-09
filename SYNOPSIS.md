@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives seventeen confirmed hypotheses, thirteen refuted
-hypotheses, two open hypotheses, twenty-five open questions, and forty-four blocked
+hypotheses, one open hypothesis, twenty-five open questions, and forty-four blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -432,6 +432,7 @@ case or experiment separately.
 | [Review of the Fixed-Angle Outer-Pair Screen](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-screen-contract-review.md) | research synthesis | record | retained | — |
 | [The Remaining Eight Segments Have Sharp Capacity Four](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/remaining-eight-segment-capacity-four.md) | research synthesis | record | retained | — |
 | [Shared Segments Restrict Separating Supports](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/shared-segment-support-bounds.md) | research synthesis | record | retained | — |
+| [A Robust Outer-Corner Incompatibility](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/robust-outer-corner-incompatibility.md) | research synthesis | record | retained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -642,7 +643,9 @@ The depth polisher will start from that retained control; its missing scratch st
 not a runnable handoff.
 
 **Selected next entry:** `think-qfog` is carrying BC-302 into BC-305 on
-`codex/n11-ownership-continuation`, stacked on PR 127 while that handoff remains open.
+`codex/n11-ownership-continuation` in
+[PR 137](https://github.com/jlevy/squares/pull/137). PR 127 has merged as `6aa9e72c`;
+the continuation now targets `main`.
 [Agenda 031](packing/campaign/agendas/agenda-031-ownership-and-pricing.md) and
 [session 111](packing/campaign/agent-sessions/session-111-ownership-and-pricing.md)
 retain the reviewed local results and fund one prospective full-support pricing test.
@@ -652,15 +655,18 @@ eight, necessary support and signed-angle restrictions, two local counterexample
 one fixed-pattern exclusion.
 None composes into a global exclusion at `96/25`. The integrated tools pass 60 controls;
 both counterexample readers and six deliberately broken examples replay as expected.
-H-135 remains untested pending its published instrument and prospective exp-134
-allocation. BC-304 has dispositioned every first- and second-wave cell and carries the
-unfinished complements of BC-292 and BC-299 forward.
+H-135 remains untested.
+Exp-134’s exact transport control passed with depth one and unchanged mass
+`21342289572/2055263195` in 135.91 seconds; its prospective pricing protocol is being
+published before any LP solve.
+BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
+complements of BC-292 and BC-299 forward.
 The corrected checkpoint is certified by the retained raw full log and structured
 component receipts composing all 69 steps; the earlier `ef8a2e72` full invocation
-remains failed. PRs 116 and 121 have merged; the owner selected a separate continuation
-PR stacked on PR 127, with usage tallied across the non-overlapping cutoff at
-2026-09-08T23:23:55Z. Preparation before that cutoff stays in session 110 even when its
-artifacts first appear in the continuation PR. The
+remains failed. PRs 116, 121 and 127 have merged; the separate continuation PR retains
+usage tallied across the non-overlapping cutoff at 2026-09-08T23:23:55Z. Preparation
+before that cutoff stays in session 110 even when its artifacts first appear in the
+continuation PR. The
 [handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
 records the corrections and the funded continuation.
 [Session 110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md)
@@ -3169,7 +3175,7 @@ round that names the hypothesis, control roles included.
 | [H-132](packing/campaign/hypotheses/H-132-rectangle-no-fit-at-q.md) | blocked | Eleven squares do not fit in 3.84 × 3.81; the rectangle centre domain is not built | 0 | — |
 | [H-133](packing/campaign/hypotheses/H-133-plateau-site-artefact.md) | open question | Is the exactly-eleven plateau at 191/50 a site artefact of Trump-shaped cores in site-free strips? | 0 | — |
 | [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
-| [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | open | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 0 | Unspent |
+| [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | running | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 1 | Unspent |
 
 ### Confirmed
 
@@ -3411,7 +3417,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
 | `codex-task-tree-session-110.yaml` | session-110 | 1,169 | 7.88 h | 2.96 h | 2.96 h | yes |
-| `codex-task-tree-session-111.yaml` | session-111 | 60 | 0.43 h | 0.21 h | 0.21 h | yes |
+| `codex-task-tree-session-111.yaml` | session-111 | 381 | 4.42 h | 2.16 h | 2.23 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -3433,7 +3439,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 89 rounds registered in `series-000`.
+There are 90 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1359.4 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -3564,6 +3570,7 @@ archive beside it.
 | [exp-131](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-131-h131-near-axis-counts-replay-at-q.md) | 11 | proof | H-131 | Registered replay of the near-axis and near-diagonal count classes through decide_class_program | Every count reproduces exactly: at most nine within 6.4537°, ten within 10.3875°, nine within 2.155° of 45°, ten within 2.44° of 40.19°, ten in [30.01°, 45°] | accepted |
 | [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-h134-segment-mark-cover-at-q.md) | 11 | proof | H-134 | Interval reader over pose space with every certified leaf re-decided exactly; the falsifier engine’s exact escapes for point sets | Ten segments of length 1/10 on Stromquist’s ten points at 96/25 are unavoidable at tolerance 3/500; the independent replay confirms the cover and closes the missing far-wall sliver | accepted |
 | [exp-133](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-133-h128-corner-skeleton-verdict-at-q.md) | 11 | proof | H-128 | Column generation with the corner orbit bounded below, swept exactly; the bounded dual’s floor | The tested support is unsuccessful, but its floor of 10.785 is below the 11.15 obstruction threshold; H-128 remains unresolved and the corner-pair theorem survives | unresolved |
+| [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Prospective allocation; exact transport control replayed, pricing target uninvoked | in-progress |
 
 ### Cost and provenance
 
@@ -3658,10 +3665,11 @@ archive beside it.
 | exp-131 | eleven replay rows and the nine-point controls, one worker at load 8 | 1870 s | — | criterion | `f010f32f` |
 | exp-132 | the interval reader’s cover, exact re-decision of 184,756 leaves and 17,551 discards, 6,000 sampled poses | 253.6 s | — | criterion | `d04205fb` |
 | exp-133 | the free, four-bound and priced column-generation measures swept exactly, and the bounded dual’s floor | 3813 s | — | criterion | `22884081` |
+| exp-134 | one 30-minute pricing process and two-second TERM grace; uninvoked | — | — | — | `82df41bd` |
 
-### What the 89 rounds jointly establish
+### What the 90 rounds jointly establish
 
-The 89 rounds use 2152.1 agent-minutes and 1359.4 wall-minutes under the campaign’s
+The 90 rounds use 2152.1 agent-minutes and 1359.4 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

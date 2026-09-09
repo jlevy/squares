@@ -47,16 +47,16 @@ agenda:
     owner_focus: efficiency
     instances:
     - 11
-    state: ready
+    state: in_progress
     priority: 1
     question: Does full retained-state dual support expose a pointwise new-site orbit missed at that same
       point by the first 32 rows?
     hypotheses:
     - H-135
-    budget: One 30-minute pricing process with a two-second TERM grace and one LP solve on the
-      ten-logical-CPU host. Solver threading uses its default; no four-core allocation is enforced. The dense LP matrix is 346.6 MiB; its negated copy and solver workspace
-      raise peak memory materially above 700 MiB. The line-pair guard bounds candidate construction separately.
-      No candidate or cutting iterations.
+    budget: One 30-minute pricing process with a two-second TERM grace and one LP solve on the ten-logical-CPU
+      host. Solver threading uses its default; no four-core allocation is enforced. The dense LP matrix
+      is 346.6 MiB; its negated copy and solver workspace raise peak memory materially above 700 MiB.
+      The line-pair guard bounds candidate construction separately. No candidate or cutting iterations.
     entry: The published paired-pricing instrument and controls, the retained BC-232 state, its exact
       unit-square transport at q, and preregistered H-135 and exp-134.
     exit: A retained solved-support record written before arrangement work and a priced record with either
@@ -72,6 +72,7 @@ agenda:
     program: n11-structure-and-conditional-dots
     artifacts:
     - packing/campaign/hypotheses/H-135-paired-full-support-pricing.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md
     next_evidence: The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts,
       or a truthful never-opened disposition.
   - id: BC-307
@@ -86,8 +87,8 @@ agenda:
     - H-125
     budget: 'Optional reserve only: one fresh 60-second producer and one conditional 60-second independent
       reader, each with a two-second grace, on published source.'
-    entry: The BC-305 and BC-306 results, the kernel renewal admission note, and a fresh prospective exp-135
-      record; exp-129 remains never invoked.
+    entry: The BC-305 and BC-306 results, the kernel renewal admission note, and a fresh prospective record
+      using the next unallocated experiment id; exp-129 remains never invoked.
     exit: Either retain a fresh producer artifact and conditional-reader verdict within the original finite-kernel
       scope, or record that the reserve was not opened. Never reinterpret exp-129 as a run or lift its
       guard.

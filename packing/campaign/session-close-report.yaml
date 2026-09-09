@@ -1727,7 +1727,7 @@ sessions:
   title: "n = 11 ownership continuation"
   status: in_progress
   primary_bead: think-qfog
-  phases: 1
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
@@ -1738,8 +1738,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-111.yaml
-    model_responses: 60
-    agent_hours: 0.43
-    active_union_hours: 0.21
-    wall_hours: 0.21
+    model_responses: 381
+    agent_hours: 4.42
+    active_union_hours: 2.16
+    wall_hours: 2.23
     snapshot_incomplete: true

@@ -123,7 +123,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-108](agent-sessions/session-108-anchors-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-4ifm | Under think-kbci the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-111 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
 | [session-109](agent-sessions/session-109-corner-class-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-kx2l | Under think-kbci the coordinator integrates the lane section, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
 | [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
-| [session-111](agent-sessions/session-111-ownership-and-pricing.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-qfog | Retain the reviewed proof sources, replay the known-example readers, and publish the tool commit before allocating the pricing target. |
+| [session-111](agent-sessions/session-111-ownership-and-pricing.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 4 | think-qfog | Publish the complete context and prospective protocol, then open the one-solve pricing phase. |
 
 ### Workflow summary
 
@@ -136,11 +136,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 20 | 1 | 61 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 17 | 4 | 76 | 7 |
+| `research-loop` | 17 | 4 | 77 | 7 |
 | `pipeline-improvement` | 26 | 0 | 134 | 1 |
 | `documentation-pass` | 1 | 0 | 16 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
-| `review-planning-oversight` | 0 | 0 | 4 | 0 |
+| `review-planning-oversight` | 0 | 0 | 6 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -647,7 +647,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-305 | research | 11 | in_progress | 1 | think-qfog | Published proof files, exact reader receipts, and a scoped statement of the remaining global ownership problem. |
-| BC-306 | research | 11 | ready | 1 | think-7lp3 | The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts, or a truthful never-opened disposition. |
+| BC-306 | research | 11 | in_progress | 1 | think-7lp3 | The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts, or a truthful never-opened disposition. |
 | BC-307 | research | 11 | tentative | 2 | think-98z2 | Coordinator selection after both funded lanes, with fresh clocks and published-source identity if opened. |
 | BC-308 | measurement_validation | 11 | blocked | 2 | think-9yow | Terminal BC-305 and BC-306 artifacts, then the coordinator's reserve decision and closeout selection. |
 
@@ -655,7 +655,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 89 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 90 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -771,7 +771,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
-| H-135 | open | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 0 |  |  |
+| H-135 | running | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -900,6 +900,12 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-111 | H-135 | No run has occurred. Only a completed exact same-witness replay can decide the pointwise mechanism; guard_refused, TERM before a priced receipt, missing output or an execution error remains unresolved and is not negative evidence. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -918,7 +924,7 @@ Status: **active**. Publish the exact ownership results derived during PR 127 re
 
 ## Effort
 
-89 rounds, 2152.1 agent-minutes, 1359.4 wall-minutes.
+90 rounds, 2152.1 agent-minutes, 1359.4 wall-minutes.
 
 ## Exploration reports not yet codified
 
