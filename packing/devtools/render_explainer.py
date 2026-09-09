@@ -23,8 +23,14 @@ from an artifact host with a strict content-security policy.
 
 Usage, from `packing/`:
 
-    uv run --frozen --all-extras --group dev python -m devtools.render_explainer
-    uv run --frozen --all-extras --group dev python -m devtools.render_explainer --check
+    uv run --frozen --all-extras --group dev python -m devtools.render_explainer --prepare-math
+
+Add `--check` to compare the prepared result with the existing publication artifact.
+
+Font composition, loading, hydration, fallback, and print are documented in
+`vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md`
+(repository-relative). `prepare_explainer_math` owns this host's measured geometry;
+the shared KPress runtime owns matching font metrics and per-formula readiness.
 """
 
 from __future__ import annotations
@@ -565,10 +571,10 @@ def _print_sans_face(block: str) -> bool:
     """Whether a `@font-face` block is one of kpress's static print instances.
 
     Those exist so a printed page embeds a font rather than drawing outline paths, and
-    they are at kpress's own weight tokens. This page prints at its own -- 410, 550 and
-    680, declared and checked in `devtools.sans_instances` -- so kpress's set
-    would answer none of its requests while costing 20 KB of base64 a face in every
-    copy of the page ever served. `render_explainer_pdf` injects this page's own set
+    they cover KPress's full weight range. This page uses the shared regular weight
+    plus its own medium and bold, declared and checked in `devtools.sans_instances`.
+    Unused instances cost 20 KB of base64 per face in the served page.
+    `render_explainer_pdf` injects this page's own set
     into the loaded document instead, at the moment it prints it, which is why nothing
     about the served page or the screen changes.
 
@@ -895,41 +901,6 @@ COMPOSITE_SLOT_FACES = {
     ("italic", "700"): "KaTeX_Math-BoldItalic",
 }
 
-#: The same table for `KPress Math Text Sans`, the second composite, which draws the
-#: letters and digits of mathematics from Source Sans 3 wherever the words around them
-#: are sans. Its slots are pinned at 400 and at kpress's sans bold token, 650, rather
-#: than at 400 and 700: a KaTeX metric table describes one face *and one weight*, and
-#: the sans tables are generated at those two.
-SANS_COMPOSITE_SLOT_FACES = {
-    ("normal", "400"): "KaTeX_Main-Regular",
-    ("italic", "400"): "KaTeX_Math-Italic",
-    ("normal", "650"): "KaTeX_Main-Bold",
-    ("italic", "650"): "KaTeX_Math-BoldItalic",
-}
-
-#: The sans slots this page draws from, including the reader's sans prose preference.
-#:
-#: Every face of the sans composite is a SECOND data-URI copy of bytes the page already
-#: carries: its Latin halves are the same two `source-sans-3-latin-wght-*.woff2` files
-#: the prose stack inlines, its Greek halves the same KaTeX faces, and its `@media print`
-#: halves static instances of the same variable face. So a slot kept unused is 20-40 KB
-#: of base64 on every copy of the page ever served, and the prune is worth taking to the
-#: weight rather than only to the style.
-#:
-#: The three `\mathbf{D}_4` expressions are in prose. That prose uses the sans composite
-#: when the reader has saved `kpress.proseFont = "sans"`, so the upright 650 slot and its
-#: print instance must remain. Without it, CSS synthesizes bold from the 400 face while
-#: KaTeX positions it with the 650 metrics. `check_math_faces` exercises both saved prose
-#: preferences and checks the rendered requests against the declarations actually shipped.
-#:
-#: The italic slots pair with `KaTeX_Math-Italic` and `KaTeX_Math-BoldItalic`, and the
-#: second is outside `KATEX_FACES`, so the italic 650 slot would go on the partner rule
-#: whatever this set said. It is named here as well so the set reads as the three slots the
-#: page draws, rather than as one prune with a second one hidden behind it.
-SANS_COMPOSITE_SLOTS_DRAWN: frozenset[tuple[str, str]] = frozenset(
-    {("normal", "400"), ("italic", "400"), ("normal", "650")}
-)
-
 _WEIGHT_TOKENS = {"normal": "400", "bold": "700"}
 
 
@@ -946,30 +917,36 @@ class Composite(NamedTuple):
     blocks: int
 
 
-#: kpress's composites by the EXACT family each declares, which is the whole of why this
-#: mapping exists. The count guard used to ask whether `"KPress Math Text" in block`, and
-#: the sans composite's family starts with that string: the check saw 20 faces of one
-#: composite, refused the render, and did so before anything else could report what had
-#: actually changed (kpress #57 senior review, K57-R2). A family is matched, not searched
-#: for.
-#:
-#: `blocks` is two per slot for the serif composite -- the reading face over Latin and
-#: digits, the KaTeX face over Greek -- and two per slot plus one static print instance
-#: per slot for the sans, which kpress layers over the same Latin ranges under
-#: `@media print` so a printed page embeds a font rather than the Type3 outline paths
-#: Chromium writes for a variable face away from its default position.
-COMPOSITES: Mapping[str, Composite] = {
-    "KPress Math Text": Composite(
-        slots=COMPOSITE_SLOT_FACES,
-        drawn=frozenset(COMPOSITE_SLOT_FACES),
-        blocks=2 * len(COMPOSITE_SLOT_FACES),
-    ),
-    "KPress Math Text Sans": Composite(
-        slots=SANS_COMPOSITE_SLOT_FACES,
-        drawn=SANS_COMPOSITE_SLOTS_DRAWN,
-        blocks=3 * len(SANS_COMPOSITE_SLOT_FACES),
-    ),
-}
+@cache
+def math_composites() -> Mapping[str, Composite]:
+    """Reachable slots by exact family, using KPress's generated regular weight.
+
+    Each slot has a Latin and a Greek face; sans also has a static print face.
+    Keep upright bold for the saved sans-prose preference's bold D expressions.
+    Unused slots cost another 20-40 KB of inlined fonts, so prune by weight/style.
+    Loading the generator here preserves imports before a submodule is initialized.
+    """
+    from devtools.sans_instances import generator  # noqa: PLC0415
+
+    regular = str(generator().REGULAR_WEIGHT)
+    sans_slots = {
+        ("normal", regular): "KaTeX_Main-Regular",
+        ("italic", regular): "KaTeX_Math-Italic",
+        ("normal", "650"): "KaTeX_Main-Bold",
+        ("italic", "650"): "KaTeX_Math-BoldItalic",
+    }
+    return {
+        "KPress Math Text": Composite(
+            slots=COMPOSITE_SLOT_FACES,
+            drawn=frozenset(COMPOSITE_SLOT_FACES),
+            blocks=2 * len(COMPOSITE_SLOT_FACES),
+        ),
+        "KPress Math Text Sans": Composite(
+            slots=sans_slots,
+            drawn=frozenset({("normal", regular), ("italic", regular), ("normal", "650")}),
+            blocks=3 * len(sans_slots),
+        ),
+    }
 
 
 def _face_family(block: str) -> str | None:
@@ -997,7 +974,7 @@ def _font_face_reachable(block: str) -> bool:
     the render rather than being inlined unread at 20-40 KB a face.
     """
     family = _face_family(block)
-    composite = COMPOSITES.get(family) if family is not None else None
+    composite = math_composites().get(family) if family is not None else None
     if composite is not None:
         # The composite is asked FIRST, and the KaTeX rule below only afterwards. A
         # composite's Greek half names a KaTeX woff2 in its `src`, so the other order
@@ -1031,7 +1008,7 @@ def katex_css(static: Path) -> str:
     parts = []
     for name in KATEX_CSS_ASSETS:
         css = (static / name).read_text(encoding="utf-8")
-        # The prune reads each composite through `COMPOSITES`, a copy of kpress's slot
+        # The prune reads each composite through `math_composites`, matching KPress's slot
         # tables. A slot added upstream would be kept unread at 20-40 KB a face, so the
         # copy is checked against the stylesheet it mirrors -- by exact family, because
         # one composite's name is a prefix of the other's.
@@ -1039,15 +1016,15 @@ def katex_css(static: Path) -> str:
             family
             for block in FONT_FACE_BLOCK.findall(css)
             for family in [_face_family(block)]
-            if family in COMPOSITES
+            if family in math_composites()
         )
-        for family, composite in COMPOSITES.items():
+        for family, composite in math_composites().items():
             count = declared[family]
             if count and count != composite.blocks:
                 raise SystemExit(
                     f"{name} declares {count} faces of {family}; the renderer knows "
                     f"{len(composite.slots)} slots and expects {composite.blocks} faces. "
-                    f"Update COMPOSITES."
+                    f"Update math_composites."
                 )
         pruned = FONT_FACE_BLOCK.sub(
             lambda match: match.group(0) if _font_face_reachable(match.group(0)) else "", css
@@ -1280,15 +1257,13 @@ def relation_face_css(static: Path) -> str:
 #: The host supplies custom context and TeX spacing; KPress owns profile selection,
 #: metric installation, font readiness, and rendering for every caller.
 KATEX_RUNTIME = "katex/katex-math-runtime.js"
-MATH_WRAPPERS = ".katex, .kpress-math, .kpress-math-render, .tex, .tex-d"
+MATH_WRAPPERS = ".katex, .kpress-math, .kpress-math-render, .tex, .tex-d, .squares-math-variant"
 
 HOST_MATH_INIT = r"""
 (() => {
   const wrappers = "%(wrappers)s";
   const firstFamily = value => (value || "").split(",")[0].trim().replace(/^["']|["']$/g, "");
   const context = {
-    // This standalone page has already downloaded every font as a data URI.
-    allEmbeddedFonts: true,
     isSansContext(node) {
       let el = node;
       while (el && el.matches && el.matches(wrappers)) el = el.parentElement;
@@ -1300,33 +1275,79 @@ HOST_MATH_INIT = r"""
   };
   // The same one-mu spacing the SVG labels use for an italic function name.
   const kern = source => String(source).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-  const ready = kpressMathText.ready(
-    document.querySelectorAll('.tex, .tex-d, .kpress-math-render'), context,
-  );
   const pending = new Set();
-  // Every render waits on the page's readiness, not only on the glyphs it happens to
-  // need. `kpressMathText.render` already holds its own node until that node's faces
-  // arrive, which is a per-node promise: a slider, a resize, or the print media change
-  // that arrives during startup would have its formula painted the moment its own few
-  // glyphs were ready, beside formulas the page had not drawn yet and while the rest
-  // of the math faces were still in flight. That is what `check_math_loading` reports
-  // as faces not ready at the first visible paint. `ready` settles either way, the
-  // runtime's own three-second timeout included, so a face that never arrives delays
-  // the first formula rather than withholding it.
-  function render(el, source, display) {
-    const result = ready.then(() => kpressMathText.render(kern(source), el,
-      { displayMode: !!display, throwOnError: false }, context)).then(() => true, () => {
-      el.textContent = source;
-      return false;
-    });
-    pending.add(result);
-    result.finally(() => pending.delete(result));
+  const submitting = new Set();
+  const versions = new WeakMap();
+  function track(result, waiting = pending) {
+    waiting.add(result);
+    result.then(() => waiting.delete(result), () => waiting.delete(result));
     return result;
   }
-  async function settled() {
-    while (pending.size) await Promise.all([...pending]);
+  // Reserve work before its producer runs, including later certificate scripts.
+  function reserve() {
+    let release;
+    const result = new Promise(resolve => { release = resolve; });
+    track(result);
+    track(result, submitting);
+    return release;
   }
-  globalThis.squaresMath = { ready, render, settled, context };
+  function nextTask() {
+    return new Promise(resolve => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = () => {
+        channel.port1.close(); channel.port2.close(); resolve();
+      };
+      channel.port2.postMessage(null);
+    });
+  }
+  function batch(jobs) {
+    const finishSubmission = reserve();
+    // Register the whole queue before its first job runs. A task boundary lets
+    // completed formulas reveal while later formulas are still being submitted.
+    return track(Promise.resolve().then(async () => {
+      const issued = [];
+      try {
+        for (let start = 0; start < jobs.length; start += 16) {
+          if (start) await nextTask();
+          for (const job of jobs.slice(start, start + 16)) issued.push(job());
+        }
+      } finally {
+        finishSubmission();
+      }
+      await Promise.all(issued);
+    }));
+  }
+  function render(el, source, display) {
+    const version = (versions.get(el) || 0) + 1;
+    versions.set(el, version);
+    const root = document.documentElement.dataset;
+    const preference = (root.kpressFontSet === 'system' ? 'system' : 'custom') + '-'
+      + (root.kpressProseFont === 'sans' ? 'sans' : 'serif');
+    const variants = [...el.querySelectorAll(':scope > .squares-math-variant')];
+    const target = variants.find(node =>
+      node.dataset.squaresMathContexts.split(' ').includes(preference)) || el;
+    const renderMath = target.dataset.kpressMathPrepared === 'true'
+      ? kpressMathText.hydrate : kpressMathText.render;
+    const result = renderMath(kern(source), target,
+      { displayMode: !!display, throwOnError: false }, context).then(() => {
+      if (versions.get(el) !== version) return true;
+      target.dataset.squaresMathReady = 'true';
+      el.dataset.squaresMathReady = 'true';
+      return true;
+    }, () => {
+      if (versions.get(el) !== version) return true;
+      el.textContent = source;
+      el.dataset.squaresMathReady = 'true';
+      return false;
+    });
+    return track(result);
+  }
+  async function drain(waiting) {
+    while (waiting.size) await Promise.all([...waiting]);
+  }
+  const submitted = () => drain(submitting);
+  const settled = () => drain(pending);
+  globalThis.squaresMath = { render, reserve, batch, submitted, settled, context };
 })();
 """
 
@@ -2236,7 +2257,7 @@ def drop_block(text: str, name: str) -> str:
     return re.sub(rf"<!--BEGIN:{name}-->.*?<!--END:{name}-->", "", text, flags=re.DOTALL)
 
 
-def wrap_figure(body: str, cert: str) -> str:
+def wrap_figure(body: str, cert: str, *, visible: bool) -> str:
     """One certificate's copy of a figure, in a wrapper the switch can hide.
 
     The blank line on each side of the two wrapper tags is load-bearing: a
@@ -2244,9 +2265,9 @@ def wrap_figure(body: str, cert: str) -> str:
     against a paragraph would swallow it into the raw block and leave its
     Markdown unrendered.
     """
-    return (
-        f'\n<div class="cert-figure" data-cert="{cert}" hidden>\n\n{body.strip()}\n\n</div>\n\n'
-    )
+    hidden = "" if visible else " hidden"
+    opening = f'\n<div class="cert-figure" data-cert="{cert}"{hidden}>'
+    return f"{opening}\n\n{body.strip()}\n\n</div>\n\n"
 
 
 def expand(
@@ -2266,13 +2287,15 @@ def expand(
     def stamp(match: re.Match[str]) -> str:
         block = match.group(1)
         copies = []
-        for values in per_certificate:
+        for index, values in enumerate(per_certificate):
             # The coarsening figure belongs to a measured certificate; a
             # certificate without a measurement has no copy of it.
             if "{{COARSEN_BARS}}" in block and not values["COARSEN_BARS"]:
                 continue
             copy = fill(block, values, where=f"{name} {values['SLUG']}")
-            copies.append(wrap_figure(copy, values["SLUG"]) if article else copy)
+            copies.append(
+                wrap_figure(copy, values["SLUG"], visible=index == 0) if article else copy
+            )
         return "".join(copies)
 
     return pattern.sub(stamp, source)
@@ -2328,6 +2351,7 @@ MARKDOWN_OUTPUT = PACKING / "site" / f"{RESULT_ID}-explainer.md"
 RENDER_INPUTS = (
     CASE,
     Path(__file__),
+    PACKING / "devtools" / "prepare_explainer_math.py",
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",
     PACKING / "devtools" / "render_explainer_pdf.py",
@@ -2743,6 +2767,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--output", type=Path, default=OUTPUT)
     parser.add_argument(
+        "--prepare-math",
+        action="store_true",
+        help="prepare publication math with measured dimensions using pinned Chromium",
+    )
+    parser.add_argument(
         "--check",
         action="store_true",
         help="exit non-zero if the committed page differs from a fresh render",
@@ -2763,8 +2792,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         tuple(path.resolve() for path in args.certificate) if args.certificate else WALKTHROUGH
     )
     rendered = render(certificates, full_sweep=args.verify_condition_5)
+    page = rendered.page
+    if args.prepare_math:
+        from devtools.prepare_explainer_math import prepare_math_html  # noqa: PLC0415
+
+        page = prepare_math_html(page)
+        assert_self_contained(page)
     document = output.parent / MARKDOWN_OUTPUT.name
-    written = ((output, rendered.page), (document, rendered.markdown))
+    written = ((output, page), (document, rendered.markdown))
     if args.check:
         for path, content in written:
             name = path.relative_to(REPO).as_posix() if path.is_relative_to(REPO) else str(path)
@@ -2783,8 +2818,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             temporary.write_text(content, encoding="utf-8")
     for asset in COMPOSITE_ASSETS:
         shutil.copyfile(asset, output.parent / asset.name)
-    print(f"wrote {label} ({len(rendered.page) / 1024:.0f} KB)")
-    name = document.relative_to(REPO).as_posix()
+    print(f"wrote {label} ({len(page) / 1024:.0f} KB)")
+    name = (
+        document.relative_to(REPO).as_posix()
+        if document.is_relative_to(REPO)
+        else str(document)
+    )
     print(f"wrote {name} ({len(rendered.markdown) / 1024:.0f} KB)")
     return 0
 

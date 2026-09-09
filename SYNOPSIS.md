@@ -212,6 +212,9 @@ case or experiment separately.
 | [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md) | research synthesis | record | retained | — |
 | [Spike v2: animated transitions between consecutive known-best packings](packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md) | research synthesis | record | retained | — |
 | [stats-summary.md](packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md) | generated status view | generated | generated | — |
+| [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
+| [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
+| [Math Startup Ledger](packing/benchmarks/math-startup/ledger.md) | generated status view | generated | generated | — |
 | [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
@@ -428,6 +431,9 @@ case or experiment separately.
 | [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
 | [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | [Change-Scoped Exhaustive Validation](docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md) | dated review record | record | retained | — |
+| `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
+| `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
+| `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -570,6 +576,13 @@ stop. Long autonomous sessions use the same rule; autonomy changes the duration 
 controller, not permission to blur contracts.
 
 ### Current Handoff
+
+**Math startup release checkpoint.**
+[Session 111](packing/campaign/agent-sessions/session-111-font-startup-stability.md)
+records the prepared geometry, parameter-first hydration, reload restoration, and the
+local browser and PDF evidence for [PR 135](https://github.com/jlevy/squares/pull/135).
+Current-main integration and affected validation remain release work under `think-qcmi`;
+the research priorities below are unchanged.
 
 **Parallel structural lanes at `n = 11`, first wave terminal.**
 [X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
@@ -3398,12 +3411,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
 | `codex-task-tree-session-110.yaml` | session-110 | 940 | 6.73 h | 2.58 h | 2.58 h | yes |
+| `codex-task-tree-session-111.yaml` | session-111 | 2,798 | 20.24 h | 6.22 h | 6.23 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 63 |
+| measured | 64 |
 | unmeasured | 45 |
-| **total** | **108** |
+| **total** | **109** |
 
 <!-- END GENERATED: session-close-report -->
 
