@@ -86,6 +86,33 @@ recovered:
 
 # Still missing. `blocker` is the mechanism, not a guess.
 unretrieved:
+  # This row was inspected on 2026-09-07. The global last_checked date above
+  # remains the date of the earlier full-list re-test; other rows were not re-tested.
+  - key: "[MacIver 2026 n17 artifacts]"
+    title: Supporting C1-C14 certificates, exact ledger, and theorem replay for the seventeen-square lower-bound manuscript
+    authors: [David R. MacIver]
+    year: 2026
+    venue: Supporting computational artifacts cited by an author-hosted manuscript
+    url: https://github.com/DRMacIver/square-packing-research/blob/9e2cd597047e040a63b7dcd103e79962cfc2d781/papers/s17-lower-bound/LEAN-CHECK.md
+    blocker: unpublished
+    detail: >-
+      Checked 2026-09-07 against the complete public source snapshot at
+      9e2cd597047e040a63b7dcd103e79962cfc2d781. None of the fourteen named
+      C1-C14 .cert.json/.cert.json.gz files, cited scripts/s17_green_*.py
+      replay programs, or the Makefile targets is present. The source audit
+      locates them in an author-local checkout. Here unpublished means absent
+      from that inspected release; no claim is made about every other branch
+      or future release. The paper itself is retrieved and retained under
+      packing/resources/web/maciver-square-packing-2026-09-07/. Its successful
+      aggregate-run log and partial Lean source do not replace the missing files.
+    depends_on_it: >-
+      Independent replay of the historical source claim
+      s(17), s(18) > (40sqrt(2)+19)/17 + 1/200 and assessment of the
+      deformed-scaffold conditional counting method. Neither current verified
+      459/100 lower bound depends on these artifacts.
+    priority: 2
+    route: Locate a public release containing the named certificates, exact ledger, theorem assembler, and pinned replay dependencies.
+
   - key: "[Plakhta 2021]"
     title: Configuration spaces of squares in a rectangle
     authors: [Leonid Plakhta]

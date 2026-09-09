@@ -1,0 +1,33 @@
+# exp-130, second calibration pass, written before it ran.
+#
+# The first pass put every arm on the trivial grid except `p_perturb = 0.50`, which was
+# the largest value tried and the only one that left it. So the first pass did not
+# bracket the optimum -- it found the edge of the grid it swept. This pass brackets it:
+# perturbation probability from 0.30 to 1.00 (1.00 means *no* single-square moves at
+# all, which is a different algorithm and worth knowing about), and the magnitude at
+# half, one and twice the temperature.
+#
+# Arm C's whole sweep did nothing at all in the first pass, so this one raises the
+# pressure weight by two orders of magnitude and adds a constant-pressure variant, on
+# the reading that a term ramped from 0.5 to 1e-6 over 400,000 steps is negligible for
+# almost the whole anneal.
+label: exp-130-arm-calibration-2
+engine: sqsearch/target/release/sqsearch
+budget_pair_tests: 200000000
+chains: 8
+threads: 4
+cells: [18, 40]
+seeds: [1, 2, 3]
+arms:
+  A-control: []
+  B-p030-s1: ["--p-perturb", "0.30", "--perturb-scale", "1"]
+  B-p050-s1: ["--p-perturb", "0.50", "--perturb-scale", "1"]
+  B-p070-s1: ["--p-perturb", "0.70", "--perturb-scale", "1"]
+  B-p090-s1: ["--p-perturb", "0.90", "--perturb-scale", "1"]
+  B-p100-s1: ["--p-perturb", "1.00", "--perturb-scale", "1"]
+  B-p050-s05: ["--p-perturb", "0.50", "--perturb-scale", "0.5"]
+  B-p050-s2: ["--p-perturb", "0.50", "--perturb-scale", "2"]
+  C-mu2: ["--mu0", "2.0", "--mu1", "1e-6"]
+  C-mu20: ["--mu0", "20.0", "--mu1", "1e-6"]
+  C-flat-mu05: ["--mu0", "0.5", "--mu1", "0.5"]
+  C-flat-mu5: ["--mu0", "5.0", "--mu1", "5.0"]

@@ -1,6 +1,6 @@
 """The deep gate's properties, which are otherwise only a comment nobody re-reads.
 
-`packing-validation.yml` keeps four steps off the pull-request surface on cost, and its
+`packing-validation.yml` defers expensive steps from the pull-request surface, and its
 own header states the consequence: "a pull request can be green while a deferred test is
 broken." On 2026-09-05 that happened twice.
 `test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` asserted a
@@ -19,7 +19,9 @@ lose silently rather than loudly:
 - a deep gate that has quietly started running on every push is a 32-minute tax nobody
   asked for, so the triggers are pinned;
 - a second always-present required context is the `D-380` failure mode, so the shape that
-  avoids it -- one aggregate, `!cancelled()`, label-gated jobs -- is pinned;
+  avoids it -- one aggregate, `!cancelled()`, label-gated jobs -- is pinned, and so is the
+  script inside that aggregate, because a prerequisite whose result it never tests is an
+  advisory check wearing a required one's name;
 - and a conflict check moved onto a `pull_request` trigger would be silent in exactly the
   case it exists to name, because that is the defect: GitHub creates no run.
 
@@ -34,6 +36,7 @@ import io
 import json
 import shlex
 from contextlib import redirect_stdout
+from itertools import combinations
 from pathlib import Path
 from typing import Any
 
@@ -134,22 +137,42 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
     also argued into the deep gate, which is how the set reached seven on 2026-09-07
     without anyone maintaining a count.
 
-    The two jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
-    twice. And the exhaustive tier is alone in its job because of `D-456` -- when it
-    outgrew its budget the gate killed it with its output in an unflushed pipe, and three
-    merges went red saying nothing about the sixty other steps. A deep gate that cannot
-    say *which* deferral broke is most of the way back to the daily backstop.
+    The jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
+    twice. Three steps have their own jobs. The exhaustive tier is
+    `D-456` -- when it outgrew its budget the gate killed it with its output in an
+    unflushed pipe, and three merges went red saying nothing about the sixty other steps.
+    A deep gate that cannot say *which* deferral broke is most of the way back to the
+    daily backstop. The escape screen is `D-484`, and its reason is workers rather than
+    verdicts: it is a process pool sized by `PACK_JOBS`, so beside the other five
+    deferrals it gets two of the runner's four. Run 34177317419 killed it here at the
+    shared 900s cap on commit `831697c0`, an hour after post-merge run 34176106076 had
+    finished the same step at 858.62s on the same commit.
+
+    Disjointness is asserted pairwise over whatever jobs exist rather than over a named
+    pair. The slow lane's separate runner is included in the same partition. A new job
+    still fails this test loudly
+    the day it arrives -- the job-set assertion below fires first and has to be taught the
+    new name -- and once it has been, the pairwise loop covers it without further edits.
     """
     selections = {
         job_name: _selected_steps(command)
         for job_name, command in _gate_commands(DEEP_GATE).items()
     }
 
-    assert set(selections) == {"deferred-steps", "exhaustive-tier"}
+    assert set(selections) == {
+        "deferred-steps",
+        "deferred-slow-lane",
+        "exhaustive-tier",
+        "screen",
+    }
+    assert selections["deferred-slow-lane"] == {"slow behavioral tests"}
     assert selections["exhaustive-tier"] == {"exhaustive exact behavioral tests"}
-    assert not selections["deferred-steps"] & selections["exhaustive-tier"]
+    assert selections["screen"] == {"single-square translation escape screen"}
+    for left, right in combinations(sorted(selections), 2):
+        assert not selections[left] & selections[right], f"{left} and {right} overlap"
 
     covered: set[str] = set().union(*selections.values())
+    assert len(covered) == sum(len(selected) for selected in selections.values())
     assert covered == {step.name for step in validate.STEPS if not step.fast}
 
 
@@ -209,7 +232,7 @@ def test_the_deep_gate_reports_one_context_and_never_leaves_it_pending() -> None
     filter -- while a job skipped by its own `if` reports a conclusion. So the label is
     tested in the job conditions (above) rather than in the trigger's filters, and the
     aggregate is gated the same way as the jobs it waits on: on an unlabelled pull
-    request all three skip together and none of them hangs.
+    request all four skip together and none of them hangs.
     """
     jobs = _workflow(DEEP_GATE)["jobs"]
     aggregate = jobs[AGGREGATE_JOB]
@@ -220,6 +243,47 @@ def test_the_deep_gate_reports_one_context_and_never_leaves_it_pending() -> None
     # so supersession is routine and must leave this unreported rather than failing hard.
     assert str(aggregate["if"]).lstrip().startswith("!cancelled()")
     assert "always()" not in str(aggregate["if"])
+
+
+def test_every_deep_gate_prerequisite_decides_the_aggregate_verdict() -> None:
+    """`needs` does not make a deep job's failure fatal here; the script does (`D-380`).
+
+    The aggregate runs under `!cancelled()`, which is the `D-380` fix -- a superseded run
+    must report nothing rather than a hard failure. What that buys is also what it costs:
+    the job is *reached* when a prerequisite has failed, so the `run:` script is what
+    decides the verdict, one `test` per result. A fourth deep job added with only `needs`
+    updated would satisfy every other assertion in this file and still be advisory --
+    green aggregate, red job, nothing on the pull request to say so. That is the `D-380`
+    shape one level along: a check that reports the wrong thing quietly.
+
+    So the pairing is derived rather than transcribed. Every job the aggregate needs must
+    have its `result` bound to an environment variable, and every one of those variables
+    must be tested for `success` in the script.
+    `test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock` in
+    `test_module_boundaries.py` holds the same property for `packing-required`, by pinning
+    that job's exact command; this one is read from `needs`, so it also covers the deep
+    job that does not exist yet.
+    """
+    aggregate = _workflow(DEEP_GATE)["jobs"][AGGREGATE_JOB]
+    steps = [step for step in aggregate["steps"] if isinstance(step.get("run"), str)]
+    assert steps, f"{AGGREGATE_JOB} must decide the verdict in a script"
+
+    script = " ".join(" ".join(str(step["run"]).split()) for step in steps)
+    environment: dict[str, str] = {
+        str(name): str(value)
+        for step in steps
+        for name, value in (step.get("env") or {}).items()
+    }
+
+    for job_name in aggregate["needs"]:
+        result = "${{ needs." + str(job_name) + ".result }}"
+        bound = sorted(name for name, value in environment.items() if value == result)
+        assert bound, f"{job_name} is a prerequisite whose result the aggregate never reads"
+        for name in bound:
+            assert f'test "${name}" = "success"' in script, (
+                f"{job_name} is needed but its result is never tested: it would be "
+                f"advisory, failing while {AGGREGATE_JOB} reports success"
+            )
 
 
 def test_the_deep_gate_is_not_cancelled_by_the_pull_request_gate() -> None:

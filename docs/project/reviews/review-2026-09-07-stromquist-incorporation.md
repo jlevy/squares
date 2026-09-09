@@ -1,5 +1,15 @@
 # Review: Incorporating Stromquist’s Memos and Helper Arguments
 
+**Subsequent clarification, September 7:** Stromquist has identified the intended
+improvement as Memo III’s twenty-six-square construction, while explicitly allowing that
+his comparison might be mistaken.
+The ranked guesses below are retained as the record of this earlier review and are
+superseded as explanations of his intent.
+The independently supported historical corrections still stand.
+See the
+[n=26 verification](../research/research-2026-09-07-stromquist-n26-verification.md) for
+the construction, catalogue comparison, and follow-up.
+
 Stromquist’s 1984 Memo III already states the unrestricted eleven-square lower bound
 `2 + 4/sqrt(5)` that the paper’s introduction dates to 2003. Memo II also contains the
 ten-square proof that the explainer says he settled in 2003. These chronology

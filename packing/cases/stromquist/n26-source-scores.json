@@ -1,0 +1,281 @@
+{
+  "deletion": {
+    "32_minus_friedman_squared_in_q_sqrt2": [
+      "61/4",
+      "-21/2"
+    ],
+    "area_excludes_unchanged_parent_containers_for_n_at_least": 32,
+    "area_gap_sign": 1,
+    "comparison_inputs": "declared numerical witness sides; geometry not replayed here",
+    "does_not_exclude": "cropping, re-enclosing, or reoptimizing the surviving squares",
+    "entries": [
+      {
+        "container_side_approx": "5.7071067811865475244008443621",
+        "container_side_interval": [
+          "57071067811865475244008443621/10000000000000000000000000000",
+          "57071067811865475244008443621/10000000000000000000000000000"
+        ],
+        "container_side_minus_friedman_approx": "0.0857864376269049511983112757854528821454727",
+        "container_side_minus_friedman_interval": [
+          "8699778331935009987650622782335329283655701027616942805093/101412048018258352119736256430080000000000000000000000000000",
+          "69598226655480079901204982258682634269357366929889399862619/811296384146066816957890051440640000000000000000000000000000"
+        ],
+        "container_side_minus_friedman_sign": 1,
+        "container_side_squared_minus_friedman_in_q_sqrt2": [
+          "1582106781186547524400844362099314242287890508342735591641/100000000000000000000000000000000000000000000000000000000",
+          "-21/2"
+        ],
+        "geometry_verified": false,
+        "metric": "unit-square-container-side",
+        "n": 26,
+        "normalized_container_side_squared": "3257106781186547524400844362099314242287890508342735591641/100000000000000000000000000000000000000000000000000000000",
+        "objective": "minimize",
+        "score_rational": "57071067811865475244008443621/10000000000000000000000000000",
+        "smaller_normalized_container_side": false,
+        "source_n": 27,
+        "witness": "packing/witnesses/known-best/n-027.yaml"
+      },
+      {
+        "container_side_approx": "5.82444461667405929695862875884838101990395",
+        "container_side_interval": [
+          "58244446166740592969586287588483810199039/10000000000000000000000000000000000000000",
+          "22751736783883044128744643589251488359/3906250000000000000000000000000000000"
+        ],
+        "container_side_minus_friedman_approx": "0.203124273114416723756095672533833902049423",
+        "container_side_minus_friedman_interval": [
+          "5029113412781507027379006715190529233603581486782955545945111044597/24758800785707605497982484480000000000000000000000000000000000000000",
+          "8046581460450411243806410744304846773775148755189079659819345103247/39614081257132168796771975168000000000000000000000000000000000000000"
+        ],
+        "container_side_minus_friedman_sign": 1,
+        "container_side_squared_minus_friedman_in_q_sqrt2": [
+          "4293538773175857385631304208562697813235022533956559598155695581189001206158946690367550579371962632504706071852809/250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "-21/2"
+        ],
+        "geometry_verified": false,
+        "metric": "unit-square-container-side",
+        "n": 26,
+        "normalized_container_side_squared": "8481038773175857385631304208562697813235022533956559598155695581189001206158946690367550579371962632504706071852809/250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "objective": "minimize",
+        "score_rational": "2912222308337029648479314379424190509951950673527645725053/500000000000000000000000000000000000000000000000000000000",
+        "smaller_normalized_container_side": false,
+        "source_n": 28,
+        "witness": "packing/witnesses/known-best/n-028.yaml"
+      },
+      {
+        "container_side_approx": "5.93383346267692918968946061635201913843385",
+        "container_side_interval": [
+          "29669167313384645948447303081760095692169/5000000000000000000000000000000000000000",
+          "59338334626769291896894606163520191384339/10000000000000000000000000000000000000000"
+        ],
+        "container_side_minus_friedman_approx": "0.312513119117286616486927530037472020579323",
+        "container_side_minus_friedman_interval": [
+          "7737450059145010388625582359809679491837194800411846339797438210549/24758800785707605497982484480000000000000000000000000000000000000000",
+          "61899600473160083109004658878477435934744650284976524649915342843851/198070406285660843983859875840000000000000000000000000000000000000000"
+        ],
+        "container_side_minus_friedman_sign": 1,
+        "container_side_squared_minus_friedman_in_q_sqrt2": [
+          "4615094890696118899706491678983785205757692980641040060406841540755785977468520329719826579720579269087712562364758500930822768496531779791845441472005122143399921895361193853067598794037489843758961/250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "-21/2"
+        ],
+        "geometry_verified": false,
+        "metric": "unit-square-container-side",
+        "n": 26,
+        "normalized_container_side_squared": "8802594890696118899706491678983785205757692980641040060406841540755785977468520329719826579720579269087712562364758500930822768496531779791845441472005122143399921895361193853067598794037489843758961/250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "objective": "minimize",
+        "score_rational": "2966916731338464594844730308176009569216917090538943487319412957540127118439900720626025864982640281/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "smaller_normalized_container_side": false,
+        "source_n": 29,
+        "witness": "packing/witnesses/known-best/n-029.yaml"
+      },
+      {
+        "container_side_approx": "6",
+        "container_side_interval": [
+          "6",
+          "6"
+        ],
+        "container_side_minus_friedman_approx": "0.378679656440357426797466913685452882145473",
+        "container_side_minus_friedman_interval": [
+          "1030864078386660992186681609172362862869/2722258935367507707706996859454145691648",
+          "8246912627093287937493452873378902902955/21778071482940061661655974875633165533184"
+        ],
+        "container_side_minus_friedman_sign": 1,
+        "container_side_squared_minus_friedman_in_q_sqrt2": [
+          "77/4",
+          "-21/2"
+        ],
+        "geometry_verified": false,
+        "metric": "unit-square-container-side",
+        "n": 26,
+        "normalized_container_side_squared": "36",
+        "objective": "minimize",
+        "score_rational": "6",
+        "smaller_normalized_container_side": false,
+        "source_n": 30,
+        "witness": "packing/witnesses/known-best/n-030.yaml"
+      },
+      {
+        "container_side_approx": "6",
+        "container_side_interval": [
+          "6",
+          "6"
+        ],
+        "container_side_minus_friedman_approx": "0.378679656440357426797466913685452882145473",
+        "container_side_minus_friedman_interval": [
+          "1030864078386660992186681609172362862869/2722258935367507707706996859454145691648",
+          "8246912627093287937493452873378902902955/21778071482940061661655974875633165533184"
+        ],
+        "container_side_minus_friedman_sign": 1,
+        "container_side_squared_minus_friedman_in_q_sqrt2": [
+          "77/4",
+          "-21/2"
+        ],
+        "geometry_verified": false,
+        "metric": "unit-square-container-side",
+        "n": 26,
+        "normalized_container_side_squared": "36",
+        "objective": "minimize",
+        "score_rational": "6",
+        "smaller_normalized_container_side": false,
+        "source_n": 31,
+        "witness": "packing/witnesses/known-best/n-031.yaml"
+      }
+    ],
+    "scope": "delete to 26 and inherit the unchanged enclosing-square side",
+    "source": {
+      "checked_local_date": "2026-09-07",
+      "retrieval_timezone": "America/Los_Angeles",
+      "scope": "current catalogue side labels checked against the retained numerical witnesses; catalogue omits 30 and 31, hence declares the trivial side 6 best known under its introductory rule",
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
+    }
+  },
+  "forloopcodes_cache": {
+    "container_side_approx": "5.621320343794426",
+    "container_side_interval": [
+      "2810660171897213/500000000000000",
+      "2810660171897213/500000000000000"
+    ],
+    "container_side_minus_friedman_approx": "2.34783426797466913685452882145472731689599E-10",
+    "container_side_minus_friedman_interval": [
+      "19505043990344465946564588995252280898961/83076749736557242056487941267521536000000000000000",
+      "156040351922755727572516711962109799926063/664613997892457936451903530140172288000000000000000"
+    ],
+    "container_side_minus_friedman_sign": 1,
+    "container_side_squared_minus_friedman_in_q_sqrt2": [
+      "3712310601889270929811837167369/250000000000000000000000000000",
+      "-21/2"
+    ],
+    "geometry_verified": false,
+    "metric": "unit-square-container-side",
+    "n": 26,
+    "normalized_container_side_squared": "7899810601889270929811837167369/250000000000000000000000000000",
+    "objective": "minimize",
+    "score_rational": "2810660171897213/500000000000000",
+    "smaller_normalized_container_side": false,
+    "source": {
+      "commit": "6a5646dec9d89a5f750adcf488c769b60fe5ccf9",
+      "commit_time_utc": "2026-09-03T04:25:56Z",
+      "n": 26,
+      "retrieval_timezone": "America/Los_Angeles",
+      "retrieved_local_date": "2026-09-07",
+      "snapshot": "packing/resources/web/n26-best-known-2026-09-07/forloopcodes-best-packings-n26.extract.json",
+      "source_key": "26",
+      "url": "https://raw.githubusercontent.com/forloopcodes/least-space-squares/6a5646dec9d89a5f750adcf488c769b60fe5ccf9/data/best_packings.json"
+    }
+  },
+  "forloopcodes_readme_display": {
+    "assumption": "nearest rounding to the supplied quantum",
+    "display": "5.621320343560",
+    "endpoint_comparison_signs": [
+      -1,
+      1
+    ],
+    "geometry_verified": false,
+    "n": 26,
+    "quantum": "0.000000000001",
+    "rounding_interval": [
+      "11242640687119/2000000000000",
+      "11242640687121/2000000000000"
+    ],
+    "source": {
+      "commit": "6a5646dec9d89a5f750adcf488c769b60fe5ccf9",
+      "display": "5.621320343560",
+      "n": 26,
+      "quantum": "0.000000000001",
+      "retrieval_timezone": "America/Los_Angeles",
+      "retrieved_local_date": "2026-09-07",
+      "url": "https://github.com/forloopcodes/least-space-squares/blob/6a5646dec9d89a5f750adcf488c769b60fe5ccf9/README.md"
+    },
+    "verdict": "undetermined-from-rounded-display"
+  },
+  "minmax": {
+    "container_side_approx": "5.62132039922030537553614986168215654222485",
+    "container_side_interval": [
+      "7026650499025381719420187327102695677781/1250000000000000000000000000000000000000",
+      "56213203992203053755361498616821565422249/10000000000000000000000000000000000000000"
+    ],
+    "container_side_minus_friedman_approx": "5.56606628023336167753676094243703227316896E-8",
+    "container_side_minus_friedman_interval": [
+      "1378091261923423641870141165887618022225954439054416588874229/24758800785707605497982484480000000000000000000000000000000000000000",
+      "11024730095387389134961129327100991269689317266366868548153291/198070406285660843983859875840000000000000000000000000000000000000000"
+    ],
+    "container_side_minus_friedman_sign": 1,
+    "container_side_squared_minus_friedman_in_q_sqrt2": [
+      "117481002759055089/7911581924832532",
+      "-21/2"
+    ],
+    "distinct_squared_sides": [
+      "1977895481208133/62500000000000000",
+      "1977895493290369/62500000000000000"
+    ],
+    "geometry_verified": false,
+    "metric": "unit-container-minimum-square-side-squared",
+    "n": 26,
+    "normalized_container_side_squared": "62500000000000000/1977895481208133",
+    "objective": "maximize",
+    "pieces_attaining_minimum": 9,
+    "score_derived_from_half_edge_vectors": true,
+    "score_rational": "1977895481208133/62500000000000000",
+    "smaller_normalized_container_side": false,
+    "source": {
+      "metric_documentation": "https://minmaxarena.com/en/problems/tilted-squares-in-square",
+      "retrieval_timezone": "America/Los_Angeles",
+      "retrieved_local_date": "2026-09-07",
+      "snapshot": "packing/resources/web/n26-best-known-2026-09-07/tilted-squares-in-square.json",
+      "url": "https://minmaxarena.com/data/tilted-squares-in-square.json"
+    },
+    "source_generated_at": "2026-09-08T00:34:07.581Z",
+    "source_recorded_at": "2026-09-02T18:06:21.856Z",
+    "source_score_display": "0.177894147",
+    "source_score_stored": "31646327699330128",
+    "source_verifier_version": "1.0.0"
+  },
+  "reference": {
+    "field_preconditions": {
+      "declared_isolating_interval": [
+        "1",
+        "2"
+      ],
+      "endpoints_are_not_roots": true,
+      "irreducibility_method": "irreducible-reduction-mod-prime",
+      "irreducibility_prime": 3,
+      "irreducible_over_q": true,
+      "normalized_minimal_polynomial": [
+        "1",
+        "0",
+        "-2"
+      ],
+      "root_count_in_open_interval": 1,
+      "root_count_method": "sturm-sequence-over-q"
+    },
+    "n": 26,
+    "side_decimal": "5.6213203435596425732025330863145471178",
+    "side_squared_in_q_sqrt2": [
+      "67/4",
+      "21/2"
+    ],
+    "unit_container_minimum_square_side": "(14 - 6*sqrt(2))/31",
+    "unit_square_container_side": "(7 + 3*sqrt(2))/2"
+  },
+  "schema_version": 1,
+  "scope": "exact source scalar comparisons; no geometry or optimality proof"
+}

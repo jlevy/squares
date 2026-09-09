@@ -272,10 +272,10 @@ Row 86 belongs to the pending refined-core transport.
 | 116 | Cover both-band squares outside the forced diamond | registered | [H-122](hypotheses/H-122-diamond-conditional-nine-point-cover.md) | Exp122 refutes this fixed-obstacle cover; full-square compatibility remains open. |
 | 117 | Localize all P10-avoiding near45 squares | registered | [H-123](hypotheses/H-123-near45-coordinate-localization.md) | Exp123 accepts the reviewed two-mark reduction through an independent four-guard certificate. |
 | 118 | Keep the full distinguished square in the conditional nine-point cover | registered | [H-124](hypotheses/H-124-full-distinguished-square-compatibility.md) | A complete compatibility proof would close H036 using H106 and H123; a bounded fixed-S discriminator first tests whether this stronger sufficient route survives. |
-| 119 | Put Gensane’s simultaneous all-square perturbation on the ordinary move menu | registered | [H-125](hypotheses/H-125-simultaneous-perturbation-move.md) | The cheapest structural repair for the plateau the 2026-09-08 annealing survey diagnoses; a flag on sqsearch rather than a formulation change. |
-| 120 | Give every square a nonzero derivative with an aggregate wall-pressure term | registered | [H-126](hypotheses/H-126-wall-pressure-dense-objective.md) | The cheap surrogate for the inflation formulation, ablatable against it; the reported side stays required_side so the term can never flatter a result. |
-| 121 | Spend the budget in refined local optima rather than moves | registered | [H-127](hypotheses/H-127-basin-hopping-over-the-lp-quench.md) | Basin hopping against multistart over the LP-in-cell quench, in the currency Ellsworth’s published statistics use. |
-| 122 | Separate cooling-schedule LENGTH from cooling-schedule SHAPE | registered | [H-128](hypotheses/H-128-cooling-schedule-length.md) | Registered mid-calibration after the ablation meant to refute a schedule explanation produced one; four temperature changes did nothing and a tenfold anneal length left the grid. |
+| 119 | Put Gensane’s simultaneous all-square perturbation on the ordinary move menu | registered | [H-127](hypotheses/H-127-simultaneous-perturbation-move.md) | The cheapest structural repair for the plateau the 2026-09-08 annealing survey diagnoses; a flag on sqsearch rather than a formulation change. |
+| 120 | Give every square a nonzero derivative with an aggregate wall-pressure term | registered | [H-128](hypotheses/H-128-wall-pressure-dense-objective.md) | The cheap surrogate for the inflation formulation, ablatable against it; the reported side stays required_side so the term can never flatter a result. |
+| 121 | Spend the budget in refined local optima rather than moves | registered | [H-129](hypotheses/H-129-basin-hopping-over-the-lp-quench.md) | Basin hopping against multistart over the LP-in-cell quench, in the currency Ellsworth’s published statistics use. |
+| 122 | Separate cooling-schedule LENGTH from cooling-schedule SHAPE | registered | [H-130](hypotheses/H-130-cooling-schedule-length.md) | Registered mid-calibration after the ablation meant to refute a schedule explanation produced one; four temperature changes did nothing and a tenfold anneal length left the grid. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.
@@ -284,9 +284,10 @@ they are not additional mathematical hypotheses without a specific method compar
 
 [X-017](explorations/X-017-compatibility-and-complete-case-covers.md) assesses the
 contributed packet against PR105’s committed `46f38ab4` state.
-[Agenda 027](agendas/agenda-027-compatibility-and-restricted-families.md) is prepared
-and paused. These idea numbers and H-111–117 records continue the sequences after the
-parallel source program’s current entries.
+[Agenda 027](agendas/agenda-027-compatibility-and-restricted-families.md) owns the
+selected follow-up allocations.
+These idea numbers and H-111–117 records continue the sequences after the parallel
+source program’s current entries.
 Branch and bead ownership distinguish the programs; the numbers carry no execution order
 or dependency. The source-to-record map in X-017 also routes overlapping proposals to
 existing H-094–103 without duplicating them.
@@ -300,6 +301,7 @@ existing H-094–103 without duplicating them.
 | 109 | Boundary-null curved resources | registered | [H-115](hypotheses/H-115-boundary-null-curved-resources.md) | Find a concrete useful candidate before building a general verifier. |
 | 110 | Expand full-size dual support beyond Trump’s orbit | registered | [H-116](hypotheses/H-116-expanded-full-size-dual-support.md) | The contributed ceiling concerns the old support only; every extension needs its own exact evidence. |
 | 111 | Force a useful bound on minimizing angle complexity | registered | [H-117](hypotheses/H-117-forced-angle-complexity.md) | A restricted-family success needs a separate argument controlling the unrestricted remainder. |
+| 119 | Test one fixed biquadratic two-pose kernel family | registered | [H-125](hypotheses/H-125-biquadratic-two-pose-kernel.md) | An exact finite objective bound at least eleven refutes this family; a feasible outer LP remains inconclusive. |
 
 ## Hybrid Strength and Angular Release
 
@@ -317,6 +319,49 @@ The agenda is prepared; none of the new instruments is declared ready.
 | 113 | Preserve common-anchor correlation | registered | [H-119](hypotheses/H-119-shared-anchor-correlation.md) | One unsplit box and measure; compare with sharply certified independent minima or a surviving static relaxation. |
 | 114 | Close a rank-nine released-contact domain | registered | [H-120](hypotheses/H-120-rank-nine-release-exclusion.md) | Prove a new continuous sublevel exclusion with all feature and local-chart seams retained. |
 | 115 | An axis-plus-one global minimizing representative | registered | [H-121](hypotheses/H-121-axis-plus-one-minimizer.md) | Establish an existential global reduction; restricted-family value proofs remain a separate obligation. |
+
+### MacIver Method Intake
+
+The
+[MacIver source review](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md)
+routes these methods to existing questions.
+The source and formal replay dependency `think-sske` precedes adoption of its geometric
+lemmas; the public Lean build is external evidence, and the full n17 computational proof
+has a separate artifact-recovery gap.
+No instrument readiness or target allocation changes here.
+
+- [H-111](hypotheses/H-111-resource-anchor-case-exclusion.md): conditional point losses
+  and the co-hit matching bound can inform complete resource-and-anchor cases.
+  Every geometric forcing clause and the case cover still need proof.
+- [H-118](hypotheses/H-118-capacity-versus-coupled-lp.md): the center-area lemma and
+  very-narrow strip law supply concrete candidate local cuts.
+  The review retains exact rational controls.
+  Acceptance still needs a natural target domain and an exact surviving witness for the
+  declared coupled LP on that same domain; stronger cuts than an incircle or rectangle
+  bound alone do not settle H-118.
+- [H-119](hypotheses/H-119-shared-anchor-correlation.md): the n17 paper’s
+  [exact translation support functions](https://github.com/DRMacIver/square-packing-research/blob/9e2cd597047e040a63b7dcd103e79962cfc2d781/papers/s17-lower-bound/paper.pdf)
+  suggest how to retain correlated translation domains.
+  This is a candidate technique after a common-anchor loss is diagnosed, not evidence of
+  the required uniform capture gap or the independent-minimum comparator’s limitation.
+
+## Stromquist’s Twenty-Six-Square Construction
+
+Stromquist’s suggestion (private communication, September 2026) prompted the
+[exact source review](../../docs/project/research/research-2026-09-07-stromquist-n26-verification.md).
+His historical packing is valid and superseded by Friedman’s current construction.
+The
+[directions review](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md)
+separates the useful next dependencies from the restricted deformation already excluded.
+
+| # | Idea | Status | Record | Crux |
+| --- | --- | --- | --- | --- |
+| 129 | Change contacts or split the central block in an n26 packing search | shaped | `think-z0fi` | The [specified family](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#first-released-contact-family) has nine translation/side variables, one common angle, and four released pair branches. Build the affine LP adapter and replay its controls before the proposed sample; driver readiness remains false. |
+| 130 | Recover Green’s n26–27 lower-bound proof or reconstruct its point cover | shaped | `think-0x08` | The survey reports approximately 5.3918. Recover the missing geometry and proof; [MacIver’s defect accounting](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md#defect-charging-and-a-co-hit-graph) suggests conditional loss clauses but supplies no n26 scaffold or theorem. |
+
+The coordinator renumbered these two source ideas from 119/120 to 129/130 while
+preparing PR120 for integration with PR116 and PR121. Their connected constraints work
+publishes ideas through 128; the source proposals and their owning beads are unchanged.
 
 ## Open questions
 
@@ -347,10 +392,33 @@ Registered as `kind: open_question` when worth carrying formally.
   stationary connectivity and unequal-side clearance remain open.
   Six endpoints from six draws show non-saturation, not its cause.
 
+## Structural Restrictions and Conditional Dots — X-019
+
+[X-019](explorations/X-019-structural-restrictions-and-conditional-dots.md) connects the
+existing conditional-dot framework to four distinct corner blockers implied by the
+twelve-square bound.
+The paused
+[Agenda 029](agendas/agenda-029-structural-restrictions-and-conditional-dots.md) plans
+three blocks of preliminary spikes, focused pursuit and independent consolidation.
+It preserves H-102’s composition questions, H-111’s complete anchor exclusion and
+H-117/H-121’s angle-reduction obligations at their existing scopes.
+No research has started under this plan.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 120 | Quantitative corner structure from insertion saturation | registered | [H-126](hypotheses/H-126-insertion-saturation-corner-structure.md) | Use four distinct corner blockers to seek useful pose or capture restrictions, including the alternatives to deep corner penetration. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.
 This section is why the campaign does not rediscover its own mistakes.
+
+- **Rotate or translate Friedman’s intact n26 central block while retaining the two
+  specified opposite corner-triplet separations.** The
+  [exact support inequality](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#a-closed-direction-rigid-central-block-rotation)
+  gives the current side as the minimum of that family, attained at 45 degrees.
+  This excludes only the declared separations and rigid block; idea 129 releases those
+  assumptions.
 
 - **`14 + 20 = 34` proves Trump is isostatic.** The verifier’s twenty is a count of
   boundary corner coordinates.

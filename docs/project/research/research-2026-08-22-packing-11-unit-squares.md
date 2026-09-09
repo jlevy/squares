@@ -1,11 +1,15 @@
 # Research: Packing 11 Unit Squares in a Square
 
-**Date:** 2026-08-22 (last updated 2026-09-06)
+**Date:** 2026-08-22 (last updated 2026-09-07)
 
 **Author:** Claude (agent), for mailto:samanthadrakova@gmail.com
 
-**Status:** The literature report is preserved as of 2026-08-25; the dated project
-summary and addenda record results through the 2026-09-06 refresh
+**Status:** The literature report is preserved as of 2026-08-25, with dated source
+corrections. The project summary records results through the 2026-09-06 refresh; the
+2026-09-07 n26 review corrects the table’s source-reported lower bounds for n26–27. The
+same day’s [MacIver review](../reviews/review-2026-09-07-maciver-square-packing.md) adds
+his missing computational artifacts to the source-availability table; his three
+manuscripts are now archived, and no operative bound changes from that addition.
 
 ## How to read the citations
 
@@ -159,7 +163,8 @@ project has since answered for itself.
 
 ## Historical Report Body (2026-08-25)
 
-The report body below preserves the literature and project state audited on 2026-08-25.
+The report body below preserves the literature and project state audited on 2026-08-25,
+except for explicitly dated source corrections.
 In particular, its `[3.788854, 3.877084]` intervals and `0.088230` gaps are historical,
 not the current project frontier.
 See the [current summary](#current-summary-through-2026-09-06) for the post-report
@@ -834,8 +839,13 @@ enumeration rather than a mathematical subtlety.
 
 ### The open frontier: what is actually unknown
 
-This section preserves the 2026-08-25 frontier snapshot; the generated table below is
-historical rather than a current inventory.
+This section preserves the 2026-08-25 frontier snapshot, with a source correction on
+2026-09-07: the n26–27 rows now include Green’s stronger lower bound as reported by
+Friedman’s survey, Theorem 9 and Table 2. Its proof remains unrecovered; the
+[verification review](research-2026-09-07-stromquist-n26-verification.md) distinguishes
+that report from the independently verified bounds.
+The table remains a historical inventory with source corrections, rather than the
+current project frontier.
 
 The solved cases above are the exceptions.
 This table is the complement — **every open `n ≤ 100`** — and it is the spine of any
@@ -846,11 +856,13 @@ Upper bounds are the best known packings from **[Kingbird]**; `grid` in the *how
 marks an `n` the catalogue does not picture, where the trivial `⌈√n⌉` packing is still
 the best known. `deg` is the algebraic degree of the conjectured optimum where the
 catalogue records a minimal polynomial.
-Lower bounds are the strongest of four sources: the area bound `√n`, Nagamochi’s general
+The original lower bounds used four sources: the area bound `√n`, Nagamochi’s general
 closed form, monotonicity from the largest proved `m ≤ n`, and the value stated in
 Stromquist’s Theorem 2 for `n ≥ 11`. Exp-017 now supplies an exact source-distinct
 certificate for the last value; D-152 still requires every provenance display to say
 that the published Figure 14 proof is false as printed.
+The n26–27 correction additionally uses Green’s reported bound, cited by Friedman as
+private communication in 2000.
 
 This table and the solved-case table below are **generated** from
 [`packing/frontier/`](../../../packing/frontier/README.md), where the same facts live as
@@ -867,30 +879,30 @@ Use the structured form to query or plot; use these tables to read.
 | --- | --- | --- | --- | --- | --- | --- |
 | 11 | 3.87708359 | hand | 8 | 3.788854 | unavoidable points | 0.0882 |
 | 12 | 4 | grid | — | 3.788854 | monotone from `s(11)` | 0.2111 |
-| 17 | 4.67553009 | hand | 18 | 4.162278 | Nagamochi | 0.5133 |
-| 18 | `(7/2) + (1/2)√7` = 4.82287566 | hand | — | 4.316625 | Nagamochi | 0.5063 |
-| 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.464102 | Nagamochi | 0.4215 |
-| 20 | 5 | grid | — | 4.605551 | Nagamochi | 0.3944 |
-| 21 | 5 | grid | — | 4.741657 | Nagamochi | 0.2583 |
-| 26 | `(7/2) + (3/2)√2` = 5.62132034 | extension | — | 5.123106 | Nagamochi | 0.4982 |
-| 27 | `5 + (1/2)√2` = 5.70710678 | strip | — | 5.242641 | Nagamochi | 0.4645 |
-| 28 | 5.82444462 | annealing | 6 | 5.358899 | Nagamochi | 0.4655 |
-| 29 | 5.93383346 | annealing | — | 5.472136 | Nagamochi | 0.4617 |
+| 17 | 4.67553009 | hand | 18 | 4.5705 | unavoidable points | 0.105 |
+| 18 | `(7/2) + (1/2)√7` = 4.82287566 | hand | — | 4.5705 | monotone from `s(17)` | 0.2524 |
+| 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.617282 | unavoidable points | 0.2683 |
+| 20 | 5 | grid | — | 4.617282 | monotone | 0.3827 |
+| 21 | 5 | grid | — | 4.7438 | unavoidable points | 0.2562 |
+| 26 | `(7/2) + (3/2)√2` = 5.62132034 | extension | — | 5.3918 | unavoidable points | 0.2295 |
+| 27 | `5 + (1/2)√2` = 5.70710678 | strip | — | 5.3918 | unavoidable points | 0.3153 |
+| 28 | 5.82444462 | annealing | 6 | 5.511709 | unavoidable points | 0.3127 |
+| 29 | 5.93383346 | annealing | — | 5.511709 | monotone | 0.4221 |
 | 30 | 6 | grid | — | 5.582576 | Nagamochi | 0.4174 |
 | 31 | 6 | grid | — | 5.690416 | Nagamochi | 0.3096 |
 | 32 | 6 | grid | — | 5.795832 | Nagamochi | 0.2042 |
-| 37 | 6.59861961 | hand | 8 | 6.09902 | Nagamochi | 0.4996 |
-| 38 | `6 + (1/2)√2` = 6.70710678 | strip | — | 6.196152 | Nagamochi | 0.511 |
-| 39 | 6.81072208 | annealing | 5 | 6.291503 | Nagamochi | 0.5192 |
-| 40 | `4 + 2 √2` = 6.82842712 | hand | — | 6.385165 | Nagamochi | 0.4433 |
+| 37 | 6.59861961 | hand | 8 | 6.350603 | unavoidable points | 0.248 |
+| 38 | `6 + (1/2)√2` = 6.70710678 | strip | — | 6.350603 | monotone | 0.3565 |
+| 39 | 6.81072208 | annealing | 5 | 6.350603 | monotone | 0.4601 |
+| 40 | `4 + 2 √2` = 6.82842712 | hand | — | 6.406136 | unavoidable points | 0.4223 |
 | 41 | 6.92669309 | annealing | 42 | 6.477226 | Nagamochi | 0.4495 |
 | 42 | 7 | grid | — | 6.567764 | Nagamochi | 0.4322 |
 | 43 | 7 | grid | — | 6.656854 | Nagamochi | 0.3431 |
 | 44 | 7 | grid | — | 6.744563 | Nagamochi | 0.2554 |
 | 45 | 7 | grid | — | 6.830952 | Nagamochi | 0.169 |
-| 50 | `7 + (4/7)` = 7.57142857 | annealing | — | 7.082763 | Nagamochi | 0.4887 |
-| 51 | 7.70079924 | annealing | 12 | 7.164414 | Nagamochi | 0.5364 |
-| 52 | `7 + (1/2)√2` = 7.70710678 | strip | — | 7.244998 | Nagamochi | 0.4621 |
+| 50 | `7 + (4/7)` = 7.57142857 | annealing | — | 7.317426 | unavoidable points | 0.254 |
+| 51 | 7.70079924 | annealing | 12 | 7.317426 | monotone | 0.3834 |
+| 52 | `7 + (1/2)√2` = 7.70710678 | strip | — | 7.317426 | monotone | 0.3897 |
 | 53 | `(13/2) + (1/2)√7` = 7.82287566 | annealing | — | 7.324555 | Nagamochi | 0.4983 |
 | 54 | `7 - (1/2)√2 + sqrt(1 + √2)` = 7.84666719 | hand | — | 7.403124 | Nagamochi | 0.4435 |
 | 55 | 7.94577101 | annealing | — | 7.480741 | Nagamochi | 0.465 |
@@ -900,10 +912,10 @@ Use the structured form to query or plot; use these tables to read.
 | 59 | 8 | grid | — | 7.78233 | Nagamochi | 0.2177 |
 | 60 | 8 | grid | — | 7.855655 | Nagamochi | 0.1443 |
 | 61 | 8 | grid | — | 7.928203 | Nagamochi | 0.0718 |
-| 65 | `5 + (5/2)√2` = 8.53553391 | hand | — | 8.071068 | Nagamochi | 0.4645 |
-| 66 | `3 + 4 √2` = 8.65685425 | hand | — | 8.141428 | Nagamochi | 0.5154 |
-| 67 | `8 + (1/2)√2` = 8.70710678 | strip | — | 8.211103 | Nagamochi | 0.496 |
-| 68 | 8.80338307 | — | — | 8.28011 | Nagamochi | 0.5233 |
+| 65 | `5 + (5/2)√2` = 8.53553391 | hand | — | 8.289966 | unavoidable points | 0.2456 |
+| 66 | `3 + 4 √2` = 8.65685425 | hand | — | 8.289966 | monotone | 0.3669 |
+| 67 | `8 + (1/2)√2` = 8.70710678 | strip | — | 8.289966 | monotone | 0.4171 |
+| 68 | 8.80338307 | — | — | 8.289966 | monotone | 0.5134 |
 | 69 | 8.82720551 | — | — | 8.348469 | Nagamochi | 0.4787 |
 | 70 | 8.88166676 | hand | 4 | 8.416198 | Nagamochi | 0.4655 |
 | 71 | 8.94407156 | annealing | — | 8.483315 | Nagamochi | 0.4608 |
@@ -914,10 +926,10 @@ Use the structured form to query or plot; use these tables to read.
 | 76 | 9 | grid | — | 8.81025 | Nagamochi | 0.1898 |
 | 77 | 9 | grid | — | 8.874008 | Nagamochi | 0.126 |
 | 78 | 9 | grid | — | 8.937254 | Nagamochi | 0.0627 |
-| 82 | `6 + (5/2)√2` = 9.53553391 | hand | — | 9.062258 | Nagamochi | 0.4733 |
-| 83 | 9.63482562 | extension | 24 | 9.124038 | Nagamochi | 0.5108 |
-| 84 | `9 + (1/2)√2` = 9.70710678 | strip | — | 9.185353 | Nagamochi | 0.5218 |
-| 85 | `(11/2) + 3 √2` = 9.74264069 | hand | — | 9.246211 | Nagamochi | 0.4964 |
+| 82 | `6 + (5/2)√2` = 9.53553391 | hand | — | 9.266734 | unavoidable points | 0.2688 |
+| 83 | 9.63482562 | extension | 24 | 9.266734 | monotone | 0.3681 |
+| 84 | `9 + (1/2)√2` = 9.70710678 | strip | — | 9.266734 | monotone | 0.4404 |
+| 85 | `(11/2) + 3 √2` = 9.74264069 | hand | — | 9.266734 | monotone | 0.4759 |
 | 86 | `(17/2) + (1/2)√7` = 9.82287566 | extension | — | 9.306624 | Nagamochi | 0.5163 |
 | 87 | 9.83881744 | annealing | 44 | 9.3666 | Nagamochi | 0.4722 |
 | 88 | 9.88815305 | hand | 20 | 9.42615 | Nagamochi | 0.462 |
@@ -930,10 +942,10 @@ Use the structured form to query or plot; use these tables to read.
 | 95 | 10 | grid | — | 9.831761 | Nagamochi | 0.1682 |
 | 96 | 10 | grid | — | 9.888194 | Nagamochi | 0.1118 |
 | 97 | 10 | grid | — | 9.944272 | Nagamochi | 0.0557 |
-| 101 | `7 + (5/2)√2` = 10.53553391 | extension | — | 10.055385 | Nagamochi | 0.4801 |
-| 102 | 10.61138823 | — | 8 | 10.110434 | Nagamochi | 0.501 |
-| 103 | 10.70379028 | — | — | 10.165151 | Nagamochi | 0.5386 |
-| 104 | `10 + (1/2)√2` = 10.70710678 | strip | — | 10.219544 | Nagamochi | 0.4876 |
+| 101 | `7 + (5/2)√2` = 10.53553391 | extension | — | 10.246736 | unavoidable points | 0.2888 |
+| 102 | 10.61138823 | — | 8 | 10.246736 | monotone | 0.3647 |
+| 103 | 10.70379028 | — | — | 10.246736 | monotone | 0.4571 |
+| 104 | `10 + (1/2)√2` = 10.70710678 | strip | — | 10.246736 | monotone | 0.4604 |
 | 105 | 10.80784791 | — | — | 10.273618 | Nagamochi | 0.5342 |
 | 106 | 10.82297973 | — | 32 | 10.327379 | Nagamochi | 0.4956 |
 | 107 | `10 - (1/2)√2 + sqrt(1 + √2)` = 10.84666719 | — | — | 10.380832 | Nagamochi | 0.4658 |
@@ -948,10 +960,10 @@ Use the structured form to query or plot; use these tables to read.
 | 116 | 11 | grid | — | 10.848858 | Nagamochi | 0.1511 |
 | 117 | 11 | grid | — | 10.899495 | Nagamochi | 0.1005 |
 | 118 | 11 | grid | — | 10.949874 | Nagamochi | 0.0501 |
-| 122 | `8 + (5/2)√2` = 11.53553391 | extension | — | 11.049876 | Nagamochi | 0.4857 |
-| 123 | 11.60139979 | — | 12 | 11.099505 | Nagamochi | 0.5019 |
-| 124 | `6 + 4 √2` = 11.65685425 | hand | — | 11.148892 | Nagamochi | 0.508 |
-| 125 | `11 + (1/2)√2` = 11.70710678 | strip | — | 11.198039 | Nagamochi | 0.5091 |
+| 122 | `8 + (5/2)√2` = 11.53553391 | extension | — | 11.229281 | unavoidable points | 0.3063 |
+| 123 | 11.60139979 | — | 12 | 11.229281 | monotone | 0.3721 |
+| 124 | `6 + 4 √2` = 11.65685425 | hand | — | 11.229281 | monotone | 0.4276 |
+| 125 | `11 + (1/2)√2` = 11.70710678 | strip | — | 11.229281 | monotone | 0.4778 |
 | 126 | 11.77617895 | annealing | 59 | 11.246951 | Nagamochi | 0.5292 |
 | 127 | `(21/2) + (1/2)√7` = 11.82287566 | extension | — | 11.29563 | Nagamochi | 0.5272 |
 | 128 | 11.82509197 | — | 40 | 11.34408 | Nagamochi | 0.481 |
@@ -968,10 +980,10 @@ Use the structured form to query or plot; use these tables to read.
 | 139 | 12 | grid | — | 11.86278 | Nagamochi | 0.1372 |
 | 140 | 12 | grid | — | 11.908712 | Nagamochi | 0.0913 |
 | 141 | 12 | grid | — | 11.954451 | Nagamochi | 0.0455 |
-| 145 | `9 + (5/2)√2` = 12.53553391 | extension | — | 12.045361 | Nagamochi | 0.4902 |
-| 146 | 12.60090778 | — | 16 | 12.090537 | Nagamochi | 0.5104 |
-| 147 | `7 + 4 √2` = 12.65685425 | hand | — | 12.135529 | Nagamochi | 0.5213 |
-| 148 | `7 + 4 √2` = 12.65685425 | hand | — | 12.18034 | Nagamochi | 0.4765 |
+| 145 | `9 + (5/2)√2` = 12.53553391 | extension | — | 12.213867 | unavoidable points | 0.3217 |
+| 146 | 12.60090778 | — | 16 | 12.213867 | monotone | 0.387 |
+| 147 | `7 + 4 √2` = 12.65685425 | hand | — | 12.213867 | monotone | 0.443 |
+| 148 | `7 + 4 √2` = 12.65685425 | hand | — | 12.213867 | monotone | 0.443 |
 | 149 | `12 + (1/2)√2` = 12.70710678 | strip | — | 12.224972 | Nagamochi | 0.4821 |
 | 150 | `5 + (11/2)√2` = 12.77817459 | extension | — | 12.269428 | Nagamochi | 0.5087 |
 | 151 | `(23/2) + (1/2)√7` = 12.82287566 | — | — | 12.313708 | Nagamochi | 0.5092 |
@@ -990,10 +1002,10 @@ Use the structured form to query or plot; use these tables to read.
 | 164 | 13 | grid | — | 12.874342 | Nagamochi | 0.1257 |
 | 165 | 13 | grid | — | 12.916375 | Nagamochi | 0.0836 |
 | 166 | 13 | grid | — | 12.958261 | Nagamochi | 0.0417 |
-| 170 | `10 + (5/2)√2` = 13.53553391 | extension | — | 13.041595 | Nagamochi | 0.4939 |
-| 171 | `13 + (4/7)` = 13.57142857 | composition | — | 13.083046 | Nagamochi | 0.4884 |
-| 172 | 13.61898899 | — | 8 | 13.124356 | Nagamochi | 0.4946 |
-| 173 | `8 + 4 √2` = 13.65685425 | extension | — | 13.165525 | Nagamochi | 0.4913 |
+| 170 | `10 + (5/2)√2` = 13.53553391 | extension | — | 13.200123 | unavoidable points | 0.3354 |
+| 171 | `13 + (4/7)` = 13.57142857 | composition | — | 13.200123 | monotone | 0.3713 |
+| 172 | 13.61898899 | — | 8 | 13.200123 | monotone | 0.4189 |
+| 173 | `8 + 4 √2` = 13.65685425 | extension | — | 13.200123 | monotone | 0.4567 |
 | 174 | `13 + (1/2)√2` = 13.70710678 | strip | — | 13.206556 | Nagamochi | 0.5006 |
 | 175 | `6 + (11/2)√2` = 13.77817459 | — | — | 13.247449 | Nagamochi | 0.5307 |
 | 176 | `(25/2) + (1/2)√7` = 13.82287566 | extension | — | 13.288206 | Nagamochi | 0.5347 |
@@ -1014,10 +1026,10 @@ Use the structured form to query or plot; use these tables to read.
 | 191 | 14 | grid | — | 13.884099 | Nagamochi | 0.1159 |
 | 192 | 14 | grid | — | 13.922848 | Nagamochi | 0.0772 |
 | 193 | 14 | grid | — | 13.961481 | Nagamochi | 0.0385 |
-| 197 | `11 + (5/2)√2` = 14.53553391 | extension | — | 14.038405 | Nagamochi | 0.4971 |
-| 198 | `14 + (4/7)` = 14.57142857 | extension | — | 14.076697 | Nagamochi | 0.4947 |
-| 199 | 14.61898899 | extension | 8 | 14.114877 | Nagamochi | 0.5041 |
-| 200 | `9 + 4 √2` = 14.65685425 | extension | — | 14.152946 | Nagamochi | 0.5039 |
+| 197 | `11 + (5/2)√2` = 14.53553391 | extension | — | 14.187765 | unavoidable points | 0.3478 |
+| 198 | `14 + (4/7)` = 14.57142857 | extension | — | 14.187765 | monotone | 0.3837 |
+| 199 | 14.61898899 | extension | 8 | 14.187765 | monotone | 0.4312 |
+| 200 | `9 + 4 √2` = 14.65685425 | extension | — | 14.187765 | monotone | 0.4691 |
 | 201 | `14 + (1/2)√2` = 14.70710678 | strip | — | 14.190906 | Nagamochi | 0.5162 |
 | 202 | `2 + 9 √2` = 14.72792206 | strip | — | 14.228757 | Nagamochi | 0.4992 |
 | 203 | `7 + (11/2)√2` = 14.77817459 | — | — | 14.266499 | Nagamochi | 0.5117 |
@@ -1040,10 +1052,10 @@ Use the structured form to query or plot; use these tables to read.
 | 220 | 15 | grid | — | 14.892444 | Nagamochi | 0.1076 |
 | 221 | 15 | grid | — | 14.928388 | Nagamochi | 0.0716 |
 | 222 | 15 | grid | — | 14.96424 | Nagamochi | 0.0358 |
-| 226 | `12 + (5/2)√2` = 15.53553391 | extension | — | 15.035669 | Nagamochi | 0.4999 |
-| 227 | `(17/2) + 5 √2` = 15.57106781 | — | — | 15.071247 | Nagamochi | 0.4998 |
-| 228 | 15.60902282 | — | 12 | 15.106736 | Nagamochi | 0.5023 |
-| 229 | `10 + 4 √2` = 15.65685425 | extension | — | 15.142136 | Nagamochi | 0.5147 |
+| 226 | `12 + (5/2)√2` = 15.53553391 | extension | — | 15.176574 | unavoidable points | 0.359 |
+| 227 | `(17/2) + 5 √2` = 15.57106781 | — | — | 15.176574 | monotone | 0.3945 |
+| 228 | 15.60902282 | — | 12 | 15.176574 | monotone | 0.4324 |
+| 229 | `10 + 4 √2` = 15.65685425 | extension | — | 15.176574 | monotone | 0.4803 |
 | 230 | `15 + (28/41)` = 15.68292683 | — | — | 15.177447 | Nagamochi | 0.5055 |
 | 231 | `15 + (1/2)√2` = 15.70710678 | strip | — | 15.21267 | Nagamochi | 0.4944 |
 | 232 | `8 + (11/2)√2` = 15.77817459 | hand | — | 15.247807 | Nagamochi | 0.5304 |
@@ -1068,11 +1080,11 @@ Use the structured form to query or plot; use these tables to read.
 | 251 | 16 | grid | — | 15.899664 | Nagamochi | 0.1003 |
 | 252 | 16 | grid | — | 15.933185 | Nagamochi | 0.0668 |
 | 253 | 16 | grid | — | 15.96663 | Nagamochi | 0.0334 |
-| 257 | `13 + (5/2)√2` = 16.53553391 | extension | — | 16.033296 | Nagamochi | 0.5022 |
-| 258 | `(19/2) + 5 √2` = 16.57106781 | extension | — | 16.066519 | Nagamochi | 0.5045 |
-| 259 | 16.60257141 | — | 8 | 16.099669 | Nagamochi | 0.5029 |
-| 260 | `11 + 4 √2` = 16.65685425 | extension | — | 16.132746 | Nagamochi | 0.5241 |
-| 261 | `16 + (28/41)` = 16.68292683 | extension | — | 16.165751 | Nagamochi | 0.5172 |
+| 257 | `13 + (5/2)√2` = 16.53553391 | extension | — | 16.166376 | unavoidable points | 0.3692 |
+| 258 | `(19/2) + 5 √2` = 16.57106781 | extension | — | 16.166376 | monotone | 0.4047 |
+| 259 | 16.60257141 | — | 8 | 16.166376 | monotone | 0.4362 |
+| 260 | `11 + 4 √2` = 16.65685425 | extension | — | 16.166376 | monotone | 0.4905 |
+| 261 | `16 + (28/41)` = 16.68292683 | extension | — | 16.166376 | monotone | 0.5166 |
 | 262 | `16 + (1/2)√2` = 16.70710678 | strip | — | 16.198684 | Nagamochi | 0.5084 |
 | 263 | `(25/2) + 3 √2` = 16.74264069 | — | — | 16.231546 | Nagamochi | 0.5111 |
 | 264 | `9 + (11/2)√2` = 16.77817459 | hand | — | 16.264338 | Nagamochi | 0.5138 |
@@ -1098,11 +1110,11 @@ Use the structured form to query or plot; use these tables to read.
 | 284 | 17 | grid | — | 16.905974 | Nagamochi | 0.094 |
 | 285 | 17 | grid | — | 16.937377 | Nagamochi | 0.0626 |
 | 286 | 17 | grid | — | 16.968719 | Nagamochi | 0.0313 |
-| 290 | `14 + (5/2)√2` = 17.53553391 | composition | — | 17.03122 | Nagamochi | 0.5043 |
-| 291 | `14 + (5/2)√2` = 17.53553391 | composition | — | 17.062378 | Nagamochi | 0.4732 |
-| 292 | 17.60257141 | extension | 8 | 17.093477 | Nagamochi | 0.5091 |
-| 293 | `17 + (26/41)` = 17.63414634 | — | — | 17.124515 | Nagamochi | 0.5096 |
-| 294 | `12 + 4 √2` = 17.65685425 | extension | — | 17.155494 | Nagamochi | 0.5014 |
+| 290 | `14 + (5/2)√2` = 17.53553391 | composition | — | 17.157031 | unavoidable points | 0.3785 |
+| 291 | `14 + (5/2)√2` = 17.53553391 | composition | — | 17.157031 | monotone | 0.3785 |
+| 292 | 17.60257141 | extension | 8 | 17.157031 | monotone | 0.4455 |
+| 293 | `17 + (26/41)` = 17.63414634 | — | — | 17.157031 | monotone | 0.4771 |
+| 294 | `12 + 4 √2` = 17.65685425 | extension | — | 17.157031 | monotone | 0.4998 |
 | 295 | `17 + (1/2)√2` = 17.70710678 | strip | — | 17.186414 | Nagamochi | 0.5207 |
 | 296 | `17 + (1/2)√2` = 17.70710678 | strip | — | 17.217275 | Nagamochi | 0.4898 |
 | 297 | 17.74116993 | annealing | — | 17.248077 | Nagamochi | 0.4931 |
@@ -2285,6 +2297,7 @@ in place of the PDF on a re-test, not that access was assumed to be blocked.
 | Source | Year | Where | Obstacle | What rests on it |
 | --- | --- | --- | --- | --- |
 | **[Arslanov–Bui 2025]** Note on “efficient packings of unit squares in a large square” | 2025 | Discrete Comput. Geom. | paywall | Current continuation of the Kearney-Shiu delta_n / n_r line. |
+| **[MacIver 2026 n17 artifacts]** Supporting C1-C14 certificates, exact ledger, and theorem replay for the seventeen-square lower-bound manuscript | 2026 | Supporting computational artifacts cited by an author-hosted manuscript | unpublished | Independent replay of the historical source claim s(17), s(18) > (40sqrt(2)+19)/17 + 1/200 and assessment of the deformed-scaffold conditional counting method. Neither current verified 459/100 lower bound depends on these artifacts. |
 | **[Plakhta 2021]** Configuration spaces of squares in a rectangle | 2021 | Algebraic & Geometric Topology 21, 1445-1478 | bot-blocked | H-032’s literature routing for affine Morse-Bott analysis of square configuration spaces in a rectangle; it is context and method, not a classification of the exact optimal-moduli spaces asked there. |
 | **[Chung–Graham 2009]** Packing equal squares into a large square | 2009 | J. Combin. Theory Ser. A 116, 1167-1175 | paywall | The O(x^{(3+sqrt(2))/7} log x) step in the asymptotic chain. |
 | **[Chung–Graham 2020]** Efficient packings of unit squares in a large square | 2020 | Discrete Comput. Geom. | paywall | The claimed O(x^{3/5}) bound that McClenagan states “has an error in it”. Reading it would let us describe the error rather than relay the claim. |

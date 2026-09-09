@@ -212,9 +212,8 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --checks --jobs 3 --inner-jobs 1
 
-      # Everything except the exhaustive exact tier, which is the `exhaustive` job below.
-      # `--skip` is what stops it running here as well: without it the two jobs would both
-      # pay 1943s for the same step. The two selections partition the gate, and
+      # Everything except the two isolated behavioural lanes below. The three selections
+      # partition the gate without paying for any step twice, and
       # `test_the_post_merge_jobs_partition_the_gate` is what keeps them a partition when a
       # step is added.
       #
@@ -222,12 +221,64 @@ jobs:
       # is still a partition. A *tier* flag on this command would be a different thing and
       # is not allowed: a tier is a filter nothing checks the complement of, so it is how a
       # step ends up in neither surface, which is the gap `D-455` and `D-456` came through.
+      #
+      # Run numeric steps serially at two inner workers. Run 34181619739, on PR #121's
+      # branch after it took PR #116's job split, timed out the escape screen at 1800s
+      # with two numeric pools sharing a runner; the serial deferred replay in run
+      # 34183723509 completed it in 1069.84s.
+      # The slow lane also gets its own runner: run 34177317419 timed it out at 1800s
+      # while it shared the deferred job. This changes scheduling, not coverage.
       - name: Run the complete integration surface
         if: "github.event_name != 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --skip "exhaustive exact behavioral tests"
-          --jobs 2 --inner-jobs 2
+          --skip "slow behavioral tests"
+          --skip "single-square translation escape screen"
+          --jobs 1 --inner-jobs 2
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  slow-lane:
+    # The full slow lane stays off the ordinary pull-request surface. Its corpus tests
+    # use PACK_JOBS internally, so retain two inner workers on this isolated runner.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Retained-theorem reviews read historical Git objects.
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the slow behavioural lane
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "slow behavioral tests"
+          --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -493,6 +544,72 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --only "exhaustive exact behavioral tests"
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  screen:
+    # The whole single-square translation escape screen, on its own runner, for the reason
+    # the exhaustive tier is on its own runner: its process pool is sized by PACK_JOBS,
+    # and beside the rest of the gate it receives two workers instead of four.
+    # A same-runner comparison is still needed to measure how the screen scales.
+    #
+    # `D-484` is what this fixes. The n=1..324 expansion (#111) took the corpus from about
+    # 100 records to 318 screened, and the step went from comfortably inside the shared
+    # 900s subprocess cap to killed at it -- 901.00s on run 34172652457, which is the cap
+    # and not an uncensored duration. The split and the higher cap are evaluated together.
+    # At `--jobs 2 --inner-jobs 2` the screen gets two pool workers and pays contention for
+    # them, and no `--jobs` setting on that job can give it more without oversubscribing
+    # the other slot (`BC-218`).
+    #
+    # Alone at `--jobs 1 --inner-jobs 4` it gets four, which is what `PACK_JOBS` hands
+    # `sqpack.workers.worker_count` and what the pool then asks for.
+    #
+    # The identical deep-gate job provides three hosted proxy readings: 944s on run
+    # 34188003140, 861s on run 34189176373 and 949s on run 34190285360 -- spread 1.10x,
+    # geometric mean 917.09s. Two of the three are above the 900s cap the step used to run
+    # under, which is why `SCREEN_BUDGET_SECONDS` raises it to 1800s rather than leaving
+    # the split to do the work alone. There is also one local reading, 794.5s at four
+    # workers on a four-cpu development box over the same 318 records; the hosted runs sit
+    # 1.08x to 1.19x above it, so it is a development number and not the measurement to
+    # size this job from.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # Shallow is enough: the provenance step that needs full history is not in this
+        # selection. kpress is vendored at vendor/kpress and installed from that path, so
+        # the environment does not resolve without the submodule checked out.
+        with:
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the single-square translation escape screen
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "single-square translation escape screen"
           --jobs 1 --inner-jobs 4
 
       - name: Preserve validation timings and partial logs

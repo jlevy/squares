@@ -116,6 +116,10 @@ WORK_MODEL_SCAN_PRUNED_DIRS = {
     "target",
 }
 
+#: The README spells its counts out, so the check has to know the word for each one it
+#: might assert. The table stopped at ten and the report count reached eleven, at which
+#: point the check silently started demanding the numeral instead -- a false failure
+#: against correct prose. Keep it ahead of the counts it is asked about.
 _SPELLED = {
     1: "one",
     2: "two",
@@ -127,6 +131,16 @@ _SPELLED = {
     8: "eight",
     9: "nine",
     10: "ten",
+    11: "eleven",
+    12: "twelve",
+    13: "thirteen",
+    14: "fourteen",
+    15: "fifteen",
+    16: "sixteen",
+    17: "seventeen",
+    18: "eighteen",
+    19: "nineteen",
+    20: "twenty",
 }
 
 

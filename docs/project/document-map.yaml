@@ -14,6 +14,11 @@ documents:
   - {path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-09-07-n26-best-known-audit.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-maciver-square-packing.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-09-07-stromquist-n26-verification.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-07-stromquist-incorporation.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/stromquist-helper-arguments-math-review.md, role: review, authority: supporting, lifecycle: maintained}
@@ -104,6 +109,8 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md, role: research-report, authority: record, lifecycle: retained}
@@ -329,6 +336,10 @@ documents:
     authority: record
     lifecycle: retained
   - path: docs/project/reviews/review-2026-09-07-n17-comprehensive-review.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-08-paper-font-merge.md
     role: review
     authority: record
     lifecycle: retained

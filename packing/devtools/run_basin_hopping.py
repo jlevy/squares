@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Basin hopping over `quench_bracket`, budgeted in refined local optima.
 
-    run_basin_hopping.py --cells 5,10,11 --seeds 1,2,3 --quenches 20 --out results/exp-132
+    run_basin_hopping.py --cells 5,10,11 --seeds 1,2,3 --quenches 20 --out results/exp-133
 
 This is Gensane and Ryckelynck's algorithm 4 with a stronger local solver substituted
 for their layer 2: perturb every square at once, refine to a local optimum, accept only

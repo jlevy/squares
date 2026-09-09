@@ -154,12 +154,19 @@ agenda:
     artifacts:
     - packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md
     - packing/resources/papers/n11-complete-research-bundle-2026-09-07/updates/enumeration_addendum.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md
     parallel_group: agenda027-direct-contracts
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
       BC-261 consumes only the accepted case/Farkas and required resource subset;
       BC-264 consumes the kernel subset. Physical stationarity is reviewed separately
       under BC-267 and is not a gate on direct all-feasible exclusions.
+    note: >-
+      Session097 independently accepted the kernel implication, joint symmetry and
+      exact finite objective-certificate contract. This closes only that subset of
+      BC260; it does not disposition the other owner's direct-contract review or
+      accept a continuum certificate. The separate post-freeze review admits a
+      source-free finite instrument build, not its scientific target.
   - id: BC-261
     purpose: tool_validation
     owner_focus: correctness
@@ -261,12 +268,12 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: tentative
+    state: in_progress
     priority: 2
     question: >-
       Does one small fixed feature family for H-114 have an exact obstruction,
       or a b < 11 candidate with a credible continuum certification route?
-    hypotheses: [H-114]
+    hypotheses: [H-114, H-125]
     budget: >-
       One 30-minute feature and separator price before any target allocation.
       Freeze a narrower family claim and scientific cap; no automatic degree
@@ -281,7 +288,7 @@ agenda:
       certified b < 11 bound. Report which output was achieved.
     bead: think-mq0d
     workflows: [insight-iteration, research-loop, factual-review]
-    depends_on: [BC-260]
+    depends_on: []
     parallel_group: agenda027-pair-kernel
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
@@ -295,6 +302,28 @@ agenda:
       left unresolved. Freeze one feature family, exact PSD/necessary-constraint
       acceptance and the full diagonal/pair verification price. Stop if these
       do not fit the slice; no degree escalation or general hierarchy build.
+      The user then explicitly requested continuation. Session097 opened
+      this source-free pricing on codex/n11-kernel-pricing, with max feature author
+      think-mkik and independent max reviewer think-b271, under think-c53m.
+      The first slice's original cap was21:27 UTC on September7; no target was admitted.
+      Pricing finished at21:23:55 with a proved cubic center-feature obstruction
+      and one eleven-feature16-parameter D4 family. The finite LP and independent
+      exact reader completed separate source-free builds before22:00;
+      all75 controls and independent max code/protocol reviews passed.
+      Engine d6f0c403 passed its immutable push gate. Exp129 did not launch:
+      protocol424adf85 failed its records/push gates on a stale synopsis control,
+      so the22:20 launch cutoff passed with zero scientific time. H125 is untested;
+      the unspent first invocation requires a fresh explicit allocation and passing
+      published admission, not a restart under the expired clock. No degree
+      escalation or continuum build is admitted.
+      The accepted kernel-specific artifact now supplies the entry contract, so
+      the coarse dependency on all of BC260 is removed for this cell only.
+      Other BC260 implications retain their own review status. H125 records the
+      concrete family prospectively; its source-free instrument is ready but the
+      operational launch guard is blocked. Keep this cell open at that precise scope.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md
   - id: BC-265
     purpose: research
     owner_focus: insight
@@ -441,7 +470,14 @@ agenda:
 
 **Selected work has executed; the rest requires its own allocation.** Session095
 completed BC259’s independent support-ceiling adoption and BC265’s comparative design.
-BC264 is the selected future pricing entry, not an active target.
+Session097 completed BC264’s pricing: a cubic-feature obstruction is proved and a fixed
+eleven-feature family has independently reviewed finite instruments with75 source-free
+controls. Exp129 did not launch because its protocol checks had not passed by the launch
+cutoff; both ultimately failed a stale documentation-control anchor.
+H125 remains untested and both scientific allowances are unspent.
+A feasible LP would remain inconclusive.
+The next admission must use a fresh allocation after the checkpoint checks pass,
+preserving the original non-invocation rather than extending its clock.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.
