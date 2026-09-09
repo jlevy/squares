@@ -1,5 +1,5 @@
 ---
-title: session-118 — test the small surviving wall-owner tuple
+title: "session-118 \u2014 test the small surviving wall-owner tuple"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -75,11 +75,16 @@ session:
   - Five focused controls passed in1.94seconds; Ruff and BasedPyright passed. Astra Max independently
     passed five controls in0.44seconds and gave source GO without target access.
   - No exp149 target ran before the original16:18:07UTC latest launch.
+  - 'full gate: fast at 8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e: passed (hosted PR merge; deferred checkpoint
+    also passed)'
+  - Hosted fast34380281277 and deferred34380372729 passed for PR142 head8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e.
+    All four deferred checkout logs confirm synthetic merge80b182105c02628b0682b1cbb36ff394aa0363cd, whose
+    immediate parents are70cae36142b814c64091136793b56a50568e6f4d and the PR head. The former merges b537d3ec8490de5cb14ad987f157cebb25269691
+    and e6a014493651ce90840d5045253f48987c9f187d.
   stop_reason: Source readiness missed the original guarded launch cutoff; the unchanged target moves
     to a fresh forward allocation rather than shortening its allowance.
-  next_action: 'Certification under think-ta8s: publish the Session117/118 results and admitted H147/exp149
-    source. BC-319 under think-ykd6 continues in Session119 with unchanged criteria.'
-  certification_pending: think-ta8s
+  next_action: Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6
+    on codex/n11-owner-core-compatibility with separate prospective experiments and usage.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-118.yaml
 ---
@@ -94,6 +99,12 @@ to accept it. No unfinished seed screen is promoted to complete.
 The source contract is in the
 [strategy note](../../cases/n11_five_dot_cover/after-exp148-strategy.md).
 Keep the original exp148 partial receipt and scientific allowance unchanged.
+
+**Certification addendum, 2026-09-09.** The pending status at the original stop is
+preserved in the historical account above.
+The subsequent PR142 fast and deferred checkpoint passed; the declared source head and
+tested synthetic merge are identified in the checks.
+No scientific result or original deadline changes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

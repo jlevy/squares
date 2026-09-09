@@ -208,6 +208,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Saved-Escape Owner Compatibility: Source Admission](packing/cases/n11_five_dot_cover/owner-compatibility-source-admission.md) | dated review record | record | retained | — |
+| [Saved-Escape Owner Compatibility: Mathematical Admission Contract](packing/cases/n11_five_dot_cover/owner-compatibility-contract.md) | dated review record | record | retained | — |
 | [After exp148: Transport the Witnesses, Then Remove Repeated Preparation](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) | research synthesis | record | retained | — |
 | [After exp149: Test the Escape in the Snapped-Core Model](packing/cases/n11_five_dot_cover/after-exp149-strategy.md) | research synthesis | record | retained | — |
 | [Selected-Cover Adapter: Source Admission](packing/cases/n11_five_dot_cover/selected-cover-source-admission.md) | dated review record | record | retained | — |
@@ -799,10 +801,14 @@ refutes H-147 at its first required direction: owner-000 has a positive exact un
 area and a retained rational strict escape for tuple `(0,0,0,7)`. H-146 remains
 unresolved over other tuples.
 
-**Selected next entry:** `think-ta8s`, BC-323: publish the coherent exp149 result head
-and require one matching deferred checkpoint.
-The next scientific branch is BC-320 under `think-ykd6`: test the saved escape against
-every retained snapped-owner frame in each selected class.
+**Selected next entry:** `think-ykd6`, BC-320: H148/exp150 tests the saved exp149 escape
+against entire allowed snapped-owner cores, in order TR, BL, BR, TL. The exact contract
+uses all retained frames and centre polygons; source admission precedes the single
+bounded target.
+[Session121](packing/campaign/agent-sessions/session-121-owner-core-compatibility.md)
+runs on `codex/n11-owner-core-compatibility`. PR142 is ready after matching fast and
+deferred validation; neither PR142 nor PR137 has merged.
+
 The two-hour sprint in
 [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
 complete. Exp141 independently confirmed the retained-family negative screens; exp142
@@ -812,18 +818,15 @@ The footprint-containment and strict-core arguments supply the physical implicat
 recorded as T-023. BC-316 subsequently completed the independent polygon-union audit in
 [exp-145](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md):
 all 361 exact deficits were zero.
-The next active slice reviews and publishes the source-bound component-containment
-adapter under think-waix before any target relation is evaluated.
+The next slice follows the
+[saved-escape decision tree](packing/cases/n11_five_dot_cover/after-exp149-strategy.md):
 
-The next slice has an ordered exit condition:
-
-1. Review and publish the source-bound containment adapter and its guard controls.
-   Transform patches and dots together under valid container symmetries, and check
-   exactly when a new guaranteed occupied union contains a certified union.
-   Retain a ledger identifying covered and uncovered owner combinations.
-2. Search for new five- or six-dot patterns only on uncovered cases, recording exact
-   escaping cores when a candidate fails.
-   Refine owner position and angle where the coarse classes remain insufficient.
+1. Test strict compatibility with an entire snapped owner core in each selected class.
+2. If one class excludes the escape, measure whether its stronger forbidden region
+   removes positive uncovered area.
+3. If all four classes admit individual compatible cores, register a six-dot test on the
+   same tuple, retaining the five dots and adding the escape centre.
+   All361 directions remain required.
 
 A global exclusion requires this ledger to cover every admissible owner combination.
 The next experiments require fresh hypotheses or explicitly scoped successors,
@@ -3385,6 +3388,7 @@ round that names the hypothesis, control roles included.
 | [H-145](packing/campaign/hypotheses/H-145-wall-owner-containment-expansion.md) | refuted | Wall-aware footprints extend a five-dot exclusion by component containment | 1 | 40.88s wall |
 | [H-146](packing/campaign/hypotheses/H-146-fixed-five-dot-wall-expansion.md) | unresolved | The fixed five dots exclude another wall-owner tuple | 1 | 74.03s wall |
 | [H-147](packing/campaign/hypotheses/H-147-selected-wall-tuple-cover.md) | refuted | The unchanged five-dot pattern covers the selected wall-owner tuple `(0,0,0,7)` | 1 | 11.41s wall |
+| [H-148](packing/campaign/hypotheses/H-148-wall-owner-escape-compatibility.md) | running | At least one selected owner-core class excludes the exact exp149 escape | 1 | Unrun; 120s external / 90s internal allowance |
 
 ### Confirmed
 
@@ -3638,13 +3642,15 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-118.yaml` | session-118 | 59 | 0.38 h | 0.16 h | 0.16 h | yes |
 | `codex-task-tree-session-119.yaml` | session-119 | 86 | 0.51 h | 0.25 h | 0.25 h | yes |
 | `codex-task-tree-session-120.yaml` | session-120 | 96 | 0.68 h | 0.2 h | 0.2 h | yes |
+| `codex-task-tree-session-121-source.yaml` | session-121 | 152 | 1.31 h | 0.45 h | 0.45 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
+| `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 75 |
+| measured | 76 |
 | unmeasured | 45 |
-| **total** | **120** |
+| **total** | **121** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3660,7 +3666,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 105 rounds registered in `series-000`.
+There are 106 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1366.1 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -3807,6 +3813,7 @@ archive beside it.
 | [exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md) | 11 | target | H-145 | Exact 128-slot component containment and union-of-products count | All128 complete; only2baseline tuples;0new | rejected |
 | [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md) | 11 | target | H-146 | Nine-seed witness bank and one surviving tuple full-net check | Partial seed bank;49152 labels rejected;no candidate | unresolved |
 | [exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md) | 11 | target | H-147 | Exact complete-net cover of the selected wall tuple `(0,0,0,7)` | First direction has exact positive deficit and strict escape | rejected |
+| [exp-150](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md) | 11 | target | H-148 | Exact compatibility of the saved escape with entire allowed owner cores | Source admitted; target unrun | in-progress |
 
 ### Cost and provenance
 
@@ -3917,10 +3924,11 @@ archive beside it.
 | exp-147 | one 120-second external process; 60-second internal guard after input loading | 40.88s | — | criterion | `e72102e1` |
 | exp-148 | one five-minute process; shared 240-second internal and 60-second seed guards | 74.03s | — | timebox | `3bbb6987` |
 | exp-149 | one five-minute external process; 240-second internal guard after input loading | 11.41s | — | criterion | `5600c0fb` |
+| exp-150 | one 120-second external process; 90-second internal guard after input loading | — | — | unrun | — |
 
-### What the 105 rounds jointly establish
+### What the 106 rounds jointly establish
 
-The 105 rounds use 2152.1 agent-minutes and 1366.1 wall-minutes under the campaign’s
+The 106 rounds use 2152.1 agent-minutes and 1366.1 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

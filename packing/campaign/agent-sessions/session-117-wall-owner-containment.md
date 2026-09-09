@@ -1,5 +1,5 @@
 ---
-title: session-117 — transfer wall-aware owner exclusions
+title: "session-117 \u2014 transfer wall-aware owner exclusions"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -122,11 +122,16 @@ session:
     typedpartial seeddeadline. Retained JSON equals stdout.
   - Native usage closes at2026-09-09T16:10:19Z; Session118 begins at exactly that boundary. Original Session117
     deadline and16:10:09 research cutoff are retained.
+  - 'full gate: fast at 8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e: passed (hosted PR merge; deferred checkpoint
+    also passed)'
+  - Hosted fast34380281277 and deferred34380372729 passed for PR142 head8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e.
+    All four deferred checkout logs confirm synthetic merge80b182105c02628b0682b1cbb36ff394aa0363cd, whose
+    immediate parents are70cae36142b814c64091136793b56a50568e6f4d and the PR head. The former merges b537d3ec8490de5cb14ad987f157cebb25269691
+    and e6a014493651ce90840d5045253f48987c9f187d.
   stop_reason: Exp147 completed negative and exp148 retained a valid partial witness bank; continued research
     is separately allocated in Session118 from16:10:19UTC.
-  next_action: 'BC-319 under think-ykd6: test the explicit small tuple(0,0,0,7) in fresh H147/exp149,
-    selected by the analytic transported witnesses. Certification remains under think-ta8s.'
-  certification_pending: think-ta8s
+  next_action: Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6
+    on codex/n11-owner-core-compatibility with separate prospective experiments and usage.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-117.yaml
 ---
@@ -149,6 +154,12 @@ retained failures.
 Usage begins at 15:25:09 UTC, exactly where Session116 ends.
 Keep native task lifetimes, model stream time, experimental process time and billed
 usage distinct.
+
+**Certification addendum, 2026-09-09.** The pending status at the original stop is
+preserved in the historical account above.
+The subsequent PR142 fast and deferred checkpoint passed; the declared source head and
+tested synthetic merge are identified in the checks.
+No scientific result or original deadline changes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

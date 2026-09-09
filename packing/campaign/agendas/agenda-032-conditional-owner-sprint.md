@@ -1,5 +1,5 @@
 ---
-title: agenda-032 — two-hour conditional-owner sprint at n = 11
+title: "agenda-032 \u2014 two-hour conditional-owner sprint at n = 11"
 softschema:
   contract: packing.squares:ExperimentAgenda/v1
   schema: ../schemas/agenda.schema.yaml
@@ -298,14 +298,14 @@ agenda:
       candidates:
       - bead: think-ta8s
         workflow: research-loop
-        priority: 1
-        rationale: Certify the coherent exp149 result checkpoint before opening the reviewed BC320
-          successor on a fresh stacked branch.
+        priority: 2
+        rationale: PR142 certification is complete. Retain separate native publication-tail and successor
+          usage, and perform the next efficiency/checkpoint review when evidence warrants it.
       - bead: think-ykd6
         workflow: research-loop
         priority: 1
-        rationale: Exp148 partial evidence and analytic transport select the explicit small tuple under
-          BC319.
+        rationale: BC320 tests the exact exp149 escape against entire allowed snapped-owner cores before
+          changing dots or scanning another tuple.
       - bead: think-waix
         workflow: research-loop
         priority: 1
@@ -322,11 +322,11 @@ agenda:
         rationale: Full-support pricing remains uninvoked; retain it behind the newly successful geometric
           conditioning mechanism.
       selected:
-        bead: think-ta8s
+        bead: think-ykd6
         workflow: research-loop
-        rationale: The continuation completed exp149 and selected BC320. Publish one coherent result head
-          and require matching deferred evidence before the successor branch opens. Original sprint outcomes
-          and cost remain unchanged.
+        rationale: 'PR142 completed fast/deferred validation and is ready. The stacked successor takes
+          BC320: one saved-escape snapped-owner compatibility test, with new H148/exp150 and separate
+          Session121 usage. Original sprint outcomes and cost remain unchanged.'
       operator_input:
         status: confirmed
         note: User selected a two-hour sprint on geometric conditioning and parallel experiments. The

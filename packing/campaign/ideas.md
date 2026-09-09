@@ -446,6 +446,12 @@ prevent those local facts from being mistaken for a global exclusion.
 | 142 | Reuse strict escapes before one direct fixed-dot cover check | registered | [H-146](hypotheses/H-146-fixed-five-dot-wall-expansion.md) | Nine seed directions broadcast exact witnesses across labels; the first surviving new tuple gets one complete direction check. A failed candidate is not a refutation over every tuple. |
 | 143 | Check the first analytically surviving wall tuple directly | registered | [H-147](hypotheses/H-147-selected-wall-tuple-cover.md) | Fix tuple `(0,0,0,7)` before the run and require the unchanged five dots to cover all 361 directions; the first replayed strict escape refutes only this selected tuple. |
 
+| 144 | Test whether an entire allowed owner core excludes the saved escape | registered
+| [H-148](hypotheses/H-148-wall-owner-escape-compatibility.md) | Freeze exp149’s
+residual pose; exact SAT extrema over complete frame centre sets distinguish a
+common-footprint artifact from surviving individual core compatibility.
+|
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 120
+count: 121
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 75
+  sessions_measured: 76
   sessions_unmeasured: 45
   attributed:
     rollups: 123
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3920
     wall_hours: 230.77
 codex_receipts:
-  attributed: 40
-  unattributed: 1
-  measured: 41
+  attributed: 41
+  unattributed: 2
+  measured: 43
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1962,4 +1962,24 @@ sessions:
     agent_hours: 0.68
     active_union_hours: 0.2
     wall_hours: 0.2
+    snapshot_incomplete: true
+- id: session-121
+  title: "Owner-core compatibility continuation"
+  status: in_progress
+  primary_bead: think-ykd6
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
+    model_responses: 152
+    agent_hours: 1.31
+    active_union_hours: 0.45
+    wall_hours: 0.45
     snapshot_incomplete: true

@@ -1,5 +1,5 @@
 ---
-title: agenda-033 — overnight owner-geometry research at n = 11
+title: "agenda-033 \u2014 overnight owner-geometry research at n = 11"
 softschema:
   contract: packing.squares:ExperimentAgenda/v1
   schema: ../schemas/agenda.schema.yaml
@@ -165,7 +165,7 @@ agenda:
     instances:
     - 11
     state: in_progress
-    priority: 2
+    priority: 1
     question: Can selective owner-pose refinement or compatibility remove the remaining difficult cases?
     budget: Conditional 30-minute insight slice only after concrete residual failures; refine implicated
       classes rather than all 256 subclasses.
@@ -175,15 +175,20 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-319
-    next_evidence: Freeze the exp149 rational escape and decide, for each of its four selected classes,
-      whether any of the181 retained snapped-owner frames can be strictly separated from that residual
-      core. Assign new H/exp IDs only on the fresh stacked successor branch.
+    next_evidence: H148/exp150 prospectively fixes the saved exp149 escape, four selected classes and
+      complete snapped-owner frames. Admit source and publish on codex/n11-owner-core-compatibility before
+      the single120-second external/90-second internal target.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
     artifacts:
     - packing/cases/n11_five_dot_cover/after-exp149-strategy.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
+    - packing/campaign/hypotheses/H-148-wall-owner-escape-compatibility.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md
+    - packing/cases/n11_five_dot_cover/owner-compatibility-contract.md
+    hypotheses:
+    - H-148
   - id: BC-321
     purpose: research
     owner_focus: insight
@@ -243,24 +248,39 @@ agenda:
     owner_focus: process
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Is the overnight milestone reviewable with complete result scope, usage and next actions?
-    budget: 'Historical resumed window: final reconciliation was scheduled16:23:09–16:38:09UTC. Session120
-      later stopped at16:46:46UTC; current publication certification is a continuation outside that expired
-      window.'
+    budget: "Historical resumed window: final reconciliation was scheduled16:23:09\u201316:38:09UTC. Session120\
+      \ later stopped at16:46:46UTC; current publication certification is a continuation outside that\
+      \ expired window."
     entry: All retained experiment records, proof reviews, exact source revisions and separate session
       receipts.
     exit: Updated stacked PR, passing appropriate checks or explicit pending gate, morning report, agenda
       dispositions and prioritized successor tasks.
     bead: think-ta8s
     depends_on: []
-    next_evidence: Publish the coherent exp149 result head, run one matching deferred checkpoint and mark
-      PR142 ready only if it passes. Later publication/certification work remains outside Session120's
-      measured interval and is not zero cost.
+    next_evidence: PR142 head8a35b482 passed matching fast/page and deferred34380372729; all four research-job
+      checkout revisions were verified. PR142 is ready and unmerged; successor branch codex/n11-owner-core-compatibility
+      is open. Native publication-tail receipt closes17:21:40UTC; Session121 starts there.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: Is the current research milestone ready for review with exact validation provenance and a
+        selected successor?
+      classification: achieved
+      result: PR142 marked ready after matching fast and all deferred checks passed; exp149 result, costs
+        and successor decision tree are recorded.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr142-deferred-checkpoint.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr142-fast-checkpoint.json
+      disposition: retire-success
+      follow_up: null
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr142-deferred-checkpoint.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr142-fast-checkpoint.json
+    - packing/campaign/resource-usage/codex-task-tree-pr142-publication-tail.yaml
 ---
 # Overnight Owner-Geometry Agenda
 
@@ -268,13 +288,13 @@ The current proof excludes one specified four-owner geometric branch at side 3.8
 global lower bound remains about 3.8100257236. The main gap is a general argument
 covering every possible owner configuration, not another check of the same branch.
 
-**Entry point: continue W6 after Session114’s controlled W7 instrument work.** This
-agenda runs through **16:38:09 UTC on September 9 (9:38 a.m. Pacific)** after the user
-resumed work following a network outage, with final reconciliation from16:23:09UTC. The
-original overnight cutoff expired without exp146 invocation and is retained in
-Session115. The 30-minute thread heartbeat continues the current slice; it does not
-reset a deadline, replace a live process, or justify a duplicate run.
-The tracking epic is `think-en2r`.
+**Entry point: W6 research loop.** Session121 continues on the fresh stacked owner-core
+compatibility branch after PR142 readiness.
+Its two-hour plan runs from17:21:40 to19:21:40UTC, with slices of at most30minutes and
+no new target after19:06:40UTC. Earlier expired windows remain historical; no experiment
+budget or result is reset.
+The30-minute heartbeat supplements continuous work and must not duplicate a launched
+target.
 
 ## The order of work
 

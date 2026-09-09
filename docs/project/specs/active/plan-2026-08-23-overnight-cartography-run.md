@@ -341,11 +341,12 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, complete BC-323 under `think-ta8s` by
-publishing the exp149 result and obtaining one matching deferred checkpoint.
-Then open a fresh stacked branch for BC-320. Exp145 independently confirmed the selected
-five-dot cover, exp146 enlarged twelve of sixteen wall-aware owner footprints, and
-exp147 found no additional tuple by component containment.
+For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H148/exp150
+tests the saved escape against entire allowed snapped owner cores.
+PR142 completed matching fast and deferred validation and is ready; Session121 continues
+on the stacked branch `codex/n11-owner-core-compatibility`. Exp145 independently
+confirmed the selected five-dot cover, exp146 enlarged twelve of sixteen wall-aware
+owner footprints, and exp147 found no additional tuple by component containment.
 Exp148 retained a partial fixed-pattern screen.
 Exp149 then refuted the selected tuple `(0,0,0,7)` at owner-000 with an exact positive
 deficit and validated rational strict escape.
