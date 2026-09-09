@@ -433,6 +433,7 @@ prevent those local facts from being mistaken for a global exclusion.
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
 | 131 | Test full dual support against its first 32 rows at the same new site | registered | [H-135](hypotheses/H-135-paired-full-support-pricing.md) | Solve the retained BC-232 state once, rationalise one support sequence, and replay both depths exactly at an orbit absent from the state. |
+| 132 | Compare a fixed-corner residual cover with its unrestricted control | registered | [H-136](hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | On one fixed grid and nine retained directions, test whether avoiding four flush corner units lowers the numerical covering objective by more than four; this is a conditional mechanism screen, not a normalization of arbitrary packings. |
 
 ## Dead ends
 

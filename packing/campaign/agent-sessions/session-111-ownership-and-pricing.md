@@ -107,8 +107,8 @@ session:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md
     stop_reason: The 00:27:48Z publication deadline passed before the complete-context commit and PR-body
       reconciliation were finished.
-    next_action: Reconcile the PR stack and session accounting in a fresh bounded publication phase;
-      keep exp-134 uninvoked until that checkpoint is public.
+    next_action: Reconcile the PR stack and session accounting in a fresh bounded publication phase; keep
+      exp-134 uninvoked until that checkpoint is public.
   - workflow: review-planning-oversight
     focus: process
     recording: contemporaneous
@@ -145,8 +145,8 @@ session:
     focus: efficiency
     recording: contemporaneous
     clock_role: work
-    objective: Run the single registered exp-134 solve and exact paired32-versus-full-support pricing screen
-      on the transported BC-232 state at q = 96/25.
+    objective: Run the single registered exp-134 solve and exact paired32-versus-full-support pricing
+      screen on the transported BC-232 state at q = 96/25.
     commitment: BC-306
     bead: think-7lp3
     status: stopped
@@ -179,7 +179,7 @@ session:
       the usage accounting and update the PR context.
     commitment: BC-306
     bead: think-7lp3
-    status: in_progress
+    status: completed
     entered_by: user_request
     switch_reason: The owner requested a detailed progress walkthrough and definitions before the target
       was invoked.
@@ -192,15 +192,117 @@ session:
     kill_condition: A claimed result or usage total cannot be reconciled with its retained source.
     fallback: State the precise uncertainty and preserve the source receipts; keep the numerical target
       uninvoked during this review.
+    outcome: The owner received the ground-up pricing explanation and full agenda walkthrough. The separate
+      usage receipts retain the changed-log-population caveat. Commit 84755809 was pushed, every required
+      hosted check passed, and the four PR descriptions now identify their actual merge or continuation
+      state. Exp-134 remained uninvoked.
+    evidence:
+    - https://github.com/jlevy/squares/pull/137
+    - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
+    stop_reason: The explanation and published PR-context exit criteria were met before the deadline.
+    next_action: Extract the owner-approved explanation into the tutorial and address the requested conditional
+      covering argument for a partly filled container.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Integrate the ground-up fractional pricing explanation into TUTORIAL.md, including the
+      owner's conditional-cover question for one or four fixed corner squares.
+    commitment: BC-306
+    bead: think-vil2
+    status: stopped
+    entered_by: user_request
+    switch_reason: The owner requested a delegated tutorial extraction, then asked whether numerical weight
+      discovery and exact verification can be conditioned on occupied corner squares.
+    budget_minutes: 30
+    started_at: '2026-09-09T02:23:03Z'
+    deadline_at: '2026-09-09T02:53:03Z'
+    expected_output: A tutorial explanation integrated with its existing proof, vocabulary and notation;
+      independent mathematical review; a precise conditional residual-domain formulation and prospective
+      pilot suggestion; publication on PR 137.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push --since 84755809
+    kill_condition: A proposed tutorial claim lacks a valid geometric or optimization argument, or a required
+      publication check fails.
+    fallback: Correct or omit the unsupported statement and retain the unresolved research question; keep
+      numerical targets uninvoked during the explanatory work.
+    outcome: The delegated tutorial draft now explains the LP, dual, pricing and support terminology,
+      with a short conditional-cover example. Independent mathematical review corrected the finite versus
+      continuum and core-boundary distinctions. The owner narrowed the tutorial to foundations and prioritized
+      a quick feasibility assessment of the conditional residual-cover experiment.
+    evidence:
+    - TUTORIAL.md
+    stop_reason: Owner reprioritized conditional-cover feasibility before tutorial publication; the reviewed
+      tutorial edit is retained for the next integration checkpoint.
+    next_action: Assess and build the smallest residual-cover pilot while retaining the tutorial draft
+      for publication with that checkpoint.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Determine whether the four-fixed-corner residual-seven cover is quickly testable and build
+      the smallest guarded instrument needed for a fair comparison.
+    commitment: BC-309
+    bead: think-3glv
+    status: completed
+    entered_by: user_request
+    switch_reason: The owner prioritized testing whether proved structural restrictions can strengthen
+      weighted covering, using four fixed corner squares as a conditional pilot rather than assuming every
+      optimal packing can be normalized to that arrangement.
+    budget_minutes: 30
+    started_at: '2026-09-09T02:36:26Z'
+    deadline_at: '2026-09-09T03:06:26Z'
+    expected_output: A reviewed exact residual-domain contract, a narrow paired-cover devtool with independent
+      controls or a specific blocker, an agenda disposition, and a prospective numerical protocol if the
+      instrument is ready.
+    validation_command: Focused residual-domain controls under project Python 3.14, then packing-validate
+      --push on the frozen integration checkpoint.
+    kill_condition: The residual center-domain representation omits a legitimate core, fills a forbidden
+      hole, lacks independent controls, or requires a broad refactor beyond the narrow prototype.
+    fallback: Preserve the exact mathematical formulation and implementation blocker; choose a smaller
+      finite numerical screen or a fresh instrument slice without claiming a scientific result.
+    outcome: The exact six-piece domain has two independent mathematical reviews. The paired instrument
+      and six independent controls pass, including the retained endpoint beyond 45 degrees. H-136 and
+      exp-135 declare the small paired test before execution. A separately reviewed sector lemma supplies
+      sixteen exhaustive positive-footprint classes per corner.
+    evidence:
+    - packing/devtools/run_residual_cover_pilot.py
+    - packing/tests/test_run_residual_cover_pilot.py
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md
+    stop_reason: The instrument-feasibility exit was met before the deadline.
+    next_action: Publish the instrument and prospective protocol, then run the declared paired screen
+      alongside hosted checks.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Publish and run exp-135, retain the actual paired numerical outcome and the reviewed ownership-sector
+      continuation on PR 137.
+    commitment: BC-309
+    bead: think-3glv
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: Instrument and independent controls are ready; the prospective pilot fixes one support,
+      one direction subset and one numerical accept margin.
+    budget_minutes: 22
+    started_at: '2026-09-09T03:00:46Z'
+    deadline_at: '2026-09-09T03:22:46Z'
+    expected_output: A published source checkpoint, one paired receipt or explicit unresolved result,
+      reviewed general branch lemma, updated tutorial and separate usage on PR 137.
+    validation_command: packing-validate --push --since 84755809; six residual controls; exp-135 five-minute
+      external process bound.
+    kill_condition: An arm reaches its declared limit, source binding fails, or a geometry or validation
+      control fails.
+    fallback: Preserve partial evidence and the precise unresolved disposition; no target tuning or retry
+      in this experiment.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Complete the three independent audits and present the research walkthrough and pricing
-      explanation, then return to the registered numerical test.
-  primary_bead: think-7lp3
+    next_action: Freeze and publish the prospective checkpoint, then execute the registered pair.
+  primary_bead: think-3glv
   status: in_progress
   budget:
-    wall_minutes: 240
+    wall_minutes: 300
     orientation_minutes: 15
     checkpoint_minutes: 30
     slice_minutes: 30
@@ -316,8 +418,8 @@ session:
     files: *id001
     checks:
     - 45/69 push steps passed in 125.71 seconds; exact clean head a1fc0306a3a9612f299217cb5c2aa894589c0db3.
-    uncertainty: Separate usage receipts remain live lower bounds; the normal hosted fast gate failed only
-      because three contemporaneous session/delegation deadlines had expired before their dispositions
+    uncertainty: Separate usage receipts remain live lower bounds; the normal hosted fast gate failed
+      only because three contemporaneous session/delegation deadlines had expired before their dispositions
       were published.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -357,8 +459,8 @@ session:
     recording: contemporaneous
     status: completed
     outcome: The 23:23:55Z boundary has no overlap or gap, but the session-111 receipt is stale after
-      00:00:42Z and the third workflow phase remained in progress after its deadline. The audit also
-      localized the remaining bead and agenda dispositions.
+      00:00:42Z and the third workflow phase remained in progress after its deadline. The audit also localized
+      the remaining bead and agenda dispositions.
     evidence:
     - packing/campaign/resource-usage/codex-task-tree-session-110.yaml
     - packing/campaign/resource-usage/codex-task-tree-session-111.yaml
@@ -386,12 +488,79 @@ session:
     checks:
     - Proved, mechanically replayed, numerical and unresolved statements were compared against their source
       records and tool acceptance contracts.
-    uncertainty: The local ownership restrictions do not yet form a complete global case split at q = 96/25.
+    uncertainty: The local ownership restrictions do not yet form a complete global case split at q =
+      96/25.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Publish the prospective protocol, then run its single solve; keep global ownership compatibility
       as the principal mathematical lane.
     phase: 4
+  - task: Extract pricing foundations into the tutorial.
+    operator: GPT-5.6 Sol, high; tutorial_pricing
+    recording: retrospective
+    status: completed
+    outcome: Added sites, poses, primal and dual LPs, support, pricing and a brief conditional example;
+      removed the untested agenda catalogue at owner request.
+    evidence: &id004
+    - TUTORIAL.md
+    files: *id004
+    checks:
+    - Independent mathematical review and Flowmark.
+    uncertainty: Full-support pricing remains unrun.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Publish with the BC-309 checkpoint.
+    phase: 7
+  - task: Derive and independently audit the six-piece residual domain.
+    operator: GPT-6 Astra, max; conditional_corner_cover; independent GPT-6 Astra, extra high; math_progress_audit
+    recording: retrospective
+    status: completed
+    outcome: Two separating-axis derivations agree, including tangency, endpoint and union-of-intervals
+      requirements.
+    evidence: &id005
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md
+    files: *id005
+    checks:
+    - Independent mathematical derivations.
+    uncertainty: No exact target cover yet.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Publish with the BC-309 checkpoint.
+    phase: 8
+  - task: Build the bounded residual-cover instrument.
+    operator: GPT-5.6 Sol, extra high; residual_cover_engine
+    recording: retrospective
+    status: completed
+    outcome: Implemented paired covering, partial receipts, complexity guards and small exact reader.
+      Six controls pass in 2.51 seconds; Ruff and BasedPyright clean. L=4/B=1/grid5/axis end-to-end control
+      converges; no n11 target run.
+    evidence: &id006
+    - packing/devtools/run_residual_cover_pilot.py
+    - packing/tests/test_run_residual_cover_pilot.py
+    files: *id006
+    checks:
+    - Six geometry and receipt controls; non-target end-to-end control.
+    uncertainty: Per-arm deadlines are cooperative around NumPy; experiment adds external bound.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Publish with the BC-309 checkpoint.
+    phase: 8
+  - task: Find a general structural continuation and derive exhaustive core footprints.
+    operator: GPT-6 Astra, extra high; math_progress_audit; independent GPT-6 Astra, max; conditional_corner_cover
+    recording: retrospective
+    status: completed
+    outcome: Reviewed primary Stromquist, Bentz and Nagamochi sources. Derived the eight-sector triangle
+      lemma giving sixteen exhaustive classes per corner without a flush-corner normalization.
+    evidence: &id007
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md
+    files: *id007
+    checks:
+    - Independent signed-axis and wedge proofs; source links resolve.
+    uncertainty: Triangle-branch numerical gain is unmeasured; triangle mass is not automatically one.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Publish with the BC-309 checkpoint.
+    phase: 8
   outputs:
   - packing/campaign/explorations/X-022-segment-ownership-continuation.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/bc-305-ownership-results.md
@@ -410,12 +579,20 @@ session:
   - 'Expanded integrated instruments at 82df41bd: 64 focused tests passed in 2.46 seconds, including historical
     Git-blob, sparse traversal, malformed revision, arithmetic and usage-cutoff controls.'
   stop_reason: null
-  next_action: Complete the owner-requested explanation and accounting review, then select the fresh
-    forward launch allocation for the one-solve exp-134 process.
+  next_action: Publish the instrument and exp-135 protocol, run its single paired screen, and retain the
+    actual result and reviewed general sector-footprint continuation.
   started_at: '2026-09-08T23:23:55Z'
-  deadline_at: '2026-09-09T03:23:55Z'
+  deadline_at: '2026-09-09T04:23:55Z'
 ---
 # Session 111 — Ownership and Pricing Continuation
+
+At 2026-09-09T03:05Z, before any exp-135 target, the coordinator allocated a fresh sixty
+minutes of session planning for the owner’s added conditional-cover direction.
+The original overall deadline was 03:23:55Z; the renewed planning window ends at
+04:23:55Z and retains thirty minutes for finalization.
+The earlier phase 8 allocation would have entered the original finalization reserve;
+this coordination correction is explicit rather than changing that phase’s recorded
+clock. No scientific target budget, accept rule, or historical phase deadline changed.
 
 The branch opened at 2026-09-08T23:23:55Z. This is the boundary between the handoff
 review’s session-110 interval and the new continuation interval.
