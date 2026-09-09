@@ -475,15 +475,33 @@ fn selftest() {
         &mut failures,
     );
 
-    // 5b. THE CONTROL IS PINNED. The arm flags all default to off, and the guard on
-    //     each of them short-circuits before its RNG draw, so a run that names none of
-    //     them must consume exactly the stream it consumed before the arms existed.
-    //     This literal is the value the pre-arm engine printed for the same triple, so
-    //     a change that quietly moves the control fails here rather than in a table.
+    // 5b. THE CONTROL IS PINNED, WITHIN THE PROCESS. The arm flags all default to off,
+    //     and the guard on each of them short-circuits before its RNG draw, so naming
+    //     every arm at its off value must consume exactly the stream the defaults
+    //     consume. Comparing the two runs bitwise catches an arm that draws
+    //     unconditionally and so shifts the control's stream.
+    //
+    //     This deliberately does not pin a literal. An earlier version did, and the
+    //     value it recorded on the author's machine did not reproduce on the Linux
+    //     runner: `sin` and `cos` differ in the last places between platform libms, so
+    //     the chain diverges without anything being wrong. A cross-process golden for
+    //     this engine would have to be a tolerance, and a tolerance cannot express
+    //     "the stream is untouched", which is the property under test.
+    // The control `p` above, with every arm written out at its off value. Anything
+    // but a bitwise match means an arm consumed the stream when it should not have.
+    let control_explicit = Params {
+        p_perturb: 0.0,
+        mu0: 0.0,
+        mu1: 0.0,
+        ..p.clone()
+    };
+    let a_explicit = search::run_chain(5, 42, 3, &control_explicit, 400_000);
     report(
         "control chain unchanged by the arm flags",
-        a.best_side == 2.793_917_043_631_216_f64,
-        &format!("{:.17e}", a.best_side),
+        a.best_side.to_bits() == a_explicit.best_side.to_bits()
+            && a.moves == a_explicit.moves
+            && a.pair_tests == a_explicit.pair_tests,
+        &format!("{:.17e} vs {:.17e}", a.best_side, a_explicit.best_side),
         &mut failures,
     );
 

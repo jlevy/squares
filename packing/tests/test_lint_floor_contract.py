@@ -35,6 +35,13 @@ NAMED_EXCLUSIONS = {
     # A byte-identical mirror of `.agents/skills`, kept by `make skills-sync` and
     # compared by `make skills-check`; linting the source copy covers it.
     ".claude/skills/": "mirror of .agents/skills",
+    # Retained video-spike prototypes: generators kept as evidence for the atlas
+    # video plan's Phase 0 decisions, not as project code. Nothing imports them,
+    # their own tests run them, and the plan's later phases re-implement them
+    # under project conventions. See their README.
+    "packing/atlas/known-best/video/spikes/": (
+        "retained prototypes, kept as evidence and re-implemented by the plan"
+    ),
 }
 
 

@@ -70,6 +70,11 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md": (
+        "a retained prototype's notes, listing the record fields the slideshow panel "
+        "deliberately does not draw; it names this field to say the figure omits it "
+        "because it is a ceiling rather than s(n), which is the contract's own reading"
+    ),
     "packing/devtools/audit_ds7_lower_bounds.py": (
         "preserves the certified ceiling unchanged while auditing source-reported lower "
         "bounds; it neither promotes that ceiling to s(n) nor derives a new upper bound"

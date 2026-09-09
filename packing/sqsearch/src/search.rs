@@ -166,7 +166,11 @@ fn anneal(
 
     let mut side = required_side(c);
     let mut overlap = total_overlap_metered(c, pair_tests);
-    let mut spread = if pressure_on { crate::geom::spread(c) } else { 0.0 };
+    let mut spread = if pressure_on {
+        crate::geom::spread(c)
+    } else {
+        0.0
+    };
     let mut energy = side + lambda * overlap + mu * spread;
 
     // The starting configuration is itself a candidate. Without this the best is only
