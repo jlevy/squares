@@ -5,16 +5,16 @@ title: Review math loading complexity before release
 kind: task
 status: closed
 priority: 1
-version: 5
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 delegate: kpress_font_pipeline
 labels: []
 dependencies: []
 parent_id: is-01m20v1mq20k9d9p1wg9s5qdsq
 created_at: 2026-09-08T21:33:44.799Z
-updated_at: 2026-09-08T23:04:43.193Z
-closed_at: 2026-09-08T23:04:43.192Z
-close_reason: Independent architecture review completed and unused shipped diagnostics removed. KPress retains one client renderer with optional host preparation; new formulas require no font rebuild. The exact Linux artifact passed all 29 Mac geometry cases, and the final baseline fix reuses existing measured dimensions and KaTeX struts. Canonical architecture is merged in KPress PR64.
+updated_at: 2026-09-09T03:00:31.114Z
+closed_at: 2026-09-09T03:00:31.114Z
+close_reason: "Implemented, reviewed, merged in Squares PR #135 (merge 171bba339321b8d63d85a59ab5f2db946270be0e) with reusable work in KPress PR #68 (merge a6203389c0a6d1f6e542b1f50fa177121eae7f4a). All PR and post-merge CI passed; Pages serves edition 171bba33; live publication 34/34 and delayed-font smoke pass. HTML/PDF opened locally. Native reload retains 3000px exactly in Chromium, Firefox, and WebKit with JS on/off. Bullet raster-shape follow-up think-x65m remains open because measured geometry is already square."
 resolution: null
 duplicate_of: null
 ---
@@ -22,4 +22,4 @@ Owner is concerned that the working page relies on an overengineered or brittle 
 
 ## Notes
 
-Independent Astra architecture review completed: keep the working shared runtime and optional host geometry preparation, remove the four unused shipped per-base diagnostics, and verify the exact Linux-produced artifact on macOS. The diagnostics were removed in 2474530b. Linux artifact from successful Pages run34283695063 at dab2a381 passed all29 Mac geometry cells with zero measured movement and maximum intrinsic width difference0.171875px. Client-side rendering is already supported without publication preparation; new formulas require no font regeneration. KPress PR64 documents the architecture. Integration review of4a868bb confirmed static/katex and static/js unchanged; final combined Pages checks remain on parent think-qcmi.
+Latest owner request asks for a systematic upstream-ownership pass. The earlier simplicity/runtime review is complete. Reopened for a bounded review of the final font-size, macOS weight, native scroller and measured-strut baseline changes against KPress 4a868bb, confirming every generic defect is fixed or documented upstream and host-only preparation remains in Squares. Delegated to kpress_font_pipeline while final PR CI runs.

@@ -3,15 +3,19 @@ type: is
 id: is-01m21hj6cz7pw7bbatr29aznez
 title: "Certificate page red on main: WebKit reports embedded math faces as errors and the Figure 5 readout reads empty"
 kind: bug
-status: in_progress
+status: closed
 priority: 0
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
 parent_id: is-01m1yxs9c3y78m00gqh7wsz9d6
 created_at: 2026-09-08T22:17:35.379Z
-updated_at: 2026-09-08T23:02:11.857Z
+updated_at: 2026-09-09T00:08:30.655Z
+closed_at: 2026-09-09T00:08:30.654Z
+close_reason: "Shipped: squares#136 merged to main; the cause was host renders painting before the readiness gate resolved, not a WebKit font failure, and main's Certificate page run is green with the deploy running again"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

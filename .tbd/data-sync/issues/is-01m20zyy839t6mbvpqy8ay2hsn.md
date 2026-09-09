@@ -5,7 +5,7 @@ title: "[epic] Move-set campaign: which annealing physics recovers non-grid s(n)
 kind: epic
 status: open
 priority: 1
-version: 10
+version: 15
 labels: []
 dependencies: []
 child_order_hints:
@@ -17,8 +17,9 @@ child_order_hints:
   - is-01m216trdrcrb87d6h4nhzkw4f
   - is-01m216trt4hkdx53q6d94v2phs
   - is-01m216ts6c7gt2qm8xpc5nm4st
+  - is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-08T17:09:58.636Z
-updated_at: 2026-09-08T19:18:56.721Z
+updated_at: 2026-09-09T04:06:56.519Z
 ---
 Umbrella for the campaign answering the repository owner's question: with the right physics or annealing model, which method recovers best-known non-grid packings for n < 100 to high accuracy?
 
@@ -29,8 +30,8 @@ Design input: docs/project/research/research-2026-09-08-annealing-for-square-pac
 - The fixes used by engines that get close: simultaneous perturbation (Gensane layer 3), inflation or wall pressure or contract-act-re-expand, and replica exchange over a pressure ladder.
 - The currency is refined local optima per record, not moves (Ellsworth: 4 of 3,004 at n = 51).
 
-Round-1 registry: H-125 simultaneous perturbation, H-126 wall pressure, H-127 basin hopping over the LP quench.
-Round-1 rounds: exp-129 calibration, exp-130 arm B, exp-131 arm C, exp-132 arm D.
+Round-1 registry: H-135 simultaneous perturbation, H-136 wall pressure, H-137 basin hopping over the LP quench.
+Round-1 rounds: exp-134 calibration, exp-135 arm B, exp-136 arm C, exp-137 arm D.
 
 ## Notes
 
@@ -40,11 +41,11 @@ Accept rule declared before measuring: median best_side at least 0.01 below the 
 
 Cells improved by at least 0.01 (of 11), and with disjoint ranges:
 - control (stock sqsearch): baseline
-- collective move alone (--p-perturb 1.0 --perturb-scale 2): 4, of which 3 disjoint. H-125 refuted.
-- long anneal alone (--steps 4000000): 3, all disjoint. H-128 refuted.
+- collective move alone (--p-perturb 1.0 --perturb-scale 2): 4, of which 3 disjoint. H-135 refuted.
+- long anneal alone (--steps 4000000): 3, all disjoint. H-138 refuted.
 - both: 5, of which 3 disjoint.
-- wall pressure (--mu0 5 --mu1 5): 1 improves and 3 regress. H-126 refuted, and the arm is harmful.
-- basin hopping over the LP quench against multistart at equal refined optima: 4 of 5 cells. H-127 confirmed.
+- wall pressure (--mu0 5 --mu1 5): 1 improves and 3 regress. H-136 refuted, and the arm is harmful.
+- basin hopping over the LP quench against multistart at equal refined optima: 4 of 5 cells. H-137 confirmed.
 
 Best side reached anywhere, against the record: n=5 +2.5e-9, n=10 +1.4e-8, n=11 +9.7e-3, n=17 +2.15e-3, n=19 +7.3e-2, n=26 +8.6e-2, n=27 +1.2e-1, n=29 +6.6e-2 (the grid), n=37 +1.7e-1, n=50 +3.6e-1, n=52 +2.9e-1 (the grid).
 

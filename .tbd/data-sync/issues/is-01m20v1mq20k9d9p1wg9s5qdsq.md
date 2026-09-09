@@ -3,9 +3,9 @@ type: is
 id: is-01m20v1mq20k9d9p1wg9s5qdsq
 title: Prevent math startup from shifting neighboring text and reduce parameter delay
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 26
+version: 33
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
@@ -29,8 +29,18 @@ child_order_hints:
   - is-01m21dyyygnr8mpt1vt77b26a4
   - is-01m21f1xf01nwz7jf9bgc3zgnr
   - is-01m21j7e3h8j1r4fqwhcxn4q21
+  - is-01m21mgmrpatjx0n66y23mmjc8
+  - is-01m21n690s638a0kpj17prevpn
+  - is-01m21npsp1xbrxc957kfy1exjj
+  - is-01m21npt8yyc1faakzqd5m51fb
+  - is-01m21pvfmt41mpzpwgqc569tst
+  - is-01m21qk3wymhc6m7g7d0fy4yfq
 created_at: 2026-09-08T15:44:04.307Z
-updated_at: 2026-09-08T22:29:11.397Z
+updated_at: 2026-09-09T03:00:31.017Z
+closed_at: 2026-09-09T03:00:31.005Z
+close_reason: "Implemented, reviewed, merged in Squares PR #135 (merge 171bba339321b8d63d85a59ab5f2db946270be0e) with reusable work in KPress PR #68 (merge a6203389c0a6d1f6e542b1f50fa177121eae7f4a). All PR and post-merge CI passed; Pages serves edition 171bba33; live publication 34/34 and delayed-font smoke pass. HTML/PDF opened locally. Native reload retains 3000px exactly in Chromium, Firefox, and WebKit with JS on/off. Bullet raster-shape follow-up think-x65m remains open because measured geometry is already square."
+resolution: null
+duplicate_of: null
 ---
 User confirms the deployed no-swap fix works but math parameters still appear slowly. Deployment remains 33cd4760 with KPress7b20ae7. Source-confirmed avoidable dependencies: HOST_MATH_INIT sets allEmbeddedFonts:true and waits every declared face before boot; both certificate boots synchronously build 230x230 heat maps, including the hidden certificate, before initial readouts; root pending CSS keeps every .tex/.tex-d hidden until all static math and pending interactive renders settle. Diagnose normal first-visible parameter timing separately from the delayed-font regression probe. Prefer a Squares fix that renders/reveals each font-ready parameter independently and defers nonessential/hidden heat-map work; evaluate narrower upstream warmup separately. Preserve the no-swap, latest-input, no-JS/error fallback, and print contracts. Do not describe the three-second failure ceiling as an intentional startup delay.
 
