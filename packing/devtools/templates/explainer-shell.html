@@ -321,8 +321,9 @@ body {
 .intro .section-head { margin-block-start: 0; }
 
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
-/* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
-.hero h1 .symbol { text-transform: none; }
+/* The heading is set in caps by kpress; its s(n) run is mathematics and keeps both
+   mathematical italic and lowercase rather than inheriting the heading transform. */
+.hero h1 .tex { letter-spacing: 0; text-transform: none; }
 /* Mathematical relations set in a sans line: `≥` in the title and the certificate
    buttons, `≈` in two captions and in the chart labels, `→` in Figure 7's label.
    Source Sans 3 carries none of the three, so the browser used to resolve them to
@@ -340,12 +341,14 @@ body {
 
    The rule that the page resolves every run to a face it ships retires that choice: a
    glyph from the reader's machine is a different glyph for every reader, and on macOS
-   the PDF writes it as outline paths. Of the two shipped routes, mathematics would set
-   the title's `s(11)` and its digits in Computer Modern and break the line's agreement
-   with the subtitle and the credits under it, so the relation comes from KaTeX_Main,
+   the PDF writes it as outline paths. Setting the whole title as mathematics would
+   hand the relation and bound to formula-specific glyph selection, spacing, and weight
+   rather than the established title typography, so the relation comes from KaTeX_Main,
    subset to those three code points and declared on the sans families themselves
-   (`relation_face_css`) rather than named by a class. That reaches the chart labels and
-   the caption prose, which no class did.
+   (`relation_face_css`) rather than named by a class. The title's `s(11)` is separately
+   set as mathematics, where the italic `s` carries meaning, while the relation and
+   value remain part of the sans title line. The relation face also reaches the chart
+   labels and the caption prose, which no class did.
 
    KaTeX_Main-Bold, not Regular, and the comparison is the reason. Measured with
    `compare_math_fonts metrics`, in units of a thousandth of an em, the rule thickness of

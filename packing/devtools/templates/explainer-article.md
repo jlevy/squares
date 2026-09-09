@@ -22,7 +22,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 <div class="hero">
 
-# <span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>
+# <span class="tex">s({{N}})</span> ≥ {{HEADLINE_L_FRAC}}
 
 <p class="subtitle centred">{{SUBTITLE}}</p>
 

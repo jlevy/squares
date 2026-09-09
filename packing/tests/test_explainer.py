@@ -87,6 +87,15 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 
 
+def test_title_sets_s11_as_math_without_moving_the_bound_into_math(page: str) -> None:
+    """The title's function is notation; its relation and value remain title text."""
+    heading = re.search(r"<h1\b.*?</h1>", page, re.DOTALL)
+    assert heading is not None
+    assert heading.group(0) == (
+        '<h1 id="s11--381100"><span class="tex">s(11)</span> ≥ 381/100</h1>'
+    )
+
+
 @pytest.mark.parametrize(
     ("paths", "comparison", "pinned_check"),
     [
@@ -188,7 +197,7 @@ def test_the_published_document_is_markdown_and_not_the_template(document: str) 
     assert "3.81" in document
     assert "1,121" in document
     assert "181" in document
-    assert document.startswith("# s(11)")
+    assert document.startswith("# $s(11)$")
 
 
 def test_the_published_document_carries_no_html(document: str) -> None:
@@ -391,7 +400,7 @@ def test_the_published_document_is_named_for_the_result(document: str) -> None:
     for claim in claims:
         assert claim.name.startswith(f"{RESULT_ID}-"), claim.name
     # The document is what it is named after: the article, not the template.
-    assert document.startswith("# s(11)")
+    assert document.startswith("# $s(11)$")
 
 
 def test_the_md_chip_offers_the_document_by_its_published_name(page: str) -> None:
