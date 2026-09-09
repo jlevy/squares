@@ -17,10 +17,12 @@ cheap enough to repeat.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
+from typing import cast
 
 import pytest
 
@@ -47,6 +49,8 @@ from sqpack.fractional.certificate import (
     closed_form_conditions,
     verify,
 )
+from sqpack.fractional.threshold import ThresholdCertificate, verify_threshold
+from tests.test_fractional_threshold_interval import tight_certificate
 
 #: The review's dilation, and the numbers it reports for the retained certificate.
 REVIEW_FACTOR = Fraction(250001, 250000)
@@ -434,3 +438,216 @@ def test_without_a_factor_the_tool_reports_only_the_ceiling(
     assert f"sharp factor supremum = {LIMIT_FACTOR_EXACT}" in printed
     assert f"side supremum {LIMIT_BOUNDED_SIDE_EXACT}" in printed
     assert "COROLLARY" not in printed
+
+
+# --- threshold sources --------------------------------------------------------------
+
+
+def threshold_record(certificate: ThresholdCertificate) -> dict[str, object]:
+    """The fixture in the shape the threshold gate freezes, declarations included."""
+
+    return {
+        "id": "C-test-threshold-limit",
+        "variant": "threshold",
+        "n": certificate.n,
+        "claim": f"s({certificate.n}) >= {certificate.outer_side}",
+        "outer_side": str(certificate.outer_side),
+        "square_side": str(certificate.square_side),
+        "angle_limit": "207107/500000",
+        "direction_steps": len(certificate.half_tangents) - 1,
+        "symmetry": certificate.symmetry,
+        "total_budget": str(certificate.total_budget),
+        "least_cell_charge": "1",
+        "atoms": [[str(a.x), str(a.y), str(a.weight)] for a in certificate.atoms],
+        "threshold_atoms": [t.to_record() for t in certificate.threshold_atoms],
+    }
+
+
+def write_threshold(path: Path, record: dict[str, object]) -> Path:
+    path.write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8")
+    return path
+
+
+def test_a_threshold_source_gets_the_point_formula_from_its_own_b_and_d() -> None:
+    """The dilation geometry is the point certificate's, read through the point view."""
+
+    certificate = tight_certificate()
+    point = certificate.point_certificate
+
+    ceiling = sharp_dilation_ceiling(certificate)
+
+    assert ceiling == sharp_dilation_ceiling(point)
+    gap = point.largest_half_gap_tangent
+    assert ceiling.radicand == gap.denominator**2 + gap.numerator**2
+    assert ceiling.coefficient == Fraction(
+        point.square_side.denominator,
+        point.square_side.numerator * (gap.denominator + gap.numerator),
+    )
+    assert ceiling.squared * (point.square_side * (1 + gap)) ** 2 == 1 + gap * gap
+    assert coarse_condition_four_ceiling(certificate) == coarse_condition_four_ceiling(point)
+    assert sharp_containment_holds(certificate, Fraction(1))
+
+
+def test_dilating_a_threshold_certificate_moves_its_threshold_points_too() -> None:
+    """A threshold atom left behind would charge a different set of cores."""
+
+    certificate = tight_certificate()
+    factor = Fraction(41, 40)
+
+    dilated = dilate(certificate, factor)
+
+    assert isinstance(dilated, ThresholdCertificate)
+    assert dilated.outer_side == certificate.outer_side * factor
+    assert dilated.square_side == certificate.square_side * factor
+    assert [t.points for t in dilated.threshold_atoms] == [
+        tuple((x * factor, y * factor) for x, y in t.points)
+        for t in certificate.threshold_atoms
+    ]
+    assert [t.weight for t in dilated.threshold_atoms] == [
+        t.weight for t in certificate.threshold_atoms
+    ]
+    assert [t.threshold for t in dilated.threshold_atoms] == [
+        t.threshold for t in certificate.threshold_atoms
+    ]
+    assert dilated.total_budget == certificate.total_budget
+    assert verify_threshold(dilated).minimum_cell_mass == (
+        verify_threshold(certificate).minimum_cell_mass
+    )
+
+
+def test_a_threshold_record_round_trips_through_update_and_check(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The tool replays Conditions 1', 2', 3, 4 and 5' and writes the v3 record."""
+
+    certificate = tight_certificate()
+    source = write_threshold(tmp_path / "threshold.json", threshold_record(certificate))
+    record_path = tmp_path / "limit.json"
+    label = "packing/tests/fixture/threshold.json"
+
+    assert (
+        main([str(source), "--source-name", label, "--update-limit-record", str(record_path)])
+        == 0
+    )
+    assert (
+        main([str(source), "--source-name", label, "--check-limit-record", str(record_path)])
+        == 0
+    )
+    assert "limit record agrees with the source certificate" in capsys.readouterr().out
+
+    written = json.loads(record_path.read_text(encoding="utf-8"))
+    ceiling = sharp_dilation_ceiling(certificate)
+    assert written["schema"] == dilation.THRESHOLD_LIMIT_RECORD_SCHEMA
+    assert written["source"]["variant"] == "threshold"
+    assert written["source"]["total_budget"] == str(certificate.total_budget)
+    assert written["source"]["minimum_cell_charge"] == "1"
+    assert written["source"]["point_atoms"] == len(certificate.atoms)
+    assert written["source"]["threshold_atoms"] == len(certificate.threshold_atoms)
+    assert written["source"]["certificate"] == label
+    assert written["source"]["sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+    assert "total_mass" not in written["source"]
+    assert (
+        "Condition 5' every reachable cell is charged at least 1"
+        in (written["source"]["accepted_conditions"])
+    )
+    assert written["strict_dilation_family"]["factor_supremum"] == ceiling.exact
+    assert written["conclusion"]["bounded_side"] == (
+        ceiling.scaled(certificate.outer_side).exact
+    )
+    assert written["conclusion"]["endpoint_certificate"] is False
+    assert any(
+        "Condition 5'" in invariant
+        for invariant in written["strict_dilation_family"]["invariants"]
+    )
+
+
+def test_a_point_record_still_round_trips_through_update_and_check(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The v2 shape a point source emits is exactly what it emitted before."""
+
+    certificate = load_n11(CERTIFICATE_PATH)
+    monkeypatch.setattr(
+        dilation,
+        "verify",
+        lambda _certificate, **_kwargs: accepted_verdict(certificate),
+    )
+    record_path = tmp_path / "limit.json"
+
+    assert (
+        main(
+            [
+                str(CERTIFICATE_PATH),
+                "--source-name",
+                LIMIT_SOURCE,
+                "--update-limit-record",
+                str(record_path),
+            ]
+        )
+        == 0
+    )
+    assert (
+        main(
+            [
+                str(CERTIFICATE_PATH),
+                "--source-name",
+                LIMIT_SOURCE,
+                "--check-limit-record",
+                str(record_path),
+            ]
+        )
+        == 0
+    )
+    capsys.readouterr()
+
+    written = json.loads(record_path.read_text(encoding="utf-8"))
+    assert written["schema"] == dilation.LIMIT_RECORD_SCHEMA
+    assert "variant" not in written["source"]
+    assert written["source"]["total_mass"] == str(certificate.total_mass)
+    assert written == json.loads(LIMIT_RECORD.read_text(encoding="utf-8"))
+
+
+def test_a_tampered_threshold_record_is_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Moving one threshold-atom point breaks the source premise, and nothing is written."""
+
+    certificate = tight_certificate()
+    record = threshold_record(certificate)
+    atoms = cast(list[dict[str, object]], record["threshold_atoms"])
+    points = cast(list[list[str]], atoms[0]["points"])
+    points[0] = [str(Fraction(points[0][0]) + Fraction(1, 8)), points[0][1]]
+    source = write_threshold(tmp_path / "tampered.json", record)
+    record_path = tmp_path / "limit.json"
+
+    assert main([str(source), "--update-limit-record", str(record_path)]) == 1
+    assert "REFUSED" in capsys.readouterr().err
+    assert not record_path.exists()
+
+
+def test_a_threshold_record_whose_declarations_disagree_is_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The declared budget and least charge are held to the replayed decision."""
+
+    certificate = tight_certificate()
+    record = threshold_record(certificate)
+    record["least_cell_charge"] = "1/2"
+    source = write_threshold(tmp_path / "declared.json", record)
+
+    assert main([str(source), "--update-limit-record", str(tmp_path / "limit.json")]) == 1
+    assert "declared least_cell_charge does not match" in capsys.readouterr().err
+
+
+def test_a_threshold_record_without_a_declared_least_charge_is_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A source that declares no least charge cannot carry a limit record."""
+
+    certificate = tight_certificate()
+    record = threshold_record(certificate)
+    del record["least_cell_charge"]
+    source = write_threshold(tmp_path / "undeclared.json", record)
+
+    assert main([str(source), "--update-limit-record", str(tmp_path / "limit.json")]) == 1
+    assert "declared least_cell_charge does not match" in capsys.readouterr().err
