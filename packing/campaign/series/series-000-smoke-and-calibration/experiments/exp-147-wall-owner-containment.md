@@ -20,6 +20,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python 3.14; one process
     selftest_passed: true
+    engine_commit: e72102e15897dc33e59fcd82818a7ca9174d3cd0
   instance:
     axis: n
     point: 11
@@ -48,22 +49,42 @@ experiment:
       clock starts after input loading. No tuning, retry, overwrite or resume. Launch by 15:53:07 UTC
       so the complete allowance fits before 15:55:09 UTC.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-147-wall-owner-containment.json
-  results: []
+    commit: e72102e15897dc33e59fcd82818a7ca9174d3cd0
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Does complete valid component containment add a tuple beyond the two baselines?
+    outcome: criterion_missed
+    checked_by: 'All 128 exact relations completed: eight contained, 120 not contained. The two family
+      products each contain one tuple, with no overlap; both are existing baselines.'
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Complete all 128 logical relations validly and certify at least one distinct owner
       tuple beyond the two baseline tuples.
-    reason: Prospective and unrun. Source review requires three bounded guard repairs before clean publication
-      and the single target.
-  lease:
-    expires: '2026-09-09T15:55:09Z'
-    host: local
+    reason: The complete exact matrix covers only the two baseline tuples, with zero new covered tuples.
+      This refutes component-containment expansion for the frozen classes, not direct coverage by the
+      five dots.
+  effort:
+    timebox: One 120-second external process and 60-second cooperative clock after input loading; no retry.
+    wall_seconds: 40.88
+    stopped_by: criterion
 ---
-# Exp147: Transfer the Existing Five-Dot Exclusions
+# Exp147: No New Tuple Inherits the Exclusion
 
-**Prospective and unrun.** Publish the controlled adapter and this protocol before one
-target invocation. Capture the full published revision, clean Git state, UTC start,
-process exit and elapsed seconds outside the repository before the clean-tree guard.
+**Rejected under its declared criterion.** The single run launched at 15:47:15 UTC from
+clean published `e72102e15897dc33e59fcd82818a7ca9174d3cd0` and exited zero in 40.88
+seconds. All 128 relations completed: eight containments and 120 exact failures.
+Only the two baseline tuples are covered; 65,534 labels remain unresolved by this
+method. No class is impossible.
+Internal elapsed time was 33.43337650000467 seconds.
+The result does not refute direct five-dot coverage or establish a feasible packing.
+The next selected test is the fixed-dot witness bank and one surviving candidate.
+
+**Prospective history, now discharged.** Publish the controlled adapter and this
+protocol before one target invocation.
+Capture the full published revision, clean Git state, UTC start, process exit and
+elapsed seconds outside the repository before the clean-tree guard.
 The four input blobs and exp146 constructor revision are fixed in the command above.
 
 Accept only a complete valid 128-slot matrix whose union-of-products count adds at least

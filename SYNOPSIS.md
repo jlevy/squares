@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives twenty-three confirmed hypotheses, sixteen
+The generated ledger currently derives twenty-three confirmed hypotheses, seventeen
 refuted hypotheses, one open hypothesis, twenty-five open questions, and forty-five
 blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
 remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
@@ -208,6 +208,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Fixed-Pattern Adapter: Source Review](packing/cases/n11_five_dot_cover/fixed-pattern-source-admission.md) | dated review record | record | retained | — |
 | [BC318 Adapter: Mathematical Source Admission](packing/cases/n11_five_dot_cover/wall-containment-source-admission.md) | dated review record | record | retained | — |
 | [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
 | [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
@@ -774,6 +775,12 @@ registers
 [exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md)
 under H-145. Nine synthetic controls and the three source-review corrections pass; no
 target containment relation has been evaluated.
+
+The active Session117 continuation is BC-319 under `think-ykd6`, with
+[exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md)
+registered under H-146. It keeps the five dots fixed, builds a reusable exact witness
+bank, and permits one surviving tuple check.
+No target witness has yet been computed.
 
 **Selected next entry:** `think-waix`, BC-318: test whether the accepted wall-aware
 footprints extend the five-dot exclusion by exact component containment.
@@ -3356,7 +3363,8 @@ round that names the hypothesis, control roles included.
 | [H-142](packing/campaign/hypotheses/H-142-five-dot-full-net-cover.md) | confirmed | The fixed five-dot four-owner proposal covers all361canonical directions | 1 | 28.95s wall |
 | [H-143](packing/campaign/hypotheses/H-143-independent-five-dot-union.md) | confirmed | Independent exact polygon union covers the same contained-core domains in all 361 directions | 1 | All 361 deficits zero; 39.06s process |
 | [H-144](packing/campaign/hypotheses/H-144-wall-aware-owner-footprint-gain.md) | confirmed | Container walls strictly enlarge twelve of sixteen coarse owner footprints | 1 | 25.69s wall |
-| [H-145](packing/campaign/hypotheses/H-145-wall-owner-containment-expansion.md) | running | Wall-aware footprints extend a five-dot exclusion by component containment | 1 | — |
+| [H-145](packing/campaign/hypotheses/H-145-wall-owner-containment-expansion.md) | refuted | Wall-aware footprints extend a five-dot exclusion by component containment | 1 | 40.88s wall |
+| [H-146](packing/campaign/hypotheses/H-146-fixed-five-dot-wall-expansion.md) | running | The fixed five dots exclude another wall-owner tuple | 1 | — |
 
 ### Confirmed
 
@@ -3628,9 +3636,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 103 rounds registered in `series-000`.
+There are 104 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1364.0 wall-minutes.
+They record 2152.1 agent-minutes and 1364.7 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3772,7 +3780,8 @@ archive beside it.
 | [exp-144](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md) | 11 | target | H-142 | Exact full361replay of unchanged five equal-weight dots | All361directions exactminimum beta; normalized5, selected branch excluded via reviewed transfer | accepted |
 | [exp-145](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md) | 11 | target | H-143 | Independent exact rational polygon inclusion-exclusion | All 361 exact deficits zero; unchanged geometry | accepted |
 | [exp-146](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md) | 11 | target | H-144 | Exact container-clipped support rectangles over every retained frame | Complete16:12 enlarged,4equal,0impossible | accepted |
-| [exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md) | 11 | target | H-145 | Exact 128-slot component containment and union-of-products count | Prospective and unrun | in-progress |
+| [exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md) | 11 | target | H-145 | Exact 128-slot component containment and union-of-products count | All128 complete; only2baseline tuples;0new | rejected |
+| [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md) | 11 | target | H-146 | Nine-seed witness bank and one surviving tuple full-net check | Prospective and unrun | in-progress |
 
 ### Cost and provenance
 
@@ -3880,11 +3889,12 @@ archive beside it.
 | exp-144 | complete exact five-dot replay | 28.95s wall | — | — | criterion |
 | exp-145 | one five-minute guarded replay | 39.06s | — | criterion | `c59d28a7` |
 | exp-146 | one five-minute guarded constructor | 25.69s | — | criterion | `91575889` |
-| exp-147 | one 120-second external process; 60-second internal guard after input loading | — | — | unrun | pending source publication |
+| exp-147 | one 120-second external process; 60-second internal guard after input loading | 40.88s | — | criterion | `e72102e1` |
+| exp-148 | one five-minute process; shared 240-second internal and 60-second seed guards | — | — | unrun | pending source publication |
 
-### What the 103 rounds jointly establish
+### What the 104 rounds jointly establish
 
-The 103 rounds use 2152.1 agent-minutes and 1364.0 wall-minutes under the campaign’s
+The 104 rounds use 2152.1 agent-minutes and 1364.7 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

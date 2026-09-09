@@ -1887,7 +1887,7 @@ sessions:
   title: "Transfer wall-aware owner exclusions"
   status: in_progress
   primary_bead: think-waix
-  phases: 1
+  phases: 2
   measured: false
   unmeasured_reason: >-
     declares no rollups

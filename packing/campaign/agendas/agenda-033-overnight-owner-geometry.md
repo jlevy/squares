@@ -88,7 +88,7 @@ agenda:
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Can larger footprints inherit either certified patch union by exact component containment?
     budget: At most 2 times 4 times 16 exact convex containments before a large census; one bounded registered
@@ -99,21 +99,30 @@ agenda:
     bead: think-waix
     depends_on:
     - BC-317
-    next_evidence: All three source-review guards and nine synthetic controls pass. Session117 freezes
-      H145/exp147 before the one 128-slot target; no target relation has been evaluated.
+    next_evidence: Exp147 completed128 relations, covered only two baseline tuples and added none. BC319
+      tests direct fixed-dot coverage.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
     hypotheses:
     - H-145
     artifacts:
-    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-147-wall-owner-containment.json
+    outcomes:
+    - scope: Can larger footprints inherit either certified patch union by exact component containment?
+      classification: bounded-negative
+      result: All 128relations complete; eight contained, 120failed; covered 2 baseline tuples,new 0,unresolved
+        65534.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-147-wall-owner-containment.json
+      disposition: retire-negative
+      follow_up: null
   - id: BC-319
     purpose: research
     owner_focus: insight
     instances:
     - 11
-    state: blocked
+    state: in_progress
     priority: 1
     question: Does a shared arrangement or a new five/six-dot cover exclude further owner cases?
     budget: One 30-minute discriminator per declared regime; no large blind sweep. Astra Max selects fixed-pattern
@@ -124,10 +133,15 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-318
-    next_evidence: Preregister the smallest additional-class test after the containment result.
+    next_evidence: H146/exp148 freezes the reviewed nine-seed witness bank and one candidate after source
+      admission; target unrun.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
+    hypotheses:
+    - H-146
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md
   - id: BC-320
     purpose: research
     owner_focus: insight

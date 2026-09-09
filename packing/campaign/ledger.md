@@ -131,7 +131,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-114](agent-sessions/session-114-independent-owner-audit.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (process) | 4 | think-yhw2 | BC-316 under think-yhw2: carry the unchanged published exp145 into Session115, then continue the reviewed wall-aware geometry agenda. In parallel, think-ta8s obtains and reconciles the new stacked milestone checkpoint. |
 | [session-115](agent-sessions/session-115-wall-aware-owner-footprints.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (insight) | 3 | think-waix | BC-317 under think-waix: Session116 publishes the controlled source and runs the unchanged exp146 under a fresh forward allocation. In parallel think-ta8s reconciles the new source checkpoint. |
 | [session-116](agent-sessions/session-116-resumed-wall-research.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-waix | Certification under think-ta8s: publish this H144/BC322 result checkpoint and retain its matching hosted status. BC-318 under think-waix then reviews and adopts the three isolated guard repairs, freezes the admitted source and prospective exp147, and evaluates the bounded containment target once. |
-| [session-117](agent-sessions/session-117-wall-owner-containment.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-waix | Complete the three reviewed BC318 guards, publish H145/exp147, then execute the single containment target. |
+| [session-117](agent-sessions/session-117-wall-owner-containment.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-waix | BC-319 under think-ykd6: admit source and freeze a fresh fixed-pattern experiment; preserve think-ta8s checkpoint certification debt. |
 
 ### Workflow summary
 
@@ -144,7 +144,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 19 | 4 | 83 | 7 |
+| `research-loop` | 19 | 4 | 84 | 7 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
@@ -689,8 +689,8 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
-| BC-318 | research | 11 | in_progress | 1 | think-waix | All three source-review guards and nine synthetic controls pass. Session117 freezes H145/exp147 before the one 128-slot target; no target relation has been evaluated. |
-| BC-319 | research | 11 | blocked | 1 | think-ykd6 | Preregister the smallest additional-class test after the containment result. |
+| BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed128 relations, covered only two baseline tuples and added none. BC319 tests direct fixed-dot coverage. |
+| BC-319 | research | 11 | in_progress | 1 | think-ykd6 | H146/exp148 freezes the reviewed nine-seed witness bank and one candidate after source admission; target unrun. |
 | BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
@@ -700,7 +700,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 103 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 104 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -826,7 +826,8 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
 | H-143 | confirmed | proof | For the unchanged four endpoint patches and five dots from exp143, the |  | 1 |  | 39s wall |
 | H-144 | confirmed | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  | 26s wall |
-| H-145 | running | proof | The frozen wall-aware owner footprints inherit at least one additional |  | 1 |  |  |
+| H-145 | refuted | proof | The frozen wall-aware owner footprints inherit at least one additional |  | 1 |  | 41s wall |
+| H-146 | running | proof | The unchanged five-dot pattern D covers at least one wall-footprint tu |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -836,7 +837,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Rounds
 
-### rejected (21)
+### rejected (22)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -861,6 +862,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-138 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-138 | Complete exact producer screen found0of65536endpoint combinations with massatleast7; maximum13394344077/2055263195 and minimum1642317587/2055263195. Sharedproducerchargedtoexp137; no secondprocess. Independent retained-receipt audit exp141 confirmed all exact checks. |
 | exp-139 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-140 | The complete exact replay found minimum760979/800000, which is belowone, so the unchanged exp136 residual weights fail H140. Their positive minimum yields normalized feasible mass31219612/3804895, above the conditional contradiction thresholdseven and without an optimum-gap claim. |
 | exp-141 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-137 | The audit completed against clean tracked receipt and source blobs at44bf815f and confirmed every recorded source identity, canonical direction, exact transport, positiveSAT gap, mask, cardinality, mass and summary. It therefore confirms exp137's subthreshold maximum and rejects H137; audit success does not reverse the mathematical verdict. The audit preserves the receipt's immutable source-era provisional label and does not itself establish the separately reviewed endpoint-containment theorem. |
+| exp-147 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-145 | The complete exact matrix covers only the two baseline tuples, with zero new covered tuples. This refutes component-containment expansion for the frozen classes, not direct coverage by the five dots. |
 
 ### abandoned (2)
 
@@ -972,7 +974,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-147 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-145 | Prospective and unrun. Source review requires three bounded guard repairs before clean publication and the single target. |
+| exp-148 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-146 | Prospective and unrun. The complete negative exp147 result selects direct coverage with the unchanged dots. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -994,7 +996,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-103 rounds, 2152.1 agent-minutes, 1364.0 wall-minutes.
+104 rounds, 2152.1 agent-minutes, 1364.7 wall-minutes.
 
 ## Exploration reports not yet codified
 

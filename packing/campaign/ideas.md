@@ -443,6 +443,7 @@ prevent those local facts from being mistaken for a global exclusion.
 | 139 | Independently decide the same five-dot cover by polygon-union area | registered | [H-143](hypotheses/H-143-independent-five-dot-union.md) | Exact inclusion-exclusion avoids the original residual-union decomposition and weighted event grid; source and synthetic controls must be admitted before replay. |
 | 140 | Restrict possible owner centers by the container walls | registered | [H-144](hypotheses/H-144-wall-aware-owner-footprint-gain.md) | Exact support extrema decide whether any of sixteen coarse footprints grows or a class becomes impossible; transfer of an old exclusion remains a separate test. |
 | 141 | Transfer a five-dot exclusion through larger wall footprints | registered | [H-145](hypotheses/H-145-wall-owner-containment-expansion.md) | Exact component containment must add a tuple beyond the two certified baselines; count the union of two products without mixing certificate families. |
+| 142 | Reuse strict escapes before one direct fixed-dot cover check | registered | [H-146](hypotheses/H-146-fixed-five-dot-wall-expansion.md) | Nine seed directions broadcast exact witnesses across labels; the first surviving new tuple gets one complete direction check. A failed candidate is not a refutation over every tuple. |
 
 ## Dead ends
 

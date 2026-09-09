@@ -52,6 +52,10 @@ and
 [source admission](../../cases/n11_five_dot_cover/wall-containment-source-admission.md)
 define the transfer and its exact controls.
 
+Exp147 completed all 128 exact relations in 40.88 seconds and added no tuple.
+This refutes the frozen component-containment mechanism.
+The two family products each contain only their retained baseline tuple.
+
 The 16⁴ label combinations are a finite bookkeeping space.
 Their overlap means a count of covered labels is not a fraction of all physical
 packings. A complete negative result rules out this component-containment extension,
