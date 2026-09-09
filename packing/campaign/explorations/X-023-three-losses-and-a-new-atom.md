@@ -39,7 +39,7 @@ exploration:
   - packing/src/sqpack/fractional/certificate.py
   - packing/src/sqpack/fractional/sweep.py
   - packing/src/sqpack/fractional/ceiling.py
-  proposes: []
+  proposes: [H-136, H-137, H-138]
 ---
 # X-023 — Three Losses and a New Atom: Where the Next Stretch of s(11) Comes From
 

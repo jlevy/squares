@@ -424,6 +424,21 @@ No research has started under this plan.
 | 127 | Is the 3.82 plateau a site artefact? | registered | [H-133](hypotheses/H-133-plateau-site-artefact.md) | Trump-shaped cores overlapping in site-free strips would explain exactly eleven; thirty minutes to test. |
 | 128 | An eleven-mark ownership set at 96/25 | registered | [H-134](hypotheses/H-134-eleven-mark-ownership-set.md) | The one lemma that collapses the exact-side tree to about two to the twenty LPs; prior about thirty per cent. |
 
+## Three Losses and a New Atom — X-023
+
+[X-023](explorations/X-023-three-losses-and-a-new-atom.md) separates the retained
+certificate’s three losses — the shrink tax, the site restriction, and the integrality
+gap of the point-covering relaxation — and opens one new certificate language, threshold
+atoms, for the third.
+Its wave-one spikes proved the point-atom ceiling at `3.82` exactly, so the three rows
+below are what remains once that route is closed.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 132 | A threshold certificate at 3.82 | registered | [H-136](hypotheses/H-136-threshold-certificate-at-191-50.md) | The point method is capped at eleven there by an exact depth-one family; that same family is cut by 2-of-3 atoms at charge 5/4, so the new language is not capped with it. |
+| 133 | Re-optimise the covering LP on a finer net | registered | [H-137](hypotheses/H-137-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
+| 134 | Where does the point-atom ceiling begin? | registered | [H-138](hypotheses/H-138-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.
