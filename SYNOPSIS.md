@@ -79,6 +79,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, as a weak limit corollary of T-018’s retained certificate. |
+| [T-023](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862, as a weak limit corollary of T-018’s retained atoms re-certified on a finer direction net. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -402,6 +403,7 @@ case or experiment separately.
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
 | [T-022 Dilation-Limit Corollary, Derived from T-018](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) | research synthesis | record | retained | — |
+| [T-023 Dilation-Limit Corollary on a Finer Net, Derived from T-018’s Atoms](packing/cases/n11_fractional_certificate/t-023-dilation-limit-proof.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 381/100$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) | generated status view | generated | generated | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -2364,8 +2366,8 @@ no intervening improvement:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…` | [T-022](packing/frontier/RESULTS.md), a weak limit corollary of T-018’s first-party certificate and a sharpened containment lemma |
-| Bound gap | `0.067057866408` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862…` | [T-023](packing/frontier/RESULTS.md), a weak limit corollary of T-018’s atoms re-certified on a 1440-step net, by T-022’s sharpened containment lemma |
+| Bound gap | `0.060474087234` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -4369,7 +4371,9 @@ This project’s instances and generator moved seven registered cases in one day
 `2 + 4/sqrt(5)`, stated in 1984 and published in 2003; the recorded search found no
 intervening improvement.
 [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
-`3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
+`3.810025723614703…`, and [T-023](packing/frontier/RESULTS.md) re-certifies the same
+atoms on a finer direction net and dilates them to `3.816609502788862…`; their proofs
+and endpoint limitations remain in the technical record.
 The shared S5 rubric category does not make these contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
 was proved about twelve squares rather than inherited from eleven.

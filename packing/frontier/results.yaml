@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-09-06'
+last_reviewed: '2026-09-09'
 results:
   - id: T-001
     claim: >-
@@ -1184,3 +1184,90 @@ results:
       supremum. Direction-specific cores, two-core endpoint averaging, or exact
       fixed-atom core shrinkage might extract more from the same data; the present
       argument cannot prove a strict bound at its own endpoint.
+  - id: T-023
+    claim: >-
+      s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862,
+      as a weak limit corollary of T-018's retained atoms re-certified on a finer
+      direction net. The 1121 atoms of the retained 381/100 certificate, on the same
+      D4-symmetric sites and with every weight multiplied by 200000/198931, form a
+      certificate of the retained form at side 381/100 on the 1440-step net with
+      shrunken side 2494953/2500000, decided from its frozen bytes by the exact
+      event-cell sweep and by the interval branch and bound, which agree at least cell
+      mass exactly 1. For every positive rational q with q^2 below
+      3240000268083184056250000000000/3228788092454681596330191602841, common scaling
+      preserves the source hypotheses other than containment, and the exact sharpened
+      containment lemma rules out a packing at side q times 381/100. Rational density
+      and upward embedding exclude every real side below the supremum. This is not a
+      certificate or a no-fit decision at the endpoint, and it does not prove a strict
+      inequality there.
+    scope:
+      n_values:
+        - 11
+    verification: V4
+    confirmation: C4
+    significance:
+      score: 5
+      rationale: >-
+        The rubric's S5 anchor is movement on a central open case, and this raises the
+        exact lower endpoint of the smallest open case by about 0.0065838 beyond T-022
+        and by about 0.0066095 beyond the T-018 certificate side, for about 0.0277551
+        beyond Stromquist in total. The movement comes from the shrink that a finer net
+        admits under Condition 4, measured on the frozen T-018 atoms; it is not a new
+        certificate architecture, no atom was re-optimised, and the gap to Trump's
+        packing is still about 0.0604741. The same measurement shows where this route
+        ends: the exact depth-one ceiling family at 191/50 caps every one-body point
+        certificate at unit side 3.8288, and these certificates sit about 0.011 below
+        it.
+      scored: '2026-09-09'
+      by: repository replay of the two-route retention gate and the corollary tool, without external review
+    novelty: apparently-novel
+    composition: >-
+      Derived from a full replay of the 1440-step source certificate's five conditions,
+      scaling equivariance for Condition 1, invariance of Conditions 2 and 3,
+      inverse-dilation preservation of Condition 5, and the sharpened containment lemma
+      T-022 proved by an exact rational-square comparison; rational density and upward
+      embedding supply the limit step. C4 rests on the two machine decisions of the
+      source certificate, which fail differently: the exact event-cell sweep and the
+      interval branch and bound. No source-distinct review has been mapped for this
+      result, so it does not reach C5. The 720-step certificate retained beside it is
+      the rung the standalone reader also decides; its own limit,
+      38100000*sqrt(129600042893309449)/3594594251080001, is registered as evidence and
+      is weaker.
+    evidence:
+      - E-n011-fractional-net1440-certificate
+      - E-n011-fractional-net1440-interval-decision
+      - E-n011-fractional-net1440-dilation-limit
+      - E-n011-fractional-net720-certificate
+      - E-n011-fractional-net720-dilation-limit
+    artifacts:
+      - packing/cases/n11_fractional_certificate/certificate-381-100-net1440.json
+      - packing/cases/n11_fractional_certificate/t-023-net1440-dilation-limit-corollary.json
+      - packing/cases/n11_fractional_certificate/certificate-381-100-net720.json
+      - packing/cases/n11_fractional_certificate/t-023-dilation-limit-corollary.json
+      - packing/cases/n11_fractional_certificate/t-023-dilation-limit-proof.md
+      - packing/devtools/measure_net_refinement.py
+      - packing/devtools/dilation_corollary.py
+      - packing/devtools/decide_certificate.py
+      - packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md
+    controls:
+      - packing/tests/test_dilation_corollary.py
+      - packing/tests/test_fractional_certificate.py
+      - packing/tests/test_fractional_interval.py
+    next_rung: >-
+      C5 needs a mapped, non-superseded source-distinct review of the corollary and of
+      the two frozen certificates; T-022's review covered the argument at the 181-step
+      net and this result reuses it unchanged with new B and D. The standalone reader
+      verify_claim.py decides the 720-step rung and refuses the 1440-step rung by its
+      declared 1000-direction ceiling; a new reader release that lifts the ceiling would
+      let a stranger decide the registered rung without trusting this project, and that
+      is a change to a retained verifier rather than to the mathematics. The shrink is
+      a 10^-7 grid crossing, not a minimum, so a smaller passing shrink off the grid
+      would move the endpoint by less than the grid step. Two limits are measured on the
+      frozen atoms: at the original shrink the same atoms fail every finer net at an
+      intermediate direction, so the gain is entirely the shrink the finer net admits,
+      and the exact ceiling family at 191/50 caps every one-body point certificate at
+      unit side 3.8288 on any net containing its six directions. The next movement is
+      therefore a re-optimised certificate at a finer net (H-137), which the covering
+      LP on the frozen sites already shows to be below eleven at 720 steps, and past
+      the cap the threshold atoms of H-136. The endpoint itself remains a weak limit
+      with no endpoint certificate and no strict inequality.

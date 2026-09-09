@@ -2098,6 +2098,46 @@ def _exact_grid_replay(context: Context) -> str:
     return output
 
 
+def _finer_net_limit_record(context: Context, steps: int, record: str) -> str:
+    """One of T-023's limit records, replayed from its source certificate in full.
+
+    Each record is derived from a re-certification of the retained T-018 atoms on a
+    finer direction net, and `--check-limit-record` replays all five source conditions
+    over that net -- 721 or 1441 directions against the 181 of T-022's source -- before
+    it re-derives the sharpened endpoint. That replay is why these two steps are off the
+    pull-request surface: measured on this branch on 2026-09-09, on a loaded four-cpu
+    host with `PACK_JOBS=1`, the 720-step check took 173s and the 1440-step check 352s,
+    against a fast tier whose target is two to two and a half minutes. T-022's own check
+    stays on the pull-request surface, where it was measured to fit. The two records are
+    two steps rather than one so that neither waits on the other and each stays well
+    inside the shared subprocess cap on the deep gate's serial schedule.
+
+    What the pull request keeps is the half of the guard that is cheap:
+    `test_every_case_page_binds_the_certificate_its_own_evidence_names` rehashes each
+    record's source bytes and re-derives its supremum from the declared gap and shrink,
+    so a changed certificate cannot leave the promoted endpoint looking current. What
+    waits for the deep gate is the five-condition replay behind the record.
+    """
+    certificate = f"cases/n11_fractional_certificate/certificate-381-100-net{steps}.json"
+    return _module(
+        context,
+        "devtools.dilation_corollary",
+        certificate,
+        "--source-name",
+        f"packing/{certificate}",
+        "--check-limit-record",
+        f"cases/n11_fractional_certificate/{record}",
+    )
+
+
+def _finer_net_limit_record_720(context: Context) -> str:
+    return _finer_net_limit_record(context, 720, "t-023-dilation-limit-corollary.json")
+
+
+def _finer_net_limit_record_1440(context: Context) -> str:
+    return _finer_net_limit_record(context, 1440, "t-023-net1440-dilation-limit-corollary.json")
+
+
 def _verifier_limits(context: Context) -> str:
     output = _module(context, "cases.trump11.verifier_limits")
     _require_text(output, "delta = 1e-100  REJECT", "tol=1e-09")
@@ -3200,6 +3240,32 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/decide_certificate.py",
             "packing/devtools/generate_known_best_n011_rational_control.py",
             "packing/devtools/check_rational_witness_independent.py",
+        ),
+    ),
+    # T-023's limit records replay their five source conditions over 721 and 1441
+    # directions, 173s and 352s on one core; the docstring on `_finer_net_limit_record`
+    # carries the measurements and the cheap stand-in the pull-request surface keeps.
+    # Each touches what `exact verification` touches.
+    Step(
+        "finer-net dilation-limit record, 720 steps",
+        _finer_net_limit_record_720,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/frontier/*",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
+        ),
+    ),
+    Step(
+        "finer-net dilation-limit record, 1440 steps",
+        _finer_net_limit_record_1440,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/frontier/*",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
         ),
     ),
     Step(

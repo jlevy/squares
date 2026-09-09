@@ -252,10 +252,12 @@ least `B` (to `10^-6`) whose least mass over the net exceeds `M/11`, is
 bind there), and `2494953/2500000 = 0.9979812` at `1440`, where they do.
 The dilation supremum `(381/100) · sqrt(1 + D_N^2) / (B_cross(N)(1 + D_N))` is then
 `3.81353994` at `360`, `3.81573032` at `720` and `3.81660950` at `1440`, against T-022’s
-`3.810025723614703`. The retention packet (a frozen certificate at the crossing shrink
-on the finer net, decided through the two-route gate, and the dilation corollary) is in
-progress; the `720` certificate has been accepted by both routes in its scratch run and
-its formal report is pending.
+`3.810025723614703`. The retention packet froze both certificates at their crossing
+shrinks, decided each through the two-route gate, and derived each dilation corollary;
+the `1440` rung is registered as `T-023`, `s(11) >= 3.816609502788862...`, with the
+`720` rung, the one the standalone reader also decides, retained beside it.
+The proof packet is
+[`t-023-dilation-limit-proof.md`](../../cases/n11_fractional_certificate/t-023-dilation-limit-proof.md).
 The ceiling above says the same atoms can never be dilated past `3.8288 · B_max(N)`, and
 the unit-equivalent side of these certificates, `3.8177` to `3.8179`, sits `0.011` below
 that cap.

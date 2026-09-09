@@ -91,8 +91,10 @@ concurrency:
 
 jobs:
   deferred-steps:
-    # Four of the seven deferrals: negative controls, the n=40 rigidity bracket,
-    # the known-best atlas rebuild and exact rational grid replay. The slow lane,
+    # Six of the nine deferrals: negative controls, the n=40 rigidity bracket,
+    # the known-best atlas rebuild, exact rational grid replay, and T-023's two
+    # finer-net dilation-limit records (173s and 352s on one core, each a full
+    # five-condition replay of a 721- or 1441-direction certificate). The slow lane,
     # exhaustive tier and translation screen each have a separate job below.
     #
     # The three new ones are here on their own measurements, taken at n=1..324 on an idle
@@ -176,6 +178,8 @@ jobs:
           --only "n=40 rigidity bracket still reproduces"
           --only "known-best n=1..324 atlas rebuild"
           --only "exact rational grid replay"
+          --only "finer-net dilation-limit record, 720 steps"
+          --only "finer-net dilation-limit record, 1440 steps"
           --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs

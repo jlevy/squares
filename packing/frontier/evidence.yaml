@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-09-07'
+last_reviewed: '2026-09-09'
 evidence:
   - id: E-green-ds7-theorem9-reported-lower
     claim: lower-bound
@@ -1889,6 +1889,288 @@ evidence:
       fit decision, and no strict inequality. It uses no compactness or attainment
       theorem and does not rule out stronger uses of the same atoms or coverage cells.
     source_reviewed: '2026-09-06'
+  - id: E-n011-fractional-net1440-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The corpus of E-n011-fractional-certificate and E-n011-fractional-dilation-limit:
+        the retained literature archive under packing/resources/, the frontier source
+        register, the 2026-09-04 s(11) audit, the 2026-09-05 literature refresh, and the
+        2026-09-06 exact-endpoint query receipt, supplemented on 2026-09-09 by a bounded
+        web search for this endpoint.
+      searched: >-
+        On 2026-09-09 a general web index was searched for the decimal 3.816609, the
+        radicand 518400042893309449, and the topic query "s(11) lower bound eleven unit
+        squares 3.81 2026 fractional unavoidable set certificate". The results were
+        Stromquist's 2003 paper and its 2 + 4/sqrt(5) bound, Friedman's survey and DS7,
+        the Wikipedia article, and certified-bound papers on unrelated problems; neither
+        the decimal nor the radicand appeared, and no lower bound on s(11) above
+        Stromquist's was found outside this repository.
+      novel_object: >-
+        The re-certification of the retained T-018 atoms on the 1440-step net at shrink
+        2494953/2500000 and the exact weak endpoint it yields through the dilation
+        corollary. The atoms, the certificate method, the sharpened containment lemma
+        and the dilation argument are not new objects; the finer-net certificate and
+        its endpoint are.
+      gaps: >-
+        A bounded search of one general index, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed
+        sources, code-hosting sites, private correspondence, or unpublished work.
+        Apparent novelty is not a priority claim.
+    certificate: cases/n11_fractional_certificate/certificate-381-100-net1440.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.decide_certificate cases/n11_fractional_certificate/certificate-381-100-net1440.json
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 1121 atoms on the
+      D4-symmetric site set of the retained 381/100 certificate: the atom multiset is
+      closed under the container's D4 group, the total mass is 2172735/198931 =
+      10.922053 and so strictly below 11, the 1441-direction net reaches pi/4,
+      containment B(1 + D) < 1 holds, and every reachable event cell at every net
+      direction carries mass at least 1, the least being exactly 1. The shrunken side is
+      B = 2494953/2500000 and the largest half-gap tangent is D = 207107/720000000. The
+      bound the certificate itself proves is the container side, 381/100, which T-018
+      already holds; what the finer net buys is the larger shrink, and the shrink is what
+      E-n011-fractional-net1440-dilation-limit turns into the registered endpoint.
+      The atoms are T-018's, from the frozen bytes with SHA-256
+      b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a, with every
+      weight multiplied by 200000/198931, the reciprocal of the least mass 198931/200000
+      the unscaled weights cover on this net at this shrink, attained at directions 978
+      and 979. The shrink is the least value on a 10^-7 grid at which every direction of
+      the net stays above M/11, measured by devtools.measure_net_refinement; one grid
+      step below it, at 9979803/10000000, direction 877 covers only 39001/40000.
+      The frozen bytes, SHA-256
+      0666bf3d8b45e990c33afdf00be45565222ec9441b1212c2e225d52b1da32ac2, were decided by
+      devtools.decide_certificate, which reads the file back and refuses unless the two
+      routes agree on the value: the exact event-cell sweep accepted at least cell mass
+      1 in 346 s, and the interval branch and bound certified all 2881 doubled-net
+      directions in 11,186,383 boxes with none stalled and a width-zero enclosure at 1
+      in 228 s, both on one core of a loaded four-cpu host. The corollary tool replayed
+      the same five conditions again from the bytes when it wrote the limit record.
+      The standalone reader verify_claim.py refuses this file by name because it decides
+      at most 1000 directions; the refusal is a declared cap of the retained reader, not
+      a failure, and the reader was not edited. The 720-step rung retained beside this
+      one is the rung that reader decides. This entry is the exact-algebraic decision;
+      C4 rests on E-n011-fractional-net1440-interval-decision, which decides the same
+      bytes by a different method.
+    source_reviewed: '2026-09-09'
+  - id: E-n011-fractional-net1440-interval-decision
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Burns–Massaccesi n17]'
+    certificate: cases/n11_fractional_certificate/certificate-381-100-net1440.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.decide_certificate --quick cases/n11_fractional_certificate/certificate-381-100-net1440.json
+    replay_status: passed
+    limitations: >-
+      The second decision of the 1440-step rung's frozen bytes, by the interval
+      verifier described under E-fractional-interval-decision: directed-rounding
+      interval arithmetic with no interval library, Condition 5 decided by branch and
+      bound over boxes of centres on the doubled net, so the D4 reflection argument and
+      Condition 1 are never invoked, and an atom whose coverage rectangle is unresolved
+      is dropped rather than assumed. It shares the certificate object and the
+      closed-form conditions with the exact route and no part of how Condition 5 is
+      decided. On this file it certified all 2881 directions of the doubled net in
+      11,186,383 boxes with none stalled, and in minimisation mode its enclosure of the
+      least covered mass has width zero and equals 1, the value the exact sweep reports
+      and the value the certificate declares. Its acceptance path is the one audited
+      under D-435, which requires the certified lower bound to reach mass 1 in both
+      modes. It adds no bound of its own and no protection against a wrong theorem
+      statement, which both routes share.
+    source_reviewed: '2026-09-09'
+  - id: E-n011-fractional-net1440-dilation-limit
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The corpus of E-n011-fractional-net1440-certificate, which carries the
+        2026-09-09 bounded search for this endpoint's decimal and radicand.
+      searched: >-
+        The 2026-09-09 search under E-n011-fractional-net1440-certificate: the decimal
+        3.816609, the radicand 518400042893309449 and a topic query, returning no
+        source that states this endpoint or any lower bound on s(11) above
+        Stromquist's outside this repository.
+      novel_object: >-
+        The exact weak endpoint obtained by combining the 1440-step re-certification of
+        the retained atoms with T-022's sharpened containment lemma, every strict
+        rational uniform dilation it admits, and rational density. The lemma and the
+        dilation argument are T-022's; the endpoint is new.
+      gaps: >-
+        A bounded search of one general index. Apparent novelty is not a priority claim.
+    certificate: cases/n11_fractional_certificate/t-023-net1440-dilation-limit-corollary.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate-381-100-net1440.json --source-name packing/cases/n11_fractional_certificate/certificate-381-100-net1440.json --check-limit-record cases/n11_fractional_certificate/t-023-net1440-dilation-limit-corollary.json
+    replay_status: passed
+    proof:
+      source: cases/n11_fractional_certificate/t-023-dilation-limit-proof.md
+      theorem: >-
+        The 1440-step re-certification of the retained atoms and the sharpened
+        containment lemma imply s(11) >= 3175000*sqrt(518400042893309449)/598960960743657.
+      scope: >-
+        Uniform dilation of the 1440-step n = 11 source with fixed relative B, one
+        concentric core per square, and strict support containment.
+      pinpoints: >-
+        One-Minute Proof, Frozen Premises, Sharpened Containment and the Strict Rational
+        Family, Endpoint and Scope, and Replay.
+      assumptions:
+        - The 1440-step source certificate passes Conditions 1 through 5 from its frozen bytes.
+        - The exact source half-gap tangent satisfies 0 <= D < 1.
+        - A packing in a smaller square embeds in a larger square.
+        - The rationals are dense in the reals.
+        - s(11) is the infimum of packable container sides.
+    limitations: >-
+      The replay binds the exact source SHA-256
+      0666bf3d8b45e990c33afdf00be45565222ec9441b1212c2e225d52b1da32ac2 and re-decides
+      all five source conditions before deriving a separate exact containment test. For
+      every positive rational q whose square is below
+      3240000268083184056250000000000/3228788092454681596330191602841, the scaled source
+      and sharpened lemma rule out a packing at q times 381/100; density and upward
+      embedding then exclude every real side below their supremum. The control rational
+      100173477/100000000 lies inside the family and above the coarse Condition 4
+      ceiling with exact positive slack, so the sharpened family is strictly larger than
+      the coarse one. The sharpened containment test is equality at the supremum, so
+      this evidence supplies no endpoint certificate, no endpoint fit decision, and no
+      strict inequality. It uses no compactness or attainment theorem. The endpoint is
+      the supremum only for uniform fixed-B dilation with one concentric core and strict
+      support containment on this net; the shrink is a 10^-7 grid crossing rather than
+      a minimum, and the exact depth-one ceiling family at 191/50 shows that no
+      certificate of this one-body form can be dilated past unit side 3.8288.
+    source_reviewed: '2026-09-09'
+  - id: E-n011-fractional-net720-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The corpus of E-n011-fractional-net1440-certificate.
+      searched: >-
+        The 2026-09-09 search under E-n011-fractional-net1440-certificate, which also
+        covered the topic query; the 720-step endpoint's own decimal 3.815730 was not
+        searched separately.
+      novel_object: >-
+        The re-certification of the retained T-018 atoms on the 720-step net at shrink
+        9979243/10000000, the rung below the registered one and the one the standalone
+        reader decides.
+      gaps: >-
+        A bounded search of one general index. Apparent novelty is not a priority claim.
+    certificate: cases/n11_fractional_certificate/certificate-381-100-net720.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.decide_certificate cases/n11_fractional_certificate/certificate-381-100-net720.json
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 1121 atoms on the
+      D4-symmetric site set of the retained 381/100 certificate: the atom multiset is
+      closed under the container's D4 group, the total mass is 2172735/198931 =
+      10.922053 and so strictly below 11, the 721-direction net reaches pi/4,
+      containment B(1 + D) < 1 holds, and every reachable event cell at every net
+      direction carries mass at least 1, the least being exactly 1. The shrunken side is
+      B = 9979243/10000000 and the largest half-gap tangent is D = 207107/360000000; the
+      unscaled least mass 198931/200000 is attained at direction 489, and the added
+      directions of this net never bind, so the crossing shrink is within one grid step
+      of the 360-step net's. The bound the certificate itself proves is the container
+      side, 381/100, which T-018 already holds; its own dilation limit is
+      E-n011-fractional-net720-dilation-limit, weaker than the registered endpoint.
+      The frozen bytes, SHA-256
+      e7806824a1b313aa0322341ac6fb4fe12ffa1f22db83e219597fee5e7d8f772a, were decided by
+      three readers. devtools.decide_certificate accepted by both routes: the exact
+      event-cell sweep at least cell mass 1 in 275 s, and the interval branch and bound
+      over all 1441 doubled-net directions in 5,681,191 boxes with none stalled and a
+      width-zero enclosure at 1 in 157 s, on one core of a loaded four-cpu host. The
+      standalone reader verify_claim.py, which imports nothing from this repository,
+      then decided the same bytes on the venv's CPython 3.14.7: all five conditions
+      hold, the least covered mass is 1 at direction 489, half-tangent
+      33758441/120000000, over 2,266,310,085 cells and 721 directions, in 1365 s, and
+      it printed VERIFIED for the declared claim. That reader is why this rung is
+      retained beside the registered one: it is the rung a stranger can decide with
+      the reader the claim documents already embed.
+    source_reviewed: '2026-09-09'
+  - id: E-n011-fractional-net720-dilation-limit
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The corpus of E-n011-fractional-net1440-certificate.
+      searched: >-
+        The 2026-09-09 search under E-n011-fractional-net1440-certificate; this weaker
+        endpoint's own decimal and radicand 129600042893309449 were not searched
+        separately.
+      novel_object: >-
+        The exact weak endpoint of the 720-step re-certification under T-022's
+        dilation argument, weaker than the registered endpoint and retained because
+        its source rung is the one the standalone reader decides.
+      gaps: >-
+        A bounded search of one general index. Apparent novelty is not a priority claim.
+    certificate: cases/n11_fractional_certificate/t-023-dilation-limit-corollary.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate-381-100-net720.json --source-name packing/cases/n11_fractional_certificate/certificate-381-100-net720.json --check-limit-record cases/n11_fractional_certificate/t-023-dilation-limit-corollary.json
+    replay_status: passed
+    proof:
+      source: cases/n11_fractional_certificate/t-023-dilation-limit-proof.md
+      theorem: >-
+        The 720-step re-certification of the retained atoms and the sharpened
+        containment lemma imply s(11) >= 38100000*sqrt(129600042893309449)/3594594251080001.
+      scope: >-
+        Uniform dilation of the 720-step n = 11 source with fixed relative B, one
+        concentric core per square, and strict support containment.
+      pinpoints: >-
+        One-Minute Proof, Frozen Premises, Sharpened Containment and the Strict Rational
+        Family, Endpoint and Scope, and Replay.
+      assumptions:
+        - The 720-step source certificate passes Conditions 1 through 5 from its frozen bytes.
+        - The exact source half-gap tangent satisfies 0 <= D < 1.
+        - A packing in a smaller square embeds in a larger square.
+        - The rationals are dense in the reals.
+        - s(11) is the infimum of packable container sides.
+    limitations: >-
+      The replay binds the exact source SHA-256
+      e7806824a1b313aa0322341ac6fb4fe12ffa1f22db83e219597fee5e7d8f772a and re-decides
+      all five source conditions before deriving a separate exact containment test. For
+      every positive rational q whose square is below
+      12960004289330944900000000000000/12921107829897393270354902160001, the scaled
+      source and sharpened lemma rule out a packing at q times 381/100; density and
+      upward embedding then exclude every real side below their supremum,
+      38100000*sqrt(129600042893309449)/3594594251080001 = 3.815730319395513..., which
+      the registered 1440-step endpoint exceeds by about 0.0008792. The control rational
+      31297/31250 lies inside the family and above the coarse Condition 4 ceiling with
+      exact positive slack. The sharpened containment test is equality at the supremum,
+      so this evidence supplies no endpoint certificate, no endpoint fit decision, and
+      no strict inequality, and it uses no compactness or attainment theorem.
+    source_reviewed: '2026-09-09'
   - id: E-n017-fractional-certificate
     claim: lower-bound
     scope:

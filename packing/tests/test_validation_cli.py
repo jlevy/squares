@@ -1984,6 +1984,22 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     the same refusal applies to the record layer of all three, which is why the record
     layer stayed and only the per-case re-derivation left.
 
+    **An eighth and a ninth arrived on 2026-09-09 with `T-023`.** The two `finer-net
+    dilation-limit record` steps are `devtools.dilation_corollary --check-limit-record`
+    on the two finer-net re-certifications of the retained `n = 11` atoms, and each
+    check replays all five source conditions over 721 or 1441 directions before
+    re-deriving its endpoint. Measured on the branch that registered the result, on a
+    loaded four-cpu host at `PACK_JOBS=1`: 173s for the 720-step record and 352s for
+    the 1440-step record, against `T-022`'s 181-direction check that stays on the
+    surface. They are two steps so that neither waits on the other and each stays well
+    inside the shared cap on the deep gate's serial schedule; neither carries a budget
+    of its own. The stand-in is not a sample: on every pull request
+    `test_every_case_page_binds_the_certificate_its_own_evidence_names` rehashes each
+    record's source bytes and re-derives its supremum from the declared gap and shrink,
+    so the promoted endpoint cannot be left looking current by a changed certificate.
+    What waits for the deep gate is the five-condition replay behind the record, on a
+    certificate whose own bytes the two-route gate decided when it was retained.
+
     `slow behavioral tests` is `BC-214`. It is not a step that was never decided: it is
     the half of the behavioural suite that carries the wall, split out by measurement
     rather than by name. Of 2,251 collected tests, 92 are marked `slow` and 2,106 remain
@@ -2017,6 +2033,8 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
         "known-best n=1..324 atlas rebuild",
         "single-square translation escape screen",
         "exact rational grid replay",
+        "finer-net dilation-limit record, 720 steps",
+        "finer-net dilation-limit record, 1440 steps",
     }
     # And the same set is what `--fast` leaves out, so the flag and the workflow cannot
     # drift apart: a step marked `fast` that no pull-request job invokes is deferred in

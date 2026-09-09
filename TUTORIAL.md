@@ -92,10 +92,11 @@ its search strategy.
 | proved lower bound explained here | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), an exact weighted atomic certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
 | gap between these bounds | about `0.067084` | still open |
 
-The technical record retains the small refinement `s(11) ≥ 3.810025723614703…` in the
-[T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md).
-It is a weak limit bound and does not decide fit at that endpoint; the table uses the
-simpler certificate bound proved below.
+The technical record retains the refinement `s(11) ≥ 3.816609502788862…` in the
+[T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
+[T-023](packing/cases/n11_fractional_certificate/t-023-dilation-limit-proof.md) proof
+packets. It is a weak limit bound and does not decide fit at that endpoint; the table
+uses the simpler certificate bound proved below.
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** is the distance between the best upper and lower bounds, which

@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **62** evidence records. **46** are formal; **40** of those were established here.
+- **67** evidence records. **51** are formal; **45** of those were established here.
 - **11** rest on an argument made elsewhere, of which **8** have been read by nobody here.
-- **16** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **20** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -76,18 +76,23 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-massaccesi-h052-agreement` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n012-independent-verifier` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-n011-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-n011-fractional-dilation-limit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-fractional-certificate` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-fractional-dilation-limit` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-fractional-net1440-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-fractional-net1440-interval-decision` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published |
+| `E-n011-fractional-net1440-dilation-limit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-fractional-net720-certificate` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-fractional-net720-dilation-limit` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n017-fractional-certificate` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n020-fractional-certificate-97-20` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n020-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-fractional-interval-decision` | 7 | lower-bound | verified | strict inequalities only | here | - | previously-published |
+| `E-fractional-interval-decision` | 6 | lower-bound | verified | strict inequalities only | here | - | previously-published |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 12, verified 46
-- **method**: exact-algebraic 36, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 12
-- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 38
+- **assurance**: numerically-checked 4, reported 12, verified 51
+- **method**: exact-algebraic 40, interval-certified 4, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 12
+- **novelty**: apparently-novel 20, common-knowledge 4, not assessed 4, previously-published 39
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -102,8 +107,8 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n020-fractional-certificate-97-20` | 20, 21 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the previous rung this project's own; what is new is a certificate at 97/20, found by seeding the generator's site set with the 24/5 certificate's own atoms scaled to the new side after the uniform grid walled there. | 2 | verified |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
-| `E-n011-fractional-certificate` | 11 | The certificate and the bound. The resource lineage runs through Göbel's integral unavoidable points, Kearney and Shiu's dual lattices, Nagamochi's weighted points, segments and area, and Bentz's resource-starvation account. This certificate uses the exact-rational, pure-atomic direction-net architecture posted by Burns and then developed by Massaccesi, while the generator is this project's. What is new is an instance at n = 11 and side 381/100, the first located public improvement to this case's lower bound since 2003. | 1 | verified |
-| `E-n011-fractional-dilation-limit` | 11 | The exact weak endpoint obtained by combining the retained T-018 source with a sharpened trigonometric containment lemma, every strict rational uniform dilation it admits, and rational density. The source certificate and dilation operation are not new objects; the registered limit corollary is. | 1 | verified |
+| `E-n011-fractional-net1440-certificate` | 11 | The re-certification of the retained T-018 atoms on the 1440-step net at shrink 2494953/2500000 and the exact weak endpoint it yields through the dilation corollary. The atoms, the certificate method, the sharpened containment lemma and the dilation argument are not new objects; the finer-net certificate and its endpoint are. | 1 | verified |
+| `E-n011-fractional-net1440-dilation-limit` | 11 | The exact weak endpoint obtained by combining the 1440-step re-certification of the retained atoms with T-022's sharpened containment lemma, every strict rational uniform dilation it admits, and rational density. The lemma and the dilation argument are T-022's; the endpoint is new. | 1 | verified |
 | `E-n011-repaired-lower` | 11 | A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
 | `E-n012-fractional-certificate` | 12 | The certificate and the bound it carries, not the method. The weighted fractional unavoidable-set technique is Burns's, with Massaccesi's parameters; what is new here is a first-party certificate ladder at n = 12, reaching 99/25, and the generator that produced it. The first instance was retained at 19/5. Anyone holding Burns's note could have run this search. | 1 | verified |
@@ -111,6 +116,10 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 1 | verified |
 | `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |
 | `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 0 | verified |
+| `E-n011-fractional-certificate` | 11 | The certificate and the bound. The resource lineage runs through Göbel's integral unavoidable points, Kearney and Shiu's dual lattices, Nagamochi's weighted points, segments and area, and Bentz's resource-starvation account. This certificate uses the exact-rational, pure-atomic direction-net architecture posted by Burns and then developed by Massaccesi, while the generator is this project's. What is new is an instance at n = 11 and side 381/100, the first located public improvement to this case's lower bound since 2003. | 0 | verified |
+| `E-n011-fractional-dilation-limit` | 11 | The exact weak endpoint obtained by combining the retained T-018 source with a sharpened trigonometric containment lemma, every strict rational uniform dilation it admits, and rational density. The source certificate and dilation operation are not new objects; the registered limit corollary is. | 0 | verified |
+| `E-n011-fractional-net720-certificate` | 11 | The re-certification of the retained T-018 atoms on the 720-step net at shrink 9979243/10000000, the rung below the registered one and the one the standalone reader decides. | 0 | verified |
+| `E-n011-fractional-net720-dilation-limit` | 11 | The exact weak endpoint of the 720-step re-certification under T-022's dilation argument, weaker than the registered endpoint and retained because its source rung is the one the standalone reader decides. | 0 | verified |
 | `E-n012-independent-verifier` | 12 | Nothing new in this entry -- it is a second, independent decision of the historical 77/20 rung and its 19/5 calibration certificate. | 0 | verified |
 | `E-n029-schadt-rational-upper` | 29 | A rational certificate for an n = 29 bound; the pose is Schadt's | 0 | verified |
 
@@ -122,7 +131,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | `E-basic-grid-upper` | 305 | here | - |
 | `E-basic-area-lower` | 18 | here | - |
 | `E-perfect-square-tiling-rigid` | 18 | here | - |
-| `E-fractional-interval-decision` | 7 | here | - |
+| `E-fractional-interval-decision` | 6 | here | - |
 
 The most-cited argument this repository did not produce is `E-nagamochi-lower`, carrying 307 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 
