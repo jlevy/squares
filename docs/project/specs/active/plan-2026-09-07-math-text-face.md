@@ -908,11 +908,18 @@ Those results precede the new support-text and 410-weight integration in this
 checkpoint. Use the PR’s current checks for its final head; do not transfer the older
 green status.
 
+The new integration at `93cf54a9` passed 116 focused font, instance, and provenance
+tests, then all 45 affected pre-push checks and 1,035 reachable tests in 165.74 seconds.
+Its rebuilt page passed the light desktop typography/provenance check: all 13 caption
+formulas and 11 inline-code spans have zero baseline offset in screen and print.
+Its refreshed PDF is 17 tagged Letter pages (816,939 bytes).
+The full artifact review, final merged dependency pin, and deployment remain pending.
+
 KPress [PR #68](https://github.com/jlevy/kpress/pull/68), candidate
 `0dd60f9eaf13c982e0d3868c086747522cc01412`, branch
 `codex/reader-reload-baseline-contract`. Squares pins that committed candidate so the
 new `REGULAR_WEIGHT` consumer is usable.
-The candidate includes current KPress main and the merged
+The candidate includes the then-current KPress main and the merged
 [PR #52](https://github.com/jlevy/kpress/pull/52), merge `149a0c1f`. PR #52’s research
 was reconciled with actual browser/PDF behavior and all six checks passed.
 It also includes the separate Vitest 4.1.11 security patch; audits are clean.
@@ -923,8 +930,17 @@ publishing-tree golden failures caused by the new font files.
 The two expected trees were regenerated and reviewed; their 13-test replay passed.
 Seventy-five focused font/asset tests, three sans-browser cases, 246 JavaScript tests,
 lint, types, generator checks, audits, and an isolated wheel/sdist smoke passed.
-A subsequent typography design-map documentation follow-up is tracked as `think-vunf`;
-check whether its upstream commit is newer than the pin before finalizing Squares.
+The Sol typography design-map follow-up, reviewed by Astra, is committed upstream as
+`125bada1` under `think-vunf` / `kpr-6q53`. KPress main then advanced through PR #66 to
+`d201627`, changing the mono size ratio from 0.87 to 0.82. That source is integrated in
+PR #68 head `9a24c2bbe688360b6d6d15ac0a069a43ac306f5e`, including the corrected design
+map. Only two generated snapshot conflicts occurred; regeneration and all 47 directly
+affected publishing, mono, and asset tests passed.
+The conflict had prevented the PR workflow from starting; check hosted status after this
+resolving push. Squares intentionally retains the tested `0dd60f9` candidate at this
+checkpoint. After PR #68 merges, update the pin and repeat the affected typography/PDF
+checks for the new 0.82 mono ratio; do not transfer the `93cf54a9` artifact results to
+it.
 
 ### Current Changes and Ownership
 
@@ -969,13 +985,14 @@ check whether its upstream commit is newer than the pin before finalizing Square
 
 ### Remaining Work in Order
 
-1. Finish the upstream documentation follow-up, inspect the final KPress PR diff and
-   wait for its hosted checks.
+1. The upstream documentation follow-up is committed; inspect the final KPress PR diff
+   and wait for its hosted checks.
    Merge it only at the reviewed head, then update the Squares gitlink to a merged
    commit containing both that PR and PR #52.
 2. Rebuild `render_explainer --prepare-math` and the PDF from the final source.
-   The local preview on port 64618 was still serving the older `a10569d1` artifact when
-   this checkpoint began; query-string labels do not change that fact.
+   The local preview on port 64618 now serves `93cf54a9` HTML and its refreshed PDF. It
+   still uses the tested `0dd60f9` dependency, including the 0.87 mono ratio.
+   Query-string labels do not identify file contents; inspect the edition stamp.
 3. Run the affected pre-push gate, existing typography self-test, light desktop and dark
    narrow checks, math faces/loading/geometry/reload checks, print layout, and PDF
    reproducibility/provenance checks.
@@ -1000,6 +1017,7 @@ ownership), `think-d32d` (caption baselines), `think-uwow` (CI timing record), a
 Related implementation children remain recorded under the parent.
 Upstream: `kpr-3y8q` (410), `kpr-37if` (code padding), `kpr-gj9v` (baseline contract),
 and `kpr-n1j6` (reader reload).
+`kpr-6q53` tracks the unified typography design map.
 `kpr-i91n` (PR #52 reconciliation) is closed and synced.
 
 Keep `think-x65m` open for the owner’s rectangular-looking bullets under “Elements of
