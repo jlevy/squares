@@ -659,6 +659,16 @@ optimising against, choose which parameters vary and over what ranges, run seeds
 configuration, and rank by the fraction of runs landing within tolerance of the record
 at a declared budget.
 
+Mechanically it is Pack with a loop around it: the same single-`n` settle, repeated
+while the parameters sweep, keeping what performed best.
+Two kinds of best, and the difference matters.
+Per run, the single configuration that reached the lowest container side, which is the
+one to look at and the one most likely to be luck.
+Statistically, the configuration whose distribution over seeds is best, by median or by
+hit rate within tolerance, which is the one to believe.
+A mode that reports only the first is a slot machine; a mode that reports both, and
+shows how far apart they are, is an instrument.
+
 The name was chosen over “backtest” deliberately.
 Backtesting is a finance term where running a strategy against history is routine and
 the overfitting risk is a footnote; here that risk is the main event.
