@@ -48,34 +48,58 @@ experiment:
       --expect-wall-source 915758898a97c92793f51e62b7a6b17f846895ca --expect-selected-blob 83ec897738d6d1b228623c3ac4c10cd9170d5940
       --expect-selected-source 5600c0fb4eccf9e9dcdf82b02506d3d4340651cb --expect-git-revision "$(git rev-parse
       HEAD)" --deadline-seconds 240 --output campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-direct-sixth-site-feasibility.json
-    budget: One300-second external process plus two-second grace and shared240-second internal guard after
+    budget: One 300-second external process plus two-second grace and shared 240-second internal guard after
       loading. No retry, per-direction clock reset or adaptive candidate loop. Initial source-slice latest
       launch19:01:38 UTC expired unrun. At19:06:09 UTC, Session122 phase2 was prospectively allocated
       through19:36:09 UTC; latest launch19:31:07 UTC fits the full302-second allowance. Preserve source
       and target evidence if it does not fit; never launch late.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-direct-sixth-site-feasibility.json
-  results: []
+    commit: da1e42ac84619d05499326da084b6a99ae7987a2
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Can any one new site complete original D for the selected wall tuple?
+    outcome: criterion_missed
+    checked_by: Complete-domain exact support constraints empty the closed feasible-site region after 188 directions,
+      through owner-187. No candidate or confirmation is needed for this complete negative prefix.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: All 361 complete-domain support constraints leave a nonempty exact site set, and
       its one canonical candidate independently passes all 361 exact zero-deficit union checks before
       the shared deadline.
-    reason: Prospective and unrun. Exp152 establishes only two-witness feasibility; this complete-domain
-      calculation may settle the entire fixed-D-plus-one-site family.
-  lease:
-    expires: '2026-09-09T19:36:09Z'
-    host: local
+    reason: The exact site region becomes empty after 188 complete direction constraints. This rules out
+      every additional single site while original D and tuple(0,0,0,7) stay fixed. It does not rule out
+      weighted added mass below two, repositioned six-site patterns or physical packings.
+  effort:
+    timebox: One 300-second external process plus two-second grace and shared 240-second internal guard;
+      no retry.
+    wall_seconds: 22.36
+    stopped_by: criterion
 ---
 # Exp153: Compute the Entire Feasible Sixth-Site Region
 
-**Prospective and unrun.** The
+**Complete fixed-family refutation.** The one run launched at19:13:57 UTC on2026-09-09
+from clean published source `da1e42ac84619d05499326da084b6a99ae7987a2`, exited zero
+in22.36 seconds, and produced a receipt byte-identical to stdout.
+The exact site region became empty after 188 directions, through owner-187. The
+remaining directions cannot restore a site; this is a complete negative prefix.
+No confirmation candidate was selected.
+
+Decomposition measured8.889535202062689seconds,
+projection/clipping0.6203172472596634seconds, shared internal
+work12.623587540991139seconds, and driver process21.66269845800707seconds.
+
+## Frozen Prospective Protocol
+
+The
 [admitted design](../../../../cases/n11_five_dot_cover/direct-sixth-site-contract.md)
 replaces a bounded sequence of guessed sites with one exact support pass over the
 complete original-D-missed domain.
 [Independent source admission](../../../../cases/n11_five_dot_cover/direct-sixth-site-source-admission.md)
-is GO:33 combined controls passed independently in3.41seconds; final source and test
+is GO:33 combined controls passed independently in3.41 seconds; final source and test
 blobs are retained there.
-Target remains unrun pending clean publication.
+The reviewed source was published before the single target.
 
 For each nonempty direction domain U and core axis u, enforce
 `sup(u·c)−h ≤ u·p ≤ inf(u·c)+h`, and likewise for v. Extrema range over all vertices of

@@ -342,7 +342,9 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H151/exp153
-computes the complete feasible region for any sixth site with the original D fixed.
+refuted every sixth-site extension preserving originalD. The next discriminator is a
+short independently replayed actual-core obstruction; prioritize a disjoint pair for the
+stronger fixed-five-unit-atoms weighted-mass conclusion.
 PR142 completed matching fast and deferred validation and is ready; Session121 closed
 its four slices and separately tallied Session122 continues on the stacked branch
 `codex/n11-owner-core-compatibility`. Exp145 independently confirmed the selected
@@ -354,8 +356,9 @@ deficit and validated rational strict escape.
 Exp150 then refuted individual-owner exclusion of this escape: all four classes admit a
 strictly separated B-core, with exact independent replay.
 Exp151 refuted the fixed sixth site, and exp152 retained a nonempty necessary two-core
-quadrilateral. Exp153 now tests the entire sixth-site family with D fixed; a positive
-answer needs all361 support directions and independent cover confirmation.
+quadrilateral. Exp153 ruled out the entire sixth-site family withDfixed after188exact
+support directions. A general empty intersection does not rule out fractional added mass
+below two without a separately verified disjoint pair.
 H146 remains unresolved.
 The global n11 bracket is unchanged.
 PR137 retains the original sprint; PR142 stacks the separately tallied continuation.

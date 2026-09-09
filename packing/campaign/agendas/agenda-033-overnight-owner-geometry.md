@@ -175,9 +175,10 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-319
-    next_evidence: Exp152 accepts a nonempty necessary site region. H151/exp153 now computes the complete
-      fixed-D sixth-site feasible region by exact support extrema, with independent full-net union confirmation
-      for any candidate.
+    next_evidence: 'Exp153 refutes every sixth-site extension preserving D for tuple(0,0,0,7): exact empty
+      support intersection after 188 directions. The next discriminator is a short actual-core obstruction,
+      prioritizing a disjoint pair that would force added mass at least 2 with the five original unit atoms
+      retained. A triple obstruction alone does not establish that mass lower bound.'
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -198,11 +199,24 @@ agenda:
     - packing/campaign/hypotheses/H-151-direct-sixth-site-feasibility.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md
     - packing/cases/n11_five_dot_cover/direct-sixth-site-contract.md
+    - packing/cases/n11_five_dot_cover/direct-sixth-site-source-admission.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-direct-sixth-site-feasibility.json
     hypotheses:
     - H-148
     - H-149
     - H-150
     - H-151
+    outcomes:
+    - scope: Can individual-owner compatibility or any sixth-site extension preserving original D resolve
+        the selected relaxed owner tuple?
+      classification: bounded-negative
+      result: Exp150 refutes individual-owner exclusion; exp151 refutes the chosen sixthsite; exp152 leaves
+        a necessary quadrilateral; exp153 then rules out every possible sixthsite preserving original D.
+        No new physical owner tuple is excluded.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-direct-sixth-site-feasibility.json
+      disposition: continue
+      follow_up: think-ykd6
   - id: BC-321
     purpose: research
     owner_focus: insight
@@ -313,10 +327,21 @@ allowance or observed result is reset.
 The 30-minute heartbeat supplements continuous work and must not duplicate a launched
 target.
 
-Exp150 has now refuted individual-owner exclusion of its saved escape.
-The active H149/exp151 follow-up tests the same tuple with that centre added as a sixth
-fixed dot.
-Its source and mathematical admission precede the single all-direction target.
+Exp150 refuted individual-owner exclusion of its saved escape.
+Exp151 refuted the fixed sixth site, and exp152 retained a nonempty two-core
+intersection. Exp153 then resolved the whole fixed-D-plus-one-site family negatively
+in22.36 seconds: the exact site region becomes empty after 188 directions.
+This eliminates every choice of that sixth site under the selected relaxed owner
+patches. It does not exclude a physical packing.
+
+The immediate successor is a short independently replayed obstruction.
+A disjoint pair of actual D-missed cores would also rule out added nonnegative mass
+below two while retaining the five original unit atoms.
+An empty triple proves only the one-site obstruction.
+Boundary support attainers need strict interior perturbation and replay before they can
+be called actual escaping cores.
+Full-support pricing remains a reserve option, and unit-parent-aware owner constraints
+are a separate possible refinement.
 
 ## The order of work
 
@@ -360,7 +385,10 @@ A research failure changes the ranking; it does not end the overnight agenda whi
 useful authorized slice remains.
 
 PR137 stays ready and unmerged.
-Work is stacked on `codex/n11-independent-owner-audit` with a separate usage tally.
+PR142 on `codex/n11-independent-owner-audit` is ready and unmerged.
+Current draft PR145 is stacked above it on `codex/n11-owner-core-compatibility`, with
+separate Session121 and Session122 usage intervals.
+Its full milestone checkpoint remains outstanding.
 No further merge is implied by this agenda.
 The original Session113 receipt remains unchanged; its publication tail and Session114
 onward have distinct cutoffs.

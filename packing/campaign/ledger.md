@@ -136,7 +136,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
 | [session-120](agent-sessions/session-120-selected-wall-tuple-execution.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
 | [session-121](agent-sessions/session-121-owner-core-compatibility.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 4 | think-ykd6 | Continue BC-320 in Session122 under think-ykd6; think-ta8s owns matching full checkpoint evidence before PR145 readiness. |
-| [session-122](agent-sessions/session-122-direct-sixth-site-feasibility.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-ykd6 | Admit direct support source, publish its prospective record, then run the one target inside a fitting fresh work slice. |
+| [session-122](agent-sessions/session-122-direct-sixth-site-feasibility.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (process) | 3 | think-ykd6 | Publish the complete fixed-family result and obtain matching full checkpoint evidence; then continue the selected successor on a fresh stacked branch. |
 
 ### Workflow summary
 
@@ -149,7 +149,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 24 | 4 | 93 | 7 |
+| `research-loop` | 24 | 4 | 94 | 7 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
@@ -696,7 +696,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
 | BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed128 relations, covered only two baseline tuples and added none. BC319 tests direct fixed-dot coverage. |
 | BC-319 | research | 11 | complete | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels, while analytic D-preserving transport rejects61440. Exp149 refutes selected tuple(0,0,0,7) at owner-000 with a validated strict escape. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple. |
-| BC-320 | research | 11 | in_progress | 1 | think-ykd6 | Exp152 accepts a nonempty necessary site region. H151/exp153 now computes the complete fixed-D sixth-site feasible region by exact support extrema, with independent full-net union confirmation for any candidate. |
+| BC-320 | research | 11 | in_progress | 1 | think-ykd6 | Exp153 refutes every sixth-site extension preserving D for tuple(0,0,0,7): exact empty support intersection after 188 directions. The next discriminator is a short actual-core obstruction, prioritizing a disjoint pair that would force added mass at least 2 with the five original unit atoms retained. A triple obstruction alone does not establish that mass lower bound. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
 | BC-323 | measurement_validation | 11 | complete | 1 | think-ta8s | PR142 head8a35b482 passed matching fast/page and deferred34380372729; all four research-job checkout revisions were verified. PR142 is ready and unmerged; successor branch codex/n11-owner-core-compatibility is open. Native publication-tail receipt closes17:21:40UTC; Session121 starts there. |
@@ -837,7 +837,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-148 | refuted | proof | At least one of the four selected owner classes admits no snapped B-co |  | 1 |  | 9s wall |
 | H-149 | refuted | proof | The original five sites D plus the exact saved exp149 centre cover eve |  | 1 |  | 13s wall |
 | H-150 | confirmed | proof | The closed escaping B-cores retained by exp149 and exp151 have a nonem |  | 1 |  | 10s wall |
-| H-151 | running | proof | For the fixed D and wall tuple (0,0,0,7), some additional site covers  |  | 1 |  |  |
+| H-151 | refuted | proof | For the fixed D and wall tuple (0,0,0,7), some additional site covers  |  | 1 |  | 22s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -847,7 +847,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Rounds
 
-### rejected (25)
+### rejected (26)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -876,6 +876,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-149 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-147 | Direction owner-000 has a positive exact deficit and a validated rational strict escape, so the specified tuple fails the registered all361 zero-deficit criterion. This refutes H147 only; H146 remains unresolved over other tuples. |
 | exp-150 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-148 | The saved escape survives the individual owner-core constraint in every selected class. H148 is refuted; joint owner compatibility, unit parents, H146 and the global n11 bound remain unresolved. |
 | exp-151 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-149 | The completed first-deficit stop refutes this fixed six-dot set after seven of 361 directions. It does not rule out relocating the sixth site, changing other sites or a weighted certificate. |
+| exp-153 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-151 | The exact site region becomes empty after 188 complete direction constraints. This rules out every additional single site while original D and tuple(0,0,0,7) stay fixed. It does not rule out weighted added mass below two, repositioned six-site patterns or physical packings. |
 
 ### abandoned (2)
 
@@ -985,12 +986,6 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-153 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-151 | Prospective and unrun. Exp152 establishes only two-witness feasibility; this complete-domain calculation may settle the entire fixed-D-plus-one-site family. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1012,7 +1007,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-109 rounds, 2152.1 agent-minutes, 1366.7 wall-minutes.
+109 rounds, 2152.1 agent-minutes, 1367.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

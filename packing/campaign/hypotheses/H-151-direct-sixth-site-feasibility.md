@@ -34,10 +34,10 @@ hypothesis:
   - Clean published prospective protocol and fixed endpoint, wall, exp149 and exp151 bindings.
   replication: false
   registered: '2026-09-09'
-  notes: Empty prefix of necessary support constraints completely refutes the fixed-D-plus-one-site family.
-    Full-net nonempty intersection supplies a candidate, but acceptance requires independent all-361 exact
-    union confirmation. Incomplete support or incomplete confirmation is unresolved; disagreement is invalid.
-    This does not decide arbitrary six-site or weighted covers.
+  notes: REFUTED byexp153:188 complete direction supports empty the exact feasible-site region. Every possible
+    sixthsite preserving original D is excluded for the selected relaxed walltuple. This is not an obstruction
+    to arbitrary weighted added mass below 2, changed base sites, or a physical packing. A separately verified
+    actual disjoint pair would be needed for the stronger fixed-five-unit-atoms mass obstruction.
 ---
 # H151: Solve for Any Sixth Site
 
@@ -50,8 +50,8 @@ The two-core screen was nonempty.
 This experiment now asks about the entire finite-direction, continuous-centre family,
 with a separate independent cover confirmation for a surviving candidate.
 Source implementation and independent admission are complete;33 combined controls passed
-independently in3.41seconds. No target has run; clean prospective publication remains
-required.
+independently in3.41 seconds.
+No target has run; clean prospective publication remains required.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
