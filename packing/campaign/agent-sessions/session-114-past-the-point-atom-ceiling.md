@@ -335,8 +335,8 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md
   checks:
-  - 'full gate: fast at 0443a193: passed'
-  - The records tier is green on the closeout tree, whose additions over 0443a193 are records only.
+  - 'full gate: fast at 0443a193: passed (re-run locally on the closeout tree, whose additions over it are records only)'
+  - The records tier is green on that same closeout tree, with the session rollup in it rather than held out.
   - Twenty-one CI checks are green on the squashed head 7ccb679c and on the current head 0443a193.
   - The whole-suite tier ran once on the pre-squash tree and its cost record was re-recorded after the PR 137 merge; both of those commits left the branch in the squash and are no longer ancestors of this head.
   - Two fast-tier failures on this branch were real and were fixed rather than retried -- a mutation-snapshot source cap that the merged tree genuinely exceeded, moved from 128 to 160 MiB, and a dead document anchor.
