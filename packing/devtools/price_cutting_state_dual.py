@@ -24,6 +24,7 @@ from sqpack.fractional.cutting import (
     support_entries,
     symmetric_placements,
 )
+from sqpack.fractional.cutting import exact_membership as _exact_membership
 
 WEIGHT_DENOMINATOR = 10**9
 DEFAULT_MAX_LINE_PAIRS = 5_000_000
@@ -51,19 +52,6 @@ def _separation_record(separation: Separation, seconds: float) -> dict[str, Any]
         ],
         "seconds": seconds,
     }
-
-
-def _exact_membership(
-    family: CeilingCertificate, point: tuple[Fraction, Fraction]
-) -> tuple[Fraction, list[int]]:
-    """Exact depth and the retained placement indices that supply it."""
-    members = [
-        index for index, placement in enumerate(family.placements) if placement.contains(*point)
-    ]
-    return (
-        sum((family.placements[index].weight for index in members), start=Fraction()),
-        members,
-    )
 
 
 def price_state(

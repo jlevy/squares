@@ -88,6 +88,23 @@ This excludes the specified fixed cross-container pattern, including selected-co
 ownership and boundary touching.
 It does not extend to arbitrary placements of the outer owners.
 
+## Perturbation Strengthening in Session 111
+
+The
+[robust outer-corner proof](../series/series-000-smoke-and-calibration/results/agenda-031/proofs/robust-outer-corner-incompatibility.md)
+extends the fixed-pattern exclusion to outer squares containing the specified
+`1/1000`-inset rectangles.
+Euclidean Hausdorff distance at most `1/1000` from each fixed axis square is a
+sufficient condition.
+Any additional owner of a forced bottom mark contains the same closed radius-`1/100`
+disk in its interior, so the two additional opposite-bottom owners cannot coexist.
+
+This argument was developed after the usage cutoff and belongs to session 111. Its exact
+arithmetic and polynomial identities have a retained guarded replay; the geometric proof
+uses separating axes and the support-function characterization of convex containment.
+The additional-owner assumptions remain essential, and the result does not exclude the
+outer squares themselves or change the packing bracket.
+
 ## Continuation
 
 The next bounded mechanism test prices the retained BC-232 cutting-state LP once and

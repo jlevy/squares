@@ -102,6 +102,19 @@ class SupportEntry:
     weight: Fraction
 
 
+def exact_membership(
+    family: CeilingCertificate, point: tuple[Fraction, Fraction]
+) -> tuple[Fraction, list[int]]:
+    """Exact depth and the retained placement indices that supply it."""
+    members = [
+        index for index, placement in enumerate(family.placements) if placement.contains(*point)
+    ]
+    return (
+        sum((family.placements[index].weight for index in members), start=Fraction()),
+        members,
+    )
+
+
 def snap_centre(
     direction: Direction,
     centre: tuple[float, float],

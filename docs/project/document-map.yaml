@@ -454,6 +454,7 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-screen-contract-review.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/remaining-eight-segment-capacity-four.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/shared-segment-support-bounds.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/robust-outer-corner-incompatibility.md, role: research-report, authority: record, lifecycle: retained}
 collections:
   - pattern: packing/frontier/n-*.md
     role: frontier-case

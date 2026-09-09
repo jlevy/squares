@@ -82,6 +82,22 @@ The two exact CLI readers were then replayed from the continuation checkout:
   the known [third-half-tangent](pair-screen-thirds-control.json) case is excluded.
   These replays validate known examples, not a new search over angle pairs.
 
+## Perturbation Supplement
+
+The [robust extension](proofs/robust-outer-corner-incompatibility.md) covers outer
+squares containing the fixed owners’ `1/1000`-inset rectangles; Euclidean Hausdorff
+distance at most `1/1000` is sufficient.
+Every additional owner of a forced bottom mark then contains the closed radius-`1/100`
+disk about the common point in its interior.
+Two additional opposite-bottom owners therefore overlap.
+
+This is a new analytic continuation result from session 111, with 23 rational
+inequalities and two polynomial identities replayed in the
+[arithmetic receipt](robust-outer-corner-arithmetic.json).
+The reader checks the arithmetic and algebra; the geometric proof is written separately.
+The expanded instrument suite passed
+[64 tests in 2.46 seconds](continuation-instrument-tests.txt).
+
 ## Scope
 
 These capacity, support, angle, counterexample, and fixed-pattern results do not compose
