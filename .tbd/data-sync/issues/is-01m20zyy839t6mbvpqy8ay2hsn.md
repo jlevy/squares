@@ -5,7 +5,7 @@ title: "[epic] Move-set campaign: which annealing physics recovers non-grid s(n)
 kind: epic
 status: open
 priority: 1
-version: 14
+version: 15
 labels: []
 dependencies: []
 child_order_hints:
@@ -17,8 +17,9 @@ child_order_hints:
   - is-01m216trdrcrb87d6h4nhzkw4f
   - is-01m216trt4hkdx53q6d94v2phs
   - is-01m216ts6c7gt2qm8xpc5nm4st
+  - is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-08T17:09:58.636Z
-updated_at: 2026-09-09T00:20:14.513Z
+updated_at: 2026-09-09T04:06:56.519Z
 ---
 Umbrella for the campaign answering the repository owner's question: with the right physics or annealing model, which method recovers best-known non-grid packings for n < 100 to high accuracy?
 
