@@ -48,12 +48,8 @@ def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, se
     with pytest.MonkeyPatch.context() as patch:
         patch.setattr(controls, "snapshot_pruned_targets", capture_targets)
         clone_tree(tree)
-    workflows = {
-        path.relative_to(controls.REPO)
-        for path in retained
-        if path.is_relative_to(controls.REPO / ".github/workflows")
-    }
-    return tree, workflows
+    copied_targets = {path.relative_to(controls.REPO) for path in retained}
+    return tree, copied_targets
 
 
 def test_oversized_snapshot_is_refused_before_cloning(
@@ -275,6 +271,34 @@ def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() ->
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
+def test_math_startup_reports_are_pruned_but_record_sources_survive(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    campaign = ROOT / "benchmarks/math-startup"
+    for directory in (campaign / "runs", campaign / "fixtures"):
+        assert directory in PRUNE
+        sources = [path for path in directory.rglob("*") if path.is_file()]
+        assert sources
+        for source in sources:
+            relative = source.relative_to(controls.REPO)
+            copied = tree / relative
+            if relative in copied_targets:
+                assert copied.read_bytes() == source.read_bytes()
+            else:
+                assert not copied.exists()
+
+    records = [*campaign.rglob("*.md"), *campaign.rglob("*.yaml")]
+    assert records
+    for source in records:
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == source.read_bytes()
+
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for control in specification["controls"]:
+        source = (ROOT / control["file"]).resolve()
+        assert (tree / source.relative_to(controls.REPO)).is_file()
+
+
 @pytest.mark.slow
 def test_build_caches_leave_the_counted_surface_and_the_worker_trees(
     tmp_path: Path,
@@ -379,7 +403,7 @@ def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
     # Main measured this call at 14.44s against the 12s quick-lane ceiling. The snapshot
     # and its selection are shared setup; the real clean check, mutation and restoration
     # remain measured here, with no relaxed ceiling or slow-lane deferral.
-    tree, selected_workflows = control_snapshot
+    tree, copied_targets = control_snapshot
     work = tree / HERE
     synopsis = tree / "SYNOPSIS.md"
     original = synopsis.read_bytes()
@@ -405,7 +429,9 @@ def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
         for path in (tree / ".github/workflows").rglob("*")
         if path.is_file()
     }
-    assert copied_workflows == selected_workflows
+    assert copied_workflows == {
+        path for path in copied_targets if path.is_relative_to(".github/workflows")
+    }
 
     spec = safe_load((ROOT / "devtools/controls.yaml").read_text())
     control = next(
