@@ -57,7 +57,7 @@ experiment:
       metadata, not permission to extend the process timeout.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/exp-134-paired-pricing.json
   lease:
-    expires: '2026-09-09T02:20:50Z'
+    expires: '2026-09-09T02:40:00Z'
     host: Darwin 25.5.0 arm64
   results: []
   complexity:

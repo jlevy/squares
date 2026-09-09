@@ -1726,8 +1726,8 @@ sessions:
 - id: session-111
   title: "n = 11 ownership continuation"
   status: in_progress
-  primary_bead: think-qfog
-  phases: 4
+  primary_bead: think-7lp3
+  phases: 6
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-111.yaml

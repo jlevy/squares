@@ -117,7 +117,7 @@ session:
       dispositions, and publish the complete prospective exp-134 checkpoint on PR 137.
     commitment: BC-306
     bead: think-7lp3
-    status: in_progress
+    status: completed
     entered_by: user_request
     switch_reason: The owner requested a precise walkthrough and updates to the PRs after the earlier
       publication allocation expired.
@@ -131,12 +131,73 @@ session:
     kill_condition: A record or instrument check fails, the publication head differs from the validated
       commit, or the phase deadline arrives.
     fallback: Publish a truthful blocked checkpoint naming the exact failing gate; do not launch exp-134.
+    outcome: The native continuation receipt was refreshed through 01:37:54Z; records and push tiers passed;
+      commit 3f597f34 was pushed; PR 137's required hosted checks passed and GitHub reports CLEAN. PRs
+      116, 121 and 127 now carry their exact final merge state and the handoff to PR 137.
+    evidence:
+    - https://github.com/jlevy/squares/pull/116
+    - https://github.com/jlevy/squares/pull/121
+    - https://github.com/jlevy/squares/pull/127
+    - https://github.com/jlevy/squares/pull/137
+    stop_reason: The publication and reconciliation exit criterion was met before the phase deadline.
+    next_action: Open the registered one-solve exp-134 target phase from the published clean checkpoint.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: Run the single registered exp-134 solve and exact paired32-versus-full-support pricing screen
+      on the transported BC-232 state at q = 96/25.
+    commitment: BC-306
+    bead: think-7lp3
+    status: stopped
+    entered_by: planned_checkpoint
+    switch_reason: The prospective experiment, input state and instrument are published at a clean hosted
+      checkpoint, so BC-306's one numerical target is admitted.
+    budget_minutes: 30
+    started_at: '2026-09-09T01:49:00Z'
+    deadline_at: '2026-09-09T02:19:00Z'
+    expected_output: A solved-support artifact written before arrangement work and a paired-pricing receipt
+      with an exact positive witness or a scoped unresolved guard, timeout, exhaustion or error.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: The process reaches its 30-minute timeout, input or source binding fails, the solve
+      errors, or the line-pair guard refuses construction.
+    fallback: Preserve the solved-support artifact if written, terminalize exp-134 truthfully, and select
+      the bounded no-second-solve reserve only under a fresh prospective record.
+    outcome: The target was allocated but never invoked. The launch-record check reported stale generated
+      agenda and handoff views, then the owner requested the detailed session summary and an explanation
+      of full-support pricing. No LP output or numerical result exists.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md
+    stop_reason: Owner-requested explanation and status review before numerical execution.
+    next_action: Complete the explanation and record reconciliation, then select a fresh forward launch
+      allocation without changing exp-134's one-solve scientific contract.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: Explain today's research agenda and full-support pricing from first principles, verify
+      the usage accounting and update the PR context.
+    commitment: BC-306
+    bead: think-7lp3
+    status: in_progress
+    entered_by: user_request
+    switch_reason: The owner requested a detailed progress walkthrough and definitions before the target
+      was invoked.
+    budget_minutes: 30
+    started_at: '2026-09-09T01:54:16Z'
+    deadline_at: '2026-09-09T02:24:16Z'
+    expected_output: A source-linked explanation of the mathematical program, proved and unresolved results,
+      session dispositions, usage caveats and next priorities, with reconciled PR descriptions.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: A claimed result or usage total cannot be reconciled with its retained source.
+    fallback: State the precise uncertainty and preserve the source receipts; keep the numerical target
+      uninvoked during this review.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Refresh session usage, validate the complete current tree, commit and publish it, then
-      reconcile every PR body against the hosted state.
-  primary_bead: think-qfog
+    next_action: Complete the three independent audits and present the research walkthrough and pricing
+      explanation, then return to the registered numerical test.
+  primary_bead: think-7lp3
   status: in_progress
   budget:
     wall_minutes: 240
@@ -349,8 +410,8 @@ session:
   - 'Expanded integrated instruments at 82df41bd: 64 focused tests passed in 2.46 seconds, including historical
     Git-blob, sparse traversal, malformed revision, arithmetic and usage-cutoff controls.'
   stop_reason: null
-  next_action: Publish the complete context and prospective protocol, then open the one-solve pricing
-    phase.
+  next_action: Complete the owner-requested explanation and accounting review, then select the fresh
+    forward launch allocation for the one-solve exp-134 process.
   started_at: '2026-09-08T23:23:55Z'
   deadline_at: '2026-09-09T03:23:55Z'
 ---
@@ -368,9 +429,24 @@ reasoning output is already included in output tokens.
 This interval excludes independent Claude activity.
 Its branch association is an operator declaration.
 
-BC-305’s exact known-example checks validate the retained local statements and tools;
-the actual H-135 numerical target requires a separate prospective exp-134 allocation.
-The continuation is tracked in a PR stacked on PR 127 while the handoff is open.
+The September 9 accounting audit found a change in the available native log population.
+The refreshed session-111 receipt through `01:37:54Z` no longer sees nineteen
+automatic-review or legacy child logs that the retained session-110 receipt included.
+The four substantive model buckets match exactly at the shared cutoff, but the older
+receipt additionally contains 161 automatic-review responses and 16,656 output tokens.
+The older session-111 snapshot through `00:00:42Z` likewise contained 35
+automatic-review responses and 3,899 output tokens that the refreshed corpus no longer
+exposes. The scanner implementation is unchanged apart from its cutoff help text.
+Preserve the historical receipts in Git and report the two intervals separately; their
+headline totals must not be summed as a uniform exact census.
+The refreshed continuation receipt records 381 substantive responses and 209,950 output
+tokens and remains a lower bound on this Codex task tree, not the whole day’s activity.
+
+BC-305’s exact known-example checks validate the retained local statements and tools.
+PR 127 is merged, and the continuation is published in draft PR 137 on `main` with a
+separate usage interval.
+The prospective exp-134 protocol is public; its single target remains uninvoked during
+the owner-requested explanation and status review.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

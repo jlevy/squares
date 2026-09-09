@@ -642,23 +642,26 @@ not certify an upper bound.
 The depth polisher will start from that retained control; its missing scratch state is
 not a runnable handoff.
 
-**Selected next entry:** `think-qfog` is carrying BC-302 into BC-305 on
+**Selected next entry:** `think-qfog` was the session-110 handoff into BC-305 and is now
+complete at its local ownership scope.
+Session 111’s current continuation is BC-306, `think-7lp3`, on
 `codex/n11-ownership-continuation` in
-[PR 137](https://github.com/jlevy/squares/pull/137). PR 127 has merged as `6aa9e72c`;
-the continuation now targets `main`.
+[PR 137](https://github.com/jlevy/squares/pull/137). PR 127 has merged as `6aa9e72c`,
+and the continuation targets `main`.
 [Agenda 031](packing/campaign/agendas/agenda-031-ownership-and-pricing.md) and
 [session 111](packing/campaign/agent-sessions/session-111-ownership-and-pricing.md)
 retain the reviewed local results and fund one prospective full-support pricing test.
 [X-022](packing/campaign/explorations/X-022-segment-ownership-continuation.md) gives
 sharp capacities of two owners on the outer middle-row segments and four on the other
 eight, necessary support and signed-angle restrictions, two local counterexamples, and
-one fixed-pattern exclusion.
-None composes into a global exclusion at `96/25`. The integrated tools pass 60 controls;
-both counterexample readers and six deliberately broken examples replay as expected.
-H-135 remains untested.
+one fixed-pattern exclusion and its robust perturbation supplement.
+None composes into a global exclusion at `96/25`. The expanded instruments pass 64
+controls; both counterexample readers and six deliberately broken examples replay as
+expected. H-135 remains untested.
 Exp-134’s exact transport control passed with depth one and unchanged mass
-`21342289572/2055263195` in 135.91 seconds; its prospective pricing protocol is being
-published before any LP solve.
+`21342289572/2055263195` in 135.91 seconds; its prospective pricing protocol is
+published at `3f597f34`, whose required hosted checks passed.
+The target remains uninvoked.
 BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
 complements of BC-292 and BC-299 forward.
 The corrected checkpoint is certified by the retained raw full log and structured

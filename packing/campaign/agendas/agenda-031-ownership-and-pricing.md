@@ -20,7 +20,7 @@ agenda:
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Which reviewed segment and corner ownership constraints survive independent exact replay,
       and what global complement remains?
