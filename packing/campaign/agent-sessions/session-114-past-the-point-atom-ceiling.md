@@ -67,12 +67,12 @@ session:
     fallback: null
     outcome: "PR 137 merged at 787cf1c9 of the pre-squash history, with unions of every register and this branch's identifiers renumbered around it first; X-024 written; then the strategic question the merge posed was settled by measurement rather than by argument, and against the branch's own prior: corner conditioning is mass-neutral at every rung."
     evidence: [packing/campaign/explorations/X-024-two-lines-at-eleven.md]
-    stop_reason: The measurement that decided between the two lines had returned, and its consequence -- that the conditional route buys nothing -- left no funded work in this phase.
-    next_action: Retain the five research lanes and file the defect the refutation exposed.
+    stop_reason: The measurement that decided between the two lines had returned, and its consequence -- that the conditional route buys no reach -- left no funded work in this phase.
+    next_action: Retain the five research lanes and file the defect the neutrality measurement exposed.
   - workflow: review-planning-oversight
     focus: process
     recording: retrospective
-    objective: "Close the branch: retain the day's five research lanes as documents, file the defect the refutation exposed, remove the oversized receipt from the branch's own history, and certify the session."
+    objective: "Close the branch: retain the day's five research lanes as documents, file the defect the neutrality measurement exposed, remove the oversized receipt from the branch's own history, and certify the session."
     status: completed
     entered_by: user_request
     switch_reason: The owner's agenda moved from research to branch hygiene and to keeping the pull request current.
@@ -83,7 +83,7 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --fast
     kill_condition: null
     fallback: null
-    outcome: This branch's own 26 commits squashed onto PR 137's head as 7ccb679c at the owner's instruction, dropping a 12,584,012-byte receipt blob from the branch and force-pushing once; retention then added 594caa3a, f84dd78f and 0443a193; D-489 filed; H-146 dispositioned with its premise refuted and its claim retained; twenty-one CI checks green on both the squashed head and the current head.
+    outcome: This branch's own 26 commits squashed onto PR 137's head as 7ccb679c at the owner's instruction, dropping a 12,584,012-byte receipt blob from the branch and force-pushing once; retention then added 594caa3a, f84dd78f and 0443a193; D-489 filed; H-146 dispositioned as live rather than refuted and priced at no reach; twenty-one CI checks green on both the squashed head and the current head.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md, packing/defects.yaml]
     stop_reason: The branch is published, green and current, and the session record is the last artifact it was missing.
     next_action: Widen the certificate format to carry weighted and floor atoms, and generate sites by structure rather than by arrangement vertex.
@@ -292,12 +292,12 @@ session:
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: The headroom is real, so the blocker is the format and the sites rather than the method.
-  - task: Retain the day's five research lanes as lane documents, file the defect the refutation exposed, and disposition H-146.
+  - task: Retain the day's five research lanes as lane documents, file the defect the neutrality measurement exposed, and disposition H-146.
     operator: Claude Opus
     recording: contemporaneous
     phase: 4
     status: completed
-    outcome: Five lane documents under results/agenda-033 with their receipts, registered in the document map and in X-024's sources (594caa3a); D-489 recorded with its evidence and every citation of exp-137 and exp-138 corrected (f84dd78f); X-024 section 5 rewritten, slices B1 and C1 withdrawn, A4 and A5 marked done, H-146 dispositioned at priority 3 with its premise refuted and its claim retained (0443a193).
+    outcome: Five lane documents under results/agenda-033 with their receipts, registered in the document map and in X-024's sources (594caa3a); D-489 recorded with its evidence and every citation of exp-137 and exp-138 corrected (f84dd78f); X-024 section 5 rewritten, slices B1 and C1 withdrawn, A4 and A5 marked done, H-146 dispositioned at priority 3 as live rather than refuted and priced at no reach (0443a193); the scope of that disposition was restated later the same day against X-026, which states the argument as a six-step ladder and marks where it stops.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md, packing/defects.yaml]
     files: [packing/campaign/explorations/X-024-two-lines-at-eleven.md, packing/campaign/hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md, docs/project/document-map.yaml]
     checks: [records tier and fast tier green before the push; twenty-one CI checks green on 0443a193.]
@@ -321,6 +321,8 @@ session:
   outputs:
   - packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md
   - packing/campaign/explorations/X-024-two-lines-at-eleven.md
+  - packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md
+  - packing/campaign/hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md
   - packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md
   - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
   - packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md
@@ -355,17 +357,31 @@ Re-certifying the same atoms on finer nets carried the exact endpoint to
 3.826447410572939. Alongside that, PR 137’s conditional ownership line was merged in and
 read against this one.
 
-What the session did not expect was to refute the direction it had been leaning toward.
+What the session did not expect was to reverse the direction it had been leaning toward.
 Corner conditioning looked like the way past the plateau, because four owners take a
 required cover from eleven to five.
 The measurement says otherwise, exactly: the ceiling family carries weight one at each
 corner mark and the corner deletions are disjoint, so every rung of the ladder gives up
 exactly as much threshold as it takes back.
 The record had read otherwise because the instrument that screened it can only accept
-families that fall short of mass eleven — that is D-489. With conditioning closed, the
-two remaining measurements located the real barrier: the method has at least a third of
-headroom at 3.825, every atom class is violated by the plateau dual, and adding those
-cuts moves the value by nothing because the site set, not the language, is what pins it.
+families that fall short of mass eleven — that is D-489.
+
+**The scope of that, corrected later the same day.** The first summaries of the
+measurement said conditioning was *refuted*, and that is wider than what was measured.
+Refutation covers the conditional method by **point covers** on the residual domain, and
+nothing else; the survivor family violates the two-of-three inequalities, charging `5/4`
+against a budget of one, so it does not block a conditional threshold certificate.
+The general result is **neutrality**: conditioning subtracts exactly `m` from both the
+obstruction and the requirement, so it cannot turn a failing method into a succeeding
+one. That argument is stated in full, term by term, in
+[X-026](../explorations/X-026-what-conditioning-does-and-does-not-buy.md), which also
+names the one cheap unrun measurement that could overturn it — a sixteen-sector
+refinement of the owner patches, registered as `H-149`.
+
+With conditioning priced as neutral, the two remaining measurements located the real
+barrier: the method has at least a third of headroom at 3.825, every atom class is
+violated by the plateau dual, and adding those cuts moves the value by nothing because
+the site set, not the language, is what pins it.
 
 ## What the phase record is, and is not
 

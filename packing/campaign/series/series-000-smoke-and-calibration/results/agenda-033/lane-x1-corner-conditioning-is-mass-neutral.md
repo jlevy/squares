@@ -5,14 +5,29 @@ Retained strategy-lane report for
 sub-agent on 2026-09-09, read-only on the repository at
 `claude/n-11-stronger-result-d730ds`. The report is reproduced as delivered, with its
 own headings and its own numbers; only its file references were rewritten to say where
-each file now is, and one correction note was added where it bears on an entry already
-in the record. X-024 carries the coordinator’s reading.
+each file now is, and two notes were added where they bear on an entry already in the
+record: the correction below about the source family, and the scope note that follows
+this paragraph. X-024 carries the coordinator’s reading.
 
 **This is the lane that reversed a direction the campaign was leaning toward.** X-024 §3
 route C and §4 read conditioning on corner ownership as the architecture for `3.84` and
 beyond; the measurement below says it is neutral at every rung, and X-024 §5 now records
 that. Nothing here refutes the *validity* of the owner theorem or of a conditional
 certificate — what it refutes is the premise that conditioning buys mass.
+
+> **Scope, added 2026-09-09 with
+> [X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md).**
+> Read “refutes” in this report as covering **point covers on the residual domain**,
+> which is what the survivor weight bounds by weak duality.
+> It does not cover threshold atoms there: the survivor family has depth one but charges
+> `5/4` against a budget of one on a two-of-three atom (see the plateau-reader reading
+> below), so it *violates* the threshold inequalities and cannot block a conditional
+> threshold certificate.
+> The general result this lane established is **neutrality** — conditioning subtracts
+> exactly `m` from both the obstruction and the requirement, so it cannot turn a failing
+> method into a succeeding one — and neutrality, not refutation, is what carries to the
+> conditional route as a whole.
+> X-026 states the six-step ladder and marks the step where it stops.
 
 Retained beside this report: the four screening scripts and the two survivor records,
 listed under [Files](#files).
@@ -270,17 +285,21 @@ violations by an order of magnitude — and it did not matter.
   `j4` are empty, they need no cover.
   An emptiness proof is not a covering argument, so it would not rescue the method, only
   these classes; a pose-feasibility check on the two sectors would decide it.
-- **A larger guaranteed patch.** The closest survivor to the `j3` footprint sits at
-  Euclidean separating gap **`0.014978`** — a weight-`1/8` wall placement centred at
-  `(1.50658, 0.50885)`. A patch reaching `0.015` further picks up `1/8` and opens
-  `0.125` of room, against a global ceiling slack (`tau(96/25) <= 11.262`) of `0.262`.
-  Refining the eight sectors to sixteen is the way to get it; whether the refined patch
-  clears `0.015` is one screen away, and this lane would not spend it.
+- **A larger guaranteed patch**, registered after this lane as
+  [`H-149`](../../../../hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md).
+  The closest survivor to the `j3` footprint sits at Euclidean separating gap
+  **`0.014978`** — a weight-`1/8` wall placement centred at `(1.50658, 0.50885)`. A
+  patch reaching `0.015` further picks up `1/8` and opens `0.125` of room, against a
+  global ceiling slack (`tau(96/25) <= 11.262`) of `0.262`. Refining the eight sectors
+  to sixteen is the way to get it; whether the refined patch clears `0.015` is one
+  screen away, and this lane would not spend it.
 - **The threshold route on a residual domain** is neither refuted nor supported here.
   It is exactly as open as the unconditional route and costs sixteen times more; that is
   why the decision is the unconditional lane.
   [`H-146`](../../../../hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md)
-  is dispositioned on exactly that reading: its premise is refuted, its claim is not.
+  is dispositioned on exactly that reading: the claim is live, not refuted, and it is
+  priced at no reach — the survivor family carries the same cut structure as the full
+  family, so threshold atoms cut it exactly as they cut the unconditional ceiling.
 
 ## Files
 

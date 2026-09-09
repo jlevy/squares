@@ -16277,7 +16277,11 @@ defects:
     the predicate had admitted the family.
     The direction is flattering rather than conservative because the error made a route
     look viable: a negative screen reads as "nothing here blocks the conditional
-    programme", and the truth is that four classes block it exactly.
+    programme", and the truth is that four classes block every point cover of their
+    residual domain exactly. The scope of that reading is stated as a ladder in X-026:
+    what the screen refutes is the conditional method by point covers, what it
+    establishes in general is neutrality, and threshold atoms on a residual domain are
+    priced rather than closed.
   fix: >-
     none yet. The predicate should require what deletion-only inheritance needs and no
     more -- an exact `max_depth` of 1 on a `net`, `symmetric_only` receipt -- and should

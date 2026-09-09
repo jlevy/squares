@@ -811,6 +811,7 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | H-145 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
 | H-146 | blocked | proof | For at least one four-owner class of PR 137's sixteen-per-corner struc |  | 0 |  |  |
 | H-147 | blocked | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 0 |  |  |
+| H-149 | blocked | proof | Refining the corner-owner angular bins from eight to sixteen makes eve |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

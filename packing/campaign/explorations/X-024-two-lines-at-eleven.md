@@ -77,13 +77,17 @@ The two lines are not competitors: the conditional route is the fallback if the
 unconditional LP stalls below `3.84`, and threshold atoms are the tool it would then
 need.
 
-**Corrected later the same day: there is no fallback.** The cheap discriminator was run
-and it is negative in the strongest available sense — corner conditioning is exactly
-mass-neutral at every rung, so the conditional route buys nothing and the rank-one cap
-`3.868983` applies to it verbatim.
-§5 carries the measurement and the three consequences; §4 is retained as the reasoning
-that led to it rather than as a live reading.
-The unconditional line is the only line.
+**Corrected later the same day: the fallback buys nothing.** The cheap discriminator was
+run and it is negative on reach — corner conditioning is exactly mass-neutral at every
+rung, so the conditional route cannot turn a failing method into a succeeding one, and
+the rank-one cap `3.868983` applies to it verbatim.
+§5 carries the measurement, the three consequences, and the scope: what is *refuted* is
+the conditional method by **point covers** on a residual domain; what is established in
+general is **neutrality**. §4 is retained as the reasoning that led to it rather than as
+a live reading. The unconditional line is the line to push, as a matter of reach rather
+than of possibility.
+[X-026](X-026-what-conditioning-does-and-does-not-buy.md) states the whole argument as a
+six-step ladder, with every term defined and the stopping point marked.
 
 ## 1. What each line established
 
@@ -238,7 +242,7 @@ Conditioning removes the expensive part of the cover.
 
 > **Superseded, 2026-09-09.** The paragraph above is arithmetic on the wrong family, and
 > the sentence “Conditioning removes the expensive part of the cover” is the claim §5
-> now refutes exactly.
+> now measures as false: what conditioning removes it also gives back, unit for unit.
 > The `1.566` figure is an upper bound from bc-293 on the *one certified class*; the
 > distribution over all sixteen classes at one corner, measured against the mass-eleven
 > ceiling family, runs from exactly `1` to `11/4`, and the case split is decided by the
@@ -320,9 +324,34 @@ corner. The measurement is retained as
 [lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md),
 with the inventory of what the conditional line already has in
 [lane X2](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md).
-`H-146` is dispositioned against it: its premise is refuted, its claim is not — the
-survivor family is a fractional packing and threshold atoms could still cut it — so it
-is retained with rewritten notes rather than deleted.
+`H-146` is dispositioned against it as **live, not refuted, and priced at no reach**:
+the survivor family carries the same cut structure as the full family, so threshold
+atoms cut it exactly as they cut the unconditional ceiling, and what the conditional
+route costs is sixteen times the work for the unconditional problem shifted down by one.
+It is retained with rewritten notes rather than deleted.
+
+**The scope of “refuted”, stated exactly, and three escapes that remain open.**
+[X-026](X-026-what-conditioning-does-and-does-not-buy.md) restates the whole argument as
+a six-step ladder and marks where it stops, because the first summaries of this
+measurement read wider than the measurement.
+What is refuted is the conditional method **by point covers on the residual domain**:
+that is what weak duality against the survivor family bounds, and nothing more.
+It is *not* refuted for threshold atoms there.
+The survivor family has depth one but a two-of-three atom charges it `5/4` against a
+budget of one, so it violates the threshold inequalities and cannot block a conditional
+threshold certificate; the argument against the hybrid is its price, not its
+impossibility. The general claim that survives is **neutrality**: conditioning subtracts
+exactly `m` from both the obstruction and the requirement.
+Three escapes are open and none was closed here.
+**Fatter patches**: neutrality is a property of the *current* eight-sector patches, the
+nearest survivor to a neutral patch sits at a separating gap of `0.014978`, and a patch
+reaching `0.015` further would delete `1/8` more — refining eight sectors to sixteen is
+how one would get it, it is one cheap screen, it was never run, and it is now
+[`H-149`](../hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md).
+**Empty classes**: if the neutral sectors cannot occur in an actual packing of eleven
+they need no cover, and every sector is known to admit a pose, which is weaker.
+**Pruning**: the four-corner programme survives if compatibility rules kill every
+combination drawn from the four neutral sectors, and nobody has enumerated them.
 
 **So slices B1 and C1 below are withdrawn as strategy, and the two lanes X1 and X2 are
 what replaced them.** Slice E1 stands on its own merits: lane A4 found that the reader
@@ -347,7 +376,7 @@ domain.
 | A5 (**done**) | weighted clique atoms (three-of-five with a doubled point) and floor two-of-five atoms in the loop, with exact vertex-set separation | one atom round plus rows-only completion at `383/100`: below eleven, freeze and gate; at eleven, the reader’s next family | this branch; answered from the other side — the ceiling support reaches only `32/3`, so neither side is capped |
 | B1 (**withdrawn**) | the owner-class census at `96/25`: combinations modulo the container symmetries, compatibility pruning by exact footprint separation, the nine-direction residual point LP on a sample of a few hundred classes | the class count and the distribution of residual values against seven | conditional line (PR 137’s branch); a census cannot rescue a neutral ladder |
 | E1 | one certificate format for both lines: point and threshold atoms, an optional forbidden region, a budget threshold, one two-route gate | PR 137’s `T-023` re-decided by the unified gate to the same verdict | either branch; efficiency block |
-| C1 (**withdrawn**) | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-146) | research, Fable; `H-146`’s premise is refuted and the point-cover route on a residual domain is closed |
+| C1 (**withdrawn**) | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-146) | research, Fable; withdrawn on price, not on refutation — the point-cover route on a residual domain is closed, `H-146` itself is live, and it buys the unconditional problem shifted down by one for sixteen times the work |
 
 Two things must not be conflated when the lines are reported together.
 PR 137’s `T-023` is conditional and does not move the bracket; `T-024` and the threshold

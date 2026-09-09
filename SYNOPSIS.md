@@ -142,7 +142,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives twenty-one confirmed hypotheses, sixteen refuted
-hypotheses, two open hypotheses, twenty-six open questions, and forty-seven blocked
+hypotheses, two open hypotheses, twenty-six open questions, and forty-eight blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -3331,6 +3331,7 @@ round that names the hypothesis, control roles included.
 | [H-145](packing/campaign/hypotheses/H-145-where-the-point-atom-ceiling-begins.md) | open question | Where does the point-atom ceiling begin in side, and does any weight-eleven family at 191/50 survive a larger shrink? | 0 | — |
 | [H-146](packing/campaign/hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
 | [H-147](packing/campaign/hypotheses/H-147-threshold-certificate-past-3-82.md) | blocked | The threshold-atom language certifies a side above 191/50, by the same loop at a larger side or by the finer-net shrink; the separation loop that would produce the atoms is unbuilt | 0 | — |
+| [H-149](packing/campaign/hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md) | blocked | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement; the bin count is hard-wired at eight in the footprint builder | 0 | — |
 
 ### Confirmed
 
@@ -4107,7 +4108,12 @@ Re-run on the mass-eleven ceiling family the same filter reads survivor weight e
 ten at four of the sixteen classes, which reverses the reading — and that measurement
 was available the day the instrument was built.
 It is `validity` in the `flattering` direction, because a negative screen reads as
-“nothing blocks this route”, and the truth is that four classes block it exactly.
+“nothing blocks this route”, and the truth is that four classes block every point cover
+of their residual domain exactly.
+The scope of that reading is stated as a ladder in
+[X-026](packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md):
+conditioning is mass-neutral, the point-cover conditional method is refuted, and the
+threshold route on a residual domain is priced rather than closed.
 
 **[D-470](defects.md) records a deferred exhaustive test that still asserted the rung
 `T-021` displaced.** The full gate caught the stale transcription after the PR 83 merge;

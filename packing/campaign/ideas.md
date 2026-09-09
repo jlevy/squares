@@ -466,8 +466,21 @@ Both rows below are the same integrality gap seen from the two sides.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
-| 142 | Threshold atoms inside an owner class’s residual cover | registered | [H-146](hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point cover of seven is the conditional form of the ceiling the unconditional line just passed; the discriminator is whether threshold atoms bring its budget below seven. |
+| 142 | Threshold atoms inside an owner class’s residual cover | registered | [H-146](hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point cover of seven is the conditional form of the ceiling the unconditional line just passed; the discriminator is whether threshold atoms bring its budget below seven. Dispositioned 2026-09-09: live, not refuted, and priced at no reach — the survivor family carries the same cut structure as the full family, so the conditional problem is the unconditional one shifted down by one for sixteen times the work. |
 | 143 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | registered | [H-147](hypotheses/H-147-threshold-certificate-past-3-82.md) | The endpoint at 3.82 is exact and its margin is 0.0327; the same loop at a larger side and the finer-net shrink of T-024 are the two untried mechanisms, and neither is capped by the point-atom ceiling. |
+
+## What Conditioning Buys — X-026
+
+[X-026](explorations/X-026-what-conditioning-does-and-does-not-buy.md) states the
+corner-conditioning argument as a six-step ladder with every term defined, and marks the
+step where it stops: the refutation covers point covers on a residual domain, the
+general result is neutrality, and the threshold route on that domain is open and
+expensive rather than closed.
+It names three escapes it does not close; the first is the row below.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 144 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-149](hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further deletes `1/8` more and the class stops being neutral; halving the angular bin widens the guaranteed wedge from `pi/4` to `3pi/8`. One screen, never run, and the only measurement that could overturn the ladder’s Step 3. |
 
 ## Dead ends
 
