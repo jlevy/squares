@@ -76,7 +76,7 @@ from devtools.render_explainer import (
     kpress_static,
     relation_face_css,
 )
-from devtools.sans_instances import SCREEN_SANS, print_family
+from devtools.sans_instances import SCREEN_SANS, generator, print_family
 
 #: kpress's generated print-face stylesheet, registered in `DEFAULT_CSS_ASSETS`.
 PRINT_FONTS = "css/print-fonts.css"
@@ -267,7 +267,10 @@ REACHABILITY_CASES: list[tuple[str, str, bool]] = [
     (
         "sans-slot-the-page-draws",
         _composite_slot_block(
-            "italic", "400", "source-sans-3-latin-wght-italic.woff2", SANS_COMPOSITE
+            "italic",
+            str(generator().REGULAR_WEIGHT),
+            "source-sans-3-latin-wght-italic.woff2",
+            SANS_COMPOSITE,
         ),
         True,
     ),
@@ -281,7 +284,10 @@ REACHABILITY_CASES: list[tuple[str, str, bool]] = [
     (
         "sans-print-instance-under-a-drawn-slot",
         _composite_slot_block(
-            "normal", "400", "kpress-print-sans-latin-400-normal.woff2", SANS_COMPOSITE
+            "normal",
+            str(generator().REGULAR_WEIGHT),
+            generator().instance_name(generator().REGULAR_WEIGHT, "normal"),
+            SANS_COMPOSITE,
         ),
         True,
     ),
@@ -299,7 +305,7 @@ REACHABILITY_CASES: list[tuple[str, str, bool]] = [
     ),
     (
         "sans-greek-half-of-a-drawn-slot",
-        _sans_composite_greek("normal", "400", "KaTeX_Main-Regular"),
+        _sans_composite_greek("normal", str(generator().REGULAR_WEIGHT), "KaTeX_Main-Regular"),
         True,
     ),
 ]

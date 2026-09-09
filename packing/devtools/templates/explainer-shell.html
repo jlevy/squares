@@ -108,7 +108,7 @@ body {
 /* Paper typography profile; see paper-design.md beside this template.
    Keep the values and their scope together for review upstream to KPress:
    a 19px sans base against 18px prose, regular 410, medium 550, bold 680.
-   Figure text, captions and footnotes share one supporting-text role.
+   Captions and footnotes share a slightly smaller size than figure labels.
    Print keeps the same size ratio.
    Scope the bold token to sans components because KPress also uses it for serif
    emphasis. Diagram labels with explicit SVG weights join the same scale.
@@ -121,12 +121,14 @@ body {
    and the footnote controls at KPress's literal 600, which is neither token. */
 :root {
   --cert-font-scale-sans: calc(19 / 18);
-  --cert-font-weight-sans-light: 410;
+  --cert-font-weight-sans-light: var(--kpress-font-weight-sans-regular);
   --cert-font-weight-sans-medium: 550;
   --cert-font-weight-sans-bold: 680;
   --paper-title-scale: 1.5;
   --paper-subtitle-scale: 1.25;
   --paper-support-scale: 0.95;
+  --paper-note-scale: 0.92;
+  --paper-note-inset: 1.4rem;
   --paper-support-leading: 1.4;
 }
 /* Resolve the sans base in the prose scope so nested sans components all use
@@ -134,6 +136,7 @@ body {
 :root, .cert-page {
   --cert-font-size-sans-base: calc(var(--kpress-font-size-base) * var(--cert-font-scale-sans));
   --paper-font-size-support: calc(var(--cert-font-size-sans-base) * var(--paper-support-scale));
+  --paper-font-size-note: calc(var(--cert-font-size-sans-base) * var(--paper-note-scale));
   --paper-support-color: var(--kpress-doc-muted);
 }
 .cert-page :is(.credits, .kpress-figcaption, .kpress-footnotes, .colophon,
@@ -184,7 +187,7 @@ body {
 .kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
 .cert-page a, .kpress-tooltip a { text-decoration: none; }
 
-/* Supporting text uses one size, family, weight and color in both media.
+/* Supporting text shares its family, weight and color in both media.
    KPress's print text-role reset below turns the inherited gray into black. */
 .cert-page :is(.kpress-figcaption, .kpress-footnotes, .mass-line, .line-fig,
   .chart, .panel, .tip-panel),
@@ -195,6 +198,10 @@ body {
   font-weight: var(--cert-font-weight-sans-light);
   line-height: var(--paper-support-leading);
   color: var(--paper-support-color);
+}
+.cert-page :is(.kpress-figcaption, .kpress-footnotes) {
+  font-size: var(--paper-font-size-note);
+  padding-inline: var(--paper-note-inset);
 }
 .cert-page :is(.kpress-figcaption, .kpress-footnotes) strong { color: inherit; }
 /* Sources, not controls: the ↑ after each footnote is kpress's footnote control and
@@ -528,7 +535,7 @@ body {
 .cert-page .kpress-figcaption {
   border-block-start: 0;
   margin-block-start: 0;
-  padding: 0.85rem 1.1rem 1rem;
+  padding-block: 0.85rem 1rem;
 }
 /* The caption label -- "Figure 5." and the sentence that names the figure -- is bold,
    and it is the same bold as the title credits and every other bold in the sans. KPress

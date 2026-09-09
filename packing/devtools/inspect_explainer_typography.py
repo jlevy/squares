@@ -2,8 +2,9 @@
 
 Run against the explainer or one of its SVG assets. Both screen and print styles
 are inspected. SVG effective sizes include the viewport transform; external SVG
-images must be inspected separately. Supporting-text checks compare ordinary text
-with the first visible caption and detect intersecting inline SVG label boxes.
+images must be inspected separately. Supporting-text checks compare captions and
+endnotes with their shared role, figure labels with theirs, and detect intersecting
+inline SVG label boxes.
 
 `--check-supporting` also asks the provenance question, in both media: whether every
 run of text on the page is drawn from a face the page ships. That is the on-screen half
@@ -53,6 +54,7 @@ class Inspection(TypedDict):
     screen: list[FontUse]
     print: list[FontUse]
     math: NotRequired[dict[str, list[MathContext]]]
+    code: NotRequired[dict[str, list[InlineCodeContext]]]
     findings: NotRequired[list[str]]
 
 
@@ -81,6 +83,74 @@ class MathContext(TypedDict):
     baseline_prepared: NotRequired[bool]
     display_math: NotRequired[bool]
     caption: NotRequired[str]
+
+
+class InlineCodeContext(TypedDict):
+    """Inline code's layout baseline and flat-bottomed ink relative to its context."""
+
+    source: str
+    family: str
+    context_family: str
+    size: float
+    context_size: float
+    baseline_offset: float
+    ink_bottom: float
+    context_ink_bottom: float
+    padding_top: float
+    padding_bottom: float
+
+
+_CODE_CONTEXTS = r"""crops => {
+  const selected = new Set();
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  const inkBottom = style => {
+    context.font = `${style.fontStyle} ${style.fontWeight} `
+      + `${style.fontSize} ${style.fontFamily}`;
+    return context.measureText('Hnx').actualBoundingBoxDescent;
+  };
+  const marker = () => {
+    const span = document.createElement('span');
+    span.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;'
+      + 'border:0;line-height:0;vertical-align:baseline;visibility:hidden;';
+    return span;
+  };
+  return [...document.querySelectorAll('code:not(pre code)')].flatMap(code => {
+    const style = getComputedStyle(code);
+    if (!code.getClientRects().length || style.visibility !== 'visible') return [];
+    const surrounding = getComputedStyle(code.parentElement);
+    if (crops) {
+      const role = code.closest('.kpress-figcaption, .kpress-footnotes') ? 'support' : 'prose';
+      if (!selected.has(role)) {
+        (code.closest('p') || code.parentElement).dataset.squaresCodeCrop = role;
+        selected.add(role);
+      }
+    }
+    const inner = marker(), outer = marker();
+    code.append(inner);
+    code.after(outer);
+    const offset = inner.getBoundingClientRect().top - outer.getBoundingClientRect().top;
+    inner.remove();
+    outer.remove();
+    return [{source: code.textContent, family: style.fontFamily,
+      context_family: surrounding.fontFamily,
+      size: parseFloat(style.fontSize), context_size: parseFloat(surrounding.fontSize),
+      baseline_offset: offset, ink_bottom: inkBottom(style),
+      context_ink_bottom: inkBottom(surrounding),
+      padding_top: parseFloat(style.paddingTop),
+      padding_bottom: parseFloat(style.paddingBottom)}];
+  });
+}"""
+
+
+def code_baseline_findings(rows: list[InlineCodeContext]) -> list[str]:
+    """Inline code shares the surrounding baseline, independent of glyph height."""
+    return [
+        f"inline code {row['source']!r}: baseline differs from surrounding text "
+        f"by {row['baseline_offset']:.4f}px"
+        for row in rows
+        if not math.isfinite(row["baseline_offset"]) or abs(row["baseline_offset"]) > 1 / 16
+    ]
 
 
 def math_size_findings(rows: list[MathContext], *, require_roles: bool = False) -> list[str]:
@@ -354,10 +424,13 @@ _PROBE = r"""({selector, supporting, check}) => {
   const visible = el => getComputedStyle(el).visibility === 'visible'
     && el.getClientRects().length && !el.closest('[hidden]');
   const caption = [...document.querySelectorAll('.kpress-figcaption')].find(visible);
-  const expected = caption ? getComputedStyle(caption) : null;
+  const figure = [...document.querySelectorAll('.mass-line')].find(visible);
+  const noteStyle = caption ? getComputedStyle(caption) : null;
+  const figureStyle = figure ? getComputedStyle(figure) : noteStyle;
   const exceptions = 'a, .katex, math, .tex, .tex-d, code, pre, '
     + 'h1, h2, h3, h4, h5, h6, .verdict, .hi, .mass-val, .tag';
-  if (check && !expected) findings.add('no visible caption to establish supporting typography');
+  if (check && !noteStyle)
+    findings.add('no visible caption to establish supporting typography');
   const round = x => Math.round(x * 10000) / 10000;
   const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
   while (walker.nextNode()) {
@@ -385,6 +458,8 @@ _PROBE = r"""({selector, supporting, check}) => {
     if (!group.effective_sizes.includes(effective)) group.effective_sizes.push(effective);
     const sample = `${el.tagName.toLowerCase()}: ${text.slice(0, 100)}`;
     if (group.samples.length < 5 && !group.samples.includes(sample)) group.samples.push(sample);
+    const expected = el.closest('.kpress-figcaption, .kpress-footnotes')
+      ? noteStyle : figureStyle;
     if (check && expected && el.closest(supporting) && !el.closest(exceptions)) {
       checked++;
       const differences = [];
@@ -397,7 +472,7 @@ _PROBE = r"""({selector, supporting, check}) => {
       if (differences.length) findings.add(`${sample}: ${differences.join('; ')}`);
     }
   }
-  if (check && expected && !checked)
+  if (check && noteStyle && !checked)
     findings.add('no ordinary supporting text matched the requested selector');
   if (check) {
     for (const link of document.querySelectorAll('.cert-page a')) {
@@ -445,7 +520,7 @@ def inspect(
     """Inspect settled text in both media without changing the source document."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
-    report: Inspection = {"screen": [], "print": [], "math": {}}
+    report: Inspection = {"screen": [], "print": [], "math": {}, "code": {}}
     findings: list[str] = []
     with sync_playwright() as driver:
         browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
@@ -492,6 +567,12 @@ def inspect(
                     _MATH_CONTEXTS, {"wrappers": MATH_WRAPPERS, "crops": bool(math_crops)}
                 )
                 report["math"][medium] = rows
+                report["code"][medium] = page.evaluate(_CODE_CONTEXTS, bool(math_crops))
+                if check_supporting:
+                    findings.extend(
+                        f"{medium}: {finding}"
+                        for finding in code_baseline_findings(report["code"][medium])
+                    )
                 if check_math:
                     findings.extend(
                         f"{medium}: {finding}"
@@ -506,9 +587,15 @@ def inspect(
                         crop = page.locator(f'[data-squares-typography-crop="{role}"]')
                         if crop.count():
                             crop.screenshot(path=math_crops / f"{medium}-{role}.png")
+                    for role in ("prose", "support"):
+                        crop = page.locator(f'[data-squares-code-crop="{role}"]')
+                        if crop.count():
+                            crop.screenshot(path=math_crops / f"{medium}-code-{role}.png")
                     page.evaluate(
                         "document.querySelectorAll('[data-squares-typography-crop]')"
-                        ".forEach(el => delete el.dataset.squaresTypographyCrop)"
+                        ".forEach(el => delete el.dataset.squaresTypographyCrop);"
+                        "document.querySelectorAll('[data-squares-code-crop]')"
+                        ".forEach(el => delete el.dataset.squaresCodeCrop)"
                     )
                 if check_supporting:
                     findings.extend(
@@ -527,11 +614,14 @@ def self_test(path: Path = PAGE) -> None:
 
     fixture = """<!doctype html><html><head><style>
       .cert-page { font-family: Arial, sans-serif; font-size: 17.575px; color: #666; }
+      .kpress-figcaption, .kpress-footnotes { font-size: 17px; }
       a { color: inherit; text-decoration: none; }
       svg text { font-family: Arial, sans-serif; font-size: 35.15px; fill: #666; }
     </style></head><body><div class="cert-page">
       <figcaption class="kpress-figcaption">Reference caption</figcaption>
       <p class="kpress-footnotes" id="footnote">Supporting footnote</p>
+      <p class="mass-line">Reference figure label</p>
+      <p>Text with <code>Hnx-010</code> aligned on its baseline.</p>
       <a href="#footnote">Reference link</a>
       <div class="line-fig"><svg viewBox="0 0 400 120" width="200" height="60">
         <text x="10" y="40">Alpha</text><text x="200" y="100">Beta</text>
@@ -552,6 +642,15 @@ def self_test(path: Path = PAGE) -> None:
                 raise SystemExit(
                     f"typography self-test rejected valid fixture: {valid['findings']}"
                 )
+            code_rows: list[InlineCodeContext] = page.evaluate(_CODE_CONTEXTS, arg=False)
+            if len(code_rows) != 1 or code_baseline_findings(code_rows):
+                raise SystemExit("code-baseline self-test rejected the aligned fixture")
+            page.locator("code").evaluate(
+                "el => { el.style.position = 'relative'; el.style.top = '-2px'; }"
+            )
+            raised_code: list[InlineCodeContext] = page.evaluate(_CODE_CONTEXTS, arg=False)
+            if not code_baseline_findings(raised_code):
+                raise SystemExit("code-baseline self-test missed raised inline code")
             page.evaluate(
                 """() => {
                   const footnote = document.querySelector('#footnote');
@@ -714,7 +813,8 @@ def self_test(path: Path = PAGE) -> None:
             browser.close()
     print(
         "typography self-test passed: supporting text, contextual sizes, "
-        f"{len(sources)} baseline cases, original-strut and raised-glyph controls"
+        f"{len(sources)} math baseline cases, inline code, "
+        "original-strut and raised-glyph controls"
     )
 
 
@@ -732,7 +832,7 @@ def main() -> None:
     parser.add_argument(
         "--math-crops",
         type=Path,
-        help="Save matched 2x crops of the first inline, display, and caption math",
+        help="Save matched 2x crops of inline, display, and caption math plus inline code",
     )
     parser.add_argument(
         "--width", type=int, default=1280, help="Screen viewport width in CSS px"

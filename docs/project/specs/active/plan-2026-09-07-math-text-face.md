@@ -14,9 +14,10 @@ status: active
 no-swap fixes merged in [Squares #128](https://github.com/jlevy/squares/pull/128). The
 shared runtime follow-up merged in
 [KPress #61](https://github.com/jlevy/kpress/pull/61), followed by its architecture
-update in [KPress #64](https://github.com/jlevy/kpress/pull/64). This repository pins
-their merged source at `4a868bb`, which also includes Planetaire Mono (`kpr-v731`) and
+update in [KPress #64](https://github.com/jlevy/kpress/pull/64). Those merged changes
+include Planetaire Mono (`kpr-v731`) and
 [KPress #65](https://github.com/jlevy/kpress/pull/65)’s font-settings corrections.
+The current candidate and continuation checkpoint are recorded below.
 Prepared startup and saved-setting support are implemented in
 [Squares #135](https://github.com/jlevy/squares/pull/135). Hosted H-006 timing and H-004
 geometry checks passed at `dab2a381`; integration with the subsequently merged
@@ -884,16 +885,162 @@ The initial full-observer timing comparison remains under review because observe
 and the host regime prevent an unqualified latency claim.
 The hosted H-003 comparison was rejected; H-005 passes its numerical rule but fails
 correctness because of the queued-math and print-carrier defects.
-The repaired publication is registered as H-006, with the complete H-004 saved-setting
-verdict and Squares release verification still pending.
-Implemented checks do not substitute for those results.
+The repaired publication passed H-006 and all 29 H-004 geometry cells on Linux and macOS
+at `dab2a381`; the accepted records were committed in `dfa0a422`. Release verification
+remains a separate step for the final PR head.
 
-## Open Questions
+## Continuation Checkpoint: Typography and Publication
 
-- Whether captions and panels keep the math text face or revert to the KaTeX faces (see
-  Background). Adopting the sans composite settles the version of this that was about
-  mixing two text faces inside one caption; what is left is the narrower question of
-  whether a caption wants mathematics in its own face at all.
+The owner requested this checkpoint because account credit was nearly exhausted.
+Preserve the working design and finish this slice; do not restart a font architecture or
+timing campaign.
+The current objective is to publish the reviewed typography work, verify
+the deployment, and open the final local HTML and PDF in the OS default browser.
+
+### Branches and Validation Boundary
+
+Squares branch: `codex/math-startup-stability`,
+[PR #135](https://github.com/jlevy/squares/pull/135). The last fully hosted-green
+integration is `131b9758`, which merged current main `cd9e527b` and passed every
+publication, packing, and mergeability check.
+Its local pre-push passed 45 checks in 185.484 seconds.
+Those results precede the new support-text and 410-weight integration in this
+checkpoint. Use the PR’s current checks for its final head; do not transfer the older
+green status.
+
+KPress [PR #68](https://github.com/jlevy/kpress/pull/68), candidate
+`0dd60f9eaf13c982e0d3868c086747522cc01412`, branch
+`codex/reader-reload-baseline-contract`. Squares pins that committed candidate so the
+new `REGULAR_WEIGHT` consumer is usable.
+The candidate includes current KPress main and the merged
+[PR #52](https://github.com/jlevy/kpress/pull/52), merge `149a0c1f`. PR #52’s research
+was reconciled with actual browser/PDF behavior and all six checks passed.
+It also includes the separate Vitest 4.1.11 security patch; audits are clean.
+The candidate’s own PR and any later documentation commit must pass CI before merging.
+
+Candidate validation: the full KPress Python/browser run had 774 passing tests and two
+publishing-tree golden failures caused by the new font files.
+The two expected trees were regenerated and reviewed; their 13-test replay passed.
+Seventy-five focused font/asset tests, three sans-browser cases, 246 JavaScript tests,
+lint, types, generator checks, audits, and an isolated wheel/sdist smoke passed.
+A subsequent typography design-map documentation follow-up is tracked as `think-vunf`;
+check whether its upstream commit is newer than the pin before finalizing Squares.
+
+### Current Changes and Ownership
+
+- KPress owns regular sans weight 410 at `--kpress-font-weight-sans-regular` in
+  `style-tokens.css`. The existing `instance_sans` and `katex_text_metrics` generators
+  read that one value and produce matching print instances, composite descriptors, Greek
+  scales, metrics, and font warmup requests.
+  Supported regular-weight tuning is 200 through 500; larger values can select bold
+  fallback operators or collide with the bold slot.
+  Medium and bold remain distinct.
+- Squares consumes `generator().REGULAR_WEIGHT` for print instances and composite
+  reachability; its CSS aliases the upstream token.
+  Its medium/bold remain 550/680. Captions and endnotes share 0.92 of the 19px sans base
+  (17.48px screen) and a 1.4rem inset on both sides.
+  Figure labels retain 0.95 (18.05px).
+- The actual Planetaire Mono text baseline was already aligned: all 11 inline code spans
+  measured zero offset in screen and print.
+  KPress balances inline-code padding at 0.175em above and below, preserving total
+  padding and wrapping while lowering the decoration’s edges by 0.075em. The existing
+  Squares typography inspector now inventories code baselines and rejects a deliberately
+  raised code span. Do not add a glyph transform to this correction.
+- Standalone KPress reader panes now flush existing history state before departure and
+  restore it on pageshow.
+  The original source fails a retained reload test at 2500px to zero.
+  Fourteen browser cases and 27 history unit cases pass, including rapid reload,
+  fragments, Back/Forward, disposal, and native-host opt-out.
+  The pane-only beforeunload hook does not prompt or cancel navigation, but can affect
+  Firefox bfcache eligibility.
+  Squares uses native document scrolling and gets no reload hook.
+  An unchanged-WebKit real-fragment quirk has a narrowly scoped test exception; other
+  native cases retain the one-pixel position check.
+- The KPress PDF helper warms each margin font at its actual weight token, including the
+  410 footer, and the folio CSS reads the matching prose-weight token.
+  Squares mirrors that existing helper contract while its credit footer is disabled.
+- The canonical KPress loading architecture already documents font composition,
+  synchronous staging, per-formula readiness, optional preparation, and measured
+  baseline/strut requirements.
+  The latest requested design consolidation belongs in its existing `kpress-design.md`,
+  with links to that architecture.
+  [Paper Design](../../../../packing/devtools/templates/paper-design.md) owns the
+  Squares-specific typography roles and points upstream.
+
+### Remaining Work in Order
+
+1. Finish the upstream documentation follow-up, inspect the final KPress PR diff and
+   wait for its hosted checks.
+   Merge it only at the reviewed head, then update the Squares gitlink to a merged
+   commit containing both that PR and PR #52.
+2. Rebuild `render_explainer --prepare-math` and the PDF from the final source.
+   The local preview on port 64618 was still serving the older `a10569d1` artifact when
+   this checkpoint began; query-string labels do not change that fact.
+3. Run the affected pre-push gate, existing typography self-test, light desktop and dark
+   narrow checks, math faces/loading/geometry/reload checks, print layout, and PDF
+   reproducibility/provenance checks.
+   Inspect captions, endnotes and code visually in the new PDF. The current role split
+   is already reviewed, but needs these checks on the rebuilt artifact.
+4. Update PR #135’s description with the final pin and exact validation evidence.
+   Keep its frozen cost receipt as a dated lower bound; do not regenerate it or relabel
+   older timings as measurements of the new source.
+   Wait for all PR checks, resolve any new main conflict, and merge the exact head.
+5. Wait for the main Pages deployment.
+   Run `check_published_site --commit FULL_SHA` and a live `check_math_loading` smoke.
+   Open fresh local HTML and PDF URLs with the OS default browser, then close the
+   resolved beads and sync.
+
+### Beads and Observed Limitations
+
+`think-qcmi` is the active continuation parent.
+The current slice is `think-bccr` (410 and support roles), `think-y54j` (code
+decoration/baseline), `think-vunf` (typography design map), `think-qju8` (upstream
+ownership), `think-d32d` (caption baselines), `think-uwow` (CI timing record), and
+`think-y4cs` (main integration).
+Related implementation children remain recorded under the parent.
+Upstream: `kpr-3y8q` (410), `kpr-37if` (code padding), `kpr-gj9v` (baseline contract),
+and `kpr-n1j6` (reader reload).
+`kpr-i91n` (PR #52 reconciliation) is closed and synced.
+
+Keep `think-x65m` open for the owner’s rectangular-looking bullets under “Elements of
+the project.” All 29 visible markers have square CSS boxes in ten observations across
+desktop/narrow, device scales 1/2, and print.
+The parent and nested items measure 3.65625 by 3.65625 CSS pixels on screen and 3.25 by
+3.25 in print.
+A slight tall appearance occurs in some crops; a tested 73px scroll change
+leaves the crops identical.
+Rasterization remains a hypothesis, not a confirmed geometry defect.
+Preserve the requested 0.04em optical offset; do not add a pixel-snapping runtime
+without evidence. The existing `check_print_layout` marker guard and preview helper
+retain the method.
+
+The atlas’s embedded Helvetica remains an accepted standalone-figure exception under
+`think-czt4`. Font subsetting and broad CI timing-noise policy are separate follow-ups;
+neither is required to finish this publication slice.
+
+### Non-Obvious Setup and Retained Evidence
+
+Use normal CPython 3.14, never PATH `python3` or the free-threaded 3.14t selected by
+some uv environments.
+The working environment on this machine is `/private/tmp/squares-font-review-py314`;
+KPress candidate checkout is `/private/tmp/kpress-reader-reload`. From `packing/`, run
+frozen project commands with `PYTHON_CPU_COUNT=4`,
+`UV_PROJECT_ENVIRONMENT=/private/tmp/squares-font-review-py314`, and on macOS
+`DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib`. Do not commit or format while
+repository-snapshot tests are running.
+
+The retained startup campaign is
+[packing/benchmarks/math-startup](../../../../packing/benchmarks/math-startup/README.md).
+H-006 measured `dab2a381`: 12 interleaved pairs per width, 48 valid observations, 14.18%
+faster parameter readiness at 1280px and 31.42% at 390px under the unchanged acceptance
+rule. H-004 had zero measured movement in all 29 cells on both Linux and macOS. Accepted
+records and raw observations were committed in `dfa0a422`. These are historical
+source-qualified results, not a timing claim for this checkpoint.
+
+Local optical evidence lives under `/private/tmp/squares-planetaire-before`,
+`/private/tmp/squares-code-balanced-padding-review`, and
+`/private/tmp/squares-elements-marker-scale-review`. Reproduce it with the retained
+tools rather than depending on those temporary files.
 
 ## References
 
