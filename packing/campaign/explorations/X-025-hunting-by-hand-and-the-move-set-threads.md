@@ -659,6 +659,17 @@ optimising against, choose which parameters vary and over what ranges, run seeds
 configuration, and rank by the fraction of runs landing within tolerance of the record
 at a declared budget.
 
+The three modes divide by who is doing the work, which is worth stating because it is
+also what each is for.
+**Pack** is the mode a person participates in: one `n`, the speed turned down as far as
+wanted, squares grabbed and moved by hand, the settle watched rather than scored.
+It is where the hand-hunting argument above actually cashes out, and its value is that a
+person can intervene mid-run.
+**Sweep** is the machine rendering what is already known across a range, at speed and
+without interaction, which is the video.
+**Calibrate** is the machine searching over its own settings, with nobody watching any
+single run.
+
 Mechanically it is Pack with a loop around it: the same single-`n` settle, repeated
 while the parameters sweep, keeping what performed best.
 Two kinds of best, and the difference matters.
