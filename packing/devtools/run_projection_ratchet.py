@@ -39,6 +39,7 @@ from devtools.divide_and_concur import (
     corners_of,
     pair_separation,
     pose_of,
+    project_contacts,
     project_pairs,
     violation,
     wall_clearance,
@@ -49,10 +50,29 @@ from sqpack.yamlio import safe_load
 
 @dataclass
 class Problem:
-    """The replica bookkeeping for `n` squares: which replica belongs to which square."""
+    """The replica bookkeeping for `n` squares: which replica belongs to which square.
+
+    `classes` is optional structural knowledge: a partition of the squares into groups
+    that share an orientation. It is the lowest rung of the structure ladder -- for
+    `n = 11` it is the two numbers "six squares at one angle, five at another", and it
+    names neither the angle nor which square goes where.
+
+    It enters as part of the concur set rather than as a force. The concur set is already
+    "every replica of a square agrees, and each is a unit square"; a class adds "and these
+    squares share an orientation", which is one more thing to project onto and not one
+    more term to weigh against the others. That distinction is the reason to try this at
+    all: the same idea measured as an *attraction* on 2026-09-08 pulled target structures
+    apart rather than building them, for two recorded reasons -- the pull could not reach
+    across one to four units, and nothing rotated a pair into registry. A projection has
+    no range, and the rigidifying fit is a rotation.
+    """
 
     n: int
     side: float
+    classes: list[list[int]] | None = None
+    contacts: list[tuple[int, int]] | None = None
+    band: float = 0.02
+    contact_weight: float = 1.0
     ra: Index = field(init=False)
     rb: Index = field(init=False)
     rw: Index = field(init=False)
@@ -73,9 +93,22 @@ class Problem:
             ]
         )
         self.weight = np.ones(2 * m + self.n)
+        # Which pair constraints are equalities. A contact graph does not enter this
+        # search as a preference to be weighed against the others; it changes what the
+        # constraint *is*, from "do not overlap" to "touch". That is the whole difference
+        # between declaring a structure and hoping a force finds it.
+        wanted = {(min(i, j), max(i, j)) for i, j in (self.contacts or ())}
+        self.touching = np.array([p in wanted for p in pairs], dtype=bool)
+        # A square touches about four others at a record but carries n - 1 pair replicas,
+        # so at n = 11 the constraints that define the structure hold roughly a quarter of
+        # the vote and the strangers hold the rest. Weighting is how the declared contacts
+        # get their say back, and it is the difference between naming a structure and
+        # having it survive the average.
+        self.weight[self.ra[self.touching]] = self.contact_weight
+        self.weight[self.rb[self.touching]] = self.contact_weight
 
     def poses(self, x: Array) -> Array:
-        """The consensus square of each body: average the replicas, then rigidify.
+        """The consensus square of each body: average the replicas, rigidify, share angles.
 
         The average is weighted by `self.weight`, which is one value per constraint and so
         is constant across the two replicas of a pair. That is what keeps the weighting
@@ -88,7 +121,17 @@ class Problem:
         np.add.at(total, self.owner, x * self.weight[:, None, None])
         mass = np.zeros(self.n)
         np.add.at(mass, self.owner, self.weight)
-        return pose_of(total / mass[:, None, None])
+        poses = pose_of(total / mass[:, None, None])
+        if self.classes is None:
+            return poses
+        # A square's orientation is defined modulo a quarter turn, so members of a class
+        # are averaged on the circle at four times the angle. Averaging the raw angles
+        # would let two squares that differ by exactly 90 degrees -- the same square --
+        # pull the class to a meaningless value between them.
+        for members in self.classes:
+            a = 4 * poses[members, 2]
+            poses[members, 2] = np.arctan2(np.sin(a).mean(), np.cos(a).mean()) / 4
+        return poses
 
     def concur(self, x: Array) -> Array:
         return corners_of(self.poses(x))[self.owner]
@@ -96,6 +139,11 @@ class Problem:
     def divide(self, x: Array) -> Array:
         out = np.empty_like(x)
         out[self.ra], out[self.rb] = project_pairs(x[self.ra], x[self.rb])
+        if self.touching.any():
+            k = self.touching
+            out[self.ra[k]], out[self.rb[k]] = project_contacts(
+                x[self.ra[k]], x[self.rb[k]], self.band
+            )
         out[self.rw] = np.clip(x[self.rw], 0.0, self.side)
         return out
 
@@ -137,6 +185,10 @@ def solve(
     monotone: int = 700,
     tol: float = 1e-9,
     check: int = 20,
+    classes: list[list[int]] | None = None,
+    contacts: list[tuple[int, int]] | None = None,
+    band: float = 0.02,
+    contact_weight: float = 1.0,
     start: Array | None = None,
 ) -> Outcome:
     """One RRR run at a fixed container side.
@@ -154,7 +206,7 @@ def solve(
 
     `alpha` turns on the metric weighting: zero leaves every constraint equal.
     """
-    p = Problem(n, side)
+    p = Problem(n, side, classes, contacts, band, contact_weight)
     if start is None:
         start = np.stack(
             [

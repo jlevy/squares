@@ -17,10 +17,11 @@ from devtools.divide_and_concur import (
     corners_of,
     pair_separation,
     pose_of,
+    project_contacts,
     project_pairs,
     violation,
 )
-from devtools.run_projection_ratchet import solve
+from devtools.run_projection_ratchet import Problem, solve
 
 
 def _poses(
@@ -117,3 +118,61 @@ def test_a_solved_run_reports_an_exactly_feasible_packing(beta: float) -> None:
             assert violation(out.poses, side) <= 1e-9
             return
     pytest.fail("no run in thirty succeeded five per cent above the n = 5 record")
+
+
+def test_a_declared_contact_closes_from_any_distance() -> None:
+    """A contact constraint has no range, which is why it is a projection and not a force.
+
+    The 2026-09-08 measurement that shelved contact-graph guidance recorded two causes,
+    and the first was reach: target pairs sat one to four units apart while the attraction
+    acted over a quarter of a side, so the bias could never build the structure it named.
+    This asserts the property that retires that cause, over the same span of distances.
+    """
+    rng = np.random.default_rng(4)
+    a = np.stack([np.zeros(400), np.zeros(400), rng.uniform(0, 1.6, 400)], -1)
+    b = np.stack(
+        [rng.uniform(-0.8, 4.0, 400), rng.uniform(-0.8, 4.0, 400), rng.uniform(0, 1.6, 400)],
+        -1,
+    )
+    va, vb = corners_of(a), corners_of(b)
+    before = pair_separation(va, vb)
+    assert before.max() > 3.0, "the sample must contain pairs several units apart"
+    assert before.min() < 0.0, "and pairs that overlap"
+    qa, qb = project_contacts(va, vb)
+    assert np.abs(pair_separation(qa, qb)).max() < 1e-9
+
+
+def test_a_declared_contact_moves_squares_rigidly() -> None:
+    """The contact projection translates whole squares and never deforms one.
+
+    It is the divide half of the iteration, where a replica is free to stop being a square
+    -- but a projection that sheared the corners here would hand the concur fit a
+    correction it has to undo, and the pair would never settle.
+    """
+    rng = np.random.default_rng(5)
+    a = np.stack([np.zeros(50), np.zeros(50), rng.uniform(0, 1.6, 50)], -1)
+    b = np.stack(
+        [rng.uniform(1.5, 3.0, 50), rng.uniform(0, 2.0, 50), rng.uniform(0, 1.6, 50)], -1
+    )
+    va, vb = corners_of(a), corners_of(b)
+    qa, qb = project_contacts(va, vb)
+    for before, after in ((va, qa), (vb, qb)):
+        shift = after - before
+        assert np.allclose(shift, shift[:, :1, :]), "every corner moved by the same vector"
+
+
+def test_shared_orientation_is_a_projection_not_a_pull() -> None:
+    """The lowest structure rung: some squares are declared to share an angle.
+
+    Two numbers for n = 11 -- six at one orientation, five at another -- naming neither the
+    angle nor which square is which. It enters the concur set, so it is satisfied exactly
+    at every step rather than approached.
+    """
+    p = Problem(4, 3.0, classes=[[0, 1], [2, 3]])
+    x = corners_of(
+        np.array([[1.0, 1.0, 0.0], [2.0, 1.0, 0.4], [1.0, 2.0, 0.9], [2.0, 2.0, 1.2]])
+    )
+    poses = p.poses(x[p.owner])
+    assert abs(poses[0, 2] - poses[1, 2]) < 1e-12
+    assert abs(poses[2, 2] - poses[3, 2]) < 1e-12
+    assert abs(poses[0, 2] - poses[2, 2]) > 1e-3, "distinct classes stay distinct"
