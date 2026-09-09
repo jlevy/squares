@@ -212,6 +212,7 @@ case or experiment separately.
 | [Agenda 032, ceiling reader: an independent exact decision of the 191/50 ceiling family](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/ceiling-reader-191-50.md) | research synthesis | record | retained | — |
 | [Agenda 032: reconciliation against the in-flight upstream branches, 2026-09-09](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/reconciliation-upstream-2026-09-09.md) | dated review record | record | retained | — |
 | [Agenda 032, lane E: fixed-site row completion at 61/16 and the 3.82 cutting loop](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/lane-e-lp-runs-61-16-and-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 032, lane M0: the exact fixed-support optimum of the 3.82 fractional packing](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/lane-m0-fixed-support-polish-191-50.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
 | [Contributed Research Note: Extending the Lower Bound for Eleven Squares](docs/project/reviews/review-2026-09-08-extending-s11-lower-bound-note.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
