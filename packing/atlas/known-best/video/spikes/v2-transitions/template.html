@@ -233,7 +233,7 @@ button.transport.is-playing .glyph-pause { display: inline; }
 button.step-nudge { min-width: 36px; font-weight: 700; font-size: 15px; line-height: 1.1; text-align: center; }
 input[type=number] { width: 64px; padding: 4px 6px; }
 /* Revision 10: a small tabbed sub-panel naming which of the two aspects the page is showing — Pack,
-   one fixed n run open-endedly, or Sweep, a range played end to end. It is drawn as tabs and
+   one fixed n run open-endedly, or Animate, a range played end to end. It is drawn as tabs and
    exposed as two `aria-pressed` buttons inside a group, not as ARIA tabs: revision 9's property
    that no tab role survives anywhere on the page still holds, so a checker can keep asserting it
    and nobody can mistake this for the two full-page tabs coming back. */
@@ -285,6 +285,23 @@ input[type=number] { width: 64px; padding: 4px 6px; }
    The shake box is given one, and the readout drops under the dial instead of beside it. */
 #shake-box { width: 478px; box-sizing: border-box; }
 #law-info, #rel-info, #grow-info { width: 300px; height: 15px; line-height: 15px; }
+/* Revision 14: **controls sit with the axis they belong to.** A mode is a choice on three
+   independent axes — scope (one n, or a range), strategy (the law, the graph, growth, annealing and
+   which solver runs) and presentation (colour, timing, phasing, desaturation) — and which solver
+   runs is strategy, not animation, so the select left the step-animation group for the row that
+   holds the law and the graph. It is given a width of its own because a `select` is as wide as its
+   widest *option*, and Pack offers one option fewer: without this, hiding `tween` would resize the
+   control. */
+#solver-box { width: 152px; box-sizing: border-box; }
+#style-select { width: 118px; }
+#solver-note { height: 15px; line-height: 15px; }
+/* The step animation's own group — dwell, move, settle, the motion phasing and the full beat —
+   describes a step, and Pack has no steps, so it is hidden there. Hidden *in place*: `display: none`
+   would take its box out of this wrapping row, the boxes after it would rewrap onto fewer lines, the
+   controls would get shorter and the stage would grow — which is exactly the reflow revision 12
+   forbids and step 13 measures. `visibility: hidden` leaves the footprint, takes the group off the
+   hit test and out of the tab order, and moves nothing on the page. */
+#step-anim-box.is-off { visibility: hidden; }
 #pair-select { max-width: 480px; }
 .hint { color: var(--muted); font-size: 12.5px; }
 .seg { display: inline-flex; border: 1px solid #b9c0c8; border-radius: 4px; overflow: hidden; }
@@ -407,7 +424,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       <div class="subpanel">
         <div class="mode-tabs" id="mode-tabs" role="group" aria-label="what the page is showing">
           <button type="button" id="mode-pack" data-mode="pack" aria-pressed="true" title="One fixed n: press play and the chosen strategy packs it until you pause">Pack</button>
-          <button type="button" id="mode-sweep" data-mode="sweep" aria-pressed="false" title="A range of n, played from end to end">Sweep</button>
+          <button type="button" id="mode-animate" data-mode="animate" aria-pressed="false" title="A range of n, played from end to end">Animate</button>
         </div>
         <div class="mode-body row" id="mode-panel">
           <label for="range-from"><strong>n</strong></label>
@@ -428,6 +445,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
             <g class="glyph-pause"><rect x="6.6" y="4.5" width="4.2" height="15" rx="1.1" /><rect x="13.2" y="4.5" width="4.2" height="15" rx="1.1" /></g>
           </svg>
         </button>
+        <button id="restart" class="transport" title="Back to the beginning of what play would play: in Pack the starting arrangement with every setting kept, in Animate the first step of the range" aria-label="Restart">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="4.6" y="4.5" width="3.4" height="15" rx="1.1" />
+            <path d="M20 4.5 L20 19.5 L9.4 12 Z" />
+          </svg>
+        </button>
         <span id="clock" class="readout">0.00 s &middot; 0 steps</span>
         <label title="How fast the clock runs while playing: 0.05x to watch a settle closely, 2x to skim">speed
           <input type="range" id="speed" min="0" max="1000" step="1" aria-label="playback speed">
@@ -446,6 +469,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         <button id="optimize" class="primary" title="Run the current settings from the chosen start until pause">Optimize</button>
       </div>
       <div class="row">
+        <div class="subpanel groupbox" id="solver-box">
+          <span class="box-title">solver</span>
+          <div class="group-body">
+            <select id="style-select" aria-label="which solver runs">
+              <option value="tween">A · tween</option>
+              <option value="physics">B · physics</option>
+              <option value="bodies">C · bodies</option>
+            </select>
+            <span class="hint readout readout-line" id="solver-note"></span>
+          </div>
+        </div>
         <div class="subpanel lawbox" id="law-box">
           <div class="law-plot-wrap">
             <span class="box-title">force law</span>
@@ -527,16 +561,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       </div>
     </div>
     <div class="row">
-      <div class="subpanel groupbox">
+      <div class="subpanel groupbox" id="step-anim-box">
         <span class="box-title">the step animation</span>
         <div class="group-body">
-          <label>style
-            <select id="style-select" aria-label="Animation style">
-              <option value="tween">A · tween</option>
-              <option value="physics">B · physics</option>
-              <option value="bodies">C · bodies</option>
-            </select>
-          </label>
           <label>motion
             <span class="seg" id="phase-seg">
               <button data-phase="add-then-move">add, then move</button>
@@ -573,7 +600,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
               <button data-scheme="angle-continuous" title="A continuous ramp from teal at a right angle to citron at forty-five">angle ramp</button>
             </span>
           </label>
-          <label title="In Sweep only: repaint the frame the step comes to rest on in the standard angle colours, leaving the motion itself identity-coloured"><input type="checkbox" id="sweep-standard-toggle" checked> sweep rests in angle colours</label>
+          <label title="In Animate only: repaint the frame the step comes to rest on in the standard angle colours, leaving the motion itself identity-coloured"><input type="checkbox" id="animate-standard-toggle" checked> animate rests in angle colours</label>
           <label><input type="checkbox" id="desat-toggle" checked> desaturate while moving</label>
           <label title="Faint lines on what the physics is relating: the step's correspondence, or the relationship graph's own attracting pairs"><input type="checkbox" id="links-toggle"> show correspondence</label>
           <label title="Press on one square and release on another to add an edge to the contact graph, or to take it away again. While this is on no square can be picked up and moved."><input type="checkbox" id="draw-toggle"> draw links</label>
@@ -663,12 +690,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     capture: false,
     autoAdvance: true,
     // Revision 10: which of the two aspects the page is showing. 'pack' is one fixed n, played as
-    // the open-ended optimisation; 'sweep' is a range, played end to end. The range below is still
+    // the open-ended optimisation; 'animate' is a range, played end to end. The range below is still
     // the one spine: Pack is that range with its two ends equal.
     mode: 'pack',
-    // The range Sweep was last left on, so switching to Pack and back does not lose it. Null until
-    // Sweep has been entered once, when it opens on the whole corpus.
-    sweep: null,
+    // The range Animate was last left on, so switching to Pack and back does not lose it. Null until
+    // Animate has been entered once, when it opens on the whole corpus.
+    animate: null,
     // Continuous play across the whole sequence: on, whether static appends take the full beat, and
     // whether the next pair is simulated during this one's dwell.
     continuous: { on: false, fullBeat: false, prefetch: true },
@@ -980,12 +1007,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   //   angle-continuous  the ramp above.
   const COLOR_SCHEMES = ['identity', 'angle-stable', 'angle-continuous'];
   let colorScheme = 'identity';
-  // The Sweep exception, and it belongs to Sweep alone. In Sweep the *resting* frame may be
+  // The Animate exception, and it belongs to Animate alone. In Animate the *resting* frame may be
   // repainted in the standard angle map, so the frame a viewer is left looking at matches the atlas
   // convention, while the motion between the two frames stays identity-coloured and therefore
   // trackable. It is a presentation choice about a finished picture, not a claim about the physics,
   // and Pack — where nothing ever comes to a scheduled rest — never applies it.
-  const SWEEP = { standardize: true };
+  const ANIMATE = { standardize: true };
   // **Shade under identity: none.** Under the two angle schemes the shade is the square's full-side
   // contact count, as revision 11 and the atlas both have it. Under identity it is not, and the
   // reason is the definition: a contact count changes when a *neighbour* moves, so shading by it
@@ -997,11 +1024,11 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     if (scheme === 'angle-continuous') return rampFill(angle);
     return fillFor(map.slotOf(angle), contacts);
   }
-  // Which scheme this frame is actually painted in: the chosen one, unless Sweep's standardising is
+  // Which scheme this frame is actually painted in: the chosen one, unless Animate's standardising is
   // on and the frame is at rest.
   function schemeFor(resting) {
     if (colorScheme !== 'identity') return colorScheme;
-    if (state.mode === 'sweep' && SWEEP.standardize && resting) return 'angle-stable';
+    if (state.mode === 'animate' && ANIMATE.standardize && resting) return 'angle-stable';
     return 'identity';
   }
 
@@ -1775,6 +1802,30 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const u = d / LAW.range;
     return -LAW.attraction * 4 * u * (1 - u);
   }
+  // How many substeps the integrator needs to hold this law.
+  //
+  // Semi-implicit Euler is stable only while dt < 2/omega, and omega = sqrt(k/m). The law's
+  // stiffest slope is `repulsion` inside the knee and `repulsion * steep` past it, so a stiff
+  // setting can demand a step the fixed 1/120 s cannot give. That is the whole of the bouncing
+  // the rigid preset produced: at rigidity 0.01 and repulsion 4000 the slope reaches about
+  // 30,000, so omega is near 173 and the limit near 11.5 ms against a step of 8.3 ms -- already
+  // marginal for one contact, and contact forces SUM, so a square wedged against four neighbours
+  // sees about four times that and a limit near 5.8 ms. Hence the safety factor: it is not
+  // timidity, it is the number of contacts one square can carry.
+  //
+  // Substepping costs time and nothing else, and it is exact where it is not needed: at the
+  // defaults the slope is 2500, omega is 50, the limit is 40 ms, and this returns 1, so the
+  // shipped trajectory is unchanged to the bit. A true rigid contact is a constraint rather than
+  // a stiff spring and wants projection instead (think-r2qd); this makes the spring honest in the
+  // meantime rather than letting the slider reach settings the integrator cannot hold.
+  const LAW_SUB_CONTACTS = 4;   // contacts one square may carry, whose stiffnesses add
+  const LAW_SUB_MAX = 12;       // a run stays interactive; past here the law is reported as beyond the step
+  function lawSubsteps(dt) {
+    const slope = LAW.repulsion * Math.max(1, lawSteep());
+    const omega = Math.sqrt(slope * LAW_SUB_CONTACTS / 1);   // unit mass
+    const limit = 2 / omega;
+    return Math.max(1, Math.min(LAW_SUB_MAX, Math.ceil(dt / limit)));
+  }
   // Everything a run has to be keyed by: two runs with the same signature draw the same trajectory.
   const lawKey = () => LAW.rigidity + ':' + LAW.repulsion + ':' + LAW.attraction + ':' + LAW.range;
   // The blind run (revision 6, feature 3): the simulation is told nothing about where the squares
@@ -2423,7 +2474,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // ---------------------------------------------------------------- growth, read and set
   // Revision 13: **the starting size is a property of the arrangement on the stage, not of a run.**
   // Setting it redraws the squares at once, in Pack, whether or not `grow` is on and whether or not
-  // a run has been started. Two rules carry that, and `stageForSize` below is the second of them.
+  // a run has been started. Two rules carry that, and `stagePack` below is the second of them.
   //
   //   - A run already on the stage takes the new size where it stands, at any step count, *unless*
   //     it has grown: growth writes the same field every step, so a size the run reached is the
@@ -2432,7 +2483,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   //     drag is thrown away to do it — only the size changes, never a pose.
   //   - A Pack stage that has no arrangement of its own gets one, so that the size has something to
   //     be the size of. That is the previous-packing start, which shows the step animation rather
-  //     than a run; see `stageForSize`.
+  //     than a run; see `stagePack`.
   function setGrowth(next) {
     const o = next || {};
     const wasSize = GROWTH.size;
@@ -2447,31 +2498,37 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     if (o.rule !== undefined) GROWTH.rule = GROWTH_RULES.includes(o.rule) ? o.rule : GROWTH_DEFAULT.rule;
     if (o.on !== undefined) GROWTH.on = !!o.on;
     if (opt !== null && opt.grew === 0) opt.size = GROWTH.size;
-    if (GROWTH.size !== wasSize) stageForSize();
+    if (GROWTH.size !== wasSize) stagePack();
     markGapBar();
     updateSegments();
     render();
     return growthState();
   }
-  // Revision 13. Pack has three starts and only two of them put an arrangement on the stage: the
-  // previous packing *is* the timeline's own start, so choosing it shows the step animation, and
-  // there is no arrangement of its own for a size to apply to. Below full size there has to be one,
-  // because a starting size that changes nothing on the stage is not a control.
+  // Revision 14: **in Pack, `n` means that many squares packed, so all `n` of them are on the stage
+  // from the first frame**, wherever the starting arrangement puts them. The owner's question was
+  // "if 17 is set below in pack mode why does the diagram show 16 to begin with", and the answer was
+  // that Pack opened on the timeline — the previous packing, with the seventeenth square staged for
+  // an arrival it would only make if a step were played. That is the transition model leaking into a
+  // mode which has no transitions.
   //
-  // So: **in Pack, with the previous-packing start, the stage shows the run's own starting
-  // arrangement exactly while the starting size is below one** — the packing of n with the new
-  // square placed, in the record's box, which is the frame `optimize()` would begin from at that
-  // instant. Back at a full size it is the timeline again. The staging is reversible and it never
-  // costs work: it is undone only from a run that has not stepped and has not been edited, so a
-  // dragged arrangement or a run in progress stays exactly where it is.
+  // So the previous-packing start, which is the only one with no arrangement of its own, is staged
+  // as one *always* rather than only below a full starting size: the packing of n with the arriving
+  // square at its own starting pose, in the run's own box, which is the frame `optimize()` would
+  // begin from at that instant. Revision 13's rule is the same rule with its condition dropped, and
+  // the size still applies to the arrangement, because there is now always an arrangement for it to
+  // apply to.
   //
-  // Sweep is untouched. Sweep plays a range of steps, its stage is the animation between two
-  // records, and growth has never been part of it.
-  function stageForSize() {
+  // Animate is untouched. Animate plays a range of steps, its stage is the animation between two
+  // records, and the arrival staging and the step header are correct there.
+  function stagePack() {
     if (state.mode !== 'pack' || state.initial !== 'previous' || state.playing) return;
-    if (GROWTH.size < 1) {
-      if (opt === null) { state.optimizing = true; opt = newOptimizer('previous'); }
-    } else if (opt !== null && opt.steps === 0 && !opt.edited) {
+    if (opt === null) { state.optimizing = true; opt = newOptimizer('previous'); }
+  }
+  // Leaving Pack gives the timeline back, but only from a staged arrangement nobody has touched: a
+  // run that has stepped, or that a hand has edited, is work and is never thrown away.
+  function unstagePack() {
+    if (state.playing) return;
+    if (opt !== null && opt.steps === 0 && !opt.edited && opt.kind === 'previous') {
       state.optimizing = false;
       opt = null;
     }
@@ -2530,8 +2587,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     BLIND.inflate = BLIND.inflateDefault;
     markGapBar();
     // Restart from the start the page is on, without changing which start that is. A timeline that
-    // was not optimizing is left as a timeline.
-    if (state.optimizing) optimize(true);
+    // was not optimizing is left as a timeline. Revision 14: a reset never starts the clock —
+    // in Pack every stage is a run now, and a button that says `reset physics` must not also press
+    // play, so a run that was paused comes back paused.
+    if (state.optimizing) { const was = state.playing; optimize(true); if (!was) pause(); }
     else {
       pause();
       if (isPhysical(state.style)) ensureTrajectory(state.pair, state.style);
@@ -3117,7 +3176,13 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // One chunk of the open-ended run: `steps` fixed steps of 1 / OPT.stepsPerSecond simulated seconds
   // each. Semi-implicit Euler, one body per square, exactly the forces the cached simulator applies.
   function optAdvance(o, steps) {
-    const dt = 1 / OPT.stepsPerSecond;
+    // Substepping keeps the simulated time identical and only divides how it is taken, so a
+    // chunk still advances `steps / stepsPerSecond` seconds. `o.steps` stays in base units so the
+    // readout counts what the owner asked for rather than what stability cost.
+    const sub = lawSubsteps(1 / OPT.stepsPerSecond);
+    o.sub = sub;
+    const dt = 1 / (OPT.stepsPerSecond * sub);
+    steps = steps * sub;
     const N = o.n;
     const level = state.anneal;
     const rigidStyle = state.style === 'bodies';
@@ -3237,7 +3302,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         o.stalled = false;
       }
       o.time += dt;
-      o.steps++;
+      o.steps += 1 / sub;
     }
     measureOptimizer(o);
   }
@@ -3315,7 +3380,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       // Revision 13: below full size the previous packing is staged as an arrangement rather than
       // as the timeline, so that the chosen size is on the stage the moment the start is chosen —
       // the same rule `setGrowth` applies from the other side.
-      stageForSize();
+      stagePack();
     } else {
       state.optimizing = true;
       opt = newOptimizer(next);
@@ -3330,6 +3395,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       pause();
       state.optimizing = false;
       opt = null;
+      // Pack always has its n squares on the stage, so stopping a run there goes back to the
+      // starting arrangement rather than to the step animation underneath it.
+      stagePack();
       markGapBar();
       updateSegments();
       render();
@@ -3621,9 +3689,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function colourState() {
     return {
       // Revision 12: which scheme is chosen, and which one this frame was actually painted in —
-      // they differ only where Sweep's standardising has repainted a resting frame.
+      // they differ only where Animate's standardising has repainted a resting frame.
       scheme: colorScheme, painted: paintOut.scheme, schemes: COLOR_SCHEMES.slice(),
-      greens: GREENS.slice(), greenStride: GREEN_STRIDE, sweepStandardize: SWEEP.standardize,
+      greens: GREENS.slice(), greenStride: GREEN_STRIDE, animateStandardize: ANIMATE.standardize,
       classes: paintOut.classes, centres: paintOut.centres.slice(), sizes: paintOut.sizes.slice(),
       slots: paintOut.slots.slice(), contacts: paintOut.contacts.slice(),
       tolerance: ANGLE_TOL, contactGap: CONTACT.gap, palette: PALETTE.slice(), shades: SHADES.map((f) => f.slice()),
@@ -3666,7 +3734,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     poseX[p.n] = o.X[p.n]; poseY[p.n] = o.Y[p.n]; poseA[p.n] = ang;
     newNode.setAttribute('opacity', 1);
     newNode.setAttribute('transform', 'translate(' + o.X[p.n] + ' ' + o.Y[p.n] + ') rotate(' + ang + ')' + grow);
-    // An open-ended run is at rest exactly when it is not playing; Sweep's standardising does not
+    // An open-ended run is at rest exactly when it is not playing; Animate's standardising does not
     // reach it anyway, an optimisation being Pack's own playback.
     paintSquares(p, side, drain, 0, o.size, !state.playing);
     mark.setAttribute('opacity', 0);
@@ -3747,7 +3815,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       newNode.setAttribute('transform', 'translate(' + nb[0] + ' ' + nb[1] + ') rotate(' + nb[2] + ')');
     }
     // At rest through the dwell and from the instant the settle ends, which are the two frames a
-    // Sweep leaves a viewer looking at.
+    // Animate leaves a viewer looking at.
     paintSquares(p, side, drain, appear > 0 ? TINT * (1 - settled) : 0, undefined,
                  t <= sc.moveStart || t >= sc.end - 1e-9);
     mark.setAttribute('opacity', 0);
@@ -3917,7 +3985,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // Revision 10: the timeline scrubber is gone. It drew an open-ended optimisation as if it had a
   // fixed length, which is exactly what it has not got. What replaces it is a counter: in Pack the
   // simulated seconds the run has covered with its step count beside them, because those are the
-  // only two numbers a run with no end has; in Sweep the step's own clock, the position across the
+  // only two numbers a run with no end has; in Animate the step's own clock, the position across the
   // range being on the progress bar and in the panel already. `seek(t)` is untouched — it is still
   // a pure function of its argument, and every capture goes through it.
   // Revision 11: the two panel lines that report a *running* number — what the relationship graph
@@ -3945,11 +4013,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // Revision 12: **no position bar in Pack.** Pack is one fixed n, so a bar carrying the whole
     // corpus's scale says nothing about it — the cursor sits on one value and never moves, and the
     // scale under it prices a journey the page is not making. It is hidden whole, its scale with
-    // it, and Sweep keeps it. Hiding it moves nothing: the bar is absolutely positioned inside the
+    // it, and Animate keeps it. Hiding it moves nothing: the bar is absolutely positioned inside the
     // 1920 x 1080 stage, so its box is not in anyone's flow, and the panel above it ends at 1032
     // whether it is drawn or not. It is set before the capture guard, because a captured Pack
     // frame is the one place the bar would be most obviously wrong.
     progressBar.hidden = state.mode === 'pack';
+    // Revision 14: and no step header either. `16 → 17 · matched · max move 1.31 · …` describes a
+    // step, and Pack has no steps: it packs one n. Animate keeps it. Like the bar, the tag is
+    // absolutely positioned on the stage, so hiding it moves nothing.
+    kindTag.hidden = state.mode === 'pack';
     if (state.capture) return;
     updateLive();
     if (state.mode === 'pack' || (state.optimizing && opt !== null)) {
@@ -3962,7 +4034,20 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   const styleSelect = document.getElementById('style-select');
   function updateSegments() {
+    // Revision 14: which solver runs is strategy, so the select sits with the law and the graph —
+    // and Pack offers two of the three, the tween being an interpolation toward an answer Pack has
+    // not got. The option is taken out of the list rather than left selectable and inert.
+    const offered = solversFor(state.mode);
+    Array.from(styleSelect.options).forEach((o) => {
+      const ok = offered.includes(o.value);
+      o.hidden = !ok;
+      o.disabled = !ok;
+    });
     styleSelect.value = state.style;
+    document.getElementById('solver-note').textContent = solverNote;
+    // The timing and the phasing describe a step. Pack has none, so the group goes — in place, so
+    // that nothing else on the panel moves and the stage keeps its size (see the stylesheet).
+    document.getElementById('step-anim-box').classList.toggle('is-off', state.mode === 'pack');
     // The mode sub-panel. Two buttons drawn as tabs: the pressed one names the aspect on show.
     document.querySelectorAll('#mode-tabs button').forEach((b) => {
       const on = b.dataset.mode === state.mode;
@@ -4023,17 +4108,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     document.getElementById('speed-info').textContent = '\u00d7' + state.speed.toFixed(2);
     document.getElementById('links-toggle').checked = state.links;
     document.getElementById('capture-toggle').checked = state.capture;
-    // Revision 12: the colour scheme, and Sweep's own standardising. The standardising box is
-    // disabled rather than hidden outside Sweep, and disabled under either angle scheme, where it
+    // Revision 12: the colour scheme, and Animate's own standardising. The standardising box is
+    // disabled rather than hidden outside Animate, and disabled under either angle scheme, where it
     // would have nothing to do: a control that vanishes is a control that moves its neighbours.
     document.querySelectorAll('#colour-seg button').forEach((b) => b.classList.toggle('on', b.dataset.scheme === colorScheme));
     // Revision 12: which graph the contact relationship reads, and the drawing mode.
     document.querySelectorAll('#target-seg button').forEach((b) => b.classList.toggle('on', b.dataset.target === targetFrom()));
     document.getElementById('draw-toggle').checked = state.drawing;
     document.getElementById('clear-edges').disabled = drawnFor(state.pair).length === 0;
-    const sweepBox = document.getElementById('sweep-standard-toggle');
-    sweepBox.checked = SWEEP.standardize;
-    sweepBox.disabled = state.mode !== 'sweep' || colorScheme !== 'identity';
+    const animateBox = document.getElementById('animate-standard-toggle');
+    animateBox.checked = ANIMATE.standardize;
+    animateBox.disabled = state.mode !== 'animate' || colorScheme !== 'identity';
     document.getElementById('t-dwell').value = state.timing.dwell;
     document.getElementById('t-move').value = state.timing.move;
     document.getElementById('t-settle').value = state.timing.settle;
@@ -4096,7 +4181,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   function updateStepChooser() {
     const n = stepN();
-    // Pack is a size, Sweep is a step: the label says which is being shown rather than always
+    // Pack is a size, Animate is a step: the label says which is being shown rather than always
     // naming the step, and the quick picks are Pack's, each one being a single n.
     stepLabel.textContent = state.mode === 'pack'
       ? 'packing n = ' + n
@@ -4128,7 +4213,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function updateRangeControls() {
     const r = rangeState();
     // Pack's chooser is one number with its minus and plus: the second box, the word between them
-    // and the corpus button are Sweep's, and so are the two figures, which price a run of a fixed
+    // and the corpus button are Animate's, and so are the two figures, which price a run of a fixed
     // length. Everything stays in the DOM — only its visibility is per-mode.
     const packing = state.mode === 'pack';
     rangeSep.hidden = packing;
@@ -4237,6 +4322,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     if (state.optimizing) { pause(); state.optimizing = false; opt = null; updateSegments(); }
     const d = duration();
     state.t = Math.max(0, Math.min(d, Number(seconds) || 0));
+    // Revision 14: Pack has no timeline to seek along, so a seek there drops whatever run was going
+    // and puts the starting arrangement back rather than uncovering the step animation underneath.
+    stagePack();
     markGapBar();
     render();
   }
@@ -4250,7 +4338,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     buildPair();
     // Revision 13: the run the new n gets is the new n's own, but the size the stage draws at is a
     // setting rather than a run, so it survives the change of n.
-    stageForSize();
+    stagePack();
     updateSegments();
     render();
   }
@@ -4276,15 +4364,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     render();
     return colorScheme;
   }
-  // Sweep's own presentation choice: repaint the resting frame in the standard angle map so what a
+  // Animate's own presentation choice: repaint the resting frame in the standard angle map so what a
   // viewer is left looking at matches the atlas, while the motion stays identity-coloured. It does
   // nothing in Pack, and nothing under either angle scheme.
-  function setSweepStandardize(on) {
-    SWEEP.standardize = !!on;
+  function setAnimateStandardize(on) {
+    ANIMATE.standardize = !!on;
     markGapBar();
     updateSegments();
     render();
-    return SWEEP.standardize;
+    return ANIMATE.standardize;
   }
   function setColorRule() { return colorScheme; }
   function setPhase(phase) {
@@ -4293,9 +4381,19 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     updateSegments();
     render();
   }
+  // Revision 14: **the tween is not a solver.** Style A interpolates toward a known answer, which
+  // is something only a step between two records has; Pack has no answer to interpolate toward, so
+  // the tween is not among its choices. It is removed from them rather than left selectable and
+  // inert, and a page that arrives in Pack carrying it falls back to the physics and says so in the
+  // readout under the select — once, until the next thing the owner chooses.
+  const TWEEN_NOTE = 'tween is Animate’s: using physics';
+  let solverNote = '';
+  const solversFor = (mode) => (mode === 'pack' ? STYLES.filter((s) => s !== 'tween') : STYLES.slice());
   function setStyle(style) {
     markGapBar();
-    const next = STYLES.includes(style) ? style : STYLES[0];
+    let next = STYLES.includes(style) ? style : STYLES[0];
+    if (state.mode === 'pack' && next === 'tween') { next = 'physics'; solverNote = TWEEN_NOTE; }
+    else solverNote = '';
     if (next !== state.style) {
       // Each style drives the new square and the mark from scratch; drop what the other left on
       // the mark's hidden node, so a style's frame does not depend on which style ran before it.
@@ -4487,9 +4585,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     state.range.to = hi;
     // Revision 10: the range and the mode are the same fact seen twice, so setting one sets the
     // other where they would otherwise disagree. A range wider than one step is something Pack
-    // cannot show, so it puts the page in Sweep; a collapsed range is legal in both and never
-    // forces a mode, since `setRange(17, 17)` in Sweep is how one step animation is played.
-    if (lo !== hi) state.mode = 'sweep';
+    // cannot show, so it puts the page in Animate; a collapsed range is legal in both and never
+    // forces a mode, since `setRange(17, 17)` in Animate is how one step animation is played.
+    if (lo !== hi) state.mode = 'animate';
     // A one-step range is not a continuous run: the three timing boxes govern again.
     if (collapsed && state.continuous.on) { pause(); state.continuous.on = false; }
     const b = rangeBounds();
@@ -4533,38 +4631,52 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   // Revision 10: the two aspects of the one view. Pack is a single fixed n and its playback is the
   // open-ended optimisation — press play and the chosen strategy, from the chosen start, runs until
-  // pause. Sweep is a range and its playback is the range end to end. Both keep every shared
+  // pause. Animate is a range and its playback is the range end to end. Both keep every shared
   // setting: the style, the colour, the annealing, the speed, the start, the timings and the
   // desaturation live in `state` and a switch does not touch one of them.
   //
   // Underneath there is still one spine, the range. Pack is the range with its ends equal, which is
   // why `setStepN` is `setRange(n, n)` and why `setRange` is unchanged: the only new rule is that a
-  // range wider than one step names Sweep, because Pack has no way to show it. Entering Pack
+  // range wider than one step names Animate, because Pack has no way to show it. Entering Pack
   // collapses the range onto the n the stage is on, so what you were watching is what you get;
-  // entering Sweep restores the range Sweep was last left on, or opens on the whole corpus, which
+  // entering Animate restores the range Animate was last left on, or opens on the whole corpus, which
   // leaves the stage where it stands and puts its n on the bar's scale.
+  //
+  // Revision 14 renames it. It was Sweep, and the name had to go before Calibrate arrives, which is
+  // the mode that actually sweeps — over parameters. Two modes called Sweep beside each other would
+  // have guaranteed a permanent "which sweep?", so the rename went through the internals as well as
+  // the label: the mode value is `'animate'`, and nothing reads `sweep` behind a button saying
+  // Animate. **`setMode('sweep')` is still accepted**, as a deprecated alias, so anything that
+  // still calls it keeps working; it is the one place the old name survives.
   function setMode(next) {
-    const want = next === 'sweep' ? 'sweep' : 'pack';
+    const want = (next === 'animate' || next === 'sweep') ? 'animate' : 'pack';
     if (want === state.mode) { updateSegments(); return state.mode; }
-    if (state.mode === 'sweep') state.sweep = { from: state.range.from, to: state.range.to };
+    if (state.mode === 'animate') state.animate = { from: state.range.from, to: state.range.to };
     state.mode = want;
     pause();
+    // Revision 14: the tween is Animate's, so entering Pack with it selected falls back to the
+    // physics and leaves the reason under the select; leaving Pack clears the note, the choice
+    // being available again.
+    if (want === 'pack' && state.style === 'tween') { state.style = 'physics'; solverNote = TWEEN_NOTE; }
+    if (want === 'animate') solverNote = '';
     if (want === 'pack') {
       const n = stepN();
       setRange(n, n);
-      // Revision 13: Pack is where the starting size lives, so entering it below full size stages
-      // the arrangement the size belongs to. Leaving Pack does not unstage anything.
-      stageForSize();
+      // Revision 13: Pack is where the starting size lives. Revision 14: and where all n squares are
+      // on the stage from the first frame, so entering Pack always stages the arrangement.
+      stagePack();
     } else {
-      const kept = state.sweep;
+      const kept = state.animate;
       setRange(kept === null ? RANGE_MIN : kept.from, kept === null ? RANGE_MAX : kept.to);
+      // ... and leaving it gives the timeline back, which is what a range of steps is drawn from.
+      unstagePack();
     }
     updateSegments();
     render();
     return state.mode;
   }
   // Revision 9: one transport button for one view. Revision 10: what it plays is the mode's own
-  // playback — the open-ended run in Pack, the range in Sweep — and pause stops it where it stands.
+  // playback — the open-ended run in Pack, the range in Animate — and pause stops it where it stands.
   // A range run that has reached its end starts again from the top.
   function transport() {
     if (state.playing) { pause(); return; }
@@ -4577,6 +4689,38 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       if (!state.continuous.on || (state.pair >= b.last && state.t >= duration())) { playRange(); return; }
     }
     play();
+  }
+  // Revision 14: **restart is return to the beginning of whatever play would play.** The owner
+  // asked for it beside play and pause, and then for the thought behind it: "perhaps the restart
+  // makes more sense for Pack than for Animate." It does, and that is the reason to define it once
+  // rather than twice — in Pack the beginning is the starting arrangement with every setting kept,
+  // in Animate it is the first step of the range, and the transport keeps its shape across both.
+  //
+  // It is not the `reset physics` button beside the growth box, and the two are worth telling
+  // apart: reset puts every *parameter* back to its default and leaves the picture where it stands;
+  // restart puts the *picture* back to the beginning and leaves every parameter where it stands.
+  // A run that was playing keeps playing, from the top, which is what a transport control does.
+  function restart() {
+    const was = state.playing;
+    pause();
+    if (state.mode === 'pack') {
+      state.optimizing = false;
+      opt = null;
+      // The previous packing is staged rather than run from, so it goes back through the one path
+      // that stages it; every other start is its own arrangement, built fresh from the same seed.
+      if (state.initial === 'previous') stagePack();
+      else { state.optimizing = true; opt = newOptimizer(state.initial); }
+    } else {
+      const b = rangeBounds();
+      if (state.pair !== b.first) select(b.first);
+      state.t = 0;
+      preparedFor = -1;
+    }
+    markGapBar();
+    updateSegments();
+    render();
+    if (was) play();
+    return { mode: state.mode, n: stepN(), playing: state.playing, t: state.t, steps: opt === null ? 0 : opt.steps };
   }
   // Revision 9: the range is the only span, so the tabs are gone from the page. These stay on the
   // API as no-ops for anything that still calls them.
@@ -4608,8 +4752,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     setStepN, stepN,
     // The range — the single spine — and the run that plays it end to end.
     setRange, range: rangeState, playRange, transport,
+    // Revision 14: back to the beginning of whatever play would play — Pack's starting arrangement
+    // or Animate's first step — with every setting kept. Distinct from `reset`, which puts the
+    // parameters back and leaves the picture alone.
+    restart,
     // Revision 10: which aspect the page is showing. Pack is the range collapsed onto one n and
-    // played as the open-ended run; Sweep is the range played end to end.
+    // played as the open-ended run; Animate is the range played end to end.
     setMode, mode: () => state.mode,
     // Revision 8, feature 4: what the gap bar is showing. Revision 9: and the call that redraws it
     // on demand, the bar having stopped following every frame of the motion.
@@ -4622,9 +4770,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     setColorRule, colour: colourState, fillsFor: angleFills,
     // Revision 12: colour is the square's identity by default, and the two angle maps are options.
     // `identityFills(k)` is the greens as a pure function of the identity, needing nothing on the
-    // stage; the Sweep standardising is a Sweep-mode presentation setting and nothing else.
+    // stage; the Animate standardising is an Animate-mode presentation setting and nothing else.
     setColorScheme, colorScheme: () => colorScheme, colorSchemes: () => COLOR_SCHEMES.slice(),
-    identityFills, setSweepStandardize, sweepStandardize: () => SWEEP.standardize,
+    identityFills, setAnimateStandardize, animateStandardize: () => ANIMATE.standardize,
     setPhase, setStyle, setOverlay, setCapture, setAutoAdvance, setDesaturate, setSnap, setBlind, setBlindInflate,
     // Revision 9: how fast the clock runs while playing. Playback only: seek(t) is unchanged.
     setSpeed, speed: () => state.speed,
@@ -4661,6 +4809,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     playAll, stopAll, setContinuous, goTo,
     continuous: continuousState,
     styles: () => STYLES.slice(),
+    // Revision 14: which of them the mode on show actually offers. Pack offers two: the tween is an
+    // interpolation toward a known answer, and Pack has no answer to interpolate toward.
+    solvers: () => solversFor(state.mode),
     progress: () => ({ position: progress(), n: state.liveN }),
     schedule: () => Object.assign({}, schedule()),
     pairs: () => PAIRS.map((p, i) => ({ index: i, n: p.n, kind: p.kind, stats: p.stats })),
@@ -4673,7 +4824,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     newSquare: () => ({ index: PAIRS[state.pair].new, identity: PAIRS[state.pair].n + 1, rule: PAIRS[state.pair].new_rule, tied: PAIRS[state.pair].new_tied }),
     state: () => ({
       // `mode` has meant the simulation mode (snap / free / blind) since revision 6 and still does;
-      // revision 10's Pack-or-Sweep aspect is `aspect` here and `mode()` on the API. They were both
+      // revision 10's Pack-or-Animate aspect is `aspect` here and `mode()` on the API. They were both
       // called `mode` in this object for one revision, and the later key silently won.
       tab: 'single', aspect: state.mode,
       pair: state.pair, n: PAIRS[state.pair].n, t: state.t, duration: duration(), playing: state.playing,
@@ -4700,6 +4851,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   rangeAllButton.addEventListener('click', () => setRange(RANGE_MIN, RANGE_MAX));
   document.getElementById('refresh-gap').addEventListener('click', () => refreshGap());
   playButton.addEventListener('click', () => transport());
+  document.getElementById('restart').addEventListener('click', () => restart());
   document.querySelectorAll('#mode-tabs button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
   document.querySelectorAll('#phase-seg button').forEach((b) => b.addEventListener('click', () => setPhase(b.dataset.phase)));
   styleSelect.addEventListener('change', () => setStyle(styleSelect.value));
@@ -4735,7 +4887,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   optimizeButton.addEventListener('click', () => optimize(true));
   document.getElementById('speed').addEventListener('input', (ev) => setSpeed(sliderToSpeed(Number(ev.target.value))));
   document.querySelectorAll('#colour-seg button').forEach((b) => b.addEventListener('click', () => setColorScheme(b.dataset.scheme)));
-  document.getElementById('sweep-standard-toggle').addEventListener('change', (ev) => setSweepStandardize(ev.target.checked));
+  document.getElementById('animate-standard-toggle').addEventListener('change', (ev) => setAnimateStandardize(ev.target.checked));
   document.getElementById('links-toggle').addEventListener('change', (ev) => setOverlay(ev.target.checked));
   document.getElementById('draw-toggle').addEventListener('change', (ev) => setDrawing(ev.target.checked));
   document.querySelectorAll('#target-seg button').forEach((b) => b.addEventListener('click', () => setTargetSource(b.dataset.target)));

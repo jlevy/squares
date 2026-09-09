@@ -1031,6 +1031,43 @@ records what its snap does and does not establish.
 The solver, its modes and its research questions leave this plan for `X-025` at this
 point; the video artefacts stay here and Phases 1 to 4 are unchanged in scope.
 
+### The workbench prototype’s own queue
+
+Phase 0’s prototype outgrew its brief and now carries work of its own, tracked under
+epic `think-hsdj` and ordered by what unblocks what.
+It is listed here because the plan owns the video and this queue is what the prototype
+must settle before Phases 1 and 3 re-implement anything from it.
+
+**First, because it invalidates measurements the rest would build on.**
+
+- `think-r2qd` Make rigid contacts a constraint instead of a very stiff spring.
+  The rigid preset is numerically unstable at the fixed timestep, so the
+  rigid-versus-sticky comparison recorded in the notes describes an integrator artefact
+  as much as a search behaviour and must be re-measured after the fix.
+- `think-0rgh` Expose the three optimisation primitives as separate buttons: the linear
+  programme at fixed angles, the angle search, and the physics that moves both at once
+  and is the only one that can change which squares touch.
+
+**Then the mode split and the instrument.**
+
+- `think-8cti` Split Pack from Animate cleanly, including the rename and moving the
+  solver choice out of the animation group.
+- `think-oa7f` Present the force law as two axes with shortcuts, not a three-state
+  selector.
+- `think-rdee` Restart, a best-known start, and a re-randomising random.
+- `think-tcns` Benchmark the simulator from the command line, without a browser.
+
+**Then the research the instrument is for.**
+
+- `think-dpmt` Test that a force law holds known optima still, which is the strongest
+  first test of a law because it is a necessary condition needing no discovery.
+- `think-3yma` Build Calibrate, deferred until Pack and Animate settle.
+
+**Deferred defects, each with its reason recorded on the bead**: `think-7vlx` the stale
+mark-stroke needle, `think-esdm` the asymmetric contact test, `think-gjcl` the
+duplicated collision routine, `think-qluo` the drawn graph’s missing undo and the
+palette’s 42-colour wrap.
+
 ### Phase 1: The record and the Version 1 player
 
 - [ ] `known_best_video/record.py` and `build_known_best_video_data.py` with the schema;
