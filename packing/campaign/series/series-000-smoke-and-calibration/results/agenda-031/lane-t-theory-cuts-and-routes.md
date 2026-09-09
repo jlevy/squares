@@ -8,6 +8,8 @@ untracked scratchpad and are reproduced in the appendix so every number can be
 recomputed. The report is reproduced as delivered, with its own status labels; X-022
 carries the coordinator’s reading of it.
 Nothing here is a registered round or a new bound.
+The ceiling family this lane asked for (M0 of its plan) was produced by spike B and
+replayed by the coordinator; see X-022.
 
 Labels: PROVED (proof here), EXACT (rational decision by repository primitives), CHECKED
 (float script retained), RECORD (retained file), PLAUSIBLE, SPECULATIVE, OPEN.

@@ -215,20 +215,55 @@ that kills it; the wave-one spikes are marked.
 
 ## What the Wave-One Spikes Measured
 
-This section is filled as each spike reports; a row without a number is still running.
-The lane reports are retained under
+This section is filled as each spike reports; a row without a settled number is still
+running. The lane reports are retained under
 [`results/agenda-031/`](../series/series-000-smoke-and-calibration/results/agenda-031/)
 with their scripts.
 
-| Spike | Question | Reading so far | Status |
+**The ceiling at `3.82` is a theorem.** Spike B’s combined loop, after one exact
+site-separation round on BC-200’s sites, produced an LP dual of eleven rows at weight
+exactly one whose D4 symmetrisation is a family of `88` closed `B`-squares at six net
+directions, weight `1/8` each, total exactly `11`, with exact maximum depth `1` over the
+`20,376` vertices of its arrangement.
+`sqpack.fractional.ceiling.verify_ceiling` proves it (`net` regime, D4-symmetric
+measures), and the coordinator replayed the frozen bytes (SHA-256 `95cf0647…6427`,
+retained as
+[`ceiling-family-191-50.json`](../series/series-000-smoke-and-calibration/results/agenda-031/ceiling-family-191-50.json)
+with its
+[replay receipt](../series/series-000-smoke-and-calibration/results/agenda-031/ceiling-family-191-50-replay.json)).
+By weak duality no D4-symmetric point-atom measure of mass below eleven covers every
+closed `9977/10000`-square at a net angle in `[0, 191/50]^2`, on this net or any net
+containing those six directions; the statement transfers upward in `L` and downward in
+`B` (a smaller concentric core is inside the larger one).
+Scaled by `1/B` it is a family of unit squares at side `3.8288`: **the one-body
+point-atom method, at any shrink and on any net containing those six directions, cannot
+certify beyond unit side `3.8288`, that is beyond `L = 3.8288 · B`.** The two lost site
+sets that stopped at exactly `11.000000` were reading this ceiling; BC-200’s `11.055617`
+was above it because its site set was not at its optimum.
+An independent reader written from the statement is being run.
+
+**The frozen atoms transfer to every finer net and dilate to about `3.8168`.** With the
+original shrink the least mass at every finer net is `96377/100000` at an intermediate
+direction; with the sharpened-test shrink of each net it is `4001/4000` at every net up
+to `2880` steps, so the certificate holds at `(381/100, B_max(N), N)` for
+`N ∈ {360, 720, 1440, 2880}`. The crossing shrink, the least `B` with least mass above
+`M/11` at net `N`, is `0.9979242` at `360` and lies in `(0.9979236, 0.997925]` at `720`
+(the added directions never bind), so the dilation supremum `L · B_max(N) / B_cross(N)`
+is about `3.8135` at `360`, `3.8157` at `720`, and `3.8168` at `1440` if the crossing
+holds there, against T-022’s `3.810026`. The retention packet (a frozen certificate at
+the crossing shrink on the finer net, decided through the two-route gate, and the
+dilation corollary) is the next deliverable, and the ceiling above says the same atoms
+can never be dilated past `3.8288 · B_max(N)`.
+
+| Spike | Question | Reading | Status |
 | --- | --- | --- | --- |
-| A, net refinement on the frozen atoms | does a finer net cost coverage at the new directions, and does the larger shrink it admits recover it? | At `360`, `720`, `1440` and `2880` steps with the original `B = 9977/10000` the least mass falls to `96377/100000 = 0.96377`, at an intermediate direction, in every case; with the sharpened-test shrink of each net it is `4001/4000` again at every net, so the certificate transfers to every finer net at that net’s shrink limit. The crossing shrink and the dilated side are being measured. | EXACT (sweeps); running |
-| C, frozen-measure expansion | at what container side does a cell of mass `≤ M/11` become reachable? | running | — |
-| B, threshold atoms | are two-of-three or two-of-five atoms violated by the retained `3.82` dual, and does adding them lower the restricted covering value on BC-200’s sites? | `3504` violated two-of-three atoms in `438` D4 orbits on the `191/50` family (maximum charge `1.078511` against budget `1`), `52088` in `6471` orbits on the unit family (maximum `1.184795`); `92%` of the violation mass on mixed near-axis and tilted triples; no two-of-five violation among two million chordless five-cycles. The extended covering LP on the retained sites is running from the reproduced control `11.055617`. | EXACT (charges); running |
-| E, row completion at `61/16` and the `3.82` cutting loop | does the unconverged `3.8125` state complete below eleven; does full-dual pricing move the `3.82` value? | running; the `3.82` loop’s restricted objective read `11.055617`, `11.038636`, `11.024472` over its first three iterations with rows unconverged | running |
-| T, theory | what can one-body core choices buy; where is the plateau evidence; what cuts fit the dual? | the sandwich lemma caps every core-choice idea by the shrink tax; direction-dependent weights never help; the retained families sit below the trivial ten from `s(10)`, so no exact evidence of a plateau exists; a half-integral witness is always cut by one odd-cycle atom | PROVED; see lane T |
-| M0, fixed-support polish | what is the exact optimum of the fractional packing on the retained supports against all arrangement vertices? | running | — |
-| D18, saturation cuts | does the retained dual violate the saturation inequality from the `n = 12` bound? | no: the least met weight over sampled probes is `1.018` at the corner probe | CHECKED |
+| A, net refinement | does a finer net cost coverage; does its larger shrink recover it? | see above: transfers at every net; crossing `0.9979242`; dilation to `3.8135` (`360`), `3.8157` (`720`), about `3.8168` (`1440`) | EXACT (sweeps); `1440` bracket running |
+| C, frozen expansion | at what side does a cell at mass `≤ M/11` become reachable? | after `5.5 × 10^-6`: the four corner atoms of weight `917/6250` sit on the far corner of the corner-snug axis core, whose mass drops to `85353/100000` the moment the walls move | EXACT; dead |
+| B, threshold atoms | are two-of-three atoms violated by the retained dual; does adding them lower the restricted value? | `3504` violated atoms (`438` orbits) on the `191/50` family, maximum charge `1.078511`; `52088` (`6471` orbits) on the unit family, maximum `1.184795`; `92%` of the violation on mixed near-axis and tilted triples; no two-of-five violation. On BC-200’s sites the value falls from `11.055617` to exactly `11.000000` with pair-centroid atoms (the ceiling), and the ceiling family is separated by interior-vertex atoms at charge `5/4`; with those the restricted value reads `10.926982` with rows still incomplete | EXACT (charges, ceiling); LP running |
+| E, `61/16` row completion; `3.82` cutting loop | does the unconverged `3.8125` state complete below eleven; does full-dual pricing move the `3.82` value? | the `3.82` loop read `11.055617`, `11.038636`, `11.024472`, `11.009981`, `11.009995` over five iterations with rows unconverged, consistent with the ceiling; the `61/16` completion is still running | running |
+| T, theory | what can one-body core choices buy; where is the plateau evidence; what cuts fit the dual? | the sandwich lemma caps every core-choice idea by the shrink tax; direction-dependent weights never help; a half-integral witness is always cut by one odd-cycle atom | PROVED |
+| M0, fixed-support polish | the exact optimum of the fractional packing on the retained `760`-placement support | `76/7 = 10.857` in floats with the working set closed, exact rebuild running; dominated by the ceiling family on its own support | running |
+| D18, saturation cuts | does the retained dual violate the saturation inequality from the `n = 12` bound? | no: least met weight `1.018` at the corner probe | CHECKED |
 
 ## What This Document Does Not Establish
 
