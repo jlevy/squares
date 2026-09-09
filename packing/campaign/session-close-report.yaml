@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 113
+count: 114
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 68
+  sessions_measured: 69
   sessions_unmeasured: 45
   attributed:
-    rollups: 123
-    turns: 31555
-    tool_calls: 17503
-    tool_errors: 365
-    one_off_code: 2974
-    wall_hours: 179.02
+    rollups: 124
+    turns: 33276
+    tool_calls: 18198
+    tool_errors: 381
+    one_off_code: 3043
+    wall_hours: 196.61
   unattributed:
     rollups: 60
     turns: 11110
@@ -28,12 +28,12 @@ totals:
     one_off_code: 946
     wall_hours: 51.75
   measured:
-    rollups: 183
-    turns: 42665
-    tool_calls: 24042
-    tool_errors: 521
-    one_off_code: 3920
-    wall_hours: 230.77
+    rollups: 184
+    turns: 44386
+    tool_calls: 24737
+    tool_errors: 537
+    one_off_code: 3989
+    wall_hours: 248.36
 codex_receipts:
   attributed: 33
   unattributed: 0
@@ -1823,3 +1823,17 @@ sessions:
     active_union_hours: 1.97
     wall_hours: 1.97
     snapshot_incomplete: true
+- id: session-114
+  title: "Pushing s(11) past the point-atom ceiling, and integrating the owner line"
+  status: completed
+  primary_bead: think-hs7y
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9.yaml
+  turns: 1721
+  tool_calls: 695
+  tool_errors: 16
+  one_off_code: 69
+  wall_hours: 17.59
+  codex_receipts: []
