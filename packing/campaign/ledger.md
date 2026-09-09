@@ -129,7 +129,8 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
 | [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: independently audit the union and five-dot replay, reuse the certificate through valid symmetries and exact containment, then search only uncovered classes under fresh preregistration and separately recorded usage. |
 | [session-114](agent-sessions/session-114-independent-owner-audit.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (process) | 4 | think-yhw2 | BC-316 under think-yhw2: carry the unchanged published exp145 into Session115, then continue the reviewed wall-aware geometry agenda. In parallel, think-ta8s obtains and reconciles the new stacked milestone checkpoint. |
-| [session-115](agent-sessions/session-115-wall-aware-owner-footprints.md) | in_progress | contemporaneous | `research-loop` (correctness) | `pipeline-improvement` (correctness) | 2 | think-waix | Complete the target-blind wall-aware constructor under BC317/think-waix, then preregister the all-16 gain/impossibility discriminator. |
+| [session-115](agent-sessions/session-115-wall-aware-owner-footprints.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (insight) | 3 | think-waix | BC-317 under think-waix: Session116 publishes the controlled source and runs the unchanged exp146 under a fresh forward allocation. In parallel think-ta8s reconciles the new source checkpoint. |
+| [session-116](agent-sessions/session-116-resumed-wall-research.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 2 | think-waix | BC-317 under think-waix: publish the controlled source and run exp146 once; use the result to select exact component containment or a revised research direction. |
 
 ### Workflow summary
 
@@ -142,11 +143,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 34 | 1 |
-| `research-loop` | 18 | 4 | 80 | 7 |
+| `research-loop` | 18 | 4 | 82 | 7 |
 | `pipeline-improvement` | 27 | 1 | 141 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
-| `review-planning-oversight` | 0 | 0 | 9 | 0 |
+| `review-planning-oversight` | 1 | 0 | 10 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -686,7 +687,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
-| BC-317 | research | 11 | in_progress | 1 | think-waix | Sol implements the conservative dimension-preserving constructor under Session115 phase2, with Astra Max support/manifest/transport review. |
+| BC-317 | research | 11 | in_progress | 1 | think-waix | Session116 resumes after the user-confirmed network outage: publish the admitted source, run unchanged exp146 once, then classify all16 footprints. No target ran in Session115. |
 | BC-318 | research | 11 | blocked | 1 | think-waix | Use Cartesian products of component containment to identify cheap new branch exclusions. |
 | BC-319 | research | 11 | blocked | 1 | think-ykd6 | Preregister the smallest additional-class test after the containment result. |
 | BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
@@ -698,7 +699,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 101 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 102 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -823,6 +824,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
 | H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
 | H-143 | confirmed | proof | For the unchanged four endpoint patches and five dots from exp143, the |  | 1 |  | 39s wall |
+| H-144 | running | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -963,6 +965,12 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-146 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-144 | The original Session115 allocation expired unrun during a network outage. User-authorized Session116 forward-allocates the unchanged single target after clean source publication; no target class evaluated yet. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -983,7 +991,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-101 rounds, 2152.1 agent-minutes, 1363.6 wall-minutes.
+102 rounds, 2152.1 agent-minutes, 1363.6 wall-minutes.
 
 ## Exploration reports not yet codified
 

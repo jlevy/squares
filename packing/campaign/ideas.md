@@ -441,6 +441,7 @@ prevent those local facts from being mistaken for a global exclusion.
 | 137 | Compare four guaranteed occupied regions with four bare marks | registered | [H-141](hypotheses/H-141-four-owner-footprint-matched-gain.md) | One compatible owner configuration tests the residual-seven mechanism before any exhaustive branch expansion. |
 | 138 | Verify the five-dot four-owner candidate on the complete net | registered | [H-142](hypotheses/H-142-five-dot-full-net-cover.md) | A positive full361minimum turns the numerical branch candidate into a five-dot conditional exclusion under the reviewed transfer. |
 | 139 | Independently decide the same five-dot cover by polygon-union area | registered | [H-143](hypotheses/H-143-independent-five-dot-union.md) | Exact inclusion-exclusion avoids the original residual-union decomposition and weighted event grid; source and synthetic controls must be admitted before replay. |
+| 140 | Restrict possible owner centers by the container walls | registered | [H-144](hypotheses/H-144-wall-aware-owner-footprint-gain.md) | Exact support extrema decide whether any of sixteen coarse footprints grows or a class becomes impossible; transfer of an old exclusion remains a separate test. |
 
 ## Dead ends
 

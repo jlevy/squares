@@ -1,0 +1,4 @@
+  snapshot source 123.6 MiB; 1 private worker trees
+  slowest negative controls (wall seconds):
+       1.426s  synopsis handoff - W10 selected entry is replaced by a deferred candidate
+  1 negative controls fire as expected

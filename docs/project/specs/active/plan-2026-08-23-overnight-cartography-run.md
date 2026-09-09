@@ -341,12 +341,14 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, continue from BC-316 under `think-yhw2`:
+For the next supervised exact-research goal, continue from BC-317 under `think-waix`:
 generalize Agenda032’s exact five-dot conditional exclusion after the completed two-hour
 session113. Exp145 has independently confirmed the complete finite cover.
-Agenda033 now constructs the 16 common owner footprints with container constraints, then
-tests exact component containment against the certified tuples before new LP searches.
-The global n11 bracket is unchanged.
+Session116 resumes Agenda033 after the user-confirmed network outage.
+The controlled constructor and prospective exp146 are ready for publication; its target
+is unrun. The next test constructs the 16 common owner footprints with container
+constraints, then tests exact component containment against the certified tuples before
+new LP searches. The global n11 bracket is unchanged.
 PR137 retains the original sprint; PR142 stacks the separately tallied continuation.
 
 The preceding work reached three checkpoints in sequence.

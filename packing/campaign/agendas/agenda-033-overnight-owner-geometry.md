@@ -64,11 +64,13 @@ agenda:
     bead: think-waix
     depends_on:
     - BC-316
-    next_evidence: Sol implements the conservative dimension-preserving constructor under Session115 phase2,
-      with Astra Max support/manifest/transport review.
+    next_evidence: 'Session116 resumes after the user-confirmed network outage: publish the admitted source,
+      run unchanged exp146 once, then classify all16 footprints. No target ran in Session115.'
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
+    hypotheses:
+    - H-144
   - id: BC-318
     purpose: research
     owner_focus: insight
@@ -177,7 +179,7 @@ agenda:
     state: tentative
     priority: 1
     question: Is the overnight milestone reviewable with complete result scope, usage and next actions?
-    budget: Begin final reconciliation at 14:30 UTC, finish by 15:00 UTC; no new target after 14:30.
+    budget: 'Resumed window: begin final reconciliation16:23:09UTC, finish16:38:09UTC; no new target after16:23:09.'
     entry: All retained experiment records, proof reviews, exact source revisions and separate session
       receipts.
     exit: Updated stacked PR, passing appropriate checks or explicit pending gate, morning report, agenda
@@ -197,9 +199,11 @@ global lower bound remains about 3.8100257236. The main gap is a general argumen
 covering every possible owner configuration, not another check of the same branch.
 
 **Entry point: continue W6 after Session114’s controlled W7 instrument work.** This
-agenda runs through **15:00 UTC on September 9 (8 a.m. Pacific)**, with final
-reconciliation from 14:30 UTC. The 30-minute thread heartbeat continues the current
-slice; it does not reset a deadline, replace a live process, or justify a duplicate run.
+agenda runs through **16:38:09 UTC on September 9 (9:38 a.m. Pacific)** after the user
+resumed work following a network outage, with final reconciliation from16:23:09UTC. The
+original overnight cutoff expired without exp146 invocation and is retained in
+Session115. The 30-minute thread heartbeat continues the current slice; it does not
+reset a deadline, replace a live process, or justify a duplicate run.
 The tracking epic is `think-en2r`.
 
 ## The order of work

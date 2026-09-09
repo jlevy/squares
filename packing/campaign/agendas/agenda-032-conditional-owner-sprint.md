@@ -295,6 +295,11 @@ agenda:
         step passed.
     replanning:
       candidates:
+      - bead: think-waix
+        workflow: research-loop
+        priority: 1
+        rationale: Session115 completed the independent union audit under the original think-yhw2 selection;
+          Session116 now takes its wall-aware footprint subtask under BC317, preserving the unrun protocol.
       - bead: think-yhw2
         workflow: insight-iteration
         priority: 1
@@ -306,10 +311,11 @@ agenda:
         rationale: Full-support pricing remains uninvoked; retain it behind the newly successful geometric
           conditioning mechanism.
       selected:
-        bead: think-yhw2
-        workflow: insight-iteration
-        rationale: The sprint produced an exact conditional exclusion; the next slice independently audits
-          the union, reuses it by symmetry and containment, and searches only uncovered owner classes.
+        bead: think-waix
+        workflow: research-loop
+        rationale: Updated at the Session115 handoff on2026-09-09. The original think-yhw2 selection produced
+          the independent exact union confirmation; its next concrete subtask is BC317 wall-aware geometry,
+          resumed in Session116 after the user-confirmed network outage. The original sprint result is unchanged.
       operator_input:
         status: confirmed
         note: User selected a two-hour sprint on geometric conditioning and parallel experiments. The

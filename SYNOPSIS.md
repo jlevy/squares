@@ -448,6 +448,8 @@ case or experiment separately.
 | [T-022 Dilation-Limit Corollary, Derived from T-018](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) | research synthesis | record | retained | — |
 | [Overnight Decision Review: Independent Coverage and Owner Geometry](packing/cases/n11_five_dot_cover/overnight-strategy-review.md) | research synthesis | record | retained | — |
 | [Wall Constructor: Mathematical Admission Addendum](packing/cases/n11_five_dot_cover/wall-constructor-contract.md) | research synthesis | record | retained | — |
+| [BC318: Exact Containment Transfer from the Retained Five-Dot Certificate](packing/cases/n11_five_dot_cover/wall-containment-contract.md) | research synthesis | record | retained | — |
+| [Wall Constructor Source Admission](packing/cases/n11_five_dot_cover/wall-source-admission.md) | research synthesis | record | retained | — |
 | [Independent Polygon-Union Audit of the Five Dots](packing/cases/n11_five_dot_cover/union-contract.md) | research synthesis | record | retained | — |
 | [Prospective Exact Census of Coarse Owner Classes](packing/cases/n11_five_dot_cover/owner-case-census-design.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
@@ -662,12 +664,18 @@ restrictions, including what could improve the bound at a different target side.
 handed BC-316 to Session115 on `codex/n11-independent-owner-audit`, stacked on the ready
 PR137 milestone. Its source checkpoint is published; certification remains owned by
 think-ta8s. [Agenda033](packing/campaign/agendas/agenda-033-overnight-owner-geometry.md)
-now governs the autonomous continuation through 15:00 UTC, with 30-minute wakeups and
-Astra Max strategic review.
+now governs the resumed continuation through16:38:09UTC, with30-minute wakeups and Astra
+Max strategic review.
 The source-independent checker passed 19 controls and mathematical review; exp145 then
 confirmed all 361 exact zero deficits in 39.06 seconds.
 [Session115](packing/campaign/agent-sessions/session-115-wall-aware-owner-footprints.md)
-is implementing the 16-class wall-aware constructor under think-waix.
+has passed the wall-constructor controls under think-waix and registered
+[exp146](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md)
+for the all-sixteen gain/impossibility discriminator.
+Its original allocation expired unrun during a user-confirmed network outage;
+[Session116](packing/campaign/agent-sessions/session-116-resumed-wall-research.md) now
+resumes the unchanged protocol after publication.
+No wall target result exists yet.
 [PR142](https://github.com/jlevy/squares/pull/142) retains this continuation separately.
 [H-143](packing/campaign/hypotheses/H-143-independent-five-dot-union.md) requires an
 independent exact polygon-union checker before replaying the unchanged five dots.
@@ -753,7 +761,8 @@ not certify an upper bound.
 The depth polisher will start from that retained control; its missing scratch state is
 not a runnable handoff.
 
-**Selected next entry:** `think-yhw2`, generalize the five-dot four-owner exclusion.
+**Selected next entry:** `think-waix`, BC-317: decide the wall-aware owner footprints,
+then test whether they extend the five-dot exclusion by exact component containment.
 The two-hour sprint in
 [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
 complete. Exp141 independently confirmed the retained-family negative screens; exp142
@@ -3334,6 +3343,7 @@ round that names the hypothesis, control roles included.
 | [H-141](packing/campaign/hypotheses/H-141-four-owner-footprint-matched-gain.md) | confirmed | Four guaranteed endpoint footprints improve the matched numerical cover beyond four bare owned marks | 1 | 9.12s wall |
 | [H-142](packing/campaign/hypotheses/H-142-five-dot-full-net-cover.md) | confirmed | The fixed five-dot four-owner proposal covers all361canonical directions | 1 | 28.95s wall |
 | [H-143](packing/campaign/hypotheses/H-143-independent-five-dot-union.md) | confirmed | Independent exact polygon union covers the same contained-core domains in all 361 directions | 1 | All 361 deficits zero; 39.06s process |
+| [H-144](packing/campaign/hypotheses/H-144-wall-aware-owner-footprint-gain.md) | running | Container walls strictly strengthen at least one coarse owner class or make it impossible | 1 | Unspent |
 
 ### Confirmed
 
@@ -3581,13 +3591,14 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-112.yaml` | session-112 | 843 | 7.52 h | 3.78 h | 3.91 h | yes |
 | `codex-task-tree-session-113.yaml` | session-113 | 973 | 6.99 h | 1.97 h | 1.97 h | yes |
 | `codex-task-tree-session-114.yaml` | session-114 | 330 | 2.25 h | 0.81 h | 0.81 h | yes |
+| `codex-task-tree-session-115.yaml` | session-115 | 213 | 19.6 h | 6.7 h | 6.7 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 69 |
+| measured | 70 |
 | unmeasured | 46 |
-| **total** | **115** |
+| **total** | **116** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3603,7 +3614,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 101 rounds registered in `series-000`.
+There are 102 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1363.6 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -3746,6 +3757,7 @@ archive beside it.
 | [exp-143](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-143-h141-four-owner-footprint-matched-gain.md) | 11 | target | H-141 | Four-owner matched point/triangle/endpoint comparison | All arms converge; point9, triangle6, endpoint5; exact full-net replay remains separate | accepted |
 | [exp-144](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md) | 11 | target | H-142 | Exact full361replay of unchanged five equal-weight dots | All361directions exactminimum beta; normalized5, selected branch excluded via reviewed transfer | accepted |
 | [exp-145](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md) | 11 | target | H-143 | Independent exact rational polygon inclusion-exclusion | All 361 exact deficits zero; unchanged geometry | accepted |
+| [exp-146](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md) | 11 | target | H-144 | Exact container-clipped support rectangles over every retained frame | Prospective all-sixteen discriminator; unrun | in-progress |
 
 ### Cost and provenance
 
@@ -3851,12 +3863,12 @@ archive beside it.
 | exp-142 | completed one-owner comparison | 24.54s wall | — | — | criterion |
 | exp-143 | completed four-owner comparison | 9.12s wall | — | — | criterion |
 | exp-144 | complete exact five-dot replay | 28.95s wall | — | — | criterion |
-
 | exp-145 | one five-minute guarded replay | 39.06s | — | criterion | `c59d28a7` |
+| exp-146 | one five-minute guarded constructor | Unspent | — | — | capture at launch |
 
-### What the 101 rounds jointly establish
+### What the 102 rounds jointly establish
 
-The 101 rounds use 2152.1 agent-minutes and 1363.6 wall-minutes under the campaign’s
+The 102 rounds use 2152.1 agent-minutes and 1363.6 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

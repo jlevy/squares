@@ -51,7 +51,7 @@ session:
       controls before evaluating any target class.
     commitment: BC-317
     bead: think-waix
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The independent five-dot replay passed; wall-aware geometry is the next economical
       discriminator selected by Astra Max.
@@ -64,12 +64,48 @@ session:
     kill_condition: Any unresolved support/manifest/degeneracy control prohibits target launch; after
       two failed implementation slices redirect to an independent reserve.
     fallback: Preserve the failing synthetic control and precise repair requirement; no target-area claim.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Freeze passing source and register H144/exp146 before the all-16 target discriminator.
+    outcome: Constructor and all twelve target-blind controls pass; Astra Max source admission discharged.
+      Two final controls and half-side forwarding repair finished at the phase boundary; no target geometry
+      evaluated.
+    evidence: &id001
+    - packing/devtools/wall_owner_footprints.py
+    - packing/tests/test_wall_owner_footprints.py
+    - packing/cases/n11_five_dot_cover/wall-source-admission.md
+    stop_reason: Source admission and required focused controls passed.
+    next_action: Publish the controlled source and prospective exp146, then run the single guarded all-sixteen
+      discriminator.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Publish the frozen wall constructor and prospective protocol, then decide the all-sixteen
+      gain/impossibility mechanism once.
+    commitment: BC-317
+    bead: think-waix
+    status: stopped
+    entered_by: evidence_checkpoint
+    switch_reason: The constructor passed independent mathematical admission and all required controls.
+    budget_minutes: 17.75
+    started_at: '2026-09-09T08:21:07Z'
+    deadline_at: '2026-09-09T08:38:52Z'
+    expected_output: Complete sixteen-class exact footprint receipt and H144 disposition, or a retained
+      invalid/partial result.
+    validation_command: Published exp146 command with five-minute external and 240-second internal guards
+    kill_condition: Launch only by08:33:50UTC after clean publication; no retry or target tuning; an incomplete
+      manifest is unresolved.
+    fallback: Retain the unspent or partial protocol and move to the next declared overnight slice.
+    outcome: Exp146 was registered but not invoked. Publication validation failed in109.02seconds;857
+      tests passed, three failed and documentation/generated-record anchors needed repair. The network
+      outage then spanned the original launch cutoff.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/wall-source-preflight-failed.log
+    stop_reason: The original allocation expired while the session was interrupted; no target geometry
+      or negative scientific result exists.
+    next_action: Session116 repairs publication checks and forward-allocates the unchanged five-minute
+      target after source publication.
   primary_bead: think-waix
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 60
     max_cycles: 4
@@ -86,24 +122,26 @@ session:
     metric: Independent all-361 verdict, exact wall-aware footprint gains and inherited owner-case exclusions.
     before: T023 excludes one selected branch; exp145 is published and unrun. Wall-aware support identities
       are reviewed but no class gain has been measured.
-    after: Independent all-361 replay accepted. Wall-aware constructor is being implemented from the reviewed
-      support-extrema and signed-frame contract; no class gain measured yet.
+    after: Exp145 independently confirmed all361 exact zero deficits. Wall constructor and12 controls
+      admitted; prospective exp146 unrun because the original allocation expired during the network outage.
   delegations:
   - task: Implement the minimal wall-aware owner-footprint constructor and synthetic controls
     operator: GPT-5.6 Sol, extra high; independent_audit_readiness
-    status: in_progress
+    status: completed
     recording: contemporaneous
     phase: 2
-    outcome: null
-    evidence: []
+    outcome: Reusable source adopted; Max-required public-wrapper degeneracies and distinct frame intersections
+      added; half forwarded correctly.
+    evidence: *id001
     files:
     - packing/devtools/wall_owner_footprints.py
     - packing/tests/test_wall_owner_footprints.py
-    checks: []
-    uncertainty: Target gain is unmeasured; new proof uncertainties return to Astra Max.
+    checks:
+    - 12 passed in5.32seconds; Ruff check/format pass; BasedPyright0/0/0; owned diff clean.
+    uncertainty: Target gains remain unmeasured; no geometry evaluated in readiness.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Return controlled source from isolated temporary staging for root adoption.
+    next_action: Root publishes source and prospective protocol before the target.
     budget_minutes: 25
     started_at: '2026-09-09T07:55:46Z'
     deadline_at: '2026-09-09T08:20:46Z'
@@ -126,14 +164,27 @@ session:
     pass. Hosted checkpoint remains owned by think-ta8s.
   - Exp145 source c59d28a770d8261b39d030050d8dc3f0eb8dde43, launch07:54:44UTC, exit0,39.06seconds process,
     all361exact deficits zero.
-  stop_reason: null
-  next_action: Complete the target-blind wall-aware constructor under BC317/think-waix, then preregister
-    the all-16 gain/impossibility discriminator.
+  - Wall source:12 synthetic tests passed in5.32seconds; Ruff and BasedPyright passed; Astra Max admission
+    conditions discharged.
+  - Pre-freeze push failed109.02seconds:857 behavioral passes and3 failures, including2 sandbox ps refusals
+    and a UV cache restriction, plus missing document-map/idea links and stale generated-session/control
+    anchors. Preserve this failed invocation; repairs are separately verified in Session116.
+  - Published exp145 checkpoint34bd4a7e passed hosted fast34327761130 and deferred34327799191. These runs
+    predate the uncommitted wall source.
+  stop_reason: The user-confirmed network outage interrupted publication work. Original research and session
+    deadlines expired without an exp146 invocation; source readiness is retained and later work belongs
+    to Session116.
+  next_action: 'BC-317 under think-waix: Session116 publishes the controlled source and runs the unchanged
+    exp146 under a fresh forward allocation. In parallel think-ta8s reconciles the new source checkpoint.'
+  certification_pending: think-ta8s
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-115.yaml
 ---
 # Session115: Independent Replay and Wall-Aware Footprints
 
 **Exp145 passed:** every one of the 361 required directions has zero exact uncovered
-area. The wall-aware constructor is the active next slice.
+area. The wall constructor passed its controls; exp146 remains unrun after the outage.
+Session116 resumes the unchanged protocol.
 
 **Entry point: W6, research loop.** This continues Session114 and
 [Agenda033](../agendas/agenda-033-overnight-owner-geometry.md) on the same stacked PR.
@@ -151,6 +202,20 @@ forward work allocation.
 Sol handles the specified implementation and publication work; Astra Max owns strategy
 and consequential mathematical review.
 One primary target runs at a time.
+
+## Outage and Usage Boundary
+
+The original session deadline remains 08:53:52 UTC; it was not extended retroactively.
+The user resumed at 14:35:49 UTC and identified the gap as a network outage.
+The native accounting interval ends at that resumption so no retained events are
+silently dropped.
+Its 24,117 seconds of elapsed envelope and 70,575.841 summed agent task
+seconds include open tasks spanning the outage.
+They are not active-compute time or a billing measure.
+Recorded model-stream time is 1,446.865 seconds; token counters retain their ordinary
+completion-boundary semantics.
+The full native receipt is kept unchanged rather than subtracting a guessed outage
+duration.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
