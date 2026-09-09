@@ -341,15 +341,16 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, continue from BC-319 under `think-ykd6`:
-generalize Agenda032’s exact five-dot conditional exclusion after the completed two-hour
-session113. Exp145 has independently confirmed the complete finite cover.
-Session116 resumed Agenda033 after the user-confirmed network outage and accepted H144:
-exp146 completed all 16 wall-aware classes, with 12 strictly enlarged footprints, 4
-equal footprints and no impossible class.
-The next test checks exact component containment against the certified tuples before new
-LP searches. Its adapter remains target-blind until the three mathematical-review guards
-pass and the source and exp147 protocol are published.
+For the next supervised exact-research goal, complete BC-323 under `think-ta8s` by
+publishing the exp149 result and obtaining one matching deferred checkpoint.
+Then open a fresh stacked branch for BC-320. Exp145 independently confirmed the selected
+five-dot cover, exp146 enlarged twelve of sixteen wall-aware owner footprints, and
+exp147 found no additional tuple by component containment.
+Exp148 retained a partial fixed-pattern screen.
+Exp149 then refuted the selected tuple `(0,0,0,7)` at owner-000 with an exact positive
+deficit and validated rational strict escape.
+BC-320 will test that saved escape against every retained snapped-owner frame in each
+selected class before registering any broader target; H146 remains unresolved.
 The global n11 bracket is unchanged.
 PR137 retains the original sprint; PR142 stacks the separately tallied continuation.
 

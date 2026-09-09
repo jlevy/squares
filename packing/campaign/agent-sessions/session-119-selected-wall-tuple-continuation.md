@@ -79,8 +79,8 @@ session:
     local and remote heads agreed exactly at publication.
   stop_reason: The clean source checkpoint was published after the latest launch that could preserve the
     full process allowance.
-  next_action: Under think-ykd6, run the unchanged exp149 exactly once in Session120 before16:59:48UTC,
-    then disposition H147 without inferring an H146 or global-bound verdict.
+  next_action: Under think-ta8s, certify the published forward allocation before Session120 runs the
+    unchanged exp149; do not infer an H146 or global-bound verdict from the selected tuple.
   certification_pending: think-ta8s
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-119.yaml

@@ -133,8 +133,8 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-116](agent-sessions/session-116-resumed-wall-research.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-waix | Certification under think-ta8s: publish this H144/BC322 result checkpoint and retain its matching hosted status. BC-318 under think-waix then reviews and adopts the three isolated guard repairs, freezes the admitted source and prospective exp147, and evaluates the bounded containment target once. |
 | [session-117](agent-sessions/session-117-wall-owner-containment.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-waix | BC-319 under think-ykd6: test the explicit small tuple(0,0,0,7) in fresh H147/exp149, selected by the analytic transported witnesses. Certification remains under think-ta8s. |
 | [session-118](agent-sessions/session-118-selected-wall-tuple.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification under think-ta8s: publish the Session117/118 results and admitted H147/exp149 source. BC-319 under think-ykd6 continues in Session119 with unchanged criteria. |
-| [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Under think-ykd6, run the unchanged exp149 exactly once in Session120 before16:59:48UTC, then disposition H147 without inferring an H146 or global-bound verdict. |
-| [session-120](agent-sessions/session-120-selected-wall-tuple-execution.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Publish this forward allocation, then run exp149 once before16:59:48UTC. |
+| [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Under think-ta8s, certify the published forward allocation before Session120 runs the unchanged exp149; do not infer an H146 or global-bound verdict from the selected tuple. |
+| [session-120](agent-sessions/session-120-selected-wall-tuple-execution.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Under think-ta8s, publish the coherent result head, run one matching deferred checkpoint, and mark PR142 ready only if that evidence passes. Then open a fresh stacked branch for BC320. |
 
 ### Workflow summary
 
@@ -693,11 +693,11 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
 | BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed128 relations, covered only two baseline tuples and added none. BC319 tests direct fixed-dot coverage. |
-| BC-319 | research | 11 | in_progress | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels; no complete seed/candidate. Analytic D-preserving transport rejects61440 labels. H147/exp149 now prospectively freezes the selected tuple(0,0,0,7) for a complete361-direction check. Its admitted source is published; Session120 supplies the execution-only allocation after two expired unrun windows. Do not extend exp148. |
-| BC-320 | research | 11 | blocked | 2 | think-ykd6 | Astra Max evaluates whether each proposed split eliminates the observed failure mechanism. |
+| BC-319 | research | 11 | complete | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels, while analytic D-preserving transport rejects61440. Exp149 refutes selected tuple(0,0,0,7) at owner-000 with a validated strict escape. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple. |
+| BC-320 | research | 11 | in_progress | 2 | think-ykd6 | Freeze the exp149 rational escape and decide, for each of its four selected classes, whether any of the181 retained snapped-owner frames can be strictly separated from that residual core. Assign new H/exp IDs only on the fresh stacked successor branch. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
-| BC-323 | measurement_validation | 11 | tentative | 1 | think-ta8s | Update the draft PR at coherent checkpoints, then close the agenda and pause its heartbeat at the morning boundary. |
+| BC-323 | measurement_validation | 11 | in_progress | 1 | think-ta8s | Publish the coherent exp149 result head, run one matching deferred checkpoint and mark PR142 ready only if it passes. Later publication/certification work remains outside Session120's measured interval and is not zero cost. |
 
 ## Series
 
@@ -831,7 +831,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-144 | confirmed | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  | 26s wall |
 | H-145 | refuted | proof | The frozen wall-aware owner footprints inherit at least one additional |  | 1 |  | 41s wall |
 | H-146 | unresolved | proof | The unchanged five-dot pattern D covers at least one wall-footprint tu |  | 1 |  | 1.2m wall |
-| H-147 | running | proof | The unchanged five-dot pattern D covers the full residual-core centre  |  | 1 |  |  |
+| H-147 | refuted | proof | The unchanged five-dot pattern D covers the full residual-core centre  |  | 1 |  | 11s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -841,7 +841,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Rounds
 
-### rejected (22)
+### rejected (23)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -867,6 +867,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-139 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-140 | The complete exact replay found minimum760979/800000, which is belowone, so the unchanged exp136 residual weights fail H140. Their positive minimum yields normalized feasible mass31219612/3804895, above the conditional contradiction thresholdseven and without an optimum-gap claim. |
 | exp-141 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-137 | The audit completed against clean tracked receipt and source blobs at44bf815f and confirmed every recorded source identity, canonical direction, exact transport, positiveSAT gap, mask, cardinality, mass and summary. It therefore confirms exp137's subthreshold maximum and rejects H137; audit success does not reverse the mathematical verdict. The audit preserves the receipt's immutable source-era provisional label and does not itself establish the separately reviewed endpoint-containment theorem. |
 | exp-147 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-145 | The complete exact matrix covers only the two baseline tuples, with zero new covered tuples. This refutes component-containment expansion for the frozen classes, not direct coverage by the five dots. |
+| exp-149 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-147 | Direction owner-000 has a positive exact deficit and a validated rational strict escape, so the specified tuple fails the registered all361 zero-deficit criterion. This refutes H147 only; H146 remains unresolved over other tuples. |
 
 ### abandoned (2)
 
@@ -975,12 +976,6 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-149 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-147 | Prospective and unrun. Analytic transport of retained exp148 witnesses selects this small explicit tuple before a general caching rewrite. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1002,7 +997,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-105 rounds, 2152.1 agent-minutes, 1365.9 wall-minutes.
+105 rounds, 2152.1 agent-minutes, 1366.1 wall-minutes.
 
 ## Exploration reports not yet codified
 

@@ -11,8 +11,8 @@ count: 120
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 74
-  sessions_unmeasured: 46
+  sessions_measured: 75
+  sessions_unmeasured: 45
   attributed:
     rollups: 123
     turns: 31555
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3920
     wall_hours: 230.77
 codex_receipts:
-  attributed: 39
+  attributed: 40
   unattributed: 1
-  measured: 40
+  measured: 41
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1945,11 +1945,21 @@ sessions:
     snapshot_incomplete: true
 - id: session-120
   title: "Execute the published selected wall tuple"
-  status: in_progress
+  status: stopped
   primary_bead: think-ykd6
   phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-120.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-120.yaml
+    model_responses: 96
+    agent_hours: 0.68
+    active_union_hours: 0.2
+    wall_hours: 0.2
+    snapshot_incomplete: true

@@ -20,6 +20,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python 3.14; one process
     selftest_passed: true
+    engine_commit: 5600c0fb4eccf9e9dcdf82b02506d3d4340651cb
   instance:
     axis: n
     point: 11
@@ -47,25 +48,50 @@ experiment:
       launch16:18:07UTC and Session119's latest launch16:29:54UTC both expired unrun. The fresh unchanged
       Session120 latest launch is16:59:48UTC to fit before17:04:50UTC.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
-  results: []
+    commit: 5600c0fb4eccf9e9dcdf82b02506d3d4340651cb
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Do the unchanged five dots cover the selected tuple at every required direction?
+    outcome: criterion_missed
+    checked_by: The complete source-bound receipt stopped at the first required direction, owner-000,
+      with exact positive uncovered area71717500601808574131146882402353369/1245285277939023012815400000000000000.
+      Its retained rational centre independently replays strict container, dot and selected-patch avoidance.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: All361 unique required directions complete with exact zero uncovered area for tuple(0,0,0,7),
       with valid source bindings and physical transfer.
-    reason: Prospective and unrun. Analytic transport of retained exp148 witnesses selects this small
-      explicit tuple before a general caching rewrite.
-  lease:
-    expires: '2026-09-09T17:04:50Z'
-    host: local
+    reason: Direction owner-000 has a positive exact deficit and a validated rational strict escape,
+      so the specified tuple fails the registered all361 zero-deficit criterion. This refutes H147 only;
+      H146 remains unresolved over other tuples.
+  effort:
+    timebox: One five-minute external process with a240-second cooperative internal guard; one run,
+      no retry or tuning.
+    wall_seconds: 11.41
+    stopped_by: criterion
 ---
-# Exp149: One Explicit Small Tuple
+# Exp149: The Selected Tuple Fails at the First Direction
 
-**Prospective and unrun.** The Session118 and Session119 allocations expired without an
-invocation. Session120 carries the unchanged tuple, inputs, criteria and process
-allowance forward. Publish this allocation before the one target invocation.
-Capture the exact full published revision, clean Git state, UTC start, process status
-and elapsed time. Input blobs and constructor revision are fixed in the command.
-The tuple is fixed in the instrument, with no runtime selection mode.
+**Rejected for the selected tuple.** The only target run launched at 16:40:34 UTC from
+clean published revision `5600c0fb4eccf9e9dcdf82b02506d3d4340651cb` and exited zero
+after 11.41 seconds.
+Direction 0 (`owner-000`) has exact positive uncovered area
+`71717500601808574131146882402353369/1245285277939023012815400000000000000`. The receipt
+retains a rational centre that independently replays strict container, five-dot and
+four-selected-patch avoidance.
+It checked one of 361 directions because the registered negative criterion stops at the
+first validated deficit; this is a complete refutation of H147, not a partial run.
+
+The JSON is byte-identical to captured stdout.
+It records 41 nonempty inclusion-exclusion subsets at the failing direction and binds
+the unchanged endpoint and wall inputs to the published implementation.
+H146 remains unresolved because it asks whether some other wall-owner tuple is covered
+by the same dots.
+
+**Prospective history, now discharged.** Sessions118 and119 expired without invocation.
+Session120 carried the unchanged tuple, inputs, criteria and process allowance forward.
+The tuple was fixed in the instrument, with no runtime selection mode.
 
 Check all361 required unique directions using the selected exp146 footprints and the
 unchanged exp143 five dots.

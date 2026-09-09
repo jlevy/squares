@@ -296,6 +296,11 @@ agenda:
         passed.
     replanning:
       candidates:
+      - bead: think-ta8s
+        workflow: research-loop
+        priority: 1
+        rationale: Certify the coherent exp149 result checkpoint before opening the reviewed BC320
+          successor on a fresh stacked branch.
       - bead: think-ykd6
         workflow: research-loop
         priority: 1
@@ -317,11 +322,11 @@ agenda:
         rationale: Full-support pricing remains uninvoked; retain it behind the newly successful geometric
           conditioning mechanism.
       selected:
-        bead: think-ykd6
+        bead: think-ta8s
         workflow: research-loop
-        rationale: Updated after Session117. Original audit and subsequent wall/containment tasks completed
-          through exp147; exp148 and analytic transport now select BC319 under think-ykd6. Original sprint
-          outcomes and cost remain unchanged.
+        rationale: The continuation completed exp149 and selected BC320. Publish one coherent result head
+          and require matching deferred evidence before the successor branch opens. Original sprint outcomes
+          and cost remain unchanged.
       operator_input:
         status: confirmed
         note: User selected a two-hour sprint on geometric conditioning and parallel experiments. The

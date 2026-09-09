@@ -23,7 +23,7 @@ session:
       first replayed strict escape or explicit partial result.
     commitment: BC-319
     bead: think-ykd6
-    status: in_progress
+    status: stopped
     entered_by: session_start
     switch_reason: null
     budget_minutes: 30
@@ -37,12 +37,20 @@ session:
       grace fit before the research cutoff.
     fallback: Preserve unrun or partial status and the exact missing obligation; do not infer an H146
       or global-bound verdict.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Record and validate the one exp149 outcome, then reserve finalization from17:04:50UTC.
+    outcome: Exp149 stopped correctly at owner-000 with exact positive uncovered area
+      71717500601808574131146882402353369/1245285277939023012815400000000000000 and a retained rational
+      strict escape. H147 is refuted; H146 remains unresolved. Result interpretation from16:40:46 through16:46:46UTC
+      selected one finite BC320 compatibility test against all retained owner frames in the four selected
+      classes; no successor target was registered or run.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
+    - packing/cases/n11_five_dot_cover/after-exp149-strategy.md
+    stop_reason: The first required direction met the registered exact negative criterion, and the reviewed
+      decision tree identifies the next bounded discriminator. Publication certification remains pending.
+    next_action: Publish this result checkpoint and require matching deferred evidence before opening
+      the successor milestone.
   primary_bead: think-ykd6
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 45
     max_cycles: 1
@@ -60,16 +68,28 @@ session:
     metric: Complete exact five-dot cover or replayed strict escape for tuple(0,0,0,7).
     before: The admitted source and prospective protocol are published at clean revision
       b8731b30f9e501b6acb24946e57484a856aae7c2; two earlier allocations expired unrun.
-    after: null
+    after: H147 is refuted by the first exact direction; H146 remains unresolved. The reviewed successor
+      is one saved-escape individual snapped-owner compatibility test under BC320, with new IDs assigned
+      only on a fresh stacked branch.
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
+  - packing/cases/n11_five_dot_cover/after-exp149-strategy.md
   checks:
   - Session119 ends and this session begins at exactly2026-09-09T16:34:50Z.
   - The tuple, inputs, criteria and scientific process allowances are unchanged.
-  - No exp149 target has run.
-  stop_reason: null
-  next_action: Publish this forward allocation, then run exp149 once before16:59:48UTC.
+  - Exp149 launched once at2026-09-09T16:40:34Z from clean published revision
+    5600c0fb4eccf9e9dcdf82b02506d3d4340651cb and exited zero after11.41seconds.
+  - Captured stdout is byte-identical to the retained JSON; the receipt binds both upstream blobs and
+    retains the strict rational escape.
+  stop_reason: The exp149 result and bounded next decision are complete; this session stops at16:46:46UTC
+    with publication certification still pending.
+  next_action: Under think-ta8s, publish the coherent result head, run one matching deferred checkpoint,
+    and mark PR142 ready only if that evidence passes. Then open a fresh stacked branch for BC320.
+  certification_pending: think-ta8s
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-120.yaml
 ---
 # Session120: Execute the Published Selected Wall Tuple
 
@@ -79,9 +99,9 @@ process limits are unchanged.
 Sessions118 and119 remain historical unrun allocations.
 
 The selected tuple is `(0,0,0,7)` in BL, BR, TL, TR order.
-Acceptance requires exact zero uncovered area at all361 directions.
-The first positive deficit must carry an independently replayed strict escape and
-refutes only H147.
+The first required direction had a positive exact deficit and a validated rational
+strict escape, so H147 is refuted.
+This result does not settle H146 or the global n11 bound.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

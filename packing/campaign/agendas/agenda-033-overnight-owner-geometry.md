@@ -122,7 +122,7 @@ agenda:
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Does a shared arrangement or a new five/six-dot cover exclude further owner cases?
     budget: One 30-minute discriminator per declared regime; no large blind sweep. Astra Max selects fixed-pattern
@@ -133,10 +133,9 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-318
-    next_evidence: 'Exp148 partial: two checked witnesses reject49152 labels; no complete seed/candidate.
-      Analytic D-preserving transport rejects61440 labels. H147/exp149 now prospectively freezes the
-      selected tuple(0,0,0,7) for a complete361-direction check. Its admitted source is published; Session120
-      supplies the execution-only allocation after two expired unrun windows. Do not extend exp148.'
+    next_evidence: 'Exp148 partial: two checked witnesses reject49152 labels, while analytic D-preserving
+      transport rejects61440. Exp149 refutes selected tuple(0,0,0,7) at owner-000 with a validated strict
+      escape. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple.'
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -147,12 +146,25 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-148-fixed-five-dot-wall-expansion.json
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
+    - packing/cases/n11_five_dot_cover/after-exp149-strategy.md
+    outcomes:
+    - scope: Does the fixed five-dot continuation certify another owner tuple under the declared bounded
+        screens?
+      classification: time-limited
+      result: Exp148 retained a partial witness bank; exp149 refuted the selected tuple at owner-000.
+        No additional owner tuple was certified, and H146 remains unresolved.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-148-fixed-five-dot-wall-expansion.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
+      disposition: continue
+      follow_up: think-ykd6
   - id: BC-320
     purpose: research
     owner_focus: insight
     instances:
     - 11
-    state: blocked
+    state: in_progress
     priority: 2
     question: Can selective owner-pose refinement or compatibility remove the remaining difficult cases?
     budget: Conditional 30-minute insight slice only after concrete residual failures; refine implicated
@@ -163,10 +175,15 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-319
-    next_evidence: Astra Max evaluates whether each proposed split eliminates the observed failure mechanism.
+    next_evidence: Freeze the exp149 rational escape and decide, for each of its four selected classes,
+      whether any of the181 retained snapped-owner frames can be strictly separated from that residual
+      core. Assign new H/exp IDs only on the fresh stacked successor branch.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - packing/cases/n11_five_dot_cover/after-exp149-strategy.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
   - id: BC-321
     purpose: research
     owner_focus: insight
@@ -226,18 +243,21 @@ agenda:
     owner_focus: process
     instances:
     - 11
-    state: tentative
+    state: in_progress
     priority: 1
     question: Is the overnight milestone reviewable with complete result scope, usage and next actions?
-    budget: 'Resumed window: begin final reconciliation16:23:09UTC, finish16:38:09UTC; no new target after16:23:09.'
+    budget: 'Historical resumed window: final reconciliation was scheduled16:23:09–16:38:09UTC. Session120
+      later stopped at16:46:46UTC; current publication certification is a continuation outside that expired
+      window.'
     entry: All retained experiment records, proof reviews, exact source revisions and separate session
       receipts.
     exit: Updated stacked PR, passing appropriate checks or explicit pending gate, morning report, agenda
       dispositions and prioritized successor tasks.
     bead: think-ta8s
     depends_on: []
-    next_evidence: Update the draft PR at coherent checkpoints, then close the agenda and pause its heartbeat
-      at the morning boundary.
+    next_evidence: Publish the coherent exp149 result head, run one matching deferred checkpoint and mark
+      PR142 ready only if it passes. Later publication/certification work remains outside Session120's
+      measured interval and is not zero cost.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots

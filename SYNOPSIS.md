@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives twenty-three confirmed hypotheses, seventeen
+The generated ledger currently derives twenty-three confirmed hypotheses, eighteen
 refuted hypotheses, one open hypothesis, twenty-five open questions, and forty-five
 blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
 remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
@@ -209,6 +209,7 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [After exp148: Transport the Witnesses, Then Remove Repeated Preparation](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) | research synthesis | record | retained | — |
+| [After exp149: Test the Escape in the Snapped-Core Model](packing/cases/n11_five_dot_cover/after-exp149-strategy.md) | research synthesis | record | retained | — |
 | [Selected-Cover Adapter: Source Admission](packing/cases/n11_five_dot_cover/selected-cover-source-admission.md) | dated review record | record | retained | — |
 | [Fixed-Pattern Adapter: Source Admission](packing/cases/n11_five_dot_cover/fixed-pattern-source-admission.md) | dated review record | record | retained | — |
 | [BC318 Adapter: Mathematical Source Admission](packing/cases/n11_five_dot_cover/wall-containment-source-admission.md) | dated review record | record | retained | — |
@@ -794,10 +795,14 @@ was partial. The separate
 [analytic transport](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) rejects
 61,440 labels for fixed D, leaving 4,094 nonbaseline labels.
 [Exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md)
-under H-147 fixes tuple `(0,0,0,7)` for a complete 361-direction check with the
-unchanged five dots.
+refutes H-147 at its first required direction: owner-000 has a positive exact uncovered
+area and a retained rational strict escape for tuple `(0,0,0,7)`. H-146 remains
+unresolved over other tuples.
 
-**Selected next entry:** `think-ykd6`, BC-319: test the explicit small surviving tuple.
+**Selected next entry:** `think-ta8s`, BC-323: publish the coherent exp149 result head
+and require one matching deferred checkpoint.
+The next scientific branch is BC-320 under `think-ykd6`: test the saved escape against
+every retained snapped-owner frame in each selected class.
 The two-hour sprint in
 [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
 complete. Exp141 independently confirmed the retained-family negative screens; exp142
@@ -3379,7 +3384,7 @@ round that names the hypothesis, control roles included.
 | [H-144](packing/campaign/hypotheses/H-144-wall-aware-owner-footprint-gain.md) | confirmed | Container walls strictly enlarge twelve of sixteen coarse owner footprints | 1 | 25.69s wall |
 | [H-145](packing/campaign/hypotheses/H-145-wall-owner-containment-expansion.md) | refuted | Wall-aware footprints extend a five-dot exclusion by component containment | 1 | 40.88s wall |
 | [H-146](packing/campaign/hypotheses/H-146-fixed-five-dot-wall-expansion.md) | unresolved | The fixed five dots exclude another wall-owner tuple | 1 | 74.03s wall |
-| [H-147](packing/campaign/hypotheses/H-147-selected-wall-tuple-cover.md) | running | The unchanged five-dot pattern covers the selected wall-owner tuple `(0,0,0,7)` | 1 | — |
+| [H-147](packing/campaign/hypotheses/H-147-selected-wall-tuple-cover.md) | refuted | The unchanged five-dot pattern covers the selected wall-owner tuple `(0,0,0,7)` | 1 | 11.41s wall |
 
 ### Confirmed
 
@@ -3632,12 +3637,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-117.yaml` | session-117 | 371 | 2.16 h | 0.75 h | 0.75 h | yes |
 | `codex-task-tree-session-118.yaml` | session-118 | 59 | 0.38 h | 0.16 h | 0.16 h | yes |
 | `codex-task-tree-session-119.yaml` | session-119 | 86 | 0.51 h | 0.25 h | 0.25 h | yes |
+| `codex-task-tree-session-120.yaml` | session-120 | 96 | 0.68 h | 0.2 h | 0.2 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 74 |
-| unmeasured | 46 |
+| measured | 75 |
+| unmeasured | 45 |
 | **total** | **120** |
 
 <!-- END GENERATED: session-close-report -->
@@ -3656,7 +3662,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 There are 105 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1365.9 wall-minutes.
+They record 2152.1 agent-minutes and 1366.1 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3800,7 +3806,7 @@ archive beside it.
 | [exp-146](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md) | 11 | target | H-144 | Exact container-clipped support rectangles over every retained frame | Complete16:12 enlarged,4equal,0impossible | accepted |
 | [exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md) | 11 | target | H-145 | Exact 128-slot component containment and union-of-products count | All128 complete; only2baseline tuples;0new | rejected |
 | [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md) | 11 | target | H-146 | Nine-seed witness bank and one surviving tuple full-net check | Partial seed bank;49152 labels rejected;no candidate | unresolved |
-| [exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md) | 11 | target | H-147 | Exact complete-net cover of the selected wall tuple `(0,0,0,7)` | Prospective and unrun | in-progress |
+| [exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md) | 11 | target | H-147 | Exact complete-net cover of the selected wall tuple `(0,0,0,7)` | First direction has exact positive deficit and strict escape | rejected |
 
 ### Cost and provenance
 
@@ -3910,11 +3916,11 @@ archive beside it.
 | exp-146 | one five-minute guarded constructor | 25.69s | — | criterion | `91575889` |
 | exp-147 | one 120-second external process; 60-second internal guard after input loading | 40.88s | — | criterion | `e72102e1` |
 | exp-148 | one five-minute process; shared 240-second internal and 60-second seed guards | 74.03s | — | timebox | `3bbb6987` |
-| exp-149 | one five-minute external process; 240-second internal guard after input loading | — | — | unrun | pending source publication |
+| exp-149 | one five-minute external process; 240-second internal guard after input loading | 11.41s | — | criterion | `5600c0fb` |
 
 ### What the 105 rounds jointly establish
 
-The 105 rounds use 2152.1 agent-minutes and 1365.9 wall-minutes under the campaign’s
+The 105 rounds use 2152.1 agent-minutes and 1366.1 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

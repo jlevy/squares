@@ -50,6 +50,10 @@ separate from cover validity.
 This hypothesis fixes one tuple and requires all361 orientations.
 Its failure would not refute existence of another fixed-dot cover.
 
+**Result: refuted.** Exp149 stopped correctly at its first required direction.
+The positive exact uncovered area and independently replayed rational strict escape
+reject this selected tuple only; H146 remains unresolved.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
