@@ -24,7 +24,7 @@ from sqpack.fractional.ceiling import CeilingCertificate
 
 REPO = Path("/home/user/squares")
 SRC = REPO / (
-    "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/"
+    "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
     "ceiling-family-191-50.json"
 )
 

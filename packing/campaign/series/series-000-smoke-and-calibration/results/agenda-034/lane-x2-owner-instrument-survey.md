@@ -247,8 +247,8 @@ Everything below is a promoted `devtools` module with tests unless marked otherw
   `packing/devtools/plateau_reader.py`. These decide point-and-threshold certificates on
   the full centre domain.
   No forbidden-region input.
-  Joining them to a residual domain is `H-146`’s instrument, and
-  [`H-146`](../../../../hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md)
+  Joining them to a residual domain is `H-155`’s instrument, and
+  [`H-155`](../../../../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md)
   records `instrument_ready: false`.
 
 ## 3. The parameters PR 137’s certified class ran at
@@ -337,7 +337,7 @@ whether any class other than the certified one admits a five-dot or a threshold 
 `gaps-to-global-bound.md`, on certificate reuse across classes: “Their class coverage is
 unmeasured.” Building the ledger is X-024 slice B1 and step 2 of the handoff in
 [`SYNOPSIS.md`](../../../../../../SYNOPSIS.md).
-`H-146` lists “a declared uncovered class from PR 137’s covered/uncovered ledger, with
+`H-155` lists “a declared uncovered class from PR 137’s covered/uncovered ledger, with
 its rows-complete point value” among its unmet prereqs.
 
 ### Cover values that do exist
@@ -540,7 +540,7 @@ Each item verified absent:
    for four of the sixteen classes, and it is exact.
 3. **A per-class ledger and its driver.** No census tool exists for owner classes
    (`devtools/census_*.py` are about chunks and tight cells).
-   X-024 slice B1 and handoff step 2 both name it; `H-146` lists it as an unmet prereq.
+   X-024 slice B1 and handoff step 2 both name it; `H-155` lists it as an unmet prereq.
 4. **Certificate transport between classes.** `OwnerClass.reflected_class_id` exists,
    but there is no tool that transforms a frozen dot set plus footprint under a
    container symmetry and re-decides it, nor one that decides exact union-containment
@@ -555,7 +555,7 @@ Each item verified absent:
 6. **The threshold-atom join**, only if point covers stay above 10.
    `sqpack.fractional.threshold` / `threshold_interval` take no forbidden region;
    `owner_footprints` / `multi_owner_domains` produce one.
-   `H-146` `instrument_ready:
+   `H-155` `instrument_ready:
    false`; X-024 slice E1.
 7. **The independent five-dot / union checker**, retained as an untested draft.
    Step 1 of the handoff and `T-023`’s `next_rung`; it blocks reusing the certified

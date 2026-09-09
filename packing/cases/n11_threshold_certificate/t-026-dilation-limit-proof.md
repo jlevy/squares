@@ -165,7 +165,7 @@ The 360-step rung of the same family (side supremum
 `38200000*sqrt(32400042893309449)/1798171928825841 = 3.82388604850764671009...`) is
 retained in the lane document only, not as a case file.
 The lane report
-[`lane-a2-threshold-certificate-on-finer-nets.md`](../../campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md)
+[`lane-a2-threshold-certificate-on-finer-nets.md`](../../campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a2-threshold-certificate-on-finer-nets.md)
 records the measurements, the crossing brackets and what remains open.
 
 ## Replay

@@ -128,7 +128,7 @@ admits; the 1440-step net adds a direction near `28.3°` that the 720-step cross
 shrink does not cover, so it pays `5.69 · 10^-5` in `B` to halve `D`, and the net gain
 over `C_720` is `0.00087918` in side against the `0.0011` a fixed crossing would have
 given. The exact ceiling family retained at
-`campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json`
+`campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-family-191-50.json`
 shows that no certificate of this one-body form, at any shrink and on any net containing
 its six directions, can pass unit side `3.8288`, that is `L < 3.8288 · B`. The
 unit-equivalent side of `C_1440` and `C_720` is `3.8177` and `3.8179`, about `0.011`

@@ -1,12 +1,12 @@
 ---
-title: H-149 — sixteen owner sectors fatten the patch enough to break neutrality
+title: H-157 — sixteen owner sectors fatten the patch enough to break neutrality
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
   envelope: hypothesis
   status: enforced
 hypothesis:
-  id: H-149
+  id: H-157
   kind: hypothesis
   claim: >-
     Refining the corner-owner angular bins from eight to sixteen makes every guaranteed
@@ -88,9 +88,9 @@ hypothesis:
     (empty classes) and 3 (compatibility pruning of the four neutral sectors) are
     unregistered and belong to the ownership line's own branch.
 ---
-# H-149 — Sixteen Sectors, a Fatter Patch, and the 0.015 That Would Decide It
+# H-157 — Sixteen Sectors, a Fatter Patch, and the 0.015 That Would Decide It
 
-[Lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md)
+[Lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md)
 measured corner conditioning as exactly mass-neutral: the transported mass-eleven
 ceiling family carries weight exactly one on each corner-mark clique, four of the
 sixteen classes per corner have a patch that reaches nothing beyond the mark, and the

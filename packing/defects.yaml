@@ -16268,7 +16268,7 @@ defects:
     "the retained family obstructs no class", which made the conditional owner programme
     look open when it is not.
     Re-run on the mass-eleven ceiling family
-    (`.../results/agenda-033/ceiling-family-191-50.json`, total exactly 11, exact maximum
+    (`.../results/agenda-034/ceiling-family-191-50.json`, total exactly 11, exact maximum
     depth exactly 1), the same `screen_footprint` reads survivor weight EXACTLY 10 at four
     of the sixteen one-corner classes and exactly 7 at the corresponding four-corner
     combination -- so those classes are obstructed against their own thresholds and no
@@ -16295,4 +16295,4 @@ defects:
     family of mass n, and no control compares a screen's survivor weight against its own
     source's total, which is the one arithmetic that would have made the deficit visible
     in the receipt.
-  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md

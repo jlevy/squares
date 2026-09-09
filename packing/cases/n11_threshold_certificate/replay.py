@@ -24,8 +24,8 @@ CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
 FROZEN_SHA256 = "3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f4bad5c"
 """The SHA-256 of the bytes T-025 was registered against.
 
-Identical to the candidate frozen by lane B of agenda-033 at
-`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-candidate-191-50.json`;
+Identical to the candidate frozen by lane B of agenda-034 at
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-b-threshold-candidate-191-50.json`;
 the copy here is what the frontier record cites.
 """
 

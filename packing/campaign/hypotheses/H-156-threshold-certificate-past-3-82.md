@@ -1,12 +1,12 @@
 ---
-title: H-147 — a threshold certificate proves a side above 191/50 unconditionally
+title: H-156 — a threshold certificate proves a side above 191/50 unconditionally
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
   envelope: hypothesis
   status: enforced
 hypothesis:
-  id: H-147
+  id: H-156
   kind: hypothesis
   claim: >-
     The rank-one threshold-atom closure admits a D4-symmetric certificate at a container
@@ -68,7 +68,7 @@ hypothesis:
     because the dilation argument uses only Conditions 1 to 4 and inverse dilation of
     placements, none of which distinguishes a threshold atom from a point atom.
 ---
-# H-147 — Past 3.82 Without Conditioning
+# H-156 — Past 3.82 Without Conditioning
 
 The threshold certificate at `191/50` is the first result past the point-method ceiling,
 and [X-024](../explorations/X-024-two-lines-at-eleven.md) makes pushing it up in side

@@ -1,12 +1,12 @@
 ---
-title: session-114 — pushing s(11) past the point-atom ceiling, and integrating the owner line
+title: session-123 — pushing s(11) past the point-atom ceiling, and integrating the owner line
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-114
+  id: session-123
   title: Pushing s(11) past the point-atom ceiling, and integrating the owner line
   date: '2026-09-08'
   started_at: '2026-09-08T23:31:43Z'
@@ -28,7 +28,7 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: null
     fallback: null
-    outcome: X-023 (three losses and a new atom), the review of the contributed note, lanes T, E, M0, A and B under agenda-033, the exact ceiling family at 191/50 with an independent reader, threshold atoms as a certificate language with a two-route exact decision.
+    outcome: X-023 (three losses and a new atom), the review of the contributed note, lanes T, E, M0, A and B under agenda-034, the exact ceiling family at 191/50 with an independent reader, threshold atoms as a certificate language with a two-route exact decision.
     evidence: [packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md]
     stop_reason: The survey had a direction map and two of its spikes had produced retainable objects; further breadth would have cost more than freezing what was already in hand.
     next_action: Retain the finer-net dilation limit and the 191/50 threshold certificate, each by its own gate.
@@ -79,12 +79,12 @@ session:
     budget_minutes: null
     started_at: '2026-09-09T14:56:14Z'
     deadline_at: null
-    expected_output: Five lane documents registered in the document map, D-489 in the defect register, H-146 dispositioned, a squashed branch without the 12.6 MB receipt blob, and this record.
+    expected_output: Five lane documents registered in the document map, D-489 in the defect register, H-155 dispositioned, a squashed branch without the 12.6 MB receipt blob, and this record.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --fast
     kill_condition: null
     fallback: null
-    outcome: This branch's own 26 commits squashed onto PR 137's head as 7ccb679c at the owner's instruction, dropping a 12,584,012-byte receipt blob from the branch and force-pushing once; retention then added 594caa3a, f84dd78f and 0443a193; D-489 filed; H-146 dispositioned as live rather than refuted and priced at no reach; twenty-one CI checks green on both the squashed head and the current head.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md, packing/defects.yaml]
+    outcome: This branch's own 26 commits squashed onto PR 137's head as 7ccb679c at the owner's instruction, dropping a 12,584,012-byte receipt blob from the branch and force-pushing once; retention then added 594caa3a, f84dd78f and 0443a193; D-489 filed; H-155 dispositioned as live rather than refuted and priced at no reach; twenty-one CI checks green on both the squashed head and the current head.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md, packing/defects.yaml]
     stop_reason: The branch is published, green and current, and the session record is the last artifact it was missing.
     next_action: Widen the certificate format to carry weighted and floor atoms, and generate sites by structure rather than by arrangement vertex.
   primary_bead: think-hs7y
@@ -103,7 +103,7 @@ session:
     phase: 1
     status: completed
     outcome: Every one-body core choice is capped by the shrink tax; direction-dependent weights never help; the cut families that can pass the ceiling are named.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t-theory-cuts-and-routes.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t-theory-cuts-and-routes.md]
     files: []
     checks: [Document-map registration; footer; links resolve.]
     uncertainty: Analytic; no new bound.
@@ -116,7 +116,7 @@ session:
     phase: 1
     status: completed
     outcome: Ceiling family of weight exactly eleven and depth one at 191/50 (EXACT); a threshold certificate of budget 685457679/62500000 accepted by the exact route, then by the interval route.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-b-threshold-atoms-at-191-50.md]
     files: [packing/src/sqpack/fractional/threshold.py, packing/devtools/decide_threshold_certificate.py]
     checks: [decide_threshold_certificate RETAINABLE at 100000203/100000000; 29 tests; ruff and basedpyright clean.]
     uncertainty: The candidate rested on one decision route until the interval route was built; the loop scripts that produced it were scratch-only and carried two defects of their own.
@@ -155,7 +155,7 @@ session:
     phase: 2
     status: completed
     outcome: lane-a and lane-b documents with receipts under 1 MB; document-map entries; checkers pass.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a-net-refinement-and-shrink-tax.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a-net-refinement-and-shrink-tax.md]
     files: []
     checks: [check_documentation, render_document_map, check_synopsis pass.]
     uncertainty: None.
@@ -167,8 +167,8 @@ session:
     recording: contemporaneous
     phase: 3
     status: canceled
-    outcome: T-023 to T-024, agenda-032 to agenda-033, H-136 to H-138 to H-143 to H-145, idea rows 132 to 134 to 139 to 141; repren dry run found no remaining match outside caches.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/reconciliation-upstream-2026-09-09.md]
+    outcome: T-023 to T-024, agenda-032 to agenda-034, H-136 to H-138 to H-152 to H-154, idea rows 132 to 134 to 139 to 141; repren dry run found no remaining match outside caches.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/reconciliation-upstream-2026-09-09.md]
     files: []
     checks: [check_rung_figures, check_case_prose, check_synopsis, check_readme pass; check_results reports only the T-023 gap the merge closes.]
     uncertainty: None.
@@ -194,7 +194,7 @@ session:
     phase: 3
     status: canceled
     outcome: Merge commit 787cf1c9 of the pre-squash history, with unions of every register and re-rendered views; records tier and checkers pass; the fast tier was rerun by the coordinator.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/reconciliation-upstream-2026-09-09.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/reconciliation-upstream-2026-09-09.md]
     files: []
     checks: [records tier passed at 787cf1c9; eight checkers exit 0.]
     uncertainty: None.
@@ -207,7 +207,7 @@ session:
     phase: 2
     status: completed
     outcome: The frozen atoms transfer at every net tried; crossing shrink equal at 720 and 1440, so the last 0.0011 of the limit comes from D halving alone; rescaled budgets 10.9963 against eleven, so net refinement is near exhausted on these atoms. Registered as T-026.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a2-threshold-certificate-on-finer-nets.md]
     files: []
     checks: [Both routes RETAINABLE and agreeing at least cell charge exactly 1 on both nets.]
     uncertainty: None on the decision; the budgets say this route is nearly spent.
@@ -220,7 +220,7 @@ session:
     phase: 3
     status: completed
     outcome: No certificate on the accepted columns at 383/100 (11.018) or at 153/40 (exactly eleven); every plateau dual refused as a fractional packing, at depth 1.124 at a corner seam, 1.098 at an interior meeting, and 28/25 after site separation inside a sliver 0.0006 wide; one atom round moved 3e-9 and one site round with 2,304 sites moved nothing.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a3-threshold-loop-at-383-100.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-threshold-loop-at-383-100.md]
     files: []
     checks: [Every reader verdict a rational; the three duals and their trajectories retained beside the lane report.]
     uncertainty: The reading that the sites rather than the atoms carry the plateau was a conjecture here and was confirmed afterwards by the separation lane.
@@ -233,33 +233,33 @@ session:
     phase: 3
     status: completed
     outcome: Corner conditioning is exactly mass-neutral at every rung; the ceiling family carries weight exactly 1 per corner mark and the deletions are additive. Do not build any rung. Exposed the salvage screen's source predicate as the reason the record read otherwise.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md]
     files: []
     checks: [The transport and the screen are PR 137's own; the survivor family read by the plateau reader at depth exactly 1.]
-    uncertainty: None on neutrality. The survivor family is still a fractional packing, so threshold atoms could cut it; that is what keeps H-146 falsifiable rather than refuted.
+    uncertainty: None on neutrality. The survivor family is still a fractional packing, so threshold atoms could cut it; that is what keeps H-155 falsifiable rather than refuted.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Recorded in X-024 section 5; H-146 dispositioned; D-489 filed.
+    next_action: Recorded in X-024 section 5; H-155 dispositioned; D-489 filed.
   - task: Survey of PR 137's owner instruments.
     operator: Claude Opus
     recording: contemporaneous
     phase: 3
     status: completed
     outcome: The single-corner theorem is standalone and its tooling exists at owner-count 1, but the side 96/25 is baked in and no ownership theorem exists elsewhere, so the conditional window was (3.82, 3.84] even before neutrality.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md]
     files: []
     checks: [Read-only; every claim cited to a module constant or a theorem statement.]
     uncertainty: None.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Consumed by the H-146 disposition.
+    next_action: Consumed by the H-155 disposition.
   - task: Containment atoms against the plateau families.
     operator: coordinator
     recording: contemporaneous
     phase: 3
     status: completed
     outcome: Negative. Both families sit exactly at the wall-strip capacity of 3 and no box on an eight-step grid exceeds capacity. Do not build them.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x3-containment-atoms-do-not-cut.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md]
     files: []
     checks: [Exact sweep; the two scripts retained beside the lane report.]
     uncertainty: The sweep is over one grid resolution; a finer grid was not measured because the families are exactly at capacity.
@@ -272,7 +272,7 @@ session:
     phase: 3
     status: completed
     outcome: All three atom classes violated, two-of-three at 133/100, a 42-member clique at 3/2, floor cuts to 8.27; the LP moved 2.2e-13 and every new column carries primal weight exactly zero. The site set, not the atom language, pins 3.825.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md]
     files: []
     checks: [Every separation verdict a rational, re-verified exactly; the seeded and control runs retained beside the lane report.]
     uncertainty: Finding P10 is the live blocker -- the certificate format cannot express the K5 and K6 atoms the reader separates, so none of these cuts can be frozen or gated today.
@@ -285,21 +285,21 @@ session:
     phase: 3
     status: completed
     outcome: nu_S = 32/3 exactly at both 153/40 and 383/100 under depth-one plus the complete budget-one class, falling to exactly 10 with floor cuts. No cap at either side.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md]
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md]
     files: []
     checks: [Exact optima; the loop and no-atom controls retained beside the lane report.]
     uncertainty: The maximum is over this site set; it says the method has headroom here, not that a certificate exists.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: The headroom is real, so the blocker is the format and the sites rather than the method.
-  - task: Retain the day's five research lanes as lane documents, file the defect the neutrality measurement exposed, and disposition H-146.
+  - task: Retain the day's five research lanes as lane documents, file the defect the neutrality measurement exposed, and disposition H-155.
     operator: Claude Opus
     recording: contemporaneous
     phase: 4
     status: completed
-    outcome: Five lane documents under results/agenda-033 with their receipts, registered in the document map and in X-024's sources (594caa3a); D-489 recorded with its evidence and every citation of exp-137 and exp-138 corrected (f84dd78f); X-024 section 5 rewritten, slices B1 and C1 withdrawn, A4 and A5 marked done, H-146 dispositioned at priority 3 as live rather than refuted and priced at no reach (0443a193); the scope of that disposition was restated later the same day against X-026, which states the argument as a six-step ladder and marks where it stops.
-    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md, packing/defects.yaml]
-    files: [packing/campaign/explorations/X-024-two-lines-at-eleven.md, packing/campaign/hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md, docs/project/document-map.yaml]
+    outcome: Five lane documents under results/agenda-034 with their receipts, registered in the document map and in X-024's sources (594caa3a); D-489 recorded with its evidence and every citation of exp-137 and exp-138 corrected (f84dd78f); X-024 section 5 rewritten, slices B1 and C1 withdrawn, A4 and A5 marked done, H-155 dispositioned at priority 3 as live rather than refuted and priced at no reach (0443a193); the scope of that disposition was restated later the same day against X-026, which states the argument as a six-step ladder and marks where it stops.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md, packing/defects.yaml]
+    files: [packing/campaign/explorations/X-024-two-lines-at-eleven.md, packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md, docs/project/document-map.yaml]
     checks: [records tier and fast tier green before the push; twenty-one CI checks green on 0443a193.]
     uncertainty: None.
     elapsed_seconds: null
@@ -311,7 +311,7 @@ session:
     phase: 4
     status: completed
     outcome: This record; the Claude rollup for the session log committed under campaign/resource-usage rather than held out, so the pull request's cost block renders from the tree; session-close-report.yaml and the SYNOPSIS tables re-rendered; slices A5, B1 and C1 and the receipt-blob decision closed as beads and four follow-ups left open.
-    evidence: [packing/campaign/agent-sessions/session-114-past-the-point-atom-ceiling.md, packing/campaign/session-close-report.yaml]
+    evidence: [packing/campaign/agent-sessions/session-123-past-the-point-atom-ceiling.md, packing/campaign/session-close-report.yaml]
     files: [packing/campaign/resource-usage/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9.yaml, SYNOPSIS.md]
     checks: [records tier and fast tier green on the closeout tree before the push.]
     uncertainty: The rollup is a snapshot taken while the session was still running, so its totals are a lower bound on the session's cost, as every live receipt here is.
@@ -322,7 +322,7 @@ session:
   - packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md
   - packing/campaign/explorations/X-024-two-lines-at-eleven.md
   - packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md
-  - packing/campaign/hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md
+  - packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md
   - packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md
   - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
   - packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md
@@ -331,11 +331,11 @@ session:
   - packing/src/sqpack/fractional/threshold_interval.py
   - packing/devtools/decide_threshold_certificate.py
   - packing/devtools/plateau_reader.py
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x3-containment-atoms-do-not-cut.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md
   checks:
   - 'full gate: fast at 0443a193: passed (re-run locally on the closeout tree, whose additions over it are records only)'
   - The records tier is green on that same closeout tree, with the session rollup in it rather than held out.
@@ -376,7 +376,7 @@ obstruction and the requirement, so it cannot turn a failing method into a succe
 one. That argument is stated in full, term by term, in
 [X-026](../explorations/X-026-what-conditioning-does-and-does-not-buy.md), which also
 names the one cheap unrun measurement that could overturn it — a sixteen-sector
-refinement of the owner patches, registered as `H-149`.
+refinement of the owner patches, registered as `H-157`.
 
 With conditioning priced as neutral, the two remaining measurements located the real
 barrier: the method has at least a third of headroom at 3.825, every atom class is

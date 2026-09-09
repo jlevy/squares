@@ -11,7 +11,7 @@ from sqpack.fractional.ceiling import CeilingCertificate
 
 REPO = Path("/home/user/squares")
 OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/strategy-conditioning-ladder")
-SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/"
+SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
               "ceiling-family-191-50.json")
 
 record = json.loads(SRC.read_text())
@@ -74,7 +74,7 @@ out = {
                     str(p.weight), str(p.side)] for p in surv],
     "total_weight": str(sum((p.weight for p in surv), Fraction(0))),
     "provenance": {"tool": "scratch replay of devtools.screen_corner_dual_salvage",
-                   "source": "agenda-033/ceiling-family-191-50.json transported to 96/25",
+                   "source": "agenda-034/ceiling-family-191-50.json transported to 96/25",
                    "class": "bottom-left:m1:j3", "footprint": "endpoint"},
 }
 (OUT / "survivor-m1-j3.json").write_text(json.dumps(out, indent=1))

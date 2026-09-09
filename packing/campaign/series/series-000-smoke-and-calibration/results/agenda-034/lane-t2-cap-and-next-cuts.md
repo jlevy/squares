@@ -422,7 +422,7 @@ margin at `u =
 3.8288` is `0.033`; `383/100` asks for `u = 3.8388`, a step of `0.010`. Unless the cut
 LP’s slope is under a quarter of the point LP’s, the run plateaus, and then route A’s
 value per certificate is zero until the next family exists.
-The memo’s own H-147 notes say “whether the threshold LP’s slope is gentler is the whole
+The memo’s own H-156 notes say “whether the threshold LP’s slope is gentler is the whole
 question” and then plan `383/100` followed by `96/25`; the plan should have been “read
 the plateau, name the cut, build it”, which is E. The `3.8266` dilation figure is the
 point-atom transfer ratio applied to the threshold certificate; two-of-three charges
@@ -512,11 +512,11 @@ family seen); or start the class census before an internal-node certificate exis
   `packing/src/sqpack/fractional/threshold.py`,
   `packing/src/sqpack/fractional/ceiling.py`, `packing/src/sqpack/fractional/sweep.py`,
   `packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md`,
-  `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md`,
-  `.../agenda-033/lane-t-theory-cuts-and-routes.md`,
-  `.../agenda-033/lane-m0-fixed-support-polish-191-50.md`,
-  `.../agenda-033/lane-e-lp-runs-61-16-and-191-50.md`,
-  `.../agenda-033/lane-a-net-refinement-and-shrink-tax.md`,
+  `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-b-threshold-atoms-at-191-50.md`,
+  `.../agenda-034/lane-t-theory-cuts-and-routes.md`,
+  `.../agenda-034/lane-m0-fixed-support-polish-191-50.md`,
+  `.../agenda-034/lane-e-lp-runs-61-16-and-191-50.md`,
+  `.../agenda-034/lane-a-net-refinement-and-shrink-tax.md`,
   `.../agenda-032/gaps-to-global-bound.md`, `.../agenda-032/sprint-report.md`,
   `.../agenda-032/proofs/point-extension-lemma.md`,
   `.../agenda-030/bc-303-first-wave-selection.md` (the corner-pair theorem and bc-293’s

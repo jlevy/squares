@@ -50,7 +50,7 @@ from tests.test_fractional_threshold_interval import tight_certificate
 PACKING = Path(__file__).resolve().parent.parent
 CANDIDATE = (
     PACKING
-    / "campaign/series/series-000-smoke-and-calibration/results/agenda-033"
+    / "campaign/series/series-000-smoke-and-calibration/results/agenda-034"
     / "lane-b-threshold-candidate-191-50.json"
 )
 PROOF = PACKING / "cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md"

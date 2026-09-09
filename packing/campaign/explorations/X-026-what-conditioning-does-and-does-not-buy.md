@@ -9,10 +9,10 @@ exploration:
   id: X-026
   title: "What Conditioning Does and Does Not Buy: Definitions, and a Ladder of Inference"
   date: '2026-09-09'
-  author: Claude coordinator (Fable), written after the agenda-033 lane X1 measurement returned
+  author: Claude coordinator (Fable), written after the agenda-034 lane X1 measurement returned
   campaign: packing.squares
   brief: >-
-    The first summaries of agenda-033 lane X1 said "conditioning is refuted", which is
+    The first summaries of agenda-034 lane X1 said "conditioning is refuted", which is
     stronger than what was measured. The owner asked for the argument stated in full,
     with every term defined before it is used, and for the exact point where the chain
     of inference stops to be marked. This report defines s(11), cores, certificates,
@@ -27,21 +27,21 @@ exploration:
     and "refuted" is right only for the point-cover conditional method. Three escapes
     the argument does not close are named, one of them a single unrun screen.
   sources:
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-cap-and-next-cuts.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-survivor-m1-j3.json
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-reader-survivor-m1-j3.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-cap-and-next-cuts.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-family-191-50.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-survivor-m1-j3.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-reader-survivor-m1-j3.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md
   - packing/campaign/explorations/X-024-two-lines-at-eleven.md
-  - packing/campaign/hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md
-  proposes: [H-149]
+  - packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md
+  proposes: [H-157]
 ---
 # X-026 — What Conditioning Does and Does Not Buy: Definitions, and a Ladder of Inference
 
 Coordinator analysis, 2026-09-09, written after the measurement lane
-([lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md))
+([lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md))
 returned.
 Its purpose is to state the argument in full, with every term defined before it
 is used, and to mark exactly where the chain of inference stops.
@@ -173,7 +173,7 @@ survives is neutrality.
    This is one cheap screen and it was not run; it is the only measurement that could
    overturn Step 3, and it should be run before the conditional line is closed in the
    record. Registered as
-   [`H-149`](../hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md).
+   [`H-157`](../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md).
 2. **Empty classes.** If the neutral sectors cannot occur in an actual packing of
    eleven, they need no cover and Step 4 evaporates for them.
    Every sector admits a *pose*, which is weaker than admitting a full eleven-square
@@ -189,9 +189,9 @@ The distinction matters for what gets built next: it removes the reason to prefe
 conditional route over the unconditional one, and it leaves the hybrid (threshold atoms
 on a residual domain) exactly as open as it was, and exactly as expensive.
 That is the reading
-[`H-146`](../hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) now
+[`H-155`](../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) now
 carries, and the scope correction [X-024](X-024-two-lines-at-eleven.md) §5 and
-[lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md)
+[lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md)
 now carry with it.
 
 <!-- This document follows common-doc-guidelines.md.

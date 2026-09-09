@@ -1,12 +1,12 @@
 ---
-title: H-146 — threshold atoms cover an owner class's residual domain where point atoms do not
+title: H-155 — threshold atoms cover an owner class's residual domain where point atoms do not
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
   envelope: hypothesis
   status: enforced
 hypothesis:
-  id: H-146
+  id: H-155
   kind: hypothesis
   claim: >-
     For at least one four-owner class of PR 137's sixteen-per-corner structure at
@@ -56,8 +56,8 @@ hypothesis:
   replication: true
   registered: '2026-09-09'
   notes: >-
-    DISPOSITIONED 2026-09-09 against agenda-033 lane X1
-    (results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md), and the scope of
+    DISPOSITIONED 2026-09-09 against agenda-034 lane X1
+    (results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md), and the scope of
     that disposition restated the same day against X-026, the conditioning ladder
     analysis. THE CLAIM IS LIVE, NOT REFUTED, AND IT IS PRICED AT NO REACH. Lane X1
     transported the mass-eleven ceiling family to 96/25 by PR 137's own transport and
@@ -99,7 +99,7 @@ hypothesis:
     K5 and K6 atoms that no ThresholdAtom can express, which is the live blocker on
     turning separation work into a bound. X-026 section 5 also names the one unrun
     measurement that could change the neutrality reading behind this disposition, a
-    sixteen-sector refinement of the owner patches, registered as H-149.
+    sixteen-sector refinement of the owner patches, registered as H-157.
     Superseded original note: PR 137's decisive stopping test for a class is an exact
     feasible fractional residual-core family of mass at least seven with depth at most
     one everywhere; that is the weak-duality ceiling this branch proved at 191/50 for the
@@ -110,7 +110,7 @@ hypothesis:
     whether threshold atoms make the conditional route feasible or leave the
     unconditional route as the only fractional way to 3.84.
 ---
-# H-146 — Threshold Atoms Where Five Dots Are Not Enough
+# H-155 — Threshold Atoms Where Five Dots Are Not Enough
 
 PR 137’s five-dot certificate excludes one four-owner class at `96/25` because four
 guaranteed occupied patches leave a residual domain that five points pierce.
@@ -133,7 +133,7 @@ Condition 5' on whatever centre domain it is given.
 **Do not fund this, and do not record it as refuted.** The reading above — that
 conditioning lowers the bar and that the question is whether threshold atoms clear the
 lowered bar — rests on a premise that has since been measured and is false.
-[Lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md)
+[Lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md)
 transported the mass-eleven ceiling family at `191/50` to `96/25` by PR 137’s own
 transport and screened it with PR 137’s own filter.
 The family carries weight **exactly 1** at each corner mark, and the four corner
@@ -174,7 +174,7 @@ and the conditional threshold problem at a class is the unconditional one shifte
 by one, at sixteen times the work and with no better reach.
 **Buying no reach is the finding; impossibility is not.** The conditional line also has
 no side but `96/25`, since no ownership theorem exists anywhere else in the tree
-([lane X2](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md)
+([lane X2](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md)
 §3), while `191/50` is already closed unconditionally by `T-025`.
 
 One measurement could still move the neutrality reading this disposition rests on, and
@@ -182,11 +182,11 @@ it has never been run: refining the owner sectors from eight to sixteen fattens 
 guaranteed patch, and the nearest survivor to a neutral patch sits at a separating gap
 of `0.014978`, so a patch reaching `0.015` further would delete `1/8` more and break
 neutrality at that class.
-That is registered as [`H-149`](H-149-refined-owner-sector-patch-breaks-neutrality.md),
+That is registered as [`H-157`](H-157-refined-owner-sector-patch-breaks-neutrality.md),
 it is one screen, and it is cheap.
 
 The instrument is still worth building, for the other lane.
-[Lane A4](../series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md)
+[Lane A4](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md)
 found that the plateau reader separates `K5` clique atoms with multiplicities and `K6`
 floor atoms charging more than one per core, neither of which a `ThresholdAtom` can
 express — so nothing the reader separates beyond two-of-three can be frozen or gated

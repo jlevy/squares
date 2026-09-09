@@ -13,22 +13,22 @@ documents:
   - {path: packing/benchmarks/math-startup/ideas.md, role: plan, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/math-startup/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t-theory-cuts-and-routes.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-reader-191-50.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/reconciliation-upstream-2026-09-09.md, role: review, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-e-lp-runs-61-16-and-191-50.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-m0-fixed-support-polish-191-50.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a-net-refinement-and-shrink-tax.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-cap-and-next-cuts.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-plateau-reader.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a3-threshold-loop-at-383-100.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x3-containment-atoms-do-not-cut.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t-theory-cuts-and-routes.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-reader-191-50.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/reconciliation-upstream-2026-09-09.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-e-lp-runs-61-16-and-191-50.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-m0-fixed-support-polish-191-50.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a-net-refinement-and-shrink-tax.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-b-threshold-atoms-at-191-50.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-cap-and-next-cuts.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-plateau-reader.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a2-threshold-certificate-on-finer-nets.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-threshold-loop-at-383-100.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-08-pr127-research-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-08-extending-s11-lower-bound-note.md, role: review, authority: record, lifecycle: retained}

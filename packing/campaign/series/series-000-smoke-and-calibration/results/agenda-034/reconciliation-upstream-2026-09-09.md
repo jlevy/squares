@@ -1,4 +1,4 @@
-# Agenda 033: reconciliation against the in-flight upstream branches, 2026-09-09
+# Agenda 034: reconciliation against the in-flight upstream branches, 2026-09-09
 
 Retained read-only review by an Opus sub-agent for
 [X-023](../../../../explorations/X-023-three-losses-and-a-new-atom.md), made from the
@@ -7,17 +7,26 @@ No git state was changed; everything is `git show`, `git diff` and
 `git merge-tree --write-tree` against remote refs.
 The report is reproduced as delivered; the coordinator acted on its first recommendation
 (X-022 became X-023 and `results/agenda-031/` became `results/agenda-032/`) before
-committing it, and the same directory became `results/agenda-033/` later on 2026-09-09,
+committing it, and the same directory became `results/agenda-034/` later on 2026-09-09,
 once PR 137 advanced and took `agenda-032` as well.
 
 **Amended later on 2026-09-09, after PR 137 moved past the head this report read.**
 `origin/codex/n11-ownership-continuation` has since registered its own `T-023` (a
 five-dot four-owner branch exclusion), `H-136` through `H-142`, `agenda-032` and its
 results directory, and `ideas.md` rows through 138. PR 137 wins every collision, so this
-branch renumbered a second time: its result became `T-024`, its three hypotheses became
-`H-143` to `H-145`, its results directory became `results/agenda-033/`, and its idea
-rows became 139 to 141. The allocations this branch took are updated below; every column
-reporting an upstream ref still reads as of `a1fc0306`.
+branch renumbered a second time: its result became `T-024`, and its three hypotheses,
+its results directory and its idea rows each moved up one allocation.
+The allocations this branch took are updated below; every column reporting an upstream
+ref still reads as of `a1fc0306`.
+
+**Amended a third time on 2026-09-09, before PR 145’s head was merged.** The same codex
+line advanced through PR 142 and PR 145, taking `H-143` through `H-151`, `agenda-033`
+and an agenda document to go with it, `session-114` through `session-122`, and
+`ideas.md` rows through 147. This branch renumbered a third time, so every identifier it
+owns reads at its final value throughout this document: hypotheses `H-152` through
+`H-157`, results directory `results/agenda-034/`, session record `session-123`, and idea
+rows 148 to 153. The upstream columns are unchanged and still read as of `a1fc0306`; the
+dated reconciliation for PR 145 in this directory carries the third audit in full.
 
 **Headline: every identifier this branch had allocated was already taken by
 `origin/codex/n11-ownership-continuation` (PR 137, head `a1fc0306`, one commit ahead of
@@ -32,7 +41,7 @@ unrun pricing round was funded to explore.
 | --- | --- | --- | --- |
 | `X-022` | `explorations/X-022-segment-ownership-continuation.md`, “Segment Ownership Constraints After the PR 127 Review”, dated 2026-09-08, `proposes: [H-135]` | the three-losses exploration, dated 2026-09-09 | **Renumbered to X-023.** Upstream is a day earlier, is the funded PR 127 continuation, and is already cited from its own agenda, ledger, `ideas.md` and SYNOPSIS. |
 | `agenda-031` | `agendas/agenda-031-ownership-and-pricing.md` (status `active`, BC-305 to BC-308) plus `results/agenda-031/` holding 18 ownership files | this branch’s results directory | **Moved to `results/agenda-032/`**; `agenda-032` is taken when an agenda is registered. The two result sets shared a directory name but no filenames, so a merge would have silently mixed two unrelated agendas’ evidence. |
-| `H-135` | `hypotheses/H-135-paired-full-support-pricing.md`, registered 2026-09-08, lane `proof`, open | “H-135 onward” | **Start at H-143.** |
+| `H-135` | `hypotheses/H-135-paired-full-support-pricing.md`, registered 2026-09-08, lane `proof`, open | “H-135 onward” | **Start at H-152.** |
 | `BC-305` | agenda-031 BC-305 (ownership replay, in progress, bead `think-qfog`); BC-306 (ready, `think-7lp3`), BC-307 (tentative), BC-308 (blocked) | “BC-305 onward” | **Start at BC-309.** |
 | `session-111` | `session-111-ownership-and-pricing.md` on the ownership branch **and** `session-111-font-startup-stability.md` on `origin/codex/math-startup-stability`, both dated 2026-09-08 | none yet | Not ours to fix; flagged: session-111 is double-allocated between two upstream branches. This branch takes session-112 onward. |
 | `exp-134`, `exp-135` | `exp-134` preregistered by BC-306/H-135 (never launched); `exp-135` named as BC-307’s reserve | none yet | **Start at exp-136.** |
@@ -71,8 +80,8 @@ marks and inside the gap main already left; nothing collides.
 | Family | main | this branch | ownership | dot-plans | hybrid | pr-stack-ci | math-startup | **Next free** |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `X-0xx` | X-021 | X-023 | X-022 | X-019 | X-018 | X-018 | — | **X-024** |
-| `agenda-0xx` | 030 | (033 reserved) | 031 | 029 | 028 | 028 | 030 | **agenda-034 after 033** |
-| `H-1xx` | H-134 | H-134 | H-135 | H-126 | H-124 | H-124 | H-134 | **H-143** |
+| `agenda-0xx` | 030 | (034 reserved) | 031 | 029 | 028 | 028 | 030 | **agenda-035 after 034** |
+| `H-1xx` | H-134 | H-134 | H-135 | H-126 | H-124 | H-124 | H-134 | **H-152** |
 | `BC-3xx` | BC-304 | BC-304 | BC-308 | BC-290 | BC-283 | BC-283 | BC-304 | **BC-309** |
 | `session-1xx` | 110 | 110 | 111 | 099 | 098 | 106 | 111 | **session-112** |
 | `exp-1xx` | exp-133 | exp-133 | exp-135 | exp-130 | exp-129 | exp-129 | exp-133 | **exp-136** |
@@ -87,7 +96,7 @@ marks and inside the gap main already left; nothing collides.
 (`SYNOPSIS.md`); `n11-hybrid-overnight` nine conflicts in shared registries and
 generated views; `review-pr-stack-ci-0dorfw` eight; `math-startup-stability` clean.
 None of `threshold.py`, the new devtools, `test_fractional_threshold.py`, or the
-agenda-033 results is touched by any upstream branch.
+agenda-034 results is touched by any upstream branch.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

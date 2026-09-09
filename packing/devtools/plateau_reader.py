@@ -52,7 +52,7 @@ over distinct sets and, separately, the depth.
 of ``S`` meet, so ``K(S, k)`` is a clique of the closed-intersection graph and the atom is
 the clique inequality ``y(C) <= 1``. Conversely a clique inequality is a rank-one atom iff
 its fractional piercing number ``tau*(C) = min {λ(S) : λ >= 0, λ(P) >= 1 on C}`` is below
-two (agenda-033 lane T, F5): with ``λ = a / t`` the atom ``(S, a, t)`` charges every
+two (agenda-034 lane T, F5): with ``λ = a / t`` the atom ``(S, a, t)`` charges every
 member and has budget ``floor(λ(S)) = 1``. ``tau*`` is monotone under inclusion, so a
 violated budget-one atom exists iff some clique of weight above one has ``tau* < 2``, and
 the heaviest such clique is found by enumerating the maximal cliques of weight above one

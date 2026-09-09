@@ -2237,7 +2237,7 @@ evidence:
       B(1 + D) = 899996306539/900000000000 < 1. The bound is the container side itself: an
       endpoint, with no strict inequality and no limit argument. The frozen bytes, SHA-256
       3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f4bad5c, are the lane-B
-      candidate of agenda-033 copied unchanged into the case package, and were decided by
+      candidate of agenda-034 copied unchanged into the case package, and were decided by
       devtools.decide_threshold_certificate, which rereads the file and prints RETAINABLE
       only when both routes accept and agree on the least charge: the exact sweep in 110 s
       with dense-grid and slab evaluations agreeing at every direction and the charge at

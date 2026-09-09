@@ -452,9 +452,9 @@ below are what remains once that route is closed.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
-| 139 | A threshold certificate at 3.82 | registered | [H-143](hypotheses/H-143-threshold-certificate-at-191-50.md) | The point method is capped at eleven there by an exact depth-one family; that same family is cut by 2-of-3 atoms at charge 5/4, so the new language is not capped with it. |
-| 140 | Re-optimise the covering LP on a finer net | registered | [H-144](hypotheses/H-144-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
-| 141 | Where does the point-atom ceiling begin? | registered | [H-145](hypotheses/H-145-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
+| 148 | A threshold certificate at 3.82 | registered | [H-152](hypotheses/H-152-threshold-certificate-at-191-50.md) | The point method is capped at eleven there by an exact depth-one family; that same family is cut by 2-of-3 atoms at charge 5/4, so the new language is not capped with it. |
+| 149 | Re-optimise the covering LP on a finer net | registered | [H-153](hypotheses/H-153-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
+| 150 | Where does the point-atom ceiling begin? | registered | [H-154](hypotheses/H-154-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
 
 ## Two Lines at Eleven — X-024
 
@@ -466,8 +466,8 @@ Both rows below are the same integrality gap seen from the two sides.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
-| 142 | Threshold atoms inside an owner class’s residual cover | registered | [H-146](hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point cover of seven is the conditional form of the ceiling the unconditional line just passed; the discriminator is whether threshold atoms bring its budget below seven. Dispositioned 2026-09-09: live, not refuted, and priced at no reach — the survivor family carries the same cut structure as the full family, so the conditional problem is the unconditional one shifted down by one for sixteen times the work. |
-| 143 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | registered | [H-147](hypotheses/H-147-threshold-certificate-past-3-82.md) | The endpoint at 3.82 is exact and its margin is 0.0327; the same loop at a larger side and the finer-net shrink of T-024 are the two untried mechanisms, and neither is capped by the point-atom ceiling. |
+| 151 | Threshold atoms inside an owner class’s residual cover | registered | [H-155](hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point cover of seven is the conditional form of the ceiling the unconditional line just passed; the discriminator is whether threshold atoms bring its budget below seven. Dispositioned 2026-09-09: live, not refuted, and priced at no reach — the survivor family carries the same cut structure as the full family, so the conditional problem is the unconditional one shifted down by one for sixteen times the work. |
+| 152 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | registered | [H-156](hypotheses/H-156-threshold-certificate-past-3-82.md) | The endpoint at 3.82 is exact and its margin is 0.0327; the same loop at a larger side and the finer-net shrink of T-024 are the two untried mechanisms, and neither is capped by the point-atom ceiling. |
 
 ## What Conditioning Buys — X-026
 
@@ -480,7 +480,7 @@ It names three escapes it does not close; the first is the row below.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
-| 144 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-149](hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further deletes `1/8` more and the class stops being neutral; halving the angular bin widens the guaranteed wedge from `pi/4` to `3pi/8`. One screen, never run, and the only measurement that could overturn the ladder’s Step 3. |
+| 153 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-157](hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further deletes `1/8` more and the class stops being neutral; halving the angular bin widens the guaranteed wedge from `pi/4` to `3pi/8`. One screen, never run, and the only measurement that could overturn the ladder’s Step 3. |
 
 ## Dead ends
 

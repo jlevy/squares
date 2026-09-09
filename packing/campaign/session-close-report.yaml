@@ -1823,7 +1823,7 @@ sessions:
     active_union_hours: 1.97
     wall_hours: 1.97
     snapshot_incomplete: true
-- id: session-114
+- id: session-123
   title: "Pushing s(11) past the point-atom ceiling, and integrating the owner line"
   status: completed
   primary_bead: think-hs7y

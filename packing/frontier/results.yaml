@@ -1325,9 +1325,9 @@ results:
       intermediate direction, so the gain is entirely the shrink the finer net admits,
       and the exact ceiling family at 191/50 caps every one-body point certificate at
       unit side 3.8288 on any net containing its six directions. The next movement is
-      therefore a re-optimised certificate at a finer net (H-144), which the covering
+      therefore a re-optimised certificate at a finer net (H-153), which the covering
       LP on the frozen sites already shows to be below eleven at 720 steps, and past
-      the cap the threshold atoms of H-143. The endpoint itself remains a weak limit
+      the cap the threshold atoms of H-152. The endpoint itself remains a weak limit
       with no endpoint certificate and no strict inequality.
   - id: T-025
     claim: >-
@@ -1381,15 +1381,15 @@ results:
       - E-n011-threshold-interval-decision
     review_artifact: docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md
     produced_by:
-      hypothesis: H-143
+      hypothesis: H-152
     artifacts:
       - packing/cases/n11_threshold_certificate/certificate.json
       - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
       - packing/devtools/decide_threshold_certificate.py
       - packing/src/sqpack/fractional/threshold.py
       - packing/src/sqpack/fractional/threshold_interval.py
-      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md
-      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-b-threshold-atoms-at-191-50.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-family-191-50.json
     controls:
       - packing/tests/test_n11_threshold_certificate.py
       - packing/tests/test_decide_threshold_certificate.py
@@ -1481,7 +1481,7 @@ results:
       - packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md
       - packing/devtools/measure_threshold_net_refinement.py
       - packing/devtools/dilation_corollary.py
-      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a2-threshold-certificate-on-finer-nets.md
     controls:
       - packing/tests/test_dilation_corollary.py
       - packing/tests/test_measure_threshold_net_refinement.py

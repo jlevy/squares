@@ -735,7 +735,7 @@ This is the actionable list.
 | [D-486](docs/project/reviews/review-2026-09-08-paper-font-merge.md) | 2026-09-08 | tooling | robustness |  | `review` | medium | fixed | Font pruning ignored the saved sans serif reading preference |
 | [D-487](docs/project/reviews/review-2026-09-08-paper-font-merge.md) | 2026-09-08 | tooling | validity | flattering | `review` | medium | fixed | Detaching a font inspection session silently ended print emulation |
 | [D-488](packing/devtools/reachable_tests.py) | 2026-09-08 | tooling | robustness | neutral | `gate` | high | fixed | The pre-push tier ran its whole-suite step in one process and could not finish it |
-| [D-489](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md) | 2026-09-09 | tooling | validity | flattering | `review` | high | outstanding | The corner-dual salvage screen can only accept a family that already fails the mass threshold |
+| [D-489](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md) | 2026-09-09 | tooling | validity | flattering | `review` | high | outstanding | The corner-dual salvage screen can only accept a family that already fails the mass threshold |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

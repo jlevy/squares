@@ -128,7 +128,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Historical at this checkpoint: resume think-mq0d for BC-264 subject to its allocation and admission requirements. Agenda030 subsequently superseded that selection with think-qfog; the current SYNOPSIS governs new work. This publication repair does not reprioritize research or authorize a target run. |
 | [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
 | [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: independently audit the union and five-dot replay, reuse the certificate through valid symmetries and exact containment, then search only uncovered classes under fresh preregistration and separately recorded usage. |
-| [session-114](agent-sessions/session-114-past-the-point-atom-ceiling.md) | completed | retrospective | `research-survey` (insight) | `review-planning-oversight` (process) | 4 | think-hs7y | Widen the certificate format to carry weighted and floor atoms, since the reader can already separate cuts the format cannot express; and generate sites by structure rather than by arrangement vertex. |
+| [session-123](agent-sessions/session-123-past-the-point-atom-ceiling.md) | completed | retrospective | `research-survey` (insight) | `review-planning-oversight` (process) | 4 | think-hs7y | Widen the certificate format to carry weighted and floor atoms, since the reader can already separate cuts the format cannot express; and generate sites by structure rather than by arrangement vertex. |
 
 ### Workflow summary
 
@@ -806,12 +806,12 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 | H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
 | H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
 | H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
-| H-143 | result registered | proof | The rank-one threshold-atom closure -- point atoms together with (S, k |  | 0 | T-025 |  |
-| H-144 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
-| H-145 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
-| H-146 | blocked | proof | For at least one four-owner class of PR 137's sixteen-per-corner struc |  | 0 |  |  |
-| H-147 | blocked | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 0 |  |  |
-| H-149 | blocked | proof | Refining the corner-owner angular bins from eight to sixteen makes eve |  | 0 |  |  |
+| H-152 | result registered | proof | The rank-one threshold-atom closure -- point atoms together with (S, k |  | 0 | T-025 |  |
+| H-153 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
+| H-154 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
+| H-155 | blocked | proof | For at least one four-owner class of PR 137's sixteen-per-corner struc |  | 0 |  |  |
+| H-156 | blocked | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 0 |  |  |
+| H-157 | blocked | proof | Refining the corner-owner angular bins from eight to sixteen makes eve |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

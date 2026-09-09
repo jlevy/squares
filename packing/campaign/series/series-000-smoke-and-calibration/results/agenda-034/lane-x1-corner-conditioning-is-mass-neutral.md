@@ -286,7 +286,7 @@ violations by an order of magnitude — and it did not matter.
   An emptiness proof is not a covering argument, so it would not rescue the method, only
   these classes; a pose-feasibility check on the two sectors would decide it.
 - **A larger guaranteed patch**, registered after this lane as
-  [`H-149`](../../../../hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md).
+  [`H-157`](../../../../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md).
   The closest survivor to the `j3` footprint sits at Euclidean separating gap
   **`0.014978`** — a weight-`1/8` wall placement centred at `(1.50658, 0.50885)`. A
   patch reaching `0.015` further picks up `1/8` and opens `0.125` of room, against a
@@ -296,7 +296,7 @@ violations by an order of magnitude — and it did not matter.
 - **The threshold route on a residual domain** is neither refuted nor supported here.
   It is exactly as open as the unconditional route and costs sixteen times more; that is
   why the decision is the unconditional lane.
-  [`H-146`](../../../../hypotheses/H-146-conditional-threshold-cover-on-an-owner-class.md)
+  [`H-155`](../../../../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md)
   is dispositioned on exactly that reading: the claim is live, not refuted, and it is
   priced at no reach — the survivor family carries the same cut structure as the full
   family, so threshold atoms cut it exactly as they cut the unconditional ceiling.

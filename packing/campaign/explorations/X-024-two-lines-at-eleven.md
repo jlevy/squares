@@ -30,18 +30,18 @@ exploration:
   - packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md
   - packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md
   - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-b-threshold-atoms-at-191-50.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t-theory-cuts-and-routes.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-cap-and-next-cuts.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-plateau-reader.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a3-threshold-loop-at-383-100.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x3-containment-atoms-do-not-cut.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md
-  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/ceiling-family-191-50.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-b-threshold-atoms-at-191-50.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t-theory-cuts-and-routes.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-cap-and-next-cuts.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-plateau-reader.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a2-threshold-certificate-on-finer-nets.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-threshold-loop-at-383-100.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-family-191-50.json
   - docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
@@ -51,7 +51,7 @@ exploration:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md
   - packing/frontier/results.yaml
-  proposes: [H-146, H-147]
+  proposes: [H-155, H-156]
 ---
 # X-024 — Two Lines at Eleven: The Unconditional Certificate and the Owner Case Split, and Where to Push Next
 
@@ -130,7 +130,7 @@ them.
 > conditioning.** Re-run on the mass-eleven family the same filter reads survivor weight
 > exactly `10` at four of the sixteen one-corner classes and exactly `7` at the
 > corresponding four-corner combination — see §5 and
-> [lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md).
+> [lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md).
 > Every citation of exp-137 or exp-138 in this document now carries this note.
 
 Their transfer from the finite net to physical angles is analytic (the `V3` half): every
@@ -321,10 +321,10 @@ result.
 not the two-corner rung, not the wall-slot generalization, which is strictly worse
 because a mid-wall slot has more angular freedom and a thinner guaranteed patch than a
 corner. The measurement is retained as
-[lane X1](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md),
+[lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md),
 with the inventory of what the conditional line already has in
-[lane X2](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x2-owner-instrument-survey.md).
-`H-146` is dispositioned against it as **live, not refuted, and priced at no reach**:
+[lane X2](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md).
+`H-155` is dispositioned against it as **live, not refuted, and priced at no reach**:
 the survivor family carries the same cut structure as the full family, so threshold
 atoms cut it exactly as they cut the unconditional ceiling, and what the conditional
 route costs is sixteen times the work for the unconditional problem shifted down by one.
@@ -347,7 +347,7 @@ Three escapes are open and none was closed here.
 nearest survivor to a neutral patch sits at a separating gap of `0.014978`, and a patch
 reaching `0.015` further would delete `1/8` more — refining eight sectors to sixteen is
 how one would get it, it is one cheap screen, it was never run, and it is now
-[`H-149`](../hypotheses/H-149-refined-owner-sector-patch-breaks-neutrality.md).
+[`H-157`](../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md).
 **Empty classes**: if the neutral sectors cannot occur in an actual packing of eleven
 they need no cover, and every sector is known to admit a pose, which is weaker.
 **Pruning**: the four-corner programme survives if compatibility rules kill every
@@ -370,13 +370,13 @@ domain.
 | Slice | Deliverable | Discriminator | Owner |
 | --- | --- | --- | --- |
 | A1 | `T-025` registered: case package, two evidence entries, the proof packet, the case page at `191/50` | the records tier and the gate on the frozen bytes | mechanical, Opus |
-| A2 | the frozen threshold certificate on the 720- and 1440-step nets at their crossing shrinks, and its dilation records | the two-route gate at each net; the endpoint about `3.8266` if it holds (H-147’s first reading) | mechanical, Opus |
-| A3 | the threshold loop at `383/100` from the accepted site and atom set, ninety minutes, rows complete or not | LP value below eleven with rows complete, frozen and decided; or a second plateau and its dual (H-147) | research, Fable |
+| A2 | the frozen threshold certificate on the 720- and 1440-step nets at their crossing shrinks, and its dilation records | the two-route gate at each net; the endpoint about `3.8266` if it holds (H-156’s first reading) | mechanical, Opus |
+| A3 | the threshold loop at `383/100` from the accepted site and atom set, ninety minutes, rows complete or not | LP value below eleven with rows complete, frozen and decided; or a second plateau and its dual (H-156) | research, Fable |
 | A4 (**done**) | the exact plateau reader: vertex membership sets, the two-of-three triple search, maximal cliques with exact piercing LPs, line chords, the CG-separation program, each returning an exact violated atom or a certificate of none | run on the `383/100` dual: two-of-three feasible (the plateau is a theorem and the reader names the cut) or not (the generator, not the language, was the limit) | this branch; run instead on the `153/40` dual with the gate bypassed — every class violated, the LP unmoved |
 | A5 (**done**) | weighted clique atoms (three-of-five with a doubled point) and floor two-of-five atoms in the loop, with exact vertex-set separation | one atom round plus rows-only completion at `383/100`: below eleven, freeze and gate; at eleven, the reader’s next family | this branch; answered from the other side — the ceiling support reaches only `32/3`, so neither side is capped |
 | B1 (**withdrawn**) | the owner-class census at `96/25`: combinations modulo the container symmetries, compatibility pruning by exact footprint separation, the nine-direction residual point LP on a sample of a few hundred classes | the class count and the distribution of residual values against seven | conditional line (PR 137’s branch); a census cannot rescue a neutral ladder |
 | E1 | one certificate format for both lines: point and threshold atoms, an optional forbidden region, a budget threshold, one two-route gate | PR 137’s `T-023` re-decided by the unified gate to the same verdict | either branch; efficiency block |
-| C1 (**withdrawn**) | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-146) | research, Fable; withdrawn on price, not on refutation — the point-cover route on a residual domain is closed, `H-146` itself is live, and it buys the unconditional problem shifted down by one for sixteen times the work |
+| C1 (**withdrawn**) | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-155) | research, Fable; withdrawn on price, not on refutation — the point-cover route on a residual domain is closed, `H-155` itself is live, and it buys the unconditional problem shifted down by one for sixteen times the work |
 
 Two things must not be conflated when the lines are reported together.
 PR 137’s `T-023` is conditional and does not move the bracket; `T-024` and the threshold
@@ -388,9 +388,9 @@ transfer is mechanised.
 
 Lane T2 is retained with this reading — the cap of the threshold method and the next cut
 families in
-[`lane-t2-cap-and-next-cuts.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-cap-and-next-cuts.md),
+[`lane-t2-cap-and-next-cuts.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-cap-and-next-cuts.md),
 the instrument it asked for in
-[`lane-t2-plateau-reader.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-t2-plateau-reader.md)
+[`lane-t2-plateau-reader.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-plateau-reader.md)
 — and slice A4 is done: the plateau reader is promoted as
 `packing/devtools/plateau_reader.py` and its run on the `191/50` ceiling family is
 retained beside the family, so what remains at `383/100` is to point it at that dual.
@@ -398,7 +398,7 @@ retained beside the family, so what remains at `383/100` is to point it at that 
 **Outcome of A2 and A3, later the same day.** Both ran; both reports are retained beside
 this document. A2 measured the frozen threshold atoms on the 360-, 720- and 1440-step
 nets
-([`lane-a2-threshold-certificate-on-finer-nets.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-a2-threshold-certificate-on-finer-nets.md)):
+([`lane-a2-threshold-certificate-on-finer-nets.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a2-threshold-certificate-on-finer-nets.md)):
 they do not cover at their own shrink `9977/10000` on any finer net, they cross at
 `249507/250000` at both 720 and 1440 steps, and the rescaled records are accepted by
 both routes of the gate at least cell charge exactly `1`. Their dilation family gives
@@ -407,7 +407,7 @@ registered as `T-026`; the `3.8266` in the table above was about `0.0002` optimi
 and the rescaled budgets of `10.9963` against eleven say that net refinement alone is
 near exhausted on these atoms.
 A3 found no certificate above `3.82` on the accepted columns
-([`lane-a3-threshold-loop-at-383-100.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-a3-threshold-loop-at-383-100.md)):
+([`lane-a3-threshold-loop-at-383-100.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-threshold-loop-at-383-100.md)):
 the covering LP under the carried rows is `11.0179` at `383/100` and exactly eleven at
 `153/40`, and one round of two-of-three atom separation moves the first by `3e-9`. Both
 plateau duals are refused by the plateau reader at depth about `1.12` at a corner seam
@@ -426,7 +426,7 @@ all three are retained beside this document.
 A4 pointed the plateau reader at the `1/25`-integral dual at `153/40` with the `K2`
 depth gate bypassed, so every reading is a separation-oracle reading and **no
 non-violation there is a cap**
-([`lane-a4-separating-the-plateau-dual-at-153-40.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md)):
+([`lane-a4-separating-the-plateau-dual-at-153-40.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md)):
 twenty-four distinct D4 orbits are violated exactly — eighteen two-of-three at `33/100`,
 one budget-one clique atom at `1/2`, five Chvátal–Gomory floor atoms at `5.545` to
 `8.27` — fed back as priced columns the LP moves from `10.999999999999945` to
@@ -438,7 +438,7 @@ So the atom language is not what pins `3.825`; the sites are, and chasing them v
 vertex chases one vertex of a wide optimal face.
 A5 measured the fixed-support maximum on the ceiling support under depth-one plus the
 **complete** budget-one class
-([`lane-a5-the-fixed-support-maximum-under-the-atom-classes.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md)):
+([`lane-a5-the-fixed-support-maximum-under-the-atom-classes.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md)):
 `nu_S = 32/3` exactly at both `153/40` and `383/100`, falling to exactly `10` once the
 floor atoms are imposed, against `11` with the atom rows dropped.
 **Neither side is capped**, the shortfall is `1/3` on the budget-one class and `1` on
@@ -446,7 +446,7 @@ the strongest row set measured, and the union with the `1/25` family’s placeme
 bounded above by `21749/1980 < 11` — so the barrier at these sides is not this family
 and not column generation on these supports.
 The containment sweep closes one more cut family
-([`lane-x3-containment-atoms-do-not-cut.md`](../series/series-000-smoke-and-calibration/results/agenda-033/lane-x3-containment-atoms-do-not-cut.md)):
+([`lane-x3-containment-atoms-do-not-cut.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md)):
 both plateau families carry exactly 3 in every wall strip against a capacity of exactly
 3, first exceeding 3 only above `2B`, and no axis-aligned box on an eight-step grid
 exceeds its capacity, so containment atoms — which would have been a cut outside the

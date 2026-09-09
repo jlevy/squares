@@ -3,7 +3,7 @@
 Quick tests run on hand-built families (a single core, pairwise disjoint cores, a planted
 non-Helly triple) and on the arithmetic the reader rests on. The 88-core ceiling family
 at 191/50 is the retained control and its searches are marked ``slow``; the numbers they
-must reproduce are the ones agenda-033 recorded: two-of-three ``5/4`` at memberships
+must reproduce are the ones agenda-034 recorded: two-of-three ``5/4`` at memberships
 ``(4, 8, 8)``, the corner clique of eleven entries at ``11/8`` with ``tau* = 5/3``, the
 wall lines at exactly ``3`` of chord at least ``0.99``.
 """
@@ -24,7 +24,7 @@ F = Fraction
 PACKING = Path(__file__).resolve().parents[1]
 CEILING_FAMILY = (
     PACKING
-    / "campaign/series/series-000-smoke-and-calibration/results/agenda-033"
+    / "campaign/series/series-000-smoke-and-calibration/results/agenda-034"
     / "ceiling-family-191-50.json"
 )
 
