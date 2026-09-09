@@ -35,7 +35,8 @@ hypothesis:
   registered: '2026-09-09'
   notes: Accept after exhaustive nonpositive slack in one class. Refute only when each of four classes
     supplies an independently replayed compatible B-core. Partial or invalid is unresolved. Positive examples
-    do not establish unit-square parents or joint owner compatibility.
+    do not establish unit-square parents or joint owner compatibility. Exp150 completed in 9.01 seconds
+    and refuted this claim with one positive replayed witness in each of the four classes.
 ---
 # H148: Does an Owner Class Exclude the Escape?
 
@@ -49,7 +50,8 @@ The
 [source admission](../../cases/n11_five_dot_cover/owner-compatibility-source-admission.md)
 is complete. Sol passed 21 focused controls in 8.51 seconds; Astra Max independently
 passed 21 in 4.53 seconds and checked exact adversarial fixtures.
-The target remains unrun.
+Exp150 now refutes H148: all four classes admit an individually compatible owner core.
+This does not establish a joint packing.
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

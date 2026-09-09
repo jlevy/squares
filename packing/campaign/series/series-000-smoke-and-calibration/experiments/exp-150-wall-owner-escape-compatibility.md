@@ -20,6 +20,7 @@ experiment:
     method: exact-algebraic
     host_system: Darwin arm64; project Python 3.14; one process
     selftest_passed: true
+    engine_commit: 49b6d6ff22e99269c475594660057d46a98a3edb
   instance:
     axis: n
     point: 11
@@ -47,20 +48,52 @@ experiment:
       No retry, additional pose, second tuple or tuning. Launch only with the full allowance remaining
       before 2026-09-09T19:06:40Z.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-150-wall-owner-escape-compatibility.json
-  results: []
+    commit: 49b6d6ff22e99269c475594660057d46a98a3edb
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Does any selected owner class exclude the saved exp149 core?
+    outcome: criterion_missed
+    checked_by: All four classes supply an exact strictly separated owner B-core on their first retained
+      frame. Each witness independently replays class membership, container, mark and polygon SAT. Four
+      positive witnesses refute the universal-exclusion hypothesis without needing an exhaustive 724-frame
+      traversal.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: At least one selected class exhaustively has no strictly separated B-core across
       its complete retained frames and signed SAT axes.
-    reason: Prospective and unrun; test the exp149 escape before changing dots or selecting another tuple.
-  lease:
-    expires: '2026-09-09T19:06:40Z'
-    host: local
+    reason: The saved escape survives the individual owner-core constraint in every selected class. H148
+      is refuted; joint owner compatibility, unit parents, H146 and the global n11 bound remain unresolved.
+  effort:
+    timebox: One 120-second external process plus two-second grace and 90-second internal guard; no retry.
+    wall_seconds: 9.01
+    stopped_by: criterion
 ---
-# Exp150: One Escape and Four Owner Classes
+# Exp150: The Escape Survives All Four Individual Owner Classes
 
-**Prospective and unrun; source admitted.** The saved exp149 escape and all geometry
-sources are fixed by Git blobs.
+**H148 is refuted.** The single target launched at 17:58:31 UTC on 2026-09-09 from clean
+published source `49b6d6ff22e99269c475594660057d46a98a3edb` and exited zero after 9.01
+seconds. The receipt is byte-identical to captured stdout.
+
+TR, BL, BR and TL each yielded a strictly separated owner B-core on frame 0. All four
+exact witnesses passed independent class, container, mark and polygon SAT replay.
+The test checked four frames out of 724 possible frames because one positive witness per
+class suffices for this registered refutation; it did not measure any full-class
+maximum. Geometry took 0.015890541981207207 seconds; the driver process measured
+8.551670249988092 seconds.
+
+This proves that the stronger individual-owner condition cannot remove this particular
+escape. The four owner witnesses may overlap each other and need not extend to contained
+unit-square parents.
+No tuple or global bound is excluded.
+The decision tree now selects a separately registered six-dot cover: retain D and add
+the saved exp149 centre, on the same tuple and all 361 directions.
+
+## Prospective Protocol
+
+**Frozen before the run at the source revision above.** The saved exp149 escape and all
+geometry sources are fixed by Git blobs.
 Publish the admitted source and this protocol before the single target invocation.
 Capture clean state, full published revision, UTC launch, process exit and elapsed time
 automatically.

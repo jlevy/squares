@@ -135,7 +135,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-118](agent-sessions/session-118-selected-wall-tuple.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
 | [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
 | [session-120](agent-sessions/session-120-selected-wall-tuple-execution.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
-| [session-121](agent-sessions/session-121-owner-core-compatibility.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-ykd6 | Record the result and select the stronger-domain or separately registered six-dot follow-up using the existing decision tree. |
+| [session-121](agent-sessions/session-121-owner-core-compatibility.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 3 | think-ykd6 | Interpret the conditional six-dot result and select the next evidence-backed slice. |
 
 ### Workflow summary
 
@@ -148,7 +148,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 23 | 4 | 89 | 7 |
+| `research-loop` | 23 | 4 | 90 | 7 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
@@ -695,7 +695,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
 | BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed128 relations, covered only two baseline tuples and added none. BC319 tests direct fixed-dot coverage. |
 | BC-319 | research | 11 | complete | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels, while analytic D-preserving transport rejects61440. Exp149 refutes selected tuple(0,0,0,7) at owner-000 with a validated strict escape. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple. |
-| BC-320 | research | 11 | in_progress | 1 | think-ykd6 | H148/exp150 prospectively fixes the saved exp149 escape, four selected classes and complete snapped-owner frames. Admit source and publish on codex/n11-owner-core-compatibility before the single120-second external/90-second internal target. |
+| BC-320 | research | 11 | in_progress | 1 | think-ykd6 | H149/exp151 fixes D plus the saved exp149 centre on the same tuple after exp150 refuted H148. Admit and publish the thin six-dot wrapper before one 300-second external / 240-second internal all-361 check. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
 | BC-323 | measurement_validation | 11 | complete | 1 | think-ta8s | PR142 head8a35b482 passed matching fast/page and deferred34380372729; all four research-job checkout revisions were verified. PR142 is ready and unmerged; successor branch codex/n11-owner-core-compatibility is open. Native publication-tail receipt closes17:21:40UTC; Session121 starts there. |
@@ -704,7 +704,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 106 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 107 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -833,7 +833,8 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-145 | refuted | proof | The frozen wall-aware owner footprints inherit at least one additional |  | 1 |  | 41s wall |
 | H-146 | unresolved | proof | The unchanged five-dot pattern D covers at least one wall-footprint tu |  | 1 |  | 1.2m wall |
 | H-147 | refuted | proof | The unchanged five-dot pattern D covers the full residual-core centre  |  | 1 |  | 11s wall |
-| H-148 | running | proof | At least one of the four selected owner classes admits no snapped B-co |  | 1 |  |  |
+| H-148 | refuted | proof | At least one of the four selected owner classes admits no snapped B-co |  | 1 |  | 9s wall |
+| H-149 | running | proof | The original five sites D plus the exact saved exp149 centre cover eve |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -843,7 +844,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Rounds
 
-### rejected (23)
+### rejected (24)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -870,6 +871,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-141 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-137 | The audit completed against clean tracked receipt and source blobs at44bf815f and confirmed every recorded source identity, canonical direction, exact transport, positiveSAT gap, mask, cardinality, mass and summary. It therefore confirms exp137's subthreshold maximum and rejects H137; audit success does not reverse the mathematical verdict. The audit preserves the receipt's immutable source-era provisional label and does not itself establish the separately reviewed endpoint-containment theorem. |
 | exp-147 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-145 | The complete exact matrix covers only the two baseline tuples, with zero new covered tuples. This refutes component-containment expansion for the frozen classes, not direct coverage by the five dots. |
 | exp-149 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-147 | Direction owner-000 has a positive exact deficit and a validated rational strict escape, so the specified tuple fails the registered all361 zero-deficit criterion. This refutes H147 only; H146 remains unresolved over other tuples. |
+| exp-150 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-148 | The saved escape survives the individual owner-core constraint in every selected class. H148 is refuted; joint owner compatibility, unit parents, H146 and the global n11 bound remain unresolved. |
 
 ### abandoned (2)
 
@@ -982,7 +984,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-150 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-148 | Prospective and unrun; test the exp149 escape before changing dots or selecting another tuple. |
+| exp-151 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-149 | Prospective and unrun. Exp150 selects this bounded follow-up; hitting its single saved escape does not establish a full cover. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1005,7 +1007,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-106 rounds, 2152.1 agent-minutes, 1366.1 wall-minutes.
+107 rounds, 2152.1 agent-minutes, 1366.3 wall-minutes.
 
 ## Exploration reports not yet codified
 

@@ -175,9 +175,9 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-319
-    next_evidence: H148/exp150 prospectively fixes the saved exp149 escape, four selected classes and
-      complete snapped-owner frames. Admit source and publish on codex/n11-owner-core-compatibility before
-      the single120-second external/90-second internal target.
+    next_evidence: H149/exp151 fixes D plus the saved exp149 centre on the same tuple after exp150 refuted
+      H148. Admit and publish the thin six-dot wrapper before one 300-second external / 240-second internal
+      all-361 check.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -187,8 +187,13 @@ agenda:
     - packing/campaign/hypotheses/H-148-wall-owner-escape-compatibility.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md
     - packing/cases/n11_five_dot_cover/owner-compatibility-contract.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-150-wall-owner-escape-compatibility.json
+    - packing/campaign/hypotheses/H-149-selected-six-dot-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md
+    - packing/cases/n11_five_dot_cover/after-exp150-decision-contract.md
     hypotheses:
     - H-148
+    - H-149
   - id: BC-321
     purpose: research
     owner_focus: insight
@@ -290,11 +295,16 @@ covering every possible owner configuration, not another check of the same branc
 
 **Entry point: W6 research loop.** Session121 continues on the fresh stacked owner-core
 compatibility branch after PR142 readiness.
-Its two-hour plan runs from17:21:40 to19:21:40UTC, with slices of at most30minutes and
-no new target after19:06:40UTC. Earlier expired windows remain historical; no experiment
-budget or result is reset.
-The30-minute heartbeat supplements continuous work and must not duplicate a launched
+Its two-hour plan runs from 17:21:40 to 19:21:40 UTC, with slices of at most 30 minutes
+and no new target after 19:06:40 UTC. Earlier expired windows remain historical; no
+experiment budget or result is reset.
+The 30-minute heartbeat supplements continuous work and must not duplicate a launched
 target.
+
+Exp150 has now refuted individual-owner exclusion of its saved escape.
+The active H149/exp151 follow-up tests the same tuple with that centre added as a sixth
+fixed dot.
+Its source and mathematical admission precede the single all-direction target.
 
 ## The order of work
 

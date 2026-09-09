@@ -341,8 +341,8 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H148/exp150
-tests the saved escape against entire allowed snapped owner cores.
+For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H149/exp151
+tests the same tuple with the saved escape centre added as a sixth fixed dot.
 PR142 completed matching fast and deferred validation and is ready; Session121 continues
 on the stacked branch `codex/n11-owner-core-compatibility`. Exp145 independently
 confirmed the selected five-dot cover, exp146 enlarged twelve of sixteen wall-aware
@@ -350,10 +350,12 @@ owner footprints, and exp147 found no additional tuple by component containment.
 Exp148 retained a partial fixed-pattern screen.
 Exp149 then refuted the selected tuple `(0,0,0,7)` at owner-000 with an exact positive
 deficit and validated rational strict escape.
-BC-320 will test that saved escape against every retained snapped-owner frame in each
-selected class before registering any broader target; H146 remains unresolved.
-The global n11 bracket is unchanged.
+Exp150 then refuted individual-owner exclusion of this escape: all four classes admit a
+strictly separated B-core, with exact independent replay.
+The six-dot follow-up must cover all 361 directions before it excludes this tuple; H146
+remains unresolved. The global n11 bracket is unchanged.
 PR137 retains the original sprint; PR142 stacks the separately tallied continuation.
+Draft PR145 carries the compatibility and six-dot work, with separate usage intervals.
 
 The preceding work reached three checkpoints in sequence.
 Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s

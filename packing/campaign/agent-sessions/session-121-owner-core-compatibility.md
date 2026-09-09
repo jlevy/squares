@@ -38,8 +38,8 @@ session:
     fallback: Keep source preparation explicit and move only unfinished future work to the next planned
       slice without changing exp150 science.
     outcome: Source preparation and mathematical admission completed at 17:48:27 UTC. Sol passed 21 focused
-      tests in 8.51 seconds; Astra Max independently passed 21 in 4.53 seconds plus exact adversarial fixtures.
-      Ruff/format and BasedPyright pass. Target remains unrun.
+      tests in 8.51 seconds; Astra Max independently passed 21 in 4.53 seconds plus exact adversarial
+      fixtures. Ruff/format and BasedPyright pass. Target remains unrun.
     evidence:
     - packing/cases/n11_five_dot_cover/owner-compatibility-contract.md
     - packing/cases/n11_five_dot_cover/owner-compatibility-source-admission.md
@@ -54,7 +54,7 @@ session:
       exact result.
     commitment: BC-320
     bead: think-ykd6
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Independent source admission passed; the next action is the single prospectively frozen
       compatibility measurement.
@@ -69,11 +69,37 @@ session:
       fits before this phase deadline.
     fallback: Preserve an unrun, partial or invalid outcome and its missing obligation; do not retry or
       widen the scientific scope.
+    outcome: Exp150 launched once at 17:58:31 UTC from 49b6d6ff22e99269c475594660057d46a98a3edb and completed
+      in 9.01 seconds with four individually compatible class witnesses. H148 refuted. Source --push validation
+      passed 45 named-tier steps in 144.56 seconds. Interpretation completed at 18:00:57 UTC.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-150-wall-owner-escape-compatibility.json
+    stop_reason: The single registered target completed conclusively.
+    next_action: Prepare the separately registered six-dot cover selected by the decision tree.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Prepare, admit, publish and test the fixed six-dot cover selected by exp150.
+    commitment: BC-320
+    bead: think-ykd6
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Exp150 conclusively refuted individual-owner exclusion of the saved escape.
+    budget_minutes: 30
+    started_at: '2026-09-09T18:00:57Z'
+    deadline_at: '2026-09-09T18:30:57Z'
+    expected_output: One complete all-361 six-dot cover, first replayed strict escape, or explicit partial/invalid
+      outcome.
+    validation_command: Focused source controls and Max admission, required pre-push checks, then exp151
+      once under 300/240-second guards.
+    kill_condition: Publish clean admitted source first; launch by 18:25:55 UTC to leave the full 302-second
+      process allowance.
+    fallback: Preserve completed source or partial/invalid result without retry; replan only future work.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Record the result and select the stronger-domain or separately registered six-dot follow-up
-      using the existing decision tree.
+    next_action: Interpret the conditional six-dot result and select the next evidence-backed slice.
   primary_bead: think-ykd6
   status: in_progress
   budget:
@@ -92,7 +118,8 @@ session:
   progress:
     metric: Resolve whether the exact exp149 escape survives individual owner-core constraints.
     before: Exp149 refuted fixed five-dot coverage for tuple (0,0,0,7); no compatibility target has run.
-    after: null
+    after: The saved escape survives all four individual snapped-owner constraints; the next discriminator
+      adds its centre as a sixth dot.
   delegations:
   - status: completed
     recording: contemporaneous
@@ -146,18 +173,85 @@ session:
       strict-core transfer scope.
     validation_command: Read-only source review and independent exact synthetic controls; no target invocation.
     next_action: Source is handed to the coordinator for publication and the single registered target.
+  - status: completed
+    recording: contemporaneous
+    outcome: Source implementation and independent admission complete; target remains unrun.
+    evidence:
+    - packing/cases/n11_five_dot_cover/six-dot-source-admission.md
+    checks:
+    - '13 combined controls passed: Sol 1.77 seconds, independent Max 0.60 seconds; Ruff/format and BasedPyright
+      clean.'
+    uncertainty: The fixed six-dot target is unrun.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    phase: 3
+    budget_minutes: 30
+    started_at: '2026-09-09T18:00:57Z'
+    deadline_at: '2026-09-09T18:30:57Z'
+    kill_condition: No target evaluation before source admission and prospective publication.
+    fallback: Retain completed preparation and carry only unfinished future work into the next planned
+      slice.
+    task: Implement fixed six-dot cover adapter and focused controls.
+    operator: GPT-5.6 Sol, extra high
+    files: &id002
+    - packing/devtools/wall_owner_six_dot_cover.py
+    - packing/tests/test_wall_owner_six_dot_cover.py
+    expected_output: Admitted thin six-dot wrapper with correct transfer and strict negative replay.
+    validation_command: Focused synthetic controls, Ruff/types and independent mathematical source review;
+      no target invocation by agents.
+    next_action: Coordinator publishes admitted source and invokes the single frozen target.
+    write_scope: *id002
+    excluded_commands:
+    - No target invocation, git commit/push, or campaign registry edits.
+  - status: completed
+    recording: contemporaneous
+    outcome: Source implementation and independent admission complete; target remains unrun.
+    evidence:
+    - packing/cases/n11_five_dot_cover/six-dot-source-admission.md
+    checks:
+    - '13 combined controls passed: Sol 1.77 seconds, independent Max 0.60 seconds; Ruff/format and BasedPyright
+      clean.'
+    uncertainty: The fixed six-dot target is unrun.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    phase: 3
+    budget_minutes: 30
+    started_at: '2026-09-09T18:00:57Z'
+    deadline_at: '2026-09-09T18:30:57Z'
+    kill_condition: No target evaluation before source admission and prospective publication.
+    fallback: Retain completed preparation and carry only unfinished future work into the next planned
+      slice.
+    task: Admit six-dot source independently and rank the next conditional discriminator.
+    operator: GPT-6 Astra, max
+    files:
+    - packing/cases/n11_five_dot_cover/after-exp150-decision-contract.md
+    expected_output: Admitted thin six-dot wrapper with correct transfer and strict negative replay.
+    validation_command: Focused synthetic controls, Ruff/types and independent mathematical source review;
+      no target invocation by agents.
+    next_action: Coordinator publishes admitted source and invokes the single frozen target.
+    write_scope:
+    - Private review notes only; shared repository source read-only.
+    excluded_commands:
+    - No target invocation, git commit/push, or campaign registry edits.
   outputs:
   - packing/campaign/hypotheses/H-148-wall-owner-escape-compatibility.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md
   - packing/cases/n11_five_dot_cover/owner-compatibility-source-admission.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-150-wall-owner-escape-compatibility.json
+  - packing/campaign/hypotheses/H-149-selected-six-dot-cover.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md
+  - packing/cases/n11_five_dot_cover/after-exp150-decision-contract.md
+  - packing/cases/n11_five_dot_cover/six-dot-source-admission.md
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-121-compatibility-target.yaml
   checks:
   - PR142 head 8a35b482 passed matching fast and deferred validation and is ready for review.
   - New source changes begin on the stacked successor after PR142 readiness.
+  - Six-dot source admitted at blobs 06bb100a94a35bdd78138d5467a450343a497476 (module) and 4b757fca7b9374c0bf8d4cb578ee0091526bd6b9
+    (tests).
   stop_reason: null
-  next_action: Record the result and select the stronger-domain or separately registered six-dot follow-up
-    using the existing decision tree.
+  next_action: Interpret the conditional six-dot result and select the next evidence-backed slice.
 ---
 # Session121: Test the Owner-Core Constraint
 
