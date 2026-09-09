@@ -1,0 +1,8 @@
+{
+  "name": "translation escape screen records and sample",
+  "output": "translation escape screen sample check passed: 12 of 324 records replayed (every 27th from n=1); retained screen: 318 records screened, 114 with a square that separates (2714 squares), 296 with a square that translates at all (5323 squares), excluded: n=68, n=69, n=103, n=105, n=110, n=131",
+  "reason": "",
+  "run_id": "cff3023c333949f090f088fb57734a96",
+  "seconds": 82.04656770799193,
+  "status": "passed"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "the decimal route still cannot price an exact pose",
+  "output": "  exact-construction price reproduces: reach 0 at the retained precision for all 4 sizes",
+  "reason": "",
+  "run_id": "cff3023c333949f090f088fb57734a96",
+  "seconds": 32.37474258302245,
+  "status": "passed"
+}

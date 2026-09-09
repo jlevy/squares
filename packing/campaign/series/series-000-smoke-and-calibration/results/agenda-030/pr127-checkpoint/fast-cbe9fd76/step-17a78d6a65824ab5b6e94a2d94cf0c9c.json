@@ -1,0 +1,8 @@
+{
+  "name": "case prose agrees with its own front matter",
+  "output": "  324 case files checked, every quoted bound figure and fraction-decimal claim in their prose agrees with their own front matter",
+  "reason": "",
+  "run_id": "cff3023c333949f090f088fb57734a96",
+  "seconds": 0.3423541249940172,
+  "status": "passed"
+}

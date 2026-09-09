@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run several search *arms* over the same cells and seeds, at one declared budget.
 
-    run_arm_sweep.py plan.yaml --out results/exp-130
+    run_arm_sweep.py plan.yaml --out results/exp-134
 
 An **arm** is one proposer: the control engine, or the control engine with one flag
 group. The plan file names them, and it is the pre-registration -- it is written before

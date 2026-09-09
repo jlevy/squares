@@ -14,6 +14,8 @@ documents:
   - {path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-08-pr127-research-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-07-n26-best-known-audit.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-07-maciver-square-packing.md, role: review, authority: record, lifecycle: retained}
@@ -111,6 +113,15 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md, role: research-report, authority: record, lifecycle: retained}

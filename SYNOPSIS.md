@@ -137,8 +137,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives fifteen confirmed hypotheses, sixteen refuted
-hypotheses, one open hypothesis, twenty-four open questions, and forty-one blocked
+The generated ledger currently derives eighteen confirmed hypotheses, sixteen refuted
+hypotheses, one open hypothesis, twenty-five open questions, and forty-four blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -212,6 +212,8 @@ case or experiment separately.
 | [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md) | research synthesis | record | retained | — |
 | [Spike v2: animated transitions between consecutive known-best packings](packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md) | research synthesis | record | retained | — |
 | [stats-summary.md](packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md) | generated status view | generated | generated | — |
+| [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
+| [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
 | [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
 | [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
@@ -309,6 +311,15 @@ case or experiment separately.
 | [BC-265: Calibration Scope and the Next Discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md) | dated review record | record | retained | — |
 | [BC264: One Finite Kernel Family and Its Verification Cost](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md) | research synthesis | record | retained | — |
 | [BC264: Kernel Bound and Feature-Class Acceptance](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md) | dated review record | record | retained | — |
+| [Agenda 030 Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane A: Corner and wall structure](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane B: Orientation-class constraints](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane C: The transfer of the s(10) proof](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane D: Contact lemmas and the closing route](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane F: The exactly-eleven plateau at 191/50](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane E: A robust unavoidable set of at most eleven marks at 96/25](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane G: What the segment cover and the corner pair localise at 96/25](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md) | research synthesis | record | retained | — |
+| [Agenda 030, BC-303: Independent replays of the first wave, and the selection](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md) | dated review record | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -560,6 +571,116 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+**Parallel structural lanes at `n = 11`, first wave terminal.**
+[X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
+pursued X-019’s exploration with four Fable lanes in parallel and reports what can be
+proved about eleven-square packings today: seven corner and wall lemmas, exact-verified
+angle counts at `96/25` on the rational cell unions specified in H-131 (rounded degree
+labels are approximations, not theorem endpoints), Stromquist’s Theorem 3 transported to
+`0.68°` bands at `96/25`, the spanning and chain lemmas, a weighted ownership lemma that
+would make four-corner containment a theorem from one LP, and a duality lemma that
+prices every conditional and capture certificate — including a retained-net cap below
+`U` with the strict endpoint corrected in the handoff review.
+It also records what cannot be forced (corner penetration, blocker angles,
+positive-length contacts, a bound on orientation classes) and prices the three closing
+architectures.
+[Agenda 030](packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md),
+epic `think-kbci`, maps eleven research lanes with disjoint deliverables under
+BC-292–BC-302. BC-303 selected the continuation and BC-304 has dispositioned every lane,
+including the unmet scopes inherited from Agenda 029. H-127–H-134 register the lanes’
+claims. The lane reports and every script they ran are retained under
+[`results/agenda-030/`](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md).
+No bound has changed.
+The owner started the wave on 2026-09-08: sessions 100 to 104 run BC-294 (the `B = 1`
+value and the kill tests), BC-293 (the corner-skeleton measure), BC-295 (the band replay
+and widening), BC-297 (the `3.82` plateau) and BC-302 (the eleven-mark ownership set),
+each in its own worktree on `claude/squares-n11-constraints-wl9atd`; `exp-130` was the
+next experiment id at launch.
+[Session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md)
+is the first terminal lane: the exactly-eleven plateau at `191/50` is not a Trump-strip
+artefact (45 grid-seed sites and 822 of BC-200’s retained sites lie in two or more of
+the scaled cores), the general site-invisible-overlap mechanism holds, adding strip
+sites left the value at `11.07` with the generator stopping on its 32-row pricing cap,
+and an exact census at the different mass `11.118805` exceeds one million near-tight
+cells with no clustering on Trump’s cores.
+This rejects the proposed strip explanation; it does not prove an obstruction at mass
+eleven or decide full-dual pricing.
+[Session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md)
+replayed every count in H-131 exactly and widened the robust end band far past H-130’s
+`3°`: no packing at `96/25` has every folded angle in Theorem C’s exact end-cell union
+(degree boundaries approximately `10.387466°` and `43.0737°`) (Theorem C, grid 119, mass
+`11083/1024`), with `[0°, 1.7139°] ∪ [43.5293°, 45°]` the first rung on grid 79; the
+dual of the band toward `40.19°` puts its weight near the axis, not at Trump’s angle,
+and `ceiling.py` decides that none of those duals is a continuum obstruction, so the
+band’s true value stays open from below.
+[Session-104](packing/campaign/agent-sessions/session-104-ownership-set-at-q.md) met
+H-134 in segment form: ten horizontal segments of length `1/10` centred on Stromquist’s
+ten Figure-13 points at `96/25` are a robust unavoidable set at tolerance `3/500`,
+certified by an interval reader over pose space with every one of its 184,756 leaves
+re-decided in exact arithmetic, while every point-mark set built from the atom skeleton
+has an exact escape; every contained unit square is therefore localised near one of ten
+known segments, which is the premise route (a) needed, though not exactly-one ownership.
+[Session-101](packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md)
+found H-128 unsuccessful on its tested finite support at `96/25`: the corner-bounded
+measure sweeps exactly at mass `11.798` against `11.262` free, and the corner atom’s
+position, not the bound, is the obstacle on that support.
+H-128 remains open over the retained net; it proved the corner-pair form instead, that
+every packing at `96/25` has four distinct squares each containing one of its corner’s
+two marks, so the anchor for BC-299 is a corner pair.
+[Session-100](packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md)
+left H-129 undecided: the `B = 1` family at `96/25` verifies exactly at `8.918` on a
+203-direction net, with its weight diffuse in angle and mostly outside Trump’s
+neighbourhood. The handoff review found a stronger retained control: exp-070’s family
+transports by `10000/9977` to unit squares at side `38200/9977 < 96/25`, preserving
+depth one and mass `21342289572/2055263195 ≈ 10.3842`. A smaller feasible family does
+not certify an upper bound.
+The depth polisher will start from that retained control; its missing scratch state is
+not a runnable handoff.
+
+**Selected next entry:** `think-qfog` continues BC-302 at the missing pairwise
+compatibility step after merge publication.
+BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
+complements of BC-292 and BC-299 forward.
+The corrected checkpoint is certified by the retained raw full log and structured
+component receipts composing all 69 steps; the earlier `ef8a2e72` full invocation
+remains failed. The owner authorized correcting and validating the stack, merging PRs
+116, 121 and 127 in order, then continuing on a new branch.
+The [handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
+records the corrections and the funded continuation.
+[Session 110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md)
+records the correction checkpoint and its remaining certification work.
+
+**Agenda 030’s selection, made.**
+[Session-107](packing/campaign/agent-sessions/session-107-first-wave-selection.md)
+replayed the first wave’s three strongest claims with readers written from their
+statements, and all three agree: the segment cover at `96/25`, the corner-pair
+containment theorem, and the band exclusion at grid 119. Two corrections came with it:
+the segment length threshold is in `(7/100, 8/100]`, and the cover’s certified domain
+now closes a far-wall sliver.
+BC-303 funds the segment cover toward an ownership argument as the next sustained block,
+with the `B = 1` depth polisher as the efficiency block and the plateau’s full-dual
+pricing as its first task; it retains the band ladder as filler and defers the
+corner-pair anchored certificate until the restricted fractional packing value is
+measured, since X-021’s duality lemma bounds any conditional certificate by it.
+Two more lanes ran and were halted by an external usage limit with their mathematics
+written and their validation unreached at that handoff:
+[session-108](packing/campaign/agent-sessions/session-108-anchors-at-q.md) proves the
+grazing localisation of the escape class and records where exactly-one ownership fails
+(a segment can be shared, even by separated squares), and
+[session-109](packing/campaign/agent-sessions/session-109-corner-class-at-q.md) bounds
+the corner class’s surplus exactly at 1.6 to 1.8 per cent of the gap to the certificate
+line on its tested support.
+Its ratio optimum equals one on site set A; mark banking only proves an upper bound of
+one on other supports.
+Ratio and slice forms have the same exclusion power.
+Run 4 remained partial and run 5 never ran.
+The review also retracts lane E’s rounded-cover and enlargement helper claims while
+independently confirming E.4. BC-304 now closes the handoff before the funded
+continuation, as the owner requested.
+The same block repaired the deferred checkpoint (a third label-gated job for the slow
+behavioural lane and a declared budget for the escape screen) and amended OR-2, OR-3 and
+OR-6.
+
 **Atlas expansion to `n = 324`, owner-directed, beside the research line.**
 [The plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) under
 epic `think-0juv` and
@@ -666,8 +787,8 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-mq0d` retains BC-264’s disposition after the completed
-H114 feature and kernel-contract pricing.
+**BC-264’s entry:** `think-mq0d` retains BC-264’s disposition after the completed H114
+feature and kernel-contract pricing.
 Its immediate prerequisite is the stopped Session097 checkpoint’s operational
 certification and draft publication.
 Exp129 missed its launch cutoff; its expired allocation cannot authorize a scientific
@@ -3024,10 +3145,18 @@ round that names the hypothesis, control roles included.
 | [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Diagonal band certified; original and collision-augmented axis representations returned no_chain without readers | 3 | 2.99s wall |
 | [H-125](packing/campaign/hypotheses/H-125-biquadratic-two-pose-kernel.md) | blocked | Fixed eleven-feature kernel; source-free instrument admitted, but exp129 missed its launch cutoff without scientific invocation | 1 | 0s scientific wall |
 | [H-126](packing/campaign/hypotheses/H-126-insertion-saturation-corner-structure.md) | open question | Quantitative corner structure from insertion saturation; X-019 and Agenda 029 prepare the unstarted investigation | 0 | Unspent |
-| [H-127](packing/campaign/hypotheses/H-127-simultaneous-perturbation-move.md) | refuted | A collective all-square proposal transforms four cells of eleven and is inert on the other six; four improved against the six declared | 2 | 105.7m wall |
-| [H-128](packing/campaign/hypotheses/H-128-wall-pressure-dense-objective.md) | refuted | The isotropic compaction surrogate optimizes a disc rather than a square and regresses both proved controls | 1 | 39.1m wall |
-| [H-129](packing/campaign/hypotheses/H-129-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart on four cells of five at equal refined optima, with disjoint ranges on two | 1 | 81.2m wall |
-| [H-130](packing/campaign/hypotheses/H-130-cooling-schedule-length.md) | refuted | A tenfold anneal length moves three cells of eleven against the six declared, and recovers three quarters of what the new move family recovers | 1 | 71.3m wall |
+| [H-135](packing/campaign/hypotheses/H-135-simultaneous-perturbation-move.md) | refuted | A collective all-square proposal transforms four cells of eleven and is inert on the other six; four improved against the six declared | 2 | 105.7m wall |
+| [H-136](packing/campaign/hypotheses/H-136-wall-pressure-dense-objective.md) | refuted | The isotropic compaction surrogate optimizes a disc rather than a square and regresses both proved controls | 1 | 39.1m wall |
+| [H-137](packing/campaign/hypotheses/H-137-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart on four cells of five at equal refined optima, with disjoint ranges on two | 1 | 81.2m wall |
+| [H-138](packing/campaign/hypotheses/H-138-cooling-schedule-length.md) | refuted | A tenfold anneal length moves three cells of eleven against the six declared, and recovers three quarters of what the new move family recovers | 1 | 71.3m wall |
+| [H-127](packing/campaign/hypotheses/H-127-corner-class-surplus-at-q.md) | blocked | Pricing the four corner blockers’ cores at 96/25 gives a covering surplus; the region-class row generator is not built | 0 | — |
+| [H-128](packing/campaign/hypotheses/H-128-corner-skeleton-ownership.md) | unresolved | A valid measure at 96/25 with T-018’s corner atoms at weight 3/20 and mass below 11.15 exists; the unsuccessful finite support does not refute this claim | 1 | 63.5m wall |
+| [H-129](packing/campaign/hypotheses/H-129-unit-shrink-fractional-value-near-u.md) | blocked | The unit-square fractional value at 3.87 stays below eleven; a lower family at least eleven obstructs the specified one-body certificate, while a smaller family is inconclusive | 0 | — |
+| [H-130](packing/campaign/hypotheses/H-130-robust-end-band-theorem-at-q.md) | confirmed | A robust band of 3° around 0° and 45° is excluded at 96/25; decided exactly in exp-130, out to [0°, 10.3875°] ∪ [43.0737°, 45°] on grid 119 | 1 | 37.2m wall |
+| [H-131](packing/campaign/hypotheses/H-131-near-axis-counts-at-q.md) | confirmed | At most nine squares within 6.45° of the axes and ten within 10.39° at 96/25; replayed exactly under exp-131 | 1 | 31.2m wall |
+| [H-132](packing/campaign/hypotheses/H-132-rectangle-no-fit-at-q.md) | blocked | Eleven squares do not fit in 3.84 × 3.81; the rectangle centre domain is not built | 0 | — |
+| [H-133](packing/campaign/hypotheses/H-133-plateau-site-artefact.md) | open question | Is the exactly-eleven plateau at 191/50 a site artefact of Trump-shaped cores in site-free strips? | 0 | — |
+| [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
 
 ### Confirmed
 
@@ -3196,9 +3325,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 115 | 29,742 | 16,800 | 349 | 2,808 | 170.08 h |
-| claimed by none | 53 | 9,920 | 5,828 | 135 | 885 | 46.72 h |
-| **measured** | **168** | **39,662** | **22,628** | **484** | **3,693** | **216.8 h** |
+| claimed by a session | 123 | 31,555 | 17,503 | 365 | 2,974 | 179.02 h |
+| claimed by none | 60 | 11,110 | 6,539 | 156 | 946 | 51.75 h |
+| **measured** | **183** | **42,665** | **24,042** | **521** | **3,920** | **230.77 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3229,7 +3358,15 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | 4 | 23 | 3,244 | 1,801 | 45 | 22.09 h |
 | [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 27 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| [session-100](packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md) | 1 | 1 | 342 | 113 | 6 | 1.78 h |
+| [session-101](packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md) | 2 | 1 | 273 | 137 | 7 | 1.64 h |
+| [session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md) | 2 | 1 | 310 | 106 | 2 | 1.52 h |
+| [session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md) | 1 | 1 | 164 | 63 | 0 | 0.94 h |
+| [session-104](packing/campaign/agent-sessions/session-104-ownership-set-at-q.md) | 3 | 1 | 238 | 83 | 1 | 1.38 h |
+| [session-107](packing/campaign/agent-sessions/session-107-first-wave-selection.md) | 2 | 1 | 202 | 82 | 0 | 0.58 h |
+| [session-108](packing/campaign/agent-sessions/session-108-anchors-at-q.md) | 1 | 1 | 128 | 52 | 0 | 0.57 h |
+| [session-109](packing/campaign/agent-sessions/session-109-corner-class-at-q.md) | 1 | 1 | 156 | 67 | 0 | 0.53 h |
+| *shared by 35 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3260,12 +3397,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-097.yaml` | session-097 | 973 | 7.51 h | 3.69 h | 4.3 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
+| `codex-task-tree-session-110.yaml` | session-110 | 940 | 6.73 h | 2.58 h | 2.58 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 54 |
+| measured | 63 |
 | unmeasured | 45 |
-| **total** | **99** |
+| **total** | **108** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3281,9 +3419,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 90 rounds registered in `series-000`.
+There are 94 rounds registered in `series-000`.
 
-They record 2417.1 agent-minutes and 1520.7 wall-minutes.
+They record 2417.1 agent-minutes and 1656.8 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3408,11 +3546,15 @@ archive beside it.
 | [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Producer no_chain; no independent reader or geometric counterexample | unresolved |
 | [exp-128](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md) | 11 | target | H-099 | Fixed seven-row necessary-lower-incidence ceiling | Independently verified ceiling and attained baseline11; whole fixed support settled | rejected |
 | [exp-129](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md) | 11 | target | H-125 | Fixed-family finite LP proposer and independent exact objective-bound reader | Launch cutoff missed with protocol admission incomplete; no scientific invocation or H125 verdict | blocked |
-| [exp-130](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-130-arm-calibration.md) | 18 | calibration | H-127 | Four calibration passes over 36 arm configurations on held-out non-grid cells | Freezes the round-1 arm parameters; the temperature ablation is inert and the anneal-length ablation is not | baseline |
-| [exp-131](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-131-round-1-perturbation.md) | 11 | target | H-127 | Collective proposal against the stock move set on eleven non-grid cells | Three cells meet both clauses and four the threshold, against six; n=10 reaches the proved basin the control never enters | rejected |
-| [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-round-1-pressure.md) | 11 | target | H-128 | Constant wall-pressure term against the stock energy on eleven non-grid cells | One cell improves and three regress; every n=5 seed returns 2*sqrt(2) and every n=11 seed the grid | rejected |
-| [exp-133](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-133-basin-hopping.md) | 11 | target | H-129 | 500 refined local optima per condition over the LP-in-cell quench | Basin hopping wins four cells of five; every emitted pose repaired and independently re-verified | accepted |
-| [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-round-1-schedule.md) | 11 | target | H-130 | Anneal length crossed with move set, two levels each | Both factors move the result and combine; the first factorial crossing found for this problem | rejected |
+| [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-arm-calibration.md) | 18 | calibration | H-135 | Four calibration passes over 36 arm configurations on held-out non-grid cells | Freezes the round-1 arm parameters; the temperature ablation is inert and the anneal-length ablation is not | baseline |
+| [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-round-1-perturbation.md) | 11 | target | H-135 | Collective proposal against the stock move set on eleven non-grid cells | Three cells meet both clauses and four the threshold, against six; n=10 reaches the proved basin the control never enters | rejected |
+| [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-round-1-pressure.md) | 11 | target | H-136 | Constant wall-pressure term against the stock energy on eleven non-grid cells | One cell improves and three regress; every n=5 seed returns 2*sqrt(2) and every n=11 seed the grid | rejected |
+| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-basin-hopping.md) | 11 | target | H-137 | 500 refined local optima per condition over the LP-in-cell quench | Basin hopping wins four cells of five; every emitted pose repaired and independently re-verified | accepted |
+| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-round-1-schedule.md) | 11 | target | H-138 | Anneal length crossed with move set, two levels each | Both factors move the result and combine; the first factorial crossing found for this problem | rejected |
+| [exp-130](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-130-h130-robust-end-band-at-q.md) | 11 | proof | H-130 | Class program on end-cell unions, composition (11, 0), decided exactly by decide_class_program | Robust end band excluded at 96/25: [0°, 1.7139°] ∪ [43.5293°, 45°] on grid 79, then [0°, 10.3875°] ∪ [43.0737°, 45°] on grid 119 | accepted |
+| [exp-131](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-131-h131-near-axis-counts-replay-at-q.md) | 11 | proof | H-131 | Registered replay of the near-axis and near-diagonal count classes through decide_class_program | Every count reproduces exactly: at most nine within 6.4537°, ten within 10.3875°, nine within 2.155° of 45°, ten within 2.44° of 40.19°, ten in [30.01°, 45°] | accepted |
+| [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-h134-segment-mark-cover-at-q.md) | 11 | proof | H-134 | Interval reader over pose space with every certified leaf re-decided exactly; the falsifier engine’s exact escapes for point sets | Ten segments of length 1/10 on Stromquist’s ten points at 96/25 are unavoidable at tolerance 3/500; the independent replay confirms the cover and closes the missing far-wall sliver | accepted |
+| [exp-133](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-133-h128-corner-skeleton-verdict-at-q.md) | 11 | proof | H-128 | Column generation with the corner orbit bounded below, swept exactly; the bounded dual’s floor | The tested support is unsuccessful, but its floor of 10.785 is below the 11.15 obstruction threshold; H-128 remains unresolved and the corner-pair theorem survives | unresolved |
 
 ### Cost and provenance
 
@@ -3503,15 +3645,19 @@ archive beside it.
 | exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
 | exp-128 | one60-second independent checker plus2-second termination grace | 1.12 s | — | criterion | `a94e57fe` |
 | exp-129 | one proposer and conditional reader; each TERM at 60 s, KILL up to 2 s later; neither invoked | 0 s scientific | — | dependency (guard) | `d6f0c403` (engine push passed; protocol admission failed) |
-| exp-130 | 1.13e12 pair tests over four calibration passes | 2681.0 s | 95 m | criterion | `9ae7700` |
-| exp-131 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 3663.0 s | 60 m | criterion | `9ae7700` |
-| exp-132 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells | 2349.0 s | 25 m | criterion | `9ae7700` |
-| exp-133 | 1,000 refined local optima, 500 per condition | 4871.0 s | 40 m | criterion | `9ae7700` |
-| exp-134 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 4281.0 s | 45 m | criterion | `9ae7700` |
+| exp-130 | three exact class-program decisions on end-band unions, one worker at load 8 | 2231 s | — | criterion | `f010f32f` |
+| exp-131 | eleven replay rows and the nine-point controls, one worker at load 8 | 1870 s | — | criterion | `f010f32f` |
+| exp-132 | the interval reader’s cover, exact re-decision of 184,756 leaves and 17,551 discards, 6,000 sampled poses | 253.6 s | — | criterion | `d04205fb` |
+| exp-133 | the free, four-bound and priced column-generation measures swept exactly, and the bounded dual’s floor | 3813 s | — | criterion | `22884081` |
+| exp-134 | 1.13e12 pair tests over four calibration passes | 2681.0 s | 95 m | criterion | `9ae7700` |
+| exp-135 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 3663.0 s | 60 m | criterion | `9ae7700` |
+| exp-136 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells | 2349.0 s | 25 m | criterion | `9ae7700` |
+| exp-137 | 1,000 refined local optima, 500 per condition | 4871.0 s | 40 m | criterion | `9ae7700` |
+| exp-138 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 4281.0 s | 45 m | criterion | `9ae7700` |
 
-### What the 90 rounds jointly establish
+### What the 94 rounds jointly establish
 
-The 90 rounds use 2417.1 agent-minutes and 1520.7 wall-minutes under the campaign’s
+The 94 rounds use 2417.1 agent-minutes and 1656.8 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

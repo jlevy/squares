@@ -48,15 +48,39 @@ tool from them:
   and `count:` in `defects.yaml` has to move with three aggregates in `SYNOPSIS.md`.
   Both were multi-file heredocs whose only check was a later gate step.
 
-## OR-2: Run three to five sub-agents, at a thinking level matched to the task
+## OR-2: Run three to five sub-agents, at a model and thinking level matched to the task
 
 Read-only investigation and disjoint writes parallelise; shared records, integration,
 commits, and external updates stay with the coordinator.
 Below three is usually serial work that could have been handed out; above five,
 reconciliation costs more than it buys.
 
-Pick the thinking level by difficulty: **extra** for anything carrying a proof
-obligation, **max** for the hardest mathematics and review findings.
+Choose the model and thinking effort together, and name both in every dispatch.
+Use the least costly row that can discharge the task’s obligation:
+
+| Task | Codex / OpenAI | Claude |
+| --- | --- | --- |
+| Straightforward implementation, record bookkeeping, identifier allocation, regenerated views, editorial work | GPT-5.6 Sol, high | Opus, high |
+| Mechanical work with substantial dependencies, careful CI repair, difficult integration | GPT-5.6 Sol, extra high; max when the dependency analysis warrants it | Opus, extra; max when the dependency analysis warrants it |
+| Deep mathematical work, proof development, mathematical feasibility analysis | GPT-6 Astra, extra high | Fable, extra |
+| Key mathematical insights, difficult counterexamples, adversarial review of consequential proof claims | GPT-6 Astra, max | Fable, max |
+
+For Codex tool arguments, the named models are `gpt-5.6-sol` and `gpt-6-astra`, and
+extra high is `xhigh`. Use the exact model identifiers and supported thinking settings
+exposed by the current harness; a provider’s display labels need not match another
+provider’s arguments.
+This is the owner’s task-routing policy, not a measured claim of equal model capability.
+If a requested combination is unavailable, record that limitation and the actual
+selection rather than silently substituting it.
+
+Split mixed work at the proof boundary: Sol or Opus can implement a specified checker,
+while Astra or Fable establishes its mathematical contract and reviews the result.
+Escalate when a mechanical lane uncovers a proof obligation, and reserve max for the
+work that benefits from it.
+This keeps straightforward tasks quick and token-efficient while funding the judgment on
+which the research depends.
+The owner specified the OpenAI and Claude choices during the PR 127 handoff review on
+2026-09-08, extending that day’s Fable/Opus dispatch policy.
 
 A sub-agent’s report is evidence, not a verdict.
 One in
@@ -74,12 +98,28 @@ strongly enough to survive being checked, so verify a parse claim by parsing rat
 by reading. The same reports were otherwise excellent, which is the point — a report can
 be right about five real defects and confidently wrong about a sixth.
 
-## OR-3: Never wait on a gate with nothing else in flight
+## OR-3: Never wait on a gate with nothing else in flight; run CI beside the research
 
 Launch it in the background and keep the next slice moving.
 Never poll it, and never start one against a tree you are about to change: a gate whose
 inputs move underneath it has to be run again, so it spends the eight minutes and buys
 nothing.
+
+**Hosted CI and the slow local checks run beside the research, never ahead of it.** Push
+at the first commit that is worth a hosted run and let the pull-request surface and the
+deferred checkpoint run while the sub-agents work.
+Read the verdicts at the next block boundary from the gate’s own receipts — the
+`validation-timings-*` artifacts every job uploads carry each step’s wall and each
+subprocess’s log — rather than by watching the run, so a red check is diagnosed from
+receipts that already exist.
+The deferred checkpoint takes 27 to 37 minutes on the hosted runner (runs
+[34171566965](https://github.com/jlevy/squares/actions/runs/34171566965) and
+[34177317419](https://github.com/jlevy/squares/actions/runs/34177317419)), longer than a
+research slice, so a coordinator that waited for it before dispatching would spend a
+slice on nothing. On 2026-09-08 the four mathematical lanes and the CI repair lane were
+dispatched while PR 121’s deferred run was still in flight, and the repair was designed
+from the receipts of a run that had finished an hour earlier.
+Added that day at the owner’s request.
 
 **Run `packing-validate --records` before a push, and push before the slower checks
 finish** so CI runs concurrently with them rather than after them.
@@ -127,13 +167,29 @@ Independently tracked work picks W1–W10 from
 Bounded delegated work inherits the parent phase unless it opens its own tracked
 session. [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts) owns the full contracts.
 
-## OR-6: Plan multi-hour work in slices before starting it
+## OR-6: Plan multi-hour work in slices before starting it, as parallel lanes with disjoint deliverables
 
 Unless the user sets another cadence, target an integration checkpoint within about four
 hours and cap each slice at 30 minutes, per the
 [bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle).
 Thirty minutes is a ceiling, not a quota: close a slice as soon as its bounded output is
 complete. Replan at each boundary from measured time, and only forward.
+
+**Map the coming sessions as parallel lanes, not as one clock with helpers.** A research
+agenda that can run in parallel names, for each lane, the exact question, the entry
+conditions, the exit that counts — a theorem, a counterexample, or a scoped obstruction
+— the instrument, the falsifier, the budget, and the files it owns.
+Lanes are disjoint in deliverables and in files, share nothing but read-only records,
+and carry a `parallel_group` in the agenda so the map can show them side by side; one
+coordinator owns identifiers, shared registries, integration and commits, which is
+Agenda 029’s division of labour generalised.
+A lane written that way can be handed to a fresh session on either harness without the
+coordinator present, and that is what lets several run at once.
+Agenda 029 planned three workers inside one eight-hour clock with sequential second and
+third blocks; on 2026-09-08 the owner asked for the sessions themselves to be mapped so
+they run in parallel, and
+[Agenda 030](packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md) is
+the first written to this rule.
 
 Plan each selected research direction end to end: known or source controls, a frozen
 bounded target attempt, independent verification, and an evidential disposition that
@@ -266,12 +322,13 @@ guard receipts still match.
 Record the handoff honestly; do not manufacture a new round or discard exact work just
 to keep a provenance label unchanged.
 
-Match judgment effort across harnesses by task, not by similarly named settings:
-
-- for the hardest mathematics or careful review, Codex **Max** corresponds to Claude
-  **Fable**;
-- for mechanical work requiring substantial care, Codex **High** or **Extra High**
-  corresponds to Claude **Opus Extra High** or **Opus Max**.
+Match the incoming agent to the task using
+[OR-2’s model and effort table](#or-2-run-three-to-five-sub-agents-at-a-model-and-thinking-level-matched-to-the-task).
+Carry both the model and the thinking effort in the handoff: Sol/Opus for mechanical
+work, Astra/Fable for mathematics, with max reserved for the most consequential or
+difficult reasoning.
+A thinking-level name alone does not identify the model or preserve the intended
+allocation.
 
 This equivalence does not make host-sensitive measurements portable.
 Timing, floating-point last bits, nondeterministic search trajectories, or any method

@@ -2,7 +2,7 @@
 """Measure how often a proposal moves the objective at all.
 
     measure_objective_sparsity.py --cells 5,11,17,27,52 --scale 0.05 --samples 20000
-    measure_objective_sparsity.py --archive results/exp-131/A-control.jsonl --scale 0.05
+    measure_objective_sparsity.py --archive results/exp-135/A-control.jsonl --scale 0.05
 
 The 2026-09-08 annealing survey argues from the shape of the objective that a plain
 annealer must stall: `required_side` is a max over the two to four squares attaining the

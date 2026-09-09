@@ -1,0 +1,1008 @@
+{
+  "arms": {
+    "A-control": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/A-control.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 144000000,
+          "n": 18,
+          "pair_tests": 4896058752,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 9.001309156417847,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 67200000,
+          "n": 40,
+          "pair_tests": 5241749760,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 9.280781269073486,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [],
+      "runs": [
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 2.9912660121917725,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 2.887660026550293,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 3.1223831176757812,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 3.0609641075134277,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 3.03900408744812,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 3.1808130741119385,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "B-p002-s1": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/B-p002-s1.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 134400000,
+          "n": 18,
+          "pair_tests": 4889420456,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 11.35266399383545,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 57600000,
+          "n": 40,
+          "pair_tests": 5301833004,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 10.18068814277649,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--p-perturb",
+        "0.02",
+        "--perturb-scale",
+        "1"
+      ],
+      "runs": [
+        {
+          "moves": 44800000,
+          "n": 18,
+          "pair_tests": 1629823439,
+          "seconds": 3.6193230152130127,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 44800000,
+          "n": 18,
+          "pair_tests": 1629898528,
+          "seconds": 3.944826126098633,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 44800000,
+          "n": 18,
+          "pair_tests": 1629698489,
+          "seconds": 3.7885148525238037,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 19200000,
+          "n": 40,
+          "pair_tests": 1768012662,
+          "seconds": 3.450388193130493,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 19200000,
+          "n": 40,
+          "pair_tests": 1767400518,
+          "seconds": 3.3795371055603027,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 19200000,
+          "n": 40,
+          "pair_tests": 1766419824,
+          "seconds": 3.3507628440856934,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "B-p005-s1": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/B-p005-s1.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 124800000,
+          "n": 18,
+          "pair_tests": 4985815811,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 10.386435270309448,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 48000000,
+          "n": 40,
+          "pair_tests": 5428534644,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 7.690644979476929,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--p-perturb",
+        "0.05",
+        "--perturb-scale",
+        "1"
+      ],
+      "runs": [
+        {
+          "moves": 41600000,
+          "n": 18,
+          "pair_tests": 1662016866,
+          "seconds": 3.7227580547332764,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 41600000,
+          "n": 18,
+          "pair_tests": 1662009131,
+          "seconds": 3.4945271015167236,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 41600000,
+          "n": 18,
+          "pair_tests": 1661789814,
+          "seconds": 3.1691501140594482,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 16000000,
+          "n": 40,
+          "pair_tests": 1809065310,
+          "seconds": 2.4266157150268555,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 40,
+          "pair_tests": 1810564080,
+          "seconds": 2.6537342071533203,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 40,
+          "pair_tests": 1808905254,
+          "seconds": 2.610295057296753,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "B-p005-s4": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/B-p005-s4.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 124800000,
+          "n": 18,
+          "pair_tests": 4986037746,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 9.138516187667847,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 48000000,
+          "n": 40,
+          "pair_tests": 5428185048,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 7.768238067626953,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--p-perturb",
+        "0.05",
+        "--perturb-scale",
+        "4"
+      ],
+      "runs": [
+        {
+          "moves": 41600000,
+          "n": 18,
+          "pair_tests": 1661823610,
+          "seconds": 3.037783145904541,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 41600000,
+          "n": 18,
+          "pair_tests": 1662404806,
+          "seconds": 3.0280420780181885,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 41600000,
+          "n": 18,
+          "pair_tests": 1661809330,
+          "seconds": 3.072690963745117,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 16000000,
+          "n": 40,
+          "pair_tests": 1808872260,
+          "seconds": 2.4766430854797363,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 40,
+          "pair_tests": 1810428594,
+          "seconds": 2.5115950107574463,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 40,
+          "pair_tests": 1808884194,
+          "seconds": 2.7799999713897705,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "B-p015-s1": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/B-p015-s1.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 96000000,
+          "n": 18,
+          "pair_tests": 4977319092,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 9.152352094650269,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 28800000,
+          "n": 40,
+          "pair_tests": 5276942190,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 6.940667152404785,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--p-perturb",
+        "0.15",
+        "--perturb-scale",
+        "1"
+      ],
+      "runs": [
+        {
+          "moves": 32000000,
+          "n": 18,
+          "pair_tests": 1659233932,
+          "seconds": 3.0142629146575928,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 32000000,
+          "n": 18,
+          "pair_tests": 1658847539,
+          "seconds": 3.179622173309326,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 32000000,
+          "n": 18,
+          "pair_tests": 1659237621,
+          "seconds": 2.9584670066833496,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 9600000,
+          "n": 40,
+          "pair_tests": 1758687060,
+          "seconds": 2.37518310546875,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 9600000,
+          "n": 40,
+          "pair_tests": 1759929600,
+          "seconds": 2.2032480239868164,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 9600000,
+          "n": 40,
+          "pair_tests": 1758325530,
+          "seconds": 2.3622360229492188,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "B-p050-s1": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/B-p050-s1.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 3,
+          "below_record_runs": 0,
+          "best_gap": 0.08057277799356388,
+          "best_side": 4.9034484335258535,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.11230584809178001,
+          "median_side": 4.93518150362407,
+          "moves": 57600000,
+          "n": 18,
+          "pair_tests": 5385691392,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 9.654675722122192,
+          "seeds": 3,
+          "worst_side": 4.938221522059162
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 19200000,
+          "n": 40,
+          "pair_tests": 8239584834,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 10.159849166870117,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--p-perturb",
+        "0.50",
+        "--perturb-scale",
+        "1"
+      ],
+      "runs": [
+        {
+          "moves": 19200000,
+          "n": 18,
+          "pair_tests": 1794720787,
+          "seconds": 3.238269090652466,
+          "seed": 1,
+          "seed_best": 4.93518150362407
+        },
+        {
+          "moves": 19200000,
+          "n": 18,
+          "pair_tests": 1795227846,
+          "seconds": 3.084751844406128,
+          "seed": 2,
+          "seed_best": 4.938221522059162
+        },
+        {
+          "moves": 19200000,
+          "n": 18,
+          "pair_tests": 1795742759,
+          "seconds": 3.3316547870635986,
+          "seed": 3,
+          "seed_best": 4.9034484335258535
+        },
+        {
+          "moves": 6400000,
+          "n": 40,
+          "pair_tests": 2746760172,
+          "seconds": 2.9328339099884033,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 6400000,
+          "n": 40,
+          "pair_tests": 2745191904,
+          "seconds": 2.9175469875335693,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 6400000,
+          "n": 40,
+          "pair_tests": 2747632758,
+          "seconds": 4.3094682693481445,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "67edd24a7fd9ee0c3d763a9044b38c05b341767f9e6094867b511b24a8680b6a",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "C-mu002": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/C-mu002.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 144000000,
+          "n": 18,
+          "pair_tests": 4896058752,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 10.765755891799927,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 67200000,
+          "n": 40,
+          "pair_tests": 5241749760,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 15.688157081604004,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--mu0",
+        "0.02",
+        "--mu1",
+        "1e-6"
+      ],
+      "runs": [
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 3.33434796333313,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 3.6780717372894287,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 3.753336191177368,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 3.697122097015381,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 6.027504920959473,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 5.96353006362915,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "C-mu010": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/C-mu010.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 144000000,
+          "n": 18,
+          "pair_tests": 4896058752,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 18.258970975875854,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 67200000,
+          "n": 40,
+          "pair_tests": 5241749760,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 17.232250928878784,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--mu0",
+        "0.10",
+        "--mu1",
+        "1e-6"
+      ],
+      "runs": [
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 6.403486013412476,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 6.087028980255127,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 5.768455982208252,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 5.343938827514648,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 5.868589162826538,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 6.019722938537598,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "C-mu050": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/C-mu050.jsonl",
+      "cells": {
+        "18": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17712434446771042,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.17712434446771042,
+          "median_side": 5.0,
+          "moves": 144000000,
+          "n": 18,
+          "pair_tests": 4896058752,
+          "record": 4.82287565553229,
+          "record_source": "frontier/n-018.md (Pertti H\u00e4m\u00e4l\u00e4inen 1980)",
+          "seconds": 18.916155099868774,
+          "seeds": 3,
+          "worst_side": 5.0
+        },
+        "40": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.17157287525381015,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.17157287525381015,
+          "median_side": 7.0,
+          "moves": 67200000,
+          "n": 40,
+          "pair_tests": 5241749760,
+          "record": 6.82842712474619,
+          "record_source": "frontier/n-040.md (Frits G\u00f6bel 1979)",
+          "seconds": 15.38030457496643,
+          "seeds": 3,
+          "worst_side": 7.0
+        }
+      },
+      "flags": [
+        "--mu0",
+        "0.50",
+        "--mu1",
+        "1e-6"
+      ],
+      "runs": [
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 6.6030731201171875,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 6.530460834503174,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 48000000,
+          "n": 18,
+          "pair_tests": 1632019584,
+          "seconds": 5.782621145248413,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 5.245204925537109,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 5.214186906814575,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 22400000,
+          "n": 40,
+          "pair_tests": 1747249920,
+          "seconds": 4.920912742614746,
+          "seed": 3,
+          "seed_best": 7.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "657783335aba16878876f605ff9031a489e92e1651bd03c0c6c8469a7d4c25ae",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 54,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    }
+  },
+  "budget_pair_tests_per_chain": 200000000,
+  "cells": [
+    18,
+    40
+  ],
+  "chains": 8,
+  "engine": "packing/sqsearch/target/release/sqsearch",
+  "gate": {
+    "command": "/Users/levy/wrk/github/squares/.claude/worktrees/squares-viz-explanations-4ae624/packing/sqsearch/target/release/sqsearch --selftest",
+    "passed": true,
+    "seconds": 1.902,
+    "tail": [
+      "SELFTEST PASSED"
+    ]
+  },
+  "host": {
+    "cpu_count": 10,
+    "loadavg_after": [
+      33.4482421875,
+      23.4931640625,
+      19.31103515625
+    ],
+    "loadavg_before": [
+      12.19140625,
+      17.4169921875,
+      16.75
+    ],
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O"
+  },
+  "label": "exp-134-arm-calibration",
+  "plan": "campaign/series/series-000-smoke-and-calibration/results/exp-134-arm-calibration/plan.yaml",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "threads": 4
+}

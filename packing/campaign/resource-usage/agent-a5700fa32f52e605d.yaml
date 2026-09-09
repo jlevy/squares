@@ -1,0 +1,580 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a5700fa32f52e605d.jsonl
+    sha256: 26953a37291615bf1e8f80db14fe28471dc24c6fe112dcd3155e2cc0b9ef26ae
+    bytes: 1168162
+    records: 171
+    session_id: 9010767e-5bb7-5e7d-99d2-858400f3969a
+    harness_versions:
+    - 2.1.263
+  span:
+    started_at: '2026-09-08T02:27:12.682Z'
+    ended_at: '2026-09-08T03:07:06.273Z'
+    wall_seconds: 2393.591
+  turns:
+    assistant: 78
+    sidechain: 78
+    by_model:
+      claude-fable-5-1: 78
+    by_thinking_level:
+      xhigh: 78
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ xhigh: 78
+    by_branch:
+      claude/squares-n11-constraints-wl9atd: 78
+    latency:
+      count: 78
+      total_seconds: 2352.356
+      median_seconds: 1.985
+      max_seconds: 804.986
+  tokens:
+    cache_creation_input_tokens: 3838893
+    cache_read_input_tokens: 9849583
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 3838893
+    input_tokens: 2322
+    output_tokens: 141022
+    thinking_tokens: 127917
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 3838893
+      cache_read_input_tokens: 9849583
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 3838893
+      input_tokens: 2322
+      output_tokens: 141022
+      thinking_tokens: 127917
+  tool_calls:
+    total: 55
+    total_seconds: 44.92
+    share_of_wall: 0.0188
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 13
+      total_seconds: 36.044
+      median_seconds: 1.52
+      max_seconds: 14.48
+    by_tool:
+      Bash:
+        count: 54
+        total_seconds: 44.912
+        median_seconds: 0.074
+        max_seconds: 14.48
+      Read:
+        count: 1
+        total_seconds: 0.008
+        median_seconds: 0.008
+        max_seconds: 0.008
+    by_command:
+      C && U && V && v && esc0 && esc_cov && cx && cy && cx && cy:
+        count: 1
+        total_seconds: 14.48
+        median_seconds: 14.48
+        max_seconds: 14.48
+      'min && certified:':
+        count: 1
+        total_seconds: 3.764
+        median_seconds: 3.764
+        max_seconds: 3.764
+      mkdir && golden && cubic:
+        count: 1
+        total_seconds: 2.702
+        median_seconds: 2.702
+        max_seconds: 2.702
+      C && U && V && dx, && cx && cy && C2 && V2:
+        count: 1
+        total_seconds: 2.678
+        median_seconds: 2.678
+        max_seconds: 2.678
+      cat:
+        count: 18
+        total_seconds: 2.511
+        median_seconds: 0.06
+        max_seconds: 1.256
+      python3:
+        count: 2
+        total_seconds: 2.505
+        median_seconds: 1.252
+        max_seconds: 1.306
+      pip && mupdf && fitz && pillow && sympy:
+        count: 1
+        total_seconds: 2.254
+        median_seconds: 2.254
+        max_seconds: 2.254
+      python3 && ls && ls:
+        count: 1
+        total_seconds: 1.563
+        median_seconds: 1.563
+        max_seconds: 1.563
+      'V && C && Lemma-4 && (a,b)-(0,1) && both && equals && bottom-row && V && F_G: && central-mesh && (a,b)-(0,1)':
+        count: 1
+        total_seconds: 1.562
+        median_seconds: 1.562
+        max_seconds: 1.562
+      H:
+        count: 1
+        total_seconds: 1.52
+        median_seconds: 1.52
+        max_seconds: 1.52
+      r1 && r1 && x0 && i && sgn.append((bx-ax)*(p[1]-ay)-(by-ay)*(p[0]-ax)) && i && ang && p && p && print(k,:
+        count: 1
+        total_seconds: 1.393
+        median_seconds: 1.393
+        max_seconds: 1.393
+      cd:
+        count: 1
+        total_seconds: 1.356
+        median_seconds: 1.356
+        max_seconds: 1.356
+      python3 && assert && print(fixed):
+        count: 1
+        total_seconds: 1.305
+        median_seconds: 1.305
+        max_seconds: 1.305
+      ? 'scripts && every && M && a && D4 && P && n && alternative-cover && and && Corollary
+        && the && the && the && Lemma && the && the && P && , && P && − && four && two &&
+        Memo && Step && Content && Lemma && Kind && 1 && The && 1, && coverage && 2 && Ten
+        && — && counting && 3 && 4 && **transfer** && 4 && Replacing && 1, && transfer, &&
+        5 && all && 3 && transfer && 6 && Case && the && Lemma && 5 && **structural: && 7
+        && By && each && metric && structural && 8 && The && all && I && 2 && counting &&
+        Counting && B, && I, && total && same && Section && f(.96) && 5)) && eq. && 2. &&
+        3. && 4. && 5. && E0 && μ1 && node && node && node && node && μ0 && contradiction.
+        && μ && P && n && two && by && P_i && (b) && corner-to-centre && the && (a, && explicitly
+        && hence && M0 && ² && (a, && ² && node && squares'
+      : count: 1
+        total_seconds: 1.3
+        median_seconds: 1.3
+        max_seconds: 1.3
+      ? 'outputs && Script && What && Key && `lemmas.py` && Lemma && Lemma && Lemma && f(.8536)
+        && f(.96) && f(.95) && f(.92) && f(.90) && min && ratio && at && `fig13_fig14_scaling.py`
+        && Figure-13 && Figure-14 && edge && strip && Figure && D–I && `interior_escape.py`,
+        && exact && see && box && `two_tier_check.py` && 400k && minimum && exp-016 && `symmetrization_witness.py`
+        && explicit && A-triple && BL && corner && 3.84 && `trump_at_U.py` && every && 2·P10
+        && corner && `skeleton.py` && T-018 && 1121 && corner && corner–centre && 8.964 &&
+        folded && Rung && it && n && Transfers? && Why && Exactly-one && P && n, && Partly
+        && exactly one && Alternative && Yes && Lemma && it && Forced && No && An && Packing-dependent
+        && No, && It && Open && Replaced && the && K4 && Yes, && Must && the && Figure-13
+        && No && Rigid && eleven && interior && A-forcing && Yes, && Survives && Integer &&
+        Generalised && Theorem && Theorem && the && Specific && (ii) && (iii) && P1 && − &&
+        branch && nothing && the && the && X-014 && X-019 && the && Lemma && their && it &&
+        S1, && none && the && the && so && record && feasible && a && parallel && seed &&
+        or && no && mutation-test && the && any && S2): && P && ls'
+      : count: 1
+        total_seconds: 1.232
+        median_seconds: 1.232
+        max_seconds: 1.232
+      ? "U && centre && s && u && , && v && 2):, {k: round(float(v),5) for k,v in m.items()})\n\
+        \    print(f && wall"
+      : count: 1
+        total_seconds: 1.216
+        median_seconds: 1.216
+        max_seconds: 1.216
+      sed:
+        count: 7
+        total_seconds: 0.603
+        median_seconds: 0.065
+        max_seconds: 0.155
+      ls:
+        count: 7
+        total_seconds: 0.535
+        median_seconds: 0.074
+        max_seconds: 0.091
+      ^:
+        count: 1
+        total_seconds: 0.084
+        median_seconds: 0.084
+        max_seconds: 0.084
+      grep:
+        count: 1
+        total_seconds: 0.077
+        median_seconds: 0.077
+        max_seconds: 0.077
+      ls && ls && ls && ls && ls:
+        count: 1
+        total_seconds: 0.073
+        median_seconds: 0.073
+        max_seconds: 0.073
+      wc:
+        count: 1
+        total_seconds: 0.071
+        median_seconds: 0.071
+        max_seconds: 0.071
+      ls && exp-060 && exp-11[3-9] && exp-12[0-9] && exp-064:
+        count: 1
+        total_seconds: 0.065
+        median_seconds: 0.065
+        max_seconds: 0.065
+      head:
+        count: 1
+        total_seconds: 0.063
+        median_seconds: 0.063
+        max_seconds: 0.063
+    by_command_family:
+      other:
+        count: 11
+        total_seconds: 31.483
+        median_seconds: 1.52
+        max_seconds: 14.48
+      toolchain:
+        count: 4
+        total_seconds: 5.373
+        median_seconds: 1.306
+        max_seconds: 1.563
+      inspection:
+        count: 37
+        total_seconds: 3.998
+        median_seconds: 0.065
+        max_seconds: 1.256
+      filesystem:
+        count: 1
+        total_seconds: 2.702
+        median_seconds: 2.702
+        max_seconds: 2.702
+      shell:
+        count: 1
+        total_seconds: 1.356
+        median_seconds: 1.356
+        max_seconds: 1.356
+    invoked:
+      cat: 44
+      echo: 28
+      head: 27
+      ls: 16
+      the: 16
+      cd: 12
+      sed: 11
+      Lemma: 8
+      P: 6
+      grep: 5
+      node: 5
+      wc: 4
+      python3: 4
+      V: 4
+      which: 3
+      C: 3
+      U: 3
+      cx: 3
+      cy: 3
+      n: 3
+      corner: 3
+      it: 3
+      (a,b)-(0,1): 2
+      v: 2
+      r1: 2
+      i: 2
+      p: 2
+      ',': 2
+      min: 2
+      every: 2
+      a: 2
+      −: 2
+      two: 2
+      The: 2
+      1,: 2
+      '2': 2
+      counting: 2
+      '3': 2
+      '4': 2
+      '5': 2
+      all: 2
+      f(.96): 2
+      (a,: 2
+      ²: 2
+      Figure-13: 2
+      'No': 2
+      Yes,: 2
+      Theorem: 2
+      ^: 1
+      tail: 1
+      exp-060: 1
+      exp-11[3-9]: 1
+      exp-12[0-9]: 1
+      exp-064: 1
+      pip list: 1
+      mupdf: 1
+      fitz: 1
+      pillow: 1
+      sympy: 1
+      mkdir: 1
+      golden: 1
+      cubic: 1
+      Lemma-4: 1
+      both: 1
+      equals: 1
+      bottom-row: 1
+      'F_G:': 1
+      central-mesh: 1
+      esc0: 1
+      esc_cov: 1
+      x0: 1
+      sgn.append((bx-ax)*(p[1]-ay)-(by-ay)*(p[0]-ax)): 1
+      ang: 1
+      print(k,: 1
+      H: 1
+      centre: 1
+      s: 1
+      u: 1
+      ? "2):, {k: round(float(v),5) for k,v in m.items()})\n    print(f"
+      : 1
+      wall: 1
+      'certified:': 1
+      dx,: 1
+      C2: 1
+      V2: 1
+      scripts: 1
+      M: 1
+      D4: 1
+      alternative-cover: 1
+      and: 1
+      Corollary: 1
+      four: 1
+      Memo: 1
+      Step: 1
+      Content: 1
+      Kind: 1
+      '1': 1
+      coverage: 1
+      Ten: 1
+      —: 1
+      '**transfer**': 1
+      Replacing: 1
+      transfer,: 1
+      transfer: 1
+      '6': 1
+      Case: 1
+      '**structural:': 1
+      '7': 1
+      By: 1
+      each: 1
+      metric: 1
+      structural: 1
+      '8': 1
+      I: 1
+      Counting: 1
+      B,: 1
+      I,: 1
+      total: 1
+      same: 1
+      Section: 1
+      5)): 1
+      eq.: 1
+      '2.': 1
+      '3.': 1
+      '4.': 1
+      '5.': 1
+      E0: 1
+      μ1: 1
+      μ0: 1
+      contradiction.: 1
+      μ: 1
+      by: 1
+      P_i: 1
+      (b): 1
+      corner-to-centre: 1
+      explicitly: 1
+      hence: 1
+      M0: 1
+      squares: 1
+      outputs: 1
+      Script: 1
+      What: 1
+      Key: 1
+      '`lemmas.py`': 1
+      f(.8536): 1
+      f(.95): 1
+      f(.92): 1
+      f(.90): 1
+      ratio: 1
+      at: 1
+      '`fig13_fig14_scaling.py`': 1
+      Figure-14: 1
+      edge: 1
+      strip: 1
+      Figure: 1
+      D–I: 1
+      '`interior_escape.py`,': 1
+      exact: 1
+      see: 1
+      box: 1
+      '`two_tier_check.py`': 1
+      400k: 1
+      minimum: 1
+      exp-016: 1
+      '`symmetrization_witness.py`': 1
+      explicit: 1
+      A-triple: 1
+      BL: 1
+      '3.84': 1
+      '`trump_at_U.py`': 1
+      2·P10: 1
+      '`skeleton.py`': 1
+      T-018: 1
+      '1121': 1
+      corner–centre: 1
+      '8.964': 1
+      folded: 1
+      Rung: 1
+      Transfers?: 1
+      Why: 1
+      Exactly-one: 1
+      n,: 1
+      Partly: 1
+      exactly one: 1
+      Alternative: 1
+      'Yes': 1
+      Forced: 1
+      An: 1
+      Packing-dependent: 1
+      No,: 1
+      It: 1
+      Open: 1
+      Replaced: 1
+      K4: 1
+      Must: 1
+      Rigid: 1
+      eleven: 1
+      interior: 1
+      A-forcing: 1
+      Survives: 1
+      Integer: 1
+      Generalised: 1
+      Specific: 1
+      (ii): 1
+      (iii): 1
+      P1: 1
+      branch: 1
+      nothing: 1
+      X-014: 1
+      X-019: 1
+      their: 1
+      S1,: 1
+      none: 1
+      so: 1
+      record: 1
+      feasible: 1
+      parallel: 1
+      seed: 1
+      or: 1
+      'no': 1
+      mutation-test: 1
+      any: 1
+      'S2):': 1
+      assert: 1
+      print(fixed): 1
+    invoked_families:
+      other: 281
+      inspection: 108
+      shell: 43
+      toolchain: 9
+      filesystem: 1
+    by_shell_shape:
+      python_heredoc:
+        count: 12
+        total_seconds: 34.481
+        median_seconds: 1.456
+        max_seconds: 14.48
+      compound:
+        count: 24
+        total_seconds: 5.364
+        median_seconds: 0.074
+        max_seconds: 2.254
+      heredoc:
+        count: 2
+        total_seconds: 2.532
+        median_seconds: 1.266
+        max_seconds: 1.3
+      python_inline:
+        count: 1
+        total_seconds: 1.563
+        median_seconds: 1.563
+        max_seconds: 1.563
+      simple:
+        count: 12
+        total_seconds: 0.785
+        median_seconds: 0.057
+        max_seconds: 0.155
+      pipeline:
+        count: 3
+        total_seconds: 0.187
+        median_seconds: 0.063
+        max_seconds: 0.073
+    by_thinking_level:
+      xhigh:
+        count: 55
+        total_seconds: 44.92
+        median_seconds: 0.074
+        max_seconds: 14.48
+    shell_traits:
+      pipes: 27
+      redirects_output: 11
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'
