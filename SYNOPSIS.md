@@ -208,7 +208,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
-| [Fixed-Pattern Adapter: Source Review](packing/cases/n11_five_dot_cover/fixed-pattern-source-admission.md) | dated review record | record | retained | — |
+| [Fixed-Pattern Adapter: Source Admission](packing/cases/n11_five_dot_cover/fixed-pattern-source-admission.md) | dated review record | record | retained | — |
 | [BC318 Adapter: Mathematical Source Admission](packing/cases/n11_five_dot_cover/wall-containment-source-admission.md) | dated review record | record | retained | — |
 | [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
 | [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
