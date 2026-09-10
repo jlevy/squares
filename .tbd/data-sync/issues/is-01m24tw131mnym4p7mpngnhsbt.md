@@ -5,12 +5,13 @@ title: "N11 overnight: fixed two-attainer mass discriminator"
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-10T04:57:58.112Z
-updated_at: 2026-09-10T04:57:58.112Z
+updated_at: 2026-09-10T06:16:06.180Z
 ---
 Under the post-PR139 three-block overnight plan, register and run the admitted fixed two-attainer construction once. The source is packing/devtools/wall_owner_two_attainer_obstruction.py and its source admission at packing/cases/n11_five_dot_cover/two-attainer-source-admission.md. Bind exp143 endpoint, exp146 wall and exp153 feasibility inputs, fixed row0/right and row187/left attainers, fixed x-axis, one deterministic inward perturbation, and independent strict original-D/patch/square-SAT replay.
 

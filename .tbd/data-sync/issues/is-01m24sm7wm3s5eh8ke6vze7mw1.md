@@ -5,7 +5,8 @@ title: "N11 overnight: three 3-hour research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 9
+version: 12
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
 child_order_hints:
@@ -16,7 +17,7 @@ child_order_hints:
   - is-01m24vex03yjx6wdsssw68r9kk
   - is-01m24vqhfhxy1q22z1a5610700
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T05:20:26.898Z
+updated_at: 2026-09-10T06:18:53.109Z
 ---
 The owner authorized unattended continuation after PR139 merges, in three sets of two to
 four hours.
@@ -24,9 +25,9 @@ Allocate three consecutive three-hour blocks, with checkpoints at most thirty
 minutes apart. Keep the scientific clock separate from the planning and source
 preparation performed while the merge checks run.
 
-The prospective plan is /private/tmp/n11-overnight-plan-final.md, to be adopted as
-docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md on a fresh codex
-branch after the merge.
+The prospective plan is now retained before the merge at
+docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md. The new agenda
+and session will be allocated on the fresh codex branch after the merge.
 Astra Max independently reviewed the strategy and the parent-bound formula; the
 strategy’s required corrections have been applied.
 Private agenda035 and session126 drafts are under /private/tmp/n11-overnight-scaffold/.
@@ -45,12 +46,14 @@ The work map is:
   a separately registered fixed-escape comparison
 - think-g3j7: the K5 and K6 format/readers work; the new private Sol lane initially
   delivers K6 and leaves uncompleted K5 mapping/admission open
-- think-a4an: obtain and review the author’s unretained A6 and H157/exp154 reports,
+- think-a4an: reconcile and independently review the author’s retained A6 and H157/exp154 reports,
   receipts, allocated IDs and active-process status
 - think-1ydi: reconstruct the W5 cadence and compare actual gate measurements under
   their declared regimes
 - think-i1fr: map the V3 spec to this plan, agenda, beads and acceptance evidence once
   its source is identified
+- Existing author idea154 and think-yc80: joint support/atom continuation, included in
+  the next comparison allocation without duplicating the task
 
 Block 1 resolves prepared mechanisms and admits the next tools.
 Block 2 selects the next comparison from actual source readiness, including incoming A6
@@ -73,3 +76,7 @@ Preserve the current native-usage publication restriction, while retaining local
 and ordinary validation receipts.
 Use the owner’s Practical Prose skills for durable text and the project’s formatter and
 validation tiers.
+
+## Notes
+
+The prospective three-block plan is now retained at docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md before the PR139 merge. Child beads link it through their spec field. Agenda035/session126 remain unallocated drafts until the new branch; source boundaries are exp154/H157/session125, with existing author idea154/think-yc80 incorporated instead of duplicated. A6 all2566 inequalities and H157 corrected geometry are replayed; A6 seven-row upper replay and final combined validation remain. The scientific nine-hour clock has not started. V3 source identification is unresolved under think-i1fr.

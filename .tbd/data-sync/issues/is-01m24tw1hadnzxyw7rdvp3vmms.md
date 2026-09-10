@@ -5,12 +5,13 @@ title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T05:37:53.906Z
+updated_at: 2026-09-10T06:16:06.740Z
 ---
 Implement and independently admit a necessary unit-parent centre-domain adapter, then prospectively register at most one paired comparison on the saved exp151 escape at tuple(0,0,0,7). The independent analytic review at /private/tmp/n11-parent-bound-independent-review.md passes the formula under exact unit rays, centre-preserving nearest-core selection, principal angular mismatch and the admitted global maximum bound D. Adopt that review under docs/project/reviews/ on the fresh post-PR139 branch before target use.
 
