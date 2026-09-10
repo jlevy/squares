@@ -5,15 +5,17 @@ title: "N11 daytime: test one changed core and direction-net threshold packet"
 kind: task
 status: open
 priority: 1
-version: 2
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - strategy
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
+child_order_hints:
+  - is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-10T16:03:43.524Z
-updated_at: 2026-09-10T18:38:46.034Z
+updated_at: 2026-09-10T19:17:31.185Z
 ---
 Run one 90–120 minute comparison that changes the strict-core/direction-net tradeoff
 relative to T026. Freeze one next net and one bounded rule for choosing the larger core,
@@ -29,4 +31,4 @@ changed threshold packet.
 
 ## Notes
 
-Promoted behind the BC326 checkpoint. Prospectively register one packet retaining T025's sites and relative weights with a 2880-step net, B=9981/10000, and D=207107/1440000000. Before launching, use the maintained dilation reader to prove its exact theoretical ceiling exceeds T026; the decimal estimate about 3.826721480476156 is only a planning guard. Freeze the packet and require agreement of exact and interval coverage routes. Failure rejects only this B/net packet; timeout is unresolved.
+Target-free BC329 preflight complete: D=207107/1440000000 and the exact geometric ceiling 3.826721480476156460... are valid and strictly exceed T026, but coverage is unmeasured. Freeze the T025 source scale and accept only if raw minimum m > M/11 = 685457679/687500000; then normalize deterministically by alpha=1/m. A raw charge below one alone is not a rejection. The existing refinement CLI runs adaptive sweeps and has no hard deadline, so BC329 is blocked on child think-qw9w for a bounded fixed-core runner and independent admission. Timeout or route disagreement remains unresolved; no scientific target has run.
