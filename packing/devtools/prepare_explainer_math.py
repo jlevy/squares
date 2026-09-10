@@ -818,7 +818,38 @@ _GEOMETRY_EARLY_READY = dedent("""
 _GEOMETRY_FONT_TRACE = dedent("""
     (() => {
       const trace = globalThis.__squaresGeometryFontTrace = {
-        time_origin_ms: performance.timeOrigin, first_math_request_ms: null, rejections: []
+        time_origin_ms: performance.timeOrigin, first_math_request_ms: null,
+        before_snapshot_complete: false, queued_calls: 0, rejections: []
+      };
+      const waiting = [];
+      let released = false;
+      globalThis.__squaresMarkGeometryBeforeSnapshotComplete = () => {
+        trace.before_snapshot_complete = true;
+      };
+      globalThis.__squaresReleaseGeometryFontGate = () => {
+        if (!trace.before_snapshot_complete) {
+          throw new Error('geometry font gate released before the before snapshot');
+        }
+        if (released) return;
+        released = true;
+        for (const invoke of waiting.splice(0)) invoke();
+      };
+      const invoke = (original, receiver, args) => {
+        const start = performance.now();
+        trace.first_math_request_ms ??= start;
+        let result;
+        try {
+          result = original.apply(receiver, args);
+        } catch (error) {
+          trace.rejections.push({source: String(args[0]),
+            elapsed_ms: performance.now() - start, reason: String(error)});
+          throw error;
+        }
+        Promise.resolve(result).then(undefined, error => {
+          trace.rejections.push({source: String(args[0]),
+            elapsed_ms: performance.now() - start, reason: String(error)});
+        });
+        return result;
       };
       let runtime;
       Object.defineProperty(globalThis, 'kpressMathText', {
@@ -829,14 +860,18 @@ _GEOMETRY_FONT_TRACE = dedent("""
           for (const name of ['render', 'hydrate']) {
             const original = api[name];
             api[name] = function(...args) {
-              const start = performance.now();
-              trace.first_math_request_ms ??= start;
-              const result = original.apply(this, args);
-              result.then(undefined, error => {
-                trace.rejections.push({source: String(args[0]),
-                  elapsed_ms: performance.now() - start, reason: String(error)});
+              const receiver = this;
+              if (released) return invoke(original, receiver, args);
+              return new Promise((resolve, reject) => {
+                trace.queued_calls++;
+                waiting.push(() => {
+                  try {
+                    Promise.resolve(invoke(original, receiver, args)).then(resolve, reject);
+                  } catch (error) {
+                    reject(error);
+                  }
+                });
               });
-              return result;
             };
           }
         }
@@ -1170,6 +1205,7 @@ async def _check_geometry_async(
     held: list[Route] = []
     released = False
     first_request: float | None = None
+    first_held_request = asyncio.Event()
 
     async def route_font(route: Route) -> None:
         nonlocal first_request
@@ -1183,6 +1219,7 @@ async def _check_geometry_async(
             )
         else:
             held.append(route)
+            first_held_request.set()
 
     async with async_playwright() as driver:
         browser_type = getattr(driver, browser_name)
@@ -1290,6 +1327,12 @@ async def _check_geometry_async(
                     }
                 """)
                 )
+            # The trace gate keeps KPress's production timeout clock stopped while
+            # this probe constructs and measures its deliberately altered before
+            # state. Start the real runtime only after those test styles are gone.
+            await page.evaluate("__squaresMarkGeometryBeforeSnapshotComplete()")
+            await page.evaluate("__squaresReleaseGeometryFontGate()")
+            await asyncio.wait_for(first_held_request.wait(), timeout=5)
             held_count = len(held)
             released = True
             release_started = time.time() * 1000
