@@ -233,7 +233,7 @@ def test_a_passed_gate_can_clear_certification_while_usage_stays_unmeasured(
 def test_agent_session_schema_allows_that_post_certification_state() -> None:
     payload, _meta = validate_schemas.payload_and_meta(SESSION_099)
     candidate = copy.deepcopy(payload)
-    candidate.pop("certification_pending")
+    candidate.pop("certification_pending", None)
     candidate["checks"].append("full gate: fast at 3a18a05a: passed")
     schema_path = REPO / "packing/campaign/schemas/agent-session.schema.yaml"
     validator = Draft202012Validator(safe_load(schema_path.read_text(encoding="utf-8")))
