@@ -31,6 +31,20 @@ from devtools import render_explainer_pdf as pdf
 _HEADER = b"%PDF-1.4\n"
 
 
+def _pages(count: int) -> bytes:
+    """A render carrying the page count `check` insists on.
+
+    The count is exercised rather than bypassed, because bypassing it is what made this
+    file's first version pass on a base where `check` had no page assertion and fail the
+    moment it did: a fake render is only a fake of the gates it actually reaches. The
+    writer puts `/Type /Page` at the end of a line, which is what `check` counts.
+    """
+    return b"".join(
+        b"%d 0 obj\n<< /Type /Page\n/Contents %d 0 R >>\nendobj\n" % (number, number + 1)
+        for number in range(1, count + 1)
+    )
+
+
 def _document(body: bytes, *, number: int = 1, declared: bytes = b"/Type /Page") -> bytes:
     return b"%s%d 0 obj\n<< %s >>\nstream\n%s\nendstream\nendobj\n" % (
         _HEADER,
@@ -110,7 +124,8 @@ def test_the_check_draws_every_render_it_is_asked_for(monkeypatch: pytest.Monkey
     """Ten renders is the guarantee the module claims; two is what the job pays for. A
     count that only reaches the first comparison would pass this file's other cases."""
     drawn: list[int] = []
-    monkeypatch.setattr(pdf, "render_pdf_bytes", lambda: (drawn.append(1), _document(b"x"))[1])
+    document = _HEADER + _pages(pdf.EXPECTED_PAGE_COUNT)
+    monkeypatch.setattr(pdf, "render_pdf_bytes", lambda: (drawn.append(1), document)[1])
     monkeypatch.setattr(pdf, "font_findings", lambda _: [])
     pdf.check(5)
     assert len(drawn) == 5
