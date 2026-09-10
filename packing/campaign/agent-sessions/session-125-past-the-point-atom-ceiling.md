@@ -1,12 +1,12 @@
 ---
-title: session-123 — pushing s(11) past the point-atom ceiling, and integrating the owner line
+title: session-125 — pushing s(11) past the point-atom ceiling, and integrating the owner line
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-123
+  id: session-125
   title: Pushing s(11) past the point-atom ceiling, and integrating the owner line
   date: '2026-09-08'
   started_at: '2026-09-08T23:31:43Z'
@@ -311,7 +311,7 @@ session:
     phase: 4
     status: completed
     outcome: This record; the Claude rollup for the session log committed under campaign/resource-usage rather than held out, so the pull request's cost block renders from the tree; session-close-report.yaml and the SYNOPSIS tables re-rendered; slices A5, B1 and C1 and the receipt-blob decision closed as beads and four follow-ups left open.
-    evidence: [packing/campaign/agent-sessions/session-123-past-the-point-atom-ceiling.md, packing/campaign/session-close-report.yaml]
+    evidence: [packing/campaign/agent-sessions/session-125-past-the-point-atom-ceiling.md, packing/campaign/session-close-report.yaml]
     files: [packing/campaign/resource-usage/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9.yaml, SYNOPSIS.md]
     checks: [records tier and fast tier green on the closeout tree before the push.]
     uncertainty: The rollup is a snapshot taken while the session was still running, so its totals are a lower bound on the session's cost, as every live receipt here is.

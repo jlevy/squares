@@ -105,7 +105,14 @@ match count was checked against an independent count.
 | `H-149` | `H-157` | " | " |
 | idea rows `139` to `144` | `148` to `153` | `ideas.md` only, anchored to the table cell | 6 |
 | `results/agenda-033/` | `results/agenda-034/` | `git mv`, then repository-wide reference pass | 97 files, 137 references over 35 files |
-| `session-114-past-the-point-atom-ceiling` | `session-123-past-the-point-atom-ceiling` | repository, file rename included | 8 over 4 files |
+| `session-114-past-the-point-atom-ceiling` | `session-125-past-the-point-atom-ceiling` | repository, file rename included | 8 over 4 files |
+
+That last row records two moves, not one.
+This reconciliation moved the session record from `session-114` to `session-123`. PR 147
+then allocated both `session-123` and `session-124` to the codex line, so a second pass
+on 2026-09-10 moved ours again, from `session-123` to `session-125`, on the same
+convention: the upstream line lands unchanged and this branch renumbers around it.
+The table gives the endpoints because those are what the repository now holds.
 
 The idea rows were matched on the table cell, `^\| 139 \|`, rather than on the digits.
 That was not caution: `research-2026-08-22-packing-11-unit-squares.md` and

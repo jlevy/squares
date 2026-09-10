@@ -24,7 +24,7 @@ advanced through PR 142 and PR 145, taking `H-143` through `H-151`, `agenda-033`
 agenda document to go with it, `session-114` through `session-122`, and `ideas.md` rows
 through 147. This branch renumbered a third time, clearing all of it, so every
 identifier it owns reads at its final value throughout this document: hypotheses `H-152`
-through `H-157`, results directory `results/agenda-034/`, session record `session-123`,
+through `H-157`, results directory `results/agenda-034/`, session record `session-125`,
 and idea rows 148 to 153. Only PR 142 was then merged; PR 145 is a draft whose last
 session is still running, so the slots it holds upstream are left empty here rather than
 filled. The upstream columns are unchanged and still read as of `a1fc0306`;
