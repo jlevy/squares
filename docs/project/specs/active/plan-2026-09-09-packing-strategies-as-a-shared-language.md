@@ -174,7 +174,9 @@ comparison between strategies honest.
 
 | Component | What it is |
 | --- | --- |
-| `packing/schemas/packing-strategy.schema.yaml` | The contract. Draft 2020-12, `oneOf` on `mechanism` so each phase validates against its own parameters. |
+| `packing/strategies/packing-strategy.schema.yaml` | What to do. Draft 2020-12, `oneOf` on `mechanism` so each phase validates against its own parameters. |
+| `packing/strategies/packing-animation.schema.yaml` | What happened. Frames of poses and a container side on logical time 0 to 1, what the colours should mean but never the colours, and both reference bounds so a gap bar draws without consulting a register. |
+| `packing/strategies/lab-components.yaml` and its schema | The lab's parts and what each reads. `environment` is load-bearing: seven are `static` and embed in a scriptless SVG, two are `interactive` and are excluded from the export by construction. |
 | `devtools/packing_strategy.py` | Loads, validates, executes. Holds the mechanism registry — the one table that knows how to run a phase. |
 | `devtools/known_structure.py` | Already built. Reads any of the 324 witnesses and yields a rung: contact edges, contact kinds, wall contacts, angle classes, thinned and rewired controls, and the constructive face assembly. |
 | `devtools/divide_and_concur.py`, `run_projection_ratchet.py` | Already built. The `project` and `ratchet` strategies. |
