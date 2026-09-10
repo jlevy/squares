@@ -3,18 +3,18 @@ type: is
 id: is-01m25zs0xky60mnw0q1fvb5bfz
 title: Independently verify the revised n11 explainer and rendered artifacts
 kind: task
-status: open
+status: closed
 priority: 1
-version: 6
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
 dependencies: []
 parent_id: is-01m25zrj5np9ywft00t8j8neaz
 created_at: 2026-09-10T15:42:56.946Z
-updated_at: 2026-09-10T20:24:55.914Z
-closed_at: null
-close_reason: null
+updated_at: 2026-09-10T22:58:20.543Z
+closed_at: 2026-09-10T22:58:20.542Z
+close_reason: "PR #148 is ready at 99c95b4f after source-bound architecture selection, implementation, version-history provenance, independent scope review, complete local validation, and all fresh hosted checks including WebKit. The explainer teaches T-018 first and adds the exact T-025/T-026 ladder without importing unproved research claims."
 resolution: null
 duplicate_of: null
 ---
@@ -30,4 +30,4 @@ choices rather than completeness claims.
 
 ## Notes
 
-Independent documentation review covers PR #148 head f7126bfc. The branch publishes the v0.4.0 explainer edition and exactly two source-derived history entries. v0.4.0 first became this explainer's edition label on September 10, 2026 at 35484ebd; v0.3.0 first became that label on September 8, 2026 at ce3b1ab5. T-018 remains the visual teaching spine; T-025 and T-026 retain their exact endpoint and weak-limit scopes; the individual-parent result is excluded because it supplies neither joint disjointness nor a new lower bound.\n\nLocal validation passes: 135 broad focused tests at 35484ebd, then 62 focused tests after the provenance qualification; Ruff, BasedPyright, generated-claim drift, prepared output, deterministic PDF/font, complete atlas, Flowmark and Practical Prose checks pass. Hosted build, prepare, Firefox, geometry, suite, sweeps, macOS and mergeability pass. Validate fails only on main's inherited expired session099 state. WebKit's 1280px saved custom-serif geometry probe reproduced one failure despite f712 changing only prose/comments; require the stacked rerun to decide it. Keep this task open until PR #148 is retargeted to the published research branch and stacked required checks pass.
+Independent review now closes on PR #148 head 99c95b4fe1ab82cc49507b1b689bf87e55ff277d. The final branch publishes v0.4.0 without a DRAFT label, keeps T-018 as the point-only teaching spine, and states T-025's exact 191/50 endpoint separately from T-026's weak limit 3.826447410572939744... with endpoint fit unresolved. The two-entry history is source-derived: v0.3.0 first used as this explainer's edition label on 2026-09-08 and v0.4.0 on 2026-09-10; v0.2.0 is omitted because v0.1.0 was the first labeled explainer carrying 3.81. Final local evidence: 125 focused tests, complete 324-entry known-best rebuild, all 86 browser-harness tests, deterministic 20-page PDF and generated-artifact checks, then the corrected required pre-push gate with 45/73 selected steps, Ruff and BasedPyright clean, and 5,005 tests passed/55 deselected in 1,152.21 seconds. Fresh hosted publication build, Firefox, WebKit, validate, suite, geometry, sweeps, macOS portability, mergeability and packing-required all pass. PR #148 is ready for review.
