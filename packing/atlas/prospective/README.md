@@ -71,6 +71,13 @@ ephemerally, parsed to numerical centre-and-angle facts, and retained as `Witnes
 with its attribution and `raw_asset_retained: false`. No Kingbird SVG above `n = 100` is
 retained in this repository, then or now.
 
+That is a statement about the *bytes*. The facts parsed out of them are not encumbered
+by the source’s copyright and carry none forward, regardless of source, which is the
+standing policy in [conventions](../../../conventions.md#6-provenance).
+The two rules point in different directions on purpose: the SVG is not retained because
+its terms do not clearly allow it, and the coordinates are retained because a coordinate
+is a fact.
+
 ## Rebuild
 
 From `packing`:

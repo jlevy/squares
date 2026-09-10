@@ -142,12 +142,17 @@ Neither is touched here.
 
 Each decision states the default this plan builds and the alternative it rejects.
 `D2` was the one the owner had to confirm before merge, and **it was confirmed on
-2026-09-10**: the derived numerical facts are retained in this project’s own atlas,
-because they are mathematical facts.
-The confirmation is for the Kingbird catalogue and covers derived facts only --
-`raw_asset_retained: false` stands, no source image is kept, and the UnitSquare
-release’s own `eligible-after-retention-control` status is untouched because it was not
-what was asked about.
+2026-09-10** -- not as an exception for one catalogue, but as the standing policy now
+recorded in [conventions](../../../../conventions.md#6-provenance): a source’s licence
+governs its bytes, not the mathematics they describe.
+Extracted centre-and-angle facts are facts about a geometric object, reshaped into this
+project’s own structures, and they carry no licence forward, regardless of source.
+Sources are still cited everywhere, because attribution here is an evidence rule rather
+than a licensing obligation.
+
+Retention of the source material itself is unchanged and still honours whatever each
+source asks: `raw_asset_retained: false` stands for the Kingbird catalogue and no source
+image is kept.
 
 **D1: horizon 324.** Build `101..324` in two chunks, `101..200` then `201..324`. Audit
 `325..400`; build it only under Phase 6, and only if the survey finds an authority

@@ -384,6 +384,31 @@ a reader crossing between them is warned.
 
 ## 6. Provenance
 
+**A source’s licence governs its bytes, not the mathematics they describe.**
+[convention, owner decision 2026-09-10] Two things are held apart everywhere in this
+project, and conflating them is a defect in both directions.
+
+*Acquisition and retention of source material* honours whatever the source asks.
+A page or an SVG is fetched under its own terms, retained only where those terms allow
+it, and never redistributed where they do not.
+`raw_asset_retained` records which way that went, per source, and the archive’s receipts
+record the fetch.
+
+*The mathematical facts extracted from it* -- a packing’s centre-and-angle coordinates,
+its container side, which squares touch -- are not encumbered by the source’s copyright,
+whatever that copyright is.
+They are facts about a geometric object, reshaped into this project’s own structures,
+and they carry no licence forward.
+**This holds regardless of source**: the same reading applies to a catalogue page with
+no stated terms, to a CC-BY-4.0 dataset, and to a paper’s figure.
+
+Sources are cited anyway, everywhere, and that is not a licensing obligation being
+discharged.
+It is what [Section 4](#4-evidence) requires of any claim: a reader has to be
+able to see where a number came from and go check it.
+Attribution is an evidence rule here, and it survives the licence question being
+answered either way.
+
 **Numbers are lifted from run data, never retyped.**
 [convention, spot-checked by review] The tables in a round’s body are derived from its
 archive.
