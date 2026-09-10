@@ -139,7 +139,7 @@ of the interior structure, and the migration between them is movement inside one
 | # | Finding | Status |
 | --- | --- | --- |
 | G7 | **The LP does not move.** The `sites-1` checkpoint with 1,400 structural site orbits added — **28,237 sites in 3,650 orbits**, 2,566 atom orbits, the same 15,021 carried rows, 15,021 x 6,216 with 44,292,847 nonzeros — solves cold to **`11.000000000`** (HiGHS, 33,473 iterations, **404.9 s**; matrices 34.5 s, model 10.3 s, driver total 441 s), against lane A4’s control **`10.999999999999945`** on the identical checkpoint and code path. Every one of the 1,400 orbits was new: **0 duplicated a site the vertex oracle had ever sampled** over four rounds. The dual does move, and hard: its support falls from A4’s 64 rows (512 placements) to **16 rows (128 placements)**. | CHECKED (LP float); rows carried unchanged and admissibility EXACT |
-| G8 | **No site set can ever move it, and here is the certificate.** Maximising total weight over the 280-placement support of the `1/25`-integral family, with weights tied across its 35 D4 orbits, subject to depth at most one at **every one of the 139,521 structural sites** and to all 2,566 atom orbits, returns **exactly 11**. The optimum is a D4-symmetric family of **64 admissible placements of total exactly 11** whose **exact maximum depth is exactly `1`** over all 14,344 arrangement vertices — `devtools.plateau_reader` reads K0, K1, K2, K3 all holding and does not refuse it — and which charges **every one of the 2,566 atom orbits at ratio exactly `1`, none violated** (independent check, 80 ambiguous memberships all decided by `Placement.contains` in `Fraction`s, 0 float verdicts corrected). A family of depth at most one everywhere satisfies the site-orbit dual constraint of *every* site set; this one also satisfies every atom column. **So the rows-complete certificate LP at `L = 153/40` on this atom set has value at least eleven for every site set whatsoever** — structural, vertex-driven, or exhaustive. `sqpack.fractional.ceiling.verify_ceiling` proves the same family independently, with no failed condition: *“no D4-symmetric measure of mass below 11 captures mass 1 in every closed B-square at a net angle in the container”*. Three routes, three primitives, one verdict. | EXACT ([`lane-a6-saturated-symmetric-153-40.json`](lane-a6-saturated-symmetric-153-40.json), [`lane-a6-reader-saturated-symmetric.json`](lane-a6-reader-saturated-symmetric.json), [`lane-a6-ceiling-atoms-saturated-symmetric.json`](lane-a6-ceiling-atoms-saturated-symmetric.json)) |
+| G8 | **No site set can ever move it, and here is the certificate.** Maximising total weight over the 280-placement support of the `1/25`-integral family, with weights tied across its 35 D4 orbits, subject to depth at most one at **every one of the 139,521 structural sites** and to all 2,566 atom orbits, returns **exactly 11**. The optimum is a D4-symmetric family of **64 admissible placements of total exactly 11** whose **exact maximum depth is exactly `1`** over all 14,344 arrangement vertices — `devtools.plateau_reader` reads K0, K1, K2, K3 all holding and does not refuse it — and which charges **every one of the 2,566 atom orbits at ratio exactly `1`, none violated** (independent check, 80 ambiguous memberships all decided by `Placement.contains` in `Fraction`s, 0 float verdicts corrected). A family of depth at most one everywhere satisfies the site-orbit dual constraint of *every* site set; this one also satisfies every atom column. **So the rows-complete certificate LP at `L = 153/40` on this atom set has value at least eleven for every site set whatsoever** — structural, vertex-driven, or exhaustive. `sqpack.fractional.ceiling.verify_ceiling` proves the same family independently, with no failed condition: *“no D4-symmetric measure of mass below 11 captures mass 1 in every closed B-square at a net angle in the container”*. Three routes, three primitives, one verdict. | EXACT ([`lane-a6-saturated-symmetric-153-40.json`](lane-a6-saturated-symmetric-153-40.json), [`lane-a6-reader-saturated-symmetric.json`](lane-a6-reader-saturated-symmetric.json), [`lane-a6-ceiling-atoms-saturated-symmetric.json`](lane-a6-ceiling-atoms-saturated-symmetric.json), over the atom set retained as [`lane-a6-atoms-2566-orbits.json`](lane-a6-atoms-2566-orbits.json)) |
 | G9 | **So the premise inverts: it is the atom language, not the site set, that pins `153/40` at eleven.** The same reader run on the certificate of G8 reports the **complete** two-of-three search at maximum charge **`11/8`** against budget 1 — violation `3/8` — and violated budget-one and rank-one floor atoms besides. The family that blocks every site set is itself cut by two-of-three atoms **outside the LP’s 2,566 orbits**. Lane A4’s P6 read “adding atoms moves the LP by `2.2e-13`” as the atoms being spent; what it actually measured is that the 24 atoms separated from *one dual vertex* miss the family that holds the face. The columns the method is short of are atoms, and they are nameable: the reader names one at violation `3/8` in 80 s. | EXACT |
 | G10 | **Where the excess ended up, and it is a third place.** The dual after the structural round has exact maximum depth **`36458333/31250000 = 1.166666656`** at **`(1.065518, 1.912500)`**, 24 placements meeting it, over 53,132 arrangement vertices in 6.5 s. That is **`y = L/2` exactly**, on the container’s horizontal centre line at `x = 1.0655` — neither S2’s mid-wall sliver at `x = 0.99964` nor A4’s interior tilted-pair meeting at `(1.2945, 1.8434)`, and it is led by the `25°`-`30°` inner pair at `(1.330, 1.392)`, the `2.6°` squares at `(1.532, 1.542)` and a `0.79°` wall square at `(0.547, 2.149)`. **The nearest of the 28,237 sites is `0.000125` away** — against A3’s `0.013`, A4’s `0.004230` before its atoms and `0.007740` after. The excess got 34 to 60 times closer to a sampled site *and `0.05` deeper* (`1.1667` against `1.1145`). And the site it is `0.000125` from is a **base** site the vertex oracle had already placed: the nearest of the 10,848 structural sites is `0.0097` away. The dual did not move away from the sites it was avoiding; it stepped into the cell next door to one of them, in a corner of the container the structural net covered thinly. | EXACT ([`lane-a6-excess-round1.log`](lane-a6-excess-round1.log)) |
 | G11 | **The migration is inside one region, not between two.** Every witness the record reports and the one measured here — `(1.71652, 1.71652)`, `(0.99964, 1.82788)`, `(1.300943, 1.847007)`, `(1.294501, 1.843441)`, `(1.065518, 1.912500)` — lies in the deep region the generator maps as one connected structure census (G3): a `0.02`-wide full-height seam column, a large interior region, and 22 % that is neither. The excess is not hopping between two special points; it is moving inside an area whose finest cells are `3e-4` wide and whose typical cells are `5e-3`, and G8 says it will keep doing so at any site density, because a weight-eleven family survives every site. | EXACT points; CHECKED census |
@@ -177,10 +177,12 @@ already building (its F1, F10) without pointing it at the LP’s own atom set.
 **And the corrected recipe works.** Section 10 runs the obvious loop — solve the
 fixed-support maximum, read the optimum with the plateau reader, add what it returns,
 re-solve — and **six atom orbits take the blocking support from exactly eleven to
-`10.4210526`**, bracketed exactly between a feasible family and a priced dual (G13).
-Twenty-four atoms separated from a dual vertex moved the LP by `2.2e-13`; six separated
-from the family that actually blocks it move their support by `0.579`. The scarce
-resource was never the atoms’ number, and never the sites.
+`10.4210526`**, bracketed exactly for that fixed-support program — between a family
+feasible for its selected finite rows, *not* for the depth-one program whose reader
+refuses it, and a priced dual (G13). Twenty-four atoms separated from a dual vertex
+moved the LP by `2.2e-13`; six separated from the family that actually blocks it move
+their support by `0.579`. The scarce resource was never the atoms’ number, and never the
+sites.
 
 Three consequences worth carrying forward.
 
@@ -218,8 +220,11 @@ Three consequences worth carrying forward.
 | exact dual bracket on the `10.42` optimum | 5.7 |
 | **LP with the six atoms as columns** (6,222 columns, 44,330,151 nonzeros): matrices / model / cold solve | 31.6 / 8.2 / **934.5** |
 
-Round two’s cost is itself a reading: **1.43 times the nonzeros bought more than ten
-times the simplex time**, and it had not converged when the lane closed.
+Round two has **no final state and no value**. It was left running when the budget
+closed, the container restart ended it, and its log (`chain-r2.log` in scratch) is zero
+bytes: it produced no result, and nothing in this report depends on one.
+Its cost is still a reading: **1.43 times the nonzeros bought more than ten times the
+simplex time**, and it had not converged when the lane closed.
 Scaling the site side is superlinear in exactly the range where it stops being
 affordable, which is a second, independent argument for G8’s conclusion — even if a site
 set could work, this one could not be solved.
@@ -239,6 +244,8 @@ the 825 s a single vertex-oracle round costs in the record.
 - **Round two did not finish.** The 4,000-orbit configuration (8,815 columns, 63.6 M
   nonzeros) was still in its cold solve after 71 minutes against round one’s 405 s, and
   the lane closed with it running.
+  It was left running, and the container restart ended it: `chain-r2.log` is zero bytes,
+  so the configuration has **no final state and no value** of any kind.
   Nothing depends on it — G7 measured the LP and G8 settles it for every site set — but
   it cost the second worker for the whole session and should have been sized from round
   one’s timing rather than launched beside it.
@@ -311,7 +318,7 @@ only a separation oracle’s proposal.
 | # | Finding | Status |
 | --- | --- | --- |
 | G12 | **One atom is not enough, and the support migrates the same way the sites did.** Adding the reader’s own two-of-three atom on the certificate family (3 points, budget 1, charge `11/8`, violation `3/8`) as a 2,567th atom row leaves the fixed-support maximum at **exactly 11** on a *different* family — 7 orbits, 56 placements, in place of 8 orbits and 64. The 280-placement support has enough freedom to absorb one cut, exactly as the optimal face absorbed A4’s 24. | EXACT ([`lane-a6-saturated-symmetric-plus1.json`](lane-a6-saturated-symmetric-plus1.json)) |
-| G13 | **Six atoms separated from the right object break eleven, where twenty-four separated from a dual vertex moved nothing.** Two loop rounds add **6 atom orbits** — two two-of-three and four three-of-five, budget 1 each, floor charges `11/8`, `11/8`, `33/32`, `5/4`, `5/4`, `5/4` — and the fixed-support maximum falls from exactly `11` to **`10.4210526`**, bracketed exactly: an exactly-feasible family of total `325657893/31250000 = 10.421052576` against an exact dual bound `2605263163/250000000 = 10.421052652` on 7 priced rows with `A^T u >= cost` verified in `Fraction`s. Round 1 read `k4` max charge `11/8` (complete), round 2 `5/4` (complete), each in 13 to 15 s. The loop then stops for a reason worth recording rather than for lack of atoms: **the `10.42` optimum has exact maximum depth `105263157/100000000 = 1.05263157`**, above one, so the reader refuses it at K2 as it refused every dual in lanes A3 and A4 — once the atoms bite, the optimum stops being a packing and starts exploiting the site gap again, and the loop would need lane A4’s gate bypass to continue. **Lane A4’s 24 atoms moved the LP by `2.2e-13`; these 6 move the blocking support by `0.579`.** The difference is not the number of atoms but the object they were separated from. | EXACT ([`lane-a6-loop-family-3-recheck.json`](lane-a6-loop-family-3-recheck.json), [`lane-a6-atom-loop.log`](lane-a6-atom-loop.log)) |
+| G13 | **Six atoms separated from the right object break eleven, where twenty-four separated from a dual vertex moved nothing.** Two loop rounds add **6 atom orbits** — two two-of-three and four three-of-five, budget 1 each, floor charges `11/8`, `11/8`, `33/32`, `5/4`, `5/4`, `5/4` — and the fixed-support maximum falls from exactly `11` to **`10.4210526`**, bracketed exactly **for that fixed-support program and no other**: a family of total `325657893/31250000 = 10.421052576` feasible for every one of that program’s selected finite rows — depth at most one at the 139,521 structural sites, the 2,566 atom orbits, the six seeded atoms — against an exact dual bound `2605263163/250000000 = 10.421052652` on 7 priced rows with `A^T u >= cost` verified in `Fraction`s. **It is not feasible for the depth-one program**, whose reader refuses it, so `10.4210526` is a value of the restricted program and not a bound on the depth-one one. Round 1 read `k4` max charge `11/8` (complete), round 2 `5/4` (complete), each in 13 to 15 s. The loop then stops for a reason worth recording rather than for lack of atoms: **the `10.42` optimum has exact maximum depth `105263157/100000000 = 1.05263157`**, above one, so the reader refuses it at K2 as it refused every dual in lanes A3 and A4 — once the atoms bite, the optimum stops being a packing and starts exploiting the site gap again, and the loop would need lane A4’s gate bypass to continue. **Lane A4’s 24 atoms moved the LP by `2.2e-13`; these 6 move the blocking support by `0.579`.** The difference is not the number of atoms but the object they were separated from. | EXACT ([`lane-a6-loop-family-3-recheck.json`](lane-a6-loop-family-3-recheck.json), [`lane-a6-dual-bracket-10-42.json`](lane-a6-dual-bracket-10-42.json), [`lane-a6-atom-loop.log`](lane-a6-atom-loop.log)) |
 | G14 | **The drop is a statement about one support, and the LP has others.** Adding the 6 orbits as columns to the round-one LP — 15,021 x 6,222, 44,330,151 nonzeros, the same 28,237 sites — re-solves to **`11.000000000`** (39,582 iterations, 934.5 s), and **all six new columns carry primal weight exactly zero** while the two-of-three block’s budget rises from `1.034274` to `1.114765` and the dual support from 16 rows to 37. The LP does not use the atoms that break the `1/25` support; it moves to a support they do not cut, exactly as it moved to a new deep cell after every site round. **One atom round on one support is to the atom side what one vertex round on one dual was to the site side.** The atoms do bite on the excess even so: the new dual (296 placements) has exact maximum depth `53703703/50000000 = 1.074074060` at `(1.048581, 1.912500)`, `0.000221` from the nearest site — the **same third structure on the centre line**, `0.017` to the left of G10’s witness and `0.09` shallower. Six atoms take `0.09` off the depth and nothing off the objective. | CHECKED (LP float); the excess and every atom’s validity EXACT |
 | G15 | So the shape of the remaining work is now legible, and it is a loop rather than a column count. Each side of the LP has a wide face and a cheap separation, and separating from one point of either face moves the dual rather than the objective. What §10 shows is that the **fixed-support** program *does* converge — six atoms, `0.579` — so the route is to iterate support and atoms together: solve the LP, take its dual’s support, run the fixed-support loop on that support until it falls below eleven, feed every atom back, re-solve. Each LP solve is 400 to 950 s and each fixed-support round about 20 s, so the loop is affordable; what it needs is lane A4’s gate bypass, because the fixed-support optima stop being packings after the first round (their depth reaches `1.0526`). | OPEN |
 
@@ -344,6 +351,14 @@ Their bytes are as delivered; nothing was reformatted.
   the same loop, retained unrun: it calls `two_of_three_maximum` directly rather than
   the reader’s CLI, which is faster but returns witnesses as membership-set indices that
   still need `shape_atom` to become points.
+- [`lane-a6-dual-bracket.py.txt`](lane-a6-dual-bracket.py.txt) — **written for the
+  2026-09-10 source handoff, not by the lane.** `lane-a6-symmetric-max.py.txt` computes
+  the dual bound of G13 and prints it; it serializes neither the priced rows nor their
+  multipliers, so the dual half of the bracket was not checkable from the record.
+  This rebuilds the identical program — same support, same rows, same seeds, same upward
+  rationalisation — and writes the dual out.
+  It reproduces `325657893/31250000` and `2605263163/250000000` on 7 priced rows in 13.5
+  s.
 
 **Instruments carried unchanged from the lanes that wrote them**, and therefore already
 retained in this directory rather than a second time here:
@@ -383,8 +398,13 @@ retained in this directory rather than a second time here:
 - The atom loop of §10: [`lane-a6-atom-loop.log`](lane-a6-atom-loop.log),
   `lane-a6-loop-family-{1,2,3}.json`,
   [`lane-a6-loop-family-3-recheck.json`](lane-a6-loop-family-3-recheck.json) (the
-  exactly bracketed `10.42` optimum), `lane-a6-loop-reader-{1,2,3}.json`,
-  `lane-a6-loop-atoms-{1,2}-{0,1,2}.json` (the six separated atoms),
+  exactly bracketed `10.42` optimum),
+  [`lane-a6-dual-bracket-10-42.json`](lane-a6-dual-bracket-10-42.json) (its dual side:
+  the seven priced rows, their exact multipliers, the support orbits each bounds, the
+  bound `2605263163/250000000` and the `A^T u >= cost` verification, with the plateau
+  reader’s refusal of the same family recorded beside them),
+  `lane-a6-loop-reader-{1,2,3}.json`, `lane-a6-loop-atoms-{1,2}-{0,1,2}.json` (the six
+  separated atoms),
   [`lane-a6-atom-from-certificate.json`](lane-a6-atom-from-certificate.json) and
   [`lane-a6-saturated-symmetric-plus1.json`](lane-a6-saturated-symmetric-plus1.json)
   (G12), and
@@ -402,6 +422,8 @@ rule here is the one lane X3 used — retain the receipts the findings cite, lea
 what a retained script rebuilds — and it is applied more sharply than usual because the
 mutation-snapshot cap in `devtools.run_negative_controls` had 34,954,039 bytes of
 headroom when this lane was retained.
+Retaining the atom set spent 6,660,580 of what was left: the snapshot measured
+135,994,139 bytes before and 142,654,719 after, against the 167,772,160-byte cap.
 
 | left in scratch | bytes | why |
 | --- | ---: | --- |
@@ -410,12 +432,25 @@ headroom when this lane was retained.
 | `structural-sites-153-40-x4000.json`, round two’s 4,000-orbit set | 2,567,953 | rebuilt in 15.4 s, and round two is OPEN, so nothing cites it |
 | `lp-struct/`, `lp-struct-atoms/`, `lp-struct-x4000/`, the three LP checkpoints | 52,782,351 | each is dominated by copies of the pre-existing `atoms.json` and `rows.json` inputs; the dual dumps the findings cite are retained above as separate files |
 
-**Inputs, all pre-existing scratch from the earlier lanes**: the `sites-1` checkpoint,
-the seven `153/40` duals, the `191/50` ceiling family
-([`ceiling-family-191-50.json`](ceiling-family-191-50.json)) scaled to `153/40`, and the
-2,566-orbit atom set.
+**Inputs from the earlier lanes.** The `sites-1` checkpoint, the seven `153/40` duals
+and the `191/50` ceiling family
+([`ceiling-family-191-50.json`](ceiling-family-191-50.json)) scaled to `153/40` remain
+pre-existing scratch.
+The **2,566-orbit atom set is now retained here** as
+[`lane-a6-atoms-2566-orbits.json`](lane-a6-atoms-2566-orbits.json), 6,660,580 bytes,
+SHA-256 `49f124c111bf778fc62506c418f53d5b5a67040a59b4f9794e7298ec482e811d`. G8’s
+conclusion — that the rows-complete LP at `153/40` is at least eleven for *every* site
+set — is a statement about that atom set, so naming the bytes is what makes it
+checkable: the 64-placement family was already retained, and this was the missing input.
+The four `lane-a6-ceiling-atoms-*.json` receipts named a scratch path for it and now
+name the retained bytes.
 
 Nothing tracked was edited by the lane, and the lane committed nothing.
+The retentions above and the wording corrections at G13 and in §6 were made afterwards,
+on 2026-09-10, from the finalization line’s review of this lane.
+**Identifiers allocated after `exp-154`**: idea row **154** and bead **`think-yc80`**,
+the joint support-and-atom iteration of G15. No experiment, hypothesis or session id was
+allocated after `exp-154` — the registers end at `exp-154`, `H-157` and `session-125`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
