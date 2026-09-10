@@ -78,12 +78,17 @@ The coordinator owns shared campaign records and Git integration.
 The order reflects present source readiness and expected information value.
 It is a working allocation, not a claim that one mathematical direction is intrinsically
 more productive than another.
+Strategy intake and BC326 are complete and retained below as history.
+BC329 is the next active direct attempt to improve the global lower bound.
+BC337 is a secondary parent-conditioning lane that may proceed in parallel while BC329’s
+runner is being admitted.
 
 | Rank | Block | Time | Exact deliverable and stop rule |
 | --- | --- | --- | --- |
-| 0 | Strategy intake and analytic pruning | 45 min | Reconcile the post-PR139 frontier, retain the parent-domain translation lemma, rank distinct routes, and select one dependency-ready block. Stop with an explicit dependency if no target is admitted. |
-| 1 | Necessary parent geometry on the saved owner escape | 60–90 min | Admit the prepared parent-domain adapter, first test the saved residual core’s own necessary parent box, then compare the complete B-only and parent-restricted owner classes at exp151’s fixed escape. Stop if source admission is incomplete after 45 minutes; do not replace the target with an angle or tuple scan. |
+| 0 | Strategy intake and analytic pruning — complete | 45 min | Reconciled the post-PR139 frontier, retained the parent-domain translation lemma, ranked distinct routes, and selected BC326 as the first dependency-ready block. |
+| 1 | Necessary parent geometry on the saved owner escape — complete | 60–90 min | Admitted the parent-domain adapter and ran the fixed exp151 target once. The residual survived its parent box; TR was already B-only incompatible, making its parent-domain arm redundant; BL, BR and TL were not run. H158 remains unresolved. |
 | 2 | One direct core and direction-net packet | 90–120 min after a fixed-core runner is admitted | Freeze the 2880-step net, one larger core, the original relative-weight scale and one deterministic normalization rule. Accept only when the raw minimum exceeds the exact budget threshold, both coverage routes agree, and dilation replay gives a limit strictly above T-026. A verified charge at or below that threshold rejects only the fixed relative-weight packet; timeout leaves it unresolved. |
+| 2P | Exact TR-incompatibility centre obstacle, in parallel | 45 min admission, then one 240 s scientific allowance inside a 300 s process | Keep exp151 direction 6, tuple `(0,0,0,7)`, open residual domain `C°`, and the same nine other closed centre-space obstacles. The control adds `P_TR + (-R)`; the candidate adds `K_TR` directly, with no second Minkowski expansion. Run once only after source-bound construction, clipping, a bounded runner and an independent reader are admitted. |
 | 3 | Weighted-atom admission, then a matched support comparison | 60–90 min for admission; a separate 90–120 minute target block | Version multiplicity semantics and make every producer, loader and coverage route agree before freezing one common-row control/candidate comparison. Accept finite improvement only when an exact candidate primal upper bound is below the control dual lower bound. |
 | 4 | Genuine-contact or snug-parent residual pilot | 60–90 min | Use the proved fixed-angle contact alternative to define one exact conditional domain. Admit physical contacts and all complementary branches before measuring; a result on one branch remains conditional. |
 | 5 | Mixed charges on one angle profile | 60–90 min after a common finite discriminator is admitted | Test a profile with changed charges or sites. Earlier neutral point-only profiles are controls for that finite language, not a general negative about angle conditioning. |
@@ -147,8 +152,8 @@ and
 
 ## Block 1: Necessary Parent Geometry
 
-This is the first selected research block if its source admission closes on time.
-Its saved object is exp151’s strict escape at tuple `(0,0,0,7)`.
+This completed protocol is retained for audit.
+Its saved object was exp151’s strict escape at tuple `(0,0,0,7)`.
 
 The adapter, source binder, closed result schema and production runner have now passed a
 target-free independent admission with 56 focused tests.
@@ -169,6 +174,60 @@ One positive restricted frame proves individual compatibility only.
 A complete nonpositive maximum can exclude the fixed pose in the declared class; zero
 supplies no neighbourhood radius.
 Neither result proves joint four-owner feasibility or a global selection theorem.
+
+Exp156 completed its sole registered invocation.
+The fixed residual lies inside its necessary parent box, and the first selected class,
+`TR / bottom-left:m1:j7`, has a strictly negative exact B-only maximum after all 181
+frames and literal replay.
+Since the parent-restricted TR set is contained in the B-only set, parent-domain gain is
+impossible for that class.
+Exp156 stopped without testing `BL`, `BR` or `TL`, leaving H158 unresolved and
+authorizing no rerun.
+
+### Parallel Secondary: The TR-Incompatibility Polygon
+
+BC337 asks a different fixed-domain question suggested by the exp156 result.
+Freeze exp151 direction 6, tuple `(0,0,0,7)`, the original B-only domains and sites, and
+the three `BL`, `BR` and `TL` patches.
+Let `C°` be the open residual-centre domain, and let `O` be the union of the same nine
+closed centre-space obstacles supplied by those sites and three patches.
+
+The control uses the existing TR centre-space collision obstacle `P_TR + (-R)`, where
+`R` is the fixed residual core.
+The candidate uses `K_TR` directly as a centre-space obstacle.
+It does not apply another Minkowski expansion to `K_TR`. For each of the 181 owner
+frames `f`, let `Z_f` be its admitted owner-centre polygon, and take the eight signed
+separating-axis directions `n` for that frame.
+With `rho_f(n)` and `rho_r(n)` the owner and residual support radii in direction `n`,
+freeze
+
+```text
+K_TR = closure(C°) ∩ intersection over all f and n of
+       {c: n·c <= min_{z in Z_f} n·z + rho_f(n) + rho_r(n)}.
+
+U0 = C° \ (O ∪ (P_TR + (-R))),
+U1 = C° \ (O ∪ K_TR).
+```
+
+The primary accepting result is exact area of `U1` equal to zero, confirmed by an
+independent polygon-union calculation.
+`C°` remains open and every obstacle remains closed, so a nonempty `U1` would be open
+and have positive area; exact zero area therefore implies `U1` is empty.
+Reject the fixed candidate only when a positive exact uncovered area is accompanied by
+both a rational strict escape in `U1` and a compatible TR witness.
+Any other completed result remains unresolved.
+No outcome applies to another direction, tuple, residual domain or owner-selection
+problem.
+
+The target is blocked until a source-bound constructor derives `K_TR` from every frame
+and signed axis, and an exact clipping pipeline, bounded runner and independent reader
+compare `U0` and `U1` without closing `C°` or expanding `K_TR` a second time.
+Admission stops after 45 minutes.
+Only then may one prospectively registered run receive a 240-second scientific allowance
+inside a 300-second external process with two-second termination grace.
+There is no retry.
+This lane is secondary and parallel to BC329; it does not displace the
+next active direct core and direction-net packet below.
 
 ## Block 2: A Direct Core and Direction-Net Packet
 

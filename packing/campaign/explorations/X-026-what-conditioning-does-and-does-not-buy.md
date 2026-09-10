@@ -45,7 +45,7 @@ exploration:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md
   - packing/campaign/explorations/X-024-two-lines-at-eleven.md
   - packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md
-  proposes: [H-157]
+  proposes: [H-157, H-158]
 ---
 # X-026 — What Conditioning Does and Does Not Buy: Definitions, and a Ladder of Inference
 

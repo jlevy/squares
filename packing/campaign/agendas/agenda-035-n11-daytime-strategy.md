@@ -61,22 +61,24 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: Does the necessary unit-parent centre domain exclude exp151's saved residual escape itself or
       eliminate its individually compatible owner class?
+    hypotheses: [H-158]
     budget: One 60–90 minute block. Source admission stops at 45 minutes; an admitted target keeps its
       90-second internal and 120-second external allowance plus termination grace.
     entry: BC325 closes; the reviewed adapter and constructor repairs are adopted, independently checked,
       and bound to a clean execution revision and complete source manifest.
-    exit: Exact residual self-exclusion; or a replayed B-only positive witness and a complete nonpositive
-      parent-restricted owner maximum; or a precise source-admission dependency with no target run.
+    exit: Exact residual self-exclusion; a replayed B-only positive witness with a complete nonpositive
+      parent-restricted owner maximum; B-only incompatibility; four positive parent-restricted witnesses;
+      or an exact partial or invalid disposition without a promoted claim.
     bead: think-fx2y
     depends_on: [BC-325]
-    next_evidence: The complete target-free instrument passed independent admission after 56 focused tests,
-      exact clock and timeout adversaries, closure-wide source binding, Ruff and BasedPyright. Freeze this
-      surface in a clean revision, prospectively register the unchanged fixed target and fresh output path,
-      and only then run it.
+    next_evidence: Exp156 is retired after its sole registered invocation returned B-only incompatibility at
+      the first selected owner. Since the parent-restricted TR set is contained in its B-only set, no parent
+      gain is possible there. Any further test of H158 requires a separately registered protocol that skips
+      TR and tests BL, BR and TL; exp156 does not authorize a rerun or continuation to those owners.
     workflows: [research-loop]
     program: n11-daytime-strategy
     artifacts:
@@ -92,7 +94,68 @@ agenda:
     - packing/tests/test_wall_owner_parent_compatibility.py
     - packing/tests/test_wall_owner_parent_experiment.py
     - packing/tests/test_wall_owner_parent_inputs.py
+    - packing/campaign/hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-035/exp-156-unit-parent-saved-residual.json
     parallel_group: parent-geometry
+    outcomes:
+    - scope: Does the necessary global-D parent domain exclude the fixed exp151 residual or produce a
+        matched parent-domain gain for an individually selected owner under exp156's frozen stopping rule?
+      classification: inconclusive
+      result: The residual is inside its necessary parent box. The sole source-bound run then exhausts all
+        181 B-only frames for TR / bottom-left:m1:j7 and replays the exact negative global maximum
+        -15763158018896271297670126092574371280133688071/116321554678452558303608800190641648704779316000.
+        The old model therefore already excludes that owner. Set inclusion makes parent-domain gain
+        impossible for TR, so its restricted arm is redundant. The later three owners were not run, and
+        H158 is neither accepted nor rejected. External command wall, including mandatory in-process
+        readback and supervision, was 20.628132708 seconds. The receipt's 9.084778667-second publication
+        clock was sampled before that readback; a later Astra audit re-read the saved receipt in 9.26
+        seconds as separate review work.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-035/exp-156-unit-parent-saved-residual.json
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md
+      disposition: retire-negative
+      follow_up: null
+  - id: BC-337
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: blocked
+    priority: 2
+    question: Does substituting the exact TR all-owner-incompatible centre-space obstacle K_TR for the
+      control obstacle P_TR + (-R) make the fixed exp151 direction-6 residual domain covered?
+    budget: A 45-minute source-admission stop, followed only after admission by one 240-second scientific
+      allowance inside one 300-second external process plus two-second termination grace. One invocation, no
+      retry or parameter sweep.
+    entry: >-
+      BC326 closes with the fixed exp151 direction-6 residual inside its parent box and TR already
+      incompatible under the complete B-only class. Freeze tuple (0,0,0,7), C° as the open residual-centre
+      domain, and the same other nine closed centre-space obstacles from the original sites and BL, BR and TL
+      patches. The control adds the existing TR centre-space collision polygon P_TR + (-R). The candidate
+      instead adds K_TR directly, with no second Minkowski expansion, where K_TR = closure(C°) ∩ intersection
+      over all 181 frames f and eight signed SAT axes n of {c: n·c <= min_{z in Z_f} n·z + rho_f(n) +
+      rho_r(n)}. Define U0 and U1 by removing, respectively, those control and candidate obstacles together
+      with the same other nine obstacles from open C°.
+    exit: Exact area(U1) = 0 with independent polygon-union confirmation, which implies U1 is empty because
+      C° remains open and every obstacle is closed; or positive exact area together with a rational strict
+      escape in U1 and a compatible TR witness; or an exact partial, timeout or invalid disposition without
+      inference beyond the fixed direction and domain. Record U0 under the same open-domain convention.
+    bead: think-0cdq
+    depends_on: [BC-326]
+    blocked_on: No admitted source-bound constructor derives K_TR from all 181 frames and eight signed SAT
+      axes per frame, and no admitted exact clipping pipeline, bounded runner or independent reader compares
+      U0 and U1 while preserving open C° and avoiding a second expansion of K_TR.
+    next_evidence: Build and independently admit the source-bound K_TR constructor, exact clipping and union
+      calculation, bounded runner and independent reader. BC329 remains the higher-priority direct
+      global-bound target; BC337 is a parallel secondary lane and must register its hypothesis and sole target
+      only after tool admission.
+    workflows: [research-loop]
+    program: n11-daytime-strategy
+    artifacts:
+    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-151-selected-six-dot-cover.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-035/exp-156-unit-parent-saved-residual.json
+    parallel_group: parent-half-plane-followup
   - id: BC-327
     purpose: research
     owner_focus: insight
