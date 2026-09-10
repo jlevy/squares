@@ -113,7 +113,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
 | [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 6 | think-c53m | Continue BC-264 under think-mq0d, whose operational certification and draft-publication prerequisites are retained in this record and owned by think-m2lx. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation. |
 | [session-098](agent-sessions/session-098-residual-skeleton.md) | stopped | contemporaneous | `insight-iteration` (correctness) | `documentation-pass` (correctness) | 4 | think-oli1 | After final-delta validation and publication, retain existing BC-264 / think-mq0d as the next portfolio pricing entry under its separate owner. Check live ownership and accept its kernel-specific prerequisites before at most30 minutes of feature and full-verification pricing; no automatic target or hierarchy. |
-| [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-10 (twice; the budget note rules out a third time and names what closes it, think-y0hr), until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
+| [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | stopped | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | Keep resource usage unmeasured unless exact native harness data becomes available; the source checkpoint is certified at cc98c774, and current n11 work continues under Agenda035. |
 | [session-100](agent-sessions/session-100-duality-kill-tests-and-unit-value.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-7lp3 | Coordinator: keep H-129 open and use the dated correction's retained exp-070 family, exact unit transport, and net-bound resume contract. The original scratch state has not been recovered. The certification debt under think-7lp3 clears only with the next qualifying gate on the integrated branch; source replay and instrument controls come before a separately registered target continuation. |
 | [session-101](agent-sessions/session-101-corner-skeleton-ownership.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (process) | 2 | think-1136 | Under think-kbci the coordinator attaches the resource rollup, allocates the experiment id for the corner-pair theorem and H-128's recorded verdict, and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the pair-priced margin (phase G) is the next session's first step. |
 | [session-102](agent-sessions/session-102-angle-band-theorems-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 2 | think-ndqj | Under think-kbci the coordinator allocates experiment ids for Theorems A, B and C and the H-131 replay and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads this lane and decides whether the end band continues at grid 119 and 159 from k = 9 and whether the band toward 40.19° runs at grid 119. |
@@ -691,7 +691,7 @@ Status: **completed**. Test whether unavoidable corner owners make residual cove
 
 ### [agenda-033](agendas/agenda-033-overnight-owner-geometry.md) — Overnight Owner-Geometry Research
 
-Status: **active**. Make the largest defensible progress toward stronger n11 lower bounds by independently auditing the five-dot branch exclusion, strengthening forced-owner geometry using the walls, and expanding certified cases only where exact evidence supports it. Preserve unchanged global bounds until an exhaustive physical argument exists.
+Status: **completed**. Make the largest defensible progress toward stronger n11 lower bounds by independently auditing the five-dot branch exclusion, strengthening forced-owner geometry using the walls, and expanding certified cases only where exact evidence supports it. Preserve unchanged global bounds until an exhaustive physical argument exists.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
@@ -700,16 +700,35 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed 128 relations, preserved only the two baseline labels and added none. This bounded containment transfer did not certify another owner selection; BC319 tests direct fixed-dot coverage. |
 | BC-319 | research | 11 | complete | 1 | think-ykd6 | Exp148 partial: two checked witnesses show fixed D misses 49,152 labels, while analytic D-preserving transport shows it misses 61,440. Exp149 shows that fixed D misses the selected four-patch residual relaxation for tuple label (0,0,0,7) at owner-000; it does not refute that physical owner tuple. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple. |
 | BC-320 | research | 11 | complete | 1 | think-ykd6 | Exp153 refutes every one-site extension of fixed D on the selected four-patch relaxation for tuple label (0,0,0,7): its exact support intersection is empty after 188 directions. Exp150 tested only the unchanged B-core owner model and found four frame-0 compatibility witnesses; it did not test unit parents or simultaneous owners. BC324 now audits which further implications are valid before any successor target is registered. |
-| BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
+| BC-321 | research | 11 | stopped | 3 | think-en2r | H135 remained unrun in this agenda. The fresh daytime reserve is owned by BC-331 and think-lkvd; the old protocol and output path remain untouched. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
 | BC-323 | measurement_validation | 11 | complete | 1 | think-ta8s | PR142 head8a35b482 passed matching fast/page and deferred34380372729; all four research-job checkout revisions were verified. PR142 is ready and unmerged; successor branch codex/n11-owner-core-compatibility is open. Native publication-tail receipt closes17:21:40UTC; Session121 starts there. |
-| BC-324 | measurement_validation | 11 | in_progress | 1 | think-rm3k | The required global routing statement is: for every hypothetical physical packing P, there exists at least one valid owner selection for P whose selected family has been excluded. The current record does not prove that statement. Complete the interpretation block before selecting or registering another scientific target. |
+| BC-324 | measurement_validation | 11 | complete | 1 | think-rm3k | The required global routing statement remains: for every hypothetical physical packing P, there exists at least one valid owner selection for P whose selected family has been excluded. The daytime agenda separates that theorem from parent-domain, threshold, and support experiments. |
+
+### [agenda-035](agendas/agenda-035-n11-daytime-strategy.md) — N11 Daytime Strategy and Research Blocks
+
+Status: **active**. Select and execute short, high-information blocks across distinct routes to a stronger n11 result. Preserve exact scope, put the most direct theorem paths first, and keep the standalone explainer update reviewable in parallel.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-325 | research | 11 | complete | 1 | think-gvlg | BC326 is selected first. The independent translation review then promotes BC329's one frozen 2880-step packet ahead of a weighted target, while BC327 remains blocked on multiplicity admission, a paired-program adapter and a freshly materialized row manifest. |
+| BC-326 | research | 11 | ready | 1 | think-fx2y | The complete target-free instrument passed independent admission after 56 focused tests, exact clock and timeout adversaries, closure-wide source binding, Ruff and BasedPyright. Freeze this surface in a clean revision, prospectively register the unchanged fixed target and fresh output path, and only then run it. |
+| BC-327 | research | 11 | blocked | 2 | think-yc80 | The conditional primary is the retained seven-token, threshold-four K5 motif. Run its W7 admission before allocating the paired scientific comparison; do not substitute ordinary atoms inside the same protocol. |
+| BC-328 | research | 11 | complete | 1 | think-02l0 | Use the reviewed adjacent-wall component normal form to define one snug-parent or genuine contact-path pilot. Preserve the complementary path-length branches and verify physical contact rather than treating an arbitrary tight support row as contact. |
+| BC-329 | research | 11 | blocked | 1 | think-17qa | Build and independently admit that fixed-core runner. Then prospectively register one packet retaining T025's sites and relative weights with a 2880-step net, B=9981/10000, D=207107/1440000000, raw acceptance threshold M/11=685457679/687500000, and normalization alpha=1/m. Require complete exact and interval agreement plus dilation replay on the same normalized bytes. |
+| BC-330 | research | 11 | blocked | 2 | think-vx0p | Use BC326 and BC328 to select a meaningful class; do not treat one class as the global existential owner-selection theorem. |
+| BC-331 | research | 11 | ready | 2 | think-lkvd | Keep as the prepared reserve when higher-ranked work waits on source review. |
+| BC-332 | tool_validation | 11 | complete | 1 | think-b5b1 | BC334 implements the selected incremental architecture: retain the T018 worked proof and add T025/T026 as an advanced final section. |
+| BC-334 | tool_validation | 11 | complete | 1 | think-gv5a | PR148 at f7126bfc implements the section and v0.4.0 edition and has passed the complete local documentation block. BC335 owns the stack-only hosted checkpoint. |
+| BC-336 | tool_validation | 11 | complete | 1 | think-ccsi | PR148 commit 35484ebd first uses v0.4.0 as this explainer's edition label on September 10, 2026; commit ce3b1ab5606307ed5cb6780da09c1b5f233ab2e1 first uses v0.3.0 as that label on September 8, 2026. Both dates are rendered from one release-history source and covered by focused tests. |
+| BC-335 | tool_validation | 11 | blocked | 1 | think-0zc1 | The independent mathematical review passed after narrowing the T025 endpoint and standalone-checker wording; the final audit also defined core, trace, charge, endpoint certificate and weak limit before use. Retarget PR148 after the research branch is pushed, then wait for the stacked hosted checks. |
+| BC-333 | measurement_validation | 11 | ready | 2 | think-1ydi | Reconstruct cadence after each terminal block; administrative planning does not reset it. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 110 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 111 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -846,7 +865,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-153 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
 | H-154 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
 | H-155 | blocked | proof | For at least one four-owner class of PR 137's sixteen-per-corner struc |  | 0 |  |  |
-| H-156 | blocked | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 0 |  |  |
+| H-156 | confirmed | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 1 |  | 111.9m wall |
 | H-157 | refuted | proof | Refining the corner-owner angular bins from eight to sixteen makes eve |  | 1 |  | 5.9m wall |
 
 ## Needs review — held for a human, not decided
@@ -939,7 +958,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 | exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
-### accepted (37)
+### accepted (38)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -980,6 +999,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-145 | series-000 | 11 | GPT-6 Astra coordinator; instrument by GPT-5.6 Sol extra high; mathematical review by GPT-6 Astra max | H-143 | All 361 required directions completed with exact zero uncovered area. The independent finite-net calculation confirms the retained five-dot coverage; shared analytic owner and strict-core transfer premises remain separate. No global bound or confirmation-rung change. |
 | exp-146 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-144 | All sixteen classes completed with exact nesting; twelve wall-aware footprints properly contain their old endpoint footprints. Four are equal and none is impossible. This accepts the frozen geometric mechanism, without an extra covered tuple or a global bound change. |
 | exp-152 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-150 | A nonempty two-dimensional four-vertex region survives the two necessary core constraints. This accepts only the two-witness screen, not any all-direction cover or tuple exclusion. |
+| exp-155 | series-000 | 11 | Claude Fable measurement lane; retrospectively registered from the retained exact lane and T-026 proof packet without a new run | H-156 | T-026 proves the first disjunct of H-156. It excludes every smaller side through strict rational dilations but does not decide whether eleven squares fit at the displayed limiting endpoint. |
 
 ### baseline (11)
 
@@ -1018,7 +1038,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-110 rounds, 2152.1 agent-minutes, 1373.0 wall-minutes.
+111 rounds, 2152.1 agent-minutes, 1484.9 wall-minutes.
 
 ## Exploration reports not yet codified
 

@@ -70,6 +70,13 @@ allOf:
       properties:
         status: {const: stopped}
         stop_reason: {type: string, pattern: "\\S"}
+  - if:
+      required: [resource_usage_unmeasured]
+    then:
+      required: [resource_rollups]
+      properties:
+        status: {const: stopped}
+        resource_rollups: {maxItems: 0}
 properties:
   id:
     type: string
@@ -218,6 +225,41 @@ properties:
       passed fast/full declaration conflicts with this field. Remove the field only
       after an actual qualifying pass covers the handed-over source. Completed
       sessions and final pre-merge coverage retain their existing requirements.
+  resource_usage_unmeasured:
+    type: object
+    additionalProperties: false
+    required: [reason, detail, disposition_bead, handoff_role]
+    properties:
+      reason: {const: native_harness_data_unavailable}
+      detail:
+        type: string
+        pattern: "\\S"
+        description: >-
+          Concrete reason the native harness cannot produce a receipt. Session clocks,
+          delegate durations, prose estimates and reconstructed totals are not substitutes.
+      disposition_bead:
+        type: string
+        pattern: "^think-[a-z0-9]+$"
+        description: >-
+          Bead under which the missing native source was investigated and this explicit
+          unmeasured disposition was recorded. It is provenance, not an open debt, and
+          may therefore name a closed bead. The session-rollup checker requires it to
+          resolve whenever tbd can answer and leaves existence unresolved when tbd is
+          unavailable.
+      handoff_role:
+        enum: [administrative_closeout, work_handoff]
+        description: >-
+          Whether terminalizing the unmeasured record only closes historical
+          administration, or whether this session still owns the current work handoff.
+          The synopsis selector excludes only a fully valid administrative_closeout;
+          work_handoff retains ordinary terminal-clock ordering.
+    description: >-
+      Narrow terminal exception for a stopped session whose native harness data is no
+      longer available to measure. It requires an explicit empty resource_rollups list
+      and names the bead that dispositioned the missing measurement. Measurement and
+      certification are independent: this marker can remain after a later gate clears
+      certification_pending. It does not permit a completed session or a silent omission,
+      and it must be removed if an exact receipt later becomes available.
   budget:
     type: object
     additionalProperties: false
@@ -342,7 +384,9 @@ properties:
       privacy-reduced `CodexTaskTreeDelta` intervals whose association with the session is
       declared here because the Codex harness exposes no Git-branch field. Required to be
       nonempty at a terminal state and checked by `devtools.check_session_rollups`, because
-      without it there is no link from a session to what it cost. Absent on sessions that
+      without it there is no link from a session to what it cost. The only post-boundary
+      exception is a stopped record with a validated resource_usage_unmeasured declaration;
+      that records missing measurement rather than supplying one. Absent on sessions that
       closed before the field existed; the checker names those rather than pretending they
       comply.
   stop_reason:

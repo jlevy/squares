@@ -54,6 +54,7 @@ from devtools.check_session_rollups import (
     GRANDFATHERED_BEFORE,
     canonical_resource_rollup_reference,
     unique_resource_rollups,
+    unmeasured_resource_problems,
 )
 from devtools.codex_task_tree_delta import validate_delta_document
 from devtools.render_pr_rollup import agenda_payload, current_branch
@@ -230,6 +231,27 @@ def regenerate(log: Path, extra: list[Path]) -> list[str]:
     return written
 
 
+def resource_measurement_problems(ident: str, payload: dict) -> list[str]:
+    """Return terminal measurement errors under the shared rollup contract."""
+    if "resource_usage_unmeasured" in payload:
+        return unmeasured_resource_problems(ident, payload)
+    declared = unique_resource_rollups(payload)
+    if payload.get("status") in TERMINAL and not declared and ident >= GRANDFATHERED_BEFORE:
+        return [f"{ident}: terminal and declares no resource measurement"]
+    return []
+
+
+def unmeasured_resource_reason(payload: dict) -> str | None:
+    """Render one already-validated unavailable-native-data declaration."""
+    marker = payload.get("resource_usage_unmeasured")
+    if not isinstance(marker, dict):
+        return None
+    detail = marker.get("detail")
+    if not isinstance(detail, str):
+        return None
+    return f"native harness data unavailable; {detail.strip()}"
+
+
 def report(session_id: str | None) -> int:
     sessions = load_sessions()
     declared_all: set[str] = set()
@@ -253,11 +275,7 @@ def report(session_id: str | None) -> int:
             for reference in declared
             if (path := receipt_path(reference)) is None or not path.exists()
         ]
-        # Same boundary the gate's own checker uses, imported rather than restated: a
-        # session that closed before the field existed cannot be faulted for not using it.
-        grandfathered = ident < GRANDFATHERED_BEFORE
-        if payload.get("status") in TERMINAL and not declared and not grandfathered:
-            problems.append(f"{ident}: terminal and declares no rollups")
+        problems.extend(resource_measurement_problems(ident, payload))
         problems.extend(f"{ident}: declares {name}, which is not on disk" for name in missing)
 
         if session_id is None:
@@ -274,29 +292,34 @@ def report(session_id: str | None) -> int:
             print(f"       {outcome[:150]}{'…' if len(outcome) > 150 else ''}")
         print()
 
-        print(f"  {len(declared)} rollups declared")
-        for reference in declared:
-            path = receipt_path(reference)
-            name = Path(reference).name
-            if path is None or not path.exists():
-                print(f"    MISSING  {reference}")
-                continue
-            if contract_of(path) == CODEX_CONTRACT:
-                c = codex_receipt_summary(path)
-                bound = " lower-bound" if c["snapshot_incomplete"] else ""
-                print(
-                    f"    codex     {name[:38]:<38} responses "
-                    f"{c['model_responses']!s:>5}  agent {c['agent_hours']}h  "
-                    f"wall {c['wall_hours']}h{bound}"
-                )
-            else:
-                t = totals(path)
-                kind = "session" if not name.startswith("agent-") else "sub-agent"
-                print(
-                    f"    {kind:<9} {name[:38]:<38} "
-                    f"turns {t['turns']!s:>5}  calls {t['calls']!s:>5}  "
-                    f"errors {t['errors']!s:>3}  {t['hours']}h"
-                )
+        reason = unmeasured_resource_reason(payload)
+        if reason is not None:
+            print("  resource measurement: UNMEASURED")
+            print(f"    {reason}")
+        else:
+            print(f"  {len(declared)} rollups declared")
+            for reference in declared:
+                path = receipt_path(reference)
+                name = Path(reference).name
+                if path is None or not path.exists():
+                    print(f"    MISSING  {reference}")
+                    continue
+                if contract_of(path) == CODEX_CONTRACT:
+                    c = codex_receipt_summary(path)
+                    bound = " lower-bound" if c["snapshot_incomplete"] else ""
+                    print(
+                        f"    codex     {name[:38]:<38} responses "
+                        f"{c['model_responses']!s:>5}  agent {c['agent_hours']}h  "
+                        f"wall {c['wall_hours']}h{bound}"
+                    )
+                else:
+                    t = totals(path)
+                    kind = "session" if not name.startswith("agent-") else "sub-agent"
+                    print(
+                        f"    {kind:<9} {name[:38]:<38} "
+                        f"turns {t['turns']!s:>5}  calls {t['calls']!s:>5}  "
+                        f"errors {t['errors']!s:>3}  {t['hours']}h"
+                    )
         print()
         print(
             f"  stop reason: {' '.join(str(payload.get('stop_reason') or '—').split())[:160]}"
@@ -326,8 +349,25 @@ def report(session_id: str | None) -> int:
             print(f"  {problem}")
         return 1
 
-    terminal = sum(1 for p in sessions.values() if p.get("status") in TERMINAL)
-    print(f"{terminal} terminal sessions, all declaring rollups that exist")
+    terminal_ids = {
+        ident for ident, payload in sessions.items() if payload.get("status") in TERMINAL
+    }
+    explicitly_unmeasured = {
+        ident for ident in terminal_ids if "resource_usage_unmeasured" in sessions[ident]
+    }
+    grandfathered = {
+        ident
+        for ident in terminal_ids
+        if ident < GRANDFATHERED_BEFORE
+        and not unique_resource_rollups(sessions[ident])
+        and ident not in explicitly_unmeasured
+    }
+    measured = terminal_ids - explicitly_unmeasured - grandfathered
+    print(
+        f"{len(terminal_ids)} terminal sessions: {len(measured)} declare rollups that "
+        f"exist, {len(explicitly_unmeasured)} explicitly unmeasured, "
+        f"{len(grandfathered)} predate the requirement"
+    )
     return 0
 
 
@@ -345,6 +385,13 @@ def render_report() -> str:
     backfill means here, and it needs no change to this file.
     """
     sessions = load_sessions()
+    measurement_problems = [
+        problem
+        for ident, payload in sessions.items()
+        for problem in resource_measurement_problems(ident, payload)
+    ]
+    if measurement_problems:
+        raise ValueError("; ".join(measurement_problems))
     owners: dict[str, set[str]] = {}
     for ident, payload in sessions.items():
         for ref in unique_resource_rollups(payload):
@@ -447,14 +494,16 @@ def render_report() -> str:
             f"  measured: {str(present).lower()}",
         ]
         if not present:
-            reason = (
-                "closed before resource_rollups existed; the harness log is not retained, "
-                "so its cost cannot be recovered"
-                if ident < GRANDFATHERED_BEFORE
-                else "declares rollups that are not on disk"
-                if declared
-                else "declares no rollups"
-            )
+            reason = unmeasured_resource_reason(payload)
+            if reason is None and ident < GRANDFATHERED_BEFORE:
+                reason = (
+                    "closed before resource_rollups existed; the harness log is not "
+                    "retained, so its cost cannot be recovered"
+                )
+            elif reason is None and declared:
+                reason = "declares rollups that are not on disk"
+            elif reason is None:
+                reason = "declares no resource measurement"
             lines.append(f"  unmeasured_reason: >-\n    {reason}")
         lines.append("  rollups:" + (" []" if not declared else ""))
         lines += [f"  - {ref}" for ref in declared]

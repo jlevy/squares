@@ -35,7 +35,7 @@ with script), CONJECTURED or OPEN.
 | Point or positive-length contacts in the chain? | Nothing forces positive length: Göbel’s n = 5 optimum spans through the middle square by four corner-on-edge point contacts. | PROVED (by example) |
 | Number of squares touching a wall | Spanning walls: ≥ 1 each; a third wall by translation; the fourth cannot be forced (n = 2). Flush (axis-aligned) squares per wall ≤ 3. Trump: left 3, bottom 3 (2 flush + 1 point), right 2 (1 + 1), top 3. | PROVED / CHECKED |
 | Must some square have a positive-length wall or square contact? | No general argument; true in every known optimum; at n = 11 OPEN. | OPEN |
-| Contact-graph rank | Some minimizer in every fixed-angle cell has 22 independent active translation rows, every square in ≥ 2 incidences, no isolated square (Lemma V). Angular rank is not forced (n = 6 rattler; n = 5 second-order flex). Trump: rank 10 segment graph, connected contact graph. | PROVED / CHECKED |
+| Fixed-angle rank and contacts | Every preselected SAT cell containing a minimizer has a vertex with 22 independent active selected rows, but a tight selected pair row need not be a physical contact. Separately, each connected component of the full fixed-angle feasible space at any feasible side has a representative with 22 independent genuine contact rows and every physical contact component touching the left and bottom walls. Angular rank is not forced (n = 6 rattler; n = 5 second-order flex). Trump: rank 10 segment graph, connected contact graph. | PROVED / CHECKED; corrected September 10 |
 | Chain consequences at 3.84 | Chain length k ≥ 3. A 3-chain forces all three squares tilted (≥ 0.67°), two ≥ 14.05°, one ≥ 19.84°, and contains no axis-aligned square. k ≥ 4 forces nothing (three axis-aligned plus one arbitrary suffice). Trump’s shortest chains have k = 5 and k = 4. | PROVED, CHECKED — a free case split, no headroom for current instruments |
 | Are minimality constraints usable at a fixed rational side? | Only with a tolerance: dilation from the (unknown) minimal side to q turns every contact into a δ-near-contact, δ = (q/L_low − 1)√2 = 0.01113 at 3.84 (Lemma T). | PROVED |
 | Can conditional or “capture” dot certificates close the band? | Governed exactly by the fractional-packing value: a depth-1 family of value ≥ 11 with ≥ 1 unit of weight outside the conditioned region kills the certificate (Lemma D). With B = 9977/10000 the {0°,45°} packing already kills every capture certificate at side ≥ 3.876681 < U. At 3.84 the retained BC-200 family gives ≥ 8.87 of restricted value on corner-box conditions: not yet a kill, not yet headroom. | PROVED + CHECKED |
@@ -145,18 +145,51 @@ It is recorded because it is the *only* consequence of spanning that is quantita
 and because a future ownership-type argument (Session S6) can use it to prune
 chain-adjacent cases.
 
-### 1.4 Lemma V (the LP-vertex representative) and the rank question
+### 1.4 Lemma V (the corrected LP-vertex statement) and the rank question
 
 **Lemma V.** Let `P` be a minimizer.
 Fix its angles and a SAT selection valid at `P`. Then there is a minimizer `P'` with the
-same angles such that (a) the active rows among the 44 wall rows (one per square and
-wall) and the 55 selected pair rows have rank 22; (b) every square has at least two
-active rows involving it; (c) no square is contact-free.
+same angles such that (a) the active rows among the 44 wall rows and the 55 selected
+pair rows have rank 22, and (b) every square has at least two linearly independent
+active selected rows involving its centre coordinates.
 
-*Proof.* (a) is (R3). (b): if a square had at most one active row, the active matrix
-would have rank ≤ 1 on that square’s two columns, so its rank would be ≤ 21. (c) follows
-from (b): an active wall row is a wall contact and an active pair row is a pair contact.
+*Proof.* Part (a) is (R3). For (b), full column rank forces the two columns of each
+square to be independent after restriction to the active rows.
 ∎
+
+The original version inferred that every active selected pair row was a physical
+contact, and hence that no square was contact-free.
+That implication is false: projection intervals can share an endpoint along the chosen
+axis while the squares remain positively separated along another SAT axis.
+An exact four-square selected-polytope vertex with one such square is given in the
+[September 10 structural review](../../../../../../docs/project/reviews/review-2026-09-10-n11-structural-normal-forms.md#4-repair-to-the-retained-vertex-argument).
+Thus Lemma V’s rank statement survives inside every preselected cell, while its contact
+conclusion is withdrawn.
+
+**Proposition V+ (genuine-contact representative).** Fix a feasible side, labelled
+orientations, and one connected component of the full feasible translation space.
+That component contains a representative in which every physical contact component
+touches both the left and bottom walls and 22 independent active translation rows are
+genuine wall or pair contacts.
+Every square has two linearly independent contact normals when the other centres are
+fixed.
+
+The proof first minimizes `f = Σ_i(x_i+y_i)` over the whole connected component, then
+breaks ties lexicographically in all centre coordinates.
+It next chooses a strictly slack separating row for every physically disjoint pair.
+The selected cell containing that minimizer lies inside the same component, and the
+minimizer is its vertex; consequently its 22-row basis cannot use a false contact from a
+disjoint pair. Translating any physical contact component left or down would lower `f`,
+so every component meets both walls.
+The full proof, exact counterexample and quantifier boundaries are in the
+[structural review](../../../../../../docs/project/reviews/review-2026-09-10-n11-structural-normal-forms.md#3-a-normal-form-at-the-trial-side).
+
+Proposition V+ chooses a suitable SAT cell after minimizing over a full connected
+component. It does not establish the original physical-contact conclusion in every
+preselected cell, force a literal corner occupant, or restrict the angles to a finite
+set.
+A one-square contact component is allowed when that square touches both named walls;
+accordingly, “no isolated square” is not used for the square-only contact graph.
 
 **What is not forced (PROVED by examples).** The angular part of the rank: the `n = 6`
 optimal family (five axis squares at lower-left corners `(2,0),(2,1),(2,2),(0,2),(1,2)`,
@@ -319,11 +352,14 @@ the modulus arithmetic reproduces `ρ_uniform = 2κ/K = 0.002309` from BC-199’
 
 ## 3. Obstructions — what does not work, and why
 
-1. **Minimality lemmas are not dilation-stable.** Everything in §1.2–1.4 holds at the
-   unknown side `s(11)`, and a certificate is run at a fixed rational side.
-   Lemma T is the only bridge, and it costs `0.011` of contact tolerance at 3.84. Any
-   session that proves a structural lemma and hands it to a certificate must state the
-   lemma in δ-robust form.
+1. **Minimality lemmas are not automatically dilation-stable.** Lemma S, Corollary C and
+   the minimizer-specific use of Lemma V hold at the unknown side `s(11)`, while a
+   certificate is run at a fixed rational side.
+   Lemma T is their bridge, and it costs `0.011` of contact tolerance at 3.84.
+   Proposition V+ is different: it is proved directly at every feasible fixed side and
+   needs no dilation transfer.
+   Any other optimum-only structural lemma handed to a fixed-side certificate must state
+   its δ-robust form.
 2. **The fractional plateau governs every dot route.** By Lemma D a conditional or
    capture certificate exists exactly when the *restricted* fractional packing value is
    below the threshold.
