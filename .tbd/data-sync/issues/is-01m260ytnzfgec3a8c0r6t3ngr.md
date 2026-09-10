@@ -5,15 +5,17 @@ title: "N11 daytime: prove or split a structural contact and owner-selection nor
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - strategy
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
+child_order_hints:
+  - is-01m2668smsn0jf4yv3vn94f895
 created_at: 2026-09-10T16:03:35.742Z
-updated_at: 2026-09-10T16:03:35.742Z
+updated_at: 2026-09-10T17:36:25.228Z
 ---
 Run one 60–90 minute first-principles block on normal forms for an optimal or
 inclusion-minimal packing of eleven congruent freely rotated squares. Separate facts

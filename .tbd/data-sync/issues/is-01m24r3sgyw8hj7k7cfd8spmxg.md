@@ -5,12 +5,14 @@ title: Iterate LP support and atom set together, separating from the depth-one c
 kind: task
 status: open
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 8
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m26697w7prvp4mdkme3cspdc
 created_at: 2026-09-10T04:09:46.782Z
-updated_at: 2026-09-10T16:24:46.419Z
+updated_at: 2026-09-10T17:37:01.400Z
 ---
 Continue idea154’s proposed joint update of placement support and threshold atoms,
 using the independently reviewed A6 evidence in PR139. This is a research proposal,
