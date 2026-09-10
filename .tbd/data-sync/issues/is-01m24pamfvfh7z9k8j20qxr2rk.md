@@ -5,12 +5,12 @@ title: Write the StrategyPlan schema and Python executor
 kind: task
 status: open
 priority: 1
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-09-strategy-plans-as-a-shared-language.md
+version: 2
+spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T03:38:33.847Z
-updated_at: 2026-09-10T03:38:33.847Z
+updated_at: 2026-09-10T03:52:55.662Z
 ---
 Phase 1 of the strategy-plan spec. Write packing/schemas/strategy-plan.schema.yaml as a draft 2020-12 contract (packing.squares:StrategyPlan/v1) with oneOf on the stage's strategy field so each stage validates against its own parameters, and the structure-ladder rung as an enum: partition, contact-graph, contact-graph-with-types, with-wall-contacts.
 
