@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 24
+version: 26
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -22,8 +22,9 @@ child_order_hints:
   - is-01m260ytnzfgec3a8c0r6t3ngr
   - is-01m260z2959dmcmn61pn2z7jsk
   - is-01m260za5fe3ewrkns6y4ehjva
+  - is-01m26nttcsn4ej3g9adcat0qk5
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T20:24:56.935Z
+updated_at: 2026-09-10T22:08:24.472Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
@@ -61,4 +62,22 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-Research checkpoint PR #150 is published from PR139's merge at head 5a6b9a75. Commit cc98c774 contains the reconciled evidence, structural correction, weighted-atom separation, BC329 preflight, parent-domain runner and session099 repair; a commit-bound fast gate passed 4,900 tests and 62 of 73 steps, and the follow-up records gate passed after certification was recorded. No scientific target ran and no global bound changed. Session099 remains honestly unmeasured for native usage. Parent-runner admission and session099 closeout beads are complete.\n\nDraft explainer PR #148 is at f7126bfc with v0.4.0 and exact first-edition-label dates. Retarget it onto codex/n11-daytime-strategy, rerun stacked checks, and resolve the WebKit saved-geometry probe before readiness. The ranked next scientific block remains BC326's one prospectively registered parent-domain comparison; BC329 waits on its fixed-core runner.
+Research checkpoint PR #150 is ready for review at `568abad5`. Commit `cc98c774`
+contains the reconciled evidence, structural correction, weighted-atom separation,
+BC329 preflight, parent-domain runner, and session-099 repair; `5a6b9a75` records its
+commit-bound certification, and `568abad5` makes the lifecycle regression follow the
+now-certified session-099 fixture. No scientific target ran and no global bound changed.
+Session-099 remains honestly unmeasured for native usage.
+
+The required pre-push tier passed 45 of 73 steps at `568abad5`, including 1,052 tests.
+Hosted validate, suite, geometry, sweeps, macOS portability, mergeability, and
+`packing-required` all pass. Independent reviews found no remaining P1, P2, or P3
+finding.
+
+Draft explainer PR #148 is retargeted onto PR #150. Its local stacked head is
+`3f0ec6bf`; the documentation layer remains exactly 21 files, +500/-101. The v0.4.0
+history records the first use of v0.3.0 as this publication's edition label on September
+8, 2026 and of v0.4.0 on September 10, 2026. Keep PR #148 draft until its stacked local
+and hosted checks pass, including a fresh disposition of the WebKit saved-geometry
+probe. The ranked next scientific block remains BC326's one prospectively registered
+parent-domain comparison; BC329 waits on its fixed-core runner.

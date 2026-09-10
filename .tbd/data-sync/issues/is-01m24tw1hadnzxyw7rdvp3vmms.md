@@ -3,9 +3,9 @@ type: is
 id: is-01m24tw1hadnzxyw7rdvp3vmms
 title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 19
+version: 21
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -16,7 +16,11 @@ child_order_hints:
   - is-01m25430wcdx8wn8f3qs7b4qjv
   - is-01m268mz0me7vv3jy38c31y939
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T20:24:56.618Z
+updated_at: 2026-09-10T22:08:12.754Z
+closed_at: 2026-09-10T22:08:12.753Z
+close_reason: "BC326 completed its sole registered run and was disposed exactly: complete old-model incompatibility, H158 unresolved, no parent-domain gain or global n11 claim."
+resolution: null
+duplicate_of: null
 ---
 Implement and independently admit a necessary unit-parent centre-domain adapter, then prospectively register at most one paired comparison on the saved exp151 escape at tuple(0,0,0,7). The independent analytic review at /private/tmp/n11-parent-bound-independent-review.md passes the formula under exact unit rays, centre-preserving nearest-core selection, principal angular mismatch and the admitted global maximum bound D. Adopt that review under docs/project/reviews/ on the fresh post-PR139 branch before target use.
 
@@ -26,4 +30,4 @@ First check whether the fixed residual escape is outside its own necessary paren
 
 ## Notes
 
-BC326 remains the first active scientific target lane. Its target-free exact adapter, source binder, closed schema and production runner are published on PR #150: implementation commit cc98c774 and lifecycle head 5a6b9a75. Independent Astra Max admission passed 56 focused tests plus adversarial deadline, publication, timeout, failed-readback, source-closure and stale-module controls; the pre-push and commit-bound fast gates pass. The translated-family realizability theorem remains unary and separate. Next: prospectively register the unchanged exp151 residual, tuple (0,0,0,7), owner order, clocks, outcome meanings and fresh output path, then run once and independently read back. No target has run.
+Exp156 ran once from prospective revision 5f6c50c4 and completed b-only-incompatible. The saved residual lies inside its necessary parent box. TR / bottom-left:m1:j7 is incompatible across all 181 B-only frames with exact negative maximum and literal replay; because the parent domain is a subset, matched parent gain is impossible there because its required positive B-only control is absent. BL, BR, and TL were not run, so H158 remains unresolved. External command wall was 20.628132708 seconds including mandatory readback and supervision; the receipt records 0.445216333 scientific seconds and 9.084778667 pre-readback seconds. Records validation passed and independent Astra Max review found no P1-P3 findings. Exp156 permits no rerun; any later-owner test needs new registration.
