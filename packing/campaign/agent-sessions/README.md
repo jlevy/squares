@@ -197,6 +197,25 @@ See
 [OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave)
 for the unchanged full pre-merge obligation.
 
+Resource measurement has one corresponding stopped state for native harness data that is
+no longer available.
+Declare `resource_rollups: []` and a `resource_usage_unmeasured` object whose reason is
+`native_harness_data_unavailable`, whose detail says what source is missing, and whose
+`disposition_bead` names the bead under which that absence was investigated and
+recorded. Set `handoff_role` to `administrative_closeout` when terminalizing the old
+record only closes its accounting history, or to `work_handoff` when the session still
+owns the current work entry.
+The checker rejects a syntactically valid bead that `tbd` definitively reports missing.
+When `tbd` is unavailable or cannot answer, bead existence remains unresolved rather
+than turning the tracker into a build dependency.
+This records that usage is unknown; session clocks, delegation durations, prose
+estimates, and reconstructed totals do not replace a receipt.
+The state is refused for completed sessions and for records with a receipt.
+It is independent of certification: retain it after a later qualifying gate removes
+`certification_pending`, because passing a source gate does not recover native usage.
+If exact harness data later becomes available, write the receipt and remove the
+unmeasured marker.
+
 The checkpoint sequence above is per-phase.
 Bringing a whole session to a terminal state adds two steps, and neither is optional.
 For a delegated Codex lane, the owner first stops writing and returns a terminal-ready

@@ -35,13 +35,12 @@ hypothesis:
       incomplete decides neither direction.
     threshold: 3.826
   instrument: >-
-    devtools.decide_threshold_certificate is the two-route gate; devtools.dilation_corollary
-    derives the limit record once it accepts a threshold record's closed-form conditions,
-    which it does not yet read; devtools.measure_net_refinement measures crossing shrinks
-    for point certificates and needs the threshold sweep to do the same for threshold
-    ones; the loop is spike B's rows-only driver and its freeze script, retained beside
-    lane B and unpromoted.
-  instrument_ready: false
+    devtools.decide_threshold_certificate is the two-route gate;
+    devtools.measure_threshold_net_refinement measures the finer-net crossing shrink;
+    and devtools.dilation_corollary replays the threshold record's closed-form
+    conditions and derives the retained limit record. The separate 383/100 loop remains
+    in its retained unpromoted state.
+  instrument_ready: true
   regime: >-
     n = 11, sides 191/50 and 383/100, shrink 9977/10000 on the 181-direction net and the
     crossing shrinks on the 720- and 1440-step nets; rank-one atoms, D4-symmetric,
@@ -57,18 +56,19 @@ hypothesis:
   replication: true
   registered: '2026-09-09'
   notes: >-
-    The point-atom method is capped at unit side 3.8288 by the exact ceiling family at
-    191/50, so no point certificate reaches 383/100 = 3.83 at this shrink, and the LP at
-    191/50 read exactly eleven every time its rows completed. The threshold certificate
-    at 191/50 sits at 10.967322864 with the rows complete, 0.0327 below eleven; the
-    point certificate at 381/100 sat at 10.863675 and the next hundredth of side cost it
-    0.136. Whether the threshold LP's slope is gentler is the whole question, and the
-    two-of-three atoms are only the first family: three-of-four, two-of-five and
-    three-of-five atoms are the next. The finer-net half is the cheap first reading,
-    because the dilation argument uses only Conditions 1 to 4 and inverse dilation of
-    placements, none of which distinguishes a threshold atom from a point atom.
+    T-026 subsequently confirms the first disjunct. The retained 1440-step certificate
+    and exact dilation corollary give the weak limit
+    955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...
+    while leaving its endpoint unresolved. The separate rows-complete loop at 383/100
+    remains open, as do re-optimised finer-net atoms and changed atom families. The
+    point-atom obstruction and earlier LP slopes retain their original finite scopes.
 ---
 # H-156 — Past 3.82 Without Conditioning
+
+**Status update, September 10, 2026.** T-026 confirms the finer-net and dilation
+disjunct with an exact weak limit of `3.826447410572939744...`. It does not decide its
+limiting endpoint. The separate rows-complete loop at `383/100`, re-optimisation on a
+finer net, and changed atom families remain open.
 
 The threshold certificate at `191/50` is the first result past the point-method ceiling,
 and [X-024](../explorations/X-024-two-lines-at-eleven.md) makes pushing it up in side
@@ -83,8 +83,8 @@ Condition 4, and the frozen weights, multiplied by one rational factor, either c
 every closed core at the new shrink or they do not.
 On the point atoms of `T-018` they did, at every net up to 2880 steps, and the 1440-step
 rung dilated to `3.816609502788862`. The same sweep on the threshold certificate, with
-the threshold atoms entering the same difference array, answers the same question at
-`191/50`; if the atoms transfer, the endpoint is about `3.8266`.
+the threshold atoms entering the same difference array, now gives the retained weak
+limit `3.826447410572939744...` from the 1440-step rung.
 
 The second is the loop.
 Spike B’s rows-only driver, warm-started from the accepted site and atom set, costs

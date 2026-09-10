@@ -1,5 +1,13 @@
 # N11: Three Overnight Research Blocks After PR139
 
+**Superseded on September 10, 2026.** The network interruption ended the consecutive
+overnight schedule before a scientific target began.
+The owner replaced it with
+[short daytime strategy blocks](plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
+and a standalone explainer pull request.
+The mathematical admission rules below remain source material for that plan; its old
+relative clock and target order are no longer active.
+
 **Prospective plan, September 10, 2026.** The owner authorized unattended continuation
 after the combined merge, in three sets of two to four hours.
 This plan allocates three consecutive three-hour blocks, nine hours in total, with a

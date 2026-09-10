@@ -9,8 +9,9 @@ paywalls and bot blocks.
 
 ```
 packing/resources/
-├── papers/   Academic papers: original .pdf, cleaned .md, and faithful .raw.md
-└── web/      Web sources: original .html and maintained .md capture
+├── papers/                 Academic papers: original .pdf, cleaned .md, and faithful .raw.md
+├── private-correspondence/ Unpublished letters and email, transcribed verbatim
+└── web/                    Web sources: original .html and maintained .md capture
 ```
 
 The archive’s normal form stores a paper three ways; the documented exceptions follow:
@@ -187,6 +188,52 @@ automatically accepted campaign results.
 the critical adaptation and complete source-to-record map.
 [Agenda 027](../campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
 organizes the proposed work as a separate agenda.
+
+## Private Correspondence
+
+`private-correspondence/` holds unpublished letters and email that bear on the
+mathematics, supplied by the project owner, transcribed verbatim and named for the
+correspondent and the first message in the exchange.
+The transcriptions are archived source in the sense the rest of this directory uses: not
+edited to read more tidily, and cited where they are used.
+
+Correspondence is weaker evidence than a paper, and is cited as such.
+It is unrefereed, often written quickly, and its author may revise or withdraw a claim
+in a later message—the one file here does exactly that twice.
+Cite it for what its author says, never for what this project has established.
+
+| Source | Correspondent | Dates | File |
+| --- | --- | --- | --- |
+| **[Stromquist 2026]** | Walter Stromquist | 2026-09-07 and 2026-09-09 | `email-stromquist-2026-09-07.md` |
+
+Four things arrive in that exchange, and the record already speaks to each:
+
+- **The repair for the 2003 Figure 14 proof.** The quadrilateral southwest of point `G`
+  is not covered by Lemma 4, and Stromquist gives the coordinate he intended: `G` evenly
+  spaced between `F` and the leftmost `A`, so `G = (0.8, s/2 - 0.05)`—`(0.8, 1.845)`
+  serves—rather than the printed `(0.8, 1.85)`, with a row for `a = 0.945, b = 0.8` in
+  the table after Lemma 4. This project found the printed point set unsound
+  independently on 2026-08-24 ([D-152](../../defects.md)); what the letter adds is the
+  author’s own intended coordinate, which no memo supplies.
+- **Fractional packings, and a conjectured duality.** Weighted collections of squares
+  under a unit depth constraint at every point, which any dots proof bans at total
+  weight `n` alongside genuine `n`-packings.
+  If the smallest container admitting fractional weight 11 is strictly smaller than the
+  smallest admitting eleven squares, no certificate of this kind can reach the packing
+  bound—which makes helper arguments necessary rather than convenient.
+  Stromquist expects an LP duality here, and a continuous analogue matching largest
+  fractional packing to smallest measure, but states he has never written the proof.
+- **“Dots proofs” and helper arguments.** The 1980s terminology for the certificates
+  this project builds, the finding from that period that `n = 6` admits no pure dots
+  proof but does admit one preceded by a helper argument, the same shape he used for
+  `n = 11`, and the open question of making helper arguments systematic.
+- **Two withdrawals.** The `n = 26` contribution, on the ground that
+  `5.62132 < 5.650629`, and the `n = 18` contribution, which he reports was not new even
+  in 1984.
+
+The exchange also points at three unpublished square-packing notes on the author’s own
+site, linked as `-I`, `-II` and `-III` under Geometry on his research and publications
+list; those are the 1984 memoranda already archived under `papers/`.
 
 ## Rigidity and Verification Method Sources
 
