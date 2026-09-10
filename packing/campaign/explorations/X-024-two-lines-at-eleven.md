@@ -534,14 +534,18 @@ to 28,237 and the value from `10.999999999999945` to `11.000000000` in 404.9 s.
 **Atoms must be separated from the depth-one certificate, not from the LP dual, and
 support and atoms have to be iterated together.** Six atoms separated from that
 certificate — two two-of-three and four three-of-five, budget 1 each — take the blocking
-support from exactly 11 to **`10.4210526`**, bracketed exactly between a feasible family
-of total `325657893/31250000` and an exact dual bound `2605263163/250000000` with
-`A^T u >= cost` verified in `Fraction`s. Twenty-four atoms separated from a dual vertex
-moved the LP by `2.2e-13`; six separated from the family that actually blocks it move
-their support by `0.579`. Fed to the LP as columns those six also enter at weight
-exactly zero and it stays at eleven, because the LP moves to a support they do not cut,
-so one atom round on one support is to the atom side what one vertex round on one dual
-was to the site side.
+support from exactly 11 to **`10.4210526`**, bracketed exactly for that fixed-support
+program: a family of total `325657893/31250000` feasible for that program’s selected
+finite rows — depth at most one at the structural sites, the atom orbits, the six seeded
+atoms — against an exact dual bound `2605263163/250000000` with `A^T u >= cost` verified
+in `Fraction`s. The lower family is **not** feasible for the depth-one program: its
+exact maximum depth is `105263157/100000000`, above one, and `devtools.plateau_reader`
+refuses it at K2. So `10.4210526` is a value of the restricted program, not a bound on
+the depth-one one. Twenty-four atoms separated from a dual vertex moved the LP by
+`2.2e-13`; six separated from the family that actually blocks it move their support by
+`0.579`. Fed to the LP as columns those six also enter at weight exactly zero and it
+stays at eleven, because the LP moves to a support they do not cut, so one atom round on
+one support is to the atom side what one vertex round on one dual was to the site side.
 That is the live route, and it is idea 154.
 
 Two readings that follow, and one that does not.
