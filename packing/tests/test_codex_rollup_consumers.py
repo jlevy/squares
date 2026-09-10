@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 import yaml
 
+import devtools.check_session_rollups as rollup_checker
 import devtools.close_session as closer
 import devtools.render_pr_rollup as renderer
 from sqpack.yamlio import safe_load
@@ -110,6 +111,28 @@ def _session(
         "---\n# fixture\n",
         encoding="utf-8",
     )
+
+
+def _unmeasured_session(*, malformed: bool = False) -> dict:
+    marker = {
+        "reason": "native_harness_data_unavailable",
+        "detail": "The native harness source for this historical session is unavailable.",
+        "disposition_bead": "think-ab12",
+        "handoff_role": "administrative_closeout",
+    }
+    if malformed:
+        marker["reason"] = "operator_forgot_to_measure"
+    return {
+        "id": "session-999",
+        "title": "Unmeasured fixture",
+        "status": "stopped",
+        "primary_bead": "think-parent",
+        "workflow_phases": [],
+        "resource_usage_unmeasured": marker,
+        "resource_rollups": [],
+        "stop_reason": "The native measurement source is unavailable.",
+        "next_action": "Preserve the explicit unmeasured disposition.",
+    }
 
 
 def test_codex_receipt_is_auto_discovered_from_its_branch_declaration(
@@ -335,6 +358,48 @@ def test_close_report_defensively_deduplicates_one_sessions_declarations(
 
     assert report.count("packing/campaign/resource-usage/codex.yaml") == 2
     assert report.count("model_responses: 7") == 1
+
+
+def test_close_report_renders_a_valid_unmeasured_terminal_state_explicitly(
+    monkeypatch, tmp_path: Path, capsys
+) -> None:
+    session = _unmeasured_session()
+    monkeypatch.setattr(closer, "load_sessions", lambda: {"session-999": session})
+    monkeypatch.setattr(closer, "USAGE", tmp_path)
+    monkeypatch.setattr(
+        rollup_checker,
+        "disposition_bead_presence",
+        lambda _bead: "present",
+    )
+
+    assert closer.report("session-999") == 0
+    output = capsys.readouterr().out
+    assert "resource measurement: UNMEASURED" in output
+    assert "native harness data unavailable" in output
+    assert "1 explicitly unmeasured" in output
+
+    rendered = safe_load(closer.render_report())
+    entry = rendered["sessions"][0]
+    assert entry["id"] == "session-999"
+    assert entry["measured"] is False
+    assert entry["rollups"] == []
+    assert entry["unmeasured_reason"].startswith("native harness data unavailable;")
+
+
+@pytest.mark.parametrize("shape", ["missing", "malformed"])
+def test_close_report_refuses_missing_or_malformed_unmeasured_terminal_states(
+    monkeypatch, tmp_path: Path, capsys, shape: str
+) -> None:
+    session = _unmeasured_session(malformed=shape == "malformed")
+    if shape == "missing":
+        session.pop("resource_usage_unmeasured")
+    monkeypatch.setattr(closer, "load_sessions", lambda: {"session-999": session})
+    monkeypatch.setattr(closer, "USAGE", tmp_path)
+
+    assert closer.report(None) == 1
+    assert "problems:" in capsys.readouterr().out
+    with pytest.raises(ValueError, match="session-999"):
+        closer.render_report()
 
 
 def test_live_session_without_a_rollup_is_not_labeled_as_historically_closed(

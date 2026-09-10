@@ -13,6 +13,7 @@ from devtools.check_synopsis import (
     check_experiment_scope_claims,
     check_round_effort_claims,
     check_unprotected_fix_claims,
+    is_administrative_unmeasured_closeout,
     load_agenda_items,
     reported_covering_sides,
     select_handoff_cell,
@@ -22,6 +23,24 @@ from devtools.check_synopsis import (
     session_handoff_key,
     spell,
 )
+
+
+def _unmeasured_handoff(role: str = "administrative_closeout") -> dict:
+    return {
+        "id": "session-099",
+        "status": "stopped",
+        "started_at": "2026-09-07T17:00:00Z",
+        "deadline_at": "2026-09-10T15:20:00Z",
+        "resource_usage_unmeasured": {
+            "reason": "native_harness_data_unavailable",
+            "detail": "The native harness input is no longer available.",
+            "disposition_bead": "think-5hak",
+            "handoff_role": role,
+        },
+        "resource_rollups": [],
+        "stop_reason": "The historical session was closed without reconstructing usage.",
+        "next_action": "Preserve the explicit unmeasured disposition.",
+    }
 
 
 def test_handoff_cell_is_selected_from_the_latest_session_action() -> None:
@@ -93,6 +112,65 @@ def test_latest_handoff_ignores_live_session_with_later_deadline() -> None:
             (Path("session-083-live.md"), live),
         ]
     ) == (Path("session-078-terminal.md"), terminal)
+
+
+def test_late_administrative_closeout_does_not_displace_research_handoff() -> None:
+    research = {
+        "id": "session-124",
+        "status": "completed",
+        "started_at": "2026-09-09T22:52:40Z",
+        "deadline_at": "2026-09-10T02:52:40Z",
+    }
+    administrative = _unmeasured_handoff()
+
+    assert is_administrative_unmeasured_closeout(administrative)
+    assert select_latest_terminal_session(
+        [
+            (Path("session-099-administrative.md"), administrative),
+            (Path("session-124-research.md"), research),
+        ]
+    ) == (Path("session-124-research.md"), research)
+
+
+def test_unmeasured_work_handoff_keeps_terminal_clock_ordering() -> None:
+    earlier = {
+        "id": "session-124",
+        "status": "completed",
+        "started_at": "2026-09-09T22:52:40Z",
+        "deadline_at": "2026-09-10T02:52:40Z",
+    }
+    work_handoff = _unmeasured_handoff("work_handoff")
+
+    assert not is_administrative_unmeasured_closeout(work_handoff)
+    assert select_latest_terminal_session(
+        [
+            (Path("session-099-work.md"), work_handoff),
+            (Path("session-124-research.md"), earlier),
+        ]
+    ) == (Path("session-099-work.md"), work_handoff)
+
+
+def test_malformed_administrative_marker_cannot_hide_a_handoff() -> None:
+    earlier = {
+        "id": "session-124",
+        "status": "completed",
+        "started_at": "2026-09-09T22:52:40Z",
+        "deadline_at": "2026-09-10T02:52:40Z",
+    }
+    malformed = _unmeasured_handoff()
+    del malformed["resource_usage_unmeasured"]["detail"]
+
+    assert not is_administrative_unmeasured_closeout(malformed)
+    assert select_latest_terminal_session(
+        [
+            (Path("session-099-malformed.md"), malformed),
+            (Path("session-124-research.md"), earlier),
+        ]
+    ) == (Path("session-099-malformed.md"), malformed)
+
+    extra_field = _unmeasured_handoff()
+    extra_field["resource_usage_unmeasured"]["inferred_from_prose"] = True
+    assert not is_administrative_unmeasured_closeout(extra_field)
 
 
 def test_latest_closeout_uses_newest_terminal_agenda(tmp_path: Path) -> None:
