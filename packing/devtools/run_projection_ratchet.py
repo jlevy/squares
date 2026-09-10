@@ -198,6 +198,8 @@ def solve(
     contact_weight: float = 1.0,
     walls: list[int] | None = None,
     start: Array | None = None,
+    trace: list[Array] | None = None,
+    trace_every: int = 40,
 ) -> Outcome:
     """One RRR run at a fixed container side.
 
@@ -244,6 +246,9 @@ def solve(
             v = violation(poses, side)
             if v <= tol:
                 return Outcome(solved=True, poses=poses, violation=v, steps=step)
+
+        if trace is not None and step % trace_every == 0:
+            trace.append(p.poses(x))
 
         if eps < best_eps - 1e-15:
             best_eps, since = eps, 0
