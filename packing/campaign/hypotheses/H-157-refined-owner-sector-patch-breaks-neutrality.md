@@ -47,7 +47,7 @@ hypothesis:
     devtools.screen_corner_dual_salvage does the deletion with the ownership line's own
     filter, and the lane X1 scripts (lane-x1-ceiling11-screen.py.txt, lane-x1-gap.py.txt)
     are the screen and the gap reader as run.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     n = 11, side 96/25, shrink 9977/10000, the 361-direction doubled net; sixteen closed
     angular bins per mark and two marks per corner, so thirty-two classes per corner;
@@ -60,7 +60,11 @@ hypothesis:
     seconds per class over the eight refined subclasses that matter
   prereqs:
   - a bin-count parameter in devtools.owner_footprints, with the pi/8 wedge vectors and
-    the containment argument of the sector-footprint proof restated at sixteen bins
+    the containment argument of the sector-footprint proof restated at sixteen bins --
+    satisfied 2026-09-10 in a scratch copy retained as agenda-034/lane-x4-nbins.py.txt,
+    with an eight-bin equivalence control against the tracked module at zero
+    disagreements; the tracked module still hard-codes eight bins and promoting the
+    parameter into it is carried separately under OR-1
   replication: true
   registered: '2026-09-09'
   notes: >-
@@ -84,6 +88,19 @@ hypothesis:
     refinement because it never used the patch. A refutation closes the conditional
     point-cover line at both resolutions and is the cheaper of the two outcomes to
     record. Either way this decides a scope question in the record rather than a bound.
+    REFUTED 2026-09-10 by exp-154. Six of the eight refined subclasses of the four
+    neutral classes read exact survivor weight 10, and the two that break read 19/2
+    rather than the predicted 79/8; the maximum over all thirty-two sixteen-bin classes
+    is exactly 10. The mechanism is present and irrelevant: the wedge does widen and the
+    patch does grow 1.6165x to 1.6175x in area, but the reach is the rational identity
+    d^2 = 75308842465387162009/335694834731568400000000, bit-identical for the parent
+    and both children at both marks, because the closest point of the patch to the
+    critical core is the mark itself. The screen then went one resolution further: at
+    the singleton-ray limit 135 classes per mark read exactly 10, and a pose probe
+    leaves exactly 10 at two mark-clique members, which are theorems T1 and T2 in
+    X-026 section 5.1. Those rule out patch refinement as the lever at every angular
+    resolution and at pose level; they do not show the conditional strategy fails, so
+    X-026 escape 1 is narrowed rather than closed.
     Registered from X-026 section 5, escape 1, and carried as `think-dm0f`; escapes 2
     (empty classes) and 3 (compatibility pruning of the four neutral sectors) are
     unregistered and belong to the ownership line's own branch.
@@ -115,6 +132,65 @@ It should be run before the conditional line is closed in the record, because it
 only measurement that can overturn Step 3 — and because a refutation, which is the
 likely outcome, is worth having on the record at the resolution where somebody would
 next ask.
+
+## Outcome, 2026-09-10: refuted
+
+Measured by
+[`exp-154`](../series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md),
+and retained in full beside
+[lane X4](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md).
+
+The registered direction refutes on one surviving class, and six survive.
+
+| refined subclass | parent | survivor weight | deletion |
+| --- | --- | --- | --- |
+| `bottom-left:m1:J6/16` | `m1:j3` | **10** | 1 |
+| `bottom-left:m1:J7/16` | `m1:j3` | **10** | 1 |
+| `bottom-left:m1:J8/16` | `m1:j4` | **10** | 1 |
+| `bottom-left:m1:J9/16` | `m1:j4` | `19/2` | `3/2` |
+| `bottom-left:m2:J6/16` | `m2:j3` | `19/2` | `3/2` |
+| `bottom-left:m2:J7/16` | `m2:j3` | **10** | 1 |
+| `bottom-left:m2:J8/16` | `m2:j4` | **10** | 1 |
+| `bottom-left:m2:J9/16` | `m2:j4` | **10** | 1 |
+
+All exact, and the maximum over the full thirty-two-class sixteen-bin split is exactly
+10, attained at six classes.
+
+**The `0.015` was a gap to the mark, not to the patch.** The squared distance from the
+patch to the nearest surviving core is
+
+```
+d^2 = 75308842465387162009/335694834731568400000000      d = 0.014977891
+```
+
+and it is bit-identical for the eight-sector parent and for both of its sixteen-sector
+children, at both marks, because the minimising vertex is the mark itself.
+Every patch at every bin count has the mark as a vertex, so no angular conditioning can
+shorten that reach.
+The proposed mechanism does happen — the guaranteed wedge widens from
+`pi/4` to `3pi/8` and the patch grows 1.6165x to 1.6175x in area, contained in
+`Q_phi(m)` for every one of the 87 to 94 retained rays in its bin — and it buys nothing.
+
+**Two theorems came out of it**, and they are the durable result rather than the
+refutation. Both are in
+[X-026 §5.1](../explorations/X-026-what-conditioning-does-and-does-not-buy.md), stated
+over the retained transported mass-eleven ceiling family and the screened endpoint
+patches: **T1**, every closed angular bin containing one of the 135 neutral rays has
+survivor weight exactly 10, at any bin count; and **T2**, the class containing the pose
+of mark-clique member `#59` has survivor weight exactly 10 under any conditioning by
+pose, at any refinement.
+
+What they establish is that **patch refinement is ruled out as the lever**, at every
+angular resolution and at pose level.
+What they do not establish is that the conditional strategy fails: that strategy needs
+one closed owner selection per packing rather than every class closed, and owner labels
+and valid selections can overlap.
+X-026 escape 1 is therefore narrowed rather than closed, and whether the neutral classes
+are ever *forced* stays open beside escape 2.
+
+The conditional **threshold** line,
+[`H-155`](H-155-conditional-threshold-cover-on-an-owner-class.md), is untouched: this
+measurement read deletions, not atoms.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

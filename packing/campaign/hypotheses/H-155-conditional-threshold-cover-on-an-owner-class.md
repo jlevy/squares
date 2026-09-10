@@ -72,10 +72,14 @@ hypothesis:
     zero.
     What that closes is the POINT-COVER ROUTE ON A RESIDUAL DOMAIN, and only it - by weak
     duality no nonnegative point cover of those classes has mass below 10, and a
-    conditional certificate needs budget strictly below 10. The rank-one bracket also
-    transfers verbatim to the conditional method at every m, since deleting the m owners
-    of a packing at side 3.868983 leaves n - m pairwise disjoint admissible cores
-    disjoint from the patches, so conditioning changes neither end of [3.82, 3.868983].
+    conditional certificate needs budget strictly below 10. A transfer of the rank-one
+    bracket to the conditional method at every m was also asserted here, by deleting the
+    m owners of a packing at side 3.868983; that argument is WITHDRAWN as unproved on
+    2026-09-10 (PR 139 finding R2). It starts from an artificial packing of eleven
+    B-cores at 3.868983 never shown to carry distinct marked owners, class memberships
+    or occupied patches, and the ownership theorem it leans on concerns unit-parent
+    packings at 96/25, so any conditional transfer needs its own owner, class, patch and
+    routing verification. The unconditional bracket is untouched at its own scope.
     Neither statement reaches this claim. The survivor family has depth one but VIOLATES
     the two-of-three inequalities - lane X1's plateau reader on the 80-placement mass-10
     survivor family of class m1:j3 read two-of-three maximum 5/4 against a budget of one,
@@ -85,10 +89,13 @@ hypothesis:
     The refutation criterion is unmet and the claim stands exactly as stated.
     What has changed is its price, and the price is why it is not funded. Those readings
     are the SAME values the full ceiling family carries: conditioning removed exactly one
-    unit of mass and exactly none of the cut structure, so threshold atoms cut the
-    survivor family exactly as they cut the unconditional ceiling, and the conditional
-    threshold problem at a class is the unconditional one shifted down by one, for
-    sixteen times the work and no better reach. The conditional programme also has no
+    unit of mass and, on this family at this class, none of the cut structure those two
+    readings see. The step from there to "the conditional threshold problem IS the
+    unconditional one shifted down by one, for sixteen times the work and no better
+    reach" is an ESTIMATE, labelled as one on 2026-09-10, and its assumptions are that
+    two matching cut maxima on one survivor family represent the whole cut structure at
+    every class, and that the cost multiplier is the class count per corner rather than a
+    measured running cost. The conditional programme also has no
     side but 96/25 - no ownership theorem exists in the tree anywhere else (lane X2) -
     while 191/50 is already closed unconditionally by T-025, so its whole open window was
     (3.82, 3.84].
@@ -151,11 +158,18 @@ state it. **The point-cover route on a residual domain is closed**: by weak dual
 nonnegative point cover of classes `m1:j3`, `m1:j4`, `m2:j3` or `m2:j4` has mass below
 10, while a conditional certificate needs budget strictly below 10, so no point cover
 can ever close them.
-And the rank-one bracket transfers verbatim: at any side where eleven pairwise-disjoint
-admissible cores exist, deleting the `m` owners leaves `n - m` disjoint admissible cores
-that avoid the patches, so the conditional rank-one method is capped at the same
-`3.868983` for every `m`, and conditioning changes neither end of `[3.82, 3.868983]`.
-Neither statement reaches the threshold language, which is what this claim is about.
+A transfer of the rank-one bracket was also claimed here, and it is **withdrawn as
+unproved** (2026-09-10, PR 139 finding R2). The argument was that at any side where
+eleven pairwise-disjoint admissible cores exist, deleting the `m` owners leaves `n - m`
+disjoint admissible cores that avoid the patches, so the conditional rank-one method
+would be capped at the same `3.868983` for every `m`. It starts from an artificial
+packing of eleven `B`-cores at `3.868983` that has never been shown to carry distinct
+marked owners, class memberships or occupied patches, and the ownership theorem it leans
+on concerns unit-parent packings at `96/25`; a conditional transfer therefore needs its
+own owner, class, patch and routing verification, and none has been done.
+The unconditional bracket `[3.82, 3.868983]` is untouched and stands at its own stated
+scope. Neither statement reaches the threshold language, which is what this claim is
+about.
 
 **This claim is live, not refuted, and that is why it is retained rather than deleted.**
 The survivor family has depth one but is not threshold-feasible: a two-of-three atom
@@ -168,22 +182,33 @@ Lane X1 ran the plateau reader on the 80-placement mass-10 survivor family of cl
 `m1:j3` and read depth exactly 1, two-of-three maximum `5/4`, heaviest rank-one clique
 `11/8` at `tau* = 5/3`, and violated floor atoms at `t = 2, 3, 4` — the *same* values
 the full ceiling family carries.
-Conditioning removed exactly one unit of mass and exactly none of the cut structure, so
-threshold atoms cut the survivor family exactly as they cut the unconditional ceiling,
-and the conditional threshold problem at a class is the unconditional one shifted down
-by one, at sixteen times the work and with no better reach.
+Conditioning removed exactly one unit of mass and, on this family at this class, none of
+the cut structure those two readings see.
+The step from there to “the conditional threshold problem *is* the unconditional one
+shifted down by one, at sixteen times the work and with no better reach” is an
+**estimate**, not a measurement, and it is what this disposition is priced on.
+Its assumptions, stated so they can be checked: that two matching cut maxima on one
+survivor family represent the whole cut structure at every class, and that the cost
+multiplier is the **class count per corner** — sixteen classes at eight sectors — rather
+than a measured running cost, which was never taken.
 **Buying no reach is the finding; impossibility is not.** The conditional line also has
 no side but `96/25`, since no ownership theorem exists anywhere else in the tree
 ([lane X2](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md)
 §3), while `191/50` is already closed unconditionally by `T-025`.
 
-One measurement could still move the neutrality reading this disposition rests on, and
-it has never been run: refining the owner sectors from eight to sixteen fattens the
-guaranteed patch, and the nearest survivor to a neutral patch sits at a separating gap
-of `0.014978`, so a patch reaching `0.015` further would delete `1/8` more and break
-neutrality at that class.
-That is registered as [`H-157`](H-157-refined-owner-sector-patch-breaks-neutrality.md),
-it is one screen, and it is cheap.
+One measurement could have moved the neutrality reading this disposition rests on, and
+it has now been taken.
+[`H-157`](H-157-refined-owner-sector-patch-breaks-neutrality.md) refined the owner
+sectors from eight to sixteen to fatten the guaranteed patch past the `0.014978`
+separating gap; it is **refuted** (`exp-154`, 2026-09-10). The patch does grow, and the
+reach does not: the distance to the nearest surviving core is pinned by the mark, which
+is a vertex of every patch at every bin count, so six of the eight refined subclasses
+still read exactly 10. The neutrality reading therefore stands — and only at the scope
+it was measured on, which is the retained transported mass-eleven ceiling family and the
+screened endpoint patches.
+It is also worth being exact about what that does *not* buy: patch refinement is ruled
+out as the lever, but a conditional proof needs one closed owner selection per packing
+rather than every class closed, so this claim is no more refuted than it was.
 
 The instrument is still worth building, for the other lane.
 [Lane A4](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md)
