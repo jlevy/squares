@@ -37,13 +37,16 @@ hypothesis:
     from full HEAD.
   replication: false
   registered: '2026-09-10'
-  notes: Residual self-exclusion and matched parent-domain gain accept by different mechanisms. A B-only
-    incompatibility is an old-model exclusion and does not establish parent gain. If the residual survives
-    and all four selected classes yield positive parent-restricted witnesses, the hypothesis is refuted only
-    for individual elimination of this fixed pose. Exp150 witnesses may not replace exp156's matched B-only
-    controls. A source or revision refusal before scientific evaluation is invalid. A deadline,
-    missing frame, evaluator refusal or failed readback after the scientific clock starts remains
-    partial and incomplete.
+  notes: >-
+    Exp156 completed at source-bound revision 5f6c50c4866921f366073511ac28713b0d1267d2 with outcome
+    b-only-incompatible. The residual survived its necessary parent box, but the first selected owner was
+    already incompatible under the old B-only model after all 181 frames and literal replay. Since the
+    parent-restricted feasible set is a subset of the B-only set, parent-domain gain is impossible for that
+    TR class. The redundant TR parent arm and later owners were not run, so H-158 remains unresolved: neither
+    accepted nor rejected. Exp156 permits no rerun or later-owner continuation. A separately registered
+    experiment may skip TR and test BL, BR and TL under a new stopping rule. Positive parent-restricted
+    witnesses for all three, combined with TR's B-only incompatibility, would reject H-158 for individual
+    elimination of this fixed pose. Exp150 witnesses may not replace a matched B-only control.
 ---
 # H158: Necessary Parent Geometry at the Saved Residual
 
@@ -61,7 +64,9 @@ proves the restriction.
 The
 [independent runner review](../../../docs/project/reviews/review-2026-09-10-n11-parent-runner-independent.md)
 admits the target-free implementation, complete source binding, exact replay, clocks,
-and result reader. No BC326 target has run.
+and result reader.
+Exp156 then ran once at `5f6c50c4866921f366073511ac28713b0d1267d2` and
+completed with `b-only-incompatible`.
 
 The one registered experiment must report these outcomes separately:
 
@@ -73,8 +78,9 @@ The one registered experiment must report these outcomes separately:
   An exactly all-empty restricted class also qualifies, with a null maximum.
 - `b-only-incompatible`: record an old-model exclusion after exhausting all 181 B-only
   frames for that owner.
-  It neither establishes parent-domain gain nor resolves possible gain at later untested
-  owners.
+  The parent-restricted set is a subset of the B-only set, so parent-domain gain is
+  impossible for that owner.
+  The result does not resolve possible gain at later untested owners.
 - `no-owner-domain-exclusion`: reject H-158 after the residual survives and all four
   owners have positive parent-restricted witnesses.
 - `incomplete` or `invalid`: preserve the completed prefix without a universal
@@ -83,6 +89,14 @@ The one registered experiment must report these outcomes separately:
 This is one fixed-pose, individual-owner comparison.
 It does not establish a compatible unit-parent angle, simultaneous four-owner
 feasibility, a neighbourhood exclusion, an owner-routing theorem, or a global n11 bound.
+The residual survived its parent box, but the old B-only model already excludes
+`TR / bottom-left:m1:j7` after all 181 frames.
+Because every parent-restricted TR placement is also a B-only TR placement, this exact
+negative maximum rules out parent-domain gain at TR without running the redundant
+restricted arm. The registered protocol then stopped without testing any later owner.
+H-158 therefore remains unresolved.
+A future protocol may skip TR and test `BL`, `BR` and `TL`, but it must be prospectively
+registered as a new experiment.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -734,10 +734,27 @@ unit parents from `3.82345`, and independently verifies the analogous A6 stateme
 It also retains the fixed-angle adjacent-wall contact normal form, the correction that
 an arbitrary tight SAT row need not be physical contact, and the abstract `4/3`
 weighted-atom separation.
-The parent-domain adapter and production runner have passed target-free independent
+The parent-domain adapter and production runner passed target-free independent
 admission, including deadline, timeout, failed-readback and source-closure adversaries.
-H-158 and exp-156 now prospectively register the fixed exp151 target against the full
-clean execution HEAD; the target remains unrun.
+Exp156 then completed its sole source-bound run.
+The fixed exp151 residual lies inside its necessary parent box, while the first selected
+owner, `TR / bottom-left:m1:j7`, is already incompatible under the B-only model after
+all 181 frames and literal replay.
+The parent-restricted TR set is contained in that B-only set, so parent-domain gain is
+impossible there without running the redundant restricted arm.
+The frozen protocol did not evaluate `BL`, `BR` or `TL`; a new prospective protocol
+would need to skip TR and test those three owners.
+This complete old-model finding leaves H-158 unresolved and changes no global bound.
+BC329 remains the next direct global-bound target.
+BC337 is a secondary parallel lane, blocked on admission of a source-bound half-plane
+constructor, exact clipping, bounded runner and independent reader.
+It keeps exp151 direction 6 and open residual-centre domain `C°`. The control uses the
+existing TR centre-space obstacle `P_TR + (-R)` with the same nine other closed
+obstacles; the candidate substitutes the exact all-owner-incompatible obstacle `K_TR`
+directly, with no second Minkowski expansion.
+Thus `U0` and `U1` remove the respective TR obstacles and the same other nine obstacles
+from open `C°`. The target would accept only exact `area(U1) = 0` with independent union
+confirmation; because `U1` remains open, that establishes emptiness.
 The [strategy review](docs/project/reviews/review-2026-09-10-n11-strategy-frontier.md)
 puts the conditional parent comparison first and one frozen 2880-step core/net packet
 next, while multiplicity admission, contact-conditioned domains and mixed angle-profile
@@ -3524,7 +3541,7 @@ round that names the hypothesis, control roles included.
 | [H-155](packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
 | [H-156](packing/campaign/hypotheses/H-156-threshold-certificate-past-3-82.md) | confirmed | T-026 confirms the finer-net disjunct: its exact dilation corollary gives weak limit `3.826447410572939744...`; every strictly smaller side is excluded, but the limiting endpoint remains unresolved | 1 | 111.9m wall |
 | [H-157](packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | refuted | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement | 1 | exp-154: six of eight refined subclasses still read exactly 10 and two read `19/2`; this refutes the all-subclasses claim, while broader conditioning and changed charges remain open |
-| [H-158](packing/campaign/hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | running | Exp151’s direction-6 residual fails its own necessary parent box, or one selected owner has a newly replayed positive B-only witness and no positive witness after the complete parent restriction | 1 | Prospective; no target run |
+| [H-158](packing/campaign/hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | unresolved | Exp151’s direction-6 residual fails its own necessary parent box, or one selected owner has a newly replayed positive B-only witness and no positive witness after the complete parent restriction | 1 | exp-156: residual survives; TR is B-only incompatible after 181 frames, making parent gain impossible there; BL, BR and TL were not run; 20.63s external wall |
 
 ### Confirmed
 
@@ -3813,7 +3830,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 There are 112 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1484.9 wall-minutes.
+They record 2152.1 agent-minutes and 1485.2 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3964,7 +3981,7 @@ archive beside it.
 | [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md) | 11 | target | H-151 | Direct complete-domain support intersection and independent cover confirmation | Empty site region after188directions; no sixth site preserves D | **rejected** |
 | [exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md) | 11 | target | H-157 | Exact sixteen-bin and singleton-ray owner-sector screen of the mass-eleven ceiling family | Six of eight refined subclasses still read survivor weight exactly 10; the two that break read 19/2, not 79/8 | **rejected** |
 | [exp-155](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-155-h156-finer-net-threshold-dilation.md) | 11 | target | H-156 | Frozen T-025 atoms on the 1440-step direction net and exact dilation corollary | Weak limit `3.826447410572939744...`; every strictly smaller side excluded; limiting endpoint unresolved | **accepted** |
-| [exp-156](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md) | 11 | target | H-158 | Exact residual parent-box check followed by matched B-only and parent-restricted owner comparisons in TR, BL, BR, TL order | Prospective and unrun; five distinct terminal dispositions frozen | in-progress |
+| [exp-156](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md) | 11 | target | H-158 | Exact residual parent-box check followed by matched B-only and parent-restricted owner comparisons in TR, BL, BR, TL order | Residual inside parent box; TR / bottom-left:m1:j7 has exact negative B-only maximum after 181 frames, which also precludes parent gain there; BL, BR and TL unrun | unresolved |
 
 ### Cost and provenance
 
@@ -4081,11 +4098,11 @@ archive beside it.
 | exp-153 | one300-second external process; shared240-second internal guard | — | 22.36s | complete negative prefix | criterion |
 | exp-154 | under an hour, as registered | 356.1 s | — | criterion | `67ccd16b` |
 | exp-155 | retrospective registration of one completed bounded lane; no new target allowance | 6713.2s additive reported | — | criterion | `7ccb679c` |
-| exp-156 | one 90-second scientific allowance inside one 120-second supervised process plus two-second grace | — | — | in progress | full HEAD resolved at launch |
+| exp-156 | one 90-second scientific allowance inside one 120-second supervised process plus two-second grace | 0.4452s scientific | 20.6281s external command wall, including mandatory in-process readback and supervision | criterion | receipt: 8.6396s source replay and 9.0848s pre-readback publication clock; later Astra receipt audit: 9.26s separate review work; H-158 unresolved |
 
 ### What the 112 rounds jointly establish
 
-The 112 rounds use 2152.1 agent-minutes and 1484.9 wall-minutes under the campaign’s
+The 112 rounds use 2152.1 agent-minutes and 1485.2 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

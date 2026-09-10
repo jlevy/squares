@@ -43,34 +43,46 @@ experiment:
       loading and supervises the worker for 120 seconds, followed by at most two seconds of termination
       grace. No retry, tuple replacement, residual search, owner reordering or parameter sweep.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-035/exp-156-unit-parent-saved-residual.json
-  results: []
+    commit: 5f6c50c4866921f366073511ac28713b0d1267d2
+    dirty: false
+  effort:
+    timebox: One 90-second scientific allowance inside one 120-second supervised process plus two-second
+      termination grace
+    wall_seconds: 20.628132708
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does this invocation establish residual self-exclusion, matched parent-domain gain, or four
+      positive parent-restricted owner witnesses under the frozen exp156 protocol?
+    outcome: no_progress
+    checked_by: The source-bound result at 5f6c50c4866921f366073511ac28713b0d1267d2 is complete and
+      independently read back. The residual is inside its necessary parent box. The first selected owner,
+      TR / bottom-left:m1:j7, has an exact negative B-only global maximum after all 181 frames and literal
+      replay. Because the parent-restricted feasible set is a subset of the B-only set, parent-domain gain
+      is impossible for TR. The protocol returns b-only-incompatible without evaluating the redundant TR
+      parent arm or the later BL, BR and TL owners.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: Exact residual self-exclusion, or one newly replayed positive B-only control paired
       with exhaustive nonpositive parent-restricted separation over the same selected owner class.
-    reason: Prospective and unrun; the command resolves and validates the full clean HEAD only after this
-      registration has been committed.
-  lease:
-    expires: '2026-09-11T02:00:00Z'
-    host: spud10.local
+    reason: The sole run found that the old B-only model already excludes the first selected owner, making
+      parent-domain gain impossible there by set inclusion. The later owners were not tested, so this
+      complete fixed-protocol result neither accepts nor rejects H-158.
+    commit: 5f6c50c4866921f366073511ac28713b0d1267d2
 ---
 # Exp156: Parent Restriction at Exp151’s Saved Escape
 
-**Prospective, in progress, and unrun.** Current source admission is clean at
-`568abad5048f396ff62d616940f3a296351165a8`. The declared command resolves the full
-execution revision with `git rev-parse HEAD` after this registration is committed; the
-runner refuses a dirty checkout, a different revision, stale imported modules, changed
-receipt bytes, or a nonfresh output path.
-The runtime substitution is deliberate because a record cannot contain the hash of its
-own commit. The runner records the resolved 40-character revision in
-`sources.implementation.git_commit`, and independent readback binds that exact revision
-again.
+**Complete, with H-158 unresolved.** The sole source-bound invocation ran at
+`5f6c50c4866921f366073511ac28713b0d1267d2`. The command’s mandatory in-process readback
+binds the same full execution revision, source receipts, result schema and complete
+status. A later Astra audit separately re-read the saved receipt.
 
 Freeze exp151’s direction-6 saved residual, tuple `(0,0,0,7)`, `q=96/25`,
 `B=9977/10000`, `D=207107/90000000`, original marks, physical corner maps, the complete
 361-direction residual authority, and all 181 frames per selected owner.
 Evaluate owners in `TR, BL, BR, TL` order.
-The one output is the fresh path under `results/agenda-035` declared in the frontmatter.
+The retained output is the path under `results/agenda-035` declared in the frontmatter.
 
 For a retained unit direction `r`, set `S=|r.x|+|r.y|`, `T=||r.x|-|r.y||`, and
 `e=max(B*S/2,1/2,(S-T*D)/(2+D^2))`. Intersect the original anchored owner-centre domain
@@ -85,8 +97,9 @@ The result and later experiment verdict must preserve five distinct cases:
   pose.
 - **B-only incompatibility:** `b-only-incompatible` records that the old model already
   excludes the current owner after exhausting all 181 B-only frames.
-  It cannot be relabeled as parent gain and does not decide later owners if the runner
-  stops there.
+  Since the parent-restricted set is a subset of the B-only set, parent gain is
+  impossible for that owner.
+  The outcome does not decide later owners if the runner stops there.
 - **Parent-domain gain:** `owner-domain-gain` accepts only when exp156 itself recomputes
   and independently replays a positive B-only witness for the selected owner, then
   exhausts all 181 parent-restricted frames with a nonpositive maximum.
@@ -104,6 +117,42 @@ The result and later experiment verdict must preserve five distinct cases:
 Exp150’s B-only witnesses are prior evidence about exp149 and cannot serve as matched
 controls here. Each exp156 B-only witness must be produced and replayed in the same
 source-bound invocation before any parent-domain gain is attributed.
+
+## Result
+
+The residual centre lies inside its necessary parent box, so the direct self-exclusion
+criterion missed. The runner then evaluated the first selected owner only:
+`TR / bottom-left:m1:j7`. All `181/181` B-only frames completed, and literal replay
+returned the same exact global maximum slack,
+
+```text
+-15763158018896271297670126092574371280133688071
+-------------------------------------------------
+116321554678452558303608800190641648704779316000
+```
+
+which is approximately `-0.1355136463`. The class is therefore incompatible in the old
+B-only model.
+The parent-restricted feasible set is contained in the B-only feasible set,
+so it also has no positive separation witness.
+Matched parent-domain gain is impossible because its required positive B-only control is
+absent. Under the frozen protocol, that result ends the invocation as
+`b-only-incompatible`: `parent_restricted` is null because that arm would be redundant,
+and `BL`, `BR` and `TL` were not run.
+
+The receipt samples its clocks before the command’s mandatory in-process readback:
+scientific work reports `0.4452163329697214` seconds, source replay reports
+`8.639562333992217` seconds, and their pre-readback publication clock is
+`9.084778666961938` seconds.
+The external command wall, which includes that mandatory readback and the supervisor and
+is recorded as the experiment effort above, was `20.628132708` seconds.
+A later Astra audit independently re-read the saved receipt in `9.26` seconds; that
+separate review work is not part of the experiment wall.
+
+This is a complete old-model finding, not a parent-domain gain.
+It neither accepts nor rejects H-158, and exp156 authorizes no rerun or later-owner
+continuation. A future test would need a new prospective record that skips the already
+incompatible TR class and evaluates `BL`, `BR` and `TL` under its own stopping rule.
 
 ## Scope
 
