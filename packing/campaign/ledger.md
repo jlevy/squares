@@ -712,7 +712,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-325 | research | 11 | complete | 1 | think-gvlg | BC326 is selected first. The independent translation review then promotes BC329's one frozen 2880-step packet ahead of a weighted target, while BC327 remains blocked on multiplicity admission, a paired-program adapter and a freshly materialized row manifest. |
-| BC-326 | research | 11 | ready | 1 | think-fx2y | The complete target-free instrument passed independent admission after 56 focused tests, exact clock and timeout adversaries, closure-wide source binding, Ruff and BasedPyright. Freeze this surface in a clean revision, prospectively register the unchanged fixed target and fresh output path, and only then run it. |
+| BC-326 | research | 11 | in_progress | 1 | think-fx2y | H158 and exp156 prospectively freeze the unchanged fixed target and one fresh agenda-035 output path. The target-free instrument passed independent admission after 56 focused tests, exact clock and timeout adversaries, closure-wide source binding, Ruff and BasedPyright. Commit the registration, then use its declared command to resolve and validate the full clean HEAD before the single run. |
 | BC-327 | research | 11 | blocked | 2 | think-yc80 | The conditional primary is the retained seven-token, threshold-four K5 motif. Run its W7 admission before allocating the paired scientific comparison; do not substitute ordinary atoms inside the same protocol. |
 | BC-328 | research | 11 | complete | 1 | think-02l0 | Use the reviewed adjacent-wall component normal form to define one snug-parent or genuine contact-path pilot. Preserve the complementary path-length branches and verify physical contact rather than treating an arbitrary tight support row as contact. |
 | BC-329 | research | 11 | blocked | 1 | think-17qa | Build and independently admit that fixed-core runner. Then prospectively register one packet retaining T025's sites and relative weights with a 2880-step net, B=9981/10000, D=207107/1440000000, raw acceptance threshold M/11=685457679/687500000, and normalization alpha=1/m. Require complete exact and interval agreement plus dilation replay on the same normalized bytes. |
@@ -728,7 +728,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 111 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 112 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -867,6 +867,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | H-155 | blocked | proof | For at least one four-owner class of PR 137's sixteen-per-corner struc |  | 0 |  |  |
 | H-156 | confirmed | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 1 |  | 111.9m wall |
 | H-157 | refuted | proof | Refining the corner-owner angular bins from eight to sixteen makes eve |  | 1 |  | 5.9m wall |
+| H-158 | running | proof | For exp151's direction-6 saved residual on selected tuple (0,0,0,7), e |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1017,6 +1018,12 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-156 | series-000 | 11 | Codex root coordinator; prospective strategy independently audited by GPT-6 Astra Max | H-158 | Prospective and unrun; the command resolves and validates the full clean HEAD only after this registration has been committed. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1038,7 +1045,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 
 ## Effort
 
-111 rounds, 2152.1 agent-minutes, 1484.9 wall-minutes.
+112 rounds, 2152.1 agent-minutes, 1484.9 wall-minutes.
 
 ## Exploration reports not yet codified
 

@@ -61,22 +61,25 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 1
     question: Does the necessary unit-parent centre domain exclude exp151's saved residual escape itself or
       eliminate its individually compatible owner class?
+    hypotheses: [H-158]
     budget: One 60–90 minute block. Source admission stops at 45 minutes; an admitted target keeps its
       90-second internal and 120-second external allowance plus termination grace.
     entry: BC325 closes; the reviewed adapter and constructor repairs are adopted, independently checked,
       and bound to a clean execution revision and complete source manifest.
-    exit: Exact residual self-exclusion; or a replayed B-only positive witness and a complete nonpositive
-      parent-restricted owner maximum; or a precise source-admission dependency with no target run.
+    exit: Exact residual self-exclusion; a replayed B-only positive witness with a complete nonpositive
+      parent-restricted owner maximum; B-only incompatibility; four positive parent-restricted witnesses;
+      or an exact partial or invalid disposition without a promoted claim.
     bead: think-fx2y
     depends_on: [BC-325]
-    next_evidence: The complete target-free instrument passed independent admission after 56 focused tests,
-      exact clock and timeout adversaries, closure-wide source binding, Ruff and BasedPyright. Freeze this
-      surface in a clean revision, prospectively register the unchanged fixed target and fresh output path,
-      and only then run it.
+    next_evidence: H158 and exp156 prospectively freeze the unchanged fixed target and one fresh agenda-035
+      output path. The target-free instrument passed independent admission after 56 focused tests, exact
+      clock and timeout adversaries, closure-wide source binding, Ruff and BasedPyright. Commit the
+      registration, then use its declared command to resolve and validate the full clean HEAD before the
+      single run.
     workflows: [research-loop]
     program: n11-daytime-strategy
     artifacts:
@@ -92,6 +95,8 @@ agenda:
     - packing/tests/test_wall_owner_parent_compatibility.py
     - packing/tests/test_wall_owner_parent_experiment.py
     - packing/tests/test_wall_owner_parent_inputs.py
+    - packing/campaign/hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md
     parallel_group: parent-geometry
   - id: BC-327
     purpose: research

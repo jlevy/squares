@@ -501,6 +501,7 @@ It names three escapes it does not close; the first is the row below.
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
 | 153 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-157](hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further would delete `1/8` more. Refuted 2026-09-10 by exp-154: six of eight refined subclasses still read exactly 10 and two read `19/2`. The two improved patches intersect their fixed target cores, so the earlier positive-distance explanation does not apply to them; the six neutral children retain the reported positive distance. T1 and T2 in X-026 §5.1 are scoped to the retained finite ray universe and fixed patch-only residual domain. They do not rule out other angular restrictions, stronger domains, changed charges, or selection routing. Whether the neutral classes are forced remains open. |
+| 155 | Test necessary unit-parent domains at exp151’s saved residual | registered | [H-158](hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | On tuple `(0,0,0,7)`, first test the fixed direction-6 residual against its own parent box, then compare newly replayed B-only and parent-restricted separation for `TR, BL, BR, TL`. A gain concerns one fixed pose and individual owner class; all four positive witnesses are a bounded negative, not joint feasibility. |
 
 ## Dead ends
 
