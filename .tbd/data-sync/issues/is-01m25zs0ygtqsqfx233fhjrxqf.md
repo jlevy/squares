@@ -5,7 +5,7 @@ title: Implement the selected T-025/T-026 explainer update
 kind: task
 status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m25zs0xky60mnw0q1fvb5bfz
 parent_id: is-01m25zrj5np9ywft00t8j8neaz
 created_at: 2026-09-10T15:42:56.976Z
-updated_at: 2026-09-10T16:32:07.220Z
+updated_at: 2026-09-10T16:52:13.273Z
 closed_at: 2026-09-10T16:20:02.155Z
 close_reason: "Implemented the incremental explainer architecture at 47a16331: source-derived T-025/T-026 facts and current bracket, preserved point-only figures, updated README/TUTORIAL and Pages inputs, and passed focused render, 70 tests, PDF determinism, print layout, typography, Flowmark, and Ruff checks."
 resolution: null
@@ -34,4 +34,4 @@ artifacts through their maintained tools and keep source-derived values consiste
 
 ## Notes
 
-Final implementation commit is d8bd6d9c after CI-driven Ruff, documentation-map, and Linux math-face fixes. Focused source render, 70 tests, PDF determinism, print layout, and exact hosted math-face command pass locally.
+Final implementation commit is 2a654809 after CI-driven Ruff, documentation-map, Linux math-face, and Astra review corrections. Focused render, 70 tests, PDF determinism, print layout, documentation integrity, and exact math-face checks pass locally. Prior-head WebKit retry passed; new-head hosted checks are running.
