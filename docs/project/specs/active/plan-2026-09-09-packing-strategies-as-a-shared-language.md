@@ -278,6 +278,48 @@ No claim about any `n`. The ascent shows what is known, and the
 owns only that each step is a correct, clean, repeatable transition between two retained
 packings.
 
+### Phase 4: use the renderer that exists, and lift the two limits that stop it
+
+The first draft of this phase said to extract a renderer. That was wrong, and checking
+before building is what caught it: `sqpack.render` **is** the renderer -- `render_packing_svg`
+with its own colour, style, contact and number modules -- and `sqpack.render.motion`
+already emits **CSS-keyframe animated SVG** from a `PackingTrajectory`, which is very close
+to the embeddable artifact this phase wants.
+
+What is actually wrong is that the prototypes bypassed it. The v1 slideshow copies the
+poster's colours and draws its own panels; the v2 workbench embeds pose JSON and draws in
+JavaScript at run time. The motion lab uses `sqpack.render.numbers` and little else. So the
+defect is not a missing renderer, it is four surfaces declining to share the one that
+exists.
+
+**Two restrictions block reuse, and they are stated in the code rather than implied.**
+`validate_translation_only_trajectory` refuses a trajectory whose container side changes,
+and refuses any frame where a square's angle differs from its final angle -- *"trajectory
+rendering does not yet support rotation"*. Both are fatal here. Squares rotate: six of
+`n = 11`'s fourteen contacts join squares 40.2 degrees apart. And the atlas ascent changes
+the container at every step, by construction.
+
+**So the work, in order.**
+
+- [ ] Lift rotation. A CSS keyframe can carry `rotate` beside `translate`, so the frame
+      model already has what it needs; what has to change is the validator, the keyframe
+      emitter, and the choice of rotating the short way round a quarter turn.
+- [ ] Lift the constant-container restriction, so a trajectory may resize. That is the
+      `container` mechanism from Phase 3 seen from the rendering side.
+- [ ] Feed a `PackingStrategy` trace into `PackingTrajectory`, which is the one adapter
+      that turns everything already built into something watchable.
+- [ ] Then the embeddable component: a trace in, one self-contained animated `.svg` out,
+      no build step and no JavaScript, so it drops into the explainer page or any other.
+      **This first, not a whole embedded motion lab** -- a component that can be dropped in
+      is worth more than a lab that has to be hosted, and it is the smaller thing.
+- [ ] A simplified interactive lab on the explainer page comes after, once there is
+      something worth playing with.
+- [ ] The video path is the same trace at a fixed size and rate, then an encoder, then a
+      receipt. Capture cost is already measured: about 42 ms per frame at 1080p and 145 ms
+      at 4K in the pinned headless browser, with repeated captures of one instant
+      byte-identical, which is what makes the export reproducible and not merely repeatable.
+- [ ] A guard on both exporters refusing a frame from a `guide` phase without its label.
+
 ## Testing Strategy
 
 Every phase asserts the invariant it is responsible for, not an arrangement that

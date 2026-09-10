@@ -1,0 +1,102 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/jlevy/squares/packing/strategies/packing-animation.schema.yaml
+title: PackingAnimation
+description: >
+  A rendered sequence of packing frames, with everything a renderer needs and
+  nothing about how a renderer draws. This is the interchange format between the
+  thing that produces motion and the several things that display it: the
+  workbench plays it live, the SVG exporter turns it into one self-contained
+  animated file, the capture path encodes it to video, and the explainer page
+  embeds it.
+
+  It is deliberately separate from PackingStrategy. A strategy says what to do;
+  an animation is what happened. One strategy run produces one animation, but an
+  animation can also be built by hand -- a sweep across retained records owes
+  nothing to a search -- and a renderer must not need to know which it is
+  holding.
+
+  `guided` is not decoration. A frame produced by a guide phase was pulled to
+  its target rather than found, and any exporter that drops the label is
+  producing something that can be mistaken for a search result.
+type: object
+additionalProperties: false
+required: [name, n, frames]
+properties:
+  name: {type: string, minLength: 1}
+  n:
+    type: integer
+    minimum: 1
+    description: Squares in the final frame. A frame may hold fewer while one arrives.
+  guided:
+    type: boolean
+    default: false
+    description: >
+      True when any frame came from a phase that drove the arrangement onto a
+      chosen target. Renderers must surface it; exporters must refuse to emit
+      without it.
+  source:
+    type: object
+    additionalProperties: false
+    description: Where the frames came from, so a viewer can go and re-run it.
+    properties:
+      strategy: {type: string, description: Path to the PackingStrategy document.}
+      records: {type: array, items: {type: integer}, description: Retained records used as targets.}
+      commit: {type: string}
+  duration_seconds: {type: number, exclusiveMinimum: 0}
+  palette:
+    type: object
+    additionalProperties: false
+    description: >
+      Which colouring rule to apply, never the colours themselves. A renderer owns
+      its palette; an animation only says what the colour should mean.
+    properties:
+      hue: {enum: [identity, angle-class, uniform]}
+      shade: {enum: [none, full-side-contact, evidence]}
+  reference:
+    type: object
+    additionalProperties: false
+    description: >
+      What to measure the container against. Both are facts about the problem, not
+      about this run, so a renderer can draw a gap bar without consulting anything.
+    properties:
+      best_known: {type: number, exclusiveMinimum: 0}
+      proved_lower_bound: {type: number, exclusiveMinimum: 0}
+  frames:
+    type: array
+    minItems: 1
+    items: {$ref: "#/$defs/frame"}
+
+$defs:
+  frame:
+    type: object
+    additionalProperties: false
+    required: [t, side, squares]
+    properties:
+      t:
+        type: number
+        minimum: 0
+        maximum: 1
+        description: >
+          Logical time, zero to one, monotonically non-decreasing across frames.
+          Not seconds: the same animation plays at any duration, and a keyframe
+          exporter needs percentages.
+      side:
+        type: number
+        exclusiveMinimum: 0
+        description: Container side at this frame. It may change between frames.
+      squares:
+        type: array
+        description: One `[x, y, theta]` per square, centre and angle in radians.
+        items:
+          type: array
+          minItems: 3
+          maxItems: 3
+          items: {type: number}
+      phase: {type: string, description: Which strategy phase produced this frame.}
+      label: {type: string, description: What to show while it is on screen.}
+      feasible:
+        type: boolean
+        description: >
+          Whether this frame is an actual packing. Intermediate frames of a
+          transition usually are not, and the plan requires a renderer to say so
+          rather than let a viewer assume every frame is a result.
