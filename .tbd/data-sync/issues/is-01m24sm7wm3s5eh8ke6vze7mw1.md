@@ -5,7 +5,7 @@ title: "N11 overnight: three 3-hour research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 13
+version: 14
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
@@ -16,8 +16,9 @@ child_order_hints:
   - is-01m24tw6gbrcrtf2msvtckq7xs
   - is-01m24vex03yjx6wdsssw68r9kk
   - is-01m24vqhfhxy1q22z1a5610700
+  - is-01m25431rvn37r4dha0sfrvzx7
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T07:37:12.706Z
+updated_at: 2026-09-10T07:39:05.370Z
 ---
 The owner authorized unattended continuation after PR139 merges, in three sets of two to
 four hours.

@@ -5,7 +5,7 @@ title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
@@ -13,8 +13,9 @@ parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 child_order_hints:
   - is-01m251b13sgjhq5d31fnmyt9pm
   - is-01m253zk0mvw2d49zmw4esm6r6
+  - is-01m25430wcdx8wn8f3qs7b4qjv
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T07:37:11.955Z
+updated_at: 2026-09-10T07:49:14.031Z
 ---
 Implement and independently admit a necessary unit-parent centre-domain adapter, then prospectively register at most one paired comparison on the saved exp151 escape at tuple(0,0,0,7). The independent analytic review at /private/tmp/n11-parent-bound-independent-review.md passes the formula under exact unit rays, centre-preserving nearest-core selection, principal angular mismatch and the admitted global maximum bound D. Adopt that review under docs/project/reviews/ on the fresh post-PR139 branch before target use.
 
@@ -24,4 +25,4 @@ First check whether the fixed residual escape is outside its own necessary paren
 
 ## Notes
 
-Private source binding constructor now complete: /private/tmp/n11-parent-adapter-prep/wall_owner_parent_inputs.py, test_wall_owner_parent_inputs.py and parent-input-constructor-readiness.md. Sol reports 30 combined synthetic/reviewer controls, Ruff clean and BasedPyright 0/0/0; no retained target was loaded or parent restriction computed. Astra xhigh independent constructor review is running and will be retained as /private/tmp/n11-parent-input-independent-review.md. Earlier pure-adapter replay repair think-u3c2 already has Astra Max correction PASS. Package adoption, clean-source CLI, exact 90/120+2 clocks, result schema, source freeze and prospective target registration remain pending. This is premerge source preparation, not postmerge scientific progress.
+Both private parent repairs now have independent correction PASS: pure-adapter replay integrity think-u3c2 (Astra Max) and constructor repository-path resolution think-k64c (Astra xhigh,15 targeted controls). Complete manifests and role/class provenance also passed constructor review. Reports /private/tmp/n11-parent-adapter-correction-review.md and /private/tmp/n11-parent-input-path-correction-review.md. No retained target has been loaded or parent restriction evaluated. Postmerge adoption, authoritative Git cwd/clean-source CLI, exact clocks, complete/partial schema and B-only attribution are tracked explicitly under think-acfb. They remain prerequisites to separately registering and launching the fixed-exp151-escape comparison.
