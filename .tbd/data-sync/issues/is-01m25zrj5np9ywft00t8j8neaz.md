@@ -5,7 +5,7 @@ title: "N11 explainer: teach the T-025/T-026 lower-bound ladder"
 kind: epic
 status: open
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
@@ -15,8 +15,9 @@ child_order_hints:
   - is-01m25zs0w1ctenbb2c5wt9q06v
   - is-01m25zs0xky60mnw0q1fvb5bfz
   - is-01m25zs0ygtqsqfx233fhjrxqf
+  - is-01m26b9kjzhrxhsw4dm5atkax2
 created_at: 2026-09-10T15:42:41.844Z
-updated_at: 2026-09-10T17:58:09.321Z
+updated_at: 2026-09-10T19:04:14.683Z
 ---
 Add a documentation block alongside the three scientific blocks to bring the public
 explainer up to the merged T-025/T-026 result. The block is editorial and does not
