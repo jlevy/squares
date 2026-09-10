@@ -684,6 +684,10 @@ exclusions:
     reason: Source-faithful transcriptions and raw extraction are governed by resources/README.md.
   - pattern: packing/resources/web/**/*.md
     reason: Retained first-party and web-source content is archival evidence, not project prose.
+  - pattern: packing/resources/private-correspondence/**/*.md
+    reason: >-
+      Verbatim transcriptions of unpublished correspondence, governed by
+      resources/README.md. Archival evidence attributed to its author, not project prose.
   - pattern: AGENTS.md
     reason: >-
       Assembled from generated tbd, flowmark and pprose blocks by their own installers,
