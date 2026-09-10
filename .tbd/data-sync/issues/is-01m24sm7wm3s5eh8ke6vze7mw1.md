@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 23
+version: 24
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m260z2959dmcmn61pn2z7jsk
   - is-01m260za5fe3ewrkns6y4ehjva
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T18:38:42.993Z
+updated_at: 2026-09-10T20:24:56.935Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
@@ -61,8 +61,4 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-BC325 is complete on codex/n11-daytime-strategy. The independent exact review strengthens the 3.82345 result: every translated member of the retained 88-core family has a strictly contained, concentric, zero-mismatch individual unit parent; A6 has the analogous result from 3.82845 under its exact atom-transport premise. This removes fixed-B point-only singleton-parent tightenings that retain the used nodes, while owner/contact conditions, joint feasibility, changed cores, changed atoms, and conditional routing remain open.
-
-The ranked next blocks are BC326 conditional parent geometry, then one prospectively frozen 2880-step core/net packet, weighted-atom admission and matched comparison, a genuine-contact or snug-parent pilot, mixed charges on one angle profile, H155 after source admission, and H135 as reserve. This is an allocation by present information and theorem distance, not a method-wide productivity judgment.
-
-The standalone explainer is draft PR148 at 277f8b1a on codex/n11-explainer-current-bound. Its complete local documentation block and independent review pass. Retarget it onto this research branch after the checkpoint is published, then require stacked hosted checks before readiness. No scientific target has run on the checkpoint branch.
+Research checkpoint PR #150 is published from PR139's merge at head 5a6b9a75. Commit cc98c774 contains the reconciled evidence, structural correction, weighted-atom separation, BC329 preflight, parent-domain runner and session099 repair; a commit-bound fast gate passed 4,900 tests and 62 of 73 steps, and the follow-up records gate passed after certification was recorded. No scientific target ran and no global bound changed. Session099 remains honestly unmeasured for native usage. Parent-runner admission and session099 closeout beads are complete.\n\nDraft explainer PR #148 is at f7126bfc with v0.4.0 and exact first-edition-label dates. Retarget it onto codex/n11-daytime-strategy, rerun stacked checks, and resolve the WebKit saved-geometry probe before readiness. The ranked next scientific block remains BC326's one prospectively registered parent-domain comparison; BC329 waits on its fixed-core runner.
