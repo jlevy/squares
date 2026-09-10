@@ -5,7 +5,7 @@ title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 child_order_hints:
   - is-01m251b13sgjhq5d31fnmyt9pm
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T06:51:01.111Z
+updated_at: 2026-09-10T07:11:13.061Z
 ---
 Implement and independently admit a necessary unit-parent centre-domain adapter, then prospectively register at most one paired comparison on the saved exp151 escape at tuple(0,0,0,7). The independent analytic review at /private/tmp/n11-parent-bound-independent-review.md passes the formula under exact unit rays, centre-preserving nearest-core selection, principal angular mismatch and the admitted global maximum bound D. Adopt that review under docs/project/reviews/ on the fresh post-PR139 branch before target use.
 
@@ -23,4 +23,4 @@ First check whether the fixed residual escape is outside its own necessary paren
 
 ## Notes
 
-The independent analytic parent review is retained at docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md. Sol xhigh's private adapter/test prototype under /private/tmp/n11-parent-adapter-prep passed18synthetic controls and local lint/type checks; it remains unadopted and has no scientific target. A separate Astra Max agent now reviews its implementation and missing source-admission obligations, producing /private/tmp/n11-parent-adapter-independent-review.md. That bounded private review runs beside PR139 finalization; it does not block the PR or start the nine-hour science clock. Receipt CLI, full residual provenance and any identified corrections remain future implementation work.
+The parent analytic formula and pure adapter geometry have independent review. Repair think-u3c2 passed Sol controls and Astra Max correction review, including shared-error refusal; adoption remains on the next branch. Sol xhigh now prepares only the smallest target-blind authoritative receipt/manifest input constructor in /private/tmp/n11-parent-adapter-prep: complete original owner frame/source inventory, all 361 residual sources, physical corner map and selected local-class identity. It may inspect retained source formats but must not calculate a new parent-domain result at the exp151 target. Output and independent admission are still required before any registered comparison; the production CLI and clock/result protocol remain separate obligations.

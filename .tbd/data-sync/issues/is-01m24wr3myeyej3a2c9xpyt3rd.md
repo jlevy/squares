@@ -5,14 +5,17 @@ title: Review H157 refinement limits and preserve owner-selection scope
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m24tw635b6tfjj1wb2awvkff
 parent_id: is-01m24tw635b6tfjj1wb2awvkff
 created_at: 2026-09-10T05:30:46.813Z
-updated_at: 2026-09-10T06:52:47.179Z
+updated_at: 2026-09-10T07:13:18.170Z
 ---
+Independently replay H157 refined-owner survivor counts and audit its distance and patch-subset explanations. Preserve the registered maximum-based rejection while correcting intersecting cases, the common-mark premise for equality and unsupported strategy-wide judgments. Retain the Astra initial/correction reviews, maintained exact geometry replay and focused controls. These are adopted in the staged PR139 correction; close after publication and required integration checks. No full-packing completion or unavoidable neutral owner selection is claimed. Parent reconciliation: think-a4an.
 
 ## Notes
 

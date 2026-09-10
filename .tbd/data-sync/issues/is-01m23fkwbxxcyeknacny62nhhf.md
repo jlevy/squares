@@ -5,12 +5,15 @@ title: "Certificate format cannot express two atom classes: K5 clique and K6 flo
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m252542q6zq6hsb4jvj9y2rs
+  - is-01m25255yg6wqveyja558g7sys
 created_at: 2026-09-09T16:22:02.365Z
-updated_at: 2026-09-10T06:16:07.009Z
+updated_at: 2026-09-10T07:09:14.368Z
 ---
 Extend the certificate format and both covering routes to retain the weighted and floor charges already returned by the separator. Source: agenda034 lane A4 finding P10 and lane A5 F6. This is a representation and verification prerequisite, not evidence that the unconditional language or conditional route is exhausted.
 
@@ -24,18 +27,4 @@ The retained A5 value10 is exact for its finite final row set and an upper bound
 
 ## Notes
 
-Sol high completed a private K6 checkpoint under /private/tmp/n11-floor-atom-prep/:
-floor.py, floor_interval.py, decide_floor_certificate.py, synthetic tests and a contract.
-Nineteen synthetic tests, Ruff and BasedPyright passed on project Python3.14.
-No retained certificate or scientific target ran, and no shared source or registry changed.
-
-Remaining: independent source review, production CLI/source/parallel adapter, legacy
-dispatch integration, low-memory slab route and affected gates. K5 source mapping and
-admission remain open; the general floor representation may express its budget-one
-subclass under the reviewed total-weight premises. This does not close think-g3j7.
-The six A6 cuts use existing threshold semantics and do not depend on this extension.
-Model identity comes from dispatch: gpt-5.6-sol at high, not the worker's generic footer.
-
-<!-- This document follows common-doc-guidelines.md.
-See github.com/jlevy/practical-prose and review guidelines before editing.
--->
+Astra xhigh independent review is complete: the floor budget proof is sound under strict core shrink and all 19 supplied controls pass. Two confirmed prototype defects are tracked separately: serialization/loader round-trip in think-h1ju and valid zero-charge NumPy overflow in think-k1pe. Sol xhigh repairs only those private source boundaries, then Astra will independently review the correction. The prototype remains unadopted; production dispatch, legacy migration, low-memory support and K5 remain open. No scientific target or retained certificate was run. Review: /private/tmp/n11-floor-atom-independent-review.md.

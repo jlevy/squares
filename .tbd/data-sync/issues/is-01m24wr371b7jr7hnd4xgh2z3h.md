@@ -5,14 +5,17 @@ title: Independently review A6 all-site obstruction and fixed-support cut receip
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m24tw635b6tfjj1wb2awvkff
 parent_id: is-01m24tw635b6tfjj1wb2awvkff
 created_at: 2026-09-10T05:30:46.358Z
-updated_at: 2026-09-10T06:56:57.333Z
+updated_at: 2026-09-10T07:13:17.907Z
 ---
+Independently admit the A6 point family, every retained old atom orbit, the six separated threshold-orbit charges, and the seven-row fixed-support upper certificate against complete published source inputs. Retain maintained exact readers, source/receipt bindings, controls and the distinction between fixed-support upper bounds, selected-row lower candidates and the global packing bracket. Math admission is complete in the staged PR139 correction; close after the adopted files are published and their required integration checks pass. Parent reconciliation: think-a4an; final combined checkpoint: think-yl6y.
 
 ## Notes
 
