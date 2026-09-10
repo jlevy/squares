@@ -151,23 +151,17 @@ at which this project holds an endpoint certificate.
 
 The value is the supremum for uniform dilation of these atoms with one concentric core
 per square and strict support containment on the 1440-step net.
-What the measurement behind it shows is how little room is left in the mechanism: the
-rescaled budgets are `10.996251` at 1440 steps and `10.996809` at 360, against the `11`
-a certificate may not reach, so both sit within `0.004` of the ceiling, where the frozen
-certificate sat at `10.967323`. The whole slack the refinement consumes is the charge
-the finer net costs — about `2.5%` of the least charge at a fixed shrink, since
-two-of-three charges are more angle-sensitive than point masses.
-A further doubling of the net would have to be paid for out of the remaining `0.0037`.
-**That is a reading about the measured nets, not a closure** (scope note, 2026-09-10, PR
-139 finding R5). What is measured is the rescaled budget on two nets, 360 and 1440
-steps, over this frozen atom family — `10.996809` and `10.996251` against `11`. That the
-remaining slack cannot absorb a further doubling is an **expectation about the next
-optimisation**, not a proof that no finer net over these frozen atoms can improve the
-bound: the charge the refinement costs is not known to be monotone or bounded below on
-nets that were not run, and no net past 1440 steps was measured.
-Read it as a hypothesis about where to spend next — re-optimising the atoms at the finer
-net, or a different atom family, look better priced than another doubling — and not as a
-route closure. The 360-step rung of the same family (side supremum
+At 1440 steps the rescaled budget is `5483661432/498684619 = 10.996251384`, leaving
+`1869377/498684619` below eleven.
+The frozen certificate’s budget was `10.967323`. At the original shrink the complete
+mixed certificate’s least charge falls from `1.00000203` to `0.973862153` on the
+1440-step net; the larger admitted shrink partly recovers it.
+These are measurements of the complete certificate, not of the two-of-three component
+separately. These figures describe the measured 1440-step certificate.
+They do not decide another net and do not prove that refinement of the frozen atoms is
+exhausted. Re-optimizing the atoms at a finer net, retaining them on another net, and
+changing the atom family remain separate hypotheses.
+The 360-step rung of the same family (side supremum
 `38200000*sqrt(32400042893309449)/1798171928825841 = 3.82388604850764671009...`) is
 retained in the lane document only, not as a case file.
 The lane report

@@ -5,7 +5,26 @@ Retained measurement-lane report for
 on 2026-09-09, read-only on the repository at `claude/n-11-stronger-result-d730ds`. The
 report is reproduced as delivered, with its own findings table and status labels; only
 its file references were rewritten to say where each file now is.
+The dated correction below governs the historical body.
 X-024 carries the coordinator’s reading.
+
+> **Scope correction, added 2026-09-10.** The exact `32/3` result is the optimum on the
+> named 88-placement support under point-depth rows and the complete budget-one class.
+> Its maximal-clique reduction is sound in this special case: every relevant maximal
+> clique on this support was either covered by a point-depth row or had `tau* < 2` and
+> received a valid row, so its subcliques are dominated.
+
+> The later exact value `10` is the optimum on the finite row sets actually produced.
+> Because K6 searched only bounded thresholds and used a time-limited mixed-integer
+> program, this proves that the full rank-one-closure optimum is at most `10`; it does
+> not prove equality for the full closure.
+> A zero bounded search is not a certificate for every rational multiplier.
+
+> These statements concern the fixed support and the one measured 344-placement union.
+> They do not show that every support stays below eleven, that either side is globally
+> uncapped, or that net or column refinement is exhausted.
+> Historical phrases such as “real room,” “separator exhausted,” and “enlarging the
+> support does not rescue it” must be read at this finite-support, finite-row scope.
 
 The question is X-024 slice A5’s in its sharpest form: **the family that caps the point
 method at `191/50` — does it also cap the threshold method at `153/40` and `383/100`,
@@ -262,6 +281,10 @@ the 88-placement support (coefficient `floor(a(P)/t)` per placement, right-hand 
   The separator was **not** run to exhaustion here — the round limit stopped it — so
   more cuts may exist and the value may fall further.
 
+> **Correction.** “Separator exhausted” above means that the declared bounded K6
+> searches returned no candidate.
+> It is not exhaustion of all rational rank-one multipliers.
+
 **Both sides land on exactly `10`**, and both are certified: on the final row set the
 exact feasible primal and the exact dual bound agree at `10`.
 
@@ -417,6 +440,10 @@ Four things went wrong and are worth recording.
   Dump the rows *before* the deadline check, not after the loop.
 
 ## 10. Verdict
+
+> **Current scope.** The verdict below concerns the two measured supports.
+> The `32/3` equalities are complete for budget one, while `10` is an exact upper bound
+> for the full rank-one optimum obtained from a finite valid row set.
 
 The question was whether the family that caps the point method also caps the threshold
 method, and if not, by how much it misses.

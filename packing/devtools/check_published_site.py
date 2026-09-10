@@ -15,7 +15,7 @@ the last deploy built from once `git fetch` has run. One line per check, `ok` or
 - every repository link in the page and in the Markdown edition names the expected
   commit, and each resolves on GitHub;
 - the Markdown edition, the PDF and the composite assets are served beside the page,
-  and the PDF is a PDF, its page count reported.
+  and the PDF is a PDF with the expected page count.
 
 Network only, so nothing here is a step of the gate; `tests/test_check_published_site.py`
 covers the parsing on fixtures.
@@ -39,6 +39,7 @@ from devtools.render_explainer import (
     REPO_URL,
     SITE_URL,
 )
+from devtools.render_explainer_pdf import EXPECTED_PAGE_COUNT
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
 from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
 
@@ -156,8 +157,8 @@ def check(site: str, commit: str, *, timeout: float) -> list[tuple[bool, str]]:
         ok = status == 200
         if name == PDF_OUTPUT.name:
             pages = pdf_pages(body)
-            ok = ok and pages > 0
-            line += f", {len(body)} bytes, {pages} pages"
+            ok = ok and pages == EXPECTED_PAGE_COUNT
+            line += f", {len(body)} bytes, {pages} pages (expected {EXPECTED_PAGE_COUNT})"
         results.append((ok, line))
     return results
 

@@ -9,6 +9,19 @@ is, and the note on the retained records was extended to record the one edit mad
 those bytes before registration.
 X-024 carries the coordinator’s reading.
 
+> **Scope correction, added 2026-09-10.** The original report below is historical.
+> Its exact measurements decide the frozen atoms on the 360-, 720-, and 1440-step nets.
+> T-026 retains the 720- and 1440-step certificates and proves the stated dilation
+> limits from them.
+
+> These finite results do not decide a 2880-step net or establish that refinement is
+> exhausted. The 1440-step rescaled budget is `5483661432/498684619`, leaving
+> `1869377/498684619` below eleven.
+> That small margin informs the cost and priority of another refinement, but it is not a
+> proof that a finer net over the frozen atoms cannot improve the bound.
+> Re-optimizing at a finer net, retaining the atoms on another net, and changing the
+> atom family remain distinct unmeasured hypotheses.
+
 The three certificates measured here were frozen after the run.
 The 720-step and 1440-step records are registered as `T-026`, whose proof packet is
 [`t-026-dilation-limit-proof.md`](../../../../../cases/n11_threshold_certificate/t-026-dilation-limit-proof.md);
@@ -112,6 +125,8 @@ Further findings, not in the table:
   consumes is the 0.3% of charge the finer net costs.
   A further doubling would have to be paid for out of `0.0037`, so the atoms as frozen
   are close to the end of what net refinement alone can extract from them.
+  The 2026-09-10 correction above makes this a priority estimate, not an exhaustion
+  result.
 - **F-E (EXACT).** Each rescaled record is accepted with least cell charge exactly `1`
   by both routes, which agree on the number and not merely the verdict; zero stalled
   boxes, zero budget-exhausted directions, zero dense/slab disagreements at every net.

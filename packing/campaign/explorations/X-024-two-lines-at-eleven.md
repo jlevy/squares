@@ -12,20 +12,16 @@ exploration:
   author: Claude coordinator (Fable), with one Opus agent for the read-only summary of PR 137
   campaign: packing.squares
   brief: >-
-    Two branches reached partial results at n = 11 on the same day by different routes.
-    This branch pushed the weighted fractional unavoidable-set certificate: a finer net
-    and a larger shrink dilate the retained atoms to 3.816609502788862 (T-024), an
-    exact ceiling family proves the one-body point-atom method cannot pass unit side
-    3.8288, and a threshold certificate, rank-one Chvátal–Gomory cuts on the measure
-    side, proves s(11) >= 191/50 = 3.82 unconditionally and past that ceiling, decided
-    by two routes that fail differently and reviewed adversarially. PR 137 pushed
-    ownership and conditional-owner case splits at q = 96/25 = 3.84: four unavoidable
-    corner owners, sixteen exhaustive classes per corner, and one four-owner class
-    excluded by five piercing dots (its T-023), with the feasibility of exhausting the
-    65,536 raw class combinations stated as unknown. The owner asked for a strategic
-    reading of the two lines together. This report says what each established, where
-    they meet in the same objects, and which of three routes to push, with the cheap
-    discriminating measurement for each.
+    Combined account of unconditional certificates and conditional owner exclusions.
+    T024 refines the earlier point certificate; T025 introduces threshold atoms and
+    excludes side3.82; T026 reaches weak lower bound3.826447410572939744. T023 and the
+    later owner audits establish conditional and fixed-family results, not a global
+    bound. The original September9 strategic narrative is retained below as historical.
+    Review corrections on September10 withdraw the transfer of an unconditional core
+    cap without owner premises, method-wide neutrality, sixteenfold cost, thin-strip
+    stacking capacity, and global conclusions from finite net/support/grid searches.
+    The current overview and corrected X026 give the supported interpretation and the
+    unranked alternatives; no new target was evaluated during reconciliation.
   sources:
   - packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md
   - packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md
@@ -55,6 +51,70 @@ exploration:
   proposes: [H-155, H-156]
 ---
 # X-024 — Two Lines at Eleven: The Unconditional Certificate and the Owner Case Split, and Where to Push Next
+
+## Current Combined Reading — September 10, 2026
+
+The combined series gives the global bracket
+`3.826447410572939744... <= s(11) <= 3.877083590022814...` through T-026 and the
+unchanged T-011 construction.
+T-025 supplies the endpoint certificate at `3.82`; T-024 and T-026 are weak dilation
+limits with their own frozen certificates.
+The new threshold language succeeds at a fixed core domain where the retained
+D4-symmetric point cover is obstructed.
+It has not exceeded the separately discussed unit-scale point-method cap near `3.8288`.
+
+The owner strand supplies T-023’s specified conditional exclusion at `3.84`, the
+wall-aware footprint audits, and exp153’s impossibility of adding one site to the fixed
+five-dot pattern for one selected relaxation.
+These results coexist with the unconditional bound; they do not rank all future work.
+The complete
+[consolidated takeaways](../../../docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons)
+map the results, terminology, uncertainties and next comparisons across both strands.
+
+**Corrections to the original strategic narrative below:**
+
+- X1’s neutrality is an exact identity for its retained fractional family and screened
+  endpoint patches. Its valid survivor families obstruct point covers on those fixed
+  residual relaxations.
+  They do not show that every physical packing must use such a selection, or that all
+  conditional point proofs fail.
+- Global routing needs an excluded valid owner selection for every hypothetical physical
+  packing. Closing every overlapping raw label is a stronger sufficient plan.
+  Stronger footprints, joint compatibility, unit-parent restrictions and richer charges
+  remain separate open possibilities.
+- The unconditional B-core witness near `3.868983` has not been verified to supply the
+  required owners, classes and patches for this conditional method.
+  Its proposed automatic transfer is withdrawn.
+- Two matching cut maxima do not identify optimization problems or prove sixteenfold
+  cost. B1 and C1 below are historical withdrawals; their universal no-reach rationale is
+  withdrawn. H-155 remains live.
+  A future allocation requires a declared comparison.
+- A4’s returned cuts are valid separation columns.
+  Their zero primal use and unchanged restricted LP objective diagnose that run, not the
+  full atom language or all possible site-generation procedures.
+  No global certificate or obstruction was produced there.
+- A5 gives exact `32/3` on its fixed support under the complete budget-one class and an
+  upper bound of ten under the full rank-one closure on that support.
+  It does not prove available room or absence of a cap on unrestricted supports.
+- X3’s generic stacking bound is false for rotated cores.
+  The recorded finite box no-exceedances imply no exceedance of the weaker valid area
+  bound on those same boxes; they do not close arbitrary containment cuts.
+  Any valid containment inequality also holds on an actual integral core-packing
+  witness, regardless of its syntax.
+- The measured 720- and 1440-step certificates do not decide a finer net.
+  Small remaining budget alone does not establish exhaustion of frozen-atom refinement.
+
+The corrected [X-026 inference ladder](X-026-what-conditioning-does-and-does-not-buy.md)
+and the dated addenda to X1, X3, T2, A2 and A5 give the supporting premises.
+These corrections address
+[the combined PR139 review](https://github.com/jlevy/squares/pull/139#pullrequestreview-5162420994).
+They supersede conflicting interpretations in the original account below.
+
+## Original September 9 Account — Historical Interpretation
+
+The original sequence is preserved to explain which measurements and decisions were
+made. Its claims of method-wide closure, transferred caps, fixed runtime ratios and
+unmeasured global headroom are not current conclusions; use the correction above.
 
 **Two branches moved on `n = 11` on the same day by different routes, and they meet in
 the same objects.** This branch works on the unconditional side: one certificate, one

@@ -57,40 +57,53 @@ is used, and to mark exactly where the chain of inference stops.
 It exists because the first summaries of that lane said “conditioning is refuted”, which
 is stronger than what was measured.
 
+**Review correction, September 10, 2026.** The earlier version also overstated
+neutrality and transferred a core-packing cap without establishing owners.
+The account below replaces those deductions following
+[R2–R3 of the combined review](https://github.com/jlevy/squares/pull/139#pullrequestreview-5162420994).
+The original measurements are retained; the changed conclusions concern their scope.
+
 ## 1. Definitions
 
 **`s(11)`.** The side of the smallest square containing eleven unit squares without
 overlap, at arbitrary rotations.
-Lower bounds are proofs that a container of side `L` is too small.
+To prove a lower bound `L`, exclude every container side strictly below `L`. An endpoint
+exclusion proves more at that side; a weak limit need not decide it.
 
-**Core.** With a shrink factor `B < 1` and a finite net of directions, every unit square
-placed in the container contains a closed `B`-square at one of those directions: its
-*core*. Disjoint unit squares have disjoint cores.
+**Core.** With a shrink factor `B < 1` and an admitted finite direction net satisfying
+the proved strict-containment condition, every unit square placed in the container
+contains a closed `B`-square at one of those directions: its *core*. Disjoint unit
+squares have disjoint cores.
 
-**Certificate.** A finite family of weighted *atoms*. A *point atom* is a weighted
-point; a core’s charge is the total weight of the points it contains.
+**Point certificate.** A finite family of nonnegative weighted *point atoms*. A point
+atom is a weighted point; a core’s charge is the total weight of the points it contains.
 The certificate is valid when every admissible core is charged at least one.
 Eleven disjoint squares then give eleven disjoint cores, each charging at least one, so
 the total weight is at least eleven; a certificate of total weight below eleven is
 therefore a proof that eleven squares do not fit.
 
-**Threshold atom.** A triple `(S, k, w)` charging `w` to every core containing at least
-`k` points of the finite set `S`. Pairwise disjoint cores each consume `k` points, so at
-most `floor(|S| / k)` can be charged and the atom costs `w * floor(|S| / k)`. Strictly
-stronger than point atoms; it is what carried this branch past `191/50`.
+**Threshold atom.** A triple `(S, k, w)`, with finite `S`, integer `1 <= k <= |S|` and
+`w >= 0`, charging `w` to every core containing at least `k` points of the finite set
+`S`. Pairwise disjoint cores each consume `k` points, so at most `floor(|S| / k)` can be
+charged and the atom costs `w * floor(|S| / k)`. Strictly stronger than point atoms; it
+is what carried this branch past `191/50`.
 
 **Fractional packing; ceiling family.** On the dual side, a nonnegative weighting of
 cores whose total weight at any point of the plane is at most one (*depth at most one*).
-By weak duality, a fractional packing of total weight at least `n` shows no valid
-certificate of weight below `n` exists.
-Such a family is a *ceiling family*: it certifies that the method fails at that side.
+By weak duality, a fractional packing of total weight at least `n` shows that no **point
+cover** of its admissible core family has mass below `n`. Such a family is a *ceiling
+family* for that specified point-cover problem.
+For threshold charges it must also satisfy the threshold inequalities; depth one alone
+is insufficient. The symmetry, shrink, net and residual domain are part of the claim.
 The retained one at `191/50` has 88 cores of weight `1/8`, total exactly eleven, maximum
 depth exactly one, decided in exact arithmetic.
 
 **Conditioning.** Case analysis.
-Prove that every packing has some structural feature, that the feature falls into
-finitely many classes, then refute each class.
-The argument succeeds only if *every* class is refuted; one surviving class defeats it.
+Prove that every hypothetical physical packing has a valid selection of structural
+features whose residual family is excluded.
+Excluding every raw class is a sufficient plan, but overlapping classes can give one
+packing several valid selections.
+One unclosed label does not defeat every such plan.
 
 **Corner ownership, the conditioning at issue.** At side `96/25`, every packing of
 eleven has, at each corner, an *owner*: a square whose core contains one of two
@@ -111,11 +124,11 @@ The requirement per class is therefore: **strictly below `11 - m`**.
 | --- | --- | --- |
 | F1 | The single-corner ownership theorem stands alone; the four-owner structure is needed only to make the owners distinct from one another | read from the proof documents |
 | F2 | The mass-eleven ceiling family transports to `96/25` and is there a depth-one family of mass eleven | computed with the ownership line’s own transport and screen, imported unmodified |
-| F3 | The cores containing a given corner mark carry weight **exactly one** in that family | EXACT; independently derived earlier as `y(K_c) = 1` at every corner |
+| F3 | The cores containing a given corner mark carry weight **exactly one** in that family | EXACT for this family; not a consequence for all fractional families of the physical ownership theorem |
 | F4 | For four of the sixteen classes the patch reaches nothing in the family beyond the mark itself | EXACT |
 | F5 | No core meets two corner patches, because cross-corner distance `1.8545` exceeds core diameter `B sqrt 2 = 1.4109` | EXACT |
-| F6 | Deletion per class ranges from exactly `1` to `11/4`, mean `55/32`; the case split is decided by the minimum | EXACT, over all sixteen |
-| F7 | The surviving family at a neutral class carries the *same* cut structure as the full family: two-of-three maximum `5/4`, heaviest rank-one clique `11/8` with piercing number `5/3` | EXACT |
+| F6 | Deletion per class ranges from exactly `1` to `11/4`, mean `55/32` | EXACT over the sixteen screened endpoint classes; not a physical routing census |
+| F7 | The surviving family at a neutral class has two-of-three maximum `5/4` and heaviest rank-one clique `11/8` with piercing number `5/3`, matching these readings for the full family | EXACT readings; not equality of the whole cut structure or optimization problems |
 
 ## 3. The ladder
 
@@ -130,9 +143,19 @@ domain has total weight at least the survivor weight.
 the survivor weight is exactly `11 - 1 = 10`, while the requirement is strictly below
 ten. Ten is not below ten.
 
-**Step 4.** Hence no point cover closes those classes; and since a case split needs
-every class closed, single-corner conditioning by point covers fails.
-Four failing classes suffice — that the other twelve are easier is irrelevant.
+**Step 4 (scope of the obstruction).** Hence no point cover with budget below ten closes
+those fixed endpoint-patch relaxations.
+This is an obstruction supplied by the retained survivor family, not by the mere fact
+that a raw label is unclosed.
+Let `Gamma(P)` be the valid owner selections of a hypothetical physical packing `P`, and
+`G` the selections whose residual families have been excluded.
+A sufficient global condition is
+
+`for every hypothetical physical packing P, Gamma(P) intersects G`.
+
+An unclosed label may be physically empty, or a packing admitting it may also have an
+excluded selection. A feasible isolated owner pose or a fractional residual family
+establishes neither a physical eleven-square packing nor an unavoidable label.
 
 **Note on Step 4’s quantifier** (2026-09-10, PR 139 finding R3). “A case split needs
 every class closed” is stronger than what a conditional proof requires.
@@ -147,7 +170,8 @@ do not establish that conditioning by point covers is impossible.
 **Step 5 (from F5).** Deletions at distinct corners are disjoint, so conditioning on `m`
 corners at neutral classes deletes exactly `m` and leaves `11 - m` against a requirement
 below `11 - m`. Two corners give nine against nine, four give seven against seven.
-No rung turns.
+This is neutrality for the stated family and patch combinations.
+It does not apply automatically to later wall-aware footprints or unit-parent domains.
 
 **Step 6 (proposed, and not established).** The argument runs: at any side where eleven
 pairwise disjoint admissible cores exist, delete the owners’ cores; the remaining
@@ -163,6 +187,12 @@ patches; the ownership theorem the step leans on concerns unit-parent packings a
 `96/25`. “Delete the owners’ cores” presupposes exactly what is unproved there.
 Any conditional transfer of the cap therefore **requires a separate owner, class, patch
 and routing verification**, and none has been done.
+Spelled out, that verification is: identify `m` distinct owners in the witness, verify
+their marks and classes at the same side, and prove that their union contains the
+declared occupied patches; the remaining cores must then satisfy every further
+restriction in the residual model.
+Only then do their indicators obstruct a budget below `11 - m` on that fixed domain.
+Even a valid fixed-selection obstruction would still leave Step 4’s routing question.
 The unconditional obstruction is untouched by this and stands at its own stated scope.
 
 ## 4. Where the ladder stops

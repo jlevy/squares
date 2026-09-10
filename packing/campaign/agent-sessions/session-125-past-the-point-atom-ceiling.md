@@ -49,7 +49,7 @@ session:
     fallback: Record the disagreement or finding and keep the candidate unretained.
     outcome: T-024 registered; the threshold certificate decided by the exact sweep and by an independent interval branch and bound, attacked by an adversarial review that found no soundness defect, registered as T-025; then re-certified on the 720- and 1440-step nets, both RETAINABLE with both routes agreeing, and registered as T-026.
     evidence: [packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md, docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md]
-    stop_reason: Every candidate the survey produced was either registered or refused, and net refinement on these atoms was measured to be near exhausted.
+    stop_reason: Every candidate the survey produced was either registered or refused. The original assessment of near-exhausted refinement is qualified by the September10 review; the measured finite nets do not decide another net.
     next_action: The certificate format has to widen before the strongest separable cuts can be frozen.
   - workflow: general-improvement
     focus: process
@@ -65,9 +65,9 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --fast
     kill_condition: null
     fallback: null
-    outcome: "PR 137 merged at 787cf1c9 of the pre-squash history, with unions of every register and this branch's identifiers renumbered around it first; X-024 written; then the strategic question the merge posed was settled by measurement rather than by argument, and against the branch's own prior: corner conditioning is mass-neutral at every rung."
+    outcome: "PR 137 merged at 787cf1c9 of the pre-squash history, with unions of every register and this branch's identifiers renumbered around it first; X-024 written; the retained fractional family was mass-neutral on the screened endpoint-patch combinations. The broader strategic conclusion was withdrawn after the September10 review; routing and changed domains remain open."
     evidence: [packing/campaign/explorations/X-024-two-lines-at-eleven.md]
-    stop_reason: The measurement that decided between the two lines had returned, and its consequence -- that the conditional route buys no reach -- left no funded work in this phase.
+    stop_reason: The phase historically stopped after interpreting the X1 measurement as no added reach. That method-wide interpretation and its funding rationale were withdrawn by the September10 review; no comparative productivity result was established.
     next_action: Retain the five research lanes and file the defect the neutrality measurement exposed.
   - workflow: review-planning-oversight
     focus: process
@@ -95,7 +95,7 @@ session:
   progress:
     metric: The verified lower bound on s(11) in the frontier register, and the retained instruments behind it.
     before: 3.810025723614703 (T-022); the covering LP at 3.82 stops at exactly eleven on every site set; no explanation of the plateau; no certificate language past point atoms.
-    after: s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939 (T-026), reached through T-025's endpoint certificate at 191/50 = 3.82, the first result past the exact point-atom ceiling; the plateau is explained (corrected 2026-09-10 from lane A6 -- on this atom set no site set can bring the rows-complete LP below eleven at 153/40, because a D4-symmetric depth-one family of 64 placements at total exactly 11 satisfies all 2,566 atom orbits, so the atom set carries it and not the site set) and a certificate language past point atoms exists with two independent decision routes.
+    after: s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939 (T-026), reached through T-025's endpoint certificate at 191/50 = 3.82, the first result past the exact point-atom ceiling; the retained LP plateau has quantified depth violations and fixed-support cut results, without a complete diagnosis over unrestricted supports and a certificate language past point atoms exists with two independent decision routes.
   delegations:
   - task: Theory of cuts and routes (lane T); the sandwich lemma and the k-fold witness lemma.
     operator: Claude Fable, high
@@ -232,11 +232,11 @@ session:
     recording: contemporaneous
     phase: 3
     status: completed
-    outcome: Corner conditioning is exactly mass-neutral at every rung; the ceiling family carries weight exactly 1 per corner mark and the deletions are additive. Do not build any rung. Exposed the salvage screen's source predicate as the reason the record read otherwise.
+    outcome: The retained family has corner-mark weight1 and additive deletion for the named endpoint-patch combinations. Its survivor families obstruct point covers on those relaxations. The broader no-rung conclusion is withdrawn by September10 review; the source-filter reuse defect is D489.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md]
     files: []
     checks: [The transport and the screen are PR 137's own; the survivor family read by the plateau reader at depth exactly 1.]
-    uncertainty: None on neutrality. The survivor family is still a fractional packing, so threshold atoms could cut it; that is what keeps H-155 falsifiable rather than refuted.
+    uncertainty: Neutrality is exact for the screened family and endpoint patches. Physical routing, stronger domains and conditional threshold covers remain open; matching cut maxima establishes no runtime comparison.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Recorded in X-024 section 5; H-155 dispositioned; D-489 filed.
@@ -258,7 +258,7 @@ session:
     recording: contemporaneous
     phase: 3
     status: completed
-    outcome: Negative. Both families sit exactly at the wall-strip capacity of 3 and no box on an eight-step grid exceeds capacity. Do not build them.
+    outcome: No exceedance was reported on the finite eight-step box grid. September10 review found the generic stacking capacity false; the narrower no-exceedance of the valid area bound survives, while the strip-capacity and method-closure conclusions are withdrawn.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md]
     files: []
     checks: [Exact sweep; the two scripts retained beside the lane report.]
@@ -271,7 +271,7 @@ session:
     recording: contemporaneous
     phase: 3
     status: completed
-    outcome: All three atom classes violated, two-of-three at 133/100, a 42-member clique at 3/2, floor cuts to 8.27; the LP moved 2.2e-13 and every new column carries primal weight exactly zero. The measurements stand; the inference drawn from them was corrected on 2026-09-10 by lane A6 -- the atom set, not the site set, pins 3.825, because a depth-one family of total exactly 11 satisfying all 2,566 atom orbits exists at that side and is dual-feasible for every site set. The columns entered at weight zero because atoms separated from a dual vertex need not cut the optimal primal family.
+    outcome: All three atom classes violated, two-of-three at 133/100, a 42-member clique at 3/2, floor cuts to 8.27; the LP moved 2.2e-13 and every new column carries primal weight exactly zero. Read at the time as the site set pinning 3.825; corrected 2026-09-10 by lane A6, which exhibits a depth-one family of 64 placements totalling exactly 11, so the LP is at least eleven for every site set on this atom set and the atom language is what pins it. The measurement stands; only the inference changed. Atoms must be separated from the depth-one certificate rather than from a dual vertex.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md]
     files: []
     checks: [Every separation verdict a rational, re-verified exactly; the seeded and control runs retained beside the lane report.]
@@ -346,6 +346,20 @@ session:
   next_action: Widen the certificate format to carry weighted and floor atoms, since the reader can already separate cuts the format cannot express; and generate sites by structure rather than by arrangement vertex.
 ---
 # Pushing s(11) Past the Point-Atom Ceiling, and Integrating the Owner Line
+
+**Review update, September 10, 2026.** This retrospective session retains the original
+measurements and decisions.
+Its old comparative judgments are superseded by
+[X-024’s current combined reading](../explorations/X-024-two-lines-at-eleven.md#current-combined-reading--september-10-2026)
+and the corrected
+[X-026](../explorations/X-026-what-conditioning-does-and-does-not-buy.md).
+The global T-026 bound remains `3.826447410572939744...`. X1 neutrality concerns the
+screened fractional family and endpoint patches; it does not settle physical owner
+routing or all conditional approaches.
+The unconditional cap needs additional owner premises before conditional transfer.
+X3’s stacking capacity is invalid.
+A4/A5’s conclusions remain tied to their finite supports and searches.
+The historical body below is not evidence of a universal method ranking.
 
 The session set out to push the n = 11 lower bound as hard as it would go, and it moved
 twice.

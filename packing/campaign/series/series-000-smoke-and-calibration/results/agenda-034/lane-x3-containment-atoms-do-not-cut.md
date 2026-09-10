@@ -4,9 +4,33 @@ Retained measurement-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by the
 coordinator on 2026-09-09, read-only on the repository at
 `claude/n-11-stronger-result-d730ds`. The report is reproduced as delivered, with its
-own findings table and status labels; only its file references were rewritten to say
-where each file now is.
+own findings table and status labels.
+Its file references were rewritten to say where each file now is, and the correction
+below governs the historical body.
 X-024 carries the coordinator’s reading.
+
+> **Correction, added 2026-09-10.** The stacking rule used by
+> [`lane-x3-box-sweep.py.txt`](lane-x3-box-sweep.py.txt),
+> `min(a,b) < 2B => capacity <= floor(max(a,b)/B)`, is false for rotated squares.
+> For a strict counterexample, set `B = 1`, `w = 199/100`, `epsilon = 1/1000`,
+> `a = sqrt(2)/2`, and `d = 2 sqrt(2) - w + epsilon`. Four 45-degree squares centred at
+> `(a,a)`, `(w-a,a+d)`, `(a,a+2d)`, and `(w-a,a+3d)` are strictly disjoint: adjacent
+> centres have L1 separation `sqrt(2) + epsilon`, centres two steps apart have
+> separation `2d > sqrt(2)`, and the remaining pair is farther apart.
+> They fit in a rectangle of width `199/100` and height `7 sqrt(2) - 5967/1000 < 79/20`,
+> although the helper returns capacity three for `(199/100, 79/20, 1)`.
+
+> The area bound `floor(ab/B^2)` remains valid.
+> The recorded grid weights stay below that valid bound, so the finite no-exceedance
+> observations survive at their measured scope: the specified eight-step boxes, strip
+> widths, and two retained families.
+> They do not decide arbitrary off-grid boxes, other convex regions, or other placement
+> families. Claims that the strip capacity is exactly three, that the tested families
+> saturate a general stacking theorem, or that containment atoms are closed as a route
+> are withdrawn.
+
+> The retained `.py.txt` helper preserves the original measurement record.
+> Its stacking branch is invalid and the file is unfit for reuse or promotion.
 
 Prompted by [lane A3](lane-a3-threshold-loop-at-383-100.md)’s site-separation addendum
 (S2/S4): the plateau excess retreats into a `0.0006`-wide sliver of interleaved
@@ -28,17 +52,16 @@ of pairwise-disjoint cores that fit inside `R`. On the dual side it is the valid
 inequality `y({P : P subset R}) <= c`. It is **not** in the rank-one threshold language:
 a threshold atom charges a core for *containing* points of a finite set, and “contained
 in `R`” is not expressible that way.
-It was tested first on the belief that a violated containment atom would be a cut
-outside [lane T2](lane-t2-cap-and-next-cuts.md)’s `3.868983` bracket.
-**That belief is withdrawn, 2026-09-10 (PR 139 finding R5).** The bracket is witnessed
-by an actual packing of eleven pairwise-disjoint integral `B`-cores, and **every valid
-packing-capacity inequality holds on such a packing** — a containment atom included,
-since its whole content is a capacity `c` on a region `R`. Being outside the rank-one
-*syntax* buys nothing against an obstruction that is a witness rather than a language
-restriction. The class was still worth testing, on the ordinary ground that it is cheap
-and expresses something the point atoms do not; it was never a way past the bracket.
+So a violated containment atom would be a cut outside
+[lane T2](lane-t2-cap-and-next-cuts.md)’s `3.868983` bracket, which is why it was worth
+testing first.
 
 ## What was measured
+
+> **Current scope.** In the historical description below, only the area capacity is a
+> proved general bound.
+> The stacking capacity and conclusions that depend on its tightness are superseded by
+> the correction above.
 
 Two families at `L = 153/40 = 3.825`, both of total weight exactly 11:
 
@@ -67,28 +90,11 @@ when `min(a,b) < 2B`, the stacking bound `floor(max(a,b)/B)`). All arithmetic in
 
 ## What this closes and what it leaves open
 
-**Negative, at the scope tested: containment atoms on wall strips and on axis-aligned
-boxes over an eight-step grid are not the missing cut on these two families.
-Do not build them.**
+> **Current interpretation.** The screen is a finite negative result on the stated grid
+> and families. It does not close containment cuts as a class.
 
-**Scope note, 2026-09-10 (PR 139 finding R5).** What was tested, stated beside the
-verdict rather than left to be inferred: two families at `L = 153/40` — the `191/50`
-point-method ceiling family under the homothety and the `1/25`-integral plateau dual
-after one round of site separation — against two region families, wall strips swept in
-width and axis-aligned boxes with corners on an eight-step grid of `[0, 153/40]^2`,
-under two capacity bounds.
-Other regions, other grids, other families and other capacity bounds are unmeasured.
-A finite negative on that surface is not a closure of the containment class, and C3
-should be read as an expectation about where the next cut is *not* rather than as a
-theorem.
-
-**One of the two capacity bounds is also false**, and its correction is attached as
-[`lane-x3-box-sweep-capacity-correction.md`](lane-x3-box-sweep-capacity-correction.md):
-the stacking bound `min(a, b) < 2B => capacity <= floor(max(a, b)/B)` fails for rotated
-squares, with an exact four-square counterexample at `B = 1` in a `199/100` by `79/20`
-box. C1 and C2 survive it, because an understated capacity makes a violation easier to
-find rather than harder, so finding none under it means none under the true capacity;
-the negative stands on the area bound alone.
+**Closed: containment atoms on wall strips and axis-aligned boxes are not the missing
+cut. Do not build them.**
 
 Open, and unchanged by this: whether a depth-one family of weight 11 at `3.825` exists
 whose two-of-three maximum is at most 1. That family, if it exists, caps the threshold
@@ -101,12 +107,9 @@ That open question was then measured from the other side and the answer is the s
 one. [Lane A5](lane-a5-the-fixed-support-maximum-under-the-atom-classes.md) reads the
 fixed-support maximum on the ceiling support under depth-one plus the complete
 budget-one class as exactly `32/3` at both `153/40` and `383/100`, falling to exactly
-`10` once the floor atoms are imposed — so **that support** does not reach eleven under
-the atom inequalities.
-Read at its own scope (2026-09-10, R5): an optimum below eleven on **one fixed support**
-does not settle whether some other support reaches eleven, which is what a cap would
-need, and A5’s own F4 and F6 say so.
-The barrier is not this family, and it is not containment atoms either.
+`10` once the floor atoms are imposed — so the ceiling support does not reach eleven
+under the atom inequalities and **caps neither side**. The barrier is not this family,
+and it is not containment atoms either.
 
 ## Files
 
@@ -114,12 +117,10 @@ Retained beside this report:
 
 - [`lane-x3-strip-profile.py.txt`](lane-x3-strip-profile.py.txt) — wall-strip weight as
   an exact function of strip width, for both families.
-- [`lane-x3-box-sweep.py.txt`](lane-x3-box-sweep.py.txt) — every axis-aligned box on the
-  8-step grid against the two capacity bounds.
-- [`lane-x3-box-sweep-capacity-correction.md`](lane-x3-box-sweep-capacity-correction.md)
-  — the dated correction to the second of those two bounds, with the exact
-  counterexample. The script’s bytes are as delivered; the correction is attached beside
-  it rather than edited into it.
+- [`lane-x3-box-sweep.py.txt`](lane-x3-box-sweep.py.txt) — the retained historical
+  eight-step box sweep.
+  Its stacking branch is invalid and must not be reused; the area-bound comparisons
+  remain interpretable.
 
 Both scripts are retained with a `.py.txt` extension, as
 `agenda-032/unrun-independent-audit/` already does: they are scratch measurement

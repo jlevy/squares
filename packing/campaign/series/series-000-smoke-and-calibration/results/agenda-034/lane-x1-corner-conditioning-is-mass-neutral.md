@@ -4,10 +4,37 @@ Retained strategy-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a Fable
 sub-agent on 2026-09-09, read-only on the repository at
 `claude/n-11-stronger-result-d730ds`. The report is reproduced as delivered, with its
-own headings and its own numbers; only its file references were rewritten to say where
-each file now is, and two notes were added where they bear on an entry already in the
-record: the correction below about the source family, and the scope note that follows
-this paragraph. X-024 carries the coordinator’s reading.
+own headings and its own numbers.
+Its file references were rewritten to say where each file now is, and dated corrections
+were added around the historical body.
+X-024 carries the coordinator’s reading.
+
+> **Scope correction, added 2026-09-10.** The original report below is historical.
+> Its exact measurements remain evidence about the retained mass-eleven fractional
+> family and the screened endpoint patches: four one-corner classes delete exactly one
+> unit, and the measured four-corner tuple deletes exactly four.
+> These survivors obstruct point covers of those fixed residual domains below the
+> corresponding residual counts.
+
+> They do not prove that corner conditioning is mass-neutral for every class, every
+> owner selection, or the whole conditional optimization.
+> A global owner argument must show that every hypothetical physical packing has at
+> least one valid owner selection whose residual family has been excluded.
+> Excluding every raw class label would be sufficient, but is not necessary; a packing
+> may admit several selections.
+
+> The artificial eleven-core packing near `3.868983` has not been shown to contain the
+> required distinct marked owners, class memberships, and occupied patches.
+> The unit-parent ownership theorem at `96/25` cannot supply those premises for a
+> different-side core packing.
+> The claimed verbatim transfer of the unconditional cap to every conditioned rung is
+> therefore withdrawn.
+
+> Finally, matching two reported cut maxima on one survivor does not show that the
+> complete cut structure or optimum is the unconditional problem shifted by one.
+> The survivor violates the two-of-three inequalities and does not obstruct a threshold
+> certificate. Runtime multipliers and the relative priority of conditional and
+> unconditional routes remain estimates, not results of this lane.
 
 **This is the lane that reversed a direction the campaign was leaning toward.** X-024 §3
 route C and §4 read conditioning on corner ownership as the architecture for `3.84` and
@@ -28,6 +55,8 @@ certificate — what it refutes is the premise that conditioning buys mass.
 > method into a succeeding one — and neutrality, not refutation, is what carries to the
 > conditional route as a whole.
 > X-026 states the six-step ladder and marks the step where it stops.
+> **This 2026-09-09 generalization is superseded by the 2026-09-10 scope correction
+> above.**
 
 Retained beside this report: the four screening scripts and the two survivor records,
 listed under [Files](#files).
@@ -88,6 +117,10 @@ budget must be below 10: the conditioning is exactly, and only exactly, neutral.
 
 ## Why it is neutral, and why the ladder inherits it
 
+> **Current interpretation.** In this historical section, “neutral” applies only to the
+> named retained family and screened classes.
+> It is not a theorem about every class or every valid owner selection.
+
 The mechanism is one line.
 The ceiling family is *owner-saturated*: the corner-pair proof leaves the duals no room
 to avoid the marks ([lane T2](lane-t2-cap-and-next-cuts.md), C.1, `y(K_c) = 1` at every
@@ -122,6 +155,12 @@ digit.
 > rather than a property of conditioning.
 > The paragraph headed “1(c)” below is where that was found, and every citation of
 > exp-137 or exp-138 as evidence about conditioning now carries the same note.
+
+> **September 10 correction to that attribution.** The named exp137/138 source and its
+> negative results remain valid, as independently confirmed by exp141. Comparing its
+> mass deficit with a residual shortfall does not prove that the deficit caused the
+> negative. Survivor strength depends on geometry as well as source mass.
+> D489 concerns the CLI’s refusal of other valid input classes before reuse.
 
 ## Answers to the four questions
 
@@ -160,6 +199,12 @@ screen above: transport a depth-one family of mass `n`, delete the members meeti
 It is exact, it needs no LP, and it costs seconds.
 It is the instrument PR 137 already built.
 **The reason their screens read negative is that they were run on the wrong family.**
+
+> **Historical attribution, superseded September 10.** The original protocol named this
+> source explicitly. Its measured negative is not invalidated; “wrong family” and “entire
+> negative result” below overstate what a change of source establishes.
+> Use the corrected D489 record and the source-specific exp137/138 annotations.
+
 exp-137 and exp-138 used
 [`agenda-025/bc-232-leg-01-family.json`](../agenda-025/bc-232-leg-01-family.json): 768
 placements, mass `21342289572/2055263195 = 10.3842`, whose own receipt records
@@ -197,6 +242,12 @@ is **interior** — `(1.71652, 1.71652)` on the diagonal, at the meeting of the 
 pair and the `8°` squares ([lane A3](lane-a3-threshold-loop-at-383-100.md)). A
 boundary-slot conditioning would not reach the interior one at all.
 
+> **Correction.** The next two historical answers overreach.
+> The concrete survivor obstructs a common point cover when it lies in one of the
+> union’s residual domains.
+> It does not establish the former set-containment argument, the global owner-selection
+> routing condition, or a conditioned cap at `3.868983`.
+
 **3. Is there a lift that avoids the tree?** No, and the same measurement proves it
 without machinery. A single certificate valid for all 16 classes must charge every core
 residual in some class, and `R_{j3}` alone is such a set; the survivor family shows its
@@ -218,17 +269,9 @@ rank-one cut on the residual domain.
 So the conditional rank-one method is capped at the same `3.868983`, for every `m`.
 Conditioning changes neither end of `[3.82, 3.868983]`.
 
-**Correction of record, 2026-09-10 (PR 139 finding R2): that transfer is not
-established.** The argument above starts from an artificial packing of eleven `B`-cores
-at `3.868983`, and that packing has never been shown to carry distinct marked owners,
-class memberships or occupied patches; the ownership theorem it leans on concerns
-unit-parent packings at `96/25`. “Delete its four owners” presupposes exactly what is
-unproved. A conditional transfer of the cap requires its own owner, class, patch and
-routing verification, and none has been done.
-The **unconditional** obstruction is untouched and stands at its own stated scope; X-026
-§3 Step 6 and
-[`H-155`](../../../../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md)
-now carry the same withdrawal.
+> **Correction.** The following equality of selected readings does not identify the
+> complete conditional cut structure or its optimum.
+> It is retained as the original interpretation of the measurement.
 
 Worse, and this is the measurement that settles the hybrid question: the promoted
 plateau reader was run on the 80-placement mass-10 survivor family (`m1:j3` at `96/25`),
@@ -239,12 +282,9 @@ clique **`11/8` with `tau* = 5/3`**, line chords tight on eight resources, and v
 CG floor atoms at `t = 2, 3, 4` with violations `1/2`, `3/8`, `3/4`. Those are the
 *same* values the full ceiling family carries (lane T2 F3, F4;
 [lane M0](lane-m0-fixed-support-polish-191-50.md) F7). **Conditioning removed exactly
-one unit of mass and exactly none of the cut structure those two readings see.** The
-step from there to “the conditional threshold problem *is* the unconditional one shifted
-down by one, with sixteen times the work and no better reach” is an **estimate**
-(labelled 2026-09-10, PR 139): it assumes two matching cut maxima on one family are
-representative of the whole cut structure, and its multiplier is the class count per
-corner rather than a measured running cost.
+one unit of mass and exactly none of the cut structure.** The conditional threshold
+problem at a class is the unconditional one shifted down by one, with sixteen times the
+work and no better reach.
 
 ## The next measurement
 
@@ -271,6 +311,14 @@ unconditionally, which is more than the whole conditional programme could offer.
 **The LP stays at eleven and the dual relocates** — the atom language is not what pins
 `3.825`, S4’s reading stands, and the sites must be placed by the sliver’s structure
 rather than vertex by vertex.
+(**Correction of record, 2026-09-10.** That branch of the prediction is inverted.
+The LP did stay at eleven and the sites were placed by structure, but
+[lane A6](lane-a6-structural-sites-and-the-depth-one-certificate.md) then exhibited a
+D4-symmetric family of 64 admissible placements of total exactly 11 at exact maximum
+depth exactly 1. A depth-one family satisfies every site set’s dual constraint, so on
+this atom set the LP is at least eleven for *every* site set, and the atom language is
+what pins the value.
+The measurement stands; the inference from it does not.)
 **The reader returns no violated atom at all** — the `1/25` family is rank-one feasible
 apart from its `28/25` depth excess, so the sliver is the entire obstruction and the
 next object is a repaired depth-one version of it, which would cap the method at `3.825`
@@ -289,23 +337,6 @@ primal weight exactly zero.
 The prediction about the generator held — the `K6` floor atoms were the largest
 violations by an order of magnitude — and it did not matter.
 
-**Correction of record, 2026-09-10.** The second outcome above was written as “the atom
-language is not what pins `3.825`, S4’s reading stands, and the sites must be placed by
-the sliver’s structure”.
-The LP reading is right and the inference is backwards.
-[Lane A6](lane-a6-structural-sites-and-the-depth-one-certificate.md) exhibits a
-D4-symmetric family of 64 admissible placements, total exactly 11, exact maximum depth
-exactly 1 everywhere, satisfying every one of the LP’s 2,566 atom orbits at ratio
-exactly
-1. Such a family is dual-feasible for **every** site set, so **on this atom set no site
-   set can bring the rows-complete LP below eleven at `153/40`: the lever is the atom
-   set, not the site set.** The twenty-four columns entered at weight zero because an
-   atom separated from a dual vertex need not cut the optimal primal family, and an atom
-   that does not cut the primal optimum cannot move the objective.
-   Atoms have to be separated from the depth-one certificate, with support and atoms
-   iterated together; six so separated take the blocking support from exactly 11 to
-   `10.4210526`, bracketed exactly.
-
 ## Uncertainties, and what would decide each
 
 - **The four-corner claim.** `(j3, j3, j3, j3)` leaves survivor exactly 7 against
@@ -318,12 +349,7 @@ exactly
   An emptiness proof is not a covering argument, so it would not rescue the method, only
   these classes; a pose-feasibility check on the two sectors would decide it.
 - **A larger guaranteed patch**, registered after this lane as
-  [`H-157`](../../../../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md)
-  and **refuted** on 2026-09-10 by `exp-154`: the refined patch does not clear `0.015`,
-  because the reach is pinned by the mark, which is a vertex of every patch at every bin
-  count. The screen is retained as
-  [lane X4](lane-x4-sixteen-sectors-and-the-refinement-limit.md), and its two theorems
-  rule out patch refinement as the lever without showing the conditional strategy fails.
+  [`H-157`](../../../../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md).
   The closest survivor to the `j3` footprint sits at Euclidean separating gap
   **`0.014978`** — a weight-`1/8` wall placement centred at `(1.50658, 0.50885)`. A
   patch reaching `0.015` further picks up `1/8` and opens `0.125` of room, against a
@@ -331,9 +357,8 @@ exactly
   to sixteen is the way to get it; whether the refined patch clears `0.015` is one
   screen away, and this lane would not spend it.
 - **The threshold route on a residual domain** is neither refuted nor supported here.
-  It is exactly as open as the unconditional route and is *estimated* to cost sixteen
-  times more, on the class count rather than on a measured running cost; that estimate
-  is why the decision is the unconditional lane.
+  It is exactly as open as the unconditional route and costs sixteen times more; that is
+  why the decision is the unconditional lane.
   [`H-155`](../../../../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md)
   is dispositioned on exactly that reading: the claim is live, not refuted, and it is
   priced at no reach — the survivor family carries the same cut structure as the full
