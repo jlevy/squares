@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 26
+version: 27
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -24,7 +24,7 @@ child_order_hints:
   - is-01m260za5fe3ewrkns6y4ehjva
   - is-01m26nttcsn4ej3g9adcat0qk5
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T22:08:24.472Z
+updated_at: 2026-09-10T22:13:21.470Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
@@ -62,22 +62,4 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-Research checkpoint PR #150 is ready for review at `568abad5`. Commit `cc98c774`
-contains the reconciled evidence, structural correction, weighted-atom separation,
-BC329 preflight, parent-domain runner, and session-099 repair; `5a6b9a75` records its
-commit-bound certification, and `568abad5` makes the lifecycle regression follow the
-now-certified session-099 fixture. No scientific target ran and no global bound changed.
-Session-099 remains honestly unmeasured for native usage.
-
-The required pre-push tier passed 45 of 73 steps at `568abad5`, including 1,052 tests.
-Hosted validate, suite, geometry, sweeps, macOS portability, mergeability, and
-`packing-required` all pass. Independent reviews found no remaining P1, P2, or P3
-finding.
-
-Draft explainer PR #148 is retargeted onto PR #150. Its local stacked head is
-`3f0ec6bf`; the documentation layer remains exactly 21 files, +500/-101. The v0.4.0
-history records the first use of v0.3.0 as this publication's edition label on September
-8, 2026 and of v0.4.0 on September 10, 2026. Keep PR #148 draft until its stacked local
-and hosted checks pass, including a fresh disposition of the WebKit saved-geometry
-probe. The ranked next scientific block remains BC326's one prospectively registered
-parent-domain comparison; BC329 waits on its fixed-core runner.
+Research checkpoint PR #150 is ready for review at 568abad5 and every required hosted check is green. The next stacked research branch codex/n11-bc326-parent-domain prospectively registered exp156, ran it once at 5f6c50c4, and closed BC326: the residual survives its parent box; TR / bottom-left:m1:j7 is B-only incompatible across 181 frames; set inclusion precludes parent gain there; BL, BR, and TL remain untested; H158 remains unresolved; no global bound changed. External command wall was 20.628132708 seconds. Independent Astra Max review passes. BC329 remains the next direct global-bound lane, blocked on think-qw9w runner admission. BC337 / think-0cdq is a secondary parallel exact full-owner forbidden-polygon pilot, blocked on its source-bound constructor, clipping, runner, and reader. Draft explainer PR #148 is stacked on #150. Local head 99c95b4f is 23 files, +618/-110: v0.4.0 carries T025/T026, the two-entry history records first edition-label dates v0.3.0 September 8 and v0.4.0 September 10, and the DRAFT prefix is removed. A Git audit omitted v0.2.0 because v0.1.0 was the first explainer label carrying 3.81. The 125 focused publication tests and full 324-entry atlas rebuild pass; the corrected WebKit harness has independent review; the final unsandboxed pre-push gate is in progress before push.
