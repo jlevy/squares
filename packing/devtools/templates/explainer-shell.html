@@ -324,6 +324,15 @@ body {
 /* The heading is set in caps by kpress; its s(n) run is mathematics and keeps both
    mathematical italic and lowercase rather than inheriting the heading transform. */
 .hero h1 .tex { letter-spacing: 0; text-transform: none; }
+/* Prepared math reserves its full measured ascent and descent. In this single-line
+   title, s(11)'s 1.27-1.30em profile reservations are taller than the heading's 1.05
+   line-height and can push Figure 1 onto the next printed page. Both profiles keep a
+   0.9123em ascent, so this limits only the invisible inline box while leaving the 1em
+   glyphs in the same painted position: 1.05 - 0.9123 = 0.1377em below the baseline. */
+.hero h1 .squares-math-box {
+  height: 1.05em !important;
+  vertical-align: -0.138em !important;
+}
 /* Mathematical relations set in a sans line: `≥` in the title and the certificate
    buttons, `≈` in two captions and in the chart labels, `→` in Figure 7's label.
    Source Sans 3 carries none of the three, so the browser used to resolve them to
