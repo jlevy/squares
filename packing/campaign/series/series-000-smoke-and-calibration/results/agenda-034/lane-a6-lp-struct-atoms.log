@@ -1,0 +1,9 @@
+resumed 17389 sites in 2250 orbits, 2566 atom orbits, 15021 rows from /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/plateau-separation/resume-sites-1
+seeded 6 floor-atom orbits (44 images, orbit sizes [4, 8]) from /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/seed-atoms-from-certificate.json
+structural sites: +1400 orbits (28237 sites total), 0 already present, from /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/structural-sites-153-40.json
+floor-atom columns: 6 orbits, costs [4.0, 8.0], rows charged per orbit min 4415 max 8140 mean 6217
+matrices: 15021 rows x 6222 columns, 44330151 nonzeros (31.6s)
+HiGHS model passed (8.2s)
+[rows-0] objective 11.000000000  sites 28237/3650 orbits (support 174)  atoms 2566 (support 26, budget 1.114765)  floor 6 (support 0, budget 0.000000)  rows 15021 (dual support 37)  LP 934.5s (39582 it)  73.9 min left
+  dual at-n-0: support 37 rows, total 11.000000000, 0 near-integral; family 296 placements
+final objective 11.000000000; 15021 rows, 28237 sites (3650 orbits), 2566 atom orbits; rows complete: False; note solve-only; total 968s

@@ -1,0 +1,78 @@
+source: 88 placements, side 191/50, total weight 11
+transported: side 96/25, total weight 11
+orientation filter: 88/88 kept, weight 11
+
+=== CONTROL: bins = 8, all sixteen classes (must reproduce lane X1) ===
+  bottom-left:m1:j0      survivors  66  weight 33/4       =  8.250000  deleted 11/4        nearest gap 0.339778 (idx 47)
+  bottom-left:m1:j1      survivors  72  weight 9          =  9.000000  deleted 2           nearest gap 0.009844 (idx 16)
+  bottom-left:m1:j2      survivors  76  weight 19/2       =  9.500000  deleted 3/2         nearest gap 0.014978 (idx 55)
+  bottom-left:m1:j3      survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978 (idx 55)  NEUTRAL(=10)
+  bottom-left:m1:j4      survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978 (idx 55)  NEUTRAL(=10)
+  bottom-left:m1:j5      survivors  76  weight 19/2       =  9.500000  deleted 3/2         nearest gap 0.089792 (idx 75)
+  bottom-left:m1:j6      survivors  74  weight 37/4       =  9.250000  deleted 7/4         nearest gap 0.002124 (idx 44)
+  bottom-left:m1:j7      survivors  70  weight 35/4       =  8.750000  deleted 9/4         nearest gap 0.177746 (idx 22)
+  bottom-left:m2:j0      survivors  70  weight 35/4       =  8.750000  deleted 9/4         nearest gap 0.177746 (idx 16)
+  bottom-left:m2:j1      survivors  74  weight 37/4       =  9.250000  deleted 7/4         nearest gap 0.002124 (idx 43)
+  bottom-left:m2:j2      survivors  76  weight 19/2       =  9.500000  deleted 3/2         nearest gap 0.089792 (idx 76)
+  bottom-left:m2:j3      survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978 (idx 50)  NEUTRAL(=10)
+  bottom-left:m2:j4      survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978 (idx 50)  NEUTRAL(=10)
+  bottom-left:m2:j5      survivors  76  weight 19/2       =  9.500000  deleted 3/2         nearest gap 0.014978 (idx 50)
+  bottom-left:m2:j6      survivors  72  weight 9          =  9.000000  deleted 2           nearest gap 0.009844 (idx 22)
+  bottom-left:m2:j7      survivors  66  weight 33/4       =  8.250000  deleted 11/4        nearest gap 0.339778 (idx 42)
+  classes at exactly 10: 4 -> ['bottom-left:m1:j3', 'bottom-left:m1:j4', 'bottom-left:m2:j3', 'bottom-left:m2:j4']
+
+=== REFINEMENT: bins = 16, the eight refined subclasses of the four neutral classes ===
+  bottom-left:m1:J6/16       rays [135.0000,157.3577] d=22.3577  survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978  NEUTRAL(=10)
+      parent bottom-left:m1:j3 weight 10; extra deletions vs parent: []
+  bottom-left:m1:J7/16       rays [157.6114,180.0000] d=22.3886  survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978  NEUTRAL(=10)
+      parent bottom-left:m1:j3 weight 10; extra deletions vs parent: []
+  bottom-left:m1:J8/16       rays [180.0000,202.3886] d=22.3886  survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978  NEUTRAL(=10)
+      parent bottom-left:m1:j4 weight 10; extra deletions vs parent: []
+  bottom-left:m1:J9/16       rays [202.6423,225.0000] d=22.3577  survivors  76  weight 19/2       =  9.500000  deleted 3/2         nearest gap 0.136657  BROKEN(<10)
+      parent bottom-left:m1:j4 weight 10; extra deletions vs parent: [7, 16, 29, 55]
+  bottom-left:m2:J6/16       rays [135.0000,157.3577] d=22.3577  survivors  76  weight 19/2       =  9.500000  deleted 3/2         nearest gap 0.136657  BROKEN(<10)
+      parent bottom-left:m2:j3 weight 10; extra deletions vs parent: [2, 22, 25, 50]
+  bottom-left:m2:J7/16       rays [157.6114,180.0000] d=22.3886  survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978  NEUTRAL(=10)
+      parent bottom-left:m2:j3 weight 10; extra deletions vs parent: []
+  bottom-left:m2:J8/16       rays [180.0000,202.3886] d=22.3886  survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978  NEUTRAL(=10)
+      parent bottom-left:m2:j4 weight 10; extra deletions vs parent: []
+  bottom-left:m2:J9/16       rays [202.6423,225.0000] d=22.3577  survivors  80  weight 10         = 10.000000  deleted 1           nearest gap 0.014978  NEUTRAL(=10)
+      parent bottom-left:m2:j4 weight 10; extra deletions vs parent: []
+
+=== all 32 refined classes at bins = 16 (completeness of the case split) ===
+  bottom-left:m1:J0/16       survivors  66  weight 33/4       =  8.250000  nearest gap 0.165743  <10
+  bottom-left:m1:J1/16       survivors  66  weight 33/4       =  8.250000  nearest gap 0.330022  <10
+  bottom-left:m1:J2/16       survivors  66  weight 33/4       =  8.250000  nearest gap 0.254497  <10
+  bottom-left:m1:J3/16       survivors  72  weight 9          =  9.000000  nearest gap 0.009844  <10
+  bottom-left:m1:J4/16       survivors  74  weight 37/4       =  9.250000  nearest gap 0.014978  <10
+  bottom-left:m1:J5/16       survivors  76  weight 19/2       =  9.500000  nearest gap 0.014978  <10
+  bottom-left:m1:J6/16       survivors  80  weight 10         = 10.000000  nearest gap 0.014978  NEUTRAL(=10)
+  bottom-left:m1:J7/16       survivors  80  weight 10         = 10.000000  nearest gap 0.014978  NEUTRAL(=10)
+  bottom-left:m1:J8/16       survivors  80  weight 10         = 10.000000  nearest gap 0.014978  NEUTRAL(=10)
+  bottom-left:m1:J9/16       survivors  76  weight 19/2       =  9.500000  nearest gap 0.136657  <10
+  bottom-left:m1:J10/16      survivors  76  weight 19/2       =  9.500000  nearest gap 0.089792  <10
+  bottom-left:m1:J11/16      survivors  76  weight 19/2       =  9.500000  nearest gap 0.006919  <10
+  bottom-left:m1:J12/16      survivors  74  weight 37/4       =  9.250000  nearest gap 0.002124  <10
+  bottom-left:m1:J13/16      survivors  72  weight 9          =  9.000000  nearest gap 0.098692  <10
+  bottom-left:m1:J14/16      survivors  70  weight 35/4       =  8.750000  nearest gap 0.177746  <10
+  bottom-left:m1:J15/16      survivors  70  weight 35/4       =  8.750000  nearest gap 0.081370  <10
+  bottom-left:m2:J0/16       survivors  70  weight 35/4       =  8.750000  nearest gap 0.081370  <10
+  bottom-left:m2:J1/16       survivors  70  weight 35/4       =  8.750000  nearest gap 0.177746  <10
+  bottom-left:m2:J2/16       survivors  72  weight 9          =  9.000000  nearest gap 0.098692  <10
+  bottom-left:m2:J3/16       survivors  74  weight 37/4       =  9.250000  nearest gap 0.002124  <10
+  bottom-left:m2:J4/16       survivors  76  weight 19/2       =  9.500000  nearest gap 0.006919  <10
+  bottom-left:m2:J5/16       survivors  76  weight 19/2       =  9.500000  nearest gap 0.089792  <10
+  bottom-left:m2:J6/16       survivors  76  weight 19/2       =  9.500000  nearest gap 0.136657  <10
+  bottom-left:m2:J7/16       survivors  80  weight 10         = 10.000000  nearest gap 0.014978  NEUTRAL(=10)
+  bottom-left:m2:J8/16       survivors  80  weight 10         = 10.000000  nearest gap 0.014978  NEUTRAL(=10)
+  bottom-left:m2:J9/16       survivors  80  weight 10         = 10.000000  nearest gap 0.014978  NEUTRAL(=10)
+  bottom-left:m2:J10/16      survivors  76  weight 19/2       =  9.500000  nearest gap 0.014978  <10
+  bottom-left:m2:J11/16      survivors  74  weight 37/4       =  9.250000  nearest gap 0.014978  <10
+  bottom-left:m2:J12/16      survivors  72  weight 9          =  9.000000  nearest gap 0.009844  <10
+  bottom-left:m2:J13/16      survivors  66  weight 33/4       =  8.250000  nearest gap 0.254497  <10
+  bottom-left:m2:J14/16      survivors  66  weight 33/4       =  8.250000  nearest gap 0.330022  <10
+  bottom-left:m2:J15/16      survivors  66  weight 33/4       =  8.250000  nearest gap 0.165743  <10
+  maximum survivor weight over all 32 refined classes: 10 at bottom-left:m1:J6/16
+
+wall time 3.70 s
+wrote survivors-16.json

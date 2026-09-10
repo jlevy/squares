@@ -91,10 +91,21 @@ Results first established here, as far as the recorded source searches show:
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
-  A small refinement, recorded in the
-  [T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md),
-  gives `s(11) ≥ 3.810025723614703…` as a weak limit bound; it does not decide fit at
-  that endpoint. The certificate at `3.81` supplies the proof explained here.
+  Two refinements, recorded in the
+  [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
+  [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
+  packets, give `s(11) ≥ 3.816609502788862…` as a weak limit bound; neither decides fit
+  at its endpoint. The largest side certified at the container side itself is
+  `191/50 = 3.82`, on a certificate of a different kind — point atoms plus *threshold
+  atoms*, whose budget rule is what carries the side past the point method’s proved
+  ceiling — stated for a stranger in the
+  [T-025 proof packet](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md).
+  The verified bound now stands at
+  `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…`, the weak limit
+  of those same threshold atoms re-certified on a 1440-step direction net
+  ([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)),
+  which again decides no fit at its own endpoint.
+  The certificate at `3.81` supplies the proof explained here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
   bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s `4.5058`,
   taken from a source rather than proved here.

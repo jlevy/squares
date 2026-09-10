@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""How many atoms it takes to break eleven on the support that blocks every site set.
+
+Fixed support, weights tied over D4 orbits, rows: depth at most one at every structural
+site, the LP's 2,566 atom orbits, and any two-of-three atoms separated so far.  Each
+round solves, runs the plateau reader's own complete two-of-three search on the optimum,
+and adds every maximiser's D4 orbit as a row.  The optimum is rationalised down and
+re-checked on every row in Fractions each round, so each reported total is exact.
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction as F
+from pathlib import Path
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gen_sites import Fam
+from sqpack.fractional.ceiling import CeilingCertificate, Placement
+from sqpack.fractional.threshold import ThresholdAtom
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools.plateau_reader import read_arrangement, two_of_three_maximum
+
+raw = json.load(open(sys.argv[1]))
+pts = sorted({(F(a), F(b)) for orb in raw["sites_out"] for a, b in orb})
+meta = json.loads(Path(sys.argv[2]).read_text()); NEW = F(meta["outer_side"])
+f = Fam(Path(sys.argv[3])); m = len(f.pl); L = f.L
+ROUNDS = int(sys.argv[4]) if len(sys.argv) > 4 else 4
+
+def mirror_ht(t): return (1 - t) / (1 + t)
+def images(t, cx, cy):
+    out = []
+    for ht, x, y in ((t, cx, cy), (mirror_ht(t), L - cx, cy)):
+        a, b = x, y
+        for _ in range(4):
+            out.append((ht, a, b)); a, b = L - b, a
+    return out
+key = {(p.half_tangent, p.centre_x, p.centre_y): i for i, p in enumerate(f.pl)}
+seen = set(); groups = []
+for i, p in enumerate(f.pl):
+    if i in seen: continue
+    grp = {key[im] for im in images(p.half_tangent, p.centre_x, p.centre_y)}
+    seen |= grp; groups.append(sorted(grp))
+G = np.zeros((m, len(groups)))
+for gi, g in enumerate(groups):
+    for j in g: G[j, gi] = 1.0
+
+def membership(points):
+    out = np.zeros((len(points), m), dtype=bool); namb = 0
+    step = max(1, 4_000_000 // max(1, m))
+    for lo in range(0, len(points), step):
+        ch = points[lo:lo + step]
+        px = np.array([float(a) for a, _ in ch]); py = np.array([float(b) for _, b in ch])
+        s1 = np.abs(px[:, None] * f.ax[None, :] + py[:, None] * f.ay[None, :] - f.u[None, :]) - f.h[None, :]
+        s2 = np.abs(px[:, None] * f.bx[None, :] + py[:, None] * f.by[None, :] - f.v[None, :]) - f.h[None, :]
+        ins = (s1 <= 0) & (s2 <= 0); amb = (np.abs(s1) < 1e-9) | (np.abs(s2) < 1e-9)
+        ai, aj = np.nonzero(amb); namb += len(ai)
+        for i, j in zip(ai.tolist(), aj.tolist()): ins[i, j] = f.pl[j].contains(*ch[i])
+        out[lo:lo + len(ch)] = ins
+    return out, namb
+
+D, _ = membership(pts)
+Ad = (D.astype(float) @ G); Ad = Ad[Ad.sum(axis=1) > 0]
+
+def atom_row(points, k):
+    """The D4-orbit row of a threshold atom on this support, and its budget."""
+    atom = ThresholdAtom(tuple(points), k, F(1)); orb = atom.orbit(NEW)
+    allp = []; idx = []
+    for im in orb:
+        idx.append(list(range(len(allp), len(allp) + len(im.points)))); allp.extend(im.points)
+    M, _ = membership(allp)
+    acc = np.zeros(m)
+    for tri in idx: acc += (M[tri, :].sum(axis=0) >= k).astype(float)
+    return acc @ G, float(len(orb) * (len(points) // k))
+
+arows = []; abud = []
+apts = []; index = {}; orb_pts = []; ks = []; sizes = []
+for e in meta["atoms"]:
+    atom = ThresholdAtom(tuple((F(a), F(b)) for a, b in e["points"]), e["threshold"], F(1))
+    imgs = []
+    for im in atom.orbit(NEW):
+        tri = []
+        for q in im.points:
+            if q not in index: index[q] = len(apts); apts.append(q)
+            tri.append(index[q])
+        imgs.append(tuple(tri))
+    orb_pts.append(imgs); ks.append(e["threshold"]); sizes.append(len(imgs))
+Ap, _ = membership(apts)
+base = np.zeros((len(orb_pts), m))
+for oi, imgs in enumerate(orb_pts):
+    acc = np.zeros(m)
+    for tri in imgs: acc += (Ap[list(tri), :].sum(axis=0) >= ks[oi]).astype(float)
+    base[oi] = acc
+Aa0 = base @ G
+b0 = np.array([sizes[oi] * (3 // ks[oi]) for oi in range(len(orb_pts))], dtype=float)
+k0 = Aa0.sum(axis=1) > 0
+Aa0 = Aa0[k0]; b0 = b0[k0]
+cost = np.array([float(len(g)) for g in groups])
+print(f"support {m} in {len(groups)} orbits; {Ad.shape[0]} depth rows; {Aa0.shape[0]} atom rows", flush=True)
+
+added = 0
+for rnd in range(ROUNDS + 1):
+    t0 = time.perf_counter()
+    A = np.vstack([Ad, Aa0] + ([np.array(arows)] if arows else []))
+    b = np.concatenate([np.ones(Ad.shape[0]), b0] + ([np.array(abud)] if abud else []))
+    res = linprog(-cost, A_ub=sparse.csr_matrix(A), b_ub=b, bounds=(0, None), method="highs")
+    zq = [max(F(0), F(int(np.floor(v * 10**9)), 10**9)) for v in res.x]
+    ok = all(sum((F(int(A[r, gi])) * zq[gi] for gi in range(len(groups)) if A[r, gi]), start=F(0)) <= F(int(b[r]))
+             for r in range(A.shape[0]))
+    tot = sum((F(len(groups[gi])) * zq[gi] for gi in range(len(groups))), start=F(0))
+    print(f"round {rnd}: {added} separated atom orbits, float optimum {-res.fun:.9f}, exact feasible total {tot} = {float(tot):.9f} (feasible {ok}), {time.perf_counter()-t0:.1f}s", flush=True)
+    if rnd == ROUNDS or -res.fun < 11 - 1e-7:
+        break
+    rec = {"n": 11, "outer_side": str(L), "square_side": str(f.pl[0].side),
+           "half_tangents": json.loads(Path(sys.argv[3]).read_text())["half_tangents"],
+           "placements": [[str(f.pl[j].half_tangent), str(f.pl[j].centre_x), str(f.pl[j].centre_y), str(zq[gi]), str(f.pl[j].side)]
+                          for gi, g in enumerate(groups) if zq[gi] > 0 for j in g], "total_weight": str(tot)}
+    cert = CeilingCertificate.from_record(rec)
+    arr = read_arrangement(cert)
+    ts = time.perf_counter()
+    k4 = two_of_three_maximum(arr, F(1))
+    print(f"   K4 on {len(cert.placements)} placements: max charge {k4.max_charge}, complete {k4.complete}, {len(k4.witnesses)} witnesses, {time.perf_counter()-ts:.1f}s", flush=True)
+    if k4.max_charge <= 1:
+        print("   no violated two-of-three atom: the loop stops"); break
+    new = 0
+    for w in k4.witnesses[:12]:
+        row, bud = atom_row(tuple(w), 2)
+        arows.append(row); abud.append(bud); new += 1
+    added += new
+    print(f"   added {new} two-of-three orbits", flush=True)

@@ -79,6 +79,9 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, as a weak limit corollary of T-018’s retained certificate. |
+| [T-025](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 191/50 = 3.82, by a threshold certificate: 584 point atoms of mass 271052551/31250000 and 320 threshold atoms, every one 2-of-3, of budget 143352577/62500000, on the D4-symmetric site set at shrunken side 9977/10000 and the 181-direction net. |
+| [T-024](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862, as a weak limit corollary of T-018’s retained atoms re-certified on a finer direction net. |
+| [T-026](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939, as a weak limit corollary of T-025’s threshold certificate re-certified on a finer direction net. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -138,8 +141,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives twenty-four confirmed hypotheses, twenty-one
-refuted hypotheses, one open hypothesis, twenty-five open questions, and forty-five
+The generated ledger currently derives twenty-four confirmed hypotheses, twenty-two
+refuted hypotheses, two open hypotheses, twenty-six open questions, and forty-seven
 blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
 remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
 scientific invocation; this does not refute its claim.
@@ -208,6 +211,13 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
+| [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
+| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | current | transient | — |
+| [Independent Review of the Unit-Parent Centre Bound](docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md) | dated review record | record | retained | — |
+| [Exact Threshold-Atom Orbit Admission](packing/cases/n11_fractional_certificate/threshold-atom-orbit-admission.md) | research synthesis | record | retained | — |
+| [H157 and Conditional-Claim Review at ee98c4ba](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/review.md) | dated review record | record | retained | — |
+| [Bounded Review of the H157 Corrections](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/correction-review.md) | dated review record | record | retained | — |
 | [Unit-Parent Centre Restriction: Author-Lane Proof Check](docs/project/reviews/review-2026-09-10-n11-parent-centre-author-check.md) | dated review record | record | retained | — |
 | [N11 Research: Definitions, Findings, and the Inference Chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md) | research synthesis | record | retained | — |
 | [Inference Audit: Owner Geometry and Fixed-D Continuation](docs/project/research/research-2026-09-09-n11-inference-audit.md) | research synthesis | record | retained | — |
@@ -234,7 +244,29 @@ case or experiment separately.
 | [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
 | [Math Startup Ledger](packing/benchmarks/math-startup/ledger.md) | generated status view | generated | generated | — |
 | [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
+| [Correction: the stacking capacity bound in lane X3’s box sweep is false](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-box-sweep-capacity-correction.md) | dated review record | record | retained | — |
+| [Agenda 034, lane A6: structural site placement at L = 153/40, and the certificate that closes the site side](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-structural-sites-and-the-depth-one-certificate.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane X4: sixteen sectors do not break neutrality, and no bin count can](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane T: what the certificate language can and cannot do past 3.82](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t-theory-cuts-and-routes.md) | research synthesis | record | retained | — |
+| [Agenda 034, ceiling reader: an independent exact decision of the 191/50 ceiling family](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-reader-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 034: reconciliation against the in-flight upstream branches, 2026-09-09](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/reconciliation-upstream-2026-09-09.md) | dated review record | record | retained | — |
+| [Agenda 034: reconciliation against PR 142, and why PR 145 was left out, 2026-09-09](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/reconciliation-upstream-142-2026-09-09.md) | dated review record | record | retained | — |
+| [Agenda 034, lane E: fixed-site row completion at 61/16 and the 3.82 cutting loop](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-e-lp-runs-61-16-and-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane M0: the exact fixed-support optimum of the 3.82 fractional packing](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-m0-fixed-support-polish-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane A: net refinement, frozen-measure expansion, and the shrink tax on the frozen T-018 atoms](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a-net-refinement-and-shrink-tax.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane B: threshold atoms at 191/50](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-b-threshold-atoms-at-191-50.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane T2: the cap of the threshold method and the next cut families](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-cap-and-next-cuts.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane T2: the plateau reader, exact feasibility of a point dual for the rank-one cut families](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t2-plateau-reader.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane A2: the frozen threshold certificate on finer direction nets](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a2-threshold-certificate-on-finer-nets.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane A3: the threshold loop at 383/100, and where it plateaus](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-threshold-loop-at-383-100.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane X1: corner conditioning is exactly mass-neutral](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane X2: what the single-corner conditional argument already has](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane X3: containment atoms on the plateau families, two negatives](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane A4: separating the 1/25-integral dual at 153/40, K4, K5 and K6 with the depth gate bypassed](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane A5: the fixed-support maximum under the atom classes, and how far it is from a cap](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
+| [Adversarial Review of the Threshold-Certificate Theorem and the 191/50 Candidate](docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md) | dated review record | record | retained | — |
+| [Contributed Research Note: Extending the Lower Bound for Eleven Squares](docs/project/reviews/review-2026-09-08-extending-s11-lower-bound-note.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
 | [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
 | [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
@@ -468,6 +500,9 @@ case or experiment separately.
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
 | [T-022 Dilation-Limit Corollary, Derived from T-018](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) | research synthesis | record | retained | — |
+| [T-024 Dilation-Limit Corollary on a Finer Net, Derived from T-018’s Atoms](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) | research synthesis | record | retained | — |
+| [T-025: A Threshold Certificate Proves `s(11) >= 191/50`](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md) | research synthesis | record | retained | — |
+| [T-026 Dilation-Limit Corollary of the Threshold Certificate on a Finer Net](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md) | research synthesis | record | retained | — |
 | [Overnight Decision Review: Independent Coverage and Owner Geometry](packing/cases/n11_five_dot_cover/overnight-strategy-review.md) | research synthesis | record | retained | — |
 | [Wall Constructor: Mathematical Admission Addendum](packing/cases/n11_five_dot_cover/wall-constructor-contract.md) | research synthesis | record | retained | — |
 | [BC318: Exact Containment Transfer from the Retained Five-Dot Certificate](packing/cases/n11_five_dot_cover/wall-containment-contract.md) | research synthesis | record | retained | — |
@@ -670,14 +705,20 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Current reader entry:**
-[definitions, findings and the inference chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md),
-followed by the
-[scope audit](docs/project/research/research-2026-09-09-n11-inference-audit.md).
-PR145 is ready at its frozen scientific milestone.
-The stacked interpretation block corrects summaries and maps untested alternatives; it
-adds no scientific target or global bound.
-Historical handoffs below retain their original context.
+**Current combined reader entry:**
+[the consolidated PR-series takeaways](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons),
+with definitions, proof results, scoped negatives and open comparisons in one place.
+PR137, PR142, PR145 and PR147 landed together at `1c1db463` on September 10, 2026. PR139
+incorporates that owner strand and contributes T-024–T-026, taking the global lower
+bound to `3.826447410572939744...`; the upper construction is unchanged at
+`3.877083590022814...`. The review corrections preserve the fixed-family scope of
+conditional obstructions and the existential owner-selection requirement.
+Finite support, net and grid results do not close entire research directions.
+The
+[review addendum](docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md#combined-series-review-addendum--september-10-2026)
+and [PR139](https://github.com/jlevy/squares/pull/139) carry finalization evidence.
+The two-attainer target and unit-parent proposal remain preparation, not new
+measurements. Historical handoffs below retain their original context.
 
 [Session113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md)
 closed Agenda032 with [T-023](packing/frontier/RESULTS.md), the five-dot exclusion of
@@ -824,6 +865,13 @@ accepted the necessary two-core screen;
 [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md)
 is the completed refutation of every one-site extension of fixed D on the selected
 four-patch relaxation.
+[exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md)
+refuted `H-157`: refining the corner-owner angular bins from eight to sixteen widens the
+guaranteed wedge and moves the reach toward the critical survivor by exactly nothing,
+because the closest point of every patch to that core is the mark itself.
+Its two theorems rule out patch refinement as the lever at every angular resolution and
+at pose level; they do not establish that the conditional strategy fails, so X-026
+escape 1 is narrowed rather than closed.
 Exp150’s compatibility result does not establish continuous unit parents or simultaneous
 owners, and exp153 does not exclude the physical tuple.
 
@@ -853,7 +901,8 @@ The record does not prove this statement.
 A reviewed two-attainer instrument is source ready but unrun; any future target needs a
 separate prospective registration and allocation.
 PR145 is ready after matching fast, page and full checkpoint validation.
-PR142 and PR137 also remain ready and unmerged.
+Historical status at that checkpoint: PR142 and PR137 were ready and unmerged.
+Both later landed with PR145/147 at `1c1db463`.
 
 The two-hour sprint in
 [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
@@ -2629,8 +2678,8 @@ no intervening improvement:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…` | [T-022](packing/frontier/RESULTS.md), a weak limit corollary of T-018’s first-party certificate and a sharpened containment lemma |
-| Bound gap | `0.067057866408` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…` | [T-026](packing/frontier/RESULTS.md), the weak dilation limit of T-025’s threshold certificate re-certified on a 1440-step direction net |
+| Bound gap | `0.050636179450` | the second-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -3435,6 +3484,12 @@ round that names the hypothesis, control roles included.
 | [H-149](packing/campaign/hypotheses/H-149-selected-six-dot-cover.md) | refuted | D plus the saved escape centre covers the same selected tuple on all 361 directions | 1 | First deficit at owner-006; 13.45s |
 | [H-150](packing/campaign/hypotheses/H-150-sixth-site-two-core-screen.md) | confirmed | One replacement site hits both exact escaping cores | 1 | Nonempty two-dimensional quadrilateral; 9.84s |
 | [H-151](packing/campaign/hypotheses/H-151-direct-sixth-site-feasibility.md) | refuted | Some sixth site completes the fixed D cover of the selected tuple | 1 | Exact site region empty after188directions; fixed-D family refuted |
+| [H-152](packing/campaign/hypotheses/H-152-threshold-certificate-at-191-50.md) | result registered | Rank-one threshold atoms admit a certificate of budget below eleven at 191/50, where the point atoms provably do not; the frozen family has budget 10.967323 and is registered as [T-025](packing/frontier/RESULTS.md) | 0 | — |
+| [H-153](packing/campaign/hypotheses/H-153-reoptimised-certificate-on-a-finer-net.md) | open | Re-optimising the covering LP on a net of 720 or more directions at the sharpened shrink passes a dilation supremum of 3.82 | 0 | — |
+| [H-154](packing/campaign/hypotheses/H-154-where-the-point-atom-ceiling-begins.md) | open question | Where does the point-atom ceiling begin in side, and does any weight-eleven family at 191/50 survive a larger shrink? | 0 | — |
+| [H-155](packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
+| [H-156](packing/campaign/hypotheses/H-156-threshold-certificate-past-3-82.md) | blocked | The threshold-atom language certifies a side above 191/50, by the same loop at a larger side or by the finer-net shrink; the separation loop that would produce the atoms is unbuilt | 0 | — |
+| [H-157](packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | refuted | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement | 1 | exp-154: six of eight refined subclasses still read exactly 10, and the reach is bit-identical to the parent because the mark is the closest point of every patch |
 
 ### Confirmed
 
@@ -3603,9 +3658,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 123 | 31,555 | 17,503 | 365 | 2,974 | 179.02 h |
+| claimed by a session | 124 | 33,276 | 18,198 | 381 | 3,043 | 196.61 h |
 | claimed by none | 60 | 11,110 | 6,539 | 156 | 946 | 51.75 h |
-| **measured** | **183** | **42,665** | **24,042** | **521** | **3,920** | **230.77 h** |
+| **measured** | **184** | **44,386** | **24,737** | **537** | **3,989** | **248.36 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3644,7 +3699,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-107](packing/campaign/agent-sessions/session-107-first-wave-selection.md) | 2 | 1 | 202 | 82 | 0 | 0.58 h |
 | [session-108](packing/campaign/agent-sessions/session-108-anchors-at-q.md) | 1 | 1 | 128 | 52 | 0 | 0.57 h |
 | [session-109](packing/campaign/agent-sessions/session-109-corner-class-at-q.md) | 1 | 1 | 156 | 67 | 0 | 0.53 h |
-| *shared by 35 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| [session-125](packing/campaign/agent-sessions/session-125-past-the-point-atom-ceiling.md) | 4 | 1 | 1,721 | 695 | 16 | 17.59 h |
+| *shared by 36 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3702,9 +3758,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 79 |
+| measured | 80 |
 | unmeasured | 45 |
-| **total** | **124** |
+| **total** | **125** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3720,9 +3776,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 109 rounds registered in `series-000`.
+There are 110 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1367.0 wall-minutes.
+They record 2152.1 agent-minutes and 1373.0 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3854,8 +3910,8 @@ archive beside it.
 | [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Owner reprioritized BC-309 before launch; no LP target invoked; protocol retained pending a fresh forward allocation | blocked |
 | [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md) | 11 | target | H-136 | Matched unrestricted and four-fixed-corner residual covering programs on one 19-by-19 grid and nine retained directions | Global numerical convergence; residual thin-cell separator failure, no paired score | unresolved |
 | [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md) | 11 | target | H-136 | Matched repaired replay on unchanged support, directions and guards | Both arms converged; matched gap improvement0.1766034327, residual mass7.804878 above7 | accepted |
-| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | No endpointclass retains mass10; exact producer completed, independentaudit pending | rejected |
-| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpointcombination retains mass7; independentaudit pending; processchargedonce | rejected |
+| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | No endpoint class retains mass10 for the declared source; exp141 independently confirmed; D489 limits source reuse | rejected |
+| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpoint combination retains mass7 for the declared source; exp141 confirmed; shared producer charged once | rejected |
 | [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md) | 11 | target | H-140 | Exact full181net replay of unchanged residualatoms fromexp136 | Exact minimum760979/800000; normalized conditional mass31219612/3804895 above7 | rejected |
 | [exp-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md) | 11 | target | H-139 | Matched unrestricted/point/triangle/endpoint covers on independent369site support andnine directions | Unrestricted converged; point hit60rounds; area arms unrun | unresolved |
 | [exp-141](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md) | 11 | target | H-137 | Independent exact reconstruction of the exp137 screen | Independent audit verified192masks,147456exactSATchecks and alljoint summaries; confirms negative | rejected |
@@ -3871,6 +3927,7 @@ archive beside it.
 | [exp-151](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md) | 11 | target | H-149 | Six fixed dots and four selected wall patches on the full net | Six covered directions then a strict escape at owner-006 | rejected |
 | [exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md) | 11 | target | H-150 | Exact closed intersection of two escaping cores | Nonempty two-core quadrilateral and verified common site | accepted |
 | [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md) | 11 | target | H-151 | Direct complete-domain support intersection and independent cover confirmation | Empty site region after188directions; no sixth site preserves D | **rejected** |
+| [exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md) | 11 | target | H-157 | Exact sixteen-bin and singleton-ray owner-sector screen of the mass-eleven ceiling family | Six of eight refined subclasses still read survivor weight exactly 10; the two that break read 19/2, not 79/8 | **rejected** |
 
 ### Cost and provenance
 
@@ -3985,10 +4042,11 @@ archive beside it.
 | exp-151 | one 300-second external process; 240-second internal guard | 13.45s | — | criterion | `c8cd38da` |
 | exp-152 | one 60-second external process; 30-second internal guard | 9.84s | — | criterion | `0a4fe687` |
 | exp-153 | one300-second external process; shared240-second internal guard | — | 22.36s | complete negative prefix | criterion |
+| exp-154 | under an hour, as registered | 356.1 s | — | criterion | `67ccd16b` |
 
-### What the 109 rounds jointly establish
+### What the 110 rounds jointly establish
 
-The 109 rounds use 2152.1 agent-minutes and 1367.0 wall-minutes under the campaign’s
+The 110 rounds use 2152.1 agent-minutes and 1373.0 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
@@ -4194,13 +4252,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 488 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 489 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 98 | asserted something false about the mathematics |
-| validity | 123 | was correct, but the measurement did not bear on the question |
+| validity | 124 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 185 | recorded something its own evidence contradicts |
 | robustness | 64 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
@@ -4220,7 +4278,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-four defects in 488, and no soundness defect
+**The automated gate has caught seventy-four defects in 489, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -4229,6 +4287,32 @@ Gates confirm what you already thought to check; these were found by devices bui
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
+
+**[D-489](defects.md) is open, and it is the log’s clearest case of a guard that reads
+like soundness and acts like a filter.** `devtools/screen_corner_dual_salvage.py`
+screens a retained depth-one family against an owner class’s guaranteed patch and reads
+the survivor weight as a weak-duality lower bound on that class’s residual cover value.
+Its source predicate requires the source receipt’s `failures` to be exactly
+`["K3 total weight at least n"]` — the failure a family records when its total weight is
+*below* `n` — so it accepts only a family that falls short of the mass the bound is made
+of, and refuses every proved ceiling family.
+Exp137 and exp138 deliberately named a source family about `0.6158` short of eleven;
+exp141 independently confirmed their exact negative results on that source.
+Those results remain valid.
+They do not establish that no other fractional family obstructs the residual problem, or
+that a useful conditional cover exists.
+The later X1 screen uses a different mass-eleven family and leaves exact survivor mass
+ten on four screened single-corner endpoint-patch relaxations.
+Its depth-one survivors obstruct a point cover below ten on those particular domains.
+
+The source guard is still a reuse defect: it must be repaired before admitting a valid
+mass-eleven source through that CLI, as tracked by `think-rm5c`. That defect and the
+change of source do not reverse exp137/138’s scoped arithmetic.
+The corrected
+[X-026](packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md)
+separates measured neutrality for the endpoint-patch family from the open questions of
+physical owner routing, stronger domains and conditional threshold covers.
+Neither a universal conditional-method refutation nor equal reach or runtime follows.
 
 **[D-470](defects.md) records a deferred exhaustive test that still asserted the rung
 `T-021` displaced.** The full gate caught the stale transcription after the PR 83 merge;
@@ -4711,8 +4795,17 @@ This project’s instances and generator moved seven registered cases in one day
 `2 + 4/sqrt(5)`, stated in 1984 and published in 2003; the recorded search found no
 intervening improvement.
 [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
-`3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
-The shared S5 rubric category does not make these contributions comparable in size.
+`3.810025723614703…`, and [T-024](packing/frontier/RESULTS.md) re-certifies the same
+atoms on a finer direction net and dilates them to `3.816609502788862…`; their proofs
+and endpoint limitations remain in the technical record.
+`s(11) >= 191/50` is [T-025](packing/frontier/RESULTS.md), a certificate of a new kind:
+threshold atoms, which charge a core holding at least `k` of a set’s points and cost
+only `floor(|S| / k)` of the budget, carry the side past the exact ceiling that the
+point-atom method provably cannot pass.
+[T-026](packing/frontier/RESULTS.md) then re-certifies those atoms on a 1440-step net
+and dilates them to `3.826447410572939…`, the verified lower bound of the case and a
+weak limit like T-022’s and T-024’s. The shared S5 rubric category does not make these
+contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
 was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity

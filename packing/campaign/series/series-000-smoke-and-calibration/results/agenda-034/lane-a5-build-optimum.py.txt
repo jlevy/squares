@@ -1,0 +1,84 @@
+"""Build the optimal family as a ceiling record, and describe the redistribution."""
+from __future__ import annotations
+import json, sys, math, time
+from fractions import Fraction
+from pathlib import Path
+import numpy as np
+from scipy.optimize import linprog
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools.plateau_reader import (
+    load_family, read_arrangement, intersection_graph, piercing_number,
+)
+from devtools.polish_ceiling_family import placement_orbits
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+from cap_lp import maximal_cliques, orbit_row, RS
+
+name = sys.argv[1]
+tag = sys.argv[2]
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+rec = json.loads((OUT / f"nu-{tag}.json").read_text())
+z = [Fraction(s) for s in rec["weights_per_placement"]]
+
+fam = load_family(RS / name)
+arr = read_arrangement(fam)
+orbit, orbits = placement_orbits(fam)
+n = len(fam.placements)
+
+# --- full 88-column float LP, as a check on the D4 reduction -----------------
+adj = intersection_graph(fam)
+cl = maximal_cliques(adj, n)
+masks = arr.masks
+nonhelly = [c for c in cl if c.bit_count() >= 2 and not any(c & m == c for m in masks)]
+rows88 = {tuple((m >> i & 1) for i in range(n)) for m in masks}
+rows88 |= {tuple((c >> i & 1) for i in range(n)) for c in nonhelly}
+rows88 = sorted(rows88)
+A = np.array(rows88, dtype=float)
+r = linprog(-np.ones(n), A_ub=A, b_ub=np.ones(len(rows88)), bounds=(0, None), method="highs")
+print(f"full {n}-column LP (float): {-r.fun!r}   rows {len(rows88)}   status {r.status}")
+
+# --- describe the orbits -----------------------------------------------------
+side = fam.outer_side
+c = side / 2
+print(f"\n== orbits of {name} (side {side} = {float(side):.5f}, centre {float(c):.5f})")
+print(f"{'orb':>3} {'weight/plc':>10} {'orbit tot':>9}  {'tilt deg':>8}  representative centre        role")
+for o in range(orbits):
+    members = [i for i in range(n) if orbit[i] == o]
+    p = fam.placements[members[0]]
+    t = p.half_tangent
+    ang = math.degrees(2 * math.atan(float(t)))
+    # fold the angle to [0,45]
+    fold = min(ang % 90, 90 - ang % 90)
+    dx, dy = float(p.centre_x - c), float(p.centre_y - c)
+    dist = math.hypot(dx, dy)
+    # distance to nearest wall
+    wall = min(float(p.centre_x), float(p.centre_y), float(side - p.centre_x), float(side - p.centre_y))
+    role = "corner" if wall < 0.55 and dist > 1.6 else ("wall" if wall < 0.55 else "inner")
+    print(f"{o:>3} {str(z[o]):>10} {str(8*z[o]):>9}  {fold:>8.3f}  ({float(p.centre_x):.4f}, {float(p.centre_y):.4f})   "
+          f"d(wall)={wall:.4f} d(centre)={dist:.4f} {role}")
+
+# --- write the optimal family as a ceiling record ---------------------------
+placements = []
+for i in range(n):
+    p = fam.placements[i]
+    w = z[int(orbit[i])]
+    if w == 0:
+        continue
+    placements.append([str(p.half_tangent), str(p.centre_x), str(p.centre_y), str(w), str(p.side)])
+src = json.loads((RS / name).read_text())
+out = {
+    "n": 11,
+    "outer_side": str(fam.outer_side),
+    "square_side": str(fam.square_side),
+    "half_tangents": src["half_tangents"],
+    "placements": placements,
+    "total_weight": str(8 * sum(z, start=Fraction(0))),
+    "total_weight_float": float(8 * sum(z, start=Fraction(0))),
+    "provenance": {
+        "tool": "threshold-cap/cap_lp.py: fixed-support maximum under depth-one rows and "
+                "the budget-one rank-one atom rows (non-Helly maximal cliques with tau* < 2)",
+        "source": str(RS / name),
+    },
+}
+path = OUT / f"nu-optimum-{tag}.json"
+path.write_text(json.dumps(out, indent=1))
+print(f"\nwrote {path}  ({len(placements)} placements, total {out['total_weight']})")

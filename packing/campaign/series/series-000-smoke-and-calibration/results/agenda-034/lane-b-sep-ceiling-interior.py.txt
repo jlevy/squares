@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""2-of-3 separation on the ceiling family with INTERIOR candidate points.
+
+Every arrangement vertex inside a pairwise intersection is pulled towards that pair's
+polygon centroid by the fraction `pull` (so no candidate lies on a placement boundary),
+the deepest `cap` per pair are kept plus the centroid itself; all combinations per
+triangle; exact containment; the maximum charge is an exact count of images (weight 1/8).
+"""
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+import numpy as np
+S = Path(__file__).resolve().parent
+sys.path.insert(0, str(S))
+from sepcore import FamilyGeometry, containment, intersect
+from sqpack.fractional.ceiling import CeilingCertificate, arrangement_lines, container_vertices
+cap = int(sys.argv[2]) if len(sys.argv) > 2 else 24
+fam = CeilingCertificate.from_record(json.loads((S / sys.argv[1]).read_text()))
+geo = FamilyGeometry(fam, print)
+pl = geo.pl; n = len(pl)
+verts = container_vertices(geo.family, arrangement_lines(geo.family))
+Vc, _ = containment(verts, pl, geo.normals, geo.offsets, geo.halves)
+vdepth = Vc @ geo.y
+print(f"{len(verts)} vertices, cap {cap} per pair")
+for pull in (Fraction(1, 1000), Fraction(1, 100), Fraction(1, 10)):
+    t0 = time.perf_counter()
+    cand_pts = {}
+    for e, (i, j) in enumerate(geo.edges):
+        idx = np.flatnonzero(Vc[:, i] & Vc[:, j])
+        if idx.size > cap:
+            idx = idx[np.argsort(-vdepth[idx], kind="stable")[:cap]]
+        poly = intersect(list(geo.corners[i]), pl[j]); m = len(poly)
+        cx = sum(p[0] for p in poly) / m; cy = sum(p[1] for p in poly) / m
+        cand_pts[e] = [(x + pull * (cx - x), y + pull * (cy - y)) for x, y in (verts[t] for t in idx)] + [(cx, cy)]
+    allpts = []; offsets = {}
+    for e in range(len(geo.edges)):
+        offsets[e] = (len(allpts), len(allpts) + len(cand_pts[e])); allpts.extend(cand_pts[e])
+    C, amb = containment(allpts, pl, geo.normals, geo.offsets, geo.halves)
+    Ci = C.astype(np.int8)
+    best = 0; viol = 0; tri = 0; best_info = None
+    for i, j in geo.edges:
+        for kk in geo.adj[i] & geo.adj[j]:
+            if kk <= j: continue
+            tri += 1
+            a0, a1 = offsets[geo.edge_index[(i, j)]]; b0, b1 = offsets[geo.edge_index[(j, kk)]]; c0, c1 = offsets[geo.edge_index[(i, kk)]]
+            cnt = Ci[a0:a1][:, None, None, :] + Ci[b0:b1][None, :, None, :] + Ci[c0:c1][None, None, :, :]
+            charged = (cnt >= 2).sum(axis=3)
+            m = int(charged.max())
+            if m > 8: viol += 1
+            if m > best:
+                best = m; a, b, c = np.unravel_index(int(charged.argmax()), charged.shape)
+                best_info = (i, j, kk, allpts[a0 + a], allpts[b0 + b], allpts[c0 + c])
+    print(f"pull {pull}: {len(allpts)} interior candidates ({amb} decided exactly), {tri} triangles, max 2-of-3 charge {best}/8 = {best/8:.4f}, violated triangles {viol}; {time.perf_counter()-t0:.1f}s", flush=True)
+    if best_info:
+        i, j, kk, a, b, c = best_info
+        print(f"   best triangle {(i, j, kk)} angles {[round(geo.angles[v],2) for v in (i,j,kk)]} points {[(round(float(p[0]),5), round(float(p[1]),5)) for p in (a,b,c)]}", flush=True)

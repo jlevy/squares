@@ -1,0 +1,27 @@
+retained signed rays: 1444
+
+=== mark m1: singleton-ray patches Q_r(m), 1444 classes ===
+  max survivor weight  10 = 10.000000   attained by 135 rays
+  min survivor weight  33/4 = 8.250000
+  distribution: 33/4x315, 67/8x16, 17/2x30, 69/8x13, 35/4x193, 71/8x3, 9x169, 73/8x28, 37/4x136, 75/8x29, 19/2x312, 77/8x29, 39/4x22, 79/8x14, 10x135
+  neutral (>=10) classes: 135
+  rays attaining the max span [147.17510, 181.58208] deg
+
+=== mark m2: singleton-ray patches Q_r(m), 1444 classes ===
+  max survivor weight  10 = 10.000000   attained by 135 rays
+  min survivor weight  33/4 = 8.250000
+  distribution: 33/4x315, 67/8x16, 17/2x30, 69/8x13, 35/4x193, 71/8x3, 9x169, 73/8x28, 37/4x136, 75/8x29, 19/2x312, 77/8x29, 39/4x22, 79/8x14, 10x135
+  neutral (>=10) classes: 135
+  rays attaining the max span [178.41792, 212.82490] deg
+
+wall time so far 81.18 s
+
+=== stronger conditioning: the owner's whole core, sampled at the mark clique ===
+  mark m1: clique members [8, 14, 59, 60, 66, 71, 81, 85], weight 1
+    survivor weight if the owner's core is that member: #8:71/8, #14:71/8, #59:10, #60:10, #66:73/8, #71:73/8, #81:37/4, #85:37/4
+    max over the clique: 10 = 10.000000  (STILL >= 10)
+  mark m2: clique members [8, 14, 59, 60, 66, 71, 81, 85], weight 1
+    survivor weight if the owner's core is that member: #8:71/8, #14:71/8, #59:10, #60:10, #66:73/8, #71:73/8, #81:37/4, #85:37/4
+    max over the clique: 10 = 10.000000  (STILL >= 10)
+
+wall time 81.64 s

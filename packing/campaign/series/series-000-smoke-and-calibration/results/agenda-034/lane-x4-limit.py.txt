@@ -1,0 +1,89 @@
+"""The refinement limit: the finest angular conditioning there is.
+
+Any partition of the owner's pose angle into closed bins gives each class a guaranteed
+patch contained in Q_phi(m) for every retained ray phi in that class.  The finest such
+split is the singleton split "e_1 is exactly the ray r", whose guaranteed patch is
+exactly the anchored quarter-core Q_r(m).  Screening every one of the 1444 retained
+signed rays therefore bounds what ANY angular refinement can ever delete.
+
+Also probes one strictly stronger conditioning -- fixing the owner's whole core, not
+just its angle -- using the eight mark-clique members as candidate owner cores.
+"""
+from __future__ import annotations
+
+import json
+import sys
+import time
+from collections import Counter
+from fractions import Fraction
+from pathlib import Path
+
+SCRATCH = "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/sixteen-sectors"
+sys.path.insert(0, SCRATCH)
+
+import nbins
+from devtools.owner_footprints import owner_branch_manifest, signed_axis_rays
+from devtools.screen_corner_dual_salvage import screen_footprint, strict_separation
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+t0 = time.perf_counter()
+REPO = Path("/home/user/squares")
+SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
+              "ceiling-family-191-50.json")
+record = json.loads(SRC.read_text())
+family = CeilingCertificate.from_record(transport(record, Fraction(1), side=Fraction(96, 25)))
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+axes = frozenset((d.ux, d.uy) for d in directions) | frozenset((d.vx, d.vy) for d in directions)
+MARKS = {o.mark_id: o.mark for o in manifest.classes}
+rays = signed_axis_rays(directions)
+print(f"retained signed rays: {len(rays)}")
+
+THRESH = Fraction(10)
+results: dict[str, dict] = {}
+for mark_id, mark in MARKS.items():
+    tally: Counter[Fraction] = Counter()
+    best: list[tuple[Fraction, tuple, int]] = []
+    for r in rays:
+        poly = nbins.anchored_quarter_core(mark, r)
+        s = screen_footprint(family, poly, class_id="limit", corner="bottom-left", kind="endpoint",
+                             source_placements=family.placements, direction_axes=axes)
+        tally[s.total_weight] += 1
+        best.append((s.total_weight, r, len(s.survivors)))
+    mx = max(w for w, _, _ in best)
+    mn = min(w for w, _, _ in best)
+    at_max = [r for w, r, _ in best if w == mx]
+    results[mark_id] = {"max": mx, "min": mn, "n_at_max": len(at_max), "tally": tally}
+    print(f"\n=== mark {mark_id}: singleton-ray patches Q_r(m), {len(rays)} classes ===")
+    print(f"  max survivor weight  {mx} = {float(mx):.6f}   attained by {len(at_max)} rays")
+    print(f"  min survivor weight  {mn} = {float(mn):.6f}")
+    print(f"  distribution: " + ", ".join(f"{str(w)}x{c}" for w, c in sorted(tally.items())))
+    print(f"  neutral (>=10) classes: {sum(c for w, c in tally.items() if w >= THRESH)}")
+    import math
+    angs = sorted(math.degrees(math.atan2(float(y), float(x))) % 360.0 for x, y in at_max)
+    if angs:
+        print(f"  rays attaining the max span [{angs[0]:.5f}, {angs[-1]:.5f}] deg")
+
+print(f"\nwall time so far {time.perf_counter() - t0:.2f} s")
+
+# ---- strictly stronger conditioning: fix the owner's whole core -------------------
+print("\n=== stronger conditioning: the owner's whole core, sampled at the mark clique ===")
+for mark_id, mark in MARKS.items():
+    clique = [i for i, p in enumerate(family.placements)
+              if strict_separation(p.corners(), (mark,)) is None]
+    print(f"  mark {mark_id}: clique members {clique}, "
+          f"weight {sum((family.placements[i].weight for i in clique), Fraction(0))}")
+    rows = []
+    for i in clique:
+        core = family.placements[i].corners()
+        s = screen_footprint(family, core, class_id="core", corner="bottom-left", kind="endpoint",
+                             source_placements=family.placements, direction_axes=axes)
+        rows.append((i, s.total_weight))
+    mx = max(w for _, w in rows)
+    print("    survivor weight if the owner's core is that member: "
+          + ", ".join(f"#{i}:{w}" for i, w in rows))
+    print(f"    max over the clique: {mx} = {float(mx):.6f}  "
+          f"({'STILL >= 10' if mx >= THRESH else 'below 10'})")
+
+print(f"\nwall time {time.perf_counter() - t0:.2f} s")

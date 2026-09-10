@@ -1,0 +1,67 @@
+"""Record the reviewed Git sources and actual import origins for this bounded replay."""
+
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    repo = args.repo.resolve()
+    sys.path.insert(0, str(repo / "packing"))
+    sys.path.insert(0, str(repo / "packing/src"))
+    if repo in args.output.resolve().parents:
+        raise SystemExit("Output must be outside repository")
+
+    def git(*parts):
+        return subprocess.check_output(["git", *parts], cwd=repo, text=True).strip()
+
+    engine = "67ccd16bb23ac2ba03b3430e757839b5b18528f4"
+    reviewed = "ee98c4baae876835ba44a5f127bfa73d4e838d45"
+    names = ["devtools.owner_footprints", "devtools.screen_corner_dual_salvage",
+             "devtools.transport_ceiling_family", "sqpack.fractional.ceiling",
+             "sqpack.fractional.model"]
+    dependencies = []
+    for name in names:
+        spec = importlib.util.find_spec(name)
+        if spec is None or spec.origin is None:
+            raise SystemExit(f"Import not found: {name}")
+        origin = Path(spec.origin).resolve()
+        relative = origin.relative_to(repo).as_posix()
+        dependencies.append({"module": name, "origin": str(origin), "repository_path": relative,
+                             "engine_blob": git("rev-parse", f"{engine}:{relative}"),
+                             "reviewed_blob": git("rev-parse", f"{reviewed}:{relative}"),
+                             "diff_engine_to_reviewed": git("diff", "--stat", engine, reviewed, "--", relative)})
+    source = "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034"
+    retained_paths = git("ls-tree", "-r", "--name-only", reviewed, "--", source).splitlines()
+    retained_paths = [path for path in retained_paths
+                      if "/lane-x4-" in path or path.endswith("/ceiling-family-191-50.json")]
+    retained_paths.extend([
+        "packing/campaign/explorations/X-024-two-lines-at-eleven.md",
+        "packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md",
+        "packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md",
+        "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md",
+    ])
+    result = {"interpreter": sys.version, "repo": str(repo), "engine_commit": engine,
+              "engine_parents": git("show", "-s", "--format=%P", engine).split(),
+              "reviewed_commit": reviewed,
+              "reviewed_parents": git("show", "-s", "--format=%P", reviewed).split(),
+              "dependencies": dependencies,
+              "retained_sources": [{"path": path, "blob": git("rev-parse", f"{reviewed}:{path}")}
+                                   for path in retained_paths],
+              "note": "Git identities record source provenance; no custom integrity checksum was introduced."}
+    args.output.write_text(json.dumps(result, indent=2) + "\n")
+    print(f"Recorded {len(dependencies)} imported modules and {len(retained_paths)} retained sources")
+    assert all(row["engine_blob"] == row["reviewed_blob"] for row in dependencies)
+
+
+if __name__ == "__main__":
+    main()

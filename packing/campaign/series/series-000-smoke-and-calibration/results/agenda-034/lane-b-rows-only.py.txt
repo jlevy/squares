@@ -1,0 +1,333 @@
+#!/usr/bin/env python3
+"""Rows-only resumption of spike B's run 3 (191/50, 9977/10000, 181 directions).
+
+Usage (from packing/):
+  .venv/bin/python3 rows_only.py <state.json> <lp-run3 dir> <outdir>
+        [--deadline-min 90] [--workers 3] [--keep 40] [--solver highs|scipy] [--max-rounds N]
+
+Reloads the checkpoint (sites.json, rows.json, atoms.json, x.npy) exactly as
+lp_threshold2.py's --resume path does, rebuilds the covering LP on (site orbits,
+threshold-atom orbits) x rows, and then runs ONLY row rounds: no new atoms, no new sites.
+Round 0 sweeps the saved x (it is the rows-3-4 solution; run 3 added no rows after it).
+Each later round adds every violated slab minimum of the previous sweep as a row
+(cutting.coverage_matrix / sepcore.atom_columns for the coefficients, as the script does),
+re-solves, and sweeps all 181 directions with the threshold-aware exact slab sweep
+(threshold.rectangle_terms / sweep_slabs / least_charged_slabs, weights rounded up at
+scale 1e9, cells below 1 - 1e-6 counted as violated, as the script does).
+
+The LP is scipy's bundled HiGHS. With --solver highs (default) one _Highs handle is kept:
+rows are appended with addRows and the re-solve hot-starts from the previous basis;
+--solver scipy re-solves cold with linprog exactly as lp_threshold2.py does. Both give the
+same optimum; the sweep that decides completeness never sees the solver.
+
+Stops when a full sweep finds no violated cell (rows complete), when the objective reaches
+n - 1e-9, or at the deadline. Checkpoints (freeze_candidate.py reads them): sites.json,
+atoms.json, rows.json, x.npy, duals.npy, trajectory.json; x.npy is always the solution of
+the LP on the rows in rows.json.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import multiprocessing as mp
+import sys
+import time
+from concurrent.futures import ProcessPoolExecutor
+from fractions import Fraction
+from functools import partial
+from pathlib import Path
+
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+
+SPIKE = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(SPIKE))
+from sepcore import atom_columns  # noqa: E402
+
+from sqpack.fractional.colgen import SiteSet, d4_orbit, site_set_from_points  # noqa: E402
+from sqpack.fractional.cutting import coverage_matrix, load_state  # noqa: E402
+from sqpack.fractional.generate import direction_net, net_half_tangents  # noqa: E402
+from sqpack.fractional.model import Atom  # noqa: E402
+from sqpack.fractional.threshold import (  # noqa: E402
+    ThresholdAtom,
+    least_charged_slabs,
+    rectangle_terms,
+    sweep_slabs,
+    threshold_weight_scale,
+)
+
+N = 11
+B = Fraction(9977, 10000)
+ANGLE_LIMIT = Fraction(207107, 500000)
+STEPS = 180
+WEIGHT_DEN = 10**9
+BELOW = Fraction(1) - Fraction(1, 10**6)
+
+
+def log(msg: str) -> None:
+    print(msg, flush=True)
+
+
+# ----------------------------------------------------------------------------- solvers
+class HighsLP:
+    """One HiGHS handle: pass the model once, append rows, re-solve from the old basis."""
+
+    def __init__(self, matrix: sparse.csr_matrix, costs: np.ndarray) -> None:
+        from scipy.optimize._highspy import _core as _h
+
+        self._h = _h
+        self.h = _h._Highs()
+        self.h.setOptionValue("output_flag", False)
+        self.h.setOptionValue("parallel", "off")
+        csc = sparse.csc_matrix(matrix)
+        m, n = csc.shape
+        lp = _h.HighsLp()
+        lp.num_col_ = n
+        lp.num_row_ = m
+        lp.col_cost_ = np.asarray(costs, dtype=float)
+        lp.col_lower_ = np.zeros(n)
+        lp.col_upper_ = np.full(n, _h.kHighsInf)
+        lp.row_lower_ = np.ones(m)
+        lp.row_upper_ = np.full(m, _h.kHighsInf)
+        lp.a_matrix_.format_ = _h.MatrixFormat.kColwise
+        lp.a_matrix_.num_col_ = n
+        lp.a_matrix_.num_row_ = m
+        lp.a_matrix_.start_ = csc.indptr.astype(np.int32)
+        lp.a_matrix_.index_ = csc.indices.astype(np.int32)
+        lp.a_matrix_.value_ = np.asarray(csc.data, dtype=float)
+        if self.h.passModel(lp) == _h.HighsStatus.kError:
+            raise RuntimeError("HiGHS refused the model")
+
+    def add_rows(self, rows: sparse.csr_matrix) -> None:
+        rows = sparse.csr_matrix(rows)
+        k = rows.shape[0]
+        status = self.h.addRows(
+            k, np.ones(k), np.full(k, self._h.kHighsInf), int(rows.nnz),
+            rows.indptr[:-1].astype(np.int32), rows.indices.astype(np.int32),
+            np.asarray(rows.data, dtype=float),
+        )
+        if status == self._h.HighsStatus.kError:
+            raise RuntimeError("HiGHS refused the new rows")
+
+    def solve(self) -> tuple[np.ndarray, np.ndarray, float, int]:
+        if self.h.run() == self._h.HighsStatus.kError:
+            raise RuntimeError("HiGHS run failed")
+        status = self.h.getModelStatus()
+        if status != self._h.HighsModelStatus.kOptimal:
+            raise RuntimeError(f"LP not optimal: {self.h.modelStatusToString(status)}")
+        sol = self.h.getSolution()
+        info = self.h.getInfo()
+        x = np.asarray(sol.col_value, dtype=float)
+        duals = np.maximum(np.asarray(sol.row_dual, dtype=float), 0.0)
+        return x, duals, float(info.objective_function_value), int(info.simplex_iteration_count)
+
+
+def solve_scipy(matrix: sparse.csr_matrix, costs: np.ndarray) -> tuple[np.ndarray, np.ndarray, float, int]:
+    result = linprog(c=costs, A_ub=-matrix, b_ub=-np.ones(matrix.shape[0]), bounds=(0.0, None), method="highs")
+    if not result.success:
+        raise RuntimeError(f"LP failed: {result.message}")
+    duals = np.maximum(-np.asarray(result.ineqlin.marginals, dtype=float), 0.0)
+    return np.asarray(result.x, dtype=float), duals, float(result.fun), int(result.nit)
+
+
+# ------------------------------------------------------------------------------- sweep
+def sweep_direction(point_atoms, t_atoms, scale, keep, outer, directions, d):
+    direction = directions[d]
+    terms = rectangle_terms(point_atoms, t_atoms, direction, outer, B, scale=scale)
+    scores, _ = sweep_slabs(terms)
+    least = Fraction(int(scores.min()), scale)
+    found = least_charged_slabs(terms, direction, outer, B, keep=keep, below=BELOW)
+    rows = [(d, direction.ux * u - direction.uy * v, direction.uy * u + direction.ux * v) for _, (u, v) in found]
+    return d, least, rows, int((scores < BELOW * scale).sum())
+
+
+def measure(x, sites, orbits):
+    ns = len(sites.orbits)
+    xs, xa = x[:ns], x[ns:]
+    point_atoms = tuple(a for a in (
+        Atom(f"{o}:{k}", px, py, Fraction(math.ceil(w * WEIGHT_DEN), WEIGHT_DEN))
+        for o, w in enumerate(xs) if w > 1e-12 for k, (px, py) in enumerate(sites.orbits[o])) if a.weight > 0)
+    t_atoms = tuple(a for a in (
+        ThresholdAtom(im.points, im.threshold, Fraction(math.ceil(w * WEIGHT_DEN), WEIGHT_DEN))
+        for o, w in enumerate(xa) if w > 1e-12 for im in orbits[o]) if a.weight > 0)
+    scale = threshold_weight_scale(point_atoms, t_atoms)
+    budget = sum(a.weight for a in point_atoms) + sum(a.budget for a in t_atoms)
+    return point_atoms, t_atoms, scale, budget
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("state")
+    ap.add_argument("rundir")
+    ap.add_argument("outdir")
+    ap.add_argument("--deadline-min", type=float, default=90.0)
+    ap.add_argument("--workers", type=int, default=3)
+    ap.add_argument("--keep", type=int, default=40, help="slab minima per direction added as rows")
+    ap.add_argument("--solver", choices=("highs", "scipy"), default="highs")
+    ap.add_argument("--max-rounds", type=int, default=1000)
+    ap.add_argument("--skip-round0-sweep", action="store_true", help="re-solve first instead of sweeping the saved x")
+    args = ap.parse_args()
+    t0 = time.perf_counter()
+    deadline = t0 + args.deadline_min * 60
+    out = Path(args.outdir)
+    out.mkdir(parents=True, exist_ok=True)
+    rd = Path(args.rundir)
+
+    # ---- reload the checkpoint exactly as lp_threshold2.py --resume does
+    outer, points, _ = load_state(Path(args.state))
+    base = site_set_from_points(outer, set(points))
+    flat = [(Fraction(a), Fraction(b)) for a, b in json.loads((rd / "sites.json").read_text())]
+    assert flat[: base.size] == list(base.positions()), "site dump does not start with the state's orbits"
+    tail = flat[base.size:]
+    extra = []
+    k = 0
+    while k < len(tail):
+        orb = d4_orbit(tail[k][0], tail[k][1], outer)
+        assert tuple(tail[k: k + len(orb)]) == orb, f"site dump is not contiguous in orbits at {k}"
+        extra.append(orb)
+        k += len(orb)
+    sites = SiteSet(outer, (*base.orbits, *extra))
+    sizes = sites.sizes()
+    exact_rows = [(int(d), Fraction(x), Fraction(y)) for d, x, y in json.loads((rd / "rows.json").read_text())]
+    meta = json.loads((rd / "atoms.json").read_text())
+    orbits: list[tuple[ThresholdAtom, ...]] = []
+    keys: set = set()
+    for e in meta["atoms"]:
+        atom = ThresholdAtom(tuple((Fraction(a), Fraction(b)) for a, b in e["points"]), e["threshold"], Fraction(1))
+        key = min(im.key for im in atom.images(outer))
+        assert key not in keys, "duplicate atom orbit in the checkpoint"
+        keys.add(key)
+        orbit = atom.orbit(outer)
+        assert len(orbit) == e["orbit_size"], "orbit size drifted"
+        orbits.append(orbit)
+    x = np.load(rd / "x.npy")
+    assert x.shape[0] == len(sites.orbits) + len(orbits), (x.shape, len(sites.orbits), len(orbits))
+    half_tangents = net_half_tangents(ANGLE_LIMIT, STEPS)
+    directions = direction_net(half_tangents)
+    assert len(directions) == 181
+    log(f"reloaded {sites.size} sites in {len(sites.orbits)} orbits, {len(exact_rows)} rows, {len(orbits)} atom orbits, x of length {x.shape[0]} from {rd} ({time.perf_counter()-t0:.1f}s)")
+
+    # the sweep workers fork now, before the matrices and the solver exist
+    pool = ProcessPoolExecutor(max_workers=max(1, args.workers), mp_context=mp.get_context("fork"))
+    assert list(pool.map(abs, [-1, -2, -3])) == [1, 2, 3]  # fork every worker now, while the process is light
+
+    # static checkpoint parts (freeze_candidate.py reads sites.json and atoms.json)
+    (out / "sites.json").write_text(json.dumps([[str(px), str(py)] for orbit in sites.orbits for px, py in orbit]))
+    (out / "atoms.json").write_text(json.dumps({
+        "outer_side": str(outer), "square_side": str(B), "angle_limit": str(ANGLE_LIMIT), "direction_steps": STEPS,
+        "atoms": [{"points": [[str(px), str(py)] for px, py in orbit[0].points], "threshold": orbit[0].threshold,
+                   "orbit_size": len(orbit)} for orbit in orbits],
+    }, indent=1))
+
+    # ---- matrices
+    ts = time.perf_counter()
+    a_sites = sparse.csr_matrix(coverage_matrix(exact_rows, sites, half_tangents, B))
+    a_atoms, atom_costs = atom_columns(orbits, exact_rows, half_tangents, B)
+    costs = np.concatenate([sizes, atom_costs])
+    matrix = sparse.hstack([a_sites, a_atoms]).tocsr()
+    log(f"matrices: {matrix.shape[0]} rows x {matrix.shape[1]} columns, {matrix.nnz} nonzeros ({time.perf_counter()-ts:.1f}s)")
+    ns = len(sites.orbits)
+    saved_obj = float(costs @ x)
+    log(f"saved x: objective {saved_obj:.9f} (run 3 reported 10.967300462), site support {int((x[:ns] > 1e-12).sum())}, atom support {int((x[ns:] > 1e-12).sum())}, atom budget {float(atom_costs @ x[ns:]):.6f}")
+
+    trajectory: list[dict] = []
+    duals = np.load(rd / "duals.npy") if (rd / "duals.npy").exists() else np.zeros(len(exact_rows))
+    obj = saved_obj
+
+    def checkpoint(note: str) -> None:
+        (out / "trajectory.json").write_text(json.dumps({"trajectory": trajectory, "note": note}, indent=1))
+        (out / "rows.json").write_text(json.dumps([[d, str(px), str(py)] for d, px, py in exact_rows]))
+        np.save(out / "x.npy", x)
+        np.save(out / "duals.npy", duals)
+
+    solver: HighsLP | None = None
+    if args.solver == "highs":
+        ts = time.perf_counter()
+        solver = HighsLP(matrix, costs)
+        log(f"HiGHS model passed ({time.perf_counter()-ts:.1f}s)")
+
+    def resolve(stage: str) -> tuple[float, int]:
+        nonlocal x, duals, obj
+        ts = time.perf_counter()
+        if solver is not None:
+            x, duals, obj, its = solver.solve()
+        else:
+            x, duals, obj, its = solve_scipy(matrix, costs)
+        lp_s = time.perf_counter() - ts
+        atom_mass = float(atom_costs @ x[ns:])
+        entry = {"stage": stage, "objective": obj, "rows": len(exact_rows), "site_orbits": ns, "sites": sites.size,
+                 "atom_orbits": len(orbits), "atom_budget": atom_mass, "positive_atoms": int((x[ns:] > 1e-12).sum()),
+                 "site_support": int((x[:ns] > 1e-12).sum()), "dual_support": int((duals > 1e-9).sum()),
+                 "lp_seconds": lp_s, "simplex_iterations": its, "seconds": time.perf_counter() - t0}
+        trajectory.append(entry)
+        log(f"[{stage}] objective {obj:.9f}  sites {sites.size}/{ns} orbits (support {entry['site_support']})  atoms {len(orbits)} orbits (support {entry['positive_atoms']}, budget {atom_mass:.6f})  rows {len(exact_rows)} (dual support {entry['dual_support']})  LP {lp_s:.1f}s ({its} it)  elapsed {time.perf_counter()-t0:.0f}s")
+        checkpoint(stage)
+        return obj, its
+
+    def sweep(stage: str) -> list:
+        ts = time.perf_counter()
+        point_atoms, t_atoms, scale, budget = measure(x, sites, orbits)
+        task = partial(sweep_direction, point_atoms, t_atoms, scale, args.keep, outer, directions)
+        results = list(pool.map(task, range(len(directions))))
+        least, least_dir = min((m, d) for d, m, _, _ in results)
+        new_rows = [row for _, _, rows, _ in results for row in rows]
+        violated_slabs = sum(c for _, _, _, c in results)
+        directions_hit = sum(1 for _, _, rows, _ in results if rows)
+        per_direction = [str(m) for _, m, _, _ in results]
+        log(f"  {stage}: measure {len(point_atoms)} sites + {len(t_atoms)} threshold atoms, budget {float(budget):.9f}; least charge {float(least):.9f} = {least} at direction {least_dir}; {len(new_rows)} violated cells (rows) in {directions_hit} directions ({violated_slabs} slab minima below 1-1e-6); {time.perf_counter()-ts:.0f}s")
+        trajectory.append({"stage": stage, "least_charge": float(least), "least_charge_exact": str(least), "least_direction": least_dir,
+                           "violated_cells": len(new_rows), "violated_slabs": violated_slabs, "directions_hit": directions_hit,
+                           "budget": float(budget), "budget_exact": str(budget), "point_atoms": len(point_atoms), "threshold_atoms": len(t_atoms),
+                           "sweep_seconds": time.perf_counter() - ts, "seconds": time.perf_counter() - t0, "per_direction": per_direction})
+        return new_rows
+
+    # ---- round 0: sweep the saved x
+    checkpoint("start")
+    if args.skip_round0_sweep:
+        resolve("round-0")
+    new_rows = sweep("sweep-0")
+    checkpoint("sweep-0")
+    r = 0
+    complete = False
+    while True:
+        if not new_rows:
+            complete = True
+            log(f"  ROWS COMPLETE at objective {obj:.9f}: no cell below 1 - 1e-6 at any of the 181 directions")
+            checkpoint("rows-complete")
+            break
+        if obj >= N - 1e-9:
+            log(f"  objective {obj:.9f} >= {N}: stopping")
+            checkpoint("at-n")
+            break
+        if r >= args.max_rounds:
+            log("  round limit"); checkpoint("round-limit"); break
+        if time.perf_counter() > deadline:
+            log("  deadline before the LP"); checkpoint("deadline"); break
+        r += 1
+        ts = time.perf_counter()
+        exact_rows.extend(new_rows)
+        add_sites = sparse.csr_matrix(coverage_matrix(new_rows, sites, half_tangents, B))
+        add_atoms, _ = atom_columns(orbits, new_rows, half_tangents, B)
+        addition = sparse.hstack([add_sites, add_atoms]).tocsr()
+        matrix = sparse.vstack([matrix, addition]).tocsr()
+        if solver is not None:
+            solver.add_rows(addition)
+        log(f"  round {r}: +{len(new_rows)} rows -> {len(exact_rows)} ({time.perf_counter()-ts:.1f}s to build)")
+        resolve(f"rows-{r}")
+        if obj >= N - 1e-9:
+            log(f"  objective {obj:.9f} >= {N}: stopping without a sweep")
+            checkpoint("at-n")
+            break
+        if time.perf_counter() > deadline:
+            log("  deadline before the sweep"); checkpoint("deadline"); break
+        new_rows = sweep(f"sweep-{r}")
+        checkpoint(f"sweep-{r}")
+    pool.shutdown()
+    log(f"final objective {obj:.9f}; {len(exact_rows)} rows, {sites.size} sites, {len(orbits)} atom orbits; rows complete: {complete}; total {time.perf_counter()-t0:.0f}s")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Cluster the deep region of the optimal face into structures and price each one."""
+from __future__ import annotations
+import json, sys, collections
+from fractions import Fraction as F
+
+rec = json.load(open(sys.argv[1]))
+det = rec["detail"]
+print(f"deep points: {len(det)} (from {rec['distinct']} distinct candidates, all exactly above depth one)")
+pts = [(float(F(r["x"])), float(F(r["y"])), float(F(r["depth"])), r["tag"]) for r in det]
+L = float(F(rec["outer_side"]))
+
+# fold into the D4 fundamental domain: x <= y, both <= L/2  (mirror + diagonal)
+def fold(x, y):
+    x = min(x, L - x); y = min(y, L - y)
+    return (min(x, y), max(x, y))
+
+# structure 1: vertical / horizontal slivers -- one coordinate pinned to a wall-column edge
+# structure 2: interior blobs
+band = 0.004
+buckets = collections.defaultdict(list)
+for x, y, d, t in pts:
+    fx, fy = fold(x, y)
+    buckets[(round(fx / band), round(fy / band))].append((fx, fy, d))
+print(f"{len(buckets)} folded cells of side {band}")
+
+# depth summary
+dmax = max(p[2] for p in pts)
+print(f"deepest structural point: {dmax:.9f}")
+top = sorted(det, key=lambda r: -float(F(r["depth"])))[:6]
+for r in top:
+    print(f"   ({float(F(r['x'])):.6f}, {float(F(r['y'])):.6f}) depth {r['depth']} = {float(F(r['depth'])):.9f}  {r['tag']}")
+
+# how much of the deep mass sits in each named structure
+def klass(x, y):
+    fx, fy = fold(x, y)
+    near1 = min(abs(fx - 1.0), abs(fy - 1.0))
+    if near1 < 0.01:
+        return "wall-column seam (x or y ~ 1.0)"
+    if abs(fx - fy) < 0.01:
+        return "diagonal"
+    if fx > 1.05 and fy > 1.05:
+        return "interior"
+    if min(fx, fy) < 0.55:
+        return "wall band (< 0.55)"
+    return "other"
+c = collections.Counter(klass(x, y) for x, y, _, _ in pts)
+tot = sum(c.values())
+print("\nstructure census over the deep region:")
+for k, v in c.most_common():
+    print(f"  {k:34s} {v:6d}  {100*v/tot:5.1f}%")
+
+# per-dual deep counts
+c2 = collections.Counter(r["tag"].split(":")[0] for r in det)
+print("\ndeep cells by dual and scan axis:")
+for k, v in c2.most_common():
+    print(f"  {k:34s} {v:6d}")
+
+# extent of the wall-column sliver
+seam = [(x, y, d) for x, y, d, _ in pts if min(abs(min(x, L-x) - 1.0), abs(min(y, L-y) - 1.0)) < 0.01]
+if seam:
+    xs = sorted({round(min(p[0], L-p[0]), 6) for p in seam if abs(min(p[0], L-p[0]) - 1.0) < 0.01})
+    ys = sorted(p[1] for p in seam if abs(min(p[0], L-p[0]) - 1.0) < 0.01)
+    print(f"\nwall-column seam: {len(seam)} deep cells; distinct abscissae {len(xs)}"
+          f" spanning [{xs[0]:.6f}, {xs[-1]:.6f}] (width {xs[-1]-xs[0]:.6f}); ordinates span [{ys[0]:.4f}, {ys[-1]:.4f}]")

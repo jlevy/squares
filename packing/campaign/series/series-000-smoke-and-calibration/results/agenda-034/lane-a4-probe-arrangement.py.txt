@@ -1,0 +1,45 @@
+"""Probe: build the arrangement of the exact25 family and report its size."""
+from __future__ import annotations
+import sys, time, json
+from collections import Counter
+from pathlib import Path
+import numpy as np
+
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools.plateau_reader import load_family, read_arrangement, MaskTable
+
+path = Path(sys.argv[1])
+t0 = time.perf_counter()
+fam = load_family(path)
+arr = read_arrangement(fam)
+t1 = time.perf_counter()
+print(f"placements {arr.placements}, vertices {len(arr.vertices)}, distinct masks {len(arr.masks)}, "
+      f"scale {arr.scale}, max depth {arr.rational(arr.max_depth)} ({float(arr.rational(arr.max_depth)):.6f}), "
+      f"arrangement {t1-t0:.1f}s", flush=True)
+weights = Counter(arr.weights)
+print("distinct placement weights:", len(weights), sorted((arr.rational(w), c) for w, c in weights.items())[:40], flush=True)
+table = MaskTable(arr)
+sizes = table.sizes
+print(f"mask weight: max {arr.rational(int(sizes.max()))}, "
+      f"above scale (i.e. >1): {int((sizes > arr.scale).sum())}, "
+      f"above 0.9: {int((sizes > 0.9*arr.scale).sum())}, above 0.5: {int((sizes > 0.5*arr.scale).sum())}", flush=True)
+card = np.array([m.bit_count() for m in arr.masks])
+print(f"mask cardinality: max {card.max()}, mean {card.mean():.2f}", flush=True)
+
+# maximal masks under inclusion, via the bit array
+t2 = time.perf_counter()
+A = table.array  # (count, words) uint64
+count, words = A.shape
+maximal = np.ones(count, dtype=bool)
+order = np.argsort(-card, kind="stable")
+for pos, i in enumerate(order):
+    if not maximal[i]:
+        continue
+    mi = A[i]
+    # rows contained in mask i
+    contained = np.all((A & ~mi[None, :]) == 0, axis=1)
+    contained[i] = False
+    maximal[contained] = False
+print(f"maximal masks under inclusion: {int(maximal.sum())} of {count} ({time.perf_counter()-t2:.1f}s)", flush=True)
+np.save("maximal_mask_flags.npy", maximal)
+print(f"total {time.perf_counter()-t0:.1f}s", flush=True)

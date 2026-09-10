@@ -460,6 +460,48 @@ from the entire original-D-missed domain; empty prefix refutes the family, full 
 requires independent cover confirmation.
 |
 
+## Three Losses and a New Atom — X-023
+
+[X-023](explorations/X-023-three-losses-and-a-new-atom.md) separates the retained
+certificate’s three losses — the shrink tax, the site restriction, and the integrality
+gap of the point-covering relaxation — and opens one new certificate language, threshold
+atoms, for the third.
+Its wave-one spikes proved the point-atom ceiling at `3.82` exactly, so the three rows
+below are what remains once that route is closed.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 148 | A threshold certificate at 3.82 | registered | [H-152](hypotheses/H-152-threshold-certificate-at-191-50.md) | The point method is capped at eleven there by an exact depth-one family; that same family is cut by 2-of-3 atoms at charge 5/4, so the new language is not capped with it. |
+| 149 | Re-optimise the covering LP on a finer net | registered | [H-153](hypotheses/H-153-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
+| 150 | Where does the point-atom ceiling begin? | registered | [H-154](hypotheses/H-154-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
+
+## Two Lines at Eleven — X-024
+
+[X-024](explorations/X-024-two-lines-at-eleven.md) reads this branch’s unconditional
+certificate line and PR 137’s conditional owner case split together, says what each
+established and where they meet in the same objects, and picks the unconditional line as
+the one to push here.
+Both rows below are the same integrality gap seen from the two sides.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 151 | Threshold atoms inside an owner class’s residual cover | registered | [H-155](hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point cover of seven is the conditional form of the ceiling the unconditional line just passed; the discriminator is whether threshold atoms bring its budget below seven. Dispositioned 2026-09-09: live, not refuted, and priced at no reach — the survivor family carries the same cut structure as the full family, so the conditional problem is the unconditional one shifted down by one for sixteen times the work. |
+| 152 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | registered | [H-156](hypotheses/H-156-threshold-certificate-past-3-82.md) | The endpoint at 3.82 is exact and its margin is 0.0327; the same loop at a larger side and the finer-net shrink of T-024 are the two untried mechanisms, and neither is capped by the point-atom ceiling. |
+| 154 | Iterate the LP support and the atom set together, separating from the depth-one certificate | raw |  | Lane A6 exhibits a D4-symmetric depth-one family of 64 placements at total exactly 11 satisfying all 2,566 atom orbits, so on this atom set no site set can bring the rows-complete LP below eleven at `153/40`; the lever is the atom set. Six atoms separated from that certificate rather than from a dual vertex take the blocking support from exactly 11 to `10.4210526`, bracketed exactly for that fixed-support program — feasible for its selected finite rows, not for the depth-one program, whose reader refuses the optimum at exact depth `105263157/100000000` — where twenty-four separated from a dual vertex moved the LP by `2.2e-13`. Each side has a wide face, so the route is a loop over support and atoms together, and it needs lane A4’s gate bypass because the fixed-support optima stop being packings after the first round. Carried as `think-yc80`. |
+
+## What Conditioning Buys — X-026
+
+[X-026](explorations/X-026-what-conditioning-does-and-does-not-buy.md) states the
+corner-conditioning argument as a six-step ladder with every term defined, and marks the
+step where it stops: the refutation covers point covers on a residual domain, the
+general result is neutrality, and the threshold route on that domain is open and
+expensive rather than closed.
+It names three escapes it does not close; the first is the row below.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 153 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-157](hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further deletes `1/8` more and the class stops being neutral; halving the angular bin widens the guaranteed wedge from `pi/4` to `3pi/8`. Refuted 2026-09-10 by exp-154: six of eight refined subclasses still read exactly 10 and the two that break read `19/2`, not `79/8`, because the reach is the identity `d^2 = 75308842465387162009/335694834731568400000000` — bit-identical for parent and children, the mark being the closest point of every patch. Theorems T1 and T2 (X-026 §5.1) rule out patch refinement as the lever at every angular resolution and at pose level; they do not show the conditional strategy fails, so escape 1 is narrowed, not closed, and whether the neutral classes are ever forced stays open. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

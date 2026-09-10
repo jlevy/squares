@@ -1,0 +1,137 @@
+"""Sharpen nu_S: add the rank-one Chvatal-Gomory floor atoms the reader separates.
+
+Each round: solve the fixed-support program on the rows so far, exactly; rebuild the
+optimum as a family; run the plateau reader on it; convert every violated atom it
+verifies into a row on the full 88-placement support (coefficient floor(a(P)/t) for
+every placement, right-hand side floor(a(S)/t)) and add it.
+
+Every row added is a valid inequality for the threshold method, so every value in the
+sequence is an exact upper bound on the true fixed-support optimum under the whole
+rank-one class. The separator is bounded (the reader's K6 is a time-limited integer
+program over thresholds t = 2, 3, 4), so the loop's last value is an upper bound, not the
+optimum: labelled accordingly.
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+import numpy as np
+sys.path.insert(0, "/home/user/squares/packing")
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+from devtools.plateau_reader import (
+    ReaderOptions, load_family, read_arrangement, read_plateau, intersection_graph,
+    piercing_number,
+)
+from devtools.polish_ceiling_family import placement_orbits
+from sqpack.fractional.ceiling import CeilingCertificate
+from cap_lp import maximal_cliques, orbit_row, solve_float, exact_primal, exact_dual, RS
+
+name, tag = sys.argv[1], sys.argv[2]
+ROUNDS = int(sys.argv[3]) if len(sys.argv) > 3 else 6
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+
+fam = load_family(RS / name)
+arr = read_arrangement(fam)
+orbit, orbits = placement_orbits(fam)
+n = len(fam.placements)
+size = 8
+src = json.loads((RS / name).read_text())
+
+depth_rows = {orbit_row(m, orbit, orbits): 1 for m in arr.masks}
+adj = intersection_graph(fam)
+cl = maximal_cliques(adj, n)
+nonhelly = [c for c in cl if c.bit_count() >= 2 and not any(c & m == c for m in arr.masks)]
+clique_rows = {}
+for c in nonhelly:
+    p = piercing_number(arr, c)
+    assert p.exact and p.value < 2, (c, p.value, p.exact)
+    clique_rows[orbit_row(c, orbit, orbits)] = 1
+
+rows: dict[tuple[int, ...], int] = dict(depth_rows)
+kinds: dict[tuple[int, ...], str] = {r: "depth" for r in depth_rows}
+for r, b in clique_rows.items():
+    if r not in rows:
+        rows[r], kinds[r] = b, "clique"
+print(f"[{tag}] start: {len(depth_rows)} depth rows, "
+      f"{len(rows)-len(depth_rows)} budget-one clique rows", flush=True)
+
+history = []
+for rnd in range(ROUNDS):
+    keys = sorted(rows)
+    rhs = [rows[k] for k in keys]
+    a = np.array(keys, dtype=float)
+    from scipy.optimize import linprog
+    result = linprog(-np.full(orbits, float(size)), A_ub=a, b_ub=np.array(rhs, dtype=float),
+                     bounds=(0, None), method="highs")
+    assert result.status == 0, result.message
+    value_float = -result.fun
+    # exact certification on the general right-hand side
+    duals = -np.asarray(result.ineqlin.marginals)
+    def feas(z):
+        return all(v >= 0 for v in z) and all(
+            sum(Fraction(c) * v for c, v in zip(k, z) if c) <= rows[k] for k in keys)
+    best = None
+    from cap_lp import rationalise
+    for d, z in rationalise(result.x):
+        if feas(z):
+            val = size * sum(z, start=Fraction(0))
+            if best is None or val > best[0]:
+                best = (val, z, d)
+    # exact dual bound: sum_i b_i u_i with A^T u >= c
+    ub = None
+    support = [i for i, v in enumerate(duals) if v > 1e-12]
+    for d, u in rationalise(np.array([duals[i] for i in support])):
+        if any(v < 0 for v in u):
+            continue
+        if all(sum(Fraction(keys[i][col]) * v for i, v in zip(support, u) if keys[i][col]) >= size
+               for col in range(orbits)):
+            ub = sum(Fraction(rows[keys[i]]) * v for i, v in zip(support, u))
+            break
+    exact = best is not None and ub is not None and best[0] == ub
+    print(f"  round {rnd}: rows {len(rows)}  float {value_float!r}  "
+          f"primal {best[0] if best else None}  dual {ub}  exact {exact}", flush=True)
+    z = best[1]
+    history.append({"round": rnd, "rows": len(rows), "float": value_float,
+                    "primal": str(best[0]) if best else None,
+                    "dual_bound": str(ub) if ub else None, "exact": exact,
+                    "weights": [str(v) for v in z]})
+    # rebuild the family and separate
+    placements = [[str(p.half_tangent), str(p.centre_x), str(p.centre_y),
+                   str(z[int(orbit[i])]), str(p.side)]
+                  for i, p in enumerate(fam.placements) if z[int(orbit[i])] != 0]
+    rec = {"n": 11, "outer_side": str(fam.outer_side), "square_side": str(fam.square_side),
+           "half_tangents": src["half_tangents"], "placements": placements,
+           "total_weight": str(size * sum(z, start=Fraction(0)))}
+    trial = CeilingCertificate.from_record(rec)
+    t0 = time.perf_counter()
+    report = read_plateau(trial, ReaderOptions(skip_lines=True, time_limit=60.0,
+                                               progress=None))
+    fresh = 0
+    for atom in report.violated:
+        pts = [(p.point, p.multiplicity) for p in atom.points]
+        coefficients = []
+        for p in fam.placements:
+            held = sum(m for pt, m in pts if p.contains(*pt))
+            coefficients.append(held // atom.threshold)
+        row = tuple(sum(coefficients[i] for i in range(n) if orbit[i] == o) for o in range(orbits))
+        if any(row) and (row not in rows or rows[row] > atom.budget):
+            rows[row] = atom.budget
+            kinds[row] = f"cg t={atom.threshold} budget={atom.budget}"
+            fresh += 1
+    k5 = report.cliques
+    print(f"    separated: {len(report.violated)} violated atoms, {fresh} new rows; "
+          f"K4 2of3 max {report.two_of_three.best/report.arrangement.scale if report.two_of_three else '-'}, "
+          f"K5 maximal-above-one {k5.maximal_above_one if k5 else '-'} ({time.perf_counter()-t0:.1f}s)",
+          flush=True)
+    history[-1]["violated"] = [a.record() for a in report.violated]
+    history[-1]["k4_two_of_three_max"] = (
+        str(report.arrangement.rational(report.two_of_three.best)) if report.two_of_three else None)
+    history[-1]["k5_maximal_above_one"] = k5.maximal_above_one if k5 else None
+    if fresh == 0:
+        print("    no new cut: the bounded separator is exhausted", flush=True)
+        break
+
+(OUT / f"k6-loop-{tag}.json").write_text(json.dumps(
+    {"family": name, "history": history,
+     "row_kinds": {str(list(k)): v for k, v in kinds.items() if v != "depth"}}, indent=1))
+print("wrote", OUT / f"k6-loop-{tag}.json")

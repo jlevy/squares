@@ -1,0 +1,73 @@
+"""One-corner owner-footprint deletion screen on the mass-11 ceiling family.
+
+Replays devtools.screen_corner_dual_salvage.screen_footprint verbatim (same
+orientation filter, same strict SAT gap, same transport) on the retained
+191/50 ceiling family (88 placements, total weight exactly 11) instead of the
+bc-232 family (total 21342289572/2055263195 = 10.3842) that exp-137 used.
+Read-only; writes nothing into the repository.
+"""
+
+from __future__ import annotations
+
+import json
+from fractions import Fraction
+from pathlib import Path
+
+from devtools.owner_footprints import full_owner_direction_manifest, owner_branch_manifest
+from devtools.screen_corner_dual_salvage import (
+    _base_polygon,
+    _orientation_axis,
+    screen_footprint,
+)
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+REPO = Path("/home/user/squares")
+SRC = REPO / (
+    "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
+    "ceiling-family-191-50.json"
+)
+
+record = json.loads(SRC.read_text())
+source = CeilingCertificate.from_record(record)
+print(f"source: {len(source.placements)} placements, side {source.outer_side}, "
+      f"total weight {source.total_weight}")
+
+target_side = Fraction(96, 25)
+moved = transport(record, Fraction(1), side=target_side)
+family = CeilingCertificate.from_record(moved)
+print(f"transported: side {family.outer_side}, total weight {family.total_weight}, "
+      f"shift {(target_side - source.outer_side) / 2}")
+
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+axes = frozenset((d.ux, d.uy) for d in directions) | frozenset((d.vx, d.vy) for d in directions)
+
+# orientation filter alone
+kept = [p for p in family.placements if _orientation_axis(p) in axes]
+print(f"orientation filter: {len(kept)}/{len(family.placements)} placements kept, "
+      f"weight {sum(p.weight for p in kept)}")
+
+THRESH = Fraction(10)
+rows = []
+for kind in ("point", "triangle", "endpoint"):
+    for owner in manifest.classes:
+        poly = _base_polygon(owner, kind, directions)
+        s = screen_footprint(
+            family, poly,
+            class_id=owner.class_id, corner="bottom-left", kind=kind,
+            source_placements=family.placements, direction_axes=axes,
+        )
+        rows.append((kind, owner.class_id, len(s.survivors), s.total_weight))
+
+for kind in ("point", "triangle", "endpoint"):
+    sub = [r for r in rows if r[0] == kind]
+    mx = max(r[3] for r in sub)
+    mn = min(r[3] for r in sub)
+    print(f"\n=== {kind} ===")
+    for _, cid, cnt, w in sub:
+        flag = "  OBSTRUCTS(>=10)" if w >= THRESH else ""
+        print(f"  {cid:26s} survivors {cnt:3d}  weight {str(w):18s} "
+              f"= {float(w):.6f}  deleted {str(11 - w):14s}{flag}")
+    print(f"  max survivor {mx} = {float(mx):.9f}   min survivor {mn} = {float(mn):.9f}")
+    print(f"  obstructing classes: {sum(1 for r in sub if r[3] >= THRESH)}/{len(sub)}")

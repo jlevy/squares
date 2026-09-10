@@ -1,0 +1,205 @@
+"""Bin-count-parametrised owner sector footprints (scratch; tracked file untouched).
+
+Generalises devtools.owner_footprints from its hard-coded eight angular bins to any
+bin count in {4, 8, 16}.  The only bin-dependent objects are
+
+  * the closed-sector membership predicate for a signed net ray,
+  * the angularly extreme retained rays in one closed bin,
+  * the endpoint-intersection footprint built from those two rays,
+  * the class manifest (marks x sectors).
+
+Sector j is the closed cone [j*2pi/bins, (j+1)*2pi/bins].  Its two boundary rays are
+exact elements of Q[sqrt 2] for bins <= 16, so membership is an exact sign decision and
+no floating point enters any verdict.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from fractions import Fraction
+from functools import cmp_to_key
+
+from devtools.owner_footprints import (
+    BOTTOM_LEFT_MARKS,
+    HALF_CORE,
+    OwnerClass,
+    _add,
+    _compare_sector_rays,
+    _cross,
+    _normalise_polygon,
+    _quarter_turn,
+    _scale,
+    signed_axis_rays,
+)
+from sqpack.fractional.model import Direction
+
+type Point = tuple[Fraction, Fraction]
+type Polygon = tuple[Point, ...]
+
+# An element a + b*sqrt(2) of Q[sqrt 2].
+type Surd = tuple[Fraction, Fraction]
+type SurdPoint = tuple[Surd, Surd]
+
+ZERO: Surd = (Fraction(0), Fraction(0))
+
+
+def _q(value: int | Fraction) -> Surd:
+    return (Fraction(value), Fraction(0))
+
+
+def _surd_sign(value: Surd) -> int:
+    """Exact sign of a + b*sqrt(2)."""
+
+    a, b = value
+    if a == 0 and b == 0:
+        return 0
+    if a >= 0 and b >= 0:
+        return 1
+    if a <= 0 and b <= 0:
+        return -1
+    # Mixed signs: compare a^2 with 2 b^2.
+    left, right = a * a, 2 * b * b
+    if left == right:
+        return 0
+    bigger_is_a = left > right
+    return 1 if (a > 0) == bigger_is_a else -1
+
+
+def _surd_mul(x: Surd, y: Surd) -> Surd:
+    return (x[0] * y[0] + 2 * x[1] * y[1], x[0] * y[1] + x[1] * y[0])
+
+
+def _surd_sub(x: Surd, y: Surd) -> Surd:
+    return (x[0] - y[0], x[1] - y[1])
+
+
+def _surd_cross(u: SurdPoint, v: SurdPoint) -> Surd:
+    return _surd_sub(_surd_mul(u[0], v[1]), _surd_mul(u[1], v[0]))
+
+
+_ROOT2: Surd = (Fraction(0), Fraction(1))
+_TWO_PLUS_ROOT2: Surd = (Fraction(2), Fraction(1))
+_NEG_ROOT2: Surd = (Fraction(0), Fraction(-1))
+_NEG_TWO_PLUS_ROOT2: Surd = (Fraction(-2), Fraction(-1))
+
+# Boundary rays at k * 22.5 degrees, k = 0..15, exact in Q[sqrt 2].
+_BOUNDARY_16: tuple[SurdPoint, ...] = (
+    (_q(1), _q(0)),
+    (_TWO_PLUS_ROOT2, _ROOT2),
+    (_q(1), _q(1)),
+    (_ROOT2, _TWO_PLUS_ROOT2),
+    (_q(0), _q(1)),
+    (_NEG_ROOT2, _TWO_PLUS_ROOT2),
+    (_q(-1), _q(1)),
+    (_NEG_TWO_PLUS_ROOT2, _ROOT2),
+    (_q(-1), _q(0)),
+    (_NEG_TWO_PLUS_ROOT2, _NEG_ROOT2),
+    (_q(-1), _q(-1)),
+    (_NEG_ROOT2, _NEG_TWO_PLUS_ROOT2),
+    (_q(0), _q(-1)),
+    (_ROOT2, _NEG_TWO_PLUS_ROOT2),
+    (_q(1), _q(-1)),
+    (_TWO_PLUS_ROOT2, _NEG_ROOT2),
+)
+
+
+def boundary_ray(sector: int, bins: int) -> SurdPoint:
+    """The exact ray at angle ``sector * 2pi / bins``."""
+
+    if 16 % bins:
+        raise ValueError("bin count must divide 16")
+    return _BOUNDARY_16[(sector * (16 // bins)) % 16]
+
+
+def sector_contains(sector: int, ray: Point, bins: int) -> bool:
+    """Exact closed-cone membership for one signed net ray."""
+
+    if not 0 <= sector < bins:
+        raise ValueError(f"sector must lie in 0..{bins - 1}")
+    if ray == (0, 0):
+        raise ValueError("the zero ray has no sector")
+    point: SurdPoint = (_q(ray[0]), _q(ray[1]))
+    low = boundary_ray(sector, bins)
+    high = boundary_ray(sector + 1, bins)
+    return _surd_sign(_surd_cross(low, point)) >= 0 and _surd_sign(_surd_cross(point, high)) >= 0
+
+
+def sector_endpoint_rays(
+    sector: int, directions: tuple[Direction, ...], bins: int
+) -> tuple[Point, Point]:
+    """The angularly first and last retained signed rays in one closed bin."""
+
+    candidates = [ray for ray in signed_axis_rays(directions) if sector_contains(sector, ray, bins)]
+    if not candidates:
+        raise ValueError(f"sector {sector} of {bins} has no retained signed-axis ray")
+    candidates.sort(key=cmp_to_key(_compare_sector_rays))
+    return candidates[0], candidates[-1]
+
+
+def endpoint_footprint(
+    mark: Point,
+    sector: int,
+    directions: tuple[Direction, ...],
+    bins: int,
+    *,
+    half: Fraction = HALF_CORE,
+) -> Polygon:
+    """Q_first ∩ Q_last: the exact intersection of the extreme anchored quarter-cores."""
+
+    first, last = sector_endpoint_rays(sector, directions, bins)
+    dot = first[0] * last[0] + first[1] * last[1]
+    determinant = _cross(first, last)
+    if determinant < 0 or determinant > 1 or dot <= 0:
+        raise ValueError("sector endpoint rays do not span an acute counterclockwise wedge")
+    turned = _quarter_turn(first)
+    middle_vector = _add(_scale(dot / (1 + determinant), first), turned)
+    return _normalise_polygon(
+        (
+            mark,
+            _add(mark, _scale(half, last)),
+            _add(mark, _scale(half, middle_vector)),
+            _add(mark, _scale(half, turned)),
+        )
+    )
+
+
+def anchored_quarter_core(mark: Point, ray: Point, *, half: Fraction = HALF_CORE) -> Polygon:
+    """Q_ray(mark) = mark + [0,half] ray + [0,half] ray^perp."""
+
+    if ray[0] * ray[0] + ray[1] * ray[1] != 1:
+        raise ValueError("anchored-quarter ray must have exact unit length")
+    turned = _quarter_turn(ray)
+    return (
+        mark,
+        _add(mark, _scale(half, ray)),
+        _add(mark, _scale(half, _add(ray, turned))),
+        _add(mark, _scale(half, turned)),
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class Manifest:
+    bins: int
+    classes: tuple[OwnerClass, ...]
+
+
+def owner_branch_manifest(bins: int, directions: tuple[Direction, ...]) -> Manifest:
+    """All ``2 * bins`` raw bottom-left classes at the requested resolution."""
+
+    classes: list[OwnerClass] = []
+    for mark_id, mark in BOTTOM_LEFT_MARKS.items():
+        other = "m2" if mark_id == "m1" else "m1"
+        for sector in range(bins):
+            reflected_sector = (bins - 1 - sector) % bins
+            classes.append(
+                OwnerClass(
+                    f"bottom-left:{mark_id}:j{sector}",
+                    mark_id,
+                    mark,
+                    sector,
+                    f"bottom-left:{other}:j{reflected_sector}",
+                    mark_id == "m1",
+                )
+            )
+    del directions
+    return Manifest(bins, tuple(classes))

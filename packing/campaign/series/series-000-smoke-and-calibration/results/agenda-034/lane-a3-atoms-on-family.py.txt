@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+"""Two-of-three separation (spike B's interior-vertex generator) on a ceiling-family file.
+Usage: atoms_on_family.py FAMILY.json OUT.json [refine_above]"""
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "spike-b"))
+from sepcore import FamilyGeometry, class_summary
+from sqpack.fractional.ceiling import CeilingCertificate
+fam = CeilingCertificate.from_record(json.load(open(sys.argv[1])))
+t = time.perf_counter(); geo = FamilyGeometry(fam, print)
+found = geo.violated_2of3(outer_side=fam.outer_side, log=print, vertex_cap=24, refine_above=float(sys.argv[3]) if len(sys.argv) > 3 else 0.95)
+print(f"violated 2-of-3 orbits: {len(found)}; top charges {[str(a['charge']) for a in found[:5]]} = {[round(float(a['charge']), 4) for a in found[:5]]}; classes {class_summary(found)}; {time.perf_counter()-t:.0f}s", flush=True)
+for a in found[:5]:
+    print("  points", [(round(float(x), 5), round(float(y), 5)) for x, y in a["points"]], "angles", [round(v, 2) for v in a["angles"]], "charge", a["charge"], flush=True)
+json.dump([{"points": [[str(x), str(y)] for x, y in a["points"]], "charge": str(a["charge"]), "classes": a["classes"], "angles": a["angles"]} for a in found], open(sys.argv[2], "w"), indent=1)

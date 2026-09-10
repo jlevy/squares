@@ -342,7 +342,23 @@ ROOT_DOCUMENTS = (
 # any of them would either remove a declared dependency or change the source surface the
 # controls exercise. Allow 128 MiB: three portable workers remain bounded at 384 MiB,
 # while the bytes actually cloned remain the measured source size.
-SNAPSHOT_MAX_BYTES = 128 * 1024 * 1024
+#
+# 2026-09-09, with `T-026` registered: 135,122,909 bytes against 134,217,728, over by
+# 905,181. This is the event `think-t1lk` predicted when the last breach was answered by
+# pruning rather than raising -- it recorded 618,148 bytes of headroom and said the next
+# committed artifact of any size would trip the cap. What tripped it is 2,679,887 bytes
+# of tracked record: the two finer-net threshold certificates (673,899 and 673,896, both
+# registered artifacts), the 360-step rung retained beside lane A2 (673,643), lane A3's
+# thirteen receipts (562,882 in all, the largest a 123,814-byte plateau dual), the two
+# lane reports, the proof packet, the two limit records and the promoted measurement with
+# its tests. None is prunable here: each is either a registered artifact or a receipt a
+# retained report cites. The durable fix is still `think-t1lk`'s -- trace which controls
+# read the five large generated files under `packing/` and prune the ones nothing reads,
+# starting with the 6.2 MB poster SVG whose PNG, PDF and 2x exports are already pruned.
+# Allow 160 MiB, which is 31.1 MiB of headroom rather than 0.9, so the guard fires on a
+# gigabyte of data and not on a research round; three portable workers remain bounded at
+# 480 MiB.
+SNAPSHOT_MAX_BYTES = 160 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

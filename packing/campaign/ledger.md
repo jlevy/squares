@@ -139,6 +139,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-122](agent-sessions/session-122-direct-sixth-site-feasibility.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (process) | 3 | think-ykd6 | Parent PR145 certification is discharged. Continue BC-324 interpretation under think-rm3k on the stacked successor; new changes require their own validation. |
 | [session-123](agent-sessions/session-123-evidence-first-interpretation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-rm3k | Continue BC-324 under think-rm3k in Session124; think-ta8s retains successor certification. |
 | [session-124](agent-sessions/session-124-evidence-interpretation-finalization.md) | stopped | contemporaneous | `research-loop` (process) | `research-loop` (process) | 1 | think-rm3k | Finalize BC-324 under think-rm3k with think-ta8s owning matching successor certification and publication follow-up. Keep scientific targets unselected while the user reviews definitions, facts, assumptions and alternate approaches. |
+| [session-125](agent-sessions/session-125-past-the-point-atom-ceiling.md) | completed | retrospective | `research-survey` (insight) | `review-planning-oversight` (process) | 4 | think-hs7y | Widen the certificate format to carry weighted and floor atoms, since the reader can already separate cuts the format cannot express; and generate sites by structure rather than by arrangement vertex. |
 
 ### Workflow summary
 
@@ -146,17 +147,17 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `research-survey` | 2 | 1 | 13 | 1 |
+| `research-survey` | 2 | 2 | 13 | 2 |
 | `factual-review` | 5 | 0 | 48 | 2 |
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 26 | 4 | 96 | 7 |
+| `research-loop` | 26 | 4 | 96 | 8 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
-| `review-planning-oversight` | 1 | 0 | 10 | 0 |
-| `general-improvement` | 1 | 0 | 7 | 0 |
+| `review-planning-oversight` | 1 | 0 | 10 | 1 |
+| `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
 
@@ -708,7 +709,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 109 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 110 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -841,6 +842,12 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | H-149 | refuted | proof | The original five sites D plus the exact saved exp149 centre cover eve |  | 1 |  | 13s wall |
 | H-150 | confirmed | proof | The closed escaping B-cores retained by exp149 and exp151 have a nonem |  | 1 |  | 10s wall |
 | H-151 | refuted | proof | For the fixed D and wall tuple (0,0,0,7), some additional site covers  |  | 1 |  | 22s wall |
+| H-152 | result registered | proof | The rank-one threshold-atom closure -- point atoms together with (S, k |  | 0 | T-025 |  |
+| H-153 | open | proof | The covering LP re-optimised on a net of 720 or more directions at the | direction_steps: 720 1440 2880 | 0 |  |  |
+| H-154 | open question | proof | Two questions about the edge of the exact ceiling at 191/50. First: wh |  | 0 |  |  |
+| H-155 | blocked | proof | For at least one four-owner class of PR 137's sixteen-per-corner struc |  | 0 |  |  |
+| H-156 | blocked | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 0 |  |  |
+| H-157 | refuted | proof | Refining the corner-owner angular bins from eight to sixteen makes eve |  | 1 |  | 5.9m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -850,7 +857,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Rounds
 
-### rejected (26)
+### rejected (27)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -880,6 +887,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | exp-150 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-148 | The saved escape survives the individual owner-core constraint in every selected class. H148 is refuted; joint owner compatibility, unit parents, H146 and the global n11 bound remain unresolved. |
 | exp-151 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-149 | The completed first-deficit stop refutes this fixed six-dot set after seven of 361 directions. It does not rule out relocating the sixth site, changing other sites or a weighted certificate. |
 | exp-153 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-151 | The exact site region becomes empty after 188 complete direction constraints. This rules out every additional single site while original D and tuple(0,0,0,7) stay fixed. It does not rule out weighted added mass below two, repositioned six-site patterns or physical packings. |
+| exp-154 | series-000 | 11 | Claude Opus 5 measurement lane, coordinated by Claude Fable | H-157 | Six refined subclasses still read exactly 10, so the case split as posed is not closed by refinement and H-157 is refuted on its own registered direction. |
 
 ### abandoned (2)
 
@@ -1010,7 +1018,7 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 
 ## Effort
 
-109 rounds, 2152.1 agent-minutes, 1367.0 wall-minutes.
+110 rounds, 2152.1 agent-minutes, 1373.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

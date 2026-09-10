@@ -1,0 +1,65 @@
+import sys, time, json
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools.plateau_reader import (
+    load_family, read_arrangement, intersection_graph, piercing_number,
+)
+RS = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-383/run-sites")
+name = sys.argv[1]
+out = Path(sys.argv[2])
+fam = load_family(RS / name)
+arr = read_arrangement(fam)
+adj = intersection_graph(fam)
+n = len(fam.placements)
+found = []
+def expand(r, p, x):
+    if p == 0 and x == 0:
+        found.append(r); return
+    if p == 0: return
+    pool = p | x
+    pivot = max((i for i in range(n) if pool >> i & 1), key=lambda i: (p & adj[i]).bit_count())
+    cand = p & ~adj[pivot]
+    while cand:
+        low = cand & -cand
+        v = low.bit_length()-1
+        expand(r | low, p & adj[v], x & adj[v])
+        p &= ~low; x |= low; cand &= ~low
+sys.setrecursionlimit(100000)
+expand(0, (1 << n) - 1, 0)
+maskset = arr.masks
+def helly(c):
+    return any(c & m == c for m in maskset)
+nonhelly = [c for c in found if c.bit_count() >= 2 and not helly(c)]
+print(f"{len(found)} maximal cliques, {len(nonhelly)} non-Helly", flush=True)
+t0 = time.perf_counter()
+memo = {}
+def tau(mask):
+    if mask not in memo:
+        memo[mask] = piercing_number(arr, mask)
+    return memo[mask]
+results = []
+valid = []   # inclusion-maximal cliques with tau* < 2
+hard = []    # maximal cliques with tau* >= 2 (need descent)
+for c in nonhelly:
+    p = tau(c)
+    results.append((c, p.value, p.exact, p.route))
+    if p.value < 2:
+        valid.append(c)
+    else:
+        hard.append(c)
+print(f"tau* on {len(nonhelly)} cliques: {time.perf_counter()-t0:.1f}s", flush=True)
+from collections import Counter
+print("tau* values:", sorted(Counter(str(v) for _,v,_,_ in results).items()))
+print("all exact:", all(e for _,_,e,_ in results))
+print("valid (tau*<2):", len(valid), " need descent:", len(hard))
+rec = {
+  "family": name,
+  "maximal_cliques": len(found),
+  "non_helly": len(nonhelly),
+  "valid_masks": [str(c) for c in valid],
+  "hard_masks": [str(c) for c in hard],
+  "tau": {str(c): str(v) for c,v,_,_ in results},
+  "exact_all": all(e for _,_,e,_ in results),
+}
+out.write_text(json.dumps(rec, indent=1))

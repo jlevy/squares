@@ -1,0 +1,36 @@
+{
+ "kind": "plateau-reader/v1",
+ "family": {
+  "placements": null,
+  "total_weight": "1377239531/125000000",
+  "max_depth": "561637353/500000000",
+  "vertices": 5018736,
+  "regime": "net",
+  "symmetric_only": true,
+  "conditions": [
+   {
+    "name": "K0 every placement is admissible",
+    "holds": true,
+    "detail": "1032 placements in the net regime, some at mirrored angles (D4-symmetric measures only)"
+   },
+   {
+    "name": "K1 every placement lies in the container",
+    "holds": true,
+    "detail": "all 1032 placements have every corner in [0, 383/100]^2"
+   },
+   {
+    "name": "K2 depth at most 1 at every arrangement vertex",
+    "holds": false,
+    "detail": "maximum depth 561637353/500000000 (1.123274706) at (Fraction(17460464044261334986674367916207, 17489953559188643975983080000000), Fraction(31029621617, 31060420000)) over 5018736 vertices, 11191 decided exactly"
+   },
+   {
+    "name": "K3 total weight at least n",
+    "holds": true,
+    "detail": "total 1377239531/125000000 (11.017916248) against n = 11"
+   }
+  ]
+ },
+ "refused": "depth 561637353/500000000 exceeds one: not a feasible point dual",
+ "seconds": 900.321,
+ "source": "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-383/lp-run2/family-at-n-1.json"
+}

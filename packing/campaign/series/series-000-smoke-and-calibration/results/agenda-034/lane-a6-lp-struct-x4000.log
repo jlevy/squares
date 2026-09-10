@@ -1,0 +1,4 @@
+resumed 17389 sites in 2250 orbits, 2566 atom orbits, 15021 rows from /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/plateau-separation/resume-sites-1
+structural sites: +3999 orbits (48253 sites total), 1 already present, from /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/structural-sites-153-40-x4000.json
+matrices: 15021 rows x 8815 columns, 63575252 nonzeros (56.3s)
+HiGHS model passed (16.4s)

@@ -177,10 +177,13 @@ class CertificateFigures:
     """`B`, the shrunken square side the certificate is stated for; None if the file does
     not carry one, in which case the ceiling and runway are simply not checked."""
     atom_count: int
+    """Point atoms, plus threshold atoms where the file carries any."""
     mass: Fraction
+    """The budget the counting proof compares against `n`: the point atoms' weights plus
+    `w floor(|S| / k)` for each threshold atom."""
     stored_mass: Fraction | None
-    """What `total_mass` says in the file itself, checked against `mass` but never used
-    in place of it."""
+    """What the file's own summary line says -- `total_mass`, or `total_budget` on a
+    threshold certificate -- checked against `mass` but never used in place of it."""
 
     @property
     def margin(self) -> Fraction:
@@ -233,6 +236,15 @@ def load_certificate(path: Path) -> CertificateFigures | None:
     Most of a result's `artifacts` are generator or verifier modules, not certificates;
     returning None for those is the expected case; this only reports a positive when the
     file parses as JSON and carries the certificate's own distinctive shape.
+
+    A *threshold* certificate carries the same fields plus `threshold_atoms`, and its
+    budget is not the atom sum: a threshold atom `(S, k, w)` costs `w floor(|S| / k)`,
+    which is what the counting proof compares against `n`. Reading only the point atoms
+    there would understate the budget -- for `T-025` by `2.29` of `10.97` -- and every
+    quoted total and margin would then be checked against a number the record does not
+    claim. So the floor rule is recomputed here from the threshold atoms themselves, in
+    the same from-scratch spirit as the point mass, and the file's own `total_budget` is
+    cross-checked against it rather than trusted.
     """
     if path.suffix != ".json" or not path.is_file():
         return None
@@ -245,11 +257,26 @@ def load_certificate(path: Path) -> CertificateFigures | None:
     atoms = record["atoms"]
     if not isinstance(atoms, list) or not atoms:
         return None
+    # Not type-checked ahead of the arithmetic: anything that is not a list of atom
+    # records fails inside the `try` below, on the same "unreadable file is not a
+    # certificate" path as every other malformed field, and one fewer early return keeps
+    # this readable.
+    thresholds = record.get("threshold_atoms", [])
     try:
         n = int(record["n"])
         outer_side = Fraction(str(record["outer_side"]))
         mass = sum((Fraction(str(atom[2])) for atom in atoms), start=Fraction(0))
-        stored_mass = Fraction(str(record["total_mass"])) if "total_mass" in record else None
+        mass += sum(
+            (
+                Fraction(str(atom["weight"])) * (len(atom["points"]) // int(atom["threshold"]))
+                for atom in thresholds
+            ),
+            start=Fraction(0),
+        )
+        declared_total = "total_budget" if thresholds else "total_mass"
+        stored_mass = (
+            Fraction(str(record[declared_total])) if declared_total in record else None
+        )
         square_side = Fraction(str(record["square_side"])) if "square_side" in record else None
     except KeyError, ValueError, TypeError, IndexError, ZeroDivisionError:
         return None
@@ -265,7 +292,7 @@ def load_certificate(path: Path) -> CertificateFigures | None:
         n=n,
         outer_side=outer_side,
         square_side=square_side,
-        atom_count=len(atoms),
+        atom_count=len(atoms) + len(thresholds),
         mass=mass,
         stored_mass=stored_mass,
     )

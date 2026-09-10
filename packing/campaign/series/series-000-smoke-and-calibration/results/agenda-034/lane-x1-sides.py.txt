@@ -1,0 +1,33 @@
+from __future__ import annotations
+import json
+from fractions import Fraction
+from pathlib import Path
+from devtools.owner_footprints import owner_branch_manifest
+from devtools.screen_corner_dual_salvage import _base_polygon, screen_footprint
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+SRC = Path("/home/user/squares/packing/campaign/series/series-000-smoke-and-calibration/"
+           "results/agenda-034/ceiling-family-191-50.json")
+record = json.loads(SRC.read_text())
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+axes = frozenset((d.ux, d.uy) for d in directions) | frozenset((d.vx, d.vy) for d in directions)
+
+for side in (Fraction(191, 50), Fraction(153, 40), Fraction(383, 100), Fraction(96, 25)):
+    moved = transport(record, Fraction(1), side=side)
+    fam = CeilingCertificate.from_record(moved)
+    rows = []
+    for owner in manifest.classes:
+        poly = _base_polygon(owner, "endpoint", directions)
+        s = screen_footprint(fam, poly, class_id=owner.class_id, corner="bottom-left",
+                             kind="endpoint", source_placements=fam.placements,
+                             direction_axes=axes)
+        rows.append((owner.class_id, s.total_weight))
+    mx = max(w for _, w in rows)
+    mn = min(w for _, w in rows)
+    mean = sum(11 - w for _, w in rows) / len(rows)
+    hits = [c for c, w in rows if w >= 10]
+    print(f"side {str(side):9s} shift {(side - Fraction(191,50))/2!s:8s} "
+          f"max survivor {str(mx):6s} min survivor {str(mn):6s} "
+          f"mean deletion {mean} = {float(mean):.5f}  obstructing {len(hits)}/16 {hits[:2]}")

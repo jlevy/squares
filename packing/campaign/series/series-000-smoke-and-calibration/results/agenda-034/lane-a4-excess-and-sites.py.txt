@@ -1,0 +1,34 @@
+"""Where a dual family's depth excess sits, and how far the nearest LP site is.
+
+Usage: excess_and_sites.py FAMILY.json SITES.json
+Exact throughout: the depth and the witness come from sqpack's own arrangement pass; the
+site distance is reported as an exact squared distance and its float root.
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+
+sys.path.insert(0, "/home/user/squares/packing")
+from sqpack.fractional.ceiling import (CeilingCertificate, arrangement_lines,
+                                       container_vertices, maximum_depth)
+
+t0 = time.perf_counter()
+fam = CeilingCertificate.from_record(json.loads(Path(sys.argv[1]).read_text()))
+vertices = container_vertices(fam, arrangement_lines(fam))
+worst, decided, where = maximum_depth(fam, vertices)
+print(f"family {len(fam.placements)} placements, total {fam.total_weight} ({float(fam.total_weight):.9f}), "
+      f"{len(vertices)} vertices, {decided} decided exactly, {time.perf_counter()-t0:.1f}s")
+print(f"exact maximum depth {worst} = {float(worst):.9f}")
+if where is None:
+    sys.exit(0)
+x, y = where
+print(f"witness ({float(x):.6f}, {float(y):.6f})")
+members = [(i, p) for i, p in enumerate(fam.placements) if p.contains(x, y)]
+print(f"{len(members)} placements meet it; heaviest:")
+for i, p in sorted(members, key=lambda ip: -ip[1].weight)[:8]:
+    print(f"   #{i} weight {p.weight} ({float(p.weight):.6f}) centre ({float(p.centre_x):.5f}, {float(p.centre_y):.5f}) ht {p.half_tangent} side {p.side}")
+sites = [(Fraction(a), Fraction(b)) for orbit in json.loads(Path(sys.argv[2]).read_text()) for a, b in orbit]
+best = min(((sx - x) ** 2 + (sy - y) ** 2, (sx, sy)) for sx, sy in sites)
+d2, (sx, sy) = best
+print(f"{len(sites)} sites; nearest at ({float(sx):.6f}, {float(sy):.6f}), squared distance {float(d2):.3e}, distance {float(d2) ** 0.5:.6f}")

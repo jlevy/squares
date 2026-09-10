@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+"""Spike B: does any 2-of-3 (or 2-of-5 / 3-of-5) cut separate the frozen ceiling family?
+
+Candidates for the atom points: every arrangement vertex (exact, closed containment
+decided by Placement.contains where the float screen is ambiguous) plus the pair
+centroids. For every triangle (i, j, k) of the overlap graph the three points range over
+the candidates inside P_i∩P_j, P_j∩P_k, P_i∩P_k (capped per pair at the deepest
+`cap`), all combinations evaluated; a charge above 1 (more than 8 images, at weight 1/8)
+is a violated cut. Then odd 5-cycles with the same candidate machinery for 2-of-5 (budget
+2, i.e. more than 16 images) and 3-of-5 (budget 1).
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from sepcore import FamilyGeometry, containment  # noqa: E402
+
+from sqpack.fractional.ceiling import CeilingCertificate, arrangement_lines, container_vertices  # noqa: E402
+
+path = Path(sys.argv[1])
+cap = int(sys.argv[2]) if len(sys.argv) > 2 else 40
+t0 = time.perf_counter()
+fam = CeilingCertificate.from_record(json.loads(path.read_text()))
+geo = FamilyGeometry(fam, print)
+pl = geo.pl
+n = len(pl)
+w = geo.y  # 1/8 each
+scale = 8
+lines = arrangement_lines(geo.family)
+verts = container_vertices(geo.family, lines)
+cands = list(verts) + list(geo.reps)
+V, amb = containment(cands, pl, geo.normals, geo.offsets, geo.halves)
+depth = V.sum(axis=1)
+print(f"{len(verts)} vertices + {len(geo.reps)} pair centroids = {len(cands)} candidates; {amb} containments decided exactly; max vertex depth {depth.max()}/8; {time.perf_counter()-t0:.1f}s")
+Vi = V.astype(np.int8)
+
+def in_pair(i, j):
+    idx = np.flatnonzero(V[:, i] & V[:, j])
+    if idx.size > cap:
+        idx = idx[np.argsort(-depth[idx], kind="stable")[:cap]]
+    return idx
+
+pair_cache = {}
+def cand_pair(i, j):
+    key = (min(i, j), max(i, j))
+    if key not in pair_cache:
+        pair_cache[key] = in_pair(*key)
+    return pair_cache[key]
+
+# --- 2-of-3 over triangles
+best = 0; best_info = None; tri_count = 0; violated = 0
+for i, j in geo.edges:
+    for k in geo.adj[i] & geo.adj[j]:
+        if k <= j:
+            continue
+        tri_count += 1
+        A, Bc, Cc = cand_pair(i, j), cand_pair(j, k), cand_pair(i, k)
+        if A.size == 0 or Bc.size == 0 or Cc.size == 0:
+            continue
+        cnt = Vi[A][:, None, None, :] + Vi[Bc][None, :, None, :] + Vi[Cc][None, None, :, :]
+        charged = (cnt >= 2).sum(axis=3)  # images charged
+        m = int(charged.max())
+        if m > 8:
+            violated += 1
+        if m > best:
+            best = m
+            a, b, c = np.unravel_index(int(charged.argmax()), charged.shape)
+            best_info = (i, j, k, cands[A[a]], cands[Bc[b]], cands[Cc[c]])
+print(f"2-of-3: {tri_count} triangles; max charge {best}/8 = {best/8:.4f}; violated triangles (charge > 1): {violated}; {time.perf_counter()-t0:.1f}s")
+if best_info:
+    i, j, k, a, b, c = best_info
+    print(f"  best at triangle {(i, j, k)} angles {[round(geo.angles[v],2) for v in (i,j,k)]} points {[(float(p[0]), float(p[1])) for p in (a,b,c)]}")
+
+# --- 5-cycles (all, not only chordless), 2-of-5 and 3-of-5, capped candidates per pair (smaller cap)
+cap5 = max(4, cap // 5)
+def cand5(i, j):
+    idx = cand_pair(i, j)
+    return idx[:cap5]
+cycles = []
+adj = geo.adj
+for v0 in range(n):
+    n0 = sorted(v for v in adj[v0] if v > v0)
+    n0set = set(n0)
+    for v1 in n0:
+        for v2 in adj[v1]:
+            if v2 <= v0:
+                continue
+            for v3 in adj[v2]:
+                if v3 <= v0 or v3 == v1:
+                    continue
+                for v4 in adj[v3] & n0set:
+                    if v4 > v1 and v4 != v2:
+                        cycles.append((v0, v1, v2, v3, v4))
+print(f"5-cycles: {len(cycles)}; candidate cap per pair {cap5}")
+best25 = 0; best35 = 0; viol25 = 0; viol35 = 0; info25 = None
+tc = time.perf_counter()
+for cyc in cycles:
+    pairs = [(cyc[c], cyc[(c + 1) % 5]) for c in range(5)]
+    cs = [cand5(*p) for p in pairs]
+    if any(c.size == 0 for c in cs):
+        continue
+    # iterate over combinations with broadcasting in two halves to bound memory
+    P0, P1, P2, P3, P4 = [Vi[c] for c in cs]
+    part = P0[:, None, None, :] + P1[None, :, None, :] + P2[None, None, :, :]  # (a,b,c,img)
+    part = part.reshape(-1, n)
+    rest = (P3[:, None, :] + P4[None, :, :]).reshape(-1, n)
+    cnt = part[:, None, :] + rest[None, :, :]
+    c25 = (cnt >= 2).sum(axis=2); c35 = (cnt >= 3).sum(axis=2)
+    m25, m35 = int(c25.max()), int(c35.max())
+    if m25 > 16: viol25 += 1
+    if m35 > 8: viol35 += 1
+    if m25 > best25:
+        best25 = m25; info25 = cyc
+    best35 = max(best35, m35)
+print(f"2-of-5: max charge {best25}/8 = {best25/8:.4f} (budget 2), violated cycles {viol25}; 3-of-5: max charge {best35}/8 = {best35/8:.4f} (budget 1), violated {viol35}; {time.perf_counter()-tc:.0f}s")
+if info25:
+    print(f"  best 2-of-5 cycle {info25} angles {[round(geo.angles[v],2) for v in info25]}")
+print(f"done {time.perf_counter()-t0:.0f}s")

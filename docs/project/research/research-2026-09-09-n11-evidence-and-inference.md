@@ -1,26 +1,44 @@
 # N11 Research: Definitions, Findings, and the Inference Chain
 
-**Scientific evidence cutoff:** the results published in
+**Current combined result, September 10, 2026:**
+`3.826447410572939744... <= s(11) <= 3.877083590022814...`. T-026 improves the global
+lower bound; the owner results remain conditional.
+[§12 consolidates the takeaways across the PR series](#12-the-combined-series-takeaways-and-open-comparisons),
+including what worked, what particular tests ruled out, and what remains undecided.
+[§13 reviews the later A6 and H157 additions](#13-the-later-a6-and-h157-results-what-has-been-checked),
+including confirmed counts, a geometric correction and remaining source dependencies.
+
+**Original owner-strand scientific cutoff:** the results published in
 [PR145](https://github.com/jlevy/squares/pull/145) at
 `2acf4b859d39e01cc9fcb1156d8573f65e08efbd`, through exp153 on September 9, 2026. The
 subsequent two-attainer verifier and unit-parent constraints are preparation or analytic
 proposals, not new measured outcomes.
 
-**Interpretation and preparation updated September 10, 2026.** Exp153 remains the latest
-scientific experiment.
-The global bounds and T-023 are unchanged.
+**Combined interpretation updated September 10, 2026.** Section12 records the combined
+review at d21c27b9. Later author heads ee98c4ba and 6ed45816 add A6, its supporting
+inputs and H157/exp154; §13 gives their source-admission status and independent
+corrections. PR139 also contains the unconditional T-024–T-026 results and earlier
+agenda034 measurements.
+The earlier claim that the global bounds were unchanged applied only to the PR147
+interpretation block.
+T-023 itself is unchanged.
+No scientific target ran during this consolidation.
 
 | Work | Current status | What that status establishes |
 | --- | --- | --- |
+| T-024–T-026 and agenda034 | Combined PR139 results; focused proof review and independent arithmetic completed | The global bound and scoped support/family findings in §12; final full-checkpoint status is tracked on the PR |
 | Exp145–153 | Recorded scientific results; PR145’s matching full checkpoint passed | The scoped findings in §7, with the retained analytic premises |
-| This account | Narrative review passed; subsequent currentness and structure pass applied | The exposition preserves the reviewed distinctions; it is not a fresh proof of every premise |
+| This account | Prior narrative review passed; later A6/H157 source review and corrections recorded in §13 | Each review has its own source and scope; no pass silently covers a later addition |
+| A6 and H157/exp154 | A6 point-family, all 2,566 atom rows and the seven-row fixed-support upper bound exactly replayed; H157 survivor counts confirmed and distance mechanism corrected | Neither addition changes the global bracket; §13 states the fixed-support and finite-domain premises |
 | Fixed two-attainer instrument | Source admitted; twelve synthetic controls passed; target unrun | Reviewed preparation for one fixed construction, with no target separation result |
-| Unit-parent centre bound | Derived and checked again by its originating lane | Conditional analytic reasoning; independent review, implementation admission and measured effects remain outstanding |
+| Unit-parent centre bound | Derived, checked by its originating lane and independently reviewed by Astra Max | Analytic necessary restriction admitted under its stated premises; implementation admission and measured effects remain outstanding |
 
 The [narrative review](../reviews/review-2026-09-09-n11-evidence-interpretation.md),
 [pair source admission](../../../packing/cases/n11_five_dot_cover/two-attainer-source-admission.md),
 and
 [parent-bound author check](../reviews/review-2026-09-10-n11-parent-centre-author-check.md)
+and
+[independent review](../reviews/review-2026-09-10-n11-parent-centre-independent-review.md)
 record these different assurance scopes.
 
 This account follows an explicit order: define the problem and objects; identify the
@@ -70,17 +88,18 @@ An **upper bound** comes from a valid construction.
 A **lower bound** proves that containers below a specified side cannot contain eleven
 squares. These are different proof tasks.
 
-The retained project record gives
+The current combined project record gives
 
 $$
-3.810025723614703\ldots \leq s(11)
+3.826447410572939744\ldots \leq s(11)
 \leq 3.877083590022814\ldots.
 $$
 
-The lower endpoint is T-022; the upper endpoint is the exactly verified Trump
-construction, T-011. The simpler introductory lower bound is T-018’s `3.81`. These are
-the project’s retained verified claims, not a claim that this report has performed a
-fresh exhaustive literature search.
+The lower endpoint is T-026; the upper endpoint is the exactly verified Trump
+construction, T-011. At this account’s original PR145 cutoff the lower endpoint was
+T-022’s `3.810025723614703...`. The simpler introductory lower bound is T-018’s `3.81`.
+These are the project’s retained verified claims, not a claim that this report has
+performed a fresh exhaustive literature search.
 See the [claim register](../../../packing/frontier/RESULTS.md) and
 [tutorial](../../../TUTORIAL.md).
 
@@ -509,7 +528,7 @@ The existing record supports several precise negative results and one retained
 conditional packing exclusion; it does not yet support a global verdict about which
 broad approach is productive.
 
-## 12. Corrections and Continuing Review
+### Corrections and Continuing Review
 
 The completed independent inference audit identifies stale experiment statuses, missing
 quantifiers and ambiguous uses of “exclude” in earlier summaries.
@@ -529,6 +548,399 @@ backfills; the
 [narrative review](../reviews/review-2026-09-09-n11-evidence-interpretation.md) records
 its assurance scope.
 No new scientific target is part of this interpretation block.
+
+## 12. The Combined Series: Takeaways and Open Comparisons
+
+This section records the combined review at d21c27b9, before the later A6 and H157
+source additions discussed in §13. It reads the two research strands together.
+The baseline is T-022’s global lower bound `3.810025723614703...`. PR137, PR142, PR145
+and PR147 form the owner and interpretation strand; PR139 adds the unconditional
+threshold-certificate work and incorporates that strand.
+Earlier handoffs and the historical §7 observations retain their original scope.
+
+### The Main Results, in Logical Order
+
+The physical problem is to fit eleven unit squares, with arbitrary rotations, in the
+smallest square container.
+We select a smaller closed **core** strictly inside each hypothetical unit square.
+A proved angular error bound allows the core’s direction to come from a finite **net**.
+Strict containment makes the selected cores disjoint even if the physical squares touch.
+The core family is a relaxation: an admissible core configuration need not extend to a
+physical packing of unit parents.
+
+A **point cover** places nonnegative weights at points so that every admissible core
+contains total weight at least one.
+Eleven disjoint cores would then need total mass at least eleven.
+A globally valid point cover of mass below eleven excludes them.
+
+A **threshold atom** `(S,k,w)`, with finite `S`, integer `1 <= k <= |S|` and `w >= 0`,
+charges `w` when a core contains at least `k` distinct sites from `S`. Disjoint cores
+consume disjoint sites, so the atom charges at most `floor(|S|/k)` cores and contributes
+`w*floor(|S|/k)` to the **charge budget**. For a two-of-three atom this budget is `w`:
+two disjoint cores cannot each contain two of the same three sites.
+The points of different atoms may overlap; the counting bound applies to each atom and
+then sums. The complete certificate must charge every admissible core at least one while
+keeping its total charge budget below eleven.
+
+| Result | What was established | What it does not establish |
+| --- | --- | --- |
+| T-024: finer-net point certificate | Re-certifying the earlier point atoms and applying dilation gives global lower bound `3.816609502788862235...` | A fit decision at its irrational limiting side |
+| T-025: threshold certificate | 584 point atoms and 320 two-of-three atoms have budget `685457679/62500000 = 10.967322864 < 11`; covering decisions exclude side `191/50 = 3.82` | A result above this side without another certificate or transfer argument |
+| T-026: finer-net threshold certificate | Re-certification on the 1440-step net and rational dilation give the stronger global weak limit below | An endpoint certificate or strict inequality at that limit |
+| T-023: conditional five-dot certificate | A specified four-owner patch case at `96/25 = 3.84` leaves at most five further parents, contradicting the seven required | A global exclusion of every packing at `3.84` |
+| Exp145–147: independent and wall-aware audits | Exp145 confirms the 361-direction cover; exp146 enlarges 12 of 16 common footprints; exp147 tests all 128 proposed containment transfers and finds no new certified selection | A physical case census or a bound from footprint growth alone |
+| Exp148–153: limits on the fixed five-dot extension | Partial masks, individual owner witnesses and escape geometry culminate in exp153’s exact exclusion of every freely placed sixth site added to fixed `D` for one selected wall-patch relaxation | Failure of moved or reweighted dots, arbitrary weighted covers, threshold charges, or stronger parent restrictions |
+| PR147 preparation | A fixed two-attainer instrument with synthetic controls and an analytic unit-parent centre proposal | A measured target result from either proposal |
+
+The new global result is
+
+$$
+s(11) \geq
+\frac{955000\sqrt{518400042893309449}}{179696714646249}
+=3.826447410572939744\ldots.
+$$
+
+The upper construction remains `3.877083590022814...`. The lower endpoint moved by about
+`0.016421687`, closing about **24.49% of the previous gap** and leaving about
+`0.050636179`. This is progress on a rigorous lower bound, not a new packing or a proof
+of optimality. The dilation argument proves exclusions for rational factors strictly
+below the limiting factor; taking their limit gives the displayed weak inequality.
+
+Primary proof packets are
+[T-024](../../../packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md),
+[T-025](../../../packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md),
+and
+[T-026](../../../packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md).
+The [claim register](../../../packing/frontier/RESULTS.md) retains their exact
+verification and confirmation levels; this narrative does not silently raise those
+levels. For the owner strand, [§7](#7-the-recorded-observations-in-order) gives the
+individual experiment sources and
+[§8](#8-why-exp153-decides-more-than-a-few-candidate-dots) gives exp153’s quantified
+conclusion.
+
+### What the Obstruction and Optimization Experiments Explain
+
+A **fractional core family** gives nonnegative weights to core placements.
+Its **depth** at a point is the sum of the weights of cores containing that point.
+Depth at most one everywhere is the dual constraint for ordinary point covers.
+Such a family of total weight eleven obstructs a point cover below eleven on the
+specified admissible domain.
+It need not be an integral packing of eleven cores, and it is not a physical unit-square
+packing.
+
+The retained family at side `3.82` has 88 cores, each of weight `1/8`. Its independent
+reader checks all 20,376 arrangement vertices and finds maximum depth one.
+With the declared symmetry, shrink and net, it rules out a D4-symmetric point measure
+below eleven on that domain.
+It violates a two-of-three inequality by charging `5/4` against budget one.
+Thus it explains why the ordinary point language is obstructed there while failing to
+obstruct the richer threshold certificate that T-025 actually supplies.
+It does not establish a symmetry-free result for a different pose domain.
+
+A **fixed support** is a specified finite list of allowed core placements.
+A **cut** is an additional valid inequality on their weights.
+**Budget-one cuts** allow total charge at most one per packing of pairwise disjoint
+admissible cores; more general **floor cuts** round an integer count of consumed site
+resources down to obtain a valid capacity.
+A **closure** imposes the whole specified cut family, not just the cuts returned by one
+search.
+
+On the retained 88-placement supports at `3.825` and `3.83`, exact primal and dual
+certificates give optimum `32/3` under depth and the complete budget-one class.
+The reported valid floor rows give exact optimum ten for the final finite row set, hence
+an upper bound of ten for the full rank-one closure on those supports.
+Equality for the full closure is not proved.
+The separately enlarged 344-placement support has reported upper bound `21749/1980 < 11`
+under its imposed cuts.
+These supports therefore do not witness a mass-eleven obstruction for those cuts.
+Another support could; these results alone neither rule that out nor construct a global
+cover below eleven. See the corrected
+[A5 report](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md).
+
+**Pricing** searches for a missing constraint or column that violates the current finite
+optimization’s dual conditions.
+A positive price can justify adding it; it does not guarantee that re-optimizing changes
+the objective.
+In A4, 24 exactly violated atom orbits were added and received zero primal
+weight, while the restricted LP stayed at eleven and the dual’s excess depth moved.
+That diagnoses a particular restricted optimization.
+The input dual had depth above one, so it was useful for separation but was not a
+feasible global obstruction.
+H135’s earlier full-support pricing experiment is a different, still-unrun comparison on
+its named rationalized dual sequence; neither experiment implies all-pose coverage.
+
+Two further negative results need their domain beside them.
+The X3 box screen found no exceedance on an eight-step grid, but its generic thin-strip
+stacking capacity was false for rotated squares.
+Its reported no-exceedances still imply no exceedance of the weaker valid area bound on
+those same boxes. No theorem about every off-grid box or containment region follows.
+Likewise, the finite finer-net measurements leave a small budget margin but do not prove
+that another net over the frozen atoms cannot improve the limit.
+
+### What Conditioning Contributes, and Where the Argument Still Needs Work
+
+An **owner’s selected core** contains a designated mark near a corner; the owner need
+not occupy the literal corner or touch a wall.
+A proved owner class supplies a **guaranteed patch** contained in every owner core in
+that class. Other selected cores must avoid that patch.
+This defines a **residual domain** for the remaining `11-m` cores after `m` distinct
+owners are selected.
+A certificate charging every core in that domain at least one, with valid total charge
+budget below `11-m`, excludes a packing with that owner selection.
+It does not say that the single-core residual domain is empty.
+
+The X1 retained fractional family leaves weight `11-m` on the named neutral
+endpoint-patch combinations.
+This obstructs a point cover below the residual requirement on those relaxations.
+It does not settle the later wall-aware domains.
+Nor does matching two cut maxima prove that conditional optimization is the
+unconditional optimization shifted by `m`, or that it costs sixteen times as much.
+
+The correct global requirement preserves the selection quantifier: **every hypothetical
+physical packing must admit at least one valid owner selection whose residual family has
+been excluded.** An unclosed raw label may be physically empty or may overlap an already
+excluded selection of the same packing.
+A fractional survivor establishes neither a physical packing nor an unavoidable owner
+choice.
+
+Similarly, an artificial integral packing of B-cores near `3.868983` supplies an
+unconditional obstruction on its declared core domain.
+Conditional transfer needs verified distinct owners, marks, classes, occupied patches
+and all additional domain conditions at that same side.
+The unit-parent ownership theorem at `96/25` does not automatically provide them.
+The corrected
+[X-026 ladder](../../../packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md)
+states the deductions and missing premises explicitly.
+
+### The Next Comparisons Remain Open
+
+These are questions to preregister, with no comparative ranking established by the
+completed work. Each needs a declared control, exact success criterion and scoped
+negative outcome before a target run.
+
+| Comparison | Evidence already in hand | The next discriminating result still needed |
+| --- | --- | --- |
+| Frozen atoms on another net versus re-optimization | T-026’s finite-net least charges, budgets and limits | A verified better certificate or a complete obstruction for the declared extension; small slack alone is neither |
+| Changed sites and richer unconditional charges | A4’s valid cuts and unmoved restricted LP; A5’s support bounds | All-pose coverage of a frozen certificate, or a feasible obstruction for the full declared language |
+| General weighted/floor certificate format | Separators already return cuts not expressible by the current threshold format | A representation, counting contract and independent covering decision; a separated cut is not yet a retainable certificate |
+| Wall-aware or refined owner domains | Exp146’s footprint gains and X1’s endpoint-patch survivors | Recompute the relevant survivor or cover on the changed domain; test H157 without presuming a gain |
+| Joint compatibility and owner routing | T-023, individual witnesses and necessary escape screens | A proof relating physical packings to excluded valid selections, or a precisely scoped additional case exclusion |
+| Conditional threshold charges | The point survivor violates threshold inequalities | Implement and validate the restricted-domain gate, then test a declared class; H155 is live and unrun |
+| Unit-parent centre restrictions | An analytic contract and author check | Independent review, implementation admission and a measured effect on the residual domain |
+| Small weighted extensions of fixed `D` | Exp153 excludes one added site; two-attainer preparation exists | A separately admitted target for a declared richer family; exp153 does not decide it |
+
+The mathematical review found no error in the T-024–T-026 proof arguments or exact
+constants. It did find the unsupported interpretations corrected above.
+Independent arithmetic on the frozen files, 77 focused passing tests and the point
+ceiling replay are distinct from replaying every finer-net covering decision.
+The final combined PR must supply the matching full checkpoint; its source identities
+and job outcomes are recorded in
+[PR139’s review and final validation discussion](https://github.com/jlevy/squares/pull/139).
+See the
+[review addendum](../reviews/review-2026-09-09-n11-evidence-interpretation.md#combined-series-review-addendum--september-10-2026)
+for the scope of the reconciliation and remaining assurance questions.
+
+## 13. The Later A6 and H157 Results: What Has Been Checked
+
+The author added A6 and H157/exp154 in `ee98c4ba`, then retained the missing A6 inputs
+and seven-row upper certificate in `6ed45816`, after the combined account in §12 was
+reviewed at `d21c27b9`. The global bracket is unchanged.
+This section separates the later observations, their admission status and the
+implications that follow.
+It does not replace the historical experimental record.
+
+### A6: An Obstruction for a Fixed Atom Set
+
+There are two optimization problems to keep distinct.
+A **covering program** minimizes the total budget of weighted point and threshold atoms,
+requiring every allowed core to collect charge at least one.
+A **fractional packing program** maximizes the total weight assigned to cores, subject
+to each atom’s capacity inequality.
+On matched finite lists these are linear-programming duals.
+The roles of a vector depend on which program is being discussed; calling it a primal or
+dual vector without naming the program is ambiguous.
+
+A fractional core family of total eleven and depth at most one everywhere satisfies
+every point-capacity inequality, including those for sites that have never been tried.
+For a mixed point-and-threshold cover it must also satisfy the threshold-atom
+inequalities.
+If it does, weak duality prevents a cover of budget below eleven using that
+fixed atom set, regardless of how many point sites are added.
+The conclusion concerns the program with every admissible core constraint.
+A finite-row relaxation can still report a lower objective and fail when its missing
+core constraints are tested.
+
+The retained A6 family has 64 placements at side `153/40`, core side `9977/10000` and
+the declared 181-direction net with its symmetry convention.
+A separate integer and rational reader, which does not import the producer’s ceiling
+geometry, confirmed containment, allowed directions, D4 symmetry, total weight exactly
+eleven and maximum depth exactly one at all 14,344 arrangement vertices.
+Three deliberately altered records were rejected.
+This independently establishes its point-capacity obstruction.
+
+The exact atom input is now retained.
+A
+[maintained reader](../../../packing/cases/n11_fractional_certificate/threshold-atom-orbit-admission.md)
+reconstructed all 2,566 orbits, their 20,524 distinct images and 14,949 sites, then
+recomputed every site-placement membership with rational slab inequalities.
+Every orbit satisfies its budget.
+The
+[atom receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-atom-membership.json),
+[point receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-ceiling.json)
+and
+[source record](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-source-record.json)
+retain these separate checks.
+The maximum charge-to-budget ratio is one; 935 orbits attain it and 1,631 have strict
+slack. The delivered report’s wording that every ratio equals one is too strong, though
+its feasibility conclusion holds.
+
+Together with the separate point-family check, this establishes the obstruction for
+arbitrary point sites combined with these fixed threshold atoms, on the declared core
+domain at `153/40`. It does not close the entire threshold language: an additional atom
+can violate this family.
+The
+[A6 report](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-structural-sites-and-the-depth-one-certificate.md)
+retains the original source and a dated correction explaining this independent replay.
+
+### A6: Six Added Atoms and Two Different Outcomes
+
+A **fixed support** permits reweighting only a specified list of core placements.
+A6’s support has 280 placements in 35 D4 orbits.
+Its computation uses one weight per orbit, so symmetry-related placements have equal
+weight. A6 separated six ordinary threshold-atom orbits from successive families on one
+such support: two two-of-three orbits and four three-of-five orbits.
+Each image has budget one; all six orbits fit the existing threshold format.
+A floor-atom extension is not required to represent them.
+The exact reader reproduced charges `11/8`, `11/8` and `33/32` against the
+[first source family](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-family-1.json),
+and `5/4` for each of the three cuts against the
+[second source family](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-family-2.json).
+Each exceeds its per-image budget one.
+These matched charge checks do not prove that either source family satisfies every other
+capacity inequality.
+
+The report gives two outcomes that must stay together:
+
+- On the fixed-support program, the reported value fell from eleven to approximately
+  `10.4210526`. An independent reader now verifies the exact upper bound
+  `2605263163/250000000`: six point-depth inequalities and one complete three-of-five
+  atom orbit suffice. It reconstructs all 280 placements as 35 D4 orbits and every priced
+  coefficient with rational membership tests.
+  The weighted inequalities cover each objective coefficient, with minimum slack
+  `3/500000000`. The
+  [maintained reader and receipt](../../../packing/cases/n11_fractional_certificate/a6_dual_upper/README.md)
+  retain this check and twelve focused controls; no LP rerun is needed for this upper
+  certificate.
+- When those six atoms were added to the larger covering LP, its numerical objective
+  stayed at eleven and all six received zero covering weight.
+  No improved global certificate resulted.
+
+The returned family of weight `325657893/31250000` satisfies the selected finite
+constraints in the reported calculation but has actual maximum depth
+`105263157/100000000 > 1`. It is therefore not a feasible lower certificate for the
+problem imposing depth at most one everywhere.
+The admitted upper certificate also bounds the more constrained problem with tied
+weights on that same support.
+The lower candidate was not independently admitted in this check and does not transfer
+to the full-depth problem.
+
+For arbitrary weights on this support, there is one further step.
+The support must be closed under D4; the objective must be total placement weight; and
+the constraints must be invariant under those symmetries.
+All-point depth constraints and complete threshold-atom orbits, or their orbit-sum
+inequalities, have that invariance.
+Average any feasible family over the eight symmetries.
+The average remains feasible on the same support, has unchanged total weight and is
+constant on each orbit.
+Thus an upper bound for tied weights also bounds arbitrary weights for that invariant
+full-depth program. An arbitrary finite site list needs its own invariance check before
+the same argument can be used.
+The separate [A6 scope review](../reviews/review-2026-09-10-n11-a6-scope-and-plan.md)
+derives this averaging argument and the obstruction’s transport conditions.
+
+These observations motivate a prospective comparison that alternates support and atom
+updates. They do not prove convergence of that procedure, establish a preferred
+separation source for every problem, or show that point pricing has become unnecessary
+once the atom set changes.
+In particular, a fixed **atom set** is narrower than an entire **atom language**: the
+new two-of-three atoms use a language already available.
+
+The second, larger structural-site solve has no result.
+The author reports that it was unfinished after more than 4,260 seconds and was ended by
+a container restart; its scratch log was empty.
+This is an incomplete run with a lower reading of elapsed cost.
+The two configurations’ timings do not establish an asymptotic scaling law or an
+impossibility of solving a differently configured problem.
+
+### H157: The Survivor Counts and the Corrected Geometry
+
+A **survivor** here is a placement in one retained fractional family that avoids a
+specified guaranteed owner patch.
+Its weight is a constraint on point covers for that relaxation; it is not a count of
+physical unit squares.
+
+H157 tested whether refining the four neutral eight-sector classes into eight
+sixteen-sector subclasses would make every subclass’s survivor weight less than ten.
+The aggregate is the **maximum** survivor weight over those subclasses.
+Six remain at ten, and two fall to `19/2`; the maximum over all 32 sixteen-sector
+classes is also ten.
+An independent review reproduced the saved table, the eight-sector equivalence control,
+and the relevant survivor sets with exact clipping as well as separating-axis checks.
+The declared all-subclasses improvement therefore fails on this family and patch
+construction. The two improved subclasses remain positive evidence about local patch
+refinement.
+
+The new distance explanation required a correction.
+Its helper calculated distances under a disjoint-polygon precondition, then applied that
+calculation to two refined patches that intersected their fixed target cores.
+For `m1:J9/16` and `m2:J6/16`, the true distance to those target cores is zero; the
+helper returned a positive value.
+The original positive squared-distance identity remains valid for the six neutral
+subclasses, not for every child.
+The survivor screen itself correctly deleted the two intersected targets.
+Thus the count-based rejection remains supported, while the blanket explanation that
+refinement never reaches farther is false.
+The [review finding](https://github.com/jlevy/squares/pull/139#issuecomment-5613757157)
+records the discrepancy and its exact scope.
+
+### The Remaining Obstruction and the Remaining Choices
+
+The singleton-ray calculation retains 135 neutral rays per mark.
+If a bin’s patch is contained in the neutral ray’s anchored quarter-core, its survivor
+weight is at least ten.
+For the specified intersection patches containing the mark, the mark’s weight-one clique
+also gives an upper bound of ten, hence equality.
+This leaves a neutral class under every coarsening of that declared finite angular
+partition.
+
+At pose level, retained owner cores 59 and 60 each leave survivor weight ten when their
+whole core is used as the patch.
+Any smaller guaranteed patch inside one of those cores leaves weight at least ten.
+Equality additionally requires a premise such as the patch containing the mark; it does
+not follow merely because the owner contains the mark.
+Both isolated cores have contained concentric unit parents, independently checked.
+That does not supply eleven mutually compatible parents or prove an unavoidable
+selection.
+
+This is an obstruction to closing every class using patch avoidance and point weights
+alone on the stated survivor domain.
+It does not show that refinement cannot improve other classes, that neutral classes
+occur in a physical eleven-square packing, or that every valid owner selection of such a
+packing is neutral. Stronger parent domains, joint compatibility, routing to another
+valid selection, and conditional threshold charges require separate arguments and
+comparisons. Their possible usefulness has not been settled by these measurements.
+
+The criterion and geometry corrections are applied, with a
+[separate correction review](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/correction-review.md)
+and
+[maintained replay receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-corrected-replay/geometry-receipt.json).
+The independent A6 upper-certificate check is complete; final combined validation
+remains. The
+[three-block overnight plan](../specs/active/plan-2026-09-10-n11-overnight-three-blocks.md)
+keeps pricing and pair tests alongside parent-domain and certificate work, each with a
+declared control and scoped outcome.
+It records the source handoff, review findings and dependencies in beads before changing
+that allocation.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

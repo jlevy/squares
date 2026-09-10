@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""Consistency: the threshold sweep with no threshold atoms reproduces the retained
+n = 11 certificate's least cell mass (4001/4000) at every direction, by both routes."""
+
+from __future__ import annotations
+
+import time
+from pathlib import Path
+
+from devtools.decide_certificate import load
+from sqpack.fractional.sweep import minimum_covered_mass
+from sqpack.fractional.threshold import minimum_charge
+
+cert, _ = load(Path("cases/n11_fractional_certificate/certificate.json"))
+t0 = time.perf_counter()
+worst = None
+mismatch = 0
+for k, direction in enumerate(cert.directions):
+    ref = minimum_covered_mass(cert.atoms, direction, cert.outer_side, cert.square_side)
+    dense = minimum_charge(cert.atoms, (), direction, cert.outer_side, cert.square_side)
+    slab = minimum_charge(cert.atoms, (), direction, cert.outer_side, cert.square_side, dense_cell_limit=0)
+    if not (ref == dense == slab):
+        mismatch += 1
+        print(f"direction {k}: sweep {ref} dense {dense} slab {slab}")
+    if worst is None or dense[0] < worst:
+        worst = dense[0]
+print(f"181 directions: least {worst} = {float(worst):.9f}; mismatches {mismatch}; {time.perf_counter()-t0:.1f}s")

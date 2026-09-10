@@ -1,0 +1,48 @@
+"""Compact tables of what the oracle reader found, for the report."""
+import json, sys
+from fractions import Fraction
+from collections import Counter
+
+k45 = json.load(open("oracle-k4k5.json"))
+k6 = json.load(open("oracle-k6.json"))
+
+print("## family")
+f = k45["family"]
+print(f"placements {f['placements']}, total {f['total_weight']}, max depth {f['max_depth']} = {f['max_depth_float']:.6f}, "
+      f"{f['vertices']} vertices, {f['distinct_membership_sets']} distinct membership sets, weight scale 1/{f['weight_scale']}")
+print("mask reduction", k45["mask_reduction"])
+print()
+print("## K4 two-of-three")
+s = k45["stages"]["k4_two_of_three"]
+print(f"max charge {s['max_charge']} = {s['max_charge_float']:.6f} against budget 1, complete={s['complete']}, "
+      f"{s['nodes']} pairs expanded, {s['maximiser_count']} maximisers, {s['witness_count']} witnesses kept, "
+      f"{s.get('extra_violated_witnesses')} further violated witnesses, {s['seconds']}s")
+a = s["atom"]
+print(f"  atom: t={a['threshold']} budget {a['budget']} threshold charge {a['threshold_charge']} floor charge {a['floor_charge']} "
+      f"violation {a['floor_violation']}, charges {len(a['charged_placements'])} of {f['placements']} placements")
+print()
+print("## K5 budget-one atoms (cliques with tau* < 2)")
+c = k45["stages"]["k5_cliques"]
+print(f"{c['edges']} edges, {c['maximal_cliques_above_one']} maximal cliques above weight one (complete={c['enumeration_complete']}), "
+      f"{c['piercing_programs_solved']} piercing programs, {c['cliques_with_tau_at_least_two']} with tau* >= 2, {c['seconds']}s")
+h = c["heaviest_rank_one_clique"]
+print(f"  heaviest rank-one clique: {h['size']} members, weight {h['weight']}, tau* {h['tau_star']} ({h['tau_route']})")
+a = c["atom"]
+print(f"  atom: {len(a['points'])} points a(S)={a['size']} t={a['threshold']} budget {a['budget']} floor charge {a['floor_charge']} "
+      f"violation {a['floor_violation']}, charges {len(a['charged_placements'])} placements; multiplicities "
+      f"{[p['multiplicity'] for p in a['points']]}")
+print()
+print("## K6 Chvatal-Gomory floor atoms")
+for s in k6["stages"].get("k6_separation", []):
+    a = s.get("atom")
+    line = (f"t={s['threshold']}: {s['claim']}; solver objective {s['solver_objective']}, bound {s['solver_bound']}, "
+            f"exact violation {s['exact_objective']}")
+    if a:
+        line += (f"; atom {len(a['points'])} points a(S)={a['size']} budget {a['budget']} floor charge {a['floor_charge']} "
+                 f"({float(Fraction(a['floor_charge'])):.4f}), charges {len(a['charged_placements'])} placements, "
+                 f"multiplicities {dict(Counter(p['multiplicity'] for p in a['points']))}")
+    line += f"; {s['seconds']}s"
+    print(line)
+print()
+print("timings k4k5", k45["timings"], "k6", k6["timings"])
+print("violated: k4/k5", k45.get("violated_count"), " k6", k6.get("violated_count"))

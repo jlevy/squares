@@ -134,13 +134,13 @@ process execution.
 <a id="validation-tiers"></a>
 
 A **tier** selects validation steps; a **lane** selects tests within a behavioural step.
-The ordinary full checkpoint has 69 steps.
+The ordinary full checkpoint has 73 steps.
 The
 [validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
 owns the current W5 work on cost, naming, and checkpoint placement.
 
 Use **PR fast surface** for `--fast`, **full checkpoint** for the default command, and
-**deferred checkpoint** for the seven steps outside PR fast coverage.
+**deferred checkpoint** for the eleven steps outside PR fast coverage.
 The advisory `Deferred checkpoint` workflow runs those steps.
 **Golden rebuild** means `--deep`, which also regenerates expensive golden producers;
 **strict checkpoint** means `--strict`, which includes that rebuild and refuses skipped
@@ -159,24 +159,30 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 31 of 69 | 300 s | 11.0 s |
+| `--records` | contributor, before touching a registry; also every pull request | 31 of 73 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; a broad diff selects the whole suite and needs `--jobs 1`, see below |
-| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 69 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 69 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 237 s | 118.7 s on CI, the geometric mean of two current-suite readings |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 69 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across four jobs; not clocked whole |
+| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 73 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 73 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 73 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 73 | 275 s | 183.4 s on CI, one reading of the lane as it now stands |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 73 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 73 of 73 | 3600 s | split across four jobs; not clocked whole |
 
-Two of the four PR partition costs use geometric means at the reference shape: four
-readings for `--geometry` and two consecutive current-suite readings for `--suite`. Both
-suite runs on 2026-09-08 passed all 4,283 selected tests:
+`--geometry`’s cost is a geometric mean of four readings at the reference shape.
+`--suite`’s is a single reading, because the lane it measures is new: merging PR 137
+brought sixteen test files and the threshold work four more, taking the quick selection
+from 4,283 tests to 4,639, and
+[run 34326478984](https://github.com/jlevy/squares/actions/runs/34326478984) cost 183.44
+s where the previous 118.72 s mean would have failed the drift rule at 1.55x. Nothing
+regressed: no test’s `call` phase reaches the per-test backstop, and the growth is in
+the count. The 275 s ceiling is 1.499x of that reading, just inside the drift rule, and
+the earlier mean of two 2026-09-08 readings —
 [158.64 s](https://github.com/jlevy/squares/actions/runs/34285770932/job/102260892830)
 and
-[88.84 s](https://github.com/jlevy/squares/actions/runs/34288782986/job/102270405743).
-Their 118.72 s mean and 237 s ceiling preserve the existing policy (`think-uwow`). The
-runner images differed; the 1.79x spread does not establish a code speedup.
+[88.84 s](https://github.com/jlevy/squares/actions/runs/34288782986/job/102270405743),
+whose 1.79x spread was runner variation rather than a code speedup — stays in the
+register as history of the previous selection.
 Refresh the means as comparable measurements accumulate; a recorded band would represent
 that variation better than a point.
 The other two, `--sweeps` and `--checks`, have no recorded cost, and the corpus widening
@@ -266,13 +272,14 @@ mode `D-466` records.
 The deferred checkpoint runs slow behavioural tests, exhaustive exact tests, negative
 controls, the n=40 rigidity replay, the whole known-best atlas rebuild, the whole
 single-square translation escape screen, and the whole exact rational grid replay.
-These are the seven steps outside the [PR fast surface](#validation-tiers).
+T-024 and T-026 add four exact dilation-limit replays at 720 and 1440 steps.
+These are the eleven steps outside the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
 
 It runs them in four jobs, mirroring the post-merge gate: `deferred-slow-lane`,
 `exhaustive-tier`, and [D-484](defects.md)’s `screen`, with `deferred-steps` carrying
-the other four checks.
+the other eight checks.
 `deep-gate-required` waits on all four — a split job that nothing waits on is an
 advisory check, which is [D-380](defects.md)’s shape.
 
@@ -296,7 +303,7 @@ not a sample of it:
 `test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers` resolves the
 workflow’s own commands through `packing-validate --list` and compares the union against
 every step no pull-request job runs.
-So the pull-request surface and the deep gate together are the whole gate, and an eighth
+So the pull-request surface and the deep gate together are the whole gate, and another
 deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
 until it is added here too.
 
@@ -316,6 +323,11 @@ A duration does not establish that the work is irreducible.
   context: `D-380` records what a fan-out of separately required checks cost here.
 - To run it without touching the author’s labels, dispatch **Deferred checkpoint** with
   `pull_request: <number>`; it checks out that pull request’s merge ref.
+  Select the PR head branch as the dispatch ref when the PR changes the workflow: GitHub
+  loads the workflow definition from that ref, independently of the checkout selected
+  inside its jobs. Dispatching an older main workflow can therefore omit newly added
+  checks even while testing the correct PR merge tree.
+  Verify both the workflow definition and the selected step union in the final receipt.
 
 **Run the full checkpoint for final review.** A passing PR fast surface and a deferred
 checkpoint together cover the ordinary gate when their source and base identities agree.

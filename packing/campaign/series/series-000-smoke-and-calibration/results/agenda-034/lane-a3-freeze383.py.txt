@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+"""Freeze an lp383.py checkpoint as a threshold-certificate record.
+
+Usage (from packing/):
+  .venv/bin/python3 freeze383.py <lp-run dir> <out.json> [--bump 1000002/1000000] [--scale 1000000000]
+
+Reads sites.json (a list of D4 site orbits), atoms.json (threshold-atom orbit
+representatives at the run's outer side) and x.npy (site orbits first, then atom orbits in
+atoms.json order); multiplies every positive weight by the bump, rounds UP to a multiple of
+1/scale, drops zeros, expands orbits to D4-closed lists, declares the total budget, and
+writes every provenance number as a string (the decide tool's parser refuses JSON floats).
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+from sqpack.fractional.colgen import d4_orbit
+from sqpack.fractional.threshold import ThresholdAtom
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("rundir")
+    ap.add_argument("out")
+    ap.add_argument("--bump", default="1000002/1000000")
+    ap.add_argument("--scale", type=int, default=10**9)
+    ap.add_argument("--n", type=int, default=11)
+    args = ap.parse_args()
+    bump = Fraction(args.bump)
+    scale = args.scale
+    run = Path(args.rundir)
+    meta = json.loads((run / "atoms.json").read_text())
+    outer = Fraction(meta["outer_side"])
+    orbits = [tuple((Fraction(a), Fraction(b)) for a, b in orbit) for orbit in json.loads((run / "sites.json").read_text())]
+    for orbit in orbits:
+        assert set(d4_orbit(orbit[0][0], orbit[0][1], outer)) == set(orbit), "a site orbit is not D4-closed"
+    x = np.load(run / "x.npy")
+    assert x.shape[0] == len(orbits) + len(meta["atoms"]), (x.shape, len(orbits), len(meta["atoms"]))
+    traj = json.loads((run / "trajectory.json").read_text())
+    lp_stages = [e for e in traj["trajectory"] if "objective" in e and "lp_seconds" in e]
+    last = lp_stages[-1] if lp_stages else {}
+
+    def rationalise(w: float) -> Fraction:
+        if w <= 1e-12:
+            return Fraction(0)
+        return Fraction(math.ceil(Fraction(w) * bump * scale), scale)
+
+    atoms = []
+    for o, orbit in enumerate(orbits):
+        w = rationalise(float(x[o]))
+        if w == 0:
+            continue
+        for px, py in orbit:
+            atoms.append([str(px), str(py), str(w)])
+    threshold_atoms = []
+    for o, entry in enumerate(meta["atoms"]):
+        w = rationalise(float(x[len(orbits) + o]))
+        if w == 0:
+            continue
+        base = ThresholdAtom(tuple((Fraction(a), Fraction(b)) for a, b in entry["points"]), entry["threshold"], w)
+        for image in base.orbit(outer):
+            threshold_atoms.append(image.to_record())
+    point_mass = sum((Fraction(a[2]) for a in atoms), start=Fraction(0))
+    budget = sum((ThresholdAtom.from_record(t).budget for t in threshold_atoms), start=Fraction(0))
+    total = point_mass + budget
+    record = {
+        "id": f"C-n{args.n:03d}-threshold-{str(outer).replace('/', '-')}",
+        "variant": "threshold",
+        "n": args.n,
+        "claim": f"s({args.n}) >= {outer}",
+        "outer_side": str(outer),
+        "square_side": meta["square_side"],
+        "angle_limit": meta["angle_limit"],
+        "direction_steps": meta["direction_steps"],
+        "symmetry": "D4",
+        "point_mass": str(point_mass),
+        "threshold_budget": str(budget),
+        "total_budget": str(total),
+        "atoms": atoms,
+        "threshold_atoms": threshold_atoms,
+        "provenance": {
+            "tool": "threshold-383 freeze383.py (lp383.py checkpoint; weights bumped and rounded up; D4-expanded)",
+            "lp_run": str(run),
+            "lp_stage": str(last.get("stage", "")),
+            "lp_rows": str(last.get("rows", "")),
+            "lp_objective_float": repr(float(last.get("objective", float("nan")))),
+            "checkpoint_note": str(traj.get("note", "")),
+            "bump": str(bump),
+            "scale": str(scale),
+        },
+    }
+    out = Path(args.out)
+    out.write_text(json.dumps(record, indent=1) + "\n")
+    digest = hashlib.sha256(out.read_bytes()).hexdigest()
+    print(f"wrote {out}: {len(atoms)} point atoms (mass {float(point_mass):.9f}), {len(threshold_atoms)} threshold atoms (budget {float(budget):.9f}), total budget {total} = {float(total):.9f}; sha256 {digest}; {out.stat().st_size} bytes")
+
+
+if __name__ == "__main__":
+    main()

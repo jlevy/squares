@@ -1,0 +1,71 @@
+"""Weight of a family contained in a wall strip, as an exact function of strip width."""
+
+from __future__ import annotations
+
+import json
+import sys
+from fractions import Fraction as F
+from pathlib import Path
+
+
+def load(path: Path) -> tuple[F, F, list[tuple[F, F, F, F]]]:
+    d = json.loads(path.read_text())
+    outer = F(d["outer_side"])
+    tans = [F(t) for t in d.get("half_tangents", [])]
+    out: list[tuple[F, F, F, F]] = []
+    for rec in d["placements"]:
+        k, cx, cy, wt, side = rec
+        t = tans[int(k)] if isinstance(k, int) else F(k)
+        den = 1 + t * t
+        cos = (1 - t * t) / den
+        sin = 2 * t / den
+        b = F(side)
+        h = b * (cos + sin) / 2
+        out.append((F(cx), F(cy), F(wt), h))
+    return outer, F(d["total_weight"]), out
+
+
+def profile(placements: list[tuple[F, F, F, F]], axis: int) -> list[tuple[F, F]]:
+    """Cumulative weight contained in [0, w] along `axis` (0 = x, 1 = y)."""
+    events: list[tuple[F, F]] = []
+    for cx, cy, wt, h in placements:
+        c = cx if axis == 0 else cy
+        events.append((c + h, wt))
+    events.sort(key=lambda e: e[0])
+    cum = F(0)
+    out: list[tuple[F, F]] = []
+    for right, wt in events:
+        cum += wt
+        out.append((right, cum))
+    return out
+
+
+def report(path: Path) -> None:
+    outer, total, pl = load(path)
+    print(f"=== {path.name}  L = {outer} = {float(outer):.6f}  total = {total}  n = {len(pl)}")
+    for axis, name in ((0, "left wall (x)"), (1, "bottom wall (y)")):
+        prof = profile(pl, axis)
+        print(f"  -- {name}")
+        for w in (F(1), F(21, 20), F(11, 10), F(6, 5), F(3, 2), F(9, 5), F(199, 100), F(2)):
+            cum = F(0)
+            for right, c in prof:
+                if right <= w:
+                    cum = c
+                else:
+                    break
+            print(f"     w = {str(w):>7} = {float(w):.4f}   weight = {str(cum):>12} = {float(cum):.6f}")
+        for cap in (F(2), F(3), F(4)):
+            crossing = None
+            for right, c in prof:
+                if c > cap:
+                    crossing = right
+                    break
+            if crossing is None:
+                print(f"     weight never exceeds {cap}")
+            else:
+                print(f"     weight first exceeds {cap} at w = {float(crossing):.6f}")
+
+
+if __name__ == "__main__":
+    for arg in sys.argv[1:]:
+        report(Path(arg))
