@@ -5,7 +5,7 @@ title: "Certificate format cannot express two atom classes: K5 clique and K6 flo
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ child_order_hints:
   - is-01m252542q6zq6hsb4jvj9y2rs
   - is-01m25255yg6wqveyja558g7sys
 created_at: 2026-09-09T16:22:02.365Z
-updated_at: 2026-09-10T07:09:14.368Z
+updated_at: 2026-09-10T07:30:34.122Z
 ---
 Extend the certificate format and both covering routes to retain the weighted and floor charges already returned by the separator. Source: agenda034 lane A4 finding P10 and lane A5 F6. This is a representation and verification prerequisite, not evidence that the unconditional language or conditional route is exhausted.
 
@@ -27,4 +27,4 @@ The retained A5 value10 is exact for its finite final row set and an upper bound
 
 ## Notes
 
-Astra xhigh independent review is complete: the floor budget proof is sound under strict core shrink and all 19 supplied controls pass. Two confirmed prototype defects are tracked separately: serialization/loader round-trip in think-h1ju and valid zero-charge NumPy overflow in think-k1pe. Sol xhigh repairs only those private source boundaries, then Astra will independently review the correction. The prototype remains unadopted; production dispatch, legacy migration, low-memory support and K5 remain open. No scientific target or retained certificate was run. Review: /private/tmp/n11-floor-atom-independent-review.md.
+The private floor counting proof and both numerical routes passed bounded independent source review. Sol repaired serializer/loader round-trip and inert-row NumPy overflow; Astra xhigh independently passed both corrections in /private/tmp/n11-floor-atom-correction-review.md, with 30 maintained controls and separate unequal-gap, extreme inert-operand and active-bound controls. Root applies the reviewed nonuniform test fixture improvement. Children think-h1ju and think-k1pe remain open for post-merge adoption. Production dispatch, legacy threshold migration, low-memory support, source manifests and K5 are separate unfinished obligations. No scientific target ran.

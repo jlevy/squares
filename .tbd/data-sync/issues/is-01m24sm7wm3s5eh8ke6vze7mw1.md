@@ -5,7 +5,7 @@ title: "N11 overnight: three 3-hour research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
   - is-01m24vex03yjx6wdsssw68r9kk
   - is-01m24vqhfhxy1q22z1a5610700
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T06:18:53.109Z
+updated_at: 2026-09-10T07:37:12.706Z
 ---
 The owner authorized unattended continuation after PR139 merges, in three sets of two to
 four hours.
@@ -79,4 +79,4 @@ validation tiers.
 
 ## Notes
 
-The prospective three-block plan is now retained at docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md before the PR139 merge. Child beads link it through their spec field. Agenda035/session126 remain unallocated drafts until the new branch; source boundaries are exp154/H157/session125, with existing author idea154/think-yc80 incorporated instead of duplicated. A6 all2566 inequalities and H157 corrected geometry are replayed; A6 seven-row upper replay and final combined validation remain. The scientific nine-hour clock has not started. V3 source identification is unresolved under think-i1fr.
+PR139 finalization is published at0c4c41b4. A6 point/all2566atom/seven-row-upper admission and H157 corrected geometry are complete; source beads think-aocp, think-9zc9 and think-a4an are closed. Current fast62 steps passed at synthetic merge9e6a40f7; deferred34449352932 is running with slow lane passed. Final think-yl6y and merge think-zaqc remain open. Private agenda035/session126 plus pair H158/exp155 and H135 exp156 drafts are prepared under /private/tmp/n11-overnight-scaffold/ but IDs and clocks remain unallocated. Floor repairs passed independent correction review; parent pure-adapter repair passed, and constructor review identified repository-root path resolution to repair before adoption. None of this source preparation counts as new scientific targets. Existing idea154/think-yc80 owns any later selected joint comparison; exact V3 source remains pending under think-i1fr.
