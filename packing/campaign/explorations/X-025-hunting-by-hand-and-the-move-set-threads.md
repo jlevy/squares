@@ -675,6 +675,45 @@ repository and already listed in this document as the missing configuration dist
 the contact-graph signature, the angle-class census, the chunk taxonomy.
 Tracked as `think-dh4k`.
 
+### The basin measurement, which says structure narrows the target
+
+Run backwards from the answer, because a mechanism that cannot return to a record from
+nearby can never converge on one.
+Each setting starts at the retained packing, is kicked by growing amounts, and is scored
+by the largest kick it still comes back from.
+The container is given half a per cent of slack, without which the question is
+unaskable: a best-known packing is tight, so any kick overlaps its squares and at the
+record’s own side there is nowhere to put them, and every setting reports no basin
+including those that hold the record perfectly.
+
+| `n` | bare projection | faces declared | all contacts, band | all contacts, equality |
+| ---: | ---: | ---: | ---: | ---: |
+| 5 | **0.12** | 0.12 | 0.06 | 0.06 |
+| 10 | 0.01 | 0.01 | 0.01 | none |
+| 11 | **0.12** | none | 0.01 | none |
+| 17 | **0.06** | 0.03 | 0.01 | none |
+
+**The bare projection has the widest basin at every `n`, and declaring structure narrows
+it.** That is the opposite of the fixed-point reading, where all-contacts holds every
+record exactly and faces-only drifts off two of them.
+Holding an optimum and attracting to one are different properties, and this problem
+separates them cleanly: the constraint that pins the answer in place is the one that
+makes it hardest to fall into.
+
+Which means the structural-hint programme is now measured as counterproductive for
+search in three independent ways, and they agree.
+Search success falls monotonically as contacts are declared.
+The reachable side gets worse: a plain grid ratchet reaches `3.9484` at `n = 11` while
+the same ratchet with faces declared never leaves `4.0`. And the basin narrows.
+The one place structure earns its keep is *construction* -- building the face groups
+rather than declaring them lifts a cold solve from 1 run in 8 to 5 in 8 at a loose side
+-- which is a statement about where a run starts, not about what it is told to hold.
+
+**Equality has no basin anywhere above `n = 5`**, which independently confirms the
+repelling result and settles the band question.
+A constraint set that meets the answer non-transversally does not merely fail to
+attract; it pushes away.
+
 ## A Catalogue of Candidate Hypotheses
 
 These are candidates.
