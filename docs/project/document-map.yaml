@@ -35,6 +35,7 @@ documents:
   - {path: packing/benchmarks/math-startup/ideas.md, role: plan, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/math-startup/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-structural-sites-and-the-depth-one-certificate.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t-theory-cuts-and-routes.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-reader-191-50.md, role: research-report, authority: record, lifecycle: retained}
