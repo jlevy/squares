@@ -1,0 +1,274 @@
+#!/usr/bin/env python3
+"""Serialize the dual side of the `10.42` bracket that symmetric_max.py only printed.
+
+symmetric_max.py builds the D4-tied fixed-support maximum, rationalises the LP duals
+upward and reports `exact dual bound ... on N priced rows; A^T u >= cost holds: True`.
+It prints that line and throws the rows away.  This script rebuilds the identical
+program -- same support, same depth rows, same 2,566 atom rows, same seeded atoms, same
+rationalisation -- and writes the dual out: every priced row with its identity, its
+budget, its exact multiplier, the support orbits it bounds and with what coefficient,
+the resulting bound, and the per-column `A^T u >= cost` verification in Fractions.
+
+The scope is written into the receipt as well as the numbers.  The program's rows are a
+selected finite set -- depth at most one at the structural sites, the atom orbits, the
+seeded atoms -- so a family feasible for all of them is feasible for THIS program and
+not for the depth-one program, whose reader refuses this one.  `--reader FILE` names the
+plateau reader's verdict on the same family and copies its refusal into the receipt.
+
+Usage mirrors symmetric_max.py:
+    dual_bracket.py DEEP_REGION ATOMS FAMILY OUT [--reader READER_JSON] [SEED_ATOM ...]
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction as F
+from pathlib import Path
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gen_sites import Fam
+from sqpack.fractional.threshold import ThresholdAtom
+
+argv = list(sys.argv)
+reader_path = None
+if "--reader" in argv:
+    i = argv.index("--reader"); reader_path = argv[i + 1]; del argv[i:i + 2]
+sys.argv = argv
+
+raw = json.load(open(sys.argv[1]))
+pts = sorted({(F(a), F(b)) for orb in raw["sites_out"] for a, b in orb})
+meta = json.loads(Path(sys.argv[2]).read_text()); NEW = F(meta["outer_side"])
+famrec = json.loads(Path(sys.argv[3]).read_text())
+f = Fam(Path(sys.argv[3])); m = len(f.pl)
+L = f.L
+
+def mirror_ht(t: F) -> F:
+    return (1 - t) / (1 + t)
+
+def images(t: F, cx: F, cy: F) -> list[tuple[F, F, F]]:
+    """The eight container symmetries acting on a placement, as (half_tangent, cx, cy)."""
+    out = []
+    for ht, x, y in ((t, cx, cy), (mirror_ht(t), L - cx, cy)):
+        a, b = x, y
+        for _ in range(4):
+            out.append((ht, a, b)); a, b = L - b, a
+    return out
+
+key = {(p.half_tangent, p.centre_x, p.centre_y): i for i, p in enumerate(f.pl)}
+seen = set(); groups: list[list[int]] = []
+for i, p in enumerate(f.pl):
+    if i in seen:
+        continue
+    grp = set()
+    for im in images(p.half_tangent, p.centre_x, p.centre_y):
+        assert im in key, f"support is not D4-closed: {im} missing"
+        grp.add(key[im])
+    seen |= grp; groups.append(sorted(grp))
+print(f"support {m} placements in {len(groups)} D4 orbits, sizes {sorted({len(g) for g in groups})}", flush=True)
+
+def membership(points):
+    out = np.zeros((len(points), m), dtype=bool); namb = 0
+    step = max(1, 4_000_000 // max(1, m))
+    for lo in range(0, len(points), step):
+        ch = points[lo:lo + step]
+        px = np.array([float(a) for a, _ in ch]); py = np.array([float(b) for _, b in ch])
+        s1 = np.abs(px[:, None] * f.ax[None, :] + py[:, None] * f.ay[None, :] - f.u[None, :]) - f.h[None, :]
+        s2 = np.abs(px[:, None] * f.bx[None, :] + py[:, None] * f.by[None, :] - f.v[None, :]) - f.h[None, :]
+        ins = (s1 <= 0) & (s2 <= 0); amb = (np.abs(s1) < 1e-9) | (np.abs(s2) < 1e-9)
+        ai, aj = np.nonzero(amb); namb += len(ai)
+        for i, j in zip(ai.tolist(), aj.tolist()):
+            ins[i, j] = f.pl[j].contains(*ch[i])
+        out[lo:lo + len(ch)] = ins
+    return out, namb
+
+t0 = time.perf_counter()
+D, n1 = membership(pts)
+apts: list[tuple[F, F]] = []; index: dict = {}; orb_pts = []; ks = []; sizes = []
+for e in meta["atoms"]:
+    atom = ThresholdAtom(tuple((F(a), F(b)) for a, b in e["points"]), e["threshold"], F(1))
+    imgs = []
+    for im in atom.orbit(NEW):
+        tri = []
+        for q in im.points:
+            if q not in index:
+                index[q] = len(apts); apts.append(q)
+            tri.append(index[q])
+        imgs.append(tuple(tri))
+    orb_pts.append(imgs); ks.append(e["threshold"]); sizes.append(len(imgs))
+Ap, n2 = membership(apts)
+G = np.zeros((m, len(groups)))
+for gi, g in enumerate(groups):
+    for j in g:
+        G[j, gi] = 1.0
+Ad = (D.astype(float) @ G)
+keep = Ad.sum(axis=1) > 0
+Ad = Ad[keep]
+sites_kept = [pt for pt, k in zip(pts, keep.tolist()) if k]
+arows = np.zeros((len(orb_pts), m))
+for oi, imgs in enumerate(orb_pts):
+    acc = np.zeros(m)
+    for tri in imgs:
+        acc += (Ap[list(tri), :].sum(axis=0) >= ks[oi]).astype(float)
+    arows[oi] = acc
+Aa = arows @ G
+bud = np.array([sizes[oi] * (3 // ks[oi]) for oi in range(len(orb_pts))], dtype=float)
+k2 = Aa.sum(axis=1) > 0
+atoms_kept = [oi for oi, k in enumerate(k2.tolist()) if k]
+extra_rows = []; extra_bud = []; extra_src = []
+for extra in sys.argv[5:]:
+    ent = json.loads(Path(extra).read_text())
+    at = ThresholdAtom(tuple((F(q["x"]), F(q["y"])) for q in ent["points"]), int(ent["threshold"]), F(1))
+    allp = []; idx = []
+    for im in at.orbit(NEW):
+        idx.append(list(range(len(allp), len(allp) + len(im.points)))); allp.extend(im.points)
+    M, _ = membership(allp)
+    acc = np.zeros(m)
+    for tri in idx:
+        acc += (M[tri, :].sum(axis=0) >= at.threshold).astype(float)
+    extra_rows.append(acc @ G)
+    extra_bud.append(float(len(at.orbit(NEW)) * (len(at.points) // at.threshold)))
+    extra_src.append((Path(extra).name, at, ent))
+    print(f"seeded atom from {Path(extra).name}: |S| = {len(at.points)}, k = {at.threshold}, orbit {len(at.orbit(NEW))}, budget {extra_bud[-1]:.0f}", flush=True)
+A = np.vstack([Ad, Aa[k2]] + ([np.array(extra_rows)] if extra_rows else []))
+b = np.concatenate([np.ones(Ad.shape[0]), bud[k2]] + ([np.array(extra_bud)] if extra_bud else []))
+c = -np.array([float(len(g)) for g in groups])
+res = linprog(c, A_ub=sparse.csr_matrix(A), b_ub=b, bounds=(0, None), method="highs")
+print(f"float optimum {-res.fun:.9f}  ({n1 + n2} memberships decided exactly, {time.perf_counter()-t0:.1f}s)", flush=True)
+zq = [max(F(0), F(int(np.floor(v * 10**9)), 10**9)) for v in res.x]
+worst_d = F(0); worst_a = F(0); ok = True
+for r in range(A.shape[0]):
+    s = sum((F(int(A[r, gi])) * zq[gi] for gi in range(len(groups)) if A[r, gi]), start=F(0))
+    lim = F(int(b[r]))
+    if r < Ad.shape[0]:
+        worst_d = max(worst_d, s)
+    else:
+        worst_a = max(worst_a, s / lim)
+    if s > lim:
+        ok = False
+tot = sum((F(len(groups[gi])) * zq[gi] for gi in range(len(groups))), start=F(0))
+print(f"exact symmetric total {tot} = {float(tot):.9f}; max depth row {worst_d}; max atom ratio {float(worst_a):.9f}; feasible {ok}")
+# exact upper bound: rationalise the LP duals upward and check A^T u >= cost in Fractions
+u = -np.asarray(res.ineqlin.marginals)
+nz = np.nonzero(u > 1e-12)[0]
+uq = {int(r): F(int(np.ceil(u[r] * 10**9)) + 1, 10**9) for r in nz.tolist()}
+n_depth = Ad.shape[0]; n_atom = int(k2.sum())
+
+
+def row_identity(r: int) -> dict:
+    """What LP row `r` is, exactly: a depth row at a site, an atom row, or a seeded atom."""
+    if r < n_depth:
+        x, y = sites_kept[r]
+        return {"kind": "depth-at-site", "site": [str(x), str(y)],
+                "note": "depth at most one at this structural site"}
+    if r < n_depth + n_atom:
+        oi = atoms_kept[r - n_depth]; e = meta["atoms"][oi]
+        return {"kind": "atom-orbit", "atom_index": oi, "threshold": e["threshold"],
+                "orbit_size": sizes[oi], "points": [[str(F(a)), str(F(b))] for a, b in e["points"]],
+                "note": "one of the LP's 2,566 threshold-atom orbits"}
+    name, at, ent = extra_src[r - n_depth - n_atom]
+    return {"kind": "seeded-atom-orbit", "source": name, "family": ent.get("family", ""),
+            "threshold": at.threshold, "orbit_size": len(at.orbit(NEW)),
+            "floor_charge_on_the_certificate": ent.get("floor_charge", ""),
+            "points": [[str(q[0]), str(q[1])] for q in at.points],
+            "note": "separated by the plateau reader in the atom loop of the lane's section 10"}
+
+
+priced = []
+for r in sorted(uq):
+    cols = [[gi, str(F(int(A[r, gi])))] for gi in range(len(groups)) if A[r, gi]]
+    priced.append({"row": r, "multiplier": str(uq[r]), "multiplier_float": float(uq[r]),
+                   "budget": str(F(int(b[r]))), "contribution": str(F(int(b[r])) * uq[r]),
+                   "bounds_support_orbits": cols, "identity": row_identity(r)})
+columns = []
+colcheck = True
+for gi in range(len(groups)):
+    acc = sum((F(int(A[r, gi])) * uq[r] for r in uq if A[r, gi]), start=F(0))
+    costq = F(len(groups[gi]))
+    if acc < costq:
+        colcheck = False
+    rep = f.pl[groups[gi][0]]
+    columns.append({"orbit": gi, "orbit_size": len(groups[gi]), "cost": str(costq),
+                    "A_transpose_u": str(acc), "slack": str(acc - costq), "holds": acc >= costq,
+                    "representative": {"half_tangent": str(rep.half_tangent),
+                                       "centre_x": str(rep.centre_x), "centre_y": str(rep.centre_y),
+                                       "side": str(rep.side)}})
+ub = sum((F(int(b[r])) * uq[r] for r in uq), start=F(0))
+print(f"exact dual bound {ub} = {float(ub):.9f} on {len(uq)} priced rows; A^T u >= cost holds: {colcheck}"
+      + ("  -- so the maximum is bracketed exactly" if colcheck else "  -- dual check FAILED, bound not exact"))
+RETAINED = Path("/home/user/squares/packing/campaign/series/series-000-smoke-and-calibration"
+                "/results/agenda-034")
+REPO = Path("/home/user/squares")
+
+
+def retained_as(path: Path) -> str:
+    """The repository-relative path of the retained copy of `path`, matched by bytes."""
+    want = path.read_bytes()
+    for cand in sorted(RETAINED.glob("lane-a6-*")):
+        if cand.read_bytes() == want:
+            return str(cand.relative_to(REPO))
+    return f"not retained (scratch only): {path.name}"
+
+
+verdict = {"note": "no plateau-reader verdict was supplied to this run"}
+if reader_path is not None:
+    rd = json.loads(Path(reader_path).read_text())
+    fam_read = rd.get("family", {})
+    verdict = {
+        "tool": "devtools.plateau_reader",
+        "source": retained_as(Path(reader_path)),
+        "refused": rd.get("refused", ""),
+        "max_depth": fam_read.get("max_depth", ""),
+        "max_depth_float": float(F(fam_read["max_depth"])) if fam_read.get("max_depth") else None,
+        "arrangement_vertices": fam_read.get("vertices"),
+        "total_weight": fam_read.get("total_weight", ""),
+        "note": "the maximum depth over ALL arrangement vertices, which is what decides whether "
+                "the family is a point dual. It exceeds one, so this family is NOT feasible for "
+                "the depth-one program; the bracket below is a bracket of the fixed-support "
+                "program on its selected finite rows only.",
+    }
+    print(f"plateau reader on the same family: max depth {verdict['max_depth']}; refused: {verdict['refused']}")
+rec = {
+    "kind": "lane-a6/dual-bracket/v1",
+    "what": "the dual side of the 10.42 bracket of G13: the priced rows, their exact multipliers, "
+            "and the A^T u >= cost verification that makes the bound an upper bound",
+    "outer_side": str(L), "square_side": str(f.pl[0].side),
+    "support": {"placements": m, "d4_orbits": len(groups),
+                "source": Path(sys.argv[3]).name,
+                "note": "the fixed support of the 1/25-integral family at 153/40, weights tied over D4 orbits"},
+    "program": {"rows_total": int(A.shape[0]), "depth_rows": n_depth,
+                "atom_rows": n_atom, "seeded_atom_rows": len(extra_rows),
+                "columns": len(groups),
+                "objective": "maximise total placement weight over the tied support"},
+    "primal": {"exact_total": str(tot), "exact_total_float": float(tot),
+               "feasible_for_every_program_row": ok,
+               "feasible_for_every_program_row_note":
+                   "every row OF THIS PROGRAM -- the depth rows carried at the structural sites, "
+                   "the 2,566 atom orbits and the seeded atoms. It is NOT depth-one feasibility: "
+                   "see reader_verdict below.",
+               "max_depth_over_program_rows": str(worst_d),
+               "max_depth_over_program_rows_note":
+                   "the maximum over the program's depth rows, which are the structural sites "
+                   "only. It is not the maximum depth over all arrangement vertices; that is "
+                   "reader_verdict.max_depth, and it exceeds one.",
+               "max_atom_ratio_float": float(worst_a),
+               "family": retained_as(Path(sys.argv[4]).with_name("loop-family-3-recheck.json"))
+                         if Path(sys.argv[4]).with_name("loop-family-3-recheck.json").exists()
+                         else "not retained"},
+    "reader_verdict": verdict,
+    "dual": {"n_priced_rows": len(uq), "bound": str(ub), "bound_float": float(ub),
+             "rationalisation": "u_r = (ceil(u_float_r * 10^9) + 1) / 10^9, rounded up so the "
+                                "rationalised multipliers stay dual feasible",
+             "a_transpose_u_ge_cost": colcheck,
+             "priced_rows": priced, "columns": columns},
+    "bracket": {"lower_exact": str(tot), "upper_exact": str(ub),
+                "gap": str(ub - tot), "gap_float": float(ub - tot),
+                "brackets": "the maximum of the FIXED-SUPPORT program on its selected finite rows",
+                "note": "these two exact rationals bracket the fixed-support maximum on the rows "
+                        "listed under `program`. They do not bound the depth-one program: the "
+                        "family attaining the lower value has maximum depth above one over the "
+                        "arrangement vertices, so it is not a feasible point dual."},
+    "provenance": {"tool": "dual_bracket.py: symmetric_max.py's dual, serialized",
+                   "seeds": [Path(p).name for p in sys.argv[5:]]},
+}
+Path(sys.argv[4]).write_text(json.dumps(rec, indent=1))
+print(f"wrote {len(uq)} priced rows to {sys.argv[4]}")
