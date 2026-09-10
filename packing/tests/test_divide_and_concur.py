@@ -21,7 +21,8 @@ from devtools.divide_and_concur import (
     project_pairs,
     violation,
 )
-from devtools.run_projection_ratchet import Problem, solve
+from devtools.known_structure import record
+from devtools.run_projection_ratchet import Problem, guide_home, match_targets, solve
 
 
 def _poses(
@@ -176,3 +177,43 @@ def test_shared_orientation_is_a_projection_not_a_pull() -> None:
     assert abs(poses[0, 2] - poses[1, 2]) < 1e-12
     assert abs(poses[2, 2] - poses[3, 2]) < 1e-12
     assert abs(poses[0, 2] - poses[2, 2]) > 1e-3, "distinct classes stay distinct"
+
+
+def test_a_guided_landing_is_collision_free_when_the_targets_are_matched() -> None:
+    """Assigning targets by least motion is what makes a guided transition clean.
+
+    Squares have no identity across two arrangements, so an unmatched target list sends
+    each one to some other square's place and they walk through each other to swap. This
+    asserts the fix over the sharpest case available: both ends are the *same* packing under
+    a relabelling, so any overlap at all is the correspondence and nothing else.
+    """
+    target, side = record(11)
+    shuffled = target[np.random.default_rng(0).permutation(len(target))]
+    ia, ib = np.triu_indices(len(target), 1)
+
+    def worst(poses: np.ndarray) -> float:
+        v = corners_of(poses)
+        return float(-pair_separation(v[ia], v[ib]).min())
+
+    # The run lands in the MATCHED order, which is the whole point of matching -- comparing
+    # it against the original ordering measures the permutation, not the landing.
+    matched = match_targets(shuffled, target)
+    landed, frames = guide_home(len(target), side, shuffled, matched, steps=300, trace=[])
+    assert max(worst(f) for f in frames) < 1e-6, "a matched transition never overlaps"
+    assert float(np.abs(landed[:, :2] - matched[:, :2]).max()) < 1e-3
+
+
+def test_a_guided_landing_reports_where_it_actually_got() -> None:
+    """The last frame is what the run reached, never the target pasted on.
+
+    Appending the target would hide any gap and put a jump at the end of every animation.
+    A phase that does not arrive has to be able to say so.
+    """
+    target, side = record(11)
+    away = target.copy()
+    away[:, :2] = side / 2
+    landed, frames = guide_home(
+        len(target), side, away, target, steps=6, pull_to=0.01, trace=[]
+    )
+    assert np.allclose(landed, frames[-1])
+    assert not np.allclose(landed, target), "six steps at a whisper cannot have arrived"

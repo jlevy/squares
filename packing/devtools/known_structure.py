@@ -35,19 +35,31 @@ WITNESSES = ROOT / "witnesses/known-best"
 
 
 def record(n: int) -> tuple[Array, float]:
-    """The retained best-known packing for `n`, as poses and a side."""
+    """The retained best-known packing for `n`, as poses and a side.
+
+    Witnesses come in two representations and both are in the atlas: `center-angle`, and
+    `corners` for the cases whose coordinates are rational and whose squares are all
+    axis-aligned. A reader that handles only the first silently works for `n = 11` and
+    `n = 17` and raises a `KeyError` on `n = 12`.
+    """
     payload = safe_load((WITNESSES / f"n-{n:03d}.yaml").read_text(encoding="utf-8"))["witness"]
-    poses = np.array(
-        [
+    rows = []
+    for s in payload["squares"]:
+        if "center" in s:
+            rows.append(
+                [float(s["center"][0]), float(s["center"][1]), math.radians(float(s["angle"]))]
+            )
+            continue
+        pts = np.array([[float(a), float(b)] for a, b in s["corners"]])
+        edge = pts[1] - pts[0]
+        rows.append(
             [
-                float(s["center"][0]),
-                float(s["center"][1]),
-                math.radians(float(s["angle"])),
+                float(pts.mean(axis=0)[0]),
+                float(pts.mean(axis=0)[1]),
+                math.atan2(edge[1], edge[0]),
             ]
-            for s in payload["squares"]
-        ]
-    )
-    return poses, float(payload["side"])
+        )
+    return np.array(rows), float(payload["side"])
 
 
 def contact_edges(poses: Array, tol: float = 1e-9) -> list[tuple[int, int]]:

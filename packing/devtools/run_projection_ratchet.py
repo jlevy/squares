@@ -32,6 +32,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+from scipy.optimize import linear_sum_assignment
 
 from devtools.divide_and_concur import (
     Array,
@@ -75,6 +76,8 @@ class Problem:
     band: float = 0.02
     contact_weight: float = 1.0
     walls: list[int] | None = None
+    targets: Array | None = None
+    target_weight: float = 0.0
     ra: Index = field(init=False)
     rb: Index = field(init=False)
     rw: Index = field(init=False)
@@ -87,14 +90,20 @@ class Problem:
         self.ra = np.arange(m, dtype=np.intp)
         self.rb = np.arange(m, 2 * m, dtype=np.intp)
         self.rw = np.arange(2 * m, 2 * m + self.n, dtype=np.intp)
+        # One more replica per square when a phase is driving the arrangement home: the
+        # constraint "this square is at that pose" is a single point, so its projection is
+        # the target itself and its weight is how hard it pulls.
+        self.rt = np.arange(2 * m + self.n, 2 * m + 2 * self.n, dtype=np.intp)
         self.owner = np.concatenate(
             [
                 np.array([p[0] for p in pairs], dtype=np.intp),
                 np.array([p[1] for p in pairs], dtype=np.intp),
                 np.arange(self.n, dtype=np.intp),
+                np.arange(self.n, dtype=np.intp),
             ]
         )
-        self.weight = np.ones(2 * m + self.n)
+        self.weight = np.ones(2 * m + 2 * self.n)
+        self.weight[self.rt] = self.target_weight
         # Which pair constraints are equalities. A contact graph does not enter this
         # search as a preference to be weighed against the others; it changes what the
         # constraint *is*, from "do not overlap" to "touch". That is the whole difference
@@ -147,6 +156,7 @@ class Problem:
                 x[self.ra[k]], x[self.rb[k]], self.band
             )
         out[self.rw] = np.clip(x[self.rw], 0.0, self.side)
+        out[self.rt] = corners_of(self.targets) if self.targets is not None else x[self.rt]
         if self.walls:
             w = np.array(self.walls, dtype=np.intp)
             out[self.rw[w]] = project_wall_contact(
@@ -326,10 +336,44 @@ def ratchet(
     # the whole point of a schedule: the tight phase's arrangement is the only thing known
     # to be near-right, and starting over would discard it.
     side = float(start_side if start_side is not None else math.ceil(math.sqrt(n)))
-    best = _grid(n, side) if start_from is None else start_from
-    if violation(best, side) > 1e-12:
-        msg = f"the grid at side {side} is not feasible for n = {n}"
-        raise AssertionError(msg)
+    if start_from is None:
+        best = _grid(n, side)
+        if violation(best, side) > 1e-12:
+            msg = f"the grid at side {side} is not feasible for n = {n}"
+            raise AssertionError(msg)
+    else:
+        # A supplied start need not be a packing -- a freshly built assembly places its
+        # blocks at arbitrary anchors and they overlap -- so it is settled here before the
+        # schedule begins. The ratchet's contract is that every side it reports is one at
+        # which it held a packing, and it can only keep that by starting from one.
+        best = start_from
+        if violation(best, side) > 1e-12:
+            first = solve(
+                n,
+                side,
+                rng,
+                beta=beta,
+                alpha=alpha,
+                iters=iters,
+                monotone=monotone,
+                band=band,
+                contact_weight=contact_weight,
+                classes=classes,
+                contacts=contacts,
+                walls=walls,
+                start=start_from,
+            )
+            if not first.solved:
+                return {
+                    "n": n,
+                    "side": side,
+                    "poses": start_from.tolist(),
+                    "violation": first.violation,
+                    "calls": 1,
+                    "history": [(side, False)],
+                    "settled": False,
+                }
+            best = first.poses
 
     delta = 0.05 * side
     history: list[tuple[float, bool]] = []
@@ -385,6 +429,7 @@ def ratchet(
         "violation": violation(best, side),
         "calls": calls,
         "history": history,
+        "settled": True,
     }
 
 
@@ -570,3 +615,94 @@ def phased(
         "phase_one_side": float(first["side"]),
         "phase_two_side": float(second["side"]),
     }
+
+
+def guide_home(
+    n: int,
+    side: float,
+    start: Array,
+    targets: Array,
+    *,
+    steps: int = 320,
+    beta: float = 0.3,
+    pull_to: float = 40.0,
+    trace: list[Array] | None = None,
+    trace_every: int = 4,
+) -> tuple[Array, list[Array]]:
+    """Drive an arrangement onto a chosen target, smoothly, and land on it exactly.
+
+    **This is production machinery for the animation, not evidence, and nothing it emits
+    is a search result.** A run that ends on a retained packing ended there because it was
+    pulled there. Every frame it produces has to be labelled as guided, and no side it
+    reaches may be reported as something a search found -- the whole point of the projection
+    work is that a reported side is one a search actually held.
+
+    What it is for is the case the video plan needs: a transition that is smooth,
+    controllable and always arrives, so a sweep across the atlas lands each packing exactly
+    rather than approximately.
+
+    The mechanism is the one already here rather than a new one. "This square is at that
+    pose" is a constraint whose set is a single point, so its projection is the target
+    itself. What moves over the phase is the target, eased from where each square starts to
+    where it must end, while the pair and wall projections run alongside -- so squares slide
+    around each other instead of through each other, which a straight interpolation of poses
+    would not do, and every frame is a small step from the last.
+
+    Rotation takes the short way round: a square is unchanged by a quarter turn, so the
+    interpolated angle follows the smallest such turn rather than unwinding the long way.
+    """
+    p = Problem(n, side, targets=start.copy(), target_weight=pull_to)
+    x = corners_of(start)[p.owner].copy()
+    frames: list[Array] = []
+    turn = np.mod(targets[:, 2] - start[:, 2] + np.pi / 4, np.pi / 2) - np.pi / 4
+
+    for step in range(1, steps + 1):
+        # The target MOVES rather than the pull strengthening. Ramping a weight lets the
+        # target go from ignorable to dominant, and the arrangement snaps across when it
+        # crosses over -- measured at a 1.16-unit jump in a single frame on the 10-to-11
+        # sweep, with squares passing through each other on 18 frames of 81. Interpolating
+        # the target instead means every frame is a small step from the last, and the pair
+        # projections have somewhere to push while it moves.
+        u = step / steps
+        ease = u * u * (3 - 2 * u)
+        p.targets = np.column_stack(
+            [
+                start[:, 0] + ease * (targets[:, 0] - start[:, 0]),
+                start[:, 1] + ease * (targets[:, 1] - start[:, 1]),
+                start[:, 2] + ease * turn,
+            ]
+        )
+        xa = p.concur(x)
+        x = x + beta * (p.divide(2 * xa - x) - xa)
+        if trace is not None and step % trace_every == 0:
+            frames.append(p.poses(x))
+
+    # The arrangement the simulation actually reached, not the target. Appending the
+    # target as a final frame would hide whatever gap remained and put a jump at the end of
+    # every animation; a phase that does not arrive should say so.
+    landed = p.poses(x)
+    frames.append(landed)
+    if trace is not None:
+        trace.extend(frames)
+    return landed, frames
+
+
+def match_targets(start: Array, targets: Array) -> Array:
+    """Assign each square the target it should travel to, by least total motion.
+
+    Without this the guided phase is unusable, and the reason is not the physics. Squares
+    have no identity across two arrangements, so a target list in arbitrary order sends
+    every square to some other square's place: measured with *both ends the same `n = 11`
+    packing* under a random relabelling -- two perfect packings, zero overlap at either end
+    -- the transition still peaked at 1.077 of a unit side and overlapped on 86 frames of
+    101. The squares were walking through each other to swap places.
+
+    A rectangular assignment on squared centre distance removes that, since the identity a
+    square is given is exactly the choice of which one it has to be. The v2 transition
+    spike reached the same conclusion from the other side: matching square by square makes a
+    tilted block returning to grid rows into a conveyor of one-unit hops, and matching
+    blocks first puts ninety per cent of moving squares into rigid groups.
+    """
+    cost = np.sum((start[:, None, :2] - targets[None, :, :2]) ** 2, axis=-1)
+    _rows, cols = linear_sum_assignment(cost)
+    return targets[cols]
