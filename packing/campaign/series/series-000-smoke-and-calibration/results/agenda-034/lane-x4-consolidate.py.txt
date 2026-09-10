@@ -1,0 +1,131 @@
+"""Consolidate: the pose-level obstruction, and every retained survivor family."""
+from __future__ import annotations
+
+import json
+import math
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+SCRATCH = "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/sixteen-sectors"
+sys.path.insert(0, SCRATCH)
+
+import nbins
+from devtools.owner_footprints import (
+    convex_polygon_intersection, convex_polygon_contains_polygon,
+    endpoint_footprint as tracked_endpoint, owner_branch_manifest,
+    polygon_area_twice, signed_axis_rays,
+)
+from devtools.screen_corner_dual_salvage import _contained, _orientation_axis, strict_separation
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+t0 = time.perf_counter()
+REPO = Path("/home/user/squares")
+SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
+              "ceiling-family-191-50.json")
+record = json.loads(SRC.read_text())
+family = CeilingCertificate.from_record(transport(record, Fraction(1), side=Fraction(96, 25)))
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+axes = frozenset((d.ux, d.uy) for d in directions) | frozenset((d.vx, d.vy) for d in directions)
+MARKS = {o.mark_id: o.mark for o in manifest.classes}
+rays = signed_axis_rays(directions)
+
+
+def ccw(p):
+    return tuple(reversed(p)) if polygon_area_twice(p) < 0 else p
+
+
+def surv_sat(poly):
+    out = [(i, p.weight) for i, p in enumerate(family.placements)
+           if strict_separation(p.corners(), poly) is not None]
+    return sum((w for _, w in out), Fraction(0)), [i for i, _ in out]
+
+
+def surv_clip(poly):
+    c = ccw(poly)
+    out = [(i, p.weight) for i, p in enumerate(family.placements)
+           if not convex_polygon_intersection(ccw(p.corners()), c)]
+    return sum((w for _, w in out), Fraction(0)), [i for i, _ in out]
+
+
+print("=== the two pose-level obstructions: family members #59 and #60 as owner cores ===")
+for idx in (59, 60):
+    p = family.placements[idx]
+    core = p.corners()
+    ws, ss = surv_sat(core)
+    wc, sc = surv_clip(core)
+    holds = {k: strict_separation(core, (m,)) is None for k, m in MARKS.items()}
+    print(f"  #{idx}: half_tangent {p.half_tangent}, centre "
+          f"({float(p.centre_x):.6f}, {float(p.centre_y):.6f}), weight {p.weight}")
+    print(f"       inside container {_contained(p, family.outer_side)}, "
+          f"net orientation retained {_orientation_axis(p) in axes}, contains marks {holds}")
+    print(f"       survivor weight after deleting everything meeting it: "
+          f"SAT {ws}, clipping {wc}, sets identical {ss == sc}")
+
+print("\n=== does the neutral arc contain a whole 16-bin? ===")
+for mark_id in ("m1", "m2"):
+    mark = MARKS[mark_id]
+    neutral = [r for r in rays if surv_sat(nbins.anchored_quarter_core(mark, r))[0] == Fraction(10)]
+    nset = set(neutral)
+    for bins in (8, 16, 32, 64, 128):
+        hit = [j for j in range(bins)
+               if any(nbins.sector_contains(j, r, 16) if bins == 16 else True for r in [])]
+        # count bins that contain at least one neutral ray, using exact membership at 8/16
+        if bins in (8, 16):
+            hit = [j for j in range(bins)
+                   if any(nbins.sector_contains(j, r, bins) for r in neutral)]
+            weights = []
+            for j in hit:
+                F = nbins.endpoint_footprint(mark, j, directions, bins)
+                weights.append((j, surv_sat(F)[0]))
+            print(f"  mark {mark_id}, {bins} bins: bins meeting the neutral arc {hit}; "
+                  f"their exact survivor weights {[(j, str(w)) for j, w in weights]}")
+
+# ---------------------------------------------------------------- artefacts
+print("\n=== writing survivor families ===")
+out = {"regime": {"side": "96/25", "square_side": str(family.square_side),
+                  "source": "ceiling-family-191-50.json transported at scale 1, shift 1/100",
+                  "placements": len(family.placements), "total_weight": str(family.total_weight)},
+       "families": {}}
+
+
+def dump(key, poly, extra=None):
+    w, s = surv_sat(poly)
+    wc, sc = surv_clip(poly)
+    out["families"][key] = {
+        "footprint": [[str(x), str(y)] for x, y in poly],
+        "survivor_weight_sat": str(w), "survivor_weight_clipping": str(wc),
+        "cross_check_identical": s == sc, "survivor_count": len(s),
+        "survivor_indices": s,
+        "survivor_weights": [str(family.placements[i].weight) for i in s],
+        **(extra or {}),
+    }
+    return w
+
+
+for mark_id in ("m1", "m2"):
+    mark = MARKS[mark_id]
+    for j in (3, 4):
+        dump(f"8bins/{mark_id}/j{j}", tracked_endpoint(mark, j, directions), {"bins": 8, "sector": j})
+    for j in range(16):
+        dump(f"16bins/{mark_id}/J{j}", nbins.endpoint_footprint(mark, j, directions, 16),
+             {"bins": 16, "sector": j})
+    neutral = [r for r in rays if surv_sat(nbins.anchored_quarter_core(mark, r))[0] == Fraction(10)]
+    out["families"][f"limit/{mark_id}/neutral_rays"] = {
+        "count": len(neutral),
+        "rays": [[str(x), str(y)] for x, y in neutral],
+        "angles_deg_float": [math.degrees(math.atan2(float(y), float(x))) % 360.0 for x, y in neutral],
+        "each_has_survivor_weight": "10",
+    }
+    dump(f"limit/{mark_id}/Q_first_neutral_ray", nbins.anchored_quarter_core(mark, neutral[0]))
+    dump(f"limit/{mark_id}/Q_last_neutral_ray", nbins.anchored_quarter_core(mark, neutral[-1]))
+
+for idx in (59, 60):
+    dump(f"pose/core{idx}", ccw(family.placements[idx].corners()), {"family_member": idx})
+
+Path(SCRATCH, "survivor-families.json").write_text(json.dumps(out, indent=1) + "\n")
+print(f"  wrote survivor-families.json with {len(out['families'])} families")
+print(f"\nwall time {time.perf_counter() - t0:.2f} s")

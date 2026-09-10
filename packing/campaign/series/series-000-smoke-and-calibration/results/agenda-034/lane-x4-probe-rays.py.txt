@@ -1,0 +1,34 @@
+"""Probe the angular distribution of the retained signed axis rays."""
+from __future__ import annotations
+
+import math
+from fractions import Fraction
+
+from devtools.owner_footprints import (
+    full_owner_direction_manifest,
+    signed_axis_rays,
+    sector_endpoint_rays,
+)
+
+man = full_owner_direction_manifest()
+dirs = man.directions
+print("folded_count", man.folded_count, "full_count", man.full_count)
+axes = [(d.ux, d.uy) for d in dirs]
+angs = sorted(math.degrees(math.atan2(float(y), float(x))) for x, y in axes)
+print("canonical axis angle range: %.6f .. %.6f  (n=%d)" % (angs[0], angs[-1], len(angs)))
+gaps = [b - a for a, b in zip(angs, angs[1:])]
+print("max canonical gap %.6f deg, min %.6f deg" % (max(gaps), min(gaps)))
+
+rays = signed_axis_rays(dirs)
+print("signed ray count", len(rays))
+rangs = sorted(math.degrees(math.atan2(float(y), float(x))) % 360.0 for x, y in rays)
+rgaps = [b - a for a, b in zip(rangs, rangs[1:])] + [rangs[0] + 360.0 - rangs[-1]]
+print("signed ray angle range %.6f .. %.6f, max gap %.6f" % (rangs[0], rangs[-1], max(rgaps)))
+
+for j in range(8):
+    first, last = sector_endpoint_rays(j, dirs)
+    fa = math.degrees(math.atan2(float(first[1]), float(first[0]))) % 360.0
+    la = math.degrees(math.atan2(float(last[1]), float(last[0]))) % 360.0
+    if la < fa:
+        la += 360.0
+    print(f"  8-sector j{j}: nominal [{j*45},{(j+1)*45}]  first {fa:9.5f}  last {la:9.5f}  delta {la-fa:8.5f}")
