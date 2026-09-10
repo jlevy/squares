@@ -741,10 +741,11 @@ that commit and resolves on GitHub, and that the PDF is a PDF.
 **The stamp in the credits has two parts, and they move on different clocks.** The
 current version and publication date come from the first entry in `PUBLICATION_HISTORY`
 in `src/sqpack/release.py`; the page renders the two retained history entries from that
-same source. Each history date means the date on which its version label first appeared
-in Git. The hash after the version is the commit the page is built from, read at render
-time (`page_edition()`), so it changes on every push, and a reader of the deployed page
-sees exactly which commit they are looking at.
+same source. Each history date records when that label first appeared in Git as an
+edition of this publication.
+The hash after the version is the commit the page is built from, read at render time
+(`page_edition()`), so it changes on every push, and a reader of the deployed page sees
+exactly which commit they are looking at.
 The atlas footer and the generated claim documents are checked in and drift-checked byte
 for byte, so they carry the pinned `PUBLICATION_REVISION` instead (`PUBLICATION_EDITION`
 and `edition_file()`); the two spellings agree on the status and the version and differ

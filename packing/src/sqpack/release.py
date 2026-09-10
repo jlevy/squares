@@ -20,8 +20,8 @@ class PublicationHistoryEntry(NamedTuple):
 
 
 #: The two editions retained in the explainer's short public history, newest first.
-#: Dates say when the version label first appeared in Git, rather than when a theorem
-#: was proved or when the page was deployed.
+#: Dates say when each label first appeared in Git as an edition of this publication,
+#: rather than when a theorem was proved or when the page was deployed.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
         version="v0.4.0",
