@@ -5,8 +5,8 @@ title: "N11 overnight: reconcile the author's A6 and H157 source and findings"
 kind: task
 status: closed
 priority: 1
-version: 11
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 12
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies:
   - type: blocks
@@ -16,7 +16,7 @@ child_order_hints:
   - is-01m24wr371b7jr7hnd4xgh2z3h
   - is-01m24wr3myeyej3a2c9xpyt3rd
 created_at: 2026-09-10T04:58:03.236Z
-updated_at: 2026-09-10T07:19:33.972Z
+updated_at: 2026-09-10T16:04:24.010Z
 closed_at: 2026-09-10T07:19:33.971Z
 close_reason: Published author handoff through 6ed45816 is reconciled in 0c4c41b4 with completed independent A6 and H157 admissions, explicit lower/support/parent limitations, corrected canonical account and review, and the retained overnight plan. Source review children are closed. These findings are inherited pre-clock evidence; final full validation and merge remain under think-yl6y/think-zaqc.
 resolution: null

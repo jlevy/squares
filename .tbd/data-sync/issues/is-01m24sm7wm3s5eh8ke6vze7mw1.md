@@ -1,12 +1,12 @@
 ---
 type: is
 id: is-01m24sm7wm3s5eh8ke6vze7mw1
-title: "N11 overnight: three 3-hour research blocks after the combined merge"
+title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 14
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 21
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 child_order_hints:
@@ -17,67 +17,48 @@ child_order_hints:
   - is-01m24vex03yjx6wdsssw68r9kk
   - is-01m24vqhfhxy1q22z1a5610700
   - is-01m25431rvn37r4dha0sfrvzx7
+  - is-01m254zwprsb793zggehvgrfza
+  - is-01m25zrj5np9ywft00t8j8neaz
+  - is-01m260ytnzfgec3a8c0r6t3ngr
+  - is-01m260z2959dmcmn61pn2z7jsk
+  - is-01m260za5fe3ewrkns6y4ehjva
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T07:39:05.370Z
+updated_at: 2026-09-10T16:04:22.977Z
 ---
-The owner authorized unattended continuation after PR139 merges, in three sets of two to
-four hours.
-Allocate three consecutive three-hour blocks, with checkpoints at most thirty
-minutes apart. Keep the scientific clock separate from the planning and source
-preparation performed while the merge checks run.
+The interrupted consecutive overnight run has been replaced by independent daytime
+blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
+its own session clock, target contract, stop rule, terminal disposition, and checkpoint
+at most 30 minutes apart. Gaps between blocks consume no scientific budget.
 
-The prospective plan is now retained before the merge at
-docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md. The new agenda
-and session will be allocated on the fresh codex branch after the merge.
-Astra Max independently reviewed the strategy and the parent-bound formula; the
-strategy’s required corrections have been applied.
-Private agenda035 and session126 drafts are under /private/tmp/n11-overnight-scaffold/.
-Confirm identifiers against incoming author work before adoption.
-The owner also requested alignment with a V3 plan spec; think-i1fr tracks the pending
-request for its path or link.
-Do not claim that alignment before reading the actual spec.
+The active plan is
+docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md.
+The research branch is codex/n11-daytime-strategy from the PR139 merge
+3a18a05a6af75e3800612549d5a3c5fe419b96f2. Root owns shared records, integration,
+targets, and the research PR.
 
-The work map is:
+Ranked blocks are: necessary parent geometry on the saved exp151 escape; a changed
+threshold-atom/support comparison; a first-principles structural contact and
+owner-selection lemma; one changed core/net comparison; a conditional H155 threshold
+cover after gate admission; and H135 as a prepared mechanism reserve. The compact pair
+is used only if it changes the structural decision. No finite or incomplete negative is
+treated as a method-wide judgment.
 
-- think-4a8g: one admitted compact two-attainer test; depends on completed merge
-  finalization
-- think-lkvd: one fresh H135 paired-pricing allocation, preserving old exp134 as unrun;
-  depends on completed merge finalization
-- think-fx2y: parent-domain implementation and independent source admission, followed by
-  a separately registered fixed-escape comparison
-- think-g3j7: the K5 and K6 format/readers work; the new private Sol lane initially
-  delivers K6 and leaves uncompleted K5 mapping/admission open
-- think-a4an: reconcile and independently review the author’s retained A6 and H157/exp154 reports,
-  receipts, allocated IDs and active-process status
-- think-1ydi: reconstruct the W5 cadence and compare actual gate measurements under
-  their declared regimes
-- think-i1fr: map the V3 spec to this plan, agenda, beads and acceptance evidence once
-  its source is identified
-- Existing author idea154 and think-yc80: joint support/atom continuation, included in
-  the next comparison allocation without duplicating the task
+The analytic parent-domain review proves that the admitted 88-core point family at
+191/50 translates into the necessary parent domain for q >= 76469/20000 = 3.82345. A
+point-only parent-box optimization at 3.827 on the fixed B and retained net is therefore
+removed from the queue. Changed charges, larger cores, stronger compatibility domains,
+and conditional routing remain open.
 
-Block 1 resolves prepared mechanisms and admits the next tools.
-Block 2 selects the next comparison from actual source readiness, including incoming A6
-evidence if independently validated.
-Block 3 tries to retain a certificate or precisely scoped result, freezes sources by
-hour 7:30 for full validation, and closes every commitment with a result, dependency or
-successor. An unfinished check remains pending; no fourth research block is implied.
+A separate documentation epic and branch codex/n11-explainer-current-bound run in
+parallel. The explainer uses an incremental architecture: preserve T018 as the complete
+point-only worked example, state the current bracket near the top, and add one advanced
+T025/T026 section. It has its own draft PR and validation and does not consume research
+allowances.
 
-Root owns shared records, identifiers, integration, Git and PR updates.
-Sol high or extra high handles implementation and mechanical work; Astra extra high
-handles deep mathematics, and Astra Max handles consequential proof and strategy.
-Execution and validation sources remain immutable for their whole processes.
-Each target needs a published hypothesis, fixed inputs, controls, exact success and
-negative criteria, partial-result rules and a fixed budget.
-A stopped or incomplete calculation is not a method-wide negative.
-
-The existing thirty-minute heartbeat is active and carries this handoff.
-Publish the fresh PR with a separate research and cost scope.
-Preserve the current native-usage publication restriction, while retaining local costs
-and ordinary validation receipts.
-Use the owner’s Practical Prose skills for durable text and the project’s formatter and
-validation tiers.
+Use Sol high/xhigh for mechanical work, Astra xhigh for deep mathematics, and Astra Max
+for consequential strategy and proof review. Preserve the V3-source gap under
+think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-PR139 finalization is published at0c4c41b4. A6 point/all2566atom/seven-row-upper admission and H157 corrected geometry are complete; source beads think-aocp, think-9zc9 and think-a4an are closed. Current fast62 steps passed at synthetic merge9e6a40f7; deferred34449352932 is running with slow lane passed. Final think-yl6y and merge think-zaqc remain open. Private agenda035/session126 plus pair H158/exp155 and H135 exp156 drafts are prepared under /private/tmp/n11-overnight-scaffold/ but IDs and clocks remain unallocated. Floor repairs passed independent correction review; parent pure-adapter repair passed, and constructor review identified repository-root path resolution to repair before adoption. None of this source preparation counts as new scientific targets. Existing idea154/think-yc80 owns any later selected joint comparison; exact V3 source remains pending under think-i1fr.
+PR139 merged2026-09-10T08:10:02Z as3a18a05a; fresh branch codex/n11-overnight-parent-and-pricing starts from that merge and matches validated tree6842862. All73 checks passed before merge. Added separate documentation epic think-gv5a with decision think-b5b1, implementation think-zq4c, independent review think-0zc1; it does not consume or extend the three scientific blocks. Actual scientific clock is being rebound now because no target ran between merge and resumption.

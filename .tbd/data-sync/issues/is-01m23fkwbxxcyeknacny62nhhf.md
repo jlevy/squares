@@ -5,8 +5,8 @@ title: "Certificate format cannot express two atom classes: K5 clique and K6 flo
 kind: task
 status: in_progress
 priority: 1
-version: 12
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 13
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 child_order_hints:
@@ -14,7 +14,7 @@ child_order_hints:
   - is-01m25255yg6wqveyja558g7sys
   - is-01m254319zrn2ezbzsqnejdn72
 created_at: 2026-09-09T16:22:02.365Z
-updated_at: 2026-09-10T07:39:04.894Z
+updated_at: 2026-09-10T16:04:49.415Z
 ---
 Extend the certificate format and both covering routes to retain the weighted and floor charges already returned by the separator. Source: agenda034 lane A4 finding P10 and lane A5 F6. This is a representation and verification prerequisite, not evidence that the unconditional language or conditional route is exhausted.
 

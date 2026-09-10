@@ -3,9 +3,9 @@ type: is
 id: is-01m24nswnk9b76cq0hdgenfceq
 title: Finalize and merge the combined n11 milestone and consolidate takeaways
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 18
+version: 20
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies:
@@ -29,10 +29,14 @@ child_order_hints:
   - is-01m24pz58h8cybgv362apngbdn
   - is-01m24pz7cfbh7nxwa9mbv3xza3
 created_at: 2026-09-10T03:29:25.138Z
-updated_at: 2026-09-10T07:39:55.451Z
+updated_at: 2026-09-10T15:44:17.988Z
+closed_at: 2026-09-10T15:44:17.987Z
+close_reason: PR139 merged at3a18a05a with the exact reviewed head and passing tree; the fresh postmerge branch is active.
+resolution: null
+duplicate_of: null
 ---
 User authorizes merging the reviewed PR137/142/145/147 stack first, then root takeover of PR139 corrections and merge after independent review and matching full validation. Track six findings in review https://github.com/jlevy/squares/pull/139#pullrequestreview-5162420994. Root owns integration and shared records; Sol checks CI and mechanical integration; Astra Max checks consequential mathematical scope. Consolidate takeaways across all PRs into current evidence docs and PR139. Preserve historical claims with corrections, exact hypotheses and quantifiers, and open alternatives. No new scientific experiments. Keep the existing public native usage payload approval block intact.
 
 ## Notes
 
-Owner stack137/142/145/147 merged via GitHub native asynchronous stack merge at1c1db463; finalization branch8aae89e8 integrates main into139. Scope corrections reviewed PASS WITH SCOPE by Astra Max; Sol mechanical audit complete. Matching final139 full checkpoint still required after source freeze. User now authorizes unattended continuation aftermerge in three2–4h blocks; plannedthree3hblocks, AstraMaxstrategyinflight,30minheartbeatupdated. Keep finalization separate from newbranch research registration.
+PR139 marked ready and merged without bypass at2026-09-10T08:10:02Z. Actual merge3a18a05a6af75e3800612549d5a3c5fe419b96f2 has parents base1c1db463447cb08f8987d3355ba32a1c72ccd31a and reviewed head0c4c41b40a6200918b5954a07ccf9647dc8bca5c, and tree6842862342321038ff7437dcda9827feb2c9d102 exactly matches the passing synthetic checkpoint. PR body was updated with all73 unique checks,4978 tests and separate four macOS repeats while preserving the first3643-character author cost prefix. Fresh branch codex/n11-overnight-parent-and-pricing starts from the actual merge.
