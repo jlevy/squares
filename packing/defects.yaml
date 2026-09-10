@@ -16337,15 +16337,23 @@ defects:
     re-measured rather than asserted; the Pages job still pays for two.
 
     The failure line no longer asserts an unfinished page, because the waiting was measured
-    and cleared. Across seven wait configurations -- `SETTLED` dropped, the `math-ready`
-    wait dropped, motion emulated rather than reduced, the capture taken at
-    `domcontentloaded` -- 25 renders produced exactly two distinct documents, one per faces
-    state, and forty consecutive renders of the shipped configuration agreed byte for byte
-    at 843670 each. Losing `_FACES_APPLIED` is what that guarantee is made of: the same page
-    without it comes out at 1055021, a 211351-byte rewrite. So the cheapest unfinished page
-    this document has is five orders of magnitude above two bytes, and an
-    unnormalised clock is ruled out by the pass rate rather than by the log: the two renders
-    are about three seconds apart, so a clock would fail every run instead of one.
+    and cleared. In one container, forty consecutive renders of the shipped configuration
+    agreed byte for byte at 843670 each, and the same page with `_FACES_APPLIED` dropped came
+    out at 1055021 -- a 211351-byte rewrite rather than a near miss. An earlier sweep of seven
+    wait configurations -- `SETTLED` dropped, the `math-ready` wait dropped, motion emulated
+    rather than reduced, the capture taken at `domcontentloaded` -- produced exactly two
+    distinct documents across 25 renders, one per faces state; it was taken on the page as it
+    stood before main's content moved, so its byte figures do not describe today's page and
+    are not quoted here. So the cheapest unfinished page this document has is five orders of
+    magnitude above two bytes, and an unnormalised clock is ruled out by the pass rate rather
+    than by the log: the two renders are about three seconds apart, so a clock would fail
+    every run instead of one.
+
+    On the runner the change is green and its own figures say so, which is the measurement that
+    container cannot give: pull-request run 34522404509 drew 786125 bytes over 17 pages with 18
+    embedded faces, two renders agreeing, the receipt again exactly 94 bytes (786219 against
+    786125), and the print layout clean. That container draws the same page at 843670 over 18
+    pages. No figure here travels without the host it came from.
 
     One hazard of the class the old message named was found and closed while looking, though
     it is not this failure: in `devtools/templates/explainer-shell.html` the transition on

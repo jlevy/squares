@@ -16,10 +16,12 @@ CSS transition is caught mid-flight and the graphics state differs in the fourth
 decimal of an alpha. With all three, ten consecutive renders agreed byte for byte
 except for `/CreationDate` and `/ModDate`.
 
-Re-measured on 2026-09-10, the day the check first failed on main: forty consecutive
-renders of this page agreed byte for byte, 843670 each. The same page with the print faces
-never injected comes out at 1055021, so the cheapest unfinished page this document has is
-a 211351-byte rewrite rather than a near miss -- and that is also how to read a failure. A
+Re-measured on 2026-09-10, the day the check first failed on main. In one container, forty
+consecutive renders of this page agreed byte for byte, 843670 each; the same page with the
+print faces never injected comes out at 1055021, so the cheapest unfinished page this document
+has is a 211351-byte rewrite rather than a near miss. Neither figure travels -- the runner
+draws the same page at 786125 over 17 pages where that container draws 18 -- but the ratio is
+what matters, and it is also how to read a failure. A
 disagreement of a handful of bytes is not an unfinished page; it is a number that settled
 differently, and `--check` names the object it happened in. D-490 is the occurrence that
 asked, and `think-ptit` holds what is still unexplained about it.
@@ -129,8 +131,10 @@ _MARGIN_BOX_SAMPLE = "Aa Gg 0123"
 #: time: the atlas figure, 2333306 bytes of external SVG read over `file://`, and it is the
 #: one element here marked lazy.
 #:
-#: Measured, it changes nothing today: the image reports `complete` before this wait on
-#: every render taken, and the page comes out at 843670 bytes with the step and without it.
+#: Measured in one container, it changes nothing today: the image reports `complete` before
+#: this wait on every render taken there, and the page comes out at 843670 bytes with the step
+#: and without it. That is not a claim about the runner, whose fonts and disk differ, and it is
+#: why this is insurance rather than a fix.
 #: It is here for the reason the margin-box half of `_FACES_APPLIED` is -- a figure that is
 #: not finished is a figure drawn at whatever it had, and neither `load` nor any number of
 #: frames bounds a multi-megabyte decode. The decode is allowed to fail rather than hang
