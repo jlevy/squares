@@ -341,28 +341,46 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take BC-320 under `think-ykd6`: H151/exp153
-refuted every sixth-site extension preserving originalD. The next discriminator is a
-short independently replayed actual-core obstruction; prioritize a disjoint pair for the
-stronger fixed-five-unit-atoms weighted-mass conclusion.
-PR142 completed matching fast and deferred validation and is ready; Session121 closed
-its four slices and separately tallied Session122 continues on the stacked branch
-`codex/n11-owner-core-compatibility`. Exp145 independently confirmed the selected
-five-dot cover, exp146 enlarged twelve of sixteen wall-aware owner footprints, and
-exp147 found no additional tuple by component containment.
+For the next supervised exact-research goal, take BC-324 under `think-rm3k`, a factual
+interpretation block with no scientific target.
+Session123 is terminal.
+Session124 is the latest terminal interpretation checkpoint; successor certification and
+publication follow-up remain pending.
+Session124 resumed at 2026-09-10 01:52:40 UTC after the elapsed interruption and
+separates that gap from active work.
+
+PR142 completed matching fast and deferred validation and is ready.
+PR145 is also ready after matching fast, page and full checkpoint validation on the
+stacked branch `codex/n11-owner-core-compatibility`. Exp145 independently confirmed the
+selected five-dot cover; exp146 enlarged twelve of sixteen wall-aware owner footprints;
+and exp147’s bounded component-containment transfer preserved only the two baseline
+tuple labels and certified no additional selection.
 Exp148 retained a partial fixed-pattern screen.
-Exp149 then refuted the selected tuple `(0,0,0,7)` at owner-000 with an exact positive
-deficit and validated rational strict escape.
-Exp150 then refuted individual-owner exclusion of this escape: all four classes admit a
-strictly separated B-core, with exact independent replay.
+
+Exp149 then showed that fixed D misses the selected four-patch residual relaxation for
+tuple label `(0,0,0,7)` at owner-000, with an exact positive deficit and validated
+rational strict escape.
+It did not refute that physical tuple.
+Exp150 refuted individual-owner exclusion only in the unchanged B-core model: all four
+classes admit a strictly separated frame-0 B-core under exact independent replay.
+This does not establish unit-parent or simultaneous-owner compatibility.
 Exp151 refuted the fixed sixth site, and exp152 retained a nonempty necessary two-core
-quadrilateral. Exp153 ruled out the entire sixth-site family withDfixed after188exact
-support directions. A general empty intersection does not rule out fractional added mass
-below two without a separately verified disjoint pair.
-H146 remains unresolved.
-The global n11 bracket is unchanged.
-PR137 retains the original sprint; PR142 stacks the separately tallied continuation.
-Draft PR145 carries the compatibility and six-dot work, with separate usage intervals.
+quadrilateral. Exp153 ruled out every single-site extension of fixed D on the selected
+four-patch relaxation after 188 exact support directions.
+
+An independently reviewed two-attainer verifier remains unrun.
+If a future prospective run produces two strict D-missed B-cores, their disjointness
+would require added nonnegative mass at least two and nominal total mass at least seven
+with the five original unit atoms retained.
+It would not establish the available-mass conclusion unless the five original sites were
+separately proved outside the occupied-patch union.
+H146 remains unresolved, and the global n11 bracket is unchanged.
+
+The global routing obligation is: for every hypothetical physical packing P, there
+exists at least one valid owner selection for P whose selected family has been excluded.
+The current record does not prove that statement.
+BC324 now reconciles these facts and premises before another scientific target is
+selected.
 
 The preceding work reached three checkpoints in sequence.
 Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s

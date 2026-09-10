@@ -1,5 +1,5 @@
 ---
-title: "agenda-032 \u2014 two-hour conditional-owner sprint at n = 11"
+title: agenda-032 — two-hour conditional-owner sprint at n = 11
 softschema:
   contract: packing.squares:ExperimentAgenda/v1
   schema: ../schemas/agenda.schema.yaml
@@ -296,6 +296,12 @@ agenda:
         passed.
     replanning:
       candidates:
+      - bead: think-rm3k
+        workflow: research-loop
+        priority: 1
+        rationale: The user selected a first-principles interpretation and breadth audit after exp153.
+          BC-324 defines terms, reconstructs evidence and assumptions, corrects stale summaries and maps
+          alternatives without new targets.
       - bead: think-ta8s
         workflow: research-loop
         priority: 2
@@ -322,16 +328,18 @@ agenda:
         rationale: Full-support pricing remains uninvoked; retain it behind the newly successful geometric
           conditioning mechanism.
       selected:
-        bead: think-ykd6
+        bead: think-rm3k
         workflow: research-loop
-        rationale: 'PR142 completed fast/deferred validation and is ready. The stacked successor takes
-          BC320: one saved-escape snapped-owner compatibility test, with new H148/exp150 and separate
-          Session121 usage. Original sprint outcomes and cost remain unchanged.'
+        rationale: 'Follow-up selection on2026-09-10: PR145 is ready after its matching full checkpoint.
+          Continue BC-324 evidence interpretation on the stacked successor. Original sprint outcomes,
+          target criteria and cost remain unchanged.'
       operator_input:
         status: confirmed
-        note: User selected a two-hour sprint on geometric conditioning and parallel experiments. The
+        note: 'User selected a two-hour sprint on geometric conditioning and parallel experiments. The
           post-sprint T-023 and figure amendment adds no target or Session113 cost. Any next-slice target
-          needs fresh preregistration and separate usage.
+          needs fresh preregistration and separate usage. Later user steering requests a stopping-point
+          interpretation block: facts and definitions before judgments, scope backfills and alternate
+          research routes. No new scientific target is selected.'
 ---
 # Agenda032: Completed Conditional-Owner Sprint
 

@@ -1,5 +1,5 @@
 ---
-title: "session-122 \u2014 direct sixth-site feasibility continuation"
+title: session-122 — direct sixth-site feasibility continuation
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -70,8 +70,8 @@ session:
     fallback: Preserve completed source or partial/invalid target evidence; do not retry the scientific
       target or broaden its criterion.
     outcome: Exp153 launched once19:13:57UTC fromda1e42ac84619d05499326da084b6a99ae7987a2 and refuted
-      the fixed-D-plus-one-site family in22.36 seconds. Closed region empty after 188 directions through owner-187,
-      exit0/stdoutidentical. Pre-push45/69steps passed142.68seconds. Interpretation closed19:15:25UTC.
+      the fixed-D-plus-one-site family in22.36 seconds. Closed region empty after 188 directions through
+      owner-187, exit0/stdoutidentical. Pre-push45/69steps passed142.68seconds. Interpretation closed19:15:25UTC.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-direct-sixth-site-feasibility.json
     stop_reason: The one direct family target completed conclusively.
@@ -85,7 +85,7 @@ session:
       while a read-only successor proof contract is developed.
     commitment: BC-320
     bead: think-ykd6
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The direct family is conclusively refuted. This efficiency block consolidates expensive
       certification at one frozen milestone rather than repeating it for each short scientific target.
@@ -100,13 +100,17 @@ session:
       no scientific reruns or premature PR readiness.
     fallback: Preserve the full checkpoint run identity and truthful pending debt if it outlasts this
       slice; continue only remaining certification in a fresh authorized allocation.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: After matching full checks pass, markPR145 ready and create the authorized fresh stacked
-      branch for the next separately recorded work.
+    outcome: Published complete exp153 milestone2acf4b859d39e01cc9fcb1156d8573f65e08efbd. Matching fast34395222942
+      and page34395222991 passed. Full34395723423 started19:33:03UTC and remains running. Private followup
+      source and analytic contracts are unrun preparation.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/README.md
+    stop_reason: The user reprioritized the next block toward definitions, facts and an inference audit
+      before strategic judgments.
+    next_action: Preserve the pending fullrun identity; continue its finalization alongside Session123
+      interpretation work.
   primary_bead: think-ykd6
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 90
     max_cycles: 3
@@ -188,8 +192,8 @@ session:
     - No target runs, registry edits, commits or pushes.
   - status: completed
     recording: contemporaneous
-    outcome: Final source admitted GO at19:07 UTC. Ten focused controls pass2.46 seconds; independent combined
-      suite33 passes3.41 seconds, including final shared-clock expiry. Source891bb3985cfbc584cb4e99e4edd2d0689c3ec104;
+    outcome: Final source admitted GO at19:07 UTC. Ten focused controls pass2.46 seconds; independent
+      combined suite33 passes3.41 seconds, including final shared-clock expiry. Source891bb3985cfbc584cb4e99e4edd2d0689c3ec104;
       testsef5b420eae398a6946ff08c18051c8b708f42d01.
     evidence:
     - packing/cases/n11_five_dot_cover/direct-sixth-site-source-admission.md
@@ -215,8 +219,8 @@ session:
     excluded_commands: *id002
   - status: completed
     recording: contemporaneous
-    outcome: Final source admitted GO at19:07 UTC. Ten focused controls pass2.46 seconds; independent combined
-      suite33 passes3.41 seconds, including final shared-clock expiry. Source891bb3985cfbc584cb4e99e4edd2d0689c3ec104;
+    outcome: Final source admitted GO at19:07 UTC. Ten focused controls pass2.46 seconds; independent
+      combined suite33 passes3.41 seconds, including final shared-clock expiry. Source891bb3985cfbc584cb4e99e4edd2d0689c3ec104;
       testsef5b420eae398a6946ff08c18051c8b708f42d01.
     evidence:
     - packing/cases/n11_five_dot_cover/direct-sixth-site-source-admission.md
@@ -248,20 +252,32 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-direct-sixth-site-feasibility.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-launch.json
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-process.log
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/fast.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/page.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/full.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/checkout-provenance.json
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-122-source.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-122-direct-target.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-122-checkpoint.yaml
   checks:
   - Session121 ends and Session122 begins at18:48:31 UTC; no native usage overlap.
-  - "Initial source-preparation allocation retains18:48:31\u201319:06:40 UTC. No scientific process allowance\
-    \ changes."
+  - Initial source-preparation allocation retains18:48:31–19:06:40 UTC. No scientific process allowance
+    changes.
   - At19:06:09 UTC the initial launch window had expired unrun. Phase2 was prospectively allocated through19:36:09
     with unchanged scientific240/300+2-second limits.
   - Independent source admission GO; target unrun. Phase2 source is frozen and ready for required pre-push
     validation.
-  stop_reason: null
-  next_action: Publish the complete fixed-family result and obtain matching full checkpoint evidence;
-    then continue the selected successor on a fresh stacked branch.
+  - 'full gate: fast at 2acf4b859d39e01cc9fcb1156d8573f65e08efbd: passed (matching fast34395222942 and
+    full deferred34395723423; four research jobs plus aggregate passed)'
+  - Follow-up adoption records the completed parent checkpoint at19:59:54 UTC; the original phase clocks
+    and research stopping points are unchanged.
+  stop_reason: User requested an evidence-first interpretation block at19:41:54 UTC. Scientific exp153
+    is complete; matching full checkpoint34395723423 remains in progress on frozenPR145head2acf4b85. Continue
+    only interpretation, review and publication, with no new scientific targets. Later checkpoint34395723423
+    passed at19:59:54 UTC and discharged the parent milestone certification debt.
+  next_action: Parent PR145 certification is discharged. Continue BC-324 interpretation under think-rm3k
+    on the stacked successor; new changes require their own validation.
 ---
 # Session122: Solve the Complete Sixth-Site Family
 
@@ -284,9 +300,20 @@ fixed. A positive answer would have required all 361 support directions and inde
 all 361 union confirmation.
 The actual empty188-direction prefix settles only this selected fixed-D family.
 
+The third slice stopped at the user-requested19:41:54 UTC transition; its
+original19:45:25 deadline remains unchanged.
+Matching fullCI was still running.
+This terminal update is retained privately until it can be adopted on the successor
+without changing the frozen checkpoint.
+
 The third slice is the efficiency block: consolidate the full checkpoint at one frozen
 milestone, keep successor proof design in flight, and put later publication-tail usage
 on the successor rather than repeatedly invalidating a checked head.
+
+The matching parent checkpoint subsequently passed at19:59:54 UTC. Its exact checkout
+provenance is retained in
+[the checkpoint record](../series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/README.md).
+This follow-up records certification without extending the historical research phase.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

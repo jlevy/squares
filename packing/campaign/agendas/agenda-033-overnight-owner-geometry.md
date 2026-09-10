@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-033
   title: Overnight Owner-Geometry Research
-  updated: '2026-09-09'
+  updated: '2026-09-10'
   status: active
   objective: Make the largest defensible progress toward stronger n11 lower bounds by independently auditing
     the five-dot branch exclusion, strengthening forced-owner geometry using the walls, and expanding
@@ -99,8 +99,9 @@ agenda:
     bead: think-waix
     depends_on:
     - BC-317
-    next_evidence: Exp147 completed128 relations, covered only two baseline tuples and added none. BC319
-      tests direct fixed-dot coverage.
+    next_evidence: Exp147 completed 128 relations, preserved only the two baseline labels and added none.
+      This bounded containment transfer did not certify another owner selection; BC319 tests direct
+      fixed-dot coverage.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -111,8 +112,8 @@ agenda:
     outcomes:
     - scope: Can larger footprints inherit either certified patch union by exact component containment?
       classification: bounded-negative
-      result: All 128relations complete; eight contained, 120failed; covered 2 baseline tuples,new 0,unresolved
-        65534.
+      result: All 128 relations completed; eight containments held and 120 failed. The screen preserved
+        two baseline tuple labels, added none, and left 65,534 labels outside this sufficient transfer.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-147-wall-owner-containment.json
       disposition: retire-negative
@@ -133,9 +134,11 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-318
-    next_evidence: 'Exp148 partial: two checked witnesses reject49152 labels, while analytic D-preserving
-      transport rejects61440. Exp149 refutes selected tuple(0,0,0,7) at owner-000 with a validated strict
-      escape. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple.'
+    next_evidence: 'Exp148 partial: two checked witnesses show fixed D misses 49,152 labels, while analytic
+      D-preserving transport shows it misses 61,440. Exp149 shows that fixed D misses the selected
+      four-patch residual relaxation for tuple label (0,0,0,7) at owner-000; it does not refute that
+      physical owner tuple. H146 remains unresolved. The reviewed decision tree selects BC320 rather than
+      another tuple.'
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -152,8 +155,9 @@ agenda:
     - scope: Does the fixed five-dot continuation certify another owner tuple under the declared bounded
         screens?
       classification: time-limited
-      result: Exp148 retained a partial witness bank; exp149 refuted the selected tuple at owner-000.
-        No additional owner tuple was certified, and H146 remains unresolved.
+      result: Exp148 retained a partial witness bank; exp149 refuted fixed D as a cover of the selected
+        tuple label's four-patch residual relaxation at owner-000. It did not refute the physical tuple.
+        No additional owner selection was certified, and H146 remains unresolved.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-148-fixed-five-dot-wall-expansion.json
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json
@@ -164,7 +168,7 @@ agenda:
     owner_focus: insight
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Can selective owner-pose refinement or compatibility remove the remaining difficult cases?
     budget: Conditional 30-minute insight slice only after concrete residual failures; refine implicated
@@ -175,10 +179,11 @@ agenda:
     bead: think-ykd6
     depends_on:
     - BC-319
-    next_evidence: 'Exp153 refutes every sixth-site extension preserving D for tuple(0,0,0,7): exact empty
-      support intersection after 188 directions. The next discriminator is a short actual-core obstruction,
-      prioritizing a disjoint pair that would force added mass at least 2 with the five original unit atoms
-      retained. A triple obstruction alone does not establish that mass lower bound.'
+    next_evidence: 'Exp153 refutes every one-site extension of fixed D on the selected four-patch relaxation
+      for tuple label (0,0,0,7): its exact support intersection is empty after 188 directions. Exp150 tested
+      only the unchanged B-core owner model and found four frame-0 compatibility witnesses; it did not test
+      unit parents or simultaneous owners. BC324 now audits which further implications are valid before any
+      successor target is registered.'
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
@@ -210,13 +215,14 @@ agenda:
     - scope: Can individual-owner compatibility or any sixth-site extension preserving original D resolve
         the selected relaxed owner tuple?
       classification: bounded-negative
-      result: Exp150 refutes individual-owner exclusion; exp151 refutes the chosen sixthsite; exp152 leaves
-        a necessary quadrilateral; exp153 then rules out every possible sixthsite preserving original D.
-        No new physical owner tuple is excluded.
+      result: Exp150 refutes individual-owner exclusion in the unchanged B-core model; exp151 refutes the
+        chosen sixth site; exp152 leaves a necessary quadrilateral; exp153 then rules out every possible
+        sixth site preserving original D on the selected four-patch relaxation. No physical owner tuple is
+        excluded.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-153-direct-sixth-site-feasibility.json
-      disposition: continue
-      follow_up: think-ykd6
+      disposition: retire-negative
+      follow_up: null
   - id: BC-321
     purpose: research
     owner_focus: insight
@@ -309,39 +315,71 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr142-deferred-checkpoint.json
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr142-fast-checkpoint.json
     - packing/campaign/resource-usage/codex-task-tree-pr142-publication-tail.yaml
+  - id: BC-324
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances:
+    - 11
+    state: in_progress
+    priority: 1
+    question: Which conclusions follow from the published owner-geometry evidence, and which still require
+      routing, unit-parent, joint-compatibility or occupied-mass premises?
+    budget: One bounded evidence-and-inference block with no target geometry or new scientific experiment;
+      preserve the elapsed interruption separately from measured work.
+    entry: PR145 passed matching fast, page and full checkpoint validation at its published exp153 result
+      head; the experimental facts and retained analytic transfer sources are frozen.
+    exit: A terminology-first evidence summary, an independent inference audit, scoped historical backfills
+      and one explicit global routing obligation. The admitted instrument remains unrun on the target.
+    bead: think-rm3k
+    depends_on:
+    - BC-320
+    - BC-323
+    next_evidence: 'The required global routing statement is: for every hypothetical physical packing P,
+      there exists at least one valid owner selection for P whose selected family has been excluded. The
+      current record does not prove that statement. Complete the interpretation block before selecting or
+      registering another scientific target.'
+    workflows:
+    - factual-review
+    program: n11-structure-and-conditional-dots
+    artifacts:
+    - docs/project/research/research-2026-09-09-n11-evidence-and-inference.md
+    - docs/project/research/research-2026-09-09-n11-inference-audit.md
+    - docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md
 ---
 # Overnight Owner-Geometry Agenda
 
 The current proof excludes one specified four-owner geometric branch at side 3.84. The
-global lower bound remains about 3.8100257236. The main gap is a general argument
-covering every possible owner configuration, not another check of the same branch.
+global lower bound remains about 3.8100257236. A global continuation needs the following
+routing statement: for every hypothetical physical packing P, there exists a valid owner
+selection for P whose selected family has been excluded.
+The record does not yet prove that statement.
 
-**Entry point: W6 research loop.** Session121 completed its four slices at18:48:31 UTC;
-Session122 continues the full-family calculation on the stacked owner-core compatibility
-branch after PR142 readiness.
-Session121’s original ceiling remains19:21:40 UTC, but its four slices finished early.
-Session122 runs from18:48:31 to20:18:31 UTC with a20:03:31 scientific cutoff.
-Its first source slice preserves the already declared19:06:40 deadline; later slices are
-allocated at evidence checkpoints, each at most30minutes. No scientific process
-allowance or observed result is reset.
-The 30-minute heartbeat supplements continuous work and must not duplicate a launched
-target.
+**Entry point: W6 research loop with W2 factual-review deliverables.** Session123 is
+terminal; Session124 is the latest terminal interpretation checkpoint.
+Session124 resumed at 2026-09-10 01:52:40 UTC on BC324 under `think-rm3k` after the
+elapsed interruption.
+The reviewed interpretation is captured; successor certification and publication
+follow-up remain pending.
+This block reconciles terminology, experiment scope and inference before another
+scientific target is selected.
+The interruption is not active compute, and no expired scientific allowance is reset.
 
-Exp150 refuted individual-owner exclusion of its saved escape.
+Exp150 refuted individual-owner exclusion of its saved escape in the unchanged B-core
+owner model; its four witnesses all occurred at frame 0. It did not test continuous unit
+parents or simultaneous owners.
 Exp151 refuted the fixed sixth site, and exp152 retained a nonempty two-core
 intersection. Exp153 then resolved the whole fixed-D-plus-one-site family negatively
 in22.36 seconds: the exact site region becomes empty after 188 directions.
-This eliminates every choice of that sixth site under the selected relaxed owner
-patches. It does not exclude a physical packing.
+This eliminates every choice of that sixth site under the selected four-patch residual
+relaxation. It does not refute the tuple label or exclude a physical packing.
 
-The immediate successor is a short independently replayed obstruction.
-A disjoint pair of actual D-missed cores would also rule out added nonnegative mass
-below two while retaining the five original unit atoms.
-An empty triple proves only the one-site obstruction.
-Boundary support attainers need strict interior perturbation and replay before they can
-be called actual escaping cores.
-Full-support pricing remains a reserve option, and unit-parent-aware owner constraints
-are a separate possible refinement.
+A reviewed two-attainer verifier is available but remains unrun.
+If a future registered run constructs and independently replays two strict D-missed
+B-cores, their disjointness would force at least two units of added nonnegative mass and
+nominal total mass at least seven with the original five unit atoms retained.
+An available-mass conclusion would also need a separate proof that those five sites lie
+outside the occupied-patch union.
+BC324 records these inference boundaries before any successor is selected.
 
 ## The order of work
 
@@ -386,10 +424,10 @@ useful authorized slice remains.
 
 PR137 stays ready and unmerged.
 PR142 on `codex/n11-independent-owner-audit` is ready and unmerged.
-Current draft PR145 is stacked above it on `codex/n11-owner-core-compatibility`, with
-separate Session121 and Session122 usage intervals.
-Its full milestone checkpoint remains outstanding.
-No further merge is implied by this agenda.
+PR145 is stacked above it on `codex/n11-owner-core-compatibility`, with separate
+Session121 and Session122 usage intervals.
+Its matching fast, page and full checkpoint validation passed, and it is ready and
+unmerged. No further merge is implied by this agenda.
 The original Session113 receipt remains unchanged; its publication tail and Session114
 onward have distinct cutoffs.
 The morning report must state exactly what is proved, what is only finite computational

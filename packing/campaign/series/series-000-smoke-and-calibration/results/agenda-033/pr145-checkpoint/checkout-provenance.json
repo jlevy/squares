@@ -1,0 +1,62 @@
+{
+  "schema": "pr-checkout-provenance/v1",
+  "repository": "jlevy/squares",
+  "pull_request": 145,
+  "verified_at": "2026-09-10T02:00:34Z",
+  "workflow": {
+    "run_id": 34395723423,
+    "url": "https://github.com/jlevy/squares/actions/runs/34395723423",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-09T19:33:03Z",
+    "completed_at": "2026-09-09T19:59:53Z"
+  },
+  "synthetic_merge": {
+    "sha": "3cc45dd7ef55cec35c96e7b225a892b37aa2d2d0",
+    "message": "Merge 2acf4b859d39e01cc9fcb1156d8573f65e08efbd into 8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e",
+    "parents": [
+      "8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e",
+      "2acf4b859d39e01cc9fcb1156d8573f65e08efbd"
+    ]
+  },
+  "research_jobs": [
+    {
+      "name": "screen",
+      "job_id": 102614835288,
+      "conclusion": "success",
+      "completed_at": "2026-09-09T19:46:31Z",
+      "checkout_sha": "3cc45dd7ef55cec35c96e7b225a892b37aa2d2d0"
+    },
+    {
+      "name": "exhaustive-tier",
+      "job_id": 102614835320,
+      "conclusion": "success",
+      "completed_at": "2026-09-09T19:59:46Z",
+      "checkout_sha": "3cc45dd7ef55cec35c96e7b225a892b37aa2d2d0"
+    },
+    {
+      "name": "deferred-slow-lane",
+      "job_id": 102614835345,
+      "conclusion": "success",
+      "completed_at": "2026-09-09T19:44:28Z",
+      "checkout_sha": "3cc45dd7ef55cec35c96e7b225a892b37aa2d2d0"
+    },
+    {
+      "name": "deferred-steps",
+      "job_id": 102614835425,
+      "conclusion": "success",
+      "completed_at": "2026-09-09T19:51:53Z",
+      "checkout_sha": "3cc45dd7ef55cec35c96e7b225a892b37aa2d2d0"
+    }
+  ],
+  "aggregate_job": {
+    "name": "deep-gate-required",
+    "job_id": 102623765511,
+    "conclusion": "success",
+    "completed_at": "2026-09-09T19:59:53Z"
+  },
+  "verification": {
+    "job_checkout_evidence": "gh run view 34395723423 --log and per-job logs",
+    "merge_identity_evidence": "GitHub commit API for 3cc45dd7ef55cec35c96e7b225a892b37aa2d2d0"
+  }
+}

@@ -208,6 +208,14 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Unit-Parent Centre Restriction: Author-Lane Proof Check](docs/project/reviews/review-2026-09-10-n11-parent-centre-author-check.md) | dated review record | record | retained | — |
+| [N11 Research: Definitions, Findings, and the Inference Chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md) | research synthesis | record | retained | — |
+| [Inference Audit: Owner Geometry and Fixed-D Continuation](docs/project/research/research-2026-09-09-n11-inference-audit.md) | research synthesis | record | retained | — |
+| [Review of the First-Principles N11 Account](docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md) | dated review record | record | retained | — |
+| [After the Direct Sixth-Site Decision](packing/cases/n11_five_dot_cover/after-direct-family-decision.md) | research synthesis | record | retained | — |
+| [Necessary Unit-Parent Centre Restrictions](packing/cases/n11_five_dot_cover/unit-parent-centre-contract.md) | research synthesis | record | retained | — |
+| [Fixed Two-Attainer Obstruction: Source Admission](packing/cases/n11_five_dot_cover/two-attainer-source-admission.md) | dated review record | record | retained | — |
+| [PR145: Frozen Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/README.md) | research synthesis | record | retained | — |
 | [Direct Sixth-Site Feasibility: Source Admission](packing/cases/n11_five_dot_cover/direct-sixth-site-source-admission.md) | dated review record | record | retained | — |
 | [Direct Sixth-Site Feasibility Versus a Bounded Candidate Loop](packing/cases/n11_five_dot_cover/direct-sixth-site-contract.md) | dated review record | record | retained | — |
 | [Two-Escape Sixth-Site Screen: Source Admission](packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md) | dated review record | record | retained | — |
@@ -662,6 +670,15 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+**Current reader entry:**
+[definitions, findings and the inference chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md),
+followed by the
+[scope audit](docs/project/research/research-2026-09-09-n11-inference-audit.md).
+PR145 is ready at its frozen scientific milestone.
+The stacked interpretation block corrects summaries and maps untested alternatives; it
+adds no scientific target or global bound.
+Historical handoffs below retain their original context.
+
 [Session113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md)
 closed Agenda032 with [T-023](packing/frontier/RESULTS.md), the five-dot exclusion of
 one specified four-owner branch at side `96/25 = 3.84`. The composed result is V3/C3,
@@ -675,38 +692,26 @@ The
 separates certificate assurance, exhaustive case coverage and stronger geometric
 restrictions, including what could improve the bound at a different target side.
 
-[Session114](packing/campaign/agent-sessions/session-114-independent-owner-audit.md)
-handed BC-316 to Session115 on `codex/n11-independent-owner-audit`, stacked on the ready
-PR137 milestone. Its source checkpoint is published; certification remains owned by
-think-ta8s. [Agenda033](packing/campaign/agendas/agenda-033-overnight-owner-geometry.md)
-now governs the resumed continuation through16:38:09UTC, with30-minute wakeups and Astra
-Max strategic review.
-The source-independent checker passed 19 controls and mathematical review; exp145 then
-confirmed all 361 exact zero deficits in 39.06 seconds.
-[Session115](packing/campaign/agent-sessions/session-115-wall-aware-owner-footprints.md)
-passed the wall-constructor controls under think-waix and registered
-[exp146](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md)
-for the all-sixteen gain/impossibility discriminator.
-Its original allocation expired unrun during a user-confirmed network outage.
-[Session116](packing/campaign/agent-sessions/session-116-resumed-wall-research.md) then
-published and ran the unchanged protocol: all 16 classes completed in 25.69 seconds,
-with 12 strictly enlarged footprints, 4 equal footprints and no impossible class.
+[Agenda033](packing/campaign/agendas/agenda-033-overnight-owner-geometry.md) governs the
+continuation after T-023. Exp145 independently confirmed all 361 exact zero deficits in
+39.06 seconds.
+Exp146 then completed all 16 wall-aware owner classes in 25.69 seconds: 12
+common footprints strictly enlarged, four were equal and none was impossible.
 [H-144](packing/campaign/hypotheses/H-144-wall-aware-owner-footprint-gain.md) is
-accepted; this geometry gain adds no owner tuple or global lower bound by itself.
-[PR142](https://github.com/jlevy/squares/pull/142) retains this continuation separately.
-[Session117](packing/campaign/agent-sessions/session-117-wall-owner-containment.md) now
-prepares the separately registered H145/exp147 containment test.
-Its nine synthetic controls and three source-review corrections pass; target relations
-remain unrun. [H-143](packing/campaign/hypotheses/H-143-independent-five-dot-union.md)
-requires an independent exact polygon-union checker before replaying the unchanged five
-dots. The
-[owner-case design](packing/cases/n11_five_dot_cover/owner-case-census-design.md) shows
-why proper containment cannot extend the equal-area coarse patch family; simultaneous
-square symmetries give only two geometric owner tuples.
-The next expansion test constructs all 16 coarse footprints with the container walls
-included, then checks exact component containment against the two certified tuples.
-A shared arrangement census follows only if those cheaper tests justify it.
-New usage is separate from Session113 and the intervening publication tail.
+accepted, but that geometric gain adds no owner selection or global lower bound by
+itself.
+
+[Exp147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md)
+completed its bounded component-containment transfer: eight of 128 relations held, it
+preserved the two baseline tuple labels, and it certified no additional selection.
+This is a negative result for that sufficient transfer, not a physical tuple census.
+[PR142](https://github.com/jlevy/squares/pull/142) retains the independently tallied
+audit and wall-aware continuation.
+The [owner-case design](packing/cases/n11_five_dot_cover/owner-case-census-design.md)
+shows why proper containment cannot extend the equal-area coarse patch family;
+simultaneous square symmetries give only two geometric owner tuples.
+No shared arrangement census has been promoted from this result.
+Usage after Session113 is retained in separate, nonoverlapping receipts.
 
 **Math startup release checkpoint.**
 [Session 111](packing/campaign/agent-sessions/session-111-font-startup-stability.md)
@@ -783,12 +788,10 @@ The depth polisher will start from that retained control; its missing scratch st
 not a runnable handoff.
 
 [Session117](packing/campaign/agent-sessions/session-117-wall-owner-containment.md)
-registers
-[exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md)
-under H-145. Nine synthetic controls and the three source-review corrections pass; no
-target containment relation has been evaluated.
+completed exp147’s bounded containment screen under H-145. All 128 relations completed;
+the screen preserved only the two baseline labels and added none.
 
-The active Session117 continuation is BC-319 under `think-ykd6`, with
+BC-319 then ran under `think-ykd6`, with
 [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md)
 registered under H-146. It keeps the five dots fixed, builds a reusable exact witness
 bank, and permits one surviving tuple check.
@@ -805,28 +808,52 @@ was partial. The separate
 61,440 labels for fixed D, leaving 4,094 nonbaseline labels.
 [Exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md)
 refutes H-147 at its first required direction: owner-000 has a positive exact uncovered
-area and a retained rational strict escape for tuple `(0,0,0,7)`. H-146 remains
-unresolved over other tuples.
+area and a retained rational strict escape for the selected four-patch relaxation
+labelled by tuple `(0,0,0,7)`. This refutes fixed D as a cover of that relaxation, not
+the physical tuple. H-146 remains unresolved over other labels.
 
-**Selected next entry:** `think-ykd6`, BC-320: H151/exp153 computes the exact region of
-all possible sixth-site locations for the fixed D and owner tuple.
-Exp152 found a nonempty two-core quadrilateral, so those two witnesses do not settle the
-whole family. Acceptance now requires complete-domain support and independent
-all-direction coverage.
-Current evidence:
+BC-320 then tested the saved escape and every one-site extension of fixed D on that same
+relaxation. Current evidence:
 [exp-150](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md)
-refuted individual-owner exclusion;
+refuted individual-owner exclusion in the unchanged B-core model, with one frame-0
+witness in each of four classes;
 [exp-151](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md)
 refuted the fixed sixth site;
 [exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md)
 accepted the necessary two-core screen;
 [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md)
-is the completed fixed-family refutation.
+is the completed refutation of every one-site extension of fixed D on the selected
+four-patch relaxation.
+Exp150’s compatibility result does not establish continuous unit parents or simultaneous
+owners, and exp153 does not exclude the physical tuple.
+
 [Session121](packing/campaign/agent-sessions/session-121-owner-core-compatibility.md)
-closed its four slices at18:48:31 UTC;
+and
 [Session122](packing/campaign/agent-sessions/session-122-direct-sixth-site-feasibility.md)
-continues on `codex/n11-owner-core-compatibility`. PR142 is ready after matching fast
-and deferred validation; neither PR142 nor PR137 has merged.
+are terminal.
+[Session123](packing/campaign/agent-sessions/session-123-evidence-first-interpretation.md)
+is terminal.
+[Session124](packing/campaign/agent-sessions/session-124-evidence-interpretation-finalization.md)
+resumed at 2026-09-10 01:52:40 UTC after the elapsed interruption and is the latest
+terminal interpretation checkpoint.
+Its successor certification and publication follow-up remain pending; no new scientific
+target is selected.
+
+**Selected next entry:** `think-rm3k`, BC-324. This is a factual interpretation block,
+not a scientific target.
+It defines the terms used in the argument, separates exact computations from analytic
+implications, and audits the premises still required for a global result.
+The key routing obligation is
+
+$$\forall P\text{ a hypothetical physical packing},\quad
+\exists\sigma\text{ a valid owner selection for }P
+\text{ whose selected family is excluded}.$$
+
+The record does not prove this statement.
+A reviewed two-attainer instrument is source ready but unrun; any future target needs a
+separate prospective registration and allocation.
+PR145 is ready after matching fast, page and full checkpoint validation.
+PR142 and PR137 also remain ready and unmerged.
 
 The two-hour sprint in
 [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
@@ -837,18 +864,15 @@ The footprint-containment and strict-core arguments supply the physical implicat
 recorded as T-023. BC-316 subsequently completed the independent polygon-union audit in
 [exp-145](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md):
 all 361 exact deficits were zero.
-The next slice follows the
-[saved-escape decision tree](packing/cases/n11_five_dot_cover/after-exp149-strategy.md):
-
-1. Test strict compatibility with an entire snapped owner core in each selected class.
-2. If one class excludes the escape, measure whether its stronger forbidden region
-   removes positive uncovered area.
-3. If all four classes admit individual compatible cores, register a six-dot test on the
-   same tuple, retaining the five dots and adding the escape centre.
-   All361 directions remain required.
-
-A global exclusion requires this ledger to cover every admissible owner combination.
-The next experiments require fresh hypotheses or explicitly scoped successors,
+The
+[saved-escape decision tree](packing/cases/n11_five_dot_cover/after-exp149-strategy.md)
+is now a historical decision record: exp150 took its compatible-owner branch, exp151
+tested the selected sixth site, and exp153 closed the broader fixed-D-plus-one-site
+family on the relaxation.
+A global exclusion does not require every raw tuple label to be excluded.
+It requires the existential owner-selection routing statement above for every
+hypothetical physical packing.
+Any next experiment requires a fresh hypothesis or explicitly scoped successor,
 prospective criteria, published source, and a separate session usage interval.
 The figure and T-023 registration are post-sprint documentation amendments and are not
 charged into the frozen session113 receipt through `2026-09-09T05:16:31Z`. The separate
@@ -3668,16 +3692,19 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-121-six-dot.yaml` | session-121 | 180 | 1.1 h | 0.39 h | 0.39 h | yes |
 | `codex-task-tree-session-121-source.yaml` | session-121 | 152 | 1.31 h | 0.45 h | 0.45 h | yes |
 | `codex-task-tree-session-121-two-core.yaml` | session-121 | 157 | 1.19 h | 0.41 h | 0.41 h | yes |
+| `codex-task-tree-session-122-checkpoint.yaml` | session-122 | 179 | 1.26 h | 0.44 h | 0.44 h | yes |
 | `codex-task-tree-session-122-direct-target.yaml` | session-122 | 88 | 0.46 h | 0.15 h | 0.15 h | yes |
 | `codex-task-tree-session-122-source.yaml` | session-122 | 101 | 0.89 h | 0.29 h | 0.29 h | yes |
+| `codex-task-tree-session-123.yaml` | session-123 | 87 | 18.56 h | 6.18 h | 6.18 h | yes |
+| `codex-task-tree-session-124-publication.yaml` | session-124 | 154 | 6.97 h | 0.41 h | 0.41 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 77 |
+| measured | 79 |
 | unmeasured | 45 |
-| **total** | **122** |
+| **total** | **124** |
 
 <!-- END GENERATED: session-close-report -->
 

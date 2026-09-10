@@ -1,5 +1,5 @@
 ---
-title: "session-121 \u2014 owner-core compatibility continuation"
+title: session-121 — owner-core compatibility continuation
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -337,6 +337,10 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md
   - packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-152-sixth-site-two-core-screen.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/fast.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/page.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/full.json
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/checkout-provenance.json
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-121-compatibility-target.yaml
@@ -348,12 +352,16 @@ session:
   - Six-dot source admitted at blobs 06bb100a94a35bdd78138d5467a450343a497476 (module) and 4b757fca7b9374c0bf8d4cb578ee0091526bd6b9
     (tests).
   - Two-core source admitted at 1868f3df5297e93ce8a6d6c4d17ba475ee88b8d3; tests 0cd1ce1bcdf4abcb4630343a332dcdbe9ea2488f.
+  - 'full gate: fast at 2acf4b859d39e01cc9fcb1156d8573f65e08efbd: passed (matching fast34395222942 and
+    full deferred34395723423; four research jobs plus aggregate passed)'
+  - Follow-up adoption records the completed parent checkpoint at19:59:54 UTC; the original phase clocks
+    and research stopping points are unchanged.
   stop_reason: The four declared slices completed by18:48:31 UTC with exp150/151 refutations and exp152
     necessary-screen acceptance. Direct full-family source preparation continues without pausing in Session122.
-    Publication certification is pending.
-  next_action: Continue BC-320 in Session122 under think-ykd6; think-ta8s owns matching full checkpoint
-    evidence before PR145 readiness.
-  certification_pending: think-ta8s
+    Publication certification is pending. Later checkpoint34395723423 passed at19:59:54 UTC and discharged
+    the parent milestone certification debt.
+  next_action: Parent PR145 certification is discharged. Continue BC-324 interpretation under think-rm3k
+    on the stacked successor; new changes require their own validation.
 ---
 # Session121: Test the Owner-Core Constraint
 
@@ -380,6 +388,11 @@ The four-slice research block closed at18:48:31 UTC with its original deadline
 unchanged. [Session122](session-122-direct-sixth-site-feasibility.md) takes the newly
 selected full-family calculation and subsequent publication work; this is continuous
 work with a nonoverlapping accounting boundary.
+
+The matching parent checkpoint subsequently passed at19:59:54 UTC. Its exact checkout
+provenance is retained in
+[the checkpoint record](../series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/README.md).
+This follow-up records certification without extending the historical research phase.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

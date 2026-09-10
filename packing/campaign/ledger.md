@@ -135,8 +135,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-118](agent-sessions/session-118-selected-wall-tuple.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
 | [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
 | [session-120](agent-sessions/session-120-selected-wall-tuple-execution.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
-| [session-121](agent-sessions/session-121-owner-core-compatibility.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 4 | think-ykd6 | Continue BC-320 in Session122 under think-ykd6; think-ta8s owns matching full checkpoint evidence before PR145 readiness. |
-| [session-122](agent-sessions/session-122-direct-sixth-site-feasibility.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (process) | 3 | think-ykd6 | Publish the complete fixed-family result and obtain matching full checkpoint evidence; then continue the selected successor on a fresh stacked branch. |
+| [session-121](agent-sessions/session-121-owner-core-compatibility.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 4 | think-ykd6 | Parent PR145 certification is discharged. Continue BC-324 interpretation under think-rm3k on the stacked successor; new changes require their own validation. |
+| [session-122](agent-sessions/session-122-direct-sixth-site-feasibility.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (process) | 3 | think-ykd6 | Parent PR145 certification is discharged. Continue BC-324 interpretation under think-rm3k on the stacked successor; new changes require their own validation. |
+| [session-123](agent-sessions/session-123-evidence-first-interpretation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-rm3k | Continue BC-324 under think-rm3k in Session124; think-ta8s retains successor certification. |
+| [session-124](agent-sessions/session-124-evidence-interpretation-finalization.md) | stopped | contemporaneous | `research-loop` (process) | `research-loop` (process) | 1 | think-rm3k | Finalize BC-324 under think-rm3k with think-ta8s owning matching successor certification and publication follow-up. Keep scientific targets unselected while the user reviews definitions, facts, assumptions and alternate approaches. |
 
 ### Workflow summary
 
@@ -149,7 +151,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
-| `research-loop` | 24 | 4 | 94 | 7 |
+| `research-loop` | 26 | 4 | 96 | 7 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
 | `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
@@ -694,12 +696,13 @@ Status: **active**. Make the largest defensible progress toward stronger n11 low
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
 | BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
-| BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed128 relations, covered only two baseline tuples and added none. BC319 tests direct fixed-dot coverage. |
-| BC-319 | research | 11 | complete | 1 | think-ykd6 | Exp148 partial: two checked witnesses reject49152 labels, while analytic D-preserving transport rejects61440. Exp149 refutes selected tuple(0,0,0,7) at owner-000 with a validated strict escape. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple. |
-| BC-320 | research | 11 | in_progress | 1 | think-ykd6 | Exp153 refutes every sixth-site extension preserving D for tuple(0,0,0,7): exact empty support intersection after 188 directions. The next discriminator is a short actual-core obstruction, prioritizing a disjoint pair that would force added mass at least 2 with the five original unit atoms retained. A triple obstruction alone does not establish that mass lower bound. |
+| BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed 128 relations, preserved only the two baseline labels and added none. This bounded containment transfer did not certify another owner selection; BC319 tests direct fixed-dot coverage. |
+| BC-319 | research | 11 | complete | 1 | think-ykd6 | Exp148 partial: two checked witnesses show fixed D misses 49,152 labels, while analytic D-preserving transport shows it misses 61,440. Exp149 shows that fixed D misses the selected four-patch residual relaxation for tuple label (0,0,0,7) at owner-000; it does not refute that physical owner tuple. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple. |
+| BC-320 | research | 11 | complete | 1 | think-ykd6 | Exp153 refutes every one-site extension of fixed D on the selected four-patch relaxation for tuple label (0,0,0,7): its exact support intersection is empty after 188 directions. Exp150 tested only the unchanged B-core owner model and found four frame-0 compatibility witnesses; it did not test unit parents or simultaneous owners. BC324 now audits which further implications are valid before any successor target is registered. |
 | BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
 | BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
 | BC-323 | measurement_validation | 11 | complete | 1 | think-ta8s | PR142 head8a35b482 passed matching fast/page and deferred34380372729; all four research-job checkout revisions were verified. PR142 is ready and unmerged; successor branch codex/n11-owner-core-compatibility is open. Native publication-tail receipt closes17:21:40UTC; Session121 starts there. |
+| BC-324 | measurement_validation | 11 | in_progress | 1 | think-rm3k | The required global routing statement is: for every hypothetical physical packing P, there exists at least one valid owner selection for P whose selected family has been excluded. The current record does not prove that statement. Complete the interpretation block before selecting or registering another scientific target. |
 
 ## Series
 
