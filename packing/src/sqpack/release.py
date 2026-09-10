@@ -12,7 +12,7 @@ from typing import NamedTuple
 
 
 class PublicationHistoryEntry(NamedTuple):
-    """One public edition and the result scope it first carried."""
+    """One retained public edition and its headline result scope."""
 
     version: str
     first_labeled: str
@@ -48,7 +48,7 @@ PUBLICATION_VERSION = PUBLICATION_HISTORY[0].version
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
 #: join below then drops it and the stray space with it, so going final is one edit.
-PUBLICATION_STATUS = "DRAFT"
+PUBLICATION_STATUS = ""
 
 #: The commit the committed artifacts are stamped with, at this repository's own short
 #: length -- the eight characters `git rev-parse --short` prints here -- so the hash a
