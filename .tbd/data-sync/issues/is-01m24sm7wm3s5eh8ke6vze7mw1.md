@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 22
+version: 23
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m260z2959dmcmn61pn2z7jsk
   - is-01m260za5fe3ewrkns6y4ehjva
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T16:24:45.546Z
+updated_at: 2026-09-10T18:38:42.993Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
@@ -61,19 +61,8 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-Daytime strategy intake BC325 completed on the fresh branch codex/n11-daytime-strategy.
-Two independent portfolios and an Astra Max atom-specific review are integrated in
-agenda035 and the active daytime plan. The exact parent-domain translation review shows
-that the 88-core point obstruction transfers for q >= 76469/20000 = 3.82345, removing
-the fixed-B, retained-net point-only parent-box target at 3.827.
+BC325 is complete on codex/n11-daytime-strategy. The independent exact review strengthens the 3.82345 result: every translated member of the retained 88-core family has a strictly contained, concentric, zero-mismatch individual unit parent; A6 has the analogous result from 3.82845 under its exact atom-transport premise. This removes fixed-B point-only singleton-parent tightenings that retain the used nodes, while owner/contact conditions, joint feasibility, changed cores, changed atoms, and conditional routing remain open.
 
-The strongest concrete changed rule found is a seven-token, threshold-four K5 motif
-with integer multiplicities and budget one, reported at charge 3/2 on the retained A6
-family. Its scientific comparison is blocked on narrow multiplicity admission across
-the producer, loader, capacity reader and both coverage routes, plus a maintained paired
-program and freshly materialized row manifest. The historical 15,021 rows are not
-reconstructable from retained artifacts.
+The ranked next blocks are BC326 conditional parent geometry, then one prospectively frozen 2880-step core/net packet, weighted-atom admission and matched comparison, a genuine-contact or snug-parent pilot, mixed charges on one angle profile, H155 after source admission, and H135 as reserve. This is an allocation by present information and theorem distance, not a method-wide productivity judgment.
 
-BC326 necessary parent geometry is the first runnable research block. The explainer
-runs independently on codex/n11-explainer-current-bound and will open a separate draft
-PR. Session126 owns plan publication only; no scientific target ran.
+The standalone explainer is draft PR148 at 277f8b1a on codex/n11-explainer-current-bound. Its complete local documentation block and independent review pass. Retarget it onto this research branch after the checkpoint is published, then require stacked hosted checks before readiness. No scientific target has run on the checkpoint branch.
