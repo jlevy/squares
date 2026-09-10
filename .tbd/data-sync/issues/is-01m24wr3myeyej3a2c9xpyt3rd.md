@@ -5,12 +5,13 @@ title: Review H157 refinement limits and preserve owner-selection scope
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
 parent_id: is-01m24tw635b6tfjj1wb2awvkff
 created_at: 2026-09-10T05:30:46.813Z
-updated_at: 2026-09-10T06:16:08.865Z
+updated_at: 2026-09-10T06:52:47.179Z
 ---
 
 ## Notes

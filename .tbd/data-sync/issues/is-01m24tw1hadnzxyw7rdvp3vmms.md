@@ -5,13 +5,15 @@ title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
+child_order_hints:
+  - is-01m251b13sgjhq5d31fnmyt9pm
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T06:16:06.740Z
+updated_at: 2026-09-10T06:51:01.111Z
 ---
 Implement and independently admit a necessary unit-parent centre-domain adapter, then prospectively register at most one paired comparison on the saved exp151 escape at tuple(0,0,0,7). The independent analytic review at /private/tmp/n11-parent-bound-independent-review.md passes the formula under exact unit rays, centre-preserving nearest-core selection, principal angular mismatch and the admitted global maximum bound D. Adopt that review under docs/project/reviews/ on the fresh post-PR139 branch before target use.
 
@@ -21,19 +23,4 @@ First check whether the fixed residual escape is outside its own necessary paren
 
 ## Notes
 
-Sol xhigh completed a private source checkpoint under /private/tmp/n11-parent-adapter-prep/:
-wall_owner_parent_compatibility.py, its synthetic test file, and admission-readiness.md.
-Eighteen synthetic tests passed on project Python3.14; Ruff and BasedPyright passed.
-No research target, retained escape comparison, shared source edit, or publication ran.
-The analytic restriction has a distinct Astra Max proof review.
-
-Remaining before any target: root code review and adoption, a complete source-bound
-receipt/CLI contract, the residual361-direction manifest and controls, prospective
-target record, independent implementation admission, and bounded execution on immutable
-source. The bead remains in_progress; preparation is partial delivery, not a result.
-Model identity comes from the dispatch: gpt-5.6-sol at xhigh. The worker's generic
-inherited-model footer is not the authority for the model allocation.
-
-<!-- This document follows common-doc-guidelines.md.
-See github.com/jlevy/practical-prose and review guidelines before editing.
--->
+The independent analytic parent review is retained at docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md. Sol xhigh's private adapter/test prototype under /private/tmp/n11-parent-adapter-prep passed18synthetic controls and local lint/type checks; it remains unadopted and has no scientific target. A separate Astra Max agent now reviews its implementation and missing source-admission obligations, producing /private/tmp/n11-parent-adapter-independent-review.md. That bounded private review runs beside PR139 finalization; it does not block the PR or start the nine-hour science clock. Receipt CLI, full residual provenance and any identified corrections remain future implementation work.
