@@ -20,6 +20,7 @@ name: Certificate page
     branches: [main]
     paths:
       - packing/cases/n11_fractional_certificate/**
+      - packing/cases/n11_threshold_certificate/**
       - packing/devtools/render_explainer.py
       - packing/devtools/prepare_explainer_math.py
       - packing/devtools/measure_net_coarsening.py
@@ -57,6 +58,7 @@ name: Certificate page
   pull_request:
     paths:
       - packing/cases/n11_fractional_certificate/**
+      - packing/cases/n11_threshold_certificate/**
       - packing/devtools/render_explainer.py
       - packing/devtools/prepare_explainer_math.py
       - packing/devtools/measure_net_coarsening.py

@@ -48,7 +48,8 @@ OUTPUT = ROOT / "site" / "t-018-explainer.pdf"
 #: The reviewed publication pagination. Unlike PDF bytes, this is portable across the
 #: pinned Linux and macOS Chromium builds. A one-line metric change once moved Figure 1
 #: and expanded the paper from 17 pages to 18 while every other check stayed green.
-EXPECTED_PAGE_COUNT = 17
+#: The advanced T-025/T-026 section deliberately brings the reviewed edition to 20.
+EXPECTED_PAGE_COUNT = 20
 
 #: The two fields Chromium stamps from the clock, and the only two that move between
 #: renders of one page. Normalised rather than removed: the length has to stay put or

@@ -89,23 +89,28 @@ its search strategy.
 |  | value | status |
 | --- | --- | --- |
 | best-known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
-| proved lower bound explained here | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), an exact weighted atomic certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
-| gap between these bounds | about `0.067084` | still open |
+| strongest verified lower bound | `3.826447410572939744…` | [T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md), an exact weak limit; the point-only T-018 proof is explained [below](#how-a-weighted-atomic-lower-bound-proof-works) |
+| gap between these bounds | about `0.050636` | still open |
 
 The technical record retains the refinement `s(11) ≥ 3.816609502788862…` in the
 [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
 [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
 packets. It is a weak limit bound and does not decide fit at that endpoint.
-The strongest bound proved at a container side itself is `s(11) ≥ 191/50 = 3.82`, by the
-threshold certificate of
+The largest side named by a separately retained endpoint certificate is `191/50 = 3.82`,
+established first by the threshold certificate of
 [T-025](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md),
 which adds atoms of a second kind to the ones explained here.
 The strongest verified bound is
-`s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…`, those
+`s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744…`, those
 same atoms re-certified on a finer direction net and dilated
 ([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)), and it
 is a weak limit bound like the two above.
-The table uses the simpler certificate bound proved below.
+T-026 gives exact certificates at every positive rational dilation strictly below that
+limit, including sides above `3.82`; it supplies no certificate at the irrational
+supremum itself. The detailed lesson below starts with the simpler point-only T-018
+certificate; the
+[standalone explainer](https://jlevy.github.io/squares/#beyond-point-atoms-the-current-bound)
+returns to T-025 and T-026 in its final advanced section.
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** is the distance between the best upper and lower bounds, which
@@ -1269,7 +1274,7 @@ throughput.
 `4.6755`. What is unknown is whether the named alternatives, none of which is built,
 would do better.
 
-**4. What `s(11)` actually is.** The bounds above leave a gap of about `0.067`, and
+**4. What `s(11)` actually is.** The bounds above leave a gap of about `0.050636`, and
 neither end is known to be tight.
 The upper end is a construction nobody has beaten since 1979; the lower bound excludes
 smaller containers without establishing the optimum.

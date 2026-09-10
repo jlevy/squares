@@ -17,9 +17,10 @@ This repository contains:
   the survey are produced and checked by AI agents running a recorded process:
   hypotheses registered before measurement, every claim graded, every defect logged.
 
-The [**explainer page**](https://jlevy.github.io/squares/) is the best introduction to
-the proof: the `s(11)` bound and its five conditions in one page, with every figure
-drawn from the certificate it explains.
+The [**explainer page**](https://jlevy.github.io/squares/) starts with an interactive
+point-certificate proof, then shows how threshold atoms and a dilation limit reach the
+current `s(11)` lower bound.
+Its figures remain drawn from the point certificates they explain.
 
 [![One hundred known-best square packings arranged from n equals one through one hundred, each labeled with its best-known upper bound and, where the value is still open, the strongest lower bound independently verified here.](packing/atlas/known-best/known-best-1-100.png)](https://jlevy.github.io/squares/known-best-1-100.pdf)
 

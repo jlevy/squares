@@ -38,6 +38,7 @@ from devtools.render_explainer import (
     VERIFIER,
     WALKTHROUGH,
     assert_self_contained,
+    current_bound_facts,
     link_revision,
     page_edition,
     png_size,
@@ -91,9 +92,9 @@ def test_title_sets_s11_as_math_without_moving_the_bound_into_math(page: str) ->
     """The title's function is notation; its relation and value remain title text."""
     heading = re.search(r"<h1\b.*?</h1>", page, re.DOTALL)
     assert heading is not None
-    assert heading.group(0) == (
-        '<h1 id="s11--381100"><span class="tex">s(11)</span> ≥ 381/100</h1>'
-    )
+    current = current_bound_facts()
+    assert '<span class="tex">s(11)</span>' in heading.group(0)
+    assert f"≥ {current.bounded_side_decimal}</h1>" in heading.group(0)
 
 
 @pytest.mark.parametrize(
@@ -378,9 +379,22 @@ def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
     assert tags["og:title"] == tags["twitter:title"] == title.group(1)
     assert tags["og:description"] == tags["twitter:description"] == described.group(1)
     assert tags["og:image:alt"] == tags["twitter:image:alt"]
-    # The bound is the certificate's, wherever it is stated.
+    current = current_bound_facts()
     for text in (title.group(1), described.group(1)):
-        assert "s(11) ≥ 381/100" in text
+        assert "s(11)" in text
+        assert current.bounded_side_decimal in text or "current lower bound" in text
+
+
+def test_advanced_section_distinguishes_endpoint_and_weak_limit(document: str) -> None:
+    current = current_bound_facts()
+    assert "## Beyond Point Atoms: The Current Bound" in document
+    assert "T-025 excludes the endpoint $L=191/50=3.82$" in document
+    assert current.bounded_side_decimal in document
+    assert "including rational sides above $3.82$" in document
+    assert "does not supply a certificate at the displayed endpoint" in document
+    assert "Each point-certificate bound shown in the interactive figures" in document
+    assert "threshold certificates use the repository" in document
+    assert "exact replay tools instead" in document
 
 
 def test_the_published_document_is_named_for_the_result(document: str) -> None:
@@ -718,6 +732,9 @@ def test_every_repository_link_is_a_permalink_to_the_commit_the_page_is_built_fr
         ATLAS,
         Path(render_explainer.__file__),
         *WALKTHROUGH,
+        render_explainer.THRESHOLD_CERTIFICATE,
+        render_explainer.THRESHOLD_FINE_CERTIFICATE,
+        render_explainer.CURRENT_BOUND_RECORD,
         *sorted(CASE.glob("*-verifiable-claim-*.md")),
     )
     for path in evidence:
