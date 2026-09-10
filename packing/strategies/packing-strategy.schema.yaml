@@ -1,0 +1,172 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/jlevy/squares/packing/strategies/packing-strategy.schema.yaml
+title: PackingStrategy
+description: >
+  An ordered sequence of optimisation phases for finding or reaching a packing of
+  n unit squares. Nothing here hard-codes a sequence: a strategy is data, and the
+  same document is executed by the Python tools, played by the workbench, and
+  later run by the Rust engine.
+
+  Each phase names a MECHANISM and carries that mechanism's own parameters. The
+  word choices are deliberate and each avoids a collision that already exists in
+  this repository. "Phase" rather than "step", because step already means one
+  solver iteration throughout the code. "Mechanism" rather than "strategy",
+  because frontier/search-strategies.yaml already catalogues 28 individual
+  strategies and the document itself is a PackingStrategy.
+
+  Structural hints declare how much a run was told, which is what makes a
+  comparison between two strategies honest. A run given the record's own contact
+  graph is being told the answer's shape; the rung field says so.
+type: object
+additionalProperties: false
+required: [name, n, phases]
+properties:
+  name:
+    type: string
+    minLength: 1
+    description: Short identifier, e.g. "assemble-then-tighten".
+  n:
+    type: integer
+    minimum: 1
+    description: How many unit squares.
+  seed:
+    type: integer
+    description: Fixes the run. Omitted means the executor chooses and records one.
+  phases:
+    type: array
+    minItems: 1
+    items: {$ref: "#/$defs/phase"}
+
+$defs:
+  structure:
+    type: object
+    additionalProperties: false
+    description: >
+      How much a phase was told about the answer, and where it came from. The rung
+      is the independent variable of the ladder experiment: the top of the ladder
+      IS the answer, and realising a full contact structure is a linear program
+      rather than a search, so the question worth asking is which rung suffices.
+    required: [rung]
+    properties:
+      rung:
+        enum: [none, partition, contact-graph, contact-graph-with-types, with-wall-contacts]
+      source:
+        enum: [record, given, random]
+        default: record
+        description: >
+          Where the structure came from. "record" reads a retained witness and is
+          only honest because the rung says how much of it was used.
+      control:
+        enum: [none, thinned, rewired]
+        default: none
+        description: >
+          The control beside a rung. "thinned" keeps a random subset of the true
+          contacts; "rewired" replaces some with pairs that do NOT touch at the
+          record, so a strategy is told a lie of the same length. Without one, a
+          result says only that constraints helped, never that structure did.
+      keep:
+        type: integer
+        minimum: 0
+        description: For thinned, how many contacts to keep; for rewired, how many to move.
+  constraints:
+    type: object
+    additionalProperties: false
+    description: >
+      How hard the declared structure is held. Bands, never equalities: declared
+      exactly, a record becomes a REPELLING fixed point of the projection, drifting
+      0.0000 at 200 steps and 0.2839 at 4,000, because exact tangency makes the
+      constraint sets meet non-transversally.
+    properties:
+      band:
+        type: number
+        minimum: 0
+        default: 0.02
+        description: How near a declared contact must be to count as touching.
+      weight:
+        type: number
+        minimum: 0
+        default: 1.0
+        description: >
+          How much vote a declared contact gets in the consensus. A square touches
+          about four others at a record but carries n-1 pair replicas, so without
+          this the structure is outvoted by strangers -- and at weight 10 it wins
+          too hard and undeclared squares pass through each other.
+  until:
+    type: object
+    additionalProperties: false
+    description: Why a phase stops. Evidence first, budget as a backstop.
+    properties:
+      feasible: {type: boolean, description: Stop as soon as the arrangement is a packing.}
+      steps: {type: integer, minimum: 1, description: Hard iteration cap.}
+      stalled_for:
+        type: integer
+        minimum: 1
+        description: >
+          Elser's m-monotonicity: abandon once the error has failed to improve for
+          this many iterations. A stop condition on evidence rather than a
+          self-declared budget.
+  phase:
+    type: object
+    additionalProperties: false
+    required: [mechanism]
+    properties:
+      mechanism:
+        enum: [scatter, grid, assemble, project, ratchet, relax, guide]
+        description: >
+          scatter/grid place a starting arrangement; assemble builds the
+          face-contact groups by construction; project settles under divide and
+          concur; ratchet tightens the container with continuation; relax releases
+          the structure and lets angles perturb; guide drives onto a chosen target
+          and is ANIMATION MACHINERY -- nothing it emits is a search result.
+      label: {type: string, description: What to call this phase in a trace or on screen.}
+      relaxation:
+        type: number
+        exclusiveMinimum: 0
+        maximum: 1
+        default: 0.1
+        description: >
+          The RRR step, beta. 1.0 is the Douglas-Rachford limit and is not offered.
+          Structural constraints need 0.1: at 0.3 and above they blow up.
+      structure: {$ref: "#/$defs/structure"}
+      constraints: {$ref: "#/$defs/constraints"}
+      until: {$ref: "#/$defs/until"}
+      side:
+        type: object
+        additionalProperties: false
+        description: What container this phase works in.
+        properties:
+          relative_to: {enum: [record, grid, current]}
+          factor: {type: number, exclusiveMinimum: 0}
+      schedule:
+        type: object
+        additionalProperties: false
+        description: For ratchet -- how the container tightens.
+        properties:
+          start: {type: number, exclusiveMinimum: 0}
+          halve_on_failure: {type: boolean, default: true}
+          floor: {type: number, exclusiveMinimum: 0}
+          attempts: {type: integer, minimum: 1}
+          cold:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: >
+              Fraction of each tightening's attempts spent on fresh random starts
+              rather than continuing the packing in hand. It trades: cold buys
+              escape, continuation buys refinement.
+      target:
+        type: object
+        additionalProperties: false
+        description: For guide -- what to land on, and how.
+        properties:
+          source: {enum: [record], default: record}
+          match:
+            enum: [by-motion, as-given]
+            default: by-motion
+            description: >
+              How targets are assigned to squares. "as-given" is almost always
+              wrong: squares have no identity across arrangements, and with both
+              ends the SAME packing under a relabelling an unmatched transition
+              still peaked at 1.077 of a unit side across 86 frames of 101.
+          steps: {type: integer, minimum: 1}
+          pull: {type: number, exclusiveMinimum: 0}
