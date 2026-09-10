@@ -41,6 +41,7 @@ exploration:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-structural-sites-and-the-depth-one-certificate.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-family-191-50.json
   - docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md
@@ -434,8 +435,54 @@ one budget-one clique atom at `1/2`, five Chvátal–Gomory floor atoms at `5.54
 zero. The dual relocates instead: 64 rows become 42, the excess moves from the mid-wall
 sliver to the interior tilted pair near `(1.29, 1.85)`, deepens from `1.0963` to
 `1.1145`, and ends `0.0077` from any sampled site.
-So the atom language is not what pins `3.825`; the sites are, and chasing them vertex by
-vertex chases one vertex of a wide optimal face.
+That measurement stands.
+**The inference drawn from it was backwards, and is corrected here** (2026-09-10, from
+[lane A6](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-structural-sites-and-the-depth-one-certificate.md)).
+It read as “the atom language is not what pins `3.825`; the sites are”.
+The reason those twenty-four columns entered at weight zero is now understood: an atom
+separated from a **dual vertex** need not cut the optimal **primal** family, and an atom
+that does not cut the primal optimum cannot move the objective.
+That is a fact about which object the separation targeted, not about the atom language.
+
+**On this atom set, no site set can bring the LP below eleven at `153/40`, and the lever
+is the atom set.** Lane A6 exhibits the certificate: a D4-symmetric family of **64
+admissible placements of total exactly 11** whose exact maximum depth is exactly `1`
+over all 14,344 arrangement vertices, and which charges every one of the LP’s 2,566 atom
+orbits at ratio exactly `1`. A family of depth at most one everywhere is dual-feasible
+for *every* site set, so the rows-complete LP at `153/40` on this atom set is at least
+eleven whatever sites are added.
+Three primitives agree on it — the plateau reader holds `K0` through `K3` rather than
+refusing, an independent exact atom check finds none of the 2,566 violated, and
+`sqpack.fractional.ceiling.verify_ceiling` proves it separately.
+The corroborating LP run is beside the point but says the same thing: 1,400 structural
+site orbits, none of them a point the vertex oracle had ever sampled, take 17,389 sites
+to 28,237 and the value from `10.999999999999945` to `11.000000000` in 404.9 s.
+
+**Atoms must be separated from the depth-one certificate, not from the LP dual, and
+support and atoms have to be iterated together.** Six atoms separated from that
+certificate — two two-of-three and four three-of-five, budget 1 each — take the blocking
+support from exactly 11 to **`10.4210526`**, bracketed exactly between a feasible family
+of total `325657893/31250000` and an exact dual bound `2605263163/250000000` with
+`A^T u >= cost` verified in `Fraction`s. Twenty-four atoms separated from a dual vertex
+moved the LP by `2.2e-13`; six separated from the family that actually blocks it move
+their support by `0.579`. Fed to the LP as columns those six also enter at weight
+exactly zero and it stays at eleven, because the LP moves to a support they do not cut,
+so one atom round on one support is to the atom side what one vertex round on one dual
+was to the site side.
+That is the live route, and it is idea 154.
+
+Two readings that follow, and one that does not.
+**Stop adding sites at `153/40`**: rounds cost 200 to 800 s and cannot move the value.
+The deep region is also three structures rather than two, and the mid-wall “sliver
+`0.0006` wide” is one cell of a full-height column with 1,123 distinct deep abscissae
+over a width of `0.0196` and ordinates spanning `[0.0663, 3.7631]`, so the retreat per
+round was never a distance to the edge of anything.
+What does **not** follow is any claim about a restricted-row LP: that program is a
+relaxation, so a restricted-row value below eleven here would be a rows-incompleteness
+artefact rather than a bound.
+A second LP round at 4,000 structural orbits (48,253 sites, 8,815 columns, 63.6 M
+nonzeros) was still in simplex at 71 minutes when the lane closed; it is **OPEN**, not a
+result, and nothing here depends on it.
 A5 measured the fixed-support maximum on the ceiling support under depth-one plus the
 **complete** budget-one class
 ([`lane-a5-the-fixed-support-maximum-under-the-atom-classes.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md)):
@@ -451,9 +498,14 @@ both plateau families carry exactly 3 in every wall strip against a capacity of 
 3, first exceeding 3 only above `2B`, and no axis-aligned box on an eight-step grid
 exceeds its capacity, so containment atoms — which would have been a cut outside the
 `3.868983` bracket — are not the missing cut and should not be built.
-A4’s P10 is the piece that now blocks everything: a `K5` clique atom carries
+A4’s P10 blocks two named atom classes, and only those two: a `K5` clique atom carries
 multiplicities and a `K6` floor atom charges more than one per core, neither is a
 `ThresholdAtom`, so neither can be frozen or gated today even when it does cut.
+It does **not** block the route above.
+All six atoms of the `10.4210526` reading are `(S, k)` threshold atoms with uniform
+multiplicity — two-of-three is `|S| = 3, k = 2` and three-of-five is `|S| = 5, k = 3` —
+which the certificate format already expresses, so that route is freezable and gateable
+today. `think-g3j7` is narrowed accordingly.
 
 ## 6. What this document does not establish
 

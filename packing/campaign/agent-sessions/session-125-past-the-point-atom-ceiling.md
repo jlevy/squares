@@ -95,7 +95,7 @@ session:
   progress:
     metric: The verified lower bound on s(11) in the frontier register, and the retained instruments behind it.
     before: 3.810025723614703 (T-022); the covering LP at 3.82 stops at exactly eleven on every site set; no explanation of the plateau; no certificate language past point atoms.
-    after: s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939 (T-026), reached through T-025's endpoint certificate at 191/50 = 3.82, the first result past the exact point-atom ceiling; the plateau is explained (the site set, not the atom language, carries it) and a certificate language past point atoms exists with two independent decision routes.
+    after: s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939 (T-026), reached through T-025's endpoint certificate at 191/50 = 3.82, the first result past the exact point-atom ceiling; the plateau is explained (corrected 2026-09-10 from lane A6 -- on this atom set no site set can bring the rows-complete LP below eleven at 153/40, because a D4-symmetric depth-one family of 64 placements at total exactly 11 satisfies all 2,566 atom orbits, so the atom set carries it and not the site set) and a certificate language past point atoms exists with two independent decision routes.
   delegations:
   - task: Theory of cuts and routes (lane T); the sandwich lemma and the k-fold witness lemma.
     operator: Claude Fable, high
@@ -271,7 +271,7 @@ session:
     recording: contemporaneous
     phase: 3
     status: completed
-    outcome: All three atom classes violated, two-of-three at 133/100, a 42-member clique at 3/2, floor cuts to 8.27; the LP moved 2.2e-13 and every new column carries primal weight exactly zero. The site set, not the atom language, pins 3.825.
+    outcome: All three atom classes violated, two-of-three at 133/100, a 42-member clique at 3/2, floor cuts to 8.27; the LP moved 2.2e-13 and every new column carries primal weight exactly zero. The measurements stand; the inference drawn from them was corrected on 2026-09-10 by lane A6 -- the atom set, not the site set, pins 3.825, because a depth-one family of total exactly 11 satisfying all 2,566 atom orbits exists at that side and is dual-feasible for every site set. The columns entered at weight zero because atoms separated from a dual vertex need not cut the optimal primal family.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a4-separating-the-plateau-dual-at-153-40.md]
     files: []
     checks: [Every separation verdict a rational, re-verified exactly; the seeded and control runs retained beside the lane report.]

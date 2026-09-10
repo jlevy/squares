@@ -274,6 +274,23 @@ primal weight exactly zero.
 The prediction about the generator held — the `K6` floor atoms were the largest
 violations by an order of magnitude — and it did not matter.
 
+**Correction of record, 2026-09-10.** The second outcome above was written as “the atom
+language is not what pins `3.825`, S4’s reading stands, and the sites must be placed by
+the sliver’s structure”.
+The LP reading is right and the inference is backwards.
+[Lane A6](lane-a6-structural-sites-and-the-depth-one-certificate.md) exhibits a
+D4-symmetric family of 64 admissible placements, total exactly 11, exact maximum depth
+exactly 1 everywhere, satisfying every one of the LP’s 2,566 atom orbits at ratio
+exactly
+1. Such a family is dual-feasible for **every** site set, so **on this atom set no site
+   set can bring the rows-complete LP below eleven at `153/40`: the lever is the atom
+   set, not the site set.** The twenty-four columns entered at weight zero because an
+   atom separated from a dual vertex need not cut the optimal primal family, and an atom
+   that does not cut the primal optimum cannot move the objective.
+   Atoms have to be separated from the depth-one certificate, with support and atoms
+   iterated together; six so separated take the blocking support from exactly 11 to
+   `10.4210526`, bracketed exactly.
+
 ## Uncertainties, and what would decide each
 
 - **The four-corner claim.** `(j3, j3, j3, j3)` leaves survivor exactly 7 against
@@ -286,7 +303,12 @@ violations by an order of magnitude — and it did not matter.
   An emptiness proof is not a covering argument, so it would not rescue the method, only
   these classes; a pose-feasibility check on the two sectors would decide it.
 - **A larger guaranteed patch**, registered after this lane as
-  [`H-157`](../../../../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md).
+  [`H-157`](../../../../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md)
+  and **refuted** on 2026-09-10 by `exp-154`: the refined patch does not clear `0.015`,
+  because the reach is pinned by the mark, which is a vertex of every patch at every bin
+  count. The screen is retained as
+  [lane X4](lane-x4-sixteen-sectors-and-the-refinement-limit.md), and its two theorems
+  rule out patch refinement as the lever without showing the conditional strategy fails.
   The closest survivor to the `j3` footprint sits at Euclidean separating gap
   **`0.014978`** — a weight-`1/8` wall placement centred at `(1.50658, 0.50885)`. A
   patch reaching `0.015` further picks up `1/8` and opens `0.125` of room, against a

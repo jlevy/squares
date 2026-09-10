@@ -133,6 +133,26 @@ The value at `153/40` on this column set is held at eleven by something
 the rank-one point-atom language cannot express, and adding more of that language moves
 the dual rather than the objective.
 
+**Correction of record, 2026-09-10: the reading above is inverted, and the measurement
+is not.** Every number in this section stands.
+What was wrong is the inference from them.
+[Lane A6](lane-a6-structural-sites-and-the-depth-one-certificate.md) exhibits a
+D4-symmetric family of 64 admissible placements of total exactly 11, exact maximum depth
+exactly 1 everywhere, charging every one of the LP’s 2,566 atom orbits at ratio exactly
+1. A depth-one family is dual-feasible for **every** site set, so on this atom set no
+   site set can bring the rows-complete LP below eleven at `153/40`: **it is the atom
+   set, not the site set, that pins `3.825`.**
+
+The reason the twenty-four columns here entered at primal weight exactly zero is now
+understood, and it is narrower than a statement about the language.
+An atom separated from a **dual vertex** need not cut the optimal **primal** family, and
+an atom that does not cut the primal optimum cannot move the objective.
+That is a fact about which object the separation targeted.
+Separated from the depth-one certificate instead, six atoms — two two-of-three and four
+three-of-five — take the blocking support from exactly 11 to `10.4210526`, bracketed
+exactly, where these twenty-four moved the LP by `2.2e-13`. The route is to iterate
+support and atoms together, separating from the certificate.
+
 The corollary for the site chase is sharper than lane A3’s S4. S4 read the excess
 retreating into a mid-wall sliver at `0.0006` per round and concluded that sites must be
 placed by the sliver’s structure.
@@ -145,6 +165,11 @@ Chasing the mid-wall sliver would have chased one vertex of a wide optimal face.
 **That is the argument for generating sites by structure rather than by arrangement
 vertex**, and it is carried as its own bead: vertex-by-vertex separation costs about 825
 s a round, moves nothing, and the obstruction migrates between rounds.
+
+That bead (`think-q0f4`) ran on 2026-09-10 and answered itself in the negative: the
+structural generator does read the deep region two orders of magnitude faster and three
+times better than the vertex oracle, and the LP still does not move, because no site set
+can move it. The site side is closed on this atom set; see lane A6, G8.
 
 ## 4. Trajectory
 
