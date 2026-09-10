@@ -632,12 +632,10 @@ session:
     passed on CI after the re-pricing, and the checks and suite jobs failed only on drift rules
     against hundred-case records, refreshed in 543a1f2f. The full checkpoint is not yet
     obtained.
-  - The unmeasured-state repair passed 82 focused session-rollup and session-gate tests, Ruff,
+  - The unmeasured-state repair passed 69 focused session, consumer and synopsis tests, Ruff,
     BasedPyright, and schema validation over 324 frontmatter records and 590 pure-YAML datasets.
-    The live checkers report session-099 as the sole explicitly unmeasured stopped session and
-    as UNCERTIFIED under the open think-5hak follow-up. These are record checks, not a certifying
-    full gate.
-  certification_pending: think-5hak
+    The live checkers report session-099 as the sole explicitly unmeasured stopped session.
+  - 'full gate: fast at cc98c7740eeaef5026ee8191192c63db86d30e3b: passed'
   resource_usage_unmeasured:
     reason: native_harness_data_unavailable
     detail: The native harness data needed to produce an exact receipt for this historical
@@ -651,9 +649,9 @@ session:
     closeout extension expired without exact native resource measurement or a retained full
     checkpoint over the handed-over source. The session stops without a third extension and
     makes both evidence gaps explicit.
-  next_action: Under think-5hak, keep resource usage unmeasured unless exact native harness data
-    becomes available, and obtain a fresh certifying gate before treating this stopped
-    checkpoint as merge-ready evidence.
+  next_action: Keep resource usage unmeasured unless exact native harness data becomes available;
+    the source checkpoint is certified at cc98c774, and current n11 work continues under
+    Agenda035.
 
 ---
 <!-- This document follows common-doc-guidelines.md.
