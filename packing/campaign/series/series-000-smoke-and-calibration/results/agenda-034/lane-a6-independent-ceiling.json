@@ -1,0 +1,168 @@
+{
+  "n": 11,
+  "outer_side": "153/40",
+  "square_side": "9977/10000",
+  "placements": 64,
+  "net": {
+    "size": 181,
+    "limit": "207107/500000",
+    "uniform_steps": 180,
+    "strictly_increasing": true
+  },
+  "K0": {
+    "holds": true,
+    "failures": [],
+    "net_placements": 32,
+    "mirror_placements": 32,
+    "net_indices_used": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      27,
+      116
+    ],
+    "net_half_tangents_used": [
+      "0",
+      "207107/90000000",
+      "207107/45000000",
+      "207107/30000000",
+      "207107/18000000",
+      "621321/10000000",
+      "6006103/22500000"
+    ],
+    "distinct_half_tangents": 14,
+    "distinct_orientations": 13
+  },
+  "K1": {
+    "holds": true,
+    "failures": [],
+    "corners_checked": 256
+  },
+  "K2": {
+    "holds": true,
+    "max_depth": "1",
+    "max_depth_float": 1.0,
+    "attaining_vertices": 3324,
+    "first_attaining_vertex": [
+      "41461920197/41527220000",
+      "41461920197/41527220000"
+    ],
+    "vertices": 14344,
+    "edge_lines": 256,
+    "distinct_lines": 228,
+    "crossing_pairs": 24900,
+    "inside_pairs": 14344,
+    "depth_histogram": {
+      "0": 1012,
+      "1/16": 112,
+      "1/8": 192,
+      "5/32": 24,
+      "3/16": 144,
+      "1/4": 600,
+      "5/16": 456,
+      "3/8": 300,
+      "13/32": 296,
+      "7/16": 200,
+      "15/32": 32,
+      "1/2": 1388,
+      "9/16": 96,
+      "19/32": 240,
+      "5/8": 584,
+      "21/32": 16,
+      "11/16": 612,
+      "23/32": 72,
+      "3/4": 2280,
+      "13/16": 936,
+      "27/32": 104,
+      "7/8": 384,
+      "29/32": 344,
+      "15/16": 596,
+      "1": 3324
+    },
+    "enumeration_seconds": 0.086,
+    "depth_seconds": 1.148
+  },
+  "K3": {
+    "holds": true,
+    "total_weight": "11",
+    "n": 11
+  },
+  "D4": {
+    "holds": true,
+    "corner_multiset_invariant": {
+      "identity": true,
+      "rotation by 90": true,
+      "rotation by 180": true,
+      "rotation by 270": true,
+      "reflection in x = L/2": true,
+      "reflection in y = L/2": true,
+      "reflection in y = x": true,
+      "reflection in x + y = L": true
+    },
+    "triple_multiset_invariant": {
+      "identity": true,
+      "rotation by 90": true,
+      "rotation by 180": true,
+      "rotation by 270": true,
+      "reflection in x = L/2": true,
+      "reflection in y = L/2": true,
+      "reflection in y = x": true,
+      "reflection in x + y = L": true
+    },
+    "orbit_count_if_free": "8"
+  },
+  "regime": "net",
+  "symmetric_only": true,
+  "proved": true,
+  "theorem": "For n = 11, L = 153/40, B = 9977/10000: no D4-symmetric measure on [0, L]^2 of total mass below 11 gives mass >= 1 to every closed B-square at a net angle inside [0, L]^2, for this net and every net containing the net angles with indices 0, 1, 2, 3, 5, 27, 116, for this B and every smaller B, and for this L and every larger L. Hence the point-atom certificate method (conditions C1-C5) cannot certify s(11) >= 153/40 at this shrink, at any smaller shrink on such a net, or at any larger side. It says nothing about whether 11 unit squares fit in side 153/40.",
+  "seconds": 1.258,
+  "record": "campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-saturated-symmetric-153-40.json",
+  "sha256": "b0ee48d6b5a12e61e05413b089726b0efea79fcabd97a112c464fb69553811c6",
+  "retained_sha256_matches": false,
+  "controls": [
+    {
+      "control": "weights scaled by 8/7",
+      "rejected": true,
+      "expected_failures": [
+        "K2",
+        "K3"
+      ],
+      "observed_failures": [
+        "K2",
+        "K3"
+      ],
+      "as_expected": true,
+      "max_depth": "8/7",
+      "total_weight": "88/7"
+    },
+    {
+      "control": "first centre shifted by L",
+      "rejected": true,
+      "expected_failures": [
+        "K1"
+      ],
+      "observed_failures": [
+        "K1"
+      ],
+      "as_expected": true,
+      "max_depth": "1",
+      "total_weight": "11"
+    },
+    {
+      "control": "first half-tangent set to 1/3",
+      "rejected": true,
+      "expected_failures": [
+        "K0"
+      ],
+      "observed_failures": [
+        "K0",
+        "K1"
+      ],
+      "as_expected": true,
+      "max_depth": "1",
+      "total_weight": "11"
+    }
+  ]
+}

@@ -1,0 +1,460 @@
+{
+  "arbitrary_subpatch_counterexample": {
+    "common_mark_ids": [],
+    "construction": "core 59 scaled by 1/10000 about corner 2",
+    "corner_index": 2,
+    "equality_premise_holds": false,
+    "inside_owner_core": true,
+    "owner_core": 59,
+    "patch": [
+      [
+        "896260724897/88696100000000",
+        "498358031699/49318700000000"
+      ],
+      [
+        "177482303/17739220000",
+        "498358031699/49318700000000"
+      ],
+      [
+        "177482303/17739220000",
+        "98687501/9863740000"
+      ],
+      [
+        "896260724897/88696100000000",
+        "98687501/9863740000"
+      ]
+    ],
+    "patch_area": "99540529/10000000000000000",
+    "sat_clipping_survivor_sets_identical": true,
+    "subset_lower_bound_holds": true,
+    "survivor_count": 86,
+    "survivor_weight": "43/4",
+    "survivor_weight_equals_ten": false
+  },
+  "distance_cases": [
+    {
+      "bins": 8,
+      "class_id": "bottom-left:m1:j3",
+      "class_kind": "parent",
+      "fixed_target": 55,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m1",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        55
+      ],
+      "parent_sector": 3,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 3,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m1:J6/16",
+      "class_kind": "child",
+      "fixed_target": 55,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m1",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        55
+      ],
+      "parent_sector": 3,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 6,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m1:J7/16",
+      "class_kind": "child",
+      "fixed_target": 55,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m1",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        55
+      ],
+      "parent_sector": 3,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 7,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 8,
+      "class_id": "bottom-left:m1:j4",
+      "class_kind": "parent",
+      "fixed_target": 55,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m1",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        55
+      ],
+      "parent_sector": 4,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 4,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m1:J8/16",
+      "class_kind": "child",
+      "fixed_target": 55,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m1",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        55
+      ],
+      "parent_sector": 4,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 8,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m1:J9/16",
+      "class_kind": "child",
+      "fixed_target": 55,
+      "fixed_target_distance_squared": "0",
+      "fixed_target_intersects": true,
+      "intersection_area": "9222372181955609687025480276566995509626950895711929/209023728552687322733150309907630740784000000000000000",
+      "intersection_polygon": [
+        [
+          "4597422661/4562140000",
+          "146121973916607530293410923/208793202482000400000000000"
+        ],
+        [
+          "4597422661/4562140000",
+          "100854588935708558617770723/500552044003220832525980000"
+        ],
+        [
+          "3521268481008586568/2972032642557983575",
+          "654670320035302984311/2377626114046386860000"
+        ]
+      ],
+      "mark": "m1",
+      "nearest_actual_survivor_distance_squared": "154520421972020636842286626510179978387793755009897266163721/8274126656975111962857032162670705972822328494029059600000000",
+      "nearest_actual_survivor_indices": [
+        75
+      ],
+      "parent_sector": 4,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 9,
+      "survivor_count": 76,
+      "survivor_weight": "19/2"
+    },
+    {
+      "bins": 8,
+      "class_id": "bottom-left:m2:j3",
+      "class_kind": "parent",
+      "fixed_target": 50,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m2",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        50
+      ],
+      "parent_sector": 3,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 3,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m2:J6/16",
+      "class_kind": "child",
+      "fixed_target": 50,
+      "fixed_target_distance_squared": "0",
+      "fixed_target_intersects": true,
+      "intersection_area": "9222372181955609687025480276566995509626950895711929/209023728552687322733150309907630740784000000000000000",
+      "intersection_polygon": [
+        [
+          "146121973916607530293410923/208793202482000400000000000",
+          "4597422661/4562140000"
+        ],
+        [
+          "654670320035302984311/2377626114046386860000",
+          "3521268481008586568/2972032642557983575"
+        ],
+        [
+          "100854588935708558617770723/500552044003220832525980000",
+          "4597422661/4562140000"
+        ]
+      ],
+      "mark": "m2",
+      "nearest_actual_survivor_distance_squared": "154520421972020636842286626510179978387793755009897266163721/8274126656975111962857032162670705972822328494029059600000000",
+      "nearest_actual_survivor_indices": [
+        76
+      ],
+      "parent_sector": 3,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 6,
+      "survivor_count": 76,
+      "survivor_weight": "19/2"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m2:J7/16",
+      "class_kind": "child",
+      "fixed_target": 50,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m2",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        50
+      ],
+      "parent_sector": 3,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 7,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 8,
+      "class_id": "bottom-left:m2:j4",
+      "class_kind": "parent",
+      "fixed_target": 50,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m2",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        50
+      ],
+      "parent_sector": 4,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 4,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m2:J8/16",
+      "class_kind": "child",
+      "fixed_target": 50,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m2",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        50
+      ],
+      "parent_sector": 4,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 8,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "bins": 16,
+      "class_id": "bottom-left:m2:J9/16",
+      "class_kind": "child",
+      "fixed_target": 50,
+      "fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "fixed_target_intersects": false,
+      "intersection_area": "0",
+      "intersection_polygon": [],
+      "mark": "m2",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_indices": [
+        50
+      ],
+      "parent_sector": 4,
+      "published_survivor_record_identical": true,
+      "sat_clipping_survivor_sets_identical": true,
+      "sector": 9,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    }
+  ],
+  "mark_containing_patch_control": {
+    "common_mark_ids": [
+      "m1",
+      "m2"
+    ],
+    "equality_premise_holds": true,
+    "inside_owner_core": true,
+    "owner_core": 59,
+    "patch_area": "99540529/100000000",
+    "subset_lower_bound_holds": true,
+    "survivor_count": 80,
+    "survivor_weight": "10",
+    "survivor_weight_equals_ten": true
+  },
+  "pose_rows": [
+    {
+      "centre": [
+        "45133461/88696100",
+        "25096071/49318700"
+      ],
+      "contains_marks": {
+        "m1": true,
+        "m2": true
+      },
+      "core_side": "9977/10000",
+      "half_tangent": "0",
+      "index": 59,
+      "same_centre_same_angle_unit_parent_contained": true,
+      "same_centre_same_angle_unit_parent_wall_margin": "785411/88696100",
+      "sat_clipping_survivor_sets_identical": true,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    },
+    {
+      "centre": [
+        "25096071/49318700",
+        "45133461/88696100"
+      ],
+      "contains_marks": {
+        "m1": true,
+        "m2": true
+      },
+      "core_side": "9977/10000",
+      "half_tangent": "1",
+      "index": 60,
+      "same_centre_same_angle_unit_parent_contained": true,
+      "same_centre_same_angle_unit_parent_wall_margin": "785411/88696100",
+      "sat_clipping_survivor_sets_identical": true,
+      "survivor_count": 80,
+      "survivor_weight": "10"
+    }
+  ],
+  "refined_survivor_summary": {
+    "class_count": 8,
+    "maximum_attaining_class_count": 6,
+    "maximum_survivor_weight": "10",
+    "minimum_survivor_weight": "19/2"
+  },
+  "schema": "h157-geometry-receipt-v1",
+  "scope": {
+    "changes_global_packing_bounds": false,
+    "new_research_target": false,
+    "operation": "replay of the retained H157 geometry result",
+    "physical_completion_claim": false
+  },
+  "source_manifest": {
+    "case_contract": {
+      "eight_bin_parents": [
+        "m1:j3",
+        "m1:j4",
+        "m2:j3",
+        "m2:j4"
+      ],
+      "fixed_targets": {
+        "m1": 55,
+        "m2": 50
+      },
+      "intersection_before_distance": [
+        "m1:J9",
+        "m2:J6"
+      ],
+      "pose_cores": [
+        59,
+        60
+      ],
+      "sixteen_bin_children": [
+        "m1:J6",
+        "m1:J7",
+        "m1:J8",
+        "m1:J9",
+        "m2:J6",
+        "m2:J7",
+        "m2:J8",
+        "m2:J9"
+      ],
+      "subpatch_counterexample": "core 59 scaled by 1/10000 about corner 2"
+    },
+    "repository_head": "6ed45816bc176170bdaa008248d22a6d09956a00",
+    "schema": "h157-geometry-source-manifest-v1",
+    "sources": [
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "2afc8fa9099f0d17c1f184400f7ebd2eb6483857",
+        "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-family-191-50.json",
+        "purpose": "retained ceiling family"
+      },
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "1ff2aac4902c89a205d0f97c8b276a7617ebe2b5",
+        "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-nbins.py.txt",
+        "purpose": "retained sixteen-bin helper"
+      },
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "fadc62ad7493f040a430340934e7fcb67ae4ccae",
+        "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-survivors-16.json",
+        "purpose": "published sixteen-bin survivor rows"
+      },
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "65501ad186a463eb5e7e16978daf03e603149fbd",
+        "path": "packing/devtools/owner_footprints.py",
+        "purpose": "exact owner geometry"
+      },
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "f8a993a9a2c24a0c844d5e43e10d33d95b332565",
+        "path": "packing/devtools/screen_corner_dual_salvage.py",
+        "purpose": "exact separating-axis screen"
+      },
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "abb8ebe3f0b5b168133659bcef93971ae5c4c1b6",
+        "path": "packing/devtools/transport_ceiling_family.py",
+        "purpose": "exact family transport"
+      },
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "f026bd04186787096fb57128517e319e7ee1ae00",
+        "path": "packing/src/sqpack/fractional/ceiling.py",
+        "purpose": "ceiling-family reader"
+      },
+      {
+        "clean_worktree_and_head_match": true,
+        "git_blob": "a5df6094eadfe441dba66fee8fe37a4e5530b6f6",
+        "path": "packing/src/sqpack/fractional/model.py",
+        "purpose": "exact direction model"
+      }
+    ]
+  }
+}

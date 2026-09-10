@@ -1,0 +1,112 @@
+{
+  "atom_admission": {
+    "admitted": false,
+    "arithmetic": "exact rational",
+    "declared_total_weight": "11",
+    "distinct_sites": 76,
+    "orbit_count": 3,
+    "orbit_images": 20,
+    "orbits": [
+      {
+        "budget": "4",
+        "charge": "11/2",
+        "charge_to_budget": "11/8",
+        "image_charges": [
+          "11/8",
+          "11/8",
+          "11/8",
+          "11/8"
+        ],
+        "index": 0,
+        "orbit_size": 4,
+        "per_image_budget": "1",
+        "slack": "-3/2",
+        "support_size": 5,
+        "threshold": 3,
+        "violated": true
+      },
+      {
+        "budget": "8",
+        "charge": "11",
+        "charge_to_budget": "11/8",
+        "image_charges": [
+          "11/8",
+          "11/8",
+          "11/8",
+          "11/8",
+          "11/8",
+          "11/8",
+          "11/8",
+          "11/8"
+        ],
+        "index": 1,
+        "orbit_size": 8,
+        "per_image_budget": "1",
+        "slack": "-3",
+        "support_size": 3,
+        "threshold": 2,
+        "violated": true
+      },
+      {
+        "budget": "8",
+        "charge": "33/4",
+        "charge_to_budget": "33/32",
+        "image_charges": [
+          "33/32",
+          "33/32",
+          "33/32",
+          "33/32",
+          "33/32",
+          "33/32",
+          "33/32",
+          "33/32"
+        ],
+        "index": 2,
+        "orbit_size": 8,
+        "per_image_budget": "1",
+        "slack": "-1/4",
+        "support_size": 5,
+        "threshold": 3,
+        "violated": true
+      }
+    ],
+    "outer_side": "153/40",
+    "placements": 64,
+    "recomputed_total_weight": "11",
+    "square_side": "9977/10000",
+    "violations": [
+      {
+        "budget": "4",
+        "charge": "11/2",
+        "charge_to_budget": "11/8",
+        "index": 0,
+        "slack": "-3/2"
+      },
+      {
+        "budget": "8",
+        "charge": "11",
+        "charge_to_budget": "11/8",
+        "index": 1,
+        "slack": "-3"
+      },
+      {
+        "budget": "8",
+        "charge": "33/4",
+        "charge_to_budget": "33/32",
+        "index": 2,
+        "slack": "-1/4"
+      }
+    ],
+    "worst": {
+      "budget": "4",
+      "charge": "11/2",
+      "charge_to_budget": "11/8",
+      "index": 0
+    }
+  },
+  "ceiling_proof": {
+    "checked": false,
+    "obligation": "K0--K3 geometry, containment, maximum depth, total, and D4 symmetry must be decided separately by devtools.independent_ceiling_reader"
+  },
+  "kind": "threshold-atom-orbit-admission/v1"
+}

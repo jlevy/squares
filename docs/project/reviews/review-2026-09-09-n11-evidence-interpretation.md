@@ -232,6 +232,79 @@ No universal ranking follows from the observations.
 An exact negative remains useful at its declared scope; a priority decision requires
 stated estimates and may change when a new comparison supplies evidence.
 
+## Later Source Review — A6 and H157 Through 6ed45816
+
+The author added A6 and H157/exp154 in `ee98c4ba`, then supplied the A6 atom input and
+upper-certificate rows in `6ed45816`. This addendum records the new review rather than
+extending the earlier PASS to unseen evidence.
+The
+[evidence account’s §13](../research/research-2026-09-09-n11-evidence-and-inference.md#13-the-later-a6-and-h157-results-what-has-been-checked)
+defines the two LPs, states the new observations and follows their implications.
+The global bracket and T-024–T-026 proof packets are unchanged.
+
+| Evidence | Review disposition |
+| --- | --- |
+| A6’s 64-placement point family | Independent integer/rational reader passed K0–K3 and D4, all 14,344 arrangement vertices and three negative controls |
+| A6’s old 2,566 atom inequalities | Exact input retained and all memberships replayed without a float screen: 20,524 images, 14,949 sites, no violation; 935 orbits attain ratio one and 1,631 have slack |
+| A6’s six new atoms and 10.42 support calculation | Existing threshold representation suffices; all six cut charges reproduced. Independent reconstruction of the full 280-placement support and seven priced rows verifies upper bound `2605263163/250000000`, with minimum column slack `3/500000000`. The returned family has depth above one; its selected-row lower feasibility was not admitted by this check |
+| Larger LP after the six atoms | Author-reported objective remains eleven; no global certificate or improved bound follows |
+| Second structural-site LP | Ended by a container restart after remaining unfinished beyond 4,260 seconds; no retained final value. This timing does not establish an asymptotic cost law |
+| H157’s survivor criterion | Separate Astra Max review reproduced six subclasses at ten, two at `19/2` and the 32-class maximum ten; the maximum-based rejection stands |
+| H157’s distance mechanism | Two intersecting cases invalidate the delivered positive-distance calculation. Correct those cases and its all-children interpretation; the six neutral distances and survivor counts remain supported |
+| Angular and pose propositions | Valid with the declared finite universe and patch-only residual domain. Guaranteed subpatches inside core 59 give survivor weight at least ten; equality needs the common mark in the patch |
+| Comparative strategy judgments | The counts and two matching cut maxima do not establish a universal productivity or runtime ranking |
+
+The later source review found a positive-area counterexample to T2’s unqualified
+equality: a small corner subpatch of core 59 leaves weight `43/4`. It also independently
+confirmed that cores 59/60 each have a contained isolated unit parent.
+Neither a full packing completion nor an unavoidable neutral owner selection was shown.
+This distinguishes a repaired local obstruction from a claim about every conditional
+proof strategy.
+
+The
+[A6 upper admission](../../../packing/cases/n11_fractional_certificate/a6_dual_upper/README.md)
+requires the retained support to be exactly D4-closed and matches every source orbit to
+one certificate column.
+Twelve focused controls passed.
+The bound applies directly to tied weights under the seven rows and to their stronger
+full-depth program. The
+[separate scope review](review-2026-09-10-n11-a6-scope-and-plan.md) supplies the
+D4-averaging argument for arbitrary weights on the same invariant full-depth program.
+Neither result bounds an enlarged placement support.
+
+The H157 replay reproduced the eight-bin equivalence control, saved sixteen-sector JSON
+and singleton-ray scan.
+Exact clipping confirmed all twelve parent/child survivor sets and all 270 rays selected
+as neutral by SAT. That control is not a separate census of all remaining rays or
+verification of the faulty distance calculation.
+Source and import identities bind the review to ee98c4ba and the unchanged geometry
+modules from the reported engine `67ccd16b`. The
+[initial independent review](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/review.md)
+and
+[correction pass](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/correction-review.md)
+are retained. The maintained `devtools.replay_h157_geometry` independently compares SAT
+and clipping for the twelve cases, decides intersection before distance, and replays the
+isolated-parent and arbitrary-subpatch checks.
+Its
+[receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-corrected-replay/geometry-receipt.json)
+and Git source manifest are retained; all five focused controls passed.
+It does not claim to rerun the full singleton-ray census.
+
+The complete hosted and supplemental checkpoint for d21c27b9 passed.
+The older manually dispatched workflow omitted four new certificate checks; their local
+supplement passed on the identical clean Git tree.
+That prior completion is retained separately from the validation still needed for the
+later source and corrections.
+PR139’s [current review record](https://github.com/jlevy/squares/pull/139) owns the
+final checkout, gate and merge disposition.
+
+The work map is think-a4an for source reconciliation, think-aocp for A6, think-9zc9 for
+H157 and think-yl6y for the final checkpoint.
+The prospective overnight epic think-gvlg keeps separate pricing, pair, parent-domain,
+atom-format and efficiency beads.
+The owner’s V3-plan alignment request is tracked in think-i1fr with its source path
+still pending; this review does not claim compliance with an unread specification.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -1,0 +1,7 @@
+[1] membership predicate: 1444 rays x 8 sectors, disagreements = 0
+[1b] every ray lies in >=1 closed bin: bins=8 True, bins=16 True
+[1c] rays on a bin boundary (in 2 bins): bins=8 4, bins=16 4
+[2] sector_endpoint_rays over 8 sectors, disagreements = 0
+[3] endpoint footprints over 16 classes, disagreements = 0
+[4] manifest class ids match True; reflection pairing matches True
+[4b] bins=16 manifest: 32 classes per corner

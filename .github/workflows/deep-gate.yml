@@ -1,6 +1,6 @@
 name: Deferred checkpoint
 
-# The seven steps the pull-request surface defers, run against a pull request *before* it
+# The eleven steps the pull-request surface defers, run against a pull request *before* it
 # merges rather than after it. Not on every build, and that is the point: the selection
 # here is 1943.05s in one step.
 #

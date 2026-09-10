@@ -1,0 +1,22 @@
+=== cross-check: SAT verdict vs exact clipping verdict ===
+  m1:j3 (8 bins)         clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m1:j4 (8 bins)         clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m1:J6 (16 bins)        clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m1:J7 (16 bins)        clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m1:J8 (16 bins)        clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m1:J9 (16 bins)        clipping 19/2      SAT 19/2      identical survivor sets True  -> AGREE
+  m2:j3 (8 bins)         clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m2:j4 (8 bins)         clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m2:J6 (16 bins)        clipping 19/2      SAT 19/2      identical survivor sets True  -> AGREE
+  m2:J7 (16 bins)        clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m2:J8 (16 bins)        clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  m2:J9 (16 bins)        clipping 10        SAT 10        identical survivor sets True  -> AGREE
+  ALL AGREE: True
+
+=== singleton-ray limit, replayed by clipping on the neutral-attaining rays ===
+  mark m1: SAT says 135 neutral rays; clipping confirms 135  -> AGREE
+    angular span [147.17510, 181.58208] deg, width 34.40698, contiguous in the ray order: True (135 rays in the span)
+  mark m2: SAT says 135 neutral rays; clipping confirms 135  -> AGREE
+    angular span [178.41792, 212.82490] deg, width 34.40698, contiguous in the ray order: True (135 rays in the span)
+
+wall time 73.24 s

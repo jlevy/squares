@@ -10,6 +10,55 @@ at the end now separates what is retained here from what stayed in scratch.
 X-024 carries the coordinator’s reading, and §5 of that document now carries this lane’s
 correction of the site-versus-atom inference.
 
+## Independent Source Review, September 10, 2026
+
+The delivered report below is historical evidence.
+The
+[consolidated account’s §13](../../../../../../docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#13-the-later-a6-and-h157-results-what-has-been-checked)
+and its
+[review](../../../../../../docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md#later-source-review--a6-and-h157-through-6ed45816)
+give the current interpretation.
+The later handoff at `6ed45816` supplies the atom input and seven priced
+upper-certificate rows that the first source review requested.
+
+The independent point reader confirmed G8’s 64-placement family: valid containment and
+directions, D4 symmetry, total weight eleven, maximum depth one over 14,344 arrangement
+vertices, and three rejected negative controls.
+A separate exact atom reader then reconstructed all 2,566 retained orbits and checked
+every membership at their 14,949 distinct sites without a floating screen.
+No orbit violates its budget.
+The maximum ratio is one, attained by 935 orbits; 1,631 have strict slack.
+G8 and §6’s wording that **every** ratio equals one should therefore read **at most**
+one.
+
+These checks establish the stated all-point obstruction with this fixed atom set and
+core domain. They do not validate every other measurement labelled EXACT below: a
+floating tolerance, without a proved error bound, does not make all unscreened
+membership decisions exact.
+Nor do they close a whole atom language.
+New atoms in the existing language can cut this particular family, as the later loop
+demonstrates.
+
+G13’s upper certificate passed an independent exact reconstruction of the full
+280-placement support and all seven priced geometric rows.
+The admitted upper bound is `2605263163/250000000`, with minimum column slack
+`3/500000000`; the
+[reader, receipt and controls](../../../../../cases/n11_fractional_certificate/a6_dual_upper/README.md)
+are retained. The delivered lower family has depth above one, so it supplies no lower
+bound for the full-depth program.
+The upper certificate bounds that more constrained program on the same fixed support,
+directly for tied weights and by the stated D4-averaging argument for arbitrary weights.
+The statement that neither end of the bracket bounds the full-depth program is too
+broad. Neither conclusion controls a changed support without an additional argument.
+
+The second structural-site LP ended without a final value when the author’s container
+restarted. Its unfinished solve after more than 4,260 seconds is a cost observation, not
+an asymptotic scaling law or a proof that another configuration is unaffordable.
+Likewise, sampled cell widths and nearest-site distances do not prove that every
+effective site set must be a uniform net of the estimated size.
+Strategy priorities remain conditional on these narrower findings and on the next
+declared comparison.
+
 Labels: **EXACT** (a rational decision by a repository primitive or by a float proposal
 whose every ambiguous entry was decided in `Fraction`s), **CHECKED** (a float LP or
 float sweep reading), **RECORD** (retained files), **OPEN**.

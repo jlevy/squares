@@ -211,6 +211,13 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
+| [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
+| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | current | transient | — |
+| [Independent Review of the Unit-Parent Centre Bound](docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md) | dated review record | record | retained | — |
+| [Exact Threshold-Atom Orbit Admission](packing/cases/n11_fractional_certificate/threshold-atom-orbit-admission.md) | research synthesis | record | retained | — |
+| [H157 and Conditional-Claim Review at ee98c4ba](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/review.md) | dated review record | record | retained | — |
+| [Bounded Review of the H157 Corrections](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/correction-review.md) | dated review record | record | retained | — |
 | [Unit-Parent Centre Restriction: Author-Lane Proof Check](docs/project/reviews/review-2026-09-10-n11-parent-centre-author-check.md) | dated review record | record | retained | — |
 | [N11 Research: Definitions, Findings, and the Inference Chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md) | research synthesis | record | retained | — |
 | [Inference Audit: Owner Geometry and Fixed-D Continuation](docs/project/research/research-2026-09-09-n11-inference-audit.md) | research synthesis | record | retained | — |

@@ -1,0 +1,56 @@
+"""Control: the parametrised module at bins=8 must reproduce the tracked behaviour exactly."""
+from __future__ import annotations
+
+import sys
+from fractions import Fraction
+
+sys.path.insert(0, "/private/tmp/n11-h157-ee98-review/replayed")
+
+from devtools import owner_footprints as tracked
+import nbins
+
+man = tracked.owner_branch_manifest()
+dirs = man.directions.directions
+rays = tracked.signed_axis_rays(dirs)
+
+# 1. membership predicate
+bad = 0
+for j in range(8):
+    for r in rays:
+        if tracked._sector_contains(j, r) != nbins.sector_contains(j, r, 8):
+            bad += 1
+print(f"[1] membership predicate: {len(rays)} rays x 8 sectors, disagreements = {bad}")
+
+# every ray is in at least one sector, at both resolutions
+cover8 = all(any(nbins.sector_contains(j, r, 8) for j in range(8)) for r in rays)
+cover16 = all(any(nbins.sector_contains(j, r, 16) for j in range(16)) for r in rays)
+print(f"[1b] every ray lies in >=1 closed bin: bins=8 {cover8}, bins=16 {cover16}")
+mult8 = sum(sum(nbins.sector_contains(j, r, 8) for j in range(8)) > 1 for r in rays)
+mult16 = sum(sum(nbins.sector_contains(j, r, 16) for j in range(16)) > 1 for r in rays)
+print(f"[1c] rays on a bin boundary (in 2 bins): bins=8 {mult8}, bins=16 {mult16}")
+
+# 2. endpoint rays
+bad = 0
+for j in range(8):
+    if tracked.sector_endpoint_rays(j, dirs) != nbins.sector_endpoint_rays(j, dirs, 8):
+        bad += 1
+print(f"[2] sector_endpoint_rays over 8 sectors, disagreements = {bad}")
+
+# 3. endpoint footprint polygons for all 16 tracked classes
+bad = 0
+for owner in man.classes:
+    a = tracked.endpoint_footprint(owner.mark, owner.sector, dirs)
+    b = nbins.endpoint_footprint(owner.mark, owner.sector, dirs, 8)
+    if a != b:
+        bad += 1
+        print("   MISMATCH", owner.class_id)
+print(f"[3] endpoint footprints over 16 classes, disagreements = {bad}")
+
+# 4. class manifest shape
+m8 = nbins.owner_branch_manifest(8, dirs)
+same_ids = [c.class_id for c in m8.classes] == [c.class_id for c in man.classes]
+same_refl = [c.reflected_class_id for c in m8.classes] == [c.reflected_class_id for c in man.classes]
+print(f"[4] manifest class ids match {same_ids}; reflection pairing matches {same_refl}")
+
+m16 = nbins.owner_branch_manifest(16, dirs)
+print(f"[4b] bins=16 manifest: {len(m16.classes)} classes per corner")

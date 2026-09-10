@@ -33,8 +33,9 @@ experiment:
       polygons vertex for vertex, and class ids with their reflection pairing, all at zero
       disagreements -- plus reproduction of lane X1's recorded eight-bin readings (survivor weight
       33/4 to exactly 10, four classes at exactly 10, mean deletion 55/32, nearest survivor at SAT
-      gap 0.014978). Every headline number was then read a second time by exact Sutherland-Hodgman
-      convex clipping in place of SAT.
+      gap 0.014978). Exact Sutherland-Hodgman clipping independently checks all twelve
+      parent/child survivor sets and the 270 singleton rays selected as neutral by SAT;
+      it does not independently census all remaining rays or validate the distance calculation.
     candidate: Sixteen closed angular bins per mark, thirty-two classes per corner; then the
       singleton-ray refinement limit, one class per retained signed ray at 1444 classes per mark,
       of which every coarser angular partition is a coarsening; then a pose probe deleting against
@@ -47,7 +48,7 @@ experiment:
       then the same invocation on verify_eight.py, verify_geometry.py, limit.py, crosscheck2.py
       and consolidate.py. $SCRATCH is the directory holding the retained
       results/agenda-034/lane-x4-*.py.txt scripts restored to their original .py names; each
-      script pins that directory in a SCRATCH constant at the top, which a replay must repoint
+      script pins paths in SCRATCH and REPO constants, which a replay must repoint
       before running, and the scripts import nbins.py from it alongside devtools.
     budget: Registered at under an hour. Six retained scripts, no unattended runner, no retry.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-survivors-16.json
@@ -59,8 +60,8 @@ experiment:
     question: Does every refined sixteen-sector subclass of the four neutral eight-sector classes
       have exact survivor weight strictly below 10?
     outcome: criterion_missed
-    checked_by: Six of the eight refined subclasses read exactly 10 and only two drop, to 19/2
-      rather than the registered 79/8. Over the full thirty-two-class sixteen-bin split the maximum
+    checked_by: Six of the eight refined subclasses read exactly 10 and two improve to19/2,
+      satisfying the registered upper bound79/8 more strongly. Over the full thirty-two-class sixteen-bin split the maximum
       survivor weight is exactly 10, attained at six classes. Both readings agree under SAT and
       under exact convex clipping, 12 of 12, and the whole table is symmetric under the diagonal
       reflection J -> 15 - J with m1 <-> m2, which the screen was not told to satisfy.
@@ -68,27 +69,30 @@ experiment:
     role: mechanism
     question: Does the refined patch reach further toward the nearest surviving core, as the
       registered mechanism predicted?
-    outcome: criterion_missed
-    checked_by: The squared distance from patch to nearest surviving core is the rational identity
-      d^2 = 75308842465387162009/335694834731568400000000, bit-identical for the eight-sector
-      parent and both sixteen-sector children at both marks, because the minimising vertex is the
-      mark itself. The mechanism the hypothesis proposed is present -- the guaranteed wedge widens
-      from pi/4 to 3pi/8 and the patch grows 1.6165x to 1.6175x in area, contained in Q_phi(m) for
-      every one of the 87 to 94 retained rays in its bin -- and it is irrelevant.
+    outcome: invalid
+    checked_by: Independent source review found that the delivered distance helper assumed
+      disjoint polygons but applied the formula to two intersecting cases. The six neutral
+      children retain the stated positive distance to fixed targets; m1:J9/16 and m2:J6/16
+      intersect their original target cores55/50 and have actual fixed-target distance zero.
+      The unchanged all-children identity is false and does not decide the compound0.015
+      reach criterion. Patch nesting and the1.6165x to1.6175x area increase still reproduce;
+      the count-based primary rejection is unaffected.
   - shape: determination
     role: mechanism
-    question: Can any finer angular conditioning break neutrality?
+    question: Can angular refinement eliminate every neutral class on the retained ray
+      universe under its intersection-patch construction?
     outcome: criterion_missed
     checked_by: At the singleton-ray limit, 135 classes per mark read exactly 10 and they form a
-      contiguous arc 34.40698 degrees wide, so every closed angular bin meeting that arc has
-      survivor weight exactly 10 whatever the bin count. A pose probe one refinement stronger than
-      any angular split -- deleting against the owner's whole core -- leaves exactly 10 at
-      mark-clique members numbered 59 and 60. This bears on X-026 section 5 escape 1 and is cited there in
-      prose; it is not a second registered claim.
+      contiguous interval in retained-ray order. Any bin containing one of those retained rays
+      has intersection-patch survivor weight exactly10. Deleting against whole owner cores59/60
+      leaves10. An arbitrary guaranteed subpatch gives only at least10 unless it also contains a
+      common mark; a positive-area subpatch of core59 omitting both marks leaves43/4. These
+      deductions concern the fixed patch-only residual domain and require new admissibility under
+      stronger restrictions. They are exploratory mechanisms, not another registered target.
   verdict:
     decision: rejected
     primary_criterion: The exact survivor weight of the transported mass-eleven ceiling family,
-      minimised over the refined subclasses of the four neutral eight-sector classes, against the
+      maximised over the refined subclasses of the four neutral eight-sector classes, against the
       registered threshold of strictly below 10.
     reason: Six refined subclasses still read exactly 10, so the case split as posed is not closed
       by refinement and H-157 is refuted on its own registered direction.
@@ -97,14 +101,19 @@ experiment:
     wall_seconds: 356.1
     stopped_by: criterion
 ---
-# Exp154: Sixteen Sectors Widen the Wedge and Move Nothing
+# Exp154: Sixteen Sectors Improve Two Subclasses and Leave Six Neutral
+
+**Independent source review, September 10, 2026.** The survivor table and primary
+rejection reproduce.
+This revision corrects the aggregate field from minimum to the preregistered maximum,
+withdraws two invalid distance calculations and narrows the angular/pose deductions.
+It does not rerun or change the original target criterion.
 
 **H-157 is refuted on its own registered direction.** It predicted exact survivor weight
 at most `79/8 = 9.875` for every refined subclass of the four neutral eight-sector
-classes.
-Six of the eight read **exactly 10**, and the two that do break read `19/2`, not
-`79/8`. The registered refutation clause is explicit that one surviving class defeats
-the split, and six survive.
+classes. Six of the eight read **exactly 10**, and two improve to `19/2`, satisfying the
+registered upper bound `79/8` more strongly.
+The refutation clause says one neutral class defeats the split, and six survive.
 
 | refined subclass | parent | survivor weight | deletion |
 | --- | --- | --- | --- |
@@ -120,33 +129,34 @@ the split, and six survive.
 All exact. The two that break delete four extra weight-`1/8` placements each, indices
 `[7, 16, 29, 55]` for `m1:J9` and `[2, 22, 25, 50]` for `m2:J6`.
 
-**The mechanism is present and irrelevant.** The guaranteed wedge does widen from `pi/4`
-to `3pi/8`, the refined patch does contain its parent vertex for vertex and is strictly
+**The patch enlargement is verified.** The guaranteed wedge widens from `pi/4` to
+`3pi/8`, the refined patch does contain its parent vertex for vertex and is strictly
 larger — 1.6165x to 1.6175x the area — and it does lie inside the anchored quarter-core
 `Q_phi(m)` for every one of the 87 to 94 retained signed rays in its closed bin.
-What does not move is the reach.
-The squared distance from the patch to the nearest surviving core is
+For the six neutral children, the squared distance to the selected target core remains
 
 ```
 d^2 = 75308842465387162009/335694834731568400000000      d = 0.014977891
 ```
 
-bit-identical for the parent and for both children at both marks, because the minimising
-vertex is the mark itself.
-The `0.014978` the hypothesis was built on is a gap to the mark, not to the patch
-boundary, and no angular conditioning moves the mark.
+The two improved children instead intersect their selected targets, core55 for
+`m1:J9/16` and core50 for `m2:J6/16`, so those fixed-target distances are zero.
+The original distance helper assumed disjointness without checking it.
+A mark being a vertex does not prevent the patch from approaching another core.
+The claimed all-children identity is withdrawn; distance to the nearest *remaining*
+survivor must also be distinguished from distance to a target that has been deleted.
 
-**The refutation extends past the registered resolution.** At the singleton-ray limit —
-one class per retained signed ray, the finest angular conditioning that exists, of which
-every coarser angular partition is a coarsening — 135 classes per mark read exactly 10,
-and those rays form a contiguous arc `34.40698` degrees wide.
-A pose probe one refinement stronger than any angular split leaves exactly 10 at two of
-the eight mark-clique members.
-The two theorems that follow, T1 (angular) and T2 (pose), are stated in
+**The retained finite universe has a further obstruction.** At one class per retained
+signed ray, 135 classes per mark read exactly ten.
+Any coarsening retaining such a ray has an intersection patch with survivor weight ten.
+The whole-core pose probes leave ten at two mark-clique members.
+The local T1 and T2 statements are given with their fixed-domain premises in
 [X-026 §5.1](../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md).
-They rule out patch refinement as the lever at every resolution and at pose level; they
-do not establish that the conditional strategy fails, because a conditional proof needs
-one closed owner selection per packing rather than every class closed.
+T2 gives only a lower bound of ten for an arbitrary guaranteed subpatch; equality
+requires a common mark in that patch.
+Neither statement applies automatically after stronger residual restrictions.
+They do not establish that the conditional strategy fails, because a conditional proof
+needs one closed owner selection per packing rather than every class closed.
 X-026 escape 1 is narrowed rather than closed on that reading.
 
 **Costs.** Five measured steps totalling 356.1 s: the eight-bin control and sixteen-bin

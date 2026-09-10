@@ -1,0 +1,36 @@
+{
+  "kind": "a6-dual-upper-source-manifest/v1",
+  "repository_revision": "6ed45816bc176170bdaa008248d22a6d09956a00",
+  "repository_revision_role": "retained author inputs; the independently added reader and receipt are identified by their enclosing Git commit",
+  "reader": "packing/devtools/admit_fixed_support_dual.py",
+  "test": "packing/tests/test_admit_fixed_support_dual.py",
+  "receipt": "packing/cases/n11_fractional_certificate/a6_dual_upper/receipt.json",
+  "inputs": [
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-dual-bracket-10-42.json",
+      "role": "seven priced rows, exact multipliers, exact bound, and column representatives"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-family-153-40-sites-round1-exact25.json",
+      "role": "retained serialization of all 280 support placements"
+    }
+  ],
+  "references": [
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-threshold-loop-at-383-100.md",
+      "role": "retained report that identifies the A3 JSON as the exact symmetrized 280-placement family"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-dual-bracket.py.txt",
+      "role": "historical producer retained for provenance; the admission reader does not execute or trust it"
+    }
+  ],
+  "support_reconstruction": {
+    "source": "the retained A3 placement family, partitioned under D4 with exact rationals",
+    "expected_placements": 280,
+    "expected_orbits": 35,
+    "certificate_relationship": "the retained source must be exactly D4-closed, and the certificate representatives must name all source orbits exactly once"
+  },
+  "decision_fields": "exact rational strings only; stored float display fields are ignored",
+  "old_source_receipts_changed": false
+}

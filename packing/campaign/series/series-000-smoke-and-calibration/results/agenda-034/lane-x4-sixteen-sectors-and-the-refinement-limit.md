@@ -6,35 +6,64 @@ Retained measurement-lane report for
 run 2026-09-10 against `claude/n-11-stronger-result-d730ds` at `67ccd16b`, read-only on
 the repository. The report is reproduced as delivered, with its own findings and status
 labels; only its file references were rewritten to say where each file now is.
-X-026 carries the coordinator’s reading, and states this lane’s two theorems — T1
-(angular) and T2 (pose) — in the unconditional form, without the arc-width premise the
-report uses as robustness.
+X-026 carries the corrected reading and states the local angular and pose propositions
+with the finite-universe, fixed-domain and mark premises identified by source review.
 
 All scripts and survivor families are retained beside this report; see
 [Files](#costs-and-files).
 
-**Every “closed” in the body below is narrowed to “patch refinement is ruled out as the
-lever”. The corrected reading is
-[X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
-escape 1.**
+## Independent Source Correction — September 10, 2026
 
-**Coordinator’s scope note, added on review (PR 139, finding R3).** The delivered text
-concludes in several places that escape 1 of X-026 §5, and with it the conditional
-point-cover line, is *closed*. That is stronger than what T1 and T2 support, and X-026
-carries the corrected reading: both theorems are statements about **survivor weight on
-the retained transported mass-eleven ceiling family and the screened endpoint patches**,
-and what they establish is that **patch refinement is ruled out as the lever**, at every
-angular resolution and at pose level.
-They do not establish that the conditional strategy fails, because that strategy needs
-one closed owner selection per packing rather than every class closed, and owner labels
-and valid selections can overlap.
-Escape 1 is therefore **narrowed, not closed**; whether the neutral classes are ever
-*forced* is adjacent to escape 2 and is not settled here.
-The delivered claim that Step 6’s rank-one cap `3.868983` is untouched is likewise left
-as delivered and not endorsed: finding R2 holds that no conditional transfer of that cap
-is established without a separate owner, class, patch and routing verification.
-The measurements below — the survivor table, the reach identity, the 135 neutral rays
-and the pose probe — are unaffected by either correction.
+The delivered report below is historical.
+Its survivor-weight result reproduces: six of the eight refined subclasses retain ten,
+two improve to `19/2`, and the 32-class maximum is ten.
+The registered all-subclasses improvement is rejected.
+The two improved values satisfy the registered upper bound `79/8` more strongly; that
+bound was not a prediction of equality.
+
+Two explanations in the delivered text are false as stated:
+
+- The distance helper assumes disjoint polygons, but `m1:J9/16` intersects fixed target
+  core55 and `m2:J6/16` intersects core50. Their true fixed-target distances are zero.
+  The old positive identity remains valid for the six neutral children, not both
+  children of every parent.
+  Distance to a fixed original target must also be distinguished from distance to the
+  nearest remaining survivor.
+  The original `.py.txt` producer is preserved and must not be reused without its
+  precondition repair.
+- A guaranteed patch inside an owner core need not contain the owner’s mark.
+  T2 therefore gives `w(F) >= 10`; equality additionally needs a common mark in `F`. For
+  the singleton class of core59, its positive-area corner subpatch scaled by `1/10000`
+  leaves weight `43/4`, with neither mark in the patch.
+  SAT and clipping agree.
+  Cores59/60 themselves do have contained isolated unit parents; no full eleven-parent
+  completion or forced owner selection follows.
+
+T1 concerns intersection patches on the declared finite retained signed-ray universe.
+T2 concerns a pose class retaining core59 and a patch inside that core.
+Both use the fixed patch-only residual domain.
+Stronger parent, wall or joint restrictions require checking survivor admissibility
+afresh. These statements leave a class unclosed by point weights in that model, while
+allowing gains in other classes, changed domains, routing to another valid selection and
+richer charges. Neither establishes a comparative ranking of research strategies.
+
+The source review reproduced eight-bin equivalence, the complete saved sixteen-sector
+JSON and the singleton scan.
+Exact clipping separately confirmed all twelve parent/child survivor sets and all270
+SAT-selected neutral rays.
+That clipping control is not an independent census of the other rays or a verification
+of the faulty distance claim.
+The local T1/T2 labels are not frontier claim identifiers.
+The active statements and missing premises are in
+[X-026 §5.1](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md#51-the-angular-and-pose-obstructions-with-their-premises)
+and the
+[source-review finding](https://github.com/jlevy/squares/pull/139#issuecomment-5613757157).
+
+The delivered cap-transfer claim near `3.868983` also remains unendorsed: no conditional
+transfer is established without the owner, class, patch and routing premises identified
+in R2. The original wording below is retained to make the correction traceable.
+
+## Delivered Account
 
 Labels: **EXACT** = a rational decision by repository primitives; **CHECKED** = a float
 reading; **RECORD** = read from a file in the repository; **OPEN** = not measured.

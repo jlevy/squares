@@ -1,0 +1,72 @@
+"""Preserve and replay the published lane-X4 scripts without changing the repository.
+
+Only the two hard-coded host path constants are adapted. The original published
+scripts remain in Git; generated outputs and raw stdout stay in this review directory.
+Run with the project's Python 3.14.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    repo = args.repo.resolve()
+    output = args.output.resolve()
+    if sys.version_info[:2] != (3, 14):
+        raise SystemExit("Use project Python 3.14")
+    if output == repo or repo in output.parents:
+        raise SystemExit("Review outputs must be outside the repository")
+    output.mkdir(parents=True, exist_ok=True)
+    source = repo / "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034"
+    old_scratch = "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/sixteen-sectors"
+    scripts = ["nbins", "verify-eight", "screen16", "verify-geometry", "limit", "crosscheck2"]
+    adaptations = []
+    for name in scripts:
+        original = source / f"lane-x4-{name}.py.txt"
+        content = original.read_text()
+        scratch_count = content.count(old_scratch)
+        repo_count = content.count('Path("/home/user/squares")')
+        if name != "nbins" and scratch_count != 1:
+            raise SystemExit(f"Unexpected scratch anchor count in {original}")
+        changed = content.replace(old_scratch, str(output))
+        changed = changed.replace('Path("/home/user/squares")', f"Path({str(repo)!r})")
+        destination = output / f"{name.replace('-', '_')}.py"
+        destination.write_text(changed)
+        adaptations.append({"source": str(original.relative_to(repo)), "destination": str(destination),
+                            "scratch_replacements": scratch_count, "repo_replacements": repo_count})
+    env = os.environ.copy()
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    env["PYTHONPATH"] = str(repo / "packing")
+    receipts = []
+    for name in scripts[1:]:
+        target = output / f"{name.replace('-', '_')}.py"
+        started = time.perf_counter()
+        result = subprocess.run([sys.executable, str(target)], cwd=repo / "packing", env=env,
+                                capture_output=True, text=True, timeout=300, check=False)
+        log = output / f"{name}.stdout.txt"
+        log.write_text(result.stdout + result.stderr)
+        receipt = {"script": name, "returncode": result.returncode,
+                   "wall_seconds": time.perf_counter() - started, "log": str(log)}
+        receipts.append(receipt)
+        (output / "replay-receipt.json").write_text(json.dumps({
+            "repo": str(repo), "head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip(),
+            "interpreter": sys.version, "path_adaptations": adaptations, "runs": receipts,
+        }, indent=2) + "\n")
+        print(json.dumps(receipt), flush=True)
+        if result.returncode:
+            raise SystemExit(result.returncode)
+
+
+if __name__ == "__main__":
+    main()

@@ -22,18 +22,18 @@ exploration:
     failure of point covers on a residual domain; and then says where the ladder stops.
     It stops at point covers: the survivor family violates the two-of-three inequalities
     it would have to satisfy to block a threshold certificate, so the blocking argument
-    does not reach the richer language. The defensible general claim is neutrality --
-    conditioning subtracts exactly m from both the obstruction and the requirement --
-    and "refuted" is right only for the point-cover conditional method. Three escapes
-    the argument does not close are named, one of them a single unrun screen.
-    Revised 2026-09-10 after lane X4 ran that screen and after the PR 139 review.
-    Escape 1 is narrowed rather than closed: refining the patch is ruled out as the
-    lever at every angular resolution and at pose level (the two theorems now in 5.1),
-    but a conditional proof needs one closed owner selection per packing rather than
-    every class closed, so whether the neutral classes are ever forced stays open beside
-    escape 2. Step 6's transfer of the rank-one cap 3.868983 to the conditional method
-    is restated as proposed and unverified, and the cost reading behind H-155 is
-    labelled an estimate.
+    does not reach the richer language. Neutrality is an identity for the named
+    fractional family and endpoint-patch relaxations, not a method-wide result.
+    Revised after lane X4 and the independent PR139 source review: six refined
+    subclasses retain ten, two improve to19/2, and the maximum remains ten. Two
+    claimed positive distances were invalid because the polygons intersected. The
+    local angular and pose statements in section5.1 retain their finite-universe and
+    patch-only domain premises. An arbitrary guaranteed subpatch inside core59 gives survivor
+    weight at least ten; equality also needs a common mark in the patch. A conditional
+    proof needs an excluded valid selection per physical packing rather than every
+    raw class closed. Stronger domains and routing remain open. Step6's transfer of
+    the rank-one cap3.868983 is unverified, and unmatched cut maxima and an unmeasured
+    class-cost estimate do not establish comparative productivity.
   sources:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md
@@ -226,9 +226,10 @@ transported mass-eleven ceiling family, and the screened endpoint patches.
   Step 6 is the proposed transfer and it does not go through as stated; it requires a
   separate owner, class, patch and routing verification that has not been done.
   This entry moved here from **Established** on 2026-09-10 (PR 139 finding R2).
-- That the case split fails as a *strategy*. Steps 4 and 5 close every class of one
-  particular split; the note on Step 4’s quantifier says why closing every class is more
-  than a conditional proof needs.
+- That the case split fails as a *strategy*. Steps 4 and 5 retain obstructions on the
+  named neutral relaxations; they do not supply the proposed all-class closure.
+  Step 4’s quantifier explains why closing every raw class is more than a conditional
+  proof needs.
 
 The word **refuted** is therefore wrong for “the conditional route” as a whole.
 It is right only for the point-cover conditional method on this family and this split,
@@ -241,22 +242,29 @@ and the general claim that survives is neutrality.
    which refutes
    [`H-157`](../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md).
    Refining the eight sectors to sixteen does widen the guaranteed wedge from `pi/4` to
-   `3pi/8` and does grow the patch by about 62 per cent in area, and it buys exactly
-   nothing: the reach toward the nearest surviving core is the rational identity
-   `d^2 = 75308842465387162009/335694834731568400000000`, bit-identical for the
-   eight-sector parent and both sixteen-sector children at both marks, because the
-   closest point of the patch to that core is the mark itself.
-   Six of the eight refined subclasses of the four neutral classes still read exactly
-   10, and the two that break read `19/2`, not the predicted `79/8`.
+   `3pi/8` and grows the patch by about 62 per cent in area.
+   Six of the eight refined subclasses retain survivor weight ten; two improve to
+   `19/2`, exceeding the registered improvement to at most `79/8`. Thus the maximum
+   remains ten, but local improvement is real.
+
+   **Distance correction, September 10.** The reported unchanged positive distance holds
+   for the six neutral children.
+   The patches `m1:J9/16` and `m2:J6/16` intersect their fixed target cores 55 and 50,
+   so their distances to those cores are zero.
+   The delivered distance helper assumed disjoint polygons and failed to check that
+   premise. A mark being a vertex does not prevent an enlarged patch from approaching
+   another core. The independent review reproduces the survivor table and corrects this
+   explanatory geometry; the count-based H157 rejection stands.
 
    Two theorems come out of it, T1 (angular) and T2 (pose), stated in §5.1 below.
-   Both are statements about **survivor weight on the retained transported mass-eleven
-   ceiling family and the screened endpoint patches**, and both hold unconditionally at
-   that scope.
+   Both concern **the retained transported mass-eleven family on the specified
+   patch-only residual domain**. Their patch, mark and pose-universe premises are stated
+   beside them; additional residual restrictions require fresh admissibility.
 
-   **What that establishes.** Patch refinement is ruled out as the lever, at every
-   angular resolution and at pose level: no refinement can make *every* class closed.
-   That closes one route and it is worth having.
+   **What that establishes.** Within those premises, every partition retaining the named
+   neutral ray or pose has a class with survivor weight at least ten.
+   Refining its patch alone cannot close every class by a point cover on that same
+   domain. Other classes can improve, as two of the measured subclasses do.
 
    **What it does not establish.** That the conditional strategy fails.
    The sufficient global condition is not that every class is closed — it is that for
@@ -282,70 +290,87 @@ and the general claim that survives is neutrality.
    combination drawn from the four neutral sectors.
    Nobody has enumerated them.
 
-### 5.1 The two theorems lane X4 proved
+### 5.1 The Angular and Pose Obstructions, with Their Premises
 
 Both are about the retained transported mass-eleven ceiling family at `q = 96/25` and
 the screened endpoint patches; `w(F)` is the exact survivor weight left when every core
 meeting the guaranteed patch `F` is deleted, and F3 is the fact that the cores holding a
 given corner mark weigh exactly one.
+The residual domain here imposes patch avoidance and the retained core admissibility
+rules. Adding parent, wall or joint-compatibility restrictions requires verifying that
+the surviving family satisfies them.
+T1 and T2 below are local proposition labels, not frontier claim identifiers.
 
 **T1, angular.** Let `r0` be a retained signed ray whose singleton class has survivor
-weight exactly 10. Under any partition of the owner’s pose angle into closed bins, let
-`B` be a bin containing `r0` and `F` its guaranteed patch.
-`F` is the intersection of `Q_r(m)` over the rays of `B`, so `F` is a subset of
-`Q_r0(m)`, so `F` deletes a subset of what `Q_r0` deletes and `w(F) >= 10`. And `m` lies
-in `F`, so `F` meets every core containing the mark; the mark clique weighs exactly 1
-(F3), so `w(F) <= 11 - 1 = 10`. Hence `w(F) = 10` exactly, against a requirement
-strictly below 10.
+weight exactly 10. Partition the declared finite retained signed-ray universe into
+closed angular bins, and let `B` contain `r0`. Define its patch `F` to be the
+intersection of `Q_r(m)` over the retained rays of `B`, all at the same mark `m`. Then
+`F` is a subset of `Q_r0(m)`, so `F` deletes a subset of what `Q_r0` deletes and
+`w(F) >= 10`. And `m` lies in `F`, so `F` meets every core containing the mark; the mark
+clique weighs exactly 1 (F3), so `w(F) <= 11 - 1 = 10`. Hence `w(F) = 10` exactly,
+against a requirement strictly below 10.
 
-The statement is unconditional.
-It needs only that *some* neutral ray exists, because any partition assigns `r0` to some
-bin and that bin is nonempty, `r0` being an admissible pose in it.
-There is no fineness threshold and no vacuity escape.
+The argument needs only one neutral retained ray: every partition of that universe
+places it in a bin. This is a statement about the declared angular construction, not
+about a class remaining possible after additional physical or joint restrictions.
 Lane X4 measured 135 such rays per mark, spanning a contiguous arc `34.40698` degrees
 wide; that width is robustness, not the load-bearing step.
 
-**T2, pose, which generalises T1.** A guaranteed patch is guaranteed precisely because
-it lies inside the owner’s core for every pose in its class.
+**T2, pose.** In this patch-only model, a guaranteed patch lies inside the selected
+owner core for every pose in its class.
+This definition does not cover every possible occupied-region argument, such as one
+using more of the unit parent.
 Mark-clique member `#59` is an admissible net-oriented core inside the container
 containing both bottom-left marks, at `(45133461/88696100, 25096071/49318700)`, and
 `#60` is its diagonal mirror.
-For any conditioning of the owner by pose, at any refinement, let `C` be the class
-containing `#59` and `F` its patch.
-Then `F` is a subset of `core(#59)`, so `w(F) >= w(core(#59)) = 10`; and `m` lies in `F`
-because every pose in `C` owns the corner and so contains the mark, so `w(F) <= 10`.
-Hence `w(F) = 10`.
+For a partition of a pose universe retaining `#59`, let `C` contain it and let `F` be
+any patch contained in every selected owner core of `C`. Then `F` is a subset of
+`core(#59)`, so `w(F) >= w(core(#59)) = 10`. That inequality already obstructs a point
+cover of budget below ten on the stated residual domain.
 
-T2 is what makes the narrowing hold at every level of the pose rather than only at the
-angular level: refining the patch is the wrong lever throughout.
-What would remove such a class is a proof that the pose cannot occur in an eleven-square
-packing, which is escape 2 above and not a covering argument at all.
+Equality additionally requires a common mark `m` to lie in `F`, for example when `F` is
+the full intersection for a class whose every core contains that same mark.
+Owning the mark does not force every chosen subpatch to contain it.
+As an exact counterexample, scale `core(#59)` by `1/10000` about its bottom-left corner
+and use that positive-area patch for the singleton class.
+It contains neither mark and leaves survivor weight `43/4`, confirmed by SAT and
+clipping.
+
+Cores `#59` and `#60` each have a contained concentric same-angle unit parent, with
+positive wall margin `785411/88696100`. No completion to eleven disjoint parents or
+forced owner selection is proved.
+The subset argument does not settle the survivor family’s admissibility after stronger
+residual restrictions, or the value of refining other classes and routing physical
+packings to them.
 
 Neither theorem says the conditional strategy fails; see the reading under escape 1.
 
 ## 6. Reading
 
-Conditioning has been shown to buy nothing on the objects measured, not to be
-impossible. The distinction matters for what gets built next: it removes the reason to
-prefer the conditional route over the unconditional one, and it leaves the hybrid
-(threshold atoms on a residual domain) exactly as open as it was.
-That is the reading
+The measurements retain neutral classes on the named patch-only relaxations and show
+improvement in two refined subclasses.
+They do not supply a measured comparison of conditional and unconditional runtime,
+reachable bound, or value of routing and pruning.
+Conditional threshold charges remain a separate open comparison.
+This is consistent with
 [`H-155`](../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) now
 carries, and the scope correction [X-024](X-024-two-lines-at-eleven.md) §5 and
 [lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md)
 now carry with it.
 
-Three scope corrections landed on 2026-09-10 from the PR 139 review, and they narrow
-this document rather than change any measurement.
-**R3**: the two theorems of §5.1 rule out patch refinement as the lever, and no more; a
-conditional proof needs one closed owner selection per packing, not every class closed,
-so escape 1 is narrowed rather than closed and the forcing question stays open beside
-escape 2. **R2**: the transfer of the rank-one cap `3.868983` to the conditional method
-is proposed, not established, and needs its own owner, class, patch and routing
+The PR139 reviews on September 10 separate the supported counts from their
+interpretations.
+**R3**: §5.1 obstructs all-class point closure within its stated domain,
+while a global conditional proof needs an excluded valid selection per packing.
+**R2**: the transfer of the rank-one cap `3.868983` to the conditional method is
+proposed, not established, and needs its own owner, class, patch and routing
 verification; the unconditional obstruction is untouched.
 **The cost reading**: that the conditional problem is the unconditional one shifted down
 by one for sixteen times the work is an estimate on two matching cut maxima with the
-class count standing in for a measured cost, and it is labelled as one in §4.
+class count standing in for a measured cost, and it is labelled as one in §4. It does
+not establish comparative productivity.
+The later independent source review also corrects the two distance cases, exp154’s
+aggregate and T2’s missing mark premise; the retained survivor counts are unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

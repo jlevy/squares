@@ -1,0 +1,786 @@
+{
+  "admitted": true,
+  "arithmetic": "exact rational",
+  "dual": {
+    "a_transpose_u_ge_cost": true,
+    "bound": "2605263163/250000000",
+    "columns": [
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 0,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      },
+      {
+        "A_transpose_u": "1078947371/125000000",
+        "cost": "8",
+        "orbit": 1,
+        "orbit_size": 8,
+        "slack": "78947371/125000000"
+      },
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 2,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 3,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 4,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 5,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 6,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 7,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 8,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "2000000003/250000000",
+        "cost": "8",
+        "orbit": 9,
+        "orbit_size": 8,
+        "slack": "3/250000000"
+      },
+      {
+        "A_transpose_u": "4000000009/500000000",
+        "cost": "8",
+        "orbit": 10,
+        "orbit_size": 8,
+        "slack": "9/500000000"
+      },
+      {
+        "A_transpose_u": "4000000007/500000000",
+        "cost": "8",
+        "orbit": 11,
+        "orbit_size": 8,
+        "slack": "7/500000000"
+      },
+      {
+        "A_transpose_u": "8000000013/1000000000",
+        "cost": "8",
+        "orbit": 12,
+        "orbit_size": 8,
+        "slack": "13/1000000000"
+      },
+      {
+        "A_transpose_u": "2000000003/250000000",
+        "cost": "8",
+        "orbit": 13,
+        "orbit_size": 8,
+        "slack": "3/250000000"
+      },
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 14,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 15,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 16,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 17,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "2000000003/250000000",
+        "cost": "8",
+        "orbit": 18,
+        "orbit_size": 8,
+        "slack": "3/250000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 19,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 20,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 21,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      },
+      {
+        "A_transpose_u": "2000000003/250000000",
+        "cost": "8",
+        "orbit": 22,
+        "orbit_size": 8,
+        "slack": "3/250000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 23,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 24,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 25,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 26,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      },
+      {
+        "A_transpose_u": "2000000003/250000000",
+        "cost": "8",
+        "orbit": 27,
+        "orbit_size": 8,
+        "slack": "3/250000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 28,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 29,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      },
+      {
+        "A_transpose_u": "2000000003/250000000",
+        "cost": "8",
+        "orbit": 30,
+        "orbit_size": 8,
+        "slack": "3/250000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 31,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 32,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "8000000027/1000000000",
+        "cost": "8",
+        "orbit": 33,
+        "orbit_size": 8,
+        "slack": "27/1000000000"
+      },
+      {
+        "A_transpose_u": "4000000003/500000000",
+        "cost": "8",
+        "orbit": 34,
+        "orbit_size": 8,
+        "slack": "3/500000000"
+      }
+    ],
+    "minimum_column_slack": "3/500000000"
+  },
+  "inputs": {
+    "certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-dual-bracket-10-42.json",
+    "support_family": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-family-153-40-sites-round1-exact25.json"
+  },
+  "kind": "fixed-support-dual-admission/v1",
+  "priced_rows": {
+    "count": 7,
+    "depth_rows": 6,
+    "rows": [
+      {
+        "budget": "1",
+        "coefficients": [
+          [
+            0,
+            "2"
+          ],
+          [
+            2,
+            "2"
+          ],
+          [
+            14,
+            "2"
+          ],
+          [
+            21,
+            "2"
+          ],
+          [
+            24,
+            "2"
+          ],
+          [
+            26,
+            "2"
+          ],
+          [
+            29,
+            "2"
+          ],
+          [
+            34,
+            "2"
+          ]
+        ],
+        "contribution": "1578947369/500000000",
+        "kind": "depth-at-site",
+        "multiplier": "1578947369/500000000",
+        "row": 280
+      },
+      {
+        "budget": "1",
+        "coefficients": [
+          [
+            0,
+            "2"
+          ],
+          [
+            2,
+            "2"
+          ],
+          [
+            14,
+            "2"
+          ],
+          [
+            21,
+            "2"
+          ],
+          [
+            24,
+            "2"
+          ],
+          [
+            26,
+            "2"
+          ],
+          [
+            29,
+            "1"
+          ],
+          [
+            34,
+            "2"
+          ]
+        ],
+        "contribution": "168421053/200000000",
+        "kind": "depth-at-site",
+        "multiplier": "168421053/200000000",
+        "row": 450
+      },
+      {
+        "budget": "1",
+        "coefficients": [
+          [
+            1,
+            "2"
+          ],
+          [
+            3,
+            "1"
+          ],
+          [
+            4,
+            "1"
+          ],
+          [
+            5,
+            "1"
+          ],
+          [
+            6,
+            "1"
+          ],
+          [
+            7,
+            "1"
+          ],
+          [
+            8,
+            "1"
+          ],
+          [
+            10,
+            "2"
+          ],
+          [
+            11,
+            "2"
+          ],
+          [
+            12,
+            "2"
+          ],
+          [
+            15,
+            "1"
+          ],
+          [
+            16,
+            "1"
+          ],
+          [
+            17,
+            "1"
+          ],
+          [
+            19,
+            "1"
+          ],
+          [
+            20,
+            "1"
+          ],
+          [
+            23,
+            "1"
+          ],
+          [
+            25,
+            "1"
+          ],
+          [
+            28,
+            "1"
+          ],
+          [
+            29,
+            "1"
+          ],
+          [
+            31,
+            "1"
+          ],
+          [
+            32,
+            "1"
+          ],
+          [
+            33,
+            "1"
+          ]
+        ],
+        "contribution": "168421053/200000000",
+        "kind": "depth-at-site",
+        "multiplier": "168421053/200000000",
+        "row": 6286
+      },
+      {
+        "budget": "1",
+        "coefficients": [
+          [
+            3,
+            "2"
+          ],
+          [
+            4,
+            "2"
+          ],
+          [
+            5,
+            "2"
+          ],
+          [
+            6,
+            "2"
+          ],
+          [
+            7,
+            "2"
+          ],
+          [
+            8,
+            "2"
+          ],
+          [
+            12,
+            "1"
+          ],
+          [
+            15,
+            "2"
+          ],
+          [
+            16,
+            "2"
+          ],
+          [
+            17,
+            "2"
+          ],
+          [
+            19,
+            "2"
+          ],
+          [
+            20,
+            "2"
+          ],
+          [
+            23,
+            "2"
+          ],
+          [
+            25,
+            "2"
+          ],
+          [
+            28,
+            "2"
+          ],
+          [
+            31,
+            "2"
+          ],
+          [
+            32,
+            "2"
+          ],
+          [
+            33,
+            "2"
+          ]
+        ],
+        "contribution": "631578949/1000000000",
+        "kind": "depth-at-site",
+        "multiplier": "631578949/1000000000",
+        "row": 20326
+      },
+      {
+        "budget": "1",
+        "coefficients": [
+          [
+            1,
+            "2"
+          ],
+          [
+            9,
+            "4"
+          ],
+          [
+            11,
+            "4"
+          ],
+          [
+            12,
+            "2"
+          ],
+          [
+            13,
+            "4"
+          ],
+          [
+            18,
+            "4"
+          ],
+          [
+            22,
+            "4"
+          ],
+          [
+            27,
+            "4"
+          ],
+          [
+            30,
+            "4"
+          ]
+        ],
+        "contribution": "12631579/40000000",
+        "kind": "depth-at-site",
+        "multiplier": "12631579/40000000",
+        "row": 43894
+      },
+      {
+        "budget": "1",
+        "coefficients": [
+          [
+            1,
+            "2"
+          ],
+          [
+            9,
+            "4"
+          ],
+          [
+            10,
+            "2"
+          ],
+          [
+            11,
+            "3"
+          ],
+          [
+            12,
+            "3"
+          ],
+          [
+            13,
+            "4"
+          ],
+          [
+            18,
+            "4"
+          ],
+          [
+            22,
+            "4"
+          ],
+          [
+            27,
+            "4"
+          ],
+          [
+            30,
+            "4"
+          ]
+        ],
+        "contribution": "52631579/31250000",
+        "kind": "depth-at-site",
+        "multiplier": "52631579/31250000",
+        "row": 46634
+      },
+      {
+        "budget": "8",
+        "coefficients": [
+          [
+            1,
+            "8"
+          ],
+          [
+            3,
+            "16"
+          ],
+          [
+            4,
+            "16"
+          ],
+          [
+            5,
+            "16"
+          ],
+          [
+            6,
+            "16"
+          ],
+          [
+            7,
+            "16"
+          ],
+          [
+            8,
+            "16"
+          ],
+          [
+            10,
+            "8"
+          ],
+          [
+            15,
+            "16"
+          ],
+          [
+            16,
+            "16"
+          ],
+          [
+            17,
+            "16"
+          ],
+          [
+            19,
+            "16"
+          ],
+          [
+            20,
+            "16"
+          ],
+          [
+            23,
+            "16"
+          ],
+          [
+            25,
+            "16"
+          ],
+          [
+            28,
+            "16"
+          ],
+          [
+            31,
+            "16"
+          ],
+          [
+            32,
+            "16"
+          ],
+          [
+            33,
+            "16"
+          ]
+        ],
+        "contribution": "184210527/62500000",
+        "kind": "seeded-atom-orbit",
+        "multiplier": "184210527/500000000",
+        "row": 142090
+      }
+    ],
+    "saved_coefficient_matrix_used_for_decision": false,
+    "threshold_atom_rows": 1,
+    "threshold_atom_rows_use_complete_exact_d4_orbits": true
+  },
+  "scope": {
+    "established": "an upper bound for the nonnegative D4-tied program on the reconstructed fixed support using the seven admitted inequalities",
+    "selected_row_lower": {
+      "checked": false,
+      "declared": "325657893/31250000",
+      "note": "the reader did not check the candidate family or the other program rows; the retained max-depth verdict is 105263157/100000000, above one"
+    },
+    "stronger_full_depth_same_support": {
+      "condition": "retain the admitted inequalities and add every exact point-depth row; adding constraints can only reduce the maximum",
+      "upper_bound_also_applies": true
+    },
+    "untied_extension": {
+      "checked_premises": [
+        "the 280-placement support is exactly D4-closed",
+        "each objective orbit cost equals its eight placements, so the objective is total placement mass",
+        "the threshold inequality sums all eight exact D4 images with budget 8"
+      ],
+      "conditional_upper_bound": "if the stronger program keeps the admitted threshold-orbit row and imposes depth at every point, the same bound applies to untied weights by D4 averaging",
+      "established_by_reader": false,
+      "obligations": [
+        "the stronger program retains the admitted threshold-orbit inequality",
+        "its complete point-depth row family is D4-invariant",
+        "D4-averaging is invoked to transfer the tied bound to untied weights"
+      ],
+      "support_closure_obligation_checked": true
+    }
+  },
+  "support": {
+    "certificate_representatives_match_every_source_orbit_once": true,
+    "objective_orbit_costs_match_sizes": true,
+    "orbit_sizes": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "source_d4_closure_placements": 280,
+    "source_d4_orbits": 35,
+    "source_is_exactly_d4_closed": true,
+    "source_positive_placements": 280
+  },
+  "unchecked": [
+    "the other declared depth and atom rows",
+    "the selected-row lower candidate's feasibility",
+    "K0--K3 placement admissibility, containment, depth, and symmetry"
+  ]
+}

@@ -110,6 +110,22 @@ These corrections address
 [the combined PR139 review](https://github.com/jlevy/squares/pull/139#pullrequestreview-5162420994).
 They supersede conflicting interpretations in the original account below.
 
+The later A6 source review confirms its 64-placement mass-eleven family and all 2,566
+retained threshold-atom orbits with exact membership.
+It obstructs adding arbitrary point sites with that fixed atom set and core domain; 935
+orbits are tight and 1,631 have slack.
+Six additional threshold-atom orbits cut their respective source families, while their
+addition to the larger covering LP left its numerical objective at eleven.
+Independent replay also verifies the seven-row fixed-support upper bound
+`2605263163/250000000`; its scope and the failed full-depth lower candidate remain
+separate. H157’s six neutral and two improved subclasses reproduce, with its distance
+mechanism and patch-equality premise corrected.
+The
+[current evidence account’s §13](../../../docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#13-the-later-a6-and-h157-results-what-has-been-checked)
+and
+[overnight plan](../../../docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md)
+carry these later findings, their review receipts and the next comparisons.
+
 ## Original September 9 Account — Historical Interpretation
 
 The original sequence is preserved to explain which measurements and decisions were

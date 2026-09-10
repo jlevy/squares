@@ -1,0 +1,26 @@
+=== (a)/(b) exact containment audit ===
+  m1:j3 -> J6/16 | rays in bin   94 | parent subset child True | strictly larger True (area x1.6175) | child inside every Q_phi in its bin True | parent likewise True
+  m1:j3 -> J7/16 | rays in bin   87 | parent subset child True | strictly larger True (area x1.6165) | child inside every Q_phi in its bin True | parent likewise True
+  m1:j4 -> J8/16 | rays in bin   87 | parent subset child True | strictly larger True (area x1.6165) | child inside every Q_phi in its bin True | parent likewise True
+  m1:j4 -> J9/16 | rays in bin   94 | parent subset child True | strictly larger True (area x1.6175) | child inside every Q_phi in its bin True | parent likewise True
+  m2:j3 -> J6/16 | rays in bin   94 | parent subset child True | strictly larger True (area x1.6175) | child inside every Q_phi in its bin True | parent likewise True
+  m2:j3 -> J7/16 | rays in bin   87 | parent subset child True | strictly larger True (area x1.6165) | child inside every Q_phi in its bin True | parent likewise True
+  m2:j4 -> J8/16 | rays in bin   87 | parent subset child True | strictly larger True (area x1.6165) | child inside every Q_phi in its bin True | parent likewise True
+  m2:j4 -> J9/16 | rays in bin   94 | parent subset child True | strictly larger True (area x1.6175) | child inside every Q_phi in its bin True | parent likewise True
+  ALL CONTAINMENT CHECKS PASS: True
+
+=== (c) exact reach: squared distance from patch to the nearest surviving core ===
+  m1:j3 (8 bins)  d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891
+    -> J6/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+    -> J7/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+  m1:j4 (8 bins)  d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891
+    -> J8/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+    -> J9/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+  m2:j3 (8 bins)  d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891
+    -> J6/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+    -> J7/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+  m2:j4 (8 bins)  d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891
+    -> J8/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+    -> J9/16            d^2 = 75308842465387162009/335694834731568400000000  d = 0.014977891  reach gain +0.000000000  (still short)
+
+wall time 1.34 s
