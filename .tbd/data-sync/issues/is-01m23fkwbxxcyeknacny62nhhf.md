@@ -3,13 +3,13 @@ type: is
 id: is-01m23fkwbxxcyeknacny62nhhf
 title: "Certificate format cannot express two atom classes: K5 clique and K6 floor"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 5
 labels: []
 dependencies: []
 created_at: 2026-09-09T16:22:02.365Z
-updated_at: 2026-09-10T04:30:12.414Z
+updated_at: 2026-09-10T05:37:54.184Z
 ---
 Extend the certificate format and both covering routes to retain the weighted and floor charges already returned by the separator. Source: agenda034 lane A4 finding P10 and lane A5 F6. This is a representation and verification prerequisite, not evidence that the unconditional language or conditional route is exhausted.
 
@@ -23,29 +23,18 @@ The retained A5 value10 is exact for its finite final row set and an upper bound
 
 ## Notes
 
-NARROWED 2026-09-10 (agenda-034 lane A6, and PR 139 finding on the same point).
+Sol high completed a private K6 checkpoint under /private/tmp/n11-floor-atom-prep/:
+floor.py, floor_interval.py, decide_floor_certificate.py, synthetic tests and a contract.
+Nineteen synthetic tests, Ruff and BasedPyright passed on project Python3.14.
+No retained certificate or scientific target ran, and no shared source or registry changed.
 
-The title and the original framing read as if the certificate format blocked separation
-work in general. It does not. It blocks exactly two named atom classes:
+Remaining: independent source review, production CLI/source/parallel adapter, legacy
+dispatch integration, low-memory slab route and affected gates. K5 source mapping and
+admission remain open; the general floor representation may express its budget-one
+subclass under the reviewed total-weight premises. This does not close think-g3j7.
+The six A6 cuts use existing threshold semantics and do not depend on this extension.
+Model identity comes from dispatch: gpt-5.6-sol at high, not the worker's generic footer.
 
-  K5 budget-one CLIQUE atoms, which carry integer multiplicities; and
-  K6 Chvatal-Gomory FLOOR atoms, whose charge exceeds one on some cores.
-
-Everything below about those two classes stands unchanged, and so does the build list.
-
-What is NOT blocked, and this is the correction. The route that now matters at 153/40 runs
-entirely inside the existing format. Lane A6 separates six atoms from the depth-one
-certificate -- two two-of-three (|S| = 3, k = 2) and four three-of-five (|S| = 5, k = 3),
-budget 1 each -- and they take the blocking support from exactly 11 to 10.4210526, bracketed
-exactly. All six are (S, k) threshold atoms with uniform multiplicity, which ThresholdAtom
-already expresses, so every one of them is FREEZABLE AND GATEABLE TODAY. The loop that found
-them deliberately discards the reader's non-uniform budget-one atoms and its Chvatal-Gomory
-giants precisely because P10 showed those cannot be frozen, and it reaches 10.42 without them.
-
-So this bead is a widening of the format for two classes, not a blocker on the live route.
-Wherever the record said the format blocks separation work generally, it now names the two
-classes instead: X-024 section 5 carries the narrowed statement.
-
-Priority unchanged: the two classes are still where the reader finds its largest violations,
-and a future loop whose best cut lands outside two-of-three and three-of-five still hits this
-wall.
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
