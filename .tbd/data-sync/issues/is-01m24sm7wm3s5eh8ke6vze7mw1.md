@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 21
+version: 22
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m260z2959dmcmn61pn2z7jsk
   - is-01m260za5fe3ewrkns6y4ehjva
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-10T16:04:22.977Z
+updated_at: 2026-09-10T16:24:45.546Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
@@ -61,4 +61,19 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-PR139 merged2026-09-10T08:10:02Z as3a18a05a; fresh branch codex/n11-overnight-parent-and-pricing starts from that merge and matches validated tree6842862. All73 checks passed before merge. Added separate documentation epic think-gv5a with decision think-b5b1, implementation think-zq4c, independent review think-0zc1; it does not consume or extend the three scientific blocks. Actual scientific clock is being rebound now because no target ran between merge and resumption.
+Daytime strategy intake BC325 completed on the fresh branch codex/n11-daytime-strategy.
+Two independent portfolios and an Astra Max atom-specific review are integrated in
+agenda035 and the active daytime plan. The exact parent-domain translation review shows
+that the 88-core point obstruction transfers for q >= 76469/20000 = 3.82345, removing
+the fixed-B, retained-net point-only parent-box target at 3.827.
+
+The strongest concrete changed rule found is a seven-token, threshold-four K5 motif
+with integer multiplicities and budget one, reported at charge 3/2 on the retained A6
+family. Its scientific comparison is blocked on narrow multiplicity admission across
+the producer, loader, capacity reader and both coverage routes, plus a maintained paired
+program and freshly materialized row manifest. The historical 15,021 rows are not
+reconstructable from retained artifacts.
+
+BC326 necessary parent geometry is the first runnable research block. The explainer
+runs independently on codex/n11-explainer-current-bound and will open a separate draft
+PR. Session126 owns plan publication only; no scientific target ran.

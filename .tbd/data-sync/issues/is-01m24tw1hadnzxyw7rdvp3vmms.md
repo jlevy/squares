@@ -5,7 +5,7 @@ title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
   - is-01m253zk0mvw2d49zmw4esm6r6
   - is-01m25430wcdx8wn8f3qs7b4qjv
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T16:04:49.000Z
+updated_at: 2026-09-10T16:24:45.987Z
 ---
 Implement and independently admit a necessary unit-parent centre-domain adapter, then prospectively register at most one paired comparison on the saved exp151 escape at tuple(0,0,0,7). The independent analytic review at /private/tmp/n11-parent-bound-independent-review.md passes the formula under exact unit rays, centre-preserving nearest-core selection, principal angular mismatch and the admitted global maximum bound D. Adopt that review under docs/project/reviews/ on the fresh post-PR139 branch before target use.
 
@@ -25,4 +25,11 @@ First check whether the fixed residual escape is outside its own necessary paren
 
 ## Notes
 
-Both private parent repairs now have independent correction PASS: pure-adapter replay integrity think-u3c2 (Astra Max) and constructor repository-path resolution think-k64c (Astra xhigh,15 targeted controls). Complete manifests and role/class provenance also passed constructor review. Reports /private/tmp/n11-parent-adapter-correction-review.md and /private/tmp/n11-parent-input-path-correction-review.md. No retained target has been loaded or parent restriction evaluated. Postmerge adoption, authoritative Git cwd/clean-source CLI, exact clocks, complete/partial schema and B-only attribution are tracked explicitly under think-acfb. They remain prerequisites to separately registering and launching the fixed-exp151-escape comparison.
+Selected as BC326, the first 60–90 minute daytime research block after the strategy
+checkpoint. The target remains the saved exp151 residual escape and tuple (0,0,0,7):
+first test residual self-exclusion by its own necessary parent box, then compare the
+complete B-only positive witness with the parent-restricted owner class. Adopt and
+check the private adapter/constructor repairs first. Source admission stops at 45
+minutes; no target runs if provenance, empty/degenerate, reflection, residual-scope or
+expiry controls are incomplete. The 3.82345 global point-obstruction transfer does not
+decide this stronger conditional saved-escape question.

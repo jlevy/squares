@@ -5,7 +5,7 @@ title: "N11 explainer: teach the T-025/T-026 lower-bound ladder"
 kind: epic
 status: open
 priority: 1
-version: 8
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
@@ -16,7 +16,7 @@ child_order_hints:
   - is-01m25zs0xky60mnw0q1fvb5bfz
   - is-01m25zs0ygtqsqfx233fhjrxqf
 created_at: 2026-09-10T15:42:41.844Z
-updated_at: 2026-09-10T16:20:02.518Z
+updated_at: 2026-09-10T16:32:07.575Z
 ---
 Add a documentation block alongside the three scientific blocks to bring the public
 explainer up to the merged T-025/T-026 result. The block is editorial and does not
@@ -47,4 +47,4 @@ under think-i1fr, so this block must not claim V3 alignment.
 
 ## Notes
 
-Architecture bead think-b5b1 and implementation bead think-zq4c are complete on codex/n11-explainer-current-bound at 47a16331. Draft PR and independent review remain.
+Architecture bead think-b5b1 and implementation bead think-zq4c are complete on codex/n11-explainer-current-bound at d8bd6d9c. Draft PR #148 is open; independent review think-0zc1 remains.
