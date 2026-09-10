@@ -5,11 +5,11 @@ title: Iterate LP support and atom set together, separating from the depth-one c
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-10T04:09:46.782Z
-updated_at: 2026-09-10T06:16:08.551Z
+updated_at: 2026-09-10T06:29:02.057Z
 ---
 From agenda-034 lane A6, finding G15. The site side at 153/40 is closed on this atom set and
 the atom side converges on a fixed support, so the remaining work is a loop over both
@@ -23,8 +23,13 @@ What lane A6 established, and why one-sided separation stalls.
     on this atom set. Retained as lane-a6-saturated-symmetric-153-40.json.
   * Six atoms separated from THAT family -- not from a dual vertex -- take the fixed-support
     maximum on the 280-placement 1/25 support from exactly 11 to 10.4210526, bracketed
-    exactly between a feasible 325657893/31250000 and an exact dual bound 2605263163/250000000
-    with A^T u >= cost verified in Fractions. Lane A4's 24 atoms separated from a dual vertex
+    exactly for that fixed-support program: a family of total 325657893/31250000 feasible for
+    that program's selected finite rows -- depth at most one at the structural sites, the atom
+    orbits, the six seeded atoms -- against an exact dual bound 2605263163/250000000 with
+    A^T u >= cost verified in Fractions. That family is NOT feasible for the depth-one program
+    (its exact maximum depth is 105263157/100000000, and the reader refuses it at K2), so
+    10.4210526 is a value of the restricted program and not a bound on the depth-one one. The
+    dual side is serialized as lane-a6-dual-bracket-10-42.json. Lane A4's 24 atoms separated from a dual vertex
     moved the LP by 2.2e-13; these six move their support by 0.579.
   * Fed to the LP as columns, those same six enter at primal weight exactly zero and the value
     stays at 11.000000000 (39,582 iterations, 934.5 s). The LP moves to a support they do not
@@ -61,8 +66,11 @@ those.
 
 Instruments are retained beside the lane report: lane-a6-symmetric-max.py.txt (the
 fixed-support maximum that produced the certificate), lane-a6-run-atom-loop.sh.txt (the loop
-as run), lane-a6-lp-struct.py.txt (lane A4's LP driver plus --seed-sites), and the six
-separated atoms in both reader shape and freeze-record shape.
+as run), lane-a6-lp-struct.py.txt (lane A4's LP driver plus --seed-sites), lane-a6-dual-
+bracket.py.txt with lane-a6-dual-bracket-10-42.json (the dual side of the 10.42 bracket, its
+seven priced rows and their multipliers), lane-a6-atoms-2566-orbits.json (the atom set the
+certificate is a statement about), and the six separated atoms in both reader shape and
+freeze-record shape.
 
 Done when either a rows-complete value below eleven at 153/40 is frozen and decided by the
 two-route gate, or the loop is shown to stall for a named reason with its own certificate.
