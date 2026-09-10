@@ -124,8 +124,21 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-107](agent-sessions/session-107-first-wave-selection.md) | stopped | contemporaneous | `factual-review` (correctness) | `review-planning-oversight` (insight) | 2 | think-znzj | Under think-kbci the coordinator integrates this record, attaches the resource receipt and runs the certifying gate; then funds the selected block under think-qfog and the efficiency block under think-7lp3, and runs BC-304 (think-yrw1) as the closeout. |
 | [session-108](agent-sessions/session-108-anchors-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-4ifm | Under think-kbci the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-111 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
 | [session-109](agent-sessions/session-109-corner-class-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-kx2l | Under think-kbci the coordinator integrates the lane section, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
-| [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | think-qfog starts the selected pairwise-compatibility continuation on a new codex branch after merge publication. |
+| [session-110](agent-sessions/session-110-pr127-handoff-review.md) | stopped | retrospective | `remediation` (correctness) | `remediation` (correctness) | 1 | think-yx4g | BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction. |
 | [session-111](agent-sessions/session-111-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Historical at this checkpoint: resume think-mq0d for BC-264 subject to its allocation and admission requirements. Agenda030 subsequently superseded that selection with think-qfog; the current SYNOPSIS governs new work. This publication repair does not reprioritize research or authorize a target run. |
+| [session-112](agent-sessions/session-112-ownership-and-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-3glv | think-8m28: session113 and Agenda032 repair the residual separator, map the general owner-class experiments and publish the merged checkpoint. |
+| [session-113](agent-sessions/session-113-conditional-owner-sprint.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 2 | think-8m28 | think-yhw2: independently audit the union and five-dot replay, reuse the certificate through valid symmetries and exact containment, then search only uncovered classes under fresh preregistration and separately recorded usage. |
+| [session-114](agent-sessions/session-114-independent-owner-audit.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (process) | 4 | think-yhw2 | Certification is discharged by the completed PR142 checkpoint; continue BC320 under think-ykd6 with separate Session121 usage. |
+| [session-115](agent-sessions/session-115-wall-aware-owner-footprints.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (insight) | 3 | think-waix | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
+| [session-116](agent-sessions/session-116-resumed-wall-research.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-waix | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
+| [session-117](agent-sessions/session-117-wall-owner-containment.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 2 | think-waix | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
+| [session-118](agent-sessions/session-118-selected-wall-tuple.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
+| [session-119](agent-sessions/session-119-selected-wall-tuple-continuation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
+| [session-120](agent-sessions/session-120-selected-wall-tuple-execution.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-ykd6 | Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6 on codex/n11-owner-core-compatibility with separate prospective experiments and usage. |
+| [session-121](agent-sessions/session-121-owner-core-compatibility.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 4 | think-ykd6 | Parent PR145 certification is discharged. Continue BC-324 interpretation under think-rm3k on the stacked successor; new changes require their own validation. |
+| [session-122](agent-sessions/session-122-direct-sixth-site-feasibility.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (process) | 3 | think-ykd6 | Parent PR145 certification is discharged. Continue BC-324 interpretation under think-rm3k on the stacked successor; new changes require their own validation. |
+| [session-123](agent-sessions/session-123-evidence-first-interpretation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-rm3k | Continue BC-324 under think-rm3k in Session124; think-ta8s retains successor certification. |
+| [session-124](agent-sessions/session-124-evidence-interpretation-finalization.md) | stopped | contemporaneous | `research-loop` (process) | `research-loop` (process) | 1 | think-rm3k | Finalize BC-324 under think-rm3k with think-ta8s owning matching successor certification and publication follow-up. Keep scientific targets unselected while the user reviews definitions, facts, assumptions and alternate approaches. |
 
 ### Workflow summary
 
@@ -135,14 +148,14 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 2 | 1 | 13 | 1 |
 | `factual-review` | 5 | 0 | 48 | 2 |
-| `insight-iteration` | 21 | 1 | 75 | 3 |
+| `insight-iteration` | 23 | 1 | 77 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 9 | 1 | 33 | 1 |
-| `research-loop` | 17 | 4 | 76 | 7 |
-| `pipeline-improvement` | 26 | 1 | 137 | 4 |
-| `documentation-pass` | 1 | 0 | 17 | 1 |
+| `efficiency-loop` | 9 | 1 | 35 | 1 |
+| `research-loop` | 26 | 4 | 96 | 7 |
+| `pipeline-improvement` | 27 | 1 | 143 | 4 |
+| `documentation-pass` | 1 | 0 | 18 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
-| `review-planning-oversight` | 0 | 0 | 4 | 0 |
+| `review-planning-oversight` | 1 | 0 | 10 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -650,11 +663,52 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | BC-303 | research | 11 | complete | 0 | think-znzj | The frozen claim for the next block and the remaining proof obligations. |
 | BC-304 | research | 11 | complete | 0 | think-yrw1 | The owner reviews the mathematical result and the next selection. |
 
+### [agenda-031](agendas/agenda-031-ownership-and-pricing.md) — Ownership Continuation and Paired Pricing at n = 11
+
+Status: **paused**. Publish the exact ownership results derived during PR 127 review, run the independent readers needed to use them safely, test one pointwise full-support pricing mechanism at q = 96/25, and assess the owner's fixed-four-corner residual-cover pilot. The bracket remains unchanged. No cell may infer a global packing certificate from a local proof, a numerical LP proposal, or a finite site set.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-305 | research | 11 | complete | 1 | think-qfog | Published proof files, exact reader receipts, and a scoped statement of the remaining global ownership problem. |
+| BC-306 | research | 11 | blocked | 1 | think-7lp3 | The actual exp-134 launch receipt and its solved-support and paired-pricing artifacts, or a truthful never-opened disposition. |
+| BC-307 | research | 11 | stopped | 2 | think-98z2 | Reserve not opened; owner prioritized Agenda032 geometric conditioning. |
+| BC-308 | measurement_validation | 11 | stopped | 2 | think-9yow | Agenda032 BC314 owns remaining publication and certification; session112 stops with explicit pending certification. |
+| BC-309 | research | 11 | complete | 1 | think-3glv | Exp135 is unresolved after its retained separator guard. The completed instrument-feasibility lane transfers repair and fresh target work to Agenda032 BC310. |
+
+### [agenda-032](agendas/agenda-032-conditional-owner-sprint.md) — Two-Hour Conditional-Owner Sprint
+
+Status: **completed**. Test whether unavoidable corner owners make residual covering arguments stronger at L = 96/25, using exact fractional-family obstructions before costly cover searches. Preserve scope, failed instrumentation, separate usage, and an executable next agenda. No global bound changes without exact exhaustive evidence.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-310 | tool_validation | 11 | complete | 1 | think-9yvj | Exp136 numerical criterion accepted: Mglobal11.981481481481488, Mresidual7.804878048780487, gap0.17660343270100132. BC313 owns exact/full-net promotion. |
+| BC-311 | research | 11 | complete | 1 | think-mwxg | The independent audit confirms all subthreshold survivor results. Stop unchanged-weight deletion filters. |
+| BC-312 | research | 11 | complete | 1 | think-9cpg | One-owner numerical comparison accepted: point11.5745, triangle10.5556, endpoint10.3889. Endpoint remains above10. |
+| BC-313 | research | 11 | complete | 2 | think-9cpg | Exp144 certifies five dots over all361directions; reviewed transfer excludes the selected reflected m1/j0 four-owner branch. Post-sprint claim T-023 records the exact scope. |
+| BC-315 | research | 11 | complete | 1 | think-9cpg | Four-owner numerical comparison accepted: point9, triangle6, endpoint5. Exp144 verifies the fixed five-dot candidate on the complete net. |
+| BC-314 | measurement_validation | 11 | complete | 1 | think-ns6k | Publish final results and separately attributed usage; next selection think-yhw2. |
+
+### [agenda-033](agendas/agenda-033-overnight-owner-geometry.md) — Overnight Owner-Geometry Research
+
+Status: **active**. Make the largest defensible progress toward stronger n11 lower bounds by independently auditing the five-dot branch exclusion, strengthening forced-owner geometry using the walls, and expanding certified cases only where exact evidence supports it. Preserve unchanged global bounds until an exhaustive physical argument exists.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-316 | measurement_validation | 11 | complete | 1 | think-yhw2 | Exp145 confirms all 361 exact zero deficits independently; stop redundant coverage checks and take the wall-aware constructor. |
+| BC-317 | research | 11 | complete | 1 | think-waix | Exp146 accepted:12 enlarged footprints,4 equal,none impossible; all16 exact nesting checks pass. BC318 now tests containment expansion. |
+| BC-318 | research | 11 | complete | 1 | think-waix | Exp147 completed 128 relations, preserved only the two baseline labels and added none. This bounded containment transfer did not certify another owner selection; BC319 tests direct fixed-dot coverage. |
+| BC-319 | research | 11 | complete | 1 | think-ykd6 | Exp148 partial: two checked witnesses show fixed D misses 49,152 labels, while analytic D-preserving transport shows it misses 61,440. Exp149 shows that fixed D misses the selected four-patch residual relaxation for tuple label (0,0,0,7) at owner-000; it does not refute that physical owner tuple. H146 remains unresolved. The reviewed decision tree selects BC320 rather than another tuple. |
+| BC-320 | research | 11 | complete | 1 | think-ykd6 | Exp153 refutes every one-site extension of fixed D on the selected four-patch relaxation for tuple label (0,0,0,7): its exact support intersection is empty after 188 directions. Exp150 tested only the unchanged B-core owner model and found four frame-0 compatibility witnesses; it did not test unit parents or simultaneous owners. BC324 now audits which further implications are valid before any successor target is registered. |
+| BC-321 | research | 11 | tentative | 3 | think-en2r | Keep H135 unrun until the strategy checkpoint explicitly selects it. |
+| BC-322 | measurement_validation | 11 | complete | 1 | think-ta8s | Session116 pruned only the unused11,552,761-byte exp137 compressed receipt from throwaway mutation workers. The snapshot now measures123,253,184bytes,10,964,544bytes below the unchanged128MiB cap; six focused controls and the392-row inventory pass. |
+| BC-323 | measurement_validation | 11 | complete | 1 | think-ta8s | PR142 head8a35b482 passed matching fast/page and deferred34380372729; all four research-job checkout revisions were verified. PR142 is ready and unmerged; successor branch codex/n11-owner-core-compatibility is open. Native publication-tail receipt closes17:21:40UTC; Session121 starts there. |
+| BC-324 | measurement_validation | 11 | in_progress | 1 | think-rm3k | The required global routing statement is: for every hypothetical physical packing P, there exists at least one valid owner selection for P whose selected family has been excluded. The current record does not prove that statement. Complete the interpretation block before selecting or registering another scientific target. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 89 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 109 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -770,6 +824,23 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | confirmed | proof | There is a set of at most eleven marks (points or short segments, thic |  | 1 |  | 4.2m wall |
+| H-135 | blocked | proof | Solving the unit-square transport of the retained BC-232 cutting state |  | 1 |  |  |
+| H-136 | confirmed | proof | On the declared 19-by-19 site grid and nine retained directions at sid |  | 2 |  | 6s wall |
+| H-137 | refuted | proof | At least one of the sixteen bottom-left endpoint-footprint classes ret |  | 2 |  | 1.8m wall |
+| H-138 | refuted | proof | Every one of the 65536 four-corner endpoint-footprint class combinatio |  | 1 |  |  |
+| H-139 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 2 |  | 41s wall |
+| H-140 | refuted | proof | The unchanged rationalized residual-cover atoms from exp136 assign mas |  | 1 |  | 19s wall |
+| H-141 | confirmed | proof | On the declared independent 369-site support and nine reflected direct |  | 1 |  | 9s wall |
+| H-142 | confirmed | proof | The five unchanged equal-weight endpoint atoms from exp143 give positi |  | 1 | T-023 | 29s wall |
+| H-143 | confirmed | proof | For the unchanged four endpoint patches and five dots from exp143, the |  | 1 |  | 39s wall |
+| H-144 | confirmed | proof | At q=96/25 and B=9977/10000, at least one of the sixteen frozen bottom |  | 1 |  | 26s wall |
+| H-145 | refuted | proof | The frozen wall-aware owner footprints inherit at least one additional |  | 1 |  | 41s wall |
+| H-146 | unresolved | proof | The unchanged five-dot pattern D covers at least one wall-footprint tu |  | 1 |  | 1.2m wall |
+| H-147 | refuted | proof | The unchanged five-dot pattern D covers the full residual-core centre  |  | 1 |  | 11s wall |
+| H-148 | refuted | proof | At least one of the four selected owner classes admits no snapped B-co |  | 1 |  | 9s wall |
+| H-149 | refuted | proof | The original five sites D plus the exact saved exp149 centre cover eve |  | 1 |  | 13s wall |
+| H-150 | confirmed | proof | The closed escaping B-cores retained by exp149 and exp151 have a nonem |  | 1 |  | 10s wall |
+| H-151 | refuted | proof | For the fixed D and wall tuple (0,0,0,7), some additional site covers  |  | 1 |  | 22s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -779,7 +850,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 
 ## Rounds
 
-### rejected (17)
+### rejected (26)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -800,6 +871,15 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-115 | series-000 | 11 | Codex coordinator, max reasoning, think-whmn in Session089 | H-105 | Every eligible pair has an independently checked separating axis. This rejects H105 only; higher-order depth, candidate feasibility and H099 remain unresolved, and the fixed-support bracket stays [11,56/5]. |
 | exp-122 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-122 | The first frozen frame supplied one independently verified contained square disjoint from the diamond and avoiding all nine marks, refuting H122 only. |
 | exp-128 | series-000 | 11 | Session095 coordinator, BC259; max mathematical judgment | H-099 | The full fixed-support upper bound is exactly11 and the independently reconstructed packing average attains11. Thus H099's mass-above-eleven claim is false for this support. No expanded-support, primal-density or global packing conclusion follows. |
+| exp-137 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-137 | Complete exact producer screen found0of16endpoint classes with massatleast10; maximum77421212793/8221052780. This particular retained-family obstruction conjecture fails; the conditionalcover method remains open. Exp141 independently confirmed the source identities, directions, transports, positiveSAT gaps, masks, cardinalities, exact masses and summaries. |
+| exp-138 | series-000 | 11 | GPT-6 Astra, max; session113 coordinator | H-138 | Complete exact producer screen found0of65536endpoint combinations with massatleast7; maximum13394344077/2055263195 and minimum1642317587/2055263195. Sharedproducerchargedtoexp137; no secondprocess. Independent retained-receipt audit exp141 confirmed all exact checks. |
+| exp-139 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-140 | The complete exact replay found minimum760979/800000, which is belowone, so the unchanged exp136 residual weights fail H140. Their positive minimum yields normalized feasible mass31219612/3804895, above the conditional contradiction thresholdseven and without an optimum-gap claim. |
+| exp-141 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-137 | The audit completed against clean tracked receipt and source blobs at44bf815f and confirmed every recorded source identity, canonical direction, exact transport, positiveSAT gap, mask, cardinality, mass and summary. It therefore confirms exp137's subthreshold maximum and rejects H137; audit success does not reverse the mathematical verdict. The audit preserves the receipt's immutable source-era provisional label and does not itself establish the separately reviewed endpoint-containment theorem. |
+| exp-147 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-145 | The complete exact matrix covers only the two baseline tuples, with zero new covered tuples. This refutes component-containment expansion for the frozen classes, not direct coverage by the five dots. |
+| exp-149 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-147 | Direction owner-000 has a positive exact deficit and a validated rational strict escape, so the specified tuple fails the registered all361 zero-deficit criterion. This refutes H147 only; H146 remains unresolved over other tuples. |
+| exp-150 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-148 | The saved escape survives the individual owner-core constraint in every selected class. H148 is refuted; joint owner compatibility, unit parents, H146 and the global n11 bound remain unresolved. |
+| exp-151 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-149 | The completed first-deficit stop refutes this fixed six-dot set after seven of 361 directions. It does not rule out relocating the sixth site, changing other sites or a weighted certificate. |
+| exp-153 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-151 | The exact site region becomes empty after 188 complete direction constraints. This rules out every additional single site while original D and tuple(0,0,0,7) stay fixed. It does not rule out weighted added mass below two, repositioned six-site patterns or physical packings. |
 
 ### abandoned (2)
 
@@ -808,7 +888,7 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (21)
+### unresolved (24)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -833,8 +913,11 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-126 | series-000 | 11 | Session094 coordinator, BC243; max mathematical judgment | H-099 | The conservative graph contains a reported overweight clique, so this sufficient depth certificate failed. No common geometric interior was certified and no independent target reader ran. H099 and its fixed-support bracket remain unresolved and unchanged. |
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
 | exp-133 | series-000 | 11 | the BC-293 lane agent of agenda-030, bead think-1136, session-101; the record was written by a separate record lane from the frozen result section | H-128 | Handoff correction, 2026-09-08: the original rejected verdict applied a stopping criterion for a finite-support attempt to H-128's broader existence claim. The valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15; that attempt did not obtain the target. The bounded dual's floor over the net is only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain. The independent corner-pair theorem remains proved. |
+| exp-135 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-136 | The unrestricted arm converged, but the residual separator stopped at direction113 because a reachable cell had no representable interior witness. The paired score was not measured. This is an instrument limitation, not negative evidence about geometric conditioning. |
+| exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Process exit0 preserved a valid partial receipt, but it did not mean scientific completion: only unrestricted converged. Point exhausted60 rounds without convergence, triangle and endpoint were not run, and the primary difference was not measured. The partial point objective is not a covering value or negative result for H139. |
+| exp-148 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-146 | The seed-stage guard expired before any complete seed direction or candidate check. Two valid retained escapes give reusable negative evidence for49152 labels, but neither a new cover nor an all-label refutation was completed. |
 
-### blocked (8)
+### blocked (9)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -846,8 +929,9 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
+| exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
-### accepted (30)
+### accepted (37)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -881,6 +965,13 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-130 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-130 | All three theorems meet H-130's total-width criterion: Theorems A, B and C clear the 3° bar by approximately 0.1846°, 8.8582° and 9.3138°. Theorem C also establishes the literal distance of 1.5° from both endpoints. Each is an exact decision of decide_class_program without using Stromquist's Theorem 3 or its lemmas. |
 | exp-131 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-131 | All eight counts are now decided under a registered round rather than cited from a planning lane, every exact mass reproduces the planning lane's to the fraction, and no declared falsifier occurred. The eight exact cell claims of H-131 are confirmed; the 2026-09-08 review corrects outward-rounded degree summaries without claiming a rerun. The certificate's site set does not restrict the resulting packing theorem within its exact angle domain. |
 | exp-132 | series-000 | 11 | the BC-302 lane agent of agenda-030, bead think-qfog, session-104; the record was written by a separate record lane from the frozen result section | H-134 | H-134's criterion is met in segment form: ten horizontal segments of length 1/10 on Stromquist's rows cover the whole pose space at tolerance 3/500, certified by an interval reader with every certified leaf and every discarded box re-decided in exact rational arithmetic and no failure, so every square of every packing of eleven unit squares at any side up to 96/25 is within 3/500 of a known mark; the point form of the same claim is untouched by this and stays open with thirteen candidate sets refuted. |
+| exp-136 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-113 | H-136 | The predeclared numerical paired margin is positive by0.17660343270100132. Residual mass remains above7; this is a finite-support finite-direction mechanism result, not a packing exclusion or exact optimum-gap bound. |
+| exp-142 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | All four numerical arms converged; point-minus-endpoint gain1.185626102292769>0.001. Point-extension and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net verification remains separate. |
+| exp-143 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-141 | All four numerical arms converged; point-minus-endpoint gain4.0>0.001. Point-extension and monotonicity guards pass. This accepts the finite numerical mechanism claim only; exact full-net verification remains separate. |
+| exp-144 | series-000 | 11 | GPT-6 Astra,max; session113 coordinator | H-142 | All361directions have exact positive minimum beta=1000001/1000000. The five unit dots cover the residual net. Reviewed endpoint containment and strict-core transfer exclude the selected four-owner branch, which would need seven residual cores. No universal n11 exclusion. |
+| exp-145 | series-000 | 11 | GPT-6 Astra coordinator; instrument by GPT-5.6 Sol extra high; mathematical review by GPT-6 Astra max | H-143 | All 361 required directions completed with exact zero uncovered area. The independent finite-net calculation confirms the retained five-dot coverage; shared analytic owner and strict-core transfer premises remain separate. No global bound or confirmation-rung change. |
+| exp-146 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-144 | All sixteen classes completed with exact nesting; twelve wall-aware footprints properly contain their old endpoint footprints. Four are equal and none is impossible. This accepts the frozen geometric mechanism, without an extra covered tuple or a global bound change. |
+| exp-152 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-150 | A nonempty two-dimensional four-vertex region survives the two necessary core constraints. This accepts only the two-witness screen, not any all-direction cover or tuple exclusion. |
 
 ### baseline (11)
 
@@ -913,10 +1004,13 @@ Status: **completed**. Run X-021's research sessions as parallel lanes with disj
 | exp-070 | H-064 | 109.3m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | After the T+2 landing, spend the remaining 135 one-core proc |
 | exp-118 | H-107 |  | dependency |  |  |
 | exp-129 | H-125 |  | dependency |  |  |
+| exp-134 | H-135 |  | dependency |  |  |
+| exp-140 | H-139 | 16s wall | timebox | Exp142 freshly restarts the same four arms with 300 rounds a |  |
+| exp-148 | H-146 | 1.2m wall | timebox | Exp149 tests the separately registered explicit tuple(0,0,0, |  |
 
 ## Effort
 
-89 rounds, 2152.1 agent-minutes, 1359.4 wall-minutes.
+109 rounds, 2152.1 agent-minutes, 1367.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

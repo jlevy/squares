@@ -94,6 +94,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-013](packing/frontier/RESULTS.md) | 40 | `V4` | `C3` | `S3` | `apparently-novel` | Goebel’s n = 40 packing is infinitesimally flexible -- seven verified independent first-order flexes turn the sixteen-square tilted block -- and every retained flex is refused at second order by a verified non-negative self-stress, exactly over Q(sqrt 2), so no first-order argument can establish rigidity here. |
 | [T-015](packing/frontier/RESULTS.md) | 17 | `V4` | `C3` | `S3` | `previously-published` | s(17) >= 22529/5000 = 4.5058, by Massaccesi’s 168-atom fractional unavoidable-set certificate (2026) on Burns’s architecture: total mass 203/12 < 17 and mass at least 1 in every closed unit square of [0, 22529/5000]^2, reduced exactly to 181 rational directions and finitely many event cells, replayed here by the source verifier and by an accumulation-independent repository instrument. |
 | [T-016](packing/frontier/RESULTS.md) | 18, 19 | `V4` | `C3` | `S3` | `previously-published` | s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a packing of n >= 17 unit squares contains a packing of 17). |
+| [T-023](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S3` | `apparently-novel` | At q = 96/25, if four distinct unit squares have selected strict cores of side B = 9977/10000 containing, respectively, the four closed rational patches in arms.endpoint.footprint_union of the retained exp143 receipt, at most five further unit squares fit. |
 | [T-006](packing/frontier/RESULTS.md) | 13 | `V3` | `C1` | `S3` | `previously-published` | s(13) = 4 (Bentz 2010, Theorem 9). |
 | [T-007](packing/frontier/RESULTS.md) | 4-100 | `V3` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 100, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V4` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
@@ -137,12 +138,12 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives seventeen confirmed hypotheses, thirteen refuted
-hypotheses, one open hypothesis, twenty-five open questions, and forty-four blocked
-hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
-unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
-invocation; this does not refute its claim.
-No hypothesis is running or waiting on review and six are unresolved.
+The generated ledger currently derives twenty-four confirmed hypotheses, twenty-one
+refuted hypotheses, one open hypothesis, twenty-five open questions, and forty-five
+blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
+remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
+scientific invocation; this does not refute its claim.
+One hypothesis is running; none is waiting on review and nine are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -207,6 +208,28 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Unit-Parent Centre Restriction: Author-Lane Proof Check](docs/project/reviews/review-2026-09-10-n11-parent-centre-author-check.md) | dated review record | record | retained | — |
+| [N11 Research: Definitions, Findings, and the Inference Chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md) | research synthesis | record | retained | — |
+| [Inference Audit: Owner Geometry and Fixed-D Continuation](docs/project/research/research-2026-09-09-n11-inference-audit.md) | research synthesis | record | retained | — |
+| [Review of the First-Principles N11 Account](docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md) | dated review record | record | retained | — |
+| [After the Direct Sixth-Site Decision](packing/cases/n11_five_dot_cover/after-direct-family-decision.md) | research synthesis | record | retained | — |
+| [Necessary Unit-Parent Centre Restrictions](packing/cases/n11_five_dot_cover/unit-parent-centre-contract.md) | research synthesis | record | retained | — |
+| [Fixed Two-Attainer Obstruction: Source Admission](packing/cases/n11_five_dot_cover/two-attainer-source-admission.md) | dated review record | record | retained | — |
+| [PR145: Frozen Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/pr145-checkpoint/README.md) | research synthesis | record | retained | — |
+| [Direct Sixth-Site Feasibility: Source Admission](packing/cases/n11_five_dot_cover/direct-sixth-site-source-admission.md) | dated review record | record | retained | — |
+| [Direct Sixth-Site Feasibility Versus a Bounded Candidate Loop](packing/cases/n11_five_dot_cover/direct-sixth-site-contract.md) | dated review record | record | retained | — |
+| [Two-Escape Sixth-Site Screen: Source Admission](packing/cases/n11_five_dot_cover/sixth-site-screen-source-admission.md) | dated review record | record | retained | — |
+| [Sixth-Site Feasibility and a Bounded Exact Cutting Loop](packing/cases/n11_five_dot_cover/sixth-site-cutting-contract.md) | dated review record | record | retained | — |
+| [Fixed Six-Dot Cover: Source Admission](packing/cases/n11_five_dot_cover/six-dot-source-admission.md) | dated review record | record | retained | — |
+| [If the Fixed Six-Dot Test Refutes](packing/cases/n11_five_dot_cover/after-six-dot-refutation-strategy.md) | dated review record | record | retained | — |
+| [After exp150: Fixed Six-Dot Cover Contract](packing/cases/n11_five_dot_cover/after-exp150-decision-contract.md) | dated review record | record | retained | — |
+| [Saved-Escape Owner Compatibility: Source Admission](packing/cases/n11_five_dot_cover/owner-compatibility-source-admission.md) | dated review record | record | retained | — |
+| [Saved-Escape Owner Compatibility: Mathematical Admission Contract](packing/cases/n11_five_dot_cover/owner-compatibility-contract.md) | dated review record | record | retained | — |
+| [After exp148: Transport the Witnesses, Then Remove Repeated Preparation](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) | research synthesis | record | retained | — |
+| [After exp149: Test the Escape in the Snapped-Core Model](packing/cases/n11_five_dot_cover/after-exp149-strategy.md) | research synthesis | record | retained | — |
+| [Selected-Cover Adapter: Source Admission](packing/cases/n11_five_dot_cover/selected-cover-source-admission.md) | dated review record | record | retained | — |
+| [Fixed-Pattern Adapter: Source Admission](packing/cases/n11_five_dot_cover/fixed-pattern-source-admission.md) | dated review record | record | retained | — |
+| [BC318 Adapter: Mathematical Source Admission](packing/cases/n11_five_dot_cover/wall-containment-source-admission.md) | dated review record | record | retained | — |
 | [Math Startup and Layout Stability](packing/benchmarks/math-startup/README.md) | component scope and use | supporting | maintained | — |
 | [Math Startup Ideas](packing/benchmarks/math-startup/ideas.md) | implementation plan | supporting | maintained | — |
 | [Math Startup Ledger](packing/benchmarks/math-startup/ledger.md) | generated status view | generated | generated | — |
@@ -440,11 +463,18 @@ case or experiment separately.
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
-| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | current | maintained | — |
+| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
 | [T-022 Dilation-Limit Corollary, Derived from T-018](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) | research synthesis | record | retained | — |
+| [Overnight Decision Review: Independent Coverage and Owner Geometry](packing/cases/n11_five_dot_cover/overnight-strategy-review.md) | research synthesis | record | retained | — |
+| [Wall Constructor: Mathematical Admission Addendum](packing/cases/n11_five_dot_cover/wall-constructor-contract.md) | research synthesis | record | retained | — |
+| [BC318: Exact Containment Transfer from the Retained Five-Dot Certificate](packing/cases/n11_five_dot_cover/wall-containment-contract.md) | research synthesis | record | retained | — |
+| [After the Wall Gain: One Fixed-Pattern Mask Discriminator](packing/cases/n11_five_dot_cover/after-wall-gain-strategy.md) | research synthesis | record | retained | — |
+| [Wall Constructor Source Admission](packing/cases/n11_five_dot_cover/wall-source-admission.md) | research synthesis | record | retained | — |
+| [Independent Polygon-Union Audit of the Five Dots](packing/cases/n11_five_dot_cover/union-contract.md) | research synthesis | record | retained | — |
+| [Prospective Exact Census of Coarse Owner Classes](packing/cases/n11_five_dot_cover/owner-case-census-design.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 381/100$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) | generated status view | generated | generated | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -471,6 +501,29 @@ case or experiment separately.
 | [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
 | [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
 | [Change-Scoped Exhaustive Validation](docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md) | dated review record | record | retained | — |
+| [Adjacent Corner Pairs Can Each Have Two Owners](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/adjacent-corner-two-owner-counterexample.md) | research synthesis | record | retained | — |
+| [BC-305 Ownership Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/bc-305-ownership-results.md) | research synthesis | record | retained | — |
+| [Fixed Outer Pairs Exclude Two Distinct Bottom Corner Owners](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/fixed-outer-pairs-bottom-corner-incompatibility.md) | research synthesis | record | retained | — |
+| [Independent Review of the New Outer-Segment Constraints](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/new-outer-constraints-review.md) | research synthesis | record | retained | — |
+| [Outer-Middle Segment Capacity Is Two](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-middle-capacity-two-proof.md) | research synthesis | record | retained | — |
+| [Outer Pair and Two Corner Owners Coexist](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-corner-counterexample.md) | research synthesis | record | retained | — |
+| [Exact Outer-Pair Exclusions for a Broad Same-Sign Angle Band](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-equal-angle-and-cell-exclusions.md) | research synthesis | record | retained | — |
+| [Review of the Fixed-Angle Outer-Pair Screen](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/outer-pair-screen-contract-review.md) | research synthesis | record | retained | — |
+| [The Remaining Eight Segments Have Sharp Capacity Four](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/remaining-eight-segment-capacity-four.md) | research synthesis | record | retained | — |
+| [Shared Segments Restrict Separating Supports](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/shared-segment-support-bounds.md) | research synthesis | record | retained | — |
+| [A Robust Outer-Corner Incompatibility](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/robust-outer-corner-incompatibility.md) | research synthesis | record | retained | — |
+| [Corner-Owner Sector Footprints](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-031/proofs/corner-owner-sector-footprints.md) | research synthesis | record | retained | — |
+| [Exact Fractional-Family Screen for Corner Residual Covers](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/dual-salvage-contract.md) | research synthesis | record | retained | — |
+| [Endpoint Footprint Proof Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md) | research synthesis | record | retained | — |
+| [Generic Owner-Footprint Cover: Sprint Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-footprint-contract.md) | research synthesis | record | retained | — |
+| [Owner-Pose Refinement Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/owner-pose-refinement-contract.md) | research synthesis | record | retained | — |
+| [Fixed-Four-Corner Cover Transfer Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/fixed-cover-transfer-review.md) | research synthesis | record | retained | — |
+| [Point-Extension Lemma](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/point-extension-lemma.md) | research synthesis | record | retained | — |
+| [Multiple Owner-Footprint Domain Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/multiple-footprint-domain-contract.md) | research synthesis | record | retained | — |
+| [Exp139, Exp140, and Multi-Owner Domain Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/receipts-and-multi-domain-review.md) | research synthesis | record | retained | — |
+| [Exp143 Five-Dot Candidate: Mathematical Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md) | research synthesis | record | retained | — |
+| [Five Dots Exclude One Four-Owner Branch at $q=3.84$](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md) | research synthesis | record | retained | — |
+| [From One Excluded Branch to a Stronger Eleven-Square Bound](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md) | research synthesis | record | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
@@ -617,6 +670,49 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+**Current reader entry:**
+[definitions, findings and the inference chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md),
+followed by the
+[scope audit](docs/project/research/research-2026-09-09-n11-inference-audit.md).
+PR145 is ready at its frozen scientific milestone.
+The stacked interpretation block corrects summaries and maps untested alternatives; it
+adds no scientific target or global bound.
+Historical handoffs below retain their original context.
+
+[Session113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md)
+closed Agenda032 with [T-023](packing/frontier/RESULTS.md), the five-dot exclusion of
+one specified four-owner branch at side `96/25 = 3.84`. The composed result is V3/C3,
+significance S3: exact full-net coverage plus audited geometric transfer, with no change
+to the global bound.
+The
+[sprint report](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md)
+explains the full result and next `think-yhw2` selection.
+The
+[gaps and routes analysis](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md)
+separates certificate assurance, exhaustive case coverage and stronger geometric
+restrictions, including what could improve the bound at a different target side.
+
+[Agenda033](packing/campaign/agendas/agenda-033-overnight-owner-geometry.md) governs the
+continuation after T-023. Exp145 independently confirmed all 361 exact zero deficits in
+39.06 seconds.
+Exp146 then completed all 16 wall-aware owner classes in 25.69 seconds: 12
+common footprints strictly enlarged, four were equal and none was impossible.
+[H-144](packing/campaign/hypotheses/H-144-wall-aware-owner-footprint-gain.md) is
+accepted, but that geometric gain adds no owner selection or global lower bound by
+itself.
+
+[Exp147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md)
+completed its bounded component-containment transfer: eight of 128 relations held, it
+preserved the two baseline tuple labels, and it certified no additional selection.
+This is a negative result for that sufficient transfer, not a physical tuple census.
+[PR142](https://github.com/jlevy/squares/pull/142) retains the independently tallied
+audit and wall-aware continuation.
+The [owner-case design](packing/cases/n11_five_dot_cover/owner-case-census-design.md)
+shows why proper containment cannot extend the equal-area coarse patch family;
+simultaneous square symmetries give only two geometric owner tuples.
+No shared arrangement census has been promoted from this result.
+Usage after Session113 is retained in separate, nonoverlapping receipts.
+
 **Math startup release checkpoint.**
 [Session 111](packing/campaign/agent-sessions/session-111-font-startup-stability.md)
 records the prepared geometry, parameter-first hydration, reload restoration, and the
@@ -691,18 +787,116 @@ not certify an upper bound.
 The depth polisher will start from that retained control; its missing scratch state is
 not a runnable handoff.
 
-**Selected next entry:** `think-qfog` continues BC-302 at the missing pairwise
-compatibility step after merge publication.
-BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
-complements of BC-292 and BC-299 forward.
-The corrected checkpoint is certified by the retained raw full log and structured
-component receipts composing all 69 steps; the earlier `ef8a2e72` full invocation
-remains failed. The owner authorized correcting and validating the stack, merging PRs
-116, 121 and 127 in order, then continuing on a new branch.
-The [handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
-records the corrections and the funded continuation.
-[Session 110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md)
-records the correction checkpoint and its remaining certification work.
+[Session117](packing/campaign/agent-sessions/session-117-wall-owner-containment.md)
+completed exp147’s bounded containment screen under H-145. All 128 relations completed;
+the screen preserved only the two baseline labels and added none.
+
+BC-319 then ran under `think-ykd6`, with
+[exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md)
+registered under H-146. It keeps the five dots fixed, builds a reusable exact witness
+bank, and permits one surviving tuple check.
+Exp148 retained two exact witnesses before its seed deadline: 49,152 labels rejected,
+16,382 nonbaseline labels remaining, no candidate attempted.
+H-146 remains unresolved.
+
+[Session120](packing/campaign/agent-sessions/session-120-selected-wall-tuple-execution.md)
+continues the published work from
+[Session119](packing/campaign/agent-sessions/session-119-selected-wall-tuple-continuation.md).
+[Exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md)
+was partial. The separate
+[analytic transport](packing/cases/n11_five_dot_cover/after-exp148-strategy.md) rejects
+61,440 labels for fixed D, leaving 4,094 nonbaseline labels.
+[Exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md)
+refutes H-147 at its first required direction: owner-000 has a positive exact uncovered
+area and a retained rational strict escape for the selected four-patch relaxation
+labelled by tuple `(0,0,0,7)`. This refutes fixed D as a cover of that relaxation, not
+the physical tuple. H-146 remains unresolved over other labels.
+
+BC-320 then tested the saved escape and every one-site extension of fixed D on that same
+relaxation. Current evidence:
+[exp-150](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md)
+refuted individual-owner exclusion in the unchanged B-core model, with one frame-0
+witness in each of four classes;
+[exp-151](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md)
+refuted the fixed sixth site;
+[exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md)
+accepted the necessary two-core screen;
+[exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md)
+is the completed refutation of every one-site extension of fixed D on the selected
+four-patch relaxation.
+Exp150’s compatibility result does not establish continuous unit parents or simultaneous
+owners, and exp153 does not exclude the physical tuple.
+
+[Session121](packing/campaign/agent-sessions/session-121-owner-core-compatibility.md)
+and
+[Session122](packing/campaign/agent-sessions/session-122-direct-sixth-site-feasibility.md)
+are terminal.
+[Session123](packing/campaign/agent-sessions/session-123-evidence-first-interpretation.md)
+is terminal.
+[Session124](packing/campaign/agent-sessions/session-124-evidence-interpretation-finalization.md)
+resumed at 2026-09-10 01:52:40 UTC after the elapsed interruption and is the latest
+terminal interpretation checkpoint.
+Its successor certification and publication follow-up remain pending; no new scientific
+target is selected.
+
+**Selected next entry:** `think-rm3k`, BC-324. This is a factual interpretation block,
+not a scientific target.
+It defines the terms used in the argument, separates exact computations from analytic
+implications, and audits the premises still required for a global result.
+The key routing obligation is
+
+$$\forall P\text{ a hypothetical physical packing},\quad
+\exists\sigma\text{ a valid owner selection for }P
+\text{ whose selected family is excluded}.$$
+
+The record does not prove this statement.
+A reviewed two-attainer instrument is source ready but unrun; any future target needs a
+separate prospective registration and allocation.
+PR145 is ready after matching fast, page and full checkpoint validation.
+PR142 and PR137 also remain ready and unmerged.
+
+The two-hour sprint in
+[Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
+complete. Exp141 independently confirmed the retained-family negative screens; exp142
+completed the one-owner numerical comparison; exp143 found the four-owner five-dot
+candidate; exp144 checked those unchanged dots on all 361 canonical orientations.
+The footprint-containment and strict-core arguments supply the physical implication
+recorded as T-023. BC-316 subsequently completed the independent polygon-union audit in
+[exp-145](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md):
+all 361 exact deficits were zero.
+The
+[saved-escape decision tree](packing/cases/n11_five_dot_cover/after-exp149-strategy.md)
+is now a historical decision record: exp150 took its compatible-owner branch, exp151
+tested the selected sixth site, and exp153 closed the broader fixed-D-plus-one-site
+family on the relaxation.
+A global exclusion does not require every raw tuple label to be excluded.
+It requires the existential owner-selection routing statement above for every
+hypothetical physical packing.
+Any next experiment requires a fresh hypothesis or explicitly scoped successor,
+prospective criteria, published source, and a separate session usage interval.
+The figure and T-023 registration are post-sprint documentation amendments and are not
+charged into the frozen session113 receipt through `2026-09-09T05:16:31Z`. The separate
+post-sprint usage delta was initially refused for non-monotone wait timing.
+The repaired meter retains that tail separately through 07:05:32 UTC, followed by
+Session114’s separate receipt through 07:53:52 UTC. The original Session113 receipt is
+unchanged.
+
+[PR137](https://github.com/jlevy/squares/pull/137), on
+`codex/n11-ownership-continuation`, is ready for review and targets `main`. PR142 stacks
+the independent audit and overnight continuation on that milestone.
+PRs 116, 121 and 127 have merged; PR127 merged as `6aa9e72c`.
+[Session112](packing/campaign/agent-sessions/session-112-ownership-and-pricing.md)
+retains the earlier research continuation through `03:18:37Z`; main’s independent font
+session111 retains its own identifier and receipt.
+[Session110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md) and
+the [handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
+preserve the original stack review and its separately tallied cost.
+
+Full-support pricing H-135 remains an unrun reserve under `think-7lp3`. Exp134’s exact
+transport control passed with depth one and unchanged mass `21342289572/2055263195` in
+135.91 seconds, but the pricing target was never invoked.
+Neither that administrative stop nor the deferred H-125 kernel is a negative scientific
+result. The owner-case continuation above takes priority.
 
 **Agenda 028’s restricted-family results.**
 [Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) and
@@ -3219,11 +3413,28 @@ round that names the hypothesis, control roles included.
 | [H-127](packing/campaign/hypotheses/H-127-corner-class-surplus-at-q.md) | blocked | Pricing the four corner blockers’ cores at 96/25 gives a covering surplus; the region-class row generator is not built | 0 | — |
 | [H-128](packing/campaign/hypotheses/H-128-corner-skeleton-ownership.md) | unresolved | A valid measure at 96/25 with T-018’s corner atoms at weight 3/20 and mass below 11.15 exists; the unsuccessful finite support does not refute this claim | 1 | 63.5m wall |
 | [H-129](packing/campaign/hypotheses/H-129-unit-shrink-fractional-value-near-u.md) | blocked | The unit-square fractional value at 3.87 stays below eleven; a lower family at least eleven obstructs the specified one-body certificate, while a smaller family is inconclusive | 0 | — |
-| [H-130](packing/campaign/hypotheses/H-130-robust-end-band-theorem-at-q.md) | confirmed | A robust band of 3° around 0° and 45° is excluded at 96/25; decided exactly in exp-130, out to [0°, 10.3875°] ∪ [43.0737°, 45°] on grid 119 | 1 | 37.2m wall |
-| [H-131](packing/campaign/hypotheses/H-131-near-axis-counts-at-q.md) | confirmed | At most nine squares within 6.45° of the axes and ten within 10.39° at 96/25; replayed exactly under exp-131 | 1 | 31.2m wall |
+| [H-130](packing/campaign/hypotheses/H-130-robust-end-band-theorem-at-q.md) | confirmed | The exact end-cell union of Theorem C is excluded at 96/25; grid-119 degree boundaries are approximately 10.387466° and 43.0737° | 1 | 37.2m wall |
+| [H-131](packing/campaign/hypotheses/H-131-near-axis-counts-at-q.md) | confirmed | The registered exact cell counts replay at 96/25 and U; at q, cells 0–24 contain at most nine squares and cells 0–39 at most ten | 1 | 31.2m wall |
 | [H-132](packing/campaign/hypotheses/H-132-rectangle-no-fit-at-q.md) | blocked | Eleven squares do not fit in 3.84 × 3.81; the rectangle centre domain is not built | 0 | — |
 | [H-133](packing/campaign/hypotheses/H-133-plateau-site-artefact.md) | open question | Is the exactly-eleven plateau at 191/50 a site artefact of Trump-shaped cores in site-free strips? | 0 | — |
 | [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | confirmed | A robust unavoidable set of ten horizontal segments exists at 96/25; unique ownership remains a separate question | 1 | 4.2m wall |
+| [H-135](packing/campaign/hypotheses/H-135-paired-full-support-pricing.md) | blocked | Full effective dual support exposes a new orbit with paired32 depth at most one and full depth greater than one under one solve | 1 | Unspent |
+| [H-136](packing/campaign/hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | confirmed | On the declared 19-by-19 site grid and nine retained directions at side 96/25, the converged numerical covering objective for cores avoiding four fixed flush corner unit squares is more than 4.001 below the matched unrestricted objective | 2 | 5.60s wall |
+| [H-137](packing/campaign/hypotheses/H-137-single-owner-dual-salvage.md) | refuted | At least one of sixteen endpoint-footprint classes retains depth-one mass at least ten | 2 | 109.08s wall |
+| [H-138](packing/campaign/hypotheses/H-138-four-owner-dual-salvage.md) | refuted | Every four-corner endpoint combination retains depth-one mass at least seven | 1 | shared exp137 |
+| [H-139](packing/campaign/hypotheses/H-139-owner-footprint-matched-gain.md) | confirmed | Enlarging an owned point to its endpoint footprint reduces the matched numerical cover mass by more than0.001 | 2 | 40.52s wall |
+| [H-140](packing/campaign/hypotheses/H-140-fixed-corner-full-net-cover.md) | refuted | Unchanged rationalized fixed-corner residual weights cover the complete181-direction net | 1 | 18.65s wall |
+| [H-141](packing/campaign/hypotheses/H-141-four-owner-footprint-matched-gain.md) | confirmed | Four guaranteed endpoint footprints improve the matched numerical cover beyond four bare owned marks | 1 | 9.12s wall |
+| [H-142](packing/campaign/hypotheses/H-142-five-dot-full-net-cover.md) | confirmed | The fixed five-dot four-owner proposal covers all361canonical directions | 1 | 28.95s wall |
+| [H-143](packing/campaign/hypotheses/H-143-independent-five-dot-union.md) | confirmed | Independent exact polygon union covers the same contained-core domains in all 361 directions | 1 | All 361 deficits zero; 39.06s process |
+| [H-144](packing/campaign/hypotheses/H-144-wall-aware-owner-footprint-gain.md) | confirmed | Container walls strictly enlarge twelve of sixteen coarse owner footprints | 1 | 25.69s wall |
+| [H-145](packing/campaign/hypotheses/H-145-wall-owner-containment-expansion.md) | refuted | Wall-aware footprints extend a five-dot exclusion by component containment | 1 | 40.88s wall |
+| [H-146](packing/campaign/hypotheses/H-146-fixed-five-dot-wall-expansion.md) | unresolved | The fixed five dots exclude another wall-owner tuple | 1 | 74.03s wall |
+| [H-147](packing/campaign/hypotheses/H-147-selected-wall-tuple-cover.md) | refuted | The unchanged five-dot pattern covers the selected wall-owner tuple `(0,0,0,7)` | 1 | 11.41s wall |
+| [H-148](packing/campaign/hypotheses/H-148-wall-owner-escape-compatibility.md) | refuted | At least one selected owner-core class excludes the exact exp149 escape | 1 | Four independently replayed compatible class witnesses; 9.01s |
+| [H-149](packing/campaign/hypotheses/H-149-selected-six-dot-cover.md) | refuted | D plus the saved escape centre covers the same selected tuple on all 361 directions | 1 | First deficit at owner-006; 13.45s |
+| [H-150](packing/campaign/hypotheses/H-150-sixth-site-two-core-screen.md) | confirmed | One replacement site hits both exact escaping cores | 1 | Nonempty two-dimensional quadrilateral; 9.84s |
+| [H-151](packing/campaign/hypotheses/H-151-direct-sixth-site-feasibility.md) | refuted | Some sixth site completes the fixed D cover of the selected tuple | 1 | Exact site region empty after188directions; fixed-D family refuted |
 
 ### Confirmed
 
@@ -3466,14 +3677,34 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-098.yaml` | session-098 | 590 | 4.33 h | 3.1 h | 3.15 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
-| `codex-task-tree-session-110.yaml` | session-110 | 940 | 6.73 h | 2.58 h | 2.58 h | yes |
+| `codex-task-tree-session-110.yaml` | session-110 | 1,169 | 7.88 h | 2.96 h | 2.96 h | yes |
 | `codex-task-tree-session-111.yaml` | session-111 | 2,798 | 20.24 h | 6.22 h | 6.23 h | yes |
+| `codex-task-tree-session-112.yaml` | session-112 | 843 | 7.52 h | 3.78 h | 3.91 h | yes |
+| `codex-task-tree-session-113.yaml` | session-113 | 973 | 6.99 h | 1.97 h | 1.97 h | yes |
+| `codex-task-tree-session-114.yaml` | session-114 | 330 | 2.25 h | 0.81 h | 0.81 h | yes |
+| `codex-task-tree-session-115.yaml` | session-115 | 213 | 19.6 h | 6.7 h | 6.7 h | yes |
+| `codex-task-tree-session-116.yaml` | session-116 | 304 | 8.45 h | 0.82 h | 0.82 h | yes |
+| `codex-task-tree-session-117.yaml` | session-117 | 371 | 2.16 h | 0.75 h | 0.75 h | yes |
+| `codex-task-tree-session-118.yaml` | session-118 | 59 | 0.38 h | 0.16 h | 0.16 h | yes |
+| `codex-task-tree-session-119.yaml` | session-119 | 86 | 0.51 h | 0.25 h | 0.25 h | yes |
+| `codex-task-tree-session-120.yaml` | session-120 | 96 | 0.68 h | 0.2 h | 0.2 h | yes |
+| `codex-task-tree-session-121-compatibility-target.yaml` | session-121 | 115 | 0.52 h | 0.21 h | 0.21 h | yes |
+| `codex-task-tree-session-121-six-dot.yaml` | session-121 | 180 | 1.1 h | 0.39 h | 0.39 h | yes |
+| `codex-task-tree-session-121-source.yaml` | session-121 | 152 | 1.31 h | 0.45 h | 0.45 h | yes |
+| `codex-task-tree-session-121-two-core.yaml` | session-121 | 157 | 1.19 h | 0.41 h | 0.41 h | yes |
+| `codex-task-tree-session-122-checkpoint.yaml` | session-122 | 179 | 1.26 h | 0.44 h | 0.44 h | yes |
+| `codex-task-tree-session-122-direct-target.yaml` | session-122 | 88 | 0.46 h | 0.15 h | 0.15 h | yes |
+| `codex-task-tree-session-122-source.yaml` | session-122 | 101 | 0.89 h | 0.29 h | 0.29 h | yes |
+| `codex-task-tree-session-123.yaml` | session-123 | 87 | 18.56 h | 6.18 h | 6.18 h | yes |
+| `codex-task-tree-session-124-publication.yaml` | session-124 | 154 | 6.97 h | 0.41 h | 0.41 h | yes |
+| `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
+| `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 66 |
+| measured | 79 |
 | unmeasured | 45 |
-| **total** | **111** |
+| **total** | **124** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3489,9 +3720,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 89 rounds registered in `series-000`.
+There are 109 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1359.4 wall-minutes.
+They record 2152.1 agent-minutes and 1367.0 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3620,6 +3851,26 @@ archive beside it.
 | [exp-131](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-131-h131-near-axis-counts-replay-at-q.md) | 11 | proof | H-131 | Registered replay of the near-axis and near-diagonal count classes through decide_class_program | Every count reproduces exactly: at most nine within 6.4537°, ten within 10.3875°, nine within 2.155° of 45°, ten within 2.44° of 40.19°, ten in [30.01°, 45°] | accepted |
 | [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-h134-segment-mark-cover-at-q.md) | 11 | proof | H-134 | Interval reader over pose space with every certified leaf re-decided exactly; the falsifier engine’s exact escapes for point sets | Ten segments of length 1/10 on Stromquist’s ten points at 96/25 are unavoidable at tolerance 3/500; the independent replay confirms the cover and closes the missing far-wall sliver | accepted |
 | [exp-133](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-133-h128-corner-skeleton-verdict-at-q.md) | 11 | proof | H-128 | Column generation with the corner orbit bounded below, swept exactly; the bounded dual’s floor | The tested support is unsuccessful, but its floor of 10.785 is below the 11.15 obstruction threshold; H-128 remains unresolved and the corner-pair theorem survives | unresolved |
+| [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Owner reprioritized BC-309 before launch; no LP target invoked; protocol retained pending a fresh forward allocation | blocked |
+| [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md) | 11 | target | H-136 | Matched unrestricted and four-fixed-corner residual covering programs on one 19-by-19 grid and nine retained directions | Global numerical convergence; residual thin-cell separator failure, no paired score | unresolved |
+| [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md) | 11 | target | H-136 | Matched repaired replay on unchanged support, directions and guards | Both arms converged; matched gap improvement0.1766034327, residual mass7.804878 above7 | accepted |
+| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | No endpointclass retains mass10; exact producer completed, independentaudit pending | rejected |
+| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpointcombination retains mass7; independentaudit pending; processchargedonce | rejected |
+| [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md) | 11 | target | H-140 | Exact full181net replay of unchanged residualatoms fromexp136 | Exact minimum760979/800000; normalized conditional mass31219612/3804895 above7 | rejected |
+| [exp-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md) | 11 | target | H-139 | Matched unrestricted/point/triangle/endpoint covers on independent369site support andnine directions | Unrestricted converged; point hit60rounds; area arms unrun | unresolved |
+| [exp-141](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md) | 11 | target | H-137 | Independent exact reconstruction of the exp137 screen | Independent audit verified192masks,147456exactSATchecks and alljoint summaries; confirms negative | rejected |
+| [exp-142](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-142-one-owner-completion.md) | 11 | target | H-139 | Fresh one-owner matched comparison with300rounds and12rows per direction | All arms converge; point11.5745 versus endpoint10.3889; gain1.1856 | accepted |
+| [exp-143](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-143-h141-four-owner-footprint-matched-gain.md) | 11 | target | H-141 | Four-owner matched point/triangle/endpoint comparison | All arms converge; point9, triangle6, endpoint5; exact full-net replay remains separate | accepted |
+| [exp-144](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-144-five-dot-full-net-replay.md) | 11 | target | H-142 | Exact full361replay of unchanged five equal-weight dots | All361directions exactminimum beta; normalized5, selected branch excluded via reviewed transfer | accepted |
+| [exp-145](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-145-independent-five-dot-union.md) | 11 | target | H-143 | Independent exact rational polygon inclusion-exclusion | All 361 exact deficits zero; unchanged geometry | accepted |
+| [exp-146](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-146-wall-owner-footprints.md) | 11 | target | H-144 | Exact container-clipped support rectangles over every retained frame | Complete16:12 enlarged,4equal,0impossible | accepted |
+| [exp-147](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-147-wall-owner-containment.md) | 11 | target | H-145 | Exact 128-slot component containment and union-of-products count | All128 complete; only2baseline tuples;0new | rejected |
+| [exp-148](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-148-fixed-five-dot-wall-expansion.md) | 11 | target | H-146 | Nine-seed witness bank and one surviving tuple full-net check | Partial seed bank;49152 labels rejected;no candidate | unresolved |
+| [exp-149](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-149-selected-wall-tuple-cover.md) | 11 | target | H-147 | Exact complete-net cover of the selected wall tuple `(0,0,0,7)` | First direction has exact positive deficit and strict escape | rejected |
+| [exp-150](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-150-wall-owner-escape-compatibility.md) | 11 | target | H-148 | Exact compatibility of the saved escape with entire allowed owner cores | Four classes admit individually compatible cores | rejected |
+| [exp-151](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md) | 11 | target | H-149 | Six fixed dots and four selected wall patches on the full net | Six covered directions then a strict escape at owner-006 | rejected |
+| [exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md) | 11 | target | H-150 | Exact closed intersection of two escaping cores | Nonempty two-core quadrilateral and verified common site | accepted |
+| [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md) | 11 | target | H-151 | Direct complete-domain support intersection and independent cover confirmation | Empty site region after188directions; no sixth site preserves D | **rejected** |
 
 ### Cost and provenance
 
@@ -3714,10 +3965,30 @@ archive beside it.
 | exp-131 | eleven replay rows and the nine-point controls, one worker at load 8 | 1870 s | — | criterion | `f010f32f` |
 | exp-132 | the interval reader’s cover, exact re-decision of 184,756 leaves and 17,551 discards, 6,000 sampled poses | 253.6 s | — | criterion | `d04205fb` |
 | exp-133 | the free, four-bound and priced column-generation measures swept exactly, and the bounded dual’s floor | 3813 s | — | criterion | `22884081` |
+| exp-134 | one 30-minute pricing process and two-second TERM grace; uninvoked | — | — | — | `82df41bd` |
+| exp-135 | two sequential 120-second arms; stopped at separator guard | 2.54 s | — | guard | `513d3831` |
+| exp-136 | same fixed support/directions; repaired separator | 3.06 s | — | criterion | `03d2925e` |
+| exp-137 | one exact sharedproducer, five-minute limit | 53.38 s | — | criterion | `223c969d` |
+| exp-138 | same producer as137; no duplicatecharge | 0 s | — | criterion | `223c969d` |
+| exp-139 | exact181-direction replay | 18.65s wall | — | — | criterion |
+| exp-140 | four-arm pilot stopped at point round60 | 15.98s wall | — | — | timebox |
+| exp-141 | independent complete receipt audit | 55.70s wall | — | — | criterion |
+| exp-142 | completed one-owner comparison | 24.54s wall | — | — | criterion |
+| exp-143 | completed four-owner comparison | 9.12s wall | — | — | criterion |
+| exp-144 | complete exact five-dot replay | 28.95s wall | — | — | criterion |
+| exp-145 | one five-minute guarded replay | 39.06s | — | criterion | `c59d28a7` |
+| exp-146 | one five-minute guarded constructor | 25.69s | — | criterion | `91575889` |
+| exp-147 | one 120-second external process; 60-second internal guard after input loading | 40.88s | — | criterion | `e72102e1` |
+| exp-148 | one five-minute process; shared 240-second internal and 60-second seed guards | 74.03s | — | timebox | `3bbb6987` |
+| exp-149 | one five-minute external process; 240-second internal guard after input loading | 11.41s | — | criterion | `5600c0fb` |
+| exp-150 | one 120-second external process; 90-second internal guard after input loading | 9.01s | — | criterion | `49b6d6ff` |
+| exp-151 | one 300-second external process; 240-second internal guard | 13.45s | — | criterion | `c8cd38da` |
+| exp-152 | one 60-second external process; 30-second internal guard | 9.84s | — | criterion | `0a4fe687` |
+| exp-153 | one300-second external process; shared240-second internal guard | — | 22.36s | complete negative prefix | criterion |
 
-### What the 89 rounds jointly establish
+### What the 109 rounds jointly establish
 
-The 89 rounds use 2152.1 agent-minutes and 1359.4 wall-minutes under the campaign’s
+The 109 rounds use 2152.1 agent-minutes and 1367.0 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

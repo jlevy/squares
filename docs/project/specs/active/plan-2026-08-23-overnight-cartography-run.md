@@ -341,20 +341,58 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-qfog` to begin the ownership
-continuation after merge publication.
+For the next supervised exact-research goal, take BC-324 under `think-rm3k`, a factual
+interpretation block with no scientific target.
+Session123 is terminal.
+Session124 is the latest terminal interpretation checkpoint; successor certification and
+publication follow-up remain pending.
+Session124 resumed at 2026-09-10 01:52:40 UTC after the elapsed interruption and
+separates that gap from active work.
+
+PR142 completed matching fast and deferred validation and is ready.
+PR145 is also ready after matching fast, page and full checkpoint validation on the
+stacked branch `codex/n11-owner-core-compatibility`. Exp145 independently confirmed the
+selected five-dot cover; exp146 enlarged twelve of sixteen wall-aware owner footprints;
+and exp147’s bounded component-containment transfer preserved only the two baseline
+tuple labels and certified no additional selection.
+Exp148 retained a partial fixed-pattern screen.
+
+Exp149 then showed that fixed D misses the selected four-patch residual relaxation for
+tuple label `(0,0,0,7)` at owner-000, with an exact positive deficit and validated
+rational strict escape.
+It did not refute that physical tuple.
+Exp150 refuted individual-owner exclusion only in the unchanged B-core model: all four
+classes admit a strictly separated frame-0 B-core under exact independent replay.
+This does not establish unit-parent or simultaneous-owner compatibility.
+Exp151 refuted the fixed sixth site, and exp152 retained a nonempty necessary two-core
+quadrilateral. Exp153 ruled out every single-site extension of fixed D on the selected
+four-patch relaxation after 188 exact support directions.
+
+An independently reviewed two-attainer verifier remains unrun.
+If a future prospective run produces two strict D-missed B-cores, their disjointness
+would require added nonnegative mass at least two and nominal total mass at least seven
+with the five original unit atoms retained.
+It would not establish the available-mass conclusion unless the five original sites were
+separately proved outside the occupied-patch union.
+H146 remains unresolved, and the global n11 bracket is unchanged.
+
+The global routing obligation is: for every hypothetical physical packing P, there
+exists at least one valid owner selection for P whose selected family has been excluded.
+The current record does not prove that statement.
+BC324 now reconciles these facts and premises before another scientific target is
+selected.
+
 The preceding work reached three checkpoints in sequence.
 Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s
-direct geometry controls.
-Session097 completed BC264’s source-free feature and kernel-contract pricing but did not
-run its scientific target.
+geometry controls. Session097 completed BC264’s source-free feature and kernel-contract
+pricing without running its scientific target.
 Session098 completed BC282’s exact open-fiber reduction and independent admission, which
 refused the larger target and parked local H120/H118 work.
 Its re-entry conditions remain in
 [X018](../../../../packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md#bc282-checkpoint-and-current-allocation).
 
-Agenda 030’s first wave ran as sessions 100 to 104 and its second as sessions 107
-through 109. BC-303 replayed the strongest claims independently and funded the
+Agenda030’s first wave ran as sessions100 to104 and its second as sessions107
+through109. BC303 replayed the strongest claims independently and funded the
 segment-mark cover toward an ownership argument as the next sustained block, with the
 `B = 1` depth polisher as the efficiency block.
 BC-304 has dispositioned every cell and carried the unfinished complements of BC-292 and

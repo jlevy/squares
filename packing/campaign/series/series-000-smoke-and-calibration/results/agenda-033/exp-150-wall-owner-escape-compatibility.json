@@ -1,0 +1,360 @@
+{
+ "schema": "wall-owner-escape-compatibility/v1",
+ "status": "complete",
+ "outcome": "all-selected-classes-compatible",
+ "claim_limit": "saved exp149 B-core versus one individual snapped B-owner core per selected class; no joint owners, unit parents, tuple exclusion, or global bound",
+ "sources": {
+  "implementation": {
+   "git_commit": "49b6d6ff22e99269c475594660057d46a98a3edb",
+   "module": "packing/devtools/wall_owner_escape_compatibility.py"
+  },
+  "endpoint": {
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json",
+   "git_commit": "49b6d6ff22e99269c475594660057d46a98a3edb",
+   "git_blob": "cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19"
+  },
+  "wall": {
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json",
+   "git_commit": "49b6d6ff22e99269c475594660057d46a98a3edb",
+   "git_blob": "e54fa98133db5f2135cae8875188f51b7db26e12",
+   "constructor_revision": "915758898a97c92793f51e62b7a6b17f846895ca"
+  },
+  "selected": {
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json",
+   "git_commit": "49b6d6ff22e99269c475594660057d46a98a3edb",
+   "git_blob": "83ec897738d6d1b228623c3ac4c10cd9170d5940",
+   "implementation_revision": "5600c0fb4eccf9e9dcdf82b02506d3d4340651cb"
+  }
+ },
+ "settings": {
+  "outer_side": "96/25",
+  "core_side": "9977/10000",
+  "half_core": "9977/20000",
+  "candidate": [
+   0,
+   0,
+   0,
+   7
+  ],
+  "selected_classes": [
+   "bottom-left:m1:j0",
+   "bottom-left:m1:j0",
+   "bottom-left:m1:j0",
+   "bottom-left:m1:j7"
+  ],
+  "corner_order": [
+   "TR",
+   "BL",
+   "BR",
+   "TL"
+  ],
+  "residual_orientation_index": 0,
+  "residual_orientation_label": "owner-000",
+  "residual_centre": [
+   "7641479337977841787/2367233010000000000",
+   "11240556076810055587/4734458945995860000"
+  ],
+  "expected_frames_per_class": 181,
+  "signed_axes_per_frame": 8,
+  "boundary_policy": "strictly positive separation; zero slack is contact",
+  "candidate_limit": 1
+ },
+ "classes": [
+  {
+   "corner": "TR",
+   "corner_index": 3,
+   "class_index": 7,
+   "class_id": "bottom-left:m1:j7",
+   "corner_map": "R",
+   "status": "compatible",
+   "expected_frames": 181,
+   "checked_frames": 1,
+   "allowed_frames": 1,
+   "empty_frames": 0,
+   "observed_maximum_slack": "267801233383658213/3347770527002070000",
+   "global_maximum_slack": null,
+   "positive_witness": {
+    "frame_index": 0,
+    "slack": "267801233383658213/3347770527002070000",
+    "owner_centre": [
+     "1593362945125497471/743949006000460000",
+     "2309404774247145729/743949006000460000"
+    ],
+    "replay": "exact class membership, container, mark, and polygon SAT passed"
+   },
+   "frame_extrema": [
+    {
+     "frame_index": 0,
+     "ray": [
+      "207107000000/292893309449",
+      "-207106690551/292893309449"
+     ],
+     "orientation_index": 181,
+     "quarter_turn": 3,
+     "sources": [
+      {
+       "folded_index": 180,
+       "reflected": false
+      }
+     ],
+     "centre_dimension": 2,
+     "owner_u": [
+      "-207107000000/292893309449",
+      "207106690551/292893309449"
+     ],
+     "owner_v": [
+      "-207106690551/292893309449",
+      "-207107000000/292893309449"
+     ],
+     "axes_checked": 8,
+     "maximum_slack": "267801233383658213/3347770527002070000",
+     "attaining_axis": "-owner-u",
+     "axis": [
+      "207107000000/292893309449",
+      "-207106690551/292893309449"
+     ],
+     "minimum_owner_projection": "-506315971299854271/743949006000460000",
+     "owner_radius": "9977/20000",
+     "residual_radius": "4132609990627327/5857866188980000",
+     "canonical_owner_centre": [
+      "1263401237916268929/743949006000460000",
+      "547359408794620671/743949006000460000"
+     ],
+     "owner_centre": [
+      "1593362945125497471/743949006000460000",
+      "2309404774247145729/743949006000460000"
+     ]
+    }
+   ],
+   "error": null
+  },
+  {
+   "corner": "BL",
+   "corner_index": 0,
+   "class_index": 0,
+   "class_id": "bottom-left:m1:j0",
+   "corner_map": "I",
+   "status": "compatible",
+   "expected_frames": 181,
+   "checked_frames": 1,
+   "allowed_frames": 1,
+   "empty_frames": 0,
+   "observed_maximum_slack": "2929606413500841787/2367233010000000000",
+   "global_maximum_slack": null,
+   "positive_witness": {
+    "frame_index": 0,
+    "slack": "2929606413500841787/2367233010000000000",
+    "owner_centre": [
+     "3152/3175",
+     "2336/3175"
+    ],
+    "replay": "exact class membership, container, mark, and polygon SAT passed"
+   },
+   "frame_extrema": [
+    {
+     "frame_index": 0,
+     "ray": [
+      "1",
+      "0"
+     ],
+     "orientation_index": 0,
+     "quarter_turn": 0,
+     "sources": [
+      {
+       "folded_index": 0,
+       "reflected": false
+      },
+      {
+       "folded_index": 0,
+       "reflected": true
+      }
+     ],
+     "centre_dimension": 2,
+     "owner_u": [
+      "1",
+      "0"
+     ],
+     "owner_v": [
+      "0",
+      "1"
+     ],
+     "axes_checked": 8,
+     "maximum_slack": "2929606413500841787/2367233010000000000",
+     "attaining_axis": "+owner-u",
+     "axis": [
+      "1",
+      "0"
+     ],
+     "minimum_owner_projection": "3152/3175",
+     "owner_radius": "9977/20000",
+     "residual_radius": "9977/20000",
+     "canonical_owner_centre": [
+      "3152/3175",
+      "2336/3175"
+     ],
+     "owner_centre": [
+      "3152/3175",
+      "2336/3175"
+     ]
+    }
+   ],
+   "error": null
+  },
+  {
+   "corner": "BR",
+   "corner_index": 1,
+   "class_index": 0,
+   "class_id": "bottom-left:m1:j0",
+   "corner_map": "H",
+   "status": "compatible",
+   "expected_frames": 181,
+   "checked_frames": 1,
+   "allowed_frames": 1,
+   "empty_frames": 0,
+   "observed_maximum_slack": "606723507334921373/946891789199172000",
+   "global_maximum_slack": null,
+   "positive_witness": {
+    "frame_index": 0,
+    "slack": "606723507334921373/946891789199172000",
+    "owner_centre": [
+     "5964921/2540000",
+     "2336/3175"
+    ],
+    "replay": "exact class membership, container, mark, and polygon SAT passed"
+   },
+   "frame_extrema": [
+    {
+     "frame_index": 0,
+     "ray": [
+      "1",
+      "0"
+     ],
+     "orientation_index": 0,
+     "quarter_turn": 0,
+     "sources": [
+      {
+       "folded_index": 0,
+       "reflected": false
+      },
+      {
+       "folded_index": 0,
+       "reflected": true
+      }
+     ],
+     "centre_dimension": 2,
+     "owner_u": [
+      "0",
+      "1"
+     ],
+     "owner_v": [
+      "-1",
+      "0"
+     ],
+     "axes_checked": 8,
+     "maximum_slack": "606723507334921373/946891789199172000",
+     "attaining_axis": "+owner-u",
+     "axis": [
+      "0",
+      "1"
+     ],
+     "minimum_owner_projection": "2336/3175",
+     "owner_radius": "9977/20000",
+     "residual_radius": "9977/20000",
+     "canonical_owner_centre": [
+      "3788679/2540000",
+      "2336/3175"
+     ],
+     "owner_centre": [
+      "5964921/2540000",
+      "2336/3175"
+     ]
+    }
+   ],
+   "error": null
+  },
+  {
+   "corner": "TL",
+   "corner_index": 2,
+   "class_index": 0,
+   "class_id": "bottom-left:m1:j0",
+   "corner_map": "V",
+   "status": "compatible",
+   "expected_frames": 181,
+   "checked_frames": 1,
+   "allowed_frames": 1,
+   "empty_frames": 0,
+   "observed_maximum_slack": "2929606413500841787/2367233010000000000",
+   "global_maximum_slack": null,
+   "positive_witness": {
+    "frame_index": 0,
+    "slack": "2929606413500841787/2367233010000000000",
+    "owner_centre": [
+     "3152/3175",
+     "6617721/2540000"
+    ],
+    "replay": "exact class membership, container, mark, and polygon SAT passed"
+   },
+   "frame_extrema": [
+    {
+     "frame_index": 0,
+     "ray": [
+      "1",
+      "0"
+     ],
+     "orientation_index": 0,
+     "quarter_turn": 0,
+     "sources": [
+      {
+       "folded_index": 0,
+       "reflected": false
+      },
+      {
+       "folded_index": 0,
+       "reflected": true
+      }
+     ],
+     "centre_dimension": 2,
+     "owner_u": [
+      "0",
+      "-1"
+     ],
+     "owner_v": [
+      "1",
+      "0"
+     ],
+     "axes_checked": 8,
+     "maximum_slack": "2929606413500841787/2367233010000000000",
+     "attaining_axis": "+owner-v",
+     "axis": [
+      "1",
+      "0"
+     ],
+     "minimum_owner_projection": "3152/3175",
+     "owner_radius": "9977/20000",
+     "residual_radius": "9977/20000",
+     "canonical_owner_centre": [
+      "3152/3175",
+      "3135879/2540000"
+     ],
+     "owner_centre": [
+      "3152/3175",
+      "6617721/2540000"
+     ]
+    }
+   ],
+   "error": null
+  }
+ ],
+ "summary": {
+  "checked_classes": 4,
+  "expected_classes": 4,
+  "checked_frames": 4,
+  "expected_frames_if_exhaustive": 724,
+  "compatible_classes": 4,
+  "incompatible_classes": 0,
+  "first_incompatible_corner": null,
+  "wall_seconds": 0.015890541981207207,
+  "process_seconds": 8.551670249988092
+ },
+ "error": null
+}

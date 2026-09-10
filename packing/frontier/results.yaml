@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-09-06'
+last_reviewed: '2026-09-09'
 results:
   - id: T-001
     claim: >-
@@ -1184,3 +1184,75 @@ results:
       supremum. Direction-specific cores, two-core endpoint averaging, or exact
       fixed-atom core shrinkage might extract more from the same data; the present
       argument cannot prove a strict bound at its own endpoint.
+
+  - id: T-023
+    claim: >-
+      At q = 96/25, if four distinct unit squares have selected strict cores of side
+      B = 9977/10000 containing, respectively, the four closed rational patches in
+      arms.endpoint.footprint_union of the retained exp143 receipt, at most five
+      further unit squares fit. Thus the specified four-owner branch contains no
+      eleven-square packing. The five saved rational dots meet every admissible
+      remaining core on the complete 361-direction net; audited containment and
+      boundary arguments transfer this exact check to arbitrary physical angles.
+      This is a conditional exclusion and changes no global bound for s(11).
+    scope: {n_values: [11]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A substantive case exclusion at the central open size, demonstrating that
+        forced occupied area can make a five-dot counting argument sufficient.
+        It excludes one owner combination and does not move the global bound.
+      scored: '2026-09-09'
+      by: GPT-6 Astra extra-high mathematical review and coordinator review
+    novelty: apparently-novel
+    composition: >-
+      Exact full-net coverage and frozen-data identities are V4/C3. Universal owner
+      footprint containment, extension to event boundaries, and strict-core selection
+      for physical squares are audited analytic proof steps, so the composed theorem
+      is V3. Exp145 adds an independent inclusion-exclusion computation of the same
+      finite cover. The analytic owner and physical-angle transfer premises remain
+      shared, so the composed theorem stays C3 pending a mapped confirmation review.
+    produced_by:
+      hypothesis: H-142
+      agenda_cell: BC-313
+      session: session-113
+      experiment: exp-144
+    evidence:
+      - E-n011-five-dot-full-net
+      - E-n011-five-dot-independent-union
+      - E-n011-five-dot-physical-transfer
+    artifacts:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-144-four-owner-endpoint-full-net-replay.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/endpoint-footprint-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-145-independent-five-dot-union.json
+      - packing/cases/n11_five_dot_cover/union-contract.md
+    controls:
+      - packing/tests/test_owner_footprints.py
+      - packing/tests/test_multi_owner_domains.py
+      - packing/tests/test_replay_owner_footprint_cover.py
+      - packing/tests/test_independent_five_dot_union.py
+    next_rung: >-
+      Exp145 completes the independent finite-union check. Assemble a mapped review
+      packet for the shared analytic premises before revisiting confirmation. V4 for
+      the whole theorem requires mechanizing the analytic transfer. Exp146 enlarged
+      twelve wall-aware footprints, but exp147 transferred no additional tuple.
+      Exp149 refuted the selected five-dot extension and exp150 showed its escape
+      survives individual owner-core constraints. Exp151 also refuted a
+      fixed sixth-site extension. Exp152 found a nonempty two-core site region, but
+      exp153 then refuted the entire fixed-D-plus-one-site family with188exact
+      support directions. Next audit a short actual-core obstruction and determine
+      whether it is a disjoint pair or only a higher-order obstruction before
+      drawing weighted-mass conclusions. Wider owner-class coverage remains a new
+      research result, not a rung change.
+    notes: >-
+      Registered at the post-sprint milestone from exp144, without a new target run or
+      additional experiment cost. The exact exp143 source is Git blob
+      cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19. Apparent novelty concerns this explicit
+      patch-and-dot instance within the retained source comparison; no new priority
+      search was performed. The subsequent independent exp145 replay passed in
+      Session115 with its own process cost and preserved the original claim and grades.

@@ -1,0 +1,66 @@
+{
+ "schema": "corner-dual-salvage-audit/v1",
+ "status": "complete",
+ "evidence_tier": "independent exact receipt audit; no arrangement replay or LP",
+ "claim_limit": "Audits the recorded deletion screen only; no packing bound.",
+ "receipt": {
+  "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-137-corner-dual-salvage.json.gz",
+  "git_commit": "44bf815fcf424469fddb2258548341c3d4c5b7f0",
+  "git_blob": "def74a3693f7fd4c0dbe434078df00786505b7d0",
+  "clean_tracked_blob_match": true
+ },
+ "source": {
+  "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-01-family.json",
+  "git_commit": "44bf815fcf424469fddb2258548341c3d4c5b7f0",
+  "git_blob": "8a0bf1a264a1361649bc0acd0f70907ba8125f2f",
+  "clean_tracked_blob_match": true
+ },
+ "settings": {
+  "source_placements_guard": 1000,
+  "component_screens_guard": 1000,
+  "joint_classes_per_kind_guard": 100000,
+  "transport": "+1/100 in each coordinate, exact"
+ },
+ "verified": {
+  "source_placements": 768,
+  "folded_direction_sources": 181,
+  "canonical_directions": 361,
+  "owner_classes_per_corner": 16,
+  "endpoint_footprint_status": "provisional exact geometry; no authoritative endpoint-footprint certificate",
+  "component_screens": 192,
+  "exact_sat_checks": 147456,
+  "kinds": {
+   "point": {
+    "component_screens": 64,
+    "exact_sat_checks": 49152,
+    "joint_classes": 65536,
+    "unique_survivor_masks": 16,
+    "summary_verified": true,
+    "obstructed_count": 0,
+    "minimum_survivor_weight": "13394344077/2055263195",
+    "maximum_survivor_weight": "13394344077/2055263195"
+   },
+   "triangle": {
+    "component_screens": 64,
+    "exact_sat_checks": 49152,
+    "joint_classes": 65536,
+    "unique_survivor_masks": 38416,
+    "summary_verified": true,
+    "obstructed_count": 0,
+    "minimum_survivor_weight": "1697473384/2055263195",
+    "maximum_survivor_weight": "13394344077/2055263195"
+   },
+   "endpoint": {
+    "component_screens": 64,
+    "exact_sat_checks": 49152,
+    "joint_classes": 65536,
+    "unique_survivor_masks": 65472,
+    "summary_verified": true,
+    "obstructed_count": 0,
+    "minimum_survivor_weight": "1642317587/2055263195",
+    "maximum_survivor_weight": "13394344077/2055263195"
+   }
+  }
+ },
+ "seconds": 54.5522487499984
+}

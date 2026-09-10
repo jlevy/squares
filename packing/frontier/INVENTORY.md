@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **62** evidence records. **46** are formal; **40** of those were established here.
+- **67** evidence records. **51** are formal; **45** of those were established here.
 - **11** rest on an argument made elsewhere, of which **8** have been read by nobody here.
-- **16** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **17** claim to be first established here. **8** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -82,12 +82,17 @@ results, it is a statement about what this repository has itself examined.
 | `E-n020-fractional-certificate-97-20` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n020-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-fractional-interval-decision` | 7 | lower-bound | verified | strict inequalities only | here | - | previously-published |
+| `E-n011-five-dot-full-net` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
+| `E-n011-five-dot-independent-union` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
+| `E-n011-wall-owner-footprints` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
+| `E-n011-wall-owner-containment` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
+| `E-n011-five-dot-physical-transfer` | 0 | derived-structure | verified | whatever its theorem states | here | - | apparently-novel |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 12, verified 46
-- **method**: exact-algebraic 36, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 12
-- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 38
+- **assurance**: numerically-checked 4, reported 12, verified 51
+- **method**: exact-algebraic 40, interval-certified 3, numerical-multiprecision 4, proof-audited 2, published-proof 6, reported 12
+- **novelty**: apparently-novel 17, common-knowledge 4, not assessed 8, previously-published 38
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -111,6 +116,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 1 | verified |
 | `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |
 | `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 0 | verified |
+| `E-n011-five-dot-physical-transfer` | 11 | The explicit four-rational-footprint, five-rational-dot conditional certificate at q=96/25 confirmed by exp144; not ownership arguments, unavoidable points, or the general weighted-cover method. | 0 | verified |
 | `E-n012-independent-verifier` | 12 | Nothing new in this entry -- it is a second, independent decision of the historical 77/20 rung and its 19/5 calibration certificate. | 0 | verified |
 | `E-n029-schadt-rational-upper` | 29 | A rational certificate for an n = 29 bound; the pose is Schadt's | 0 | verified |
 

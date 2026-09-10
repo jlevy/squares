@@ -85,8 +85,11 @@ def _link_problems(path: Path) -> list[str]:
         if target.startswith(("http://", "https://", "mailto:")):
             continue
         relative, _, fragment = target.partition("#")
-        resolved = path if not relative else (path.parent / unquote(relative)).resolve()
         label = path.relative_to(REPO).as_posix()
+        if Path(unquote(relative)).is_absolute():
+            problems.append(f"{label}: absolute local link -> {target}; use a relative path")
+            continue
+        resolved = path if not relative else (path.parent / unquote(relative)).resolve()
         if not resolved.exists():
             problems.append(f"{label}: dead link -> {target}")
         elif _is_ephemeral_local_target(resolved):

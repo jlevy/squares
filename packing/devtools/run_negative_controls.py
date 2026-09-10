@@ -229,6 +229,17 @@ PRUNE = frozenset(
         "/bc-200-state-191-50.json",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results"
         "/bc-200-family-191-50.json",
+        # Exp-137's compressed producer receipt is retained scientific evidence, but it
+        # is not an input to any registered mutation control. The exp-141 audit names it
+        # in a protocol command, not in `devtools/controls.yaml`; the worker baselines
+        # exercise the live registered consumers below. On 2026-09-09 this 11,552,761-
+        # byte receipt was already present when adding exp-146 made the measured snapshot
+        # exceed the 128 MiB cap. Omitting this unused older receipt restores more than
+        # 10 MiB of headroom while every agenda record remains in the worker. Keep this
+        # prune exact: agenda-033's exp-146 receipt is registered frontier evidence and
+        # is not interchangeable with this unused mutation-snapshot input.
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+        "/exp-137-corner-dual-salvage.json.gz",
         ROOT / "resources",
         ROOT / "sqsearch/target",
         ROOT / "witnesses/prospective",

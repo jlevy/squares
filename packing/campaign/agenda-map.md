@@ -2,7 +2,7 @@
 
 # Agenda map
 
-293 agenda commitments across 30 agendas, as declared in each agenda's own frontmatter.
+313 agenda commitments across 33 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** in_progress, **15** ready, **11** tentative, **59** blocked, **54** stopped, **147** complete.
+- **8** in_progress, **15** ready, **12** tentative, **60** blocked, **56** stopped, **162** complete.
 
-- **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -53,6 +53,8 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
+| agenda-033 | `BC-324` | in_progress | 1 | correctness | measurement_validation | Which conclusions follow from the published owner-geometry evidence, and which still require routing,… | `think-rm3k` |
+| agenda-033 | `BC-321` | tentative | 3 | insight | research | Does the full-support pricing reserve merit time after the owner-geometry discriminators? | `think-en2r` |
 
 ## Blocked, and on what
 
@@ -119,6 +121,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-027 | `BC-263` | 1 | `BC-261` | no | — |
 | agenda-028 | `BC-270` | 0 | — | no | A natural finite same-domain geometric baseline and exact LP survival witness are missing; the accepted central… |
 | agenda-028 | `BC-271` | 1 | `BC-270`, `BC-261` | no | — |
+| agenda-031 | `BC-306` | 1 | — | no | Fresh forward launch allocation after the owner-prioritized BC-309 pilot; exp-134 was never invoked and its original… |
 
 ## Discharged elsewhere
 
@@ -172,6 +175,9 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-028 | paused |  |  | 2 | 2 | 3 | 8 | 15 |
 | agenda-029 | superseded |  |  |  |  | 3 | 4 | 7 |
 | agenda-030 | completed |  |  |  |  | 7 | 7 | 14 |
+| agenda-031 | paused |  |  |  | 1 | 2 | 2 | 5 |
+| agenda-032 | completed |  |  |  |  |  | 6 | 6 |
+| agenda-033 | active | 1 |  | 1 |  |  | 7 | 9 |
 
 ## By program
 
@@ -337,8 +343,28 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-030 | `BC-302` | complete | Is there a robust unavoidable set of at most eleven marks at 96/25? |
 | agenda-030 | `BC-303` | complete | Which lane results earn the next sustained block, and what is the strongest claim to freeze? |
 | agenda-030 | `BC-304` | complete | What survives independent checking, what did it change about the global problem, and what is the… |
+| agenda-031 | `BC-305` | complete | Which reviewed segment and corner ownership constraints survive independent exact replay, and what… |
+| agenda-031 | `BC-306` | blocked | Does full retained-state dual support expose a pointwise new-site orbit missed at that same point… |
+| agenda-031 | `BC-307` | stopped | Should H-125's finite kernel test be renewed after the two funded lanes report? |
+| agenda-031 | `BC-309` | complete | Can fixed corner geometry improve a weighted covering argument beyond the four units accounted for… |
+| agenda-031 | `BC-308` | stopped | What did the funded continuation establish, what remains unresolved, and which next entry should be… |
+| agenda-032 | `BC-310` | complete | Can exact event reconstruction repair the thin-cell separator and permit a fresh matched… |
+| agenda-032 | `BC-311` | complete | Does deleting poses that meet guaranteed owner footprints from the retained depth-one fractional… |
+| agenda-032 | `BC-312` | complete | Do guaranteed area footprints improve the covering objective beyond merely owning a point? |
+| agenda-032 | `BC-313` | complete | Does the selected five-dot endpoint-footprint proposal survive rational reconstruction, the full… |
+| agenda-032 | `BC-314` | complete | What did the sprint establish, what did each branch cost, and what should run next? |
+| agenda-032 | `BC-315` | complete | Do four guaranteed occupied regions improve the matched cover beyond four bare marks? |
+| agenda-033 | `BC-316` | complete | Does independent exact polygon inclusion-exclusion confirm the retained five-dot net? |
+| agenda-033 | `BC-317` | complete | Do the container walls enlarge any of the 16 coarse bottom-left common owner footprints, or rule… |
+| agenda-033 | `BC-318` | complete | Can larger footprints inherit either certified patch union by exact component containment? |
+| agenda-033 | `BC-319` | complete | Does a shared arrangement or a new five/six-dot cover exclude further owner cases? |
+| agenda-033 | `BC-320` | complete | Can selective owner-pose refinement or compatibility remove the remaining difficult cases? |
+| agenda-033 | `BC-321` | tentative | Does the full-support pricing reserve merit time after the owner-geometry discriminators? |
+| agenda-033 | `BC-322` | complete | Are compute, verification and coordination producing evidence efficiently? |
+| agenda-033 | `BC-323` | complete | Is the overnight milestone reviewable with complete result scope, usage and next actions? |
+| agenda-033 | `BC-324` | in_progress | Which conclusions follow from the published owner-geometry evidence, and which still require… |
 
-Open frontier: none; every cell is terminal.
+Open frontier: `BC-306`, `BC-321`, `BC-324`.
 
 ### `reach-table-ladder`
 

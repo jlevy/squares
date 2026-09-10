@@ -1,0 +1,4 @@
+^D  snapshot source 123.5 MiB; 1 private worker trees
+  slowest negative controls (wall seconds):
+       1.358s  synopsis - narrative round aggregate lagging the ledger
+  1 negative controls fire as expected
