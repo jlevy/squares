@@ -141,8 +141,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives twenty-four confirmed hypotheses, twenty-one
-refuted hypotheses, two open hypotheses, twenty-six open questions, and forty-eight
+The generated ledger currently derives twenty-four confirmed hypotheses, twenty-two
+refuted hypotheses, two open hypotheses, twenty-six open questions, and forty-seven
 blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
 remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
 scientific invocation; this does not refute its claim.
@@ -852,6 +852,13 @@ accepted the necessary two-core screen;
 [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md)
 is the completed refutation of every one-site extension of fixed D on the selected
 four-patch relaxation.
+[exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md)
+refuted `H-157`: refining the corner-owner angular bins from eight to sixteen widens the
+guaranteed wedge and moves the reach toward the critical survivor by exactly nothing,
+because the closest point of every patch to that core is the mark itself.
+Its two theorems rule out patch refinement as the lever at every angular resolution and
+at pose level; they do not establish that the conditional strategy fails, so X-026
+escape 1 is narrowed rather than closed.
 Exp150’s compatibility result does not establish continuous unit parents or simultaneous
 owners, and exp153 does not exclude the physical tuple.
 
@@ -3468,7 +3475,7 @@ round that names the hypothesis, control roles included.
 | [H-154](packing/campaign/hypotheses/H-154-where-the-point-atom-ceiling-begins.md) | open question | Where does the point-atom ceiling begin in side, and does any weight-eleven family at 191/50 survive a larger shrink? | 0 | — |
 | [H-155](packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
 | [H-156](packing/campaign/hypotheses/H-156-threshold-certificate-past-3-82.md) | blocked | The threshold-atom language certifies a side above 191/50, by the same loop at a larger side or by the finer-net shrink; the separation loop that would produce the atoms is unbuilt | 0 | — |
-| [H-157](packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | blocked | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement; the bin count is hard-wired at eight in the footprint builder | 0 | — |
+| [H-157](packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | refuted | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement | 1 | exp-154: six of eight refined subclasses still read exactly 10, and the reach is bit-identical to the parent because the mark is the closest point of every patch |
 
 ### Confirmed
 
@@ -3755,9 +3762,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 109 rounds registered in `series-000`.
+There are 110 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1367.0 wall-minutes.
+They record 2152.1 agent-minutes and 1373.0 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3906,6 +3913,7 @@ archive beside it.
 | [exp-151](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-151-selected-six-dot-cover.md) | 11 | target | H-149 | Six fixed dots and four selected wall patches on the full net | Six covered directions then a strict escape at owner-006 | rejected |
 | [exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md) | 11 | target | H-150 | Exact closed intersection of two escaping cores | Nonempty two-core quadrilateral and verified common site | accepted |
 | [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md) | 11 | target | H-151 | Direct complete-domain support intersection and independent cover confirmation | Empty site region after188directions; no sixth site preserves D | **rejected** |
+| [exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md) | 11 | target | H-157 | Exact sixteen-bin and singleton-ray owner-sector screen of the mass-eleven ceiling family | Six of eight refined subclasses still read survivor weight exactly 10; the two that break read 19/2, not 79/8 | **rejected** |
 
 ### Cost and provenance
 
@@ -4020,10 +4028,11 @@ archive beside it.
 | exp-151 | one 300-second external process; 240-second internal guard | 13.45s | — | criterion | `c8cd38da` |
 | exp-152 | one 60-second external process; 30-second internal guard | 9.84s | — | criterion | `0a4fe687` |
 | exp-153 | one300-second external process; shared240-second internal guard | — | 22.36s | complete negative prefix | criterion |
+| exp-154 | under an hour, as registered | 356.1 s | — | criterion | `67ccd16b` |
 
-### What the 109 rounds jointly establish
+### What the 110 rounds jointly establish
 
-The 109 rounds use 2152.1 agent-minutes and 1367.0 wall-minutes under the campaign’s
+The 110 rounds use 2152.1 agent-minutes and 1373.0 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
