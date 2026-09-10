@@ -293,6 +293,8 @@ def ratchet(
     classes: list[list[int]] | None = None,
     contacts: list[tuple[int, int]] | None = None,
     walls: list[int] | None = None,
+    start_from: Array | None = None,
+    start_side: float | None = None,
 ) -> dict[str, Any]:
     """Tighten the container while the search keeps up, halving the step when it does not.
 
@@ -315,8 +317,11 @@ def ratchet(
     Measured at `n = 5`: three of four fully continuation-led runs never left `3.0`, and
     the fourth reached `2.708`, which is the record to four decimals.
     """
-    side = float(math.ceil(math.sqrt(n)))
-    best = _grid(n, side)
+    # A second phase resumes from what the first built rather than from the grid, which is
+    # the whole point of a schedule: the tight phase's arrangement is the only thing known
+    # to be near-right, and starting over would discard it.
+    side = float(start_side if start_side is not None else math.ceil(math.sqrt(n)))
+    best = _grid(n, side) if start_from is None else start_from
     if violation(best, side) > 1e-12:
         msg = f"the grid at side {side} is not feasible for n = {n}"
         raise AssertionError(msg)
@@ -508,3 +513,55 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def phased(
+    n: int,
+    rng: np.random.Generator,
+    *,
+    tight: dict[str, Any],
+    loose: dict[str, Any] | None = None,
+    split: float = 0.5,
+    **shared: Any,
+) -> dict[str, Any]:
+    """Organise under a tight structural constraint, then let it relax.
+
+    Optimal packings are often a *perturbation* of a clean grouping rather than the
+    grouping itself, so a constraint that is right early is wrong late. Holding
+    face-to-face contacts rigid for the whole run welds squares that have to come apart:
+    at `n = 11` eight of the fourteen contacts are edge-edge, and the other six are
+    corner-on-edge between squares 40.2 degrees apart, which no shared-orientation class
+    can ever produce. Enforcing the grouping to the end forbids exactly the tilt that makes
+    the packing optimal.
+
+    So the constraints are a schedule, not a setting. Phase one holds the grouping tightly
+    and organises the arrangement; phase two releases it and lets the result perturb into
+    place, warm-started from what phase one built.
+
+    How far the premise reaches was measured before this was built, and it does not reach
+    everywhere. At the records for `n = 5, 10, 11, 17, 26, 40` every corner contact is
+    between squares 36 to 45 degrees apart -- genuinely tilted, not slipped faces. Perturbed
+    faces appear at the larger, less tidy records: seven of `n = 29`'s corner contacts sit
+    at 0.3 to 4.5 degrees of alignment, and two of `n = 37`'s at 2.9. The schedule earns its
+    keep at 11 and 17 by organising the face-to-face majority first, not by anticipating a
+    perturbation that is not there.
+    """
+    # The split is a budget, not a wall-clock: the tight phase only has to organise, and
+    # spending most of the schedule there leaves nothing to perturb with.
+    budget = int(shared.get("steps", 30))
+    one: dict[str, Any] = {**shared, "steps": max(1, round(budget * split)), **tight}
+    first = ratchet(n, rng, **one)
+    if loose is None:
+        loose = {"band": 0.05, "contact_weight": 1.0, "classes": None}
+    second = ratchet(
+        n,
+        rng,
+        start_from=np.array(first["poses"]),
+        start_side=float(first["side"]),
+        **(shared | loose),
+    )
+    better = min((first, second), key=lambda r: float(r["side"]))
+    return better | {
+        "phase_one_side": float(first["side"]),
+        "phase_two_side": float(second["side"]),
+    }
