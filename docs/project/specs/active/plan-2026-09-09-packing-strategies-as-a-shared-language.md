@@ -322,6 +322,68 @@ the container at every step, by construction.
       byte-identical, which is what makes the export reproducible and not merely repeatable.
 - [ ] A guard on both exporters refusing a frame from a `guide` phase without its label.
 
+### Phase 5: publishing, which is nearly free
+
+**Yes, and most of it already runs.** `.github/workflows/pages.yml` builds and deploys
+today, the repository is public, and the site lives at `https://jlevy.github.io/squares/`.
+`packing/site/` is gitignored, so the page is rendered in CI and deployed rather than
+committed -- which is the same rule the spikes follow, and the reason nothing here needs a
+policy change to publish multi-megabyte artifacts.
+
+**The explainer keeps its URL, and that is a requirement rather than a convenience.**
+It is already published at `https://jlevy.github.io/squares/` and may be linked from
+elsewhere, so nothing here moves `site/index.html`. Everything new is a *sibling
+directory* beneath it, which leaves the existing page byte-identical and its address
+untouched.
+
+`upload-pages-artifact` takes `packing/site` whole, so **a subdirectory is a URL**:
+
+| path | what | size today |
+| --- | --- | ---: |
+| `/` | the explainer | 1.1 MB |
+| `/workbench/` | the workbench, its own URL | 3.1 MB |
+| `/atlas/` | the slideshow | 3.5 MB |
+| `/embed/n-011.svg` | one embeddable animation per case | small |
+
+About eight megabytes against a soft limit of a gigabyte, so size is not the question.
+
+**Three existing constraints decide the work, and all three are already enforced.**
+
+*Self-containment.* The renderer refuses a page that references anything outside itself --
+no external script or stylesheet, no CSS import, no `url()` that is not a data URI. The
+workbench is already one self-contained file, and the embeddable SVG is designed to be, so
+both clear it. It is also the reason the embed can be dropped into someone else's site at
+all.
+
+*Determinism.* The build renders twice and fails unless the two agree byte for byte. Both
+spike generators already assert byte-identical regeneration, so this costs nothing to
+adopt and is what makes a published animation reproducible rather than merely repeatable.
+
+*The path filter.* The workflow only rebuilds when an input changes, and
+`test_the_pages_filter_covers_every_render_input` compares that filter against
+`RENDER_INPUTS` declared in the renderer. **A new generator must declare its inputs**, or
+the test fails and names what is missing. That is a constraint worth having: it is what
+stops a published page from going stale when the data under it moves.
+
+**What has to be built.**
+
+- [ ] A `site/workbench/` and `site/atlas/` build step, writing into the same tree the
+      artifact already uploads, and never touching `site/index.html`. Simplest as another
+      job whose output `build` collects before uploading, so a workbench failure cannot
+      publish a broken explainer -- the existing page's checks stay exactly as they are and
+      keep gating the deploy.
+- [ ] A link from the explainer to `/workbench/`, which is the only change the existing
+      page needs and the reason to give the workbench a stable address at all.
+- [ ] `RENDER_INPUTS` entries for the two generators and their data, and the workflow's
+      two `paths:` lists extended to match, which the test will confirm.
+- [ ] The embed directory, one SVG per case, generated from traces.
+
+**The one real caveat.** A 3.1 MB single file is a slow first load on a phone, and the
+workbench carries all 323 transitions whether or not a visitor opens one. Splitting the
+data from the page would fix it and would break self-containment, so if it matters the
+answer is a smaller default payload -- the twenty-five-pair build already exists at 714 kB
+-- rather than an external fetch.
+
 ## Testing Strategy
 
 Every phase asserts the invariant it is responsible for, not an arrangement that
