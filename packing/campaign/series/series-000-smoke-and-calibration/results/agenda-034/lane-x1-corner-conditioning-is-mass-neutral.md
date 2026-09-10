@@ -218,6 +218,18 @@ rank-one cut on the residual domain.
 So the conditional rank-one method is capped at the same `3.868983`, for every `m`.
 Conditioning changes neither end of `[3.82, 3.868983]`.
 
+**Correction of record, 2026-09-10 (PR 139 finding R2): that transfer is not
+established.** The argument above starts from an artificial packing of eleven `B`-cores
+at `3.868983`, and that packing has never been shown to carry distinct marked owners,
+class memberships or occupied patches; the ownership theorem it leans on concerns
+unit-parent packings at `96/25`. “Delete its four owners” presupposes exactly what is
+unproved. A conditional transfer of the cap requires its own owner, class, patch and
+routing verification, and none has been done.
+The **unconditional** obstruction is untouched and stands at its own stated scope; X-026
+§3 Step 6 and
+[`H-155`](../../../../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md)
+now carry the same withdrawal.
+
 Worse, and this is the measurement that settles the hybrid question: the promoted
 plateau reader was run on the 80-placement mass-10 survivor family (`m1:j3` at `96/25`),
 94 seconds, all keys.
@@ -227,9 +239,12 @@ clique **`11/8` with `tau* = 5/3`**, line chords tight on eight resources, and v
 CG floor atoms at `t = 2, 3, 4` with violations `1/2`, `3/8`, `3/4`. Those are the
 *same* values the full ceiling family carries (lane T2 F3, F4;
 [lane M0](lane-m0-fixed-support-polish-191-50.md) F7). **Conditioning removed exactly
-one unit of mass and exactly none of the cut structure.** The conditional threshold
-problem at a class is the unconditional one shifted down by one, with sixteen times the
-work and no better reach.
+one unit of mass and exactly none of the cut structure those two readings see.** The
+step from there to “the conditional threshold problem *is* the unconditional one shifted
+down by one, with sixteen times the work and no better reach” is an **estimate**
+(labelled 2026-09-10, PR 139): it assumes two matching cut maxima on one family are
+representative of the whole cut structure, and its multiplier is the class count per
+corner rather than a measured running cost.
 
 ## The next measurement
 
@@ -316,8 +331,9 @@ exactly
   to sixteen is the way to get it; whether the refined patch clears `0.015` is one
   screen away, and this lane would not spend it.
 - **The threshold route on a residual domain** is neither refuted nor supported here.
-  It is exactly as open as the unconditional route and costs sixteen times more; that is
-  why the decision is the unconditional lane.
+  It is exactly as open as the unconditional route and is *estimated* to cost sixteen
+  times more, on the class count rather than on a measured running cost; that estimate
+  is why the decision is the unconditional lane.
   [`H-155`](../../../../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md)
   is dispositioned on exactly that reading: the claim is live, not refuted, and it is
   priced at no reach — the survivor family carries the same cut structure as the full

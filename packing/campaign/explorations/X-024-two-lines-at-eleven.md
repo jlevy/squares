@@ -80,8 +80,10 @@ need.
 
 **Corrected later the same day: the fallback buys nothing.** The cheap discriminator was
 run and it is negative on reach — corner conditioning is exactly mass-neutral at every
-rung, so the conditional route cannot turn a failing method into a succeeding one, and
-the rank-one cap `3.868983` applies to it verbatim.
+rung on the family measured, so the conditional route cannot turn a failing method into
+a succeeding one there.
+(A claim that the rank-one cap `3.868983` applies to the conditional route verbatim also
+stood here; it is **withdrawn as unproved** on 2026-09-10, PR 139 finding R2. See §5.)
 §5 carries the measurement, the three consequences, and the scope: what is *refuted* is
 the conditional method by **point covers** on a residual domain; what is established in
 general is **neutrality**. §4 is retained as the reasoning that led to it rather than as
@@ -303,12 +305,19 @@ exactly one unit, and for sectors `j3` and `j4` it reaches nothing else.
 The gain of a conditioning is only the patch’s reach beyond the mark, and for those
 classes that reach is exactly zero.
 Three consequences follow, and each is exact rather than argued.
-The rank-one bracket `3.868983` **transfers verbatim to the conditional method** at
-every `m`, because deleting the `m` owners of a `3.868983` packing leaves `n - m`
-pairwise disjoint admissible cores disjoint from the patches.
-There is **no lift that avoids the tree**: a single certificate valid for all sixteen
-classes must charge `R_{j3}`, whose point-covering value is at least 10, while it needs
-budget below 10 — lane T2’s C.3 at `m = 1`, now with a witness.
+A transfer of the rank-one bracket `3.868983` to the conditional method at every `m` was
+claimed here, on the argument that deleting the `m` owners of a `3.868983` packing
+leaves `n - m` pairwise disjoint admissible cores disjoint from the patches.
+**Withdrawn as unproved, 2026-09-10 (PR 139 finding R2).** That argument starts from an
+artificial packing of eleven `B`-cores at `3.868983` which has never been shown to carry
+distinct marked owners, class memberships or occupied patches, and the ownership theorem
+it leans on concerns unit-parent packings at `96/25`; deleting “the owners’ cores”
+presupposes exactly what is unproved.
+Any conditional transfer needs its own owner, class, patch and routing verification, and
+none has been done. The unconditional bracket is untouched and stands at its own stated
+scope. There is **no lift that avoids the tree**: a single certificate valid for all
+sixteen classes must charge `R_{j3}`, whose point-covering value is at least 10, while
+it needs budget below 10 — lane T2’s C.3 at `m = 1`, now with a witness.
 And the hybrid buys nothing: the plateau reader on the 80-placement mass-10 survivor
 family reports depth exactly 1, two-of-three maximum `5/4`, heaviest rank-one clique
 `11/8` at `tau* = 5/3`, and violated floor atoms at `t = 2, 3, 4` — **the same values
@@ -326,9 +335,13 @@ corner. The measurement is retained as
 with the inventory of what the conditional line already has in
 [lane X2](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x2-owner-instrument-survey.md).
 `H-155` is dispositioned against it as **live, not refuted, and priced at no reach**:
-the survivor family carries the same cut structure as the full family, so threshold
-atoms cut it exactly as they cut the unconditional ceiling, and what the conditional
-route costs is sixteen times the work for the unconditional problem shifted down by one.
+the survivor family carries the same cut structure as the full family on the two maxima
+read, so threshold atoms cut it the way they cut the unconditional ceiling there.
+The step from that to “the conditional route costs sixteen times the work for the
+unconditional problem shifted down by one” is an **estimate**, and is labelled as one in
+`H-155` and in [X-026](X-026-what-conditioning-does-and-does-not-buy.md) §4: it assumes
+two matching cut maxima on one family represent the whole cut structure, and it uses the
+class count per corner in place of a running cost nobody measured.
 It is retained with rewritten notes rather than deleted.
 
 **The scope of “refuted”, stated exactly, and three escapes that remain open.**
@@ -377,7 +390,7 @@ domain.
 | A5 (**done**) | weighted clique atoms (three-of-five with a doubled point) and floor two-of-five atoms in the loop, with exact vertex-set separation | one atom round plus rows-only completion at `383/100`: below eleven, freeze and gate; at eleven, the reader’s next family | this branch; answered from the other side — the ceiling support reaches only `32/3`, so neither side is capped |
 | B1 (**withdrawn**) | the owner-class census at `96/25`: combinations modulo the container symmetries, compatibility pruning by exact footprint separation, the nine-direction residual point LP on a sample of a few hundred classes | the class count and the distribution of residual values against seven | conditional line (PR 137’s branch); a census cannot rescue a neutral ladder |
 | E1 | one certificate format for both lines: point and threshold atoms, an optional forbidden region, a budget threshold, one two-route gate | PR 137’s `T-023` re-decided by the unified gate to the same verdict | either branch; efficiency block |
-| C1 (**withdrawn**) | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-155) | research, Fable; withdrawn on price, not on refutation — the point-cover route on a residual domain is closed, `H-155` itself is live, and it buys the unconditional problem shifted down by one for sixteen times the work |
+| C1 (**withdrawn**) | a conditional threshold certificate on one uncovered owner class at `96/25`, decided by both routes on the residual domain | budget below seven where the point cover was above it (H-155) | research, Fable; withdrawn on price, not on refutation — the point-cover route on a residual domain is closed on the family measured, `H-155` itself is live, and the estimate behind the withdrawal is that it buys the unconditional problem shifted down by one for sixteen times the work |
 
 Two things must not be conflated when the lines are reported together.
 PR 137’s `T-023` is conditional and does not move the bracket; `T-024` and the threshold
@@ -496,11 +509,33 @@ The containment sweep closes one more cut family
 ([`lane-x3-containment-atoms-do-not-cut.md`](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-containment-atoms-do-not-cut.md)):
 both plateau families carry exactly 3 in every wall strip against a capacity of exactly
 3, first exceeding 3 only above `2B`, and no axis-aligned box on an eight-step grid
-exceeds its capacity, so containment atoms — which would have been a cut outside the
-`3.868983` bracket — are not the missing cut and should not be built.
-A4’s P10 blocks two named atom classes, and only those two: a `K5` clique atom carries
-multiplicities and a `K6` floor atom charges more than one per core, neither is a
-`ThresholdAtom`, so neither can be frozen or gated today even when it does cut.
+exceeds its capacity, so containment atoms are not the missing cut on those two families
+and should not be built.
+The scope is the two families, the wall strips and the eight-step box grid actually
+swept; other regions and other capacity bounds are unmeasured, and one of the two bounds
+used was itself false in the lenient direction (corrected 2026-09-10 beside the
+artifact, and C1 and C2 survive it because an understated capacity makes a violation
+easier to find, not harder).
+**Withdrawn with it**: the reason X3 was run first, that a violated containment atom
+would be “a cut outside the `3.868983` bracket”.
+That bracket is witnessed by an actual packing of eleven pairwise-disjoint integral
+`B`-cores, and every valid packing-capacity inequality holds on such a packing,
+containment atoms included.
+No choice of syntax evades an obstruction that is a witness rather than a language
+restriction. A4’s P10 blocks two named atom classes, and only those two: a `K5` clique
+atom carries multiplicities and a `K6` floor atom charges more than one per core,
+neither is a `ThresholdAtom`, so neither can be frozen or gated today even when it does
+cut.
+
+Two conditions the promoted plateau reader carries, and the next runner has to carry
+with it (2026-09-10, PR 139 finding R6). Its budget-one procedure enumerates maximal
+cliques of weight above one and **descends into sub-cliques wherever `tau* >= 2`**,
+since `tau*` is monotone under inclusion and an overweight sub-clique can carry the
+violated atom; checking maximal cliques alone decides nothing about the family.
+And its higher-budget separation is a **bounded search** whose zero result is the
+solver’s claim within its threshold range and time limit, never a feasibility proof: a
+returned cut is always valid, but not finding one is a theorem only when the declared
+search is complete and its optimality certified.
 It does **not** block the route above.
 All six atoms of the `10.4210526` reading are `(S, k)` threshold atoms with uniform
 multiplicity — two-of-three is `|S| = 3, k = 2` and three-of-five is `|S| = 5, k = 3` —
@@ -525,12 +560,13 @@ The hybrid tool does not exist yet.
 Four things the same-day lanes added, and their own limits.
 The neutrality result of §5 is a statement about **point covers on a residual domain**;
 it does not say a *threshold* certificate on a residual domain is impossible, only that
-its premise — that conditioning buys mass — is false, and that it costs sixteen times
-more than the unconditional route for no better reach.
-It also has one escape it does not close: if sectors `j3` and `j4` are empty, those four
-classes need no cover, and an emptiness proof would rescue the classes but not the
-method. A4’s readings are separation-oracle readings on a family of depth `28/25` with
-the gate bypassed: every violation there is sound and every non-violation decides
+its premise — that conditioning buys mass — is false on the family measured, and that it
+is estimated to cost sixteen times more than the unconditional route for no better
+reach. It also has one escape it does not close: if sectors `j3` and `j4` are empty,
+those four classes need no cover, and an emptiness proof would rescue the classes but
+not the method.
+A4’s readings are separation-oracle readings on a family of depth `28/25`
+with the gate bypassed: every violation there is sound and every non-violation decides
 nothing, so **no number in A4 is a cap at `153/40`**, and its LP value of eleven is a
 restricted optimum on one column set that bounds nothing from below.
 A5 establishes `nu_S` exactly on one support and its union with one other, and its `10`

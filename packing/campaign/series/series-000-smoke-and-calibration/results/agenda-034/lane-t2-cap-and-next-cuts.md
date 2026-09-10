@@ -190,6 +190,7 @@ tools that mostly exist:
 1. An exact D4-symmetric family `y` of total weight `>= 11` at side `L'`, depth at most
    one at every arrangement vertex: `verify_ceiling`
    (`packing/src/sqpack/fractional/ceiling.py`), K0-K3.
+
 2. **K4, two-of-three feasibility.** The maximum over triples of vertex membership sets
    of `y((T_1 ∩ T_2) ∪ (T_3 ∩ (T_1 Δ T_2)))` is at most one.
    The reduction to vertices is exact (a closed core containing an open face contains
@@ -198,12 +199,26 @@ tools that mostly exist:
    88-core family, complete for every violating triple (a triple with nine or more
    charged members has a pair whose union holds them all and whose intersection is
    nonempty).
+
 3. **K5, all budget-one atoms.** Every maximal clique of the interior-overlap graph with
    weight above one has `tau*(C) >= 2`, decided by Bron-Kerbosch on the family (lane
    M0’s `clique_scan` does the exact overlaps and a branch-and-bound clique) and one
    piercing LP per clique over the clique’s own arrangement vertices, rationalised and
    checked exactly. By F2 this covers every `k`-of-`(2k-1)` atom and everything they
    dominate.
+
+   **Correction, 2026-09-10 (PR 139 finding R6): checking the maximal cliques is not the
+   whole family.** `tau*` is monotone under inclusion, so `tau*(C) >= 2` for a maximal
+   clique `C` gives **no lower bound** on `tau*` of an overweight *sub*-clique of `C`,
+   and a violated budget-one atom can live there.
+   The procedure as written above would therefore have reported feasibility it had not
+   decided. The promoted reader does it correctly and its condition is the one to carry:
+   it enumerates the maximal cliques of weight above one, pruned on weight, and
+   **descends into sub-cliques exactly where `tau* >= 2`** — which is what makes
+   [`devtools/plateau_reader.py`](../../../../../devtools/plateau_reader.py) able to
+   label K5 complete. Any future run must use that procedure, or report its result as a
+   bounded search rather than as a decision.
+
 4. **K6, the whole rank-one closure.** The CG-separation MIP (Fischetti-Lodi) with one
    multiplier `lambda_v in [0, 1)` per distinct vertex membership set, integer `f_P <=
    lambda(T ∋ P)`, integer `f_0 >= lambda(1) - 1 + eps`, maximising `sum f_P y_P - f_0`;
@@ -486,6 +501,17 @@ The measurement that discriminates everything is step 2 of outcome 2: whether th
 plateau family is two-of-three-feasible.
 If it is, the plateau is a theorem and step 3 names the cut; if it is not, the loop’s
 generator, not the language, was the limit.
+
+**Correction, 2026-09-10 (PR 139 finding R6): a zero K6 result is not a cap.** Step 3 of
+the table above says “if K6 finds nothing, the rank-one cap is at `383/100`”. It does
+not follow. K6 is a Chvátal-Gomory separation solved as an integer program under a time
+limit, over a bounded range of thresholds and bounded multiplicities; a zero or absent
+optimum is **the solver’s claim within its own bound and threshold range**, not a proof
+of feasibility for every rational rank-one multiplier.
+The promoted reader labels it exactly that way, and that label is the condition to
+carry: a valid returned cut is always a valid cut, but failure to find one is a theorem
+only when the declared search is complete and its optimality certified.
+Neither holds for K6 as run.
 Either way the branch spends its next four hours on the plateau family, not on the next
 side.
 

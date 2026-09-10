@@ -169,7 +169,12 @@ shrink and net; the threshold atoms carry `2.29` of this certificate’s budget,
 point method cannot have.
 Nothing here bounds the side from above, decides fit at a larger side, or proves a
 strict inequality at `191/50`. The finer-net dilation argument of T-024 applies to
-threshold certificates unchanged and has not yet been measured on this one.
+threshold certificates unchanged; it has since been measured on this one, at 360 and
+1440 net steps, and is registered as `T-026`
+([`t-026-dilation-limit-proof.md`](t-026-dilation-limit-proof.md)):
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939...`, a
+weak limit of this certificate’s dilation family rather than an endpoint here.
+`191/50` remains the largest side at which this project holds an *endpoint* certificate.
 
 ## Replay
 

@@ -15,6 +15,20 @@ and if not, by how much does it miss?**
 budget-one class, falling to exactly `10` once the floor atoms are imposed.
 So no cap at either side, and real room rather than a nearly-capped method.**
 
+**Scope note, 2026-09-10 (PR 139 finding R5), and it is the report’s own F4 and F6 said
+beside the headline rather than below it.** Both numbers are about **one fixed
+support**, the 88 placements of the record’s ceiling family — plus, in F10, its union
+with the 280-placement `1/25` family.
+An optimum below eleven on one support does not settle whether some *other* support
+reaches eleven, which is exactly what a cap would need, and F4 says so.
+The `10` of F6 is an upper bound resting on a time-limited K6 separator, so it is an
+exact bound and not a proved optimum.
+Read “no cap at either side” as “this support does not cap either side”; the wider
+statement is untested.
+[Lane A6](lane-a6-structural-sites-and-the-depth-one-certificate.md) later found a
+different support at `153/40` that does reach exactly eleven under the LP’s whole atom
+set, which is the same point from the other direction.
+
 Retained beside this report: the two exact results with their tight rows and priced
 duals, the two no-atom controls, the two `32/3` optima as ceiling records, the two
 sharpening loops, and the ten scripts that produced them, listed under [Files](#files).

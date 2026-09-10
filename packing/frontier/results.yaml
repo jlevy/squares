@@ -1411,10 +1411,12 @@ results:
     next_rung: >-
       Push the side with the same loop: the LP that produced these atoms is run again at
       a larger side, and the ceiling family says the answer cannot come from point atoms
-      alone. Two mechanisms are unmeasured on this certificate. The finer-net shrink of
-      T-024 applies to threshold certificates unchanged -- Condition 4 ties the shrink to
-      the net's largest half-gap tangent whatever the atoms are -- and would turn this
-      endpoint into a strictly larger weak limit, which nobody has measured here. And no
+      alone. One of the two mechanisms once unmeasured here has since been measured. The
+      finer-net shrink of T-024 applies to threshold certificates unchanged -- Condition 4
+      ties the shrink to the net's largest half-gap tangent whatever the atoms are -- and
+      it turns this endpoint into a strictly larger weak limit, registered as T-026 at
+      955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939 on the 1440-step
+      net. What remains unmeasured is the second: no
       standalone reader outside this repository decides a threshold certificate: the
       retained verify_claim.py reads point atoms only, so a stranger cannot yet check
       these bytes without trusting this project's own code, which is the gap that keeps
