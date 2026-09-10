@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""Lane 1: is the scaled depth-one ceiling family feasible for the LP's atom columns?
+
+The covering LP's dual constraint for an atom orbit is
+``sum_{images T} sum_{P : |P cap T| >= k} y_P <= |orbit| * floor(|S|/k)``.
+A family that satisfies every atom orbit and has depth at most one everywhere satisfies
+every site-orbit constraint of *every* site set, so it certifies the rows-complete LP
+value from below.  Membership is screened in float and every ambiguous entry is decided
+exactly in Fractions; the counts and the charge comparison are exact.
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+from sqpack.fractional.ceiling import CeilingCertificate
+from sqpack.fractional.threshold import ThresholdAtom
+
+FAM = Path(sys.argv[1])
+ATOMS = Path(sys.argv[2])
+OUT = Path(sys.argv[3])
+SCREEN = 1e-6
+
+t0 = time.perf_counter()
+fam = CeilingCertificate.from_record(json.loads(FAM.read_text()))
+NEW = fam.outer_side
+placements = list(fam.placements)
+print(f"family: {len(placements)} placements, total {fam.total_weight}, L = {NEW}", flush=True)
+
+slabs = [p.slabs() for p in placements]
+halves = [p.side / 2 for p in placements]
+w = [p.weight for p in placements]
+AX = np.array([float(s[0]) for s in slabs]); AY = np.array([float(s[1]) for s in slabs])
+U = np.array([float(s[2]) for s in slabs]); BX = np.array([float(s[3]) for s in slabs])
+BY = np.array([float(s[4]) for s in slabs]); V = np.array([float(s[5]) for s in slabs])
+H = np.array([float(h) for h in halves])
+
+meta = json.loads(ATOMS.read_text())
+assert Fraction(meta["outer_side"]) == NEW, (meta["outer_side"], NEW)
+entries = meta["atoms"]
+print(f"atoms: {len(entries)} orbits at L = {meta['outer_side']}", flush=True)
+
+# expand every orbit into its images; collect the distinct points
+orbits: list[list[tuple[tuple[Fraction, Fraction], ...]]] = []
+index: dict[tuple[Fraction, Fraction], int] = {}
+pts: list[tuple[Fraction, Fraction]] = []
+ks: list[int] = []
+sizes: list[int] = []
+for e in entries:
+    atom = ThresholdAtom(tuple((Fraction(a), Fraction(b)) for a, b in e["points"]), e["threshold"], Fraction(1))
+    orb = atom.orbit(NEW)
+    assert len(orb) == e["orbit_size"]
+    imgs = []
+    for im in orb:
+        tri = []
+        for q in im.points:
+            if q not in index:
+                index[q] = len(pts); pts.append(q)
+            tri.append(index[q])
+        imgs.append(tuple(tri))
+    orbits.append(imgs); ks.append(e["threshold"]); sizes.append(len(orb))
+print(f"expanded: {sum(len(o) for o in orbits)} images, {len(pts)} distinct points ({time.perf_counter()-t0:.1f}s)", flush=True)
+
+PX = np.array([float(p[0]) for p in pts]); PY = np.array([float(p[1]) for p in pts])
+s1 = np.abs(PX[:, None] * AX[None, :] + PY[:, None] * AY[None, :] - U[None, :]) - H[None, :]
+s2 = np.abs(PX[:, None] * BX[None, :] + PY[:, None] * BY[None, :] - V[None, :]) - H[None, :]
+inside = (s1 <= 0) & (s2 <= 0)
+amb = (np.abs(s1) < SCREEN) | (np.abs(s2) < SCREEN)
+ai, aj = np.nonzero(amb)
+print(f"float screen: {int(inside.sum())} inside, {len(ai)} ambiguous to decide exactly ({time.perf_counter()-t0:.1f}s)", flush=True)
+flips = 0
+for i, j in zip(ai.tolist(), aj.tolist()):
+    x, y = pts[i]
+    val = placements[j].contains(x, y)
+    if bool(inside[i, j]) != val:
+        flips += 1
+    inside[i, j] = val
+print(f"exact recheck: {flips} float verdicts corrected ({time.perf_counter()-t0:.1f}s)", flush=True)
+
+wq = [Fraction(x) for x in w]
+report = {"family": str(FAM), "atoms": str(ATOMS), "n_orbits": len(orbits), "total_weight": str(fam.total_weight),
+          "screen": SCREEN, "ambiguous": len(ai), "flips": flips, "violated": []}
+worst = Fraction(0); worst_i = -1
+for oi, imgs in enumerate(orbits):
+    k = ks[oi]
+    charge = Fraction(0)
+    for tri in imgs:
+        cnt = inside[list(tri), :].sum(axis=0)
+        hit = np.nonzero(cnt >= k)[0]
+        for m in hit.tolist():
+            charge += wq[m]
+    budget = Fraction(sizes[oi] * (3 // k))
+    ratio = charge / budget
+    if ratio > worst:
+        worst = ratio; worst_i = oi
+    if charge > budget:
+        report["violated"].append({"orbit": oi, "k": k, "orbit_size": sizes[oi],
+                                   "charge": str(charge), "budget": str(budget), "ratio": float(ratio)})
+report["max_charge_to_budget"] = str(worst)
+report["max_charge_to_budget_float"] = float(worst)
+report["argmax_orbit"] = worst_i
+report["n_violated"] = len(report["violated"])
+report["seconds"] = time.perf_counter() - t0
+OUT.write_text(json.dumps(report, indent=1))
+print(f"max charge/budget over {len(orbits)} atom orbits: {worst} = {float(worst):.12f}; violated {len(report['violated'])}; {time.perf_counter()-t0:.1f}s", flush=True)

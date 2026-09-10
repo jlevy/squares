@@ -1,0 +1,20 @@
+=== round 1 ===
+float optimum 11.000000000  (0 memberships decided exactly, 5.7s)
+exact symmetric total 11 = 11.000000000; max depth row 1; max atom ratio 1.000000000; feasible True
+wrote 64 placements to /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/loop-family-1.json
+   reader returned 3 uniform-multiplicity atoms; k4 max charge: 11/8 complete True
+=== round 2 ===
+float optimum 11.000000000  (0 memberships decided exactly, 5.5s)
+exact symmetric total 11 = 11.000000000; max depth row 1; max atom ratio 1.000000000; feasible True
+wrote 56 placements to /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/loop-family-2.json
+   reader returned 3 uniform-multiplicity atoms; k4 max charge: 5/4 complete True
+=== round 3 ===
+float optimum 10.421052632  (0 memberships decided exactly, 4.8s)
+exact symmetric total 325657893/31250000 = 10.421052576; max depth row 499999999/500000000; max atom ratio 0.999999998; feasible True
+wrote 80 placements to /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/loop-family-3.json
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import json;d=json.load(open('/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/loop-reader-3.json'));print(d['k4_two_of_three']['max_charge'], 'complete', d['k4_two_of_three']['complete'])
+                                                                                                                                                                ~^^^^^^^^^^^^^^^^^^^
+KeyError: 'k4_two_of_three'
+   reader returned 0 uniform-multiplicity atoms; k4 max charge: 

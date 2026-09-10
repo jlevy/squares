@@ -1,0 +1,36 @@
+{
+ "kind": "plateau-reader/v1",
+ "family": {
+  "placements": null,
+  "total_weight": "325657893/31250000",
+  "max_depth": "105263157/100000000",
+  "vertices": 26008,
+  "regime": "net",
+  "symmetric_only": true,
+  "conditions": [
+   {
+    "name": "K0 every placement is admissible",
+    "holds": true,
+    "detail": "80 placements in the net regime, some at mirrored angles (D4-symmetric measures only)"
+   },
+   {
+    "name": "K1 every placement lies in the container",
+    "holds": true,
+    "detail": "all 80 placements have every corner in [0, 153/40]^2"
+   },
+   {
+    "name": "K2 depth at most 1 at every arrangement vertex",
+    "holds": false,
+    "detail": "maximum depth 105263157/100000000 (1.052631570) at (Fraction(136686101900289687320967974081721468977404335417391577, 96733113312048139159163103007124743051346000000000000), Fraction(5582542289700887237347619169623865032067, 2919176841923744102057242844493569237500)) over 26008 vertices, 1733 decided exactly"
+   },
+   {
+    "name": "K3 total weight at least n",
+    "holds": false,
+    "detail": "total 325657893/31250000 (10.421052576) against n = 11"
+   }
+  ]
+ },
+ "refused": "depth 105263157/100000000 exceeds one: not a feasible point dual",
+ "seconds": 1.179,
+ "source": "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/loop-family-3.json"
+}

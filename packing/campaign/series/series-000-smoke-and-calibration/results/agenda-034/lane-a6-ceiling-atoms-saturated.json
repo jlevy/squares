@@ -1,0 +1,15 @@
+{
+ "family": "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/saturated-family-at-n-1-exact25.json",
+ "atoms": "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-383/run-sites/lp-153-40/atoms.json",
+ "n_orbits": 2566,
+ "total_weight": "11",
+ "screen": 1e-06,
+ "ambiguous": 59,
+ "flips": 0,
+ "violated": [],
+ "max_charge_to_budget": "1",
+ "max_charge_to_budget_float": 1.0,
+ "argmax_orbit": 9,
+ "n_violated": 0,
+ "seconds": 1.0801603490035632
+}

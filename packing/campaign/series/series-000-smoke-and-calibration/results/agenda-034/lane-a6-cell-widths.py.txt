@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+"""Widths of the deep cells along the structural scan net: how fine a site net must be."""
+from __future__ import annotations
+import sys, json
+from pathlib import Path
+import numpy as np
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gen_sites import Fam, deep_runs, levels_from
+
+out = {}
+for path in sys.argv[1:]:
+    f = Fam(Path(path))
+    rows = []
+    for axis, name in ((0, "h"), (1, "v")):
+        lev = levels_from(f, axis, 900)
+        widths = []; seam = []; interior = []
+        block = max(1, 1_000_000 // max(1, len(f.pl)))
+        for s0 in range(0, len(lev), block):
+            sub = lev[s0:s0 + block]
+            lo, hi = f.spans(sub, axis)
+            for r, rl in enumerate(deep_runs(lo, hi, f.w, 2e-9)):
+                for a, b, d in rl:
+                    widths.append(b - a)
+                    m = (a + b) / 2.0
+                    if min(abs(m - 1.0), abs(m - (float(f.L) - 1.0))) < 0.012:
+                        seam.append(b - a)
+                    elif 1.05 < m < float(f.L) - 1.05:
+                        interior.append(b - a)
+        w = np.array(widths)
+        rows.append((name, len(w), float(np.median(w)), float(w.mean()), float(w.min()), float(w.max()),
+                     len(seam), float(np.median(seam)) if seam else None,
+                     len(interior), float(np.median(interior)) if interior else None))
+    out[Path(path).name] = rows
+    for name, n, med, mean, mn, mx, ns, ms, ni, mi in rows:
+        print(f"{Path(path).name:28s} {name}: {n:5d} deep cells  median width {med:.3e}  mean {mean:.3e}  min {mn:.2e}  max {mx:.2e}"
+              f" | seam {ns:5d} median {ms if ms is None else f'{ms:.3e}'} | interior {ni:5d} median {mi if mi is None else f'{mi:.3e}'}")
+json.dump({k: [list(r) for r in v] for k, v in out.items()}, open(sys.argv[0].replace("cell_widths.py", "cell-widths.json"), "w"), indent=1)

@@ -13,6 +13,11 @@ report uses as robustness.
 All scripts and survivor families are retained beside this report; see
 [Files](#costs-and-files).
 
+**Every “closed” in the body below is narrowed to “patch refinement is ruled out as the
+lever”. The corrected reading is
+[X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
+escape 1.**
+
 **Coordinator’s scope note, added on review (PR 139, finding R3).** The delivered text
 concludes in several places that escape 1 of X-026 §5, and with it the conditional
 point-cover line, is *closed*. That is stronger than what T1 and T2 support, and X-026
@@ -50,7 +55,10 @@ Any closed angular bin that contains one of them has survivor weight exactly 10,
 whatever the bin count.
 **No angular refinement of the owner-sector conditioning can break neutrality**, so
 escape 1 of X-026 §5 is closed at every resolution rather than only at sixteen.
-(Narrowed, not closed — see the scope note above.)
+**Narrowed, not closed: the lane’s “closed” means only that patch refinement is ruled
+out as the lever.
+[X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
+escape 1 carries the corrected reading.**
 
 ## The instrument
 
@@ -184,7 +192,12 @@ That gives a general statement, EXACT and independent of bin count:
 The neutral arc has positive width, so **every** partition of the owner’s pose angle
 into closed bins has at least one bin meeting it, and that bin is exactly neutral.
 Escape 1 of X-026 §5 is therefore closed at every angular resolution, not refuted only
-at sixteen. (Narrowed, not closed — see the scope note above.)
+at sixteen.
+
+**Narrowed, not closed: the lane’s “closed” means only that patch refinement is ruled
+out as the lever.
+[X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
+escape 1 carries the corrected reading.**
 
 The prediction was then checked against the screen rather than left as an argument
 (EXACT). The bins that meet the neutral arc, and their measured survivor weights:
@@ -257,11 +270,16 @@ so the trap stays on the record.
   survives every angular refinement and the pose-level refinement sampled here.
 - **Steps 4, 5 and 6 are untouched**, and Step 6’s rank-one cap of `3.868983` never used
   the patch in the first place.
-- **Escape 1 can be marked closed.** (Narrowed rather than closed — see the scope note
-  above.) Escapes 2 (empty classes) and 3 (compatibility pruning) are untouched by this
+  Not endorsed: PR 139 finding R2 holds that no conditional transfer of that cap is
+  established without a separate owner, class, patch and routing verification.
+- **Escape 1 can be marked closed.** Narrowed rather than closed: the lane’s “closed”
+  means only that patch refinement is ruled out as the lever, and
+  [X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
+  escape 1 carries the corrected reading.
+  Escapes 2 (empty classes) and 3 (compatibility pruning) are untouched by this
   measurement and remain exactly as open as they were.
 - The conditional **point-cover** line can now be closed in the record at every angular
-  resolution (narrowed rather than closed — see the scope note above).
+  resolution — narrowed rather than closed, on the same reading as the bullet above.
   The conditional **threshold** line (H-155) is untouched: this lane measured deletions,
   not atoms.
 

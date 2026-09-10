@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""Fixed-support maximum once the structural sites exist.
+
+For a dual family's support (geometry only, weights discarded), maximise the total
+weight subject to depth at most one at every structural deep point.  If the optimum is
+below eleven the support is exhausted by those sites, so an LP that still reads eleven
+has moved to a different support: the migration, priced.
+Floats propose; the primal is rationalised and re-checked on every row in Fractions, so
+the reported lower bound is exact.
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction as F
+from pathlib import Path
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gen_sites import Fam
+
+deep = json.load(open(sys.argv[1]))["detail"]
+pts = [(F(r["x"]), F(r["y"])) for r in deep]
+print(f"{len(pts)} structural deep points", flush=True)
+
+for path in sys.argv[2:]:
+    t0 = time.perf_counter()
+    f = Fam(Path(path))
+    m = len(f.pl)
+    # membership matrix, float-screened with every ambiguous entry decided exactly
+    rows = []; cols = []
+    namb = 0
+    step = max(1, 4_000_000 // max(1, m))
+    for lo in range(0, len(pts), step):
+        chunk = pts[lo:lo + step]
+        px = np.array([float(a) for a, _ in chunk]); py = np.array([float(b) for _, b in chunk])
+        s1 = np.abs(px[:, None] * f.ax[None, :] + py[:, None] * f.ay[None, :] - f.u[None, :]) - f.h[None, :]
+        s2 = np.abs(px[:, None] * f.bx[None, :] + py[:, None] * f.by[None, :] - f.v[None, :]) - f.h[None, :]
+        inside = (s1 <= 0) & (s2 <= 0)
+        amb = (np.abs(s1) < 1e-9) | (np.abs(s2) < 1e-9)
+        ai, aj = np.nonzero(amb); namb += len(ai)
+        for i, j in zip(ai.tolist(), aj.tolist()):
+            inside[i, j] = f.pl[j].contains(*chunk[i])
+        ri, ci = np.nonzero(inside)
+        rows.append(ri + lo); cols.append(ci)
+    ri = np.concatenate(rows); ci = np.concatenate(cols)
+    A = sparse.csr_matrix((np.ones(len(ri)), (ri, ci)), shape=(len(pts), m))
+    keep = np.asarray(A.sum(axis=1)).ravel() > 0
+    A = A[keep]
+    res = linprog(-np.ones(m), A_ub=A, b_ub=np.ones(A.shape[0]), bounds=(0, None), method="highs")
+    val = -res.fun if res.success else float("nan")
+    # exact lower bound: rationalise down at 1e-9 and check every row in Fractions
+    yq = [max(F(0), F(int(np.floor(v * 1e9)), 10**9)) for v in res.x]
+    Aq = A.tocsr()
+    worst = F(0)
+    for r in range(Aq.shape[0]):
+        s = sum((yq[j] for j in Aq.indices[Aq.indptr[r]:Aq.indptr[r + 1]]), start=F(0))
+        if s > worst:
+            worst = s
+    tot = sum(yq, start=F(0))
+    ok = worst <= 1
+    print(f"{Path(path).name:30s} support {m:5d}  rows {A.shape[0]:6d} (of {len(pts)}), {namb} memberships decided exactly"
+          f"  float optimum {val:.9f}  exact feasible total {float(tot):.9f} (max row {float(worst):.9f}, feasible {ok})"
+          f"  {time.perf_counter()-t0:.1f}s", flush=True)

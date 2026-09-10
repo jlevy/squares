@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+"""The same fixed-support maximum with weights tied across D4 orbits of the support.
+
+A D4-symmetric measure is what the net regime's mirrored angles require, and it makes the
+site-orbit dual constraint depth at most one *pointwise*.  The support and both row
+families are D4-invariant, so tying loses nothing: averaging an optimum over the group
+keeps feasibility and the objective.
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction as F
+from pathlib import Path
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gen_sites import Fam
+from sqpack.fractional.threshold import ThresholdAtom
+
+raw = json.load(open(sys.argv[1]))
+pts = sorted({(F(a), F(b)) for orb in raw["sites_out"] for a, b in orb})
+meta = json.loads(Path(sys.argv[2]).read_text()); NEW = F(meta["outer_side"])
+famrec = json.loads(Path(sys.argv[3]).read_text())
+f = Fam(Path(sys.argv[3])); m = len(f.pl)
+L = f.L
+
+def mirror_ht(t: F) -> F:
+    return (1 - t) / (1 + t)
+
+def images(t: F, cx: F, cy: F) -> list[tuple[F, F, F]]:
+    """The eight container symmetries acting on a placement, as (half_tangent, cx, cy)."""
+    out = []
+    for ht, x, y in ((t, cx, cy), (mirror_ht(t), L - cx, cy)):
+        a, b = x, y
+        for _ in range(4):
+            out.append((ht, a, b)); a, b = L - b, a
+    return out
+
+key = {(p.half_tangent, p.centre_x, p.centre_y): i for i, p in enumerate(f.pl)}
+seen = set(); groups: list[list[int]] = []
+for i, p in enumerate(f.pl):
+    if i in seen:
+        continue
+    grp = set()
+    for im in images(p.half_tangent, p.centre_x, p.centre_y):
+        assert im in key, f"support is not D4-closed: {im} missing"
+        grp.add(key[im])
+    seen |= grp; groups.append(sorted(grp))
+print(f"support {m} placements in {len(groups)} D4 orbits, sizes {sorted({len(g) for g in groups})}", flush=True)
+
+def membership(points):
+    out = np.zeros((len(points), m), dtype=bool); namb = 0
+    step = max(1, 4_000_000 // max(1, m))
+    for lo in range(0, len(points), step):
+        ch = points[lo:lo + step]
+        px = np.array([float(a) for a, _ in ch]); py = np.array([float(b) for _, b in ch])
+        s1 = np.abs(px[:, None] * f.ax[None, :] + py[:, None] * f.ay[None, :] - f.u[None, :]) - f.h[None, :]
+        s2 = np.abs(px[:, None] * f.bx[None, :] + py[:, None] * f.by[None, :] - f.v[None, :]) - f.h[None, :]
+        ins = (s1 <= 0) & (s2 <= 0); amb = (np.abs(s1) < 1e-9) | (np.abs(s2) < 1e-9)
+        ai, aj = np.nonzero(amb); namb += len(ai)
+        for i, j in zip(ai.tolist(), aj.tolist()):
+            ins[i, j] = f.pl[j].contains(*ch[i])
+        out[lo:lo + len(ch)] = ins
+    return out, namb
+
+t0 = time.perf_counter()
+D, n1 = membership(pts)
+apts: list[tuple[F, F]] = []; index: dict = {}; orb_pts = []; ks = []; sizes = []
+for e in meta["atoms"]:
+    atom = ThresholdAtom(tuple((F(a), F(b)) for a, b in e["points"]), e["threshold"], F(1))
+    imgs = []
+    for im in atom.orbit(NEW):
+        tri = []
+        for q in im.points:
+            if q not in index:
+                index[q] = len(apts); apts.append(q)
+            tri.append(index[q])
+        imgs.append(tuple(tri))
+    orb_pts.append(imgs); ks.append(e["threshold"]); sizes.append(len(imgs))
+Ap, n2 = membership(apts)
+G = np.zeros((m, len(groups)))
+for gi, g in enumerate(groups):
+    for j in g:
+        G[j, gi] = 1.0
+Ad = (D.astype(float) @ G)
+keep = Ad.sum(axis=1) > 0
+Ad = Ad[keep]
+arows = np.zeros((len(orb_pts), m))
+for oi, imgs in enumerate(orb_pts):
+    acc = np.zeros(m)
+    for tri in imgs:
+        acc += (Ap[list(tri), :].sum(axis=0) >= ks[oi]).astype(float)
+    arows[oi] = acc
+Aa = arows @ G
+bud = np.array([sizes[oi] * (3 // ks[oi]) for oi in range(len(orb_pts))], dtype=float)
+k2 = Aa.sum(axis=1) > 0
+extra_rows = []; extra_bud = []
+for extra in sys.argv[5:]:
+    ent = json.loads(Path(extra).read_text())
+    at = ThresholdAtom(tuple((F(q["x"]), F(q["y"])) for q in ent["points"]), int(ent["threshold"]), F(1))
+    allp = []; idx = []
+    for im in at.orbit(NEW):
+        idx.append(list(range(len(allp), len(allp) + len(im.points)))); allp.extend(im.points)
+    M, _ = membership(allp)
+    acc = np.zeros(m)
+    for tri in idx:
+        acc += (M[tri, :].sum(axis=0) >= at.threshold).astype(float)
+    extra_rows.append(acc @ G)
+    extra_bud.append(float(len(at.orbit(NEW)) * (len(at.points) // at.threshold)))
+    print(f"seeded atom from {Path(extra).name}: |S| = {len(at.points)}, k = {at.threshold}, orbit {len(at.orbit(NEW))}, budget {extra_bud[-1]:.0f}", flush=True)
+A = np.vstack([Ad, Aa[k2]] + ([np.array(extra_rows)] if extra_rows else []))
+b = np.concatenate([np.ones(Ad.shape[0]), bud[k2]] + ([np.array(extra_bud)] if extra_bud else []))
+c = -np.array([float(len(g)) for g in groups])
+res = linprog(c, A_ub=sparse.csr_matrix(A), b_ub=b, bounds=(0, None), method="highs")
+print(f"float optimum {-res.fun:.9f}  ({n1 + n2} memberships decided exactly, {time.perf_counter()-t0:.1f}s)", flush=True)
+zq = [max(F(0), F(int(np.floor(v * 10**9)), 10**9)) for v in res.x]
+worst_d = F(0); worst_a = F(0); ok = True
+for r in range(A.shape[0]):
+    s = sum((F(int(A[r, gi])) * zq[gi] for gi in range(len(groups)) if A[r, gi]), start=F(0))
+    lim = F(int(b[r]))
+    if r < Ad.shape[0]:
+        worst_d = max(worst_d, s)
+    else:
+        worst_a = max(worst_a, s / lim)
+    if s > lim:
+        ok = False
+tot = sum((F(len(groups[gi])) * zq[gi] for gi in range(len(groups))), start=F(0))
+print(f"exact symmetric total {tot} = {float(tot):.9f}; max depth row {worst_d}; max atom ratio {float(worst_a):.9f}; feasible {ok}")
+# exact upper bound: rationalise the LP duals upward and check A^T u >= cost in Fractions
+u = -np.asarray(res.ineqlin.marginals)
+nz = np.nonzero(u > 1e-12)[0]
+uq = {int(r): F(int(np.ceil(u[r] * 10**9)) + 1, 10**9) for r in nz.tolist()}
+colcheck = True
+for gi in range(len(groups)):
+    acc = sum((F(int(A[r, gi])) * uq[r] for r in uq if A[r, gi]), start=F(0))
+    if acc < F(int(cq := int(-c[gi]))):
+        colcheck = False; break
+ub = sum((F(int(b[r])) * uq[r] for r in uq), start=F(0))
+print(f"exact dual bound {ub} = {float(ub):.9f} on {len(uq)} priced rows; A^T u >= cost holds: {colcheck}"
+      + ("  -- so the maximum is bracketed exactly" if colcheck else "  -- dual check FAILED, bound not exact"))
+rec = {"n": 11, "outer_side": str(L), "square_side": str(f.pl[0].side), "half_tangents": famrec["half_tangents"],
+       "placements": [[str(f.pl[j].half_tangent), str(f.pl[j].centre_x), str(f.pl[j].centre_y), str(zq[gi]), str(f.pl[j].side)]
+                      for gi, g in enumerate(groups) if zq[gi] > 0 for j in g],
+       "total_weight": str(tot),
+       "provenance": {"tool": "symmetric_max.py: D4-tied fixed-support maximum under the structural sites and the LP atom orbits"}}
+Path(sys.argv[4]).write_text(json.dumps(rec, indent=1))
+print(f"wrote {len(rec['placements'])} placements to {sys.argv[4]}")

@@ -1,0 +1,31 @@
+#!/bin/bash
+# Alternate the D4-tied fixed-support maximum with the plateau reader's own atom search:
+# each round adds every uniform-multiplicity atom the reader returns and re-solves.
+set -u
+S=/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad
+W=$S/structural-sites
+cd /home/user/squares/packing
+SEEDS=""
+for r in 1 2 3 4 5; do
+  echo "=== round $r ==="
+  .venv/bin/python3 $W/symmetric_max.py $W/deep-region-all.json \
+    $S/threshold-383/run-sites/lp-153-40/atoms.json \
+    $S/threshold-383/run-sites/family-at-n-1-exact25.json \
+    $W/loop-family-$r.json $SEEDS 2>&1 | grep -E "exact symmetric|float optimum|wrote"
+  .venv/bin/python3 -m devtools.plateau_reader $W/loop-family-$r.json --out $W/loop-reader-$r.json \
+    --time-limit 20 --cg-thresholds 2 > $W/loop-reader-$r.log 2>&1
+  n=$(.venv/bin/python3 - "$W/loop-reader-$r.json" "$W/loop-atoms-$r" <<'PY'
+import json, sys
+d = json.load(open(sys.argv[1])); out = sys.argv[2]; n = 0
+for a in d.get("violated_atoms", []):
+    pts = a.get("points") or []
+    if not pts or any(int(p.get("multiplicity", 1)) != 1 for p in pts) or len(pts) > 5:
+        continue
+    json.dump(a, open(f"{out}-{n}.json", "w")); n += 1
+print(n)
+PY
+)
+  echo "   reader returned $n uniform-multiplicity atoms; k4 max charge: $(.venv/bin/python3 -c "import json;d=json.load(open('$W/loop-reader-$r.json'));print(d['k4_two_of_three']['max_charge'], 'complete', d['k4_two_of_three']['complete'])")"
+  for i in $(seq 0 $((n-1))); do SEEDS="$SEEDS $W/loop-atoms-$r-$i.json"; done
+  [ "$n" = "0" ] && break
+done
