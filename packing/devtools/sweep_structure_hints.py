@@ -38,7 +38,7 @@ from typing import Any
 
 import numpy as np
 
-from devtools.divide_and_concur import corners_of, pair_separation, wall_clearance
+from devtools.divide_and_concur import corners_of, pair_separation
 from devtools.known_structure import (
     angle_classes,
     contact_edges,
@@ -48,7 +48,7 @@ from devtools.known_structure import (
     thinned,
     wall_contacts,
 )
-from devtools.run_projection_ratchet import ratchet
+from devtools.run_projection_ratchet import solve
 
 
 def orientation_classes(edges: list[tuple[int, int]], kinds: dict, n: int) -> list[list[int]]:
@@ -139,40 +139,59 @@ def hints(n: int, seed: int) -> list[tuple[str, dict[str, Any]]]:
     ]
 
 
+SIDES = (1.06, 1.04, 1.02, 1.01, 1.005, 1.00000001)
+"""Container sides to try, as multiples of the record, from loose to tight.
+
+A **fixed** side, from a **cold** start, because the container ratchet cannot answer this
+question. The ratchet's difficulty is dominated by escaping the trivial grid -- every
+failed run in exp-139 failed at the first tightening, all of them after exactly 48 solver
+calls -- and that swamps whatever signal the structural hints carry, so comparing rungs
+through a ratchet mostly compares how lucky each was at leaving the grid. Measured that
+way, all six arms of a first attempt returned exactly the grid and the run said nothing.
+
+Holding the side fixed removes the grid from the experiment, and the tightest side at
+which a rung still finds a packing is the "how close" the ladder is asking for.
+"""
+
+
 def _one(job: tuple[int, str, dict[str, Any], float, int, float, float, int]) -> dict[str, Any]:
-    n, name, hint, weight, seed, side, band, iters = job
+    n, name, hint, weight, seed, record_side, band, iters = job
     poses, _ = record(n)
     truth = contact_edges(poses)
     ia = np.array([e[0] for e in truth])
     ib = np.array([e[1] for e in truth])
-    # The ratchet rather than a single side, because the question is how CLOSE a rung
-    # gets, not whether it happens to hit one number. A rung that cannot reach the record
-    # but reliably beats the grid is saying something, and a binary test would discard it.
-    row = ratchet(
-        n,
-        np.random.default_rng(seed),
-        beta=0.1,
-        iters=iters,
-        monotone=iters // 4,
-        attempts=4,
-        band=band,
-        contact_weight=weight,
-        **hint,
-    )
-    poses_out = np.array(row["poses"])
-    v = corners_of(poses_out)
-    ja, jb = np.triu_indices(n, 1)
+
+    tightest = None
+    realised = 0
+    for mult in SIDES:
+        side = record_side * mult
+        out = solve(
+            n,
+            side,
+            np.random.default_rng(seed),
+            beta=0.1,
+            iters=iters,
+            monotone=iters // 3,
+            band=band,
+            contact_weight=weight,
+            **hint,
+        )
+        if out.solved:
+            tightest = mult
+            v = corners_of(out.poses)
+            realised = int((np.abs(pair_separation(v[ia], v[ib])) < 0.03).sum())
+        else:
+            # Sides are tried loose to tight, so the first failure is the wall for this
+            # seed; carrying on would only measure luck at a side already refused.
+            break
     return {
         "n": n,
         "hint": name,
         "weight": weight,
         "seed": seed,
-        "side": float(row["side"]),
-        "excess_pct": 100.0 * (float(row["side"]) - side) / side,
-        "violation": float(row["violation"]),
-        "worst_pair": float(-pair_separation(v[ja], v[jb]).min()),
-        "worst_wall": float(-wall_clearance(v, side).min()),
-        "true_edges_realised": int((np.abs(pair_separation(v[ia], v[ib])) < 0.03).sum()),
+        "tightest": tightest,
+        "excess_pct": None if tightest is None else 100.0 * (tightest - 1.0),
+        "true_edges_realised": realised,
         "true_edges": len(truth),
     }
 
@@ -184,7 +203,6 @@ def main() -> int:
     ap.add_argument("--seeds", type=int, default=8)
     ap.add_argument("--band", type=float, default=0.02)
     ap.add_argument("--iters", type=int, default=20000)
-    ap.add_argument("--slack", type=float, default=1.000000001)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--out", type=Path, default=None)
     o = ap.parse_args()
@@ -202,9 +220,12 @@ def main() -> int:
     if o.out:
         o.out.write_text(json.dumps(rows, default=str), encoding="utf-8")
 
-    print(f"{len(jobs)} ratchet runs in {time.time() - began:.0f}s, beta 0.1, band {o.band}")
     print(
-        f"{'n':>3} {'rung':>30} {'w':>3} {'best side':>12} {'excess%':>9} "
+        f"{len(jobs)} runs in {time.time() - began:.0f}s, beta 0.1, band {o.band}, "
+        f"cold starts at fixed sides"
+    )
+    print(
+        f"{'n':>3} {'rung':>30} {'w':>3} {'reached':>8} {'tightest%':>10} "
         f"{'median%':>9} {'true edges':>11}"
     )
     for n in o.n:
@@ -218,12 +239,14 @@ def main() -> int:
                 if not sel:
                     continue
                 ed = int(np.median([r["true_edges_realised"] for r in sel]))
-                best = min(r["side"] for r in sel)
-                bx = min(r["excess_pct"] for r in sel)
-                mx = float(np.median([r["excess_pct"] for r in sel]))
+                got = [r["excess_pct"] for r in sel if r["excess_pct"] is not None]
+                if not got:
+                    print(f"{n:>3} {name:>30} {weight:>3.0f} {'0/' + str(len(sel)):>8}")
+                    continue
                 print(
-                    f"{n:>3} {name:>30} {weight:>3.0f} {best:>12.7f} {bx:>+9.3f} "
-                    f"{mx:>+9.3f} {ed:>5} of {sel[0]['true_edges']:<3}"
+                    f"{n:>3} {name:>30} {weight:>3.0f} "
+                    f"{str(len(got)) + '/' + str(len(sel)):>8} {min(got):>+10.3f} "
+                    f"{float(np.median(got)):>+9.3f} {ed:>5} of {sel[0]['true_edges']:<3}"
                 )
     return 0
 

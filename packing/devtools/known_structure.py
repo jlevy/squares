@@ -167,3 +167,141 @@ def _contact_axis(va: Array, vb: Array) -> Array:
     a, b = va @ axes.T, vb @ axes.T
     gap = np.maximum(a.min(0) - b.max(0), b.min(0) - a.max(0))
     return axes[int(gap.argmax())]
+
+
+def seed_from_contacts(
+    n: int,
+    edges: list[tuple[int, int]],
+    side: float,
+    rng: np.random.Generator,
+    *,
+    classes: list[list[int]] | None = None,
+    steps: int = 400,
+) -> Array:
+    """Build a starting arrangement that already has the contact groups together.
+
+    A contact graph is a construction, not only a constraint, and using it only as the
+    latter was measured to be a mistake. Asked to satisfy declared contacts from a random
+    scatter, the search has to discover the structure and stay feasible at the same time,
+    and the contact constraints drag distant squares toward each other *through* the
+    squares between them. On the ladder that showed as a monotone cost: at `n = 11` the
+    unconstrained search packed 4 runs of 4, three declared edges packed 2, seven packed 1
+    and all fourteen packed none -- and the true graph was indistinguishable from a rewired
+    one, so only the constraint count was registering.
+
+    Laying the graph out first inverts that. Two squares in face contact have centres one
+    unit apart, so the contact graph is a unit-distance graph and the seed is its
+    embedding: edges pulled to length one, every other pair pushed to at least one, all of
+    it inside the container. The search then starts with the structure roughly built and
+    has only to settle it.
+
+    Orientations are shared within a class and random across classes, so the seed commits
+    to the *grouping* without committing to any angle.
+    """
+    pos = rng.uniform(0.5, side - 0.5, (n, 2))
+    ia, ib = np.triu_indices(n, 1)
+    wanted = np.zeros(len(ia), dtype=bool)
+    index = {
+        (int(min(i, j)), int(max(i, j))): k for k, (i, j) in enumerate(zip(ia, ib, strict=True))
+    }
+    for i, j in edges:
+        wanted[index[(int(min(i, j)), int(max(i, j)))]] = True
+
+    for _ in range(steps):
+        delta = pos[ia] - pos[ib]
+        dist = np.maximum(np.linalg.norm(delta, axis=1), 1e-9)
+        unit = delta / dist[:, None]
+        # Edges want length one exactly; strangers only want to stop overlapping, so they
+        # push when close and are silent when far. A stranger that pulled would collapse
+        # the layout into a blob.
+        pull = np.where(wanted, dist - 1.0, np.minimum(0.0, dist - 1.0))
+        force = -0.5 * pull[:, None] * unit
+        disp = np.zeros((n, 2))
+        np.add.at(disp, ia, force)
+        np.add.at(disp, ib, -force)
+        pos = np.clip(pos + 0.1 * disp, 0.5, side - 0.5)
+
+    angles = rng.uniform(0, math.pi / 2, n)
+    if classes:
+        for group in classes:
+            angles[group] = rng.uniform(0, math.pi / 2)
+    return np.column_stack([pos, angles])
+
+
+def assemble_from_faces(
+    n: int,
+    edges: list[tuple[int, int]],
+    kinds: dict[tuple[int, int], str],
+    side: float,
+    rng: np.random.Generator,
+) -> Array:
+    """Build the face-contact groups explicitly, then scatter whatever is left.
+
+    Subproblem one, done by construction rather than by search. A face-to-face contact is
+    unambiguous -- the two squares share an orientation and their centres are exactly one
+    unit apart along a face normal -- so the edge-edge subgraph can be *laid out* by walking
+    it, rather than discovered.
+
+    That it has to be laid out was measured. Asked to realise `n = 11`'s contact graph from
+    a random scatter with a slack container, the projection search satisfies all fourteen
+    declared contacts and still returns nothing usable: every angle collapses to about 44
+    degrees and two undeclared squares end up 0.012 apart, essentially on top of each other.
+    The graph is realised inside a degenerate 45-degree lattice. A contact graph does not
+    determine an assembly on its own, and the search's own preference is for the degenerate
+    realisation.
+
+    Corner contacts are deliberately not built. They join squares 36 to 45 degrees apart at
+    the records here, so there is no single offset to place them at, and guessing one would
+    impose an angle the structure never specified. They are left to the relaxation.
+    """
+    faces: dict[int, list[int]] = {i: [] for i in range(n)}
+    for i, j in edges:
+        if kinds.get((i, j)) == "edge-edge":
+            faces[i].append(j)
+            faces[j].append(i)
+
+    groups: list[dict[int, tuple[float, float, float]]] = []
+    seen: set[int] = set()
+    for root in range(n):
+        if root in seen or not faces[root]:
+            continue
+        angle = float(rng.uniform(0, math.pi / 2))
+        block: dict[int, tuple[float, float, float]] = {root: (0.0, 0.0, angle)}
+        used: dict[int, set[int]] = {}
+        queue = [root]
+        seen.add(root)
+        while queue:
+            i = queue.pop(0)
+            cx, cy, a = block[i]
+            taken = used.setdefault(i, set())
+            for j in faces[i]:
+                if j in seen:
+                    continue
+                free = [d for d in range(4) if d not in taken]
+                if not free:
+                    break
+                d = free[0]
+                taken.add(d)
+                used.setdefault(j, set()).add((d + 2) % 4)
+                theta = a + d * math.pi / 2
+                block[j] = (cx + math.cos(theta), cy + math.sin(theta), a)
+                seen.add(j)
+                queue.append(j)
+        groups.append(block)
+
+    # Each block was built about its own origin, so it has to be given a place. Blocks go
+    # down at random centres and everything unattached is scattered; the relaxation sorts
+    # out the collisions, which it can do because the blocks are already correct inside.
+    poses = np.zeros((n, 3))
+    poses[:, 0] = rng.uniform(0.5, side - 0.5, n)
+    poses[:, 1] = rng.uniform(0.5, side - 0.5, n)
+    poses[:, 2] = rng.uniform(0, math.pi / 2, n)
+    for block in groups:
+        members = sorted(block)
+        local = np.array([block[i] for i in members])
+        span = np.abs(local[:, :2]).max() + 1.0
+        anchor = rng.uniform(min(span, side / 2), max(span, side - span), 2)
+        poses[members, 0] = local[:, 0] + anchor[0]
+        poses[members, 1] = local[:, 1] + anchor[1]
+        poses[members, 2] = local[:, 2]
+    return poses
