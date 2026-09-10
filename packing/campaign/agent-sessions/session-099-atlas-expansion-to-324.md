@@ -121,15 +121,20 @@ session:
     focus: process
     recording: contemporaneous
     clock_role: work
-    objective: Hold the record open for the owner's decisions (D2, 325..400, the poster
-      raster), the hosted re-run of the re-priced tiers, the full checkpoint before merge, and
-      the harness rollup that lets this session name what it cost and the gate that certified
-      it. No further autonomous work is planned in this phase.
+    objective: Hold the record open for the remaining owner decisions (325..400 and the
+      poster raster, both optional), the hosted re-run of the re-priced tiers, the full
+      checkpoint before merge, and the harness rollup that lets this session name what it
+      cost and the gate that certified it. D2 was confirmed on 2026-09-10 -- the derived
+      numerical facts are retained in this project's own atlas because they are
+      mathematical facts, for the Kingbird catalogue, derived facts only, with
+      raw_asset_retained false standing. No further autonomous work is planned in this
+      phase.
     bead: think-0juv
     status: in_progress
     entered_by: planned_checkpoint
     switch_reason: The bounded work is complete and committed on PR 111; only records that
-      depend on the owner, CI and the harness remain.
+      depend on the owner, CI and the harness remain. D2, the one decision that blocked the
+      merge, cleared on 2026-09-10; what is left of the owner's list is optional.
     budget_minutes: 8730
     started_at: '2026-09-07T15:30:00Z'
     deadline_at: '2026-09-13T17:00:00Z'
