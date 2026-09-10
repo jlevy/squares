@@ -1,11 +1,12 @@
-# Agenda 034, lane X4: sixteen sectors do not break neutrality, and no bin count can
+# Agenda 034, lane X4: sixteen sectors retain six neutral subclasses
 
 Retained measurement-lane report for
 [X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) and
 [`H-157`](../../../../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md),
 run 2026-09-10 against `claude/n-11-stronger-result-d730ds` at `67ccd16b`, read-only on
-the repository. The report is reproduced as delivered, with its own findings and status
-labels; only its file references were rewritten to say where each file now is.
+the repository. The measurement tables are retained as delivered.
+The interpretive headings and summaries have been narrowed in place; the correction
+snapshot beside this report preserves the earlier wording.
 X-026 carries the corrected reading and states the local angular and pose propositions
 with the finite-universe, fixed-domain and mark premises identified by source review.
 
@@ -61,33 +62,31 @@ and the
 
 The delivered cap-transfer claim near `3.868983` also remains unendorsed: no conditional
 transfer is established without the owner, class, patch and routing premises identified
-in R2. The original wording below is retained to make the correction traceable.
+in R2. The correction snapshot beside this report retains the earlier wording for
+traceability.
 
 ## Delivered Account
 
 Labels: **EXACT** = a rational decision by repository primitives; **CHECKED** = a float
 reading; **RECORD** = read from a file in the repository; **OPEN** = not measured.
 
-## Verdict
+## Registered verdict
 
-**H-157 is refuted, and by more than it asked for.** Six of the eight refined subclasses
-of the four neutral eight-sector classes still carry survivor weight **exactly 10**;
-only two drop, and they drop to `19/2`, not to the predicted `79/8`. Step 3 of X-026
-(`packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md`)
-stands at sixteen sectors exactly as it stands at eight.
+**H-157 is rejected on its registered sixteen-sector prediction.** Six of the eight
+refined subclasses of the four neutral eight-sector classes still carry survivor weight
+**exactly 10**; only two drop, and they drop to `19/2`, not to the predicted `79/8`.
+Thus this particular sixteen-sector split does not close every raw class.
 
-The measurement also settles the question one resolution further out than it was asked.
-Screening the **singleton limit** — one class per retained signed ray, the finest
-angular conditioning that exists — leaves **135 classes per mark at exactly 10**, and
-those 135 rays form a contiguous arc `34.40698` degrees wide.
-Any closed angular bin that contains one of them has survivor weight exactly 10,
-whatever the bin count.
-**No angular refinement of the owner-sector conditioning can break neutrality**, so
-escape 1 of X-026 §5 is closed at every resolution rather than only at sixteen.
-**Narrowed, not closed: the lane’s “closed” means only that patch refinement is ruled
-out as the lever.
-[X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
-escape 1 carries the corrected reading.**
+The measurement also probes the finest split of the **retained finite signed-ray
+universe**: one class per retained ray.
+It leaves **135 classes per mark at exactly 10**, and those 135 rays form a contiguous
+arc `34.40698` degrees wide.
+Any closed bin in a partition of that retained ray universe that contains one of them
+has survivor weight exactly 10 under the same patch-only residual model.
+This obstructs closing every raw class merely by repartitioning those rays and shrinking
+the same kind of guaranteed patch.
+It does not decide physical routing, a different pose universe, a stronger residual
+domain, a different occupied-region argument, or richer charges.
 
 ## The instrument
 
@@ -189,12 +188,13 @@ The patch grows only into directions that lead away from the obstruction.
 H-157’s `0.015` was measured as a gap to the patch; it is really a gap to the mark, and
 no angular conditioning moves the mark.
 
-## The refinement limit: no bin count works
+## The retained finite-ray universe still has neutral classes
 
-The finest angular conditioning available is one class per retained signed ray — the
+The finest partition used by this instrument is one class per retained signed ray — the
 class “`e_1` is exactly the ray `r`” — whose guaranteed patch is exactly the anchored
-quarter-core `Q_r(m)`. That split is finite (1444 classes per mark) and exhaustive, and
-every coarser angular partition is a coarsening of it.
+quarter-core `Q_r(m)`. That split is finite (1444 classes per mark) and exhaustive for
+the retained ray universe.
+Every closed-bin partition of that same universe is a coarsening of it.
 
 **EXACT, 1444 classes per mark:**
 
@@ -207,7 +207,8 @@ every coarser angular partition is a coarsening of it.
 | width of that arc | `34.40698` deg | `34.40698` deg |
 | contiguous in the ray order | yes, all 135 | yes, all 135 |
 
-That gives a general statement, EXACT and independent of bin count:
+That gives an exact statement for every closed-bin partition of this retained ray
+universe:
 
 > **Every closed angular bin containing at least one of the 135 neutral rays has
 > survivor weight exactly 10.**
@@ -218,15 +219,12 @@ That gives a general statement, EXACT and independent of bin count:
 > in `F`, so `F` meets every core containing the mark; the mark clique weighs exactly 1
 > (F3), so `w(F) <= 11 - 1 = 10`. Hence `w(F) = 10`.
 
-The neutral arc has positive width, so **every** partition of the owner’s pose angle
-into closed bins has at least one bin meeting it, and that bin is exactly neutral.
-Escape 1 of X-026 §5 is therefore closed at every angular resolution, not refuted only
-at sixteen.
-
-**Narrowed, not closed: the lane’s “closed” means only that patch refinement is ruled
-out as the lever.
-[X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
-escape 1 carries the corrected reading.**
+Every retained neutral ray belongs to a bin, so every such partition has at least one
+bin with survivor weight exactly 10 in this model.
+The conclusion is confined to the retained rays, the intersection-patch construction and
+the fixed patch-only residual domain.
+It does not settle whether physical packings can be routed to already excluded classes
+or whether added parent, wall or joint restrictions remove the survivors.
 
 The prediction was then checked against the screen rather than left as an argument
 (EXACT). The bins that meet the neutral arc, and their measured survivor weights:
@@ -238,10 +236,10 @@ The prediction was then checked against the screen rather than left as an argume
 
 Those are precisely the six sixteen-bin classes the screen found at exactly 10, and
 precisely the four eight-bin classes lane X1 found.
-The arc predicts the neutral classes at both resolutions, and it predicts at least one
-at every other resolution too.
+Within the same finite-ray construction, the singleton result predicts at least one
+neutral bin at every other closed-bin resolution as well.
 
-## The obstruction is at pose level, not at sector level
+## One retained pose obstructs the same patch-only relaxation
 
 One conditioning strictly stronger than any angular split was probed: fix the owner’s
 whole core, not just its direction.
@@ -258,13 +256,13 @@ corner cores of weight `1/8` each, centred at `(45133461/88696100, 25096071/4931
 and its diagonal mirror — a mirror pair, not one square counted twice; both sit inside
 the container and both contain both marks (EXACT).
 
-Any conditioning at all whose guaranteed patch lies inside the owner’s core — which is
-what makes the patch guaranteed — has a class containing the pose of member `#59`, and
-that class’s patch is a subset of `#59`’s core, so its survivor weight is at least 10
-against a requirement strictly below 10. Refining the patch is therefore the wrong lever
-at every level of the pose, not only at the angular level.
-What would remove that class is a proof that the pose cannot occur in an eleven-square
-packing, which is X-026’s escape 2 (emptiness) and not a covering argument at all.
+For every partition of a retained pose universe that includes member `#59`, if the class
+containing it uses a guaranteed patch lying inside every member’s core, that patch is a
+subset of `#59`’s core.
+Its survivor weight is therefore at least 10 against a requirement strictly below 10.
+This is a local obstruction for that raw class and residual model.
+It does not show that the pose extends to an eleven-square packing, that the class is
+forced, or that a valid selection cannot be routed to another excluded class.
 
 ## Cross-checks
 
@@ -293,24 +291,22 @@ so the trap stays on the record.
 
 ## What this means for X-026
 
-- **Step 3 stands, and is stronger than it was stated.** X-026 §5 escape 1 said
-  neutrality is a property of the current eight-sector patches.
-  It is not: it is a property of the mark and the mass-eleven ceiling family, and it
-  survives every angular refinement and the pose-level refinement sampled here.
+- **The registered sixteen-sector prediction fails.** Six of the eight refined
+  subclasses remain neutral.
+  On the retained mass-eleven family and patch-only domain, the singleton-ray probe also
+  leaves 135 neutral classes per mark, and the retained pose `#59` gives the local
+  subset obstruction stated above.
 - **Steps 4, 5 and 6 are untouched**, and Step 6’s rank-one cap of `3.868983` never used
   the patch in the first place.
   Not endorsed: PR 139 finding R2 holds that no conditional transfer of that cap is
   established without a separate owner, class, patch and routing verification.
-- **Escape 1 can be marked closed.** Narrowed rather than closed: the lane’s “closed”
-  means only that patch refinement is ruled out as the lever, and
-  [X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
-  escape 1 carries the corrected reading.
-  Escapes 2 (empty classes) and 3 (compatibility pruning) are untouched by this
-  measurement and remain exactly as open as they were.
-- The conditional **point-cover** line can now be closed in the record at every angular
-  resolution — narrowed rather than closed, on the same reading as the bullet above.
-  The conditional **threshold** line (H-155) is untouched: this lane measured deletions,
-  not atoms.
+- **Escape 1 is narrowed.** Repartitioning the retained rays while using the same
+  intersection-patch construction cannot make every raw class improve on this ceiling
+  family. Escapes 2 (empty classes), 3 (compatibility pruning), physical-selection
+  routing and stronger source domains are untouched.
+- The conditional **point-cover** statement reaches only those raw classes on the fixed
+  patch-only domain. The conditional **threshold** line (H-155) is untouched: this lane
+  measured deletions, not atoms.
 
 ## Costs and files
 

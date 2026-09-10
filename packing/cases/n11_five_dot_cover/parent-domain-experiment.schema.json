@@ -1,0 +1,577 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wall-owner-parent-experiment/v1",
+  "title": "Prospective wall-owner parent-domain experiment result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "outcome",
+    "claim_limit",
+    "sources",
+    "settings",
+    "clocks",
+    "authority",
+    "residual_check",
+    "comparisons",
+    "summary",
+    "error"
+  ],
+  "properties": {
+    "schema": {"const": "wall-owner-parent-experiment/v1"},
+    "status": {"enum": ["complete", "partial", "invalid"]},
+    "outcome": {
+      "enum": [
+        "residual-self-excluded",
+        "b-only-incompatible",
+        "owner-domain-gain",
+        "no-owner-domain-exclusion",
+        "incomplete",
+        "invalid"
+      ]
+    },
+    "claim_limit": {
+      "const": "fixed exp151 residual pose against individual selected owner classes under the necessary global-D parent-centre rule; no simultaneous owner feasibility, neighbourhood exclusion, or global n=11 conclusion"
+    },
+    "sources": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/sources"}
+      ]
+    },
+    "settings": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/settings"}
+      ]
+    },
+    "clocks": {"$ref": "#/$defs/clocks"},
+    "authority": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/authority"}
+      ]
+    },
+    "residual_check": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/residualCheck"}
+      ]
+    },
+    "comparisons": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/comparison"}
+    },
+    "summary": {"$ref": "#/$defs/summary"},
+    "error": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "nonnegativeNumber": {"type": "number", "minimum": 0},
+    "exact": {
+      "type": "string",
+      "pattern": "^-?(?:0|[1-9][0-9]*)(?:/[1-9][0-9]*)?$"
+    },
+    "point": {
+      "type": "array",
+      "prefixItems": [
+        {"$ref": "#/$defs/exact"},
+        {"$ref": "#/$defs/exact"}
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "polygon": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/point"}
+    },
+    "directionSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["folded_index", "reflected"],
+      "properties": {
+        "folded_index": {"type": "integer", "minimum": 0},
+        "reflected": {"type": "boolean"}
+      }
+    },
+    "frameIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ray",
+        "orientation_index",
+        "quarter_turn",
+        "sources"
+      ],
+      "properties": {
+        "ray": {"$ref": "#/$defs/point"},
+        "orientation_index": {"type": "integer", "minimum": 0},
+        "quarter_turn": {"type": "integer"},
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/directionSource"}
+        }
+      }
+    },
+    "footprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "disposition",
+        "centre_dimension",
+        "centre_set",
+        "support_r",
+        "support_jr",
+        "common_rectangle"
+      ],
+      "properties": {
+        "disposition": {"enum": ["allowed", "empty"]},
+        "centre_dimension": {"type": "integer", "minimum": -1, "maximum": 2},
+        "centre_set": {"$ref": "#/$defs/polygon"},
+        "support_r": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "array",
+              "prefixItems": [
+                {"$ref": "#/$defs/exact"},
+                {"$ref": "#/$defs/exact"}
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "support_jr": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "array",
+              "prefixItems": [
+                {"$ref": "#/$defs/exact"},
+                {"$ref": "#/$defs/exact"}
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "common_rectangle": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/polygon"}
+          ]
+        }
+      }
+    },
+    "axisMaximum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "axis",
+        "minimum_owner_projection",
+        "owner_radius",
+        "residual_radius",
+        "slack",
+        "canonical_owner_centre",
+        "owner_centre"
+      ],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "axis": {"$ref": "#/$defs/point"},
+        "minimum_owner_projection": {"$ref": "#/$defs/exact"},
+        "owner_radius": {"$ref": "#/$defs/exact"},
+        "residual_radius": {"$ref": "#/$defs/exact"},
+        "slack": {"$ref": "#/$defs/exact"},
+        "canonical_owner_centre": {"$ref": "#/$defs/point"},
+        "owner_centre": {"$ref": "#/$defs/point"}
+      }
+    },
+    "frameExtremum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_index",
+        "frame",
+        "owner_u",
+        "owner_v",
+        "axes_checked",
+        "maximum"
+      ],
+      "properties": {
+        "frame_index": {"type": "integer", "minimum": 0},
+        "frame": {"$ref": "#/$defs/frameIdentity"},
+        "owner_u": {"$ref": "#/$defs/point"},
+        "owner_v": {"$ref": "#/$defs/point"},
+        "axes_checked": {"const": 8},
+        "maximum": {"$ref": "#/$defs/axisMaximum"}
+      }
+    },
+    "derivedFrame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_index",
+        "frame",
+        "extent",
+        "parent_box",
+        "original",
+        "restricted"
+      ],
+      "properties": {
+        "frame_index": {"type": "integer", "minimum": 0},
+        "frame": {"$ref": "#/$defs/frameIdentity"},
+        "extent": {"$ref": "#/$defs/exact"},
+        "parent_box": {"$ref": "#/$defs/polygon"},
+        "original": {"$ref": "#/$defs/footprint"},
+        "restricted": {"$ref": "#/$defs/footprint"}
+      }
+    },
+    "bOnlyResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "expected_frames",
+        "checked_frames",
+        "frame_extrema",
+        "observed_maximum_slack",
+        "global_maximum_slack",
+        "error"
+      ],
+      "properties": {
+        "status": {"enum": ["compatible", "incompatible", "partial"]},
+        "expected_frames": {"type": "integer", "minimum": 1},
+        "checked_frames": {"type": "integer", "minimum": 0},
+        "frame_extrema": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/frameExtremum"}
+        },
+        "observed_maximum_slack": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/exact"}]
+        },
+        "global_maximum_slack": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/exact"}]
+        },
+        "error": {"type": ["string", "null"]}
+      }
+    },
+    "parentResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "expected_frames",
+        "derived_frames",
+        "frame_extrema",
+        "observed_maximum_slack",
+        "global_maximum_slack",
+        "error"
+      ],
+      "properties": {
+        "status": {"enum": ["compatible", "incompatible", "impossible", "unresolved"]},
+        "expected_frames": {"type": "integer", "minimum": 1},
+        "derived_frames": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/derivedFrame"}
+        },
+        "frame_extrema": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/frameExtremum"}
+        },
+        "observed_maximum_slack": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/exact"}]
+        },
+        "global_maximum_slack": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/exact"}]
+        },
+        "error": {"type": ["string", "null"]}
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corner",
+        "corner_index",
+        "class_index",
+        "class_id",
+        "status",
+        "attribution",
+        "b_only",
+        "parent_restricted",
+        "error"
+      ],
+      "properties": {
+        "corner": {"enum": ["BL", "BR", "TL", "TR"]},
+        "corner_index": {"type": "integer", "minimum": 0, "maximum": 3},
+        "class_index": {"type": "integer", "minimum": 0, "maximum": 15},
+        "class_id": {"type": "string", "minLength": 1},
+        "status": {"enum": ["complete", "partial"]},
+        "attribution": {
+          "enum": [
+            "b-only-incompatible",
+            "owner-domain-gain",
+            "still-compatible",
+            "unresolved"
+          ]
+        },
+        "b_only": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/bOnlyResult"}]
+        },
+        "parent_restricted": {
+          "oneOf": [{"type": "null"}, {"$ref": "#/$defs/parentResult"}]
+        },
+        "error": {"type": ["string", "null"]}
+      }
+    },
+    "receiptIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "git_commit", "git_blob", "producer_revision"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "git_blob": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "producer_revision": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation",
+        "endpoint",
+        "wall",
+        "selected_cover",
+        "strict_escape"
+      ],
+      "properties": {
+        "implementation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["git_commit", "entry_point", "dependency_paths", "result_schema"],
+          "properties": {
+            "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+            "entry_point": {"const": "devtools.wall_owner_parent_experiment"},
+            "dependency_paths": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "result_schema": {
+              "const": "packing/cases/n11_five_dot_cover/parent-domain-experiment.schema.json"
+            }
+          }
+        },
+        "endpoint": {"$ref": "#/$defs/receiptIdentity"},
+        "wall": {"$ref": "#/$defs/receiptIdentity"},
+        "selected_cover": {"$ref": "#/$defs/receiptIdentity"},
+        "strict_escape": {"$ref": "#/$defs/receiptIdentity"}
+      }
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outer_side",
+        "core_side",
+        "tangent_bound",
+        "parent_rule",
+        "selection_rule",
+        "candidate",
+        "physical_owner_order",
+        "scientific_allowance_seconds",
+        "external_bound_seconds",
+        "termination_grace_seconds"
+      ],
+      "properties": {
+        "outer_side": {"$ref": "#/$defs/exact"},
+        "core_side": {"$ref": "#/$defs/exact"},
+        "tangent_bound": {"$ref": "#/$defs/exact"},
+        "parent_rule": {"const": "global-D"},
+        "selection_rule": {"type": "string", "minLength": 1},
+        "candidate": {
+          "type": "array",
+          "prefixItems": [
+            {"const": 0},
+            {"const": 0},
+            {"const": 0},
+            {"const": 7}
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "physical_owner_order": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "TR"},
+            {"const": "BL"},
+            {"const": "BR"},
+            {"const": "TL"}
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "scientific_allowance_seconds": {"const": 90},
+        "external_bound_seconds": {"const": 120},
+        "termination_grace_seconds": {"const": 2}
+      }
+    },
+    "clocks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_replay_seconds",
+        "scientific_seconds",
+        "process_seconds",
+        "scientific_started"
+      ],
+      "properties": {
+        "source_replay_seconds": {"$ref": "#/$defs/nonnegativeNumber"},
+        "scientific_seconds": {"$ref": "#/$defs/nonnegativeNumber"},
+        "process_seconds": {"$ref": "#/$defs/nonnegativeNumber"},
+        "scientific_started": {"type": "boolean"}
+      }
+    },
+    "residualAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "label", "ray", "turned_ray", "sources"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 0},
+        "label": {"type": "string", "minLength": 1},
+        "ray": {"$ref": "#/$defs/point"},
+        "turned_ray": {"$ref": "#/$defs/point"},
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/directionSource"}
+        }
+      }
+    },
+    "physicalMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "xx",
+        "xy",
+        "yx",
+        "yy",
+        "tx",
+        "ty",
+        "target_family",
+        "corner_permutation"
+      ],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "xx": {"type": "integer"},
+        "xy": {"type": "integer"},
+        "yx": {"type": "integer"},
+        "yy": {"type": "integer"},
+        "tx": {"$ref": "#/$defs/exact"},
+        "ty": {"$ref": "#/$defs/exact"},
+        "target_family": {"type": "integer"},
+        "corner_permutation": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {"type": "integer", "minimum": 0, "maximum": 3}
+        }
+      }
+    },
+    "ownerAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corner",
+        "corner_index",
+        "class_index",
+        "class_id",
+        "owner_mark",
+        "physical_map",
+        "expected_frames"
+      ],
+      "properties": {
+        "corner": {"enum": ["BL", "BR", "TL", "TR"]},
+        "corner_index": {"type": "integer", "minimum": 0, "maximum": 3},
+        "class_index": {"type": "integer", "minimum": 0, "maximum": 15},
+        "class_id": {"type": "string", "minLength": 1},
+        "owner_mark": {"$ref": "#/$defs/point"},
+        "physical_map": {"$ref": "#/$defs/physicalMap"},
+        "expected_frames": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/frameIdentity"}
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["residual_manifest", "selected_residual_index", "selected_owners"],
+      "properties": {
+        "residual_manifest": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/residualAuthority"}
+        },
+        "selected_residual_index": {"type": "integer", "minimum": 0},
+        "selected_owners": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {"$ref": "#/$defs/ownerAuthority"}
+        }
+      }
+    },
+    "residualCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "centre", "ray", "sources", "extent", "parent_box"],
+      "properties": {
+        "status": {"enum": ["inside-parent-box", "outside-parent-box"]},
+        "centre": {"$ref": "#/$defs/point"},
+        "ray": {"$ref": "#/$defs/point"},
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/directionSource"}
+        },
+        "extent": {"$ref": "#/$defs/exact"},
+        "parent_box": {"$ref": "#/$defs/polygon"}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_residual_orientations",
+        "bound_residual_orientations",
+        "expected_selected_owners",
+        "bound_selected_owners",
+        "completed_comparisons"
+      ],
+      "properties": {
+        "expected_residual_orientations": {"const": 361},
+        "bound_residual_orientations": {"type": "integer", "minimum": 0},
+        "expected_selected_owners": {"const": 4},
+        "bound_selected_owners": {"type": "integer", "minimum": 0},
+        "completed_comparisons": {"type": "integer", "minimum": 0, "maximum": 4}
+      }
+    }
+  }
+}

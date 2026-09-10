@@ -44,6 +44,7 @@ from decimal import ROUND_HALF_UP, Decimal, InvalidOperation, localcontext
 from pathlib import Path
 
 from devtools.check_rung_figures import round_to
+from devtools.check_session_rollups import unmeasured_resource_problems
 from devtools.render_certificate_reach import reported_covering_values
 from sqpack.yamlio import safe_load
 
@@ -387,14 +388,26 @@ def session_handoff_key(session: dict, session_number: int) -> tuple[str, str, i
     return terminal_at, started_at, session_number
 
 
+def is_administrative_unmeasured_closeout(session: dict) -> bool:
+    """Recognize an exact, explicit accounting closeout that carries no work handoff."""
+    marker = session.get("resource_usage_unmeasured")
+    if not isinstance(marker, dict):
+        return False
+    if marker.get("handoff_role") != "administrative_closeout":
+        return False
+    identifier = str(session.get("id") or "session")
+    return not unmeasured_resource_problems(identifier, session)
+
+
 def select_latest_terminal_session(
     records: Iterable[tuple[Path, dict]],
 ) -> tuple[Path, dict] | None:
-    """Select the terminal session whose terminal clock is latest."""
+    """Select the latest terminal work handoff, excluding exact admin closeouts."""
     terminal = [
         (path, session)
         for path, session in records
         if session.get("status") in {"completed", "stopped"}
+        and not is_administrative_unmeasured_closeout(session)
     ]
     if not terminal:
         return None

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Every terminal session names the resource rollups it produced, and they exist.
+"""Every terminal session names its resource measurement, and every receipt exists.
 
 A session record says what was attempted and what came back. What it never said is what it
 cost, and not for want of the data: `campaign/resource-usage/` holds enforced
@@ -14,8 +14,12 @@ measurement gap is a tool rather than a better memory, so the link is now a requ
 at terminal state and this checks both its existence and its enforced contract.
 
 Sessions that closed before the field existed are listed as **grandfathered** rather than
-silently skipped. A checker that hides what it is not checking is the same failure one level
-up.
+silently skipped. A stopped session may explicitly say native harness data is unavailable,
+but only by naming the reason and the bead that dispositioned the missing source. This
+measurement state is independent of certification: a later gate can clear
+``certification_pending`` while the honest unmeasured marker remains. The checker reports
+that case as unmeasured; it never turns an absent receipt into a measurement. A checker that
+hides what it is not checking is the same failure one level up.
 
 Usage:
     uv run --frozen python -m devtools.check_session_rollups
@@ -23,10 +27,15 @@ Usage:
 
 from __future__ import annotations
 
+import functools
+import json
 import pathlib
 import re
+import shutil
+import subprocess
 import sys
 from collections.abc import Iterable, Mapping
+from typing import Literal
 
 import yaml
 
@@ -39,6 +48,7 @@ REPO = ROOT.parent
 ROLLUP_REFERENCE = re.compile(
     r"packing/campaign/resource-usage/[A-Za-z0-9][A-Za-z0-9._-]*\.yaml"
 )
+BEAD_REFERENCE = re.compile(r"think-[a-z0-9]+")
 
 TERMINAL = {"completed", "stopped"}
 SUPPORTED_ROLLUP_CONTRACTS = {
@@ -52,6 +62,51 @@ GRANDFATHERED_BEFORE = "session-045"
 Named as a boundary rather than a list so the exemption cannot quietly grow: a new session
 is above it by construction, and moving it is a visible edit.
 """
+
+UNMEASURED_REASON = "native_harness_data_unavailable"
+"""The sole reason that can replace a terminal resource receipt.
+
+The value is deliberately an enum of one rather than free text. A new failure mode must
+become an explicit contract change instead of quietly broadening the exception.
+"""
+
+UNMEASURED_HANDOFF_ROLES = frozenset({"administrative_closeout", "work_handoff"})
+"""Explicit handoff roles; prose and session age never decide this distinction."""
+
+type BeadPresence = Literal["present", "missing", "unresolved"]
+
+
+@functools.cache
+def disposition_bead_presence(reference: str) -> BeadPresence:
+    """Resolve a short bead id when tbd can answer, without making it a build dependency."""
+    if shutil.which("tbd") is None:
+        return "unresolved"
+    try:
+        shown = subprocess.run(
+            ("tbd", "show", reference, "--json"),
+            capture_output=True,
+            text=True,
+            check=False,
+            cwd=str(REPO),
+            timeout=30,
+        )
+    except OSError, subprocess.SubprocessError:
+        return "unresolved"
+    try:
+        payload = json.loads(shown.stdout or shown.stderr)
+    except ValueError:
+        return "unresolved"
+    presence: BeadPresence = "unresolved"
+    if shown.returncode != 0:
+        if isinstance(payload, dict) and payload.get("type") == "NotFoundError":
+            presence = "missing"
+    else:
+        issues = payload if isinstance(payload, list) else [payload]
+        if any(
+            isinstance(issue, dict) and isinstance(issue.get("status"), str) for issue in issues
+        ):
+            presence = "present"
+    return presence
 
 
 def canonical_resource_rollup_reference(reference: object) -> str | None:
@@ -73,6 +128,57 @@ def unique_resource_rollups(session: Mapping[str, object]) -> list[str]:
     if not isinstance(declared, list):
         return []
     return list(dict.fromkeys(str(reference) for reference in declared))
+
+
+def unmeasured_resource_problems(name: str, session: Mapping[str, object]) -> list[str]:
+    """Validate the narrow stopped-session declaration for unavailable native data."""
+    if "resource_usage_unmeasured" not in session:
+        return []
+    problems: list[str] = []
+    marker = session.get("resource_usage_unmeasured")
+    if not isinstance(marker, Mapping):
+        return [f"{name}: resource_usage_unmeasured must be a mapping"]
+    expected_fields = {"reason", "detail", "disposition_bead", "handoff_role"}
+    if set(marker) != expected_fields:
+        problems.append(
+            f"{name}: resource_usage_unmeasured fields must be exactly "
+            f"{sorted(expected_fields)}"
+        )
+    if session.get("status") != "stopped":
+        problems.append(f"{name}: resource_usage_unmeasured is allowed only when stopped")
+    stop_reason = session.get("stop_reason")
+    if not isinstance(stop_reason, str) or not stop_reason.strip():
+        problems.append(f"{name}: resource_usage_unmeasured requires a nonblank stop_reason")
+    if session.get("resource_rollups") != []:
+        problems.append(
+            f"{name}: resource_usage_unmeasured requires an explicit empty "
+            "resource_rollups list"
+        )
+    reason = marker.get("reason")
+    if reason != UNMEASURED_REASON:
+        problems.append(
+            f"{name}: resource_usage_unmeasured reason must be {UNMEASURED_REASON!r}"
+        )
+    detail = marker.get("detail")
+    if not isinstance(detail, str) or not detail.strip():
+        problems.append(f"{name}: resource_usage_unmeasured requires a nonblank detail")
+    handoff_role = marker.get("handoff_role")
+    if handoff_role not in UNMEASURED_HANDOFF_ROLES:
+        problems.append(
+            f"{name}: resource_usage_unmeasured handoff_role must be one of "
+            f"{sorted(UNMEASURED_HANDOFF_ROLES)}"
+        )
+    owner = marker.get("disposition_bead")
+    if not isinstance(owner, str) or BEAD_REFERENCE.fullmatch(owner) is None:
+        problems.append(
+            f"{name}: resource_usage_unmeasured disposition_bead must name one well-formed bead"
+        )
+    elif not problems and disposition_bead_presence(owner) == "missing":
+        problems.append(
+            f"{name}: resource_usage_unmeasured disposition_bead {owner} does not resolve "
+            "in the available tbd store"
+        )
+    return problems
 
 
 def codex_branch_claims(
@@ -137,10 +243,17 @@ def main() -> int:
     grandfathered: list[str] = []
     checked = 0
     rollups = 0
+    unmeasured: list[str] = []
     records = sessions()
     codex_references: set[str] = set()
     for path, session in records:
         identifier = str(session.get("id", path.stem))
+        if "resource_usage_unmeasured" in session:
+            marker_problems = unmeasured_resource_problems(path.name, session)
+            problems.extend(marker_problems)
+            if not marker_problems:
+                unmeasured.append(identifier)
+            continue
         if str(session.get("status")) not in TERMINAL:
             continue
         raw_declared = session.get("resource_rollups") or []
@@ -196,6 +309,11 @@ def main() -> int:
     if problems:
         return 1
     print(f"  {checked} terminal sessions declare {rollups} resource rollups, all present")
+    if unmeasured:
+        print(
+            f"  {len(unmeasured)} stopped sessions explicitly record unavailable "
+            "resource measurement: " + ", ".join(unmeasured)
+        )
     if grandfathered:
         print(
             f"  {len(grandfathered)} closed before the field existed and are not checked: "

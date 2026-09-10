@@ -36,7 +36,7 @@ independent proof of every retained theorem.
 | Recorded experiments | Exp145–153 retain their original results and criteria; no subsequent scientific target ran |
 | Narrative and inference scope | PASS within the sources and checks listed below |
 | Two-attainer source | Separate GO and twelve synthetic controls; unregistered, unrun target |
-| Unit-parent analytic proposal | Author-lane proof check completed; independent review, implementation admission and measurement remain open |
+| Unit-parent analytic proposal | Formula independently reviewed; translated 88-core and A6 families independently checked to have exact individual parents on their stated ranges; conditional owner measurement remains open |
 
 ## Facts and Implications Checked
 
@@ -85,10 +85,14 @@ independent proof of every retained theorem.
 - The unit-parent half-box is an analytic necessary condition.
   The stronger formula is in the
   [durable contract](../../../packing/cases/n11_five_dot_cover/unit-parent-centre-contract.md).
-  Its [author-lane check](review-2026-09-10-n11-parent-centre-author-check.md) found no
-  error under the stated hypotheses; independent review remains open.
-  The check identifies explicit empty-frame handling and replay of the added parent
-  restriction as implementation obligations.
+  Its [author-lane check](review-2026-09-10-n11-parent-centre-author-check.md) and
+  [independent review](review-2026-09-10-n11-parent-centre-independent-review.md) found
+  no error under the stated hypotheses.
+  A later
+  [realizability review](review-2026-09-10-n11-parent-realizability-independent.md)
+  independently constructed exact parents for the translated 88-core and A6 families.
+  The implementation review identifies explicit empty-frame handling and replay of the
+  added parent restriction as target obligations.
   These are preparation findings, not additional exp145–153 target results.
   No footprint gain, removed escape, comparative productivity result, or physical case
   exclusion is attributed to that proposal.
@@ -300,10 +304,65 @@ final checkout, gate and merge disposition.
 
 The work map is think-a4an for source reconciliation, think-aocp for A6, think-9zc9 for
 H157 and think-yl6y for the final checkpoint.
-The prospective overnight epic think-gvlg keeps separate pricing, pair, parent-domain,
-atom-format and efficiency beads.
+The superseding daytime epic think-gvlg keeps separate pricing, pair, parent-domain,
+atom-format, structural and efficiency beads.
 The owner’s V3-plan alignment request is tracked in think-i1fr with its source path
 still pending; this review does not claim compliance with an unread specification.
+
+## Daytime Evidence Review — September 10, 2026
+
+The
+[evidence account’s §14](../research/research-2026-09-09-n11-evidence-and-inference.md#14-daytime-evidence-after-pr139)
+records three post-PR139 strategy results.
+They change the experiment queue and one retained structural statement; they do not
+change the global bracket.
+
+| Evidence | Review disposition and boundary |
+| --- | --- |
+| Individual unit-parent domain | The translated retained 88-core point obstruction has an explicit concentric unit parent for every placement throughout `q >= 76469/20000 = 3.82345`, at zero net mismatch. This removes fixed-B point-only solves that merely strengthen isolated-parent containment while retaining the used nodes; it does not decide changed atoms, angle subcells excluding those nodes, owner/contact conditions, joint compatibility or routing |
+| Parent experiment instrument | The exact adapter, source binder, closed schema, production runner and independently recomputing readback passed 56 focused tests and a separate adversarial admission review. A clean implementation commit, prospective registration and independently read actual result remain prerequisites; no target result is recorded |
+| Weighted five-site atom | The token-budget proof is exact. On the abstract five-site trace universe, the weighted `(2,2,1,1,1)`, threshold-four atom has budget one, whereas ordinary distinct-site threshold atoms need budget at least `4/3` to charge every weighted-positive trace. Geometric realization, a maintained representation and a complete cover remain open |
+| Fixed-angle contact argument | A tight row in an arbitrary selected SAT cell need not be physical contact. The old per-cell rank conclusion survives, but its physical-contact inference is withdrawn. A separate lexicographic theorem gives a genuine-contact representative in each connected component of the full fixed-angle feasible space; its independent review is recorded in the structural review |
+
+The [parent translation review](review-2026-09-10-n11-parent-domain-translation.md), its
+[independent realizability review](review-2026-09-10-n11-parent-realizability-independent.md),
+[parent adapter admission](review-2026-09-10-n11-parent-adapter-admission.md),
+[independent runner admission](review-2026-09-10-n11-parent-runner-independent.md),
+[BC329 packet preflight](review-2026-09-10-n11-bc329-packet-preflight.md),
+[weighted-atom review](review-2026-09-10-n11-weighted-five-site-atoms.md), and
+[structural review](review-2026-09-10-n11-structural-normal-forms.md) carry the complete
+assumptions, proofs and controls.
+
+The structural correction is narrow but consequential for future case generation.
+An arbitrary active support equality cannot be serialized as a contact edge.
+Actual-contact work must either verify intersection directly or use the repaired
+existential choice: minimize over a full feasible component, assign strict alternatives
+to disjoint pairs, and only then take the active basis.
+That result permits a finite branch between one square touching the left and bottom
+walls and a physical contact path joining those walls.
+It does not force a literal corner square, axis alignment, a bounded path length below
+eleven, or a finite angle set.
+
+The changed-atom result is likewise an admission motive rather than a measured gain.
+Its `4/3` separation is over Boolean traces on the same five sites.
+A future claim about square geometry must materialize the relevant exact row set, retain
+the multiplicities through D4 transformations, and pass the direct, event and interval
+coverage routes.
+
+The direct 2880-step packet currently has a positive exact geometric ceiling only.
+Its coverage has not run.
+The correct test preserves the original T-025 relative-weight scale, compares its raw
+least charge `m` with `M/11 = 685457679/687500000`, and normalizes by `1/m` only after
+that strict comparison passes.
+The maintained adaptive refinement command does not implement the fixed packet, so the
+target remains blocked on a bounded runner rather than being classified by a nearby
+sweep.
+
+The daytime plan is intentionally a portfolio.
+Current evidence justifies skipping one redundant point-only solve and admitting two
+newly precise routes.
+It does not justify declaring the parent, weighted-atom, structural, core/net or routing
+direction generally productive or exhausted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
