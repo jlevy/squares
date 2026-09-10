@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 489
+count: 490
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -16285,3 +16285,89 @@ defects:
     source's total, which is the one arithmetic that would have made the deficit visible
     in the receipt.
   recorded_in: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md
+- id: D-490
+  title: Two renders of the explainer disagreed by two bytes and the check could not say where
+  date: '2026-09-10'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    The blind instrument, since the check was written: it has always reported two lengths
+    and nothing else, and until this run nothing had asked it for more. The disagreement
+    itself, unknown and not knowable from the log -- this is the first failure of a check
+    that has run on every push since the PDF export was built, so the page had drawn the
+    same twice on every run before it.
+  severity: medium
+  status: contained
+  bead: think-ptit
+  what: >-
+    `render_explainer_pdf --check` draws the page twice in one browser and requires the two
+    to agree once `/CreationDate` and `/ModDate` are normalised. On run 34453706991, main's
+    push run at 3a18a05a, it reported `786119 then 786117 bytes` and failed the `build` job
+    of the Pages workflow at 08:12:03Z.
+
+    It was the second render that came up short, not the first that ran long. 786119 is the
+    size CI's renders of that page have been producing, and the receipt `_with_receipt`
+    writes is exactly 94 bytes on every run measured: 786213/786119 at 3a18a05a and again
+    at 1c1db463, 786221/786127 at 93af1e4d, 817917/817823 on PR 148's branch, 786210/786116
+    on PR 125's, and 843764/843670 in a container. The cross-reference is a classic
+    fixed-width table rather than an xref stream -- verified on the rendered file, which
+    carries no `/Type /XRef` -- so shifting offsets costs nothing and a file-length delta is
+    the delta of the object bodies alone. Two bytes left the objects.
+
+    The message was the other half of the defect. Two lengths name no object, no offset and
+    no kind, the renders are not kept, and the sentence that followed them asserted a cause:
+    that something the page draws was not finished when it was captured. That reading is now
+    measured false at this scale, so the log was not just silent but misleading.
+  consequence: >-
+    `deploy` is gated on `build`, so the published page and its PDF stayed at the previous
+    commit's content from 08:11Z until the job was re-run at 18:59Z, about eleven hours. No
+    wrong artifact was asserted: the check fails loudly and publishes nothing. The risk it
+    does leave is structural rather than observed -- the PDF that ships is the `--update`
+    render, taken before the pair and compared with nothing, so the check samples the
+    process and not the artifact it deploys (think-6hsg).
+  fix: >-
+    The instrument, and the reading of it. `_difference` reports the first differing byte
+    with the object it falls in, that object's declared `/Subtype` (or `/Type`), and a
+    64-byte window of each render around it. The window that reads the declaration is
+    bounded by the object's own `endobj`, which is a bug found before it shipped: unbounded,
+    33 of this document's 1160 objects declare no type of their own while sitting within 400
+    bytes of one that does, and `<< /ca 1 /BM /Normal >>` was reported as a Link. `--renders
+    N` makes the count the caller's, so the ten-render guarantee the module claims can be
+    re-measured rather than asserted; the Pages job still pays for two.
+
+    The failure line no longer asserts an unfinished page, because the waiting was measured
+    and cleared. Across seven wait configurations -- `SETTLED` dropped, the `math-ready`
+    wait dropped, motion emulated rather than reduced, the capture taken at
+    `domcontentloaded` -- 25 renders produced exactly two distinct documents, one per faces
+    state, and forty consecutive renders of the shipped configuration agreed byte for byte
+    at 843670 each. Losing `_FACES_APPLIED` is what that guarantee is made of: the same page
+    without it comes out at 1055021, a 211351-byte rewrite. So the cheapest unfinished page
+    this document has is five orders of magnitude above two bytes, and an
+    unnormalised clock is ruled out by the pass rate rather than by the log: the two renders
+    are about three seconds apart, so a clock would fail every run instead of one.
+
+    One hazard of the class the old message named was found and closed while looking, though
+    it is not this failure: in `devtools/templates/explainer-shell.html` the transition on
+    footnote reference and backref anchors is declared at `.cert-page .kpress-footnote-ref a`
+    (0,2,1) while the `prefers-reduced-motion: reduce` guard beside it reaches only
+    `.cert-page a` (0,1,1), and a media query adds no specificity -- so a 120ms colour
+    transition survived a reader asking for no motion, and was a transition the export could
+    in principle catch in flight. The two selectors are now named in the guard.
+
+    The cause is open and the record says so. What is left fits two shapes: a Flate stream
+    that compressed two bytes smaller, or a variable-length decimal that lost two
+    characters in an uncompressed object -- this document has 79 Link `/Rect` arrays whose
+    payloads run 31 to 43 bytes and 36 bare `/ca` graphics states in objects 3 to 143. The
+    second is the more economical account of a clean minus two with nothing else moving, and
+    it reads as sub-pixel rounding on the runner rather than a page that was unfinished.
+  regression: >-
+    `tests/test_render_explainer_pdf.py`, twelve cases over synthetic documents in the
+    shapes the writer emits, in the quick lane at 0.07s. They pin that a disagreement names
+    the object and quotes both windows, that `/Subtype` beats `/Type` where both are
+    present, that a short untyped object does not borrow a later object's type, that a
+    truncated render is reported as truncated, that two renders which agree are not given an
+    invented difference, and that the count the CLI accepts is the count `check` draws --
+    the join D-488 was made of. Nothing here prevents the race, which is what contained
+    means: the guard is that the next occurrence arrives diagnosable.
+  recorded_in: packing/devtools/render_explainer_pdf.py

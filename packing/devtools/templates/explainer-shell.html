@@ -268,8 +268,15 @@ body {
 }
 @keyframes cert-swap { from { opacity: 0; } to { opacity: 1; } }
 .cert-page .swap { animation: cert-swap 160ms ease-out; }
+/* The two footnote anchors are named again rather than left to `.cert-page a`: a
+   media query adds no specificity, so the transition above at (0,2,1) would outrank
+   this rule's (0,1,1) and keep running for a reader who asked for no motion. It is
+   also a render hazard -- a transition caught in flight is one of the three things
+   that make the PDF export draw the page differently twice (D-490). */
 @media (prefers-reduced-motion: reduce) {
-  .cert-page a, .cert-page button, .cert-page .verdict, .cert-page .mass-dec, .cert-page .swap {
+  .cert-page a, .cert-page button, .cert-page .verdict, .cert-page .mass-dec,
+  .cert-page .swap, .cert-page .kpress-footnote-ref a,
+  .cert-page a.kpress-footnote-backref {
     animation: none;
     transition: none;
   }

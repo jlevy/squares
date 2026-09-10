@@ -16,6 +16,14 @@ CSS transition is caught mid-flight and the graphics state differs in the fourth
 decimal of an alpha. With all three, ten consecutive renders agreed byte for byte
 except for `/CreationDate` and `/ModDate`.
 
+Re-measured on 2026-09-10, the day the check first failed on main: forty consecutive
+renders of this page agreed byte for byte, 843670 each. The same page with the print faces
+never injected comes out at 1055021, so the cheapest unfinished page this document has is
+a 211351-byte rewrite rather than a near miss -- and that is also how to read a failure. A
+disagreement of a handful of bytes is not an unfinished page; it is a number that settled
+differently, and `--check` names the object it happened in. D-490 is the occurrence that
+asked, and `think-ptit` holds what is still unexplained about it.
+
 That is a stronger guarantee than the composite PDF beside it manages: cairo assigns
 font-subset tags per process, so two runs of `render_composite_pdf` differ. It is still
 not a portable one, and the difference matters for what `--check` can mean. These bytes
@@ -114,6 +122,26 @@ _MARGIN_BOX_TOKENS = (
 )
 _MARGIN_BOX_SAMPLE = "Aa Gg 0123"
 
+#: The page's images, forced and decoded. `loading="lazy"` is excluded from the `load`
+#: event by specification, `document.fonts.ready` is fonts, and `squaresMath.settled()`
+#: awaits math renders and nothing else -- so until this step nothing in the chain had any
+#: concept of an image. The page carries exactly one, `document.images` counted at render
+#: time: the atlas figure, 2333306 bytes of external SVG read over `file://`, and it is the
+#: one element here marked lazy.
+#:
+#: Measured, it changes nothing today: the image reports `complete` before this wait on
+#: every render taken, and the page comes out at 843670 bytes with the step and without it.
+#: It is here for the reason the margin-box half of `_FACES_APPLIED` is -- a figure that is
+#: not finished is a figure drawn at whatever it had, and neither `load` nor any number of
+#: frames bounds a multi-megabyte decode. The decode is allowed to fail rather than hang
+#: the export: an image that refuses is the page's defect and `check_published_site` is
+#: where it is caught.
+_IMAGES_DECODED = """async () => {
+  const images = [...document.images];
+  for (const image of images) image.loading = 'eager';
+  await Promise.all(images.map((image) => image.decode().catch(() => undefined)));
+}"""
+
 #: The added faces, settled -- both the ones the document tree asks for and the ones
 #: only an `@page` margin box does.
 #:
@@ -166,6 +194,75 @@ def _normalised(pdf: bytes) -> bytes:
     return _DATES.sub(rb"/\1 (D:00000000000000+00'00')", pdf)
 
 
+#: An object header as Chromium's writer emits it: at a line start, which is where a
+#: header goes and where stream bytes only land by accident. Read to scan back from a
+#: byte to the object it belongs to, so a disagreement can be named rather than counted.
+_OBJECT_HEADER = re.compile(rb"(?m)^(\d+)\s+0\s+obj\b")
+
+#: What an object declares itself to be, read from the head of its dictionary. Asked in
+#: two goes rather than one alternation because `re` returns the leftmost match and
+#: Chromium writes `/Type /XObject` before `/Subtype /Image`: "XObject" does not tell the
+#: figure that was redrawn from the form beside it, which is the whole question here.
+_OBJECT_SUBTYPE = re.compile(rb"/Subtype\s*/(\w+)")
+_OBJECT_TYPE = re.compile(rb"/Type\s*/(\w+)")
+
+#: How far into an object to look for that declaration, bounded by the object's own
+#: `endobj` -- without that bound a short object with no type of its own is labelled with
+#: a later object's. Measured on this document: of its 1160 objects, 33 declare no type of
+#: their own while sitting within 400 bytes of one that does, which is how
+#: `<< /ca 1 /BM /Normal >>` came to be reported as a Link. Truncating early can only lose
+#: a type, never borrow one, because a dictionary precedes any stream it opens.
+_DICTIONARY = 400
+
+#: How much of each render to quote either side of a disagreement. Wide enough to carry a
+#: coordinate list or a font name whole, narrow enough that both quotes stay readable in a
+#: log with no horizontal scroll.
+_WINDOW = 64
+
+
+def _difference(first: bytes, second: bytes) -> str:
+    """Where two renders stopped agreeing, in terms a CI log can carry on its own.
+
+    Lengths alone say that a render was not reproducible and nothing at all about what
+    moved, and the renders are not kept. The first failure of this check in CI said
+    `786119 then 786117 bytes` and left no way to tell a canvas race from a face that
+    had not applied from a transition caught in flight -- the three causes the module
+    docstring names -- so the next occurrence has to arrive diagnosable or cost the same
+    guessing again.
+
+    Those three look different at the first differing byte, which is what this reports,
+    with the object it falls in and a window of each render around it: a number that
+    differs in its last digits is layout that had not settled, an unrelated run of bytes
+    is a stream or an image redrawn, and an object the font scan can name is a face.
+
+    Called on renders that have already been found to differ. Handed two that do not it
+    says so rather than inventing a disagreement, because the alternative -- reporting
+    the shorter-prefix case unconditionally -- would have it announce a truncation on two
+    identical files.
+    """
+    limit = min(len(first), len(second))
+    offset = next((at for at in range(limit) if first[at] != second[at]), limit)
+    if offset == limit and len(first) == len(second):
+        return "no byte differs, so the renders this was handed did not disagree"
+    if offset == limit:
+        return f"one render is the first {limit} bytes of the other, so one was cut short"
+    header = max(
+        _OBJECT_HEADER.finditer(first, 0, offset), key=lambda found: found.start(), default=None
+    )
+    if header is None:
+        where = "the file header"
+    else:
+        head = first[header.end() : header.end() + _DICTIONARY].partition(b"endobj")[0]
+        kind = _OBJECT_SUBTYPE.search(head) or _OBJECT_TYPE.search(head)
+        declared = f", {kind.group(1).decode()}" if kind else ""
+        where = f"object {header.group(1).decode()}{declared}"
+    window = slice(max(0, offset - _WINDOW // 2), offset + _WINDOW // 2)
+    return (
+        f"first difference at byte {offset}, in {where}: "
+        f"{first[window]!r} against {second[window]!r}"
+    )
+
+
 def render_pdf_bytes() -> bytes:
     """Draw the page as a PDF, waiting for it to be finished rather than for the network.
 
@@ -209,6 +306,7 @@ def render_pdf_bytes() -> bytes:
             page.evaluate(_ABSOLUTE_LINKS, SITE_URL)
             page.add_style_tag(content=print_face_css())
             page.evaluate(_FACES_APPLIED, [list(_MARGIN_BOX_TOKENS), _MARGIN_BOX_SAMPLE])
+            page.evaluate(_IMAGES_DECODED)
             page.evaluate(SETTLED)
             return page.pdf(
                 print_background=True,
@@ -639,8 +737,8 @@ def update() -> None:
     print(f"explainer PDF updated: {OUTPUT.name} ({len(written)} bytes)")
 
 
-def check() -> None:
-    """Two renders, one browser, one moment: the second has to match the first.
+def check(renders: int = 2) -> None:
+    """Renders of one page, one browser, one moment: every one has to match the first.
 
     Not a comparison against the committed file, because there is no committed file --
     the PDF is built in the Pages job and deployed, never checked in. What this catches
@@ -652,15 +750,24 @@ def check() -> None:
     The second question is about one render rather than about two, and no amount of
     self-agreement would answer it: whether the glyphs are set in fonts. A page that
     draws its sans as outline paths draws it that way every time.
+
+    `renders` is two in the Pages job, where the question is asked on every push and
+    each answer costs a draw of a 17-page document. It is raisable because the guarantee
+    this module claims is about ten consecutive renders while the check only ever takes
+    two, and a race that shows once in ten cannot be chased at two: `--renders 10`
+    re-measures the claim, and higher hunts something rarer than it.
     """
     first = _normalised(render_pdf_bytes())
-    second = _normalised(render_pdf_bytes())
-    if first != second:
-        raise SystemExit(
-            f"explainer PDF does not reproduce itself: {len(first)} then {len(second)} "
-            "bytes, normalised. The page draws differently twice, which means something "
-            "it draws is not finished when it is captured."
-        )
+    for _ in range(renders - 1):
+        again = _normalised(render_pdf_bytes())
+        if first != again:
+            raise SystemExit(
+                f"explainer PDF does not reproduce itself: {len(first)} then {len(again)} "
+                "bytes, normalised. A handful of bytes is a number that settled "
+                "differently rather than a page that was unfinished: the cheapest "
+                "unfinished page this document has is its print faces unapplied, and that "
+                "one costs 211351 bytes. " + _difference(first, again)
+            )
     findings = font_findings(first)
     if findings:
         raise SystemExit("\n".join(findings))
@@ -675,7 +782,7 @@ def check() -> None:
     fallbacks = ", ".join(host)
     trailer = f"; drawn as outlines from the host's own fonts: {fallbacks}" if host else ""
     print(
-        f"explainer PDF check passed: two renders agree, {len(first)} bytes, "
+        f"explainer PDF check passed: {renders} renders agree, {len(first)} bytes, "
         f"{pages} pages, {len(embedded)} embedded fonts, none of them this page's "
         f"in outline paths{trailer}"
     )
@@ -711,9 +818,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     command = argparse.ArgumentParser(description=__doc__)
     mode = command.add_mutually_exclusive_group(required=True)
     mode.add_argument("--update", action="store_true", help="write the PDF")
-    mode.add_argument("--check", action="store_true", help="render twice and compare")
+    mode.add_argument("--check", action="store_true", help="render repeatedly and compare")
     mode.add_argument("--fonts", action="store_true", help="list the fonts the PDF embeds")
+    command.add_argument(
+        "--renders",
+        type=int,
+        default=2,
+        metavar="N",
+        help="how many renders --check compares (default 2)",
+    )
     arguments = command.parse_args(argv)
+    if not arguments.check and arguments.renders != 2:
+        command.error("--renders is for --check, the only mode that compares renders")
+    if arguments.renders < 2:
+        command.error("--renders must be at least 2, which is one render against another")
     if not PAGE.is_file():
         raise SystemExit(f"{PAGE.relative_to(ROOT)} is missing; render the page first")
     if arguments.update:
@@ -721,7 +839,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif arguments.fonts:
         fonts()
     else:
-        check()
+        check(arguments.renders)
     return 0
 
 
