@@ -1411,10 +1411,9 @@ results:
     next_rung: >-
       Push the side with the same loop: the LP that produced these atoms is run again at
       a larger side, and the ceiling family says the answer cannot come from point atoms
-      alone. Two mechanisms are unmeasured on this certificate. The finer-net shrink of
-      T-024 applies to threshold certificates unchanged -- Condition 4 ties the shrink to
-      the net's largest half-gap tangent whatever the atoms are -- and would turn this
-      endpoint into a strictly larger weak limit, which nobody has measured here. And no
+      alone on the stated core domain. The finer-net and dilation continuation has now
+      been measured and registered as T-026, with weak limit 3.826447410572939744.
+      That is a separate corollary; T-025 retains its endpoint scope at 191/50. No
       standalone reader outside this repository decides a threshold certificate: the
       retained verify_claim.py reads point atoms only, so a stranger cannot yet check
       these bytes without trusting this project's own code, which is the gap that keeps
@@ -1500,16 +1499,15 @@ results:
       - packing/tests/test_measure_threshold_net_refinement.py
       - packing/tests/test_decide_threshold_certificate.py
     next_rung: >-
-      Net refinement is near exhausted on these atoms: the rescaled budgets are
-      10.996251 at 1440 steps and 10.996809 at 360, both within 0.004 of the eleven a
-      certificate may not reach, where the frozen T-025 certificate sits at 10.967323.
-      A 2880-step net would have to buy its charge out of that remainder, and the
-      crossing shrink is already equal at 720 and 1440 steps, so the next movement is
-      not another doubling. It is either a re-optimised threshold certificate at the
-      finer net -- the atoms here are T-025's, optimised against 181 directions -- or the
-      cutting loop with site separation and weighted clique atoms that lane T2 and the
-      lane-A3 report set out, where the plateau duals at 383/100 are refused by the
-      depth-witness reader at depth about 1.12 at the seams. C5 needs a mapped
+      The rescaled 1440-step budget is 5483661432/498684619, leaving
+      1869377/498684619 below eleven. The measured 720- and 1440-step certificates
+      have the same crossing shrink and least unscaled charge. These finite
+      measurements do not decide another net or prove that frozen-atom refinement
+      cannot improve the limit. Re-certification on another net, re-optimization
+      on a finer net, changed site generation, and richer charge atoms remain
+      distinct hypotheses. The retained plateau duals with depth above one are
+      useful separation inputs but not globally feasible obstruction witnesses.
+      C5 needs a mapped
       source-distinct review of this corollary on the threshold atoms. And no standalone
       reader outside this repository decides a threshold certificate at any net, so a
       stranger cannot check these bytes without trusting this project's own code; that

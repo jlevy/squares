@@ -1,6 +1,13 @@
 # Review of the First-Principles N11 Account
 
-**Updated September 10, 2026. Scientific cutoff: exp153 at PR145 head
+**Current reading:** the
+[combined-series addendum](#combined-series-review-addendum--september-10-2026) extends
+the original review to the T-024–T-026 results and reconciles PR139’s interpretations
+with the owner strand.
+The original review below keeps its own cutoff and assurance scope; it is not silently
+promoted to a review of later results.
+
+**Original review updated September 10, 2026. Scientific cutoff: exp153 at PR145 head
 `2acf4b859d39e01cc9fcb1156d8573f65e08efbd`.** Reviewed
 [N11 Research: Definitions, Findings, and the Inference Chain](../research/research-2026-09-09-n11-evidence-and-inference.md)
 against the retained claim register, BC303 corner-pair replay, sector and strict-core
@@ -127,6 +134,103 @@ The
 [two-attainer source admission](../../../packing/cases/n11_five_dot_cover/two-attainer-source-admission.md)
 separately records GO and twelve adopted synthetic controls.
 That assurance is not implied by the narrative PASS, and no pair target has run.
+
+## Combined-Series Review Addendum — September 10, 2026
+
+**Scope.** This addendum covers the combined interpretation of PR137, PR142, PR145,
+PR147 and PR139. The owner stack merged into main at `1c1db463`; PR139’s author had
+already incorporated it at `58ee1782`, and the finalization branch merged the updated
+main at `8aae89e8` before applying these corrections.
+The canonical outcome is the
+[consolidated account’s §12](../research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons).
+The original PR145/exp153 interpretation above is retained as historical review
+evidence.
+
+The combined global bound is `3.826447410572939744... <= s(11) <= 3.877083590022814...`.
+T-026 supplies the new weak lower endpoint; the upper construction is unchanged.
+T-023 and exp153 retain their conditional and fixed-family scopes and do not supply that
+global improvement. The compact pair instrument and parent-centre proposal remain unrun
+preparation and analytic work, respectively.
+
+### What Was Reviewed and Corrected
+
+The
+[published review](https://github.com/jlevy/squares/pull/139#pullrequestreview-5162420994)
+contains the original six findings, locations and evidence.
+Its focused proof review found no error in the T-024–T-026 counting, strict-core,
+direction-net or dilation arguments, or their exact constants.
+The corrections below concern how the exploratory observations were interpreted.
+
+| Finding | Corrected interpretation and evidence boundary |
+| --- | --- |
+| R1: full combined checkpoint | The new finer-net covering and limit replays are deferred checks. A successful fast run with skipped deferred jobs is not full validation. The final matching checkout, source/base identities and substantive job outcomes belong in the PR’s validation receipt |
+| R2: cap transfer | An unconditional B-core witness needs separately verified owners, classes, occupied patches and any additional domain premises before supplying a conditional obstruction at that same side |
+| R3: owner selection and neutrality | Global exclusion needs some excluded valid selection for every hypothetical physical packing. X1’s exact survivor masses obstruct point covers only on the specified endpoint-patch relaxations; they do not establish a method-wide refutation, equal optimization problems or sixteenfold runtime |
+| R4: capacity formula | Four strictly disjoint 45-degree unit squares in the stated `1.99` by `3.95` rectangle refute the generic stacking rule. X3 now withdraws that rule and marks the retained script unfit for reuse. Its finite no-exceedances still imply no exceedance of the weaker area bound on the same boxes |
+| R5: finite domains and searches | Frozen-net measurements do not settle another net; an eight-step grid does not settle arbitrary regions; a fixed-support optimum does not settle other supports. A5’s `32/3` remains exact for its complete budget-one program; ten is exact for the finite final row set and only an upper bound for the full closure |
+| R6: completeness | A maximal clique with piercing number at least two does not exclude lower-piercing overweight sub-cliques. Bounded floating separation is not complete rational nonviolation. A5’s special-case completeness remains valid because the relevant maximal-clique rows are certified and imposed |
+
+The related C.1/C.3 corrections in the retained theory report prevent two other
+unsupported steps: physical ownership does not impose a lower mass bound on every
+fractional dual family, and a patch containing its mark does not reverse the inclusion
+between mark-avoiding and patch-avoiding residual domains.
+A concrete retained survivor supplies the narrower common-point-cover obstruction.
+
+H155’s unrun negative criterion now distinguishes a failed candidate class from a
+complete refutation of its existential claim.
+H157’s unrun criterion uses the maximum survivor mass, consistent with testing every
+subclass; exact direction representation, patch nesting and the separate geometric reach
+assertion require admission before a run.
+Neither clarification changes a measured outcome.
+
+D489 remains an open source-admission repair, required before that CLI accepts a
+mass-eleven family. The original exp137/138 source was explicitly declared and its
+negative arithmetic independently confirmed by exp141; the later source comparison does
+not invalidate it. The record now says so beside the original experiments and in the
+defect’s own consequence and proposed repair.
+
+### Roles, Independence and Validation Scope
+
+**Correction review: PASS for the stated mathematical scopes after the listed
+clarifications.** The separate pass checked R2–R6, the strict rotated-square
+counterexample, the fixed-support completeness exception, the selection quantifiers and
+the new summary definitions.
+This verdict does not replace the full checkpoint.
+
+The coordinator reviewed the proof implementations and combined claims, integrated the
+records, and wrote the consolidated account.
+Astra Max supplied a separate mathematical review and independent arithmetic
+recomputation of the fractional-certificate results, then helped formulate and checked
+the correction scopes.
+Sol checked stack ancestry, full-checkpoint identities and mechanical integration, and
+added the dated corrections to retained reports.
+The correction pass is separate scrutiny of the interpretation; because the reviewer
+also contributed to its wording, it is not another wholly source-independent proof of
+the underlying results.
+
+The completed focused evidence includes 77 passing tests with one slow case deselected,
+an independent 20,376-vertex point-ceiling replay and three negative controls, and
+independent rational recomputation from six frozen certificate files and four dilation
+records. Those checks do not constitute a replay of every finer-net covering decision.
+The original proof packets retain the two covering routes and their declared C levels.
+A standalone threshold reader and a mapped source-distinct T-026 review remain possible
+assurance improvements; this addendum does not claim either was supplied.
+
+The final source/base-matched full checkpoint is a separate merge condition.
+Its live status and completed receipt are maintained on
+[PR139](https://github.com/jlevy/squares/pull/139), together with the per-finding
+disposition. Historical full checks for the owner strand do not validate the added
+threshold strand by themselves.
+
+### Questions Left Open Deliberately
+
+The combined account retains alternative sites and supports, frozen-atom refinements,
+re-optimization, richer charge formats, changed owner domains, joint compatibility and
+selection routing, conditional threshold covers, and the unit-parent proposal as
+distinct possible comparisons.
+No universal ranking follows from the observations.
+An exact negative remains useful at its declared scope; a priority decision requires
+stated estimates and may change when a new comparison supplies evidence.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -66,6 +66,16 @@ experiment:
 ---
 # Exp138: Four-Owner Verdict from the Shared Screen
 
+**Source-scope annotation, September 10, 2026 ([D-489](../../../../../defects.md)).**
+The declared source has mass `21342289572/2055263195`, about `10.3842`, below eleven.
+The screen’s source predicate accepts that particular deficient receipt but refuses
+valid mass-eleven source receipts.
+Fix the predicate before using the instrument for that broader input class (tracked as
+`think-rm5c`). This does not invalidate this experiment’s exact negative on its named
+source; exp141 independently confirmed the arithmetic and complete retained enumeration.
+It supplies no negative verdict on other fractional families or on the conditional cover
+method. The later mass-eleven X1 screen is a different source comparison.
+
 Complete exact producer screen found0of65536endpoint combinations with massatleast7;
 maximum13394344077/2055263195 and minimum1642317587/2055263195.
 Sharedproducerchargedtoexp137; no secondprocess.

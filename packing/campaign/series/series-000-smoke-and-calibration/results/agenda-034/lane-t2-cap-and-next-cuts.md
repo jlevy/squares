@@ -9,6 +9,34 @@ where each file now is.
 X-024 carries the coordinator’s reading.
 Nothing here is a bound and nothing here is a registered round.
 
+> **Completeness corrections, added 2026-09-10.** The original analysis below is
+> historical. A maximal-clique-only test does not generally decide every budget-one atom:
+> `tau*(M) >= 2` for a maximal clique M supplies no lower bound on `tau*(K)` for a
+> subclique `K subset M` that would rule out an overweight cut there.
+> A complete negative test must descend into relevant subcliques, unless every relevant
+> maximal clique is itself represented by a valid row as in the fixed-support A5
+> calculation. The graph used for that reduction must be the closed-intersection graph,
+> or the equivalence of a different overlap graph must be proved.
+
+> Likewise, a zero result from the bounded floating-point K6 mixed-integer search does
+> not certify feasibility for every rational rank-one multiplier.
+> A positive candidate is a valid cut after exact replay.
+> A negative result has only the declared denominator, threshold, and time bounds unless
+> a complete range and optimality proof is supplied.
+> The promoted reader’s bounded statuses supersede the broader K5/K6 claims in this
+> report.
+
+> Section C also needs two restrictions.
+> Physical ownership constrains integral packings; it does not impose `y(K_c) >= 1` on
+> every fractional family.
+> The equality measured on the retained family remains an exact property of that family.
+> And because a patch contains its mark, avoiding the patch implies avoiding the mark,
+> not the reverse. The former C.3 point-extension argument is invalid.
+> The retained neutral survivor instead gives a point-cover obstruction for a declared
+> residual domain, and hence for a union that contains that domain.
+> This says nothing by itself about all threshold certificates or all owner-selection
+> routing rules.
+
 The lane’s two scripts are not retained (scratch only) — scripts are not retained under
 results — and what they measured is in the instrument this lane’s recommendation asked
 for, promoted with it as `packing/devtools/plateau_reader.py` and reported in
@@ -40,6 +68,10 @@ every rank-one threshold cut, `nu_{2/3}(u)` under the two-of-three cuts alone.
 `u = 3.838829`; `96/25` would be `u = 3.848852`.
 
 ## Findings
+
+> **Reading note.** Findings F2, F6, F9, and F10 below use the original completeness and
+> conditioning language.
+> Read them through the 2026-09-10 correction above.
 
 | # | Finding | Q | Status |
 | --- | --- | --- | --- |
@@ -187,6 +219,12 @@ This is the quantity X-024 left unpriced (F12).
 **What establishes the cap exactly.** One frozen object per named family, decided by
 tools that mostly exist:
 
+> **Correction.** The K5 and K6 steps below are specifications from the original report,
+> not complete negative certificates as written.
+> K5 needs the maximal/subclique and closed-intersection conditions above; K6 needs
+> exact replay for a positive result and a complete rational search before a zero result
+> is universal.
+
 1. An exact D4-symmetric family `y` of total weight `>= 11` at side `L'`, depth at most
    one at every arrangement vertex: `verify_ceiling`
    (`packing/src/sqpack/fractional/ceiling.py`), K0-K3.
@@ -303,6 +341,11 @@ guaranteeing a closed patch `F` inside the owner’s core; residual cores avoid 
 of the four patches; budget below seven.
 Three ways to put that inside one certificate:
 
+> **Correction.** The integral Owner Lemma can justify a negative charge in the physical
+> counting proof. It cannot be imported as the fractional constraint `y(K_c) >= 1` for
+> every dual family. The numerical equalities below remain exact readings of the named
+> retained families.
+
 **C.1 Mark atoms with negative weight (PROVED sound, EXACT worthless at 3.82).** Let
 `K_c` be the cores holding a mark of corner `c`. The Owner Lemma says every
 eleven-packing at `L <= 96/25` has at least one core in each `K_c` (the marks are
@@ -340,19 +383,19 @@ The sound single object is:
 > `m_j` of its selected cores are pairwise distinct and their union contains `F_j`. For
 > each `j` let `A_j` be a finite family of point and threshold atoms with charge `c_j`
 > and budget `M_j` such that
-> 
+
 > - **C2_j** `M_j < n - m_j`;
 > - **C5_j** every closed `B`-square at a direction of the *doubled* net, inside the
 >   container and disjoint from `F_j`, has `c_j(P) >= 1` (or: `A_j` and `F_j` are
 >   D4-invariant and the folded net suffices, exactly as Condition 1' allows).
-> 
+
 > Then no such packing exists.
 > *Proof.* Take the packing’s class `j`; its `n - m_j` non-owner cores are pairwise
 > disjoint closed sets, admissible at doubled-net directions by Condition 4, and
 > disjoint from `F_j` since `F_j` lies in the union of the other cores; C5_j charges
 > each at least one, Lemma 1 bounds the sum by `M_j`, and C2_j contradicts.
 > ∎
-> 
+
 > The residual domain `{c : P(c) ∩ F_j = ∅}` is open; the sweep still decides its
 > infimum on open cells because boundary centres carry at least the charge of an
 > adjacent open cell (Lemma 2 of the docstring), and the strict clearance `B(1 + D) < 1`
@@ -364,6 +407,13 @@ mechanised); the symmetry of the folded net is lost unless `F_j` is symmetric, s
 generic class costs the doubled net and eight times the columns; and a single family
 `A_j` serves several classes only if their forbidden sets *contain* a common `F` (PR
 137’s reuse rule), which is set containment, not area.
+
+> **Correction.** The containment direction used next is reversed: avoiding a patch that
+> contains a mark implies avoiding the mark.
+> A core that avoids the mark may still meet the patch.
+> The conclusion below therefore does not follow from the point-extension lemma.
+> A concrete survivor already inside a named residual domain can obstruct a common point
+> cover of a union containing that domain; that is the narrower valid argument.
 
 **C.3 A single certificate with `n - 4` is impossible (PROVED given the point-extension
 lemma).** A certificate valid for every class at once must charge every core that is
@@ -473,6 +523,11 @@ The slope reading from step 1, `(11 - value)/0.010`, replaces F5’s assumption 
 step 4 before it runs.
 
 **Outcome 2: the run plateaus at eleven.**
+
+> **Correction.** In the historical table below, “K5 and K6 find nothing” is only a
+> universal cap statement when K5 descends through the relevant subcliques and K6
+> exhausts and certifies the declared rational multiplier domain.
+> The retained bounded searches do not establish that universal negative.
 
 | step | instrument | measurement | discriminator |
 | --- | --- | --- | --- |

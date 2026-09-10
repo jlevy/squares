@@ -695,14 +695,20 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Current reader entry:**
-[definitions, findings and the inference chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md),
-followed by the
-[scope audit](docs/project/research/research-2026-09-09-n11-inference-audit.md).
-PR145 is ready at its frozen scientific milestone.
-The stacked interpretation block corrects summaries and maps untested alternatives; it
-adds no scientific target or global bound.
-Historical handoffs below retain their original context.
+**Current combined reader entry:**
+[the consolidated PR-series takeaways](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons),
+with definitions, proof results, scoped negatives and open comparisons in one place.
+PR137, PR142, PR145 and PR147 landed together at `1c1db463` on September 10, 2026. PR139
+incorporates that owner strand and contributes T-024–T-026, taking the global lower
+bound to `3.826447410572939744...`; the upper construction is unchanged at
+`3.877083590022814...`. The review corrections preserve the fixed-family scope of
+conditional obstructions and the existential owner-selection requirement.
+Finite support, net and grid results do not close entire research directions.
+The
+[review addendum](docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md#combined-series-review-addendum--september-10-2026)
+and [PR139](https://github.com/jlevy/squares/pull/139) carry finalization evidence.
+The two-attainer target and unit-parent proposal remain preparation, not new
+measurements. Historical handoffs below retain their original context.
 
 [Session113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md)
 closed Agenda032 with [T-023](packing/frontier/RESULTS.md), the five-dot exclusion of
@@ -878,7 +884,8 @@ The record does not prove this statement.
 A reviewed two-attainer instrument is source ready but unrun; any future target needs a
 separate prospective registration and allocation.
 PR145 is ready after matching fast, page and full checkpoint validation.
-PR142 and PR137 also remain ready and unmerged.
+Historical status at that checkpoint: PR142 and PR137 were ready and unmerged.
+Both later landed with PR145/147 at `1c1db463`.
 
 The two-hour sprint in
 [Agenda032](packing/campaign/agendas/agenda-032-conditional-owner-sprint.md) is
@@ -3886,8 +3893,8 @@ archive beside it.
 | [exp-134](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-paired-full-support-pricing.md) | 11 | target | H-135 | One retained-state LP solve with nested paired32 and full rationalised support | Owner reprioritized BC-309 before launch; no LP target invoked; protocol retained pending a fresh forward allocation | blocked |
 | [exp-135](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-fixed-corner-residual-cover-pilot.md) | 11 | target | H-136 | Matched unrestricted and four-fixed-corner residual covering programs on one 19-by-19 grid and nine retained directions | Global numerical convergence; residual thin-cell separator failure, no paired score | unresolved |
 | [exp-136](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-repaired-fixed-corner-pilot.md) | 11 | target | H-136 | Matched repaired replay on unchanged support, directions and guards | Both arms converged; matched gap improvement0.1766034327, residual mass7.804878 above7 | accepted |
-| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | No endpointclass retains mass10; exact producer completed, independentaudit pending | rejected |
-| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpointcombination retains mass7; independentaudit pending; processchargedonce | rejected |
+| [exp-137](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-corner-dual-salvage.md) | 11 | target | H-137 | Exact translated-family deletion over16owner classes; shared producer | No endpoint class retains mass10 for the declared source; exp141 independently confirmed; D489 limits source reuse | rejected |
+| [exp-138](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-four-owner-dual-salvage.md) | 11 | target | H-138 | Separate verdict over65536four-owner classes from exp137 producer | No endpoint combination retains mass7 for the declared source; exp141 confirmed; shared producer charged once | rejected |
 | [exp-139](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-139-fixed-corner-full-net-replay.md) | 11 | target | H-140 | Exact full181net replay of unchanged residualatoms fromexp136 | Exact minimum760979/800000; normalized conditional mass31219612/3804895 above7 | rejected |
 | [exp-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-140-h139-owner-footprint-matched-gain.md) | 11 | target | H-139 | Matched unrestricted/point/triangle/endpoint covers on independent369site support andnine directions | Unrestricted converged; point hit60rounds; area arms unrun | unresolved |
 | [exp-141](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-141-independent-dual-salvage-audit.md) | 11 | target | H-137 | Independent exact reconstruction of the exp137 screen | Independent audit verified192masks,147456exactSATchecks and alljoint summaries; confirms negative | rejected |
@@ -4270,20 +4277,23 @@ Its source predicate requires the source receipt’s `failures` to be exactly
 `["K3 total weight at least n"]` — the failure a family records when its total weight is
 *below* `n` — so it accepts only a family that falls short of the mass the bound is made
 of, and refuses every proved ceiling family.
-Three experiments therefore measured the wrong object: exp-137, exp-138 and exp-141 all
-ran on a family `0.6158` short of eleven, and both of their reported shortfalls are
-smaller than that deficit, so `obstructs: false` on all forty-eight rows was the
-source’s missing mass rather than a fact about conditioning.
-Re-run on the mass-eleven ceiling family the same filter reads survivor weight exactly
-ten at four of the sixteen classes, which reverses the reading — and that measurement
-was available the day the instrument was built.
-It is `validity` in the `flattering` direction, because a negative screen reads as
-“nothing blocks this route”, and the truth is that four classes block every point cover
-of their residual domain exactly.
-The scope of that reading is stated as a ladder in
-[X-026](packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md):
-conditioning is mass-neutral, the point-cover conditional method is refuted, and the
-threshold route on a residual domain is priced rather than closed.
+Exp137 and exp138 deliberately named a source family about `0.6158` short of eleven;
+exp141 independently confirmed their exact negative results on that source.
+Those results remain valid.
+They do not establish that no other fractional family obstructs the residual problem, or
+that a useful conditional cover exists.
+The later X1 screen uses a different mass-eleven family and leaves exact survivor mass
+ten on four screened single-corner endpoint-patch relaxations.
+Its depth-one survivors obstruct a point cover below ten on those particular domains.
+
+The source guard is still a reuse defect: it must be repaired before admitting a valid
+mass-eleven source through that CLI, as tracked by `think-rm5c`. That defect and the
+change of source do not reverse exp137/138’s scoped arithmetic.
+The corrected
+[X-026](packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md)
+separates measured neutrality for the endpoint-patch family from the open questions of
+physical owner routing, stronger domains and conditional threshold covers.
+Neither a universal conditional-method refutation nor equal reach or runtime follows.
 
 **[D-470](defects.md) records a deferred exhaustive test that still asserted the rung
 `T-021` displaced.** The full gate caught the stale transcription after the PR 83 merge;

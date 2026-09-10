@@ -4,9 +4,33 @@ Retained measurement-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by the
 coordinator on 2026-09-09, read-only on the repository at
 `claude/n-11-stronger-result-d730ds`. The report is reproduced as delivered, with its
-own findings table and status labels; only its file references were rewritten to say
-where each file now is.
+own findings table and status labels.
+Its file references were rewritten to say where each file now is, and the correction
+below governs the historical body.
 X-024 carries the coordinator’s reading.
+
+> **Correction, added 2026-09-10.** The stacking rule used by
+> [`lane-x3-box-sweep.py.txt`](lane-x3-box-sweep.py.txt),
+> `min(a,b) < 2B => capacity <= floor(max(a,b)/B)`, is false for rotated squares.
+> For a strict counterexample, set `B = 1`, `w = 199/100`, `epsilon = 1/1000`,
+> `a = sqrt(2)/2`, and `d = 2 sqrt(2) - w + epsilon`. Four 45-degree squares centred at
+> `(a,a)`, `(w-a,a+d)`, `(a,a+2d)`, and `(w-a,a+3d)` are strictly disjoint: adjacent
+> centres have L1 separation `sqrt(2) + epsilon`, centres two steps apart have
+> separation `2d > sqrt(2)`, and the remaining pair is farther apart.
+> They fit in a rectangle of width `199/100` and height `7 sqrt(2) - 5967/1000 < 79/20`,
+> although the helper returns capacity three for `(199/100, 79/20, 1)`.
+
+> The area bound `floor(ab/B^2)` remains valid.
+> The recorded grid weights stay below that valid bound, so the finite no-exceedance
+> observations survive at their measured scope: the specified eight-step boxes, strip
+> widths, and two retained families.
+> They do not decide arbitrary off-grid boxes, other convex regions, or other placement
+> families. Claims that the strip capacity is exactly three, that the tested families
+> saturate a general stacking theorem, or that containment atoms are closed as a route
+> are withdrawn.
+
+> The retained `.py.txt` helper preserves the original measurement record.
+> Its stacking branch is invalid and the file is unfit for reuse or promotion.
 
 Prompted by [lane A3](lane-a3-threshold-loop-at-383-100.md)’s site-separation addendum
 (S2/S4): the plateau excess retreats into a `0.0006`-wide sliver of interleaved
@@ -33,6 +57,11 @@ So a violated containment atom would be a cut outside
 testing first.
 
 ## What was measured
+
+> **Current scope.** In the historical description below, only the area capacity is a
+> proved general bound.
+> The stacking capacity and conclusions that depend on its tightness are superseded by
+> the correction above.
 
 Two families at `L = 153/40 = 3.825`, both of total weight exactly 11:
 
@@ -61,6 +90,9 @@ when `min(a,b) < 2B`, the stacking bound `floor(max(a,b)/B)`). All arithmetic in
 
 ## What this closes and what it leaves open
 
+> **Current interpretation.** The screen is a finite negative result on the stated grid
+> and families. It does not close containment cuts as a class.
+
 **Closed: containment atoms on wall strips and axis-aligned boxes are not the missing
 cut. Do not build them.**
 
@@ -85,8 +117,10 @@ Retained beside this report:
 
 - [`lane-x3-strip-profile.py.txt`](lane-x3-strip-profile.py.txt) — wall-strip weight as
   an exact function of strip width, for both families.
-- [`lane-x3-box-sweep.py.txt`](lane-x3-box-sweep.py.txt) — every axis-aligned box on the
-  8-step grid against the two capacity bounds.
+- [`lane-x3-box-sweep.py.txt`](lane-x3-box-sweep.py.txt) — the retained historical
+  eight-step box sweep.
+  Its stacking branch is invalid and must not be reused; the area-bound comparisons
+  remain interpretable.
 
 Both scripts are retained with a `.py.txt` extension, as
 `agenda-032/unrun-independent-audit/` already does: they are scratch measurement

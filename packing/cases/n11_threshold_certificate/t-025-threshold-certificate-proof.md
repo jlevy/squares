@@ -168,8 +168,10 @@ D4-symmetric point-atom measure of mass below eleven satisfies Condition 5 at th
 shrink and net; the threshold atoms carry `2.29` of this certificate’s budget, which the
 point method cannot have.
 Nothing here bounds the side from above, decides fit at a larger side, or proves a
-strict inequality at `191/50`. The finer-net dilation argument of T-024 applies to
-threshold certificates unchanged and has not yet been measured on this one.
+strict inequality at `191/50`. [T-026](t-026-dilation-limit-proof.md) measures these
+atoms on 720- and 1440-step nets and proves the resulting weak dilation-limit bound
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249`. That finite-net result does
+not decide further refinements.
 
 ## Replay
 

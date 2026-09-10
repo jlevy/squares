@@ -4,10 +4,37 @@ Retained strategy-lane report for
 [X-024](../../../../explorations/X-024-two-lines-at-eleven.md), written by a Fable
 sub-agent on 2026-09-09, read-only on the repository at
 `claude/n-11-stronger-result-d730ds`. The report is reproduced as delivered, with its
-own headings and its own numbers; only its file references were rewritten to say where
-each file now is, and two notes were added where they bear on an entry already in the
-record: the correction below about the source family, and the scope note that follows
-this paragraph. X-024 carries the coordinator’s reading.
+own headings and its own numbers.
+Its file references were rewritten to say where each file now is, and dated corrections
+were added around the historical body.
+X-024 carries the coordinator’s reading.
+
+> **Scope correction, added 2026-09-10.** The original report below is historical.
+> Its exact measurements remain evidence about the retained mass-eleven fractional
+> family and the screened endpoint patches: four one-corner classes delete exactly one
+> unit, and the measured four-corner tuple deletes exactly four.
+> These survivors obstruct point covers of those fixed residual domains below the
+> corresponding residual counts.
+
+> They do not prove that corner conditioning is mass-neutral for every class, every
+> owner selection, or the whole conditional optimization.
+> A global owner argument must show that every hypothetical physical packing has at
+> least one valid owner selection whose residual family has been excluded.
+> Excluding every raw class label would be sufficient, but is not necessary; a packing
+> may admit several selections.
+
+> The artificial eleven-core packing near `3.868983` has not been shown to contain the
+> required distinct marked owners, class memberships, and occupied patches.
+> The unit-parent ownership theorem at `96/25` cannot supply those premises for a
+> different-side core packing.
+> The claimed verbatim transfer of the unconditional cap to every conditioned rung is
+> therefore withdrawn.
+
+> Finally, matching two reported cut maxima on one survivor does not show that the
+> complete cut structure or optimum is the unconditional problem shifted by one.
+> The survivor violates the two-of-three inequalities and does not obstruct a threshold
+> certificate. Runtime multipliers and the relative priority of conditional and
+> unconditional routes remain estimates, not results of this lane.
 
 **This is the lane that reversed a direction the campaign was leaning toward.** X-024 §3
 route C and §4 read conditioning on corner ownership as the architecture for `3.84` and
@@ -28,6 +55,8 @@ certificate — what it refutes is the premise that conditioning buys mass.
 > method into a succeeding one — and neutrality, not refutation, is what carries to the
 > conditional route as a whole.
 > X-026 states the six-step ladder and marks the step where it stops.
+> **This 2026-09-09 generalization is superseded by the 2026-09-10 scope correction
+> above.**
 
 Retained beside this report: the four screening scripts and the two survivor records,
 listed under [Files](#files).
@@ -88,6 +117,10 @@ budget must be below 10: the conditioning is exactly, and only exactly, neutral.
 
 ## Why it is neutral, and why the ladder inherits it
 
+> **Current interpretation.** In this historical section, “neutral” applies only to the
+> named retained family and screened classes.
+> It is not a theorem about every class or every valid owner selection.
+
 The mechanism is one line.
 The ceiling family is *owner-saturated*: the corner-pair proof leaves the duals no room
 to avoid the marks ([lane T2](lane-t2-cap-and-next-cuts.md), C.1, `y(K_c) = 1` at every
@@ -122,6 +155,12 @@ digit.
 > rather than a property of conditioning.
 > The paragraph headed “1(c)” below is where that was found, and every citation of
 > exp-137 or exp-138 as evidence about conditioning now carries the same note.
+
+> **September 10 correction to that attribution.** The named exp137/138 source and its
+> negative results remain valid, as independently confirmed by exp141. Comparing its
+> mass deficit with a residual shortfall does not prove that the deficit caused the
+> negative. Survivor strength depends on geometry as well as source mass.
+> D489 concerns the CLI’s refusal of other valid input classes before reuse.
 
 ## Answers to the four questions
 
@@ -160,6 +199,12 @@ screen above: transport a depth-one family of mass `n`, delete the members meeti
 It is exact, it needs no LP, and it costs seconds.
 It is the instrument PR 137 already built.
 **The reason their screens read negative is that they were run on the wrong family.**
+
+> **Historical attribution, superseded September 10.** The original protocol named this
+> source explicitly. Its measured negative is not invalidated; “wrong family” and “entire
+> negative result” below overstate what a change of source establishes.
+> Use the corrected D489 record and the source-specific exp137/138 annotations.
+
 exp-137 and exp-138 used
 [`agenda-025/bc-232-leg-01-family.json`](../agenda-025/bc-232-leg-01-family.json): 768
 placements, mass `21342289572/2055263195 = 10.3842`, whose own receipt records
@@ -197,6 +242,12 @@ is **interior** — `(1.71652, 1.71652)` on the diagonal, at the meeting of the 
 pair and the `8°` squares ([lane A3](lane-a3-threshold-loop-at-383-100.md)). A
 boundary-slot conditioning would not reach the interior one at all.
 
+> **Correction.** The next two historical answers overreach.
+> The concrete survivor obstructs a common point cover when it lies in one of the
+> union’s residual domains.
+> It does not establish the former set-containment argument, the global owner-selection
+> routing condition, or a conditioned cap at `3.868983`.
+
 **3. Is there a lift that avoids the tree?** No, and the same measurement proves it
 without machinery. A single certificate valid for all 16 classes must charge every core
 residual in some class, and `R_{j3}` alone is such a set; the survivor family shows its
@@ -217,6 +268,10 @@ owners’ cores. Their 0/1 indicator is a packing of mass `n - m` feasible for e
 rank-one cut on the residual domain.
 So the conditional rank-one method is capped at the same `3.868983`, for every `m`.
 Conditioning changes neither end of `[3.82, 3.868983]`.
+
+> **Correction.** The following equality of selected readings does not identify the
+> complete conditional cut structure or its optimum.
+> It is retained as the original interpretation of the measurement.
 
 Worse, and this is the measurement that settles the hybrid question: the promoted
 plateau reader was run on the 80-placement mass-10 survivor family (`m1:j3` at `96/25`),

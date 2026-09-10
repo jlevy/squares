@@ -70,6 +70,16 @@ experiment:
 ---
 # Exp137: Exact Fractional-Family Obstruction Screen
 
+**Source-scope annotation, September 10, 2026 ([D-489](../../../../../defects.md)).**
+The declared source has mass `21342289572/2055263195`, about `10.3842`, below eleven.
+The screen’s source predicate accepts that particular deficient receipt but refuses
+valid mass-eleven source receipts.
+Fix the predicate before using the instrument for that broader input class (tracked as
+`think-rm5c`). This does not invalidate this experiment’s exact negative on its named
+source; exp141 independently confirmed the arithmetic and complete retained enumeration.
+It supplies no negative verdict on other fractional families or on the conditional cover
+method. The later mass-eleven X1 screen is a different source comparison.
+
 Complete exact producer screen found0of16endpoint classes with massatleast10;
 maximum77421212793/8221052780. This particular retained-family obstruction conjecture
 fails; the conditionalcover method remains open.
