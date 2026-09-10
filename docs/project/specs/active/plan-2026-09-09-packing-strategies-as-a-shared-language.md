@@ -322,6 +322,44 @@ the container at every step, by construction.
       byte-identical, which is what makes the export reproducible and not merely repeatable.
 - [ ] A guard on both exporters refusing a frame from a `guide` phase without its label.
 
+### Three ways of presenting this, and what each one costs
+
+The same work has three audiences, and they need different subsets of it. Naming them
+apart is what keeps the component split honest.
+
+| | hosted workbench | embedded animation | standalone video |
+| --- | --- | --- | --- |
+| where | `/workbench/` on Pages | the explainer, or anyone's page | a file to upload |
+| components | all nine | the seven `static` ones | the seven `static` ones |
+| script | yes | **none** | none at render time |
+| runs the mechanisms | **yes, live** | no, replays frames | no, replays frames |
+| what it consumes | a `PackingStrategy` | a `PackingAnimation` | a `PackingAnimation` |
+
+The second and third are the same path twice: static components, a finished animation, no
+mechanism executed. One emits SVG and the other emits frames for an encoder. That is why
+the embed is the thing to build first -- the video is nearly free once it exists.
+
+**The first is different, and this is the part the plan had not pinned down.** GitHub Pages
+serves static files and runs no backend, so a hosted workbench that lets a visitor *change*
+a setting and see what happens has to execute the mechanisms **in the browser**. The
+current prototype already does -- `optimizeStep`, `annealState` and the force law are
+JavaScript in `template.html` -- so nothing needs inventing. But it means there are two
+implementations of the same mechanisms, in two languages, and they will drift.
+
+**That is exactly what the shared contract is for**, and it is the strongest argument for
+having written one. `PackingStrategy` is the format both read: the Python executor runs a
+document headlessly for the campaign, the JavaScript runs the same document live for a
+visitor, and the two can be checked against each other by running one document through both
+and comparing the animation each produces. Without the contract, two implementations of
+"the physics" is a liability; with it, it is a testable agreement.
+
+- [ ] A JavaScript mechanism registry mirroring `MECHANISMS`, reading the same schema, so
+      the hosted workbench executes strategy documents rather than its own hard-coded
+      modes.
+- [ ] A conformance check: one strategy document, both implementations, and the two
+      `PackingAnimation` outputs compared within a declared tolerance. This is the test
+      that keeps the Rust backend honest later, for the same reason.
+
 ### Phase 5: publishing, which is nearly free
 
 **Yes, and most of it already runs.** `.github/workflows/pages.yml` builds and deploys
