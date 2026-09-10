@@ -93,6 +93,16 @@ $defs:
           maxItems: 3
           items: {type: number}
       phase: {type: string, description: Which strategy phase produced this frame.}
+      guided:
+        type: boolean
+        default: false
+        description: >
+          Whether THIS frame was pulled toward a target rather than found. Per
+          frame, not only per animation, because the interesting animations are
+          hybrids: the physics runs honestly for as long as it can and the last
+          stretch is slid into place. A renderer that knows which frames are
+          which can show the handoff instead of hiding it, and a viewer can see
+          exactly how far the search got on its own.
       label: {type: string, description: What to show while it is on screen.}
       feasible:
         type: boolean

@@ -237,16 +237,36 @@ none of it is a search result**. That rule is not decoration.
 The same instruments that make this animation possible are the ones used to report what
 a search reached, and the two must never be confusable.
 
-**The beat, per step from `n` to `n + 1`.** Five beats, and the middle three are the
-ones that had to be measured rather than guessed.
+**The beat, per step from `n` to `n + 1`.** Not a fade. The step should look like the
+packing being *found*: the new square arrives, everything jiggles, and the arrangement
+settles into the optimum. Most of that should actually be true.
 
-| beat | what happens | why |
-| --- | --- | --- |
-| **Hold** | the packing at rest, labelled with `n`, its side, and whether it beats the grid | the viewer needs a still frame to read the fact off |
-| **Enter** | the new square arrives from outside the container edge | it has to come from somewhere; dropping it in the middle starts the step already overlapping, measured at 0.83 of a unit side |
-| **Open** | the container grows to whichever side is larger | the rearrangement needs room, and this is the beat that fixes the measured defect below |
-| **Rearrange** | the guided phase drives every square to its matched target | matched, always: unmatched targets send each square to another’s place and they walk through each other |
-| **Close** | the container contracts to the new record’s side, squares riding it down | the owner’s own design: add the square, reshuffle without scaling, then scale down |
+| beat | what happens | honest? |
+| --- | --- | :---: |
+| **Hold** | the packing at rest, labelled with `n`, its side, whether it beats the grid | — |
+| **Enter** | the new square arrives from outside the container edge | — |
+| **Open** | the container grows to whichever side is larger | — |
+| **Settle** | the projection runs for real, unguided, from the arrangement it inherited | **yes** |
+| **Close in** | the guided phase takes it the rest of the way onto the record | no |
+| **Land** | the container contracts to the new record's side | — |
+
+**The fair stretch and the thumb on the scale, kept apart and both reported.** *Settle* is
+an ordinary `project` phase with no target: whatever it reaches, it reached. *Close in* is
+a `guide` phase, and every frame of it carries `guided: true` so a renderer can show the
+handoff rather than hide it. What the animation then shows is a plausible route to the
+optimum, with the point where plausibility ran out marked on it.
+
+That handoff is worth measuring rather than merely admitting, and it is the same number
+the campaign already reports: **how close the honest phase got before the guide took
+over**. Per step, that is one figure -- the excess over the record at the end of *Settle* --
+and across `n = 1..100` it is a curve. A step where the physics arrives on its own has an
+empty guided stretch and should say so; a step where it does not is exactly as interesting,
+and the film is better for showing which is which.
+
+**How much fair time to give it** is a dial, not a constant. Too little and every step is
+mostly thumb; too much and the film is long and the physics visibly stalls, since the
+measured cliff is around two per cent above a record and no budget yet crosses it. The
+strategy document carries the budget, so the answer is swept rather than guessed.
 
 **The defect this beat exists to fix, stated plainly.** A guided transition between two
 *different* `n` is smooth and lands exactly -- residual `0.0004` to `0.0007`, largest
