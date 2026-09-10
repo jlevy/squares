@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 488
+count: 489
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -16222,3 +16222,66 @@ defects:
     in devtools/gate-budgets.yaml would, and arming it is think-uswr's.
   bead: think-uswr
   recorded_in: packing/devtools/reachable_tests.py
+- id: D-489
+  title: The corner-dual salvage screen can only accept a family that already fails the mass threshold
+  date: '2026-09-09'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: >-
+    One day and three experiments. The predicate is committed with the instrument on
+    2026-09-08 and exp-137, exp-138 and exp-141 all ran against it that day; a read-only
+    strategy review on 2026-09-09 tried to re-run the same screen on a better source,
+    was refused by the predicate, and read the refusal as the tell.
+  severity: high
+  status: outstanding
+  bead: think-rm5c
+  what: >-
+    `devtools/screen_corner_dual_salvage.py:_source_receipt` requires the source family's
+    own `verify_ceiling` receipt to carry `failures == ["K3 total weight at least n"]`
+    exactly. That is the failure a family records when its total weight is BELOW n, so
+    the predicate accepts only a family that falls short of mass n and refuses every
+    proved ceiling family, whose `failures` list is empty. The screen's whole purpose is
+    weak duality -- delete from a depth-one family the members meeting a class's
+    guaranteed patch and read the survivor weight as a lower bound on that class's
+    residual cover value -- and the survivor bound depends on both source mass and the geometry of deletion.
+    Hard-wiring a deficient source receipt excludes other valid inputs; this input
+    restriction is stronger than the mathematical inheritance argument requires.
+    Deletion-only inheritance needs depth at most one, with the receipt's geometry
+    and declared domain valid. The source-mass clause is not such a validity premise;
+    its failure-list equality makes the CLI source-specific.
+  consequence: >-
+    Reviewed September10: this is source-admission reuse debt, not a failure of the
+    original exact arithmetic. Exp137 and exp138 explicitly tested the retained
+    agenda025 BC232 family of mass21342289572/2055263195, about10.3842, and exp141
+    independently confirmed their complete negative enumeration. Those scoped verdicts
+    stand. A source below eleven may still obstruct a residual threshold after
+    deletion, so source deficit alone does not prove the negative or identify its cause.
+    Neither failure of this source nor comparison of its deficit to a survivor
+    shortfall establishes that a useful residual cover exists.
+    The later X1 measurement used a different mass-eleven family and found survivors
+    of mass10 on four single-corner endpoint-patch classes and mass7 on the stated
+    four-corner combination. These witnesses obstruct point covers below the required
+    budgets on those fixed relaxations. They do not establish a method-wide conditional
+    refutation, universal neutrality, or a physical packing forced into an unresolved
+    selection. The corrected X026 states the owner-selection quantifier and limits.
+    The CLI predicate prevents reuse on this valid source class; its component screen
+    can still be applied after separate source verification. Original exp137/138
+    records now carry this annotation without changing their outcomes.
+  fix: >-
+    none yet; tracked as think-rm5c and required before CLI reuse on mass-eleven sources.
+    Replace the source-specific failure-list equality with an explicit admission
+    contract: retain valid geometry, net, symmetry, containment and all-point depth
+    premises, while permitting either side of the source-mass threshold. Do not
+    accept arbitrary unrelated verifier failures. Record source and survivor masses
+    separately. A larger source mass alone does not guarantee a stronger survivor
+    bound when the placement geometry changes. Add positive admission and refusal
+    controls before running a new target. The present milestone only corrects the
+    interpretation and annotates the original records; it does not claim the repair.
+  regression: >-
+    none. Nothing in `packing/tests/test_screen_corner_dual_salvage.py` exercises a source
+    family of mass n, and no control compares a screen's survivor weight against its own
+    source's total, which is the one arithmetic that would have made the deficit visible
+    in the receipt.
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md

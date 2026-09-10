@@ -624,6 +624,12 @@ class Step:
     its own budget still fails. An explicit `--timeout-seconds` on the command line still
     wins, so an operator can always tighten what a step asked for."""
 
+    start_early: bool = False
+    """Prefer this step within its budget class to reduce a measured late tail.
+
+    This is only a submission hint; it changes neither timeout nor report order.
+    """
+
     def reachable_from(self, path: str) -> bool:
         """Can a change to `path` affect this step?
 
@@ -2098,6 +2104,86 @@ def _exact_grid_replay(context: Context) -> str:
     return output
 
 
+def _finer_net_limit_record(context: Context, steps: int, record: str) -> str:
+    """One of T-024's limit records, replayed from its source certificate in full.
+
+    Each record is derived from a re-certification of the retained T-018 atoms on a
+    finer direction net, and `--check-limit-record` replays all five source conditions
+    over that net -- 721 or 1441 directions against the 181 of T-022's source -- before
+    it re-derives the sharpened endpoint. That replay is why these two steps are off the
+    pull-request surface: measured on this branch on 2026-09-09, on a loaded four-cpu
+    host with `PACK_JOBS=1`, the 720-step check took 173s and the 1440-step check 352s,
+    against a fast tier whose target is two to two and a half minutes. T-022's own check
+    stays on the pull-request surface, where it was measured to fit. The two records are
+    two steps rather than one so that neither waits on the other and each stays well
+    inside the shared subprocess cap on the deep gate's serial schedule.
+
+    What the pull request keeps is the half of the guard that is cheap:
+    `test_every_case_page_binds_the_certificate_its_own_evidence_names` rehashes each
+    record's source bytes and re-derives its supremum from the declared gap and shrink,
+    so a changed certificate cannot leave the promoted endpoint looking current. What
+    waits for the deep gate is the five-condition replay behind the record.
+    """
+    certificate = f"cases/n11_fractional_certificate/certificate-381-100-net{steps}.json"
+    return _module(
+        context,
+        "devtools.dilation_corollary",
+        certificate,
+        "--source-name",
+        f"packing/{certificate}",
+        "--check-limit-record",
+        f"cases/n11_fractional_certificate/{record}",
+    )
+
+
+def _finer_net_limit_record_720(context: Context) -> str:
+    return _finer_net_limit_record(context, 720, "t-024-dilation-limit-corollary.json")
+
+
+def _finer_net_limit_record_1440(context: Context) -> str:
+    return _finer_net_limit_record(context, 1440, "t-024-net1440-dilation-limit-corollary.json")
+
+
+def _threshold_limit_record(context: Context, steps: int, record: str) -> str:
+    """One of T-026's limit records, replayed from its threshold source in full.
+
+    The same guard as `_finer_net_limit_record` over the other kind of atom. Each record
+    is derived from a re-certification of the retained T-025 threshold atoms on a finer
+    direction net, and `--check-limit-record` replays all six source conditions -- 1, 1',
+    2', 3, 4 and 5' -- by the threshold theorem's own exact event-cell sweep before it
+    re-derives the sharpened endpoint. That sweep is why these two steps are off the
+    pull-request surface, and it is dearer than the point one: measured on this branch on
+    2026-09-09, on a four-cpu host with `PACK_JOBS=1`, the 720-step check took 618s and
+    the 1440-step check 919s, against a fast tier whose target is two to two and a half
+    minutes. No standalone reader decides a threshold certificate, so unlike T-024's
+    rungs neither of these has a third-party replay behind it either.
+
+    What the pull request keeps is the same cheap half:
+    `test_every_case_page_binds_the_certificate_its_own_evidence_names` rehashes the
+    record's source bytes and re-derives its supremum from the declared gap and shrink,
+    for the `v3` threshold record as for the `v2` point one, so a changed certificate
+    cannot leave the promoted endpoint looking current.
+    """
+    certificate = f"cases/n11_threshold_certificate/certificate-191-50-net{steps}.json"
+    return _module(
+        context,
+        "devtools.dilation_corollary",
+        certificate,
+        "--source-name",
+        f"packing/{certificate}",
+        "--check-limit-record",
+        f"cases/n11_threshold_certificate/{record}",
+    )
+
+
+def _threshold_limit_record_720(context: Context) -> str:
+    return _threshold_limit_record(context, 720, "t-026-net720-dilation-limit-corollary.json")
+
+
+def _threshold_limit_record_1440(context: Context) -> str:
+    return _threshold_limit_record(context, 1440, "t-026-dilation-limit-corollary.json")
+
+
 def _verifier_limits(context: Context) -> str:
     output = _module(context, "cases.trump11.verifier_limits")
     _require_text(output, "delta = 1e-100  REJECT", "tol=1e-09")
@@ -3169,6 +3255,9 @@ STEPS: tuple[Step, ...] = (
         "exact verification",
         _exact_verification,
         fast=True,
+        # PR110 run34154326299: a 42s launch delay leaves a 41s exact-only tail.
+        # VE-004 measures starting it sooner after VE-003's retained setup failure.
+        start_early=True,
         touches=(
             *_CORE,
             *_CASES,
@@ -3200,6 +3289,59 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/decide_certificate.py",
             "packing/devtools/generate_known_best_n011_rational_control.py",
             "packing/devtools/check_rational_witness_independent.py",
+        ),
+    ),
+    # T-024's limit records replay their five source conditions over 721 and 1441
+    # directions, 173s and 352s on one core; the docstring on `_finer_net_limit_record`
+    # carries the measurements and the cheap stand-in the pull-request surface keeps.
+    # Each touches what `exact verification` touches.
+    Step(
+        "finer-net dilation-limit record, 720 steps",
+        _finer_net_limit_record_720,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/frontier/*",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
+        ),
+    ),
+    Step(
+        "finer-net dilation-limit record, 1440 steps",
+        _finer_net_limit_record_1440,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/frontier/*",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
+        ),
+    ),
+    # T-026's two limit records do the same over threshold atoms, and their replay is the
+    # threshold exact sweep: 618s and 919s on one core, measured on the branch that
+    # registered the result. `_threshold_limit_record` carries the reading and the
+    # pull-request stand-in. Each touches what the point records touch, with the
+    # threshold decider in place of the point one.
+    Step(
+        "threshold dilation-limit record, 720 steps",
+        _threshold_limit_record_720,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/frontier/*",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_threshold_certificate.py",
+        ),
+    ),
+    Step(
+        "threshold dilation-limit record, 1440 steps",
+        _threshold_limit_record_1440,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/frontier/*",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_threshold_certificate.py",
         ),
     ),
     Step(
@@ -4025,7 +4167,7 @@ def _selection_needs_marker(selected: Sequence[Step]) -> bool:
 
 
 def _submission_order(selected: Sequence[Step]) -> list[Step]:
-    """The order steps are handed to the pool: longest first, declared order after.
+    """Submit budgeted steps first, then early hints, with stable ties.
 
     The pool has `--jobs` workers and takes steps in submission order, so a long step
     submitted late starts late and the run ends when it finishes. In declared order the
@@ -4037,13 +4179,18 @@ def _submission_order(selected: Sequence[Step]) -> list[Step]:
     `budget_seconds` is the ordering key because it is already the file's declaration
     that a step runs long, argued next to each of the four that carry one; nothing here
     guesses a duration. Descending, so the longest budget goes first, and stable, so
-    everything unbudgeted keeps declared order.
+    ties keep declared order unless a measured late tail earns `start_early`.
+    The hint is separate from a subprocess budget so starting sooner cannot grant a
+    longer timeout.
 
     This changes when steps start, never what is reported: `_run_selected` collects
     results by name and replays them in declared order, which is the property that keeps
     two runs comparable.
     """
-    return sorted(selected, key=lambda step: -(step.budget_seconds or 0.0))
+    return sorted(
+        selected,
+        key=lambda step: (-(step.budget_seconds or 0.0), not step.start_early),
+    )
 
 
 def _run_selected(

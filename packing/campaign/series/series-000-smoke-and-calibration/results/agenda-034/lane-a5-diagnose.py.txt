@@ -1,0 +1,64 @@
+"""Where the optimum's tight and priced rows sit, and how the weight moves off 1/8."""
+from __future__ import annotations
+import json, math, sys
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, "/home/user/squares/packing")
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+from devtools.plateau_reader import (
+    load_family, read_arrangement, intersection_graph, piercing_number,
+)
+from devtools.polish_ceiling_family import placement_orbits
+from cap_lp import maximal_cliques, orbit_row, RS
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+name, tag = sys.argv[1], sys.argv[2]
+rec = json.loads((OUT / f"nu-{tag}.json").read_text())
+z = [Fraction(s) for s in rec["weights_per_placement"]]
+fam = load_family(RS / name)
+arr = read_arrangement(fam)
+orbit, orbits = placement_orbits(fam)
+n = len(fam.placements)
+c = fam.outer_side / 2
+
+def where(x, y):
+    dx, dy = float(x - c), float(y - c)
+    wall = min(float(x), float(y), float(fam.outer_side - x), float(fam.outer_side - y))
+    return f"({float(x):.4f},{float(y):.4f}) d(wall)={wall:.3f} d(centre)={math.hypot(dx,dy):.3f}"
+
+print(f"== {tag}: nu_S = {rec['primal_exact']}, dual bound {rec['dual_bound_exact']}")
+print(f"   shortfall 11 - nu_S = {Fraction(11) - Fraction(rec['primal_exact'])}")
+print("\n-- the priced rows of the exact dual (the certificate of optimality)")
+by_row = {}
+for m in arr.masks:
+    by_row.setdefault(orbit_row(m, orbit, orbits), []).append(m)
+adj = intersection_graph(fam)
+cl = maximal_cliques(adj, n)
+nonhelly = [q for q in cl if q.bit_count() >= 2 and not any(q & m == q for m in arr.masks)]
+clique_by_row = {}
+for q in nonhelly:
+    clique_by_row.setdefault(orbit_row(q, orbit, orbits), []).append(q)
+for d in rec["dual_support"]:
+    row = tuple(d["row_vector"])
+    total = sum(row)
+    print(f"   {d['kind']:6} u = {d['u']:>4}  {total} placements, orbit counts {d['row_vector']}")
+    if d["kind"] == "depth" and row in by_row:
+        m = by_row[row][0]
+        print(f"          a point of that membership set: {where(*arr.representative[m])} "
+              f"({len(by_row[row])} membership sets share this orbit row)")
+    if d["kind"] == "atom" and row in clique_by_row:
+        q = clique_by_row[row][0]
+        p = piercing_number(arr, q)
+        pts = ", ".join(where(*pt) for pt, v in p.measure)
+        print(f"          clique of {q.bit_count()} placements, tau* = {p.value}, "
+              f"{len(clique_by_row[row])} cliques share this orbit row")
+        print(f"          piercing measure at {pts}")
+        print(f"          members: " + "; ".join(
+            where(fam.placements[i].centre_x, fam.placements[i].centre_y)
+            for i in arr.members(q)))
+print("\n-- redistribution off the uniform 1/8")
+for o in range(orbits):
+    p = fam.placements[[i for i in range(n) if orbit[i] == o][0]]
+    ang = math.degrees(2 * math.atan(float(p.half_tangent)))
+    fold = min(ang % 90, 90 - ang % 90)
+    print(f"   orbit {o:2}: 1/8 -> {str(z[o]):>6}  (orbit total 1 -> {str(8*z[o]):>5})  "
+          f"tilt {fold:6.3f} deg  {where(p.centre_x, p.centre_y)}")

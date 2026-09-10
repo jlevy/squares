@@ -93,9 +93,25 @@ session:
   - 143 focused kernel/session tests passed at c89c7646.
   - At the initial correction checkpoint, the corrected tools passed their source and failure controls; integrated certification was then outstanding. The dated addendum records its later completion.
   stop_reason: The stopped correction checkpoint is certified by the retained raw full log and structured component receipts; merge publication remains pending and no research phase is reopened.
-  next_action: think-qfog starts the selected pairwise-compatibility continuation on a new codex branch after merge publication.
+  next_action: BC-305, think-qfog, continues pairwise compatibility on codex/n11-ownership-continuation, stacked on PR 127 under the owner's updated publication instruction.
 ---
 # PR 127 Handoff Review and Merge Corrections
+
+**Usage and publication boundary, 2026-09-08.** The handoff-review receipt now closes at
+2026-09-08T23:23:55Z, when the continuation branch was created.
+Session 112 starts at the same cutoff and uses an after-minus-before delta, so the two
+intervals do not charge the same recorded completion twice.
+Analytic derivation and tool preparation before the cutoff remain in this interval even
+when first published in the stacked continuation PR. PRs 116 and 121 have merged; PR 127
+remains open.
+
+The native task-tree receipts are live lower bounds and include the root and linked
+Codex agents. Token counts are assigned when their completion event is recorded;
+reasoning output is a subset of output.
+Independent Claude activity is covered only by its own retained receipts, and later
+concurrent Claude merge activity is not included in this Codex interval.
+The branch association is declared by this session, because native Codex logs contain no
+Git-branch telemetry.
 
 The
 [review](../../../docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)

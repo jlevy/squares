@@ -1,0 +1,137 @@
+{
+  "steps": 2880,
+  "D": "207107/1440000000",
+  "B_fail": "9979803/10000000",
+  "B_pass": "2494953/2500000",
+  "B_pass_float": 0.9979812,
+  "unit_equivalent_side_L0_over_B": 3.81770718726966,
+  "dilation_supremum_squared": "20903184432391367564325625000000/1434604297721532268112545733649",
+  "dilation_supremum_float": 3.8171582266239787,
+  "tests": [
+    {
+      "B": "4994591/5000000",
+      "B_float": 0.9989182,
+      "least_over_new_directions": "4001/4000",
+      "least_float": 1.00025,
+      "argmin": 1537,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 11.5
+    },
+    {
+      "B": "2496123/2500000",
+      "B_float": 0.9984492,
+      "least_over_new_directions": "4001/4000",
+      "least_float": 1.00025,
+      "argmin": 1537,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 6.8
+    },
+    {
+      "B": "9982147/10000000",
+      "B_float": 0.9982147,
+      "least_over_new_directions": "4001/4000",
+      "least_float": 1.00025,
+      "argmin": 1537,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 7.7
+    },
+    {
+      "B": "399239/400000",
+      "B_float": 0.9980975,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 7.3
+    },
+    {
+      "B": "9980389/10000000",
+      "B_float": 0.9980389,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 7.5
+    },
+    {
+      "B": "155939/156250",
+      "B_float": 0.9980096,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 6.1
+    },
+    {
+      "B": "9979949/10000000",
+      "B_float": 0.9979949,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 5.9
+    },
+    {
+      "B": "2494969/2500000",
+      "B_float": 0.9979876,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 7.9
+    },
+    {
+      "B": "9979839/10000000",
+      "B_float": 0.9979839,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 14.0
+    },
+    {
+      "B": "9979821/10000000",
+      "B_float": 0.9979821,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 13.8
+    },
+    {
+      "B": "2494953/2500000",
+      "B_float": 0.9979812,
+      "least_over_new_directions": "100003/100000",
+      "least_float": 1.00003,
+      "argmin": 2825,
+      "passes": true,
+      "directions_to_sweep": 20,
+      "swept": 20,
+      "seconds": 12.6
+    }
+  ],
+  "seconds": 101.5,
+  "method": "knowledge-based: only directions failing at B0 and below their net's known crossing are swept",
+  "lower_is_failure_of": "1440-net k=877 (2880-net k=1754) fails at 9979803/10^7",
+  "upper_is_pass_of": "chain S2880-sharp, all 2881 directions"
+}

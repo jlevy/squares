@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""Spike B: anatomy of an LP dual from a lp-run2 checkpoint (duals.npy, rows.json, sites.json).
+
+Reports the support rows and weights (integrality), the symmetrised family's exact maximum
+depth at the sites vs at arrangement vertices, and, for the support placements, which
+pairwise overlaps contain no site of the current site set (the unsampled overlaps that
+make an integer plateau).
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from collections import Counter
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from sepcore import FamilyGeometry, family_from_dual, fold_deg, angle_class  # noqa: E402
+
+from sqpack.fractional.ceiling import arrangement_lines, container_vertices, maximum_depth  # noqa: E402
+from sqpack.fractional.generate import net_half_tangents  # noqa: E402
+
+run = Path(sys.argv[1])
+outer = Fraction(191, 50)
+B = Fraction(9977, 10000)
+half_tangents = net_half_tangents(Fraction(207107, 500000), 180)
+duals = np.load(run / "duals.npy")
+rows = [(int(d), Fraction(x), Fraction(y)) for d, x, y in json.loads((run / "rows.json").read_text())]
+sites = [(Fraction(x), Fraction(y)) for x, y in json.loads((run / "sites.json").read_text())]
+support = np.flatnonzero(duals > 1e-9)
+print(f"rows {len(rows)}, dual support {support.size}, total {duals.sum():.9f}")
+vals = Counter(round(float(duals[i]), 6) for i in support)
+print("dual weight values:", dict(sorted(vals.items(), key=lambda t: -t[0])))
+for i in support[np.argsort(-duals[support])][:40]:
+    d, x, y = rows[i]
+    ang = fold_deg(half_tangents[d])
+    print(f"  y={duals[i]:.6f} dir {d:3d} angle {ang:6.2f} ({angle_class(ang)}) centre ({float(x):.4f}, {float(y):.4f})")
+fam = family_from_dual(rows, duals, half_tangents, outer, B, n=11)
+geo = FamilyGeometry(fam, print)
+pl = geo.pl
+print(f"symmetrised family {len(pl)} distinct placements, total {float(geo.family.total_weight):.6f}")
+lines = arrangement_lines(geo.family)
+verts = container_vertices(geo.family, lines)
+worst, decided, where = maximum_depth(geo.family, verts)
+print(f"exact max depth at {len(verts)} arrangement vertices: {float(worst):.6f} at {where and (float(where[0]), float(where[1]))}")
+# depth at sites
+S = np.array([[float(x), float(y)] for x, y in sites])
+first = np.abs(S @ geo.normals[:, 0, :].T - geo.offsets[None, :, 0]) <= geo.halves[None, :] + 1e-9
+second = np.abs(S @ geo.normals[:, 1, :].T - geo.offsets[None, :, 1]) <= geo.halves[None, :] + 1e-9
+inside = first & second
+site_depth = inside @ geo.y
+print(f"max depth at the {len(sites)} sites (loose): {site_depth.max():.6f}")
+# unsampled overlaps among heavy placements
+heavy = [i for i in range(len(pl)) if geo.y[i] >= 0.05]
+unsampled = 0; total = 0; area_unsampled = []
+from sepcore import intersect, area
+for a in range(len(heavy)):
+    for b in range(a + 1, len(heavy)):
+        i, j = heavy[a], heavy[b]
+        if j not in geo.adj[i]:
+            continue
+        total += 1
+        both = inside[:, i] & inside[:, j]
+        if not both.any():
+            unsampled += 1
+            poly = intersect(list(geo.corners[i]), pl[j])
+            area_unsampled.append(float(area(poly)))
+print(f"heavy placements (y >= 0.05): {len(heavy)}; overlapping heavy pairs {total}, of which {unsampled} contain no site; unsampled overlap areas: {sorted(area_unsampled, reverse=True)[:10]}")

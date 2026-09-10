@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""How well an LP site set samples the deep region of the optimal face."""
+from __future__ import annotations
+import json, sys
+from fractions import Fraction as F
+import numpy as np
+from scipy.spatial import cKDTree
+
+deep = json.load(open(sys.argv[1]))["detail"]
+P = np.array([[float(F(r["x"])), float(F(r["y"]))] for r in deep])
+for label, path in (("base 191/50 + vertex oracle (sites-1)", sys.argv[2]),) + tuple(("structural", p) for p in sys.argv[3:]):
+    raw = json.load(open(path))
+    orbits = raw if isinstance(raw, list) else raw["sites_out"]
+    S = np.array([[float(F(a)), float(F(b))] for orb in orbits for a, b in orb])
+    d, _ = cKDTree(S).query(P)
+    print(f"{label:42s} {len(S):6d} sites: nearest-site distance to the {len(P)} deep cells -- "
+          f"min {d.min():.2e}  median {np.median(d):.4f}  mean {d.mean():.4f}  max {d.max():.4f}; "
+          f"{(d > 1e-3).sum()} deep cells more than 1e-3 away ({100*(d>1e-3).mean():.1f}%)")

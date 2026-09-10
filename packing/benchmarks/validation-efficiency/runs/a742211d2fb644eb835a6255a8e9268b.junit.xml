@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="99.165" timestamp="2026-09-07T12:44:57.752477-07:00" hostname="MacBookPro"><testcase classname="benchmarks.test_checks_timing" name="test_complete_checks_workload" time="99.138"><failure message="assert 1 == 0&#10; +  where 1 = CompletedProcess(args=['/Users/levy/wrk/github/squares/packing/.venv/bin/python3', '-m', 'sqpack.cli.validate', '--che...   ],\n      [\n        &quot;type floor (basedpyright)&quot;,\n        31.448190208000597\n      ]\n    ]\n  }\n}\n', stderr='').returncode">capsys = &lt;_pytest.capture.CaptureFixture object at 0x106f442f0&gt;
+
+    def test_complete_checks_workload(capsys: pytest.CaptureFixture[str]) -&gt; None:
+        """Retain the complete CLI result before refusing failed or changed coverage."""
+        completed = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "sqpack.cli.validate",
+                "--checks",
+                "--jobs",
+                "3",
+                "--inner-jobs",
+                "1",
+                "--format",
+                "json",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            timeout=600,
+            check=False,
+        )
+        with capsys.disabled():
+            print(completed.stdout, end="")
+            print(completed.stderr, end="", file=sys.stderr)
+&gt;       assert completed.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/Users/levy/wrk/github/squares/packing/.venv/bin/python3', '-m', 'sqpack.cli.validate', '--che...   ],\n      [\n        "type floor (basedpyright)",\n        31.448190208000597\n      ]\n    ]\n  }\n}\n', stderr='').returncode
+
+benchmarks/test_checks_timing.py:44: AssertionError</failure></testcase></testsuite></testsuites>

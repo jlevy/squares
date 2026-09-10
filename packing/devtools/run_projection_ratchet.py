@@ -328,7 +328,7 @@ def ratchet(
     repair. Continuation from the grid therefore has to invent a new arrangement on its
     first step or never move at all, which is the same wall this repository already
     measured for its annealing engine, where no single-square move lowers the side at a
-    grid ([H-135](../campaign/hypotheses/H-135-simultaneous-perturbation-move.md)).
+    grid ([H-158](../campaign/hypotheses/H-158-simultaneous-perturbation-move.md)).
     Measured at `n = 5`: three of four fully continuation-led runs never left `3.0`, and
     the fourth reached `2.708`, which is the record to four decimals.
     """

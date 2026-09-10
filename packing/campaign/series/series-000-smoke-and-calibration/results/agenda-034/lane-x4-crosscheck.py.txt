@@ -1,0 +1,144 @@
+"""Second, independent reading of every headline number.
+
+The screen's own test is SAT over edge normals (strict_separation).  This replays every
+verdict with an unrelated test: the exact rational squared distance between the two
+convex polygons, positive iff they are strictly disjoint.  Also pins the mechanism --
+where the patch's closest point to the critical survivor actually is.
+"""
+from __future__ import annotations
+
+import json
+import math
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+SCRATCH = "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/sixteen-sectors"
+sys.path.insert(0, SCRATCH)
+
+import nbins
+from devtools.owner_footprints import (
+    endpoint_footprint as tracked_endpoint,
+    owner_branch_manifest,
+    signed_axis_rays,
+)
+from devtools.screen_corner_dual_salvage import strict_separation
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+t0 = time.perf_counter()
+REPO = Path("/home/user/squares")
+SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
+              "ceiling-family-191-50.json")
+record = json.loads(SRC.read_text())
+family = CeilingCertificate.from_record(transport(record, Fraction(1), side=Fraction(96, 25)))
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+MARKS = {o.mark_id: o.mark for o in manifest.classes}
+
+
+def seg_dist2(p, a, b):
+    ax, ay = a
+    dx, dy = b[0] - ax, b[1] - ay
+    den = dx * dx + dy * dy
+    if den == 0:
+        return (p[0] - ax) ** 2 + (p[1] - ay) ** 2
+    t = ((p[0] - ax) * dx + (p[1] - ay) * dy) / den
+    t = Fraction(0) if t < 0 else (Fraction(1) if t > 1 else t)
+    return (p[0] - (ax + t * dx)) ** 2 + (p[1] - (ay + t * dy)) ** 2
+
+
+def poly_dist2(A, B):
+    best = None
+    arg = None
+    for (P, Q) in ((A, B), (B, A)):
+        edges = list(zip(Q, Q[1:] + Q[:1])) if len(Q) > 1 else [(Q[0], Q[0])]
+        for p in P:
+            for a, b in edges:
+                d = seg_dist2(p, a, b)
+                if best is None or d < best:
+                    best, arg = d, p
+    return best, arg
+
+
+def weight_by_distance(poly):
+    """Survivor weight decided by exact positive polygon distance, not by SAT."""
+    total = Fraction(0)
+    surv = []
+    for i, p in enumerate(family.placements):
+        d2, _ = poly_dist2(poly, p.corners())
+        if d2 > 0:
+            total += p.weight
+            surv.append(i)
+    return total, surv
+
+
+def weight_by_sat(poly):
+    total = Fraction(0)
+    surv = []
+    for i, p in enumerate(family.placements):
+        if strict_separation(p.corners(), poly) is not None:
+            total += p.weight
+            surv.append(i)
+    return total, surv
+
+
+print("=== cross-check: SAT verdict vs exact-distance verdict ===")
+cases = []
+for mark_id in ("m1", "m2"):
+    for parent in (3, 4):
+        cases.append((f"{mark_id}:j{parent} (8 bins)", tracked_endpoint(MARKS[mark_id], parent, directions)))
+    for kid in (6, 7, 8, 9):
+        cases.append((f"{mark_id}:J{kid} (16 bins)",
+                      nbins.endpoint_footprint(MARKS[mark_id], kid, directions, 16)))
+agree = True
+for label, poly in cases:
+    wd, sd = weight_by_distance(poly)
+    ws, ss = weight_by_sat(poly)
+    ok = (wd == ws) and (sd == ss)
+    agree &= ok
+    print(f"  {label:22s} distance-test {str(wd):8s}  SAT-test {str(ws):8s}  "
+          f"identical survivor sets {sd == ss}  -> {'AGREE' if ok else 'DISAGREE'}")
+print(f"  ALL AGREE: {agree}")
+
+print("\n=== mechanism: where the patch's closest point to the critical survivor is ===")
+for mark_id, idx in (("m1", 55), ("m2", 50)):
+    mark = MARKS[mark_id]
+    core = family.placements[idx].corners()
+    dm, _ = poly_dist2((mark,), core)
+    print(f"  mark {mark_id} alone           d^2 = {dm}  d = {float(dm) ** 0.5:.9f}")
+    for label, poly in ((f"j3 (8 bins)", tracked_endpoint(mark, 3, directions)),
+                        (f"J6 (16 bins)", nbins.endpoint_footprint(mark, 6, directions, 16)),
+                        (f"J7 (16 bins)", nbins.endpoint_footprint(mark, 7, directions, 16))):
+        d2, arg = poly_dist2(poly, core)
+        print(f"  {mark_id} patch {label:14s} d^2 = {d2}  d = {float(d2) ** 0.5:.9f}  "
+              f"closest patch point is the mark: {arg == mark}")
+
+print("\n=== control: lane X1's recorded mean deletion over the sixteen 8-bin classes ===")
+tot = Fraction(0)
+for owner in manifest.classes:
+    poly = tracked_endpoint(owner.mark, owner.sector, directions)
+    w, _ = weight_by_sat(poly)
+    tot += 11 - w
+print(f"  mean deletion = {tot / 16} (lane X1 records 55/32)  match {tot / 16 == Fraction(55, 32)}")
+
+print("\n=== the neutral ray set, and the general bin theorem ===")
+rays = signed_axis_rays(directions)
+for mark_id in ("m1", "m2"):
+    mark = MARKS[mark_id]
+    neutral = []
+    for r in rays:
+        w, _ = weight_by_sat(nbins.anchored_quarter_core(mark, r))
+        if w == Fraction(10):
+            neutral.append(r)
+    angs = sorted(math.degrees(math.atan2(float(y), float(x))) % 360.0 for x, y in neutral)
+    print(f"  mark {mark_id}: {len(neutral)} neutral rays, angular span "
+          f"[{angs[0]:.5f}, {angs[-1]:.5f}] deg, width {angs[-1] - angs[0]:.5f} deg")
+    # any closed bin containing one of these rays is exactly neutral
+    for bins in (8, 16, 32, 64):
+        step = 360.0 / bins
+        hit = sorted({int(a // step) for a in angs})
+        print(f"    a {bins}-bin partition has {len(hit)} bins containing a neutral ray: {hit}")
+
+print(f"\nwall time {time.perf_counter() - t0:.2f} s")

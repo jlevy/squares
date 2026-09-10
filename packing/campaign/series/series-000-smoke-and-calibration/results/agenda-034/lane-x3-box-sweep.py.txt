@@ -1,0 +1,74 @@
+"""Containment atoms on axis-aligned boxes: does any box hold more family weight than
+the number of pairwise-disjoint cores it can contain?
+
+Capacity bounds used, both valid upper bounds on the number of pairwise-disjoint closed
+B-squares contained in an (a x b) box:
+  * area:      floor(a*b / B^2)
+  * stacking:  if min(a, b) < 2B no two contained cores sit side by side across the short
+               side, so they stack along the long side and each has extent >= B there:
+               floor(max(a, b) / B).
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from fractions import Fraction as F
+from math import floor
+from pathlib import Path
+
+
+def load(path: Path) -> tuple[F, F, F, list[tuple[F, F, F, F]]]:
+    d = json.loads(path.read_text())
+    outer = F(d["outer_side"])
+    tans = [F(t) for t in d.get("half_tangents", [])]
+    side = F(d["placements"][0][4])
+    out: list[tuple[F, F, F, F]] = []
+    for k, cx, cy, wt, sd in d["placements"]:
+        t = tans[int(k)] if isinstance(k, int) else F(k)
+        den = 1 + t * t
+        h = F(sd) * ((1 - t * t) / den + 2 * t / den) / 2
+        out.append((F(cx), F(cy), F(wt), h))
+    return outer, side, F(d["total_weight"]), out
+
+
+def capacity(a: F, b: F, bb: F) -> int:
+    area = floor(a * b / (bb * bb))
+    if min(a, b) < 2 * bb:
+        return min(area, floor(max(a, b) / bb))
+    return area
+
+
+def sweep(path: Path, steps: int) -> None:
+    outer, bb, total, pl = load(path)
+    print(f"=== {path.name}  L = {float(outer):.6f}  B = {float(bb):.6f}  total = {total}")
+    grid = [outer * F(i, steps) for i in range(steps + 1)]
+    best: list[tuple[F, F, F, F, F, int]] = []
+    for i0, x0 in enumerate(grid):
+        for x1 in grid[i0 + 1 :]:
+            for j0, y0 in enumerate(grid):
+                for y1 in grid[j0 + 1 :]:
+                    cap = capacity(x1 - x0, y1 - y0, bb)
+                    wt = F(0)
+                    for cx, cy, w, h in pl:
+                        if x0 <= cx - h and cx + h <= x1 and y0 <= cy - h and cy + h <= y1:
+                            wt += w
+                    if wt > cap:
+                        best.append((x0, x1, y0, y1, wt, cap))
+    best.sort(key=lambda r: r[4] - r[5], reverse=True)
+    if not best:
+        print(f"  no box on the {steps}-step grid exceeds its capacity")
+        return
+    print(f"  {len(best)} boxes exceed capacity; top 10 by excess:")
+    for x0, x1, y0, y1, wt, cap in best[:10]:
+        print(
+            f"   [{float(x0):.4f},{float(x1):.4f}]x[{float(y0):.4f},{float(y1):.4f}] "
+            f"dims {float(x1 - x0):.4f}x{float(y1 - y0):.4f}  weight {float(wt):.6f} "
+            f"cap {cap}  excess {float(wt - cap):.6f}"
+        )
+
+
+if __name__ == "__main__":
+    n = int(sys.argv[1])
+    for arg in sys.argv[2:]:
+        sweep(Path(arg), n)

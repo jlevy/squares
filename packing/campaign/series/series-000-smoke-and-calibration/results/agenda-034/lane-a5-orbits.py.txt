@@ -1,0 +1,40 @@
+import sys
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools.plateau_reader import load_family
+from devtools.polish_ceiling_family import placement_key, d4_placement_images
+
+RS = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-383/run-sites")
+for name in ("ceiling-family-153-40.json", "ceiling-family-383-100.json"):
+    fam = load_family(RS / name)
+    ps = fam.placements
+    keys = [placement_key(p) for p in ps]
+    print("==", name, "outer", fam.outer_side, "n placements", len(ps))
+    print("   distinct keys:", len(set(keys)))
+    # geometric duplicates: same corner set
+    corners = []
+    for p in ps:
+        cs = tuple(sorted(p.corners())) if hasattr(p, "corners") else None
+        corners.append(cs)
+    print("   has corners():", corners[0] is not None)
+    if corners[0] is not None:
+        print("   distinct geometry:", len(set(corners)))
+    # D4 closure
+    index = {k: i for i, k in enumerate(keys)}
+    missing = 0
+    orbit = [-1]*len(ps); count = 0
+    for i, p in enumerate(ps):
+        if orbit[i] >= 0: continue
+        imgs = d4_placement_images(p, fam.outer_side)
+        for im in imgs:
+            j = index.get(im)
+            if j is None:
+                missing += 1
+            else:
+                orbit[j] = count
+        count += 1
+    print("   orbits:", count, "missing images:", missing, "unassigned:", orbit.count(-1))
+    from collections import Counter
+    print("   orbit sizes:", sorted(Counter(o for o in orbit if o>=0).values()))
+    print("   weights distinct:", sorted({str(p.weight) for p in ps}))

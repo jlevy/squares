@@ -1,0 +1,112 @@
+"""Exact soundness + growth audit of the sixteen-sector patches.
+
+(a) parent patch  subset  refined patch (and strictly larger),
+(b) refined patch  subset  Q_phi(m) for EVERY retained signed net ray phi in the closed bin
+    -- the containment argument of the sector-footprint proof, restated at sixteen bins
+    and checked ray by ray rather than assumed,
+(c) the exact squared distance from each patch to the nearest surviving core, so the
+    reach gain 8 -> 16 is a number and not an assertion.
+"""
+from __future__ import annotations
+
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+SCRATCH = "/private/tmp/n11-h157-ee98-review/replayed"
+sys.path.insert(0, SCRATCH)
+
+import nbins
+from devtools.owner_footprints import (
+    convex_polygon_contains_polygon,
+    owner_branch_manifest,
+    polygon_area_twice,
+    signed_axis_rays,
+    endpoint_footprint as tracked_endpoint,
+)
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+t0 = time.perf_counter()
+REPO = Path('/Users/levy/.codex/worktrees/88e2/squares')
+SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
+              "ceiling-family-191-50.json")
+record = json.loads(SRC.read_text())
+family = CeilingCertificate.from_record(transport(record, Fraction(1), side=Fraction(96, 25)))
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+MARKS = {o.mark_id: o.mark for o in manifest.classes}
+rays_all = signed_axis_rays(directions)
+
+
+def seg_dist2(p, a, b) -> Fraction:
+    ax, ay = a
+    dx, dy = b[0] - ax, b[1] - ay
+    den = dx * dx + dy * dy
+    if den == 0:
+        return (p[0] - ax) ** 2 + (p[1] - ay) ** 2
+    t = ((p[0] - ax) * dx + (p[1] - ay) * dy) / den
+    t = Fraction(0) if t < 0 else (Fraction(1) if t > 1 else t)
+    qx, qy = ax + t * dx, ay + t * dy
+    return (p[0] - qx) ** 2 + (p[1] - qy) ** 2
+
+
+def poly_dist2(A, B) -> Fraction:
+    """Exact squared distance between two disjoint convex polygons."""
+    best = None
+    for (P, Q) in ((A, B), (B, A)):
+        edges = list(zip(Q, Q[1:] + Q[:1])) if len(Q) > 1 else [(Q[0], Q[0])]
+        for p in P:
+            for a, b in edges:
+                d = seg_dist2(p, a, b)
+                if best is None or d < best:
+                    best = d
+    return best
+
+
+PAIRS = [("m1", 3, (6, 7)), ("m1", 4, (8, 9)), ("m2", 3, (6, 7)), ("m2", 4, (8, 9))]
+
+print("=== (a)/(b) exact containment audit ===")
+ok_all = True
+for mark_id, parent, kids in PAIRS:
+    mark = MARKS[mark_id]
+    Fp = tracked_endpoint(mark, parent, directions)
+    for kid in kids:
+        Fc = nbins.endpoint_footprint(mark, kid, directions, 16)
+        grows = convex_polygon_contains_polygon(Fc, Fp)
+        strict = polygon_area_twice(Fc) > polygon_area_twice(Fp)
+        bin_rays = [r for r in rays_all if nbins.sector_contains(kid, r, 16)]
+        sound = all(
+            convex_polygon_contains_polygon(nbins.anchored_quarter_core(mark, r), Fc)
+            for r in bin_rays
+        )
+        parent_rays = [r for r in rays_all if nbins.sector_contains(parent, r, 8)]
+        parent_sound = all(
+            convex_polygon_contains_polygon(nbins.anchored_quarter_core(mark, r), Fp)
+            for r in parent_rays
+        )
+        area_ratio = float(polygon_area_twice(Fc) / polygon_area_twice(Fp))
+        ok_all &= grows and strict and sound and parent_sound
+        print(f"  {mark_id}:j{parent} -> J{kid}/16 | rays in bin {len(bin_rays):4d} | "
+              f"parent subset child {grows} | strictly larger {strict} (area x{area_ratio:.4f}) | "
+              f"child inside every Q_phi in its bin {sound} | parent likewise {parent_sound}")
+print(f"  ALL CONTAINMENT CHECKS PASS: {ok_all}")
+
+print("\n=== (c) exact reach: squared distance from patch to the nearest surviving core ===")
+NEAREST = {"m1": 55, "m2": 50}
+for mark_id, parent, kids in PAIRS:
+    mark = MARKS[mark_id]
+    idx = NEAREST[mark_id]
+    core = family.placements[idx].corners()
+    Fp = tracked_endpoint(mark, parent, directions)
+    dp = poly_dist2(Fp, core)
+    print(f"  {mark_id}:j{parent} (8 bins)  d^2 = {dp}  d = {float(dp) ** 0.5:.9f}")
+    for kid in kids:
+        Fc = nbins.endpoint_footprint(mark, kid, directions, 16)
+        dc = poly_dist2(Fc, core)
+        gain = float(dp) ** 0.5 - float(dc) ** 0.5
+        print(f"    -> J{kid}/16            d^2 = {dc}  d = {float(dc) ** 0.5:.9f}  "
+              f"reach gain {gain:+.9f}  ({'REACHES' if dc == 0 else 'still short'})")
+print(f"\nwall time {time.perf_counter() - t0:.2f} s")

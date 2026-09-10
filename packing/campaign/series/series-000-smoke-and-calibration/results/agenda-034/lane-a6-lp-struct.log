@@ -1,0 +1,7 @@
+resumed 17389 sites in 2250 orbits, 2566 atom orbits, 15021 rows from /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/plateau-separation/resume-sites-1
+structural sites: +1400 orbits (28237 sites total), 0 already present, from /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/structural-sites-153-40.json
+matrices: 15021 rows x 6216 columns, 44292847 nonzeros (34.5s)
+HiGHS model passed (10.3s)
+[rows-0] objective 11.000000000  sites 28237/3650 orbits (support 177)  atoms 2566 (support 26, budget 1.034274)  floor 0 (support 0, budget 0.000000)  rows 15021 (dual support 16)  LP 404.9s (33473 it)  82.6 min left
+  dual at-n-0: support 16 rows, total 11.000000000, 0 near-integral; family 128 placements
+final objective 11.000000000; 15021 rows, 28237 sites (3650 orbits), 2566 atom orbits; rows complete: False; note solve-only; total 441s

@@ -1,0 +1,275 @@
+{
+ "schema": "wall-owner-six-dot-cover/v1",
+ "status": "complete",
+ "outcome": "refute-six-dot-cover",
+ "claim_limit": "the explicit tuple (0,0,0,7) under fixed D plus x149 only",
+ "sources": {
+  "implementation": {
+   "git_commit": "c8cd38dad502c78840144bcae42df4294ba7f3d0",
+   "module": "packing/devtools/wall_owner_six_dot_cover.py"
+  },
+  "endpoint": {
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json",
+   "git_commit": "c8cd38dad502c78840144bcae42df4294ba7f3d0",
+   "git_blob": "cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19"
+  },
+  "wall": {
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-146-wall-owner-footprints.json",
+   "git_commit": "c8cd38dad502c78840144bcae42df4294ba7f3d0",
+   "git_blob": "e54fa98133db5f2135cae8875188f51b7db26e12",
+   "constructor_revision": "915758898a97c92793f51e62b7a6b17f846895ca"
+  },
+  "selected_cover": {
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/exp-149-selected-wall-tuple-cover.json",
+   "git_commit": "c8cd38dad502c78840144bcae42df4294ba7f3d0",
+   "git_blob": "83ec897738d6d1b228623c3ac4c10cd9170d5940",
+   "implementation_revision": "5600c0fb4eccf9e9dcdf82b02506d3d4340651cb"
+  }
+ },
+ "settings": {
+  "outer_side": "96/25",
+  "core_side": "9977/10000",
+  "orientation_count": 361,
+  "candidate": [
+   0,
+   0,
+   0,
+   7
+  ],
+  "selected_classes": [
+   "bottom-left:m1:j0",
+   "bottom-left:m1:j0",
+   "bottom-left:m1:j0",
+   "bottom-left:m1:j7"
+  ],
+  "corner_order": [
+   "BL",
+   "BR",
+   "TL",
+   "TR"
+  ],
+  "max_subsets": 1023,
+  "candidate_limit": 1,
+  "dot_count": 6
+ },
+ "sites": {
+  "original": [
+   [
+    "73/75",
+    "187/90"
+   ],
+   [
+    "793/450",
+    "43/15"
+   ],
+   [
+    "48/25",
+    "48/25"
+   ],
+   [
+    "187/90",
+    "73/75"
+   ],
+   [
+    "43/15",
+    "793/450"
+   ]
+  ],
+  "added": [
+   "7641479337977841787/2367233010000000000",
+   "11240556076810055587/4734458945995860000"
+  ],
+  "augmented": [
+   [
+    "73/75",
+    "187/90"
+   ],
+   [
+    "793/450",
+    "43/15"
+   ],
+   [
+    "48/25",
+    "48/25"
+   ],
+   [
+    "187/90",
+    "73/75"
+   ],
+   [
+    "43/15",
+    "793/450"
+   ],
+   [
+    "7641479337977841787/2367233010000000000",
+    "11240556076810055587/4734458945995860000"
+   ]
+  ]
+ },
+ "selected_footprints": [
+  {
+   "corner": "BL",
+   "class": "bottom-left:m1:j0",
+   "polygon": [
+    [
+     "3152/3175",
+     "2336/3175"
+    ],
+    [
+     "1251225874449498/929936257500575",
+     "809779555054961729/743949006000460000"
+    ],
+    [
+     "1523220930453/1270000000000",
+     "3135879/2540000"
+    ],
+    [
+     "3152/3175",
+     "3135879/2540000"
+    ]
+   ]
+  },
+  {
+   "corner": "BR",
+   "class": "bottom-left:m1:j0",
+   "polygon": [
+    [
+     "463945870870542/185987251500115",
+     "809779555054961729/743949006000460000"
+    ],
+    [
+     "1808/635",
+     "2336/3175"
+    ],
+    [
+     "1808/635",
+     "3135879/2540000"
+    ],
+    [
+     "3353579069547/1270000000000",
+     "3135879/2540000"
+    ]
+   ]
+  },
+  {
+   "corner": "TL",
+   "class": "bottom-left:m1:j0",
+   "polygon": [
+    [
+     "3152/3175",
+     "6617721/2540000"
+    ],
+    [
+     "1523220930453/1270000000000",
+     "6617721/2540000"
+    ],
+    [
+     "1251225874449498/929936257500575",
+     "2046984627986804671/743949006000460000"
+    ],
+    [
+     "3152/3175",
+     "9856/3175"
+    ]
+   ]
+  },
+  {
+   "corner": "TR",
+   "class": "bottom-left:m1:j7",
+   "polygon": [
+    [
+     "5964921/2540000",
+     "3679979069547/1270000000000"
+    ],
+    [
+     "1855783875578497471/743949006000460000",
+     "2558730294863094/929936257500575"
+    ],
+    [
+     "1808/635",
+     "9856/3175"
+    ],
+    [
+     "5964921/2540000",
+     "9856/3175"
+    ]
+   ]
+  }
+ ],
+ "directions": [
+  {
+   "index": 0,
+   "label": "owner-000",
+   "container_area": "807866929/100000000",
+   "covered_area": "807866929/100000000",
+   "uncovered_area": "0",
+   "nonempty_subsets": 45
+  },
+  {
+   "index": 1,
+   "label": "owner-001",
+   "container_area": "52833982950911334449965838968999518918529/6561069487345290979548767268360100000000",
+   "covered_area": "52833982950911334449965838968999518918529/6561069487345290979548767268360100000000",
+   "uncovered_area": "0",
+   "nonempty_subsets": 45
+  },
+  {
+   "index": 2,
+   "label": "owner-002",
+   "container_area": "3291624692784645792510154624605978918529/410079871974310444548767268360100000000",
+   "covered_area": "3291624692784645792510154624605978918529/410079871974310444548767268360100000000",
+   "uncovered_area": "0",
+   "nonempty_subsets": 45
+  },
+  {
+   "index": 3,
+   "label": "owner-003",
+   "container_area": "648150327237302305568930976474798918529/81007720979684419548767268360100000000",
+   "covered_area": "648150327237302305568930976474798918529/81007720979684419548767268360100000000",
+   "uncovered_area": "0",
+   "nonempty_subsets": 45
+  },
+  {
+   "index": 4,
+   "label": "owner-004",
+   "container_area": "204439524268965750200319989909208918529/25633249381565310798767268360100000000",
+   "covered_area": "204439524268965750200319989909208918529/25633249381565310798767268360100000000",
+   "uncovered_area": "0",
+   "nonempty_subsets": 45
+  },
+  {
+   "index": 5,
+   "label": "owner-005",
+   "container_area": "83480018087580715675793665969854918529/10500379670435894748767268360100000000",
+   "covered_area": "83480018087580715675793665969854918529/10500379670435894748767268360100000000",
+   "uncovered_area": "0",
+   "nonempty_subsets": 45
+  },
+  {
+   "index": 6,
+   "label": "owner-006",
+   "container_area": "40135530081398113066376228343618918529/5064430382908804548767268360100000000",
+   "covered_area": "73189880759847718271121602744310574627071076778943047073481270890216244809973/9235893469110404550484104839657173112007073579532924993906637300000000000000",
+   "uncovered_area": "4427806234510766223910886044896951895672125490055474190438377927872190027/9235893469110404550484104839657173112007073579532924993906637300000000000000",
+   "nonempty_subsets": 42
+  }
+ ],
+ "escape": {
+  "orientation_index": 6,
+  "orientation_label": "owner-006",
+  "centre": [
+   "817192199347085520228353265846148270165682283161/339091015439118075361184328473167020364108140000",
+   "514813913410257785124616100324951461020539455610609685340386289/228842801213834883684121071973854752301680377574694240555420000"
+  ],
+  "replay": "open container; closed six-dot and four-selected-owner avoidance"
+ },
+ "summary": {
+  "checked_directions": 7,
+  "expected_directions": 361,
+  "all_covered": false,
+  "first_positive_deficit": 6,
+  "wall_seconds": 0.7116803329845425,
+  "process_seconds": 12.395755292003741
+ },
+ "error": null
+}

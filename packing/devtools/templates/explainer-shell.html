@@ -70,10 +70,9 @@ html, body { height: auto; overflow: visible; }
 /* One accent, everywhere. kpress ships a separate link blue and sets it on
    `:root`, on `.kpress`, and again per theme and palette on attribute selectors,
    all of which outrank `body`; the popovers it appends carry `.kpress-tooltip`
-   and their own resolved-theme attribute. Anything reading the token got the
-   blue, which is why a footnote popover drew a blue rule down its edge while
-   the text beside it was teal. Redeclare the token in the same places kpress
-   does, so the page's accent is what every consumer of it resolves. */
+   and their own resolved-theme attribute. Redeclare the token in the same
+   places kpress does, so links and controls inside those popovers resolve the
+   same accent as the surrounding page. */
 :root,
 .kpress,
 .kpress-page-main,
@@ -322,8 +321,18 @@ body {
 .intro .section-head { margin-block-start: 0; }
 
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
-/* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
-.hero h1 .symbol { text-transform: none; }
+/* The heading is set in caps by kpress; its s(n) run is mathematics and keeps both
+   mathematical italic and lowercase rather than inheriting the heading transform. */
+.hero h1 .tex { letter-spacing: 0; text-transform: none; }
+/* Prepared math reserves its full measured ascent and descent. In this single-line
+   title, s(11)'s 1.27-1.30em profile reservations are taller than the heading's 1.05
+   line-height and can push Figure 1 onto the next printed page. Both profiles keep a
+   0.9123em ascent, so this limits only the invisible inline box while leaving the 1em
+   glyphs in the same painted position: 1.05 - 0.9123 = 0.1377em below the baseline. */
+.hero h1 .squares-math-box {
+  height: 1.05em !important;
+  vertical-align: -0.138em !important;
+}
 /* Mathematical relations set in a sans line: `≥` in the title and the certificate
    buttons, `≈` in two captions and in the chart labels, `→` in Figure 7's label.
    Source Sans 3 carries none of the three, so the browser used to resolve them to
@@ -341,12 +350,14 @@ body {
 
    The rule that the page resolves every run to a face it ships retires that choice: a
    glyph from the reader's machine is a different glyph for every reader, and on macOS
-   the PDF writes it as outline paths. Of the two shipped routes, mathematics would set
-   the title's `s(11)` and its digits in Computer Modern and break the line's agreement
-   with the subtitle and the credits under it, so the relation comes from KaTeX_Main,
+   the PDF writes it as outline paths. Setting the whole title as mathematics would
+   hand the relation and bound to formula-specific glyph selection, spacing, and weight
+   rather than the established title typography, so the relation comes from KaTeX_Main,
    subset to those three code points and declared on the sans families themselves
-   (`relation_face_css`) rather than named by a class. That reaches the chart labels and
-   the caption prose, which no class did.
+   (`relation_face_css`) rather than named by a class. The title's `s(11)` is separately
+   set as mathematics, where the italic `s` carries meaning, while the relation and
+   value remain part of the sans title line. The relation face also reaches the chart
+   labels and the caption prose, which no class did.
 
    KaTeX_Main-Bold, not Regular, and the comparison is the reason. Measured with
    `compare_math_fonts metrics`, in units of a thousandth of an em, the rule thickness of
@@ -524,24 +535,24 @@ body {
   letter-spacing: var(--kpress-caps-spacing);
   padding: 0.05rem 0.4rem;
 }
-/* No box around a figure, and no rule under it. kpress draws both, and on a page
-   this dense they add a grid of grey the content did not ask for; the figures are
-   already set apart by their own white space and by the caption's voice.
+/* Pure charts and packing drawings need no outer box. Composite apparatus uses the
+   same hairline as its internal panel so its diagram, readout and controls read as one
+   figure.
 
-   The padding stays. It was there to hold the caption off the border, and with the
-   border gone it does the work the border was doing: the caption sits inset from the
-   measure, so a reader can see where the figure ends and the prose resumes. */
+   Caption padding keeps borderless figures inset from the measure, so a reader can see
+   where the figure ends and the prose resumes. */
 .cert-page .kpress-figure { border: 0; }
+.cert-page .kpress-figure.apparatus {
+  border: 1px solid var(--kpress-doc-border);
+}
 .cert-page .kpress-figcaption {
   border-block-start: 0;
   margin-block-start: 0;
   padding-block: 0.85rem 1rem;
 }
-/* The caption label -- "Figure 5." and the sentence that names the figure -- is bold,
-   and it is the same bold as the title credits and every other bold in the sans. KPress
-   sets it to its medium, which is right for a caption that whispers and wrong for one
-   that labels: on this page the label is the figure's title, and a reader scanning for
-   Figure 7 was looking for the one weight the page uses to mean "start here". */
+/* The "Figure N." prefix is the caption label. It uses the title-credit bold so a
+   reader scanning for Figure 7 can find it; the condition and caption text stay at the
+   caption's regular weight. */
 .cert-page .kpress-figcaption strong {
   font-weight: var(--kpress-font-weight-sans-bold);
 }
@@ -846,6 +857,14 @@ html[data-kpress-math-pending]
      rule the chooser would otherwise leave under every figure. */
   .panel, .fig-choose, .cert-page input[type="range"], .screen-only,
   .cert-page figure .rotation-handle { display: none; }
+
+  /* Paper keeps inline code's Planetaire metrics and text role without drawing the
+     screen chip behind it. Only decoration changes, so family, color, size, weight,
+     baseline and wrapping continue to come from kpress and the surrounding role. */
+  .cert-page code:not(pre code) {
+    background: transparent;
+    border: 0;
+  }
 
   /* Stack the printable figure body and cap canvases so their captions fit. */
   .split { display: block; }

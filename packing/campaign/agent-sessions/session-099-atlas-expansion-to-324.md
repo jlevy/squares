@@ -10,7 +10,7 @@ session:
   title: Atlas expansion to n = 324 and the poster composite
   date: '2026-09-07'
   started_at: '2026-09-07T07:20:00Z'
-  deadline_at: '2026-09-10T15:20:00Z'
+  deadline_at: '2026-09-13T18:00:00Z'
   branch: claude/atlas-expansion-300-400-9f79fc
   goal: Plan and begin the owner-directed widening of the frontier register and known-best
     atlas from n = 1..100 to n = 1..324, survey public sources beyond n = 100, and prepare the
@@ -130,9 +130,9 @@ session:
     entered_by: planned_checkpoint
     switch_reason: The bounded work is complete and committed on PR 111; only records that
       depend on the owner, CI and the harness remain.
-    budget_minutes: 4220
+    budget_minutes: 8730
     started_at: '2026-09-07T15:30:00Z'
-    deadline_at: '2026-09-10T13:50:00Z'
+    deadline_at: '2026-09-13T17:00:00Z'
     expected_output: A terminal session record with its rollup and certifying gate named, and
       the epic closed at merge.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
@@ -157,10 +157,10 @@ session:
     # after session-045, so that half needs the rollup; the certifying-gate line could be
     # declared without it, but the full checkpoint phase 4 names was not obtained before
     # merge, so it stays the owner's to declare. No work continues under this extension.
-    # There is no third: by 2026-09-10T13:50Z either the rollup exists and the record closes
+    # There is no third: by 2026-09-13T17:00Z either the rollup exists and the record closes
     # through close_session (think-y0hr), or the gate gains an honest unmeasured terminal
     # state (think-kfpr) and the record closes as stopped under it.
-    wall_minutes: 4800
+    wall_minutes: 9280
     checkpoint_minutes: 240
   stop_conditions:
   - Stop a phase when its bounded output is complete and validated; do not start a corpus chunk

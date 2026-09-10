@@ -1,0 +1,29 @@
+"""Write the last family of a K6 loop as a ceiling record, for a deeper reader pass."""
+import json, sys
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, "/home/user/squares/packing")
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+from devtools.plateau_reader import load_family
+from devtools.polish_ceiling_family import placement_orbits
+from cap_lp import RS
+OUT = Path("/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/threshold-cap")
+name, tag = sys.argv[1], sys.argv[2]
+loop = json.loads((OUT / f"k6-loop-{tag}.json").read_text())
+last = loop["history"][-1]
+z = [Fraction(s) for s in last["weights"]]
+fam = load_family(RS / name)
+orbit, orbits = placement_orbits(fam)
+src = json.loads((RS / name).read_text())
+rows = [[str(p.half_tangent), str(p.centre_x), str(p.centre_y), str(z[int(orbit[i])]), str(p.side)]
+        for i, p in enumerate(fam.placements) if z[int(orbit[i])] != 0]
+total = 8 * sum(z, start=Fraction(0))
+rec = {"n": 11, "outer_side": str(fam.outer_side), "square_side": str(fam.square_side),
+       "half_tangents": src["half_tangents"], "placements": rows,
+       "total_weight": str(total), "total_weight_float": float(total),
+       "provenance": {"tool": "threshold-cap/k6_loop.py, last round",
+                      "source": str(RS / name), "round": last["round"], "rows": last["rows"]}}
+p = OUT / f"k6-final-{tag}.json"
+p.write_text(json.dumps(rec, indent=1))
+print(f"wrote {p}: {len(rows)} placements, total {total}, round {last['round']}, "
+      f"primal {last['primal']} dual {last['dual_bound']}")

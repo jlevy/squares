@@ -1,0 +1,110 @@
+"""Second, independent reading of every headline number.
+
+The screen's own test is SAT over edge normals (strict_separation).  This replays every
+verdict with an unrelated algorithm: exact Sutherland-Hodgman convex clipping
+(convex_polygon_intersection), where "meets the patch" is "the exact intersection is
+nonempty".  Touching counts as meeting under both tests.
+"""
+from __future__ import annotations
+
+import json
+import math
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+SCRATCH = "/private/tmp/n11-h157-ee98-review/replayed"
+sys.path.insert(0, SCRATCH)
+
+import nbins
+from devtools.owner_footprints import (
+    convex_polygon_intersection,
+    endpoint_footprint as tracked_endpoint,
+    owner_branch_manifest,
+    polygon_area_twice,
+    signed_axis_rays,
+)
+from devtools.screen_corner_dual_salvage import strict_separation
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+t0 = time.perf_counter()
+REPO = Path('/Users/levy/.codex/worktrees/88e2/squares')
+SRC = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
+              "ceiling-family-191-50.json")
+record = json.loads(SRC.read_text())
+family = CeilingCertificate.from_record(transport(record, Fraction(1), side=Fraction(96, 25)))
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+MARKS = {o.mark_id: o.mark for o in manifest.classes}
+
+
+def ccw(poly):
+    return tuple(reversed(poly)) if polygon_area_twice(poly) < 0 else poly
+
+
+def weight_by_clipping(poly):
+    clip = ccw(poly)
+    total = Fraction(0)
+    surv = []
+    for i, p in enumerate(family.placements):
+        core = ccw(p.corners())
+        if not convex_polygon_intersection(core, clip):
+            total += p.weight
+            surv.append(i)
+    return total, surv
+
+
+def weight_by_sat(poly):
+    total = Fraction(0)
+    surv = []
+    for i, p in enumerate(family.placements):
+        if strict_separation(p.corners(), poly) is not None:
+            total += p.weight
+            surv.append(i)
+    return total, surv
+
+
+print("=== cross-check: SAT verdict vs exact clipping verdict ===")
+cases = []
+for mark_id in ("m1", "m2"):
+    for parent in (3, 4):
+        cases.append((f"{mark_id}:j{parent} (8 bins)",
+                      tracked_endpoint(MARKS[mark_id], parent, directions)))
+    for kid in (6, 7, 8, 9):
+        cases.append((f"{mark_id}:J{kid} (16 bins)",
+                      nbins.endpoint_footprint(MARKS[mark_id], kid, directions, 16)))
+agree = True
+for label, poly in cases:
+    wc, sc = weight_by_clipping(poly)
+    ws, ss = weight_by_sat(poly)
+    ok = (wc == ws) and (sc == ss)
+    agree &= ok
+    print(f"  {label:22s} clipping {str(wc):8s}  SAT {str(ws):8s}  "
+          f"identical survivor sets {sc == ss}  -> {'AGREE' if ok else 'DISAGREE'}")
+print(f"  ALL AGREE: {agree}")
+
+print("\n=== singleton-ray limit, replayed by clipping on the neutral-attaining rays ===")
+rays = signed_axis_rays(directions)
+for mark_id in ("m1", "m2"):
+    mark = MARKS[mark_id]
+    sat_neutral, clip_neutral = [], []
+    for r in rays:
+        q = nbins.anchored_quarter_core(mark, r)
+        if weight_by_sat(q)[0] == Fraction(10):
+            sat_neutral.append(r)
+    for r in sat_neutral:
+        q = nbins.anchored_quarter_core(mark, r)
+        if weight_by_clipping(q)[0] == Fraction(10):
+            clip_neutral.append(r)
+    angs = sorted(math.degrees(math.atan2(float(y), float(x))) % 360.0 for x, y in sat_neutral)
+    order = sorted(math.degrees(math.atan2(float(y), float(x))) % 360.0 for x, y in rays)
+    lo, hi = order.index(angs[0]), order.index(angs[-1])
+    contiguous = (hi - lo + 1) == len(angs)
+    print(f"  mark {mark_id}: SAT says {len(sat_neutral)} neutral rays; clipping confirms "
+          f"{len(clip_neutral)}  -> {'AGREE' if len(sat_neutral) == len(clip_neutral) else 'DISAGREE'}")
+    print(f"    angular span [{angs[0]:.5f}, {angs[-1]:.5f}] deg, width {angs[-1]-angs[0]:.5f}, "
+          f"contiguous in the ray order: {contiguous} ({hi - lo + 1} rays in the span)")
+
+print(f"\nwall time {time.perf_counter() - t0:.2f} s")

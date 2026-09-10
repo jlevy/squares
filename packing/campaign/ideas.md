@@ -272,11 +272,11 @@ Row 86 belongs to the pending refined-core transport.
 | 116 | Cover both-band squares outside the forced diamond | registered | [H-122](hypotheses/H-122-diamond-conditional-nine-point-cover.md) | Exp122 refutes this fixed-obstacle cover; full-square compatibility remains open. |
 | 117 | Localize all P10-avoiding near45 squares | registered | [H-123](hypotheses/H-123-near45-coordinate-localization.md) | Exp123 accepts the reviewed two-mark reduction through an independent four-guard certificate. |
 | 118 | Keep the full distinguished square in the conditional nine-point cover | registered | [H-124](hypotheses/H-124-full-distinguished-square-compatibility.md) | A complete compatibility proof would close H036 using H106 and H123; a bounded fixed-S discriminator first tests whether this stronger sufficient route survives. |
-| 119 | Put Gensane’s simultaneous all-square perturbation on the ordinary move menu | registered | [H-135](hypotheses/H-135-simultaneous-perturbation-move.md) | The cheapest structural repair for the plateau the 2026-09-08 annealing survey diagnoses; a flag on sqsearch rather than a formulation change. |
-| 120 | Give every square a nonzero derivative with an aggregate wall-pressure term | registered | [H-136](hypotheses/H-136-wall-pressure-dense-objective.md) | The cheap surrogate for the inflation formulation, ablatable against it; the reported side stays required_side so the term can never flatter a result. |
-| 121 | Spend the budget in refined local optima rather than moves | registered | [H-137](hypotheses/H-137-basin-hopping-over-the-lp-quench.md) | Basin hopping against multistart over the LP-in-cell quench, in the currency Ellsworth’s published statistics use. |
-| 122 | Separate cooling-schedule LENGTH from cooling-schedule SHAPE | registered | [H-138](hypotheses/H-138-cooling-schedule-length.md) | Registered mid-calibration after the ablation meant to refute a schedule explanation produced one; four temperature changes did nothing and a tenfold anneal length left the grid. |
-| 123 | Search by projection instead of by an objective | registered | [H-139](hypotheses/H-139-projection-search-reaches-feasibility.md) | The one mechanism in the 2026-09-09 simulation survey with a cold whole-benchmark result on the sibling problem, and the only search here whose output is a packing by construction rather than by tolerance. |
+| 119 | Put Gensane’s simultaneous all-square perturbation on the ordinary move menu | registered | [H-158](hypotheses/H-158-simultaneous-perturbation-move.md) | The cheapest structural repair for the plateau the 2026-09-08 annealing survey diagnoses; a flag on sqsearch rather than a formulation change. |
+| 120 | Give every square a nonzero derivative with an aggregate wall-pressure term | registered | [H-159](hypotheses/H-159-wall-pressure-dense-objective.md) | The cheap surrogate for the inflation formulation, ablatable against it; the reported side stays required_side so the term can never flatter a result. |
+| 121 | Spend the budget in refined local optima rather than moves | registered | [H-160](hypotheses/H-160-basin-hopping-over-the-lp-quench.md) | Basin hopping against multistart over the LP-in-cell quench, in the currency Ellsworth’s published statistics use. |
+| 122 | Separate cooling-schedule LENGTH from cooling-schedule SHAPE | registered | [H-161](hypotheses/H-161-cooling-schedule-length.md) | Registered mid-calibration after the ablation meant to refute a schedule explanation produced one; four temperature changes did nothing and a tenfold anneal length left the grid. |
+| 123 | Search by projection instead of by an objective | registered | [H-162](hypotheses/H-162-projection-search-reaches-feasibility.md) | The one mechanism in the 2026-09-09 simulation survey with a cold whole-benchmark result on the sibling problem, and the only search here whose output is a packing by construction rather than by tolerance. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.
@@ -414,9 +414,9 @@ No research has started under this plan.
 [X-021](explorations/X-021-what-can-be-proved-about-eleven-squares.md) pursues X-019 as
 a programme: four mathematical lanes proved corner, angle, contact and ownership lemmas,
 measured what each buys at 96/25, and priced the closing route.
-The paused [Agenda 030](agendas/agenda-030-parallel-structural-lanes-at-n11.md) maps
-eleven research lanes with disjoint deliverables, nine of them ready to run at once.
-No research has started under this plan.
+The terminal [Agenda 030](agendas/agenda-030-parallel-structural-lanes-at-n11.md)
+records the eleven lanes and their dispositions.
+Agenda 031 continues its selected ownership and fractional-pricing work.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
@@ -428,6 +428,84 @@ No research has started under this plan.
 | 126 | The first rectangle bound for eleven | registered | [H-132](hypotheses/H-132-rectangle-no-fit-at-q.md) | A convex domain change; the largest H0 with no packing in 3.84 × H0 is the strongest symmetry-breaking premise available. |
 | 127 | Is the 3.82 plateau a site artefact? | registered | [H-133](hypotheses/H-133-plateau-site-artefact.md) | Trump-shaped cores overlapping in site-free strips would explain exactly eleven; thirty minutes to test. |
 | 128 | An eleven-mark ownership set at 96/25 | registered | [H-134](hypotheses/H-134-eleven-mark-ownership-set.md) | The one lemma that collapses the exact-side tree to about two to the twenty LPs; prior about thirty per cent. |
+
+## Ownership and Pricing Continuation — X-022
+
+[X-022](explorations/X-022-segment-ownership-continuation.md) retains sharp local owner
+capacities, necessary angle and support restrictions, and exact counterexamples that
+prevent those local facts from being mistaken for a global exclusion.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 131 | Test full dual support against its first 32 rows at the same new site | registered | [H-135](hypotheses/H-135-paired-full-support-pricing.md) | Solve the retained BC-232 state once, rationalise one support sequence, and replay both depths exactly at an orbit absent from the state. |
+| 132 | Compare a fixed-corner residual cover with its unrestricted control | registered | [H-136](hypotheses/H-136-fixed-corner-residual-cover-pilot.md) | On one fixed grid and nine retained directions, test whether avoiding four flush corner units lowers the numerical covering objective by more than four; this is a conditional mechanism screen, not a normalization of arbitrary packings. |
+| 133 | Reuse exact fractional packings to obstruct one-owner covers on all supports | registered | [H-137](hypotheses/H-137-single-owner-dual-salvage.md) | Delete poses meeting each guaranteed footprint; an exact surviving mass of ten blocks that residual-ten cover. |
+| 134 | Screen all four-owner footprint combinations by shared exact deletion masks | registered | [H-138](hypotheses/H-138-four-owner-dual-salvage.md) | Test the minimum surviving mass over all65536 combinations against seven, retaining negative or unresolved outcomes. |
+| 135 | Compare owned-point and area-footprint covers on matched independent sites | registered | [H-139](hypotheses/H-139-owner-footprint-matched-gain.md) | Four numerical arms distinguish geometry gain from the change in remaining-square count. |
+| 136 | Check the fixed-corner rational candidate across every retained direction | registered | [H-140](hypotheses/H-140-fixed-corner-full-net-cover.md) | Exact full-net minimum tests the unchanged weights; positive minima also permit a separately labeled normalized feasible mass. |
+| 137 | Compare four guaranteed occupied regions with four bare marks | registered | [H-141](hypotheses/H-141-four-owner-footprint-matched-gain.md) | One compatible owner configuration tests the residual-seven mechanism before any exhaustive branch expansion. |
+| 138 | Verify the five-dot four-owner candidate on the complete net | registered | [H-142](hypotheses/H-142-five-dot-full-net-cover.md) | A positive full361minimum turns the numerical branch candidate into a five-dot conditional exclusion under the reviewed transfer. |
+| 139 | Independently decide the same five-dot cover by polygon-union area | registered | [H-143](hypotheses/H-143-independent-five-dot-union.md) | Exact inclusion-exclusion avoids the original residual-union decomposition and weighted event grid; source and synthetic controls must be admitted before replay. |
+| 140 | Restrict possible owner centers by the container walls | registered | [H-144](hypotheses/H-144-wall-aware-owner-footprint-gain.md) | Exact support extrema decide whether any of sixteen coarse footprints grows or a class becomes impossible; transfer of an old exclusion remains a separate test. |
+| 141 | Transfer a five-dot exclusion through larger wall footprints | registered | [H-145](hypotheses/H-145-wall-owner-containment-expansion.md) | Exact component containment must add a tuple beyond the two certified baselines; count the union of two products without mixing certificate families. |
+| 142 | Reuse strict escapes before one direct fixed-dot cover check | registered | [H-146](hypotheses/H-146-fixed-five-dot-wall-expansion.md) | Nine seed directions broadcast exact witnesses across labels; the first surviving new tuple gets one complete direction check. A failed candidate is not a refutation over every tuple. |
+| 143 | Check the first analytically surviving wall tuple directly | registered | [H-147](hypotheses/H-147-selected-wall-tuple-cover.md) | Fix tuple `(0,0,0,7)` before the run and require the unchanged five dots to cover all 361 directions; the first replayed strict escape refutes only this selected tuple. |
+
+| 144 | Test whether an owner class excludes the saved escape | registered | [H-148](hypotheses/H-148-wall-owner-escape-compatibility.md) | Exact SAT extrema test all allowed owner cores; exp150 refutes the claim with four compatible witnesses. |
+| 145 | Add the saved escape as a sixth fixed dot | registered | [H-149](hypotheses/H-149-selected-six-dot-cover.md) | Retain the same tuple and five sites, add the bound escape centre, and require full-net exact coverage before any new conditional exclusion. |
+
+| 146 | Intersect the two escaping cores before relocating a sixth site | registered |
+[H-150](hypotheses/H-150-sixth-site-two-core-screen.md) | Empty intersection rules out
+every additional single site with D fixed; nonempty gives only a necessary candidate.
+|
+
+| 147 | Solve any-sixth-site feasibility directly by exact support extrema | registered
+| [H-151](hypotheses/H-151-direct-sixth-site-feasibility.md) | Intersect requirements
+from the entire original-D-missed domain; empty prefix refutes the family, full nonempty
+requires independent cover confirmation.
+|
+
+## Three Losses and a New Atom — X-023
+
+[X-023](explorations/X-023-three-losses-and-a-new-atom.md) separates the retained
+certificate’s three losses — the shrink tax, the site restriction, and the integrality
+gap of the point-covering relaxation — and opens one new certificate language, threshold
+atoms, for the third.
+Its wave-one spikes proved the point-atom ceiling at `3.82` exactly, so the three rows
+below are what remains once that route is closed.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 148 | A threshold certificate at 3.82 | registered | [H-152](hypotheses/H-152-threshold-certificate-at-191-50.md) | The point method is capped at eleven there by an exact depth-one family; that same family is cut by 2-of-3 atoms at charge 5/4, so the new language is not capped with it. |
+| 149 | Re-optimise the covering LP on a finer net | registered | [H-153](hypotheses/H-153-reoptimised-certificate-on-a-finer-net.md) | The frozen atoms already dilate to 3.81661 at 1440 directions without re-optimisation; the cap on every one-body core rule is unit side 3.8288, and 0.012 of it is unclaimed. |
+| 150 | Where does the point-atom ceiling begin? | registered | [H-154](hypotheses/H-154-where-the-point-atom-ceiling-begins.md) | Two bisections at 0.8 s per decision: the least side in (3.8125, 3.82] carrying a weight-eleven family, and whether any family survives a shrink raised toward 0.998. |
+
+## Two Lines at Eleven — X-024
+
+[X-024](explorations/X-024-two-lines-at-eleven.md) reads this branch’s unconditional
+certificate line and PR 137’s conditional owner case split together, says what each
+established and where they meet in the same objects, and picks the unconditional line as
+the one to push here.
+Both rows below are the same integrality gap seen from the two sides.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 151 | Threshold atoms inside an owner class’s residual cover | registered | [H-155](hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point cover of seven is the conditional form of the ceiling the unconditional line just passed; the discriminator is whether threshold atoms bring its budget below seven. Dispositioned 2026-09-09: live, not refuted, and priced at no reach — the survivor family carries the same cut structure as the full family, so the conditional problem is the unconditional one shifted down by one for sixteen times the work. |
+| 152 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | registered | [H-156](hypotheses/H-156-threshold-certificate-past-3-82.md) | The endpoint at 3.82 is exact and its margin is 0.0327; the same loop at a larger side and the finer-net shrink of T-024 are the two untried mechanisms, and neither is capped by the point-atom ceiling. |
+| 154 | Iterate the LP support and the atom set together, separating from the depth-one certificate | raw |  | Lane A6 exhibits a D4-symmetric depth-one family of 64 placements at total exactly 11 satisfying all 2,566 atom orbits, so on this atom set no site set can bring the rows-complete LP below eleven at `153/40`; the lever is the atom set. Six atoms separated from that certificate rather than from a dual vertex take the blocking support from exactly 11 to `10.4210526`, bracketed exactly for that fixed-support program — feasible for its selected finite rows, not for the depth-one program, whose reader refuses the optimum at exact depth `105263157/100000000` — where twenty-four separated from a dual vertex moved the LP by `2.2e-13`. Each side has a wide face, so the route is a loop over support and atoms together, and it needs lane A4’s gate bypass because the fixed-support optima stop being packings after the first round. Carried as `think-yc80`. |
+
+## What Conditioning Buys — X-026
+
+[X-026](explorations/X-026-what-conditioning-does-and-does-not-buy.md) states the
+corner-conditioning argument as a six-step ladder with every term defined, and marks the
+step where it stops: the refutation covers point covers on a residual domain, the
+general result is neutrality, and the threshold route on that domain is open and
+expensive rather than closed.
+It names three escapes it does not close; the first is the row below.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 153 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-157](hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further deletes `1/8` more and the class stops being neutral; halving the angular bin widens the guaranteed wedge from `pi/4` to `3pi/8`. Refuted 2026-09-10 by exp-154: six of eight refined subclasses still read exactly 10 and the two that break read `19/2`, not `79/8`, because the reach is the identity `d^2 = 75308842465387162009/335694834731568400000000` — bit-identical for parent and children, the mark being the closest point of every patch. Theorems T1 and T2 (X-026 §5.1) rule out patch refinement as the lever at every angular resolution and at pose level; they do not show the conditional strategy fails, so escape 1 is narrowed, not closed, and whether the neutral classes are ever forced stays open. |
 
 ## Dead ends
 

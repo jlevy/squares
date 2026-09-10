@@ -1,0 +1,151 @@
+{
+  "binding_method": "Coordinator Git-blob capture after the adopted, repository-formatted atom reader replay reproduced the earlier receipt byte for byte. The inputs and tracked geometry were unchanged throughout each replay. The new atom reader was untracked; documentation edits coexisted. This is not an assertion that the whole worktree was clean or that runtime imports were traced by the atom CLI.",
+  "checks": [
+    {
+      "input": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-saturated-symmetric-153-40.json",
+      "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-ceiling.json",
+      "result": "K0-K3 and D4 passed; 14344 vertices; three altered controls rejected",
+      "tool": "devtools.independent_ceiling_reader"
+    },
+    {
+      "command": "/opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 600s .venv/bin/python3 -m devtools.admit_threshold_atom_orbits campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-saturated-symmetric-153-40.json campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-atoms-2566-orbits.json",
+      "cwd": "packing",
+      "exit_code": 0,
+      "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-atom-membership.json",
+      "result": "2566 orbits, 20524 images, 14949 sites, no violation; exact rational membership throughout",
+      "tool": "devtools.admit_threshold_atom_orbits"
+    },
+    {
+      "atoms": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-input-family-1.json",
+      "exit_code": 1,
+      "input": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-loop-family-1.json",
+      "interpretation": "Expected rejection: all three retained cuts violate this named source family; no global family feasibility is claimed by this charge-only check.",
+      "ratios": [
+        "11/8",
+        "11/8",
+        "33/32"
+      ],
+      "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-family-1.json",
+      "tool": "devtools.admit_threshold_atom_orbits"
+    },
+    {
+      "atoms": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-input-family-2.json",
+      "exit_code": 1,
+      "input": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-loop-family-2.json",
+      "interpretation": "Expected rejection: all three retained cuts violate this named source family; no global family feasibility is claimed by this charge-only check.",
+      "ratios": [
+        "5/4",
+        "5/4",
+        "5/4"
+      ],
+      "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-family-2.json",
+      "tool": "devtools.admit_threshold_atom_orbits"
+    }
+  ],
+  "files": [
+    {
+      "git_blob": "66907412e734140bc376e5859beb0723396951e8",
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-saturated-symmetric-153-40.json"
+    },
+    {
+      "git_blob": "be08eaa5206980e5ef545c75ae62ce08109aad83",
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-atoms-2566-orbits.json"
+    },
+    {
+      "git_blob": "564ee2b4a17ae8be55cdedbbfad48c1e8fc623b3",
+      "path": "packing/devtools/admit_threshold_atom_orbits.py"
+    },
+    {
+      "git_blob": "be6e815d04abb1c0e98154f94ab70adfbaa1737e",
+      "path": "packing/devtools/independent_ceiling_reader.py"
+    },
+    {
+      "git_blob": "25f365e6b1d50972abe05231109134857f1cacc4",
+      "path": "packing/uv.lock"
+    },
+    {
+      "git_blob": "4b151f632c056125a9497e303f5e43e5b2edbb13",
+      "path": "packing/pyproject.toml"
+    },
+    {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "packing/src/sqpack/fractional/__init__.py"
+    },
+    {
+      "git_blob": "d80f6e060904bc5e01c21f5f23eba87ede456422",
+      "path": "packing/src/sqpack/fractional/adaptive.py"
+    },
+    {
+      "git_blob": "f93ba252b8b0ae1cf7fb9e8b3d24711e09d8b719",
+      "path": "packing/src/sqpack/fractional/adaptive_interval.py"
+    },
+    {
+      "git_blob": "bbf6c571f95c608a5f1b64217c2ecc2ddc1ddd5b",
+      "path": "packing/src/sqpack/fractional/adaptive_io.py"
+    },
+    {
+      "git_blob": "f026bd04186787096fb57128517e319e7ee1ae00",
+      "path": "packing/src/sqpack/fractional/ceiling.py"
+    },
+    {
+      "git_blob": "902d19e7f9914d9d53c422c2cd050c787ea685d5",
+      "path": "packing/src/sqpack/fractional/certificate.py"
+    },
+    {
+      "git_blob": "523e9f34593d04bfa7a327dbdde3a15cd5582f63",
+      "path": "packing/src/sqpack/fractional/classcert.py"
+    },
+    {
+      "git_blob": "76738cf3bdb195f16deaae3b38fb99fa6ee8d37b",
+      "path": "packing/src/sqpack/fractional/colgen.py"
+    },
+    {
+      "git_blob": "a8483c5354c04cc2e459d9fd2e7f2d42ff8d5e2a",
+      "path": "packing/src/sqpack/fractional/cutting.py"
+    },
+    {
+      "git_blob": "d6e90df695d3c3f59db6529ab904955cdd20f3a5",
+      "path": "packing/src/sqpack/fractional/generate.py"
+    },
+    {
+      "git_blob": "85b06ccace9f0c5d2e58a2a79833e9882732c485",
+      "path": "packing/src/sqpack/fractional/interval.py"
+    },
+    {
+      "git_blob": "a5df6094eadfe441dba66fee8fe37a4e5530b6f6",
+      "path": "packing/src/sqpack/fractional/model.py"
+    },
+    {
+      "git_blob": "6bd5c56564a8f1a0681213c9b083cf62e4621a95",
+      "path": "packing/src/sqpack/fractional/sweep.py"
+    },
+    {
+      "git_blob": "6f0be4eebfeb07922fac7f8d882af8f3adf6e79a",
+      "path": "packing/src/sqpack/fractional/threshold.py"
+    },
+    {
+      "git_blob": "5a38d23952a6555cb06248b6b334d7d2967f11ec",
+      "path": "packing/src/sqpack/fractional/threshold_interval.py"
+    },
+    {
+      "git_blob": "66907412e734140bc376e5859beb0723396951e8",
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-loop-family-1.json"
+    },
+    {
+      "git_blob": "a6185df215bffb3461e45474d13ea92a9ffa13b4",
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-input-family-1.json"
+    },
+    {
+      "git_blob": "418ec77a8293e28159c1ca2312953c557b3f368b",
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-loop-family-2.json"
+    },
+    {
+      "git_blob": "326dd035033229e828e8a24cdada0bb245401d45",
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-independent-cut-input-family-2.json"
+    }
+  ],
+  "interpreter": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "kind": "a6-independent-admission-source-record/v1",
+  "scope": "Replay of retained evidence; no new target or bound. Point admission and atom admission are separate obligations.",
+  "source_head": "6ed45816bc176170bdaa008248d22a6d09956a00"
+}

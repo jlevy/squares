@@ -91,10 +91,21 @@ Results first established here, as far as the recorded source searches show:
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
-  A small refinement, recorded in the
-  [T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md),
-  gives `s(11) ≥ 3.810025723614703…` as a weak limit bound; it does not decide fit at
-  that endpoint. The certificate at `3.81` supplies the proof explained here.
+  Two refinements, recorded in the
+  [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
+  [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
+  packets, give `s(11) ≥ 3.816609502788862…` as a weak limit bound; neither decides fit
+  at its endpoint. The largest side certified at the container side itself is
+  `191/50 = 3.82`, on a certificate of a different kind — point atoms plus *threshold
+  atoms*, whose budget rule is what carries the side past the point method’s proved
+  ceiling — stated for a stranger in the
+  [T-025 proof packet](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md).
+  The verified bound now stands at
+  `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…`, the weak limit
+  of those same threshold atoms re-certified on a 1440-step direction net
+  ([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)),
+  which again decides no fit at its own endpoint.
+  The certificate at `3.81` supplies the proof explained here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
   bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s `4.5058`,
   taken from a source rather than proved here.
@@ -387,10 +398,12 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These twelve research reports are the durable topical syntheses:
+These fourteen research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
+| [N11 Definitions, Findings, and the Inference Chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md) | First-principles interpretation through exp153, exact scope of results, remaining proof obligations, and unranked alternatives |
+| [N11 Inference Audit](docs/project/research/research-2026-09-09-n11-inference-audit.md) | Corrections to overbroad summaries, physical-versus-relaxed quantifiers, and missing evidence |
 | [Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | What is proved for `s(11)`, what remains conjectural, and why the available proof techniques do not close the gap |
 | [Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | Search, numerical-to-exact promotion, verification, and the record landscape |
 | [FrankenSim as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | Assessment of certified-arithmetic and determinism components in a larger Rust framework |

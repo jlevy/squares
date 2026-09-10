@@ -1,0 +1,282 @@
+"""Separation-oracle reader: the plateau reader's K4/K5/K6 with the K2 depth gate bypassed.
+
+THIS IS NOT THE PLATEAU READER'S THEOREM MODE.  `devtools.plateau_reader` refuses a family
+whose exact maximum depth exceeds one, because on such a family a "feasible" verdict for an
+atom class is not a statement about the method: the family is not a fractional packing of
+the plane, so nothing about the true problem follows either way.  This driver runs the same
+exact searches on such a family and reports every reading as a SEPARATION-ORACLE reading:
+
+  * a violated atom is still a valid inequality of the true problem (the atom classes are
+    valid for every packing) that the current restricted-LP dual violates, so adding it as
+    a column strictly cuts this dual and moves the restricted LP.  Sound, and the point of
+    the exercise.
+  * a non-violated ("feasible") reading is NOT a cap on the method.  It says only that this
+    particular infeasible dual is not cut by the searched atoms.  Never quote it as a cap.
+
+Everything exact is imported from `devtools.plateau_reader` unchanged; nothing in the
+repository is modified.  Mask reduction (dominance and weight filters) is sound for finding
+violations -- every charge is monotone in each point's membership set, so the maximum over
+all points is attained on the maximal sets -- and any atom returned is re-verified against
+the family geometrically by the reader's own `verify_atom`.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from dataclasses import replace
+from fractions import Fraction
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+
+sys.path.insert(0, "/home/user/squares/packing")
+
+from devtools.plateau_reader import (  # noqa: E402
+    Arrangement,
+    AtomVerdict,
+    MaskTable,
+    cg_separation,
+    clique_scan,
+    k_of_search,
+    line_chords,
+    load_family,
+    read_arrangement,
+    shape_atom,
+    two_of_three_maximum,
+)
+from sqpack.fractional.ceiling import verify_ceiling  # noqa: E402
+
+
+def say(text: str) -> None:
+    print(f"... {text}", file=sys.stderr, flush=True)
+
+
+def maximal_flags(table: MaskTable, masks: list[int]) -> np.ndarray:
+    """Flag the masks that no other mask strictly contains (sound for maximisation)."""
+    A = table.array
+    count = A.shape[0]
+    keep = np.ones(count, dtype=bool)
+    card = np.array([m.bit_count() for m in masks])
+    for i in np.argsort(-card, kind="stable"):
+        if not keep[i]:
+            continue
+        contained = np.all((A & ~A[i][None, :]) == 0, axis=1)
+        contained[i] = False
+        keep[contained] = False
+    return keep
+
+
+def reduce_arrangement(
+    arrangement: Arrangement, *, maximal_only: bool, cap: int | None, min_weight: Fraction | None
+) -> tuple[Arrangement, dict[str, Any]]:
+    table = MaskTable(arrangement)
+    masks = arrangement.masks
+    keep = np.ones(len(masks), dtype=bool)
+    note: dict[str, Any] = {"masks_in": len(masks)}
+    if maximal_only:
+        t = time.perf_counter()
+        keep &= maximal_flags(table, masks)
+        note["maximal_seconds"] = round(time.perf_counter() - t, 1)
+        note["masks_maximal"] = int(keep.sum())
+    if min_weight is not None:
+        keep &= table.sizes >= int(min_weight * arrangement.scale)
+        note["masks_after_weight"] = int(keep.sum())
+    index = np.flatnonzero(keep)
+    if cap is not None and index.size > cap:
+        order = index[np.argsort(-table.sizes[index], kind="stable")][:cap]
+        index = np.sort(order)
+        note["capped_to"] = int(index.size)
+    kept = [masks[int(i)] for i in index]
+    note["masks_out"] = len(kept)
+    note["complete"] = bool(len(kept) == len(masks) or (maximal_only and "capped_to" not in note and min_weight is None))
+    reduced = replace(
+        arrangement,
+        masks=kept,
+        representative={m: arrangement.representative[m] for m in kept},
+        multiplicity={m: arrangement.multiplicity[m] for m in kept},
+    )
+    return reduced, note
+
+
+def atom_record(atom: AtomVerdict, source: str) -> dict[str, Any]:
+    record = atom.record()
+    record["source"] = source
+    record["reading"] = "separation-oracle only (depth above one): a valid inequality this dual violates"
+    return record
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("family", type=Path)
+    ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--stages", default="k4,k5,k6")
+    ap.add_argument("--cg-thresholds", default="2,3,4")
+    ap.add_argument("--time-limit", type=float, default=60.0)
+    ap.add_argument("--shape-node-limit", type=int, default=200_000)
+    ap.add_argument("--clique-node-limit", type=int, default=1_000_000)
+    ap.add_argument("--maximal-only", action="store_true")
+    ap.add_argument("--mask-cap", type=int, default=None)
+    ap.add_argument("--min-mask-weight", type=str, default=None)
+    args = ap.parse_args()
+    stages = {s.strip() for s in args.stages.split(",") if s.strip()}
+
+    t0 = time.perf_counter()
+    family = load_family(args.family)
+    verdict = verify_ceiling(family)
+    say(
+        f"K0-K3: total {verdict.total_weight}, depth {verdict.max_depth} "
+        f"({float(verdict.max_depth):.9f}), {verdict.vertices} vertices, "
+        f"failures {list(verdict.failures)} ({time.perf_counter() - t0:.1f}s)"
+    )
+    bypassed = verdict.max_depth > 1
+    t = time.perf_counter()
+    arrangement = read_arrangement(family)
+    say(
+        f"arrangement: {arrangement.placements} placements, {len(arrangement.masks)} distinct "
+        f"membership sets, scale 1/{arrangement.scale} ({time.perf_counter() - t:.1f}s)"
+    )
+    reduced, reduction = reduce_arrangement(
+        arrangement,
+        maximal_only=args.maximal_only,
+        cap=args.mask_cap,
+        min_weight=Fraction(args.min_mask_weight) if args.min_mask_weight else None,
+    )
+    say(f"mask reduction: {reduction}")
+    table = MaskTable(reduced)
+
+    out: dict[str, Any] = {
+        "kind": "separation-oracle-reader/v1",
+        "source": str(args.family),
+        "depth_gate_bypassed": bypassed,
+        "reading": (
+            "SEPARATION-ORACLE ONLY: the family has depth above one, so no K4/K5/K6 verdict "
+            "here is a theorem about the method; violations are valid inequalities this dual "
+            "violates and are sound as separation."
+        ),
+        "family": {
+            "placements": arrangement.placements,
+            "total_weight": str(verdict.total_weight),
+            "max_depth": str(verdict.max_depth),
+            "max_depth_float": float(verdict.max_depth),
+            "vertices": verdict.vertices,
+            "distinct_membership_sets": len(arrangement.masks),
+            "weight_scale": arrangement.scale,
+            "failures": list(verdict.failures),
+        },
+        "mask_reduction": reduction,
+        "stages": {},
+        "violated_atoms": [],
+        "timings": {},
+    }
+
+    def dump() -> None:
+        out["timings"]["total_seconds"] = round(time.perf_counter() - t0, 1)
+        args.out.write_text(json.dumps(out, indent=1))
+
+    violated: list[tuple[AtomVerdict, str]] = []
+    dump()
+
+    if "k4" in stages:
+        t = time.perf_counter()
+        search = two_of_three_maximum(reduced, table)
+        value = reduced.rational(search.best)
+        say(
+            f"K4 two-of-three: max {value} ({float(value):.6f}) over {search.nodes} pairs, "
+            f"{search.maximiser_count} maximisers ({search.seconds:.1f}s)"
+        )
+        record = search.record(reduced)
+        if search.witnesses:
+            atom = shape_atom(reduced, search.witnesses[0], 2, "two-of-three")
+            record["atom"] = atom_record(atom, "k4-two-of-three")
+            if atom.violated:
+                violated.append((atom, "k4-two-of-three"))
+            # keep several distinct witnesses as separate atoms
+            extra = []
+            for witness in search.witnesses[1:64]:
+                other = shape_atom(reduced, witness, 2, "two-of-three")
+                if other.violated:
+                    extra.append(other)
+                    violated.append((other, "k4-two-of-three"))
+            record["extra_violated_witnesses"] = len(extra)
+        out["stages"]["k4_two_of_three"] = record
+        out["timings"]["k4_two_of_three"] = round(time.perf_counter() - t, 1)
+        dump()
+
+    if "shape" in stages:
+        t = time.perf_counter()
+        shape = k_of_search(reduced, 3, table, node_limit=args.shape_node_limit)
+        say(
+            f"K4 three-of-five: max {reduced.rational(shape.best)}, complete={shape.complete} "
+            f"({shape.seconds:.1f}s)"
+        )
+        record = shape.record(reduced)
+        if shape.witnesses:
+            atom = shape_atom(reduced, shape.witnesses[0], 3, "three-of-five")
+            record["atom"] = atom_record(atom, "k4-three-of-five")
+            if atom.violated:
+                violated.append((atom, "k4-three-of-five"))
+        out["stages"]["k4_three_of_five"] = record
+        out["timings"]["k4_three_of_five"] = round(time.perf_counter() - t, 1)
+        dump()
+
+    if "k5" in stages:
+        t = time.perf_counter()
+        scan = clique_scan(reduced, node_limit=args.clique_node_limit)
+        say(
+            f"K5 cliques: {scan.maximal_above_one} maximal above one, heaviest rank-one "
+            f"{scan.heaviest_rank_one_weight} ({scan.seconds:.1f}s)"
+        )
+        record = scan.record(reduced)
+        if scan.atom is not None:
+            record["atom"] = atom_record(scan.atom, "k5-clique")
+            if scan.atom.violated:
+                violated.append((scan.atom, "k5-clique"))
+        out["stages"]["k5_cliques"] = record
+        out["timings"]["k5_cliques"] = round(time.perf_counter() - t, 1)
+        dump()
+
+    if "lines" in stages:
+        t = time.perf_counter()
+        lines = line_chords(family)
+        out["stages"]["lines"] = [line.record() for line in lines]
+        out["timings"]["lines"] = round(time.perf_counter() - t, 1)
+        dump()
+
+    if "k6" in stages:
+        separations = []
+        for threshold in [int(v) for v in args.cg_thresholds.split(",") if v.strip()]:
+            t = time.perf_counter()
+            result = cg_separation(reduced, threshold, time_limit=args.time_limit)
+            say(f"K6 t={threshold}: {result.claim} ({result.seconds:.1f}s)")
+            record = result.record()
+            if result.atom is not None:
+                record["atom"] = atom_record(result.atom, f"k6-t{threshold}")
+                if result.atom.violated:
+                    violated.append((result.atom, f"k6-t{threshold}"))
+            separations.append(record)
+            out["stages"]["k6_separation"] = separations
+            out["timings"][f"k6_t{threshold}"] = round(time.perf_counter() - t, 1)
+            dump()
+
+    violated.sort(key=lambda pair: (-pair[0].floor_violation, -pair[0].threshold_violation))
+    out["violated_atoms"] = [atom_record(atom, source) for atom, source in violated]
+    out["violated_count"] = len(violated)
+    dump()
+    say(f"violated atoms: {len(violated)}; total {time.perf_counter() - t0:.1f}s")
+    for atom, source in violated[:12]:
+        total = sum(p.multiplicity for p in atom.points)
+        print(
+            f"{source}: {atom.family}, {len(atom.points)} points (a(S) = {total}), "
+            f"t = {atom.threshold}, budget {atom.budget}, threshold charge "
+            f"{atom.threshold_charge}, floor charge {atom.floor_charge}, "
+            f"floor violation {atom.floor_violation} ({float(atom.floor_violation):.6f})"
+        )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

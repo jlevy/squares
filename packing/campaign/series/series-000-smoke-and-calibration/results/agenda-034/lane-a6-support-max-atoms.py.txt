@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+"""Fixed-support maximum under the structural sites AND the LP's 2,566 atom orbits.
+
+If a dual's support still carries eleven under both, then adding every structural site
+cannot take the LP below eleven on that support: the dual simply redistributes.  This is
+the prediction the LP run then either confirms or refutes.
+Floats propose; the returned family is rationalised down and re-checked on every depth
+row and every atom row in Fractions, so the reported total is an exact lower bound.
+"""
+from __future__ import annotations
+import json, sys, time
+from fractions import Fraction as F
+from pathlib import Path
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gen_sites import Fam
+from sqpack.fractional.threshold import ThresholdAtom
+
+raw = json.load(open(sys.argv[1]))
+# every member of every structural orbit, so the site constraint is depth at most one at
+# each site rather than an orbit average, and the point set is D4-closed
+pts = sorted({(F(a), F(b)) for orb in raw["sites_out"] for a, b in orb})
+meta = json.loads(Path(sys.argv[2]).read_text())
+NEW = F(meta["outer_side"])
+orb_pts: list[list[tuple[int, ...]]] = []
+index: dict[tuple[F, F], int] = {}
+apts: list[tuple[F, F]] = []
+ks: list[int] = []; sizes: list[int] = []
+for e in meta["atoms"]:
+    atom = ThresholdAtom(tuple((F(a), F(b)) for a, b in e["points"]), e["threshold"], F(1))
+    imgs = []
+    for im in atom.orbit(NEW):
+        tri = []
+        for q in im.points:
+            if q not in index:
+                index[q] = len(apts); apts.append(q)
+            tri.append(index[q])
+        imgs.append(tuple(tri))
+    orb_pts.append(imgs); ks.append(e["threshold"]); sizes.append(len(imgs))
+print(f"{len(pts)} structural sites (all orbit members); {len(orb_pts)} atom orbits, {len(apts)} distinct atom points", flush=True)
+
+
+def membership(f: Fam, points: list[tuple[F, F]]) -> tuple[np.ndarray, int]:
+    m = len(f.pl); out = np.zeros((len(points), m), dtype=bool); namb = 0
+    step = max(1, 4_000_000 // max(1, m))
+    for lo in range(0, len(points), step):
+        chunk = points[lo:lo + step]
+        px = np.array([float(a) for a, _ in chunk]); py = np.array([float(b) for _, b in chunk])
+        s1 = np.abs(px[:, None] * f.ax[None, :] + py[:, None] * f.ay[None, :] - f.u[None, :]) - f.h[None, :]
+        s2 = np.abs(px[:, None] * f.bx[None, :] + py[:, None] * f.by[None, :] - f.v[None, :]) - f.h[None, :]
+        ins = (s1 <= 0) & (s2 <= 0)
+        amb = (np.abs(s1) < 1e-9) | (np.abs(s2) < 1e-9)
+        ai, aj = np.nonzero(amb); namb += len(ai)
+        for i, j in zip(ai.tolist(), aj.tolist()):
+            ins[i, j] = f.pl[j].contains(*chunk[i])
+        out[lo:lo + len(chunk)] = ins
+    return out, namb
+
+
+for path in sys.argv[3:]:
+    t0 = time.perf_counter()
+    f = Fam(Path(path)); m = len(f.pl)
+    D, n1 = membership(f, pts)
+    Ap, n2 = membership(f, apts)
+    ri, ci = np.nonzero(D)
+    Ad = sparse.csr_matrix((np.ones(len(ri)), (ri, ci)), shape=(len(pts), m))
+    Ad = Ad[np.asarray(Ad.sum(axis=1)).ravel() > 0]
+    arows = np.zeros((len(orb_pts), m))
+    for oi, imgs in enumerate(orb_pts):
+        acc = np.zeros(m)
+        for tri in imgs:
+            acc += (Ap[list(tri), :].sum(axis=0) >= ks[oi]).astype(float)
+        arows[oi] = acc
+    bud = np.array([sizes[oi] * (3 // ks[oi]) for oi in range(len(orb_pts))], dtype=float)
+    keep = arows.sum(axis=1) > 0
+    Aa = sparse.csr_matrix(arows[keep]); ba = bud[keep]
+    A = sparse.vstack([Ad, Aa]).tocsr(); b = np.concatenate([np.ones(Ad.shape[0]), ba])
+    res = linprog(-np.ones(m), A_ub=A, b_ub=b, bounds=(0, None), method="highs")
+    val = -res.fun if res.success else float("nan")
+    yq = [max(F(0), F(int(np.floor(v * 1e9)), 10**9)) for v in res.x]
+    slack_ok = True; worst_d = F(0); worst_a = F(0)
+    for r in range(A.shape[0]):
+        idx = A.indices[A.indptr[r]:A.indptr[r + 1]]; dat = A.data[A.indptr[r]:A.indptr[r + 1]]
+        s = sum((F(int(c)) * yq[j] for j, c in zip(idx.tolist(), dat.tolist())), start=F(0))
+        lim = F(int(b[r]))
+        if r < Ad.shape[0]:
+            worst_d = max(worst_d, s)
+        else:
+            worst_a = max(worst_a, s / lim)
+        if s > lim:
+            slack_ok = False
+    tot = sum(yq, start=F(0))
+    out = Path(path).with_suffix("").name
+    rec = {"n": 11, "outer_side": str(f.L), "square_side": str(f.pl[0].side),
+           "half_tangents": sorted({str(pp.half_tangent) for pp in f.pl}),
+           "placements": [[str(f.pl[j].half_tangent), str(f.pl[j].centre_x), str(f.pl[j].centre_y), str(yq[j]), str(f.pl[j].side)]
+                          for j in range(m) if yq[j] > 0],
+           "total_weight": str(tot),
+           "provenance": {"tool": "support_max_atoms.py: fixed-support maximum under the structural sites and the LP atom orbits"}}
+    Path(f"saturated-{out}.json").write_text(json.dumps(rec, indent=1))
+    print(f"{Path(path).name:30s} support {m:5d}  depth rows {Ad.shape[0]:6d}  atom rows {Aa.shape[0]:5d}"
+          f"  ({n1 + n2} memberships decided exactly)  float optimum {val:.9f}"
+          f"  exact feasible total {float(tot):.9f} (max depth row {float(worst_d):.9f}, max atom ratio {float(worst_a):.9f}, feasible {slack_ok})"
+          f"  {time.perf_counter()-t0:.1f}s", flush=True)

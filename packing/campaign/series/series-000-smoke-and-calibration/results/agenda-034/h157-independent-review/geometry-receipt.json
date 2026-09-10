@@ -1,0 +1,351 @@
+{
+  "head_reviewed": "ee98c4baae876835ba44a5f127bfa73d4e838d45",
+  "sixteen_sector_json_matches_published": true,
+  "distance_rows": [
+    {
+      "mark": "m1",
+      "bins": 8,
+      "sector": 3,
+      "fixed_target": 55,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m1",
+      "bins": 16,
+      "sector": 6,
+      "fixed_target": 55,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m1",
+      "bins": 16,
+      "sector": 7,
+      "fixed_target": 55,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m1",
+      "bins": 8,
+      "sector": 4,
+      "fixed_target": 55,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m1",
+      "bins": 16,
+      "sector": 8,
+      "fixed_target": 55,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m1",
+      "bins": 16,
+      "sector": 9,
+      "fixed_target": 55,
+      "target_is_survivor": false,
+      "intersection_polygon": [
+        [
+          "4597422661/4562140000",
+          "146121973916607530293410923/208793202482000400000000000"
+        ],
+        [
+          "4597422661/4562140000",
+          "100854588935708558617770723/500552044003220832525980000"
+        ],
+        [
+          "3521268481008586568/2972032642557983575",
+          "654670320035302984311/2377626114046386860000"
+        ]
+      ],
+      "intersection_area": "9222372181955609687025480276566995509626950895711929/209023728552687322733150309907630740784000000000000000",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "0",
+      "nearest_actual_survivor_distance_squared": "154520421972020636842286626510179978387793755009897266163721/8274126656975111962857032162670705972822328494029059600000000",
+      "survivor_weight": "19/2"
+    },
+    {
+      "mark": "m2",
+      "bins": 8,
+      "sector": 3,
+      "fixed_target": 50,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m2",
+      "bins": 16,
+      "sector": 6,
+      "fixed_target": 50,
+      "target_is_survivor": false,
+      "intersection_polygon": [
+        [
+          "146121973916607530293410923/208793202482000400000000000",
+          "4597422661/4562140000"
+        ],
+        [
+          "654670320035302984311/2377626114046386860000",
+          "3521268481008586568/2972032642557983575"
+        ],
+        [
+          "100854588935708558617770723/500552044003220832525980000",
+          "4597422661/4562140000"
+        ]
+      ],
+      "intersection_area": "9222372181955609687025480276566995509626950895711929/209023728552687322733150309907630740784000000000000000",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "0",
+      "nearest_actual_survivor_distance_squared": "154520421972020636842286626510179978387793755009897266163721/8274126656975111962857032162670705972822328494029059600000000",
+      "survivor_weight": "19/2"
+    },
+    {
+      "mark": "m2",
+      "bins": 16,
+      "sector": 7,
+      "fixed_target": 50,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m2",
+      "bins": 8,
+      "sector": 4,
+      "fixed_target": 50,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m2",
+      "bins": 16,
+      "sector": 8,
+      "fixed_target": 50,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    },
+    {
+      "mark": "m2",
+      "bins": 16,
+      "sector": 9,
+      "fixed_target": 50,
+      "target_is_survivor": true,
+      "intersection_polygon": [],
+      "intersection_area": "0",
+      "published_vertex_edge_distance_squared": "75308842465387162009/335694834731568400000000",
+      "actual_fixed_target_distance_squared": "75308842465387162009/335694834731568400000000",
+      "nearest_actual_survivor_distance_squared": "75308842465387162009/335694834731568400000000",
+      "survivor_weight": "10"
+    }
+  ],
+  "pose_rows": [
+    {
+      "index": 59,
+      "centre": [
+        "45133461/88696100",
+        "25096071/49318700"
+      ],
+      "core_side": "9977/10000",
+      "half_tangent": "0",
+      "contains_marks": {
+        "m1": true,
+        "m2": true
+      },
+      "same_centre_same_angle_unit_parent_contained": true,
+      "same_centre_same_angle_unit_parent_wall_margin": "785411/88696100",
+      "survivor_weight": "10",
+      "sat_clipping_survivor_sets_identical": true
+    },
+    {
+      "index": 60,
+      "centre": [
+        "25096071/49318700",
+        "45133461/88696100"
+      ],
+      "core_side": "9977/10000",
+      "half_tangent": "1",
+      "contains_marks": {
+        "m1": true,
+        "m2": true
+      },
+      "same_centre_same_angle_unit_parent_contained": true,
+      "same_centre_same_angle_unit_parent_wall_margin": "785411/88696100",
+      "survivor_weight": "10",
+      "sat_clipping_survivor_sets_identical": true
+    }
+  ],
+  "pose_patch_examples": [
+    {
+      "owner_core": 59,
+      "corner_index": 0,
+      "construction": "core59 scaled by 1/10000 about its named corner",
+      "patch": [
+        [
+          "17875902097/17739220000",
+          "9939740899/9863740000"
+        ],
+        [
+          "89370661275103/88696100000000",
+          "9939740899/9863740000"
+        ],
+        [
+          "89370661275103/88696100000000",
+          "49693783968301/49318700000000"
+        ],
+        [
+          "17875902097/17739220000",
+          "49693783968301/49318700000000"
+        ]
+      ],
+      "patch_area": "99540529/10000000000000000",
+      "inside_owner_core": true,
+      "contains_marks": {
+        "m1": false,
+        "m2": false
+      },
+      "sat_clipping_survivor_sets_identical": true,
+      "survivor_weight": "10"
+    },
+    {
+      "owner_core": 59,
+      "corner_index": 1,
+      "construction": "core59 scaled by 1/10000 about its named corner",
+      "patch": [
+        [
+          "896260724897/88696100000000",
+          "9939740899/9863740000"
+        ],
+        [
+          "177482303/17739220000",
+          "9939740899/9863740000"
+        ],
+        [
+          "177482303/17739220000",
+          "49693783968301/49318700000000"
+        ],
+        [
+          "896260724897/88696100000000",
+          "49693783968301/49318700000000"
+        ]
+      ],
+      "patch_area": "99540529/10000000000000000",
+      "inside_owner_core": true,
+      "contains_marks": {
+        "m1": false,
+        "m2": false
+      },
+      "sat_clipping_survivor_sets_identical": true,
+      "survivor_weight": "85/8"
+    },
+    {
+      "owner_core": 59,
+      "corner_index": 2,
+      "construction": "core59 scaled by 1/10000 about its named corner",
+      "patch": [
+        [
+          "896260724897/88696100000000",
+          "498358031699/49318700000000"
+        ],
+        [
+          "177482303/17739220000",
+          "498358031699/49318700000000"
+        ],
+        [
+          "177482303/17739220000",
+          "98687501/9863740000"
+        ],
+        [
+          "896260724897/88696100000000",
+          "98687501/9863740000"
+        ]
+      ],
+      "patch_area": "99540529/10000000000000000",
+      "inside_owner_core": true,
+      "contains_marks": {
+        "m1": false,
+        "m2": false
+      },
+      "sat_clipping_survivor_sets_identical": true,
+      "survivor_weight": "43/4"
+    },
+    {
+      "owner_core": 59,
+      "corner_index": 3,
+      "construction": "core59 scaled by 1/10000 about its named corner",
+      "patch": [
+        [
+          "17875902097/17739220000",
+          "498358031699/49318700000000"
+        ],
+        [
+          "89370661275103/88696100000000",
+          "498358031699/49318700000000"
+        ],
+        [
+          "89370661275103/88696100000000",
+          "98687501/9863740000"
+        ],
+        [
+          "17875902097/17739220000",
+          "98687501/9863740000"
+        ]
+      ],
+      "patch_area": "99540529/10000000000000000",
+      "inside_owner_core": true,
+      "contains_marks": {
+        "m1": false,
+        "m2": false
+      },
+      "sat_clipping_survivor_sets_identical": true,
+      "survivor_weight": "85/8"
+    }
+  ],
+  "interpretation": "A contained isolated unit parent is not an eleven-square packing or a forced owner selection."
+}

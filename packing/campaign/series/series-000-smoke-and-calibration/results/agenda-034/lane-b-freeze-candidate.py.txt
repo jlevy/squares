@@ -1,0 +1,122 @@
+#!/usr/bin/env python3
+"""Spike B, task 4: freeze the LP loop's measure as a threshold-certificate JSON.
+
+Usage (from packing/):
+  .venv/bin/python3 freeze_candidate.py <state.json> <lp-run dir> <out.json>
+        [--bump 1000002/1000000] [--scale 1000000000] [--n 11]
+
+Reads the checkpointed LP weights (x.npy: site orbits first, then threshold-atom orbits in
+atoms.json order), multiplies every weight by the bump, rounds UP to a multiple of
+1/scale, drops zero weights, expands orbits to D4-closed atom lists, and writes the record
+with `atoms` (as today) plus `threshold_atoms` ({points, threshold, weight}). The record
+declares its total budget; devtools.decide_threshold_certificate recomputes it.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+from sqpack.fractional.colgen import SiteSet, d4_orbit, site_set_from_points
+from sqpack.fractional.cutting import load_state
+from sqpack.fractional.threshold import ThresholdAtom
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("state")
+    ap.add_argument("rundir")
+    ap.add_argument("out")
+    ap.add_argument("--bump", default="1000002/1000000")
+    ap.add_argument("--scale", type=int, default=10**9)
+    ap.add_argument("--n", type=int, default=11)
+    args = ap.parse_args()
+    bump = Fraction(args.bump)
+    scale = args.scale
+    outer, points, _ = load_state(Path(args.state))
+    base = site_set_from_points(outer, set(points))
+    run = Path(args.rundir)
+    meta = json.loads((run / "atoms.json").read_text())
+    x = np.load(run / "x.npy")
+    orbits = list(base.orbits)
+    sites_path = run / "sites.json"
+    if sites_path.exists():
+        # The loop dumps every site in orbit order: the state's sorted orbits first, then
+        # each added vertex orbit (a d4_orbit tuple) contiguously. Regroup the tail.
+        flat = [(Fraction(a), Fraction(b)) for a, b in json.loads(sites_path.read_text())]
+        assert flat[: base.size] == list(base.positions()), "site dump does not start with the state's orbits"
+        tail = flat[base.size :]
+        k = 0
+        while k < len(tail):
+            orbit = d4_orbit(tail[k][0], tail[k][1], outer)
+            assert tuple(tail[k : k + len(orbit)]) == orbit, f"site dump is not contiguous in orbits at {k}"
+            orbits.append(orbit)
+            k += len(orbit)
+    sites = SiteSet(outer, tuple(orbits))
+    n_site = len(sites.orbits)
+    assert x.shape[0] == n_site + len(meta["atoms"]), (x.shape, n_site, len(meta["atoms"]))
+
+    def rationalise(w: float) -> Fraction:
+        if w <= 1e-12:
+            return Fraction(0)
+        return Fraction(math.ceil(Fraction(w) * bump * scale), scale)
+
+    atoms = []
+    for o, orbit in enumerate(sites.orbits):
+        w = rationalise(float(x[o]))
+        if w == 0:
+            continue
+        for px, py in orbit:
+            atoms.append([str(px), str(py), str(w)])
+    threshold_atoms = []
+    for o, entry in enumerate(meta["atoms"]):
+        w = rationalise(float(x[n_site + o]))
+        if w == 0:
+            continue
+        base = ThresholdAtom(tuple((Fraction(a), Fraction(b)) for a, b in entry["points"]), entry["threshold"], w)
+        for image in base.orbit(outer):
+            threshold_atoms.append(image.to_record())
+    point_mass = sum((Fraction(a[2]) for a in atoms), start=Fraction(0))
+    budget = sum((ThresholdAtom.from_record(t).budget for t in threshold_atoms), start=Fraction(0))
+    total = point_mass + budget
+    record = {
+        "id": f"C-n{args.n:03d}-threshold-{str(outer).replace('/', '-')}",
+        "variant": "threshold",
+        "n": args.n,
+        "claim": f"s({args.n}) >= {outer}",
+        "outer_side": str(outer),
+        "square_side": meta["square_side"],
+        "angle_limit": meta["angle_limit"],
+        "direction_steps": meta["direction_steps"],
+        "symmetry": "D4",
+        "point_mass": str(point_mass),
+        "threshold_budget": str(budget),
+        "total_budget": str(total),
+        "atoms": atoms,
+        "threshold_atoms": threshold_atoms,
+        "provenance": {
+            "tool": "spike-b freeze_candidate.py (resume copy: lp_objective as string)",
+            "lp_run": str(run),
+            "bump": str(bump),
+            "scale": scale,
+            # A JSON float anywhere in the record is refused by decide_threshold_certificate's
+            # strict parser (parse_float refuses); the LP objective is informational, so it is
+            # written as a decimal string. (resume/ copy of spike B's freeze_candidate.py; this
+            # line is the only change.)
+            "lp_objective_float": repr(float(x[:n_site] @ sites.sizes() + sum(float(x[n_site + o]) * e["orbit_size"] * (len(e["points"]) // e["threshold"]) for o, e in enumerate(meta["atoms"])))),
+        },
+    }
+    out = Path(args.out)
+    out.write_text(json.dumps(record, indent=1) + "\n")
+    digest = hashlib.sha256(out.read_bytes()).hexdigest()
+    print(f"wrote {out}: {len(atoms)} point atoms (mass {float(point_mass):.9f}), {len(threshold_atoms)} threshold atoms (budget {float(budget):.9f}), total budget {total} = {float(total):.9f}; sha256 {digest}")
+
+
+if __name__ == "__main__":
+    main()

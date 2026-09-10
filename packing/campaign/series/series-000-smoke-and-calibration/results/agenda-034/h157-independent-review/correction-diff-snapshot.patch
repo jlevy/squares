@@ -1,0 +1,538 @@
+diff --git a/packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md b/packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md
+index 4c7c9b96..62b93516 100644
+--- a/packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md
++++ b/packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md
+@@ -226,9 +226,9 @@ transported mass-eleven ceiling family, and the screened endpoint patches.
+   Step 6 is the proposed transfer and it does not go through as stated; it requires a
+   separate owner, class, patch and routing verification that has not been done.
+   This entry moved here from **Established** on 2026-09-10 (PR 139 finding R2).
+-- That the case split fails as a *strategy*. Steps 4 and 5 close every class of one
+-  particular split; the note on Step 4’s quantifier says why closing every class is more
+-  than a conditional proof needs.
++- That the case split fails as a *strategy*. Steps 4 and 5 retain obstructions on the
++  named neutral relaxations; they do not supply the proposed all-class closure. Step 4’s
++  quantifier explains why closing every raw class is more than a conditional proof needs.
+ 
+ The word **refuted** is therefore wrong for “the conditional route” as a whole.
+ It is right only for the point-cover conditional method on this family and this split,
+@@ -241,22 +241,28 @@ and the general claim that survives is neutrality.
+    which refutes
+    [`H-157`](../hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md).
+    Refining the eight sectors to sixteen does widen the guaranteed wedge from `pi/4` to
+-   `3pi/8` and does grow the patch by about 62 per cent in area, and it buys exactly
+-   nothing: the reach toward the nearest surviving core is the rational identity
+-   `d^2 = 75308842465387162009/335694834731568400000000`, bit-identical for the
+-   eight-sector parent and both sixteen-sector children at both marks, because the
+-   closest point of the patch to that core is the mark itself.
+-   Six of the eight refined subclasses of the four neutral classes still read exactly
+-   10, and the two that break read `19/2`, not the predicted `79/8`.
++   `3pi/8` and grows the patch by about 62 per cent in area. Six of the eight refined
++   subclasses retain survivor weight ten; two improve to `19/2`, exceeding the
++   registered improvement to at most `79/8`. Thus the maximum remains ten, but local
++   improvement is real.
++
++   **Distance correction, September 10.** The reported unchanged positive distance
++   holds for the six neutral children. The patches `m1:J9/16` and `m2:J6/16`
++   intersect their fixed target cores 55 and 50, so their distances to those cores are
++   zero. The delivered distance helper assumed disjoint polygons and failed to check
++   that premise. A mark being a vertex does not prevent an enlarged patch from
++   approaching another core. The independent review reproduces the survivor table
++   and corrects this explanatory geometry; the count-based H157 rejection stands.
+ 
+    Two theorems come out of it, T1 (angular) and T2 (pose), stated in §5.1 below.
+-   Both are statements about **survivor weight on the retained transported mass-eleven
+-   ceiling family and the screened endpoint patches**, and both hold unconditionally at
+-   that scope.
++   Both concern **the retained transported mass-eleven family on the specified
++   patch-only residual domain**. Their patch, mark and pose-universe premises are
++   stated beside them; additional residual restrictions require fresh admissibility.
+ 
+-   **What that establishes.** Patch refinement is ruled out as the lever, at every
+-   angular resolution and at pose level: no refinement can make *every* class closed.
+-   That closes one route and it is worth having.
++   **What that establishes.** Within those premises, every partition retaining the
++   named neutral ray or pose has a class with survivor weight at least ten. Refining
++   its patch alone cannot close every class by a point cover on that same domain.
++   Other classes can improve, as two of the measured subclasses do.
+ 
+    **What it does not establish.** That the conditional strategy fails.
+    The sufficient global condition is not that every class is closed — it is that for
+@@ -282,70 +288,82 @@ and the general claim that survives is neutrality.
+    combination drawn from the four neutral sectors.
+    Nobody has enumerated them.
+ 
+-### 5.1 The two theorems lane X4 proved
++### 5.1 The Angular and Pose Obstructions, with Their Premises
+ 
+ Both are about the retained transported mass-eleven ceiling family at `q = 96/25` and
+ the screened endpoint patches; `w(F)` is the exact survivor weight left when every core
+ meeting the guaranteed patch `F` is deleted, and F3 is the fact that the cores holding a
+-given corner mark weigh exactly one.
++given corner mark weigh exactly one. The residual domain here imposes patch avoidance
++and the retained core admissibility rules. Adding parent, wall or joint-compatibility
++restrictions requires verifying that the surviving family satisfies them.
++T1 and T2 below are local proposition labels, not frontier claim identifiers.
+ 
+ **T1, angular.** Let `r0` be a retained signed ray whose singleton class has survivor
+-weight exactly 10. Under any partition of the owner’s pose angle into closed bins, let
+-`B` be a bin containing `r0` and `F` its guaranteed patch.
+-`F` is the intersection of `Q_r(m)` over the rays of `B`, so `F` is a subset of
++weight exactly 10. Partition the declared finite retained signed-ray universe into
++closed angular bins, and let `B` contain `r0`. Define its patch `F` to be the
++intersection of `Q_r(m)` over the retained rays of `B`, all at the same mark `m`.
++Then `F` is a subset of
+ `Q_r0(m)`, so `F` deletes a subset of what `Q_r0` deletes and `w(F) >= 10`. And `m` lies
+ in `F`, so `F` meets every core containing the mark; the mark clique weighs exactly 1
+ (F3), so `w(F) <= 11 - 1 = 10`. Hence `w(F) = 10` exactly, against a requirement
+ strictly below 10.
+ 
+-The statement is unconditional.
+-It needs only that *some* neutral ray exists, because any partition assigns `r0` to some
+-bin and that bin is nonempty, `r0` being an admissible pose in it.
+-There is no fineness threshold and no vacuity escape.
++The argument needs only one neutral retained ray: every partition of that universe
++places it in a bin. This is a statement about the declared angular construction, not
++about a class remaining possible after additional physical or joint restrictions.
+ Lane X4 measured 135 such rays per mark, spanning a contiguous arc `34.40698` degrees
+ wide; that width is robustness, not the load-bearing step.
+ 
+-**T2, pose, which generalises T1.** A guaranteed patch is guaranteed precisely because
+-it lies inside the owner’s core for every pose in its class.
++**T2, pose.** In this patch-only model, a guaranteed patch lies inside the selected
++owner core for every pose in its class. This definition does not cover every possible
++occupied-region argument, such as one using more of the unit parent.
+ Mark-clique member `#59` is an admissible net-oriented core inside the container
+ containing both bottom-left marks, at `(45133461/88696100, 25096071/49318700)`, and
+ `#60` is its diagonal mirror.
+-For any conditioning of the owner by pose, at any refinement, let `C` be the class
+-containing `#59` and `F` its patch.
+-Then `F` is a subset of `core(#59)`, so `w(F) >= w(core(#59)) = 10`; and `m` lies in `F`
+-because every pose in `C` owns the corner and so contains the mark, so `w(F) <= 10`.
+-Hence `w(F) = 10`.
+-
+-T2 is what makes the narrowing hold at every level of the pose rather than only at the
+-angular level: refining the patch is the wrong lever throughout.
+-What would remove such a class is a proof that the pose cannot occur in an eleven-square
+-packing, which is escape 2 above and not a covering argument at all.
++For a partition of a pose universe retaining `#59`, let `C` contain it and let `F`
++be any patch contained in every selected owner core of `C`. Then `F` is a subset of
++`core(#59)`, so `w(F) >= w(core(#59)) = 10`. That inequality already obstructs a
++point cover of budget below ten on the stated residual domain.
++
++Equality additionally requires a common mark `m` to lie in `F`, for example when `F`
++is the full intersection for a class whose every core contains that same mark.
++Owning the mark does not force every chosen subpatch to contain it. As an exact
++counterexample, scale `core(#59)` by `1/10000` about its bottom-left corner and use
++that positive-area patch for the singleton class. It contains neither mark and leaves
++survivor weight `43/4`, confirmed by SAT and clipping.
++
++Cores `#59` and `#60` each have a contained concentric same-angle unit parent, with
++positive wall margin `785411/88696100`. No completion to eleven disjoint parents or
++forced owner selection is proved. The subset argument does not settle the survivor
++family's admissibility after stronger residual restrictions, or the value of refining
++other classes and routing physical packings to them.
+ 
+ Neither theorem says the conditional strategy fails; see the reading under escape 1.
+ 
+ ## 6. Reading
+ 
+-Conditioning has been shown to buy nothing on the objects measured, not to be
+-impossible. The distinction matters for what gets built next: it removes the reason to
+-prefer the conditional route over the unconditional one, and it leaves the hybrid
+-(threshold atoms on a residual domain) exactly as open as it was.
+-That is the reading
++The measurements retain neutral classes on the named patch-only relaxations and show
++improvement in two refined subclasses. They do not supply a measured comparison of
++conditional and unconditional runtime, reachable bound, or value of routing and
++pruning. Conditional threshold charges remain a separate open comparison.
++This is consistent with
+ [`H-155`](../hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) now
+ carries, and the scope correction [X-024](X-024-two-lines-at-eleven.md) §5 and
+ [lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md)
+ now carry with it.
+ 
+-Three scope corrections landed on 2026-09-10 from the PR 139 review, and they narrow
+-this document rather than change any measurement.
+-**R3**: the two theorems of §5.1 rule out patch refinement as the lever, and no more; a
+-conditional proof needs one closed owner selection per packing, not every class closed,
+-so escape 1 is narrowed rather than closed and the forcing question stays open beside
+-escape 2. **R2**: the transfer of the rank-one cap `3.868983` to the conditional method
++The PR139 reviews on September 10 separate the supported counts from their
++interpretations. **R3**: §5.1 obstructs all-class point closure within its stated
++domain, while a global conditional proof needs an excluded valid selection per packing.
++**R2**: the transfer of the rank-one cap `3.868983` to the conditional method
+ is proposed, not established, and needs its own owner, class, patch and routing
+ verification; the unconditional obstruction is untouched.
+ **The cost reading**: that the conditional problem is the unconditional one shifted down
+ by one for sixteen times the work is an estimate on two matching cut maxima with the
+-class count standing in for a measured cost, and it is labelled as one in §4.
++class count standing in for a measured cost, and it is labelled as one in §4. It does
++not establish comparative productivity. The later independent source review also
++corrects the two distance cases, exp154's aggregate and T2's missing mark premise;
++the retained survivor counts are unchanged.
+ 
+ <!-- This document follows common-doc-guidelines.md.
+ See github.com/jlevy/practical-prose and review guidelines before editing.
+diff --git a/packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md b/packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md
+index c8305c1f..43140c7b 100644
+--- a/packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md
++++ b/packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md
+@@ -91,33 +91,37 @@ hypothesis:
+     joint compatibility and richer charges remain open independently of this test.
+     REFUTED 2026-09-10 by exp-154, on exact survivor weights as the corrected criterion
+     requires. Six of the eight refined subclasses of the four neutral classes read exact
+-    survivor weight 10, and the two that break read 19/2 rather than the predicted 79/8;
+-    the maximum over all thirty-two sixteen-bin classes is exactly 10. The mechanism is
+-    present and irrelevant: the wedge does widen from pi/4 to 3pi/8 and the patch does
+-    grow 1.6165x to 1.6175x in area, checked vertex for vertex, but the reach toward the
+-    critical survivor is the rational identity
+-    d^2 = 75308842465387162009/335694834731568400000000, bit-identical for the parent and
+-    both children at both marks, because the closest point of the patch to that core is
+-    the mark itself. The screen went one resolution further: at the singleton-ray limit
+-    135 classes per mark read exactly 10, and a pose probe leaves exactly 10 at two
+-    mark-clique members. Those are theorems T1 and T2 in X-026.
+-    What the refutation does and does not settle, in the terms this correction set out.
+-    It retains an obstruction on at least one refined relaxation at every angular
+-    resolution and at pose level, so patch refinement is closed as a lever. It does not
+-    close the conditional method: the sufficient global condition is that for every
++    survivor weight 10, and two improve to 19/2, satisfying the registered upper bound
++    79/8 more strongly. The maximum over all thirty-two sixteen-bin classes is exactly
++    10. Independent review reproduced the saved table, eight-bin equivalence and
++    singleton scan. The six neutral children retain the reported positive distance to
++    their fixed targets; m1:J9/16 and m2:J6/16 intersect cores55/50, respectively, so
++    those two distances are zero. The delivered distance helper violated its disjointness
++    precondition. Its all-children reach identity and the conclusion that the mechanism
++    is irrelevant are withdrawn; the survivor-weight rejection is unchanged.
++    On the finite retained ray universe, 135 classes per mark read exactly10. A pose
++    probe leaves10 at cores59/60. X026's local T1/T2 statements now name the patch-only
++    residual domain. T2 gives survivor weight at least10 for any patch inside core59;
++    equality also requires a common mark in the patch. A positive-area subpatch omitting
++    both marks leaves43/4. The two isolated cores have contained unit parents, but no
++    full eleven-parent packing or forced routing has been proved.
++    These statements obstruct closing every retained class by patch-only point covers
++    on that domain; they do not exclude gains in other classes or stronger domains.
++    The sufficient global condition is that for every
+     hypothetical physical packing there exists a valid owner selection whose residual
+     family is excluded, and a packing carrying an unclosed label may admit another
+     selection that is already excluded. Whether the neutral classes are ever forced is
+-    open, and is adjacent to X-026's emptiness escape rather than to any covering
+-    argument. This lane measured deletions, not atoms, so H-155's conditional threshold
+-    line is untouched. Tracked as think-dm0f.
++    open. This lane measured deletions, not atoms, so H-155's conditional threshold
++    line is untouched. Original target think-dm0f; later source review and corrections
++    think-9zc9. A maintained guarded replay is required before reusing the distance
++    producer; the delivered script is retained as historical evidence.
+ ---
+ # H-157 — Sixteen Sectors, a Fatter Patch, and the 0.015 That Would Decide It
+ 
+-**Unrun protocol clarified September 10, 2026.** The original criterion required success
++**Protocol clarification recorded before the target, September 10, 2026.** The original criterion required success
+ for every refined subclass; its aggregate metric is therefore the **maximum** survivor
+ weight. The earlier “minimum” was an error.
+-No target result exists.
++The later outcome and independent source corrections are recorded below.
+ 
+ [Lane X1](../series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md)
+ measured neutrality for a particular fractional family and endpoint patches.
+@@ -136,9 +140,9 @@ A successful screen would remove this family’s point-cover obstruction on the
+ subclasses; it would not construct a conditional cover.
+ An unsuccessful screen would leave a fixed-relaxation obstruction, without showing that
+ physical packings must route there or excluding stronger domains and charges.
+-This screen is one open hypothesis among the comparisons in the corrected
++This was one proposed comparison in the corrected
+ [X-026](../explorations/X-026-what-conditioning-does-and-does-not-buy.md).
+-It is carried as `think-dm0f`; instrument admission is still outstanding.
++The original target is `think-dm0f`; the later source review is `think-9zc9`.
+ 
+ ## Outcome, 2026-09-10: refuted
+ 
+@@ -163,33 +167,38 @@ The registered direction refutes on one surviving class, and six survive.
+ All exact, and the maximum over the full thirty-two-class sixteen-bin split is exactly
+ 10, attained at six classes.
+ 
+-**The `0.015` was a gap to the mark, not to the patch.** The squared distance from the
+-patch to the nearest surviving core is
++**Distance correction from the independent source review.** For the six neutral
++children, the squared distance to their selected target core remains
+ 
+ ```
+ d^2 = 75308842465387162009/335694834731568400000000      d = 0.014977891
+ ```
+ 
+-and it is bit-identical for the eight-sector parent and for both of its sixteen-sector
+-children, at both marks, because the minimising vertex is the mark itself.
+-Every patch at every bin count has the mark as a vertex, so no angular conditioning can
+-shorten that reach.
+-The proposed mechanism does happen — the guaranteed wedge widens from
++The patches `m1:J9/16` and `m2:J6/16` instead intersect their original target cores55
++and50, so their true distances to those cores are zero. The original helper computed
++vertex-to-edge distance under a disjointness assumption without first checking it.
++The survivor screen correctly deletes those intersected cores. Distance to a fixed
++original target and distance to the nearest remaining survivor are different metrics.
++The guaranteed wedge widens from
+ `pi/4` to `3pi/8` and the patch grows 1.6165x to 1.6175x in area, contained in
+-`Q_phi(m)` for every one of the 87 to 94 retained rays in its bin — and it buys nothing.
++`Q_phi(m)` for every one of the 87 to 94 retained rays in its bin. Two subclasses
++therefore improve; six do not. The full compound reach assertion is not established by
++this calculation, and the all-subclasses survivor criterion is rejected independently.
+ 
+-**Two theorems came out of it**, and they are the durable result rather than the
+-refutation. Both are in
++**Two local obstruction statements** are in
+ [X-026 §5.1](../explorations/X-026-what-conditioning-does-and-does-not-buy.md), stated
+ over the retained transported mass-eleven ceiling family and the screened endpoint
+-patches: **T1**, every closed angular bin containing one of the 135 neutral rays has
+-survivor weight exactly 10, at any bin count; and **T2**, the class containing the pose
+-of mark-clique member `#59` has survivor weight exactly 10 under any conditioning by
+-pose, at any refinement.
+-
+-What they establish is that **patch refinement is ruled out as the lever**, at every
+-angular resolution and at pose level.
+-What they do not establish is that the conditional strategy fails: that strategy needs
++patch-only residual domain: **T1**, the intersection patch for any bin containing a
++neutral ray in the declared finite retained universe leaves survivor weight ten;
++**T2**, any guaranteed patch inside owner core `#59` leaves weight at least ten.
++Equality in T2 also requires a common mark inside the patch. A positive-area corner
++subpatch of core59 for its singleton class omits both marks and leaves `43/4`, so
++containment in the owner alone does not give equality.
++
++For a partition retaining the neutral ray or pose, these statements leave a class
++unclosed by point covers on the stated relaxation. They require new survivor
++admissibility if the residual domain is strengthened, and do not decide gains in other
++classes. They do not establish that the conditional strategy fails: that strategy needs
+ one closed owner selection per packing rather than every class closed, and owner labels
+ and valid selections can overlap.
+ X-026 escape 1 is therefore narrowed rather than closed, and whether the neutral classes
+diff --git a/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md b/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md
+index 5e8aef55..9531277f 100644
+--- a/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md
++++ b/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md
+@@ -33,8 +33,9 @@ experiment:
+       polygons vertex for vertex, and class ids with their reflection pairing, all at zero
+       disagreements -- plus reproduction of lane X1's recorded eight-bin readings (survivor weight
+       33/4 to exactly 10, four classes at exactly 10, mean deletion 55/32, nearest survivor at SAT
+-      gap 0.014978). Every headline number was then read a second time by exact Sutherland-Hodgman
+-      convex clipping in place of SAT.
++      gap 0.014978). Exact Sutherland-Hodgman clipping independently checks all twelve
++      parent/child survivor sets and the 270 singleton rays selected as neutral by SAT;
++      it does not independently census all remaining rays or validate the distance calculation.
+     candidate: Sixteen closed angular bins per mark, thirty-two classes per corner; then the
+       singleton-ray refinement limit, one class per retained signed ray at 1444 classes per mark,
+       of which every coarser angular partition is a coarsening; then a pose probe deleting against
+@@ -47,7 +48,7 @@ experiment:
+       then the same invocation on verify_eight.py, verify_geometry.py, limit.py, crosscheck2.py
+       and consolidate.py. $SCRATCH is the directory holding the retained
+       results/agenda-034/lane-x4-*.py.txt scripts restored to their original .py names; each
+-      script pins that directory in a SCRATCH constant at the top, which a replay must repoint
++      script pins paths in SCRATCH and REPO constants, which a replay must repoint
+       before running, and the scripts import nbins.py from it alongside devtools.
+     budget: Registered at under an hour. Six retained scripts, no unattended runner, no retry.
+     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-survivors-16.json
+@@ -59,8 +60,8 @@ experiment:
+     question: Does every refined sixteen-sector subclass of the four neutral eight-sector classes
+       have exact survivor weight strictly below 10?
+     outcome: criterion_missed
+-    checked_by: Six of the eight refined subclasses read exactly 10 and only two drop, to 19/2
+-      rather than the registered 79/8. Over the full thirty-two-class sixteen-bin split the maximum
++    checked_by: Six of the eight refined subclasses read exactly 10 and two improve to19/2,
++      satisfying the registered upper bound79/8 more strongly. Over the full thirty-two-class sixteen-bin split the maximum
+       survivor weight is exactly 10, attained at six classes. Both readings agree under SAT and
+       under exact convex clipping, 12 of 12, and the whole table is symmetric under the diagonal
+       reflection J -> 15 - J with m1 <-> m2, which the screen was not told to satisfy.
+@@ -68,27 +69,30 @@ experiment:
+     role: mechanism
+     question: Does the refined patch reach further toward the nearest surviving core, as the
+       registered mechanism predicted?
+-    outcome: criterion_missed
+-    checked_by: The squared distance from patch to nearest surviving core is the rational identity
+-      d^2 = 75308842465387162009/335694834731568400000000, bit-identical for the eight-sector
+-      parent and both sixteen-sector children at both marks, because the minimising vertex is the
+-      mark itself. The mechanism the hypothesis proposed is present -- the guaranteed wedge widens
+-      from pi/4 to 3pi/8 and the patch grows 1.6165x to 1.6175x in area, contained in Q_phi(m) for
+-      every one of the 87 to 94 retained rays in its bin -- and it is irrelevant.
++    outcome: invalid
++    checked_by: Independent source review found that the delivered distance helper assumed
++      disjoint polygons but applied the formula to two intersecting cases. The six neutral
++      children retain the stated positive distance to fixed targets; m1:J9/16 and m2:J6/16
++      intersect their original target cores55/50 and have actual fixed-target distance zero.
++      The unchanged all-children identity is false and does not decide the compound0.015
++      reach criterion. Patch nesting and the1.6165x to1.6175x area increase still reproduce;
++      the count-based primary rejection is unaffected.
+   - shape: determination
+     role: mechanism
+-    question: Can any finer angular conditioning break neutrality?
++    question: Can angular refinement eliminate every neutral class on the retained ray
++      universe under its intersection-patch construction?
+     outcome: criterion_missed
+     checked_by: At the singleton-ray limit, 135 classes per mark read exactly 10 and they form a
+-      contiguous arc 34.40698 degrees wide, so every closed angular bin meeting that arc has
+-      survivor weight exactly 10 whatever the bin count. A pose probe one refinement stronger than
+-      any angular split -- deleting against the owner's whole core -- leaves exactly 10 at
+-      mark-clique members numbered 59 and 60. This bears on X-026 section 5 escape 1 and is cited there in
+-      prose; it is not a second registered claim.
++      contiguous interval in retained-ray order. Any bin containing one of those retained rays
++      has intersection-patch survivor weight exactly10. Deleting against whole owner cores59/60
++      leaves10. An arbitrary guaranteed subpatch gives only at least10 unless it also contains a
++      common mark; a positive-area subpatch of core59 omitting both marks leaves43/4. These
++      deductions concern the fixed patch-only residual domain and require new admissibility under
++      stronger restrictions. They are exploratory mechanisms, not another registered target.
+   verdict:
+     decision: rejected
+     primary_criterion: The exact survivor weight of the transported mass-eleven ceiling family,
+-      minimised over the refined subclasses of the four neutral eight-sector classes, against the
++      maximised over the refined subclasses of the four neutral eight-sector classes, against the
+       registered threshold of strictly below 10.
+     reason: Six refined subclasses still read exactly 10, so the case split as posed is not closed
+       by refinement and H-157 is refuted on its own registered direction.
+@@ -97,13 +101,18 @@ experiment:
+     wall_seconds: 356.1
+     stopped_by: criterion
+ ---
+-# Exp154: Sixteen Sectors Widen the Wedge and Move Nothing
++# Exp154: Sixteen Sectors Improve Two Subclasses and Leave Six Neutral
++
++**Independent source review, September 10, 2026.** The survivor table and primary
++rejection reproduce. This revision corrects the aggregate field from minimum to the
++preregistered maximum, withdraws two invalid distance calculations and narrows the
++angular/pose deductions. It does not rerun or change the original target criterion.
+ 
+ **H-157 is refuted on its own registered direction.** It predicted exact survivor weight
+ at most `79/8 = 9.875` for every refined subclass of the four neutral eight-sector
+ classes.
+-Six of the eight read **exactly 10**, and the two that do break read `19/2`, not
+-`79/8`. The registered refutation clause is explicit that one surviving class defeats
++Six of the eight read **exactly 10**, and two improve to `19/2`, satisfying the
++registered upper bound `79/8` more strongly. The refutation clause says one neutral class defeats
+ the split, and six survive.
+ 
+ | refined subclass | parent | survivor weight | deletion |
+@@ -120,32 +129,32 @@ the split, and six survive.
+ All exact. The two that break delete four extra weight-`1/8` placements each, indices
+ `[7, 16, 29, 55]` for `m1:J9` and `[2, 22, 25, 50]` for `m2:J6`.
+ 
+-**The mechanism is present and irrelevant.** The guaranteed wedge does widen from `pi/4`
++**The patch enlargement is verified.** The guaranteed wedge widens from `pi/4`
+ to `3pi/8`, the refined patch does contain its parent vertex for vertex and is strictly
+ larger — 1.6165x to 1.6175x the area — and it does lie inside the anchored quarter-core
+ `Q_phi(m)` for every one of the 87 to 94 retained signed rays in its closed bin.
+-What does not move is the reach.
+-The squared distance from the patch to the nearest surviving core is
++For the six neutral children, the squared distance to the selected target core remains
+ 
+ ```
+ d^2 = 75308842465387162009/335694834731568400000000      d = 0.014977891
+ ```
+ 
+-bit-identical for the parent and for both children at both marks, because the minimising
+-vertex is the mark itself.
+-The `0.014978` the hypothesis was built on is a gap to the mark, not to the patch
+-boundary, and no angular conditioning moves the mark.
++The two improved children instead intersect their selected targets, core55 for
++`m1:J9/16` and core50 for `m2:J6/16`, so those fixed-target distances are zero.
++The original distance helper assumed disjointness without checking it. A mark being
++a vertex does not prevent the patch from approaching another core. The claimed
++all-children identity is withdrawn; distance to the nearest *remaining* survivor must
++also be distinguished from distance to a target that has been deleted.
+ 
+-**The refutation extends past the registered resolution.** At the singleton-ray limit —
+-one class per retained signed ray, the finest angular conditioning that exists, of which
+-every coarser angular partition is a coarsening — 135 classes per mark read exactly 10,
+-and those rays form a contiguous arc `34.40698` degrees wide.
+-A pose probe one refinement stronger than any angular split leaves exactly 10 at two of
+-the eight mark-clique members.
+-The two theorems that follow, T1 (angular) and T2 (pose), are stated in
++**The retained finite universe has a further obstruction.** At one class per retained
++signed ray, 135 classes per mark read exactly ten. Any coarsening retaining such a ray
++has an intersection patch with survivor weight ten. The whole-core pose probes leave
++ten at two mark-clique members. The local T1 and T2 statements are given with their
++fixed-domain premises in
+ [X-026 §5.1](../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md).
+-They rule out patch refinement as the lever at every resolution and at pose level; they
+-do not establish that the conditional strategy fails, because a conditional proof needs
++T2 gives only a lower bound of ten for an arbitrary guaranteed subpatch; equality
++requires a common mark in that patch. Neither statement applies automatically after
++stronger residual restrictions. They do not establish that the conditional strategy fails, because a conditional proof needs
+ one closed owner selection per packing rather than every class closed.
+ X-026 escape 1 is narrowed rather than closed on that reading.
+ 
+diff --git a/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md b/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md
+index 15ae81f9..bd53f8d2 100644
+--- a/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md
++++ b/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md
+@@ -13,28 +13,53 @@ report uses as robustness.
+ All scripts and survivor families are retained beside this report; see
+ [Files](#costs-and-files).
+ 
+-**Every “closed” in the body below is narrowed to “patch refinement is ruled out as the
+-lever”. The corrected reading is
+-[X-026](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md) §5,
+-escape 1.**
+-
+-**Coordinator’s scope note, added on review (PR 139, finding R3).** The delivered text
+-concludes in several places that escape 1 of X-026 §5, and with it the conditional
+-point-cover line, is *closed*. That is stronger than what T1 and T2 support, and X-026
+-carries the corrected reading: both theorems are statements about **survivor weight on
+-the retained transported mass-eleven ceiling family and the screened endpoint patches**,
+-and what they establish is that **patch refinement is ruled out as the lever**, at every
+-angular resolution and at pose level.
+-They do not establish that the conditional strategy fails, because that strategy needs
+-one closed owner selection per packing rather than every class closed, and owner labels
+-and valid selections can overlap.
+-Escape 1 is therefore **narrowed, not closed**; whether the neutral classes are ever
+-*forced* is adjacent to escape 2 and is not settled here.
+-The delivered claim that Step 6’s rank-one cap `3.868983` is untouched is likewise left
+-as delivered and not endorsed: finding R2 holds that no conditional transfer of that cap
+-is established without a separate owner, class, patch and routing verification.
+-The measurements below — the survivor table, the reach identity, the 135 neutral rays
+-and the pose probe — are unaffected by either correction.
++## Independent Source Correction — September 10, 2026
++
++The delivered report below is historical. Its survivor-weight result reproduces:
++six of the eight refined subclasses retain ten, two improve to `19/2`, and the
++32-class maximum is ten. The registered all-subclasses improvement is rejected.
++The two improved values satisfy the registered upper bound `79/8` more strongly;
++that bound was not a prediction of equality.
++
++Two explanations in the delivered text are false as stated:
++
++- The distance helper assumes disjoint polygons, but `m1:J9/16` intersects fixed
++  target core55 and `m2:J6/16` intersects core50. Their true fixed-target distances
++  are zero. The old positive identity remains valid for the six neutral children,
++  not both children of every parent. Distance to a fixed original target must also
++  be distinguished from distance to the nearest remaining survivor. The original
++  `.py.txt` producer is preserved and must not be reused without its precondition
++  repair.
++- A guaranteed patch inside an owner core need not contain the owner's mark. T2
++  therefore gives `w(F) >= 10`; equality additionally needs a common mark in `F`.
++  For the singleton class of core59, its positive-area corner subpatch scaled by
++  `1/10000` leaves weight `43/4`, with neither mark in the patch. SAT and clipping
++  agree. Cores59/60 themselves do have contained isolated unit parents; no full
++  eleven-parent completion or forced owner selection follows.
++
++T1 concerns intersection patches on the declared finite retained signed-ray universe.
++T2 concerns a pose class retaining core59 and a patch inside that core. Both use the
++fixed patch-only residual domain. Stronger parent, wall or joint restrictions require
++checking survivor admissibility afresh. These statements leave a class unclosed by
++point weights in that model, while allowing gains in other classes, changed domains,
++routing to another valid selection and richer charges. Neither establishes a
++comparative ranking of research strategies.
++
++The source review reproduced eight-bin equivalence, the complete saved sixteen-sector
++JSON and the singleton scan. Exact clipping separately confirmed all twelve
++parent/child survivor sets and all270 SAT-selected neutral rays. That clipping
++control is not an independent census of the other rays or a verification of the faulty
++distance claim. The local T1/T2 labels are not frontier claim identifiers.
++The active statements and missing premises are in
++[X-026 §5.1](../../../../explorations/X-026-what-conditioning-does-and-does-not-buy.md#51-the-angular-and-pose-obstructions-with-their-premises)
++and the [source-review finding](https://github.com/jlevy/squares/pull/139#issuecomment-5613757157).
++
++The delivered cap-transfer claim near `3.868983` also remains unendorsed: no
++conditional transfer is established without the owner, class, patch and routing
++premises identified in R2. The original wording below is retained to make the
++correction traceable.
++
++## Delivered Account
+ 
+ Labels: **EXACT** = a rational decision by repository primitives; **CHECKED** = a float
+ reading; **RECORD** = read from a file in the repository; **OPEN** = not measured.
+

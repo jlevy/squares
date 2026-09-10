@@ -727,7 +727,9 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sessions-root", type=Path, required=True)
     parser.add_argument("--root-id", required=True, help="root Codex task id")
-    parser.add_argument("--start", required=True, help="inclusive ISO-8601 baseline cutoff")
+    parser.add_argument(
+        "--start", required=True, help="ISO-8601 baseline cutoff excluded from the delta"
+    )
     parser.add_argument("--end", required=True, help="inclusive ISO-8601 after cutoff")
     parser.add_argument("--out", type=Path, required=True, help="YAML artifact to write")
     return parser

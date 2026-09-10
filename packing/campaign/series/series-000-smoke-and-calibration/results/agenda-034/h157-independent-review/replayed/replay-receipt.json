@@ -1,0 +1,75 @@
+{
+  "repo": "/Users/levy/.codex/worktrees/88e2/squares",
+  "head": "ee98c4baae876835ba44a5f127bfa73d4e838d45",
+  "interpreter": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "path_adaptations": [
+    {
+      "source": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-nbins.py.txt",
+      "destination": "/private/tmp/n11-h157-ee98-review/replayed/nbins.py",
+      "scratch_replacements": 0,
+      "repo_replacements": 0
+    },
+    {
+      "source": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-verify-eight.py.txt",
+      "destination": "/private/tmp/n11-h157-ee98-review/replayed/verify_eight.py",
+      "scratch_replacements": 1,
+      "repo_replacements": 0
+    },
+    {
+      "source": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-screen16.py.txt",
+      "destination": "/private/tmp/n11-h157-ee98-review/replayed/screen16.py",
+      "scratch_replacements": 1,
+      "repo_replacements": 1
+    },
+    {
+      "source": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-verify-geometry.py.txt",
+      "destination": "/private/tmp/n11-h157-ee98-review/replayed/verify_geometry.py",
+      "scratch_replacements": 1,
+      "repo_replacements": 1
+    },
+    {
+      "source": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-limit.py.txt",
+      "destination": "/private/tmp/n11-h157-ee98-review/replayed/limit.py",
+      "scratch_replacements": 1,
+      "repo_replacements": 1
+    },
+    {
+      "source": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-crosscheck2.py.txt",
+      "destination": "/private/tmp/n11-h157-ee98-review/replayed/crosscheck2.py",
+      "scratch_replacements": 1,
+      "repo_replacements": 1
+    }
+  ],
+  "runs": [
+    {
+      "script": "verify-eight",
+      "returncode": 0,
+      "wall_seconds": 2.6137030419777147,
+      "log": "/private/tmp/n11-h157-ee98-review/replayed/verify-eight.stdout.txt"
+    },
+    {
+      "script": "screen16",
+      "returncode": 0,
+      "wall_seconds": 4.051501042005839,
+      "log": "/private/tmp/n11-h157-ee98-review/replayed/screen16.stdout.txt"
+    },
+    {
+      "script": "verify-geometry",
+      "returncode": 0,
+      "wall_seconds": 1.6691572919953614,
+      "log": "/private/tmp/n11-h157-ee98-review/replayed/verify-geometry.stdout.txt"
+    },
+    {
+      "script": "limit",
+      "returncode": 0,
+      "wall_seconds": 81.97179941699142,
+      "log": "/private/tmp/n11-h157-ee98-review/replayed/limit.stdout.txt"
+    },
+    {
+      "script": "crosscheck2",
+      "returncode": 0,
+      "wall_seconds": 73.69521658300073,
+      "log": "/private/tmp/n11-h157-ee98-review/replayed/crosscheck2.stdout.txt"
+    }
+  ]
+}

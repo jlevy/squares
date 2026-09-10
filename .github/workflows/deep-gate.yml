@@ -1,6 +1,6 @@
 name: Deferred checkpoint
 
-# The seven steps the pull-request surface defers, run against a pull request *before* it
+# The eleven steps the pull-request surface defers, run against a pull request *before* it
 # merges rather than after it. Not on every build, and that is the point: the selection
 # here is 1943.05s in one step.
 #
@@ -91,9 +91,13 @@ concurrency:
 
 jobs:
   deferred-steps:
-    # Four of the seven deferrals: negative controls, the n=40 rigidity bracket,
-    # the known-best atlas rebuild and exact rational grid replay. The slow lane,
-    # exhaustive tier and translation screen each have a separate job below.
+    # Eight of the eleven deferrals: negative controls, the n=40 rigidity bracket,
+    # the known-best atlas rebuild, exact rational grid replay, T-024's two
+    # finer-net dilation-limit records (173s and 352s on one core, each a full
+    # five-condition replay of a 721- or 1441-direction certificate) and T-026's two
+    # threshold ones (618s and 919s, six conditions by the threshold exact sweep).
+    # The slow lane, exhaustive tier and translation screen each have a separate job
+    # below.
     #
     # The three new ones are here on their own measurements, taken at n=1..324 on an idle
     # ten-cpu box and retained in `packing/benchmarks/gate-cost-at-324/`: 691.19s for the
@@ -176,6 +180,10 @@ jobs:
           --only "n=40 rigidity bracket still reproduces"
           --only "known-best n=1..324 atlas rebuild"
           --only "exact rational grid replay"
+          --only "finer-net dilation-limit record, 720 steps"
+          --only "finer-net dilation-limit record, 1440 steps"
+          --only "threshold dilation-limit record, 720 steps"
+          --only "threshold dilation-limit record, 1440 steps"
           --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs

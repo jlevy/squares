@@ -27,15 +27,15 @@ exploration:
     launched.
   sources:
   - docs/project/research/research-2026-09-08-annealing-for-square-packing.md
-  - packing/campaign/hypotheses/H-135-simultaneous-perturbation-move.md
-  - packing/campaign/hypotheses/H-136-wall-pressure-dense-objective.md
-  - packing/campaign/hypotheses/H-137-basin-hopping-over-the-lp-quench.md
-  - packing/campaign/hypotheses/H-138-cooling-schedule-length.md
-  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-134-arm-calibration.md
-  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-135-round-1-perturbation.md
-  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-136-round-1-pressure.md
-  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-137-basin-hopping.md
-  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-138-round-1-schedule.md
+  - packing/campaign/hypotheses/H-158-simultaneous-perturbation-move.md
+  - packing/campaign/hypotheses/H-159-wall-pressure-dense-objective.md
+  - packing/campaign/hypotheses/H-160-basin-hopping-over-the-lp-quench.md
+  - packing/campaign/hypotheses/H-161-cooling-schedule-length.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-155-arm-calibration.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-round-1-perturbation.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-157-round-1-pressure.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-158-basin-hopping.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-159-round-1-schedule.md
   - packing/campaign/hypotheses/H-004-neighbor-transfer-seeding.md
   - packing/campaign/hypotheses/H-012-record-basins-are-rare.md
   - packing/campaign/hypotheses/H-013-delta-continuation.md
@@ -136,7 +136,7 @@ move is a no-op on the objective for almost every square.
 The search campaign then measured it directly, and the measurement is sharper than the
 argument. From `devtools/measure_objective_sparsity.py`, 8,000 proposals per kind per
 cell at scales `0.01`, `0.05` and `0.2`, recorded in
-[exp-134](../series/series-000-smoke-and-calibration/experiments/exp-134-arm-calibration.md):
+[exp-155](../series/series-000-smoke-and-calibration/experiments/exp-155-arm-calibration.md):
 
 | cell | single-square proposals that lower the side | that change it at all | collective proposals that lower it |
 | ---: | ---: | ---: | ---: |
@@ -156,7 +156,7 @@ A quarter to a third of proposals still change the objective, and outside `n = 5
 one of those raises it.
 
 The consequence, from
-[exp-135](../series/series-000-smoke-and-calibration/experiments/exp-135-round-1-perturbation.md):
+[exp-156](../series/series-000-smoke-and-calibration/experiments/exp-156-round-1-perturbation.md):
 adding a whole-configuration move takes `n = 17` from exactly `5.0` on every control
 seed to a best of `4.682227`, which is `+6.70e-03` from Bidwell, a gap forty-eight times
 smaller than the control’s. It takes `n = 11` from `3.922761` to `3.886755` and `n = 26`
@@ -166,7 +166,7 @@ from exactly `6.0` to `5.746574`. Above `n = 26` it stops, and it stops abruptly
 **One correction to how this has been told.** The `n = 17` figure often quoted as
 “within `0.002` of Bidwell cold” is `4.677676`, `+2.15e-03`, and it is not the
 collective move alone: it is the both-factors arm of
-[exp-138](../series/series-000-smoke-and-calibration/experiments/exp-138-round-1-schedule.md),
+[exp-159](../series/series-000-smoke-and-calibration/experiments/exp-159-round-1-schedule.md),
 collective move plus a tenfold longer anneal, and that arm’s delivered budget at
 `n = 17` overshot the control’s by `×1.31`. The collective move on its own reaches
 `+6.70e-03`. Both are cold and both are against a control sitting at exactly `5.0`,
@@ -312,7 +312,7 @@ plain descent there.
 It converges from cold uniform random starts on 12 of 12 at `n = 5` to the proved
 `2.707106781187`, and polishes annealer output at `n = 10` to a median gap of `8.9e-16`.
 It also has two known defects that an interactive tool would feel immediately:
-[exp-137](../series/series-000-smoke-and-calibration/experiments/exp-137-basin-hopping.md)
+[exp-158](../series/series-000-smoke-and-calibration/experiments/exp-158-basin-hopping.md)
 found `time_budget=4.0` producing calls of up to about 30 seconds, and LP output
 penetrating by about `1e-16` and needing a monotone centroid-scaling repair before
 emission. Both are prerequisites, not details.
@@ -506,7 +506,7 @@ repository already holds, and no version of it has been run.
 
 ### Directional rather than isotropic pressure
 
-[exp-136](../series/series-000-smoke-and-calibration/experiments/exp-136-round-1-pressure.md)
+[exp-157](../series/series-000-smoke-and-calibration/experiments/exp-157-round-1-pressure.md)
 refuted the wall-pressure surrogate, and the refutation is a design error rather than a
 null result, which makes it more useful than a clean negative.
 `required_side` is minimised by a tight square; the aggregate `spread` term is minimised
@@ -584,7 +584,7 @@ reads differently from the rest.
 The
 [simulation survey](../../../docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md)
 ranks divide and concur first, and
-[exp-139](../series/series-000-smoke-and-calibration/experiments/exp-139-projection-search.md)
+[exp-160](../series/series-000-smoke-and-calibration/experiments/exp-160-projection-search.md)
 ran it. The thing worth carrying into the rest of this document is not the sides it
 reached but what its failure mode says about everything else here.
 
@@ -663,7 +663,7 @@ physics with memory.
 That is Laio and Parrinello’s history-dependent bias, deposited at visited points in a
 collective-variable space to fill basins.
 The closest thing either survey records is basin hopping
-([H-137](../hypotheses/H-137-basin-hopping-over-the-lp-quench.md)), which perturbs an
+([H-160](../hypotheses/H-160-basin-hopping-over-the-lp-quench.md)), which perturbs an
 incumbent rather than remembering where it has been.
 
 Its hard part is not the bias, it is the coordinate.
@@ -1002,13 +1002,13 @@ key is itself tolerance-dependent.
 *Claim.* At equal delivered budget, the improvement from the collective move and the
 improvement from a tenfold longer anneal are not additive, and the both-factors arm
 beats the sum of the two main effects.
-*Evidence already in hand.* exp-138’s `2×2`: cells improving the control’s median by at
+*Evidence already in hand.* exp-159’s `2×2`: cells improving the control’s median by at
 least `0.01` are 0 for the control, 4 for the collective move alone, 3 for the long
 schedule alone, and 5 for both.
 The both-factors arm’s best at `n = 17` is `4.677676`, against `4.682227` for the move
 alone and `4.700170` for the schedule alone; its `n = 26` median is `5.710314`, against
 `5.823450` and `5.887456`. *Instrument.* Exists: `--steps` and `--p-perturb` are both
-already flags, and exp-138 reports `lines_changed: 0`. The extension needed is budget
+already flags, and exp-159 reports `lines_changed: 0`. The extension needed is budget
 accounting, because the both-factors arm overshot by `×1.31` at `n = 17`, `×2.13` at
 `n = 37` and `×3.92` at `n = 50`, and the record says so itself.
 *Criterion shape.* A factorial with delivered pair tests equal across arms to within a
@@ -1038,7 +1038,7 @@ boundary in the budget.
 **C3. The sparsity is a property of the grid, not of the objective.** *Claim.* The
 fraction of single-square proposals that lower the side is near zero at the grid and
 materially positive at every non-grid configuration of the same `n`, at the same scales.
-*Evidence.* One measurement, in exp-134: `3.5` per cent at arm B’s emitted `n = 18`
+*Evidence.* One measurement, in exp-155: `3.5` per cent at arm B’s emitted `n = 18`
 poses at side `4.84`, against `0.0000` at the grid.
 That is one configuration at one cell.
 *Instrument.* The same sparsity tool, pointed at a sample of off-grid configurations
@@ -1105,7 +1105,7 @@ schedule’s right variable is the overlap tolerance, not the delta.
 **C7. A directional wall-pressure term does not have the disc pathology.** *Claim.* A
 per-wall inward term, carrying the container’s normals, lowers the median best side
 against the control on cells where the isotropic aggregate raised it.
-*Evidence.* exp-136’s mechanism is exact and explains its own failure completely;
+*Evidence.* exp-157’s mechanism is exact and explains its own failure completely;
 nothing bears on the directional variant.
 *Instrument.* Not built; it is a change in `geom.rs` and it is a smaller change than the
 inflation rewrite. *Criterion shape.* Paired against the control, never against the
@@ -1134,10 +1134,10 @@ cycles, which is the comparison the source claims and the one the archive cannot
 **C10. Record basins are rare in quench measure.** *Claim.* H-012 unchanged.
 *What the new material does to its standing.* It supplies the first in-repo numbers of
 the right shape without touching the estimand.
-Over 55 runs per arm, exp-135 recorded 10 landing inside a `1e-4` basin proxy of a
+Over 55 runs per arm, exp-156 recorded 10 landing inside a `1e-4` basin proxy of a
 record against 5 for the control, and 8 inside `1e-6` against 5, with `n = 10`
 accounting for the cleanest part of it at 5 seeds of 5 inside `1e-4` against 0 of 5;
-exp-137 recorded `0 / 25` record hits under both of its conditions across five cells.
+exp-158 recorded `0 / 25` record hits under both of its conditions across five cells.
 None of that is H-012, because H-012 is stated over a named proposal, quench and
 terminal equivalence at `n = 11`, and the terminal-component identity at `n = 11` still
 does not exist. So the standing moves from “no in-repo data at all” to “hit counts at
@@ -1182,10 +1182,10 @@ This branch created four hypotheses and five experiment records in a single afte
 Two of them are closer to parameter sweeps than to standing scientific claims, and the
 records say so themselves.
 
-`H-138`, on cooling schedule length, is a claim about one flag.
+`H-161`, on cooling schedule length, is a claim about one flag.
 Its experiment reports `lines_changed: 0` and states outright that no code change was
 needed because `--steps` already existed, so the round is a parameter and not a feature.
-`H-136`, on wall pressure, declared its own limit before running (the term is isotropic)
+`H-159`, on wall pressure, declared its own limit before running (the term is isotropic)
 and was then refuted by a mechanism derivable from the term’s algebra: a `spread`
 penalty is minimised by a disc.
 Both produced real information.
@@ -1203,11 +1203,11 @@ split across two records that each report it as a complication of their own verd
 And it consumes one identifier instead of four.
 
 The cost of not doing that was paid the same day and is concrete.
-The four were registered as `H-127` through `H-130` and had to be renumbered to `H-135`
-through `H-138` when this branch merged `main`, because the `n = 11` proof line had used
+The four were registered as `H-127` through `H-130` and had to be renumbered to `H-158`
+through `H-161` when this branch merged `main`, because the `n = 11` proof line had used
 those same four identifiers for unrelated corner-class work.
 The five experiment records were renumbered the same way and for the same reason, ending
-at `exp-134` through `exp-138`. That is a whole afternoon’s identifiers consumed inside
+at `exp-155` through `exp-159`. That is a whole afternoon’s identifiers consumed inside
 a range another line was actively claiming, and it is why this document leaves a gap.
 
 **Nothing above is a request to edit those records.** They are written, they are

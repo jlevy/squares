@@ -1,0 +1,154 @@
+"""H-157: sixteen-sector owner patches screened against the mass-11 ceiling family.
+
+Replays lane X1's screen verbatim (devtools.screen_corner_dual_salvage.screen_footprint,
+devtools.transport_ceiling_family.transport, the retained 191/50 mass-eleven ceiling
+family) at bin counts 8 and 16.  Every verdict is exact rational arithmetic; floats
+appear only in the human-readable columns.
+"""
+from __future__ import annotations
+
+import json
+import math
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+SCRATCH = "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/sixteen-sectors"
+sys.path.insert(0, SCRATCH)
+
+import nbins
+from devtools.owner_footprints import HALF_CORE, owner_branch_manifest
+from devtools.screen_corner_dual_salvage import (
+    _base_polygon,
+    _orientation_axis,
+    screen_footprint,
+    strict_separation,
+)
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+
+REPO = Path("/home/user/squares")
+SRC = REPO / (
+    "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/"
+    "ceiling-family-191-50.json"
+)
+TARGET = Fraction(96, 25)
+THRESH = Fraction(10)
+
+t0 = time.perf_counter()
+record = json.loads(SRC.read_text())
+source = CeilingCertificate.from_record(record)
+print(f"source: {len(source.placements)} placements, side {source.outer_side}, "
+      f"total weight {source.total_weight}")
+
+moved = transport(record, Fraction(1), side=TARGET)
+family = CeilingCertificate.from_record(moved)
+print(f"transported: side {family.outer_side}, total weight {family.total_weight}")
+
+manifest = owner_branch_manifest()
+directions = manifest.directions.directions
+axes = frozenset((d.ux, d.uy) for d in directions) | frozenset((d.vx, d.vy) for d in directions)
+kept = [p for p in family.placements if _orientation_axis(p) in axes]
+print(f"orientation filter: {len(kept)}/{len(family.placements)} kept, "
+      f"weight {sum((p.weight for p in kept), Fraction(0))}")
+
+
+def euclid_gap(entry) -> float:
+    ax, ay = entry.separation.axis
+    return float(entry.separation.gap) / math.hypot(float(ax), float(ay))
+
+
+def run(mark_id: str, mark, sector: int, bins: int):
+    poly = nbins.endpoint_footprint(mark, sector, directions, bins)
+    cid = f"bottom-left:{mark_id}:J{sector}/{bins}"
+    s = screen_footprint(family, poly, class_id=cid, corner="bottom-left", kind="endpoint",
+                         source_placements=family.placements, direction_axes=axes)
+    nearest = min(((euclid_gap(e), e.source_index, e.weight) for e in s.survivors), default=None)
+    return cid, poly, s, nearest
+
+
+# ---------------------------------------------------------------- control: bins = 8
+print("\n=== CONTROL: bins = 8, all sixteen classes (must reproduce lane X1) ===")
+eight = {}
+for owner in manifest.classes:
+    poly_t = _base_polygon(owner, "endpoint", directions)
+    poly_n = nbins.endpoint_footprint(owner.mark, owner.sector, directions, 8)
+    assert poly_t == poly_n, owner.class_id
+    s = screen_footprint(family, poly_t, class_id=owner.class_id, corner="bottom-left",
+                         kind="endpoint", source_placements=family.placements, direction_axes=axes)
+    nearest = min(((euclid_gap(e), e.source_index, e.weight) for e in s.survivors), default=None)
+    eight[owner.class_id] = (s, nearest)
+    flag = "  NEUTRAL(=10)" if s.total_weight == THRESH else ""
+    print(f"  {owner.class_id:22s} survivors {len(s.survivors):3d}  weight {str(s.total_weight):10s} "
+          f"= {float(s.total_weight):9.6f}  deleted {str(11 - s.total_weight):10s}  "
+          f"nearest gap {nearest[0]:.6f} (idx {nearest[1]}){flag}")
+neutral8 = [c for c, (s, _) in eight.items() if s.total_weight == THRESH]
+print(f"  classes at exactly 10: {len(neutral8)} -> {neutral8}")
+
+# ---------------------------------------------------------------- refined: bins = 16
+NEUTRAL_PARENTS = [("m1", 3), ("m1", 4), ("m2", 3), ("m2", 4)]
+MARKS = dict(zip(("m1", "m2"), (owner.mark for owner in manifest.classes[:1] + manifest.classes[8:9])))
+MARKS = {owner.mark_id: owner.mark for owner in manifest.classes}
+
+print("\n=== REFINEMENT: bins = 16, the eight refined subclasses of the four neutral classes ===")
+rows = []
+for mark_id, parent in NEUTRAL_PARENTS:
+    mark = MARKS[mark_id]
+    parent_s, parent_near = eight[f"bottom-left:{mark_id}:j{parent}"]
+    for sector in (2 * parent, 2 * parent + 1):
+        cid, poly, s, nearest = run(mark_id, mark, sector, 16)
+        first, last = nbins.sector_endpoint_rays(sector, directions, 16)
+        fa = math.degrees(math.atan2(float(first[1]), float(first[0]))) % 360.0
+        la = math.degrees(math.atan2(float(last[1]), float(last[0]))) % 360.0
+        la = la + 360.0 if la < fa else la
+        deleted_more = sorted(set(range(len(family.placements))) - {e.source_index for e in s.survivors}
+                              - (set(range(len(family.placements))) - {e.source_index for e in parent_s.survivors}))
+        rows.append((mark_id, parent, sector, cid, poly, s, nearest, parent_s, fa, la, deleted_more))
+        flag = "  NEUTRAL(=10)" if s.total_weight == THRESH else "  BROKEN(<10)"
+        if s.total_weight > THRESH:
+            flag = "  ??? >10"
+        print(f"  {cid:26s} rays [{fa:8.4f},{la:8.4f}] d={la-fa:7.4f}  survivors {len(s.survivors):3d}  "
+              f"weight {str(s.total_weight):10s} = {float(s.total_weight):9.6f}  "
+              f"deleted {str(11 - s.total_weight):10s}  nearest gap {nearest[0]:.6f}{flag}")
+        print(f"      parent bottom-left:{mark_id}:j{parent} weight {parent_s.total_weight}; "
+              f"extra deletions vs parent: {deleted_more}")
+
+print("\n=== all 32 refined classes at bins = 16 (completeness of the case split) ===")
+worst = None
+for mark_id in ("m1", "m2"):
+    mark = MARKS[mark_id]
+    for sector in range(16):
+        cid, poly, s, nearest = run(mark_id, mark, sector, 16)
+        tag = "NEUTRAL(=10)" if s.total_weight == THRESH else ("<10" if s.total_weight < THRESH else ">10")
+        print(f"  {cid:26s} survivors {len(s.survivors):3d}  weight {str(s.total_weight):10s} "
+              f"= {float(s.total_weight):9.6f}  nearest gap {nearest[0]:.6f}  {tag}")
+        if worst is None or s.total_weight > worst[1]:
+            worst = (cid, s.total_weight)
+print(f"  maximum survivor weight over all 32 refined classes: {worst[1]} at {worst[0]}")
+
+print(f"\nwall time {time.perf_counter() - t0:.2f} s")
+
+# dump the refined survivor families
+out = {}
+for mark_id, parent, sector, cid, poly, s, nearest, parent_s, fa, la, extra in rows:
+    out[cid] = {
+        "bins": 16,
+        "mark": mark_id,
+        "sector": sector,
+        "parent_class": f"bottom-left:{mark_id}:j{parent}",
+        "parent_survivor_weight": str(parent_s.total_weight),
+        "footprint": [[str(x), str(y)] for x, y in poly],
+        "ray_angles_deg_float": [fa, la],
+        "survivor_count": len(s.survivors),
+        "survivor_weight": str(s.total_weight),
+        "survivor_mask_hex": hex(s.mask),
+        "nearest_survivor": {"euclidean_gap_float": nearest[0], "source_index": nearest[1],
+                             "weight": str(nearest[2])},
+        "extra_deletions_vs_parent": extra,
+        "survivors": [{"source_index": e.source_index, "weight": str(e.weight),
+                       "separating_axis": [str(v) for v in e.separation.axis],
+                       "positive_projection_gap": str(e.separation.gap)} for e in s.survivors],
+    }
+Path(SCRATCH, "survivors-16.json").write_text(json.dumps(out, indent=1) + "\n")
+print("wrote survivors-16.json")

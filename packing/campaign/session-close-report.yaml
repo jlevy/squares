@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 109
+count: 125
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 64
+  sessions_measured: 80
   sessions_unmeasured: 45
   attributed:
-    rollups: 123
-    turns: 31555
-    tool_calls: 17503
-    tool_errors: 365
-    one_off_code: 2974
-    wall_hours: 179.02
+    rollups: 124
+    turns: 33276
+    tool_calls: 18198
+    tool_errors: 381
+    one_off_code: 3043
+    wall_hours: 196.61
   unattributed:
     rollups: 60
     turns: 11110
@@ -28,16 +28,16 @@ totals:
     one_off_code: 946
     wall_hours: 51.75
   measured:
-    rollups: 183
-    turns: 42665
-    tool_calls: 24042
-    tool_errors: 521
-    one_off_code: 3920
-    wall_hours: 230.77
+    rollups: 184
+    turns: 44386
+    tool_calls: 24737
+    tool_errors: 537
+    one_off_code: 3989
+    wall_hours: 248.36
 codex_receipts:
-  attributed: 29
-  unattributed: 0
-  measured: 29
+  attributed: 49
+  unattributed: 2
+  measured: 51
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1441,6 +1441,26 @@ sessions:
     active_union_hours: 1.93
     wall_hours: 1.93
     snapshot_incomplete: true
+- id: session-092
+  title: "Eight-hour hybrid and release investigation"
+  status: stopped
+  primary_bead: think-0yfe
+  phases: 20
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-092.yaml
+    model_responses: 1723
+    agent_hours: 19.06
+    active_union_hours: 7.77
+    wall_hours: 9.72
+    snapshot_incomplete: true
 - id: session-093
   title: "Full-square compatibility and distinct density assessment"
   status: completed
@@ -1540,6 +1560,26 @@ sessions:
     agent_hours: 7.51
     active_union_hours: 3.69
     wall_hours: 4.3
+    snapshot_incomplete: true
+- id: session-098
+  title: "Residual ten-square skeleton admission"
+  status: stopped
+  primary_bead: think-oli1
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-098.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-098.yaml
+    model_responses: 590
+    agent_hours: 4.33
+    active_union_hours: 3.1
+    wall_hours: 3.15
     snapshot_incomplete: true
 - id: session-099
   title: "Atlas expansion to n = 324 and the poster composite"
@@ -1718,10 +1758,10 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-110.yaml
-    model_responses: 940
-    agent_hours: 6.73
-    active_union_hours: 2.58
-    wall_hours: 2.58
+    model_responses: 1169
+    agent_hours: 7.88
+    active_union_hours: 2.96
+    wall_hours: 2.96
     snapshot_incomplete: true
 - id: session-111
   title: "Prepared math startup and publication integration"
@@ -1743,3 +1783,312 @@ sessions:
     active_union_hours: 6.22
     wall_hours: 6.23
     snapshot_incomplete: true
+- id: session-112
+  title: "n = 11 ownership continuation"
+  status: stopped
+  primary_bead: think-3glv
+  phases: 9
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-112.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-112.yaml
+    model_responses: 843
+    agent_hours: 7.52
+    active_union_hours: 3.78
+    wall_hours: 3.91
+    snapshot_incomplete: true
+- id: session-113
+  title: "Two-hour n = 11 conditional-owner sprint"
+  status: completed
+  primary_bead: think-8m28
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-113.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-113.yaml
+    model_responses: 973
+    agent_hours: 6.99
+    active_union_hours: 1.97
+    wall_hours: 1.97
+    snapshot_incomplete: true
+- id: session-114
+  title: "Independent five-dot audit and owner-case readiness"
+  status: stopped
+  primary_bead: think-yhw2
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-114.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-114.yaml
+    model_responses: 330
+    agent_hours: 2.25
+    active_union_hours: 0.81
+    wall_hours: 0.81
+    snapshot_incomplete: true
+- id: session-115
+  title: "Independent replay and wall-aware owner footprints"
+  status: stopped
+  primary_bead: think-waix
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-115.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-115.yaml
+    model_responses: 213
+    agent_hours: 19.6
+    active_union_hours: 6.7
+    wall_hours: 6.7
+    snapshot_incomplete: true
+- id: session-116
+  title: "Resume wall-aware research after the network outage"
+  status: stopped
+  primary_bead: think-waix
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-116.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-116.yaml
+    model_responses: 304
+    agent_hours: 8.45
+    active_union_hours: 0.82
+    wall_hours: 0.82
+    snapshot_incomplete: true
+- id: session-117
+  title: "Transfer wall-aware owner exclusions"
+  status: stopped
+  primary_bead: think-waix
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-117.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-117.yaml
+    model_responses: 371
+    agent_hours: 2.16
+    active_union_hours: 0.75
+    wall_hours: 0.75
+    snapshot_incomplete: true
+- id: session-118
+  title: "Test the small surviving wall-owner tuple"
+  status: stopped
+  primary_bead: think-ykd6
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-118.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-118.yaml
+    model_responses: 59
+    agent_hours: 0.38
+    active_union_hours: 0.16
+    wall_hours: 0.16
+    snapshot_incomplete: true
+- id: session-119
+  title: "Publish and test the selected wall tuple"
+  status: stopped
+  primary_bead: think-ykd6
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-119.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-119.yaml
+    model_responses: 86
+    agent_hours: 0.51
+    active_union_hours: 0.25
+    wall_hours: 0.25
+    snapshot_incomplete: true
+- id: session-120
+  title: "Execute the published selected wall tuple"
+  status: stopped
+  primary_bead: think-ykd6
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-120.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-120.yaml
+    model_responses: 96
+    agent_hours: 0.68
+    active_union_hours: 0.2
+    wall_hours: 0.2
+    snapshot_incomplete: true
+- id: session-121
+  title: "Owner-core compatibility continuation"
+  status: stopped
+  primary_bead: think-ykd6
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-121-compatibility-target.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-121-six-dot.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-121-two-core.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-121-source.yaml
+    model_responses: 152
+    agent_hours: 1.31
+    active_union_hours: 0.45
+    wall_hours: 0.45
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-121-compatibility-target.yaml
+    model_responses: 115
+    agent_hours: 0.52
+    active_union_hours: 0.21
+    wall_hours: 0.21
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-121-six-dot.yaml
+    model_responses: 180
+    agent_hours: 1.1
+    active_union_hours: 0.39
+    wall_hours: 0.39
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-121-two-core.yaml
+    model_responses: 157
+    agent_hours: 1.19
+    active_union_hours: 0.41
+    wall_hours: 0.41
+    snapshot_incomplete: true
+- id: session-122
+  title: "Direct sixth-site feasibility continuation"
+  status: stopped
+  primary_bead: think-ykd6
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-122-source.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-122-direct-target.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-122-checkpoint.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-122-source.yaml
+    model_responses: 101
+    agent_hours: 0.89
+    active_union_hours: 0.29
+    wall_hours: 0.29
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-122-direct-target.yaml
+    model_responses: 88
+    agent_hours: 0.46
+    active_union_hours: 0.15
+    wall_hours: 0.15
+    snapshot_incomplete: true
+  - path: packing/campaign/resource-usage/codex-task-tree-session-122-checkpoint.yaml
+    model_responses: 179
+    agent_hours: 1.26
+    active_union_hours: 0.44
+    wall_hours: 0.44
+    snapshot_incomplete: true
+- id: session-123
+  title: "Evidence-First Interpretation and Milestone Review"
+  status: stopped
+  primary_bead: think-rm3k
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-123.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-123.yaml
+    model_responses: 87
+    agent_hours: 18.56
+    active_union_hours: 6.18
+    wall_hours: 6.18
+    snapshot_incomplete: true
+- id: session-124
+  title: "Evidence Interpretation Finalization"
+  status: stopped
+  primary_bead: think-rm3k
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-124-publication.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-124-publication.yaml
+    model_responses: 154
+    agent_hours: 6.97
+    active_union_hours: 0.41
+    wall_hours: 0.41
+    snapshot_incomplete: true
+- id: session-125
+  title: "Pushing s(11) past the point-atom ceiling, and integrating the owner line"
+  status: completed
+  primary_bead: think-hs7y
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9.yaml
+  turns: 1721
+  tool_calls: 695
+  tool_errors: 16
+  one_off_code: 69
+  wall_hours: 17.59
+  codex_receipts: []

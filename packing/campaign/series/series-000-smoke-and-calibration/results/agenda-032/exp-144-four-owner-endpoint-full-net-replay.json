@@ -1,0 +1,2564 @@
+{
+ "schema": "owner-footprint-exact-replay/v1",
+ "status": "complete",
+ "scientific_target_run": true,
+ "source": {
+  "path": "campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json",
+  "git_commit": "5195c94c38c93f058894feb8679e49b0c4446823",
+  "git_blob": "cc66f06ddd3f7cc52d8a06d30a3920ba8e992c19",
+  "owner_count": 4,
+  "endpoint_atoms": 5,
+  "rationalised_total_mass": "1000001/200000"
+ },
+ "scope": {
+  "directions": "full",
+  "direction_count": 361,
+  "continuum_angle_transfer_checked": false,
+  "claim_limit": "exact selected-net replay only; no all-angle or packing claim"
+ },
+ "guards": {
+  "max_atoms": 1000,
+  "max_event_cells": 5000000,
+  "max_total_event_cells": 10000000,
+  "observed_max_event_cells": 2457,
+  "observed_total_event_cells": 589549,
+  "deadline_seconds": 240.0
+ },
+ "directions": [
+  {
+   "index": 0,
+   "label": "owner-000",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 49,
+   "dense_event_cells": 361
+  },
+  {
+   "index": 1,
+   "label": "owner-001",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 445,
+   "dense_event_cells": 2065
+  },
+  {
+   "index": 2,
+   "label": "owner-002",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 517,
+   "dense_event_cells": 2257
+  },
+  {
+   "index": 3,
+   "label": "owner-003",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 555,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 4,
+   "label": "owner-004",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 555,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 5,
+   "label": "owner-005",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 557,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 6,
+   "label": "owner-006",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 545,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 7,
+   "label": "owner-007",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 535,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 8,
+   "label": "owner-008",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 537,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 9,
+   "label": "owner-009",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 537,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 10,
+   "label": "owner-010",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 521,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 11,
+   "label": "owner-011",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 517,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 12,
+   "label": "owner-012",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 517,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 13,
+   "label": "owner-013",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 517,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 14,
+   "label": "owner-014",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 517,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 15,
+   "label": "owner-015",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 517,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 16,
+   "label": "owner-016",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 517,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 17,
+   "label": "owner-017",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 515,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 18,
+   "label": "owner-018",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 507,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 19,
+   "label": "owner-019",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 499,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 20,
+   "label": "owner-020",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 463,
+   "dense_event_cells": 2223
+  },
+  {
+   "index": 21,
+   "label": "owner-021",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 387,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 22,
+   "label": "owner-022",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 367,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 23,
+   "label": "owner-023",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 367,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 24,
+   "label": "owner-024",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 367,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 25,
+   "label": "owner-025",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 389,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 26,
+   "label": "owner-026",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 389,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 27,
+   "label": "owner-027",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 405,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 28,
+   "label": "owner-028",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 405,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 29,
+   "label": "owner-029",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 405,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 30,
+   "label": "owner-030",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 405,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 31,
+   "label": "owner-031",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 405,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 32,
+   "label": "owner-032",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 407,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 33,
+   "label": "owner-033",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 407,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 34,
+   "label": "owner-034",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 407,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 35,
+   "label": "owner-035",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 409,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 36,
+   "label": "owner-036",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 429,
+   "dense_event_cells": 1785
+  },
+  {
+   "index": 37,
+   "label": "owner-037",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 429,
+   "dense_event_cells": 1785
+  },
+  {
+   "index": 38,
+   "label": "owner-038",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 387,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 39,
+   "label": "owner-039",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 387,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 40,
+   "label": "owner-040",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 355,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 41,
+   "label": "owner-041",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 355,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 42,
+   "label": "owner-042",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 43,
+   "label": "owner-043",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 337,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 44,
+   "label": "owner-044",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 337,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 45,
+   "label": "owner-045",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 335,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 46,
+   "label": "owner-046",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 47,
+   "label": "owner-047",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 301,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 48,
+   "label": "owner-048",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 299,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 49,
+   "label": "owner-049",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 297,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 50,
+   "label": "owner-050",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 297,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 51,
+   "label": "owner-051",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 52,
+   "label": "owner-052",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 273,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 53,
+   "label": "owner-053",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 273,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 54,
+   "label": "owner-054",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 273,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 55,
+   "label": "owner-055",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 56,
+   "label": "owner-056",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 57,
+   "label": "owner-057",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 58,
+   "label": "owner-058",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 59,
+   "label": "owner-059",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 289,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 60,
+   "label": "owner-060",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 289,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 61,
+   "label": "owner-061",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 62,
+   "label": "owner-062",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 63,
+   "label": "owner-063",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 64,
+   "label": "owner-064",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 65,
+   "label": "owner-065",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 263,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 66,
+   "label": "owner-066",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 263,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 67,
+   "label": "owner-067",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 247,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 68,
+   "label": "owner-068",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 245,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 69,
+   "label": "owner-069",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 233,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 70,
+   "label": "owner-070",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 233,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 71,
+   "label": "owner-071",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 227,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 72,
+   "label": "owner-072",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 229,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 73,
+   "label": "owner-073",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 239,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 74,
+   "label": "owner-074",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 239,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 75,
+   "label": "owner-075",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 235,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 76,
+   "label": "owner-076",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 235,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 77,
+   "label": "owner-077",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 261,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 78,
+   "label": "owner-078",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 261,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 79,
+   "label": "owner-079",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 261,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 80,
+   "label": "owner-080",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 81,
+   "label": "owner-081",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 82,
+   "label": "owner-082",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 83,
+   "label": "owner-083",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 84,
+   "label": "owner-084",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 85,
+   "label": "owner-085",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 86,
+   "label": "owner-086",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 269,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 87,
+   "label": "owner-087",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 267,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 88,
+   "label": "owner-088",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 267,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 89,
+   "label": "owner-089",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 267,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 90,
+   "label": "owner-090",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 267,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 91,
+   "label": "owner-091",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 249,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 92,
+   "label": "owner-092",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 249,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 93,
+   "label": "owner-093",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 249,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 94,
+   "label": "owner-094",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 283,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 95,
+   "label": "owner-095",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 283,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 96,
+   "label": "owner-096",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 335,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 97,
+   "label": "owner-097",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 335,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 98,
+   "label": "owner-098",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 337,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 99,
+   "label": "owner-099",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 339,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 100,
+   "label": "owner-100",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 345,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 101,
+   "label": "owner-101",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 102,
+   "label": "owner-102",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 103,
+   "label": "owner-103",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 104,
+   "label": "owner-104",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 105,
+   "label": "owner-105",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 345,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 106,
+   "label": "owner-106",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 343,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 107,
+   "label": "owner-107",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 108,
+   "label": "owner-108",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 109,
+   "label": "owner-109",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 110,
+   "label": "owner-110",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 111,
+   "label": "owner-111",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 335,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 112,
+   "label": "owner-112",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 333,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 113,
+   "label": "owner-113",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 335,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 114,
+   "label": "owner-114",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 337,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 115,
+   "label": "owner-115",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 337,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 116,
+   "label": "owner-116",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 333,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 117,
+   "label": "owner-117",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 333,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 118,
+   "label": "owner-118",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 333,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 119,
+   "label": "owner-119",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 335,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 120,
+   "label": "owner-120",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 315,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 121,
+   "label": "owner-121",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 323,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 122,
+   "label": "owner-122",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 309,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 123,
+   "label": "owner-123",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 349,
+   "dense_event_cells": 1925
+  },
+  {
+   "index": 124,
+   "label": "owner-124",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1925
+  },
+  {
+   "index": 125,
+   "label": "owner-125",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1925
+  },
+  {
+   "index": 126,
+   "label": "owner-126",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 379,
+   "dense_event_cells": 1995
+  },
+  {
+   "index": 127,
+   "label": "owner-127",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 379,
+   "dense_event_cells": 1995
+  },
+  {
+   "index": 128,
+   "label": "owner-128",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 377,
+   "dense_event_cells": 1995
+  },
+  {
+   "index": 129,
+   "label": "owner-129",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 379,
+   "dense_event_cells": 1995
+  },
+  {
+   "index": 130,
+   "label": "owner-130",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 379,
+   "dense_event_cells": 1995
+  },
+  {
+   "index": 131,
+   "label": "owner-131",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 379,
+   "dense_event_cells": 1995
+  },
+  {
+   "index": 132,
+   "label": "owner-132",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 363,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 133,
+   "label": "owner-133",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 365,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 134,
+   "label": "owner-134",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 365,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 135,
+   "label": "owner-135",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 369,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 136,
+   "label": "owner-136",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 357,
+   "dense_event_cells": 1855
+  },
+  {
+   "index": 137,
+   "label": "owner-137",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 345,
+   "dense_event_cells": 1785
+  },
+  {
+   "index": 138,
+   "label": "owner-138",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 343,
+   "dense_event_cells": 1785
+  },
+  {
+   "index": 139,
+   "label": "owner-139",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 355,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 140,
+   "label": "owner-140",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 353,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 141,
+   "label": "owner-141",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 355,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 142,
+   "label": "owner-142",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 415,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 143,
+   "label": "owner-143",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 415,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 144,
+   "label": "owner-144",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 379,
+   "dense_event_cells": 2457
+  },
+  {
+   "index": 145,
+   "label": "owner-145",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 343,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 146,
+   "label": "owner-146",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 147,
+   "label": "owner-147",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 148,
+   "label": "owner-148",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 339,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 149,
+   "label": "owner-149",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 339,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 150,
+   "label": "owner-150",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 333,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 151,
+   "label": "owner-151",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 333,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 152,
+   "label": "owner-152",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 331,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 153,
+   "label": "owner-153",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 333,
+   "dense_event_cells": 2301
+  },
+  {
+   "index": 154,
+   "label": "owner-154",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 271,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 155,
+   "label": "owner-155",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 269,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 156,
+   "label": "owner-156",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 157,
+   "label": "owner-157",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 158,
+   "label": "owner-158",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 263,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 159,
+   "label": "owner-159",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 229,
+   "dense_event_cells": 1887
+  },
+  {
+   "index": 160,
+   "label": "owner-160",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 229,
+   "dense_event_cells": 1887
+  },
+  {
+   "index": 161,
+   "label": "owner-161",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 201,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 162,
+   "label": "owner-162",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 197,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 163,
+   "label": "owner-163",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 197,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 164,
+   "label": "owner-164",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 197,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 165,
+   "label": "owner-165",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 193,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 166,
+   "label": "owner-166",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 193,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 167,
+   "label": "owner-167",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 193,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 168,
+   "label": "owner-168",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 193,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 169,
+   "label": "owner-169",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 205,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 170,
+   "label": "owner-170",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 205,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 171,
+   "label": "owner-171",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 213,
+   "dense_event_cells": 1645
+  },
+  {
+   "index": 172,
+   "label": "owner-172",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 193,
+   "dense_event_cells": 1419
+  },
+  {
+   "index": 173,
+   "label": "owner-173",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 139,
+   "dense_event_cells": 1015
+  },
+  {
+   "index": 174,
+   "label": "owner-174",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 139,
+   "dense_event_cells": 1015
+  },
+  {
+   "index": 175,
+   "label": "owner-175",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 137,
+   "dense_event_cells": 1015
+  },
+  {
+   "index": 176,
+   "label": "owner-176",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 137,
+   "dense_event_cells": 1015
+  },
+  {
+   "index": 177,
+   "label": "owner-177",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 137,
+   "dense_event_cells": 1015
+  },
+  {
+   "index": 178,
+   "label": "owner-178",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 137,
+   "dense_event_cells": 1015
+  },
+  {
+   "index": 179,
+   "label": "owner-179",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 151,
+   "dense_event_cells": 1085
+  },
+  {
+   "index": 180,
+   "label": "owner-180",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 91,
+   "dense_event_cells": 729
+  },
+  {
+   "index": 181,
+   "label": "owner-181",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 91,
+   "dense_event_cells": 625
+  },
+  {
+   "index": 182,
+   "label": "owner-182",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 147,
+   "dense_event_cells": 1023
+  },
+  {
+   "index": 183,
+   "label": "owner-183",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 133,
+   "dense_event_cells": 1023
+  },
+  {
+   "index": 184,
+   "label": "owner-184",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 133,
+   "dense_event_cells": 1023
+  },
+  {
+   "index": 185,
+   "label": "owner-185",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 135,
+   "dense_event_cells": 1023
+  },
+  {
+   "index": 186,
+   "label": "owner-186",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 135,
+   "dense_event_cells": 1023
+  },
+  {
+   "index": 187,
+   "label": "owner-187",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 135,
+   "dense_event_cells": 1023
+  },
+  {
+   "index": 188,
+   "label": "owner-188",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 135,
+   "dense_event_cells": 1023
+  },
+  {
+   "index": 189,
+   "label": "owner-189",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 173,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 190,
+   "label": "owner-190",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 175,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 191,
+   "label": "owner-191",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 175,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 192,
+   "label": "owner-192",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 175,
+   "dense_event_cells": 1365
+  },
+  {
+   "index": 193,
+   "label": "owner-193",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 207,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 194,
+   "label": "owner-194",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 207,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 195,
+   "label": "owner-195",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 207,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 196,
+   "label": "owner-196",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 207,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 197,
+   "label": "owner-197",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 198,
+   "label": "owner-198",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 199,
+   "label": "owner-199",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 200,
+   "label": "owner-200",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 201,
+   "label": "owner-201",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 202,
+   "label": "owner-202",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 203,
+   "label": "owner-203",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 204,
+   "label": "owner-204",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 205,
+   "label": "owner-205",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 206,
+   "label": "owner-206",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 207,
+   "label": "owner-207",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 211,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 208,
+   "label": "owner-208",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 223,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 209,
+   "label": "owner-209",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 223,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 210,
+   "label": "owner-210",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 223,
+   "dense_event_cells": 1517
+  },
+  {
+   "index": 211,
+   "label": "owner-211",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 229,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 212,
+   "label": "owner-212",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 231,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 213,
+   "label": "owner-213",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 233,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 214,
+   "label": "owner-214",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 233,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 215,
+   "label": "owner-215",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 233,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 216,
+   "label": "owner-216",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 1833
+  },
+  {
+   "index": 217,
+   "label": "owner-217",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 1833
+  },
+  {
+   "index": 218,
+   "label": "owner-218",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 349,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 219,
+   "label": "owner-219",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 351,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 220,
+   "label": "owner-220",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 335,
+   "dense_event_cells": 2067
+  },
+  {
+   "index": 221,
+   "label": "owner-221",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 319,
+   "dense_event_cells": 1989
+  },
+  {
+   "index": 222,
+   "label": "owner-222",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1989
+  },
+  {
+   "index": 223,
+   "label": "owner-223",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 327,
+   "dense_event_cells": 1911
+  },
+  {
+   "index": 224,
+   "label": "owner-224",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 319,
+   "dense_event_cells": 1911
+  },
+  {
+   "index": 225,
+   "label": "owner-225",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 311,
+   "dense_event_cells": 1911
+  },
+  {
+   "index": 226,
+   "label": "owner-226",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 317,
+   "dense_event_cells": 1911
+  },
+  {
+   "index": 227,
+   "label": "owner-227",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 315,
+   "dense_event_cells": 1911
+  },
+  {
+   "index": 228,
+   "label": "owner-228",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 313,
+   "dense_event_cells": 1911
+  },
+  {
+   "index": 229,
+   "label": "owner-229",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 319,
+   "dense_event_cells": 1911
+  },
+  {
+   "index": 230,
+   "label": "owner-230",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 297,
+   "dense_event_cells": 1755
+  },
+  {
+   "index": 231,
+   "label": "owner-231",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 277,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 232,
+   "label": "owner-232",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 269,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 233,
+   "label": "owner-233",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 263,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 234,
+   "label": "owner-234",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 261,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 235,
+   "label": "owner-235",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 261,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 236,
+   "label": "owner-236",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 237,
+   "label": "owner-237",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 267,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 238,
+   "label": "owner-238",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 283,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 239,
+   "label": "owner-239",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 277,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 240,
+   "label": "owner-240",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 241,
+   "label": "owner-241",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 242,
+   "label": "owner-242",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 243,
+   "label": "owner-243",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 244,
+   "label": "owner-244",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1591
+  },
+  {
+   "index": 245,
+   "label": "owner-245",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1813
+  },
+  {
+   "index": 246,
+   "label": "owner-246",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 317,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 247,
+   "label": "owner-247",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 317,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 248,
+   "label": "owner-248",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 331,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 249,
+   "label": "owner-249",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 305,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 250,
+   "label": "owner-250",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 305,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 251,
+   "label": "owner-251",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 311,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 252,
+   "label": "owner-252",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 253,
+   "label": "owner-253",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 254,
+   "label": "owner-254",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 281,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 255,
+   "label": "owner-255",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 283,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 256,
+   "label": "owner-256",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 273,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 257,
+   "label": "owner-257",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 273,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 258,
+   "label": "owner-258",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 259,
+   "label": "owner-259",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 260,
+   "label": "owner-260",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 261,
+   "label": "owner-261",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 277,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 262,
+   "label": "owner-262",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 315,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 263,
+   "label": "owner-263",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 309,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 264,
+   "label": "owner-264",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 305,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 265,
+   "label": "owner-265",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 305,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 266,
+   "label": "owner-266",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 305,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 267,
+   "label": "owner-267",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 268,
+   "label": "owner-268",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 269,
+   "label": "owner-269",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 270,
+   "label": "owner-270",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 271,
+   "label": "owner-271",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 317,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 272,
+   "label": "owner-272",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 313,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 273,
+   "label": "owner-273",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 349,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 274,
+   "label": "owner-274",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 331,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 275,
+   "label": "owner-275",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 349,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 276,
+   "label": "owner-276",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 349,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 277,
+   "label": "owner-277",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 349,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 278,
+   "label": "owner-278",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 349,
+   "dense_event_cells": 1435
+  },
+  {
+   "index": 279,
+   "label": "owner-279",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 280,
+   "label": "owner-280",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 281,
+   "label": "owner-281",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 282,
+   "label": "owner-282",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 283,
+   "label": "owner-283",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 284,
+   "label": "owner-284",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 285,
+   "label": "owner-285",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 286,
+   "label": "owner-286",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 303,
+   "dense_event_cells": 1287
+  },
+  {
+   "index": 287,
+   "label": "owner-287",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 323,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 288,
+   "label": "owner-288",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 323,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 289,
+   "label": "owner-289",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 290,
+   "label": "owner-290",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 291,
+   "label": "owner-291",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 292,
+   "label": "owner-292",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 293,
+   "label": "owner-293",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 294,
+   "label": "owner-294",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 321,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 295,
+   "label": "owner-295",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 351,
+   "dense_event_cells": 1419
+  },
+  {
+   "index": 296,
+   "label": "owner-296",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 323,
+   "dense_event_cells": 1419
+  },
+  {
+   "index": 297,
+   "label": "owner-297",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 323,
+   "dense_event_cells": 1551
+  },
+  {
+   "index": 298,
+   "label": "owner-298",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 287,
+   "dense_event_cells": 1551
+  },
+  {
+   "index": 299,
+   "label": "owner-299",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 289,
+   "dense_event_cells": 1551
+  },
+  {
+   "index": 300,
+   "label": "owner-300",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 289,
+   "dense_event_cells": 1551
+  },
+  {
+   "index": 301,
+   "label": "owner-301",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 289,
+   "dense_event_cells": 1551
+  },
+  {
+   "index": 302,
+   "label": "owner-302",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 291,
+   "dense_event_cells": 1551
+  },
+  {
+   "index": 303,
+   "label": "owner-303",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 291,
+   "dense_event_cells": 1551
+  },
+  {
+   "index": 304,
+   "label": "owner-304",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 275,
+   "dense_event_cells": 1485
+  },
+  {
+   "index": 305,
+   "label": "owner-305",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 279,
+   "dense_event_cells": 1485
+  },
+  {
+   "index": 306,
+   "label": "owner-306",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 279,
+   "dense_event_cells": 1485
+  },
+  {
+   "index": 307,
+   "label": "owner-307",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 277,
+   "dense_event_cells": 1485
+  },
+  {
+   "index": 308,
+   "label": "owner-308",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 279,
+   "dense_event_cells": 1485
+  },
+  {
+   "index": 309,
+   "label": "owner-309",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 279,
+   "dense_event_cells": 1485
+  },
+  {
+   "index": 310,
+   "label": "owner-310",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 277,
+   "dense_event_cells": 1485
+  },
+  {
+   "index": 311,
+   "label": "owner-311",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 265,
+   "dense_event_cells": 1419
+  },
+  {
+   "index": 312,
+   "label": "owner-312",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 261,
+   "dense_event_cells": 1419
+  },
+  {
+   "index": 313,
+   "label": "owner-313",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 263,
+   "dense_event_cells": 1419
+  },
+  {
+   "index": 314,
+   "label": "owner-314",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 249,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 315,
+   "label": "owner-315",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 247,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 316,
+   "label": "owner-316",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 259,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 317,
+   "label": "owner-317",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 259,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 318,
+   "label": "owner-318",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 267,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 319,
+   "label": "owner-319",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 271,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 320,
+   "label": "owner-320",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 285,
+   "dense_event_cells": 1353
+  },
+  {
+   "index": 321,
+   "label": "owner-321",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 325,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 322,
+   "label": "owner-322",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 323,
+   "label": "owner-323",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 341,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 324,
+   "label": "owner-324",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 325,
+   "label": "owner-325",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 327,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 326,
+   "label": "owner-326",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 325,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 327,
+   "label": "owner-327",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 328,
+   "label": "owner-328",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 325,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 329,
+   "label": "owner-329",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 325,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 330,
+   "label": "owner-330",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 325,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 331,
+   "label": "owner-331",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 325,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 332,
+   "label": "owner-332",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 333,
+   "label": "owner-333",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 334,
+   "label": "owner-334",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 347,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 335,
+   "label": "owner-335",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 345,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 336,
+   "label": "owner-336",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 345,
+   "dense_event_cells": 1505
+  },
+  {
+   "index": 337,
+   "label": "owner-337",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 389,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 338,
+   "label": "owner-338",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 389,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 339,
+   "label": "owner-339",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 389,
+   "dense_event_cells": 1715
+  },
+  {
+   "index": 340,
+   "label": "owner-340",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 377,
+   "dense_event_cells": 1575
+  },
+  {
+   "index": 341,
+   "label": "owner-341",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 433,
+   "dense_event_cells": 1813
+  },
+  {
+   "index": 342,
+   "label": "owner-342",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 477,
+   "dense_event_cells": 1813
+  },
+  {
+   "index": 343,
+   "label": "owner-343",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 461,
+   "dense_event_cells": 1813
+  },
+  {
+   "index": 344,
+   "label": "owner-344",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 429,
+   "dense_event_cells": 1813
+  },
+  {
+   "index": 345,
+   "label": "owner-345",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 479,
+   "dense_event_cells": 1887
+  },
+  {
+   "index": 346,
+   "label": "owner-346",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 347,
+   "label": "owner-347",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 348,
+   "label": "owner-348",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 349,
+   "label": "owner-349",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 350,
+   "label": "owner-350",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 351,
+   "label": "owner-351",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 352,
+   "label": "owner-352",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 353,
+   "label": "owner-353",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 509,
+   "dense_event_cells": 1961
+  },
+  {
+   "index": 354,
+   "label": "owner-354",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 543,
+   "dense_event_cells": 2035
+  },
+  {
+   "index": 355,
+   "label": "owner-355",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 521,
+   "dense_event_cells": 2035
+  },
+  {
+   "index": 356,
+   "label": "owner-356",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 521,
+   "dense_event_cells": 2035
+  },
+  {
+   "index": 357,
+   "label": "owner-357",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 507,
+   "dense_event_cells": 2035
+  },
+  {
+   "index": 358,
+   "label": "owner-358",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 507,
+   "dense_event_cells": 2035
+  },
+  {
+   "index": 359,
+   "label": "owner-359",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 507,
+   "dense_event_cells": 2035
+  },
+  {
+   "index": 360,
+   "label": "owner-360",
+   "minimum_covered_mass": "1000001/1000000",
+   "reachable_cells": 507,
+   "dense_event_cells": 2035
+  }
+ ],
+ "summary": {
+  "minimum_covered_mass": "1000001/1000000",
+  "normalised_total_mass": "5",
+  "conditional_threshold": "7",
+  "normalised_mass_below_threshold": true,
+  "scope_is_not_continuum": true
+ },
+ "wall_seconds": 12.761688209022395
+}

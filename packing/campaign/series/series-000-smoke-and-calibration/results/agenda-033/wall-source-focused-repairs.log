@@ -1,0 +1,11 @@
+^D============================= test session starts ==============================
+platform darwin -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/levy/.codex/worktrees/88e2/squares/packing
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collecting 3 items                                                             collected 3 items                                                              
+
+tests/test_negative_controls.py .                                        [ 33%]
+tests/test_validation_cli.py ..                                          [100%]
+
+============================== 3 passed in 13.73s ==============================

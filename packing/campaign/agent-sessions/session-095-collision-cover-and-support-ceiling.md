@@ -732,7 +732,7 @@ ownership before allocating anything new.
 | AgentSession | 091, 093, 094, 095 | External Session092 retains its own clock and work | 096 |
 | Hypothesis | H122–H124 | H099, H110 and the existing resource/compatibility questions | H125 |
 | Experiment | exp121–128 | Earlier source controls and retained experiments | exp129 |
-| Block commitment | No new BC identity in these slices | BC243, BC255, BC259 and BC265; future BC264 | BC282 after external BC281 |
+| Block commitment | No new BC identity in these slices | BC243, BC255, BC259 and BC265; future BC264 | Historical pointer BC282 is now occupied by external Agenda028; refresh the merged inventory |
 | Agenda | No new agenda identity in these slices | Agenda024 coordinates; Agenda026/027 provide research entries; external Agenda028 remains separate | Agenda029 |
 | Exploration | No new exploration identity in these slices | X016–X018 supply the source and strategy context | X019 |
 

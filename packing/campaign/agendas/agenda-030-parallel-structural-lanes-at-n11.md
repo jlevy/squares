@@ -718,6 +718,10 @@ agenda:
         Earlier c89c7646 and 8176e389 evidence remains historical.
     replanning:
       candidates:
+      - bead: think-8m28
+        workflow: insight-iteration
+        priority: 1
+        rationale: Owner selected the two-hour Agenda032 conditional-owner sprint after the unresolved first pilot; session113 keeps a separate usage interval.
       - bead: think-qfog
         workflow: insight-iteration
         priority: 1
@@ -737,13 +741,12 @@ agenda:
           Retain the corner-class support question, missing run artifacts and unrun site-set
           complement behind the two higher-priority lanes.
       selected:
-        bead: think-qfog
+        bead: think-8m28
         workflow: insight-iteration
         rationale: >-
-          The corrected checkpoint is certified by the retained raw full log and
-          structured component receipts. The ten-segment theorem now supplies the source
-          control for the distinct pairwise compatibility and ownership continuation
-          after merge publication.
+          BC305 is complete at local scope. The owner selected Agenda032 for a two-hour
+          conditional-owner sprint after exp135 stopped unresolved; repair, exact dual
+          screening and general footprints run in parallel with separate session113 usage.
       operator_input:
         status: confirmed
         note: The owner authorized closeout, merge once the corrected tree is ready, and continuation on a new branch.

@@ -144,7 +144,7 @@ SIDES = (1.06, 1.04, 1.02, 1.01, 1.005, 1.00000001)
 
 A **fixed** side, from a **cold** start, because the container ratchet cannot answer this
 question. The ratchet's difficulty is dominated by escaping the trivial grid -- every
-failed run in exp-139 failed at the first tightening, all of them after exactly 48 solver
+failed run in exp-160 failed at the first tightening, all of them after exactly 48 solver
 calls -- and that swamps whatever signal the structural hints carry, so comparing rungs
 through a ratchet mostly compares how lucky each was at leaving the grid. Measured that
 way, all six arms of a first attempt returned exactly the grid and the run said nothing.

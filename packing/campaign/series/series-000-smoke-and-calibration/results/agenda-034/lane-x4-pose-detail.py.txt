@@ -1,0 +1,18 @@
+from __future__ import annotations
+import json, sys
+from fractions import Fraction
+from pathlib import Path
+SCRATCH = "/tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/sixteen-sectors"
+sys.path.insert(0, SCRATCH)
+from devtools.transport_ceiling_family import transport
+from sqpack.fractional.ceiling import CeilingCertificate
+SRC = Path("/home/user/squares/packing/campaign/series/series-000-smoke-and-calibration/"
+           "results/agenda-034/ceiling-family-191-50.json")
+fam = CeilingCertificate.from_record(transport(json.loads(SRC.read_text()), Fraction(1), side=Fraction(96, 25)))
+for i in (59, 60):
+    p = fam.placements[i]
+    print(i, "ht", p.half_tangent, "centre", p.centre_x, p.centre_y, "side", p.side, "w", p.weight)
+    print("   corners", sorted(p.corners()))
+a, b = sorted(fam.placements[59].corners()), sorted(fam.placements[60].corners())
+print("same closed square:", a == b)
+print("combined weight at that pose:", fam.placements[59].weight + fam.placements[60].weight)

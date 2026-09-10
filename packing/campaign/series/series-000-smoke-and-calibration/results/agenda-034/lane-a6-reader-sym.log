@@ -1,0 +1,47 @@
+... K0-K3: total 11, depth 1, 14344 vertices
+... arrangement: 853 distinct membership sets (1.7s)
+... K4 two-of-three: max 11/8 over 1800 pairs (0.3s)
+... K4 three-of-five search: max 33/32, complete=False (3.4s)
+... K4 three-of-five program: violated floor atom found and verified exactly (8.3s)
+... K5 cliques: 44 maximal above one, heaviest rank-one 3/2 (0.7s)
+... lines: 12 direction/threshold pairs, tight on 8
+... K6 t=2: violated floor atom found and verified exactly (0.7s)
+... K6 t=3: violated floor atom found and verified exactly (60.2s)
+family: total weight 11 (11.000000), max depth 1, 14344 vertices, regime net
+arrangement: 64 placements, 853 distinct membership sets, weight scale 1/32
+K4 two-of-three: max 11/8 (1.375000), complete at 1800 nodes, 12 maximisers, 0.3s
+   sparsest witness memberships [6, 6, 6]
+K4 three-of-five (bound): max 33/32 (1.031250), INCOMPLETE at 200000 nodes, 4 maximisers, 3.4s
+   sparsest witness memberships [4, 5, 5, 6, 6]
+K4 three-of-five (program): violated floor atom found and verified exactly; exact objective 3/8, solver bound 0.3750000000000935, 8.3s
+K5 cliques: 440 edges, 44 maximal cliques above one, 7 piercing programs, 0 with tau* >= 2, 0.7s
+   heaviest clique: weight 3/2, tau* 7/4
+   heaviest rank-one clique: 10 members, weight 3/2, tau* 7/4 (float proposal certified by an exact primal-dual pair)
+   atom: weighted clique (piercing measure): 5 points (a(S) = 7), t = 4, budget 1, threshold charge 3/2, floor charge 3/2, violation 1/2
+line horizontal c=9/10: max weight 3 against budget 4 at offset 117379696303/41527220000; max(count - budget) = -1; slack
+line horizontal c=19/20: max weight 3 against budget 4 at offset 117379696303/41527220000; max(count - budget) = -1; slack
+line horizontal c=99/100: max weight 3 against budget 3 at offset 117379696303/41527220000; max(count - budget) = 0; tight at count 3 (offset 117379696303/41527220000)
+line vertical c=9/10: max weight 3 against budget 4 at offset 117379696303/41527220000; max(count - budget) = -1; slack
+line vertical c=19/20: max weight 3 against budget 4 at offset 117379696303/41527220000; max(count - budget) = -1; slack
+line vertical c=99/100: max weight 3 against budget 3 at offset 117379696303/41527220000; max(count - budget) = 0; tight at count 3 (offset 117379696303/41527220000)
+line diagonal x+y c=9/10: max weight 7/2 against budget 5 at offset 819390602578023511260957123001/172945409331115899572559620000 + (-87916726401219310513386345129/201547139674476690029747433620)*sqrt(2); max(count - budget) = 0; tight at count 1 (offset 1282821187221470946198230720251/172945409331115899572559620000 + (-87916726401219310513386345129/201547139674476690029747433620)*sqrt(2))
+line diagonal x+y c=19/20: max weight 7/2 against budget 5 at offset 819390602578023511260957123001/172945409331115899572559620000 + (-185601977958129655528260061939/403094279348953380059494867240)*sqrt(2); max(count - budget) = 0; tight at count 1 (offset 45912351997717279/22982065897895000 + (-19/40)*sqrt(2))
+line diagonal x+y c=99/100: max weight 7/2 against budget 5 at offset 819390602578023511260957123001/172945409331115899572559620000 + (-967083990413412415647249796419/2015471396744766900297474336200)*sqrt(2); max(count - budget) = 0; tight at count 1 (offset 45912351997717279/22982065897895000 + (-99/200)*sqrt(2))
+line diagonal x-y c=9/10: max weight 7/2 against budget 5 at offset 157874411886505195395916576501/172945409331115899572559620000 + (-87916726401219310513386345129/201547139674476690029747433620)*sqrt(2); max(count - budget) = 0; tight at count 1 (offset -621304996529952630333190173751/172945409331115899572559620000 + (87916726401219310513386345129/201547139674476690029747433620)*sqrt(2))
+line diagonal x-y c=19/20: max weight 7/2 against budget 5 at offset 157874411886505195395916576501/172945409331115899572559620000 + (-185601977958129655528260061939/403094279348953380059494867240)*sqrt(2); max(count - budget) = 0; tight at count 1 (offset -5249256257716387/2872758237236875 + (-19/40)*sqrt(2))
+line diagonal x-y c=99/100: max weight 7/2 against budget 5 at offset 157874411886505195395916576501/172945409331115899572559620000 + (-967083990413412415647249796419/2015471396744766900297474336200)*sqrt(2); max(count - budget) = 0; tight at count 1 (offset -5249256257716387/2872758237236875 + (-99/200)*sqrt(2))
+K6 t=2: violated floor atom found and verified exactly; exact objective 1/2, solver bound 0.5000000000000003, 0.7s
+K6 t=3: violated floor atom found and verified exactly; exact objective 1/2, solver bound 0.6562499999999558, 60.2s
+violated atoms, ranked by exact floor violation:
+   weighted clique (piercing measure): 5 points (a(S) = 7), t = 4, budget 1, threshold charge 3/2, floor charge 3/2, violation 1/2
+   Chvátal-Gomory floor atom, t = 2: 55 points (a(S) = 55), t = 2, budget 27, threshold charge 31/4, floor charge 55/2, violation 1/2
+   Chvátal-Gomory floor atom, t = 3: 56 points (a(S) = 98), t = 3, budget 32, threshold charge 31/4, floor charge 65/2, violation 1/2
+   three-of-five (integer program): 5 points (a(S) = 5), t = 3, budget 1, threshold charge 11/8, floor charge 11/8, violation 3/8
+   two-of-three: 3 points (a(S) = 3), t = 2, budget 1, threshold charge 11/8, floor charge 11/8, violation 3/8
+   three-of-five: 5 points (a(S) = 5), t = 3, budget 1, threshold charge 33/32, floor charge 33/32, violation 1/32
+two-of-three: violated [searched: all triples of distinct membership sets (853 sets, 1800 pairs expanded; complete by the exact pair bound)]
+three-of-five: violated [searched: branch and bound over distinct membership sets, 200000 nodes, node limit reached; integer program: violated floor atom found and verified exactly]
+budget-one atoms (weighted cliques with tau* < 2): violated [searched: 44 maximal cliques above weight one of the closed-intersection graph (440 edges), 7 piercing programs decided exactly, descent below 0 cliques with tau* >= 2; complete]
+line chords (collinear atoms, continuum form): never violated (theorem); tight on: horizontal c=99/100, vertical c=99/100, diagonal x+y c=9/10, diagonal x+y c=19/20, diagonal x+y c=99/100, diagonal x-y c=9/10, diagonal x-y c=19/20, diagonal x-y c=99/100 [searched: every offset of 4 directions at thresholds ['9/10', '19/20', '99/100'], exact in Q(sqrt 2)]
+rank-one Chvátal-Gomory floor atoms: t=2: violated floor atom found and verified exactly; t=3: violated floor atom found and verified exactly [searched: thresholds [2, 3], multiplicities below the threshold, 853 candidate points, HiGHS with 60.0s per threshold]
+total 80.0s

@@ -2035,6 +2035,32 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     the same refusal applies to the record layer of all three, which is why the record
     layer stayed and only the per-case re-derivation left.
 
+    **An eighth and a ninth arrived on 2026-09-09 with `T-024`.** The two `finer-net
+    dilation-limit record` steps are `devtools.dilation_corollary --check-limit-record`
+    on the two finer-net re-certifications of the retained `n = 11` atoms, and each
+    check replays all five source conditions over 721 or 1441 directions before
+    re-deriving its endpoint. Measured on the branch that registered the result, on a
+    loaded four-cpu host at `PACK_JOBS=1`: 173s for the 720-step record and 352s for
+    the 1440-step record, against `T-022`'s 181-direction check that stays on the
+    surface. They are two steps so that neither waits on the other and each stays well
+    inside the shared cap on the deep gate's serial schedule; neither carries a budget
+    of its own. The stand-in is not a sample: on every pull request
+    `test_every_case_page_binds_the_certificate_its_own_evidence_names` rehashes each
+    record's source bytes and re-derives its supremum from the declared gap and shrink,
+    so the promoted endpoint cannot be left looking current by a changed certificate.
+    What waits for the deep gate is the five-condition replay behind the record, on a
+    certificate whose own bytes the two-route gate decided when it was retained.
+
+    **A tenth and an eleventh arrived the same day with `T-026`.** The two `threshold
+    dilation-limit record` steps are the same check over the threshold re-certifications
+    of the retained `n = 11` atoms, and each replays six conditions rather than five,
+    by the threshold theorem's own exact event-cell sweep. Measured on the branch that
+    registered the result, on a four-cpu host at `PACK_JOBS=1`: 618s for the 720-step
+    record and 919s for the 1440-step record. They carry the same stand-in as T-024's,
+    since `test_every_case_page_binds_the_certificate_its_own_evidence_names` reads the
+    `v3` threshold record beside the `v2` point one; and unlike T-024's rungs they have
+    no standalone reader behind them, because none decides a threshold certificate.
+
     `slow behavioral tests` is `BC-214`. It is not a step that was never decided: it is
     the half of the behavioural suite that carries the wall, split out by measurement
     rather than by name. Of 2,251 collected tests, 92 are marked `slow` and 2,106 remain
@@ -2068,6 +2094,10 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
         "known-best n=1..324 atlas rebuild",
         "single-square translation escape screen",
         "exact rational grid replay",
+        "finer-net dilation-limit record, 720 steps",
+        "finer-net dilation-limit record, 1440 steps",
+        "threshold dilation-limit record, 720 steps",
+        "threshold dilation-limit record, 1440 steps",
     }
     # And the same set is what `--fast` leaves out, so the flag and the workflow cannot
     # drift apart: a step marked `fast` that no pull-request job invokes is deferred in
@@ -2372,8 +2402,8 @@ def test_the_longest_steps_are_submitted_first() -> None:
     checks; the 2026-09-05 promotion put eleven steps and 476s there, which greedy
     submission would have spent delaying the suite's start rather than running beside it.
 
-    Ordering by declared budget rather than by a guessed duration keeps the file the only
-    place a step's cost is asserted.
+    Budget precedence remains ahead of early-start hints. The unbudgeted exact verifier
+    has a measured late tail, so it starts ahead of the remaining declaration-order work.
 
     `fast behavioral tests` is no longer in this list, and its absence is the point rather
     than an omission. It carried an 1800s exception to the shared cap for as long as it
@@ -2393,7 +2423,60 @@ def test_the_longest_steps_are_submitted_first() -> None:
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
-    assert order[4:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
+    budgeted_count = sum(step.budget_seconds is not None for step in validate.STEPS)
+    assert order[budgeted_count] == "exact verification"
+    assert order[budgeted_count + 1 :] == [
+        step.name
+        for step in validate.STEPS
+        if step.budget_seconds is None and step.name != "exact verification"
+    ]
+
+
+def test_early_start_preserves_failures_stable_ties_and_report_order(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    launched: list[str] = []
+
+    def step(
+        name: str,
+        exit_code: int = 0,
+        *,
+        early: bool = False,
+        budget: float | None = None,
+    ) -> validate.Step:
+        def action(context: validate.Context) -> str:
+            launched.append(name)
+            return validate._run(
+                context,
+                (sys.executable, "-c", f"import sys; print({name!r}); sys.exit({exit_code})"),
+            )
+
+        return validate.Step(name, action, fast=True, budget_seconds=budget, start_early=early)
+
+    steps = [
+        step("ordinary"),
+        step("early failure", 17, early=True),
+        step("also early", early=True),
+        step("budgeted", budget=2),
+        step("last ordinary"),
+    ]
+    summary = validate._run_selected(
+        steps, _budget_context(timeout_seconds=5, explicit=False), []
+    )
+    assert launched == ["budgeted", "early failure", "also early", "ordinary", "last ordinary"]
+    assert [result.name for result in summary.results] == [step.name for step in steps]
+    assert [result.status for result in summary.results] == [
+        "passed",
+        "failed",
+        "passed",
+        "passed",
+        "passed",
+    ]
+    assert "exited 17" in summary.results[1].reason
+    assert validate._render_text(summary, strict=False) == 1
+    output = capsys.readouterr().out
+    assert "1 STEP FAILED" in output
+    assert "STEPS PASSED" not in output
 
 
 def test_submission_order_does_not_change_the_reported_order(

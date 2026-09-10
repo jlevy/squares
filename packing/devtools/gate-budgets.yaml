@@ -405,15 +405,46 @@ tiers:
   # to 260s, 1.6x the reading and under the 2x headroom rule, because the same lane had
   # shown a 1.52x hosted spread and a band set to one reading fails on an ordinary day.
   #
-  # 2026-09-08 (think-uwow): two consecutive hosted runs of the current 4,283-test lane
+  # 2026-09-08 (think-uwow): two consecutive hosted runs of the then 4,283-test lane
   # cost 158.64s and 88.84s at the reference shape. The geometric mean is 118.72s;
   # 237s rounds down from twice that mean. The unchanged drift rule fails above 178.08s
   # and the stale rule below 71.232s, so both observations fit without weakening policy.
-  ceiling_seconds: 237.0
-  measured_seconds: 118.72
-  measured_on: '2026-09-08'
+  #
+  # 2026-09-09: the lane is not that lane any more. Merging PR 137 brought sixteen test
+  # files, and this branch added the three threshold ones, so the selection grew from
+  # 4,283 to 4,639 tests. Run 34326478984, job `suite`, at the reference shape and at
+  # 683fb800, passed all 4,635 it selected there in 183.44s -- 1.55x of the 118.72s
+  # record, which the drift rule fails at 1.5x. Nothing regressed: the growth is
+  # aggregate rather than one test, and the per-test ceiling is untouched. A local
+  # reading of the same selection on a two-cpu box at two xdist workers was 193.09s over
+  # 4,639 tests with no `call` phase above 5.82s, the only phase over the 12s backstop
+  # being a 16.26s module-scoped setup that no marker can move -- so no test was deferred
+  # for this, and the record moves instead.
+  #
+  # 275s is the band: 1.499x of the new record, just under the drift rule's 275.16s so
+  # the ceiling never speaks after the record-relative rule, and well inside rule 2's
+  # slack (366.88s). What it does not have yet is a second sample of this selection at
+  # the reference shape, so the record is one reading rather than a mean, as it was on
+  # 2026-09-07 for the same reason. The stale rule now fails below 110.06s, and this lane
+  # has shown a 1.79x hosted spread, so an unusually fast runner could fail for being
+  # quick; `think-be1s` holds the policy follow-up that would record a band instead of a
+  # point, and the next comparable hosted reading should be folded in as a geometric mean.
+  ceiling_seconds: 275.0
+  measured_seconds: 183.44
+  measured_on: '2026-09-09'
   measured_where: >-
-    Geometric mean of two consecutive current-suite observations on 2026-09-08:
+    Run 34326478984, job `suite`, on 2026-09-09 at 683fb800: 183.44s at the reference
+    shape, all 4,635 selected tests passing. It is one reading rather than a mean
+    because it is the first at this selection: the merge of PR 137 added sixteen test
+    files and this branch's threshold work three more
+    (test_fractional_threshold.py, test_fractional_threshold_interval.py,
+    test_decide_threshold_certificate.py, and now test_n11_threshold_certificate.py),
+    taking the lane from 4,283 to 4,639 collected quick tests. Cross-checked locally the
+    same day: 193.09s over 4,639 tests at two xdist workers on a contended two-cpu box,
+    every `call` phase under 6s. Refresh as a geometric mean when a second hosted reading
+    of this selection lands.
+    The superseded 2026-09-08 record, kept as history of the previous selection:
+    geometric mean of two consecutive observations,
     158.64s in run 34285770932/job 102260892830 at dfa0a422f6dcd22dda7ed00ddb4763b65f4aac75,
     and 88.84s in run 34288782986/job 102270405743 at a10569d1ccf47522d6ef2de8e6ddf39a42b0c095.
     Both passed all 4,283 selected tests with Python 3.14.7, four reported CPUs, and

@@ -1,0 +1,145 @@
+"""Check lane-X4 distance preconditions and the two pose witnesses in exact arithmetic.
+
+This review instrument decides intersection before using vertex-to-edge distances.
+The selected cores 55 and 50 are the fixed targets in the published geometry script.
+All measurements are written to a JSON receipt outside the repository.
+"""
+
+from __future__ import annotations
+
+import argparse
+from dataclasses import replace
+from fractions import Fraction
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", type=Path, required=True)
+    parser.add_argument("--scratch", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    if sys.version_info[:2] != (3, 14):
+        raise SystemExit("Use project Python 3.14")
+    repo = args.repo.resolve()
+    if repo in args.output.resolve().parents:
+        raise SystemExit("Review output must be outside the repository")
+    sys.path.insert(0, str(repo / "packing"))
+    spec = importlib.util.spec_from_file_location("nbins", args.scratch / "nbins.py")
+    assert spec and spec.loader
+    nbins = importlib.util.module_from_spec(spec)
+    sys.modules["nbins"] = nbins
+    spec.loader.exec_module(nbins)
+    from devtools.owner_footprints import (
+        convex_polygon_contains_polygon, convex_polygon_intersection, endpoint_footprint, owner_branch_manifest,
+        polygon_area_twice,
+    )
+    from devtools.screen_corner_dual_salvage import strict_separation
+    from devtools.transport_ceiling_family import transport
+    from sqpack.fractional.ceiling import CeilingCertificate
+
+    base = repo / "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034"
+    family = CeilingCertificate.from_record(transport(
+        json.loads((base / "ceiling-family-191-50.json").read_text()),
+        Fraction(1), side=Fraction(96, 25),
+    ))
+    manifest = owner_branch_manifest()
+    directions = manifest.directions.directions
+    marks = {owner.mark_id: owner.mark for owner in manifest.classes}
+
+    def ccw(poly):
+        return tuple(reversed(poly)) if polygon_area_twice(poly) < 0 else poly
+
+    def segment_distance2(point, a, b):
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        den = dx * dx + dy * dy
+        t = Fraction(0) if den == 0 else max(Fraction(0), min(Fraction(1),
+            ((point[0] - a[0]) * dx + (point[1] - a[1]) * dy) / den))
+        return (point[0] - a[0] - t * dx) ** 2 + (point[1] - a[1] - t * dy) ** 2
+
+    def vertex_edge_distance2(left, right):
+        return min(segment_distance2(point, a, b)
+                   for points, edges in ((left, right), (right, left))
+                   for point in points for a, b in zip(edges, edges[1:] + edges[:1]))
+
+    rows = []
+    for mark_id, parent, children in (("m1", 3, (6, 7)), ("m1", 4, (8, 9)),
+                                      ("m2", 3, (6, 7)), ("m2", 4, (8, 9))):
+        idx = 55 if mark_id == "m1" else 50
+        core = family.placements[idx].corners()
+        polygons = [(8, parent, endpoint_footprint(marks[mark_id], parent, directions))]
+        polygons.extend((16, child, nbins.endpoint_footprint(marks[mark_id], child, directions, 16))
+                        for child in children)
+        for bins, sector, poly in polygons:
+            overlap = convex_polygon_intersection(ccw(poly), ccw(core))
+            separated = strict_separation(poly, core) is not None
+            assert separated == (not overlap), (mark_id, bins, sector)
+            old_distance = vertex_edge_distance2(poly, core)
+            true_distance = old_distance if separated else Fraction(0)
+            survivors = [p for p in family.placements if strict_separation(poly, p.corners()) is not None]
+            nearest_distance = min(vertex_edge_distance2(poly, p.corners()) for p in survivors)
+            rows.append({"mark": mark_id, "bins": bins, "sector": sector,
+                         "fixed_target": idx, "target_is_survivor": separated,
+                         "intersection_polygon": [[str(x), str(y)] for x, y in overlap],
+                         "intersection_area": str(abs(polygon_area_twice(overlap)) / 2) if overlap else "0",
+                         "published_vertex_edge_distance_squared": str(old_distance),
+                         "actual_fixed_target_distance_squared": str(true_distance),
+                         "nearest_actual_survivor_distance_squared": str(nearest_distance),
+                         "survivor_weight": str(sum((p.weight for p in survivors), Fraction(0)))})
+    poses = []
+    for idx in (59, 60):
+        placement = family.placements[idx]
+        core = placement.corners()
+        parent = replace(placement, side=Fraction(1))
+        survivors_sat = [i for i, p in enumerate(family.placements)
+                         if strict_separation(core, p.corners()) is not None]
+        survivors_clip = [i for i, p in enumerate(family.placements)
+                          if not convex_polygon_intersection(ccw(core), ccw(p.corners()))]
+        assert survivors_sat == survivors_clip
+        poses.append({"index": idx, "centre": [str(placement.centre_x), str(placement.centre_y)],
+                      "core_side": str(placement.side), "half_tangent": str(placement.half_tangent),
+                      "contains_marks": {name: placement.contains(*mark) for name, mark in marks.items()},
+                      "same_centre_same_angle_unit_parent_contained": all(
+                          0 <= x <= family.outer_side and 0 <= y <= family.outer_side for x, y in parent.corners()),
+                      "same_centre_same_angle_unit_parent_wall_margin": str(min(
+                          min(x, y, family.outer_side - x, family.outer_side - y) for x, y in parent.corners())),
+                      "survivor_weight": str(sum((family.placements[i].weight for i in survivors_sat), Fraction(0))),
+                      "sat_clipping_survivor_sets_identical": True})
+    pose_patch_examples = []
+    witness_core = family.placements[59].corners()
+    for corner_index, anchor in enumerate(witness_core):
+        small_patch = tuple((anchor[0] + (point[0] - anchor[0]) / 10000,
+                             anchor[1] + (point[1] - anchor[1]) / 10000)
+                            for point in witness_core)
+        survivors = [p for p in family.placements
+                     if strict_separation(small_patch, p.corners()) is not None]
+        clipped_survivors = [p for p in family.placements
+                             if not convex_polygon_intersection(ccw(small_patch), ccw(p.corners()))]
+        assert survivors == clipped_survivors
+        assert convex_polygon_contains_polygon(ccw(witness_core), ccw(small_patch))
+        pose_patch_examples.append({"owner_core": 59, "corner_index": corner_index,
+                                    "construction": "core59 scaled by 1/10000 about its named corner",
+                                    "patch": [[str(x), str(y)] for x, y in small_patch],
+                                    "patch_area": str(abs(polygon_area_twice(small_patch)) / 2),
+                                    "inside_owner_core": True,
+                                    "contains_marks": {name: strict_separation(small_patch, (mark,)) is None
+                                                       for name, mark in marks.items()},
+                                    "sat_clipping_survivor_sets_identical": True,
+                                    "survivor_weight": str(sum((p.weight for p in survivors), Fraction(0)))})
+    published = json.loads((base / "lane-x4-survivors-16.json").read_text())
+    replayed = json.loads((args.scratch / "survivors-16.json").read_text())
+    receipt = {"head_reviewed": "ee98c4baae876835ba44a5f127bfa73d4e838d45",
+               "sixteen_sector_json_matches_published": published == replayed,
+               "distance_rows": rows, "pose_rows": poses, "pose_patch_examples": pose_patch_examples,
+               "interpretation": "A contained isolated unit parent is not an eleven-square packing or a forced owner selection."}
+    args.output.write_text(json.dumps(receipt, indent=2) + "\n")
+    print(json.dumps({"receipt": str(args.output), "published_json_matches": published == replayed,
+                      "invalid_disjoint_distance_calls": [row for row in rows if not row["target_is_survivor"]],
+                      "pose_rows": poses, "pose_patch_examples": pose_patch_examples}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

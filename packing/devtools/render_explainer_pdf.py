@@ -45,6 +45,11 @@ ROOT = Path(__file__).resolve().parent.parent
 PAGE = ROOT / "site" / "index.html"
 OUTPUT = ROOT / "site" / "t-018-explainer.pdf"
 
+#: The reviewed publication pagination. Unlike PDF bytes, this is portable across the
+#: pinned Linux and macOS Chromium builds. A one-line metric change once moved Figure 1
+#: and expanded the paper from 17 pages to 18 while every other check stayed green.
+EXPECTED_PAGE_COUNT = 17
+
 #: The two fields Chromium stamps from the clock, and the only two that move between
 #: renders of one page. Normalised rather than removed: the length has to stay put or
 #: every cross-reference offset after them shifts.
@@ -660,6 +665,11 @@ def check() -> None:
     if findings:
         raise SystemExit("\n".join(findings))
     pages = first.count(b"/Type /Page\n") or first.count(b"/Type/Page")
+    if pages != EXPECTED_PAGE_COUNT:
+        raise SystemExit(
+            f"explainer PDF has {pages} pages; expected {EXPECTED_PAGE_COUNT}. "
+            "A layout change crossed a page boundary."
+        )
     embedded = embedded_fonts(first)
     host = sorted(set(outline_fonts(first)))
     fallbacks = ", ".join(host)

@@ -1,0 +1,302 @@
+#!/usr/bin/env python3
+"""Structural site generator for the n = 11 weighted fractional certificate LP.
+
+The record's site oracle takes the 300 deepest *arrangement vertices* of one dual per
+round.  This generator instead reads the deep region as a union of structures and places
+sites along each, so one round covers a family rather than a vertex.
+
+Stage 1 -- structured scan-line net.  For a family F of weighted placements, the depth
+is piecewise constant on the cells of the arrangement of the placements' edge lines.  A
+horizontal line y = c meets a set of intervals, one per placement, and the depth profile
+along it is an exact step function.  The scan levels are the *midpoints of consecutive
+distinct corner ordinates* of F -- one line strictly inside every horizontal slab of the
+placement-corner decomposition, which is a structural net, not a sample.  The same in x.
+
+Stage 2 -- one site per deep cell.  Every maximal run of the profile above depth one
+gives its midpoint: a point in the interior of a deep cell, not on its boundary, so it
+stays a separating site when the dual moves a little.  Floats locate the runs; every
+emitted site's depth is then decided in Fractions against F.
+
+Stage 3 -- structural extension.  The emitted points are clustered by abscissa (a
+vertical sliver), by ordinate (a horizontal sliver) and by proximity (an interior blob).
+Each cluster is a structure; the generator emits a ladder along it -- the cluster's
+distinct transversal offsets crossed with a ladder of levels spanning its extent -- so
+the round covers the whole structure and not only the cells the scan lines happened to
+cross.
+
+Stage 4 -- the face, not a vertex.  Every stage runs over *all* the duals given, whose
+union spans the optimal face; a site deep for any of them is kept.
+
+Run from packing/ with the project interpreter.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+from sqpack.fractional.ceiling import CeilingCertificate, Placement
+from sqpack.fractional.colgen import d4_orbit
+
+DEEP = Fraction(1) + Fraction(1, 10**9)
+
+
+def log(msg: str) -> None:
+    print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+class Fam:
+    """A weighted family with float slabs for scanning and exact placements for deciding."""
+
+    def __init__(self, path: Path) -> None:
+        rec = json.loads(path.read_text())
+        cert = CeilingCertificate.from_record(rec)
+        self.path = path
+        self.L = cert.outer_side
+        self.pl: list[Placement] = [p for p in cert.placements if p.weight > 0]
+        self.yq = [p.weight for p in self.pl]
+        s = [p.slabs() for p in self.pl]
+        self.ax = np.array([float(t[0]) for t in s]); self.ay = np.array([float(t[1]) for t in s])
+        self.u = np.array([float(t[2]) for t in s]); self.bx = np.array([float(t[3]) for t in s])
+        self.by = np.array([float(t[4]) for t in s]); self.v = np.array([float(t[5]) for t in s])
+        self.h = np.array([float(p.side) / 2 for p in self.pl])
+        self.w = np.array([float(p.weight) for p in self.pl])
+        cs = np.array([[float(x), float(y)] for p in self.pl for x, y in p.corners()])
+        self.corner_x = cs[:, 0]; self.corner_y = cs[:, 1]
+
+    def depth_exact(self, x: Fraction, y: Fraction) -> Fraction:
+        return sum((self.yq[m] for m, p in enumerate(self.pl) if p.contains(x, y)), start=Fraction(0))
+
+    def depths(self, pts: list[tuple[Fraction, Fraction]], screen: float = 1e-9) -> tuple[list[Fraction], int]:
+        """Exact depth at each point: floats propose the membership set, its margins prove
+        it, every entry inside the margin is decided by ``Placement.contains`` in
+        Fractions, and the depth is then an exact sum of the family's rational weights."""
+        out: list[Fraction] = []
+        namb = 0
+        step = max(1, 4_000_000 // max(1, len(self.pl)))
+        for lo in range(0, len(pts), step):
+            chunk = pts[lo:lo + step]
+            px = np.array([float(a) for a, _ in chunk]); py = np.array([float(b) for _, b in chunk])
+            s1 = np.abs(px[:, None] * self.ax[None, :] + py[:, None] * self.ay[None, :] - self.u[None, :]) - self.h[None, :]
+            s2 = np.abs(px[:, None] * self.bx[None, :] + py[:, None] * self.by[None, :] - self.v[None, :]) - self.h[None, :]
+            inside = (s1 <= 0) & (s2 <= 0)
+            amb = (np.abs(s1) < screen) | (np.abs(s2) < screen)
+            del s1, s2
+            ai, aj = np.nonzero(amb)
+            del amb
+            namb += len(ai)
+            for i, j in zip(ai.tolist(), aj.tolist()):
+                inside[i, j] = self.pl[j].contains(*chunk[i])
+            for i in range(len(chunk)):
+                out.append(sum((self.yq[m] for m in np.nonzero(inside[i])[0].tolist()), start=Fraction(0)))
+            del inside
+        return out, namb
+
+    def spans(self, levels: np.ndarray, axis: int) -> tuple[np.ndarray, np.ndarray]:
+        """Intervals cut on each scan line: (lo, hi) of shape (len(levels), n_placements).
+
+        axis 0 scans horizontal lines y = level and returns x-intervals; axis 1 scans
+        vertical lines x = level and returns y-intervals.  Nonpositive coefficients flip
+        the interval, and a zero coefficient makes the constraint level-only.
+        """
+        if axis == 0:
+            c1, k1, c2, k2 = self.ax, self.ay, self.bx, self.by
+        else:
+            c1, k1, c2, k2 = self.ay, self.ax, self.by, self.bx
+        lo = np.full((len(levels), len(self.pl)), -np.inf)
+        hi = np.full((len(levels), len(self.pl)), np.inf)
+        for c, k, base in ((c1, k1, self.u), (c2, k2, self.v)):
+            lowv = base[None, :] - self.h[None, :] - k[None, :] * levels[:, None]
+            highv = base[None, :] + self.h[None, :] - k[None, :] * levels[:, None]
+            nz = c != 0
+            a = np.where(nz, c, 1.0)[None, :]
+            l2 = np.where(a > 0, lowv / a, highv / a)
+            h2 = np.where(a > 0, highv / a, lowv / a)
+            l2 = np.where(nz[None, :], l2, np.where((lowv <= 0) & (highv >= 0), -np.inf, np.inf))
+            h2 = np.where(nz[None, :], h2, np.where((lowv <= 0) & (highv >= 0), np.inf, -np.inf))
+            lo = np.maximum(lo, l2); hi = np.minimum(hi, h2)
+        return lo, hi
+
+
+def deep_runs(lo: np.ndarray, hi: np.ndarray, w: np.ndarray, tol: float) -> list[list[tuple[float, float, float]]]:
+    """Per scan line, the maximal (start, end, depth) runs whose depth exceeds 1 + tol."""
+    out: list[list[tuple[float, float, float]]] = []
+    for r in range(lo.shape[0]):
+        keep = np.isfinite(lo[r]) & np.isfinite(hi[r]) & (hi[r] > lo[r])
+        if not keep.any():
+            out.append([]); continue
+        a = lo[r][keep]; b = hi[r][keep]; ww = w[keep]
+        pos = np.concatenate([a, b]); delta = np.concatenate([ww, -ww])
+        order = np.argsort(pos, kind="stable")
+        pos = pos[order]; depth = np.cumsum(delta[order])
+        runs: list[tuple[float, float, float]] = []
+        i = 0
+        while i < len(pos) - 1:
+            if depth[i] > 1.0 + tol and pos[i + 1] > pos[i]:
+                j = i
+                while j + 1 < len(pos) - 1 and depth[j + 1] > 1.0 + tol:
+                    j += 1
+                runs.append((pos[i], pos[j + 1], float(depth[i:j + 1].max())))
+                i = j + 1
+            else:
+                i += 1
+        out.append(runs)
+    return out
+
+
+def levels_from(fam: Fam, axis: int, cap: int) -> np.ndarray:
+    raw = fam.corner_y if axis == 0 else fam.corner_x
+    L = float(fam.L)
+    vals = np.unique(np.round(raw[(raw > 1e-9) & (raw < L - 1e-9)], 12))
+    vals = np.concatenate([[0.0], vals, [L]])
+    mids = (vals[:-1] + vals[1:]) / 2.0
+    mids = mids[(mids > 1e-6) & (mids < L - 1e-6)]
+    if len(mids) > cap:                       # keep the net uniform in the index, never argmax
+        mids = mids[np.linspace(0, len(mids) - 1, cap).astype(int)]
+    return mids
+
+
+def rationalise(v: float, den: int) -> Fraction:
+    return Fraction(v).limit_denominator(den)
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("families", nargs="+")
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--level-cap", type=int, default=900)
+    ap.add_argument("--tol", type=float, default=2e-9)
+    ap.add_argument("--den", type=int, default=10**7)
+    ap.add_argument("--orbit-cap", type=int, default=1400)
+    ap.add_argument("--ladder-x", type=float, default=0.0)
+    ap.add_argument("--cluster-tol", type=float, default=6e-4)
+    ap.add_argument("--cell", type=float, default=0.02)
+    ap.add_argument("--ladder-steps", type=int, default=0)
+    args = ap.parse_args()
+    t0 = time.perf_counter()
+
+    fams = [Fam(Path(p)) for p in args.families]
+    L = fams[0].L
+    assert all(f.L == L for f in fams)
+    log(f"{len(fams)} families at L = {L}: " + ", ".join(f"{len(f.pl)}" for f in fams))
+
+    # ---- stage 1 + 2: one candidate per deep cell crossed by the structural net
+    cands: list[tuple[Fraction, Fraction, str]] = []
+    stats = []
+    for f in fams:
+        for axis, name in ((0, "h"), (1, "v")):
+            lev = levels_from(f, axis, args.level_cap)
+            got = 0; nruns = 0
+            block = max(1, 1_000_000 // max(1, len(f.pl)))
+            for s0 in range(0, len(lev), block):
+                sub = lev[s0:s0 + block]
+                lo, hi = f.spans(sub, axis)
+                runs = deep_runs(lo, hi, f.w, args.tol)
+                del lo, hi
+                nruns += sum(len(r) for r in runs)
+                for r, rl in enumerate(runs):
+                    c = rationalise(float(sub[r]), args.den)
+                    for a, b, _d in rl:
+                        m = rationalise((a + b) / 2.0, args.den)
+                        if not (0 < m < L):
+                            continue
+                        cands.append((m, c, f"{f.path.name}:{name}") if axis == 0 else (c, m, f"{f.path.name}:{name}"))
+                        got += 1
+            stats.append((f.path.name, name, len(lev), nruns, got))
+            log(f"  {f.path.name} {name}: {len(lev)} scan lines, {nruns} deep runs, {got} candidates")
+    log(f"stage 1-2: {len(cands)} raw candidates ({time.perf_counter()-t0:.1f}s)")
+
+    # ---- exact filter: keep a candidate whose exact depth exceeds one for some family
+    seen: set[tuple[Fraction, Fraction]] = set()
+    uniq: list[tuple[Fraction, Fraction, str]] = []
+    for x, y, tag in cands:
+        if (x, y) in seen:
+            continue
+        seen.add((x, y)); uniq.append((x, y, tag))
+    pts = [(x, y) for x, y, _ in uniq]
+    best = [Fraction(0)] * len(pts)
+    amb_total = 0
+    for f in fams:
+        ds, nam = f.depths(pts)
+        amb_total += nam
+        for i, d in enumerate(ds):
+            if d > best[i]:
+                best[i] = d
+    kept = [(uniq[i][0], uniq[i][1], best[i], uniq[i][2]) for i in range(len(pts)) if best[i] > DEEP]
+    log(f"exact filter: {len(kept)} of {len(seen)} distinct candidates above depth one, "
+        f"{amb_total} memberships decided exactly ({time.perf_counter()-t0:.1f}s)")
+
+    # ---- stage 3: structural extension, ladders along each cluster
+    extra: list[tuple[Fraction, Fraction, Fraction, str]] = []
+    if args.ladder_steps > 0:
+        by_x: dict[int, list[tuple[Fraction, Fraction, Fraction, str]]] = {}
+        for rec in kept:
+            by_x.setdefault(int(float(rec[0]) / args.cluster_tol), []).append(rec)
+        for bucket, members in sorted(by_x.items(), key=lambda kv: -len(kv[1])):
+            if len(members) < 6:
+                continue
+            ys = sorted(float(m[1]) for m in members)
+            y0, y1 = ys[0], ys[-1]
+            if y1 - y0 < 0.05:
+                continue
+            xs = sorted({m[0] for m in members})
+            for xv in xs[:: max(1, len(xs) // 12)]:
+                for t in range(args.ladder_steps + 1):
+                    yv = rationalise(y0 + (y1 - y0) * t / args.ladder_steps, args.den)
+                    if (xv, yv) in seen:
+                        continue
+                    seen.add((xv, yv))
+                    best = max((f.depth_exact(xv, yv) for f in fams), default=Fraction(0))
+                    extra.append((xv, yv, best, f"ladder:{bucket}"))
+        log(f"stage 3: {len(extra)} ladder sites ({time.perf_counter()-t0:.1f}s)")
+
+    allsites = kept + extra
+    # Structural selection: bucket the deep region into coarse cells and take the deepest
+    # remaining site from each in round robin, so the cap spreads over every structure
+    # instead of piling onto the deepest one.
+    cell = args.cell
+    buckets: dict[tuple[int, int], list[tuple[Fraction, Fraction, Fraction, str]]] = {}
+    for rec in allsites:
+        buckets.setdefault((int(float(rec[0]) / cell), int(float(rec[1]) / cell)), []).append(rec)
+    for b in buckets.values():
+        b.sort(key=lambda r: (-r[2], float(r[0]), float(r[1])))
+    order = sorted(buckets, key=lambda k: (-len(buckets[k]), k))
+    allsites = []
+    depth_round = 0
+    while any(len(buckets[k]) > depth_round for k in order):
+        for k in order:
+            if len(buckets[k]) > depth_round:
+                allsites.append(buckets[k][depth_round])
+        depth_round += 1
+    log(f"selection: {len(buckets)} coarse cells of side {cell}, round robin over {len(allsites)} sites")
+
+    # ---- D4 orbits, deduped, capped
+    orbits: list[tuple[tuple[Fraction, Fraction], ...]] = []
+    keys: set[tuple[Fraction, Fraction]] = set()
+    rows = []
+    for x, y, d, tag in allsites:
+        orb = d4_orbit(x, y, L)
+        if orb[0] in keys:
+            continue
+        keys.add(orb[0]); orbits.append(orb)
+        rows.append({"x": str(x), "y": str(y), "depth": str(d), "depth_float": float(d), "tag": tag, "orbit": len(orb)})
+        if len(orbits) >= args.orbit_cap:
+            break
+    Path(args.out).write_text(json.dumps({
+        "outer_side": str(L), "families": [str(f.path) for f in fams], "level_cap": args.level_cap,
+        "tol": args.tol, "den": args.den, "orbit_cap": args.orbit_cap, "ladder_steps": args.ladder_steps,
+        "scan_stats": stats, "raw_candidates": len(cands), "distinct": len(seen), "deep_exact": len(kept),
+        "ladder": len(extra), "orbits": len(orbits), "sites": sum(len(o) for o in orbits),
+        "seconds": time.perf_counter() - t0,
+        "sites_out": [[[str(px), str(py)] for px, py in orb] for orb in orbits],
+        "detail": rows}, indent=1))
+    log(f"wrote {len(orbits)} orbits ({sum(len(o) for o in orbits)} sites) to {args.out}; {time.perf_counter()-t0:.1f}s")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,19 @@
+[02:11:49] 7 families at L = 153/40: 704, 576, 360, 960, 280, 512, 336
+[02:11:49]   family-at-n-0.json h: 900 scan lines, 4040 deep runs, 4040 candidates
+[02:11:49]   family-at-n-0.json v: 900 scan lines, 4040 deep runs, 4040 candidates
+[02:11:50]   family-at-n-1.json h: 900 scan lines, 3550 deep runs, 3550 candidates
+[02:11:50]   family-at-n-1.json v: 900 scan lines, 3550 deep runs, 3550 candidates
+[02:11:50]   family-at-n-2.json h: 673 scan lines, 1746 deep runs, 1746 candidates
+[02:11:50]   family-at-n-2.json v: 673 scan lines, 1746 deep runs, 1746 candidates
+[02:11:50]   family-at-n-3.json h: 900 scan lines, 4117 deep runs, 4117 candidates
+[02:11:50]   family-at-n-3.json v: 900 scan lines, 4117 deep runs, 4117 candidates
+[02:11:50]   family-at-n-1-exact25.json h: 501 scan lines, 806 deep runs, 806 candidates
+[02:11:50]   family-at-n-1-exact25.json v: 501 scan lines, 806 deep runs, 806 candidates
+[02:11:50]   family-at-n-0.json h: 900 scan lines, 2767 deep runs, 2767 candidates
+[02:11:51]   family-at-n-0.json v: 900 scan lines, 2767 deep runs, 2767 candidates
+[02:11:51]   family-at-n-0.json h: 629 scan lines, 1658 deep runs, 1658 candidates
+[02:11:51]   family-at-n-0.json v: 629 scan lines, 1658 deep runs, 1658 candidates
+[02:11:51] stage 1-2: 37368 raw candidates (2.0s)
+[02:12:05] exact filter: 37055 of 37055 distinct candidates above depth one, 0 memberships decided exactly (16.7s)
+[02:12:05] selection: 2955 coarse cells of side 0.02, round robin over 37055 sites
+[02:12:06] wrote 17885 orbits (139521 sites) to /tmp/claude-0/-home-user-squares/cd8c0aac-f931-5096-97c8-3cccdcaa8ba9/scratchpad/structural-sites/deep-region-all.json; 17.8s

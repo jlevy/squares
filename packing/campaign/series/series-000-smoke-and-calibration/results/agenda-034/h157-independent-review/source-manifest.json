@@ -1,0 +1,130 @@
+{
+  "interpreter": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "repo": "/Users/levy/.codex/worktrees/88e2/squares",
+  "engine_commit": "67ccd16bb23ac2ba03b3430e757839b5b18528f4",
+  "engine_parents": [
+    "1297bf5ddfb2af13f32ae1cf2b659e4ce7acec32"
+  ],
+  "reviewed_commit": "ee98c4baae876835ba44a5f127bfa73d4e838d45",
+  "reviewed_parents": [
+    "e8e8bfebcf946ccf87c90e61ba3f34dd842a2f0f",
+    "d21c27b90be18ba5e96d2e712e673c0b30efd9a2"
+  ],
+  "dependencies": [
+    {
+      "module": "devtools.owner_footprints",
+      "origin": "/Users/levy/.codex/worktrees/88e2/squares/packing/devtools/owner_footprints.py",
+      "repository_path": "packing/devtools/owner_footprints.py",
+      "engine_blob": "65501ad186a463eb5e7e16978daf03e603149fbd",
+      "reviewed_blob": "65501ad186a463eb5e7e16978daf03e603149fbd",
+      "diff_engine_to_reviewed": ""
+    },
+    {
+      "module": "devtools.screen_corner_dual_salvage",
+      "origin": "/Users/levy/.codex/worktrees/88e2/squares/packing/devtools/screen_corner_dual_salvage.py",
+      "repository_path": "packing/devtools/screen_corner_dual_salvage.py",
+      "engine_blob": "f8a993a9a2c24a0c844d5e43e10d33d95b332565",
+      "reviewed_blob": "f8a993a9a2c24a0c844d5e43e10d33d95b332565",
+      "diff_engine_to_reviewed": ""
+    },
+    {
+      "module": "devtools.transport_ceiling_family",
+      "origin": "/Users/levy/.codex/worktrees/88e2/squares/packing/devtools/transport_ceiling_family.py",
+      "repository_path": "packing/devtools/transport_ceiling_family.py",
+      "engine_blob": "abb8ebe3f0b5b168133659bcef93971ae5c4c1b6",
+      "reviewed_blob": "abb8ebe3f0b5b168133659bcef93971ae5c4c1b6",
+      "diff_engine_to_reviewed": ""
+    },
+    {
+      "module": "sqpack.fractional.ceiling",
+      "origin": "/Users/levy/.codex/worktrees/88e2/squares/packing/src/sqpack/fractional/ceiling.py",
+      "repository_path": "packing/src/sqpack/fractional/ceiling.py",
+      "engine_blob": "f026bd04186787096fb57128517e319e7ee1ae00",
+      "reviewed_blob": "f026bd04186787096fb57128517e319e7ee1ae00",
+      "diff_engine_to_reviewed": ""
+    },
+    {
+      "module": "sqpack.fractional.model",
+      "origin": "/Users/levy/.codex/worktrees/88e2/squares/packing/src/sqpack/fractional/model.py",
+      "repository_path": "packing/src/sqpack/fractional/model.py",
+      "engine_blob": "a5df6094eadfe441dba66fee8fe37a4e5530b6f6",
+      "reviewed_blob": "a5df6094eadfe441dba66fee8fe37a4e5530b6f6",
+      "diff_engine_to_reviewed": ""
+    }
+  ],
+  "retained_sources": [
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-family-191-50.json",
+      "blob": "2afc8fa9099f0d17c1f184400f7ebd2eb6483857"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-consolidate.py.txt",
+      "blob": "3a830424c8932735a04f10707a6f8107d3eabf0f"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-crosscheck.py.txt",
+      "blob": "742bc1070378679cfc1900ddc96665223fe03a89"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-crosscheck2.py.txt",
+      "blob": "6e9cf9034004ac1a77da5f74e543a2a70ca97795"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-limit.py.txt",
+      "blob": "522ddb5a65e97afead270e4b5cec8a588789b20d"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-nbins.py.txt",
+      "blob": "1ff2aac4902c89a205d0f97c8b276a7617ebe2b5"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-pose-detail.py.txt",
+      "blob": "0bddc89e0a5892cc138a33643c770133b2d7e569"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-probe-rays.py.txt",
+      "blob": "4c72e009bd289559182cd4c5c81c4993dfb8de3f"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-screen16.py.txt",
+      "blob": "cde6a0f021778f2c785560e34bbfb157336a9e49"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md",
+      "blob": "15ae81f9477674011a3073bddfd2f855fa030675"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-survivor-families.json",
+      "blob": "8bfe375ed05db31a7ec2c100610b1967d70463dc"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-survivors-16.json",
+      "blob": "fadc62ad7493f040a430340934e7fcb67ae4ccae"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-verify-eight.py.txt",
+      "blob": "cca9e8224b13423ef5d7620860f03adc77f94d8c"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-verify-geometry.py.txt",
+      "blob": "918d6fd4ba8c1af75b0ad6e8c3aec1aff36a04c7"
+    },
+    {
+      "path": "packing/campaign/explorations/X-024-two-lines-at-eleven.md",
+      "blob": "86cdce6cb8633c878780bed037caa8b1031b52de"
+    },
+    {
+      "path": "packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md",
+      "blob": "4c7c9b96befa01a205cae995620802f6a8b4b0ab"
+    },
+    {
+      "path": "packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md",
+      "blob": "c8305c1f785ed2a6032e43e0bb7b370676fb6fb1"
+    },
+    {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md",
+      "blob": "5e8aef554047232d86cfb82f3b4d16457eb1365b"
+    }
+  ],
+  "note": "Git identities record source provenance; no custom integrity checksum was introduced."
+}

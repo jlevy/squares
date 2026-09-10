@@ -1,0 +1,340 @@
+#!/usr/bin/env python3
+"""Spike B, task 2: separation of threshold atoms on a retained depth-one family.
+
+Usage (from packing/):  .venv/bin/python3 sep_family.py <family.json> <tag> [cycle_cap]
+
+Stage A: exact overlap graph (float prescreen on centre distance, exact separating-axis
+test on the survivors); for every edge the exact intersection polygon (Sutherland-Hodgman
+in Fractions), its area and its vertex average as the representative point; the
+containment matrix of representatives against placements (float with 1e-9 margin,
+ambiguous pairs decided by Placement.contains); every triangle of the overlap graph and
+the 2-of-3 atom on its three edge representatives, charged over the whole family.
+Stage B: chordless 5-cycles (capped) and the 2-of-5 atoms on their edge representatives.
+Weights are the family's, rounded DOWN to denominator 1e9 (cutting.tidy_family), which
+keeps the family a fractional packing and makes every charge a lower bound on the charge
+under the retained weights: a violation here is a violation there.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import sys
+import time
+from collections import Counter
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+from sqpack.fractional.ceiling import CeilingCertificate, Placement, float_family
+from sqpack.fractional.cutting import tidy_family
+
+HERE = Path(__file__).resolve().parent
+MARGIN = 1e-9
+
+
+def log(msg: str) -> None:
+    print(msg, flush=True)
+
+
+def clip(poly, a, b, c):
+    """Keep the part of the convex polygon with a x + b y <= c."""
+    out = []
+    n = len(poly)
+    for i in range(n):
+        p, q = poly[i], poly[(i + 1) % n]
+        fp = a * p[0] + b * p[1] - c
+        fq = a * q[0] + b * q[1] - c
+        if fp <= 0:
+            out.append(p)
+        if (fp < 0 < fq) or (fq < 0 < fp):
+            t = fp / (fp - fq)
+            out.append((p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])))
+    return out
+
+
+def half_planes(p: Placement):
+    ax, ay, u, bx, by, v = p.slabs()
+    h = p.side / 2
+    return ((ax, ay, u + h), (-ax, -ay, h - u), (bx, by, v + h), (-bx, -by, h - v))
+
+
+def intersect(poly, p: Placement):
+    for a, b, c in half_planes(p):
+        poly = clip(poly, a, b, c)
+        if not poly:
+            return []
+    return poly
+
+
+def area(poly) -> Fraction:
+    s = Fraction(0)
+    for i in range(len(poly)):
+        p, q = poly[i], poly[(i + 1) % len(poly)]
+        s += p[0] * q[1] - q[0] * p[1]
+    return abs(s) / 2
+
+
+def overlap_exact(p: Placement, q: Placement, cp, cq) -> bool:
+    """Closed squares meet iff no edge normal of either separates the corner sets."""
+    for s, other in ((p, cq), (q, cp)):
+        ax, ay, u, bx, by, v = s.slabs()
+        h = s.side / 2
+        for nx, ny, off in ((ax, ay, u), (bx, by, v)):
+            vals = [nx * x + ny * y for x, y in other]
+            if max(vals) < off - h or min(vals) > off + h:
+                return False
+    return True
+
+
+def fold_deg(t: Fraction) -> float:
+    a = math.degrees(2 * math.atan(float(t)))
+    return a if a <= 45 else 90 - a
+
+
+def angle_class(a: float) -> str:
+    return "axis" if a <= 2.5 else ("29" if 25 <= a <= 35 else "other")
+
+
+def containment(points, pl, normals, offsets, halves):
+    """Exact containment matrix [points x placements]: floats screen, Fractions decide."""
+    P = np.array([[float(x), float(y)] for x, y in points])
+    first = np.abs(P @ normals[:, 0, :].T - offsets[None, :, 0])
+    second = np.abs(P @ normals[:, 1, :].T - offsets[None, :, 1])
+    loose = (first <= halves[None, :] + MARGIN) & (second <= halves[None, :] + MARGIN)
+    strict = (first <= halves[None, :] - MARGIN) & (second <= halves[None, :] - MARGIN)
+    result = strict.copy()
+    ambiguous = np.argwhere(loose & ~strict)
+    for a, b in ambiguous:
+        result[a, b] = pl[b].contains(points[a][0], points[a][1])
+    return result, len(ambiguous)
+
+
+def main() -> None:
+    path = Path(sys.argv[1])
+    tag = sys.argv[2]
+    cycle_cap = int(sys.argv[3]) if len(sys.argv) > 3 else 2_000_000
+    t0 = time.perf_counter()
+    fam = CeilingCertificate.from_record(json.loads(path.read_text()))
+    tidy = tidy_family(fam, 10**9)
+    pl = tidy.placements
+    n = len(pl)
+    loss = fam.total_weight - tidy.total_weight
+    log(f"[{tag}] {n} placements, side {pl[0].side}, L={fam.outer_side}, total {float(fam.total_weight):.9f}, tidy total {float(tidy.total_weight):.9f} (loss {float(loss):.3e})")
+    y = np.array([float(p.weight) for p in pl])
+    yq = [p.weight for p in pl]
+    corners = [p.corners() for p in pl]
+    cx = np.array([float(p.centre_x) for p in pl])
+    cy = np.array([float(p.centre_y) for p in pl])
+    side = float(pl[0].side)
+    angles = [fold_deg(p.half_tangent) for p in pl]
+    classes = [angle_class(a) for a in angles]
+    log(f"[{tag}] max placement weight {y.max():.6f}; weight by class {dict(Counter({c: 0 for c in ('axis','29','other')}) )}")
+    wc = Counter()
+    for c, w in zip(classes, y):
+        wc[c] += w
+    log(f"[{tag}] weight by class: " + ", ".join(f"{k}={v:.4f}" for k, v in wc.items()))
+
+    # --- overlap graph
+    d2 = (cx[:, None] - cx[None, :]) ** 2 + (cy[:, None] - cy[None, :]) ** 2
+    reach = (side * math.sqrt(2) + 1e-6) ** 2
+    cand = np.argwhere(np.triu(d2 <= reach, 1))
+    edges = []
+    for i, j in cand:
+        if overlap_exact(pl[i], pl[j], corners[i], corners[j]):
+            edges.append((int(i), int(j)))
+    log(f"[{tag}] candidate pairs {len(cand)}, exact overlapping pairs {len(edges)}  ({time.perf_counter()-t0:.1f}s)")
+    adj = [set() for _ in range(n)]
+    for i, j in edges:
+        adj[i].add(j)
+        adj[j].add(i)
+    degs = np.array([len(a) for a in adj])
+    log(f"[{tag}] degree: min {degs.min()} mean {degs.mean():.1f} max {degs.max()}")
+    max_pair = max(y[i] + y[j] for i, j in edges)
+    log(f"[{tag}] max y_i + y_j over overlapping pairs: {max_pair:.6f} (a depth-1 family has every such sum <= 1)")
+
+    # --- representatives
+    reps = []
+    areas = []
+    for i, j in edges:
+        poly = intersect(list(corners[i]), pl[j])
+        if not poly:
+            raise RuntimeError(f"edge {(i, j)} has empty intersection polygon")
+        m = len(poly)
+        reps.append((sum(p[0] for p in poly) / m, sum(p[1] for p in poly) / m))
+        areas.append(area(poly))
+    areas_f = np.array([float(a) for a in areas])
+    log(f"[{tag}] representatives built ({time.perf_counter()-t0:.1f}s); zero-area intersections {(areas_f == 0).sum()}, median area {np.median(areas_f):.5f}")
+    normals, offsets, halves, _ = float_family(tidy)
+    C, ambiguous = containment(reps, pl, normals, offsets, halves)
+    log(f"[{tag}] containment matrix {C.shape}, {ambiguous} pairs decided exactly; representative depth: max {(C @ y).max():.6f} mean {(C @ y).mean():.6f}")
+    edge_index = {e: k for k, e in enumerate(edges)}
+
+    # --- triangles and 2-of-3 charges
+    tri = []
+    for i, j in edges:
+        for k in adj[i] & adj[j]:
+            if k > j:
+                tri.append((i, j, k))
+    log(f"[{tag}] triangles {len(tri)}  ({time.perf_counter()-t0:.1f}s)")
+    T = np.array(tri, dtype=np.int64).reshape(-1, 3)
+    own = y[T[:, 0]] + y[T[:, 1]] + y[T[:, 2]] if len(tri) else np.zeros(0)
+    if len(tri):
+        log(f"[{tag}] triangle own-weight sum: max {own.max():.6f}, count > 1: {(own > 1).sum()}")
+    E1 = np.array([edge_index[(i, j)] for i, j, k in tri], dtype=np.int64)
+    E2 = np.array([edge_index[(j, k)] for i, j, k in tri], dtype=np.int64)
+    E3 = np.array([edge_index[(i, k)] for i, j, k in tri], dtype=np.int64)
+    charges = np.zeros(len(tri))
+    Ci = C.astype(np.int8)
+    step = 20000
+    for s in range(0, len(tri), step):
+        cnt = Ci[E1[s:s+step]] + Ci[E2[s:s+step]] + Ci[E3[s:s+step]]
+        charges[s:s+step] = (cnt >= 2) @ y
+    log(f"[{tag}] 2-of-3 charges computed ({time.perf_counter()-t0:.1f}s)")
+    if len(tri):
+        hist_edges = [0, 0.25, 0.5, 0.75, 0.9, 0.95, 1.0, 1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 2]
+        h, _ = np.histogram(charges, bins=hist_edges)
+        log(f"[{tag}] charge histogram: " + ", ".join(f"[{a},{b}):{c}" for a, b, c in zip(hist_edges[:-1], hist_edges[1:], h)))
+        log(f"[{tag}] max 2-of-3 charge {charges.max():.6f}; violated (float, > 1): {(charges > 1).sum()}; total float violation {np.clip(charges - 1, 0, None).sum():.6f}")
+    # exact recheck of the near-violated ones
+    order = np.argsort(-charges)
+    violated = []
+    checked = 0
+    for idx in order:
+        if charges[idx] < 1 - 1e-7:
+            break
+        i, j, k = tri[idx]
+        cnt = Ci[E1[idx]] + Ci[E2[idx]] + Ci[E3[idx]]
+        members = np.flatnonzero(cnt >= 2)
+        exact = sum((yq[m] for m in members), start=Fraction(0))
+        checked += 1
+        if exact > 1:
+            violated.append((exact, idx, members))
+    log(f"[{tag}] exact recheck: {checked} atoms with float charge >= 1-1e-7, {len(violated)} violated exactly; total exact violation {float(sum((v[0]-1 for v in violated), start=Fraction(0))):.9f}")
+    # classify
+    def tri_class(i, j, k):
+        return "-".join(sorted((classes[i], classes[j], classes[k])))
+    cls_counter = Counter(tri_class(*tri[idx]) for _, idx, _ in violated)
+    log(f"[{tag}] violated 2-of-3 atoms by triangle class: {dict(cls_counter)}")
+    top_counter = Counter(tri_class(*tri[idx]) for idx in order[:2000])
+    log(f"[{tag}] top-2000 by charge, triangle class: {dict(top_counter)}")
+    # triple intersections for the top 300
+    empty_triple = 0
+    nonempty_triple = 0
+    for idx in order[:300]:
+        i, j, k = tri[idx]
+        poly = intersect(intersect(list(corners[i]), pl[j]), pl[k])
+        if poly and area(poly) > 0:
+            nonempty_triple += 1
+        else:
+            empty_triple += 1
+    log(f"[{tag}] top-300 by charge: triple intersection empty (or degenerate) {empty_triple}, positive area {nonempty_triple}")
+    # dump the violated atoms and the top atoms
+    out = {
+        "family": str(path), "tag": tag, "placements": n, "edges": len(edges), "triangles": len(tri),
+        "max_placement_weight": float(y.max()), "max_pair_sum": float(max_pair),
+        "max_triangle_own_sum": float(own.max()) if len(tri) else None,
+        "max_2of3_charge": float(charges.max()) if len(tri) else None,
+        "violated_2of3": len(violated),
+        "atoms": [],
+        "top": [],
+    }
+    for exact, idx, members in violated:
+        i, j, k = tri[idx]
+        pts = [reps[E1[idx]], reps[E2[idx]], reps[E3[idx]]]
+        out["atoms"].append({
+            "kind": "2-of-3", "threshold": 2,
+            "points": [[str(x), str(yv)] for x, yv in pts],
+            "charge": str(exact), "charge_float": float(exact), "budget": 1,
+            "triangle": [i, j, k], "classes": [classes[i], classes[j], classes[k]],
+            "angles": [angles[i], angles[j], angles[k]],
+            "charged_placements": int(len(members)),
+        })
+    for idx in order[:50]:
+        i, j, k = tri[idx]
+        out["top"].append({"charge": float(charges[idx]), "triangle": [i, j, k], "classes": [classes[i], classes[j], classes[k]], "angles": [round(angles[i],2), round(angles[j],2), round(angles[k],2)], "own": float(own[idx])})
+    for entry in out["top"][:10]:
+        log(f"[{tag}]   top atom charge {entry['charge']:.6f} triangle {entry['triangle']} classes {entry['classes']} angles {entry['angles']} own {entry['own']:.4f}")
+
+    # --- Stage B: chordless 5-cycles
+    tB = time.perf_counter()
+    cycles = []
+    complete = True
+    for v0 in range(n):
+        n0 = sorted(v for v in adj[v0] if v > v0)
+        n0set = set(n0)
+        for v1 in n0:
+            for v2 in adj[v1]:
+                if v2 <= v0 or v2 in adj[v0]:
+                    continue  # v2 > v0 and no chord v0-v2
+                for v3 in adj[v2]:
+                    if v3 <= v0 or v3 == v1 or v3 in adj[v0] or v3 in adj[v1]:
+                        continue  # no chords v0-v3, v1-v3
+                    for v4 in adj[v3] & n0set:
+                        if v4 > v1 and v4 != v2 and v4 not in adj[v1] and v4 not in adj[v2]:
+                            cycles.append((v0, v1, v2, v3, v4))
+                            if len(cycles) >= cycle_cap:
+                                complete = False
+                                break
+                    if not complete:
+                        break
+                if not complete:
+                    break
+            if not complete:
+                break
+        if not complete:
+            break
+    log(f"[{tag}] chordless 5-cycles: {len(cycles)} (complete={complete})  ({time.perf_counter()-tB:.1f}s)")
+    out["chordless_5cycles"] = len(cycles)
+    out["cycles_complete"] = complete
+    if cycles:
+        Cy = np.array(cycles, dtype=np.int64)
+        eids = np.zeros((len(cycles), 5), dtype=np.int64)
+        for c in range(5):
+            a, b = Cy[:, c], Cy[:, (c + 1) % 5]
+            eids[:, c] = [edge_index[(min(p, q), max(p, q))] for p, q in zip(a, b)]
+        ch5 = np.zeros(len(cycles))
+        own5 = y[Cy].sum(axis=1)
+        for s in range(0, len(cycles), step):
+            cnt = sum(Ci[eids[s:s+step, c]] for c in range(5))
+            ch5[s:s+step] = (cnt >= 2) @ y
+        hist_edges = [0, 0.5, 1.0, 1.5, 1.8, 1.9, 2.0, 2.1, 2.2, 2.5, 3]
+        h, _ = np.histogram(ch5, bins=hist_edges)
+        log(f"[{tag}] 2-of-5 charge histogram: " + ", ".join(f"[{a},{b}):{c}" for a, b, c in zip(hist_edges[:-1], hist_edges[1:], h)))
+        log(f"[{tag}] max 2-of-5 charge {ch5.max():.6f} (budget 2); violated (float): {(ch5 > 2).sum()}; max cycle own sum {own5.max():.6f}")
+        order5 = np.argsort(-ch5)
+        viol5 = []
+        for idx in order5:
+            if ch5[idx] < 2 - 1e-7:
+                break
+            cnt = sum(Ci[eids[idx, c]] for c in range(5))
+            members = np.flatnonzero(cnt >= 2)
+            exact = sum((yq[m] for m in members), start=Fraction(0))
+            if exact > 2:
+                viol5.append((exact, idx, members))
+        log(f"[{tag}] exact 2-of-5 violated: {len(viol5)}; total exact violation {float(sum((v[0]-2 for v in viol5), start=Fraction(0))):.9f}")
+        cyc_cls = Counter("-".join(sorted(classes[v] for v in cycles[idx])) for _, idx, _ in viol5)
+        log(f"[{tag}] violated 2-of-5 by class: {dict(cyc_cls)}")
+        out["max_2of5_charge"] = float(ch5.max())
+        out["violated_2of5"] = len(viol5)
+        for exact, idx, members in viol5:
+            cyc = cycles[idx]
+            pts = [reps[eids[idx, c]] for c in range(5)]
+            out["atoms"].append({
+                "kind": "2-of-5", "threshold": 2,
+                "points": [[str(x), str(yv)] for x, yv in pts],
+                "charge": str(exact), "charge_float": float(exact), "budget": 2,
+                "cycle": list(cyc), "classes": [classes[v] for v in cyc],
+                "angles": [angles[v] for v in cyc],
+                "charged_placements": int(len(members)),
+            })
+        for idx in order5[:5]:
+            cyc = cycles[idx]
+            log(f"[{tag}]   top 2-of-5 charge {ch5[idx]:.6f} cycle {cyc} classes {[classes[v] for v in cyc]} angles {[round(angles[v],2) for v in cyc]} own {own5[idx]:.4f}")
+    (HERE / f"sep-{tag}.json").write_text(json.dumps(out, indent=1))
+    log(f"[{tag}] done in {time.perf_counter()-t0:.1f}s; wrote sep-{tag}.json with {len(out['atoms'])} violated atoms")
+
+
+if __name__ == "__main__":
+    main()

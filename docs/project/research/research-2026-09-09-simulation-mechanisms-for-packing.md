@@ -112,7 +112,7 @@ them.
 
 `required_side(c) = max(hix - lox, hiy - loy)` (`packing/sqsearch/src/geom.rs`), so only
 the squares attaining the extremes of the binding span can reduce it.
-**Measured here**, exp-134: at the trivial grid, over 8,000 proposals per kind per cell
+**Measured here**, exp-155: at the trivial grid, over 8,000 proposals per kind per cell
 at scales `0.01`, `0.05` and `0.2` alike, **no single-square proposal lowers the
 objective at all** for any tested cell except `n = 5`, while a quarter to a third of
 proposals change it and every one of those raises it.
@@ -478,7 +478,7 @@ produce highly dense packings.”
 **Inference.** That is section 1.1, stated by Torquato and Jiao in 2009 about a
 different problem, before this repository measured it.
 The mechanism they identify as load-bearing is exactly the one `sqsearch` does not have,
-and the mechanism exp-135 added by hand and measured.
+and the mechanism exp-156 added by hand and measured.
 Their own justification for shrinking the cell rather than growing the particles is an
 operation count: growing polyhedra costs `d N n_v` per move while straining the cell
 costs `d(d + 1) / 2`, independent of `N`.
@@ -682,7 +682,7 @@ As a *feasibility projection* at a fixed container side it is a reasonable, chea
 operator: for each overlapping pair, separate the two squares along the minimum
 translation direction of the separating-axis test, share the correction between them,
 and iterate. That is a useful primitive here for a specific measured reason.
-exp-137 records that the LP quench returns separations non-negative only to solver
+exp-158 records that the LP quench returns separations non-negative only to solver
 tolerance, so an emitted pose needs a monotone repair before it is a packing, and the
 repair currently in use scales the centres apart, which can only raise the reported
 side. A projection repair moves only what is overlapping.
@@ -1329,9 +1329,9 @@ All are recorded in `packing/campaign/`.
   **This is the direct precedent for every inflation and compression scheme below**, and
   it says the loop is not the missing piece.
   What was missing in both attempts is a collective move, which section 1.1 measures and
-  exp-135 confirms.
-- **A simultaneous all-square perturbation move was then built and measured** (exp-135,
-  H-135, 2026-09-08). It takes `n = 17` from exactly `5.0` on every control seed to a
+  exp-156 confirms.
+- **A simultaneous all-square perturbation move was then built and measured** (exp-156,
+  H-158, 2026-09-08). It takes `n = 17` from exactly `5.0` on every control seed to a
   best of `4.682227`, a gap of `+6.70e-03` from Bidwell against the control’s
   `+3.2447e-01`; `n = 11` from `3.922761` to `3.886755`; `n = 26` from exactly `6.0` to
   `5.746574`; and `n = 10` from `+7.08e-04` to `+3.14e-07`, inside the `1e-4` basin
@@ -1341,15 +1341,15 @@ All are recorded in `packing/campaign/`.
   The failure is not gradual: above `n = 26` the arm either leaves the grid or it does
   not, and it does not.
 - **The cheap aggregate substitute for an inflation objective was measured and refuted**
-  (exp-136, H-136). Adding an isotropic `spread` term to the energy improved one cell of
+  (exp-157, H-159). Adding an isotropic `spread` term to the energy improved one cell of
   eleven and regressed three, including both proved controls, returning exactly `2√2` at
   `n = 5` where the control reaches the proved optimum on every seed.
   The verdict names the design error: `required_side` is minimised by a tight square and
   an aggregate spread term is minimised by a disc, so the term optimises a disc.
   **Any pressure-like term below has to carry the container’s shape**, which means a
   per-wall directional force rather than an aggregate.
-- **Basin hopping over the LP quench was built and accepted as a proposer** (exp-137,
-  H-137), improving four of five cells by `0.06` to `0.13` in median with disjoint seed
+- **Basin hopping over the LP quench was built and accepted as a proposer** (exp-158,
+  H-160), improving four of five cells by `0.06` to `0.13` in median with disjoint seed
   ranges at `n = 10` and `n = 19`, and settling nothing about record finding since no
   run came within `1e-2` of any record.
   Its recorded failure mode is the one section 4 is about: *the LP quench returns
@@ -1595,7 +1595,7 @@ whether that is enough on squares is exactly the kind of thing an arm settles.
 ### Rank 6. Constraint projection as a component, not as a search
 
 Independently of Rank 1, the projection operator is worth building on its own, because
-exp-137 recorded a specific defect it fixes: the LP quench emits poses whose separations
+exp-158 recorded a specific defect it fixes: the LP quench emits poses whose separations
 are non-negative only to solver tolerance, and the current repair scales all centres
 apart, which can only raise the reported side.
 A projection repair moves only the overlapping pair.
@@ -1649,7 +1649,7 @@ Where the reason is a repository measurement rather than a published one, it say
   cube and the square from their own studies for exactly this reason, and the retained
   torus annealer reports density-one packings for squares whenever `n` is a sum of two
   squares.
-- **An aggregate compaction surrogate.** Measured and refuted here, exp-136: an
+- **An aggregate compaction surrogate.** Measured and refuted here, exp-157: an
   isotropic spread term optimises a disc, improved one cell of eleven and regressed
   three including both proved controls.
   A pressure-like term has to carry the container’s shape, which means per-wall and
@@ -1705,7 +1705,7 @@ Where the reason is a repository measurement rather than a published one, it say
   “corresponds to non-trivial collective motions of the particle centroids … It is this
   collective motion that enables the algorithm to explore the configuration space more
   efficiently”, which is section 1.1 written about polyhedra seventeen years before
-  exp-134 measured it on squares.
+  exp-155 measured it on squares.
 - **Position-based dynamics has never been used as a packing optimiser**, and
   differentiating through it is measurably impossible: two independent implementations
   return a position gradient of `0.0000` and `-0.0020` where the analytic answer is
@@ -1888,8 +1888,8 @@ Where the reason is a repository measurement rather than a published one, it say
 - [Annealing for square packing, and how far it actually reaches](research-2026-09-08-annealing-for-square-packing.md),
   which this document extends
 - [Algorithms and tooling for square packing](research-2026-08-22-square-packing-algorithms-and-tooling.md)
-- Campaign artifacts: exp-006, exp-011, exp-012, exp-134, exp-135, exp-136, exp-137,
-  exp-138; hypotheses H-002, H-004, H-012, H-013, H-019, H-135, H-136, H-137;
+- Campaign artifacts: exp-006, exp-011, exp-012, exp-155, exp-156, exp-157, exp-158,
+  exp-159; hypotheses H-002, H-004, H-012, H-013, H-019, H-158, H-159, H-160;
   exploration
   [X-025](../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md)
 - Repository artifacts read directly:

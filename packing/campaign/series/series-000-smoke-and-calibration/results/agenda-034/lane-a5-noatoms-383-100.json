@@ -1,0 +1,122 @@
+{
+ "family": "ceiling-family-383-100.json",
+ "outer_side": "383/100",
+ "square_side": "9977/10000",
+ "placements": 88,
+ "orbits": 11,
+ "vertices": 20504,
+ "membership_sets": 1517,
+ "maximal_cliques": 233,
+ "non_helly_cliques": 168,
+ "atom_cliques": 168,
+ "tau_star": {
+  "3/2": 120,
+  "5/3": 40,
+  "7/4": 8
+ },
+ "tau_all_exact": true,
+ "atoms_verified": true,
+ "rows_depth": 172,
+ "rows_atom": 0,
+ "with_atoms": false,
+ "float_optimum": 11.0,
+ "seconds": 3.2,
+ "primal_exact": "11",
+ "primal_float": 11.0,
+ "primal_route": "rationalised at denominator 8",
+ "weights_per_placement": [
+  "0",
+  "0",
+  "0",
+  "0",
+  "1/8",
+  "1/4",
+  "1/2",
+  "1/2",
+  "0",
+  "0",
+  "0"
+ ],
+ "tight_rows": 29,
+ "tight_depth_rows": 29,
+ "tight_atom_rows": 0,
+ "tight_atom_row_vectors": [],
+ "dual_bound_exact": "11",
+ "dual_bound_float": 11.0,
+ "dual_route": "rationalised at denominator 1",
+ "dual_support": [
+  {
+   "row": 47,
+   "kind": "depth",
+   "u": "1",
+   "row_vector": [
+    0,
+    0,
+    0,
+    0,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "row": 112,
+   "kind": "depth",
+   "u": "4",
+   "row_vector": [
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    0,
+    2
+   ]
+  },
+  {
+   "row": 148,
+   "kind": "depth",
+   "u": "4",
+   "row_vector": [
+    1,
+    0,
+    1,
+    1,
+    0,
+    2,
+    1,
+    0,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "row": 169,
+   "kind": "depth",
+   "u": "2",
+   "row_vector": [
+    2,
+    0,
+    2,
+    2,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "exact": true
+}

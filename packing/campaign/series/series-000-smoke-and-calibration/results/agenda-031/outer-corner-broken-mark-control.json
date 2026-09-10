@@ -1,0 +1,297 @@
+{
+  "checks": {
+    "container_containment": {
+      "holds": true
+    },
+    "core_membership": {
+      "holds": false,
+      "marks": [
+        {
+          "core_clearance": "-969173249/3477260000",
+          "local_coordinates": [
+            "-1206468/4346575",
+            "2657764/4346575"
+          ],
+          "mark_id": "bottom-left-a",
+          "point": [
+            "2336/3175",
+            "3152/3175"
+          ],
+          "square": "C-minus",
+          "strictly_inside_core": false
+        },
+        {
+          "core_clearance": "166045951/3477260000",
+          "local_coordinates": [
+            "212556/4346575",
+            "1963348/4346575"
+          ],
+          "mark_id": "top-left-a",
+          "point": [
+            "3152/3175",
+            "9856/3175"
+          ],
+          "square": "C-plus",
+          "strictly_inside_core": true
+        }
+      ],
+      "minimum_core_clearance": "-969173249/3477260000"
+    },
+    "pair_interior_disjointness": {
+      "holds": true,
+      "pairs": [
+        {
+          "gap": "0",
+          "interiors_disjoint": true,
+          "normal": [
+            "0",
+            "1"
+          ],
+          "squares": [
+            "A-minus",
+            "A-plus"
+          ],
+          "strictly_separated": false
+        },
+        {
+          "gap": "137/34225",
+          "interiors_disjoint": true,
+          "normal": [
+            "-35/37",
+            "12/37"
+          ],
+          "squares": [
+            "A-minus",
+            "C-minus"
+          ],
+          "strictly_separated": true
+        },
+        {
+          "gap": "601/925",
+          "interiors_disjoint": true,
+          "normal": [
+            "0",
+            "1"
+          ],
+          "squares": [
+            "A-minus",
+            "C-plus"
+          ],
+          "strictly_separated": true
+        },
+        {
+          "gap": "601/925",
+          "interiors_disjoint": true,
+          "normal": [
+            "0",
+            "1"
+          ],
+          "squares": [
+            "A-plus",
+            "C-minus"
+          ],
+          "strictly_separated": true
+        },
+        {
+          "gap": "137/34225",
+          "interiors_disjoint": true,
+          "normal": [
+            "35/37",
+            "12/37"
+          ],
+          "squares": [
+            "A-plus",
+            "C-plus"
+          ],
+          "strictly_separated": true
+        },
+        {
+          "gap": "8414/6845",
+          "interiors_disjoint": true,
+          "normal": [
+            "12/37",
+            "35/37"
+          ],
+          "squares": [
+            "C-minus",
+            "C-plus"
+          ],
+          "strictly_separated": true
+        }
+      ]
+    },
+    "segment_membership": {
+      "holds": true,
+      "owners": [
+        {
+          "endpoint_local_coordinates": [
+            [
+              "49/100",
+              "1"
+            ],
+            [
+              "59/100",
+              "1"
+            ]
+          ],
+          "square": "A-minus",
+          "whole_segment_in_closed_square": true
+        },
+        {
+          "endpoint_local_coordinates": [
+            [
+              "49/100",
+              "0"
+            ],
+            [
+              "59/100",
+              "0"
+            ]
+          ],
+          "square": "A-plus",
+          "whole_segment_in_closed_square": true
+        }
+      ],
+      "segment": [
+        [
+          "49/100",
+          "48/25"
+        ],
+        [
+          "59/100",
+          "48/25"
+        ]
+      ]
+    }
+  },
+  "claim_refuted": false,
+  "control": "broken-mark",
+  "control_expectation_met": true,
+  "core_side": "9977/10000",
+  "eleven_square_packing_claimed": false,
+  "geometry_holds": false,
+  "kind": "outer-pair-corner-audit/v1",
+  "q": "96/25",
+  "refuted_claim": "the specified outer pair and selected corner owners are incompatible",
+  "scope": "four-square local ownership compatibility",
+  "squares": [
+    {
+      "center": [
+        "1/2",
+        "71/50"
+      ],
+      "contained": true,
+      "name": "A-minus",
+      "unit_square": true,
+      "vertices": [
+        [
+          "0",
+          "23/25"
+        ],
+        [
+          "1",
+          "23/25"
+        ],
+        [
+          "1",
+          "48/25"
+        ],
+        [
+          "0",
+          "48/25"
+        ]
+      ]
+    },
+    {
+      "center": [
+        "1/2",
+        "121/50"
+      ],
+      "contained": true,
+      "name": "A-plus",
+      "unit_square": true,
+      "vertices": [
+        [
+          "0",
+          "48/25"
+        ],
+        [
+          "1",
+          "48/25"
+        ],
+        [
+          "1",
+          "73/25"
+        ],
+        [
+          "0",
+          "73/25"
+        ]
+      ]
+    },
+    {
+      "center": [
+        "531/370",
+        "47/74"
+      ],
+      "contained": true,
+      "name": "C-minus",
+      "unit_square": true,
+      "vertices": [
+        [
+          "4/5",
+          "12/37"
+        ],
+        [
+          "323/185",
+          "0"
+        ],
+        [
+          "383/185",
+          "35/37"
+        ],
+        [
+          "208/185",
+          "47/37"
+        ]
+      ]
+    },
+    {
+      "center": [
+        "531/370",
+        "5929/1850"
+      ],
+      "contained": true,
+      "name": "C-plus",
+      "unit_square": true,
+      "vertices": [
+        [
+          "4/5",
+          "3252/925"
+        ],
+        [
+          "323/185",
+          "96/25"
+        ],
+        [
+          "383/185",
+          "2677/925"
+        ],
+        [
+          "208/185",
+          "2377/925"
+        ]
+      ]
+    }
+  ],
+  "status": "control_passed",
+  "target_identity": {
+    "exact_four_squares": true,
+    "fixed_q_and_core": true,
+    "four_distinct_owners": true,
+    "holds": false,
+    "specified_corner_marks": false,
+    "specified_segment_M": true
+  },
+  "valid_target_counterexample": false
+}

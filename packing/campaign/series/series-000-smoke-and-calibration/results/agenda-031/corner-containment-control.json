@@ -1,0 +1,156 @@
+{
+  "checks": {
+    "core_ownership": {
+      "7/10_inside_core_radius": true,
+      "all_distances_below_7/10": true,
+      "core_side_squared": "99540529/100000000",
+      "holds": true,
+      "l1_distances": [
+        "2959/12700",
+        "8801/12700",
+        "2959/12700",
+        "4337/6350"
+      ],
+      "strictly_inside": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "pair_interior_disjointness": {
+      "holds": true,
+      "l1_sat_agree": true,
+      "minimum_l1_distance": "143/100",
+      "pairs": [
+        {
+          "diamonds": [
+            "A",
+            "B"
+          ],
+          "l1_disjoint": true,
+          "l1_distance": "36/25",
+          "sat_disjoint": true,
+          "sat_projection_distances": [
+            "11/25",
+            "36/25"
+          ]
+        },
+        {
+          "diamonds": [
+            "A",
+            "A-prime"
+          ],
+          "l1_disjoint": true,
+          "l1_distance": "36/25",
+          "sat_disjoint": true,
+          "sat_projection_distances": [
+            "36/25",
+            "36/25"
+          ]
+        },
+        {
+          "diamonds": [
+            "A",
+            "B-prime"
+          ],
+          "l1_disjoint": true,
+          "l1_distance": "287/100",
+          "sat_disjoint": true,
+          "sat_projection_distances": [
+            "287/100",
+            "99/100"
+          ]
+        },
+        {
+          "diamonds": [
+            "B",
+            "A-prime"
+          ],
+          "l1_disjoint": true,
+          "l1_distance": "72/25",
+          "sat_disjoint": true,
+          "sat_projection_distances": [
+            "1",
+            "72/25"
+          ]
+        },
+        {
+          "diamonds": [
+            "B",
+            "B-prime"
+          ],
+          "l1_disjoint": true,
+          "l1_distance": "243/100",
+          "sat_disjoint": true,
+          "sat_projection_distances": [
+            "243/100",
+            "243/100"
+          ]
+        },
+        {
+          "diamonds": [
+            "A-prime",
+            "B-prime"
+          ],
+          "l1_disjoint": true,
+          "l1_distance": "143/100",
+          "sat_disjoint": true,
+          "sat_projection_distances": [
+            "143/100",
+            "9/20"
+          ]
+        }
+      ],
+      "required_separation_squared": "2",
+      "sat_normals": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          -1
+        ]
+      ]
+    },
+    "unit_containment": {
+      "holds": false,
+      "margins": {
+        "A": "71/100",
+        "A-prime": "71/100",
+        "B": "7/10",
+        "B-prime": "71/100"
+      },
+      "minimum_margin": "7/10",
+      "required_radius_squared": "1/2",
+      "strictly_contained": {
+        "A": true,
+        "A-prime": true,
+        "B": false,
+        "B-prime": true
+      }
+    }
+  },
+  "claim_refuted": false,
+  "control": "containment",
+  "control_expectation_met": true,
+  "geometry_holds": false,
+  "horizontal_reflection_extension": {
+    "interiors_disjoint": false,
+    "l1_distance": "27/50"
+  },
+  "observed_failed_checks": [
+    "unit_containment"
+  ],
+  "status": "control_passed",
+  "target_identity": {
+    "actual_adjacency": true,
+    "all_four_owners_distinct": true,
+    "four_centers": false,
+    "four_mark_assignments": true,
+    "holds": false,
+    "parameters": true
+  },
+  "valid_n11_counterexample": false
+}

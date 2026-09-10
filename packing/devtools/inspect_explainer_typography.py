@@ -88,11 +88,21 @@ class MathContext(TypedDict):
 class InlineCodeContext(TypedDict):
     """Inline code's layout baseline and flat-bottomed ink relative to its context."""
 
+    role: str
     source: str
     family: str
     context_family: str
+    weight: str
+    color: str
+    context_color: str
     size: float
     context_size: float
+    background_color: str
+    border_styles: list[str]
+    border_widths: list[float]
+    white_space: str
+    overflow_wrap: str
+    word_break: str
     baseline_offset: float
     ink_bottom: float
     context_ink_bottom: float
@@ -132,9 +142,19 @@ _CODE_CONTEXTS = r"""crops => {
     const offset = inner.getBoundingClientRect().top - outer.getBoundingClientRect().top;
     inner.remove();
     outer.remove();
-    return [{source: code.textContent, family: style.fontFamily,
+    const role = code.closest('.kpress-figcaption, .kpress-footnotes')
+      ? 'support' : 'prose';
+    return [{role, source: code.textContent, family: style.fontFamily,
       context_family: surrounding.fontFamily,
+      weight: style.fontWeight, color: style.color, context_color: surrounding.color,
       size: parseFloat(style.fontSize), context_size: parseFloat(surrounding.fontSize),
+      background_color: style.backgroundColor,
+      border_styles: [style.borderTopStyle, style.borderRightStyle,
+        style.borderBottomStyle, style.borderLeftStyle],
+      border_widths: [style.borderTopWidth, style.borderRightWidth,
+        style.borderBottomWidth, style.borderLeftWidth].map(parseFloat),
+      white_space: style.whiteSpace, overflow_wrap: style.overflowWrap,
+      word_break: style.wordBreak,
       baseline_offset: offset, ink_bottom: inkBottom(style),
       context_ink_bottom: inkBottom(surrounding),
       padding_top: parseFloat(style.paddingTop),
@@ -151,6 +171,56 @@ def code_baseline_findings(rows: list[InlineCodeContext]) -> list[str]:
         for row in rows
         if not math.isfinite(row["baseline_offset"]) or abs(row["baseline_offset"]) > 1 / 16
     ]
+
+
+def code_print_style_findings(
+    screen: list[InlineCodeContext], printed: list[InlineCodeContext]
+) -> list[str]:
+    """Print drops code-chip paint while keeping its typography and line behavior."""
+    findings: list[str] = []
+    for medium, rows in (("screen", screen), ("print", printed)):
+        roles = {row["role"] for row in rows}
+        findings.extend(
+            f"no visible {role} inline code to verify in {medium}"
+            for role in ("prose", "support")
+            if role not in roles
+        )
+    findings.extend(
+        f"screen inline code {row['source']!r}: chip decoration is missing"
+        for row in screen
+        if row["background_color"] == "rgba(0, 0, 0, 0)"
+        or all(
+            style == "none" or width == 0
+            for style, width in zip(row["border_styles"], row["border_widths"], strict=True)
+        )
+    )
+    screen_rows = {(row["role"], row["source"]): row for row in screen}
+    for row in printed:
+        if row["background_color"] != "rgba(0, 0, 0, 0)":
+            findings.append(
+                f"print inline code {row['source']!r}: background is {row['background_color']}"
+            )
+        if any(
+            style != "none" and width != 0
+            for style, width in zip(row["border_styles"], row["border_widths"], strict=True)
+        ):
+            findings.append(f"print inline code {row['source']!r}: border remains visible")
+        if "Planetaire Mono Text" not in row["family"]:
+            findings.append(f"print inline code {row['source']!r}: family is {row['family']!r}")
+        screen_row = screen_rows.get((row["role"], row["source"]))
+        if screen_row is None:
+            findings.append(f"print inline code {row['source']!r}: no screen counterpart")
+            continue
+        if row["family"] != screen_row["family"] or row["weight"] != screen_row["weight"]:
+            findings.append(f"print inline code {row['source']!r}: font changed")
+        screen_ratio = screen_row["size"] / screen_row["context_size"]
+        print_ratio = row["size"] / row["context_size"]
+        if abs(screen_ratio - print_ratio) > 0.001:
+            findings.append(f"print inline code {row['source']!r}: relative size changed")
+        wrapping = ("white_space", "overflow_wrap", "word_break")
+        if any(row[name] != screen_row[name] for name in wrapping):
+            findings.append(f"print inline code {row['source']!r}: wrapping changed")
+    return findings
 
 
 def math_size_findings(rows: list[MathContext], *, require_roles: bool = False) -> list[str]:
@@ -601,6 +671,10 @@ def inspect(
                     findings.extend(
                         f"{medium}: {finding}" for finding in provenance_findings(page)
                     )
+            if check_supporting:
+                findings.extend(
+                    code_print_style_findings(report["code"]["screen"], report["code"]["print"])
+                )
             if check_supporting or check_math:
                 report["findings"] = findings
             return report

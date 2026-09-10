@@ -1,0 +1,65 @@
+{
+ "trajectory": [
+  {
+   "stage": "rows-0",
+   "objective": 11.017916786936624,
+   "rows": 15021,
+   "site_orbits": 1950,
+   "sites": 15085,
+   "atom_orbits": 2566,
+   "atom_budget": 1.404643107499711,
+   "positive_atoms": 14,
+   "site_support": 51,
+   "dual_support": 117,
+   "lp_seconds": 106.0517342029998,
+   "simplex_iterations": 6676,
+   "seconds": 132.02340072700463,
+   "wall": 1788950932.3663511
+  },
+  {
+   "stage": "atom-separation",
+   "violated_orbits": 803,
+   "new_orbits": 400,
+   "top_violation": 0.22126276500000008,
+   "classes": {
+    "29-axis-axis": 104,
+    "29-axis-other": 141,
+    "29-29-axis": 8,
+    "axis-axis-axis": 22,
+    "axis-axis-other": 95,
+    "axis-other-other": 22,
+    "29-other-other": 1,
+    "other-other-other": 7
+   },
+   "seconds": 93.61497095399682,
+   "wall": 1788951026.249148
+  },
+  {
+   "stage": "atoms-1",
+   "objective": 11.017916783649405,
+   "rows": 15021,
+   "site_orbits": 1950,
+   "sites": 15085,
+   "atom_orbits": 2966,
+   "atom_budget": 1.4046431004459519,
+   "positive_atoms": 42,
+   "site_support": 93,
+   "dual_support": 129,
+   "lp_seconds": 233.7433402339957,
+   "simplex_iterations": 24677,
+   "seconds": 464.91868377100036,
+   "wall": 1788951265.2616293
+  }
+ ],
+ "note": "at-n",
+ "meta": {
+  "scale": "383/382",
+  "carried_rows": 15021,
+  "dropped_rows": 0,
+  "old_rows": 15021,
+  "wall_start": 1788950800.3429432,
+  "final": "at-n",
+  "rows_complete": false,
+  "atom_rounds": 1
+ }
+}
