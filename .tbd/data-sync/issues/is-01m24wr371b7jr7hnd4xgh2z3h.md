@@ -3,9 +3,9 @@ type: is
 id: is-01m24wr371b7jr7hnd4xgh2z3h
 title: Independently review A6 all-site obstruction and fixed-support cut receipts
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies:
@@ -13,7 +13,11 @@ dependencies:
     target: is-01m24tw635b6tfjj1wb2awvkff
 parent_id: is-01m24tw635b6tfjj1wb2awvkff
 created_at: 2026-09-10T05:30:46.358Z
-updated_at: 2026-09-10T07:13:17.907Z
+updated_at: 2026-09-10T07:19:33.683Z
+closed_at: 2026-09-10T07:19:33.682Z
+close_reason: Independent source admission, scoped corrections, maintained exact readers, retained receipts and controls are published in PR139 commit 0c4c41b40a6200918b5954a07ccf9647dc8bca5c. All 45 pre-push steps pass, including 4923 behavioral tests; 25 focused reader controls passed. The matching full branch checkpoint remains separately open under think-yl6y before finalization/merge.
+resolution: null
+duplicate_of: null
 ---
 Independently admit the A6 point family, every retained old atom orbit, the six separated threshold-orbit charges, and the seven-row fixed-support upper certificate against complete published source inputs. Retain maintained exact readers, source/receipt bindings, controls and the distinction between fixed-support upper bounds, selected-row lower candidates and the global packing bracket. Math admission is complete in the staged PR139 correction; close after the adopted files are published and their required integration checks pass. Parent reconciliation: think-a4an; final combined checkpoint: think-yl6y.
 
