@@ -1,13 +1,17 @@
 ---
 type: is
 id: is-01m24nswnk9b76cq0hdgenfceq
-title: Review PR 139 together with the n11 evidence branch for merge readiness
+title: Finalize and merge the combined n11 milestone and consolidate takeaways
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 13
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m24tw131mnym4p7mpngnhsbt
+  - type: blocks
+    target: is-01m24vex03yjx6wdsssw68r9kk
 child_order_hints:
   - is-01m24pyxdsrz809h9cp4bwtcmc
   - is-01m24pyzhebzvqcggzf1dp0aw9
@@ -16,6 +20,10 @@ child_order_hints:
   - is-01m24pz58h8cybgv362apngbdn
   - is-01m24pz7cfbh7nxwa9mbv3xza3
 created_at: 2026-09-10T03:29:25.138Z
-updated_at: 2026-09-10T03:49:48.554Z
+updated_at: 2026-09-10T05:13:05.014Z
 ---
-Reconcile the author-updated combined PR139 into a coherent milestone with carefully scoped claims and independent review of corrections. Published six-findings review: https://github.com/jlevy/squares/pull/139#pullrequestreview-5162420994 at head58ee1782, which includes PR145 and147. Earlier conflict/session-ID findings withdrawn after author merge. T024-T026 proof chain and constants passed focused review; no full all-angle replay performed here. Author owns combined-branch edits; root reviews incoming changes with Astra Max math and Sol integration/CI. Full combined checkpoint follows correction/source freeze. Existing30-minute heartbeat updated. No new scientific targets.
+User authorizes merging the reviewed PR137/142/145/147 stack first, then root takeover of PR139 corrections and merge after independent review and matching full validation. Track six findings in review https://github.com/jlevy/squares/pull/139#pullrequestreview-5162420994. Root owns integration and shared records; Sol checks CI and mechanical integration; Astra Max checks consequential mathematical scope. Consolidate takeaways across all PRs into current evidence docs and PR139. Preserve historical claims with corrections, exact hypotheses and quantifiers, and open alternatives. No new scientific experiments. Keep the existing public native usage payload approval block intact.
+
+## Notes
+
+Owner stack137/142/145/147 merged via GitHub native asynchronous stack merge at1c1db463; finalization branch8aae89e8 integrates main into139. Scope corrections reviewed PASS WITH SCOPE by Astra Max; Sol mechanical audit complete. Matching final139 full checkpoint still required after source freeze. User now authorizes unattended continuation aftermerge in three2–4h blocks; plannedthree3hblocks, AstraMaxstrategyinflight,30minheartbeatupdated. Keep finalization separate from newbranch research registration.

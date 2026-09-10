@@ -5,12 +5,12 @@ title: Reproduce the measured results as plans
 kind: task
 status: open
 priority: 1
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-09-strategy-plans-as-a-shared-language.md
+version: 2
+spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T03:38:36.818Z
-updated_at: 2026-09-10T03:38:36.818Z
+updated_at: 2026-09-10T03:53:00.078Z
 ---
 A plan that cannot restate a result already measured is not yet a description of it. Port these four into plan documents and check each reproduces its number:
 

@@ -5,11 +5,11 @@ title: "Fix D-489: corner-dual salvage screen refuses any mass-n source"
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-09T16:22:47.115Z
-updated_at: 2026-09-09T16:22:47.115Z
+updated_at: 2026-09-10T04:15:00.467Z
 ---
 D-489. `devtools/screen_corner_dual_salvage.py:_source_receipt` requires the source
 family's `verify_ceiling` receipt to carry `failures == ["K3 total weight at least n"]`
@@ -55,3 +55,7 @@ the CLI, so there is no receipt for the corrected numbers.
 Narrative: agenda-033 lane X1
 (packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-x1-corner-conditioning-is-mass-neutral.md).
 Register entry: D-489 in `packing/defects.yaml`.
+
+## Notes
+
+PR139 final review corrected the D489 inference and annotated exp137/138 without changing their exact negative verdicts. Guard repair remains a prerequisite before CLI reuse on mass-eleven sources. Admission must preserve all geometry/net/symmetry/depth conditions and reject unrelated failures; blindly accepting any failure list is not authorized by deletion inheritance. Larger source mass alone need not yield a larger survivor after geometry changes. No new target run in finalization.

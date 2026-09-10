@@ -3,92 +3,38 @@ type: is
 id: is-01m23fkwbxxcyeknacny62nhhf
 title: "Certificate format cannot express two atom classes: K5 clique and K6 floor"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 2
+version: 5
 labels: []
 dependencies: []
 created_at: 2026-09-09T16:22:02.365Z
-updated_at: 2026-09-10T04:09:05.868Z
+updated_at: 2026-09-10T05:37:54.184Z
 ---
-The plateau reader separates cut families that the certificate format cannot express, and
-that is now the blocker on turning any separation work into a bound.
+Extend the certificate format and both covering routes to retain the weighted and floor charges already returned by the separator. Source: agenda034 lane A4 finding P10 and lane A5 F6. This is a representation and verification prerequisite, not evidence that the unconditional language or conditional route is exhausted.
 
-Measured 2026-09-09 in agenda-033 lane A4
-(packing/campaign/series/series-000-smoke-and-calibration/results/agenda-033/lane-a4-separating-the-plateau-dual-at-153-40.md,
-finding P10), confirmed by lane A5's sharpening loop
-(.../lane-a5-the-fixed-support-maximum-under-the-atom-classes.md, F6).
+Preserve distinct charge semantics. A ThresholdAtom(S,k,w) charges w*1[count>=k]. A floor atom with nonnegative integer multiplicities a, positive integer t and nonnegative w charges w*floor(a(P)/t), with budget w*floor(a(S)/t). These are not equivalent when a=1 and |S|>=2k. Use separate tagged records or an explicit charge mode; retain backward compatibility for existing frozen threshold records without reinterpreting their bytes.
 
-The freeze path writes `atoms` (point atoms) and `threshold_atoms`
-(`ThresholdAtom.to_record()`), and `devtools.decide_threshold_certificate` parses exactly
-those. A `ThresholdAtom` is `(S, k, w)`: it charges `w` to every core holding at least `k`
-points of a finite set `S`, one unit per core.
+Admission controls must include a 2-of-5 atom with a core containing four sites: threshold charge1 versus floor charge2. A T025 2-of-3 replay alone cannot catch the semantic mismatch. Also test zero weights/multiplicities where admitted, invalid signs and denominators, declared-budget mismatch, shared sites, closed-boundary membership, and D4 orbit accounting. The counting proof is sum_i floor(a(P_i)/t)<=floor(a(S)/t) for disjoint cores because their site traces are disjoint.
 
-Two of the three cut families the reader can separate do not fit in it:
+Implement exact event-cell coverage and the separately structured interval route with appropriate sound bounds. Re-decide unchanged T025/T026 through the preserved threshold mode and verify the same exact charges and budgets. Freeze a richer certificate only if its entire admissible domain passes both routes and its budget meets the declared physical counting threshold. Valid separated cuts alone do not constitute such a certificate.
 
-- A K5 budget-one clique atom carries INTEGER MULTIPLICITIES. The one A4 returned is
-  `a = (1, 2, 2, 1, 1)` at `t = 4`, `a(S) = 7`, budget `floor(7/4) = 1`, floor charge
-  `3/2` against this dual -- violation `1/2`, the hardest small cut found, charging all 42
-  members of the heaviest rank-one clique.
-- A K6 Chvatal-Gomory floor atom charges `floor(a(P)/t)`, which EXCEEDS ONE on some cores.
-  A4 returned five of them, at violations `1109/200` through `827/100`, each using
-  multiplicity `t-1` on most of its points. A5 separated seventeen more in its sharpening
-  loop, which is what takes the fixed-support optimum from `32/3` to exactly `10`.
-
-So neither can be frozen into a certificate today even when it does cut. A4 states the
-consequence plainly: had the LP value dropped on a K5 or K6 column, the freeze-and-gate
-step its brief specified would have had nothing to write. Every future run of the loop
-that finds its best cut outside two-of-three hits the same wall.
-
-The validity argument is already written down and is one line: for disjoint cores,
-`sum_P floor(a(P)/t) <= floor(a(S)/t)`, because the floor is superadditive and disjoint
-cores have disjoint traces on `S`. A4's LP driver already prices such a column correctly
--- coefficient `sum_images floor(a(P)/t)`, cost `|orbit| * floor(a(S)/t)`, the orbit's
-budget -- so the pricing question is settled and only the record format and the two gate
-routes are missing.
-
-What to build:
-
-1. Generalise the frozen atom record from `(S, k, w)` to `(S, a, t, w)` with integer
-   multiplicities and an explicit threshold, keeping `ThresholdAtom` as the special case
-   `a = 1, t = k` so every frozen certificate in the tree still reads. The charge is
-   `w * floor(a(P)/t)` and the budget contribution `w * floor(a(S)/t)`.
-2. Teach both routes of the gate to decide it: the exact event-cell sweep and the interval
-   branch and bound. They must still fail differently -- that is the point of having two.
-3. A control that refuses a record whose declared budget disagrees with
-   `floor(a(S)/t)` recomputed from its own `a` and `t`, since a wrong budget is the one
-   error that would make an unsound certificate look accepted.
-4. Re-decide the frozen T-025 and T-026 certificates through the generalised path and
-   confirm byte-identical verdicts, as the migration control.
-
-This is X-024 slice E1 in substance, but its motivation is now unconditional: the
-conditional line it was originally scoped for is closed (lane X1, H-146's disposition).
+The retained A5 value10 is exact for its finite final row set and an upper bound for the full rank-one closure on that fixed support. The corrected H155 conditional route remains live; this format may be useful to either strand. Primary paths use packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/.
 
 ## Notes
 
-NARROWED 2026-09-10 (agenda-034 lane A6, and PR 139 finding on the same point).
+Sol high completed a private K6 checkpoint under /private/tmp/n11-floor-atom-prep/:
+floor.py, floor_interval.py, decide_floor_certificate.py, synthetic tests and a contract.
+Nineteen synthetic tests, Ruff and BasedPyright passed on project Python3.14.
+No retained certificate or scientific target ran, and no shared source or registry changed.
 
-The title and the original framing read as if the certificate format blocked separation
-work in general. It does not. It blocks exactly two named atom classes:
+Remaining: independent source review, production CLI/source/parallel adapter, legacy
+dispatch integration, low-memory slab route and affected gates. K5 source mapping and
+admission remain open; the general floor representation may express its budget-one
+subclass under the reviewed total-weight premises. This does not close think-g3j7.
+The six A6 cuts use existing threshold semantics and do not depend on this extension.
+Model identity comes from dispatch: gpt-5.6-sol at high, not the worker's generic footer.
 
-  K5 budget-one CLIQUE atoms, which carry integer multiplicities; and
-  K6 Chvatal-Gomory FLOOR atoms, whose charge exceeds one on some cores.
-
-Everything below about those two classes stands unchanged, and so does the build list.
-
-What is NOT blocked, and this is the correction. The route that now matters at 153/40 runs
-entirely inside the existing format. Lane A6 separates six atoms from the depth-one
-certificate -- two two-of-three (|S| = 3, k = 2) and four three-of-five (|S| = 5, k = 3),
-budget 1 each -- and they take the blocking support from exactly 11 to 10.4210526, bracketed
-exactly. All six are (S, k) threshold atoms with uniform multiplicity, which ThresholdAtom
-already expresses, so every one of them is FREEZABLE AND GATEABLE TODAY. The loop that found
-them deliberately discards the reader's non-uniform budget-one atoms and its Chvatal-Gomory
-giants precisely because P10 showed those cannot be frozen, and it reaches 10.42 without them.
-
-So this bead is a widening of the format for two classes, not a blocker on the live route.
-Wherever the record said the format blocks separation work generally, it now names the two
-classes instead: X-024 section 5 carries the narrowed statement.
-
-Priority unchanged: the two classes are still where the reader finds its largest violations,
-and a future loop whose best cut lands outside two-of-three and three-of-five still hits this
-wall.
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
