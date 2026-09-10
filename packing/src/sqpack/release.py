@@ -8,9 +8,43 @@ reasons.
 
 from __future__ import annotations
 
-#: The edition the figures and the explainer state. Choose at most one patch bump per
-#: merge, and keep the version fixed while revising that pull request.
-PUBLICATION_VERSION = "v0.3.0"
+from typing import NamedTuple
+
+
+class PublicationHistoryEntry(NamedTuple):
+    """One public edition and the result scope it first carried."""
+
+    version: str
+    first_labeled: str
+    result_scope: str
+
+
+#: The two editions retained in the explainer's short public history, newest first.
+#: Dates say when the version label first appeared in Git, rather than when a theorem
+#: was proved or when the page was deployed.
+PUBLICATION_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.0",
+        first_labeled="September 10, 2026",
+        result_scope=(
+            "The current lower-bound edition: T-025 excludes the endpoint "
+            "$191/50 = 3.82$, and T-026 proves the weak limit "
+            "$s(11) ≥ 3.826447410572939744…$."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.3.0",
+        first_labeled="September 8, 2026",
+        result_scope=(
+            "The 3.81-result edition: T-018's point certificate proves "
+            "$s(11) ≥ 381/100 = 3.81$."
+        ),
+    ),
+)
+
+#: The edition the figures and the explainer state. Choose at most one version bump per
+#: merge, and keep it fixed while revising that pull request.
+PUBLICATION_VERSION = PUBLICATION_HISTORY[0].version
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
 #: join below then drops it and the stray space with it, so going final is one edit.
@@ -28,7 +62,7 @@ PUBLICATION_STATUS = "DRAFT"
 #: the exception, and deliberately: it is rendered on every deploy and stamps the commit
 #: it is built from (`render_explainer.page_edition`), so its hash moves with every push
 #: while this one moves when an edition is cut.
-PUBLICATION_REVISION = "33cd4760"
+PUBLICATION_REVISION = "277f8b1a"
 
 #: The version, written the one way it is ever written: `v0.1.0-3bd273e6`. Semver core,
 #: then the revision, in the shape a build identifier takes everywhere else.
@@ -47,4 +81,4 @@ PUBLICATION_STAMP = f"{PUBLICATION_VERSION}-{PUBLICATION_REVISION}"
 PUBLICATION_EDITION = " ".join(part for part in (PUBLICATION_STATUS, PUBLICATION_STAMP) if part)
 
 #: The date that edition carries, written the way a reader reads it.
-PUBLICATION_DATE = "September 8, 2026"
+PUBLICATION_DATE = PUBLICATION_HISTORY[0].first_labeled

@@ -739,13 +739,16 @@ the edition stamp is the one `sqpack.release` names, that every repository link 
 that commit and resolves on GitHub, and that the PDF is a PDF.
 
 **The stamp in the credits has two parts, and they move on different clocks.** The
-version (`v0.3.0`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
-is the commit the page is built from, read at render time (`page_edition()`), so it
-changes on every push, and a reader of the deployed page sees exactly which commit they
-are looking at. The atlas footer and the generated claim documents are checked in and
-drift-checked byte for byte, so they carry the pinned `PUBLICATION_REVISION` instead
-(`PUBLICATION_EDITION` and `edition_file()`); the two spellings agree on the status and
-the version and differ only in which commit they name.
+current version and publication date come from the first entry in `PUBLICATION_HISTORY`
+in `src/sqpack/release.py`; the page renders the two retained history entries from that
+same source. Each history date means the date on which its version label first appeared
+in Git. The hash after the version is the commit the page is built from, read at render
+time (`page_edition()`), so it changes on every push, and a reader of the deployed page
+sees exactly which commit they are looking at.
+The atlas footer and the generated claim documents are checked in and drift-checked byte
+for byte, so they carry the pinned `PUBLICATION_REVISION` instead (`PUBLICATION_EDITION`
+and `edition_file()`); the two spellings agree on the status and the version and differ
+only in which commit they name.
 
 **Cutting an edition** is the one manual step, and it is editorial: it changes the
 version, and with it the revision the committed artifacts are stamped with.
@@ -754,9 +757,10 @@ Keep the chosen version fixed throughout a pull request; further edits update th
 content revision, not the patch number.
 To cut one:
 
-1. Set `PUBLICATION_VERSION`, `PUBLICATION_REVISION` (the short hash of the commit whose
-   content the edition describes, which is by construction older than the commit that
-   carries the bump) and `PUBLICATION_DATE` in `src/sqpack/release.py`.
+1. Add the edition to the front of `PUBLICATION_HISTORY` with the date its label will
+   first appear in Git, and set `PUBLICATION_REVISION` to the short hash of the commit
+   whose content the edition describes.
+   That revision is by construction older than the commit that carries the bump.
 2. Rebuild the atlas family:
    `uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update`
    (see the cairo note under Supported Environment), and regenerate the claim documents:

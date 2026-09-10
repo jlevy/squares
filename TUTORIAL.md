@@ -108,8 +108,8 @@ is a weak limit bound like the two above.
 T-026 gives exact certificates at every positive rational dilation strictly below that
 limit, including sides above `3.82`; it supplies no certificate at the irrational
 supremum itself. The detailed lesson below starts with the simpler point-only T-018
-certificate; the
-[standalone explainer](https://jlevy.github.io/squares/#beyond-point-atoms-the-current-bound)
+certificate;
+[the standalone v0.4.0 explainer](https://jlevy.github.io/squares/#beyond-point-atoms-the-current-bound)
 returns to T-025 and T-026 in its final advanced section.
 
 Two different quantities get called a gap in this subject, and this document keeps them
@@ -1244,6 +1244,7 @@ definition and the one-place list of apparently novel results.
 | Fixing the angles and every pair’s separating axis makes minimising `s` a linear program | proved | Nothing about *which* cell is best; that choice is the combinatorial hard part |
 | Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
 | [`s(11) ≥ 2 + 4/√5`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
+| [T-025](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md) excludes side `191/50 = 3.82`; [T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md) proves `s(11) ≥ 3.826447410572939744…` as a weak limit | verified (`V4`); exact event-cell and interval decisions of the finite certificates, followed by an exact dilation argument | T-026 supplies no certificate or no-fit decision at its displayed endpoint. Neither result determines `s(11)` |
 | [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. Both this falsification and the adjacent repair are this project’s findings |
 | [Trump’s pose is locally isolated at fixed side](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Consequently, it is a strict local minimum of side in the anchored pose–side chart, modulo finite symmetries. This is not global optimality or an explicit isolation radius. Apparently novel here, not externally peer-reviewed |
 | The one-dimensional class-angle optimum is a corner, with signed one-sided derivatives of about `−0.1747` and `+0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |

@@ -67,6 +67,7 @@ from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
 from sqpack.release import (
     PUBLICATION_DATE,
+    PUBLICATION_HISTORY,
     PUBLICATION_REVISION,
     PUBLICATION_STATUS,
     PUBLICATION_VERSION,
@@ -379,6 +380,14 @@ def page_edition() -> str:
     """
     stamp = f"{PUBLICATION_VERSION}-{link_revision()[:8]}"
     return " ".join(part for part in (PUBLICATION_STATUS, stamp) if part)
+
+
+def publication_history_markdown() -> str:
+    """The retained edition history, rendered from the release metadata."""
+    return "\n".join(
+        f"- **{entry.version} — {entry.first_labeled}.** {entry.result_scope}"
+        for entry in PUBLICATION_HISTORY
+    )
 
 
 def repo_file(path: Path, revision: str | None = None) -> str:
@@ -2220,6 +2229,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
         "EDITION": page_edition(),
+        "VERSION_HISTORY": publication_history_markdown(),
         "PRIOR_YEAR": str(PRIOR_YEAR),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "PRIOR_MEMO_YEAR": str(PRIOR_MEMO_YEAR),

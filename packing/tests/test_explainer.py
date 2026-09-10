@@ -46,7 +46,7 @@ from devtools.render_explainer import (
 )
 from devtools.render_explainer import load_certificate as load
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
-from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
+from sqpack.release import PUBLICATION_HISTORY, PUBLICATION_STATUS, PUBLICATION_VERSION
 from sqpack.yamlio import safe_load
 
 
@@ -786,3 +786,30 @@ def test_the_page_stamps_the_commit_it_is_built_from(page: str, document: str) -
     assert edition.startswith(lead), edition
     assert f"({edition})" in page
     assert f"({edition})" in document
+
+
+def test_version_history_is_source_derived_and_has_two_entries(
+    page: str, document: str
+) -> None:
+    """The page history comes from release metadata rather than copied prose."""
+    match = re.search(
+        r"^## Version History\n\n(?P<history>.*?)(?=\n## )",
+        document,
+        re.MULTILINE | re.DOTALL,
+    )
+    assert match is not None
+    history = match.group("history")
+    assert len(re.findall(r"^- \*\*v", history, re.MULTILINE)) == 2
+    compact_history = " ".join(history.split())
+    for entry in PUBLICATION_HISTORY:
+        expected = f"- **{entry.version} — {entry.first_labeled}.** {entry.result_scope}"
+        assert " ".join(expected.split()) in compact_history
+        assert entry.version in page
+        assert entry.first_labeled in page
+
+
+def test_reader_facing_version_references_follow_release_metadata() -> None:
+    """Nearby entry points do not retain the previous edition number."""
+    for path in (REPO / "README.md", REPO / "TUTORIAL.md"):
+        assert PUBLICATION_VERSION in path.read_text()
+    assert "PUBLICATION_HISTORY" in (REPO / "development.md").read_text()

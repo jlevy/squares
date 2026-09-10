@@ -71,6 +71,10 @@ of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 {{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
 
+## Version History
+
+{{VERSION_HISTORY}}
+
 ## The Agentic Research Framework
 
 <div class="boxed-text">
