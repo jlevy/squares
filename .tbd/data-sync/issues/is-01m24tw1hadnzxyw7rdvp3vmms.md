@@ -5,7 +5,7 @@ title: "N11 overnight: admit parent domains and compare the fixed escape"
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
   - is-01m25430wcdx8wn8f3qs7b4qjv
   - is-01m268mz0me7vv3jy38c31y939
 created_at: 2026-09-10T04:57:58.569Z
-updated_at: 2026-09-10T18:38:43.524Z
+updated_at: 2026-09-10T19:12:20.716Z
 ---
 Implement and independently admit a necessary unit-parent centre-domain adapter, then prospectively register at most one paired comparison on the saved exp151 escape at tuple(0,0,0,7). The independent analytic review at /private/tmp/n11-parent-bound-independent-review.md passes the formula under exact unit rays, centre-preserving nearest-core selection, principal angular mismatch and the admitted global maximum bound D. Adopt that review under docs/project/reviews/ on the fresh post-PR139 branch before target use.
 
@@ -26,6 +26,4 @@ First check whether the fixed residual escape is outside its own necessary paren
 
 ## Notes
 
-BC326 remains the first active target lane. The pure exact adapter and source binder passed their focused and adversarial controls. The production command and closed result schema are now being finalized with one 120-second process cap over replay plus science, a 90-second scientific subcap, terminate plus two-second grace plus kill, schema-valid invalid outputs for source refusal, and independent recomputation of every saved complete or partial comparison. No scientific target may run until the implementation is committed cleanly and independently admitted.
-
-The translated-family realizability theorem does not decide this target. It gives unary parents for each fractional placement, while BC326 asks whether exp151's fixed residual or a selected anchored owner class survives a conditional necessary parent domain.
+BC326 remains the first active target lane. The exact adapter, source binder, closed schema and production runner have passed target-free independent admission: 56 focused tests plus adversarial deadline, publication, timeout, failed-readback, source-closure and stale-module controls; Ruff and BasedPyright pass. The translated-family realizability theorem remains separate: it gives unary parents for each fractional placement but does not decide the saved residual/anchored-owner comparison. Next: publish a clean implementation revision, prospectively register the unchanged exp151 residual, tuple (0,0,0,7), owner order, clocks, outcome meanings and fresh output path, then run once and independently read back. No target has run.
