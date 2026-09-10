@@ -5,7 +5,7 @@ title: "N11 explainer: teach the T-025/T-026 lower-bound ladder"
 kind: epic
 status: open
 priority: 1
-version: 13
+version: 14
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
@@ -17,7 +17,7 @@ child_order_hints:
   - is-01m25zs0ygtqsqfx233fhjrxqf
   - is-01m26b9kjzhrxhsw4dm5atkax2
 created_at: 2026-09-10T15:42:41.844Z
-updated_at: 2026-09-10T19:04:14.683Z
+updated_at: 2026-09-10T19:46:38.010Z
 ---
 Add a documentation block alongside the three scientific blocks to bring the public
 explainer up to the merged T-025/T-026 result. The block is editorial and does not
@@ -48,4 +48,6 @@ under think-i1fr, so this block must not claim V3 alignment.
 
 ## Notes
 
-Architecture and implementation are complete on codex/n11-explainer-current-bound. PR #148 is at 277f8b1a. The independent mathematical and prose audit is complete under think-0zc1: T-018 remains the visual teaching spine; T-025 and T-026 are stated at their exact scopes; endpoint certificate, weak limit, core, trace, and charge are now defined; the rational-density step is written out; and the point-only generator section is scoped explicitly. Local validation passed: 70 focused tests, Ruff, BasedPyright, prepared-render replay, deterministic 20-page PDF, print layout and its self-check, and desktop/mobile typography checks. The PR is still based on main because codex/n11-daytime-strategy is not yet published remotely. Retarget PR #148 to that branch once it exists, then require hosted CI to pass before marking ready. No unmerged scientific claim is used by the explainer.
+Architecture and implementation are complete on codex/n11-explainer-current-bound. Draft PR #148 is pushed at 35484ebd and titled “docs: publish the v0.4.0 n=11 lower-bound explainer.” It retains T-018 as the visual, first-principles spine; states T-025 at 191/50 and T-026 as the weak limit 3.826447410572939744… with the endpoint unresolved; defines the advanced terms before use; and adds the missing T-025/T-026 tutorial evidence row.
+
+The v0.4.0 release metadata drives the current version, date, exactly two rendered history entries, atlas stamps, and generated claim stamps. History dates record the first Git commit carrying each label: v0.4.0 on September 10, 2026 at 35484ebd, and the 3.81-result v0.3.0 on September 8, 2026 at ce3b1ab5. All directly affected checks pass, including 135 focused tests, static analysis, prepared HTML/Markdown drift, deterministic 20-page PDF/font validation, and the complete 324-case atlas gate. Hosted checks are running. Retarget PR #148 from main to codex/n11-daytime-strategy after that branch is published, then require stacked hosted checks before readiness. No unmerged research claim is used by the explainer.
