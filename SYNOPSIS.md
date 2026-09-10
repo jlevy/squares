@@ -425,7 +425,7 @@ case or experiment separately.
 | [Plan: Extend the Known-Best Atlas to `n = 324`, and Draw the Poster](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) | implementation plan | current | transient | — |
 | [Feature: Math Text Face Integration](docs/project/specs/active/plan-2026-09-07-math-text-face.md) | implementation plan | current | transient | — |
 | [Plan: A Video of Every Known-Best Packing, `n = 1..324`](docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md) | implementation plan | current | transient | — |
-| [Feature: Strategy Plans as a Shared Language](docs/project/specs/active/plan-2026-09-09-strategy-plans-as-a-shared-language.md) | implementation plan | current | transient | — |
+| [Feature: Packing Strategies as a Shared Language](docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
