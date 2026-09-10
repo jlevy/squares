@@ -1325,6 +1325,8 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 | **direction net** | The finite set of exact square orientations a certificate checks. A strict shrink condition lets a nearby net direction stand in for any orientation at all |
 | **event cell** | One open region of admissible centres on which the set of atoms a square covers is constant. Not a configuration-space cell, and never written bare |
 | **weighted fractional unavoidable-set certificate** | A finite weighted atom set whose total mass is below `n` but whose mass is at least one in every prescribed inner square; with the direction and shrink conditions, that tension is a lower bound on `s(n)` |
+| **endpoint certificate** / **weak limit** | An endpoint certificate rules out the exact container side it names. A weak limit rules out every smaller side through certificates approaching the displayed value, without deciding fit at that value |
+| **core** / **trace** / **charge** | A core is the shrunken closed square selected inside a physical unit square. Its trace on a finite site set `S` is the subset of `S` it contains. Its charge is the sum contributed by the point and threshold atoms it triggers |
 | **row generation** / **column generation** | Adding a deficient square-pose constraint, or adding a candidate atom site. Rows restrict the cover; columns give it more choices |
 | **dual depth** / **pricing** | The sum of dual pose weights covering one point, and the search for an absent site where that depth exceeds one |
 | **dual support** / **fractional packing** | The held poses with positive dual weight, and their interpretation as weighted, possibly overlapping squares whose depth is capped at one at the held sites. It is not a physical packing |

@@ -122,7 +122,7 @@ def test_certificate_comparisons_match_the_rendered_certificates(
     assert "what remains unknown about" not in document
     assert "A certificate written by a wrong program" not in document
     assert (
-        "The verifier rejects a certificate that fails the conditions, "
+        "The verifier rejects a point certificate that fails the conditions, "
         "regardless of how it was generated."
     ) in document
     assert "{{" not in rendered.markdown
@@ -387,14 +387,20 @@ def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
 
 def test_advanced_section_distinguishes_endpoint_and_weak_limit(document: str) -> None:
     current = current_bound_facts()
+    prose = " ".join(document.split())
     assert "## Beyond Point Atoms: The Current Bound" in document
-    assert "T-025 excludes the endpoint $L=191/50=3.82$" in document
-    assert current.bounded_side_decimal in document
-    assert "including rational sides above $3.82$" in document
-    assert "does not supply a certificate at the displayed endpoint" in document
-    assert "Each point-certificate bound shown in the interactive figures" in document
-    assert "threshold certificates use the repository" in document
-    assert "exact replay tools instead" in document
+    assert "**endpoint certificate** rules out the container side it names" in prose
+    assert "call this selected square a **core**" in prose
+    assert "Its **trace** on a core $P$ is the subset $P\\cap S$" in prose
+    assert "T-025 excludes the endpoint $L=191/50=3.82$" in prose
+    assert current.bounded_side_decimal in prose
+    assert "including rational sides above $3.82$" in prose
+    assert "does not supply a certificate at the displayed endpoint" in prose
+    assert "choose a rational $q<c$" in prose
+    assert "fit unchanged in that larger container" in prose
+    assert "Each point-certificate bound shown in the interactive figures" in prose
+    assert "threshold certificates use the repository" in prose
+    assert "exact replay tools instead" in prose
 
 
 def test_the_published_document_is_named_for_the_result(document: str) -> None:

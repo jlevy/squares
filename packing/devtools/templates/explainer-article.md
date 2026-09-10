@@ -40,12 +40,12 @@ per certificate; the prose is filled once, with the headline certificate's value
 The current certified bracket for this long-standing open geometry problem is
 ${{CURRENT_BOUND_INLINE_TEX}} \le s(11) \le {{BEST_PACKING_LONG_TEX}}$.
 
-The lower end is the weak limit ${{CURRENT_BOUND_DEC}}$ from T-026. “Weak” matters: the
-proof rules out every smaller container but does not decide whether eleven unit squares
-fit at that exact endpoint.
-T-026 supplies exact certificates at rational sides arbitrarily close to that limit,
-including sides above $3.82$. The largest side named by a separately retained endpoint
-certificate is $191/50 = 3.82$, established first by T-025.
+The lower end is the **weak limit** ${{CURRENT_BOUND_DEC}}$ from T-026: the proof rules
+out every smaller container but does not decide whether eleven unit squares fit at that
+exact value. By contrast, an **endpoint certificate** rules out the container side it
+names. T-026 supplies exact certificates at rational sides arbitrarily close to that
+limit, including sides above $3.82$. The largest side named by a separately retained
+endpoint certificate is $191/50 = 3.82$, established first by T-025.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
 open case of the square packing problem.[^novelty] Stromquist published the previous
@@ -561,10 +561,13 @@ proves, with no appeal to compactness.
 
 ## Beyond Point Atoms: The Current Bound
 
-The point proof gives each site a weight and charges a core whenever it contains that
-site. T-025 keeps that mechanism and adds **threshold atoms**. A threshold atom is a
-finite set $S$, a threshold $k$, and a nonnegative weight $w$. It charges a core $w$
-when the core contains at least $k$ points of $S$.
+The point proof selects a shrunken side-$B$ square inside each physical unit square;
+call this selected square a **core**. With point atoms, a core’s **charge** is its
+covered mass: each contained site contributes its weight.
+T-025 keeps that mechanism and adds **threshold atoms**. A threshold atom is a finite
+set $S$, a threshold $k$, and a nonnegative weight $w$. Its **trace** on a core $P$ is
+the subset $P\cap S$. The atom adds $w$ to the core’s charge when that trace has at
+least $k$ points.
 
 The budget changes with this rule.
 The selected cores lie strictly inside packed squares, so they are pairwise disjoint.
@@ -615,8 +618,10 @@ $$
 c = {{T026_FACTOR}}.
 $$
 
-It follows that every side below $(191/50)c$ is excluded.
-Rational density and upward embedding then give
+For every positive real side $x<(191/50)c$, choose a rational $q<c$ with $x<q(191/50)$.
+The scaled certificate rules out the larger side $q(191/50)$; a packing that fit at $x$
+would fit unchanged in that larger container.
+Therefore
 
 $$
 s(11) \;\ge\; {{CURRENT_BOUND_TEX}} = {{CURRENT_BOUND_DEC}}.
@@ -633,8 +638,10 @@ separately retained endpoint certificate at $3.82$. The
 
 ## Generator and Verifier
 
-The generator solves for the weights on a chosen set of sites $A$, arranged in orbits of
-$\mathbf{D}_4$. The weights, one per orbit, come from the covering linear program
+The generator and verifier in this section are the point-certificate tools behind
+Figures 4–7. The generator solves for the weights on a chosen set of sites $A$, arranged
+in orbits of $\mathbf{D}_4$. The weights, one per orbit, come from the covering linear
+program
 
 $$
 \tau^*(A, \Theta; L, B) \;=\; \min_{w \,\ge\, 0}\; \sum_{a \in A} w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
@@ -659,11 +666,11 @@ The search runs in floating point.
 None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
 certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1 through
 5 on it in exact rational arithmetic.
-The verifier rejects a certificate that fails the conditions, regardless of how it was
-generated. The gate that admits a certificate to the record asks for two verdicts: it
-accepts one only when the exact event-cell sweep and an interval branch-and-bound, which
-decide Condition 5 by distinct methods, both accept it and report the same least covered
-mass.
+The verifier rejects a point certificate that fails the conditions, regardless of how it
+was generated. The gate that admits a point certificate to the record asks for two
+verdicts: it accepts one only when the exact event-cell sweep and an interval
+branch-and-bound, which decide Condition 5 by distinct methods, both accept it and
+report the same least covered mass.
 
 Geometric constraints can strengthen the final count.
 Stromquist’s six-square proof rules out a container of side less than 3 by forcing four
