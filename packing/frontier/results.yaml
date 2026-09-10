@@ -1238,9 +1238,16 @@ results:
     next_rung: >-
       Exp145 completes the independent finite-union check. Assemble a mapped review
       packet for the shared analytic premises before revisiting confirmation. V4 for
-      the whole theorem requires mechanizing the analytic transfer. Test the 16
-      wall-aware owner footprints and exact component containment under BC317/BC318;
-      wider owner-class coverage is a new research result, not a rung change.
+      the whole theorem requires mechanizing the analytic transfer. Exp146 enlarged
+      twelve wall-aware footprints, but exp147 transferred no additional tuple.
+      Exp149 refuted the selected five-dot extension and exp150 showed its escape
+      survives individual owner-core constraints. Exp151 also refuted a
+      fixed sixth-site extension. Exp152 found a nonempty two-core site region, but
+      exp153 then refuted the entire fixed-D-plus-one-site family with188exact
+      support directions. Next audit a short actual-core obstruction and determine
+      whether it is a disjoint pair or only a higher-order obstruction before
+      drawing weighted-mass conclusions. Wider owner-class coverage remains a new
+      research result, not a rung change.
     notes: >-
       Registered at the post-sprint milestone from exp144, without a new target run or
       additional experiment cost. The exact exp143 source is Git blob

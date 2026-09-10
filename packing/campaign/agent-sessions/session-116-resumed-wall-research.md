@@ -281,12 +281,16 @@ session:
     inventory matched392rows and lint/format/types passed.
   - BC318's isolated adapter passed eight focused controls in5.92seconds plus lint and types. Astra Max
     identified three small source-admission guards; no repair or target is included in this checkpoint.
+  - 'full gate: fast at 8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e: passed (hosted PR merge; deferred checkpoint
+    also passed)'
+  - Hosted fast34380281277 and deferred34380372729 passed for PR142 head8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e.
+    All four deferred checkout logs confirm synthetic merge80b182105c02628b0682b1cbb36ff394aa0363cd, whose
+    immediate parents are70cae36142b814c64091136793b56a50568e6f4d and the PR head. The former merges b537d3ec8490de5cb14ad987f157cebb25269691
+    and e6a014493651ce90840d5045253f48987c9f187d.
   stop_reason: Exp146 and the bounded snapshot repair completed; BC318 continues from an explicit reviewed
     source-admission gap in Session117.
-  next_action: 'Certification under think-ta8s: publish this H144/BC322 result checkpoint and retain its
-    matching hosted status. BC-318 under think-waix then reviews and adopts the three isolated guard repairs,
-    freezes the admitted source and prospective exp147, and evaluates the bounded containment target once.'
-  certification_pending: think-ta8s
+  next_action: Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6
+    on codex/n11-owner-core-compatibility with separate prospective experiments and usage.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-116.yaml
 ---
@@ -308,6 +312,12 @@ Sol owns specified implementation and publication work.
 The resumed two-hour campaign ends at16:38:09UTC (9:38a.m.Pacific); final reconciliation
 begins at16:23:09UTC. Thirty-minute follow-ups continue from the actual checkpoint.
 This session’s accounting begins at14:35:49UTC, exactly where Session115’s receipt ends.
+
+**Certification addendum, 2026-09-09.** The pending status at the original stop is
+preserved in the historical account above.
+The subsequent PR142 fast and deferred checkpoint passed; the declared source head and
+tested synthetic merge are identified in the checks.
+No scientific result or original deadline changes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

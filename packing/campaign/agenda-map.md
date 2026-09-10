@@ -2,7 +2,7 @@
 
 # Agenda map
 
-312 agenda commitments across 33 agendas, as declared in each agenda's own frontmatter.
+313 agenda commitments across 33 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **9** in_progress, **15** ready, **12** tentative, **60** blocked, **56** stopped, **160** complete.
+- **8** in_progress, **15** ready, **12** tentative, **60** blocked, **56** stopped, **162** complete.
 
 - **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -53,8 +53,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
-| agenda-033 | `BC-323` | in_progress | 1 | process | measurement_validation | Is the overnight milestone reviewable with complete result scope, usage and next actions? | `think-ta8s` |
-| agenda-033 | `BC-320` | in_progress | 2 | insight | research | Can selective owner-pose refinement or compatibility remove the remaining difficult cases? | `think-ykd6` |
+| agenda-033 | `BC-324` | in_progress | 1 | correctness | measurement_validation | Which conclusions follow from the published owner-geometry evidence, and which still require routing,… | `think-rm3k` |
 | agenda-033 | `BC-321` | tentative | 3 | insight | research | Does the full-support pricing reserve merit time after the owner-geometry discriminators? | `think-en2r` |
 
 ## Blocked, and on what
@@ -178,7 +177,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-030 | completed |  |  |  |  | 7 | 7 | 14 |
 | agenda-031 | paused |  |  |  | 1 | 2 | 2 | 5 |
 | agenda-032 | completed |  |  |  |  |  | 6 | 6 |
-| agenda-033 | active | 2 |  | 1 |  |  | 5 | 8 |
+| agenda-033 | active | 1 |  | 1 |  |  | 7 | 9 |
 
 ## By program
 
@@ -359,12 +358,13 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-033 | `BC-317` | complete | Do the container walls enlarge any of the 16 coarse bottom-left common owner footprints, or rule… |
 | agenda-033 | `BC-318` | complete | Can larger footprints inherit either certified patch union by exact component containment? |
 | agenda-033 | `BC-319` | complete | Does a shared arrangement or a new five/six-dot cover exclude further owner cases? |
-| agenda-033 | `BC-320` | in_progress | Can selective owner-pose refinement or compatibility remove the remaining difficult cases? |
+| agenda-033 | `BC-320` | complete | Can selective owner-pose refinement or compatibility remove the remaining difficult cases? |
 | agenda-033 | `BC-321` | tentative | Does the full-support pricing reserve merit time after the owner-geometry discriminators? |
 | agenda-033 | `BC-322` | complete | Are compute, verification and coordination producing evidence efficiently? |
-| agenda-033 | `BC-323` | in_progress | Is the overnight milestone reviewable with complete result scope, usage and next actions? |
+| agenda-033 | `BC-323` | complete | Is the overnight milestone reviewable with complete result scope, usage and next actions? |
+| agenda-033 | `BC-324` | in_progress | Which conclusions follow from the published owner-geometry evidence, and which still require… |
 
-Open frontier: `BC-306`, `BC-320`, `BC-321`, `BC-323`.
+Open frontier: `BC-306`, `BC-321`, `BC-324`.
 
 ### `reach-table-ladder`
 

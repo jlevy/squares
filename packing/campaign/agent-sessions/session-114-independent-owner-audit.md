@@ -236,12 +236,14 @@ session:
     evidence.
   - 32 focused usage-meter tests passed before adoption; repaired publication-tail receipt validates.
   - No target run, no C4 promotion, and no global n11 bound change.
+  - 'full gate: fast at 8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e: passed (hosted PR merge; deferred checkpoint
+    also passed)'
+  - PR142 fast34380281277 and deferred34380372729 passed. All four deferred job checkout logs confirm
+    synthetic merge80b182105c02628b0682b1cbb36ff394aa0363cd containing this PR head.
   stop_reason: The controlled source and overnight strategy are published, but target launch missed the
     declared cutoff and the new PR checkpoint remains pending. Continue rather than extending this session.
-  next_action: 'BC-316 under think-yhw2: carry the unchanged published exp145 into Session115, then continue
-    the reviewed wall-aware geometry agenda. In parallel, think-ta8s obtains and reconciles the new stacked
-    milestone checkpoint.'
-  certification_pending: think-ta8s
+  next_action: Certification is discharged by the completed PR142 checkpoint; continue BC320 under think-ykd6
+    with separate Session121 usage.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-114.yaml
 ---
@@ -285,6 +287,10 @@ a.m. Pacific), with 30-minute thread wakeups.
 continuation.
 This does not extend this session or any frozen experiment clock: successor
 sessions carry later work, with final overnight reconciliation beginning at 14:30 UTC.
+
+**Certification addendum, 2026-09-09.** The pending state at the original stop is
+historical. PR142 subsequently passed matching fast and deferred validation; no original
+deadline or scientific finding changes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

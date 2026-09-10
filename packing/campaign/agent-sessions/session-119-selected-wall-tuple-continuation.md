@@ -1,5 +1,5 @@
 ---
-title: session-119 — publish and test the selected wall tuple
+title: "session-119 \u2014 publish and test the selected wall tuple"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -35,10 +35,10 @@ session:
       internal guards
     kill_condition: No target before clean publication; launch only by16:29:54UTC so the unchanged302-second
       allowance fits before the work cutoff.
-    fallback: Preserve unrun or partial status and the exact missing obligation; do not infer an H146 verdict.
-    outcome: The admitted source and prospective H147/exp149 were published cleanly at
-      b8731b30f9e501b6acb24946e57484a856aae7c2. The launch guard expired before a target could fit, so
-      exp149 remained unrun.
+    fallback: Preserve unrun or partial status and the exact missing obligation; do not infer an H146
+      verdict.
+    outcome: The admitted source and prospective H147/exp149 were published cleanly at b8731b30f9e501b6acb24946e57484a856aae7c2.
+      The launch guard expired before a target could fit, so exp149 remained unrun.
     evidence:
     - packing/cases/n11_five_dot_cover/selected-cover-source-admission.md
     stop_reason: The16:29:54UTC latest launch passed during source/protocol publication. No scientific
@@ -77,11 +77,16 @@ session:
   - No exp149 target has run.
   - Focused source, Ruff, format, BasedPyright, synopsis, documentation, ledger and diff checks passed;
     local and remote heads agreed exactly at publication.
+  - 'full gate: fast at 8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e: passed (hosted PR merge; deferred checkpoint
+    also passed)'
+  - Hosted fast34380281277 and deferred34380372729 passed for PR142 head8a35b4829ba81e51dff98ec4ef4ea89f4a0c5e4e.
+    All four deferred checkout logs confirm synthetic merge80b182105c02628b0682b1cbb36ff394aa0363cd, whose
+    immediate parents are70cae36142b814c64091136793b56a50568e6f4d and the PR head. The former merges b537d3ec8490de5cb14ad987f157cebb25269691
+    and e6a014493651ce90840d5045253f48987c9f187d.
   stop_reason: The clean source checkpoint was published after the latest launch that could preserve the
     full process allowance.
-  next_action: Under think-ta8s, certify the published forward allocation before Session120 runs the
-    unchanged exp149; do not infer an H146 or global-bound verdict from the selected tuple.
-  certification_pending: think-ta8s
+  next_action: Certification debt for this retained checkpoint is discharged. Continue BC320 under think-ykd6
+    on codex/n11-owner-core-compatibility with separate prospective experiments and usage.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-119.yaml
 ---
@@ -96,6 +101,12 @@ The selected tuple is `(0,0,0,7)` in BL, BR, TL, TR order.
 Acceptance requires exact zero uncovered area at all361 directions.
 The first positive deficit must carry an independently replayed strict escape and
 refutes only this selected H147 cover.
+
+**Certification addendum, 2026-09-09.** The pending status at the original stop is
+preserved in the historical account above.
+The subsequent PR142 fast and deferred checkpoint passed; the declared source head and
+tested synthetic merge are identified in the checks.
+No scientific result or original deadline changes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

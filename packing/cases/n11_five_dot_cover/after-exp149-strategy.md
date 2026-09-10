@@ -1,19 +1,24 @@
 # After exp149: Test the Escape in the Snapped-Core Model
 
-**Proposed next milestone, 2026-09-09.** Open one registered BC320 discriminator on the
-saved exp149 escape before changing dots, scanning another tuple, or multiplying owner
-subclasses. Ask whether the escape can be strictly disjoint from some allowed snapped
-owner core in each of its four selected classes.
-This is a bounded test of the specific relaxation failure, with no new geometry engine.
+**Historical decision record, proposed 2026-09-09 and executed as exp150.** The frozen
+criterion below asked whether the saved exp149 escape could be strictly disjoint from
+some allowed snapped B-owner core in each selected class.
+Exp150 refuted the registered individual-owner exclusion: each class supplied a positive
+frame-0 witness in the unchanged B-core model.
+Later experiments through exp153 refuted the fixed-D-plus-one-site family on the
+selected four-patch relaxation.
+They did not refute a physical owner tuple or change the global bound.
 
 This proposal reads published contracts, source, and retained receipts only.
 No new target geometry, owner pose, mask, or compatibility relation was evaluated.
 
 ## Evidence and the Immediate Question
 
-Exp149, at source `5600c0fb4eccf9e9dcdf82b02506d3d4340651cb`, completely refutes D on
-tuple (0,0,0,7). Its first direction, axis `owner-000`, has a positive exact deficit and
-a replayed strict escape centred at
+Exp149, at source `5600c0fb4eccf9e9dcdf82b02506d3d4340651cb`, refutes D as a cover of
+the selected four-patch residual relaxation labelled by tuple `(0,0,0,7)`. It does not
+refute that physical tuple.
+Its first direction, axis `owner-000`, has a positive exact deficit and a replayed
+strict escape centred at
 
 $$x=\left(\frac{7641479337977841787}{2367233010000000000},
 \frac{11240556076810055587}{4734458945995860000}\right).$$
@@ -88,13 +93,13 @@ does not establish a realizable contained unit parent.
 The retained transfer $B(1+D_{\rm net})<1$ assigns every hypothetical unit packing a
 family of full-net B-cores strictly inside its parents.
 BC303 supplies four distinct selected core owners containing the corner-pair marks.
-Conditioning on one coarse selected-core class puts that actual selected core in one of
-its complete recorded frames and centre sets.
+Conditioning on one coarse selected-core class puts the B-core selected for that owner
+in one of its complete recorded frames and centre sets.
 The 181 class frames are exhaustive for that finite necessary model; they are not
 samples standing in for arbitrary continuous unit-owner angles.
 
-Consequently, exclusion against every allowed snapped core excludes this residual pose
-under the already admitted physical transfer.
+Consequently, exclusion against every allowed snapped core would exclude coexistence of
+this residual pose and that owner within the unchanged B-only necessary model.
 No new all-angle approximation is being claimed.
 Testing full unit squares at only those 181 angles would not justify a universal
 continuous-owner conclusion and is outside this protocol.
@@ -121,6 +126,11 @@ Likewise, adding one dot to hit one witness does not prove a six-dot cover.
 Those are separate prospective experiments after this classification, and neither
 retroactively changes exp149’s fixed-five-dot result.
 
+The observed exp150 branch was the second row: all four classes supplied independently
+replayed frame-0 B-core witnesses.
+This is a result about individual compatibility in the unchanged B-core model.
+It does not establish compatible unit parents or four simultaneously compatible owners.
+
 ## Structural Reduction and the Global Gap
 
 Let U contain all sixteen labels and E={0,7,8,15}. Existing analytic witness transport
@@ -133,9 +143,15 @@ This union has 7,936 labels; its intersection has 256. The other 57,600 labels a
 out as candidates for these two patterns, not as physical packings.
 This is a cheap analytic restriction, not a completed census or probability of success.
 
-A precise necessary routing lemma for this portfolio would say: after the retained core
-reduction, every hypothetical packing admits valid owner/mark/sector choices with E
-available at both corners of at least one diagonal.
+A precise global routing obligation is
+
+$$\forall P\text{ a hypothetical physical packing},\quad
+\exists\sigma\text{ a valid owner selection for }P
+\text{ whose selected family is excluded}.$$
+
+An endpoint-sector lemma for this portfolio could help establish that obligation by
+showing that, after the retained core reduction, every hypothetical packing admits valid
+owner/mark/sector choices with E available at both corners of at least one diagonal.
 The corner-pair theorem supplies owners and marks, but does not establish this
 endpoint-sector choice.
 Even that lemma would not route directly into the currently certified tuples.
@@ -143,8 +159,8 @@ The actual global task is to prove that some valid four-owner selection lies in 
 completely excluded tuple family, or to dispose exhaustively of every remaining
 selection. Labels may overlap and owning both marks does not create two owners.
 
-With the actual deficit, BC320’s concrete one-escape compatibility test has greater
-immediate information value than trying the next tuple.
+BC320 selected the concrete one-escape compatibility test under its historical frozen
+criterion. Exp150 has now resolved that test as described above.
 T-023 remains V3/C3, and no global n11 bound changes.
 
 <!-- This document follows common-doc-guidelines.md.

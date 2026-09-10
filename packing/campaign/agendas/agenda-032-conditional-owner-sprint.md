@@ -296,16 +296,22 @@ agenda:
         passed.
     replanning:
       candidates:
-      - bead: think-ta8s
+      - bead: think-rm3k
         workflow: research-loop
         priority: 1
-        rationale: Certify the coherent exp149 result checkpoint before opening the reviewed BC320
-          successor on a fresh stacked branch.
+        rationale: The user selected a first-principles interpretation and breadth audit after exp153.
+          BC-324 defines terms, reconstructs evidence and assumptions, corrects stale summaries and maps
+          alternatives without new targets.
+      - bead: think-ta8s
+        workflow: research-loop
+        priority: 2
+        rationale: PR142 certification is complete. Retain separate native publication-tail and successor
+          usage, and perform the next efficiency/checkpoint review when evidence warrants it.
       - bead: think-ykd6
         workflow: research-loop
         priority: 1
-        rationale: Exp148 partial evidence and analytic transport select the explicit small tuple under
-          BC319.
+        rationale: BC320 tests the exact exp149 escape against entire allowed snapped-owner cores before
+          changing dots or scanning another tuple.
       - bead: think-waix
         workflow: research-loop
         priority: 1
@@ -322,16 +328,18 @@ agenda:
         rationale: Full-support pricing remains uninvoked; retain it behind the newly successful geometric
           conditioning mechanism.
       selected:
-        bead: think-ta8s
+        bead: think-rm3k
         workflow: research-loop
-        rationale: The continuation completed exp149 and selected BC320. Publish one coherent result head
-          and require matching deferred evidence before the successor branch opens. Original sprint outcomes
-          and cost remain unchanged.
+        rationale: 'Follow-up selection on2026-09-10: PR145 is ready after its matching full checkpoint.
+          Continue BC-324 evidence interpretation on the stacked successor. Original sprint outcomes,
+          target criteria and cost remain unchanged.'
       operator_input:
         status: confirmed
-        note: User selected a two-hour sprint on geometric conditioning and parallel experiments. The
+        note: 'User selected a two-hour sprint on geometric conditioning and parallel experiments. The
           post-sprint T-023 and figure amendment adds no target or Session113 cost. Any next-slice target
-          needs fresh preregistration and separate usage.
+          needs fresh preregistration and separate usage. Later user steering requests a stopping-point
+          interpretation block: facts and definitions before judgments, scope backfills and alternate
+          research routes. No new scientific target is selected.'
 ---
 # Agenda032: Completed Conditional-Owner Sprint
 

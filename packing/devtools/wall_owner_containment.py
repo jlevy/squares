@@ -40,8 +40,10 @@ from devtools.owner_footprints import (
     polygon_area_twice,
 )
 from devtools.wall_owner_footprints import (
+    OwnerFrameFootprint,
     RetainedOwnerFrame,
     centre_set_dimension,
+    closed_centre_set,
     retained_owner_frames,
     support_rectangle,
     validate_owner_manifest,
@@ -76,6 +78,7 @@ class WallClass:
     old_endpoint: Polygon
     disposition: Literal["possible", "impossible"]
     wall_footprint: Polygon | None
+    frames: tuple[OwnerFrameFootprint, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -361,12 +364,15 @@ def validate_certificate_receipt(
     return {"path": relative, "git_commit": commit, "git_blob": blob}
 
 
-def validate_frame_record(
+def parse_frame_record(
     raw_value: object,
     expected: object,
     *,
     label: str,
-) -> Literal["allowed", "empty"]:
+    owner_mark: Point | None = None,
+) -> OwnerFrameFootprint:
+    """Parse one exact frame, optionally reconstructing its complete centre set."""
+
     if not isinstance(expected, RetainedOwnerFrame):
         raise ContainmentError("internal expected-frame type is invalid")
     raw = _mapping(raw_value, label)
@@ -413,7 +419,15 @@ def validate_frame_record(
             or raw["common_rectangle"] is not None
         ):
             raise ContainmentError(f"{label} has inconsistent empty-frame data")
-        return "empty"
+        parsed = OwnerFrameFootprint(expected, (), -1, None, None, None, "empty")
+        if owner_mark is not None and closed_centre_set(
+            owner_mark,
+            expected.ray,
+            outer_side=OUTER_SIDE,
+            half=HALF_CORE,
+        ):
+            raise ContainmentError(f"{label} changes the exact centre set")
+        return parsed
     if disposition != "allowed":
         raise ContainmentError(f"{label} has invalid frame disposition")
     centre_raw = _sequence(raw["centre_set"], f"{label}.centre_set")
@@ -440,7 +454,34 @@ def validate_frame_record(
         or stored_rectangle != normalise_convex_polygon(rectangle)
     ):
         raise ContainmentError(f"{label} support receipt is inconsistent")
-    return "allowed"
+    parsed = OwnerFrameFootprint(
+        expected,
+        centre_set,
+        cast(Literal[0, 1, 2], dimension),
+        cast(tuple[Fraction, Fraction], support_r),
+        cast(tuple[Fraction, Fraction], support_jr),
+        cast(Polygon, stored_rectangle),
+        "allowed",
+    )
+    if owner_mark is not None and parsed.centre_set != closed_centre_set(
+        owner_mark,
+        expected.ray,
+        outer_side=OUTER_SIDE,
+        half=HALF_CORE,
+    ):
+        raise ContainmentError(f"{label} changes the exact centre set")
+    return parsed
+
+
+def validate_frame_record(
+    raw_value: object,
+    expected: object,
+    *,
+    label: str,
+) -> Literal["allowed", "empty"]:
+    """Validate one frame while preserving the historical disposition API."""
+
+    return parse_frame_record(raw_value, expected, label=label).disposition
 
 
 def load_wall_input(path: Path, expected_blob: str, *, expected_source: str) -> WallInput:
@@ -535,12 +576,23 @@ def load_wall_input(path: Path, expected_blob: str, *, expected_source: str) -> 
         frames = _sequence(raw["frames"], f"{label}.frames")
         if len(frames) != len(expected_frames):
             raise ContainmentError(f"{label} has a partial frame list")
-        frame_dispositions = tuple(
-            validate_frame_record(item, expected_frame, label=f"{label}.frames[{frame_index}]")
+        class_disposition = raw["disposition"]
+        parsed_frames = tuple(
+            parse_frame_record(
+                item,
+                expected_frame,
+                label=f"{label}.frames[{frame_index}]",
+                owner_mark=(
+                    expected_class.mark
+                    if class_disposition == "possible" and raw["wall_footprint"] is not None
+                    else None
+                ),
+            )
             for frame_index, (item, expected_frame) in enumerate(
                 zip(frames, expected_frames, strict=True)
             )
         )
+        frame_dispositions = tuple(frame.disposition for frame in parsed_frames)
         dimensions = tuple(
             _integer(_mapping(item, "frame")["centre_dimension"], "frame dimension")
             for item in frames
@@ -576,7 +628,7 @@ def load_wall_input(path: Path, expected_blob: str, *, expected_source: str) -> 
         )
         if old != expected_old:
             raise ContainmentError(f"{label} changes the certified old endpoint")
-        disposition = raw["disposition"]
+        disposition = class_disposition
         wall = _polygon(raw["wall_footprint"], f"{label}.wall_footprint", optional=True)
         if disposition == "possible":
             if wall is None or not any(value == "allowed" for value in frame_dispositions):
@@ -607,7 +659,15 @@ def load_wall_input(path: Path, expected_blob: str, *, expected_source: str) -> 
             parsed_disposition = "impossible"
         else:
             raise ContainmentError(f"{label} has invalid class disposition")
-        classes.append(WallClass(expected_class.class_id, old, parsed_disposition, wall))
+        classes.append(
+            WallClass(
+                expected_class.class_id,
+                old,
+                parsed_disposition,
+                wall,
+                parsed_frames,
+            )
+        )
     summary = _mapping(document["summary"], "wall summary")
     seconds = summary.get("wall_seconds")
     if (
@@ -631,7 +691,9 @@ def load_wall_input(path: Path, expected_blob: str, *, expected_source: str) -> 
     return WallInput(relative, commit, blob, expected_source, tuple(classes))
 
 
-def _corner_maps() -> tuple[AffineMap, AffineMap, AffineMap, AffineMap]:
+def physical_corner_maps() -> tuple[AffineMap, AffineMap, AffineMap, AffineMap]:
+    """Return the exact BL, BR, TL, TR physical corner maps."""
+
     q = OUTER_SIDE
     return (
         AffineMap("I", 1, 0, 0, 1, Fraction(0), Fraction(0), 0, (0, 1, 2, 3)),
@@ -639,6 +701,12 @@ def _corner_maps() -> tuple[AffineMap, AffineMap, AffineMap, AffineMap]:
         AffineMap("V", 1, 0, 0, -1, Fraction(0), q, 0, (2, 3, 0, 1)),
         AffineMap("R", -1, 0, 0, -1, q, q, 0, (3, 2, 1, 0)),
     )
+
+
+def _corner_maps() -> tuple[AffineMap, AffineMap, AffineMap, AffineMap]:
+    """Retain the private compatibility name for existing internal callers."""
+
+    return physical_corner_maps()
 
 
 def _certificate_maps() -> tuple[AffineMap, AffineMap, AffineMap, AffineMap]:
