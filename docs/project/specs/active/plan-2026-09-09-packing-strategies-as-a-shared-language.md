@@ -223,6 +223,61 @@ phase hand its arrangement to the next.
   cases below 100.
 - [ ] Export an edited strategy back out as the same document the headless tools read.
 
+### Phase 3: the atlas ascent, one square at a time
+
+A single directed animation from `n = 1` to `n = 100`, adding one square per step and
+landing each time on the retained record.
+Directed on purpose: it is not a search, it uses the known endpoints, and the point is
+that it is clean, legible and always arrives.
+
+Every frame of it comes from a `guide` phase, so **every frame is labelled guided and
+none of it is a search result**. That rule is not decoration.
+The same instruments that make this animation possible are the ones used to report what
+a search reached, and the two must never be confusable.
+
+**The beat, per step from `n` to `n + 1`.** Five beats, and the middle three are the
+ones that had to be measured rather than guessed.
+
+| beat | what happens | why |
+| --- | --- | --- |
+| **Hold** | the packing at rest, labelled with `n`, its side, and whether it beats the grid | the viewer needs a still frame to read the fact off |
+| **Enter** | the new square arrives from outside the container edge | it has to come from somewhere; dropping it in the middle starts the step already overlapping, measured at 0.83 of a unit side |
+| **Open** | the container grows to whichever side is larger | the rearrangement needs room, and this is the beat that fixes the measured defect below |
+| **Rearrange** | the guided phase drives every square to its matched target | matched, always: unmatched targets send each square to another’s place and they walk through each other |
+| **Close** | the container contracts to the new record’s side, squares riding it down | the owner’s own design: add the square, reshuffle without scaling, then scale down |
+
+**The defect this beat exists to fix, stated plainly.** A guided transition between two
+*different* `n` is smooth and lands exactly -- residual `0.0004` to `0.0007`, largest
+per-frame motion `0.013` to `0.016` -- but squares pass through each other on the way:
+peak overlap `0.83` at 10 to 11, `0.49` at 11 to 12, `0.35` at 16 to 17, `0.86` at 17 to
+18, with roughly 100 frames of 126 carrying some overlap.
+Between two arrangements of the *same* `n` the same machinery is perfectly clean -- peak
+overlap `0.0000` across every frame -- so the transit overlap is not the mechanism.
+It is that adding a square is a genuine rearrangement with nowhere to do it.
+**Open** and **Close** give it somewhere.
+
+**What has to be built.**
+
+- [ ] A `container` mechanism, so the side is a phase rather than a side effect of
+  another one. **Open** and **Close** are that mechanism run twice with different
+  targets.
+- [ ] Correspondence across a change of `n`: 100 squares matched against 101 targets.
+  The rectangular assignment already handles the shape; what it needs is a rule for
+  which square is *new*, and the honest one is whichever target the assignment leaves
+  over.
+- [ ] The ascent as one strategy document per step, generated for `n = 1..100`, so the
+  whole film is data and a single step can be re-run and re-watched on its own.
+- [ ] Capture end to end: play the trace in the workbench’s Animate tab, record it, and
+  write a receipt naming every strategy document and the record each step landed on.
+- [ ] A guard in the capture path that refuses to export a frame from a guided phase
+  without its label.
+
+**What is deliberately not in it.** No search.
+No claim about any `n`. The ascent shows what is known, and the
+[video plan](plan-2026-09-07-known-best-atlas-video.md) owns how it looks; this phase
+owns only that each step is a correct, clean, repeatable transition between two retained
+packings.
+
 ## Testing Strategy
 
 Every phase asserts the invariant it is responsible for, not an arrangement that

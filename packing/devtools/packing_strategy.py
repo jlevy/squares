@@ -87,6 +87,12 @@ def _structure(state: State, spec: dict[str, Any], rng: np.random.Generator) -> 
     elif rung == "contact-graph":
         state.contacts = edges
     elif rung == "contact-graph-with-types":
+        # All contacts, not just the faces, and the basin map is why. Declaring every
+        # contact holds the record exactly at n = 5, 10, 11 and 17; declaring only the
+        # faces lets it drift and stop being a packing at 10 and 11, and never holds it at
+        # 17. Faces-only settles a built assembly better and holds the answer worse, so
+        # which subset a phase declares belongs in the strategy document rather than being
+        # decided once here for every phase.
         state.contacts = edges
         state.classes = orientation_classes(edges, kinds, state.n)
     elif rung == "with-wall-contacts":

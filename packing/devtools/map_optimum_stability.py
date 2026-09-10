@@ -49,7 +49,14 @@ positive control: a row that reports it as stable means the harness is broken.""
 
 
 def basin_radius(
-    n: int, name: str, spec: dict[str, Any], *, beta: float, steps: int, rng_seed: int = 0
+    n: int,
+    name: str,
+    spec: dict[str, Any],
+    *,
+    beta: float,
+    steps: int,
+    slack: float = 1.005,
+    rng_seed: int = 0,
 ) -> dict[str, Any]:
     """The largest perturbation a setting still pulls back to the record.
 
@@ -59,10 +66,19 @@ def basin_radius(
     find one, because nothing but an exact hit would ever land in it.
 
     Perturbations grow until the run stops returning. The reported radius is the last one
-    that came back to within a twentieth of a unit side, which is far tighter than the
-    perturbation itself at every rung that reports a positive number.
+    that came back to within a twentieth of a unit side.
+
+    **`slack` is why this is not measured at the record's own side**, and the first version
+    of this instrument was wrong for the lack of it. A best-known packing is tight: kick it
+    by a hundredth and the squares overlap, and at the exact record side there is nowhere to
+    put them, because the packing is essentially the only arrangement that fits. Every
+    setting then reports no basin at all, including the ones that hold the record perfectly,
+    and the measurement says only that the record is rigid -- which was already known. Giving
+    the container a little room asks the question that matters instead: released nearby,
+    does the mechanism go back?
     """
     poses, side = record(n)
+    side = side * slack
     edges = contact_edges(poses)
     kinds = contact_kinds(poses)
     rung = spec.get("rung")
@@ -89,7 +105,7 @@ def basin_radius(
                 start = start + rng.normal(0, kick, poses.shape)
             out = solve(
                 n,
-                side * 1.000000001,
+                side,
                 np.random.default_rng(rng_seed + trial),
                 beta=beta,
                 iters=steps,
@@ -101,11 +117,13 @@ def basin_radius(
                 start=start,
             )
             back = float(np.abs(out.poses[:, :2] - poses[:, :2]).max())
-            feasible = violation(out.poses, side * 1.000000001) <= 1e-9
+            feasible = violation(out.poses, side) <= 1e-9
             if kick == 0.0:
                 v = corners_of(out.poses)
+                turn = np.mod(out.poses[:, 2] - poses[:, 2] + np.pi / 4, np.pi / 2) - np.pi / 4
                 detail = {
                     "drift": back,
+                    "turn_deg": float(np.degrees(np.abs(turn).max())),
                     "held": feasible,
                     "contacts_kept": int((np.abs(pair_separation(v[ia], v[ib])) < 0.03).sum()),
                 }
@@ -131,12 +149,13 @@ def main() -> int:
     ap.add_argument("--n", type=int, nargs="+", default=[5, 10, 11, 17])
     ap.add_argument("--beta", type=float, nargs="+", default=[0.1, 0.5])
     ap.add_argument("--steps", type=int, default=4000)
+    ap.add_argument("--slack", type=float, default=1.005)
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--json", action="store_true")
     o = ap.parse_args()
 
     rows = [
-        basin_radius(n, name, spec, beta=beta, steps=o.steps)
+        basin_radius(n, name, spec, beta=beta, steps=o.steps, slack=o.slack)
         for n in o.n
         for name, spec in SETTINGS
         for beta in o.beta
@@ -147,13 +166,21 @@ def main() -> int:
         print(json.dumps(rows, default=str, sort_keys=True))
         return 0
 
-    print(f"drift from the exact best-known packing after {o.steps} iterations")
-    print(f"{'n':>4} {'beta':>5} {'setting':>34} {'drift':>9} {'packing?':>9} {'contacts':>10}")
+    print(
+        f"basin around the best-known packing, {o.steps} iterations per trial, "
+        f"container at {o.slack:g} of the record"
+    )
+    print(
+        f"{'n':>4} {'setting':>34} {'moved':>8} {'turned':>8} "
+        f"{'holds':>6} {'basin':>7} {'contacts':>11}"
+    )
     for r in rows:
-        held = "yes" if r["held"] else "NO"
+        held = "yes" if r.get("held") else "NO"
+        radius = f"{r['radius']:.2f}" if r["radius"] else "none"
         print(
-            f"{r['n']:>4} {r['beta']:>5.1f} {r['setting']:>34} {r['drift']:>9.5f} "
-            f"{held:>16} {r['contacts_kept']:>5} of {r['contacts']:<3}"
+            f"{r['n']:>4} {r['setting']:>34} {r.get('drift', 0):>8.4f} "
+            f"{r.get('turn_deg', 0):>7.2f} {held:>6} {radius:>7} "
+            f"{r.get('contacts_kept', 0):>4} of {r['contacts']:<3}"
         )
     return 0
 
