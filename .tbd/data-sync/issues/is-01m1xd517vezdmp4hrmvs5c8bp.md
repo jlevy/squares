@@ -5,7 +5,7 @@ title: "[epic] Extend the known-best atlas to n = 324 and draw the poster compos
 kind: epic
 status: in_progress
 priority: 1
-version: 16
+version: 18
 spec_path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 labels: []
 dependencies: []
@@ -24,10 +24,11 @@ child_order_hints:
   - is-01m1xd6h2mncvg3tv2rn9hedrq
   - is-01m0nneevjvsbvysrwkb9jxqc1
   - is-01m1xdd33x4y6r42j2scgakvp8
+  - is-01m20w03pgz6s4wwe9r6yajjn8
 created_at: 2026-09-07T07:43:32.090Z
-updated_at: 2026-09-07T11:36:37.143Z
+updated_at: 2026-09-08T16:00:57.755Z
 ---
-Widen the frontier register and known-best atlas from n = 1..100 to n = 1..324 in two chunks (101..200, 201..324), under the n <= 100 retention precedent for Kingbird-derived numerical facts, then draw an 18x18 poster composite known-best-1-324 beside the untouched 1-100 figure. Survey sources beyond 324 first; build 325..400 only if an authority with a completeness claim exists. Calibration-only annotation layers stay pinned to n = 1..100 so the new range remains an unseen corpus (H-044 successor, H-035 regime). Owner-directed 2026-09-07; supersedes the 2026-08-24 note on think-ezcx. Session record: session-093.
+Widen the frontier register and known-best atlas from n = 1..100 to n = 1..324 in two chunks (101..200, 201..324), under the n <= 100 retention precedent for Kingbird-derived numerical facts, then draw an 18x18 poster composite known-best-1-324 beside the untouched 1-100 figure. Survey sources beyond 324 first; build 325..400 only if an authority with a completeness claim exists. Calibration-only annotation layers stay pinned to n = 1..100 so the new range remains an unseen corpus (H-044 successor, H-035 regime). Owner-directed 2026-09-07; supersedes the 2026-08-24 note on think-ezcx. Session record: session-099 (renumbered from session-093 on main).
 
 ## Notes
 
