@@ -155,7 +155,10 @@ def ink_box(image, x0: int, y0: int, x1: int, y1: int) -> tuple[int, int, int, i
                 right = x if right is None or x > right else right
                 top = y if top is None else top
                 bottom = y
-    return None if left is None else (left, top, right, bottom)
+    # All four are set together in the loop above; naming that lets the checker see it.
+    if left is None or top is None or right is None or bottom is None:
+        return None
+    return (left, top, right, bottom)
 
 
 def survey(

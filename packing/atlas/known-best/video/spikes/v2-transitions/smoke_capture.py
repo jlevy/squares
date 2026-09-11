@@ -19,6 +19,12 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    # Type-only: the runtime import stays inside the function that needs a driver, so the
+    # script still runs where playwright is not installed and only the browser paths fail.
+    from playwright.sync_api import Page
 
 HERE = Path(__file__).resolve().parent
 PAGE = HERE / "index.html"
@@ -87,8 +93,8 @@ INK_BANDS = [
     ("open", 664, 704),
     ("open-items", 704, 748),
 ]
-INK_X0, INK_X1 = 1100, 1900   # the panel's columns; the packing ends at x = 1060
-INK_THRESHOLD = 160           # a pixel darker than this (mean of R, G, B) is ink
+INK_X0, INK_X1 = 1100, 1900  # the panel's columns; the packing ends at x = 1060
+INK_THRESHOLD = 160  # a pixel darker than this (mean of R, G, B) is ink
 INK_PAIRS = [(103, 0.5), (28, 0.5), (17, 0.5), (100, 0.5), (147, 2.8)]
 
 PAIR_NS_JS = "window.atlasTransitions.pairs().map(p => p.n)"
@@ -106,7 +112,7 @@ def measure_ink(driver) -> None:
 
     browser = driver.chromium.launch(executable_path=os.environ.get("SQPACK_CHROMIUM"))
     try:
-        pages: dict[Path, object] = {}
+        pages: dict[Path, Page] = {}
 
         def page_for(path: Path):
             if path not in pages:
@@ -135,7 +141,14 @@ def measure_ink(driver) -> None:
             page.evaluate(f"window.atlasTransitions.select({index})")
             page.evaluate(f"window.atlasTransitions.seek({seconds})")
             image = Image.open(BytesIO(page.screenshot(type="png"))).convert("L")
-            pixels = image.load()
+            # `Any` because Pillow's accessor returns a sample whose type depends on the
+            # image mode, which the checker cannot see: the convert("L") above makes every
+            # pixel one number, not the tuple a colour mode would give. Stated here once
+            # rather than cast per pixel, which would run inside the scan loop below.
+            pixels: Any = image.load()
+            if pixels is None:
+                message = "Pillow gave no pixel accessor for a loaded image"
+                raise RuntimeError(message)
             cells = []
             for _name, y0, y1 in INK_BANDS:
                 left, top, bottom = None, None, None
@@ -158,8 +171,9 @@ def capture_review(driver, out: Path) -> list[str]:
     errors: list[str] = []
     out.mkdir(parents=True, exist_ok=True)
     browser = driver.chromium.launch(executable_path=os.environ.get("SQPACK_CHROMIUM"))
-    pages: dict[Path, object] = {}
+    pages: dict[Path, Page] = {}
     try:
+
         def page_for(path: Path):
             if path not in pages:
                 page = browser.new_page(
@@ -167,9 +181,11 @@ def capture_review(driver, out: Path) -> list[str]:
                 )
                 page.on(
                     "console",
-                    lambda msg: errors.append(f"console.{msg.type}: {msg.text}")
-                    if msg.type in ("error", "warning")
-                    else None,
+                    lambda msg: (
+                        errors.append(f"console.{msg.type}: {msg.text}")
+                        if msg.type in ("error", "warning")
+                        else None
+                    ),
                 )
                 page.on("pageerror", lambda exc: errors.append(f"pageerror: {exc}"))
                 page.goto(path.resolve().as_uri(), wait_until="load")
@@ -251,9 +267,11 @@ def main() -> int:
             )
             page.on(
                 "console",
-                lambda msg: errors.append(f"console.{msg.type}: {msg.text}")
-                if msg.type in ("error", "warning")
-                else None,
+                lambda msg: (
+                    errors.append(f"console.{msg.type}: {msg.text}")
+                    if msg.type in ("error", "warning")
+                    else None
+                ),
             )
             page.on("pageerror", lambda exc: errors.append(f"pageerror: {exc}"))
             t_load = time.perf_counter()
@@ -286,10 +304,25 @@ def main() -> int:
                 )
                 mp4 = args.out / f"transition-{n:03d}.mp4"
                 cmd = [
-                    FFMPEG, "-y", "-loglevel", "error", "-framerate", str(args.fps),
-                    "-i", str(frame_dir / "%05d.png"),
-                    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-preset", "medium",
-                    "-movflags", "+faststart", str(mp4),
+                    FFMPEG,
+                    "-y",
+                    "-loglevel",
+                    "error",
+                    "-framerate",
+                    str(args.fps),
+                    "-i",
+                    str(frame_dir / "%05d.png"),
+                    "-c:v",
+                    "libx264",
+                    "-pix_fmt",
+                    "yuv420p",
+                    "-crf",
+                    "18",
+                    "-preset",
+                    "medium",
+                    "-movflags",
+                    "+faststart",
+                    str(mp4),
                 ]
                 t0 = time.perf_counter()
                 subprocess.run(cmd, check=True)
