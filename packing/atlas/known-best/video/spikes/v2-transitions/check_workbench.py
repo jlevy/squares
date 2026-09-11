@@ -339,8 +339,20 @@ def main() -> int:
                 print(" -", failure)
             print(" - the gap bar was not driven: gapBar is not on the API yet")
             return 1
-        page.evaluate("atlasTransitions.setStepN(17); atlasTransitions.setStyle('tween'); atlasTransitions.seek(0)")
+        # **The bar is keyed to the n on the panel, so it is read where the panel says 17.** Through
+        # the dwell the stage shows the packing of 16 and both say 16; the roll carries both to 17.
+        # Read at t = 0 the bar used to describe 17 while the stage showed 16's packing, which is how
+        # a 25-square packing came to sit eleven per cent "under the best known" at the step into 26.
+        page.evaluate("atlasTransitions.setStepN(17); atlasTransitions.setStyle('tween')")
+        page.evaluate("atlasTransitions.seek(0)")
+        dwell = page.evaluate("atlasTransitions.gapBar()")
+        shown = page.evaluate("atlasTransitions.progress().n")
+        check(dwell["n"] == shown,
+              f"through the dwell the bar describes n = {dwell['n']} and the panel n = {shown}")
+        page.evaluate("atlasTransitions.seek(atlasTransitions.duration())")
         bar = page.evaluate("atlasTransitions.gapBar()")
+        check(bar["n"] == page.evaluate("atlasTransitions.progress().n") == 17,
+              f"at rest the bar describes n = {bar['n']}, not the 17 the panel shows")
         facts = page.evaluate("() => JSON.parse(document.getElementById('atlas-data').textContent).facts['17']")
         check(abs(bar["record"] - float(facts["side"])) < 1e-9,
               f"the bar's record {bar['record']} is not the panel's s(17) <= {facts['side']}")
@@ -355,12 +367,33 @@ def main() -> int:
         for size in (17, 324):
             if page.evaluate(f"atlasTransitions.setStepN({size})") != size:
                 continue
+            page.evaluate("atlasTransitions.seek(atlasTransitions.duration())")
             scale = page.evaluate("atlasTransitions.gapBar()")
             check(abs(scale["lo"] - math.sqrt(size)) < 1e-9,
                   f"the bar at n = {size} starts at {scale['lo']}, not the area bound {math.sqrt(size)}")
             check(abs((scale["hi"] - scale["lo"]) - 1.0) < 1e-9,
                   f"the bar at n = {size} spans {scale['hi'] - scale['lo']}, not 1")
         page.evaluate("atlasTransitions.setStepN(17)")
+        # **The pointer is drawn only where the arrangement is a packing.** A bounding box reports a
+        # number for any arrangement, including one whose squares are inside each other, and that
+        # number is smaller than the record -- which is how a frame mid-move came to read as better
+        # than the best known. Measured: a retained record scores 0 to 1.3e-5 of a unit side of
+        # summed overlap, the float precision of the poses; the same step mid-move reaches 1.1 at
+        # n = 11 and 12.4 at n = 110.
+        page.evaluate("atlasTransitions.setStyle('physics'); atlasTransitions.seek(atlasTransitions.duration())")
+        rest = page.evaluate("atlasTransitions.gapBar()")
+        check(rest["valid"] and rest["overlap"] < 1e-4,
+              f"the retained record does not read as a packing: overlap {rest['overlap']}")
+        check(page.evaluate("Number(document.getElementById('gapbar-hand').getAttribute('opacity'))") == 1,
+              "the pointer is hidden on a valid packing")
+        sc = page.evaluate("atlasTransitions.schedule()")
+        page.evaluate(f"atlasTransitions.seek({(sc['moveStart'] + sc['moveEnd']) / 2})")
+        moving = page.evaluate("atlasTransitions.gapBar()")
+        check(not moving["valid"] and moving["overlap"] > 1e-4,
+              f"a frame mid-move reads as a packing: overlap {moving['overlap']}")
+        check(page.evaluate("Number(document.getElementById('gapbar-hand').getAttribute('opacity'))") == 0,
+              "the pointer claims a side for an arrangement that is not a packing")
+        page.evaluate("atlasTransitions.setStyle('tween')")
         # Under style A the indicator sweeps to the record and the check turns green.
         page.evaluate("atlasTransitions.seek(atlasTransitions.duration())")
         end_bar = page.evaluate("atlasTransitions.gapBar()")

@@ -1195,9 +1195,100 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // within a hundredth of a side of touching that the atlas's tolerance refuses.
   const CONTACT = { gap: 0.01, cell: 1.2 };
   let contactHead = null, contactNext = null, contactDim = 0;
+  let overlapHead = null, overlapNext = null, overlapDim = 0;
   // `edges`, when given, is filled with the square-square contacts as a flat list of index pairs
   // (walls have no partner, so they raise a count and add no edge). It is the same test twice over
   // rather than two tests: the shade and the contact graph are the same fact about the picture.
+  // ---------------------------------------------------------------- is this a packing? (one number)
+  // **The one number that says whether what is on the stage is a packing.** The owner's rule, and
+  // it is the right one: a side is only a claim if the squares do not overlap, and a bounding box
+  // is happy to report a smaller side for an arrangement whose squares are inside each other.
+  //
+  // The total is the sum, over every pair, of how deep the two are into one another by the
+  // separating-axis theorem -- the smallest overlap across the four edge normals, which is the
+  // distance one would have to move to part them -- plus how far any corner lies outside the
+  // container. In unit sides. A valid packing scores zero and a retained record scores it to the
+  // last bit the poses carry; anything else is a number that says how far from a packing it is,
+  // rather than a yes or a no that hides the margin.
+  //
+  // Same broad phase as the contact sweep: a cell grid, and pairs whose centres are more than a
+  // diagonal apart cannot touch at all. That is what makes it affordable every frame -- the work
+  // is the neighbour count, not the square of the square count.
+  const OVERLAP_GRID = 1.5;   // cells of this many sides; two unit squares can only meet within sqrt 2
+  const overlapOut = { total: 0, deepest: 0, pairs: 0, walls: 0 };
+  function overlapOf(px, py, pa, side, size) {
+    const unit = size === undefined || !(size > 0) ? 1 : size;
+    const N = px.length;
+    let total = 0, deepest = 0, pairs = 0, walls = 0;
+    // The walls: how far the furthest corner of each square lies outside the box.
+    if (side > 0) {
+      for (let i = 0; i < N; i++) {
+        const c = Math.cos(pa[i] * DEG) * unit / 2, s = Math.sin(pa[i] * DEG) * unit / 2;
+        let out = 0;
+        for (let q = 0; q < 4; q++) {
+          const s1 = q & 1 ? -1 : 1, s2 = q & 2 ? -1 : 1;
+          const vx = px[i] + s1 * c - s2 * s, vy = py[i] + s1 * s + s2 * c;
+          out = Math.max(out, -vx, vx - side, -vy, vy - side);
+        }
+        if (out > 0) { walls += out; total += out; deepest = Math.max(deepest, out); }
+      }
+    }
+    const cell = OVERLAP_GRID * unit;
+    let lo = Infinity, loy = Infinity, hi = -Infinity, hiy = -Infinity;
+    for (let i = 0; i < N; i++) {
+      if (px[i] < lo) lo = px[i]; if (px[i] > hi) hi = px[i];
+      if (py[i] < loy) loy = py[i]; if (py[i] > hiy) hiy = py[i];
+    }
+    const dim = Math.max(1, Math.min(512, Math.ceil(Math.max(hi - lo, hiy - loy) / cell) + 1));
+    if (overlapHead === null || overlapDim !== dim) { overlapHead = new Int32Array(dim * dim); overlapDim = dim; }
+    if (overlapNext === null || overlapNext.length !== N) overlapNext = new Int32Array(N);
+    const head = overlapHead, nxt = overlapNext;
+    head.fill(-1);
+    const cx = (v, base) => Math.max(0, Math.min(dim - 1, Math.floor((v - base) / cell)));
+    for (let i = 0; i < N; i++) {
+      const ci = cx(px[i], lo) + cx(py[i], loy) * dim;
+      nxt[i] = head[ci]; head[ci] = i;
+    }
+    const half = unit / 2;
+    for (let i = 0; i < N; i++) {
+      const gx = cx(px[i], lo), gy = cx(py[i], loy);
+      const ci = Math.cos(pa[i] * DEG), si = Math.sin(pa[i] * DEG);
+      for (let oy = -1; oy <= 1; oy++) {
+        const yy = gy + oy;
+        if (yy < 0 || yy >= dim) continue;
+        for (let ox = -1; ox <= 1; ox++) {
+          const xx = gx + ox;
+          if (xx < 0 || xx >= dim) continue;
+          for (let j = head[xx + yy * dim]; j !== -1; j = nxt[j]) {
+            if (j <= i) continue;
+            const dx = px[j] - px[i], dy = py[j] - py[i];
+            if (dx * dx + dy * dy >= 2 * unit * unit) continue;
+            const cj = Math.cos(pa[j] * DEG), sj = Math.sin(pa[j] * DEG);
+            // The four edge normals: each square's own two axes. The least overlap across them is
+            // the penetration depth, and any axis with no overlap separates the pair outright.
+            let depth = Infinity;
+            for (let a = 0; a < 4; a++) {
+              const ux = a < 2 ? (a === 0 ? ci : -si) : (a === 2 ? cj : -sj);
+              const uy = a < 2 ? (a === 0 ? si : ci) : (a === 2 ? sj : cj);
+              const ri = half * (Math.abs(ux * ci + uy * si) + Math.abs(ux * -si + uy * ci));
+              const rj = half * (Math.abs(ux * cj + uy * sj) + Math.abs(ux * -sj + uy * cj));
+              const gap = ri + rj - Math.abs(dx * ux + dy * uy);
+              if (gap <= 0) { depth = 0; break; }
+              if (gap < depth) depth = gap;
+            }
+            if (depth > 0 && depth !== Infinity) {
+              total += depth; pairs++;
+              if (depth > deepest) deepest = depth;
+            }
+          }
+        }
+      }
+    }
+    overlapOut.total = total; overlapOut.deepest = deepest;
+    overlapOut.pairs = pairs; overlapOut.walls = walls;
+    return overlapOut;
+  }
+
   function fullSideContacts(px, py, pa, side, out, edges, size) {
     const unit = size === undefined || !(size > 0) ? 1 : size;
     const N = px.length;
@@ -1890,6 +1981,14 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // is the same split the other way round; the three unstaged modes move everything through the
   // whole move and fade the new square in over its last third. The panel's text leaves and
   // returns over `roll` seconds from `arrive`, the moment the new square starts to appear.
+  // The n the stage is showing at t: the pair's own n through the dwell and the first half of the
+  // roll, and the next one after that. One function, so the panel's numeral, the announcement and
+  // the gap bar cannot disagree about which packing is on screen.
+  function rollingN(p, sc, t, optimizing) {
+    if (optimizing) return p.n + 1;
+    const q = sc.roll > 0 ? clamp01((t - sc.arrive) / sc.roll) : (t >= sc.arrive ? 1 : 0);
+    return q >= 0.5 ? p.n + 1 : p.n;
+  }
   function schedule() {
     const tm = timing();
     const moveStart = tm.dwell;
@@ -3279,10 +3378,24 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const gapbarLowerLabel = document.getElementById('gapbar-lower-label');
   const gapbarRecordLabel = document.getElementById('gapbar-record-label');
   let gapbarInfo = null;
-  const gapbarOut = { n: 0, record: 0, lower: 0, lo: 0, hi: 0, side: 0, x: 0, excess: 0, met: false };
+  //: What the summed overlap may be for the arrangement to count as a packing, in unit sides.
+  //: Measured: retained records score 0 to 1.3e-5 -- the float precision of the poses -- and a
+  //: frame mid-move scores 1.1 to 12.4. The threshold sits five orders of magnitude clear of both.
+  const VALID_OVERLAP = 1e-4;
+  const gapbarOut = {
+    n: 0, record: 0, lower: 0, lo: 0, hi: 0, side: 0, x: 0, excess: 0, met: false,
+    // Whether the side above is a claim at all: a bounding box reports a number for any
+    // arrangement, and only an arrangement without overlaps is a packing.
+    valid: false, overlap: 0,
+  };
   // The scale and the static marks, once per n rather than once per frame.
-  function gapbarSetup(p) {
-    const n = p.n + 1;
+  // **The bar is keyed to the n on the panel, not to the n the step is heading for.** Through the
+  // dwell the stage shows the packing of n - 1 and the panel says so, but the bar was measuring it
+  // against n's record: at the step into 26 that put a 25-square packing, side 5.0000, against a
+  // record of 5.6213 and drew the pointer at one per cent of the bar -- eleven per cent "under the
+  // best known", for a third of every step. It was reading a true number about the wrong n.
+  function gapbarSetup(p, shown) {
+    const n = shown || p.n + 1;
     if (gapbarInfo !== null && gapbarInfo.n === n) return gapbarInfo;
     const f = FACTS[String(n)];
     const record = Number(f.side);
@@ -3316,7 +3429,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     return clamp01((value - i.lo) / (i.hi - i.lo)) * GAPBAR.width;
   }
   function updateGapBar(p, B, g, mode) {
-    const info = gapbarSetup(p);
+    const info = gapbarSetup(p, state.liveN);
     const met = mode === 'blind'
       ? g.side <= info.record * (1 + GAP_MET.side)
       : g.centre <= GAP_MET.centre && g.angle <= GAP_MET.angle && g.side <= info.record * (1 + GAP_MET.side);
@@ -3326,8 +3439,16 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // the bar. Kept inside by its own half-width: the tick is the mark, the hand only points at it.
     const HALF = 10;
     const x = Math.max(HALF, Math.min(GAPBAR.width - HALF, met ? gapbarX(info.record) : gapbarX(g.side)));
+    // **And the hand is drawn only where the arrangement IS a packing.** A bounding box will happily
+    // report a smaller side for squares that are inside each other, so a side is a claim only when
+    // the overlap is zero. Measured: a retained record scores between 0 and 1.3e-5 of a unit side
+    // -- the float precision of the poses the page carries -- while the same step mid-move reaches
+    // 1.1 at n = 11 and 12.4 at n = 110. Five orders of magnitude between them, so the threshold
+    // does not need to be delicate.
+    const valid = paintOut.overlap <= VALID_OVERLAP;
     const excess = (g.side / info.record - 1) * 100;
     gapbarHand.setAttribute('transform', 'translate(' + fmt(x, 2) + ' 0)');
+    gapbarHand.setAttribute('opacity', valid ? '1' : '0');
     // The hand turns green on a hit; the head row that said "on the record" beside a tick box is
     // gone, because the bar is always measuring the same thing and a label saying so on every frame
     // was a caption rather than a reading. `excess` survives in the readout below the stage and in
@@ -3336,6 +3457,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     gapbarOut.n = info.n; gapbarOut.record = info.record; gapbarOut.lower = info.lower;
     gapbarOut.lo = info.lo; gapbarOut.hi = info.hi;
     gapbarOut.side = g.side; gapbarOut.x = x / GAPBAR.width; gapbarOut.excess = excess; gapbarOut.met = met;
+    gapbarOut.valid = valid; gapbarOut.overlap = paintOut.overlap;
   }
   // `still` is true where the picture is not in motion: through the dwell, and from the instant the
   // settle ends. Those are the frames the bar is allowed to move on, along with the ones something
@@ -4126,9 +4248,19 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   let paintContacts = null;
   const paintEdges = [];              // the frame's own contact graph, as index pairs
   let paintTouching = new Set();      // the same, as i * N + j keys, for the relationship's evidence
-  const paintOut = { classes: 0, centres: [], sizes: [], slots: [], contacts: [], scheme: 'identity' };
+  const paintOut = {
+    classes: 0, centres: [], sizes: [], slots: [], contacts: [], scheme: 'identity',
+    // The frame's own answer to "is this a packing": the summed penetration in unit sides, the
+    // deepest single one, and how many pairs are inside each other. Zero on a valid packing.
+    overlap: 0, deepestOverlap: 0, overlapPairs: 0,
+  };
   function paintSquares(p, side, drain, tint, size, resting, homeward) {
     paintContacts = fullSideContacts(poseX, poseY, poseA, side, paintContacts, paintEdges, size);
+    // Every frame, from the poses just drawn: how far this arrangement is from being a packing.
+    const lap = overlapOf(poseX, poseY, poseA, side, size);
+    paintOut.overlap = lap.total;
+    paintOut.deepestOverlap = lap.deepest;
+    paintOut.overlapPairs = lap.pairs;
     const N = poseA.length;
     paintTouching = new Set();
     for (let e = 0; e < paintEdges.length; e += 2) {
@@ -4207,6 +4339,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // centres are, which palette slot each took, and the contact count of every square drawn.
   function colourState() {
     return {
+      overlap: paintOut.overlap,
+      deepestOverlap: paintOut.deepestOverlap,
+      overlapPairs: paintOut.overlapPairs,
       // Revision 12: which scheme is chosen, and which one this frame was actually painted in —
       // they differ only where Animate's standardising has repainted a resting frame.
       scheme: colorScheme, painted: paintOut.scheme, schemes: COLOR_SCHEMES.slice(),
@@ -4353,6 +4488,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const t = state.t;
     const mode = simMode();
     const optimizing = state.optimizing && opt !== null;
+    // **Which n the stage is showing, decided before anything reads it.** The panel rolls from n to
+    // n + 1 half way through the roll, and the bar has to be keyed to the same answer -- it is the
+    // n whose packing is on the stage, and a bar keyed to the other one measures a true number
+    // against the wrong record. It used to be assigned in the roll block below, which runs AFTER
+    // `updateGap`, so the bar read the previous frame's answer and lagged a step behind the panel.
+    state.liveN = rollingN(p, sc, t, optimizing);
     if (optimizing) renderOptimizeScene(p, A, B);
     // **A static append is never simulated, whatever the style says.** On a prefix or
     // shared-picture step every existing square's target IS where it already stands, so there is
@@ -4380,11 +4521,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     factsB.style.opacity = back;
     numeralA.style.transform = 'translateY(' + (-24 * easeOut(out)) + 'px)';
     numeralB.style.transform = 'translateY(' + (24 * (1 - easeOut(back))) + 'px)';
-    const shownN = q >= 0.5 ? p.n + 1 : p.n;
-    if (shownN !== state.liveN) {
-      state.liveN = shownN;
-      live.textContent = 'n = ' + shownN;
-    }
+    if (live.textContent !== 'n = ' + state.liveN) live.textContent = 'n = ' + state.liveN;
 
     // The progress bar: the fill advances continuously, the cursor and the riding n sit on its
     // leading edge, and whichever scale numerals the riding n would touch are suppressed. Under
@@ -4396,8 +4533,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const x = TRACK_LEFT + lead;
     progressCursor.style.left = x + 'px';
     progressN.style.left = x + 'px';
-    progressN.textContent = String(shownN);
-    const riderHalf = (String(shownN).length * digitWidth) / 2;
+    progressN.textContent = String(state.liveN);
+    const riderHalf = (String(state.liveN).length * digitWidth) / 2;
     for (let i = 0; i < scaleLabels.length; i++) {
       const s = scaleLabels[i];
       const clear = riderHalf + (s.digits * digitWidth) / 2 + SCALE_GAP;
