@@ -24,13 +24,13 @@ Names may nest (`probes/gapbar/labels.js` is `probe("gapbar/labels")`), which is
 checker's probes stay together.
 """
 
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 
 PROBES = Path(__file__).resolve().parent / "probes"
 
 
-@lru_cache(maxsize=None)
+@cache
 def probe(name: str) -> str:
     """The text of `probes/<name>.js`, read once and kept.
 
