@@ -1,0 +1,238 @@
+softschema:
+  contract: packing.squares:CodexTaskTreeDelta/v1
+  schema: ../schemas/codex-task-tree-delta.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: codex
+    source_schema: CodexEfficiencyRollup/v2
+    root_task_id: 01a08da8-78b7-7d63-b977-fde320df4c51
+    start_cutoff_at: '2026-09-10T23:37:54Z'
+    end_cutoff_at: '2026-09-11T00:04:20Z'
+    before_snapshot_at: '2026-09-10T23:36:24.722Z'
+    after_snapshot_at: '2026-09-11T00:04:15.731Z'
+  completeness:
+    snapshot_incomplete: true
+    live_session_count: 1
+  before:
+    session_count: 5
+    task_count: 6
+    completed_task_count: 6
+    interrupted_task_count: 0
+    agent_active_seconds: 716.137
+    elapsed_envelope_seconds: 320.996
+    active_union_seconds: 320.996
+    parallel_overlap_seconds: 395.141
+    timed_model_stream_seconds: 325.071
+    recorded_first_token_wait_seconds: 22.153
+    tool_seconds_by_category:
+      agent_control: 2.018
+      command: 39.992
+      extension: 0.049
+    compaction_seconds: 0.0
+    compaction_event_count: 0
+    compaction_item_count: 0
+    legacy_compaction_event_count: 0
+    excluded_legacy_replay_task_count: 0
+    models:
+    - model: codex-auto-review
+      thinking_level: low
+      model_response_count: 2
+      timed_model_stream_seconds: 0.0
+      timed_reasoning_seconds: 0.0
+      timed_message_seconds: 0.0
+      recorded_first_token_wait_seconds: 8.048
+      tokens:
+        input: 41359
+        cached_input: 17920
+        output: 323
+        reasoning_output: 202
+    - model: gpt-5.6-sol
+      thinking_level: high
+      model_response_count: 10
+      timed_model_stream_seconds: 67.906
+      timed_reasoning_seconds: 47.107
+      timed_message_seconds: 20.799
+      recorded_first_token_wait_seconds: 4.778
+      tokens:
+        input: 789253
+        cached_input: 689024
+        output: 6403
+        reasoning_output: 2196
+    - model: gpt-6-astra
+      thinking_level: max
+      model_response_count: 24
+      timed_model_stream_seconds: 142.757
+      timed_reasoning_seconds: 113.798
+      timed_message_seconds: 28.959
+      recorded_first_token_wait_seconds: 3.029
+      tokens:
+        input: 1913938
+        cached_input: 1830400
+        output: 7643
+        reasoning_output: 2902
+    - model: gpt-6-astra
+      thinking_level: xhigh
+      model_response_count: 20
+      timed_model_stream_seconds: 114.408
+      timed_reasoning_seconds: 43.514
+      timed_message_seconds: 70.894
+      recorded_first_token_wait_seconds: 6.298
+      tokens:
+        input: 1191760
+        cached_input: 1075072
+        output: 6888
+        reasoning_output: 1021
+  after:
+    session_count: 8
+    task_count: 22
+    completed_task_count: 21
+    interrupted_task_count: 0
+    agent_active_seconds: 5313.906
+    elapsed_envelope_seconds: 2034.119
+    active_union_seconds: 1906.895
+    parallel_overlap_seconds: 3407.011
+    timed_model_stream_seconds: 2114.709
+    recorded_first_token_wait_seconds: 75.913
+    tool_seconds_by_category:
+      agent_control: 8.123
+      command: 211.116
+      extension: 1.803
+      file_change: 3.416
+    compaction_seconds: 206.947
+    compaction_event_count: 1
+    compaction_item_count: 1
+    legacy_compaction_event_count: 0
+    excluded_legacy_replay_task_count: 0
+    models:
+    - model: codex-auto-review
+      thinking_level: low
+      model_response_count: 13
+      timed_model_stream_seconds: 0.0
+      timed_reasoning_seconds: 0.0
+      timed_message_seconds: 0.0
+      recorded_first_token_wait_seconds: 39.958
+      tokens:
+        input: 628200
+        cached_input: 482048
+        output: 1720
+        reasoning_output: 925
+    - model: gpt-5.6-sol
+      thinking_level: high
+      model_response_count: 10
+      timed_model_stream_seconds: 67.906
+      timed_reasoning_seconds: 47.107
+      timed_message_seconds: 20.799
+      recorded_first_token_wait_seconds: 4.778
+      tokens:
+        input: 789253
+        cached_input: 689024
+        output: 6403
+        reasoning_output: 2196
+    - model: gpt-6-astra
+      thinking_level: max
+      model_response_count: 162
+      timed_model_stream_seconds: 1413.789
+      timed_reasoning_seconds: 1344.818
+      timed_message_seconds: 68.971
+      recorded_first_token_wait_seconds: 18.174
+      tokens:
+        input: 19980471
+        cached_input: 19198976
+        output: 104024
+        reasoning_output: 34691
+    - model: gpt-6-astra
+      thinking_level: xhigh
+      model_response_count: 71
+      timed_model_stream_seconds: 633.014
+      timed_reasoning_seconds: 541.103
+      timed_message_seconds: 91.911
+      recorded_first_token_wait_seconds: 13.003
+      tokens:
+        input: 9693677
+        cached_input: 9345920
+        output: 35159
+        reasoning_output: 14957
+  delta:
+    session_count: 3
+    task_count: 16
+    completed_task_count: 15
+    interrupted_task_count: 0
+    compaction_event_count: 1
+    compaction_item_count: 1
+    legacy_compaction_event_count: 0
+    excluded_legacy_replay_task_count: 0
+    agent_active_seconds: 4597.769
+    elapsed_envelope_seconds: 1713.123
+    active_union_seconds: 1585.899
+    parallel_overlap_seconds: 3011.87
+    timed_model_stream_seconds: 1789.638
+    recorded_first_token_wait_seconds: 53.76
+    compaction_seconds: 206.947
+    tool_seconds_by_category:
+      agent_control: 6.105
+      command: 171.124
+      extension: 1.754
+      file_change: 3.416
+    models:
+    - model: codex-auto-review
+      thinking_level: low
+      model_response_count: 11
+      timed_model_stream_seconds: 0.0
+      timed_reasoning_seconds: 0.0
+      timed_message_seconds: 0.0
+      recorded_first_token_wait_seconds: 31.91
+      tokens:
+        input: 586841
+        cached_input: 464128
+        output: 1397
+        reasoning_output: 723
+    - model: gpt-5.6-sol
+      thinking_level: high
+      model_response_count: 0
+      timed_model_stream_seconds: 0.0
+      timed_reasoning_seconds: 0.0
+      timed_message_seconds: 0.0
+      recorded_first_token_wait_seconds: 0.0
+      tokens:
+        input: 0
+        cached_input: 0
+        output: 0
+        reasoning_output: 0
+    - model: gpt-6-astra
+      thinking_level: max
+      model_response_count: 138
+      timed_model_stream_seconds: 1271.032
+      timed_reasoning_seconds: 1231.02
+      timed_message_seconds: 40.012
+      recorded_first_token_wait_seconds: 15.145
+      tokens:
+        input: 18066533
+        cached_input: 17368576
+        output: 96381
+        reasoning_output: 31789
+    - model: gpt-6-astra
+      thinking_level: xhigh
+      model_response_count: 51
+      timed_model_stream_seconds: 518.606
+      timed_reasoning_seconds: 497.589
+      timed_message_seconds: 21.017
+      recorded_first_token_wait_seconds: 6.705
+      tokens:
+        input: 8501917
+        cached_input: 8270848
+        output: 28271
+        reasoning_output: 13936
+  semantics:
+    attribution: Codex logs carry no git-branch telemetry. This task-tree interval is not branch-attributed
+      unless an AgentSession explicitly declares it.
+    delta: Delta is after minus before for a fixed whitelist of cumulative additive fields; a decrease
+      is rejected rather than hidden.
+    cutoff_boundary: Task, tool, compaction, and model-stream timings are clipped at both cutoffs.
+      Token counts and client-reported first-token waits are emitted on completion and can be charged
+      wholly to the interval containing that completion.
+    live_snapshot: When snapshot_incomplete is true, the after snapshot and delta are lower bounds
+      on the task tree's eventual totals.
+    retention: The receipt retains aggregate counts, timings, models, efforts, and tokens; it drops
+      prose, private paths, agent paths, turn ids, and command history.

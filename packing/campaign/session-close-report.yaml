@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 125
+count: 126
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 80
+  sessions_measured: 81
   sessions_unmeasured: 45
   attributed:
     rollups: 124
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3989
     wall_hours: 248.36
 codex_receipts:
-  attributed: 49
+  attributed: 50
   unattributed: 2
-  measured: 51
+  measured: 52
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -2092,3 +2092,23 @@ sessions:
   one_off_code: 69
   wall_hours: 17.59
   codex_receipts: []
+- id: session-126
+  title: "Stromquist, Fractional Packing, and the Next Proof Mechanisms"
+  status: in_progress
+  primary_bead: think-jx95
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-126.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-126.yaml
+    model_responses: 200
+    agent_hours: 1.28
+    active_union_hours: 0.44
+    wall_hours: 0.44
+    snapshot_incomplete: true

@@ -211,6 +211,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Fractional Packing, Duality, and the Next N11 Discriminators](docs/project/research/research-2026-09-10-x027-fractional-duality.md) | research synthesis | record | retained | — |
+| [X027: Seven Corner Marks, Contact Components, and Relational Helpers](docs/project/research/research-2026-09-10-x027-structural-helpers.md) | research synthesis | record | retained | — |
+| [Certificate Mechanisms After the N11 Fractional Ceilings](docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md) | research synthesis | record | retained | — |
 | [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
 | [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
 | [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) | implementation plan | current | transient | — |
@@ -714,6 +717,19 @@ stop. Long autonomous sessions use the same rule; autonomy changes the duration 
 controller, not permission to blur contracts.
 
 ### Current Handoff
+
+**New analytical exploration:**
+[X-027](packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md)
+connects the Stromquist correspondence with the recent certificate and owner results.
+Three cross-reviewed reports derive the full-unit fractional obstruction at
+`38200/9977`, a precise interior-duality argument, seven-of-eight corner-mark ownership,
+and at most three normalized physical contact components.
+A floor-charge example adds an exact abstract expressiveness separation.
+These are analytical deductions with explicit scope, not newly registered frontier
+results or target measurements.
+BC329 remains the direct-bound continuation; small geometric charge and joint-owner
+tests are the next new mechanism comparisons.
+X-027’s ranked table states their prerequisites and what each outcome would establish.
 
 **Current combined reader entry:**
 [the consolidated PR-series takeaways](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons),
@@ -3805,14 +3821,15 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-122-source.yaml` | session-122 | 101 | 0.89 h | 0.29 h | 0.29 h | yes |
 | `codex-task-tree-session-123.yaml` | session-123 | 87 | 18.56 h | 6.18 h | 6.18 h | yes |
 | `codex-task-tree-session-124-publication.yaml` | session-124 | 154 | 6.97 h | 0.41 h | 0.41 h | yes |
+| `codex-task-tree-session-126.yaml` | session-126 | 200 | 1.28 h | 0.44 h | 0.44 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 80 |
+| measured | 81 |
 | unmeasured | 45 |
-| **total** | **125** |
+| **total** | **126** |
 
 <!-- END GENERATED: session-close-report -->
 
