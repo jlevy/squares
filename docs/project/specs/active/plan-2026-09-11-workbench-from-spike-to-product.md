@@ -210,3 +210,7 @@ page whose script nothing can read.
 - **Does `test_candidate.py`’s full sweep belong in the fast tier or the deep gate?** It
   walks 324 pairs at two instants; `check_workbench.py` does not.
   Measure at C.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

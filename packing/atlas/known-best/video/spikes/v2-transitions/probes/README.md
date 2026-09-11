@@ -7,3 +7,7 @@ formatted into its text.
 
 Names are grouped by what they are about, not by which checker uses them, so two
 checkers asking the same question of the page ask it with the same file.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
