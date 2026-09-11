@@ -11,11 +11,11 @@ theorem it rests on was reviewed adversarially before the certificate was regist
 s(11) >= 191/50 = 3.82
 ```
 
-This is an endpoint certificate, not a limit: the side is the container side itself, and
-nothing here claims a strict inequality.
-The exact ceiling family retained beside it shows that no certificate of the earlier
-one-body point-atom form exists at this side for this shrink, on any net containing its
-six directions; the threshold atoms are what pass that ceiling.
+This lower bound is carried by an endpoint certificate: the certificate’s container side
+is exactly `191/50`. The theorem concludes `s(11) >= 191/50`; it does not claim a strict
+inequality. The exact ceiling family retained beside it shows that no certificate of the
+earlier one-body point-atom form exists at this side for this shrink, on any net
+containing its six directions; the threshold atoms are what pass that ceiling.
 
 ## The Theorem
 
@@ -169,9 +169,9 @@ shrink and net; the threshold atoms carry `2.29` of this certificate’s budget,
 point method cannot have.
 Nothing here bounds the side from above, decides fit at a larger side, or proves a
 strict inequality at `191/50`. [T-026](t-026-dilation-limit-proof.md) measures these
-atoms on 720- and 1440-step nets and proves the resulting weak dilation-limit bound
-`s(11) >= 955000*sqrt(518400042893309449)/179696714646249`. That finite-net result does
-not decide further refinements.
+atoms on 720- and 1440-step nets and proves the exact lower bound
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249` by a dilation-limit argument.
+That finite-net result does not decide further refinements.
 
 ## Replay
 

@@ -67,8 +67,9 @@ The original measurements are retained; the changed conclusions concern their sc
 
 **`s(11)`.** The side of the smallest square containing eleven unit squares without
 overlap, at arbitrary rotations.
-To prove a lower bound `L`, exclude every container side strictly below `L`. An endpoint
-exclusion proves more at that side; a weak limit need not decide it.
+To prove a lower bound `L`, exclude every container side strictly below `L`. The
+conclusion is `s(11) >= L`; it does not by itself decide whether a packing exists at
+side exactly `L`. A direct exclusion at `L` settles that additional question.
 
 **Core.** With a shrink factor `B < 1` and an admitted finite direction net satisfying
 the proved strict-containment condition, every unit square placed in the container

@@ -31,13 +31,18 @@ $$
 \leq s(11)\leq 3.877083590022814\ldots.
 $$
 
-The lower endpoint is T-026’s weak limit.
-T-025 excludes the particular rational side `191/50`. T-023 excludes one four-owner
-branch at `96/25`; it does not supply a global lower bound there.
+T-026 proves the ordinary exact lower bound
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249` at V4/C4 by dilation and
+rational density. T-025 proves `s(11) >= 191/50 = 3.82` at V4/C5. T-023 excludes one
+four-owner branch at `96/25`; it does not supply a global lower bound there.
 Their registry levels are respectively V4/C4/S5, V4/C5/S5 and V3/C3/S3. This review does
 not raise those assurance levels.
 See the [claim register](../../../packing/frontier/RESULTS.md) and
 [T-026 proof](../../../packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md).
+
+The dilation-limit method does not establish the separate strict inequality beyond the
+displayed algebraic constant.
+This does not qualify T-026’s proved lower bound.
 
 | Retained observation | Supported inference | Additional premise still needed |
 | --- | --- | --- |
@@ -244,7 +249,11 @@ All old net nodes survive and provide monotonicity controls when B grows.
 
 **Accept.** The complete exact and interval routes agree on the normalized certificate,
 with budget below eleven, and its physical dilation record is strictly stronger than
-T-026. This would be unconditional progress directly, at its stated weak-limit scope.
+T-026. This would prove an ordinary exact lower bound `s(11) >= C'` for the new
+algebraic constant `C'`.
+
+The method would not establish the separate strict inequality `s(11) > C'`. That would
+not qualify the proved lower bound.
 
 **Reject or remain partial.** An exact undercharged core with `m_c<=M/11` rejects this
 fixed packet. A time limit is incomplete.

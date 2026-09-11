@@ -419,7 +419,7 @@ agenda:
     instances: [11]
     state: blocked
     priority: 1
-    question: Does the standalone explainer state the point-only, threshold and weak-limit rungs accurately,
+    question: Does the standalone explainer state the point-only, threshold and dilation-limit proofs accurately,
       and does its stacked head pass independently of the inherited research base?
     budget: One parallel 30–60 minute independent mathematical, prose and rendering review, followed by one
       stack-only CI checkpoint.
@@ -432,10 +432,11 @@ agenda:
     blocked_on: The research branch must be published before PR148 can be retargeted and checked on its
       stacked head. On its current main base, the only hosted failure is the inherited expired session099
       deadline; every other hosted job passes.
-    next_evidence: The independent mathematical review passed after narrowing the T025 endpoint and
-      standalone-checker wording; the final audit also defined core, trace, charge, endpoint certificate and
-      weak limit before use. Retarget PR148 after the research branch is pushed, then wait for the stacked
-      hosted checks.
+    next_evidence: The independent mathematical review passed after narrowing the T025 certificate and
+      standalone-checker wording; the terminology audit states the exact proved lower bound with its V4/C4
+      assurance, identifies dilation-limit as the proof method and treats strictness as a separate question. It
+      defines core, trace and charge before use. Retarget PR148 after the research branch is pushed, then wait for
+      the stacked hosted checks.
     workflows: [factual-review, documentation-pass]
     program: n11-daytime-strategy
     parallel_group: explainer-review

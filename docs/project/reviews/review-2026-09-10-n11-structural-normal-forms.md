@@ -87,8 +87,10 @@ The relevant sources are:
 - `packing/cases/n11_five_dot_cover/`: T023’s selected conditional exclusion and its
   continuation contracts.
 - `packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md` and
-  `t-026-dilation-limit-proof.md`: the current unconditional certificate and weak
-  limiting lower value `3.826447410572939744...`.
+  `t-026-dilation-limit-proof.md`: the certificate and exact dilation-limit argument
+  proving the current unconditional lower bound
+  `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 =
+  3.826447410572939744...` at V4/C4.
 
 Compactness supplies an optimum because centres are bounded, orientations live on a
 compact quotient circle, and containment/non-overlap are closed.

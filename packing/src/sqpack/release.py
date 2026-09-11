@@ -27,8 +27,8 @@ PUBLICATION_HISTORY = (
         version="v0.4.0",
         first_labeled="September 10, 2026",
         result_scope=(
-            "The current lower-bound edition: T-025 excludes the endpoint "
-            "$191/50 = 3.82$, and T-026 proves the weak limit "
+            "The current lower-bound edition: T-025 proves "
+            "$s(11) ≥ 191/50 = 3.82$, and T-026 proves "
             "$s(11) ≥ 3.826447410572939744…$."
         ),
     ),

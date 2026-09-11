@@ -1455,6 +1455,7 @@ class CurrentBoundFacts:
     fine_total_budget: Fraction
     fine_directions: int
     fine_interval_directions: int
+    fine_half_gap: Fraction
     normalization: Fraction
     dilation_factor_tex: str
 
@@ -1490,13 +1491,15 @@ def current_bound_facts() -> CurrentBoundFacts:
         raise SystemExit(f"{CURRENT_BOUND_RECORD.name}: exact bound and square disagree")
     if conclusion["relation"] != ">=" or conclusion["endpoint_certificate"] is not False:
         raise SystemExit(
-            f"{CURRENT_BOUND_RECORD.name}: explainer requires a weak non-endpoint bound"
+            f"{CURRENT_BOUND_RECORD.name}: explainer requires a >= dilation-limit bound"
         )
     endpoint = Fraction(coarse["outer_side"])
     if endpoint != Fraction(source["outer_side"]) or fine["outer_side"] != coarse["outer_side"]:
         raise SystemExit("T-025 and T-026 disagree about their source endpoint")
     if coarse["variant"] != "threshold" or fine["variant"] != "threshold":
         raise SystemExit("advanced explainer inputs must be threshold certificates")
+    if coarse["symmetry"] != "D4" or fine["symmetry"] != "D4":
+        raise SystemExit("advanced explainer inputs must carry D4 symmetry")
     if (
         len(coarse["atoms"]) != source["point_atoms"]
         or len(coarse["threshold_atoms"]) != source["threshold_atoms"]
@@ -1549,6 +1552,7 @@ def current_bound_facts() -> CurrentBoundFacts:
         fine_total_budget=Fraction(fine["total_budget"]),
         fine_directions=int(fine["direction_steps"]) + 1,
         fine_interval_directions=2 * int(fine["direction_steps"]) + 1,
+        fine_half_gap=Fraction(source["half_gap_tangent"]),
         normalization=normalization,
         dilation_factor_tex=(
             f"\\frac{{{factor_multiplier}\\sqrt{{{factor_radicand}}}}}{{{factor_denominator}}}"
@@ -1890,8 +1894,8 @@ def number_line_marks(facts: list[Facts], headline: Facts, current: CurrentBound
     if ordered[0] is not headline:
         raise SystemExit("the headline bound is not the largest; the marks would stack wrong")
     entries = [
-        (current.bounded_side, "T-026: current weak bound", True),
-        (current.endpoint, f"191/50 = {decimal(current.endpoint)}, excluded endpoint", False),
+        (current.bounded_side, "T-026: current lower bound", True),
+        (current.endpoint, f"191/50 = {decimal(current.endpoint)}, direct certificate", False),
         *[
             (
                 f.outer_side,
@@ -2146,8 +2150,10 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
     return values
 
 
-#: The deck, which the hero sets under the title and the card repeats after it.
-SUBTITLE = "A New Lower Bound on the Square Packing Problem"
+#: The visible title names the concrete result. The deck names the reusable method
+#: without implying that this particular threshold certificate proves other cases.
+TITLE = "A New Lower Bound for Packing 11 Squares"
+SUBTITLE = "Weighted Certificates for Square Packing"
 
 
 def card_substitutions(headline: Facts, current: CurrentBoundFacts) -> dict[str, str]:
@@ -2170,10 +2176,10 @@ def card_substitutions(headline: Facts, current: CurrentBoundFacts) -> dict[str,
     legend at the foot, which is the part a reader can find on the page.
     """
     width, height = png_size(COMPOSITE_CARD)
-    title = f"s({headline.n}) ≥ {current.bounded_side_decimal}: {SUBTITLE}"
+    title = f"{TITLE}: s({headline.n}) ≥ {current.bounded_side_decimal}"
     description = (
         f"How weighted point and threshold certificates prove the current lower bound "
-        f"for s({headline.n}), from a visual point-only proof to an exact weak limit."
+        f"for s({headline.n}), from a visual point-only proof to the current exact lower bound."
     )
     return {
         "PAGE_TITLE": title,
@@ -2193,7 +2199,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
 
     The axis positions are here rather than in `certificate_substitutions`
     because the bounds figure states every rung at once and stands outside the stamped
-    article; the band it shades runs from the current weak bound to the best packing.
+    article; the band it shades runs from the current lower bound to the best packing.
     """
     headline_frac = f"{headline.outer_side.numerator}/{headline.outer_side.denominator}"
     current = current_bound_facts()
@@ -2214,6 +2220,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
             else ""
         ),
         "THIRDPARTY_L_FRAC": f"{package_side.numerator}/{package_side.denominator}",
+        "TITLE": TITLE,
         "SUBTITLE": SUBTITLE,
         **card_substitutions(headline, current),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
@@ -2281,6 +2288,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "T026_TOTAL_DEC": truncated(current.fine_total_budget),
         "T026_DIRECTIONS": str(current.fine_directions),
         "T026_INTERVAL_DIRECTIONS": str(current.fine_interval_directions),
+        "T026_HALF_GAP": frac_inline_tex(current.fine_half_gap),
         "T026_NORMALIZATION": frac_inline_tex(current.normalization),
         "T026_FACTOR": current.dilation_factor_tex,
         "T026_CERT_URL": repo_file(THRESHOLD_FINE_CERTIFICATE),

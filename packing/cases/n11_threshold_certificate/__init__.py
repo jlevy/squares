@@ -10,7 +10,7 @@ the exact point-atom ceiling at `191/50`.
 `certificate.json` is the retained rung, T-025's endpoint certificate on the 181-direction
 net at shrink 9977/10000. Beside it are the same atoms re-certified on finer nets,
 `certificate-191-50-net720.json` and `certificate-191-50-net1440.json` at shrink
-249507/250000, whose dilation families give T-026's weak limit; their limit records are
+249507/250000, whose dilation families prove T-026's exact lower bounds; their records are
 `t-026-net720-dilation-limit-corollary.json` and `t-026-dilation-limit-corollary.json`.
 The finer-net rungs prove the same side, 191/50, as the retained one: what they buy is
 the larger shrink the dilation argument turns into a bound above it.

@@ -10,7 +10,7 @@
   "proof": {
     "density_step": "for every real x below bounded_side, rational density supplies q with x / outer_side < q < factor_supremum",
     "embedding_step": "a packing at side x embeds in the larger side q * outer_side, contradicting that strict-subfactor no-fit proof",
-    "endpoint_status": "the sharpened containment inequality is equality at the factor supremum; the weak limit bound does not assert an endpoint certificate, no-fit at the endpoint, or a strict lower bound",
+    "endpoint_status": "the dilation-limit theorem establishes s(11) >= 3175000*sqrt(518400042893309449)/598960960743657; at the factor supremum the sharpened containment inequality is equality, so endpoint_certificate is false because the proof supplies no individual certificate at that side; the method does not establish s(11) > 3175000*sqrt(518400042893309449)/598960960743657",
     "order_step": "equivalently, s(n) is at least every strict rational subbound and therefore at least their real supremum",
     "requires_compactness": false,
     "strict_family": "for every rational q > 0 with q^2 below factor_supremum_squared, the sharpened containment theorem and the scaled source data rule out a packing at side q * outer_side"

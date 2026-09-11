@@ -54,15 +54,17 @@ Labels: **EXACT** = a rational decision by repository primitives; **CHECKED** = 
 **Headline.** The frozen atoms do *not* cover at the finer nets at their own shrink, but
 they do at a slightly larger one, and the rescaled families are accepted by both routes
 of the retention gate.
-The strongest consequence is a weak limit bound
+The strongest consequence is a lower bound
 
 ```text
 s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.82644741057293974417...
 ```
 
 from the 1440-step record, `0.006447410572939` above T-025’s endpoint `191/50 = 3.82`
-and `0.009837907784` above T-024’s `3.816609502788862`. It is a limit, not an endpoint
-certificate: it asserts no strict inequality at its own value.
+and `0.009837907784` above T-024’s `3.816609502788862`. The dilation-limit argument
+proves the ordinary exact lower bound displayed above at V4/C4. It does not establish
+the separate strict inequality beyond that value; this does not qualify the proved lower
+bound.
 
 ## Findings
 

@@ -29,9 +29,12 @@ The current bracket is
 
 T-025 excludes the rational side `191/50 = 3.82` with a mixed certificate made from
 ordinary point charges and two-of-three threshold charges.
-T-026 gives the displayed lower value as a **weak limit** after a finer direction net, a
-larger strict core, weight normalization, and rational dilation.
-It does not decide whether eleven unit squares fit at the limiting side itself.
+T-026 proves the ordinary exact lower bound displayed above at V4/C4 using a finer
+direction net, a larger strict core, weight normalization, rational dilation and order
+completeness.
+
+The method does not establish a strict inequality beyond the displayed constant.
+This is a separate question and does not qualify the proved lower bound.
 
 The inherited A6 result is an exact obstruction for one fixed support, core domain, and
 atom family.
@@ -372,13 +375,18 @@ be reviewed without an in-progress experiment in its diff.
 
 The explainer update uses an **incremental architecture**.
 
-1. State the current bracket near the top, preserving the weak-limit and unresolved
-   endpoint language.
+1. State the exact proved lower bound near the top, explain that every smaller container
+   is excluded, and give the current bracket.
+   Keep the separate strictness question apart from the V4/C4 assurance statement.
 2. Keep T-018 and its point-only certificate as the complete worked example, with its
    seven interactive figures and standalone standard-library checker.
-3. Add one final advanced section defining a two-of-three threshold charge, proving its
-   packing budget, and explaining T-025’s exact exclusion at `3.82`.
-4. Explain T-026’s finer net, normalization, common dilation, and weak limiting step.
+   State explicitly that the numerical `3.81` result is a teaching example rather than a
+   premise of T-026.
+3. Add a final proof section defining a two-of-three threshold charge, proving the
+   general packing budget, and applying it to T-025’s direct certificate at `3.82`.
+4. Complete the headline proof with T-026’s finer net, normalization, common dilation,
+   and limiting step. Dilation-limit describes this proof method; the conclusion is an
+   ordinary lower bound.
 5. Label this edition `v0.4.0` and put a short history near the top: `v0.3.0`, first
    used as this explainer’s edition label on September 8, 2026, is the 3.81 edition;
    `v0.4.0`, first used as that label on September 10, 2026, is the current T-025/T-026

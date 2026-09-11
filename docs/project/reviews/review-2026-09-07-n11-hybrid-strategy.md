@@ -88,8 +88,10 @@ $$
 3.810025723614703\ldots\le s(11)\le3.877083590022814\ldots.
 $$
 
-The lower endpoint is T-022’s weak limit consequence of T-018’s exact $3.81$
-certificate. It is not a separate no-fit certificate at the limiting endpoint.
+T-022 proves the ordinary exact lower bound by applying dilation and a limit argument to
+T-018’s exact $3.81$ certificate.
+The method does not establish the separate strict inequality beyond the displayed
+constant; this does not qualify the proved lower bound.
 The upper endpoint is Trump’s verified construction.
 Its exact representation is
 

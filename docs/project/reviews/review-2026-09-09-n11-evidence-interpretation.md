@@ -150,8 +150,14 @@ The canonical outcome is the
 The original PR145/exp153 interpretation above is retained as historical review
 evidence.
 
-The combined global bound is `3.826447410572939744... <= s(11) <= 3.877083590022814...`.
-T-026 supplies the new weak lower endpoint; the upper construction is unchanged.
+Let `C = 955000*sqrt(518400042893309449)/179696714646249 =
+3.826447410572939744...`. T-026 proves the ordinary exact lower bound `s(11) >= C` at
+V4/C4, so the combined global bound is `C <= s(11) <= 3.877083590022814...`; the upper
+construction is unchanged.
+The classification follows [epistemics.md](../../../epistemics.md).
+
+The dilation-limit proof does not establish the separate strict inequality `s(11) > C`.
+This does not qualify the proved lower bound.
 T-023 and exp153 retain their conditional and fixed-family scopes and do not supply that
 global improvement. The compact pair instrument and parent-centre proposal remain unrun
 preparation and analytic work, respectively.

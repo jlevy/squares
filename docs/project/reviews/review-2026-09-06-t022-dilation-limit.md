@@ -4,7 +4,7 @@
 `6b4cde0a905d5165fe1f841870d1081c9c915e0e`.** The sharpened theorem and its retained
 replay boundary are sound.
 The unchanged `T-018` source certificate and a new exact Euclidean containment lemma
-prove the weak lower bound
+prove the lower bound
 
 $$
 s(11)\ge S_*:=
@@ -321,8 +321,9 @@ $$
 
 so the sharp containment test reaches equality.
 The proof requires strict interior containment and supplies no certificate at $q=c_*$.
-This does not affect the weak bound: the density step uses a distinct rational $q<c_*$
-above each hypothetical $x<S_*$. The record states that the endpoint is not certified.
+This does not affect the lower bound: the density step uses a distinct rational $q<c_*$
+above each hypothetical $x<S_*$. The record states `s(11)>=S_*` and leaves fit at
+equality undecided.
 
 ### Strict `>`
 
@@ -410,7 +411,7 @@ remains reviewed through `2026-09-05`, while the new `T-022` evidence records
 
 On the exact integrated tree, all 20 focused dilation-corollary tests pass.
 An independent rational-arithmetic check reproduces the source digest, $D$, $R$,
-$S_*^2$, and the record’s weak relation and endpoint flag.
+$S_*^2$, and the record’s `>=` relation and endpoint flag.
 The review’s eight local links resolve, and the one-file review diff has no whitespace
 errors.
 

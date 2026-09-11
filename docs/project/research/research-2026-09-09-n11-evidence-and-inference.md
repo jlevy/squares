@@ -1,8 +1,10 @@
 # N11 Research: Definitions, Findings, and the Inference Chain
 
-**Current combined result, September 10, 2026:**
-`3.826447410572939744... <= s(11) <= 3.877083590022814...`. T-026 improves the global
-lower bound; the owner results remain conditional.
+**Current combined result, September 10, 2026:** let
+`C = 955000*sqrt(518400042893309449)/179696714646249 =
+3.826447410572939744...`. T-026 proves `s(11) >= C` at V4/C4, so
+`C <= s(11) <= 3.877083590022814...`. The owner results remain conditional.
+The classification follows [epistemics.md](../../../epistemics.md).
 [§12 consolidates the takeaways across the PR series](#12-the-combined-series-takeaways-and-open-comparisons),
 including what worked, what particular tests ruled out, and what remains undecided.
 [§13 reviews the later A6 and H157 additions](#13-the-later-a6-and-h157-results-what-has-been-checked),
@@ -586,7 +588,7 @@ keeping its total charge budget below eleven.
 | --- | --- | --- |
 | T-024: finer-net point certificate | Re-certifying the earlier point atoms and applying dilation gives global lower bound `3.816609502788862235...` | A fit decision at its irrational limiting side |
 | T-025: threshold certificate | 584 point atoms and 320 two-of-three atoms have budget `685457679/62500000 = 10.967322864 < 11`; covering decisions exclude side `191/50 = 3.82` | A result above this side without another certificate or transfer argument |
-| T-026: finer-net threshold certificate | Re-certification on the 1440-step net and rational dilation give the stronger global weak limit below | An endpoint certificate or strict inequality at that limit |
+| T-026: finer-net threshold certificate | Re-certification on the 1440-step net and rational dilation prove the stronger global lower bound below | The separate strict inequality beyond the stated lower bound |
 | T-023: conditional five-dot certificate | A specified four-owner patch case at `96/25 = 3.84` leaves at most five further parents, contradicting the seven required | A global exclusion of every packing at `3.84` |
 | Exp145–147: independent and wall-aware audits | Exp145 confirms the 361-direction cover; exp146 enlarges 12 of 16 common footprints; exp147 tests all 128 proposed containment transfers and finds no new certified selection | A physical case census or a bound from footprint growth alone |
 | Exp148–153: limits on the fixed five-dot extension | Partial masks, individual owner witnesses and escape geometry culminate in exp153’s exact exclusion of every freely placed sixth site added to fixed `D` for one selected wall-patch relaxation | Failure of moved or reweighted dots, arbitrary weighted covers, threshold charges, or stronger parent restrictions |
@@ -595,7 +597,7 @@ keeping its total charge budget below eleven.
 The new global result is
 
 $$
-s(11) \geq
+s(11) \geq C :=
 \frac{955000\sqrt{518400042893309449}}{179696714646249}
 =3.826447410572939744\ldots.
 $$
@@ -604,7 +606,11 @@ The upper construction remains `3.877083590022814...`. The lower endpoint moved 
 `0.016421687`, closing about **24.49% of the previous gap** and leaving about
 `0.050636179`. This is progress on a rigorous lower bound, not a new packing or a proof
 of optimality. The dilation argument proves exclusions for rational factors strictly
-below the limiting factor; taking their limit gives the displayed weak inequality.
+below the limiting factor; taking their limit proves `s(11) >= C`. Here
+**dilation-limit** names the method of proof.
+
+**Separate strictness question.** T-026 does not establish `s(11) > C`. This does not
+qualify the proved lower bound `s(11) >= C`.
 
 Primary proof packets are
 [T-024](../../../packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md),
@@ -945,7 +951,7 @@ that allocation.
 ## 14. Daytime Evidence After PR139
 
 This section records the first post-merge strategy blocks.
-They sharpen domains and candidate languages but do not change the T-026 lower limit or
+They sharpen domains and candidate languages but do not change the T-026 lower bound or
 the known upper construction.
 The active allocation is
 [agenda035](../../../packing/campaign/agendas/agenda-035-n11-daytime-strategy.md).

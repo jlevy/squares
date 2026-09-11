@@ -13,9 +13,9 @@ hypothesis:
     side strictly above 191/50, in one of two ways: the frozen 191/50 threshold
     certificate, placed on a finer net at the larger shrink the net admits and rescaled
     by one rational factor, passes both routes of the gate and dilates by T-022's
-    sharpened containment argument to a weak limit above 3.826; or the threshold loop
+    sharpened containment argument to a lower bound above 3.826; or the threshold loop
     started from the accepted 191/50 site and atom set reaches a rows-complete value
-    below eleven at 383/100, which freezes to an endpoint certificate there.
+    below eleven at 383/100, which freezes to an individual-side certificate there.
   lane: proof
   derived_from: [X-024]
   strategy_refs: ['proof:22', 'proof:23']
@@ -24,7 +24,7 @@ hypothesis:
     metric: >-
       the largest side certified unconditionally by a frozen threshold certificate
       accepted by devtools.decide_threshold_certificate with both routes agreeing,
-      together with the weak limit its dilation record derives
+      together with the lower bound its dilation record derives
     direction: >-
       Confirm with a frozen threshold certificate at 383/100 accepted by both routes, or
       with the frozen 191/50 certificate accepted by both routes on a 720- or 1440-step
@@ -57,18 +57,24 @@ hypothesis:
   registered: '2026-09-09'
   notes: >-
     T-026 subsequently confirms the first disjunct. The retained 1440-step certificate
-    and exact dilation corollary give the weak limit
+    and exact dilation corollary prove
+    s(11) >=
     955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...
-    while leaving its endpoint unresolved. The separate rows-complete loop at 383/100
-    remains open, as do re-optimised finer-net atoms and changed atom families. The
-    point-atom obstruction and earlier LP slopes retain their original finite scopes.
+    at V4/C4. The separate rows-complete loop at 383/100 remains open, as do re-optimised
+    finer-net atoms and changed atom families. The point-atom obstruction and earlier LP
+    slopes retain their original finite scopes.
 ---
 # H-156 — Past 3.82 Without Conditioning
 
 **Status update, September 10, 2026.** T-026 confirms the finer-net and dilation
-disjunct with an exact weak limit of `3.826447410572939744...`. It does not decide its
-limiting endpoint. The separate rows-complete loop at `383/100`, re-optimisation on a
-finer net, and changed atom families remain open.
+disjunct by proving the ordinary exact lower bound
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249 =
+3.826447410572939744...` at V4/C4. The separate rows-complete loop at `383/100`,
+re-optimisation on a finer net, and changed atom families remain open.
+
+**Separate strictness question.** The dilation-limit method does not establish
+`s(11) > 955000*sqrt(518400042893309449)/179696714646249`. This does not qualify the
+proved lower bound.
 
 The threshold certificate at `191/50` is the first result past the point-method ceiling,
 and [X-024](../explorations/X-024-two-lines-at-eleven.md) makes pushing it up in side
@@ -83,8 +89,9 @@ Condition 4, and the frozen weights, multiplied by one rational factor, either c
 every closed core at the new shrink or they do not.
 On the point atoms of `T-018` they did, at every net up to 2880 steps, and the 1440-step
 rung dilated to `3.816609502788862`. The same sweep on the threshold certificate, with
-the threshold atoms entering the same difference array, now gives the retained weak
-limit `3.826447410572939744...` from the 1440-step rung.
+the threshold atoms entering the same difference array, gives the verified covering
+premise for the dilation-limit lower bound `3.826447410572939744...` from the 1440-step
+rung.
 
 The second is the loop.
 Spike B’s rows-only driver, warm-started from the accepted site and atom set, costs

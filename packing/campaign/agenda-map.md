@@ -281,7 +281,7 @@ Open frontier: `BC-261`, `BC-262`, `BC-263`, `BC-264`, `BC-266`, `BC-267`, `BC-2
 | agenda-035 | `BC-333` | ready | Are the selected blocks producing reusable evidence without repeated parsing, gates or source… |
 | agenda-035 | `BC-334` | complete | Can the selected incremental architecture be rendered as a self-contained explainer whose headline… |
 | agenda-035 | `BC-336` | complete | Can the current explainer be labeled v0.4.0 with a concise, source-bound history of the v0.3.0 and… |
-| agenda-035 | `BC-335` | blocked | Does the standalone explainer state the point-only, threshold and weak-limit rungs accurately, and… |
+| agenda-035 | `BC-335` | blocked | Does the standalone explainer state the point-only, threshold and dilation-limit proofs accurately,… |
 | agenda-035 | `BC-337` | blocked | Does substituting the exact TR all-owner-incompatible centre-space obstacle K_TR for the control… |
 
 Open frontier: `BC-327`, `BC-329`, `BC-330`, `BC-331`, `BC-333`, `BC-335`, `BC-337`.

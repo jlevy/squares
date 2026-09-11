@@ -88,13 +88,18 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 
 
-def test_title_sets_s11_as_math_without_moving_the_bound_into_math(page: str) -> None:
-    """The title's function is notation; its relation and value remain title text."""
+def test_title_names_the_result_and_the_deck_states_the_bound_in_plain_text(page: str) -> None:
+    """The title block is typographic; the exact theorem is typeset in the body."""
     heading = re.search(r"<h1\b.*?</h1>", page, re.DOTALL)
     assert heading is not None
+    assert "A New Lower Bound for Packing 11 Squares" in heading.group(0)
+    subtitle = re.search(r'<p class="subtitle centred">(.*?)</p>', page, re.DOTALL)
+    assert subtitle is not None
     current = current_bound_facts()
-    assert '<span class="tex">s(11)</span>' in heading.group(0)
-    assert f"≥ {current.bounded_side_decimal}</h1>" in heading.group(0)
+    assert "Weighted Certificates for Square Packing" in subtitle.group(0)
+    assert "s(11)" in subtitle.group(0)
+    assert f"≥ {current.bounded_side_decimal}</p>" in subtitle.group(0)
+    assert 'class="tex"' not in subtitle.group(0)
 
 
 @pytest.mark.parametrize(
@@ -198,7 +203,26 @@ def test_the_published_document_is_markdown_and_not_the_template(document: str) 
     assert "3.81" in document
     assert "1,121" in document
     assert "181" in document
-    assert document.startswith("# $s(11)$")
+    assert document.startswith("# A New Lower Bound for Packing 11 Squares")
+
+
+def test_the_three_stage_guide_wraps_each_print_grid_item_in_a_paragraph(page: str) -> None:
+    """KPress's print list grid needs one element child for each item's prose.
+
+    A tight Markdown list leaves the text after its opening ``strong`` as an anonymous
+    grid item. Chromium then auto-places that text in the 2.5rem number column, producing
+    several pages of nearly one-character-wide lines. A loose list wraps each complete
+    item in one paragraph, which the print stylesheet explicitly places in column two.
+    """
+
+    guide = re.search(
+        r"We explain the proof in three stages:</p>\s*<ol>(.*?)</ol>", page, re.DOTALL
+    )
+    assert guide is not None
+    items = re.findall(r"<li>(.*?)</li>", guide.group(1), re.DOTALL)
+    assert len(items) == 3
+    for item in items:
+        assert re.fullmatch(r"\s*<p>.*</p>\s*", item, re.DOTALL)
 
 
 def test_the_published_document_carries_no_html(document: str) -> None:
@@ -383,24 +407,31 @@ def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
     for text in (title.group(1), described.group(1)):
         assert "s(11)" in text
         assert current.bounded_side_decimal in text or "current lower bound" in text
+    assert title.group(1).startswith("A New Lower Bound for Packing 11 Squares")
 
 
-def test_advanced_section_distinguishes_endpoint_and_weak_limit(document: str) -> None:
+def test_advanced_section_derives_the_current_lower_bound(document: str) -> None:
     current = current_bound_facts()
     prose = " ".join(document.split())
-    assert "## Beyond Point Atoms: The Current Bound" in document
-    assert "**endpoint certificate** rules out the container side it names" in prose
+    assert "## Proof of the New Lower Bound" in document
+    assert "The numerical $3.81$ result is not a premise of T-026" in prose
+    assert "Keeping T-018 in full also serves as an assurance bridge" in prose
+    assert "The checker does not verify the different threshold certificate" in prose
     assert "call this selected square a **core**" in prose
     assert "Its **trace** on a core $P$ is the subset $P\\cap S$" in prose
-    assert "T-025 excludes the endpoint $L=191/50=3.82$" in prose
+    assert "T-025 proves $s(11)\\ge 191/50=3.82$ directly" in prose
+    assert f"$D={render_explainer.frac_inline_tex(current.fine_half_gap)}$" in prose
+    assert "\\frac{qB(1+D)}{\\sqrt{1+D^2}}" in document
+    assert "both atom families closed under the eight symmetries of the container" in prose
     assert current.bounded_side_decimal in prose
-    assert "including rational sides above $3.82$" in prose
-    assert "does not supply a certificate at the displayed endpoint" in prose
+    assert "exact exclusions include rational sides above $3.82$" in prose
+    assert "the exact lower bound $s(11)\\ge L_*$" in prose
     assert "choose a rational $q<c$" in prose
     assert "fit unchanged in that larger container" in prose
     assert "Each point-certificate bound shown in the interactive figures" in prose
     assert "threshold certificates use the repository" in prose
     assert "exact replay tools instead" in prose
+    assert "weak limit" not in prose.lower()
 
 
 def test_the_published_document_is_named_for_the_result(document: str) -> None:
@@ -420,7 +451,7 @@ def test_the_published_document_is_named_for_the_result(document: str) -> None:
     for claim in claims:
         assert claim.name.startswith(f"{RESULT_ID}-"), claim.name
     # The document is what it is named after: the article, not the template.
-    assert document.startswith("# $s(11)$")
+    assert document.startswith("# A New Lower Bound for Packing 11 Squares")
 
 
 def test_the_md_chip_offers_the_document_by_its_published_name(page: str) -> None:

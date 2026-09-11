@@ -2,17 +2,22 @@
 
 The frozen T-025 threshold atoms, placed on a finer direction net at the larger shrunken
 side that net admits and rescaled by one rational factor, form a threshold certificate
-of the retained form whose sharpened dilation family implies the exact weak bound
+of the retained form whose sharpened dilation family proves the exact lower bound
 
 ```text
 s(11) >= 955000*sqrt(518400042893309449)/179696714646249
       = 3.82644741057293974417...
 ```
 
-T-026 is a limit corollary, not a certificate at the displayed endpoint.
-It neither decides whether eleven squares fit at that endpoint nor proves a strict lower
-bound. It moves the exact lower endpoint by `0.0064474` beyond T-025’s `191/50 = 3.82`,
-which is an endpoint certificate and remains one.
+T-026 proves this ordinary lower bound by a dilation-limit argument: the strict rational
+certificate family approaches the displayed side from below, and rational density plus
+upward embedding establishes the `>=` conclusion at its supremum.
+The record’s `endpoint_certificate: false` says only that this proof supplies no single
+certificate at the displayed side.
+It does not weaken the theorem or its evidence.
+The method does not establish a `>` conclusion there.
+The new result raises the proved lower bound by `0.0064474` beyond T-025’s
+`191/50 = 3.82`; T-025 continues to supply an individual-side certificate at `3.82`.
 
 The registered rung is the threshold certificate on the 1440-step net, `C_1440`. The
 same certificate on the 720-step net, `C_720`, is retained beside it: its own dilation
@@ -148,6 +153,8 @@ midpoint realises the maximum angular error, so the uniform argument cannot incl
 endpoint. Nothing here claims that the frozen data form a certificate at `cL`, that no
 packing exists at `cL`, or that `s(11) > cL`. T-025’s `191/50` remains the largest side
 at which this project holds an endpoint certificate.
+This limit on the method does not weaken the exact conclusion `s(11) >= cL`, which
+follows from the whole strict family by density and upward embedding.
 
 The value is the supremum for uniform dilation of these atoms with one concentric core
 per square and strict support containment on the 1440-step net.

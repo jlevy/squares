@@ -5,10 +5,10 @@ certificate's atom positions, ``L`` and ``B`` by ``a = 250001/250000`` leaves th
 the net, the symmetry, the total mass and the coverage unchanged and keeps
 ``a B (1 + D) < 1``, so the same accepted data prove ``s(11) >= 95250381/25000000 =
 3.81001524``. The whole strict rational family has supremum
-``38100*sqrt(8100042893309449)/899996306539``. Rational density promotes that
-supremum to a weak lower bound even though no member of the family is an endpoint
-certificate. It does not license dividing ``L`` by ``B``, assert no-fit at the
-endpoint, or prove a strict bound.
+``38100*sqrt(8100042893309449)/899996306539``. Rational density and upward embedding
+prove the ordinary exact lower bound at that supremum even though no member of the
+family is an endpoint certificate. The argument does not license dividing ``L`` by
+``B``, assert no-fit at the endpoint, or prove a strict bound.
 
 `devtools.dilation_corollary` recomputes every number from the file. These tests hold it
 to the review's values, and check the invariance the corollary rests on where a sweep is
@@ -172,10 +172,10 @@ def test_the_ceiling_is_below_dividing_l_by_b() -> None:
     )
 
 
-def test_the_strict_dilation_family_proves_its_limit_as_a_weak_bound(
+def test_the_strict_dilation_family_proves_the_exact_lower_bound_at_its_limit(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """The endpoint is the supremum of certified sides, not an endpoint certificate."""
+    """The strict family proves ``>=`` at its supremum without a certificate there."""
 
     certificate = load_n11(CERTIFICATE_PATH)
     monkeypatch.setattr(
@@ -298,6 +298,15 @@ def test_the_retained_limit_record_is_derived_from_the_frozen_certificate(
     )
     assert retained["sharpened_containment"]["source_gap_below_one"] is True
     assert retained["proof"]["requires_compactness"] is False
+    endpoint_status = retained["proof"]["endpoint_status"]
+    assert (
+        f"the dilation-limit theorem establishes s(11) >= {LIMIT_BOUNDED_SIDE_EXACT}"
+        in endpoint_status
+    )
+    assert "endpoint_certificate is false" in endpoint_status
+    assert (
+        f"the method does not establish s(11) > {LIMIT_BOUNDED_SIDE_EXACT}" in endpoint_status
+    )
     assert retained["proof"]["strict_family"] == (
         "for every rational q > 0 with q^2 below factor_supremum_squared, "
         "the sharpened containment theorem and the scaled source data rule out "
@@ -437,6 +446,8 @@ def test_without_a_factor_the_tool_reports_only_the_ceiling(
     assert f"coarse Condition 4 ceiling 1 / (B(1 + D)) = {COARSE_FACTOR}" in printed
     assert f"sharp factor supremum = {LIMIT_FACTOR_EXACT}" in printed
     assert f"side supremum {LIMIT_BOUNDED_SIDE_EXACT}" in printed
+    assert f"theorem establishes s(11) >= {LIMIT_BOUNDED_SIDE_EXACT}" in printed
+    assert f"does not establish s(11) > {LIMIT_BOUNDED_SIDE_EXACT}" in printed
     assert "COROLLARY" not in printed
 
 
@@ -555,6 +566,15 @@ def test_a_threshold_record_round_trips_through_update_and_check(
         ceiling.scaled(certificate.outer_side).exact
     )
     assert written["conclusion"]["endpoint_certificate"] is False
+    endpoint_status = written["proof"]["endpoint_status"]
+    bounded_side = ceiling.scaled(certificate.outer_side).exact
+    assert (
+        f"the dilation-limit theorem establishes s({certificate.n}) >= {bounded_side}"
+        in endpoint_status
+    )
+    assert (
+        f"the method does not establish s({certificate.n}) > {bounded_side}" in endpoint_status
+    )
     assert any(
         "Condition 5'" in invariant
         for invariant in written["strict_dilation_family"]["invariants"]

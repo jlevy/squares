@@ -92,21 +92,23 @@ Results first established here, as far as the recorded source searches show:
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
-  Two refinements, recorded in the
-  [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
-  [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
-  packets, give `s(11) ≥ 3.816609502788862…` as a weak limit bound; neither decides fit
-  at its endpoint. The largest side certified at the container side itself is
-  `191/50 = 3.82`, on a certificate of a different kind — point atoms plus *threshold
-  atoms*, whose budget rule is what carries the side past the point method’s proved
-  ceiling — stated for a stranger in the
-  [T-025 proof packet](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md).
-  The verified bound now stands at
-  `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…`, the weak limit
-  of those same threshold atoms re-certified on a 1440-step direction net
-  ([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)),
-  which again decides no fit at its own endpoint.
-  The certificate at `3.81` supplies the proof explained here.
+  [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md)
+  refines the point-certificate bound to `3.810025723614703…`.
+  [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md)
+  rechecks the point atoms on a finer direction net and proves
+  `s(11) ≥ 3.816609502788862…`.
+  [T-025](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md)
+  introduces point atoms plus *threshold atoms*, whose stronger budget rule carries the
+  side past the point method’s proved ceiling, and directly proves
+  `s(11) ≥ 191/50 = 3.82`. The strongest proved lower bound now stands at
+  `s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 =
+  3.826447410572939…`, proved from those same threshold atoms re-certified on a
+  1440-step direction net and an exact dilation-limit argument
+  ([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)). It
+  is registered as `V4/C4`: machine-verified exact or interval-certified evidence with
+  passing replay, confirmed by distinct exact event-cell and interval coverage methods.
+  The explainer uses the `3.81` certificate as its visual worked example, then proves
+  the threshold-counting and dilation steps that establish the headline bound directly.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
   bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s `4.5058`,
   taken from a source rather than proved here.
