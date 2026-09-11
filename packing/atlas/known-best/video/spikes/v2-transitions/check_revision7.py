@@ -224,13 +224,14 @@ def main() -> int:
             print(" -", f)
         return 1
     print(
-        "OK: the bar carries a numeral every 25 and the last value, minor ticks every 5, all at 28 px in the "
-        "muted grey, with the riding n on the fill's edge and never on a numeral; the annealing dial runs 0..10 "
-        "from no shake to three times the default with the run stretched to 1.7 moves at 120 steps a second "
-        "throughout, deterministic, cached per level, and the default reproduces the recorded free-run misses; "
-        "the live gap reads at the dwell, closes to nothing under the snap and style A, rests at the trajectory's "
-        "own miss with the snap off, withholds the centre and angle errors in a blind run with the reason, and its "
-        "trace is built once per combination."
+        "OK: where the sequence stands is a number that starts at nothing, ends at everything and never "
+        "goes backwards, with the bar it used to be drawn on gone from the page; the annealing dial runs "
+        "0..10 from no shake to three times the default with the run stretched to 1.7 moves at 120 steps a "
+        "second throughout, deterministic, cached per level, and the default reproduces the recorded "
+        "free-run misses; and the live gap, read from `gapBar()` rather than from rows that no longer "
+        "exist, sits on its own record at the dwell, reaches the record under the snap, never reads better "
+        "than the record on a free run, agrees with what the trajectory says it reached, and is built once "
+        "per combination with no per-frame sparkline."
     )
     return 0
 

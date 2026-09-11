@@ -6,6 +6,7 @@
 <title>Best known packings: transition review candidate</title>
 <style>
 __FONT_CSS__
+__KATEX_CSS__
 :root {
   --ink: #17202a;
   --muted: #5c6673;
@@ -48,7 +49,7 @@ body.capture { background: var(--paper); }
 body.capture #stage { box-shadow: none; }
 /* Revision 9: the squares can be picked up, so the surface takes pointer gestures rather than the
    browser's pan and zoom, and says so with the cursor. */
-#packing-svg { position: absolute; left: 60px; top: 24px; width: 1000px; height: 1000px; display: block; touch-action: none; }
+#packing-svg { position: absolute; left: 60px; top: 12px; width: 1000px; height: 940px; display: block; touch-action: none; }
 #packing-svg #squares { cursor: grab; }
 body.dragging #packing-svg #squares { cursor: grabbing; }
 #links line { stroke: var(--paper); stroke-opacity: 0.85; stroke-width: 2; }
@@ -84,15 +85,20 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
    Revision 9 folds the two tabs into one view, so the bar is always drawn: the range is the spine and
    its `to` end is the n the bar measures.
    The two numbers are the ones the panel itself prints, s(n) <= and s(n) >=, read from the record. */
-.gapbar { position: absolute; left: 6px; top: 130px; width: 694px; height: 126px; }
+.gapbar { position: absolute; left: 6px; top: 40px; width: 694px; height: 126px; }
 /* The bar sits under the headline, so the first thing in the column is the n it is all about. */
 .gapbar-plot { position: absolute; left: 0; top: 0; width: 680px; height: 126px; display: block; }
 .gapbar-plot .track { fill: var(--track); }
 /* The bar's two ends, named by the formulas they are rather than by their values: area forbids
    anything below the left one and a grid achieves the right one, so the span is one unit side at
    every n. Set in the text face, which is where the radical comes from. */
-.gapbar-end { font-family: var(--serif); font-size: 26px; fill: var(--quiet); }
-.gapbar-end .gapbar-arg { font-style: italic; }
+/* The two ends are HTML rather than SVG text, because KaTeX sets HTML: a radical it draws is an
+   inline SVG inside a span, which cannot be nested in a `<text>`. They sit above the plot in the
+   band its viewBox opens for them. */
+.gapbar-end { position: absolute; top: -2px; font-size: 26px; color: var(--quiet); white-space: nowrap; }
+.gapbar-area { left: 0; }
+.gapbar-grid { right: 14px; }
+.gapbar-end .katex { font-size: 1em; }
 /* The open territory: everything between what is proved and what is known. */
 /* Named `gap-open`, not `open`: `height` is a CSS property on an SVG rect, so the panel's own
    `.open` group (a 76 px slot) silently stretched this band to 76 px when it shared the name. */
@@ -117,10 +123,19 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
    The eyebrow that used to sit above the headline said "Best known packing", which every packing
    on screen already is, so it named nothing and has been dropped.
    Every slot below is fixed, so nothing jumps between n. */
-.nline { position: absolute; left: 6px; top: 24px; height: 104px; font-family: var(--serif); font-size: 96px; line-height: 104px; color: var(--muted); white-space: nowrap; }
+/* The headline sits under the packing it names, centred on it, rather than at the top of the
+   panel: it is the one thing on the stage that belongs to the picture rather than to the record,
+   and moving it gives the panel back a hundred and thirty pixels for the facts. `#headline` is
+   the row; the `n =` half is constant and lives outside the two fading layers, and the numeral
+   rolls inside them, so the two are positioned within the row rather than as one element. */
+#headline { position: absolute; left: 60px; top: 958px; width: 1000px; height: 108px; }
+/* One slot per fading layer. The numeral used to live inside the layer and take the layer's own
+   opacity; out here it carries its own, which is the whole of what moving it cost. */
+.numeral-slot { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.nline { position: absolute; top: 0; height: 104px; font-family: var(--serif); font-size: 96px; line-height: 104px; color: var(--muted); white-space: nowrap; }
 .nline .n-var { font-style: italic; font-weight: 400; margin-right: 0.22em; }
 .nline .n-eq { font-weight: 400; }
-.numeral { position: absolute; left: 0; top: 24px; font-family: var(--serif); color: var(--ink); line-height: 104px; white-space: nowrap; will-change: transform; }
+.numeral { position: absolute; left: 0; top: 0; font-family: var(--serif); color: var(--ink); line-height: 104px; white-space: nowrap; will-change: transform; }
 .numeral .n-val { font-weight: 400; font-size: 96px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 /* The panel says two things about n, and says them under headings: what is proved, then what
    is open. The heads are the gap bar's head style, so the three headings in the column read as
@@ -131,28 +146,36 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
   font-size: 28px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--quiet); white-space: nowrap;
 }
-.head-proved { top: 296px; }
-.head-open { top: 606px; }
+.head-proved { top: 210px; }
+.head-open { top: 566px; }
 /* The two bounds, one above the other at one size: a best known side and a proved lower bound
    are the same kind of fact about the same quantity, and a reader is meant to compare them, so
    showing one larger than the other would rank them. Both are proved -- a construction proves
    its upper bound -- which is why both sit under PROVED and only the questions sit under OPEN. */
-.side  { position: absolute; left: 6px; top: 336px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
-.lower { position: absolute; left: 6px; top: 392px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
-.side .fn, .lower .fn { font-style: italic; }
-.side .arg, .lower .arg { margin-left: 0.04em; }
-.side .rel, .lower .rel { margin: 0 0.3em; color: var(--label); }
+.side  { position: absolute; left: 6px; top: 250px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+.lower { position: absolute; left: 6px; top: 306px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+/* KaTeX owns the setting inside these lines; the stylesheet owns only where they sit and how
+   big they are. `.katex` inherits the line's size, so one number here scales the whole expression,
+   and the relation's own colour is left to KaTeX rather than being tinted by a class of ours. */
+.side .katex, .lower .katex, .exact .katex { font-size: 1em; }
+/* KaTeX's own stylesheet sets `white-space: normal` on `.katex`, and KaTeX breaks an expression
+   into one `.base` span per relation so a long one can wrap. These lines are fixed-height slots in
+   a poster and must not: `s(11)` wrapped away from its own bound and landed on the line below. */
+.side .katex, .lower .katex, .exact .katex,
+.side .katex-html, .lower .katex-html, .exact .katex-html { white-space: nowrap; }
 /* A bound first proved here, in scarlet on the line directly under the bound it is about --
    the digits themselves are never coloured, so this line is what says it. */
-.star-line { position: absolute; left: 6px; top: 450px; height: 40px; display: flex; align-items: center; white-space: nowrap; }
+.star-line { position: absolute; left: 6px; top: 364px; height: 40px; display: flex; align-items: center; white-space: nowrap; }
 /* Under both bounds, annotating the value above them: the closed form in the text face, or a
    small-caps note giving its degree. Never to the right of a value. */
-.exact { position: absolute; left: 6px; top: 492px; height: 46px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
-.exact .rel { margin-right: 0.3em; }
-.exact .note { font-family: var(--sans); font-size: 28px; font-weight: 500; font-variant-caps: all-small-caps; letter-spacing: 0.09em; color: var(--muted); }
+.exact { position: absolute; left: 6px; top: 406px; height: 86px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
+/* The degree note. It was grey small-caps sans, which made a proved fact read as a caption; it
+   is a statement about the value, so it is set in the text face in ink like the bound above it and
+   differs only in size. */
+.exact .note { font-family: var(--serif); font-size: 34px; color: var(--ink); }
 /* The poster's badges, in a row with short labels: what this record establishes. Fixed height,
    so the row never reflows. */
-.badges { position: absolute; left: 6px; top: 548px; height: 40px; display: flex; align-items: center; gap: 34px; white-space: nowrap; }
+.badges { position: absolute; left: 6px; top: 500px; height: 40px; display: flex; align-items: center; gap: 34px; white-space: nowrap; }
 .badge-item { display: inline-flex; align-items: center; gap: 11px; font-family: var(--sans); font-size: 28px; font-weight: 500; color: var(--label); letter-spacing: 0.01em; }
 .badge-item svg { width: 36px; height: 36px; display: block; flex: none; }
 .badge-item.is-star .label { color: var(--new); font-weight: 600; }
@@ -167,7 +190,7 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
 .badge .glyph-path { fill: var(--muted); stroke: var(--muted); stroke-linejoin: round; }
 .badge .star { fill: var(--new); }
 /* OPEN: what the record leaves unsettled for this n, in the same badge row shape, a step quieter. */
-.open-items { position: absolute; left: 6px; top: 646px; height: 40px; display: flex; align-items: center; gap: 28px; white-space: nowrap; }
+.open-items { position: absolute; left: 6px; top: 606px; height: 40px; display: flex; align-items: center; gap: 28px; white-space: nowrap; }
 .open-item { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
 .open-item svg { width: 32px; height: 32px; display: block; flex: none; }
 .open-none { font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
@@ -378,15 +401,19 @@ input[type=number] { width: 64px; padding: 4px 6px; }
               <path class="hand" d="M -10 8 L 10 8 L 0 23 Z" />
               <line class="hand-stem" x1="0" y1="21" x2="0" y2="53" />
             </g>
-            <text class="gapbar-end" x="0" y="-4" text-anchor="start">&#8730;<tspan class="gapbar-arg">n</tspan></text>
-            <text class="gapbar-end" x="680" y="-4" text-anchor="end">&#8730;<tspan class="gapbar-arg">n</tspan> + 1</text>
             <text class="gapbar-num" id="gapbar-lower-label" x="0" y="88" text-anchor="start"></text>
             <text class="gapbar-num record" id="gapbar-record-label" x="0" y="88" text-anchor="middle"></text>
           </svg>
+          <div class="gapbar-end gapbar-area" id="gapbar-area"></div>
+          <div class="gapbar-end gapbar-grid" id="gapbar-grid"></div>
         </div>
-        <div class="nline" aria-hidden="true"><span class="n-var">n</span><span class="n-eq">=</span></div>
         <div class="facts-layer" id="facts-a"></div>
         <div class="facts-layer" id="facts-b"></div>
+      </div>
+      <div id="headline" aria-hidden="true">
+        <div class="nline"><span class="n-var">n</span><span class="n-eq">=</span></div>
+        <div class="numeral-slot" id="numeral-a"></div>
+        <div class="numeral-slot" id="numeral-b"></div>
       </div>
       <div id="kind-tag"></div>
     </div>
@@ -585,7 +612,11 @@ input[type=number] { width: 64px; padding: 4px 6px; }
             </span>
           </label>
           <label title="In Animate only: repaint the frame the step comes to rest on in the standard angle colours, leaving the motion itself identity-coloured"><input type="checkbox" id="animate-standard-toggle" checked> animate rests in angle colours</label>
-          <label><input type="checkbox" id="desat-toggle" checked> desaturate while moving</label>
+          <label title="Drain the fills while a square is unsettled, so the squares that have found their place carry the picture"><input type="checkbox" id="desat-toggle" checked> desaturate while moving</label>
+          <label title="How much chroma a moving square keeps, as a fraction of its own: 1 leaves the colour alone, 0 takes it to grey">drained to
+            <input type="range" id="desat-floor" min="0" max="1" step="0.01" aria-label="the chroma a moving square keeps">
+            <span class="law-val" id="desat-floor-val"></span>
+          </label>
           <label title="Faint lines on what the physics is relating: the step's correspondence, or the relationship graph's own attracting pairs"><input type="checkbox" id="links-toggle"> show correspondence</label>
           <label title="Press on one square and release on another to add an edge to the contact graph, or to take it away again. While this is on no square can be picked up and moved."><input type="checkbox" id="draw-toggle"> draw links</label>
           <label><input type="checkbox" id="capture-toggle"> capture preview</label>
@@ -617,7 +648,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const TINT_CHROMA = 0.6;              // the share of the accent's chroma that tint colour carries
   // Revision 6: while a pair is in motion the fills lose chroma, and lock back in over the settle,
   // so the resting frame is exactly the retained colours and only the moving picture is muted.
-  const DESAT = 0.15;                   // the chroma a fill keeps at full desaturation
+  //: The chroma a fill keeps at full desaturation, as a fraction of its own. 1 leaves the colour
+  //: alone and 0 takes it to grey; the owner sets it from the page, so it is a variable rather than
+  //: the constant it was. The default is measured rather than chosen: at a third the moving squares
+  //: still competed with the locked ones for attention, and at an eighth the locked ones carry the
+  //: picture, which is the point of locking them one at a time.
+  let desatFloor = 0.15;
   // **Chroma and hue move one at a time, and the hue always moves in the grey.** A square's
   // colour changes twice a beat -- it drains and comes back, and it swaps between the scheme a
   // viewer chose and the atlas's own answer for a finished picture. Doing both at once is what
@@ -820,7 +856,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function desatHex(hex, level) {
     if (level <= 0) return hex;
     const lab = hexToLab(hex);
-    const k = 1 - (1 - DESAT) * level;
+    const k = 1 - (1 - desatFloor) * level;
     return labToHex(lab[0], lab[1] * k, lab[2] * k);
   }
   // **The stage is one packing where the atlas is a page of them, and the same fill over a bigger
@@ -1481,11 +1517,29 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // sum could, since `=` may come from the symbols face with its own size-adjust. Taken at
   // startup and again on `document.fonts.ready`, as the figure width beside it is.
   let numeralLeft = 152;   // the fallback, close enough for the frame before the faces land
+  //: The row the headline is centred in: the packing's own box, so `n = 26` sits under the picture
+  //: it names rather than under the panel.
+  const HEADLINE_ROW = 1000;
+  //: How many digits the centring is computed for. The numeral rolls between two n through a step,
+  //: and `n =` lives outside the fading layers, so centring on the CURRENT numeral would shift the
+  //: constant half of the headline twice in the film -- at 9 to 10 and at 99 to 100 -- and shift it
+  //: mid-roll besides. The pair is centred as though the numeral were always three digits, which is
+  //: what the corpus ends on and what keeps `n =` still.
+  const HEADLINE_DIGITS = 3;
   function measureHeadline() {
     const line = document.querySelector('.nline');
     if (!line || line.offsetWidth === 0) return;
-    numeralLeft = line.offsetLeft + line.offsetWidth + METRICS.headline_gap_px - METRICS.digit_bearing_px;
-    document.querySelectorAll('.numeral').forEach((n) => { n.style.left = numeralLeft + 'px'; });
+    // The numeral's own width at HEADLINE_DIGITS, measured off a real numeral rather than assumed:
+    // the figures are tabular, so any numeral gives the width of one.
+    const shown = document.querySelector('.numeral .n-val');
+    const digits = shown && shown.textContent ? shown.textContent.length : 0;
+    const figure = shown && digits > 0 && shown.offsetWidth > 0 ? shown.offsetWidth / digits : 54;
+    const gap = METRICS.headline_gap_px;
+    const total = line.offsetWidth + gap + figure * HEADLINE_DIGITS;
+    const left = Math.max(0, (HEADLINE_ROW - total) / 2);
+    line.style.left = left + 'px';
+    numeralLeft = left + line.offsetWidth + gap - METRICS.digit_bearing_px;
+    document.querySelectorAll('.numeral').forEach((el) => { el.style.left = numeralLeft + 'px'; });
   }
   //: The width of one figure in the face the gap bar sets its two numbers in, used to decide
   //: whether the record's label would sit on top of the lower bound's. The fallback is Source Sans
@@ -1593,35 +1647,46 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     layer.textContent = '';
     // The numeral alone: the `n =` line above it is static, outside the layers. Its box offset
     // comes from the build, which read the regular face's digit bearings (see the stylesheet).
+    // The numeral belongs to the headline under the packing, not to the panel, but it still has
+    // to roll and fade with the layer whose facts it names -- so it is built here and placed in
+    // that layer's slot in the headline row.
     const numeral = text('div', 'numeral');
     numeral.style.left = numeralLeft + 'px';
     numeral.appendChild(text('span', 'n-val', String(n)));
-    layer.appendChild(numeral);
-    function functionLine(cls, relation, value) {
+    const slot = document.getElementById(layer.id === 'facts-a' ? 'numeral-a' : 'numeral-b');
+    slot.textContent = '';
+    slot.appendChild(numeral);
+    // **The mathematics is set by KaTeX, at build time.** It used to be assembled here from four
+    // spans -- an italic `s`, an upright `(n)`, a relation glyph borrowed from a KaTeX face, and a
+    // value in tabular figures -- which is an imitation of typesetting rather than typesetting: no
+    // real spacing around the relation, no maths italic, and a closed form's fraction written with
+    // a solidus because a vinculum was out of reach. The build now renders each line once through
+    // the same KaTeX the explainer sets its paper with, so `s(11) <= 3.877084` is set here the way
+    // it is set there. See `katex_html` in build_candidate.py for why that happens at build time.
+    function mathLine(cls, html) {
       const line = text('div', cls);
-      line.appendChild(text('span', 'fn', 's'));
-      line.appendChild(text('span', 'arg', '(' + n + ')'));
-      line.appendChild(text('span', 'rel', relation));
-      line.appendChild(text('span', 'val', value));
+      if (html) line.innerHTML = html;
       return line;
     }
     // PROVED, in the order a reader wants it: the best known side, the proved lower bound
     // under it, the scarlet mark when that bound was first proved here, the closed form or
     // degree note for the value, and the badges. Both bounds are proved facts -- a construction
     // proves its upper bound -- so both belong here, and OPEN below carries the questions.
-    layer.appendChild(text('div', 'section-head head-proved', 'Proved'));
-    layer.appendChild(functionLine('side', f.relation, f.side));
+    layer.appendChild(text('div', 'section-head head-proved', 'Proven'));
+    layer.appendChild(mathLine('side', f.html_side));
     // A proved n has no separate lower bound to state; its slot stays empty at its height.
-    layer.appendChild(f.lower !== null ? functionLine('lower', '≥', f.lower) : text('div', 'lower'));
+    layer.appendChild(mathLine('lower', f.html_lower));
     const starLine = text('div', 'star-line');
     if (f.star) starLine.appendChild(badgeItem('badge-item is-star', '', 'star', STAR_LABEL));
     layer.appendChild(starLine);
+    // The closed form when there is one the value does not already state, set as mathematics;
+    // otherwise the degree note, which is a fact about the value rather than a caption on it, so it
+    // is set in the text face in ink like the lines above it and only smaller.
     const exact = text('div', 'exact');
-    if (f.exact && f.exact !== f.side) {
-      exact.appendChild(text('span', 'rel', '='));
-      exact.appendChild(text('span', 'form', f.exact));
+    if (f.html_exact && f.exact !== f.side) {
+      exact.innerHTML = f.html_exact;
     } else if (f.exact_state === 'minimal-polynomial') {
-      exact.appendChild(text('span', 'note', 'algebraic' + (f.degree ? ' · degree ' + f.degree : '')));
+      exact.appendChild(text('span', 'note', 'algebraic' + (f.degree ? ', degree ' + f.degree : '')));
     }
     layer.appendChild(exact);
     const badges = text('div', 'badges');
@@ -1645,6 +1710,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   let numeralA = null;
   let numeralB = null;
+  const numeralSlotA = document.getElementById('numeral-a');
+  const numeralSlotB = document.getElementById('numeral-b');
 
   // The current pair's motion, one entry per square of n: its element, its start and end
   // poses, and, for a block member, the block's transform (a rotation about the source pivot
@@ -4392,6 +4459,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const back = clamp01((q - 0.55) / 0.45);
     factsA.style.opacity = 1 - out;
     factsB.style.opacity = back;
+    numeralSlotA.style.opacity = 1 - out;
+    numeralSlotB.style.opacity = back;
     numeralA.style.transform = 'translateY(' + (-24 * easeOut(out)) + 'px)';
     numeralB.style.transform = 'translateY(' + (24 * (1 - easeOut(back))) + 'px)';
     if (live.textContent !== 'n = ' + state.liveN) live.textContent = 'n = ' + state.liveN;
@@ -4608,6 +4677,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     });
     document.querySelectorAll('#phase-seg button').forEach((b) => b.classList.toggle('on', b.dataset.phase === state.phase));
     document.getElementById('desat-toggle').checked = state.desaturate;
+    document.getElementById('desat-floor').value = String(desatFloor);
+    document.getElementById('desat-floor-val').textContent = fmt(desatFloor, 2);
     document.getElementById('blind-toggle').checked = state.blind;
     document.querySelectorAll('#initial-seg button').forEach((b) => b.classList.toggle('on', b.dataset.initial === state.initial));
     optimizeButton.textContent = state.optimizing ? 'Restart optimize' : 'Optimize';
@@ -5339,6 +5410,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // `identityFills(k)` is the greens as a pure function of the identity, needing nothing on the
     // stage; the Animate standardising is an Animate-mode presentation setting and nothing else.
     setColorScheme, colorScheme: () => colorScheme, colorSchemes: () => COLOR_SCHEMES.slice(),
+    // How far a moving square is drained, as the chroma it keeps. Clamped to [0, 1]: past 1 a
+    // "drained" square would be more saturated than a settled one, which would invert what the
+    // drain is for.
+    setDesatFloor: (v) => {
+      const k = Number(v);
+      desatFloor = Math.max(0, Math.min(1, isFinite(k) ? k : desatFloor));
+      markGapBar();
+      render();
+      return desatFloor;
+    },
+    desatFloor: () => desatFloor,
     // The stage's area compensation. 1 is the atlas's own chroma, which is what a check that
     // compares the stage with a rendering sets before it looks.
     setStageChroma: (v) => {
@@ -5443,6 +5525,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   document.getElementById('anneal').addEventListener('input', (ev) => setAnneal(ev.target.value));
   document.querySelectorAll('#law-preset-seg button').forEach((b) => b.addEventListener('click', () => setLawPreset(b.dataset.law)));
   document.querySelectorAll('#rel-seg button').forEach((b) => b.addEventListener('click', () => setRelationship(b.dataset.rel)));
+  document.getElementById('desat-floor').addEventListener('input',
+    (ev) => { window.atlasTransitions.setDesatFloor(ev.target.value); updateChrome(); });
   document.getElementById('grow-size').addEventListener('input', (ev) => setGrowth({ size: ev.target.value }));
   document.getElementById('grow-rate').addEventListener('input', (ev) => setGrowth({ rate: ev.target.value }));
   document.getElementById('grow-toggle').addEventListener('change', (ev) => setGrowth({ on: ev.target.checked }));
@@ -5564,6 +5648,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   layout();
   // The scale's figure width is measured from the drawn numerals, so it has to be taken again once
   // the faces are in; re-rendering afterwards is a no-op on everything but the suppression.
+  // The bar's two ends, set once: they are the same expression at every n.
+  document.getElementById('gapbar-area').innerHTML = METRICS.bound_html.area;
+  document.getElementById('gapbar-grid').innerHTML = METRICS.bound_html.grid;
   measureDigit();
   measureHeadline();
   if (document.fonts && document.fonts.ready) {

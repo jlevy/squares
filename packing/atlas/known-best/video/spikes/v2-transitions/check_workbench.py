@@ -209,8 +209,13 @@ def main() -> int:
             "  const out = []; for (const n of laws) for (const k of keys) out.push(A.lawPrefix(n) + '-' + k);"
             "  return out; }"
         )
-        check(sorted(sliders) == sorted(derived + ["anneal", "grow-rate", "grow-size", "speed"]),
-              f"the controls carry a slider that is none of the speed, annealing and law dials: {sliders}")
+        # `desat-floor` joins them: the owner asked for the degree of desaturation to be settable,
+        # so how much chroma a moving square keeps is a dial like the rest rather than a constant.
+        check(
+            sorted(sliders)
+            == sorted(derived + ["anneal", "desat-floor", "grow-rate", "grow-size", "speed"]),
+            f"the controls carry a slider that is none of the speed, drain, annealing and law dials: {sliders}",
+        )
         check("seek" in api, "the API lost seek when the scrubber went")
         # The controls may not push the stage off the window.
         fits = page.evaluate(
@@ -410,18 +415,21 @@ def main() -> int:
         blind = page.evaluate("atlasTransitions.gapBar()")
         check(blind["side"] > 0 and 0 <= blind["x"] <= 1, f"the bar loses its indicator in blind mode: {blind}")
         page.evaluate("atlasTransitions.setBlind(false); atlasTransitions.setSnap(true); atlasTransitions.setStyle('tween')")
-        # The headline is the first thing in the column now -- the n the panel is about, then the
-        # bar that measures it -- so the clearance runs the other way: the `n =` line must not reach
-        # the bar below it. Same property, both ends of it read from the page rather than assumed.
+        # The headline left the panel: it sits centred under the packing it names, which gave the
+        # panel back its room for the facts. So the clearance it needs is from the picture rather
+        # than from the bar -- it must sit below the packing and inside the stage -- and the bar,
+        # now the first thing in the column, must stay inside the panel's own width.
         geom = page.evaluate(
             "() => { const s = document.getElementById('stage').getBoundingClientRect();"
             " const k = s.width / 1920;"
             " const b = document.getElementById('gapbar').getBoundingClientRect();"
-            " const e = document.querySelector('.nline').getBoundingClientRect();"
+            " const e = document.getElementById('headline').getBoundingClientRect();"
+            " const pk = document.getElementById('packing-svg').getBoundingClientRect();"
             " const f = document.getElementById('facts').getBoundingClientRect();"
             " return {bottom: (b.bottom - s.top) / k, top: (b.top - s.top) / k,"
-            "         nline: (e.bottom - s.top) / k, right: (b.right - s.left) / k,"
-            "         panelRight: (f.right - s.left) / k,"
+            "         headTop: (e.top - s.top) / k, headBottom: (e.bottom - s.top) / k,"
+            "         packBottom: (pk.bottom - s.top) / k, stageBottom: s.height / k,"
+            "         right: (b.right - s.left) / k, panelRight: (f.right - s.left) / k,"
             "         shown: getComputedStyle(document.getElementById('gapbar')).display !== 'none'}; }"
         )
         # The bar's own geometry: the shaded open span is a band inside the track, from the lower
@@ -445,7 +453,8 @@ def main() -> int:
         check(parts["lowLabel"]["r"] < parts["recLabel"]["l"] - 0.5,
               f"the bar's two numbers overlap: {parts['lowLabel']} and {parts['recLabel']}")
         check(geom["shown"], "the gap bar is not drawn")
-        check(geom["nline"] < geom["top"] - 0.5, f"the `n =` line reaches the gap bar: {geom}")
+        check(geom["headTop"] >= geom["packBottom"] - 0.5, f"the headline overlaps the packing: {geom}")
+        check(geom["headBottom"] <= geom["stageBottom"] + 0.5, f"the headline runs off the stage: {geom}")
         check(geom["right"] <= geom["panelRight"] + 0.5, f"the gap bar runs past the panel: {geom}")
 
         # ---- step 5 (revision 9): the bar stops animating. The sparkline is gone, the hand holds
