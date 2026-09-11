@@ -49,14 +49,16 @@ Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 
 ## Orientation
 
-`s(11)` is pinned to `[3.81, 3.877084]`. The upper end is Walter Trump’s 1979 packing —
-six axis-aligned squares plus a tightly constrained block of five tilted at `≈40.1819°`;
-the tilt is numerically characterized through a trigonometric equation, not established
-here as an algebraic number.
-That end has stood since 1979; the lower end moved on 2026-09-04, for the first time
-since Stromquist stated `2 + 4/√5 = 3.788854` in 2003. This is the fourth-smallest open
-gap at `n ≤ 100`, and the smallest open gap whose standing record is nontrivial rather
-than a grid.
+The current certified bracket is
+`3.826447410572939744... <= s(11) <= 3.877083590022814...`. The upper end is Walter
+Trump’s 1979 packing — six axis-aligned squares plus a tightly constrained block of five
+tilted at `≈40.1819°`; the tilt is numerically characterized through a trigonometric
+equation, not established here as an algebraic number.
+The lower end is T-026; the
+[combined evidence account](../../docs/project/research/research-2026-09-09-n11-evidence-and-inference.md)
+distinguishes the recent retained improvements from their open equality cases.
+[X-027](explorations/X-027-stromquist-fractional-and-structural-strategy.md) develops
+the next certificate and structural mechanisms from that baseline.
 
 What the
 [baseline](series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
@@ -507,6 +509,33 @@ It names three escapes it does not close; the first is the row below.
 | --- | --- | --- | --- | --- |
 | 153 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-157](hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further would delete `1/8` more. Refuted 2026-09-10 by exp-154: six of eight refined subclasses still read exactly 10 and two read `19/2`. The two improved patches intersect their fixed target cores, so the earlier positive-distance explanation does not apply to them; the six neutral children retain the reported positive distance. T1 and T2 in X-026 §5.1 are scoped to the retained finite ray universe and fixed patch-only residual domain. They do not rule out other angular restrictions, stronger domains, changed charges, or selection routing. Whether the neutral classes are forced remains open. |
 | 155 | Test necessary unit-parent domains at exp151’s saved residual | registered | [H-158](hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | On tuple `(0,0,0,7)`, first test the fixed direction-6 residual against its own parent box, then compare newly replayed B-only and parent-restricted separation for `TR, BL, BR, TL`. A gain concerns one fixed pose and individual owner class; all four positive witnesses are a bounded negative, not joint feasibility. |
+
+## Stromquist Fractional and Structural Strategy — X-027
+
+[X-027](explorations/X-027-stromquist-fractional-and-structural-strategy.md) is an
+analytical block with three independent, cross-reviewed mathematical reports and no new
+target run. Exact transport of the retained 88-core family already gives full-unit
+fractional mass eleven at `38200/9977`, below `3.83`. It obstructs arbitrary
+unconditional point measures there; the current physical lower bound is still below that
+side, so a strict physical gap is not yet proved.
+BC329 remains the next direct bound packet, and BC337 remains the existing unary
+owner-domain comparison.
+
+The rows below are shaped follow-ups, not registered experiments.
+The joint atom/support loop remains idea 154 and `think-yc80`; X-027 adds an exact
+optimal-dual-face discriminator to distinguish a cut of one solver vertex from a change
+in the finite optimum.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 156 | Admit interior duality and export the transported full-unit obstruction | shaped |  | Compactness, finite-mask LP duality, and uniform atom smearing give equality with the density problem; retain the reviewed theorem contract and a consumer-ready unit-family export if needed. No search at `3.83–3.85` is necessary, and equality classification remains open. |
+| 157 | Test weighted-site expressiveness on realizable square traces | shaped |  | One frozen five-site motif has at most 32 traces and 80 ordinary threshold atoms on those sites. A witnessed realizable subset with domination cost above one proves a local gain; cost at most one on all realizable traces disproves its multiplicity advantage on that domain. Ordinary replacement columns may still improve the current catalog. Neither decides the global covering budget. |
+| 158 | Preserve a genuine floor advantage through square geometry | shaped |  | The reviewed five-site profile `floor(|T|/2)` costs two while every ordinary threshold mixture dominating all traces costs at least `5/2`. Find admitted geometric traces retaining multiple charge levels before widening the full certificate format. |
+| 159 | Use seven-mark ownership and one shared surplus allowance | shaped |  | BC303 forces at least seven of eight marks to be owned, with 80 abstract co-owned/split patterns and `4+s` owner cores. One source-bound parent-geometry or common-surplus comparison must add information beyond the retained neutral co-owner counterexample. |
+| 160 | Require one owner to serve two compatible residual squares | shaped |  | Freeze a disjoint residual pair with positive unary controls, then test the intersection of its complete owner domains. Empty intersection reveals relational information that independent footprints lose; exp149/151 are unsuitable controls. |
+| 161 | Charge a normalized component connecting corner owners | shaped |  | At most three unit squares touch a wall; S1 yields at most three physical contact components and a path between owners from different corners. A complete anchored component cell must change a resource inequality; no short path, common angle, or rigidity follows. |
+| 162 | Use mixed angle-count profiles with one resource budget | shaped |  | For a proved `(9,2)` branch, test `M < 9*d0 + 2*d1` against the same language’s uniform-demand control; a separate point-only versus threshold comparison holds the profile fixed. Exact class boundaries and physical unit-to-core assignment are premises; no multiplicity extension is required first. |
+| 163 | Compose globally valid integer charges before a higher-rank search | shaped |  | A floor of a nonnegative rational combination of valid integer charges has the correspondingly rounded global budget. Retain an explicitly separating charge and complete pose evaluator before expanding the format; finite-support validity alone is insufficient. |
 
 ## Dead ends
 

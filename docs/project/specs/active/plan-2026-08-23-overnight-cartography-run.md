@@ -341,46 +341,37 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take BC-324 under `think-rm3k`, a factual
-interpretation block with no scientific target.
-Session123 is terminal.
-Session124 is the latest terminal interpretation checkpoint; successor certification and
-publication follow-up remain pending.
-Session124 resumed at 2026-09-10 01:52:40 UTC after the elapsed interruption and
-separates that gap from active work.
+For the next supervised exact-research goal, continue the existing BC329 bounded
+fixed-core runner admission under `think-qw9w`. The frozen packet preserves T-025’s
+relative weights and total charge budget $M$. It must compare raw least core charge $m$
+with $M/11$ before applying $\alpha=1/m$. Independent instrument admission and a
+prospective run contract precede any scientific packet measurement.
+Coverage remains unmeasured.
+The [packet preflight](../../reviews/review-2026-09-10-n11-bc329-packet-preflight.md)
+and [daytime plan](plan-2026-09-10-n11-daytime-strategy-and-explainer.md) own those
+requirements.
 
-PR142 completed matching fast and deferred validation and is ready.
-PR145 is also ready after matching fast, page and full checkpoint validation on the
-stacked branch `codex/n11-owner-core-compatibility`. Exp145 independently confirmed the
-selected five-dot cover; exp146 enlarged twelve of sixteen wall-aware owner footprints;
-and exp147’s bounded component-containment transfer preserved only the two baseline
-tuple labels and certified no additional selection.
-Exp148 retained a partial fixed-pattern screen.
+[Session126](../../../../packing/campaign/agent-sessions/session-126-stromquist-analytical-exploration.md)
+and
+[X-027](../../../../packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md)
+retain the latest analytical synthesis.
+The exploration is the reading entry; its three companion reports supply local
+definitions, proofs and explicit dependencies.
+Their KaTeX notation and scope distinguish physical parents from strict cores,
+point-depth obstructions from stronger charge capacities, and conditional exclusions
+from a global bound.
+BC329 remains the first direct-bound continuation in that ranking; the other geometric
+and charge comparisons remain proposed experiments.
 
-Exp149 then showed that fixed D misses the selected four-patch residual relaxation for
-tuple label `(0,0,0,7)` at owner-000, with an exact positive deficit and validated
-rational strict escape.
-It did not refute that physical tuple.
-Exp150 refuted individual-owner exclusion only in the unchanged B-core model: all four
-classes admit a strictly separated frame-0 B-core under exact independent replay.
-This does not establish unit-parent or simultaneous-owner compatibility.
-Exp151 refuted the fixed sixth site, and exp152 retained a nonempty necessary two-core
-quadrilateral. Exp153 ruled out every single-site extension of fixed D on the selected
-four-patch relaxation after 188 exact support directions.
-
-An independently reviewed two-attainer verifier remains unrun.
-If a future prospective run produces two strict D-missed B-cores, their disjointness
-would require added nonnegative mass at least two and nominal total mass at least seven
-with the five original unit atoms retained.
-It would not establish the available-mass conclusion unless the five original sites were
-separately proved outside the occupied-patch union.
-H146 remains unresolved, and the global n11 bracket is unchanged.
-
-The global routing obligation is: for every hypothetical physical packing P, there
-exists at least one valid owner selection for P whose selected family has been excluded.
-The current record does not prove that statement.
-BC324 now reconciles these facts and premises before another scientific target is
-selected.
+The earlier BC-324 interpretation audit is complete and was merged through PR139. The
+[combined evidence account](../../research/research-2026-09-09-n11-evidence-and-inference.md)
+retains the exp145–153 results and their limits.
+In particular, a residual core that escapes a conditional cover need not extend to a
+physical packing, and individual owner compatibility need not imply joint compatibility.
+The remaining global routing obligation is that every hypothetical physical packing have
+at least one valid owner selection whose selected family is excluded.
+X-027 defines that obligation and explains what the new ownership and contact deductions
+supply toward it; no global routing proof or new packing bound is claimed.
 
 The preceding work reached three checkpoints in sequence.
 Session092 accepted BC260’s direct case, Farkas, and resource contracts and BC261’s

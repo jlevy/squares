@@ -9,6 +9,9 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/research/research-2026-09-10-x027-fractional-duality.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-09-10-x027-structural-helpers.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/research/research-2026-09-08-annealing-for-square-packing.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/known-best/video/spikes/README.md, role: component-guide, authority: supporting, lifecycle: maintained}

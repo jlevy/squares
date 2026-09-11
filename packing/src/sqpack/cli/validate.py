@@ -2336,6 +2336,27 @@ def _defect_log(context: Context) -> str:
     )
 
 
+_X027_MATH = (
+    "packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md",
+    "docs/project/research/research-2026-09-10-x027-fractional-duality.md",
+    "docs/project/research/research-2026-09-10-x027-structural-helpers.md",
+    "docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md",
+)
+
+
+def _x027_math(context: Context) -> str:
+    """The analytical block's explicit KaTeX convention is checked on every PR."""
+    return _run(
+        context,
+        (
+            sys.executable,
+            "-m",
+            "devtools.check_katex",
+            *(str(REPOSITORY_ROOT / path) for path in _X027_MATH),
+        ),
+    )
+
+
 def _skills_mirrored(context: Context) -> str:
     make = shutil.which("make", path=context.environment.get("PATH"))
     if make is None:
@@ -3424,6 +3445,23 @@ STEPS: tuple[Step, ...] = (
         records=True,
         # The mirrored list is a Make variable, so the Makefile is part of the contract.
         touches=("Makefile", ".agents/*", ".claude/*"),
+    ),
+    Step(
+        "X-027 mathematics parses with pinned KaTeX",
+        _x027_math,
+        fast=True,
+        records=True,
+        touches=(
+            *_X027_MATH,
+            *_CORE,
+            "packing/devtools/check_katex.py",
+            "packing/devtools/check_math_spans.py",
+            "packing/devtools/render_explainer.py",
+            "packing/pyproject.toml",
+            "packing/uv.lock",
+            "vendor/kpress",
+            "vendor/kpress/*",
+        ),
     ),
     Step("synopsis agrees with the artifacts", _synopsis, fast=True, records=True),
     Step("README agrees with the directory", _readme, fast=True, records=True),

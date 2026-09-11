@@ -112,9 +112,14 @@ def math_spans(text: str) -> list[str]:
     Code is masked before either pass: `$5` in a shell example is not a formula, and a
     formatter will not touch it in any case.
     """
+    return [body for body, _display in math_spans_with_mode(text)]
+
+
+def math_spans_with_mode(text: str) -> list[tuple[str, bool]]:
+    """The same recognized spans with their display/inline rendering convention."""
     masked = _mask(mask_fences(text), INLINE_CODE)
-    display = [match.group("body") for match in DISPLAY.finditer(masked)]
-    inline = [match.group("body") for match in INLINE.finditer(_mask(masked, DISPLAY))]
+    display = [(match.group("body"), True) for match in DISPLAY.finditer(masked)]
+    inline = [(match.group("body"), False) for match in INLINE.finditer(_mask(masked, DISPLAY))]
     return display + inline
 
 
