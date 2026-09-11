@@ -5,7 +5,7 @@ title: Clarify T-026 as a proved lower bound across the explainer and reader doc
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 17
 labels: []
 dependencies: []
 child_order_hints:
@@ -15,11 +15,12 @@ child_order_hints:
   - is-01m27hc9136cfzbb0gcq3b90pm
   - is-01m27kjxj4g8z0vyckt3x8xp2w
   - is-01m27m4teg5w29vh0d03ddp9tg
+  - is-01m27myg3v2zhr8dnzy6fg82vm
 created_at: 2026-09-10T23:18:28.662Z
-updated_at: 2026-09-11T06:58:09.487Z
+updated_at: 2026-09-11T08:48:22.281Z
 ---
 Revise PR148 on current main so the headline states s(11) >= C directly, publishes the v0.4.0 explainer, gives T025 and T026 self-contained verifiable claims, records T026 at V4/C5 under epistemics.md, reconciles reader and research terminology, and passes local and hosted validation.
 
 ## Notes
 
-Milestone commits 2b2375b2 and 2e2b2bfa publish the standalone claims and reconcile X027/X028 after merging origin/main at d507f5c7. Exact and interval coverage, the independent oracle, and the mapped Astra review support T026 at V4/C5. Local focused and records checks pass; pre-push, full checkpoint, push, permalink verification, and hosted CI remain.
+PR148 final candidate head 989fd544 is pushed. All hosted checks pass, including Packing validation, Certificate page, Firefox, WebKit, and mergeability. Exact-head pre-push passed: 46/74 steps, 5,037 tests, Ruff 1,781 files, BasedPyright zero, 967.56s. The local full checkpoint is the sole remaining item.
