@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 490
+count: 491
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -16385,3 +16385,59 @@ defects:
     drawable current request. Nothing here prevents the race, which is what contained means:
     the guard is that the next occurrence arrives diagnosable.
   recorded_in: packing/devtools/render_explainer_pdf.py
+- id: D-491
+  title: The math exposure rule judged visibility in a state the probe itself had changed
+  date: '2026-09-11'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    Until the page grew enough for the probe's own styles to reveal a box. The ordering has
+    always been wrong; it only became visible when `prepare_explainer_math` met a document
+    where the carrier substitution changes which boxes the page is willing to show.
+  severity: medium
+  status: fixed
+  bead: think-ghns
+  what: >-
+    `prepare_explainer_math` holds the math faces, measures the page, releases them and
+    requires that nothing was shown while its own faces were held. A box may be visible
+    early if its faces were already loaded, and `early_ready` names those, built from the
+    `_GEOMETRY_EARLY_READY` evidence evaluated at line 1280.
+
+    The exposure rule read `before`, taken at line 1317. Between the two the probe injects
+    its carrier face (`carrier_font_css`) and a `.katex` substitution, and those styles
+    change which boxes the page will show. So a box the substitution reveals is visible in
+    `before` and absent from the evidence -- unadmittable by construction, because
+    `early_ready` can only name a box the evidence saw. The rule asked about one state and
+    took its exemptions from another.
+  consequence: >-
+    It failed PR 149's Certificate page jobs in both browsers on run 34584297510 at head
+    d932bccf, and blocked that pull request: webkit on `--prose-font sans` at 1280, firefox
+    on `--prose-font serif` at 1280 (its first attempt; it passed on a retry, which is why
+    this read as a threshold rather than a defect at first). Identical signature in both:
+    the evidence recorded no visible box, `before` recorded eighteen, and the eighteen were
+    the same keys in both engines -- 111 to 120, 189, 191, 193, 195, 197, and 200 to 202.
+    All eighteen moved 0.0000px across font arrival against a 1.0px tolerance, in both
+    browsers, so their layout was already final and nothing unstyled could reach a reader.
+    A green check would have been correct; the gate refused a page that was right, which is
+    the conservative direction and still a blocked merge.
+  fix: >-
+    `geometry_findings` takes `exposed_early`, the keys the evidence saw visible, and the
+    exposure rule reads that instead of `before`'s flags, so the question and its exemptions
+    come from one observation. `_GEOMETRY_EARLY_READY` skips hidden boxes, so its keys are
+    exactly that set. Omitted, the rule still falls back to `before`, which is what every
+    caller without the evidence gets.
+
+    The rule keeps its teeth: a box the evidence saw visible while its faces were genuinely
+    unloaded is in `exposed_early` and not in `early_ready`, and still fails. Verified by
+    replaying the retained reports from the failing run through both versions: the one
+    failing configuration per browser goes from one finding to none, and the other seven per
+    browser are unchanged at none, so nothing elsewhere was masked.
+  regression: >-
+    `test_the_exposure_rule_reads_the_observation_its_exemptions_came_from` in
+    `packing/tests/test_prepare_explainer_math.py` pins all four directions: a box revealed
+    only after the evidence is not exposed, a box the evidence saw and could not admit still
+    fails, admitting it clears the finding, and omitting the argument falls back to
+    `before`. The replay above is the measurement the test was written from.
+  recorded_in: packing/devtools/prepare_explainer_math.py

@@ -126,6 +126,57 @@ def test_cli_prepares_before_comparing_or_writing_the_publication_artifact(
     )
 
 
+def test_the_exposure_rule_reads_the_observation_its_exemptions_came_from() -> None:
+    """A box the probe's own substitution reveals is not an exposed box (D-491).
+
+    `early_ready` can only name a box the font evidence saw, and that evidence is gathered
+    before the carrier face and the `.katex` substitution go in. Judging exposure against
+    `before`, which is measured after them, condemns every box those styles reveal. PR
+    149's webkit job failed that way twice on `--prose-font sans` at 1280: no box was
+    visible when the evidence was taken, eighteen were visible in `before`, and all
+    eighteen moved 0.0000px across font arrival.
+    """
+    held: list[GeometryBox] = [
+        {
+            "key": key,
+            "group": 0,
+            "x": 12,
+            "y": 24,
+            "width": 30,
+            "height": 20,
+            "baseline": 40,
+            "intrinsic_width": 30,
+            "hidden": hidden,
+        }
+        for key, hidden in ((0, True), (1, False))
+    ]
+    arrived: list[GeometryBox] = [{**box, "hidden": False} for box in held]
+
+    # Key 1 is visible in `before` only because the substitution revealed it: the evidence
+    # saw nothing, so nothing was exposed while its requests were held.
+    assert geometry_findings(held, arrived, exposed_early=frozenset()) == []
+
+    # The rule keeps its teeth. A box the evidence did see visible, and could not admit,
+    # is still an exposed box -- whether or not `before` agrees that it was visible.
+    assert any(
+        "exposed while its font requests were held" in message
+        for message in geometry_findings(held, arrived, exposed_early=frozenset({1}))
+    )
+    assert (
+        geometry_findings(
+            held, arrived, exposed_early=frozenset({1}), early_ready=frozenset({1})
+        )
+        == []
+    )
+
+    # Omitted, the rule falls back to `before`'s own flags, which is what every caller
+    # without the evidence still gets.
+    assert any(
+        "exposed while its font requests were held" in message
+        for message in geometry_findings(held, arrived)
+    )
+
+
 def test_geometry_oracle_requires_hidden_then_visible_unchanged_boxes_and_line_breaks() -> None:
     before: list[GeometryBox] = [
         {
