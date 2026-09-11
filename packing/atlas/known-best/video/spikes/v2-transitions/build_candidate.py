@@ -138,7 +138,11 @@ TYPE_SCALE = [28, 34, 44, 96]
 NUMERAL_PX = 96      # .n-val
 NUMERAL_WEIGHT = 400
 N_LINE_PX = 96       # .nline, the same size as the numeral it labels
-N_LINE_LEFT_PX = 6   # .nline left, the panel's text edge; the numeral's box is offset from it
+N_LINE_LEFT_PX = 6   # .nline left, the panel's text edge
+#: The space between the `=` of `n =` and the first digit beside it, ink to ink. The headline is
+#: one line, so this is a word space rather than a line break: 16 px at 96 px is a sixth of an em,
+#: tighter than the face's own space, which is what makes `n = 11` read as one statement.
+HEADLINE_GAP_PX = 16
 
 # Pairs the demonstration must carry, identified by n (the pair is n -> n+1).
 REQUIRED_PAIRS = [4, 9, 10, 17, 99, 100, 147, 272]
@@ -918,7 +922,7 @@ def type_metrics() -> dict:
         "numeral_px": NUMERAL_PX,
         "numeral_weight": NUMERAL_WEIGHT,
         "n_line_px": N_LINE_PX,
-        "numeral_left_px": round(N_LINE_LEFT_PX + n_bearing_px - digit_bearing_px, 1),
+        "headline_gap_px": HEADLINE_GAP_PX,
         "digit_bearing_px": round(digit_bearing_px, 2),
         "n_bearing_px": round(n_bearing_px, 2),
         "badge_baseline": {

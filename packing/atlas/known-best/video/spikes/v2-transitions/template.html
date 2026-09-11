@@ -114,21 +114,22 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
 .gapbar.is-met .gapbar-plot .hand-stem { stroke: var(--met); }
 .gapbar-num { font-family: var(--sans); font-size: 28px; font-weight: 450; fill: var(--muted); }
 .gapbar-num.record { fill: var(--ink); font-weight: 600; }
-/* The headline: `n =` on its own line above the numeral, at the SAME size and left-aligned on
-   their ink -- the label reads as part of the number rather than as a caption over it, which
-   is why it is sized to match and kept muted rather than shrunk. The eyebrow that used to sit
-   above it said "Best known packing", which every packing on screen already is, so it named
-   nothing and has been dropped; the n line takes its space.
-   The numeral's box offset is not in this stylesheet: the
-   build reads the digits' left side bearings from the regular face (median 49 units, 4.7 px at
-   96 px) and the italic n's, now at the same 96 px, and emits `metrics.numeral_left_px`,
-   which the script applies, so the ink of the median digit begins where the n's does.
-   The `n =` line is constant, so it lives outside the two fading layers and never blinks.
+/* The headline, on one line: `n = 11`, the label and the value reading as one statement rather
+   than as a caption stacked over a number. They are two elements because only one of them
+   changes -- `n =` is constant, so it lives outside the two fading layers and never blinks,
+   while the numeral rolls with the rest of the facts.
+   That split is also why the numeral's left is not in this stylesheet. It has to begin where the
+   constant line's ink ends, and the width of `n =` depends on the faces the browser actually
+   got, so the script measures that line once the faces are in and puts the numeral
+   `metrics.headline_gap_px` past it, less the median digit's left side bearing so the GAP is
+   between ink and ink rather than between boxes.
+   The eyebrow that used to sit above the headline said "Best known packing", which every packing
+   on screen already is, so it named nothing and has been dropped.
    Every slot below is fixed, so nothing jumps between n. */
 .nline { position: absolute; left: 6px; top: 196px; height: 104px; font-family: var(--serif); font-size: 96px; line-height: 104px; color: var(--muted); white-space: nowrap; }
 .nline .n-var { font-style: italic; font-weight: 400; margin-right: 0.22em; }
 .nline .n-eq { font-weight: 400; }
-.numeral { position: absolute; left: 0; top: 300px; font-family: var(--serif); color: var(--ink); line-height: 1; white-space: nowrap; will-change: transform; }
+.numeral { position: absolute; left: 0; top: 196px; font-family: var(--serif); color: var(--ink); line-height: 104px; white-space: nowrap; will-change: transform; }
 .numeral .n-val { font-weight: 400; font-size: 96px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 /* The panel says two things about n, and says them under headings: what is proved, then what
    is open. The heads are the gap bar's head style, so the three headings in the column read as
@@ -139,28 +140,28 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
   font-size: 28px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--quiet); white-space: nowrap;
 }
-.head-proved { top: 416px; }
-.head-open { top: 732px; }
+.head-proved { top: 348px; }
+.head-open { top: 664px; }
 /* The two bounds, one above the other at one size: a best known side and a proved lower bound
    are the same kind of fact about the same quantity, and a reader is meant to compare them, so
    showing one larger than the other would rank them. Both are proved -- a construction proves
    its upper bound -- which is why both sit under PROVED and only the questions sit under OPEN. */
-.side  { position: absolute; left: 6px; top: 452px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
-.lower { position: absolute; left: 6px; top: 508px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+.side  { position: absolute; left: 6px; top: 384px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+.lower { position: absolute; left: 6px; top: 440px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
 .side .fn, .lower .fn { font-style: italic; }
 .side .arg, .lower .arg { margin-left: 0.04em; }
 .side .rel, .lower .rel { margin: 0 0.3em; color: var(--label); }
 /* A bound first proved here, in scarlet on the line directly under the bound it is about --
    the digits themselves are never coloured, so this line is what says it. */
-.star-line { position: absolute; left: 6px; top: 566px; height: 40px; display: flex; align-items: center; white-space: nowrap; }
+.star-line { position: absolute; left: 6px; top: 498px; height: 40px; display: flex; align-items: center; white-space: nowrap; }
 /* Under both bounds, annotating the value above them: the closed form in the text face, or a
    small-caps note giving its degree. Never to the right of a value. */
-.exact { position: absolute; left: 6px; top: 608px; height: 46px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
+.exact { position: absolute; left: 6px; top: 540px; height: 46px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
 .exact .rel { margin-right: 0.3em; }
 .exact .note { font-family: var(--sans); font-size: 28px; font-weight: 500; font-variant-caps: all-small-caps; letter-spacing: 0.09em; color: var(--muted); }
 /* The poster's badges, in a row with short labels: what this record establishes. Fixed height,
    so the row never reflows. */
-.badges { position: absolute; left: 6px; top: 664px; height: 40px; display: flex; align-items: center; gap: 34px; white-space: nowrap; }
+.badges { position: absolute; left: 6px; top: 596px; height: 40px; display: flex; align-items: center; gap: 34px; white-space: nowrap; }
 .badge-item { display: inline-flex; align-items: center; gap: 11px; font-family: var(--sans); font-size: 28px; font-weight: 500; color: var(--label); letter-spacing: 0.01em; }
 .badge-item svg { width: 36px; height: 36px; display: block; flex: none; }
 .badge-item.is-star .label { color: var(--new); font-weight: 600; }
@@ -175,7 +176,7 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
 .badge .glyph-path { fill: var(--muted); stroke: var(--muted); stroke-linejoin: round; }
 .badge .star { fill: var(--new); }
 /* OPEN: what the record leaves unsettled for this n, in the same badge row shape, a step quieter. */
-.open-items { position: absolute; left: 6px; top: 772px; height: 40px; display: flex; align-items: center; gap: 28px; white-space: nowrap; }
+.open-items { position: absolute; left: 6px; top: 704px; height: 40px; display: flex; align-items: center; gap: 28px; white-space: nowrap; }
 .open-item { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
 .open-item svg { width: 32px; height: 32px; display: block; flex: none; }
 .open-none { font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
@@ -668,7 +669,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const TINT = 1.0;                     // the arriving square starts fully scarlet and settles to its own fill
   // Revision 6: while a pair is in motion the fills lose chroma, and lock back in over the settle,
   // so the resting frame is exactly the retained colours and only the moving picture is muted.
-  const DESAT = 0.5;                    // the chroma a fill keeps at full desaturation (half of it)
+  const DESAT = 0.15;                   // the chroma a fill keeps at full desaturation
   const DESAT_IN = 0.15;                // the fraction of the move over which the colour drains
   // Continuous play (revision 6, feature 4): the beat the whole sequence runs at, back to back.
   // A static append (a grid prefix or a shared picture, where nothing moves) gets a dwell and no
@@ -1376,6 +1377,18 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // label's width follows from its digit count and no frame ever has to ask the layout engine. A
   // three-digit label is preferred because it is the least relative error, but a shorter one will
   // do where the span carries no numeral that long.
+  // The numeral shares the headline's line, so its box starts where `n =` ends. The width of
+  // that line is measured rather than computed: it is one constant string, and a measurement
+  // cannot disagree with the face the browser actually loaded -- which a build-time advance
+  // sum could, since `=` may come from the symbols face with its own size-adjust. Taken at
+  // startup and again on `document.fonts.ready`, as the figure width beside it is.
+  let numeralLeft = 152;   // the fallback, close enough for the frame before the faces land
+  function measureHeadline() {
+    const line = document.querySelector('.nline');
+    if (!line || line.offsetWidth === 0) return;
+    numeralLeft = line.offsetLeft + line.offsetWidth + METRICS.headline_gap_px - METRICS.digit_bearing_px;
+    document.querySelectorAll('.numeral').forEach((n) => { n.style.left = numeralLeft + 'px'; });
+  }
   function measureDigit() {
     for (const want of [3, 0]) {
       for (const s of scaleLabels) {
@@ -1470,7 +1483,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // The numeral alone: the `n =` line above it is static, outside the layers. Its box offset
     // comes from the build, which read the regular face's digit bearings (see the stylesheet).
     const numeral = text('div', 'numeral');
-    numeral.style.left = METRICS.numeral_left_px + 'px';
+    numeral.style.left = numeralLeft + 'px';
     numeral.appendChild(text('span', 'n-val', String(n)));
     layer.appendChild(numeral);
     function functionLine(cls, relation, value) {
@@ -5173,12 +5186,13 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // The scale's figure width is measured from the drawn numerals, so it has to be taken again once
   // the faces are in; re-rendering afterwards is a no-op on everything but the suppression.
   measureDigit();
+  measureHeadline();
   if (document.fonts && document.fonts.ready) {
     // `layout()` again, not only `measureDigit()`: the panel's height is what the stage's scale is
     // computed from, and with revision 11's six control boxes the faces landing changes how much the
     // rows wrap. Measured before this line: a fresh load left the controls 45 px taller than the
     // scale had allowed for and `overflow: hidden` clipped the bottom row until the window resized.
-    document.fonts.ready.then(() => { measureDigit(); layout(); render(); });
+    document.fonts.ready.then(() => { measureDigit(); measureHeadline(); layout(); render(); });
   }
 })();
 </script>

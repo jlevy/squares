@@ -85,7 +85,12 @@ NEW_RULES = {
 }
 # Revision 4's type scale on the 1920 x 1080 stage, and the headline's face.
 TYPE_SCALE = [28, 34, 44, 96]
-NUMERAL_PX, NUMERAL_WEIGHT, N_LINE_PX, N_LINE_LEFT_PX = 96, 400, 34, 6
+# The headline is one line at one size: `n =` and the numeral both at 96 px, the numeral a
+# HEADLINE_GAP_PX ink gap past the line. N_LINE_PX was 34 while the label sat above the
+# number as a caption; it matches the numeral now, and this copy is read independently of
+# the build so a change to one side has to be made on both.
+NUMERAL_PX, NUMERAL_WEIGHT, N_LINE_PX, N_LINE_LEFT_PX = 96, 400, 96, 6
+HEADLINE_GAP_PX = 16
 NUMERAL_RATIO_MAX = 4.5
 BADGE_VOCABULARY = {("O", "solid"), ("=", "solid"), ("≈", "muted"), ("R", "solid"), ("R", "muted")}
 SYMBOL_RANGE = "U+2208, U+221A, U+2248, U+2264-2265, U+2308-230B"
@@ -154,10 +159,15 @@ def katex_approx_bounds() -> tuple[int, float, float]:
     return glyph_set[name].width, round(y0, 1), round(y1, 1)
 
 
-def numeral_left_px() -> float:
-    """The numeral's box offset the build should derive: the n-line's left plus the italic n's
-    bearing at the line's size, less the median digit's bearing at the numeral's size, in the
-    regular face; read here from the woff2 hmtx tables independently of the build."""
+def digit_bearing_px() -> float:
+    """The median digit's left side bearing at the numeral's size, in the regular face, read
+    from the woff2 hmtx tables independently of the build.
+
+    The headline is one line now, so the numeral's box left is not a stamped constant: the page
+    measures the `n =` line the numeral sits beside and puts the numeral `headline_gap_px` past
+    it, less this bearing, so the gap is ink to ink rather than box to box. What is checked below
+    is that relationship on the rendered page, which is a stronger claim than two computations of
+    one formula agreeing with each other."""
     from fontTools.ttLib import TTFont  # noqa: PLC0415
 
     def bearing(path: Path, char: str) -> float:
@@ -165,9 +175,7 @@ def numeral_left_px() -> float:
         return font["hmtx"][font.getBestCmap()[ord(char)]][1] / font["head"].unitsPerEm
 
     digits = sorted(bearing(FONTS / f"pt-serif-latin-{NUMERAL_WEIGHT}-normal.woff2", d) for d in "0123456789")
-    digit = (digits[4] + digits[5]) / 2 * NUMERAL_PX
-    n = bearing(FONTS / "pt-serif-latin-400-italic.woff2", "n") * N_LINE_PX
-    return round(N_LINE_LEFT_PX + n - digit, 1)
+    return round((digits[4] + digits[5]) / 2 * NUMERAL_PX, 2)
 
 
 def witness_centres(n: int) -> list[tuple[float, float]]:
@@ -188,7 +196,7 @@ def witness_centres(n: int) -> list[tuple[float, float]]:
     return centres
 
 
-def type_and_fit_sweep(browser, page_path: Path, check, expected_left: float) -> tuple[list, int]:
+def type_and_fit_sweep(browser, page_path: Path, check, expected_gap: float) -> tuple[list, int]:
     """Revision 4, over every pair of the page in one evaluate: the census of computed font
     sizes of every visible text-bearing HTML element on the stage (the badge glyphs are SVG
     marks and are left out), and at t = 0 and t = duration the visible layer's extent against
@@ -219,7 +227,7 @@ def type_and_fit_sweep(browser, page_path: Path, check, expected_left: float) ->
               sizes.get(size).add(el.id || el.className || el.tagName.toLowerCase());
             }
           };
-          const SLOTS = ['.numeral', '.side', '.exact', '.lower', '.lower-note', '.badges', '.open', '.open-items'];
+          const SLOTS = ['.numeral', '.head-proved', '.side', '.lower', '.star-line', '.exact', '.badges', '.head-open', '.open-items'];
           const fits = [];
           const count = api.pairs().length;
           for (let i = 0; i < count; i++) {
@@ -249,8 +257,17 @@ def type_and_fit_sweep(browser, page_path: Path, check, expected_left: float) ->
                 const r = root.querySelector(sel).getBoundingClientRect();
                 return [sel, Math.round(r.top * 100) / 100, Math.round(r.height * 100) / 100];
               });
+              // The headline: the numeral against the `n =` line it shares a row with. Read
+              // through `offset*` rather than `getBoundingClientRect`, because the numeral
+              // carries the roll's transform and a client rect would measure that instead of
+              // the layout. The line is constant and lives OUTSIDE both fading layers, so it
+              // is found on the document rather than in `root`.
+              const numeralEl = root.querySelector('.numeral');
+              const nlineEl = document.querySelector('.nline');
               fits.push({ n: api.state().n + (t > 0 ? 1 : 0), t, bottom, right, slots,
-                          numeralLeft: root.querySelector('.numeral').getBoundingClientRect().left });
+                          numeralLeft: numeralEl.offsetLeft, numeralTop: numeralEl.offsetTop,
+                          nlineRight: nlineEl.offsetLeft + nlineEl.offsetWidth,
+                          nlineTop: nlineEl.offsetTop });
             }
           }
           // Revision 12 hides the position bar in Pack, where a corpus-wide scale says nothing
@@ -288,8 +305,14 @@ def type_and_fit_sweep(browser, page_path: Path, check, expected_left: float) ->
     check(not wide, f"{page_path.name}: panel text runs past the panel's right edge {result['factsRight']}: {[(f['n'], f['right']) for f in wide][:6]}")
     slot_sets = {json.dumps(f["slots"]) for f in fits}
     check(len(slot_sets) == 1, f"{page_path.name}: slot positions differ between n: {sorted(slot_sets)[:3]}")
-    off = [f for f in fits if abs(f["numeralLeft"] - result["factsLeft"] - expected_left) > 0.05]
-    check(not off, f"{page_path.name}: the numeral's box is not {expected_left} px into the panel: {[(f['n'], f['numeralLeft'] - result['factsLeft']) for f in off][:4]}")
+    off = [f for f in fits if abs(f["numeralLeft"] - f["nlineRight"] - expected_gap) > 0.55]
+    check(
+        not off,
+        f"{page_path.name}: the numeral does not start {expected_gap} px after the `n =` line: "
+        f"{[(f['n'], round(f['numeralLeft'] - f['nlineRight'], 2)) for f in off][:4]}",
+    )
+    rows = [f for f in fits if f["numeralTop"] != f["nlineTop"]]
+    check(not rows, f"{page_path.name}: the numeral is not on the `n =` line's row: {[(f['n'], f['numeralTop'], f['nlineTop']) for f in rows][:4]}")
     return fits[0]["slots"] if fits else [], len(fits)
 
 
@@ -730,11 +753,11 @@ def browser_checks(page_path: Path, check) -> None:
 
             # Revision 4: the type scale and the panel's fit, over every embedded pair of index.html
             # and, when it is present, of index-all.html (every n from 1 to 324).
-            expected_left = numeral_left_px()
-            slots, instants = type_and_fit_sweep(browser, page_path, check, expected_left)
+            expected_gap = HEADLINE_GAP_PX - digit_bearing_px()
+            slots, instants = type_and_fit_sweep(browser, page_path, check, expected_gap)
             print(f"type and fit sweep over {page_path.name}: {instants} instants; slots (top, height): " + ", ".join(f"{s[0]} {s[1]:g}/{s[2]:g}" for s in slots))
             if (HERE / "index-all.html").exists():
-                _, instants_all = type_and_fit_sweep(browser, HERE / "index-all.html", check, expected_left)
+                _, instants_all = type_and_fit_sweep(browser, HERE / "index-all.html", check, expected_gap)
                 print(f"type and fit sweep over index-all.html: {instants_all} instants")
 
             # Revision 11's colouring over the whole corpus, from the all-pairs page when it is present.
@@ -930,8 +953,9 @@ def main() -> int:
     check("n_var_raise" not in metrics and "n_eq_raise" not in metrics, "the revision-2 headline raises are still emitted")
     check((metrics["numeral_px"], metrics["n_line_px"], metrics["numeral_weight"]) == (NUMERAL_PX, N_LINE_PX, NUMERAL_WEIGHT), f"headline sizes are {metrics['numeral_px']}, {metrics['n_line_px']} at weight {metrics['numeral_weight']}")
     check(metrics["type_scale"] == TYPE_SCALE, f"type scale is {metrics['type_scale']}")
-    check(metrics["numeral_left_px"] == numeral_left_px(), f"numeral offset is {metrics['numeral_left_px']} px, the fonts say {numeral_left_px()}")
-    check(0 <= metrics["numeral_left_px"] <= 8, f"numeral offset {metrics['numeral_left_px']} px is outside 0..8")
+    check("numeral_left_px" not in metrics, "the stacked headline's numeral offset is still emitted")
+    check(metrics["headline_gap_px"] == HEADLINE_GAP_PX, f"headline gap is {metrics['headline_gap_px']}, expected {HEADLINE_GAP_PX}")
+    check(metrics["digit_bearing_px"] == digit_bearing_px(), f"digit bearing is {metrics['digit_bearing_px']} px, the fonts say {digit_bearing_px()}")
     advance, y0, y1 = katex_approx_bounds()
     approx = metrics["approx"]
     check((approx["advance"], approx["y0"], approx["y1"]) == (advance, y0, y1), f"approximately-equal metrics {approx['advance']}, {approx['y0']}, {approx['y1']} differ from KaTeX_Main")
