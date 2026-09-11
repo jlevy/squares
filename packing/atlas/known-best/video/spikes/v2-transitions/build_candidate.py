@@ -93,8 +93,8 @@ CONTACT_BADNESS = 1000.0       # one full-side contact outweighs any position di
 NEW_RULE = "lowest total matching cost after removal from n+1, then fewest full-side contacts, then highest position (y, then x)"
 
 # Timeline defaults, seconds. Revision 2: a little faster (was 1.2 / 1.6 / 0.5).
-# The single-step beat. The owner's pacing: 0.7 to read the packing, 1.2 to rearrange, and a
-# settle long enough for the colour to come back without the film dragging.
+# The single-step beat, even: a beat to read the packing, a beat to rearrange it, a beat to
+# settle. The owner's pacing.
 #: The footer `devtools/check_documentation.py` requires on durable Markdown. Written here rather
 #: than added by hand afterwards, because this file is regenerated on every build.
 DOC_FOOTER = (
@@ -103,7 +103,7 @@ DOC_FOOTER = (
     "-->\n"
 )
 
-TIMING = {"dwell": 0.7, "move": 1.2, "settle": 0.5}
+TIMING = {"dwell": 0.8, "move": 0.8, "settle": 0.8}
 # Revision 5 staging: in the default motion (add, then make room) the new square arrives over
 # the first ARRIVAL_FRACTION of the move while the container grows, and the existing squares
 # move, as blocks, over the rest; `move-then-add` is the same split the other way round.

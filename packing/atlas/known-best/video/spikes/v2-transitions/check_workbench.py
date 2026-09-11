@@ -348,25 +348,44 @@ def main() -> int:
               f"the bar's lower bound {bar['lower']} is not the panel's s(17) >= {facts['lower']}")
         check(bar["lo"] <= bar["lower"] + 1e-9, f"the bar's scale starts above the lower bound: {bar}")
         check(bar["hi"] > bar["record"], f"the bar's scale does not reach past the record: {bar}")
+        # The scale is the same span at every n, from the area bound up: `sqrt(n)` to `sqrt(n) + 0.7`.
+        # sqrt(n) is the one bound on the bar that needs no citation -- n unit squares have area n --
+        # and a constant span is what makes two bars comparable. Checked at both ends of the corpus
+        # because the left end is where a perfect square's record sits, hard against it.
+        for size in (17, 324):
+            if page.evaluate(f"atlasTransitions.setStepN({size})") != size:
+                continue
+            scale = page.evaluate("atlasTransitions.gapBar()")
+            check(abs(scale["lo"] - math.sqrt(size)) < 1e-9,
+                  f"the bar at n = {size} starts at {scale['lo']}, not the area bound {math.sqrt(size)}")
+            check(abs((scale["hi"] - scale["lo"]) - 0.7) < 1e-9,
+                  f"the bar at n = {size} spans {scale['hi'] - scale['lo']}, not 0.7")
+        page.evaluate("atlasTransitions.setStepN(17)")
         # Under style A the indicator sweeps to the record and the check turns green.
         page.evaluate("atlasTransitions.seek(atlasTransitions.duration())")
         end_bar = page.evaluate("atlasTransitions.gapBar()")
         check(end_bar["met"], f"style A does not reach the record by the end of the step: {end_bar}")
         check(abs(end_bar["excess"]) < 0.05, f"the excess at rest is {end_bar['excess']} per cent")
-        tick_colour = page.evaluate("getComputedStyle(document.getElementById('gapbar-check')).fill")
+        # The HAND is what turns green on a hit. It used to be a tick box in a head row that also
+        # said "gap to the best known" and "on the record"; the row is gone, because the bar is
+        # always measuring the same thing and a label saying so on every frame was a caption rather
+        # than a reading. The property it held is still held, on the mark that survived.
+        hand = "getComputedStyle(document.querySelector('#gapbar-hand .hand')).fill"
+        tick_colour = page.evaluate(hand)
         page.evaluate("atlasTransitions.setStyle('bodies'); atlasTransitions.setSnap(false); atlasTransitions.seek(2.0)")
         mid = page.evaluate("atlasTransitions.gapBar()")
         check(not mid["met"], f"the check reads met in the middle of a free run: {mid}")
-        mid_colour = page.evaluate("getComputedStyle(document.getElementById('gapbar-check')).fill")
-        check(tick_colour != mid_colour, f"the check does not change colour when the record is met ({tick_colour})")
+        mid_colour = page.evaluate(hand)
+        check(tick_colour != mid_colour, f"the hand does not change colour when the record is met ({tick_colour})")
         check(0 <= mid["x"] <= 1, f"the indicator is off the bar: {mid}")
         # In blind mode the bar still means something: the side comparison is all it needs.
         page.evaluate("atlasTransitions.setBlind(true); atlasTransitions.seek(2.0)")
         blind = page.evaluate("atlasTransitions.gapBar()")
         check(blind["side"] > 0 and 0 <= blind["x"] <= 1, f"the bar loses its indicator in blind mode: {blind}")
         page.evaluate("atlasTransitions.setBlind(false); atlasTransitions.setSnap(true); atlasTransitions.setStyle('tween')")
-        # The bar is the single-step tab's, and it must never reach the `n =` line below it
-        # (which took the dropped eyebrow's space, and is the first panel text under the bar).
+        # The headline is the first thing in the column now -- the n the panel is about, then the
+        # bar that measures it -- so the clearance runs the other way: the `n =` line must not reach
+        # the bar below it. Same property, both ends of it read from the page rather than assumed.
         geom = page.evaluate(
             "() => { const s = document.getElementById('stage').getBoundingClientRect();"
             " const k = s.width / 1920;"
@@ -374,7 +393,7 @@ def main() -> int:
             " const e = document.querySelector('.nline').getBoundingClientRect();"
             " const f = document.getElementById('facts').getBoundingClientRect();"
             " return {bottom: (b.bottom - s.top) / k, top: (b.top - s.top) / k,"
-            "         nline: (e.top - s.top) / k, right: (b.right - s.left) / k,"
+            "         nline: (e.bottom - s.top) / k, right: (b.right - s.left) / k,"
             "         panelRight: (f.right - s.left) / k,"
             "         shown: getComputedStyle(document.getElementById('gapbar')).display !== 'none'}; }"
         )
@@ -399,7 +418,7 @@ def main() -> int:
         check(parts["lowLabel"]["r"] < parts["recLabel"]["l"] - 0.5,
               f"the bar's two numbers overlap: {parts['lowLabel']} and {parts['recLabel']}")
         check(geom["shown"], "the gap bar is not drawn")
-        check(geom["bottom"] < geom["nline"] - 0.5, f"the gap bar reaches the `n =` line: {geom}")
+        check(geom["nline"] < geom["top"] - 0.5, f"the `n =` line reaches the gap bar: {geom}")
         check(geom["right"] <= geom["panelRight"] + 0.5, f"the gap bar runs past the panel: {geom}")
 
         # ---- step 5 (revision 9): the bar stops animating. The sparkline is gone, the hand holds
