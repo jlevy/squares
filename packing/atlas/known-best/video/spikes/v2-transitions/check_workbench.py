@@ -358,8 +358,8 @@ def main() -> int:
             scale = page.evaluate("atlasTransitions.gapBar()")
             check(abs(scale["lo"] - math.sqrt(size)) < 1e-9,
                   f"the bar at n = {size} starts at {scale['lo']}, not the area bound {math.sqrt(size)}")
-            check(abs((scale["hi"] - scale["lo"]) - 0.7) < 1e-9,
-                  f"the bar at n = {size} spans {scale['hi'] - scale['lo']}, not 0.7")
+            check(abs((scale["hi"] - scale["lo"]) - 1.0) < 1e-9,
+                  f"the bar at n = {size} spans {scale['hi'] - scale['lo']}, not 1")
         page.evaluate("atlasTransitions.setStepN(17)")
         # Under style A the indicator sweeps to the record and the check turns green.
         page.evaluate("atlasTransitions.seek(atlasTransitions.duration())")

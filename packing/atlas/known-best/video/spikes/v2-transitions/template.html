@@ -84,14 +84,19 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
    Revision 9 folds the two tabs into one view, so the bar is always drawn: the range is the spine and
    its `to` end is the n the bar measures.
    The two numbers are the ones the panel itself prints, s(n) <= and s(n) >=, read from the record. */
-.gapbar { position: absolute; left: 6px; top: 156px; width: 694px; height: 100px; }
+.gapbar { position: absolute; left: 6px; top: 130px; width: 694px; height: 126px; }
 /* The bar sits under the headline, so the first thing in the column is the n it is all about. */
-.gapbar-plot { position: absolute; left: 0; top: 0; width: 680px; height: 100px; display: block; }
+.gapbar-plot { position: absolute; left: 0; top: 0; width: 680px; height: 126px; display: block; }
 .gapbar-plot .track { fill: var(--track); }
+/* The bar's two ends, named by the formulas they are rather than by their values: area forbids
+   anything below the left one and a grid achieves the right one, so the span is one unit side at
+   every n. Set in the text face, which is where the radical comes from. */
+.gapbar-end { font-family: var(--serif); font-size: 26px; fill: var(--quiet); }
+.gapbar-end .gapbar-arg { font-style: italic; }
 /* The open territory: everything between what is proved and what is known. */
 /* Named `gap-open`, not `open`: `height` is a CSS property on an SVG rect, so the panel's own
    `.open` group (a 76 px slot) silently stretched this band to 76 px when it shared the name. */
-.gapbar-plot .gap-open { fill: var(--quiet); opacity: 0.34; }
+.gapbar-plot .gap-open { fill: var(--quiet); opacity: 0.62; }
 .gapbar-plot .edge { stroke: var(--muted); stroke-width: 2; }
 .gapbar-plot .edge.record { stroke: var(--ink); stroke-width: 3; }
 .gapbar-plot .hand { fill: var(--ink); }
@@ -389,7 +394,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       </svg>
       <div id="facts">
         <div class="gapbar" id="gapbar">
-          <svg class="gapbar-plot" viewBox="0 0 680 100" aria-hidden="true">
+          <svg class="gapbar-plot" viewBox="0 -26 680 126" aria-hidden="true">
             <rect class="track" x="0" y="34" width="680" height="18" rx="3" />
             <rect class="gap-open" id="gapbar-open" x="0" y="34" width="0" height="18" />
             <line class="edge" id="gapbar-lower" x1="1" y1="27" x2="1" y2="59" />
@@ -398,6 +403,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
               <path class="hand" d="M -10 8 L 10 8 L 0 23 Z" />
               <line class="hand-stem" x1="0" y1="21" x2="0" y2="53" />
             </g>
+            <text class="gapbar-end" x="0" y="-4" text-anchor="start">&#8730;<tspan class="gapbar-arg">n</tspan></text>
+            <text class="gapbar-end" x="680" y="-4" text-anchor="end">&#8730;<tspan class="gapbar-arg">n</tspan> + 1</text>
             <text class="gapbar-num" id="gapbar-lower-label" x="0" y="88" text-anchor="start"></text>
             <text class="gapbar-num record" id="gapbar-record-label" x="0" y="88" text-anchor="middle"></text>
           </svg>
@@ -3242,21 +3249,23 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function markGapBar() { gapBarDirty = true; }
   const GAPBAR = {
     width: 680,
-    // **The scale is the same at every n: one span of side, from the area bound up.**
+    // **Both ends are formulas, and the span is one unit side at every n.**
     //
-    // The left end is `sqrt(n)`, which is where a lower bound comes from before anything is proved
-    // -- n unit squares have area n, so no box smaller than that side can hold them, whatever the
-    // arrangement. It is the one number on this bar that needs no citation.
+    // The left end is `sqrt(n)`: n unit squares have area n, so no box with a smaller side can hold
+    // them whatever the arrangement. It is the one bound on this bar that needs no citation, and it
+    // is where every proved lower bound starts from.
     //
-    // The right end is that plus SPAN. Measured over the whole corpus, the furthest any record sits
-    // above the area bound is 0.586 of a side, at n = 2; the median is 0.458 and nothing exceeds
-    // 0.6. So 0.7 holds every record with room to spare and, being a constant, makes the bars
-    // comparable: the same distance means the same distance at n = 11 and at n = 300, which the old
-    // scale -- headroom proportional to the open gap -- could not say.
+    // The right end is `sqrt(n) + 1`, and it is a BOUND rather than a margin: n unit squares fit a
+    // grid of side `ceil(sqrt(n))`, and `ceil(sqrt(n)) < sqrt(n) + 1`, so no best known packing can
+    // reach the right end of this bar. Checked against the corpus: no record exceeds the grid
+    // bound, and the furthest any sits above the area bound is 0.586 of a side at n = 2, median
+    // 0.458. So the bar runs from what area forbids to what a grid achieves.
     //
-    // A perfect square's record IS the area bound, so its tick sits hard against the left end. That
-    // is the honest picture: there is nothing below it to draw.
-    span: 0.7,
+    // A constant span is what makes two bars comparable -- the same distance means the same
+    // distance at n = 11 and at n = 300, which a headroom proportional to the open gap could not
+    // say. And a perfect square's record IS the area bound, so its tick sits hard against the left
+    // end: the honest picture, since there is nothing below it to draw.
+    span: 1.0,
   };
   // What it takes to say the picture *is* the record: every square on its own target, not merely a
   // box that happens to be small enough. A blind run has no correspondence to the record's
@@ -3312,7 +3321,11 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       ? g.side <= info.record * (1 + GAP_MET.side)
       : g.centre <= GAP_MET.centre && g.angle <= GAP_MET.angle && g.side <= info.record * (1 + GAP_MET.side);
     // On a hit the hand locks to the record's tick rather than hovering a pixel off it.
-    const x = met ? gapbarX(info.record) : gapbarX(g.side);
+    // The hand is a 20-unit triangle centred on the value, so at a record sitting hard against an
+    // end -- which is every perfect square, whose record IS the area bound -- half of it hung off
+    // the bar. Kept inside by its own half-width: the tick is the mark, the hand only points at it.
+    const HALF = 10;
+    const x = Math.max(HALF, Math.min(GAPBAR.width - HALF, met ? gapbarX(info.record) : gapbarX(g.side)));
     const excess = (g.side / info.record - 1) * 100;
     gapbarHand.setAttribute('transform', 'translate(' + fmt(x, 2) + ' 0)');
     // The hand turns green on a hit; the head row that said "on the record" beside a tick box is
