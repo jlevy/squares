@@ -95,11 +95,13 @@ def _capture(
         page.evaluate(f"window.atlasTransitions.select({step['index']})")
         seconds = page.evaluate(f"window.atlasTransitions.duration({step['index']})")
         count = max(1, round(seconds * fps))
+        started = time.monotonic()
         for frame in range(count + 1):
             at = seconds * frame / count
             page.evaluate(f"window.atlasTransitions.seek({at})")
             page.screenshot(path=str(frames_dir / f"f{index:07d}.png"), type="png")
             index += 1
+        drawing = time.monotonic() - started
         # The bar holds still through the motion and catches up when the picture settles, so it
         # is asked to redraw before it is read: what goes in the receipt is the settled answer.
         page.evaluate("window.atlasTransitions.refreshGap()")
@@ -114,6 +116,11 @@ def _capture(
                 "reached": bar["side"],
                 "landed_on_record": bool(bar["met"]),
                 "excess": bar["excess"],
+                # What this step cost to draw. A capture is the slowest thing built here -- a
+                # screenshot per frame through a real browser -- and it is the first place an
+                # algorithm that got slower would show as the film taking twice as long to make.
+                # Recorded per step rather than as a total so a step that is slow says which.
+                "ms_per_frame": round(1000 * drawing / (count + 1), 1),
             }
         )
     return receipt
@@ -171,7 +178,7 @@ def main() -> int:
         )
     ffmpeg = _encoder()
     scale = HEIGHTS[o.height]
-    started = time.monotonic()
+    started_all = time.monotonic()
 
     from playwright.sync_api import sync_playwright  # noqa: PLC0415  (optional dev dependency)
 
@@ -204,6 +211,7 @@ def main() -> int:
 
     frames = sum(step["frames"] for step in receipt)
     missed = [step["n"] for step in receipt if not step["landed_on_record"]]
+    drawn = [step["ms_per_frame"] for step in receipt]
     document = {
         "page": str(o.page.relative_to(ROOT) if o.page.is_relative_to(ROOT) else o.page),
         "page_sha256": _digest(o.page),
@@ -215,6 +223,13 @@ def main() -> int:
         "frames": frames,
         "seconds": round(frames / o.fps, 3),
         "steps_off_record": missed,
+        # The run's own cost, beside what it produced.
+        "capture_seconds": round(took := time.monotonic() - started_all, 1),
+        "ms_per_frame": {
+            "mean": round(sum(drawn) / len(drawn), 1),
+            "worst": max(drawn),
+            "worst_at_n": receipt[drawn.index(max(drawn))]["n"],
+        },
         "encoder": command,
         "steps": receipt,
     }
@@ -222,7 +237,6 @@ def main() -> int:
     receipt_path.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
 
     size_mb = o.out.stat().st_size / 1e6
-    took = time.monotonic() - started
     summary = f"{frames} frames, {document['seconds']}s, {size_mb:.1f} MB in {took:.0f}s"
     print(f"  {o.out}: {summary}")
     print(f"  {receipt_path}")

@@ -28,6 +28,8 @@ import json
 import math
 import re
 import sys
+import time
+from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
 
@@ -439,6 +441,53 @@ def base_cost(prev: dict, nxt: dict) -> tuple[np.ndarray, float, np.ndarray]:
     return d2 + ANGLE_WEIGHT * (dang / 45.0) ** 2 / scale**2, scale, moves
 
 
+#: A swap has to save more than this, in the normalised cost's own units, to be taken. It is
+#: there only to stop churn on exact ties: any real saving is a shorter journey and is worth having.
+CROSSING_TOL = 1e-12
+
+
+def repair_crossings(mapping: list[int], base: np.ndarray) -> tuple[list[int], int]:
+    """Undo any pairing where two squares would be shorter off in each other's place.
+
+    **The assignment does not minimise travel, and it is not meant to.** A block pairing is
+    discounted so a shingled row lands as one rigid group, and a square that moves alone pays a
+    penalty on top of its distance; both are worth having. But either can buy its coherence with a
+    detour, and a detour that two squares take past each other is a swap -- which is what a viewer
+    sees, and the one thing the motion cannot explain. At `n = 10 -> 11` the discount sent square 1
+    to target 8, 1.425 unit sides away, and square 8 to target 9, 0.872 away; in each other's place
+    they travel 0.586 and 0.248. Two squares crossing the packing to trade positions, for 2.3 unit
+    sides of motion that buys nothing.
+
+    So every pair of squares is offered the exchange, and it is taken whenever it shortens the two
+    journeys together. The measure is `base`, the cost before any discount or penalty: squared
+    centre distance plus the angle term, which is what "minimal relative to where the square is"
+    means when a square can also turn.
+
+    A block survives this untouched unless it was the thing causing the crossing. Swapping two
+    members of a row that shifts by one cell sends each further, not nearer, so the exchange is
+    refused; and the blocks are rebuilt from the repaired mapping by the caller, so a member that
+    was swapped out simply is not one any more.
+
+    The leftover column cannot change: an exchange moves two assigned targets between two squares
+    and never touches the one no square took, so which square is *new* is decided before this runs
+    and is unaffected by it.
+    """
+    order = list(mapping)
+    swaps = 0
+    while True:
+        improved = False
+        for i in range(len(order)):
+            for j in range(i + 1, len(order)):
+                keep = base[i, order[i]] + base[j, order[j]]
+                trade = base[i, order[j]] + base[j, order[i]]
+                if trade < keep - CROSSING_TOL:
+                    order[i], order[j] = order[j], order[i]
+                    swaps += 1
+                    improved = True
+        if not improved:
+            return order, swaps
+
+
 def exclusion_costs(cost: np.ndarray, rows: np.ndarray, cols: np.ndarray) -> np.ndarray:
     """For every column c, the least total cost of an assignment that leaves c out, from the
     optimal one: the cost of the shortest alternating path from c to the free column, found
@@ -527,6 +576,9 @@ def match_pair(prev: dict, nxt: dict, prev_render: list[dict], nxt_render: list[
     for r, c in zip(rows, cols, strict=True):
         mapping[int(r)] = int(c)
     (new_index,) = sorted(set(range(n + 1)) - set(mapping))
+    # Before anything is derived from it: no two squares may be shorter off in each other's place.
+    # The blocks below are built by walking this mapping, so a repaired pairing rebuilds them.
+    mapping, crossings_undone = repair_crossings(mapping, base)
     exclusion = exclusion_costs(cost, rows, cols)
     tied = sorted(int(c) for c in np.flatnonzero(exclusion - exclusion[new_index] <= NEW_TIE_TOL))
     if len(tied) == 1:
@@ -592,6 +644,7 @@ def match_pair(prev: dict, nxt: dict, prev_render: list[dict], nxt_render: list[
             block["drift_max"] = round(max(drifts[k]), 4)
     return {
         "kind": "matched", "map": mapping, "new": new_index, "cost": float(cost[rows, cols].sum()),
+        "crossings_undone": crossings_undone,
         "new_rule": rule, "new_tied": len(tied), "new_hungarian": hungarian_new,
         "blocks": blocks, "block_of": block_of, "clusters": (len(clusters_a), len(clusters_b)), "links": len(links),
     }
@@ -713,6 +766,9 @@ def pair_stats(prev: dict, nxt: dict, match: dict) -> dict:
         "rotated": sum(1 for r in rot if r > ROTATION_TOLERANCE_DEG),
         "max_rotation_deg": round(max(rot), 3),
         "crossings": crossings,
+        # How many exchanges the repair took on this pair: the number of times two squares were
+        # shorter off in each other's place than in the one the assignment gave them.
+        "crossings_undone": match.get("crossings_undone", 0),
         "min_pass_distance": None if min_pass == float("inf") else round(min_pass, 3),
         "matching_cost": round(match["cost"], 6),
         "new_index": match["new"],
@@ -1123,6 +1179,37 @@ def block_summary_lines(matched: list[dict], stats: list[dict]) -> list[str]:
 # --------------------------------------------------------------------------- main
 
 
+class Stopwatch:
+    """Wall time per named stage of the build, so a stage that gets slow says so.
+
+    Every stage here is at least O(n^2) in the number of squares and one of them is a Hungarian
+    assignment, which is cubic; the corpus runs them 323 times. A change that makes one of them
+    quadratically worse would still finish, just slowly, and would be noticed as "the build feels
+    slow" some weeks later. The timings go into the stats record beside the measurements they
+    produced, so a regression is a diff rather than a memory.
+    """
+
+    def __init__(self) -> None:
+        self.totals: dict[str, float] = {}
+
+    @contextmanager
+    def stage(self, name: str):
+        started = time.perf_counter()
+        try:
+            yield
+        finally:
+            self.totals[name] = self.totals.get(name, 0.0) + (time.perf_counter() - started)
+
+    def record(self) -> dict[str, float]:
+        return {name: round(seconds, 3) for name, seconds in sorted(self.totals.items())}
+
+    def report(self) -> str:
+        rows = sorted(self.totals.items(), key=lambda kv: -kv[1])
+        total = sum(self.totals.values())
+        body = "\n".join(f"  {seconds:7.2f}s  {name}" for name, seconds in rows)
+        return f"Build timings ({total:.1f}s in all):\n{body}"
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", type=Path, default=HERE)
@@ -1131,19 +1218,25 @@ def main(argv: list[str] | None = None) -> int:
     out: Path = args.out
     out.mkdir(parents=True, exist_ok=True)
 
+    clock = Stopwatch()
     manifest = json.loads(MANIFEST.read_text())["atlas"]["entries"]
     manifest_by_n = {entry["n"]: entry for entry in manifest}
-    witnesses = {n: load_witness(n) for n in range(1, N_MAX + 1)}
-    renderings = {n: load_rendering(n) for n in range(1, N_MAX + 1)}
-    facts = load_facts(manifest_by_n)
+    with clock.stage("read the witnesses and renderings"):
+        witnesses = {n: load_witness(n) for n in range(1, N_MAX + 1)}
+        renderings = {n: load_rendering(n) for n in range(1, N_MAX + 1)}
+    with clock.stage("read the facts"):
+        facts = load_facts(manifest_by_n)
 
     stats = []
     matches = {}
     for n in range(1, N_MAX):
-        match = match_pair(witnesses[n], witnesses[n + 1], renderings[n], renderings[n + 1], manifest_by_n[n + 1])
+        with clock.stage("match the pairs"):
+            match = match_pair(witnesses[n], witnesses[n + 1], renderings[n], renderings[n + 1], manifest_by_n[n + 1])
         matches[n] = match
-        stats.append(pair_stats(witnesses[n], witnesses[n + 1], match))
-    identities = identity_chain(matches)
+        with clock.stage("measure the pairs"):
+            stats.append(pair_stats(witnesses[n], witnesses[n + 1], match))
+    with clock.stage("chain the identities"):
+        identities = identity_chain(matches)
 
     summary = summary_text(stats)
     print(summary)
@@ -1157,6 +1250,7 @@ def main(argv: list[str] | None = None) -> int:
         "angle_weight": ANGLE_WEIGHT,
         "rotation_tolerance_deg": ROTATION_TOLERANCE_DEG,
         "crossing_distance": CROSSING_DISTANCE,
+        "build_seconds": clock.record(),
         "block_matching": {
             "cluster_angle_tol_deg": CLUSTER_ANGLE_TOL,
             "cluster_gap_tol": CLUSTER_GAP_TOL,
@@ -1222,6 +1316,8 @@ def main(argv: list[str] | None = None) -> int:
     html = build_html(template, payload_for(demo))
     (out / "index.html").write_text(html)
     print(f"\nindex.html: {len(html.encode('utf-8'))} bytes, {len(demo)} pairs embedded: {demo}")
+    print()
+    print(clock.report())
     if args.all:
         html_all = build_html(template, payload_for(list(range(1, N_MAX))))
         (out / "index-all.html").write_text(html_all)

@@ -32,6 +32,13 @@ from playwright.sync_api import sync_playwright
 
 HERE = Path(__file__).resolve().parent
 
+#: What one trajectory may cost to build. Measured on this machine at n = 324: 27 ms and 1.3 MB
+#: under `physics`, 31 ms under `bodies`. The ceilings are about thirteen times the time and three
+#: times the memory, which is loose enough that wall clock on a loaded machine does not trip it and
+#: tight enough that an algorithm going quadratic does.
+TRAJECTORY_MS_CEILING = 400.0
+TRAJECTORY_BYTE_CEILING = 4_000_000
+
 # Every visible square, as (identity, the angle it is drawn at, the fill it is painted with). The
 # angle is read off the transform because `state()` carries no per-square pose; the transform is
 # `translate(x y) rotate(a)`, with a `scale(k)` after it while the new square is inflating.
@@ -1401,7 +1408,14 @@ def main() -> int:
         # left the stage on an open-ended run from the grid; everything from here reads the timeline,
         # so the start goes back to the previous packing first.
         page.evaluate("atlasTransitions.setInitial('previous')")
-        for n, want_edges in ((11, 4), (17, 35), (26, 59), (29, 46), (110, 550)):
+        # The counts fell when the crossing repair landed, and they were meant to: a block that was
+        # buying its coherence with two squares trading places across the packing is dissolved by
+        # the repair, so there are fewer members to form cliques from -- and occasionally more, where
+        # undoing one crossing lets a member join a block it was assigned away from. Measured before
+        # and after: 11 was 4 and is 3, 17 was 35 and is 40, 26 was 59 and is 53, 29 was 46 and is
+        # 42, 110 was 550 and is 365. What has not changed, and is the part that is a property rather
+        # than a number, is the line below: the mask IS the blocks' cliques, counted either way round.
+        for n, want_edges in ((11, 3), (17, 40), (26, 53), (29, 42), (110, 365)):
             if page.evaluate(f"atlasTransitions.setStepN({n})") != n:
                 continue
             page.evaluate("atlasTransitions.setRelationship('groups')")
@@ -1419,6 +1433,35 @@ def main() -> int:
             check(counted["maskEdges"] == counted["byOf"] == counted["byBlocks"],
                   f"the groups mask at n = {n} is not the blocks' cliques: {counted}")
             check(counted["maskEdges"] < 60000, f"the groups mask at n = {n} reaches the 60,000-pair cap")
+        # 11d. **What a trajectory costs to build.** Every physical style runs a simulation of
+        # `bodies` squares over `steps` sub-steps, and the page builds one per pair on demand while
+        # a viewer waits. None of the algorithms here is worse than linear in the body count today,
+        # and this is what says so tomorrow: a change that made the broad phase quadratic, or that
+        # dropped the grid, would still produce the right picture and take ten times as long. The
+        # ceiling is loose on purpose -- thirteen times the measurement -- because this is wall
+        # clock on whatever machine is running it, and a flaky performance gate is worse than none.
+        # It is the shape of a regression this catches, not a tenth of a millisecond.
+        costs = []
+        for n in (11, 100, 324):
+            if page.evaluate(f"atlasTransitions.setStepN({n})") != n:
+                continue
+            index = page.evaluate(
+                f"() => atlasTransitions.pairs().findIndex((p) => p.n + 1 === {n})")
+            if index < 0:
+                continue
+            for style in ("physics", "bodies"):
+                built = page.evaluate(f"atlasTransitions.physics({index}, {style!r})")
+                costs.append((n, style, built["bodies"], built["ms"], built["bytes"]))
+                check(built["ms"] < TRAJECTORY_MS_CEILING,
+                      f"a {style} trajectory at n = {n} took {built['ms']:.0f} ms, "
+                      f"over the {TRAJECTORY_MS_CEILING} ms ceiling")
+                check(built["bytes"] < TRAJECTORY_BYTE_CEILING,
+                      f"a {style} trajectory at n = {n} holds {built['bytes']} bytes, "
+                      f"over the {TRAJECTORY_BYTE_CEILING} ceiling")
+        print("trajectory build cost: " + "; ".join(
+            f"n={n} {style} {bodies} bodies {ms:.0f} ms {bytes_ / 1e6:.1f} MB"
+            for n, style, bodies, ms, bytes_ in costs))
+
         # A general relationship has no mask to report, and the arriving square is in no block, so a
         # size whose blocks the record does not carry attracts nobody under groups.
         page.evaluate("atlasTransitions.setStepN(17); atlasTransitions.setRelationship('general')")
