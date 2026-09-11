@@ -39,15 +39,19 @@ from scipy.optimize import linear_sum_assignment
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import connected_components
 
-REPO = Path("/Users/levy/wrk/github/squares/.claude/worktrees/squares-viz-explanations-4ae624")
-PACKING = REPO / "packing"
+HERE = Path(__file__).resolve().parent
+# This file lives at packing/atlas/known-best/video/spikes/v2-transitions, so `packing`
+# is five levels up -- the depth `compare_palette.py` and `grade_motion.py` beside it
+# already use. Derived rather than written out: an absolute path from one checkout
+# resolves nowhere else, which is how this script came to fail on CI.
+PACKING = HERE.parents[4]
+REPO = PACKING.parent
 WITNESSES = PACKING / "witnesses" / "known-best"
 RENDERINGS = PACKING / "atlas" / "known-best" / "rendering"
 MANIFEST = PACKING / "atlas" / "known-best" / "manifest.json"
 COMPOSITE = PACKING / "atlas" / "known-best" / "composite-figure.json"
 FONTS = REPO / "vendor" / "kpress" / "src" / "kpress" / "format" / "static" / "fonts"
 KATEX_FONTS = REPO / "vendor" / "kpress" / "src" / "kpress" / "format" / "static" / "katex" / "fonts"
-HERE = Path(__file__).resolve().parent
 
 N_MAX = 324
 
