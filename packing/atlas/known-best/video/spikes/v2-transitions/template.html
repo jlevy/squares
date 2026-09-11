@@ -1891,6 +1891,29 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     contactTorque: 0.15, // fraction of a contact's or wall's torque applied to a single square (the push acts at a
                          // corner); the rest yields to the angle spring. A block takes the whole torque about its centroid.
     lockIn: 0.7,         // from this fraction of the move the push-apart fades out, gone where the final blend begins
+    // **Room to move, and then a tightening.** Two measured problems, and one beat each.
+    //
+    // Room: on 164 of the 323 steps the record's side does not grow at all -- the box at n is the
+    // box at n + 1 -- and at the perfect squares there is not even area to give, `side^2 - n` being
+    // exactly 0 at n = 100 and at n = 324. Squares with nowhere to go shove rather than pass, and
+    // the measure of that is WANDER: how far a square strays from the straight line between where
+    // it starts and where it ends, which separates thrashing from travel (a square that legitimately
+    // moves 1.2 sides is not wandering). Median wander over the matched steps was 0.66 of a side and
+    // the worst 1.07 -- a square swinging a whole square-width out of its way. So the container
+    // breathes: it opens past the side it is heading for, holds while the squares rearrange, and is
+    // closed again before the blend. The squares are not scaled; the walls move and the repulsion
+    // spreads the packing into the room on its own.
+    //
+    // Tightening: with the room taken the run still ended a visible distance from the record and the
+    // blend then carried it the rest of the way, so the last thing a viewer saw was a correction
+    // rather than an arrival. Between the push-apart fading and the blend beginning, the spring
+    // toward the target is stiffened: the same spring, harder, over a window where nothing else is
+    // competing with it.
+    open: 0.3,           // sides the container opens past its target at the widest
+    openBy: 0.3,         // fraction of the move by which it is fully open
+    shutFrom: 0.62,      // fraction of the move from which it closes again, done at `1 - blend`
+    tighten: 16.0,       // the spring's stiffness multiplier at the end of the tightening window
+    tightenFrom: 0.68,   // fraction of the move where the tightening begins
     wall: 2500,          // the container's walls: stiffness per unit of corner overhang, per move^2
     wallCap: 0.25,
     inertia: 1 / 6,      // a unit square of unit mass about its centre
@@ -2106,6 +2129,22 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // smoothstep only zeroes the first. Used where a change has to start and stop invisibly.
   const smootherstep = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * x * (x * (x * 6 - 15) + 10));
   const containerCurve = (u) => easeOut(clamp01(u / PHYS.grow));
+  // How far past its target the box is open at u, in sides. Zero at both ends of the move, so the
+  // side it starts from and the side it lands on are exactly the record's.
+  function containerOpen(u) {
+    const shutSpan = Math.max(1e-6, (1 - PHYS.blend) - PHYS.shutFrom);
+    const open = smootherstep(clamp01(u / PHYS.openBy));
+    const shut = smootherstep(clamp01((u - PHYS.shutFrom) / shutSpan));
+    return PHYS.open * open * (1 - shut);
+  }
+  // The side the box has at u: where it is heading, plus the breath.
+  const containerSide = (a, b, u) => lerp(a, b, containerCurve(u)) + containerOpen(u);
+  // The spring's stiffness multiplier at tau: one until the tightening window, then rising to
+  // PHYS.tighten by the time the blend takes over.
+  function tightenScale(tau) {
+    const span = Math.max(1e-6, (1 - PHYS.blend) - PHYS.tightenFrom);
+    return 1 + (PHYS.tighten - 1) * smootherstep(clamp01((tau - PHYS.tightenFrom) / span));
+  }
   // A trajectory is computed in one of three modes. 'snap' is the shipped behaviour: the last
   // PHYS.blend of the move eases every square onto the record's pose and the final state is the
   // record. 'free' runs the same simulation to the end of the move with no blend and no snap, so
@@ -2384,7 +2423,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
           worldPoses();
         }
       } else {
-        side = lerp(A.side, B.side, containerCurve(tau));
+        side = containerSide(A.side, B.side, tau);
       }
       sides[s] = side;
       stepPenetration = 0;
@@ -2394,7 +2433,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       const decay = Math.pow(1 - tau, decayPower);
       const tauMoves = tau * span;   // the jiggle's frequencies are cycles per move, not per run
       // A blind run has no target to spring toward: only the contacts, the walls and the jiggle.
-      const ks = blind ? 0 : k * smoothstep(tau / PHYS.springRamp);
+      // The tightening scales the stiffness AND the damping that goes with it. Damping is
+      // `2 zeta omega` and omega is the square root of the stiffness, so a spring made `g` times
+      // stiffer needs its damping multiplied by the square root of `g` to keep the same damping
+      // ratio. Without that the ratio falls as the spring hardens and the squares ring rather than
+      // arrive -- measured, a tightening of 12 left a worse residual (0.355 of a side) than one of
+      // 8 (0.200), which is the ringing showing up as a non-monotone curve.
+      const tight = blind ? 1 : tightenScale(tau);
+      const ks = blind ? 0 : k * smoothstep(tau / PHYS.springRamp) * tight;
+      const cs = c * Math.sqrt(tight);
       // The push-apart fades only because the blend is about to carry the squares onto their exact
       // targets; with no blend to hand over to, the contacts stay firm to the last step.
       contactScale = mode === 'snap' ? 1 - clamp01((tau - PHYS.lockIn) / (1 - PHYS.blend - PHYS.lockIn)) : 1;
@@ -2439,13 +2486,13 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       // Integrate each body: the contacts and walls over its mass and inertia, the spring to its
       // target pose and the fading jiggle as accelerations, so a block arrives at a single square's pace.
       for (let b = 0; b < NB; b++) {
-        const ax = BFX[b] / BM[b] - ks * (BX[b] - BTX[b]) - c * BVX[b] + jiggle * decay * Math.cos(FQX[b] * tauMoves + PHX[b]);
-        const ay = BFY[b] / BM[b] - ks * (BY[b] - BTY[b]) - c * BVY[b] + jiggle * decay * Math.cos(FQY[b] * tauMoves + PHY[b]);
+        const ax = BFX[b] / BM[b] - ks * (BX[b] - BTX[b]) - cs * BVX[b] + jiggle * decay * Math.cos(FQX[b] * tauMoves + PHX[b]);
+        const ay = BFY[b] / BM[b] - ks * (BY[b] - BTY[b]) - cs * BVY[b] + jiggle * decay * Math.cos(FQY[b] * tauMoves + PHY[b]);
         BVX[b] += ax * dt; BVY[b] += ay * dt;
         const sp = Math.hypot(BVX[b], BVY[b]);
         if (sp > PHYS.maxSpeed) { BVX[b] *= PHYS.maxSpeed / sp; BVY[b] *= PHYS.maxSpeed / sp; }
         BX[b] += BVX[b] * dt; BY[b] += BVY[b] * dt;
-        const alpha = BTQ[b] / BI[b] - ks * (BPH[b] - BTT[b]) - c * BW[b] + jiggleTorque * decay * Math.cos(FQT[b] * tauMoves + PHT[b]);
+        const alpha = BTQ[b] / BI[b] - ks * (BPH[b] - BTT[b]) - cs * BW[b] + jiggleTorque * decay * Math.cos(FQT[b] * tauMoves + PHT[b]);
         BW[b] += alpha * dt;
         if (BW[b] > PHYS.maxSpin) BW[b] = PHYS.maxSpin; else if (BW[b] < -PHYS.maxSpin) BW[b] = -PHYS.maxSpin;
         BPH[b] += BW[b] * dt;
@@ -4060,7 +4107,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       side = oe < 1 ? lerp(A.side, tr.sides[0], oe) : sampleSide(tr, su);
       fit = Math.max(B.side, tr.miss.side);
     } else {
-      side = u >= 1 ? B.side : lerp(A.side, B.side, containerCurve(u));
+      side = u >= 1 ? B.side : containerSide(A.side, B.side, u);
       fit = B.side;
     }
     // The held view has to cover the widest the container ever gets, which for a blind run is its
@@ -4128,7 +4175,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const mode = simMode();
     const optimizing = state.optimizing && opt !== null;
     if (optimizing) renderOptimizeScene(p, A, B);
-    else if (isPhysical(state.style)) renderPhysicsScene(p, A, B, tm, sc, t);
+    // **A static append is never simulated, whatever the style says.** On a prefix or
+    // shared-picture step every existing square's target IS where it already stands, so there is
+    // nothing for a simulation to find -- but handing it to one anyway gives the jiggle a
+    // rearrangement's worth of energy and no rearrangement to spend it on, and the packing is
+    // thrown. Measured, worst distance a square reached from where it ends up, in unit sides:
+    // n = 324 went 2.46, n = 100 2.26, n = 16 1.31, against 0.04 to 0.10 for the same steps drawn
+    // by the tween. The short move these steps were given so the new square can be seen arriving
+    // is what exposed it -- 0.4 s of move is a compressed clock for the same shake.
+    else if (isPhysical(state.style) && !isStillPair()) renderPhysicsScene(p, A, B, tm, sc, t);
     else renderTweenScene(p, A, B, tm, sc, t);
     // The live gap, from the poses the scene just drew. Style A never runs blind or free, so it is
     // always measured against the record's own labelling. A run from a random or grid start, or a
