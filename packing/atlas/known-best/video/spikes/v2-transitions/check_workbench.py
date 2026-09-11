@@ -718,6 +718,16 @@ def main() -> int:
                 print(" -", failure)
             print(" - the colouring was not driven: colour / fillsFor are not on the API yet")
             return 1
+        # The stage trims chroma to compensate for drawing one packing where the atlas draws a page
+        # of them, so the fills on the stage are a step under the palette's by default. Every check
+        # below is about the PALETTE -- which hue a class takes, which shade a contact count takes,
+        # that a square keeps its fill through a turn -- so they are taken with the trim off, and
+        # the trim gets one check of its own: that it is on by default, and that turning it off is
+        # what puts the stage back on the atlas's own numbers.
+        check(abs(page.evaluate("atlasTransitions.stageChroma()") - 0.85) < 1e-9,
+              f"the stage's chroma trim is {page.evaluate('atlasTransitions.stageChroma()')}, not 0.85")
+        check(page.evaluate("atlasTransitions.setStageChroma(1)") == 1,
+              "the stage's chroma trim does not go back to the atlas's own numbers")
         # Revision 12 put three schemes where revision 11 had one, and made the square's *identity*
         # the default, so the angle map has to be selected before it can be checked. The default is
         # read here, before anything switches it, because "identity is the default" is the claim.

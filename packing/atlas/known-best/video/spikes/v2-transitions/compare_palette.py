@@ -91,6 +91,10 @@ def workbench_fills(page_path: Path, pairs: int) -> dict[str, dict[str, int]]:
         page.evaluate("document.fonts.ready")
         page.evaluate("window.atlasTransitions.setMode('animate')")
         page.evaluate("window.atlasTransitions.setCapture(true)")
+        # The stage trims chroma to compensate for drawing one packing where the atlas draws a page
+        # of them. Set to 1 here: the claim being checked is that the stage's colours ARE the
+        # atlas's, and the trim is a presentation setting on top of that rather than a palette.
+        page.evaluate("window.atlasTransitions.setStageChroma(1)")
         count = page.evaluate("window.atlasTransitions.pairs().length")
         picks = sorted({round(i * (count - 1) / max(1, pairs - 1)) for i in range(pairs)})
         for scheme in page.evaluate("window.atlasTransitions.colorSchemes()"):
@@ -123,6 +127,10 @@ def per_n(page_path: Path, wanted: list[int]) -> None:
         page.evaluate("document.fonts.ready")
         page.evaluate("window.atlasTransitions.setMode('animate')")
         page.evaluate("window.atlasTransitions.setCapture(true)")
+        # The stage trims chroma to compensate for drawing one packing where the atlas draws a page
+        # of them. Set to 1 here: the claim being checked is that the stage's colours ARE the
+        # atlas's, and the trim is a presentation setting on top of that rather than a palette.
+        page.evaluate("window.atlasTransitions.setStageChroma(1)")
         pairs = page.evaluate("window.atlasTransitions.pairs().map((p) => p.n)")
         for n in wanted:
             svg = RENDERINGS / f"n-{n:03d}.svg"

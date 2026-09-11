@@ -867,6 +867,26 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const k = 1 - (1 - DESAT) * level;
     return labToHex(lab[0], lab[1] * k, lab[2] * k);
   }
+  // **The stage is one packing where the atlas is a page of them, and the same fill over a bigger
+  // patch reads as a stronger colour.** The numbers are identical -- the PDF's own content streams
+  // carry `#257260`, `#4b9582`, `#dd87b8`, the renderings carry the same, and a pixel census of the
+  // stage beside a render of `n = 17` finds the same fills on both halves -- so this is not a
+  // palette difference and cannot be fixed by changing the palette. It is area: the stage draws a
+  // packing about three times larger in each direction than a panel of the atlas, and a patch that
+  // size at the same chroma reads as more saturated. (The PDF compounds it: DeviceRGB with no ICC
+  // profile renders through the display profile as generic RGB, duller than the same numbers tagged
+  // sRGB in a browser.)
+  //
+  // So the stage trims chroma to compensate for its own size. It is a presentation setting of this
+  // page and of nothing else: `sqpack.render` is untouched, so an exported still or embedded SVG is
+  // still the atlas's own drawing. **At `setStageChroma(1)` the stage reproduces the atlas exactly**,
+  // which is how `compare_palette.py` checks that it still does.
+  let stageChroma = 0.85;
+  function trimHex(hex) {
+    if (stageChroma >= 1) return hex;
+    const lab = hexToLab(hex);
+    return labToHex(lab[0], lab[1] * stageChroma, lab[2] * stageChroma);
+  }
   // The arriving square's fill: the accent at TINT_CHROMA of its chroma, same lightness and hue.
   // Full `--new` is the panel's star colour, chosen to read as a mark on white; on the stage,
   // filling a whole square against drained greens, it shouted. Softening the FILL and leaving the
@@ -4008,9 +4028,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     paintOut.scheme = scheme;
     function paintedFill(ident, angle, contacts) {
       const own = fillOf(colorScheme, map, ident, angle, contacts);
-      if (standard <= 0) return desatHex(own, drain);
-      const home = fillFor(atlas.slotOf(angle), contacts);
-      return desatHex(standard >= 1 ? home : mixHex(own, home, standard), drain);
+      const chosen = standard <= 0 ? own
+        : (standard >= 1 ? fillFor(atlas.slotOf(angle), contacts)
+                         : mixHex(own, fillFor(atlas.slotOf(angle), contacts), standard));
+      // The trim goes on before the drain, so a drained fill is drained from the colour the stage
+      // actually shows rather than from one it never paints.
+      return desatHex(trimHex(chosen), drain);
     }
     for (let i = 0; i < motion.length; i++) {
       motion[i].rect.setAttribute('fill', paintedFill(motion[i].ident, poseA[i], paintContacts[i]));
@@ -5165,6 +5188,15 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // `identityFills(k)` is the greens as a pure function of the identity, needing nothing on the
     // stage; the Animate standardising is an Animate-mode presentation setting and nothing else.
     setColorScheme, colorScheme: () => colorScheme, colorSchemes: () => COLOR_SCHEMES.slice(),
+    // The stage's area compensation. 1 is the atlas's own chroma, which is what a check that
+    // compares the stage with a rendering sets before it looks.
+    setStageChroma: (v) => {
+      const k = Number(v);
+      stageChroma = Math.max(0.3, Math.min(1, isFinite(k) ? k : stageChroma));
+      render();
+      return stageChroma;
+    },
+    stageChroma: () => stageChroma,
     identityFills, setAnimateStandardize, animateStandardize: () => ANIMATE.standardize,
     setPhase, setStyle, setOverlay, setCapture, setAutoAdvance, setDesaturate, setSnap, setBlind, setBlindInflate,
     // Revision 9: how fast the clock runs while playing. Playback only: seek(t) is unchanged.
