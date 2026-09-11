@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from decimal import Decimal
+import math
+from decimal import ROUND_HALF_EVEN, Decimal
+from itertools import pairwise
 from xml.etree import ElementTree as ET
 
 from sqpack.render.model import PackingTrajectory
@@ -28,37 +30,35 @@ def keyframe_percentages(times: tuple[Decimal, ...]) -> tuple[str, ...]:
     return tuple(f"{format_svg_number((time - times[0]) * 100 / span)}%" for time in times)
 
 
-def validate_translation_only_trajectory(trajectory: PackingTrajectory) -> None:
-    """Reject frame changes that the current CSS translation model cannot show."""
-    final_side = trajectory.frames[-1].container_side.projected
-    if any(frame.container_side.projected != final_side for frame in trajectory.frames):
-        raise ValueError("trajectory rendering requires a constant container side")
+QUARTER_TURN = Decimal(str(math.pi / 2))
+"""A square is unchanged by a quarter turn, so every angle difference is reduced to the
+smallest equivalent one before it is animated. Without that a square asked to go from
+1 degree to 89 takes the long way round through 88 degrees of visible spin, when the two
+poses differ by two degrees of actual square."""
+
+
+def short_quarter_turn(delta: Decimal) -> Decimal:
+    """The smallest rotation, in radians, that carries one square orientation to another."""
+    turns = (delta / QUARTER_TURN).to_integral_value(rounding=ROUND_HALF_EVEN)
+    return delta - turns * QUARTER_TURN
+
+
+def validate_trajectory(trajectory: PackingTrajectory) -> None:
+    """Reject what the CSS motion model still cannot show, which is now much less.
+
+    It used to refuse rotation outright and refuse any trajectory whose container side
+    changed. Both were fatal for the atlas work: six of `n = 11`'s fourteen contacts join
+    squares 40.2 degrees apart, and an ascent that adds one square per step resizes the
+    container at every step by construction. What remains are the two things the keyframe
+    emitters genuinely require -- a pose on every square, and time that does not run
+    backwards.
+    """
     for track in match_square_tracks(trajectory):
-        final_pose = track[-1].pose
-        if final_pose is None:
+        if any(square.pose is None for square in track):
             raise ValueError("motion requires square poses")
-        final_offsets = tuple(
-            (
-                corner.x.projected - final_pose.centre.x.projected,
-                corner.y.projected - final_pose.centre.y.projected,
-            )
-            for corner in track[-1].corners
-        )
-        for square in track:
-            pose = square.pose
-            if pose is None:
-                raise ValueError("motion requires square poses")
-            if pose.angle.projected != final_pose.angle.projected:
-                raise ValueError("trajectory rendering does not yet support rotation")
-            offsets = tuple(
-                (
-                    corner.x.projected - pose.centre.x.projected,
-                    corner.y.projected - pose.centre.y.projected,
-                )
-                for corner in square.corners
-            )
-            if offsets != final_offsets:
-                raise ValueError("trajectory rendering requires translation-only geometry")
+    times = tuple(frame.logical_time for frame in trajectory.frames)
+    if any(later < earlier for earlier, later in pairwise(times)):
+        raise ValueError("motion requires non-decreasing logical time")
 
 
 def square_keyframes(trajectory: PackingTrajectory, square_index: int, scale: Decimal) -> str:
@@ -73,8 +73,14 @@ def square_keyframes(trajectory: PackingTrajectory, square_index: int, scale: De
             raise ValueError("motion requires square poses")
         dx = (pose.centre.x.projected - final.centre.x.projected) * scale
         dy = -(pose.centre.y.projected - final.centre.y.projected) * scale
+        # Negated for the same reason dy is: the drawing's y runs down while the
+        # mathematics runs up, so a counter-clockwise turn in the packing is a clockwise
+        # one on screen.
+        turn = -short_quarter_turn(pose.angle.projected - final.angle.projected)
+        degrees = turn * 180 / Decimal(str(math.pi))
         rules.append(
-            f"{percentage}{{transform:translate({format_svg_number(dx)}px,{format_svg_number(dy)}px)}}"
+            f"{percentage}{{transform:translate({format_svg_number(dx)}px,"
+            f"{format_svg_number(dy)}px) rotate({format_svg_number(degrees)}deg)}}"
         )
     return "".join(rules)
 
@@ -104,14 +110,19 @@ def append_motion_styles(
     duration_seconds: Decimal,
     reveal_final_overlay: bool = False,
 ) -> None:
-    validate_translation_only_trajectory(trajectory)
+    validate_trajectory(trajectory)
     rules = []
     for index, track in enumerate(match_square_tracks(trajectory)):
         square_id = track[-1].square_id
         animation = f"sqpack-{square_id}"
         rules.append(f"@keyframes {animation}{{{square_keyframes(trajectory, index, scale)}}}")
+        # transform-box and transform-origin are not decoration: CSS rotates about the
+        # element's origin, which for an SVG child is the viewport's corner unless told
+        # otherwise, so a square without them swings around the page instead of spinning
+        # where it stands.
         rules.append(
-            f".motion-{square_id}{{animation:{animation} "
+            f".motion-{square_id}{{transform-box:fill-box;transform-origin:center;"
+            f"animation:{animation} "
             f"{format_svg_number(duration_seconds)}s ease-in-out 1 forwards}}"
         )
     if reveal_final_overlay:
