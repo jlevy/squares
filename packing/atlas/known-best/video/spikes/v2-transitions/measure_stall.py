@@ -7,6 +7,7 @@ which is where the next pair's DOM is built and, without the prefetch, its physi
     packing/.venv/bin/python3 measure_stall.py [--page index-all.html] [--start 100]
                               [--pairs 30] [--styles bodies,physics] [--no-prefetch]
 """
+
 import argparse
 import statistics
 import sys

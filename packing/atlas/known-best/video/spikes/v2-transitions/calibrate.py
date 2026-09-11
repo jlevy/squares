@@ -6,6 +6,7 @@ container it needs against the record's. A run that reports a side below the rec
 not found anything: it is overlapping, and the overlap column is printed beside every
 number so that cannot be read as a win.
 """
+
 import itertools
 import json
 import sys
@@ -15,18 +16,19 @@ from playwright.sync_api import sync_playwright
 
 PAGE = sys.argv[1]
 STEPS = int(sys.argv[2]) if len(sys.argv) > 2 else 2400
-CASES = [5, 10, 11, 17, 26, 29]          # non-grid cases, small enough to sweep
+CASES = [5, 10, 11, 17, 26, 29]  # non-grid cases, small enough to sweep
 ARMS = [
-    # label                start     law overrides                                    anneal
-    ("plain",              "grid",   {},                                               3),
-    ("rigid",              "grid",   {"rigidity": 0.01, "repulsion": 4000},             3),
-    ("soft",               "grid",   {"rigidity": 0.35, "repulsion": 400},              3),
-    ("sticky",             "grid",   {"attraction": 150, "range": 0.25},                3),
-    ("shaken",             "grid",   {},                                              10),
-    ("quiet",              "grid",   {},                                               0),
-    ("plain/random",       "random", {},                                               3),
-    ("shaken/random",      "random", {},                                              10),
+    # An arm is (label, start, law overrides, anneal level).
+    ("plain", "grid", {}, 3),
+    ("rigid", "grid", {"rigidity": 0.01, "repulsion": 4000}, 3),
+    ("soft", "grid", {"rigidity": 0.35, "repulsion": 400}, 3),
+    ("sticky", "grid", {"attraction": 150, "range": 0.25}, 3),
+    ("shaken", "grid", {}, 10),
+    ("quiet", "grid", {}, 0),
+    ("plain/random", "random", {}, 3),
+    ("shaken/random", "random", {}, 10),
 ]
+
 
 def main():
     rows = []
@@ -49,8 +51,16 @@ def main():
             st = pg.evaluate("atlasTransitions.optimizeState()")
             rec, side, pen = st.get("record"), st.get("side"), st.get("penetration")
             if rec and side is not None:
-                rows.append({"n": n, "arm": label, "record": rec, "side": side,
-                             "pen": pen, "excess": 100 * (side - rec) / rec})
+                rows.append(
+                    {
+                        "n": n,
+                        "arm": label,
+                        "record": rec,
+                        "side": side,
+                        "pen": pen,
+                        "excess": 100 * (side - rec) / rec,
+                    }
+                )
         b.close()
     print(
         f"{'n':>4} {'arm':<16} {'record':>9} {'reached':>9}"
@@ -58,8 +68,10 @@ def main():
     )
     for r in rows:
         v = "OVERLAPPING" if (r["pen"] or 0) > 1e-4 and r["side"] < r["record"] else ""
-        print(f"{r['n']:>4} {r['arm']:<16} {r['record']:>9.5f} {r['side']:>9.5f}"
-              f" {r['excess']:>7.2f}% {r['pen']:>9.5f}  {v}")
+        print(
+            f"{r['n']:>4} {r['arm']:<16} {r['record']:>9.5f} {r['side']:>9.5f}"
+            f" {r['excess']:>7.2f}% {r['pen']:>9.5f}  {v}"
+        )
     print()
     best = {}
     for r in rows:
@@ -69,10 +81,13 @@ def main():
     print("arm summary (mean excess over cases, clean runs only):")
     for arm, vals in best.items():
         ok = [v for v in vals if v is not None]
-        print(f"  {arm:<16} clean {len(ok)}/{len(vals)}"
-              + (f"  mean excess {sum(ok)/len(ok):+.2f}%" if ok else "  no clean run"))
+        print(
+            f"  {arm:<16} clean {len(ok)}/{len(vals)}"
+            + (f"  mean excess {sum(ok) / len(ok):+.2f}%" if ok else "  no clean run")
+        )
     out = Path(sys.argv[3] if len(sys.argv) > 3 else "/dev/null")
     with out.open("w") as fh:
         json.dump(rows, fh, indent=1)
+
 
 main()

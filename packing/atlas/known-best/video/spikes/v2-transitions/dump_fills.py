@@ -1,7 +1,13 @@
 """Dump every visible square's fill at chosen instants, for the rest-colour identity check.
 
     packing/.venv/bin/python3 dump_fills.py OUT.json [PAGE]
+
+Every pair in `PAIRS` is sampled under every style and every colour rule, at three
+instants each: `start` at t = 0, `dwell` at 0.5 s and `end` at the pair's duration. Each
+row is a square's identity beside the fill it is painted, so comparing two dumps says
+whether a fill is a property of the square or of the instant.
 """
+
 import json
 import sys
 from pathlib import Path
@@ -34,9 +40,9 @@ def main() -> int:
         errors: list[str] = []
         page.on(
             "console",
-            lambda m: errors.append(f"console.{m.type}: {m.text}")
-            if m.type == "error"
-            else None,
+            lambda m: (
+                errors.append(f"console.{m.type}: {m.text}") if m.type == "error" else None
+            ),
         )
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         page.goto(f"file://{page_path}")

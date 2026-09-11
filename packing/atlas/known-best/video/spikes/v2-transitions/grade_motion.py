@@ -72,13 +72,21 @@ WEIGHTS = {
 #: squares and what it carries them from is exactly what is being graded.
 LOCK_IN_AT = 0.88
 
-# The embedded JavaScript is left exactly as it runs in the page; E501 is waived over the
-# whole literal rather than reflowing another language to Python's line limit.
+# The embedded JavaScript is this measurement's source, so it is held to the same 96
+# columns as the Python around it: only two of its lines ever exceeded them, both
+# one-line arrow bodies that break across lines without changing what they do.
 MEASURE = """(args) => {
   const api = window.atlasTransitions;
   const d = api.duration(), sc = api.schedule();
-  const read = () => { const o = []; for (let i = 0; ; i++) { const q = api.poseOf(i); if (!q) break; o.push(q.slice()); } return o; };
-  const at = (u) => { api.seek(sc.moveStart + (sc.moveEnd - sc.moveStart) * u); return read(); };
+  const read = () => {
+    const o = [];
+    for (let i = 0; ; i++) { const q = api.poseOf(i); if (!q) break; o.push(q.slice()); }
+    return o;
+  };
+  const at = (u) => {
+    api.seek(sc.moveStart + (sc.moveEnd - sc.moveStart) * u);
+    return read();
+  };
   api.seek(d);            const end = read();
   const start = at(0);
   const path = [];
@@ -126,7 +134,7 @@ MEASURE = """(args) => {
     overlap: built.maxPenetration === undefined ? 0 : built.maxPenetration,
     ms: built.ms === undefined ? 0 : built.ms,
   };
-}"""  # noqa: E501
+}"""
 
 
 def grade(row: dict[str, float]) -> float:

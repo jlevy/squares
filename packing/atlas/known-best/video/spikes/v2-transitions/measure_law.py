@@ -99,7 +99,8 @@ def drawn_graph(page, kind: str, n: int) -> list[list[int]]:
     if kind == "record":
         flat = page.evaluate(
             "(n) => { const A = window.atlasTransitions; A.setStepN(n);"
-            "  A.setTargetSource('record'); return A.targetGraph(); }", n
+            "  A.setTargetSource('record'); return A.targetGraph(); }",
+            n,
         )
         return [[flat[i], flat[i + 1]] for i in range(0, len(flat), 2)]
     edges = [[i, i + 1] for i in range(n - 1)]

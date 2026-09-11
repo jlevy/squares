@@ -103,7 +103,9 @@ def workbench_fills(page_path: Path, pairs: int) -> dict[str, dict[str, int]]:
             tally: dict[str, int] = {}
             for index in picks:
                 page.evaluate(f"window.atlasTransitions.select({index})")
-                page.evaluate("window.atlasTransitions.seek(window.atlasTransitions.duration())")
+                page.evaluate(
+                    "window.atlasTransitions.seek(window.atlasTransitions.duration())"
+                )
                 for fill in page.evaluate(DRAWN_FILLS):
                     key = str(fill).lower()
                     tally[key] = tally.get(key, 0) + 1
@@ -159,8 +161,7 @@ def per_n(page_path: Path, wanted: list[int]) -> None:
             print(f"      page:      {'  '.join(f'{c} x{got[c]}' for c in sorted(got))}")
             if only_svg or only_page:
                 print(
-                    f"      only in the rendering: {only_svg}"
-                    f"   only on the page: {only_page}"
+                    f"      only in the rendering: {only_svg}   only on the page: {only_page}"
                 )
         browser.close()
 

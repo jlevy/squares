@@ -29,6 +29,7 @@ JND = 0.02
 
 def oklab(hex_colour: str) -> tuple[float, float, float]:
     """An sRGB hex colour in OkLab, as the page's own `hexToLab` computes it."""
+
     def linear(channel: int) -> float:
         c = channel / 255
         return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
@@ -76,12 +77,17 @@ def main() -> int:
     hues = [hue(h) for h in ramp]
     print(f"hue band: {min(hues):.1f} to {max(hues):.1f} degrees (teal is 174.6, citron 109.4)")
 
-    pairs = [(distance(ramp[i], ramp[j]), ramp[i], ramp[j], i, j)
-             for i in range(period) for j in range(i + 1, period)]
+    pairs = [
+        (distance(ramp[i], ramp[j]), ramp[i], ramp[j], i, j)
+        for i in range(period)
+        for j in range(i + 1, period)
+    ]
     pairs.sort()
     closest = pairs[0]
-    print(f"resolution: the closest two are {closest[0]:.4f} apart in OkLab "
-          f"({closest[1]} at index {closest[3]}, {closest[2]} at index {closest[4]})")
+    print(
+        f"resolution: the closest two are {closest[0]:.4f} apart in OkLab "
+        f"({closest[1]} at index {closest[3]}, {closest[2]} at index {closest[4]})"
+    )
     for threshold in (0.015, 0.02, 0.025, 0.03, 0.04):
         keep: list[str] = []
         for colour in ramp:
@@ -89,18 +95,23 @@ def main() -> int:
                 keep.append(colour)
         marker = "  <- the JND used below" if abs(threshold - JND) < 1e-9 else ""
         print(
-            f"  at a threshold of {threshold:.3f}: "
-            f"{len(keep)} mutually distinguishable{marker}"
+            f"  at a threshold of {threshold:.3f}: {len(keep)} mutually distinguishable{marker}"
         )
 
-    neighbours = [(distance(by_identity[i], by_identity[i + 1]), i + 1, i + 2)
-                  for i in range(len(by_identity) - 1)]
+    neighbours = [
+        (distance(by_identity[i], by_identity[i + 1]), i + 1, i + 2)
+        for i in range(len(by_identity) - 1)
+    ]
     neighbours.sort()
-    print(f"neighbours: identities {neighbours[0][1]} and {neighbours[0][2]} are the closest "
-          f"consecutive pair, {neighbours[0][0]:.4f} apart")
+    print(
+        f"neighbours: identities {neighbours[0][1]} and {neighbours[0][2]} are the closest "
+        f"consecutive pair, {neighbours[0][0]:.4f} apart"
+    )
     repeats = len(by_identity) / period
-    print(f"over {len(by_identity)} identities the ramp turns {repeats:.1f} times; "
-          f"identity k and identity k + {period} share a colour and nothing else does")
+    print(
+        f"over {len(by_identity)} identities the ramp turns {repeats:.1f} times; "
+        f"identity k and identity k + {period} share a colour and nothing else does"
+    )
     all_ok = all(d >= JND for d, *_ in pairs)
     print(f"every pair clears the {JND} just-noticeable step: {'yes' if all_ok else 'no'}")
     return 0

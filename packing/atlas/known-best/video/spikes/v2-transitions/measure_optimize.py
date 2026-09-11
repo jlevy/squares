@@ -51,8 +51,10 @@ def main() -> int:
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(900)
         print(f"{page_name}, {steps} steps per progress run\n")
-        print(f"{'n':>4} {'start':<9} {'steps/s':>8} {'sim s/s':>8} {'ms/step':>8} "
-              f"{'start side':>10} {'best':>8} {'record':>8} {'excess':>8} {'overlap':>8}")
+        print(
+            f"{'n':>4} {'start':<9} {'steps/s':>8} {'sim s/s':>8} {'ms/step':>8} "
+            f"{'start side':>10} {'best':>8} {'record':>8} {'excess':>8} {'overlap':>8}"
+        )
         for n in ns:
             for kind in KINDS:
                 # Throughput: a real playing run for 2 s of wall clock.

@@ -6,6 +6,7 @@
 With `--anneal` the same measurement is taken at each annealing level, which is what says
 whether shaking harder gets the physics closer to the record or only further from it.
 """
+
 import sys
 from pathlib import Path
 

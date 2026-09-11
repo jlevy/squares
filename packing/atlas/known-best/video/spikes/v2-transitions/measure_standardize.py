@@ -139,8 +139,10 @@ def main() -> int:
             for angle, ns in top:
                 slots = {n: slot_of(frames, n, angle, tol) for n in sorted(ns)[:8]}
                 agree = len(set(slots.values())) == 1
-                print(f"  {angle:>6.1f} deg in {len(ns)} packings: slots {slots}"
-                      f" {'(agree)' if agree else '(DISAGREE)'}")
+                print(
+                    f"  {angle:>6.1f} deg in {len(ns)} packings: slots {slots}"
+                    f" {'(agree)' if agree else '(DISAGREE)'}"
+                )
 
         if "--still" in flags:
             print(

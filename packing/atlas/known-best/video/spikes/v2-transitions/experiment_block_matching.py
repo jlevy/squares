@@ -105,8 +105,7 @@ def sweep(manifest: dict, witnesses: dict, renderings: dict, *, quick: bool = Fa
         " crossings | max of max disp | new differs from rev 4 | seconds |"
     )
     print(
-        "| --- | ---: | ---: | ---: | ---: | ---: |"
-        " ---: | ---: | ---: | ---: | ---: | ---: |"
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"
     )
     for name, overrides in settings:
         for key, value in baseline.items():
@@ -147,10 +146,26 @@ def sweep(manifest: dict, witnesses: dict, renderings: dict, *, quick: bool = Fa
 
 
 PALETTE = [
-    "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
-    "#8c564b", "#e377c2", "#17becf", "#bcbd22", "#393b79",
-    "#637939", "#8c6d31", "#843c39", "#7b4173", "#3182bd",
-    "#e6550d", "#31a354", "#756bb1", "#636363", "#6baed6",
+    "#1f77b4",
+    "#ff7f0e",
+    "#2ca02c",
+    "#d62728",
+    "#9467bd",
+    "#8c564b",
+    "#e377c2",
+    "#17becf",
+    "#bcbd22",
+    "#393b79",
+    "#637939",
+    "#8c6d31",
+    "#843c39",
+    "#7b4173",
+    "#3182bd",
+    "#e6550d",
+    "#31a354",
+    "#756bb1",
+    "#636363",
+    "#6baed6",
 ]
 
 
@@ -202,10 +217,9 @@ def draw(n: int, manifest: dict, witnesses: dict, renderings: dict, out_dir) -> 
     for i in range(n):
         x0, y0, a0 = a["squares"][i]
         x1, y1, a1 = b["squares"][s["map"][i]]
-        if (
-            ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5 > bc.MOVE_TOLERANCE
-            or abs(bc.angle_delta(a0, a1)) > bc.ROTATION_TOLERANCE_DEG
-        ):
+        travel = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
+        turn = abs(bc.angle_delta(a0, a1))
+        if travel > bc.MOVE_TOLERANCE or turn > bc.ROTATION_TOLERANCE_DEG:
             moving.add(i)
     fills_a = [colour(i, moving=i in moving) for i in range(n)]
     labels_a = [str(i) for i in range(n)]
@@ -233,8 +247,7 @@ def draw(n: int, manifest: dict, witnesses: dict, renderings: dict, out_dir) -> 
         f"({s['alone_hops']} hops); residual mean {s['block_residual_mean']} "
         f"max {s['block_residual_max']}; max displacement {s['max_displacement']}; "
         f"{s['crossings']} close passes; {s['arrival_overlaps']} under the new square "
-        f"at arrival</div>"
-        + "</body></html>"
+        f"at arrival</div>" + "</body></html>"
     )
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

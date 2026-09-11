@@ -107,9 +107,11 @@ def main() -> int:
             )
             page.on(
                 "console",
-                lambda msg: errors.append(f"console.{msg.type}: {msg.text}")
-                if msg.type in ("error", "warning")
-                else None,
+                lambda msg: (
+                    errors.append(f"console.{msg.type}: {msg.text}")
+                    if msg.type in ("error", "warning")
+                    else None
+                ),
             )
             page.on("pageerror", lambda exc: errors.append(f"pageerror: {exc}"))
             page.goto(PAGE.resolve().as_uri(), wait_until="load")
