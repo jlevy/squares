@@ -163,7 +163,7 @@ session:
     kill_condition: The handoff points to completed work, changes a historical research disposition, or weakens an applicable consistency check.
     fallback: Preserve the historical agenda and diagnose the exact dependency rule before accepting the new handoff.
     outcome: The session, synopsis and launch plan select the existing BC329 instrument task. The checker compares only agendas linked by the session's integration bead, produced agenda path, or named next-action cell; historical Agenda033 remains unchanged. The author reports all 24 focused tests passing, clean Ruff formatting and lint, and zero BasedPyright findings. The coordinator's repository synopsis check and 25 focused tests, including the registered negative control, pass. The final pre-push run and hosted checks will validate the committed handoff correction; their exact revision and outcomes belong to the PR check record.
-    evidence: [packing/devtools/check_synopsis.py, packing/tests/test_synopsis_handoff.py, SYNOPSIS.md, docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md]
+    evidence: [packing/devtools/check_synopsis.py, packing/tests/test_synopsis_handoff.py, packing/devtools/controls.yaml, SYNOPSIS.md, docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md]
     stop_reason: The analytical work and concrete handoff repair are complete; a failed final check must be corrected before publication is finished.
     next_action: Continue the existing BC329 instrument admission under think-qw9w after this branch's checks pass.
   primary_bead: think-jx95
@@ -236,6 +236,7 @@ session:
   - packing/src/sqpack/cli/validate.py
   - packing/devtools/check_synopsis.py
   - packing/tests/test_synopsis_handoff.py
+  - packing/devtools/controls.yaml
   - SYNOPSIS.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   checks:
@@ -257,6 +258,7 @@ session:
   - Closing-record pre-push at 2528c96e passed 44 of 46 checks in 120.9 seconds; the missing handoff bead and historical-agenda comparison were corrected in the following phase with focused regression coverage. The 58ae49ed gate predates that repair.
   - The repaired handoff passes the repository synopsis check and 25 focused tests in 8.29 seconds, including the negative control that exposed the closing-record failure. Independent agenda-provenance controls preserve applicable mismatches.
   - The fractional reviewer independently accepted all three handoff-provenance paths, confirmed that BC329 instrument bead think-qw9w is distinct from the research cell's bead, and reran all 24 focused handoff tests successfully.
+  - Pre-push at 6750bc73 passed 45 of 46 checks in 100.3 seconds, including 877 reachable behavioral tests; the sole failure was the retained negative control's literal anchor for the old handoff bead. Updating that anchor and its expected diagnostic restores all 163 anchor resolutions, and the selected mutation fires as expected in an isolated snapshot in 1.568 seconds.
   resource_rollups: [packing/campaign/resource-usage/codex-task-tree-session-126.yaml]
   stop_reason: The requested exploration, supporting analyses, KaTeX notation, foundational definitions and dependency organization are complete and reviewed. The current handoff selects an existing tracked continuation; proposed numerical studies remain separate work.
   next_action: Continue the already tracked BC329 bounded fixed-core runner admission under think-qw9w; a scientific packet run still requires the stated prospective contract and independent admission.
