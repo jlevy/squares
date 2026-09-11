@@ -509,6 +509,42 @@ instruments (`compare_palette.py`, `grade_motion.py`, `measure_law.py`,
 They become `devtools` modules run with `python -m`, and the banner comes off — which
 should be the *last* step, because the banner is what makes the current state honest.
 
+### The deployment is already the real one, and the conversion does not touch it
+
+Worth saying plainly, because “still a spike” and “not really deployed” sound like the
+same problem and are not.
+
+**What reaches a reader is already the path we want.**
+`devtools/build_workbench_site.py` writes the page into `site/workbench/`;
+`.github/workflows/pages.yml` builds it with `--check` before the artifact upload, so it
+has to reproduce itself byte for byte and pass its own self-containment check; Pages
+serves `packing/site` whole, so it lands at `/workbench/` while the explainer keeps `/`;
+and the workflow’s path filter names the page’s inputs, held there by two tests.
+None of that is a prototype.
+Converting the spike changes what *feeds* that pipeline, not the pipeline.
+
+So the conversion is a swap behind a stable seam:
+
+|  | today | after Phase 6 |
+| --- | --- | --- |
+| the page’s source | `atlas/.../v2-transitions/template.html` | a template under `devtools/templates/` |
+| its generator | `build_candidate.py`, run by path | `devtools/build_workbench.py`, run with `python -m` |
+| its palette | a hand-kept copy of `SQUARE_HUE_PALETTE` | emitted from `sqpack.render.style` |
+| its instruments | `compare_palette.py`, `grade_motion.py`, … beside it | `devtools` modules |
+| its gates | run by hand | steps in `packing-validate` |
+| **what publishes it** | **`build_workbench_site.py` → `site/workbench/` → Pages** | **unchanged** |
+
+**The first seam is already cut.** The panel’s mathematics is set by
+`render_explainer.katex_css` and guarded by `render_explainer.EXTERNAL_REFERENCE` — the
+spike now *imports project code* rather than carrying its own copy of it, which is the
+direction every remaining chunk goes in.
+It also found the thing that made the spike unimportable: `build_candidate.py` held an
+absolute path to one worktree, so it only ran from that checkout.
+
+**The order matters and the banner is the marker.** A through D can land in any order
+and each is independently checkable; E is last, because taking the prototype banner off
+before the rest would make the page claim something that is not yet true.
+
 ### Phase 7: grade the motion, not just the answer
 
 **A physics configuration is graded on both halves of what it is asked to do, and
