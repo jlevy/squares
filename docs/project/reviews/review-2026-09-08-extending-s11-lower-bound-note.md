@@ -8,13 +8,13 @@ The integration decisions belong to the exploration the coordinator is writing, 
 `packing/campaign/explorations/X-023-...`, not to this record.
 
 **Editorial terminology note, September 10, 2026.** The contributed body below is
-preserved verbatim. Its phrase “weak lower bound” refers to the ordinary proved
-inequality `s(11) >= C`, where `C` is the displayed T-022 value. The proof excludes
-every side below `C` and leaves fit at equality undecided. Likewise, the proposed
-strict family in §3 would prove a lower bound at its supremum; “weak” does not mark a
-lower level of proof assurance. Later T-026 proves
+preserved verbatim. Its phrase “weak lower bound” is historical terminology for the
+ordinary proved inequality `s(11) >= C`, where `C` is the displayed T-022 value.
+Excluding every side below `C` proves that inequality by order completeness. The proof
+does not assert the separate stronger inequality `s(11) > C`; “weak” does not mark a
+different theorem or a lower level of proof assurance. Later T-026 proves
 `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...`
-(V4/C4). See the [current evidence account](../research/research-2026-09-09-n11-evidence-and-inference.md).
+(V4/C5). See the [current evidence account](../research/research-2026-09-09-n11-evidence-and-inference.md).
 
 ## Assessment
 

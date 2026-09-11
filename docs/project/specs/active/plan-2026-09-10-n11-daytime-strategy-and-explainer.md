@@ -43,6 +43,13 @@ two to `19/2`; it rejects its registered all-subclasses claim without deciding o
 domains, charges, or the existential owner-selection problem.
 These scopes remain in force throughout this plan.
 
+[X-027](../../../../packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md)
+contains the later analytical mechanism synthesis.
+The draft
+[X-028 portfolio](../../../../packing/campaign/explorations/X-028-n11-strategy-portfolio-draft.md)
+preserves the broader six-route option map and reconciles it with T-026 and exp-156.
+Neither document registers a target; this plan remains the execution controller.
+
 An **atom** is a nonnegative resource rule used by a covering certificate.
 A point atom charges a core when it contains one site.
 A `k`-of-`m` threshold atom charges weight `w` when the core contains at least `k` sites

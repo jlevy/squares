@@ -61,7 +61,7 @@ T-025 excludes side `3.82` directly.
 T-024 and T-026 prove lower bounds by dilation and a limit argument, with their own
 frozen certificates.
 T-026 proves the ordinary exact lower bound
-`s(11) >= 955000*sqrt(518400042893309449)/179696714646249` at V4/C4. Its method does not
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249` at V4/C5. Its method does not
 establish the separate strict inequality beyond that constant; this does not qualify the
 proved lower bound. The new threshold language succeeds at a fixed core domain where the
 retained D4-symmetric point cover is obstructed.

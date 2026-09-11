@@ -723,7 +723,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | BC-332 | tool_validation | 11 | complete | 1 | think-b5b1 | BC334 implements the selected incremental architecture: retain the T018 worked proof and add T025/T026 as an advanced final section. |
 | BC-334 | tool_validation | 11 | complete | 1 | think-gv5a | PR148 at f7126bfc implements the section and v0.4.0 edition and has passed the complete local documentation block. BC335 owns the stack-only hosted checkpoint. |
 | BC-336 | tool_validation | 11 | complete | 1 | think-ccsi | PR148 commit 35484ebd first uses v0.4.0 as this explainer's edition label on September 10, 2026; commit ce3b1ab5606307ed5cb6780da09c1b5f233ab2e1 first uses v0.3.0 as that label on September 8, 2026. Both dates are rendered from one release-history source and covered by focused tests. |
-| BC-335 | tool_validation | 11 | blocked | 1 | think-0zc1 | The independent mathematical review passed after narrowing the T025 certificate and standalone-checker wording; the terminology audit states the exact proved lower bound with its V4/C4 assurance, identifies dilation-limit as the proof method and treats strictness as a separate question. It defines core, trace and charge before use. Retarget PR148 after the research branch is pushed, then wait for the stacked hosted checks. |
+| BC-335 | tool_validation | 11 | in_progress | 1 | think-0zc1 | The independent mathematical review passed after narrowing the T025 certificate and standalone-checker wording; the terminology audit states the exact proved lower bound with its V4/C5 assurance, identifies dilation-limit as the proof method, and distinguishes the separate stronger strict inequality. The review defines core, trace and charge before use. PR154 and X-027 are merged into the PR148 head; local merged-head checks pass, and hosted checks are the remaining exit evidence. |
 | BC-333 | measurement_validation | 11 | ready | 2 | think-1ydi | Reconstruct cadence after each terminal block; administrative planning does not reset it. |
 
 ## Series
@@ -1054,6 +1054,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-015 — The map and the three programs: where significant progress is likeliest next
 - X-027 — Fractional Obstructions and Structural Proof Mechanisms
+- X-028 — Draft N11 Strategy Portfolio After the Daytime Explorations
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

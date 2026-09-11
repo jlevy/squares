@@ -33,17 +33,18 @@ Certificate SHA-256: `3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f
 ## Definitions and Finite Certificate Theorem
 
 Let $s(n)$ be the infimum of the side lengths of squares that contain $n$ unit squares
-with pairwise disjoint interiors; rotations are allowed. Fix positive integers $n$ and
-$K$, positive rational numbers $L$ and $B$, and a rational number $T$ with $0<T<1$.
-Put $Q=[0,L]^2$ and $t_k=T k/K$ for $k=0,\ldots,K$. Parameter $t_k$ represents the
-direction $2\arctan(t_k)$.
+with pairwise disjoint interiors; rotations are allowed.
+Fix positive integers $n$ and $K$, positive rational numbers $L$ and $B$, and a rational
+number $T$ with $0<T<1$. Put $Q=[0,L]^2$ and $t_k=T k/K$ for $k=0,\ldots,K$. Parameter
+$t_k$ represents the direction $2\arctan(t_k)$.
 
 A **point atom** $(p,w)$ assigns weight $w\geq0$ to a closed $B$-square $P$ when
 $p\in P$. A **threshold atom** $(S,k,w)$ consists of a finite set $S$ of distinct
 points, an integer $1\leq k\leq |S|$, and a weight $w\geq0$; it assigns weight $w$ to
 $P$ when $|P\cap S|\geq k$. The **charge** of $P$ is the sum of all weights assigned to
-it by these two rules. A point atom has budget $w$. A threshold atom has budget
-$w\lfloor |S|/k\rfloor$. The certificate’s total budget is the sum of those budgets.
+it by these two rules.
+A point atom has budget $w$. A threshold atom has budget $w\lfloor |S|/k\rfloor$. The
+certificate’s total budget is the sum of those budgets.
 
 The eight symmetries of $Q$ form the group D4. A point-atom family is D4-invariant when
 each image point has the same weight.
@@ -68,8 +69,8 @@ The following five conditions prove $s(n)\geq L$:
 For the proof, suppose $n$ unit squares with disjoint interiors fit in $Q$. Consider
 each packed square $U$ separately, and represent its direction modulo $\pi/2$ in
 $[0,\pi/2)$. If that direction exceeds $\pi/4$, let $g$ be the diagonal reflection;
-otherwise let $g$ be the identity. The angle condition places $g(U)$ in the net’s
-covered arc.
+otherwise let $g$ be the identity.
+The angle condition places $g(U)$ in the net’s covered arc.
 Choose the nearer net direction.
 If its mismatch is $d$, then $\tan d\leq D$, and a concentric closed side-$B$ square has
 half-width across either edge normal at most $B(1+D)/2<1/2$. It lies strictly inside

@@ -488,7 +488,7 @@ Both rows below are the same integrality gap seen from the two sides.
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
 | 151 | Threshold atoms inside an owner class’s residual cover | registered | [H-155](hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | A class stuck at a point-cover budget of seven is the conditional form of the ceiling the unconditional line passed; the discriminator is whether threshold atoms bring its budget below seven. The retained point ceiling family is neutral on some patch-only classes but violates a two-of-three row, so it does not obstruct this richer language. Two matching cut maxima on one family are limited evidence, not a comparison of attainable bounds or runtime. A conditional certificate would still need a global owner-selection theorem. |
-| 152 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | confirmed | [H-156](hypotheses/H-156-threshold-certificate-past-3-82.md) | T-026 and exp-155 confirm the finer-net and dilation branch by proving `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...` at V4/C4. The rows-complete loop at `383/100`, re-optimised finer-net atoms, and changed atom families remain separate open routes. |
+| 152 | A threshold certificate past 191/50, by a finer net or by the loop at 383/100 | confirmed | [H-156](hypotheses/H-156-threshold-certificate-past-3-82.md) | T-026 and exp-155 confirm the finer-net and dilation branch by proving `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...` at V4/C5. The rows-complete loop at `383/100`, re-optimised finer-net atoms, and changed atom families remain separate open routes. |
 | 154 | Iterate the LP support and the atom set together, separating from the depth-one certificate | raw |  | Lane A6 exhibits a D4-symmetric depth-one family of 64 placements at total exactly 11 satisfying all 2,566 atom orbits, so on this atom set no site set can bring the rows-complete LP below eleven at `153/40`; the lever is the atom set. Six atoms separated from that certificate rather than from a dual vertex take the blocking support from exactly 11 to `10.4210526`, bracketed exactly for that fixed-support program — feasible for its selected finite rows, not for the depth-one program, whose reader refuses the optimum at exact depth `105263157/100000000` — where twenty-four separated from a dual vertex moved the LP by `2.2e-13`. Each side has a wide face, so the route is a loop over support and atoms together, and it needs lane A4’s gate bypass because the fixed-support optima stop being packings after the first round. Carried as `think-yc80`. |
 
 ## What Conditioning Buys — X-026
@@ -503,7 +503,7 @@ It names three escapes it does not close; the first is the row below.
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
 | 153 | Sixteen owner sectors instead of eight, to fatten the guaranteed patch past neutrality | registered | [H-157](hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | The nearest survivor to a neutral patch sits at a separating gap of `0.014978`, so a patch reaching `0.015` further would delete `1/8` more. Refuted 2026-09-10 by exp-154: six of eight refined subclasses still read exactly 10 and two read `19/2`. The two improved patches intersect their fixed target cores, so the earlier positive-distance explanation does not apply to them; the six neutral children retain the reported positive distance. T1 and T2 in X-026 §5.1 are scoped to the retained finite ray universe and fixed patch-only residual domain. They do not rule out other angular restrictions, stronger domains, changed charges, or selection routing. Whether the neutral classes are forced remains open. |
-| 155 | Test necessary unit-parent domains at exp151’s saved residual | registered | [H-158](hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | On tuple `(0,0,0,7)`, first test the fixed direction-6 residual against its own parent box, then compare newly replayed B-only and parent-restricted separation for `TR, BL, BR, TL`. A gain concerns one fixed pose and individual owner class; all four positive witnesses are a bounded negative, not joint feasibility. |
+| 155 | Test necessary unit-parent domains at exp151’s saved residual | registered; unresolved after exp-156 | [H-158](hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | The residual survives its parent box, but every replayed B-only frame already excludes the selected `TR` owner, so narrowing to that parent domain cannot show an incremental gain there. The registered invocation stopped before `BL`, `BR`, or `TL`; those comparisons require a fresh prospective protocol with matched B-only controls. |
 
 ## Stromquist Fractional and Structural Strategy — X-027
 
@@ -531,6 +531,14 @@ in the finite optimum.
 | 161 | Charge a normalized component connecting corner owners | shaped |  | At most three unit squares touch a wall; S1 yields at most three physical contact components and a path between owners from different corners. A complete anchored component cell must change a resource inequality; no short path, common angle, or rigidity follows. |
 | 162 | Use mixed angle-count profiles with one resource budget | shaped |  | For a proved `(9,2)` branch, test `M < 9*d0 + 2*d1` against the same language’s uniform-demand control; a separate point-only versus threshold comparison holds the profile fixed. Exact class boundaries and physical unit-to-core assignment are premises; no multiplicity extension is required first. |
 | 163 | Compose globally valid integer charges before a higher-rank search | shaped |  | A floor of a nonnegative rational combination of valid integer charges has the correspondingly rounded global budget. Retain an explicitly separating charge and complete pose evaluator before expanding the format; finite-support validity alone is insufficient. |
+
+## Reconciled Daytime Portfolio — X-028
+
+[X-028](explorations/X-028-n11-strategy-portfolio-draft.md) preserves the six-route
+daytime portfolio as a draft options record and reconciles it with T-026, exp-156, and
+X-027. It adds no hypothesis or scientific claim.
+Its order is a readiness judgment, with a separate discriminator and stopping condition
+for each route; the active agenda still owns execution.
 
 ## Dead ends
 
