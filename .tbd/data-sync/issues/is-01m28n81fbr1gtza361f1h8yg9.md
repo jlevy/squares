@@ -3,14 +3,18 @@ type: is
 id: is-01m28n81fbr1gtza361f1h8yg9
 title: Track what the build and the runs cost, so a slow algorithm says so
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T16:36:37.982Z
-updated_at: 2026-09-11T16:36:37.982Z
+updated_at: 2026-09-11T16:36:49.800Z
+closed_at: 2026-09-11T16:36:49.799Z
+close_reason: "Built and measured in 80092bc9: per-stage build timings recorded and printed, a trajectory-cost check with a stated ceiling in the gate, and ms_per_frame in the capture receipt."
+resolution: null
+duplicate_of: null
 ---
 Built in 80092bc9, recorded here so it is findable.
 
