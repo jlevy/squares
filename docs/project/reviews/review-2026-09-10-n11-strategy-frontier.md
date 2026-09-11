@@ -32,11 +32,12 @@ $$
 $$
 
 T-026 proves the ordinary exact lower bound
-`s(11) >= 955000*sqrt(518400042893309449)/179696714646249` at V4/C4 by dilation and
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249` at V4/C5 by dilation and
 rational density. T-025 proves `s(11) >= 191/50 = 3.82` at V4/C5. T-023 excludes one
 four-owner branch at `96/25`; it does not supply a global lower bound there.
-Their registry levels are respectively V4/C4/S5, V4/C5/S5 and V3/C3/S3. This review does
-not raise those assurance levels.
+Their registry levels are respectively V4/C5/S5, V4/C5/S5 and V3/C3/S3. The later
+[claim review](review-2026-09-10-t025-t026-verifiable-claims.md) supplies T-026’s C5
+artifact; this strategy review does not raise any assurance level itself.
 See the [claim register](../../../packing/frontier/RESULTS.md) and
 [T-026 proof](../../../packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md).
 

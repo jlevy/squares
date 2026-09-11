@@ -64,7 +64,7 @@ The core exposition begins with T-018’s visual proof of `s(11) >= 3.81`, then 
 the threshold charges and dilation argument that strengthen it.
 T-026 proves the project’s strongest current lower bound,
 `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 =
-3.826447410572939744...`, at `V4/C4`. Future research follows the
+3.8264474...`, at `V4/C5`. Future research follows the
 [payoff policy](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
 prioritize substantial bound improvements and methods or theorems that make them
 possible.
@@ -81,8 +81,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, proved by an exact dilation-limit corollary of T-018’s retained certificate. |
 | [T-025](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 191/50 = 3.82, by a threshold certificate: 584 point atoms of mass 271052551/31250000 and 320 threshold atoms, every one 2-of-3, of budget 143352577/62500000, on the D4-symmetric site set at shrunken side 9977/10000 and the 181-direction net. |
+| [T-026](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939, proved by an exact dilation-limit corollary of T-025’s threshold certificate re-certified on a finer direction net. |
 | [T-024](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862, proved by an exact dilation-limit corollary of T-018’s retained atoms re-certified on a finer direction net. |
-| [T-026](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939, proved by an exact dilation-limit corollary of T-025’s threshold certificate re-certified on a finer direction net. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -277,6 +277,7 @@ case or experiment separately.
 | [Agenda 034, lane A5: the fixed-support maximum under the atom classes, and how far it is from a cap](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a5-the-fixed-support-maximum-under-the-atom-classes.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
 | [Adversarial Review of the Threshold-Certificate Theorem and the 191/50 Candidate](docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md) | dated review record | record | retained | — |
+| [Adversarial Review of the T-025 and T-026 Verifiable Claims](docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md) | dated review record | record | retained | — |
 | [Contributed Research Note: Extending the Lower Bound for Eleven Squares](docs/project/reviews/review-2026-09-08-extending-s11-lower-bound-note.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
 | [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
@@ -514,6 +515,8 @@ case or experiment separately.
 | [T-024 Dilation-Limit Corollary on a Finer Net, Derived from T-018’s Atoms](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) | research synthesis | record | retained | — |
 | [T-025: A Threshold Certificate Proves `s(11) >= 191/50`](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md) | research synthesis | record | retained | — |
 | [T-026 Dilation-Limit Corollary of the Threshold Certificate on a Finer Net](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md) | research synthesis | record | retained | — |
+| [T-025 Verifiable Claim: $s(11) \geq 191/50$](packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md) | generated status view | generated | generated | — |
+| [T-026 Verifiable Claim: the Exact Dilation-Limit Bound](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md) | generated status view | generated | generated | — |
 | [Overnight Decision Review: Independent Coverage and Owner Geometry](packing/cases/n11_five_dot_cover/overnight-strategy-review.md) | research synthesis | record | retained | — |
 | [Wall Constructor: Mathematical Admission Addendum](packing/cases/n11_five_dot_cover/wall-constructor-contract.md) | research synthesis | record | retained | — |
 | [BC318: Exact Containment Transfer from the Retained Five-Dot Certificate](packing/cases/n11_five_dot_cover/wall-containment-contract.md) | research synthesis | record | retained | — |
@@ -720,10 +723,10 @@ controller, not permission to blur contracts.
 [the consolidated PR-series takeaways](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons),
 with definitions, proof results, scoped negatives and open comparisons in one place.
 PR137, PR142, PR145 and PR147 landed together at `1c1db463` on September 10, 2026. PR139
-incorporates that owner strand and contributes T-024–T-026, taking the global lower
-bound to `3.826447410572939744...`; the upper construction is unchanged at
-`3.877083590022814...`. The review corrections preserve the fixed-family scope of
-conditional obstructions and the existential owner-selection requirement.
+then merged as `3a18a05a`, incorporating that owner strand and contributing T-024–T-026.
+The global lower bound is `3.8264474...`; the upper construction is unchanged at
+`3.8770835...`. The review corrections preserve the fixed-family scope of conditional
+obstructions and the existential owner-selection requirement.
 Finite support, net and grid results do not close entire research directions.
 The
 [review addendum](docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md#combined-series-review-addendum--september-10-2026)
@@ -2729,9 +2732,9 @@ no intervening improvement:
 
 |  | value | source |
 | --- | --- | --- |
-| Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…` | [T-026](packing/frontier/RESULTS.md), proved at V4/C4 by an exact dilation-limit argument from T-025’s threshold certificate re-certified on a 1440-step direction net |
-| Bound gap | `0.050636179450` | the second-smallest open gap at `n ≤ 100` in this corpus |
+| Best known packing (upper bound) | `3.8770835…` | Walter Trump, 1979 |
+| Best certified lower bound | `955000*sqrt(518400042893309449)/179696714646249 = 3.8264474…` | [T-026](packing/frontier/RESULTS.md), proved at V4/C5 by an exact dilation-limit argument from T-025’s threshold certificate re-certified on a 1440-step direction net |
+| Bound gap | `0.0506362` | the second-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -3540,7 +3543,7 @@ round that names the hypothesis, control roles included.
 | [H-153](packing/campaign/hypotheses/H-153-reoptimised-certificate-on-a-finer-net.md) | open | Re-optimising the covering LP on a net of 720 or more directions at the sharpened shrink passes a dilation supremum of 3.82 | 0 | — |
 | [H-154](packing/campaign/hypotheses/H-154-where-the-point-atom-ceiling-begins.md) | open question | Where does the point-atom ceiling begin in side, and does any weight-eleven family at 191/50 survive a larger shrink? | 0 | — |
 | [H-155](packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
-| [H-156](packing/campaign/hypotheses/H-156-threshold-certificate-past-3-82.md) | confirmed | T-026 confirms the finer-net disjunct by proving `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...` at V4/C4 | 1 | 111.9m wall |
+| [H-156](packing/campaign/hypotheses/H-156-threshold-certificate-past-3-82.md) | confirmed | T-026 confirms the finer-net disjunct by proving `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.8264474...`; the result is now V4/C5 | 1 | 111.9m wall |
 | [H-157](packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | refuted | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement | 1 | exp-154: six of eight refined subclasses still read exactly 10 and two read `19/2`; this refutes the all-subclasses claim, while broader conditioning and changed charges remain open |
 | [H-158](packing/campaign/hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | unresolved | Exp151’s direction-6 residual fails its own necessary parent box, or one selected owner has a newly replayed positive B-only witness and no positive witness after the complete parent restriction | 1 | exp-156: residual survives; TR is B-only incompatible after 181 frames, making parent gain impossible there; BL, BR and TL were not run; 20.63s external wall |
 
@@ -3981,7 +3984,7 @@ archive beside it.
 | [exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md) | 11 | target | H-150 | Exact closed intersection of two escaping cores | Nonempty two-core quadrilateral and verified common site | accepted |
 | [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md) | 11 | target | H-151 | Direct complete-domain support intersection and independent cover confirmation | Empty site region after188directions; no sixth site preserves D | **rejected** |
 | [exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md) | 11 | target | H-157 | Exact sixteen-bin and singleton-ray owner-sector screen of the mass-eleven ceiling family | Six of eight refined subclasses still read survivor weight exactly 10; the two that break read 19/2, not 79/8 | **rejected** |
-| [exp-155](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-155-h156-finer-net-threshold-dilation.md) | 11 | target | H-156 | Frozen T-025 atoms on the 1440-step direction net and exact dilation corollary | Proved `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...` at V4/C4 | **accepted** |
+| [exp-155](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-155-h156-finer-net-threshold-dilation.md) | 11 | target | H-156 | Frozen T-025 atoms on the 1440-step direction net and exact dilation corollary | Proved `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.8264474...`; the result is now V4/C5 | **accepted** |
 | [exp-156](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md) | 11 | target | H-158 | Exact residual parent-box check followed by matched B-only and parent-restricted owner comparisons in TR, BL, BR, TL order | Residual inside parent box; TR / bottom-left:m1:j7 has exact negative B-only maximum after 181 frames, which also precludes parent gain there; BL, BR and TL unrun | unresolved |
 
 ### Cost and provenance

@@ -67,8 +67,10 @@ experiment:
   verdict:
     decision: accepted
     primary_criterion: A two-route verified threshold certificate and exact lower bound strictly above 3.826
-    reason: T-026 proves the first disjunct of H-156 at V4/C4. Its exact conclusion is
-      s(11) >= 955000*sqrt(518400042893309449)/179696714646249.
+    reason: T-026 proves the first disjunct of H-156 at V4. Its two finite decision
+      methods supplied C4 at registration; the later mapped review of the complete
+      self-contained claim supplies its current C5. Its exact conclusion is s(11) >=
+      955000*sqrt(518400042893309449)/179696714646249.
   effort:
     timebox: Retrospective registration of one already completed bounded lane; no new target allowance
     wall_seconds: 6713.2
@@ -81,7 +83,8 @@ as T-026. It introduces no new calculation.
 The source lane records the measurement, the two certificate files retain the exact
 finite objects, and the T-026 proof packet proves the ordinary exact lower bound
 `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 =
-3.826447410572939744...` at V4/C4.
+3.826447410572939744...` at V4/C5. The C5 promotion comes from the later mapped review;
+it does not change this experiment’s calculation or verdict.
 
 The proof uses strict rational dilations and order completeness.
 It does not establish the separate strict inequality `s(11) >

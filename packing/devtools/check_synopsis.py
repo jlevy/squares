@@ -787,11 +787,24 @@ def check_case_interval(
         )
 
     lower_cell = figures["lower"][0]
-    absent = [
-        wanted
-        for wanted in (exact, lower)
-        if not re.search(rf"(?<![\w./]){re.escape(wanted)}(?![\w./])", lower_cell)
-    ]
+    exact_present = re.search(rf"(?<![\w./]){re.escape(exact)}(?![\w./])", lower_cell)
+    shown_lower = re.search(
+        rf"{re.escape(exact)}\s*=\s*(\d+(?:\.\d+)?)(?P<ellipsis>…|\.\.\.)?",
+        lower_cell,
+    )
+    decimal_present = bool(
+        shown_lower
+        and (
+            lower.startswith(shown_lower.group(1))
+            if shown_lower.group("ellipsis")
+            else shown_lower.group(1) == lower
+        )
+    )
+    absent = []
+    if exact_present is None:
+        absent.append(exact)
+    if not decimal_present:
+        absent.append(lower)
     if absent:
         problems.append(
             f"SYNOPSIS.md: '{labels['lower']}' states '{lower_cell}', which does not "

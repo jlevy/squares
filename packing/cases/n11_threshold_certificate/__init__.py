@@ -15,7 +15,9 @@ net at shrink 9977/10000. Beside it are the same atoms re-certified on finer net
 The finer-net rungs prove the same side, 191/50, as the retained one: what they buy is
 the larger shrink the dilation argument turns into a bound above it.
 
-The theorem, the frozen premises and the two-route decision are written for a stranger in
-`t-025-threshold-certificate-proof.md`, and the limit corollary in
+The generated `t-025-verifiable-claim-191-50.md` and
+`t-026-verifiable-claim-dilation-limit.md` each carry the theorem, proof, shared
+standard-library verifier, and exact input bytes in one file. The research records and
+two-route measurements remain in `t-025-threshold-certificate-proof.md` and
 `t-026-dilation-limit-proof.md`.
 """

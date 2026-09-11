@@ -24,8 +24,9 @@ same certificate on the 720-step net, `C_720`, is retained beside it: its own di
 family reaches
 `955000*sqrt(129600042893309449)/89874194646249 = 3.82534784591311198085...`, and it is
 the control that isolates where the extra `0.0011` comes from.
-No standalone reader outside this repository decides a threshold certificate, at either
-net; that gap is T-025’s and this corollary does not close it.
+The standalone [T-026 verifiable claim](t-026-verifiable-claim-dilation-limit.md) embeds
+a standard-library reader, the 1440-step certificate, and the exact dilation record.
+It checks this registered rung without importing the repository package.
 
 ## One-Minute Proof
 

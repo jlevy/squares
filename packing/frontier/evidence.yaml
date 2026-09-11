@@ -2249,14 +2249,15 @@ evidence:
       only when both routes accept and agree on the least charge: the exact sweep in 110 s
       with dense-grid and slab evaluations agreeing at every direction and the charge at
       the witness re-evaluated by membership counting, beside the interval route recorded
-      under E-n011-threshold-interval-decision, on two workers of a four-cpu host. No
-      standalone reader outside this repository decides a threshold certificate yet, and
-      the dilation argument of T-024 has not been measured on this one. The theorem was
+      under E-n011-threshold-interval-decision, on two workers of a four-cpu host. The
+      self-contained T-025 verifiable claim also embeds these exact bytes and a separate
+      standard-library event-cell verifier. The dilation argument of T-024 has not been
+      measured on this certificate. The theorem was
       reviewed adversarially before registration in
       docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md, which found
       no soundness defect; the exact depth-one ceiling family at the same side shows no
       point-atom certificate of the earlier form exists here, which is why the threshold
-      atoms are load-bearing rather than decorative.
+      atoms are necessary for this certificate’s budget.
     source_reviewed: '2026-09-09'
   - id: E-n011-threshold-interval-decision
     claim: lower-bound
@@ -2361,10 +2362,10 @@ evidence:
       781.8 s, with the dense-grid and slab evaluations agreeing at every direction and
       the charge at the witness re-evaluated by membership counting, beside the interval
       route recorded under E-n011-threshold-net1440-interval-decision, on two workers of
-      a four-cpu host. No standalone reader outside this repository decides a threshold
-      certificate at any net, so this rung, like T-025's, cannot yet be checked by a
-      stranger without trusting this project's own code. This entry is the
-      exact-algebraic decision; C4 rests on the interval decision of the same bytes.
+      a four-cpu host. The self-contained T-026 verifiable claim embeds these bytes, a
+      separate standard-library threshold verifier, and the exact dilation record. This
+      entry is the exact-algebraic decision; C4 rests on the interval decision of the
+      same bytes.
     source_reviewed: '2026-09-09'
   - id: E-n011-threshold-net1440-interval-decision
     claim: lower-bound

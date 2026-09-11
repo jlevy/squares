@@ -29,7 +29,7 @@ The current bracket is
 
 T-025 excludes the rational side `191/50 = 3.82` with a mixed certificate made from
 ordinary point charges and two-of-three threshold charges.
-T-026 proves the ordinary exact lower bound displayed above at V4/C4 using a finer
+T-026 proves the ordinary exact lower bound displayed above at V4/C5 using a finer
 direction net, a larger strict core, weight normalization, rational dilation and order
 completeness.
 
@@ -377,7 +377,7 @@ The explainer update uses an **incremental architecture**.
 
 1. State the exact proved lower bound near the top, explain that every smaller container
    is excluded, and give the current bracket.
-   Keep the separate strictness question apart from the V4/C4 assurance statement.
+   Keep the separate strictness question apart from the V4/C5 assurance statement.
 2. Keep T-018 and its point-only certificate as the complete worked example, with its
    seven interactive figures and standalone standard-library checker.
    State explicitly that the numerical `3.81` result is a teaching example rather than a

@@ -2,7 +2,7 @@
 
 **Current combined result, September 10, 2026:** let
 `C = 955000*sqrt(518400042893309449)/179696714646249 =
-3.826447410572939744...`. T-026 proves `s(11) >= C` at V4/C4, so
+3.826447410572939744...`. T-026 proves `s(11) >= C` at V4/C5, so
 `C <= s(11) <= 3.877083590022814...`. The owner results remain conditional.
 The classification follows [epistemics.md](../../../epistemics.md).
 [§12 consolidates the takeaways across the PR series](#12-the-combined-series-takeaways-and-open-comparisons),
@@ -28,7 +28,7 @@ No scientific target ran during this consolidation.
 
 | Work | Current status | What that status establishes |
 | --- | --- | --- |
-| T-024–T-026 and agenda034 | Combined PR139 results; focused proof review and independent arithmetic completed | The global bound and scoped support/family findings in §12; final full-checkpoint status is tracked on the PR |
+| T-024–T-026 and agenda034 | Combined PR139 results merged; T-025 and T-026 also have self-contained claims, exhaustive standard-library replays, and a mapped source-distinct review | The global bound and scoped support/family findings in §12; T-026 is V4/C5 |
 | Exp145–153 | Recorded scientific results; PR145’s matching full checkpoint passed | The scoped findings in §7, with the retained analytic premises |
 | This account | Prior narrative review passed; later A6/H157 source review and corrections recorded in §13 | Each review has its own source and scope; no pass silently covers a later addition |
 | A6 and H157/exp154 | A6 point-family, all 2,566 atom rows and the seven-row fixed-support upper bound exactly replayed; H157 survivor counts confirmed and distance mechanism corrected | Neither addition changes the global bracket; §13 states the fixed-support and finite-domain premises |
@@ -614,9 +614,18 @@ qualify the proved lower bound `s(11) >= C`.
 
 Primary proof packets are
 [T-024](../../../packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md),
-[T-025](../../../packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md),
+the self-contained
+[T-025 claim](../../../packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md),
+and the self-contained
+[T-026 claim](../../../packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md).
+The shorter
+[T-025 proof](../../../packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md)
 and
-[T-026](../../../packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md).
+[T-026 proof](../../../packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)
+remain the repository-oriented accounts.
+The
+[joint source-distinct review](../reviews/review-2026-09-10-t025-t026-verifiable-claims.md)
+checks the standalone claims and supplies T-026’s mapped C5 review.
 The [claim register](../../../packing/frontier/RESULTS.md) retains their exact
 verification and confirmation levels; this narrative does not silently raise those
 levels. For the owner strand, [§7](#7-the-recorded-observations-in-order) gives the
@@ -738,10 +747,12 @@ negative outcome before a target run.
 The mathematical review found no error in the T-024–T-026 proof arguments or exact
 constants. It did find the unsupported interpretations corrected above.
 Independent arithmetic on the frozen files, 77 focused passing tests and the point
-ceiling replay are distinct from replaying every finer-net covering decision.
-The final combined PR must supply the matching full checkpoint; its source identities
-and job outcomes are recorded in
-[PR139’s review and final validation discussion](https://github.com/jlevy/squares/pull/139).
+ceiling replay remain distinct from replaying every finer-net covering decision.
+PR139 merged after its required hosted checks passed.
+The later standalone T-025 and T-026 documents each embed the complete certificate and
+an independent standard-library exact-sweep implementation; their exhaustive replays and
+the source-distinct review add assurance without changing the theorem statements or the
+earlier experimental record.
 See the
 [review addendum](../reviews/review-2026-09-09-n11-evidence-interpretation.md#combined-series-review-addendum--september-10-2026)
 for the scope of the reconciliation and remaining assurance questions.

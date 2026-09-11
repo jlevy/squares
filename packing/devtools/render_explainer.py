@@ -83,6 +83,9 @@ THRESHOLD_CERTIFICATE = THRESHOLD_CASE / "certificate.json"
 THRESHOLD_FINE_CERTIFICATE = THRESHOLD_CASE / "certificate-191-50-net1440.json"
 THRESHOLD_PROOF = THRESHOLD_CASE / "t-025-threshold-certificate-proof.md"
 CURRENT_BOUND_RECORD = THRESHOLD_CASE / "t-026-dilation-limit-corollary.json"
+T025_CLAIM = THRESHOLD_CASE / "t-025-verifiable-claim-191-50.md"
+T026_CLAIM = THRESHOLD_CASE / "t-026-verifiable-claim-dilation-limit.md"
+T026_REVIEW = REPO / "docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md"
 # The registered result these certificates belong to, lowercased as a filename
 # stem. `conventions.md` builds every document name for a result from this id --
 # `t-018-proof-card.md`, `t-018-verifiable-claim-<bound>.md`, `t-018-explainer.md` --
@@ -189,14 +192,6 @@ def decimal(value: Fraction) -> str:
             "page states it as an equality; it cannot be printed as a decimal at all"
         )
     return text
-
-
-def full_terminating_decimal(value: Fraction) -> str:
-    """Write a terminating rational in full, including long retained measurements."""
-    places = terminating_places(value)
-    if places is None:
-        raise SystemExit(f"{value} has no terminating decimal")
-    return digits(value, places)
 
 
 def decimal_or_rational(value: Fraction) -> str:
@@ -1538,7 +1533,7 @@ def current_bound_facts() -> CurrentBoundFacts:
         bounded_side_tex=f"\\frac{{{multiplier}\\sqrt{{{radicand}}}}}{{{denominator}}}",
         bounded_side_inline_tex=f"{multiplier}\\sqrt{{{radicand}}}/{denominator}",
         bounded_side_plain=expression,
-        bounded_side_decimal=digits(bounded_side, 18) + "…",
+        bounded_side_decimal=truncated(bounded_side),
         endpoint=endpoint,
         point_atoms=len(coarse["atoms"]),
         threshold_atoms=len(coarse["threshold_atoms"]),
@@ -2275,12 +2270,12 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "T025_POINT_MASS": decimal_or_rational(current.point_mass),
         "T025_THRESHOLD_BUDGET": decimal_or_rational(current.threshold_budget),
         "T025_TOTAL_BUDGET": decimal_or_rational(current.total_budget),
-        "T025_TOTAL_DEC": full_terminating_decimal(current.total_budget),
-        "T025_LEAST_CHARGE": full_terminating_decimal(current.least_charge),
+        "T025_LEAST_EXCESS": frac_inline_tex(current.least_charge - 1),
         "T025_DIRECTIONS": str(current.coarse_directions),
         "T025_INTERVAL_DIRECTIONS": str(current.coarse_interval_directions),
         "T025_CERT_URL": repo_file(THRESHOLD_CERTIFICATE),
         "T025_PROOF_URL": repo_file(THRESHOLD_PROOF),
+        "T025_CLAIM_URL": repo_file(T025_CLAIM),
         "T026_FINE_B": frac_inline_tex(current.fine_square_side),
         "T026_TOTAL_BUDGET": decimal_or_rational(current.fine_total_budget),
         "T026_TOTAL_DEC": truncated(current.fine_total_budget),
@@ -2291,6 +2286,8 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "T026_FACTOR": current.dilation_factor_tex,
         "T026_CERT_URL": repo_file(THRESHOLD_FINE_CERTIFICATE),
         "T026_PROOF_URL": repo_file(THRESHOLD_CASE / "t-026-dilation-limit-proof.md"),
+        "T026_CLAIM_URL": repo_file(T026_CLAIM),
+        "T026_REVIEW_URL": repo_file(T026_REVIEW),
         "T026_RECORD_URL": repo_file(CURRENT_BOUND_RECORD),
         "NUMBER_LINE_MARKS": number_line_marks(facts, headline, current),
         "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
@@ -2450,8 +2447,8 @@ def drop_block(text: str, name: str) -> str:
 def wrap_figure(body: str, cert: str, *, visible: bool) -> str:
     """One certificate's copy of a figure, in a wrapper the switch can hide.
 
-    The blank line on each side of the two wrapper tags is load-bearing: a
-    Markdown HTML block runs to the next blank line, so a wrapper pressed
+    The blank line on each side of the two wrapper tags is required by Markdown parsing.
+    An HTML block runs to the next blank line, so a wrapper pressed
     against a paragraph would swallow it into the raw block and leave its
     Markdown unrendered.
     """
@@ -2584,7 +2581,7 @@ def _balanced(source: str, start: int, tag: str) -> int:
     raise SystemExit(f"{MARKDOWN.name}: an unclosed <{tag}> reached the publisher")
 
 
-_TEX_SPAN = re.compile(r'<span class="tex">(.*?)</span>', re.DOTALL)
+_TEX_SPAN = re.compile(r'<span class="(tex(?:-d)?)">(.*?)</span>', re.DOTALL)
 _SCREEN_ONLY = re.compile(r'<span class="screen-only">.*?</span>', re.DOTALL)
 _ANCHOR = re.compile(r'<a\s[^>]*?href="([^"]*)"[^>]*>(.*?)</a>', re.DOTALL)
 _IMG = re.compile(r"<img\s[^>]*>")
@@ -2595,7 +2592,12 @@ _SIMPLE_TAG = re.compile(r"</?(?:strong|b|em|i|code|span|br)\b[^>]*>")
 def _inline_markdown(fragment: str) -> str:
     """Inline HTML the article uses inside a caption, written as Markdown instead."""
     fragment = _SCREEN_ONLY.sub("", fragment)
-    fragment = _TEX_SPAN.sub(lambda m: f"${m.group(1).strip()}$", fragment)
+    fragment = _TEX_SPAN.sub(
+        lambda m: (
+            f"$${m.group(2).strip()}$$" if m.group(1) == "tex-d" else f"${m.group(2).strip()}$"
+        ),
+        fragment,
+    )
     fragment = _ANCHOR.sub(
         lambda m: f"[{_inline_markdown(m.group(2))}]({m.group(1)})", fragment
     )

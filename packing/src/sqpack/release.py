@@ -29,7 +29,7 @@ PUBLICATION_HISTORY = (
         result_scope=(
             "The current lower-bound edition: T-025 proves "
             "$s(11) ≥ 191/50 = 3.82$, and T-026 proves "
-            "$s(11) ≥ 3.826447410572939744…$."
+            "$s(11) ≥ 3.8264474…$."
         ),
     ),
     PublicationHistoryEntry(

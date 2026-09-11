@@ -152,7 +152,7 @@ evidence.
 
 Let `C = 955000*sqrt(518400042893309449)/179696714646249 =
 3.826447410572939744...`. T-026 proves the ordinary exact lower bound `s(11) >= C` at
-V4/C4, so the combined global bound is `C <= s(11) <= 3.877083590022814...`; the upper
+V4/C5, so the combined global bound is `C <= s(11) <= 3.877083590022814...`; the upper
 construction is unchanged.
 The classification follows [epistemics.md](../../../epistemics.md).
 
@@ -223,14 +223,18 @@ an independent 20,376-vertex point-ceiling replay and three negative controls, a
 independent rational recomputation from six frozen certificate files and four dilation
 records. Those checks do not constitute a replay of every finer-net covering decision.
 The original proof packets retain the two covering routes and their declared C levels.
-A standalone threshold reader and a mapped source-distinct T-026 review remain possible
-assurance improvements; this addendum does not claim either was supplied.
+The later self-contained T-025 and T-026 claims embed a separate standard-library exact
+sweep and their complete data.
+The [source-distinct review](review-2026-09-10-t025-t026-verifiable-claims.md) checks
+both claims from the theorem through the finite decision and, for T-026, through
+dilation and the endpoint inference.
+It records the exhaustive standalone receipts and supplies the mapped review required
+for T-026 at C5.
 
-The final source/base-matched full checkpoint is a separate merge condition.
-Its live status and completed receipt are maintained on
-[PR139](https://github.com/jlevy/squares/pull/139), together with the per-finding
-disposition. Historical full checks for the owner strand do not validate the added
-threshold strand by themselves.
+[PR139](https://github.com/jlevy/squares/pull/139) merged as `3a18a05a` after its
+required hosted checks passed.
+The self-contained claim documents and their separate review are the later assurance
+addition on PR148; they do not revise PR139’s frozen experimental outcomes.
 
 ### Questions Left Open Deliberately
 

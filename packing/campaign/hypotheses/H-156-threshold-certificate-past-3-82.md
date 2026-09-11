@@ -60,17 +60,24 @@ hypothesis:
     and exact dilation corollary prove
     s(11) >=
     955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...
-    at V4/C4. The separate rows-complete loop at 383/100 remains open, as do re-optimised
-    finer-net atoms and changed atom families. The point-atom obstruction and earlier LP
-    slopes retain their original finite scopes.
+    at V4/C5 after the mapped source-distinct review of the self-contained claim. The
+    separate rows-complete loop at 383/100 remains open, as do re-optimised finer-net
+    atoms and changed atom families. The point-atom obstruction and earlier LP slopes
+    retain their original finite scopes.
 ---
 # H-156 — Past 3.82 Without Conditioning
 
 **Status update, September 10, 2026.** T-026 confirms the finer-net and dilation
 disjunct by proving the ordinary exact lower bound
 `s(11) >= 955000*sqrt(518400042893309449)/179696714646249 =
-3.826447410572939744...` at V4/C4. The separate rows-complete loop at `383/100`,
+3.826447410572939744...` at V4/C5. The separate rows-complete loop at `383/100`,
 re-optimisation on a finer net, and changed atom families remain open.
+
+The
+[source-distinct review](../../../docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md)
+checks the complete claim from the finite threshold certificate through the endpoint
+inference. The promotion from C4 to C5 changes the retained assurance record, not the
+theorem or this hypothesis’s measured outcome.
 
 **Separate strictness question.** The dilation-limit method does not establish
 `s(11) > 955000*sqrt(518400042893309449)/179696714646249`. This does not qualify the

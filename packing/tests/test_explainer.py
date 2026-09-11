@@ -88,13 +88,18 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 
 
-def test_title_block_names_the_result_without_a_subtitle(page: str) -> None:
+def test_title_block_names_the_result_without_a_subtitle(page: str, document: str) -> None:
     """The title stands alone; the exact theorem is typeset in the opening section."""
     heading = re.search(r"<h1\b.*?</h1>", page, re.DOTALL)
     assert heading is not None
     assert "A New Lower Bound for Packing 11 Squares" in heading.group(0)
     assert '<p class="subtitle centred">' not in page
     assert "Weighted Certificates for Square Packing" not in page
+    current = current_bound_facts()
+    theorem = (
+        f"$$s(11) \\;\\ge\\; L = {current.bounded_side_tex} = {current.bounded_side_decimal}.$$"
+    )
+    assert theorem in document
 
 
 @pytest.mark.parametrize(
@@ -411,7 +416,9 @@ def test_advanced_section_derives_the_current_lower_bound(document: str) -> None
     assert "## Proof of the New Lower Bound" in document
     assert "The numerical $3.81$ result is not a premise of T-026" in prose
     assert "Keeping T-018 in full also serves as an assurance bridge" in prose
-    assert "The checker does not verify the different threshold certificate" in prose
+    assert "does not verify the threshold certificates" in prose
+    assert "t-025-verifiable-claim-191-50.md" in prose
+    assert "t-026-verifiable-claim-dilation-limit.md" in prose
     assert "call this selected square a **core**" in prose
     assert "Its **trace** on a core $P$ is the subset $P\\cap S$" in prose
     assert "T-025 proves $s(11)\\ge 191/50=3.82$ directly" in prose
@@ -424,8 +431,9 @@ def test_advanced_section_derives_the_current_lower_bound(document: str) -> None
     assert "choose a rational $q<c$" in prose
     assert "fit unchanged in that larger container" in prose
     assert "Each point-certificate bound shown in the interactive figures" in prose
-    assert "threshold certificates use the repository" in prose
-    assert "exact replay tools instead" in prose
+    assert "T-025 claim document" in prose
+    assert "standard-library exact verifier" in prose
+    assert "the same verifier, and the exact dilation record" in prose
     assert "weak limit" not in prose.lower()
 
 

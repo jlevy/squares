@@ -1401,6 +1401,8 @@ results:
       hypothesis: H-152
     artifacts:
       - packing/cases/n11_threshold_certificate/certificate.json
+      - packing/cases/n11_threshold_certificate/verify_claim.py
+      - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
       - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
       - packing/devtools/decide_threshold_certificate.py
       - packing/src/sqpack/fractional/threshold.py
@@ -1412,6 +1414,8 @@ results:
       - packing/tests/test_decide_threshold_certificate.py
       - packing/tests/test_fractional_threshold.py
       - packing/tests/test_fractional_threshold_interval.py
+      - packing/tests/test_verify_threshold_claim.py
+      - packing/tests/test_verify_threshold_claim_oracle.py
     next_rung: >-
       Push the side with the same loop: the LP that produced these atoms is run again at
       a larger side, and the ceiling family says the answer cannot come from point atoms
@@ -1419,12 +1423,9 @@ results:
       been measured and registered as T-026, proving
       s(11) >= 3.826447410572939744 by an exact dilation-limit argument. That is a
       separate corollary. T-025 itself proves the ordinary lower bound
-      s(11) >= 191/50 at V4/C5 and its certificate is instantiated at that named side. No
-      standalone reader outside this repository decides a threshold certificate: the
-      retained verify_claim.py reads point atoms only, so a stranger cannot yet check
-      these bytes without trusting this project's own code, which is the gap that keeps
-      the architecture short of what the point-atom rungs have. T-025 needs no limit
-      argument, so no dilation record belongs at this rung.
+      s(11) >= 191/50 at V4/C5 and its certificate is instantiated at that named side.
+      The self-contained T-025 claim embeds its standard-library verifier and certificate
+      bytes. T-025 needs no limit argument, so no dilation record belongs at this rung.
   - id: T-026
     claim: >-
       s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939,
@@ -1449,7 +1450,7 @@ results:
       n_values:
         - 11
     verification: V4
-    confirmation: C4
+    confirmation: C5
     significance:
       score: 5
       rationale: >-
@@ -1466,7 +1467,7 @@ results:
         reach, so a further doubling of the net would have to be paid for out of 0.0037
         of budget, and net refinement alone is near exhausted on these atoms.
       scored: '2026-09-09'
-      by: repository replay of the two-route retention gate and the corollary tool, without external review
+      by: repository replay of the two-route retention gate and the corollary tool, with a mapped source-distinct review
     novelty: apparently-novel
     composition: >-
       Derived from a full replay of the 1440-step threshold source's Conditions 1, 1',
@@ -1478,10 +1479,11 @@ results:
       which fail differently: the exact event-cell sweep of sqpack.fractional.threshold,
       whose dense-grid and slab evaluations must agree at every direction, and the
       interval branch and bound of sqpack.fractional.threshold_interval over the doubled
-      net, which never invokes the D4 argument. No source-distinct review has been
-      mapped for this result, so it does not reach C5; T-025's review covered the
-      threshold theorem and T-022's covered the dilation argument, and this result reuses
-      both unchanged with new B and D. The 720-step certificate retained beside it
+      net, which never invokes the D4 argument. C5 adds the mapped source-distinct review
+      of the self-contained claim, covering the threshold count, exact sweep, dilation,
+      and endpoint inference. T-025's earlier review covers the threshold theorem and
+      T-022's covers the dilation argument; the new review checks their composition with
+      the T-026 values and embedded data. The 720-step certificate retained beside it
       crosses at the same shrink and reaches
       955000*sqrt(129600042893309449)/89874194646249 = 3.825347845913112, which isolates
       the remaining 0.0010996 as the effect of D halving alone.
@@ -1491,9 +1493,12 @@ results:
       - E-n011-threshold-net1440-dilation-limit
       - E-n011-threshold-net720-certificate
       - E-n011-threshold-net720-dilation-limit
+    review_artifact: docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md
     artifacts:
       - packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json
       - packing/cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json
+      - packing/cases/n11_threshold_certificate/verify_claim.py
+      - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
       - packing/cases/n11_threshold_certificate/certificate-191-50-net720.json
       - packing/cases/n11_threshold_certificate/t-026-net720-dilation-limit-corollary.json
       - packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md
@@ -1504,6 +1509,8 @@ results:
       - packing/tests/test_dilation_corollary.py
       - packing/tests/test_measure_threshold_net_refinement.py
       - packing/tests/test_decide_threshold_certificate.py
+      - packing/tests/test_verify_threshold_claim.py
+      - packing/tests/test_verify_threshold_claim_oracle.py
     next_rung: >-
       The rescaled 1440-step budget is 5483661432/498684619, leaving
       1869377/498684619 below eleven. The measured 720- and 1440-step certificates
@@ -1512,9 +1519,8 @@ results:
       cannot improve the limit. Re-certification on another net, re-optimization
       on a finer net, changed site generation, and richer charge atoms remain
       distinct hypotheses. The retained plateau duals with depth above one are
-      useful separation inputs but not globally feasible obstruction witnesses.
-      C5 needs a mapped
-      source-distinct review of this corollary on the threshold atoms. And no standalone
-      reader outside this repository decides a threshold certificate at any net, so a
-      stranger cannot check these bytes without trusting this project's own code; that
-      gap is T-025's and this rung does not close it.
+      useful separation inputs but not globally feasible obstruction witnesses. The
+      self-contained T-026 claim embeds the standard-library threshold verifier, the
+      1440-step certificate, and the exact dilation record; its mapped source-distinct
+      review supplies C5. A further assurance step would require proof-assistant
+      formalization, external review, or an independently reproduced full decision.

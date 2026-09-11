@@ -51,8 +51,8 @@ The problem is elementary to state and remains open even at small `n`.
 
 ## New Results
 
-The [results register](packing/frontier/RESULTS.md) collects first-party and
-load-bearing whole results.
+The [results register](packing/frontier/RESULTS.md) collects first-party results and the
+published results needed to interpret them.
 Each result has a `T-NNN` ID and the classifications defined in
 [`epistemics.md`](epistemics.md): **V**, the highest verification rung supported by its
 cited evidence, and **C**, what this repository has recorded or performed itself.
@@ -93,20 +93,20 @@ Results first established here, as far as the recorded source searches show:
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
   [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md)
-  refines the point-certificate bound to `3.810025723614703…`.
+  refines the point-certificate bound to `3.8100257…`.
   [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md)
-  rechecks the point atoms on a finer direction net and proves
-  `s(11) ≥ 3.816609502788862…`.
-  [T-025](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md)
+  rechecks the point atoms on a finer direction net and proves `s(11) ≥ 3.8166095…`.
+  [T-025](packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md)
   introduces point atoms plus *threshold atoms*, whose stronger budget rule carries the
   side past the point method’s proved ceiling, and directly proves
   `s(11) ≥ 191/50 = 3.82`. The strongest proved lower bound now stands at
   `s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 =
-  3.826447410572939…`, proved from those same threshold atoms re-certified on a
-  1440-step direction net and an exact dilation-limit argument
-  ([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)). It
-  is registered as `V4/C4`: machine-verified exact or interval-certified evidence with
-  passing replay, confirmed by distinct exact event-cell and interval coverage methods.
+  3.8264474…`, proved from those same threshold atoms re-certified on a 1440-step
+  direction net and an exact dilation-limit argument
+  ([T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md)).
+  It is registered as `V4/C5`: machine-verified exact or interval-certified evidence
+  with passing replay, confirmed by distinct exact event-cell and interval coverage
+  methods and a mapped source-distinct review of the complete claim.
   The explainer uses the `3.81` certificate as its visual worked example, then proves
   the threshold-counting and dilation steps that establish the headline bound directly.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted

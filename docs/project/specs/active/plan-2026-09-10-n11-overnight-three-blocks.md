@@ -61,7 +61,7 @@ An admitted instrument can still return a negative or incomplete target result.
 The retained global lower bound is
 `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...`. T-026
 proves the ordinary exact lower bound `s(11) >=
-955000*sqrt(518400042893309449)/179696714646249` at V4/C4 by dilation and rational
+955000*sqrt(518400042893309449)/179696714646249` at V4/C5 by dilation and rational
 density. The method does not establish the separate strict inequality beyond this
 constant; this does not qualify the proved lower bound.
 T-023 excludes a specified owner case at `96/25`. Exp153 rules out adding any single
