@@ -1061,7 +1061,13 @@ def main() -> int:
         span = page.evaluate("atlasTransitions.duration()")
         page.evaluate(f"atlasTransitions.seek({span})")
         rest = page.evaluate("atlasTransitions.colour()")
-        check(rest["painted"] == "angle-stable" and rest["scheme"] == "identity",
+        # `angle-atlas`, not `angle-stable`. The two group angles identically and differ in which
+        # palette slot a class is given: the stable map gives a class the slot its own angle falls
+        # in, so a square keeps its hue from frame to frame, while the atlas hands slots out from 2
+        # by descending class size. A resting frame is a picture that is meant to match a rendering,
+        # so it takes the atlas's answer -- measured before this changed, n = 17's tilted core came
+        # out `#b9e53c`, the lightest fill in the ramp, against the rendering's `#dd87b8`.
+        check(rest["painted"] == "angle-atlas" and rest["scheme"] == "identity",
               f"a resting Animate frame is painted {rest['painted']} with the scheme on {rest['scheme']}")
         page.evaluate(f"atlasTransitions.seek({span * 0.55})")
         mid = page.evaluate("atlasTransitions.colour()")

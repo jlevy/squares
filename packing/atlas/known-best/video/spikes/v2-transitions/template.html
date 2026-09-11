@@ -666,15 +666,31 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const ROLL_MAX = 0.4;                 // seconds for the panel's out-then-in sequence, from the moment the new square starts to appear
   const MARK_FADE = 0.15;               // fraction of the move over which the previous pair's scarlet outline gives way to the normal stroke
   const MARK_WIDE = 4, MARK_THIN = 2;   // scarlet outline widths, px: at arrival, and through the following dwell
-  const TINT = 1.0;                     // the arriving square starts fully scarlet and settles to its own fill
+  const TINT = 1.0;                     // the arriving square starts at the tint colour and settles to its own fill
+  const TINT_CHROMA = 0.6;              // the share of the accent's chroma that tint colour carries
   // Revision 6: while a pair is in motion the fills lose chroma, and lock back in over the settle,
   // so the resting frame is exactly the retained colours and only the moving picture is muted.
   const DESAT = 0.15;                   // the chroma a fill keeps at full desaturation
-  const DESAT_IN = 0.15;                // the fraction of the move over which the colour drains
+  // How the drain enters and leaves. Both ends were abrupt: the colour fell out over the first
+  // 15 per cent of the move (0.18 s of a 1.2 s move) and came back over a 0.3 s settle, so at
+  // speed it read as two cuts rather than as a drain. Over a third of the move in, and a settle
+  // half again as long out, with a fifth-order ease at each end instead of a third-order one --
+  // `smootherstep` has zero second derivative at both ends, so there is no visible corner where
+  // the change starts or stops, which is the whole complaint.
+  const DESAT_IN = 0.35;                // the fraction of the move over which the colour drains
   // Continuous play (revision 6, feature 4): the beat the whole sequence runs at, back to back.
   // A static append (a grid prefix or a shared picture, where nothing moves) gets a dwell and no
   // move at all, unless the full beat is asked for.
-  const CONTINUOUS = { dwell: 0.8, move: 1.2, settle: 0.3, staticDwell: 0.5 };
+  // A static append used to be a dwell and nothing else, which meant the new square appeared
+  // between one frame and the next with no time to be seen arriving -- the owner's report, and
+  // exactly right: `move: 0` collapses `arrive` and `arrived` onto the same instant. It now gets
+  // a short move and a settle of its own, so the scarlet square comes in and takes its colour.
+  // Nothing rearranges (that is what makes it static), and the drain stays off for the same
+  // reason: there is no motion to mute.
+  const CONTINUOUS = {
+    dwell: 0.8, move: 1.2, settle: 0.5,
+    staticDwell: 0.4, staticMove: 0.4, staticSettle: 0.35,
+  };
   // Revision 7, feature 2: the annealing dial, 0 to 10, default 3. The default is exactly the
   // revision-6 shake, so nothing about the shipped picture moves when the dial is not touched.
   // Three things rise with the level, and all three are stated here rather than in the simulator:
@@ -844,6 +860,16 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const k = 1 - (1 - DESAT) * level;
     return labToHex(lab[0], lab[1] * k, lab[2] * k);
   }
+  // The arriving square's fill: the accent at TINT_CHROMA of its chroma, same lightness and hue.
+  // Full `--new` is the panel's star colour, chosen to read as a mark on white; on the stage,
+  // filling a whole square against drained greens, it shouted. Softening the FILL and leaving the
+  // outline at the full accent keeps the convention pointing at the same square while letting the
+  // packing keep the viewer's eye. Drained rather than blended toward the square's own colour: a
+  // blend from green to scarlet passes through mud, and a chroma step does not move the hue at all.
+  const SCARLET_FILL = (function () {
+    const lab = hexToLab(SCARLET);
+    return labToHex(lab[0], lab[1] * TINT_CHROMA, lab[2] * TINT_CHROMA);
+  })();
   // ---------------------------------------------------------------- colour: the angle map (revision 11)
   // One colouring, always on, no rule to choose. **Hue is a function of the angle**, and shade is
   // the square's full-side contact count, darkest at four, exactly as the atlas shades.
@@ -968,6 +994,57 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     return list.map((a, i) => fillFor(map.slotOf(a), cs.length > i ? cs[i] : 0));
   }
 
+  // The atlas's hue order, for a frame that is meant to match a rendering. `slotForAngle` gives a
+  // class the slot its own angle falls in, which is what keeps a square's hue steady from frame to
+  // frame; `_assign_hues` in sqpack/render/color.py instead pins right angles to 0 and 45 degree
+  // tilts to 1 and hands the rest out from 2 BY DESCENDING CLASS SIZE, ties to the class holding
+  // the lowest-numbered square. The two agree on every axis-aligned square and disagree on every
+  // tilt that is neither square nor 45 degrees -- measured against the renderings by
+  // `compare_palette.py`, n = 11's five tilted squares came out `#3ed5ec` here against the atlas's
+  // `#dd87b8`, and n = 17's six came out `#b9e53c`, the lightest and most chromatic fill in the
+  // whole ramp, against the same `#dd87b8`. That is the "brighter than the SVGs" the owner saw,
+  // and it is a difference of which hue, not of the ramp: every fill on both sides is one of the
+  // same hundred.
+  //
+  // Classes are formed exactly as `buildAngleMap` forms them, seam-safe mean and all, so the only
+  // thing that differs is the slot each class is given.
+  function buildAtlasMap(angles) {
+    const base = buildAngleMap(angles);
+    const unpinned = [];
+    const slots = base.centres.map(function (centre, k) {
+      if (angleGap(centre, 0) <= ANGLE_TOL) return 0;
+      if (angleGap(centre, 45) <= ANGLE_TOL) return 1;
+      unpinned.push(k);
+      return -1;
+    });
+    // Descending size, ties to the class met first -- classes are created in square order, so the
+    // class met first is the one holding the lowest-numbered square, which is the atlas's tie-break.
+    unpinned.sort(function (a, b) { return base.sizes[b] - base.sizes[a] || a - b; });
+    const free = Math.max(1, PALETTE.length - 2);
+    unpinned.forEach(function (k, position) { slots[k] = 2 + (position % free); });
+    return {
+      classes: base.classes,
+      centres: base.centres,
+      slots: slots,
+      sizes: base.sizes,
+      slotOf: function (angle) {
+        const a = foldAngle(Number(angle) || 0);
+        for (let k = 0; k < base.centres.length; k++) {
+          if (angleGap(a, base.centres[k]) <= ANGLE_TOL) return slots[k];
+        }
+        return slotForAngle(a);
+      },
+    };
+  }
+  // The atlas order as a pure function, as `angleFills` is for the stable one: angles and contact
+  // counts in, fills out, needing nothing on the stage.
+  function atlasFills(angles, contacts) {
+    const list = Array.from(angles || []);
+    const cs = Array.from(contacts || []);
+    const map = buildAtlasMap(list);
+    return list.map((a, i) => fillFor(map.slotOf(a), cs.length > i ? cs[i] : 0));
+  }
+
   // ------------------------------------------------- colour: the square's identity (revision 12)
   // The default, and the owner's own words for why: "I want default to be greens and color is
   // identity of the square, so same always."
@@ -1042,6 +1119,10 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   //                     by contacts: see `fillOf` for why.
   //   angle-stable      revision 11's discrete map, right angles teal and 45 degrees citron.
   //   angle-continuous  the ramp above.
+  // A fourth, `angle-atlas`, is NOT offered here on purpose: it is not a way of looking at the
+  // stage, it is the atlas's own answer for a finished picture, and Animate's resting frame is
+  // the only place it applies. Offering it as a choice would invite it onto a moving frame,
+  // where "which class is biggest" changes under the viewer and squares would swap hues.
   const COLOR_SCHEMES = ['identity', 'angle-stable', 'angle-continuous'];
   let colorScheme = 'identity';
   // The Animate exception, and it belongs to Animate alone. In Animate the *resting* frame may be
@@ -1059,14 +1140,22 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function fillOf(scheme, map, ident, angle, contacts) {
     if (scheme === 'identity') return identityFill(ident);
     if (scheme === 'angle-continuous') return rampFill(angle);
+    // `angle-stable` and `angle-atlas` differ in the MAP they are handed, not here: both ask the
+    // map for the class's slot and shade it by the contact count.
     return fillFor(map.slotOf(angle), contacts);
   }
-  // Which scheme this frame is actually painted in: the chosen one, unless Animate's standardising is
-  // on and the frame is at rest.
-  function schemeFor(resting) {
+  // Whether this frame's colours are on their way to the atlas's: Animate only, standardising on,
+  // and only over the chosen scheme's default. A frame answers with a LEVEL rather than a yes or
+  // no, because the repaint is a crossfade -- see `paintSquares`.
+  function standardizing() {
+    return colorScheme === 'identity' && state.mode === 'animate' && ANIMATE.standardize;
+  }
+  // Which scheme this frame is painted in, for the record. Mid-crossfade a frame is painted in
+  // neither, so it reports the one it is leaving until the fade is done: what this answers is
+  // "what are the colours of the picture a viewer is left looking at".
+  function schemeFor(rest) {
     if (colorScheme !== 'identity') return colorScheme;
-    if (state.mode === 'animate' && ANIMATE.standardize && resting) return 'angle-stable';
-    return 'identity';
+    return standardizing() && rest >= 1 - 1e-9 ? 'angle-atlas' : 'identity';
   }
 
   // ---------------------------------------------------------------- full-side contacts, live
@@ -1629,11 +1718,21 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // The beat one pair takes under continuous play, whether or not a run is on. Split out in
   // revision 8 so the sequence tab can price a range before the owner presses play: `timing` is
   // exactly what it was, and this is the branch it takes while a run is going.
+  // A pair where the arrangement does not rearrange: the new square is appended to a picture the
+  // previous n already had. Named here because both the beat and the drain ask the question.
+  function isStillPair(pairIndex) {
+    const p = PAIRS[pairIndex === undefined ? state.pair : pairIndex];
+    return p.kind === 'prefix' || p.kind === 'shared-picture';
+  }
   function continuousTiming(pairIndex, style) {
     const span = annealSpan(style);
-    const p = PAIRS[pairIndex === undefined ? state.pair : pairIndex];
-    const still = p.kind === 'prefix' || p.kind === 'shared-picture';
-    if (still && !state.continuous.fullBeat) return { dwell: CONTINUOUS.staticDwell, move: 0, settle: 0 };
+    if (isStillPair(pairIndex) && !state.continuous.fullBeat) {
+      return {
+        dwell: CONTINUOUS.staticDwell,
+        move: CONTINUOUS.staticMove,
+        settle: CONTINUOUS.staticSettle,
+      };
+    }
     return { dwell: CONTINUOUS.dwell, move: CONTINUOUS.move * span, settle: CONTINUOUS.settle };
   }
   function timing(pairIndex, style) {
@@ -1692,12 +1791,18 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // colours fade in on, so they arrive exactly where revision 6's desaturation locks the colour
   // back in, and it does not depend on whether the desaturation itself is on.
   function restLevel(sc, t) {
-    const on = smoothstep(ramp(t, sc.moveStart, sc.moveStart + (sc.moveEnd - sc.moveStart) * DESAT_IN));
-    const off = smoothstep(ramp(t, sc.moveEnd, sc.end));
+    const on = smootherstep(ramp(t, sc.moveStart, sc.moveStart + (sc.moveEnd - sc.moveStart) * DESAT_IN));
+    const off = smootherstep(ramp(t, sc.moveEnd, sc.end));
     return 1 - on * (1 - off);
   }
   function desatLevel(sc, t) {
     if (!state.desaturate) return 0;
+    // Nothing moves on a static append, so nothing is unsettled and nothing is muted. Without
+    // this the short move added for the arrival would drain a picture that is standing still.
+    if (
+      state.continuous.on && !state.continuous.fullBeat
+      && isStillPair() && !isPhysical(state.style)
+    ) return 0;
     return 1 - restLevel(sc, t);
   }
   // Revision 9: which steps playback is allowed to run over — always the range, there being one view.
@@ -1979,6 +2084,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const physicsCache = new Map();
   const PHYS_CACHE_MAX = 16;
   const smoothstep = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+  // Ken Perlin's sixth-degree ease: zero first AND second derivative at both ends, where
+  // smoothstep only zeroes the first. Used where a change has to start and stop invisibly.
+  const smootherstep = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * x * (x * (x * 6 - 15) + 10));
   const containerCurve = (u) => easeOut(clamp01(u / PHYS.grow));
   // A trajectory is computed in one of three modes. 'snap' is the shipped behaviour: the last
   // PHYS.blend of the move eases every square onto the record's pose and the final state is the
@@ -3820,15 +3928,30 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       paintTouching.add(a < b ? a * N + b : b * N + a);
     }
     drawMaskLinks(N);
+    // `rest` is how settled the picture is, 1 through the dwell, 0 through the motion, back to 1
+    // as the settle ends -- the drain's own curve read the other way up. The standardising repaint
+    // rides it, so the atlas colours arrive exactly as the chroma comes back instead of replacing
+    // the picture between two frames. It WAS a cut: at n = 17 the frame at 2.75 s was still the
+    // identity greens and the frame at 2.80 s was the atlas teals, a whole palette in one step.
+    const rest = clamp01(Number(resting) || 0);
+    const scheme = schemeFor(rest);
+    const standard = standardizing() ? rest : 0;
     const map = buildAngleMap(poseA);
-    const scheme = schemeFor(!!resting);
+    // Built only when it is going to be used: on a moving frame under a chosen angle scheme this
+    // is a second grouping of every square for nothing.
+    const atlas = standard > 0 ? buildAtlasMap(poseA) : null;
     paintOut.scheme = scheme;
-    for (let i = 0; i < motion.length; i++) {
-      motion[i].rect.setAttribute('fill',
-        desatHex(fillOf(scheme, map, motion[i].ident, poseA[i], paintContacts[i]), drain));
+    function paintedFill(ident, angle, contacts) {
+      const own = fillOf(colorScheme, map, ident, angle, contacts);
+      if (standard <= 0) return desatHex(own, drain);
+      const home = fillFor(atlas.slotOf(angle), contacts);
+      return desatHex(standard >= 1 ? home : mixHex(own, home, standard), drain);
     }
-    const own = fillOf(scheme, map, p.n + 1, poseA[p.n], paintContacts[p.n]);
-    newRect.setAttribute('fill', tint > 0 ? mixHex(own, SCARLET, tint) : desatHex(own, drain));
+    for (let i = 0; i < motion.length; i++) {
+      motion[i].rect.setAttribute('fill', paintedFill(motion[i].ident, poseA[i], paintContacts[i]));
+    }
+    const own = paintedFill(p.n + 1, poseA[p.n], paintContacts[p.n]);
+    newRect.setAttribute('fill', tint > 0 ? mixHex(own, SCARLET_FILL, tint) : own);
     paintOut.classes = map.classes;
     paintOut.centres = map.centres.slice();
     paintOut.sizes = map.sizes.slice();
@@ -3888,7 +4011,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     newNode.setAttribute('transform', 'translate(' + o.X[p.n] + ' ' + o.Y[p.n] + ') rotate(' + ang + ')' + grow);
     // An open-ended run is at rest exactly when it is not playing; Animate's standardising does not
     // reach it anyway, an optimisation being Pack's own playback.
-    paintSquares(p, side, drain, 0, o.size, !state.playing);
+    paintSquares(p, side, drain, 0, o.size, state.playing ? 0 : 1);
     mark.setAttribute('opacity', 0);
     linksGroup.setAttribute('opacity', 0);
     ghost.setAttribute('opacity', 0);
@@ -3969,7 +4092,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // At rest through the dwell and from the instant the settle ends, which are the two frames a
     // Animate leaves a viewer looking at.
     paintSquares(p, side, drain, appear > 0 ? TINT * (1 - settled) : 0, undefined,
-                 t <= sc.moveStart || t >= sc.end - 1e-9);
+                 restLevel(sc, t));
     mark.setAttribute('opacity', 0);
     if (state.links) {
       linksGroup.setAttribute('opacity', u <= 0 ? 0.35 : 1 - e);
@@ -4095,7 +4218,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     poseX[p.n] = nb[0]; poseY[p.n] = nb[1]; poseA[p.n] = nb[2];
     currentTrajectory = null;
     paintSquares(p, side, drain, k > 0 ? TINT * (1 - settled) : 0, undefined,
-                 t <= sc.moveStart || t >= sc.end - 1e-9);
+                 restLevel(sc, t));
     if (k > 0) {
       const scale = 0.8 + 0.2 * k;
       const pose = 'translate(' + nb[0] + ' ' + nb[1] + ') rotate(' + nb[2] + ')';
@@ -4964,7 +5087,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // callers. `colour()` is what the frame was painted from — the angle classes, their palette
     // slots, and every square's full-side contact count — and `fillsFor` is the map as a pure
     // function of angles and contacts, testable with nothing on the stage at all.
-    setColorRule, colour: colourState, fillsFor: angleFills,
+    setColorRule, colour: colourState, fillsFor: angleFills, atlasFillsFor: atlasFills,
     // Revision 12: colour is the square's identity by default, and the two angle maps are options.
     // `identityFills(k)` is the greens as a pure function of the identity, needing nothing on the
     // stage; the Animate standardising is an Animate-mode presentation setting and nothing else.
