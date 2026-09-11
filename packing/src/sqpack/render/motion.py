@@ -86,21 +86,25 @@ def validate_motion_trajectory(trajectory: PackingTrajectory) -> None:
         raise ValueError("motion requires non-decreasing logical time")
 
 
-MUTED_SATURATION = "0.35"
+MUTED_SATURATION = "0.12"
 """How far the colour drops on a frame that is not a packing.
 
-Saturation carries meaning here rather than mood. A frame at full colour is an
-arrangement that actually is a packing; a muted one is not -- mid-transition, squares
-overlapping, a state no one should read as a result. Tying the two together means a viewer
-cannot mistake the interesting middle of an animation for its answer, and it costs nothing,
-because the renderer already knows which frames are which."""
+Saturation carries meaning here rather than mood. A square at full colour is one that has
+locked into its final place; a muted one has not, and neither has the frame around it if
+nothing in it is a packing. Tying colour to that means a viewer cannot mistake the
+interesting middle of an animation for its answer, and it reads as the packing assembling
+itself rather than as a crossfade.
+
+Low on purpose. At a third of full saturation the muted state still competed with the
+locked one for attention; an eighth lets the locked squares carry the picture, which is the
+point of locking them one at a time."""
 
 
 def square_keyframes(
     trajectory: PackingTrajectory,
     square_index: int,
     scale: Decimal,
-    muted: tuple[bool, ...] | None = None,
+    muted: tuple[tuple[bool, ...], ...] | None = None,
 ) -> str:
     percentages = keyframe_percentages(tuple(frame.logical_time for frame in trajectory.frames))
     final_x, final_y, final_angle = pose_of(trajectory.frames[-1].squares[square_index])
@@ -114,8 +118,11 @@ def square_keyframes(
         # one on screen.
         turn = -short_quarter_turn(angle - final_angle)
         degrees = turn * 180 / Decimal(str(math.pi))
+        # Per square AND per frame, because locking is a property of one square at one
+        # moment: the corner squares settle first and take their colour while the tilted
+        # core is still moving, which is the whole reason to show the assembly this way.
         filter_rule = ""
-        if muted is not None and muted[len(rules)]:
+        if muted is not None and muted[len(rules)][square_index]:
             filter_rule = f";filter:saturate({MUTED_SATURATION})"
         rules.append(
             f"{percentage}{{transform:translate({format_svg_number(dx)}px,"
@@ -149,14 +156,23 @@ def append_motion_styles(
     scale: Decimal,
     duration_seconds: Decimal,
     reveal_final_overlay: bool = False,
-    muted: tuple[bool, ...] | None = None,
+    muted: tuple[tuple[bool, ...], ...] | None = None,
 ) -> None:
     validate_motion_trajectory(trajectory)
     if muted is None:
         # Derived from what each frame says it establishes, not passed in beside it. A
         # CANDIDATE frame is one nobody checked or one that is not a packing at all, and
         # those are exactly the frames whose colour should say so.
-        muted = tuple(frame.evidence is EvidenceTier.CANDIDATE for frame in trajectory.frames)
+        # A square that says it has not locked is muted; otherwise the frame's own
+        # evidence decides for all of them, which is what an animation with no notion of
+        # locking can say.
+        muted = tuple(
+            tuple(
+                not square.locked or frame.evidence is EvidenceTier.CANDIDATE
+                for square in frame.squares
+            )
+            for frame in trajectory.frames
+        )
     rules = []
     for index, track in enumerate(match_square_tracks(trajectory)):
         square_id = track[-1].square_id

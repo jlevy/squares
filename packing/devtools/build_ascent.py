@@ -34,6 +34,7 @@ import numpy as np
 
 from devtools.export_animation_svg import export_svg
 from devtools.known_structure import record
+from devtools.lock_order import lock_order
 from devtools.packing_strategy import run
 
 
@@ -145,7 +146,18 @@ def render_ascent(first: int, last: int, *, fair_steps: int = 2000) -> dict[str,
                 }
             )
 
-        frames.extend(state.animation)
+        # Each square takes its colour as it reaches its place, outside in and
+        # axis-aligned first. The order is the geometry's, not the run's: a viewer can
+        # predict where a square square to the wall belongs, so those locking first is
+        # both the clearest thing to watch and the least surprising.
+        target_poses, _ = record(n)
+        order = lock_order(target_poses, target_side)
+        produced = list(state.animation)
+        for index, entry in enumerate(produced):
+            share = (index + 1) / max(1, len(produced))
+            settled = set(order[: round(share * len(order))])
+            entry["locked"] = [i in settled for i in range(len(entry["squares"]))]
+        frames.extend(produced)
         poses, side = state.poses, state.side
 
     # Every frame carries the final square count, because a trajectory is one fixed set of
@@ -154,13 +166,19 @@ def render_ascent(first: int, last: int, *, fair_steps: int = 2000) -> dict[str,
     # rather than appearing. Without this the renderer refuses the whole film with
     # "trajectory square identity or order changed", and rightly, since it cannot know
     # which square became which.
-    parked = float(record(last)[1]) + 1.5
+    # Waiting squares sit INSIDE the final container, at the corner they will enter from.
+    # Parking them outside it put them beyond the viewBox, which the renderer sizes to the
+    # largest container in the trajectory: the film then drew squares in the margin and the
+    # packing itself came out squashed and overlapping. A square waiting at the corner of a
+    # box it has not joined yet reads correctly and costs the layout nothing.
+    final_side = float(record(last)[1])
+    corner = final_side - 0.5
     for frame in frames:
         missing = last - len(frame["squares"])
         if missing > 0:
-            frame["squares"] = frame["squares"] + [
-                [parked + 1.2 * index, parked, 0.0] for index in range(missing)
-            ]
+            frame["squares"] = frame["squares"] + [[corner, corner, 0.0]] * missing
+            # A square that has not arrived has certainly not locked.
+            frame["locked"] = list(frame.get("locked", [])) + [False] * missing
 
     # Only the last frame of the whole climb claims to be a record. An intermediate step
     # ends on the record for ITS n, which has fewer squares than the padded frames around
@@ -176,7 +194,9 @@ def render_ascent(first: int, last: int, *, fair_steps: int = 2000) -> dict[str,
         "name": f"atlas-ascent-{first:03d}-{last:03d}",
         "n": last,
         "guided": any(frame.get("guided") for frame in frames),
-        "duration_seconds": max(6.0, 0.9 * (last - first)),
+        # 0.7 s per step rather than a second: at a second the film drags, and the
+        # steps are short enough that the eye keeps up.
+        "duration_seconds": max(4.0, 0.7 * (last - first)),
         "palette": {"hue": "angle-class", "shade": "full-side-contact"},
         "reference": {"best_known": float(record(last)[1])},
         "frames": frames,

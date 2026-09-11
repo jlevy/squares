@@ -162,6 +162,6 @@ def test_colour_is_muted_exactly_where_a_frame_is_not_a_packing() -> None:
         kind=traj.kind,
         label=traj.label,
     )
-    css = square_keyframes(settled, 0, Decimal(100), (True, False))
+    css = square_keyframes(settled, 0, Decimal(100), ((True,), (False,)))
     assert css.count("filter:saturate") == 1, "only the unchecked frame is muted"
     assert css.index("filter:saturate") < css.index("100%"), "and it is the first one"

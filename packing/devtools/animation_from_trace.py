@@ -35,7 +35,7 @@ from sqpack.render.model import (
 from sqpack.yamlio import safe_load
 
 
-def _renamed(frame: PackingFrame) -> PackingFrame:
+def _renamed(frame: PackingFrame, locked: list[bool] | None = None) -> PackingFrame:
     """Give pose-built squares the names the witness uses.
 
     `frame_from_pose_arrays` numbers from zero in two digits and the atlas witness numbers
@@ -53,6 +53,7 @@ def _renamed(frame: PackingFrame) -> PackingFrame:
                 corners=square.corners,
                 pose=square.pose,
                 label=str(index),
+                locked=True if locked is None else bool(locked[index - 1]),
             )
             for index, square in enumerate(frame.squares, start=1)
         ),
@@ -75,6 +76,22 @@ def _label(entry: dict[str, Any]) -> str:
         marks.append("not a packing")
     label = entry.get("phase", "frame")
     return f"{label} ({', '.join(marks)})" if marks else label
+
+
+def muting_from_animation(document: dict[str, Any]) -> tuple[tuple[bool, ...], ...]:
+    """Which squares are muted in which frame.
+
+    A frame that declares `locked` decides square by square; one that does not falls back
+    to its own feasibility, which is all an animation without a locking notion can say.
+    """
+    out = []
+    for entry in document["frames"]:
+        locked = entry.get("locked")
+        if locked is None:
+            out.append(tuple(not entry.get("feasible", True) for _ in entry["squares"]))
+        else:
+            out.append(tuple(not flag for flag in locked))
+    return tuple(out)
 
 
 def trajectory_from_animation(document: dict[str, Any]) -> PackingTrajectory:
@@ -151,7 +168,8 @@ def trajectory_from_animation(document: dict[str, Any]) -> PackingTrajectory:
                         else None
                     ),
                     source_id=document.get("name", "animation"),
-                )
+                ),
+                entry.get("locked"),
             )
         )
     return PackingTrajectory(

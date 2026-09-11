@@ -110,6 +110,13 @@ class SquareGeometry:
     corners: tuple[Point2, ...]
     pose: RigidPose | None = None
     label: str | None = None
+    locked: bool = True
+    """Whether this square has reached its final place in this frame.
+
+    Per square and per frame, which is what it has to be: an animation that locks the
+    outside squares first and the tilted core last needs to colour them one at a time.
+    Default true so a still, which is every frame of an atlas figure, is fully coloured
+    without anyone having to say so."""
 
 
 @dataclass(frozen=True)

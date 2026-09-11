@@ -367,7 +367,7 @@ def run(
 
 
 def animation_document(
-    strategy: dict[str, Any], state: State, *, duration_seconds: float = 8.0
+    strategy: dict[str, Any], state: State, *, duration_seconds: float = 5.0
 ) -> dict[str, Any]:
     """Turn a finished run into a PackingAnimation, the format the renderers read.
 

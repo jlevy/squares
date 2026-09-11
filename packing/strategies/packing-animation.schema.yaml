@@ -101,6 +101,15 @@ $defs:
           atlas uses, rather than from the float poses the run carried, so a final
           still is the same drawing as the atlas rendering and not merely one that
           looks like it. The two otherwise differ in the tenth significant digit.
+      locked:
+        type: array
+        items: {type: boolean}
+        description: >
+          Per square, whether it has reached its final place by this frame. A locked
+          square is drawn at full standard colour and an unlocked one is muted, so the
+          picture reads as the packing assembling itself rather than as a crossfade.
+          Omitted means the frame's own feasibility decides, which is the right default
+          for an animation that has no notion of locking.
       phase: {type: string, description: Which strategy phase produced this frame.}
       guided:
         type: boolean
