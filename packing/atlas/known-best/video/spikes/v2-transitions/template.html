@@ -87,7 +87,7 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
    The two numbers are the ones the panel itself prints, s(n) <= and s(n) >=, read from the record. */
 .gapbar { position: absolute; left: 6px; top: 40px; width: 694px; height: 240px; }
 /* The bar sits under the headline, so the first thing in the column is the n it is all about. */
-.gapbar-plot { position: absolute; left: 0; top: 56px; width: 680px; height: 172px; display: block; }
+.gapbar-plot { position: absolute; left: 0; top: 48px; width: 680px; height: 180px; display: block; }
 .gapbar-plot .track { fill: var(--track); }
 /* The bar's two ends, named by the formulas they are rather than by their values: area forbids
    anything below the left one and a grid achieves the right one, so the span is one unit side at
@@ -121,13 +121,18 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
    is the colour, and the colour is the only thing that says which bound it is -- scarlet for
    the proved lower bound, green for the best known upper bound, ink for anything that is
    neither. The same three in the panel below. */
+/* The modifiers are `is-lower` and `is-record`, not `lower` and `record`. The panel below has a
+   `.lower` row -- a 48 px serif line -- and a bare class selector reaches into the SVG as
+   readily as into a div: same specificity, later in the sheet, so it won, and the bar's lower
+   bound came out in a large serif while its upper bound stayed small and sans. The same trap
+   the `gap-open` rect is named around, and the same fix. */
 .gapbar-num { font-family: var(--sans); font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; fill: var(--ink); }
-.gapbar-num.lower { fill: var(--new); }
+.gapbar-num.is-lower { fill: var(--new); }
 .gapbar-end-num { font-family: var(--sans); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 0.45em; }
 /* The end's formula is the one piece of mathematics on the bar, so it is set as mathematics -- at
    the bar's own small size, so it reads as part of the instrument rather than as a fact. */
 .gapbar-end .katex { font-size: 24px; }
-.gapbar-num.record { fill: var(--met); font-weight: 700; }
+.gapbar-num.is-record { fill: var(--met); font-weight: 700; }
 /* The headline, on one line: `n = 11`, the label and the value reading as one statement rather
    than as a caption stacked over a number. They are two elements because only one of them
    changes -- `n =` is constant, so it lives outside the two fading layers and never blinks,
@@ -416,19 +421,23 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       </svg>
       <div id="facts">
         <div class="gapbar" id="gapbar">
-          <svg class="gapbar-plot" viewBox="0 -56 680 172" aria-hidden="true">
+          <svg class="gapbar-plot" viewBox="0 -64 680 180" aria-hidden="true">
             <rect class="track" x="0" y="0" width="680" height="26" rx="4" />
             <rect class="gap-open" id="gapbar-open" x="0" y="0" width="0" height="26" />
-            <line class="end-tick" x1="1.5" y1="-6" x2="1.5" y2="32" />
-            <line class="end-tick" x1="678.5" y1="-6" x2="678.5" y2="32" />
+            <!-- The scale's two ends are ticks ON the rail, not the rail's own ends: the bar
+                 runs the full width of the column and sqrt(n) and sqrt(n)+1 are marked a little way
+                 in from each end. That is what a scale looks like, and it is also what stops a
+                 bound arrow at either extreme from being cut in half by the viewBox. -->
+            <line class="end-tick" x1="34" y1="-6" x2="34" y2="32" />
+            <line class="end-tick" x1="646" y1="-6" x2="646" y2="32" />
             <!-- The two bounds, as arrows pointing at the track from the sides a reader reads
                  them from: the proved lower bound from below in scarlet, the best known upper
                  bound from above in green, the same two colours their lines carry in the panel. -->
             <g id="gapbar-record"><path class="arrow upper" d="M -11 -22 L 11 -22 L 0 -3 Z" /></g>
             <g id="gapbar-lower"><path class="arrow lower" d="M -11 48 L 11 48 L 0 29 Z" /></g>
             <line class="hand-stem" id="gapbar-hand" x1="0" y1="-4" x2="0" y2="30" />
-            <text class="gapbar-num lower" id="gapbar-lower-label" x="0" y="88" text-anchor="middle"></text>
-            <text class="gapbar-num record" id="gapbar-record-label" x="0" y="-32" text-anchor="middle"></text>
+            <text class="gapbar-num is-lower" id="gapbar-lower-label" x="0" y="88" text-anchor="middle"></text>
+            <text class="gapbar-num is-record" id="gapbar-record-label" x="0" y="-32" text-anchor="middle"></text>
           </svg>
           <div class="gapbar-end gapbar-area"><span id="gapbar-area"></span><span class="gapbar-end-num" id="gapbar-area-num"></span></div>
           <div class="gapbar-end gapbar-grid"><span id="gapbar-grid"></span><span class="gapbar-end-num" id="gapbar-grid-num"></span></div>
@@ -773,6 +782,9 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // The range Animate was last left on, so switching to Pack and back does not lose it. Null until
     // Animate has been entered once, when it opens on the whole corpus.
     animate: null,
+    // And the n Pack was last left on, for the same reason in the other direction. Null until Pack
+    // has been left once, which cannot happen before the page has an n on the stage.
+    packN: null,
     // Continuous play across the whole sequence: on, whether static appends take the full beat, and
     // whether the next pair is simulated during this one's dwell.
     continuous: { on: false, fullBeat: false, prefetch: true },
@@ -3068,15 +3080,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     if (state.mode !== 'pack' || state.initial !== 'previous' || state.playing) return;
     if (opt === null) { state.optimizing = true; opt = newOptimizer('previous'); }
   }
-  // Leaving Pack gives the timeline back, but only from a staged arrangement nobody has touched: a
-  // run that has stepped, or that a hand has edited, is work and is never thrown away.
-  function unstagePack() {
-    if (state.playing) return;
-    if (opt !== null && opt.steps === 0 && !opt.edited && opt.kind === 'previous') {
-      state.optimizing = false;
-      opt = null;
-    }
-  }
   // What the growth is doing, and — the only figure that is about a packing rather than a picture —
   // the box the arrangement would need **at unit size**.
   function growthState() {
@@ -3351,6 +3354,11 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function markGapBar() { gapBarDirty = true; }
   const GAPBAR = {
     width: 680,
+    // How far in from each end of the rail the scale's own ends are marked. The rail is the full
+    // width of the column; `sqrt(n)` sits at `inset` and `sqrt(n) + 1` at `width - inset`, so the
+    // bar reads as a scale with two ticks on it rather than as a box with two hard ends -- and an
+    // arrow pinned to either extreme has room to be drawn whole.
+    inset: 34,
     // **Both ends are formulas, and the span is one unit side at every n.**
     //
     // The left end is `sqrt(n)`: n unit squares have area n, so no box with a smaller side can hold
@@ -3444,7 +3452,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   function gapbarX(value) {
     const i = gapbarInfo;
-    return clamp01((value - i.lo) / (i.hi - i.lo)) * GAPBAR.width;
+    const span = GAPBAR.width - 2 * GAPBAR.inset;
+    return GAPBAR.inset + clamp01((value - i.lo) / (i.hi - i.lo)) * span;
   }
   function updateGapBar(p, B, g, mode) {
     const info = gapbarSetup(p, state.liveN);
@@ -5335,28 +5344,51 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // the label: the mode value is `'animate'`, and nothing reads `sweep` behind a button saying
   // Animate. **`setMode('sweep')` is still accepted**, as a deprecated alias, so anything that
   // still calls it keeps working; it is the one place the old name survives.
+  //
+  // **Revision 15: switching is a reset, and each mode keeps its own n.** It used to carry whatever
+  // was on the stage across, on the reasoning that a run is work and work is not thrown away. What
+  // that produced was a page describing one thing and drawing another: leaving Pack mid-run put the
+  // optimiser's arrangement under Animate's header, so the panel read `showing the step 10 -> 11`
+  // over a stage holding eleven squares that had been pushed around for 110 steps, with the run's
+  // clock still counting; and entering Animate re-keyed the bar to the pair's first n while the
+  // stage still held the second's, which is a total overlap of 1.0 and a packing the page itself
+  // calls invalid. Neither is recoverable by looking at it. So the switch now ends the run, puts
+  // the clock at zero and rebuilds the stage from the mode it is entering.
+  //
+  // Each mode remembering its own n is what keeps that from being lossy: Pack's n and Animate's
+  // range are stored on the way out and restored on the way in, so Pack(17) -> Animate -> Pack is
+  // Pack(17) again, and Animate always opens at the first step of its range rather than wherever
+  // Pack happened to leave the stage.
   function setMode(next) {
     const want = (next === 'animate' || next === 'sweep') ? 'animate' : 'pack';
     if (want === state.mode) { updateSegments(); return state.mode; }  // updateSegments coerces the style
     if (state.mode === 'animate') state.animate = { from: state.range.from, to: state.range.to };
+    else state.packN = stepN();
     state.mode = want;
+    // The reset itself: nothing that belonged to the mode being left survives into the one being
+    // entered. `opt` is the open-ended run, `state.t` the animation clock.
     pause();
+    state.optimizing = false;
+    opt = null;
+    state.t = 0;
     // Revision 14: the tween is Animate's, so entering Pack with it selected falls back to the
     // physics and leaves the reason under the select; leaving Pack clears the note, the choice
     // being available again.
     if (want === 'pack' && state.style === 'tween') { state.style = 'physics'; solverNote = TWEEN_NOTE; }
     if (want === 'animate') solverNote = '';
     if (want === 'pack') {
-      const n = stepN();
-      setRange(n, n);
       // Revision 13: Pack is where the starting size lives. Revision 14: and where all n squares are
-      // on the stage from the first frame, so entering Pack always stages the arrangement.
+      // on the stage from the first frame, so entering Pack always stages the arrangement --
+      // `setRange` collapsed onto one n selects that pair, which is what stages it.
+      const n = state.packN === null ? stepN() : state.packN;
+      setRange(n, n);
       stagePack();
     } else {
       const kept = state.animate;
       setRange(kept === null ? RANGE_MIN : kept.from, kept === null ? RANGE_MAX : kept.to);
-      // ... and leaving it gives the timeline back, which is what a range of steps is drawn from.
-      unstagePack();
+      // Animate opens at the first step of its range, so the header, the bar and the stage are all
+      // describing the same n from the first frame.
+      select(rangeBounds().first);
     }
     updateSegments();
     render();
