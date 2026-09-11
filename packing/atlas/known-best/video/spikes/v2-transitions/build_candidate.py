@@ -95,6 +95,14 @@ NEW_RULE = "lowest total matching cost after removal from n+1, then fewest full-
 # Timeline defaults, seconds. Revision 2: a little faster (was 1.2 / 1.6 / 0.5).
 # The single-step beat. The owner's pacing: 0.7 to read the packing, 1.2 to rearrange, and a
 # settle long enough for the colour to come back without the film dragging.
+#: The footer `devtools/check_documentation.py` requires on durable Markdown. Written here rather
+#: than added by hand afterwards, because this file is regenerated on every build.
+DOC_FOOTER = (
+    "<!-- This document follows common-doc-guidelines.md.\n"
+    "See github.com/jlevy/practical-prose and review guidelines before editing.\n"
+    "-->\n"
+)
+
 TIMING = {"dwell": 0.7, "move": 1.2, "settle": 0.5}
 # Revision 5 staging: in the default motion (add, then make room) the new square arrives over
 # the first ARRIVAL_FRACTION of the move while the container grows, and the existing squares
@@ -1272,7 +1280,10 @@ def main(argv: list[str] | None = None) -> int:
         "pairs": stats,
     }
     (out / "transition-stats.json").write_text(compact_json(stats_doc))
-    (out / "stats-summary.md").write_text(summary + "\n")
+    # The footer the documentation floor requires on every durable Markdown file. It was being
+    # maintained by HAND on a generated file, so every rebuild silently dropped it and the floor
+    # only noticed on the next commit. A generated document's footer is the generator's to write.
+    (out / "stats-summary.md").write_text(summary + "\n\n" + DOC_FOOTER)
 
     template = (HERE / "template.html").read_text()
     metrics = type_metrics()

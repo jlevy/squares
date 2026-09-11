@@ -90,3 +90,7 @@ transitions plus a closing dwell) Per-kind schedule, static appends at dwell 0.5
 0.0 s, settle 0.4 s (no move): 158 × 2.4 + 165 × 0.9 + 0.7 = 528.4 s = 8.8 min Per-kind
 schedule, static appends at dwell 0.5 s, move 0.4 s, settle 0.3 s (short move): 158 ×
 2.4 + 165 × 1.2 + 0.7 = 577.9 s = 9.6 min
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
