@@ -358,15 +358,16 @@ def main() -> int:
         blind = page.evaluate("atlasTransitions.gapBar()")
         check(blind["side"] > 0 and 0 <= blind["x"] <= 1, f"the bar loses its indicator in blind mode: {blind}")
         page.evaluate("atlasTransitions.setBlind(false); atlasTransitions.setSnap(true); atlasTransitions.setStyle('tween')")
-        # The bar is the single-step tab's, and it must never reach the eyebrow below it.
+        # The bar is the single-step tab's, and it must never reach the `n =` line below it
+        # (which took the dropped eyebrow's space, and is the first panel text under the bar).
         geom = page.evaluate(
             "() => { const s = document.getElementById('stage').getBoundingClientRect();"
             " const k = s.width / 1920;"
             " const b = document.getElementById('gapbar').getBoundingClientRect();"
-            " const e = document.querySelector('.eyebrow').getBoundingClientRect();"
+            " const e = document.querySelector('.nline').getBoundingClientRect();"
             " const f = document.getElementById('facts').getBoundingClientRect();"
             " return {bottom: (b.bottom - s.top) / k, top: (b.top - s.top) / k,"
-            "         eyebrow: (e.top - s.top) / k, right: (b.right - s.left) / k,"
+            "         nline: (e.top - s.top) / k, right: (b.right - s.left) / k,"
             "         panelRight: (f.right - s.left) / k,"
             "         shown: getComputedStyle(document.getElementById('gapbar')).display !== 'none'}; }"
         )
@@ -391,7 +392,7 @@ def main() -> int:
         check(parts["lowLabel"]["r"] < parts["recLabel"]["l"] - 0.5,
               f"the bar's two numbers overlap: {parts['lowLabel']} and {parts['recLabel']}")
         check(geom["shown"], "the gap bar is not drawn")
-        check(geom["bottom"] < geom["eyebrow"] - 0.5, f"the gap bar reaches the eyebrow: {geom}")
+        check(geom["bottom"] < geom["nline"] - 0.5, f"the gap bar reaches the `n =` line: {geom}")
         check(geom["right"] <= geom["panelRight"] + 0.5, f"the gap bar runs past the panel: {geom}")
 
         # ---- step 5 (revision 9): the bar stops animating. The sparkline is gone, the hand holds
@@ -2324,7 +2325,7 @@ def main() -> int:
         "to 17, nine quick picks each setting both ends, clamped both ways; the range widening to the "
         "whole corpus in one click, clamped, collapsing to one step, and scoping the run and the bar's "
         "scale; the gap bar reading the panel's own s(n) bounds, sweeping to the record under style A, "
-        "missing under a free run, alive in blind mode, and clear of the eyebrow and the panel edge; "
+        "missing under a free run, alive in blind mode, and clear of the `n =` line and the panel edge; "
         "the bar holding still through the motion and catching up when it settles, with the per-frame "
         "sparkline gone and refreshGap redrawing it on demand; three initial conditions, the random "
         "one reproducible and the grid one the trivial grid, an open-ended run that accumulates "

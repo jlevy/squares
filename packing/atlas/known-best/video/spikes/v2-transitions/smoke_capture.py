@@ -74,18 +74,18 @@ REVIEW = [
 
 
 # The panel's text slots, as template.html places them (stage y ranges), for the ink measurement.
-# Revision 4's slots; the bands end where the next slot's box begins.
+# The two headed sections; each band ends where the next slot's box begins.
 INK_BANDS = [
-    ("eyebrow", 200, 250),
-    ("n-line", 250, 300),
-    ("numeral", 300, 424),
-    ("side", 424, 488),
-    ("exact", 488, 552),
-    ("lower", 552, 598),
-    ("lower-note", 598, 646),
-    ("badges", 660, 708),
-    ("open", 740, 816),
-    ("legend", 854, 900),
+    ("n-line", 196, 300),
+    ("numeral", 300, 400),
+    ("proved", 416, 452),
+    ("side", 452, 508),
+    ("lower", 508, 566),
+    ("star", 566, 608),
+    ("exact", 608, 660),
+    ("badges", 664, 704),
+    ("open", 732, 772),
+    ("open-items", 772, 816),
 ]
 INK_X0, INK_X1 = 1100, 1900   # the panel's columns; the packing ends at x = 1060
 INK_THRESHOLD = 160           # a pixel darker than this (mean of R, G, B) is ink

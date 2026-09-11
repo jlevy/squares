@@ -137,7 +137,7 @@ APPROX_STROKE_UNITS = 26
 TYPE_SCALE = [28, 34, 44, 96]
 NUMERAL_PX = 96      # .n-val
 NUMERAL_WEIGHT = 400
-N_LINE_PX = 34       # .nline
+N_LINE_PX = 96       # .nline, the same size as the numeral it labels
 N_LINE_LEFT_PX = 6   # .nline left, the panel's text edge; the numeral's box is offset from it
 
 # Pairs the demonstration must carry, identified by n (the pair is n -> n+1).

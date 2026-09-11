@@ -72,14 +72,15 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
 #facts { position: absolute; left: 1160px; top: 0; width: 700px; height: 1080px; }
 .facts-layer { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: opacity; }
 /* Type scale, revision 4: four sizes on the stage, 28 / 34 / 44 / 96 px, nothing smaller than
-   28 so the page reads on video. 28 is every small line (the eyebrow, the small-caps notes, the
-   badge labels, the open group, the legend, the progress bar's labels); 34 the `n =` line, the
-   exact line and the lower bound; 44 the side line; 96 the numeral, PT Serif Regular, 3.4 times
-   the smallest. The badge glyphs are drawn marks in the poster's boxes, not stage text. */
+   28 so the page reads on video. 28 is every small line (the PROVED and OPEN heads, the
+   small-caps note, the badge labels, the open group, the progress bar's labels); 34 the exact
+   line; 44 both bound lines, one size because they are one kind of fact; 96 the `n =` line and
+   the numeral, PT Serif Regular, 3.4 times the smallest.
+   The badge glyphs are drawn marks in the poster's boxes, not stage text. */
 /* Revision 8, feature 4: how close the arrangement on the stage is to the best known, drawn on a
    scale that runs from the proved lower bound to comfortably past the record. The panel's top 200 px
    were empty, and this is what goes in them: the head row at 24, the bar at 66, the two tick numbers
-   below it, the whole thing ending at 166 with the eyebrow at 200.
+   below it, the whole thing ending at 166, clear of the `n =` line at 196.
    Revision 9 folds the two tabs into one view, so the bar is always drawn: the range is the spine and
    its `to` end is the n the bar measures.
    The two numbers are the ones the panel itself prints, s(n) <= and s(n) >=, read from the record. */
@@ -113,38 +114,52 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
 .gapbar.is-met .gapbar-plot .hand-stem { stroke: var(--met); }
 .gapbar-num { font-family: var(--sans); font-size: 28px; font-weight: 450; fill: var(--muted); }
 .gapbar-num.record { fill: var(--ink); font-weight: 600; }
-.eyebrow {
-  position: absolute; left: 6px; top: 200px;
-  font-family: var(--sans); font-weight: 550; font-size: 28px; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--label);
-}
-/* The headline: `n =` on its own small line (italic n, upright equals, muted) above the numeral,
-   the two left-aligned on their ink. The numeral's box offset is not in this stylesheet: the
+/* The headline: `n =` on its own line above the numeral, at the SAME size and left-aligned on
+   their ink -- the label reads as part of the number rather than as a caption over it, which
+   is why it is sized to match and kept muted rather than shrunk. The eyebrow that used to sit
+   above it said "Best known packing", which every packing on screen already is, so it named
+   nothing and has been dropped; the n line takes its space.
+   The numeral's box offset is not in this stylesheet: the
    build reads the digits' left side bearings from the regular face (median 49 units, 4.7 px at
-   96 px) and the italic n's (43 units, 1.5 px at 34 px) and emits `metrics.numeral_left_px`,
+   96 px) and the italic n's, now at the same 96 px, and emits `metrics.numeral_left_px`,
    which the script applies, so the ink of the median digit begins where the n's does.
    The `n =` line is constant, so it lives outside the two fading layers and never blinks.
    Every slot below is fixed, so nothing jumps between n. */
-.nline { position: absolute; left: 6px; top: 250px; height: 40px; font-family: var(--serif); font-size: 34px; line-height: 40px; color: var(--muted); white-space: nowrap; }
+.nline { position: absolute; left: 6px; top: 196px; height: 104px; font-family: var(--serif); font-size: 96px; line-height: 104px; color: var(--muted); white-space: nowrap; }
 .nline .n-var { font-style: italic; font-weight: 400; margin-right: 0.22em; }
 .nline .n-eq { font-weight: 400; }
 .numeral { position: absolute; left: 0; top: 300px; font-family: var(--serif); color: var(--ink); line-height: 1; white-space: nowrap; will-change: transform; }
 .numeral .n-val { font-weight: 400; font-size: 96px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.side { position: absolute; left: 6px; top: 424px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+/* The panel says two things about n, and says them under headings: what is proved, then what
+   is open. The heads are the gap bar's head style, so the three headings in the column read as
+   one set. Every slot below is fixed, so nothing jumps between n; a slot with nothing to say
+   for this n stays empty at its height rather than closing up. */
+.section-head {
+  position: absolute; left: 6px; height: 34px; line-height: 34px; font-family: var(--sans);
+  font-size: 28px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--quiet); white-space: nowrap;
+}
+.head-proved { top: 416px; }
+.head-open { top: 732px; }
+/* The two bounds, one above the other at one size: a best known side and a proved lower bound
+   are the same kind of fact about the same quantity, and a reader is meant to compare them, so
+   showing one larger than the other would rank them. Both are proved -- a construction proves
+   its upper bound -- which is why both sit under PROVED and only the questions sit under OPEN. */
+.side  { position: absolute; left: 6px; top: 452px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+.lower { position: absolute; left: 6px; top: 508px; height: 56px; font-family: var(--serif); font-size: 44px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
 .side .fn, .lower .fn { font-style: italic; }
 .side .arg, .lower .arg { margin-left: 0.04em; }
 .side .rel, .lower .rel { margin: 0 0.3em; color: var(--label); }
-/* One line under the value it annotates: the closed form in the text face, or a small-caps note. */
-.exact { position: absolute; left: 6px; top: 488px; height: 46px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
+/* A bound first proved here, in scarlet on the line directly under the bound it is about --
+   the digits themselves are never coloured, so this line is what says it. */
+.star-line { position: absolute; left: 6px; top: 566px; height: 40px; display: flex; align-items: center; white-space: nowrap; }
+/* Under both bounds, annotating the value above them: the closed form in the text face, or a
+   small-caps note giving its degree. Never to the right of a value. */
+.exact { position: absolute; left: 6px; top: 608px; height: 46px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
 .exact .rel { margin-right: 0.3em; }
-.exact .note, .lower-note .note { font-family: var(--sans); font-size: 28px; font-weight: 500; font-variant-caps: all-small-caps; letter-spacing: 0.09em; color: var(--muted); }
-/* The proved lower bound for an open n, `s(n) ≥ value` in the side line's style at the exact
-   line's size, with its small-caps note on its own line directly below. Proved n leave both
-   slots empty at their fixed heights. The digits are never coloured: when the bound was first
-   proved here the star badge already says so, in scarlet. */
-.lower { position: absolute; left: 6px; top: 552px; height: 46px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--ink); white-space: nowrap; }
-.lower-note { position: absolute; left: 6px; top: 598px; height: 36px; line-height: 36px; white-space: nowrap; }
-/* The poster's badges, in a row with short labels. Fixed height: the row never reflows. */
+.exact .note { font-family: var(--sans); font-size: 28px; font-weight: 500; font-variant-caps: all-small-caps; letter-spacing: 0.09em; color: var(--muted); }
+/* The poster's badges, in a row with short labels: what this record establishes. Fixed height,
+   so the row never reflows. */
 .badges { position: absolute; left: 6px; top: 664px; height: 40px; display: flex; align-items: center; gap: 34px; white-space: nowrap; }
 .badge-item { display: inline-flex; align-items: center; gap: 11px; font-family: var(--sans); font-size: 28px; font-weight: 500; color: var(--label); letter-spacing: 0.01em; }
 .badge-item svg { width: 36px; height: 36px; display: block; flex: none; }
@@ -159,10 +174,8 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
    stroke in the same units (the stroke width scales with the path), as the slideshow draws it. */
 .badge .glyph-path { fill: var(--muted); stroke: var(--muted); stroke-linejoin: round; }
 .badge .star { fill: var(--new); }
-/* What the record leaves open for this n. Quieter, and a fixed two-line height. */
-.open { position: absolute; left: 6px; top: 740px; height: 76px; }
-.open-head { height: 34px; line-height: 34px; font-family: var(--sans); font-size: 28px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--quiet); }
-.open-items { position: absolute; left: 0; top: 40px; height: 36px; display: flex; align-items: center; gap: 28px; white-space: nowrap; }
+/* OPEN: what the record leaves unsettled for this n, in the same badge row shape, a step quieter. */
+.open-items { position: absolute; left: 6px; top: 772px; height: 40px; display: flex; align-items: center; gap: 28px; white-space: nowrap; }
 .open-item { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
 .open-item svg { width: 32px; height: 32px; display: block; flex: none; }
 .open-none { font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
@@ -410,7 +423,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
             <text class="gapbar-num record" id="gapbar-record-label" x="0" y="88" text-anchor="middle"></text>
           </svg>
         </div>
-        <div class="eyebrow">Best known packing</div>
         <div class="nline" aria-hidden="true"><span class="n-var">n</span><span class="n-eq">=</span></div>
         <div class="facts-layer" id="facts-a"></div>
         <div class="facts-layer" id="facts-b"></div>
@@ -1469,9 +1481,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       line.appendChild(text('span', 'val', value));
       return line;
     }
+    // PROVED, in the order a reader wants it: the best known side, the proved lower bound
+    // under it, the scarlet mark when that bound was first proved here, the closed form or
+    // degree note for the value, and the badges. Both bounds are proved facts -- a construction
+    // proves its upper bound -- so both belong here, and OPEN below carries the questions.
+    layer.appendChild(text('div', 'section-head head-proved', 'Proved'));
     layer.appendChild(functionLine('side', f.relation, f.side));
-    // The line under the value: the closed form when there is one the value does not already
-    // state, or the degree note in small caps. Never to the right of the value.
+    // A proved n has no separate lower bound to state; its slot stays empty at its height.
+    layer.appendChild(f.lower !== null ? functionLine('lower', '≥', f.lower) : text('div', 'lower'));
+    const starLine = text('div', 'star-line');
+    if (f.star) starLine.appendChild(badgeItem('badge-item is-star', '', 'star', STAR_LABEL));
+    layer.appendChild(starLine);
     const exact = text('div', 'exact');
     if (f.exact && f.exact !== f.side) {
       exact.appendChild(text('span', 'rel', '='));
@@ -1480,34 +1500,23 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       exact.appendChild(text('span', 'note', 'algebraic' + (f.degree ? ' · degree ' + f.degree : '')));
     }
     layer.appendChild(exact);
-    // The proved lower bound for an open n, and its note on the line directly below; both slots
-    // stay, empty, for a proved n.
-    const lowerNote = text('div', 'lower-note');
-    if (f.lower !== null) {
-      layer.appendChild(functionLine('lower', '≥', f.lower));
-      lowerNote.appendChild(text('span', 'note', 'proved lower bound'));
-    } else {
-      layer.appendChild(text('div', 'lower'));
-    }
-    layer.appendChild(lowerNote);
     const badges = text('div', 'badges');
-    if (f.star) badges.appendChild(badgeItem('badge-item is-star', '', 'star', STAR_LABEL));
     for (const b of f.badges) {
       const label = BADGE_LABELS[b.glyph + '/' + b.style];
       if (label === undefined) throw new Error('unknown badge ' + b.glyph + '/' + b.style + ' for n = ' + n);
       badges.appendChild(badgeItem('badge-item', b.glyph, b.style, label));
     }
     layer.appendChild(badges);
-    const open = text('div', 'open');
-    open.appendChild(text('div', 'open-head', 'Open'));
+    // OPEN, always headed even when nothing is open, so the pair of headings is the panel's
+    // shape rather than something that appears for some n and not others.
+    layer.appendChild(text('div', 'section-head head-open', 'Open'));
     const items = text('div', 'open-items');
     if (f.open.length === 0) {
       items.appendChild(text('span', 'open-none', 'none'));
     } else {
       for (const key of f.open) items.appendChild(badgeItem('open-item', '?', 'query', OPEN_LABELS[key] || key));
     }
-    open.appendChild(items);
-    layer.appendChild(open);
+    layer.appendChild(items);
     return numeral;
   }
   let numeralA = null;
