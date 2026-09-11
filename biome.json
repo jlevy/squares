@@ -10,6 +10,7 @@
       "**/*.js",
       "**/*.mjs",
       "**/*.cjs",
+      "**/*.ts",
       "**/*.css",
       "package.json",
       "package-lock.json",
@@ -62,6 +63,19 @@
           "correctness": {
             "noUnusedVariables": "off",
             "noUnusedFunctionParameters": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "packing/src/sqpack/motion_lab/assets/**/*.js",
+        "packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noRedundantUseStrict": "off"
           }
         }
       }

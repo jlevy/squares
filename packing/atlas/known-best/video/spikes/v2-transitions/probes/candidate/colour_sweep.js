@@ -11,7 +11,9 @@
   const seen = new Set();
   const collect = () => {
     const n = api.state().n;
-    document.querySelectorAll("#squares g[data-identity]").forEach((g) => {
+    /** @type {NodeListOf<SVGGElement>} */ (
+      document.querySelectorAll("#squares g[data-identity]")
+    ).forEach((g) => {
       if (Number(g.dataset.identity) <= n) {
         seen.add(g.firstElementChild.getAttribute("fill"));
       }

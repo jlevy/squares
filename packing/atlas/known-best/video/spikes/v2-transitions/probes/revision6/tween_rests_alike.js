@@ -5,12 +5,16 @@
   A.setStyle("tween");
   A.setSnap(false);
   A.seek(A.duration());
-  const free = Array.from(document.querySelectorAll("#squares g"))
+  const free = Array.from(
+    /** @type {NodeListOf<SVGGElement>} */ (document.querySelectorAll("#squares g")),
+  )
     .filter((g) => g.style.display !== "none")
     .map((g) => g.getAttribute("transform"));
   A.setSnap(true);
   A.seek(A.duration());
-  const snap = Array.from(document.querySelectorAll("#squares g"))
+  const snap = Array.from(
+    /** @type {NodeListOf<SVGGElement>} */ (document.querySelectorAll("#squares g")),
+  )
     .filter((g) => g.style.display !== "none")
     .map((g) => g.getAttribute("transform"));
   return JSON.stringify(free) === JSON.stringify(snap);

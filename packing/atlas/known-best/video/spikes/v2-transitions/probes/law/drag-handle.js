@@ -7,7 +7,7 @@
   return {
     law: { rigidity: l.rigidity, repulsion: l.repulsion, attraction: l.attraction, range: l.range },
     sliders: ["rigidity", "repulsion", "attraction", "range"].map(
-      (k) => document.getElementById(`law-${k}`).value,
+      (k) => /** @type {HTMLInputElement} */ (document.getElementById(`law-${k}`)).value,
     ),
     shown: document.getElementById("lp-pull").style.display !== "none",
   };

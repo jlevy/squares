@@ -12,6 +12,6 @@
     "lint": "biome ci --error-on-warnings .",
     "lint:fix": "biome check --write --unsafe .",
     "format:check": "biome format .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.probes.json && tsc -p tsconfig.motion-lab.json"
   }
 }

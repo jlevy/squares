@@ -1,4 +1,6 @@
 (() => {
+  "use strict";
+
   const EPSILON = 1e-10;
   const QUARTER_TURN = Math.PI / 2;
   const WALLS = ["left", "right", "bottom", "top"];

@@ -1,2 +1,5 @@
 // The `disabled` property of the element with this id.
-(o) => document.getElementById(o.id).disabled;
+(o) =>
+  /** @type {HTMLButtonElement | HTMLInputElement | HTMLSelectElement} */ (
+    document.getElementById(o.id)
+  ).disabled;

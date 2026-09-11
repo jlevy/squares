@@ -1,4 +1,6 @@
 (() => {
+  "use strict";
+
   const editor = globalThis.MotionLabEditor;
   if (!editor) {
     throw new Error("Motion Lab editor model is unavailable");
@@ -19,19 +21,22 @@
   const probeLayer = byId("probe-layer");
   const labelLayer = byId("free-label-layer");
   const liveRegion = byId("live-region");
-  const scenarioSelect = byId("scenario-select");
-  const nInput = byId("n-input");
-  const sideInput = byId("side-input");
-  const seedInput = byId("seed-input");
-  const snappingToggle = byId("snapping-toggle");
-  const rotateLeftButton = byId("rotate-left-button");
-  const rotateRightButton = byId("rotate-right-button");
-  const runButton = byId("run-button");
-  const downloadButton = byId("download-button");
+  // `getElementById` is typed to the generic element, so the handles whose control
+  // interface this file uses -- `value`, `max`, `checked`, `disabled` -- name the tag the
+  // shell renders for them. Each matches the markup in `render_general_motion_lab.py`.
+  const scenarioSelect = /** @type {HTMLSelectElement} */ (byId("scenario-select"));
+  const nInput = /** @type {HTMLInputElement} */ (byId("n-input"));
+  const sideInput = /** @type {HTMLInputElement} */ (byId("side-input"));
+  const seedInput = /** @type {HTMLInputElement} */ (byId("seed-input"));
+  const snappingToggle = /** @type {HTMLInputElement} */ (byId("snapping-toggle"));
+  const rotateLeftButton = /** @type {HTMLButtonElement} */ (byId("rotate-left-button"));
+  const rotateRightButton = /** @type {HTMLButtonElement} */ (byId("rotate-right-button"));
+  const runButton = /** @type {HTMLButtonElement} */ (byId("run-button"));
+  const downloadButton = /** @type {HTMLButtonElement} */ (byId("download-button"));
   const timelinePanel = byId("timeline-panel");
-  const timelineInput = byId("timeline-input");
+  const timelineInput = /** @type {HTMLInputElement} */ (byId("timeline-input"));
   const timelineList = byId("timeline-list");
-  const playTraceButton = byId("play-trace-button");
+  const playTraceButton = /** @type {HTMLButtonElement} */ (byId("play-trace-button"));
 
   let scenario = JSON.parse(byId("free-scenario").textContent);
   let baseline = editor.stateFromScenario(scenario);
@@ -184,8 +189,8 @@
         labelLayer.append(label);
       }
       retained.add(square.square_id);
-      label.setAttribute("x", plotLeft + scale * square.x);
-      label.setAttribute("y", plotBottom - scale * square.y + 4);
+      label.setAttribute("x", String(plotLeft + scale * square.x));
+      label.setAttribute("y", String(plotBottom - scale * square.y + 4));
     }
     for (const [squareId, label] of existing) {
       if (!retained.has(squareId)) {
@@ -462,7 +467,7 @@
     try {
       await loadScenario();
     } catch (error) {
-      announce(`Could not load setup: ${error.message}`);
+      announce(`Could not load setup: ${/** @type {Error} */ (error).message}`);
     }
   });
 
@@ -477,7 +482,7 @@
     try {
       await loadScenario();
     } catch (error) {
-      announce(`Could not load setup: ${error.message}`);
+      announce(`Could not load setup: ${/** @type {Error} */ (error).message}`);
     }
   });
 
@@ -715,8 +720,8 @@
     stopPlayback();
     const request = editor.releaseQuenchRequest(
       state,
-      Number(byId("sweeps-input").value),
-      Number(byId("budget-input").value),
+      Number(/** @type {HTMLInputElement} */ (byId("sweeps-input")).value),
+      Number(/** @type {HTMLInputElement} */ (byId("budget-input")).value),
     );
     runButton.disabled = true;
     runButton.textContent = "Quenching…";
@@ -745,7 +750,7 @@
       // Clear before reporting. The download button names its file a quench trace, so
       // a rejected run must leave nothing behind for it to save.
       clearTraceView();
-      announce(`Quench failed: ${error.message}`);
+      announce(`Quench failed: ${/** @type {Error} */ (error).message}`);
       renderSetup();
     } finally {
       runButton.disabled = false;

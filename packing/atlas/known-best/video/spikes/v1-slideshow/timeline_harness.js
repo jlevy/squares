@@ -49,7 +49,9 @@ function el(tag) {
       n.attrs = Object.assign({}, this.attrs);
       return n;
     },
-    querySelector() {
+    // The generic stub ignores the selector; `layer` below replaces this with one that
+    // honours it, and a replacement may not take more arguments than what it replaces.
+    querySelector(_selector) {
       return el("div");
     },
     addEventListener() {},
@@ -184,7 +186,7 @@ check(
   s.n === 1 && s.next === 2 && near(s.progress, 0.5, 1e-9),
   s,
 );
-let L = layersFor(s);
+let L = layersFor();
 check(
   "  base holds 1 visible, top holds 2 at half opacity",
   L.base.n === 1 &&
@@ -205,7 +207,7 @@ check("  just before the midpoint the panel still holds 1", s.panel === 1 && pan
 ]);
 s = api.seek(SLOT);
 check("t=slot is n=2 dwell", s.n === 2 && s.progress === 0, s);
-L = layersFor(s);
+L = layersFor();
 check(
   "  roles swapped: base holds 2 visible, top holds 3 hidden",
   L.base.n === 2 &&
@@ -227,7 +229,7 @@ check(
 );
 s = api.seek(TOTAL - FADE / 2);
 check("last slide fades out", s.n === 324 && s.next === 0 && near(s.progress, 0.5, 1e-6), s);
-L = layersFor(s);
+L = layersFor();
 check(
   "  base 324 at half opacity, nothing on top",
   L.base.n === 324 && near(Number(L.base.opacity), 0.5, 1e-6) && L.top.n === 0,
@@ -243,12 +245,12 @@ s = api.seek(5.0);
 const again = api.seek(5.0);
 check("seek is idempotent", JSON.stringify(s) === JSON.stringify(again));
 s = api.seek(100.0);
-L = layersFor(s);
+L = layersFor();
 const before = { base: L.base.n, top: L.top.n, panel: panelN(), fill: fill() };
 api.seek(5.0);
 api.seek(500.0);
 s = api.seek(100.0);
-L = layersFor(s);
+L = layersFor();
 check(
   "layer, panel and bar depend only on time",
   before.base === L.base.n &&

@@ -11,16 +11,19 @@ function scenarioHasCapability(capability) {
 }
 const manifest = JSON.parse(byId("motion-data").textContent);
 const scenes = new Map(manifest.scenes.map((scene) => [scene.id, scene]));
-const motionSelect = byId("motion-select");
-const stratumSelect = byId("stratum-select");
-const ownerSelect = byId("owner-select");
-const progressInput = byId("parameter-input");
-const playButton = byId("play-button");
+// `getElementById` is typed to the generic element, so the handles whose control
+// interface this file uses -- `value`, `max`, `checked`, `disabled` -- name the tag the
+// shell renders for them. Each matches the markup in `render_packing_motion_lab.py`.
+const motionSelect = /** @type {HTMLSelectElement} */ (byId("motion-select"));
+const stratumSelect = /** @type {HTMLSelectElement} */ (byId("stratum-select"));
+const ownerSelect = /** @type {HTMLSelectElement} */ (byId("owner-select"));
+const progressInput = /** @type {HTMLInputElement} */ (byId("parameter-input"));
+const playButton = /** @type {HTMLButtonElement} */ (byId("play-button"));
 const restartButton = byId("restart-button");
-const idsToggle = byId("ids-toggle");
-const contactsToggle = byId("contacts-toggle");
-const trailsToggle = byId("trails-toggle");
-const tangentToggle = byId("tangent-toggle");
+const idsToggle = /** @type {HTMLInputElement} */ (byId("ids-toggle"));
+const contactsToggle = /** @type {HTMLInputElement} */ (byId("contacts-toggle"));
+const trailsToggle = /** @type {HTMLInputElement} */ (byId("trails-toggle"));
+const tangentToggle = /** @type {HTMLInputElement} */ (byId("tangent-toggle"));
 const liveRegion = byId("live-region");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const left = 42;
@@ -84,8 +87,8 @@ function updateGeometry(scene, progress) {
     setShown(ghost, tangentToggle.checked && progress > 0);
     const label = byId(`label-${pose.id}`);
     const labelPoint = screenPoint(pose);
-    label.setAttribute("x", labelPoint[0]);
-    label.setAttribute("y", labelPoint[1] + 5);
+    label.setAttribute("x", String(labelPoint[0]));
+    label.setAttribute("y", String(labelPoint[1] + 5));
     setShown(label, idsToggle.checked);
     const trail = byId(`trail-${pose.id}`);
     setLine(trail, base[index], endpoint[index]);

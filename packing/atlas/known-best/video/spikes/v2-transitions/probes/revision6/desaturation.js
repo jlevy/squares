@@ -8,7 +8,7 @@
   A.setSnap(true);
   A.setBlind(false);
   const fills = () =>
-    Array.from(document.querySelectorAll("#squares g"))
+    Array.from(/** @type {NodeListOf<SVGGElement>} */ (document.querySelectorAll("#squares g")))
       .filter((g) => g.style.display !== "none")
       .map((g) => g.firstElementChild.getAttribute("fill"));
   A.setDesaturate(true);

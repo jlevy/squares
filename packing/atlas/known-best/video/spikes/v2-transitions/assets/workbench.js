@@ -1,4 +1,7 @@
 (() => {
+  // Not redundant: the generator inlines this file into a plain `<script>` with no
+  // `type="module"`, so nothing else puts the page in strict mode.
+  "use strict";
   const DATA = JSON.parse(document.getElementById("atlas-data").textContent);
   const FRAMES = DATA.frames;
   const PAIRS = DATA.pairs;
@@ -478,6 +481,10 @@
   function buildAtlasMap(angles) {
     const base = buildAngleMap(angles);
     const unpinned = [];
+    // A palette slot, and the pinned classes return only 0, 1 and -1 -- so the type is stated here
+    // rather than inferred from the three, which would fix the array at those three values and
+    // refuse the free classes their slots below.
+    /** @type {number[]} */
     const slots = base.centres.map((centre, k) => {
       if (angleGap(centre, 0) <= ANGLE_TOL) {
         return 0;
@@ -1166,11 +1173,13 @@
     // centred on the WIDEST the corpus holds rather than on the current one: `n = 324` is the
     // longest, and centring each n on itself would slide the row as a digit is gained, twice in
     // the film and again mid-roll.
+    /** @type {HTMLElement} */
     const shown = document.querySelector(".numeral");
     if (!shown || shown.offsetWidth === 0) {
       return;
     }
     const digits = String(N_MAX).length;
+    /** @type {HTMLElement} */
     const current = document.querySelector(".numeral .n-val, .numeral .mord");
     const widest =
       shown.offsetWidth +
@@ -1178,7 +1187,7 @@
         Math.max(0, digits - (current?.textContent ? current.textContent.length : digits));
     numeralLeft = Math.max(0, (HEADLINE_ROW - widest) / 2);
     document.querySelectorAll(".numeral").forEach((el) => {
-      el.style.left = `${numeralLeft}px`;
+      /** @type {HTMLElement} */ (el).style.left = `${numeralLeft}px`;
     });
   }
   //: The width of one figure in the face the gap bar sets its two numbers in, used to decide
@@ -3707,7 +3716,12 @@
   const gapbarRecord = document.getElementById("gapbar-record");
   const gapbarHand = document.getElementById("gapbar-hand");
   const gapbarLowerLabel = document.getElementById("gapbar-lower-label");
-  const gapbarRecordLabel = document.getElementById("gapbar-record-label");
+  // An SVG text node, not an HTML one, which is why `measureDigit` can ask it for its
+  // `getComputedTextLength`. `getElementById` is typed as returning an HTML element whatever it
+  // finds, so the step through `Element` is what lets the SVG type be named at all.
+  const gapbarRecordLabel = /** @type {SVGTextElement} */ (
+    /** @type {Element} */ (document.getElementById("gapbar-record-label"))
+  );
   const gapbarAreaNum = document.getElementById("gapbar-area-num");
   const gapbarGridNum = document.getElementById("gapbar-grid-num");
   let gapbarInfo = null;
@@ -4846,7 +4860,7 @@
     for (let k = drawn; k < maskLines.length; k++) {
       maskLines[k].style.display = "none";
     }
-    maskGroup.setAttribute("opacity", 1);
+    maskGroup.setAttribute("opacity", "1");
   }
 
   // ------------------------------------------------- drawing an edge with the pointer (revision 12)
@@ -4881,8 +4895,8 @@
     if (!Number.isFinite(x) || !Number.isFinite(y)) {
       return null;
     }
-    drawLine.setAttribute("x2", x);
-    drawLine.setAttribute("y2", y);
+    drawLine.setAttribute("x2", String(x));
+    drawLine.setAttribute("y2", String(y));
     return { from: linkFrom, x, y };
   }
   function linkCancel() {
@@ -5059,7 +5073,9 @@
       contactGap: CONTACT.gap,
       palette: PALETTE.slice(),
       shades: SHADES.map((f) => f.slice()),
-      fills: Array.from(document.querySelectorAll("#squares g[data-identity]"))
+      fills: /** @type {SVGGElement[]} */ (
+        Array.from(document.querySelectorAll("#squares g[data-identity]"))
+      )
         .filter((g) => g.style.display !== "none")
         .map((g) => g.firstElementChild.getAttribute("fill")),
     };
@@ -5108,9 +5124,9 @@
     // An open-ended run is at rest exactly when it is not playing; Animate's standardising does not
     // reach it anyway, an optimisation being Pack's own playback.
     paintSquares(p, side, drain, 0, o.size, state.playing ? 0 : 1, true);
-    mark.setAttribute("opacity", 0);
-    linksGroup.setAttribute("opacity", 0);
-    ghost.setAttribute("opacity", 0);
+    mark.setAttribute("opacity", "0");
+    linksGroup.setAttribute("opacity", "0");
+    ghost.setAttribute("opacity", "0");
   }
 
   // Styles B and C. The world-to-stage scale is held at n's through the move, so the container
@@ -5226,10 +5242,10 @@
       hueLevel(sc, t),
       t >= sc.moveEnd,
     );
-    mark.setAttribute("opacity", 0);
+    mark.setAttribute("opacity", "0");
     if (state.links) {
-      linksGroup.setAttribute("opacity", u <= 0 ? 0.35 : 1 - e);
-      ghost.setAttribute("opacity", moving ? 1 - e : 0);
+      linksGroup.setAttribute("opacity", String(u <= 0 ? 0.35 : 1 - e));
+      ghost.setAttribute("opacity", String(moving ? 1 - e : 0));
     }
   }
 
@@ -5286,9 +5302,9 @@
           : 0;
     const out = clamp01(q / 0.45);
     const back = clamp01((q - 0.55) / 0.45);
-    factsA.style.opacity = 1 - out;
+    factsA.style.opacity = String(1 - out);
     factsB.style.opacity = back;
-    numeralSlotA.style.opacity = 1 - out;
+    numeralSlotA.style.opacity = String(1 - out);
     numeralSlotB.style.opacity = back;
     numeralA.style.transform = `translateY(${-24 * easeOut(out)}px)`;
     numeralB.style.transform = `translateY(${24 * (1 - easeOut(back))}px)`;
@@ -5385,9 +5401,9 @@
       const pose = `translate(${nb[0]} ${nb[1]}) rotate(${nb[2]})`;
       newNode.setAttribute("opacity", k);
       newNode.setAttribute("transform", `${pose} scale(${scale})`);
-      mark.setAttribute("opacity", k);
+      mark.setAttribute("opacity", String(k));
       mark.setAttribute("transform", `${pose} scale(${scale})`);
-      markRect.setAttribute("stroke-width", lerp(MARK_WIDE, MARK_THIN, settled));
+      markRect.setAttribute("stroke-width", String(lerp(MARK_WIDE, MARK_THIN, settled)));
     } else {
       newNode.setAttribute("opacity", 0);
       newNode.setAttribute("transform", `translate(${nb[0]} ${nb[1]}) rotate(${nb[2]})`);
@@ -5396,19 +5412,19 @@
       const fadeLen = tm.move * MARK_FADE;
       const gone = fadeLen > 0 ? clamp01((t - sc.moveStart) / fadeLen) : t >= sc.moveStart ? 1 : 0;
       if (prevPose !== null && gone < 1) {
-        mark.setAttribute("opacity", 1 - gone);
+        mark.setAttribute("opacity", String(1 - gone));
         mark.setAttribute(
           "transform",
           `translate(${prevPose[0]} ${prevPose[1]}) rotate(${prevPose[2]})`,
         );
-        markRect.setAttribute("stroke-width", MARK_THIN);
+        markRect.setAttribute("stroke-width", String(MARK_THIN));
       } else {
-        mark.setAttribute("opacity", 0);
+        mark.setAttribute("opacity", "0");
       }
     }
     if (state.links) {
-      linksGroup.setAttribute("opacity", u <= 0 ? 0.35 : 1 - e);
-      ghost.setAttribute("opacity", t > sc.moveStart ? 1 - k : 0);
+      linksGroup.setAttribute("opacity", String(u <= 0 ? 0.35 : 1 - e));
+      ghost.setAttribute("opacity", String(t > sc.moveStart ? 1 - k : 0));
     }
   }
 
@@ -5482,7 +5498,7 @@
   // and the rows follow, which is why there is no list of slider ids anywhere: the ids are a
   // function of the table, so they cannot disagree with it.
   document.querySelectorAll(".law-rows").forEach((host) => {
-    const spec = lawSpec(host.dataset.law);
+    const spec = lawSpec(/** @type {HTMLElement} */ (host).dataset.law);
     host.innerHTML = LAW_PARAMS.map((d) => {
       const id = `${spec.prefix}-${d.key}`;
       return (
@@ -5501,7 +5517,9 @@
     }).join("");
     host.querySelectorAll("input[type=range]").forEach((el) => {
       const key = el.id.slice(spec.prefix.length + 1);
-      el.addEventListener("input", (ev) => setLawOf(spec.name, { [key]: ev.target.value }));
+      el.addEventListener("input", (ev) =>
+        setLawOf(spec.name, { [key]: /** @type {HTMLInputElement} */ (ev.target).value }),
+      );
     });
   });
   // And syncing them is the same walk: every law, every parameter, no enumeration by hand.
@@ -5509,7 +5527,9 @@
     for (const name of Object.keys(LAWS)) {
       const spec = LAWS[name];
       for (const d of LAW_PARAMS) {
-        const el = document.getElementById(`${spec.prefix}-${d.key}`);
+        const el = /** @type {HTMLInputElement} */ (
+          document.getElementById(`${spec.prefix}-${d.key}`)
+        );
         if (!el) {
           continue;
         }
@@ -5526,7 +5546,7 @@
       }
     }
   }
-  const styleSelect = document.getElementById("style-select");
+  const styleSelect = /** @type {HTMLSelectElement} */ (document.getElementById("style-select"));
   function updateSegments() {
     // Revision 14: which solver runs is strategy, so the select sits with the law and the graph —
     // and Pack offers two of the three, the tween being an interpolation toward an answer Pack has
@@ -5553,23 +5573,29 @@
     document.getElementById("step-anim-box").classList.toggle("is-off", state.mode === "pack");
     // The mode sub-panel. Two buttons drawn as tabs: the pressed one names the aspect on show.
     document.querySelectorAll("#mode-tabs button").forEach((b) => {
-      const on = b.dataset.mode === state.mode;
+      const on = /** @type {HTMLElement} */ (b).dataset.mode === state.mode;
       b.classList.toggle("on", on);
       b.setAttribute("aria-pressed", on ? "true" : "false");
     });
     document.querySelectorAll("#phase-seg button").forEach((b) => {
-      b.classList.toggle("on", b.dataset.phase === state.phase);
+      b.classList.toggle("on", /** @type {HTMLElement} */ (b).dataset.phase === state.phase);
     });
-    document.getElementById("desat-toggle").checked = state.desaturate;
-    document.getElementById("desat-floor").value = String(desatFloor);
+    /** @type {HTMLInputElement} */ (document.getElementById("desat-toggle")).checked =
+      state.desaturate;
+    /** @type {HTMLInputElement} */ (document.getElementById("desat-floor")).value =
+      String(desatFloor);
     document.getElementById("desat-floor-val").textContent = fmt(desatFloor, 2);
-    document.getElementById("blind-toggle").checked = state.blind;
+    /** @type {HTMLInputElement} */ (document.getElementById("blind-toggle")).checked = state.blind;
     document.querySelectorAll("#initial-seg button").forEach((b) => {
-      b.classList.toggle("on", b.dataset.initial === state.initial);
+      b.classList.toggle("on", /** @type {HTMLElement} */ (b).dataset.initial === state.initial);
     });
     optimizeButton.textContent = state.optimizing ? "Restart optimize" : "Optimize";
-    document.getElementById("blind-inflate").value = BLIND.inflate;
-    document.getElementById("anneal").value = String(state.anneal);
+    /** @type {HTMLInputElement} */ (document.getElementById("blind-inflate")).value = String(
+      BLIND.inflate,
+    );
+    /** @type {HTMLInputElement} */ (document.getElementById("anneal")).value = String(
+      state.anneal,
+    );
     const an = annealState();
     document.getElementById("anneal-info").textContent =
       state.anneal +
@@ -5583,7 +5609,7 @@
       (isPhysical(state.style) ? "" : " (styles B and C only)");
     syncLawRows();
     document.querySelectorAll("#law-preset-seg button").forEach((b) => {
-      const preset = LAW_PRESETS[b.dataset.law];
+      const preset = LAW_PRESETS[/** @type {HTMLElement} */ (b).dataset.law];
       b.classList.toggle(
         "on",
         preset !== undefined &&
@@ -5608,13 +5634,14 @@
     // snap ends on the record by construction and says nothing about the physics; the contact bias
     // only tells the settle which pairs should touch and leaves it to find the geometry.
     document.querySelectorAll("#rel-seg button").forEach((b) => {
-      b.classList.toggle("on", b.dataset.rel === relKind);
+      b.classList.toggle("on", /** @type {HTMLElement} */ (b).dataset.rel === relKind);
     });
-    document.getElementById("snap-toggle").checked = state.snap;
-    document.getElementById("bias-toggle").checked = relKind === "contact";
+    /** @type {HTMLInputElement} */ (document.getElementById("snap-toggle")).checked = state.snap;
+    /** @type {HTMLInputElement} */ (document.getElementById("bias-toggle")).checked =
+      relKind === "contact";
     // Growth.
-    const gs = document.getElementById("grow-size"),
-      gr = document.getElementById("grow-rate");
+    const gs = /** @type {HTMLInputElement} */ (document.getElementById("grow-size")),
+      gr = /** @type {HTMLInputElement} */ (document.getElementById("grow-rate"));
     gs.min = String(GROWTH_BOUNDS.size[0]);
     gs.max = String(GROWTH_BOUNDS.size[1]);
     gs.step = "0.01";
@@ -5629,28 +5656,35 @@
     }
     document.getElementById("grow-size-val").textContent = fmt(GROWTH.size, 2);
     document.getElementById("grow-rate-val").textContent = `${fmt(GROWTH.rate, 3)}/s`;
-    document.getElementById("grow-toggle").checked = GROWTH.on;
+    /** @type {HTMLInputElement} */ (document.getElementById("grow-toggle")).checked = GROWTH.on;
     document.querySelectorAll("#grow-rule-seg button").forEach((b) => {
-      b.classList.toggle("on", b.dataset.growRule === GROWTH.rule);
+      b.classList.toggle("on", /** @type {HTMLElement} */ (b).dataset.growRule === GROWTH.rule);
     });
     updateLive();
-    document.getElementById("speed").value = String(speedToSlider(state.speed));
+    /** @type {HTMLInputElement} */ (document.getElementById("speed")).value = String(
+      speedToSlider(state.speed),
+    );
     document.getElementById("speed-info").textContent = `\u00d7${state.speed.toFixed(2)}`;
-    document.getElementById("links-toggle").checked = state.links;
-    document.getElementById("capture-toggle").checked = state.capture;
+    /** @type {HTMLInputElement} */ (document.getElementById("links-toggle")).checked = state.links;
+    /** @type {HTMLInputElement} */ (document.getElementById("capture-toggle")).checked =
+      state.capture;
     // Revision 12: the colour scheme, and Animate's own standardising. The standardising box is
     // disabled rather than hidden outside Animate, and disabled under either angle scheme, where it
     // would have nothing to do: a control that vanishes is a control that moves its neighbours.
     document.querySelectorAll("#colour-seg button").forEach((b) => {
-      b.classList.toggle("on", b.dataset.scheme === colorScheme);
+      b.classList.toggle("on", /** @type {HTMLElement} */ (b).dataset.scheme === colorScheme);
     });
     // Revision 12: which graph the contact relationship reads, and the drawing mode.
     document.querySelectorAll("#target-seg button").forEach((b) => {
-      b.classList.toggle("on", b.dataset.target === targetFrom());
+      b.classList.toggle("on", /** @type {HTMLElement} */ (b).dataset.target === targetFrom());
     });
-    document.getElementById("draw-toggle").checked = state.drawing;
-    document.getElementById("clear-edges").disabled = drawnFor(state.pair).length === 0;
-    const animateBox = document.getElementById("animate-standard-toggle");
+    /** @type {HTMLInputElement} */ (document.getElementById("draw-toggle")).checked =
+      state.drawing;
+    /** @type {HTMLButtonElement} */ (document.getElementById("clear-edges")).disabled =
+      drawnFor(state.pair).length === 0;
+    const animateBox = /** @type {HTMLInputElement} */ (
+      document.getElementById("animate-standard-toggle")
+    );
     animateBox.checked = ANIMATE.standardize;
     animateBox.disabled = state.mode !== "animate" || colorScheme !== "identity";
 
@@ -5660,11 +5694,12 @@
     // reasoning that they had no effect there -- which was true, and made them uneditable exactly
     // where the owner was watching. Editing the beat that is running is the whole point of them.
     ["dwell", "move", "settle"].forEach((key) => {
-      const input = document.getElementById(`t-${key}`);
+      const input = /** @type {HTMLInputElement} */ (document.getElementById(`t-${key}`));
       input.disabled = false;
       input.value = state.continuous.on ? CONTINUOUS[key] : state.timing[key];
     });
-    document.getElementById("fullbeat-toggle").checked = state.continuous.fullBeat;
+    /** @type {HTMLInputElement} */ (document.getElementById("fullbeat-toggle")).checked =
+      state.continuous.fullBeat;
     updateStepChooser();
     updateRangeControls();
     const c = continuousState();
@@ -5760,7 +5795,10 @@
     stepNote.textContent = STEP_NOTES[n] || "";
     const single = state.range.from === state.range.to;
     for (const chip of stepChips.children) {
-      chip.classList.toggle("on", single && Number(chip.dataset.n) === n);
+      chip.classList.toggle(
+        "on",
+        single && Number(/** @type {HTMLElement} */ (chip).dataset.n) === n,
+      );
     }
     stepChips.hidden = state.mode !== "pack";
   }
@@ -5769,8 +5807,8 @@
   // The two range boxes, the run's length in wall-clock seconds before it is started, and where the
   // run stands inside it. The length is the honest one: it prices every pair in the range at the
   // beat it will actually play at, static appends and the annealing dial included.
-  const rangeFrom = document.getElementById("range-from");
-  const rangeTo = document.getElementById("range-to");
+  const rangeFrom = /** @type {HTMLInputElement} */ (document.getElementById("range-from"));
+  const rangeTo = /** @type {HTMLInputElement} */ (document.getElementById("range-to"));
   const rangeDurationOut = document.getElementById("range-duration");
   const rangePosition = document.getElementById("range-position");
   const rangeAllButton = document.getElementById("range-all");
@@ -6574,7 +6612,13 @@
     return PAIRS[best].n;
   }
 
-  window.atlasTransitions = {
+  // The workbench's API, hung on the page's own global: one handle for the probes, the capture
+  // script and the console. The type library's `Window` knows nothing of `atlasTransitions`, so the
+  // property is named here, once, rather than at each of the two places that touch it.
+  /** @typedef {Record<string, Function>} WorkbenchApi */
+  /** @typedef {Window & typeof globalThis & { atlasTransitions: WorkbenchApi }} PageWindow */
+  const win = /** @type {PageWindow} */ (window);
+  win.atlasTransitions = {
     // Revision 9: the tabs are gone; these are no-ops kept so nothing that called them breaks.
     setTab,
     tab: () => "single",
@@ -6813,48 +6857,68 @@
   playButton.addEventListener("click", () => transport());
   document.getElementById("restart").addEventListener("click", () => restart());
   document.querySelectorAll("#mode-tabs button").forEach((b) => {
-    b.addEventListener("click", () => setMode(b.dataset.mode));
+    b.addEventListener("click", () => setMode(/** @type {HTMLElement} */ (b).dataset.mode));
   });
   document.querySelectorAll("#phase-seg button").forEach((b) => {
-    b.addEventListener("click", () => setPhase(b.dataset.phase));
+    b.addEventListener("click", () => setPhase(/** @type {HTMLElement} */ (b).dataset.phase));
   });
   styleSelect.addEventListener("change", () => setStyle(styleSelect.value));
   document
     .getElementById("desat-toggle")
-    .addEventListener("change", (ev) => setDesaturate(ev.target.checked));
+    .addEventListener("change", (ev) =>
+      setDesaturate(/** @type {HTMLInputElement} */ (ev.target).checked),
+    );
   document
     .getElementById("blind-toggle")
-    .addEventListener("change", (ev) => setBlind(ev.target.checked));
+    .addEventListener("change", (ev) =>
+      setBlind(/** @type {HTMLInputElement} */ (ev.target).checked),
+    );
   document
     .getElementById("blind-inflate")
-    .addEventListener("change", (ev) => setBlindInflate(ev.target.value));
-  document.getElementById("anneal").addEventListener("input", (ev) => setAnneal(ev.target.value));
+    .addEventListener("change", (ev) =>
+      setBlindInflate(/** @type {HTMLInputElement} */ (ev.target).value),
+    );
+  document
+    .getElementById("anneal")
+    .addEventListener("input", (ev) =>
+      setAnneal(/** @type {HTMLInputElement} */ (ev.target).value),
+    );
   document.querySelectorAll("#law-preset-seg button").forEach((b) => {
-    b.addEventListener("click", () => setLawPreset(b.dataset.law));
+    b.addEventListener("click", () => setLawPreset(/** @type {HTMLElement} */ (b).dataset.law));
   });
   document.querySelectorAll("#rel-seg button").forEach((b) => {
-    b.addEventListener("click", () => setRelationship(b.dataset.rel));
+    b.addEventListener("click", () => setRelationship(/** @type {HTMLElement} */ (b).dataset.rel));
   });
   document.getElementById("desat-floor").addEventListener("input", (ev) => {
-    window.atlasTransitions.setDesatFloor(ev.target.value);
+    win.atlasTransitions.setDesatFloor(/** @type {HTMLInputElement} */ (ev.target).value);
     updateChrome();
   });
   document
     .getElementById("grow-size")
-    .addEventListener("input", (ev) => setGrowth({ size: ev.target.value }));
+    .addEventListener("input", (ev) =>
+      setGrowth({ size: /** @type {HTMLInputElement} */ (ev.target).value }),
+    );
   document
     .getElementById("grow-rate")
-    .addEventListener("input", (ev) => setGrowth({ rate: ev.target.value }));
+    .addEventListener("input", (ev) =>
+      setGrowth({ rate: /** @type {HTMLInputElement} */ (ev.target).value }),
+    );
   document
     .getElementById("grow-toggle")
-    .addEventListener("change", (ev) => setGrowth({ on: ev.target.checked }));
+    .addEventListener("change", (ev) =>
+      setGrowth({ on: /** @type {HTMLInputElement} */ (ev.target).checked }),
+    );
   document.querySelectorAll("#grow-rule-seg button").forEach((b) => {
-    b.addEventListener("click", () => setGrowth({ rule: b.dataset.growRule }));
+    b.addEventListener("click", () =>
+      setGrowth({ rule: /** @type {HTMLElement} */ (b).dataset.growRule }),
+    );
   });
   document.getElementById("reset-physics").addEventListener("click", () => resetPhysics());
   document
     .getElementById("snap-toggle")
-    .addEventListener("change", (ev) => setSnap(ev.target.checked));
+    .addEventListener("change", (ev) =>
+      setSnap(/** @type {HTMLInputElement} */ (ev.target).checked),
+    );
   // Turning the bias on with no attraction set would mask a force that is not there, so it brings
   // the sticky preset's pull with it. That is a convenience of the control, not of the physics:
   // `setRelationship('contact')` on the API changes the graph and nothing else.
@@ -6863,7 +6927,7 @@
     // writes this box's checked state back from a relationship that has not been changed yet, so
     // re-reading `ev.target.checked` on the next line saw the box untick itself and turned the bias
     // straight off again — the first click did nothing but bring the pull in.
-    const want = ev.target.checked;
+    const want = /** @type {HTMLInputElement} */ (ev.target).checked;
     if (want && !lawAttracts()) {
       setLaw({ attraction: LAW_PRESETS.sticky.attraction, range: LAW_PRESETS.sticky.range });
     }
@@ -6871,41 +6935,57 @@
   });
   lawPlotWiring();
   document.querySelectorAll("#initial-seg button").forEach((b) => {
-    b.addEventListener("click", () => setInitial(b.dataset.initial));
+    b.addEventListener("click", () => setInitial(/** @type {HTMLElement} */ (b).dataset.initial));
   });
   optimizeButton.addEventListener("click", () => optimize(true));
   document
     .getElementById("speed")
-    .addEventListener("input", (ev) => setSpeed(sliderToSpeed(Number(ev.target.value))));
+    .addEventListener("input", (ev) =>
+      setSpeed(sliderToSpeed(Number(/** @type {HTMLInputElement} */ (ev.target).value))),
+    );
   document.querySelectorAll("#colour-seg button").forEach((b) => {
-    b.addEventListener("click", () => setColorScheme(b.dataset.scheme));
+    b.addEventListener("click", () =>
+      setColorScheme(/** @type {HTMLElement} */ (b).dataset.scheme),
+    );
   });
   document
     .getElementById("animate-standard-toggle")
-    .addEventListener("change", (ev) => setAnimateStandardize(ev.target.checked));
+    .addEventListener("change", (ev) =>
+      setAnimateStandardize(/** @type {HTMLInputElement} */ (ev.target).checked),
+    );
   document
     .getElementById("links-toggle")
-    .addEventListener("change", (ev) => setOverlay(ev.target.checked));
+    .addEventListener("change", (ev) =>
+      setOverlay(/** @type {HTMLInputElement} */ (ev.target).checked),
+    );
   document
     .getElementById("draw-toggle")
-    .addEventListener("change", (ev) => setDrawing(ev.target.checked));
+    .addEventListener("change", (ev) =>
+      setDrawing(/** @type {HTMLInputElement} */ (ev.target).checked),
+    );
   document.querySelectorAll("#target-seg button").forEach((b) => {
-    b.addEventListener("click", () => setTargetSource(b.dataset.target));
+    b.addEventListener("click", () =>
+      setTargetSource(/** @type {HTMLElement} */ (b).dataset.target),
+    );
   });
   document.getElementById("clear-edges").addEventListener("click", () => clearEdges());
   document
     .getElementById("capture-toggle")
-    .addEventListener("change", (ev) => setCapture(ev.target.checked));
+    .addEventListener("change", (ev) =>
+      setCapture(/** @type {HTMLInputElement} */ (ev.target).checked),
+    );
   ["dwell", "move", "settle"].forEach((key) => {
     document.getElementById(`t-${key}`).addEventListener("change", (ev) => {
       const o = {};
-      o[key] = ev.target.value;
+      o[key] = /** @type {HTMLInputElement} */ (ev.target).value;
       setTiming(o);
     });
   });
   document
     .getElementById("fullbeat-toggle")
-    .addEventListener("change", (ev) => setContinuous({ fullBeat: ev.target.checked }));
+    .addEventListener("change", (ev) =>
+      setContinuous({ fullBeat: /** @type {HTMLInputElement} */ (ev.target).checked }),
+    );
   // Typing in `from` alone drags `to` with it while the two are equal, so a one-step range stays one
   // step rather than silently widening.
   rangeFrom.addEventListener("change", () => {
@@ -6916,7 +6996,12 @@
   // The hand. Client coordinates go through the world group's own matrix, so the y flip, the
   // viewBox and the stage's CSS scale are all accounted for in one step. Pointer capture keeps the
   // drag alive when the cursor leaves the square, or the stage.
-  const worldGroup = document.getElementById("world");
+  // The SVG group the stage is drawn in, so it carries a screen matrix. `getElementById` is typed
+  // as returning an HTML element whatever it finds, which is why the SVG type is named through
+  // `Element` here.
+  const worldGroup = /** @type {SVGGElement} */ (
+    /** @type {Element} */ (document.getElementById("world"))
+  );
   function worldPoint(ev) {
     const m = worldGroup.getScreenCTM();
     if (m === null) {
@@ -6989,13 +7074,16 @@
   svg.addEventListener("pointercancel", endDrag);
 
   window.addEventListener("keydown", (ev) => {
+    // What has the focus, read as an element once: the guard is about typing into a control, and
+    // the three questions below are all about the same one.
+    const focused = /** @type {HTMLElement} */ (ev.target);
     if (
-      ev.target &&
-      (ev.target.tagName === "INPUT" || ev.target.tagName === "SELECT") &&
+      focused &&
+      (focused.tagName === "INPUT" || focused.tagName === "SELECT") &&
       ev.key !== "Escape"
     ) {
       if (ev.key === " " || ev.key === "ArrowLeft" || ev.key === "ArrowRight") {
-        ev.target.blur();
+        focused.blur();
       } else {
         return;
       }

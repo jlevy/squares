@@ -4,7 +4,7 @@
 (o) => {
   const api = window.atlasTransitions;
   const shown = () =>
-    Array.from(document.getElementById("style-select").options)
+    Array.from(/** @type {HTMLSelectElement} */ (document.getElementById("style-select")).options)
       .filter((opt) => !opt.hidden && !opt.disabled)
       .map((opt) => opt.value);
   const note = () => document.getElementById("solver-note").textContent;

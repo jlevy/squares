@@ -1,0 +1,18 @@
+{
+  // The checkers' probes. Each file is one JavaScript expression evaluated in the page, so
+  // they share a program only in the sense that none of them declares anything at the top
+  // level; what they have in common is that they all talk to `window.atlasTransitions`.
+  // `probes/atlas-transitions.d.ts` is what that is -- 114 keys, cross-checked against the
+  // object the page actually exports. Same ratchet, same tracker: think-4cwy.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false
+  },
+  "include": [
+    "packing/atlas/known-best/video/spikes/v2-transitions/probes/**/*.js",
+    "packing/atlas/known-best/video/spikes/v2-transitions/probes/atlas-transitions.d.ts"
+  ]
+}

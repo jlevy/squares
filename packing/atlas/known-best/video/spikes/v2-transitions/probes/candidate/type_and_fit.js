@@ -46,10 +46,10 @@
   const count = api.pairs().length;
   for (let i = 0; i < count; i++) {
     api.select(i);
-    for (const [t, layer, other] of [
+    for (const [t, layer, other] of /** @type {[number, string, string][]} */ ([
       [0, "facts-a", "facts-b"],
       [d, "facts-b", "facts-a"],
-    ]) {
+    ])) {
       api.seek(t);
       census();
       const root = document.getElementById(layer);
@@ -85,8 +85,8 @@
       // carries the roll's transform and a client rect would measure that instead of
       // the layout. The line is constant and lives OUTSIDE both fading layers, so it
       // is found on the document rather than in `root`.
-      const numeralEl = root.querySelector(".numeral");
-      const nlineEl = document.querySelector(".nline");
+      const numeralEl = /** @type {HTMLElement} */ (root.querySelector(".numeral"));
+      const nlineEl = /** @type {HTMLElement} */ (document.querySelector(".nline"));
       fits.push({
         n: api.state().n + (t > 0 ? 1 : 0),
         t,

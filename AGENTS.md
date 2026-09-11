@@ -63,7 +63,7 @@ correct. A report that they do not parse is a report that the wrong interpreter 
 — see [`D-397`](defects.md), and `OR-2` for the three occurrences before it.
 
 The repository is mostly prose.
-The only repo-wide tooling is Markdown formatting.
+The only repo-wide tooling is Markdown formatting and the browser floor.
 
 ```bash
 make hooks-install   # once after cloning: installs the lefthook pre-commit hook
@@ -98,6 +98,37 @@ live:
 surface, and only the unavoidably slow ones leave it, each on its own measurement.
 `OR-14` is why the surface is kept quick — a development cycle is never artificially
 slow, and its target is two to two and a half minutes.
+
+### The JavaScript and CSS floor
+
+**Biome owns the browser code, and `tsc` type-checks it.** The JavaScript this
+repository serves — the workbench’s script, the checkers’ probes, the motion lab’s
+assets — is under the same shape of floor the Python is: zero findings, verify-only in
+CI, fixed at commit.
+The rules come from `tbd guidelines typescript-lint-format-rules`, Profile B, and
+`packing/tests/test_browser_floor_contract.py` is what proves they are live rather than
+merely written down.
+
+```bash
+make hooks-install        # once after cloning: npm ci, then the git hooks
+make lint-fix             # fix in place; the commit hook does this for staged files
+packing-validate --only "browser floor"   # verify, which is what CI runs
+```
+
+Three things worth knowing before changing any of it:
+
+- **There is no TypeScript here and no build step for the browser code.** It is checked
+  JavaScript: `allowJs` + `checkJs` + `noEmit`, with types from JSDoc.
+  `tsconfig.base.json` holds the floor and each `tsconfig.*.json` names **one program**,
+  because the assets are concatenated into pages rather than imported as modules — one
+  `include` covering all of them would put every file in one global scope and invent
+  collisions.
+- **A relaxed compiler flag names the bead tracking its removal.** That is the ratchet
+  from the shared floor’s rule 8, and the contract test fails a config that relaxes one
+  without naming a tracker.
+- **Formatting the workbench’s script changes the published page’s bytes**, since the
+  generator inlines it.
+  That is expected; what says the page is unharmed is `check_workbench.py`, not a hash.
 
 ### Markdown formatting
 

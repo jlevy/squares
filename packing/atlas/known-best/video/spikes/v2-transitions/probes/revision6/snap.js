@@ -10,12 +10,16 @@
   A.setSnap(false);
   A.seek(A.duration());
   const note = String(A.gapBar().side);
-  const poses = Array.from(document.querySelectorAll("#squares g"))
+  const poses = Array.from(
+    /** @type {NodeListOf<SVGGElement>} */ (document.querySelectorAll("#squares g")),
+  )
     .filter((g) => g.style.display !== "none")
     .map((g) => g.getAttribute("transform"));
   A.setSnap(true);
   A.seek(A.duration());
-  const snapped = Array.from(document.querySelectorAll("#squares g"))
+  const snapped = Array.from(
+    /** @type {NodeListOf<SVGGElement>} */ (document.querySelectorAll("#squares g")),
+  )
     .filter((g) => g.style.display !== "none")
     .map((g) => g.getAttribute("transform"));
   return {

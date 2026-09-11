@@ -68,6 +68,26 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
+      # The browser floor's tools. Node is on the runner already, but pinned here for the
+      # same reason the Python version is: a floor that moves under you is not a floor. The
+      # version is the one the vendored kpress pins, so the repository has one answer to
+      # "which Node".
+      - name: Install Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      # `npm ci` rather than `npm install`: it installs exactly the lockfile and fails if
+      # the lockfile and `package.json` disagree, which is what makes the pinned Biome and
+      # TypeScript versions mean anything. At the repository root, where they live, and with
+      # `--ignore-scripts`, which `.npmrc` also sets by default: a package's install script
+      # is arbitrary code from the supply chain.
+      - name: Install the pinned browser toolchain
+        working-directory: .
+        run: npm ci --ignore-scripts
+
       # Only this job builds the engine, and `_build_engine` runs it *before* the
       # executor rather than inside it, so a cold `cargo build --locked --release` is a
       # serial prefix on this job's whole wall -- about 25s of it. Nothing else in the

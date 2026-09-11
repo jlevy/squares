@@ -1,6 +1,6 @@
 // Take the focus off whatever holds it.
 () => {
   if (document.activeElement) {
-    document.activeElement.blur();
+    /** @type {HTMLElement | SVGElement} */ (document.activeElement).blur();
   }
 };

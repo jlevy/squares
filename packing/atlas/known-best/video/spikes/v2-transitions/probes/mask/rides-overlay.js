@@ -3,7 +3,7 @@
 () => {
   const api = window.atlasTransitions;
   api.setRelationship("groups");
-  const box = document.getElementById("links-toggle");
+  const box = /** @type {HTMLInputElement} */ (document.getElementById("links-toggle"));
   box.checked = true;
   box.dispatchEvent(new Event("change"));
   const on = document.getElementById("mask-links").style.display !== "none";
