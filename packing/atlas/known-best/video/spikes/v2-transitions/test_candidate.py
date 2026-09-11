@@ -66,7 +66,10 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PYTHON = Path(sys.executable)
 SHARED_PICTURE_PAIRS = {147, 232, 264, 290, 295}
-REPO = Path("/Users/levy/wrk/github/squares/.claude/worktrees/squares-viz-explanations-4ae624")
+# Five levels up from this directory is `packing`; its parent is the checkout. Derived
+# for the same reason as in `build_candidate.py`: a hard-coded absolute path is only ever
+# right on one machine.
+REPO = HERE.parents[5]
 MANIFEST = REPO / "packing/atlas/known-best/manifest.json"
 COMPOSITE = REPO / "packing/atlas/known-best/composite-figure.json"
 ATLAS_SOURCE = REPO / "packing/devtools/build_known_best_atlas.py"

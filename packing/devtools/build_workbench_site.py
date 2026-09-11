@@ -64,11 +64,24 @@ EXTERNAL = re.compile(
 def build(out: Path) -> str:
     """Generate the page and return its text, refusing anything that reaches outside itself."""
     with tempfile.TemporaryDirectory() as scratch:
-        subprocess.run(
+        # Captured so a working build stays quiet, but reported on failure: `check=True`
+        # alone raises a CalledProcessError whose message is the exit status and the
+        # argv, with the child's traceback sealed inside the exception object. A CI log
+        # then says only "returned non-zero exit status 1", which is how a hard-coded
+        # absolute path in the generator survived a whole run unnamed.
+        built = subprocess.run(
             [sys.executable, str(SPIKE / "build_candidate.py"), "--out", scratch, "--all"],
-            check=True,
+            check=False,
             capture_output=True,
+            text=True,
         )
+        if built.returncode != 0:
+            msg = (
+                f"{SPIKE.name}/build_candidate.py exited {built.returncode}\n"
+                f"--- stderr ---\n{built.stderr.strip() or '(empty)'}\n"
+                f"--- stdout ---\n{built.stdout.strip() or '(empty)'}"
+            )
+            raise ValueError(msg)
         page = (Path(scratch) / "workbench.html").read_text(encoding="utf-8")
 
     reaching_out = EXTERNAL.findall(page)

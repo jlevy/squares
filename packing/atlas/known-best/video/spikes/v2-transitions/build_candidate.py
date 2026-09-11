@@ -41,14 +41,15 @@ from scipy.optimize import linear_sum_assignment
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import connected_components
 
-# This file lives at packing/atlas/known-best/video/spikes/v2-transitions/, so the packing root
-# is five parents up and the repository root is six. It carried an ABSOLUTE path to one
-# worktree until now, which meant the build only ran from that checkout -- and ran silently
-# against the wrong tree from any other.
-PACKING = Path(__file__).resolve().parents[5]
+HERE = Path(__file__).resolve().parent
+# This file lives at packing/atlas/known-best/video/spikes/v2-transitions, so `packing` is five
+# levels up -- the depth `compare_palette.py` and `grade_motion.py` beside it already use. Derived
+# rather than written out: it carried an ABSOLUTE path to one worktree, which meant the build ran
+# only from that checkout, ran silently against the wrong tree from any other, and failed on CI.
+PACKING = HERE.parents[4]
 REPO = PACKING.parent
-# `devtools` is imported for the explainer's KaTeX inliner and its self-containment check,
-# so the packing root has to be importable: this file is run as a script, not as a module.
+# `devtools` is imported for the explainer's KaTeX inliner and its self-containment check, so the
+# packing root has to be importable: this file is run as a script, not as a module.
 if str(PACKING) not in sys.path:
     sys.path.insert(0, str(PACKING))
 WITNESSES = PACKING / "witnesses" / "known-best"
@@ -57,7 +58,6 @@ MANIFEST = PACKING / "atlas" / "known-best" / "manifest.json"
 COMPOSITE = PACKING / "atlas" / "known-best" / "composite-figure.json"
 FONTS = REPO / "vendor" / "kpress" / "src" / "kpress" / "format" / "static" / "fonts"
 KATEX_FONTS = REPO / "vendor" / "kpress" / "src" / "kpress" / "format" / "static" / "katex" / "fonts"
-HERE = Path(__file__).resolve().parent
 
 N_MAX = 324
 

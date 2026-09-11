@@ -672,6 +672,17 @@ def run_animation_controls() -> dict[str, bool]:
             *trajectory.frames[1:],
         ),
     )
+    rotating_text = render_packing_svg(
+        trajectory.frames[-1],
+        trajectory=rotating,
+        spec=RenderSpec(view=ViewLevel.TRAJECTORY),
+    )
+    rendered_turns = {
+        float(value) for value in re.findall(r"rotate\(([-0-9.]+)deg\)", rotating_text)
+    }
+    # The square above starts 0.1 rad off its final pose, and the keyframes carry it back,
+    # so the turn the renderer must emit is that angle negated, in degrees.
+    expected_turn = -math.degrees(0.1)
     return {
         "motion_is_reduced_motion_scoped": "prefers-reduced-motion: no-preference" in text,
         "no_smil": "<animate" not in text,
@@ -691,11 +702,12 @@ def run_animation_controls() -> dict[str, bool]:
             trajectory=trajectory,
             spec=RenderSpec(view=ViewLevel.TRAJECTORY, duration_seconds=Decimal(0)),
         ),
-        "unsupported_rotation_is_rejected": _rejects(
-            render_packing_svg,
-            trajectory.frames[-1],
-            trajectory=rotating,
-            spec=RenderSpec(view=ViewLevel.TRAJECTORY),
+        # Trajectory rendering used to refuse rotation outright, and this control asserted
+        # the refusal. It now carries a square through the shortest quarter-turn-reduced
+        # angle, so the thing worth pinning is that the turn arrives at its true size: a
+        # rejection here, or a turn of the wrong size, both mean the feature is broken.
+        "rotation_renders_at_its_true_size": any(
+            abs(turn - expected_turn) < 1e-9 for turn in rendered_turns
         ),
         "unsupported_container_change_is_rejected": _rejects(
             render_packing_svg,
