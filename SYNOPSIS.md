@@ -3821,7 +3821,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-122-source.yaml` | session-122 | 101 | 0.89 h | 0.29 h | 0.29 h | yes |
 | `codex-task-tree-session-123.yaml` | session-123 | 87 | 18.56 h | 6.18 h | 6.18 h | yes |
 | `codex-task-tree-session-124-publication.yaml` | session-124 | 154 | 6.97 h | 0.41 h | 0.41 h | yes |
-| `codex-task-tree-session-126.yaml` | session-126 | 200 | 1.28 h | 0.44 h | 0.44 h | yes |
+| `codex-task-tree-session-126.yaml` | session-126 | 259 | 1.63 h | 0.76 h | 0.76 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
 

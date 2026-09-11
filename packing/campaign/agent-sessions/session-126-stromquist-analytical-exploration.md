@@ -26,7 +26,7 @@ session:
     started_at: '2026-09-10T23:39:43Z'
     deadline_at: '2026-09-11T00:09:43Z'
     expected_output: X-027 with three disjoint supporting analyses, candidate mechanisms, exact scope, and first discriminators.
-    validation_command: Independent mathematical cross-review, then uv run --frozen --all-extras --group dev packing-validate --records.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: A proposed direction merely repeats an unchanged refuted domain, or a claimed deduction requires an unproved transfer premise.
     fallback: Preserve the failed deduction and its missing premise; rank a different discriminator without running a target experiment.
     outcome: Three retained mathematical reports and an integrated X-027 draft; independent cross-reviews passed the transport, duality, side-relaxed finite witness, seven-mark, contact-component and charge-profile deductions.
@@ -55,9 +55,9 @@ session:
   - workflow: review-planning-oversight
     focus: correctness
     recording: contemporaneous
-    clock_role: finalization
+    clock_role: work
     objective: Validate the committed analytical exploration, preserve native resource usage and the final review disposition, and leave a clean reviewable branch.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The requested research and documentation are complete and independently reviewed; certification and accounting now close the block.
     budget_minutes: 30
@@ -67,10 +67,29 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 1 --format json
     kill_condition: A concrete mathematical or validation failure invalidates certification of the source checkpoint.
     fallback: Correct the named failure, record the changed scope, and rerun affected checks before claiming completion.
+    outcome: The pre-push floor passed 43 checks but found missing README report entries and a stale campaign ledger with an incorrect finalization clock role. Test collection separately exposed the omitted documented macOS Cairo loader setting; the setting restored all 36 atlas-test collections. The full checkpoint on 42f6e6c9 was interrupted without a completed verdict so those known defects could be corrected before a clean restart.
+    evidence: [README.md, development.md, packing/campaign/agent-sessions/session-126-stromquist-analytical-exploration.md, packing/campaign/ledger.md]
+    stop_reason: Known integration and environment failures made the current checkpoint unsuitable for certification; the mathematical reports are unchanged.
+    next_action: Correct the index and clock role, regenerate all record views, and restart checks with the documented Cairo loader path.
+  - workflow: review-planning-oversight
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Correct the identified documentation and runtime setup failures, then certify the analytical branch on one fixed corrected checkpoint.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Pre-push validation and an isolated collection diagnostic identified concrete fixes; the interrupted full run has no verdict.
+    budget_minutes: 30
+    started_at: '2026-09-11T00:23:33Z'
+    deadline_at: '2026-09-11T00:53:33Z'
+    expected_output: Correct report index and generated ledger, passing records preflight, and full checkpoint with the supported macOS environment.
+    validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --jobs 4 --inner-jobs 2 --format json
+    kill_condition: A specific validation or mathematical failure still prevents certification.
+    fallback: Diagnose that failure and rerun the affected checks; preserve any unresolved limitation without calling it a passed checkpoint.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Run the full checkpoint on a fixed source tree and resolve any actual failure.
+    next_action: Run the records preflight before committing and restarting the full checkpoint.
   primary_bead: think-jx95
   status: in_progress
   budget:
@@ -134,11 +153,15 @@ session:
   - docs/project/research/research-2026-09-10-x027-structural-helpers.md
   - docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md
   - packing/campaign/ideas.md
+  - README.md
   checks:
   - Baseline e0c2583e has no source changes; origin/main was fetched before branch creation.
   - Baseline records tier passed before research-record edits; transcript retained locally at /private/tmp/x027-baseline-records.json.
   - Exploration, session, document map and native resource receipt passed bound softschema checks with no repair.
   - Three reciprocal mathematical reviews passed; final integrated review corrections are dispositioned in X-027 section7.
+  - Pre-push at 42f6e6c9 passed 43 of 45 checks; README report-index and campaign-record checks failed. The full run at that commit was interrupted without a completed verdict after the known failures were diagnosed.
+  - The documented macOS setting DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib restored collection of all 36 atlas tests. No source code changed.
+  - All 31 records checks passed across the corrected preflight and the campaign-record rerun; the latter removed a trailing period from an executable command field.
   resource_rollups: [packing/campaign/resource-usage/codex-task-tree-session-126.yaml]
   stop_reason: null
   next_action: Resolve the integrated review, validate the completed source checkpoint, and retain the new exploration on its branch.
@@ -163,8 +186,11 @@ in the coordinator and delegate dispatches.
 
 The four-hour ceiling is a planning checkpoint, not a quota or a reason to leave the
 owner’s requested work unfinished.
-Finalization has a thirty-minute reserve; a slow check runs alongside independent
-review, on a fixed source tree.
+The last thirty minutes are reserved for finalization; an earlier close is ordinary work
+and need not wait for that reserve.
+Phase 3 initially used the reserved clock-role label incorrectly and was corrected after
+the ledger rejected it.
+A slow check runs alongside independent review, on a fixed source tree.
 
 One coordinator owns X and session identifiers, the idea board, generated views,
 bookkeeping, mathematical integration, commits, and publication.
