@@ -13,6 +13,16 @@ PAIRS = [1, 4, 10, 17, 100, 110, 272, 307, 323]
 STYLES = ["tween", "physics", "bodies"]
 RULES = ["continuous", "house"]
 
+SELECT_JS = (
+    "([i, s, r]) => { atlasTransitions.select(i); "
+    "atlasTransitions.setStyle(s); atlasTransitions.setColorRule(r); }"
+)
+FILLS_JS = (
+    "Array.from(document.querySelectorAll('#squares g'))"
+    ".filter(g => g.style.display !== 'none')"
+    ".map(g => [g.dataset.identity, g.firstElementChild.getAttribute('fill')])"
+)
+
 
 def main() -> int:
     out = Path(sys.argv[1])
@@ -22,7 +32,12 @@ def main() -> int:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
         errors: list[str] = []
-        page.on("console", lambda m: errors.append(f"console.{m.type}: {m.text}") if m.type == "error" else None)
+        page.on(
+            "console",
+            lambda m: errors.append(f"console.{m.type}: {m.text}")
+            if m.type == "error"
+            else None,
+        )
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(800)
@@ -32,17 +47,11 @@ def main() -> int:
                 continue
             for style in STYLES:
                 for rule in RULES:
-                    page.evaluate(
-                        "([i, s, r]) => { atlasTransitions.select(i); atlasTransitions.setStyle(s); atlasTransitions.setColorRule(r); }",
-                        [index_of[n], style, rule],
-                    )
+                    page.evaluate(SELECT_JS, [index_of[n], style, rule])
                     for label, t in (("dwell", 0.5), ("start", 0.0), ("end", None)):
                         tt = page.evaluate("atlasTransitions.duration()") if t is None else t
                         page.evaluate("t => atlasTransitions.seek(t)", tt)
-                        fills = page.evaluate(
-                            "Array.from(document.querySelectorAll('#squares g')).filter(g => g.style.display !== 'none')"
-                            ".map(g => [g.dataset.identity, g.firstElementChild.getAttribute('fill')])"
-                        )
+                        fills = page.evaluate(FILLS_JS)
                         snap[f"{n}/{style}/{rule}/{label}"] = fills
         if errors:
             print("ERRORS:", errors)

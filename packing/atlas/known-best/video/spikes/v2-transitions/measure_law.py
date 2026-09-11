@@ -10,9 +10,9 @@
 A tool, not a one-off: every number the notes quote about revision 11 comes out of here, and the
 run is deterministic in the step count, so re-running it on any host gives the same table.
 
-Progress is measured in *steps*, never in wall time: `optimizeStep(k)` advances the open-ended run
-by exactly k fixed steps with no clock in it, so the arrangement after k steps is the same
-arrangement on any machine. Wall time is reported separately, as a cost.
+Progress is measured in *steps*, never in wall time: `optimizeStep(k)` advances the
+open-ended run by exactly k fixed steps with no clock in it, so the arrangement after k
+steps is the same arrangement on any machine. Wall time is reported separately, as a cost.
 """
 
 from __future__ import annotations
@@ -31,10 +31,13 @@ SIZES = (17, 29)
 
 
 def drive(page, script: str):
-    return page.evaluate("(() => {\n  const api = window.atlasTransitions;\n" + script + "\n})()")
+    prelude = "(() => {\n  const api = window.atlasTransitions;\n"
+    return page.evaluate(prelude + script + "\n})()")
 
 
-def settle(page, n: int, *, law: str, start: str, relationship: str = "general", steps: int = STEPS) -> dict:
+def settle(
+    page, n: int, *, law: str, start: str, relationship: str = "general", steps: int = STEPS
+) -> dict:
     """Run one open-ended settle and report what it reached."""
     return drive(
         page,
@@ -74,12 +77,12 @@ def law_table(page, sizes) -> list[dict]:
 
 
 def graph_table(page, sizes) -> list[dict]:
-    rows = []
-    for n in sizes:
-        for rel in ("general", "groups", "contact"):
-            for law in ("sticky", "default"):
-                rows.append(settle(page, n, law=law, start="grid", relationship=rel))
-    return rows
+    return [
+        settle(page, n, law=law, start="grid", relationship=rel)
+        for n in sizes
+        for rel in ("general", "groups", "contact")
+        for law in ("sticky", "default")
+    ]
 
 
 # ------------------------------------------------- the hand-drawn contact graph (revision 12)
@@ -87,8 +90,8 @@ def graph_table(page, sizes) -> list[dict]:
 # asked for at any n and the numbers are reproducible:
 #   ring   0-1-2-...-(n-1)-0, every square joined to the next. n edges.
 #   chain  the same without the closing edge. n - 1 edges.
-#   record the record's own contact graph, drawn by hand rather than derived — the control, which
-#          has to give exactly the run the record-derived target gives.
+#   record the record's own contact graph, drawn by hand rather than derived — the
+#          control, which has to give exactly the run the record-derived target gives.
 DRAWN_GRAPHS = ("ring", "chain", "record")
 
 
@@ -142,10 +145,7 @@ def grow_table(page, sizes) -> list[dict]:
     rows = []
     for n in sizes:
         for rule in ("constant", "clean"):
-            rows.append(
-                drive(
-                    page,
-                    f"""
+            script = f"""
   api.reset();
   api.setStepN({n});
   api.setBlind(true);
@@ -158,10 +158,10 @@ def grow_table(page, sizes) -> list[dict]:
   const o = api.optimizeState();
   return {{ n: {n}, rule: {rule!r}, size: g.size, growing: g.growing, stalled: g.stalled,
            tight: g.sideAtSize, unitSide: g.unitSide, record: g.record,
-           pen: g.penetration, packing: g.packing, suspect: g.suspect, excess: g.excess, steps: o.steps }};
-""",
-                )
-            )
+           pen: g.penetration, packing: g.packing, suspect: g.suspect, excess: g.excess,
+           steps: o.steps }};
+"""
+            rows.append(drive(page, script))
     return rows
 
 

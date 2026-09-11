@@ -35,6 +35,12 @@ PROBE = """
 """
 
 
+def note_console(errors: list[str], message) -> None:
+    """Keep the console errors and ignore everything else the page says."""
+    if message.type == "error":
+        errors.append(f"console.{message.type}: {message.text}")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--page", default="index-all.html")
@@ -49,7 +55,7 @@ def main() -> int:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
         errors: list[str] = []
-        page.on("console", lambda m: errors.append(f"console.{m.type}: {m.text}") if m.type == "error" else None)
+        page.on("console", lambda m: note_console(errors, m))
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(900)
@@ -64,12 +70,16 @@ def main() -> int:
             )
             page.evaluate("atlasTransitions.stopAll()")
             frames = page.evaluate("window.__frames")
-            # Each frame delta is classified by what happened across it: the pair changed (the DOM of
-            # the next pair is built there), the move began (where an unprefetched simulation runs),
-            # or neither.
-            classes: dict[str, list[float]] = {"boundary": [], "move start": [], "elsewhere": []}
+            # Each frame delta is classified by what happened across it: the pair changed
+            # (the DOM of the next pair is built there), the move began (where an
+            # unprefetched simulation runs), or neither.
+            classes: dict[str, list[float]] = {
+                "boundary": [],
+                "move start": [],
+                "elsewhere": [],
+            }
             for i in range(1, len(frames)):
-                (t0, p0, c0, m0), (t1, p1, c1, m1) = frames[i - 1], frames[i]
+                (t0, p0, c0, _m0), (t1, p1, c1, m1) = frames[i - 1], frames[i]
                 d = t1 - t0
                 if p1 != p0:
                     classes["boundary"].append(d)
@@ -79,9 +89,12 @@ def main() -> int:
                     classes["elsewhere"].append(d)
             worst = {k: (max(v) if v else 0.0) for k, v in classes.items()}
             print(
-                f"{style:>8} {args.page} n={args.start}..{args.start + args.pairs}, prefetch={not args.no_prefetch}: "
-                f"{len(frames)} frames, {len(classes['boundary'])} pair changes, {len(classes['move start'])} move starts; "
-                f"worst frame at a pair change {worst['boundary']:.1f} ms, at a move start {worst['move start']:.1f} ms, "
+                f"{style:>8} {args.page} n={args.start}..{args.start + args.pairs}, "
+                f"prefetch={not args.no_prefetch}: "
+                f"{len(frames)} frames, {len(classes['boundary'])} pair changes, "
+                f"{len(classes['move start'])} move starts; "
+                f"worst frame at a pair change {worst['boundary']:.1f} ms, "
+                f"at a move start {worst['move start']:.1f} ms, "
                 f"elsewhere {worst['elsewhere']:.1f} ms; median frame "
                 f"{statistics.median(classes['elsewhere']):.1f} ms"
             )

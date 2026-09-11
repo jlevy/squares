@@ -114,7 +114,16 @@ SMALL, MEDIUM, LARGE, NUMERAL_SIZE = TYPE_SCALE
 NEW_COLOR = "#a3123f"
 # Selectors outside the stage (the review chrome), which the type-scale rule does
 # not cover. Every other rule in the CSS styles stage text.
-CHROME_SELECTORS = ("html", "body", "#app", "#controls", "#readout", "#length", ".hint", ".visually-hidden")
+CHROME_SELECTORS = (
+    "html",
+    "body",
+    "#app",
+    "#controls",
+    "#readout",
+    "#length",
+    ".hint",
+    ".visually-hidden",
+)
 
 FONT_DIR = Path("vendor/kpress/src/kpress/format/static/fonts")
 KATEX_FONT_DIR = Path("vendor/kpress/src/kpress/format/static/katex/fonts")
@@ -212,7 +221,7 @@ def read_manifest(repo: Path) -> dict[int, dict]:
     return entries
 
 
-FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
+FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 
 
 def read_frontier(repo: Path, n: int) -> dict:
@@ -226,7 +235,7 @@ def read_frontier(repo: Path, n: int) -> dict:
 
 # ------------------------------------------------------------------------- geometry
 
-POLYGON = re.compile(r'<polygon data-feature="square-fill"(.*?)/>', re.S)
+POLYGON = re.compile(r'<polygon data-feature="square-fill"(.*?)/>', re.DOTALL)
 POINTS = re.compile(r'points="([^"]+)"')
 FILL = re.compile(r'fill="(#[0-9a-fA-F]{6})"')
 CONTAINER = re.compile(
@@ -255,10 +264,10 @@ def extract_geometry(svg_text: str, n: int, coordinate) -> tuple[list[str], list
     match = CONTAINER.search(svg_text)
     assert match, f"n={n}: container rect missing"
     x, y, w, h = (Decimal(v) for v in match.groups())
-    assert x == PANEL_ORIGIN and y == PANEL_ORIGIN, f"n={n}: container origin {x},{y}"
-    assert abs(w - PANEL_SIDE) < Decimal("0.01") and abs(h - PANEL_SIDE) < Decimal("0.01"), (
-        f"n={n}: container side {w}x{h}"
-    )
+    assert x == PANEL_ORIGIN, f"n={n}: container origin {x},{y}"
+    assert y == PANEL_ORIGIN, f"n={n}: container origin {x},{y}"
+    assert abs(w - PANEL_SIDE) < Decimal("0.01"), f"n={n}: container side {w}x{h}"
+    assert abs(h - PANEL_SIDE) < Decimal("0.01"), f"n={n}: container side {w}x{h}"
     polygons: list[str] = []
     fills: list[str] = []
     for attrs in POLYGON.findall(svg_text):
@@ -395,7 +404,9 @@ def sqrt_depth(node) -> int:
     raise ValueError(kind)
 
 
-def render_math(node, radical: str) -> str:
+def render_math(node, radical: str) -> str:  # noqa: PLR0911
+    # One return per node kind: the grammar has nine, and a dispatch table would put
+    # the recursion behind a layer without making the cases easier to read.
     kind = node[0]
     if kind == "int":
         return str(node[1])
@@ -429,9 +440,13 @@ def render_math(node, radical: str) -> str:
         parts = []
         for index, (sign, term) in enumerate(node[1]):
             if index == 0:
-                parts.append(("−" if sign < 0 else "") + render_math(term, radical))
+                # U+2212 MINUS SIGN, the typographic minus the page sets: RUF001's
+                # hyphen-minus would be a different glyph in the rendered formula.
+                parts.append(
+                    ("−" if sign < 0 else "") + render_math(term, radical)  # noqa: RUF001
+                )
             else:
-                op = "−" if sign < 0 else "+"
+                op = "−" if sign < 0 else "+"  # noqa: RUF001
                 parts.append(f'<span class="op">{op}</span>' + render_math(term, radical))
         return "".join(parts)
     raise ValueError(kind)
@@ -477,10 +492,13 @@ def badge_glyph_outlines(repo: Path) -> dict[str, tuple[str, Decimal, Decimal, D
     KaTeX_Main face gives ≈. Outline coordinates are rounded to a tenth of a font
     unit, so the emitted paths are the same bytes on every build.
     """
-    from fontTools.pens.boundsPen import BoundsPen
-    from fontTools.pens.svgPathPen import SVGPathPen
-    from fontTools.ttLib import TTFont
-    from fontTools.varLib.instancer import instantiateVariableFont
+    # fontTools is imported here rather than at the top: it is needed only when the
+    # badge glyphs are traced, and importing it re-enables the GIL on this build of
+    # Python. PLC0415 is waived for that reason, not overlooked.
+    from fontTools.pens.boundsPen import BoundsPen  # noqa: PLC0415
+    from fontTools.pens.svgPathPen import SVGPathPen  # noqa: PLC0415
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+    from fontTools.varLib.instancer import instantiateVariableFont  # noqa: PLC0415
 
     def ntos(value: float) -> str:
         return format(round(value, 1), "g")
@@ -536,7 +554,10 @@ def badge_symbols(outlines: dict[str, tuple[str, Decimal, Decimal, Decimal]]) ->
         tx = half - advance * k / 2
         stroke = ""
         if char == "≈":
-            stroke = f' stroke="{fill}" stroke-width="{fmt_units(APPROX_STROKE_UNITS)}" stroke-linejoin="round"'
+            stroke = (
+                f' stroke="{fill}" stroke-width="{fmt_units(APPROX_STROKE_UNITS)}"'
+                ' stroke-linejoin="round"'
+            )
         return (
             f'<path d="{d}" fill="{fill}"{stroke} '
             f'transform="translate({fmt_units(tx)} {fmt_units(baseline)}) '
@@ -545,7 +566,8 @@ def badge_symbols(outlines: dict[str, tuple[str, Decimal, Decimal, Decimal]]) ->
 
     def box(fill: str, stroke: str) -> str:
         return (
-            f'<rect x="0" y="0" width="{fmt_units(BADGE_SIZE)}" height="{fmt_units(BADGE_SIZE)}" '
+            f'<rect x="0" y="0" width="{fmt_units(BADGE_SIZE)}" '
+            f'height="{fmt_units(BADGE_SIZE)}" '
             f'rx="{BADGE_RX}" fill="{fill}" stroke="{stroke}" stroke-width="{BADGE_STROKE}"/>'
         )
 
@@ -558,11 +580,17 @@ def badge_symbols(outlines: dict[str, tuple[str, Decimal, Decimal, Decimal]]) ->
         symbols.append(f'<symbol id="{ident}">{body}</symbol>')
     scale = BADGE_SIZE * STAR_SPAN / (STAR_INSET * 2)
     points = " ".join(
-        f"{fmt_units(half + dx * scale)},{fmt_units(half + dy * scale)}" for dx, dy in STAR_POINTS
+        f"{fmt_units(half + dx * scale)},{fmt_units(half + dy * scale)}"
+        for dx, dy in STAR_POINTS
     )
-    symbols.append(f'<symbol id="{STAR_ID}"><polygon points="{points}" fill="currentColor"/></symbol>')
     symbols.append(
-        f'<symbol id="{OPEN_ID}">' + box("none", BADGE_FAINT) + glyph_path("?", BADGE_FAINT) + "</symbol>"
+        f'<symbol id="{STAR_ID}"><polygon points="{points}" fill="currentColor"/></symbol>'
+    )
+    symbols.append(
+        f'<symbol id="{OPEN_ID}">'
+        + box("none", BADGE_FAINT)
+        + glyph_path("?", BADGE_FAINT)
+        + "</symbol>"
     )
     return "".join(symbols)
 
@@ -603,7 +631,8 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
     """Return (template html, aria text, source url or None) for one case."""
     side = entry["side"]
     match = SIDE_DISPLAY.match(side["display"])
-    assert match and int(match.group(1)) == n, f"n={n}: side display {side['display']!r}"
+    assert match, f"n={n}: side display {side['display']!r}"
+    assert int(match.group(1)) == n, f"n={n}: side display {side['display']!r}"
     relation, side_value = match.group(2), match.group(3)
     assert (relation == "=") == (side["relation"] == "equality"), f"n={n}: relation"
 
@@ -611,7 +640,8 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
     lower_value = None
     if lower["shown"]:
         lmatch = SIDE_DISPLAY.match(lower["display"])
-        assert lmatch and lmatch.group(2) == "≥", f"n={n}: lower display"
+        assert lmatch, f"n={n}: lower display"
+        assert lmatch.group(2) == "≥", f"n={n}: lower display"
         lower_value = lmatch.group(3)
 
     exactness = entry["exactness"]
@@ -676,7 +706,8 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
     if lower_value is not None:
         reported_lower = frontier["reported_lower_bound"]
         who = join_names(reported_lower["proved_by"])
-        year = "" if reported_lower["proved_year"] is None else str(reported_lower["proved_year"])
+        proved_year = reported_lower["proved_year"]
+        year = "" if proved_year is None else str(proved_year)
         kind = LOWER_KIND_LABELS.get(reported_lower["kind"], reported_lower["kind"])
         pieces = [p for p in (who, year) if p]
         text = kind if not pieces else f"{', '.join(pieces)} ({kind})"
@@ -706,12 +737,15 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
     parts.append(f'<p class="headline"><span class="nval">{n}</span></p>')
     parts.append('<div class="lines">')
     parts.append(f'<p class="line side">{function_line(n, relation, side_value)}</p>')
-    degree_sub = f'<p class="sub">{degree_html}</p>' if degree_html else '<p class="sub empty"></p>'
+    degree_sub = (
+        f'<p class="sub">{degree_html}</p>' if degree_html else '<p class="sub empty"></p>'
+    )
     if exact_html:
         # Side, exact form, degree note: the note sits under the form it describes.
         tall = " tall" if exact_depth > 1 else ""
         parts.append(
-            f'<p class="line exact{tall}"><span class="eqsign">=</span><span class="form">{exact_html}</span></p>'
+            f'<p class="line exact{tall}"><span class="eqsign">=</span>'
+            f'<span class="form">{exact_html}</span></p>'
         )
         parts.append(degree_sub)
     else:
@@ -730,12 +764,13 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
     parts.append("</div>")
     parts.append('<ul class="status">')
     for ident, style, label, _meaning in labels:
-        parts.append(f'<li class="{style}">{badge_svg(ident)}{html.escape(label, quote=False)}</li>')
+        parts.append(
+            f'<li class="{style}">{badge_svg(ident)}{html.escape(label, quote=False)}</li>'
+        )
     parts.append("</ul>")
     parts.append('<div class="open"><p class="open-head">Open</p><ul>')
     if open_items:
-        for item in open_items:
-            parts.append(f"<li>{badge_svg(OPEN_ID)}{item}</li>")
+        parts.extend(f"<li>{badge_svg(OPEN_ID)}{item}</li>" for item in open_items)
     else:
         parts.append('<li class="none">nothing open</li>')
     parts.append("</ul></div>")
@@ -745,7 +780,8 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
     # The source URL is the block's last line, across both columns: the longest
     # (52 characters) is 664px at 28px, wider than the value column but not the panel.
     if source_url:
-        parts.append(f'<div class="urlrow"><dd class="url">{html.escape(strip_scheme(source_url))}</dd></div>')
+        url_text = html.escape(strip_scheme(source_url))
+        parts.append(f'<div class="urlrow"><dd class="url">{url_text}</dd></div>')
     parts.append("</dl>")
     parts.append("</div>")
     template = f'<template id="facts-{n}">' + "".join(parts) + "</template>"
@@ -795,6 +831,9 @@ def font_css(repo: Path) -> tuple[str, list[tuple[str, int]]]:
     return "".join(blocks), sizes
 
 
+# The stage stylesheet, emitted into the page byte for byte. Its line lengths are the
+# stylesheet's own formatting, not Python's, and rewrapping them would change the
+# generated `index.html`; E501 is waived for the literal as a whole.
 CSS = r"""
 :root {
   --paper: #ffffff;
@@ -934,8 +973,11 @@ body.capture #stage { box-shadow: none; }
 #readout { font-variant-numeric: tabular-nums; min-width: 22em; white-space: nowrap; }
 #length, .hint { color: var(--muted); white-space: nowrap; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-"""
+"""  # noqa: E501
 
+# The player, emitted into the page byte for byte, on the same terms as `CSS` above.
+# RUF001 is waived with it: the separator in the length readout is U+00D7, the
+# multiplication sign the review chrome shows, not a letter x.
 JS = r"""
 (function () {
   'use strict';
@@ -1214,7 +1256,7 @@ JS = r"""
   fit();
   render();
 })();
-"""
+"""  # noqa: E501, RUF001
 
 FOOTER_LEFT = (
     '<span><i>s</i><span class="m">(</span><i>n</i><span class="m">)</span> is the side of the '
@@ -1288,26 +1330,35 @@ def assemble(fonts_css: str, symbols: str, facts_templates: list[str], data_json
         "</div></div>\n"
         '<div id="controls">\n'
         '<div class="row">'
-        '<button id="btn-prev" type="button" title="Previous (←)">‹ prev</button>'
+        '<button id="btn-prev" type="button" title="Previous (←)">'
+        "‹ prev</button>"  # noqa: RUF001
         '<button id="btn-play" type="button" title="Play / pause (space)">Play</button>'
-        '<button id="btn-next" type="button" title="Next (→)">next ›</button>'
-        '<input id="scrub" type="range" min="0" max="1" step="0.01" value="0" aria-label="Timeline">'
+        '<button id="btn-next" type="button" title="Next (→)">'
+        "next ›</button>"  # noqa: RUF001
+        '<input id="scrub" type="range" min="0" max="1" step="0.01" '
+        'value="0" aria-label="Timeline">'
         '<span id="readout"></span>'
-        '<label>go to n <input id="jump" type="number" min="1" max="324" step="1" value="1"></label>'
+        '<label>go to n <input id="jump" type="number" min="1" max="324" '
+        'step="1" value="1"></label>'
         "</div>\n"
         '<div class="row">'
-        f'<label>dwell <input id="dwell" type="number" min="0.1" step="0.1" value="{DEFAULT_DWELL}"> s</label>'
-        f'<label>fade <input id="fade" type="number" min="0" step="0.1" value="{DEFAULT_FADE}"> s</label>'
-        '<label><input id="settle" type="checkbox" checked> 2% scale settle (picture only; the panel cuts at the fade midpoint)</label>'
+        f'<label>dwell <input id="dwell" type="number" min="0.1" step="0.1" '
+        f'value="{DEFAULT_DWELL}"> s</label>'
+        f'<label>fade <input id="fade" type="number" min="0" step="0.1" '
+        f'value="{DEFAULT_FADE}"> s</label>'
+        '<label><input id="settle" type="checkbox" checked> 2% scale settle '
+        "(picture only; the panel cuts at the fade midpoint)</label>"
         '<label><input id="capture" type="checkbox"> capture preview (stage only, 16:9)</label>'
         '<span id="length"></span>'
-        '<span class="hint">space play/pause · ← → step · Home/End · ?capture=1 in the URL for the stage alone</span>'
+        '<span class="hint">space play/pause · ← → step · Home/End · '
+        "?capture=1 in the URL for the stage alone</span>"
         "</div>\n"
         "</div>\n"
         "</div>\n"
         '<div id="live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>\n'
         "<noscript>This slideshow needs JavaScript to step through the packings.</noscript>\n"
-        '<template id="proto"><svg><g class="squares"><polygon></polygon></g></svg></template>\n'
+        '<template id="proto"><svg><g class="squares">'
+        "<polygon></polygon></g></svg></template>\n"
         + "\n".join(facts_templates)
         + "\n"
         '<script id="atlas-data" type="application/json">' + data_json + "</script>\n"
@@ -1340,7 +1391,9 @@ def build(repo: Path, out_dir: Path, decimals: int, radical: str) -> dict:
     slides: list[dict] = []
     for n in range(FIRST_N, LAST_N + 1):
         frontier = read_frontier(repo, n)
-        template, aria, source_url = build_facts(n, composite[n], manifest[n], frontier, radical)
+        template, aria, source_url = build_facts(
+            n, composite[n], manifest[n], frontier, radical
+        )
         templates.append(template)
         slide = {
             "n": n,
@@ -1374,7 +1427,7 @@ def build(repo: Path, out_dir: Path, decimals: int, radical: str) -> dict:
     out_path.write_bytes(page.encode("utf-8"))
 
     geometry_bytes = sum(len(s["p"]) + len(s["f"]) for s in slides)
-    report = {
+    return {
         "index_html": str(out_path),
         "bytes": len(page.encode("utf-8")),
         "geometry_bytes": geometry_bytes,
@@ -1387,7 +1440,6 @@ def build(repo: Path, out_dir: Path, decimals: int, radical: str) -> dict:
         "decimals": decimals,
         "duration_seconds": LAST_N * (DEFAULT_DWELL + DEFAULT_FADE),
     }
-    return report
 
 
 def main(argv: list[str] | None = None) -> int:

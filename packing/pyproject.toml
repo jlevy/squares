@@ -237,6 +237,10 @@ max-complexity = 57
 "benchmarks/*" = ["T201"]
 "frankensim-probe/*" = ["T201"]
 "src/sqpack/cli/*" = ["T201"]
+# The video spikes are tools of the same kind: generators, measurement scripts and
+# browser checks whose interface is what they print. Waived here rather than rewritten
+# as the lint floor is raised over them; `**` because they sit two directories down.
+"atlas/known-best/video/spikes/**" = ["T201"]
 # `K` is the published symbol in the source these modules transcribe; renaming it to
 # `k` would make the code harder to check against the paper, which is the point.
 "cases/trump11/packing.py" = ["N806"]

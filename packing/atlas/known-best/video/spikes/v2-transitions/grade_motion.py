@@ -3,14 +3,15 @@
     packing/.venv/bin/python3 grade_motion.py [workbench.html] [--style physics] [--anneal 3]
     packing/.venv/bin/python3 grade_motion.py --compare      # every style at every anneal level
 
-**Neither half alone is the answer, and that is the whole design.** A run graded only on where it
-ends up can thrash across the stage and still score well, because the lock-in carries whatever is
-left; one graded only on the journey can glide smoothly to somewhere wrong. A configuration is good
-when a viewer can follow the motion AND the run arrives, so this reports the two separately, never
-collapses one into the other, and combines them only at the end with the weights written down.
+**Neither half alone is the answer, and that is the whole design.** A run graded only on
+where it ends up can thrash across the stage and still score well, because the lock-in
+carries whatever is left; one graded only on the journey can glide smoothly to somewhere
+wrong. A configuration is good when a viewer can follow the motion AND the run arrives, so
+this reports the two separately, never collapses one into the other, and combines them only
+at the end with the weights written down.
 
-**Outcome** -- did it get there, at the instant the lock-in takes over, which is the last frame the
-physics owns:
+**Outcome** -- did it get there, at the instant the lock-in takes over, which is the last
+frame the physics owns:
 
   residual    the worst square's distance from its place in the record, in unit sides
   turn        the worst square's angle from its place in the record, in degrees
@@ -19,20 +20,21 @@ physics owns:
 
 **Motion** -- was the journey one a viewer can follow:
 
-  wander      the worst distance a square strays from the straight line between where it starts and
-              where it ends. This is the measure that matters and it took two tries to find: distance
-              from the final pose confuses travel with thrashing, since a square that legitimately
-              moves 1.2 sides reads 1.2 at the start of its move
+  wander      the worst distance a square strays from the straight line between where it
+              starts and where it ends. This is the measure that matters and it took two
+              tries to find: distance from the final pose confuses travel with thrashing,
+              since a square that legitimately moves 1.2 sides reads 1.2 at the start of
+              its move
   jerk        the worst single-frame displacement, in sides -- a jump, as against a glide
   overlap     the deepest penetration of one square into another through the move, which is the
               physics failing rather than looking bad
 
-The grade is `1 / (1 + sum(weight * value))` over both families, so it runs 0 to 1 with 1 perfect,
-and the components are printed beside it. The weights are a statement about what matters, not a
-measurement, and they are here to be argued with: a unit side of residual and a unit side of wander
-are counted the same, a degree of turn as a fiftieth of a side, and a unit side of overlap as five,
-because squares passing through each other is a different kind of wrong from squares taking a long
-way round.
+The grade is `1 / (1 + sum(weight * value))` over both families, so it runs 0 to 1 with 1
+perfect, and the components are printed beside it. The weights are a statement about what
+matters, not a measurement, and they are here to be argued with: a unit side of residual
+and a unit side of wander are counted the same, a degree of turn as a fiftieth of a side,
+and a unit side of overlap as five, because squares passing through each other is a
+different kind of wrong from squares taking a long way round.
 """
 
 import argparse
@@ -47,13 +49,15 @@ HERE = Path(__file__).resolve().parent
 PACKING = HERE.parents[4]
 DEFAULT_PAGE = PACKING / "site/workbench/index.html"
 
-#: The n sampled by default: a spread of sizes and of rearrangement kinds, every one a matched step
-#: (a static append has no motion to grade). Small enough to run while someone waits.
+#: The n sampled by default: a spread of sizes and of rearrangement kinds, every one a
+#: matched step (a static append has no motion to grade). Small enough to run while
+#: someone waits.
 DEFAULT_SIZES = (11, 17, 26, 29, 37, 110, 180, 307)
 
-#: What a unit of each measure costs the grade. See the module docstring: this is a statement about
-#: what matters rather than something measured, and the components are always printed beside the
-#: grade so a reader can disagree with the weights without losing the numbers.
+#: What a unit of each measure costs the grade. See the module docstring: this is a
+#: statement about what matters rather than something measured, and the components are
+#: always printed beside the grade so a reader can disagree with the weights without
+#: losing the numbers.
 WEIGHTS = {
     "residual": 1.0,
     "mean": 1.0,
@@ -63,11 +67,13 @@ WEIGHTS = {
     "overlap": 5.0,
 }
 
-#: Where the lock-in takes over, as a fraction of the move: `1 - PHYS.blend`. The outcome is read
-#: here rather than at the end, because after this the blend is carrying the squares and what it
-#: carries them from is exactly what is being graded.
+#: Where the lock-in takes over, as a fraction of the move: `1 - PHYS.blend`. The outcome
+#: is read here rather than at the end, because after this the blend is carrying the
+#: squares and what it carries them from is exactly what is being graded.
 LOCK_IN_AT = 0.88
 
+# The embedded JavaScript is left exactly as it runs in the page; E501 is waived over the
+# whole literal rather than reflowing another language to Python's line limit.
 MEASURE = """(args) => {
   const api = window.atlasTransitions;
   const d = api.duration(), sc = api.schedule();
@@ -120,11 +126,14 @@ MEASURE = """(args) => {
     overlap: built.maxPenetration === undefined ? 0 : built.maxPenetration,
     ms: built.ms === undefined ? 0 : built.ms,
   };
-}"""
+}"""  # noqa: E501
 
 
 def grade(row: dict[str, float]) -> float:
-    """One number from both families, 0 to 1, with 1 perfect. Components stay printed beside it."""
+    """One number from both families, 0 to 1, with 1 perfect.
+
+    Components stay printed beside it.
+    """
     penalty = sum(weight * float(row.get(name, 0.0)) for name, weight in WEIGHTS.items())
     return 1.0 / (1.0 + penalty)
 
@@ -149,12 +158,16 @@ def measure(page, sizes: tuple[int, ...], style: str, samples: int) -> list[dict
 def report(label: str, rows: list[dict]) -> dict:
     """Print the rows and their medians, and return the summary."""
     print(f"\n== {label} ==")
-    head = f"{'n':>5} {'residual':>9} {'mean':>7} {'turn':>7} {'wander':>8} {'jerk':>7} {'overlap':>8} {'grade':>7}"
+    head = (
+        f"{'n':>5} {'residual':>9} {'mean':>7} {'turn':>7}"
+        f" {'wander':>8} {'jerk':>7} {'overlap':>8} {'grade':>7}"
+    )
     print(head)
     for row in rows:
         print(
             f"{row['n']:>5} {row['residual']:>9.3f} {row['mean']:>7.3f} {row['turn']:>7.2f} "
-            f"{row['wander']:>8.3f} {row['jerk']:>7.3f} {row['overlap']:>8.4f} {row['grade']:>7.3f}"
+            f"{row['wander']:>8.3f} {row['jerk']:>7.3f}"
+            f" {row['overlap']:>8.4f} {row['grade']:>7.3f}"
         )
     if not rows:
         return {}
@@ -163,7 +176,8 @@ def report(label: str, rows: list[dict]) -> dict:
         for name in ("residual", "mean", "turn", "wander", "jerk", "overlap", "grade")
     }
     print(
-        f"{'med':>5} {summary['residual']:>9.3f} {summary['mean']:>7.3f} {summary['turn']:>7.2f} "
+        f"{'med':>5} {summary['residual']:>9.3f} {summary['mean']:>7.3f}"
+        f" {summary['turn']:>7.2f} "
         f"{summary['wander']:>8.3f} {summary['jerk']:>7.3f} {summary['overlap']:>8.4f} "
         f"{summary['grade']:>7.3f}"
     )
@@ -182,7 +196,9 @@ def main() -> int:
     o = ap.parse_args()
 
     if not o.page.exists():
-        raise SystemExit(f"{o.page} is not built: run `python -m devtools.build_workbench_site`")
+        raise SystemExit(
+            f"{o.page} is not built: run `python -m devtools.build_workbench_site`"
+        )
     sizes = tuple(o.sizes)
     out: dict[str, dict] = {}
     with sync_playwright() as pw:
@@ -214,7 +230,10 @@ def main() -> int:
             print(f"  {summary.get('grade', 0):.3f}  {label}")
     if o.json:
         o.json.write_text(
-            json.dumps({"weights": WEIGHTS, "lock_in_at": LOCK_IN_AT, "rows": everything}, indent=2),
+            json.dumps(
+                {"weights": WEIGHTS, "lock_in_at": LOCK_IN_AT, "rows": everything},
+                indent=2,
+            ),
             encoding="utf-8",
         )
         print(f"\nwrote {o.json}")

@@ -6,7 +6,11 @@ container it needs against the record's. A run that reports a side below the rec
 not found anything: it is overlapping, and the overlap column is printed beside every
 number so that cannot be read as a win.
 """
-import json, sys, itertools
+import itertools
+import json
+import sys
+from pathlib import Path
+
 from playwright.sync_api import sync_playwright
 
 PAGE = sys.argv[1]
@@ -27,13 +31,17 @@ ARMS = [
 def main():
     rows = []
     with sync_playwright() as pw:
-        b = pw.chromium.launch(); pg = b.new_page(viewport={"width": 1400, "height": 900})
-        pg.goto(f"file://{PAGE}"); pg.wait_for_timeout(2000)
+        b = pw.chromium.launch()
+        pg = b.new_page(viewport={"width": 1400, "height": 900})
+        pg.goto(f"file://{PAGE}")
+        pg.wait_for_timeout(2000)
         pg.evaluate("atlasTransitions.setMode('pack')")
         for n, (label, start, law, anneal) in itertools.product(CASES, ARMS):
-            pg.evaluate(f"atlasTransitions.setStepN({n})"); pg.wait_for_timeout(250)
+            pg.evaluate(f"atlasTransitions.setStepN({n})")
+            pg.wait_for_timeout(250)
             pg.evaluate("atlasTransitions.setLawPreset('default')")
-            if law: pg.evaluate(f"atlasTransitions.setLaw({json.dumps(law)})")
+            if law:
+                pg.evaluate(f"atlasTransitions.setLaw({json.dumps(law)})")
             pg.evaluate(f"atlasTransitions.setAnneal({anneal})")
             pg.evaluate(f"atlasTransitions.setInitial('{start}'); atlasTransitions.optimize()")
             pg.wait_for_timeout(120)
@@ -44,7 +52,10 @@ def main():
                 rows.append({"n": n, "arm": label, "record": rec, "side": side,
                              "pen": pen, "excess": 100 * (side - rec) / rec})
         b.close()
-    print(f"{'n':>4} {'arm':<16} {'record':>9} {'reached':>9} {'excess':>8} {'overlap':>9}  verdict")
+    print(
+        f"{'n':>4} {'arm':<16} {'record':>9} {'reached':>9}"
+        f" {'excess':>8} {'overlap':>9}  verdict"
+    )
     for r in rows:
         v = "OVERLAPPING" if (r["pen"] or 0) > 1e-4 and r["side"] < r["record"] else ""
         print(f"{r['n']:>4} {r['arm']:<16} {r['record']:>9.5f} {r['side']:>9.5f}"
@@ -60,6 +71,8 @@ def main():
         ok = [v for v in vals if v is not None]
         print(f"  {arm:<16} clean {len(ok)}/{len(vals)}"
               + (f"  mean excess {sum(ok)/len(ok):+.2f}%" if ok else "  no clean run"))
-    json.dump(rows, open(sys.argv[3] if len(sys.argv) > 3 else "/dev/null", "w"), indent=1)
+    out = Path(sys.argv[3] if len(sys.argv) > 3 else "/dev/null")
+    with out.open("w") as fh:
+        json.dump(rows, fh, indent=1)
 
 main()

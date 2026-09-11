@@ -21,7 +21,11 @@ def main(argv: list[str]) -> int:
     weights = [float(w) for w in argv] or [0.0, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0]
     manifest = {e["n"]: e for e in json.loads(bc.MANIFEST.read_text())["atlas"]["entries"]}
     witnesses = {n: bc.load_witness(n) for n in range(1, bc.N_MAX + 1)}
-    print("| angle weight | mean of max disp | max of max disp | squares moving >1 | squares rotating | total rotation (deg) | pairs with crossings | 4→5 keeps corners |")
+    print(
+        "| angle weight | mean of max disp | max of max disp | squares moving >1 |"
+        " squares rotating | total rotation (deg) | pairs with crossings |"
+        " 4→5 keeps corners |"
+    )
     print("| ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
     for weight in weights:
         bc.ANGLE_WEIGHT = weight
@@ -41,11 +45,18 @@ def main(argv: list[str]) -> int:
             rotating += stats["rotated"]
             crossing_pairs += 1 if stats["crossings"] else 0
             for i, j in enumerate(match["map"]):
-                total_rotation += abs(bc.angle_delta(witnesses[n]["squares"][i][2], witnesses[n + 1]["squares"][j][2]))
+                here = witnesses[n]["squares"][i][2]
+                there = witnesses[n + 1]["squares"][j][2]
+                total_rotation += abs(bc.angle_delta(here, there))
             if n == 4:
-                corners = "yes" if match["new"] == 4 else "no (new square is index %d)" % match["new"]
+                corners = (
+                    "yes"
+                    if match["new"] == 4
+                    else f"no (new square is index {match['new']:d})"
+                )
         print(
-            f"| {weight:g} | {sum(maxima) / len(maxima):.3f} | {max(maxima):.3f} | {over_one} | {rotating} | "
+            f"| {weight:g} | {sum(maxima) / len(maxima):.3f} | {max(maxima):.3f} | "
+            f"{over_one} | {rotating} | "
             f"{total_rotation:.0f} | {crossing_pairs} | {corners} |"
         )
     return 0

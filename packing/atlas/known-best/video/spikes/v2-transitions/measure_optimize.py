@@ -1,14 +1,15 @@
 """What an open-ended Optimize run achieves, per second of wall clock and per second simulated.
 
-Two measurements, because they answer different questions and only one of them is a property of the
-machine this runs on:
+Two measurements, because they answer different questions and only one of them is a
+property of the machine this runs on:
 
-  throughput  how many fixed steps of the run a second of wall clock buys at this n, from a real
-              playing run through `requestAnimationFrame` in the pinned headless shell. This is the
-              one that moves with the host.
-  progress    what the run reaches after a fixed number of steps: the smallest box it has held the
-              squares in without overlapping them (`best`), against the record. Deterministic — the
-              state after k steps is exact — so it is the same on any host.
+  throughput  how many fixed steps of the run a second of wall clock buys at this n, from
+              a real playing run through `requestAnimationFrame` in the pinned headless
+              shell. This is the one that moves with the host.
+  progress    what the run reaches after a fixed number of steps: the smallest box it has
+              held the squares in without overlapping them (`best`), against the record.
+              Deterministic — the state after k steps is exact — so it is the same on any
+              host.
 
     packing/.venv/bin/python3 measure_optimize.py [--page workbench.html] [--steps 2400] [n ...]
 """
@@ -56,17 +57,20 @@ def main() -> int:
             for kind in KINDS:
                 # Throughput: a real playing run for 2 s of wall clock.
                 page.evaluate(
-                    "([n, k]) => { const A = window.atlasTransitions; A.setStepN(n); A.setSpeed(2);"
+                    "([n, k]) => { const A = window.atlasTransitions;"
+                    " A.setStepN(n); A.setSpeed(2);"
                     "  A.setInitial(k); A.optimize(true); }",
                     [n, kind],
                 )
                 page.wait_for_timeout(2000)
                 live = page.evaluate(
-                    "() => { const A = window.atlasTransitions; A.pause(); return A.optimizeState(); }"
+                    "() => { const A = window.atlasTransitions; A.pause();"
+                    " return A.optimizeState(); }"
                 )
                 # Progress: the same start, driven by exact step counts with no clock in it.
                 page.evaluate(
-                    "([n, k]) => { const A = window.atlasTransitions; A.setStepN(n); A.setInitial(k);"
+                    "([n, k]) => { const A = window.atlasTransitions;"
+                    " A.setStepN(n); A.setInitial(k);"
                     "  A.optimize(true); A.pause(); }",
                     [n, kind],
                 )
@@ -77,7 +81,7 @@ def main() -> int:
                 print(
                     f"{n:>4} {kind:<9} {live['steps'] / 2.0:>8.0f} {live['time'] / 2.0:>8.2f} "
                     f"{live['msPerStep']:>8.3f} {start['required']:>10.3f} "
-                    f"{(best if best else float('nan')):>8.3f} {done['record']:>8.3f} "
+                    f"{(best or float('nan')):>8.3f} {done['record']:>8.3f} "
                     f"{excess:>7.2f}% {(done['penetration'] or 0):>8.4f}"
                 )
         page.evaluate("atlasTransitions.setSpeed(1); atlasTransitions.setInitial('previous')")

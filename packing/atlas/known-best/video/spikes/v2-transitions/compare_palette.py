@@ -91,9 +91,10 @@ def workbench_fills(page_path: Path, pairs: int) -> dict[str, dict[str, int]]:
         page.evaluate("document.fonts.ready")
         page.evaluate("window.atlasTransitions.setMode('animate')")
         page.evaluate("window.atlasTransitions.setCapture(true)")
-        # The stage trims chroma to compensate for drawing one packing where the atlas draws a page
-        # of them. Set to 1 here: the claim being checked is that the stage's colours ARE the
-        # atlas's, and the trim is a presentation setting on top of that rather than a palette.
+        # The stage trims chroma to compensate for drawing one packing where the atlas
+        # draws a page of them. Set to 1 here: the claim being checked is that the stage's
+        # colours ARE the atlas's, and the trim is a presentation setting on top of that
+        # rather than a palette.
         page.evaluate("window.atlasTransitions.setStageChroma(1)")
         count = page.evaluate("window.atlasTransitions.pairs().length")
         picks = sorted({round(i * (count - 1) / max(1, pairs - 1)) for i in range(pairs)})
@@ -127,9 +128,10 @@ def per_n(page_path: Path, wanted: list[int]) -> None:
         page.evaluate("document.fonts.ready")
         page.evaluate("window.atlasTransitions.setMode('animate')")
         page.evaluate("window.atlasTransitions.setCapture(true)")
-        # The stage trims chroma to compensate for drawing one packing where the atlas draws a page
-        # of them. Set to 1 here: the claim being checked is that the stage's colours ARE the
-        # atlas's, and the trim is a presentation setting on top of that rather than a palette.
+        # The stage trims chroma to compensate for drawing one packing where the atlas
+        # draws a page of them. Set to 1 here: the claim being checked is that the stage's
+        # colours ARE the atlas's, and the trim is a presentation setting on top of that
+        # rather than a palette.
         page.evaluate("window.atlasTransitions.setStageChroma(1)")
         pairs = page.evaluate("window.atlasTransitions.pairs().map((p) => p.n)")
         for n in wanted:
@@ -156,7 +158,10 @@ def per_n(page_path: Path, wanted: list[int]) -> None:
             print(f"      rendering: {'  '.join(f'{c} x{want[c]}' for c in sorted(want))}")
             print(f"      page:      {'  '.join(f'{c} x{got[c]}' for c in sorted(got))}")
             if only_svg or only_page:
-                print(f"      only in the rendering: {only_svg}   only on the page: {only_page}")
+                print(
+                    f"      only in the rendering: {only_svg}"
+                    f"   only on the page: {only_page}"
+                )
         browser.close()
 
 
@@ -204,7 +209,9 @@ def main() -> int:
         families.setdefault(round(hue / 20) * 20, []).append((lightness, chroma, fill))
     for hue in sorted(families):
         members = sorted(families[hue])
-        shown = " ".join(f"{fill}({l:.2f}/{c:.2f})" for l, c, fill in members[:6])
+        shown = " ".join(
+            f"{fill}({light:.2f}/{chrom:.2f})" for light, chrom, fill in members[:6]
+        )
         print(f"  hue ~{hue:>3}  {len(members):>2} shades  {shown}")
     return 0
 

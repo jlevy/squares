@@ -2,19 +2,19 @@
 
     packing/.venv/bin/python3 measure_greens.py [workbench.html] [--identities N]
 
-Revision 12 makes a square's colour a property of its identity, from a ramp of greens the page
-generates itself out of the two ends of the teal-to-citron sweep. Two numbers say whether that ramp
-is any good, and this is where both of them come from:
+Revision 12 makes a square's colour a property of its identity, from a ramp of greens the
+page generates itself out of the two ends of the teal-to-citron sweep. Two numbers say
+whether that ramp is any good, and this is where both of them come from:
 
   * the **resolution** of the ramp — the smallest OkLab distance between any two of its greens,
     which is how far apart the two most confusable squares on a stage can be;
   * the **neighbour separation** — the smallest distance between the greens of two consecutive
     identities, which is what the co-prime stride is for.
 
-Distances are plain Euclidean OkLab, which is the space the page mixes and drains colour in. An
-OkLab distance of about 0.02 is one just-noticeable step for two large patches side by side, so the
-count reported as *distinguishable* is the number of greens whose pairwise distances all clear a
-threshold, 0.02 by default.
+Distances are plain Euclidean OkLab, which is the space the page mixes and drains colour in.
+An OkLab distance of about 0.02 is one just-noticeable step for two large patches side by
+side, so the count reported as *distinguishable* is the number of greens whose pairwise
+distances all clear a threshold, 0.02 by default.
 """
 
 import math
@@ -88,7 +88,10 @@ def main() -> int:
             if all(distance(colour, other) >= threshold for other in keep):
                 keep.append(colour)
         marker = "  <- the JND used below" if abs(threshold - JND) < 1e-9 else ""
-        print(f"  at a threshold of {threshold:.3f}: {len(keep)} mutually distinguishable{marker}")
+        print(
+            f"  at a threshold of {threshold:.3f}: "
+            f"{len(keep)} mutually distinguishable{marker}"
+        )
 
     neighbours = [(distance(by_identity[i], by_identity[i + 1]), i + 1, i + 2)
                   for i in range(len(by_identity) - 1)]

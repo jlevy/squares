@@ -75,7 +75,7 @@ def _build_twice() -> tuple[bytes, bytes]:
 
 
 def _extract_json(page: str) -> dict:
-    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.S)
+    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.DOTALL)
     assert match, "embedded record missing"
     return json.loads(match.group(1).replace("<\\/", "</"))
 
@@ -121,9 +121,9 @@ def _no_exact_form(entry: dict) -> bool:
 
 
 def _stage_css(page: str) -> str:
-    style = re.search(r"<style>\n(.*?)</style>", page, re.S).group(1)
+    style = re.search(r"<style>\n(.*?)</style>", page, re.DOTALL).group(1)
     style = re.sub(r"@font-face \{[^}]*\}", "", style)
-    return re.sub(r"/\*.*?\*/", "", style, flags=re.S)
+    return re.sub(r"/\*.*?\*/", "", style, flags=re.DOTALL)
 
 
 def test_candidate() -> None:
@@ -149,7 +149,7 @@ def test_candidate() -> None:
         for polygon in slide["p"].split(";"):
             assert len(polygon.split(" ")) == 4, f"n={n}: corner count"
         assert slide["a"].startswith(f"n = {n}."), f"n={n}: aria text"
-    templates = dict(re.findall(r'<template id="facts-(\d+)">(.*?)</template>', page, re.S))
+    templates = dict(re.findall(r'<template id="facts-(\d+)">(.*?)</template>', page, re.DOTALL))
     assert len(templates) == 324
     for n in range(FIRST, LAST + 1):
         assert str(n) in templates, f"n={n}: facts template"
@@ -157,7 +157,7 @@ def test_candidate() -> None:
     assert all(len(fill) == 7 and fill.startswith("#") for fill in data["palette"])
 
     # 3. the only http(s) strings are the source-URL facts in the record
-    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.S)
+    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.DOTALL)
     outside = page[: match.start()] + page[match.end() :]
     assert "http://" not in outside and "https://" not in outside, "URL outside the record"
     url_paths = []
@@ -188,17 +188,17 @@ def test_candidate() -> None:
     degree_under_side = 0
     for n in range(FIRST, LAST + 1):
         body = templates[str(n)]
-        status = re.search(r'<ul class="status">(.*?)</ul>', body, re.S).group(1)
-        rows = re.findall(r"<li[^>]*>(.*?)</li>", status, re.S)
+        status = re.search(r'<ul class="status">(.*?)</ul>', body, re.DOTALL).group(1)
+        rows = re.findall(r"<li[^>]*>(.*?)</li>", status, re.DOTALL)
         expected = _expected_badges(composite[n])
         assert len(rows) == len(expected), f"n={n}: badge rows {rows}"
         for row, (ident, label) in zip(rows, expected):
             assert f'<use href="#{ident}"' in row and row.endswith(label), f"n={n}: {row!r} vs {label!r}"
         badge_tally += len(rows)
-        open_block = re.search(r'<div class="open"><p class="open-head">Open</p><ul>(.*?)</ul></div>', body, re.S)
+        open_block = re.search(r'<div class="open"><p class="open-head">Open</p><ul>(.*?)</ul></div>', body, re.DOTALL)
         assert open_block, f"n={n}: open group missing"
         expected_open = _expected_open(composite[n])
-        rows = re.findall(r"<li[^>]*>(.*?)</li>", open_block.group(1), re.S)
+        rows = re.findall(r"<li[^>]*>(.*?)</li>", open_block.group(1), re.DOTALL)
         if expected_open:
             assert len(rows) == len(expected_open), f"n={n}: open rows"
             for row, text in zip(rows, expected_open):
@@ -207,7 +207,7 @@ def test_candidate() -> None:
             assert rows == ["nothing open"], f"n={n}: empty open group {rows}"
         # Notes on their own line under the value: never inside a `.line`.
         for note in ("class=\"degree\"", "class=\"note\""):
-            for line in re.findall(r'<p class="line[^"]*">(.*?)</p>', body, re.S):
+            for line in re.findall(r'<p class="line[^"]*">(.*?)</p>', body, re.DOTALL):
                 assert note not in line, f"n={n}: {note} inside a value line"
         # The five slots, in order. With an exact form: side, exact, degree note,
         # lower, the lower's note. Without one the degree note follows the side value
@@ -286,7 +286,7 @@ def test_candidate() -> None:
 
     # 8. the script parses and its timeline API behaves (optional, needs node)
     node = shutil.which("node")
-    scripts = re.findall(r"<script>(.*?)</script>", page, re.S)
+    scripts = re.findall(r"<script>(.*?)</script>", page, re.DOTALL)
     assert len(scripts) == 1
     if node:
         with tempfile.TemporaryDirectory() as tmp:
@@ -305,7 +305,6 @@ def test_candidate() -> None:
     survey_note = "skipped"
     try:
         import playwright.sync_api  # noqa: F401
-
         import render_review
     except ImportError:
         render_review = None
