@@ -451,12 +451,34 @@ def load_agenda_items(paths: Iterable[Path]) -> list[dict]:
     return [item for path in sorted(paths) for item in front(path)["agenda"].get("items", [])]
 
 
-def select_latest_closeout(paths: Iterable[Path]) -> tuple[Path, dict] | None:
-    """Select the newest terminal agenda carrying a W10 closeout."""
+def select_latest_closeout(
+    paths: Iterable[Path], *, session: dict | None = None, cell: dict | None = None
+) -> tuple[Path, dict] | None:
+    """Select the newest terminal closeout relevant to the supplied handoff, if any.
+
+    A session is linked by its integration bead's agenda cell or an explicitly
+    produced agenda path. A next-action cell also identifies its owning agenda.
+    Without those links, a later standalone session does not inherit a historical
+    agenda's selection. Omitting the session retains the unfiltered lookup.
+    """
     records = []
     for path in paths:
         agenda = front(path)["agenda"]
         if agenda.get("status") in {"completed", "superseded"} and agenda.get("closeout"):
+            if session is not None:
+                items = agenda.get("items", [])
+                primary_bead = session.get("primary_bead")
+                owns_cell = primary_bead is not None and any(
+                    item.get("bead") == primary_bead for item in items
+                )
+                produces_agenda = path.relative_to(REPO).as_posix() in session.get(
+                    "outputs", []
+                )
+                resumes_cell = cell is not None and any(
+                    item.get("id") == cell["id"] for item in items
+                )
+                if not (owns_cell or produces_agenda or resumes_cell):
+                    continue
             records.append((path, agenda["closeout"]))
     if not records:
         return None
@@ -493,7 +515,9 @@ def check_current_handoff(text: str) -> list[str]:
 
     problems: list[str] = []
     body = section.group("body")
-    closeout_record = select_latest_closeout(AGENDAS.glob("agenda-*.md"))
+    closeout_record = select_latest_closeout(
+        AGENDAS.glob("agenda-*.md"), session=latest, cell=cell
+    )
     if closeout_record is not None:
         closeout_path, closeout = closeout_record
         selected = closeout["replanning"]["selected"]

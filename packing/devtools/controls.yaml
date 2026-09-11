@@ -1290,11 +1290,11 @@ controls:
   run: python3 -m sqpack.campaign.ledger check
   expect: "bounded-negative but gives disposition continue"
 
-- name: synopsis handoff - W10 selected entry is replaced by a deferred candidate
+- name: synopsis handoff - selected entry is replaced by another bead
   file: ../SYNOPSIS.md
-  replace: ["**Selected next entry:** `think-rm3k`", "**Selected next entry:** `think-cyko`"]
+  replace: ["**Selected next entry:** `think-qw9w`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
-  expect: "exactly one canonical Selected next entry marker for think-rm3k"
+  expect: "exactly one canonical Selected next entry marker for think-qw9w"
 
 # --- the gate's own declared cost (agenda-023 BC-216) ---
 #
