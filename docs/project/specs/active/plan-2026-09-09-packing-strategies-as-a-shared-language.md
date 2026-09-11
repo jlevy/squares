@@ -328,23 +328,30 @@ And the atlas ascent changes the container at every step, by construction.
 
 **So the work, in order.**
 
-- [ ] Lift rotation. A CSS keyframe can carry `rotate` beside `translate`, so the frame
-  model already has what it needs; what has to change is the validator, the keyframe
-  emitter, and the choice of rotating the short way round a quarter turn.
-- [ ] Lift the constant-container restriction, so a trajectory may resize.
-  That is the `container` mechanism from Phase 3 seen from the rendering side.
-- [ ] Feed a `PackingStrategy` trace into `PackingTrajectory`, which is the one adapter
-  that turns everything already built into something watchable.
-- [ ] Then the embeddable component: a trace in, one self-contained animated `.svg` out,
+- [x] Lift rotation. Done: `validate_motion_trajectory` (renamed from
+  `validate_translation_only_trajectory`), `square_keyframes` emitting `rotate` beside
+  `translate`, and `short_quarter_turn` for the choice of which way round — squares have
+  a 90-degree symmetry, so the short way is never more than 45 degrees.
+- [x] Lift the constant-container restriction, so a trajectory may resize.
+  Done, and it is the `container` mechanism from Phase 3 seen from the rendering side.
+- [x] Feed a `PackingStrategy` trace into `PackingTrajectory`. Done:
+  `devtools/animation_from_trace.py`. A frame that *is* a retained record is built the
+  way the atlas builds it, from the witness and with no pose attached — attaching a
+  float pose changes what the renderer draws, because full-side contact shading needs
+  two edges exactly parallel and a float angle is not exactly anything.
+- [x] Then the embeddable component: a trace in, one self-contained animated `.svg` out,
   no build step and no JavaScript, so it drops into the explainer page or any other.
-  **This first, not a whole embedded motion lab** -- a component that can be dropped in
-  is worth more than a lab that has to be hosted, and it is the smaller thing.
+  Done: `devtools/export_animation_svg.py`. **This first, not a whole embedded motion
+  lab** -- a component that can be dropped in is worth more than a lab that has to be
+  hosted, and it is the smaller thing.
 - [ ] A simplified interactive lab on the explainer page comes after, once there is
   something worth playing with.
-- [ ] The video path is the same trace at a fixed size and rate, then an encoder, then a
-  receipt. Capture cost is already measured: about 42 ms per frame at 1080p and 145 ms at
-  4K in the pinned headless browser, with repeated captures of one instant
-  byte-identical, which is what makes the export reproducible and not merely repeatable.
+- [x] The video path, at a fixed size and rate, then an encoder, then a receipt.
+  Done: `devtools/capture_video.py`, though **from the workbench page rather than from a
+  trace** -- which is the stronger claim, since a captured frame is then the frame the
+  page draws rather than a second rendering that agrees.
+  Measured end to end at 1080p / 24 fps: 59 ms per frame including the encode, against
+  the 42 ms per frame the capture alone was measured at.
 - [ ] A guard on both exporters refusing a frame from a `guide` phase without its label.
 
 ### Three ways of presenting this, and what each one costs
@@ -438,15 +445,21 @@ stale when the data under it moves.
 
 **What has to be built.**
 
-- [ ] A `site/workbench/` and `site/atlas/` build step, writing into the same tree the
-  artifact already uploads, and never touching `site/index.html`. Simplest as another
-  job whose output `build` collects before uploading, so a workbench failure cannot
-  publish a broken explainer -- the existing page’s checks stay exactly as they are and
-  keep gating the deploy.
+- [x] A `site/workbench/` build step, writing into the same tree the artifact already
+  uploads and never touching `site/index.html`. **Built as a step inside `build`, not as
+  a separate job**: the artifact is uploaded from that job, so a separate job would have
+  to hand its output back through a second artifact round trip to be included at all.
+  The ordering gives the same protection — it runs after every explainer check, so a
+  workbench failure stops the deploy without ever having touched the explainer.
+  It runs on pull requests too, where nothing deploys, so a broken build fails review.
+  `site/atlas/` is still to do.
 - [ ] A link from the explainer to `/workbench/`, which is the only change the existing
   page needs and the reason to give the workbench a stable address at all.
-- [ ] `RENDER_INPUTS` entries for the two generators and their data, and the workflow’s
-  two `paths:` lists extended to match, which the test will confirm.
+- [x] `RENDER_INPUTS` for the workbench generator and its data, and both `paths:` lists
+  extended to match. Two tests hold it there, the explainer’s comparison asked of the
+  other page: `test_the_pages_filter_covers_every_workbench_input` and
+  `test_every_declared_workbench_input_exists`. The slideshow generator still needs its
+  own.
 - [ ] The embed directory, one SVG per case, generated from traces.
 
 **The one real caveat.** A 3.1 MB single file is a slow first load on a phone, and the
@@ -470,14 +483,14 @@ Ordered by dependency: nothing below can be checked until the row above it works
 | 6 | `think-9jqn` | `devtools/animation_from_trace.py` (new) | `trajectory_from_animation` | One function, `PackingAnimation` document to `PackingTrajectory`: `[x, y, theta]` to `SquareGeometry` with a pose, `side` to `container_side`, `t` to `logical_time`, `guided` and `feasible` into the frame label so no renderer can drop them. |
 | 7 | `think-9jqn` | `devtools/export_animation_svg.py` (new) | `export_svg` | Trace in, one scriptless `.svg` out: `render_packing_svg` for the final frame, `append_motion_styles` for the motion. Refuses when any frame has `guided` and no label component is present. |
 | 8 | `think-dekm` | `devtools/packing_strategy.py` | `run`, `main` | Emit a `PackingAnimation` document rather than today’s ad-hoc `{"frames": [...]}`, with `guided` set per frame from the phase that produced it. |
-| 9 | `think-cttv` | `devtools/packing_strategy.py` | `MECHANISMS`, `_run_container` (new) | A `container` mechanism, so the side is a phase. *Open* and *Close* are it run twice. |
-| 10 | `think-cttv` | `devtools/run_projection_ratchet.py` | `match_targets` | Accept unequal counts: `n` squares against `n+1` targets. The rectangular assignment already handles the shape; the rule for which square is new is “whichever target the assignment leaves over”. |
+| 9 | ~~`think-pfn9`~~ | `devtools/packing_strategy.py` | `MECHANISMS`, `_run_container` | **Done.** A `container` mechanism, so the side is a phase; centres scale about the box’s middle so a square against a wall stays against it. *Open* and *Close* are it run twice. |
+| 10 | ~~`think-5hd4`~~ | `devtools/run_projection_ratchet.py` | `match_targets` | **Done.** Unequal counts accepted, returning `(ordered, spare)`: the targets in travel order plus the indices the rectangular assignment left over, which is the rule for which target is new. |
 | 11 | `think-cttv` | `devtools/build_ascent.py` (new) | `ascent_strategies` | One strategy document per step for `n = 1..100`, six phases each, so a single step re-runs and re-watches alone. |
 | 12 | `think-e74w` | same | `fair_reach` | The excess over the record at the end of *Settle*, per step, into the receipt beside the film. |
-| 13 | `think-zvor` | `devtools/capture_animation.py` (new) | `capture` | Frames at a declared size and rate through the pinned headless browser, then an encoder, then a receipt naming every strategy document and the record each step landed on. |
+| 13 | `think-zvor` | `devtools/capture_video.py` (new) | `main`, `_capture`, `_encode` | **Mostly done, by a different route.** Frames come from the *built workbench page* driven through its own clock, not from a trace: a captured frame is the frame the page draws. Declared size (1080p or 4K) and frame rate, ffmpeg to H.264, and a receipt naming the page by digest and, per step, the record it aimed at and whether it landed. Measured on `n = 2..8` at 24 fps: 476 frames, 19.8 s, 1.2 MB, 28 s end to end, all seven on the record. **Remaining:** the receipt names records rather than strategy documents, and there is no guide-phase label guard, both because the page does not yet play a `PackingStrategy` (row 14). |
 | 14 | `think-6qxx` | the workbench template | a JS `MECHANISMS` | Mirror the Python registry, reading the same schema, so the hosted page executes documents rather than hard-coded modes. |
 | 15 | `think-6qxx` | `tests/test_mechanism_conformance.py` (new) | — | One strategy document through both implementations; the two animations compared within a declared tolerance. |
-| 16 | `think-n0e0` | `.github/workflows/pages.yml`, `devtools/render_explainer.py` | `RENDER_INPUTS`, both `paths:` lists | A `site/workbench/` build job whose output `build` collects, never touching `site/index.html`, with the new inputs declared so `test_the_pages_filter_covers_every_render_input` passes. |
+| 16 | ~~`think-n0e0`~~ | `.github/workflows/pages.yml`, `devtools/build_workbench_site.py` | `RENDER_INPUTS`, both `paths:` lists | **Done.** A `site/workbench/` build step inside `build`, running `--check` so the page must reproduce itself and pass its own self-containment check before the upload; `site/index.html` is untouched. Its inputs are declared and the filter covers them, held by two tests of its own. |
 
 Rows 1 to 5 are the only ones with no prerequisite, and nothing is watchable until they
 land.
