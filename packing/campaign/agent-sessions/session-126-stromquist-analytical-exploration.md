@@ -76,7 +76,7 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Correct the identified documentation and runtime setup failures, then certify the analytical branch on one fixed corrected checkpoint.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Pre-push validation and an isolated collection diagnostic identified concrete fixes; the interrupted full run has no verdict.
     budget_minutes: 30
@@ -86,10 +86,67 @@ session:
     validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --jobs 4 --inner-jobs 2 --format json
     kill_condition: A specific validation or mathematical failure still prevents certification.
     fallback: Diagnose that failure and rerun the affected checks; preserve any unresolved limitation without calling it a passed checkpoint.
+    outcome: Corrected records checks passed, all 45 pre-push checks passed in 313.6 seconds, and all seven applicable hosted checks passed at cd9dd221. The full checkpoint was still running at the planned boundary, so its existing exact checks continued with the tree fixed.
+    evidence: [README.md, packing/campaign/ledger.md, packing/campaign/agent-sessions/session-126-stromquist-analytical-exploration.md]
+    stop_reason: The setup corrections and fast surfaces were certified; the full checkpoint continued into the next declared slice.
+    next_action: Collect the full checkpoint outcome before changing its source tree.
+  - workflow: review-planning-oversight
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Complete the already running full checkpoint and retain its actual outcome, then close the session accounting and confirm the final published branch.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: The corrected records and hosted CI passed; the full checkpoint was still performing its existing exact checks at the initial slice boundary. The source tree stayed fixed until that run completed. This contract was declared at the boundary and retained in the coordinator state before insertion here.
+    budget_minutes: 30
+    started_at: '2026-09-11T00:53:59Z'
+    deadline_at: '2026-09-11T01:23:59Z'
+    expected_output: Full checkpoint outcome at cd9dd221, terminal session and refreshed native receipt, final published metadata with matching green checks.
+    validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --jobs 4 --inner-jobs 2 --format json
+    kill_condition: A concrete failure prevents certification or the full checkpoint returns an unresolved outcome.
+    fallback: Retain the outcome honestly and diagnose the specific failed check without reopening numerical research.
+    outcome: All 73 full checks passed at cd9dd221 in 2213.5 seconds. During the run the owner requested KaTeX notation, foundational definitions, and explicit document dependencies; closure therefore yields to a new documentation phase.
+    evidence: [packing/campaign/agent-sessions/session-126-stromquist-analytical-exploration.md]
+    stop_reason: The fixed-tree checkpoint completed successfully; the new user request requires a documentation revision before closure.
+    next_action: Revise X-027 and its three companion reports, then validate the changed documents and records.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Make X-027 and its three supporting reports readable from first definitions, use KaTeX-compatible mathematical notation, and distinguish reading order from non-circular proof dependencies.
+    status: completed
+    entered_by: user_request
+    switch_reason: The owner explicitly requested mathematical notation throughout, definitions from the ground up, and clearer organization and dependencies. Read-only planning proceeded while the full checkpoint held the source tree fixed; writing began after its successful completion.
+    budget_minutes: 30
+    started_at: '2026-09-11T01:07:34Z'
+    deadline_at: '2026-09-11T01:37:34Z'
+    expected_output: Four revised documents with consistent notation, explicit premises and outputs, intact evidence scope, and verified mathematical rendering.
+    validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --push --since origin/main
+    kill_condition: A notation or organizational change alters a mathematical claim or creates a circular dependency.
+    fallback: Restore the precise scope and define the missing premise before accepting the rewrite.
+    outcome: All four reports now use KaTeX notation with foundational definitions and explicit inputs and outputs. Reciprocal reviews preserved the proof scopes and clarified owner terminology, boundary-atom smoothing, mixed-demand normalization, the fixed-support upper bound, and the routing quantifier. A retained offline syntax checker uses the pinned KaTeX bundle, distinguishes display and inline math, refuses unsupported syntax or missing inputs, and runs on the fast and records CI surfaces.
+    evidence: [packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md, docs/project/research/research-2026-09-10-x027-fractional-duality.md, docs/project/research/research-2026-09-10-x027-structural-helpers.md, docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md, packing/devtools/check_katex.py, packing/tests/test_check_katex.py]
+    stop_reason: The requested notation and organization revision is complete and independently reviewed; the revised source now needs its checkpoint and published checks.
+    next_action: Regenerate affected views, validate the final source, and close the record after the matching hosted checks pass.
+  - workflow: review-planning-oversight
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Validate and publish the notation revision, retain the prior full checkpoint and the new fast-surface evidence, and close the analytical block with accurate resource accounting.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The user-requested rewrite and reciprocal reviews are complete; only validation and final session accounting remain.
+    budget_minutes: 30
+    started_at: '2026-09-11T01:27:39Z'
+    deadline_at: '2026-09-11T01:57:39Z'
+    expected_output: Committed KaTeX revision with matching passing checks, refreshed native usage, and a completed session and bead.
+    validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --push --since origin/main --jobs 4 --inner-jobs 2 --format json
+    kill_condition: A concrete source, mathematical, or validation failure prevents certification of the changed branch.
+    fallback: Correct that failure and rerun its affected checks while retaining the actual prior outcomes.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Run the records preflight before committing and restarting the full checkpoint.
+    next_action: Format and regenerate records, commit the reviewed source, run the pre-push gate, and confirm hosted checks on that exact head.
   primary_bead: think-jx95
   status: in_progress
   budget:
@@ -154,6 +211,10 @@ session:
   - docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md
   - packing/campaign/ideas.md
   - README.md
+  - packing/devtools/check_katex.py
+  - packing/devtools/check_math_spans.py
+  - packing/tests/test_check_katex.py
+  - packing/src/sqpack/cli/validate.py
   checks:
   - Baseline e0c2583e has no source changes; origin/main was fetched before branch creation.
   - Baseline records tier passed before research-record edits; transcript retained locally at /private/tmp/x027-baseline-records.json.
@@ -162,6 +223,10 @@ session:
   - Pre-push at 42f6e6c9 passed 43 of 45 checks; README report-index and campaign-record checks failed. The full run at that commit was interrupted without a completed verdict after the known failures were diagnosed.
   - The documented macOS setting DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib restored collection of all 36 atlas tests. No source code changed.
   - All 31 records checks passed across the corrected preflight and the campaign-record rerun; the latter removed a trailing period from an executable command field.
+  - 'full gate: full at cd9dd221: passed (73 checks in 2213.5 seconds before the user-requested notation revision)'
+  - All 45 pre-push checks and seven applicable hosted checks passed at cd9dd221 before the notation revision; eight hosted checks were intentionally deferred or skipped.
+  - All three original authors completed the notation revision and reciprocal scope reviews. Source definitions distinguish physical parents from strict cores, closed depth from interior incidence, and proof dependencies from navigation and review assurance.
+  - The retained KaTeX checker passed the four-document syntax check with version 0.16.45. Its controls reject unsupported syntax, missing or empty inputs, and display-only syntax used inline. This checks recognized mathematical spans, not delimiter linting or browser layout; the browser rejected a local file preview under its URL policy.
   resource_rollups: [packing/campaign/resource-usage/codex-task-tree-session-126.yaml]
   stop_reason: null
   next_action: Resolve the integrated review, validate the completed source checkpoint, and retain the new exploration on its branch.

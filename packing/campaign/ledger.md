@@ -140,7 +140,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-123](agent-sessions/session-123-evidence-first-interpretation.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-rm3k | Continue BC-324 under think-rm3k in Session124; think-ta8s retains successor certification. |
 | [session-124](agent-sessions/session-124-evidence-interpretation-finalization.md) | stopped | contemporaneous | `research-loop` (process) | `research-loop` (process) | 1 | think-rm3k | Finalize BC-324 under think-rm3k with think-ta8s owning matching successor certification and publication follow-up. Keep scientific targets unselected while the user reviews definitions, facts, assumptions and alternate approaches. |
 | [session-125](agent-sessions/session-125-past-the-point-atom-ceiling.md) | completed | retrospective | `research-survey` (insight) | `review-planning-oversight` (process) | 4 | think-hs7y | Widen the certificate format to carry weighted and floor atoms, since the reader can already separate cuts the format cannot express; and generate sites by structure rather than by arrangement vertex. |
-| [session-126](agent-sessions/session-126-stromquist-analytical-exploration.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (correctness) | 4 | think-jx95 | Resolve the integrated review, validate the completed source checkpoint, and retain the new exploration on its branch. |
+| [session-126](agent-sessions/session-126-stromquist-analytical-exploration.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (correctness) | 7 | think-jx95 | Resolve the integrated review, validate the completed source checkpoint, and retain the new exploration on its branch. |
 
 ### Workflow summary
 
@@ -155,9 +155,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
 | `research-loop` | 26 | 4 | 96 | 8 |
 | `pipeline-improvement` | 27 | 1 | 143 | 4 |
-| `documentation-pass` | 1 | 0 | 19 | 1 |
+| `documentation-pass` | 1 | 0 | 20 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
-| `review-planning-oversight` | 1 | 0 | 12 | 1 |
+| `review-planning-oversight` | 1 | 0 | 14 | 1 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
