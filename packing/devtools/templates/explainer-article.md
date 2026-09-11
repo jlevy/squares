@@ -24,13 +24,11 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 # {{TITLE}}
 
-<p class="subtitle centred">{{SUBTITLE}}<br>s({{N}}) ≥ {{CURRENT_BOUND_DEC}}</p>
-
 <div class="credits centred">
   <span>Human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
   <span><a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
-  <span class="publication-date">{{PUBLISHED}} ({{EDITION}})</span>
+  <span class="publication-date">{{PUBLISHED}} (<a href="#version-history">{{EDITION}}</a>)</span>
 </div>
 
 </div>
@@ -39,16 +37,17 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 Let $s(11)$ be the smallest side of a square that can hold eleven unit squares, allowing
 the squares to rotate but not to overlap in their interiors.
+Write $L$ for the exact value below.
 We prove
 
 $$
-s(11) \;\ge\; L_* = {{CURRENT_BOUND_TEX}} = {{CURRENT_BOUND_DEC}}.
+s(11) \;\ge\; L = {{CURRENT_BOUND_TEX}} = {{CURRENT_BOUND_DEC}}.
 $$
 
-Thus eleven unit squares cannot fit in any square whose side is smaller than $L_*$. This
+Thus eleven unit squares cannot fit in any square whose side is smaller than $L$. This
 is the strongest lower bound proved in this project, and our recorded literature search
 found no stronger published bound.[^novelty] The best known packing gives the other side
-of the current bracket, $L_* \le s(11) \le {{BEST_PACKING_LONG_TEX}}$.
+of the current bracket, $L \le s(11) \le {{BEST_PACKING_LONG_TEX}}$.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
 open case of the square packing problem.
@@ -75,9 +74,9 @@ We explain the proof in three stages:
    when it contains enough points from a small set.
    This stronger counting rule directly excludes the container side $191/50=3.82$.
 
-3. **T-026: finer directions and scaling reach $L_*$.** The threshold atoms are
-   rechecked with a larger core on a finer direction net, their weights are rescaled,
-   and an exact dilation argument proves $s(11)\ge L_*$.
+3. **T-026: finer directions and scaling reach $L$.** The threshold atoms are rechecked
+   with a larger core on a finer direction net, their weights are rescaled, and an exact
+   dilation argument proves $s(11)\ge L$.
 
 All three stages use the same contradiction: eleven disjoint cores would require total
 charge at least eleven, while the certificate’s total budget is less than eleven.
@@ -102,10 +101,6 @@ interval-certified evidence and passing replay commands (`V4`), while the certif
 coverage condition is confirmed by an exact event-cell sweep and a distinct interval
 branch-and-bound (`C4`). The two coverage methods share the certificate data and
 theorem; `C4` records distinct confirmation methods, not two independent proofs.
-
-## Version History
-
-{{VERSION_HISTORY}}
 
 ## The Agentic Research Framework
 
@@ -676,7 +671,7 @@ $$
 c = \frac{\sqrt{1+D^2}}{B(1+D)} = {{T026_FACTOR}}.
 $$
 
-The corresponding container side is $q(191/50)$, and $L_*=(191/50)c$.
+The corresponding container side is $q(191/50)$, and $L=(191/50)c$.
 
 For every positive real side $x<(191/50)c$, choose a rational $q<c$ with $x<q(191/50)$.
 The scaled certificate rules out the larger side $q(191/50)$; a packing that fit at $x$
@@ -688,10 +683,10 @@ s(11) \;\ge\; {{CURRENT_BOUND_TEX}} = {{CURRENT_BOUND_DEC}}.
 $$
 
 The containment inequality is strict for every positive rational $0<q<c$. The resulting
-exact exclusions include rational sides above $3.82$ and approach $L_*$ arbitrarily
+exact exclusions include rational sides above $3.82$ and approach $L$ arbitrarily
 closely.
 The rational-density argument above turns that whole family into the exact lower
-bound $s(11)\ge L_*$. The [T-026 proof]({{T026_PROOF_URL}}) and its
+bound $s(11)\ge L$. The [T-026 proof]({{T026_PROOF_URL}}) and its
 [machine-readable limit record]({{T026_RECORD_URL}}) carry the exact derivation.
 
 ## Generator and Verifier
@@ -820,6 +815,10 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     consistent formatting
   - **[KPress](https://github.com/jlevy/kpress):** web and print formatting from
     Markdown
+
+## Version History
+
+{{VERSION_HISTORY}}
 
 [^stromquist-history]: Walter Stromquist states this bound in
     [Memo III ({{PRIOR_MEMO_YEAR}}), p. 10]({{PRIOR_MEMO_URL}}#page=10), as an

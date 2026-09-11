@@ -2150,10 +2150,9 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
     return values
 
 
-#: The visible title names the concrete result. The deck names the reusable method
-#: without implying that this particular threshold certificate proves other cases.
+#: The visible title names the concrete result. The exact theorem follows in the
+#: opening section, where the notation and the status of the claim are defined.
 TITLE = "A New Lower Bound for Packing 11 Squares"
-SUBTITLE = "Weighted Certificates for Square Packing"
 
 
 def card_substitutions(headline: Facts, current: CurrentBoundFacts) -> dict[str, str]:
@@ -2221,7 +2220,6 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         ),
         "THIRDPARTY_L_FRAC": f"{package_side.numerator}/{package_side.denominator}",
         "TITLE": TITLE,
-        "SUBTITLE": SUBTITLE,
         **card_substitutions(headline, current),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
         "DEFAULT_ID": default.identifier,

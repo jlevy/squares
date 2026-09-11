@@ -88,18 +88,13 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 
 
-def test_title_names_the_result_and_the_deck_states_the_bound_in_plain_text(page: str) -> None:
-    """The title block is typographic; the exact theorem is typeset in the body."""
+def test_title_block_names_the_result_without_a_subtitle(page: str) -> None:
+    """The title stands alone; the exact theorem is typeset in the opening section."""
     heading = re.search(r"<h1\b.*?</h1>", page, re.DOTALL)
     assert heading is not None
     assert "A New Lower Bound for Packing 11 Squares" in heading.group(0)
-    subtitle = re.search(r'<p class="subtitle centred">(.*?)</p>', page, re.DOTALL)
-    assert subtitle is not None
-    current = current_bound_facts()
-    assert "Weighted Certificates for Square Packing" in subtitle.group(0)
-    assert "s(11)" in subtitle.group(0)
-    assert f"≥ {current.bounded_side_decimal}</p>" in subtitle.group(0)
-    assert 'class="tex"' not in subtitle.group(0)
+    assert '<p class="subtitle centred">' not in page
+    assert "Weighted Certificates for Square Packing" not in page
 
 
 @pytest.mark.parametrize(
@@ -425,7 +420,7 @@ def test_advanced_section_derives_the_current_lower_bound(document: str) -> None
     assert "both atom families closed under the eight symmetries of the container" in prose
     assert current.bounded_side_decimal in prose
     assert "exact exclusions include rational sides above $3.82$" in prose
-    assert "the exact lower bound $s(11)\\ge L_*$" in prose
+    assert "the exact lower bound $s(11)\\ge L$" in prose
     assert "choose a rational $q<c$" in prose
     assert "fit unchanged in that larger container" in prose
     assert "Each point-certificate bound shown in the interactive figures" in prose
@@ -815,8 +810,10 @@ def test_the_page_stamps_the_commit_it_is_built_from(page: str, document: str) -
     assert edition.endswith(link_revision()[:8]), edition
     lead = f"{PUBLICATION_STATUS} " if PUBLICATION_STATUS else PUBLICATION_VERSION
     assert edition.startswith(lead), edition
-    assert f"({edition})" in page
-    assert f"({edition})" in document
+    linked_edition = f'(<a href="#version-history">{edition}</a>)'
+    assert linked_edition in page
+    assert f"([{edition}](#version-history))" in document
+    assert 'id="version-history"' in page
 
 
 def test_version_history_is_source_derived_and_has_two_entries(
@@ -824,11 +821,12 @@ def test_version_history_is_source_derived_and_has_two_entries(
 ) -> None:
     """The page history comes from release metadata rather than copied prose."""
     match = re.search(
-        r"^## Version History\n\n(?P<history>.*?)(?=\n## )",
+        r"^## Version History\n\n(?P<history>.*?)(?=\n\[\^|\Z)",
         document,
         re.MULTILINE | re.DOTALL,
     )
     assert match is not None
+    assert document.index("## Version History") > document.index("## Further Reading")
     history = match.group("history")
     assert len(re.findall(r"^- \*\*v", history, re.MULTILINE)) == 2
     compact_history = " ".join(history.split())
