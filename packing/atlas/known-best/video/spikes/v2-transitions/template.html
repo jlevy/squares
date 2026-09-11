@@ -1667,6 +1667,64 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   //: The two settled arrangements of the current pair, each with its own angle map and contact
   //: counts, and which squares hold their colour right through the move.
   let restSource = null, restTarget = null, holdsColour = null;
+  //: **The moving palette.** While the packing is unsettled the atlas's answer does not exist yet
+  //: -- its hue is the angle class and its shade the contact count, and both are properties of an
+  //: arrangement that has come to rest. So a moving frame is coloured by what IS true of it: which
+  //: squares are parallel and touching. Every connected run of same-angle squares that share a
+  //: whole side takes one colour, so a block reads as a block while it travels, and the drain is
+  //: what says the colour is provisional.
+  //:
+  //: There is no fixed correspondence between this palette and the atlas's, and there does not
+  //: need to be: which square ends up in which angle class is exactly what the run is deciding, so
+  //: the final colours are assigned when the squares are in place and the two are crossfaded over
+  //: the settle. What this palette owes is STABILITY, not agreement -- a square keeps its slot, and
+  //: when two runs join they take the slot of the lower-numbered one, so a colour changes only when
+  //: something about the packing changed.
+  let groupSlot = null;       // per square: which palette slot it carries while moving
+  let groupParent = null;     // union-find, carried forward through a move so runs only merge
+  let groupSize = null;       // each run's member count, so a join repaints the smaller side
+  let groupClock = null;      // the time it was last advanced to, so a scrub backwards resets it
+  //: The shade a moving square is drawn at. Fixed, because the shade is the contact count and that
+  //: is exactly what churns while squares are parting: a live count put a fifth of the ramp into
+  //: single frames. Mid ramp, so the drained colours sit where the eye can still separate them.
+  const MOVING_SHADE = 2;
+
+  // Every connected run of same-angle squares that share a whole side, as a palette slot per
+  // square. Union-find over the contact graph the painter has already built, so the cost is the
+  // edge count and nothing is recomputed: measured at n = 324 it does not move the trajectory's
+  // build time, which the gate holds to 400 ms.
+  function assignGroups(count, clock) {
+    if (groupSlot === null || groupSlot.length !== count) return;
+    const parent = groupParent, size = groupSize;
+    // **Runs only ever merge, and a join repaints the NEWCOMER.** Two rules, and both were found by
+    // measuring rather than by reasoning. Rebuilding the components each frame let a square
+    // oscillate between two of them as a contact made and broke at the tolerance: 49 direction
+    // reversals at n = 110. And taking the lowest-numbered member's colour meant a whole run
+    // repainted because one low-numbered square joined it, cascading as the merges did: 364 hue
+    // hops at n = 110, 13 of them on one square. Union by size fixes the second -- the larger run
+    // keeps its colour and the smaller adopts it, which is what "they become the same colour as
+    // that connected component" means -- and carrying the union-find forward fixes the first.
+    //
+    // The reset is for a scrub: playback and capture both run the clock forward.
+    if (groupClock === null || clock < groupClock - 1e-9) {
+      for (let i = 0; i < count; i++) { parent[i] = i; size[i] = 1; }
+    }
+    groupClock = clock;
+    const find = (a) => { while (parent[a] !== a) { parent[a] = parent[parent[a]]; a = parent[a]; } return a; };
+    for (let e = 0; e < paintEdges.length; e += 2) {
+      const a = paintEdges[e], b = paintEdges[e + 1];
+      if (a >= count || b >= count) continue;
+      if (angleGap(foldAngle(poseA[a]), foldAngle(poseA[b])) > ANGLE_TOL) continue;
+      let ra = find(a), rb = find(b);
+      if (ra === rb) continue;
+      // The larger run keeps its colour; ties go to the lower-numbered root so the result does not
+      // depend on the order the edges came in.
+      if (size[rb] > size[ra] || (size[rb] === size[ra] && rb < ra)) { const s = ra; ra = rb; rb = s; }
+      parent[rb] = ra;
+      size[ra] += size[rb];
+    }
+    for (let i = 0; i < count; i++) groupSlot[i] = groupSlot[find(i)];
+  }
   //: What counts as not moving and not turning, for a square that keeps its colour. A unit side is
   //: 1, so a hundredth of one is under half a pixel at the size the stage draws; half a degree is
   //: the same tolerance the angle classes are seeded with.
@@ -1753,12 +1811,28 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     restTarget = restOf(B.side, (i) => [tgtX[i], tgtY[i], tgtA[i]], p.n + 1, -1);
     // A square that neither moves nor turns, and sits square to the container, has nothing to be
     // unsettled about: it keeps its colour while the rest of the packing drains around it.
+    // A square that sits square to the container is never drained. The owner's rule, and it is the
+    // one the picture is built on: the grid is what a viewer can already read, so it keeps its
+    // colour and the drain is left to say which squares are still looking for their place. It is
+    // the ORIENTATION that decides, not whether the square moves -- an axis-aligned square sliding
+    // one cell along a row is still a square a viewer can follow.
     holdsColour = new Uint8Array(p.n + 1);
-    for (let i = 0; i < p.n; i++) {
-      const a = motion[i].a, b = motion[i].b;
-      const still = Math.hypot(a[0] - b[0], a[1] - b[1]) <= HOLD_MOVE_TOL
-        && Math.abs(angleDelta(a[2], b[2])) <= HOLD_TURN_TOL;
-      holdsColour[i] = still && angleGap(foldAngle(a[2]), 0) <= HOLD_TURN_TOL ? 1 : 0;
+    for (let i = 0; i <= p.n; i++) {
+      const here = i < p.n ? motion[i].a[2] : tgtA[i];
+      const there = tgtA[i];
+      holdsColour[i] = angleGap(foldAngle(here), 0) <= HOLD_TURN_TOL
+        && angleGap(foldAngle(there), 0) <= HOLD_TURN_TOL ? 1 : 0;
+    }
+    // The moving palette starts spread over the slots the atlas does not reserve for right angles,
+    // so two runs that have never touched are unlikely to arrive at the same colour.
+    groupSlot = new Int16Array(p.n + 1);
+    groupParent = new Int32Array(p.n + 1);
+    groupSize = new Int32Array(p.n + 1);
+    groupClock = null;
+    for (let i = 0; i <= p.n; i++) {
+      groupSlot[i] = 1 + (i % (PALETTE.length - 1));
+      groupParent[i] = i;
+      groupSize[i] = 1;
     }
     if (B.ident[p.new] !== p.n + 1) throw new Error('the new square of ' + p.n + ' -> ' + (p.n + 1) + ' is not identity ' + (p.n + 1));
     newNode = nodeFor(p.n + 1);
@@ -4063,61 +4137,62 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const rest = clamp01(Number(resting) || 0);
     const scheme = schemeFor(rest);
     const standard = standardizing() ? rest : 0;
-    const map = buildAngleMap(poseA);
-    // The settled arrangement this frame borrows its atlas answer from: the one it is leaving
-    // through the first half of the beat, the one it is landing on through the second. Never the
-    // live frame -- see `restSource` in `buildPair` for the flicker that is.
-    const home = (homeward ? restTarget : restSource) || null;
+    // The live angle map is wanted only by a scheme the viewer chose; the standardising path does
+    // not look at it. Built on demand so a standardising frame does not group every square for
+    // nothing -- which at n = 324 is the difference between grouping 324 squares a frame and none.
+    let liveMapCache = null;
+    const liveMap = () => (liveMapCache === null ? (liveMapCache = buildAngleMap(poseA)) : liveMapCache);
+    // Which run of same-angle touching squares each square belongs to, from the contact graph the
+    // painter has just built. Only while the colours are moving: at rest the atlas answers instead.
+    if (standardizing() && standard < 1) assignGroups(N, state.t);
     paintOut.scheme = scheme;
+    // The standardising path keeps ONE assignment either side of the lock-in and changes only how
+    // saturated it is, which is the simplification the owner asked for. A moving square is coloured
+    // by the run of same-angle neighbours it shares a whole side with; a settled one by the atlas.
+    // The two are not a relabelling of each other and do not have to be -- which square lands in
+    // which angle class is exactly what the run is deciding -- so the settled colours are assigned
+    // when the squares are in place and the two are crossfaded over the settle.
+    function settledFill(index) {
+      if (restSource === null || restTarget === null) {
+        return fillFor(buildAtlasMap(poseA).slotOf(poseA[index]), paintContacts[index]);
+      }
+      const was = fillFor(restSource.map.slotOf(restSource.angles[index]), restSource.contacts[index]);
+      const will = fillFor(restTarget.map.slotOf(restTarget.angles[index]), restTarget.contacts[index]);
+      // Its colour can differ between the two rests even when it has not moved -- a neighbour may
+      // have left it, and the shade is a contact count -- so it crosses on the settle's own curve
+      // rather than at the instant the move ends: switching there put a whole shade step into one
+      // frame, 0.117 OkLab, which is six just-noticeable steps and reads as the flicker itself.
+      return homeward ? mixHex(was, will, standard) : was;
+    }
     function paintedFill(index, ident, angle, contacts) {
-      const own = fillOf(colorScheme, map, ident, angle, contacts);
-      let chosen = own;
-      if (standard > 0) {
-        const settled = home === null
-          ? fillFor(buildAtlasMap(poseA).slotOf(angle), contacts)
-          : fillFor(home.map.slotOf(home.angles[index]), home.contacts[index]);
-        chosen = standard >= 1 ? settled : mixHex(own, settled, standard);
+      if (!standardizing()) {
+        return desatHex(trimHex(fillOf(colorScheme, liveMap(), ident, angle, contacts)), drain);
       }
-      // **A square that neither moves nor turns and sits square to the container does not change
-      // at all.** There is nothing unsettled about it, so it keeps the colour it had at rest --
-      // its hue as well as its chroma, since holding the chroma while the hue swaps would leave it
-      // a bright green among the teals it was one of a moment before. Draining it with the rest
-      // also hides the one thing the picture is trying to say, which is which squares are still
-      // looking for their place.
-      // Only where a "rest" means something: a step in Animate, which has an arrangement it left
-      // and one it lands on. Pack has neither -- its run starts from a grid or a scatter and ends
-      // wherever the physics gets to -- so a square that happens not to move there is not settled,
-      // it is just one frame of a run, and painting it from a rest it has no relation to is how
-      // this first went wrong: an ordered-fill start came out in 15 identity greens instead of 17.
-      // Gated on the PAIR, not on the frame. Gating it on `standard > 0` meant a held square
-      // stopped being held the instant the hue finished leaving, half way through the move, and
-      // dropped into the drain in one frame: measured at 0.32 OkLab, sixteen just-noticeable steps,
-      // which is a worse flicker than the one this set out to remove.
-      const held = standardizing() && holdsColour !== null
-        && index < holdsColour.length && holdsColour[index];
-      if (held && restSource !== null && restTarget !== null) {
-        // Its colour can still differ between the two rests -- it has not moved, but a neighbour
-        // may have moved away from it, and the shade is a contact count. So it crosses from one to
-        // the other on the settle's own curve rather than at the instant the move ends: switching
-        // there put a whole shade step into one frame, measured at 0.117 OkLab, which is six
-        // just-noticeable steps and reads as exactly the flicker this is meant to remove.
-        const was = fillFor(restSource.map.slotOf(restSource.angles[index]), restSource.contacts[index]);
-        const will = fillFor(restTarget.map.slotOf(restTarget.angles[index]), restTarget.contacts[index]);
-        return trimHex(homeward ? mixHex(was, will, standard) : was);
+      const settled = settledFill(index);
+      // A square square to the container is never drained: the grid is what a viewer can already
+      // read, and leaving it in colour is what lets the drain mean "these are the ones still
+      // looking for their place". The atlas gives a right angle hue 0 anyway, so its settled colour
+      // IS its standard green -- there is no second rule here, only the absence of the drain.
+      if (holdsColour !== null && index < holdsColour.length && holdsColour[index]) {
+        return trimHex(settled);
       }
+      const moving = fillFor(groupSlot === null ? 1 : groupSlot[index], MOVING_SHADE);
+      const chosen = standard >= 1 ? settled
+        : (standard <= 0 ? moving : mixHex(moving, settled, standard));
       // The trim goes on before the drain, so a drained fill is drained from the colour the stage
       // actually shows rather than from one it never paints.
-      return desatHex(trimHex(chosen), held ? 0 : drain);
+      return desatHex(trimHex(chosen), drain);
     }
     for (let i = 0; i < motion.length; i++) {
       motion[i].rect.setAttribute('fill', paintedFill(i, motion[i].ident, poseA[i], paintContacts[i]));
     }
     const own = paintedFill(p.n, p.n + 1, poseA[p.n], paintContacts[p.n]);
     newRect.setAttribute('fill', tint > 0 ? mixHex(own, SCARLET_FILL, tint) : own);
-    paintOut.classes = map.classes;
-    paintOut.centres = map.centres.slice();
-    paintOut.sizes = map.sizes.slice();
-    paintOut.slots = map.slots.slice();
+    const reported = liveMap();
+    paintOut.classes = reported.classes;
+    paintOut.centres = reported.centres.slice();
+    paintOut.sizes = reported.sizes.slice();
+    paintOut.slots = reported.slots.slice();
     paintOut.contacts = Array.from(paintContacts);
     return paintOut;
   }
