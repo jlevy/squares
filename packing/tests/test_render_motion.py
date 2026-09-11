@@ -121,3 +121,47 @@ def test_a_rotating_square_spins_where_it_stands() -> None:
     css = "".join(node.text or "" for node in root.iter())
     assert "transform-box:fill-box" in css
     assert "transform-origin:center" in css
+
+
+def test_colour_is_muted_exactly_where_a_frame_is_not_a_packing() -> None:
+    """Saturation carries meaning rather than mood.
+
+    A frame at full colour is an arrangement that actually is a packing; a muted one is
+    not. Tying the two together is what stops a viewer reading the interesting middle of a
+    transition as its answer, and it costs nothing because the frame already declares what
+    it establishes.
+    """
+    from sqpack.render.model import CheckKind, CheckSummary, EvidenceTier
+
+    checked = CheckSummary(
+        passed=True,
+        kind=CheckKind.NUMERICAL,
+        method="test",
+        arithmetic="binary64",
+        precision="53",
+        rounding="nearest-even",
+        tolerance="1e-9",
+    )
+    traj = _trajectory([(0.0, 4.0, [(1.0, 1.0, 0.0)]), (1.0, 4.0, [(1.5, 1.0, 0.0)])])
+    settled = PackingTrajectory(
+        frames=(
+            PackingFrame(
+                container_side=traj.frames[0].container_side,
+                squares=traj.frames[0].squares,
+                logical_time=traj.frames[0].logical_time,
+                evidence=EvidenceTier.CANDIDATE,
+            ),
+            PackingFrame(
+                container_side=traj.frames[1].container_side,
+                squares=traj.frames[1].squares,
+                logical_time=traj.frames[1].logical_time,
+                evidence=EvidenceTier.NUMERICALLY_CHECKED,
+                check=checked,
+            ),
+        ),
+        kind=traj.kind,
+        label=traj.label,
+    )
+    css = square_keyframes(settled, 0, Decimal(100), (True, False))
+    assert css.count("filter:saturate") == 1, "only the unchecked frame is muted"
+    assert css.index("filter:saturate") < css.index("100%"), "and it is the first one"

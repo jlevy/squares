@@ -7,7 +7,7 @@ from decimal import ROUND_HALF_EVEN, Decimal
 from itertools import pairwise
 from xml.etree import ElementTree as ET
 
-from sqpack.render.model import PackingTrajectory
+from sqpack.render.model import EvidenceTier, PackingTrajectory
 from sqpack.render.numbers import format_svg_number
 from sqpack.render.svg import MOTION_MARKER, sub
 
@@ -61,7 +61,22 @@ def validate_trajectory(trajectory: PackingTrajectory) -> None:
         raise ValueError("motion requires non-decreasing logical time")
 
 
-def square_keyframes(trajectory: PackingTrajectory, square_index: int, scale: Decimal) -> str:
+MUTED_SATURATION = "0.35"
+"""How far the colour drops on a frame that is not a packing.
+
+Saturation carries meaning here rather than mood. A frame at full colour is an
+arrangement that actually is a packing; a muted one is not -- mid-transition, squares
+overlapping, a state no one should read as a result. Tying the two together means a viewer
+cannot mistake the interesting middle of an animation for its answer, and it costs nothing,
+because the renderer already knows which frames are which."""
+
+
+def square_keyframes(
+    trajectory: PackingTrajectory,
+    square_index: int,
+    scale: Decimal,
+    muted: tuple[bool, ...] | None = None,
+) -> str:
     percentages = keyframe_percentages(tuple(frame.logical_time for frame in trajectory.frames))
     final = trajectory.frames[-1].squares[square_index].pose
     if final is None:
@@ -78,9 +93,13 @@ def square_keyframes(trajectory: PackingTrajectory, square_index: int, scale: De
         # one on screen.
         turn = -short_quarter_turn(pose.angle.projected - final.angle.projected)
         degrees = turn * 180 / Decimal(str(math.pi))
+        filter_rule = ""
+        if muted is not None and muted[len(rules)]:
+            filter_rule = f";filter:saturate({MUTED_SATURATION})"
         rules.append(
             f"{percentage}{{transform:translate({format_svg_number(dx)}px,"
-            f"{format_svg_number(dy)}px) rotate({format_svg_number(degrees)}deg)}}"
+            f"{format_svg_number(dy)}px) rotate({format_svg_number(degrees)}deg)"
+            f"{filter_rule}}}"
         )
     return "".join(rules)
 
@@ -109,13 +128,21 @@ def append_motion_styles(
     scale: Decimal,
     duration_seconds: Decimal,
     reveal_final_overlay: bool = False,
+    muted: tuple[bool, ...] | None = None,
 ) -> None:
     validate_trajectory(trajectory)
+    if muted is None:
+        # Derived from what each frame says it establishes, not passed in beside it. A
+        # CANDIDATE frame is one nobody checked or one that is not a packing at all, and
+        # those are exactly the frames whose colour should say so.
+        muted = tuple(frame.evidence is EvidenceTier.CANDIDATE for frame in trajectory.frames)
     rules = []
     for index, track in enumerate(match_square_tracks(trajectory)):
         square_id = track[-1].square_id
         animation = f"sqpack-{square_id}"
-        rules.append(f"@keyframes {animation}{{{square_keyframes(trajectory, index, scale)}}}")
+        rules.append(
+            f"@keyframes {animation}{{{square_keyframes(trajectory, index, scale, muted)}}}"
+        )
         # transform-box and transform-origin are not decoration: CSS rotates about the
         # element's origin, which for an SVG child is the viewport's corner unless told
         # otherwise, so a square without them swings around the page instead of spinning

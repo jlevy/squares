@@ -22,7 +22,13 @@ from typing import Any
 
 from devtools.animation_from_trace import trajectory_from_animation
 from sqpack.render import render_packing_svg
-from sqpack.render.model import AnnotationLevel, RenderSpec, ViewLevel
+from sqpack.render.model import (
+    AnnotationLevel,
+    HueScheme,
+    RenderSpec,
+    ShadeScheme,
+    ViewLevel,
+)
 
 
 class GuidedWithoutLabelError(ValueError):
@@ -46,7 +52,18 @@ def export_svg(document: dict[str, Any], *, width: int = 720) -> str:
 
     trajectory = trajectory_from_animation(document)
     duration = document.get("duration_seconds", 8.0)
+    palette = document.get("palette") or {}
     spec = RenderSpec(
+        # The animation says what its colours should MEAN and the renderer owns what they
+        # are. Reading this was missing on the first pass, so every export came out under
+        # the renderer's default angle-hue scheme while its own document asked for colour
+        # by identity -- the field was defined and then ignored.
+        hue_scheme={"identity": HueScheme.INDEX, "angle-class": HueScheme.ANGLE}.get(
+            palette.get("hue", "identity"), HueScheme.INDEX
+        ),
+        shade_scheme={"full-side-contact": ShadeScheme.CONTACTS}.get(
+            palette.get("shade", "none"), ShadeScheme.CONTRAST
+        ),
         title=document.get("name", "packing animation"),
         description=_describe(document),
         duration_seconds=Decimal(str(duration)),

@@ -128,7 +128,7 @@ def _validate_motion_css(css: str) -> None:
     keyframes = re.compile(
         r"@keyframes sqpack-[A-Za-z0-9_.-]+\{"
         r"(?:[0-9.]+%\{transform:translate\(-?[0-9.]+px,-?[0-9.]+px\)"
-        r"(?: rotate\(-?[0-9.]+deg\))?\})+\}"
+        r"(?: rotate\(-?[0-9.]+deg\))?(?:;filter:saturate\([0-9.]+\))?\})+\}"
     )
     animations = re.compile(
         r"\.motion-[A-Za-z0-9_.-]+\{"

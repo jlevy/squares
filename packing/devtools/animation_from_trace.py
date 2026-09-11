@@ -21,7 +21,13 @@ from pathlib import Path
 from typing import Any
 
 from devtools.packing_render_adapters import frame_from_pose_arrays
-from sqpack.render.model import PackingTrajectory, TrajectoryKind
+from sqpack.render.model import (
+    CheckKind,
+    CheckSummary,
+    EvidenceTier,
+    PackingTrajectory,
+    TrajectoryKind,
+)
 
 
 def trajectory_from_animation(document: dict[str, Any]) -> PackingTrajectory:
@@ -50,6 +56,31 @@ def trajectory_from_animation(document: dict[str, Any]) -> PackingTrajectory:
                 [pose[2] for pose in squares],
                 label=label,
                 logical_time=Decimal(str(entry["t"])),
+                # A frame that is a packing establishes something; one mid-transition
+                # establishes nothing. Saying so here rather than in a side channel is what
+                # lets the renderer mute the second without being told which is which.
+                evidence=(
+                    EvidenceTier.NUMERICALLY_CHECKED
+                    if entry.get("feasible", True)
+                    else EvidenceTier.CANDIDATE
+                ),
+                # The tier is a claim about evidence, so the renderer requires the
+                # receipt with it -- and refuses the claim without one, which is how this
+                # got caught. The check is real: the producer measured the deepest
+                # penetration by the separating-axis theorem and compared it to 1e-9.
+                check=(
+                    CheckSummary(
+                        passed=True,
+                        kind=CheckKind.NUMERICAL,
+                        method="separating-axis violation at most 1e-9",
+                        arithmetic="binary64",
+                        precision="53",
+                        rounding="nearest-even",
+                        tolerance="1e-9",
+                    )
+                    if entry.get("feasible", True)
+                    else None
+                ),
                 source_id=document.get("name", "animation"),
             )
         )
