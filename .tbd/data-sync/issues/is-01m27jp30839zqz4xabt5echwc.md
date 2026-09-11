@@ -3,14 +3,18 @@ type: is
 id: is-01m27jp30839zqz4xabt5echwc
 title: "The stage reads brighter than the PDF at the same hex: area, not palette"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T06:32:38.151Z
-updated_at: 2026-09-11T06:32:38.151Z
+updated_at: 2026-09-11T07:02:40.735Z
+closed_at: 2026-09-11T07:02:40.735Z
+close_reason: Built in 88aad978. A stage chroma trim of 0.85, applied to what the page paints and to nothing else; sqpack.render is untouched so exports are still the atlas's own drawing. setStageChroma(1) restores the exact match, compare_palette.py sets it before it looks and still reports n = 11, 17, 26, 100, 300, 324 reproducing their renderings exactly, and the gate takes every palette check with the trim off plus one check that it is 0.85 by default.
+resolution: null
+duplicate_of: null
 ---
 The owner reports the workbench still looks brighter than the PDF export. The numbers say they are identical, so what is left is a display question and the fix is a choice rather than a correction.
 

@@ -3,14 +3,18 @@ type: is
 id: is-01m27hvywbcvahg6vk2cnk9pks
 title: Packings in the 300s look short of the best known on the workbench
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T06:18:21.962Z
-updated_at: 2026-09-11T06:18:21.962Z
+updated_at: 2026-09-11T07:02:40.106Z
+closed_at: 2026-09-11T07:02:40.105Z
+close_reason: "Measured to a conclusion: at rest the packing fills its box exactly (shortfall -0.0000 at every n sampled in 290..324). What reads as 'below the best known' is the record's own empty area -- side^2 - n is 17.7 unit squares at n = 300, up to 18.65 over 280..324. The record is a grid with holes. Filed think-ss8w for the rounding tolerance."
+resolution: null
+duplicate_of: null
 ---
 The owner, watching the workbench play, reports that many packings look as though they sit BELOW the best known — the 300s named specifically.
 
@@ -24,3 +28,15 @@ Hypotheses, in the order they are cheap to test:
 4. 'met' is decided against a rounded decimal. Three steps report a side a millionth above the record, which is the rounding of the printed value rather than a real excess; the tolerance should be stated rather than implicit.
 
 To do: reproduce visually (capture the settled frame at a few n in the 300s and measure the drawn squares' bounding box against the drawn container), then say which of the four it is.
+
+## Notes
+
+RESOLVED, and it is not a defect in the drawing.
+
+At rest the packing fills its box exactly. Measured at the settled frame, the squares' bounding span against the drawn container, in unit sides: n = 290, 297, 300, 303, 306, 310, 317, 324 all give a shortfall of -0.0000. The container is the record's side and the packing reaches it on both axes.
+
+What a viewer is reading as 'below the best known' is the record's own empty area. A best-known packing in the 300s is a grid with holes: side^2 - n is 17.5 unit squares at n = 290, 17.7 at n = 300, 18.5 at n = 303, and over 280..324 it runs from 0.00 to 18.65. So at n = 300 there are nearly eighteen squares' worth of gaps scattered through an 18 x 18 box, and the picture looks like a packing that has not finished because it is one that cannot be finished -- that IS the record.
+
+Hypothesis 4 stands and is worth keeping: three steps in 290..324 report a side about 1e-6 ABOVE the record (n = 300 side 17.824124 against 17.824123), which is the rounding of the printed value rather than a real excess, and the tolerance 'met' is decided against should be stated rather than implicit.
+
+The remaining question is presentation, not correctness: should the panel say how much of the box the record leaves empty, so a reader stops reading the gaps as failure? That is worth its own bead if the owner wants it.

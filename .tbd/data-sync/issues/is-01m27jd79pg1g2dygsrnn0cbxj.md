@@ -3,14 +3,18 @@ type: is
 id: is-01m27jd79pg1g2dygsrnn0cbxj
 title: "A step with no slack throws the physics: overshoot the container, then shrink"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 2
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T06:27:47.611Z
-updated_at: 2026-09-11T06:32:19.889Z
+updated_at: 2026-09-11T07:02:26.032Z
+closed_at: 2026-09-11T07:02:26.028Z
+close_reason: "Both causes fixed and measured: static appends are no longer simulated (2.46 -> 0.000 sides of thrashing at n = 324) and the container opens past its target during the move."
+resolution: null
+duplicate_of: null
 ---
 The owner: adding a square to a tightly aligned row 'goes really crazy' -- the arrangement scatters violently for what should be a small change.
 
@@ -24,20 +28,10 @@ Related: the ascent's container mechanism in devtools/packing_strategy.py alread
 
 ## Notes
 
-MEASURED, and the owner's reading is right.
+Built in 14ac2ddc, and the measurement found a second cause the container could not have fixed.
 
-**164 of 323 steps gain no container side at all** — the box is the same at n and at n+1 — and 30 more gain under 0.02 of a side. So 194 of 323 steps (60 per cent) have no usable room. At the perfect squares the slack is exactly zero: side^2 - n is 0.000 at n = 100 and at n = 324, a full grid with no free area anywhere.
+FIRST CAUSE, and it was mine: a static append was being handed to the physics. The short move added in d2b2c2e7 so the new square could be seen arriving gave 160 prefix steps a simulation they never had before, with a rearrangement's worth of jiggle and no rearrangement to spend it on. Worst distance a square reached from where it ends up, in unit sides: n = 324 went 2.46, n = 100 2.26, n = 16 1.31. A static append is now drawn by the tween whatever the style says, and every one of those steps measures 0.000.
 
-**And the new square does not travel in. It materialises at its final pose.** `renderTweenScene`/`renderPhysicsScene` draw it at `newPose` from the instant it appears, fading and scaling 0.8 -> 1.0 in place. On a step with no slack that means a unit square appearing on top of whatever currently occupies its slot, which the repulsion then has to resolve — the violence the owner sees.
+SECOND: the container now breathes. It opens PHYS.open (0.2 of a side) past the side it is heading for, is fully open by 0.3 of the move, and is closed again before the blend. The squares are not scaled; the walls move and the repulsion spreads the packing into the room on its own.
 
-Which square is 'new' is not random and not 'the middle': it is whichever target the rectangular assignment leaves over. Over the corpus: 160 steps 'prefix: square n+1 is appended', 157 'lowest cost', 5 'shared picture', 1 'lowest cost, fewest contacts, highest position'. So on a prefix step it is the record's own last square; on a matched step it can be anywhere in the final packing, interior included.
-
-**The owner's design, to build as one beat rather than a constant:**
-1. desaturate and GROW the container past the target, shown as scaling — the squares shrink relative to the box, which is what makes the room visible rather than just present;
-2. bring the new square in from OUTSIDE the box rather than materialising it in the crowd;
-3. let the whole set rejiggle with the slack available;
-4. shrink the container back onto the record and lock in.
-
-Open question the owner raised and worth settling with a measurement rather than a guess: where should the new square enter? Candidates — the nearest point on the container edge to its final pose; the most accessible free space; a fixed corner. It should enter with room around it either way.
-
-Overshoot size is a parameter, not a constant. Measure peak displacement and peak overlap through the move, before and after, on the 194 no-slack steps.
+The room alone is worth little, which is the useful finding. Residual the lock-in has to carry, median over eight matched steps: baseline worst 1.171 sides / turn 23.8 deg, room only 1.117 / 22.0. It is the tightening (think-3g7w) that does the work, and the room helps it: both together at tighten 16 give 0.082 / 1.2 deg.

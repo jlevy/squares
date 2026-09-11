@@ -3,9 +3,9 @@ type: is
 id: is-01m25zrj5np9ywft00t8j8neaz
 title: "N11 explainer: teach the T-025/T-026 lower-bound ladder"
 kind: epic
-status: closed
+status: open
 priority: 1
-version: 16
+version: 18
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
@@ -17,39 +17,14 @@ child_order_hints:
   - is-01m25zs0ygtqsqfx233fhjrxqf
   - is-01m26b9kjzhrxhsw4dm5atkax2
 created_at: 2026-09-10T15:42:41.844Z
-updated_at: 2026-09-10T22:58:20.554Z
-closed_at: 2026-09-10T22:58:20.554Z
-close_reason: "PR #148 is ready at 99c95b4f after source-bound architecture selection, implementation, version-history provenance, independent scope review, complete local validation, and all fresh hosted checks including WebKit. The explainer teaches T-018 first and adds the exact T-025/T-026 ladder without importing unproved research claims."
+updated_at: 2026-09-11T06:56:48.371Z
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
-Add a documentation block alongside the three scientific blocks to bring the public
-explainer up to the merged T-025/T-026 result. The block is editorial and does not
-consume or extend a scientific target budget. It belongs to the existing explainer
-line under think-3od5 while this bead coordinates it with the post-PR139 overnight
-session.
-
-Begin with a source-bound complexity audit of the current Markdown article and
-renderer. Decide prospectively between two architectures: retain the simple
-weighted-point certificate as the teaching spine and add the threshold/dilation
-extension, or rebuild the whole article around the tighter certificate. The decision
-must compare the number of new concepts, figure and renderer changes, independent
-verification surface, obsolete claims, and effect on the reader's proof arc.
-
-The article must state the current result exactly: T-026 is the weak lower limit
-955000*sqrt(518400042893309449)/179696714646249 =
-3.826447410572939744..., with endpoint fit unresolved. T-025 is the exact excluded
-endpoint 191/50 using point and two-of-three threshold atoms. The exact upper
-construction remains 3.877083590022814.... Preserve the distinction between the
-simple point-only certificate, the threshold certificate, and the dilation argument.
-Do not turn A6, owner restrictions, or private overnight work into a theorem.
-
-Apply Practical Prose, regenerate the explainer from its Markdown source, run its
-focused tests and PDF/page checks, and obtain an independent mathematical/prose review
-before readiness. If the overnight research changes the standing bound, update only
-after its theorem and certificate gates pass. The exact V3 plan source remains pending
-under think-i1fr, so this block must not claim V3 alignment.
+Publish the v0.4.0 explainer for the strongest proved n=11 lower bound. Keep T-018 at 3.81 as the fully auditable visual proof, then define threshold atoms and the dilation argument that give T-025 at 3.82 and T-026 at C = 955000*sqrt(518400042893309449)/179696714646249. State the theorem as the ordinary lower bound s(11) >= C at V4/C5. Apply Practical Prose, regenerate every format, reconcile current main, and require local and hosted checks.
 
 ## Notes
 
-Architecture and implementation are complete on codex/n11-explainer-current-bound. Draft PR #148 is pushed at f7126bfc and titled “docs: publish the v0.4.0 n=11 lower-bound explainer.” It retains T-018 as the visual, first-principles spine; states T-025 at 191/50 and T-026 as the weak limit 3.826447410572939744… with the endpoint unresolved; defines the advanced terms before use; and adds the missing T-025/T-026 tutorial evidence row.\n\nThe v0.4.0 release metadata drives the current version, date, exactly two rendered history entries, atlas stamps, and generated claim stamps. The dates record the first Git commit that used each string as this explainer's edition label: v0.4.0 on September 10, 2026 at 35484ebd, and the 3.81-result v0.3.0 on September 8, 2026 at ce3b1ab5. All directly affected local checks pass. Hosted build, prepare, Firefox, geometry, suite, sweeps, macOS and mergeability pass. Validate fails only on main's expired session099 state; WebKit's saved custom-serif geometry probe remains unresolved after one rerun. Retarget PR #148 to codex/n11-daytime-strategy and require the stacked hosted checks before readiness.
+Reopened because the earlier closure called T-026 a weak limit and treated endpoint fit as unresolved. That wording was mathematically misleading. PR #148 now contains standalone T-025/T-026 claim packets, exhaustive replays, mapped source-distinct review, the direct theorem s(11) >= C at V4/C5, and current-main reconciliation. Final pushed-head CI and browser review remain.
