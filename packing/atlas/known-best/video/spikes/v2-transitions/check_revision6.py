@@ -80,7 +80,7 @@ def main() -> int:
                   A.select(i); A.setStyle(style); A.setBlind(false);
                   const snap = A.physics(i, style, 'snap'), free = A.physics(i, style, 'free');
                   A.setSnap(false); A.seek(A.duration());
-                  const note = document.getElementById('gap-b').textContent;
+                  const note = String(A.gapBar().side);
                   const poses = Array.from(document.querySelectorAll('#squares g')).filter(g => g.style.display !== 'none')
                     .map(g => g.getAttribute('transform'));
                   A.setSnap(true); A.seek(A.duration());
@@ -126,7 +126,7 @@ def main() -> int:
             check(m["excess"] < 25, f"blind {row['n']}: the blind run is {m['excess']:.1f}% worse, which looks broken")
         note = page.evaluate(
             "([i]) => { const A = window.atlasTransitions; A.select(i); A.setStyle('bodies'); A.setBlind(true);"
-            " A.seek(A.duration()); return {read: document.getElementById('gap-b').textContent,"
+            " A.seek(A.duration()); return {read: String(A.gapBar().side),"
             "   miss: A.physics(i, 'bodies', 'blind').miss}; }",
             [index_of[n]],
         )

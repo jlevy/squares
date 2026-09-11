@@ -270,19 +270,13 @@ def type_and_fit_sweep(browser, page_path: Path, check, expected_gap: float) -> 
                           nlineTop: nlineEl.offsetTop });
             }
           }
-          // Revision 12 hides the position bar in Pack, where a corpus-wide scale says nothing
-          // about one fixed n. A hidden element has a zero rect, so where it is not drawn the band
-          // it *would* occupy is read off the stylesheet: the panel is held to the same line
-          // whether the bar is drawn or not, which is what keeps a switch to Sweep from putting
-          // the two on top of each other.
-          const barEl = document.getElementById('progress');
-          const pnEl = document.getElementById('p-n');
+          // Revision 12 held the panel clear of the position bar along the bottom of the stage.
+          // Revision 16 removed that bar entirely -- the owner found it distracting -- so the
+          // clearance is now to the stage's own foot, and the two numbers the callers read are the
+          // stage's bottom rather than the bar's top.
           const stageBox = document.getElementById('stage').getBoundingClientRect();
-          const drawn = barEl.getBoundingClientRect().height > 0;
-          const barTop = drawn ? barEl.getBoundingClientRect().top
-                               : stageBox.top + parseFloat(getComputedStyle(barEl).top);
-          const pnTop = drawn ? pnEl.getBoundingClientRect().top
-                              : barTop + parseFloat(getComputedStyle(pnEl).top);
+          const barTop = stageBox.bottom;
+          const pnTop = stageBox.bottom;
           const box = facts.getBoundingClientRect();
           return { sizes: Array.from(sizes, ([s, k]) => [s, Array.from(k).sort()]).sort((a, b) => a[0] - b[0]),
                    svgGlyphs, fits, pnTop, barTop, factsLeft: box.left, factsRight: box.right };
@@ -618,22 +612,20 @@ def browser_checks(page_path: Path, check) -> None:
             style_checks(page, api, index_of, check)
             check(not errors, f"browser errors during the style checks: {errors}")
 
-            # The progress bar is a pure function of the pair and the clock, on the 1..324 range.
-            # Revision 9 makes the bar span the chosen range, so the corpus range is what makes that
-            # the 1..324 bar; the page itself opens on a one-step range.
+            # Where the sequence stands is a pure function of the pair and the clock, on the
+            # 1..324 range. Revision 16 removed the bar it was drawn on -- the owner found it
+            # distracting -- so what is checked is the number itself and the n it rolls to, which
+            # is what the bar was drawing and what `progress()` still reports.
             page.evaluate(f"{api}.setRange({api}.range().min, {api}.range().max)")
             page.evaluate(f"{api}.select({index_of[100]})")
             for t, expected in ((0.0, 99 / 323), (duration, 100 / 323), (1.4, (99 + 0.5) / 323)):
                 page.evaluate(f"{api}.seek({t})")
                 position = page.evaluate(f"{api}.progress().position")
-                width = page.evaluate("parseFloat(document.getElementById('p-fill').style.width)")
                 check(abs(position - expected) < 1e-9, f"progress at t={t} is {position}, expected {expected}")
-                # The style serialises to a thousandth of a pixel.
-                check(abs(width - expected * 1720) < 1e-3, f"fill width at t={t} is {width}px, expected {expected * 1720}")
             page.evaluate(f"{api}.seek(0.5)")
-            check(page.evaluate("document.getElementById('p-n').textContent") == "100", "progress label at the dwell is not 100")
+            check(page.evaluate(f"{api}.progress().n") == 100, "the dwell does not report n = 100")
             page.evaluate(f"{api}.seek({duration})")
-            check(page.evaluate("document.getElementById('p-n').textContent") == "101", "progress label at the settle is not 101")
+            check(page.evaluate(f"{api}.progress().n") == 101, "the settle does not report n = 101")
 
             # Seeking is idempotent: the same instant renders the same stage.
             page.evaluate(f"{api}.seek(2.3)")
@@ -693,7 +685,9 @@ def browser_checks(page_path: Path, check) -> None:
             opens = page.evaluate("Array.from(document.querySelectorAll('#facts-a .open-item .label')).map(e => e.textContent)")
             check(opens == ["optimality", "rigidity"], f"open items for n=17 are {opens}")
             page.evaluate(f"{api}.select({index_of[103]})")
-            check(page.evaluate("document.getElementById('progress').getBoundingClientRect().bottom") <= 1080, "progress bar is not inside the stage")
+            # Revision 16 removed the position bar; what was a fit check is now an absence check.
+            check(page.evaluate("document.getElementById('progress') === null"),
+                  "the position bar is still in the page")
 
             # Revision 3, the headline: `n =` is one static line above the numeral, italic n and upright
             # equals in PT Serif, muted, sharing the numeral's left edge (the numeral's box starts a

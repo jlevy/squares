@@ -171,31 +171,6 @@ body.drawing #packing-svg #squares { cursor: crosshair; }
 .open-item { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
 .open-item svg { width: 32px; height: 32px; display: block; flex: none; }
 .open-none { font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
-/* Revision 9: the three legend lines that sat here (the scarlet convention, the active style, what a
-   free or blind run was doing) are gone. The stage carries facts about the packing and nothing that
-   explains itself; what they said is written down in NOTES.md instead. The live readout moves up
-   into the room they leave, 826 to 978, with the progress bar still beginning at 1034.
-   Revision 7, feature 3: how far off the best known the picture is, at every frame. */
-/* Revision 11 adds a fifth row, what the force law is doing: 826 + 5 x 38 = 1016, still clear of
-   the progress bar at 1034. */
-.gap-read { position: absolute; left: 6px; top: 826px; width: 694px; height: 190px; }
-/* max-content so the row's box is its ink, which is what the fit checks have to measure. */
-.gap-line { width: max-content; font-family: var(--sans); font-size: 28px; font-weight: 450; line-height: 38px; color: var(--muted); letter-spacing: 0.01em; white-space: nowrap; }
-/* The progress bar: a pure function of the clock, along the bottom of the stage. Revision 7 gives
-   the track a scale instead of two end labels — a numeral every 25 with a major tick, a minor tick
-   every 5 — and brings the riding n down into the numeral row, where it is the only bold, inked
-   numeral and carries a cursor on the track. The whole apparatus is the band 1034-1080; the panel
-   above it ends at 1032. */
-#progress { position: absolute; left: 0; top: 1034px; width: 1920px; height: 46px; font-family: var(--sans); color: var(--label); }
-#progress .p-track { position: absolute; left: 100px; top: 4px; width: 1720px; height: 4px; border-radius: 2px; background: var(--track); }
-#progress .p-fill { position: absolute; left: 0; top: 0; width: 0; height: 4px; border-radius: 2px; background: var(--label); }
-/* Ticks: the majors in the muted grey the numerals use, the minors a step quieter so the scale
-   reads as a scale rather than a comb. */
-#progress .p-tick { position: absolute; top: 9px; width: 2px; margin-left: -1px; height: 5px; border-radius: 1px; background: var(--quiet); }
-#progress .p-tick.p-major { height: 9px; background: var(--muted); }
-#progress .p-num { position: absolute; top: 14px; transform: translateX(-50%); font-size: 28px; line-height: 32px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--muted); }
-#progress .p-cursor { position: absolute; top: 2px; width: 3px; margin-left: -1.5px; height: 14px; border-radius: 1.5px; background: var(--ink); }
-#progress .p-n { position: absolute; top: 14px; left: 100px; transform: translateX(-50%); font-size: 28px; line-height: 32px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
 #kind-tag {
   position: absolute; left: 60px; top: 14px; font-family: var(--sans); font-size: 18px;
   color: var(--label); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
@@ -412,19 +387,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
         <div class="nline" aria-hidden="true"><span class="n-var">n</span><span class="n-eq">=</span></div>
         <div class="facts-layer" id="facts-a"></div>
         <div class="facts-layer" id="facts-b"></div>
-        <div class="gap-read" id="gap-read">
-          <div class="gap-line" id="gap-a"></div>
-          <div class="gap-line" id="gap-b"></div>
-          <div class="gap-line" id="gap-c"></div>
-          <div class="gap-line" id="gap-d"></div>
-          <div class="gap-line" id="gap-e"></div>
-        </div>
-      </div>
-      <div id="progress" aria-hidden="true">
-        <div class="p-track"><div class="p-fill" id="p-fill"></div></div>
-        <div id="p-scale"></div>
-        <span class="p-cursor" id="p-cursor"></span>
-        <span class="p-n" id="p-n"></span>
       </div>
       <div id="kind-tag"></div>
     </div>
@@ -1508,72 +1470,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const factsB = document.getElementById('facts-b');
   const kindTag = document.getElementById('kind-tag');
   const live = document.getElementById('live');
-  const progressBar = document.getElementById('progress');
-  const progressFill = document.getElementById('p-fill');
-  const progressN = document.getElementById('p-n');
-  const progressCursor = document.getElementById('p-cursor');
-  const progressScale = document.getElementById('p-scale');
   const SVG_NS = svg.namespaceURI;
-  const TRACK_LEFT = 100, TRACK_WIDTH = 1720;
-
-  // Revision 7, feature 1: the bar carries the whole 1..N_MAX scale rather than two end labels.
-  // The interval: the track is 1720 px for 324 values, 5.32 px a step, and a three-digit numeral at
-  // 28 px tabular is about 47 px wide. A numeral every 25 puts 133 px between neighbours (86 px of
-  // clear paper); every 10 would put 53 px between them and they would touch; every 50 would leave
-  // the middle of the movie unlabelled. So 25, with the last value (324) labelled as well, and an
-  // unlabelled minor tick every 5. The riding n shares the numeral row and hides whichever scale
-  // numeral it would touch, so the two never collide; it is the only bold, inked numeral there and
-  // carries a cursor on the track itself.
-  // Revision 8 makes the span a variable rather than 1..N_MAX: on the sequence tab the bar spans the
-  // range the owner picked, so a 1..100 run fills the whole track instead of the first third of it.
-  // The interval is chosen from a ladder by the same rule that picked 25 for the full span — the
-  // smallest step that leaves SCALE_MIN_SPACING between neighbouring numerals — and 1..324 still
-  // lands on 25 with a minor tick every 5, so the shipped bar is unchanged where the span is.
-  const SCALE_LADDER = [1, 2, 5, 10, 25, 50, 100, 250];
-  const SCALE_MIN_SPACING = 120, SCALE_GAP = 14;
-  let scaleLo = 1, scaleHi = N_MAX;
-  const trackX = (n) => TRACK_LEFT + ((n - scaleLo) / (scaleHi - scaleLo)) * TRACK_WIDTH;
-  const scaleLabels = [];
-  let digitWidth = 15.6;   // measured below, once the faces are in; the fallback is Source Sans 3's figure at 28 px
-  function buildScale(lo, hi) {
-    scaleLo = lo;
-    scaleHi = Math.max(lo + 1, hi);
-    progressScale.textContent = '';
-    scaleLabels.length = 0;
-    const span = scaleHi - scaleLo;
-    let major = SCALE_LADDER[SCALE_LADDER.length - 1];
-    for (const s of SCALE_LADDER) {
-      if ((s / span) * TRACK_WIDTH >= SCALE_MIN_SPACING) { major = s; break; }
-    }
-    const minor = major >= 5 ? major / 5 : 0;
-    const majors = [scaleLo];
-    for (let v = Math.ceil(scaleLo / major) * major; v < scaleHi; v += major) if (v > scaleLo) majors.push(v);
-    majors.push(scaleHi);
-    const isMajor = new Set(majors);
-    if (minor > 0) {
-      for (let v = scaleLo; v <= scaleHi; v += minor) {
-        if (isMajor.has(v)) continue;
-        const tick = document.createElement('i');
-        tick.className = 'p-tick';
-        tick.style.left = trackX(v) + 'px';
-        progressScale.appendChild(tick);
-      }
-    }
-    for (const v of majors) {
-      const x = trackX(v);
-      const tick = document.createElement('i');
-      tick.className = 'p-tick p-major';
-      tick.style.left = x + 'px';
-      progressScale.appendChild(tick);
-      const num = document.createElement('span');
-      num.className = 'p-num';
-      num.textContent = String(v);
-      num.style.left = x + 'px';
-      progressScale.appendChild(num);
-      scaleLabels.push({ v: v, x: x, digits: String(v).length, node: num });
-    }
-  }
-  buildScale(1, N_MAX);
   // One measurement of one numeral gives the figure width; the numerals are tabular, so every
   // label's width follows from its digit count and no frame ever has to ask the layout engine. A
   // three-digit label is preferred because it is the least relative error, but a shorter one will
@@ -1590,11 +1487,24 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     numeralLeft = line.offsetLeft + line.offsetWidth + METRICS.headline_gap_px - METRICS.digit_bearing_px;
     document.querySelectorAll('.numeral').forEach((n) => { n.style.left = numeralLeft + 'px'; });
   }
+  //: The width of one figure in the face the gap bar sets its two numbers in, used to decide
+  //: whether the record's label would sit on top of the lower bound's. The fallback is Source Sans
+  //: 3's figure at 28 px; the real value is measured once the faces land.
+  //:
+  //: It used to be measured off the progress scale's numerals, which are gone with the scale. That
+  //: was always indirect -- those numerals are a different weight from the bar's -- and measuring
+  //: the bar's own label is both simpler and more correct, since it is the thing being laid out.
+  //: `getComputedTextLength` is the SVG measurement; `offsetWidth` is zero on an SVG text node.
+  let digitWidth = 15.6;
   function measureDigit() {
-    for (const want of [3, 0]) {
-      for (const s of scaleLabels) {
-        if ((want === 0 || s.digits === want) && s.node.offsetWidth > 0) { digitWidth = s.node.offsetWidth / s.digits; return; }
-      }
+    const label = gapbarRecordLabel;
+    const text = label && label.textContent ? label.textContent : '';
+    const digits = (text.match(/[0-9]/g) || []).length;
+    if (digits > 0 && typeof label.getComputedTextLength === 'function') {
+      const width = label.getComputedTextLength();
+      // The label carries a relation glyph and a space as well as its digits, and the digits are
+      // about four fifths of its width at the two and three digit labels this bar ever shows.
+      if (width > 0) digitWidth = (width * 0.8) / digits;
     }
   }
 
@@ -2081,19 +1991,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function scaleSpanWanted() {
     return { lo: state.range.from - 1, hi: state.range.to };
   }
-  function syncScale() {
-    const want = scaleSpanWanted();
-    if (want.lo === scaleLo && want.hi === scaleHi) return;
-    buildScale(want.lo, want.hi);
-    measureDigit();
-  }
-  // Where the sequence stands, 0 at the start of the span's first step and 1 at the end of its
-  // last: a pure function of the pair and the clock.
+  // Where the sequence stands, 0 at the start of the range's first step and 1 at the end of its
+  // last: a pure function of the pair and the clock. The scale it used to be drawn on is gone --
+  // the owner found it distracting, and the stage carries facts about the packing rather than
+  // apparatus about the playback -- but the number is still what `progress()` reports, and the
+  // transport and the checkers read it.
   function progress() {
+    const span = scaleSpanWanted();
     const d = duration();
     // An open-ended run has no position inside the step: it is the step's own n, done arriving.
     const within = state.optimizing ? 1 : (d > 0 ? clamp01(state.t / d) : 0);
-    return clamp01((PAIRS[state.pair].n + within - scaleLo) / (scaleHi - scaleLo));
+    return clamp01((PAIRS[state.pair].n + within - span.lo) / Math.max(1, span.hi - span.lo));
   }
 
   // ---------------------------------------------------------------- styles B and C: physics, bodies
@@ -3304,11 +3212,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // interpolation shows it closing to nothing, a snapped run reaches nothing at the end, a free run
   // rests at its residual. In a blind run the squares have no correspondence to the record's
   // labelling, so the centre and angle errors are meaningless and only the box is reported.
-  const gapA = document.getElementById('gap-a');
-  const gapB = document.getElementById('gap-b');
-  const gapC = document.getElementById('gap-c');
-  const gapD = document.getElementById('gap-d');
-  const gapE = document.getElementById('gap-e');
   const gapOut = { centre: 0, angle: 0, side: 0 };
   function gapOf(px, py, pa) {
     let centre = 0, angle = 0, x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
@@ -3430,9 +3333,16 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   }
   function updateGapBar(p, B, g, mode) {
     const info = gapbarSetup(p, state.liveN);
-    const met = mode === 'blind'
-      ? g.side <= info.record * (1 + GAP_MET.side)
-      : g.centre <= GAP_MET.centre && g.angle <= GAP_MET.angle && g.side <= info.record * (1 + GAP_MET.side);
+    // **`met` is a claim about the n the bar describes.** The centre and angle gaps are measured
+    // against the targets of the n the step is heading INTO, so they mean nothing while the bar is
+    // describing the previous packing through the dwell -- where the arrangement is that packing's
+    // own record, exactly, and the side test is the whole of what can be asked. The same is true of
+    // a blind run, which has no correspondence to the record's labelling at all.
+    const describesTarget = info.n === p.n + 1;
+    const withinSide = g.side <= info.record * (1 + GAP_MET.side);
+    const met = (mode === 'blind' || !describesTarget)
+      ? withinSide
+      : g.centre <= GAP_MET.centre && g.angle <= GAP_MET.angle && withinSide;
     // On a hit the hand locks to the record's tick rather than hovering a pixel off it.
     // The hand is a 20-unit triangle centred on the value, so at a record sitting hard against an
     // end -- which is every perfect square, whose record IS the area bound -- half of it hung off
@@ -3465,43 +3375,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   function updateGap(p, A, B, mode, still) {
     const g = gapOf(poseX, poseY, poseA);
     if (gapBarDirty || still) { updateGapBar(p, B, g, mode); gapBarDirty = false; }
-    const excess = (g.side / B.side - 1) * 100;
-    gapA.textContent = mode === 'blind'
-      ? 'no centre or angle gap: nothing corresponds'
-      : 'gap to the record: centres ' + fmt(g.centre, 3) + ', angles ' + fmt(g.angle, 1) + '°';
-    gapB.textContent = 'side ' + fmt(g.side, 3) + ' against the record ' + fmt(B.side, 3)
-      + ', ' + (excess >= 0 ? '+' : '') + fmt(excess, 1) + ' per cent';
-    // The third row belongs to an open-ended run: how long it has been going, how far it has got,
-    // and whether a hand touched it. Empty the rest of the time.
-    if (state.optimizing && opt !== null) {
-      gapC.textContent = 'optimize \u00b7 ' + initialShort[opt.kind] + ' \u00b7 ' + fmt(opt.time, 1)
-        + ' s \u00b7 ' + opt.steps + ' steps' + (opt.edited ? ' \u00b7 hand-edited' : '');
-      if (GROWTH.on) {
-        // While the squares are undersized, "the smallest box" means something else, so the row
-        // says the size, whether it is climbing, and the box the arrangement would need at unit
-        // size — which is the only figure the record can be compared with.
-        const g = growthState();
-        const stage = g.size >= 1 ? (g.clean ? 'full' : 'full, overlapping') : (g.stalled ? 'stalled' : 'growing');
-        gapD.textContent = 'size ' + fmt(g.size, 3) + ' ' + stage
-          + (g.unitSide === null ? '' : ' \u00b7 unit side ' + fmt(g.unitSide, 3) + ' vs ' + fmt(g.record, 3))
-          + (g.suspect ? ' \u00b7 under the record: suspect an overlap' : '');
-      } else {
-        gapD.textContent = opt.best === Infinity
-          ? (isFinite(opt.pen)
-              ? 'no clean moment yet; deepest overlap ' + fmt(opt.pen, 3)
-              : 'not stepped yet; the record ' + fmt(opt.record, 3))
-          : 'smallest box ' + fmt(opt.best, 3) + ' at overlap ' + fmt(opt.bestPen, 3)
-            + ', the record ' + fmt(opt.record, 3);
-      }
-    } else {
-      gapC.textContent = '';
-      gapD.textContent = '';
-    }
-    // The fifth row is the force law's: the deepest overlap on the stage right now and how many
-    // pairs the attraction is reaching. Both are the simulation's own numbers — the optimizer's for
-    // an open-ended run, the cached trajectory's at the instant being drawn — so style A, which is
-    // an interpolation and has no contacts at all, honestly says nothing.
-    gapE.textContent = lawReadout();
   }
   // Where the two numbers come from at this instant, or the empty string when nothing is simulating.
   function lawReadout() {
@@ -4523,23 +4396,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     numeralB.style.transform = 'translateY(' + (24 * (1 - easeOut(back))) + 'px)';
     if (live.textContent !== 'n = ' + state.liveN) live.textContent = 'n = ' + state.liveN;
 
-    // The progress bar: the fill advances continuously, the cursor and the riding n sit on its
-    // leading edge, and whichever scale numerals the riding n would touch are suppressed. Under
-    // continuous play the whole 1..N_MAX span is the movie's progress; on a single pair the fill
-    // sits at that pair's own position. All of it is a pure function of the clock.
-    const pos = progress();
-    const lead = pos * TRACK_WIDTH;
-    progressFill.style.width = lead + 'px';
-    const x = TRACK_LEFT + lead;
-    progressCursor.style.left = x + 'px';
-    progressN.style.left = x + 'px';
-    progressN.textContent = String(state.liveN);
-    const riderHalf = (String(state.liveN).length * digitWidth) / 2;
-    for (let i = 0; i < scaleLabels.length; i++) {
-      const s = scaleLabels[i];
-      const clear = riderHalf + (s.digits * digitWidth) / 2 + SCALE_GAP;
-      s.node.style.visibility = Math.abs(s.x - x) < clear ? 'hidden' : '';
-    }
     updateChrome();
   }
 
@@ -4674,15 +4530,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
           + ' · unit ' + fmt(g.unitSide, 3) + ' vs ' + fmt(g.record, 3));
   }
   function updateChrome() {
-    // Revision 12: **no position bar in Pack.** Pack is one fixed n, so a bar carrying the whole
-    // corpus's scale says nothing about it — the cursor sits on one value and never moves, and the
-    // scale under it prices a journey the page is not making. It is hidden whole, its scale with
-    // it, and Animate keeps it. Hiding it moves nothing: the bar is absolutely positioned inside the
-    // 1920 x 1080 stage, so its box is not in anyone's flow, and the panel above it ends at 1032
-    // whether it is drawn or not. It is set before the capture guard, because a captured Pack
-    // frame is the one place the bar would be most obviously wrong.
-    progressBar.hidden = state.mode === 'pack';
-    // Revision 14: and no step header either. `16 → 17 · matched · max move 1.31 · …` describes a
+    // Revision 14: no step header in Pack. `16 → 17 · matched · max move 1.31 · …` describes a
     // step, and Pack has no steps: it packs one n. Animate keeps it. Like the bar, the tag is
     // absolutely positioned on the stage, so hiding it moves nothing.
     kindTag.hidden = state.mode === 'pack';
@@ -5315,7 +5163,6 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       if (!state.continuous.on) pause();
       select(collapsed ? pairForStepN(lo) : b.first);
     }
-    syncScale();
     updateSegments();
     render();
     return rangeState();

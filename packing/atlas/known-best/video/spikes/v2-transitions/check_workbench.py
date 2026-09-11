@@ -282,12 +282,12 @@ def main() -> int:
         check(rng["steps"] == page.evaluate("atlasTransitions.pairs().length"),
               f"the corpus range is {rng['steps']} steps, not every pair the page carries")
         check(rng["duration"] > 60, f"the corpus run's duration reads {rng['duration']}, which is not minutes")
-        # The scale spans the range, read from the n it steps from through the n it steps into, so the
-        # whole corpus is the shipped 1..324 bar.
-        scale = page.evaluate(
-            "() => Array.from(document.querySelectorAll('#p-scale .p-num')).map(e => Number(e.textContent))"
-        )
-        check(scale and scale[0] == first - 1 and scale[-1] == last, f"the corpus scale does not span {first - 1}..{last}: {scale}")
+        # The span the range covers, read from the n it steps from through the n it steps into. It
+        # used to be checked on the numerals of the progress scale along the bottom of the stage;
+        # the owner found that distracting and it is gone, so the span is read from the range itself,
+        # which is what the scale was drawing.
+        check(rng["from"] == first and rng["to"] == last,
+              f"the corpus range does not span {first}..{last}: {rng}")
         # Clamped to what the page carries, and to from <= to.
         r = page.evaluate("atlasTransitions.setRange(-10, 100000)")
         check(r["from"] == first and r["to"] == last, f"the range does not clamp to what the page carries: {r}")
@@ -299,18 +299,12 @@ def main() -> int:
         check(page.evaluate("atlasTransitions.state().n") == 16, "17 to 17 does not show the step 16 -> 17")
         check(page.evaluate("document.getElementById('range-position').textContent").strip() == "",
               "the position readout is drawn for a one-step range")
-        single_scale = page.evaluate(
-            "() => Array.from(document.querySelectorAll('#p-scale .p-num')).map(e => Number(e.textContent))"
-        )
-        check(single_scale == [16, 17], f"a one-step range's scale is {single_scale}, not 16..17")
+        check(page.evaluate("atlasTransitions.progress().n") in (16, 17),
+              "a one-step range does not put the step 16 -> 17 on the stage")
         # A range of more than one step: the run is scoped to it and both readouts come back.
         r = page.evaluate("atlasTransitions.setRange(2, 100)")
         check(r["steps"] == 99, f"2..100 is {r['steps']} steps, expected 99")
-        scale = page.evaluate(
-            "() => Array.from(document.querySelectorAll('#p-scale .p-num')).map(e => Number(e.textContent))"
-        )
-        check(scale and scale[0] == 1 and scale[-1] == 100, f"the bar's scale does not span 1..100: {scale}")
-        check(len(scale) >= 5, f"the range scale carries only {len(scale)} numerals")
+        check(r["from"] == 2 and r["to"] == 100, f"the range does not span 2..100: {r}")
         page.evaluate("atlasTransitions.setStyle('tween'); atlasTransitions.playRange(); atlasTransitions.pause()")
         check(page.evaluate("atlasTransitions.state().n") == 1, "playRange does not start at the range's first step")
         pos = page.evaluate("atlasTransitions.range()")
@@ -468,7 +462,11 @@ def main() -> int:
             """() => { window.__samples = []; const A = window.atlasTransitions;
               A.seek(0); A.play();
               const id = setInterval(() => { const st = A.state();
-                window.__samples.push([st.t, A.gapBar().x, document.getElementById('gap-b').textContent]);
+                // The third sample used to be the live readout's text, which is gone with the
+                // readout. The summed overlap replaces it and is a better witness for the same
+                // property: it is measured from the poses of every frame, so it moves while the bar
+                // deliberately does not.
+                window.__samples.push([st.t, A.gapBar().x, A.colour().overlap]);
                 if (!st.playing) clearInterval(id); }, 60); }"""
         )
         page.wait_for_timeout(4500)
@@ -478,7 +476,7 @@ def main() -> int:
         hands = {round(r[1], 9) for r in mid}
         rows = {r[2] for r in mid}
         check(len(hands) == 1, f"the gap bar's hand moved {len(hands)} times mid-motion: it should hold still")
-        check(len(rows) > 5, f"the live readout froze with the bar ({len(rows)} distinct rows over {len(mid)} samples)")
+        check(len(rows) > 5, f"the frame's own measurement froze with the bar ({len(rows)} distinct values over {len(mid)} samples)")
         settled = page.evaluate("atlasTransitions.gapBar().x")
         check(abs(settled - mid[0][1]) > 1e-6, "the bar never caught up once the motion settled")
         # On demand, mid-motion, with nothing else touched.
@@ -561,12 +559,12 @@ def main() -> int:
               f"the run made the arrangement no smaller: {run['a']['required']} -> {run['c']['required']}")
         check(run["c"]["best"] is not None and run["c"]["bestPenetration"] is not None,
               f"the run reports no smallest box and no overlap beside it: {run['c']}")
-        # And it reports all four figures on the stage.
-        rows = page.evaluate("() => [document.getElementById('gap-c').textContent, document.getElementById('gap-d').textContent]")
-        check("optimize" in rows[0] and " s " in rows[0] and "steps" in rows[0],
-              f"the run does not report its clock and step count: {rows[0]!r}")
-        check("smallest box" in rows[1] and "overlap" in rows[1] and "record" in rows[1],
-              f"the run does not report its box, its overlap and the record: {rows[1]!r}")
+        # And it reports all four figures. They used to be read off the rows under the stage; the
+        # owner had those dropped, so they are read from the API that filled them -- which is where
+        # a number belongs, and is what `grade_motion.py` and the capture receipt read too.
+        said = page.evaluate("atlasTransitions.optimizeState()")
+        for field in ("time", "steps", "best", "bestPenetration", "record"):
+            check(said.get(field) is not None, f"the run does not report its {field}: {said}")
         # Play resumes and pause stops it where it stands.
         held = page.evaluate(
             """() => { const A = window.atlasTransitions; A.setSpeed(1); A.play();
@@ -582,8 +580,8 @@ def main() -> int:
         # Seeking is how the timeline is come back to.
         page.evaluate("atlasTransitions.seek(0)")
         check(not page.evaluate("atlasTransitions.state().optimizing"), "a seek did not leave the open-ended run")
-        check(page.evaluate("document.getElementById('gap-c').textContent") == "",
-              "the run's readout survived leaving the run")
+        check(page.evaluate("atlasTransitions.state().optimizing") is False,
+              "the run survived leaving it")
         page.evaluate("atlasTransitions.setInitial('previous'); atlasTransitions.setStepN(17)")
 
         # ---- step 7 (revision 9): the hand.
@@ -602,8 +600,8 @@ def main() -> int:
         check(grabbed["g"] == grabbed["i"] and not grabbed["before"] and grabbed["optimizing"],
               f"a grab from the timeline did not start an open-ended run: {grabbed}")
         check(grabbed["edited"], "a dragged run is not marked hand-edited")
-        check("hand-edited" in page.evaluate("document.getElementById('gap-c').textContent"),
-              "the stage does not say the run was hand-edited")
+        check(page.evaluate("atlasTransitions.optimizeState().edited") is True,
+              "the run does not report that it was hand-edited")
         page.evaluate("atlasTransitions.release()")
         # Pinned: the held square follows the cursor exactly and its neighbours are pushed aside.
         pin = page.evaluate(
@@ -643,14 +641,15 @@ def main() -> int:
         moved = page.evaluate(
             """() => { const A = window.atlasTransitions;
               A.setStepN(17); A.setInitial('grid');
-              const before = document.getElementById('gap-b').textContent;
+              const before = A.gapBar().side;
               const k = A.pickAt(0.5, 0.5);
               A.grab(k, 0.5, 0.5); A.dragTo(7.5, 0.5, false);
-              const after = document.getElementById('gap-b').textContent;
+              const after = A.gapBar().side;
               A.release();
               return {before, after}; }"""
         )
-        check(moved["before"] != moved["after"], f"the live readout did not follow the drag: {moved}")
+        check(abs(moved["before"] - moved["after"]) > 1e-9,
+              f"the measured side did not follow the drag: {moved}")
         # And a drag while a run is playing leaves it playing.
         live = page.evaluate(
             """() => { const A = window.atlasTransitions;
@@ -1838,44 +1837,33 @@ def main() -> int:
         # carries the corpus's scale has nothing to say about it. Animate keeps it. The property that
         # matters alongside is that hiding it moves nothing else: the bar is absolutely positioned
         # inside the stage, so the stage, the panel and the controls are the same box either way.
+        # Revision 16: the position bar and its scale along the bottom of the stage are gone --
+        # the owner found them distracting, and the stage carries facts about the packing rather
+        # than apparatus about the playback. What was checked here was that hiding the bar in Pack
+        # moved nothing else; with no bar there is nothing to hide, and what remains worth holding
+        # is the other half of that property: the two modes lay the stage out identically, so a
+        # switch between them does not move the picture.
         def geometry() -> dict:
             return page.evaluate(
                 "() => { const r = (id) => { const e = document.getElementById(id);"
                 "    const b = e.getBoundingClientRect(); return [b.x, b.y, b.width, b.height]; };"
-                "  const bar = document.getElementById('progress');"
-                "  return {stage: r('stage'), facts: r('facts'), controls: r('controls'),"
-                "    read: r('gap-read'), svg: r('packing-svg'),"
-                "    shown: bar.getClientRects().length > 0,"
-                "    ticks: document.querySelectorAll('#p-scale .p-tick').length,"
-                "    numerals: Array.from(document.querySelectorAll('#p-scale .p-num'))"
-                "      .filter((e) => e.getClientRects().length > 0).length}; }"
+                "  return {stage: r('stage'), facts: r('facts'), svg: r('packing-svg'),"
+                "    progress: document.getElementById('progress') === null}; }"
             )
 
         page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17)")
         packed = geometry()
-        check(not packed["shown"], "the position bar is still drawn in Pack")
-        check(packed["numerals"] == 0, f"Pack still draws {packed['numerals']} scale numerals")
+        check(packed["progress"], "the position bar is still in the page")
         page.evaluate("atlasTransitions.setMode('animate'); atlasTransitions.setRange(2, 100)")
         swept = geometry()
-        check(swept["shown"], "the position bar is gone from Animate as well")
-        check(swept["numerals"] > 3, f"Animate draws only {swept['numerals']} scale numerals")
-        # Revision 15: the bar's own removal must not move the picture, which is what these read.
-        # `controls` is no longer among them: Pack drops the whole timing row as well, so its panel
-        # is deliberately shorter and the stage correspondingly larger. Comparing the two modes'
-        # control heights asserted that a mode with fewer controls must waste the space anyway,
-        # which is the reserved dead space the owner reported as a ragged layout.
-        for key in ("facts", "read", "svg"):
+        for key in ("stage", "facts", "svg"):
             check(packed[key] == swept[key],
-                  f"hiding the bar moved the {key}: {packed[key]} against {swept[key]}")
-        # It goes with the mode and not with the run: a Pack run playing does not bring it back, and
-        # a captured Pack frame — the one place a stray bar would be most visible — has none either.
-        page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17);"
-                      " atlasTransitions.setInitial('grid'); atlasTransitions.optimizeStep(60)")
-        check(not geometry()["shown"], "a Pack run brings the position bar back")
-        page.evaluate("atlasTransitions.setCapture(true)")
-        check(not page.evaluate("document.getElementById('progress').getClientRects().length > 0"),
-              "a captured Pack frame still carries the position bar")
-        page.evaluate("atlasTransitions.setCapture(false); atlasTransitions.setInitial('previous');"
+                  f"the mode moved the {key}: {packed[key]} against {swept[key]}")
+        # The step header still goes with the mode: it describes a step, and Pack has none.
+        page.evaluate("atlasTransitions.setMode('pack'); atlasTransitions.setStepN(17)")
+        check(page.evaluate("document.getElementById('kind-tag').hidden"),
+              "Pack still draws the step header")
+        page.evaluate("atlasTransitions.setMode('animate'); atlasTransitions.setInitial('previous');"
                       " atlasTransitions.setStepN(17); atlasTransitions.seek(0)")
 
         # ---- step 14 (revision 12): a contact graph drawn by hand. The owner: "it would be nice
@@ -2068,12 +2056,14 @@ def main() -> int:
                       " atlasTransitions.setStyle('tween'); atlasTransitions.setSnap(true);"
                       " atlasTransitions.setInitial('previous'); atlasTransitions.setRelationship('contact');"
                       " atlasTransitions.setTargetSource('record'); atlasTransitions.seek(atlasTransitions.duration())")
-        row = page.evaluate("document.getElementById('gap-e').textContent")
+        # The row that carried this under the stage is gone with the rest of the readout, so what is
+        # checked is the measurement itself: how much of the target graph is realised, out of how
+        # much, and the side the arrangement is in. It is a measurement of the picture rather than of
+        # a run, which is why it holds with nothing simulating.
         state_rel = page.evaluate("atlasTransitions.relationship()")
-        check(f"{state_rel['met']} of {state_rel['edges']} contacts" in row,
-              f"the readout does not carry the fraction: {row!r} against {state_rel}")
-        check(f"side {state_rel['side']:.3f}" in row, f"the readout does not carry the side: {row!r}")
-        check(len(row) <= 56, f"the readout row is {len(row)} characters and will not fit the panel: {row!r}")
+        check(state_rel["edges"] > 0 and 0 <= state_rel["met"] <= state_rel["edges"],
+              f"the contact target reports no fraction: {state_rel}")
+        check(state_rel["side"] > 0, f"the relationship readout carries no side: {state_rel}")
         page.evaluate("atlasTransitions.setRelationship('general'); atlasTransitions.setTargetSource('record');"
                       " atlasTransitions.setLawPreset('default'); atlasTransitions.setDrawing(false);"
                       " atlasTransitions.setStepN(17); atlasTransitions.seek(0)")
