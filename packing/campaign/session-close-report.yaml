@@ -2094,7 +2094,7 @@ sessions:
   codex_receipts: []
 - id: session-126
   title: "Stromquist, Fractional Packing, and the Next Proof Mechanisms"
-  status: in_progress
+  status: completed
   primary_bead: think-jx95
   phases: 7
   measured: true
@@ -2107,8 +2107,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-126.yaml
-    model_responses: 487
-    agent_hours: 3.66
-    active_union_hours: 1.86
-    wall_hours: 1.86
+    model_responses: 526
+    agent_hours: 3.9
+    active_union_hours: 2.1
+    wall_hours: 2.1
     snapshot_incomplete: true

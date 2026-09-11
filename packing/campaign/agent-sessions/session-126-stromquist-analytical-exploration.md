@@ -133,7 +133,7 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Validate and publish the notation revision, retain the prior full checkpoint and the new fast-surface evidence, and close the analytical block with accurate resource accounting.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The user-requested rewrite and reciprocal reviews are complete; only validation and final session accounting remain.
     budget_minutes: 30
@@ -143,12 +143,12 @@ session:
     validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --push --since origin/main --jobs 4 --inner-jobs 2 --format json
     kill_condition: A concrete source, mathematical, or validation failure prevents certification of the changed branch.
     fallback: Correct that failure and rerun its affected checks while retaining the actual prior outcomes.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Format and regenerate records, commit the reviewed source, run the pre-push gate, and confirm hosted checks on that exact head.
+    outcome: Source commit 58ae49ed passed all 46 pre-push checks in 211.5 seconds and all 11 applicable hosted checks, including the complete fast-tier partition, publication build, both font checks, and macOS portability. Ten hosted checks were intentionally skipped. The four documents contain 1017 recognized mathematical spans; strict KaTeX parsing and the unchanged-span formatter check pass. The final commit after this checkpoint updates session closure and generated accounting only, with its own pre-push and hosted checks.
+    evidence: [packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md, packing/devtools/check_katex.py, packing/tests/test_check_katex.py, packing/campaign/resource-usage/codex-task-tree-session-126.yaml, packing/campaign/session-close-report.yaml]
+    stop_reason: The requested analytical block and the subsequent notation and organization revision are complete, reviewed, and published with passing source checks.
+    next_action: Use X-027 to select a prospectively declared numerical continuation; no further research is required to complete this analytical block.
   primary_bead: think-jx95
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 240
     max_cycles: 8
@@ -163,7 +163,7 @@ session:
   progress:
     metric: Supported mechanisms and discriminating next questions, rather than a new packing bound.
     before: T-026 gives the lower bound 3.826447410572939; corrected structural and fixed-family results coexist with newly archived correspondence but lack a joint strategic exploration.
-    after: Exact full-unit transport and continuous duality, seven-mark ownership and a three-component normal-form consequence, a floor-profile separation, and eight shaped follow-ups are retained in three cross-reviewed reports and X-027; the frontier is unchanged.
+    after: Exact full-unit transport and continuous duality, seven-mark ownership and a three-component normal-form consequence, a floor-profile separation, and eight shaped follow-ups are retained in three cross-reviewed reports and X-027. All four documents have KaTeX notation, foundational definitions, and explicit non-circular dependencies. The frontier is unchanged.
   delegations:
   - task: Fractional packing, continuous duality, and exact transport of the retained core obstruction.
     operator: GPT-6 Astra, max
@@ -203,7 +203,7 @@ session:
     uncertainty: Expressive separation on abstract traces does not establish a geometric or LP improvement.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Complete the separate read-only review of the integrated X-027 draft.
+    next_action: The integrated review and later notation/checker review are complete; continue the retained geometric discriminator when its instrument is admitted.
   outputs:
   - packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md
   - docs/project/research/research-2026-09-10-x027-fractional-duality.md
@@ -227,9 +227,13 @@ session:
   - All 45 pre-push checks and seven applicable hosted checks passed at cd9dd221 before the notation revision; eight hosted checks were intentionally deferred or skipped.
   - All three original authors completed the notation revision and reciprocal scope reviews. Source definitions distinguish physical parents from strict cores, closed depth from interior incidence, and proof dependencies from navigation and review assurance.
   - The retained KaTeX checker passed the four-document syntax check with version 0.16.45. Its controls reject unsupported syntax, missing or empty inputs, and display-only syntax used inline. This checks recognized mathematical spans, not delimiter linting or browser layout; the browser rejected a local file preview under its URL policy.
+  - All 32 records checks passed across the notation preflight and the isolated Ruff discovery rerun through the documented uv environment; the initial direct-venv invocation omitted Ruff from PATH.
+  - All 1017 recognized math spans survive pinned Flowmark unchanged. Twelve span/parser controls, four validation-selection controls, and the changed-code Ruff and BasedPyright checks pass.
+  - All 46 pre-push checks passed at 58ae49ed in 211.5 seconds with no skips.
+  - 'full gate: fast at 58ae49ed: passed (hosted validate, suite, geometry and sweeps cover the full fast tier; publication and portability checks also passed)'
   resource_rollups: [packing/campaign/resource-usage/codex-task-tree-session-126.yaml]
-  stop_reason: null
-  next_action: Resolve the integrated review, validate the completed source checkpoint, and retain the new exploration on its branch.
+  stop_reason: The requested exploration, three supporting analyses, notation and definition revision, independent reviews, and source validation are complete; all remaining numerical directions have explicit proposed controls and limits.
+  next_action: Keep BC329 as the next direct-bound continuation after instrument admission; select one of X-027's bounded geometric or charge discriminators for a separate experiment block.
 ---
 # Session 126: Stromquist Analytical Exploration
 
