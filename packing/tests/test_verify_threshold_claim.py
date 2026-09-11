@@ -181,6 +181,39 @@ def test_a_stale_least_charge_declaration_is_refused(capsys) -> None:
     assert "wrong fields: least_cell_charge" in capsys.readouterr().out
 
 
+def test_certificate_size_ceilings_refuse_before_condition_work(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    verifier = load_verifier()
+    monkeypatch.setattr(
+        verifier,
+        "point_symmetry",
+        lambda *_args: pytest.fail("oversized input reached condition work"),
+    )
+    cases = (
+        (
+            "atoms",
+            [None] * (verifier.MAX_POINT_ATOMS + 1),
+            "too many point atoms",
+        ),
+        (
+            "threshold_atoms",
+            [None] * (verifier.MAX_THRESHOLD_ATOMS + 1),
+            "too many threshold atoms",
+        ),
+        (
+            "direction_steps",
+            verifier.MAX_DIRECTIONS,
+            "directions exceeds ceiling",
+        ),
+    )
+    for field, value, refusal in cases:
+        record = small_certificate()
+        record[field] = value
+        with pytest.raises(ValueError, match=refusal):
+            verifier.check_certificate(encoded(record))
+
+
 @pytest.mark.parametrize(
     ("mutate", "refusal"),
     [

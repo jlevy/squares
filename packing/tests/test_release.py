@@ -34,7 +34,7 @@ def test_publication_history_is_the_two_retained_editions() -> None:
         "September 10, 2026",
         "September 8, 2026",
     ]
-    assert "3.826447410572939744" in PUBLICATION_HISTORY[0].result_scope
+    assert "3.8264474…" in PUBLICATION_HISTORY[0].result_scope
     assert "381/100 = 3.81" in PUBLICATION_HISTORY[1].result_scope
     assert all("weak" not in entry.result_scope.lower() for entry in PUBLICATION_HISTORY)
     assert PUBLICATION_HISTORY[0].version == PUBLICATION_VERSION
