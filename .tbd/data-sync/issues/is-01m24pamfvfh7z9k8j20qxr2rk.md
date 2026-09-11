@@ -3,14 +3,18 @@ type: is
 id: is-01m24pamfvfh7z9k8j20qxr2rk
 title: Write the StrategyPlan schema and Python executor
 kind: task
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T03:38:33.847Z
-updated_at: 2026-09-10T03:52:55.662Z
+updated_at: 2026-09-11T00:00:34.708Z
+closed_at: 2026-09-11T00:00:34.706Z
+close_reason: "Built: packing/strategies/packing-strategy.schema.yaml (valid draft 2020-12, oneOf on mechanism) and devtools/packing_strategy.py with MECHANISMS as the single table that knows how to run a phase. Proved end to end on strategies/sweep-landing.yaml, which validates, runs, reports per-phase side and violation, marks the guided run, and emits a 101-frame trace."
+resolution: null
+duplicate_of: null
 ---
 Phase 1 of the strategy-plan spec. Write packing/schemas/strategy-plan.schema.yaml as a draft 2020-12 contract (packing.squares:StrategyPlan/v1) with oneOf on the stage's strategy field so each stage validates against its own parameters, and the structure-ladder rung as an enum: partition, contact-graph, contact-graph-with-types, with-wall-contacts.
 
