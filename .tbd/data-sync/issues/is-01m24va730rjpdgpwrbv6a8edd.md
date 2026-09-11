@@ -5,12 +5,12 @@ title: "The atlas ascent: animate n = 1 to 100, one square at a time"
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T05:05:43.007Z
-updated_at: 2026-09-10T05:05:43.007Z
+updated_at: 2026-09-10T23:56:45.991Z
 ---
 Phase 3 of the packing-strategies spec. A single directed animation from n=1 to n=100, adding one square per step and landing each time on the retained record. Directed on purpose: not a search, uses the known endpoints, clean and always arrives. Every frame comes from a guide phase and every frame is labelled guided -- the same instruments report what searches reach, and the two must never be confusable.
 
