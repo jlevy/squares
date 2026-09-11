@@ -21,6 +21,8 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from probes import probe
+
 HERE = Path(__file__).resolve().parent
 
 # The lines revision 9 removed and the apparatus revision 16 removed, by id. A page that grows any
@@ -60,8 +62,6 @@ GONE_WORDS = (
     "Keys:",
 )
 
-STAGE_TEXT = "() => document.getElementById('stage').innerText.replace(/\\s+/g, ' ')"
-
 
 def main() -> int:
     page_path = (HERE / sys.argv[1]) if len(sys.argv) > 1 else HERE / "index.html"
@@ -73,14 +73,14 @@ def main() -> int:
         page.on("pageerror", lambda e: bad.append(f"pageerror: {e}"))
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(700)
-        index_of = {q["n"]: q["index"] for q in page.evaluate("atlasTransitions.pairs()")}
+        index_of = {q["n"]: q["index"] for q in page.evaluate(probe("legend/pairs"))}
         for ident in GONE_IDS:
-            if page.evaluate(f"document.getElementById({ident!r}) !== null"):
+            if page.evaluate(probe("legend/element_present"), {"id": ident}):
                 bad.append(f"the removed element #{ident} is back in the page")
         for sel in GONE_CLASSES:
-            if page.evaluate(f"document.querySelectorAll({sel!r}).length") != 0:
+            if page.evaluate(probe("legend/selector_count"), {"selector": sel}) != 0:
                 bad.append(f"the removed stack {sel} is back on the stage")
-        page.evaluate("atlasTransitions.setCapture(true)")
+        page.evaluate(probe("legend/set_capture"), {"on": True})
         for n in (100, 110, 307):
             if n not in index_of:
                 continue
@@ -91,14 +91,13 @@ def main() -> int:
                     for level in (3, 10):
                         for at in (2.0, 2.8):
                             page.evaluate(
-                                "([i, s, m, L, t]) => { const A = window.atlasTransitions; A.select(i); A.setStyle(s);"
-                                " A.setSnap(m !== 'free'); A.setBlind(m === 'blind'); A.setAnneal(L); A.seek(t); }",
-                                [index_of[n], style, mode, level, at],
+                                probe("legend/set_state"),
+                                {"index": index_of[n], "style": style, "mode": mode, "level": level, "at": at},
                             )
                             combinations += 1
                             label = f"n={n} {style}/{mode} anneal {level} at {at}"
                             # The stage's whole text, as a viewer would read it off a still.
-                            stage_text = page.evaluate(STAGE_TEXT)
+                            stage_text = page.evaluate(probe("legend/stage_text"))
                             for word in GONE_WORDS:
                                 if word.lower() in stage_text.lower():
                                     bad.append(f"{label}: the stage still says {word!r}")
@@ -108,18 +107,14 @@ def main() -> int:
             if n not in index_of:
                 continue
             for kind in ("grid", "random", "previous"):
-                page.evaluate(
-                    "([n, k]) => { const A = window.atlasTransitions; A.setStepN(n); A.setInitial(k);"
-                    "  if (k === 'previous') { A.optimize(true); A.pause(); } A.optimizeStep(1200); }",
-                    [n, kind],
-                )
+                page.evaluate(probe("legend/optimize_from"), {"n": n, "initial": kind})
                 combinations += 1
                 label = f"optimize n={n} from {kind}"
-                stage_text = page.evaluate(STAGE_TEXT)
+                stage_text = page.evaluate(probe("legend/stage_text"))
                 for word in GONE_WORDS:
                     if word.lower() in stage_text.lower():
                         bad.append(f"{label}: the stage still says {word!r}")
-        page.evaluate("atlasTransitions.setInitial('previous'); atlasTransitions.setCapture(false)")
+        page.evaluate(probe("legend/restore"))
         browser.close()
     if bad:
         print("FAILED")

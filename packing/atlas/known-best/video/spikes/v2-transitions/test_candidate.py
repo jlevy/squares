@@ -63,6 +63,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from probes import probe
+
 HERE = Path(__file__).resolve().parent
 PYTHON = Path(sys.executable)
 SHARED_PICTURE_PAIRS = {147, 232, 264, 290, 295}
@@ -124,7 +126,7 @@ def build(out: Path) -> None:
 
 
 def payload_of(html: str) -> dict:
-    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', html, re.S)
+    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', html, re.DOTALL)
     assert match is not None, "index.html carries no atlas-data block"
     return json.loads(match.group(1).replace("<\\/", "</"))
 
@@ -132,7 +134,7 @@ def payload_of(html: str) -> dict:
 def atlas_star_points() -> list[tuple[float, float]]:
     """SUMMARY_STAR_POINTS as the atlas source states it, parsed rather than imported."""
     text = ATLAS_SOURCE.read_text()
-    block = re.search(r"SUMMARY_STAR_POINTS = \((.*?)\n\)", text, re.S).group(1)
+    block = re.search(r"SUMMARY_STAR_POINTS = \((.*?)\n\)", text, re.DOTALL).group(1)
     pairs = re.findall(r"\(Decimal\(\"?(-?[\d.]+)\"?\), Decimal\(\"?(-?[\d.]+)\"?\)\)", block)
     return [(float(x), float(y)) for x, y in pairs]
 
@@ -184,8 +186,9 @@ def digit_bearing_px() -> float:
 def witness_centres(n: int) -> list[tuple[float, float]]:
     """Square centres of witness n, read independently of the build (corners averaged, or the
     centre-angle form's centres)."""
-    import yaml  # noqa: PLC0415
     from fractions import Fraction  # noqa: PLC0415
+
+    import yaml  # noqa: PLC0415
 
     data = yaml.load((REPO / f"packing/witnesses/known-best/n-{n:03d}.yaml").read_text(), Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))["witness"]
     centres = []
@@ -206,85 +209,8 @@ def type_and_fit_sweep(browser, page_path: Path, check, expected_gap: float) -> 
     the riding n, the bar and the panel's right edge, with each slot's top and height."""
     page = browser.new_page(viewport={"width": 1920, "height": 1080}, device_scale_factor=1)
     page.goto(page_path.as_uri(), wait_until="load")
-    page.evaluate("document.fonts.ready")
-    result = page.evaluate(
-        """(() => {
-          const api = window.atlasTransitions;
-          api.setCapture(true);
-          const stage = document.getElementById('stage');
-          const facts = document.getElementById('facts');
-          const d = api.duration();
-          const sizes = new Map();
-          let svgGlyphs = 0;
-          const census = () => {
-            const walker = document.createTreeWalker(stage, NodeFilter.SHOW_TEXT);
-            let node;
-            while ((node = walker.nextNode())) {
-              if (!node.textContent.trim()) continue;
-              const el = node.parentElement;
-              if (!(el instanceof HTMLElement)) { svgGlyphs++; continue; }
-              const cs = getComputedStyle(el);
-              if (cs.display === 'none' || cs.visibility === 'hidden' || el.getClientRects().length === 0) continue;
-              const size = parseFloat(cs.fontSize);
-              if (!sizes.has(size)) sizes.set(size, new Set());
-              sizes.get(size).add(el.id || el.className || el.tagName.toLowerCase());
-            }
-          };
-          const SLOTS = ['.numeral', '.head-proved', '.side', '.lower', '.star-line', '.exact', '.badges', '.head-open', '.open-items'];
-          const fits = [];
-          const count = api.pairs().length;
-          for (let i = 0; i < count; i++) {
-            api.select(i);
-            for (const [t, layer, other] of [[0, 'facts-a', 'facts-b'], [d, 'facts-b', 'facts-a']]) {
-              api.seek(t);
-              census();
-              const root = document.getElementById(layer);
-              let bottom = 0, right = 0;
-              const walker = document.createTreeWalker(facts, NodeFilter.SHOW_TEXT);
-              let node;
-              while ((node = walker.nextNode())) {
-                if (!node.textContent.trim()) continue;
-                const el = node.parentElement;
-                if (el.closest('#' + other)) continue;
-                const r = el.getBoundingClientRect();
-                if (r.width === 0) continue;
-                bottom = Math.max(bottom, r.bottom);
-                right = Math.max(right, r.right);
-              }
-              root.querySelectorAll('svg').forEach((s) => {
-                const r = s.getBoundingClientRect();
-                bottom = Math.max(bottom, r.bottom);
-                right = Math.max(right, r.right);
-              });
-              const slots = SLOTS.map((sel) => {
-                const r = root.querySelector(sel).getBoundingClientRect();
-                return [sel, Math.round(r.top * 100) / 100, Math.round(r.height * 100) / 100];
-              });
-              // The headline: the numeral against the `n =` line it shares a row with. Read
-              // through `offset*` rather than `getBoundingClientRect`, because the numeral
-              // carries the roll's transform and a client rect would measure that instead of
-              // the layout. The line is constant and lives OUTSIDE both fading layers, so it
-              // is found on the document rather than in `root`.
-              const numeralEl = root.querySelector('.numeral');
-              const nlineEl = document.querySelector('.nline');
-              fits.push({ n: api.state().n + (t > 0 ? 1 : 0), t, bottom, right, slots,
-                          numeralLeft: numeralEl.offsetLeft, numeralTop: numeralEl.offsetTop,
-                          nlineRight: nlineEl.offsetLeft + nlineEl.offsetWidth,
-                          nlineTop: nlineEl.offsetTop });
-            }
-          }
-          // Revision 12 held the panel clear of the position bar along the bottom of the stage.
-          // Revision 16 removed that bar entirely -- the owner found it distracting -- so the
-          // clearance is now to the stage's own foot, and the two numbers the callers read are the
-          // stage's bottom rather than the bar's top.
-          const stageBox = document.getElementById('stage').getBoundingClientRect();
-          const barTop = stageBox.bottom;
-          const pnTop = stageBox.bottom;
-          const box = facts.getBoundingClientRect();
-          return { sizes: Array.from(sizes, ([s, k]) => [s, Array.from(k).sort()]).sort((a, b) => a[0] - b[0]),
-                   svgGlyphs, fits, pnTop, barTop, factsLeft: box.left, factsRight: box.right };
-        })()"""
-    )
+    page.evaluate(probe("candidate/fonts_ready"))
+    result = page.evaluate(probe("candidate/type_and_fit"))
     page.close()
     sizes = result["sizes"]
     check(len(sizes) <= 4, f"{page_path.name}: {len(sizes)} distinct stage font sizes: {sizes}")
@@ -327,8 +253,8 @@ def platform_font_checks(browser, page_path: Path, index_of: dict[int, int], dur
     errors: list[str] = []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
     page.goto(page_path.as_uri(), wait_until="load")
-    page.evaluate("document.fonts.ready")
-    page.evaluate("window.atlasTransitions.setCapture(true)")
+    page.evaluate(probe("candidate/fonts_ready"))
+    page.evaluate(probe("candidate/set_capture"), {"on": True})
     cdp = page.context.new_cdp_session(page)
     cdp.send("DOM.enable")
     cdp.send("CSS.enable")
@@ -339,14 +265,14 @@ def platform_font_checks(browser, page_path: Path, index_of: dict[int, int], dur
         fonts = cdp.send("CSS.getPlatformFontsForNode", {"nodeId": node["nodeId"]})["fonts"]
         return [f["familyName"] for f in fonts if f["glyphCount"] > 0]
 
-    page.evaluate(f"window.atlasTransitions.select({index_of[103]})")
+    page.evaluate(probe("candidate/select"), {"index": index_of[103]})
     check(fonts_of("#facts .nline .n-var") == ["PT Serif"] and fonts_of("#facts-a .n-val") == ["PT Serif"], "the headline is not set in PT Serif")
     check(fonts_of("#facts-a .side .rel") == ["KaTeX_Main"], f"≤ is set in {fonts_of('#facts-a .side .rel')}")
     check(fonts_of("#facts-a .lower .rel") == ["KaTeX_Main"], f"≥ is set in {fonts_of('#facts-a .lower .rel')}")
     check(fonts_of("#facts-a .lower .val") == ["PT Serif"] and fonts_of("#facts-a .side .val") == ["PT Serif"], "the bound values are not set in PT Serif")
-    page.evaluate(f"window.atlasTransitions.select({index_of[147]})")
-    page.evaluate(f"window.atlasTransitions.seek({duration})")
-    form = page.evaluate("document.querySelector('#facts-b .exact .form').textContent")
+    page.evaluate(probe("candidate/select"), {"index": index_of[147]})
+    page.evaluate(probe("candidate/seek"), {"t": duration})
+    form = page.evaluate(probe("candidate/text_of"), {"selector": "#facts-b .exact .form"})
     check("√" in form and "KaTeX_Main" in fonts_of("#facts-b .exact .form"), f"the radical in n=148's closed form {form!r} is not set in KaTeX_Main")
     check(all("Georgia" not in f for f in fonts_of("#facts-b .exact .form") + fonts_of("#facts-b .side")), "a panel glyph falls back to Georgia")
     check(not errors, f"page errors on the font-check page: {errors}")
@@ -374,35 +300,8 @@ def colour_sweep(browser, page_path: Path, check) -> tuple[int, int]:
     """
     page = browser.new_page(viewport={"width": 1920, "height": 1080}, device_scale_factor=1)
     page.goto(page_path.as_uri(), wait_until="load")
-    page.evaluate("document.fonts.ready")
-    swept = page.evaluate(
-        """(() => {
-          const api = window.atlasTransitions;
-          api.setCapture(true);
-          api.setDesaturate(false);
-          // Revision 12: the angle map is one of three schemes now, and not the default.
-          if (api.setColorScheme) api.setColorScheme('angle-stable');
-          const seen = new Set();
-          const collect = () => {
-            const n = api.state().n;
-            document.querySelectorAll('#squares g[data-identity]').forEach((g) => {
-              if (Number(g.dataset.identity) <= n) seen.add(g.firstElementChild.getAttribute('fill'));
-            });
-          };
-          const count = api.pairs().length;
-          for (let i = 0; i < count; i++) {
-            api.select(i);
-            const sc = api.schedule();
-            for (const t of [0, sc.arrived, (sc.blocksStart + sc.blocksEnd) / 2, 2.8]) { api.seek(t); collect(); }
-          }
-          const colour = api.colour();
-          const token = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-          return {
-            fills: Array.from(seen), shades: colour.shades, palette: colour.palette,
-            reserved: [token('--new'), token('--met')],
-          };
-        })()"""
-    )
+    page.evaluate(probe("candidate/fonts_ready"))
+    swept = page.evaluate(probe("candidate/colour_sweep"))
     page.close()
     fills, shades, palette = swept["fills"], swept["shades"], swept["palette"]
 
@@ -441,82 +340,84 @@ def colour_sweep(browser, page_path: Path, check) -> tuple[int, int]:
     return len(fills), families
 
 
-def staging_checks(page, api: str, index_of: dict[int, int], duration: float, check) -> None:
+def staging_checks(page, index_of: dict[int, int], duration: float, check) -> None:
     """Revision 5 in the headless shell: the identity pool, the five motion modes, the two
     staged orders, and a block's rigidity half way through its motion."""
-    poses = "Array.from(document.querySelectorAll('#squares g[data-identity]')).filter(g => Number(g.dataset.identity) <= " + api + ".state().n).map(g => [g.dataset.identity, g.getAttribute('transform')])"
-    visible = "Array.from(document.querySelectorAll('#squares g[data-identity]')).filter(g => g.style.display !== 'none').length"
-    total = "document.querySelectorAll('#squares g[data-identity]').length"
+    poses = probe("candidate/poses")
+    visible = probe("candidate/visible_count")
+    total = probe("candidate/count_of")
+    pool = {"selector": "#squares g[data-identity]"}
 
     # The pool: one element per identity, created once, never re-keyed, hidden beyond n + 1.
-    shown = ("Array.from(document.querySelectorAll('#squares g[data-identity]'))"
-             ".filter(g => g.style.display !== 'none').map(g => Number(g.dataset.identity)).sort((a, b) => a - b)")
-    page.evaluate(f"{api}.select({index_of[4]})")
+    shown = probe("candidate/shown_identities")
+    page.evaluate(probe("candidate/select"), {"index": index_of[4]})
     check(page.evaluate(shown) == [1, 2, 3, 4, 5], "pair 4->5 does not show exactly identities 1..5")
-    check(page.evaluate(total) >= 5, "pair 4->5 has no pool at all")
-    page.evaluate("document.querySelector('#squares g[data-identity=\"5\"]').dataset.probe = 'born-at-5'")
-    page.evaluate(f"{api}.select({index_of[100]})")
-    check(page.evaluate(total) == 101 and page.evaluate(visible) == 101, "pair 100->101 does not show exactly identities 1..101")
-    check(page.evaluate("document.querySelector('#squares g[data-identity=\"5\"]').dataset.probe") == "born-at-5", "identity 5's element was re-created between pairs")
-    ids = page.evaluate("Array.from(document.querySelectorAll('#squares g[data-identity]')).map(g => Number(g.dataset.identity))")
+    check(page.evaluate(total, pool) >= 5, "pair 4->5 has no pool at all")
+    page.evaluate(probe("candidate/mark_identity"), {"identity": 5, "mark": "born-at-5"})
+    page.evaluate(probe("candidate/select"), {"index": index_of[100]})
+    check(page.evaluate(total, pool) == 101 and page.evaluate(visible) == 101, "pair 100->101 does not show exactly identities 1..101")
+    check(page.evaluate(probe("candidate/identity_mark"), {"identity": 5}) == "born-at-5", "identity 5's element was re-created between pairs")
+    ids = page.evaluate(probe("candidate/pool_identities"))
     check(ids == list(range(1, 102)), "pool elements are not in birth order")
-    page.evaluate(f"{api}.select({index_of[323]})")
-    check(page.evaluate(total) == 324, "pair 323->324 does not create identities up to 324")
-    page.evaluate(f"{api}.select({index_of[4]})")
-    check(page.evaluate(total) == 324 and page.evaluate(visible) == 5, "returning to 4->5 does not hide identities beyond 5")
-    check(page.evaluate("document.querySelector('#squares g[data-identity=\"5\"]').dataset.probe") == "born-at-5", "identity 5's element was re-created on return")
-    ident = page.evaluate(f"{api}.identities()")
+    page.evaluate(probe("candidate/select"), {"index": index_of[323]})
+    check(page.evaluate(total, pool) == 324, "pair 323->324 does not create identities up to 324")
+    page.evaluate(probe("candidate/select"), {"index": index_of[4]})
+    check(page.evaluate(total, pool) == 324 and page.evaluate(visible) == 5, "returning to 4->5 does not hide identities beyond 5")
+    check(page.evaluate(probe("candidate/identity_mark"), {"identity": 5}) == "born-at-5", "identity 5's element was re-created on return")
+    ident = page.evaluate(probe("candidate/identities"))
     check(sorted(ident["from"]) == [1, 2, 3, 4] and sorted(ident["to"]) == [1, 2, 3, 4, 5], f"identities of 4->5 are {ident}")
-    new = page.evaluate(f"{api}.newSquare()")
+    new = page.evaluate(probe("candidate/new_square"))
     check(new["identity"] == 5 and ident["to"][new["index"]] == 5, f"the new square of 4->5 is {new}")
 
     # The five motion modes, add-then-move the default.
-    check(page.evaluate(f"{api}.phases()") == PHASES, "the motion modes are not the five expected")
-    check(page.evaluate(f"{api}.state().phase") == "add-then-move", "the default motion mode is not add-then-move")
+    check(page.evaluate(probe("candidate/phases")) == PHASES, "the motion modes are not the five expected")
+    check(page.evaluate(probe("candidate/state"))["phase"] == "add-then-move", "the default motion mode is not add-then-move")
     for phase in PHASES:
-        page.evaluate(f"{api}.setPhase('{phase}')")
-        check(page.evaluate(f"{api}.state().phase") == phase, f"motion mode {phase} is not reachable")
-    check(page.evaluate("Array.from(document.querySelectorAll('#phase-seg button')).map(b => b.dataset.phase)") == PHASES, "the motion buttons do not offer the five modes")
+        page.evaluate(probe("candidate/set_phase"), {"phase": phase})
+        check(page.evaluate(probe("candidate/state"))["phase"] == phase, f"motion mode {phase} is not reachable")
+    check(page.evaluate(probe("candidate/phase_buttons")) == PHASES, "the motion buttons do not offer the five modes")
 
     # add-then-move at 100->101: the new square fully in and the container grown before anything moves.
-    page.evaluate(f"{api}.select({index_of[100]})")
-    page.evaluate(f"{api}.setPhase('add-then-move')")
-    sc = page.evaluate(f"{api}.schedule()")
+    page.evaluate(probe("candidate/select"), {"index": index_of[100]})
+    page.evaluate(probe("candidate/set_phase"), {"phase": "add-then-move"})
+    sc = page.evaluate(probe("candidate/schedule"))
     check(abs(sc["arrive"] - TIMING["dwell"]) < 1e-9 and abs(sc["arrived"] - (TIMING["dwell"] + ARRIVAL_FRACTION * TIMING["move"])) < 1e-9, f"add-then-move arrival instants are {sc}")
     check(abs(sc["blocksStart"] - sc["arrived"]) < 1e-9 and abs(sc["blocksEnd"] - (TIMING["dwell"] + TIMING["move"])) < 1e-9, f"add-then-move block instants are {sc}")
-    page.evaluate(f"{api}.seek(0)")
+    page.evaluate(probe("candidate/seek"), {"t": 0})
     rest = page.evaluate(poses)
-    page.evaluate(f"{api}.seek({sc['arrived']})")
+    page.evaluate(probe("candidate/seek"), {"t": sc["arrived"]})
     at_arrival = page.evaluate(poses)
     check(at_arrival == rest, "add-then-move: an existing square has moved by the arrival instant")
-    new_state = "[Number(document.querySelector('#squares g[data-identity=\"101\"]').getAttribute('opacity')), document.getElementById('mark').getAttribute('opacity'), document.getElementById('mark').firstElementChild.getAttribute('stroke-width'), parseFloat(document.getElementById('container').getAttribute('width'))]"
-    opacity, mark_opacity, mark_width, side = page.evaluate(new_state)
+    new_state = probe("candidate/new_square_state")
+    arriving = {"identity": 101}
+    opacity, mark_opacity, mark_width, side = page.evaluate(new_state, arriving)
     check(opacity == 1.0 and float(mark_opacity) == 1.0 and float(mark_width) == 4.0, f"add-then-move: at arrival the new square is {opacity}, mark {mark_opacity} at {mark_width}px")
-    side_to = page.evaluate("JSON.parse(document.getElementById('atlas-data').textContent).frames['101'].side")
+    side_to = page.evaluate(probe("candidate/frame_side"), {"n": 101})
     check(abs(side - side_to) < 1e-6, f"add-then-move: at arrival the container is {side}, not {side_to}")
     mid = (sc["blocksStart"] + sc["blocksEnd"]) / 2
-    page.evaluate(f"{api}.seek({mid})")
+    page.evaluate(probe("candidate/seek"), {"t": mid})
     at_mid = page.evaluate(poses)
     check(sum(1 for a, b in zip(at_mid, rest, strict=True) if a != b) > 50, "add-then-move: the squares are not moving mid block motion")
-    page.evaluate(f"{api}.seek({duration})")
+    page.evaluate(probe("candidate/seek"), {"t": duration})
     end = page.evaluate(poses)
 
     # A block turns as one body: its rigid members keep their mutual distances at mid motion,
     # up to twice the residual the record states for the block.
-    blocks = page.evaluate(f"{api}.blocks()")
+    blocks = page.evaluate(probe("candidate/blocks"))
     check(len(blocks) >= 2, f"100->101 carries {len(blocks)} blocks")
-    ident_from = page.evaluate(f"{api}.identities().from")
-    ident_to = page.evaluate(f"{api}.identities().to")
+    ident_from = page.evaluate(probe("candidate/identities"))["from"]
+    ident_to = page.evaluate(probe("candidate/identities"))["to"]
     stats_blocks = json.loads((HERE / "transition-stats.json").read_text())["pairs"][99]["blocks"]
     # The turning block (the diamond, 45 degrees), not the largest: the strips are bigger but only slide.
     biggest = max(range(len(blocks)), key=lambda k: (abs(blocks[k]["turn"]), len(blocks[k]["members"])))
     members = blocks[biggest]["members"]
     residual = stats_blocks[biggest]["residual_max"]
-    page.evaluate(f"{api}.seek({mid})")
-    centre = "(() => { const g = document.querySelector('#squares g[data-identity=\"' + arguments[0] + '\"]'); const m = /translate\\(([-\\d.e]+) ([-\\d.e]+)\\)/.exec(g.getAttribute('transform')); return [parseFloat(m[1]), parseFloat(m[2])]; })"
-    mid_centres = page.evaluate("(ids) => ids.map(id => { const g = document.querySelector('#squares g[data-identity=\"' + id + '\"]'); const m = /translate\\(([-\\d.e]+) ([-\\d.e]+)\\)/.exec(g.getAttribute('transform')); return [parseFloat(m[1]), parseFloat(m[2])]; })", [ident_from[i] for i in members])
-    page.evaluate(f"{api}.seek(0)")
-    rest_centres = page.evaluate("(ids) => ids.map(id => { const g = document.querySelector('#squares g[data-identity=\"' + id + '\"]'); const m = /translate\\(([-\\d.e]+) ([-\\d.e]+)\\)/.exec(g.getAttribute('transform')); return [parseFloat(m[1]), parseFloat(m[2])]; })", [ident_from[i] for i in members])
+    page.evaluate(probe("candidate/seek"), {"t": mid})
+    centres_of = probe("candidate/centres_of")
+    block_members = {"identities": [ident_from[i] for i in members]}
+    mid_centres = page.evaluate(centres_of, block_members)
+    page.evaluate(probe("candidate/seek"), {"t": 0})
+    rest_centres = page.evaluate(centres_of, block_members)
     worst = 0.0
     for a in range(len(members)):
         for b in range(a + 1, len(members)):
@@ -529,62 +430,44 @@ def staging_checks(page, api: str, index_of: dict[int, int], duration: float, ch
     check(len(moved) == len(members), "100->101: a member of the turning block is not moving mid motion")
 
     # move-then-add: the blocks at their final poses before the new square appears.
-    page.evaluate(f"{api}.setPhase('move-then-add')")
-    sc = page.evaluate(f"{api}.schedule()")
+    page.evaluate(probe("candidate/set_phase"), {"phase": "move-then-add"})
+    sc = page.evaluate(probe("candidate/schedule"))
     check(abs(sc["blocksEnd"] - sc["arrive"]) < 1e-9 and abs(sc["arrived"] - (TIMING["dwell"] + TIMING["move"])) < 1e-9, f"move-then-add instants are {sc}")
-    page.evaluate(f"{api}.seek({sc['blocksEnd']})")
+    page.evaluate(probe("candidate/seek"), {"t": sc["blocksEnd"]})
     check(page.evaluate(poses) == end, "move-then-add: the squares are not at their final poses when the blocks end")
-    opacity, mark_opacity, _, _ = page.evaluate(new_state)
+    opacity, mark_opacity, _, _ = page.evaluate(new_state, arriving)
     check(opacity == 0.0 and float(mark_opacity) == 0.0, f"move-then-add: the new square shows before the blocks end (opacity {opacity}, mark {mark_opacity})")
-    page.evaluate(f"{api}.seek({sc['arrived']})")
-    opacity, mark_opacity, _, _ = page.evaluate(new_state)
+    page.evaluate(probe("candidate/seek"), {"t": sc["arrived"]})
+    opacity, mark_opacity, _, _ = page.evaluate(new_state, arriving)
     check(opacity == 1.0 and float(mark_opacity) == 1.0, "move-then-add: the new square is not in at the move's end")
-    page.evaluate(f"{api}.setPhase('add-then-move')")
+    page.evaluate(probe("candidate/set_phase"), {"phase": "add-then-move"})
     # The arrival-instant overlap census is on the record for this pair.
     stats_pair = json.loads((HERE / "transition-stats.json").read_text())["pairs"][99]
     check(stats_pair["arrival_overlaps"] == len(stats_pair["arrival_overlap_ids"]) and stats_pair["arrival_overlaps"] > 0, "100->101's arrival overlap census is missing or empty")
 
 
-def style_checks(page, api: str, index_of: dict, check) -> None:
+def style_checks(page, index_of: dict, check) -> None:
     """Styles B and C, a smoke check: the styles cycle, each physical style renders 100->101 mid-move
     with finite poses and its trajectory ends exactly on the n + 1 poses, and the tween is left showing."""
-    check(page.evaluate(f"{api}.styles()") == ["tween", "physics", "bodies"], "the styles are not tween, physics, bodies")
+    check(page.evaluate(probe("candidate/styles")) == ["tween", "physics", "bodies"], "the styles are not tween, physics, bodies")
     index = index_of[100]
-    page.evaluate(f"{api}.select({index})")
+    page.evaluate(probe("candidate/select"), {"index": index})
     for style, letter in (("physics", "B"), ("bodies", "C")):
-        page.evaluate(f"{api}.setStyle('{style}')")
-        check(page.evaluate(f"{api}.state().style") == style, f"setStyle('{style}') did not take")
-        check(page.evaluate("document.getElementById('style-select').value") == style,
+        page.evaluate(probe("candidate/set_style"), {"style": style})
+        check(page.evaluate(probe("candidate/state"))["style"] == style, f"setStyle('{style}') did not take")
+        check(page.evaluate(probe("candidate/style_select_value")) == style,
               f"the style select does not follow setStyle('{style}') (style {letter})")
-        page.evaluate(f"{api}.seek(1.7)")
-        bad = page.evaluate(
-            "Array.from(document.querySelectorAll('#squares g')).filter(g => g.style.display !== 'none')"
-            ".map(g => g.getAttribute('transform') || '').filter(t => /NaN|Infinity/.test(t)).length"
-        )
+        page.evaluate(probe("candidate/seek"), {"t": 1.7})
+        bad = page.evaluate(probe("candidate/nonfinite_transforms"))
         check(bad == 0, f"{style}: {bad} non-finite transforms at 100->101 mid-move")
-        result = page.evaluate(
-            f"""(() => {{
-              const data = JSON.parse(document.getElementById('atlas-data').textContent);
-              const info = {api}.physics({index}, '{style}');
-              const pair = data.pairs[{index}];
-              const target = data.frames[String(pair.n + 1)].squares;
-              let maxPos = 0, maxAng = 0;
-              info.final.forEach((f, i) => {{
-                const t = i < pair.n ? target[pair.map[i]] : target[pair.new];
-                maxPos = Math.max(maxPos, Math.hypot(f[0] - t[0], f[1] - t[1]));
-                const d = ((f[2] - t[2]) % 90 + 90) % 90;
-                maxAng = Math.max(maxAng, Math.min(d, 90 - d));
-              }});
-              return {{ maxPos, maxAng, bodies: info.bodies, squares: pair.n + 1 }};
-            }})()"""
-        )
+        result = page.evaluate(probe("candidate/trajectory_end"), {"index": index, "style": style})
         check(result["maxPos"] < 1e-6 and result["maxAng"] < 1e-6, f"{style}: 100->101 ends {result['maxPos']:.2e} units / {result['maxAng']:.2e} degrees off the n+1 poses")
         if style == "bodies":
             check(0 < result["bodies"] < result["squares"], f"bodies: 100->101 has {result['bodies']} bodies for {result['squares']} squares; the blocks are not rigid bodies")
         else:
             check(result["bodies"] == result["squares"], f"physics: 100->101 has {result['bodies']} bodies for {result['squares']} squares")
-    page.evaluate(f"{api}.setStyle('tween')")
-    check(page.evaluate(f"{api}.state().style") == "tween", "the tween is not showing after the style checks")
+    page.evaluate(probe("candidate/set_style"), {"style": "tween"})
+    check(page.evaluate(probe("candidate/state"))["style"] == "tween", "the tween is not showing after the style checks")
 
 
 def browser_checks(page_path: Path, check) -> None:
@@ -599,97 +482,94 @@ def browser_checks(page_path: Path, check) -> None:
             page.on("pageerror", lambda exc: errors.append(str(exc)))
             page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
             page.goto(page_path.as_uri(), wait_until="load")
-            page.evaluate("document.fonts.ready")
-            api = "window.atlasTransitions"
-            page.evaluate(f"{api}.setCapture(true)")
-            rect = lambda selector: page.evaluate(f"(() => {{ const b = document.querySelector('{selector}').getBoundingClientRect(); return [b.left, b.top, b.width, b.height]; }})()")
-            text_of = lambda selector: page.evaluate(f"document.querySelector('{selector}').textContent")
-            index_of = {n: i for i, n in enumerate(page.evaluate(f"{api}.pairs().map(p => p.n)"))}
-            duration = page.evaluate(f"{api}.duration()")
+            page.evaluate(probe("candidate/fonts_ready"))
+            page.evaluate(probe("candidate/set_capture"), {"on": True})
+            rect = lambda selector: page.evaluate(probe("candidate/rect_of"), {"selector": selector})
+            text_of = lambda selector: page.evaluate(probe("candidate/text_of"), {"selector": selector})
+            index_of = {n: i for i, n in enumerate(page.evaluate(probe("candidate/pair_ns")))}
+            duration = page.evaluate(probe("candidate/duration"))
             check(abs(duration - sum(TIMING.values())) < 1e-9, f"page duration is {duration}, not {sum(TIMING.values())}")
 
             # Revision 5: the identity pool, the motion modes and the staged orders.
-            staging_checks(page, api, index_of, duration, check)
+            staging_checks(page, index_of, duration, check)
             check(not errors, f"browser errors during the staging checks: {errors}")
             # Styles B and C: the smoke check.
-            style_checks(page, api, index_of, check)
+            style_checks(page, index_of, check)
             check(not errors, f"browser errors during the style checks: {errors}")
 
             # Where the sequence stands is a pure function of the pair and the clock, on the
             # 1..324 range. Revision 16 removed the bar it was drawn on -- the owner found it
             # distracting -- so what is checked is the number itself and the n it rolls to, which
             # is what the bar was drawing and what `progress()` still reports.
-            page.evaluate(f"{api}.setRange({api}.range().min, {api}.range().max)")
-            page.evaluate(f"{api}.select({index_of[100]})")
+            page.evaluate(probe("candidate/set_full_range"))
+            page.evaluate(probe("candidate/select"), {"index": index_of[100]})
             for t, expected in ((0.0, 99 / 323), (duration, 100 / 323), (1.4, (99 + 0.5) / 323)):
-                page.evaluate(f"{api}.seek({t})")
-                position = page.evaluate(f"{api}.progress().position")
+                page.evaluate(probe("candidate/seek"), {"t": t})
+                position = page.evaluate(probe("candidate/progress"))["position"]
                 check(abs(position - expected) < 1e-9, f"progress at t={t} is {position}, expected {expected}")
-            page.evaluate(f"{api}.seek(0.5)")
-            check(page.evaluate(f"{api}.progress().n") == 100, "the dwell does not report n = 100")
-            page.evaluate(f"{api}.seek({duration})")
-            check(page.evaluate(f"{api}.progress().n") == 101, "the settle does not report n = 101")
+            page.evaluate(probe("candidate/seek"), {"t": 0.5})
+            check(page.evaluate(probe("candidate/progress"))["n"] == 100, "the dwell does not report n = 100")
+            page.evaluate(probe("candidate/seek"), {"t": duration})
+            check(page.evaluate(probe("candidate/progress"))["n"] == 101, "the settle does not report n = 101")
 
             # Seeking is idempotent: the same instant renders the same stage.
-            page.evaluate(f"{api}.seek(2.3)")
-            first = page.evaluate("document.getElementById('stage').innerHTML")
-            page.evaluate(f"{api}.seek(0.2)")
-            page.evaluate(f"{api}.seek(2.3)")
-            check(first == page.evaluate("document.getElementById('stage').innerHTML"), "seek is not idempotent")
+            page.evaluate(probe("candidate/seek"), {"t": 2.3})
+            first = page.evaluate(probe("candidate/stage_html"))
+            page.evaluate(probe("candidate/seek"), {"t": 0.2})
+            page.evaluate(probe("candidate/seek"), {"t": 2.3})
+            check(first == page.evaluate(probe("candidate/stage_html")), "seek is not idempotent")
 
             # The panel's text never cross-dissolves over itself: at no instant are both layers visible.
             # Checked in the default staging and in the unstaged mode, whose roll starts later.
             for phase in ("add-then-move", "simultaneous"):
-                page.evaluate(f"{api}.setPhase('{phase}')")
-                schedule = page.evaluate(f"{api}.schedule()")
+                page.evaluate(probe("candidate/set_phase"), {"phase": phase})
+                schedule = page.evaluate(probe("candidate/schedule"))
                 samples = 60
                 for k in range(samples + 1):
                     t = schedule["arrive"] - 0.05 + (schedule["roll"] + 0.1) * k / samples
-                    page.evaluate(f"{api}.seek({t})")
-                    a, b = page.evaluate(
-                        "[parseFloat(document.getElementById('facts-a').style.opacity), parseFloat(document.getElementById('facts-b').style.opacity)]"
-                    )
+                    page.evaluate(probe("candidate/seek"), {"t": t})
+                    a, b = page.evaluate(probe("candidate/facts_opacities"))
                     check(min(a, b) == 0.0, f"{phase}: both facts layers visible at t={t:.3f}: {a:.3f} and {b:.3f}")
-                page.evaluate(f"{api}.seek({schedule['arrive'] - 0.01})")
-                check(page.evaluate("document.querySelector('#facts-a .n-val').textContent") == "100", "layer A does not read 100")
-                check(page.evaluate("document.querySelector('#facts-b .n-val').textContent") == "101", "layer B does not read 101")
+                page.evaluate(probe("candidate/seek"), {"t": schedule["arrive"] - 0.01})
+                check(page.evaluate(probe("candidate/text_of"), {"selector": "#facts-a .n-val"}) == "100", "layer A does not read 100")
+                check(page.evaluate(probe("candidate/text_of"), {"selector": "#facts-b .n-val"}) == "101", "layer B does not read 101")
 
             # The scarlet mark in the unstaged mode: absent mid-move, on the arriving square at the settle,
             # retained through the next pair's dwell, gone once the next move is under way. Scarlet comes
             # from the stylesheet.
-            page.evaluate(f"{api}.setPhase('simultaneous')")
-            scarlet = page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--new').trim()")
+            page.evaluate(probe("candidate/set_phase"), {"phase": "simultaneous"})
+            scarlet = page.evaluate(probe("candidate/token"), {"name": "--new"})
             check(scarlet == "#a3123f", f"--new is {scarlet!r}")
-            mark_state = "[document.getElementById('mark').getAttribute('opacity'), document.getElementById('mark').firstElementChild.getAttribute('stroke-width'), getComputedStyle(document.getElementById('mark').firstElementChild).stroke]"
-            page.evaluate(f"{api}.seek(1.7)")
+            mark_state = probe("candidate/mark_state")
+            page.evaluate(probe("candidate/seek"), {"t": 1.7})
             opacity, _, _ = page.evaluate(mark_state)
             check(float(opacity) == 0.0, f"mark visible mid-move (opacity {opacity})")
-            page.evaluate(f"{api}.seek({duration})")
+            page.evaluate(probe("candidate/seek"), {"t": duration})
             opacity, width, stroke = page.evaluate(mark_state)
             check(float(opacity) == 1.0 and float(width) == 2.0, f"mark at the settle: opacity {opacity}, width {width}")
             check(stroke == "rgb(163, 18, 63)", f"mark stroke is {stroke}")
-            check(float(page.evaluate("document.querySelector('#squares g[data-identity=\"101\"]').getAttribute('opacity')")) == 1.0, "new square not fully in at the settle")
-            page.evaluate(f"{api}.select({index_of[101]})")
-            page.evaluate(f"{api}.seek(0.5)")
+            check(float(page.evaluate(probe("candidate/identity_opacity"), {"identity": 101})) == 1.0, "new square not fully in at the settle")
+            page.evaluate(probe("candidate/select"), {"index": index_of[101]})
+            page.evaluate(probe("candidate/seek"), {"t": 0.5})
             opacity, width, _ = page.evaluate(mark_state)
             check(float(opacity) == 1.0 and float(width) == 2.0, f"mark not retained through the next dwell: opacity {opacity}, width {width}")
-            page.evaluate(f"{api}.seek({TIMING['dwell'] + 0.15 * TIMING['move'] + 0.01})")
+            page.evaluate(probe("candidate/seek"), {"t": TIMING["dwell"] + 0.15 * TIMING["move"] + 0.01})
             opacity, _, _ = page.evaluate(mark_state)
             check(float(opacity) == 0.0, f"mark still visible once the next move is under way (opacity {opacity})")
-            page.evaluate(f"{api}.setPhase('add-then-move')")
+            page.evaluate(probe("candidate/set_phase"), {"phase": "add-then-move"})
 
             # The badges are the poster's marks, and the star is drawn, not typeset.
-            page.evaluate(f"{api}.select({index_of[17]})")
-            page.evaluate(f"{api}.seek(0.0)")
-            labels = page.evaluate("Array.from(document.querySelectorAll('#facts-a .badge-item .label')).map(e => e.textContent)")
+            page.evaluate(probe("candidate/select"), {"index": index_of[17]})
+            page.evaluate(probe("candidate/seek"), {"t": 0.0})
+            labels = page.evaluate(probe("candidate/texts_of"), {"selector": "#facts-a .badge-item .label"})
             check(labels == ["new lower bound", "exact"], f"badge labels for n=17 are {labels}")
-            check(page.evaluate("document.querySelectorAll('#facts-a .badge-star polygon').length") == 1, "n=17 has no star polygon")
-            check(page.evaluate("document.querySelector('#facts-a .exact .note').textContent") == "algebraic · degree 18", "n=17 degree note")
-            opens = page.evaluate("Array.from(document.querySelectorAll('#facts-a .open-item .label')).map(e => e.textContent)")
+            check(page.evaluate(probe("candidate/count_of"), {"selector": "#facts-a .badge-star polygon"}) == 1, "n=17 has no star polygon")
+            check(page.evaluate(probe("candidate/text_of"), {"selector": "#facts-a .exact .note"}) == "algebraic · degree 18", "n=17 degree note")
+            opens = page.evaluate(probe("candidate/texts_of"), {"selector": "#facts-a .open-item .label"})
             check(opens == ["optimality", "rigidity"], f"open items for n=17 are {opens}")
-            page.evaluate(f"{api}.select({index_of[103]})")
+            page.evaluate(probe("candidate/select"), {"index": index_of[103]})
             # Revision 16 removed the position bar; what was a fit check is now an absence check.
-            check(page.evaluate("document.getElementById('progress') === null"),
+            check(page.evaluate(probe("candidate/progress_bar_gone")),
                   "the position bar is still in the page")
 
             # Revision 3, the headline: `n =` is one static line above the numeral, italic n and upright
@@ -700,12 +580,10 @@ def browser_checks(page_path: Path, check) -> None:
             n_line, numeral = rect("#facts .nline"), rect("#facts-a .numeral")
             check(n_line[1] + n_line[3] <= numeral[1], f"the n-line (bottom {n_line[1] + n_line[3]}) is not above the numeral (top {numeral[1]})")
             check(0 <= n_line[0] - numeral[0] <= 8, f"the n-line's left ({n_line[0]}) does not share the numeral's ({numeral[0]})")
-            check(page.evaluate("document.querySelectorAll('#facts-a .numeral .n-var, #facts-a .numeral .n-eq').length") == 0, "the numeral still carries n and =")
-            styles = page.evaluate(
-                "[getComputedStyle(document.querySelector('#facts .nline .n-var')).fontStyle, getComputedStyle(document.querySelector('#facts .nline .n-eq')).fontStyle, getComputedStyle(document.querySelector('#facts .nline')).color, getComputedStyle(document.querySelector('#facts-a .n-val')).fontSize, getComputedStyle(document.querySelector('#facts-a .n-val')).fontWeight, getComputedStyle(document.querySelector('#facts .nline')).fontSize]"
-            )
+            check(page.evaluate(probe("candidate/count_of"), {"selector": "#facts-a .numeral .n-var, #facts-a .numeral .n-eq"}) == 0, "the numeral still carries n and =")
+            styles = page.evaluate(probe("candidate/headline_styles"))
             check(styles == ["italic", "normal", "rgb(92, 102, 115)", f"{NUMERAL_PX}px", str(NUMERAL_WEIGHT), f"{N_LINE_PX}px"], f"headline styles are {styles}")
-            check(page.evaluate("getComputedStyle(document.getElementById('kind-tag')).display") == "none", "the review kind tag is shown in capture preview")
+            check(page.evaluate(probe("candidate/computed"), {"selector": "#kind-tag", "property": "display"}) == "none", "the review kind tag is shown in capture preview")
 
             # The lower bound: `s(n) ≥ value` for an open n with its note on the line directly below,
             # left-aligned and never to its right; both slots empty, at the same fixed heights, for a proved n.
@@ -715,31 +593,31 @@ def browser_checks(page_path: Path, check) -> None:
             check(note[1] >= lower[1] + lower[3] - 0.5 and abs(note[0] - lower[0]) < 0.5, f"the note is not directly below the lower line: {lower} vs {note}")
             slot = lambda selector: tuple(rect(selector)[i] for i in (0, 1, 3))   # left, top, height: the row's width follows its content
             badges_open, open_group_open = slot("#facts-a .badges"), slot("#facts-a .open")
-            page.evaluate(f"{api}.select({index_of[100]})")
+            page.evaluate(probe("candidate/select"), {"index": index_of[100]})
             check(text_of("#facts-a .lower") == "" and text_of("#facts-a .lower-note") == "", "n=100 (proved) shows a lower-bound line")
             proved_lower, proved_note = rect("#facts-a .lower"), rect("#facts-a .lower-note")
             check((proved_lower[1], proved_lower[3]) == (lower[1], lower[3]) and (proved_note[1], proved_note[3]) == (note[1], note[3]), "the empty lower-bound slots are not at the fixed heights")
             check((slot("#facts-a .badges"), slot("#facts-a .open")) == (badges_open, open_group_open), "the badge row or the open group moves between an open and a proved n")
-            page.evaluate(f"{api}.select({index_of[17]})")
+            page.evaluate(probe("candidate/select"), {"index": index_of[17]})
             check(text_of("#facts-a .lower") == "s(17)≥4.59", f"n=17 lower line reads {text_of('#facts-a .lower')!r}")
-            check(page.evaluate("getComputedStyle(document.querySelector('#facts-a .lower .val')).color") == "rgb(23, 32, 42)", "n=17: the first-proved-here digits are coloured")
-            page.evaluate(f"{api}.select({index_of[147]})")
-            page.evaluate(f"{api}.seek({duration})")
+            check(page.evaluate(probe("candidate/computed"), {"selector": "#facts-a .lower .val", "property": "color"}) == "rgb(23, 32, 42)", "n=17: the first-proved-here digits are coloured")
+            page.evaluate(probe("candidate/select"), {"index": index_of[147]})
+            page.evaluate(probe("candidate/seek"), {"t": duration})
             check("√" in text_of("#facts-b .exact .form"), "n=148's closed form carries no radical")
 
             # The symbols face is loaded with the relation range and the size adjustment.
-            faces = page.evaluate("Array.from(document.fonts).map(f => [f.family.replace(/\"/g, ''), f.status, f.unicodeRange, f.sizeAdjust])")
+            faces = page.evaluate(probe("candidate/font_faces"))
             symbols = [f for f in faces if f[0] == "Atlas Symbols"]
             check(len(symbols) == 1 and symbols[0][1] == "loaded" and symbols[0][3] == "102.5%", f"Atlas Symbols face: {symbols}")
             check(symbols and symbols[0][2].replace("U+", "").replace(" ", "") == SYMBOL_RANGE.replace("U+", "").replace(" ", ""), f"Atlas Symbols range is {symbols and symbols[0][2]}")
             check(len(faces) == 5, f"{len(faces)} faces loaded, expected 5")
 
             # The approximately-equal badge is one path, KaTeX_Main's outline, placed on its own ink.
-            page.evaluate(f"{api}.select({index_of[103]})")
-            approx = page.evaluate("Array.from(document.querySelectorAll('#facts-a .badge-muted .glyph-path')).map(p => [p.getAttribute('d'), p.getAttribute('transform'), p.getAttribute('stroke-width')])")
+            page.evaluate(probe("candidate/select"), {"index": index_of[103]})
+            approx = page.evaluate(probe("candidate/approx_paths"))
             check(len(approx) == 1, f"n=103 draws {len(approx)} approximately-equal paths, expected one")
             if approx:
-                metrics = page.evaluate("JSON.parse(document.getElementById('atlas-data').textContent).metrics.approx")
+                metrics = page.evaluate(probe("candidate/approx_metrics"))
                 k = metrics["font_size"] / 1000
                 expected = f"translate({(9.5 - metrics['advance'] * k / 2):.3f} {(9.5 + (metrics['y0'] + metrics['y1']) / 2 * k):.3f}) scale({k:.4f} -{k:.4f})"
                 check(approx[0] == [metrics["d"], expected, str(metrics["stroke_units"])], f"approximately-equal path is {approx[0][1:]} not {expected}")

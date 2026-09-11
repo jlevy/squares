@@ -273,7 +273,10 @@ max-complexity = 57
 ban-relative-imports = "all"
 
 [tool.ruff.lint.isort]
-known-first-party = ["cases", "devtools", "sqpack"]
+# `probes` is the video workbench's probe loader, which its checkers import as a sibling.
+# Named here because ruff otherwise reads it as a third-party package and reorders the import
+# into the wrong block, which is an `I001` no rewriting of the file can settle.
+known-first-party = ["cases", "devtools", "probes", "sqpack"]
 
 [tool.ruff.format]
 docstring-code-format = true

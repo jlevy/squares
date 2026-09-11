@@ -13,6 +13,8 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from probes import probe
+
 HERE = Path(__file__).resolve().parent
 
 # What revision 6 measured at the default annealing, from NOTES.md: the default level has to be
@@ -57,12 +59,12 @@ def main() -> int:
         page.on("pageerror", lambda e: failures.append(f"pageerror: {e}"))
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(900)
-        api = set(page.evaluate("Object.keys(window.atlasTransitions)"))
+        api = set(page.evaluate(probe("revision7/api_names")))
         for name in ("setAnneal", "anneal"):
             check(name in api, f"the API lacks {name}")
-        index_of = {q["n"]: q["index"] for q in page.evaluate("atlasTransitions.pairs()")}
+        index_of = {q["n"]: q["index"] for q in page.evaluate(probe("revision7/pairs"))}
         n = 100 if 100 in index_of else sorted(index_of)[len(index_of) // 2]
-        n_max = page.evaluate("atlasTransitions.pairs().slice(-1)[0].n") + 1
+        n_max = page.evaluate(probe("revision7/last_pair_n")) + 1
 
         # ---- feature 1: where the sequence stands, as a number.
         # Revision 7 drew this as a bar with a scale along the bottom of the stage, and most of this
@@ -73,43 +75,20 @@ def main() -> int:
         # it was drawing, which `progress()` still reports and the transport still uses.
         # Checked as properties rather than against a formula, which would only restate the page's
         # own arithmetic: it starts at nothing, ends at everything, and never goes backwards.
-        page.evaluate("atlasTransitions.setRange(atlasTransitions.range().min, atlasTransitions.range().max)")
-        walk = page.evaluate(
-            """() => { const A = window.atlasTransitions; const out = [];
-              const pairs = A.pairs();
-              for (const i of [0, Math.floor(pairs.length / 2), pairs.length - 1]) {
-                A.select(i);
-                for (const u of [0, 0.5, 1]) { A.seek(A.duration() * u); out.push(A.progress().position); }
-              }
-              return out; }"""
-        )
+        page.evaluate(probe("revision7/set_full_range"))
+        walk = page.evaluate(probe("revision7/walk"))
         check(abs(walk[0]) < 1e-9, f"the first step does not start the sequence at 0: {walk[0]}")
         check(abs(walk[-1] - 1) < 1e-9, f"the last step does not end the sequence at 1: {walk[-1]}")
         check(all(b >= a - 1e-12 for a, b in zip(walk, walk[1:], strict=False)),
               f"the sequence's position goes backwards: {walk}")
-        check(page.evaluate("document.getElementById('progress') === null"),
+        check(page.evaluate(probe("revision7/progress_bar_gone")),
               "the position bar is still in the page")
 
         # ---- feature 2: the annealing dial.
-        a = page.evaluate("atlasTransitions.anneal()")
+        a = page.evaluate(probe("revision7/anneal"))
         check((a["level"], a["min"], a["max"], a["dflt"]) == (3, 0, 10, 3), f"the dial reports {a}")
         check(abs(a["amplitude"] - 1) < 1e-12 and abs(a["span"] - 1) < 1e-12, "the default level is not the shipped shake")
-        levels = page.evaluate(
-            """([i]) => {
-              const A = window.atlasTransitions;
-              A.setStyle('bodies'); A.setSnap(false); A.setBlind(false);
-              const out = {};
-              for (const L of [0, 3, 6, 10]) {
-                A.setAnneal(L);
-                const a = A.anneal(), r = A.physics(i, 'bodies', 'free');
-                out[L] = {amp: a.amplitude, decay: a.decayPower, span: a.span, steps: r.steps,
-                          move: a.move, miss: r.miss, first: r.final[0]};
-              }
-              A.setAnneal(3);
-              return out;
-            }""",
-            [index_of[n]],
-        )
+        levels = page.evaluate(probe("revision7/anneal_levels"), {"index": index_of[n]})
         check(abs(levels["0"]["amp"]) < 1e-12, "level 0 still shakes")
         check(abs(levels["10"]["amp"] - 3) < 1e-9, f"level 10's amplitude is {levels['10']['amp']}, not three times the default")
         check(levels["0"]["steps"] == levels["3"]["steps"], "level 0 does not run the default length")
@@ -121,41 +100,25 @@ def main() -> int:
         check(levels["0"]["first"] != levels["3"]["first"], "level 0 and level 3 give the same trajectory")
         check(levels["10"]["first"] != levels["3"]["first"], "level 10 and level 3 give the same trajectory")
         # Deterministic, and cached per level rather than per anything else.
-        det = page.evaluate(
-            "([i]) => { const A = window.atlasTransitions; A.setAnneal(7); const a = A.physics(i, 'bodies', 'free').final[0];"
-            " A.setAnneal(2); A.physics(i, 'bodies', 'free'); A.setAnneal(7);"
-            " const b = A.physics(i, 'bodies', 'free').final[0]; A.setAnneal(3); return [a, b]; }",
-            [index_of[n]],
-        )
+        det = page.evaluate(probe("revision7/anneal_reproduces"), {"index": index_of[n]})
         check(det[0] == det[1], "the same annealing level does not reproduce its trajectory")
         # The default reproduces the recorded free-run misses to the digits above.
         for (style, pair_n), (centre, angle, side) in FREE_MISS.items():
             if pair_n not in index_of:
                 continue
-            m = page.evaluate(
-                "([i, s]) => window.atlasTransitions.physics(i, s, 'free').miss",
-                [index_of[pair_n], style],
-            )
+            m = page.evaluate(probe("revision7/free_miss"), {"index": index_of[pair_n], "style": style})
             check(abs(m["centre"] - centre) < 5e-4 and abs(m["angle"] - angle) < 5e-3 and abs(m["side"] - side) < 5e-4,
                   f"at the default level {style} {pair_n} misses by {m['centre']:.3f}/{m['angle']:.2f}/{m['side']:.3f}, "
                   f"not the recorded {centre}/{angle}/{side}")
         # The dial works under the snap and under the blind run too.
         for mode in ("snap", "blind"):
-            r = page.evaluate(
-                "([i, m]) => { const A = window.atlasTransitions; A.setAnneal(9);"
-                " const r = A.physics(i, 'physics', m); A.setAnneal(3); return {miss: r.miss, steps: r.steps}; }",
-                [index_of[n], mode],
-            )
+            r = page.evaluate(probe("revision7/anneal_at_nine"), {"index": index_of[n], "mode": mode})
             # The step count is `stepsPerSecond x move x span`, so it moved with the beat: revision
             # 16 made the move 0.8 s where it was 1.4, which is 154 steps at level 9's span rather
             # than the 200-odd this was written against. What the dial has to do is lengthen the run,
             # and that is what is checked -- against the same run at the default level, not against a
             # number that a change to the beat invalidates.
-            base = page.evaluate(
-                "([i, m]) => { const A = window.atlasTransitions; A.setAnneal(3);"
-                " return A.physics(i, 'physics', m).steps; }",
-                [index_of[n], mode],
-            )
+            base = page.evaluate(probe("revision7/default_steps"), {"index": index_of[n], "mode": mode})
             check(r["steps"] > base, f"{mode} at level 9 runs {r['steps']} steps, no more than the default's {base}")
             if mode == "snap":
                 check(r["miss"]["centre"] < 1e-9, "a snapped run at level 9 does not end on the record")
@@ -168,20 +131,7 @@ def main() -> int:
         # `gapBar()` -- which is where it always came from, and where `grade_motion.py` and the
         # capture receipt read it too.
         for style in ("tween", "physics", "bodies"):
-            r = page.evaluate(
-                """([i, style]) => {
-                  const A = window.atlasTransitions;
-                  A.stopAll(); A.select(i); A.setStyle(style); A.setSnap(true); A.setBlind(false); A.setAnneal(3);
-                  const read = () => { const g = A.gapBar(); return {side: g.side, record: g.record, met: g.met}; };
-                  const out = {};
-                  A.seek(0); out.dwell = read();
-                  A.seek(A.duration()); out.rest = read();
-                  A.setSnap(false); A.seek(A.duration()); out.free = read();
-                  A.setSnap(true);
-                  return out;
-                }""",
-                [index_of[n], style],
-            )
+            r = page.evaluate(probe("revision7/gap_read"), {"index": index_of[n], "style": style})
             # At the dwell the stage shows the previous packing and the bar describes it, so the two
             # agree: revision 16 keyed the bar to the n on the panel rather than the n being stepped
             # into, which is what stopped a smaller packing reading as better than the best known.
@@ -191,27 +141,11 @@ def main() -> int:
                 check(not r["free"]["met"] or r["free"]["side"] >= r["free"]["record"] - 1e-9,
                       f"{style}: the free run reads better than the record: {r['free']}")
         # The measurement agrees with what the trajectory itself says it reached.
-        agree = page.evaluate(
-            "([i]) => { const A = window.atlasTransitions; A.select(i); A.setStyle('bodies'); A.setSnap(false);"
-            " A.seek(A.duration()); const g = A.gapBar();"
-            " const m = A.physics(i, 'bodies', 'free').miss; A.setSnap(true);"
-            " return [g.side, m.side]; }",
-            [index_of[n]],
-        )
+        agree = page.evaluate(probe("revision7/gap_agrees"), {"index": index_of[n]})
         check(abs(agree[0] - agree[1]) < 5e-3, f"the bar says {agree[0]} where the trajectory says {agree[1]}")
         # The trace is built once per combination and only its head moves; the per-frame cost is what
         # the feature has to justify.
-        cost = page.evaluate(
-            """([i]) => {
-              const A = window.atlasTransitions;
-              A.select(i); A.setStyle('bodies'); A.setSnap(true); A.seek(1.7);
-              const t0 = performance.now();
-              for (let k = 0; k < 200; k++) A.seek(1.2 + (k % 100) * 0.01);
-              const per = (performance.now() - t0) / 200;
-              return {per, spark: document.getElementById('gap-spark') !== null, side: A.gapBar().side};
-            }""",
-            [index_of[n]],
-        )
+        cost = page.evaluate(probe("revision7/frame_cost"), {"index": index_of[n]})
         # Revision 9 removed the per-frame sparkline: the motion is already visible in the packing.
         check(not cost["spark"], "the per-frame sparkline is back")
         check(cost["side"] > 0, "the bar stopped measuring a side")
