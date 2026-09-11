@@ -22,29 +22,36 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 <div class="hero">
 
-# <span class="tex">s({{N}})</span> ≥ {{HEADLINE_L_FRAC}}
-
-<p class="subtitle centred">{{SUBTITLE}}</p>
+# {{TITLE}}
 
 <div class="credits centred">
   <span>Human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
-  <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
+  <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, <strong>GPT 5.6 Sol</strong>, and <strong>GPT-6 Astra</strong></span>
   <span><a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
-  <span class="publication-date">{{PUBLISHED}} ({{EDITION}})</span>
+  <span class="publication-date">{{PUBLISHED}} (<a href="#version-history">{{EDITION}}</a>)</span>
 </div>
 
 </div>
 
-## A New Bound for Packing 11 Squares
+## The Result and Proof Roadmap
 
-This work presents a new lower bound on a long-standing open geometry problem: eleven
-unit squares with disjoint interiors, free to rotate, cannot fit in a square of size
-${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$.
+Let $s(11)$ be the smallest side of a square that can hold eleven unit squares, allowing
+the squares to rotate but not to overlap in their interiors.
+Write $L$ for the exact value below.
+We prove
+
+<p class="centred"><span class="tex-d">s(11) \;\ge\; L = {{CURRENT_BOUND_TEX}} = {{CURRENT_BOUND_DEC}}.</span></p>
+
+Thus eleven unit squares cannot fit in any square whose side is smaller than $L$. This
+is the strongest lower bound proved in this project, and our recorded literature search
+found no stronger published bound.[^novelty] The best known packing gives the other side
+of the current bracket, ${{CURRENT_BOUND_DEC}} \le s(11) \le {{BEST_PACKING_TEX}}$.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem.[^novelty] Stromquist published the previous
-bound of {{PRIOR_LOWER_DEC}} in {{PRIOR_YEAR}}.[^stromquist-history][^repair] The
-tightest known packing, due to Trump in 1979 (Figure 1), shows
+open case of the square packing problem.
+Stromquist published the previous bound of {{PRIOR_LOWER_DEC}} in
+{{PRIOR_YEAR}}.[^stromquist-history][^repair] The tightest known packing, due to Trump
+in 1979 (Figure 1), shows
 <span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span>
 
 <figure>
@@ -53,17 +60,50 @@ tightest known packing, due to Trump in 1979 (Figure 1), shows
   <span class="tex">{{BEST_PACKING_TEX}}</span>, a root of an eighth-degree polynomial.</figcaption>
 </figure>
 
-The computer-assisted proof of the new lower bound was found via an automated research
-framework. The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally
-weighted points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}}
-rationally parameterized directions.
-Five exact conditions and a pigeonhole-style argument then imply the
-claim.<!--BEGIN:CLAIM--> [Verification](#verifiable-claim) is exact rational arithmetic:
-the one-file checker,
+A **core** is a smaller square selected strictly inside one of the packed unit squares.
+We explain the proof in three stages:
+
+1. **T-018: weighted points reach $3.81$.** This is the visual proof developed in detail
+   below. It places {{HEADLINE_N_ATOMS}} rationally weighted points in the container,
+   checks a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized directions, and
+   derives a counting contradiction from five exact conditions.
+
+2. **T-025: threshold atoms reach $3.82$.** Each threshold atom specifies a small set of
+   points, a minimum count, and a weight.
+   It contributes its weight when a core contains at least that many of the set’s
+   points. This stronger counting rule directly excludes the container side
+   $191/50=3.82$.
+
+3. **T-026: finer directions and scaling reach $L$.** The threshold atoms are rechecked
+   with a larger core on a finer direction net, their weights are rescaled, and an exact
+   dilation argument proves $s(11)\ge L$.
+
+All three stages use the same contradiction: each of eleven disjoint cores would receive
+at least one unit of weight, while all the available weights can contribute less than
+eleven in total. The fully illustrated T-018 proof teaches that argument; the final
+section explains exactly what T-025 and T-026 add.
+The numerical $3.81$ result is not a premise of T-026: the stronger theorem uses its own
+threshold certificate and dilation record, while reusing the general core-selection and
+counting ideas.<!--BEGIN:CLAIM--> Keeping T-018 in full also serves as an assurance
+bridge: [verification](#verifiable-claim) of the point certificate uses exact rational
+arithmetic, and its one-file standard-library checker,
 {{PINNED_VERIFIER_LINES}}
-of standard-library Python and short enough to read in one sitting, decides the
-certificate file of {{HEADLINE_N_ATOMS}} weighted points in
-{{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
+and short enough to read in one sitting, lets a reader audit that shared geometry and
+counting mechanism end to end.
+It decides the certificate file of
+{{HEADLINE_N_ATOMS}} weighted points in {{HEADLINE_PINNED_RUNTIME}}. The checker does
+not verify the threshold certificates.
+The separate [T-025]({{T025_CLAIM_URL}}) and [T-026]({{T026_CLAIM_URL}}) claim documents
+each embed the shared standard-library threshold verifier and their exact input
+bytes.<!--END:CLAIM-->
+
+The new lower bound is registered as [**V4/C5**]({{EPISTEMICS_URL}}): the certificate
+and dilation calculations used in the proof are machine-verified with exact or
+interval-certified evidence and passing replay commands (`V4`), while the certificate’s
+coverage condition is confirmed by an exact event-cell sweep and a distinct interval
+branch-and-bound (`C4`). The two coverage methods share the certificate data and
+theorem. A [source-distinct review of the complete claim]({{T026_REVIEW_URL}}) supplies
+`C5`.
 
 ## The Agentic Research Framework
 
@@ -140,7 +180,11 @@ The proof presented here is of this kind.
   <a href="known-best-1-324.pdf">full 324-case poster</a>.</figcaption>
 </figure>
 
-For eleven squares, we prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
+For eleven squares, the current result is $s(11) \ge {{CURRENT_BOUND_DEC}}$. We first
+prove the point-only rung $s(11) \ge {{HEADLINE_L_FRAC}} =
+{{HEADLINE_L_DEC}}$ because its geometry can be drawn and checked directly.
+The advanced section then explains how threshold atoms and dilation reach the current
+bound.
 
 <!--BEGIN:COMPARISON-->
 
@@ -159,7 +203,7 @@ The figures below illustrate this certificate.
 
 <figure>
   <div class="line-fig kpress-diagram">
-  <svg viewBox="0 0 700 180" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the bounds proved here up to {{HEADLINE_L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
+  <svg viewBox="0 0 700 260" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the point and threshold bounds proved here up to {{CURRENT_BOUND_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
     <rect x="{{BAND_X}}" y="69.5" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
     <line x1="20" y1="76" x2="680" y2="76" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
     <g stroke="var(--kpress-doc-muted)" stroke-width="1">
@@ -182,11 +226,11 @@ The figures below illustrate this certificate.
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
-  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the gap left by the certificates explained here. With their lower bound at <span class="tex">{{HEADLINE_L_FRAC}}</span> the gap is
-  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span> at Stromquist’s bound.</figcaption>
+  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the gap left by the certificates explained here. At the current lower bound the gap is
+  <span class="tex">{{CURRENT_GAP}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span> at Stromquist’s bound.</figcaption>
 </figure>
 
-## The Five Conditions
+## The Five Conditions for a Point Certificate
 
 We prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$ with a new weighted-point
 certificate found by our automated search.
@@ -549,10 +593,113 @@ By compactness a packing exists at the infimum, so in fact $s({{N}}) \gt {{L_FRA
 the claim is stated as $\ge$ because that is what the theorem behind the verifier
 proves, with no appeal to compactness.
 
+## Proof of the New Lower Bound
+
+We now prove the headline result.
+The visual T-018 proof selects a shrunken side-$B$ square inside each physical unit
+square; call this selected square a **core**. With point atoms, each site contained in a
+core contributes its weight to that core’s total.
+T-025 keeps that mechanism and adds **threshold atoms**. A threshold atom is a finite
+set $S$ of distinct points, an integer threshold $1\le k\le |S|$, and a nonnegative
+weight $w$. Its **trace** on a core $P$ is the subset $P\cap S$. The atom contributes
+$w$ to the core’s total when that trace has at least $k$ points.
+
+The budget changes with this rule.
+The selected cores lie strictly inside packed squares, so they are pairwise disjoint.
+Their traces on $S$ are therefore disjoint as well.
+If $r$ cores meet one threshold atom’s condition, then $rk \le |S|$. Thus at most
+$\lfloor |S|/k\rfloor$ cores can receive that atom’s weight, and the atom contributes at
+most $w\lfloor |S|/k\rfloor$ to the sum over all cores.
+A point atom is the special case $|S|=k=1$.
+
+The certificates below keep both atom families closed under the eight symmetries of the
+container, with equal weights on symmetry-related atoms.
+Reflecting a core therefore preserves its total assigned weight, as required by the
+earlier core-selection argument.
+
+This gives the general counting theorem used below.
+If the direction and shrink conditions select a core inside every packed unit square,
+every admissible core receives total weight at least $1$, and all atoms together can
+contribute less than $n$ across disjoint cores, then $n$ packed squares would require a
+total of at least $n$. Therefore no such packing exists.
+
+### T-025: a direct certificate at 3.82
+
+The [T-025 certificate]({{T025_CERT_URL}}) has {{T025_POINT_ATOMS}} point atoms with
+mass ${{T025_POINT_MASS}}$ and {{T025_THRESHOLD_ATOMS}} threshold atoms with budget
+${{T025_THRESHOLD_BUDGET}}$. Every threshold atom is two-of-three, so at most one of the
+disjoint cores can meet its condition.
+The total budget is
+
+$$
+{{T025_TOTAL_BUDGET}} < 11.
+$$
+
+An exact event-cell sweep over {{T025_DIRECTIONS}} net directions finds that every core
+receives total weight at least $1+{{T025_LEAST_EXCESS}}>1$. A separate interval
+calculation checks
+{{T025_INTERVAL_DIRECTIONS}} canonical directions.
+The same shrink-and-snap argument used above selects a legal core inside every physical
+square, and the threshold budget then gives the same contradiction.
+Thus T-025 proves $s(11)\ge {{CURRENT_ENDPOINT_FRAC}}={{CURRENT_ENDPOINT_DEC}}$
+directly. The [self-contained claim]({{T025_CLAIM_URL}}) gives the theorem, exact
+arithmetic, and both verification routes.
+
+### T-026: finer directions and the new lower bound
+
+A finer net reduces the largest angular mismatch and permits a larger core.
+T-026 uses the same atom locations and thresholds on {{T026_DIRECTIONS}} directions,
+raises the core side to $B={{T026_FINE_B}}$, and rescales every weight by one common
+rational factor, ${{T026_NORMALIZATION}}$. The minimum total assigned to any core is
+exactly $1$, while the total budget remains
+${{T026_TOTAL_BUDGET}} = {{T026_TOTAL_DEC}} < 11$. A second method checks all
+{{T026_INTERVAL_DIRECTIONS}} directions.
+These facts are recorded in the [finer-net certificate]({{T026_CERT_URL}}).
+
+Now scale the container, the core, and every atom point together by a positive rational
+factor $q$. Containment traces do not change, so neither the assigned totals nor the
+budget changes. For this net, let $D={{T026_HALF_GAP}}$ be the tangent of its widest
+angular half-gap. If $d$ is the mismatch between a physical square and its selected net
+direction, then $\tan d\le D$. The exact identity
+$\cos d+\sin d=(1+\tan d)/\sqrt{1+\tan^2d}$ gives
+
+$$
+qB(\cos d+\sin d)
+\;\le\;
+\frac{qB(1+D)}{\sqrt{1+D^2}}
+\;<\;1
+$$
+
+for every positive rational $q$ with $0<q<c$, where
+
+$$
+c = \frac{\sqrt{1+D^2}}{B(1+D)} = {{T026_FACTOR}}.
+$$
+
+The corresponding container side is $q(191/50)$, and $L=(191/50)c$.
+
+For every positive real side $x<(191/50)c$, choose a rational $q<c$ with $x<q(191/50)$.
+The scaled certificate rules out the larger side $q(191/50)$; a packing that fit at $x$
+would fit unchanged in that larger container.
+Therefore
+
+$$
+s(11) \;\ge\; {{CURRENT_BOUND_TEX}} = {{CURRENT_BOUND_DEC}}.
+$$
+
+The containment inequality is strict for every positive rational $0<q<c$. The resulting
+exact exclusions include rational sides above $3.82$ and approach $L$ arbitrarily
+closely.
+The rational-density argument above turns that whole family into the exact lower
+bound $s(11)\ge L$. The [T-026 self-contained claim]({{T026_CLAIM_URL}}) and its
+[machine-readable limit record]({{T026_RECORD_URL}}) carry the exact derivation.
+
 ## Generator and Verifier
 
-The generator solves for the weights on a chosen set of sites $A$, arranged in orbits of
-$\mathbf{D}_4$. The weights, one per orbit, come from the covering linear program
+The generator and verifier in this section are the point-certificate tools behind
+Figures 4–7. The generator solves for the weights on a chosen set of sites $A$, arranged
+in orbits of $\mathbf{D}_4$. The weights, one per orbit, come from the covering linear
+program
 
 $$
 \tau^*(A, \Theta; L, B) \;=\; \min_{w \,\ge\, 0}\; \sum_{a \in A} w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
@@ -577,11 +724,11 @@ The search runs in floating point.
 None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
 certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1 through
 5 on it in exact rational arithmetic.
-The verifier rejects a certificate that fails the conditions, regardless of how it was
-generated. The gate that admits a certificate to the record asks for two verdicts: it
-accepts one only when the exact event-cell sweep and an interval branch-and-bound, which
-decide Condition 5 by distinct methods, both accept it and report the same least covered
-mass.
+The verifier rejects a point certificate that fails the conditions, regardless of how it
+was generated. The gate that admits a point certificate to the record asks for two
+verdicts: it accepts one only when the exact event-cell sweep and an interval
+branch-and-bound, which decide Condition 5 by distinct methods, both accept it and
+report the same least covered mass.
 
 Geometric constraints can strengthen the final count.
 Stromquist’s six-square proof rules out a container of side less than 3 by forcing four
@@ -608,9 +755,9 @@ This project wrote every file in the package, so it is not itself a third-party 
 
 ## Verifiable Claim
 
-Each bound has one self-contained file: the claim, the theorem with its proof, a
-verifier in Python’s standard library, and the certificate it decides, to paste into any
-coding agent or check by hand.
+Each point-certificate bound shown in the interactive figures has one self-contained
+file: the claim, the theorem with its proof, a verifier in Python’s standard library,
+and the certificate it decides, to paste into any coding agent or check by hand.
 
 For $s(11) \ge {{HEADLINE_L_FRAC}}$:
 [`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
@@ -620,6 +767,11 @@ $s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}
 
 The one-file checker [`minimal_verify.py`]({{PINNED_VERIFIER_URL}}) verifies the
 {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.[^verifier-timing]
+
+The [T-025 claim document]({{T025_CLAIM_URL}}) embeds its certificate and a
+standard-library exact verifier.
+The [T-026 claim document]({{T026_CLAIM_URL}}) embeds the finer-net certificate, the
+same verifier, and the exact dilation record.
 
 <!--END:CLAIM-->
 
@@ -668,6 +820,10 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     consistent formatting
   - **[KPress](https://github.com/jlevy/kpress):** web and print formatting from
     Markdown
+
+## Version History
+
+{{VERSION_HISTORY}}
 
 [^stromquist-history]: Walter Stromquist states this bound in
     [Memo III ({{PRIOR_MEMO_YEAR}}), p. 10]({{PRIOR_MEMO_URL}}#page=10), as an

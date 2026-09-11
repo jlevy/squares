@@ -7,6 +7,15 @@ cited and dispositioned. It adjudicates nothing and changes no bound.
 The integration decisions belong to the exploration the coordinator is writing, X-023 at
 `packing/campaign/explorations/X-023-...`, not to this record.
 
+**Editorial terminology note, September 10, 2026.** The contributed body below is
+preserved verbatim. Its phrase “weak lower bound” is historical terminology for the
+ordinary proved inequality `s(11) >= C`, where `C` is the displayed T-022 value.
+Excluding every side below `C` proves that inequality by order completeness. The proof
+does not assert the separate stronger inequality `s(11) > C`; “weak” does not mark a
+different theorem or a lower level of proof assurance. Later T-026 proves
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939744...`
+(V4/C5). See the [current evidence account](../research/research-2026-09-09-n11-evidence-and-inference.md).
+
 ## Assessment
 
 The best immediate route is to distinguish unfinished optimization from a genuine limitation of the weighted-point method, then remove two avoidable geometric relaxations: centers that are admissible for a small core but not for its parent unit square, and the requirement that every inner witness itself be a square. For a substantially larger improvement, the strongest direction is a hybrid proof that combines the weighted measure with compatibility between placements, conditional certificates, and exact geometric exclusion.

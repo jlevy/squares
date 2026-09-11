@@ -38,6 +38,7 @@ from devtools.render_explainer import (
     VERIFIER,
     WALKTHROUGH,
     assert_self_contained,
+    current_bound_facts,
     link_revision,
     page_edition,
     png_size,
@@ -45,7 +46,7 @@ from devtools.render_explainer import (
 )
 from devtools.render_explainer import load_certificate as load
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
-from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
+from sqpack.release import PUBLICATION_HISTORY, PUBLICATION_STATUS, PUBLICATION_VERSION
 from sqpack.yamlio import safe_load
 
 
@@ -87,13 +88,18 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 
 
-def test_title_sets_s11_as_math_without_moving_the_bound_into_math(page: str) -> None:
-    """The title's function is notation; its relation and value remain title text."""
+def test_title_block_names_the_result_without_a_subtitle(page: str, document: str) -> None:
+    """The title stands alone; the exact theorem is typeset in the opening section."""
     heading = re.search(r"<h1\b.*?</h1>", page, re.DOTALL)
     assert heading is not None
-    assert heading.group(0) == (
-        '<h1 id="s11--381100"><span class="tex">s(11)</span> ≥ 381/100</h1>'
+    assert "A New Lower Bound for Packing 11 Squares" in heading.group(0)
+    assert '<p class="subtitle centred">' not in page
+    assert "Weighted Certificates for Square Packing" not in page
+    current = current_bound_facts()
+    theorem = (
+        f"$$s(11) \\;\\ge\\; L = {current.bounded_side_tex} = {current.bounded_side_decimal}.$$"
     )
+    assert theorem in document
 
 
 @pytest.mark.parametrize(
@@ -121,7 +127,7 @@ def test_certificate_comparisons_match_the_rendered_certificates(
     assert "what remains unknown about" not in document
     assert "A certificate written by a wrong program" not in document
     assert (
-        "The verifier rejects a certificate that fails the conditions, "
+        "The verifier rejects a point certificate that fails the conditions, "
         "regardless of how it was generated."
     ) in document
     assert "{{" not in rendered.markdown
@@ -197,7 +203,26 @@ def test_the_published_document_is_markdown_and_not_the_template(document: str) 
     assert "3.81" in document
     assert "1,121" in document
     assert "181" in document
-    assert document.startswith("# $s(11)$")
+    assert document.startswith("# A New Lower Bound for Packing 11 Squares")
+
+
+def test_the_three_stage_guide_wraps_each_print_grid_item_in_a_paragraph(page: str) -> None:
+    """KPress's print list grid needs one element child for each item's prose.
+
+    A tight Markdown list leaves the text after its opening ``strong`` as an anonymous
+    grid item. Chromium then auto-places that text in the 2.5rem number column, producing
+    several pages of nearly one-character-wide lines. A loose list wraps each complete
+    item in one paragraph, which the print stylesheet explicitly places in column two.
+    """
+
+    guide = re.search(
+        r"We explain the proof in three stages:</p>\s*<ol>(.*?)</ol>", page, re.DOTALL
+    )
+    assert guide is not None
+    items = re.findall(r"<li>(.*?)</li>", guide.group(1), re.DOTALL)
+    assert len(items) == 3
+    for item in items:
+        assert re.fullmatch(r"\s*<p>.*</p>\s*", item, re.DOTALL)
 
 
 def test_the_published_document_carries_no_html(document: str) -> None:
@@ -378,9 +403,38 @@ def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
     assert tags["og:title"] == tags["twitter:title"] == title.group(1)
     assert tags["og:description"] == tags["twitter:description"] == described.group(1)
     assert tags["og:image:alt"] == tags["twitter:image:alt"]
-    # The bound is the certificate's, wherever it is stated.
+    current = current_bound_facts()
     for text in (title.group(1), described.group(1)):
-        assert "s(11) ≥ 381/100" in text
+        assert "s(11)" in text
+        assert current.bounded_side_decimal in text or "current lower bound" in text
+    assert title.group(1).startswith("A New Lower Bound for Packing 11 Squares")
+
+
+def test_advanced_section_derives_the_current_lower_bound(document: str) -> None:
+    current = current_bound_facts()
+    prose = " ".join(document.split())
+    assert "## Proof of the New Lower Bound" in document
+    assert "The numerical $3.81$ result is not a premise of T-026" in prose
+    assert "Keeping T-018 in full also serves as an assurance bridge" in prose
+    assert "does not verify the threshold certificates" in prose
+    assert "t-025-verifiable-claim-191-50.md" in prose
+    assert "t-026-verifiable-claim-dilation-limit.md" in prose
+    assert "call this selected square a **core**" in prose
+    assert "Its **trace** on a core $P$ is the subset $P\\cap S$" in prose
+    assert "T-025 proves $s(11)\\ge 191/50=3.82$ directly" in prose
+    assert f"$D={render_explainer.frac_inline_tex(current.fine_half_gap)}$" in prose
+    assert "\\frac{qB(1+D)}{\\sqrt{1+D^2}}" in document
+    assert "both atom families closed under the eight symmetries of the container" in prose
+    assert current.bounded_side_decimal in prose
+    assert "exact exclusions include rational sides above $3.82$" in prose
+    assert "the exact lower bound $s(11)\\ge L$" in prose
+    assert "choose a rational $q<c$" in prose
+    assert "fit unchanged in that larger container" in prose
+    assert "Each point-certificate bound shown in the interactive figures" in prose
+    assert "T-025 claim document" in prose
+    assert "standard-library exact verifier" in prose
+    assert "the same verifier, and the exact dilation record" in prose
+    assert "weak limit" not in prose.lower()
 
 
 def test_the_published_document_is_named_for_the_result(document: str) -> None:
@@ -400,7 +454,7 @@ def test_the_published_document_is_named_for_the_result(document: str) -> None:
     for claim in claims:
         assert claim.name.startswith(f"{RESULT_ID}-"), claim.name
     # The document is what it is named after: the article, not the template.
-    assert document.startswith("# $s(11)$")
+    assert document.startswith("# A New Lower Bound for Packing 11 Squares")
 
 
 def test_the_md_chip_offers_the_document_by_its_published_name(page: str) -> None:
@@ -718,6 +772,9 @@ def test_every_repository_link_is_a_permalink_to_the_commit_the_page_is_built_fr
         ATLAS,
         Path(render_explainer.__file__),
         *WALKTHROUGH,
+        render_explainer.THRESHOLD_CERTIFICATE,
+        render_explainer.THRESHOLD_FINE_CERTIFICATE,
+        render_explainer.CURRENT_BOUND_RECORD,
         *sorted(CASE.glob("*-verifiable-claim-*.md")),
     )
     for path in evidence:
@@ -761,5 +818,35 @@ def test_the_page_stamps_the_commit_it_is_built_from(page: str, document: str) -
     assert edition.endswith(link_revision()[:8]), edition
     lead = f"{PUBLICATION_STATUS} " if PUBLICATION_STATUS else PUBLICATION_VERSION
     assert edition.startswith(lead), edition
-    assert f"({edition})" in page
-    assert f"({edition})" in document
+    linked_edition = f'(<a href="#version-history">{edition}</a>)'
+    assert linked_edition in page
+    assert f"([{edition}](#version-history))" in document
+    assert 'id="version-history"' in page
+
+
+def test_version_history_is_source_derived_and_has_two_entries(
+    page: str, document: str
+) -> None:
+    """The page history comes from release metadata rather than copied prose."""
+    match = re.search(
+        r"^## Version History\n\n(?P<history>.*?)(?=\n\[\^|\Z)",
+        document,
+        re.MULTILINE | re.DOTALL,
+    )
+    assert match is not None
+    assert document.index("## Version History") > document.index("## Further Reading")
+    history = match.group("history")
+    assert len(re.findall(r"^- \*\*v", history, re.MULTILINE)) == 2
+    compact_history = " ".join(history.split())
+    for entry in PUBLICATION_HISTORY:
+        expected = f"- **{entry.version} — {entry.first_labeled}.** {entry.result_scope}"
+        assert " ".join(expected.split()) in compact_history
+        assert entry.version in page
+        assert entry.first_labeled in page
+
+
+def test_reader_facing_version_references_follow_release_metadata() -> None:
+    """Nearby entry points do not retain the previous edition number."""
+    for path in (REPO / "README.md", REPO / "TUTORIAL.md"):
+        assert PUBLICATION_VERSION in path.read_text()
+    assert "PUBLICATION_HISTORY" in (REPO / "development.md").read_text()

@@ -1,8 +1,10 @@
 # N11 Research: Definitions, Findings, and the Inference Chain
 
-**Current combined result, September 10, 2026:**
-`3.826447410572939744... <= s(11) <= 3.877083590022814...`. T-026 improves the global
-lower bound; the owner results remain conditional.
+**Current combined result, September 10, 2026:** let
+`C = 955000*sqrt(518400042893309449)/179696714646249 =
+3.826447410572939744...`. T-026 proves `s(11) >= C` at V4/C5, so
+`C <= s(11) <= 3.877083590022814...`. The owner results remain conditional.
+The classification follows [epistemics.md](../../../epistemics.md).
 [§12 consolidates the takeaways across the PR series](#12-the-combined-series-takeaways-and-open-comparisons),
 including what worked, what particular tests ruled out, and what remains undecided.
 [§13 reviews the later A6 and H157 additions](#13-the-later-a6-and-h157-results-what-has-been-checked),
@@ -26,7 +28,7 @@ No scientific target ran during this consolidation.
 
 | Work | Current status | What that status establishes |
 | --- | --- | --- |
-| T-024–T-026 and agenda034 | Combined PR139 results; focused proof review and independent arithmetic completed | The global bound and scoped support/family findings in §12; final full-checkpoint status is tracked on the PR |
+| T-024–T-026 and agenda034 | Combined PR139 results merged; T-025 and T-026 also have self-contained claims, exhaustive standard-library replays, and a mapped source-distinct review | The global bound and scoped support/family findings in §12; T-026 is V4/C5 |
 | Exp145–153 | Recorded scientific results; PR145’s matching full checkpoint passed | The scoped findings in §7, with the retained analytic premises |
 | This account | Prior narrative review passed; later A6/H157 source review and corrections recorded in §13 | Each review has its own source and scope; no pass silently covers a later addition |
 | A6 and H157/exp154 | A6 point-family, all 2,566 atom rows and the seven-row fixed-support upper bound exactly replayed; H157 survivor counts confirmed and distance mechanism corrected | Neither addition changes the global bracket; §13 states the fixed-support and finite-domain premises |
@@ -586,7 +588,7 @@ keeping its total charge budget below eleven.
 | --- | --- | --- |
 | T-024: finer-net point certificate | Re-certifying the earlier point atoms and applying dilation gives global lower bound `3.816609502788862235...` | A fit decision at its irrational limiting side |
 | T-025: threshold certificate | 584 point atoms and 320 two-of-three atoms have budget `685457679/62500000 = 10.967322864 < 11`; covering decisions exclude side `191/50 = 3.82` | A result above this side without another certificate or transfer argument |
-| T-026: finer-net threshold certificate | Re-certification on the 1440-step net and rational dilation give the stronger global weak limit below | An endpoint certificate or strict inequality at that limit |
+| T-026: finer-net threshold certificate | Re-certification on the 1440-step net and rational dilation prove the stronger global lower bound below | The separate strict inequality beyond the stated lower bound |
 | T-023: conditional five-dot certificate | A specified four-owner patch case at `96/25 = 3.84` leaves at most five further parents, contradicting the seven required | A global exclusion of every packing at `3.84` |
 | Exp145–147: independent and wall-aware audits | Exp145 confirms the 361-direction cover; exp146 enlarges 12 of 16 common footprints; exp147 tests all 128 proposed containment transfers and finds no new certified selection | A physical case census or a bound from footprint growth alone |
 | Exp148–153: limits on the fixed five-dot extension | Partial masks, individual owner witnesses and escape geometry culminate in exp153’s exact exclusion of every freely placed sixth site added to fixed `D` for one selected wall-patch relaxation | Failure of moved or reweighted dots, arbitrary weighted covers, threshold charges, or stronger parent restrictions |
@@ -595,7 +597,7 @@ keeping its total charge budget below eleven.
 The new global result is
 
 $$
-s(11) \geq
+s(11) \geq C :=
 \frac{955000\sqrt{518400042893309449}}{179696714646249}
 =3.826447410572939744\ldots.
 $$
@@ -604,13 +606,26 @@ The upper construction remains `3.877083590022814...`. The lower endpoint moved 
 `0.016421687`, closing about **24.49% of the previous gap** and leaving about
 `0.050636179`. This is progress on a rigorous lower bound, not a new packing or a proof
 of optimality. The dilation argument proves exclusions for rational factors strictly
-below the limiting factor; taking their limit gives the displayed weak inequality.
+below the limiting factor; taking their limit proves `s(11) >= C`. Here
+**dilation-limit** names the method of proof.
+
+**Separate strictness question.** T-026 does not establish `s(11) > C`. This does not
+qualify the proved lower bound `s(11) >= C`.
 
 Primary proof packets are
 [T-024](../../../packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md),
-[T-025](../../../packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md),
+the self-contained
+[T-025 claim](../../../packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md),
+and the self-contained
+[T-026 claim](../../../packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md).
+The shorter
+[T-025 proof](../../../packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md)
 and
-[T-026](../../../packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md).
+[T-026 proof](../../../packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)
+remain the repository-oriented accounts.
+The
+[joint source-distinct review](../reviews/review-2026-09-10-t025-t026-verifiable-claims.md)
+checks the standalone claims and supplies T-026’s mapped C5 review.
 The [claim register](../../../packing/frontier/RESULTS.md) retains their exact
 verification and confirmation levels; this narrative does not silently raise those
 levels. For the owner strand, [§7](#7-the-recorded-observations-in-order) gives the
@@ -732,10 +747,12 @@ negative outcome before a target run.
 The mathematical review found no error in the T-024–T-026 proof arguments or exact
 constants. It did find the unsupported interpretations corrected above.
 Independent arithmetic on the frozen files, 77 focused passing tests and the point
-ceiling replay are distinct from replaying every finer-net covering decision.
-The final combined PR must supply the matching full checkpoint; its source identities
-and job outcomes are recorded in
-[PR139’s review and final validation discussion](https://github.com/jlevy/squares/pull/139).
+ceiling replay remain distinct from replaying every finer-net covering decision.
+PR139 merged after its required hosted checks passed.
+The later standalone T-025 and T-026 documents each embed the complete certificate and
+an independent standard-library exact-sweep implementation; their exhaustive replays and
+the source-distinct review add assurance without changing the theorem statements or the
+earlier experimental record.
 See the
 [review addendum](../reviews/review-2026-09-09-n11-evidence-interpretation.md#combined-series-review-addendum--september-10-2026)
 for the scope of the reconciliation and remaining assurance questions.
@@ -945,7 +962,7 @@ that allocation.
 ## 14. Daytime Evidence After PR139
 
 This section records the first post-merge strategy blocks.
-They sharpen domains and candidate languages but do not change the T-026 lower limit or
+They sharpen domains and candidate languages but do not change the T-026 lower bound or
 the known upper construction.
 The active allocation is
 [agenda035](../../../packing/campaign/agendas/agenda-035-n11-daytime-strategy.md).

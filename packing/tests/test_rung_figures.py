@@ -674,14 +674,14 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
 
     `D-442`'s surface, contracted rather than spot-checked. For every case page whose
     verified lower bound cites evidence carrying a certificate, exactly one cited object
-    binds that side. Ordinarily it is an endpoint certificate. T-022's typed exception is
-    a weak limit record whose exact source hash, strict-family identity, and source mass
-    are rechecked here; it is deliberately not treated as an endpoint certificate.
-    T-026's record is the same exception over a threshold source: the `v3` schema, whose
-    source block names the variant and whose decision carries the six threshold
-    conditions rather than five. Both are rechecked the same way, from the source bytes,
-    because the surd is a function of `B` and `D` alone whichever kind of atom carries
-    the charge.
+    binds that side. An endpoint certificate binds its own container side. A
+    dilation-limit record binds the supremum of its strict certificate family and proves
+    the same `>=` relation even though it supplies no individual certificate at that
+    side. T-022's point-source record carries the exact source hash, strict-family
+    identity, and source mass. T-026 uses the same proof shape over a threshold source:
+    the `v3` schema names the variant and carries the six threshold conditions rather
+    than five. Both are rechecked from the source bytes because the surd is a function of
+    `B` and `D` alone whichever kind of atom carries the charge.
     """
     evidence = _evidence_by_id()
     interval = _evidence("E-fractional-interval-decision")

@@ -227,8 +227,10 @@ The
 [certificate analysis](../../../docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md#what-produced-the-retained-gains)
 links each exact proof and distinguishes direct rational-side exclusions from limiting
 dilation statements.
-T-022, T-024, and T-026 establish the displayed lower limits without deciding their
-equality cases.
+T-022, T-024, and T-026 prove ordinary exact lower bounds.
+In particular, T-026 proves $s(11)\ge C=3.826447410572939744\ldots$ at V4/C5. The
+separate strict inequality $s(11)>C$ remains unproved; this does not qualify the lower
+bound.
 
 For frozen relative weights, let $M$ be their original total resource budget and
 $m=\inf_{C\in\mathcal C}g(C)$ the least charge on the proposed core domain.
@@ -725,8 +727,8 @@ known; X-027 is not an instruction to run every row at once.
 - **Replace point sites by unrestricted continuous density to cross $L_*$.** The
   retained family and the duality argument block this unconditional method.
   Reopen with a richer charge or conditional domain whose witness membership is checked.
-- **Split the same neutral endpoint patches again.** A patch is a bounded subset of the
-  pose domain; these patches lie near angular endpoints.
+- **Split the same neutral endpoint patches again.** These guaranteed occupied regions
+  are derived from the retained angular endpoint classes.
   H-157’s six neutral subclasses are a result for that finite patch universe.
   Additional marks, parent consistency, segment demand, or selection routing could
   change the domain; relabelling it cannot.

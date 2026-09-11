@@ -34,7 +34,7 @@ the weakest in this document and are flagged again in [Open Questions](#open-que
 
 ## Current Summary Through 2026-09-06
 
-T-022 sharpens the project’s weak lower bound to
+T-022 sharpens the project’s lower bound to
 
 ```text
 s(11) >= 38100*sqrt(8100042893309449)/899996306539
@@ -46,9 +46,9 @@ The resulting certified interval extends to Trump’s verified 1979 construction
 `0.06705786640811077`. T-022 is a uniform fixed-core dilation corollary of the frozen
 T-018 certificate. It replays T-018’s five conditions, then proves the sharper
 strict-containment inequality separately.
-The endpoint follows by rational density and upward embedding, so this is a weak `>=`
-statement: it is not an endpoint no-fit certificate and does not prove a strict
-improvement beyond the displayed algebraic number.
+Rational density and upward embedding prove the displayed `>=` statement.
+The argument does not establish the separate strict inequality beyond the displayed
+algebraic number; this does not qualify the proved lower bound.
 See [T-022](../../../packing/frontier/RESULTS.md) and its exact proof packet.
 
 The lower-bound improvement remains `apparently-novel` in the repository’s scoped sense.

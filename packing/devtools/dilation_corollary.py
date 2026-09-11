@@ -15,9 +15,10 @@ contains a sharper identity. If ``t = tan(d) <= D < 1`` is the angular error, th
 though the factor supremum is a quadratic irrational.
 
 No member of the strict rational family attains the supremum. Rational density and
-upward embedding nevertheless promote the supremum to a weak lower bound. This limit
-corollary neither certifies nor decides fit at the endpoint, and it never licenses
-dividing ``L`` by ``B``.
+upward embedding prove the ordinary lower bound at that supremum. The term
+*dilation-limit* names this proof method; it does not mark a weaker theorem or level of
+evidence. The corollary supplies no individual certificate at the endpoint, does not
+establish a strict lower bound there, and never licenses dividing ``L`` by ``B``.
 
 Section 4 of the 2026-09-05 adversarial review read this off the retained
 ``s(11) >= 381/100`` certificate at ``a = 250001/250000``, giving
@@ -295,7 +296,7 @@ class Corollary:
 
 @dataclass(frozen=True, slots=True)
 class LimitCorollary:
-    """The weak bound obtained from every strict rational dilation."""
+    """The exact lower bound obtained from every strict rational dilation."""
 
     factor_supremum: PositiveQuadraticSurd
     bounded_side: PositiveQuadraticSurd
@@ -572,9 +573,12 @@ def build_limit_record(
             ),
             "requires_compactness": result.requires_compactness,
             "endpoint_status": (
-                "the sharpened containment inequality is equality at the factor "
-                "supremum; the weak limit bound does not assert an endpoint certificate, "
-                "no-fit at the endpoint, or a strict lower bound"
+                f"the dilation-limit theorem establishes s({certificate.n}) >= "
+                f"{result.bounded_side.exact}; at the factor supremum the sharpened "
+                "containment inequality is equality, so endpoint_certificate is false "
+                "because the proof supplies no individual certificate at that side; "
+                f"the method does not establish s({certificate.n}) > "
+                f"{result.bounded_side.exact}"
             ),
         },
     }
@@ -669,8 +673,10 @@ def main(argv: list[str] | None = None) -> int:
     print(
         f"  sharp factor supremum = {sharp_ceiling.exact} "
         f"(square {sharp_ceiling.squared}, decimal {_decimal(sharp_ceiling)}); "
-        f"side supremum {sharp_side.exact} = {_decimal(sharp_side)}; "
-        "no endpoint certificate"
+        f"side supremum {sharp_side.exact} = {_decimal(sharp_side)}; the dilation-limit "
+        f"theorem establishes s({certificate.n}) >= {sharp_side.exact}; it supplies no "
+        "individual certificate at that side and does not establish "
+        f"s({certificate.n}) > {sharp_side.exact}"
     )
     print(
         "  Condition 5 is inherited from the file's retained decision "

@@ -283,7 +283,7 @@ finish within the wall deadline.
 
 | Outcome | Required evidence | Permitted inference |
 | --- | --- | --- |
-| Accept | Exact `m_c>M/11`; normalized bytes pass all closed-form conditions; the complete exact and interval routes accept and agree at minimum one; dilation replay produces the exact `S_c>S_0` record | A stronger unconditional weak lower bound `s(11)>=S_c` |
+| Accept | Exact `m_c>M/11`; normalized bytes pass all closed-form conditions; the complete exact and interval routes accept and agree at minimum one; dilation replay produces the exact `S_c>S_0` record | A stronger unconditional lower bound `s(11)>=S_c` |
 | Reject this relative-weight packet | One independently re-evaluated admissible rational core with original-weight charge `<=M/11`, or a fully checked minimum implying normalized budget `>=11` | These fixed sites, threshold atoms, relative weights, core side and net cannot satisfy the retained criterion under any common scaling |
 | Unresolved | Timeout, incomplete directions, interval stalls, exhausted box budgets, or a nonzero-width enclosure without a verified refuting witness | The planned run did not decide the packet |
 | Invalid | Mutated or mismatched sources, malformed declarations, wrong geometry, disagreement between methods, or a purported witness failing exact membership/admissibility checks | Repair the instrument or invocation; no scientific verdict |
@@ -303,10 +303,13 @@ path does not pass a worker override.
 Include that work in the budget estimate.
 
 At the limiting dilation factor, the strict containment inequality becomes equality.
-Success therefore proves the weak limit through all strict rational subfactors and order
-completeness. It does not provide a certificate at `S_c`, decide packing at that
-endpoint, or prove `s(11)>S_c`. A rejection does not decide other core sides, other
-nets, reoptimized relative weights, changed atoms or conditional geometry.
+Success therefore proves the lower bound through all strict rational subfactors and
+order completeness. The conclusion is the ordinary exact lower bound `s(11)>=S_c`.
+
+The argument would not establish the separate strict inequality `s(11)>S_c`. This would
+not qualify the proved lower bound.
+A rejection does not decide other core sides, other nets, reoptimized relative weights,
+changed atoms or conditional geometry.
 
 ## 8. Preflight Checks Performed
 

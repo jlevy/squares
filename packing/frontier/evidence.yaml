@@ -1849,10 +1849,11 @@ evidence:
         general web index. Exact routes returned zero; the inspected leading broad
         Crossref matches did not state this endpoint.
       novel_object: >-
-        The exact weak endpoint obtained by combining the retained T-018 source with a
-        sharpened trigonometric containment lemma, every strict rational uniform
-        dilation it admits, and rational density. The source certificate and dilation
-        operation are not new objects; the registered limit corollary is.
+        The exact lower-bound value obtained by combining the retained T-018 source with
+        a sharpened trigonometric containment lemma, every strict rational uniform
+        dilation it admits, rational density, and upward embedding. The source
+        certificate and dilation operation are not new objects; the registered
+        dilation-limit corollary is.
       gaps: >-
         This bounded search does not exhaust subscription-only indexes, theses,
         proceedings, non-English or unindexed sources, private correspondence, or
@@ -1886,8 +1887,10 @@ evidence:
       sharpened lemma rule out a packing at qL; density and upward embedding then exclude
       every real side below their supremum. The sharpened containment test is equality
       at the supremum, so this evidence supplies no endpoint certificate, no endpoint
-      fit decision, and no strict inequality. It uses no compactness or attainment
-      theorem and does not rule out stronger uses of the same atoms or coverage cells.
+      fit decision, and no strict inequality. Those artifact limits do not qualify the
+      proved conclusion s(11) >= 38100*sqrt(8100042893309449)/899996306539. The argument
+      uses no compactness or attainment theorem and does not rule out stronger uses of
+      the same atoms or coverage cells.
     source_reviewed: '2026-09-06'
   - id: E-n011-fractional-net1440-certificate
     claim: lower-bound
@@ -1917,10 +1920,10 @@ evidence:
         Stromquist's was found outside this repository.
       novel_object: >-
         The re-certification of the retained T-018 atoms on the 1440-step net at shrink
-        2494953/2500000 and the exact weak endpoint it yields through the dilation
-        corollary. The atoms, the certificate method, the sharpened containment lemma
-        and the dilation argument are not new objects; the finer-net certificate and
-        its endpoint are.
+        2494953/2500000 and the exact lower-bound value it yields through the
+        dilation-limit corollary. The atoms, the certificate method, the sharpened
+        containment lemma and the dilation argument are not new objects; the finer-net
+        certificate and its bound are.
       gaps: >-
         A bounded search of one general index, not an exhaustive review of
         subscription-only indexes, theses, proceedings, non-English or unindexed
@@ -1939,7 +1942,7 @@ evidence:
       B = 2494953/2500000 and the largest half-gap tangent is D = 207107/720000000. The
       bound the certificate itself proves is the container side, 381/100, which T-018
       already holds; what the finer net buys is the larger shrink, and the shrink is what
-      E-n011-fractional-net1440-dilation-limit turns into the registered endpoint.
+      E-n011-fractional-net1440-dilation-limit turns into the registered lower bound.
       The atoms are T-018's, from the frozen bytes with SHA-256
       b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a, with every
       weight multiplied by 200000/198931, the reciprocal of the least mass 198931/200000
@@ -2007,17 +2010,17 @@ evidence:
     novelty_basis:
       corpus: >-
         The corpus of E-n011-fractional-net1440-certificate, which carries the
-        2026-09-09 bounded search for this endpoint's decimal and radicand.
+        2026-09-09 bounded search for this bound's decimal and radicand.
       searched: >-
         The 2026-09-09 search under E-n011-fractional-net1440-certificate: the decimal
         3.816609, the radicand 518400042893309449 and a topic query, returning no
         source that states this endpoint or any lower bound on s(11) above
         Stromquist's outside this repository.
       novel_object: >-
-        The exact weak endpoint obtained by combining the 1440-step re-certification of
-        the retained atoms with T-022's sharpened containment lemma, every strict
-        rational uniform dilation it admits, and rational density. The lemma and the
-        dilation argument are T-022's; the endpoint is new.
+        The exact lower-bound value obtained by combining the 1440-step re-certification
+        of the retained atoms with T-022's sharpened containment lemma, every strict
+        rational uniform dilation it admits, rational density, and upward embedding.
+        The lemma and the dilation argument are T-022's; the bound is new.
       gaps: >-
         A bounded search of one general index. Apparent novelty is not a priority claim.
     certificate: cases/n11_fractional_certificate/t-024-net1440-dilation-limit-corollary.json
@@ -2052,11 +2055,13 @@ evidence:
       ceiling with exact positive slack, so the sharpened family is strictly larger than
       the coarse one. The sharpened containment test is equality at the supremum, so
       this evidence supplies no endpoint certificate, no endpoint fit decision, and no
-      strict inequality. It uses no compactness or attainment theorem. The endpoint is
-      the supremum only for uniform fixed-B dilation with one concentric core and strict
-      support containment on this net; the shrink is a 10^-7 grid crossing rather than
-      a minimum, and the exact depth-one ceiling family at 191/50 shows that no
-      certificate of this one-body form can be dilated past unit side 3.8288.
+      strict inequality. Those artifact limits do not qualify the proved conclusion
+      s(11) >= 3175000*sqrt(518400042893309449)/598960960743657. The argument uses no
+      compactness or attainment theorem. This value is the supremum only for uniform
+      fixed-B dilation with one concentric core and strict support containment on this
+      net; the shrink is a 10^-7 grid crossing rather than a minimum, and the exact
+      depth-one ceiling family at 191/50 shows that no certificate of this one-body form
+      can be dilated past unit side 3.8288.
     source_reviewed: '2026-09-09'
   - id: E-n011-fractional-net720-certificate
     claim: lower-bound
@@ -2074,7 +2079,7 @@ evidence:
         The corpus of E-n011-fractional-net1440-certificate.
       searched: >-
         The 2026-09-09 search under E-n011-fractional-net1440-certificate, which also
-        covered the topic query; the 720-step endpoint's own decimal 3.815730 was not
+        covered the topic query; the 720-step bound's own decimal 3.815730 was not
         searched separately.
       novel_object: >-
         The re-certification of the retained T-018 atoms on the 720-step net at shrink
@@ -2097,7 +2102,7 @@ evidence:
       directions of this net never bind, so the crossing shrink is within one grid step
       of the 360-step net's. The bound the certificate itself proves is the container
       side, 381/100, which T-018 already holds; its own dilation limit is
-      E-n011-fractional-net720-dilation-limit, weaker than the registered endpoint.
+      E-n011-fractional-net720-dilation-limit, weaker than the registered bound.
       The frozen bytes, SHA-256
       e7806824a1b313aa0322341ac6fb4fe12ffa1f22db83e219597fee5e7d8f772a, were decided by
       three readers. devtools.decide_certificate accepted by both routes: the exact
@@ -2128,12 +2133,12 @@ evidence:
         The corpus of E-n011-fractional-net1440-certificate.
       searched: >-
         The 2026-09-09 search under E-n011-fractional-net1440-certificate; this weaker
-        endpoint's own decimal and radicand 129600042893309449 were not searched
+        bound's own decimal and radicand 129600042893309449 were not searched
         separately.
       novel_object: >-
-        The exact weak endpoint of the 720-step re-certification under T-022's
-        dilation argument, weaker than the registered endpoint and retained because
-        its source rung is the one the standalone reader decides.
+        The exact lower-bound value from the 720-step re-certification under T-022's
+        dilation-limit argument. It is weaker than the registered bound and is retained
+        because its source rung is the one the standalone reader decides.
       gaps: >-
         A bounded search of one general index. Apparent novelty is not a priority claim.
     certificate: cases/n11_fractional_certificate/t-024-dilation-limit-corollary.json
@@ -2165,11 +2170,13 @@ evidence:
       source and sharpened lemma rule out a packing at q times 381/100; density and
       upward embedding then exclude every real side below their supremum,
       38100000*sqrt(129600042893309449)/3594594251080001 = 3.815730319395513..., which
-      the registered 1440-step endpoint exceeds by about 0.0008792. The control rational
+      the registered 1440-step bound exceeds by about 0.0008792. The control rational
       31297/31250 lies inside the family and above the coarse Condition 4 ceiling with
       exact positive slack. The sharpened containment test is equality at the supremum,
       so this evidence supplies no endpoint certificate, no endpoint fit decision, and
-      no strict inequality, and it uses no compactness or attainment theorem.
+      no strict inequality. Those artifact limits do not qualify the proved conclusion
+      s(11) >= 38100000*sqrt(129600042893309449)/3594594251080001, and the argument uses
+      no compactness or attainment theorem.
     source_reviewed: '2026-09-09'
   - id: E-n011-threshold-certificate
     claim: lower-bound
@@ -2242,14 +2249,15 @@ evidence:
       only when both routes accept and agree on the least charge: the exact sweep in 110 s
       with dense-grid and slab evaluations agreeing at every direction and the charge at
       the witness re-evaluated by membership counting, beside the interval route recorded
-      under E-n011-threshold-interval-decision, on two workers of a four-cpu host. No
-      standalone reader outside this repository decides a threshold certificate yet, and
-      the dilation argument of T-024 has not been measured on this one. The theorem was
+      under E-n011-threshold-interval-decision, on two workers of a four-cpu host. The
+      self-contained T-025 verifiable claim also embeds these exact bytes and a separate
+      standard-library event-cell verifier. The dilation argument of T-024 has not been
+      measured on this certificate. The theorem was
       reviewed adversarially before registration in
       docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md, which found
       no soundness defect; the exact depth-one ceiling family at the same side shows no
       point-atom certificate of the earlier form exists here, which is why the threshold
-      atoms are load-bearing rather than decorative.
+      atoms are necessary for this certificate’s budget.
     source_reviewed: '2026-09-09'
   - id: E-n011-threshold-interval-decision
     claim: lower-bound
@@ -2313,7 +2321,8 @@ evidence:
         The re-certification of the retained T-025 threshold atoms on the 1440-step net
         at shrink 249507/250000. The atoms, the threshold theorem, the two decision
         routes and the net-refinement measurement are not new objects; this certificate
-        and the endpoint E-n011-threshold-net1440-dilation-limit derives from it are.
+        and the lower bound derived from it under
+        E-n011-threshold-net1440-dilation-limit are.
       gaps: >-
         A bounded search of one general index, not an exhaustive review of
         subscription-only indexes, theses, proceedings, non-English or unindexed
@@ -2336,7 +2345,7 @@ evidence:
       914 (t = 94647899/360000000, about 29.46 degrees). The bound the certificate itself
       proves is the container side, 191/50, which T-025 already holds as an endpoint;
       what the finer net buys is the larger shrink, and the shrink is what
-      E-n011-threshold-net1440-dilation-limit turns into the registered endpoint. The
+      E-n011-threshold-net1440-dilation-limit turns into the registered lower bound. The
       atoms are T-025's, from the frozen bytes with SHA-256
       3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f4bad5c, whose own shrink
       9977/10000 does not survive any finer net: at 1440 steps the unscaled least charge
@@ -2353,10 +2362,10 @@ evidence:
       781.8 s, with the dense-grid and slab evaluations agreeing at every direction and
       the charge at the witness re-evaluated by membership counting, beside the interval
       route recorded under E-n011-threshold-net1440-interval-decision, on two workers of
-      a four-cpu host. No standalone reader outside this repository decides a threshold
-      certificate at any net, so this rung, like T-025's, cannot yet be checked by a
-      stranger without trusting this project's own code. This entry is the
-      exact-algebraic decision; C4 rests on the interval decision of the same bytes.
+      a four-cpu host. The self-contained T-026 verifiable claim embeds these bytes, a
+      separate standard-library threshold verifier, and the exact dilation record. This
+      entry is the exact-algebraic decision; C4 rests on the interval decision of the
+      same bytes.
     source_reviewed: '2026-09-09'
   - id: E-n011-threshold-net1440-interval-decision
     claim: lower-bound
@@ -2409,15 +2418,15 @@ evidence:
       searched: >-
         The 2026-09-09 search under E-n011-fractional-net1440-certificate, which returned
         no source stating any lower bound on s(11) above Stromquist's outside this
-        repository. This endpoint's own decimal 3.826447 and its radicand
+        repository. This bound's own decimal 3.826447 and its radicand
         518400042893309449, which the T-024 search already covered, were not searched
         again.
       novel_object: >-
-        The exact weak endpoint obtained by combining the 1440-step re-certification of
-        T-025's threshold atoms with T-022's sharpened containment lemma, every strict
-        rational uniform dilation it admits, and rational density. The lemma and the
-        dilation argument are T-022's and T-024's; carrying them over threshold atoms
-        needs no new theorem, and the endpoint is new.
+        The exact lower-bound value obtained by combining the 1440-step re-certification
+        of T-025's threshold atoms with T-022's sharpened containment lemma, every
+        strict rational uniform dilation it admits, rational density, and upward
+        embedding. The lemma and the dilation argument are T-022's and T-024's;
+        carrying them over threshold atoms needs no new theorem, and the bound is new.
       gaps: >-
         A bounded search of one general index. Apparent novelty is not a priority claim.
     certificate: cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json
@@ -2457,12 +2466,13 @@ evidence:
       one here too. The sharpened containment test is equality at the supremum, so this
       evidence supplies no endpoint certificate, no endpoint fit decision, and no strict
       inequality; T-025's 191/50 remains the largest side certified at the container side
-      itself. It uses no compactness or attainment theorem. The endpoint is the supremum
-      only for uniform fixed-B dilation with one concentric core and strict support
-      containment on this net, and the shrink is a 10^-7 grid crossing rather than a
-      minimum. The rescaled budget 5483661432/498684619 = 10.996251384 sits within 0.004
-      of the eleven a certificate may not reach, so net refinement alone cannot carry
-      these atoms much further.
+      itself. Those artifact limits do not qualify the proved conclusion s(11) >=
+      955000*sqrt(518400042893309449)/179696714646249. The argument uses no compactness
+      or attainment theorem. This value is the supremum only for uniform fixed-B
+      dilation with one concentric core and strict support containment on this net, and
+      the shrink is a 10^-7 grid crossing rather than a minimum. The rescaled budget
+      5483661432/498684619 = 10.996251384 sits within 0.004 of the eleven a certificate
+      may not reach, so net refinement alone cannot carry these atoms much further.
     source_reviewed: '2026-09-09'
   - id: E-n011-threshold-net720-certificate
     claim: lower-bound
@@ -2534,12 +2544,13 @@ evidence:
         The corpus of E-n011-threshold-net1440-certificate.
       searched: >-
         The 2026-09-09 search under E-n011-fractional-net1440-certificate; this weaker
-        endpoint's own decimal and the radicand 129600042893309449, which T-024's
+        bound's own decimal and the radicand 129600042893309449, which T-024's
         720-step rung already carries, were not searched separately.
       novel_object: >-
-        The exact weak endpoint of the 720-step threshold re-certification under T-022's
-        dilation argument, weaker than the registered endpoint and retained because its
-        source rung is the control that isolates the effect of the net alone.
+        The exact lower-bound value from the 720-step threshold re-certification under
+        T-022's dilation-limit argument. It is weaker than the registered bound and is
+        retained because its source rung is the control that isolates the effect of the
+        net alone.
       gaps: >-
         A bounded search of one general index. Apparent novelty is not a priority claim.
     certificate: cases/n11_threshold_certificate/t-026-net720-dilation-limit-corollary.json
@@ -2572,12 +2583,14 @@ evidence:
       the sharpened lemma rule out a packing at q times 191/50; density and upward
       embedding then exclude every real side below their supremum,
       955000*sqrt(129600042893309449)/89874194646249 = 3.825347845913112, which the
-      registered 1440-step endpoint exceeds by about 0.0010996. The control rational
+      registered 1440-step bound exceeds by about 0.0010996. The control rational
       5006999/5000000 lies inside the family and above the coarse Condition 4 ceiling
       38200000000000/9986021627361 with exact positive slack. The sharpened containment
       test is equality at the supremum, so this evidence supplies no endpoint
-      certificate, no endpoint fit decision, and no strict inequality, and it uses no
-      compactness or attainment theorem.
+      certificate, no endpoint fit decision, and no strict inequality. Those artifact
+      limits do not qualify the proved conclusion s(11) >=
+      955000*sqrt(129600042893309449)/89874194646249, and the argument uses no compactness
+      or attainment theorem.
     source_reviewed: '2026-09-09'
   - id: E-n017-fractional-certificate
     claim: lower-bound

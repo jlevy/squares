@@ -249,7 +249,10 @@ PROBE = r"""({ wrappers, advance_tolerance }) => {
        size and the stack are the node's own. */
     seam.installTablesFor(host, globalThis.squaresMath?.context);
     try {
-      katex.render(source(node), probe, { throwOnError: false });
+      katex.render(source(node), probe, {
+        throwOnError: false,
+        displayMode: !!node.closest('.katex-display'),
+      });
     } catch (error) {
       probe.textContent = '';
     }

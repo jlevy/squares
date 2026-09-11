@@ -2155,8 +2155,9 @@ def _threshold_limit_record(context: Context, steps: int, record: str) -> str:
     pull-request surface, and it is dearer than the point one: measured on this branch on
     2026-09-09, on a four-cpu host with `PACK_JOBS=1`, the 720-step check took 618s and
     the 1440-step check 919s, against a fast tier whose target is two to two and a half
-    minutes. No standalone reader decides a threshold certificate, so unlike T-024's
-    rungs neither of these has a third-party replay behind it either.
+    minutes. The T-025 and T-026 claim documents now embed a separate standard-library
+    reader. Its complete retained sweeps are exhaustive checks as well; they supplement
+    rather than replace these repository replays.
 
     What the pull request keeps is the same cheap half:
     `test_every_case_page_binds_the_certificate_its_own_evidence_names` rehashes the

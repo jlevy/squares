@@ -4,8 +4,8 @@ The atlas footer and the explainer's credits each used to compose the stamp from
 parts, in two files and two languages, joined by a literal ", revision ". Two
 hand-assembled spellings of one fact is how they come to disagree, and neither could be
 changed without remembering the other. What is pinned here is the shape and the single
-source, not the values: bumping a version or cutting a new revision is an ordinary edit
-to `sqpack.release` and should not need a test changed with it.
+source. The short public history is the exception: its focused regression changes when
+an edition enters or leaves that two-entry record.
 """
 
 from __future__ import annotations
@@ -14,7 +14,9 @@ import re
 import subprocess
 
 from sqpack.release import (
+    PUBLICATION_DATE,
     PUBLICATION_EDITION,
+    PUBLICATION_HISTORY,
     PUBLICATION_REVISION,
     PUBLICATION_STAMP,
     PUBLICATION_STATUS,
@@ -23,6 +25,20 @@ from sqpack.release import (
 
 #: `v0.1.0-3bd273e6`: a semver core, a hyphen, and this repository's short hash.
 STAMP = re.compile(r"v\d+\.\d+\.\d+-[0-9a-f]{7,40}")
+
+
+def test_publication_history_is_the_two_retained_editions() -> None:
+    """The public history stays short, dated, and tied to the current edition."""
+    assert [entry.version for entry in PUBLICATION_HISTORY] == ["v0.4.0", "v0.3.0"]
+    assert [entry.first_labeled for entry in PUBLICATION_HISTORY] == [
+        "September 10, 2026",
+        "September 8, 2026",
+    ]
+    assert "3.8264474…" in PUBLICATION_HISTORY[0].result_scope
+    assert "381/100 = 3.81" in PUBLICATION_HISTORY[1].result_scope
+    assert all("weak" not in entry.result_scope.lower() for entry in PUBLICATION_HISTORY)
+    assert PUBLICATION_HISTORY[0].version == PUBLICATION_VERSION
+    assert PUBLICATION_HISTORY[0].first_labeled == PUBLICATION_DATE
 
 
 def test_the_stamp_is_a_version_and_a_revision_and_nothing_else() -> None:

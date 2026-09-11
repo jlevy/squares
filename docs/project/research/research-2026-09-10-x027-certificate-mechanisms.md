@@ -244,10 +244,12 @@ The original
 [X-023 derivation](../../../packing/campaign/explorations/X-023-three-losses-and-a-new-atom.md#threshold-atoms)
 and corrected X-024 distinguish these comparisons.
 
-T-022, T-024, and T-026 exclude every side strictly below their limiting values, giving
-weak lower bounds on $s(11)$. Their strict containment argument does not decide the
-limiting endpoint. T-025 retains its direct exclusion at the rational container side
-$191/50$.
+T-022, T-024, and T-026 exclude every side strictly below their limiting values.
+By order completeness, they therefore prove the corresponding ordinary lower bounds on
+$s(11)$. In particular, T-026 proves $s(11)\ge C$ at V4/C5, where
+$C=3.826447410572939744\ldots$. Its argument does not establish the separate stronger
+inequality $s(11)>C$. T-025 separately excludes the rational container side $191/50$
+directly.
 
 ## What the Ceiling Families Require Us to Change
 
@@ -281,7 +283,7 @@ Conditioning restricts the admissible configurations by additional physical info
 For example, an **owner** of a marked site is a selected core containing it; its
 physical unit-square parent also contains the site.
 A **class** groups assignments or poses satisfying specified restrictions; a **patch**
-is the permitted region for a selected core center.
+is a planar region guaranteed to lie inside every owner core in the class.
 The corrected
 [X-026 ladder](../../../packing/campaign/explorations/X-026-what-conditioning-does-and-does-not-buy.md#3-the-ladder)
 prevents transferring an unconditional core witness to such a restricted domain without
@@ -687,7 +689,7 @@ runner.
 
 | Direction | Cheapest Useful Next Check | What a Positive Result Would Establish | Stop or Scope Boundary |
 | --- | --- | --- | --- |
-| BC329 uniform core/net packet | Admit its fixed-core runner, then decide the frozen candidate using the original T-025 coefficients and $m>M/11$ | With both complete coverage routes and dilation replay, a stronger weak lower bound | The candidate limit is conditional on unmeasured coverage; a valid core of charge at most $M/11$ rejects only this fixed packet. |
+| BC329 uniform core/net packet | Admit its fixed-core runner, then decide the frozen candidate using the original T-025 coefficients and $m>M/11$ | With both complete coverage routes and dilation replay, a stronger exact lower bound | The candidate limit is conditional on unmeasured coverage; a valid core of charge at most $M/11$ rejects only this fixed packet. |
 | Weighted binary atoms | Admit exact multiplicities and replay the retained source pairs; test the at-most-32-trace, 80-ordinary-atom comparison before a large paired LP | Valid representation first, possible local geometric expressiveness second, and a finite budget gain only after the paired comparison | The abstract $4/3$ ratio and reported source charge $3/2$ do not predict geometric or global improvement. |
 | Joint row and atom generation | Check whether any exact old optimal dual survives all new columns; retain the replacement family | Why the fixed finite objective stays or moves, and which constraint type remains violated | An exact tie concerns that finite program; omitted placements can change the result. |
 | Genuine floor atoms | Admit one explicit retained floor resource with its joint budget; use the five-site profile as an exact control | A charge above one and, if exhibited, an exact violation by the matched family | The $5/4$ example concerns profile domination, not unit-demand or geometric gain. |

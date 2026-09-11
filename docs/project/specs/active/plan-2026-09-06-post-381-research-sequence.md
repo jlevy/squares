@@ -246,8 +246,8 @@ BC-232’s unfinished scientific criterion stays open.
 H-092’s reviewed transport remains pending integration; do not repeat its measurement
 for another receipt.
 PRs 94–96 are incorporated from `origin/main` at `edccf294` in this checkpoint.
-The merge preserves both sets of verifier guards, T-022’s weak endpoint statement, and
-the new agenda’s priority over historical handoff text.
+The merge preserves both sets of verifier guards, T-022’s lower-bound statement, and the
+new agenda’s priority over historical handoff text.
 
 README and TUTORIAL need no new mathematical exposition for this planning revision.
 SYNOPSIS defines the work entities and points to the agenda.

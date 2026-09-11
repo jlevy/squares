@@ -67,6 +67,7 @@ from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
 from sqpack.release import (
     PUBLICATION_DATE,
+    PUBLICATION_HISTORY,
     PUBLICATION_REVISION,
     PUBLICATION_STATUS,
     PUBLICATION_VERSION,
@@ -77,6 +78,14 @@ from sqpack.yamlio import safe_load
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
 CASE = PACKING / "cases" / "n11_fractional_certificate"
+THRESHOLD_CASE = PACKING / "cases" / "n11_threshold_certificate"
+THRESHOLD_CERTIFICATE = THRESHOLD_CASE / "certificate.json"
+THRESHOLD_FINE_CERTIFICATE = THRESHOLD_CASE / "certificate-191-50-net1440.json"
+THRESHOLD_PROOF = THRESHOLD_CASE / "t-025-threshold-certificate-proof.md"
+CURRENT_BOUND_RECORD = THRESHOLD_CASE / "t-026-dilation-limit-corollary.json"
+T025_CLAIM = THRESHOLD_CASE / "t-025-verifiable-claim-191-50.md"
+T026_CLAIM = THRESHOLD_CASE / "t-026-verifiable-claim-dilation-limit.md"
+T026_REVIEW = REPO / "docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md"
 # The registered result these certificates belong to, lowercased as a filename
 # stem. `conventions.md` builds every document name for a result from this id --
 # `t-018-proof-card.md`, `t-018-verifiable-claim-<bound>.md`, `t-018-explainer.md` --
@@ -366,6 +375,14 @@ def page_edition() -> str:
     """
     stamp = f"{PUBLICATION_VERSION}-{link_revision()[:8]}"
     return " ".join(part for part in (PUBLICATION_STATUS, stamp) if part)
+
+
+def publication_history_markdown() -> str:
+    """The retained edition history, rendered from the release metadata."""
+    return "\n".join(
+        f"- **{entry.version} — {entry.first_labeled}.** {entry.result_scope}"
+        for entry in PUBLICATION_HISTORY
+    )
 
 
 def repo_file(path: Path, revision: str | None = None) -> str:
@@ -1411,6 +1428,133 @@ class Facts:
     admitted_side: Fraction
 
 
+@dataclass(frozen=True, slots=True)
+class CurrentBoundFacts:
+    """The advanced threshold rung, read from the two retained proof inputs."""
+
+    bounded_side: Fraction
+    bounded_side_tex: str
+    bounded_side_inline_tex: str
+    bounded_side_plain: str
+    bounded_side_decimal: str
+    endpoint: Fraction
+    point_atoms: int
+    threshold_atoms: int
+    point_mass: Fraction
+    threshold_budget: Fraction
+    total_budget: Fraction
+    least_charge: Fraction
+    coarse_directions: int
+    coarse_interval_directions: int
+    fine_square_side: Fraction
+    fine_total_budget: Fraction
+    fine_directions: int
+    fine_interval_directions: int
+    fine_half_gap: Fraction
+    normalization: Fraction
+    dilation_factor_tex: str
+
+
+def _sqrt_fraction_floor(value: Fraction, places: int) -> Fraction:
+    """Floor a positive square root to `places`, using integer arithmetic."""
+    scale = 10**places
+    root = isqrt(value.numerator * scale * scale // value.denominator)
+    answer = Fraction(root, scale)
+    step = Fraction(1, scale)
+    assert answer * answer <= value < (answer + step) * (answer + step)
+    return answer
+
+
+@cache
+def current_bound_facts() -> CurrentBoundFacts:
+    """Read and cross-check the retained T-025 certificate and T-026 corollary."""
+    coarse = json.loads(THRESHOLD_CERTIFICATE.read_text(encoding="utf-8"))
+    fine = json.loads(THRESHOLD_FINE_CERTIFICATE.read_text(encoding="utf-8"))
+    limit = json.loads(CURRENT_BOUND_RECORD.read_text(encoding="utf-8"))
+    threshold_proof = THRESHOLD_PROOF.read_text(encoding="utf-8")
+    source = limit["source"]
+    conclusion = limit["conclusion"]
+    expression = conclusion["bounded_side"]
+    match = re.fullmatch(r"(\d+)\*sqrt\((\d+)\)/(\d+)", expression)
+    if match is None:
+        raise SystemExit(
+            f"unsupported exact bound form in {CURRENT_BOUND_RECORD.name}: {expression}"
+        )
+    multiplier, radicand, denominator = map(int, match.groups())
+    squared = Fraction(conclusion["bounded_side_squared"])
+    if Fraction(multiplier * multiplier * radicand, denominator * denominator) != squared:
+        raise SystemExit(f"{CURRENT_BOUND_RECORD.name}: exact bound and square disagree")
+    if conclusion["relation"] != ">=" or conclusion["endpoint_certificate"] is not False:
+        raise SystemExit(
+            f"{CURRENT_BOUND_RECORD.name}: explainer requires a >= dilation-limit bound"
+        )
+    endpoint = Fraction(coarse["outer_side"])
+    if endpoint != Fraction(source["outer_side"]) or fine["outer_side"] != coarse["outer_side"]:
+        raise SystemExit("T-025 and T-026 disagree about their source endpoint")
+    if coarse["variant"] != "threshold" or fine["variant"] != "threshold":
+        raise SystemExit("advanced explainer inputs must be threshold certificates")
+    if coarse["symmetry"] != "D4" or fine["symmetry"] != "D4":
+        raise SystemExit("advanced explainer inputs must carry D4 symmetry")
+    if (
+        len(coarse["atoms"]) != source["point_atoms"]
+        or len(coarse["threshold_atoms"]) != source["threshold_atoms"]
+    ):
+        raise SystemExit("T-025 atom counts disagree with the T-026 retained record")
+    if any(
+        atom["threshold"] != 2 or len(atom["points"]) != 3 for atom in coarse["threshold_atoms"]
+    ):
+        raise SystemExit("the explainer's two-of-three statement no longer describes T-025")
+    least_match = re.search(r"Least cell charge \| `([^`]+)`", threshold_proof)
+    if least_match is None:
+        raise SystemExit(f"{THRESHOLD_PROOF.name}: retained least charge is missing")
+    least_charge = Fraction(least_match.group(1).split(" = ", 1)[0])
+    normalization = Fraction(fine["point_mass"]) / Fraction(coarse["point_mass"])
+    if (
+        Fraction(fine["threshold_budget"]) / Fraction(coarse["threshold_budget"])
+        != normalization
+    ):
+        raise SystemExit("T-026 did not normalize point and threshold weights together")
+    if Fraction(coarse["point_mass"]) + Fraction(coarse["threshold_budget"]) != Fraction(
+        coarse["total_budget"]
+    ):
+        raise SystemExit("T-025 point mass and threshold budget do not sum to its total")
+    if Fraction(fine["point_mass"]) + Fraction(fine["threshold_budget"]) != Fraction(
+        fine["total_budget"]
+    ):
+        raise SystemExit("T-026 point mass and threshold budget do not sum to its total")
+    bounded_side = _sqrt_fraction_floor(squared, 18)
+    factor_expression = limit["strict_dilation_family"]["factor_supremum"]
+    factor_match = re.fullmatch(r"(\d+)\*sqrt\((\d+)\)/(\d+)", factor_expression)
+    if factor_match is None:
+        raise SystemExit(f"unsupported dilation factor form: {factor_expression}")
+    factor_multiplier, factor_radicand, factor_denominator = factor_match.groups()
+    return CurrentBoundFacts(
+        bounded_side=bounded_side,
+        bounded_side_tex=f"\\frac{{{multiplier}\\sqrt{{{radicand}}}}}{{{denominator}}}",
+        bounded_side_inline_tex=f"{multiplier}\\sqrt{{{radicand}}}/{denominator}",
+        bounded_side_plain=expression,
+        bounded_side_decimal=truncated(bounded_side),
+        endpoint=endpoint,
+        point_atoms=len(coarse["atoms"]),
+        threshold_atoms=len(coarse["threshold_atoms"]),
+        point_mass=Fraction(coarse["point_mass"]),
+        threshold_budget=Fraction(coarse["threshold_budget"]),
+        total_budget=Fraction(coarse["total_budget"]),
+        least_charge=least_charge,
+        coarse_directions=int(coarse["direction_steps"]) + 1,
+        coarse_interval_directions=2 * int(coarse["direction_steps"]) + 1,
+        fine_square_side=Fraction(fine["square_side"]),
+        fine_total_budget=Fraction(fine["total_budget"]),
+        fine_directions=int(fine["direction_steps"]) + 1,
+        fine_interval_directions=2 * int(fine["direction_steps"]) + 1,
+        fine_half_gap=Fraction(source["half_gap_tangent"]),
+        normalization=normalization,
+        dilation_factor_tex=(
+            f"\\frac{{{factor_multiplier}\\sqrt{{{factor_radicand}}}}}{{{factor_denominator}}}"
+        ),
+    )
+
+
 def load_certificate(path: Path) -> tuple[Certificate, dict[str, str]]:
     record = json.loads(path.read_text(encoding="utf-8"))
     limit = Fraction(record["angle_limit"])
@@ -1725,7 +1869,7 @@ LINE_FIRST_ROW = 128.0
 LINE_ROW = 32.0
 # The viewBox height the figure declares. A certificate count that would not fit
 # under the axis fails the render rather than drawing off the bottom of the box.
-LINE_HEIGHT = 180.0
+LINE_HEIGHT = 260.0
 
 
 def line_x(value: float) -> float:
@@ -1733,7 +1877,7 @@ def line_x(value: float) -> float:
     return LINE_X0 + (value - LINE_LOW) / (LINE_HIGH - LINE_LOW) * (LINE_X1 - LINE_X0)
 
 
-def number_line_marks(facts: list[Facts], headline: Facts) -> str:
+def number_line_marks(facts: list[Facts], headline: Facts, current: CurrentBoundFacts) -> str:
     """Every certificate's mark on the shared axis: a tick, a dot and a label.
 
     The figure states all of the bounds at once, so the marks are generated here
@@ -1744,22 +1888,31 @@ def number_line_marks(facts: list[Facts], headline: Facts) -> str:
     ordered = sorted(facts, key=lambda f: f.outer_side, reverse=True)
     if ordered[0] is not headline:
         raise SystemExit("the headline bound is not the largest; the marks would stack wrong")
-    depth = LINE_FIRST_ROW + LINE_ROW * (len(ordered) - 1)
+    entries = [
+        (current.bounded_side, "T-026: current lower bound", True),
+        (current.endpoint, f"191/50 = {decimal(current.endpoint)}, direct certificate", False),
+        *[
+            (
+                f.outer_side,
+                f"{f.outer_side.numerator}/{f.outer_side.denominator} = {decimal(f.outer_side)}"
+                + (", point proof below" if f is headline else ", simpler point proof"),
+                False,
+            )
+            for f in ordered
+        ],
+    ]
+    depth = LINE_FIRST_ROW + LINE_ROW * (len(entries) - 1)
     if depth + 10 > LINE_HEIGHT:
         raise SystemExit(
-            f"{len(ordered)} certificates need {depth + 10:.0f} pixels of axis and the "
+            f"{len(entries)} bound marks need {depth + 10:.0f} pixels of axis and the "
             f"figure's viewBox is {LINE_HEIGHT:.0f} tall; raise it in the Markdown"
         )
     marks = []
-    for index, f in enumerate(ordered):
-        x = line_x(float(f.outer_side))
+    for index, (value, label, lead) in enumerate(entries):
+        x = line_x(float(value))
         y = LINE_FIRST_ROW + LINE_ROW * index
-        lead = f is headline
         colour = "var(--cert-probe)" if lead else "var(--kpress-doc-muted)"
         emphasis = ' font-weight="550"' if lead else ""
-        label = f"{f.outer_side.numerator}/{f.outer_side.denominator} = {decimal(f.outer_side)}"
-        if lead:
-            label += ", proved below"
         marks.append(
             f'<line x1="{x:.0f}" y1="{LINE_AXIS_Y}" x2="{x:.0f}" y2="{y:.0f}" '
             f'stroke="{colour}" stroke-width="{2 if lead else 1.25}"/>'
@@ -1828,6 +1981,7 @@ def bound_substitutions() -> dict[str, str]:
         "PRIOR_LOWER_DEC": truncated(PRIOR_LOWER),
         "BEST_PACKING_DEC": truncated(BEST_PACKING),
         "BEST_PACKING_TEX": truncated(BEST_PACKING, tex=True),
+        "BEST_PACKING_LONG_TEX": truncated(BEST_PACKING, places=15, tex=True),
     }
 
 
@@ -1991,11 +2145,12 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
     return values
 
 
-#: The deck, which the hero sets under the title and the card repeats after it.
-SUBTITLE = "A New Lower Bound on the Square Packing Problem"
+#: The visible title names the concrete result. The exact theorem follows in the
+#: opening section, where the notation and the status of the claim are defined.
+TITLE = "A New Lower Bound for Packing 11 Squares"
 
 
-def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
+def card_substitutions(headline: Facts, current: CurrentBoundFacts) -> dict[str, str]:
     """What a link preview shows: the title, the sentence, the canonical URL, the image.
 
     Every one of these is a string the page already states somewhere -- the title in
@@ -2004,7 +2159,8 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
     the page it opens cannot say different things. The bound in the title and in the
     sentence is the headline certificate's own, like every other number on the page.
 
-    The card names the cropped composite rather than the full canvas, and the reason is
+    The card names the current bound while the interactive figures retain the point
+    certificates. It uses the cropped composite rather than the full canvas, and the reason is
     what the croppers do with a portrait. X and Facebook show a landscape card and take
     a band from the middle of whatever they are given: from the 150:181 canvas that is
     four rows out of the middle of the grid, with the title, the date and the repository
@@ -2014,11 +2170,10 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
     legend at the foot, which is the part a reader can find on the page.
     """
     width, height = png_size(COMPOSITE_CARD)
-    title = f"s({headline.n}) ≥ {headline_frac}: {SUBTITLE}"
+    title = f"{TITLE}: s({headline.n}) ≥ {current.bounded_side_decimal}"
     description = (
-        f"How a weighted point set and a pigeonhole prove s({headline.n}) ≥ "
-        f"{headline_frac}, improving Stromquist's bound on the smallest open case, "
-        f"stated in {PRIOR_MEMO_YEAR} and published in {PRIOR_YEAR}."
+        f"How weighted point and threshold certificates prove the current lower bound "
+        f"for s({headline.n}), from a visual point-only proof to the current exact lower bound."
     )
     return {
         "PAGE_TITLE": title,
@@ -2034,14 +2189,14 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
 
 
 def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) -> dict[str, str]:
-    """Values the whole page states: the headline bound, the deck, the shared axis.
+    """Values the whole page states: current result, point lesson, deck, and shared axis.
 
     The axis positions are here rather than in `certificate_substitutions`
-    because the bounds figure states every certificate at once and stands outside
-    the stamped article; the band it shades runs from the headline bound to the
-    best packing known. It describes the certificates shown, not later refinements.
+    because the bounds figure states every rung at once and stands outside the stamped
+    article; the band it shades runs from the current lower bound to the best packing.
     """
     headline_frac = f"{headline.outer_side.numerator}/{headline.outer_side.denominator}"
+    current = current_bound_facts()
     package_side = Fraction(
         json.loads(THIRDPARTY_CERTIFICATE.read_text(encoding="utf-8"))["outer_side"]
     )
@@ -2059,8 +2214,8 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
             else ""
         ),
         "THIRDPARTY_L_FRAC": f"{package_side.numerator}/{package_side.denominator}",
-        "SUBTITLE": SUBTITLE,
-        **card_substitutions(headline, headline_frac),
+        "TITLE": TITLE,
+        **card_substitutions(headline, current),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
         "DEFAULT_ID": default.identifier,
         # Print shows one certificate deterministically, and this names which.
@@ -2074,6 +2229,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
         "EDITION": page_edition(),
+        "VERSION_HISTORY": publication_history_markdown(),
         "PRIOR_YEAR": str(PRIOR_YEAR),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "PRIOR_MEMO_YEAR": str(PRIOR_MEMO_YEAR),
@@ -2102,11 +2258,42 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "PRINCIPLES_URL": repo_file(REPO / "README.md") + "#operating-principles",
         "EPISTEMICS_URL": repo_file(REPO / "epistemics.md"),
         "TRUMP_SVG": best_packing_svg(),
-        "NUMBER_LINE_MARKS": number_line_marks(facts, headline),
+        "CURRENT_BOUND_DEC": current.bounded_side_decimal,
+        "CURRENT_BOUND_TEX": current.bounded_side_tex,
+        "CURRENT_BOUND_INLINE_TEX": current.bounded_side_inline_tex,
+        "CURRENT_BOUND_PLAIN": current.bounded_side_plain,
+        "CURRENT_GAP": truncated(BEST_PACKING - current.bounded_side, tex=True),
+        "CURRENT_ENDPOINT_FRAC": frac_inline_tex(current.endpoint),
+        "CURRENT_ENDPOINT_DEC": decimal(current.endpoint),
+        "T025_POINT_ATOMS": f"{current.point_atoms:,}",
+        "T025_THRESHOLD_ATOMS": f"{current.threshold_atoms:,}",
+        "T025_POINT_MASS": decimal_or_rational(current.point_mass),
+        "T025_THRESHOLD_BUDGET": decimal_or_rational(current.threshold_budget),
+        "T025_TOTAL_BUDGET": decimal_or_rational(current.total_budget),
+        "T025_LEAST_EXCESS": frac_inline_tex(current.least_charge - 1),
+        "T025_DIRECTIONS": str(current.coarse_directions),
+        "T025_INTERVAL_DIRECTIONS": str(current.coarse_interval_directions),
+        "T025_CERT_URL": repo_file(THRESHOLD_CERTIFICATE),
+        "T025_PROOF_URL": repo_file(THRESHOLD_PROOF),
+        "T025_CLAIM_URL": repo_file(T025_CLAIM),
+        "T026_FINE_B": frac_inline_tex(current.fine_square_side),
+        "T026_TOTAL_BUDGET": decimal_or_rational(current.fine_total_budget),
+        "T026_TOTAL_DEC": truncated(current.fine_total_budget),
+        "T026_DIRECTIONS": str(current.fine_directions),
+        "T026_INTERVAL_DIRECTIONS": str(current.fine_interval_directions),
+        "T026_HALF_GAP": frac_inline_tex(current.fine_half_gap),
+        "T026_NORMALIZATION": frac_inline_tex(current.normalization),
+        "T026_FACTOR": current.dilation_factor_tex,
+        "T026_CERT_URL": repo_file(THRESHOLD_FINE_CERTIFICATE),
+        "T026_PROOF_URL": repo_file(THRESHOLD_CASE / "t-026-dilation-limit-proof.md"),
+        "T026_CLAIM_URL": repo_file(T026_CLAIM),
+        "T026_REVIEW_URL": repo_file(T026_REVIEW),
+        "T026_RECORD_URL": repo_file(CURRENT_BOUND_RECORD),
+        "NUMBER_LINE_MARKS": number_line_marks(facts, headline, current),
         "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
         "BEST_X": f"{line_x(float(BEST_PACKING)):.0f}",
-        "BAND_X": f"{line_x(float(headline.outer_side)):.0f}",
-        "BAND_W": f"{line_x(float(BEST_PACKING)) - line_x(float(headline.outer_side)):.0f}",
+        "BAND_X": f"{line_x(float(current.bounded_side)):.0f}",
+        "BAND_W": f"{line_x(float(BEST_PACKING)) - line_x(float(current.bounded_side)):.0f}",
     }
 
 
@@ -2260,8 +2447,8 @@ def drop_block(text: str, name: str) -> str:
 def wrap_figure(body: str, cert: str, *, visible: bool) -> str:
     """One certificate's copy of a figure, in a wrapper the switch can hide.
 
-    The blank line on each side of the two wrapper tags is load-bearing: a
-    Markdown HTML block runs to the next blank line, so a wrapper pressed
+    The blank line on each side of the two wrapper tags is required by Markdown parsing.
+    An HTML block runs to the next blank line, so a wrapper pressed
     against a paragraph would swallow it into the raw block and leave its
     Markdown unrendered.
     """
@@ -2350,6 +2537,7 @@ MARKDOWN_OUTPUT = PACKING / "site" / f"{RESULT_ID}-explainer.md"
 #: any of them would have left the deployed page stale with every gate green.
 RENDER_INPUTS = (
     CASE,
+    THRESHOLD_CASE,
     Path(__file__),
     PACKING / "devtools" / "prepare_explainer_math.py",
     PACKING / "devtools" / "measure_net_coarsening.py",
@@ -2393,7 +2581,7 @@ def _balanced(source: str, start: int, tag: str) -> int:
     raise SystemExit(f"{MARKDOWN.name}: an unclosed <{tag}> reached the publisher")
 
 
-_TEX_SPAN = re.compile(r'<span class="tex">(.*?)</span>', re.DOTALL)
+_TEX_SPAN = re.compile(r'<span class="(tex(?:-d)?)">(.*?)</span>', re.DOTALL)
 _SCREEN_ONLY = re.compile(r'<span class="screen-only">.*?</span>', re.DOTALL)
 _ANCHOR = re.compile(r'<a\s[^>]*?href="([^"]*)"[^>]*>(.*?)</a>', re.DOTALL)
 _IMG = re.compile(r"<img\s[^>]*>")
@@ -2404,7 +2592,12 @@ _SIMPLE_TAG = re.compile(r"</?(?:strong|b|em|i|code|span|br)\b[^>]*>")
 def _inline_markdown(fragment: str) -> str:
     """Inline HTML the article uses inside a caption, written as Markdown instead."""
     fragment = _SCREEN_ONLY.sub("", fragment)
-    fragment = _TEX_SPAN.sub(lambda m: f"${m.group(1).strip()}$", fragment)
+    fragment = _TEX_SPAN.sub(
+        lambda m: (
+            f"$${m.group(2).strip()}$$" if m.group(1) == "tex-d" else f"${m.group(2).strip()}$"
+        ),
+        fragment,
+    )
     fragment = _ANCHOR.sub(
         lambda m: f"[{_inline_markdown(m.group(2))}]({m.group(1)})", fragment
     )

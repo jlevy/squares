@@ -151,6 +151,20 @@ def test_n68_depth_bound_is_named_by_its_refusal_test() -> None:
             )
         ]
 
+    for name in ("MAX_POINT_ATOMS", "MAX_THRESHOLD_ATOMS", "MAX_DIRECTIONS"):
+        bound = _entry(receipt, f"cases/n11_threshold_certificate/verify_claim.py::{name}")
+        assert bound["status"] == "named"
+        assert [
+            (reference["path"], reference["function"], reference["kind"])
+            for reference in bound["named_by"]
+        ] == [
+            (
+                "tests/test_verify_threshold_claim.py",
+                "test_certificate_size_ceilings_refuse_before_condition_work",
+                "guard-message",
+            )
+        ]
+
     assert receipt["violations"] == []
     assert receipt["ok"] is True
     assert declared.main([]) == 0

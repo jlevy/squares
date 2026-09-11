@@ -434,6 +434,24 @@ def test_case_interval_accepts_the_table_the_front_matter_supports() -> None:
     assert check_case_interval(CURRENT_TABLE, CASE_FRONT) == []
 
 
+def test_case_interval_accepts_a_truncated_decimal_beside_the_exact_lower_bound() -> None:
+    front = {
+        "verified_upper_bound": {"value": "3.87708359002281417730789706010096"},
+        "verified_lower_bound": {
+            "value": "3.82644741057293974417",
+            "exact_form": "955000*sqrt(518400042893309449)/179696714646249",
+        },
+    }
+    table = (
+        "| Best known packing (upper bound) | `3.8770835…` | Walter Trump, 1979 |\n"
+        "| Best certified lower bound | "
+        "`955000*sqrt(518400042893309449)/179696714646249 = 3.8264474…` | T-026 |\n"
+        "| Bound gap | `0.0506362` | still open |\n"
+    )
+
+    assert check_case_interval(table, front) == []
+
+
 def test_case_interval_rejects_the_lower_bound_left_at_the_displaced_rung() -> None:
     """D-450's own shape: the row kept Stromquist's value after T-018 displaced it."""
     stale = CURRENT_TABLE.replace("`381/100 = 3.81`", "`2 + 4/√5 = 3.788854382…`")

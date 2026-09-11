@@ -1133,13 +1133,15 @@ results:
   - id: T-022
     claim: >-
       s(11) >= 38100*sqrt(8100042893309449)/899996306539 =
-      3.810025723614703, as a weak limit corollary of T-018's retained certificate. For
-      every positive rational q with q^2 below
+      3.810025723614703, proved by an exact dilation-limit corollary of T-018's retained
+      certificate. For every positive rational q with q^2 below
       810004289330944900000000/809993351783841654158521, common scaling preserves the
       source hypotheses other than containment, and the exact sharpened containment
       lemma rules out a packing at side qL. Rational density and upward embedding
-      exclude every real side below the supremum. This is not a certificate or a no-fit
-      decision at the endpoint, and it does not prove a strict inequality there.
+      exclude every real side below the supremum, which proves the displayed lower
+      bound. The direct certificate family covers strict rational sides below the
+      supremum; the density-and-embedding step supplies the exact `>=` conclusion at
+      the supremum.
     scope:
       n_values:
         - 11
@@ -1149,7 +1151,7 @@ results:
       score: 5
       rationale: >-
         The rubric's S5 anchor is movement on a central open case, and this raises the
-        exact lower endpoint of the smallest open case by about 0.0000257236147034
+        proved lower bound for the smallest open case by about 0.0000257236147034
         beyond T-018. The movement derives from an exact support identity and unused
         strictness margin in an existing certificate; it is not a new certificate
         architecture and leaves a gap of about 0.0670578664 to Trump's packing.
@@ -1180,10 +1182,11 @@ results:
     next_rung: >-
       C5 was reached by the mapped 2026-09-06 source-distinct review. A second,
       method-distinct derivation could separately earn C4 but would not improve the
-      bound. This endpoint is only the uniform fixed-B, single-core strict-containment
-      supremum. Direction-specific cores, two-core endpoint averaging, or exact
+      bound. This dilation limit is only the uniform fixed-B, single-core
+      strict-containment supremum. Direction-specific cores, two-core endpoint
+      averaging, or exact
       fixed-atom core shrinkage might extract more from the same data; the present
-      argument cannot prove a strict bound at its own endpoint.
+      argument does not establish s(11) greater than the displayed bound.
   - id: T-023
     claim: >-
       At q = 96/25, if four distinct unit squares have selected strict cores of side
@@ -1258,19 +1261,20 @@ results:
   - id: T-024
     claim: >-
       s(11) >= 3175000*sqrt(518400042893309449)/598960960743657 = 3.816609502788862,
-      as a weak limit corollary of T-018's retained atoms re-certified on a finer
-      direction net. The 1121 atoms of the retained 381/100 certificate, on the same
-      D4-symmetric sites and with every weight multiplied by 200000/198931, form a
-      certificate of the retained form at side 381/100 on the 1440-step net with
-      shrunken side 2494953/2500000, decided from its frozen bytes by the exact
-      event-cell sweep and by the interval branch and bound, which agree at least cell
-      mass exactly 1. For every positive rational q with q^2 below
+      proved by an exact dilation-limit corollary of T-018's retained atoms re-certified
+      on a finer direction net. The 1121 atoms of the retained 381/100 certificate, on
+      the same D4-symmetric sites and with every weight multiplied by 200000/198931,
+      form a certificate of the retained form at side 381/100 on the 1440-step net with
+      shrunken side 2494953/2500000, decided from its frozen bytes by the exact event-cell
+      sweep and by the interval branch and bound, which agree at least cell mass exactly
+      1. For every positive rational q with q^2 below
       3240000268083184056250000000000/3228788092454681596330191602841, common scaling
       preserves the source hypotheses other than containment, and the exact sharpened
       containment lemma rules out a packing at side q times 381/100. Rational density
-      and upward embedding exclude every real side below the supremum. This is not a
-      certificate or a no-fit decision at the endpoint, and it does not prove a strict
-      inequality there.
+      and upward embedding exclude every real side below the supremum, which proves the
+      displayed lower bound. The direct certificate family covers strict rational sides
+      below the supremum; the density-and-embedding step supplies the exact `>=`
+      conclusion at the supremum.
     scope:
       n_values:
         - 11
@@ -1280,7 +1284,7 @@ results:
       score: 5
       rationale: >-
         The rubric's S5 anchor is movement on a central open case, and this raises the
-        exact lower endpoint of the smallest open case by about 0.0065838 beyond T-022
+        proved lower bound for the smallest open case by about 0.0065838 beyond T-022
         and by about 0.0066095 beyond the T-018 certificate side, for about 0.0277551
         beyond Stromquist in total. The movement comes from the shrink that a finer net
         admits under Condition 4, measured on the frozen T-018 atoms; it is not a new
@@ -1340,8 +1344,9 @@ results:
       unit side 3.8288 on any net containing its six directions. The next movement is
       therefore a re-optimised certificate at a finer net (H-153), which the covering
       LP on the frozen sites already shows to be below eleven at 720 steps, and past
-      the cap the threshold atoms of H-152. The endpoint itself remains a weak limit
-      with no endpoint certificate and no strict inequality.
+      the cap the threshold atoms of H-152. The displayed lower bound is proved by a
+      dilation-limit argument rather than one individual-side certificate at the
+      algebraic value.
   - id: T-025
     claim: >-
       s(11) >= 191/50 = 3.82, by a threshold certificate: 584 point atoms of mass
@@ -1352,9 +1357,7 @@ results:
       the family's total budget is 685457679/62500000 = 10.967322864, strictly below 11,
       while every event cell at every net direction carries charge at least
       100000203/100000000. The counting argument then rules out eleven unit squares with
-      pairwise disjoint interiors in a container of side 191/50. This is an endpoint
-      certificate at the container side itself, not a limit: it proves no strict
-      inequality at 3.82 and carries no dilation family.
+      pairwise disjoint interiors in a container of side 191/50.
     scope:
       n_values:
         - 11
@@ -1364,7 +1367,7 @@ results:
       score: 5
       rationale: >-
         The rubric's S5 anchor is movement on a central open case, and this raises the
-        verified lower endpoint of the smallest open case by 0.0033905 beyond T-024 and
+        proved lower bound for the smallest open case by 0.0033905 beyond T-024 and
         by 0.0311456 beyond Stromquist, leaving the interval [3.82, 3.877084] and a gap
         of 0.057084. What earns the score beyond the arithmetic is the architecture: the
         exact depth-one ceiling family retained at this same side proves that no
@@ -1377,18 +1380,19 @@ results:
       by: repository replay of the two-route retention gate, against a source-distinct adversarial review of the theorem
     novelty: apparently-novel
     composition: >-
-      One certificate, decided twice. Conditions 1, 1', 2', 3 and 4 are closed-form
-      consequences of the frozen bytes and were recomputed without sqpack in the review;
-      Condition 5' is decided by the exact event-cell sweep of sqpack.fractional.threshold,
-      whose dense-grid and slab evaluations agree at every direction and whose witness
-      charge is re-evaluated by membership counting, and independently by the interval
-      branch and bound of sqpack.fractional.threshold_interval over the doubled net, which
-      never invokes the D4 argument. The two share the loader, the conditions and the net,
-      and no part of how Condition 5' is decided; the gate refuses the record unless both
-      accept and agree on the least charge exactly. C5 rests on those two machine routes
-      together with the mapped adversarial review of the theorem, which found no soundness
-      defect and whose open items -- the second route, the controls, and a stranger-facing
-      statement in a case directory -- this registration closes.
+      One certificate, decided twice. The certificate is instantiated at its named side,
+      191/50; no dilation family is part of T-025. Conditions 1, 1', 2', 3 and 4 are
+      closed-form consequences of the frozen bytes and were recomputed without sqpack in
+      the review; Condition 5' is decided by the exact event-cell sweep of
+      sqpack.fractional.threshold, whose dense-grid and slab evaluations agree at every
+      direction and whose witness charge is re-evaluated by membership counting, and
+      independently by the interval branch and bound of sqpack.fractional.threshold_interval
+      over the doubled net, which never invokes the D4 argument. The two share the loader,
+      the conditions and the net, and no part of how Condition 5' is decided; the gate
+      refuses the record unless both accept and agree on the least charge exactly. C5 rests
+      on those two machine routes together with the mapped adversarial review of the theorem,
+      which found no soundness defect and whose open items -- the second route, the controls,
+      and a stranger-facing statement in a case directory -- this registration closes.
     evidence:
       - E-n011-threshold-certificate
       - E-n011-threshold-interval-decision
@@ -1397,6 +1401,8 @@ results:
       hypothesis: H-152
     artifacts:
       - packing/cases/n11_threshold_certificate/certificate.json
+      - packing/cases/n11_threshold_certificate/verify_claim.py
+      - packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
       - packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md
       - packing/devtools/decide_threshold_certificate.py
       - packing/src/sqpack/fractional/threshold.py
@@ -1408,47 +1414,48 @@ results:
       - packing/tests/test_decide_threshold_certificate.py
       - packing/tests/test_fractional_threshold.py
       - packing/tests/test_fractional_threshold_interval.py
+      - packing/tests/test_verify_threshold_claim.py
+      - packing/tests/test_verify_threshold_claim_oracle.py
     next_rung: >-
       Push the side with the same loop: the LP that produced these atoms is run again at
       a larger side, and the ceiling family says the answer cannot come from point atoms
       alone on the stated core domain. The finer-net and dilation continuation has now
-      been measured and registered as T-026, with weak limit 3.826447410572939744.
-      That is a separate corollary; T-025 retains its endpoint scope at 191/50. No
-      standalone reader outside this repository decides a threshold certificate: the
-      retained verify_claim.py reads point atoms only, so a stranger cannot yet check
-      these bytes without trusting this project's own code, which is the gap that keeps
-      the architecture short of what the point-atom rungs have. The endpoint itself is
-      exact and needs no limit argument, so no dilation record belongs at this rung.
+      been measured and registered as T-026, proving
+      s(11) >= 3.826447410572939744 by an exact dilation-limit argument. That is a
+      separate corollary. T-025 itself proves the ordinary lower bound
+      s(11) >= 191/50 at V4/C5 and its certificate is instantiated at that named side.
+      The self-contained T-025 claim embeds its standard-library verifier and certificate
+      bytes. T-025 needs no limit argument, so no dilation record belongs at this rung.
   - id: T-026
     claim: >-
-      s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939, as a
-      weak limit corollary of T-025's threshold certificate re-certified on a finer
-      direction net. The 584 point atoms and 320 threshold atoms of the retained 191/50
-      threshold certificate, on the same D4-symmetric sites and with every weight
-      multiplied by 500000000/498684619, form a threshold certificate of the retained
-      form at side 191/50 on the 1440-step net with shrunken side 249507/250000, decided
-      from its frozen bytes by the exact event-cell sweep and by the interval branch and
-      bound, which agree at least cell charge exactly 1. The rescaled total budget is
-      5483661432/498684619 = 10.996251384, still strictly below eleven. For every
-      positive rational q with q^2 below
+      s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939,
+      proved by an exact dilation-limit corollary of T-025's threshold certificate
+      re-certified on a finer direction net. The 584 point atoms and 320 threshold atoms
+      of the retained 191/50 threshold certificate, on the same D4-symmetric sites and
+      with every weight multiplied by 500000000/498684619, form a threshold certificate
+      of the retained form at side 191/50 on the 1440-step net with shrunken side
+      249507/250000, decided from its frozen bytes by the exact event-cell sweep and by
+      the interval branch and bound, which agree at least cell charge exactly 1. The
+      rescaled total budget is 5483661432/498684619 = 10.996251384, still strictly below
+      eleven. For every positive rational q with q^2 below
       32400002680831840562500000000/32290909254655439869209770001, common scaling of the
       point atoms, the threshold atoms' points, the container side and the shrunken side
       preserves the source hypotheses other than containment, and the exact sharpened
       containment lemma rules out a packing at side q times 191/50. Rational density and
-      upward embedding exclude every real side below the supremum. This is not a
-      certificate or a no-fit decision at the endpoint and it proves no strict
-      inequality there; T-025's 191/50 remains the largest side this project certifies
-      at the container side itself.
+      upward embedding exclude every real side below the supremum, which proves the
+      displayed lower bound. The direct certificate family covers strict rational sides
+      below the supremum; the density-and-embedding step supplies the exact `>=`
+      conclusion at the supremum.
     scope:
       n_values:
         - 11
     verification: V4
-    confirmation: C4
+    confirmation: C5
     significance:
       score: 5
       rationale: >-
         The rubric's S5 anchor is movement on a central open case, and this raises the
-        exact lower endpoint of the smallest open case by about 0.0064474 beyond T-025's
+        proved lower bound for the smallest open case by about 0.0064474 beyond T-025's
         191/50 and by about 0.0375930 beyond Stromquist's 2 + 4/sqrt(5), leaving the
         interval [3.826447410572939, 3.877084] and a bound gap of about 0.0506362. The
         movement is the shrink a finer net admits under Condition 4, measured on the
@@ -1460,7 +1467,7 @@ results:
         reach, so a further doubling of the net would have to be paid for out of 0.0037
         of budget, and net refinement alone is near exhausted on these atoms.
       scored: '2026-09-09'
-      by: repository replay of the two-route retention gate and the corollary tool, without external review
+      by: repository replay of the two-route retention gate and the corollary tool, with a mapped source-distinct review
     novelty: apparently-novel
     composition: >-
       Derived from a full replay of the 1440-step threshold source's Conditions 1, 1',
@@ -1472,10 +1479,11 @@ results:
       which fail differently: the exact event-cell sweep of sqpack.fractional.threshold,
       whose dense-grid and slab evaluations must agree at every direction, and the
       interval branch and bound of sqpack.fractional.threshold_interval over the doubled
-      net, which never invokes the D4 argument. No source-distinct review has been
-      mapped for this corollary, so it does not reach C5; T-025's review covered the
-      threshold theorem and T-022's covered the dilation argument, and this result reuses
-      both unchanged with new B and D. The 720-step certificate retained beside it
+      net, which never invokes the D4 argument. C5 adds the mapped source-distinct review
+      of the self-contained claim, covering the threshold count, exact sweep, dilation,
+      and endpoint inference. T-025's earlier review covers the threshold theorem and
+      T-022's covers the dilation argument; the new review checks their composition with
+      the T-026 values and embedded data. The 720-step certificate retained beside it
       crosses at the same shrink and reaches
       955000*sqrt(129600042893309449)/89874194646249 = 3.825347845913112, which isolates
       the remaining 0.0010996 as the effect of D halving alone.
@@ -1485,9 +1493,12 @@ results:
       - E-n011-threshold-net1440-dilation-limit
       - E-n011-threshold-net720-certificate
       - E-n011-threshold-net720-dilation-limit
+    review_artifact: docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md
     artifacts:
       - packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json
       - packing/cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json
+      - packing/cases/n11_threshold_certificate/verify_claim.py
+      - packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
       - packing/cases/n11_threshold_certificate/certificate-191-50-net720.json
       - packing/cases/n11_threshold_certificate/t-026-net720-dilation-limit-corollary.json
       - packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md
@@ -1498,6 +1509,8 @@ results:
       - packing/tests/test_dilation_corollary.py
       - packing/tests/test_measure_threshold_net_refinement.py
       - packing/tests/test_decide_threshold_certificate.py
+      - packing/tests/test_verify_threshold_claim.py
+      - packing/tests/test_verify_threshold_claim_oracle.py
     next_rung: >-
       The rescaled 1440-step budget is 5483661432/498684619, leaving
       1869377/498684619 below eleven. The measured 720- and 1440-step certificates
@@ -1506,9 +1519,8 @@ results:
       cannot improve the limit. Re-certification on another net, re-optimization
       on a finer net, changed site generation, and richer charge atoms remain
       distinct hypotheses. The retained plateau duals with depth above one are
-      useful separation inputs but not globally feasible obstruction witnesses.
-      C5 needs a mapped
-      source-distinct review of this corollary on the threshold atoms. And no standalone
-      reader outside this repository decides a threshold certificate at any net, so a
-      stranger cannot check these bytes without trusting this project's own code; that
-      gap is T-025's and this rung does not close it.
+      useful separation inputs but not globally feasible obstruction witnesses. The
+      self-contained T-026 claim embeds the standard-library threshold verifier, the
+      1440-step certificate, and the exact dilation record; its mapped source-distinct
+      review supplies C5. A further assurance step would require proof-assistant
+      formalization, external review, or an independently reproduced full decision.
