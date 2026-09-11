@@ -61,6 +61,7 @@ class State:
     walls: list[int] | None = None
     rung: str = "none"
     trace: list[Array] = field(default_factory=list)
+    animation: list[dict[str, Any]] = field(default_factory=list)
     log: list[dict[str, Any]] = field(default_factory=list)
 
 
@@ -298,12 +299,59 @@ def run(strategy: dict[str, Any], *, keep_trace: bool = False) -> State:
             state.log[-1]["rung"] = state.rung
         before = len(state.trace)
         MECHANISMS[mechanism](state, phase, rng)
+        # Frames are tagged with the phase that produced them as they arrive, because
+        # afterwards nothing can tell them apart -- and whether a frame was guided is the
+        # one thing an exporter is required to carry.
+        guided = bool(state.log[-1].get("guided"))
+        for poses in state.trace[before:]:
+            state.animation.append(
+                {
+                    "side": state.side,
+                    "squares": [[float(v) for v in pose] for pose in poses],
+                    "phase": phase.get("label", mechanism),
+                    "guided": guided,
+                    "feasible": violation(poses, state.side) <= 1e-9,
+                }
+            )
         state.log[-1] |= {
             "side": state.side,
             "violation": violation(state.poses, state.side),
             "frames": len(state.trace) - before,
         }
     return state
+
+
+def animation_document(
+    strategy: dict[str, Any], state: State, *, duration_seconds: float = 8.0
+) -> dict[str, Any]:
+    """Turn a finished run into a PackingAnimation, the format the renderers read.
+
+    Logical time is evenly spaced over the frames rather than proportional to the work each
+    phase did. A phase that needed four thousand iterations and one that needed forty are
+    equally interesting to watch, and pacing by iteration count would give the whole screen
+    to whichever mechanism happened to be slowest.
+    """
+    frames = state.animation or [
+        {
+            "side": state.side,
+            "squares": [[float(v) for v in pose] for pose in state.poses],
+            "phase": "final",
+            "guided": any(p.get("guided") for p in state.log),
+            "feasible": violation(state.poses, state.side) <= 1e-9,
+        }
+    ]
+    span = max(1, len(frames) - 1)
+    known = record(state.n)[1]
+    return {
+        "name": strategy["name"],
+        "n": state.n,
+        "guided": any(f["guided"] for f in frames),
+        "source": {"strategy": strategy["name"]},
+        "duration_seconds": duration_seconds,
+        "palette": {"hue": "identity", "shade": "none"},
+        "reference": {"best_known": float(known)},
+        "frames": [dict(f, t=index / span) for index, f in enumerate(frames)],
+    }
 
 
 def main() -> int:
@@ -327,8 +375,7 @@ def main() -> int:
     }
     if o.trace:
         o.trace.write_text(
-            json.dumps({"strategy": strategy, "frames": [f.tolist() for f in state.trace]}),
-            encoding="utf-8",
+            json.dumps(animation_document(strategy, state), sort_keys=True), encoding="utf-8"
         )
     if o.json:
         print(json.dumps(payload, default=str, sort_keys=True))
