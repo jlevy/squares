@@ -1,34 +1,111 @@
 # pyright: reportPrivateUsage=false
-"""What `render_explainer_pdf --check` says when the page does not draw the same twice.
+"""The PDF difference report, render count, and required-image wait.
 
 The check itself needs a browser, a rendered page and about nine seconds a render, and
 it lives in the Pages job. What is here is the part that only matters on the day it
-fails, and that therefore has to be right before then: that a disagreement is reported
-with the object it happened in, and that the number of renders the CLI asks for is the
-number `check` takes.
+fails, and that therefore has to be right before then: a disagreement names its object,
+the CLI count reaches `check`, and an image that cannot become drawable refuses capture.
 
-Both are regressions waiting to happen rather than hypotheticals. On 2026-09-10 this
+All three are regressions waiting to happen rather than hypotheticals. On 2026-09-10 this
 check failed on main for the first time, said `786119 then 786117 bytes` and nothing
 else, and the renders were gone -- so the cause had to be guessed between the three the
 module docstring names. And the CLI-to-function join is the one D-488 was made of: a
 count that argparse accepts and nothing forwards looks exactly like a count that works.
+The image wait initially discarded every decode rejection, which could let two PDFs
+agree on the same absent figure.
 
-Nothing here launches a browser: `render_pdf_bytes` is replaced with a list of synthetic
-documents in the shapes Chromium writes, so the whole file runs in milliseconds and
-belongs in the quick lane.
+Nothing here launches a browser. `render_pdf_bytes` is replaced with synthetic
+documents in the shapes Chromium writes, and the exact image-wait JavaScript runs under
+Node against small image-element stand-ins. The file belongs in the quick lane.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
+from textwrap import dedent
 
 import pytest
+from nodejs_wheel import node
 
 from devtools import render_explainer_pdf as pdf
 
 #: A document with one object, in the shape the writer emits: the header at a line start,
 #: the dictionary declaring what the object is, and a body that the cases below vary.
 _HEADER = b"%PDF-1.4\n"
+
+
+def _run_image_wait(case: str) -> None:
+    """Run the exact browser-side image wait against small image-element stand-ins."""
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        let document;
+    """)
+    script += f"const waitForImages = {pdf._IMAGES_DECODED};\n"
+    script += dedent(f"""
+        (async () => {{
+          {case}
+        }})().catch((error) => {{
+          console.error(error.stack || error);
+          process.exit(1);
+        }});
+    """)
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
+def test_the_image_wait_forces_lazy_images_eager_before_decode() -> None:
+    _run_image_wait("""
+        const calls = [];
+        const image = {
+          loading: 'lazy', complete: true, naturalWidth: 640, naturalHeight: 480,
+          currentSrc: 'file:///atlas.svg',
+          async decode() { calls.push(this.loading); },
+        };
+        document = {images: [image]};
+        await waitForImages();
+        assert.deepEqual(calls, ['eager']);
+    """)
+
+
+def test_a_decode_rejection_is_safe_only_for_an_available_image() -> None:
+    """A changed request may reject while its replacement is already drawable."""
+    _run_image_wait("""
+        const image = {
+          loading: 'lazy', complete: true, naturalWidth: 640, naturalHeight: 480,
+          currentSrc: 'file:///atlas.svg',
+          async decode() { throw new Error('the request changed'); },
+        };
+        document = {images: [image]};
+        await waitForImages();
+    """)
+
+
+def test_an_image_without_a_drawable_current_request_refuses_the_render() -> None:
+    _run_image_wait("""
+        document = {images: [
+          {
+            loading: 'lazy', complete: false, naturalWidth: 0, naturalHeight: 0,
+            currentSrc: '', src: 'file:///missing-atlas.svg',
+            async decode() { throw new Error('request failed'); },
+          },
+          {
+            loading: 'eager', complete: true, naturalWidth: 0, naturalHeight: 0,
+            currentSrc: 'file:///empty-atlas.svg', src: 'file:///empty-atlas.svg',
+            async decode() {},
+          },
+        ]};
+        await assert.rejects(waitForImages(), (error) => {
+          assert.match(error.message, /2 required images are not drawable after decode/);
+          assert.match(
+            error.message,
+            /missing-atlas[.]svg.*complete=false.*0x0.*request failed/,
+          );
+          assert.match(error.message, /empty-atlas[.]svg.*complete=true.*0x0/);
+          return true;
+        });
+    """)
 
 
 def _pages(count: int) -> bytes:

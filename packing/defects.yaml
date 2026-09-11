@@ -16370,12 +16370,12 @@ defects:
     second is the more economical account of a clean minus two with nothing else moving, and
     it reads as sub-pixel rounding on the runner rather than a page that was unfinished.
   regression: >-
-    `tests/test_render_explainer_pdf.py`, twelve cases over synthetic documents in the
-    shapes the writer emits, in the quick lane at 0.07s. They pin that a disagreement names
-    the object and quotes both windows, that `/Subtype` beats `/Type` where both are
-    present, that a short untyped object does not borrow a later object's type, that a
-    truncated render is reported as truncated, that two renders which agree are not given an
-    invented difference, and that the count the CLI accepts is the count `check` draws --
-    the join D-488 was made of. Nothing here prevents the race, which is what contained
-    means: the guard is that the next occurrence arrives diagnosable.
+    `tests/test_render_explainer_pdf.py`, fifteen cases over synthetic documents in the
+    shapes the writer emits and the exact image-wait JavaScript under Node. They pin that a
+    disagreement names the object and quotes both windows, that `/Subtype` beats `/Type`
+    where both are present, that a short untyped object does not borrow a later object's
+    type, that truncated and equal renders are reported honestly, that the CLI count reaches
+    `check`, and that capture refuses an image with no drawable current request. Nothing here
+    prevents the race, which is what contained means: the guard is that the next occurrence
+    arrives diagnosable.
   recorded_in: packing/devtools/render_explainer_pdf.py

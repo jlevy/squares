@@ -137,13 +137,34 @@ _MARGIN_BOX_SAMPLE = "Aa Gg 0123"
 #: why this is insurance rather than a fix.
 #: It is here for the reason the margin-box half of `_FACES_APPLIED` is -- a figure that is
 #: not finished is a figure drawn at whatever it had, and neither `load` nor any number of
-#: frames bounds a multi-megabyte decode. The decode is allowed to fail rather than hang
-#: the export: an image that refuses is the page's defect and `check_published_site` is
-#: where it is caught.
+#: frames bounds a multi-megabyte decode. A decode rejection is accepted only when the
+#: image's current request is already complete with nonzero intrinsic dimensions. The HTML
+#: image contract makes that state an available paint source; `complete` alone is not enough,
+#: because it is also true for a broken request. Every other rejection, and a resolved decode
+#: that still leaves no drawable image, refuses the export with the source and state.
 _IMAGES_DECODED = """async () => {
   const images = [...document.images];
   for (const image of images) image.loading = 'eager';
-  await Promise.all(images.map((image) => image.decode().catch(() => undefined)));
+  const failures = (await Promise.all(images.map(async (image, index) => {
+    let rejection = null;
+    try {
+      await image.decode();
+    } catch (error) {
+      rejection = error instanceof Error ? error.message : String(error);
+    }
+    if (image.complete && image.naturalWidth > 0 && image.naturalHeight > 0) return null;
+    const source = image.currentSrc || image.src || `image ${index + 1}`;
+    const reason = rejection === null
+      ? 'decode resolved without a drawable current request'
+      : `decode rejected: ${rejection}`;
+    return `${source}: complete=${image.complete}, `
+      + `natural=${image.naturalWidth}x${image.naturalHeight}, ${reason}`;
+  }))).filter((failure) => failure !== null);
+  if (failures.length > 0) {
+    const noun = failures.length === 1 ? 'image is' : 'images are';
+    throw new Error(`${failures.length} required ${noun} not drawable after decode: `
+      + failures.join('; '));
+  }
 }"""
 
 #: The added faces, settled -- both the ones the document tree asks for and the ones
