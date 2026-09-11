@@ -5,12 +5,18 @@ title: "[epic] Phase 6: the workbench stops being a prototype"
 kind: epic
 status: open
 priority: 1
-version: 2
-spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
+version: 8
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m292qr3ayhe4zxrnmcjz9vb4
+  - is-01m292qrjevy600v0j0h1h5zp3
+  - is-01m292qs1re33kvh0tvnm6xctd
+  - is-01m292rgtadddppyrzfkjz1sn4
+  - is-01m292rh6bg0nxsd2nyv4q6x99
 created_at: 2026-09-11T16:53:49.786Z
-updated_at: 2026-09-11T18:53:57.661Z
+updated_at: 2026-09-11T20:33:24.333Z
 ---
 The page carries a banner calling itself a prototype and the banner is honest: a retained spike, excluded from the lint floor, run by hand, drawing with its own copy of the palette. It is also the thing the owner uses and the thing the video is captured from, and those two facts cannot both keep being true.
 
@@ -24,8 +30,8 @@ E. It lives where the code lives, and the banner comes off
 
 ## Notes
 
-The deployment is ALREADY the one we want, and the conversion does not touch it. build_workbench_site.py writes site/workbench/, pages.yml builds it with --check before the upload, Pages serves it at /workbench/ while the explainer keeps /, and the path filter names its inputs with two tests holding it there. Phase 6 changes what FEEDS that pipeline, not the pipeline.
+The conversion now has its own plan spec: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md, which carries the measured sizings, the five chunks with disjoint owned-file lists, the risk table and the two open questions.
 
-The first seam is cut as of b0fa05a6: the panel's mathematics is set by render_explainer.katex_css and guarded by render_explainer.EXTERNAL_REFERENCE, so the spike now imports project code rather than carrying its own copy. That is the direction every remaining chunk goes in, and it forced the fix that made the spike importable at all -- build_candidate.py held an absolute path to one worktree, so it only ran from that checkout and would have run silently against the wrong tree from any other.
+The chunks gained one. The owner's rule -- 'you should not embed JavaScript or HTML inside of Python' -- is now Phase 6D (think-7f3p) rather than an option inside 6B, and it is the chunk no auto-fix touches. Order: 6D C1 (the page's script leaves the HTML), then 6D C2 (the checkers' probes leave Python) and 6B (the Python floors) and the instruments in parallel, then 6A (palette from sqpack, which edits the extracted script), then 6C and 6E last with the banner.
 
-The conversion table is now in the plan spec under 'The deployment is already the real one'.
+Not a chunk, but landed on the way: three defects the owner found on the built page, all fixed and measured -- think-lkbk (the lower numeral in the panel's serif), think-uy41 (bound arrows clipped, rail ends doubling as scale ends), think-9yzq (mode switch carried the run across). One left open: think-2m96 (the first frame of every step is an invalid packing).

@@ -5,12 +5,12 @@ title: "Phase 6E: the workbench moves into devtools, and the banner comes off"
 kind: task
 status: open
 priority: 2
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
+version: 2
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T16:54:14.013Z
-updated_at: 2026-09-11T16:54:14.013Z
+updated_at: 2026-09-11T20:33:23.513Z
 ---
 The generator is a script run by path and the instruments (compare_palette.py, grade_motion.py, measure_law.py, measure_greens.py, capture_stills.py, smoke_capture.py) sit beside it in the spike tree. They become devtools modules run with python -m, alongside build_workbench_site.py and capture_video.py which already are.
 

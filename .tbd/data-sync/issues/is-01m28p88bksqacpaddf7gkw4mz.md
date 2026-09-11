@@ -5,12 +5,12 @@ title: "Phase 6C: the workbench's gates run where gates run"
 kind: task
 status: open
 priority: 1
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
+version: 2
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T16:54:13.617Z
-updated_at: 2026-09-11T16:54:13.617Z
+updated_at: 2026-09-11T20:33:22.667Z
 ---
 check_workbench.py, check_revision6.py, check_revision7.py and test_candidate.py are run by hand, which means they are run when someone remembers. Between them they are the only thing holding the page's behaviour: the colour map, the force law, the relationship graph, the hand-drawn contact graph, the panel's fit, and now the trajectory-cost ceiling.
 
