@@ -16,6 +16,9 @@ from xml.etree import ElementTree as ET
 import pytest
 
 from sqpack.render.model import (
+    CheckKind,
+    CheckSummary,
+    EvidenceTier,
     PackingFrame,
     PackingTrajectory,
     Point2,
@@ -131,8 +134,6 @@ def test_colour_is_muted_exactly_where_a_frame_is_not_a_packing() -> None:
     transition as its answer, and it costs nothing because the frame already declares what
     it establishes.
     """
-    from sqpack.render.model import CheckKind, CheckSummary, EvidenceTier
-
     checked = CheckSummary(
         passed=True,
         kind=CheckKind.NUMERICAL,
