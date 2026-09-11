@@ -3,14 +3,18 @@ type: is
 id: is-01m28p893qgbvhs61xbj0qxv0h
 title: "Phase 7: grade a physics configuration on the motion AND the outcome"
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T16:54:14.390Z
-updated_at: 2026-09-11T16:54:14.390Z
+updated_at: 2026-09-11T20:11:53.847Z
+closed_at: 2026-09-11T20:11:53.846Z
+close_reason: "Built in 7e96fdfb: grade_motion.py reports outcome and motion separately and combines them with declared weights; six configurations ranked. The next steps it names (reduce wander, sweep the laws, move to devtools with Phase 6E, a grade floor in the gate) are follow-on work, not this bead."
+resolution: null
+duplicate_of: null
 ---
 Built: atlas/known-best/video/spikes/v2-transitions/grade_motion.py, and recorded here because the METHOD is the deliverable, not the script.
 
