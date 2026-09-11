@@ -5,15 +5,16 @@ title: Clarify T-026 as a proved lower bound across the explainer and reader doc
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m27258dy9wympsk083fspbm0
   - is-01m2729rgwe9tf9kk6m8hv5242
   - is-01m27341tgrm865t7htkcacdf5
+  - is-01m27hc9136cfzbb0gcq3b90pm
 created_at: 2026-09-10T23:18:28.662Z
-updated_at: 2026-09-11T02:00:38.479Z
+updated_at: 2026-09-11T06:09:48.057Z
 ---
 Revise PR148 after the merged n=11 stack so the headline states s(11) >= 3.826447410572939744... directly, replaces misleading 'weak limit' theorem language with dilation-limit proof terminology, and explains the result's V4/C4 evidence status consistently in the explainer, tutorial, README, synopsis, and result register. Regenerate derived views and pass local and hosted validation before merge readiness.
 
