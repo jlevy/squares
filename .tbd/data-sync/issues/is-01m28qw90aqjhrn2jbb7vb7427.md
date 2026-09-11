@@ -3,16 +3,16 @@ type: is
 id: is-01m28qw90aqjhrn2jbb7vb7427
 title: Drop the progress scale along the bottom of the stage
 kind: task
-status: open
+status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T17:22:38.216Z
-updated_at: 2026-09-11T17:31:08.063Z
-closed_at: 2026-09-11T17:30:59.674Z
-close_reason: "superseded: this is about the gap bar's scale, which landed; the progress scale at the bottom of the stage is a different element and stays open"
+updated_at: 2026-09-11T18:26:36.197Z
+closed_at: 2026-09-11T18:26:36.197Z
+close_reason: "Done: #progress, its track, fill, scale, ticks, cursor and riding n are gone, with buildScale/syncScale/scaleLabels. progress() still reports the number they drew. Both flagged dependencies handled: digitWidth is measured off the gap bar's record label, and the panel's 1032 clearance is no longer needed."
 resolution: null
 duplicate_of: null
 ---
