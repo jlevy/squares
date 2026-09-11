@@ -75,7 +75,9 @@ def _build_twice() -> tuple[bytes, bytes]:
 
 
 def _extract_json(page: str) -> dict:
-    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.DOTALL)
+    match = re.search(
+        r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.DOTALL
+    )
     assert match, "embedded record missing"
     return json.loads(match.group(1).replace("<\\/", "</"))
 
@@ -83,10 +85,10 @@ def _extract_json(page: str) -> dict:
 def _walk(node, path=()):
     if isinstance(node, dict):
         for key, value in node.items():
-            yield from _walk(value, path + (key,))
+            yield from _walk(value, (*path, key))
     elif isinstance(node, list):
         for index, value in enumerate(node):
-            yield from _walk(value, path + (index,))
+            yield from _walk(value, (*path, index))
     else:
         yield path, node
 
@@ -133,7 +135,9 @@ def test_candidate() -> None:
     assert a == b, "two builds differ"
     shipped = HERE / "index.html"
     if shipped.exists():
-        assert shipped.read_bytes() == a, "shipped index.html is stale: rerun build_candidate.py"
+        assert shipped.read_bytes() == a, (
+            "shipped index.html is stale: rerun build_candidate.py"
+        )
 
     page = a.decode("utf-8")
 
@@ -149,7 +153,9 @@ def test_candidate() -> None:
         for polygon in slide["p"].split(";"):
             assert len(polygon.split(" ")) == 4, f"n={n}: corner count"
         assert slide["a"].startswith(f"n = {n}."), f"n={n}: aria text"
-    templates = dict(re.findall(r'<template id="facts-(\d+)">(.*?)</template>', page, re.DOTALL))
+    templates = dict(
+        re.findall(r'<template id="facts-(\d+)">(.*?)</template>', page, re.DOTALL)
+    )
     assert len(templates) == 324
     for n in range(FIRST, LAST + 1):
         assert str(n) in templates, f"n={n}: facts template"
@@ -157,31 +163,47 @@ def test_candidate() -> None:
     assert all(len(fill) == 7 and fill.startswith("#") for fill in data["palette"])
 
     # 3. the only http(s) strings are the source-URL facts in the record
-    match = re.search(r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.DOTALL)
+    match = re.search(
+        r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.DOTALL
+    )
     outside = page[: match.start()] + page[match.end() :]
-    assert "http://" not in outside and "https://" not in outside, "URL outside the record"
+    assert "http://" not in outside, "URL outside the record"
+    assert "https://" not in outside, "URL outside the record"
     url_paths = []
     for path, value in _walk(data):
         if isinstance(value, str) and ("http://" in value or "https://" in value):
             url_paths.append(path)
-            assert path[0] == "slides" and path[2] == "src", f"URL at {path}"
+            assert path[0] == "slides", f"URL at {path}"
+            assert path[2] == "src", f"URL at {path}"
     # Every case has one: 147 from the manifest (kingbird / unitsquare renderings),
     # 177 exact grids from the frontier's record-catalogue resource.
     assert len(url_paths) == 324, f"{len(url_paths)} source URLs"
 
     # 4. nothing that could reach the network
-    assert "fetch(" not in page and "XMLHttpRequest" not in page and "import(" not in page
-    assert "innerHTML" not in page and "eval(" not in page
+    assert "fetch(" not in page
+    assert "XMLHttpRequest" not in page
+    assert "import(" not in page
+    assert "innerHTML" not in page
+    assert "eval(" not in page
     local_refs = {"#surd", f"#{build_candidate.STAR_ID}", f"#{build_candidate.OPEN_ID}"}
     local_refs.update(f"#{ident}" for ident in build_candidate.BADGE_IDS.values())
     for attr in re.findall(r'\b(?:src|href)="([^"]*)"', page):
-        assert attr.startswith("data:") or attr in local_refs, f"external reference {attr[:60]!r}"
+        assert attr.startswith("data:") or attr in local_refs, (
+            f"external reference {attr[:60]!r}"
+        )
     csp = re.search(r'Content-Security-Policy" content="([^"]+)"', page).group(1)
-    assert "default-src 'none'" in csp and "connect-src 'none'" in csp
-    assert "Date.now" not in page and "Math.random" not in page and "setInterval" not in page
+    assert "default-src 'none'" in csp
+    assert "connect-src 'none'" in csp
+    assert "Date.now" not in page
+    assert "Math.random" not in page
+    assert "setInterval" not in page
 
     # 5. badges and the open group come from the record, one row each, nothing invented
-    for ident in list(build_candidate.BADGE_IDS.values()) + [build_candidate.STAR_ID, build_candidate.OPEN_ID]:
+    for ident in [
+        *build_candidate.BADGE_IDS.values(),
+        build_candidate.STAR_ID,
+        build_candidate.OPEN_ID,
+    ]:
         assert page.count(f'<symbol id="{ident}">') == 1, f"symbol {ident}"
     composite = build_candidate.read_composite(build_candidate.DEFAULT_REPO)
     badge_tally = 0
@@ -192,17 +214,23 @@ def test_candidate() -> None:
         rows = re.findall(r"<li[^>]*>(.*?)</li>", status, re.DOTALL)
         expected = _expected_badges(composite[n])
         assert len(rows) == len(expected), f"n={n}: badge rows {rows}"
-        for row, (ident, label) in zip(rows, expected):
-            assert f'<use href="#{ident}"' in row and row.endswith(label), f"n={n}: {row!r} vs {label!r}"
+        for row, (ident, label) in zip(rows, expected, strict=True):
+            assert f'<use href="#{ident}"' in row, f"n={n}: {row!r} vs {label!r}"
+            assert row.endswith(label), f"n={n}: {row!r} vs {label!r}"
         badge_tally += len(rows)
-        open_block = re.search(r'<div class="open"><p class="open-head">Open</p><ul>(.*?)</ul></div>', body, re.DOTALL)
+        open_block = re.search(
+            r'<div class="open"><p class="open-head">Open</p><ul>(.*?)</ul></div>',
+            body,
+            re.DOTALL,
+        )
         assert open_block, f"n={n}: open group missing"
         expected_open = _expected_open(composite[n])
         rows = re.findall(r"<li[^>]*>(.*?)</li>", open_block.group(1), re.DOTALL)
         if expected_open:
             assert len(rows) == len(expected_open), f"n={n}: open rows"
-            for row, text in zip(rows, expected_open):
-                assert f'<use href="#{build_candidate.OPEN_ID}"' in row and row.endswith(text), f"n={n}: {row!r}"
+            for row, text in zip(rows, expected_open, strict=True):
+                assert f'<use href="#{build_candidate.OPEN_ID}"' in row, f"n={n}: {row!r}"
+                assert row.endswith(text), f"n={n}: {row!r}"
         else:
             assert rows == ["nothing open"], f"n={n}: empty open group {rows}"
         # Notes on their own line under the value: never inside a `.line`.
@@ -214,20 +242,28 @@ def test_candidate() -> None:
         # it annotates and the empty exact slot comes after it, so the note cannot
         # read as the lower bound's label; the slots are the same heights either way.
         lines = re.findall(r'<p class="(line[^"]*|sub[^"]*)">', body)
-        kinds = [(c.split()[0],) if c.startswith("sub") else tuple(c.split()[:2]) for c in lines]
+        kinds = [
+            (c.split()[0],) if c.startswith("sub") else tuple(c.split()[:2]) for c in lines
+        ]
         exact_empty = '<p class="line exact empty"></p>' in body
         assert exact_empty == _no_exact_form(composite[n]), f"n={n}: exact slot"
         degree = composite[n]["exactness"]["degree"]
         degree_here = degree is not None and degree >= 2
         assert (f"algebraic degree {degree}" in body) == degree_here, f"n={n}: degree note"
         if exact_empty:
-            expected_slots = [("line", "side"), ("sub",), ("line", "exact"), ("line", "lower"), ("sub",)]
+            expected_slots = [
+                ("line", "side"), ("sub",), ("line", "exact"), ("line", "lower"), ("sub",)
+            ]
             degree_slot = 1
         else:
-            expected_slots = [("line", "side"), ("line", "exact"), ("sub",), ("line", "lower"), ("sub",)]
+            expected_slots = [
+                ("line", "side"), ("line", "exact"), ("sub",), ("line", "lower"), ("sub",)
+            ]
             degree_slot = 2
         assert kinds == expected_slots, f"n={n}: slots {lines}"
-        assert (lines[degree_slot] == "sub") == degree_here, f"n={n}: degree slot {lines[degree_slot]!r}"
+        assert (lines[degree_slot] == "sub") == degree_here, (
+            f"n={n}: degree slot {lines[degree_slot]!r}"
+        )
         if exact_empty and degree_here:
             degree_under_side += 1
         # The `n =` line is its own block directly above the numeral's.
@@ -235,52 +271,76 @@ def test_candidate() -> None:
             '<p class="lead"><span class="var">n</span><span class="eq">=</span></p>'
             f'<p class="headline"><span class="nval">{n}</span></p>'
         ) in body, f"n={n}: headline"
-        assert body.count('<div class="urlrow"><dd class="url">') == 1, f"n={n}: source URL line"
-        assert body.endswith("</dl></div>"), f"n={n}: the URL line is not the last thing in the panel"
+        assert body.count('<div class="urlrow"><dd class="url">') == 1, (
+            f"n={n}: source URL line"
+        )
+        assert body.endswith("</dl></div>"), (
+            f"n={n}: the URL line is not the last thing in the panel"
+        )
     assert badge_tally == sum(len(_expected_badges(entry)) for entry in composite.values())
     assert degree_under_side == sum(
         1
         for entry in composite.values()
         if _no_exact_form(entry) and (entry["exactness"]["degree"] or 0) >= 2
     )
-    assert "Minimal polynomial" not in page and "<sup>" not in page
+    assert "Minimal polynomial" not in page
+    assert "<sup>" not in page
 
     # 6. the type: weight, the one scarlet, and the scale
     css = _stage_css(page)
     headline_rule = re.search(r"\n\.headline \{([^}]*)\}", css).group(1)
-    assert "font-weight: 400" in headline_rule and f"font-size: {build_candidate.NUMERAL_SIZE}px" in headline_rule
+    assert "font-weight: 400" in headline_rule
+    assert f"font-size: {build_candidate.NUMERAL_SIZE}px" in headline_rule
     faces = re.findall(
-        r'@font-face \{\n  font-family: "([^"]+)";\n  font-style: (\w+);\n  font-weight: ([^;]+);', page
+        r'@font-face \{\n  font-family: "([^"]+)";\n  font-style: (\w+);\n'
+        r"  font-weight: ([^;]+);",
+        page,
     )
     assert tuple(faces) == FACES, f"embedded faces {faces}"
     assert not any(weight == "700" for _, _, weight in faces)
-    assert "font-weight: 700" not in css and "bold" not in css, "a stage rule asks for a bold face"
+    assert "font-weight: 700" not in css, "a stage rule asks for a bold face"
+    assert "bold" not in css, "a stage rule asks for a bold face"
     plain = re.sub(r"data:font/woff2;base64,[A-Za-z0-9+/=]+", "", outside)
-    assert plain.lower().count("a3123f") == 1, f"scarlet written {plain.lower().count('a3123f')} times"
+    assert plain.lower().count("a3123f") == 1, (
+        f"scarlet written {plain.lower().count('a3123f')} times"
+    )
     star_rule = re.search(r"\.status li\.star \{([^}]*)\}", css).group(1)
     assert build_candidate.NEW_COLOR in star_rule, "scarlet is not on the star row"
-    assert re.search(rf'<symbol id="{build_candidate.STAR_ID}"><polygon points="[^"]+" fill="currentColor"/>', page)
-    assert "accent" not in css and "accent" not in "".join(templates.values())
+    assert re.search(
+        rf'<symbol id="{build_candidate.STAR_ID}"><polygon points="[^"]+" '
+        r'fill="currentColor"/>',
+        page,
+    )
+    assert "accent" not in css
+    assert "accent" not in "".join(templates.values())
     sizes: set[int] = set()
     for selectors, declarations in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
         selector_list = [s.strip() for s in selectors.strip().split(",")]
-        chrome = all(any(s.startswith(p) for p in build_candidate.CHROME_SELECTORS) for s in selector_list)
+        chrome = all(
+            any(s.startswith(p) for p in build_candidate.CHROME_SELECTORS)
+            for s in selector_list
+        )
         for value in re.findall(r"font-size:\s*([^;]+);", declarations):
             if chrome:
                 continue
-            assert re.fullmatch(r"\d+px", value.strip()), f"stage font-size {value!r} in {selectors.strip()!r}"
+            assert re.fullmatch(r"\d+px", value.strip()), (
+                f"stage font-size {value!r} in {selectors.strip()!r}"
+            )
             px = int(value.strip()[:-2])
             assert px >= 28, f"{px}px in {selectors.strip()!r}"
             sizes.add(px)
-    assert sizes == set(build_candidate.TYPE_SCALE) and len(sizes) <= 4, sizes
+    assert sizes == set(build_candidate.TYPE_SCALE), sizes
+    assert len(sizes) <= 4, sizes
     assert max(sizes) <= 4.5 * min(sizes)
     assert "font-size" not in build_candidate.JS
     assert not re.search(r'style="[^"]*font-size', page), "inline font-size in the markup"
 
     # 7. the progress bar and the timing
     assert page.count('<div id="progress" aria-hidden="true">') == 1
-    assert '<span class="end lo">1</span>' in page and '<span class="end hi">324</span>' in page
-    assert 'id="progress-fill"' in page and 'id="progress-cursor"' in page
+    assert '<span class="end lo">1</span>' in page
+    assert '<span class="end hi">324</span>' in page
+    assert 'id="progress-fill"' in page
+    assert 'id="progress-cursor"' in page
     assert data["timing"] == {"dwell": 1.5, "fade": 0.5}
     assert page.count('<div id="facts" class="facts-host"></div>') == 1
 
@@ -304,8 +364,10 @@ def test_candidate() -> None:
     # 9. the headless survey of every n (optional, needs Playwright and its browser)
     survey_note = "skipped"
     try:
-        import playwright.sync_api  # noqa: F401
-        import render_review
+        # Both are optional extras, and section 9 is skipped without them; the imports
+        # stay inside the try for that reason, so PLC0415 is waived.
+        import playwright.sync_api  # noqa: F401, PLC0415
+        import render_review  # noqa: PLC0415
     except ImportError:
         render_review = None
     if render_review is not None:
@@ -319,7 +381,9 @@ def test_candidate() -> None:
         footer = min(m["footerTop"] for m in result["measures"].values())
         bar = min(m["barTop"] for m in result["measures"].values())
         lower_tops = sorted({round(m["lowerTop"], 1) for m in result["measures"].values()})
-        serif_weights = sorted({w for m in result["measures"].values() for w in m["serifWeights"]})
+        serif_weights = sorted(
+            {w for m in result["measures"].values() for w in m["serifWeights"]}
+        )
         assert len(lower_tops) == 1, f"the lower-bound line moves between n: {lower_tops}"
         assert serif_weights == ["400"], f"PT Serif elements resolve to weights {serif_weights}"
         survey_note = (
@@ -331,7 +395,8 @@ def test_candidate() -> None:
     print(
         f"ok: {len(a)} bytes, 324 slides, {len(url_paths)} source URLs, {badge_tally} badges, "
         f"{degree_under_side} degree notes under a side value, {len(faces)} faces, "
-        f"{duration:.1f} s, sizes {sorted(sizes)}, node={'yes' if node else 'skipped'}, survey={survey_note}"
+        f"{duration:.1f} s, sizes {sorted(sizes)}, "
+        f"node={'yes' if node else 'skipped'}, survey={survey_note}"
     )
 
 
