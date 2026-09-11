@@ -468,6 +468,82 @@ Splitting the data from the page would fix it and would break self-containment, 
 matters the answer is a smaller default payload -- the twenty-five-pair build already
 exists at 714 kB -- rather than an external fetch.
 
+### Phase 6: the workbench stops being a prototype
+
+The page carries a banner calling itself a prototype, and the banner is honest: it is a
+retained spike, excluded from the lint floor, run by hand, and drawing with its own copy
+of the palette. It is also, now, the thing the owner uses and the thing the video is
+captured from. Those two facts cannot both keep being true.
+
+**What makes it a spike is five specific things, not its age**, and each is a chunk of
+work that can land on its own:
+
+**A. One source for the palette.** The page has its own `PALETTE` and `SHADES` tables,
+copied from `sqpack/render/style.py` and kept in step by hand.
+`compare_palette.py` measures that they still agree, which is a check standing in for a
+guarantee. The build should emit them into the page from `sqpack.render.style` and
+`sqpack.render.color` at generation time, so a palette change reaches the workbench the
+way it reaches every other drawing.
+The same for the shade ramp and the angle-class contract.
+
+**B. The floors.** `build_candidate.py`, the checkers and the measurement tools are
+outside ruff and BasedPyright.
+The page’s five thousand lines of JavaScript have no checker at all.
+Bringing the Python under the floors is mechanical; the JavaScript needs a decision, and
+the honest options are a linter in the build or extracting the logic into modules the
+build inlines.
+
+**C. The gates run where gates run.** `check_workbench.py`, `check_revision6.py`,
+`check_revision7.py` and `test_candidate.py` are run by hand, which means they are run
+when someone remembers.
+They belong on the pull-request surface with the rest, under `packing-validate`, with
+the trajectory-cost ceiling among them.
+
+**D. It reads the contracts.** The page embeds its own pose JSON and hard-codes its
+modes. Phase 2 is what makes it read a `PackingStrategy` and play a `PackingAnimation`,
+and until it does, the contract is a format nothing consumes.
+
+**E. It lives where the code lives.** The generator is a script run by path; the
+instruments (`compare_palette.py`, `grade_motion.py`, `measure_law.py`,
+`measure_greens.py`) sit beside it in the spike tree.
+They become `devtools` modules run with `python -m`, and the banner comes off — which
+should be the *last* step, because the banner is what makes the current state honest.
+
+### Phase 7: grade the motion, not just the answer
+
+**A physics configuration is graded on both halves of what it is asked to do, and
+neither alone.** A run graded only on where it ends up can thrash across the stage and
+still score well, because the lock-in carries whatever is left; one graded only on the
+journey can glide smoothly to somewhere wrong.
+
+`grade_motion.py` reports the two families separately and combines them only at the end,
+with the weights written down:
+
+| family | measure | what it catches |
+| --- | --- | --- |
+| outcome | `residual`, `mean`, `turn` | the run did not arrive, and the lock-in is carrying it |
+| motion | `wander` | a square strays from the straight line between its ends — thrashing, as against travel |
+| motion | `jerk` | the worst single-frame step — a jump, as against a glide |
+| motion | `overlap` | squares passing through each other, which is the physics failing rather than looking bad |
+
+Measured over eight matched steps at the shipped defaults: residual 0.044 sides, turn
+1.16 degrees, wander 0.696, jerk 0.429, overlap 0.157, grade 0.292. **The outcome half
+is solved and the motion half is not**, which is a finding the combined number alone
+would have hidden.
+
+Ranking six configurations by grade puts `physics, anneal 0` first at 0.302 and every
+`bodies` setting last, and says the annealing dial buys nothing the grade values — the
+shake was there to reach the record, and the tightening phase now does that.
+That is exactly the use the instrument is for: picking physics and annealing parameters
+against a number rather than against an impression.
+
+**The method is the point, and it generalises.** Sampling frames through a run and
+measuring how the arrangement approaches the optimum is how the physics gets understood,
+not only how the film gets tuned.
+Every parameter this project can turn — the force law, the wall law, the annealing dial,
+the tightening, the container’s breath — has a grade attached to it now, and a sweep
+over them is the same instrument run more times.
+
 ## Implementation Map
 
 Every row names something that exists unless marked new.
@@ -490,6 +566,11 @@ Ordered by dependency: nothing below can be checked until the row above it works
 | 13 | `think-zvor` | `devtools/capture_video.py` (new) | `main`, `_capture`, `_encode` | **Mostly done, by a different route.** Frames come from the *built workbench page* driven through its own clock, not from a trace: a captured frame is the frame the page draws. Declared size (1080p or 4K) and frame rate, ffmpeg to H.264, and a receipt naming the page by digest and, per step, the record it aimed at and whether it landed. Measured on `n = 2..8` at 24 fps: 476 frames, 19.8 s, 1.2 MB, 28 s end to end, all seven on the record. **Remaining:** the receipt names records rather than strategy documents, and there is no guide-phase label guard, both because the page does not yet play a `PackingStrategy` (row 14). |
 | 14 | `think-6qxx` | the workbench template | a JS `MECHANISMS` | Mirror the Python registry, reading the same schema, so the hosted page executes documents rather than hard-coded modes. |
 | 15 | `think-6qxx` | `tests/test_mechanism_conformance.py` (new) | — | One strategy document through both implementations; the two animations compared within a declared tolerance. |
+| 17 | `think-fk8h` | `build_candidate.py`, the page’s `PALETTE` / `SHADES` | the colour tables | Phase 6A. Emit them from `sqpack.render.style` and `sqpack.render.color` at generation time, so there is one source rather than two kept in step by hand. |
+| 18 | `think-vi3v` | the spike’s Python and its JavaScript | the exclusions | Phase 6B. Drop the lint exclusion and fix what falls out; decide what checks the page’s script. |
+| 19 | `think-tmqs` | `src/sqpack/cli/validate.py` | a new step | Phase 6C. `check_workbench.py` on the pull-request surface with a declared budget. |
+| 20 | `think-g0lh` | the spike tree, `devtools/` | the generator and the instruments | Phase 6E. They become `devtools` modules; the prototype banner comes off last. |
+| 21 | ~~`think-ovei`~~ | `grade_motion.py` (new) | `grade`, `measure` | **Done.** Phase 7. Outcome and motion graded separately and combined with declared weights; six configurations ranked. |
 | 16 | ~~`think-n0e0`~~ | `.github/workflows/pages.yml`, `devtools/build_workbench_site.py` | `RENDER_INPUTS`, both `paths:` lists | **Done.** A `site/workbench/` build step inside `build`, running `--check` so the page must reproduce itself and pass its own self-containment check before the upload; `site/index.html` is untouched. Its inputs are declared and the filter covers them, held by two tests of its own. |
 
 Rows 1 to 5 are the only ones with no prerequisite, and nothing is watchable until they
