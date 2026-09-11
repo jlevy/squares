@@ -1581,9 +1581,12 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const digits = (text.match(/[0-9]/g) || []).length;
     if (digits > 0 && typeof label.getComputedTextLength === 'function') {
       const width = label.getComputedTextLength();
-      // The label carries a relation glyph and a space as well as its digits, and the digits are
-      // about four fifths of its width at the two and three digit labels this bar ever shows.
-      if (width > 0) digitWidth = (width * 0.8) / digits;
+      // The label is digits and a decimal point, nothing else: the relation glyph it used to carry
+      // went when the arrows took over saying which bound is which. Counting the point as about
+      // half a figure is close enough for a collision test, and the four-fifths fudge the relation
+      // needed is gone -- it was making every label read a fifth narrower than it is, which is how
+      // `5.12` came to be clamped to `.12` at the left end of the bar.
+      if (width > 0) digitWidth = width / (digits + 0.5);
     }
   }
 
@@ -3419,16 +3422,24 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // The two numbers, in the relations the panel states them with. The record's sits under its
     // tick unless that would put it on top of the lower bound's, in which case it steps aside: the
     // tick is the mark, the numeral only has to be next to it.
-    gapbarLowerLabel.textContent = gapbarInfo.proved ? '' : '≥ ' + fmt(lower, 2);
-    gapbarRecordLabel.textContent = '≤ ' + fmt(record, 2);
+    // **The number alone, with no relation glyph.** Two reasons, and the second is why it looked
+    // wrong. The arrow under or over each value already says which bound it is, so a relation on
+    // top of it is the same fact twice. And the sans face this bar is set in has no `<=` or `>=`:
+    // the glyph fell through to the symbols face, which is a serif at a different size, so the two
+    // labels came out in two faces and two sizes -- exactly the thing a diagram label must not do.
+    gapbarLowerLabel.textContent = gapbarInfo.proved ? '' : fmt(lower, 2);
+    gapbarRecordLabel.textContent = fmt(record, 2);
     // Each bound's value sits over its own arrow, the upper above the track and the lower below,
-    // so the two can no longer collide and neither has to step aside for the other. They are only
-    // kept inside the bar's own width.
-    const half = (text) => (text.length * digitWidth * 0.92) / 2;
-    const inside = (x, w) => Math.max(w, Math.min(GAPBAR.width - w, x));
-    gapbarRecordLabel.setAttribute('x', fmt(inside(xr, half(gapbarRecordLabel.textContent)), 2));
-    gapbarLowerLabel.setAttribute(
-      'x', fmt(inside(gapbarX(lower), half(gapbarLowerLabel.textContent)), 2));
+    // so the two can no longer collide and neither has to step aside for the other. All they need
+    // is to stay inside the bar, and the width they need for that is MEASURED rather than estimated
+    // from a figure width -- an estimate was off by a fifth and clamped `5.12` to `.12` at the left
+    // end. `getComputedTextLength` is exact and is right there.
+    const inside = (label, x) => {
+      const half = (label.getComputedTextLength ? label.getComputedTextLength() : 0) / 2;
+      label.setAttribute('x', fmt(Math.max(half, Math.min(GAPBAR.width - half, x)), 2));
+    };
+    inside(gapbarRecordLabel, xr);
+    inside(gapbarLowerLabel, gapbarX(lower));
     return gapbarInfo;
   }
   function gapbarX(value) {
