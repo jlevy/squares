@@ -10,7 +10,7 @@ session:
   title: Atlas expansion to n = 324 and the poster composite
   date: '2026-09-07'
   started_at: '2026-09-07T07:20:00Z'
-  deadline_at: '2026-09-13T18:00:00Z'
+  deadline_at: '2026-09-10T15:20:00Z'
   branch: claude/atlas-expansion-300-400-9f79fc
   goal: Plan and begin the owner-directed widening of the frontier register and known-best
     atlas from n = 1..100 to n = 1..324, survey public sources beyond n = 100, and prepare the
@@ -121,35 +121,38 @@ session:
     focus: process
     recording: contemporaneous
     clock_role: work
-    objective: Hold the record open for the remaining owner decisions (325..400 and the
-      poster raster, both optional), the hosted re-run of the re-priced tiers, the full
-      checkpoint before merge, and the harness rollup that lets this session name what it
-      cost and the gate that certified it. D2 was confirmed on 2026-09-10 -- the derived
-      numerical facts are retained in this project's own atlas because they are
-      mathematical facts, for the Kingbird catalogue, derived facts only, with
-      raw_asset_retained false standing. No further autonomous work is planned in this
-      phase.
+    objective: Hold the record open for the owner's decisions (D2, 325..400, the poster
+      raster), the hosted re-run of the re-priced tiers, the full checkpoint before merge, and
+      the harness rollup that lets this session name what it cost and the gate that certified
+      it. No further autonomous work is planned in this phase.
     bead: think-0juv
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: The bounded work is complete and committed on PR 111; only records that
-      depend on the owner, CI and the harness remain. D2, the one decision that blocked the
-      merge, cleared on 2026-09-10; what is left of the owner's list is optional.
-    budget_minutes: 8730
+      depend on the owner, CI and the harness remain.
+    budget_minutes: 4220
     started_at: '2026-09-07T15:30:00Z'
-    deadline_at: '2026-09-13T17:00:00Z'
+    deadline_at: '2026-09-10T13:50:00Z'
     expected_output: A terminal session record with its rollup and certifying gate named, and
       the epic closed at merge.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: The owner stops the line or reverts D2.
     fallback: Leave the session open with this phase and the handoff entry as the recovery
       state.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Terminalize the record once the rollup exists and the full checkpoint has run.
+    outcome: The finalization deadline passed after the two recorded extensions without the
+      native harness data needed for an exact resource receipt and without a retained full
+      checkpoint on the handed-over source. The corpus and poster work remain as recorded, but
+      this phase stops rather than extending its clock a third time.
+    evidence:
+    - packing/atlas/known-best/known-best-1-324.svg
+    - packing/benchmarks/gate-cost-at-324/README.md
+    stop_reason: The second and final extension expired before exact native resource
+      measurement and certifying full-gate evidence became available. Neither value can be
+      reconstructed from phase clocks, delegation durations, prose, or partial checks.
+    next_action: Under think-5hak, preserve the unmeasured resource state and obtain a fresh
+      certifying gate before treating this stopped checkpoint as merge-ready evidence.
   primary_bead: think-0juv
-  status: in_progress
+  status: stopped
   budget:
     # 480 for the work; extended once, at 2026-09-07T15:30Z, to hold the record open for
     # the finalization phase below, not to continue autonomous work (D-395). Extended a
@@ -162,10 +165,10 @@ session:
     # after session-045, so that half needs the rollup; the certifying-gate line could be
     # declared without it, but the full checkpoint phase 4 names was not obtained before
     # merge, so it stays the owner's to declare. No work continues under this extension.
-    # There is no third: by 2026-09-13T17:00Z either the rollup exists and the record closes
-    # through close_session (think-y0hr), or the gate gains an honest unmeasured terminal
-    # state (think-kfpr) and the record closes as stopped under it.
-    wall_minutes: 9280
+    # There is no third: the 2026-09-10T13:50Z deadline passed without the native harness
+    # source needed for an exact receipt. The record therefore closes as stopped under the
+    # honest unmeasured-state repair tracked by think-5hak; no usage is reconstructed.
+    wall_minutes: 4800
     checkpoint_minutes: 240
   stop_conditions:
   - Stop a phase when its bounded output is complete and validated; do not start a corpus chunk
@@ -177,8 +180,9 @@ session:
     before: 100 frontier cases, 100 known-best rows, 101 prospective seed witnesses without
       claims, 123 located-but-unretained Kingbird cases, no composite beyond 1-100.
     after: 324 frontier cases and 324 known-best rows (141 catalogue-derived, 177 grid and 6
-      UnitSquare cases; 59 proved); the prospective seed retired with a pointer; no composite
-      beyond 1-100 yet. Screen and rigidity totals at 324 are recorded in the evidence register.
+      UnitSquare cases; 59 proved); the prospective seed retired with a pointer; the 1..324
+      poster composite retained and published beside the 1-100 figure. Screen and rigidity
+      totals at 324 are recorded in the evidence register.
   delegations:
   - task: Map the known-best atlas pipeline end to end and every hard-coded n = 1..100 site
     operator: Claude Explore delegate
@@ -628,16 +632,26 @@ session:
     passed on CI after the re-pricing, and the checks and suite jobs failed only on drift rules
     against hundred-case records, refreshed in 543a1f2f. The full checkpoint is not yet
     obtained.
+  - The unmeasured-state repair passed 69 focused session, consumer and synopsis tests, Ruff,
+    BasedPyright, and schema validation over 324 frontmatter records and 590 pure-YAML datasets.
+    The live checkers report session-099 as the sole explicitly unmeasured stopped session.
+  - 'full gate: fast at cc98c7740eeaef5026ee8191192c63db86d30e3b: passed'
+  resource_usage_unmeasured:
+    reason: native_harness_data_unavailable
+    detail: The native harness data needed to produce an exact receipt for this historical
+      session is unavailable in the current environment. Session clocks, delegation durations,
+      prose estimates and partial validation timings do not determine resource usage, so no
+      value is reconstructed.
+    disposition_bead: think-5hak
+    handoff_role: administrative_closeout
   resource_rollups: []
-  stop_reason: null
-  next_action: The plan's Phases 0 through 5 are terminal on PR 111 and the calibration
-    boundary held throughout; the session stays open, with its clock extended to 2026-09-10
-    (twice; the budget note rules out a third time and names what closes it, think-y0hr),
-    until the owner confirms D2 and the two open questions, the re-priced tiers are read on the
-    next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and
-    the harness has written this session's rollup so the record can name what it cost and the
-    gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the
-    caveated form.
+  stop_reason: The plan's implementation through Phase 5 is retained, but the second and final
+    closeout extension expired without exact native resource measurement or a retained full
+    checkpoint over the handed-over source. The session stops without a third extension and
+    makes both evidence gaps explicit.
+  next_action: Keep resource usage unmeasured unless exact native harness data becomes available;
+    the source checkpoint is certified at cc98c774, and current n11 work continues under
+    Agenda035.
 
 ---
 <!-- This document follows common-doc-guidelines.md.

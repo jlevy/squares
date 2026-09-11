@@ -9,7 +9,7 @@ agenda:
   id: agenda-033
   title: Overnight Owner-Geometry Research
   updated: '2026-09-10'
-  status: active
+  status: completed
   objective: Make the largest defensible progress toward stronger n11 lower bounds by independently auditing
     the five-dot branch exclusion, strengthening forced-owner geometry using the walls, and expanding
     certified cases only where exact evidence supports it. Preserve unchanged global bounds until an exhaustive
@@ -228,7 +228,7 @@ agenda:
     owner_focus: insight
     instances:
     - 11
-    state: tentative
+    state: stopped
     priority: 3
     question: Does the full-support pricing reserve merit time after the owner-geometry discriminators?
     budget: 'Reserve only: one explicit strategic decision, no launch without a new protocol and sufficient
@@ -239,10 +239,24 @@ agenda:
     bead: think-en2r
     depends_on:
     - BC-318
-    next_evidence: Keep H135 unrun until the strategy checkpoint explicitly selects it.
+    next_evidence: H135 remained unrun in this agenda. The fresh daytime reserve is owned by BC-331
+      and think-lkvd; the old protocol and output path remain untouched.
     workflows:
     - research-loop
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - packing/campaign/hypotheses/H-135-paired-full-support-pricing.md
+    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    outcomes:
+    - scope: Was H135 selected and run during agenda033?
+      classification: never-opened
+      result: The reserve was never activated and no H135 target ran. A fresh forward allocation carries
+        the unchanged scientific question without reusing exp134 or its output path.
+      evidence:
+      - packing/campaign/hypotheses/H-135-paired-full-support-pricing.md
+      - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+      disposition: defer-dependency
+      follow_up: think-lkvd
   - id: BC-322
     purpose: measurement_validation
     owner_focus: efficiency
@@ -320,7 +334,7 @@ agenda:
     owner_focus: correctness
     instances:
     - 11
-    state: in_progress
+    state: complete
     priority: 1
     question: Which conclusions follow from the published owner-geometry evidence, and which still require
       routing, unit-parent, joint-compatibility or occupied-mass premises?
@@ -334,10 +348,9 @@ agenda:
     depends_on:
     - BC-320
     - BC-323
-    next_evidence: 'The required global routing statement is: for every hypothetical physical packing P,
-      there exists at least one valid owner selection for P whose selected family has been excluded. The
-      current record does not prove that statement. Complete the interpretation block before selecting or
-      registering another scientific target.'
+    next_evidence: 'The required global routing statement remains: for every hypothetical physical packing
+      P, there exists at least one valid owner selection for P whose selected family has been excluded. The
+      daytime agenda separates that theorem from parent-domain, threshold, and support experiments.'
     workflows:
     - factual-review
     program: n11-structure-and-conditional-dots
@@ -345,94 +358,96 @@ agenda:
     - docs/project/research/research-2026-09-09-n11-evidence-and-inference.md
     - docs/project/research/research-2026-09-09-n11-inference-audit.md
     - docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md
+    outcomes:
+    - scope: Which conclusions follow from the combined owner-geometry evidence, and which premises remain?
+      classification: achieved
+      result: The terminology-first evidence account and independent reviews now distinguish observed
+        finite results from parent, routing, joint-compatibility and occupied-mass premises. PR139 merged
+        the two strands after a matching 73-check checkpoint. No target ran in this interpretation block.
+      evidence:
+      - docs/project/research/research-2026-09-09-n11-evidence-and-inference.md
+      - docs/project/research/research-2026-09-09-n11-inference-audit.md
+      - docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md
+      disposition: retire-success
+      follow_up: null
+  closeout:
+    documentation_review:
+    - path: README.md
+      decision: checked-current
+      reason: The owner-geometry agenda changes no README claim; the later threshold result is handled by
+        its own documentation lane.
+    - path: SYNOPSIS.md
+      decision: updated
+      reason: The generated agenda state and current handoff are refreshed at transfer to agenda035.
+    - path: TUTORIAL.md
+      decision: checked-current
+      reason: This agenda adds no tutorial theorem; current-bound exposition is assigned to the standalone
+        explainer block.
+    - path: conventions.md
+      decision: not-applicable
+      reason: No mathematical or data convention changed.
+    - path: development.md
+      decision: checked-current
+      reason: Existing validation tiers and publication rules govern the transfer.
+    - path: operating-rules.md
+      decision: checked-current
+      reason: The block used the existing experiment, delegation, documentation and closeout rules.
+    changes:
+    - name: combined-series-closeout
+      result: PR137, PR142, PR145, PR147 and PR139 are merged; BC321 transfers unrun and BC324 closes on the
+        retained interpretation rather than a new target.
+      paths:
+      - packing/campaign/agendas/agenda-033-overnight-owner-geometry.md
+      - docs/project/research/research-2026-09-09-n11-evidence-and-inference.md
+    validation:
+    - scope: combined-pr139-checkpoint
+      status: passed
+      evidence: All 73 declared fast and deferred checks passed on the reviewed PR139 merge tree before
+        merge; the actual merge tree matches that reviewed tree.
+    replanning:
+      candidates:
+      - bead: think-rm3k
+        workflow: factual-review
+        priority: 1
+        rationale: Complete the terminology-first inference audit before transferring any scientific target.
+      - bead: think-fx2y
+        workflow: research-loop
+        priority: 1
+        rationale: Test the admitted necessary-parent idea on one saved residual escape after source admission.
+      - bead: think-yc80
+        workflow: research-loop
+        priority: 1
+        rationale: Change the threshold atom family and support together rather than repeat the A6 obstruction.
+      - bead: think-02l0
+        workflow: insight-iteration
+        priority: 1
+        rationale: Attack the missing structural contact and owner-selection normal form directly.
+      selected:
+        bead: think-rm3k
+        workflow: factual-review
+        rationale: The terminal agenda selection is the completed evidence-and-inference audit. Fresh parent
+          and changed-atom work transfers to agenda035 rather than becoming a retroactive agenda033 selection.
+      operator_input:
+        status: revised
+        note: The owner replaced the interrupted overnight run with smaller daytime blocks and a separate
+          explainer pull request.
 ---
-# Overnight Owner-Geometry Agenda
+# Overnight Owner-Geometry Agenda — Closed
 
-The current proof excludes one specified four-owner geometric branch at side 3.84. The
-global lower bound remains about 3.8100257236. A global continuation needs the following
-routing statement: for every hypothetical physical packing P, there exists a valid owner
-selection for P whose selected family has been excluded.
-The record does not yet prove that statement.
+This agenda produced one specified conditional exclusion at side `96/25`, exact
+wall-aware owner domains, several sharply scoped negative results, and the terminology
+and inference account used to reconcile the work with the threshold-certificate branch.
+The global lower bound was later improved independently by T-025 and T-026. PR139 merged
+the two strands at `3a18a05a6af75e3800612549d5a3c5fe419b96f2` after all 73 declared
+checks passed on the matching merge tree.
 
-**Entry point: W6 research loop with W2 factual-review deliverables.** Session123 is
-terminal; Session124 is the latest terminal interpretation checkpoint.
-Session124 resumed at 2026-09-10 01:52:40 UTC on BC324 under `think-rm3k` after the
-elapsed interruption.
-The reviewed interpretation is captured; successor certification and publication
-follow-up remain pending.
-This block reconciles terminology, experiment scope and inference before another
-scientific target is selected.
-The interruption is not active compute, and no expired scientific allowance is reset.
-
-Exp150 refuted individual-owner exclusion of its saved escape in the unchanged B-core
-owner model; its four witnesses all occurred at frame 0. It did not test continuous unit
-parents or simultaneous owners.
-Exp151 refuted the fixed sixth site, and exp152 retained a nonempty two-core
-intersection. Exp153 then resolved the whole fixed-D-plus-one-site family negatively
-in22.36 seconds: the exact site region becomes empty after 188 directions.
-This eliminates every choice of that sixth site under the selected four-patch residual
-relaxation. It does not refute the tuple label or exclude a physical packing.
-
-A reviewed two-attainer verifier is available but remains unrun.
-If a future registered run constructs and independently replays two strict D-missed
-B-cores, their disjointness would force at least two units of added nonnegative mass and
-nominal total mass at least seven with the original five unit atoms retained.
-An available-mass conclusion would also need a separate proof that those five sites lie
-outside the occupied-patch union.
-BC324 records these inference boundaries before any successor is selected.
-
-## The order of work
-
-1. Independently audit the existing five-dot coverage with exact polygon unions.
-2. Intersect possible owner centers with the container constraints.
-   Every owner in a class then contains the resulting common footprint.
-   Test all 16 coarse classes before adding more angle or position splits.
-3. Test whether those larger footprints contain the already certified footprints.
-   Any such containment transfers the old exclusion cheaply.
-   Only then fund a larger case census or a new covering search for selected remaining
-   cases.
-4. Use exact escaping poses to choose a targeted refinement or a compatibility lemma.
-   A failure of one dot pattern is evidence about that pattern, not a feasible packing.
-
-The [census design](../../cases/n11_five_dot_cover/owner-case-census-design.md) states
-the exact support-extrema identity, its limits, the symmetry calculation, and the
-shared-arrangement method.
-A wall can remove possible centers without changing any projection extremum, so strict
-footprint gain is a hypothesis to measure.
-
-## Parallel lanes and decisions
-
-| Lane | Owner and deliverable | Rule |
-| --- | --- | --- |
-| Geometry and target compute | Sol high/extra high implementation; coordinator integrates exact receipts | One main compute queue; freeze each scientific protocol before its target |
-| Mathematical strategy and review | Astra Max | Audit implications, decide which failure mechanism to attack, and review consequential claims |
-| Publication and accounting | Sol high/extra high | Keep the stacked PR current, retain nonoverlapping native usage intervals, and distinguish pending checks from passes |
-| Coordinator | This task | Select the next handoff slice, maintain claims and agenda, and avoid repeated gates without new evidence |
-
-The environment permits four active agents including the coordinator.
-Keep deliverables disjoint and work within that cap.
-Never substitute an unavailable model silently.
-The user specifically requests Astra Max for strategic work while the coordinator uses
-lower thinking. The broader model-routing rule remains in
-[Operating Rules](../../../operating-rules.md#or-2-run-three-to-five-sub-agents-at-a-model-and-thinking-level-matched-to-the-task).
-
-Every 30-minute checkpoint records a result, a falsified regime, or the exact unresolved
-dependency, then takes the next useful slice.
-One block in four to eight addresses an observed efficiency problem.
-A research failure changes the ranking; it does not end the overnight agenda while a
-useful authorized slice remains.
-
-PR137 stays ready and unmerged.
-PR142 on `codex/n11-independent-owner-audit` is ready and unmerged.
-PR145 is stacked above it on `codex/n11-owner-core-compatibility`, with separate
-Session121 and Session122 usage intervals.
-Its matching fast, page and full checkpoint validation passed, and it is ready and
-unmerged. No further merge is implied by this agenda.
-The original Session113 receipt remains unchanged; its publication tail and Session114
-onward have distinct cutoffs.
-The morning report must state exactly what is proved, what is only finite computational
-evidence, which regimes failed, and which gaps still prevent a stronger global n11
-result.
+The owner work still lacks the global selection statement: for every hypothetical
+physical packing, some valid owner selection must have an excluded residual family.
+The retained experiments do not prove that statement.
+H135 also remained unrun.
+Both questions now have fresh, bounded allocations in
+[the daytime plan](../../../docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md).
+No old target, output path, or expired clock transfers as a new measurement.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

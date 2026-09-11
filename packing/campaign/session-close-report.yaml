@@ -1583,12 +1583,12 @@ sessions:
     snapshot_incomplete: true
 - id: session-099
   title: "Atlas expansion to n = 324 and the poster composite"
-  status: in_progress
+  status: stopped
   primary_bead: think-0juv
   phases: 4
   measured: false
   unmeasured_reason: >-
-    declares no rollups
+    native harness data unavailable; The native harness data needed to produce an exact receipt for this historical session is unavailable in the current environment. Session clocks, delegation durations, prose estimates and partial validation timings do not determine resource usage, so no value is reconstructed.
   rollups: []
   codex_receipts: []
 - id: session-100

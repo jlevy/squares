@@ -498,7 +498,7 @@ and the four reproduction strategies run in the slow tier.
   this gives something to play
 - [Simulation mechanisms survey](../../research/research-2026-09-09-simulation-mechanisms-for-packing.md)
 - [Annealing survey](../../research/research-2026-09-08-annealing-for-square-packing.md)
-- [exp-160](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-160-projection-search.md),
+- [exp-206](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-206-projection-search.md),
   the projection search’s first measurements
 - [X-025](../../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md),
   which carries the constraint ladder and the memory thread

@@ -31,7 +31,7 @@ No scientific target ran during this consolidation.
 | This account | Prior narrative review passed; later A6/H157 source review and corrections recorded in §13 | Each review has its own source and scope; no pass silently covers a later addition |
 | A6 and H157/exp154 | A6 point-family, all 2,566 atom rows and the seven-row fixed-support upper bound exactly replayed; H157 survivor counts confirmed and distance mechanism corrected | Neither addition changes the global bracket; §13 states the fixed-support and finite-domain premises |
 | Fixed two-attainer instrument | Source admitted; twelve synthetic controls passed; target unrun | Reviewed preparation for one fixed construction, with no target separation result |
-| Unit-parent centre bound | Derived, checked by its originating lane and independently reviewed by Astra Max | Analytic necessary restriction admitted under its stated premises; implementation admission and measured effects remain outstanding |
+| Unit-parent centre bound and translated-family realizability | Derived, checked by its originating lane, and independently reviewed by Astra Max | Analytic necessary restriction admitted; the 88-core and A6 translations have explicit individual parents on their stated ranges, while conditional owner effects and joint feasibility remain unmeasured |
 
 The [narrative review](../reviews/review-2026-09-09-n11-evidence-interpretation.md),
 [pair source admission](../../../packing/cases/n11_five_dot_cover/two-attainer-source-admission.md),
@@ -934,13 +934,166 @@ The criterion and geometry corrections are applied, with a
 [separate correction review](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/correction-review.md)
 and
 [maintained replay receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-corrected-replay/geometry-receipt.json).
-The independent A6 upper-certificate check is complete; final combined validation
-remains. The
-[three-block overnight plan](../specs/active/plan-2026-09-10-n11-overnight-three-blocks.md)
-keeps pricing and pair tests alongside parent-domain and certificate work, each with a
-declared control and scoped outcome.
+The independent A6 upper-certificate check and PR139’s final combined validation are
+complete. The superseding
+[daytime strategy](../specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
+separates parent-domain, changed-atom, structural-selection, core/net and reserve
+blocks, each with a declared control and scoped outcome.
 It records the source handoff, review findings and dependencies in beads before changing
 that allocation.
+
+## 14. Daytime Evidence After PR139
+
+This section records the first post-merge strategy blocks.
+They sharpen domains and candidate languages but do not change the T-026 lower limit or
+the known upper construction.
+The active allocation is
+[agenda035](../../../packing/campaign/agendas/agenda-035-n11-daytime-strategy.md).
+
+### A Necessary Domain and Exact Individual Parents
+
+Suppose a strict B-core with unit direction `r=(r_x,r_y)` was selected as the nearest
+core to the concentric unit square that contains it.
+Write
+
+```text
+S = |r_x| + |r_y|,  T = ||r_x| - |r_y||,
+e(r,D) = max(B*S/2, 1/2, (S-T*D)/(2+D^2)),
+```
+
+where `D` is the admitted bound on the tangent of the angular mismatch.
+The parent square’s centre, and hence the concentric core’s centre, must lie in the
+closed box `[e(r,D),q-e(r,D)]^2`. This is a necessary condition for every selected
+nearest core. In general it is not a sufficient construction of a parent or a
+simultaneous packing.
+
+The retained 88-core point family at `q0=191/50`, total weight eleven and depth one, can
+be translated by half the container increase.
+Because `e(r,D) <= S/2`, `S<3/2`, and `B=9977/10000`, the translated family lies in the
+necessary parent box whenever
+
+```text
+q >= 191/50 + (3/2)(1-B) = 76469/20000 = 3.82345.
+```
+
+For this retained family there is a stronger statement.
+Give each translated core a concentric unit square with exactly the same physical
+orientation. Its coordinate wall margin is at least
+
+```text
+(Delta - (1-B)*S)/2 > 0,
+```
+
+including at the stated rational threshold, and the core has parent-axis margin
+`(1-B)/2 > 0`. The used folded indices are `0,1,3,5,99,113` and their mirrors, so each
+parent lies exactly at its retained net node.
+Nearest-angle selection returns the same geometric orientation, including the equivalent
+`t=0` and `t=1` endpoint representations.
+
+Its point depths, total weight and D4 relations are unchanged.
+Thus a point-only LP at `3.827` with the same B, retained directions and point language
+cannot improve merely by replacing the conservative parent box with exact
+individual-parent realizability.
+The argument does not cover T-025’s threshold rows, a larger core, removal of the used
+nodes, an angle subcell excluding a node, contact or ownership conditions, joint parent
+compatibility, or conditional routing.
+The [translation review](../reviews/review-2026-09-10-n11-parent-domain-translation.md)
+contains the exact derivation.
+Its
+[independent review](../reviews/review-2026-09-10-n11-parent-realizability-independent.md)
+also verifies the corresponding A6 construction at `q >= 76569/20000 = 3.82845` and
+states the exact atom-transport premise.
+
+The exact adapter, source binder and production runner for the stronger saved-escape
+comparison have passed target-free admission.
+They reconstruct closed, empty and degenerate parent intersections, bind the full owner
+and residual manifests and the 26-path local import closure, preserve the admitted
+symmetry maps, enforce the 90-second scientific and 120-second process bounds, and
+independently recompute any saved complete or partial result before interpretation.
+The final focused suite has 56 passing tests; the independent audit also exercised late
+publication, timeout, failed-readback, stale-module, duplicate-key and non-finite-number
+controls. This is **instrument admission**, not a target result.
+A clean implementation commit and prospective hypothesis and experiment record still
+precede the fixed target.
+See the
+[adapter admission review](../reviews/review-2026-09-10-n11-parent-adapter-admission.md)
+and the
+[independent runner review](../reviews/review-2026-09-10-n11-parent-runner-independent.md).
+
+### Weighted Five-Site Atoms
+
+The changed-atom block now has one exact abstract reason to remain in the queue.
+Take five sites with positive integer token multiplicities totaling seven, and charge a
+core when it contains at least four tokens.
+Two disjoint cores cannot both receive the charge, so every such atom has packing budget
+one.
+
+On the abstract universe of all Boolean containment traces of the five sites, one
+weighted threshold atom has budget one, while any nonnegative combination of ordinary
+distinct-site threshold atoms that charges every weighted-positive trace by at least one
+has budget at least `4/3`. The
+[weighted-atom review](../reviews/review-2026-09-10-n11-weighted-five-site-atoms.md)
+gives matching exact primal and dual arguments.
+This proves an expressiveness separation in the abstract trace model.
+It does not prove that the required traces arise from unit-square cores, that a finite
+cover improves, or that a continuum certificate exists.
+
+The old scratch reader coerces multiplicities through integers and float slack, so it is
+not an admitted scientific instrument.
+The remaining W7 work is explicit: version the multiplicity semantics, preserve them in
+D4 keys and every loader, prove the token budget independently, and make the direct,
+event and interval coverage routes agree on a common-row comparison.
+
+### A Fixed-Side Contact Normal Form and a Source Correction
+
+The earlier Lane D argument correctly showed that a preselected fixed-angle SAT cell has
+a vertex with `2n` independent active selected rows.
+It incorrectly treated every tight selected pair row as a physical contact.
+Two squares can have projection intervals that share an endpoint along the chosen axis
+while remaining positively separated along another axis.
+An exact four-square vertex demonstrates the gap.
+
+A different existential statement survives.
+Fix a feasible side, all labelled orientations, and one connected component of the full
+feasible translation space.
+Lexicographically minimize the sum of centre coordinates and then the individual
+coordinates over that component.
+Choose a strictly slack separating row for every pair of physically disjoint squares at
+the minimizer.
+The resulting selected cell has the same point as a vertex, so a full-rank
+active basis uses genuine wall or pair contacts.
+Translating a physical contact component left or down would lower the first objective;
+therefore every such component touches both the left and bottom walls.
+
+For `n=11`, the representative has 22 independent genuine-contact rows.
+It yields a finite alternative between one square touching both adjacent walls and a
+path of two through eleven physically contacting squares joining those walls.
+It does not force axis alignment, a literal corner occupant, a finite angle set, or a
+short path. The
+[structural review](../reviews/review-2026-09-10-n11-structural-normal-forms.md) states
+the proof, exact counterexamples and review status.
+Lane D and X-021 now preserve the valid per-cell rank statement while withdrawing their
+per-cell contact inference.
+
+### What These Facts Permit Next
+
+| Fact now in hand | A valid next use | Missing bridge to a stronger `n=11` result |
+| --- | --- | --- |
+| Point obstruction has explicit individual parents from `3.82345` | Avoid repeating fixed-B point-only solves that merely tighten isolated-parent containment or refine a net while retaining the used nodes; test changed geometry, charges, or conditional owner/contact restrictions | Production admission, then a complete conditional class result; joint feasibility and global routing remain separate |
+| The 2880-step fixed-core packet has exact geometric headroom to `3.826721480476156460...` | Build a bounded fixed-core runner, freeze the raw criterion `m>M/11` and normalization `alpha=1/m`, then measure one prospectively registered packet | Coverage is unmeasured; the current adaptive CLI runs a different experiment; exact and interval agreement plus dilation replay remain required |
+| Weighted five-site traces have an exact `4/3` abstract separation | Build and compare the multiplicity-aware certificate language on one fresh common row set | Geometric realization, exact covering on both routes, and continuum transfer |
+| Every fixed-angle feasible component has an adjacent-wall contact representative | Condition pilots on a snug parent or a genuine contact path without assuming literal corners | Certificates for every branch and a valid map from every hypothetical packing to an excluded label |
+| A preselected SAT equality need not be contact | Require strict alternatives for disjoint pairs and actual-contact controls | Correction alone produces no exclusion or bound |
+
+These results change the order and formulation of experiments.
+They do not establish that the parent, weighted-atom, contact, core/net or routing route
+is universally better than the others.
+That comparison remains empirical and theorem-dependent, block by block.
+
+The [BC329 preflight](../reviews/review-2026-09-10-n11-bc329-packet-preflight.md)
+contains the exact arithmetic and the outcome table.
+Its conditional verdict is an instrument-readiness finding.
+It neither accepts nor rejects the proposed packet and does not change the lower bound.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -264,15 +264,26 @@ result that quantifies the whole conditional-certificate programme.
   `14.05°`, one at least `19.84°`, and no axis square.
   A four-chain forces nothing.
   A free case split with no headroom for the current instruments.
-- **LP-vertex representative** (proved).
-  In every fixed-angle cell containing a minimiser there is one with twenty-two
-  independent active translation rows, every square in at least two incidences, no
-  isolated square. Angular rank is not forced (the `n = 6` rattler).
+- **Fixed-angle representatives** (proved; contact inference corrected September 10).
+  Every preselected SAT cell containing a minimiser has a vertex with twenty-two
+  independent active selected rows, but a tight selected pair row need not be a physical
+  contact. Separately, every connected component of the full fixed-angle feasible space
+  at a fixed side has a representative with twenty-two independent genuine contact rows;
+  each physical contact component touches the left and bottom walls.
+  This second statement chooses a suitable cell after minimizing over the full
+  component, so it does not restore the stronger contact claim in every preselected cell
+  or force a literal corner occupant.
+  Angular rank is not forced (the `n = 6` rattler).
   At most three squares are flush on any wall.
+  See the
+  [structural review](../../../docs/project/reviews/review-2026-09-10-n11-structural-normal-forms.md).
 - **Robust transfer** (proved).
-  Minimality facts hold at the unknown side, not at `q`; dilation turns every contact
-  into a near-contact with tolerance `0.01113` at `q` and walls `0.00556`. Every
-  structural lemma handed to a certificate must be stated with that tolerance.
+  Facts that use optimality hold at the unknown side, not automatically at `q`; dilation
+  turns their contacts into near-contacts with tolerance `0.01113` at `q` and walls
+  `0.00556`. The fixed-side genuine-contact representative above is proved directly at
+  every feasible `q` and needs no dilation.
+  Every other optimum-only structural lemma handed to a certificate must state the
+  required tolerance.
 - **Duality bounds a specified single-core covering program** (proved in the form
   corrected in lane D on 2026-09-08). A depth-one family with sufficient weight in that
   program’s admissible class gives a weak-duality obstruction on every site set.

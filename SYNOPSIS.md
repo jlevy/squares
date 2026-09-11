@@ -61,9 +61,9 @@ Read it before citing any capability here.
 ### Results and their significance
 
 The core exposition uses T-018’s simple `s(11) >= 3.81` bound.
-The technical register below retains T-022’s small exact refinement; its algebraic
-endpoint need not complicate the introduction.
-Future research follows the
+The technical register below carries the current T-026 weak lower limit, reached through
+T-025’s threshold certificate; its algebraic endpoint need not complicate the
+introduction. Future research follows the
 [payoff policy](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
 prioritize substantial bound improvements and methods or theorems that make them
 possible.
@@ -141,8 +141,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives twenty-five confirmed hypotheses, twenty-five
-refuted hypotheses, two open hypotheses, twenty-six open questions, and forty-seven
+The generated ledger currently derives twenty-six confirmed hypotheses, twenty-five
+refuted hypotheses, two open hypotheses, twenty-six open questions, and forty-six
 blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
 remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
 scientific invocation; this does not refute its claim.
@@ -219,8 +219,18 @@ case or experiment separately.
 | [stats-summary.md](packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md) | generated status view | generated | generated | — |
 | [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
 | [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
-| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | current | transient | — |
+| [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) | implementation plan | current | transient | — |
+| [N11: Three Overnight Research Blocks After PR139](docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md) | implementation plan | record | superseded | [N11: Daytime Strategy Blocks and Parallel Explainer Update](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md) |
 | [Independent Review of the Unit-Parent Centre Bound](docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md) | dated review record | record | retained | — |
+| [Independent Review of the Adopted Parent Adapter](docs/project/reviews/review-2026-09-10-n11-parent-adapter-admission.md) | dated review record | record | retained | — |
+| [The Retained Point Obstruction in the Individual-Parent Domain](docs/project/reviews/review-2026-09-10-n11-parent-domain-translation.md) | dated review record | record | retained | — |
+| [Independent Review of Translated Individual-Parent Realizability](docs/project/reviews/review-2026-09-10-n11-parent-realizability-independent.md) | dated review record | record | retained | — |
+| [Independent Admission Review: BC326 Parent-Domain Runner](docs/project/reviews/review-2026-09-10-n11-parent-runner-independent.md) | dated review record | record | retained | — |
+| [BC329: Preflight of the 2880-Step Threshold Packet](docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md) | dated review record | record | retained | — |
+| [Strategic Review of the N11 Daytime Research Frontier](docs/project/reviews/review-2026-09-10-n11-strategy-frontier.md) | dated review record | record | retained | — |
+| [N=11 Structural Normal Forms](docs/project/reviews/review-2026-09-10-n11-structural-normal-forms.md) | dated review record | record | retained | — |
+| [Independent Review of the N=11 Structural Normal Form](docs/project/reviews/review-2026-09-10-n11-structural-normal-forms-independent.md) | dated review record | record | retained | — |
+| [Readiness of the Weighted Five-Site Atom Direction](docs/project/reviews/review-2026-09-10-n11-weighted-five-site-atoms.md) | dated review record | record | retained | — |
 | [Exact Threshold-Atom Orbit Admission](packing/cases/n11_fractional_certificate/threshold-atom-orbit-admission.md) | research synthesis | record | retained | — |
 | [H157 and Conditional-Claim Review at ee98c4ba](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/review.md) | dated review record | record | retained | — |
 | [Bounded Review of the H157 Corrections](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/correction-review.md) | dated review record | record | retained | — |
@@ -252,7 +262,7 @@ case or experiment separately.
 | [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
 | [Correction: the stacking capacity bound in lane X3’s box sweep is false](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x3-box-sweep-capacity-correction.md) | dated review record | record | retained | — |
 | [Agenda 034, lane A6: structural site placement at L = 153/40, and the certificate that closes the site side](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a6-structural-sites-and-the-depth-one-certificate.md) | research synthesis | record | retained | — |
-| [Agenda 034, lane X4: sixteen sectors do not break neutrality, and no bin count can](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md) | research synthesis | record | retained | — |
+| [Agenda 034, lane X4: sixteen sectors retain six neutral subclasses](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-sixteen-sectors-and-the-refinement-limit.md) | research synthesis | record | retained | — |
 | [Agenda 034, lane T: what the certificate language can and cannot do past 3.82](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-t-theory-cuts-and-routes.md) | research synthesis | record | retained | — |
 | [Agenda 034, ceiling reader: an independent exact decision of the 191/50 ceiling family](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/ceiling-reader-191-50.md) | research synthesis | record | retained | — |
 | [Agenda 034: reconciliation against the in-flight upstream branches, 2026-09-09](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/reconciliation-upstream-2026-09-09.md) | dated review record | record | retained | — |
@@ -725,8 +735,47 @@ Finite support, net and grid results do not close entire research directions.
 The
 [review addendum](docs/project/reviews/review-2026-09-09-n11-evidence-interpretation.md#combined-series-review-addendum--september-10-2026)
 and [PR139](https://github.com/jlevy/squares/pull/139) carry finalization evidence.
-The two-attainer target and unit-parent proposal remain preparation, not new
-measurements. Historical handoffs below retain their original context.
+The post-merge daytime checkpoint adds no new global bound or target measurement.
+It proves that the translated 88-core obstruction has exact, zero-mismatch individual
+unit parents from `3.82345`, and independently verifies the analogous A6 statement from
+`3.82845`; contact, ownership and joint feasibility remain separate conditions.
+It also retains the fixed-angle adjacent-wall contact normal form, the correction that
+an arbitrary tight SAT row need not be physical contact, and the abstract `4/3`
+weighted-atom separation.
+The parent-domain adapter and production runner passed target-free independent
+admission, including deadline, timeout, failed-readback and source-closure adversaries.
+Exp156 then completed its sole source-bound run.
+The fixed exp151 residual lies inside its necessary parent box, while the first selected
+owner, `TR / bottom-left:m1:j7`, is already incompatible under the B-only model after
+all 181 frames and literal replay.
+The parent-restricted TR set is contained in that B-only set, so parent-domain gain is
+impossible there without running the redundant restricted arm.
+The frozen protocol did not evaluate `BL`, `BR` or `TL`; a new prospective protocol
+would need to skip TR and test those three owners.
+This complete old-model finding leaves H-158 unresolved and changes no global bound.
+BC329 remains the next direct global-bound target.
+BC337 is a secondary parallel lane, blocked on admission of a source-bound half-plane
+constructor, exact clipping, bounded runner and independent reader.
+It keeps exp151 direction 6 and open residual-centre domain `C°`. The control uses the
+existing TR centre-space obstacle `P_TR + (-R)` with the same nine other closed
+obstacles; the candidate substitutes the exact all-owner-incompatible obstacle `K_TR`
+directly, with no second Minkowski expansion.
+Thus `U0` and `U1` remove the respective TR obstacles and the same other nine obstacles
+from open `C°`. The target would accept only exact `area(U1) = 0` with independent union
+confirmation; because `U1` remains open, that establishes emptiness.
+The [strategy review](docs/project/reviews/review-2026-09-10-n11-strategy-frontier.md)
+puts the conditional parent comparison first and one frozen 2880-step core/net packet
+next, while multiplicity admission, contact-conditioned domains and mixed angle-profile
+charges proceed as separate blocks.
+The packet’s
+[target-free preflight](docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md)
+verifies its exact geometric headroom but identifies two prerequisites: test the raw
+least charge against `M/11 = 685457679/687500000`, then normalize by the frozen rule
+`alpha = 1/m`; and admit a bounded fixed-core runner because the existing refinement CLI
+runs a different adaptive experiment.
+Coverage remains unmeasured, so this is a readiness result rather than a new bound.
+The two-attainer target remains preparation.
+Historical handoffs below retain their original context.
 
 [Session113](packing/campaign/agent-sessions/session-113-conditional-owner-sprint.md)
 closed Agenda032 with [T-023](packing/frontier/RESULTS.md), the five-dot exclusion of
@@ -874,12 +923,14 @@ accepted the necessary two-core screen;
 is the completed refutation of every one-site extension of fixed D on the selected
 four-patch relaxation.
 [exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md)
-refuted `H-157`: refining the corner-owner angular bins from eight to sixteen widens the
-guaranteed wedge and moves the reach toward the critical survivor by exactly nothing,
-because the closest point of every patch to that core is the mark itself.
-Its two theorems rule out patch refinement as the lever at every angular resolution and
-at pose level; they do not establish that the conditional strategy fails, so X-026
-escape 1 is narrowed rather than closed.
+refuted `H-157`: six of its eight refined subclasses retain survivor weight ten, while
+two improve to `19/2`. The two improved patches intersect their fixed target cores, so
+their old positive distance explanation was invalid; the six neutral children retain the
+reported positive distance.
+The corrected T1 and T2 statements concern the retained finite ray universe and the
+fixed patch-only residual domain.
+They do not rule out other angular restrictions, stronger domains, changed charges, or
+owner-selection routing, and they do not establish that the conditional strategy fails.
 Exp150’s compatibility result does not establish continuous unit parents or simultaneous
 owners, and exp153 does not exclude the physical tuple.
 
@@ -3496,13 +3547,14 @@ round that names the hypothesis, control roles included.
 | [H-153](packing/campaign/hypotheses/H-153-reoptimised-certificate-on-a-finer-net.md) | open | Re-optimising the covering LP on a net of 720 or more directions at the sharpened shrink passes a dilation supremum of 3.82 | 0 | — |
 | [H-154](packing/campaign/hypotheses/H-154-where-the-point-atom-ceiling-begins.md) | open question | Where does the point-atom ceiling begin in side, and does any weight-eleven family at 191/50 survive a larger shrink? | 0 | — |
 | [H-155](packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold certificate of budget below seven exists on an owner class whose residual point cover is stuck at seven or above; the joined domain-restricted gate does not exist yet | 0 | — |
-| [H-156](packing/campaign/hypotheses/H-156-threshold-certificate-past-3-82.md) | blocked | The threshold-atom language certifies a side above 191/50, by the same loop at a larger side or by the finer-net shrink; the separation loop that would produce the atoms is unbuilt | 0 | — |
-| [H-157](packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | refuted | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement | 1 | exp-154: six of eight refined subclasses still read exactly 10, and the reach is bit-identical to the parent because the mark is the closest point of every patch |
-| [H-158](packing/campaign/hypotheses/H-158-simultaneous-perturbation-move.md) | refuted | A collective move takes n = 17 from the trivial grid to within 0.002 of Bidwell cold, and is inert above n = 26 | 2 | 131.7m wall |
-| [H-159](packing/campaign/hypotheses/H-159-wall-pressure-dense-objective.md) | refuted | Isotropic wall pressure optimises a disc, returning exactly 2*sqrt(2) at n = 5, so pressure must be directional | 1 | 39.2m wall |
-| [H-160](packing/campaign/hypotheses/H-160-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart at an equal budget of refined local optima | 1 | 81.2m wall |
-| [H-161](packing/campaign/hypotheses/H-161-cooling-schedule-length.md) | refuted | A tenfold anneal length moves three cells of eleven against the six declared, and recovers three quarters of what the new move family recovers | 1 | 71.3m wall |
-| [H-162](packing/campaign/hypotheses/H-162-projection-search-reaches-feasibility.md) | unresolved | Every run ends on an exactly feasible packing, 28 of 28 against 0 of 48 for the penalty physics, but only one cell of four comes within a per cent | 1 | 15.6m wall |
+| [H-156](packing/campaign/hypotheses/H-156-threshold-certificate-past-3-82.md) | confirmed | T-026 confirms the finer-net disjunct: its exact dilation corollary gives weak limit `3.826447410572939744...`; every strictly smaller side is excluded, but the limiting endpoint remains unresolved | 1 | 111.9m wall |
+| [H-157](packing/campaign/hypotheses/H-157-refined-owner-sector-patch-breaks-neutrality.md) | refuted | Sixteen owner sectors instead of eight fatten every guaranteed patch past the `0.014978` separating gap, so no neutral class survives the refinement | 1 | exp-154: six of eight refined subclasses still read exactly 10 and two read `19/2`; this refutes the all-subclasses claim, while broader conditioning and changed charges remain open |
+| [H-158](packing/campaign/hypotheses/H-158-unit-parent-domain-excludes-saved-residual.md) | unresolved | Exp151’s direction-6 residual fails its own necessary parent box, or one selected owner has a newly replayed positive B-only witness and no positive witness after the complete parent restriction | 1 | exp-156: residual survives; TR is B-only incompatible after 181 frames, making parent gain impossible there; BL, BR and TL were not run; 20.63s external wall |
+| [H-201](packing/campaign/hypotheses/H-201-simultaneous-perturbation-move.md) | refuted | A collective move takes n = 17 from the trivial grid to within 0.002 of Bidwell cold, and is inert above n = 26 | 2 | 131.7m wall |
+| [H-202](packing/campaign/hypotheses/H-202-wall-pressure-dense-objective.md) | refuted | Isotropic wall pressure optimises a disc, returning exactly 2*sqrt(2) at n = 5, so pressure must be directional | 1 | 39.2m wall |
+| [H-203](packing/campaign/hypotheses/H-203-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart at an equal budget of refined local optima | 1 | 81.2m wall |
+| [H-204](packing/campaign/hypotheses/H-204-cooling-schedule-length.md) | refuted | A tenfold anneal length moves three cells of eleven against the six declared | 1 | 71.3m wall |
+| [H-205](packing/campaign/hypotheses/H-205-projection-search-reaches-feasibility.md) | unresolved | Every run ends on an exactly feasible packing, 28 of 28 against 0 of 48 for the penalty physics, but only one cell of four comes within a per cent | 1 | 15.6m wall |
 
 ### Confirmed
 
@@ -3789,9 +3841,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 116 rounds registered in `series-000`.
+There are 118 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 1686.0 wall-minutes.
+They record 2512.1 agent-minutes and 1798.2 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -3941,12 +3993,14 @@ archive beside it.
 | [exp-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-152-sixth-site-two-core-screen.md) | 11 | target | H-150 | Exact closed intersection of two escaping cores | Nonempty two-core quadrilateral and verified common site | accepted |
 | [exp-153](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-153-direct-sixth-site-feasibility.md) | 11 | target | H-151 | Direct complete-domain support intersection and independent cover confirmation | Empty site region after188directions; no sixth site preserves D | **rejected** |
 | [exp-154](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-154-h157-sixteen-sector-refinement-limit.md) | 11 | target | H-157 | Exact sixteen-bin and singleton-ray owner-sector screen of the mass-eleven ceiling family | Six of eight refined subclasses still read survivor weight exactly 10; the two that break read 19/2, not 79/8 | **rejected** |
-| [exp-155](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-155-arm-calibration.md) | 18 | control | H-158 | Sparsity of the single-square move set at a trivial grid | At every scale tried no single-square proposal lowers the container side; the grid is a strict local minimum under the whole move set | baseline |
-| [exp-156](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-round-1-perturbation.md) | 11 | target | H-158 | Gensane’s simultaneous all-square perturbation on the ordinary move menu | Takes n = 17 from exactly 5.0 to within 0.002 of Bidwell cold, and is inert above n = 26 | rejected |
-| [exp-157](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-157-round-1-pressure.md) | 11 | target | H-159 | Aggregate wall-pressure term against the plain required-side objective | Isotropic pressure optimises a disc, returning exactly 2*sqrt(2) at n = 5, so pressure must be directional | rejected |
-| [exp-158](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-158-basin-hopping.md) | 11 | target | H-160 | Basin hopping against multistart over the LP-in-cell quench | Basin hopping reaches a lower median best side at an equal budget of refined optima | accepted |
-| [exp-159](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-159-round-1-schedule.md) | 11 | target | H-161 | Anneal length crossed with move set, two levels each | Both factors move the result and combine; the first factorial crossing found for this problem | rejected |
-| [exp-160](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-160-projection-search.md) | 11 | target | H-162 | Divide and concur with relaxed-reflect-reflect over a bounded container | The first search here whose every output is a packing an independent oracle confirms; it leaves the grid on all four cells and stalls 1.2 to 2.8 per cent above three of them | unresolved |
+| [exp-155](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-155-h156-finer-net-threshold-dilation.md) | 11 | target | H-156 | Frozen T-025 atoms on the 1440-step direction net and exact dilation corollary | Weak limit `3.826447410572939744...`; every strictly smaller side excluded; limiting endpoint unresolved | **accepted** |
+| [exp-156](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md) | 11 | target | H-158 | Exact residual parent-box check followed by matched B-only and parent-restricted owner comparisons in TR, BL, BR, TL order | Residual inside parent box; TR / bottom-left:m1:j7 has exact negative B-only maximum after 181 frames, which also precludes parent gain there; BL, BR and TL unrun | unresolved |
+| [exp-201](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-201-arm-calibration.md) | 18 | control | H-201 | Sparsity of the single-square move set at a trivial grid | At every scale tried no single-square proposal lowers the container side; the grid is a strict local minimum under the whole move set | baseline |
+| [exp-202](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md) | 11 | target | H-201 | Gensane's simultaneous all-square perturbation on the ordinary move menu | Takes n = 17 from exactly 5.0 to within 0.002 of Bidwell cold, and is inert above n = 26 | rejected |
+| [exp-203](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-203-round-1-pressure.md) | 11 | target | H-202 | Aggregate wall-pressure term against the plain required-side objective | Isotropic pressure optimises a disc, returning exactly 2*sqrt(2) at n = 5, so pressure must be directional | rejected |
+| [exp-204](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-204-basin-hopping.md) | 11 | target | H-203 | Basin hopping against multistart over the LP-in-cell quench | Basin hopping reaches a lower median best side at an equal budget of refined optima | accepted |
+| [exp-205](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-205-round-1-schedule.md) | 11 | target | H-204 | Anneal length crossed with move set, two levels each | Both factors move the result and combine; the first factorial crossing found for this problem | rejected |
+| [exp-206](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-206-projection-search.md) | 11 | target | H-205 | Divide and concur with relaxed-reflect-reflect over a bounded container | The first search here whose every output is a packing an independent oracle confirms | unresolved |
 
 ### Cost and provenance
 
@@ -4062,16 +4116,18 @@ archive beside it.
 | exp-152 | one 60-second external process; 30-second internal guard | 9.84s | — | criterion | `0a4fe687` |
 | exp-153 | one300-second external process; shared240-second internal guard | — | 22.36s | complete negative prefix | criterion |
 | exp-154 | under an hour, as registered | 356.1 s | — | criterion | `67ccd16b` |
-| exp-155 | 1.25e9 pair tests per chain, 8 chains, 5 seeds | 2681.0 s | 95 m | criterion | `9ae7700` |
-| exp-156 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells | 3663.0 s | 60 m | criterion | `9ae7700` |
-| exp-157 | 400,000 steps per anneal, 5 seeds, 5 cells | 2349.0 s | 25 m | criterion | `9ae7700` |
-| exp-158 | 20 refined optima per seed, seeds 1-5 | 4871.0 s | 40 m | criterion | `9ae7700` |
-| exp-159 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 4281.0 s | 45 m | criterion | `9ae7700` |
-| exp-160 | 48 to 95 solver calls per ratchet run, 28 runs over two arms | 937.0 s | 95 m | criterion | `ffa6d01` |
+| exp-155 | retrospective registration of one completed bounded lane; no new target allowance | 6713.2s additive reported | — | criterion | `7ccb679c` |
+| exp-156 | one 90-second scientific allowance inside one 120-second supervised process plus two-second grace | 0.4452s scientific | 20.6281s external command wall, including mandatory in-process readback and supervision | criterion | receipt: 8.6396s source replay and 9.0848s pre-readback publication clock; later Astra receipt audit: 9.26s separate review work; H-158 unresolved |
+| exp-201 | 1.25e9 pair tests per chain, 8 chains, 5 seeds | 2681.0 s | 95 m | criterion | `9ae7700` |
+| exp-202 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells | 3663.0 s | 60 m | criterion | `9ae7700` |
+| exp-203 | 400,000 steps per anneal, 5 seeds, 5 cells | 2349.0 s | 25 m | criterion | `9ae7700` |
+| exp-204 | 20 refined optima per seed, seeds 1-5 | 4871.0 s | 40 m | criterion | `9ae7700` |
+| exp-205 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 4281.0 s | 45 m | criterion | `9ae7700` |
+| exp-206 | 48 to 95 solver calls per ratchet run, 28 runs over two arms | 937.0 s | 95 m | criterion | `ffa6d01` |
 
-### What the 116 rounds jointly establish
+### What the 118 rounds jointly establish
 
-The 116 rounds use 2512.1 agent-minutes and 1686.0 wall-minutes under the campaign’s
+The 118 rounds use 2512.1 agent-minutes and 1798.2 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
