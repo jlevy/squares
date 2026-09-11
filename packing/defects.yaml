@@ -16398,7 +16398,7 @@ defects:
     where the carrier substitution changes which boxes the page is willing to show.
   severity: medium
   status: fixed
-  bead: think-ghns
+  bead: think-ji4p
   what: >-
     `prepare_explainer_math` holds the math faces, measures the page, releases them and
     requires that nothing was shown while its own faces were held. A box may be visible
