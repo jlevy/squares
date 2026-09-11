@@ -683,8 +683,8 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // and at every instant at most one of the two is moving. Each end is a `smootherstep`, which has
   // zero second derivative at both ends, so there is no corner where a change starts or stops.
   const DESAT_IN = 0.2;                 // fraction of the move the chroma takes to drain
-  const HUE_OUT = 0.2;                  // fraction of the move the hue takes to leave, once drained
-  const HUE_IN = 0.45;                  // fraction of the settle the hue takes to return, before the chroma
+  const HUE_OUT = 0.45;                  // fraction of the move the hue takes to leave, once drained
+  const HUE_IN = 0.6;                  // fraction of the settle the hue takes to return, before the chroma
   // Continuous play (revision 6, feature 4): the beat the whole sequence runs at, back to back.
   // A static append (a grid prefix or a shared picture, where nothing moves) gets a dwell and no
   // move at all, unless the full beat is asked for.
@@ -1664,6 +1664,26 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   let poseX = null, poseY = null, poseA = null;
   let sceneSide = 0;   // the container side the last frame drew, which is where a drag picks the run up
   let tgtX = null, tgtY = null, tgtA = null;
+  //: The two settled arrangements of the current pair, each with its own angle map and contact
+  //: counts, and which squares hold their colour right through the move.
+  let restSource = null, restTarget = null, holdsColour = null;
+  //: What counts as not moving and not turning, for a square that keeps its colour. A unit side is
+  //: 1, so a hundredth of one is under half a pixel at the size the stage draws; half a degree is
+  //: the same tolerance the angle classes are seeded with.
+  const HOLD_MOVE_TOL = 0.01;
+  const HOLD_TURN_TOL = 0.5;
+  // One settled arrangement's answer: the angle map its own classes give, and the contact count
+  // each square has in it. `skip` leaves the arriving square out of the source arrangement, where
+  // it does not exist yet.
+  function restOf(side, poseAt, count, skip) {
+    const x = new Float64Array(count), y = new Float64Array(count), a = new Float64Array(count);
+    for (let i = 0; i < count; i++) {
+      if (i === skip) { x[i] = 1e6; y[i] = 1e6; a[i] = 0; continue; }
+      const q = poseAt(i);
+      x[i] = q[0]; y[i] = q[1]; a[i] = q[2];
+    }
+    return { angles: a, map: buildAtlasMap(a), contacts: fullSideContacts(x, y, a, side, null, null) };
+  }
   let currentTrajectory = null;   // the trajectory the physical scene last drew from, or null
   let lastMoveU = 0;              // where in that trajectory the last frame sampled, 0..1
 
@@ -1718,6 +1738,28 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     tgtX = new Float64Array(p.n + 1); tgtY = new Float64Array(p.n + 1); tgtA = new Float64Array(p.n + 1);
     for (let i = 0; i < p.n; i++) { tgtX[i] = motion[i].b[0]; tgtY[i] = motion[i].b[1]; tgtA[i] = motion[i].b[2]; }
     tgtX[p.n] = newPose[0]; tgtY[p.n] = newPose[1]; tgtA[p.n] = newPose[2];
+    // **The atlas map is a function of a settled arrangement, so it is asked of settled ones.**
+    // Its hue is the angle CLASS, and its shade the full-side contact count, and both are read from
+    // the frame on the stage -- which is right at rest and meaningless in transit. Through a move
+    // the classes regroup as squares turn, so a square's hue jumps between families, and contacts
+    // break and remake, so its shade jumps a step: measured at n = 17, 14 to 16 of 17 fills changed
+    // between consecutive frames over the few hundred milliseconds after the drain begins. That is
+    // the flicker.
+    //
+    // So the two rests are worked out once per pair -- the arrangement this step leaves and the one
+    // it lands on -- and a frame in transit borrows whichever it is nearer to. At either rest the
+    // borrowed answer IS the live one, so the frames a viewer is left looking at are unchanged.
+    restSource = restOf(A.side, (i) => motion[i].a, p.n + 1, p.n);
+    restTarget = restOf(B.side, (i) => [tgtX[i], tgtY[i], tgtA[i]], p.n + 1, -1);
+    // A square that neither moves nor turns, and sits square to the container, has nothing to be
+    // unsettled about: it keeps its colour while the rest of the packing drains around it.
+    holdsColour = new Uint8Array(p.n + 1);
+    for (let i = 0; i < p.n; i++) {
+      const a = motion[i].a, b = motion[i].b;
+      const still = Math.hypot(a[0] - b[0], a[1] - b[1]) <= HOLD_MOVE_TOL
+        && Math.abs(angleDelta(a[2], b[2])) <= HOLD_TURN_TOL;
+      holdsColour[i] = still && angleGap(foldAngle(a[2]), 0) <= HOLD_TURN_TOL ? 1 : 0;
+    }
     if (B.ident[p.new] !== p.n + 1) throw new Error('the new square of ' + p.n + ' -> ' + (p.n + 1) + ' is not identity ' + (p.n + 1));
     newNode = nodeFor(p.n + 1);
     newRect = newNode.firstElementChild;
@@ -4004,7 +4046,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   const paintEdges = [];              // the frame's own contact graph, as index pairs
   let paintTouching = new Set();      // the same, as i * N + j keys, for the relationship's evidence
   const paintOut = { classes: 0, centres: [], sizes: [], slots: [], contacts: [], scheme: 'identity' };
-  function paintSquares(p, side, drain, tint, size, resting) {
+  function paintSquares(p, side, drain, tint, size, resting, homeward) {
     paintContacts = fullSideContacts(poseX, poseY, poseA, side, paintContacts, paintEdges, size);
     const N = poseA.length;
     paintTouching = new Set();
@@ -4022,23 +4064,55 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const scheme = schemeFor(rest);
     const standard = standardizing() ? rest : 0;
     const map = buildAngleMap(poseA);
-    // Built only when it is going to be used: on a moving frame under a chosen angle scheme this
-    // is a second grouping of every square for nothing.
-    const atlas = standard > 0 ? buildAtlasMap(poseA) : null;
+    // The settled arrangement this frame borrows its atlas answer from: the one it is leaving
+    // through the first half of the beat, the one it is landing on through the second. Never the
+    // live frame -- see `restSource` in `buildPair` for the flicker that is.
+    const home = (homeward ? restTarget : restSource) || null;
     paintOut.scheme = scheme;
-    function paintedFill(ident, angle, contacts) {
+    function paintedFill(index, ident, angle, contacts) {
       const own = fillOf(colorScheme, map, ident, angle, contacts);
-      const chosen = standard <= 0 ? own
-        : (standard >= 1 ? fillFor(atlas.slotOf(angle), contacts)
-                         : mixHex(own, fillFor(atlas.slotOf(angle), contacts), standard));
+      let chosen = own;
+      if (standard > 0) {
+        const settled = home === null
+          ? fillFor(buildAtlasMap(poseA).slotOf(angle), contacts)
+          : fillFor(home.map.slotOf(home.angles[index]), home.contacts[index]);
+        chosen = standard >= 1 ? settled : mixHex(own, settled, standard);
+      }
+      // **A square that neither moves nor turns and sits square to the container does not change
+      // at all.** There is nothing unsettled about it, so it keeps the colour it had at rest --
+      // its hue as well as its chroma, since holding the chroma while the hue swaps would leave it
+      // a bright green among the teals it was one of a moment before. Draining it with the rest
+      // also hides the one thing the picture is trying to say, which is which squares are still
+      // looking for their place.
+      // Only where a "rest" means something: a step in Animate, which has an arrangement it left
+      // and one it lands on. Pack has neither -- its run starts from a grid or a scatter and ends
+      // wherever the physics gets to -- so a square that happens not to move there is not settled,
+      // it is just one frame of a run, and painting it from a rest it has no relation to is how
+      // this first went wrong: an ordered-fill start came out in 15 identity greens instead of 17.
+      // Gated on the PAIR, not on the frame. Gating it on `standard > 0` meant a held square
+      // stopped being held the instant the hue finished leaving, half way through the move, and
+      // dropped into the drain in one frame: measured at 0.32 OkLab, sixteen just-noticeable steps,
+      // which is a worse flicker than the one this set out to remove.
+      const held = standardizing() && holdsColour !== null
+        && index < holdsColour.length && holdsColour[index];
+      if (held && restSource !== null && restTarget !== null) {
+        // Its colour can still differ between the two rests -- it has not moved, but a neighbour
+        // may have moved away from it, and the shade is a contact count. So it crosses from one to
+        // the other on the settle's own curve rather than at the instant the move ends: switching
+        // there put a whole shade step into one frame, measured at 0.117 OkLab, which is six
+        // just-noticeable steps and reads as exactly the flicker this is meant to remove.
+        const was = fillFor(restSource.map.slotOf(restSource.angles[index]), restSource.contacts[index]);
+        const will = fillFor(restTarget.map.slotOf(restTarget.angles[index]), restTarget.contacts[index]);
+        return trimHex(homeward ? mixHex(was, will, standard) : was);
+      }
       // The trim goes on before the drain, so a drained fill is drained from the colour the stage
       // actually shows rather than from one it never paints.
-      return desatHex(trimHex(chosen), drain);
+      return desatHex(trimHex(chosen), held ? 0 : drain);
     }
     for (let i = 0; i < motion.length; i++) {
-      motion[i].rect.setAttribute('fill', paintedFill(motion[i].ident, poseA[i], paintContacts[i]));
+      motion[i].rect.setAttribute('fill', paintedFill(i, motion[i].ident, poseA[i], paintContacts[i]));
     }
-    const own = paintedFill(p.n + 1, poseA[p.n], paintContacts[p.n]);
+    const own = paintedFill(p.n, p.n + 1, poseA[p.n], paintContacts[p.n]);
     newRect.setAttribute('fill', tint > 0 ? mixHex(own, SCARLET_FILL, tint) : own);
     paintOut.classes = map.classes;
     paintOut.centres = map.centres.slice();
@@ -4099,7 +4173,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     newNode.setAttribute('transform', 'translate(' + o.X[p.n] + ' ' + o.Y[p.n] + ') rotate(' + ang + ')' + grow);
     // An open-ended run is at rest exactly when it is not playing; Animate's standardising does not
     // reach it anyway, an optimisation being Pack's own playback.
-    paintSquares(p, side, drain, 0, o.size, state.playing ? 0 : 1);
+    paintSquares(p, side, drain, 0, o.size, state.playing ? 0 : 1, true);
     mark.setAttribute('opacity', 0);
     linksGroup.setAttribute('opacity', 0);
     ghost.setAttribute('opacity', 0);
@@ -4180,7 +4254,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // At rest through the dwell and from the instant the settle ends, which are the two frames a
     // Animate leaves a viewer looking at.
     paintSquares(p, side, drain, appear > 0 ? TINT * (1 - settled) : 0, undefined,
-                 hueLevel(sc, t));
+                 hueLevel(sc, t), t >= sc.moveEnd);
     mark.setAttribute('opacity', 0);
     if (state.links) {
       linksGroup.setAttribute('opacity', u <= 0 ? 0.35 : 1 - e);
@@ -4314,7 +4388,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     poseX[p.n] = nb[0]; poseY[p.n] = nb[1]; poseA[p.n] = nb[2];
     currentTrajectory = null;
     paintSquares(p, side, drain, k > 0 ? TINT * (1 - settled) : 0, undefined,
-                 hueLevel(sc, t));
+                 hueLevel(sc, t), t >= sc.moveEnd);
     if (k > 0) {
       const scale = 0.8 + 0.2 * k;
       const pose = 'translate(' + nb[0] + ' ' + nb[1] + ') rotate(' + nb[2] + ')';
