@@ -442,6 +442,32 @@ data from the page would fix it and would break self-containment, so if it matte
 answer is a smaller default payload -- the twenty-five-pair build already exists at 714 kB
 -- rather than an external fetch.
 
+## Implementation Map
+
+Every row names something that exists unless marked new. Ordered by dependency: nothing
+below can be checked until the row above it works.
+
+| # | bead | file | function or object | change |
+| --- | --- | --- | --- | --- |
+| 1 | `think-cdvd` | `src/sqpack/render/motion.py` | `validate_translation_only_trajectory` | Split. Keep poses-exist and non-decreasing `logical_time`; drop the two clauses rejecting rotation and a changing side. Rename to `validate_trajectory`; both motion-lab renderers move with it. |
+| 2 | `think-cdvd` | same | `square_keyframes` | Append `rotate(D deg)` after the existing `translate`, `D` being the frame's angle less the final angle wrapped to the short way round a quarter turn. |
+| 3 | `think-cdvd` | same | `append_square_motion` | Set `transform-box:fill-box;transform-origin:center` on the node, or CSS rotates the square about the viewport origin and it swings instead of spinning. |
+| 4 | `think-cdvd` | same | `container_keyframes` | Emits only `opacity:1` today. Add a scale track, `scale(side_final / side_frame)`, on a wrapping group so box and squares move together and square offsets stay in the units row 2 uses. |
+| 5 | `think-cdvd` | `tests/test_render_motion.py` (new) | — | A rotating two-square trajectory and a resizing one, each asserting the emitted CSS contains the rotation and scale it should. Both are cases the current validator rejects, so they fail before rows 1 to 4 and pass after. |
+| 6 | `think-9jqn` | `devtools/animation_from_trace.py` (new) | `trajectory_from_animation` | One function, `PackingAnimation` document to `PackingTrajectory`: `[x, y, theta]` to `SquareGeometry` with a pose, `side` to `container_side`, `t` to `logical_time`, `guided` and `feasible` into the frame label so no renderer can drop them. |
+| 7 | `think-9jqn` | `devtools/export_animation_svg.py` (new) | `export_svg` | Trace in, one scriptless `.svg` out: `render_packing_svg` for the final frame, `append_motion_styles` for the motion. Refuses when any frame has `guided` and no label component is present. |
+| 8 | `think-dekm` | `devtools/packing_strategy.py` | `run`, `main` | Emit a `PackingAnimation` document rather than today's ad-hoc `{"frames": [...]}`, with `guided` set per frame from the phase that produced it. |
+| 9 | `think-cttv` | `devtools/packing_strategy.py` | `MECHANISMS`, `_run_container` (new) | A `container` mechanism, so the side is a phase. *Open* and *Close* are it run twice. |
+| 10 | `think-cttv` | `devtools/run_projection_ratchet.py` | `match_targets` | Accept unequal counts: `n` squares against `n+1` targets. The rectangular assignment already handles the shape; the rule for which square is new is "whichever target the assignment leaves over". |
+| 11 | `think-cttv` | `devtools/build_ascent.py` (new) | `ascent_strategies` | One strategy document per step for `n = 1..100`, six phases each, so a single step re-runs and re-watches alone. |
+| 12 | `think-e74w` | same | `fair_reach` | The excess over the record at the end of *Settle*, per step, into the receipt beside the film. |
+| 13 | `think-zvor` | `devtools/capture_animation.py` (new) | `capture` | Frames at a declared size and rate through the pinned headless browser, then an encoder, then a receipt naming every strategy document and the record each step landed on. |
+| 14 | `think-6qxx` | the workbench template | a JS `MECHANISMS` | Mirror the Python registry, reading the same schema, so the hosted page executes documents rather than hard-coded modes. |
+| 15 | `think-6qxx` | `tests/test_mechanism_conformance.py` (new) | — | One strategy document through both implementations; the two animations compared within a declared tolerance. |
+| 16 | `think-n0e0` | `.github/workflows/pages.yml`, `devtools/render_explainer.py` | `RENDER_INPUTS`, both `paths:` lists | A `site/workbench/` build job whose output `build` collects, never touching `site/index.html`, with the new inputs declared so `test_the_pages_filter_covers_every_render_input` passes. |
+
+Rows 1 to 5 are the only ones with no prerequisite, and nothing is watchable until they land.
+
 ## Testing Strategy
 
 Every phase asserts the invariant it is responsible for, not an arrangement that
