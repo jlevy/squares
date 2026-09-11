@@ -7,12 +7,16 @@
   for (const law of o.laws) {
     api.setLaw(law);
     const key = api.law().key;
-    if (api.lawForce(0) !== 0) bad.push([key, 0, api.lawForce(0), 'not zero at touching']);
+    if (api.lawForce(0) !== 0) {
+      bad.push([key, 0, api.lawForce(0), "not zero at touching"]);
+    }
     for (const d of ds) {
       const f = api.lawForce(d);
-      if (!(f > 0)) bad.push([key, d, f, 'not repulsive at a penetration']);
+      if (!(f > 0)) {
+        bad.push([key, d, f, "not repulsive at a penetration"]);
+      }
     }
   }
-  api.setLawPreset('default');
+  api.setLawPreset("default");
   return bad;
-}
+};

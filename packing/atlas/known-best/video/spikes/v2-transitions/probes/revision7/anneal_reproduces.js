@@ -4,10 +4,11 @@
 (o) => {
   const A = window.atlasTransitions;
   A.setAnneal(7);
-  const a = A.physics(o.index, 'bodies', 'free').final[0];
-  A.setAnneal(2); A.physics(o.index, 'bodies', 'free');
+  const a = A.physics(o.index, "bodies", "free").final[0];
+  A.setAnneal(2);
+  A.physics(o.index, "bodies", "free");
   A.setAnneal(7);
-  const b = A.physics(o.index, 'bodies', 'free').final[0];
+  const b = A.physics(o.index, "bodies", "free").final[0];
   A.setAnneal(3);
   return [a, b];
-}
+};

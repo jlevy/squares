@@ -5,5 +5,5 @@
   const before = api.state().optimizing;
   const i = api.pickAt(o.x, o.y);
   const g = api.grab(i, o.x, o.y);
-  return {before, i, g, optimizing: api.state().optimizing, edited: api.hand().edited};
-}
+  return { before, i, g, optimizing: api.state().optimizing, edited: api.hand().edited };
+};

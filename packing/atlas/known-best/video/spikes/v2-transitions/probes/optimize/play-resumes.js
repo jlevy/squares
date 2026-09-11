@@ -3,5 +3,5 @@
   const api = window.atlasTransitions;
   api.setSpeed(o.speed);
   api.play();
-  return {playing: api.state().playing, steps: api.optimizeState().steps};
-}
+  return { playing: api.state().playing, steps: api.optimizeState().steps };
+};

@@ -2,7 +2,9 @@
 // Takes {index}.
 (o) => {
   const A = window.atlasTransitions;
-  A.select(o.index); A.setStyle('bodies'); A.setBlind(true);
+  A.select(o.index);
+  A.setStyle("bodies");
+  A.setBlind(true);
   A.seek(A.duration());
-  return {read: String(A.gapBar().side), miss: A.physics(o.index, 'bodies', 'blind').miss};
-}
+  return { read: String(A.gapBar().side), miss: A.physics(o.index, "bodies", "blind").miss };
+};

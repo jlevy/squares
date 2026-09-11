@@ -9,6 +9,8 @@
   const id = setInterval(() => {
     const st = api.state();
     window.__samples.push([st.t, api.gapBar().x, api.colour().overlap]);
-    if (!st.playing) clearInterval(id);
+    if (!st.playing) {
+      clearInterval(id);
+    }
   }, 60);
-}
+};

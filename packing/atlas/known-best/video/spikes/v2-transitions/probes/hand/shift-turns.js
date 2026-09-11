@@ -3,11 +3,11 @@
 (o) => {
   const api = window.atlasTransitions;
   api.setStepN(o.n);
-  api.setInitial('grid');
+  api.setInitial("grid");
   const j = api.pickAt(o.at[0], o.at[1]);
   api.grab(j, o.grab[0], o.grab[1]);
   const a = api.dragTo(o.first[0], o.first[1], true);
   const b = api.dragTo(o.second[0], o.second[1], true);
   api.release();
-  return {a, b};
-}
+  return { a, b };
+};

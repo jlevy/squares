@@ -7,9 +7,10 @@
   const out = {};
   for (const k of o.kinds) {
     api.setRelationship(k);
-    (out[k] = out[k] || []).push(JSON.stringify(api.physics(i, 'bodies', 'free').miss));
+    out[k] ??= [];
+    out[k].push(JSON.stringify(api.physics(i, "bodies", "free").miss));
   }
-  api.setRelationship('general');
-  api.setLawPreset('default');
+  api.setRelationship("general");
+  api.setLawPreset("default");
   return out;
-}
+};

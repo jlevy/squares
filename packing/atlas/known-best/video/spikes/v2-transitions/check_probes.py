@@ -50,12 +50,18 @@ CALLERS = (
 #: Asks node to parse each probe and say what it evaluates to. The file is wrapped in
 #: parentheses because an arrow function is an expression: `(o) => o` on its own line is a
 #: syntax error as a *statement*, which is what a bare `node --check` would read it as.
+#:
+#: The trailing semicolon is trimmed first, because the formatter puts one there -- the file
+#: IS a statement on disk, however it is used -- and a statement terminator inside the
+#: wrapping parentheses is a syntax error. Playwright itself does not care either way; it is
+#: only this wrapper that has to.
 INSPECT = """
 const fs = require('fs');
 const out = {};
 for (const path of process.argv.slice(1)) {
+  const source = fs.readFileSync(path, 'utf8').trimEnd().replace(/;$/, '');
   try {
-    out[path] = { type: typeof eval('(' + fs.readFileSync(path, 'utf8') + ')') };
+    out[path] = { type: typeof eval('(' + source + ')') };
   } catch (e) {
     out[path] = { error: String(e && e.message ? e.message : e) };
   }

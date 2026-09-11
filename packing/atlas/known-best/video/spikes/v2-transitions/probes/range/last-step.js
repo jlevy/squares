@@ -7,5 +7,5 @@
   api.pause();
   api.goTo(o.step);
   api.seek(api.duration() - 0.001);
-  return {n: api.state().n, last: api.range().to};
-}
+  return { n: api.state().n, last: api.range().to };
+};

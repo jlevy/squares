@@ -4,4 +4,4 @@
   const steps = api.optimizeState().steps;
   api.pause();
   return steps;
-}
+};

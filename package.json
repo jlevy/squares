@@ -4,6 +4,14 @@
   "description": "Tooling-only root package for git hooks (lefthook). See docs/ for research reports and explorations/ for self-contained project directories with their own sources, code, and literature archives.",
   "version": "0.0.0",
   "devDependencies": {
-    "lefthook": "2.1.10"
+    "@biomejs/biome": "2.5.11",
+    "lefthook": "2.1.10",
+    "typescript": "7.0.2"
+  },
+  "scripts": {
+    "lint": "biome ci --error-on-warnings .",
+    "lint:fix": "biome check --write --unsafe .",
+    "format:check": "biome format .",
+    "typecheck": "tsc --noEmit"
   }
 }

@@ -3,6 +3,8 @@
 (o) => {
   const api = window.atlasTransitions;
   let answer;
-  for (const call of o.calls) answer = api[call[0]](...call.slice(1));
+  for (const call of o.calls) {
+    answer = api[call[0]](...call.slice(1));
+  }
   return answer;
-}
+};

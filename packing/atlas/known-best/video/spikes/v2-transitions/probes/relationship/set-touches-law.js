@@ -3,5 +3,5 @@
   const api = window.atlasTransitions;
   const before = api.law().key;
   api.setRelationship(o.kind);
-  return {before, after: api.law().key, kind: api.relationship().kind};
-}
+  return { before, after: api.law().key, kind: api.relationship().kind };
+};

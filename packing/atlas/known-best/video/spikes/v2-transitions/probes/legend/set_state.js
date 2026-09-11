@@ -4,8 +4,8 @@
   const A = window.atlasTransitions;
   A.select(o.index);
   A.setStyle(o.style);
-  A.setSnap(o.mode !== 'free');
-  A.setBlind(o.mode === 'blind');
+  A.setSnap(o.mode !== "free");
+  A.setBlind(o.mode === "blind");
   A.setAnneal(o.level);
   A.seek(o.at);
-}
+};

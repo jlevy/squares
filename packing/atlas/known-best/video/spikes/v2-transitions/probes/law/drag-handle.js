@@ -5,8 +5,10 @@
   const api = window.atlasTransitions;
   const l = api.dragLaw(o.handle, o.d, o.f);
   return {
-    law: {rigidity: l.rigidity, repulsion: l.repulsion, attraction: l.attraction, range: l.range},
-    sliders: ['rigidity', 'repulsion', 'attraction', 'range'].map((k) => document.getElementById('law-' + k).value),
-    shown: document.getElementById('lp-pull').style.display !== 'none',
+    law: { rigidity: l.rigidity, repulsion: l.repulsion, attraction: l.attraction, range: l.range },
+    sliders: ["rigidity", "repulsion", "attraction", "range"].map(
+      (k) => document.getElementById(`law-${k}`).value,
+    ),
+    shown: document.getElementById("lp-pull").style.display !== "none",
   };
-}
+};

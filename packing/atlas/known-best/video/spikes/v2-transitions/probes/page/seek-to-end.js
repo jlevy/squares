@@ -3,6 +3,8 @@
 // o.calls is a list of [method, ...arguments], and may be empty.
 (o) => {
   const api = window.atlasTransitions;
-  for (const call of (o.calls || [])) api[call[0]](...call.slice(1));
+  for (const call of o.calls || []) {
+    api[call[0]](...call.slice(1));
+  }
   return api.seek(api.duration());
-}
+};

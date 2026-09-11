@@ -2,4 +2,4 @@
 (o) => {
   const api = window.atlasTransitions;
   return api.linkStart(o.index) >= 0 && api.linkEnd(o.index).added;
-}
+};

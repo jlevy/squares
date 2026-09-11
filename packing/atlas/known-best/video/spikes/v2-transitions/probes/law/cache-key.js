@@ -8,8 +8,8 @@
   const out = {};
   for (const key of Object.keys(o.presets)) {
     api.setLawPreset(o.presets[key]);
-    out[key] = JSON.stringify(api.physics(i, 'bodies', 'free').miss);
+    out[key] = JSON.stringify(api.physics(i, "bodies", "free").miss);
   }
-  api.setLawPreset('default');
+  api.setLawPreset("default");
   return out;
-}
+};

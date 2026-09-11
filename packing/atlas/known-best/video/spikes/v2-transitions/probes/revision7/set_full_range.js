@@ -2,4 +2,4 @@
 () => {
   const A = window.atlasTransitions;
   A.setRange(A.range().min, A.range().max);
-}
+};

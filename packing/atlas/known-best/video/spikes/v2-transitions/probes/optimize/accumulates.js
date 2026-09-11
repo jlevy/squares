@@ -3,11 +3,11 @@
 (o) => {
   const api = window.atlasTransitions;
   api.setStepN(o.n);
-  api.setInitial('grid');
+  api.setInitial("grid");
   const a = api.optimizeState();
   api.optimizeStep(o.steps);
   const b = api.optimizeState();
   api.optimizeStep(o.steps);
   const c = api.optimizeState();
-  return {a, b, c};
-}
+  return { a, b, c };
+};

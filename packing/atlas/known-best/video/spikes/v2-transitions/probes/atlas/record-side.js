@@ -2,5 +2,7 @@
 // o.n is the size.
 (o) => {
   window.atlasTransitions.optimizeState();
-  return Number(JSON.parse(document.getElementById('atlas-data').textContent).facts[String(o.n)].side);
-}
+  return Number(
+    JSON.parse(document.getElementById("atlas-data").textContent).facts[String(o.n)].side,
+  );
+};

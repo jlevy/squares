@@ -6,7 +6,10 @@
   const pairs = A.pairs();
   for (const i of [0, Math.floor(pairs.length / 2), pairs.length - 1]) {
     A.select(i);
-    for (const u of [0, 0.5, 1]) { A.seek(A.duration() * u); out.push(A.progress().position); }
+    for (const u of [0, 0.5, 1]) {
+      A.seek(A.duration() * u);
+      out.push(A.progress().position);
+    }
   }
   return out;
-}
+};

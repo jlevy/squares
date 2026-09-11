@@ -7,5 +7,5 @@
   api.seek(o.before);
   const before = api.gapBar().x;
   api.seek(o.after);
-  return {before, after: api.gapBar().x, demand: api.refreshGap().x};
-}
+  return { before, after: api.gapBar().x, demand: api.refreshGap().x };
+};

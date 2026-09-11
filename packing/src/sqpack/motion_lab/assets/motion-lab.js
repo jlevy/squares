@@ -34,15 +34,25 @@ let animationOrigin = 0;
 playButton.hidden = !scenarioHasCapability("playback");
 progressInput.disabled = !scenarioHasCapability("scrub");
 
-function currentScene() { return scenes.get(`${motionSelect.value}:${stratumSelect.value}`); }
-function currentProgress() { return Number(progressInput.value) / Number(progressInput.max); }
-function transform(pose) {
-  return `translate(${pose.x} ${pose.y}) rotate(${pose.angle * 180 / Math.PI})`;
+function currentScene() {
+  return scenes.get(`${motionSelect.value}:${stratumSelect.value}`);
 }
-function screenPoint(pose) { return [left + scale * pose.x, bottom - scale * pose.y]; }
+function currentProgress() {
+  return Number(progressInput.value) / Number(progressInput.max);
+}
+function transform(pose) {
+  return `translate(${pose.x} ${pose.y}) rotate(${(pose.angle * 180) / Math.PI})`;
+}
+function screenPoint(pose) {
+  return [left + scale * pose.x, bottom - scale * pose.y];
+}
 
-function pairKey(pair) { return `${pair[0]}-${pair[1]}`; }
-function contactLabel(pair) { return `${pair[0]}–${pair[1]}`; }
+function pairKey(pair) {
+  return `${pair[0]}-${pair[1]}`;
+}
+function contactLabel(pair) {
+  return `${pair[0]}–${pair[1]}`;
+}
 
 function setLine(line, first, second) {
   line.setAttribute("x1", first.x);
@@ -52,8 +62,11 @@ function setLine(line, first, second) {
 }
 
 function setShown(element, shown) {
-  if (shown) element.removeAttribute("display");
-  else element.setAttribute("display", "none");
+  if (shown) {
+    element.removeAttribute("display");
+  } else {
+    element.setAttribute("display", "none");
+  }
 }
 
 function updateGeometry(scene, progress) {
@@ -81,14 +94,11 @@ function updateGeometry(scene, progress) {
     const tangent = byId(`tangent-${pose.id}`);
     const start = base[index];
     const arrowEnd = {
-      x: start.x + scalar(scene.squares[index].centre_derivative.x) * extent * .72,
-      y: start.y + scalar(scene.squares[index].centre_derivative.y) * extent * .72,
+      x: start.x + scalar(scene.squares[index].centre_derivative.x) * extent * 0.72,
+      y: start.y + scalar(scene.squares[index].centre_derivative.y) * extent * 0.72,
     };
     setLine(tangent, start, arrowEnd);
-    setShown(
-      tangent,
-      tangentToggle.checked && (start.x !== arrowEnd.x || start.y !== arrowEnd.y),
-    );
+    setShown(tangent, tangentToggle.checked && (start.x !== arrowEnd.x || start.y !== arrowEnd.y));
   });
   setShown(byId("obstruction-badge"), obstruction);
   updateContacts(scene, progress, actual);
@@ -134,13 +144,16 @@ function updateReadout(scene, progress) {
   byId("evidence-value").textContent = scene.evidence.status.replaceAll("-", " ");
   byId("source-value").textContent = scene.evidence.source_record;
   if (scene.evidence.geometry_source_record) {
-    byId("source-value").textContent += `; ghost geometry: ${scene.evidence.geometry_source_record}`;
+    byId("source-value").textContent +=
+      `; ghost geometry: ${scene.evidence.geometry_source_record}`;
   }
   byId("claim-value").textContent = scene.evidence.claim;
   byId("claim-value").classList.toggle("obstructed", scene.mode === "second-order-obstruction");
   const controls = sceneControlState(scene);
   const rotating = controls.ownerDisabled;
-  const angle = rotating ? 2 * Math.atan(scene.sigma * value / 2) * 180 / Math.PI : value * 180 / Math.PI;
+  const angle = rotating
+    ? (2 * Math.atan((scene.sigma * value) / 2) * 180) / Math.PI
+    : (value * 180) / Math.PI;
   byId("angle-value").textContent = rotating
     ? `${angle.toFixed(5)}° on square 1; θ=2 atan(σu/2)`
     : `${angle.toFixed(5)}° linear ghost on squares 3 and 4`;
@@ -168,14 +181,18 @@ function update() {
 }
 
 function stopPlayback() {
-  if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+  if (animationFrame !== null) {
+    cancelAnimationFrame(animationFrame);
+  }
   animationFrame = null;
   animationStart = null;
   playButton.textContent = "Play";
 }
 
 function tick(timestamp) {
-  if (animationStart === null) animationStart = timestamp;
+  if (animationStart === null) {
+    animationStart = timestamp;
+  }
   const elapsed = (timestamp - animationStart) / durationMilliseconds;
   const next = Math.min(1, animationOrigin + elapsed);
   progressInput.value = String(Math.round(next * Number(progressInput.max)));
@@ -189,8 +206,12 @@ function tick(timestamp) {
 }
 
 function startPlayback() {
-  if (currentScene().mode !== "certified-path") return;
-  if (currentProgress() >= 1) progressInput.value = "0";
+  if (currentScene().mode !== "certified-path") {
+    return;
+  }
+  if (currentProgress() >= 1) {
+    progressInput.value = "0";
+  }
   animationOrigin = currentProgress();
   animationStart = null;
   playButton.textContent = "Pause";
@@ -199,7 +220,11 @@ function startPlayback() {
 }
 
 playButton.addEventListener("click", () => {
-  if (animationFrame === null) startPlayback(); else stopPlayback();
+  if (animationFrame === null) {
+    startPlayback();
+  } else {
+    stopPlayback();
+  }
 });
 restartButton.addEventListener("click", () => {
   stopPlayback();
@@ -207,7 +232,10 @@ restartButton.addEventListener("click", () => {
   update();
   liveRegion.textContent = "Scene returned to its base configuration.";
 });
-progressInput.addEventListener("input", () => { stopPlayback(); update(); });
+progressInput.addEventListener("input", () => {
+  stopPlayback();
+  update();
+});
 for (const select of [motionSelect, stratumSelect]) {
   select.addEventListener("change", () => {
     stopPlayback();

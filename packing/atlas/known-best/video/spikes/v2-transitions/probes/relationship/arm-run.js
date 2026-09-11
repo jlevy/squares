@@ -2,9 +2,9 @@
 // open-ended run from the grid start. o.n is the size, o.kind the graph.
 (o) => {
   const api = window.atlasTransitions;
-  api.setStyle('tween');
+  api.setStyle("tween");
   api.setStepN(o.n);
-  api.setLawPreset('sticky');
+  api.setLawPreset("sticky");
   api.setRelationship(o.kind);
-  api.setInitial('grid');
-}
+  api.setInitial("grid");
+};

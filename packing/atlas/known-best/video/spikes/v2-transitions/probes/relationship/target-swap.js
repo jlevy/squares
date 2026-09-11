@@ -4,7 +4,11 @@
   const before = api.targetGraph();
   const from = api.relationship().target;
   api.setTargetGraph(o.graph);
-  const given = {graph: api.targetGraph(), target: api.relationship().target, edges: api.relationship().edges};
+  const given = {
+    graph: api.targetGraph(),
+    target: api.relationship().target,
+    edges: api.relationship().edges,
+  };
   api.setTargetGraph(null);
-  return {before, from, given, after: api.targetGraph(), target: api.relationship().target};
-}
+  return { before, from, given, after: api.targetGraph(), target: api.relationship().target };
+};

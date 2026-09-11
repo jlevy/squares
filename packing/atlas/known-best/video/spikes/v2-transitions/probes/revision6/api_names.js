@@ -1,2 +1,2 @@
 // What the review API offers, by name.
-() => Object.keys(window.atlasTransitions)
+() => Object.keys(window.atlasTransitions);

@@ -4,9 +4,9 @@
 (o) => {
   const api = window.atlasTransitions;
   const i = api.state().pair;
-  api.setTargetSource('record');
-  const fromRecord = JSON.stringify(api.physics(i, 'bodies', 'free').miss);
+  api.setTargetSource("record");
+  const fromRecord = JSON.stringify(api.physics(i, "bodies", "free").miss);
   api.setEdges(o.graph);
-  const fromHand = JSON.stringify(api.physics(i, 'bodies', 'free').miss);
-  return {fromRecord, fromHand};
-}
+  const fromHand = JSON.stringify(api.physics(i, "bodies", "free").miss);
+  return { fromRecord, fromHand };
+};

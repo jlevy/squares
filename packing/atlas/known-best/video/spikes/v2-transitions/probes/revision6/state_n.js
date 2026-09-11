@@ -1,2 +1,2 @@
 // The n the stage is sitting on.
-() => window.atlasTransitions.state().n
+() => window.atlasTransitions.state().n;

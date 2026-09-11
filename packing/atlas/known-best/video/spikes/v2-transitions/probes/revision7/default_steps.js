@@ -2,5 +2,5 @@
 (o) => {
   const A = window.atlasTransitions;
   A.setAnneal(3);
-  return A.physics(o.index, 'physics', o.mode).steps;
-}
+  return A.physics(o.index, "physics", o.mode).steps;
+};

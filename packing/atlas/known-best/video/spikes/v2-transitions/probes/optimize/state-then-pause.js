@@ -4,4 +4,4 @@
   const state = api.optimizeState();
   api.pause();
   return state;
-}
+};

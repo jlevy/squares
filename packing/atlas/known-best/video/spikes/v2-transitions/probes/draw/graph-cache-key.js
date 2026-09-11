@@ -4,12 +4,17 @@
   const api = window.atlasTransitions;
   const i = api.state().pair;
   const out = {};
-  const one = () => ({key: api.relationship().key,
-                      miss: JSON.stringify(api.physics(i, 'bodies', 'free').miss)});
+  const one = () => ({
+    key: api.relationship().key,
+    miss: JSON.stringify(api.physics(i, "bodies", "free").miss),
+  });
   for (const step of o.walk) {
-    if (step[1] === null) api.setTargetSource('record');
-    else api.setEdges(step[1]);
+    if (step[1] === null) {
+      api.setTargetSource("record");
+    } else {
+      api.setEdges(step[1]);
+    }
     out[step[0]] = one();
   }
   return out;
-}
+};

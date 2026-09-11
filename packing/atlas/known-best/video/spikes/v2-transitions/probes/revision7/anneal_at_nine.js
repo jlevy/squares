@@ -3,7 +3,7 @@
 (o) => {
   const A = window.atlasTransitions;
   A.setAnneal(9);
-  const r = A.physics(o.index, 'physics', o.mode);
+  const r = A.physics(o.index, "physics", o.mode);
   A.setAnneal(3);
-  return {miss: r.miss, steps: r.steps};
-}
+  return { miss: r.miss, steps: r.steps };
+};

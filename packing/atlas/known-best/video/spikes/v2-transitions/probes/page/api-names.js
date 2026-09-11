@@ -1,2 +1,2 @@
 // Every name the page's API carries.
-() => Object.keys(window.atlasTransitions)
+() => Object.keys(window.atlasTransitions);

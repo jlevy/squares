@@ -3,4 +3,4 @@
 (o) => {
   const b = document.querySelector(o.selector).getBoundingClientRect();
   return [b.left, b.top, b.width, b.height];
-}
+};

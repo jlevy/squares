@@ -3,5 +3,8 @@
 (o) => {
   const api = window.atlasTransitions;
   api.setInitial(o.kind);
-  if (o.kind === 'previous') { api.optimize(true); api.pause(); }
-}
+  if (o.kind === "previous") {
+    api.optimize(true);
+    api.pause();
+  }
+};
