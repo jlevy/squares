@@ -5,12 +5,16 @@ title: Drop the progress scale along the bottom of the stage
 kind: task
 status: open
 priority: 2
-version: 2
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T17:22:38.216Z
-updated_at: 2026-09-11T17:22:54.133Z
+updated_at: 2026-09-11T17:31:08.063Z
+closed_at: 2026-09-11T17:30:59.674Z
+close_reason: "superseded: this is about the gap bar's scale, which landed; the progress scale at the bottom of the stage is a different element and stays open"
+resolution: null
+duplicate_of: null
 ---
 The owner: the scale at the bottom is distracting, drop it entirely.
 
