@@ -3,14 +3,18 @@ type: is
 id: is-01m291gkyzr8mmb81644pef6f9
 title: The n = 26 headline should be real mathematics
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T20:11:01.982Z
-updated_at: 2026-09-11T20:11:01.982Z
+updated_at: 2026-09-11T20:11:24.118Z
+closed_at: 2026-09-11T20:11:24.105Z
+close_reason: Done in 4ed60b89
+resolution: null
+duplicate_of: null
 ---
 Done in 4ed60b89, recorded because the owner asked for it as a bead and because the reasoning is worth keeping.
 

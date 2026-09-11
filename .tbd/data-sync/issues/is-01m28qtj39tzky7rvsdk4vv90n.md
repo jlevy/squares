@@ -3,14 +3,18 @@ type: is
 id: is-01m28qtj39tzky7rvsdk4vv90n
 title: The badges become icons on the line they qualify
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T17:21:41.992Z
-updated_at: 2026-09-11T17:21:41.992Z
+updated_at: 2026-09-11T20:11:37.984Z
+closed_at: 2026-09-11T20:11:37.983Z
+close_reason: "superseded by the panel's current shape: the badges sit under the two bound lines they qualify inside PROVEN, which is what putting them on the line was for. Reopen if the icons should sit inline with the value itself."
+resolution: null
+duplicate_of: null
 ---
 The badges sit in a row of their own, four lines below the fact they are about, each with its label spelled out: 'O optimal   = exact   R rigid'. The owner wants them as icons beside the assertion itself -- s(324) = 18 followed by the marks that say this value is optimal, exact and rigid.
 
