@@ -31,6 +31,8 @@ exploration:
   - docs/project/research/research-2026-09-10-x027-fractional-duality.md
   - docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md
   - docs/project/research/research-2026-09-10-x027-structural-helpers.md
+  - packing/campaign/hypotheses/H-131-near-axis-counts-at-q.md
+  - packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md
   - packing/campaign/hypotheses/H-135-paired-full-support-pricing.md
   - packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md
   - packing/campaign/hypotheses/H-018-basin-entry.md
@@ -69,6 +71,14 @@ cores containing a specified number of sites.
 A **fractional family** permits overlapping cores with nonnegative weights.
 It obstructs a certificate language only after every capacity inequality of that
 language is verified.
+For a fractional family $\{(C_i,\lambda_i)\}$, its **mass** is $\sum_i\lambda_i$, and
+its **point depth** at $x$ is the sum of the weights of the cores containing $x$. A
+core’s **trace** on a finite site set is the subset of those sites that it contains.
+An **owner** of a marked site is a selected core containing it; the core’s physical
+unit-square parent contains the mark as well.
+A **placement support** is the finite list of core placements used as the rows of a
+finite linear program.
+A result on that list need not hold after other placements are added.
 
 The retained bound is
 
@@ -81,7 +91,10 @@ $$
 T-026 proves the ordinary exact lower bound at V4/C5 in the
 [current evidence account](../../../docs/project/research/research-2026-09-09-n11-evidence-and-inference.md).
 Its limit argument does not decide the separate strict inequality $s(11)>C$. Improving
-the lower bound requires a stronger complete certificate and its physical transfer.
+the lower bound requires a complete exclusion for every side below some new endpoint
+above $C$, proved directly or through a limiting argument.
+Covering routes must establish complete coverage and physical transfer; structural
+routes must cover their geometric cases and routing.
 Improving the upper bound requires one independently verified packing below Trump’s
 exact value; exhaustive search is unnecessary for that direction.
 
@@ -128,8 +141,9 @@ finer-net disjunct in
 [exp-155](../series/series-000-smoke-and-calibration/experiments/exp-155-h156-finer-net-threshold-dilation.md).
 BC329 is a prospective successor with the same T-025 sites and relative weights, a
 2880-step net, core side $B=9981/10000$, and angular mismatch bound
-$D=207107/1440000000$. Its geometric limit is approximately $3.826721480476156460$,
-conditional on complete coverage of that packet.
+$D=207107/1440000000$. Here $D$ is the worst mismatch tangent, not an angle.
+Its geometric limit is approximately $3.826721480476156460$, conditional on complete
+coverage of that packet.
 The
 [preflight](../../../docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md)
 states the frozen source and normalization.
@@ -146,10 +160,13 @@ timeout or incomplete coverage is unresolved.
 Neither closes re-optimization, other packets, or richer charges.
 This route remains selected because it tests a specific continuation of a mechanism that
 has produced a stronger bound.
+Direction-dependent core sizes remain another geometric option, requiring complete
+coverage and physical transfer on every assigned angle cell.
 
 ### 2. Change Atoms and Check the Replacement Supports
 
-A6 shows why adding arbitrary point sites to its unchanged language is insufficient.
+A6 shows why adding arbitrary point sites while retaining its 2,566 atom orbits and core
+domain cannot defeat that family.
 It also shows why cutting a particular fractional family is insufficient: another
 support can retain the finite program’s value.
 New atoms and new placement rows must be compared on an explicitly matched program, with
@@ -270,6 +287,9 @@ A combinatorial cover supplies a physical theorem only with complete transfer fr
 physical packing and independently verified geometry.
 Segment/angle helpers remain a subsequent route when a specific incidence cell supplies
 the missing resource inequality.
+Other retained structural inputs include the snug-parent/contact-path alternative and
+[H-134’s ten-segment unavoidable set](../hypotheses/H-134-eleven-mark-ownership-set.md).
+Neither supplies an exclusion without its own complete geometric argument.
 
 ### 5. Threshold Charges on a Residual Domain
 
@@ -293,6 +313,9 @@ the language fixed while comparing uniform and class-specific demands, then hold
 proved profile fixed while comparing points and thresholds.
 Do not conflate a demand improvement with a language improvement, or use rounded angle
 labels in place of the proved physical-to-core classification.
+This is a separately registered eleven-core profile comparison under
+[H-131’s exact angle-count premises](../hypotheses/H-131-near-axis-counts-at-q.md); it
+does not inherit BC330’s four-owner residual domain or seven-unit budget.
 
 **Stop and scope.** One class and one frozen candidate after admission, within BC330’s
 registered allowance.
@@ -314,9 +337,12 @@ depths satisfying $d_{32}\le1<d_{\mathrm{full}}$.
 **Discriminator.** Publish BC331’s fresh forward protocol, retaining the original
 source, one solve, rationalization, selected-candidate rule, and 30-minute process
 allowance. Replay the exact membership and orbit absence.
-A hit identifies information lost by truncation and proposes a column; a stronger
-theorem still needs re-optimization, all-pose coverage, a budget below eleven, and
-physical transfer above $C$.
+A hit identifies information lost by truncation and proposes a column.
+At H-135’s frozen $q=96/25$, X-027’s transported mass-eleven family rules out an
+unconditional point certificate below eleven.
+Turning a pricing hit into a stronger bound therefore requires a side below $L_*$,
+richer charges, or a justified restricted domain, followed by the corresponding
+re-optimization, complete coverage, and physical transfer.
 
 **Stop and scope.** Keep the one-candidate contract and its external grace.
 Timeout, line-pair refusal, missing output, an existing orbit, or failure of the paired
