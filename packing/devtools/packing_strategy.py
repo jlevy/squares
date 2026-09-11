@@ -231,7 +231,7 @@ def _run_guide(state: State, phase: dict[str, Any], _rng: np.random.Generator) -
     t = phase.get("target") or {}
     targets, side = record(state.n)
     if t.get("match", "by-motion") == "by-motion":
-        targets = match_targets(state.poses, targets)
+        targets, _spare = match_targets(state.poses, targets)
     state.side = side
     landed, _frames = guide_home(
         state.n,
@@ -249,7 +249,41 @@ def _run_guide(state: State, phase: dict[str, Any], _rng: np.random.Generator) -
     }
 
 
+def _run_container(state: State, phase: dict[str, Any], _rng: np.random.Generator) -> None:
+    """Resize the box, carrying the arrangement with it, as a phase of its own.
+
+    The ascent's *Open* and *Close* beats are this mechanism run twice. Open grows the
+    container to whichever of the two sides is larger, because adding a square is a genuine
+    rearrangement and it needs somewhere to happen: measured without it, a guided step
+    between two different `n` peaks at 0.83 of a unit side of overlap, while the same
+    machinery between two arrangements of the same `n` never overlaps at all. Close then
+    contracts to the new record's side with the squares riding it down.
+
+    Centres scale about the container's middle so a square that was against a wall stays
+    against it, and the squares themselves do not scale, because they are unit squares and
+    that is the whole problem.
+    """
+    was = state.side
+    state.side = _side_for(state, phase.get("side"))
+    if was <= 0:
+        return
+    factor = state.side / was
+    moved = state.poses.copy()
+    moved[:, :2] = (state.poses[:, :2] - was / 2) * factor + state.side / 2
+    state.poses = moved
+    frames = int((phase.get("until") or {}).get("frames", 24))
+    for step in range(1, frames + 1):
+        u = step / frames
+        ease = u * u * (3 - 2 * u)
+        between = state.poses.copy()
+        side_now = was + ease * (state.side - was)
+        between[:, :2] = (state.poses[:, :2] - state.side / 2) * (side_now / state.side)
+        between[:, :2] += side_now / 2
+        state.trace.append(between)
+
+
 MECHANISMS = {
+    "container": _run_container,
     "scatter": _run_scatter,
     "grid": _run_grid,
     "assemble": _run_assemble,
@@ -271,15 +305,26 @@ def load(path: Path) -> dict[str, Any]:
     return strategy
 
 
-def run(strategy: dict[str, Any], *, keep_trace: bool = False) -> State:
-    """Execute the phases in order, threading one arrangement through them."""
+def run(
+    strategy: dict[str, Any],
+    *,
+    keep_trace: bool = False,
+    start: Array | None = None,
+    start_side: float | None = None,
+) -> State:
+    """Execute the phases in order, threading one arrangement through them.
+
+    `start` is what makes an ascent possible: step `n` begins from step `n - 1`'s result
+    rather than from the grid, which is the whole point of a film that adds one square at a
+    time. Without it each step would restart and the squares would teleport between steps.
+    """
     n = int(strategy["n"])
     seed = int(strategy.get("seed", 0))
     rng = np.random.default_rng(seed)
     state = State(
         n=n,
-        poses=_grid_poses(n, float(math.ceil(math.sqrt(n)))),
-        side=float(math.ceil(math.sqrt(n))),
+        poses=_grid_poses(n, float(math.ceil(math.sqrt(n)))) if start is None else start,
+        side=float(math.ceil(math.sqrt(n))) if start_side is None else start_side,
     )
     if not keep_trace:
         state.trace = []
@@ -348,7 +393,7 @@ def animation_document(
         "guided": any(f["guided"] for f in frames),
         "source": {"strategy": strategy["name"]},
         "duration_seconds": duration_seconds,
-        "palette": {"hue": "identity", "shade": "none"},
+        "palette": {"hue": "angle-class", "shade": "full-side-contact"},
         "reference": {"best_known": float(known)},
         "frames": [dict(f, t=index / span) for index, f in enumerate(frames)],
     }

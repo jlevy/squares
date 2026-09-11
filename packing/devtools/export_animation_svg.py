@@ -35,7 +35,7 @@ class GuidedWithoutLabelError(ValueError):
     """A guided animation was asked to export without saying so."""
 
 
-def export_svg(document: dict[str, Any], *, width: int = 720) -> str:
+def export_svg(document: dict[str, Any], *, width: int = 960) -> str:
     """One animated SVG from one animation document.
 
     Refuses a guided animation whose frames do not carry the label. That is not
@@ -58,11 +58,19 @@ def export_svg(document: dict[str, Any], *, width: int = 720) -> str:
         # are. Reading this was missing on the first pass, so every export came out under
         # the renderer's default angle-hue scheme while its own document asked for colour
         # by identity -- the field was defined and then ignored.
+        # Angle class is the standard scheme and the renderer's own default: it is what
+        # every atlas rendering uses, greens for one class and pink for the other. Colour
+        # by identity is a rainbow and belongs to the workbench, where a square keeping one
+        # colour across a run is the point.
         hue_scheme={"identity": HueScheme.INDEX, "angle-class": HueScheme.ANGLE}.get(
-            palette.get("hue", "identity"), HueScheme.INDEX
+            palette.get("hue", "angle-class"), HueScheme.ANGLE
         ),
-        shade_scheme={"full-side-contact": ShadeScheme.CONTACTS}.get(
-            palette.get("shade", "none"), ShadeScheme.CONTRAST
+        # CONTACTS is the renderer's default and what every atlas rendering uses. The
+        # defaults here are the atlas's defaults on purpose: a final still of a retained
+        # packing has to be the same drawing as atlas/known-best/rendering/n-NNN.svg, and
+        # it stops being one the moment this spec deviates for no reason.
+        shade_scheme={"none": ShadeScheme.CONTRAST}.get(
+            palette.get("shade", "full-side-contact"), ShadeScheme.CONTACTS
         ),
         title=document.get("name", "packing animation"),
         description=_describe(document),
@@ -100,7 +108,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("animation", type=Path)
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--width", type=int, default=720)
+    ap.add_argument("--width", type=int, default=960)
     o = ap.parse_args()
 
     document = json.loads(o.animation.read_text(encoding="utf-8"))

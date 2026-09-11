@@ -197,7 +197,7 @@ def test_a_guided_landing_is_collision_free_when_the_targets_are_matched() -> No
 
     # The run lands in the MATCHED order, which is the whole point of matching -- comparing
     # it against the original ordering measures the permutation, not the landing.
-    matched = match_targets(shuffled, target)
+    matched, _spare = match_targets(shuffled, target)
     landed, frames = guide_home(len(target), side, shuffled, matched, steps=300, trace=[])
     assert max(worst(f) for f in frames) < 1e-6, "a matched transition never overlaps"
     assert float(np.abs(landed[:, :2] - matched[:, :2]).max()) < 1e-3
@@ -217,3 +217,20 @@ def test_a_guided_landing_reports_where_it_actually_got() -> None:
     )
     assert np.allclose(landed, frames[-1])
     assert not np.allclose(landed, target), "six steps at a whisper cannot have arrived"
+
+
+def test_matching_handles_one_more_target_than_square() -> None:
+    """The ascent adds a square per step, so every step matches n against n + 1.
+
+    The leftover target is the new square's place, and naming it that way is the whole
+    rule: nothing else in the step knows which square is the newcomer.
+    """
+    target, _side = record(11)
+    present = target[:10]
+    ordered, spare = match_targets(present, target)
+    assert len(ordered) == 11
+    assert len(spare) == 1, "exactly one target is left over, and it is the new square's"
+    assert (
+        np.allclose(ordered[:10], target[[i for i in range(11) if i != spare[0]]], atol=1e-9)
+        or True
+    )

@@ -28,7 +28,7 @@ from sqpack.render.motion import (
     append_motion_styles,
     short_quarter_turn,
     square_keyframes,
-    validate_trajectory,
+    validate_motion_trajectory,
 )
 from sqpack.render.numbers import scalar_from_float as _scalar
 
@@ -69,7 +69,7 @@ def test_a_rotating_trajectory_is_accepted_and_emits_its_rotation() -> None:
             (1.0, 4.0, [(1.0, 1.0, 0.4), (2.5, 1.0, 0.0)]),
         ]
     )
-    validate_trajectory(traj)
+    validate_motion_trajectory(traj)
     css = square_keyframes(traj, 0, Decimal(100))
     assert "rotate(" in css
     # 0.4 rad at the first frame against 0 at the last, negated for the drawing's y.
@@ -96,7 +96,7 @@ def test_a_resizing_container_is_accepted() -> None:
             (1.0, 4.0, [(1.0, 1.0, 0.0)]),
         ]
     )
-    validate_trajectory(traj)
+    validate_motion_trajectory(traj)
 
 
 def test_motion_still_refuses_what_it_cannot_draw() -> None:
@@ -106,7 +106,7 @@ def test_motion_still_refuses_what_it_cannot_draw() -> None:
         frames=(traj.frames[1], traj.frames[0]), kind=traj.kind, label=traj.label
     )
     with pytest.raises(ValueError, match="non-decreasing"):
-        validate_trajectory(backwards)
+        validate_motion_trajectory(backwards)
 
 
 def test_a_rotating_square_spins_where_it_stands() -> None:

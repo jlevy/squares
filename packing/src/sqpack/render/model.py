@@ -368,8 +368,13 @@ def validate_trajectory(trajectory: PackingTrajectory) -> None:
     for frame in trajectory.frames:
         if tuple(square.square_id for square in frame.squares) != reference:
             raise ValueError("trajectory square identity or order changed")
-        if any(square.pose is None for square in frame.squares):
-            raise ValueError("trajectory squares require poses")
+        # Corners are enough. A frame built from a retained witness carries exact corners
+        # and no pose, and it has to stay that way: attaching a float pose changes what the
+        # renderer draws, because full-side contact shading needs two edges exactly
+        # parallel and a float angle is not exactly anything. The motion model derives the
+        # centre and angle it needs from the corners when a pose is absent.
+        if any(len(square.corners) < 2 for square in frame.squares):
+            raise ValueError("trajectory squares require corners or poses")
         if frame is not trajectory.frames[0] and frame.logical_time <= previous:
             raise ValueError("trajectory times must increase")
         previous = frame.logical_time

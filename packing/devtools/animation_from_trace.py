@@ -20,14 +20,61 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
+from devtools.build_known_best_atlas import frame_from_witness
+from devtools.known_structure import WITNESSES
 from devtools.packing_render_adapters import frame_from_pose_arrays
 from sqpack.render.model import (
     CheckKind,
     CheckSummary,
     EvidenceTier,
+    PackingFrame,
     PackingTrajectory,
+    SquareGeometry,
     TrajectoryKind,
 )
+from sqpack.yamlio import safe_load
+
+
+def _renamed(frame: PackingFrame) -> PackingFrame:
+    """Give pose-built squares the names the witness uses.
+
+    `frame_from_pose_arrays` numbers from zero in two digits and the atlas witness numbers
+    from one in three, and a trajectory whose frames disagree about a square's identity is
+    refused outright -- correctly, since it cannot know which square became which. Aligning
+    on the atlas convention is what lets a record frame and a computed one sit in the same
+    animation, and is also what makes a final still the same drawing as the atlas rendering
+    rather than one with different ids on identical shapes.
+    """
+    return PackingFrame(
+        container_side=frame.container_side,
+        squares=tuple(
+            SquareGeometry(
+                square_id=f"square-{index:03d}",
+                corners=square.corners,
+                pose=square.pose,
+                label=str(index),
+            )
+            for index, square in enumerate(frame.squares, start=1)
+        ),
+        evidence=frame.evidence,
+        check=frame.check,
+        label=frame.label,
+        logical_time=frame.logical_time,
+        source_id=frame.source_id,
+        source_url=frame.source_url,
+        features=frame.features,
+    )
+
+
+def _label(entry: dict[str, Any]) -> str:
+    """What to show while a frame is on screen, with the marks a viewer must not lose."""
+    marks = []
+    if entry.get("guided"):
+        marks.append("guided")
+    if not entry.get("feasible", True):
+        marks.append("not a packing")
+    label = entry.get("phase", "frame")
+    return f"{label} ({', '.join(marks)})" if marks else label
 
 
 def trajectory_from_animation(document: dict[str, Any]) -> PackingTrajectory:
@@ -39,49 +86,72 @@ def trajectory_from_animation(document: dict[str, Any]) -> PackingTrajectory:
     """
     frames = []
     for entry in document["frames"]:
+        # A frame that IS a retained record is built the way the atlas builds it, from the
+        # witness, through the same function. Rebuilding it from the float poses the run
+        # carried gives a picture that differs in the tenth significant digit -- invisible,
+        # but not the same drawing, and "the same as our SVGs" is a byte claim rather than
+        # a visual one.
+        if entry.get("record") is not None:
+            witness = safe_load(
+                (WITNESSES / f"n-{int(entry['record']):03d}.yaml").read_text(encoding="utf-8")
+            )["witness"]
+            base = frame_from_witness(witness)
+            # The witness frame is used exactly as the atlas uses it: exact corners and
+            # NO pose. Attaching a float pose changes what the renderer draws, because
+            # full-side contact shading needs two edges exactly parallel and a float angle
+            # is not exactly anything -- two of n = 11's eleven squares came out a different
+            # green. The motion model derives the pose it needs from these corners instead.
+            frames.append(
+                PackingFrame(
+                    container_side=base.container_side,
+                    squares=base.squares,
+                    evidence=base.evidence,
+                    check=base.check,
+                    label=_label(entry),
+                    logical_time=Decimal(str(entry["t"])),
+                    source_id=base.source_id,
+                    source_url=base.source_url,
+                    features=base.features,
+                )
+            )
+            continue
         squares = entry["squares"]
-        marks = []
-        if entry.get("guided"):
-            marks.append("guided")
-        if not entry.get("feasible", True):
-            marks.append("not a packing")
-        label = entry.get("phase", "frame")
-        if marks:
-            label = f"{label} ({', '.join(marks)})"
         frames.append(
-            frame_from_pose_arrays(
-                entry["side"],
-                [pose[0] for pose in squares],
-                [pose[1] for pose in squares],
-                [pose[2] for pose in squares],
-                label=label,
-                logical_time=Decimal(str(entry["t"])),
-                # A frame that is a packing establishes something; one mid-transition
-                # establishes nothing. Saying so here rather than in a side channel is what
-                # lets the renderer mute the second without being told which is which.
-                evidence=(
-                    EvidenceTier.NUMERICALLY_CHECKED
-                    if entry.get("feasible", True)
-                    else EvidenceTier.CANDIDATE
-                ),
-                # The tier is a claim about evidence, so the renderer requires the
-                # receipt with it -- and refuses the claim without one, which is how this
-                # got caught. The check is real: the producer measured the deepest
-                # penetration by the separating-axis theorem and compared it to 1e-9.
-                check=(
-                    CheckSummary(
-                        passed=True,
-                        kind=CheckKind.NUMERICAL,
-                        method="separating-axis violation at most 1e-9",
-                        arithmetic="binary64",
-                        precision="53",
-                        rounding="nearest-even",
-                        tolerance="1e-9",
-                    )
-                    if entry.get("feasible", True)
-                    else None
-                ),
-                source_id=document.get("name", "animation"),
+            _renamed(
+                frame_from_pose_arrays(
+                    entry["side"],
+                    [pose[0] for pose in squares],
+                    [pose[1] for pose in squares],
+                    [pose[2] for pose in squares],
+                    label=_label(entry),
+                    logical_time=Decimal(str(entry["t"])),
+                    # A frame that is a packing establishes something; one mid-transition
+                    # establishes nothing. Saying so here rather than in a side channel is what
+                    # lets the renderer mute the second without being told which is which.
+                    evidence=(
+                        EvidenceTier.NUMERICALLY_CHECKED
+                        if entry.get("feasible", True)
+                        else EvidenceTier.CANDIDATE
+                    ),
+                    # The tier is a claim about evidence, so the renderer requires the
+                    # receipt with it -- and refuses the claim without one, which is how this
+                    # got caught. The check is real: the producer measured the deepest
+                    # penetration by the separating-axis theorem and compared it to 1e-9.
+                    check=(
+                        CheckSummary(
+                            passed=True,
+                            kind=CheckKind.NUMERICAL,
+                            method="separating-axis violation at most 1e-9",
+                            arithmetic="binary64",
+                            precision="53",
+                            rounding="nearest-even",
+                            tolerance="1e-9",
+                        )
+                        if entry.get("feasible", True)
+                        else None
+                    ),
+                    source_id=document.get("name", "animation"),
+                )
             )
         )
     return PackingTrajectory(

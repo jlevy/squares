@@ -111,13 +111,15 @@ $defs:
     required: [mechanism]
     properties:
       mechanism:
-        enum: [scatter, grid, assemble, project, ratchet, relax, guide]
+        enum: [scatter, grid, assemble, project, ratchet, relax, guide, container]
         description: >
           scatter/grid place a starting arrangement; assemble builds the
           face-contact groups by construction; project settles under divide and
           concur; ratchet tightens the container with continuation; relax releases
           the structure and lets angles perturb; guide drives onto a chosen target
-          and is ANIMATION MACHINERY -- nothing it emits is a search result.
+          and is ANIMATION MACHINERY -- nothing it emits is a search result; container
+          resizes the box carrying the arrangement with it, which is how the ascent makes
+          room for a new square before asking anything to rearrange.
       label: {type: string, description: What to call this phase in a trace or on screen.}
       relaxation:
         type: number

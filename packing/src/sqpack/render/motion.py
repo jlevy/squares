@@ -12,6 +12,31 @@ from sqpack.render.numbers import format_svg_number
 from sqpack.render.svg import MOTION_MARKER, sub
 
 
+def pose_of(square):
+    """A square's centre and angle, from its pose when it has one and its corners when not.
+
+    A frame built from a retained witness carries exact corners and no pose, and it must
+    stay that way: attaching a float pose to it changes what the renderer draws. Full-side
+    contact shading needs two edges exactly parallel, and a float angle is not exactly
+    anything, so two of `n = 11`'s eleven squares came out a different green. Deriving the
+    pose here instead means a record frame is the same drawing as its atlas rendering while
+    the motion still has the numbers it needs.
+    """
+    if square.pose is not None:
+        return (
+            square.pose.centre.x.projected,
+            square.pose.centre.y.projected,
+            square.pose.angle.projected,
+        )
+    xs = [corner.x.projected for corner in square.corners]
+    ys = [corner.y.projected for corner in square.corners]
+    cx = sum(xs) / len(xs)
+    cy = sum(ys) / len(ys)
+    edge_x = xs[1] - xs[0]
+    edge_y = ys[1] - ys[0]
+    return cx, cy, Decimal(str(math.atan2(float(edge_y), float(edge_x))))
+
+
 def match_square_tracks(trajectory: PackingTrajectory):
     final_order = tuple(square.square_id for square in trajectory.frames[-1].squares)
     tracks = []
@@ -43,7 +68,7 @@ def short_quarter_turn(delta: Decimal) -> Decimal:
     return delta - turns * QUARTER_TURN
 
 
-def validate_trajectory(trajectory: PackingTrajectory) -> None:
+def validate_motion_trajectory(trajectory: PackingTrajectory) -> None:
     """Reject what the CSS motion model still cannot show, which is now much less.
 
     It used to refuse rotation outright and refuse any trajectory whose container side
@@ -54,8 +79,8 @@ def validate_trajectory(trajectory: PackingTrajectory) -> None:
     backwards.
     """
     for track in match_square_tracks(trajectory):
-        if any(square.pose is None for square in track):
-            raise ValueError("motion requires square poses")
+        if any(len(square.corners) < 2 for square in track):
+            raise ValueError("motion requires square corners or poses")
     times = tuple(frame.logical_time for frame in trajectory.frames)
     if any(later < earlier for earlier, later in pairwise(times)):
         raise ValueError("motion requires non-decreasing logical time")
@@ -78,20 +103,16 @@ def square_keyframes(
     muted: tuple[bool, ...] | None = None,
 ) -> str:
     percentages = keyframe_percentages(tuple(frame.logical_time for frame in trajectory.frames))
-    final = trajectory.frames[-1].squares[square_index].pose
-    if final is None:
-        raise ValueError("motion requires square poses")
+    final_x, final_y, final_angle = pose_of(trajectory.frames[-1].squares[square_index])
     rules = []
     for percentage, frame in zip(percentages, trajectory.frames, strict=True):
-        pose = frame.squares[square_index].pose
-        if pose is None:
-            raise ValueError("motion requires square poses")
-        dx = (pose.centre.x.projected - final.centre.x.projected) * scale
-        dy = -(pose.centre.y.projected - final.centre.y.projected) * scale
+        px, py, angle = pose_of(frame.squares[square_index])
+        dx = (px - final_x) * scale
+        dy = -(py - final_y) * scale
         # Negated for the same reason dy is: the drawing's y runs down while the
         # mathematics runs up, so a counter-clockwise turn in the packing is a clockwise
         # one on screen.
-        turn = -short_quarter_turn(pose.angle.projected - final.angle.projected)
+        turn = -short_quarter_turn(angle - final_angle)
         degrees = turn * 180 / Decimal(str(math.pi))
         filter_rule = ""
         if muted is not None and muted[len(rules)]:
@@ -130,7 +151,7 @@ def append_motion_styles(
     reveal_final_overlay: bool = False,
     muted: tuple[bool, ...] | None = None,
 ) -> None:
-    validate_trajectory(trajectory)
+    validate_motion_trajectory(trajectory)
     if muted is None:
         # Derived from what each frame says it establishes, not passed in beside it. A
         # CANDIDATE frame is one nobody checked or one that is not a packing at all, and

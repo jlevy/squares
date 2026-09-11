@@ -687,8 +687,14 @@ def guide_home(
     return landed, frames
 
 
-def match_targets(start: Array, targets: Array) -> Array:
+def match_targets(start: Array, targets: Array) -> tuple[Array, list[int]]:
     """Assign each square the target it should travel to, by least total motion.
+
+    Returns the targets in the order the squares should travel to them, and the indices of
+    any targets left over. **Counts need not match**: the atlas ascent adds one square per
+    step, so a step matches `n` squares against `n + 1` targets, and the rectangular
+    assignment already handles that shape. The rule for which target is new is the honest
+    one -- whichever the assignment did not use.
 
     Without this the guided phase is unusable, and the reason is not the physics. Squares
     have no identity across two arrangements, so a target list in arbitrary order sends
@@ -704,5 +710,7 @@ def match_targets(start: Array, targets: Array) -> Array:
     blocks first puts ninety per cent of moving squares into rigid groups.
     """
     cost = np.sum((start[:, None, :2] - targets[None, :, :2]) ** 2, axis=-1)
-    _rows, cols = linear_sum_assignment(cost)
-    return targets[cols]
+    rows, cols = linear_sum_assignment(cost)
+    order = [int(c) for c in cols[np.argsort(rows)]]
+    spare = [index for index in range(len(targets)) if index not in set(order)]
+    return targets[order + spare], spare
