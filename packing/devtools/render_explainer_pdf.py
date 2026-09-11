@@ -7,26 +7,26 @@ their browser had finished laying out when they pressed it. Printing still works
 the chip's handler is untouched -- but the artifact this writes is the one the project
 owns and can hold to a standard.
 
-What makes the output reproducible is the waiting, and it is worth stating because the
-obvious recipe is wrong. `networkidle` fires on this page before KaTeX has typeset and
-before the faces are applied: two renders taken that way differed by 440 KB, one of
-them a partly-drawn document. Waiting on the page's own `html.math-ready` and on
-`document.fonts.ready` closes that, and reduced motion closes the rest -- without it a
-CSS transition is caught mid-flight and the graphics state differs in the fourth
-decimal of an alpha. With all three, ten consecutive renders agreed byte for byte
-except for `/CreationDate` and `/ModDate`.
+The waiting addresses readiness failures measured on this page, and the obvious recipe
+is insufficient. `networkidle` fires before KaTeX has typeset and before the faces are
+applied: two renders taken that way differed by 440 KB, one of them a partly drawn
+document. The page therefore waits on its own `html.math-ready`, on
+`document.fonts.ready`, and with reduced motion. Without reduced motion, a CSS
+transition was caught mid-flight and the graphics state differed in the fourth decimal
+of an alpha. With all three controls, ten consecutive renders on the measured host
+agreed byte for byte except for `/CreationDate` and `/ModDate`; that run does not
+establish the cause of a later two-byte disagreement in CI.
 
-Re-measured on 2026-09-10, the day the check first failed on main. In one container, forty
-consecutive renders of this page agreed byte for byte, 843670 each; the same page with the
-print faces never injected comes out at 1055021, so the cheapest unfinished page this document
-has is a 211351-byte rewrite rather than a near miss. Neither figure travels -- the runner
-draws the same page at 786125 over 17 pages where that container draws 18 -- but the ratio is
-what matters, and it is also how to read a failure. A
-disagreement of a handful of bytes is not an unfinished page; it is a number that settled
-differently, and `--check` names the object it happened in. D-490 is the occurrence that
-asked, and `think-ptit` holds what is still unexplained about it.
+Re-measured on 2026-09-10, the day the check first failed on main. Forty consecutive
+renders in one container agreed byte for byte at 843670 bytes. On that same host and
+revision, omitting the print-face injection produced 1055021 bytes, a 211351-byte
+change. A historical pull-request run drew that revision at 786125 bytes over 17 pages,
+where the container drew 18. These host-qualified controls describe known outcomes; they
+do not identify the cause of the two-byte CI disagreement or rule out another readiness
+failure. `--check` now names the PDF object or outside-object section containing the
+first difference. D-490 records the incident, and `think-ptit` tracks its unknown cause.
 
-That is a stronger guarantee than the composite PDF beside it manages: cairo assigns
+That same-host agreement is stronger than the composite PDF beside it manages: cairo assigns
 font-subset tags per process, so two runs of `render_composite_pdf` differ. It is still
 not a portable one, and the difference matters for what `--check` can mean. These bytes
 are a function of the Chromium build, of which binary variant ran -- the headless shell
@@ -223,8 +223,21 @@ def _normalised(pdf: bytes) -> bytes:
 
 #: An object header as Chromium's writer emits it: at a line start, which is where a
 #: header goes and where stream bytes only land by accident. Read to scan back from a
-#: byte to the object it belongs to, so a disagreement can be named rather than counted.
+#: byte toward the object that may contain it. The matching `endobj` still has to fall
+#: after the byte: a cross-reference, trailer, or inter-object difference belongs to the
+#: PDF structure around the objects rather than to the last object before it.
 _OBJECT_HEADER = re.compile(rb"(?m)^(\d+)\s+0\s+obj\b")
+_OBJECT_END = re.compile(rb"(?m)^endobj\b")
+
+#: Named PDF sections outside indirect objects. The latest marker before a difference
+#: distinguishes a cross-reference entry or trailer value from ordinary inter-object
+#: bytes, without pretending that either belongs to the preceding object.
+_OUTSIDE_SECTION = re.compile(rb"(?m)^(xref|trailer|startxref)\b")
+_OUTSIDE_NAMES = {
+    b"xref": "the cross-reference table",
+    b"trailer": "the trailer",
+    b"startxref": "the startxref section",
+}
 
 #: What an object declares itself to be, read from the head of its dictionary. Asked in
 #: two goes rather than one alternation because `re` returns the leftmost match and
@@ -257,10 +270,10 @@ def _difference(first: bytes, second: bytes) -> str:
     docstring names -- so the next occurrence has to arrive diagnosable or cost the same
     guessing again.
 
-    Those three look different at the first differing byte, which is what this reports,
-    with the object it falls in and a window of each render around it: a number that
-    differs in its last digits is layout that had not settled, an unrelated run of bytes
-    is a stream or an image redrawn, and an object the font scan can name is a face.
+    The first differing byte narrows the next investigation. This reports its containing
+    object, cross-reference table, trailer, or inter-object region, followed by a window
+    of each render around it. It does not infer a cause from the difference's size or
+    location.
 
     Called on renders that have already been found to differ. Handed two that do not it
     says so rather than inventing a disagreement, because the alternative -- reporting
@@ -279,10 +292,25 @@ def _difference(first: bytes, second: bytes) -> str:
     if header is None:
         where = "the file header"
     else:
-        head = first[header.end() : header.end() + _DICTIONARY].partition(b"endobj")[0]
-        kind = _OBJECT_SUBTYPE.search(head) or _OBJECT_TYPE.search(head)
-        declared = f", {kind.group(1).decode()}" if kind else ""
-        where = f"object {header.group(1).decode()}{declared}"
+        end = _OBJECT_END.search(first, header.end())
+        if end is None or offset < end.end():
+            dictionary_end = min(header.end() + _DICTIONARY, end.start() if end else len(first))
+            head = first[header.end() : dictionary_end]
+            kind = _OBJECT_SUBTYPE.search(head) or _OBJECT_TYPE.search(head)
+            declared = f", {kind.group(1).decode()}" if kind else ""
+            where = f"object {header.group(1).decode()}{declared}"
+        else:
+            section = max(
+                _OUTSIDE_SECTION.finditer(first, end.end(), offset),
+                key=lambda found: found.start(),
+                default=None,
+            )
+            if section is not None:
+                where = _OUTSIDE_NAMES[section.group(1)]
+            elif _OBJECT_HEADER.search(first, offset):
+                where = "between PDF objects"
+            else:
+                where = "after the last PDF object"
     window = slice(max(0, offset - _WINDOW // 2), offset + _WINDOW // 2)
     return (
         f"first difference at byte {offset}, in {where}: "
@@ -779,21 +807,21 @@ def check(renders: int = 2) -> None:
     draws its sans as outline paths draws it that way every time.
 
     `renders` is two in the Pages job, where the question is asked on every push and
-    each answer costs a draw of a 17-page document. It is raisable because the guarantee
-    this module claims is about ten consecutive renders while the check only ever takes
-    two, and a race that shows once in ten cannot be chased at two: `--renders 10`
-    re-measures the claim, and higher hunts something rarer than it.
+    each answer costs a draw of the currently reviewed 22-page document. Callers can
+    raise it because the earlier observation used ten consecutive renders while the
+    check only ever takes two, and a race that shows once in ten cannot be chased at
+    two: `--renders 10` repeats that protocol, and higher hunts something rarer than it.
     """
     first = _normalised(render_pdf_bytes())
     for _ in range(renders - 1):
         again = _normalised(render_pdf_bytes())
         if first != again:
+            length_delta = abs(len(first) - len(again))
             raise SystemExit(
                 f"explainer PDF does not reproduce itself: {len(first)} then {len(again)} "
-                "bytes, normalised. A handful of bytes is a number that settled "
-                "differently rather than a page that was unfinished: the cheapest "
-                "unfinished page this document has is its print faces unapplied, and that "
-                "one costs 211351 bytes. " + _difference(first, again)
+                f"bytes, normalised; length delta {length_delta}. The cause is unknown; "
+                "D-490 records the host-qualified readiness controls. "
+                + _difference(first, again)
             )
     findings = font_findings(first)
     if findings:

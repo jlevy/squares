@@ -16317,8 +16317,9 @@ defects:
 
     The message was the other half of the defect. Two lengths name no object, no offset and
     no kind, the renders are not kept, and the sentence that followed them asserted a cause:
-    that something the page draws was not finished when it was captured. That reading is now
-    measured false at this scale, so the log was not just silent but misleading.
+    that something the page draws was not finished when it was captured. The log did not
+    support that diagnosis. Later controls measured several readiness states without
+    reproducing the incident, but they do not establish what happened on the runner.
   consequence: >-
     `deploy` is gated on `build`, so the published page and its PDF stayed at the previous
     commit's content from 08:11Z until the job was re-run at 18:59Z, about eleven hours. No
@@ -16327,33 +16328,37 @@ defects:
     render, taken before the pair and compared with nothing, so the check samples the
     process and not the artifact it deploys (think-6hsg).
   fix: >-
-    The instrument, and the reading of it. `_difference` reports the first differing byte
-    with the object it falls in, that object's declared `/Subtype` (or `/Type`), and a
-    64-byte window of each render around it. The window that reads the declaration is
-    bounded by the object's own `endobj`, which is a bug found before it shipped: unbounded,
-    33 of this document's 1160 objects declare no type of their own while sitting within 400
-    bytes of one that does, and `<< /ca 1 /BM /Normal >>` was reported as a Link. `--renders
-    N` makes the count the caller's, so the ten-render guarantee the module claims can be
-    re-measured rather than asserted; the Pages job still pays for two.
+    The fix changes both the instrument and how its result is interpreted. `_difference`
+    reports the first differing byte with the object or outside-object PDF section that
+    contains it, the object's declared
+    `/Subtype` (or `/Type`) where one applies, and a 64-byte window of each render around it.
+    The object span ends at its own `endobj`, so a cross-reference, trailer, or inter-object
+    difference is not assigned to the preceding object. The window that reads an object's
+    declaration is bounded by that same terminator, which closes a bug found before it
+    shipped: unbounded, 33 of this document's 1160 objects declare no type of their own while
+    sitting within 400 bytes of one that does, and `<< /ca 1 /BM /Normal >>` was reported as
+    a Link. `--renders N` makes the count the caller's, so the earlier ten-render protocol can
+    be repeated; the Pages job still pays for two.
 
-    The failure line no longer asserts an unfinished page, because the waiting was measured
-    and cleared. In one container, forty consecutive renders of the shipped configuration
-    agreed byte for byte at 843670 each, and the same page with `_FACES_APPLIED` dropped came
-    out at 1055021 -- a 211351-byte rewrite rather than a near miss. An earlier sweep of seven
-    wait configurations -- `SETTLED` dropped, the `math-ready` wait dropped, motion emulated
-    rather than reduced, the capture taken at `domcontentloaded` -- produced exactly two
-    distinct documents across 25 renders, one per faces state; it was taken on the page as it
-    stood before main's content moved, so its byte figures do not describe today's page and
-    are not quoted here. So the cheapest unfinished page this document has is five orders of
-    magnitude above two bytes, and an unnormalised clock is ruled out by the pass rate rather
-    than by the log: the two renders are about three seconds apart, so a clock would fail
-    every run instead of one.
+    The failure line now reports the two sizes, their length delta, and the location without
+    assigning a cause. In one container, forty consecutive renders of the shipped
+    configuration agreed byte for byte at 843670 each. On that same host and revision, the
+    page with `_FACES_APPLIED` dropped came out at 1055021, a 211351-byte change. An earlier
+    sweep of seven wait configurations -- `SETTLED` dropped, the `math-ready` wait dropped,
+    motion emulated rather than reduced, and capture taken at `domcontentloaded` -- produced
+    exactly two distinct documents across 25 renders, one per faces state. That sweep used
+    the page as it stood before main's content moved, so its byte figures do not describe
+    today's page and are not quoted here. These controls make the measured missing-face state
+    a poor match for the observed two-byte delta on that host; they neither identify nor rule
+    out another readiness failure on the runner. The two renders are about three seconds
+    apart, so the normalised date fields do not explain a failure that appeared only once.
 
-    On the runner the change is green and its own figures say so, which is the measurement that
-    container cannot give: pull-request run 34522404509 drew 786125 bytes over 17 pages with 18
-    embedded faces, two renders agreeing, the receipt again exactly 94 bytes (786219 against
-    786125), and the print layout clean. That container draws the same page at 843670 over 18
-    pages. No figure here travels without the host it came from.
+    A historical runner measurement supplies the environment that container cannot:
+    pull-request run 34522404509 drew the then-current revision at 786125 bytes over 17 pages
+    with 18 embedded faces, two renders agreeing, the receipt again exactly 94 bytes (786219
+    against 786125), and the print layout clean. The container drew that revision at 843670
+    over 18 pages. Both figures remain tied to their host and revision; the current reviewed
+    edition is 22 pages.
 
     One hazard of the class the old message named was found and closed while looking, though
     it is not this failure: in `devtools/templates/explainer-shell.html` the transition on
@@ -16363,19 +16368,20 @@ defects:
     transition survived a reader asking for no motion, and was a transition the export could
     in principle catch in flight. The two selectors are now named in the guard.
 
-    The cause is open and the record says so. What is left fits two shapes: a Flate stream
-    that compressed two bytes smaller, or a variable-length decimal that lost two
-    characters in an uncompressed object -- this document has 79 Link `/Rect` arrays whose
-    payloads run 31 to 43 bytes and 36 bare `/ca` graphics states in objects 3 to 143. The
-    second is the more economical account of a clean minus two with nothing else moving, and
-    it reads as sub-pixel rounding on the runner rather than a page that was unfinished.
+    The cause remains open. Two hypotheses fit the retained length-only evidence: a Flate
+    stream that compressed two bytes smaller, or a variable-length decimal that lost two
+    characters in an uncompressed object. The historical document had 79 Link `/Rect` arrays
+    whose payloads ran 31 to 43 bytes and 36 bare `/ca` graphics states in objects 3 to 143.
+    Neither hypothesis can be selected without another occurrence that preserves the new
+    location report.
   regression: >-
-    `tests/test_render_explainer_pdf.py`, fifteen cases over synthetic documents in the
+    `tests/test_render_explainer_pdf.py`, eighteen cases over synthetic documents in the
     shapes the writer emits and the exact image-wait JavaScript under Node. They pin that a
-    disagreement names the object and quotes both windows, that `/Subtype` beats `/Type`
-    where both are present, that a short untyped object does not borrow a later object's
-    type, that truncated and equal renders are reported honestly, that the CLI count reaches
-    `check`, and that capture refuses an image with no drawable current request. Nothing here
-    prevents the race, which is what contained means: the guard is that the next occurrence
-    arrives diagnosable.
+    disagreement names its object or outside-object section and quotes both windows, that
+    `/Subtype` beats `/Type` where both are present, that a short untyped object does not
+    borrow a later object's type, that cross-reference, trailer and inter-object differences
+    do not borrow the preceding object, that truncated and equal renders are reported
+    honestly, that the CLI count reaches `check`, and that capture refuses an image with no
+    drawable current request. Nothing here prevents the race, which is what contained means:
+    the guard is that the next occurrence arrives diagnosable.
   recorded_in: packing/devtools/render_explainer_pdf.py

@@ -3,8 +3,9 @@
 
 The check itself needs a browser, a rendered page and about nine seconds a render, and
 it lives in the Pages job. What is here is the part that only matters on the day it
-fails, and that therefore has to be right before then: a disagreement names its object,
-the CLI count reaches `check`, and an image that cannot become drawable refuses capture.
+fails, and that therefore has to be right before then: a disagreement names its object
+or outside-object section without guessing a cause, the CLI count reaches `check`, and
+an image that cannot become drawable refuses capture.
 
 All three are regressions waiting to happen rather than hypotheticals. On 2026-09-10 this
 check failed on main for the first time, said `786119 then 786117 bytes` and nothing
@@ -163,6 +164,33 @@ def test_a_short_untyped_object_does_not_borrow_the_next_object_type() -> None:
     assert "in object 3:" in report
 
 
+def test_a_cross_reference_difference_is_not_assigned_to_the_last_object() -> None:
+    document = _document(b"0.5 rg")
+    first = document + b"xref\n0 2\n0000000000 65535 f\n0000000010 00000 n\n"
+    second = document + b"xref\n0 2\n0000000000 65535 f\n0000000011 00000 n\n"
+    report = pdf._difference(first, second)
+    assert "in the cross-reference table" in report
+    assert "in object 1" not in report
+
+
+def test_a_trailer_difference_is_not_assigned_to_the_last_object() -> None:
+    document = _document(b"0.5 rg") + b"xref\n0 2\ntrailer\n"
+    report = pdf._difference(
+        document + b"<< /Size 2 /Root 1 0 R /ID [<aaa>] >>\n",
+        document + b"<< /Size 2 /Root 1 0 R /ID [<aab>] >>\n",
+    )
+    assert "in the trailer" in report
+    assert "in object 1" not in report
+
+
+def test_an_inter_object_difference_is_not_assigned_to_the_previous_object() -> None:
+    first = _document(b"0.5 rg") + b"% alignment a\n" + _document(b"0.4 rg", number=2)
+    second = _document(b"0.5 rg") + b"% alignment b\n" + _document(b"0.4 rg", number=2)
+    report = pdf._difference(first, second)
+    assert "between PDF objects" in report
+    assert "in object 1" not in report
+
+
 def test_a_difference_before_the_first_object_names_the_file_header() -> None:
     report = pdf._difference(_HEADER + b"a", _HEADER + b"b")
     assert "in the file header" in report
@@ -195,11 +223,13 @@ def test_a_disagreement_reaches_the_failure_the_job_reads(
     message = str(refused.value)
     assert "explainer PDF does not reproduce itself" in message
     assert "object 1, Page" in message
+    assert "length delta 1" in message
+    assert "cause is unknown" in message
 
 
 def test_the_check_draws_every_render_it_is_asked_for(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Ten renders is the guarantee the module claims; two is what the job pays for. A
-    count that only reaches the first comparison would pass this file's other cases."""
+    """The earlier observation used ten renders; the job normally pays for two. A count
+    that only reaches the first comparison would pass this file's other cases."""
     drawn: list[int] = []
     document = _HEADER + _pages(pdf.EXPECTED_PAGE_COUNT)
     monkeypatch.setattr(pdf, "render_pdf_bytes", lambda: (drawn.append(1), document)[1])

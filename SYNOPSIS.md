@@ -4384,11 +4384,13 @@ twice and requires the two to agree; on 2026-09-10 they did not, by two bytes ou
 786119, and the failure line carried those two lengths and nothing else — no object, no
 offset, no kind, and both renders discarded.
 It also asserted a cause: that something the page draws was unfinished when it was
-captured. Measurement since puts the cheapest unfinished page on that document at 211351
-bytes, five orders of magnitude away, so the single sentence of diagnosis the log did
-carry was the wrong one.
-The cause stays open under `think-ptit`; what the fix buys is that the next occurrence
-names the object it happened in.
+captured.
+A control on one container changed the PDF by 211351 bytes when the print faces
+were omitted, while forty complete renders on that host agreed.
+That makes the measured missing-face state a poor match for the observed two-byte delta
+on that host; it does not identify the runner’s cause or rule out another readiness
+failure. The cause stays open under `think-ptit`; the next occurrence will name the
+object or outside-object PDF section containing the first difference.
 
 **[D-489](defects.md) is open, and it is the log’s clearest case of a guard that reads
 like soundness and acts like a filter.** `devtools/screen_corner_dual_salvage.py`
