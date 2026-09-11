@@ -671,13 +671,20 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // Revision 6: while a pair is in motion the fills lose chroma, and lock back in over the settle,
   // so the resting frame is exactly the retained colours and only the moving picture is muted.
   const DESAT = 0.15;                   // the chroma a fill keeps at full desaturation
-  // How the drain enters and leaves. Both ends were abrupt: the colour fell out over the first
-  // 15 per cent of the move (0.18 s of a 1.2 s move) and came back over a 0.3 s settle, so at
-  // speed it read as two cuts rather than as a drain. Over a third of the move in, and a settle
-  // half again as long out, with a fifth-order ease at each end instead of a third-order one --
-  // `smootherstep` has zero second derivative at both ends, so there is no visible corner where
-  // the change starts or stops, which is the whole complaint.
-  const DESAT_IN = 0.35;                // the fraction of the move over which the colour drains
+  // **Chroma and hue move one at a time, and the hue always moves in the grey.** A square's
+  // colour changes twice a beat -- it drains and comes back, and it swaps between the scheme a
+  // viewer chose and the atlas's own answer for a finished picture. Doing both at once is what
+  // made the change read as a lurch: a hue rotation at full chroma is a different colour arriving,
+  // where the same rotation at a tenth of the chroma is invisible. So the order is
+  //
+  //     leaving rest   drain, THEN rotate            (grey out, then quietly become identity)
+  //     returning      rotate, THEN saturate         (quietly become the atlas's, then colour up)
+  //
+  // and at every instant at most one of the two is moving. Each end is a `smootherstep`, which has
+  // zero second derivative at both ends, so there is no corner where a change starts or stops.
+  const DESAT_IN = 0.2;                 // fraction of the move the chroma takes to drain
+  const HUE_OUT = 0.2;                  // fraction of the move the hue takes to leave, once drained
+  const HUE_IN = 0.45;                  // fraction of the settle the hue takes to return, before the chroma
   // Continuous play (revision 6, feature 4): the beat the whole sequence runs at, back to back.
   // A static append (a grid prefix or a shared picture, where nothing moves) gets a dwell and no
   // move at all, unless the full beat is asked for.
@@ -1783,17 +1790,28 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     return { rot: e, slide: e, e };
   }
   const ramp = (t, from, to) => (to > from ? clamp01((t - from) / (to - from)) : (t >= from ? 1 : 0));
-  // How far the fills are drained at t: nothing through the dwell, full over the first DESAT_IN of
-  // the move, held through the motion, and eased back to nothing over the settle. A zero-length move
-  // (a static append under continuous play) never drains at all.
-  // Revision 10: the same curve, read the other way up, is how settled the picture is — 1 through
-  // the dwell, 0 through the motion, back to 1 as the settle ends. It is what the standardized
-  // colours fade in on, so they arrive exactly where revision 6's desaturation locks the colour
-  // back in, and it does not depend on whether the desaturation itself is on.
-  function restLevel(sc, t) {
-    const on = smootherstep(ramp(t, sc.moveStart, sc.moveStart + (sc.moveEnd - sc.moveStart) * DESAT_IN));
-    const off = smootherstep(ramp(t, sc.moveEnd, sc.end));
-    return 1 - on * (1 - off);
+  // How much chroma the fills carry at t: all of it through the dwell, drained over the first
+  // DESAT_IN of the move, held through the motion, and back over the LAST part of the settle --
+  // after the hue has finished moving, which is the whole point of the split. A zero-length move
+  // (a static append under a tween) never drains at all.
+  function chromaLevel(sc, t) {
+    const move = sc.moveEnd - sc.moveStart;
+    const settle = sc.end - sc.moveEnd;
+    const out = smootherstep(ramp(t, sc.moveStart, sc.moveStart + move * DESAT_IN));
+    const back = smootherstep(ramp(t, sc.moveEnd + settle * HUE_IN, sc.end));
+    return 1 - out * (1 - back);
+  }
+  // Which hues the fills carry at t: 1 is the atlas's answer, the convention for a finished
+  // picture; 0 is the scheme the viewer chose, which is what makes a square trackable while it
+  // moves. It leaves only AFTER the chroma is gone and returns BEFORE the chroma comes back, so
+  // both rotations happen in the grey and a viewer never watches a colour turn into another colour.
+  function hueLevel(sc, t) {
+    const move = sc.moveEnd - sc.moveStart;
+    const settle = sc.end - sc.moveEnd;
+    const leave = smootherstep(ramp(
+      t, sc.moveStart + move * DESAT_IN, sc.moveStart + move * (DESAT_IN + HUE_OUT)));
+    const back = smootherstep(ramp(t, sc.moveEnd, sc.moveEnd + settle * HUE_IN));
+    return 1 - leave * (1 - back);
   }
   function desatLevel(sc, t) {
     if (!state.desaturate) return 0;
@@ -1803,7 +1821,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       state.continuous.on && !state.continuous.fullBeat
       && isStillPair() && !isPhysical(state.style)
     ) return 0;
-    return 1 - restLevel(sc, t);
+    return 1 - chromaLevel(sc, t);
   }
   // Revision 9: which steps playback is allowed to run over — always the range, there being one view.
   // The ends are values of n stepped into, so RANGE_MIN is the first n the page can arrive at.
@@ -3928,11 +3946,11 @@ input[type=number] { width: 64px; padding: 4px 6px; }
       paintTouching.add(a < b ? a * N + b : b * N + a);
     }
     drawMaskLinks(N);
-    // `rest` is how settled the picture is, 1 through the dwell, 0 through the motion, back to 1
-    // as the settle ends -- the drain's own curve read the other way up. The standardising repaint
-    // rides it, so the atlas colours arrive exactly as the chroma comes back instead of replacing
-    // the picture between two frames. It WAS a cut: at n = 17 the frame at 2.75 s was still the
-    // identity greens and the frame at 2.80 s was the atlas teals, a whole palette in one step.
+    // `hue` is how far the fills have travelled toward the atlas's answer: 1 at rest, 0 through
+    // the motion. It is NOT the drain's curve -- it moves in the window the drain leaves open, so
+    // the rotation happens while the picture is grey. It WAS a cut on a boolean: at n = 17 the
+    // frame at 2.75 s was the identity greens and the frame at 2.80 s was the atlas teals, a whole
+    // palette in one step.
     const rest = clamp01(Number(resting) || 0);
     const scheme = schemeFor(rest);
     const standard = standardizing() ? rest : 0;
@@ -4092,7 +4110,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     // At rest through the dwell and from the instant the settle ends, which are the two frames a
     // Animate leaves a viewer looking at.
     paintSquares(p, side, drain, appear > 0 ? TINT * (1 - settled) : 0, undefined,
-                 restLevel(sc, t));
+                 hueLevel(sc, t));
     mark.setAttribute('opacity', 0);
     if (state.links) {
       linksGroup.setAttribute('opacity', u <= 0 ? 0.35 : 1 - e);
@@ -4218,7 +4236,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     poseX[p.n] = nb[0]; poseY[p.n] = nb[1]; poseA[p.n] = nb[2];
     currentTrajectory = null;
     paintSquares(p, side, drain, k > 0 ? TINT * (1 - settled) : 0, undefined,
-                 restLevel(sc, t));
+                 hueLevel(sc, t));
     if (k > 0) {
       const scale = 0.8 + 0.2 * k;
       const pose = 'translate(' + nb[0] + ' ' + nb[1] + ') rotate(' + nb[2] + ')';
