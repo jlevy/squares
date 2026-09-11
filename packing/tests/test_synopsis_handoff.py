@@ -3,10 +3,12 @@ other reconciliations against artifacts the document restates."""
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
 
+from devtools import check_synopsis
 from devtools.check_synopsis import (
     check_case_interval,
     check_covering_value_reports,
@@ -194,6 +196,107 @@ def test_latest_closeout_uses_newest_terminal_agenda(tmp_path: Path) -> None:
     assert selected is not None
     assert selected[0].name == "agenda-015.md"
     assert selected[1]["replanning"]["selected"]["bead"] == "think-next"
+
+
+def _write_handoff(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    primary_bead: str = "think-independent",
+    next_action: str = "Continue under think-next after publication.",
+    outputs: tuple[str, ...] = ("docs/standalone-review.md",),
+) -> str:
+    """An old agenda handoff followed by a separately recorded terminal session."""
+    sessions = tmp_path / "packing/campaign/agent-sessions"
+    agendas = tmp_path / "packing/campaign/agendas"
+    sessions.mkdir(parents=True)
+    agendas.mkdir(parents=True)
+    for number, bead, action, produced in (
+        (99, "think-old", "Continue BC-019 under think-old.", []),
+        (100, primary_bead, next_action, list(outputs)),
+    ):
+        record = {
+            "session": {
+                "id": f"session-{number:03}",
+                "status": "completed",
+                "started_at": f"2026-09-{number - 90:02}T10:00:00Z",
+                "deadline_at": f"2026-09-{number - 90:02}T11:00:00Z",
+                "primary_bead": bead,
+                "outputs": produced,
+                "next_action": action,
+            }
+        }
+        (sessions / f"session-{number:03}-work.md").write_text(
+            f"---\n{json.dumps(record)}\n---\n", encoding="utf-8"
+        )
+    agenda = {
+        "agenda": {
+            "status": "completed",
+            "items": [
+                {"id": "BC-019", "bead": "think-old"},
+                {"id": "BC-020", "bead": "think-next"},
+            ],
+            "closeout": {"replanning": {"selected": {"bead": "think-old"}}},
+        }
+    }
+    (agendas / "agenda-015-closed.md").write_text(
+        f"---\n{json.dumps(agenda)}\n---\n", encoding="utf-8"
+    )
+    for name, path in (
+        ("REPO", tmp_path),
+        ("AGENT_SESSIONS", sessions),
+        ("AGENDAS", agendas),
+        ("README", tmp_path / "README.md"),
+        ("ACTIVE_PLAN", tmp_path / "plan.md"),
+        ("DEFECTS", tmp_path / "defects.yaml"),
+    ):
+        monkeypatch.setattr(check_synopsis, name, path)
+    check_synopsis.README.write_text("SYNOPSIS.md#current-handoff", encoding="utf-8")
+    check_synopsis.ACTIVE_PLAN.write_text(
+        f"For the next supervised exact-research goal, {next_action}\n", encoding="utf-8"
+    )
+    check_synopsis.DEFECTS.write_text("defects: []\n", encoding="utf-8")
+    return (
+        "### Current Handoff\n\n"
+        "[Latest session](packing/campaign/agent-sessions/session-100-work.md).\n\n"
+        f"**Selected next entry:** `think-next`\n\n{next_action}\n"
+    )
+
+
+def test_current_handoff_accepts_independent_standalone_succession(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    text = _write_handoff(tmp_path, monkeypatch)
+
+    assert check_synopsis.check_current_handoff(text) == []
+
+
+@pytest.mark.parametrize(
+    "provenance",
+    [
+        {"primary_bead": "think-old"},
+        {"outputs": ("packing/campaign/agendas/agenda-015-closed.md",)},
+        {"next_action": "Continue BC-020 under think-next."},
+    ],
+    ids=["integration-bead", "produced-agenda", "next-action-cell"],
+)
+def test_current_handoff_keeps_same_agenda_mismatch_detection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, provenance: dict
+) -> None:
+    text = _write_handoff(tmp_path, monkeypatch, **provenance)
+    # A newer unrelated closeout must not hide the applicable agenda's mismatch.
+    (check_synopsis.AGENDAS / "agenda-016-unrelated.md").write_text(
+        "---\nagenda:\n  status: completed\n  items: []\n  closeout:\n"
+        "    replanning:\n      selected:\n        bead: think-next\n---\n",
+        encoding="utf-8",
+    )
+
+    assert check_synopsis.check_current_handoff(text) == [
+        (
+            "agenda-015-closed.md: selected bead think-old disagrees with "
+            "latest terminal session bead think-next"
+        )
+    ]
 
 
 def test_unprotected_fix_claims_rejects_stale_duplicate() -> None:
