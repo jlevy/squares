@@ -54,6 +54,8 @@ name: Certificate page
       - packing/devtools/build_workbench_site.py
       - packing/atlas/known-best/video/spikes/v2-transitions/build_candidate.py
       - packing/atlas/known-best/video/spikes/v2-transitions/template.html
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.css
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js
       - packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
@@ -96,6 +98,8 @@ name: Certificate page
       - packing/devtools/build_workbench_site.py
       - packing/atlas/known-best/video/spikes/v2-transitions/build_candidate.py
       - packing/atlas/known-best/video/spikes/v2-transitions/template.html
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.css
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js
       - packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml

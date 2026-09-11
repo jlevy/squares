@@ -33,7 +33,7 @@ their own tests assert.
 | `v1-slideshow/build_candidate.py` | Reads the composite figure record, the frontier records and the 324 renderings; writes one self-contained page holding every packing |
 | `v1-slideshow/NOTES.md` | Sizes, the font composition, the fact provenance tables, the capture sketch, four revisions of owner feedback |
 | `v2-transitions/build_candidate.py` | Computes the correspondence for all 323 consecutive pairs and writes the workbench |
-| `v2-transitions/template.html` | The page itself: three animation styles, the annealing dial, the snap and blind modes, the gap bar, two tabs |
+| `v2-transitions/template.html`, `v2-transitions/assets/` | The page itself -- markup, stylesheet and script, inlined by the generator: three animation styles, the annealing dial, the snap and blind modes, the gap bar, and the Pack and Animate modes |
 | `v2-transitions/transition-stats.json` | The computed record: per pair, the matching method, the identity chain, block statistics, displacements and turns |
 | `v2-transitions/NOTES.md` | Eight revisions, with the measurements that answer the plan’s open questions |
 | `*/test_candidate.py`, `check_*.py`, `measure_*.py` | The checks and the instruments that produced the measured tables |

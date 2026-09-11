@@ -39,6 +39,8 @@ RENDER_INPUTS = (
     Path(__file__),
     SPIKE / "build_candidate.py",
     SPIKE / "template.html",
+    SPIKE / "assets/workbench.css",
+    SPIKE / "assets/workbench.js",
     SPIKE / "transition-stats.json",
     ROOT / "atlas/known-best/manifest.json",
 )

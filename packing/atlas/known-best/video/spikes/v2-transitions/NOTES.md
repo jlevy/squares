@@ -9,7 +9,9 @@ manifest, per-n renderings and composite record; nothing in the worktree was mod
 | File | Role |
 | --- | --- |
 | `build_candidate.py` | Deterministic generator. Reads all 324 witnesses and renderings (fills, contact counts, and from revision 5 the angle classes and full-side contacts), classifies and matches all 323 pairs (from revision 5 block first, then square by square, with the identity chain, the new-square rule and the arrival overlap census), reads the badges, the lower bounds and the open facts from the composite record and the glyph metrics from the embedded fonts, writes `index.html`, `transition-stats.json`, `stats-summary.md`; `--all` also writes `index-all.html`. Two runs give identical bytes. About 9.5 s of CPU (revision 4: 7.5). |
-| `template.html` | The page shell the generator fills in (`__FONT_CSS__`, `__DATA__`). |
+| `template.html` | The page’s markup, 275 lines, and the tokens the generator fills in (`__FONT_CSS__`, `__KATEX_CSS__`, `__WORKBENCH_CSS__`, `__WORKBENCH_JS__`, `__DATA__`). |
+| `assets/workbench.css` | The stylesheet, 395 lines, inlined at `__WORKBENCH_CSS__`. |
+| `assets/workbench.js` | The page’s script, 5,079 lines, inlined at `__WORKBENCH_JS__`. A file rather than a `<script>` body so that something can read it: `node --check` parses it, and a linter could. |
 | `index.html` | The self-contained review page, 25 pairs embedded, 467,521 bytes (revision 4: 24 pairs, 383,005). |
 | `index-all.html` | The same page with all 323 pairs embedded, 2,823,176 bytes (revision 4: 2,175,358; the identity arrays, the blocks and the block tags are the difference). Built to answer the scaling question. |
 | `transition-stats.json` | Per-pair kind, sides, displacement and rotation statistics, crossing count, matching cost, the new-square index and the full correspondence map; from revision 5 the identity chain for every n, each pair’s blocks (members, riders, turn, pivots, residuals), the block census, the new-square rule with its tie set and revision 4’s leftover for comparison, and the arrival overlap census. 1,416,430 bytes, arrays of scalars on one line each. |

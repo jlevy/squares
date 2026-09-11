@@ -16,6 +16,11 @@ cost-optimal choice under a stated rule rather than the assignment's leftover, a
 record carries the identity chain, the blocks, the residuals, the rule and the census of
 squares the arriving square overlaps before the others have moved.
 
+The page is three files that the build makes one: `template.html` holds the markup,
+`assets/workbench.css` the stylesheet and `assets/workbench.js` the script, and each is
+inlined at its `__TOKEN__` the way the embedded faces are. Written as one file none of it
+could be read by a formatter, a linter or an editor; written as three, all of it can.
+
 Run with the project interpreter:
     packing/.venv/bin/python3 build_candidate.py [--all] [--out DIR]
 """
@@ -1180,12 +1185,37 @@ def compact_frame(witness: dict, rendering: list[dict], identities: list[int]) -
     return {"side": round(witness["side"], 9), "squares": squares, "ident": identities}
 
 
+def asset(name: str) -> str:
+    """The text of `assets/<name>`, without its final newline.
+
+    The page's stylesheet and script live beside the template rather than inside it, because
+    nothing could read them where they were: 395 lines of CSS and 5,079 of JavaScript sealed in an
+    HTML file that is itself composed by Python string operations, so no formatter indented them,
+    no linter parsed them and no editor coloured them as code. Each is now a file in the language
+    it is written in, and every tool for that language applies to it.
+
+    They are inlined here the way the faces are -- a `__TOKEN__` alone on a line, replaced with
+    `str.replace`. **`str.replace` and not `%` or `.format`,** which is not a preference: the
+    script is full of `{`, `}` and `%`, and a format string would read every one of them as its
+    own punctuation. Interpolating code into a template is the seam that put a doubled backslash
+    from an f-string into the rendered page and broke a line of mathematics in two.
+
+    The final newline goes because the token's own line supplies it. The split was required to
+    leave the built page byte-for-byte what it was, and the newline is where that is won or lost.
+    """
+    return (HERE / "assets" / name).read_text(encoding="utf-8").removesuffix("\n")
+
+
 def build_html(template: str, payload: dict) -> str:
     data = json.dumps(payload, separators=(",", ":"), sort_keys=True, ensure_ascii=False)
     # A closing script tag inside JSON would end the data block early; there is none, but be safe.
     data = data.replace("</", "<\\/")
     html = (
-        template.replace("__FONT_CSS__", font_css())
+        # The page is assembled before it is filled: the stylesheet and the script go in first, so
+        # a face, KaTeX or data token is substituted wherever it ends up standing.
+        template.replace("__WORKBENCH_CSS__", asset("workbench.css"))
+        .replace("__WORKBENCH_JS__", asset("workbench.js"))
+        .replace("__FONT_CSS__", font_css())
         .replace("__KATEX_CSS__", katex_css())
         .replace("__DATA__", data)
     )

@@ -1,0 +1,395 @@
+:root {
+  --ink: #17202a;
+  --muted: #5c6673;
+  --label: #47525f;
+  --quiet: #8a939e;
+  --quiet-rule: #c9cfd5;
+  --new: #a3123f;
+  /* Revision 8: the one green on the page, and it means one thing — the arrangement on the stage
+     is the best known one. Nothing else is ever drawn in it. */
+  --met: #17794a;
+  --paper: #ffffff;
+  --panel: #f7f8fa;
+  --chrome: #e6e8eb;
+  --rule: #d5d9de;
+  --track: #dfe3e7;
+  /* "Atlas Symbols" is KaTeX_Main restricted to the relation code points (≤ ≥ √ ≈ …) that the
+     latin subsets do not carry; it follows PT Serif so those glyphs never fall back to Georgia. */
+  --serif: "PT Serif", "Atlas Symbols", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", "Atlas Symbols", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  background: var(--chrome);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  overflow: hidden;
+}
+body.capture { background: var(--paper); }
+#viewport {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+}
+#stage-wrap { position: relative; flex: none; overflow: hidden; }
+#stage {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  background: var(--paper); transform-origin: 0 0;
+  box-shadow: 0 8px 40px rgba(23, 32, 42, 0.18);
+}
+body.capture #stage { box-shadow: none; }
+/* Revision 9: the squares can be picked up, so the surface takes pointer gestures rather than the
+   browser's pan and zoom, and says so with the cursor. */
+#packing-svg { position: absolute; left: 60px; top: 12px; width: 1000px; height: 940px; display: block; touch-action: none; }
+#packing-svg #squares { cursor: grab; }
+body.dragging #packing-svg #squares { cursor: grabbing; }
+#links line { stroke: var(--paper); stroke-opacity: 0.85; stroke-width: 2; }
+/* Revision 11: the relationship graph drawn on the stage — a faint line on every pair the
+   attraction is actually reaching. It rides the correspondence overlay's own control rather than
+   adding a second one, and a general relationship (every pair attracts) draws nothing, there being
+   no mask to show. */
+#mask-links line { stroke: var(--paper); stroke-opacity: 0.9; stroke-width: 2.5; stroke-dasharray: 5 4; }
+/* Revision 12: a target contact graph is drawn in two classes, because the difference between them
+   is the measurement. An edge whose two squares share a whole side right now is solid and white —
+   it lies across the pair it joins, so white reads against the fill. One that is only wanted is
+   dashed and dark: it is usually long and crosses paper, where white would be invisible. */
+#mask-links line.met { stroke: var(--paper); stroke-opacity: 1; stroke-width: 4.5; stroke-dasharray: none; }
+#mask-links line.unmet { stroke: var(--ink); stroke-opacity: 0.62; stroke-width: 3; stroke-dasharray: 7 6; }
+/* The edge being drawn, following the cursor from the square it started on. */
+#draw-line { stroke: var(--ink); stroke-opacity: 0.75; stroke-width: 3.5; stroke-dasharray: 2 7; }
+/* Drawing mode: no square is ever picked up, and the cursor says which gesture is live. */
+body.drawing #packing-svg #squares { cursor: crosshair; }
+#ghost rect { stroke: var(--muted); }
+#mark rect { stroke: none; }
+#facts { position: absolute; left: 1160px; top: 0; width: 700px; height: 1080px; }
+.facts-layer { position: absolute; left: 0; top: 0; width: 100%; height: 100%; will-change: opacity; }
+/* Type scale, revision 4: four sizes on the stage, 28 / 34 / 44 / 96 px, nothing smaller than
+   28 so the page reads on video. 28 is every small line (the PROVED and OPEN heads, the
+   small-caps note, the badge labels, the open group, the progress bar's labels); 34 the exact
+   line; 44 both bound lines, one size because they are one kind of fact; 96 the `n =` line and
+   the numeral, PT Serif Regular, 3.4 times the smallest.
+   The badge glyphs are drawn marks in the poster's boxes, not stage text. */
+/* Revision 8, feature 4: how close the arrangement on the stage is to the best known, drawn on a
+   scale that runs from the proved lower bound to comfortably past the record. The panel's top 200 px
+   were empty, and this is what goes in them: the head row at 24, the bar at 66, the two tick numbers
+   below it, the whole thing ending at 166, clear of the `n =` line at 196.
+   Revision 9 folds the two tabs into one view, so the bar is always drawn: the range is the spine and
+   its `to` end is the n the bar measures.
+   The two numbers are the ones the panel itself prints, s(n) <= and s(n) >=, read from the record. */
+.gapbar { position: absolute; left: 6px; top: 40px; width: 694px; height: 240px; }
+/* The bar sits under the headline, so the first thing in the column is the n it is all about. */
+.gapbar-plot { position: absolute; left: 0; top: 48px; width: 680px; height: 180px; display: block; }
+.gapbar-plot .track { fill: var(--track); }
+/* The bar's two ends, named by the formulas they are rather than by their values: area forbids
+   anything below the left one and a grid achieves the right one, so the span is one unit side at
+   every n. Set in the text face, which is where the radical comes from. */
+/* The two ends are HTML rather than SVG text, because KaTeX sets HTML: a radical it draws is an
+   inline SVG inside a span, which cannot be nested in a `<text>`. They sit above the plot in the
+   band its viewBox opens for them. */
+/* The scale's two ends: the formula the end IS, and the value it takes at this n, on one line.
+   Quiet, because they are the bar rather than a claim about this packing. */
+.gapbar-end { position: absolute; top: 0; font-family: var(--sans); font-size: 22px; color: var(--quiet); white-space: nowrap; }
+.gapbar-area { left: 0; }
+.gapbar-grid { right: 14px; }
+.gapbar-end .katex { font-size: 1em; }
+/* The open territory: everything between what is proved and what is known. */
+/* Named `gap-open`, not `open`: `height` is a CSS property on an SVG rect, so the panel's own
+   `.open` group (a 76 px slot) silently stretched this band to 76 px when it shared the name. */
+.gapbar-plot .gap-open { fill: var(--quiet); opacity: 0.62; }
+/* The two ends of the scale: a quiet tick, because they are what the bar IS rather than
+   anything claimed about this n. */
+.gapbar-plot .end-tick { stroke: var(--quiet-rule); stroke-width: 3; }
+/* The bounds. Scarlet points up at the track from below, green points down at it from above, and
+   the same two colours name the two lines in the panel -- so a reader who has learnt which is
+   which on the bar has learnt it for the facts as well. */
+.gapbar-plot .arrow.upper { fill: var(--met); }
+.gapbar-plot .arrow.lower { fill: var(--new); }
+/* Where the arrangement on the stage actually is: a line through the track, not a third arrow.
+   It is the only mark here that moves, so it does not need a shape to argue for it. */
+.gapbar-plot .hand-stem { stroke: var(--ink); stroke-width: 3; }
+.gapbar.is-met .gapbar-plot .hand-stem { stroke: var(--met); }
+/* Every number on the bar is set the same: one size, one weight, tabular figures. What differs
+   is the colour, and the colour is the only thing that says which bound it is -- scarlet for
+   the proved lower bound, green for the best known upper bound, ink for anything that is
+   neither. The same three in the panel below. */
+/* The modifiers are `is-lower` and `is-record`, not `lower` and `record`. The panel below has a
+   `.lower` row -- a 48 px serif line -- and a bare class selector reaches into the SVG as
+   readily as into a div: same specificity, later in the sheet, so it won, and the bar's lower
+   bound came out in a large serif while its upper bound stayed small and sans. The same trap
+   the `gap-open` rect is named around, and the same fix. */
+.gapbar-num { font-family: var(--sans); font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; fill: var(--ink); }
+.gapbar-num.is-lower { fill: var(--new); }
+.gapbar-end-num { font-family: var(--sans); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 0.45em; }
+/* The end's formula is the one piece of mathematics on the bar, so it is set as mathematics -- at
+   the bar's own small size, so it reads as part of the instrument rather than as a fact. */
+.gapbar-end .katex { font-size: 24px; }
+.gapbar-num.is-record { fill: var(--met); font-weight: 700; }
+/* The headline, on one line: `n = 11`, the label and the value reading as one statement rather
+   than as a caption stacked over a number. They are two elements because only one of them
+   changes -- `n =` is constant, so it lives outside the two fading layers and never blinks,
+   while the numeral rolls with the rest of the facts.
+   That split is also why the numeral's left is not in this stylesheet. It has to begin where the
+   constant line's ink ends, and the width of `n =` depends on the faces the browser actually
+   got, so the script measures that line once the faces are in and puts the numeral
+   `metrics.headline_gap_px` past it, less the median digit's left side bearing so the GAP is
+   between ink and ink rather than between boxes.
+   The eyebrow that used to sit above the headline said "Best known packing", which every packing
+   on screen already is, so it named nothing and has been dropped.
+   Every slot below is fixed, so nothing jumps between n. */
+/* The headline sits under the packing it names, centred on it, rather than at the top of the
+   panel: it is the one thing on the stage that belongs to the picture rather than to the record,
+   and moving it gives the panel back a hundred and thirty pixels for the facts. `#headline` is
+   the row; the `n =` half is constant and lives outside the two fading layers, and the numeral
+   rolls inside them, so the two are positioned within the row rather than as one element. */
+/* The numeral's box opens above its own ink by about a fifth of its size, so the row sits
+   higher than the gap it leaves looks: measured, the drawn container ends at 913 and the ink
+   began at about 980. This closes that to under forty pixels. */
+#headline { position: absolute; left: 60px; top: 926px; width: 1000px; height: 108px; }
+/* One slot per fading layer. The numeral used to live inside the layer and take the layer's own
+   opacity; out here it carries its own, which is the whole of what moving it cost. */
+.numeral-slot { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.nline { position: absolute; top: 0; height: 104px; font-family: var(--serif); font-size: 96px; line-height: 104px; color: var(--muted); white-space: nowrap; }
+.nline .n-var { font-style: italic; font-weight: 400; margin-right: 0.22em; }
+.nline .n-eq { font-weight: 400; }
+.numeral { position: absolute; left: 0; top: 0; font-family: var(--serif); color: var(--ink); line-height: 104px; white-space: nowrap; will-change: transform; }
+.numeral .n-val { font-weight: 400; font-size: 96px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+/* The headline is an equation now, so KaTeX sets it and this is the one place its size is chosen.
+   Large, because it names the picture above it; not as large as the bare numeral was, because an
+   equation is wider than a number and has to sit inside the packing's own width. */
+.numeral .katex { font-size: 76px; }
+/* The panel says two things about n, and says them under headings: what is proved, then what
+   is open. The heads are the gap bar's head style, so the three headings in the column read as
+   one set. Every slot below is fixed, so nothing jumps between n; a slot with nothing to say
+   for this n stays empty at its height rather than closing up. */
+.section-head {
+  position: absolute; left: 6px; height: 34px; line-height: 34px; font-family: var(--sans);
+  font-size: 28px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--quiet); white-space: nowrap;
+}
+.head-proved { top: 320px; }
+.head-open { top: 700px; }
+/* The two bounds, one above the other at one size: a best known side and a proved lower bound
+   are the same kind of fact about the same quantity, and a reader is meant to compare them, so
+   showing one larger than the other would rank them. Both are proved -- a construction proves
+   its upper bound -- which is why both sit under PROVED and only the questions sit under OPEN. */
+.side  { position: absolute; left: 6px; top: 360px; height: 62px; font-family: var(--serif); font-size: 48px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+.lower { position: absolute; left: 6px; top: 424px; height: 62px; font-family: var(--serif); font-size: 48px; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+/* KaTeX owns the setting inside these lines; the stylesheet owns only where they sit and how
+   big they are. `.katex` inherits the line's size, so one number here scales the whole expression,
+   and the relation's own colour is left to KaTeX rather than being tinted by a class of ours. */
+.side .katex, .lower .katex, .exact .katex { font-size: 1em; }
+/* KaTeX's own stylesheet sets `white-space: normal` on `.katex`, and KaTeX breaks an expression
+   into one `.base` span per relation so a long one can wrap. These lines are fixed-height slots in
+   a poster and must not: `s(11)` wrapped away from its own bound and landed on the line below. */
+.side .katex, .lower .katex, .exact .katex,
+.side .katex-html, .lower .katex-html, .exact .katex-html { white-space: nowrap; }
+/* A bound first proved here, in scarlet on the line directly under the bound it is about --
+   the digits themselves are never coloured, so this line is what says it. */
+.star-line { position: absolute; left: 6px; top: 490px; height: 40px; display: flex; align-items: center; white-space: nowrap; }
+/* Under both bounds, annotating the value above them: the closed form in the text face, or a
+   small-caps note giving its degree. Never to the right of a value. */
+.exact { position: absolute; left: 6px; top: 534px; height: 86px; font-family: var(--serif); font-size: 34px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
+/* The degree note. It was grey small-caps sans, which made a proved fact read as a caption; it
+   is a statement about the value, so it is set in the text face in ink like the bound above it and
+   differs only in size. */
+.exact .note { font-family: var(--serif); font-size: 34px; color: var(--ink); }
+/* The poster's badges, in a row with short labels: what this record establishes. Fixed height,
+   so the row never reflows. */
+.badges { position: absolute; left: 6px; top: 632px; height: 40px; display: flex; align-items: center; gap: 34px; white-space: nowrap; }
+.badge-item { display: inline-flex; align-items: center; gap: 11px; font-family: var(--sans); font-size: 28px; font-weight: 500; color: var(--label); letter-spacing: 0.01em; }
+.badge-item svg { width: 36px; height: 36px; display: block; flex: none; }
+.badge-item.is-star .label { color: var(--new); font-weight: 600; }
+.badge .box { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+.badge-solid .box { fill: var(--muted); stroke: none; }
+.badge-query .box { stroke: var(--quiet-rule); }
+.badge .glyph { font-family: var(--sans); font-weight: 650; font-size: 15px; fill: var(--muted); }
+.badge-solid .glyph { fill: var(--paper); }
+.badge-query .glyph { fill: var(--quiet); }
+/* The approximately-equal sign is KaTeX_Main's outline in font units, filled and thickened by a
+   stroke in the same units (the stroke width scales with the path), as the slideshow draws it. */
+.badge .glyph-path { fill: var(--muted); stroke: var(--muted); stroke-linejoin: round; }
+.badge .star { fill: var(--new); }
+/* OPEN: what the record leaves unsettled for this n, in the same badge row shape, a step quieter. */
+.open-items { position: absolute; left: 6px; top: 740px; height: 40px; display: flex; align-items: center; gap: 28px; white-space: nowrap; }
+.open-item { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
+.open-item svg { width: 32px; height: 32px; display: block; flex: none; }
+.open-none { font-family: var(--sans); font-size: 28px; font-weight: 450; color: var(--quiet); }
+#kind-tag {
+  position: absolute; left: 60px; top: 14px; font-family: var(--sans); font-size: 18px;
+  color: var(--label); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
+}
+body.capture #kind-tag { display: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Revision 9: one view, no tabs. Stepping one n and running a range are the same operation over a
+   different span, so the range is the single spine: `from` and `to` are values of n stepped into,
+   and setting them equal is the old Single step tab. */
+#controls {
+  flex: none; width: 100%; box-sizing: border-box; padding: 7px 14px 8px;
+  background: var(--chrome); border-top: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 6px;
+}
+body.capture #controls { display: none; }
+#panel { display: flex; flex-direction: column; gap: 6px; }
+[hidden] { display: none !important; }
+.row { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+/* Revision 15: boxes in a row differ in height, and centring them made the panel read as
+   scattered rather than as rows. They hang from a common top instead. */
+.row label { display: inline-flex; align-items: center; gap: 5px; color: var(--label); white-space: nowrap; }
+button, select, input[type=number] {
+  font: inherit; color: var(--ink); background: var(--paper); border: 1px solid #b9c0c8; border-radius: 4px;
+  padding: 3px 9px; cursor: pointer;
+}
+button:hover { background: #f3f5f7; }
+button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); min-width: 84px; }
+button.primary:hover { background: #2b3947; }
+/* Revision 9: the transport is the tape convention — a right-pointing triangle to play, two bars to
+   pause — drawn as inline SVG on one button that toggles. The glyphs are `fill: currentColor`, so
+   they take the button's ink in both states, and the accessible name is set from the script beside
+   the class that swaps them. Previous and next are `-` and `+`: they were solid triangles, which on
+   a transport row read as play. */
+button.transport {
+  min-width: 44px; padding: 5px 14px; display: inline-flex; align-items: center; justify-content: center;
+}
+button.transport svg { width: 18px; height: 18px; display: block; fill: currentColor; }
+button.transport .glyph-pause { display: none; }
+button.transport.is-playing .glyph-play { display: none; }
+button.transport.is-playing .glyph-pause { display: inline; }
+button.step-nudge { min-width: 36px; font-weight: 700; font-size: 15px; line-height: 1.1; text-align: center; }
+input[type=number] { width: 64px; padding: 4px 6px; }
+/* Revision 10: a small tabbed sub-panel naming which of the two aspects the page is showing — Pack,
+   one fixed n run open-endedly, or Animate, a range played end to end. It is drawn as tabs and
+   exposed as two `aria-pressed` buttons inside a group, not as ARIA tabs: revision 9's property
+   that no tab role survives anywhere on the page still holds, so a checker can keep asserting it
+   and nobody can mistake this for the two full-page tabs coming back. */
+.subpanel { border: 1px solid #b9c0c8; border-radius: 6px; background: var(--paper); align-self: flex-start; }
+.mode-tabs { display: flex; border-bottom: 1px solid #b9c0c8; }
+.mode-tabs button {
+  border: 0; border-radius: 0; background: transparent; padding: 5px 18px; font-weight: 600;
+  color: var(--label); border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.mode-tabs button + button { border-left: 1px solid #dfe3e8; }
+.mode-tabs button.on { color: var(--ink); border-bottom-color: var(--ink); background: #eef1f4; }
+.mode-body { padding: 5px 12px 6px; }
+/* Revision 9: how fast the virtual clock runs during playback, 0.05x to 2x on a logarithmic slider
+   so the slow end has as much travel as the fast one. It scales playback only — `seek(t)` is still a
+   pure function of its argument, so every instant renders identically and captures are untouched. */
+/* Revision 12: **a readout that changes at runtime never changes size.** The defect it closes is a
+   real one: the numbers sat inline with the buttons, so as a figure gained a digit the controls
+   after it slid sideways under the cursor while a run was playing. Every live readout now either
+   takes a fixed slot wide enough for the widest value it can hold, or — the owner's own suggestion,
+   and the better rule for anything that changes often — moves onto its own line *below* the control
+   it belongs to. Figures are tabular throughout, so a slot's width is a character count and not a
+   guess, and anything that overruns is clipped rather than allowed to push. `check_workbench.py`
+   holds it down by comparing every button's bounding box at two instants of a run. */
+.readout {
+  display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums; vertical-align: middle; box-sizing: border-box;
+}
+/* The below-its-control form: a full-width line of its own inside a wrapping flex row. */
+.readout-line { display: block; flex: 0 0 100%; width: 100%; height: 16px; line-height: 16px; }
+#speed { width: 130px; accent-color: var(--ink); }
+#speed-info { color: var(--label); width: 54px; }
+#clock { font-family: var(--mono); font-size: 13px; color: var(--label); width: 200px; text-align: right; }
+/* 'Optimize' becomes 'Restart optimize' the moment a run starts: one slot holds both, so the button
+   the owner just pressed does not change size under the cursor. */
+#optimize { width: 152px; }
+#range-duration { width: 292px; }
+#range-position { width: 252px; }
+#step-label { width: 216px; }
+/* The one-line note about the n on show. Its own line at a fixed height, so appearing and
+   disappearing cannot change how tall the controls are and therefore how big the stage is. */
+#step-note { flex: 0 0 100%; width: 100%; height: 16px; line-height: 16px; }
+#continuous-info { color: var(--muted); }
+/* A line of its own, but a fixed one: the annealing readout gains '(styles B and C only)'
+   under style A, and with no width of its own that text widened the box it sits in and slid
+   the whole view box — colour chooser and all — sideways on a style change. */
+#anneal-info { color: var(--muted); width: 396px; }
+/* A flex row's intrinsic width is the sum of its items whether they wrap or not, so a line placed
+   *below* the controls still widens the box that holds it unless the box has a width of its own.
+   The shake box is given one, and the readout drops under the dial instead of beside it. */
+#shake-box { width: 478px; box-sizing: border-box; }
+#law-info, #rel-info, #grow-info { width: 300px; height: 15px; line-height: 15px; }
+/* Revision 14: **controls sit with the axis they belong to.** A mode is a choice on three
+   independent axes — scope (one n, or a range), strategy (the law, the graph, growth, annealing and
+   which solver runs) and presentation (colour, timing, phasing, desaturation) — and which solver
+   runs is strategy, not animation, so the select left the step-animation group for the row that
+   holds the law and the graph. It is given a width of its own because a `select` is as wide as its
+   widest *option*, and Pack offers one option fewer: without this, hiding `tween` would resize the
+   control. */
+#solver-box { width: 232px; box-sizing: border-box; }
+/* Revision 15: the note under the select was clipping mid-word in a 152px box. A fixed
+   slot keeps the controls still; it has to be wide enough to hold what it is given. */
+#solver-note { white-space: normal; }
+#style-select { width: 118px; }
+#solver-note { height: 15px; line-height: 15px; }
+/* The step animation's own group — dwell, move, settle, the motion phasing and the full beat —
+   describes a step, and Pack has no steps, so it is hidden there. Hidden *in place*: `display: none`
+   would take its box out of this wrapping row, the boxes after it would rewrap onto fewer lines, the
+   controls would get shorter and the stage would grow — which is exactly the reflow revision 12
+   forbids and step 13 measures. `visibility: hidden` leaves the footprint, takes the group off the
+   hit test and out of the tab order, and moves nothing on the page. */
+/* Revision 15: `visibility: hidden` kept this box's 1145px in the flow, so the row wrapped
+   around a box nobody could see and the view fell to a line of its own. It is a whole group
+   in its own row, so removing it moves nothing beside it. */
+#step-anim-box.is-off { display: none; }
+#pair-select { max-width: 480px; }
+.hint { color: var(--muted); font-size: 12.5px; }
+.seg { display: inline-flex; border: 1px solid #b9c0c8; border-radius: 4px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; padding: 4px 10px; }
+.seg button + button { border-left: 1px solid #b9c0c8; }
+.seg button.on { background: var(--ink); color: var(--paper); }
+#pair-info { color: var(--label); font-size: 13px; }
+/* The chooser for n, and the sparse cases worth looking at as a row of chips. A chip sets both ends
+   of the range to the same value, which is one step. */
+.chips { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.chips button { padding: 3px 9px; font-size: 13px; min-width: 38px; text-align: center; }
+.chips button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.step-label { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.hint.readout-line { font-style: italic; }
+/* The range: two boxes of n, its length in wall-clock seconds, and where a run stands in it. */
+/* Revision 11: the force law, drawn and edited. The plot is the law itself — force against the
+   signed gap, both sides of zero, the crossing marked — and its two handles are the four numbers:
+   the knee's position is the rigidity and its height the repulsion, the pull's position is the
+   range and its depth the attraction. The sliders and the handles are two views of one state. */
+.lawbox { display: flex; align-items: stretch; }
+.law-plot-wrap { padding: 3px 8px 4px 6px; border-right: 1px solid #e2e6ea; }
+#law-plot { display: block; width: 264px; height: 116px; touch-action: none; cursor: crosshair; }
+#law-plot .lp-field { fill: #fbfcfd; }
+#law-plot .lp-zero { stroke: #9aa3ad; stroke-width: 1; }
+#law-plot .lp-axis { stroke: #c8ced4; stroke-width: 1; }
+#law-plot .lp-curve { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+#law-plot .lp-cross { fill: var(--new); }
+#law-plot .lp-handle { fill: var(--paper); stroke: var(--ink); stroke-width: 2; cursor: grab; }
+#law-plot .lp-handle.is-pull { stroke: #7a5aa8; }
+#law-plot text { font-family: var(--sans); font-size: 9px; fill: var(--quiet); }
+#law-plot text.lp-side { fill: var(--label); font-weight: 600; }
+.law-body { padding: 4px 10px; display: flex; flex-direction: column; gap: 1px; }
+.law-body .law-row { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--label); }
+.law-body .law-row > span:first-child { min-width: 88px; text-align: right; }
+.law-body input[type=range] { width: 118px; accent-color: var(--ink); }
+.law-val { font-variant-numeric: tabular-nums; color: var(--ink); display: inline-block; width: 56px; }
+.law-presets { display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap; }
+.relbox { display: flex; flex-direction: column; }
+/* Revision 11: the panel reads as one instrument rather than as a wall of labels. Every control is
+   in a named box — what the step animation does, how hard it shakes, what the view shows, the force
+   law, who attracts whom, and growth — and the boxes lay out in one row that wraps. */
+.groupbox { display: flex; flex-direction: column; align-self: flex-start; }
+.group-body { padding: 1px 10px 5px; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.group-body.stack { flex-direction: column; align-items: stretch; gap: 2px; }
+.group-body.stack .law-row { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--label); }
+.group-body.stack .law-row > span:first-child { width: 66px; text-align: right; }
+.group-body.stack .law-row input[type=range] { width: 118px; }
+.group-body label { display: inline-flex; align-items: center; gap: 5px; color: var(--label); white-space: nowrap; }
+.rel-body { padding: 1px 10px 5px; display: flex; flex-direction: column; gap: 2px; }
+.rel-body .law-row > span:first-child { min-width: 42px; }
+.rel-body label { font-size: 12.5px; }
+.law-presets .hint { font-size: 12px; }
+.box-title {
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--quiet); padding: 3px 10px 1px; display: block;
+}
+#range-from, #range-to { width: 72px; font-weight: 600; }
+.range-sep { color: var(--label); }
+.range-figure { color: var(--label); white-space: nowrap; }
+.range-figure strong { color: var(--ink); font-variant-numeric: tabular-nums; }
