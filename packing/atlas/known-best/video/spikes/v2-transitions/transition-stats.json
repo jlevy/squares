@@ -11,11 +11,11 @@
   "residual_tol": 0.35
  },
  "build_seconds": {
-  "chain the identities": 0.004,
-  "match the pairs": 7.209,
-  "measure the pairs": 3.744,
-  "read the facts": 0.005,
-  "read the witnesses and renderings": 2.891
+  "chain the identities": 0.005,
+  "match the pairs": 7.348,
+  "measure the pairs": 3.854,
+  "read the facts": 0.004,
+  "read the witnesses and renderings": 3.031
  },
  "crossing_distance": 0.7,
  "embedded_pairs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 89, 99, 100, 101, 102, 103, 104, 105, 110, 147, 260, 272, 307, 323],
@@ -28264,8 +28264,8 @@
  ],
  "rotation_tolerance_deg": 0.05,
  "timing": {
-  "dwell": 1.0,
-  "move": 1.4,
-  "settle": 0.4
+  "dwell": 0.7,
+  "move": 1.2,
+  "settle": 0.5
  }
 }

@@ -695,7 +695,7 @@ input[type=number] { width: 64px; padding: 4px 6px; }
   // Nothing rearranges (that is what makes it static), and the drain stays off for the same
   // reason: there is no motion to mute.
   const CONTINUOUS = {
-    dwell: 0.8, move: 1.2, settle: 0.5,
+    dwell: 0.7, move: 1.2, settle: 0.5,
     staticDwell: 0.4, staticMove: 0.4, staticSettle: 0.35,
   };
   // Revision 7, feature 2: the annealing dial, 0 to 10, default 3. The default is exactly the
@@ -4594,11 +4594,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     const animateBox = document.getElementById('animate-standard-toggle');
     animateBox.checked = ANIMATE.standardize;
     animateBox.disabled = state.mode !== 'animate' || colorScheme !== 'identity';
-    document.getElementById('t-dwell').value = state.timing.dwell;
-    document.getElementById('t-move').value = state.timing.move;
-    document.getElementById('t-settle').value = state.timing.settle;
+
     // Under continuous play the sequence's own beat governs, so the three boxes are inert.
-    ['t-dwell', 't-move', 't-settle'].forEach((id) => { document.getElementById(id).disabled = state.continuous.on; });
+    // The three inputs drive whichever beat is in force: `state.timing` for a single step, and
+    // CONTINUOUS while a range is playing. They used to be DISABLED under continuous play, on the
+    // reasoning that they had no effect there -- which was true, and made them uneditable exactly
+    // where the owner was watching. Editing the beat that is running is the whole point of them.
+    ['dwell', 'move', 'settle'].forEach((key) => {
+      const input = document.getElementById('t-' + key);
+      input.disabled = false;
+      input.value = state.continuous.on ? CONTINUOUS[key] : state.timing[key];
+    });
     document.getElementById('fullbeat-toggle').checked = state.continuous.fullBeat;
     updateStepChooser();
     updateRangeControls();
@@ -4832,12 +4838,17 @@ input[type=number] { width: 64px; padding: 4px 6px; }
     updateSegments();
     render();
   }
+  // The beat, whichever one is running. Under continuous play this edits CONTINUOUS, which is what
+  // a range is actually paced by; otherwise it edits the single-step timing. Both are clamped the
+  // same way, and a move of zero is refused in both -- a move has to have a duration for anything
+  // to be seen happening in it.
   function setTiming(timing) {
     timing = timing || {};
     const frac = duration() > 0 ? state.t / duration() : 0;
-    if (timing.dwell !== undefined) state.timing.dwell = Math.max(0, Number(timing.dwell) || 0);
-    if (timing.move !== undefined) state.timing.move = Math.max(0.05, Number(timing.move) || 0.05);
-    if (timing.settle !== undefined) state.timing.settle = Math.max(0, Number(timing.settle) || 0);
+    const beat = state.continuous.on ? CONTINUOUS : state.timing;
+    if (timing.dwell !== undefined) beat.dwell = Math.max(0, Number(timing.dwell) || 0);
+    if (timing.move !== undefined) beat.move = Math.max(0.05, Number(timing.move) || 0.05);
+    if (timing.settle !== undefined) beat.settle = Math.max(0, Number(timing.settle) || 0);
     state.t = frac * duration();
     updateSegments();
     render();

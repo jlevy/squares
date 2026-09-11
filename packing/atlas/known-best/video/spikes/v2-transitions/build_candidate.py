@@ -93,7 +93,9 @@ CONTACT_BADNESS = 1000.0       # one full-side contact outweighs any position di
 NEW_RULE = "lowest total matching cost after removal from n+1, then fewest full-side contacts, then highest position (y, then x)"
 
 # Timeline defaults, seconds. Revision 2: a little faster (was 1.2 / 1.6 / 0.5).
-TIMING = {"dwell": 1.0, "move": 1.4, "settle": 0.4}
+# The single-step beat. The owner's pacing: 0.7 to read the packing, 1.2 to rearrange, and a
+# settle long enough for the colour to come back without the film dragging.
+TIMING = {"dwell": 0.7, "move": 1.2, "settle": 0.5}
 # Revision 5 staging: in the default motion (add, then make room) the new square arrives over
 # the first ARRIVAL_FRACTION of the move while the container grows, and the existing squares
 # move, as blocks, over the rest; `move-then-add` is the same split the other way round.
