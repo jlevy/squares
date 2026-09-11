@@ -171,6 +171,22 @@ N_LINE_LEFT_PX = 6   # .nline left, the panel's text edge
 #: tighter than the face's own space, which is what makes `n = 11` read as one statement.
 HEADLINE_GAP_PX = 16
 
+#: TeX fragments, written as constants so no escaping has to survive an f-string.
+BOLD = chr(92) + "boldsymbol{%s}"
+LE = chr(92) + "le"
+GE = chr(92) + "ge"
+#: The two bound colours, as the panel and the gap bar both draw them: scarlet for what is
+#: proved from below, green for the best that is known from above. They are the palette's own
+#: `--new` and `--met`, written here because KaTeX colours by value rather than by class.
+LOWER_INK = "#a3123f"
+UPPER_INK = "#17794a"
+
+
+def colour(ink: str, body: str) -> str:
+    """`body` in `ink`, as TeX."""
+    return chr(92) + "textcolor{" + ink + "}{" + body + "}"
+
+
 # Pairs the demonstration must carry, identified by n (the pair is n -> n+1).
 REQUIRED_PAIRS = [4, 9, 10, 17, 99, 100, 147, 272]
 EXTRA_PAIRS = [110, 260, 307]           # the block-motion showcases: two collapses into a grid and the largest rotation count
@@ -902,9 +918,25 @@ def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
             open_items.append("rigidity")
         facts[str(n)] = {
             "relation": relation,
-            # The TeX the panel's three lines are set from. Rendered below, once, for every n.
-            "tex_side": f"s({n}) {'=' if relation == '=' else chr(92) + 'le'} {value_text}",
-            "tex_lower": None if lower_value is None else f"s({n}) \\ge {lower_value}",
+            # The TeX the panel's three lines are set from, rendered below, once, for every n.
+            # The two bounds are the panel's statement and have to carry across a room, so they
+            # are set in the bold companions of the same faces rather than in a heavier weight of
+            # something else. The closed form stays regular: it annotates the bound rather than
+            # competing with it.
+            # Only the VALUE takes the bound's colour. `s(n)` names the same quantity
+            # in both lines and the relation is what distinguishes them, so colouring
+            # either would say that two different things are being talked about.
+            "tex_side": BOLD % (
+                f"s({n}) {'=' if relation == '=' else LE} "
+                + colour(UPPER_INK, value_text)
+            ),
+            "tex_lower": (
+                None
+                if lower_value is None
+                else BOLD % (f"s({n}) {GE} " + colour(LOWER_INK, lower_value))
+            ),
+            # The headline under the packing, set as mathematics like everything else.
+            "tex_headline": f"n = {n}",
             "tex_exact": (
                 None
                 if not entry["exactness"].get("exact_form")
@@ -923,7 +955,7 @@ def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
         }
     # One call to KaTeX for the whole corpus rather than one per expression: the cost is a node
     # start, and there are about a thousand expressions behind it.
-    keys = ("tex_side", "tex_lower", "tex_exact")
+    keys = ("tex_side", "tex_lower", "tex_exact", "tex_headline")
     order = [(n, key) for n in sorted(facts, key=int) for key in keys if facts[n][key] is not None]
     rendered = katex_html([facts[n][key] for n, key in order])
     for (n, key), html in zip(order, rendered, strict=True):

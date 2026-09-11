@@ -398,11 +398,12 @@ def main() -> int:
         end_bar = page.evaluate("atlasTransitions.gapBar()")
         check(end_bar["met"], f"style A does not reach the record by the end of the step: {end_bar}")
         check(abs(end_bar["excess"]) < 0.05, f"the excess at rest is {end_bar['excess']} per cent")
-        # The HAND is what turns green on a hit. It used to be a tick box in a head row that also
-        # said "gap to the best known" and "on the record"; the row is gone, because the bar is
-        # always measuring the same thing and a label saying so on every frame was a caption rather
-        # than a reading. The property it held is still held, on the mark that survived.
-        hand = "getComputedStyle(document.querySelector('#gapbar-hand .hand')).fill"
+        # The HAND is what turns green on a hit. It was a tick box in a head row, then a triangle,
+        # and is now a line through the track -- the bar's two arrows are the bounds and the hand is
+        # the only mark that moves, so it does not need a shape to argue for it. The property has
+        # survived all three: the mark that says where the arrangement is changes colour when the
+        # arrangement is the record.
+        hand = "getComputedStyle(document.getElementById('gapbar-hand')).stroke"
         tick_colour = page.evaluate(hand)
         page.evaluate("atlasTransitions.setStyle('bodies'); atlasTransitions.setSnap(false); atlasTransitions.seek(2.0)")
         mid = page.evaluate("atlasTransitions.gapBar()")
@@ -424,7 +425,10 @@ def main() -> int:
             " const k = s.width / 1920;"
             " const b = document.getElementById('gapbar').getBoundingClientRect();"
             " const e = document.getElementById('headline').getBoundingClientRect();"
-            " const pk = document.getElementById('packing-svg').getBoundingClientRect();"
+            # The DRAWN container, not the svg element: the element's box carries the view's own
+            # padding, so the picture ends well above it and a clearance measured to the element
+            # would refuse a headline that is nowhere near the packing.
+            " const pk = document.getElementById('container').getBoundingClientRect();"
             " const f = document.getElementById('facts').getBoundingClientRect();"
             " return {bottom: (b.bottom - s.top) / k, top: (b.top - s.top) / k,"
             "         headTop: (e.top - s.top) / k, headBottom: (e.bottom - s.top) / k,"
@@ -448,10 +452,21 @@ def main() -> int:
         )
         check(parts["open"]["t"] >= parts["track"]["t"] - 0.5 and parts["open"]["b"] <= parts["track"]["b"] + 0.5,
               f"the shaded open span is not a band inside the track: {parts['open']} against {parts['track']}")
-        check(parts["open"]["l"] <= parts["low"]["l"] + 1.5 and abs(parts["open"]["r"] - parts["rec"]["l"]) < 2.5,
+        # The two bounds are arrow groups now, not tick lines, so their boxes are the arrows' own
+        # width -- eleven units either side of the value they point at. The span still runs from one
+        # to the other; it is compared against their CENTRES rather than their edges.
+        low_mid = (parts["low"]["l"] + parts["low"]["r"]) / 2
+        rec_mid = (parts["rec"]["l"] + parts["rec"]["r"]) / 2
+        check(abs(parts["open"]["l"] - low_mid) < 3 and abs(parts["open"]["r"] - rec_mid) < 3,
               f"the shaded span does not run from the lower bound to the record: {parts}")
-        check(parts["lowLabel"]["r"] < parts["recLabel"]["l"] - 0.5,
-              f"the bar's two numbers overlap: {parts['lowLabel']} and {parts['recLabel']}")
+        # Each bound's value sits over its own arrow -- the upper above the track, the lower below
+        # it -- so they are separated vertically and no longer have to dodge each other sideways.
+        # What must still hold is that they do not overlap at all.
+        apart = (parts["lowLabel"]["r"] < parts["recLabel"]["l"] - 0.5
+                 or parts["recLabel"]["r"] < parts["lowLabel"]["l"] - 0.5
+                 or parts["lowLabel"]["t"] > parts["recLabel"]["b"] - 0.5
+                 or parts["recLabel"]["t"] > parts["lowLabel"]["b"] - 0.5)
+        check(apart, f"the bar's two numbers overlap: {parts['lowLabel']} and {parts['recLabel']}")
         check(geom["shown"], "the gap bar is not drawn")
         check(geom["headTop"] >= geom["packBottom"] - 0.5, f"the headline overlaps the packing: {geom}")
         check(geom["headBottom"] <= geom["stageBottom"] + 0.5, f"the headline runs off the stage: {geom}")
