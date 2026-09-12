@@ -88,6 +88,29 @@ Reused rather than replaced:
 - The page’s API drives both headlessly, and the four-phase beat now lets the search and
   the landing be priced separately.
 
+## First Finding: There Is No Seed
+
+Found before any sweeping, and it reshapes the order of work (`think-kbwb`).
+
+Every source of randomness in the page is seeded from `n` alone — the cached simulator’s
+shake from `n`, the live optimiser’s from `n` and the start kind, the random start’s
+poses from `n`. So for a given n and parameter set there is exactly **one** blind trial,
+and it is the same trial every time.
+
+That is a deliberate and good property for an animation: the same pair jiggles the same
+way in every build, which is what makes a capture reproducible.
+It also makes a success *rate* impossible, because a rate over one sample is either 0 or
+1\.
+
+**H7 is therefore answered in a stronger form than it was asked** — replay is
+deterministic because there is nothing to vary — and the first chunk is no longer the
+harness but the seed: `setSeed(k)` mixed into all three generators, defaulting to
+exactly today’s behaviour so no capture, checker or recorded measurement moves.
+
+Two traps, both already met on this branch: the default has to be bit-identical, because
+`check_revision7` compares free-run misses against recorded values; and the seed has to
+be in the trajectory cache key, or two seeds will share one cached run.
+
 ## Testing Strategy
 
 The harness is itself the test, which is the trap to avoid: a benchmark that cannot be
