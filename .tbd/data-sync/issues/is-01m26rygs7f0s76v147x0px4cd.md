@@ -5,7 +5,7 @@ title: Reconcile PR149 onto the current v0.4.0 explainer stack and restore CI
 kind: task
 status: closed
 priority: 1
-version: 18
+version: 19
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration lane
 labels: []
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m2ae6naj55e8wkrxbc1402x8
   - is-01m2ae6nqy69685v8r37nvd7ya
 created_at: 2026-09-10T23:02:51.417Z
-updated_at: 2026-09-12T15:51:57.610Z
+updated_at: 2026-09-12T15:52:10.943Z
 closed_at: 2026-09-12T15:51:57.610Z
 close_reason: "PR #149 exact head 4d00ab68 passed focused, unrestricted pre-push, unrestricted full checkpoint, and all hosted checks; its body records all valid and invalid costs and the PR is mergeable over PR #148."
 resolution: null
@@ -28,4 +28,4 @@ PR #149's page-render diagnostic work is currently red only because it predates 
 
 ## Notes
 
-PR149 has two concurrent candidate fixes that must be combined without overwriting author work: remote b6a81495 ties exposure and exemptions to the same observation; local 88615a56 pauses the page root watchdog only during artificial geometry setup and proves the hook fired. Astra adjudication recommends both and rejects the former causal wording about carrier CSS and final glyph layout. Child think-6ogd owns integration and D-491 correction; dependent think-o96l owns fresh exact-head validation, push, hosted CI, full checkpoint, PR metadata, and bead sync. The local pre-push on 88615a56 is evidence for that pre-merge head only.
+The unrestricted exact-head full merge/research checkpoint passed at `4d00ab68f26576f28c40c3a4543c7b2ca8f38000` in 3,990.24 seconds. All required checks passed; the Rust lint floor alone skipped because Cargo is unavailable. The run used the project Python 3.14 environment, a valid uv path, process access, and loopback access. It observed 10 CPUs with two outer jobs and one inner job, so the cost is reported without comparing it to the two-CPU budget band. PR #149's body now records this terminal result alongside the earlier invalid and failed attempts. The PR is open, non-draft, mergeable, stacked on PR #148, and every hosted check is green.
