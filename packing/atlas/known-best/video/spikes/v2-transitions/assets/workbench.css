@@ -184,8 +184,8 @@ body.drawing #packing-svg #squares {
   position: absolute;
   top: 8px;
   font-family: var(--sans);
-  font-size: 22px;
-  color: var(--quiet);
+  font-size: 26px;
+  color: var(--ink);
   white-space: nowrap;
 }
 /* Centred on the tick each one names, not on the column's edge: the formula and the mark
@@ -250,19 +250,23 @@ body.drawing #packing-svg #squares {
 .gapbar-num.is-lower {
   fill: var(--new);
 }
-/* Each reference mark's own value, under its tick: the same sans the rest of the diagram
-   uses, quieter than a bound because a reference mark is not a claim. */
+/* Every number on this bar is the same size, and what differs is the colour and the weight.
+   Scarlet and green at 700 are the two bounds, the values the panel below states. Ink at 400
+   is a reference mark -- the scale's ends, and the integers inside it -- which is a place on
+   the scale rather than a claim about this n. Size was carrying that distinction before and
+   doing it badly: a mark at 20 px beside a bound at 26 read as a lesser version of the same
+   thing rather than as a different kind of thing. */
 .gapbar-ref-num {
   font-family: var(--sans);
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 400;
   font-variant-numeric: tabular-nums;
-  fill: var(--quiet);
+  fill: var(--ink);
 }
-/* The end's formula is the one piece of mathematics on the bar, so it is set as mathematics -- at
-   the bar's own small size, so it reads as part of the instrument rather than as a fact. */
+/* The end's formula is the one piece of mathematics on the bar, so it is set as mathematics --
+   at the size every other number here is set at, because it names one of them. */
 .gapbar-end .katex {
-  font-size: 24px;
+  font-size: 26px;
 }
 .gapbar-num.is-record {
   fill: var(--met);
@@ -292,12 +296,15 @@ body.drawing #packing-svg #squares {
    it is how much of it the squares fill, not where its edge is. So the clearance here is a
    number that can be chosen once rather than a worst case to guess at.
    The numeral's own box opens above its ink by about a fifth of its size, so what matters is
-   where the INK starts, not where the box does. Measured at this top: ink from 950, which is
-   37 below the container's floor and 31 above the stage's own. */
+   where the INK starts, not where the box does. Measured: ink from 950, which is 37 below the
+   container's floor and 31 above the stage's own.
+   Anchored to the stage's floor with `bottom` rather than to its ceiling with `top`. The stage
+   is a fixed 1080 tall so the two are the same number today; `bottom` is the one that stays
+   true, because what this row is measured from is the bottom of the diagram. */
 #headline {
   position: absolute;
   left: 60px;
-  top: 972px;
+  bottom: 12px;
   width: 1000px;
   height: 96px;
 }
