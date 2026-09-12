@@ -157,7 +157,14 @@ session:
   - Eleven mutation controls over the replay, including a heavy site read as light, which moves the charge while leaving the budget at one.
   - 'Ruff and ruff format clean over the tree; basedpyright reports zero errors and zero warnings.'
   - The threshold, interval, admission, certificate, dilation and plateau suites were run together; their result is recorded in the report below.
-  resource_rollups: [packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml]
+  - 'full gate: fast at 6cb9eebd: passed (585.26s of a 600s ceiling at 4 cpus, --jobs 3 --inner-jobs 1; ALL CHECKS PASSED and 4997 tests passed; the only failing step was this declaration''s own absence, which this line supplies. Additions over that commit are records only: these rollups, the close report, and the regenerated synopsis, re-checked by a clean --records run)'
+  resource_rollups:
+  - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
+  - packing/campaign/resource-usage/agent-ac97342e4ca35e69e.yaml
+  - packing/campaign/resource-usage/agent-ab1bed639a6db6acc.yaml
+  - packing/campaign/resource-usage/agent-a9b644d4541443deb.yaml
+  - packing/campaign/resource-usage/agent-a4306d8d044623c7c.yaml
+  - packing/campaign/resource-usage/agent-a106b43671ede9c00.yaml
   stop_reason: Stages one and two of the weighted-atom review's staged admission are complete with executable controls, and the remaining two stages need coverage and paired-runner controls that are their own work rather than an extension of this one. No scientific target was registered or run, which the bead forbids until every stage passes.
   next_action: Continue under think-8c9e, the weighted-atom coverage mechanics, which cover the direct, event and interval controls including the boundary and undercharged-core cases and the interval route's stall handling. Stage four's paired runner and exact common manifests are tracked separately and blocked on it.
 ---
