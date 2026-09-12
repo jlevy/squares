@@ -509,10 +509,14 @@ def main() -> int:
                 continue
             seek_to_end()
             scale = ask("gapBar")
+            # One below the grid bound `ceil(sqrt(n))`, which is the same as one below the area
+            # bound everywhere except a perfect square -- and there it is the difference between
+            # the record sitting in the middle of the bar and sitting hard against its left end.
+            want_lo = math.ceil(math.sqrt(size)) - 1
             check(
-                abs(scale["lo"] - math.floor(math.sqrt(size))) < 1e-9,
+                abs(scale["lo"] - want_lo) < 1e-9,
                 f"the bar at n = {size} starts at {scale['lo']}, "
-                f"not the integer below the area bound, {math.floor(math.sqrt(size))}",
+                f"not one below the grid bound, {want_lo}",
             )
             check(
                 abs((scale["hi"] - scale["lo"]) - 2.0) < 1e-9,

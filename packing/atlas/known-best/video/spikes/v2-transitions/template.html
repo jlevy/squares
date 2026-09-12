@@ -28,7 +28,9 @@ __WORKBENCH_CSS__
       <div id="facts">
         <div class="gapbar" id="gapbar">
           <svg class="gapbar-plot" viewBox="0 -40 680 150" aria-hidden="true">
-            <rect class="track" x="0" y="0" width="680" height="26" rx="4" />
+            <!-- Square corners, always. This is a number line: a rounded end reads as the end of a
+                 THING, and the scale does not end there -- its ends are the ticks on it. -->
+            <rect class="track" x="0" y="0" width="680" height="26" />
             <rect class="gap-open" id="gapbar-open" x="0" y="0" width="0" height="26" />
             <!-- Two weights of vertical rule, and the weight is what says which kind of value
                  it is. The reference marks -- the scale's two ends and any integer inside the

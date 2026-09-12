@@ -400,13 +400,17 @@ body.drawing #packing-svg #squares {
   color: var(--ink);
   white-space: nowrap;
 }
-/* The slot the star sits in, to the LEFT of the lower bound it marks. Always this wide,
-   whether or not there is a star in it: without that the whole inequality steps sideways at
-   every n that has one, and during a sweep the line jitters rather than rolls. */
+/* The star hangs in the margin, to the LEFT of the column the facts are set in.
+   It was an inline slot in front of the inequality, always the star's width so the line would
+   not step sideways at the n that have one -- which held the line still but indented every
+   statement on the page by a space that is empty at most n. Out here it costs nothing: the
+   inequality starts at the margin like every other row, and the star is beside it rather than
+   inside it. There is room because the packing ends at 1060 and this column starts at 1160. */
 .bound-star {
-  display: inline-block;
-  width: 52px;
-  vertical-align: -0.08em;
+  position: absolute;
+  left: -46px;
+  top: 0.12em;
+  width: 38px;
 }
 .bound-star svg {
   width: 38px;
@@ -467,6 +471,12 @@ body.drawing #packing-svg #squares {
   font-family: var(--serif);
   font-size: 34px;
   color: var(--ink);
+}
+/* "new lower bound" is the star's own caption, so it takes the star's colour: the two are one
+   mark and reading them as one is the point. "algebraic, degree 8" above it stays ink, being a
+   remark about the value rather than about where the value came from. */
+.star-line .note {
+  color: var(--new);
 }
 /* The poster's badges, in a row with short labels: what this record establishes. Fixed height,
    so the row never reflows. */

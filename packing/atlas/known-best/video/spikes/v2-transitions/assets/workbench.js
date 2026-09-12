@@ -3785,7 +3785,15 @@
     // A proved n carries no separate lower bound: the bound is the value, and the gap is nothing.
     const lower = f.lower === null ? record : Number(f.lower);
     const root = Math.sqrt(n);
-    const lo = Math.floor(root);
+    // **One below the grid bound**, not one below the area bound. The two are the same wherever
+    // `sqrt(n)` is irrational, and they differ at exactly the n where it matters: at a perfect
+    // square `ceil(sqrt(n))` IS `sqrt(n)`, so flooring would start the bar at the record itself
+    // and leave it hard against the left end with an empty unit to its right. n = 36 ran 6 to 8
+    // with its record at 6; it runs 5 to 7 now, with the record in the middle.
+    //
+    // The span always contains `[sqrt(n), sqrt(n) + 1]`, which is what the bar is about:
+    // `ceil(x) - 1 <= x` and `ceil(x) + 1 >= x + 1` for every x.
+    const lo = Math.ceil(root) - 1;
     const hi = lo + GAPBAR.span;
     gapbarInfo = { n, record, lower, lo, hi, proved: f.lower === null };
     const xr = gapbarX(record);
@@ -3823,7 +3831,11 @@
       tick.setAttribute("x1", fmt(at, 2));
       tick.setAttribute("x2", fmt(at, 2));
       tick.setAttribute("y1", "-8");
-      tick.setAttribute("y2", "34");
+      // A tick reaches its own label. The integers' labels are on the first row and 34 all but
+      // touches them; the two irrational marks are a row further down, so theirs run to 70 --
+      // otherwise the number floats below a tick that stopped short of it and a reader has to
+      // guess which mark it belongs to, which at n = 26 means guessing between 5 and 5.099.
+      tick.setAttribute("y2", Number.isInteger(value) ? "34" : "70");
       gapbarTicks.appendChild(tick);
       const num = /** @type {SVGTextElement} */ (document.createElementNS(SVG_NS, "text"));
       num.setAttribute("class", "gapbar-ref-num");
