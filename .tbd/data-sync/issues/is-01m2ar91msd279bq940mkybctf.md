@@ -5,7 +5,7 @@ title: Return the verified-upper-bound corpus check to the fast lane
 kind: bug
 status: in_progress
 priority: 1
-version: 4
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - ci
@@ -14,10 +14,10 @@ dependencies:
     target: is-01m2ad9avdatjwfznq7zwqjget
 parent_id: is-01m2ad9avdatjwfznq7zwqjget
 created_at: 2026-09-12T12:08:05.528Z
-updated_at: 2026-09-12T14:13:41.281Z
+updated_at: 2026-09-12T14:32:02.243Z
 ---
 The exact-head PR149 full gate measured test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports at 0.97s, below the repository's 1s slow-marker floor. Remove its pytest.mark.slow decorator and matching test_module_boundaries slow registry entry, add no replacement ceremony, run the focused contract and boundary tests, then rerun the required gate before publication.
 
 ## Notes
 
-Implemented unchanged-test lane correction at 4d00ab68. Focused 23-test control, Ruff, formatting, BasedPyright, unrestricted pre-push, and all required hosted checks pass. The repeated full checkpoint is running; close only after that exact-head gate passes.
+Implemented the unchanged-test lane correction at 4d00ab68. Focused 23-test control, Ruff, formatting, BasedPyright, unrestricted pre-push, and all required hosted checks pass. The discovery full gate measured the intact corpus test at 0.97s below the one-second marker floor. A first repeated invocation was invalid and interrupted after 2,722s because its child PATH omitted uv. A second sandboxed replacement was interrupted after 1,146s because required process-tree and loopback controls cannot run there. The unrestricted exact-head full checkpoint is running as session 83725; close only after that gate passes.
