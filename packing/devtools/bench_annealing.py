@@ -69,6 +69,11 @@ TOLERANCES = {"exact": 0.0001, "close": 0.1, "near": 1.0}
 #: wherever it is pointed, and the two only looked different because their gaps differ".
 OUTCOME = "closed"
 
+#: The k at which best-of-k is reported. A trial costs a fraction of a millisecond, so the
+#: question is never "what does one run give" but "what does the best of a budget give", and
+#: the ladder is what shows whether more budget is still buying anything.
+BEST_OF = (1, 10, 100, 1000, 10_000)
+
 
 def gap_closed(n: int, record: float, excess: float) -> float:
     """How much of the record-to-grid gap a run closed: 1 reached the record, 0 the grid.
@@ -282,6 +287,23 @@ def report(trials: list[Trial]) -> int:
             + f"  {closed:>7.3f}  {excess[0]:>8.4f}  {statistics.median(excess):>8.4f}  "
             f"{excess[-1]:>8.4f}  {statistics.median(t.ms for t in rows):>9.1f}"
         )
+    # **Best-of-k, which is the number that matters and the one nobody was reporting.**
+    # The median says the method closes about half the gap; the best of a thousand trials at
+    # n = 5 closes 98.7% of it. Those are both true and only the second is a result about
+    # what the search can reach -- a run costs a fraction of a millisecond, so k is free and
+    # the tail is the product.
+    print(f"\n{'    n':>5}" + "".join(f"{'best-of-' + str(k):>12}" for k in BEST_OF))
+    for n in sorted(by_n):
+        ordered = sorted(by_n[n], key=lambda t: t.seed)
+        line = f"{n:>5}"
+        for k in BEST_OF:
+            if k > len(ordered):
+                line += f"{'-':>12}"
+                continue
+            line += f"{max(t.closed for t in ordered[:k]):>12.3f}"
+        print(line)
+    print("  (closed at the best trial of the first k seeds)")
+
     every = sorted(t.closed for t in trials)
     print(
         "\n  closed is the fraction of the record-to-grid gap the run closed: 1 reached the "
@@ -312,7 +334,82 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     parser.add_argument("--out", type=Path, default=None, help="where the raw trials go")
     parser.add_argument("--replay", type=Path, default=None, help="report an existing jsonl")
+    parser.add_argument(
+        "--sweep",
+        nargs="+",
+        default=None,
+        metavar="KEY=V,V,V",
+        help="parameter grid, e.g. --sweep anneal=0,3,6,10 inflate=1.05,1.12,1.25",
+    )
     return parser.parse_args(argv)
+
+
+def parse_grid(spec: list[str]) -> list[dict[str, float | int]]:
+    """`["anneal=0,3", "inflate=1.1,1.2"]` into the four cells it names.
+
+    A grid rather than one axis at a time, because the interesting question is almost never
+    what one parameter does alone -- a shake that helps at a tight container may hurt at a
+    loose one, and only the cross says so.
+    """
+    axes: list[tuple[str, list[float | int]]] = []
+    for entry in spec:
+        key, _, values = entry.partition("=")
+        if not values:
+            msg = f"a sweep axis needs values: {entry!r}"
+            raise ValueError(msg)
+        axes.append(
+            (
+                key,
+                [int(v) if key == "anneal" else float(v) for v in values.split(",")],
+            )
+        )
+    cells: list[dict[str, float | int]] = [{}]
+    for key, values in axes:
+        cells = [{**cell, key: value} for cell in cells for value in values]
+    return cells
+
+
+def sweep(args: argparse.Namespace, seeds: list[int], stamp: str) -> int:
+    """One run per cell of the grid, reported as one table of best-of-k."""
+    cells = parse_grid(args.sweep)
+    print(f"# {len(cells)} cell(s) x {len(args.n)} n x {len(seeds)} seeds")
+    table: list[tuple[dict[str, float | int], int, list[Trial]]] = []
+    for cell in cells:
+        label = "-".join(f"{k}{v}" for k, v in cell.items())
+        out = RESULTS / f"{stamp}-sweep-{label}.jsonl"
+        trials = run_trials(
+            Run(
+                sizes=args.n,
+                seeds=seeds,
+                style=args.style,
+                inflate=float(cell["inflate"]) if "inflate" in cell else args.inflate,
+                anneal=int(cell["anneal"]) if "anneal" in cell else args.anneal,
+                budget=args.budget,
+                out=out,
+            )
+        )
+        by_n: dict[int, list[Trial]] = {}
+        for trial in trials:
+            by_n.setdefault(trial.n, []).append(trial)
+        table.extend((cell, n, by_n[n]) for n in sorted(by_n))
+    if not table:
+        print("no trials")
+        return 1
+    keys = list(cells[0])
+    head = "  " + "".join(f"{k:>9}" for k in keys) + f"{'n':>5}{'trials':>8}{'median':>9}"
+    print(f"\n{head}" + "".join(f"{'best-' + str(k):>11}" for k in BEST_OF if k <= len(seeds)))
+    print("  " + "-" * (len(head) + 11 * len(BEST_OF)))
+    for cell, n, rows in table:
+        ordered = sorted(rows, key=lambda t: t.seed)
+        line = "  " + "".join(f"{cell[k]:>9}" for k in keys)
+        line += f"{n:>5}{len(rows):>8}{statistics.median(t.closed for t in rows):>9.3f}"
+        for k in BEST_OF:
+            if k > len(seeds):
+                continue
+            line += f"{max(t.closed for t in ordered[:k]):>11.3f}"
+        print(line)
+    print("\n  median and best-of-k are both `closed`: 1 is the record, 0 the grid.")
+    return 0
 
 
 def _trial_of(row: dict[str, Any]) -> Trial:
@@ -353,6 +450,8 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     RESULTS.mkdir(parents=True, exist_ok=True)
     stamp = time.strftime("%Y%m%dT%H%M%S")
+    if args.sweep is not None:
+        return sweep(args, list(range(args.seed_from, args.seed_from + args.seeds)), stamp)
     label = "-".join(str(n) for n in args.n)
     out = args.out or RESULTS / f"{stamp}-n{label}-{args.style}.jsonl"
     seeds = list(range(args.seed_from, args.seed_from + args.seeds))
