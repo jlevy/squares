@@ -49,6 +49,9 @@ and the workflow’s path filter names the page’s inputs, held there by two te
 
 **This work changes what feeds that pipeline, not the pipeline.**
 
+What the pipeline does *not* do on its own is publish, and that is mapped below rather
+than assumed.
+
 ### What it costs, measured
 
 | file | lines |
@@ -164,6 +167,61 @@ it off before the rest would make the page claim something that is not yet true.
 | 6 | E | `think-g0lh` | `pyproject.toml`, `pages.yml`, the tree | Into `devtools`, banner off. |
 
 Two and three run beside one; four waits on one; five and six are last.
+
+## Publishing It
+
+Tracked as `think-fyje`. Four items, and only the second is strictly required.
+
+What already works, and needs nothing: `build_workbench_site.py` writes
+`site/workbench/`; `pages.yml` builds it with `--check`, so it must reproduce itself
+byte for byte and pass its own self-containment check; the upload takes `packing/site`
+**whole**, so a subdirectory is a URL — the workbench lands at `/workbench/` and the
+explainer keeps `/`; and the path filter names every input, held there by
+`test_the_pages_filter_covers_every_render_input`, which is what made it gain the two
+asset files when the script left the HTML.
+
+**P1 — the Pages build depends on a Node nobody declared** (`think-l6l4`). The build job
+pins Python to 3.14.7 and uv to 0.12.8 and says nothing about Node, but
+`build_candidate.py:1152` runs `["node", entry]` to render about a thousand KaTeX
+expressions in one call.
+It works today only because `ubuntu-latest` happens to ship a Node.
+A runner-image change, or a KaTeX upgrade wanting a newer runtime, breaks the publish
+with no warning and an error that will read as a KaTeX problem rather than a toolchain
+one. Fix: `actions/setup-node` at the pin `packing-validation.yml` and the vendored
+kpress already use, so the repository has one answer to “which Node”.
+No `npm ci` is needed there — Pages needs the runtime, not the pinned tools, and the
+tools run in the validation workflow, which is the right separation.
+
+**P2 — the branch has to reach main** (`think-tn6s`). Both gates are the same condition:
+the artifact upload and the `deploy` job are each
+`if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'`. A pull
+request *builds* the page — so a broken render fails review rather than the next deploy
+— and deploys nothing.
+Today that is [PR #125](https://github.com/jlevy/squares/pull/125), 94 commits ahead of
+`main`. Merging it publishes the workbench, because the path filter already names the
+workbench’s inputs. P1 belongs in the same branch: a first deploy that fails on an
+undeclared toolchain is the worst kind.
+
+**P3 — what the published page says while it is still a prototype** (`think-yuvc`). A
+decision, not a defect, and it should be made rather than inherited.
+The banner injected at build time says the workbench “is excluded from the repository’s
+lint floor” — **which is no longer true.** Its JavaScript and CSS are at zero under
+Biome, its script type-checks, and its gates run in `packing-validate`. What remains
+true is that the animation model is still moving and that figures it draws are not
+evidence. Three separable questions: whether the banner is rewritten to what is still
+true or removed outright (removal is the last chunk and waits on the rest); whether `/`
+links to `/workbench/` at all, since today nothing links either way except the banner’s
+own link back; and whether the page is meant to be shareable yet, since it is public the
+moment it deploys.
+
+**P4 — nothing checks the page after it deploys** (`think-9x0m`). The workflow proves a
+great deal about the page it *builds* and nothing about the page at the URL. An upload
+path that is subtly wrong, a Pages configuration serving a different directory, a
+half-successful deploy: each leaves a green workflow and a broken link.
+A post-deploy fetch of `/workbench/` — 200, body carries `window.atlasTransitions`,
+digest matches the uploaded artifact — closes it.
+Low priority because the failure is visible the moment anyone opens the link, worth
+doing because “anyone opens the link” is not a gate.
 
 ## Testing Strategy
 
