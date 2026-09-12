@@ -60,10 +60,14 @@
   // reason: there is no motion to mute.
   const CONTINUOUS = {
     dwell: 0.8,
-    move: 0.8,
+    // The moving span, split: the free rearrangement and then the landing. 0.55 + 0.25 is the
+    // 0.8 this was, at the ratio the physics was already using inside it.
+    move: 0.55,
+    correct: 0.25,
     settle: 0.8,
     staticDwell: 0.4,
-    staticMove: 0.4,
+    staticMove: 0.28,
+    staticCorrect: 0.12,
     staticSettle: 0.35,
   };
   // Revision 7, feature 2: the annealing dial, 0 to 10, default 3. The default is exactly the
@@ -106,7 +110,19 @@
     pair: 0,
     t: 0,
     playing: false,
-    timing: { dwell: DATA.timing.dwell, move: DATA.timing.move, settle: DATA.timing.settle },
+    // **Four phases, not three.** The move was one span with the correction hidden inside it
+    // as two fractions -- the spring stiffened at 0.68 of it, the poses eased onto their targets
+    // over the last 0.12 -- so lengthening the search lengthened the landing with it, which
+    // nobody wants and which no control said was happening. `move` is now the free
+    // rearrangement and `correct` the landing, and the two fractions are derived from their
+    // ratio rather than fixed. Defaults keep today's beat: 0.55 + 0.25 is 0.8 at a ratio of
+    // 0.6875, against the 0.68 that was written down.
+    timing: {
+      dwell: DATA.timing.dwell,
+      move: DATA.timing.move,
+      correct: DATA.timing.correct,
+      settle: DATA.timing.settle,
+    },
     phase: PHASES[0],
     style: "tween", // 'tween' (style A, the block tween), 'physics' (B) or 'bodies' (C)
     desaturate: true, // drain the fills' chroma while the pair moves, lock the colour back in over the settle
@@ -1755,16 +1771,31 @@
     const p = PAIRS[pairIndex === undefined ? state.pair : pairIndex];
     return p.kind === "prefix" || p.kind === "shared-picture";
   }
+  // **Every beat carries all four spans.** The anneal dial and the continuous beat each build a
+  // fresh object here, and when `correct` was added they were left at three keys -- so
+  // `dwell + move + correct + settle` was NaN on every path but the default one, and a NaN
+  // duration turns a seek into a run that never arrives. The gate went from 90 seconds to over
+  // seventeen minutes and the cause looked like a cache problem for two rounds.
+  //
+  // A static append has no landing to speak of, but it still gets a `correct` in proportion:
+  // the beat is a shape, and a span that is sometimes absent is a span every caller has to
+  // remember.
   function continuousTiming(pairIndex, style) {
     const span = annealSpan(style);
     if (isStillPair(pairIndex) && !state.continuous.fullBeat) {
       return {
         dwell: CONTINUOUS.staticDwell,
         move: CONTINUOUS.staticMove,
+        correct: CONTINUOUS.staticCorrect,
         settle: CONTINUOUS.staticSettle,
       };
     }
-    return { dwell: CONTINUOUS.dwell, move: CONTINUOUS.move * span, settle: CONTINUOUS.settle };
+    return {
+      dwell: CONTINUOUS.dwell,
+      move: CONTINUOUS.move * span,
+      correct: CONTINUOUS.correct * span,
+      settle: CONTINUOUS.settle,
+    };
   }
   function timing(pairIndex, style) {
     const span = annealSpan(style);
@@ -1774,6 +1805,7 @@
         : {
             dwell: state.timing.dwell,
             move: state.timing.move * span,
+            correct: state.timing.correct * span,
             settle: state.timing.settle,
           };
     }
@@ -1781,7 +1813,8 @@
   }
   function duration(pairIndex) {
     const tm = timing(pairIndex);
-    return tm.dwell + tm.move + tm.settle;
+    // Four spans, not three: the correction has its own time now and it is part of the beat.
+    return tm.dwell + tm.move + tm.correct + tm.settle;
   }
   // The instants of one pair. In the default staging the new square arrives over the first
   // ARRIVAL_FRACTION of the move (`arrive` to `arrived`) while the container grows, and the
@@ -1801,24 +1834,27 @@
   }
   function schedule() {
     const tm = timing();
+    // The moving span is the rearrangement and the correction together: one continuous run of
+    // the physics, divided by `correctionShape` rather than by a break in the clock.
+    const span = tm.move + tm.correct;
     const moveStart = tm.dwell;
-    const moveEnd = tm.dwell + tm.move;
+    const moveEnd = tm.dwell + span;
     const end = moveEnd + tm.settle;
     let arrive, arrived, blocksStart, blocksEnd;
     if (state.phase === "add-then-move") {
       arrive = moveStart;
-      arrived = moveStart + tm.move * ARRIVAL_FRACTION;
+      arrived = moveStart + span * ARRIVAL_FRACTION;
       blocksStart = arrived;
       blocksEnd = moveEnd;
     } else if (state.phase === "move-then-add") {
       blocksStart = moveStart;
-      blocksEnd = moveStart + tm.move * (1 - ARRIVAL_FRACTION);
+      blocksEnd = moveStart + span * (1 - ARRIVAL_FRACTION);
       arrive = blocksEnd;
       arrived = moveEnd;
     } else {
       blocksStart = moveStart;
       blocksEnd = moveEnd;
-      arrive = moveStart + tm.move * (1 - NEW_FRACTION);
+      arrive = moveStart + span * (1 - NEW_FRACTION);
       arrived = moveEnd;
     }
     const roll = Math.min(ROLL_MAX, end - arrive);
@@ -1969,7 +2005,10 @@
     openBy: 0.3, // fraction of the move by which it is fully open
     shutFrom: 0.62, // fraction of the move from which it closes again, done at `1 - blend`
     tighten: 16.0, // the spring's stiffness multiplier at the end of the tightening window
-    tightenFrom: 0.68, // fraction of the move where the tightening begins
+    // Where the correction begins, as a fraction of the simulation's own progress. The
+    // rearrangement is everything before it and the landing everything after, and the beat's
+    // `move` and `correct` are how many seconds the reader spends on each side of it.
+    tightenFrom: 0.68,
     wall: 2500, // the container's walls: stiffness per unit of corner overhang, per move^2
     wallCap: 0.25,
     inertia: 1 / 6, // a unit square of unit mass about its centre
@@ -1982,7 +2021,10 @@
     // clearance the square jams flat on its neighbours and only the lock-in carries it through.
     appear: 0.15, // fraction of the move over which the new square fades in and inflates to full size
     inflateFrom: 0.3, // its side when it first appears
-    blend: 0.12, // the last fraction of the move eases each pose onto its exact target (smoothstep)
+    // The last fraction of the simulation's progress that eases each pose onto its exact
+    // target (smoothstep). Inside the correction, so a longer `correct` gives it more
+    // seconds without giving it more of the run.
+    blend: 0.12,
     maxSpeed: 40, // units per move, per body
     maxSpin: 20, // radians per move, per body
     cell: 1.5, // broad-phase grid cell; two unit squares can only overlap within sqrt 2 of each other
@@ -2204,7 +2246,20 @@
     const limit = 2 / omega;
     return Math.max(1, Math.min(LAW_SUB_MAX, Math.ceil(dt / limit)));
   }
-  // Everything a run has to be keyed by: two runs with the same signature draw the same trajectory.
+  // How the moving span divides. `tightenFrom` is where the correction starts, which is just
+  // the two timings' ratio; `blend` is the last part of the correction, at the share it has
+  // always had of it -- 0.12 of a span whose correction was 0.32 is three eighths of the
+  // correction. Recomputed rather than stored, so a timing change cannot leave them stale.
+  // Everything a run has to be keyed by: two runs with the same signature draw the same
+  // trajectory.
+  //
+  // The two move timings are deliberately NOT in this key. `move` and `correct` are two
+  // TIMES -- how long the reader watches the rearrangement, and how long the landing -- and
+  // the simulation they play is the same one either way; `moveProgress` warps the clock over
+  // it rather than rebuilding it. Deriving the physics' own fractions from the timings was
+  // tried and measured: it put the ratio in this key, which every timing change then
+  // invalidated, and took the gate from 90 seconds to over 17 minutes of rebuilding
+  // trajectories nobody had asked to differ.
   const lawKey = () => lawsKey();
   // The blind run (revision 6, feature 3): the simulation is told nothing about where the squares
   // are meant to end up. It starts from the packing of n in a container inflated by `inflate`,
@@ -2942,7 +2997,12 @@
   // The step count: 120 a second of the annealed move, so a level that lengthens the move buys sub-
   // steps at the same dt rather than a finer integration of the same span.
   function physicsSteps(pairIndex, style) {
-    return Math.max(1, Math.round(PHYS.stepsPerSecond * timing(pairIndex, style).move));
+    // The whole moving span, not just the rearrangement: the physics runs through the landing
+    // too, and `move` stopped being the whole of it when the correction got its own time.
+    // Reading `move` alone cut a run's steps by 31 per cent at the shipped beat, which
+    // `check_revision7` caught as every free run suddenly missing by ten times as much.
+    const tm = timing(pairIndex, style);
+    return Math.max(1, Math.round(PHYS.stepsPerSecond * (tm.move + tm.correct)));
   }
   function ensureTrajectory(pairIndex, style, mode) {
     mode = MODES.includes(mode) ? mode : simMode();
@@ -5228,8 +5288,25 @@
   // would not fit at that scale, which happens on the tiny pairs); over the settle the whole
   // picture eases down to n + 1's fit. The new square inflates in place from the start of the
   // move, tinted scarlet as in A. Every square is the pool's element for its identity.
+  // The simulation's own progress at wall-clock `t`. Piecewise linear with its knee at
+  // `PHYS.tightenFrom`, which is where the landing begins: the reader spends `move` seconds on
+  // the run's first 68 per cent and `correct` seconds on its last 32, so the two phases have
+  // independent durations while the run they play is the same one. Lengthening the search no
+  // longer lengthens the landing with it, which was the whole complaint.
+  function moveProgress(sc, t) {
+    const tm = timing();
+    const span = sc.moveEnd - sc.moveStart;
+    const total = tm.move + tm.correct;
+    if (span <= 0 || total <= 0) {
+      return ramp(t, sc.moveStart, sc.moveEnd);
+    }
+    const knee = sc.moveStart + span * (tm.move / total);
+    return t < knee
+      ? ramp(t, sc.moveStart, knee) * PHYS.tightenFrom
+      : PHYS.tightenFrom + ramp(t, knee, sc.moveEnd) * (1 - PHYS.tightenFrom);
+  }
   function renderPhysicsScene(p, A, B, _tm, sc, t) {
-    const u = ramp(t, sc.moveStart, sc.moveEnd);
+    const u = moveProgress(sc, t);
     const moving = u > 0 && u < 1;
     // With the snap off the simulation's own final state is what the pair comes to rest at, so the
     // trajectory is read through the settle as well, not only while the squares are on the move.
@@ -5783,11 +5860,11 @@
     animateBox.disabled = state.mode !== "animate" || colorScheme !== "identity";
 
     // Under continuous play the sequence's own beat governs, so the three boxes are inert.
-    // The three inputs drive whichever beat is in force: `state.timing` for a single step, and
+    // The four inputs drive whichever beat is in force: `state.timing` for a single step, and
     // CONTINUOUS while a range is playing. They used to be DISABLED under continuous play, on the
     // reasoning that they had no effect there -- which was true, and made them uneditable exactly
     // where the owner was watching. Editing the beat that is running is the whole point of them.
-    ["dwell", "move", "settle"].forEach((key) => {
+    ["dwell", "move", "correct", "settle"].forEach((key) => {
       const input = /** @type {HTMLInputElement} */ (document.getElementById(`t-${key}`));
       input.disabled = false;
       input.value = state.continuous.on ? CONTINUOUS[key] : state.timing[key];
@@ -6158,6 +6235,9 @@
     if (timing.move !== undefined) {
       beat.move = Math.max(0.05, Number(timing.move) || 0.05);
     }
+    if (timing.correct !== undefined) {
+      beat.correct = Math.max(0.05, Number(timing.correct) || 0.05);
+    }
     if (timing.settle !== undefined) {
       beat.settle = Math.max(0, Number(timing.settle) || 0);
     }
@@ -6330,7 +6410,9 @@
       amplitude: ANNEAL.amplitude(state.anneal),
       decayPower: ANNEAL.decayPower(state.anneal),
       span: ANNEAL.span(state.anneal),
-      move: timing().move,
+      // The whole moving span, which is what the run is drawn over and what `steps` counts.
+      // `move` alone stopped being that when the correction got its own time.
+      move: timing().move + timing().correct,
       steps: physicsSteps(state.pair, state.style),
     };
   }
@@ -6516,7 +6598,7 @@
     let s = 0;
     for (let i = b.first; i <= b.last; i++) {
       const tm = continuousTiming(i);
-      s += tm.dwell + tm.move + tm.settle;
+      s += tm.dwell + tm.move + tm.correct + tm.settle;
     }
     return s;
   }
@@ -7090,7 +7172,7 @@
     .addEventListener("change", (ev) =>
       setCapture(/** @type {HTMLInputElement} */ (ev.target).checked),
     );
-  ["dwell", "move", "settle"].forEach((key) => {
+  ["dwell", "move", "correct", "settle"].forEach((key) => {
     document.getElementById(`t-${key}`).addEventListener("change", (ev) => {
       const o = {};
       o[key] = /** @type {HTMLInputElement} */ (ev.target).value;

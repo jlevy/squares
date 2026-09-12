@@ -135,7 +135,10 @@ DOC_FOOTER = (
     "-->\n"
 )
 
-TIMING = {"dwell": 0.8, "move": 0.8, "settle": 0.8}
+#: The beat, in seconds. `move` is the free rearrangement and `correct` the landing; they
+#: used to be one span with the landing hidden inside it as a fraction. 0.55 + 0.25 keeps
+#: the moving span at the 0.8 it has always been, at the ratio the physics already used.
+TIMING = {"dwell": 0.8, "move": 0.55, "correct": 0.25, "settle": 0.8}
 # Revision 5 staging: in the default motion (add, then make room) the new square arrives over
 # the first ARRIVAL_FRACTION of the move while the container grows, and the existing squares
 # move, as blocks, over the rest; `move-then-add` is the same split the other way round.
