@@ -157,6 +157,7 @@ session:
   - Eleven mutation controls over the replay, including a heavy site read as light, which moves the charge while leaving the budget at one.
   - 'Ruff and ruff format clean over the tree; basedpyright reports zero errors and zero warnings.'
   - The threshold, interval, admission, certificate, dilation and plateau suites were run together; their result is recorded in the report below.
+  resource_rollups: [packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml]
   stop_reason: Stages one and two of the weighted-atom review's staged admission are complete with executable controls, and the remaining two stages need coverage and paired-runner controls that are their own work rather than an extension of this one. No scientific target was registered or run, which the bead forbids until every stage passes.
   next_action: Continue under think-8c9e, the weighted-atom coverage mechanics, which cover the direct, event and interval controls including the boundary and undercharged-core cases and the interval route's stall handling. Stage four's paired runner and exact common manifests are tracked separately and blocked on it.
 ---

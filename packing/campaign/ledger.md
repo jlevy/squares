@@ -141,6 +141,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-124](agent-sessions/session-124-evidence-interpretation-finalization.md) | stopped | contemporaneous | `research-loop` (process) | `research-loop` (process) | 1 | think-rm3k | Finalize BC-324 under think-rm3k with think-ta8s owning matching successor certification and publication follow-up. Keep scientific targets unselected while the user reviews definitions, facts, assumptions and alternate approaches. |
 | [session-125](agent-sessions/session-125-past-the-point-atom-ceiling.md) | completed | retrospective | `research-survey` (insight) | `review-planning-oversight` (process) | 4 | think-hs7y | Widen the certificate format to carry weighted and floor atoms, since the reader can already separate cuts the format cannot express; and generate sites by structure rather than by arrangement vertex. |
 | [session-126](agent-sessions/session-126-stromquist-analytical-exploration.md) | completed | contemporaneous | `insight-iteration` (insight) | `documentation-pass` (correctness) | 8 | think-jx95 | Continue the already tracked BC329 bounded fixed-core runner admission under think-qw9w; a scientific packet run still requires the stated prospective contract and independent admission. |
+| [session-127](agent-sessions/session-127-weighted-five-site-atom-admission.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-zvr3 | Continue under think-8c9e, the weighted-atom coverage mechanics, which cover the direct, event and interval controls including the boundary and undercharged-core cases and the interval route's stall handling. Stage four's paired runner and exact common manifests are tracked separately and blocked on it. |
 
 ### Workflow summary
 
@@ -154,7 +155,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 35 | 1 |
 | `research-loop` | 26 | 4 | 96 | 8 |
-| `pipeline-improvement` | 27 | 1 | 143 | 4 |
+| `pipeline-improvement` | 28 | 1 | 145 | 4 |
 | `documentation-pass` | 1 | 0 | 21 | 1 |
 | `remediation` | 0 | 1 | 0 | 1 |
 | `review-planning-oversight` | 1 | 0 | 14 | 1 |
