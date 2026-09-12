@@ -156,6 +156,16 @@
     // Revision 9: the playback rate. It multiplies the wall-clock delta the animation clock is
     // advanced by and the simulated time an open-ended run covers per frame, and nothing else.
     speed: 1,
+    // **The run's seed.** Every generator on this page used to be seeded from n alone, so a
+    // given n and parameter set had exactly one blind trial and it was the same trial every
+    // time. That is the right property for an animation -- it is what makes a capture
+    // reproducible across builds -- and it makes a success RATE impossible, because a rate
+    // over one sample is either 0 or 1.
+    //
+    // Zero is the default and mixes to nothing, so every recorded measurement, every capture
+    // and every checker sees exactly the trajectories it saw before. A non-zero seed is a
+    // different draw of the same distribution.
+    seed: 0,
     // Revision 9: what an open-ended Optimize run starts from, and whether one is on the stage.
     initial: "previous",
     optimizing: false,
@@ -2251,7 +2261,8 @@
   // always had of it -- 0.12 of a span whose correction was 0.32 is three eighths of the
   // correction. Recomputed rather than stored, so a timing change cannot leave them stale.
   // Everything a run has to be keyed by: two runs with the same signature draw the same
-  // trajectory.
+  // trajectory. The seed is in it because the seed is in the simulation -- without it two
+  // seeds would share one cached run and every trial would report the first one's answer.
   //
   // The two move timings are deliberately NOT in this key. `move` and `correct` are two
   // TIMES -- how long the reader watches the rearrangement, and how long the landing -- and
@@ -2260,7 +2271,7 @@
   // tried and measured: it put the ratio in this key, which every timing change then
   // invalidated, and took the gate from 90 seconds to over 17 minutes of rebuilding
   // trajectories nobody had asked to differ.
-  const lawKey = () => lawsKey();
+  const lawKey = () => `${lawsKey()}|s:${state.seed}`;
   // The blind run (revision 6, feature 3): the simulation is told nothing about where the squares
   // are meant to end up. It starts from the packing of n in a container inflated by `inflate`,
   // drops the new square into the emptiest place a coarse grid can find, and then closes the walls
@@ -2528,7 +2539,7 @@
     const newBody = BODY[n];
     // Numerical Recipes' LCG, seeded from the pair's n (so a pair jiggles the same way in index.html
     // and index-all.html); the page never draws from the browser's random source.
-    let seed = (Math.imul(p.n, 2654435761) + 0x9e3779b9) >>> 0;
+    let seed = (Math.imul(withSeed(p.n), 2654435761) + 0x9e3779b9) >>> 0;
     const rnd = () => {
       seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
       return seed / 4294967296;
@@ -4149,7 +4160,12 @@
     record: "best known",
   };
   const _initialShort = { previous: "previous", random: "random", grid: "grid" };
-  // The page's own generator, seeded so a start is reproducible from n and the kind alone.
+  // The run's seed folded into a generator's own base. The multiplier is the odd 32-bit
+  // constant from the same family as the LCG's, so successive seeds land far apart rather
+  // than in neighbouring streams; at `state.seed === 0` it adds nothing, which is what keeps
+  // the default bit-identical to every run recorded before seeds existed.
+  const withSeed = (base) => base + state.seed * 0x9e3779b1;
+  // The page's own generator, seeded so a start is reproducible from n, the kind and the seed.
   function seededRandom(seedN) {
     let seed = (Math.imul(seedN, 2654435761) + 0x9e3779b9) >>> 0;
     return () => {
@@ -4182,7 +4198,7 @@
       }
     } else if (kind === "random") {
       side = B.side * OPT.randomInflate;
-      const rnd = seededRandom(N);
+      const rnd = seededRandom(withSeed(N));
       // Inset by half a diagonal so a square at any angle starts inside the walls.
       const lo = Math.SQRT1_2,
         hi = Math.max(lo, side - Math.SQRT1_2);
@@ -4308,7 +4324,7 @@
     }
     // The shake's phases, from the same generator the cached simulator draws from, seeded by n and
     // the kind, so an un-dragged run repeats exactly given the same number of steps.
-    const rnd = seededRandom(N + INITIALS.indexOf(kind) * 7919);
+    const rnd = seededRandom(withSeed(N + INITIALS.indexOf(kind) * 7919));
     const [hzLo, hzHi] = PHYS.jiggleHz;
     for (let i = 0; i < N; i++) {
       o.FQX[i] = 2 * Math.PI * lerp(hzLo, hzHi, rnd());
@@ -6416,6 +6432,25 @@
       steps: physicsSteps(state.pair, state.style),
     };
   }
+  // The run's seed. An integer; anything else is ignored rather than silently turned into
+  // NaN, which would make every generator produce the same degenerate stream.
+  function setSeed(value) {
+    const k = Math.round(Number(value));
+    if (!Number.isFinite(k)) {
+      return state.seed;
+    }
+    state.seed = k >>> 0;
+    // A new seed is a new run: the staged arrangement and any cached trajectory belong to the
+    // old one.
+    if (state.optimizing) {
+      state.optimizing = false;
+      opt = null;
+    }
+    markGapBar();
+    stagePack();
+    render();
+    return state.seed;
+  }
   function setBlindInflate(factor) {
     markGapBar();
     const v = Number(factor);
@@ -6892,6 +6927,8 @@
     setSnap,
     setBlind,
     setBlindInflate,
+    setSeed,
+    seed: () => state.seed,
     // Revision 9: how fast the clock runs while playing. Playback only: seek(t) is unchanged.
     setSpeed,
     speed: () => state.speed,
