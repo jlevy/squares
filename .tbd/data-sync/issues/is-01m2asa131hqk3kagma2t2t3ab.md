@@ -5,7 +5,7 @@ title: Name exact interval and dilation directions in partial BC329 receipts
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol high isolated implementation; root integration
 labels:
@@ -18,9 +18,11 @@ dependencies:
     target: is-01m2aj7q4y8raaw35s0jq3ty2y
   - type: blocks
     target: is-01m26c1jahzgfckegz7fp9wcq7
+  - type: blocks
+    target: is-01m2b1h805emc13mx1cykp5s5x
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T12:26:06.304Z
-updated_at: 2026-09-12T14:13:25.101Z
+updated_at: 2026-09-12T14:49:51.364Z
 ---
 Partial interval and dilation receipts currently retain a count and last row while the filesystem may contain an unpublished sparse tail. They publish no partial scientific summary and cannot produce acceptance, so this is auditability and recovery hardening. Before the BC329 scientific target, record canonical completed-direction labels for each published checkpoint and make readback distinguish the receipt-bound set from valid unpublished tail rows, mirroring raw and exact handling.
 

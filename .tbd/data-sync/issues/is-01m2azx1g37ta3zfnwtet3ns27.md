@@ -5,16 +5,18 @@ title: Correct stale n=11 evidence and inference wording after BC329 review
 kind: bug
 status: in_progress
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol high documentation implementation; Astra mathematical source audit
 labels:
   - n11
   - docs
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m2aj7q4y8raaw35s0jq3ty2y
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-12T14:21:20.764Z
-updated_at: 2026-09-12T14:29:13.316Z
+updated_at: 2026-09-12T14:38:31.506Z
 ---
 Apply the source-distinct strategy audit's exact wording corrections on the eventual BC329 publication stack. At minimum reconcile the completed exp156 parent target and the now-built but not-yet-admitted BC329 runner in review-2026-09-09-n11-evidence-interpretation.md; replace the unsupported T026 'net refinement ... near exhausted' significance claim with its measured fixed-packet scope; make TUTORIAL.md state the owner-selection quantifier as every packing admits at least one certified selection; update the point-dual narrative to include the later mass-eleven obstruction; and reconcile T025's exact-side exclusion with the tutorial's compactness/attainment statement. Preserve evidence levels, distinguish an elementary corollary from a new computational result, regenerate derived records, and obtain mathematical review before closure.
 
