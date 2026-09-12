@@ -121,6 +121,63 @@ A landscape with a rare good basin is a landscape where restarts are worth more 
 schedule tuning — which is a claim the sweep can test rather than a conclusion this
 exploration is entitled to.
 
+## 3a. Correction: Sections 2 and 3 Were Not About Packings
+
+**Added the same night, after the guard was built.** The sections above stand as a
+record of what was measured and are wrong about what was being measured.
+
+Every one of those runs ended with squares inside each other.
+Measured by a separating-axis test over the final poses — written in the harness rather
+than read off the simulation, with its tolerance taken from a control rather than chosen
+— **15,000 of 15,000 blind trials are invalid**, at every n and every shake level
+including zero, with overlaps of 0.03 to 0.12 of a unit side.
+
+The control is what makes that a measurement.
+The *snapped* trajectory ends on the record’s own poses by construction and scores
+5.5e-7 to 1.0e-6, the float noise the stored poses carry.
+Two orders of magnitude separate it from the smallest real overlap.
+
+| mode | n=5 | n=11 | n=17 |
+| --- | ---: | ---: | ---: |
+| snap | 5.5e-7 | 1.0e-6 | 7.3e-7 |
+| free | 3.9e-5 | 4.5e-5 | 3.1e-2 |
+| blind | 8.4e-2 | 3.5e-2 | 8.6e-2 |
+
+So a side reported above is the bounding box of an invalid arrangement, and a box can be
+made smaller by letting squares intersect.
+That is why thirty cells of the parameter sweep reported a container **below** the
+known-best side. It should have been the tell; it was read as a promising tail.
+
+### Resolved, the picture inverts
+
+Projecting each run to a packing — translation only, angles held, each pair pushed apart
+along its own minimum-penetration axis — makes 120 of 120 trials valid in 15 to 56
+sweeps, and the honest numbers over 30,000 trials are:
+
+| n | median | best-of-100 | best-of-1000 |
+| ---: | ---: | ---: | ---: |
+| 5 | −0.084 | −0.015 | **0.974** |
+| 10 | −0.099 | 0.874 | **0.947** |
+| 11 | −0.085 | −0.035 | −0.012 |
+| 17 | −0.122 | −0.062 | −0.062 |
+| 26 | −0.155 | 0.120 | 0.212 |
+| 29 | −0.857 | −0.370 | −0.193 |
+
+**Run once, the method is worse than doing nothing** — the median is below the trivial
+grid at every n. The uniform “closes about half the gap” of §2 was entirely overlap.
+
+**Run a thousand times and take the best, it is a real search at small n** — n = 5
+reaches 0.974 and n = 10 reaches 0.947, valid packings within 0.28% and 0.42% of the
+records. At n = 11, 17 and 29 the tail barely clears the grid.
+
+So there is a difficulty gradient after all, and it runs opposite to §2’s: the search
+works where there are few squares and fails where there are many.
+
+**One limit bounds every number here.** The resolver only translates.
+A resolver that could rotate, or that solved for the smallest container directly, would
+score these same runs higher.
+These are a lower bound on what the arrangements are worth.
+
 ## 4. What This Changes
 
 - **The outcome metric is `closed`, not excess.** Excess stays in the record because it
