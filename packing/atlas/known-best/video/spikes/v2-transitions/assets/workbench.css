@@ -158,7 +158,7 @@ body.drawing #packing-svg #squares {
   left: 6px;
   top: 40px;
   width: 694px;
-  height: 240px;
+  height: 268px;
 }
 /* The bar sits under the headline, so the first thing in the column is the n it is all about. */
 .gapbar-plot {
@@ -166,7 +166,7 @@ body.drawing #packing-svg #squares {
   left: 0;
   top: 60px;
   width: 680px;
-  height: 110px;
+  height: 150px;
   display: block;
 }
 .gapbar-plot .track {
@@ -180,23 +180,23 @@ body.drawing #packing-svg #squares {
    band its viewBox opens for them. */
 /* The scale's two ends: the formula the end IS, and the value it takes at this n, on one line.
    Quiet, because they are the bar rather than a claim about this packing. */
+/* Under the value it names, not at the column's edge: `sqrt(n)` is a mark inside the bar now,
+   so its formula reads as a label on that mark rather than as a name for the whole end. `left`
+   is set per n by `gapbarSetup`; the translate is what centres it on the mark. */
 .gapbar-end {
   position: absolute;
-  top: 8px;
+  top: 210px;
+  transform: translateX(-50%);
   font-family: var(--sans);
   font-size: 26px;
   color: var(--ink);
   white-space: nowrap;
 }
-/* Centred on the tick each one names, not on the column's edge: the formula and the mark
-   are the same statement. `--inset` matches GAPBAR.inset. */
 .gapbar-area {
   left: 34px;
-  transform: translateX(-50%);
 }
 .gapbar-grid {
   left: 646px;
-  transform: translateX(-50%);
 }
 .gapbar-end .katex {
   font-size: 1em;

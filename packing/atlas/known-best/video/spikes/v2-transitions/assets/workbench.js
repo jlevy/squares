@@ -3702,9 +3702,19 @@
     //
     // A constant span is what makes two bars comparable -- the same distance means the same
     // distance at n = 11 and at n = 300, which a headroom proportional to the open gap could not
-    // say. And a perfect square's record IS the area bound, so its tick sits hard against the left
-    // end: the honest picture, since there is nothing below it to draw.
-    span: 1.0,
+    // say.
+    //
+    // **The bar runs between whole integers, and the two formulas are marks inside it.** It used
+    // to run from `sqrt(n)` to `sqrt(n) + 1` exactly, so both of its ends moved with every n --
+    // 5.10 to 6.10 at n = 26, 5.20 to 6.20 at n = 27 -- and nothing on it was ever twice in the
+    // same place. A reader watching a sweep had no fixed thing to hold on to. Running from
+    // `floor(sqrt(n))` to two above it, the scale changes only when `floor(sqrt(n))` does, which
+    // is once per perfect square: one bar for all of 17..24, another for 25..35.
+    //
+    // Two rather than `ceil(sqrt(n) + 1)`, which would be one at a perfect square and two
+    // everywhere else -- and a scale that halves between n = 16 and n = 17 is the problem this
+    // change exists to remove.
+    span: 2.0,
   };
   // What it takes to say the picture *is* the record: every square on its own target, not merely a
   // box that happens to be small enough. A blind run has no correspondence to the record's
@@ -3715,6 +3725,14 @@
   const gapbarLowerRule = document.getElementById("gapbar-lower-rule");
   const gapbarRecordRule = document.getElementById("gapbar-record-rule");
   const gapbarTicks = document.getElementById("gapbar-ticks");
+  /** @type {HTMLElement} */
+  const gapbarAreaEnd = document.querySelector(".gapbar-area");
+  /** @type {HTMLElement} */
+  const gapbarGridEnd = document.querySelector(".gapbar-grid");
+  // How a number is written on this diagram: an exact integer as an integer, and anything
+  // else to three places. `5` rather than `5.00`, because the second says a measurement was
+  // taken to two places when in fact the value is four.
+  const barNum = (value) => (Number.isInteger(value) ? String(value) : value.toFixed(3));
   const gapbarHand = document.getElementById("gapbar-hand");
   const gapbarLowerLabel = document.getElementById("gapbar-lower-label");
   // An SVG text node, not an HTML one, which is why `measureDigit` can ask it for its
@@ -3758,7 +3776,8 @@
     const record = Number(f.side);
     // A proved n carries no separate lower bound: the bound is the value, and the gap is nothing.
     const lower = f.lower === null ? record : Number(f.lower);
-    const lo = Math.sqrt(n);
+    const root = Math.sqrt(n);
+    const lo = Math.floor(root);
     const hi = lo + GAPBAR.span;
     gapbarInfo = { n, record, lower, lo, hi, proved: f.lower === null };
     const xr = gapbarX(record);
@@ -3774,18 +3793,21 @@
     // A proved n has one bound, not two in the same place: drawing both would put a four-wide
     // black rule on a four-wide black rule and say there were two facts here.
     gapbarLowerRule.setAttribute("opacity", gapbarInfo.proved ? "0" : "1");
-    // The scale's reference marks. The span is exactly one unit wide, so at most one integer
-    // can fall strictly inside it -- none when n is a perfect square, because then both ends
-    // ARE integers. Rebuilt per n rather than moved, since how many there are changes.
+    // The scale's reference marks: the three integers the bar spans, and the two values the
+    // formulas name. Deduplicated, because at a perfect square `sqrt(n)` IS an integer and
+    // `sqrt(n) + 1` is the next one -- drawing both would stack two rules and two numerals in
+    // the same place and claim there were two marks there. Rebuilt per n rather than moved,
+    // since how many survive the deduplication changes.
     while (gapbarTicks.firstChild) {
       gapbarTicks.removeChild(gapbarTicks.firstChild);
     }
-    const marks = [lo, hi];
-    for (let k = Math.ceil(lo); k < hi; k++) {
-      if (k > lo) {
-        marks.push(k);
+    const marks = [];
+    for (const value of [lo, lo + 1, hi, root, root + 1]) {
+      if (!marks.some((seen) => seen === value)) {
+        marks.push(value);
       }
     }
+    marks.sort((a, b) => a - b);
     for (const value of marks) {
       const at = gapbarX(value);
       const tick = document.createElementNS(SVG_NS, "line");
@@ -3798,8 +3820,14 @@
       const num = /** @type {SVGTextElement} */ (document.createElementNS(SVG_NS, "text"));
       num.setAttribute("class", "gapbar-ref-num");
       num.setAttribute("text-anchor", "middle");
-      num.setAttribute("y", "56");
-      num.textContent = fmt(value, 2);
+      // Two rows, and which row a value is on is decided by what KIND of value it is rather
+      // than by whether it happens to collide. The integers are the scale and sit on the first
+      // row a unit apart, which at this width is three hundred pixels and never crowds. The two
+      // irrational marks sit on the second, under their own formulas -- and they have to,
+      // because `sqrt(26)` is 0.099 from the integer 5, about thirty pixels, against labels
+      // twice that wide. On one row they overlapped and read as "55.099".
+      num.setAttribute("y", Number.isInteger(value) ? "56" : "92");
+      num.textContent = barNum(value);
       gapbarTicks.appendChild(num);
       // Placed after it is in the document, because the width it needs is measured.
       const half = num.getComputedTextLength() / 2;
@@ -3813,8 +3841,8 @@
     // top of it is the same fact twice. And the sans face this bar is set in has no `<=` or `>=`:
     // the glyph fell through to the symbols face, which is a serif at a different size, so the two
     // labels came out in two faces and two sizes -- exactly the thing a diagram label must not do.
-    gapbarLowerLabel.textContent = gapbarInfo.proved ? "" : fmt(lower, 2);
-    gapbarRecordLabel.textContent = fmt(record, 2);
+    gapbarLowerLabel.textContent = gapbarInfo.proved ? "" : barNum(lower);
+    gapbarRecordLabel.textContent = barNum(record);
     // Both values share one line above the rail now, so as well as staying inside the bar they
     // have to stay off each other. The width each needs is MEASURED rather than estimated from a
     // figure width -- an estimate was off by a fifth once and clamped `5.12` to `.12`.
@@ -3834,6 +3862,11 @@
     }
     gapbarLowerLabel.setAttribute("x", fmt(lowAt, 2));
     gapbarRecordLabel.setAttribute("x", fmt(recAt, 2));
+    // Each formula sits under the value it names, which is now a mark inside the bar rather
+    // than one of its ends. Centred by the stylesheet; placed here, because where the mark is
+    // depends on n.
+    gapbarAreaEnd.style.left = `${fmt(gapbarX(root), 2)}px`;
+    gapbarGridEnd.style.left = `${fmt(gapbarX(root + 1), 2)}px`;
     return gapbarInfo;
   }
   function gapbarX(value) {

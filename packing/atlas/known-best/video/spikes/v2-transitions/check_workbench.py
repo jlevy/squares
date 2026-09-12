@@ -587,15 +587,23 @@ def main() -> int:
         # 76 px tall on its first build: `height` is a CSS property on an SVG rect, and the class
         # name it had then was the panel's own `.open` slot.)
         parts = look("gapbar/parts")
-        # The scale's reference marks: its two ends, and any integer inside the span. The span
-        # is exactly one unit wide, so at most one integer can fall strictly inside it -- and
-        # none when n is a perfect square, because then both ends ARE integers. Two marks or
-        # three, never more, and every one of them carries its value underneath.
-        expected_marks = 2 if math.isqrt(17) ** 2 == 17 else 3
+        # The scale's reference marks: the three integers the bar spans, plus `sqrt(n)` and
+        # `sqrt(n) + 1`. At a perfect square those two ARE integers and collapse onto the marks
+        # already there, so the count is three; everywhere else it is five. Every mark carries
+        # its value, so the two counts agree.
+        perfect = math.isqrt(17) ** 2 == 17
+        expected_marks = 3 if perfect else 5
         check(
             parts["refTicks"] == expected_marks and len(parts["refNums"]) == expected_marks,
             f"the scale carries {parts['refTicks']} marks and {len(parts['refNums'])} numbers "
             f"at n = 17, expected {expected_marks} of each",
+        )
+        # An exact integer is written as one. `5`, not `5.00`: the second says a measurement was
+        # taken to two places when the value is four.
+        integers = [value for value in parts["refNums"] if "." not in value]
+        check(
+            len(integers) == 3,
+            f"the scale's three integer marks are not written as integers: {parts['refNums']}",
         )
         check(
             parts["open"]["t"] >= parts["track"]["t"] - 0.5
