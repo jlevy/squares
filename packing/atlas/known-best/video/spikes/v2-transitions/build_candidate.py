@@ -941,7 +941,7 @@ def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
                 else BOLD % (f"s({n}) {GE} " + colour(LOWER_INK, lower_value))
             ),
             # The headline under the packing, set as mathematics like everything else.
-            "tex_headline": f"n = {n}",
+            "tex_headline": BOLD % f"n = {n}",
             "tex_exact": (
                 None
                 if not entry["exactness"].get("exact_form")

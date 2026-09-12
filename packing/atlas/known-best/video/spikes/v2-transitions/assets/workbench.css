@@ -285,15 +285,21 @@ body.drawing #packing-svg #squares {
    and moving it gives the panel back a hundred and thirty pixels for the facts. `#headline` is
    the row; the `n =` half is constant and lives outside the two fading layers, and the numeral
    rolls inside them, so the two are positioned within the row rather than as one element. */
-/* The numeral's box opens above its own ink by about a fifth of its size, so the row sits
-   higher than the gap it leaves looks: measured, the drawn container ends at 913 and the ink
-   began at about 980. This closes that to under forty pixels. */
+/* Below the packing, with air the container cannot eat into.
+   The container's DRAWN floor is a constant: the packing SVG fits the box into the same
+   rectangle whatever the box is, so it sits at 913.2 at every n, from every start, at every
+   growth size and under a doubled blind inflation -- all five measured. What changes inside
+   it is how much of it the squares fill, not where its edge is. So the clearance here is a
+   number that can be chosen once rather than a worst case to guess at.
+   The numeral's own box opens above its ink by about a fifth of its size, so what matters is
+   where the INK starts, not where the box does. Measured at this top: ink from 950, which is
+   37 below the container's floor and 31 above the stage's own. */
 #headline {
   position: absolute;
   left: 60px;
-  top: 926px;
+  top: 972px;
   width: 1000px;
-  height: 108px;
+  height: 96px;
 }
 /* One slot per fading layer. The numeral used to live inside the layer and take the layer's own
    opacity; out here it carries its own, which is the whole of what moving it cost. */
@@ -328,21 +334,22 @@ body.drawing #packing-svg #squares {
   top: 0;
   font-family: var(--serif);
   color: var(--ink);
-  line-height: 104px;
+  line-height: 92px;
   white-space: nowrap;
   will-change: transform;
 }
 .numeral .n-val {
-  font-weight: 400;
-  font-size: 96px;
+  font-weight: 700;
+  font-size: 64px;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
-/* The headline is an equation now, so KaTeX sets it and this is the one place its size is chosen.
-   Large, because it names the picture above it; not as large as the bare numeral was, because an
-   equation is wider than a number and has to sit inside the packing's own width. */
+/* The headline is an equation, so KaTeX sets it and this is the one place its size is chosen.
+   Large, because it names the picture above it; smaller than it was, because it is bold now --
+   the same `\boldsymbol` the panel's two bound lines are set in, so the three statements about
+   n on this page are one voice -- and bold at 76 was heavier than the picture it labels. */
 .numeral .katex {
-  font-size: 76px;
+  font-size: 64px;
 }
 /* The panel says two things about n, and says them under headings: what is proved, then what
    is open. The heads are the gap bar's head style, so the three headings in the column read as
