@@ -51,10 +51,9 @@ stops a published page going stale when the data under it moves."""
 BANNER = (
     '<div style="background:#fff8e1;border-bottom:1px solid #e8d9a0;padding:.55rem 1rem;'
     'font:13px/1.4 system-ui;color:#5a4a1a">'
-    "<strong>Prototype.</strong> This workbench is a retained spike, not project code: it "
-    "is excluded from the repository's lint floor and its animation model is still moving. "
-    'Figures it draws are not evidence. <a href="/" style="color:#5a4a1a">The explainer</a> '
-    "is the published work.</div>"
+    "<strong>Working page.</strong> The animation model this workbench draws with is still "
+    "moving, so a number it shows is not evidence. "
+    '<a href="/" style="color:#5a4a1a">The explainer</a> is the published work.</div>'
 )
 
 EXTERNAL = re.compile(
