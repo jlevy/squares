@@ -379,33 +379,38 @@ body.drawing #packing-svg #squares {
   top: 320px;
 }
 .head-open {
-  top: 700px;
+  top: 636px;
 }
 /* The two bounds, one above the other at one size: a best known side and a proved lower bound
    are the same kind of fact about the same quantity, and a reader is meant to compare them, so
    showing one larger than the other would rank them. Both are proved -- a construction proves
    its upper bound -- which is why both sit under PROVED and only the questions sit under OPEN. */
+/* One chained statement, so it is about twice as wide as the single bound it replaced.
+   Measured over the whole corpus at the old 48 px, the widest -- `10.055385 <= s(101) <=
+   10.535534` -- came to 812 against a 694 column and ran off the panel. 38 px brings that to
+   643, which leaves room for the ellipsis think-xp8b will add to every truncated value. */
 .side {
   position: absolute;
   left: 6px;
   top: 360px;
   height: 62px;
   font-family: var(--serif);
-  font-size: 48px;
+  font-size: 38px;
   line-height: 1.2;
   color: var(--ink);
   white-space: nowrap;
 }
-.lower {
-  position: absolute;
-  left: 6px;
-  top: 424px;
-  height: 62px;
-  font-family: var(--serif);
-  font-size: 48px;
-  line-height: 1.2;
-  color: var(--ink);
-  white-space: nowrap;
+/* The slot the star sits in, to the LEFT of the lower bound it marks. Always this wide,
+   whether or not there is a star in it: without that the whole inequality steps sideways at
+   every n that has one, and during a sweep the line jitters rather than rolls. */
+.bound-star {
+  display: inline-block;
+  width: 52px;
+  vertical-align: -0.08em;
+}
+.bound-star svg {
+  width: 38px;
+  height: 38px;
 }
 /* KaTeX owns the setting inside these lines; the stylesheet owns only where they sit and how
    big they are. `.katex` inherits the line's size, so one number here scales the whole expression,
@@ -431,7 +436,7 @@ body.drawing #packing-svg #squares {
 .star-line {
   position: absolute;
   left: 6px;
-  top: 490px;
+  top: 426px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -442,7 +447,7 @@ body.drawing #packing-svg #squares {
 .exact {
   position: absolute;
   left: 6px;
-  top: 534px;
+  top: 470px;
   height: 86px;
   font-family: var(--serif);
   font-size: 34px;
@@ -453,7 +458,12 @@ body.drawing #packing-svg #squares {
 /* The degree note. It was grey small-caps sans, which made a proved fact read as a caption; it
    is a statement about the value, so it is set in the text face in ink like the bound above it and
    differs only in size. */
-.exact .note {
+/* Both notes under the bound -- "algebraic, degree 8" and "new lower bound" -- are remarks
+   ABOUT the value rather than claims about it, so they are one style: the text face at the
+   annotation size, in ink. The star beside the bound is what marks the result as ours; the
+   words only name what the mark means, and shouting them twice was the old arrangement. */
+.exact .note,
+.star-line .note {
   font-family: var(--serif);
   font-size: 34px;
   color: var(--ink);
@@ -463,7 +473,7 @@ body.drawing #packing-svg #squares {
 .badges {
   position: absolute;
   left: 6px;
-  top: 632px;
+  top: 568px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -528,7 +538,7 @@ body.drawing #packing-svg #squares {
 .open-items {
   position: absolute;
   left: 6px;
-  top: 740px;
+  top: 676px;
   height: 40px;
   display: flex;
   align-items: center;

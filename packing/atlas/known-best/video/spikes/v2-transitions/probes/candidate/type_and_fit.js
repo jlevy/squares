@@ -35,7 +35,6 @@
     ".numeral",
     ".head-proved",
     ".side",
-    ".lower",
     ".star-line",
     ".exact",
     ".badges",

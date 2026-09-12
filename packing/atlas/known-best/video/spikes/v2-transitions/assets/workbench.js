@@ -1385,12 +1385,20 @@
     // degree note for the value, and the badges. Both bounds are proved facts -- a construction
     // proves its upper bound -- so both belong here, and OPEN below carries the questions.
     layer.appendChild(text("div", "section-head head-proved", "Proven"));
-    layer.appendChild(mathLine("side", f.html_side));
-    // A proved n has no separate lower bound to state; its slot stays empty at its height.
-    layer.appendChild(mathLine("lower", f.html_lower));
+    // The bound is one chained statement now, so it is one row. The star sits to the LEFT of
+    // the lower bound it marks, inside a slot that is always the star's width whether or not
+    // there is a star in it -- otherwise the whole inequality would step sideways at every n
+    // that has one, which during a sweep is a line that jitters rather than rolls.
+    const bound = mathLine("side", f.html_side);
+    const starSlot = text("span", "bound-star");
+    if (f.star) {
+      starSlot.appendChild(badgeSvg("", "star"));
+    }
+    bound.insertBefore(starSlot, bound.firstChild);
+    layer.appendChild(bound);
     const starLine = text("div", "star-line");
     if (f.star) {
-      starLine.appendChild(badgeItem("badge-item is-star", "", "star", STAR_LABEL));
+      starLine.appendChild(text("span", "note", STAR_LABEL));
     }
     layer.appendChild(starLine);
     // The closed form when there is one the value does not already state, set as mathematics;
@@ -5942,6 +5950,18 @@
   // `offsetHeight` reads zero while the tab is in the background; the stage then scaled to the
   // whole viewport and covered the controls, which came back only on a reload. Keep the last real
   // measurement and never lay out from a hidden one.
+  // The tallest the controls have been since the window last changed size -- not the height they
+  // happen to have now.
+  //
+  // The difference matters because the panel's content is not a constant: the two modes offer
+  // different controls, and a group that is meaningless in one is taken out of the list rather
+  // than left inert. Scaling the stage from the CURRENT height means the picture grows and
+  // shrinks as the reader switches modes, which the page's own gate calls "the mode moved the
+  // stage" -- and it is right to. Scaling from the tallest the panel has been keeps the stage a
+  // fact about the window, and leaves the mode with fewer controls some empty space instead.
+  //
+  // Reset on a window resize, because a narrower window wraps the panel differently and last
+  // window's peak says nothing about this one's.
   let controlsHeight = 0;
   // The largest share of the window height the controls may take before they start scrolling
   // instead of pushing the stage out. Without a cap the two effects compound: the panel WRAPS
@@ -5960,12 +5980,12 @@
       vh = window.innerHeight;
     let ch = state.capture ? 0 : controls.offsetHeight;
     if (!state.capture) {
-      if (ch > 0) {
+      // A hidden document is not laid out, so `offsetHeight` reads zero in a background tab;
+      // the stage then scaled to the whole viewport and covered the controls until a reload.
+      if (ch > controlsHeight) {
         controlsHeight = ch;
-      } else {
-        ch = controlsHeight;
       }
-      ch = Math.min(ch, vh * CONTROLS_SHARE);
+      ch = Math.min(controlsHeight, vh * CONTROLS_SHARE);
     }
     const s = Math.min(vw / 1920, (vh - ch) / 1080);
     stage.style.transform = `scale(${s})`;
@@ -7223,7 +7243,12 @@
         return;
     }
   });
-  window.addEventListener("resize", layout);
+  window.addEventListener("resize", () => {
+    // A new window size is a new question: how the panel wraps changes with it, so the tallest
+    // it was at the old size is not evidence about this one.
+    controlsHeight = 0;
+    layout();
+  });
   // The panel's height is not a constant of the window: it changes when a webfont lands, when
   // a control appears or is taken out of the list, and when a row wraps. `layout` used to run
   // only at startup and on resize, so whichever height happened to be current at that instant

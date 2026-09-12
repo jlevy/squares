@@ -494,22 +494,34 @@ def main() -> int:
         check(
             bar["hi"] > bar["record"], f"the bar's scale does not reach past the record: {bar}"
         )
-        # The scale is the same span at every n, from the area bound up: `sqrt(n)` to `sqrt(n) + 0.7`.
-        # sqrt(n) is the one bound on the bar that needs no citation -- n unit squares have area n --
-        # and a constant span is what makes two bars comparable. Checked at both ends of the corpus
-        # because the left end is where a perfect square's record sits, hard against it.
-        for size in (17, 324):
+        # **The scale runs between whole integers, and the same width at every n.** It used to run
+        # from the area bound `sqrt(n)` to one above, so both ends moved with every n and nothing
+        # on the bar was ever twice in the same place. It now runs from `floor(sqrt(n))` to two
+        # above, so it changes only when `floor(sqrt(n))` does -- once per perfect square -- and a
+        # reader watching a sweep has something that holds still.
+        #
+        # `sqrt(n)` is still on the bar, as a mark rather than an end: it is the one bound here
+        # that needs no citation, since n unit squares have area n. A constant span is still what
+        # makes two bars comparable. Checked at both ends of the corpus, and at a perfect square,
+        # where `sqrt(n)` IS the left end and the record sits hard against it.
+        for size in (16, 17, 324):
             if ask("setStepN", size) != size:
                 continue
             seek_to_end()
             scale = ask("gapBar")
             check(
-                abs(scale["lo"] - math.sqrt(size)) < 1e-9,
-                f"the bar at n = {size} starts at {scale['lo']}, not the area bound {math.sqrt(size)}",
+                abs(scale["lo"] - math.floor(math.sqrt(size))) < 1e-9,
+                f"the bar at n = {size} starts at {scale['lo']}, "
+                f"not the integer below the area bound, {math.floor(math.sqrt(size))}",
             )
             check(
-                abs((scale["hi"] - scale["lo"]) - 1.0) < 1e-9,
-                f"the bar at n = {size} spans {scale['hi'] - scale['lo']}, not 1",
+                abs((scale["hi"] - scale["lo"]) - 2.0) < 1e-9,
+                f"the bar at n = {size} spans {scale['hi'] - scale['lo']}, not 2",
+            )
+            check(
+                scale["lo"] <= math.sqrt(size) <= scale["hi"]
+                and scale["lo"] <= math.sqrt(size) + 1 <= scale["hi"],
+                f"the bar at n = {size} does not contain both sqrt(n) and sqrt(n) + 1: {scale}",
             )
         ask("setStepN", 17)
         # **The pointer is drawn only where the arrangement is a packing.** A bounding box reports a
