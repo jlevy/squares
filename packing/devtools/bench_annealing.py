@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import statistics
 import sys
@@ -53,9 +54,34 @@ RESULTS = PROJECT_ROOT / "campaign/results/annealing"
 #: packing and the grid it improves on at these n.
 TOLERANCES = {"exact": 0.0001, "close": 0.1, "near": 1.0}
 
-#: The metric the accept rule scores. `miss.excess` is `(side / record - 1) * 100`: the
-#: percentage by which the run's container exceeds the best known one. Zero is a find.
-OUTCOME = "excess"
+#: The metric the accept rule scores, and it is NOT the raw excess.
+#:
+#: `miss.excess` is `(side / record - 1) * 100` -- the percentage the run's container exceeds
+#: the best known one by -- and it cannot be compared across n, because the room between the
+#: record and the trivial grid differs at every n. At n = 29 the grid is 1.1% above the record
+#: and at n = 5 it is 10.8%, so an excess of 1% is nearly a failure at the first and a strong
+#: result at the second.
+#:
+#: `closed` normalises it: 1 means the run reached the record, 0 means it got no further than
+#: the grid `ceil(sqrt(n))`, and a negative number means it ended worse than the grid.
+#: Measured over 1200 trials at six n it sits at 0.47 with a range of 0.33 to 0.70 -- which is
+#: what turned "n = 11 is easy and n = 17 is hard" into "the method closes about half the gap
+#: wherever it is pointed, and the two only looked different because their gaps differ".
+OUTCOME = "closed"
+
+
+def gap_closed(n: int, record: float, excess: float) -> float:
+    """How much of the record-to-grid gap a run closed: 1 reached the record, 0 the grid.
+
+    `ceil(sqrt(n))` is the trivial grid and no best known packing exceeds it, checked over the
+    whole corpus. It is the honest zero for this search: the blind run has to beat the grid
+    before it has done anything at all.
+    """
+    grid = math.ceil(math.sqrt(n))
+    gap = (grid / record - 1) * 100
+    if gap <= 0:
+        return float("nan")
+    return 1 - excess / gap
 
 
 @dataclass
@@ -68,6 +94,7 @@ class Trial:
     excess: float
     side: float
     record: float
+    closed: float
     steps: int
     ms: float
     centre: float
@@ -80,6 +107,7 @@ class Trial:
             "seed": self.seed,
             "style": self.style,
             "excess": self.excess,
+            "closed": self.closed,
             "side": self.side,
             "record": self.record,
             "steps": self.steps,
@@ -205,6 +233,7 @@ def run_trials(run: Run) -> list[Trial]:
                         seed=seed,
                         style=run.style,
                         excess=got["excess"],
+                        closed=gap_closed(n, got["record"], got["excess"]),
                         side=got["side"],
                         record=got["record"],
                         steps=got["steps"],
@@ -237,7 +266,7 @@ def report(trials: list[Trial]) -> int:
 
     names = list(TOLERANCES)
     head = "    n  trials  " + "  ".join(f"{name:>7}" for name in names)
-    print(f"\n{head}      best    median       p90     worst   ms/trial")
+    print(f"\n{head}   closed      best    median     worst   ms/trial")
     print("  " + "-" * (len(head) + 44))
     for n in sorted(by_n):
         rows = by_n[n]
@@ -246,17 +275,23 @@ def report(trials: list[Trial]) -> int:
         for name in names:
             hits = sum(1 for e in excess if e <= TOLERANCES[name])
             rates.append(f"{hits / len(excess):>6.1%} ")
-        p90 = excess[min(len(excess) - 1, int(0.9 * len(excess)))]
+        closed = statistics.median(t.closed for t in rows)
         print(
             f"  {n:>3}  {len(rows):>6}  "
             + "  ".join(rates)
-            + f"  {excess[0]:>8.4f}  {statistics.median(excess):>8.4f}  "
-            f"{p90:>8.4f}  {excess[-1]:>8.4f}  {statistics.median(t.ms for t in rows):>9.1f}"
+            + f"  {closed:>7.3f}  {excess[0]:>8.4f}  {statistics.median(excess):>8.4f}  "
+            f"{excess[-1]:>8.4f}  {statistics.median(t.ms for t in rows):>9.1f}"
         )
+    every = sorted(t.closed for t in trials)
     print(
-        "\n  excess is (side / record - 1) x 100: the per cent by which the run's container "
-        "exceeds\n  the best known one. 0 is a find. Tolerances: "
+        "\n  closed is the fraction of the record-to-grid gap the run closed: 1 reached the "
+        "record,\n  0 got no further than ceil(sqrt(n)). It is the only column that compares "
+        "across n.\n  excess is (side / record - 1) x 100. Tolerances: "
         + ", ".join(f"{k} <= {v:g}%" for k, v in TOLERANCES.items())
+    )
+    print(
+        f"\n  over all {len(every)} trials: closed median {statistics.median(every):.3f}, "
+        f"range {every[0]:.3f} to {every[-1]:.3f}"
     )
     return 0
 
@@ -280,15 +315,39 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def _trial_of(row: dict[str, Any]) -> Trial:
+    """One recorded row as a `Trial`.
+
+    Rows written before `closed` existed are still readable: the fraction is derived from n
+    and the record, both of which every row has always carried. The record is corrected,
+    not rewritten, so an old file keeps its numbers and gains the new column here.
+    """
+    n = int(row["n"])
+    record = float(row["record"])
+    excess = float(row["excess"])
+    return Trial(
+        n=n,
+        seed=int(row["seed"]),
+        style=str(row["style"]),
+        excess=excess,
+        side=float(row["side"]),
+        record=record,
+        closed=float(row["closed"]) if "closed" in row else gap_closed(n, record, excess),
+        steps=int(row["steps"]),
+        ms=float(row["ms"]),
+        centre=float(row["centre"]),
+        angle=float(row["angle"]),
+        params=dict(row.get("params", {})),
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(sys.argv[1:] if argv is None else argv)
     if args.replay is not None:
         rows = [
             json.loads(line) for line in args.replay.read_text(encoding="utf-8").splitlines()
         ]
-        return report(
-            [Trial(**{k: v for k, v in row.items() if k != "params"}) for row in rows]
-        )
+        return report([_trial_of(row) for row in rows])
     if not PAGE.is_file():
         print(f"no built page at {PAGE}; run `python -m devtools.build_workbench_site` first")
         return 1
