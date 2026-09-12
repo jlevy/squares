@@ -214,6 +214,7 @@ case or experiment separately.
 | --- | --- | --- | --- | --- |
 | [Fractional Packing, Duality, and the Next $n=11$ Discriminators](docs/project/research/research-2026-09-10-x027-fractional-duality.md) | research synthesis | record | retained | — |
 | [X027: Seven Corner Marks, Contact Components, and Relational Helpers](docs/project/research/research-2026-09-10-x027-structural-helpers.md) | research synthesis | record | retained | — |
+| [N11: The Missing Owner-Selection Theorem](docs/project/research/research-2026-09-12-n11-selection-routing-first-principles.md) | research synthesis | record | retained | — |
 | [Certificate Mechanisms After the $n=11$ Fractional Ceilings](docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md) | research synthesis | record | retained | — |
 | [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
 | [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
@@ -226,6 +227,7 @@ case or experiment separately.
 | [Independent Admission Review: BC326 Parent-Domain Runner](docs/project/reviews/review-2026-09-10-n11-parent-runner-independent.md) | dated review record | record | retained | — |
 | [BC329: Preflight of the 2880-Step Threshold Packet](docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md) | dated review record | record | retained | — |
 | [N11 Strategy Audit for the BC329 Closeout](docs/project/reviews/review-2026-09-12-n11-post-bc329-strategy-audit.md) | dated review record | record | retained | — |
+| [Source-Distinct Review of the N11 Owner-Selection Report](docs/project/reviews/review-2026-09-12-n11-selection-routing-first-principles.md) | dated review record | record | retained | — |
 | [Strategic Review of the N11 Daytime Research Frontier](docs/project/reviews/review-2026-09-10-n11-strategy-frontier.md) | dated review record | record | retained | — |
 | [N=11 Structural Normal Forms](docs/project/reviews/review-2026-09-10-n11-structural-normal-forms.md) | dated review record | record | retained | — |
 | [Independent Review of the N=11 Structural Normal Form](docs/project/reviews/review-2026-09-10-n11-structural-normal-forms-independent.md) | dated review record | record | retained | — |

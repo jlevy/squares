@@ -370,7 +370,7 @@ That disjunction must then be joined to separate certificates for every branch.
 Literature analogues guide the formulation but do not replace the proof for congruent
 freely rotated squares.
 
-The analytic portion of Block 4 is now complete and independently reviewed.
+The fixed-angle normal-form portion of Block 4 is complete and independently reviewed.
 At every feasible fixed side, for each labelled fixed-angle connected component, there
 is a representative whose physical contact components all touch the left and bottom
 walls and whose active translation constraints contain a `2n`-row basis of genuine
@@ -386,13 +386,40 @@ The per-cell algebraic rank statement survives, while physical contacts require 
 component-wise choice of representative and separating axes.
 The proof, exact fixtures and independent audit are in the
 [structural review](../../reviews/review-2026-09-10-n11-structural-normal-forms.md).
-The next structural experiment must consume an actual contact path or snug parent and
-retain the complementary branches.
-Its branch map must combine the fixed-side normal form with the seven-of-eight mark
-ownership alternative and one shared resource account, then prove that every admitted
-packing has at least one excluded valid selection.
-It may not promote an arbitrary active LP row to a contact edge or assume a literal
-corner, finite angle set, short path, or complete quench.
+
+The accepted
+[selection-routing analysis](../../research/research-2026-09-12-n11-selection-routing-first-principles.md)
+and its
+[source-distinct review](../../reviews/review-2026-09-12-n11-selection-routing-first-principles.md)
+state the missing transfer exactly: for every physical packing `P`, its valid selection
+set must satisfy `Gamma(P) intersect G != empty`, where `G` contains only completely
+excluded conditional selections.
+For T-023’s two certified uniform tuples, the complement has sixteen maximal
+availability products.
+These give three physical `D4` types, but ten orbits when S1’s fixed left/bottom wall
+chart is retained. The obligation reduces to two unproved lemmas: every corner offers
+label 0 or 15, and no two corners force opposing singleton types.
+
+Two path deductions are proved at their narrow scope.
+If `sigma` corner pairs split their mark owners, some shortest path between owners of
+different corners has at most `9-sigma` parents.
+A right-corner owner needs at least three parents to reach the normalized left wall,
+with the symmetric top/bottom statement.
+Exact four-parent controls satisfy eight-mark ownership and simultaneous owner
+compatibility while defeating either missing lemma.
+They do not extend to eleven parents and do not refute the selection theorem.
+
+The proposed one-corner surplus test `think-ms9l` and adjacent/opposite pair test
+`think-cexv` are unrun.
+Their dependencies keep them blocked by `think-gldo` until this accepted retention is
+integrated. A success proves only the corresponding lemma; a rejection refutes only the
+named BC303 surplus inequality on its declared domain.
+No selection theorem or new n11 bound follows yet.
+
+Any later structural experiment must retain the complementary branches and combine the
+fixed-side normal form with the seven-of-eight mark-ownership alternative and one shared
+resource account. It may not promote an arbitrary active LP row to a contact edge or
+assume a literal corner, finite angle set, short prescribed path, or complete quench.
 
 For the angle-profile lane, H131 supplies upper counts, not an exact `(9,2)`
 decomposition. A certificate normalized to `9d_0+2d_1` therefore applies only to that
