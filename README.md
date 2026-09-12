@@ -659,9 +659,14 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── AGENTS.md               Project instructions for agents
 ├── CLAUDE.md               Bridge to AGENTS.md
 ├── Makefile                Markdown formatting, hooks, and skill mirroring
+├── biome.json              Biome lint and format config for the browser sources
 ├── lefthook.yml            Pre-commit Markdown formatter hook
-├── package.json            Tooling-only lefthook package
-└── package-lock.json       Tooling lockfile
+├── package.json            Tooling-only package: lefthook, Biome, TypeScript
+├── package-lock.json       Tooling lockfile
+├── tsconfig.base.json      The shared TypeScript type floor every program extends
+├── tsconfig.json           The workbench's own script and stylesheet
+├── tsconfig.motion-lab.json  The motion lab's assets and the slideshow harness
+└── tsconfig.probes.json    The checkers' probes
 ```
 
 An optional, Git-ignored `attic/` holds intake and scratch files.

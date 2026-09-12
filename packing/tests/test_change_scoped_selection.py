@@ -53,6 +53,7 @@ PATTERN_PROBES = (
     "packing/atlas/known-best/manifest.json",
     "packing/atlas/prospective/manifest.json",
     "packing/atlas/enumerated/contact-scaffolds-size5.json",
+    "packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js",
     "packing/cases/trump11/packing.py",
     "packing/cases/stromquist/printed_cover.py",
     "packing/resources/papers/kingbird-square-29-provenance.svg",
