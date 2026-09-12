@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 490
+count: 491
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -16385,3 +16385,68 @@ defects:
     drawable current request. Nothing here prevents the race, which is what contained means:
     the guard is that the next occurrence arrives diagnosable.
   recorded_in: packing/devtools/render_explainer_pdf.py
+- id: D-491
+  title: The math geometry probe mixed observations and left a page watchdog uncontrolled
+  date: '2026-09-11'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    The geometry probe had two independent validity gaps. Its exposure rule combined
+    visibility from a later snapshot with font evidence from an earlier observation, and
+    its artificial runtime gate did not stop the page's three-second root watchdog. The
+    retained PR 149 failure establishes both conditions in the failing run, but it does not
+    identify the first revision on which either condition could affect a result.
+  severity: medium
+  status: fixed
+  bead: think-ji4p
+  what: >-
+    `prepare_explainer_math` holds the math faces while it measures the page before and
+    after font arrival. A box may be visible early if its required faces are already loaded,
+    and `early_ready` records those exceptions. The old rule tested visibility from the
+    later `before` snapshot against exceptions gathered by `_GEOMETRY_EARLY_READY` earlier.
+    Those observations bracket the probe's carrier-font and monospace substitutions, so the
+    rule asked one state a question whose exceptions described another state.
+
+    The probe also queued calls to `kpressMathText` before its synchronous `hideNode()`
+    could run. The page's independent root watchdog continued counting during that
+    artificial setup and removes global pending visibility after three seconds. In the
+    retained WebKit report, `early_visible` was empty, the first KPress call arrived at
+    5,339 ms, font release began at 5,474 ms, and 18 boxes were visible in `before`. The
+    injected CSS changes font families rather than visibility. The timing supplies a
+    source-supported mechanism for the later exposure; because the report did not timestamp
+    watchdog expiry, it does not prove that mechanism was the sole historical cause.
+  consequence: >-
+    It failed PR 149's Certificate page jobs in both browsers on run 34584297510 at head
+    d932bccf, and blocked that pull request: webkit on `--prose-font sans` at 1280, firefox
+    on `--prose-font serif` at 1280 on its first attempt. Both reports named the same keys:
+    111 to 120, 189, 191, 193, 195, 197, and 200 to 202. In the retained WebKit report, the
+    18 reservation boxes kept the same coordinates and dimensions while the intrinsic glyph
+    widths changed by as much as 20.875 px. The stable boxes show that the reservations
+    protected surrounding layout; they do not show that the held-font glyph metrics were
+    already final. Because the exposure verdict mixed states and the artificial setup could
+    consume the watchdog, the failed verdict could not distinguish a page defect from a
+    probe-induced exposure.
+  fix: >-
+    `geometry_findings` now takes `exposed_early`, the keys visible in the same observation
+    that produced `early_ready`. A key in `exposed_early` without a loaded-face exception
+    still fails, while later visibility no longer changes that earlier question.
+
+    Separately, the geometry-only trace intercepts `kpressMathPendingTimer`, clears that
+    timer during its artificial setup, and records `root_watchdog_paused`. The oracle fails
+    closed if the live page never passes through the hook. It releases the delayed KPress
+    calls only after removing the substituted styles. The independent queue-watchdog control
+    still leaves the real root timer active, waits for expiry, and tests queued-formula
+    recovery, so the probe repair does not remove product-watchdog coverage.
+  regression: >-
+    `test_the_exposure_rule_reads_the_observation_its_exemptions_came_from` in
+    `packing/tests/test_prepare_explainer_math.py` pins the same-observation rule and its
+    negative control. `test_geometry_font_gate_starts_runtime_only_after_before_snapshot`
+    proves that the trace cancels the root timer, retains pending visibility, and queues the
+    runtime until the artificial snapshot is complete. The live Chromium replay held
+    thirteen math-font requests, observed `root_watchdog_paused: true`, covered 450 targets and 369
+    bases, exposed no box in the early observation, left none hidden after release, and
+    returned no finding. Firefox and WebKit run the same geometry oracle in hosted CI; the
+    Chromium self-test also runs the independent queue-watchdog control.
+  recorded_in: packing/devtools/prepare_explainer_math.py

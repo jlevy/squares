@@ -2,7 +2,7 @@
 
 # Defect log
 
-490 defects recorded across the packing toolchain.
+491 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 62 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 75 | the automated test suite |
+| `gate` | 76 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 75 of 490, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 76 of 491, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 75 of 490, and none of
 | quench | 23 |
 | verifier | 12 |
 | record | 152 |
-| tooling | 181 |
+| tooling | 182 |
 | docs | 111 |
 
 ## By kind
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 75 of 490, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 98 |
-| validity | 124 |
+| validity | 125 |
 | bookkeeping | 185 |
 | robustness | 65 |
 | performance | 18 |
@@ -738,6 +738,7 @@ This is the actionable list.
 | [D-488](packing/devtools/reachable_tests.py) | 2026-09-08 | tooling | robustness | neutral | `gate` | high | fixed | The pre-push tier ran its whole-suite step in one process and could not finish it |
 | [D-489](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x1-corner-conditioning-is-mass-neutral.md) | 2026-09-09 | tooling | validity | flattering | `review` | high | outstanding | The corner-dual salvage screen can only accept a family that already fails the mass threshold |
 | [D-490](packing/devtools/render_explainer_pdf.py) | 2026-09-10 | tooling | robustness |  | `gate` | medium | contained | Two renders of the explainer disagreed by two bytes and the check could not say where |
+| [D-491](packing/devtools/prepare_explainer_math.py) | 2026-09-11 | tooling | validity | conservative | `gate` | medium | fixed | The math geometry probe mixed observations and left a page watchdog uncontrolled |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

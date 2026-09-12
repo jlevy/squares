@@ -559,8 +559,15 @@ def geometry_findings(
     root_watchdog_paused: bool,
     tolerance: float = 1.0,
     early_ready: frozenset[int] = frozenset(),
+    exposed_early: frozenset[int] | None = None,
 ) -> list[str]:
-    """Compare the same boxes and their line breaks across actual font arrival."""
+    """Compare the same boxes and their line breaks across actual font arrival.
+
+    `exposed_early` and `early_ready` describe the same observation: the boxes visible
+    when their font evidence was gathered. Keeping those sets together prevents a later
+    probe state from changing the exposure question. The root-watchdog flag separately
+    proves that the artificial setup did not consume the page's recovery timeout.
+    """
     findings: list[str] = []
     if not root_watchdog_paused:
         findings.append("the geometry probe did not pause the root math watchdog")
@@ -568,7 +575,12 @@ def geometry_findings(
     new = {box["key"]: box for box in after}
     if not old or old.keys() != new.keys():
         findings.append("prepared math boxes disappeared or were never measured")
-    if before and any(not box["hidden"] and box["key"] not in early_ready for box in before):
+    exposed = (
+        exposed_early
+        if exposed_early is not None
+        else frozenset(box["key"] for box in before if not box["hidden"])
+    )
+    if before and exposed - early_ready:
         findings.append("math was exposed while its font requests were held")
     if before and not any(box["hidden"] for box in before):
         findings.append("no hidden prepared math was observed before fonts arrived")
@@ -1396,6 +1408,10 @@ async def _check_geometry_async(
         after,
         early_ready=early_ready,
         root_watchdog_paused=font_trace["root_watchdog_paused"],
+        # `_GEOMETRY_EARLY_READY` skips hidden boxes, so its keys are exactly what was
+        # visible when it weighed each box's faces -- the one observation the exposure
+        # rule and its exemptions can share.
+        exposed_early=frozenset(box["key"] for box in early_visible),
     )
     findings.extend(coverage_findings(coverage_before))
     findings.extend(coverage_findings(coverage_after))
