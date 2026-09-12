@@ -228,6 +228,7 @@ def _normalised(pdf: bytes) -> bytes:
 #: PDF structure around the objects rather than to the last object before it.
 _OBJECT_HEADER = re.compile(rb"(?m)^(\d+)\s+0\s+obj\b")
 _OBJECT_END = re.compile(rb"(?m)^endobj\b")
+_OBJECT_STREAM = re.compile(rb"(?m)^stream\r?$")
 
 #: Named PDF sections outside indirect objects. The latest marker before a difference
 #: distinguishes a cross-reference entry or trailer value from ordinary inter-object
@@ -247,11 +248,12 @@ _OBJECT_SUBTYPE = re.compile(rb"/Subtype\s*/(\w+)")
 _OBJECT_TYPE = re.compile(rb"/Type\s*/(\w+)")
 
 #: How far into an object to look for that declaration, bounded by the object's own
-#: `endobj` -- without that bound a short object with no type of its own is labelled with
-#: a later object's. Measured on this document: of its 1160 objects, 33 declare no type of
-#: their own while sitting within 400 bytes of one that does, which is how
-#: `<< /ca 1 /BM /Normal >>` came to be reported as a Link. Truncating early can only lose
-#: a type, never borrow one, because a dictionary precedes any stream it opens.
+#: `endobj` and the start of any stream. Without those bounds a short untyped object can
+#: borrow a later object's type, or arbitrary stream bytes can look like a declaration.
+#: Measured on this document: of its 1160 objects, 33 declare no type of their own while
+#: sitting within 400 bytes of one that does, which is how `<< /ca 1 /BM /Normal >>` came
+#: to be reported as a Link. Truncating early can only lose a type; it cannot invent one
+#: from another object or a stream payload.
 _DICTIONARY = 400
 
 #: How much of each render to quote either side of a disagreement. Wide enough to carry a
@@ -294,7 +296,13 @@ def _difference(first: bytes, second: bytes) -> str:
     else:
         end = _OBJECT_END.search(first, header.end())
         if end is None or offset < end.end():
-            dictionary_end = min(header.end() + _DICTIONARY, end.start() if end else len(first))
+            object_end = end.start() if end else len(first)
+            stream = _OBJECT_STREAM.search(first, header.end(), object_end)
+            dictionary_end = min(
+                header.end() + _DICTIONARY,
+                object_end,
+                stream.start() if stream else object_end,
+            )
             head = first[header.end() : dictionary_end]
             kind = _OBJECT_SUBTYPE.search(head) or _OBJECT_TYPE.search(head)
             declared = f", {kind.group(1).decode()}" if kind else ""

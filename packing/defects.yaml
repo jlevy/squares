@@ -16306,14 +16306,14 @@ defects:
     push run at 3a18a05a, it reported `786119 then 786117 bytes` and failed the `build` job
     of the Pages workflow at 08:12:03Z.
 
-    It was the second render that came up short, not the first that ran long. 786119 is the
-    size CI's renders of that page have been producing, and the receipt `_with_receipt`
-    writes is exactly 94 bytes on every run measured: 786213/786119 at 3a18a05a and again
-    at 1c1db463, 786221/786127 at 93af1e4d, 817917/817823 on PR 148's branch, 786210/786116
-    on PR 125's, and 843764/843670 in a container. The cross-reference is a classic
-    fixed-width table rather than an xref stream -- verified on the rendered file, which
-    carries no `/Type /XRef` -- so shifting offsets costs nothing and a file-length delta is
-    the delta of the object bodies alone. Two bytes left the objects.
+    The second reported length was two bytes smaller. 786119 matches the size produced by
+    other CI renders of that page, but the lost pair does not establish which output
+    represented a complete or stable draw. The receipt `_with_receipt` writes is exactly 94
+    bytes on every run measured: 786213/786119 at 3a18a05a and again at 1c1db463,
+    786221/786127 at 93af1e4d, 817917/817823 on PR 148's branch, 786210/786116 on PR 125's,
+    and 843764/843670 in a container. The retained file uses a classic fixed-width
+    cross-reference table rather than an xref stream. That explains why changed object
+    offsets need not change the table's width; it does not locate the two changed bytes.
 
     The message was the other half of the defect. Two lengths name no object, no offset and
     no kind, the renders are not kept, and the sentence that followed them asserted a cause:
@@ -16334,10 +16334,11 @@ defects:
     `/Subtype` (or `/Type`) where one applies, and a 64-byte window of each render around it.
     The object span ends at its own `endobj`, so a cross-reference, trailer, or inter-object
     difference is not assigned to the preceding object. The window that reads an object's
-    declaration is bounded by that same terminator, which closes a bug found before it
-    shipped: unbounded, 33 of this document's 1160 objects declare no type of their own while
-    sitting within 400 bytes of one that does, and `<< /ca 1 /BM /Normal >>` was reported as
-    a Link. `--renders N` makes the count the caller's, so the earlier ten-render protocol can
+    declaration is bounded by that same terminator and by the start of any stream, which
+    closes two bugs found before it shipped: an unbounded scan made 33 of this document's
+    1160 untyped objects eligible to borrow a later object's declaration, and a scan through
+    stream data could mistake payload bytes such as `/Type /Link` for the containing object's
+    type. `--renders N` makes the count the caller's, so the earlier ten-render protocol can
     be repeated; the Pages job still pays for two.
 
     The failure line now reports the two sizes, their length delta, and the location without
@@ -16368,22 +16369,23 @@ defects:
     transition survived a reader asking for no motion, and was a transition the export could
     in principle catch in flight. The two selectors are now named in the guard.
 
-    The cause remains open. Two hypotheses fit the retained length-only evidence: a Flate
-    stream that compressed two bytes smaller, or a variable-length decimal that lost two
-    characters in an uncompressed object. The historical document had 79 Link `/Rect` arrays
-    whose payloads ran 31 to 43 bytes and 36 bare `/ca` graphics states in objects 3 to 143.
-    Neither hypothesis can be selected without another occurrence that preserves the new
-    location report.
+    The cause remains open. A Flate stream that compressed two bytes smaller and a
+    variable-length decimal that changed by two characters are two plausible hypotheses,
+    but the length-only evidence neither selects them nor excludes a change outside an
+    object body. The historical document had 79 Link `/Rect` arrays whose payloads ran 31 to
+    43 bytes and 36 bare `/ca` graphics states in objects 3 to 143. Another occurrence must
+    preserve the new location report before any hypothesis can be selected.
   regression: >-
-    `tests/test_render_explainer_pdf.py`, eighteen cases over synthetic documents in the
+    `tests/test_render_explainer_pdf.py`, nineteen cases over synthetic documents in the
     shapes the writer emits and the exact image-wait JavaScript under Node. They pin that a
     disagreement names its object or outside-object section and quotes both windows, that
     `/Subtype` beats `/Type` where both are present, that a short untyped object does not
-    borrow a later object's type, that cross-reference, trailer and inter-object differences
-    do not borrow the preceding object, that truncated and equal renders are reported
-    honestly, that the CLI count reaches `check`, and that capture refuses an image with no
-    drawable current request. Nothing here prevents the race, which is what contained means:
-    the guard is that the next occurrence arrives diagnosable.
+    borrow a later object's type or a type-like name from its own stream payload, that
+    cross-reference, trailer and inter-object differences do not borrow the preceding object,
+    that truncated and equal renders are reported honestly, that the CLI count reaches
+    `check`, and that capture refuses an image with no drawable current request. Nothing here
+    prevents the race, which is what contained means: the guard is that the next occurrence
+    arrives diagnosable.
   recorded_in: packing/devtools/render_explainer_pdf.py
 - id: D-491
   title: The math geometry probe mixed observations and left a page watchdog uncontrolled

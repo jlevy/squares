@@ -164,6 +164,15 @@ def test_a_short_untyped_object_does_not_borrow_the_next_object_type() -> None:
     assert "in object 3:" in report
 
 
+def test_an_untyped_object_does_not_borrow_a_type_from_its_stream() -> None:
+    """A stream payload is data, even when its bytes happen to parse like a PDF name."""
+    prefix = b"7 0 obj\n<< /Length 18 >>\nstream\n/Type /Link value="
+    suffix = b"\nendstream\nendobj\n"
+    report = pdf._difference(_HEADER + prefix + b"a" + suffix, _HEADER + prefix + b"b" + suffix)
+    assert "in object 7:" in report
+    assert "object 7, Link" not in report
+
+
 def test_a_cross_reference_difference_is_not_assigned_to_the_last_object() -> None:
     document = _document(b"0.5 rg")
     first = document + b"xref\n0 2\n0000000000 65535 f\n0000000010 00000 n\n"
