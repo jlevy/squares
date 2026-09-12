@@ -3,9 +3,9 @@ type: is
 id: is-01m2agbyn3sd63v0j87jer8vz0
 title: Reduce the seven-mark selection theorem to one explicit routing obligation
 kind: task
-status: closed
+status: in_progress
 priority: 2
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max first-principles selection-theorem analysis; root integration
 labels:
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m2b4ywxym84rgf3b254v4jw6
   - is-01m2agbya33mh3sbs5jn8xss56
 created_at: 2026-09-12T09:49:52.162Z
-updated_at: 2026-09-12T16:41:51.375Z
+updated_at: 2026-09-12T16:43:41.809Z
 closed_at: 2026-09-12T16:41:51.374Z
 close_reason: "Exact owner-selection obligation and finite remainder are now durably defined and independently reviewed at 39714308: 16 maximal avoiding products, 3 physical versus 10 fixed-chart orbits, two missing lemmas, scoped path deductions, and exact narrow controls. No global selection theorem or new n11 bound is claimed."
 resolution: null
@@ -28,4 +28,4 @@ Starting from the reviewed seven-mark availability and contact-component facts, 
 
 ## Notes
 
-The exact routing obligation, 16 maximal avoiding products, 3 physical versus 10 fixed-chart orbits, two missing lemmas, two narrow path deductions, four-parent controls, and prospective surplus tests are durably retained on PR #156 at `39714308` with accepted source-distinct review and a maintained exact checker. Hosted CI is pending; no surplus target or BC329 target ran.
+The reduction/report/review/checker milestone is complete and green at PR #156 commit 39714308, but this umbrella remains in progress while its experiment children think-ms9l and think-cexv are active. The retained result is unchanged: no selection theorem or new n11 bound is claimed.
