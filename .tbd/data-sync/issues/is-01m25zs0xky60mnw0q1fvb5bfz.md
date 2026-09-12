@@ -5,14 +5,14 @@ title: Independently verify the revised n11 explainer and rendered artifacts
 kind: task
 status: closed
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
 dependencies: []
 parent_id: is-01m25zrj5np9ywft00t8j8neaz
 created_at: 2026-09-10T15:42:56.946Z
-updated_at: 2026-09-12T08:42:29.376Z
+updated_at: 2026-09-12T13:37:38.034Z
 closed_at: 2026-09-12T08:42:29.375Z
 close_reason: Independent mathematical, terminology, source, browser, PDF, permalink, and hosted checks confirm the v0.4.0 explainer states the ordinary proved bound s(11) >= C at V4/C5 and preserves T018 as the auditable visual example. Final head 989fd544 is green.
 resolution: null
@@ -22,4 +22,4 @@ Independently verify that the revised explainer states the ordinary exact theore
 
 ## Notes
 
-Reopened to correct its prior weak-limit wording. The revised mathematical and terminology audits find T-026 proves s(11) >= C without qualification; the separate statement s(11) > C is outside the theorem. Local focused, records, exact replay, rendering, lint and type checks pass. Close again only after the final pushed head, permalinks, browser preview and hosted checks pass.
+The revised mathematical and terminology audits confirm that T026 proves s(11) >= C without qualification; only the separate statement s(11) > C is outside the theorem. Local focused, records, exact replay, rendering, lint, type, permalink, browser, and hosted checks all pass on PR148 head 989fd544.

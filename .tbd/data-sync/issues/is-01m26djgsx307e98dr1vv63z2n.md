@@ -3,13 +3,17 @@ type: is
 id: is-01m26djgsx307e98dr1vv63z2n
 title: Lapsed session-099 deadlines are failing every pull request now
 kind: bug
-status: open
+status: closed
 priority: 0
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:44:03.901Z
-updated_at: 2026-09-10T20:48:04.077Z
+updated_at: 2026-09-12T13:36:49.121Z
+closed_at: 2026-09-12T13:36:49.120Z
+close_reason: PR150 merged at cf0a1d32 on 2026-09-10 and repaired the lapsed session-099 state. PR148 and PR149 now pass their campaign-record and full hosted validation surfaces, so the cross-PR blocker no longer exists.
+resolution: null
+duplicate_of: null
 ---
 The lapsed session-099 deadlines are no longer a future problem; they are failing builds now.
 

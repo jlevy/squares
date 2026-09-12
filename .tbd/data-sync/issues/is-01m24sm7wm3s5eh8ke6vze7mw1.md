@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 34
+version: 37
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -28,8 +28,10 @@ child_order_hints:
   - is-01m2agbyn3sd63v0j87jer8vz0
   - is-01m2agbz06cy0dta3xykd2arsk
   - is-01m2agbzb01ez7q1cxs1efbmen
+  - is-01m2axbxf0xz00ezc32q4mesn2
+  - is-01m2axbxvjf2wcvzxzznhqkf59
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-12T09:49:52.863Z
+updated_at: 2026-09-12T13:37:19.038Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
@@ -67,6 +69,4 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-Research checkpoint PR #150 is ready for review at 568abad5 and every required hosted check is green. Stacked research PR #151 records exp156's sole source-bound run at c0d357e5. The fixed residual survives its parent box; TR / bottom-left:m1:j7 is B-only incompatible across all 181 frames; set inclusion precludes parent gain there; BL, BR, and TL remain untested; H158 remains unresolved; no global bound changed. External command wall was 20.628132708 seconds. The required pre-push tier, two independent Astra Max reviews, and every required hosted check pass. BC329 remains the next direct global-bound lane, blocked on think-qw9w runner admission. BC337 / think-0cdq is a secondary parallel exact full-owner forbidden-polygon pilot, blocked on its source-bound constructor, clipping, runner, and reader, and depends on completed BC326 / think-fx2y.
-
-Draft explainer PR #148 is stacked separately on #150. Local head 99c95b4f is 23 files, +618/-110: v0.4.0 carries T025/T026, the two-entry history records first edition-label dates v0.3.0 September 8 and v0.4.0 September 10, and the DRAFT prefix is removed. A Git audit omitted v0.2.0 because v0.1.0 was the first explainer label carrying 3.81. The 125 focused publication tests and full 324-entry atlas rebuild pass; the corrected WebKit harness has independent review; the final unsandboxed pre-push gate is in progress before push.
+Current 2026-09-12 state: PR150 and PR151 are merged. PR148 is open, mergeable, non-draft, and fully hosted-green at 989fd544; think-t1ml owns its final disposition and stack order. PR149 is open, mergeable, non-draft, correctly stacked on PR148, and fully hosted-green at 4d00ab68; its repeated full local checkpoint remains in progress under think-o96l/think-5rh4. BC329 is the next direct-bound lane. Its source-bound runner is committed at 5095241d with 156 passed/3 platform skips, Ruff and BasedPyright clean, edit gate green, and exact manifest replay; no BC329 target has run. think-ygiz owns the stacked progress PR, think-cur4 and think-yiay own final runner hardening, think-122i owns target-free calibration/admission, think-zd1b owns final docs, think-17qa owns preregistration and the sole scientific run, and think-iexs owns cross-record closeout. X028 preserves the wider strategy portfolio without treating finite negatives as method-wide judgments.
