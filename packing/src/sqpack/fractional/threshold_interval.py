@@ -123,6 +123,10 @@ Ints = NDArray[np.int64]
 # The cap keeps the gathered block at twice the point route's mask bound and the count
 # block under it; an input past it is refused before any array exists.
 MAX_MEMBER_SLOTS = 2 * MAX_INTERVAL_ATOMS
+#: Tokens per atom. `_counts` sums a member row into one `int16`, so a row has to stay
+#: inside that lane; this cap is far above any admitted atom and exists so a weighted
+#: atom fails loudly rather than overflowing a count.
+MAX_TOKENS_PER_ATOM = 4096
 
 CONDITION_5 = "Condition 5' every admissible centre is charged at least 1"
 
@@ -159,10 +163,21 @@ class ThresholdAtomData:
             return index.setdefault(point, len(index))
 
         rows: list[list[int]] = [[site((atom.x, atom.y))] for atom in certificate.atoms]
+        # One slot per TOKEN, repeating a site's index for each of its tokens. The boolean
+        # gather at `_counts` then sums tokens rather than sites, while the interval
+        # enclosure below is still built once per distinct coordinate.
         rows.extend(
-            [site(point) for point in threshold_atom.points]
+            [site(threshold_atom.points[s]) for s in threshold_atom.token_sites]
             for threshold_atom in certificate.threshold_atoms
         )
+        for threshold_atom in certificate.threshold_atoms:
+            # `_counts` accumulates this row into one `int16` per (box, atom), so the token
+            # total has to fit with the threshold it is compared against.
+            if threshold_atom.token_count > MAX_TOKENS_PER_ATOM:
+                raise IntervalInputError(
+                    f"an atom carries {threshold_atom.token_count} tokens, above the "
+                    f"{MAX_TOKENS_PER_ATOM} this verifier counts in one int16 lane"
+                )
         if len(index) > MAX_INTERVAL_ATOMS:
             raise IntervalInputError(
                 f"the interval verifier supports at most {MAX_INTERVAL_ATOMS} distinct sites"
@@ -233,7 +248,7 @@ def scaled_threshold_masses(
     if any(mass < 0 for mass in point_masses + threshold_masses):
         raise IntervalInputError("the interval verifier requires nonnegative weights")
     budget = sum(point_masses) + sum(
-        mass * (t.size // t.threshold)
+        mass * (t.token_count // t.threshold)
         for mass, t in zip(threshold_masses, certificate.threshold_atoms, strict=True)
     )
     if budget >= INT64_MASS_LIMIT:

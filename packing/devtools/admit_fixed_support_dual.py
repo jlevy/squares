@@ -454,6 +454,15 @@ def _priced_row(
         threshold = _integer(
             identity.get("threshold"), f"{context} identity field 'threshold'", minimum=1
         )
+        # This reader prices ordinary orbit columns. A weighted atom's budget is a token
+        # budget and its orbit is keyed on the token counts, so reading one here without
+        # them would price a different column; refuse instead of guessing. Outside the
+        # `try`, because `AdmissionError` is a `ValueError` and would be relabelled.
+        if identity.get("multiplicities") is not None or identity.get("variant") is not None:
+            raise AdmissionError(
+                f"{context} identity declares token counts, and this reader prices "
+                "unweighted orbit columns only"
+            )
         try:
             atom = ThresholdAtom(points, threshold, Fraction(1))
         except (TypeError, ValueError) as error:
@@ -469,7 +478,8 @@ def _priced_row(
                 f"{context} atom orbit_size is {declared_orbit_size}, "
                 f"exact D4 size is {len(images)}"
             )
-        budget = Fraction(len(images) * (atom.size // atom.threshold))
+        # `token_count`, not `size`: see `ThresholdAtom.budget`.
+        budget = Fraction(len(images) * (atom.token_count // atom.threshold))
         coefficients = _atom_coefficients(atom, images, columns)
 
     declared_budget = _fraction(row.get("budget"), f"{context} field 'budget'")

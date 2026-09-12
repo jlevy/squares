@@ -341,15 +341,23 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, continue the existing BC329 bounded
-fixed-core runner admission under `think-qw9w`. The frozen packet preserves T-025’s
-relative weights and total charge budget $M$. It must compare raw least core charge $m$
-with $M/11$ before applying $\alpha=1/m$. Independent instrument admission and a
-prospective run contract precede any scientific packet measurement.
-Coverage remains unmeasured.
-The [packet preflight](../../reviews/review-2026-09-10-n11-bc329-packet-preflight.md)
-and [daytime plan](plan-2026-09-10-n11-daytime-strategy-and-explainer.md) own those
-requirements.
+For the next supervised exact-research goal, continue the weighted-atom coverage
+mechanics under `think-8c9e`. The production threshold-atom model now carries explicit
+per-site integer token counts through its budget, its D4 orbit key, its record and both
+exact coverage routes, and all four retained seven-token receipts reproduce their
+declared token total, budget, charge $3/2$ and charged-placement lists from family
+geometry. What remains before certificate coverage can be admitted is the agreeing
+direct, event and interval controls on weighted atoms, including the closed-boundary and
+undercharged-core cases and the interval route’s stall handling, which is unresolved
+rather than a refutation.
+Neither a BC327 hypothesis nor any experiment may be registered until that passes.
+The
+[weighted-atom review](../../reviews/review-2026-09-10-n11-weighted-five-site-atoms.md)
+owns the staged accept rules, and the
+[daytime plan](plan-2026-09-10-n11-daytime-strategy-and-explainer.md) owns the block it
+sits in. The BC329 bounded fixed-core runner admission continues in its own lane, which
+holds its branch and its own draft review; this entry point is the unclaimed slice, not
+a reassignment of that work.
 
 [Session126](../../../../packing/campaign/agent-sessions/session-126-stromquist-analytical-exploration.md)
 and

@@ -59,12 +59,13 @@ from concurrent.futures import ProcessPoolExecutor
 from fractions import Fraction
 from functools import partial
 from pathlib import Path
-from typing import Literal, Never, cast
+from typing import Any, Literal, Never, cast
 
 from sqpack.fractional.interval import IntervalInputError
 from sqpack.fractional.model import Atom
 from sqpack.fractional.threshold import (
     DENSE_CELL_LIMIT,
+    WEIGHTED_VARIANT,
     ThresholdAtom,
     ThresholdCertificate,
     closed_form_threshold_conditions,
@@ -104,6 +105,26 @@ def _rational(value: object, field: str) -> Fraction:
     if not isinstance(value, str) or RATIONAL.fullmatch(value) is None:
         raise FormatError(f"field {field!r} must be an exact rational string, got {value!r}")
     return Fraction(value)
+
+
+def _token_counts(item: dict[str, object], context: str) -> tuple[int, ...]:
+    """The declared per-site token counts, under the same marker the model requires."""
+
+    variant = item.get("variant")
+    declared = item.get("multiplicities")
+    if variant is not None and variant != WEIGHTED_VARIANT:
+        raise FormatError(f"{context}.variant is {variant!r}, not {WEIGHTED_VARIANT!r}")
+    if declared is not None and variant is None:
+        raise FormatError(
+            f"{context} carries 'multiplicities' without 'variant': {WEIGHTED_VARIANT!r}"
+        )
+    if variant is not None and declared is None:
+        raise FormatError(f"{context} declares {WEIGHTED_VARIANT!r} with no 'multiplicities'")
+    if declared is None:
+        return ()
+    if not isinstance(declared, list):
+        raise FormatError(f"{context}.multiplicities must be a JSON array")
+    return tuple(cast(list[Any], declared))
 
 
 def _integer(value: object, field: str) -> int:
@@ -169,16 +190,27 @@ def load(data: bytes) -> tuple[ThresholdCertificate, dict[str, object]]:
                     _rational(pair[1], f"threshold_atoms[{index}].points[{p}][1]"),
                 )
             )
+        multiplicities = _token_counts(item, f"threshold_atoms[{index}]")
         try:
             threshold_atoms.append(
                 ThresholdAtom(
                     tuple(points),
                     _integer(item.get("threshold"), f"threshold_atoms[{index}].threshold"),
                     _rational(item.get("weight"), f"threshold_atoms[{index}].weight"),
+                    multiplicities,
                 )
             )
         except ValueError as error:
             raise FormatError(f"threshold_atoms[{index}]: {error}") from None
+        if threshold_atoms[-1].token_count != threshold_atoms[-1].size:
+            # Parsed, then refused: reading the field is what stops this gate deciding a
+            # lighter object, and refusing is what stops it claiming a coverage verdict the
+            # interval and event routes have not been admitted for on weighted atoms.
+            raise FormatError(
+                f"threshold_atoms[{index}] carries token counts, and variant "
+                f"{VARIANT!r} decides unweighted atoms only; weighted coverage needs its "
+                "own admitted variant"
+            )
     try:
         certificate = ThresholdCertificate(
             n=n,

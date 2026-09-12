@@ -111,7 +111,8 @@ def _cluster_certificate(
     grid = [Fraction(1, 2) + Fraction(2, 5) * i for i in range(6)]
     representatives = ((0, 0), (1, 1), (2, 2), (0, 1), (0, 2), (1, 2))
     shapes = ((3, 2), (4, 3), (5, 2), (3, 2), (4, 3), (5, 4))
-    seen: dict[tuple[tuple[tuple[Fraction, Fraction], ...], int], ThresholdAtom] = {}
+    # The orbit key carries each site's token count, so it is a triple per site.
+    seen: dict[tuple[tuple[tuple[Fraction, Fraction, int], ...], int], ThresholdAtom] = {}
     for (i, j), (size, threshold) in zip(representatives, shapes, strict=True):
         points: list[tuple[Fraction, Fraction]] = []
         while len(points) < size:
@@ -145,7 +146,7 @@ def rescaled(certificate: ThresholdCertificate, factor: Fraction) -> ThresholdCe
         square_side=certificate.square_side,
         atoms=tuple(Atom(a.label, a.x, a.y, a.weight * factor) for a in certificate.atoms),
         threshold_atoms=tuple(
-            ThresholdAtom(t.points, t.threshold, t.weight * factor)
+            ThresholdAtom(t.points, t.threshold, t.weight * factor, t.multiplicities)
             for t in certificate.threshold_atoms
         ),
         half_tangents=certificate.half_tangents,
@@ -424,7 +425,12 @@ def test_a_lowered_threshold_weight_is_refused_and_the_witness_is_exact() -> Non
     assert charged, "the tightest cell should be carried by a threshold atom"
     lightened = charged[0]
     threshold_atoms = tuple(
-        ThresholdAtom(t.points, t.threshold, t.weight - Fraction(1, 10000))
+        ThresholdAtom(
+            t.points,
+            t.threshold,
+            t.weight - Fraction(1, 10000),
+            t.multiplicities,
+        )
         if t is lightened
         else t
         for t in certificate.threshold_atoms

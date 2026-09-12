@@ -11,7 +11,7 @@ from typing import Any
 import pytest
 
 from devtools import admit_threshold_atom_orbits as admission
-from sqpack.fractional.threshold import ThresholdAtom
+from sqpack.fractional.threshold import WEIGHTED_VARIANT, ThresholdAtom
 
 
 def family(
@@ -149,3 +149,47 @@ def test_cli_serializes_exact_receipt_and_keeps_ceiling_proof_separate(
     }
     assert receipt["ceiling_proof"]["checked"] is False
     assert "K0--K3" in receipt["ceiling_proof"]["obligation"]
+
+
+def test_a_declared_input_kind_is_checked_rather_than_ignored() -> None:
+    """The receipt stamped its own kind from the start but read no declared one.
+
+    A record of another shape whose field names happen to line up was admitted without
+    complaint, which is an admission receipt attesting to an object nobody chose. The
+    sibling `devtools.admit_fixed_support_dual` has always checked.
+    """
+
+    atoms = atom_input([["1", "1"]], 1)
+    atoms["kind"] = "something-else/v9"
+    with pytest.raises(admission.AdmissionError, match="does not accept"):
+        admission.admit_records(family(), atoms)
+    # An undeclared kind stays readable: the retained inputs carry none.
+    assert "kind" not in atom_input([["1", "1"]], 1)
+
+
+def test_the_per_image_budget_is_a_token_budget() -> None:
+    """Five sites carrying seven tokens floor to one, where five sites alone floor to one
+    as well -- so the control is the charge side too: the budget must come from tokens."""
+
+    points = [["1", "1"], ["1", "13/10"], ["13/10", "1"], ["7/10", "1"], ["1", "7/10"]]
+    atoms = atom_input(points, 4)
+    entry = atoms["atoms"][0]
+    entry["variant"] = WEIGHTED_VARIANT
+    entry["multiplicities"] = [2, 2, 1, 1, 1]
+    atom = ThresholdAtom(
+        tuple((Fraction(x), Fraction(y)) for x, y in points), 4, Fraction(1), (2, 2, 1, 1, 1)
+    )
+    entry["orbit_size"] = len(atom.orbit(Fraction(2)))
+    receipt = admission.admit_records(family(), atoms)
+    row = receipt["atom_admission"]["orbits"][0]
+    assert row["support_size"] == 5
+    assert row["token_count"] == 7
+    # The receipt stringifies every rational figure; this one is an integer budget.
+    assert row["per_image_budget"] == "1"
+
+
+def test_token_counts_without_their_variant_are_refused_by_the_admitter() -> None:
+    atoms = atom_input([["1", "1"], ["1", "13/10"]], 2)
+    atoms["atoms"][0]["multiplicities"] = [2, 1]
+    with pytest.raises(admission.AdmissionError, match="without 'variant'"):
+        admission.admit_records(family(), atoms)

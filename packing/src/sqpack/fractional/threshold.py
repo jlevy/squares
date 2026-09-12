@@ -39,12 +39,14 @@ an open cell whose trace on ``S`` has ``m`` points,
 
 and ``C(m, j)`` counts the ``j``-subsets ``T`` of ``S`` with ``C ⊆ ⋂_{t ∈ T} R_t``. Each
 intersection is a closed axis-aligned rectangle with event-coordinate corners, so the atom
-is ``sum_{j >= k} C(|S|, j)`` signed rectangle terms whose *sum* on every open cell is the
+is ``sum_{j >= k} C(A, j)`` signed rectangle terms, over the ``A`` tokens of ``S``,
+whose *sum* on every open cell is the
 nonnegative, monotone value ``w [m >= k]``. `sqpack.fractional.sweep` refuses signed
 *point weights* because a signed weight makes the charge non-monotone and breaks the
 counting; the signs here are internal to an exact expansion of a monotone function and
 never reach the theorem. `ThresholdAtom` refuses negative weights, thresholds outside
-``1..|S|`` and repeated points; `charge_grid` checks the ``int64`` headroom against the
+``1..A``, non-positive or non-integer token counts, and repeated points; `charge_grid`
+checks the ``int64`` headroom against the
 sum of the absolute expansion coefficients, the largest magnitude any intermediate prefix
 sum can reach; and `charge_grid_direct`, which thresholds one integer count grid per
 atom instead, is the independent route the tests hold it to, cell for cell.
@@ -92,14 +94,34 @@ Point = tuple[Fraction, Fraction]
 #: and no mass, and `reduce_to_spans` accepts a zero weight.
 _EVENT_ONLY = Fraction(0)
 
+#: The record variant a weighted atom must declare. Readers here ignore unknown fields, so
+#: a bare ``multiplicities`` would be skipped by one that predates token counts -- and the
+#: archived ``floor_atom_columns`` reader did exactly that, coercing the field through
+#: ``int`` under a float membership slack. The marker is what makes that read fail loudly.
+WEIGHTED_VARIANT = "weighted-threshold/v1"
+
 
 @dataclass(frozen=True, slots=True)
 class ThresholdAtom:
-    """``(S, k, w)``: weight ``w`` to every core containing at least ``k`` points of ``S``."""
+    """``(S, a, k, w)``: weight ``w`` to every core holding at least ``k`` of ``S``'s tokens.
+
+    ``multiplicities`` gives each distinct site an integer token count, so one site can
+    contribute more than one unit of resource. An empty tuple means all ones, which is also
+    what a record written before token counts existed means, and an all-ones atom is exactly
+    the unweighted atom this class used to be.
+
+    ``size`` counts *distinct sites* and ``token_count`` counts *tokens*; they differ as soon
+    as one multiplicity exceeds one, and they are not interchangeable. Geometry is per site --
+    one membership rectangle each -- while the threshold, the budget and the
+    inclusion--exclusion expansion are all per token. Reading a seven-token atom as five
+    sites understates its expansion mass from 209 to 9 and would let the ``int64`` headroom
+    check pass a term list it cannot hold.
+    """
 
     points: tuple[Point, ...]
     threshold: int
     weight: Fraction
+    multiplicities: tuple[int, ...] = ()
 
     def __post_init__(self) -> None:
         if not isinstance(self.threshold, int) or isinstance(self.threshold, bool):
@@ -108,10 +130,34 @@ class ThresholdAtom:
             raise ValueError("a threshold atom needs at least one point")
         if len(set(self.points)) != len(self.points):
             raise ValueError("a threshold atom's points must be distinct")
-        if self.threshold < 1 or self.threshold > len(self.points):
+        # Normalize before checking the threshold, which is measured in tokens. Every
+        # downstream use then reads one materialized count per site rather than having to
+        # remember a second spelling of "all ones"; `object.__setattr__` is how the other
+        # frozen records here normalize (`sqpack.uniform_cell`, `sqpack.contact_assembly`).
+        multiplicities = self.multiplicities or (1,) * len(self.points)
+        if len(multiplicities) != len(self.points):
             raise ValueError(
-                f"threshold {self.threshold} is outside 1..{len(self.points)}; the charge "
-                "would be constant and the budget meaningless"
+                f"{len(self.points)} points carry {len(multiplicities)} multiplicities; "
+                "every site needs exactly one token count"
+            )
+        for multiplicity in multiplicities:
+            # `bool` is an `int`, so `True` would otherwise read as one token.
+            if not isinstance(multiplicity, int) or isinstance(multiplicity, bool):
+                raise TypeError(
+                    f"multiplicity {multiplicity!r} is not an integer; a token count may not "
+                    "be a bool, a float or a string"
+                )
+            if multiplicity < 1:
+                raise ValueError(
+                    f"multiplicity {multiplicity} is not positive; a site carrying no tokens "
+                    "is left out rather than declared empty"
+                )
+        object.__setattr__(self, "multiplicities", tuple(multiplicities))
+        token_count = sum(multiplicities)
+        if self.threshold < 1 or self.threshold > token_count:
+            raise ValueError(
+                f"threshold {self.threshold} is outside 1..{token_count}; the charge would "
+                "be constant and the budget meaningless"
             )
         if self.weight < 0:
             raise ValueError(
@@ -121,22 +167,62 @@ class ThresholdAtom:
 
     @property
     def size(self) -> int:
+        """``|S|``: the distinct sites, hence the membership rectangles."""
+
         return len(self.points)
 
     @property
-    def budget(self) -> Fraction:
-        """``w floor(|S| / k)``: the most a family of disjoint cores can be charged."""
+    def token_count(self) -> int:
+        """``A = sum_x a_x``: the tokens, which is what the threshold counts."""
 
-        return self.weight * (self.size // self.threshold)
+        return sum(self.multiplicities)
 
     @property
-    def key(self) -> tuple[tuple[Point, ...], int]:
-        """``(S, k)`` with ``S`` in a canonical order, for symmetry and duplicate checks."""
+    def token_sites(self) -> tuple[int, ...]:
+        """The site index behind each token, in site order: ``(2, 1)`` gives ``(0, 0, 1)``.
 
-        return tuple(sorted(self.points)), self.threshold
+        Inclusion--exclusion subsets are subsets of token indices, so this is what carries
+        a site's geometry into every one of its tokens while keeping them distinct.
+        """
+
+        return tuple(index for index, a in enumerate(self.multiplicities) for _ in range(a))
+
+    @property
+    def budget(self) -> Fraction:
+        """``w floor(A / k)``: the most a family of disjoint cores can be charged.
+
+        Disjoint cores consume disjoint site tokens, so their traces sum to at most ``A``.
+        """
+
+        return self.weight * (self.token_count // self.threshold)
+
+    @property
+    def key(self) -> tuple[tuple[tuple[Fraction, Fraction, int], ...], int]:
+        """``(S with its token counts, k)``, canonically ordered, for symmetry and duplicates.
+
+        Each count travels with its own site. A reflection that exchanges a heavy site for a
+        light one is not a symmetry of a weighted atom, and a key over the bare coordinates
+        would call it one.
+        """
+
+        return (
+            tuple(
+                sorted(
+                    (x, y, a)
+                    for (x, y), a in zip(self.points, self.multiplicities, strict=True)
+                )
+            ),
+            self.threshold,
+        )
 
     def trace_count(self, contains: Callable[[Fraction, Fraction], bool]) -> int:
-        return sum(1 for x, y in self.points if contains(x, y))
+        """The tokens inside a core; a site contributes all of its tokens or none of them."""
+
+        return sum(
+            a
+            for (x, y), a in zip(self.points, self.multiplicities, strict=True)
+            if contains(x, y)
+        )
 
     def charge(self, contains: Callable[[Fraction, Fraction], bool]) -> Fraction:
         """The charge on a core given its membership test."""
@@ -148,24 +234,42 @@ class ThresholdAtom:
 
         per_point = [d4_images(x, y, outer_side) for x, y in self.points]
         return tuple(
-            ThresholdAtom(tuple(images[g] for images in per_point), self.threshold, self.weight)
+            ThresholdAtom(
+                tuple(images[g] for images in per_point),
+                self.threshold,
+                self.weight,
+                # `d4_images` sends every site through the same group element and keeps the
+                # tuple order, so each count still sits beside the site it was declared on.
+                self.multiplicities,
+            )
             for g in range(8)
         )
 
     def orbit(self, outer_side: Fraction) -> tuple[ThresholdAtom, ...]:
-        """The distinct D4 images, keyed on ``(S, k)``."""
+        """The distinct D4 images, keyed on ``(S carrying its token counts, k)``."""
 
-        seen: dict[tuple[tuple[Point, ...], int], ThresholdAtom] = {}
+        seen: dict[tuple[tuple[tuple[Fraction, Fraction, int], ...], int], ThresholdAtom] = {}
         for image in self.images(outer_side):
             seen.setdefault(image.key, image)
         return tuple(seen.values())
 
     def to_record(self) -> dict[str, Any]:
-        return {
+        """The JSON record: the legacy shape exactly when every token count is one.
+
+        A weighted atom also carries `WEIGHTED_VARIANT`. The marker is the part an older
+        reader refuses: readers here ignore fields they do not know, so a record carrying
+        only ``multiplicities`` would be read by one as a different, lighter atom.
+        """
+
+        record: dict[str, Any] = {
             "points": [[str(x), str(y)] for x, y in self.points],
             "threshold": self.threshold,
             "weight": str(self.weight),
         }
+        if self.token_count != self.size:
+            record["variant"] = WEIGHTED_VARIANT
+            record["multiplicities"] = list(self.multiplicities)
+        return record
 
     @classmethod
     def from_record(cls, record: dict[str, Any]) -> ThresholdAtom:
@@ -173,7 +277,29 @@ class ThresholdAtom:
         threshold = record["threshold"]
         if not isinstance(threshold, int) or isinstance(threshold, bool):
             raise TypeError("field 'threshold' must be a JSON integer")
-        return cls(points, threshold, Fraction(record["weight"]))
+        variant = record.get("variant")
+        multiplicities = record.get("multiplicities")
+        if variant is not None and variant != WEIGHTED_VARIANT:
+            raise ValueError(
+                f"threshold atom declares variant {variant!r}, which this reader does not "
+                f"support; only {WEIGHTED_VARIANT!r} carries token counts"
+            )
+        if multiplicities is not None and variant is None:
+            raise ValueError(
+                "threshold atom carries 'multiplicities' without "
+                f"'variant': {WEIGHTED_VARIANT!r}; a reader that did not know the field "
+                "would ignore it and admit a different atom"
+            )
+        if variant is not None and multiplicities is None:
+            raise ValueError(
+                f"threshold atom declares variant {WEIGHTED_VARIANT!r} with no "
+                "'multiplicities'; the variant exists to carry them"
+            )
+        if multiplicities is None:
+            return cls(points, threshold, Fraction(record["weight"]))
+        if not isinstance(multiplicities, list):
+            raise TypeError("field 'multiplicities' must be a JSON array of integers")
+        return cls(points, threshold, Fraction(record["weight"]), tuple(multiplicities))
 
 
 def expansion_terms(size: int, threshold: int) -> tuple[tuple[int, int], ...]:
@@ -238,7 +364,7 @@ def _headroom(
         raise ValueError("the common weight scale must be a positive integer")
     total = sum(_scaled(atom.weight, scale) for atom in atoms)
     total += sum(
-        _scaled(t.weight, scale) * absolute_expansion_sum(t.size, t.threshold)
+        _scaled(t.weight, scale) * absolute_expansion_sum(t.token_count, t.threshold)
         for t in threshold_atoms
     )
     if total >= _INTEGER_MASS_LIMIT:
@@ -299,13 +425,20 @@ def rectangle_terms(
         weights.append(_scaled(atom.weight, scale))
     cursor = len(atoms)
     for threshold_atom in threshold_atoms:
+        # One membership rectangle per distinct site: that is the geometry, and `size` is
+        # its count. The expansion below is over token subsets instead, so each site's
+        # rectangle is repeated to all of its tokens -- equal rectangles that stay distinct
+        # positions, which is what keeps their combinatorial multiplicity.
         rectangles = reduction.rectangles[cursor : cursor + threshold_atom.size]
         cursor += threshold_atom.size
+        tokens = tuple(rectangles[site] for site in threshold_atom.token_sites)
         scaled_weight = _scaled(threshold_atom.weight, scale)
         if scaled_weight == 0:
             continue
-        for j, coefficient in expansion_terms(threshold_atom.size, threshold_atom.threshold):
-            for subset in combinations(rectangles, j):
+        for j, coefficient in expansion_terms(
+            threshold_atom.token_count, threshold_atom.threshold
+        ):
+            for subset in combinations(tokens, j):
                 u_low = max(r[0] for r in subset)
                 u_high = min(r[1] for r in subset)
                 if u_low >= u_high:
@@ -442,8 +575,14 @@ def charge_grid_direct(
     cursor = len(atoms)
     for threshold_atom in threshold_atoms:
         counts = np.zeros((width, height), dtype=np.int64)
-        for rectangle in reduction.rectangles[cursor : cursor + threshold_atom.size]:
-            paint(counts, rectangle, 1)
+        # Deliberately not the sweep's token expansion: this route paints each distinct
+        # site's rectangle with its own token count and thresholds the total, so the two
+        # routes can only agree by computing the same charge two different ways.
+        site_rectangles = reduction.rectangles[cursor : cursor + threshold_atom.size]
+        for rectangle, multiplicity in zip(
+            site_rectangles, threshold_atom.multiplicities, strict=True
+        ):
+            paint(counts, rectangle, multiplicity)
         cursor += threshold_atom.size
         np.cumsum(counts, axis=1, out=counts)
         np.cumsum(counts, axis=0, out=counts)
@@ -766,6 +905,7 @@ def verify_threshold(certificate: ThresholdCertificate, *, workers: int = 1) -> 
 
 __all__ = [
     "DENSE_CELL_LIMIT",
+    "WEIGHTED_VARIANT",
     "Point",
     "Terms",
     "ThresholdAtom",

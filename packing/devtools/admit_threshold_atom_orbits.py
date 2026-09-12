@@ -21,10 +21,10 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from sqpack.fractional.ceiling import CeilingCertificate
-from sqpack.fractional.threshold import ThresholdAtom
+from sqpack.fractional.threshold import WEIGHTED_VARIANT, ThresholdAtom
 
 KIND = "threshold-atom-orbit-admission/v1"
 
@@ -43,7 +43,9 @@ class Orbit:
 
     @property
     def per_image_budget(self) -> int:
-        return self.atom.size // self.atom.threshold
+        # Tokens, not sites: a weighted atom's budget is `floor(A / k)`, and reading `size`
+        # here would understate it for every atom carrying a count above one.
+        return self.atom.token_count // self.atom.threshold
 
     @property
     def budget(self) -> int:
@@ -70,6 +72,21 @@ def _load(path: Path, context: str) -> Mapping[str, Any]:
     except (OSError, json.JSONDecodeError, ValueError) as error:
         raise AdmissionError(f"cannot read {context} {path}: {error}") from error
     return _mapping(value, context)
+
+
+#: Input receipts that declare a kind must declare one of these. The tool stamped `KIND` on
+#: its output from the start but read no declared kind at all, so a record of another shape
+#: whose field names happened to line up was admitted without complaint. Its sibling
+#: `devtools.admit_fixed_support_dual` has always checked.
+ACCEPTED_INPUT_KINDS = frozenset({"threshold-atom-orbits/v1"})
+
+
+def _check_kind(record: Mapping[str, Any], context: str) -> None:
+    kind = record.get("kind")
+    if kind is not None and kind not in ACCEPTED_INPUT_KINDS:
+        raise AdmissionError(
+            f"{context} declares kind {kind!r}, which this reader does not accept"
+        )
 
 
 def _family(record: Mapping[str, Any]) -> CeilingCertificate:
@@ -101,6 +118,36 @@ def _point(raw: Any, context: str) -> tuple[Fraction, Fraction]:
     return _fraction(raw[0], f"{context}[0]"), _fraction(raw[1], f"{context}[1]")
 
 
+def _multiplicities(entry: Mapping[str, Any], context: str) -> tuple[int, ...]:
+    """The declared token counts, or the empty tuple an all-ones atom means.
+
+    The variant marker is required rather than inferred, for the reason
+    `devtools.dilation_corollary` requires its own: a reader that does not know the field
+    skips it and decides a lighter object. `ThresholdAtom` refuses the same shapes, and
+    checking here too is what puts the atom's index in the message.
+    """
+
+    variant = entry.get("variant")
+    declared = entry.get("multiplicities")
+    if variant is not None and variant != WEIGHTED_VARIANT:
+        raise AdmissionError(
+            f"{context} declares variant {variant!r}, not {WEIGHTED_VARIANT!r}"
+        )
+    if declared is not None and variant is None:
+        raise AdmissionError(
+            f"{context} carries 'multiplicities' without 'variant': {WEIGHTED_VARIANT!r}"
+        )
+    if variant is not None and declared is None:
+        raise AdmissionError(
+            f"{context} declares {WEIGHTED_VARIANT!r} with no 'multiplicities'"
+        )
+    if declared is None:
+        return ()
+    if not isinstance(declared, list):
+        raise AdmissionError(f"{context} field 'multiplicities' must be a JSON array")
+    return tuple(cast(list[Any], declared))
+
+
 def _orbits(record: Mapping[str, Any], family: CeilingCertificate) -> tuple[Orbit, ...]:
     if "outer_side" not in record:
         raise AdmissionError("atom input field 'outer_side' is required")
@@ -116,6 +163,7 @@ def _orbits(record: Mapping[str, Any], family: CeilingCertificate) -> tuple[Orbi
                 "atom square_side does not match family square_side: "
                 f"{square_side} != {family.square_side}"
             )
+    _check_kind(record, "threshold-atom input")
     entries = record.get("atoms")
     if not isinstance(entries, list) or not entries:
         raise AdmissionError("atom input field 'atoms' must be a nonempty JSON array")
@@ -132,8 +180,9 @@ def _orbits(record: Mapping[str, Any], family: CeilingCertificate) -> tuple[Orbi
         threshold = entry.get("threshold")
         if not isinstance(threshold, int) or isinstance(threshold, bool):
             raise AdmissionError(f"atom {index} field 'threshold' must be a JSON integer")
+        multiplicities = _multiplicities(entry, f"atom {index}")
         try:
-            atom = ThresholdAtom(points, threshold, Fraction(1))
+            atom = ThresholdAtom(points, threshold, Fraction(1), multiplicities)
         except (TypeError, ValueError) as error:
             raise AdmissionError(f"invalid atom {index}: {error}") from error
         for point_index, (x, y) in enumerate(atom.points):
@@ -174,6 +223,7 @@ def _orbit_report(
     return {
         "index": orbit.index,
         "support_size": orbit.atom.size,
+        "token_count": orbit.atom.token_count,
         "threshold": orbit.atom.threshold,
         "orbit_size": len(orbit.images),
         "per_image_budget": str(orbit.per_image_budget),

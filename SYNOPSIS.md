@@ -739,16 +739,33 @@ notation, and identify their imported premises and supplied results.
 [Session126](packing/campaign/agent-sessions/session-126-stromquist-analytical-exploration.md)
 retains the analytical work, independent reviews, and validation.
 
-**Selected next entry:** `think-qw9w`, the existing BC329 bounded fixed-core runner
-admission. With total charge budget $M$ and least core charge $m$, it preserves the
-frozen relative-weight scale, checks $m>M/11$, and uses $\alpha=1/m$ only after
-acceptance. The scientific packet remains unrun; the
-[packet preflight](docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md)
-and
-[daytime plan](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
-state its admission and prospective-run requirements.
-This follows X-027’s first-ranked direct-bound continuation without reopening the
-completed interpretation audit.
+**Weighted atoms now exist in production:**
+[Session127](packing/campaign/agent-sessions/session-127-weighted-five-site-atom-admission.md)
+completed the first two stages of the
+[weighted-atom admission](docs/project/reviews/review-2026-09-10-n11-weighted-five-site-atoms.md).
+`ThresholdAtom` carries an explicit positive integer token count per distinct site, and
+the distinction between sites and tokens is now held apart everywhere it is used:
+geometry stays one membership rectangle per site, while the threshold, the budget
+$w\lfloor A/k\rfloor$, the D4 orbit key and the inclusion--exclusion expansion are all
+measured in tokens. The retained seven-token, threshold-four motif $(2,2,1,1,1)$ expands
+over 64 token subsets with absolute coefficient mass 209, where the same atom read as
+five sites reports 9, so the `int64` headroom bound now reads the token count.
+All four retained receipts reproduce their declared token total, budget, charge $3/2$
+and exact charged-placement lists from family geometry, on rational coordinates up to
+965 characters wide, and both inputs are digest-bound because nothing retained binds
+them. Three readers that cannot price a weighted atom refuse one rather than read it as
+lighter. No hypothesis, experiment or scientific target was registered or run, and the
+frontier is unchanged.
+
+**Selected next entry:** `think-8c9e`, the weighted-atom coverage mechanics.
+The agreeing direct, event and interval controls on weighted atoms remain, including the
+closed-boundary and undercharged-core cases and the interval route’s stall handling,
+which is unresolved rather than a refuted atom or a failed budget proof.
+Certificate coverage admission stays blocked until they pass, and the paired instrument
+with its exact common row and point manifests is tracked separately behind it.
+The BC329 bounded fixed-core runner admission continues in its own lane with its own
+branch and draft review; this entry point is the unclaimed slice rather than a
+reassignment of that work.
 
 **Current combined reader entry:**
 [the consolidated PR-series takeaways](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons),
