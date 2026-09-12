@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 42
+version: 43
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -36,7 +36,7 @@ child_order_hints:
   - is-01m2b0qdwj6yj4s84apk2d1p8c
   - is-01m2b0qe8stb62xr0zzrynqeej
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-12T14:35:45.816Z
+updated_at: 2026-09-12T16:04:16.110Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
@@ -74,4 +74,8 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-Current 2026-09-12 state: PR150 and PR151 are merged. PR148 is open, mergeable, non-draft, and fully hosted-green at 989fd544; think-t1ml owns its final disposition and stack order. PR149 is open, mergeable, non-draft, correctly stacked on PR148, and fully hosted-green at 4d00ab68; its repeated full local checkpoint remains in progress under think-o96l/think-5rh4. BC329 is the next direct-bound lane. Its source-bound runner is committed at 5095241d with 156 passed/3 platform skips, Ruff and BasedPyright clean, edit gate green, and exact manifest replay; no BC329 target has run. think-ygiz owns the stacked progress PR, think-cur4 and think-yiay own final runner hardening, think-122i owns target-free calibration/admission, think-zd1b owns final docs, think-17qa owns preregistration and the sole scientific run, and think-iexs owns cross-record closeout. X028 preserves the wider strategy portfolio without treating finite negatives as method-wide judgments.
+Current controller, September 12: PR #148 is the completed T-026/explainer milestone at `989fd544`, open and green; PR #149 is the page/PDF layer at `4d00ab68`, open, mergeable, hosted-green, and now also passes the unrestricted 3,990.24-second full checkpoint; draft PR #156 is the BC329/evidence layer at `f1e397cd`, with its new hosted checks running after the reviewed documentation correction milestone. All three fetched bases are exact ancestors, so no upstream merge is presently required.
+
+The BC329 target remains unregistered and unrun. The active gate is the second calibration correction: CAL-1 and CAL-7 closed; CAL-2 through CAL-6 remain open; `think-1arg` owns source-distinct rereview; `think-zypf`, profiles `think-vy5i`, admission `think-1mma`, runner integration `think-qw9w`, documentation `think-zd1b`, and target `think-17qa` remain in dependency order. The preflight behaviors are accepted off-branch, with integration and Ruff cleanup under `think-cur4` and `think-yiay`.
+
+The structural lane is separately tracked: first-principles analysis `think-979p`, source-distinct review and durable retention `think-gldo`, complete one-corner BC303 surplus test `think-ms9l`, and adjacent/opposite forced-type pair test `think-cexv`. These tests target two explicit missing routing lemmas and retain local scope. The active 30-minute heartbeat was updated to this state and continues from beads and durable records rather than chat history. No broader method ranking follows from these pending tests.
