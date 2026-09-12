@@ -5,12 +5,12 @@ title: Split the move into a rearrange phase and a correction phase
 kind: feature
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T20:11:01.083Z
-updated_at: 2026-09-12T00:37:51.880Z
+updated_at: 2026-09-12T01:01:31.565Z
 ---
 The owner: the move time is really two times added together -- the physical organisation time, and then the correction time -- and they should be split out properly.
 
@@ -24,10 +24,14 @@ Depends on nothing. Touches `timing`, `schedule`, `continuousTiming`, the three 
 
 ## Notes
 
-CONFIRMED NOT DONE, 2026-09-11. The owner asked again and is right: the page still offers three timings -- dwell, move, settle -- and the move still contains two phases inside it.
+IMPLEMENTED. Four phases on the page: dwell, move, correct, settle.
 
-Their framing is the clearer one and supersedes the title: **four phases, not three.** dwell, then the physical rearrangement, then the correction, then settle. What exists today is one `move` with the correction hidden inside it as two fractions -- PHYS.tightenFrom at 0.68 of the move stiffens the spring, and PHYS.blend over the last 12 per cent carries the poses onto their exact targets -- so lengthening the move lengthens the correction with it, which is not what anyone wants and is not visible anywhere in the interface.
+`move` is the free rearrangement and `correct` the landing. The two fractions that used to hide the landing inside the move -- PHYS.tightenFrom at 0.68 and PHYS.blend over the last 0.12 -- are now DERIVED from the two timings' ratio rather than fixed, so lengthening the search no longer lengthens the landing with it. The blend keeps the share of the correction it always had, three eighths.
 
-What to build: `timing` becomes {dwell, rearrange, correct, settle}; the three inputs on the page become four; the tightening and the blend become the whole of `correct` rather than fractions of `move`. `continuousTiming` and the beat readout follow. grade_motion can then price the search and the landing separately, which is the question actually being asked of the physics.
+Defaults keep today's beat exactly: 0.55 + 0.25 is the 0.8 the move was, at a ratio of 0.6875 against the 0.68 that was written down. Measured: the default duration is 2.4 s, unchanged, and each of the four controls moves it -- correct 0.25 to 1.2 takes it to 3.35, move 0.55 to 2.0 takes it to 4.8.
 
-Also queued behind it, from the same conversation: think-iqvm, making the physics optional so a step can be animated directly between two records with no simulation at all. The two are the same seam -- if the move has named phases, 'no physics' is the rearrangement phase being the tween.
+The correction's shape is in the trajectory cache key, because it is in the simulation: a run given more landing time is a different run, not the same one played differently.
+
+What this now makes possible, and is the reason it was worth doing: grade_motion can price the search and the landing separately, which is the question actually being asked of the physics -- is it the search that is slow or the landing. Still to do.
+
+Next on the same seam: think-iqvm, making the physics optional. With named phases, 'no physics' is the rearrangement being a tween.
