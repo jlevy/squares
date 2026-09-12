@@ -5,7 +5,7 @@ title: Replace the private selection-review script with a maintained exact check
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol implementation; root review
 labels:
@@ -17,10 +17,10 @@ dependencies:
     target: is-01m2b4yg9c8wm02dr21yhzn6vt
 parent_id: is-01m2b4yg9c8wm02dr21yhzn6vt
 created_at: 2026-09-12T16:15:30.873Z
-updated_at: 2026-09-12T16:16:53.412Z
+updated_at: 2026-09-12T16:36:01.278Z
 ---
 Move the exact arithmetic and finite-enumeration checks from /private/tmp/n11-selection-theorem-review-checks.py into a maintained repository entry point with focused regression coverage. Preserve the 256 availability profiles, 16 maximal products, D4 and fixed-wall orbit counts, 80 incidence count, 81 four-parent configurations, label sets, containment and separation margins, distant-wall comparison, and rational controls. Make the durable source-distinct review cite the maintained checker and a reproducible target-free command. Do not turn these finite controls into a global selection theorem or run a scientific target.
 
 ## Notes
 
-Sol is converting the accepted private exact checker into a maintained repository entry point with regression coverage and durable review citations. This remains target-free and does not change the selection-theorem status.
+Maintained checker and unmarked regression are now committed on PR #156 at `39714308`. The checker replays 256 profiles, 16 maximal products, the 3/10 orbit split, 80 incidences, all 81 four-parent controls, and exact rational margins. Focused checker and test pass; delegated edit tier passed all 45 selected steps. Awaiting hosted CI on the published head before closure.
