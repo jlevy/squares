@@ -11,11 +11,16 @@ no external script, stylesheet or font, so it works from any static host. This t
 to put it where the Pages artifact will find it, to check that self-containment rather than
 assume it, and to declare its inputs so the workflow rebuilds when they move.
 
-**It builds from the retained spike**, and that is a deliberate, temporary arrangement. The
-spike is excluded from the lint floor and is not project code; the video plan's later phases
-re-implement it under project conventions. Publishing it now is worth more than waiting for
-that, provided the record says plainly which it is -- so the page carries a banner naming
-itself a prototype.
+**It builds from the retained spike tree**, which is deliberate and temporary -- though
+less of one than it was. The page's own code meets the project's floors now: its JavaScript
+and CSS are at zero under Biome, its script type-checks, and its checkers run in
+`packing-validate`. What has not happened is the move; the generator and the instruments
+still sit under `atlas/known-best/video/spikes/`, which the video plan's Phase 6E finishes.
+
+So the page no longer carries a banner calling itself unchecked, because it is checked. It
+carries one quiet line saying what a reader does have to know -- that the animation model is
+still moving, so a number it draws is not evidence -- and that line goes when the model
+settles, which is a different question from where the code lives.
 
 Usage, from `packing/`:
     uv run --frozen python -m devtools.build_workbench_site
@@ -48,13 +53,34 @@ RENDER_INPUTS = (
 list, and `test_the_pages_filter_covers_every_render_input` is what says so -- which is what
 stops a published page going stale when the data under it moves."""
 
-BANNER = (
-    '<div style="background:#fff8e1;border-bottom:1px solid #e8d9a0;padding:.55rem 1rem;'
-    'font:13px/1.4 system-ui;color:#5a4a1a">'
-    "<strong>Working page.</strong> The animation model this workbench draws with is still "
-    "moving, so a number it shows is not evidence. "
-    '<a href="/" style="color:#5a4a1a">The explainer</a> is the published work.</div>'
-)
+NOTE = """<style>
+#site-note {
+  position: fixed; right: 12px; bottom: 8px; z-index: 30;
+  font-family: var(--sans); font-size: 11px; line-height: 1.4;
+  color: var(--quiet); text-align: right; pointer-events: none;
+}
+#site-note a { color: inherit; text-decoration: underline; pointer-events: auto; }
+body.capture #site-note { display: none; }
+</style>
+<div id="site-note">
+The animation model is still moving, so a number here is not evidence
+&mdash; <a href="/">the explainer</a> is the published work.
+</div>"""
+"""The one thing a reader of the published page has to know, said once and quietly.
+
+It is **injected here rather than written into the template** because it is a property of
+the published page and not of the page: the link goes to `/`, which exists on Pages and
+nowhere else, and a local build has nothing for it to point at.
+
+Where it sits and how it looks are both deliberate, and both are corrections. It was a
+full-width strip in warning yellow at the top of `<body>` -- which put it outside
+`#viewport`, the absolutely-positioned element that covers the whole window, so it showed
+through against the chrome rather than sitting above the page. Now it is fixed to the
+bottom right in the page's own `--quiet` grey at 11px, in the corner the timing readout
+does not use, and `pointer-events` stay off everywhere but the link so it cannot swallow a
+drag. `body.capture` hides it, because a note about the page does not belong in a frame of
+the video.
+"""
 
 EXTERNAL = re.compile(
     r"""(?:<script[^>]+\bsrc=|<link[^>]+\bhref=|@import\b|url\((?!['"]?data:))""",
@@ -93,9 +119,11 @@ def build(out: Path) -> str:
         )
         raise ValueError(msg)
 
-    marked = page.replace("<body>", f"<body>{BANNER}", 1)
-    if BANNER not in marked:
-        msg = "could not place the prototype banner; the page has no <body> to mark"
+    # At the end of the body, so it is inside `#viewport`'s stacking context and after the
+    # stylesheet that defines the custom properties it borrows.
+    marked = page.replace("</body>", f"{NOTE}</body>", 1)
+    if NOTE not in marked:
+        msg = "could not place the page's note; the page has no </body> to close"
         raise ValueError(msg)
 
     out.mkdir(parents=True, exist_ok=True)
