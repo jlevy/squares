@@ -119,6 +119,9 @@ class Trial:
     record: float
     closed: float
     overlap: float
+    resolved_side: float
+    resolved_closed: float
+    resolved_overlap: float
     steps: int
     ms: float
     centre: float
@@ -133,6 +136,9 @@ class Trial:
             "excess": self.excess,
             "closed": self.closed,
             "overlap": self.overlap,
+            "resolved_side": self.resolved_side,
+            "resolved_closed": self.resolved_closed,
+            "resolved_overlap": self.resolved_overlap,
             "side": self.side,
             "record": self.record,
             "steps": self.steps,
@@ -212,6 +218,73 @@ TRIAL_JS = """
     }
   }
 
+  // **The resolution phase: what container does this arrangement actually need?**
+  //
+  // A run that ends overlapping has not found a container, it has found a number. Pushing
+  // the squares apart until no pair overlaps -- translation only, angles held, each pair
+  // separated along its own minimum-penetration axis -- turns that number into one about a
+  // packing. The box that fits the separated arrangement is the honest answer.
+  //
+  // This is a projection rather than a search: it never improves an arrangement, it only
+  // stops it cheating. `resolvedSide` is therefore always at least the raw side, and the
+  // difference between them is how much of the raw result was overlap.
+  const rp = poses.map((q) => [q[0], q[1], q[2]]);
+  let unresolved = true;
+  let sweeps = 0;
+  for (; sweeps < 400 && unresolved; sweeps++) {
+    unresolved = false;
+    const cs = rp.map(cornersOf);
+    for (let i = 0; i < N; i++) {
+      for (let j = i + 1; j < N; j++) {
+        if (Math.hypot(rp[i][0] - rp[j][0], rp[i][1] - rp[j][1]) > 1.4143) { continue; }
+        let depth = Infinity, best = null, sign = 1;
+        for (const ax of [...axesOf(rp[i][2]), ...axesOf(rp[j][2])]) {
+          const [al, ah] = spanOn(cs[i], ax);
+          const [bl, bh] = spanOn(cs[j], ax);
+          const over = Math.min(ah, bh) - Math.max(al, bl);
+          if (over <= 0) { depth = 0; break; }
+          if (over < depth) {
+            depth = over;
+            best = ax;
+            sign = ah - bh > 0 ? 1 : -1;
+          }
+        }
+        if (depth > 1e-9 && best !== null) {
+          unresolved = true;
+          const push = (depth / 2 + 1e-9) * sign;
+          rp[i][0] += best[0] * push; rp[i][1] += best[1] * push;
+          rp[j][0] -= best[0] * push; rp[j][1] -= best[1] * push;
+          cs[i] = cornersOf(rp[i]); cs[j] = cornersOf(rp[j]);
+        }
+      }
+    }
+  }
+  let rx0 = Infinity, rx1 = -Infinity, ry0 = Infinity, ry1 = -Infinity;
+  for (const q of rp) {
+    for (const c of cornersOf(q)) {
+      if (c[0] < rx0) { rx0 = c[0]; }
+      if (c[0] > rx1) { rx1 = c[0]; }
+      if (c[1] < ry0) { ry0 = c[1]; }
+      if (c[1] > ry1) { ry1 = c[1]; }
+    }
+  }
+  const resolvedSide = Math.max(rx1 - rx0, ry1 - ry0);
+  let resolvedOverlap = 0;
+  const rcs = rp.map(cornersOf);
+  for (let i = 0; i < N; i++) {
+    for (let j = i + 1; j < N; j++) {
+      let depth = Infinity;
+      for (const ax of [...axesOf(rp[i][2]), ...axesOf(rp[j][2])]) {
+        const [al, ah] = spanOn(rcs[i], ax);
+        const [bl, bh] = spanOn(rcs[j], ax);
+        const over = Math.min(ah, bh) - Math.max(al, bl);
+        if (over <= 0) { depth = 0; break; }
+        if (over < depth) { depth = over; }
+      }
+      if (depth > resolvedOverlap) { resolvedOverlap = depth; }
+    }
+  }
+
   return {
     excess: r.miss.excess,
     side: r.miss.side,
@@ -219,6 +292,9 @@ TRIAL_JS = """
     centre: r.miss.centre,
     angle: r.miss.angle,
     overlap: deepest,
+    resolvedSide,
+    resolvedOverlap,
+    sweeps,
     steps: r.steps,
     ms: performance.now() - started,
   };
@@ -317,6 +393,11 @@ def run_trials(run: Run) -> list[Trial]:
                         excess=got["excess"],
                         closed=gap_closed(n, got["record"], got["excess"]),
                         overlap=got["overlap"],
+                        resolved_side=got["resolvedSide"],
+                        resolved_closed=gap_closed(
+                            n, got["record"], (got["resolvedSide"] / got["record"] - 1) * 100
+                        ),
+                        resolved_overlap=got["resolvedOverlap"],
                         side=got["side"],
                         record=got["record"],
                         steps=got["steps"],
@@ -345,7 +426,7 @@ def valid(trials: list[Trial]) -> list[Trial]:
     found a smaller number. Refused here rather than annotated, because an invalid run is not
     a poor result -- it is not a result.
     """
-    return [t for t in trials if not (t.overlap > VALID_OVERLAP)]
+    return [t for t in trials if not (t.resolved_overlap > VALID_OVERLAP)]
 
 
 def report(trials: list[Trial]) -> int:
@@ -356,7 +437,7 @@ def report(trials: list[Trial]) -> int:
     kept = valid(trials)
     refused = len(trials) - len(kept)
     if refused:
-        worst = max(t.overlap for t in trials if t.overlap > VALID_OVERLAP)
+        worst = max(t.resolved_overlap for t in trials if t.resolved_overlap > VALID_OVERLAP)
         print(
             f"\n  REFUSED {refused} of {len(trials)} trials as invalid: squares overlapping by "
             f"up to {worst:.4f}\n  of a unit side. They are not poor results, they are not "
@@ -376,12 +457,15 @@ def report(trials: list[Trial]) -> int:
     print("  " + "-" * (len(head) + 44))
     for n in sorted(by_n):
         rows = by_n[n]
-        excess = sorted(t.excess for t in rows)
+        # The RESOLVED excess, so every column in this table is about the same arrangement.
+        # Scoring the tolerances on the raw side while scoring `closed` on the resolved one
+        # would put two different arrangements in one row.
+        excess = sorted((t.resolved_side / t.record - 1) * 100 for t in rows)
         rates = []
         for name in names:
             hits = sum(1 for e in excess if e <= TOLERANCES[name])
             rates.append(f"{hits / len(excess):>6.1%} ")
-        closed = statistics.median(t.closed for t in rows)
+        closed = statistics.median(t.resolved_closed for t in rows)
         print(
             f"  {n:>3}  {len(rows):>6}  "
             + "  ".join(rates)
@@ -401,11 +485,11 @@ def report(trials: list[Trial]) -> int:
             if k > len(ordered):
                 line += f"{'-':>12}"
                 continue
-            line += f"{max(t.closed for t in ordered[:k]):>12.3f}"
+            line += f"{max(t.resolved_closed for t in ordered[:k]):>12.3f}"
         print(line)
     print("  (closed at the best trial of the first k seeds)")
 
-    every = sorted(t.closed for t in trials)
+    every = sorted(t.resolved_closed for t in trials)
     print(
         "\n  closed is the fraction of the record-to-grid gap the run closed: 1 reached the "
         "record,\n  0 got no further than ceil(sqrt(n)). It is the only column that compares "
@@ -503,11 +587,13 @@ def sweep(args: argparse.Namespace, seeds: list[int], stamp: str) -> int:
     for cell, n, rows in table:
         ordered = sorted(rows, key=lambda t: t.seed)
         line = "  " + "".join(f"{cell[k]:>9}" for k in keys)
-        line += f"{n:>5}{len(rows):>8}{statistics.median(t.closed for t in rows):>9.3f}"
+        line += (
+            f"{n:>5}{len(rows):>8}{statistics.median(t.resolved_closed for t in rows):>9.3f}"
+        )
         for k in BEST_OF:
             if k > len(seeds):
                 continue
-            line += f"{max(t.closed for t in ordered[:k]):>11.3f}"
+            line += f"{max(t.resolved_closed for t in ordered[:k]):>11.3f}"
         print(line)
     print("\n  median and best-of-k are both `closed`: 1 is the record, 0 the grid.")
     return 0
@@ -532,6 +618,9 @@ def _trial_of(row: dict[str, Any]) -> Trial:
         record=record,
         closed=float(row["closed"]) if "closed" in row else gap_closed(n, record, excess),
         overlap=float(row.get("overlap", float("nan"))),
+        resolved_side=float(row.get("resolved_side", float("nan"))),
+        resolved_closed=float(row.get("resolved_closed", float("nan"))),
+        resolved_overlap=float(row.get("resolved_overlap", float("nan"))),
         steps=int(row["steps"]),
         ms=float(row["ms"]),
         centre=float(row["centre"]),
