@@ -74,6 +74,24 @@ OUTCOME = "closed"
 #: the ladder is what shows whether more budget is still buying anything.
 BEST_OF = (1, 10, 100, 1000, 10_000)
 
+#: How deep two squares may overlap in the final arrangement before the trial is INVALID
+#: rather than merely poor.
+#:
+#: This is the guard, and it is the reason the first sweep's headline was wrong. Thirty cells
+#: reported a best-of-k `closed` above 1 -- a container BELOW the known-best side, which is
+#: either a new record or a run whose squares are inside each other. It is the second: the
+#: side is the bounding box of the final poses, and a box can be made arbitrarily small by
+#: letting the squares intersect. A search that is allowed to cheat reports cheating as
+#: progress.
+#:
+#: **The number is measured, not chosen.** Run the same check over the SNAPPED trajectory,
+#: which ends on the record's own poses by construction, and the deepest pair overlap is
+#: 5.5e-7 at n = 5, 1.0e-6 at n = 11 and 7.3e-7 at n = 17 -- the float noise the stored poses
+#: carry. A blind run at the same n scores 0.091, 0.035 and 0.095. Two orders of magnitude
+#: separate the noise from the smallest real overlap, so 1e-5 refuses overlaps without
+#: refusing arithmetic, and the control is what says so rather than a guess about precision.
+VALID_OVERLAP = 1e-5
+
 
 def gap_closed(n: int, record: float, excess: float) -> float:
     """How much of the record-to-grid gap a run closed: 1 reached the record, 0 the grid.
@@ -100,6 +118,7 @@ class Trial:
     side: float
     record: float
     closed: float
+    overlap: float
     steps: int
     ms: float
     centre: float
@@ -113,6 +132,7 @@ class Trial:
             "style": self.style,
             "excess": self.excess,
             "closed": self.closed,
+            "overlap": self.overlap,
             "side": self.side,
             "record": self.record,
             "steps": self.steps,
@@ -136,12 +156,69 @@ TRIAL_JS = """
   if (index < 0) { return { error: `the page carries no pair into n = ${o.n}` }; }
   const started = performance.now();
   const r = A.physics(index, o.style, "blind");
+
+  // **The validity check, written here rather than read off the simulation.**
+  //
+  // The deepest overlap between any two squares in the FINAL arrangement, by the separating
+  // axis theorem: two convex polygons are disjoint exactly when some edge normal separates
+  // them, and for squares the four candidate axes are the two edge directions of each. The
+  // depth is the smallest overlap across those axes, and it is zero the moment one separates.
+  //
+  // It is computed from the poses the run ended on, with none of the page's own bookkeeping,
+  // because the thing being checked is whether the page's answer is a packing at all. The
+  // simulation reports `maxPenetration` over the whole trajectory, which says how deep the
+  // squares went at any instant and nothing about where they stopped.
+  const poses = r.final;
+  const N = poses.length;
+  const axesOf = (a) => {
+    const t = (a * Math.PI) / 180;
+    return [[Math.cos(t), Math.sin(t)], [-Math.sin(t), Math.cos(t)]];
+  };
+  const cornersOf = (p) => {
+    const t = (p[2] * Math.PI) / 180;
+    const c = Math.cos(t) / 2, s = Math.sin(t) / 2;
+    return [
+      [p[0] + c - s, p[1] + s + c],
+      [p[0] - c - s, p[1] - s + c],
+      [p[0] - c + s, p[1] - s - c],
+      [p[0] + c + s, p[1] + s - c],
+    ];
+  };
+  const spanOn = (pts, ax) => {
+    let lo = Infinity, hi = -Infinity;
+    for (const q of pts) {
+      const v = q[0] * ax[0] + q[1] * ax[1];
+      if (v < lo) { lo = v; }
+      if (v > hi) { hi = v; }
+    }
+    return [lo, hi];
+  };
+  let deepest = 0;
+  const corners = poses.map(cornersOf);
+  for (let i = 0; i < N; i++) {
+    for (let j = i + 1; j < N; j++) {
+      if (Math.hypot(poses[i][0] - poses[j][0], poses[i][1] - poses[j][1]) > 1.4143) {
+        continue;
+      }
+      let depth = Infinity;
+      for (const ax of [...axesOf(poses[i][2]), ...axesOf(poses[j][2])]) {
+        const [al, ah] = spanOn(corners[i], ax);
+        const [bl, bh] = spanOn(corners[j], ax);
+        const over = Math.min(ah, bh) - Math.max(al, bl);
+        if (over <= 0) { depth = 0; break; }
+        if (over < depth) { depth = over; }
+      }
+      if (depth > deepest) { deepest = depth; }
+    }
+  }
+
   return {
     excess: r.miss.excess,
     side: r.miss.side,
     record: r.miss.record,
     centre: r.miss.centre,
     angle: r.miss.angle,
+    overlap: deepest,
     steps: r.steps,
     ms: performance.now() - started,
   };
@@ -239,6 +316,7 @@ def run_trials(run: Run) -> list[Trial]:
                         style=run.style,
                         excess=got["excess"],
                         closed=gap_closed(n, got["record"], got["excess"]),
+                        overlap=got["overlap"],
                         side=got["side"],
                         record=got["record"],
                         steps=got["steps"],
@@ -260,11 +338,34 @@ def run_trials(run: Run) -> list[Trial]:
     return trials
 
 
+def valid(trials: list[Trial]) -> list[Trial]:
+    """The trials whose final arrangement is a packing.
+
+    A run whose squares end up inside each other has not found a smaller container, it has
+    found a smaller number. Refused here rather than annotated, because an invalid run is not
+    a poor result -- it is not a result.
+    """
+    return [t for t in trials if not (t.overlap > VALID_OVERLAP)]
+
+
 def report(trials: list[Trial]) -> int:
     """Per n: the rate at each tolerance, the shape of the failures, and the cost."""
     if not trials:
         print("no trials")
         return 1
+    kept = valid(trials)
+    refused = len(trials) - len(kept)
+    if refused:
+        worst = max(t.overlap for t in trials if t.overlap > VALID_OVERLAP)
+        print(
+            f"\n  REFUSED {refused} of {len(trials)} trials as invalid: squares overlapping by "
+            f"up to {worst:.4f}\n  of a unit side. They are not poor results, they are not "
+            "results."
+        )
+    if not kept:
+        print("  every trial was invalid")
+        return 1
+    trials = kept
     by_n: dict[int, list[Trial]] = {}
     for t in trials:
         by_n.setdefault(t.n, []).append(t)
@@ -430,6 +531,7 @@ def _trial_of(row: dict[str, Any]) -> Trial:
         side=float(row["side"]),
         record=record,
         closed=float(row["closed"]) if "closed" in row else gap_closed(n, record, excess),
+        overlap=float(row.get("overlap", float("nan"))),
         steps=int(row["steps"]),
         ms=float(row["ms"]),
         centre=float(row["centre"]),
