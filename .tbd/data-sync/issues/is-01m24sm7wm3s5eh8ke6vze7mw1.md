@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: in_progress
 priority: 1
-version: 37
+version: 38
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -30,8 +30,9 @@ child_order_hints:
   - is-01m2agbzb01ez7q1cxs1efbmen
   - is-01m2axbxf0xz00ezc32q4mesn2
   - is-01m2axbxvjf2wcvzxzznhqkf59
+  - is-01m2az2fkag8qa7v9vexgvrq4q
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-12T13:37:19.038Z
+updated_at: 2026-09-12T14:06:50.473Z
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets

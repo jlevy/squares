@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m2anzgc2aqn6vzx29ps3rpn2
-title: Publish BC329 admission work as a stacked progress PR
+title: Publish the BC329 baseline runner as a stacked draft PR
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root publication lane
 labels:
@@ -14,12 +14,14 @@ labels:
 dependencies:
   - type: blocks
     target: is-01m2axbxf0xz00ezc32q4mesn2
+  - type: blocks
+    target: is-01m260z2959dmcmn61pn2z7jsk
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T11:27:55.777Z
-updated_at: 2026-09-12T13:48:55.369Z
+updated_at: 2026-09-12T14:13:42.071Z
 ---
-Commit the admitted runner and scheduler repairs on codex/n11-bc329-runner-publication-stack, push the exact head, and open a clean draft PR stacked on PR #149. Lead the PR body with measured implementation, validation, and agent costs; state that no BC329 scientific target has run; enumerate the open calibration and documentation gates; verify the base/head relationship and hosted CI. Update the PR at each later calibration, admission, or scientific milestone without conflating work completed on PRs #148 and #149.
+Commit the admitted baseline runner on codex/n11-bc329-runner-publication-stack, push the exact head, and open a clean draft PR stacked on PR #149. Lead the PR body with measured implementation, validation, and agent costs; state that no BC329 scientific target has run; enumerate every remaining hardening, calibration, admission, documentation, and scientific gate; and verify the base/head relationship and hosted CI. Later scientific documentation, accounting, and final PR-body reconciliation belong to think-zd1b, think-92jm, and think-iexs.
 
 ## Notes
 
-Runner implementation is committed at 5095241d. Its first exact-head pre-push passed 46/74 steps with 5,156 tests in 1,096.64s. The merge-upstream workflow then merged current PR149 head 4d00ab68 without conflicts, producing 5fa83cc7; a clean 23-path source manifest and the 45-step edit gate pass on that merge head. The exact merged-head pre-push is running before push and draft PR creation. The formatted PR body is staged at /private/tmp/bc329-pr-body.md. No BC329 target has run.
+Runner implementation is committed at 5095241d. Its first exact-head pre-push passed 46/74 steps with 5,156 tests in 1,096.64s. Current PR149 head 4d00ab68 merged without conflict as 5fa83cc7; a clean 23-path source manifest and 45-step edit gate pass. The first merged-head pre-push ran 1,118.21s with 5,155 tests passing but one copied-tree control unable to find uv because the invocation omitted uv from child PATH. Focused diagnosis also exposed the sandbox-unwritable default uv cache; the control passes in 5.18s with project PATH plus writable UV_CACHE_DIR. Corrected merged-head pre-push is running as session 98622. Draft PR body records all rejected and accepted costs. No BC329 target has run.

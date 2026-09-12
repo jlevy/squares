@@ -5,7 +5,8 @@ title: Reconcile PR149 onto the current v0.4.0 explainer stack and restore CI
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration lane
 labels: []
 dependencies: []
@@ -17,7 +18,7 @@ child_order_hints:
   - is-01m2ae6naj55e8wkrxbc1402x8
   - is-01m2ae6nqy69685v8r37nvd7ya
 created_at: 2026-09-10T23:02:51.417Z
-updated_at: 2026-09-12T09:12:02.045Z
+updated_at: 2026-09-12T14:13:40.169Z
 ---
 PR #149's page-render diagnostic work is currently red only because it predates the session-099 terminal repair in PR #150, and it also modifies the same explainer/PDF surface now advanced by PR #148. Reconcile it onto the current v0.4.0 explainer head, resolve the page-count and generated-artifact context rather than carrying a 17-page assumption, run focused PDF/page tests and the required pre-push gate, push the author branch, retarget it as a clean stack layer above PR #148, update its cost/validation/body, and require all hosted checks to pass. Preserve D-490's measured host-specific evidence and do not claim the underlying nondeterminism cause is solved.
 

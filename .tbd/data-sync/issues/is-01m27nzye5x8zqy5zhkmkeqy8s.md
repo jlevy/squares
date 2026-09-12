@@ -5,12 +5,13 @@ title: Correct PR149 PDF diagnostic attribution and evidence scope
 kind: bug
 status: closed
 priority: 1
-version: 3
+version: 4
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m26rygs7f0s76v147x0px4cd
 created_at: 2026-09-11T07:30:26.884Z
-updated_at: 2026-09-11T07:38:02.808Z
+updated_at: 2026-09-12T14:13:40.644Z
 closed_at: 2026-09-11T07:38:02.807Z
 close_reason: Made PDF difference attribution span-aware with cross-reference, trailer, and inter-object controls; neutralized runtime, D-490, synopsis, module, and prepared PR-body claims; retained host-qualified 211351-byte and historical 17/18-page evidence; updated current cost to 22 pages; 18 focused tests, Ruff, BasedPyright, render_defects check, synopsis check, and diff check all pass.
 resolution: null
