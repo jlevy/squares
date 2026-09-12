@@ -2,7 +2,9 @@
   "use strict";
 
   const editor = globalThis.MotionLabEditor;
-  if (!editor) throw new Error("Motion Lab editor model is unavailable");
+  if (!editor) {
+    throw new Error("Motion Lab editor model is unavailable");
+  }
   const byId = (id) => document.getElementById(id);
   const svgNamespace = "http://www.w3.org/2000/svg";
   const stageSize = 620;
@@ -19,19 +21,22 @@
   const probeLayer = byId("probe-layer");
   const labelLayer = byId("free-label-layer");
   const liveRegion = byId("live-region");
-  const scenarioSelect = byId("scenario-select");
-  const nInput = byId("n-input");
-  const sideInput = byId("side-input");
-  const seedInput = byId("seed-input");
-  const snappingToggle = byId("snapping-toggle");
-  const rotateLeftButton = byId("rotate-left-button");
-  const rotateRightButton = byId("rotate-right-button");
-  const runButton = byId("run-button");
-  const downloadButton = byId("download-button");
+  // `getElementById` is typed to the generic element, so the handles whose control
+  // interface this file uses -- `value`, `max`, `checked`, `disabled` -- name the tag the
+  // shell renders for them. Each matches the markup in `render_general_motion_lab.py`.
+  const scenarioSelect = /** @type {HTMLSelectElement} */ (byId("scenario-select"));
+  const nInput = /** @type {HTMLInputElement} */ (byId("n-input"));
+  const sideInput = /** @type {HTMLInputElement} */ (byId("side-input"));
+  const seedInput = /** @type {HTMLInputElement} */ (byId("seed-input"));
+  const snappingToggle = /** @type {HTMLInputElement} */ (byId("snapping-toggle"));
+  const rotateLeftButton = /** @type {HTMLButtonElement} */ (byId("rotate-left-button"));
+  const rotateRightButton = /** @type {HTMLButtonElement} */ (byId("rotate-right-button"));
+  const runButton = /** @type {HTMLButtonElement} */ (byId("run-button"));
+  const downloadButton = /** @type {HTMLButtonElement} */ (byId("download-button"));
   const timelinePanel = byId("timeline-panel");
-  const timelineInput = byId("timeline-input");
+  const timelineInput = /** @type {HTMLInputElement} */ (byId("timeline-input"));
   const timelineList = byId("timeline-list");
-  const playTraceButton = byId("play-trace-button");
+  const playTraceButton = /** @type {HTMLButtonElement} */ (byId("play-trace-button"));
 
   let scenario = JSON.parse(byId("free-scenario").textContent);
   let baseline = editor.stateFromScenario(scenario);
@@ -91,18 +96,18 @@
   }
 
   function groupMap(layer) {
-    return new Map([...layer.children].map((element) => [
-      Number(element.getAttribute("data-square-id")),
-      element,
-    ]));
+    return new Map(
+      [...layer.children].map((element) => [
+        Number(element.getAttribute("data-square-id")),
+        element,
+      ]),
+    );
   }
 
-  function syncSquareLayer(layer, squares, {probe = false, diagnostics = null} = {}) {
+  function syncSquareLayer(layer, squares, { probe = false, diagnostics = null } = {}) {
     const existing = groupMap(layer);
     const retained = new Set();
-    const selectedGroup = selectedId === null || !editing
-      ? []
-      : editor.groupFor(state, selectedId);
+    const selectedGroup = selectedId === null || !editing ? [] : editor.groupFor(state, selectedId);
     for (const square of squares) {
       let glyph = existing.get(square.square_id);
       if (!glyph) {
@@ -119,7 +124,7 @@
       retained.add(square.square_id);
       glyph.setAttribute(
         "transform",
-        `translate(${square.x} ${square.y}) rotate(${square.theta * 180 / Math.PI})`,
+        `translate(${square.x} ${square.y}) rotate(${(square.theta * 180) / Math.PI})`,
       );
       const rectangle = glyph.firstElementChild;
       if (probe) {
@@ -131,10 +136,17 @@
         glyph.removeAttribute("aria-label");
       } else {
         const classes = ["editor-square"];
-        if (editing && selectedId === square.square_id) classes.push("selected");
-        else if (editing && selectedGroup.includes(square.square_id)) classes.push("group-member");
-        if (diagnostics?.overlapIds.has(square.square_id)) classes.push("overlap");
-        if (diagnostics?.outsideIds.has(square.square_id)) classes.push("outside");
+        if (editing && selectedId === square.square_id) {
+          classes.push("selected");
+        } else if (editing && selectedGroup.includes(square.square_id)) {
+          classes.push("group-member");
+        }
+        if (diagnostics?.overlapIds.has(square.square_id)) {
+          classes.push("overlap");
+        }
+        if (diagnostics?.outsideIds.has(square.square_id)) {
+          classes.push("outside");
+        }
         rectangle.setAttribute("class", classes.join(" "));
         rectangle.setAttribute("style", `fill: ${palette(square.palette_index)}`);
         if (editing) {
@@ -152,15 +164,19 @@
       }
     }
     for (const [squareId, glyph] of existing) {
-      if (!retained.has(squareId)) glyph.remove();
+      if (!retained.has(squareId)) {
+        glyph.remove();
+      }
     }
   }
 
   function syncLabels(squares, side) {
-    const existing = new Map([...labelLayer.children].map((element) => [
-      Number(element.getAttribute("data-square-id")),
-      element,
-    ]));
+    const existing = new Map(
+      [...labelLayer.children].map((element) => [
+        Number(element.getAttribute("data-square-id")),
+        element,
+      ]),
+    );
     const retained = new Set();
     const scale = scaleFor(side);
     for (const square of squares) {
@@ -173,11 +189,13 @@
         labelLayer.append(label);
       }
       retained.add(square.square_id);
-      label.setAttribute("x", plotLeft + scale * square.x);
-      label.setAttribute("y", plotBottom - scale * square.y + 4);
+      label.setAttribute("x", String(plotLeft + scale * square.x));
+      label.setAttribute("y", String(plotBottom - scale * square.y + 4));
     }
     for (const [squareId, label] of existing) {
-      if (!retained.has(squareId)) label.remove();
+      if (!retained.has(squareId)) {
+        label.remove();
+      }
     }
   }
 
@@ -200,7 +218,9 @@
     if (diagnostics.result.outside_square_ids.length) {
       issues.push(`${diagnostics.result.outside_square_ids.length} square(s) outside`);
     }
-    byId("diagnostics-value").textContent = issues.length ? issues.join("; ") : "No visible defects";
+    byId("diagnostics-value").textContent = issues.length
+      ? issues.join("; ")
+      : "No visible defects";
     if (selectedId === null) {
       byId("selection-value").textContent = "No chunk selected";
     } else {
@@ -214,7 +234,7 @@
   function setPhase(phase, outcome = null) {
     stage.setAttribute("class", `phase-${phase}`);
     stage.dataset.probeOutcome = outcome || "";
-    const presentation = editor.phasePresentation({phase, outcome});
+    const presentation = editor.phasePresentation({ phase, outcome });
     const badge = byId("phase-badge");
     badge.textContent = presentation.label;
     badge.setAttribute("class", `phase-badge phase-${presentation.variant}`);
@@ -227,8 +247,8 @@
     const frame = frameFromState(state);
     setPlane(frame.container_side);
     setPhase("setup");
-    syncSquareLayer(acceptedLayer, frame.squares, {diagnostics});
-    syncSquareLayer(probeLayer, [], {probe: true});
+    syncSquareLayer(acceptedLayer, frame.squares, { diagnostics });
+    syncSquareLayer(probeLayer, [], { probe: true });
     syncLabels(frame.squares, frame.container_side);
     displayedFrame = frame;
     byId("run-readout-title").textContent = "Setup";
@@ -241,14 +261,16 @@
 
   function pointInMath(event, side = state.side) {
     const bounds = stage.getBoundingClientRect();
-    const screenX = (event.clientX - bounds.left) * stageSize / bounds.width;
-    const screenY = (event.clientY - bounds.top) * stageSize / bounds.height;
+    const screenX = ((event.clientX - bounds.left) * stageSize) / bounds.width;
+    const screenY = ((event.clientY - bounds.top) * stageSize) / bounds.height;
     const scale = scaleFor(side);
-    return {x: (screenX - plotLeft) / scale, y: (plotBottom - screenY) / scale};
+    return { x: (screenX - plotLeft) / scale, y: (plotBottom - screenY) / scale };
   }
 
   function squareTarget(event) {
-    if (!(event.target instanceof Element)) return null;
+    if (!(event.target instanceof Element)) {
+      return null;
+    }
     const glyph = event.target.closest("[data-square-id]");
     return glyph ? Number(glyph.getAttribute("data-square-id")) : null;
   }
@@ -263,9 +285,13 @@
   }
 
   stage.addEventListener("pointerdown", (event) => {
-    if (!editing) return;
+    if (!editing) {
+      return;
+    }
     const squareId = squareTarget(event);
-    if (squareId === null) return;
+    if (squareId === null) {
+      return;
+    }
     selectedId = squareId;
     const start = pointInMath(event);
     const pivot = selectedPivot(state, squareId);
@@ -285,7 +311,9 @@
   });
 
   stage.addEventListener("pointermove", (event) => {
-    if (!drag || drag.pointerId !== event.pointerId) return;
+    if (!drag || drag.pointerId !== event.pointerId) {
+      return;
+    }
     const point = pointInMath(event, drag.baseline.side);
     const distance = Math.hypot(point.x - drag.start.x, point.y - drag.start.y);
     drag.moved ||= distance > 0.01;
@@ -304,7 +332,9 @@
   });
 
   function finishPointer(event, cancelled) {
-    if (!drag || drag.pointerId !== event.pointerId) return;
+    if (!drag || drag.pointerId !== event.pointerId) {
+      return;
+    }
     if (cancelled) {
       state = drag.baseline;
       announce("Pointer edit cancelled.");
@@ -316,13 +346,16 @@
       const snapped = editor.applyBestSnap(state, drag.squareId, threshold);
       state = snapped.state;
       if (snapped.result) {
-        const target = snapped.result.target_kind === "wall"
-          ? `${snapped.result.target_id} wall`
-          : `square ${snapped.result.target_id}`;
+        const target =
+          snapped.result.target_kind === "wall"
+            ? `${snapped.result.target_id} wall`
+            : `square ${snapped.result.target_id}`;
         announce(`Temporary chunk snapped to ${target}.`);
       }
     }
-    if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+    if (stage.hasPointerCapture(event.pointerId)) {
+      stage.releasePointerCapture(event.pointerId);
+    }
     drag = null;
     renderSetup();
   }
@@ -331,10 +364,16 @@
   stage.addEventListener("pointercancel", (event) => finishPointer(event, true));
 
   stage.addEventListener("keydown", (event) => {
-    if (!editing) return;
+    if (!editing) {
+      return;
+    }
     const targetId = squareTarget(event);
-    if (targetId !== null) selectedId = targetId;
-    if (selectedId === null) return;
+    if (targetId !== null) {
+      selectedId = targetId;
+    }
+    if (selectedId === null) {
+      return;
+    }
     const amount = event.shiftKey ? 0.2 : 0.05;
     const translations = {
       ArrowLeft: [-amount, 0],
@@ -360,10 +399,12 @@
   });
 
   function rotateSelected(delta) {
-    if (selectedId === null) return;
+    if (selectedId === null) {
+      return;
+    }
     state = editor.rotateGroup(state, selectedId, delta);
     renderSetup();
-    announce(`Selected chunk rotated ${Math.round(Math.abs(delta * 180 / Math.PI))} degrees.`);
+    announce(`Selected chunk rotated ${Math.round(Math.abs((delta * 180) / Math.PI))} degrees.`);
   }
 
   rotateLeftButton.addEventListener("click", () => rotateSelected(-rotationStep));
@@ -375,8 +416,12 @@
   });
 
   function stopPlayback() {
-    if (playbackTimer !== null) window.clearTimeout(playbackTimer);
-    if (tweenFrame !== null) cancelAnimationFrame(tweenFrame);
+    if (playbackTimer !== null) {
+      window.clearTimeout(playbackTimer);
+    }
+    if (tweenFrame !== null) {
+      cancelAnimationFrame(tweenFrame);
+    }
     playbackTimer = null;
     tweenFrame = null;
     playTraceButton.textContent = "Play";
@@ -407,10 +452,12 @@
     const n = Number(nInput.value);
     const side = Number(sideInput.value);
     const seed = Number(seedInput.value);
-    const query = new URLSearchParams({n: String(n), side: String(side), seed: String(seed)});
+    const query = new URLSearchParams({ n: String(n), side: String(side), seed: String(seed) });
     const response = await fetch(`/api/scenario/free-quench?${query}`);
     const body = await response.json();
-    if (!response.ok) throw new Error(body.error?.message || "scenario request failed");
+    if (!response.ok) {
+      throw new Error(body.error?.message || "scenario request failed");
+    }
     adoptScenario(body);
     announce(`Loaded deterministic setup for ${n} squares with seed ${seed}.`);
   }
@@ -420,14 +467,14 @@
     try {
       await loadScenario();
     } catch (error) {
-      announce(`Could not load setup: ${error.message}`);
+      announce(`Could not load setup: ${/** @type {Error} */ (error).message}`);
     }
   });
 
   byId("randomize-all-button").addEventListener("click", async () => {
     const seed = Number(seedInput.value) + 1;
     const magnitude = Math.abs(Math.trunc(seed));
-    const n = 3 + (magnitude * 17 + 5) % 9;
+    const n = 3 + ((magnitude * 17 + 5) % 9);
     const side = Math.sqrt(n) + 0.35 + ((magnitude * 7919) % 70) / 100;
     seedInput.value = String(seed);
     nInput.value = String(n);
@@ -435,7 +482,7 @@
     try {
       await loadScenario();
     } catch (error) {
-      announce(`Could not load setup: ${error.message}`);
+      announce(`Could not load setup: ${/** @type {Error} */ (error).message}`);
     }
   });
 
@@ -448,12 +495,16 @@
   });
 
   scenarioSelect.addEventListener("change", () => {
-    if (scenarioSelect.value === "exact-n5") window.location.assign("/exact-n5");
+    if (scenarioSelect.value === "exact-n5") {
+      window.location.assign("/exact-n5");
+    }
   });
 
   function acceptedFrameBefore(index) {
     for (let current = index - 1; current >= 0; current -= 1) {
-      if (trace.events[current].phase !== "angular-probe") return trace.events[current].frame;
+      if (trace.events[current].phase !== "angular-probe") {
+        return trace.events[current].frame;
+      }
     }
     return trace.events[0].frame;
   }
@@ -463,7 +514,7 @@
     setPlane(frame.container_side);
     setPhase(phase, outcome);
     syncSquareLayer(acceptedLayer, frame.squares);
-    syncSquareLayer(probeLayer, probeFrame ? probeFrame.squares : [], {probe: true});
+    syncSquareLayer(probeLayer, probeFrame ? probeFrame.squares : [], { probe: true });
     syncLabels(frame.squares, frame.container_side);
     displayedFrame = frame;
     rotateLeftButton.disabled = true;
@@ -477,12 +528,19 @@
     byId("run-readout-title").textContent = `Event ${index + 1} of ${trace.events.length}`;
     byId("mode-value").textContent = presentation.label;
     byId("event-value").textContent = event.detail;
-    byId("counters-value").textContent = event.phase === "stop"
-      ? `run total ${trace.result.lp_solves} LP solves; ${trace.result.cell_changes} cell changes`
-      : [
-        event.call_lp_solves === undefined ? null : `${event.call_lp_solves} LP solves in this call`,
-        event.call_cell_changes === undefined ? null : `${event.call_cell_changes} cell changes in this call`,
-      ].filter(Boolean).join("; ") || "No counters on this event";
+    byId("counters-value").textContent =
+      event.phase === "stop"
+        ? `run total ${trace.result.lp_solves} LP solves; ${trace.result.cell_changes} cell changes`
+        : [
+            event.call_lp_solves === undefined
+              ? null
+              : `${event.call_lp_solves} LP solves in this call`,
+            event.call_cell_changes === undefined
+              ? null
+              : `${event.call_cell_changes} cell changes in this call`,
+          ]
+            .filter(Boolean)
+            .join("; ") || "No counters on this event";
     byId("groups-value").textContent = "Released; no optimizer constraints";
     byId("diagnostics-value").textContent = `${event.frame.squares.length} retained square poses`;
     byId("evidence-value").textContent = event.frame.evidence.claim;
@@ -506,17 +564,23 @@
   function angleBetween(first, second, progress) {
     const quarter = Math.PI / 2;
     let delta = (second - first) % quarter;
-    if (delta > quarter / 2) delta -= quarter;
-    if (delta < -quarter / 2) delta += quarter;
+    if (delta > quarter / 2) {
+      delta -= quarter;
+    }
+    if (delta < -quarter / 2) {
+      delta += quarter;
+    }
     return first + delta * progress;
   }
 
   function interpolatedFrame(first, second, progress) {
-    if (first.squares.length !== second.squares.length) return second;
+    if (first.squares.length !== second.squares.length) {
+      return second;
+    }
     return {
       ...second,
-      container_side: first.container_side
-        + (second.container_side - first.container_side) * progress,
+      container_side:
+        first.container_side + (second.container_side - first.container_side) * progress,
       squares: second.squares.map((square, index) => ({
         ...square,
         x: first.squares[index].x + (square.x - first.squares[index].x) * progress,
@@ -541,7 +605,11 @@
     setPhase(target.phase, target.outcome);
     function tick(now) {
       const progress = Math.min(1, (now - startTime) / duration);
-      renderFrame(interpolatedFrame(startFrame, target.frame, progress), target.phase, target.outcome);
+      renderFrame(
+        interpolatedFrame(startFrame, target.frame, progress),
+        target.phase,
+        target.outcome,
+      );
       if (progress < 1) {
         tweenFrame = requestAnimationFrame(tick);
       } else {
@@ -574,7 +642,9 @@
       announce("Reduced-motion mode advanced one retained event.");
       return;
     }
-    if (eventIndex >= trace.events.length - 1) renderEvent(0);
+    if (eventIndex >= trace.events.length - 1) {
+      renderEvent(0);
+    }
     playTraceButton.textContent = "Pause";
     announce("Trace playback started.");
     playNext();
@@ -625,7 +695,9 @@
   function renderTimelineWindow(index) {
     timelineList.replaceChildren();
     const windowed = editor.timelineWindow(trace.events.length, index, 20);
-    if (windowed.start > 0) timelineList.append(timelineGap(0, windowed.start - 1));
+    if (windowed.start > 0) {
+      timelineList.append(timelineGap(0, windowed.start - 1));
+    }
     for (let current = windowed.start; current < windowed.end; current += 1) {
       timelineList.append(timelineItem(trace.events[current], current));
     }
@@ -633,22 +705,23 @@
       timelineList.append(timelineGap(windowed.end, trace.events.length - 1));
     }
     const current = timelineList.querySelector(`[data-event-index="${index}"]`);
-    current?.scrollIntoView({block: "nearest", inline: "nearest"});
+    current?.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
 
   function buildTimeline() {
     playbackIndices = editor.selectPlaybackIndices(trace.events, 160);
     timelineInput.max = String(trace.events.length - 1);
     const result = trace.result;
-    byId("trace-summary").textContent = `${trace.events.length} retained events; autoplay samples ${playbackIndices.length}, preserving every accepted rotation, cell change, setup, and stop. Slider and step controls reach every event. Side ${result.side.toPrecision(9)}; ${result.reason}; ${result.converged ? "converged" : "not converged"}.`;
+    byId("trace-summary").textContent =
+      `${trace.events.length} retained events; autoplay samples ${playbackIndices.length}, preserving every accepted rotation, cell change, setup, and stop. Slider and step controls reach every event. Side ${result.side.toPrecision(9)}; ${result.reason}; ${result.converged ? "converged" : "not converged"}.`;
   }
 
   runButton.addEventListener("click", async () => {
     stopPlayback();
     const request = editor.releaseQuenchRequest(
       state,
-      Number(byId("sweeps-input").value),
-      Number(byId("budget-input").value),
+      Number(/** @type {HTMLInputElement} */ (byId("sweeps-input")).value),
+      Number(/** @type {HTMLInputElement} */ (byId("budget-input")).value),
     );
     runButton.disabled = true;
     runButton.textContent = "Quenching…";
@@ -656,12 +729,14 @@
     try {
       const response = await fetch("/api/quench", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(request),
       });
       const text = await response.text();
       const body = JSON.parse(text);
-      if (!response.ok) throw new Error(body.error?.message || "numerical request failed");
+      if (!response.ok) {
+        throw new Error(body.error?.message || "numerical request failed");
+      }
       trace = body;
       traceText = text;
       traceName = `quench-trace-n${trace.request.x.length}-seed${seedInput.value}.json`;
@@ -675,7 +750,7 @@
       // Clear before reporting. The download button names its file a quench trace, so
       // a rejected run must leave nothing behind for it to save.
       clearTraceView();
-      announce(`Quench failed: ${error.message}`);
+      announce(`Quench failed: ${/** @type {Error} */ (error).message}`);
       renderSetup();
     } finally {
       runButton.disabled = false;
@@ -684,8 +759,10 @@
   });
 
   downloadButton.addEventListener("click", () => {
-    if (!traceText) return;
-    const blob = new Blob([traceText], {type: "application/json"});
+    if (!traceText) {
+      return;
+    }
+    const blob = new Blob([traceText], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;

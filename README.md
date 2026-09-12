@@ -257,7 +257,7 @@ relevant source audit.
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for `n = 1…324`, with reported and verified bounds kept separate |
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, and raw extractions |
-| [**Reports**](#reports) | Research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
+| [**Reports**](#reports) | Eleven research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
 | [**Code and development guide**](development.md) | Exact verification, search, promotion, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
@@ -398,7 +398,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These 15 research reports are the durable topical syntheses:
+These 17 research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -415,6 +415,8 @@ These 15 research reports are the durable topical syntheses:
 | [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | Basin cartography, structural diversity, relaxation ladders, and search strategy |
 | [Public Sources Beyond n = 100](docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md) | Which catalogues carry geometry above 100, their reuse terms, and why 324 is a source boundary |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | Historical corrections, the three memo arguments, and a reusable conditional counting control |
+| [Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | What “solve to `n = 100`” actually asks for, what the record engines do, and why the move set rather than the cooling schedule is the binding constraint |
+| [Physics and Simulation Mechanisms for Square Packing](docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md) | Inflation, shrinking cells, constraint projection, contact solvers, smoothing continuation and differentiable simulation, and which of them could recover a record cold |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | Exact verification, comparison with the current record, source attribution, and bounded follow-up |
 | [The Best-Known n = 26 Packing](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | Dated literature and source search, exact score normalization, and the limits of the best-known claim |
 
@@ -636,7 +638,7 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── development.md          Python setup, engineering boundaries, and validation
 ├── defects.md              Generated view of packing/defects.yaml
 ├── docs/project/           Reports, reviews, specs, postmortems, and dated handoffs
-├── docs/project/research/  The research reports listed above
+├── docs/project/research/  The twelve research reports listed above
 ├── packing/                Code, data, and the research record
 │   ├── campaign/           Hypotheses, experiments, sessions, agendas, and ledger
 │   ├── frontier/           Per-case claims, evidence, generated views, and results
@@ -657,9 +659,14 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── AGENTS.md               Project instructions for agents
 ├── CLAUDE.md               Bridge to AGENTS.md
 ├── Makefile                Markdown formatting, hooks, and skill mirroring
+├── biome.json              Biome lint and format config for the browser sources
 ├── lefthook.yml            Pre-commit Markdown formatter hook
-├── package.json            Tooling-only lefthook package
-└── package-lock.json       Tooling lockfile
+├── package.json            Tooling-only package: lefthook, Biome, TypeScript
+├── package-lock.json       Tooling lockfile
+├── tsconfig.base.json      The shared TypeScript type floor every program extends
+├── tsconfig.json           The workbench's own script and stylesheet
+├── tsconfig.motion-lab.json  The motion lab's assets and the slideshow harness
+└── tsconfig.probes.json    The checkers' probes
 ```
 
 An optional, Git-ignored `attic/` holds intake and scratch files.

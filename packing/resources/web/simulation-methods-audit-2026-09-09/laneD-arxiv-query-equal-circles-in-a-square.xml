@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/XK2loH2kW9kEKCaN8BEQsgxvriI</id>
+  <title>arXiv Query: search_query=all:"equal circles" AND all:"square"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:26:46Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22equal+circles%22+AND+all:%22square%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1809.10525v2</id>
+    <title>Packing of Circles on Square Flat Torus as Global Optimization of Mixed Integer Nonlinear problem</title>
+    <updated>2018-12-17T17:52:45Z</updated>
+    <link href="https://arxiv.org/abs/1809.10525v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1809.10525v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The article demonstrates rather general approach to problems of discrete geometry: treat them as global optimization problems to be solved by one of general purpose solver implementing branch-and-bound algorithm (B&amp;B). This approach may be used for various types of problems, i.e. Tammes problems, Thomson problems, search of minimal potential energy of micro-clusters, etc. Here we consider a problem of densest packing of equal circles in special geometrical object, so called square flat torus $\mathbb{R}^2/\mathbb{Z}^2$ with the induced metric. It is formulated as Mixed-Integer Nonlinear Problem with linear and non-convex quadratic constraints.
+  The open-source B&amp;B-solver SCIP, http://scip.zib.de, and its parallel implementation ParaSCIP, http://ug.zib.de, had been used in computing experiments to find "very good" approximations of optimal arrangements. The main result is a confirmation of the conjecture on optimal packing for N=9 that was published in 2012 by O. Musin and A. Nikitenko. To do that, ParaSCIP took about 2000 CPU*hours (16 hours x 128 CPUs) of cluster HPC4/HPC5, National Research Centre "Kurchatov Institute", http://ckp.nrcki.ru</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-27T14:07:10Z</published>
+    <arxiv:comment>9 pages, 8 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Sergey A. Smirnov</name>
+    </author>
+    <author>
+      <name>Vladimir V. Voloshinov</name>
+    </author>
+  </entry>
+</feed>

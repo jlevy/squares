@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best known packings: transition review candidate</title>
+<style>
+__FONT_CSS__
+__KATEX_CSS__
+__WORKBENCH_CSS__
+</style>
+</head>
+<body>
+<div id="viewport">
+  <div id="stage-wrap">
+    <div id="stage" aria-label="Animated transition between consecutive best known packings">
+      <svg id="packing-svg" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true">
+        <g id="world" transform="scale(1 -1)">
+          <rect id="container" x="0" y="0" width="1" height="1" fill="none" stroke="#000000" stroke-width="2" vector-effect="non-scaling-stroke" />
+          <g id="squares"></g>
+          <g id="links"></g>
+          <g id="mask-links"></g>
+          <line id="draw-line" x1="0" y1="0" x2="0" y2="0" vector-effect="non-scaling-stroke" stroke-linecap="round" style="display: none" />
+          <g id="ghost" opacity="0"><rect x="-0.5" y="-0.5" width="1" height="1" fill="none" stroke-opacity="0.7" stroke-width="1.5" stroke-dasharray="6 5" vector-effect="non-scaling-stroke" /></g>
+          <g id="mark" opacity="0"><rect x="-0.5" y="-0.5" width="1" height="1" fill="none" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" /></g>
+        </g>
+      </svg>
+      <div id="facts">
+        <div class="gapbar" id="gapbar">
+          <svg class="gapbar-plot" viewBox="0 -40 680 150" aria-hidden="true">
+            <!-- Square corners, always. This is a number line: a rounded end reads as the end of a
+                 THING, and the scale does not end there -- its ends are the ticks on it. -->
+            <rect class="track" x="0" y="0" width="680" height="26" />
+            <rect class="gap-open" id="gapbar-open" x="0" y="0" width="0" height="26" />
+            <!-- Two weights of vertical rule, and the weight is what says which kind of value
+                 it is. The reference marks -- the scale's two ends and any integer inside the
+                 span -- are the quieter grey, drawn into this group by `gapbarSetup` because
+                 how many there are depends on n. The two bounds are bold black, drawn over
+                 them. A rule IS its value; the numbers beside it only have to be nearby. -->
+            <g id="gapbar-ticks"></g>
+            <line class="bound-rule" id="gapbar-lower-rule" x1="0" y1="-8" x2="0" y2="34" />
+            <line class="bound-rule" id="gapbar-record-rule" x1="0" y1="-8" x2="0" y2="34" />
+            <!-- Where the arrangement on the stage actually is: inside the rail, because it is
+                 a reading rather than a mark on the scale, and the only thing here that moves. -->
+            <line class="hand-stem" id="gapbar-hand" x1="0" y1="2" x2="0" y2="24" />
+            <!-- Both bounds' values above the rail, on one line, scarlet and green: the colour
+                 is what says which is which now that neither carries an arrow. -->
+            <text class="gapbar-num is-lower" id="gapbar-lower-label" x="0" y="-16" text-anchor="middle"></text>
+            <text class="gapbar-num is-record" id="gapbar-record-label" x="0" y="-16" text-anchor="middle"></text>
+          </svg>
+          <div class="gapbar-end gapbar-area" id="gapbar-area"></div>
+          <div class="gapbar-end gapbar-grid" id="gapbar-grid"></div>
+        </div>
+        <div class="facts-layer" id="facts-a"></div>
+        <div class="facts-layer" id="facts-b"></div>
+      </div>
+      <div id="headline" aria-hidden="true">
+        <div class="numeral-slot" id="numeral-a"></div>
+        <div class="numeral-slot" id="numeral-b"></div>
+      </div>
+      <div id="kind-tag"></div>
+    </div>
+  </div>
+  <div id="controls">
+    <div id="panel">
+      <div class="subpanel">
+        <div class="mode-tabs" id="mode-tabs" role="group" aria-label="what the page is showing">
+          <button type="button" id="mode-pack" data-mode="pack" aria-pressed="true" title="One fixed n: press play and the chosen strategy packs it until you pause">Pack</button>
+          <button type="button" id="mode-animate" data-mode="animate" aria-pressed="false" title="A range of n, played from end to end">Animate</button>
+        </div>
+        <div class="mode-body row" id="mode-panel">
+          <label for="range-from"><strong>n</strong></label>
+          <button id="prev" class="step-nudge" title="The step before (left arrow)" aria-label="the step before">&minus;</button>
+          <input type="number" id="range-from" step="1" aria-label="the packing size n">
+          <span class="range-sep" id="range-sep">to</span>
+          <input type="number" id="range-to" step="1" aria-label="the last value of n to step into">
+          <button id="next" class="step-nudge" title="The step after (right arrow)" aria-label="the step after">+</button>
+          <button id="range-all" title="Widen the range to every step this page carries">whole corpus</button>
+          <span class="step-label readout" id="step-label"></span>
+          <span class="chips" id="step-chips"></span>
+        </div>
+      </div>
+      <div class="row">
+        <button id="play" class="primary transport" title="Play or pause (space)" aria-label="Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path class="glyph-play" d="M7.5 4.5 L19.5 12 L7.5 19.5 Z" />
+            <g class="glyph-pause"><rect x="6.6" y="4.5" width="4.2" height="15" rx="1.1" /><rect x="13.2" y="4.5" width="4.2" height="15" rx="1.1" /></g>
+          </svg>
+        </button>
+        <button id="restart" class="transport" title="Back to the beginning of what play would play: in Pack the starting arrangement with every setting kept, in Animate the first step of the range" aria-label="Restart">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <g class="glyph-play"><rect x="4.6" y="4.5" width="3.4" height="15" rx="1.1" /><path d="M20 4.5 L20 19.5 L9.4 12 Z" /></g>
+            <g class="glyph-pause"><path d="M12 5.2 a6.8 6.8 0 1 1 -6.8 6.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /><path d="M5.2 12 L5.2 6.6 L10.6 12 Z" /></g>
+          </svg>
+        </button>
+        <span id="clock" class="readout">0.00 s &middot; 0 steps</span>
+        <label title="How fast the clock runs while playing: 0.05x to watch a settle closely, 2x to skim">speed
+          <input type="range" id="speed" min="0" max="1000" step="1" aria-label="playback speed">
+          <span class="hint readout" id="speed-info"></span>
+        </label>
+        <span class="range-figure readout" id="range-duration"></span>
+        <span class="range-figure readout" id="range-position"></span>
+        <button id="refresh-gap" title="Redraw the gap bar against what is on the stage now">update gap bar</button>
+        <label>start
+          <span class="seg" id="initial-seg">
+            <button data-initial="previous" title="The retained packing of n-1 with the new square added">previous packing</button>
+            <button data-initial="random" title="n squares at seeded pseudo-random centres and angles in a box larger than the record">random</button>
+            <button data-initial="grid" title="n squares axis-aligned in rows from the bottom-left, in the grid's own box">ordered fill</button>
+            <button data-initial="record" title="The retained best-known packing of n itself, in its own box. Press play to see whether the current law holds a known optimum still">best known</button>
+          </span>
+        </label>
+        <button id="optimize" class="primary" title="Run the current settings from the chosen start until pause">Optimize</button>
+      </div>
+      <div class="row">
+        <div class="subpanel lawbox" id="law-box">
+          <div class="law-plot-wrap">
+            <span class="box-title">force law</span>
+            <svg id="law-plot" viewBox="0 0 300 132" role="img" aria-label="the force against the signed gap between two squares">
+              <rect class="lp-field" x="0" y="0" width="300" height="132" />
+              <line class="lp-axis" id="lp-vaxis" x1="0" y1="0" x2="0" y2="132" />
+              <line class="lp-zero" x1="0" y1="88" x2="300" y2="88" />
+              <path class="lp-curve" id="lp-curve" d="" />
+              <circle class="lp-cross" id="lp-cross" r="2.6" cx="0" cy="88" />
+              <circle class="lp-handle" id="lp-knee" r="5" cx="0" cy="0" />
+              <circle class="lp-handle is-pull" id="lp-pull" r="5" cx="0" cy="0" />
+              <text class="lp-side" id="lp-label-push" x="4" y="10">push</text>
+              <text class="lp-side" id="lp-label-pull" x="4" y="128">pull</text>
+              <text id="lp-top" x="296" y="10" text-anchor="end"></text>
+              <text id="lp-left" x="4" y="98"></text>
+              <text id="lp-right" x="296" y="98" text-anchor="end"></text>
+            </svg>
+          </div>
+          <div class="law-body">
+            <div class="law-rows" data-law="pair"></div>
+            <div class="law-presets">
+              <span class="seg" id="law-preset-seg">
+                <button data-law="rigid" title="A knee at four thousandths of a side and a strong push: effectively rigid">rigid</button>
+                <button data-law="soft" title="A third of a side of interpenetration before the push reaches its knee">soft</button>
+                <button data-law="sticky" title="A firm push with a pull that reaches a quarter of a side">sticky</button>
+              </span>
+              <span class="hint readout readout-line" id="law-info"></span>
+            </div>
+          </div>
+        </div>
+        <div class="subpanel groupbox" id="wall-box">
+          <span class="box-title">walls</span>
+          <div class="group-body stack">
+            <div class="law-rows" data-law="wall"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Revision 15: the law gets a line of its own; the solver and the two graphs share
+           the next, so a wide plot is not squeezed beside three narrow boxes. -->
+      <div class="row">
+        <div class="subpanel groupbox" id="solver-box">
+          <span class="box-title">solver</span>
+          <div class="group-body">
+            <select id="style-select" aria-label="which solver runs">
+              <option value="tween">A · tween</option>
+              <option value="physics">B · physics</option>
+              <option value="bodies">C · bodies</option>
+            </select>
+            <span class="hint readout readout-line" id="solver-note"></span>
+          </div>
+        </div>
+        <div class="subpanel relbox">
+          <span class="box-title">who attracts whom</span>
+          <div class="rel-body">
+            <div class="law-row"><span>graph</span>
+              <span class="seg" id="rel-seg">
+                <button data-rel="general" title="Every pair attracts: the shipped behaviour">general</button>
+                <button data-rel="groups" title="Squares in the same block attract each other and nothing across blocks">groups</button>
+                <button data-rel="contact" title="Exactly the edges of the target contact graph attract">contact graph</button>
+              </span>
+            </div>
+            <div class="law-row"><span>chart</span>
+              <label title="End the step animation on the record's own poses. Ends on the record by construction, and proves nothing about the physics"><input type="checkbox" id="snap-toggle"> snap to the known solution at the end</label>
+            </div>
+            <div class="law-row"><span></span>
+              <label title="Attract exactly the pairs that touch in the retained packing, and let the settle find the geometry itself"><input type="checkbox" id="bias-toggle"> bias toward the known contact graph</label>
+            </div>
+            <div class="law-row"><span>target</span>
+              <span class="seg" id="target-seg">
+                <button data-target="record" title="The contact graph of the retained packing of this n, read off the record">record</button>
+                <button data-target="drawn" title="The edges drawn by hand between squares on the stage">hand-drawn</button>
+              </span>
+              <button id="clear-edges" title="Forget every edge drawn at this n">clear</button>
+            </div>
+            <div class="law-row"><span></span><span class="hint readout" id="rel-info"></span></div>
+          </div>
+        </div>
+        <div class="subpanel relbox">
+          <span class="box-title">start small and grow</span>
+          <div class="rel-body">
+            <div class="law-row"><span>size</span><input type="range" id="grow-size" aria-label="the size every square starts at, as a fraction of a unit side"><span class="law-val" id="grow-size-val"></span></div>
+            <div class="law-row"><span>rate</span><input type="range" id="grow-rate" aria-label="how fast the squares grow, per simulated second"><span class="law-val" id="grow-rate-val"></span></div>
+            <div class="law-row"><span>rule</span>
+              <span class="seg" id="grow-rule-seg">
+                <button data-grow-rule="constant" title="The size climbs whatever the arrangement is doing">constant</button>
+                <button data-grow-rule="clean" title="The size climbs only while the deepest overlap is inside the tolerance">while clean</button>
+              </span>
+              <label title="Grow the squares as the run goes"><input type="checkbox" id="grow-toggle"> grow</label>
+            </div>
+            <div class="law-row"><span></span><span class="hint readout" id="grow-info"></span></div>
+            <div class="law-row"><span></span>
+              <button id="reset-physics" title="Every physics parameter back to its default, and the run restarted from the arrangement on the stage">reset physics</button>
+            </div>
+          </div>
+        </div>
+        <span class="hint readout readout-line" id="step-note"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="subpanel groupbox" id="step-anim-box">
+        <span class="box-title">the step animation</span>
+        <div class="group-body">
+          <label>motion
+            <span class="seg" id="phase-seg">
+              <button data-phase="add-then-move">add, then move</button>
+              <button data-phase="move-then-add">move, then add</button>
+              <button data-phase="simultaneous">simultaneous</button>
+              <button data-phase="rotate-first">rotate first</button>
+              <button data-phase="slide-first">slide first</button>
+            </span>
+          </label>
+          <label>dwell <input type="number" id="t-dwell" min="0" max="10" step="0.1"> s</label>
+          <label>move <input type="number" id="t-move" min="0.1" max="10" step="0.1"> s</label>
+          <label title="The landing: the window where the spring stiffens and the poses ease onto their exact targets. It used to be a fixed fraction of the move.">correct <input type="number" id="t-correct" min="0.1" max="10" step="0.1"> s</label>
+          <label>settle <input type="number" id="t-settle" min="0" max="5" step="0.1"> s</label>
+          <label><input type="checkbox" id="fullbeat-toggle"> full beat for static appends</label>
+        </div>
+      </div>
+      </div>
+      <!-- Revision 15: the timing group is alone in its row, so removing it in Pack
+           cannot reflow anything beside it. -->
+      <div class="row">
+      <div class="subpanel groupbox" id="shake-box">
+        <span class="box-title">the shake</span>
+        <div class="group-body">
+          <label title="How hard and how long the two physical styles shake: 0 none, 3 the default, 10 the loudest and longest">annealing
+            <input type="range" id="anneal" min="0" max="10" step="1" style="width: 130px">
+          </label>
+          <label><input type="checkbox" id="blind-toggle"> blind, no target</label>
+          <label>inflate <input type="number" id="blind-inflate" min="1" max="2" step="0.01"></label>
+          <span class="hint readout readout-line" id="anneal-info"></span>
+        </div>
+      </div>
+      <div class="subpanel groupbox">
+        <span class="box-title">the view</span>
+        <div class="group-body">
+          <label>colour
+            <span class="seg" id="colour-seg">
+              <button data-scheme="identity" title="Every square keeps one colour of its own, for the whole session: the same square is the same green wherever it goes">identity</button>
+              <button data-scheme="angle-stable" title="The atlas convention: right angles teal, forty-five citron, the rest in five-degree bands, shaded by full-side contacts">angle</button>
+              <button data-scheme="angle-continuous" title="A continuous ramp from teal at a right angle to citron at forty-five">angle ramp</button>
+            </span>
+          </label>
+          <label title="In Animate only: repaint the frame the step comes to rest on in the standard angle colours, leaving the motion itself identity-coloured"><input type="checkbox" id="animate-standard-toggle" checked> animate rests in angle colours</label>
+          <label title="Drain the fills while a square is unsettled, so the squares that have found their place carry the picture"><input type="checkbox" id="desat-toggle" checked> desaturate while moving</label>
+          <label title="How much chroma a moving square keeps, as a fraction of its own: 1 leaves the colour alone, 0 takes it to grey">drained to
+            <input type="range" id="desat-floor" min="0" max="1" step="0.01" aria-label="the chroma a moving square keeps">
+            <span class="law-val" id="desat-floor-val"></span>
+          </label>
+          <label title="Faint lines on what the physics is relating: the step's correspondence, or the relationship graph's own attracting pairs"><input type="checkbox" id="links-toggle"> show correspondence</label>
+          <label title="Press on one square and release on another to add an edge to the contact graph, or to take it away again. While this is on no square can be picked up and moved."><input type="checkbox" id="draw-toggle"> draw links</label>
+          <label><input type="checkbox" id="capture-toggle"> capture preview</label>
+        </div>
+      </div>
+      <span class="hint readout readout-line" id="continuous-info"></span>
+    </div>
+  </div>
+</div>
+<div class="sr-only" aria-live="polite" id="live"></div>
+<script id="atlas-data" type="application/json">__DATA__</script>
+<script>
+__WORKBENCH_JS__
+</script>
+</body>
+</html>

@@ -1435,6 +1435,50 @@ def _lint_floor(context: Context) -> str:
     )
 
 
+def _browser_floor(context: Context) -> str:
+    """Biome and `tsc` over the JavaScript and CSS this repository serves to a browser.
+
+    The counterpart to `_lint_floor` and `_type_floor`, and it exists for the same reason
+    they do: until this ran, five thousand lines of published JavaScript had no checker at
+    all, and the one bug that reached a rendered page came in through exactly that gap.
+
+    `biome ci` rather than `biome check`: verify-only, never fixing, and
+    `--error-on-warnings` because plain `ci` passes on warnings and this floor configures
+    warning-severity rules. Fixing is `npm run lint:fix`, at a commit hook or by hand.
+
+    The type gate is separate from the lint gate (floor rule 3) and runs once per program:
+    the workbench's script, the checkers' probes, and the motion lab's assets are three
+    independent programs that happen to share a language, and one `include` covering all of
+    them would have them collide in one global scope.
+
+    Node is not a `uv` dependency, so this asks for the pinned local binaries rather than
+    anything on PATH. `npm ci` at the repository root is what puts them there.
+    """
+    biome = REPOSITORY_ROOT / "node_modules/.bin/biome"
+    tsc = REPOSITORY_ROOT / "node_modules/.bin/tsc"
+    missing = [str(tool) for tool in (biome, tsc) if not tool.is_file()]
+    if missing:
+        raise StepFailureError(
+            f"the browser floor's pinned tools are not installed: {missing}; "
+            "run `npm ci` at the repository root"
+        )
+    return _commands(
+        context,
+        (
+            (str(biome), "ci", "--error-on-warnings", "."),
+            *(
+                (str(tsc), "-p", name)
+                for name in (
+                    "tsconfig.json",
+                    "tsconfig.probes.json",
+                    "tsconfig.motion-lab.json",
+                )
+            ),
+        ),
+        cwd=REPOSITORY_ROOT,
+    )
+
+
 def _type_floor(context: Context) -> str:
     basedpyright = _required_tool(context, "basedpyright")
     output = _commands(context, ((basedpyright,),))
@@ -2293,7 +2337,7 @@ def _generated_tables(context: Context) -> str:
 
 def _strategy_catalogues(_context: Context) -> str:
     lines: list[str] = []
-    for kind, field_name, expected in (("search", "outcome", 20), ("proof", "status", 30)):
+    for kind, field_name, expected in (("search", "outcome", 28), ("proof", "status", 30)):
         path = PROJECT_ROOT / "frontier" / f"{kind}-strategies.yaml"
         data = safe_load(path.read_text(encoding="utf-8"))
         strategies = data["strategies"]
@@ -2874,6 +2918,21 @@ STEPS: tuple[Step, ...] = (
     ),
     Step("lint floor (ruff)", _lint_floor, fast=True, records=True, touches=_ANY_PYTHON),
     Step("type floor (basedpyright)", _type_floor, fast=True, touches=_ANY_PYTHON),
+    # Under two seconds for 190 files: Biome is one compiled binary and the three
+    # type-check programs are small. Cheap enough for the edit tier, but `fast` rather
+    # than unconditional because it needs a Node toolchain the Python tiers do not.
+    Step(
+        "browser floor (biome, tsc)",
+        _browser_floor,
+        fast=True,
+        touches=(
+            "biome.json",
+            "tsconfig*.json",
+            "package.json",
+            "**/*.js",
+            "**/*.css",
+        ),
+    ),
     # 9.63s.
     Step(
         "basin atlas",

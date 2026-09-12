@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/5haD4sm92Jhgej3QuvzlMQ+61Pw</id>
+  <title>arXiv Query: search_query=all:"basin hopping" AND all:packing&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-08T16:41:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22basin+hopping%22+AND+all:packing&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>7</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.10233v2</id>
+    <title>ImprovEvolve: Basin-Hopping Meets LLM-Guided Evolutionary Search</title>
+    <updated>2026-06-26T19:49:14Z</updated>
+    <link href="https://arxiv.org/abs/2602.10233v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.10233v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM-guided evolutionary computation, most notably AlphaEvolve, has been remarkably successful in discovering novel mathematical constructions by solving challenging optimization problems. The standard approach is to evolve a monolithic program that directly outputs a candidate solution. We present ImprovEvolve, an algorithmic alternative that drastically reduces cognitive load on the LLM. Instead of prompting the model for an end-to-end optimizer, we evolve a program with three specialized operators of initialization, local improvement, and perturbation. We then approach the optimum by iteratively applying local improvements and intensity-scheduled perturbations, effectively driving a basin-hopping search with LLM-evolved subroutines. For hexagon in hexagon packing, ImprovEvolve discovers new state-of-the-art packings of 11, 12, 15, and 16 hexagons, and additionally for 14, 17, and 23 hexagons after minimal expert tuning of the generated code. For the second autocorrelation inequality, the evolved and human-scaled program pushes the lower bound from 0.96102 to 0.96258. For spherical codes, the ImprovEvolve program lowers the best-known maximum cosine for the majority of 90 randomly chosen diverse state-of-the-art spherical codes, achieving relative improvements of up to 2.4%.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-10T19:23:13Z</published>
+    <arxiv:comment>40 pages, 14 figures, AI for Math Workshop at ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Alexey Kravatskiy</name>
+    </author>
+    <author>
+      <name>Valentin Khrulkov</name>
+    </author>
+    <author>
+      <name>Ivan Oseledets</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2008.02875v1</id>
+    <title>Phase transitions on non-uniformly curved surfaces: Coupling between phase and location</title>
+    <updated>2020-08-06T21:20:19Z</updated>
+    <link href="https://arxiv.org/abs/2008.02875v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2008.02875v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For particles confined to two dimensions, any curvature of the surface affects the structural, kinetic and thermodynamic properties of the system. If the curvature is non-uniform, an even richer range of behaviours can emerge. Using a combination of bespoke Monte Carlo, molecular dynamics and basin-hopping methods, we show that the stable states of attractive colloids confined to non-uniformly curved surfaces are distinguished not only by the phase of matter but also by their location on the surface. Consequently, the transitions between these states involve cooperative migration of the entire colloidal assembly. We demonstrate these phenomena on toroidal and sinusoidal surfaces for model colloids with different ranges of interactions as described by the Morse potential. In all cases, the behaviour can be rationalised in terms of three universal considerations: cluster perimeter, stress, and the packing of next-nearest neighbours.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-08-06T21:20:19Z</published>
+    <arxiv:comment>9 pages, 9 figures, accepted in Soft Matter, SI can be requested to the authors</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Jack O. Law</name>
+    </author>
+    <author>
+      <name>Jacob M. Dean</name>
+    </author>
+    <author>
+      <name>Mark A. Miller</name>
+    </author>
+    <author>
+      <name>Halim Kusumaatmaja</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1701.00541v2</id>
+    <title>Packing Unequal Circles into a Square Container by Partitioning Narrow Action Spaces and Circle Items</title>
+    <updated>2017-02-27T10:00:30Z</updated>
+    <link href="https://arxiv.org/abs/1701.00541v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1701.00541v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We address the NP-hard problem of finding a non-overlapping dense packing pattern for n Unequal Circle items in a two-dimensional Square Container (PUC-SC) such that the size of the container is minimized. Based on our previous work on an Action Space based Global Optimization (ASGO) that approximates each circle item as a square item to efficiently find the large unoccupied spaces, we propose an optimization algorithm based on the Partitioned Action Space and Partitioned Circle Items (PAS-PCI). The PAS is to partition the narrow action space on the long side to find two equal action spaces to fully utilize the unoccupied spaces. The PCI is to partition the circle items into four groups based on size for the basin hopping strategy. Experiments on two sets of benchmark instances show the effectiveness of the proposed method. In comparison with our previous algorithm ASGO on the 68 tested instances that ASGO published, PAS-PCI not only gains smaller containers in 64 instances and matches the other 4 but also runs faster in most instances. In comparison with the best record of the Packomania website on a total of 98 instances, PAS-PCI finds smaller containers on 82 and matches the other 16. Note that we updated 19 records for (47-48, 51-54, 57, 61-72) that had been kept unchanged since 2013.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-12-21T13:11:56Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Kun He</name>
+    </author>
+    <author>
+      <name>Mohammed Dosh</name>
+    </author>
+    <author>
+      <name>Shenghao Zou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1611.02323v2</id>
+    <title>An Efficient Quasi-physical Quasi-human Algorithm for Packing Equal Circles in a Circular Container</title>
+    <updated>2017-04-13T02:42:03Z</updated>
+    <link href="https://arxiv.org/abs/1611.02323v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1611.02323v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper addresses the equal circle packing problem, and proposes an efficient Quasi-physical Quasi-human (QPQH) algorithm. QPQH is based on a modified Broyden-Fletcher-Goldfarb-Shanno (BFGS) algorithm which we call the local BFGS and a new basin hopping strategy based on a Chinese idiom: alternate tension with relaxation. Starting from a random initial layout, we apply the local BFGS algorithm to reach a local minimum layout. The local BFGS algorithm fully utilizes the neighborhood information of each circle to considerably speed up the running time of the gradient descent process, and the efficiency is very apparent for large scale instances. When yielding a local minimum layout, the new basin-hopping strategy is to shrink the container size to different extent to generate several new layouts. Experimental results indicate that the new basin-hopping strategy is very efficient, especially for a type of layout with comparatively dense packing in the center and comparatively sparse packing around the boundary of the container. We test QPQH on the instances of n = 1,2,...,320, and obtain 66 new layouts which have smaller container sizes than the current best-known results reported in literature.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-08-02T04:18:40Z</published>
+    <arxiv:comment>19 pages, 16 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Kun He</name>
+    </author>
+    <author>
+      <name>Hui Ye</name>
+    </author>
+    <author>
+      <name>Zhengli Wang</name>
+    </author>
+    <author>
+      <name>Jingfa Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1602.07945v2</id>
+    <title>Energetically favoured defects in dense packings of particles on spherical surfaces</title>
+    <updated>2017-02-28T21:59:56Z</updated>
+    <link href="https://arxiv.org/abs/1602.07945v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1602.07945v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The dense packing of interacting particles on spheres has proved to be a useful model for virus capsids and colloidosomes. Indeed, icosahedral symmetry observed in virus capsids corresponds to potential energy minima that occur for magic numbers of, e.g., 12, 32 and 72 identical Lennard-Jones particles, for which the packing has exactly the minimum number of twelve five-fold defects. It is unclear, however, how stable these structures are against thermal agitation. We investigate this property by means of basin-hopping global optimisation and Langevin dynamics for particle numbers between ten and one hundred. An important measure is the number and type of point defects, that is, particles that do not have six nearest neighbours. We find that small icosahedral structures are the most robust against thermal fluctuations, exhibiting fewer excess defects and rearrangements for a wide temperature range. Furthermore, we provide evidence that excess defects appearing at low non-zero temperatures lower the potential energy at the expense of entropy. At higher temperatures defects are, as expected, thermally excited and thus entropically stabilised. If we replace the Lennard-Jones potential by a very short-ranged (Morse) potential, which is arguably more appropriate for colloids and virus capsid proteins, we find that the same particle numbers give a minimum in the potential energy, although for larger particle numbers these minima correspond to different packings. Furthermore, defects are more difficult to excite thermally for the short-ranged potential, suggesting that the short-ranged interaction further stabilises equilibrium structures.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-02-25T14:30:06Z</published>
+    <arxiv:comment>25 pages, 11 figures, 3 tables</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Stefan Paquay</name>
+    </author>
+    <author>
+      <name>Halim Kusumaatmaja</name>
+    </author>
+    <author>
+      <name>David J. Wales</name>
+    </author>
+    <author>
+      <name>Roya Zandi</name>
+    </author>
+    <author>
+      <name>Paul van der Schoot</name>
+    </author>
+    <arxiv:doi>10.1039/C6SM00489J</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1039/C6SM00489J" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0407119v1</id>
+    <title>Stacked clusters of polycyclic aromatic hydrocarbon molecules</title>
+    <updated>2004-07-22T12:12:11Z</updated>
+    <link href="https://arxiv.org/abs/physics/0407119v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0407119v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Clusters of polycyclic aromatic hydrocarbon (PAH) molecules are modelled using explicit all-atom potentials using a rigid body approximation. The PAH's considered range from pyrene (C10H8) to circumcoronene (C54H18), and clusters containing between 2 and 32 molecules are investigated. In addition to the usual repulsion-dispersion interactions, electrostatic point-charge interactions are incorporated, as obtained from density functional theory calculations. The general electrostatic distribution in neutral or singly charged PAH's is reproduced well using a fluctuating charges analysis, which provides an adequate description of the multipolar distribution. Global optimization is performed using a variety of methods, including basin-hopping and parallel tempering Monte Carlo. We find evidence that stacking the PAH molecules generally yields the most stable motif. A structural transition between one-dimensional stacks and three-dimensional shapes built from mutiple stacks is observed at larger sizes, and the threshold for this transition increases with the size of the monomer. Larger aggregates seem to evolve toward the packing observed for benzene in bulk.Difficulties met in optimizing these clusters are analysed in terms of the strong anisotropy of the molecules. We also discuss segregation in heterogeneous clusters and vibrational properties in the context of astrophysical observations.</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.atm-clus" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-07-22T12:12:11Z</published>
+    <arxiv:comment>12 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <author>
+      <name>M. Rapacioli</name>
+    </author>
+    <author>
+      <name>F. Calvo</name>
+    </author>
+    <author>
+      <name>F. Spiegelman</name>
+    </author>
+    <author>
+      <name>C. Joblin</name>
+    </author>
+    <author>
+      <name>D. J. Wales</name>
+    </author>
+    <arxiv:doi>10.1021/jp046745z</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1021/jp046745z" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0407106v1</id>
+    <title>Global minima of Al_N, Au_N and Pt_N, N=2-80, clusters described by Voter-Chen version of embedded-atom potentials</title>
+    <updated>2004-07-20T11:35:22Z</updated>
+    <link href="https://arxiv.org/abs/physics/0407106v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0407106v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Using the basin-hopping Monte Carlo minimization approach we report the global minima for aluminium, gold and platinum metal clusters modelled by the Voter-Chen version of the embedded-atom model potential containing up to 80 atoms. The virtue of the Voter-Chen potentials is that they are derived by fitting to experimental data of both diatomic molecules and bulk metals simultaneously. Therefore, it may be more appropriate for a wide range of the size of the clusters. This is important since almost all properties of the small clusters are size dependent. The results show that the global minima of the Al, Au and Pt clusters have structures based on either octahedral, decahedral, icosahedral or a mixture of decahedral and icosahedral packing. The 54-atom icosahedron without a central atom is found to be more stable than the 55-atom complete icosahedron for all of the elements considered in this work. The most of the Al global minima are identified as some fcc structures and many of the Au global minima are found to be some low symmetric structures, which are both in agreement with the previous experimental studies.</summary>
+    <category term="physics.atm-clus" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-07-20T11:35:22Z</published>
+    <arxiv:primary_category term="physics.atm-clus"/>
+    <author>
+      <name>Ali Sebetci</name>
+    </author>
+    <author>
+      <name>Ziya B. Guvenc</name>
+    </author>
+    <arxiv:doi>10.1088/0965-0393/13/5/004</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/0965-0393/13/5/004" title="doi"/>
+  </entry>
+</feed>

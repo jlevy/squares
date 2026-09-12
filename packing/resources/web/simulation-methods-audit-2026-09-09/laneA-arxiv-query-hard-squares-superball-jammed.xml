@@ -1,0 +1,1000 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/vbkhRttkQ0cvbWI9EQ15hffVUp4</id>
+  <title>arXiv Query: search_query=(abs:"hard squares" OR abs:"hard rectangles" OR abs:"superball" OR abs:"superdisk") AND (abs:"jammed" OR abs:"packing")&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:16Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=(abs:%22hard+squares%22+OR+(abs:%22hard+rectangles%22+OR+(abs:%22superball%22+OR+abs:%22superdisk%22)))+AND+(abs:%22jammed%22+OR+abs:%22packing%22)&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>42</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2603.28609v1</id>
+    <title>Rounded hard squares confined in a circle</title>
+    <updated>2026-03-30T15:57:28Z</updated>
+    <link href="https://arxiv.org/abs/2603.28609v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.28609v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Packing under confinement could generate rich ordered structures through entropic effects, which is a fundamental problem in condensed matter, biophysics and material science. The influence of confinement to the anisotropic hard particles--particularly regarding the emergence of topological defect structures--remains poorly understood. Recent studies have shown that granular rods confined within circular boundaries can cluster into square like super-particles, forming four disclinations. In this study, we employ Monte Carlo simulations in the NPT ensemble to investigate how circular confinement influences the ordered structures of rounded-corner hard-squares with varying roundness. At low roundness, the system forms an integrated cross-shaped domain with tetratic order and four +1/4 disclinations in the corners, along with some column shifts. As roundness increases, we found a new partition structure, where particles self-assemble into six domains separated by six +1/4 disclinations and a central -1/2 disclination. Our findings reveal that the interplay between confinement geometry and colloid shape can drive entropy governed structural transitions, offering new insights for the design of topological metamaterials.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-30T15:57:28Z</published>
+    <arxiv:comment>8 pages, 6 figures, accepted by Soft Matter</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Soft Matter 22(16), 3119 (2026)</arxiv:journal_ref>
+    <author>
+      <name>Zhongtian Yuan</name>
+    </author>
+    <author>
+      <name>Yao Li</name>
+    </author>
+    <arxiv:doi>10.1039/D6SM00008H</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1039/D6SM00008H" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.06918v1</id>
+    <title>Emergence of mixed orientational ordering in quasi-one-dimensional superdisk and superball fluids</title>
+    <updated>2025-10-08T11:49:56Z</updated>
+    <link href="https://arxiv.org/abs/2510.06918v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.06918v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We report the discovery of a mixed orientational structure in the quasi-one-dimensional fluid of hard non-spherical bodies with the exact calculation of the thermodynamic and structural quantities using the transfer operator method. The mixed arrangement, which is spatially uniform, but orientionally ordered, cannot be identified with conventional mesophases such as tetratic, cubatic and nematic. It is found that the particles form a mixed orientational arrangement with preferred parallel and perpendicular orientations in a channel, where the number of parallel and perpendicularly oriented particles is not equal even at the close packing density. The mixed structure can be stabilized with hard bodies having equal side lengths in parallel and perpendicular orientations along the channel. These conditions can be realized with colloidal superdisks (superballs) if the curvature of neighboring sides (faces) are different. We show that even a small stretching of the superparticle destabilizes mixed ordering due to perfect nematic order evolving upon approaching close-packing.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-08T11:49:56Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Sakineh Mizani</name>
+    </author>
+    <author>
+      <name>Martin Oettel</name>
+    </author>
+    <author>
+      <name>Péter Gurin</name>
+    </author>
+    <author>
+      <name>Szabolcs Varga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.24885v1</id>
+    <title>Response to dynamic shape changes in suspensions of hard rectangles</title>
+    <updated>2025-09-29T14:59:46Z</updated>
+    <link href="https://arxiv.org/abs/2509.24885v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.24885v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While the autonomous assembly of hard nanoparticles with different shapes has been studied extensively both in experiment and simulations, little is known about systems where particle shape can be dynamically altered. DNA origami nanostructures offer an alternative route to synthesize nanoparticles that can change their shape on demand. Motivated by recent experiments, here we study the structure and dynamics of suspensions of hard squares in response to an elongation into a rectangle. Performing extensive hard-particle Monte Carlo simulations at constant volume and employing two protocols, we numerically analyze the collective diffusion and ordering during quenching and the subsequent relaxation to the new equilibrium state. We find that the cascading protocol, which mimics experimentally realized DNA origami, can become dynamically arrested due to the increase in effective packing fraction.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-29T14:59:46Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Soft Matter 22, 2447-2455 (2026)</arxiv:journal_ref>
+    <author>
+      <name>Denis Dertli</name>
+    </author>
+    <author>
+      <name>Thomas Speck</name>
+    </author>
+    <arxiv:doi>10.1039/d6sm00037a</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1039/d6sm00037a" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.10742v2</id>
+    <title>Universality of the close packing properties and markers of isotropic-to-tetratic crossover in quasi-one-dimensional superdisk fluid</title>
+    <updated>2024-12-05T21:29:12Z</updated>
+    <link href="https://arxiv.org/abs/2409.10742v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.10742v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study equilibrium states and ordering regimes of a quasi-one-dimensional system of hard superdisks (anisotropic particles interpolating between disks and squares) where the centers of the particles are constrained to move on a line. A continuous change from a quasi-isotropic to a tetratic regime is found upon increasing the density. Somewhat unexpected, for isobaric states, systems with larger and more anisotropic particles in the tetratic regime are denser than systems with smaller and less anisotropic particles in a quasi-isotropic regime. Close packing behaviour is characterised by exponents describing the behaviour of the pressure, the angular fluctuations and the angular correlation length. We obtain two universal, shape-independent relations between them.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-16T21:21:04Z</published>
+    <arxiv:comment>Submission to SciPost</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>SciPost Phys. Core 8, 008 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Sakineh Mizani</name>
+    </author>
+    <author>
+      <name>Martin Oettel</name>
+    </author>
+    <author>
+      <name>Péter Gurin</name>
+    </author>
+    <author>
+      <name>Szabolcs Varga</name>
+    </author>
+    <arxiv:doi>10.21468/SciPostPhysCore.8.1.008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.21468/SciPostPhysCore.8.1.008" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.06889v1</id>
+    <title>In pursuit of the tetratic phase in hard rectangles</title>
+    <updated>2024-08-13T13:35:55Z</updated>
+    <link href="https://arxiv.org/abs/2408.06889v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.06889v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We numerically investigate two-dimensional systems of hard rectangles at constant pressure through extensive hard-particle Monte Carlo simulations. We determine the complete phase diagram as a function of packing fraction and aspect ratio, which consists of four distinct phases. At very high packing fractions, particles form a smectic solid for all aspect ratios. Rod-like particles with large aspect ratio assemble in an intervening nematic phase, which is displaced by a "tetratic" phase (also called biaxial nematic) for moderately elongated rectangles. Surprisingly, we find evidence that the transition from tetratic to smectic is weakly discontinuous at variance with previously proposed two-step scenarios for the melting of hard particles.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-13T13:35:55Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. Research 7, L012034 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Denis Dertli</name>
+    </author>
+    <author>
+      <name>Thomas Speck</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevResearch.7.L012034</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevResearch.7.L012034" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.09173v1</id>
+    <title>The effect of combined roundness and polydispersity on the phase behavior of hard-rectangle fluids</title>
+    <updated>2022-07-19T10:19:41Z</updated>
+    <link href="https://arxiv.org/abs/2207.09173v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.09173v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a model for a fluid of polydisperse rounded hard rectangles where the length and width of the rectangular core are fixed, while the roundness is taken into account by the convex envelope of a disk displaced along the perimeter of the core. The diameter of the disk has a continuous polydispersity described by a Schultz distribution function. We implemented the scaled particle theory for this model with the aim to studying: (i) the effect of roundness on the phase behavior of the one-component hard-rectangle fluid, and (ii) how polydispersity affects phase transitions between isotropic, nematic and tetratic phases. We found that roundness greatly affects the tetratic phase, whose region of stability in the phase diagram strongly decreases as the roundness parameter is increased. Also the interval of aspect ratios where the tetratic-nematic and isotropic-nematic phase transitions are of first order considerably reduces with roundness, both transitions becoming weaker. Polydispersity induces strong fractionation between the coexisting phases, with the nematic phase enriched in particles of lower roundness. Finally, for high enough polydispersity and certain mean aspect ratios, the isotropic-to-nematic transition can change from second (for the one-component fluid) to first order. We also found a packing-fraction inversion phenomenon for large polydispersities: the coexisting isotropic phase has a higher packing fraction than the nematic.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-19T10:19:41Z</published>
+    <arxiv:comment>16 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 106, 034602 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Yuri Martinez-Raton</name>
+    </author>
+    <author>
+      <name>Enrique Velasco</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.106.034602</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.106.034602" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.05719v2</id>
+    <title>On the lower bound for packing densities of superballs in high dimensions</title>
+    <updated>2022-06-18T08:44:37Z</updated>
+    <link href="https://arxiv.org/abs/2206.05719v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.05719v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Define the superball with radius $r$ and center ${\boldsymbol 0}$ in $\mathbb{R}^n$ to be the set $$ \left\{{\boldsymbol x}\in\mathbb{R}^n:\sum_{j=1}^{m}\left(x_{k_j+1}^2+x_{k_j+2}^2+\cdots+x_{k_{j+1}}^2\right)^{p/2}\leq r^p\right\},0=k_1&lt;k_2&lt;\cdots&lt;k_{m+1}=n, $$ which is a generalization of $\ell_p$-balls. We give two new proofs for the celebrated result that for $1&lt;p\leq2$, the translative packing density of superballs in $\mathbb{R}^n$ is $Ω(n/2^n)$. This bound was first obtained by Schmidt, with subsequent constant factor improvement by Rogers and Schmidt, respectively. Our first proof is based on the hard superball model, and the second proof is based on the independence number of a graph. We also investigate the entropy of packings, which measures how plentiful such packings are.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-12T11:34:32Z</published>
+    <arxiv:comment>31 pages; any comments are welcome</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Chengfei Xie</name>
+    </author>
+    <author>
+      <name>Gennian Ge</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.14954v2</id>
+    <title>Characterization of Void Space, Large-Scale Structure, and Transport Properties of Maximally Random Jammed Packings of Superballs</title>
+    <updated>2022-05-06T16:43:30Z</updated>
+    <link href="https://arxiv.org/abs/2111.14954v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.14954v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dense, disordered packings of particles are useful models of low-temperature amorphous phases of matter, biological systems, granular media, and colloidal systems. The study of dense packings of nonspherical particles enables one to ascertain how rotational degrees of freedom affect packing behavior. Here, we study superballs, a large family of deformations of the sphere, defined in three dimensions by $|x_1|^{2p}+|x_2|^{2p}+|x_3|^{2p}\leq1$, where $p&gt;0$ is a deformation parameter indicating to what extent the shape deviates from a sphere. As $p$ increases from the sphere point ($p=1$), the superball attains cubic symmetry, and attains octahedral symmetry when $p&lt;1$. Previous characterization of superball packings has shown that they have a maximally random jammed (MRJ) state, whose properties (e.g., packing fraction $φ$) vary nonanalytically as $p$ diverges from unity. Here, we use an event-driven molecular dynamics algorithm to produce MRJ superball packings. We characterize their large-scale structure by examining the small-$Q$ behavior of their structure factors and spectral densities, which indicate these packings are effectively hyperuniform. We show that the mean width $\bar{w}$ is a useful length scale to make distances dimensionless in order to compare systematically superballs of different shape. We also compute the complementary cumulative pore-size distribution $F(δ)$ and find the pore sizes tend to decrease as $|1-p|$ increases. From $F(δ)$, we estimate the fluid permeability, mean survival time, and principal diffusion relaxation time of the packings. Additionally, we compute the diffusion spreadability and find the long-time power-law scaling indicates these packings are hyperuniform. Our results can be used to help inform the design of granular materials with targeted densities and transport properties.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-29T21:03:45Z</published>
+    <arxiv:comment>16 Pages, 17 Figures. SI: 4 Pages, 6 Figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review Materials, 6 025603 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Charles Emmett Maher</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevMaterials.6.025603</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevMaterials.6.025603" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.12540v2</id>
+    <title>Growth rate of 3D heaps of pieces</title>
+    <updated>2020-10-02T14:09:25Z</updated>
+    <link href="https://arxiv.org/abs/2009.12540v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.12540v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider configurational statistics of three-dimensional heaps of $N$ pieces ($N\gg 1$) on a simple cubic lattice in a large 3D bounding box of base $n \times n$, and calculate the growth rate, $Λ(n)$, of the corresponding partition function, $Z_N\sim N^θ[Λ(n)]^N$, at $n\gg 1$. Our computations rely on a theorem of G.X. Viennot \cite{viennot-rev}, which connects the generating function of a $(D+1)$-dimensional heap of pieces to the generating function of projection of these pieces onto a $D$-dimensional subspace. The growth rate of a heap of cubic blocks, which cannot touch each other by vertical faces, is thus related to the position of zeros of the partition function describing 2D lattice gas of hard squares. We study the corresponding partition function exactly at low densities on finite $n\times n$ lattice of arbitrary $n$, and extrapolate its behavior to the jamming transition density. This allows us to estimate the limiting growth rate, $Λ=\lim_{n\to\infty}Λ(n)\approx 9.5$. The same method works for any underlying 2D lattice and for various shapes of pieces: flat vertical squares, mapped to an ensemble of repulsive dimers, dominoes mapped to an ensemble of rectangles with hard-core repulsion, etc.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-26T08:48:41Z</published>
+    <arxiv:comment>14 pages, 8 figures, some comments are added, misprints corrected</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>M. V. Tamm</name>
+    </author>
+    <author>
+      <name>N. Pospelov</name>
+    </author>
+    <author>
+      <name>S. Nechaev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.09506v1</id>
+    <title>Highly confined mixtures of parallel hard squares: A Density Functional Theory study</title>
+    <updated>2019-10-21T16:49:05Z</updated>
+    <link href="https://arxiv.org/abs/1910.09506v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.09506v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using the Fundamental-Measure Density Functional Theory, we have studied theoretically the phase behavior of extremely confined mixtures of parallel hard squares in slit geometry. The pore width is chosen such that configurations consisting of two consecutive big squares, or three small squares, in the transverse direction, perpendicular to the walls, are forbidden. We analyzed two different mixtures with edge-lengths of species selected so as to allow or forbid one big plus one small square to fit into the channel. For the first mixture we obtained first-order transitions between symmetric and asymmetric packings of particles: small and big squares are preferentially adsorbed at different walls. Asymmetric configurations are shown to lead to more efficient packing at finite pressures. We argue that the stability region of the asymmetric phase in the pressure-composition plane is bounded so that the symmetric phase is stable at low and very high pressure. For the second mixture, we observe strong demixing between phases which are rich in different species. Demixing occurs in the transverse direction, i.e. the dividing interface is perpendicular to the walls, and phases exhibit symmetric density profiles. The possible experimental realization of this behaviour (which in practical terms is precluded by jamming) in strictly two-dimensional systems is discussed. Finally the phase behavior of a mixture with periodic boundary conditions is analyzed and the differences and similarities between the latter and the confined system are discussed. We claim that, although exact calculations discard the existence of true phase transitions in $1+ε$-dimensional systems, Density Functional Theory is still successful to describe packing properties of large clusters of particles.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-21T16:49:05Z</published>
+    <arxiv:comment>13 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 100, 062604 (2019)</arxiv:journal_ref>
+    <author>
+      <name>Yuri Martinez-Raton</name>
+    </author>
+    <author>
+      <name>Enrique Velasco</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.100.062604</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.100.062604" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.10361v2</id>
+    <title>Shape and Interaction Decoupling for Colloidal Pre-Assembly</title>
+    <updated>2021-08-13T12:09:16Z</updated>
+    <link href="https://arxiv.org/abs/1909.10361v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.10361v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Creating materials with structure that is independently controllable at a range of scales requires breaking naturally occurring hierarchies. Breaking these hierarchies can be achieved via the decoupling of building block attributes from structure during assembly. Here, we demonstrate both geometric and interaction decoupling in pre-assembled colloidal structures of cube-like particles with rounded edges. Through computer simulations and experiments, we show that compressing a small number of such cubes in spherical confinement results in clusters with highly reproducible structures that can be used as mesoscale building blocks to form the next level of structural hierarchy. These clusters demonstrate geometric decoupling between particle shape and cluster structure; namely, for clusters of up to nine particles, the colloidal superballs pack consistently like spheres, despite the presence of shape anisotropy and facets in the cubic-like particles. We confirm that cluster structure is also decoupled from inter-particle interaction, showing that the same structures arise from the spherical confinement of both non-magnetic and magnetic colloidal cubes with strong dipolar interactions. To highlight the potential of these superball clusters for hierarchical assembly, we demonstrate, using computer simulations, that clusters of six to nine particles can self-assemble into high-order structures that differ from those of similarly shaped particles without pre-assembly. These results demonstrate decoupling for anisotropic building blocks that can be further exploited for hierarchical materials development.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-23T13:42:16Z</published>
+    <arxiv:comment>8 pages, 6 figures, supporting info</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Science Advances, 2022, 8, 21, eabm0548</arxiv:journal_ref>
+    <author>
+      <name>Lucia Baldauf</name>
+    </author>
+    <author>
+      <name>Erin G. Teich</name>
+    </author>
+    <author>
+      <name>Peter Schall</name>
+    </author>
+    <author>
+      <name>Greg van Anders</name>
+    </author>
+    <author>
+      <name>Laura Rossi</name>
+    </author>
+    <arxiv:doi>10.1126/sciadv.abm0548</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1126/sciadv.abm0548" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.13151v1</id>
+    <title>Morphology and Kinetics of Random Sequential Adsorption of Superballs: From Hexapods to Cubes</title>
+    <updated>2019-05-30T16:14:43Z</updated>
+    <link href="https://arxiv.org/abs/1905.13151v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.13151v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Superballs represent a class of particles whose shapes are defined by ${|x|}^{2p}+{|y|}^{2p}+{|z|}^{2p} \le R^{2p}$, with $p\in(0,\infty)$ being the "deformation parameter". $0&lt;p&lt;0.5$ represents a family of hexapodlike (concave octahedrallike) particles, while for $0.5\leq p&lt;1$ and $p&gt;1$ one has, respectively, families of convex octahedrallike and cubelike particles, with $p=1,\;0.5$ and $\infty$ representing spheres, octahedra, and cubes. Colloidal zeolite suspensions, catalysis, and adsorption, as well as biomedical magnetic nanoparticles are but a few of the applications of packing of superballs. We introduce a universal method for simulating random sequential adsorption of superballs, which we refer to as "low-entropy" algorithm, in contrast with the conventional algorithm that represents a "high-entropy" method. The two algorithms yield, respectively, precise estimates of the jamming fraction $φ_\infty(p)$ and $ν(p)$, the exponent that characterizes the kinetics of adsorption at long times $t$, $φ(\infty)-φ(t)\sim t^{-ν(p)}$. Precise estimates of $φ_\infty(p)$ and $ν(p)$ are obtained and shown to be in agreement, in some special limits, with the existing analytical and numerical results.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-30T16:14:43Z</published>
+    <arxiv:comment>13 pages, 4 figures, 1 table, Submitted to Physical Review Letters</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 100, 020602 (2019)</arxiv:journal_ref>
+    <author>
+      <name>Pooria Yousefi</name>
+    </author>
+    <author>
+      <name>Hessam Malmir</name>
+    </author>
+    <author>
+      <name>Muhammad Sahimi</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.100.020602</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.100.020602" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.13262v1</id>
+    <title>Effect of Shape and Friction on the Packing and Flow of Granular Materials</title>
+    <updated>2018-10-31T13:03:25Z</updated>
+    <link href="https://arxiv.org/abs/1810.13262v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.13262v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The packing and flow of aspherical frictional particles are studied using discrete element simulations. Particles are superballs with shape $|x|^{s}+|y|^{s}+|z|^{s} = 1$ that varies from sphere ($s=2$) to cube ($s=\infty$), constructed with an overlapping-sphere model. Both packing fraction, $φ$, and coordination number, $z$, decrease monotonically with microscopic friction $μ$, for all shapes. However, this decrease is more dramatic for larger $s$ due to a reduction in the fraction of face-face contacts with increasing friction. For flowing grains, the dynamic friction $\tildeμ$ - the ratio of shear to normal stresses - depends on shape, microscopic friction and inertial number $I.$ For all shapes, $\tildeμ$ grows from its quasi-static value $\tildeμ_0$ as $(\tildeμ-\tildeμ_0) = dI^α,$ with different universal behavior for frictional and frictionless shapes. For frictionless shapes the exponent $α\approx 0.5$ and prefactor $d \approx 5\tildeμ_0$ while for frictional shapes $α\approx 1$ and $d$ varies only slightly. The results highlight that the flow exponents are universal and are consistent for all the shapes simulated here.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-31T13:03:25Z</published>
+    <arxiv:comment>6 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>K. Michael Salerno</name>
+    </author>
+    <author>
+      <name>Dan S. Bolintineanu</name>
+    </author>
+    <author>
+      <name>Gary S. Grest</name>
+    </author>
+    <author>
+      <name>Jeremy B. Lechman</name>
+    </author>
+    <author>
+      <name>Steven J. Plimpton</name>
+    </author>
+    <author>
+      <name>Ishan Srivastava</name>
+    </author>
+    <author>
+      <name>Leonardo E. Silbert</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.98.050901</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.98.050901" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.10878v1</id>
+    <title>New dense superball packings in three dimensions</title>
+    <updated>2018-06-28T11:09:28Z</updated>
+    <link href="https://arxiv.org/abs/1806.10878v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.10878v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we construct a new family of lattice packings for superballs in three dimensions (unit balls for the $l^p_3$ norm) with $p \in (1, 1.58]$. We conjecture that the family also exists for $p \in (1.58, \log_2 3 = 1.5849625\ldots]$. Like in the densest lattice packing of regular octahedra, each superball in our family of lattice packings has $14$ neighbors.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-28T11:09:28Z</published>
+    <arxiv:comment>11 pages, 4 tables, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Adv. Geom. 20 (2020), 473-482</arxiv:journal_ref>
+    <author>
+      <name>Maria Dostert</name>
+    </author>
+    <author>
+      <name>Frank Vallentin</name>
+    </author>
+    <arxiv:doi>10.1515/advgeom-2020-0002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1515/advgeom-2020-0002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.06751v3</id>
+    <title>Entropy of hard square lattice gas with $k$ distinct species of particles: coloring problems and vertex models</title>
+    <updated>2018-12-13T06:27:15Z</updated>
+    <link href="https://arxiv.org/abs/1806.06751v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.06751v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Coloring the faces of 2-dimensional square lattice with $k$ distinct colors such that no two adjacent faces have the same color is considered by establishing connection between the $k$ coloring problem and a generalized vertex model. Associating the colors with $k$ distinct species of particles with infinite repulsive force between nearest neighbors of the same type and zero chemical potential $μ$ associated with each species, the number of ways $[W(k)]^N$ for large $N$ is related to the entropy of the {\it{hard square lattice gas}} at close packing of the lattice, where $N$ is the number of lattice sites. We discuss the evaluation of $W(k)$ using transfer matrix method with non-periodic boundary conditions imposed on at least one dimension and show the characteristic Toeplitz block structure of the transfer matrix. Using this result, we present some analytical calculations for non-periodic models that remain finite in one dimension. The case $k=3$ is found to approach the exact result obtained by Lieb for the residual entropy of ice with periodic boundary conditions. Finally, we show, by explicit calculation of the contribution of subgraphs and the series expansion of $W(k)$, that the genenralized Pauling type estimate(which is based on mean field approximation) dominates at large values of $k$. We thus also provide an alternative series expansion for the chromatic polynomial of a regular square graph.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-18T15:03:45Z</published>
+    <arxiv:comment>16 pages, 8 figures, Some major revisions done</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <arxiv:journal_ref>J. Stat. Mech. (2018) 123102</arxiv:journal_ref>
+    <author>
+      <name>Sahil Kumar Singh</name>
+    </author>
+    <author>
+      <name>Sudhir R. Jain</name>
+    </author>
+    <arxiv:doi>10.1088/1742-5468/aaeb41</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1742-5468/aaeb41" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1704.08052v2</id>
+    <title>The columnar-disorder phase boundary in a mixture of hard squares and dimers</title>
+    <updated>2017-07-10T13:19:26Z</updated>
+    <link href="https://arxiv.org/abs/1704.08052v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1704.08052v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A mixture of hard squares, dimers and vacancies on a square lattice is known to undergo a transition from a low-density disordered phase to high-density columnar ordered phase. Along the fully packed square-dimer line, the system undergoes an Kosterliz-Thouless type transition to a phase with power law correlations. We estimate the phase boundary separating the ordered and disordered phases by calculating the interfacial tension between two differently ordered phases within two different approximation schemes. The analytically obtained phase boundary is in good agreement with Monte Carlo simulations.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-04-26T10:45:29Z</published>
+    <arxiv:comment>11 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 96, 012140 (2017)</arxiv:journal_ref>
+    <author>
+      <name>Dipanjan Mandal</name>
+    </author>
+    <author>
+      <name>R. Rajesh</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.96.012140</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.96.012140" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1702.07217v1</id>
+    <title>Ordering of hard rectangles in strong confinement</title>
+    <updated>2017-02-23T14:00:59Z</updated>
+    <link href="https://arxiv.org/abs/1702.07217v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1702.07217v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using transfer operator and fundamental measure theories, we examine the structural and thermodynamic properties of hard rectangles confined between two parallel hard walls. The side lengths of the rectangle ($L$ and $D$, $L&gt;D$) and the pore width ($H$) are chosen such that maximum two layers are allowed to form in planar order ($L$ is parallel to the wall), while only one in homeotropic order ($D$ is parallel to the wall). We observe three different structures: (i) a low density fluid phase with parallel alignment to the wall, (ii) an intermediate and high density fluid phase with two layers and planar ordering and (iii) a dense single fluid layer with homeotropic ordering. The appearance of these phases and the change in the ordering direction with density is a consequence of the varying close packing structures with $L$ and $H$. Interestingly, even three different structures can be observed with increasing density if $L$ is close to $H$.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-02-23T14:00:59Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>J. Chem. Phys. 146, 134503 (2017)</arxiv:journal_ref>
+    <author>
+      <name>Peter Gurin</name>
+    </author>
+    <author>
+      <name>Szabolcs Varga</name>
+    </author>
+    <author>
+      <name>Miguel Gonzalez-Pinto</name>
+    </author>
+    <author>
+      <name>Yuri Martinez-Raton</name>
+    </author>
+    <author>
+      <name>Enrique Velasco</name>
+    </author>
+    <arxiv:doi>10.1063/1.4979497</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.4979497" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1701.05154v1</id>
+    <title>Clustering in vibrated monolayers of granular rods</title>
+    <updated>2017-01-18T17:30:19Z</updated>
+    <link href="https://arxiv.org/abs/1701.05154v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1701.05154v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the ordering properties of vertically-vibrated monolayers of granular cylinders in a circular container at high packing fraction. In line with previous works by other groups, we identify liquid-crystalline ordering behaviour similar to that of two-dimensional hard rectangular particles subject to thermal equilibrium fluctuations. However, due to dissipation, there is a much stronger tendency for particles to cluster into parallel arrangements in the granular system. These clusters behave as a polydisperse mixture of long life-time `superparticles', and some aspects of the system behaviour can be understood by applying mean-field theories for equilibrium hard rectangles, based on two-body correlations, to these `superparticles'. Many other features of the granular system are different: (i) For small particle length-to-breadth ratio $κ$, we identify tetratic ordering at moderate packing fractions and smectic fluctuations at higher packing fractions, with no sharp transition between the two states. Both types of ordering can be explained in terms of clustering. (ii) For large $κ$, strong clustering precludes the stabilisation of a uniaxial nematic state, and the system exhibits a mixture of randomly-oriented clusters which, as packing fraction is increased, develops into states with smectic fluctuations, again through a diffuse transition. (iii) Vorticity excitations of the velocity field compete with smectic ordering, causing dynamic fluctuations and the absence of steady states at high densities; the tetratic state, by contrast, is very stiff against vorticity, and long-standing steady states, spatially and orientationally homogeneous except for four symmetrical defects located close to the wall, can be observed.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-01-18T17:30:19Z</published>
+    <arxiv:comment>13 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Soft Matter 13, 2571 (2017)</arxiv:journal_ref>
+    <author>
+      <name>Miguel Gonzalez-Pinto</name>
+    </author>
+    <author>
+      <name>Florentino Borondo</name>
+    </author>
+    <author>
+      <name>Yuri Martinez-Raton</name>
+    </author>
+    <author>
+      <name>Enrique Velasco</name>
+    </author>
+    <arxiv:doi>10.1039/c7sm00102a</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1039/c7sm00102a" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1605.06716v1</id>
+    <title>A geometric-Structure Theory for maximally Random Jammed Packings</title>
+    <updated>2016-05-22T00:21:55Z</updated>
+    <link href="https://arxiv.org/abs/1605.06716v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1605.06716v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Maximally random jammed (MRJ) particle packings can be viewed as prototypical glasses in that they are maximally disordered while simultaneously being mechanically rigid. The prediction of the MRJ packing density phi, among other packing properties of frictionless particles, still poses many theoretical challenges, even for congruent spheres or disks. Using the geometric-structure approach, we derive for the first time a highly accurate formula for MRJ densities for a very wide class of twodimensional frictionless packings, namely, binary convex superdisks, with shapes that continuously interpolate between circles and squares.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-05-22T00:21:55Z</published>
+    <arxiv:comment>9 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Scientific Reports, 2015 5:16722</arxiv:journal_ref>
+    <author>
+      <name>Jianxiang Tian</name>
+    </author>
+    <author>
+      <name>Y. Xu</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1038/srep16722</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/srep16722" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1512.08154v1</id>
+    <title>Phase behaviour and correlations of parallel hard squares: From highly confined to bulk systems</title>
+    <updated>2015-12-26T22:53:12Z</updated>
+    <link href="https://arxiv.org/abs/1512.08154v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1512.08154v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study a fluid of two-dimensional parallel hard squares in bulk and under confinement in channels, with the aim of evaluating the performance of Fundamental-Measure Theory (FMT). To this purpose, we first analyse the phase behaviour of the bulk system using FMT and Percus-Yevick theory, and compare the results with MD and MC simulations. In a second step, we study the confined system and check the results against those obtained from Transfer Matrix Method and from our own Monte Carlo simulations. Squares are confined to channels with parallel walls at angles of 0$^{\circ}$ or 45$^{\circ}$ relative to the diagonals of the parallel hard squares, respectively, which allows for an assessment of the effect of the external-potential symmetry on the fluid structural properties. In general FMT overestimates bulk correlations, predicting the existence of a columnar phase (absent in simulations) prior to crystallisation. The equation of state predicted by FMT compares well with simulations, although the PY approach with the virial route is better in some range of packing fractions. The FMT is highly accurate for the structure and correlations of the confined fluid due to the dimensional crossover property fulfilled by the theory. Both density profiles and equations of state of the confined system are accurately predicted by the theory. The highly non-uniform pair correlations inside the channel are also very well described by FMT.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-12-26T22:53:12Z</published>
+    <arxiv:comment>13 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>J. Phys.: Condens. Matter 28, 244002 (2016)</arxiv:journal_ref>
+    <author>
+      <name>Miguel Gonzalez-Pinto</name>
+    </author>
+    <author>
+      <name>Yuri Martinez-Raton</name>
+    </author>
+    <author>
+      <name>Szabolcs Varga</name>
+    </author>
+    <author>
+      <name>Peter Gurin</name>
+    </author>
+    <author>
+      <name>Enrique Velasco</name>
+    </author>
+    <arxiv:doi>10.1088/0953-8984/28/24/244002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/0953-8984/28/24/244002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1510.02331v3</id>
+    <title>New upper bounds for the density of translative packings of three-dimensional convex bodies with tetrahedral symmetry</title>
+    <updated>2017-01-10T21:04:51Z</updated>
+    <link href="https://arxiv.org/abs/1510.02331v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1510.02331v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we determine new upper bounds for the maximal density of translative packings of superballs in three dimensions (unit balls for the $l^p_3$-norm) and of Platonic and Archimedean solids having tetrahedral symmetry. Thereby, we improve Zong's recent upper bound for the maximal density of translative packings of regular tetrahedra from $0.3840\ldots$ to $0.3745\ldots$, getting closer to the best known lower bound of $0.3673\ldots$
+  We apply the linear programming bound of Cohn and Elkies which originally was designed for the classical problem of densest packings of round spheres. The proofs of our new upper bounds are computational and rigorous. Our main technical contribution is the use of invariant theory of pseudo-reflection groups in polynomial optimization.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-10-08T14:13:30Z</published>
+    <arxiv:comment>30 pages, 6 tables, 3 figures, (v3) comments of referees incorporated</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Comput. Geom. 58 (2017), 449-481</arxiv:journal_ref>
+    <author>
+      <name>Maria Dostert</name>
+    </author>
+    <author>
+      <name>Cristóbal Guzmán</name>
+    </author>
+    <author>
+      <name>Fernando Mário de Oliveira Filho</name>
+    </author>
+    <author>
+      <name>Frank Vallentin</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-017-9882-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-017-9882-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1411.0378v1</id>
+    <title>Completely packed O($n$) loop models and their relation with exactly solved coloring models</title>
+    <updated>2014-11-03T07:01:30Z</updated>
+    <link href="https://arxiv.org/abs/1411.0378v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1411.0378v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore the physical properties of the completely packed O($n$) loop model on the square lattice, and its generalization to an Eulerian graph model, which follows by including cubic vertices which connect the four incoming loop segments. This model includes crossing bonds as well. Our study of the properties of this model involve transfer-matrix calculations and finite-size scaling. The numerical results are compared to existing exact solutions, including solutions of special cases of a so-called coloring model, which are shown to be equivalent with our generalized loop model. The latter exact solutions correspond with seven one-dimensional branches in the parameter space of our generalized loop model. One of these branches, describing the case of nonintersecting loops, is already known to correspond with the ordering transition of the Potts model. We find that another exactly solved branch, which describes a model with nonintersecting loops and cubic vertices, corresponds with a first-order Ising-like phase transition for $n&gt;2$. For $1&lt;n&lt;2$, this branch can be interpreted in terms of a low-temperature O($n$) phase with corner-cubic anisotropy. For $n&gt;2$ this branch is the locus of a first-order phase boundary between a phase with a hard-square lattice-gas like ordering, and a phase dominated by cubic vertices. The first-order character of this transition is in agreement with a mean-field argument.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-11-03T07:01:30Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Yougang Wang</name>
+    </author>
+    <author>
+      <name>Wenan Guo</name>
+    </author>
+    <author>
+      <name>Henk W. J. Blöte</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.91.032123</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.91.032123" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1409.4569v1</id>
+    <title>Asymptotic Behavior of the Isotropic-Nematic and Nematic-Columnar Phase Boundaries for the System of Hard Rectangles on a Square lattice</title>
+    <updated>2014-09-16T10:33:36Z</updated>
+    <link href="https://arxiv.org/abs/1409.4569v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1409.4569v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A system of hard rectangles of size $m\times mk$ on a square lattice undergoes three entropy driven phase transitions with increasing density for large enough aspect ratio $k$: first from a low density isotropic to an intermediate density nematic phase, second from the nematic to a columnar phase, and third from the columnar to a high density sublattice phase. In this paper we show, from extensive Monte Carlo simulations of systems with $m=1,2$ and $3$, that the transition density for the isotropic-nematic transition is $\approx A_1/k$ when $k \gg 1$, where $A_1$ is independent of $m$. We estimate $A_1=4.80\pm 0.05$. Within a Bethe approximation, we obtain $A_1=2$ and the virial expansion truncated at second virial coefficient gives $A_1=1$. The critical density for the nematic-columnar transition when $m=2$ is numerically shown to tend to a value less than the full packing density as $k^{-1}$ when $k\to \infty$. We find that the critical Binder cumulant for this transition is non-universal and decreases as $k^{-1}$ for $k \gg 1$. However, the transition is shown to be in the Ising universality class.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-09-16T10:33:36Z</published>
+    <arxiv:comment>11 pages</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 91, 012105 (2015)</arxiv:journal_ref>
+    <author>
+      <name>Joyjit Kundu</name>
+    </author>
+    <author>
+      <name>R. Rajesh</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.91.012105</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.91.012105" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1311.4786v1</id>
+    <title>Exact results for deposition of binary mixtures of superdisks on the plane</title>
+    <updated>2013-11-19T15:53:55Z</updated>
+    <link href="https://arxiv.org/abs/1311.4786v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1311.4786v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the deposition of binary mixtures of oriented superdisks on a plane. Superdisks are chosen as objects bounded by $|x|^{2p}+|y|^{2p}=1$, where parameter $p$ controls their size and shape. For single-type superdisks, the maximum packing and jamming densities are known to be nonanalytic at $p=0.5$. For binary mixtures, we discover that nonanalyticities form a locus of points separating "phase diagram" of shape combinations into regions with different excluded-area constructions. An analytical expression for this phase boundary and exact constructions of the excluded-areas are presented.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-11-19T15:53:55Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>N. M. Švrakić</name>
+    </author>
+    <author>
+      <name>B. N. Aleksić</name>
+    </author>
+    <author>
+      <name>M. Belić</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1305.6120v2</id>
+    <title>Kinetics of Deposition of Oriented Superdisks</title>
+    <updated>2013-11-19T14:15:38Z</updated>
+    <link href="https://arxiv.org/abs/1305.6120v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1305.6120v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We use numerical Monte Carlo simulation to study kinetics of deposition of oriented superdisks, bounded by the Lame curves of the form $|x|^{2p}+|y|^{2p}=1$, on regular planar substrate. It was recently shown that the maximum packing density, as well as jamming density $ρ_{J}$, exhibit discontinuous derivative at $p=0.5$, when the shape changes from convex to concave form. By careful examination of the late-stage approach to the jamming limit, we find that the leading term in temporal development is also nonanalytic at $p=0.5$, and offer heuristic excluded-area arguments for this behavior.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-05-27T06:25:16Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>B. N. Aleksić</name>
+    </author>
+    <author>
+      <name>N. M. Švrakić</name>
+    </author>
+    <author>
+      <name>M. Belić</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.88.062112</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.88.062112" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1207.4932v1</id>
+    <title>Free Minimization of the Fundamental Measure Theory Functional: Freezing of Parallel Hard Squares and Cubes</title>
+    <updated>2012-07-20T12:15:17Z</updated>
+    <link href="https://arxiv.org/abs/1207.4932v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1207.4932v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Due to remarkable advances in colloid synthesis techniques, systems of squares and cubes, once an academic abstraction for theorists and simulators, are nowadays an experimental reality. By means of a free minimization of the free-energy functional, we apply Fundamental Measure Theory to analyze the phase behavior of parallel hard squares and hard cubes. We compare our results with those obtained by the traditional approach based on the Gaussian parameterization, finding small deviations and good overall agreement between the two methods. For hard squares our predictions feature at intermediate packing fraction a smectic phase, which is however expected to be unstable due to thermal fluctuations. This implies that for hard squares the theory predicts either a vacancy-rich second-order transition or a vacancy-poor weakly first-order phase transition at higher density. In accordance with previous studies, a second-order transition with a high vacancy concentration is predicted for hard cubes.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-07-20T12:15:17Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>S. Belli</name>
+    </author>
+    <author>
+      <name>M. Dijkstra</name>
+    </author>
+    <author>
+      <name>R. van Roij</name>
+    </author>
+    <arxiv:doi>10.1063/1.4754836</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.4754836" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1106.2368v1</id>
+    <title>Glassy dynamics and hysteresis in a linear system of orientable hard rods</title>
+    <updated>2011-06-13T01:57:09Z</updated>
+    <link href="https://arxiv.org/abs/1106.2368v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1106.2368v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the dynamics of a one-dimensional fluid of orientable hard rectangles with a non-coarse-grained microscopic mechanism of facilitation. The length occupied by a rectangle depends on its orientation, which is coupled to an external field. The equilibrium properties of our model are essentially those of the Tonks gas, but at high densities, the orientational degrees of freedom become effectively frozen due to jamming. This is a simple analytically tractable model of glassy phase. Under a cyclic variation of the pressure, hysteresis is observed. Following a pressure quench, the orientational persistence exhibits a two-stage decay characteristic of glassy systems.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-06-13T01:57:09Z</published>
+    <arxiv:comment>7 pages</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <arxiv:journal_ref>Physical Review E 84 (2011) 011505</arxiv:journal_ref>
+    <author>
+      <name>Jeferson J. Arenzon</name>
+    </author>
+    <author>
+      <name>Deepak Dhar</name>
+    </author>
+    <author>
+      <name>Ronald Dickman</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.84.011505</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.84.011505" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1104.4093v1</id>
+    <title>Hyperuniformity, quasi-long-range correlations, and void-space constraints in maximally random jammed particle packings. II. Anisotropy in particle shape</title>
+    <updated>2011-04-20T18:34:32Z</updated>
+    <link href="https://arxiv.org/abs/1104.4093v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.4093v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We extend the results from the first part of this series of two papers by examining hyperuniformity in heterogeneous media composed of impenetrable anisotropic inclusions. Specifically, we consider maximally random jammed packings of hard ellipses and superdisks and show that these systems both possess vanishing infinite-wavelength local-volume-fraction fluctuations and quasi-long-range pair correlations. Our results suggest a strong generalization of a conjecture by Torquato and Stillinger [Phys. Rev. E. 68, 041113 (2003)], namely that all strictly jammed saturated packings of hard particles, including those with size- and shape-distributions, are hyperuniform with signature quasi-long-range correlations. We show that our arguments concerning the constrained distribution of the void space in MRJ packings directly extend to hard ellipse and superdisk packings, thereby providing a direct structural explanation for the appearance of hyperuniformity and quasi-long-range correlations in these systems. Additionally, we examine general heterogeneous media with anisotropic inclusions and show for the first time that one can decorate a periodic point pattern to obtain a hard-particle system that is not hyperuniform with respect to local-volume-fraction fluctuations. This apparent discrepancy can also be rationalized by appealing to the irregular distribution of the void space arising from the anisotropic shapes of the particles. Our work suggests the intriguing possibility that the MRJ states of hard particles share certain universal features independent of the local properties of the packings, including the packing fraction and average contact number per particle.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-20T18:34:32Z</published>
+    <arxiv:comment>29 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Chase E. Zachary</name>
+    </author>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.83.051309</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.83.051309" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1008.2982v1</id>
+    <title>Jammed Hard-Particle Packings: From Kepler to Bernal and Beyond</title>
+    <updated>2010-08-17T22:49:45Z</updated>
+    <link href="https://arxiv.org/abs/1008.2982v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1008.2982v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This review describes the diversity of jammed configurations attainable by frictionless convex nonoverlapping (hard) particles in Euclidean spaces and for that purpose it stresses individual-packing geometric analysis. A fundamental feature of that diversity is the necessity to classify individual jammed configurations according to whether they are locally, collectively, or strictly jammed. Each of these categories contains a multitude of jammed configurations spanning a wide and (in the large system limit) continuous range of intensive properties, including packing fraction $φ$, mean contact number $Z$, and several scalar order metrics. Application of these analytical tools to spheres in three dimensions (an analog to the venerable Ising model) covers a myriad of jammed states, including maximally dense packings (as Kepler conjectured), low-density strictly-jammed tunneled crystals, and a substantial family of amorphous packings. With respect to the last of these, the current approach displaces the historically prominent but ambiguous idea of ``random close packing" (RCP) with the precise concept of ``maximally random jamming" (MRJ). This review also covers recent advances in understanding jammed packings of polydisperse sphere mixtures, as well as convex nonspherical particles, e.g., ellipsoids, ``superballs", and polyhedra. Because of their relevance to error-correcting codes and information theory, sphere packings in high-dimensional Euclidean spaces have been included as well. We also make some remarks about packings in (curved) non-Euclidean spaces. In closing this review, several basic open questions for future research to consider have been identified.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-08-17T22:49:45Z</published>
+    <arxiv:comment>37 figures, 6 tables; Reviews of Modern Physics, in press</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Reviews of Modern Physics, 82, 2633 (2010)</arxiv:journal_ref>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <arxiv:doi>10.1103/RevModPhys.82.2633</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/RevModPhys.82.2633" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1001.0423v1</id>
+    <title>Novel Features Arising in the Maximally Random Jammed Packings of Superballs</title>
+    <updated>2010-01-04T01:40:37Z</updated>
+    <link href="https://arxiv.org/abs/1001.0423v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1001.0423v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Dense random packings of hard particles are useful models of granular media and are closely related to the structure of nonequilibrium low-temperature amorphous phases of matter. Most work has been done for random jammed packings of spheres, and it is only recently that corresponding packings of nonspherical particles (e.g., ellipsoids) have received attention. Here we report a study of the maximally random jammed (MRJ) packings of binary superdisks and monodispersed superballs whose shapes are defined by |x_1|^2p+...+|x_2|^2p&lt;=1 with d = 2 and 3, respectively, where p is the deformation parameter with values in the interval (0, infinity). We find that the MRJ densities of such packings increase dramatically and nonanalytically as one moves away from the circular-disk and sphere point. Moreover, the disordered packings are hypostatic and the local arrangements of particles are necessarily nontrivially correlated to achieve jamming. We term such correlated structures "nongeneric". The degree of "nongenericity" of the packings is quantitatively characterized by determining the fraction of local coordination structures in which the central particles have fewer contacting neighbors than average. We also show that such seemingly special packing configurations are counterintuitively not rare. As the anisotropy of the particles increases, the fraction of rattlers decreases while the minimal orientational order increases. These novel characteristics result from the unique rotational symmetry breaking manner of the particles.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-01-04T01:40:37Z</published>
+    <arxiv:comment>20 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.81.041304</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.81.041304" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0909.0940v3</id>
+    <title>Dense Packings of Polyhedra: Platonic and Archimedean Solids</title>
+    <updated>2009-09-09T21:59:40Z</updated>
+    <link href="https://arxiv.org/abs/0909.0940v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0909.0940v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We formulate the problem of generating dense packings of nonoverlapping, non-tiling polyhedra within an adaptive fundamental cell subject to periodic boundary conditions as an optimization problem, which we call the Adaptive Shrinking Cell (ASC) scheme. This novel optimization problem is solved here (using a variety of multi-particle initial configurations) to find the dense packings of each of the Platonic solids in three-dimensional Euclidean space R3 , except for the cube, which is the only Platonic solid that tiles space. We find the densest known packings of tetrahedra, icosahedra, dodecahedra, and octahedra with densities 0.823, 0.836, 0.904, and 0.947, respectively. It is noteworthy that the densest tetrahedral packing possesses no long-range order. Unlike the densest tetrahedral packing, which must not be a Bravais lattice packing, the densest packings of the other non-tiling Platonic solids that we obtain are their previously known optimal (Bravais) lattice packings. We also derive a simple upper bound on the maximal density of packings of congruent nonspherical particles, and apply it to Platonic solids, Archimedean solids, superballs and ellipsoids. Our simulation results, rigorous upper bounds, and other theoretical arguments lead us to the conjecture that the densest packings of Platonic and Archimedean solids with central symmetry are given by their corresponding densest lattice packings. In addition, we conjecture that the optimal packing of any convex, congruent polyhedron without central symmetry generally is not a lattice packing.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-09-04T19:43:51Z</published>
+    <arxiv:comment>To appear in Phys. Rev. E. The paper is a sequel of a recent Nature paper, i.e., Nature 460, 876 (2009). In this paper, we reported a new packing of tetrahedra with higher density 0.823 than that reported in Nature (0.782). The paper is 52 pages, including 14 figures and 4 tables</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.80.041104</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.80.041104" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0905.0293v3</id>
+    <title>Single-Speed Molecular Dynamics of Hard Parallel Squares and Cubes</title>
+    <updated>2009-07-10T20:51:07Z</updated>
+    <link href="https://arxiv.org/abs/0905.0293v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0905.0293v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The fluid and solid equations of state for hard parallel squares and cubes are reinvestigated here over a wide range of densities. We use a novel single-speed version of molecular dynamics. Our results are compared with those from earlier simulations, as well as with the predictions of the virial series, the cell model, and Kirkwood's many-body single-occupancy model. The single-occupancy model is applied to give the absolute entropy of the solid phases just as was done earlier for hard disks and hard spheres. The excellent agreement found here with all relevant previous work shows very clearly that configurational properties, such as the equation of state, do not require the maximum-entropy Maxwell-Boltzmann velocity distribution. For both hard squares and hard cubes the free-volume theory provides a good description of the high-density solid-phase pressure. Hard parallel squares appear to exhibit a second-order melting transition at a density of 0.79 relative to close-packing. Hard parallel cubes have a more complicated equation of state, with several relatively-gentle curvature changes, but nothing so abrupt as to indicate a first-order melting transition. Because the number-dependence for the cubes is relatively large the exact nature of the cube transition remains unknown.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-05-03T23:30:30Z</published>
+    <arxiv:comment>11 Figures and 28 pages, in preparation for the Journal of Statistical Physics</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Wm G Hoover</name>
+    </author>
+    <author>
+      <name>Carol G Hoover</name>
+    </author>
+    <author>
+      <name>Marcus N. Bannerman</name>
+    </author>
+    <arxiv:doi>10.1007/s10955-009-9795-0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10955-009-9795-0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0902.3089v1</id>
+    <title>Random Sequential Adsorption of Oriented Superdisks</title>
+    <updated>2009-02-18T20:59:43Z</updated>
+    <link href="https://arxiv.org/abs/0902.3089v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0902.3089v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this work we extend recent study of the properties of the dense packing of "superdisks," by Y. Jiao, F. H. Stillinger and S. Torquato, Phys. Rev. Lett. 100, 245504 (2008), to the jammed state formed by these objects in random sequential adsorption. The superdisks are two-dimensional shapes bound by the curves of the form |x|^(2p) + |y|^(2p) = 1, with p &gt; 0. We use Monte Carlo simulations and theoretical arguments to establish that p = 1/2 is a special point at which the jamming density has a discontinuous derivative as a function of p. The existence of this point can be also argued for by geometrical arguments.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-02-18T20:59:43Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 79, article 042103, 4 pages (2009)</arxiv:journal_ref>
+    <author>
+      <name>Oleksandr Gromenko</name>
+    </author>
+    <author>
+      <name>Vladimir Privman</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.79.042103</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.79.042103" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0902.1504v1</id>
+    <title>Optimal Packings of Superballs</title>
+    <updated>2009-02-09T19:40:25Z</updated>
+    <link href="https://arxiv.org/abs/0902.1504v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0902.1504v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Dense hard-particle packings are intimately related to the structure of low-temperature phases of matter and are useful models of heterogeneous materials and granular media. Most studies of the densest packings in three dimensions have considered spherical shapes, and it is only more recently that nonspherical shapes (e.g., ellipsoids) have been investigated. Superballs (whose shapes are defined by |x1|^2p + |x2|^2p + |x3|^2p &lt;= 1) provide a versatile family of convex particles (p &gt;= 0.5) with both cubic- and octahedral-like shapes as well as concave particles (0 &lt; p &lt; 0.5) with octahedral-like shapes. In this paper, we provide analytical constructions for the densest known superball packings for all convex and concave cases. The candidate maximally dense packings are certain families of Bravais lattice packings. The maximal packing density as a function of p is nonanalytic at the sphere-point (p = 1) and increases dramatically as p moves away from unity. The packing characteristics determined by the broken rotational symmetry of superballs are similar to but richer than their two-dimensional "superdisk" counterparts, and are distinctly different from that of ellipsoid packings. Our candidate optimal superball packings provide a starting point to quantify the equilibrium phase behavior of superball systems, which should deepen our understanding of the statistical thermodynamics of nonspherical-particle systems.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-02-09T19:40:25Z</published>
+    <arxiv:comment>28 pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <author>
+      <name>Frank Stillinger</name>
+    </author>
+    <author>
+      <name>Sal Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.79.041309</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.79.041309" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0712.0420v1</id>
+    <title>Dense Packings of Superdisks and the Role of Symmetry</title>
+    <updated>2007-12-04T01:26:19Z</updated>
+    <link href="https://arxiv.org/abs/0712.0420v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0712.0420v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We construct the densest known two-dimensional packings of superdisks in the plane whose shapes are defined by |x^(2p) + y^(2p)| &lt;= 1, which contains both convex-shaped particles (p &gt; 0.5, with the circular-disk case p = 1) and concave-shaped particles (0 &lt; p &lt; 0.5). The packings of the convex cases with p 1 generated by a recently developed event-driven molecular dynamics (MD) simulation algorithm [Donev, Torquato and Stillinger, J. Comput. Phys. 202 (2005) 737] suggest exact constructions of the densest known packings. We find that the packing density (covering fraction of the particles) increases dramatically as the particle shape moves away from the "circular-disk" point (p = 1). In particular, we find that the maximal packing densities of superdisks for certain p 6 = 1 are achieved by one of the two families of Bravais lattice packings, which provides additional numerical evidence for Minkowski's conjecture concerning the critical determinant of the region occupied by a superdisk. Moreover, our analysis on the generated packings reveals that the broken rotational symmetry of superdisks influences the packing characteristics in a non-trivial way. We also propose an analytical method to construct dense packings of concave superdisks based on our observations of the structural properties of packings of convex superdisks.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-12-04T01:26:19Z</published>
+    <arxiv:comment>15 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.100.245504</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.100.245504" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0705.0868v1</id>
+    <title>Demixing and orientational ordering in mixtures of rectangular particles</title>
+    <updated>2007-05-07T08:31:04Z</updated>
+    <link href="https://arxiv.org/abs/0705.0868v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0705.0868v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Using scaled-particle theory for binary mixtures of two-dimensional hard particles with rotational freedom, we analyse the stability of nematic phases and the demixing phase behaviour of a variety of mixtures, focussing on cases where at least one of the components consists of hard rectangles or hard squares. A pure fluid of hard rectangles may exhibit, aside from the usual uniaxial nematic phase, an additional (tetratic) oriented phase, possessing two directors, which is the analogue of the biaxial or cubatic phases in three- dimensional fluids. There is computer simulation evidence that the tetratic phase might be stable with respect to phases with spatial order for rectangles with low aspect ratios. As hard rectangles are mixed with other particles not possessing stable tetratic order by themselves, the tetratic phase is destabilised, via a first- or second-order phase transition, to uniaxial nematic or isotropic phases; for hard rectangles of low aspect ratio tetratic order persists in a relatively large range of volume fractions. The order of these transitions depends on the particle geometry, dimensions and thermodynamic conditions of the mixture. The second component of the mixture has been chosen to be hard discs or disco-rectangles, the geometry of which is different from that of rectangles, leading to packing frustration and demixing behaviour, or simply rectangles of different aspect ratio. These mixtures may be good candidates for observing thermodynamically stable tetratic phases in monolayers of hard particles. Finally, demixing between fluid (isotropic--tetratic or tetratic--tetratic) phases is seen to occur in mixtures of hard squares of different sizes when the size ratio is sufficiently large.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-05-07T08:31:04Z</published>
+    <arxiv:comment>27 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 76, 031704 (2007).</arxiv:journal_ref>
+    <author>
+      <name>D. de las Heras</name>
+    </author>
+    <author>
+      <name>Y. Martinez-Raton</name>
+    </author>
+    <author>
+      <name>E. Velasco</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.76.031704</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.76.031704" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0704.1467v1</id>
+    <title>Capillary ordering and layering transitions in two-dimensional hard-rod fluids</title>
+    <updated>2007-04-11T17:53:06Z</updated>
+    <link href="https://arxiv.org/abs/0704.1467v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0704.1467v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this article we calculate the surface phase diagram of a two-dimensional hard-rod fluid confined between two hard lines. In a first stage we study the semi-infinite system consisting of an isotropic fluid in contact with a single hard line. We have found complete wetting by the columnar phase at the wall-isotropic fluid interface. When the fluid is confined between two hard walls, capillary columnar ordering occurs via a first-order phase transition. For higher chemical potentials the system exhibits layering transitions even for very narrow slits (near the one-dimensional limit). The theoretical model used was a density-functional theory based on the Fundamental-Measure Functional applied to a fluid of hard rectangles in the restricted-orientation approximation (Zwanzig model). The results presented here can be checked experimentally in two-dimensional granular media made of rods, where vertical motions induced by an external source and excluded volume interactions between the grains allow the system to explore those stationary states which entropically maximize packing configurations. We claim that some of the surface phenomena found here can be present in two-dimensional granular-media fluids.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-04-11T17:53:06Z</published>
+    <arxiv:comment>13 pages, 15 figures. To appear in Phys. Rev. E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 75, 051708 (2007).</arxiv:journal_ref>
+    <author>
+      <name>Yuri Martinez-Raton</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.75.051708</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.75.051708" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0411584v1</id>
+    <title>Effect of particle geometry on phase transitions in two-dimensional liquid crystals</title>
+    <updated>2004-11-23T18:35:18Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0411584v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0411584v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Using a version of density-functional theory which combines Onsager approximation and fundamental-measure theory for spatially nonuniform phases, we have studied the phase diagram of freely rotating hard rectangles and hard discorectangles. We find profound differences in the phase behavior of these models, which can be attributed to their different packing properties. Interestingly, bimodal orientational distribution functions are found in the nematic phase of hard rectangles, which cause a certain degree of biaxial order, albeit metastable with respect to spatially ordered phases. This feature is absent in discorectangles, which always show unimodal behavior. This result may be relevant in the light of recent experimental results which have confirmed the existence of biaxial phases. We expect that some perturbation of the particle shapes (either a certain degree of polydispersity or even bimodal dispersity in the aspect ratios) may actually destabilize spatially ordered phases thereby stabilizing the biaxial phase.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-11-23T18:35:18Z</published>
+    <arxiv:comment>9 pages, 7 figures, to appear in JCP</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>J. Chem. Phys. 122, 064903 (2005).</arxiv:journal_ref>
+    <author>
+      <name>Yuri Martinez-Raton</name>
+    </author>
+    <author>
+      <name>Enrique Velasco</name>
+    </author>
+    <author>
+      <name>Luis Mederos</name>
+    </author>
+    <arxiv:doi>10.1063/1.1849159</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.1849159" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0306221v1</id>
+    <title>Phase behavior of hard-core lattice gases: A Fundamental Measure approach</title>
+    <updated>2003-06-10T09:28:47Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0306221v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0306221v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We use an extension of fundamental measure theory to lattice hard-core fluids to study the phase diagram of two different systems. First, two-dimensional parallel hard squares with edge-length $σ=2$ in a simple square lattice. This system is equivalent to the lattice gas with first and second neighbor exclusion in the same lattice, and has the peculiarity that its close packing is degenerated (the system orders in sliding columns). A comparison with other theories is discussed. Second, a three-dimensional binary mixture of parallel hard cubes with $σ_{\rm{L}}=6$ and $σ_{\rm{S}}=2$. Previous simulations of this model only focused on fluid phases. Thanks to the simplicity introduced by the discrete nature of the lattice we have been able to map out the complete phase diagram (both uniform and nonuniform phases) through a free minimization of the free energy functional, so the structure of the ordered phases is obtained as a result. A zoo of entropy-driven phase transitions is found: one-, two- and three-dimensional positional ordering, as well as fluid-ordered phase and solid-solid demixings.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2003-06-10T09:28:47Z</published>
+    <arxiv:comment>14 pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Luis Lafuente</name>
+      <arxiv:affiliation>GISC, Departamento de Matematicas, Universidad Carlos III de Madrid</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jose A. Cuesta</name>
+      <arxiv:affiliation>GISC, Departamento de Matematicas, Universidad Carlos III de Madrid</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1063/1.1615511</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.1615511" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9810055v1</id>
+    <title>Critical packing fraction at the phase separation transition in hard-core mixtures</title>
+    <updated>1998-10-06T13:32:31Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9810055v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9810055v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper, I relate the phase separation transition in binary hard-core mixtures in the limit of small size ratio to a bond percolation transition. It allows to estimate the critical packing fraction at the transition as a function of the size ratio and the composition of the mixture for different shapes of objects. The theoretical predictions are in excellent quantitative agreement with numerical simulations of binary parallel hard squares mixtures.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1998-10-06T13:32:31Z</published>
+    <arxiv:comment>4 pages and 1 figure</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 82 pp960-963 (1999)</arxiv:journal_ref>
+    <author>
+      <name>Arnaud Buhot</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.82.960</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.82.960" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9302033v1</id>
+    <title>Irreversible Multilayer Adsorption</title>
+    <updated>1993-02-20T23:02:54Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9302033v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9302033v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Random sequential adsorption (RSA) models have been studied due to their relevance to deposition processes on surfaces. The depositing particles are represented by hard-core extended objects; they are not allowed to overlap. Numerical Monte Carlo studies and analytical considerations are reported for 1D and 2D models of multilayer adsorption processes. Deposition without screening is investigated, in certain models the density may actually increase away from the substrate. Analytical studies of the late stage coverage behavior show the crossover from exponential time dependence for the lattice case to the power law behavior in the continuum deposition. 2D lattice and continuum simulations rule out some "exact" conjectures for the jamming coverage. For the deposition of dimers on a 1D lattice with diffusional relaxation we find that the limiting coverage (100%) is approached according to the ~1/t**0.5 power-law preceded, for fast diffusion, by the mean-field crossover regime with the intermediate ~1/t behavior. In case of k-mer deposition (k&gt;3) with diffusion the void fraction decreases according to the power-law t**[-1/(k-1)]. In the case of RSA of lattice hard squares in 2D with diffusional relaxation the approach to the full coverage is ~t**(-0.5).</summary>
+    <category term="cond-mat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1993-02-20T23:02:54Z</published>
+    <arxiv:comment>5 pages (plain LaTeX)</arxiv:comment>
+    <arxiv:primary_category term="cond-mat"/>
+    <arxiv:journal_ref>Computer Simulation Studies in Condensed-Matter Physics VI, edited by D. P. Landau, K. K. Mon, and H.-B. Schuettler, Springer Proceedings in Physics, Vol. 76, Pages 143-147 (Springer, Berlin, 1993)</arxiv:journal_ref>
+    <author>
+      <name>P. Nielaba</name>
+    </author>
+    <author>
+      <name>V. Privman</name>
+    </author>
+    <author>
+      <name>J. -S. Wang</name>
+    </author>
+    <arxiv:doi>10.1007/978-3-642-78448-4_13</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/978-3-642-78448-4_13" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9210025v1</id>
+    <title>Collective Effects in Random Sequential Adsorption of Diffusing Hard Squares</title>
+    <updated>1992-10-24T00:42:15Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9210025v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9210025v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study by Monte Carlo computer simulations random sequential adsorption (RSA) with diffusional relaxation, of lattice hard squares in two dimensions. While for RSA without diffusion the coverage approaches its maximum jamming value (large-time fractional coverage) exponentially, added diffusion allows the deposition process to proceed to the full coverage. The approach to the full coverage is consistent with the t**(-1/2) power law reminiscent of the equilibrium cluster coarsening in models with nonconserved order-parameter dynamics.</summary>
+    <category term="cond-mat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1992-10-24T00:42:15Z</published>
+    <arxiv:comment>11 pages (plain TeX), 4 figures (PostScript)</arxiv:comment>
+    <arxiv:primary_category term="cond-mat"/>
+    <arxiv:journal_ref>Mod.Phys.Lett.B7:189-196,1993</arxiv:journal_ref>
+    <author>
+      <name>J. -S. Wang</name>
+    </author>
+    <author>
+      <name>P. Nielaba</name>
+    </author>
+    <author>
+      <name>V. Privman</name>
+    </author>
+    <arxiv:doi>10.1142/S0217984993000217</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1142/S0217984993000217" title="doi"/>
+  </entry>
+</feed>

@@ -1,0 +1,16 @@
+softschema:
+  contract: packing.squares:PackingStrategy/v1
+  schema: packing-strategy.schema.yaml
+  envelope: strategy
+  status: enforced
+strategy:
+  name: sweep-landing
+  n: 11
+  seed: 3
+  phases:
+    - mechanism: scatter
+      label: start anywhere
+      side: {relative_to: record, factor: 1.0}
+    - mechanism: guide
+      label: land on the record (guided, not a search result)
+      target: {source: record, match: by-motion, steps: 400, pull: 5.0}

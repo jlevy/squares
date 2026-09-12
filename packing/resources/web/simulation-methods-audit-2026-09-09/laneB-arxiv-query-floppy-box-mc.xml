@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/yJdSIU59UInMwFNAsA3wMkNsThI</id>
+  <title>arXiv Query: search_query=all:"floppy-box" OR all:"floppy box Monte Carlo"&amp;id_list=&amp;start=0&amp;max_results=30</title>
+  <updated>2026-09-09T07:39:20Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22floppy-box%22+OR+all:%22floppy+box+Monte+Carlo%22&amp;start=0&amp;max_results=30&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>30</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2003.08889v2</id>
+    <title>Infinite-pressure phase diagram of binary mixtures of (non)additive hard disks</title>
+    <updated>2020-05-28T13:21:46Z</updated>
+    <link href="https://arxiv.org/abs/2003.08889v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.08889v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>One versatile route to the creation of two-dimensional crystal structures on the nanometer to micrometer scale is the self-assembly of colloidal particles at an interface. Here, we explore the crystal phases that can be expected from the self-assembly of mixtures of spherical particles of two different sizes, which we map to (additive or non-additive) hard-disk mixtures. We map out the infinite-pressure phase diagram for these mixtures, using Floppy Box Monte Carlo simulations to systematically sample candidate crystal structures with up to 12 disks in the unit cell. As a function of the size ratio and number ratio of the two species of particles, we find a rich variety of periodic crystal structures. Additionally, we identify random tiling regions to predict random tiling quasicrystal stability ranges. Increasing non-additivity both gives rise to additional crystal phases and broadens the stability regime for crystal structures involving a large number of large-small contacts, including random tilings. Our results provide useful guidelines for controlling the self-assembly of colloidal particles at interfaces.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-19T16:23:45Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Etienne Fayen</name>
+    </author>
+    <author>
+      <name>Anuradha Jagannathan</name>
+    </author>
+    <author>
+      <name>Giuseppe Foffi</name>
+    </author>
+    <author>
+      <name>Frank Smallenburg</name>
+    </author>
+    <arxiv:doi>10.1063/5.0008230</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/5.0008230" title="doi"/>
+  </entry>
+</feed>

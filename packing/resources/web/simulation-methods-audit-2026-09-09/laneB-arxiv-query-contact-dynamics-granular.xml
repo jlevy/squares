@@ -1,0 +1,1391 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/y6E7jhN9dTM7gkubF2HZnroONVA</id>
+  <title>arXiv Query: search_query=all:"contact dynamics" AND all:granular&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:24:36Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22contact+dynamics%22+AND+all:granular&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>47</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.00678v2</id>
+    <title>ABot-M0.5: Unified Mobility-and-Manipulation World Action Model</title>
+    <updated>2026-07-06T08:13:44Z</updated>
+    <link href="https://arxiv.org/abs/2607.00678v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.00678v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mobile manipulation is a key capability for general-purpose robots, yet remains challenging for current embodied learning methods. VLA policies are typically reactive and lack explicit world modeling, while existing World Action Models (WAMs) are still poorly aligned with the structure of mobile manipulation: they operate on coarse video chunks, model entangled navigation-manipulation actions, and train inverse dynamics under supervision that does not match autoregressive inference. As a result, they often miss fine-grained contact dynamics, suffer from action-distribution conflicts, and accumulate errors over long-horizon rollouts. We propose ABot-M0.5, a new WAM built on the insight that mobile manipulation requires alignment at three levels: temporal granularity, action space, and train-test consistency. To align temporal granularity, we introduce intermediate latent actions that capture local visual state transitions and serve as an bridging action space between video latents and embodiment-specific controls. To align action space, we design a dual-level Mixture-of-Transformers architecture that disentangles both modality representations and heterogeneous action subspaces such as base movement and arm manipulation. To align inference conditions, we propose the dream-forcing training strategy that progressively trains inverse dynamics on model-predicted videos, improving train-test alignment and robustness during autoregressive prediction. Experiments on challenging mobile and fine-grained manipulation benchmarks demonstrate that ABot-M0.5 achieves state-of-the-art performance in both long-horizon task success and finegrained control accuracy. These results highlight the critical importance of granularity-aligned, action-disentangled, and inference-consistent world-action modeling.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-01T09:21:20Z</published>
+    <arxiv:comment>Code: https://github.com/amap-cvlab/ABot-Manipulation</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ronghan Chen</name>
+    </author>
+    <author>
+      <name>Yandan Yang</name>
+    </author>
+    <author>
+      <name>Zuojin Tang</name>
+    </author>
+    <author>
+      <name>Dongjie Huo</name>
+    </author>
+    <author>
+      <name>Tong Lin</name>
+    </author>
+    <author>
+      <name>Haoning Wu</name>
+    </author>
+    <author>
+      <name>Haoyun Liu</name>
+    </author>
+    <author>
+      <name>Yuzhi Chen</name>
+    </author>
+    <author>
+      <name>Lulu Zheng</name>
+    </author>
+    <author>
+      <name>Botai Yuan</name>
+    </author>
+    <author>
+      <name>Tianlun Li</name>
+    </author>
+    <author>
+      <name>Mingxin Wang</name>
+    </author>
+    <author>
+      <name>Dekang Qi</name>
+    </author>
+    <author>
+      <name>Bin Hu</name>
+    </author>
+    <author>
+      <name>Wei Mei</name>
+    </author>
+    <author>
+      <name>Yuze Xuan</name>
+    </author>
+    <author>
+      <name>Haolong Yang</name>
+    </author>
+    <author>
+      <name>Yanqing Zhu</name>
+    </author>
+    <author>
+      <name>Mu Xu</name>
+    </author>
+    <author>
+      <name>Zhiheng Ma</name>
+    </author>
+    <author>
+      <name>Xinyuan Chang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.28545v2</id>
+    <title>ManipArena: Comprehensive Real-world Evaluation of Reasoning-Oriented Generalist Robot Manipulation</title>
+    <updated>2026-07-01T17:48:55Z</updated>
+    <link href="https://arxiv.org/abs/2603.28545v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.28545v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision-Language-Action (VLA) models and world-action models have emerged as central paradigms for general-purpose robotic intelligence, yet their empirical progress remains constrained by the absence of evaluation protocols that are both physically realistic and diagnostically controlled. Simulator-centric benchmarks provide scale and reproducibility, but cannot fully capture the reality gap induced by perception noise, contact dynamics, latency, calibration error, and hardware constraints. Conversely, real-robot evaluations are often fragmented across platforms, scenes, objects, and scoring rules, making fair comparison and failure attribution difficult. We introduce ManipArena, a standardized real-robot evaluation framework for studying manipulation generalization under matched physical conditions. ManipArena comprises 20 tasks, 10,812 expert trajectories, 13.5M frames, and approximately 188 robot hours across tabletop and mobile manipulation. The framework combines schema-defined task variation, stratified in-domain, visualshift, and semantic-OOD trials, subtask-level partial-credit scoring, three-level language annotations, low-level motor signals, and paired real-to-sim environments reconstructed from physical scenes. Using ManipArena, we evaluate seven tabletop configurations spanning VLA and world-action-model policies. The results show that real-robot conclusions depend not only on architecture, but also on model provenance, fine-tuning regime, data sampling, and annotation granularity. ManipArena thus provides a reproducible and interpretable foundation for diagnosing capability boundaries and failure modes in embodied generalization.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-30T15:06:41Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yu Sun</name>
+    </author>
+    <author>
+      <name>Meng Cao</name>
+    </author>
+    <author>
+      <name>Yang Ping</name>
+    </author>
+    <author>
+      <name>Kaidong Zhang</name>
+    </author>
+    <author>
+      <name>Qingxuan Chen</name>
+    </author>
+    <author>
+      <name>Rongtao Xu</name>
+    </author>
+    <author>
+      <name>Liangwang Ruan</name>
+    </author>
+    <author>
+      <name>Xuecheng Chen</name>
+    </author>
+    <author>
+      <name>Dongxiu Liu</name>
+    </author>
+    <author>
+      <name>Yunxiao Yan</name>
+    </author>
+    <author>
+      <name>Zunnan Xu</name>
+    </author>
+    <author>
+      <name>Runze Xu</name>
+    </author>
+    <author>
+      <name>Charles Yang</name>
+    </author>
+    <author>
+      <name>Peilun Zhang</name>
+    </author>
+    <author>
+      <name>Xiaofan Li</name>
+    </author>
+    <author>
+      <name>Ruyi Gan</name>
+    </author>
+    <author>
+      <name>Liang Ma</name>
+    </author>
+    <author>
+      <name>Yuehao Yin</name>
+    </author>
+    <author>
+      <name>Jincheng Yu</name>
+    </author>
+    <author>
+      <name>Lufang Chen</name>
+    </author>
+    <author>
+      <name>Yuxin Liang</name>
+    </author>
+    <author>
+      <name>Peng Zhai</name>
+    </author>
+    <author>
+      <name>Hao Wang</name>
+    </author>
+    <author>
+      <name>Ivan Laptev</name>
+    </author>
+    <author>
+      <name>Ian Reid</name>
+    </author>
+    <author>
+      <name>Qian Wang</name>
+    </author>
+    <author>
+      <name>Xiaodan Liang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.24945v1</id>
+    <title>Energy-Conserving Contact Dynamics of Nonspherical Rigid-Body Particles</title>
+    <updated>2025-10-28T20:17:33Z</updated>
+    <link href="https://arxiv.org/abs/2510.24945v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.24945v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Understanding the contact dynamics of nonspherical particles beyond the microscale is crucial for accurately modeling colloidal and granular systems, where shape anisotropy dictates structural organization and transport properties. In this paper, we introduce an energy-conserving contact dynamics framework for arbitrary convex rigid-body particles, integrating vertex-boundary interactions in 2D with vertex-surface and edge-edge detection in 3D. This formulation enables continuous force evaluation and strictly prevents particle overlap while conserving total energy during translational and rotational motion. Simulations of polygonal and polyhedral particles confirm the framework's stability and demonstrate its capability to capture packing behavior, anisotropic diffusion, and equations of state. The framework establishes a robust and extensible foundation for investigating the nonequilibrium dynamics of complex nonspherical particle systems, with potential applications in colloidal self-assembly, granular flow, and hydrodynamics.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-28T20:17:33Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>APL Computational Physics 2, 016108 (2026)</arxiv:journal_ref>
+    <author>
+      <name>Haoyuan Shi</name>
+    </author>
+    <author>
+      <name>Christopher J. Mundy</name>
+    </author>
+    <author>
+      <name>Gregory K. Schenter</name>
+    </author>
+    <author>
+      <name>Jaehun Chun</name>
+    </author>
+    <arxiv:doi>10.1063/5.0319853</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/5.0319853" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.17335v4</id>
+    <title>DDBot: Differentiable Physics-based Digging Robot for Unknown Granular Materials</title>
+    <updated>2026-01-06T13:34:28Z</updated>
+    <link href="https://arxiv.org/abs/2510.17335v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.17335v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automating the manipulation of granular materials poses significant challenges due to complex contact dynamics, unpredictable material properties, and intricate system states. Existing approaches often fail to achieve efficiency and accuracy in such tasks. To fill the research gap, this article studies the small-scale and high-precision granular material digging task with unknown physical properties. A key scientific problem addressed is the feasibility of applying first-order gradient-based optimization to complex differentiable granular material simulation and overcoming associated numerical instability. A new framework, named differentiable digging robot (DDBot), is proposed to manipulate granular materials, including sand and soil. Specifically, we equip DDBot with a differentiable physics-based simulator, tailored for granular material manipulation, powered by GPU-accelerated parallel computing and automatic differentiation. DDBot can perform efficient differentiable system identification and high-precision digging skill optimization for unknown granular materials, which is enabled by a differentiable skill-to-action mapping, a task-oriented demonstration method, gradient clipping and line search-based gradient descent. Experimental results show that DDBot can efficiently (converge within 5 to 20 minutes) identify unknown granular material dynamics and optimize digging skills, with high-precision results in zero-shot real-world deployments, highlighting its practicality. Benchmark results against state-of-the-art baselines also confirm the robustness and efficiency of DDBot in such digging tasks.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-20T09:27:24Z</published>
+    <arxiv:comment>Published as a regular paper by the IEEE Transactions on Robotics</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Transactions on Robotics, vol. 42, pp. 152-169, 2026</arxiv:journal_ref>
+    <author>
+      <name>Xintong Yang</name>
+    </author>
+    <author>
+      <name>Minglun Wei</name>
+    </author>
+    <author>
+      <name>Yu-Kun Lai</name>
+    </author>
+    <author>
+      <name>Ze Ji</name>
+    </author>
+    <arxiv:doi>10.1109/TRO.2025.3636815</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TRO.2025.3636815" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.04411v1</id>
+    <title>Synthesizing realistic sand assemblies with denoising diffusion in latent space</title>
+    <updated>2023-06-07T13:10:08Z</updated>
+    <link href="https://arxiv.org/abs/2306.04411v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.04411v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The shapes and morphological features of grains in sand assemblies have far-reaching implications in many engineering applications, such as geotechnical engineering, computer animations, petroleum engineering, and concentrated solar power. Yet, our understanding of the influence of grain geometries on macroscopic response is often only qualitative, due to the limited availability of high-quality 3D grain geometry data. In this paper, we introduce a denoising diffusion algorithm that uses a set of point clouds collected from the surface of individual sand grains to generate grains in the latent space. By employing a point cloud autoencoder, the three-dimensional point cloud structures of sand grains are first encoded into a lower-dimensional latent space. A generative denoising diffusion probabilistic model is trained to produce synthetic sand that maximizes the log-likelihood of the generated samples belonging to the original data distribution measured by a Kullback-Leibler divergence. Numerical experiments suggest that the proposed method is capable of generating realistic grains with morphology, shapes and sizes consistent with the training data inferred from an F50 sand database. We then use a rigid contact dynamic simulator to pour the synthetic sand in a confined volume to form granular assemblies in a static equilibrium state with targeted distribution properties. To ensure third-party validation, 50,000 synthetic sand grains and the 1,542 real synchrotron microcomputed tomography (SMT) scans of the F50 sand, as well as the granular assemblies composed of synthetic sand grains are made available in an open-source repository.</summary>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-07T13:10:08Z</published>
+    <arxiv:comment>28 pages, 13 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CE"/>
+    <author>
+      <name>Nikolaos N. Vlassis</name>
+    </author>
+    <author>
+      <name>WaiChing Sun</name>
+    </author>
+    <author>
+      <name>Khalid A. Alshibli</name>
+    </author>
+    <author>
+      <name>Richard A. Regueiro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.13679v1</id>
+    <title>Oedometric compression of a granular material: computation of energies involved during breakage with a discrete element modelling</title>
+    <updated>2022-03-21T08:52:43Z</updated>
+    <link href="https://arxiv.org/abs/2203.13679v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.13679v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A numerical model able to simulate the grain breakage with the discrete element method, using the "Non-Smooth Contact Dynamics" is presented. The model reproduces 3D grains having complex shapes and is tested in single grain and in oedometric compressions. Numerical simulations are then carried out to evaluate the different energies active during breakage (surface creation and redistribution energies). The surface creation energy is estimated. Results are closed to the ones found in the literature.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-21T08:52:43Z</published>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <arxiv:journal_ref>EPJ Web of Conferences, EDP Sciences, 2021, 249, pp.07008</arxiv:journal_ref>
+    <author>
+      <name>François Nader</name>
+      <arxiv:affiliation>GRG</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Claire Silvani</name>
+      <arxiv:affiliation>GRG</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Irini Djeran-Maigre</name>
+    </author>
+    <arxiv:doi>10.1051/epjconf/202124907008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/epjconf/202124907008" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.03606v1</id>
+    <title>Three-dimensional compaction of soft granular packings</title>
+    <updated>2021-08-27T12:50:34Z</updated>
+    <link href="https://arxiv.org/abs/2109.03606v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.03606v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper analyzes the compaction behavior of assemblies composed of soft (elastic) spherical particles beyond the jammed state, using three-dimensional non-smooth contact dynamic simulations. The assemblies of particles are characterized using the evolution of the packing fraction, the coordination number, and the von Misses stress distribution within the particles as the confining stress increases. The packing fraction increases and tends toward a maximum value close to $1$, and the mean coordination number increases as a square root of the packing fraction. As the confining stress increases, a transition is observed from a granular-like material with exponential tails of the shear stress distributions to a continuous-like material characterized by Gaussian-like distributions of the shear stresses. We develop an equation that describes the evolution of the packing fraction as a function of the applied pressure. This equation, based on the micromechanical expression of the granular stress tensor, the limit of the Hertz contact law for small deformation, and the power-law relation between the packing fraction and the coordination of the particles, provides good predictions from the jamming point up to very high densities without the need of tuning any parameters.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-27T12:50:34Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Manuel Cárdenas-Barrantes</name>
+    </author>
+    <author>
+      <name>David Cantor</name>
+    </author>
+    <author>
+      <name>Jonathan Barés</name>
+    </author>
+    <author>
+      <name>Mathieu Renouf</name>
+    </author>
+    <author>
+      <name>Emilien Azéma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.02867v1</id>
+    <title>Compaction of mixtures of rigid and highly deformable particles: a micro-mechanical model</title>
+    <updated>2020-05-28T16:37:51Z</updated>
+    <link href="https://arxiv.org/abs/2006.02867v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.02867v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We analyze the isotropic compaction of mixtures composed of rigid and deformable incompressible particles by the non-smooth contact dynamics approach (NSCD). The deformable bodies are simulated using a hyper-elastic neo-Hookean constitutive law by means of classical finite elements. For mixtures that varied from totally rigid to totally deformable particles, we characterize the evolution of the packing fraction, the elastic modulus, and the connectivity as a function of the applied stresses when varying inter-particle coefficient of friction. We show first that the packing fraction increases and tends asymptotically to a maximum value $φ_{max}$, which depends on both the mixture ratio and the inter-particle friction. The bulk modulus is also shown to increase with the packing fraction and to diverges as it approaches $φ_{max}$. From the micro-mechanical expression of the granular stress tensor, we develop a model to describe the compaction behavior as a function of the applied pressure, the Young modulus of the deformable particles, and the mixture ratio. A bulk equation is also derived from the compaction equation. This model lays on the characterization of a single deformable particle under compression together with a power-law relation between connectivity and packing fraction. This compaction model, set by well-defined physical quantities, results in outstanding predictions from the jamming point up to very high densities and allows us to give a direct prediction of $φ_{max}$ as a function of both the mixture ratio and the friction coefficient.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-28T16:37:51Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 102, 032904 (2020)</arxiv:journal_ref>
+    <author>
+      <name>Manuel Cárdenas-Barrantes</name>
+    </author>
+    <author>
+      <name>David Cantor</name>
+    </author>
+    <author>
+      <name>Jonathan Barés</name>
+    </author>
+    <author>
+      <name>Mathieu Renouf</name>
+    </author>
+    <author>
+      <name>Emilien Azéma</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.102.032904</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.102.032904" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.01072v1</id>
+    <title>Effects of particle compressibility on structural and mechanical properties of compressed soft granular materials</title>
+    <updated>2020-04-02T15:25:15Z</updated>
+    <link href="https://arxiv.org/abs/2004.01072v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.01072v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Changes in the mechanical properties of granular materials, induced by variations in the intrinsic compressibility of the particles, are investigated by means of numerical simulations based on the combination of the Finite Element and Contact Dynamics methods. Assemblies of athermal 2D particles are subjected to quasi-static uni-axial compactions up to packing fractions close to $1$. Inspired by the contact mechanics in the Hertz's limit, we show that the effect of the compressibility of the particles both on the global and the local stresses, can be described by considering only the packing fraction of the system. This result, demonstrated in the whole range of accessible packing fractions in case of frictionless particles, remains relevant for moderate inter-particles coefficients of friction. The small discrepancies observed with frictional particles originate from irreversible local reorganizations in the system, the later being facilitated by the compressibility of the particles.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-02T15:25:15Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Thi-Lo Vu</name>
+    </author>
+    <author>
+      <name>Saeid Nezamabadi</name>
+    </author>
+    <author>
+      <name>Serge Mora</name>
+    </author>
+    <arxiv:doi>10.1016/j.jmps.2020.104201</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jmps.2020.104201" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1901.09569v1</id>
+    <title>Behavior of confined granular beds under cyclic thermal loading</title>
+    <updated>2019-01-28T09:35:09Z</updated>
+    <link href="https://arxiv.org/abs/1901.09569v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1901.09569v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the mechanical behavior of a confined granular packing of irregular polyhedral particles under repeated heating and cooling cycles by means of numerical simulations with the Non-Smooth Contact Dynamics method. Assuming a homogeneous temperature distribution as well as constant temperature rate, we study the effect of the container shape, and coefficients of thermal expansions on the pressure buildup at the confining walls and the density evolution. We observe that small changes in the opening angle of the confinement can lead to a drastic peak pressure reduction. Furthermore, the displacement fields over several thermal cycles are obtained and we discover the formation of convection cells inside the granular material having the shape of a torus. The root mean square of the vorticity is then calculated from the displacement fields and a quadratic dependency on the ratio of thermal expansion coefficients is established.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-01-28T09:35:09Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Pavel S. Iliev</name>
+    </author>
+    <author>
+      <name>Elena Giacomazzi</name>
+    </author>
+    <author>
+      <name>Falk K. Wittel</name>
+    </author>
+    <author>
+      <name>Miller Mendoza</name>
+    </author>
+    <author>
+      <name>Andreas Haselbacher</name>
+    </author>
+    <author>
+      <name>Hans J. Herrmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.07437v1</id>
+    <title>Resolving Force Indeterminacy in Contact Dynamics Using Compatibility Conditions</title>
+    <updated>2018-05-16T16:27:22Z</updated>
+    <link href="https://arxiv.org/abs/1805.07437v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.07437v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Contact dynamics (CD) is a powerful method to solve the dynamics of large systems of colliding rigid bodies. CD can be computationally more efficient than classical penalty-based discrete element methods (DEM) for simulating contact between stiff materials such as rock, glass, or engineering metals. However, by idealizing bodies as perfectly rigid, contact forces computed by CD can be non-unique due to indeterminacy in the contact network, which is a common occurence in dense granular flows. We propose a CD method that is designed to identify only the unique set of contact forces that would be predicted by a soft particle method, such as DEM, in the limit of large stiffness. The method involves applying an elastic compatibility condition to the contact forces, which maintains no-penetration constraints but filters out force distributions that could not have arisen from stiff elastic contacts. The method can be used as a post-processing step that could be integrated into existing CD codes with minimal effort. We demonstrate its efficacy in a variety of indeterminate problems, including some involving multiple materials, non-spherical shapes, and nonlinear contact constitutive laws.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-16T16:27:22Z</published>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <author>
+      <name>Tyler Olsen</name>
+    </author>
+    <author>
+      <name>Ken Kamrin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1604.06881v1</id>
+    <title>Micro-mechanical Failure Analysis of Wet Granular Matter</title>
+    <updated>2016-04-23T08:49:45Z</updated>
+    <link href="https://arxiv.org/abs/1604.06881v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1604.06881v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We employ a novel fluid-particle model to study the shearing behavior of granular soils under different saturation levels, ranging from the dry material via the capillary bridge regime to higher saturation levels with percolating clusters. The full complexity of possible liquid morphologies is taken into account, implying the formation of isolated arbitrary-sized liquid clusters with individual Laplace pressures that evolve by liquid exchange via films on the grain surface. Liquid clusters can grow in size, shrink, merge and split, depending on local conditions, changes of accessible liquid and the pore space morphology determined by the granular phase. This phase is represented by a discrete particle model based on Contact Dynamics, where capillary forces exerted from a liquid phase add to the motion of spherical particles. We study the macroscopic response of the system due to an external compression force at various liquid contents with the help of triaxial shear tests. Additionally, the change in liquid cluster distributions during the compression due to the deformation of the pore space is evaluated close to the critical load.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-04-23T08:49:45Z</published>
+    <arxiv:comment>11 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Acta Geotechnica 11.3 (2016)</arxiv:journal_ref>
+    <author>
+      <name>Konstantin Melnikov</name>
+    </author>
+    <author>
+      <name>Falk K. Wittel</name>
+    </author>
+    <author>
+      <name>Hans J. Herrmann</name>
+    </author>
+    <arxiv:doi>10.1007/s11440-016-0465-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s11440-016-0465-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1507.05354v1</id>
+    <title>Kinematic flow patterns in slow deformation of a dense granular material</title>
+    <updated>2015-07-19T23:29:18Z</updated>
+    <link href="https://arxiv.org/abs/1507.05354v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.05354v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The kinematic flow pattern in slow deformation of a model dense granular medium is studied at high resolution using \emph{in situ} imaging, coupled with particle tracking. The deformation configuration is indentation by a flat punch under macroscopic plane-strain conditions. Using a general analysis method, velocity gradients and deformation fields are obtained from the disordered grain arrangement, enabling flow characteristics to be quantified. The key observations are the formation of a stagnation zone, as in dilute granular flow past obstacles; occurrence of vortices in the flow immediately underneath the punch; and formation of distinct shear bands adjoining the stagnation zone. The transient and steady state stagnation zone geometry, as well as the strength of the vortices and strain rates in the shear bands, are obtained from the experimental data. All of these results are well-reproduced in exact-scale Non-Smooth Contact Dynamics (NSCD) simulations. Full 3D numerical particle positions from the simulations allow extraction of flow features that are extremely difficult to obtain from experiments. Three examples of these, namely material free surface evolution, deformation of a grain column below the punch and resolution of velocities inside the primary shear band, are highlighted. The variety of flow features observed in this model problem also illustrates the difficulty involved in formulating a complete micromechanical analytical description of the deformation.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-19T23:29:18Z</published>
+    <arxiv:comment>16 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Granular Matter 17(5) 2015 553--565</arxiv:journal_ref>
+    <author>
+      <name>Koushik Viswanathan</name>
+    </author>
+    <author>
+      <name>Anirban Mahato</name>
+    </author>
+    <author>
+      <name>Tejas G. Murthy</name>
+    </author>
+    <author>
+      <name>Tomasz Koziara</name>
+    </author>
+    <author>
+      <name>Srinivasan Chandrasekar</name>
+    </author>
+    <arxiv:doi>10.1007/s10035-015-0576-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10035-015-0576-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1401.2044v1</id>
+    <title>Scaling Laws for the Slip Velocity in Dense Granular Flows</title>
+    <updated>2014-01-09T16:02:08Z</updated>
+    <link href="https://arxiv.org/abs/1401.2044v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1401.2044v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this Letter, the 2-dimensional dense flow of polygonal particles on an incline with a flat frictional inferior boundary is analyzed by means of contact dynamics discrete element simulations, in order to develop boundary conditions for continuum models of dense granular flows. We show the evidence that the global slip phenomenon deviates significantly from simple sliding: a finite slip velocity is generally found for shear forces lower than the sliding threshold for particle-wall contacts. We determined simple scaling laws for the dependence of the slip velocity on shear rate, normal and shear stresses, and material parameters.The importance of a correct determination of the slip at the base of the incline, which is crucial for the calculation of flow rates, is discussed in relation to natural flows.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-01-09T16:02:08Z</published>
+    <arxiv:comment>5 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 108, 238002 (2012)</arxiv:journal_ref>
+    <author>
+      <name>Riccardo Artoni</name>
+    </author>
+    <author>
+      <name>Andrea C. Santomaso</name>
+    </author>
+    <author>
+      <name>Massimiliano Go'</name>
+    </author>
+    <author>
+      <name>Paolo Canu</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.108.238002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.108.238002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1308.1002v1</id>
+    <title>Microscopic mechanism for the shear-thickening of non-Brownian suspensions</title>
+    <updated>2013-08-05T15:01:12Z</updated>
+    <link href="https://arxiv.org/abs/1308.1002v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1308.1002v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a simple model, supported by contact-dynamics simulations as well as rheology and friction measurements, that links the transition from continuous to discontinuous shear-thickening in dense granular pastes to distinct lubrication regimes in the particle contacts. We identify a local Sommerfeld number that determines the transition from Newtonian to shear-thickening flows, and then show that the suspension's volume fraction and the boundary lubrication friction coefficient control the nature of the shear-thickening transition, both in simulations and experiments.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-08-05T15:01:12Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Nicolas Fernandez</name>
+    </author>
+    <author>
+      <name>Roman Mani</name>
+    </author>
+    <author>
+      <name>David Rinaldi</name>
+    </author>
+    <author>
+      <name>Dirk Kadau</name>
+    </author>
+    <author>
+      <name>Martin Mosquet</name>
+    </author>
+    <author>
+      <name>Helene Lombois-Burger</name>
+    </author>
+    <author>
+      <name>Juliette Cayer-Barrioz</name>
+    </author>
+    <author>
+      <name>Hans J. Herrmann</name>
+    </author>
+    <author>
+      <name>Nicholas D. Spencer</name>
+    </author>
+    <author>
+      <name>Lucio Isa</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.111.108301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.111.108301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1306.6279v1</id>
+    <title>Continuum simulation of the discharge of the granular silo: a validation test for the mu(I)-visco-plastic flow law</title>
+    <updated>2013-06-26T15:52:31Z</updated>
+    <link href="https://arxiv.org/abs/1306.6279v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1306.6279v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using both a continuum Navier-Stokes solver, with the mu(I)-flow-law implemented to model the viscous behavior, and the discrete Contact Dynamics algorithm, the discharge of granular silos is simulated in two dimensions from the early stages of the discharge until complete release of the material. In both cases, the Beverloo scaling is recovered. We first do not attempt quantitative comparison, but focus on the qualitative behavior of velocity and pressure at different locations in the flow. A good agreement is obtained in the regions of rapid flows, while areas of slow creep are not entirely captured by the continuum model. The pressure field shows a general good agreement. The evolution of the free surface implies differences, however, the bulk deformation is essentially identical in both approaches. The influence of the parameters of the mu(I)-flow-law is systematically investigated, showing the importance of the dependence on the inertial number I to achieve quantitative agreement between continuum and discrete discharge. The general ability of the continuum model to reproduce qualitatively the granular behavior is found to be very encouraging.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-06-26T15:52:31Z</published>
+    <arxiv:comment>12 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>L. Staron</name>
+    </author>
+    <author>
+      <name>P. -Y. Lagrée</name>
+    </author>
+    <author>
+      <name>S. Popinet</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1210.3329v1</id>
+    <title>Shear flow of dense granular materials near smooth walls. I. Shear localization and constitutive laws in boundary region</title>
+    <updated>2012-10-11T19:19:09Z</updated>
+    <link href="https://arxiv.org/abs/1210.3329v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1210.3329v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We report on a numerical study of the shear flow of a simple two-dimensional model of a granular material under controlled normal stress between two parallel smooth, frictional walls, moving with opposite velocities $\pm$V . Discrete simulations, which are carried out with the contact dynamics method in dense assemblies of disks, reveal that, unlike rough walls made of strands of particles, smooth ones can lead to shear strain localization in the boundary layer. Specifically, we observe, for decreasing V, first a fluid-like regime (A), in which the whole granular layer is sheared, with a homogeneous strain rate except near the walls; then (B) a symmetric velocity profile with a solid block in the middle and strain localized near the walls and finally (C) a state with broken symmetry in which the shear rate is confined to one boundary layer, while the bulk of the material moves together with the opposite wall. Both transitions are independent of system size and occur for specific values of V . Transient times are discussed. We show that the first transition, between regimes A and B, can be deduced from constitutive laws identified for the bulk material and the boundary layer, while the second one could be associated with an instability in the behavior of the boundary layer. The boundary zone constitutive law, however, is observed to depend on the state of the bulk material nearby.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-10-11T19:19:09Z</published>
+    <arxiv:comment>13 pages</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review E 86 (2012) 011301</arxiv:journal_ref>
+    <author>
+      <name>Zahra Shojaaee</name>
+      <arxiv:affiliation>NAVIER</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jean-Noël Roux</name>
+      <arxiv:affiliation>NAVIER</arxiv:affiliation>
+    </author>
+    <author>
+      <name>François Chevoir</name>
+      <arxiv:affiliation>NAVIER</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Wolf Dietrich</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.86.011301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.86.011301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1202.5687v3</id>
+    <title>Contacts Dynamics Reveals Widom Lines for Jamming</title>
+    <updated>2012-11-10T14:47:36Z</updated>
+    <link href="https://arxiv.org/abs/1202.5687v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1202.5687v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We experimentally study the vicinity of the Jamming transition by investigating the statics and the dynamics of the contact network of an horizontally shaken bi-disperse packing of photo-elastic discs. Compressing the packing very slowly, while maintaining a mechanical excitation, yields a granular glass, namely a frozen structure of vibrating grains. In this glass phase, we observe a remarkable dynamics of the contact network, which exhibits strong dynamical heterogeneities. Such heterogeneities are maximum at a packing fraction $φ^*$, \emph{distinct} and smaller than the jamming packing fraction $φ_J$, which is indicated by the abrupt variation of the average number of contact per particle. We demonstrate that the two cross-overs, one for the maximum dynamical heterogeneity, and the other for static jamming, converge at point J in the zero mechanical excitation limit, a behavior reminiscent of the Widom lines in the supercritical phase of a second order critical point. Our findings are discussed in the light of recent numerical and theoretical studies of thermal soft spheres.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-02-25T19:23:43Z</published>
+    <arxiv:comment>5 pages, 5 figures, to appear in EPL</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>EPL 100 (2012) 44005</arxiv:journal_ref>
+    <author>
+      <name>C. Coulais</name>
+    </author>
+    <author>
+      <name>R. P. Behringer</name>
+    </author>
+    <author>
+      <name>O. Dauchot</name>
+    </author>
+    <arxiv:doi>10.1209/0295-5075/100/44005</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1209/0295-5075/100/44005" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1105.4418v1</id>
+    <title>Identification of rolling resistance as a shape parameter in sheared granular media</title>
+    <updated>2011-05-23T07:32:10Z</updated>
+    <link href="https://arxiv.org/abs/1105.4418v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1105.4418v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using contact dynamics simulations, we compare the effect of rolling resistance at the contacts in granular systems composed of disks with the effect of angularity in granular systems composed of regular polygonal particles. In simple shear conditions, we consider four aspects of the mechanical behavior of these systems in the steady state: shear strength, solid fraction, force and fabric anisotropies, and probability distribution of contact forces. Our main finding is that, based on the energy dissipation associated with relative rotation between two particles in contact, the effect of rolling resistance can explicitly be identified with that of the number of sides in a regular polygonal particle. This finding supports the use of rolling resistance as a shape parameter accounting for particle angularity and shows unambiguously that one of the main influencing factors behind the mechanical behavior of granular systems composed of noncircular particles is the partial hindrance of rotations as a result of angular particle shape.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-05-23T07:32:10Z</published>
+    <arxiv:comment>Soumis a Physical Review E; Statistical, Nonlinear, and Soft Matter Physics http://link.aps.org/doi/10.1103/PhysRevE.84.011306</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review E: Statistical, 84, 011306 (2011)</arxiv:journal_ref>
+    <author>
+      <name>Nicolas Estrada</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Émilien Azema</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Farhang Radjaï</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alfredo Taboada</name>
+      <arxiv:affiliation>GM</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.84.011306</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.84.011306" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1104.3516v2</id>
+    <title>An adaptive hierarchical domain decomposition method for parallel contact dynamics simulations of granular materials</title>
+    <updated>2011-12-28T09:45:23Z</updated>
+    <link href="https://arxiv.org/abs/1104.3516v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.3516v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A fully parallel version of the contact dynamics (CD) method is presented in this paper. For large enough systems, 100% efficiency has been demonstrated for up to 256 processors using a hierarchical domain decomposition with dynamic load balancing. The iterative scheme to calculate the contact forces is left domain-wise sequential, with data exchange after each iteration step, which ensures its stability. The number of additional iterations required for convergence by the partially parallel updates at the domain boundaries becomes negligible with increasing number of particles, which allows for an effective parallelization. Compared to the sequential implementation, we found no influence of the parallelization on simulation results.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-18T15:21:18Z</published>
+    <arxiv:comment>19 pages, 15 figures, published in Journal of Computational Physics (2011)</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Journal of Computational Physics, Volume 231, Issue 2, 20 January 2012, Pages 612-628</arxiv:journal_ref>
+    <author>
+      <name>Zahra Shojaaee</name>
+    </author>
+    <author>
+      <name>M. Reza Shaebani</name>
+    </author>
+    <author>
+      <name>Lothar Brendel</name>
+    </author>
+    <author>
+      <name>János Török</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+    <arxiv:doi>10.1016/j.jcp.2011.09.024</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jcp.2011.09.024" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1104.0157v1</id>
+    <title>Minimal dissipation theory and shear bands in biaxial tests</title>
+    <updated>2011-04-01T12:36:29Z</updated>
+    <link href="https://arxiv.org/abs/1104.0157v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.0157v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>True biaxial tests of granular materials are investigated by applying the principle of minimal dissipation and comparing to two dimensional contact dynamics simulations. It is shown that the macroscopic steady state manifested by constant stress ratio and constant volume is the result of the ever changing microscopic structure which minimizes the dissipation rate. The shear band angle in the varying shear band structures is found to be constant. We also show that introducing friction on the walls reduces the degeneracy of the optimal shear band structures to one for a wide range of parameters which gives a non-constant stress ratio curve with varying aspect ratio that can be calculated.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-01T12:36:29Z</published>
+    <arxiv:comment>8 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Thomas Stegmann</name>
+    </author>
+    <author>
+      <name>Janos Török</name>
+    </author>
+    <author>
+      <name>Lothar Brendel</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1012.2696v1</id>
+    <title>A micromechanical model of collapsing quicksand</title>
+    <updated>2010-12-13T11:26:05Z</updated>
+    <link href="https://arxiv.org/abs/1012.2696v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1012.2696v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The discrete element method constitutes a general class of modeling techniques to simulate the microscopic behavior (i.e. at the particle scale) of granular/soil materials. We present a contact dynamics method, accounting for the cohesive nature of fine powders and soils. A modification of the model adjusted to capture the essential physical processes underlying the dynamics of generation and collapse of loose systems is able to simulate "quicksand" behavior of a collapsing soil material, in particular of a specific type, which we call "living quicksand". We investigate the penetration behavior of an object for varying density of the material. We also investigate the dynamics of the penetration process, by measuring the relation between the driving force and the resulting velocity of the intruder, leading to a "power law" behavior with exponent 1/2, i.e. a quadratic velocity dependence of the drag force on the intruder.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-12-13T11:26:05Z</published>
+    <arxiv:comment>5 pages, 4 figures, accepted for granular matter</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Granular Matter 13(3), 219-223 (2011)</arxiv:journal_ref>
+    <author>
+      <name>Dirk Kadau</name>
+    </author>
+    <author>
+      <name>Jose S. Andrade</name>
+    </author>
+    <author>
+      <name>Hans J. Herrmann</name>
+    </author>
+    <arxiv:doi>10.1007/s10035-010-0236-1</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10035-010-0236-1" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1010.5339v2</id>
+    <title>Density profiles of loose and collapsed cohesive granular structures generated by ballistic deposition</title>
+    <updated>2011-01-06T15:01:33Z</updated>
+    <link href="https://arxiv.org/abs/1010.5339v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1010.5339v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Loose granular structures stabilized against gravity by an effective cohesive force are investigated on a microscopic basis using contact dynamics. We study the influence of the granular Bond number on the density profiles and the generation process of packings, generated by ballistic deposition under gravity. The internal compaction occurs discontinuously in small avalanches and we study their size distribution. We also develop a model explaining the final density profiles based on insight about the collapse of a packing under changes of the Bond number.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-10-26T09:10:51Z</published>
+    <arxiv:comment>12 pages, 18 figures, submitted to Phys. Rev. E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review E 83, 031301 (2011)</arxiv:journal_ref>
+    <author>
+      <name>Dirk Kadau</name>
+    </author>
+    <author>
+      <name>Hans J. Herrmann</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.83.031301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.83.031301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1004.5296v1</id>
+    <title>Stress-strain behavior and geometrical properties of packings of elongated particles</title>
+    <updated>2010-04-29T14:18:51Z</updated>
+    <link href="https://arxiv.org/abs/1004.5296v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1004.5296v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a numerical analysis of the effect of particle elongation on the quasistatic behavior of sheared granular media by means of the Contact Dynamics method. The particle shapes are rounded-cap rectangles characterized by their elongation. The macroscopic and microstructural properties of several packings subjected to biaxial compression are analyzed as a function of particle elongation. We find that the shear strength is an increasing linear function of elongation. Performing an additive decomposition of the stress tensor based on a harmonic approximation of the angular dependence of branch vectors, contact normals and forces, we show that the increasing mobilization of friction force and the associated anisotropy are key effects of particle elongation. These effects are correlated with partial nematic ordering of the particles which tend to be oriented perpendicular to the major principal stress direction and form side-to-side contacts. However, the force transmission is found to be mainly guided by cap-to-side contacts, which represent the largest fraction of contacts for the most elongated particles. Another interesting finding is that, in contrast to shear strength, the solid fraction first increases with particle elongation, but declines as the particles become more elongated. It is also remarkable that the coordination number does not follow this trend so that the packings of more elongated particles are looser but more strongly connected.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-04-29T14:18:51Z</published>
+    <arxiv:comment>Submited to Physical Review E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review E: Statistical, Nonlinear, and Soft Matter Physics (2010) http://link.aps.org/doi/10.1103/PhysRevE.81.051304</arxiv:journal_ref>
+    <author>
+      <name>Émilien Azema</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Farhang Radjaï</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.81.051304</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.81.051304" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0911.0752v1</id>
+    <title>Collapsing granular suspensions</title>
+    <updated>2009-11-04T09:04:46Z</updated>
+    <link href="https://arxiv.org/abs/0911.0752v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0911.0752v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A 2D contact dynamics model is proposed as a microscopic description of a collapsing suspension/soil to capture the essential physical processes underlying the dynamics of generation and collapse of the system. Our physical model is compared with real data obtained from in situ measurements performed with a natural collapsing/suspension soil. We show that the shear strength behavior of our collapsing suspension/soil model is very similar to the behavior of this collapsing suspension soil, for both the unperturbed and the perturbed phases of the material.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-11-04T09:04:46Z</published>
+    <arxiv:comment>7 pages, 5 figures, accepted for publication in EPJE</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Eur. Phys. J. E 30, 275-281 (2009)</arxiv:journal_ref>
+    <author>
+      <name>D. Kadau</name>
+    </author>
+    <author>
+      <name>J. S. Andrade</name>
+    </author>
+    <author>
+      <name>H. J. Herrmann</name>
+    </author>
+    <arxiv:doi>10.1140/epje/i2009-10523-6</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epje/i2009-10523-6" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0904.4679v2</id>
+    <title>Relevance of visco-plastic theory in a multi-directional inhomogeneous granular flow</title>
+    <updated>2009-11-06T13:56:26Z</updated>
+    <link href="https://arxiv.org/abs/0904.4679v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0904.4679v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We confront a recent visco-plastic description of dense granular flows [P. Jop et al, Nature, {\bf 441} (2006) 727] with multi-directional inhomogeneous steady flows observed in non-smooth contact dynamics simulations of 2D half-filled rotating drums. Special attention is paid to check separately the two underlying fundamental statements into which the considered theory can be recast, namely (i) a single relation between the invariants of stress and strain rate tensors and (ii) the alignment between these tensors. Interestingly, the first prediction is fairly well verified over more than four decades of small strain rate, from the surface rapid flow to the quasi-static creep phase, where it is usually believed to fail because of jamming. On the other hand, the alignment between stress and strain rate tensors is shown to fail over the whole flow, what yields an apparent violation of the visco-plastic rheology when applied without care. In the quasi-static phase, the particularly large misalignment is conjectured to be related to transient dilatancy effects.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.other" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-04-29T19:06:37Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>P.-P. Cortet, D. Bonamy, F. Daviaud, O. Dauchot, B. Dubrulle, M. Renouf, EPL 88 14001 (2009)</arxiv:journal_ref>
+    <author>
+      <name>P. -P. Cortet</name>
+    </author>
+    <author>
+      <name>D. Bonamy</name>
+    </author>
+    <author>
+      <name>F. Daviaud</name>
+    </author>
+    <author>
+      <name>O. Dauchot</name>
+    </author>
+    <author>
+      <name>B. Dubrulle</name>
+    </author>
+    <author>
+      <name>M. Renouf</name>
+    </author>
+    <arxiv:doi>10.1209/0295-5075/88/14001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1209/0295-5075/88/14001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0807.3205v1</id>
+    <title>Vibrational dynamics of 3D granular media composed with polyhedral grains -- Dinámica vibracional de un medio granular 3D compuesto de partículas poliédricas</title>
+    <updated>2008-07-21T04:45:43Z</updated>
+    <link href="https://arxiv.org/abs/0807.3205v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0807.3205v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  By means of tree-dimensional contact dynamics simulations, we analyze the vibrational dynamics of a confined granular layer in response to harmonic forcing. The sample is composed of polyedric grains with a shape derived from digitalized ballast. The system involves a jammed state separating passive (loading) and active (unloading) states. We show that an approximate expression of the packing resistance force as a function of the displacement of the free retaining wall from the jamming position provides a good description of the dynamics. We study in detail the scaling of displacements and velocities with loading parameters. In particular, we find that, for a wide range of frequencies, the data collapse by scaling the displacements with the inverse square of frequency, the inverse of the force amplitude and the square of gravity. We show that the mean compaction rate increases linearly with frequency up to a characteristic frequency of 10 Hz and then it declines in inverse proportion to frequency.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-07-21T04:45:43Z</published>
+    <arxiv:comment>IX Congreso de Geotecnia, Sociedad Colombiana de geotecnia, Bogotà : Colombie (2008)</arxiv:comment>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <author>
+      <name>Émilien Azema</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>F. Radjaï</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>R. Peyroux</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Frédéric Dubois</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>G. Saussine</name>
+      <arxiv:affiliation>R&amp;D - SNCF</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0805.0178v1</id>
+    <title>Quasistatic rheology, force transmission and fabric properties of a packing of irregular polyhedral particles</title>
+    <updated>2008-05-02T07:00:22Z</updated>
+    <link href="https://arxiv.org/abs/0805.0178v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0805.0178v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  By means of contact dynamics simulations, we investigate a dense packing composed of polyhedral particles under quasistatic shearing. The effect of particle shape is analyzed by comparing the polyhedra packing with a packing of similar characteristics except for the spherical shape of the particles. The polyhedra packing shows higher shear stress and dilatancy but similar stress-dilatancy relation compared to the sphere packing. A harmonic approximation of granular fabric is presented in terms of branch vectors (connecting particle centers) and contact force components along and perpendicular to the branch vectors. It is found that the origin of enhanced shear strength of the polyhedra packing lies in its higher force anisotropy with respect to the sphere packing which has a higher fabric anisotropy. Various contact types (face-vertex, face-face, etc) contribute differently to force transmission and fabric anisotropy. In particular, most face-face contacts belong to strong force chains along the major principal stress direction whereas vertex-face contacts are correlated with weak forces and oriented on average along the minor principal stress direction in steady shearing.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-05-02T07:00:22Z</published>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <arxiv:journal_ref>Mechanics of Materials (2009) http://www.sciencedirect.com/science/article/pii/S0167663609000179</arxiv:journal_ref>
+    <author>
+      <name>Émilien Azema</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>F. RadjaÏ</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>G. Saussine</name>
+      <arxiv:affiliation>R&amp;D - SNCF</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1016/j.mechmat.2009.01.021</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.mechmat.2009.01.021" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0803.3566v2</id>
+    <title>Generation of homogeneous granular packings: Contact dynamics method with coupling to an external pressure bath</title>
+    <updated>2011-04-18T15:03:36Z</updated>
+    <link href="https://arxiv.org/abs/0803.3566v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0803.3566v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The contact dynamics method (CD) is an efficient simulation technique of dense granular media where unilateral and frictional contact problems for a large number of rigid bodies have to be solved. In this paper we present a modified version of the contact dynamics to generate homogeneous random packings of rigid grains. CD is coupled to an external pressure bath, which allows the variation of the size of a periodically repeated cell. We follow the concept of the Andersen dynamics and show how it can be applied within the framework of the contact dynamics method. The main challenge here is to handle the interparticle interactions properly, which are based on constraint forces in CD. We implement the proposed algorithm, perform test simulations and investigate the properties of the final packings.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-03-25T14:33:11Z</published>
+    <arxiv:comment>21 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <arxiv:journal_ref>Int J Mod Phys C 20, 847 (2009)</arxiv:journal_ref>
+    <author>
+      <name>M. Reza Shaebani</name>
+    </author>
+    <author>
+      <name>Tamas Unger</name>
+    </author>
+    <author>
+      <name>Janos Kertesz</name>
+    </author>
+    <arxiv:doi>10.1142/S0129183109014047</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1142/S0129183109014047" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0803.0191v2</id>
+    <title>Euler-like modelling of dense granular flows: application to a rotating drum</title>
+    <updated>2016-03-08T23:18:48Z</updated>
+    <link href="https://arxiv.org/abs/0803.0191v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0803.0191v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>General conservation equations are derived for 2D dense granular flows from the Euler equation within the Boussinesq approximation. In steady flows, the 2D fields of granular temperature, vorticity and stream function are shown to be encoded in two scalar functions only. We checked such prediction on steady surface flows in a rotating drum simulated through the Non-Smooth Contact Dynamics method. This result is non trivial because granular flows are dissipative and therefore not necessarily compatible with Euler equation. Finally, we briefly discuss some possible ways to predict theoretically these two functions using statistical mechanics.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-03-03T07:37:23Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>European Physical Journal B 68, 619 (2009)</arxiv:journal_ref>
+    <author>
+      <name>Daniel Bonamy</name>
+      <arxiv:affiliation>SPCSI</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pierre-Henri Chavanis</name>
+      <arxiv:affiliation>LPT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pierre Philippe Cortet</name>
+      <arxiv:affiliation>GIT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>François Daviaud</name>
+      <arxiv:affiliation>GIT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Bérengère Dubrulle</name>
+      <arxiv:affiliation>GIT</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Mathieu Renouf</name>
+      <arxiv:affiliation>LaMCoS</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1140/epjb/e2009-00123-6</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjb/e2009-00123-6" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0711.1081v1</id>
+    <title>Short-time dynamics of a packing of polyhedral grains under horizontal vibrations</title>
+    <updated>2007-11-07T13:20:20Z</updated>
+    <link href="https://arxiv.org/abs/0711.1081v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0711.1081v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We analyze the dynamics of a 3D granular packing composed of particles of irregular polyhedral shape confined inside a rectangular box with a retaining wall sub jected to horizontal harmonic forcing. The simulations are performed by means of the contact dynamics method for a broad set of loading parameters. We explore the vibrational dynamics of the packing, the evolution of solid fraction and the scaling of dy- namics with the loading parameters. We show that the motion of the retaining wall is strongly anharmonic as a result of jamming and grain rearrangements. It is found that the mean particle displacement scales with inverse square of frequency, the inverse of the force amplitude and the square of gravity. The short- time compaction rate grows in proportion to frequency up to a characteristic frequency, corresponding to collective particle rearrangements between equilibrium states, and then it declines in inverse proportion to frequency.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-11-07T13:20:20Z</published>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <arxiv:journal_ref>European Physical Journal E (2008) http://www.springerlink.com/content/dh7118426qt413g9/export-citation/</arxiv:journal_ref>
+    <author>
+      <name>Émilien Azema</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Farhang Radjaï</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Peyroux</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Vincent Richefeu</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gilles Saussine</name>
+      <arxiv:affiliation>R&amp;D - SNCF</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1140/epje/i2007-10331-0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epje/i2007-10331-0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0709.2241v1</id>
+    <title>Influence of particle shape on shear stress in granular media</title>
+    <updated>2007-09-14T09:45:07Z</updated>
+    <link href="https://arxiv.org/abs/0709.2241v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0709.2241v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We analyze the contact and force networks in a dense confined packing of pentagonal particles simulated by means of the contact dynamics method. The particle shape effect is evidenced by comparing the data from pentagon packing and from a packing with identical characteristics except for the circular shape of the particles. A surprising observation is that the pentagon packing develops a lower structural anisotropy than the disk packing. We show in this work that this weakness is compensated by a higher force anisotropy that leads to enhanced shear strength of the pentagon packing. With the polygonal shape of the particles, the strong force chains are mostly composed of edge-to-edge contacts with a marked zig-zag aspect.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-09-14T09:45:07Z</published>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <author>
+      <name>émilien Azema</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Farhang Radjaï</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Peyroux</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gilles Saussine</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0706.1531v2</id>
+    <title>Critical scaling and heterogeneous superdiffusion across the jamming/rigidity transition of a granular glass</title>
+    <updated>2008-03-14T11:30:12Z</updated>
+    <link href="https://arxiv.org/abs/0706.1531v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0706.1531v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The dynamical properties of a dense horizontally vibrated bidisperse granular monolayer are experimentally investigated. The quench protocol produces states with a frozen structure of the assembly, but the remaining degrees of freedom associated with contact dynamics control the appearance of macroscopic rigidity. We provide decisive experimental evidence that this transition is a critical phenomenon, with increasingly collective and heterogeneous rearrangements occurring at length scales much smaller than the grains' diameter, presumably reflecting the contact force network fluctuations. Dynamical correlation time and length scales soar on both sides of the transition, as the volume fraction varies over a remarkably tiny range ($δφ/φ\sim 10^{-3}$). We characterize the motion of individual grains, which becomes super-diffusive at the jamming transition $φ_J$, signaling long-ranged temporal correlations. Correspondingly, the system exhibits long-ranged four-point dynamical correlations in space that obey critical scaling at the transition density.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-06-11T17:58:53Z</published>
+    <arxiv:comment>4 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>EPL, 83 (2008) 46003</arxiv:journal_ref>
+    <author>
+      <name>F. Lechenault</name>
+    </author>
+    <author>
+      <name>O. Dauchot</name>
+    </author>
+    <author>
+      <name>G. Biroli</name>
+    </author>
+    <author>
+      <name>J. -P. Bouchaud</name>
+    </author>
+    <arxiv:doi>10.1209/0295-5075/83/46003</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1209/0295-5075/83/46003" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0704.2392v2</id>
+    <title>Shear zones in granular media: 3D Contact Dynamics simulation</title>
+    <updated>2007-04-25T18:26:17Z</updated>
+    <link href="https://arxiv.org/abs/0704.2392v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0704.2392v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Shear zone formation is investigated in slow 3D shear flows. We simulate the linear version of the split-bottom shear cell. It is shown that the same type of wide shear zones is achieved in the presence as well as in the absence of gravity. We investigate the relaxation of the material towards a stationary flow and analyze the stress and the velocity fields. We provide the functional form of the widening of the shear zone inside the bulk. We discuss the growth of the region where the material is in critical state. It is found that the growth of the critical zone is responsible for the initial transient of the shear zone.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-04-18T17:33:38Z</published>
+    <arxiv:comment>9 pages</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 76, 051301 (2007)</arxiv:journal_ref>
+    <author>
+      <name>Alexander Ries</name>
+    </author>
+    <author>
+      <name>Tamas Unger</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.76.051301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.76.051301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0604176v2</id>
+    <title>Vibrational dynamics of confined granular material</title>
+    <updated>2006-04-22T18:55:43Z</updated>
+    <link href="https://arxiv.org/abs/physics/0604176v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0604176v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  By means of two-dimensional contact dynamics simulations, we analyze the vibrational dynamics of a confined granular layer in response to harmonic forcing. We use irregular polygonal grains allowing for strong variability of solid fraction. The system involves a jammed state separating passive (loading) and active (unloading) states. We show that an approximate expression of the packing resistance force as a function of the displacement of the free retaining wall from the jamming position provides a good description of the dynamics. We study in detail the scaling of displacements and velocities with loading parameters. In particular, we find that, for a wide range of frequencies, the data collapse by scaling the displacements with the inverse square of frequency, the inverse of the force amplitude and the square of gravity. Interestingly, compaction occurs during the extension of the packing, followed by decompaction in the contraction phase. We show that the mean compaction rate increases linearly with frequency up to a characteristic frequency and then it declines in inverse proportion to frequency. The characteristic frequency is interpreted in terms of the time required for the relaxation of the packing through collective grain rearrangements between two equilibrium states.</summary>
+    <category term="physics.class-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-04-21T15:16:25Z</published>
+    <arxiv:primary_category term="physics.class-ph"/>
+    <author>
+      <name>Emilien Azema</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Farhang Radjaï</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Peyroux</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Frédéric Dubois</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gilles Saussine</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.74.031302</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.74.031302" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0511080v1</id>
+    <title>Influence of particle elasticity in shear testers</title>
+    <updated>2005-11-09T16:21:39Z</updated>
+    <link href="https://arxiv.org/abs/physics/0511080v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0511080v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Two dimensional simulations of non-cohesive granular matter in a biaxial shear tester are discussed. The effect of particle elasticity on the mechanical behavior is investigated using two complementary distinct element methods (DEM): Soft particle molecular dynamics simulations (Particle Flow Code, PFC) for elastic particles and contact dynamics simulations (CD) for the limit of perfectly rigid particles. As soon as the system dilates to form shear bands, it relaxes the elastic strains so that one finds the same stresses for rigid respectively elastic particles in steady state ow. The principal stresses in steady state ow are determined. They are proportional to each other, giving rise to an effective macroscopic friction coefficient which is about 10 % smaller than the microscopic friction coefficient between the grains.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-11-09T16:21:39Z</published>
+    <arxiv:comment>accepted for Granular Matter (some figures in arxiv-Version may be worse than in original version)</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <arxiv:journal_ref>Granular Matter 8(1), 35-40 (2006)</arxiv:journal_ref>
+    <author>
+      <name>Dirk Kadau</name>
+    </author>
+    <author>
+      <name>Dominik Schwesig</name>
+    </author>
+    <author>
+      <name>Joerg Theuerkauf</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+    <arxiv:doi>10.1007/s10035-005-0217-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10035-005-0217-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0506796v1</id>
+    <title>Numerical simulation of 2D steady granular flows in rotating drum: On surface flows rheology</title>
+    <updated>2005-06-30T11:54:25Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0506796v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0506796v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The rheology of 2D steady surface flow of cohesionless cylinders in a rotating drum is investigated through {\em Non Smooth Contact Dynamics} simulations. Profile of volume fraction, translational and angular velocity, rms velocity, strain rate and stress tensor were measured at the midpoint along the length of the surface flowing layer where the flow is generally considered as steady and homogeneous. Analysis of these data and their inter-relations suggest the local inertial number - defined as the ratio between local inertial forces and local confinement forces - to be the relevant dimensionless parameter to describe the transition from the quasi-static part of the packing to the flowing part at the surface of the heap. Variations of the components of the stress tensor as well as the ones of rms velocity as a function of the inertial number are analysed within both the quasi-static and the flowing phases. Their implications are discussed.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-06-30T11:54:25Z</published>
+    <arxiv:comment>13 pages, 14 figures, 61 references, submitted to Phys. Fluids</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physics of Fluids 17 (2005) 103303</arxiv:journal_ref>
+    <author>
+      <name>Mathieu Renouf</name>
+      <arxiv:affiliation>IRISA / INRIA Rennes</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel Bonamy</name>
+      <arxiv:affiliation>SPCSI</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Frederic Dubois</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Pierre Alart</name>
+      <arxiv:affiliation>LMGC</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1063/1.2063347</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.2063347" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0501022v1</id>
+    <title>Study of the collapse of granular columns using DEM numerical simulation</title>
+    <updated>2005-01-06T19:00:19Z</updated>
+    <link href="https://arxiv.org/abs/physics/0501022v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0501022v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Numerical simulations of the collapse and spreading of granular columns onto an horizontal plane using the Contact Dynamics method are presented. The final shape of the deposit seems to depend only on the aspect ratio $a$ of the columns; these results are in good agreement with previous experimental work. In particular, the renormalised runout distance shows a power law dependence on the aspect ratio $a$, which is incompatible with a simple friction model. The dynamics of the collapse is shown to be mostly controlled by the free fall of the column. The energy dissipation at the base of the column can be described simply by a coefficient of restitution. Hence the energy available for the sideways flow is proportional to the initial potential energy $E_0$. The dissipation process within the flow is well approximated by basal friction, contrary to the behaviour of the runout distance. The mass ejected sideways is showned to play a determining role in the spreading process. As $a$ increases, the same fraction of initial potential energy $E_0$ drives more mass against friction. This additional dissipation give a possible explanation for power-law dependence of the runout distance on $a$. Beyond the frictional properties of the material, we show that the flow characteristics strongly depend on the early dynamics of the collapse. We propose a new scaling for the runout distance that matches the data well, is compatible with a friction model, and provide a qualitative explanation to the column collapse phenomenology.</summary>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-01-06T19:00:19Z</published>
+    <arxiv:comment>15 pages, 22 Figures</arxiv:comment>
+    <arxiv:primary_category term="physics.geo-ph"/>
+    <author>
+      <name>L. Staron</name>
+    </author>
+    <author>
+      <name>E. J. Hinch</name>
+    </author>
+    <arxiv:doi>10.1017/S0022112005006415</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/S0022112005006415" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0409619v1</id>
+    <title>Multiscale Analysis of the Stress State in a Granular Slope in Transition to Failure</title>
+    <updated>2004-09-23T15:51:55Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0409619v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0409619v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  By means of contact dynamics simulations, we analyze the stress state in a granular bed slowly tilted towards its angle of repose. An increasingly large number of grains are overloaded in the sense that they are found to carry a stress ratio above the Coulomb yield threshold of the whole packing. Using this property, we introduce a coarse-graining length scale at which all stress ratios are below the packing yield threshold. We show that this length increases with the slope angle and jumps to a length comparable to the depth of the granular bed at an angle below the angle of repose. This transition coincides with the onset of dilatation in the packing. We map this transition into a percolation transition of the overloaded grains, and we argue that in the presence of long-range correlations above the transition angle, the granular slope is metastable.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-09-23T15:51:55Z</published>
+    <arxiv:comment>11 pages, 14 Fig, submitted to PRE</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Lydie Staron</name>
+    </author>
+    <author>
+      <name>Jean-Pierre Vilotte</name>
+    </author>
+    <author>
+      <name>Farhang Radjai</name>
+    </author>
+    <arxiv:doi>10.1140/epje/e2005-00031-0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epje/e2005-00031-0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0407755v1</id>
+    <title>Shearing behavior of polydisperse media</title>
+    <updated>2004-07-29T10:19:59Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0407755v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0407755v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study the shearing of polydisperse and bidisperse media with a size ratio of 10. Simulations are performed with a the two dimensional shear cell using contact dynamics. With a truncated power law for the polydisperse media we find that they show a stronger dilatancy and greater resistance to shearing than bidisperse mixtures. Motivated by the practical problem of reducing the energy needed to shear granular media, we introduce "point-like particles" representing charged particles in the distribution. Even though changing the kinematic behavior very little, they reduce the force necessary to maintain a fixed shearing velocity.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-07-29T10:19:59Z</published>
+    <arxiv:comment>17 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Martin Wackenhut</name>
+    </author>
+    <author>
+      <name>Sean McNamara</name>
+    </author>
+    <author>
+      <name>Hans Herrmann</name>
+    </author>
+    <arxiv:doi>10.1140/epje/i2004-10144-7</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epje/i2004-10144-7" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0403110v1</id>
+    <title>The effect of contact torques on porosity of cohesive powders</title>
+    <updated>2004-03-03T13:43:12Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0403110v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0403110v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The porosity of uniaxially compacted cohesive powders depends on the applied stress (including gravity). The case, where these stresses are weak, is considered. The compaction results in a porosity which is a function of sliding, rolling and torsion friction. By contact dynamics simulations it is shown that the influences of contact torques (static rolling and torsion friction) on the porosity are significant and approximately additive. The relevance for nano-powder pressure sintering is discussed.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-03-03T13:43:12Z</published>
+    <arxiv:comment>5 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Granular Matter, Volume 7, Numbers 2-3, 2005, Pages 139 - 143</arxiv:journal_ref>
+    <author>
+      <name>Guido Bartels</name>
+    </author>
+    <author>
+      <name>Tamas Unger</name>
+    </author>
+    <author>
+      <name>Dirk Kadau</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+    <author>
+      <name>Janos Kertesz</name>
+    </author>
+    <arxiv:doi>10.1007/s10035-004-0184-8</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10035-004-0184-8" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0403089v3</id>
+    <title>Force indeterminacy in the jammed state of hard disks</title>
+    <updated>2005-06-20T00:04:45Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0403089v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0403089v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Granular packings of hard discs are investigated by means of contact dynamics which is an appropriate technique to explore the allowed force-realizations in the space of contact forces. Configurations are generated for given values of the friction coefficient, and then an ensemble of equilibrium forces is found for fixed contacts. We study the force fluctuations within this ensemble. In the limit of zero friction the fluctuations vanish in accordance with the isostaticity of the packing. The magnitude of the fluctuations has a non-monotonous friction dependence. The increase for small friction can be attributed to the opening of the angle of the Coulomb cone, while the decrease as friction increases is due to the reduction of connectivity of the contact-network, leading to local, independent clusters of indeterminacy. We discuss the relevance of indeterminacy to packings of deformable particles and to the mechanical response properties.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-03-02T18:01:32Z</published>
+    <arxiv:comment>4 pages, 3 figures. Minor changes, journal reference added</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 94, 178001 (2005)</arxiv:journal_ref>
+    <author>
+      <name>Tamas Unger</name>
+    </author>
+    <author>
+      <name>Janos Kertesz</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.94.178001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.94.178001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0303560v1</id>
+    <title>Contact dynamics in a gently vibrated granular pile</title>
+    <updated>2003-03-26T15:59:13Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0303560v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0303560v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We use multi-speckle diffusive wave spectroscopy (MSDWS) to probe the micron-scale dynamics of a granular pile submitted to discrete gentle taps. The typical time-scale between plastic events is found to increase dramatically with the number of applied taps. Furthermore, this microscopic dynamics weakly depends on the solid fraction of the sample. This process is strongly analogous to the aging phenomenon observed in thermal glassy systems. We propose a heuristic model where this slowing down mechanism is associated with a slow evolution of the distribution of the contact forces between particles. This model accounts for the main features of the observed dynamics.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2003-03-26T15:59:13Z</published>
+    <arxiv:comment>4 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Alexandre Kabla</name>
+    </author>
+    <author>
+      <name>Georges Debregeas</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.92.035501</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.92.035501" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0211696v1</id>
+    <title>The contact dynamics method for granular media</title>
+    <updated>2002-11-29T12:49:29Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0211696v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0211696v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper we review the simulation method of the non-smooth contact dynamics. This technique was designed to solve the unilateral and frictional contact problem for a large number of rigid bodies and has proved to be especially valuable in research of dense granular materials during the last decade. We present here the basic principles compared to other methods and the detailed description of a 3D algorithm. We point out an artifact manifesting itself in spurious sound waves and discuss the applicability of the method.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-11-29T12:49:29Z</published>
+    <arxiv:comment>for the proceedings of the 7th Granada Seminar, 23 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Tamas Unger</name>
+    </author>
+    <author>
+      <name>Janos Kertesz</name>
+    </author>
+    <arxiv:doi>10.1063/1.1571300</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.1571300" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0206572v1</id>
+    <title>Pore Stabilization in Cohesive Granular Systems</title>
+    <updated>2002-06-28T12:16:29Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0206572v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0206572v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Cohesive powders tend to form porous aggregates which can be compacted by applying an external pressure. This process is modelled using the Contact Dynamics method supplemented with a cohesion law and rolling friction. Starting with ballistic deposits of varying density, we investigate how the porosity of the compacted sample depends on the cohesion strength and the friction coefficients. This allows to explain different pore stabilization mechanisms. The final porosity depends on the cohesion force scaled by the external pressure and on the lateral distance between branches of the ballistic deposit r_capt. Even if cohesion is switched off, pores can be stabilized by Coulomb friction alone. This effect is weak for round particles, as long as the friction coefficient is smaller than 1. However, for nonspherical particles the effect is much stronger.</summary>
+    <category term="cond-mat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-06-28T12:16:29Z</published>
+    <arxiv:comment>10 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat"/>
+    <arxiv:journal_ref>Phase Trans. 76(4-5), 315-331 (2003)</arxiv:journal_ref>
+    <author>
+      <name>Dirk Kadau</name>
+    </author>
+    <author>
+      <name>Guido Bartels</name>
+    </author>
+    <author>
+      <name>Lothar Brendel</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+    <arxiv:doi>10.1080/0141159021000051460</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1080/0141159021000051460" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0204075v1</id>
+    <title>Force Distribution and Comminution in Ball Mills</title>
+    <updated>2002-04-03T12:03:19Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0204075v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0204075v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The motion of granular material in a ball mill is investigated using molecular dynamics simulations in two dimensions. In agreement with experimental observations by Rothkegel [1] we find that local stresses - and hence the comminution efficiency - are maximal close to the bottom of the container. This effect will be explained using analysis of statistics of force chains in the material.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-04-03T12:03:19Z</published>
+    <arxiv:comment>10 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>In: D.E.Wolf, P.Grassberger (eds.) "Friction, Arching, Contact Dynamics" World Scientific (Singapore, 1997) p. 265</arxiv:journal_ref>
+    <author>
+      <name>Volkhard Buchholtz</name>
+    </author>
+    <author>
+      <name>Thorsten Poeschel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0203575v1</id>
+    <title>Elastic behavior in Contact Dynamics of rigid particles</title>
+    <updated>2002-03-27T20:59:15Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0203575v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0203575v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The systematic errors due to the practical implementation of the Contact Dynamics method for simulation of dense granular media are examined. It is shown that, using the usual iterative solver to simulate a chain of rigid particles, effective elasticity and sound propagation with a finite velocity occur. The characteristics of these phenomena are investigated analytically and numerically in order to assess the limits of applicability of this simulation method and to compare it with soft particle molecular dynamics.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-03-27T20:59:15Z</published>
+    <arxiv:comment>submitted to PRE, 7 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 65, 061305 (2002)</arxiv:journal_ref>
+    <author>
+      <name>Tamas Unger</name>
+    </author>
+    <author>
+      <name>Lothar Brendel</name>
+    </author>
+    <author>
+      <name>Dietrich E. Wolf</name>
+    </author>
+    <author>
+      <name>Janos Kertesz</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.65.061305</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.65.061305" title="doi"/>
+  </entry>
+</feed>

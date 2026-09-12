@@ -681,7 +681,7 @@ code {
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
+    scroll-behavior: auto;
+    transition: none;
   }
 }

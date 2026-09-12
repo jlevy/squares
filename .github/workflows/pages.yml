@@ -51,6 +51,13 @@ name: Certificate page
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
+      - packing/devtools/build_workbench_site.py
+      - packing/atlas/known-best/video/spikes/v2-transitions/build_candidate.py
+      - packing/atlas/known-best/video/spikes/v2-transitions/template.html
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.css
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js
+      - packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
+      - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
   # On a pull request the page is built but not deployed, so a change that
   # breaks the render fails review rather than the next deploy.
@@ -88,6 +95,13 @@ name: Certificate page
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
+      - packing/devtools/build_workbench_site.py
+      - packing/atlas/known-best/video/spikes/v2-transitions/build_candidate.py
+      - packing/atlas/known-best/video/spikes/v2-transitions/template.html
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.css
+      - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js
+      - packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
+      - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
 
 permissions:
@@ -303,6 +317,13 @@ jobs:
           path: /tmp/math-geometry
           if-no-files-found: error
           retention-days: 7
+
+      # The workbench is a second page inside the same artifact. Pages takes `packing/site`
+      # whole, so a subdirectory is a URL: this puts the workbench at `/workbench/` and
+      # leaves the explainer where it is, at `/`, which readers may already have linked.
+      # After the download, not before: that step writes `packing/site` and would erase it.
+      - name: Build the workbench at its own URL
+        run: uv run --frozen --group dev python -m devtools.build_workbench_site --check
 
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

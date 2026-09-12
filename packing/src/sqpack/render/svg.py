@@ -120,12 +120,20 @@ def _validate_motion_css(css: str) -> None:
     if not css.startswith(MOTION_MEDIA_PREFIX) or not css.endswith("}"):
         raise ValueError("motion CSS is not reduced-motion scoped")
     body = css[len(MOTION_MEDIA_PREFIX) : -1]
+    # The grammar is an allow-list, not a formality: this CSS is inlined into a document
+    # meant to be self-contained and embeddable, so anything outside the vocabulary the
+    # renderer emits should be refused rather than shipped. Rotation and the transform box
+    # were added when the motion model stopped being translation-only; extending it is a
+    # deliberate act, which is the point of writing the shapes out.
     keyframes = re.compile(
         r"@keyframes sqpack-[A-Za-z0-9_.-]+\{"
-        r"(?:[0-9.]+%\{transform:translate\(-?[0-9.]+px,-?[0-9.]+px\)\})+\}"
+        r"(?:[0-9.]+%\{transform:translate\(-?[0-9.]+px,-?[0-9.]+px\)"
+        r"(?: rotate\(-?[0-9.]+deg\))?(?:;filter:saturate\([0-9.]+\))?\})+\}"
     )
     animations = re.compile(
-        r"\.motion-[A-Za-z0-9_.-]+\{animation:sqpack-[A-Za-z0-9_.-]+ "
+        r"\.motion-[A-Za-z0-9_.-]+\{"
+        r"(?:transform-box:fill-box;transform-origin:center;)?"
+        r"animation:sqpack-[A-Za-z0-9_.-]+ "
         r"[0-9.]+s ease-in-out 1 forwards\}"
     )
     final_overlay_keyframes = re.compile(

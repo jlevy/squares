@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Wv6FGStfXmJUQRDWVZf+2qzkUXI</id>
+  <title>arXiv Query: search_query=all:"distance geometry" AND all:"smoothing"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:52Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22distance+geometry%22+AND+all:%22smoothing%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2601.13851v2</id>
+    <title>Inverting Self-Organizing Maps: A Unified Activation-Based Framework</title>
+    <updated>2026-02-23T11:03:39Z</updated>
+    <link href="https://arxiv.org/abs/2601.13851v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.13851v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Self-Organizing Maps (SOMs) provide topology-preserving projections of high-dimensional data, yet their use as generative models remains largely unexplored. We show that the activation pattern of a SOM -- the squared distances to its prototypes -- can be \emph{inverted} to recover the exact input, following from a classical result in Euclidean distance geometry: a point in $D$ dimensions is uniquely determined by its distances to $D{+}1$ affinely independent references. We derive the corresponding linear system and characterize the conditions under which inversion is well-posed. Building on this mechanism, we introduce the \emph{Manifold-Aware Unified SOM Inversion and Control} (MUSIC) update rule, which modifies squared distances to selected prototypes while preserving others, producing controlled, semantically meaningful trajectories aligned with the SOM's piecewise-linear structure. Tikhonov regularization stabilizes the update and ensures smooth motion in high dimensions. Unlike variational or diffusion-based generative models, MUSIC requires no sampling, latent priors, or learned decoders: it operates entirely on prototype geometry. If no perturbation is applied, inversion recovers the exact input; when a target prototype or cluster is specified, MUSIC produces coherent semantic transitions. We validate the framework on synthetic Gaussian mixtures, MNIST digits, and the Labeled Faces in the Wild dataset. Across all settings, MUSIC trajectories maintain high classifier confidence, produce significantly sharper intermediate images than linear interpolation, and reveal an interpretable geometric structure of the learned map.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-20T11:02:54Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alessandro Londei</name>
+    </author>
+    <author>
+      <name>Matteo Benati</name>
+    </author>
+    <author>
+      <name>Denise Lanzieri</name>
+    </author>
+    <author>
+      <name>Vittorio Loreto</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.13720v4</id>
+    <title>Riemannian Optimization for Distance-Geometric Inverse Kinematics</title>
+    <updated>2023-12-10T21:35:28Z</updated>
+    <link href="https://arxiv.org/abs/2108.13720v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.13720v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Solving the inverse kinematics problem is a fundamental challenge in motion planning, control, and calibration for articulated robots. Kinematic models for these robots are typically parametrized by joint angles, generating a complicated mapping between the robot configuration and the end-effector pose. Alternatively, the kinematic model and task constraints can be represented using invariant distances between points attached to the robot. In this paper, we formalize the equivalence of distance-based inverse kinematics and the distance geometry problem for a large class of articulated robots and task constraints. Unlike previous approaches, we use the connection between distance geometry and low-rank matrix completion to find inverse kinematics solutions by completing a partial Euclidean distance matrix through local optimization. Furthermore, we parametrize the space of Euclidean distance matrices with the Riemannian manifold of fixed-rank Gram matrices, allowing us to leverage a variety of mature Riemannian optimization methods. Finally, we show that bound smoothing can be used to generate informed initializations without significant computational overhead, improving convergence. We demonstrate that our inverse kinematics solver achieves higher success rates than traditional techniques, and substantially outperforms them on problems that involve many workspace constraints.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-31T09:58:14Z</published>
+    <arxiv:comment>20 pages, 14 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Transactions on Robotics (T-RO), Vol. 38, No. 3, pp. 1703-1722, Jun. 2022</arxiv:journal_ref>
+    <author>
+      <name>Filip Marić</name>
+    </author>
+    <author>
+      <name>Matthew Giamou</name>
+    </author>
+    <author>
+      <name>Adam W. Hall</name>
+    </author>
+    <author>
+      <name>Soroush Khoubyarian</name>
+    </author>
+    <author>
+      <name>Ivan Petrović</name>
+    </author>
+    <author>
+      <name>Jonathan Kelly</name>
+    </author>
+    <arxiv:doi>10.1109/TRO.2021.3123841</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TRO.2021.3123841" title="doi"/>
+  </entry>
+</feed>

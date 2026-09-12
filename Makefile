@@ -13,7 +13,7 @@
 # rule 6 warns against. Bumping this pin is a deliberate, reviewable act.
 FLOWMARK := uvx --from flowmark-rs==0.4.0 flowmark
 
-.PHONY: format format-check hooks-install
+.PHONY: format format-check hooks-install lint-fix
 
 ## Format all Markdown in the repository.
 format:
@@ -33,8 +33,22 @@ format-check:
 ## PATH" and the format-markdown hook silently did nothing -- while AGENTS.md
 ## promised that unformatted Markdown could not be committed by accident. 2.1.10 is
 ## the version verified working here that day.
+## Install the browser floor's pinned tools and the git hooks. Run once after cloning.
+##
+## `npm ci --ignore-scripts` installs exactly what package-lock.json pins -- lefthook,
+## Biome and TypeScript -- and fails if the lockfile and package.json disagree, which is
+## what makes "pinned" mean anything. The hook install then runs the LOCAL lefthook rather
+## than fetching one, so the binary that installs the hook is the binary the lockfile
+## names.
 hooks-install:
-	npx lefthook@2.1.10 install
+	npm ci --ignore-scripts
+	./node_modules/.bin/lefthook install
+
+## Fix the JavaScript and CSS floor in place. The verify-only counterpart is a step in
+## `packing-validate` and runs on every pull request; this is the local fix command, and
+## the commit hook runs the same thing over staged files.
+lint-fix:
+	./node_modules/.bin/biome check --write --unsafe .
 
 # ---------------------------------------------------------------------------
 # Hand-written agent skills.

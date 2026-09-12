@@ -106,7 +106,7 @@ finite-refiner residual motivates H-021 through H-023 but is not a runnable basi
 experiment. It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a
 structural prior an unconstrained search does not exploit.
 
-The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 20 search
+The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 28 search
 families drawn from this problem and adjacent optimization practice; it is a working
 map, not an exhaustive history.
 `strategy_refs` on each hypothesis cites into it, so the ledger can report which whole
@@ -274,6 +274,11 @@ Row 86 belongs to the pending refined-core transport.
 | 116 | Cover both-band squares outside the forced diamond | registered | [H-122](hypotheses/H-122-diamond-conditional-nine-point-cover.md) | Exp122 refutes this fixed-obstacle cover; full-square compatibility remains open. |
 | 117 | Localize all P10-avoiding near45 squares | registered | [H-123](hypotheses/H-123-near45-coordinate-localization.md) | Exp123 accepts the reviewed two-mark reduction through an independent four-guard certificate. |
 | 118 | Keep the full distinguished square in the conditional nine-point cover | registered | [H-124](hypotheses/H-124-full-distinguished-square-compatibility.md) | A complete compatibility proof would close H036 using H106 and H123; a bounded fixed-S discriminator first tests whether this stronger sufficient route survives. |
+| 119 | Put Gensane’s simultaneous all-square perturbation on the ordinary move menu | registered | [H-201](hypotheses/H-201-simultaneous-perturbation-move.md) | The cheapest structural repair for the plateau the 2026-09-08 annealing survey diagnoses; a flag on sqsearch rather than a formulation change. |
+| 120 | Give every square a nonzero derivative with an aggregate wall-pressure term | registered | [H-202](hypotheses/H-202-wall-pressure-dense-objective.md) | The cheap surrogate for the inflation formulation, ablatable against it; the reported side stays required_side so the term can never flatter a result. |
+| 121 | Spend the budget in refined local optima rather than moves | registered | [H-203](hypotheses/H-203-basin-hopping-over-the-lp-quench.md) | Basin hopping against multistart over the LP-in-cell quench, in the currency Ellsworth’s published statistics use. |
+| 122 | Separate cooling-schedule LENGTH from cooling-schedule SHAPE | registered | [H-204](hypotheses/H-204-cooling-schedule-length.md) | Registered mid-calibration after the ablation meant to refute a schedule explanation produced one; four temperature changes did nothing and a tenfold anneal length left the grid. |
+| 123 | Search by projection instead of by an objective | registered | [H-205](hypotheses/H-205-projection-search-reaches-feasibility.md) | The one mechanism in the 2026-09-09 simulation survey with a cold whole-benchmark result on the sibling problem, and the only search here whose output is a packing by construction rather than by tolerance. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.

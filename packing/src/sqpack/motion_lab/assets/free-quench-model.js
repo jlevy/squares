@@ -8,7 +8,7 @@
   function copyState(state) {
     return {
       side: state.side,
-      squares: state.squares.map((square) => ({...square})),
+      squares: state.squares.map((square) => ({ ...square })),
       groups: state.groups.map((group) => [...group]),
       snapping_enabled: state.snapping_enabled,
     };
@@ -16,30 +16,39 @@
 
   function groupFor(state, squareId) {
     const group = state.groups.find((value) => value.includes(squareId));
-    if (!group) throw new Error(`unknown editor square ID: ${squareId}`);
+    if (!group) {
+      throw new Error(`unknown editor square ID: ${squareId}`);
+    }
     return group;
   }
 
   function axes(square) {
     const cosine = Math.cos(square.theta);
     const sine = Math.sin(square.theta);
-    return [[cosine, sine], [-sine, cosine]];
+    return [
+      [cosine, sine],
+      [-sine, cosine],
+    ];
   }
 
   function halfExtent(square, axis) {
     const [axisX, axisY] = axis;
     const cosine = Math.cos(square.theta);
     const sine = Math.sin(square.theta);
-    return 0.5 * (
-      Math.abs(axisX * cosine + axisY * sine)
-      + Math.abs(-axisX * sine + axisY * cosine)
+    return (
+      0.5 * (Math.abs(axisX * cosine + axisY * sine) + Math.abs(-axisX * sine + axisY * cosine))
     );
   }
 
   function corners(square) {
     const cosine = Math.cos(square.theta);
     const sine = Math.sin(square.theta);
-    return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([signX, signY]) => [
+    return [
+      [-1, -1],
+      [1, -1],
+      [1, 1],
+      [-1, 1],
+    ].map(([signX, signY]) => [
       square.x + 0.5 * (signX * cosine - signY * sine),
       square.y + 0.5 * (signX * sine + signY * cosine),
     ]);
@@ -48,20 +57,27 @@
   function pairGap(first, second) {
     const deltaX = first.x - second.x;
     const deltaY = first.y - second.y;
-    return Math.max(...axes(first).concat(axes(second)).map((axis) => (
-      Math.abs(deltaX * axis[0] + deltaY * axis[1])
-      - halfExtent(first, axis)
-      - halfExtent(second, axis)
-    )));
+    return Math.max(
+      ...axes(first)
+        .concat(axes(second))
+        .map(
+          (axis) =>
+            Math.abs(deltaX * axis[0] + deltaY * axis[1]) -
+            halfExtent(first, axis) -
+            halfExtent(second, axis),
+        ),
+    );
   }
 
   function insideContainer(square, side) {
     const horizontal = halfExtent(square, [1, 0]);
     const vertical = halfExtent(square, [0, 1]);
-    return square.x - horizontal >= -EPSILON
-      && square.x + horizontal <= side + EPSILON
-      && square.y - vertical >= -EPSILON
-      && square.y + vertical <= side + EPSILON;
+    return (
+      square.x - horizontal >= -EPSILON &&
+      square.x + horizontal <= side + EPSILON &&
+      square.y - vertical >= -EPSILON &&
+      square.y + vertical <= side + EPSILON
+    );
   }
 
   function editorDiagnostics(state) {
@@ -69,10 +85,7 @@
     for (let first = 0; first < state.squares.length; first += 1) {
       for (let second = first + 1; second < state.squares.length; second += 1) {
         if (pairGap(state.squares[first], state.squares[second]) < -EPSILON) {
-          overlapPairs.push([
-            state.squares[first].square_id,
-            state.squares[second].square_id,
-          ]);
+          overlapPairs.push([state.squares[first].square_id, state.squares[second].square_id]);
         }
       }
     }
@@ -87,11 +100,9 @@
   function translateGroup(state, squareId, dx, dy) {
     const output = copyState(state);
     const moving = new Set(groupFor(output, squareId));
-    output.squares = output.squares.map((square) => (
-      moving.has(square.square_id)
-        ? {...square, x: square.x + dx, y: square.y + dy}
-        : square
-    ));
+    output.squares = output.squares.map((square) =>
+      moving.has(square.square_id) ? { ...square, x: square.x + dx, y: square.y + dy } : square,
+    );
     return output;
   }
 
@@ -105,7 +116,9 @@
     const cosine = Math.cos(delta);
     const sine = Math.sin(delta);
     output.squares = output.squares.map((square) => {
-      if (!moving.has(square.square_id)) return square;
+      if (!moving.has(square.square_id)) {
+        return square;
+      }
       const offsetX = square.x - pivotX;
       const offsetY = square.y - pivotY;
       return {
@@ -121,12 +134,20 @@
   function validCandidate(state, movingGroup, dx, dy) {
     const moved = translateGroup(state, movingGroup[0], dx, dy);
     const moving = new Set(movingGroup);
-    if (moved.squares.some(
-      (square) => moving.has(square.square_id) && !insideContainer(square, moved.side),
-    )) return false;
-    return !moved.squares.some((first) => moving.has(first.square_id)
-      && moved.squares.some((second) => !moving.has(second.square_id)
-        && pairGap(first, second) < -EPSILON));
+    if (
+      moved.squares.some(
+        (square) => moving.has(square.square_id) && !insideContainer(square, moved.side),
+      )
+    ) {
+      return false;
+    }
+    return !moved.squares.some(
+      (first) =>
+        moving.has(first.square_id) &&
+        moved.squares.some(
+          (second) => !moving.has(second.square_id) && pairGap(first, second) < -EPSILON,
+        ),
+    );
   }
 
   function candidateRecord({
@@ -160,46 +181,28 @@
     for (const movingId of movingGroup) {
       const first = byId.get(movingId);
       for (const second of state.squares) {
-        if (moving.has(second.square_id)) continue;
+        if (moving.has(second.square_id)) {
+          continue;
+        }
         const stationaryGroup = groupFor(state, second.square_id);
         const deltaX = first.x - second.x;
         const deltaY = first.y - second.y;
         for (const [axisOrder, axis] of axes(first).concat(axes(second)).entries()) {
           const projection = deltaX * axis[0] + deltaY * axis[1];
           const sign = projection >= 0 ? 1 : -1;
-          const contactProjection = sign * (
-            halfExtent(first, axis) + halfExtent(second, axis)
-          );
+          const contactProjection = sign * (halfExtent(first, axis) + halfExtent(second, axis));
           const amount = contactProjection - projection;
           const dx = amount * axis[0];
           const dy = amount * axis[1];
           const distance = Math.abs(amount);
-          const translated = {...first, x: first.x + dx, y: first.y + dy};
-          if (distance <= threshold
-            && validCandidate(state, movingGroup, dx, dy)
-            && Math.abs(pairGap(translated, second)) <= EPSILON) {
-            candidates.push(candidateRecord({
-              dx,
-              dy,
-              distance,
-              targetKind: "square",
-              targetId: second.square_id,
-              movingGroup,
-              stationaryGroup,
-              rank: [distance, second.square_id, movingId, axisOrder, sign < 0 ? 0 : 1],
-            }));
-          }
-        }
-        for (const [movingCorner, firstCorner] of corners(first).entries()) {
-          for (const [stationaryCorner, secondCorner] of corners(second).entries()) {
-            const dx = secondCorner[0] - firstCorner[0];
-            const dy = secondCorner[1] - firstCorner[1];
-            const distance = Math.hypot(dx, dy);
-            const translated = {...first, x: first.x + dx, y: first.y + dy};
-            if (distance <= threshold
-              && validCandidate(state, movingGroup, dx, dy)
-              && Math.abs(pairGap(translated, second)) <= EPSILON) {
-              candidates.push(candidateRecord({
+          const translated = { ...first, x: first.x + dx, y: first.y + dy };
+          if (
+            distance <= threshold &&
+            validCandidate(state, movingGroup, dx, dy) &&
+            Math.abs(pairGap(translated, second)) <= EPSILON
+          ) {
+            candidates.push(
+              candidateRecord({
                 dx,
                 dy,
                 distance,
@@ -207,14 +210,40 @@
                 targetId: second.square_id,
                 movingGroup,
                 stationaryGroup,
-                rank: [
+                rank: [distance, second.square_id, movingId, axisOrder, sign < 0 ? 0 : 1],
+              }),
+            );
+          }
+        }
+        for (const [movingCorner, firstCorner] of corners(first).entries()) {
+          for (const [stationaryCorner, secondCorner] of corners(second).entries()) {
+            const dx = secondCorner[0] - firstCorner[0];
+            const dy = secondCorner[1] - firstCorner[1];
+            const distance = Math.hypot(dx, dy);
+            const translated = { ...first, x: first.x + dx, y: first.y + dy };
+            if (
+              distance <= threshold &&
+              validCandidate(state, movingGroup, dx, dy) &&
+              Math.abs(pairGap(translated, second)) <= EPSILON
+            ) {
+              candidates.push(
+                candidateRecord({
+                  dx,
+                  dy,
                   distance,
-                  second.square_id,
-                  movingId,
-                  4 + movingCorner * 4 + stationaryCorner,
-                  0,
-                ],
-              }));
+                  targetKind: "square",
+                  targetId: second.square_id,
+                  movingGroup,
+                  stationaryGroup,
+                  rank: [
+                    distance,
+                    second.square_id,
+                    movingId,
+                    4 + movingCorner * 4 + stationaryCorner,
+                    0,
+                  ],
+                }),
+              );
             }
           }
         }
@@ -239,15 +268,17 @@
       for (const [wallOrder, [dx, dy]] of translations.entries()) {
         const distance = Math.hypot(dx, dy);
         if (distance <= threshold && validCandidate(state, movingGroup, dx, dy)) {
-          candidates.push(candidateRecord({
-            dx,
-            dy,
-            distance,
-            targetKind: "wall",
-            targetId: WALLS[wallOrder],
-            movingGroup,
-            rank: [distance, state.squares.length + wallOrder, movingId, 0, 0],
-          }));
+          candidates.push(
+            candidateRecord({
+              dx,
+              dy,
+              distance,
+              targetKind: "wall",
+              targetId: WALLS[wallOrder],
+              movingGroup,
+              rank: [distance, state.squares.length + wallOrder, movingId, 0, 0],
+            }),
+          );
         }
       }
     }
@@ -256,7 +287,9 @@
 
   function compareRanks(first, second) {
     for (let index = 0; index < first.length; index += 1) {
-      if (first[index] !== second[index]) return first[index] - second[index];
+      if (first[index] !== second[index]) {
+        return first[index] - second[index];
+      }
     }
     return 0;
   }
@@ -266,36 +299,44 @@
       throw new Error("snap threshold must be finite and non-negative");
     }
     const movingGroup = groupFor(state, movingSquareId);
-    if (!state.snapping_enabled) return {state: copyState(state), result: null};
-    const candidates = squareCandidates(state, movingGroup, threshold)
-      .concat(wallCandidates(state, movingGroup, threshold));
-    if (candidates.length === 0) return {state: copyState(state), result: null};
+    if (!state.snapping_enabled) {
+      return { state: copyState(state), result: null };
+    }
+    const candidates = squareCandidates(state, movingGroup, threshold).concat(
+      wallCandidates(state, movingGroup, threshold),
+    );
+    if (candidates.length === 0) {
+      return { state: copyState(state), result: null };
+    }
     candidates.sort((first, second) => compareRanks(first.rank, second.rank));
     const selected = candidates[0].result;
     const output = translateGroup(state, movingSquareId, selected.dx, selected.dy);
     if (selected.target_kind === "square") {
-      const merged = [...selected.moving_group, ...selected.stationary_group]
-        .sort((first, second) => first - second);
+      const merged = [...selected.moving_group, ...selected.stationary_group].sort(
+        (first, second) => first - second,
+      );
       const mergedIds = new Set(merged);
       output.groups = output.groups
         .filter((group) => !group.some((squareId) => mergedIds.has(squareId)))
         .concat([merged])
         .sort((first, second) => first[0] - second[0]);
     }
-    return {state: output, result: selected};
+    return { state: output, result: selected };
   }
 
   function setSnapping(state, enabled) {
-    if (typeof enabled !== "boolean") throw new Error("snapping toggle must be boolean");
+    if (typeof enabled !== "boolean") {
+      throw new Error("snapping toggle must be boolean");
+    }
     const output = copyState(state);
     output.snapping_enabled = enabled;
     return output;
   }
 
   function releaseQuenchRequest(state, maxSweeps, timeBudget) {
-    const foldedAngles = state.squares.map((square) => (
-      (square.theta % QUARTER_TURN + QUARTER_TURN) % QUARTER_TURN
-    ));
+    const foldedAngles = state.squares.map(
+      (square) => ((square.theta % QUARTER_TURN) + QUARTER_TURN) % QUARTER_TURN,
+    );
     return {
       contract: "packing.squares:QuenchRequest/v1",
       schema_version: 1,
@@ -326,44 +367,50 @@
 
   function phasePresentation(event) {
     const presentations = {
-      setup: {label: "Setup released", variant: "setup"},
-      "fixed-angle-lp": {label: "Fixed-angle LP", variant: "lp"},
+      setup: { label: "Setup released", variant: "setup" },
+      "fixed-angle-lp": { label: "Fixed-angle LP", variant: "lp" },
       "angular-probe": {
         label: "Angular probe",
         variant: event.outcome === "rejected" ? "probe-rejected" : "probe",
       },
-      "angle-accepted": {label: "Accepted rotation", variant: "accepted"},
-      "cell-change": {label: "Cell change", variant: "cell"},
-      stop: {label: "Stop", variant: "stop"},
+      "angle-accepted": { label: "Accepted rotation", variant: "accepted" },
+      "cell-change": { label: "Cell change", variant: "cell" },
+      stop: { label: "Stop", variant: "stop" },
     };
-    return presentations[event.phase] || {label: event.phase, variant: "unknown"};
+    return presentations[event.phase] || { label: event.phase, variant: "unknown" };
   }
 
   function selectPlaybackIndices(events, limit = 160) {
     if (!Number.isInteger(limit) || limit < 2) {
       throw new Error("playback event limit must be an integer of at least two");
     }
-    if (events.length <= limit) return events.map((_, index) => index);
+    if (events.length <= limit) {
+      return events.map((_, index) => index);
+    }
     const mandatoryPhases = new Set(["setup", "angle-accepted", "cell-change", "stop"]);
-    const selected = new Set(events.flatMap((event, index) => (
-      mandatoryPhases.has(event.phase) ? [index] : []
-    )));
+    const selected = new Set(
+      events.flatMap((event, index) => (mandatoryPhases.has(event.phase) ? [index] : [])),
+    );
     const available = Math.max(0, limit - selected.size);
-    if (available === 1) selected.add(Math.floor((events.length - 1) / 2));
+    if (available === 1) {
+      selected.add(Math.floor((events.length - 1) / 2));
+    }
     for (let slot = 0; slot < available && available > 1; slot += 1) {
-      selected.add(Math.round(slot * (events.length - 1) / (available - 1)));
+      selected.add(Math.round((slot * (events.length - 1)) / (available - 1)));
     }
     return [...selected].sort((first, second) => first - second);
   }
 
   function timelineWindow(length, index, radius = 20) {
-    if (!Number.isInteger(length) || length < 1) throw new Error("timeline must not be empty");
+    if (!Number.isInteger(length) || length < 1) {
+      throw new Error("timeline must not be empty");
+    }
     if (!Number.isInteger(index) || index < 0 || index >= length) {
       throw new Error("timeline index is outside the trace");
     }
     const width = Math.min(length, 2 * radius + 1);
     const start = Math.max(0, Math.min(index - radius, length - width));
-    return {start, end: start + width};
+    return { start, end: start + width };
   }
 
   globalThis.MotionLabEditor = Object.freeze({

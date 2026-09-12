@@ -231,6 +231,10 @@ max-complexity = 57
 "benchmarks/*" = ["T201"]
 "frankensim-probe/*" = ["T201"]
 "src/sqpack/cli/*" = ["T201"]
+# The video spikes are tools of the same kind: generators, measurement scripts and
+# browser checks whose interface is what they print. Waived here rather than rewritten
+# as the lint floor is raised over them; `**` because they sit two directories down.
+"atlas/known-best/video/spikes/**" = ["T201"]
 # `K` is the published symbol in the source these modules transcribe; renaming it to
 # `k` would make the code harder to check against the paper, which is the point.
 "cases/trump11/packing.py" = ["N806"]
@@ -263,7 +267,10 @@ max-complexity = 57
 ban-relative-imports = "all"
 
 [tool.ruff.lint.isort]
-known-first-party = ["cases", "devtools", "sqpack"]
+# `probes` is the video workbench's probe loader, which its checkers import as a sibling.
+# Named here because ruff otherwise reads it as a third-party package and reorders the import
+# into the wrong block, which is an `I001` no rewriting of the file can settle.
+known-first-party = ["cases", "devtools", "probes", "sqpack"]
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -288,6 +295,11 @@ include = [
     "benchmarks",
     "tests",
     "frankensim-probe",
+    # The retained video spikes. They were excluded from both gates while they were
+    # throwaway prototypes; the workbench they grew into is shipped, so they are held to
+    # the same floor as everything else here. `print` stays waived for them under
+    # `per-file-ignores`, because they are tools and printing is their interface.
+    "atlas/known-best/video/spikes",
     # The hand-written skill assets at the repository root are project Python too; the
     # gate runs from this directory, so they are reached by a parent path. `.claude/skills`
     # is a byte-identical mirror kept by `make skills-sync`, so it is not listed twice.

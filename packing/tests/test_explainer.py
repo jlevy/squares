@@ -17,6 +17,7 @@ import pytest
 import tinycss2
 
 from devtools import render_explainer
+from devtools.build_workbench_site import RENDER_INPUTS as WORKBENCH_INPUTS
 from devtools.render_explainer import (
     ATLAS,
     BEST_RENDERING,
@@ -464,6 +465,31 @@ def test_the_pages_filter_covers_every_render_input() -> None:
             if not covered(declared, patterns)
         ]
         assert not missing, f"{event}: RENDER_INPUTS not covered by paths: {missing}"
+
+
+def test_the_pages_filter_covers_every_workbench_input() -> None:
+    """The workbench is published by the same workflow, so it needs the same guard.
+
+    `packing/site` is uploaded whole and the workbench is a subdirectory of it, which is
+    what gives it its own URL -- and also what makes a stale workbench invisible: the
+    explainer would rebuild, the artifact would upload, and `/workbench/` would keep
+    serving the previous build with every check green. The comparison is the explainer's,
+    asked of the other page's declared inputs.
+    """
+    filters = pages_filters()
+    for event, patterns in filters.items():
+        missing = [
+            declared.relative_to(REPO).as_posix()
+            for declared in WORKBENCH_INPUTS
+            if not covered(declared, patterns)
+        ]
+        assert not missing, f"{event}: workbench inputs not covered by paths: {missing}"
+
+
+def test_every_declared_workbench_input_exists() -> None:
+    """The other half, for the workbench: a filter entry naming a file that is gone."""
+    for declared in WORKBENCH_INPUTS:
+        assert declared.exists(), declared.relative_to(REPO).as_posix()
 
 
 def test_every_declared_render_input_exists() -> None:

@@ -68,7 +68,21 @@ WORK_UNITS = (
 # reader's map of the directory is not a documentation defect.
 # `attic` is where the tbd checkout shortcut clones third-party repositories for
 # review; it is gitignored and never part of the layout.
-NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv", "LICENSE", "attic"}
+# `node_modules` is the browser floor's install directory. It is gitignored, and the
+# floor's own instruction is to create it (`npm ci` at the repository root), so without
+# this every contributor who follows that instruction -- and CI, which runs `npm ci`
+# before the validation steps -- fails a documentation check over an installed
+# dependency tree. `_exists_somewhere` below already skips it for the same reason;
+# these two answers about what counts as content were not the same.
+NOT_CONTENT = {
+    "uv.lock",
+    "pyproject.toml",
+    "__pycache__",
+    ".venv",
+    "LICENSE",
+    "attic",
+    "node_modules",
+}
 CACHE_PARTS = {"__pycache__", ".pytest_cache", ".ruff_cache", ".venv"}
 IGNORED_FILES = {".DS_Store"}
 
@@ -116,6 +130,10 @@ WORK_MODEL_SCAN_PRUNED_DIRS = {
     "target",
 }
 
+#: The README spells its counts out, so the check has to know the word for each one it
+#: might assert. The table stopped at ten and the report count reached eleven, at which
+#: point the check silently started demanding the numeral instead -- a false failure
+#: against correct prose. Keep it ahead of the counts it is asked about.
 _SPELLED = {
     1: "one",
     2: "two",
@@ -127,6 +145,16 @@ _SPELLED = {
     8: "eight",
     9: "nine",
     10: "ten",
+    11: "eleven",
+    12: "twelve",
+    13: "thirteen",
+    14: "fourteen",
+    15: "fifteen",
+    16: "sixteen",
+    17: "seventeen",
+    18: "eighteen",
+    19: "nineteen",
+    20: "twenty",
 }
 
 

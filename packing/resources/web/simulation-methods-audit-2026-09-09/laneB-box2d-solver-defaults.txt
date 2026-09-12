@@ -1,0 +1,104 @@
+=== BOX2D v3 core constants ===
+105:	float contactHertz;
+106-
+107-	/// Contact bounciness. Non-dimensional. You can speed up overlap recovery by decreasing this with
+108-	/// the trade-off that overlap resolution becomes more energetic.
+109:	float contactDampingRatio;
+110-
+111-	/// This parameter controls how fast overlap is resolved and usually has units of meters per second. This only
+112-	/// puts a cap on the resolution speed. The resolution speed is increased by increasing the hertz and/or
+--
+114:	float contactSpeed;
+115-
+116-	/// Maximum linear speed. Usually meters per second.
+117:	float maximumLinearSpeed;
+118-
+119-	/// Optional mixing callback for friction. The default uses sqrt(frictionA * frictionB).
+120-	b2FrictionCallback* frictionCallback;
+--- b2_linearSlop / core.h ---
+404: Not Found2026-09-09T07:36:08Z
+=== BULLET rest of defaults ===
+	btScalar m_splitImpulseTurnErp;
+	btScalar m_linearSlop;
+	btScalar m_warmstartingFactor;
+	btScalar m_articulatedWarmstartingFactor;
+	int m_solverMode;
+	int m_restingContactRestitutionThreshold;
+	int m_minimumSolverBatchSize;
+	btScalar m_maxGyroscopicForce;
+	btScalar m_singleAxisRollingFrictionThreshold;
+	btScalar m_leastSquaresResidualThreshold;
+	btScalar m_restitutionVelocityThreshold;
+	bool m_jointFeedbackInWorldSpace;
+	bool m_jointFeedbackInJointFrame;
+	int m_reportSolverAnalytics;
+	int m_numNonContactInnerIterations;
+};
+		m_splitImpulseTurnErp = 0.1f;
+		m_linearSlop = btScalar(0.0);
+		m_warmstartingFactor = btScalar(0.85);
+		m_articulatedWarmstartingFactor = btScalar(0.85);
+		//m_solverMode =  SOLVER_USE_WARMSTARTING |  SOLVER_SIMD | SOLVER_DISABLE_VELOCITY_DEPENDENT_FRICTION_DIRECTION|SOLVER_USE_2_FRICTION_DIRECTIONS|SOLVER_ENABLE_FRICTION_DIRECTION_CACHING;// | SOLVER_RANDMIZE_ORDER;
+		m_solverMode = SOLVER_USE_WARMSTARTING | SOLVER_SIMD;  // | SOLVER_RANDMIZE_ORDER;
+		m_restingContactRestitutionThreshold = 2;              //unused as of 2.81
+		m_minimumSolverBatchSize = 128;                        //try to combine islands until the amount of constraints reaches this limit
+		m_maxGyroscopicForce = 100.f;                          ///it is only used for 'explicit' version of gyroscopic force
+
+=== BOX2D v3 defaults (b2DefaultWorldDef) ===
+
+=== BOX2D v3 linear slop ===
+2026-09-09T07:36:20Z
+CMakeLists.txt aabb.c aabb.h arena_allocator.c arena_allocator.h atomic.h bitset.c bitset.h body.c body.h box2d.natvis box2d.pc.in broad_phase.c broad_phase.h constraint_graph.c constraint_graph.h contact.c contact.h contact_solver.c contact_solver.h container.h core.c core.h ctz.h distance.c distance_joint.c dynamic_tree.c geometry.c hull.c id_pool.c id_pool.h island.c island.h joint.c joint.h manifold.c math_functions.c motor_joint.c mover.c mover_joint.c parallel_for.c parallel_for.h physics_world.c physics_world.h pogo_joint.c prismatic_joint.c recording.c recording.h recording_ops.inl recording_replay.c recording_replay.h revolute_joint.c scheduler.c scheduler.h sensor.c sensor.h shape.c shape.h solver.c solver.h solver_set.c solver_set.h table.c table.h timer.c types.c weld_joint.c wheel_joint.c world_snapshot.c world_snapshot.h
+--- grep slop across likely files ---
+## constants.h
+## core.h
+## physics_world.c
+267:	world->contactSpeed = def->contactSpeed;
+268:	world->contactHertz = def->contactHertz;
+269:	world->contactDampingRatio = def->contactDampingRatio;
+464:	float speculativeDistance = B2_SPECULATIVE_DISTANCE;
+465:	float recycleDistanceNonTouching = b2MinFloat( recycleDistance, speculativeDistance );
+978:	float contactHertz = b2MinFloat( world->contactHertz, 0.125f * context.inv_h );
+1301:			const float linearSlop = B2_LINEAR_SLOP;
+1345:							else if ( mp->separation > linearSlop )
+## world.c
+## contact_solver.c
+230:	const float contactSpeed = context->world->contactSpeed;
+2020:	b2FloatW contactSpeed = b2SplatW( -context->world->contactSpeed );
+## manifold.c
+130:	const float speculativeDistance = B2_SPECULATIVE_DISTANCE;
+155:	if ( separation > radius + speculativeDistance )
+175:		if ( separation > radius + speculativeDistance )
+196:		if ( separation > radius + speculativeDistance )
+371:		if ( separationA + 0.1f * B2_LINEAR_SLOP >= separationB )
+401:			if ( sp <= distance + B2_LINEAR_SLOP || sq <= distance + B2_LINEAR_SLOP )
+447:			if ( sp <= distance + B2_LINEAR_SLOP || sq <= distance + B2_LINEAR_SLOP )
+691:// if separation >= 0.1f * B2_LINEAR_SLOP
+2026-09-09T07:36:31Z
+=== B2_LINEAR_SLOP / SPECULATIVE definitions ===
+--- from constants (types.c defaults) ---
+6-#include "core.h"
+7-
+8:b2WorldDef b2DefaultWorldDef( void )
+9-{
+10-	float lengthUnits = b2GetLengthUnitsPerMeter();
+11-	b2WorldDef def = { 0 };
+12-	def.gravity.x = 0.0f;
+13-	def.gravity.y = -10.0f;
+14-	def.hitEventThreshold = 1.0f * lengthUnits;
+15-	def.restitutionThreshold = 1.0f * lengthUnits;
+16-	def.contactSpeed = 3.0f * lengthUnits;
+17-	def.contactHertz = 30.0;
+18-	def.contactDampingRatio = 10.0f;
+19-
+20-	// 400 meters per second, faster than the speed of sound
+21-	def.maximumLinearSpeed = 400.0f * lengthUnits;
+22-	def.enableSleep = true;
+23-	def.enableContinuous = true;
+24-	def.internalValue = B2_SECRET_COOKIE;
+2026-09-09T07:36:44Z
+## src/core.h
+## src/solver.h
+## src/constraint_graph.h
+## include/box2d/base.h
+## src/contact.h

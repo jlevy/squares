@@ -1,0 +1,39 @@
+== LMGC90 gitlab project API
+  name = LMGC90_user
+  path_with_namespace = lmgc90/lmgc90_user
+  description = User version of LMGC90 project
+  license = None
+  license_url = None
+  web_url = https://git-xen.lmgc.univ-montp2.fr/lmgc90/lmgc90_user
+  last_activity_at = 2026-07-16T14:06:56.037Z
+  star_count = 2
+  visibility = public
+2026-09-09T07:38:59Z
+=== LMGC90 repo tree / license ===
+  blob README.md
+--- README raw ---
+# LMGC90 project: user version #
+
+
+# Downloading
+
+To get the project please check [here](https://git-xen.lmgc.univ-montp2.fr/lmgc90/lmgc90_user/-/wikis/home)
+
+# Contact us
+
+If you'd like to speak about a bad behavior of a simulation, to propose a non 
+regression test, to propose a new feature or any thing relative to the 
+development of LMGC90, please contact us via this mailing list:
+
+lmgc90-user@groupes.renater.fr
+
+To stay aware, you can subscribe to this mailing list by asking to:
+ - Dubois Frédéric : frederic.dubois@umontpellier.fr
+ - Rémy Mozul : remy.mozul@umontpellier.fr
+
+# How does it work
+
+To obtain up to date informations on how to download/install/use, please check the
+[wiki](https://git-xen.lmgc.univ-montp2.fr/lmgc90/lmgc90_user/-/wikis/home#how-does-it-work)
+
+

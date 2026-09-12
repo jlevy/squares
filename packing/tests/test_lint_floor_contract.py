@@ -104,6 +104,11 @@ def test_the_rule_families_are_enabled_and_print_is_a_checked_boundary() -> None
         "src/sqpack/cli/*",
         "src/sqpack/campaign/runner.py",
         "src/sqpack/campaign/ledger.py",
+        # The retained video spikes are tools of the same kind -- generators, measurement
+        # scripts and browser checks whose interface is what they print -- and were waived
+        # wholesale when the lint floor was raised over them. `**` rather than `*` because
+        # they sit two directories below `packing/`.
+        "atlas/known-best/video/spikes/**",
     }
     ceiling = _mapping(lint["mccabe"])["max-complexity"]
     assert isinstance(ceiling, int)

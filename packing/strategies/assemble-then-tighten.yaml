@@ -1,0 +1,28 @@
+softschema:
+  contract: packing.squares:PackingStrategy/v1
+  schema: packing-strategy.schema.yaml
+  envelope: strategy
+  status: enforced
+strategy:
+  name: assemble-then-tighten
+  n: 11
+  seed: 7
+  phases:
+    - mechanism: assemble
+      label: build the face groups
+      structure: {rung: contact-graph-with-types}
+      side: {relative_to: record, factor: 1.12}
+    - mechanism: project
+      label: settle them into a packing
+      relaxation: 0.1
+      constraints: {band: 0.02, weight: 2.0}
+      until: {steps: 4000, stalled_for: 1200}
+    - mechanism: relax
+      label: release the grouping
+      relaxation: 0.1
+      until: {steps: 2000, stalled_for: 700}
+    - mechanism: ratchet
+      label: tighten the container
+      relaxation: 0.1
+      until: {steps: 4000, stalled_for: 1200}
+      schedule: {attempts: 5, floor: 1.0e-3}

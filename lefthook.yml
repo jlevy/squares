@@ -3,7 +3,11 @@
 # Bypass for an emergency commit: `git commit --no-verify` (avoid in PRs).
 
 pre-commit:
-  parallel: true
+  # Sequential, not parallel. Both commands below write the Git index through
+  # `stage_fixed`, and two of those racing contend on `.git/index.lock` -- a failure that
+  # is intermittent, looks like a tool bug, and only ever appears when someone stages both
+  # Markdown and JavaScript at once.
+  parallel: false
   commands:
     # Auto-format Markdown on commit and stage the result, so formatting is
     # transparent rather than a gate the author has to satisfy by hand.
@@ -23,4 +27,20 @@ pre-commit:
     format-markdown:
       glob: "*.{md,markdown,mdc}"
       run: make format
+      stage_fixed: true
+
+    # The JavaScript and CSS floor, fixed at commit the same way Markdown is formatted at
+    # commit: `tbd guidelines typescript-lint-format-rules` floor rule 6, hooks auto-fix and
+    # the gate verifies. `--unsafe` is required and is not as alarming as it reads -- the
+    # braces rule (`useBlockStatements`) classes its own fix unsafe, and that fix only ever
+    # adds braces. The verify-only counterpart, `biome ci --error-on-warnings .`, is a step
+    # in `packing-validate` and runs on every pull request, so a `--no-verify` commit cannot
+    # land unchecked.
+    #
+    # `{staged_files}` is right here, unlike the Markdown hook above: Biome reads
+    # `biome.json` from the repository root whatever paths it is given, so passing explicit
+    # files does not bypass the exclusion list.
+    biome:
+      glob: "*.{js,mjs,cjs,css,json}"
+      run: ./node_modules/.bin/biome check --write --unsafe --no-errors-on-unmatched {staged_files}
       stage_fixed: true

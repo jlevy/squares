@@ -730,7 +730,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 112 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 118 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -870,6 +870,11 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | H-156 | confirmed | proof | The rank-one threshold-atom closure admits a D4-symmetric certificate  |  | 1 |  | 111.9m wall |
 | H-157 | refuted | proof | Refining the corner-owner angular bins from eight to sixteen makes eve |  | 1 |  | 5.9m wall |
 | H-158 | unresolved | proof | For exp151's direction-6 saved residual on selected tuple (0,0,0,7), e |  | 1 |  | 21s wall |
+| H-201 | refuted | search | With a simultaneous perturbation proposal added to the ordinary move m | n: 5 10 11* 17 19 26 27 29 37 50 52 | 2 |  | 155m agent + 105.7m wall |
+| H-202 | refuted | search | Adding an aggregate inward wall-pressure term to the annealing energy, | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 25m agent + 39.1m wall |
+| H-203 | confirmed | search | At an equal budget of refined local optima, basin hopping -- perturbin | n: 5 10 11* 17 19 | 1 |  | 40m agent + 81.2m wall |
+| H-204 | refuted | search | Raising only the anneal length from 400,000 to 4,000,000 steps per res | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 45m agent + 71.3m wall |
+| H-205 | unresolved | search | Divide and concur searched with relaxed-reflect-reflect, run cold over | n: 5 10 11* 17 | 1 |  | 95m agent + 15.6m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -879,7 +884,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 
 ## Rounds
 
-### rejected (27)
+### rejected (30)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -910,6 +915,9 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | exp-151 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-149 | The completed first-deficit stop refutes this fixed six-dot set after seven of 361 directions. It does not rule out relocating the sixth site, changing other sites or a weighted certificate. |
 | exp-153 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-151 | The exact site region becomes empty after 188 complete direction constraints. This rules out every additional single site while original D and tuple(0,0,0,7) stay fixed. It does not rule out weighted added mass below two, repositioned six-site patterns or physical packings. |
 | exp-154 | series-000 | 11 | Claude Opus 5 measurement lane, coordinated by Claude Fable | H-157 | Six refined subclasses still read exactly 10, so the case split as posed is not closed by refinement and H-157 is refuted on its own registered direction. |
+| exp-202 | series-000 | 11 | claude-opus-5 | H-201 | The criterion was measured and missed: three cells of eleven meet both clauses and four meet the threshold, against the six declared -- but the four where it works it works by 0.017 to 0.29, and the six where it does nothing it does exactly nothing, so the move is not weak, it is inapplicable above n = 26 at this budget. |
+| exp-203 | series-000 | 11 | claude-opus-5 | H-202 | The criterion was measured and missed in the wrong direction: one cell of eleven improves and three regress, including both proved controls, so the aggregate compaction surrogate is not a weak version of the inflation formulation but a different and worse objective, and it should not be carried. |
+| exp-205 | series-000 | 11 | claude-opus-5 | H-204 | The criterion was measured and missed -- three cells of eleven against the six declared -- but a parameter that costs nothing to carry recovers three quarters of what the new move family recovers, which contradicts the design input hard enough that the schedule axis has to be swept properly before any further move is built. |
 
 ### abandoned (2)
 
@@ -918,7 +926,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (25)
+### unresolved (26)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -947,6 +955,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Process exit0 preserved a valid partial receipt, but it did not mean scientific completion: only unrestricted converged. Point exhausted60 rounds without convergence, triangle and endpoint were not run, and the primary difference was not measured. The partial point objective is not a covering value or negative result for H139. |
 | exp-148 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-146 | The seed-stage guard expired before any complete seed direction or candidate check. Two valid retained escapes give reusable negative evidence for49152 labels, but neither a new cover nor an all-label refutation was completed. |
 | exp-156 | series-000 | 11 | Codex root coordinator; prospective strategy independently audited by GPT-6 Astra Max | H-158 | The sole run found that the old B-only model already excludes the first selected owner, making parent-domain gain impossible there by set inclusion. The later owners were not tested, so this complete fixed-protocol result neither accepts nor rejects H-158. |
+| exp-206 | series-000 | 11 | claude-opus-5 | H-205 | The guard clause is met decisively and is the point of the round: 16 of 16 runs end on packings that an independent oracle confirms, against 0 of 48 for the penalty physics, which settles the precondition the 2026-09-08 calibration failed. The accuracy clause is missed by three cells of four. The failure is localised rather than diffuse -- every failed run failed at the first tightening and never moved -- so the repair is in the container schedule and the restart policy, not in the projections. |
 
 ### blocked (9)
 
@@ -962,7 +971,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 | exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 
-### accepted (38)
+### accepted (39)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1004,8 +1013,9 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | exp-146 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-144 | All sixteen classes completed with exact nesting; twelve wall-aware footprints properly contain their old endpoint footprints. Four are equal and none is impossible. This accepts the frozen geometric mechanism, without an extra covered tuple or a global bound change. |
 | exp-152 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-150 | A nonempty two-dimensional four-vertex region survives the two necessary core constraints. This accepts only the two-witness screen, not any all-direction cover or tuple exclusion. |
 | exp-155 | series-000 | 11 | Claude Fable measurement lane; retrospectively registered from the retained exact lane and T-026 proof packet without a new run | H-156 | T-026 proves the first disjunct of H-156. It excludes every smaller side through strict rational dilations but does not decide whether eleven squares fit at the displayed limiting endpoint. |
+| exp-204 | series-000 | 11 | claude-opus-5 | H-203 | The proposal structure is worth its complexity at this budget: H-203 declared three of five cells improving by 0.01 and four did, two of them with disjoint seed ranges, but the other two overlap and no run came within 1e-2 of any record, so this accepts a proposer and settles nothing about record-finding. |
 
-### baseline (11)
+### baseline (12)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1020,6 +1030,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
+| exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1042,7 +1053,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 
 ## Effort
 
-112 rounds, 2152.1 agent-minutes, 1485.2 wall-minutes.
+118 rounds, 2512.1 agent-minutes, 1798.2 wall-minutes.
 
 ## Exploration reports not yet codified
 
@@ -1053,6 +1064,7 @@ Status: **active**. Select and execute short, high-information blocks across dis
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-015 — The map and the three programs: where significant progress is likeliest next
+- X-025 — Hunting by Hand, and the Threads the Move-Set Round Opened
 - X-027 — Fractional Obstructions and Structural Proof Mechanisms
 
 <!-- This document follows common-doc-guidelines.md.

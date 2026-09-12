@@ -1,0 +1,18 @@
+{
+  // The motion lab's assets and the slideshow's harness. The motion-lab files are fragments
+  // concatenated into one page -- `exact-n5-model.js` defines what `motion-lab.js` calls --
+  // so they are one program here for the same reason Biome's unused-symbol rules are scoped
+  // off for them. Same ratchet, same tracker: think-4cwy.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false
+  },
+  "include": [
+    "packing/src/sqpack/motion_lab/assets/**/*.js",
+    "packing/atlas/known-best/video/spikes/v1-slideshow/*.js",
+    "packing/atlas/known-best/video/spikes/v1-slideshow/*.d.ts"
+  ]
+}

@@ -28,7 +28,8 @@ formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive normally stores an original
 source, a cleaned `.md` transcription, and a faithful `.raw.md` extraction.
-Twenty-two entries currently fall short in ways worth naming rather than hiding:
+One hundred and nine entries currently fall short in ways worth naming rather than
+hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
   `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
@@ -46,6 +47,48 @@ Twenty-two entries currently fall short in ways worth naming rather than hiding:
   faithful extraction, no cleaned transcription yet.
   All fourteen were read directly from the PDF, and the claims resting on them were
   checked there.
+- The fifteen search-method sources retained on 2026-09-08 for
+  [the annealing report](../../docs/project/research/research-2026-09-08-annealing-for-square-packing.md)
+  are **raw-only** on the same terms:
+  `ye-huang-lu-2013-iterated-tabu-search-unequal-circles`,
+  `gensane-2004-dense-packings-equal-spheres-cube`,
+  `addis-locatelli-schoen-2008-disk-packing-square`,
+  `grosso-jamali-locatelli-schoen-2010-packing-equal-unequal-circles`,
+  `lai-hao-xiao-glover-2023-perturbation-thresholding-search`,
+  `odriozola-2009-replica-exchange-hard-spheres`,
+  `johnson-aragon-mcgeoch-schevon-1989-annealing-part-i`,
+  `johnson-aragon-mcgeoch-schevon-1991-annealing-part-ii`,
+  `blair-santangelo-machta-2012-packing-squares-in-a-torus`,
+  `berthold-kamp-mexi-pokutta-polik-2026-global-optimization-combinatorial-geometry`,
+  `berthold-kamp-mexi-pokutta-polik-2026-out-of-the-box-packing-problems`,
+  `ninarello-berthier-coslovich-2017-next-generation-glass-transition`,
+  `xu-xiao-amos-2008-simulated-annealing-weighted-polygon-packing`,
+  `anderson-irrgang-glotzer-2016-scalable-metropolis-hard-shapes`, and
+  `gardeyn-vandenberghe-wauters-2025-sparrow-2d-nesting`. These are method sources
+  rather than results about congruent squares, and a cleaned transcription would buy
+  little: the report’s readings from them are specific numbered observations and tables.
+  Three of those readings were checked against the retained bytes and the check is
+  recorded in
+  [the acquisition packet](web/annealing-methods-audit-2026-09-08/README.md); the rest
+  are cited from abstracts, tables, or the report’s own reading, and the packet says
+  which.
+- The **seventy-two** simulation- and physics-method sources retained on 2026-09-09 for
+  [the simulation mechanisms report](../../docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md)
+  are **raw-only** on the same terms, and are listed in
+  [their own table](#simulation-and-physics-method-sources) below.
+  Like the 2026-09-08 batch these are method sources rather than results about congruent
+  squares, and a cleaned transcription would buy little: the report’s readings from them
+  are specific numbered parameters, quoted sentences and tables.
+  Eight of those readings were checked against the retained bytes and the check is
+  recorded in
+  [the acquisition packet](web/simulation-methods-audit-2026-09-09/README.md), which
+  also names every source the pass could not obtain and says what the report does and
+  does not claim from it.
+  One of the seventy-two, `more-wu-1997-global-continuation-distance-geometry`, is an
+  **image-only raster scan**: its faithful extraction is 28 bytes of form feeds and
+  `pdftotext` reported no warning at all, so an `.ocr.md` sidecar is retained beside it
+  on the same terms as the Stromquist memoranda, and the formulas the report quotes were
+  read off rendered page images rather than off the OCR.
 - `gobel-1979-geometrical-packing-and-covering-problems` is **PDF-only**: the source is
   retained, but neither a cleaned transcription nor a faithful extraction has been
   produced. Claims resting on it must be checked against the page images.
@@ -138,6 +181,10 @@ grep -n "sqrt" packing/resources/papers/stromquist-2003-*.raw.md
 ## Papers
 
 Citation keys match those used in the research document.
+This table holds sources about packing congruent squares.
+Two further tables below hold method analogues from adjacent problems:
+[rigidity and verification](#rigidity-and-verification-method-sources), and
+[search and annealing](#search-and-annealing-method-sources).
 
 | Key | Title | Authors | Year | Venue | File stem |
 | --- | --- | --- | --- | --- | --- |
@@ -249,6 +296,142 @@ hypotheses to be matched to the square pose chart and its nonsmooth feature chan
 | **[Donev et al. 2007]** | Underconstrained Jammed Packings of Nonspherical Hard Particles: Ellipses and Ellipsoids | A. Donev, R. Connelly, F. H. Stillinger, S. Torquato | 2007 | Phys. Rev. E 75, 051304 | `donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings` |
 | **[Connelly notes]** | Packings of Circles and Spheres, Lectures III and IV | R. Connelly | undated | Institut Henri Poincaré lecture slides | `connelly-packings-of-circles-and-spheres-lecture-notes` |
 
+## Search and Annealing Method Sources
+
+Retained on 2026-09-08 for
+[Annealing for Square Packing](../../docs/project/research/research-2026-09-08-annealing-for-square-packing.md).
+Only two of them are about squares at all, and neither sets a record for `s(n)`. They
+are here because the report’s argument is about **search methods**, and the methods that
+set packing records were developed on circles, disks and spheres, or measured on graph
+problems. Every entry is raw-only.
+The retrieval receipts, the checked readings, and the sources that could not be
+retrieved are in
+[`web/annealing-methods-audit-2026-09-08`](web/annealing-methods-audit-2026-09-08/README.md).
+
+| Key | Title | Authors | Year | Venue | File stem |
+| --- | --- | --- | --- | --- | --- |
+| **[Gensane 2004]** | Dense Packings of Equal Spheres in a Cube | T. Gensane | 2004 | Electron. J. Combin. 11, #R33 | `gensane-2004-dense-packings-equal-spheres-cube` |
+| **[Addis–Locatelli–Schoen 2008]** | Disk Packing in a Square: A New Global Optimization Approach | B. Addis, M. Locatelli, F. Schoen | 2008 | INFORMS J. Comput. 20(4), 516–524 (preprint) | `addis-locatelli-schoen-2008-disk-packing-square` |
+| **[Grosso et al. 2010]** | Solving the problem of packing equal and unequal circles in a circular container | A. Grosso, A. R. M. J. U. Jamali, M. Locatelli, F. Schoen | 2010 | J. Global Optim. 47, 63–81 (preprint) | `grosso-jamali-locatelli-schoen-2010-packing-equal-unequal-circles` |
+| **[Ye–Huang–Lü 2013]** | Iterated Tabu Search Algorithm for Packing Unequal Circles in a Circle | F. Ye, W. Huang, Z. Lü | 2013 | arXiv:1306.0694 | `ye-huang-lu-2013-iterated-tabu-search-unequal-circles` |
+| **[Lai et al. 2023]** | Perturbation-based thresholding search for packing equal circles and spheres | X. Lai, J.-K. Hao, R. Xiao, F. Glover | 2023 | INFORMS J. Comput. (accepted manuscript) | `lai-hao-xiao-glover-2023-perturbation-thresholding-search` |
+| **[Odriozola 2009]** | Replica Exchange Monte Carlo applied to Hard Spheres | G. Odriozola | 2009 | J. Chem. Phys. 131, 144107; arXiv:1010.2923 | `odriozola-2009-replica-exchange-hard-spheres` |
+| **[Johnson et al. Part I]** | Optimization by Simulated Annealing: An Experimental Evaluation; Part I, Graph Partitioning | D. S. Johnson, C. R. Aragon, L. A. McGeoch, C. Schevon | 1989 | Oper. Res. 37(6), 865–892 | `johnson-aragon-mcgeoch-schevon-1989-annealing-part-i` |
+| **[Johnson et al. Part II]** | Optimization by Simulated Annealing: An Experimental Evaluation; Part II, Graph Coloring and Number Partitioning | D. S. Johnson, C. R. Aragon, L. A. McGeoch, C. Schevon | 1991 | Oper. Res. 39(3), 378–406 | `johnson-aragon-mcgeoch-schevon-1991-annealing-part-ii` |
+| **[Blair et al. 2012]** | Packing Squares in a Torus | D. W. Blair, C. Santangelo, J. Machta | 2012 | arXiv:1110.5348; J. Stat. Mech. | `blair-santangelo-machta-2012-packing-squares-in-a-torus` |
+| **[Xu–Xiao–Amos 2008]** | Simulated Annealing for Weighted Polygon Packing | Y.-C. Xu, R.-B. Xiao, M. Amos | 2008 | arXiv:0809.5005 | `xu-xiao-amos-2008-simulated-annealing-weighted-polygon-packing` |
+| **[Anderson et al. 2016]** | Scalable Metropolis Monte Carlo for simulation of hard shapes (HOOMD-blue HPMC) | J. A. Anderson, M. E. Irrgang, S. C. Glotzer | 2016 | Comput. Phys. Commun. 204, 21–30; arXiv:1509.04692 | `anderson-irrgang-glotzer-2016-scalable-metropolis-hard-shapes` |
+| **[Ninarello et al. 2017]** | Models and algorithms for the next generation of glass transition studies | A. Ninarello, L. Berthier, D. Coslovich | 2017 | Phys. Rev. X 7, 021039; arXiv:1704.08864 | `ninarello-berthier-coslovich-2017-next-generation-glass-transition` |
+| **[Berthold et al. 2026a]** | Global Optimization for Combinatorial Geometry Problems Revisited in the Era of LLMs | T. Berthold, D. Kamp, G. Mexi, S. Pokutta, I. Pólik | 2026 | arXiv:2601.05943 | `berthold-kamp-mexi-pokutta-polik-2026-global-optimization-combinatorial-geometry` |
+| **[Berthold et al. 2026b]** | Out-of-the-Box Global Optimization for Packing Problems: New Models and Improved Solutions | T. Berthold, D. Kamp, G. Mexi, S. Pokutta, I. Pólik | 2026 | arXiv:2605.04850 | `berthold-kamp-mexi-pokutta-polik-2026-out-of-the-box-packing-problems` |
+| **[Sparrow 2025]** | An open-source heuristic to reboot 2D nesting research | J. Gardeyn, G. Vanden Berghe, T. Wauters | 2025 | arXiv:2509.13329 | `gardeyn-vandenberghe-wauters-2025-sparrow-2d-nesting` |
+
+## Simulation and Physics Method Sources
+
+Retained on 2026-09-09 for
+[Physics and Simulation Mechanisms for Square Packing](../../docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md).
+None of them is about congruent squares in a square, and none sets a record for `s(n)`.
+They are here because that report’s argument is about **mechanisms that move bodies
+under a simulated physical or geometric rule**, and those mechanisms were developed on
+disks, spheres, ellipses, polyhedra and, in the graphics half, on nothing in particular.
+Every entry is raw-only, with the one image-only exception named above.
+The acquisition URLs, retrieval timestamps, per-file SHA-256 hashes, the eight readings
+checked against the retained bytes, the screened-out material, and every source that
+could not be retrieved are in
+[`web/simulation-methods-audit-2026-09-09`](web/simulation-methods-audit-2026-09-09/README.md).
+
+### Inflation, event-driven dynamics and billiards
+
+| Source | File stem |
+| --- | --- |
+| Lubachevsky, *How to Simulate Billiards and Similar Systems*, J. Comput. Phys. 94, 1991 | `lubachevsky-1991-how-to-simulate-billiards` |
+| Donev, Torquato & Stillinger, *Neighbor list collision-driven molecular dynamics for nonspherical hard particles*, 2005 | `donev-torquato-stillinger-2005-neighbor-list-collision-driven-nonspherical` |
+| Skoge, Donev, Stillinger & Torquato, *Packing hyperspheres in high-dimensional Euclidean spaces*, 2006 | `skoge-donev-stillinger-torquato-2006-packing-hyperspheres-high-dimensional-euclidean-spaces` |
+| Torquato & Stillinger, *Jammed hard-particle packings: from Kepler to Bernal and beyond*, Rev. Mod. Phys. 82, 2010 | `torquato-stillinger-2010-jammed-hard-particle-packings-kepler-bernal` |
+| Jiao, Stillinger & Torquato, *Optimal packings of superdisks*, 2008 | `jiao-stillinger-torquato-2008-dense-packings-superdisks` |
+| Jiao, Stillinger & Torquato, *Maximally random jammed packings of superballs*, 2010 | `jiao-stillinger-torquato-2010-mrj-packings-superballs` |
+| Klement, Lee, Anderson & Engel, *Newtonian event-chain Monte Carlo and collision prediction with polyhedral particles*, 2021 | `klement-engel-2021-newtonian-event-chain-monte-carlo-collision-prediction-polyhedra` |
+| Hoover, Hoover & Bannerman, *Single-speed molecular dynamics of hard parallel squares and cubes*, 2009 | `hoover-hoover-bannerman-2009-single-speed-md-hard-parallel-squares-cubes` |
+| Hoy, *Ultradense jammed ellipse packings via biased SWAP*, 2024 | `hoy-2024-ultradense-jammed-ellipse-packings-biased-swap` |
+| Bannerman, Sargant & Lue, *DynamO: a free O(N) general event-driven molecular dynamics simulator*, 2011 | `bannerman-sargant-lue-2011-dynamo-free-event-driven-md-simulator` |
+| Boll, Donovan, Graham & Lubachevsky, *Improving dense packings of equal disks in a square*, 2000 | `boll-donovan-graham-lubachevsky-2000-improving-dense-packings-disks-square` |
+| Graham & Lubachevsky, *Repeated patterns of dense packings of equal disks in a square*, 1996 | `graham-lubachevsky-1996-repeated-patterns-dense-packings-disks-square` |
+| Graham & Lubachevsky, *Dense packings of equal disks in an equilateral triangle*, 1995 | `graham-lubachevsky-1995-dense-packings-disks-equilateral-triangle` |
+| Lubachevsky & Graham, *Curved hexagonal packings of equal disks in a circle*, 1997 | `lubachevsky-graham-1997-curved-hexagonal-packings-disks-circle` |
+
+### Adaptive shrinking cell, and contact dynamics
+
+| Source | File stem |
+| --- | --- |
+| Torquato & Jiao, *Dense packings of the Platonic and Archimedean solids*, Nature 460, 2009 | `torquato-jiao-2009-dense-packings-platonic-archimedean-solids` |
+| Torquato & Jiao, *Dense packings of polyhedra: Platonic and Archimedean solids*, Phys. Rev. E 80, 2009 | `torquato-jiao-2009-dense-packings-polyhedra-platonic-archimedean` |
+| Torquato & Jiao, *Robust algorithm to generate a diverse class of dense sphere packings via linear programming*, Phys. Rev. E 82, 2010 | `torquato-jiao-2010-robust-algorithm-sphere-packings-linear-programming` |
+| Jiao, Stillinger & Torquato, *Optimal packings of superballs*, 2009 | `jiao-stillinger-torquato-2009-optimal-packings-superballs` |
+| Atkinson, Jiao & Torquato, *Maximally dense packings of two-dimensional convex and concave noncircular particles*, 2012 | `atkinson-jiao-torquato-2012-maximally-dense-packings-2d-noncircular` |
+| Maher, Stillinger & Torquato, *Kinetic frustration effects on dense two-dimensional packings of convex particles*, 2021 | `maher-stillinger-torquato-2021-kinetic-frustration-2d-convex-packings` |
+| Fu, Steinhardt, Zhao, Socolar & Charbonneau, *Hard sphere packings within cylinders*, 2016 | `fu-steinhardt-zhao-socolar-charbonneau-2016-hard-sphere-packings-within-cylinders` |
+| Fayen, Jagannathan & Foffi, *Infinite-pressure phase diagram of binary mixtures of hard disks*, 2020 | `fayen-jagannathan-foffi-2020-infinite-pressure-phase-diagram-binary-hard-disks` |
+| Unger & Kertesz, *The contact dynamics method for granular media*, 2003 | `unger-kertesz-2003-contact-dynamics-method-granular-media` |
+| Unger, Kertesz & Wolf, *Force indeterminacy in the jammed state of hard disks*, 2005 | `unger-kertesz-wolf-2005-force-indeterminacy-jammed-hard-disks` |
+| Dubois, Acary & Jean, *The Contact Dynamics method: a nonsmooth story*, C. R. Mecanique 346, 2018 | `dubois-acary-jean-2018-contact-dynamics-method-nonsmooth-story` |
+| Shaebani, Unger & Kertesz, *Generation of homogeneous granular packings: contact dynamics at constant pressure*, 2008 | `shaebani-unger-kertesz-2008-homogeneous-granular-packings-contact-dynamics-pressure-bath` |
+| Shojaaee, Shaebani, Brendel, Torok & Wolf, *Parallel contact dynamics by adaptive hierarchical domain decomposition*, 2012 | `shojaaee-shaebani-brendel-torok-wolf-2012-parallel-contact-dynamics-domain-decomposition` |
+| Olsen & Kamrin, *Resolving force indeterminacy in contact dynamics using compatibility conditions*, 2018 | `olsen-kamrin-2018-force-indeterminacy-contact-dynamics` |
+| Preclik & Rude, *Ultrascale simulations of non-smooth granular dynamics*, 2015 | `preclik-rude-2015-ultrascale-simulations-nonsmooth-granular-dynamics` |
+| Mazhar, Heyn & Pazouki et al., *Chrono: a parallel multi-physics library*, 2013 | `mazhar-heyn-pazouki-2013-chrono-parallel-multiphysics-library` |
+| Azema, Estrada & Radjai, *Particle shape dependence in 2D granular media*, 2012 | `azema-estrada-radjai-2012-particle-shape-dependence-2d-granular` |
+| Azema, Radjai & Saussine, *Quasistatic rheology of irregular polyhedral particles*, 2009 | `azema-radjai-saussine-2009-quasistatic-rheology-irregular-polyhedral-particles` |
+
+### Constraint projection, position-based dynamics and differentiable simulation
+
+| Source | File stem |
+| --- | --- |
+| Gravel & Elser, *Divide and concur: a general approach to constraint satisfaction*, Phys. Rev. E 78, 2008 | `gravel-elser-2008-divide-and-concur` |
+| Kallus, Elser & Gravel, *A method for dense packing discovery*, 2010 | `kallus-elser-gravel-2010-method-dense-packing-discovery` |
+| Kallus, Elser & Gravel, *Dense periodic packings of tetrahedra with small repeating units*, 2010 | `kallus-elser-gravel-2010-dense-periodic-packings-tetrahedra` |
+| Kallus, *Solving geometric puzzles with divide and concur*, Cornell thesis, 2011 | `kallus-2011-solving-geometric-puzzles-with-divide-and-concur` |
+| Elser, *How densely can spheres be packed with moderate effort in high dimensions?*, 2023 | `elser-2023-how-densely-can-spheres-be-packed-moderate-effort` |
+| Elser, *The complexity of bit retrieval*, 2016 | `elser-2016-complexity-of-bit-retrieval` |
+| Elser, *Learning without loss*, 2019 | `elser-2019-learning-without-loss` |
+| Lal, *The flow limit of reflect-reflect-relax*, 2025 | `lal-2025-flow-limit-reflect-reflect-relax` |
+| Mueller, Heidelberger, Hennix & Ratcliff, *Position based dynamics*, 2007 | `muller-heidelberger-hennix-2007-position-based-dynamics` |
+| Macklin, Mueller & Chentanez, *XPBD: position-based simulation of compliant constrained dynamics*, 2016 | `macklin-muller-chentanez-2016-xpbd` |
+| Macklin, Storey, Lu et al., *Small steps in physics simulation*, 2019 | `macklin-storey-lu-2019-small-steps-physics-simulation` |
+| Mueller, Macklin, Chentanez et al., *Detailed rigid body simulation with extended position based dynamics*, 2020 | `muller-macklin-chentanez-2020-detailed-rigid-body-xpbd` |
+| Bender, Mueller & Macklin, *A survey on position based dynamics*, 2017 | `bender-muller-macklin-2017-survey-position-based-dynamics` |
+| Stuyck & Chen, *DiffXPBD: differentiable position-based simulation of compliant constraint dynamics*, 2023 | `stuyck-chen-2023-diffxpbd` |
+| Hu, Anderson, Li et al., *DiffTaichi: differentiable programming for physical simulation*, 2020 | `hu-anderson-li-2020-difftaichi` |
+| Freeman, Frey, Raichuk et al., *Brax: a differentiable physics engine for large scale rigid body simulation*, 2021 | `freeman-frey-raichuk-2021-brax` |
+| Werling, Omens, Lee et al., *Fast and feature-complete differentiable physics*, 2021 | `werling-omens-lee-2021-fast-feature-complete-differentiable-physics` |
+| Howell, Le Cleac’h, Kolter et al., *Dojo: a differentiable physics engine for robotics*, 2022 | `howell-le-cleach-kolter-2022-dojo-differentiable-physics-engine` |
+| Suh, Simchowitz, Zhang et al., *Do differentiable simulators give better policy gradients?*, ICML 2022 | `suh-simchowitz-zhang-2022-do-differentiable-simulators-give-better-policy-gradients` |
+| Metz, Freeman, Schoenholz & Kachman, *Gradients are not all you need*, 2021 | `metz-freeman-schoenholz-2021-gradients-are-not-all-you-need` |
+| Zhong, Han & Brikis, *Differentiable physics simulations with contacts: do they have correct gradients?*, 2022 | `zhong-han-brikis-2022-differentiable-physics-contacts-correct-gradients` |
+| Antonova, Yang, Jatavallabhula et al., *Rethinking optimization with differentiable simulation*, 2022 | `antonova-yang-jatavallabhula-2022-rethinking-optimization-differentiable-simulation` |
+| Gupta & Raman, *Differentiable packing of irregular 3D objects with adaptive container estimation*, 2026 | `gupta-raman-2026-differentiable-packing-irregular-3d-objects` |
+| Wang & Lu, *Image-space collage and packing with differentiable rendering*, 2024 (screened) | `wang-lu-2024-image-space-collage-and-packing-differentiable-rendering` |
+| Debnath, Tiwari, Sadekar & Raman, *RASP: shadow-guided packing*, 2025 (screened) | `debnath-tiwari-sadekar-2025-rasp-shadow-guided-packing` |
+| Zhang, Lyu, Rudra et al., *Sequential object placement with convex decomposition*, 2026 (screened) | `zhang-lyu-rudra-2026-sequential-object-placement-convex-decomposition` |
+
+### Smoothed penalties, continuation, and nonlinear-programming packing
+
+| Source | File stem |
+| --- | --- |
+| Nurmela & Ostergard, *Packing up to 50 equal circles in a square*, DCG 18, 1997 | `nurmela-ostergard-1997-packing-up-to-50-equal-circles-in-a-square` |
+| Nurmela & Ostergard, *More optimal packings of equal circles in a square*, DCG 22, 1999 | `nurmela-ostergard-1999-more-optimal-packings-of-equal-circles-in-a-square` |
+| More & Wu, *Global continuation for distance geometry problems*, Argonne MCS-P505-0395, 1995 | `more-wu-1997-global-continuation-distance-geometry` |
+| Birgin & Sobral, *Minimizing the object dimensions in circle and sphere packing problems*, 2008 | `birgin-sobral-2008-minimizing-object-dimensions-circle-sphere-packing` |
+| Birgin & Gentil, *New and improved results for packing identical unitary radius circles*, 2010 | `birgin-gentil-2010-packing-unitary-radius-circles-triangles-rectangles-strips` |
+| Birgin, Martinez & Nishihara, *Orthogonal packing of rectangular items within arbitrary convex regions*, 2006 | `birgin-martinez-nishihara-2006-orthogonal-packing-arbitrary-convex-regions` |
+| Birgin, *Applications of nonlinear programming to packing problems*, 2016 | `birgin-2016-applications-nonlinear-programming-packing` |
+| Romanova, Bennell, Stoyan & Pankratov, *Packing of concave polyhedra with continuous rotations*, EJOR, 2018 | `romanova-bennell-stoyan-2018-packing-concave-polyhedra-continuous-rotations` |
+| Peralta, Andretta & Oliveira, *Solving irregular strip packing problems with free rotations using separation lines*, 2018 | `peralta-andretta-oliveira-2018-irregular-strip-packing-free-rotations-separation-lines` |
+| Yaskov & Chugay, *Packing equal spheres by block coordinate descent*, 2020 | `yaskov-chugay-2020-packing-equal-spheres-block-coordinate-descent` |
+| Lopez & Beasley, *Packing unequal rectangles and squares using formulation space search*, 2018 | `lopez-beasley-2018-packing-unequal-rectangles-squares-formulation-space-search` |
+| He, Ye & Wang, *An efficient quasi-physical quasi-human algorithm for packing equal circles in a circular container*, 2018 | `he-ye-wang-2018-quasi-physical-quasi-human-equal-circles` |
+| Zhou, He & Zheng, *Geometric batch optimization for packing equal circles*, 2023 | `zhou-he-zheng-2023-geometric-batch-optimization-equal-circles` |
+| Hansmann & Wille, *Global optimization by energy landscape paving*, 2002 | `hansmann-wille-2002-global-optimization-energy-landscape-paving` |
+
 ## Web Sources
 
 | Key | What | Source | File stem (in `web/`) |
@@ -270,7 +453,11 @@ hypotheses to be matched to the square pose chart and its nonsmooth feature chan
 | **[MacIver 2026 papers]** | Three author-hosted manuscripts: a reported `s(17), s(18) > 4.450208382…`, the center-area lemma, and center-count bounds; original PDFs, faithful extractions, source revision, upstream CI receipt, and a reading aid with verification limits | github.com/DRMacIver; drmaciver.github.io | `maciver-square-packing-2026-09-07/` |
 | **[n26 current-source audit 2026]** | Current n26 catalogues, recent solver and proof projects, and an exact comparison of MinMax Arena’s reciprocal score; no smaller public upper bound found in the scoped search | primary catalogues; GitHub; minmaxarena.com | `n26-best-known-2026-09-07/` |
 | **[De Winter 2026]** | Mutable author report of proposed construction improvements at `n = 68, 126, 206`; coordinates unavailable and values unreplayed | researchgate.net | `de-winter-improved-packings-2026/` |
+| **[Schadt n29 2025]** | Thomas Schadt’s `n = 29` record repository: the packing, its Python verifier, the rendered SVG, and his four-sentence methodology note | github.com/BalthasarStrauss | `schadt-s29-2025/` |
+| **[Squarl n17 2026]** | Sam Burns’s open `n = 17` pipeline documentation at a pinned commit: the formulation and move set, the deep-polish architecture and its tolerances, the final nine-hour production search’s own accounting, and the earlier topology drain | github.com/sam-bee/squarl | `squarl-n17-2026/` |
 | **[Literature refresh 2026-09-05]** | Frozen arXiv, Crossref, OpenAlex, and Zenodo receipts; additions, currentness checks, and nearby-problem exclusions | primary sources and scholarly indexes | `literature-refresh-2026-09-05/` |
+| **[Annealing methods audit 2026-09-08]** | Frozen arXiv, Crossref and OpenAlex receipts for the search-method corpus; the fifteen-paper acquisition manifest, three readings checked against the retained bytes, the screened-out adjacent problems, and the open-access verdict on every source that could not be retrieved | primary sources and scholarly indexes | `annealing-methods-audit-2026-09-08/` |
+| **[Simulation methods audit 2026-09-09]** | Frozen arXiv, Crossref, OpenAlex, Semantic Scholar, GitHub and publisher receipts for the physics- and simulation-mechanism corpus, in four disjoint lanes; 101 responses, the seventy-two-paper acquisition manifest with per-file hashes, eight readings checked against the retained bytes, four searches whose zero counts are themselves findings, the screened-out adjacent problems, and every source that could not be retrieved with its obstacle | primary sources and scholarly indexes | `simulation-methods-audit-2026-09-09/` |
 | **[`s(11)` lower-bound audit 2026]** | Exact-value, reciprocal, catalogue, citation-chain, and method-lineage search supporting the scoped novelty claim for `381/100` | primary papers; author pages; scholarly indexes; public catalogues | `s11-lower-bound-literature-audit-2026/` |
 | **[`s(11)` exact-endpoint audit 2026-09-06]** | Dated exact-value and topic-query receipt for `38100*sqrt(8100042893309449)/899996306539`; a bounded currentness check, not absolute-priority proof | arXiv; Crossref; OpenAlex; general web index | `s11-exact-endpoint-literature-audit-2026-09-06/` |
 | **[Finite-case literature audit 2026]** | Repeatable queries and bounded negative result for recent papers on the prioritized cases | arxiv.org; combinatorics.org; author pages | `finite-case-literature-audit-2026/` |
@@ -340,6 +527,37 @@ The short version below is kept for readers of this archive.
 | Gustafsson & Thulin (1980), *Ronden* | Swedish company periodical; Ellsworth notes he has not read it directly either |
 | MacIver (2026), supporting C1-C14 certificates and exact ledger/replay scripts | Absent from the inspected public commit of 10 August 2026; checked 7 September. The manuscript itself is archived. |
 
+Six search-method sources were attempted on **2026-09-08** and not retrieved.
+[The annealing audit packet](web/annealing-methods-audit-2026-09-08/README.md) records
+each attempt, its HTTP result, and its open-access verdict from the retained OpenAlex
+probe; the short version is that Basurto et al.
+2024 (J. Chem. Phys.
+161:044110) and Oakley et al.
+2013 (Phys. Chem. Chem.
+Phys. 15:3965) are nominally hybrid open access but returned HTTP 403, and that Basurto
+et al. 2026 (Comput.
+Phys. Commun. 320:109990), Müller et al.
+2009 (Phys. Rev. E 79:021102), Gomes & Oliveira 2006 (Eur.
+J. Oper. Res. 171:811) and the TAMSASS-PECS chapter are closed.
+These are not in
+[`../frontier/source-availability.yaml`](../frontier/source-availability.yaml), which
+tracks sources bearing on square-packing bounds; these bear on search method.
+
+Twenty further simulation-method sources or groups of them were attempted on
+**2026-09-09** and not retrieved.
+[The simulation methods audit packet](web/simulation-methods-audit-2026-09-09/README.md)
+records each attempt, its HTTP result and its open-access verdict; these too bear on
+method rather than on bounds and are not in `source-availability.yaml`. Three patterns
+are worth carrying forward rather than rediscovering.
+**HAL is gated from this host by an Anubis proof-of-work challenge that returns HTTP 200
+with a challenge page**, which is what hides the open copies of the four foundational
+contact-dynamics papers (Moreau 1994, Jean 1999, Radjai and Richefeu 2009, Radjai et al.
+1996). **The American Physical Society refuses plain `curl` with HTTP 403** even on
+bronze open-access articles.
+And **a Cloudflare interstitial returns HTTP 200**, so a fetch can appear to succeed and
+write an HTML file to a `.pdf` path; one such file was written and deleted in this pass,
+and the packet says so.
+
 ## Provenance and Licence
 
 The original archive was retrieved on **2026-08-22** from the URLs recorded in each
@@ -364,6 +582,17 @@ and
 records their implications for the research program.
 The review retains source-level formula slips as explicit reading notes and leaves the
 PDFs and raw OCR unchanged.
+The fifteen search-method papers and the Squarl documentation were retrieved on
+**2026-09-08**; every URL, timestamp and SHA-256 is in
+[the audit packet](web/annealing-methods-audit-2026-09-08/README.md), and each `.raw.md`
+is `pdftotext -layout` on its retained PDF. The seventy-two simulation- and
+physics-method papers were retrieved on **2026-09-09** on the same terms, from arXiv,
+from open-access journal and repository mirrors, from author and institutional pages,
+and in three cases from the Internet Archive’s copy of a publisher PDF; every URL,
+timestamp and SHA-256 is in
+[the simulation methods packet](web/simulation-methods-audit-2026-09-09/README.md).
+The single OCR sidecar in that batch was produced with `pdftoppm -r 300 -gray -png` and
+Tesseract at `--psm 6`, the same method as the Stromquist aids.
 Archive PDFs are marked binary in the repository’s `.gitattributes`; this prevents Git
 from interpreting compressed scan streams as text without changing any source bytes.
 The arXiv and Electronic Journal of Combinatorics items are open access; the Stanford

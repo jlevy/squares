@@ -1,0 +1,26 @@
+{
+  // The type floor from `tbd guidelines typescript-lint-format-rules`: strict is not the
+  // floor on its own, and these seven flags are the ones that catch real bugs whatever the
+  // runtime or build tool. Every program in this repository extends this and relaxes only
+  // what it demonstrably cannot meet yet, over its own file list, with a tracked issue.
+  //
+  // Everything here is checked JavaScript -- there is no TypeScript in this repository and
+  // no build step for the browser code. `allowJs` + `checkJs` + `noEmit` is how a
+  // JavaScript-only project gets floor rule 3's separate type gate.
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

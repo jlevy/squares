@@ -141,7 +141,18 @@ Neither is touched here.
 ### Decisions
 
 Each decision states the default this plan builds and the alternative it rejects.
-`D2` is the one the owner should confirm before merge.
+`D2` was the one the owner had to confirm before merge, and **it was confirmed on
+2026-09-10** -- not as an exception for one catalogue, but as the standing policy now
+recorded in [conventions](../../../../conventions.md#6-provenance): a source’s licence
+governs its bytes, not the mathematics they describe.
+Extracted centre-and-angle facts are facts about a geometric object, reshaped into this
+project’s own structures, and they carry no licence forward, regardless of source.
+Sources are still cited everywhere, because attribution here is an evidence rule rather
+than a licensing obligation.
+
+Retention of the source material itself is unchanged and still honours whatever each
+source asks: `raw_asset_retained: false` stands for the Kingbird catalogue and no source
+image is kept.
 
 **D1: horizon 324.** Build `101..324` in two chunks, `101..200` then `201..324`. Audit
 `325..400`; build it only under Phase 6, and only if the survey finds an authority
@@ -160,7 +171,8 @@ Update the prospective map’s `acquisition_status` from `deferred-pending-licen
 to the policy actually applied.
 *Rejected:* retaining raw SVGs (no express terms found), and leaving 123 of 224 cards
 empty. *Owner alternative:* express permission from the catalogue’s author, which would
-allow raw retention; not required by this plan.
+allow raw retention; not required by this plan, and not sought, since the confirmation
+above turns on the facts being mathematical rather than on the pictures being licensed.
 
 **D3: one collection, one register.** The known-best manifest, witnesses, renderings,
 and frontier register widen to `1..324`. The prospective collection’s source map is kept

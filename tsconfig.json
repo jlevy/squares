@@ -1,0 +1,17 @@
+{
+  // The workbench's own script and stylesheet: one program, one 5,079-line IIFE, inlined
+  // into the published page by the generator.
+  //
+  // **The ratchet (floor rule 8).** At the full floor this program reports 1,145 errors and
+  // with the four flags below relaxed it reports 109, so the four are off and the 109 are
+  // the work. The default stays strict in tsconfig.base.json; nothing else in the repository
+  // inherits this relaxation, and files move OUT of it, never in. Tracked as think-4cwy.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["packing/atlas/known-best/video/spikes/v2-transitions/assets/**/*.js"]
+}
