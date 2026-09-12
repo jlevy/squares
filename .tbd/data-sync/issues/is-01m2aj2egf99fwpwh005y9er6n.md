@@ -5,7 +5,7 @@ title: Define and test crash durability for BC329 partial receipts
 kind: bug
 status: open
 priority: 2
-version: 3
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -15,8 +15,14 @@ dependencies:
     target: is-01m2aj2ewckram8ww4458w74hr
   - type: blocks
     target: is-01m2aj7q4y8raaw35s0jq3ty2y
+  - type: blocks
+    target: is-01m2anzgc2aqn6vzx29ps3rpn2
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T10:19:37.870Z
-updated_at: 2026-09-12T10:22:41.525Z
+updated_at: 2026-09-12T11:27:55.777Z
 ---
 The WIP calls atomic_write_text and describes partial output as durable, but rename atomicity alone does not fsync file content or its directory. State the required crash model. If process or host-crash durability is part of admission, fsync the file and containing directory at declared checkpoints and test the call/order contract; otherwise narrow the claim and acceptance language to atomic process-level retention. Do not advertise durable scientific partials beyond the property actually established.
+
+## Notes
+
+Admission will claim atomic process-level retention only. atomic_write_text prevents partial JSON visibility across ordinary worker failure/termination, but no fsync contract will be claimed for host crash or power loss; per-direction fsync would materially distort the long scientific run. Remaining work is to remove or narrow every use of 'durable' in runner and final docs before closure.
