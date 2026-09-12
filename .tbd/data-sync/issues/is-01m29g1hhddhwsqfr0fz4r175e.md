@@ -5,7 +5,7 @@ title: "[epic] The workbench draws in layers, and one of them is the research"
 kind: epic
 status: open
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -14,8 +14,9 @@ child_order_hints:
   - is-01m29g3y5nwwb3p5s7awrfg4vx
   - is-01m29g3z5bzj3snyzrw9pkffqp
   - is-01m29g3zzk0809kksdk904rf5w
+  - is-01m29gkhzf1w3zkx0sekkhkvv4
 created_at: 2026-09-12T00:24:56.608Z
-updated_at: 2026-09-12T00:26:58.017Z
+updated_at: 2026-09-12T00:34:46.894Z
 ---
 Owner's design, 2026-09-11, in three messages that are one idea:
 

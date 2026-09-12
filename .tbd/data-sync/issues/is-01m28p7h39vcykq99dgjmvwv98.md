@@ -5,7 +5,7 @@ title: "[epic] Phase 6: the workbench stops being a prototype"
 kind: epic
 status: open
 priority: 1
-version: 17
+version: 19
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -24,8 +24,10 @@ child_order_hints:
   - is-01m29fmp137m9trd5gbc1x1ryg
   - is-01m29fnn377jv7kmkek75ekkt3
   - is-01m29g1hhddhwsqfr0fz4r175e
+  - is-01m29gkhfkt1sv50caesct8q0x
+  - is-01m29gs5z48h1ztmc5h659hd6b
 created_at: 2026-09-11T16:53:49.786Z
-updated_at: 2026-09-12T00:24:56.608Z
+updated_at: 2026-09-12T00:37:51.188Z
 ---
 The page carries a banner calling itself a prototype and the banner is honest: a retained spike, excluded from the lint floor, run by hand, drawing with its own copy of the palette. It is also the thing the owner uses and the thing the video is captured from, and those two facts cannot both keep being true.
 
