@@ -334,8 +334,8 @@ change the global bracket.
 | Weighted five-site atom | The token-budget proof is exact. On the abstract five-site trace universe, the weighted `(2,2,1,1,1)`, threshold-four atom has budget one, whereas ordinary distinct-site threshold atoms need budget at least `4/3` to charge every weighted-positive trace. Geometric realization, a maintained representation and a complete cover remain open |
 | Fixed-angle contact argument | A tight row in an arbitrary selected SAT cell need not be physical contact. The old per-cell rank conclusion survives, but its physical-contact inference is withdrawn. A separate lexicographic theorem gives a genuine-contact representative in each connected component of the full fixed-angle feasible space; its independent review is recorded in the structural review |
 
-The parent-instrument row records its September 10 cutoff.
-On September 12,
+The parent-instrument row records its September 10 cutoff before exp156’s invocation.
+This September 12 addendum records the later result: on September 10,
 [exp156](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md)
 completed its sole registered invocation.
 The saved residual survived its necessary parent box, but all 181 frames for the first

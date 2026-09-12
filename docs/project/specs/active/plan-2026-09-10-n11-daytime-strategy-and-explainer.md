@@ -308,8 +308,11 @@ acceptance, but it is less precise for interrupted-run recovery.
 Then register one hypothesis and one experiment, freeze the packet and normalization
 rule, measure `m_c`, and run the normalized object through the complete exact route, the
 reflected interval route, and the dilation reader’s source replay.
-A timeout, incomplete direction set, or nonzero-width enclosure leaves the packet
-scientifically unresolved.
+A timeout, incomplete direction set, or nonzero-width enclosure leaves coverage
+incomplete.
+Without an independently verified admissible core whose raw charge is at most
+`M/11`, it also leaves the packet scientifically unresolved; such a core instead rejects
+the fixed relative-weight packet even when the remaining directions are incomplete.
 A source mismatch, malformed geometry, method disagreement, or invalid witness makes the
 invocation or instrument invalid; it supplies no scientific verdict.
 A pass changes the bound only when all three readers verify the same retained bytes.
@@ -319,8 +322,8 @@ After a verified rejection, retain the low-charge witness and analyze its exact
 breakpoints across the full improving core-side interval before freezing one nearby
 packet. After acceptance, use the least-charge directions and measured budget margin to
 choose at most one smaller-core or locally refined candidate.
-After timeout, record the unfinished stage and evidence needed to judge whether another
-instrument is warranted.
+After a timeout without a verified refuter, record the unfinished stage and evidence
+needed to judge whether another instrument is warranted.
 None of these outcomes ranks the wider method.
 
 ## Block 3: Changed Atoms and Support
