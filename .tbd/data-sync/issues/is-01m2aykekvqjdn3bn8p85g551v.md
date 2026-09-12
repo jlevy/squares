@@ -3,9 +3,9 @@ type: is
 id: is-01m2aykekvqjdn3bn8p85g551v
 title: Reap the BC329 worker group when its supervisor receives POSIX termination
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -19,7 +19,11 @@ dependencies:
     target: is-01m2b1h8cawhz8q1y1tg2d3c5d
 parent_id: is-01m2as8hsq3d7dxy1z185zxeah
 created_at: 2026-09-12T13:58:37.945Z
-updated_at: 2026-09-12T14:49:51.753Z
+updated_at: 2026-09-12T15:11:12.843Z
+closed_at: 2026-09-12T15:11:12.843Z
+close_reason: "Repair commit 1a5a8565 passed source-distinct reproduction at each stated boundary: literal Git pathspec and tracked-output overlap are fail closed; the post-Popen deadline uses recomputed remaining time and kills a late process group; real SIGTERM and launch-window SIGHUP kill and reap workers before signal redelivery. The 98-test focused suite, Ruff, BasedPyright, edit tier, and diff check passed. Adjacent findings remain separately blocked; no BC329 target ran."
+resolution: null
+duplicate_of: null
 ---
 Independent target-free review of c516a592 ran supervise_worker around a pause-only child, sent SIGTERM to the supervisor, and observed supervisor exit -15 while the start_new_session worker remained alive and result.json stayed preflight-pending/pending. Install and restore appropriate SIGTERM/SIGHUP handling around the supervised lifetime, cover the launch window, terminate and reap the owned worker process group, and retain preflight-failed/supervisor-interrupted with exact exit/signal provenance. Add a real subprocess control in addition to the mocked KeyboardInterrupt test, and verify no orphan remains. Re-run focused tests, Ruff, BasedPyright, formatting, and source-distinct review. No BC329 target may run before closure.
 
