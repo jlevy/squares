@@ -27,26 +27,27 @@ __WORKBENCH_CSS__
       </svg>
       <div id="facts">
         <div class="gapbar" id="gapbar">
-          <svg class="gapbar-plot" viewBox="0 -64 680 180" aria-hidden="true">
+          <svg class="gapbar-plot" viewBox="0 -40 680 110" aria-hidden="true">
             <rect class="track" x="0" y="0" width="680" height="26" rx="4" />
             <rect class="gap-open" id="gapbar-open" x="0" y="0" width="0" height="26" />
-            <!-- The scale's two ends are ticks ON the rail, not the rail's own ends: the bar
-                 runs the full width of the column and sqrt(n) and sqrt(n)+1 are marked a little way
-                 in from each end. That is what a scale looks like, and it is also what stops a
-                 bound arrow at either extreme from being cut in half by the viewBox. -->
-            <line class="end-tick" x1="34" y1="-6" x2="34" y2="32" />
-            <line class="end-tick" x1="646" y1="-6" x2="646" y2="32" />
-            <!-- The two bounds, as arrows pointing at the track from the sides a reader reads
-                 them from: the proved lower bound from below in scarlet, the best known upper
-                 bound from above in green, the same two colours their lines carry in the panel. -->
-            <g id="gapbar-record"><path class="arrow upper" d="M -11 -22 L 11 -22 L 0 -3 Z" /></g>
-            <g id="gapbar-lower"><path class="arrow lower" d="M -11 48 L 11 48 L 0 29 Z" /></g>
-            <line class="hand-stem" id="gapbar-hand" x1="0" y1="-4" x2="0" y2="30" />
-            <text class="gapbar-num is-lower" id="gapbar-lower-label" x="0" y="88" text-anchor="middle"></text>
-            <text class="gapbar-num is-record" id="gapbar-record-label" x="0" y="-32" text-anchor="middle"></text>
+            <!-- Two weights of vertical rule, and the weight is what says which kind of value
+                 it is. The reference marks -- the scale's two ends and any integer inside the
+                 span -- are the quieter grey, drawn into this group by `gapbarSetup` because
+                 how many there are depends on n. The two bounds are bold black, drawn over
+                 them. A rule IS its value; the numbers beside it only have to be nearby. -->
+            <g id="gapbar-ticks"></g>
+            <line class="bound-rule" id="gapbar-lower-rule" x1="0" y1="-8" x2="0" y2="34" />
+            <line class="bound-rule" id="gapbar-record-rule" x1="0" y1="-8" x2="0" y2="34" />
+            <!-- Where the arrangement on the stage actually is: inside the rail, because it is
+                 a reading rather than a mark on the scale, and the only thing here that moves. -->
+            <line class="hand-stem" id="gapbar-hand" x1="0" y1="2" x2="0" y2="24" />
+            <!-- Both bounds' values above the rail, on one line, scarlet and green: the colour
+                 is what says which is which now that neither carries an arrow. -->
+            <text class="gapbar-num is-lower" id="gapbar-lower-label" x="0" y="-16" text-anchor="middle"></text>
+            <text class="gapbar-num is-record" id="gapbar-record-label" x="0" y="-16" text-anchor="middle"></text>
           </svg>
-          <div class="gapbar-end gapbar-area"><span id="gapbar-area"></span><span class="gapbar-end-num" id="gapbar-area-num"></span></div>
-          <div class="gapbar-end gapbar-grid"><span id="gapbar-grid"></span><span class="gapbar-end-num" id="gapbar-grid-num"></span></div>
+          <div class="gapbar-end gapbar-area" id="gapbar-area"></div>
+          <div class="gapbar-end gapbar-grid" id="gapbar-grid"></div>
         </div>
         <div class="facts-layer" id="facts-a"></div>
         <div class="facts-layer" id="facts-b"></div>

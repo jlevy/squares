@@ -587,23 +587,33 @@ def main() -> int:
         # 76 px tall on its first build: `height` is a CSS property on an SVG rect, and the class
         # name it had then was the panel's own `.open` slot.)
         parts = look("gapbar/parts")
+        # The scale's reference marks: its two ends, and any integer inside the span. The span
+        # is exactly one unit wide, so at most one integer can fall strictly inside it -- and
+        # none when n is a perfect square, because then both ends ARE integers. Two marks or
+        # three, never more, and every one of them carries its value underneath.
+        expected_marks = 2 if math.isqrt(17) ** 2 == 17 else 3
+        check(
+            parts["refTicks"] == expected_marks and len(parts["refNums"]) == expected_marks,
+            f"the scale carries {parts['refTicks']} marks and {len(parts['refNums'])} numbers "
+            f"at n = 17, expected {expected_marks} of each",
+        )
         check(
             parts["open"]["t"] >= parts["track"]["t"] - 0.5
             and parts["open"]["b"] <= parts["track"]["b"] + 0.5,
             f"the shaded open span is not a band inside the track: {parts['open']} against {parts['track']}",
         )
-        # The two bounds are arrow groups now, not tick lines, so their boxes are the arrows' own
-        # width -- eleven units either side of the value they point at. The span still runs from one
-        # to the other; it is compared against their CENTRES rather than their edges.
+        # The two bounds are bold vertical rules. A rule has width, so the span is compared
+        # against their CENTRES rather than their edges -- which is also what makes the check
+        # independent of how bold "bold" is.
         low_mid = (parts["low"]["l"] + parts["low"]["r"]) / 2
         rec_mid = (parts["rec"]["l"] + parts["rec"]["r"]) / 2
         check(
             abs(parts["open"]["l"] - low_mid) < 3 and abs(parts["open"]["r"] - rec_mid) < 3,
             f"the shaded span does not run from the lower bound to the record: {parts}",
         )
-        # Each bound's value sits over its own arrow -- the upper above the track, the lower below
-        # it -- so they are separated vertically and no longer have to dodge each other sideways.
-        # What must still hold is that they do not overlap at all.
+        # Both values share one line above the rail now, so they dodge each other sideways
+        # rather than being separated by being on different sides of it. What must hold is the
+        # same either way: they do not overlap.
         apart = (
             parts["lowLabel"]["r"] < parts["recLabel"]["l"] - 0.5
             or parts["recLabel"]["r"] < parts["lowLabel"]["l"] - 0.5

@@ -3712,8 +3712,9 @@
   const GAP_MET = { centre: 0.02, angle: 0.5, side: 0.002 };
   const gapbar = document.getElementById("gapbar");
   const gapbarOpen = document.getElementById("gapbar-open");
-  const gapbarLower = document.getElementById("gapbar-lower");
-  const gapbarRecord = document.getElementById("gapbar-record");
+  const gapbarLowerRule = document.getElementById("gapbar-lower-rule");
+  const gapbarRecordRule = document.getElementById("gapbar-record-rule");
+  const gapbarTicks = document.getElementById("gapbar-ticks");
   const gapbarHand = document.getElementById("gapbar-hand");
   const gapbarLowerLabel = document.getElementById("gapbar-lower-label");
   // An SVG text node, not an HTML one, which is why `measureDigit` can ask it for its
@@ -3722,8 +3723,6 @@
   const gapbarRecordLabel = /** @type {SVGTextElement} */ (
     /** @type {Element} */ (document.getElementById("gapbar-record-label"))
   );
-  const gapbarAreaNum = document.getElementById("gapbar-area-num");
-  const gapbarGridNum = document.getElementById("gapbar-grid-num");
   let gapbarInfo = null;
   //: What the summed overlap may be for the arrangement to count as a packing, in unit sides.
   //: Measured: retained records score 0 to 1.3e-5 -- the float precision of the poses -- and a
@@ -3765,13 +3764,47 @@
     const xr = gapbarX(record);
     gapbarOpen.setAttribute("x", fmt(gapbarX(lower), 2));
     gapbarOpen.setAttribute("width", fmt(Math.max(0, xr - gapbarX(lower)), 2));
-    // The two bound arrows are groups, so they are placed rather than drawn at an x.
-    gapbarLower.setAttribute("transform", `translate(${fmt(gapbarX(lower), 2)} 0)`);
-    gapbarRecord.setAttribute("transform", `translate(${fmt(xr, 2)} 0)`);
-    // The ends carry their own values under their formulas: the bar is a scale, and a scale with
-    // no numbers on it asks a reader to take its span on trust.
-    gapbarAreaNum.textContent = fmt(lo, 2);
-    gapbarGridNum.textContent = fmt(hi, 2);
+    const xl = gapbarX(lower);
+    const standUpAt = (rule, at) => {
+      rule.setAttribute("x1", fmt(at, 2));
+      rule.setAttribute("x2", fmt(at, 2));
+    };
+    standUpAt(gapbarLowerRule, xl);
+    standUpAt(gapbarRecordRule, xr);
+    // A proved n has one bound, not two in the same place: drawing both would put a four-wide
+    // black rule on a four-wide black rule and say there were two facts here.
+    gapbarLowerRule.setAttribute("opacity", gapbarInfo.proved ? "0" : "1");
+    // The scale's reference marks. The span is exactly one unit wide, so at most one integer
+    // can fall strictly inside it -- none when n is a perfect square, because then both ends
+    // ARE integers. Rebuilt per n rather than moved, since how many there are changes.
+    while (gapbarTicks.firstChild) {
+      gapbarTicks.removeChild(gapbarTicks.firstChild);
+    }
+    const marks = [lo, hi];
+    for (let k = Math.ceil(lo); k < hi; k++) {
+      if (k > lo) {
+        marks.push(k);
+      }
+    }
+    for (const value of marks) {
+      const at = gapbarX(value);
+      const tick = document.createElementNS(SVG_NS, "line");
+      tick.setAttribute("class", "ref-tick");
+      tick.setAttribute("x1", fmt(at, 2));
+      tick.setAttribute("x2", fmt(at, 2));
+      tick.setAttribute("y1", "-8");
+      tick.setAttribute("y2", "34");
+      gapbarTicks.appendChild(tick);
+      const num = /** @type {SVGTextElement} */ (document.createElementNS(SVG_NS, "text"));
+      num.setAttribute("class", "gapbar-ref-num");
+      num.setAttribute("text-anchor", "middle");
+      num.setAttribute("y", "56");
+      num.textContent = fmt(value, 2);
+      gapbarTicks.appendChild(num);
+      // Placed after it is in the document, because the width it needs is measured.
+      const half = num.getComputedTextLength() / 2;
+      num.setAttribute("x", fmt(Math.max(half, Math.min(GAPBAR.width - half, at)), 2));
+    }
     // The two numbers, in the relations the panel states them with. The record's sits under its
     // tick unless that would put it on top of the lower bound's, in which case it steps aside: the
     // tick is the mark, the numeral only has to be next to it.
@@ -3782,17 +3815,25 @@
     // labels came out in two faces and two sizes -- exactly the thing a diagram label must not do.
     gapbarLowerLabel.textContent = gapbarInfo.proved ? "" : fmt(lower, 2);
     gapbarRecordLabel.textContent = fmt(record, 2);
-    // Each bound's value sits over its own arrow, the upper above the track and the lower below,
-    // so the two can no longer collide and neither has to step aside for the other. All they need
-    // is to stay inside the bar, and the width they need for that is MEASURED rather than estimated
-    // from a figure width -- an estimate was off by a fifth and clamped `5.12` to `.12` at the left
-    // end. `getComputedTextLength` is exact and is right there.
-    const inside = (label, x) => {
-      const half = (label.getComputedTextLength ? label.getComputedTextLength() : 0) / 2;
-      label.setAttribute("x", fmt(Math.max(half, Math.min(GAPBAR.width - half, x)), 2));
-    };
-    inside(gapbarRecordLabel, xr);
-    inside(gapbarLowerLabel, gapbarX(lower));
+    // Both values share one line above the rail now, so as well as staying inside the bar they
+    // have to stay off each other. The width each needs is MEASURED rather than estimated from a
+    // figure width -- an estimate was off by a fifth once and clamped `5.12` to `.12`.
+    const halfOf = (label) => (label.getComputedTextLength ? label.getComputedTextLength() : 0) / 2;
+    const inside = (x, half) => Math.max(half, Math.min(GAPBAR.width - half, x));
+    const lowHalf = halfOf(gapbarLowerLabel);
+    const recHalf = halfOf(gapbarRecordLabel);
+    let lowAt = inside(xl, lowHalf);
+    let recAt = inside(xr, recHalf);
+    // The lower bound is always the smaller value, so when they crowd it is the left one that
+    // gives way: push them apart about their midpoint and re-clamp.
+    const need = lowHalf + recHalf + 10;
+    if (!gapbarInfo.proved && recAt - lowAt < need) {
+      const middle = (lowAt + recAt) / 2;
+      lowAt = inside(middle - need / 2, lowHalf);
+      recAt = inside(middle + need / 2, recHalf);
+    }
+    gapbarLowerLabel.setAttribute("x", fmt(lowAt, 2));
+    gapbarRecordLabel.setAttribute("x", fmt(recAt, 2));
     return gapbarInfo;
   }
   function gapbarX(value) {

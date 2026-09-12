@@ -164,9 +164,9 @@ body.drawing #packing-svg #squares {
 .gapbar-plot {
   position: absolute;
   left: 0;
-  top: 48px;
+  top: 60px;
   width: 680px;
-  height: 180px;
+  height: 110px;
   display: block;
 }
 .gapbar-plot .track {
@@ -182,17 +182,21 @@ body.drawing #packing-svg #squares {
    Quiet, because they are the bar rather than a claim about this packing. */
 .gapbar-end {
   position: absolute;
-  top: 0;
+  top: 8px;
   font-family: var(--sans);
   font-size: 22px;
   color: var(--quiet);
   white-space: nowrap;
 }
+/* Centred on the tick each one names, not on the column's edge: the formula and the mark
+   are the same statement. `--inset` matches GAPBAR.inset. */
 .gapbar-area {
-  left: 0;
+  left: 34px;
+  transform: translateX(-50%);
 }
 .gapbar-grid {
-  right: 14px;
+  left: 646px;
+  transform: translateX(-50%);
 }
 .gapbar-end .katex {
   font-size: 1em;
@@ -204,20 +208,19 @@ body.drawing #packing-svg #squares {
   fill: var(--quiet);
   opacity: 0.62;
 }
-/* The two ends of the scale: a quiet tick, because they are what the bar IS rather than
-   anything claimed about this n. */
-.gapbar-plot .end-tick {
-  stroke: var(--quiet-rule);
-  stroke-width: 3;
+/* The scale's reference marks -- its two ends, and any integer inside the span. A step
+   darker than the rail so they read as marks rather than as part of it, and a step lighter
+   than the bounds so the eye sorts them without being told. Not black: an earlier revision
+   drew these in ink and the bar read as though every mark on it were a claim. */
+.gapbar-plot .ref-tick {
+  stroke: #9aa3ad;
+  stroke-width: 2.5;
 }
-/* The bounds. Scarlet points up at the track from below, green points down at it from above, and
-   the same two colours name the two lines in the panel -- so a reader who has learnt which is
-   which on the bar has learnt it for the facts as well. */
-.gapbar-plot .arrow.upper {
-  fill: var(--met);
-}
-.gapbar-plot .arrow.lower {
-  fill: var(--new);
+/* The two bounds. Bold and black, because these are the two values the panel below states
+   and the only two a reader is asked to compare the arrangement against. */
+.gapbar-plot .bound-rule {
+  stroke: #0c1116;
+  stroke-width: 4;
 }
 /* Where the arrangement on the stage actually is: a line through the track, not a third arrow.
    It is the only mark here that moves, so it does not need a shape to argue for it. */
@@ -247,12 +250,14 @@ body.drawing #packing-svg #squares {
 .gapbar-num.is-lower {
   fill: var(--new);
 }
-.gapbar-end-num {
+/* Each reference mark's own value, under its tick: the same sans the rest of the diagram
+   uses, quieter than a bound because a reference mark is not a claim. */
+.gapbar-ref-num {
   font-family: var(--sans);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  margin-left: 0.45em;
+  fill: var(--quiet);
 }
 /* The end's formula is the one piece of mathematics on the bar, so it is set as mathematics -- at
    the bar's own small size, so it reads as part of the instrument rather than as a fact. */
