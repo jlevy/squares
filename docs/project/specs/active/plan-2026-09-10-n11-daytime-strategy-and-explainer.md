@@ -412,15 +412,17 @@ separate evidence and stop conditions:
 | D2b: edition and history | 30–45 min | Label the current explainer `v0.4.0`, retain `v0.3.0` as the 3.81 edition, and render a two-entry history near the top. Recover the date each label was first applied to this explainer from Git rather than substituting a theorem or deployment date; bind the version and dates to focused tests. |
 | D3: independent review and stacking | 30–60 min | Independently check the mathematics, prose and rendered output, correct findings, then stack the docs PR on the research checkpoint. Readiness requires green checks on the stacked head; inherited base failures are recorded rather than attributed to the docs change. |
 
-D1, D2 and D2b are complete on PR148 at `f7126bfc`. The mathematical, prose and local
-rendering portion of D3 is also complete: 135 focused tests, static analysis,
-prepared-output drift, the deterministic 20-page PDF and font check, and the complete
-324-case atlas gate pass.
-The remaining D3 step is operational: publish this research branch, retarget PR148 onto
-it, and require the hosted checks to pass on that stacked head.
-On the temporary `main` base, every hosted job except `validate` and its aggregate
-passes; the log attributes those failures solely to the inherited expired session099
-deadline.
+D1, D2, D2b and D3 are complete on PR148 at `989fd544`. The pull request is open,
+non-draft, mergeable into `main`, and all hosted checks pass.
+Its mathematical, prose and rendering review includes 135 focused tests, static
+analysis, prepared-output drift, the deterministic 20-page PDF and font check, and the
+complete 324-case atlas gate.
+
+PR149 is the separate page-diagnostic layer above PR148. It is open, non-draft and
+mergeable at `4d00ab68`; every hosted check passes, as does its unrestricted full
+research checkpoint.
+The BC329 runner and later evidence corrections continue as draft PR156 above PR149.
+Those later layers do not reopen the completed explainer milestone.
 
 The blocks share one documentation branch because they revise one reader artifact.
 Their costs and outcomes remain distinct in the agenda and beads.
