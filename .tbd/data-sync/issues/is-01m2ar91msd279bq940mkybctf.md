@@ -3,9 +3,9 @@ type: is
 id: is-01m2ar91msd279bq940mkybctf
 title: Return the verified-upper-bound corpus check to the fast lane
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - ci
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m2ad9avdatjwfznq7zwqjget
 parent_id: is-01m2ad9avdatjwfznq7zwqjget
 created_at: 2026-09-12T12:08:05.528Z
-updated_at: 2026-09-12T14:32:02.243Z
+updated_at: 2026-09-12T15:51:57.595Z
+closed_at: 2026-09-12T15:51:57.594Z
+close_reason: "PR #149 exact head 4d00ab68 passed focused, unrestricted pre-push, unrestricted full checkpoint, and all hosted checks; its body records all valid and invalid costs and the PR is mergeable over PR #148."
+resolution: null
+duplicate_of: null
 ---
 The exact-head PR149 full gate measured test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports at 0.97s, below the repository's 1s slow-marker floor. Remove its pytest.mark.slow decorator and matching test_module_boundaries slow registry entry, add no replacement ceremony, run the focused contract and boundary tests, then rerun the required gate before publication.
 
