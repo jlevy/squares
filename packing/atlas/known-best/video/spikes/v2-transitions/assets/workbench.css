@@ -563,7 +563,12 @@ body.capture #kind-tag {
 /* Revision 9: one view, no tabs. Stepping one n and running a range are the same operation over a
    different span, so the range is the single spine: `from` and `to` are values of n stepped into,
    and setting them equal is the old Single step tab. */
+/* Past the share `layout` allows it, the panel scrolls rather than pushing the stage out.
+   `max-height` here and `CONTROLS_SHARE` there are the same number, and if they ever
+   disagree the stage is either starved or overlapped. */
 #controls {
+  max-height: 58vh;
+  overflow-y: auto;
   flex: none;
   width: 100%;
   box-sizing: border-box;

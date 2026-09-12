@@ -5869,6 +5869,15 @@
   // whole viewport and covered the controls, which came back only on a reload. Keep the last real
   // measurement and never lay out from a hidden one.
   let controlsHeight = 0;
+  // The largest share of the window height the controls may take before they start scrolling
+  // instead of pushing the stage out. Without a cap the two effects compound: the panel WRAPS
+  // as the window narrows, so it grows exactly when there is least height to share, and it is
+  // subtracted first. Measured before this cap existed: 1920x1080 gave the stage a scale of
+  // 0.448, 1512x982 gave 0.256, and 1280x800 gave 0.061 -- a packing drawn at six per cent.
+  // Browser zoom changes the CSS viewport the same way a smaller window does, which is how it
+  // was noticed. 0.58 is chosen to leave 1920x1080 exactly as it was: the panel is 596 px
+  // there, which is 0.552 of the height, so it still fits under the cap and nothing moves.
+  const CONTROLS_SHARE = 0.58;
   function layout() {
     if (document.hidden) {
       return;
@@ -5882,6 +5891,7 @@
       } else {
         ch = controlsHeight;
       }
+      ch = Math.min(ch, vh * CONTROLS_SHARE);
     }
     const s = Math.min(vw / 1920, (vh - ch) / 1080);
     stage.style.transform = `scale(${s})`;
@@ -7140,6 +7150,23 @@
     }
   });
   window.addEventListener("resize", layout);
+  // The panel's height is not a constant of the window: it changes when a webfont lands, when
+  // a control appears or is taken out of the list, and when a row wraps. `layout` used to run
+  // only at startup and on resize, so whichever height happened to be current at that instant
+  // was the one the stage was scaled from, and a later reflow left it stale. Observing the
+  // panel is what makes the layout converge instead of depending on timing.
+  if (typeof ResizeObserver === "function") {
+    let lastSeen = 0;
+    new ResizeObserver(() => {
+      const now = controls.offsetHeight;
+      // Only on a real change, and never on the sub-pixel echo of our own resize: `layout`
+      // resizes the stage, which can change how the panel wraps, which would call us again.
+      if (now > 0 && Math.abs(now - lastSeen) >= 1) {
+        lastSeen = now;
+        layout();
+      }
+    }).observe(controls);
+  }
   // Coming back to the tab is exactly when the stale zero would have been applied.
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
