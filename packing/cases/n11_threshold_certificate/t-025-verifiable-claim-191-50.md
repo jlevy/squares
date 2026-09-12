@@ -152,7 +152,7 @@ once and requires agreement between the exact sweep in
 The verifier is an additional standard-library implementation of the exact event-cell
 decision. It uses the same certificate and theorem.
 The retained exact sweep and interval branch-and-bound remain separate repository
-decisions. This claim does not bound the side from above, prove a strict inequality at $191/50$, or decide any different atom family, shrink, or direction net.
+decisions. The registered headline records $s(11) \geq 191/50$. Since the minimum is attained and this certificate excludes feasibility at $191/50$, the elementary compactness corollary is $s(11)>191/50$; it requires no additional computation. This claim does not bound the side from above or decide any different atom family, shrink, or direction net.
 
 ## Verifier
 

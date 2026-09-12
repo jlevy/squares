@@ -225,6 +225,7 @@ case or experiment separately.
 | [Independent Review of Translated Individual-Parent Realizability](docs/project/reviews/review-2026-09-10-n11-parent-realizability-independent.md) | dated review record | record | retained | — |
 | [Independent Admission Review: BC326 Parent-Domain Runner](docs/project/reviews/review-2026-09-10-n11-parent-runner-independent.md) | dated review record | record | retained | — |
 | [BC329: Preflight of the 2880-Step Threshold Packet](docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md) | dated review record | record | retained | — |
+| [N11 Strategy Audit for the BC329 Closeout](docs/project/reviews/review-2026-09-12-n11-post-bc329-strategy-audit.md) | dated review record | record | retained | — |
 | [Strategic Review of the N11 Daytime Research Frontier](docs/project/reviews/review-2026-09-10-n11-strategy-frontier.md) | dated review record | record | retained | — |
 | [N=11 Structural Normal Forms](docs/project/reviews/review-2026-09-10-n11-structural-normal-forms.md) | dated review record | record | retained | — |
 | [Independent Review of the N=11 Structural Normal Form](docs/project/reviews/review-2026-09-10-n11-structural-normal-forms-independent.md) | dated review record | record | retained | — |

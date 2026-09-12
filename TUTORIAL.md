@@ -382,7 +382,16 @@ The
 [retained side-`B` depth-one baseline](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md)
 at `L = 191/50` has mass `21342289572/2055263195 ≈ 10.3842`, below 11, so it is
 inconclusive: it is neither the desired cover below 11 nor an obstruction at that
-threshold.
+threshold. A later
+[88-core family](docs/project/research/research-2026-09-10-x027-fractional-duality.md)
+at the same side and core size has total mass exactly 11 and point depth at most one.
+It therefore obstructs every unconditional point-atom cover below mass 11 on that fixed
+core domain. Scaling the cores and placements by `10000/9977` gives a mass-eleven family
+of full unit squares in side `38200/9977`; selecting any individually defined core
+inside each parent preserves the point-depth inequality.
+This extends the point-only obstruction to those selections at that side and above.
+It does not apply below that side or to threshold charges, conditional domains, or
+restrictions that depend on the other packed squares.
 
 #### Why condition on corner squares?
 
@@ -436,8 +445,10 @@ Here is the counting argument for that branch.
 This proves that an eleven-square packing at side `96/25` cannot belong to this selected
 branch. The result is registered as [T-023](packing/frontier/RESULTS.md).
 It does not prove a new lower bound for `s(11)`. The corner-owner theorem permits other
-owner classes and sectors, so a global result would need conditional exclusions whose
-cases cover every permitted combination.
+owner classes and sectors, so a global result would need to prove that every
+hypothetical packing admits at least one valid selection excluded by a conditional
+certificate. Excluding every raw label or every permitted combination is sufficient but
+stronger than this selection requirement.
 The
 [numerical source receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/exp-143-four-owner-footprint-cover.json)
 records how the five dots were found; the exact replay and transfer review establish the
@@ -730,11 +741,14 @@ and global connectivity are still open.
 The constrained-optimality language needed for the sharper statement is introduced in
 [§5](#contact-graphs-stationary-branches-and-rattlers).
 
-The project’s term for this is a **terminal family**, and its definition is deliberately
-strict: local dimension is the nullity of the appropriate independent active-constraint
-Jacobian, after quotienting symmetries and accounting for inequalities and stratum
-changes. **Raw contact counts cannot supply that rank**—contacts may be dependent, one
-contact description may encode several scalar conditions, and angles and cells may
+The project’s term for this is a **terminal family**. The nullity of the appropriate
+independent active-constraint Jacobian, after quotienting symmetries and accounting for
+inequalities and stratum changes, is its **linearized dimension**. It equals local
+dimension only on a regular constant-rank stratum, or after a separate integrability
+argument. At a singular constraint, nullity can overstate the local dimension: `x² = 0`
+has Jacobian nullity one at zero but local dimension zero.
+**Raw contact counts cannot supply even the linearized rank**—contacts may be dependent,
+one contact description may encode several scalar conditions, and angles and cells may
 change along a motion.
 Subtracting contacts from variables is not a rigidity calculation, and the project has a
 logged defect for having done it.

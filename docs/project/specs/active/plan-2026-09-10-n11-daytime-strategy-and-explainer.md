@@ -47,8 +47,11 @@ These scopes remain in force throughout this plan.
 contains the later analytical mechanism synthesis.
 The draft
 [X-028 portfolio](../../../../packing/campaign/explorations/X-028-n11-strategy-portfolio-draft.md)
-preserves the broader six-route option map and reconciles it with T-026 and exp-156.
-Neither document registers a target; this plan remains the execution controller.
+preserves the broader six-route option map and reconciles it with T-026 and exp-156. The
+[source-distinct closeout audit](../../reviews/review-2026-09-12-n11-post-bc329-strategy-audit.md)
+records the exact T-025/T-026/BC329 fact ladder, the terminal meaning of each possible
+BC329 outcome, and the remaining conditional-selection obligations.
+None of these documents registers a target; this plan remains the execution controller.
 
 An **atom** is a nonnegative resource rule used by a covering certificate.
 A point atom charges a core when it contains one site.
@@ -305,8 +308,20 @@ acceptance, but it is less precise for interrupted-run recovery.
 Then register one hypothesis and one experiment, freeze the packet and normalization
 rule, measure `m_c`, and run the normalized object through the complete exact route, the
 reflected interval route, and the dilation reader’s source replay.
-A disagreement or incomplete run is unresolved.
+A timeout, incomplete direction set, or nonzero-width enclosure leaves the packet
+scientifically unresolved.
+A source mismatch, malformed geometry, method disagreement, or invalid witness makes the
+invocation or instrument invalid; it supplies no scientific verdict.
 A pass changes the bound only when all three readers verify the same retained bytes.
+
+The first direct follow-up depends on that terminal evidence.
+After a verified rejection, retain the low-charge witness and analyze its exact
+breakpoints across the full improving core-side interval before freezing one nearby
+packet. After acceptance, use the least-charge directions and measured budget margin to
+choose at most one smaller-core or locally refined candidate.
+After timeout, record the unfinished stage and evidence needed to judge whether another
+instrument is warranted.
+None of these outcomes ranks the wider method.
 
 ## Block 3: Changed Atoms and Support
 
@@ -317,8 +332,10 @@ K5 motif with five sites and integer multiplicities.
 Its budget is one because two disjoint cores cannot each consume four of seven labeled
 tokens. The retained reader reports charge `3/2` against A6’s family, but the production
 format and both coverage routes do not yet admit multiplicities.
-The scientific comparison is blocked on that narrow W7 admission and a maintained
-paired-program adapter.
+First admit exact traces for this one motif on a frozen core domain and compare them
+with all 80 ordinary threshold types on the same sites.
+Only a surviving geometric trace advantage justifies full W7 multiplicity-format
+expansion and a maintained paired-program adapter.
 
 The candidate must state what changes: the atom-generation rule, support-generation
 rule, core/net regime, or some combination.
@@ -367,8 +384,18 @@ component-wise choice of representative and separating axes.
 The proof, exact fixtures and independent audit are in the
 [structural review](../../reviews/review-2026-09-10-n11-structural-normal-forms.md).
 The next structural experiment must consume an actual contact path or snug parent and
-retain the complementary branches; it may not promote an arbitrary active LP row to a
-contact edge.
+retain the complementary branches.
+Its branch map must combine the fixed-side normal form with the seven-of-eight mark
+ownership alternative and one shared resource account, then prove that every admitted
+packing has at least one excluded valid selection.
+It may not promote an arbitrary active LP row to a contact edge or assume a literal
+corner, finite angle set, short path, or complete quench.
+
+For the angle-profile lane, H131 supplies upper counts, not an exact `(9,2)`
+decomposition. A certificate normalized to `9d_0+2d_1` therefore applies only to that
+conditional exact-count branch unless the demand is minimized over every allowed count
+vector. In the simpler `n_0 <= 9` case, `d_0 <= d_1` makes `9d_0+2d_1` the worst allowed
+demand; without that order, the single normalization does not cover the count theorem.
 
 ## Parallel Documentation Blocks
 
