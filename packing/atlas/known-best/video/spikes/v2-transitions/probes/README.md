@@ -22,3 +22,7 @@ local annotations.
 Nothing loads it: a declaration file has no emit, and `probes.probe()`
 still hands the browser each `.js` file exactly as it sits on disk.
 `check_probes.py` globs `*.js`, so it does not count this file as a probe.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
