@@ -223,6 +223,71 @@ digest matches the uploaded artifact — closes it.
 Low priority because the failure is visible the moment anyone opens the link, worth
 doing because “anyone opens the link” is not a gate.
 
+## The Layer Model, and the Research Layer
+
+Tracked as `think-dpyh`. This is the one piece of remaining work that is a **design**
+rather than a conversion, so it is written out here before it is built.
+
+### What the owner asked for
+
+Three messages that are one idea: a `Sources:` block carrying the citations behind each
+n’s bounds, in the explainer’s own styling, condensed and complete; a scarlet star where
+the lower bound is this project’s own; and — the structural part — “a layer which is the
+research layer and the bounds layer, enabled/hidden as a layer in both the Pack and
+Animate tabs in an appropriate way”.
+
+The third changes the other two.
+Without it, sources are a feature: one more block, always on, competing for panel
+height. With it, the page has a **depth**, and the same build is a bare animation, a
+bounds display, or a cited research view.
+
+### What the layers probably are, and what is not settled
+
+The obvious cut is three:
+
+| layer | what it draws | who it is for |
+| --- | --- | --- |
+| stage | the packing and the `n = k` headline | a pure animation, and the video |
+| bounds | the gap bar, `s(n) ≤ …`, `s(n) ≥ …` | someone comparing one n against another |
+| research | the sources, the star, the exact/rigid badges, the OPEN block | someone checking a claim |
+
+**Two things are genuinely unsettled and should not be guessed at.** Whether *bounds*
+and *research* are two layers or two depths of one — they nest rather than compose,
+which is an argument for depth.
+And where the badges and the OPEN block go: they are claims about evidential status,
+which sounds like research, but a reader watching bounds probably wants to know an upper
+bound is only the best known.
+Settle both with the panel in front of you.
+
+### The constraints the page already imposes
+
+These are the reason this is not a checkbox, and each has bitten something already:
+
+- **Every fact on the panel is absolutely positioned at a fixed top.** Hiding one leaves
+  a hole. The layer model needs a layout answer, not a `display: none`.
+- **`setMode` is a reset**, so a layer choice has to live with `state.style` and the
+  colour scheme — settings that survive a switch — and not with the run, which does not.
+- **“Appropriate in both tabs” probably means different defaults, not different
+  capabilities.** Pack is one n examined and can afford words; Animate is a sweep
+  watched and probably wants fewer.
+- **`body.capture` already hides the controls for a capture.** A layer choice has to
+  compose with that rather than fight it, and the capture pipeline will want to name a
+  layer set.
+- **The API needs `setLayers` and `layers`**, so a capture and the checkers can drive
+  it.
+
+### The sources block, before it is designed
+
+One thing decides the rest: **what the record actually holds.** The composite figure
+record and the frontier register carry provenance for the known-best sides, and
+`devtools/render_explainer.py` already formats references for the published paper.
+Both get reused — the generator reads the record rather than restating it, and a second
+citation style invented here would be a second thing to keep right.
+
+Find out what is there per n *first*. “All the pages where we have details” says the
+owner expects it to be partial, and a block designed for complete data that is mostly
+absent is a worse outcome than one designed for absence.
+
 ## Testing Strategy
 
 The page’s own checkers are the test suite and they already exist: `check_workbench.py`
