@@ -3,18 +3,18 @@ type: is
 id: is-01m2aqpewzn7a55te03bfefzr7
 title: Make interval refutation outrank speculative tail failures
 kind: bug
-status: closed
+status: open
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - tooling
 dependencies: []
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T11:57:56.510Z
-updated_at: 2026-09-12T12:06:45.268Z
-closed_at: 2026-09-12T12:06:45.265Z
-close_reason: "Fixed deterministic scheduler precedence: an earlier net-order refutation now suppresses speculative failures strictly beyond its retained prefix, while failures at or before the prefix still raise. Added same-batch, cross-batch, no-refutation, and later-refutation controls; 27 interval tests pass, Ruff and BasedPyright are clean."
+updated_at: 2026-09-12T12:24:38.667Z
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
