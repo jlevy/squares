@@ -1,33 +1,22 @@
 ---
 type: is
 id: is-01m28vqwvnktgxa2k44bftwdam
-title: The math exposure rule judged visibility in a state the probe itself had changed
+title: Keep geometry exposure evidence within one controlled observation
 kind: bug
-status: closed
+status: in_progress
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-11T18:30:09.012Z
-updated_at: 2026-09-11T18:30:15.242Z
+updated_at: 2026-09-12T08:56:10.525Z
 closed_at: 2026-09-11T18:30:15.242Z
 close_reason: Fixed in 15959d44; recorded as D-491
 resolution: null
 duplicate_of: null
 ---
-`prepare_explainer_math`'s exposure rule — `math was exposed while its font requests were
-held` — read visibility from the `before` snapshot and its exemptions from the
-`_GEOMETRY_EARLY_READY` evidence. Those are two observations of two different states: the
-probe injects its own carrier face and the `.katex` substitution between them, and those
-styles change which boxes the page will show.
+The geometry probe previously combined visibility from its later before snapshot with readiness exemptions from an earlier observation. That mixed two states and made the exposure verdict internally inconsistent. The retained WebKit artifact also shows that artificial pre-release work lasted beyond the independent three-second page watchdog: early_visible was empty, the first KPress call arrived at 5339 ms, and 18 boxes were visible later. Their reservation boxes did not move, but their intrinsic glyph widths changed by as much as 20.875 px. Integrate the same-observation exposed_early predicate with a probe-only watchdog pause and live assertion. Preserve the separate queue-watchdog product control. Record the historical causal limit: the artifact supports this timing mechanism but does not timestamp watchdog expiry or prove it was the sole historical cause.
 
-A box the substitution reveals is therefore visible in `before` and absent from the
-evidence, which makes it unadmittable by construction, because `early_ready` can only name
-a box the evidence saw. The rule asked about one state and took its exemptions from another.
+## Notes
 
-Fixed: `geometry_findings` takes `exposed_early` and the exposure rule reads that instead of
-`before`'s flags, so the question and its exemptions come from one observation. Recorded as
-D-491.
-
-Distinct from think-ghns, which is the separate gap that both explainer callers discard the
-font-wait `{status}`. That one is still open, and closing it would not have prevented this.
+Reopened during PR149 reconciliation because the original closed description attributed visibility to carrier CSS, which changes font family but not visibility. Child implementation bead think-6ogd owns the combined correction and fresh validation.

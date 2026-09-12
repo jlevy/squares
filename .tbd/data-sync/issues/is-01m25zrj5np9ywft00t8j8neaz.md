@@ -3,9 +3,9 @@ type: is
 id: is-01m25zrj5np9ywft00t8j8neaz
 title: "N11 explainer: teach the T-025/T-026 lower-bound ladder"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 18
+version: 19
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
@@ -17,9 +17,9 @@ child_order_hints:
   - is-01m25zs0ygtqsqfx233fhjrxqf
   - is-01m26b9kjzhrxhsw4dm5atkax2
 created_at: 2026-09-10T15:42:41.844Z
-updated_at: 2026-09-11T06:56:48.371Z
-closed_at: null
-close_reason: null
+updated_at: 2026-09-12T08:42:29.675Z
+closed_at: 2026-09-12T08:42:29.674Z
+close_reason: PR148 publishes the v0.4.0 explainer, T025 and T026 self-contained claims, exact V4/C5 theorem wording, two-entry dated version history, regenerated 22-page PDF, and reconciled reader documentation. Focused, pre-push, full, browser, and hosted checks pass.
 resolution: null
 duplicate_of: null
 ---
