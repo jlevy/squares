@@ -5,9 +5,9 @@ title: "N11 BC329: build and admit a bounded fixed-core packet runner"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 15
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
-delegate: Sol implementation lane
+delegate: root integration with Sol admission review
 labels:
   - n11
   - tooling
@@ -15,11 +15,20 @@ dependencies: []
 parent_id: is-01m260z2959dmcmn61pn2z7jsk
 child_order_hints:
   - is-01m2ag6b030mv58gf58yyka1as
+  - is-01m2aj2d1mccqf56hnxqqcwt1b
+  - is-01m2aj2deytqhx7j4f1pnte7sp
+  - is-01m2aj2dszhq8h9e6sftwqjp0g
+  - is-01m2aj2e56r62h83avk7kexvhb
+  - is-01m2aj2egf99fwpwh005y9er6n
+  - is-01m2aj2ewckram8ww4458w74hr
+  - is-01m2aj7paytrdj85x26njv0jrr
+  - is-01m2aj7psxqgwsrew721qhsfzj
+  - is-01m2aj7q4y8raaw35s0jq3ty2y
 created_at: 2026-09-10T19:17:19.821Z
-updated_at: 2026-09-12T09:46:48.180Z
+updated_at: 2026-09-12T10:22:52.052Z
 ---
 Implement a maintained entry point for exactly one frozen core side and direction net. It must preserve the original T025 relative-weight scale, report the exact raw minimum m, compare m strictly with M/11, derive normalized bytes by the fixed rule alpha=1/m only after acceptance, enforce a hard process deadline, retain durable partial output, and support the complete exact route, reflected interval route, and dilation replay. Add focused adversarial tests and obtain independent target-free admission before prospectively registering or running BC329. Do not run the scientific target in this bead.
 
 ## Notes
 
-Active on stacked branch codex/n11-bc329-fixed-core-runner at c0d357e5. This bead is target-free instrument admission only; no BC329 hypothesis, experiment, or scientific target may be registered or run until implementation and independent admission pass. T025 source is blob 684a6b7adf4524691a4fb996fa3625d909d171ac, SHA-256 3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f4bad5c; T026 comparison is blob e12789cd8312797254f756446d5ec49c04046a7d, SHA-256 fe786efff724de4cd819928bb04b7337f9f643360f07048fce8c94efb4a646ea. Astra Max confirms the packet mathematics subject to runner admission. A partial observed minimum is only an upper bound on the global m and cannot set alpha; a replayed rational witness at or below M/11 rejects the fixed packet, including equality. Acceptance requires a complete m above M/11, alpha=1/m, explicit least_cell_charge 1, one byte-bound candidate through 2881 exact and 5761 reflected interval directions with exact minimum/enclosure 1, then dilation replay and exact comparison above T026. Execution-level source or method disagreement is invalid evidence while the scientific question remains unresolved. The old rescaling helper omits the real source's minimum declaration, uses a packing-relative provenance path, and has a colliding net-only ID. Admission must also bind the source/revision/import closure, persist atomic partials, supervise and reap the whole process tree, bound dense-route memory, avoid per-direction certificate serialization, and calibrate the full positive-path allowance before registration.
+Fresh clean continuation branch codex/n11-bc329-runner-publication-stack starts at exact PR149 head 237c4023. The old WIP at c0d357e5 was independently audited by Sol high: 23 runner tests, 16 interval tests, Ruff, BasedPyright, and diff-check pass, but it is not admissible. The recovered draft and interval-progress seam are now copied to the clean branch; stale WIP plan/preflight prose was not copied. Published T026 source constants are rebased, still subject to mutation review under think-ak5v. Admission repairs are explicitly split: per-direction reconstructing readback think-p6nf; bounded out-of-order interval/dilation execution and progress think-cf2z; absolute deadlines, parent attestation and real process-group cleanup think-cm33; immediate exact-disagreement classification think-9p77; defined fsync/crash durability think-gxeg; runtime/strict schema/provenance think-95hs; unexpected failure preservation think-snw7; full target-free calibration think-122i; final-stack documentation think-zd1b. No BC329 hypothesis, experiment, or scientific target may be registered or run until every required repair, calibration, independent reader, and parent admission passes.

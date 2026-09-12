@@ -3,15 +3,15 @@ type: is
 id: is-01m28vqwvnktgxa2k44bftwdam
 title: Keep geometry exposure evidence within one controlled observation
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 5
 labels: []
 dependencies: []
 created_at: 2026-09-11T18:30:09.012Z
-updated_at: 2026-09-12T08:56:10.525Z
-closed_at: 2026-09-11T18:30:15.242Z
-close_reason: Fixed in 15959d44; recorded as D-491
+updated_at: 2026-09-12T10:07:50.389Z
+closed_at: 2026-09-12T10:07:50.388Z
+close_reason: Published and independently reviewed the same-observation exposure rule and probe-only root-watchdog pause at 237c4023, preserved the independent queue-watchdog control, corrected D-491's causal scope, and obtained focused live plus exact-head Firefox/WebKit and hosted validation.
 resolution: null
 duplicate_of: null
 ---
@@ -19,4 +19,4 @@ The geometry probe previously combined visibility from its later before snapshot
 
 ## Notes
 
-Reopened during PR149 reconciliation because the original closed description attributed visibility to carrier CSS, which changes font family but not visibility. Child implementation bead think-6ogd owns the combined correction and fresh validation.
+Combined fix is published at PR149 head 237c4023. The exposure verdict uses exposed_early and early_ready from one observation; the geometry probe pauses and records only its artificial root-watchdog timer; the independent queue-watchdog product control retains the real timer and rejects its broken-queue mutation. Seventeen focused geometry tests, an exact live Chromium run with root_watchdog_paused true and zero findings, and exact-head hosted Firefox/WebKit, geometry, page build and packing validation all pass. D-491 states that the retained WebKit timing supports the mechanism but does not timestamp watchdog expiry or prove a sole historical cause.

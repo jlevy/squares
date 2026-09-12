@@ -5,14 +5,18 @@ title: Reconcile the BC329 runner source lock with the published T-026 claim
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - tooling
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m2aj2ewckram8ww4458w74hr
+  - type: blocks
+    target: is-01m2aj7q4y8raaw35s0jq3ty2y
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T09:46:48.180Z
-updated_at: 2026-09-12T09:46:48.180Z
+updated_at: 2026-09-12T10:22:41.494Z
 ---
-The unfinished fixed_core_packet.py pins T-026 blob e12789cd with SHA fe786eff, while PR148 head 989fd544 carries the published T-026 limit blob baeb8c43 and standalone-claim SHA 04fd6bbc. The observed diff is endpoint_status prose; mathematical fields and the T-025 input appear unchanged. Rebase the runner onto the publication stack, independently compare all consumed mathematical fields, update the source/revision lock deliberately, add or retain a refusal control for unexpected source drift, and leave a clean committed branch. Do not weaken or bypass the source binding and do not register or run BC329 until this and the parent admission are complete.
+The unfinished fixed_core_packet.py pins T-026 blob e12789cd with SHA fe786eff, while PR148 head 989fd544 carries the published T-026 limit blob baeb8c43 with SHA 04fd6bbc. The observed artifact diff is endpoint_status prose; mathematical fields and the T-025 input appear unchanged. Rebase the runner onto the publication stack, independently compare every consumed mathematical field, update the source/revision lock deliberately, and retain refusal controls for unexpected source drift. Port only the WIP plan/preflight additions: the old worktree also reintroduces the corrected-away phrase weak limit and points retention at the old CLI. Preserve PR148's direct statement that T-026 proves the ordinary exact lower bound s(11)>=C, while keeping the separate strict-inequality question distinct, and point the run protocol at the admitted fixed-core runner. Leave a clean committed branch. Do not weaken source binding and do not register or run BC329 until this and the parent admission are complete.
