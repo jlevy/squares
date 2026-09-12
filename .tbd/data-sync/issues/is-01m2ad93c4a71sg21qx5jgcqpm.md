@@ -5,7 +5,8 @@ title: Combine PR149 geometry-probe fixes and correct D-491 evidence
 kind: bug
 status: closed
 priority: 1
-version: 4
+version: 5
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration lane
 labels: []
 dependencies:
@@ -13,7 +14,7 @@ dependencies:
     target: is-01m2ad9avdatjwfznq7zwqjget
 parent_id: is-01m26rygs7f0s76v147x0px4cd
 created_at: 2026-09-12T08:55:52.963Z
-updated_at: 2026-09-12T09:06:55.806Z
+updated_at: 2026-09-12T14:13:40.644Z
 closed_at: 2026-09-12T09:06:55.805Z
 close_reason: Combined author and local probe repairs at 7acbc809; focused, records, and live Chromium controls pass. Exact-head publication validation continues in dependent bead think-o96l.
 resolution: null

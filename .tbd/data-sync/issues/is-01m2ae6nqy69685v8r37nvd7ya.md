@@ -5,13 +5,14 @@ title: Stop PDF diagnostics from reading object types out of stream payloads
 kind: bug
 status: closed
 priority: 2
-version: 3
+version: 4
+spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration lane
 labels: []
 dependencies: []
 parent_id: is-01m26rygs7f0s76v147x0px4cd
 created_at: 2026-09-12T09:12:02.045Z
-updated_at: 2026-09-12T09:22:59.269Z
+updated_at: 2026-09-12T14:13:40.644Z
 closed_at: 2026-09-12T09:22:59.269Z
 close_reason: Corrected in 237c4023 and covered by focused regression, static, generated-view, and clean exact-commit browser checks; final publication gates continue in think-o96l.
 resolution: null
