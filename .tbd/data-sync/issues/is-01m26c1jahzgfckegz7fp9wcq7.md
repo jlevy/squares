@@ -5,7 +5,7 @@ title: "N11 BC329: build and admit a bounded fixed-core packet runner"
 kind: task
 status: in_progress
 priority: 1
-version: 24
+version: 25
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration with Sol admission review
 labels:
@@ -32,8 +32,9 @@ child_order_hints:
   - is-01m2artckdxp3pxt6a4enat3mt
   - is-01m2as8hsq3d7dxy1z185zxeah
   - is-01m2asa131hqk3kagma2t2t3ab
+  - is-01m2ay2nyw6emx0zphn4pj685e
 created_at: 2026-09-10T19:17:19.821Z
-updated_at: 2026-09-12T13:36:47.924Z
+updated_at: 2026-09-12T13:49:28.411Z
 ---
 Implement a maintained entry point for exactly one frozen core side and direction net. It must preserve the original T025 relative-weight scale, report the exact raw minimum m, compare m strictly with M/11, derive normalized bytes by the fixed rule alpha=1/m only after acceptance, enforce a hard process deadline, retain atomic process-level partial output without claiming host-crash or power-loss durability, and support the complete exact route, reflected interval route, and dilation replay. Add focused adversarial tests and obtain independent target-free admission before prospectively registering or running BC329. Do not run the scientific target in this bead.
 
