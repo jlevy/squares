@@ -11,23 +11,37 @@ and a pure point certificate is shown to take, number for number, the point rout
 path.
 """
 
+# These tests exercise the private scheduler because completion order and cleanup are
+# intentionally not part of the public verdict API.
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
 import random
+import sys
+import threading
 from collections.abc import Callable
+from concurrent.futures import Future, ProcessPoolExecutor, ThreadPoolExecutor
 from fractions import Fraction
 from itertools import combinations
+from multiprocessing.process import BaseProcess
+from typing import Literal, cast
+from unittest.mock import patch
 
 import numpy as np
 import pytest
 
 from cases.n11_fractional_certificate.replay import STROMQUIST_RUNG_PATH
 from cases.n11_fractional_certificate.replay import load as load_n11
+from sqpack.fractional import threshold_interval
 from sqpack.fractional.certificate import d4_images
 from sqpack.fractional.generate import net_half_tangents
 from sqpack.fractional.interval import (
     BATCH,
+    DirectionOutcome,
     IntervalInputError,
+    Rotation,
+    doubled_net,
     verify_by_intervals,
 )
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
@@ -505,7 +519,575 @@ def test_point_atoms_written_as_one_of_one_threshold_atoms_change_nothing() -> N
     assert verdict.enclosure == original.enclosure
 
 
-def test_forked_workers_do_not_change_the_verdict() -> None:
+class _ThreadPoolAdapter:
+    """Exercise the bounded parallel path portably without starting child processes."""
+
+    def __init__(self, *, max_workers: int, mp_context: object) -> None:
+        del mp_context
+        self._pool = ThreadPoolExecutor(max_workers=max_workers)
+
+    def submit(
+        self, function: Callable[..., DirectionOutcome], *args: object
+    ) -> Future[DirectionOutcome]:
+        return self._pool.submit(function, *args)
+
+    def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+        self._pool.shutdown(wait=wait, cancel_futures=cancel_futures)
+
+    def terminate_workers(self) -> None:
+        self._pool.shutdown(wait=True, cancel_futures=True)
+
+
+def _synthetic_outcome(
+    label: str, status: Literal["certified", "refuted", "undecided"] = "certified"
+) -> DirectionOutcome:
+    return DirectionOutcome(label, status, 1, 1, None, 1, 0)
+
+
+def test_parallel_progress_observes_landings_but_returns_net_order(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:4]
+    release_first = threading.Event()
+    progress: list[str] = []
+
+    def search(
+        _data: ThresholdAtomData,
+        _outer: object,
+        _square: object,
+        _prune_at: int | None,
+        rotation: Rotation,
+    ) -> DirectionOutcome:
+        label = rotation.label
+        if label == rotations[0].label:
+            assert release_first.wait(timeout=2)
+        return _synthetic_outcome(label)
+
+    def landed(outcome: DirectionOutcome) -> None:
+        progress.append(outcome.label)
+        release_first.set()
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", _ThreadPoolAdapter)
+    monkeypatch.setattr(threshold_interval, "_search_direction", search)
+    outcomes = threshold_interval._search_directions(  # noqa: SLF001
+        certificate,
+        data,
+        rotations,
+        prune_at=None,
+        workers=2,
+        progress=landed,
+    )
+
+    assert progress[0] != rotations[0].label
+    assert [outcome.label for outcome in outcomes] == [rotation.label for rotation in rotations]
+
+
+def test_parallel_early_refutation_keeps_the_input_order_prefix(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:5]
+    submitted: list[str] = []
+    progress: list[str] = []
+    shutdown: list[tuple[bool, bool]] = []
+    terminated: list[bool] = []
+
+    class ImmediateExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function
+            rotation = cast(Rotation, args[-1])
+            submitted.append(rotation.label)
+            future: Future[DirectionOutcome] = Future()
+            status = "refuted" if rotation.label == rotations[1].label else "certified"
+            future.set_result(_synthetic_outcome(rotation.label, status))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            shutdown.append((wait, cancel_futures))
+
+        def terminate_workers(self) -> None:
+            terminated.append(True)
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ImmediateExecutor)
+    outcomes = threshold_interval._search_directions(  # noqa: SLF001
+        certificate,
+        data,
+        rotations,
+        prune_at=1,
+        workers=2,
+        progress=lambda outcome: progress.append(outcome.label),
+    )
+
+    assert [outcome.label for outcome in outcomes] == [
+        rotations[0].label,
+        rotations[1].label,
+    ]
+    assert submitted == [rotation.label for rotation in rotations[:4]]
+    assert progress == submitted
+    assert shutdown == []
+    assert terminated == [True]
+
+
+def test_parallel_callback_failure_cancels_pending_work_without_waiting(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:5]
+    futures: list[Future[DirectionOutcome]] = []
+    shutdown: list[tuple[bool, bool]] = []
+    terminated: list[bool] = []
+
+    class ControlledExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function
+            rotation = cast(Rotation, args[-1])
+            future: Future[DirectionOutcome] = Future()
+            if not futures:
+                future.set_result(_synthetic_outcome(rotation.label))
+            elif len(futures) == 1:
+                assert future.set_running_or_notify_cancel()
+            futures.append(future)
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            shutdown.append((wait, cancel_futures))
+
+        def terminate_workers(self) -> None:
+            terminated.append(True)
+
+    def fail(_outcome: DirectionOutcome) -> None:
+        raise RuntimeError("stop after durable checkpoint")
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ControlledExecutor)
+    with pytest.raises(RuntimeError, match="durable checkpoint"):
+        threshold_interval._search_directions(  # noqa: SLF001
+            certificate,
+            data,
+            rotations,
+            prune_at=None,
+            workers=2,
+            progress=fail,
+        )
+
+    assert len(futures) == 4
+    assert futures[1].running()
+    assert all(future.cancelled() for future in futures[2:])
+    assert shutdown == []
+    assert terminated == [True]
+
+
+def test_parallel_callback_failure_still_offers_the_whole_landed_batch(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:2]
+    offered: list[str] = []
+
+    class ImmediateExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function
+            rotation = cast(Rotation, args[-1])
+            future: Future[DirectionOutcome] = Future()
+            future.set_result(_synthetic_outcome(rotation.label))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            del wait, cancel_futures
+
+        def terminate_workers(self) -> None:
+            return None
+
+    def fail_first(outcome: DirectionOutcome) -> None:
+        offered.append(outcome.label)
+        if len(offered) == 1:
+            raise RuntimeError("deadline after first durable direction")
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ImmediateExecutor)
+    with pytest.raises(RuntimeError, match="deadline after first"):
+        threshold_interval._search_directions(  # noqa: SLF001
+            certificate,
+            data,
+            rotations,
+            prune_at=None,
+            workers=2,
+            progress=fail_first,
+        )
+
+    assert offered == [rotation.label for rotation in rotations]
+
+
+def test_parallel_reverse_refutations_return_the_earliest_net_prefix(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:4]
+    futures: list[Future[DirectionOutcome]] = []
+    progress: list[str] = []
+
+    class ReverseExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function, args
+            future: Future[DirectionOutcome] = Future()
+            futures.append(future)
+            if len(futures) == 4:
+                futures[2].set_result(_synthetic_outcome(rotations[2].label, "refuted"))
+                futures[0].set_result(_synthetic_outcome(rotations[0].label))
+                futures[1].set_result(_synthetic_outcome(rotations[1].label, "refuted"))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            del wait, cancel_futures
+
+        def terminate_workers(self) -> None:
+            return None
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ReverseExecutor)
+    outcomes = threshold_interval._search_directions(  # noqa: SLF001
+        certificate,
+        data,
+        rotations,
+        prune_at=1,
+        workers=2,
+        progress=lambda outcome: progress.append(outcome.label),
+    )
+
+    assert progress == [rotations[2].label, rotations[0].label, rotations[1].label]
+    assert [outcome.label for outcome in outcomes] == [
+        rotations[0].label,
+        rotations[1].label,
+    ]
+    assert futures[3].cancelled()
+
+
+def test_parallel_refill_never_exceeds_twice_the_worker_count(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:9]
+    active = 0
+    maximum_active = 0
+
+    class CountingFuture(Future[DirectionOutcome]):
+        counted = False
+
+        def result(self, timeout: float | None = None) -> DirectionOutcome:
+            nonlocal active
+            if not self.counted:
+                active -= 1
+                self.counted = True
+            return super().result(timeout)
+
+    class ImmediateExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            nonlocal active, maximum_active
+            del function
+            rotation = cast(Rotation, args[-1])
+            active += 1
+            maximum_active = max(maximum_active, active)
+            future = CountingFuture()
+            future.set_result(_synthetic_outcome(rotation.label))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            del wait, cancel_futures
+
+        def terminate_workers(self) -> None:
+            return None
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ImmediateExecutor)
+    outcomes = threshold_interval._search_directions(  # noqa: SLF001
+        certificate,
+        data,
+        rotations,
+        prune_at=None,
+        workers=2,
+    )
+
+    assert len(outcomes) == len(rotations)
+    assert maximum_active == 4
+
+
+@pytest.mark.skipif(not sys.platform.startswith("linux"), reason="fork pool is Linux-only")
+def test_real_forked_callback_failure_requests_and_observes_worker_exit() -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:8]
+    worker_processes: list[BaseProcess] = []
+
+    class TrackingExecutor(ProcessPoolExecutor):
+        def terminate_workers(self) -> None:
+            worker_processes.extend(self._processes.values())
+            super().terminate_workers()
+
+    def fail(_outcome: DirectionOutcome) -> None:
+        raise RuntimeError("synthetic callback failure")
+
+    with (
+        patch.object(threshold_interval, "ProcessPoolExecutor", TrackingExecutor),
+        pytest.raises(RuntimeError, match="synthetic callback failure"),
+    ):
+        threshold_interval._search_directions(  # noqa: SLF001
+            certificate,
+            data,
+            rotations,
+            prune_at=None,
+            workers=2,
+            progress=fail,
+        )
+
+    assert worker_processes
+    for process in worker_processes:
+        process.join(timeout=5)
+        assert not process.is_alive()
+
+
+def test_parallel_worker_failure_retains_other_completed_results(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:2]
+    shutdown: list[tuple[bool, bool]] = []
+    terminated: list[bool] = []
+
+    class MixedExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function
+            rotation = cast(Rotation, args[-1])
+            future: Future[DirectionOutcome] = Future()
+            if rotation.label == rotations[0].label:
+                future.set_exception(RuntimeError("worker failed"))
+            else:
+                future.set_result(_synthetic_outcome(rotation.label))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            shutdown.append((wait, cancel_futures))
+
+        def terminate_workers(self) -> None:
+            terminated.append(True)
+
+    progress: list[str] = []
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", MixedExecutor)
+    with pytest.raises(RuntimeError, match="worker failed"):
+        threshold_interval._search_directions(  # noqa: SLF001
+            certificate,
+            data,
+            rotations,
+            prune_at=None,
+            workers=2,
+            progress=lambda outcome: progress.append(outcome.label),
+        )
+
+    assert progress == [rotations[1].label]
+    assert shutdown == []
+    assert terminated == [True]
+
+
+def test_parallel_same_batch_refutation_precedes_speculative_worker_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:4]
+    progress: list[str] = []
+
+    class ImmediateExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function
+            rotation = cast(Rotation, args[-1])
+            index = rotations.index(rotation)
+            future: Future[DirectionOutcome] = Future()
+            if index == 3:
+                future.set_exception(RuntimeError("speculative worker failed"))
+            else:
+                status = "refuted" if index == 1 else "certified"
+                future.set_result(_synthetic_outcome(rotation.label, status))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            del wait, cancel_futures
+
+        def terminate_workers(self) -> None:
+            return None
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ImmediateExecutor)
+    outcomes = threshold_interval._search_directions(  # noqa: SLF001
+        certificate,
+        data,
+        rotations,
+        prune_at=1,
+        workers=2,
+        progress=lambda outcome: progress.append(outcome.label),
+    )
+
+    assert [outcome.label for outcome in outcomes] == [
+        rotations[0].label,
+        rotations[1].label,
+    ]
+    assert progress == [rotation.label for rotation in rotations[:3]]
+
+
+def test_parallel_cross_batch_refutation_precedes_earlier_speculative_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:5]
+    futures: list[Future[DirectionOutcome]] = []
+    progress: list[str] = []
+
+    class ControlledExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function, args
+            future: Future[DirectionOutcome] = Future()
+            futures.append(future)
+            if len(futures) == 4:
+                future.set_exception(RuntimeError("speculative worker failed first"))
+            elif len(futures) == 5:
+                futures[0].set_result(_synthetic_outcome(rotations[0].label))
+                futures[1].set_result(_synthetic_outcome(rotations[1].label, "refuted"))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            del wait, cancel_futures
+
+        def terminate_workers(self) -> None:
+            return None
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ControlledExecutor)
+    outcomes = threshold_interval._search_directions(  # noqa: SLF001
+        certificate,
+        data,
+        rotations,
+        prune_at=1,
+        workers=2,
+        progress=lambda outcome: progress.append(outcome.label),
+    )
+
+    assert [outcome.label for outcome in outcomes] == [
+        rotations[0].label,
+        rotations[1].label,
+    ]
+    assert progress == [rotation.label for rotation in rotations[:2]]
+    assert futures[2].cancelled()
+    assert futures[4].cancelled()
+
+
+@pytest.mark.parametrize("refutation_index", [None, 2])
+def test_parallel_worker_failure_is_not_hidden_without_an_earlier_refutation(
+    monkeypatch: pytest.MonkeyPatch, refutation_index: int | None
+) -> None:
+    certificate = _cluster_certificate()
+    data = ThresholdAtomData.of(certificate)
+    rotations = doubled_net(certificate.half_tangents)[:4]
+
+    class ImmediateExecutor:
+        def __init__(self, *, max_workers: int, mp_context: object) -> None:
+            del max_workers, mp_context
+
+        def submit(
+            self, function: Callable[..., DirectionOutcome], *args: object
+        ) -> Future[DirectionOutcome]:
+            del function
+            rotation = cast(Rotation, args[-1])
+            index = rotations.index(rotation)
+            future: Future[DirectionOutcome] = Future()
+            if index == 1:
+                future.set_exception(RuntimeError("retained worker failed"))
+            else:
+                status = "refuted" if index == refutation_index else "certified"
+                future.set_result(_synthetic_outcome(rotation.label, status))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            del wait, cancel_futures
+
+        def terminate_workers(self) -> None:
+            return None
+
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", ImmediateExecutor)
+    with pytest.raises(RuntimeError, match="retained worker failed"):
+        threshold_interval._search_directions(  # noqa: SLF001
+            certificate,
+            data,
+            rotations,
+            prune_at=1,
+            workers=2,
+        )
+
+
+def test_bounded_parallel_workers_do_not_change_the_verdict(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _cluster_certificate()
+    serial = verify_threshold_by_intervals(certificate, enclose=True, workers=1)
+    monkeypatch.setattr(threshold_interval.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_interval, "ProcessPoolExecutor", _ThreadPoolAdapter)
+    forked = verify_threshold_by_intervals(certificate, enclose=True, workers=2)
+    assert forked.directions == serial.directions
+    assert forked.conditions == serial.conditions
+
+
+@pytest.mark.skipif(not sys.platform.startswith("linux"), reason="fork pool is Linux-only")
+def test_real_forked_workers_do_not_change_the_verdict() -> None:
     certificate = _cluster_certificate()
     serial = verify_threshold_by_intervals(certificate, enclose=True, workers=1)
     forked = verify_threshold_by_intervals(certificate, enclose=True, workers=2)

@@ -55,6 +55,7 @@ import hashlib
 import json
 import math
 import sys
+import time
 from dataclasses import dataclass, replace
 from decimal import ROUND_HALF_UP, Decimal, localcontext
 from fractions import Fraction
@@ -74,6 +75,9 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.threshold import (
     ThresholdCertificate,
+    ThresholdSweepClock,
+    ThresholdSweepDeadlineError,
+    ThresholdSweepProgress,
     closed_form_threshold_conditions,
     verify_threshold,
 )
@@ -354,7 +358,12 @@ def _accepted_source(certificate: AnyCertificate, verdict: Verdict) -> None:
 
 
 def _decide_limit(
-    certificate: AnyCertificate, *, workers: int | None = None
+    certificate: AnyCertificate,
+    *,
+    workers: int | None = None,
+    progress: ThresholdSweepProgress | None = None,
+    deadline: float | None = None,
+    clock: ThresholdSweepClock = time.perf_counter,
 ) -> tuple[LimitCorollary, Verdict]:
     """Replay the source certificate and derive the sharp limit from that verdict.
 
@@ -363,9 +372,25 @@ def _decide_limit(
     """
 
     if isinstance(certificate, ThresholdCertificate):
-        verdict = verify_threshold(certificate, workers=workers or 1)
+        verdict = verify_threshold(
+            certificate,
+            workers=workers or 1,
+            progress=progress,
+            deadline=deadline,
+            clock=clock,
+        )
     else:
+        if progress is not None:
+            raise ValueError("direction progress is available only for threshold sources")
+        if deadline is not None and clock() >= deadline:
+            raise ThresholdSweepDeadlineError(
+                "dilation source replay reached its absolute deadline"
+            )
         verdict = verify(certificate, workers=workers)
+        if deadline is not None and clock() >= deadline:
+            raise ThresholdSweepDeadlineError(
+                "dilation source replay reached its absolute deadline"
+            )
     _accepted_source(certificate, verdict)
     factor_supremum = sharp_dilation_ceiling(certificate)
     return (
@@ -452,14 +477,32 @@ def build_limit_record(
     *,
     source_name: str | None = None,
     workers: int | None = None,
+    progress: ThresholdSweepProgress | None = None,
+    deadline: float | None = None,
+    clock: ThresholdSweepClock = time.perf_counter,
 ) -> dict[str, object]:
-    """Re-decide a frozen certificate and derive its strict-family limit record."""
+    """Re-decide a frozen certificate and derive its strict-family limit record.
 
+    Threshold callers may retain each completed direction through ``progress`` and share
+    one absolute ``deadline`` with the surrounding run. Defaults preserve the historical
+    unbounded, callback-free behavior.
+    """
+
+    if deadline is not None and clock() >= deadline:
+        raise ThresholdSweepDeadlineError("dilation replay reached its absolute deadline")
     raw = read_bounded(certificate_path)
     certificate, declared = load_source(raw)
-    result, verdict = _decide_limit(certificate, workers=workers)
+    result, verdict = _decide_limit(
+        certificate,
+        workers=workers,
+        progress=progress,
+        deadline=deadline,
+        clock=clock,
+    )
     if read_bounded(certificate_path) != raw:
         raise ValueError("source certificate changed while the limit record was built")
+    if deadline is not None and clock() >= deadline:
+        raise ThresholdSweepDeadlineError("dilation replay reached its absolute deadline")
 
     threshold = isinstance(certificate, ThresholdCertificate)
     total_field = "total_budget" if threshold else "total_mass"
@@ -499,7 +542,7 @@ def build_limit_record(
         source_block["variant"] = THRESHOLD_VARIANT
         source_block["point_atoms"] = len(certificate.atoms)
         source_block["threshold_atoms"] = len(certificate.threshold_atoms)
-    return {
+    record: dict[str, object] = {
         "schema": THRESHOLD_LIMIT_RECORD_SCHEMA if threshold else LIMIT_RECORD_SCHEMA,
         "source": source_block,
         "sharpened_containment": {
@@ -582,6 +625,9 @@ def build_limit_record(
             ),
         },
     }
+    if deadline is not None and clock() >= deadline:
+        raise ThresholdSweepDeadlineError("dilation replay reached its absolute deadline")
+    return record
 
 
 def _record_text(record: dict[str, object]) -> str:

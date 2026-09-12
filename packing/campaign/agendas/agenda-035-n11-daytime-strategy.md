@@ -244,19 +244,24 @@ agenda:
     question: Can one changed strict-core and direction-net packet yield a verified dilation limit above T026?
     budget: One runner-admission block followed by one 90–120 minute target block, one declared fixed-core
       packet, both coverage routes, and dilation replay.
-    entry: A maintained fixed-core runner has a hard process deadline and durable partial output; the exact
-      T025 source scale, raw-minimum threshold and deterministic normalization rule are registered; and BC325
-      has disposed of the fixed-B point-only parent-box alternative analytically.
+    entry: A maintained fixed-core runner has a supervised worker-process deadline, bounded parent-side
+      preflight, atomic process-level partial output, and exact published direction sets for every route; a
+      separate full-shape, non-scientific positive control has been independently admitted; the exact T025
+      source scale, raw-minimum threshold and deterministic normalization rule are registered; and BC325 has
+      disposed of the fixed-B point-only parent-box alternative analytically.
     exit: A raw minimum strictly above M/11 followed by one normalized, two-route verified certificate and a
       valid stronger dilation limit; one independently verified core of raw charge at most M/11; or an
       unresolved timeout or incomplete gate.
     bead: think-17qa
     depends_on: [BC-325]
-    blocked_on: The existing adaptive refinement CLI does not execute the declared fixed-core packet and has
-      no process deadline. Child bead think-qw9w owns the maintained bounded runner and its independent
-      admission before registration and execution.
-    next_evidence: Build and independently admit that fixed-core runner. Then prospectively register one
-      packet retaining T025's sites and relative weights with a 2880-step net, B=9981/10000,
+    blocked_on: The runner implementation and target-free source review pass, but its parent preflight remains
+      outside the worker deadline, partial interval and dilation receipts still need exact published direction
+      sets, and the separate full-shape calibration has not run. Child bead think-qw9w owns these gates before
+      registration and execution.
+    next_evidence: Publish the reviewed runner checkpoint, bound its parent preflight, name each route's exact
+      partial direction set, run and independently read three full-shape controls under the separate
+      fixed-core-packet-calibration/v1 schema, then prospectively register one packet retaining T025's sites
+      and relative weights with a 2880-step net, B=9981/10000,
       D=207107/1440000000, raw acceptance threshold M/11=685457679/687500000, and normalization alpha=1/m.
       Require complete exact and interval agreement plus dilation replay on the same normalized bytes.
     workflows: [research-loop]

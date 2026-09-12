@@ -248,24 +248,44 @@ decisions:
    interval resolution floor, and per-direction box budget.
    Record workers, host, complete direction dispositions, rational witnesses and totals,
    source identities, and retained logs.
-6. A process deadline and durable partial output, including the normalized gate and the
-   dilation record’s additional source replay.
+6. A supervised worker-process deadline and atomic process-level partial output,
+   including the normalized gate and the dilation record’s additional source replay.
+   The parent-side Git, runtime, and source preflight currently precedes that clock and
+   must be bounded before target registration.
    Any staged deadlines must be fixed before the target; an incomplete stage cannot
    silently acquire another budget.
 7. The outcome table below and the scope of any rejection.
-   Preserve every completed direction when a timeout or invalid invocation stops the
-   run.
+   Preserve every completed direction observed by the coordinator when a timeout or
+   invalid invocation stops the run.
 
-The retained primitives are suitable, but
-`packing/devtools/measure_threshold_net_refinement.py:main` has no fixed-core option and
-runs original-core and maximal-core sweeps followed by adaptive bisection.
-Running it with `--nets 2880` does not execute the proposed single packet.
-It also has no hard wall deadline.
-A maintained fixed-core entry point or wrapper is needed before the experiment is marked
-ready. It can reuse `at`, `full_sweep`, `rescaled_record` and the existing verifiers.
-The existing `rescaled_record` should receive the original T-025 record, and its derived
-artifact must include the minimum declaration even though that source currently omits
-it.
+Runner admission is not a BC329 measurement.
+It uses a separate `fixed-core-packet-calibration/v1` receipt and a frozen known-answer
+fixture that exercises the real raw, exact, interval, dilation, publication, and
+per-direction readback paths at the full 14,404-record shape.
+That schema cannot carry a scientific acceptance and the scientific reader refuses it.
+Three fresh runs price operational overhead on the intended host; their timing does not
+bound the harder BC329 computation.
+A source-distinct reader must accept the calibration receipts before the target is
+registered.
+
+The branch now contains the maintained fixed-packet entry point
+`packing/devtools/fixed_core_packet.py`. It binds the T-025 and T-026 source bytes,
+project runtime, and complete local implementation manifest; keeps raw and exact
+submissions bounded; retains coordinator-observed direction rows; checks the normalized
+candidate through exact, interval, and dilation routes; and rejects incomplete evidence
+as scientifically unresolved.
+Its target-free controls currently pass 156 tests with three platform skips, and an
+independent source review found no acceptance-safety blocker in the current
+implementation. That establishes the implementation checkpoint only.
+
+The older `packing/devtools/measure_threshold_net_refinement.py:main` remains an
+adaptive core-sweep and bisection tool.
+Running it with `--nets 2880` does not execute this one fixed packet.
+Before the fixed-packet runner is admitted for BC329, the separate full-shape
+calibration must pass three host runs and source-distinct readback.
+The parent preflight must gain a bounded clock, and partial interval and dilation
+receipts must name their exact published direction sets.
+None of those remaining tasks asks the BC329 coverage question.
 
 The raw sweep should precede the normalized retention gate.
 Feeding the original weights directly to `decide_threshold_certificate` and treating its
@@ -288,19 +308,14 @@ finish within the wall deadline.
 | Unresolved | Timeout, incomplete directions, interval stalls, exhausted box budgets, or a nonzero-width enclosure without a verified refuting witness | The planned run did not decide the packet |
 | Invalid | Mutated or mismatched sources, malformed declarations, wrong geometry, disagreement between methods, or a purported witness failing exact membership/admissibility checks | Repair the instrument or invocation; no scientific verdict |
 
-For retention, use `packing/devtools/decide_threshold_certificate.py` in its full mode.
-Require every exact direction, zero dense/slab disagreements, exact witness membership
-agreement, every interval direction, zero stalled boxes, zero exhausted direction
-budgets, a zero-width enclosure, and equality of that enclosure with the exact minimum.
-`--quick` and `--exact-only` are partial routes and cannot retain a positive result.
-Their negative output must still be classified by its actual evidence.
-
-Then use the limit-record path in `packing/devtools/dilation_corollary.py`. It replays
-the normalized source’s exact coverage and checks its declared budget and minimum; the
-arithmetic-only ceiling calculation in this preflight is insufficient.
-The CLI’s limit-record mode performs an additional source replay, and its current call
-path does not pass a worker override.
-Include that work in the budget estimate.
+For the registered target, use `packing/devtools/fixed_core_packet.py` at the exact
+admitted implementation revision.
+Direct calls to `packing/devtools/decide_threshold_certificate.py` or the
+arithmetic-only dilation calculation do not establish the packet result.
+The runner requires every exact direction, zero dense/slab disagreements, exact witness
+membership agreement, every interval direction, zero stalled boxes, zero exhausted
+direction budgets, a zero-width enclosure equal to the exact minimum, and a dilation
+record that replays its normalized source.
 
 At the limiting dilation factor, the strict containment inequality becomes equality.
 Success therefore proves the lower bound through all strict rational subfactors and
@@ -320,11 +335,13 @@ sizes, and compared the proposed squared surd against T-026 with exact `Fraction
 arithmetic. The formula agreed with the maintained dilation helper.
 Decimal renderings used 70-digit `Decimal` arithmetic after exact decisions.
 
-All those target-free checks passed.
-Coverage, normalization by a measured candidate minimum, two-route retention, and
+All those target-free mathematical checks passed.
+The runner’s target-free unit and integration controls also pass, but the full-shape
+calibration and its independent readback remain unrun.
+BC329 coverage, normalization by its measured minimum, two-route retention, and
 dilation-source replay remain unrun.
-The candidate is suitable for prospective registration after the normalization and
-bounded-runner conditions above are resolved.
+The packet becomes suitable for prospective registration only after the remaining
+admission tasks above are resolved.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

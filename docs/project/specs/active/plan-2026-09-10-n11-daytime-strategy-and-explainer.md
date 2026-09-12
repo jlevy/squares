@@ -279,10 +279,29 @@ raw charge below one therefore does not by itself reject the packet.
 A verified admissible core with charge at most `M/11` does reject this fixed collection
 of sites, thresholds, relative weights, core side, and net under every common rescaling.
 
-The existing refinement CLI runs adaptive core sweeps and bisection and has no process
-deadline. It does not execute this single fixed packet.
-Before registration, add and independently admit a maintained fixed-core runner with a
-hard deadline and durable partial output.
+The existing refinement CLI runs adaptive core sweeps and bisection and does not execute
+this single fixed packet.
+A maintained fixed-core runner is now implemented on the publication stack.
+It binds its source and runtime, runs bounded raw and exact schedulers, records
+coordinator-observed direction evidence, and supervises the worker process group under a
+hard deadline. Target-free controls pass and an independent source review found no
+acceptance-safety blocker in the current implementation.
+The parent-side Git, runtime, and source preflight still needs a bounded clock before
+target registration.
+Atomic replacement prevents a reader from seeing half-written JSON after an ordinary
+worker failure or termination; the runner makes no host-crash or power-loss durability
+claim.
+Admission uses a separate `fixed-core-packet-calibration/v1` receipt and a frozen,
+analytically solved fixture unrelated to BC329. The full-shape control runs all four
+generic routes and 14,404 direction records, but its schema cannot express a scientific
+acceptance. Three fresh host runs measure operational overhead, effective workers by
+route, clocks, sampled process-group RSS, artifact bytes, and deadline headroom.
+Because the fixture is deliberately easy, its timing does not bound BC329’s computation.
+A source-distinct reader must accept those controls before registration.
+Partial interval and dilation receipts must also name the exact direction set bound to
+each published checkpoint; their current count-and-last form cannot yield a scientific
+acceptance, but it is less precise for interrupted-run recovery.
+
 Then register one hypothesis and one experiment, freeze the packet and normalization
 rule, measure `m_c`, and run the normalized object through the complete exact route, the
 reflected interval route, and the dilation reader’s source replay.
