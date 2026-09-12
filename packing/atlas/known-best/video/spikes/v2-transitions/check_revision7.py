@@ -9,6 +9,7 @@ the pinned headless shell. It complements `check_revision6.py` (the earlier feat
 """
 
 import sys
+from itertools import pairwise
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -24,18 +25,18 @@ HERE = Path(__file__).resolve().parent
 #:
 #: These were revision 6's numbers and they have moved, because revision 16 added a tightening
 #: window before the lock-in: between the push-apart fading and the blend beginning, the spring
-#: toward the target stiffens, with its damping scaled to match. The point of that phase was to stop
-#: the picture jumping into place at the end, and its effect here is the same effect measured from
-#: the other side. Recorded before and after:
+#: toward the target stiffens, with its damping scaled to match. The point of that phase was to
+#: stop the picture jumping into place at the end, and its effect here is the same effect
+#: measured from the other side. Recorded before and after:
 #:
 #:     physics 100   1.149 / 42.96 / 10.619   ->   0.001 / 0.03 / 10.536
 #:     bodies  100   1.244 / 43.04 / 10.621   ->   0.000 / 0.02 / 10.536
 #:     physics 110   1.540 / 16.87 / 11.116   ->   0.001 / 0.00 / 11.000
 #:     bodies  110   1.706 / 28.33 / 11.074   ->   0.372 / 2.63 / 11.198
 #:
-#: Three of the four now land essentially on the record without the snap at all. The fourth, bodies
-#: at 110, is the style whose whole point is a louder shake, and it still misses -- which is the
-#: honest result rather than a tuned one.
+#: Three of the four now land essentially on the record without the snap at all. The fourth,
+#: bodies at 110, is the style whose whole point is a louder shake, and it still misses --
+#: which is the honest result rather than a tuned one.
 FREE_MISS = {
     ("physics", 100): (0.001, 0.03, 10.536),
     ("bodies", 100): (0.000, 0.02, 10.536),
@@ -48,14 +49,19 @@ def main() -> int:
     page_path = (HERE / sys.argv[1]) if len(sys.argv) > 1 else HERE / "index.html"
     failures: list[str] = []
 
-    def check(condition: bool, message: str) -> None:
+    def check(condition: bool, message: str) -> None:  # noqa: FBT001 - the assertion, not a flag
         if not condition:
             failures.append(message)
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        page.on("console", lambda m: failures.append(f"console.{m.type}: {m.text}") if m.type == "error" else None)
+        page.on(
+            "console",
+            lambda m: (
+                failures.append(f"console.{m.type}: {m.text}") if m.type == "error" else None
+            ),
+        )
         page.on("pageerror", lambda e: failures.append(f"pageerror: {e}"))
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(900)
@@ -64,41 +70,83 @@ def main() -> int:
             check(name in api, f"the API lacks {name}")
         index_of = {q["n"]: q["index"] for q in page.evaluate(probe("revision7/pairs"))}
         n = 100 if 100 in index_of else sorted(index_of)[len(index_of) // 2]
-        n_max = page.evaluate(probe("revision7/last_pair_n")) + 1
+        # Unread since revision 16 removed the numerals it sized; the probe is still asked, so
+        # what this file puts to the page is unchanged.
+        _n_max = page.evaluate(probe("revision7/last_pair_n")) + 1
 
         # ---- feature 1: where the sequence stands, as a number.
-        # Revision 7 drew this as a bar with a scale along the bottom of the stage, and most of this
-        # section measured that drawing: the numerals it laid out, the ticks between them, the fill's
-        # width, and the riding n suppressing whichever numeral it would touch. Revision 16 removed
-        # the whole band -- the owner found it distracting, and the stage carries facts about the
-        # packing rather than apparatus about the playback -- so what is left to check is the number
-        # it was drawing, which `progress()` still reports and the transport still uses.
-        # Checked as properties rather than against a formula, which would only restate the page's
-        # own arithmetic: it starts at nothing, ends at everything, and never goes backwards.
+        # Revision 7 drew this as a bar with a scale along the bottom of the stage, and most of
+        # this section measured that drawing: the numerals it laid out, the ticks between them,
+        # the fill's width, and the riding n suppressing whichever numeral it would touch.
+        # Revision 16 removed the whole band -- the owner found it distracting, and the stage
+        # carries facts about the packing rather than apparatus about the playback -- so what
+        # is left to check is the number it was drawing, which `progress()` still reports and
+        # the transport still uses.
+        # Checked as properties rather than against a formula, which would only restate the
+        # page's own arithmetic: it starts at nothing, ends at everything, and never goes
+        # backwards.
         page.evaluate(probe("revision7/set_full_range"))
         walk = page.evaluate(probe("revision7/walk"))
-        check(abs(walk[0]) < 1e-9, f"the first step does not start the sequence at 0: {walk[0]}")
-        check(abs(walk[-1] - 1) < 1e-9, f"the last step does not end the sequence at 1: {walk[-1]}")
-        check(all(b >= a - 1e-12 for a, b in zip(walk, walk[1:], strict=False)),
-              f"the sequence's position goes backwards: {walk}")
-        check(page.evaluate(probe("revision7/progress_bar_gone")),
-              "the position bar is still in the page")
+        check(
+            abs(walk[0]) < 1e-9, f"the first step does not start the sequence at 0: {walk[0]}"
+        )
+        check(
+            abs(walk[-1] - 1) < 1e-9,
+            f"the last step does not end the sequence at 1: {walk[-1]}",
+        )
+        check(
+            all(b >= a - 1e-12 for a, b in pairwise(walk)),
+            f"the sequence's position goes backwards: {walk}",
+        )
+        check(
+            page.evaluate(probe("revision7/progress_bar_gone")),
+            "the position bar is still in the page",
+        )
 
         # ---- feature 2: the annealing dial.
         a = page.evaluate(probe("revision7/anneal"))
-        check((a["level"], a["min"], a["max"], a["dflt"]) == (3, 0, 10, 3), f"the dial reports {a}")
-        check(abs(a["amplitude"] - 1) < 1e-12 and abs(a["span"] - 1) < 1e-12, "the default level is not the shipped shake")
+        check(
+            (a["level"], a["min"], a["max"], a["dflt"]) == (3, 0, 10, 3),
+            f"the dial reports {a}",
+        )
+        check(
+            abs(a["amplitude"] - 1) < 1e-12 and abs(a["span"] - 1) < 1e-12,
+            "the default level is not the shipped shake",
+        )
         levels = page.evaluate(probe("revision7/anneal_levels"), {"index": index_of[n]})
         check(abs(levels["0"]["amp"]) < 1e-12, "level 0 still shakes")
-        check(abs(levels["10"]["amp"] - 3) < 1e-9, f"level 10's amplitude is {levels['10']['amp']}, not three times the default")
-        check(levels["0"]["steps"] == levels["3"]["steps"], "level 0 does not run the default length")
-        check(levels["10"]["steps"] > levels["3"]["steps"] * 1.6, f"level 10 runs {levels['10']['steps']} steps against {levels['3']['steps']}")
-        check(abs(levels["10"]["move"] / levels["3"]["move"] - 1.7) < 1e-6, "the move on the clock does not lengthen with the run")
-        # 120 steps a second of the annealed move at every level: the sub-steps are at the same dt.
-        for L in ("0", "3", "6", "10"):
-            check(abs(levels[L]["steps"] / levels[L]["move"] - 120) < 0.5, f"level {L} runs {levels[L]['steps']} steps over {levels[L]['move']} s")
-        check(levels["0"]["first"] != levels["3"]["first"], "level 0 and level 3 give the same trajectory")
-        check(levels["10"]["first"] != levels["3"]["first"], "level 10 and level 3 give the same trajectory")
+        check(
+            abs(levels["10"]["amp"] - 3) < 1e-9,
+            f"level 10's amplitude is {levels['10']['amp']}, not three times the default",
+        )
+        check(
+            levels["0"]["steps"] == levels["3"]["steps"],
+            "level 0 does not run the default length",
+        )
+        check(
+            levels["10"]["steps"] > levels["3"]["steps"] * 1.6,
+            f"level 10 runs {levels['10']['steps']} steps against {levels['3']['steps']}",
+        )
+        check(
+            abs(levels["10"]["move"] / levels["3"]["move"] - 1.7) < 1e-6,
+            "the move on the clock does not lengthen with the run",
+        )
+        # 120 steps a second of the annealed move at every level: the sub-steps are at the same
+        # dt.
+        for level in ("0", "3", "6", "10"):
+            check(
+                abs(levels[level]["steps"] / levels[level]["move"] - 120) < 0.5,
+                f"level {level} runs {levels[level]['steps']} steps over "
+                f"{levels[level]['move']} s",
+            )
+        check(
+            levels["0"]["first"] != levels["3"]["first"],
+            "level 0 and level 3 give the same trajectory",
+        )
+        check(
+            levels["10"]["first"] != levels["3"]["first"],
+            "level 10 and level 3 give the same trajectory",
+        )
         # Deterministic, and cached per level rather than per anything else.
         det = page.evaluate(probe("revision7/anneal_reproduces"), {"index": index_of[n]})
         check(det[0] == det[1], "the same annealing level does not reproduce its trajectory")
@@ -106,47 +154,79 @@ def main() -> int:
         for (style, pair_n), (centre, angle, side) in FREE_MISS.items():
             if pair_n not in index_of:
                 continue
-            m = page.evaluate(probe("revision7/free_miss"), {"index": index_of[pair_n], "style": style})
-            check(abs(m["centre"] - centre) < 5e-4 and abs(m["angle"] - angle) < 5e-3 and abs(m["side"] - side) < 5e-4,
-                  f"at the default level {style} {pair_n} misses by {m['centre']:.3f}/{m['angle']:.2f}/{m['side']:.3f}, "
-                  f"not the recorded {centre}/{angle}/{side}")
+            m = page.evaluate(
+                probe("revision7/free_miss"), {"index": index_of[pair_n], "style": style}
+            )
+            check(
+                abs(m["centre"] - centre) < 5e-4
+                and abs(m["angle"] - angle) < 5e-3
+                and abs(m["side"] - side) < 5e-4,
+                f"at the default level {style} {pair_n} misses by "
+                f"{m['centre']:.3f}/{m['angle']:.2f}/{m['side']:.3f}, "
+                f"not the recorded {centre}/{angle}/{side}",
+            )
         # The dial works under the snap and under the blind run too.
         for mode in ("snap", "blind"):
-            r = page.evaluate(probe("revision7/anneal_at_nine"), {"index": index_of[n], "mode": mode})
-            # The step count is `stepsPerSecond x move x span`, so it moved with the beat: revision
-            # 16 made the move 0.8 s where it was 1.4, which is 154 steps at level 9's span rather
-            # than the 200-odd this was written against. What the dial has to do is lengthen the run,
-            # and that is what is checked -- against the same run at the default level, not against a
-            # number that a change to the beat invalidates.
-            base = page.evaluate(probe("revision7/default_steps"), {"index": index_of[n], "mode": mode})
-            check(r["steps"] > base, f"{mode} at level 9 runs {r['steps']} steps, no more than the default's {base}")
+            r = page.evaluate(
+                probe("revision7/anneal_at_nine"), {"index": index_of[n], "mode": mode}
+            )
+            # The step count is `stepsPerSecond x move x span`, so it moved with the beat:
+            # revision 16 made the move 0.8 s where it was 1.4, which is 154 steps at level 9's
+            # span rather than the 200-odd this was written against. What the dial has to do is
+            # lengthen the run, and that is what is checked -- against the same run at the
+            # default level, not against a number that a change to the beat invalidates.
+            base = page.evaluate(
+                probe("revision7/default_steps"), {"index": index_of[n], "mode": mode}
+            )
+            check(
+                r["steps"] > base,
+                f"{mode} at level 9 runs {r['steps']} steps, no more than the default's {base}",
+            )
             if mode == "snap":
-                check(r["miss"]["centre"] < 1e-9, "a snapped run at level 9 does not end on the record")
+                check(
+                    r["miss"]["centre"] < 1e-9,
+                    "a snapped run at level 9 does not end on the record",
+                )
             else:
                 check(r["miss"]["excess"] > -0.001, "a blind run at level 9 beat the record")
 
         # ---- feature 3: the live gap, at all times.
-        # Revision 7 printed this as rows under the stage and most of this section read their text.
-        # Revision 16 dropped the rows; the measurement did not go with them, and is read here from
-        # `gapBar()` -- which is where it always came from, and where `grade_motion.py` and the
-        # capture receipt read it too.
+        # Revision 7 printed this as rows under the stage and most of this section read their
+        # text. Revision 16 dropped the rows; the measurement did not go with them, and is read
+        # here from `gapBar()` -- which is where it always came from, and where
+        # `grade_motion.py` and the capture receipt read it too.
         for style in ("tween", "physics", "bodies"):
-            r = page.evaluate(probe("revision7/gap_read"), {"index": index_of[n], "style": style})
-            # At the dwell the stage shows the previous packing and the bar describes it, so the two
-            # agree: revision 16 keyed the bar to the n on the panel rather than the n being stepped
-            # into, which is what stopped a smaller packing reading as better than the best known.
-            check(r["dwell"]["met"], f"{style}: the dwell does not sit on its own record: {r['dwell']}")
-            check(r["rest"]["met"], f"{style}: the snapped run does not reach the record: {r['rest']}")
+            r = page.evaluate(
+                probe("revision7/gap_read"), {"index": index_of[n], "style": style}
+            )
+            # At the dwell the stage shows the previous packing and the bar describes it, so
+            # the two agree: revision 16 keyed the bar to the n on the panel rather than the n
+            # being stepped into, which is what stopped a smaller packing reading as better
+            # than the best known.
+            check(
+                r["dwell"]["met"],
+                f"{style}: the dwell does not sit on its own record: {r['dwell']}",
+            )
+            check(
+                r["rest"]["met"],
+                f"{style}: the snapped run does not reach the record: {r['rest']}",
+            )
             if style != "tween":
-                check(not r["free"]["met"] or r["free"]["side"] >= r["free"]["record"] - 1e-9,
-                      f"{style}: the free run reads better than the record: {r['free']}")
+                check(
+                    not r["free"]["met"] or r["free"]["side"] >= r["free"]["record"] - 1e-9,
+                    f"{style}: the free run reads better than the record: {r['free']}",
+                )
         # The measurement agrees with what the trajectory itself says it reached.
         agree = page.evaluate(probe("revision7/gap_agrees"), {"index": index_of[n]})
-        check(abs(agree[0] - agree[1]) < 5e-3, f"the bar says {agree[0]} where the trajectory says {agree[1]}")
-        # The trace is built once per combination and only its head moves; the per-frame cost is what
-        # the feature has to justify.
+        check(
+            abs(agree[0] - agree[1]) < 5e-3,
+            f"the bar says {agree[0]} where the trajectory says {agree[1]}",
+        )
+        # The trace is built once per combination and only its head moves; the per-frame cost
+        # is what the feature has to justify.
         cost = page.evaluate(probe("revision7/frame_cost"), {"index": index_of[n]})
-        # Revision 9 removed the per-frame sparkline: the motion is already visible in the packing.
+        # Revision 9 removed the per-frame sparkline: the motion is already visible in the
+        # packing.
         check(not cost["spark"], "the per-frame sparkline is back")
         check(cost["side"] > 0, "the bar stopped measuring a side")
         print(f"  a whole frame at n={n} under style C: {cost['per']:.2f} ms")
@@ -158,14 +238,15 @@ def main() -> int:
             print(" -", f)
         return 1
     print(
-        "OK: where the sequence stands is a number that starts at nothing, ends at everything and never "
-        "goes backwards, with the bar it used to be drawn on gone from the page; the annealing dial runs "
-        "0..10 from no shake to three times the default with the run stretched to 1.7 moves at 120 steps a "
-        "second throughout, deterministic, cached per level, and the default reproduces the recorded "
-        "free-run misses; and the live gap, read from `gapBar()` rather than from rows that no longer "
-        "exist, sits on its own record at the dwell, reaches the record under the snap, never reads better "
-        "than the record on a free run, agrees with what the trajectory says it reached, and is built once "
-        "per combination with no per-frame sparkline."
+        "OK: where the sequence stands is a number that starts at nothing, ends at everything "
+        "and never goes backwards, with the bar it used to be drawn on gone from the page; the "
+        "annealing dial runs 0..10 from no shake to three times the default with the run "
+        "stretched to 1.7 moves at 120 steps a second throughout, deterministic, cached per "
+        "level, and the default reproduces the recorded free-run misses; and the live gap, "
+        "read from `gapBar()` rather than from rows that no longer exist, sits on its own "
+        "record at the dwell, reaches the record under the snap, never reads better than the "
+        "record on a free run, agrees with what the trajectory says it reached, and is built "
+        "once per combination with no per-frame sparkline."
     )
     return 0
 

@@ -38,6 +38,7 @@ index.html into two temporary directories and checks:
 
 from __future__ import annotations
 
+import importlib.util
 import json
 import re
 import shutil
@@ -52,6 +53,11 @@ sys.path.insert(0, str(HERE))
 import build_candidate  # noqa: E402
 
 FIRST, LAST = build_candidate.FIRST_N, build_candidate.LAST_N
+
+# The builder's own guard, reused here. Every pattern below reads a shape the build
+# emits, so a miss is a changed page, not an absent feature: it should say which
+# pattern missed rather than raise on an attribute of `None`.
+require_match = build_candidate.require_match
 
 # The faces the page embeds, (family, style, weight) in @font-face order. PT Serif
 # is embedded at 400 only: nothing on the stage is set bold in the serif, so the
@@ -123,7 +129,9 @@ def _no_exact_form(entry: dict) -> bool:
 
 
 def _stage_css(page: str) -> str:
-    style = re.search(r"<style>\n(.*?)</style>", page, re.DOTALL).group(1)
+    style = require_match(
+        re.search(r"<style>\n(.*?)</style>", page, re.DOTALL), "the stage <style> block"
+    ).group(1)
     style = re.sub(r"@font-face \{[^}]*\}", "", style)
     return re.sub(r"/\*.*?\*/", "", style, flags=re.DOTALL)
 
@@ -163,8 +171,13 @@ def test_candidate() -> None:
     assert all(len(fill) == 7 and fill.startswith("#") for fill in data["palette"])
 
     # 3. the only http(s) strings are the source-URL facts in the record
-    match = re.search(
-        r'<script id="atlas-data" type="application/json">(.*?)</script>', page, re.DOTALL
+    match = require_match(
+        re.search(
+            r'<script id="atlas-data" type="application/json">(.*?)</script>',
+            page,
+            re.DOTALL,
+        ),
+        "the embedded atlas-data record",
     )
     outside = page[: match.start()] + page[match.end() :]
     assert "http://" not in outside, "URL outside the record"
@@ -191,7 +204,10 @@ def test_candidate() -> None:
         assert attr.startswith("data:") or attr in local_refs, (
             f"external reference {attr[:60]!r}"
         )
-    csp = re.search(r'Content-Security-Policy" content="([^"]+)"', page).group(1)
+    csp = require_match(
+        re.search(r'Content-Security-Policy" content="([^"]+)"', page),
+        "the Content-Security-Policy meta",
+    ).group(1)
     assert "default-src 'none'" in csp
     assert "connect-src 'none'" in csp
     assert "Date.now" not in page
@@ -210,7 +226,9 @@ def test_candidate() -> None:
     degree_under_side = 0
     for n in range(FIRST, LAST + 1):
         body = templates[str(n)]
-        status = re.search(r'<ul class="status">(.*?)</ul>', body, re.DOTALL).group(1)
+        status = require_match(
+            re.search(r'<ul class="status">(.*?)</ul>', body, re.DOTALL), f"n={n}: status list"
+        ).group(1)
         rows = re.findall(r"<li[^>]*>(.*?)</li>", status, re.DOTALL)
         expected = _expected_badges(composite[n])
         assert len(rows) == len(expected), f"n={n}: badge rows {rows}"
@@ -234,7 +252,7 @@ def test_candidate() -> None:
         else:
             assert rows == ["nothing open"], f"n={n}: empty open group {rows}"
         # Notes on their own line under the value: never inside a `.line`.
-        for note in ("class=\"degree\"", "class=\"note\""):
+        for note in ('class="degree"', 'class="note"'):
             for line in re.findall(r'<p class="line[^"]*">(.*?)</p>', body, re.DOTALL):
                 assert note not in line, f"n={n}: {note} inside a value line"
         # The five slots, in order. With an exact form: side, exact, degree note,
@@ -252,12 +270,20 @@ def test_candidate() -> None:
         assert (f"algebraic degree {degree}" in body) == degree_here, f"n={n}: degree note"
         if exact_empty:
             expected_slots = [
-                ("line", "side"), ("sub",), ("line", "exact"), ("line", "lower"), ("sub",)
+                ("line", "side"),
+                ("sub",),
+                ("line", "exact"),
+                ("line", "lower"),
+                ("sub",),
             ]
             degree_slot = 1
         else:
             expected_slots = [
-                ("line", "side"), ("line", "exact"), ("sub",), ("line", "lower"), ("sub",)
+                ("line", "side"),
+                ("line", "exact"),
+                ("sub",),
+                ("line", "lower"),
+                ("sub",),
             ]
             degree_slot = 2
         assert kinds == expected_slots, f"n={n}: slots {lines}"
@@ -288,7 +314,9 @@ def test_candidate() -> None:
 
     # 6. the type: weight, the one scarlet, and the scale
     css = _stage_css(page)
-    headline_rule = re.search(r"\n\.headline \{([^}]*)\}", css).group(1)
+    headline_rule = require_match(
+        re.search(r"\n\.headline \{([^}]*)\}", css), "the .headline rule"
+    ).group(1)
     assert "font-weight: 400" in headline_rule
     assert f"font-size: {build_candidate.NUMERAL_SIZE}px" in headline_rule
     faces = re.findall(
@@ -304,7 +332,9 @@ def test_candidate() -> None:
     assert plain.lower().count("a3123f") == 1, (
         f"scarlet written {plain.lower().count('a3123f')} times"
     )
-    star_rule = re.search(r"\.status li\.star \{([^}]*)\}", css).group(1)
+    star_rule = require_match(
+        re.search(r"\.status li\.star \{([^}]*)\}", css), "the .status li.star rule"
+    ).group(1)
     assert build_candidate.NEW_COLOR in star_rule, "scarlet is not on the star row"
     assert re.search(
         rf'<symbol id="{build_candidate.STAR_ID}"><polygon points="[^"]+" '
@@ -364,10 +394,15 @@ def test_candidate() -> None:
     # 9. the headless survey of every n (optional, needs Playwright and its browser)
     survey_note = "skipped"
     try:
-        # Both are optional extras, and section 9 is skipped without them; the imports
-        # stay inside the try for that reason, so PLC0415 is waived.
-        import playwright.sync_api  # noqa: F401, PLC0415
+        # Both are optional extras, and section 9 is skipped without them; the import
+        # stays inside the try for that reason, so PLC0415 is waived. Playwright is
+        # probed rather than imported because nothing here names it — `survey` is what
+        # drives it — so an `import` would read as unused. `find_spec` on a submodule
+        # imports the parent package, so a missing Playwright still lands in `except`.
         import render_review  # noqa: PLC0415
+
+        if importlib.util.find_spec("playwright.sync_api") is None:
+            render_review = None
     except ImportError:
         render_review = None
     if render_review is not None:

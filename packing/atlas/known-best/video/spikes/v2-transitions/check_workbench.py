@@ -1,24 +1,24 @@
 """The revision-9 checks: one view, the chooser for n, the range spine, the gap bar.
 
 Everything here is a property of the built page, driven through `window.atlasTransitions` in the
-pinned headless shell. It complements `check_revision6.py` (desaturation, snap, blind, continuous
-play) and `check_revision7.py` (the bar scale, the annealing dial, the live gap) rather than
-repeating them. The workbench needs pairs the 25-pair demo does not carry, so it defaults to the
-all-pairs build.
+pinned headless shell. It complements `check_revision6.py` (desaturation, snap, blind,
+continuous play) and `check_revision7.py` (the bar scale, the annealing dial, the live gap)
+rather than repeating them. The workbench needs pairs the 25-pair demo does not carry, so it
+defaults to the all-pairs build.
 
 Revision 9 folded revision 8's two tabs into one view: the range is the spine, its two ends are
 values of n stepped *into*, and setting them equal is the old Single step tab. So the tab checks
 below became checks that the tabs are *gone* and that `setTab` / `tab` survive as no-ops.
 
-Revision 11 took the choice out of the colouring: hue is a function of the angle and shade is the
-square's full-side contact count, always, with no rule to pick. Step 9 is that property, driven
-through `colour()` (what the frame was painted from) and `fillsFor` (the same map as a pure
-function, needing nothing on the stage).
+Revision 11 took the choice out of the colouring: hue is a function of the angle and shade is
+the square's full-side contact count, always, with no rule to pick. Step 9 is that property,
+driven through `colour()` (what the frame was painted from) and `fillsFor` (the same map as a
+pure function, needing nothing on the stage).
 
 Revision 11 also made the contact force one editable law of the signed gap (step 10) and put a
-relationship graph beside it saying which pairs the law's attraction reaches (step 11). The two are
-orthogonal, and the asymmetry is the property step 11 exists to hold down: repulsion always applies
-to every pair, attraction only to the pairs the graph relates.
+relationship graph beside it saying which pairs the law's attraction reaches (step 11). The two
+are orthogonal, and the asymmetry is the property step 11 exists to hold down: repulsion always
+applies to every pair, attraction only to the pairs the graph relates.
 
 The JavaScript this drives the page with lives in `probes/`, one expression to a file, and
 reaches the page through `probes.probe`. Nothing below formats a Python value into a probe:
@@ -34,14 +34,15 @@ from pathlib import Path
 from typing import Any
 
 from playwright.sync_api import sync_playwright
+
 from probes import probe
 
 HERE = Path(__file__).resolve().parent
 
 #: What one trajectory may cost to build. Measured on this machine at n = 324: 27 ms and 1.3 MB
-#: under `physics`, 31 ms under `bodies`. The ceilings are about thirteen times the time and three
-#: times the memory, which is loose enough that wall clock on a loaded machine does not trip it and
-#: tight enough that an algorithm going quadratic does.
+#: under `physics`, 31 ms under `bodies`. The ceilings are about thirteen times the time and
+#: three times the memory, which is loose enough that wall clock on a loaded machine does not
+#: trip it and tight enough that an algorithm going quadratic does.
 TRAJECTORY_MS_CEILING = 400.0
 TRAJECTORY_BYTE_CEILING = 4_000_000
 
@@ -80,9 +81,10 @@ def angle_gap(a: float, b: float) -> float:
 
 
 # ---------------------------------------------------------------- the force law, reimplemented
-# The revision-11 law written out from the formula rather than read off the page, so `lawForce` is
-# checked against something independent of itself. `steep` is derived from the rigidity, not a fifth
-# parameter, which is what makes the shipped defaults reproduce the old hard-coded law exactly.
+# The revision-11 law written out from the formula rather than read off the page, so `lawForce`
+# is checked against something independent of itself. `steep` is derived from the rigidity, not
+# a fifth parameter, which is what makes the shipped
+# defaults reproduce the old hard-coded law exactly.
 LAW_KEYS = ("rigidity", "repulsion", "attraction", "range")
 LAW_TOL0, LAW_STEEP_MAX = 0.15, 8
 LAW_DEFAULT = {"rigidity": 0.15, "repulsion": 2500, "attraction": 0, "range": 0}
@@ -100,7 +102,8 @@ LAW_PRESETS = {
 
 
 def law_steep(law: dict) -> float:
-    """The slope multiplier past the knee: zero at the shipped rigidity, eight at a fifteenth of it."""
+    """The slope multiplier past the knee: zero at the shipped rigidity, eight at a
+    fifteenth of it."""
     return LAW_STEEP_MAX * max(0.0, 1 - law["rigidity"] / LAW_TOL0)
 
 
@@ -116,7 +119,8 @@ def law_force(law: dict, d: float) -> float:
 
 
 def law_samples(law: dict) -> list[float]:
-    """Signed gaps worth asking a law about: a dense sweep, with every breakpoint sampled exactly."""
+    """Signed gaps worth asking a law about: a dense sweep, with every breakpoint
+    sampled exactly."""
     ds = [-0.6 + 1.2 * i / 240 for i in range(241)]
     ds += [
         -law["rigidity"],
@@ -135,9 +139,9 @@ def law_samples(law: dict) -> list[float]:
 
 
 # ---------------------------------------------------------------- the plot's own geometry
-# The two half-axes of `#law-plot`: the gap runs across the whole editable domain so a handle can
-# never be dragged off the plot, the push climbs a ladder chosen to keep the current peak in the
-# box, and the pull hangs below the zero line on the attraction's own fixed bound.
+# The two half-axes of `#law-plot`: the gap runs across the whole editable domain so a handle
+# can never be dragged off the plot, the push climbs a ladder chosen to keep the current peak in
+# the box, and the pull hangs below the zero line on the attraction's own fixed bound.
 LP = {
     "w": 300,
     "zero": 88,
@@ -174,11 +178,11 @@ def lp_pull(law: dict) -> tuple[float, float]:
     return lp_x(law["range"] / 2), LP["zero"] + depth * LP["pullSpan"]
 
 
-def main() -> int:
+def main() -> int:  # noqa: C901, PLR0911 -- a flat list of page invariants
     page_path = (HERE / sys.argv[1]) if len(sys.argv) > 1 else HERE / "workbench.html"
     failures: list[str] = []
 
-    def check(condition: bool, message: str) -> None:
+    def check(condition: bool, message: str) -> None:  # noqa: FBT001 - a check is its condition
         if not condition:
             failures.append(message)
 
@@ -245,7 +249,8 @@ def main() -> int:
             "gapBar",
         ):
             check(name in api, f"the API lacks {name}")
-        # The tab bar and the two tab panels are gone from the page; the API keeps the two calls.
+        # The tab bar and the two tab panels are gone
+        # from the page; the API keeps the two calls.
         gone = look(
             "dom/present-ids",
             ids=["tabbar", "tab-single", "tab-sequence", "panel-single", "panel-sequence"],
@@ -276,22 +281,25 @@ def main() -> int:
         # Revision 10: the timeline scrubber is gone from the page, `seek` staying on the API.
         check(not in_page("scrub"), "the timeline scrubber is still in the page")
         # Every slider in the controls is named, which is how the scrubber's absence is checked
-        # without counting: the speed dial, the annealing dial and the four physics-law dials, and
-        # nothing whose id reads like a timeline. (This was a count of two when the scrubber went;
-        # the law panel has since added four, so the ids say it instead.)
+        # without counting: the speed dial, the annealing dial and the four physics-law dials,
+        # and nothing whose id reads like a timeline. (This was a count of two when the scrubber
+        # went; the law panel has since added four, so the ids say it instead.)
         sliders = look("controls/slider-ids")
-        # Revision 16: the law sliders are generated from the page's own parameter table, so this
-        # asks the page which ones that table implies rather than restating a list that has needed
-        # editing every time a law or a parameter was added. What is actually being checked is
-        # that nothing else is a slider -- that the timeline scrubber is gone and has not returned
-        # under another name -- so only the handful outside the laws is written out here.
+        # Revision 16: the law sliders are generated from the page's own parameter table, so
+        # this asks the page which ones that table implies rather than restating a list that has
+        # needed editing every time a law or a parameter was added. What is actually being
+        # checked is that nothing else is a slider -- that the timeline scrubber is gone and has
+        # not returned under another name -- so only the
+        # handful outside the laws is written out here.
         derived = look("controls/law-slider-ids")
-        # `desat-floor` joins them: the owner asked for the degree of desaturation to be settable,
-        # so how much chroma a moving square keeps is a dial like the rest rather than a constant.
+        # `desat-floor` joins them: the owner asked for the degree of desaturation to be
+        # settable, so how much chroma a moving square keeps
+        # is a dial like the rest rather than a constant.
         check(
             sorted(sliders)
-            == sorted(derived + ["anneal", "desat-floor", "grow-rate", "grow-size", "speed"]),
-            f"the controls carry a slider that is none of the speed, drain, annealing and law dials: {sliders}",
+            == sorted([*derived, "anneal", "desat-floor", "grow-rate", "grow-size", "speed"]),
+            f"the controls carry a slider that is none of the speed, drain, annealing and law "
+            f"dials: {sliders}",
         )
         check("seek" in api, "the API lost seek when the scrubber went")
         # The controls may not push the stage off the window.
@@ -313,14 +321,16 @@ def main() -> int:
             st["n"] == 16,
             f"n = 17 does not show the step 16 -> 17 (the pair starts at {st['n']})",
         )
-        # Revision 10: the page opens in Pack, where the label names the size, not the step; Animate
-        # keeps the step wording. Both are read here so the two modes cannot drift apart silently.
+        # Revision 10: the page opens in Pack, where the label names the size, not the step;
+        # Animate keeps the step wording. Both are read
+        # here so the two modes cannot drift apart silently.
         label = text_of("step-label")
         check(
             "17" in label and "16" not in label,
             f"the Pack label does not name the size alone: {label!r}",
         )
-        # Animate has never been entered on this page, so this is where it opens on the whole corpus.
+        # Animate has never been entered on this page,
+        # so this is where it opens on the whole corpus.
         ask("setMode", "animate")
         opening = ask("range")
         pairs = ask("pairs")
@@ -394,10 +404,10 @@ def main() -> int:
             rng["duration"] > 60,
             f"the corpus run's duration reads {rng['duration']}, which is not minutes",
         )
-        # The span the range covers, read from the n it steps from through the n it steps into. It
-        # used to be checked on the numerals of the progress scale along the bottom of the stage;
-        # the owner found that distracting and it is gone, so the span is read from the range itself,
-        # which is what the scale was drawing.
+        # The span the range covers, read from the n it steps from through the n it steps into.
+        # It used to be checked on the numerals of the progress scale along the bottom of the
+        # stage; the owner found that distracting and it is gone, so the span is read from the
+        # range itself, which is what the scale was drawing.
         check(
             rng["from"] == first and rng["to"] == last,
             f"the corpus range does not span {first}..{last}: {rng}",
@@ -460,10 +470,11 @@ def main() -> int:
                 print(" -", failure)
             print(" - the gap bar was not driven: gapBar is not on the API yet")
             return 1
-        # **The bar is keyed to the n on the panel, so it is read where the panel says 17.** Through
-        # the dwell the stage shows the packing of 16 and both say 16; the roll carries both to 17.
-        # Read at t = 0 the bar used to describe 17 while the stage showed 16's packing, which is how
-        # a 25-square packing came to sit eleven per cent "under the best known" at the step into 26.
+        # **The bar is keyed to the n on the panel, so it is read where the panel says 17.**
+        # Through the dwell the stage shows the packing of 16 and both say 16; the roll carries
+        # both to 17. Read at t = 0 the bar used to describe 17 while the stage showed 16's
+        # packing, which is how a 25-square packing came to sit eleven per cent "under the best
+        # known" at the step into 26.
         drive(("setStepN", 17), ("setStyle", "tween"))
         ask("seek", 0)
         dwell = ask("gapBar")
@@ -485,7 +496,8 @@ def main() -> int:
         )
         check(
             abs(bar["lower"] - float(facts["lower"])) < 1e-9,
-            f"the bar's lower bound {bar['lower']} is not the panel's s(17) >= {facts['lower']}",
+            f"the bar's lower bound {bar['lower']} is not the panel's s(17) >= "
+            f"{facts['lower']}",
         )
         check(
             bar["lo"] <= bar["lower"] + 1e-9,
@@ -494,16 +506,16 @@ def main() -> int:
         check(
             bar["hi"] > bar["record"], f"the bar's scale does not reach past the record: {bar}"
         )
-        # **The scale runs between whole integers, and the same width at every n.** It used to run
-        # from the area bound `sqrt(n)` to one above, so both ends moved with every n and nothing
-        # on the bar was ever twice in the same place. It now runs from `floor(sqrt(n))` to two
-        # above, so it changes only when `floor(sqrt(n))` does -- once per perfect square -- and a
-        # reader watching a sweep has something that holds still.
+        # **The scale runs between whole integers, and the same width at every n.** It used to
+        # run from the area bound `sqrt(n)` to one above, so both ends moved with every n and
+        # nothing on the bar was ever twice in the same place. It now runs from `floor(sqrt(n))`
+        # to two above, so it changes only when `floor(sqrt(n))` does -- once per perfect square
+        # -- and a reader watching a sweep has something that holds still.
         #
         # `sqrt(n)` is still on the bar, as a mark rather than an end: it is the one bound here
-        # that needs no citation, since n unit squares have area n. A constant span is still what
-        # makes two bars comparable. Checked at both ends of the corpus, and at a perfect square,
-        # where `sqrt(n)` IS the left end and the record sits hard against it.
+        # that needs no citation, since n unit squares have area n. A constant span is still
+        # what makes two bars comparable. Checked at both ends of the corpus, and at a perfect
+        # square, where `sqrt(n)` IS the left end and the record sits hard against it.
         for size in (16, 17, 324):
             if ask("setStepN", size) != size:
                 continue
@@ -528,12 +540,12 @@ def main() -> int:
                 f"the bar at n = {size} does not contain both sqrt(n) and sqrt(n) + 1: {scale}",
             )
         ask("setStepN", 17)
-        # **The pointer is drawn only where the arrangement is a packing.** A bounding box reports a
-        # number for any arrangement, including one whose squares are inside each other, and that
-        # number is smaller than the record -- which is how a frame mid-move came to read as better
-        # than the best known. Measured: a retained record scores 0 to 1.3e-5 of a unit side of
-        # summed overlap, the float precision of the poses; the same step mid-move reaches 1.1 at
-        # n = 11 and 12.4 at n = 110.
+        # **The pointer is drawn only where the arrangement is a packing.** A bounding box
+        # reports a number for any arrangement, including one whose squares are inside each
+        # other, and that number is smaller than the record -- which is how a frame mid-move
+        # came to read as better than the best known. Measured: a retained record scores 0 to
+        # 1.3e-5 of a unit side of summed overlap, the float precision of the poses; the same
+        # step mid-move reaches 1.1 at n = 11 and 12.4 at n = 110.
         seek_to_end(("setStyle", "physics"))
         rest = ask("gapBar")
         check(
@@ -567,11 +579,11 @@ def main() -> int:
             abs(end_bar["excess"]) < 0.05, f"the excess at rest is {end_bar['excess']} per cent"
         )
 
-        # The HAND is what turns green on a hit. It was a tick box in a head row, then a triangle,
-        # and is now a line through the track -- the bar's two arrows are the bounds and the hand is
-        # the only mark that moves, so it does not need a shape to argue for it. The property has
-        # survived all three: the mark that says where the arrangement is changes colour when the
-        # arrangement is the record.
+        # The HAND is what turns green on a hit. It was a tick box in a head row, then a
+        # triangle, and is now a line through the track -- the bar's two arrows are the bounds
+        # and the hand is the only mark that moves, so it does not need a shape to argue for it.
+        # The property has survived all three: the mark that says where the arrangement is
+        # changes colour when the arrangement is the record.
         def hand_colour() -> str:
             return look("dom/computed", id="gapbar-hand", property="stroke")
 
@@ -593,15 +605,15 @@ def main() -> int:
             f"the bar loses its indicator in blind mode: {blind}",
         )
         drive(("setBlind", False), ("setSnap", True), ("setStyle", "tween"))
-        # The headline left the panel: it sits centred under the packing it names, which gave the
-        # panel back its room for the facts. So the clearance it needs is from the picture rather
-        # than from the bar -- it must sit below the packing and inside the stage -- and the bar,
-        # now the first thing in the column, must stay inside the panel's own width.
+        # The headline left the panel: it sits centred under the packing it names, which gave
+        # the panel back its room for the facts. So the clearance it needs is from the picture
+        # rather than from the bar -- it must sit below the packing and inside the stage -- and
+        # the bar, now the first thing in the column, must stay inside the panel's own width.
         geom = look("gapbar/clearance")
-        # The bar's own geometry: the shaded open span is a band inside the track, from the lower
-        # bound's tick to the record's, and the two numbers do not sit on each other. (The band was
-        # 76 px tall on its first build: `height` is a CSS property on an SVG rect, and the class
-        # name it had then was the panel's own `.open` slot.)
+        # The bar's own geometry: the shaded open span is a band inside the track, from the
+        # lower bound's tick to the record's, and the two numbers do not sit on each other. (The
+        # band was 76 px tall on its first build: `height` is a CSS property on an SVG rect, and
+        # the class name it had then was the panel's own `.open` slot.)
         parts = look("gapbar/parts")
         # The scale's reference marks: the three integers the bar spans, plus `sqrt(n)` and
         # `sqrt(n) + 1`. At a perfect square those two ARE integers and collapse onto the marks
@@ -624,7 +636,8 @@ def main() -> int:
         check(
             parts["open"]["t"] >= parts["track"]["t"] - 0.5
             and parts["open"]["b"] <= parts["track"]["b"] + 0.5,
-            f"the shaded open span is not a band inside the track: {parts['open']} against {parts['track']}",
+            f"the shaded open span is not a band inside the track: {parts['open']} against "
+            f"{parts['track']}",
         )
         # The two bounds are bold vertical rules. A rule has width, so the span is compared
         # against their CENTRES rather than their edges -- which is also what makes the check
@@ -661,21 +674,22 @@ def main() -> int:
             f"the gap bar runs past the panel: {geom}",
         )
 
-        # ---- step 5 (revision 9): the bar stops animating. The sparkline is gone, the hand holds
-        # still through the motion, and it catches up when the picture settles.
+        # ---- step 5 (revision 9): the bar stops animating. The sparkline is gone, the hand
+        # holds still through the motion, and it catches up when the picture settles.
         check(not in_page("gap-spark"), "the per-frame sparkline is still in the page")
         check("refreshGap" in api, "the API lacks refreshGap")
-        # n = 101, not 100: 99 -> 100 is a grid prefix where nothing moves, so the bar would be on the
-        # record for the whole step and "it held still" would prove nothing.
+        # n = 101, not 100: 99 -> 100 is a grid prefix where nothing moves, so the bar would be
+        # on the record for the whole step and "it held still" would prove nothing.
         drive(
             ("setStepN", 101),
             ("setStyle", "bodies"),
             ("setSnap", False),
             ("setTiming", {"dwell": 0.4, "move": 2.5, "settle": 0.4}),
         )
-        # The third sample used to be the live readout's text, which is gone with the readout. The
-        # summed overlap replaces it and is a better witness for the same property: it is measured
-        # from the poses of every frame, so it moves while the bar deliberately does not.
+        # The third sample used to be the live readout's text, which is gone with the readout.
+        # The summed overlap replaces it and is a better witness for the same property: it is
+        # measured from the poses of every frame, so
+        # it moves while the bar deliberately does not.
         look("gapbar/sample-run")
         page.wait_for_timeout(4500)
         samples = look("gapbar/samples")
@@ -689,7 +703,8 @@ def main() -> int:
         )
         check(
             len(rows) > 5,
-            f"the frame's own measurement froze with the bar ({len(rows)} distinct values over {len(mid)} samples)",
+            f"the frame's own measurement froze with the bar ({len(rows)} distinct values over "
+            f"{len(mid)} samples)",
         )
         settled = ask("gapBar")["x"]
         check(
@@ -719,18 +734,18 @@ def main() -> int:
             "speed",
         ):
             check(name in api, f"the API lacks {name}")
-        # Revision 16: `record` joined them, the retained packing of n itself. It is last because
-        # it is the least common start and its use is diagnostic rather than exploratory: put a
-        # known optimum on the stage and see whether the law holds it.
+        # Revision 16: `record` joined them, the retained packing of n itself. It is last
+        # because it is the least common start and its use is diagnostic rather than
+        # exploratory: put a known optimum on the stage and see whether the law holds it.
         check(
             ask("initials") == ["previous", "random", "grid", "record"],
             "the initial conditions are not previous / random / grid / record",
         )
         check(ask("initial") == "previous", "the default start is not the previous packing")
         # Revision 9 removed the snap checkbox because an open-ended run had nothing to snap to.
-        # Revision 11 brings it back as one of the two chart options, beside the contact bias, and
-        # the two are different claims: the snap ends on the record by construction, the bias only
-        # says which pairs should touch. Both are on the page and both drive the API.
+        # Revision 11 brings it back as one of the two chart options, beside the contact bias,
+        # and the two are different claims: the snap ends on the record by construction, the
+        # bias only says which pairs should touch. Both are on the page and both drive the API.
         snap_box = look("controls/chart-options")
         check(snap_box is not None, "the two chart options are not both on the page")
         check(
@@ -755,8 +770,8 @@ def main() -> int:
             )
             check(st["n"] == 17, f"the {kind} start built {st['n']} squares, not 17")
             check(st["steps"] == 0, f"the {kind} start is already {st['steps']} steps in")
-        # Random and grid have no correspondence to the record, so they run without target springs;
-        # the previous packing with the blind box off does have one.
+        # Random and grid have no correspondence to the record, so they run without target
+        # springs; the previous packing with the blind box off does have one.
         check(
             not starts["random"]["springs"] and not starts["grid"]["springs"],
             "a random or grid start was given the record's poses to spring at",
@@ -792,15 +807,17 @@ def main() -> int:
         )
         check(
             run["c"]["required"] < run["a"]["required"] - 1e-3,
-            f"the run made the arrangement no smaller: {run['a']['required']} -> {run['c']['required']}",
+            f"the run made the arrangement no smaller: {run['a']['required']} -> "
+            f"{run['c']['required']}",
         )
         check(
             run["c"]["best"] is not None and run["c"]["bestPenetration"] is not None,
             f"the run reports no smallest box and no overlap beside it: {run['c']}",
         )
-        # And it reports all four figures. They used to be read off the rows under the stage; the
-        # owner had those dropped, so they are read from the API that filled them -- which is where
-        # a number belongs, and is what `grade_motion.py` and the capture receipt read too.
+        # And it reports all four figures. They used to be read off the rows under the stage;
+        # the owner had those dropped, so they are read from the API that filled them -- which
+        # is where a number belongs, and is what
+        # `grade_motion.py` and the capture receipt read too.
         said = ask("optimizeState")
         for field in ("time", "steps", "best", "bestPenetration", "record"):
             check(said.get(field) is not None, f"the run does not report its {field}: {said}")
@@ -828,7 +845,8 @@ def main() -> int:
         # ---- step 7 (revision 9): the hand.
         for name in ("pickAt", "grab", "dragTo", "release", "hand"):
             check(name in api, f"the API lacks {name}")
-        # Grabbing from the timeline hands the picture to an open-ended run seeded where it stood.
+        # Grabbing from the timeline hands the picture
+        # to an open-ended run seeded where it stood.
         drive(("setStepN", 17), ("setStyle", "tween"), ("seek", 0))
         grabbed = look("hand/grab-from-timeline", x=2.5, y=2.5)
         check(grabbed["i"] >= 0, "nothing was picked at the middle of the packing")
@@ -842,7 +860,8 @@ def main() -> int:
             "the run does not report that it was hand-edited",
         )
         ask("release")
-        # Pinned: the held square follows the cursor exactly and its neighbours are pushed aside.
+        # Pinned: the held square follows the cursor
+        # exactly and its neighbours are pushed aside.
         pin = look(
             "hand/pinned-drag",
             n=17,
@@ -926,8 +945,8 @@ def main() -> int:
             tabs[0][2] == "true" and tabs[1][2] == "false",
             f"the pressed tab is not Pack: {tabs}",
         )
-        # Pack is one number: the second box, the separator, the corpus button and the two figures
-        # that price a fixed-length run are Animate's.
+        # Pack is one number: the second box, the separator, the corpus button and the two
+        # figures that price a fixed-length run are Animate's.
         chooser = [
             "range-to",
             "range-sep",
@@ -967,7 +986,8 @@ def main() -> int:
             ran["on"] and ran["steps"] > 0,
             f"the transport in Pack did not start an open-ended run: {ran}",
         )
-        # And the readout is a seconds counter with the step count beside it, not a t / duration.
+        # And the readout is a seconds counter with
+        # the step count beside it, not a t / duration.
         counter = text_of("clock")
         check(
             " s " in counter and "steps" in counter and "/" not in counter,
@@ -979,8 +999,8 @@ def main() -> int:
         page.wait_for_timeout(500)
         after = look("optimize/steps-then-pause")
         check(after > before, f"the transport did not resume the run: {before} -> {after}")
-        # Animate: a range, always, and the pieces Pack hides come back. It comes back on the range it
-        # was last left on rather than on whatever Pack collapsed to.
+        # Animate: a range, always, and the pieces Pack hides come back. It comes back on the
+        # range it was last left on rather than on whatever Pack collapsed to.
         drive(("setMode", "animate"), ("setRange", 30, 90))
         drive(("setMode", "pack"), ("setMode", "animate"))
         rng = ask("range")
@@ -1002,8 +1022,8 @@ def main() -> int:
             },
             f"Animate shows the wrong pieces of the chooser: {animating}",
         )
-        # A shared strategy setting survives a switch in both directions, which is the whole point of
-        # the modes being two aspects of one page rather than two pages.
+        # A shared strategy setting survives a switch in both directions, which is the whole
+        # point of the modes being two aspects of one page rather than two pages.
         drive(
             ("setStyle", "bodies"),
             ("setAnneal", 7),
@@ -1025,8 +1045,8 @@ def main() -> int:
             kept["range"]["from"] == 30 and kept["range"]["to"] == 60,
             f"Animate did not remember the range it was left on: {kept['range']}",
         )
-        # `setRange` still works as it did; a range wider than one step names Animate, since Pack has
-        # no way to show one.
+        # `setRange` still works as it did; a range wider than one step names Animate, since
+        # Pack has no way to show one.
         forced = look("modes/wide-range-from-pack", lo=40, hi=44)
         check(
             forced["mode"] == "animate" and forced["range"]["steps"] == 5,
@@ -1036,9 +1056,9 @@ def main() -> int:
         drive(("setDesaturate", True), ("setInitial", "previous"))
         drive(("setMode", "pack"), ("setStepN", 17))
 
-        # ---- step 9 (revision 11): the colouring is the angle map, and only that. Guarded like the
-        # steps above so a page built before the revision reports the missing calls rather than
-        # dying on the first one.
+        # ---- step 9 (revision 11): the colouring is the angle map, and only that. Guarded like
+        # the steps above so a page built before the revision reports the missing calls rather
+        # than dying on the first one.
         if not {"colour", "fillsFor"} <= api:
             browser.close()
             print("FAILED")
@@ -1046,12 +1066,12 @@ def main() -> int:
                 print(" -", failure)
             print(" - the colouring was not driven: colour / fillsFor are not on the API yet")
             return 1
-        # The stage trims chroma to compensate for drawing one packing where the atlas draws a page
-        # of them, so the fills on the stage are a step under the palette's by default. Every check
-        # below is about the PALETTE -- which hue a class takes, which shade a contact count takes,
-        # that a square keeps its fill through a turn -- so they are taken with the trim off, and
-        # the trim gets one check of its own: that it is on by default, and that turning it off is
-        # what puts the stage back on the atlas's own numbers.
+        # The stage trims chroma to compensate for drawing one packing where the atlas draws a
+        # page of them, so the fills on the stage are a step under the palette's by default.
+        # Every check below is about the PALETTE -- which hue a class takes, which shade a
+        # contact count takes, that a square keeps its fill through a turn -- so they are taken
+        # with the trim off, and the trim gets one check of its own: that it is on by default,
+        # and that turning it off is what puts the stage back on the atlas's own numbers.
         check(
             abs(ask("stageChroma") - 0.85) < 1e-9,
             f"the stage's chroma trim is {ask('stageChroma')}, not 0.85",
@@ -1060,9 +1080,10 @@ def main() -> int:
             ask("setStageChroma", 1) == 1,
             "the stage's chroma trim does not go back to the atlas's own numbers",
         )
-        # Revision 12 put three schemes where revision 11 had one, and made the square's *identity*
-        # the default, so the angle map has to be selected before it can be checked. The default is
-        # read here, before anything switches it, because "identity is the default" is the claim.
+        # Revision 12 put three schemes where revision 11 had one, and made the square's
+        # *identity* the default, so the angle map has to be selected before it can be checked.
+        # The default is read here, before anything switches it, because "identity is the
+        # default" is the claim.
         check(
             ask("colorScheme") == "identity",
             f"the page does not open in the identity scheme: {ask('colorScheme')}",
@@ -1071,8 +1092,9 @@ def main() -> int:
             ask("colorSchemes") == ["identity", "angle-stable", "angle-continuous"],
             f"the three schemes are {ask('colorSchemes')}",
         )
-        # The desaturation is revision 6's and is a separate thing: it drains chroma out of the very
-        # fills this step is reading, so it comes off for the whole step and goes back on at the end.
+        # The desaturation is revision 6's and is a separate thing: it drains chroma out of the
+        # very fills this step is reading, so it comes off for the whole step and goes back on
+        # at the end.
         drive(
             ("setMode", "pack"),
             ("setStyle", "tween"),
@@ -1090,14 +1112,16 @@ def main() -> int:
         )
         check(
             len(palette) == 20 and len(shades) == 20 and all(len(f) == 5 for f in shades),
-            f"the map is not twenty hues of five shades: {len(palette)} hues, {[len(f) for f in shades]}",
+            f"the map is not twenty hues of five shades: {len(palette)} hues, "
+            f"{[len(f) for f in shades]}",
         )
         check(
             palette[0] == "#1faa8e" and palette[1] == "#c3c45f",
             f"the two pinned slots are not the house teal and citron: {palette[:2]}",
         )
-        # Every fill on the stage is looked up here, so the hundred hexes have to name one family and
-        # one shade each; two families sharing a hex would make the readings below ambiguous.
+        # Every fill on the stage is looked up here, so the hundred hexes have to name one
+        # family and one shade each; two families sharing
+        # a hex would make the readings below ambiguous.
         family = {h: (s, j) for s, fam in enumerate(shades) for j, h in enumerate(fam)}
         check(
             len(family) == 100,
@@ -1105,9 +1129,9 @@ def main() -> int:
         )
         band = 90 / (len(palette) - 2)
 
-        # 9a. The same angle takes the same fill in every retained packing that holds it. Each of
-        # these is settled on its own retained frame first, which under style A with the snap on is
-        # the record's own packing for n.
+        # 9a. The same angle takes the same fill in every retained packing that holds it. Each
+        # of these is settled on its own retained frame first, which under style A with the snap
+        # on is the record's own packing for n.
         frames = {}
         for want in (5, 11, 17, 26, 29, 100, 110, 172, 272, 324):
             if not (first <= want <= last):
@@ -1118,79 +1142,88 @@ def main() -> int:
             frames[want] = ask("colour")
         check(
             {17, 29, 100, 272} <= set(frames),
-            f"the four retained frames this step needs are not all on the page: {sorted(frames)}",
+            f"the four retained frames this step needs are not all on the page: "
+            f"{sorted(frames)}",
         )
         for n, c in frames.items():
             check(
                 len(c["fills"]) == n and len(c["contacts"]) == n,
-                f"n = {n} drew {len(c['fills'])} squares against {len(c['contacts'])} contact counts",
+                f"n = {n} drew {len(c['fills'])} squares against {len(c['contacts'])} contact "
+                f"counts",
             )
             stray = [f for f in c["fills"] if f not in family]
             check(stray == [], f"n = {n} painted {stray[:3]}, which is in no palette family")
-            # The whole frame, read back off the DOM and taken apart: the family histogram is the
-            # classes' own slots weighted by their sizes (two classes may land on one slot, so they
-            # are summed), and the shade histogram is 4 - contacts, square for square. Together
-            # these say the picture is exactly what `colour()` claims it was painted from.
+            # The whole frame, read back off the DOM and taken apart: the family histogram is
+            # the classes' own slots weighted by their sizes (two classes may land on one slot,
+            # so they are summed), and the shade histogram is 4 - contacts, square for square.
+            # Together these say the picture is exactly
+            # what `colour()` claims it was painted from.
             drawn_family = Counter(family[f][0] for f in c["fills"] if f in family)
             want_family: Counter[int] = Counter()
-            for slot, size in zip(c["slots"], c["sizes"]):
+            for slot, size in zip(c["slots"], c["sizes"], strict=False):
                 want_family[slot] += size
             check(
                 drawn_family == want_family,
-                f"n = {n}'s families are {dict(drawn_family)}, not the classes' slots {dict(want_family)}",
+                f"n = {n}'s families are {dict(drawn_family)}, not the classes' slots "
+                f"{dict(want_family)}",
             )
             drawn_shade = Counter(family[f][1] for f in c["fills"] if f in family)
             want_shade = Counter(4 - max(0, min(4, k)) for k in c["contacts"])
             check(
                 drawn_shade == want_shade,
-                f"n = {n}'s shades are {dict(drawn_shade)}, not 4 - contacts {dict(want_shade)}",
+                f"n = {n}'s shades are {dict(drawn_shade)}, not 4 - contacts "
+                f"{dict(want_shade)}",
             )
-            # And the slot a class took is the pure function of its own centre: asking `fillsFor`
-            # for that one angle, with nothing else in the array, gives the same family back. This
-            # is what kills the old house rule, under which a class's colour was its rank among the
-            # frame's other classes and so moved when the frame did.
+            # And the slot a class took is the pure function of its own centre: asking
+            # `fillsFor` for that one angle, with nothing else in the array, gives the same
+            # family back. This is what kills the old house rule, under which a class's colour
+            # was its rank among the frame's other classes and so moved when the frame did.
             alone = look("colour/fills-for-angles", angles=c["centres"])
-            for centre, slot, hexed in zip(c["centres"], c["slots"], alone):
+            for centre, slot, hexed in zip(c["centres"], c["slots"], alone, strict=False):
                 check(
                     hexed == shades[slot][4],
-                    f"n = {n}'s {centre:.4f} degree class took slot {slot}, but the angle alone gives {hexed}",
+                    f"n = {n}'s {centre:.4f} degree class took slot {slot}, but the angle "
+                    f"alone gives {hexed}",
                 )
-        # The four the revision names, pairwise: a shared angle is a shared fill, at every contact
-        # count, with no exception allowed.
+        # The four the revision names, pairwise: a shared angle is a shared fill, at every
+        # contact count, with no exception allowed.
         core = [n for n in (17, 29, 100, 272) if n in frames]
         shared = 0
         for i, a in enumerate(core):
             for b in core[i + 1 :]:
-                for ca, sa in zip(frames[a]["centres"], frames[a]["slots"]):
-                    for cb, sb in zip(frames[b]["centres"], frames[b]["slots"]):
+                for ca, sa in zip(frames[a]["centres"], frames[a]["slots"], strict=False):
+                    for cb, sb in zip(frames[b]["centres"], frames[b]["slots"], strict=False):
                         if angle_gap(ca, cb) > tol:
                             continue
                         shared += 1
                         check(
                             sa == sb,
-                            f"n = {a}'s {ca:.4f} degree class took slot {sa} while n = {b}'s {cb:.4f} took {sb}",
+                            f"n = {a}'s {ca:.4f} degree class took slot {sa} while n = {b}'s "
+                            f"{cb:.4f} took {sb}",
                         )
                         both = look("colour/fills-for-pair", angles=[ca, cb])
                         check(
                             all(x == y for x, y in both),
-                            f"n = {a}'s {ca:.4f} and n = {b}'s {cb:.4f} are painted differently: {both}",
+                            f"n = {a}'s {ca:.4f} and n = {b}'s {cb:.4f} are painted "
+                            f"differently: {both}",
                         )
         check(
             shared >= 6,
             f"the four frames share only {shared} angles, so the check has no teeth",
         )
-        # The wider sweep, where the one loophole in "hue is a function of the angle" shows up: the
-        # slot is a step function with an edge every five degrees, and two classes within the half
-        # degree that counts as the same tilt can still fall either side of one. Measured over the
-        # ten frames above that happens exactly once — n = 29's 64.9387 degree class takes slot 14
-        # and n = 110's 65.1299 takes slot 15 — so a disagreement is allowed only when the two
-        # centres are in different bands, and then only to the neighbouring slot.
+        # The wider sweep, where the one loophole in "hue is a function of the angle" shows up:
+        # the slot is a step function with an edge every five degrees, and two classes within
+        # the half degree that counts as the same tilt can still fall either side of one.
+        # Measured over the ten frames above that happens exactly once — n = 29's 64.9387 degree
+        # class takes slot 14 and n = 110's 65.1299 takes slot 15 — so a disagreement is allowed
+        # only when the two centres are in different
+        # bands, and then only to the neighbouring slot.
         agreed, straddles = 0, []
         wide = sorted(frames)
         for i, a in enumerate(wide):
             for b in wide[i + 1 :]:
-                for ca, sa in zip(frames[a]["centres"], frames[a]["slots"]):
-                    for cb, sb in zip(frames[b]["centres"], frames[b]["slots"]):
+                for ca, sa in zip(frames[a]["centres"], frames[a]["slots"], strict=False):
+                    for cb, sb in zip(frames[b]["centres"], frames[b]["slots"], strict=False):
                         if angle_gap(ca, cb) > tol:
                             continue
                         if sa == sb:
@@ -1204,14 +1237,17 @@ def main() -> int:
                 int(fold_angle(ca) // band) != int(fold_angle(cb) // band)
                 and abs(sa - sb) == 1
                 and edge <= tol,
-                f"n = {a}'s {ca:.4f} (slot {sa}) and n = {b}'s {cb:.4f} (slot {sb}) disagree without a band edge between them",
+                f"n = {a}'s {ca:.4f} (slot {sa}) and n = {b}'s {cb:.4f} (slot {sb}) disagree "
+                f"without a band edge between them",
             )
         check(
             len(straddles) <= 2,
-            f"{len(straddles)} shared angles fall either side of a band edge, not the one measured",
+            f"{len(straddles)} shared angles fall either side of a band edge, not the one "
+            f"measured",
         )
-        # `fillsFor` is the map with nothing on the stage, so its answer cannot depend on what is:
-        # the same table comes back at every n, and it pins the tolerance and the five-degree band.
+        # `fillsFor` is the map with nothing on the stage, so its answer cannot depend on what
+        # is: the same table comes back at every n, and
+        # it pins the tolerance and the five-degree band.
         sweep = [0.0, 0.4, 0.6, 12.3, 23.4513, 44.4, 44.6, 45.0, 45.3, 64.9387, 65.1299, 89.7]
         table = {}
         for n in wide:
@@ -1225,22 +1261,24 @@ def main() -> int:
         pinned = look("colour/fills-for-angles", angles=[0.0, 0.4, 0.6, 44.4, 44.6, 45.0])
         check(
             [family[h][0] for h in pinned] == [0, 0, 2, 10, 1, 1],
-            f"the half-degree pins and the five-degree bands are not where the revision puts them: {pinned}",
+            f"the half-degree pins and the five-degree bands are not where the revision puts "
+            f"them: {pinned}",
         )
 
-        # 9b. A square whose angle does not move keeps its hue through a step. n = 110 carries twelve
-        # angle classes and a real rotation, so the frame is not one colour throughout.
-        # Revision 14: a step is Animate's, and it is asked for here. Pack has all n squares on the
-        # stage from the first frame and never plays a transition, so scrubbing one there would find
-        # a still arrangement and the check would prove nothing (measured: it found nothing turning).
+        # 9b. A square whose angle does not move keeps its hue through a step. n = 110 carries
+        # twelve angle classes and a real rotation, so the frame is not one colour throughout.
+        # Revision 14: a step is Animate's, and it is asked for here. Pack has all n squares on
+        # the stage from the first frame and never plays a transition, so scrubbing one there
+        # would find a still arrangement and the check would
+        # prove nothing (measured: it found nothing turning).
         drive(("setMode", "animate"), ("setStepN", 110), ("setStyle", "tween"), ("seek", 0))
         span = ask("duration")
         snaps = []
         for fraction in (0.0, 0.15, 0.35, 0.5, 0.62, 0.75, 0.88, 1.0):
             ask("seek", span * fraction)
             rows = look("stage/drawn")
-            # The map driven by the angles the frame actually drew, which is the same question the
-            # painter asked, put to the pure function instead.
+            # The map driven by the angles the frame actually drew, which is the same question
+            # the painter asked, put to the pure function instead.
             pure = look("colour/fills-for-drawn", angles=[r[1] for r in rows])
             snaps.append({r[0]: (r[1], r[2], pure[i]) for i, r in enumerate(rows)})
         check(
@@ -1275,18 +1313,19 @@ def main() -> int:
         check(held >= 500, f"only {held} square-instants held their angle over the step")
         check(moved_hue == [], f"a square kept its angle and changed hue: {moved_hue[:3]}")
 
-        # 9c. A contact darkens without changing hue. First off the stage, where it is exact: the
-        # five fills of one angle are one family, they run from the light end at no contacts to the
-        # dark end at four, and the hue holds. The two pinned families ramp in OkLCh and hold to
-        # within a degree; the eighteen free ones ramp in HSL, which drifts — 6.42 degrees at slot 6
-        # is the worst of them — so they are held to seven.
+        # 9c. A contact darkens without changing hue. First off the stage, where it is exact:
+        # the five fills of one angle are one family, they run from the light end at no contacts
+        # to the dark end at four, and the hue holds. The two pinned families ramp in OkLCh and
+        # hold to within a degree; the eighteen free ones ramp in HSL, which drifts — 6.42
+        # degrees at slot 6 is the worst of them — so they are held to seven.
         for slot in range(len(palette)):
             theta = 0.0 if slot == 0 else 45.0 if slot == 1 else band * (slot - 2) + band / 2
             ramp = look("colour/shade-ramp", angle=theta)
             check(
                 [family.get(h, (None, None)) for h in ramp]
                 == [(slot, 4), (slot, 3), (slot, 2), (slot, 1), (slot, 0)],
-                f"{theta} degrees does not walk slot {slot} from its light end to its dark one: {ramp}",
+                f"{theta} degrees does not walk slot {slot} from its light end to its dark "
+                f"one: {ramp}",
             )
             lit = [oklab(h)[0] for h in ramp]
             check(
@@ -1304,8 +1343,9 @@ def main() -> int:
                 max(hue_gap(x, oklab(palette[slot])[2]) for x in hues) <= allowed,
                 f"slot {slot}'s shades are not the palette hue {palette[slot]}",
             )
-        # Then on the stage. A grid start is every square upright, so the whole picture is one class
-        # and one family, and the only thing left to tell the fills apart is the contact count.
+        # Then on the stage. A grid start is every square upright, so the whole picture is one
+        # class and one family, and the only thing left
+        # to tell the fills apart is the contact count.
         for n in (17, 26):
             drive(("setStepN", n), ("setInitial", "grid"))
             c = ask("colour")
@@ -1313,7 +1353,8 @@ def main() -> int:
                 c["classes"] == 1
                 and c["slots"] == [0]
                 and angle_gap(c["centres"][0], 0) <= tol,
-                f"the grid start at n = {n} is not one upright class: {c['classes']} classes at {c['centres']}",
+                f"the grid start at n = {n} is not one upright class: {c['classes']} classes "
+                f"at {c['centres']}",
             )
             hist = Counter(c["contacts"])
             check(
@@ -1322,7 +1363,8 @@ def main() -> int:
             )
             check(
                 Counter(c["fills"]) == Counter(shades[0][4 - k] for k in c["contacts"]),
-                f"the grid start at n = {n} is not its own contact counts shaded: {sorted(Counter(c['fills']).items())}",
+                f"the grid start at n = {n} is not its own contact counts shaded: "
+                f"{sorted(Counter(c['fills']).items())}",
             )
             check(
                 {family[f][0] for f in c["fills"]} == {0},
@@ -1332,13 +1374,14 @@ def main() -> int:
             lit = [oklab(shades[0][4 - k])[0] for k in counts]
             check(
                 all(lit[i] > lit[i + 1] for i in range(len(lit) - 1)),
-                f"the grid start's shades do not darken with contacts: {list(zip(counts, [round(x, 4) for x in lit]))}",
+                f"the grid start's shades do not darken with contacts: "
+                f"{list(zip(counts, [round(x, 4) for x in lit], strict=False))}",
             )
         ask("setInitial", "previous")
 
-        # 9d. The old rule switch is still gone. Revision 12's scheme chooser is not it: `rule-seg`
-        # is not back, `setColorRule` is a no-op alias reporting the scheme in force, and the key
-        # that used to cycle the rule still moves nothing.
+        # 9d. The old rule switch is still gone. Revision 12's scheme chooser is not it:
+        # `rule-seg` is not back, `setColorRule` is a no-op alias reporting the scheme in force,
+        # and the key that used to cycle the rule still moves nothing.
         seek_to_end(("setStepN", 29))
         check(not in_page("rule-seg"), "the colour-rule chooser is still in the page")
         check(
@@ -1362,10 +1405,10 @@ def main() -> int:
         check(ask("colour")["fills"] == painted, "the k key repainted the stage")
         check(ask("state")["rule"] == "angle-stable", "the k key moved the scheme")
 
-        # 9e (revision 12): colour is the square's identity, and that is the default. The claim is
-        # stronger than the angle map's: a square's fill is a property of the square and of nothing
-        # else, so it survives the square turning, its neighbours moving, and the frame being drawn
-        # from a different start altogether.
+        # 9e (revision 12): colour is the square's identity, and that is the default. The claim
+        # is stronger than the angle map's: a square's fill is a property of the square and of
+        # nothing else, so it survives the square turning, its neighbours moving, and the frame
+        # being drawn from a different start altogether.
         if "setColorScheme" not in api or "identityFills" not in api:
             browser.close()
             print("FAILED")
@@ -1397,9 +1440,9 @@ def main() -> int:
                 f"an identity green is a colour the page reserves: {hexed}",
             )
 
-        # The palette's own resolution, re-measured here rather than asserted: the closest two of the
-        # 42 are 0.0237 apart in OkLab, and consecutive identities are five times further apart than
-        # that, which is what the co-prime stride buys.
+        # The palette's own resolution, re-measured here rather than asserted: the closest two
+        # of the 42 are 0.0237 apart in OkLab, and consecutive identities are five times further
+        # apart than that, which is what the co-prime stride buys.
         def lab_dist(x: str, y: str) -> float:
             a, b = oklab(x), oklab(y)
             pa = (
@@ -1437,11 +1480,11 @@ def main() -> int:
             "the 42 identities do not use the 42 greens once each",
         )
 
-        # A settle that turns the squares does not repaint them. n = 110 has a real rotation in it,
-        # and the run is left free so the physics, not the record, decides where it lands.
-        # Revision 14: a settle is a step's, so this is Animate's stage — with the standardising off,
-        # because it is Animate that repaints a *resting* frame in the angle map and this check is
-        # about the identity greens holding. 9f puts it back on and proves it fires.
+        # A settle that turns the squares does not repaint them. n = 110 has a real rotation in
+        # it, and the run is left free so the physics, not the record, decides where it lands.
+        # Revision 14: a settle is a step's, so this is Animate's stage — with the standardising
+        # off, because it is Animate that repaints a *resting* frame in the angle map and this
+        # check is about the identity greens holding. 9f puts it back on and proves it fires.
         drive(
             ("setMode", "animate"),
             ("setAnimateStandardize", False),
@@ -1469,14 +1512,14 @@ def main() -> int:
             (k, settle[0][k][1], s[k][1])
             for s in settle[1:]
             for k in settle[0]
-            # The arriving square — identity 110, the n the step lands on — leans toward scarlet as
-            # it lands and settles to its own green, which is a mark and not a colouring.
+            # The arriving square — identity 110, the n the step lands on — leans toward scarlet
+            # as it lands and settles to its own green, which is a mark and not a colouring.
             if k in s and k != 110 and settle[0][k][1] != s[k][1]
         ]
         check(repainted == [], f"a square changed colour while it turned: {repainted[:3]}")
-        # And the same square is the same green in two different frames of the same n: the settled
-        # step animation, and an open-ended run from the ordered fill, which shares nothing with it
-        # but the labelling.
+        # And the same square is the same green in two different frames of the same n: the
+        # settled step animation, and an open-ended run from the ordered fill, which shares
+        # nothing with it but the labelling.
         seek_to_end(("setStepN", 29), ("setStyle", "tween"), ("setSnap", True))
         frame_one = {r[0]: r[2] for r in look("stage/drawn")}
         drive(
@@ -1492,8 +1535,8 @@ def main() -> int:
             differ == [],
             f"two frames of n = 29 paint the same square differently: {differ[:5]}",
         )
-        # And the fill a square is drawn with is its identity's own entry in the ramp, not merely
-        # something stable: the pure function and the picture agree square by square.
+        # And the fill a square is drawn with is its identity's own entry in the ramp, not
+        # merely something stable: the pure function and the picture agree square by square.
         pure = ask("identityFills", 29)
         wrong = [
             (k, frame_one[k], pure[k - 1])
@@ -1501,10 +1544,10 @@ def main() -> int:
             if frame_one[k] != pure[k - 1]
         ]
         check(wrong == [], f"a drawn fill is not its identity's green: {wrong[:3]}")
-        # Contacts do not shade the identity scheme, which is the decision revision 12 records: the
-        # ordered fill at n = 17 carries three different contact counts and exactly seventeen
-        # different greens, one a square, where the angle map would have painted it in three shades
-        # of one hue.
+        # Contacts do not shade the identity scheme, which is the decision revision 12 records:
+        # the ordered fill at n = 17 carries three different contact counts and exactly
+        # seventeen different greens, one a square, where the angle map would have painted it in
+        # three shades of one hue.
         drive(("setStepN", 17), ("setInitial", "grid"), ("setColorScheme", "identity"))
         grid = ask("colour")
         check(
@@ -1519,12 +1562,13 @@ def main() -> int:
         shaded = ask("colour")
         check(
             len(set(shaded["fills"])) == len(set(shaded["contacts"])),
-            f"the angle map's ordered fill is {len(set(shaded['fills']))} fills for {len(set(shaded['contacts']))} contact counts",
+            f"the angle map's ordered fill is {len(set(shaded['fills']))} fills for "
+            f"{len(set(shaded['contacts']))} contact counts",
         )
 
-        # 9f (revision 12): the Animate exception, and it belongs to Animate alone. In Animate the resting
-        # frame is repainted in the standard angle map while the motion stays identity-coloured; in
-        # Pack nothing is repainted, whatever the setting says.
+        # 9f (revision 12): the Animate exception, and it belongs to Animate alone. In Animate
+        # the resting frame is repainted in the standard angle map while the motion stays
+        # identity-coloured; in Pack nothing is repainted, whatever the setting says.
         drive(
             ("setInitial", "previous"),
             ("setColorScheme", "identity"),
@@ -1540,15 +1584,17 @@ def main() -> int:
         span = ask("duration")
         ask("seek", span)
         rest = ask("colour")
-        # `angle-atlas`, not `angle-stable`. The two group angles identically and differ in which
-        # palette slot a class is given: the stable map gives a class the slot its own angle falls
-        # in, so a square keeps its hue from frame to frame, while the atlas hands slots out from 2
-        # by descending class size. A resting frame is a picture that is meant to match a rendering,
-        # so it takes the atlas's answer -- measured before this changed, n = 17's tilted core came
-        # out `#b9e53c`, the lightest fill in the ramp, against the rendering's `#dd87b8`.
+        # `angle-atlas`, not `angle-stable`. The two group angles identically and differ in
+        # which palette slot a class is given: the stable map gives a class the slot its own
+        # angle falls in, so a square keeps its hue from frame to frame, while the atlas hands
+        # slots out from 2 by descending class size. A resting frame is a picture that is meant
+        # to match a rendering, so it takes the atlas's answer -- measured before this changed,
+        # n = 17's tilted core came out `#b9e53c`, the lightest
+        # fill in the ramp, against the rendering's `#dd87b8`.
         check(
             rest["painted"] == "angle-atlas" and rest["scheme"] == "identity",
-            f"a resting Animate frame is painted {rest['painted']} with the scheme on {rest['scheme']}",
+            f"a resting Animate frame is painted {rest['painted']} with the scheme on "
+            f"{rest['scheme']}",
         )
         ask("seek", span * 0.55)
         mid = ask("colour")
@@ -1556,7 +1602,7 @@ def main() -> int:
             mid["painted"] == "identity",
             f"a moving Animate frame is painted {mid['painted']}, not in identity",
         )
-        ask("setAnimateStandardize", False)
+        ask("setAnimateStandardize", False)  # noqa: FBT003 -- the page API's own argument
         ask("seek", span)
         check(
             ask("colour")["painted"] == "identity",
@@ -1573,8 +1619,9 @@ def main() -> int:
         )
         drive(("setDesaturate", True), ("setColorScheme", "identity"), ("setStepN", 17))
 
-        # ---- step 10 (revision 11): one editable force law. Guarded like the steps above so a page
-        # built before the revision reports the missing calls rather than dying on the first one.
+        # ---- step 10 (revision 11): one editable force law. Guarded like the steps above so a
+        # page built before the revision reports the
+        # missing calls rather than dying on the first one.
         if (
             not {
                 "setLaw",
@@ -1615,14 +1662,16 @@ def main() -> int:
             f"the law's defaults are {shipped['defaults']}, not {LAW_DEFAULT}",
         )
 
-        # 10a. The law's shape, against the formula written out at the top of this file rather than
-        # against the page's own arithmetic. Four laws, and every breakpoint sampled exactly.
+        # 10a. The law's shape, against the formula written out at the top of this file rather
+        # than against the page's own arithmetic. Four
+        # laws, and every breakpoint sampled exactly.
         for name in ("default", "rigid", "soft", "sticky"):
             want = LAW_DEFAULT if name == "default" else LAW_PRESETS[name]
             got = ask("setLawPreset", name)
             check(
                 {k: got[k] for k in LAW_KEYS} == want,
-                f"the {name} law is {[got[k] for k in LAW_KEYS]}, not {[want[k] for k in LAW_KEYS]}",
+                f"the {name} law is {[got[k] for k in LAW_KEYS]}, not "
+                f"{[want[k] for k in LAW_KEYS]}",
             )
             check(
                 abs(got["steep"] - law_steep(want)) < 1e-12,
@@ -1632,21 +1681,26 @@ def main() -> int:
             fs = look("law/forces-at", gaps=ds)
             off = [
                 (d, f, law_force(want, d))
-                for d, f in zip(ds, fs)
+                for d, f in zip(ds, fs, strict=False)
                 if abs(f - law_force(want, d)) > 1e-9 * max(1.0, abs(law_force(want, d)))
             ]
             check(off == [], f"the {name} law departs from the formula at {off[:3]}")
-            at = dict(zip(ds, fs))
-            # Continuous at zero: nothing at touching, and nothing either side of it in the limit.
+            at = dict(zip(ds, fs, strict=False))
+            # Continuous at zero: nothing at touching,
+            # and nothing either side of it in the limit.
             check(at[0.0] == 0, f"the {name} law is {at[0.0]} at touching, not zero")
             check(
                 abs(at[1e-12]) < 1e-6 and abs(at[-1e-12]) < 1e-6,
-                f"the {name} law is not continuous at zero: {at[-1e-12]} below, {at[1e-12]} above",
+                f"the {name} law is not continuous at zero: {at[-1e-12]} below, {at[1e-12]} "
+                f"above",
             )
-            # Zero at and past the range — which for a law with no pull is everywhere past touching.
+            # Zero at and past the range — which for a law
+            # with no pull is everywhere past touching.
             reach = want["range"] if want["attraction"] > 0 else 0.0
             beyond = [
-                (d, f) for d, f in zip(ds, fs) if d >= reach > 0 or (reach == 0 and d > 0)
+                (d, f)
+                for d, f in zip(ds, fs, strict=False)
+                if d >= reach > 0 or (reach == 0 and d > 0)
             ]
             check(
                 all(f == 0 for _, f in beyond),
@@ -1656,9 +1710,10 @@ def main() -> int:
                 len(beyond) >= 20,
                 f"the {name} law's zero tail was sampled only {len(beyond)} times",
             )
-            # The knee, and the two slopes either side of it, taken against the penetration the law
-            # is written in: `repulsion` per unit of depth up to the knee, `repulsion * steep` past
-            # it — which is flat wherever steep is zero, and that flat is the old law's cap.
+            # The knee, and the two slopes either side of it, taken against the penetration the
+            # law is written in: `repulsion` per unit of depth up to the knee, `repulsion *
+            # steep` past it — which is flat wherever steep
+            # is zero, and that flat is the old law's cap.
             tol, rep = want["rigidity"], want["repulsion"]
             check(
                 abs(at[-tol] - rep * tol) < 1e-9,
@@ -1681,16 +1736,19 @@ def main() -> int:
                 deepest = min(fs)
                 check(
                     at[want["range"] / 2] == -want["attraction"],
-                    f"the {name} law's pull at half its range is {at[want['range'] / 2]}, not {-want['attraction']}",
+                    f"the {name} law's pull at half its range is {at[want['range'] / 2]}, not "
+                    f"{-want['attraction']}",
                 )
                 check(
                     deepest == -want["attraction"] and deepest == at[want["range"] / 2],
-                    f"the {name} law's deepest pull is {deepest}, not {-want['attraction']} at half the range",
+                    f"the {name} law's deepest pull is {deepest}, not {-want['attraction']} at "
+                    f"half the range",
                 )
 
-        # 10b. The attraction never overcomes the repulsion at contact. The two halves of the law do
-        # not overlap by construction, so this holds whatever the four numbers are: over every preset
-        # and a grid of 108 settings, the force at any penetration is a push and never a pull.
+        # 10b. The attraction never overcomes the repulsion at contact. The two halves of the
+        # law do not overlap by construction, so this holds whatever the four numbers are: over
+        # every preset and a grid of 108 settings, the force at any penetration is a push and
+        # never a pull.
         grid = [
             {"rigidity": g, "repulsion": r, "attraction": a, "range": w}
             for g in (0.002, 0.05, 0.15, 0.4)
@@ -1704,22 +1762,24 @@ def main() -> int:
         check(len(grid) == 112, f"the parameter grid is {len(grid)} settings")
 
         # 10c. The defaults reproduce today's behaviour to the bit: the old law was `contact *
-        # min(p, contactCap)` with contact 2500 and cap 0.15, and steep is zero exactly there, so
-        # every cached trajectory and every measurement of revisions 6 to 10 is unchanged.
+        # min(p, contactCap)` with contact 2500 and cap 0.15, and steep is zero exactly there,
+        # so every cached trajectory and every measurement of revisions 6 to 10 is unchanged.
         ask("setLawPreset", "default")
         check(ask("law")["steep"] == 0, "the shipped law's steep is not exactly zero")
         old_ps = [0.0, 1e-6, 0.001, 0.02, 0.075, 0.1499, 0.15, 0.1501, 0.2, 0.3, 0.42, 0.6]
         old = look("law/forces-at-penetration", penetrations=old_ps)
         drift = [
-            (p, f, 2500 * min(p, 0.15)) for p, f in zip(old_ps, old) if f != 2500 * min(p, 0.15)
+            (p, f, 2500 * min(p, 0.15))
+            for p, f in zip(old_ps, old, strict=False)
+            if f != 2500 * min(p, 0.15)
         ]
         check(
             drift == [],
             f"the shipped law is not the old hard-coded one to the bit: {drift[:3]}",
         )
 
-        # 10d. Every parameter clamps to its bounds and round-trips, and a setter given nothing —
-        # or something that is not a number — leaves the law alone rather than resetting it.
+        # 10d. Every parameter clamps to its bounds and round-trips, and a setter given nothing
+        # — or something that is not a number — leaves the law alone rather than resetting it.
         moved = look(
             "law/clamps-and-round-trips",
             low={"rigidity": -9, "repulsion": -9, "attraction": -9, "range": -9},
@@ -1746,18 +1806,18 @@ def main() -> int:
             moved["junk"] == moved["mid"] and moved["none"] == moved["mid"],
             f"a setter given junk or nothing moved the law: {moved}",
         )
-        # Revision 15: the cache key carries the walls' own law after a "|w", since a changed wall
-        # law needs its run rebuilt too. The claim here is about the pair law, so it reads the
-        # pair's segment rather than the whole key, which would fail on an unrelated change.
+        # Revision 15: the cache key carries the walls' own law after a "|w", since a changed
+        # wall law needs its run rebuilt too. The claim here is about the pair law, so it reads
+        # the pair's segment rather than the whole key, which would fail on an unrelated change.
         pair_segment = next(s for s in moved["stray"].split("|") if s.startswith("pair:"))
         check(
             pair_segment == "pair:0.123:3333:250:0.375",
             f"an unknown preset is not a no-op: {moved['stray']}",
         )
 
-        # 10e. The law is in the trajectory cache key. Two laws draw two trajectories, and the same
-        # law set twice draws the same one byte for byte: the cache is keyed rather than cleared, so
-        # coming back to a law already run is instant and gives what it gave before.
+        # 10e. The law is in the trajectory cache key. Two laws draw two trajectories, and the
+        # same law set twice draws the same one byte for byte: the cache is keyed rather than
+        # cleared, so coming back to a law already run is instant and gives what it gave before.
         keyed = look(
             "law/cache-key",
             n=17,
@@ -1772,8 +1832,9 @@ def main() -> int:
             f"the same law drew two different runs: {keyed['a']} then {keyed['c']}",
         )
 
-        # 10f. The plot. The curve is redrawn on every parameter, the two handles sit where the four
-        # numbers put them, and the pull handle is not drawn when there is nothing to pull with.
+        # 10f. The plot. The curve is redrawn on every parameter, the two handles sit where the
+        # four numbers put them, and the pull handle is
+        # not drawn when there is nothing to pull with.
         ask("setLawPreset", "default")
 
         def curve() -> str:
@@ -1790,7 +1851,8 @@ def main() -> int:
             curves.append(curve())
         check(
             len(set(curves)) == len(curves),
-            f"a parameter changed without redrawing the curve ({len(set(curves))} of {len(curves)} distinct)",
+            f"a parameter changed without redrawing the curve ({len(set(curves))} of "
+            f"{len(curves)} distinct)",
         )
         check(
             all(c.startswith("M") for c in curves),
@@ -1803,7 +1865,8 @@ def main() -> int:
             kx, ky = lp_knee(want)
             check(
                 abs(handles["knee"][0] - kx) < 0.01 and abs(handles["knee"][1] - ky) < 0.01,
-                f"the {name} law's knee is drawn at {handles['knee']}, not ({kx:.2f}, {ky:.2f})",
+                f"the {name} law's knee is drawn at {handles['knee']}, not ({kx:.2f}, "
+                f"{ky:.2f})",
             )
             check(
                 handles["top"] == lp_top(want),
@@ -1822,10 +1885,11 @@ def main() -> int:
                 px, py = lp_pull(want)
                 check(
                     abs(handles["pull"][0] - px) < 0.01 and abs(handles["pull"][1] - py) < 0.01,
-                    f"the {name} law's pull handle is drawn at {handles['pull']}, not ({px:.2f}, {py:.2f})",
+                    f"the {name} law's pull handle is drawn at {handles['pull']}, not "
+                    f"({px:.2f}, {py:.2f})",
                 )
-        # Dragging a handle is the same setter the sliders write through, so neither can get ahead of
-        # the other: the four numbers move and the four sliders follow.
+        # Dragging a handle is the same setter the sliders write through, so neither can get
+        # ahead of the other: the four numbers move and the four sliders follow.
         ask("setLawPreset", "default")
         dragged = look("law/drag-handle", handle="knee", d=-0.1, f=300)
         check(
@@ -1859,10 +1923,12 @@ def main() -> int:
         )
         check(
             abs(sampled["ends"][0] + 0.16) < 1e-12 and abs(sampled["ends"][1] - 0.25) < 1e-12,
-            f"the sticky law's curve spans {sampled['ends']}, not twice its knee through its range",
+            f"the sticky law's curve spans {sampled['ends']}, not twice its knee through its "
+            f"range",
         )
 
-        # 10g. The three presets are reachable from the panel, and the pressed one is the one in use.
+        # 10g. The three presets are reachable from the
+        # panel, and the pressed one is the one in use.
         for name in ("rigid", "soft", "sticky"):
             lit = look("law/press-preset", name=name)
             check(
@@ -1876,8 +1942,8 @@ def main() -> int:
             "a preset is still lit with the shipped law in use",
         )
 
-        # ---- step 11 (revision 11): the relationship graph. Orthogonal to the law: the law says
-        # what the force is, the graph says between whom. Guarded like the steps above.
+        # ---- step 11 (revision 11): the relationship graph. Orthogonal to the law: the law
+        # says what the force is, the graph says between whom. Guarded like the steps above.
         if (
             not {
                 "setRelationship",
@@ -1894,7 +1960,8 @@ def main() -> int:
             for failure in dict.fromkeys(failures):
                 print(" -", failure)
             print(
-                " - the relationship graph was not driven: setRelationship is not on the API yet"
+                " - the relationship graph was not driven: setRelationship is not on the API "
+                "yet"
             )
             return 1
         drive(
@@ -1917,12 +1984,13 @@ def main() -> int:
             "an unknown graph does not fall back to general",
         )
 
-        # 11a. Repulsion is never masked. Under every graph, with the sticky law's pull switched on,
-        # an open-ended run from the grid start settles to the same shallow overlap: no relationship
-        # lets two squares be pulled through each other, because the mask is never consulted on the
-        # penetrating side of the law. Measured over 2,400 steps: at n = 17 the deepest overlap is
-        # 0.0048 under general, 0.0052 under groups and 0.0056 under contact; at n = 29 it is 0.0048,
-        # 0.0046 and 0.0054. All are thousandths of a side, and none runs away.
+        # 11a. Repulsion is never masked. Under every graph, with the sticky law's pull switched
+        # on, an open-ended run from the grid start settles to the same shallow overlap: no
+        # relationship lets two squares be pulled through each other, because the mask is never
+        # consulted on the penetrating side of the law. Measured over 2,400 steps: at n = 17 the
+        # deepest overlap is 0.0048 under general, 0.0052 under groups and 0.0056 under contact;
+        # at n = 29 it is 0.0048, 0.0046 and 0.0054. All
+        # are thousandths of a side, and none runs away.
         overlaps: dict[tuple[int, str], float] = {}
         nears: dict[tuple[int, str], int] = {}
         for n in (17, 29):
@@ -1939,27 +2007,31 @@ def main() -> int:
         for (n, kind), pen in overlaps.items():
             check(
                 pen is not None and 0 < pen < 0.01,
-                f"the deepest overlap at n = {n} under {kind} is {pen}, not a few thousandths of a side",
+                f"the deepest overlap at n = {n} under {kind} is {pen}, not a few thousandths "
+                f"of a side",
             )
             check(
                 pen <= 2.5 * overlaps[(n, "general")],
-                f"{kind} at n = {n} overlaps {pen}, against {overlaps[(n, 'general')]} under general",
+                f"{kind} at n = {n} overlaps {pen}, against {overlaps[(n, 'general')]} under "
+                f"general",
             )
 
-        # 11b. Attraction IS masked. The same runs, counted by how many pairs the pull was reaching
-        # at the last step: at n = 17 that is 17 pairs under general against 0 under contact, and at
-        # n = 29 it is 31 against 0. Groups falls in between (5 and 1), being a mask that still
-        # relates whole blocks. The bands below are wide enough to survive a nudge to the physics
-        # and narrow enough that a mask quietly doing nothing would show.
+        # 11b. Attraction IS masked. The same runs, counted by how many pairs the pull was
+        # reaching at the last step: at n = 17 that is 17 pairs under general against 0 under
+        # contact, and at n = 29 it is 31 against 0. Groups falls in between (5 and 1), being a
+        # mask that still relates whole blocks. The bands below are wide enough to survive a
+        # nudge to the physics and narrow enough that a mask quietly doing nothing would show.
         for n, wide in ((17, 17), (29, 31)):
             general, contact = nears[(n, "general")], nears[(n, "contact")]
             check(
                 general >= wide // 2,
-                f"the pull reached only {general} pairs at n = {n} under general (measured {wide})",
+                f"the pull reached only {general} pairs at n = {n} under general (measured "
+                f"{wide})",
             )
             check(
                 contact <= 3,
-                f"the pull reached {contact} pairs at n = {n} under contact, which is not a mask (measured 0)",
+                f"the pull reached {contact} pairs at n = {n} under contact, which is not a "
+                f"mask (measured 0)",
             )
             check(
                 general >= 4 * max(contact, 1),
@@ -1967,7 +2039,8 @@ def main() -> int:
             )
             check(
                 nears[(n, "groups")] <= general,
-                f"n = {n}: groups reached {nears[(n, 'groups')]} pairs, more than general's {general}",
+                f"n = {n}: groups reached {nears[(n, 'groups')]} pairs, more than general's "
+                f"{general}",
             )
         # With no pull at all there is nothing to mask, whatever the graph says.
         drive(("setLawPreset", "default"), ("setRelationship", "general"))
@@ -1976,20 +2049,21 @@ def main() -> int:
             "the shipped law reports itself as attracting",
         )
 
-        # 11c. The groups mask is exactly the blocks' own cliques. `blocks()` splits a block into
-        # members and riders and the mask is built from `blockOf`, which carries both, so the count
-        # is the sum of (members + riders) choose 2 — n = 17's blocks are 5, 4 + 1 and 3 + 3, which
-        # is 10 + 10 + 15 = 35 pairs, not the 19 the member counts alone would give. The runs above
-        # left the stage on an open-ended run from the grid; everything from here reads the timeline,
-        # so the start goes back to the previous packing first.
+        # 11c. The groups mask is exactly the blocks' own cliques. `blocks()` splits a block
+        # into members and riders and the mask is built from `blockOf`, which carries both, so
+        # the count is the sum of (members + riders) choose 2 — n = 17's blocks are 5, 4 + 1 and
+        # 3 + 3, which is 10 + 10 + 15 = 35 pairs, not the 19 the member counts alone would
+        # give. The runs above left the stage on an open-ended run from the grid; everything
+        # from here reads the timeline, so the start goes back to the previous packing first.
         ask("setInitial", "previous")
-        # The counts fell when the crossing repair landed, and they were meant to: a block that was
-        # buying its coherence with two squares trading places across the packing is dissolved by
-        # the repair, so there are fewer members to form cliques from -- and occasionally more, where
-        # undoing one crossing lets a member join a block it was assigned away from. Measured before
-        # and after: 11 was 4 and is 3, 17 was 35 and is 40, 26 was 59 and is 53, 29 was 46 and is
-        # 42, 110 was 550 and is 365. What has not changed, and is the part that is a property rather
-        # than a number, is the line below: the mask IS the blocks' cliques, counted either way round.
+        # The counts fell when the crossing repair landed, and they were meant to: a block that
+        # was buying its coherence with two squares trading places across the packing is
+        # dissolved by the repair, so there are fewer members to form cliques from -- and
+        # occasionally more, where undoing one crossing lets a member join a block it was
+        # assigned away from. Measured before and after: 11 was 4 and is 3, 17 was 35 and is 40,
+        # 26 was 59 and is 53, 29 was 46 and is 42, 110 was 550 and is 365. What has not
+        # changed, and is the part that is a property rather than a number, is the line below:
+        # the mask IS the blocks' cliques, counted either way round.
         for n, want_edges in ((11, 3), (17, 40), (26, 53), (29, 42), (110, 365)):
             if ask("setStepN", n) != n:
                 continue
@@ -1997,7 +2071,8 @@ def main() -> int:
             counted = look("relationship/groups-mask-cliques")
             check(
                 counted["maskEdges"] == want_edges,
-                f"the groups mask at n = {n} is {counted['maskEdges']} pairs, not the measured {want_edges}",
+                f"the groups mask at n = {n} is {counted['maskEdges']} pairs, not the measured "
+                f"{want_edges}",
             )
             check(
                 counted["maskEdges"] == counted["byOf"] == counted["byBlocks"],
@@ -2008,13 +2083,14 @@ def main() -> int:
                 f"the groups mask at n = {n} reaches the 60,000-pair cap",
             )
         # 11d. **What a trajectory costs to build.** Every physical style runs a simulation of
-        # `bodies` squares over `steps` sub-steps, and the page builds one per pair on demand while
-        # a viewer waits. None of the algorithms here is worse than linear in the body count today,
-        # and this is what says so tomorrow: a change that made the broad phase quadratic, or that
-        # dropped the grid, would still produce the right picture and take ten times as long. The
-        # ceiling is loose on purpose -- thirteen times the measurement -- because this is wall
-        # clock on whatever machine is running it, and a flaky performance gate is worse than none.
-        # It is the shape of a regression this catches, not a tenth of a millisecond.
+        # `bodies` squares over `steps` sub-steps, and the page builds one per pair on demand
+        # while a viewer waits. None of the algorithms here is worse than linear in the body
+        # count today, and this is what says so tomorrow: a change that made the broad phase
+        # quadratic, or that dropped the grid, would still produce the right picture and take
+        # ten times as long. The ceiling is loose on purpose -- thirteen times the measurement
+        # -- because this is wall clock on whatever machine is running it, and a flaky
+        # performance gate is worse than none. It is the shape of a regression this catches, not
+        # a tenth of a millisecond.
         costs = []
         for n in (11, 100, 324):
             if ask("setStepN", n) != n:
@@ -2043,8 +2119,8 @@ def main() -> int:
             )
         )
 
-        # A general relationship has no mask to report, and the arriving square is in no block, so a
-        # size whose blocks the record does not carry attracts nobody under groups.
+        # A general relationship has no mask to report, and the arriving square is in no block,
+        # so a size whose blocks the record does not carry attracts nobody under groups.
         drive(("setStepN", 17), ("setRelationship", "general"))
         check(ask("relationship")["maskEdges"] is None, "a general relationship reports a mask")
         if ask("setStepN", 100) == 100:
@@ -2054,8 +2130,8 @@ def main() -> int:
                 "n = 100 carries no blocks, so its groups mask should be empty",
             )
 
-        # 11d. The contact target is the retained packing's own contact graph, relabelled into the
-        # run's square order. The counts are read off the record and pinned here.
+        # 11d. The contact target is the retained packing's own contact graph, relabelled into
+        # the run's square order. The counts are read off the record and pinned here.
         ask("setRelationship", "contact")
         for n, want_edges in (
             (17, 4),
@@ -2076,24 +2152,27 @@ def main() -> int:
                 ask("relationship")["edges"] == want_edges,
                 f"the relationship at n = {n} does not report the target's {want_edges} edges",
             )
-        # And settling on the retained frame realises that graph, by definition — bar one pair. The
-        # full-side test builds its axes from the lower-indexed square of the pair, so a contact
-        # right on the hundredth-of-a-side tolerance can read differently once the frame's order is
-        # relabelled into the run's. Measured over eleven retained frames that happens exactly once:
-        # n = 110's run-order pair 46-54 (the frame's squares 17 and 7, whose centres are 1.00415
-        # apart at 63.93 and 64.22 degrees) is a contact in the frame's order and not in the run's.
+        # And settling on the retained frame realises that graph, by definition — bar one pair.
+        # The full-side test builds its axes from the lower-indexed square of the pair, so a
+        # contact right on the hundredth-of-a-side tolerance can read differently once the
+        # frame's order is relabelled into the run's. Measured over eleven retained frames that
+        # happens exactly once: n = 110's run-order pair 46-54 (the frame's squares 17 and 7,
+        # whose centres are 1.00415 apart at 63.93 and 64.22 degrees) is a contact in the
+        # frame's order and not in the run's.
         short = []
         ask("setMode", "animate")
         for n in (5, 10, 11, 17, 26, 29, 100, 110, 172, 272, 324):
             if ask("setStepN", n) != n:
                 continue
-            # Revision 14: the retained frame is what a step comes to rest on, so it is Animate's
-            # settled stage that is read here. Pack's own stage is a starting arrangement.
+            # Revision 14: the retained frame is what a step comes to rest on, so it is
+            # Animate's settled stage that is read here.
+            # Pack's own stage is a starting arrangement.
             seek_to_end()
             rel = ask("relationship")
             check(
                 abs(rel["side"] - rel["record"]) < 1e-9,
-                f"the settled frame at n = {n} is a box of {rel['side']}, not the record's {rel['record']}",
+                f"the settled frame at n = {n} is a box of {rel['side']}, not the record's "
+                f"{rel['record']}",
             )
             if rel["met"] == rel["edges"]:
                 check(
@@ -2104,7 +2183,8 @@ def main() -> int:
                 short.append((n, rel["edges"], rel["met"]))
         check(
             short == [(110, 111, 110)],
-            f"the retained frames that do not realise their own contact graph are {short}, not the one measured",
+            f"the retained frames that do not realise their own contact graph are {short}, not "
+            f"the one measured",
         )
 
         # 11e. A graph from anywhere, and back to the record's.
@@ -2112,7 +2192,8 @@ def main() -> int:
         swapped = look("relationship/target-swap", graph=[[0, 1], [1, 2]])
         check(
             swapped["from"] == "record" and swapped["target"] == "record",
-            f"the target does not name where it came from: {swapped['from']} then {swapped['target']}",
+            f"the target does not name where it came from: {swapped['from']} then "
+            f"{swapped['target']}",
         )
         check(
             swapped["given"]["graph"] == [0, 1, 1, 2]
@@ -2122,14 +2203,16 @@ def main() -> int:
         )
         check(
             swapped["after"] == swapped["before"],
-            f"setTargetGraph(null) did not go back to the record's: {swapped['after']} against {swapped['before']}",
+            f"setTargetGraph(null) did not go back to the record's: {swapped['after']} against "
+            f"{swapped['before']}",
         )
 
-        # 11f. What the graph looks like on the stage. Revision 12 splits it in two, and the split
-        # is the point: a **contact** target is drawn whenever it is in force, overlay or no
-        # overlay, because it is what the run is being asked to realise; the **groups** cliques
-        # still ride the correspondence overlay and are still drawn only where the pull reaches,
-        # a completely connected block being thousands of pairs that are not doing anything.
+        # 11f. What the graph looks like on the stage. Revision 12 splits it in two, and the
+        # split is the point: a **contact** target is drawn whenever it is in force, overlay or
+        # no overlay, because it is what the run is being asked to realise; the **groups**
+        # cliques still ride the correspondence overlay and are still drawn only where the pull
+        # reaches, a completely connected block being
+        # thousands of pairs that are not doing anything.
         seek_to_end(
             ("setMode", "animate"),
             ("setLawPreset", "sticky"),
@@ -2153,8 +2236,8 @@ def main() -> int:
             no_overlay["contact"]["shown"] and no_overlay["contact"]["drawn"] > 0,
             f"the contact graph is not drawn without the overlay: {no_overlay['contact']}",
         )
-        # Every target edge is drawn, in one of two classes, and on the record's own settled frame
-        # they are all met: n = 29's seventeen target contacts are seventeen solid lines.
+        # Every target edge is drawn, in one of two classes, and on the record's own settled
+        # frame they are all met: n = 29's seventeen target contacts are seventeen solid lines.
         targeted = ask("relationship")["edges"]
         rel = ask("relationship")
         check(
@@ -2164,11 +2247,13 @@ def main() -> int:
         check(
             no_overlay["contact"]["met"] == rel["met"]
             and no_overlay["contact"]["unmet"] == targeted - rel["met"],
-            f"the two classes do not split the graph the way the count does: {no_overlay['contact']} against {rel}",
+            f"the two classes do not split the graph the way the count does: "
+            f"{no_overlay['contact']} against {rel}",
         )
         check(
             no_overlay["contact"]["met"] > 0 and no_overlay["contact"]["unmet"] == 0,
-            f"the retained frame's own contact graph is not drawn as met: {no_overlay['contact']}",
+            f"the retained frame's own contact graph is not drawn as met: "
+            f"{no_overlay['contact']}",
         )
         # The two classes are drawn differently, which is what makes the difference readable.
         styles = look("mask/link-styles")
@@ -2181,7 +2266,8 @@ def main() -> int:
         pair_styles = look("mask/link-styles")
         check(
             pair_styles["met"] is not None and pair_styles["unmet"] is not None,
-            f"one of the two classes is not on the stage to compare: {pair_styles} (settled: {styles})",
+            f"one of the two classes is not on the stage to compare: {pair_styles} (settled: "
+            f"{styles})",
         )
         check(
             pair_styles["met"] != pair_styles["unmet"],
@@ -2196,12 +2282,12 @@ def main() -> int:
             grouped["shown"] and 0 < grouped["drawn"] < related,
             f"the groups mask draws {grouped['drawn']} of {related} related pairs",
         )
-        ask("setOverlay", False)
+        ask("setOverlay", False)  # noqa: FBT003 -- the page API's own argument
         check(
             look("mask/links")["drawn"] == 0, "the groups mask survives the overlay going off"
         )
-        # And the correspondence overlay is still one control: the graph added no second checkbox
-        # for itself, the drawing mode's toggle being a mode and not an overlay.
+        # And the correspondence overlay is still one control: the graph added no second
+        # checkbox for itself, the drawing mode's toggle being a mode and not an overlay.
         controls = look("controls/checkbox-ids")
         check(
             [c for c in controls if "mask" in c or "overlay" in c] == [],
@@ -2225,12 +2311,13 @@ def main() -> int:
             snapped["shown"] is snapped["was"],
             f"the snap box does not read back the state it drives: {snapped}",
         )
-        # The bias sets the graph, and brings a pull with it when the law has none — there being no
-        # point masking a force that is not there. The two are one gesture, and the order they are
-        # done in matters: `setLaw` runs `updateSegments`, which writes `bias-toggle.checked` back
-        # from the relationship, so a handler that reads `ev.target.checked` again *after* calling
-        # `setLaw` reads the value it has just been reset to. The two checks below are exactly that
-        # reading, and they are the ones to look at first if this step goes red.
+        # The bias sets the graph, and brings a pull with it when the law has none — there being
+        # no point masking a force that is not there. The two are one gesture, and the order
+        # they are done in matters: `setLaw` runs `updateSegments`, which writes
+        # `bias-toggle.checked` back from the relationship, so a handler that reads
+        # `ev.target.checked` again *after* calling `setLaw` reads the value it has just been
+        # reset to. The two checks below are exactly that reading, and they are the ones to look
+        # at first if this step goes red.
         drive(("setLawPreset", "default"), ("setRelationship", "general"))
         biased = look("controls/bias-toggle")
         check(
@@ -2262,8 +2349,8 @@ def main() -> int:
             and again["kind"] == "general",
             f"the bias does not toggle the graph from a law that already pulls: {again}",
         )
-        # `setRelationship` on the API changes the graph and nothing else, which is what makes the
-        # convenience above a property of the control rather than of the physics.
+        # `setRelationship` on the API changes the graph and nothing else, which is what makes
+        # the convenience above a property of the control rather than of the physics.
         drive(("setLawPreset", "default"), ("setRelationship", "general"))
         alone = look("relationship/set-touches-law", kind="contact")
         check(
@@ -2292,13 +2379,14 @@ def main() -> int:
             ("setStepN", 17),
         )
 
-        # ---- step 12 (revision 12): nothing the owner clicks moves while a run plays. The defect
-        # this closes is a real one and it will come back: the live readouts sat inline with the
-        # buttons, so a figure gaining a digit slid every control after it sideways under the
-        # cursor. Every button's bounding box is captured at two instants of a run and compared,
-        # for both of the page's playbacks — Pack's open-ended optimisation, whose clock, step
-        # count, overlap and target fraction all move, and a Animate, which additionally crosses a
-        # pair boundary and so redraws every readout in the panel rather than only the live ones.
+        # ---- step 12 (revision 12): nothing the owner clicks moves while a run plays. The
+        # defect this closes is a real one and it will come back: the live readouts sat inline
+        # with the buttons, so a figure gaining a digit slid every control after it sideways
+        # under the cursor. Every button's bounding box is captured at two instants of a run and
+        # compared, for both of the page's playbacks — Pack's open-ended optimisation, whose
+        # clock, step count, overlap and target fraction all move, and a Animate, which
+        # additionally crosses a pair boundary and so redraws every readout in the panel rather
+        # than only the live ones.
         drive(
             ("setMode", "pack"),
             ("setStepN", 17),
@@ -2311,7 +2399,7 @@ def main() -> int:
         check(len(early) >= 20, f"only {len(early)} buttons found in the controls")
         ask("optimizeStep", 2400)
         late = look("controls/button-boxes")
-        moved = [(a, b) for a, b in zip(early, late) if a != b]
+        moved = [(a, b) for a, b in zip(early, late, strict=False) if a != b]
         check(moved == [], f"a control moved while a Pack run played: {moved[:3]}")
         # And the two readouts that drive it really did change, so the comparison has teeth.
         drive(("setStepN", 17), ("setInitial", "grid"), ("optimizeStep", 5))
@@ -2321,7 +2409,8 @@ def main() -> int:
             first_clock != text_of("clock"),
             "the clock did not change over the run, so the no-reflow check proves nothing",
         )
-        # The Animate half: a range played across a pair boundary, where the whole panel is rewritten.
+        # The Animate half: a range played across a pair
+        # boundary, where the whole panel is rewritten.
         drive(
             ("setInitial", "previous"),
             ("setLawPreset", "default"),
@@ -2335,11 +2424,11 @@ def main() -> int:
         early = look("controls/button-boxes")
         drive(("goTo", 28), ("seek", 1.9))
         late = look("controls/button-boxes")
-        moved = [(a, b) for a, b in zip(early, late) if a != b]
+        moved = [(a, b) for a, b in zip(early, late, strict=False) if a != b]
         check(moved == [], f"a control moved while a Animate run played: {moved[:3]}")
         # And the same for the settings a press changes: switching the style, the size, the law
-        # preset, the graph or growth rewrites the whole panel, and none of it may move a control.
-        # (Pack and Animate are exempt: they deliberately show different controls.)
+        # preset, the graph or growth rewrites the whole panel, and none of it may move a
+        # control. (Pack and Animate are exempt: they deliberately show different controls.)
         drive(
             ("setMode", "pack"),
             ("setStepN", 17),
@@ -2360,7 +2449,11 @@ def main() -> int:
             ("the size again", ("setStepN", 5)),
         ):
             drive(call)
-            moved = [(a, b) for a, b in zip(base, look("controls/button-boxes")) if a != b]
+            moved = [
+                (a, b)
+                for a, b in zip(base, look("controls/button-boxes"), strict=False)
+                if a != b
+            ]
             check(moved == [], f"changing {label} moved a control: {moved[:3]}")
         drive(
             ("setStyle", "tween"),
@@ -2371,7 +2464,8 @@ def main() -> int:
             ("setStepN", 17),
         )
         # Every readout that changes at runtime is in a slot of its own: fixed width, or a full
-        # line below the control it belongs to. This is the property, stated where it can be read.
+        # line below the control it belongs to. This
+        # is the property, stated where it can be read.
         slots = look(
             "controls/readout-slots",
             ids=[
@@ -2401,16 +2495,16 @@ def main() -> int:
         )
         drive(("stopAll",), ("setMode", "pack"), ("setStepN", 17), ("seek", 0))
 
-        # ---- step 13 (revision 12): no position bar in Pack. Pack is one fixed n, so the bar that
-        # carries the corpus's scale has nothing to say about it. Animate keeps it. The property that
-        # matters alongside is that hiding it moves nothing else: the bar is absolutely positioned
-        # inside the stage, so the stage, the panel and the controls are the same box either way.
-        # Revision 16: the position bar and its scale along the bottom of the stage are gone --
-        # the owner found them distracting, and the stage carries facts about the packing rather
-        # than apparatus about the playback. What was checked here was that hiding the bar in Pack
-        # moved nothing else; with no bar there is nothing to hide, and what remains worth holding
-        # is the other half of that property: the two modes lay the stage out identically, so a
-        # switch between them does not move the picture.
+        # ---- step 13 (revision 12): no position bar in Pack. Pack is one fixed n, so the bar
+        # that carries the corpus's scale has nothing to say about it. Animate keeps it. The
+        # property that matters alongside is that hiding it moves nothing else: the bar is
+        # absolutely positioned inside the stage, so the stage, the panel and the controls are
+        # the same box either way. Revision 16: the position bar and its scale along the bottom
+        # of the stage are gone -- the owner found them distracting, and the stage carries facts
+        # about the packing rather than apparatus about the playback. What was checked here was
+        # that hiding the bar in Pack moved nothing else; with no bar there is nothing to hide,
+        # and what remains worth holding is the other half of that property: the two modes lay
+        # the stage out identically, so a switch between them does not move the picture.
         drive(("setMode", "pack"), ("setStepN", 17))
         packed = look("layout/stage-boxes")
         check(packed["progress"], "the position bar is still in the page")
@@ -2426,11 +2520,11 @@ def main() -> int:
         check(look("dom/hidden", id="kind-tag"), "Pack still draws the step header")
         drive(("setMode", "animate"), ("setInitial", "previous"), ("setStepN", 17), ("seek", 0))
 
-        # ---- step 14 (revision 12): a contact graph drawn by hand. The owner: "it would be nice
-        # if you can click and drag a link between any two boxes to add to their contact graph."
-        # The property that matters is not the gesture but where the edges *go*: they are the same
-        # object the record-derived graph is, they reach the mask by the same path, and nothing in
-        # the physics is told which of the two it is looking at.
+        # ---- step 14 (revision 12): a contact graph drawn by hand. The owner: "it would be
+        # nice if you can click and drag a link between any two boxes to add to their contact
+        # graph." The property that matters is not the gesture but where the edges *go*: they
+        # are the same object the record-derived graph is, they reach the mask by the same path,
+        # and nothing in the physics is told which of the two it is looking at.
         if not {"edges", "setEdges", "clearEdges", "setDrawing", "linkStart", "linkEnd"} <= api:
             browser.close()
             print("FAILED")
@@ -2449,8 +2543,9 @@ def main() -> int:
             ("clearEdges",),
             ("setTargetSource", "record"),
         )
-        # What the record's own graph is at this n, read off the page before anything is drawn, so
-        # the check that the target goes back to it compares against the record and not a constant.
+        # What the record's own graph is at this n, read off the page before anything is drawn,
+        # so the check that the target goes back to it
+        # compares against the record and not a constant.
         ask("setRelationship", "contact")
         record_edges = ask("relationship")["edges"]
         check(
@@ -2473,7 +2568,7 @@ def main() -> int:
         def screen_of(index: int) -> tuple[float, float]:
             return tuple(look("stage/screen-of", index=index))
 
-        ask("setDrawing", True)
+        ask("setDrawing", True)  # noqa: FBT003 -- the page API's own argument
         check(ask("drawing") is True, "the drawing mode did not come on")
         check(
             ask("targetSource") == "drawn",
@@ -2519,7 +2614,7 @@ def main() -> int:
 
         # 14b. The square drag still works, and the two gestures are kept apart by the toggle
         # alone: with drawing on nothing is ever picked up, with it off nothing is ever drawn.
-        ask("setDrawing", True)
+        ask("setDrawing", True)  # noqa: FBT003 -- the page API's own argument
         page.mouse.move(ax, ay)
         page.mouse.down()
         page.mouse.move(ax + 40, ay + 40, steps=3)
@@ -2539,9 +2634,9 @@ def main() -> int:
             "the drag did not mark the run hand-edited, so it did not happen",
         )
 
-        # 14c. The drawn graph is the same object the record's is. It reaches the mask by the one
-        # path, it is what the readout counts, and it is held per n because an index is a different
-        # square at a different n.
+        # 14c. The drawn graph is the same object the record's is. It reaches the mask by the
+        # one path, it is what the readout counts, and it is held per n because an index is a
+        # different square at a different n.
         seek_to_end(
             ("setInitial", "previous"),
             ("setStepN", 11),
@@ -2593,14 +2688,16 @@ def main() -> int:
             recorded["target"] == "record"
             and recorded["edges"] == record_edges
             and recorded["drawn"] == 2,
-            f"the record's graph is not what the target goes back to (its {record_edges} edges): {recorded}",
+            f"the record's graph is not what the target goes back to (its {record_edges} "
+            f"edges): {recorded}",
         )
         check(ask("clearEdges") == [], "clearEdges left something behind")
         drive(("setStepN", 5), ("clearEdges",), ("setStepN", 11))
 
-        # 14d. A drawn graph drives a run. The trajectory cache is keyed by it, so two graphs draw
-        # two runs and the same graph twice draws the same one; and the physics never learns which
-        # source it came from, so a drawn copy of the record's graph drives the record's run.
+        # 14d. A drawn graph drives a run. The trajectory cache is keyed by it, so two graphs
+        # draw two runs and the same graph twice draws the same one; and the physics never
+        # learns which source it came from, so a drawn copy
+        # of the record's graph drives the record's run.
         drive(
             ("setLawPreset", "sticky"),
             ("setStepN", 17),
@@ -2618,26 +2715,30 @@ def main() -> int:
                 ["recordAgain", None],
             ],
         )
-        # The key is what the trajectory cache is keyed by, so this is the property directly: three
-        # graphs are three keys, and one graph reached twice is one key both times. The *outcome*
-        # is the weaker test — two masks the pull never reaches can settle to the same arrangement,
-        # which is revision 11's own measured finding about the contact bias — so the run is only
-        # asserted to be stable, never to differ.
+        # The key is what the trajectory cache is keyed by, so this is the property directly:
+        # three graphs are three keys, and one graph reached twice is one key both times. The
+        # *outcome* is the weaker test — two masks the pull never reaches can settle to the same
+        # arrangement, which is revision 11's own measured finding about the contact bias — so
+        # the run is only asserted to be stable, never to differ.
         check(
             len({keyed[k]["key"] for k in ("record", "two", "three")}) == 3,
-            f"three graphs share a cache key: {[keyed[k]['key'] for k in ('record', 'two', 'three')]}",
+            f"three graphs share a cache key: "
+            f"{[keyed[k]['key'] for k in ('record', 'two', 'three')]}",
         )
         check(
             keyed["two"]["key"] == keyed["twoAgain"]["key"],
-            f"the same drawn graph keys two runs: {keyed['two']['key']} against {keyed['twoAgain']['key']}",
+            f"the same drawn graph keys two runs: {keyed['two']['key']} against "
+            f"{keyed['twoAgain']['key']}",
         )
         check(
             keyed["two"]["miss"] == keyed["twoAgain"]["miss"],
-            f"the same drawn graph drew two different runs: {keyed['two']} against {keyed['twoAgain']}",
+            f"the same drawn graph drew two different runs: {keyed['two']} against "
+            f"{keyed['twoAgain']}",
         )
         check(
             keyed["record"] == keyed["recordAgain"],
-            f"going back to the record's graph did not go back to its run: {keyed['record']} against {keyed['recordAgain']}",
+            f"going back to the record's graph did not go back to its run: {keyed['record']} "
+            f"against {keyed['recordAgain']}",
         )
         # The record's own graph, drawn by hand, is the record's own run: the physics is told
         # nothing about where the edges came from.
@@ -2647,9 +2748,9 @@ def main() -> int:
             f"the record's graph drawn by hand drives a different run: {same}",
         )
 
-        # 14e. The readout says how much of the target is realised, out of how much, and the side
-        # the arrangement is in — and it says it whether or not anything is simulating, because it
-        # is a measurement of the picture rather than of a run.
+        # 14e. The readout says how much of the target is realised, out of how much, and the
+        # side the arrangement is in — and it says it whether or not anything is simulating,
+        # because it is a measurement of the picture rather than of a run.
         seek_to_end(
             ("setStepN", 11),
             ("clearEdges",),
@@ -2659,10 +2760,10 @@ def main() -> int:
             ("setRelationship", "contact"),
             ("setTargetSource", "record"),
         )
-        # The row that carried this under the stage is gone with the rest of the readout, so what is
-        # checked is the measurement itself: how much of the target graph is realised, out of how
-        # much, and the side the arrangement is in. It is a measurement of the picture rather than of
-        # a run, which is why it holds with nothing simulating.
+        # The row that carried this under the stage is gone with the rest of the readout, so
+        # what is checked is the measurement itself: how much of the target graph is realised,
+        # out of how much, and the side the arrangement is in. It is a measurement of the
+        # picture rather than of a run, which is why it holds with nothing simulating.
         state_rel = ask("relationship")
         check(
             state_rel["edges"] > 0 and 0 <= state_rel["met"] <= state_rel["edges"],
@@ -2678,18 +2779,20 @@ def main() -> int:
             ("seek", 0),
         )
 
-        # ---- step 15 (revision 13): the starting size redraws the arrangement. The owner: "when we
-        # change size in Pack mode it should change the size of the boxes in the initial arrangement
-        # right?" It did not. `setGrowth({size: 0.5})` stored the value and `growth().size` read it
-        # back, but every drawn square stayed at full width until a run was started — because the
-        # previous-packing start, which is the default, has no arrangement of its own on the stage,
-        # only the step animation, and the size was written into a run that did not exist.
+        # ---- step 15 (revision 13): the starting size redraws the arrangement. The owner:
+        # "when we change size in Pack mode it should change the size of the boxes in the
+        # initial arrangement right?" It did not. `setGrowth({size: 0.5})` stored the value and
+        # `growth().size` read it back, but every drawn square stayed at full width until a run
+        # was started — because the previous-packing start, which is the default, has no
+        # arrangement of its own on the stage, only the step animation, and the size was written
+        # into a run that did not exist.
         #
-        # The property, stated as geometry rather than as a transform string: **the drawn width of
-        # the squares is proportional to the size setting**, at once, in Pack, under every one of the
-        # three starts, with growth off as well as on, and with no run started. Reading the rendered
-        # box rather than the `scale()` in the transform is deliberate — it is the picture the owner
-        # is looking at, and it catches a scale that is written but not applied.
+        # The property, stated as geometry rather than as a transform string: **the drawn width
+        # of the squares is proportional to the size setting**, at once, in Pack, under every
+        # one of the three starts, with growth off as well as on, and with no run started.
+        # Reading the rendered box rather than the `scale()` in the transform is deliberate — it
+        # is the picture the owner is looking at, and it
+        # catches a scale that is written but not applied.
         def widths() -> list[float]:
             return look("stage/square-widths")
 
@@ -2707,8 +2810,9 @@ def main() -> int:
         for start in ("previous", "random", "grid"):
             for grow_on in (False, True):
                 drive(("setInitial", start), ("setGrowth", {"on": grow_on, "size": 1}))
-                # Half size, then a third of it again, both from a stage that has not been run: the
-                # ratio of the drawn widths must be the ratio of the sizes, square for square.
+                # Half size, then a third of it again, both from a stage that has not been run:
+                # the ratio of the drawn widths must be the
+                # ratio of the sizes, square for square.
                 ask("setGrowth", {"size": 0.9})
                 check(
                     (ask("optimizeState")["steps"] or 0) == 0,
@@ -2724,7 +2828,8 @@ def main() -> int:
                 )
                 check(all(w > 0 for w in big), f"{where}: a square drew at no width at all")
                 worst = max(
-                    (abs(s / b - 0.5) for b, s in zip(big, small) if b > 0), default=1.0
+                    (abs(s / b - 0.5) for b, s in zip(big, small, strict=False) if b > 0),
+                    default=1.0,
                 )
                 check(
                     worst < 2e-3,
@@ -2733,24 +2838,26 @@ def main() -> int:
                 )
                 # And it is the setting that did it, not a run: nothing was played.
                 check(not ask("state")["playing"], f"{where}: the size change started a run")
-        # A size below one is not a picture of nothing: it is the frame a run started at that instant
-        # would begin from, container and all. That is what makes the small squares mean something,
-        # and it is checked against a real run rather than asserted.
+        # A size below one is not a picture of nothing: it is the frame a run started at that
+        # instant would begin from, container and all. That is what makes the small squares mean
+        # something, and it is checked against a real run rather than asserted.
         drive(("setInitial", "previous"), ("setGrowth", {"on": True, "size": 0.4}))
         paused = staged()
         drive(("optimize", True), ("pause",))
         started = staged()
         check(
             paused == started,
-            f"the staged arrangement is not the frame a run starts from: {paused} against {started}",
+            f"the staged arrangement is not the frame a run starts from: {paused} against "
+            f"{started}",
         )
         check(
             float(started["box"]) > 1,
             f"the run starts in no container at all: {started['box']}",
         )
         # The container is the run's own starting box and the size does not move it: while the
-        # squares are growing the walls hold (measured in revision 11 — the `clean` rule deadlocked
-        # at 0.76 when they did not), so a reduced size is small squares in a full-size frame.
+        # squares are growing the walls hold (measured in revision 11 — the `clean` rule
+        # deadlocked at 0.76 when they did not), so a
+        # reduced size is small squares in a full-size frame.
         boxes = {}
         for size in (0.3, 0.6, 0.9):
             drive(("setInitial", "previous"), ("setGrowth", {"size": size}))
@@ -2759,10 +2866,10 @@ def main() -> int:
             len(set(boxes.values())) == 1,
             f"the starting container moved with the size, which no growth run does: {boxes}",
         )
-        # Revision 14 drops the condition revision 13 put on that staging: Pack shows its n squares
-        # from the first frame at every size, so a full size leaves the arrangement on the stage
-        # rather than uncovering the timeline underneath it. Leaving Pack is what gives the timeline
-        # back, and that is the reversibility that matters.
+        # Revision 14 drops the condition revision 13 put on that staging: Pack shows its n
+        # squares from the first frame at every size, so a full size leaves the arrangement on
+        # the stage rather than uncovering the timeline underneath it. Leaving Pack is what
+        # gives the timeline back, and that is the reversibility that matters.
         ask("setGrowth", {"size": 1})
         check(
             ask("optimizeState")["on"] is True,
@@ -2778,8 +2885,8 @@ def main() -> int:
             ask("optimizeState")["on"] is True,
             "entering Pack did not stage the arrangement again",
         )
-        # The three starting-arrangement buttons have the same duty and are checked the same way:
-        # each takes effect on the drawing at once, with nothing played.
+        # The three starting-arrangement buttons have the same duty and are checked the same
+        # way: each takes effect on the drawing at once, with nothing played.
         drive(("setGrowth", {"on": False, "size": 1}), ("setStepN", 17), ("seek", 0))
         drawn = {}
         for start in ("previous", "random", "grid", "previous"):
@@ -2788,7 +2895,8 @@ def main() -> int:
             drawn.setdefault(start, []).append(staged())
         check(
             len({tuple(v[0]["squares"]) for v in drawn.values()}) == 3,
-            "two of the three starting arrangements draw the same picture, so a button did nothing",
+            "two of the three starting arrangements draw the same picture, so a button did "
+            "nothing",
         )
         check(
             drawn["previous"][0] == drawn["previous"][1],
@@ -2801,12 +2909,12 @@ def main() -> int:
             ("seek", 0),
         )
 
-        # ---- step 16 (revision 14): in Pack, n squares are on the stage from the first frame. The
-        # owner: "if 17 is set below in pack mode why does the diagram show 16 to begin with". They
-        # did: the pool held seventeen and sixteen were drawn, because Pack opened on the timeline,
-        # which stages the seventeenth square's *arrival* — a transition model in a mode that has no
-        # transitions. The property is counted rather than argued: what is drawn, at rest and after a
-        # restart, under every start.
+        # ---- step 16 (revision 14): in Pack, n squares are on the stage from the first frame.
+        # The owner: "if 17 is set below in pack mode why does the diagram show 16 to begin
+        # with". They did: the pool held seventeen and sixteen were drawn, because Pack opened
+        # on the timeline, which stages the seventeenth square's *arrival* — a transition model
+        # in a mode that has no transitions. The property is counted rather than argued: what is
+        # drawn, at rest and after a restart, under every start.
         drive(
             ("stopAll",),
             ("setMode", "pack"),
@@ -2830,7 +2938,8 @@ def main() -> int:
                     after = look("stage/visible-count")
                     check(
                         after == n,
-                        f"Pack at n = {n} from the {kind} start draws {after} squares after a restart, not {n}",
+                        f"Pack at n = {n} from the {kind} start draws {after} squares after a "
+                        f"restart, not {n}",
                     )
                     check(
                         not ask("state")["playing"],
@@ -2839,8 +2948,8 @@ def main() -> int:
                 counted[(n, kind)] = at_rest
         check(len(counted) >= 12, f"only {len(counted)} start-and-size pairs were counted")
         # And the step header goes with the step: `16 -> 17 · matched · max move …` describes a
-        # transition, and Pack makes none. Animate keeps it, and hiding it moves nothing, the tag
-        # being absolutely positioned on the stage.
+        # transition, and Pack makes none. Animate keeps it, and hiding it moves nothing, the
+        # tag being absolutely positioned on the stage.
         tag = look("modes/step-header", n=17)
         check(tag["packed"]["hidden"], "Pack still draws the step header")
         check(not tag["swept"]["hidden"], "Animate lost the step header as well")
@@ -2850,25 +2959,27 @@ def main() -> int:
         )
         check(
             tag["packed"]["stage"] == tag["swept"]["stage"],
-            f"hiding the step header moved the stage: {tag['packed']['stage']} against {tag['swept']['stage']}",
+            f"hiding the step header moved the stage: {tag['packed']['stage']} against "
+            f"{tag['swept']['stage']}",
         )
 
-        # ---- step 17 (revision 14): restart, beside play and pause. The owner asked for it there,
-        # and then for the thought behind it: "perhaps the restart makes more sense for Pack than
-        # for Animate." One definition serves both — **back to the beginning of whatever play would
-        # play** — so the transport keeps its shape across the modes. What is checked is that
-        # definition, and that it is not the other reset: restart puts the picture back and keeps
-        # every setting, where `reset` puts the parameters back and leaves the picture alone.
+        # ---- step 17 (revision 14): restart, beside play and pause. The owner asked for it
+        # there, and then for the thought behind it: "perhaps the restart makes more sense for
+        # Pack than for Animate." One definition serves both — **back to the beginning of
+        # whatever play would play** — so the transport keeps its shape across the modes. What
+        # is checked is that definition, and that it is not the other reset: restart puts the
+        # picture back and keeps every setting, where `reset` puts the parameters back and
+        # leaves the picture alone.
         check("restart" in api, "the API lacks restart")
         seat = look("controls/restart-seat")
         check(
             seat["i"] == seat["j"] + 1 and seat["sameRow"] and 0 <= seat["gap"] < 40,
             f"restart is not beside play and pause: {seat}",
         )
-        # Revision 15: the owner's refinement -- the button does two things and should say which.
-        # Paused it skips back to the start; running, what it actually does is restart the run, so
-        # it swaps to a circling arrow and renames itself, exactly as play swaps to pause. The name
-        # is therefore state-dependent and the check reads the paused one.
+        # Revision 15: the owner's refinement -- the button does two things and should say
+        # which. Paused it skips back to the start; running, what it actually does is restart
+        # the run, so it swaps to a circling arrow and renames itself, exactly as play swaps to
+        # pause. The name is therefore state-dependent and the check reads the paused one.
         check(
             seat["glyph"] and seat["name"] in ("Restart", "Back to the start"),
             f"restart is not drawn in the transport's own convention: {seat}",
@@ -2880,7 +2991,8 @@ def main() -> int:
         )
         check(
             packed_restart["after"]["steps"] == 0 and packed_restart["after"]["on"],
-            f"restart in Pack did not go back to the start of the run: {packed_restart['after']}",
+            f"restart in Pack did not go back to the start of the run: "
+            f"{packed_restart['after']}",
         )
         check(
             packed_restart["after"]["pull"] == packed_restart["before"]["pull"]
@@ -2892,7 +3004,7 @@ def main() -> int:
             "restart from a paused run started the clock",
         )
         # A run that was playing keeps playing, from the top: it is a transport control.
-        ask("optimize", True)
+        ask("optimize", True)  # noqa: FBT003 -- the page API's own argument
         page.wait_for_timeout(350)
         rolling = look("transport/restart-while-playing")
         page.wait_for_timeout(300)
@@ -2914,8 +3026,8 @@ def main() -> int:
             and animate_restart["pair"] == animate_restart["first"],
             f"restart in Animate did not go to the first step of the range: {animate_restart}",
         )
-        # And the two are different controls: reset puts the parameters back and leaves the picture,
-        # restart puts the picture back and leaves the parameters.
+        # And the two are different controls: reset puts the parameters back and leaves the
+        # picture, restart puts the picture back and leaves the parameters.
         parted = look("transport/reset-against-restart", n=17, steps=400)
         check(
             parted["reset"]["pull"] == 0 and parted["before"]["pull"] > 0,
@@ -2929,8 +3041,8 @@ def main() -> int:
             ("setStepN", 17),
         )
 
-        # ---- step 18 (revision 14): every control sits with the axis it belongs to. A mode is a
-        # choice on three independent axes — scope (one n, or a range), strategy (the law, the
+        # ---- step 18 (revision 14): every control sits with the axis it belongs to. A mode is
+        # a choice on three independent axes — scope (one n, or a range), strategy (the law, the
         # graph, growth, annealing, and which solver runs) and presentation (colour, timing,
         # phasing, desaturation) — so a control belongs to an axis and not to the mode that
         # happened to introduce it. Three consequences are checked here.
@@ -2952,7 +3064,8 @@ def main() -> int:
         )
         check(
             placed["width"].endswith("px") and float(placed["width"][:-2]) > 0,
-            f"the solver select has no width of its own, so hiding an option would resize it: {placed}",
+            f"the solver select has no width of its own, so hiding an option would resize it: "
+            f"{placed}",
         )
         # 18b. The tween is not a solver: it interpolates toward a known answer, and Pack has no
         # answer to interpolate toward. It is taken out of Pack's choices rather than left
@@ -2970,7 +3083,8 @@ def main() -> int:
         )
         check(
             offered["packing"]["style"] == "physics" and "tween" in offered["packing"]["note"],
-            f"entering Pack on the tween did not fall back to the physics and say so: {offered['packing']}",
+            f"entering Pack on the tween did not fall back to the physics and say so: "
+            f"{offered['packing']}",
         )
         check(
             offered["chosen"]["note"] == "",
@@ -2986,9 +3100,10 @@ def main() -> int:
             f"leaving Pack did not give the tween back: {offered['back']}",
         )
         # 18c. Timing and phasing are Animate's: dwell, move, settle, the motion phasing and the
-        # full beat all describe a step, and Pack has none. The group is hidden there — and hidden
-        # *in place*, because taking its box out of the wrapping row would rewrap the panel, shorten
-        # the controls and resize the stage, which is the reflow rule revision 12 established.
+        # full beat all describe a step, and Pack has none. The group is hidden there — and
+        # hidden *in place*, because taking its box out of the wrapping row would rewrap the
+        # panel, shorten the controls and resize the stage,
+        # which is the reflow rule revision 12 established.
         timing_group = look("controls/timing-group", n=17)
         check(
             timing_group["animating"]["holds"],
@@ -3004,17 +3119,17 @@ def main() -> int:
             f"Pack still shows the timing group: {timing_group['packing']}",
         )
         # Revision 15: this used to require `visibility: hidden` so the group kept its width and
-        # the row could not rewrap. That reserved 1145 px of dead space in Pack and pushed the view
-        # onto a line of its own, which is the ragged layout the owner reported. The group is a
-        # whole row now, so removing it moves nothing beside it -- which is what the boxes below
-        # actually assert. The hidden box's own geometry is deliberately not among them: a box
-        # that is not drawn should not have any.
+        # the row could not rewrap. That reserved 1145 px of dead space in Pack and pushed the
+        # view onto a line of its own, which is the ragged layout the owner reported. The group
+        # is a whole row now, so removing it moves nothing beside it -- which is what the boxes
+        # below actually assert. The hidden box's own geometry is deliberately not among them: a
+        # box that is not drawn should not have any.
         # What must hold is that removing the group cannot reflow anything beside it, which is
         # guaranteed by it being the only panel in its row rather than by measuring neighbours.
         # The panel is deliberately shorter in Pack and the stage correspondingly larger: a mode
-        # with fewer controls should give the packing more room, and pretending otherwise is what
-        # reserved the dead space in the first place. So the law, which shares no row with it,
-        # must not move; the shake, which follows it down the panel, is expected to rise.
+        # with fewer controls should give the packing more room, and pretending otherwise is
+        # what reserved the dead space in the first place. So the law, which shares no row with
+        # it, must not move; the shake, which follows it down the panel, is expected to rise.
         check(
             timing_group["packing"]["alone_in_row"],
             "the timing group shares its row, so hiding it would reflow its neighbours",
@@ -3034,69 +3149,71 @@ def main() -> int:
             print(" -", failure)
         return 1
     print(
-        "OK: one view with no tab machinery left and setTab/tab surviving as no-ops, every control in "
-        "one panel and the stage still fitting; the chooser opening on n = 17 as the one-step range 17 "
-        "to 17, nine quick picks each setting both ends, clamped both ways; the range widening to the "
-        "whole corpus in one click, clamped, collapsing to one step, and scoping the run and the bar's "
-        "scale; the gap bar reading the panel's own s(n) bounds, sweeping to the record under style A, "
-        "missing under a free run, alive in blind mode, and clear of the `n =` line and the panel edge; "
-        "the bar holding still through the motion and catching up when it settles, with the per-frame "
-        "sparkline gone and refreshGap redrawing it on demand; three initial conditions, the random "
-        "one reproducible and the grid one the trivial grid, an open-ended run that accumulates "
-        "steps, closes the walls, reports its box beside its overlap, and resumes and stops with the "
-        "transport, with the two chart options on the page and setSnap still on the API; a "
-        "hand that picks the topmost square, pins it against its neighbours, turns it on shift, "
-        "moves the readout as it goes, marks the run hand-edited and regresses no key; and the two "
-        "modes — Pack showing one n whose ends never come apart and whose transport is the "
-        "open-ended run reported as a seconds counter, Animate showing a range and remembering it, "
-        "with every shared setting surviving a switch either way and the scrubber gone; and the "
-        "colouring being the angle map and nothing else — every retained frame from 5 to 324 "
-        "painted exactly as colour() says, each class taking the slot its own centre alone gives, "
-        "a shared angle taking the same fill across frames but for the one class pair that "
-        "straddles a five-degree band edge, fillsFor answering the same table whatever is on the "
-        "stage, a square that holds its angle holding its hue across a step, all twenty families "
-        "darkening from no contacts to four at a held hue, an upright grid start painted in the "
-        "teal family alone and shaded by its contacts, and no switch left: no rule control and "
-        "neither setColorRule nor the k key moving a fill; and colour being the square's own "
-        "identity by default — 42 greens inside the teal-to-citron band, all distinct, the "
-        "closest two 0.0237 apart in OkLab and consecutive identities five times further, a "
-        "square keeping its fill through a settle that turns it, two frames of one n painting "
-        "a square the same, no contact shading under identity, and Animate alone repainting its "
-        "resting frame in the angle map; "
-        "one editable force law matching the written-out formula at every sampled gap under all "
-        "four of default, rigid, soft and sticky — continuous at touching, flat at and past its "
-        "range, its hump peaking at half the range at exactly the attraction, its knee at the "
-        "rigidity with the stated slope either side — never pulling at any penetration over a "
-        "112-setting grid, reproducing the old hard-coded 2500 * min(p, 0.15) to the bit at the "
-        "shipped defaults with steep exactly zero, clamping and round-tripping every parameter, "
-        "keying the trajectory cache so two laws draw two runs and one law drawn twice is "
-        "byte-identical, and drawn as a plot whose curve redraws on every parameter, whose two "
-        "handles sit where the four numbers put them, whose pull handle is hidden with no pull, "
-        "and whose drags move the numbers and the sliders together, with the three presets "
-        "reachable from the panel and lit when in use; and the relationship graph beside it, "
-        "orthogonal to the law — three kinds settable and reported, repulsion never masked (the "
-        "deepest overlap staying a few thousandths under every graph at n = 17 and n = 29) while "
-        "attraction is (17 and 31 pairs in reach under general against none under contact), the "
-        "groups mask exactly the blocks' cliques counted over members and riders, the contact "
-        "target the record's own graph at 4, 17, 180, 111, 322 and 612 edges and realised by the "
-        "retained frame itself bar n = 110's one tolerance-width pair, a target graph settable "
-        "from outside and returnable to the record's, the mask drawn through the one overlay "
-        "control on the pairs the pull is actually reaching and on none under general, and the "
-        "two chart options driving the snap and the contact bias; "
-        "no control moving while either playback runs or when the style, the dial, the preset, the "
-        "graph, growth or n is changed, every live readout in a fixed slot or on a line of its own; "
-        "no position bar in Pack, in a run or in a capture, Animate keeping it, and the stage, panel "
-        "and controls the same box either way; and a contact graph drawn by hand — a real pointer "
-        "press, drag and release adding an edge and the same gesture taking it away, the square "
-        "drag untouched beside it, the graph normalised and held per n, reaching the mask by the "
-        "one path the record's does, keyed into the trajectory cache by its own contents so the "
-        "record's graph drawn by hand drives the record's run, and reported as a fraction and a "
-        "container side; and the starting size redrawing the arrangement at once — the drawn width "
-        "of every square proportional to the size under all three starts with growth off and on and "
-        "nothing played, the staged frame identical to the one a run started at that instant begins "
-        "from, the starting container the run's own and unmoved by the size, a full size restoring "
-        "the timeline, and each of the three starting-arrangement buttons drawing its own picture "
-        "the moment it is pressed."
+        "OK: one view with no tab machinery left and setTab/tab surviving as no-ops, every "
+        "control in one panel and the stage still fitting; the chooser opening on n = 17 as "
+        "the one-step range 17 to 17, nine quick picks each setting both ends, clamped both "
+        "ways; the range widening to the whole corpus in one click, clamped, collapsing to one "
+        "step, and scoping the run and the bar's scale; the gap bar reading the panel's own "
+        "s(n) bounds, sweeping to the record under style A, missing under a free run, alive in "
+        "blind mode, and clear of the `n =` line and the panel edge; the bar holding still "
+        "through the motion and catching up when it settles, with the per-frame sparkline gone "
+        "and refreshGap redrawing it on demand; three initial conditions, the random one "
+        "reproducible and the grid one the trivial grid, an open-ended run that accumulates "
+        "steps, closes the walls, reports its box beside its overlap, and resumes and stops "
+        "with the transport, with the two chart options on the page and setSnap still on the "
+        "API; a hand that picks the topmost square, pins it against its neighbours, turns it "
+        "on shift, moves the readout as it goes, marks the run hand-edited and regresses no "
+        "key; and the two modes — Pack showing one n whose ends never come apart and whose "
+        "transport is the open-ended run reported as a seconds counter, Animate showing a "
+        "range and remembering it, with every shared setting surviving a switch either way and "
+        "the scrubber gone; and the colouring being the angle map and nothing else — every "
+        "retained frame from 5 to 324 painted exactly as colour() says, each class taking the "
+        "slot its own centre alone gives, a shared angle taking the same fill across frames "
+        "but for the one class pair that straddles a five-degree band edge, fillsFor answering "
+        "the same table whatever is on the stage, a square that holds its angle holding its "
+        "hue across a step, all twenty families darkening from no contacts to four at a held "
+        "hue, an upright grid start painted in the teal family alone and shaded by its "
+        "contacts, and no switch left: no rule control and neither setColorRule nor the k key "
+        "moving a fill; and colour being the square's own identity by default — 42 greens "
+        "inside the teal-to-citron band, all distinct, the closest two 0.0237 apart in OkLab "
+        "and consecutive identities five times further, a square keeping its fill through a "
+        "settle that turns it, two frames of one n painting a square the same, no contact "
+        "shading under identity, and Animate alone repainting its resting frame in the angle "
+        "map; one editable force law matching the written-out formula at every sampled gap "
+        "under all four of default, rigid, soft and sticky — continuous at touching, flat at "
+        "and past its range, its hump peaking at half the range at exactly the attraction, its "
+        "knee at the rigidity with the stated slope either side — never pulling at any "
+        "penetration over a 112-setting grid, reproducing the old hard-coded 2500 * min(p, "
+        "0.15) to the bit at the shipped defaults with steep exactly zero, clamping and "
+        "round-tripping every parameter, keying the trajectory cache so two laws draw two runs "
+        "and one law drawn twice is byte-identical, and drawn as a plot whose curve redraws on "
+        "every parameter, whose two handles sit where the four numbers put them, whose pull "
+        "handle is hidden with no pull, and whose drags move the numbers and the sliders "
+        "together, with the three presets reachable from the panel and lit when in use; and "
+        "the relationship graph beside it, orthogonal to the law — three kinds settable and "
+        "reported, repulsion never masked (the deepest overlap staying a few thousandths under "
+        "every graph at n = 17 and n = 29) while attraction is (17 and 31 pairs in reach under "
+        "general against none under contact), the groups mask exactly the blocks' cliques "
+        "counted over members and riders, the contact target the record's own graph at 4, 17, "
+        "180, 111, 322 and 612 edges and realised by the retained frame itself bar n = 110's "
+        "one tolerance-width pair, a target graph settable from outside and returnable to the "
+        "record's, the mask drawn through the one overlay control on the pairs the pull is "
+        "actually reaching and on none under general, and the two chart options driving the "
+        "snap and the contact bias; no control moving while either playback runs or when the "
+        "style, the dial, the preset, the graph, growth or n is changed, every live readout in "
+        "a fixed slot or on a line of its own; no position bar in Pack, in a run or in a "
+        "capture, Animate keeping it, and the stage, panel and controls the same box either "
+        "way; and a contact graph drawn by hand — a real pointer press, drag and release "
+        "adding an edge and the same gesture taking it away, the square drag untouched beside "
+        "it, the graph normalised and held per n, reaching the mask by the one path the "
+        "record's does, keyed into the trajectory cache by its own contents so the record's "
+        "graph drawn by hand drives the record's run, and reported as a fraction and a "
+        "container side; and the starting size redrawing the arrangement at once — the drawn "
+        "width of every square proportional to the size under all three starts with growth off "
+        "and on and nothing played, the staged frame identical to the one a run started at "
+        "that instant begins from, the starting container the run's own and unmoved by the "
+        "size, a full size restoring the timeline, and each of the three starting-arrangement "
+        "buttons drawing its own picture the moment it is pressed."
     )
     return 0
 

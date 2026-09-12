@@ -301,8 +301,7 @@ def check(result: dict, *, verbose: bool = True) -> list[str]:
         lift = 5 if m["exactTall"] and not m["exactEmpty"] else 0
         if m["degreeUnder"] != want:
             failures.append(
-                f"n={n}: the degree note sits under the {m['degreeUnder']} line, "
-                f"not the {want}"
+                f"n={n}: the degree note sits under the {m['degreeUnder']} line, not the {want}"
             )
         elif abs(m["degreeGap"] - lift) > 0.5:
             failures.append(
@@ -333,8 +332,7 @@ def check(result: dict, *, verbose: bool = True) -> list[str]:
         failures.append(f"{len(sizes)} distinct sizes on the stage: {sizes}")
     if sizes[-1] > MAX_SIZE_RATIO * sizes[0]:
         failures.append(
-            f"largest size {sizes[-1]} is more than {MAX_SIZE_RATIO} x "
-            f"the smallest {sizes[0]}"
+            f"largest size {sizes[-1]} is more than {MAX_SIZE_RATIO} x the smallest {sizes[0]}"
         )
     lines = sorted(
         ((m["recordHeight"], m["record"], n) for n, m in measures.items()), reverse=True
@@ -394,8 +392,7 @@ def check_headline(result: dict, *, verbose: bool = True) -> list[str]:
             )
         if abs(box_offset) > 0.5:
             failures.append(
-                f"n={n}: the `n =` line is not flush left with the numeral "
-                f"({box_offset:.1f}px)"
+                f"n={n}: the `n =` line is not flush left with the numeral ({box_offset:.1f}px)"
             )
     return failures
 
