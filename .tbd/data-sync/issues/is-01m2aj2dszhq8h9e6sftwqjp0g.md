@@ -3,9 +3,9 @@ type: is
 id: is-01m2aj2dszhq8h9e6sftwqjp0g
 title: Make BC329 deadlines and process-group reaping end-to-end
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -19,7 +19,11 @@ dependencies:
     target: is-01m2anzgc2aqn6vzx29ps3rpn2
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T10:19:37.150Z
-updated_at: 2026-09-12T11:59:36.722Z
+updated_at: 2026-09-12T16:11:31.542Z
+closed_at: 2026-09-12T16:11:31.542Z
+close_reason: Implemented, integrated, independently reviewed, and published on the clean PR 156 stack by f1e397cd. Their remaining follow-up risks are separately tracked under calibration, parent preflight, partial-direction integration, and admission beads; no BC329 scientific target ran.
+resolution: null
+duplicate_of: null
 ---
 The WIP scientific clock begins after parent process launch and interpreter/module startup, partial receipts can retain stale scientific_seconds, and the supervisor's mocked TERM/KILL tests do not establish that descendants are gone. Start the scientific clock at the declared parent invocation boundary, propagate an absolute deadline, update every terminal and partial clock consistently, reject NaN and infinity for every duration, and add a real subprocess-tree control that proves the process group is reaped after grace. Preserve invalid scientific classifications when the outer supervisor records process outcomes.
 

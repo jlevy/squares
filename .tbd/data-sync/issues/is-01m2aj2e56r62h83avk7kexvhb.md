@@ -3,9 +3,9 @@ type: is
 id: is-01m2aj2e56r62h83avk7kexvhb
 title: Promote any BC329 exact-route disagreement before timeout classification
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -19,7 +19,11 @@ dependencies:
     target: is-01m2anzgc2aqn6vzx29ps3rpn2
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T10:19:37.509Z
-updated_at: 2026-09-12T11:28:10.951Z
+updated_at: 2026-09-12T16:11:31.534Z
+closed_at: 2026-09-12T16:11:31.534Z
+close_reason: Implemented, integrated, independently reviewed, and published on the clean PR 156 stack by f1e397cd. Their remaining follow-up risks are separately tracked under calibration, parent preflight, partial-direction integration, and admission beads; no BC329 scientific target ran.
+resolution: null
+duplicate_of: null
 ---
 The WIP records per-direction dense/slab disagreements but checks the aggregate only after the complete exact route. If a later direction times out, an already observed method disagreement can be published merely as incomplete. Make the first verified reader disagreement an invalid invocation with scientific status unresolved, retain its exact direction and both witnesses/values, and ensure later timeout or supervisor handling cannot downgrade or erase that classification. Add a disagreement-before-timeout regression and independent readback mutation.
 

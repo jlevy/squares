@@ -3,9 +3,9 @@ type: is
 id: is-01m2anz8ybfp4qym3sts3xf9vr
 title: Make BC329 raw and exact schedulers bounded and completion-aware
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root implementation
 labels:
@@ -20,7 +20,11 @@ dependencies:
     target: is-01m2aj2e56r62h83avk7kexvhb
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T11:27:48.158Z
-updated_at: 2026-09-12T14:13:24.519Z
+updated_at: 2026-09-12T16:11:31.518Z
+closed_at: 2026-09-12T16:11:31.518Z
+close_reason: Implemented, integrated, independently reviewed, and published on the clean PR 156 stack by f1e397cd. Their remaining follow-up risks are separately tracked under calibration, parent preflight, partial-direction integration, and admission beads; no BC329 scientific target ran.
+resolution: null
+duplicate_of: null
 ---
 The raw and normalized-exact routes still use ProcessPoolExecutor.map over the whole direction net. Eager submission weakens the memory bound, and ordered consumption can hide an already completed dense/slab disagreement behind a slower earlier direction until the deadline. Replace both routes with a bounded completion-order scheduler, cap outstanding tasks at a declared multiple of the worker count, atomically retain every landed result, preserve deterministic minima and final net ordering, promote any completed exact disagreement before timeout classification, and terminate workers on incomplete exits. Add adversarial controls for slow-prefix/fast-disagreement, deadline, bounded submission, deterministic ties, and partial readback before admission.
 

@@ -1,18 +1,20 @@
 ---
 type: is
 id: is-01m24tw6gbrcrtf2msvtckq7xs
-title: "N11 overnight: measure the due validation-efficiency checkpoint"
+title: Measure the next due n=11 validation-efficiency checkpoint
 kind: task
 status: open
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-10T04:58:03.658Z
-updated_at: 2026-09-10T16:04:50.418Z
+updated_at: 2026-09-12T16:12:01.814Z
 ---
-Perform the bounded W5 checkpoint for the post-PR139 overnight session. Reconstruct the OR-12 cadence from actual agenda commitments and session phases; session numbers are not work-block counts. Read maintained packing-validate --budgets and compare actual measured gate receipts only under their declared resource/selection regimes. An administrative status update does not reset the cadence and reading ceilings alone is not a measurement.
+At the next checkpoint due under OR-12, reconstruct the four-to-eight-block cadence from actual active daytime blocks and measured gate receipts. Select at most one demonstrated bottleneck, bind an equivalence guard, and measure a prospective change; otherwise retain the measured no-change decision. Do not infer that a checkpoint is due from the superseded overnight schedule, and do not treat administrative updates as efficiency measurements.
 
-First bound the timing/coverage evidence from the matching PR139 checkpoint. The local records preflight on d21 passed31/73steps in100.46s at10CPUs/jobs1/inner1; this is descriptive and differs from the two-CPU reference. Do not write it as a reference baseline. Select at most one demonstrated bottleneck, with a fixed correctness/equivalence guard and prospective measurement. Otherwise retain the no-change decision with the measured scope. Use thirty-minute cells at the due entry and hours2/5/8 as cadence requires; source/control work continues independently during remote CI.
+## Notes
+
+The earlier PR139 records preflight took 100.46 seconds at 10 CPUs with jobs 1 and inner 1; that is descriptive evidence under a different host regime, not the two-CPU reference baseline. This bead remains open until the active block count makes the next OR-12 checkpoint due.

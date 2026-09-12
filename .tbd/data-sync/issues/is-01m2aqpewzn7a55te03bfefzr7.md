@@ -3,18 +3,18 @@ type: is
 id: is-01m2aqpewzn7a55te03bfefzr7
 title: Make interval refutation outrank speculative tail failures
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - tooling
 dependencies: []
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T11:57:56.510Z
-updated_at: 2026-09-12T12:24:38.667Z
-closed_at: null
-close_reason: null
+updated_at: 2026-09-12T16:11:31.578Z
+closed_at: 2026-09-12T16:11:31.578Z
+close_reason: Implemented, integrated, independently reviewed, and published on the clean PR 156 stack by f1e397cd. Their remaining follow-up risks are separately tracked under calibration, parent preflight, partial-direction integration, and admission beads; no BC329 scientific target ran.
 resolution: null
 duplicate_of: null
 ---

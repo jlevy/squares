@@ -3,9 +3,9 @@ type: is
 id: is-01m2aj2egf99fwpwh005y9er6n
 title: Define and test crash durability for BC329 partial receipts
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -19,7 +19,11 @@ dependencies:
     target: is-01m2anzgc2aqn6vzx29ps3rpn2
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T10:19:37.870Z
-updated_at: 2026-09-12T11:27:55.777Z
+updated_at: 2026-09-12T16:11:31.571Z
+closed_at: 2026-09-12T16:11:31.571Z
+close_reason: Implemented, integrated, independently reviewed, and published on the clean PR 156 stack by f1e397cd. Their remaining follow-up risks are separately tracked under calibration, parent preflight, partial-direction integration, and admission beads; no BC329 scientific target ran.
+resolution: null
+duplicate_of: null
 ---
 The WIP calls atomic_write_text and describes partial output as durable, but rename atomicity alone does not fsync file content or its directory. State the required crash model. If process or host-crash durability is part of admission, fsync the file and containing directory at declared checkpoints and test the call/order contract; otherwise narrow the claim and acceptance language to atomic process-level retention. Do not advertise durable scientific partials beyond the property actually established.
 
