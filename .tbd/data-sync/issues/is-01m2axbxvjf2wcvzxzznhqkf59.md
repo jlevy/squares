@@ -3,9 +3,9 @@ type: is
 id: is-01m2axbxvjf2wcvzxzznhqkf59
 title: Finalize PR148 disposition and preserve the n11 stack order
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root PR stack lane
 labels:
@@ -14,7 +14,11 @@ labels:
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-12T13:37:02.833Z
-updated_at: 2026-09-13T18:58:16.026Z
+updated_at: 2026-09-13T22:06:49.812Z
+closed_at: 2026-09-13T22:06:49.811Z
+close_reason: "2026-09-13 22:06 UTC: after exact-head review, green CI and clean mergeability for PR148 b43d3011 and PR149 8d0a3ff2, and in accordance with the user-directed ready-stack merge, GitHub asynchronous stack merge request ca455f5c-2904-4e02-8c55-2f60805910b4 merged both into main at f2e24e07be8c94fa3ac603c3534dce7c454da99b. Verified both PRs MERGED and PR156 automatically retargeted to main while remaining DRAFT; PR157 remains above PR156. The earlier no-automatic-merge note described a former handoff state. PR156 timing repair and PR157 integration remain separate open beads."
+resolution: null
+duplicate_of: null
 ---
 Own the remaining pull-request state after the explainer implementation beads closed: confirm PR148 still targets current main, is mergeable, and has all required checks green; keep PR149 and the BC329 runner PR correctly stacked above it; record the eventual user-directed merge or any new upstream reconciliation. Do not conflate the proven T026 lower bound with the prospective unrun BC329 endpoint.
 
