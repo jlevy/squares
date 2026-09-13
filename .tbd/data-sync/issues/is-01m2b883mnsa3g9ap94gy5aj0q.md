@@ -5,7 +5,7 @@ title: Retain observed worker topology in BC329 calibration profiles
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation; source-distinct review
 labels:
@@ -21,10 +21,10 @@ dependencies:
     target: is-01m2cv85q2ajjgsnx7076ta8cp
 parent_id: is-01m2app5e71qnp9z5vfp9vppbp
 created_at: 2026-09-12T16:47:12.009Z
-updated_at: 2026-09-13T07:38:31.521Z
+updated_at: 2026-09-13T07:56:48.537Z
 ---
 Run-sheet review F-1. Before any positive full-shape profile, extend the maintained fixed-core-packet-calibration/v1 measurement contract to distinguish configured route workers from observed execution. Retain the supervised coordinator PID and per-sample PID/PPID/PGID/phase data, or an equivalent route-scoped worker lifecycle record; derive and validate observed child count and maximum simultaneous children for raw and normalized-exact phases. Refuse metrics admission if the parallel phase has no observation capable of checking worker execution. Keep RSS explicitly a sampled process-group sum with missed-peak/shared-page limits. Add focused mutation and lifecycle tests, source-distinct review, and do not run a profile or BC329.
 
 ## Notes
 
-Observed-worker topology is integrated on clean PR156 local head faa4085db8fb4cf42154afec0022a0585f59196d without changing the accepted CAL-5 staging owner. The combined target-free runner/calibration/topology/coordinator suite passes 226 tests in 26.78s, and the edit tier passes all 45 selected steps in 75.78s with clean Ruff and zero BasedPyright findings. Source-distinct exact-head acceptance review is active. No positive profile or BC329 target ran.
+Observed-worker topology is integrated through local PR156 commit 0cc0311a, including the repaired coordinator consumer. Root target-free validation: 242 integrated tests passed in 24.59s; Ruff check/format and BasedPyright are clean. Exact-head source-distinct review still must accept the combined producer/consumer contract before this bead closes. No positive profile or BC329 target ran.
