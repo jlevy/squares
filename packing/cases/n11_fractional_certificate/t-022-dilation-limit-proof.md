@@ -1,15 +1,19 @@
 # T-022 Dilation-Limit Corollary, Derived from T-018
 
-The retained T-018 certificate implies the exact weak bound
+The retained T-018 certificate proves the exact lower bound
 
 ```text
 s(11) >= 38100*sqrt(8100042893309449)/899996306539
       = 3.8100257236147034071933954110...
 ```
 
-T-022 is a limit corollary, not a certificate at the displayed endpoint.
-It neither decides whether eleven squares fit at that endpoint nor proves a strict lower
-bound.
+T-022 proves this ordinary lower bound by a dilation-limit argument: the strict rational
+certificate family approaches the displayed side from below, and rational density plus
+upward embedding establishes the `>=` conclusion at its supremum.
+The record’s `endpoint_certificate: false` says only that this proof supplies no single
+certificate at the displayed side.
+It does not weaken the theorem or its evidence.
+The method does not establish a `>` conclusion there.
 
 ## One-Minute Proof
 
@@ -147,7 +151,9 @@ The proof uses neither compactness nor attainment of the infimum.
 At `q = c`, equation (1) is an equality.
 A finite net gap attains `D`, and its midpoint realizes the corresponding maximum
 angular error, so this uniform strict-containment argument cannot include the endpoint.
-It supplies none of these stronger claims:
+This limit on the method does not weaken the exact conclusion `s(11) >= cL`, which
+follows from the whole strict family by density and upward embedding.
+The proof does not supply any of these stronger statements:
 
 - the retained data form a certificate at `cL`;
 - no packing exists at `cL`;

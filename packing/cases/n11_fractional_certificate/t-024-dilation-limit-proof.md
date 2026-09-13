@@ -2,16 +2,21 @@
 
 The retained T-018 atoms, placed on a finer direction net at a larger shrunken side and
 rescaled by one rational factor, form a certificate of the retained form whose sharpened
-dilation family implies the exact weak bound
+dilation family proves the exact lower bound
 
 ```text
 s(11) >= 3175000*sqrt(518400042893309449)/598960960743657
       = 3.81660950278886223509...
 ```
 
-T-024 is a limit corollary, not a certificate at the displayed endpoint.
-It neither decides whether eleven squares fit at that endpoint nor proves a strict lower
-bound. It moves the exact lower endpoint by `0.0065838` beyond T-022.
+T-024 proves this ordinary lower bound by a dilation-limit argument: the strict rational
+certificate family approaches the displayed side from below, and rational density plus
+upward embedding establishes the `>=` conclusion at its supremum.
+The record’s `endpoint_certificate: false` says only that this proof supplies no single
+certificate at the displayed side.
+It does not weaken the theorem or its evidence.
+The method does not establish a `>` conclusion there.
+The new result raises the proved lower bound by `0.0065838` beyond T-022.
 
 The registered rung is the certificate on the 1440-step net, `C_1440`. A certificate of
 the same kind on the 720-step net, `C_720`, is retained beside it: its own dilation
@@ -117,7 +122,9 @@ ceiling `13716000000000000/3594594251080001 = 3.815729687...` with exact positiv
 At `q = c` the sharpened test is an equality; a finite net gap attains `D` and its
 midpoint realises the maximum angular error, so the uniform argument cannot include the
 endpoint. Nothing here claims that the retained data form a certificate at `cL`, that no
-packing exists at `cL`, or that `s(11) > cL`.
+packing exists at `cL`, or that `s(11) > cL`. This limit on the method does not weaken
+the exact conclusion `s(11) >= cL`, which follows from the whole strict family by
+density and upward embedding.
 
 The value is the supremum for uniform dilation of these atoms with one concentric core
 per square and strict support containment on the 1440-step net.

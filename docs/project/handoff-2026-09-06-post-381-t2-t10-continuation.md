@@ -177,7 +177,7 @@ The continuation starts from these fixed facts:
 | T+2 boundary | `2026-09-06T05:33:28Z` |
 | Portfolio allocation | 120 active minutes consumed; 1,320 remain |
 | T-022 promotion commit | `6b4cde0a` on this branch; independent review is a separate transport |
-| T-022 exact weak bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703407...` |
+| T-022 exact lower bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703407...` |
 | T-022 proof-record SHA-256 | `16a52d54b95cbcdf7e97eab3b40b829ca24126141b7914ff224d2794af47d442` |
 | BC-232 retained leg-01 state | `f91999b452bf89f49e2d4cda9827efbf57623a4196688b5feba0819bc7e851e2` |
 | BC-232 retained leg-01 summary | `d8c50db8770b12d43baa6d9e2c7384a52a0f250f8cee26b6a036c99b3cb3350e` |
@@ -210,7 +210,7 @@ rewriting the historical T+2 manifests.
 Preserve these claim labels:
 
 - `T-018` remains the formal first-party claim `s(11) >= 381/100`.
-- `T-022` is the weak bound `s(11) >= 38100*sqrt(8100042893309449)/899996306539`,
+- `T-022` is the lower bound `s(11) >= 38100*sqrt(8100042893309449)/899996306539`,
   obtained from every strict rational member of the uniform fixed-`B`, single-core
   dilation family. It is not a certificate or no-fit decision at the algebraic endpoint
   and proves no strict inequality there.

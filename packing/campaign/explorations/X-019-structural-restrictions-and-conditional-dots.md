@@ -52,7 +52,8 @@ bracket is $3.810025723614703\ldots\le s(11)\le U=3.877083590022814\ldots$; reac
 $3.84$ would remove about 45% of this remaining gap.
 That is an objective, not a prediction of what one night can prove.
 [T-022](../../cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) is a
-weak-limit lower bound, not an endpoint no-fit certificate.
+dilation-limit proof of the ordinary lower bound
+`s(11) >= 38100*sqrt(8100042893309449)/899996306539`.
 
 ## What Would Move the Argument Forward
 

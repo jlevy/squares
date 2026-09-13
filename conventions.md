@@ -146,10 +146,10 @@ This is a filename convention only: prose and structured records keep the canoni
 uppercase id `T-018`. `README.md` remains the exception for a directory’s orientation
 page. The kinds in use, each generated from the certificate so its figures cannot drift:
 `t-NNN-proof-card.md`, the one-page statement with every constant and the one command
-that checks it; `t-NNN-verifiable-claim-<bound>.md`, the self-contained claim with
-theorem, proof, verifier and certificate, one per retained bound;
-`t-NNN-proof-visual.svg`, the figure; and `t-NNN-explainer.md`, the article a reader is
-sent to, published beside the page it is rendered from.
+that checks it; `t-NNN-verifiable-claim-<bound-or-theorem>.md`, the self-contained claim
+with theorem, proof, verifier and certificate, one per retained bound or named algebraic
+theorem; `t-NNN-proof-visual.svg`, the figure; and `t-NNN-explainer.md`, the article a
+reader is sent to, published beside the page it is rendered from.
 A new result takes the same names with its own id.
 
 The published form of a document is named the same way as the case-local one.

@@ -17,9 +17,10 @@ This repository contains:
   the survey are produced and checked by AI agents running a recorded process:
   hypotheses registered before measurement, every claim graded, every defect logged.
 
-The [**explainer page**](https://jlevy.github.io/squares/) is the best introduction to
-the proof: the `s(11)` bound and its five conditions in one page, with every figure
-drawn from the certificate it explains.
+The [**v0.4.0 explainer page**](https://jlevy.github.io/squares/) starts with an
+interactive point-certificate proof, then shows how threshold atoms and a dilation limit
+reach the current `s(11)` lower bound.
+Its figures remain drawn from the point certificates they explain.
 
 [![One hundred known-best square packings arranged from n equals one through one hundred, each labeled with its best-known upper bound and, where the value is still open, the strongest lower bound independently verified here.](packing/atlas/known-best/known-best-1-100.png)](https://jlevy.github.io/squares/known-best-1-100.pdf)
 
@@ -50,8 +51,8 @@ The problem is elementary to state and remains open even at small `n`.
 
 ## New Results
 
-The [results register](packing/frontier/RESULTS.md) collects first-party and
-load-bearing whole results.
+The [results register](packing/frontier/RESULTS.md) collects first-party results and the
+published results needed to interpret them.
 Each result has a `T-NNN` ID and the classifications defined in
 [`epistemics.md`](epistemics.md): **V**, the highest verification rung supported by its
 cited evidence, and **C**, what this repository has recorded or performed itself.
@@ -91,21 +92,23 @@ Results first established here, as far as the recorded source searches show:
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
-  Two refinements, recorded in the
-  [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
-  [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
-  packets, give `s(11) ≥ 3.816609502788862…` as a weak limit bound; neither decides fit
-  at its endpoint. The largest side certified at the container side itself is
-  `191/50 = 3.82`, on a certificate of a different kind — point atoms plus *threshold
-  atoms*, whose budget rule is what carries the side past the point method’s proved
-  ceiling — stated for a stranger in the
-  [T-025 proof packet](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md).
-  The verified bound now stands at
-  `955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…`, the weak limit
-  of those same threshold atoms re-certified on a 1440-step direction net
-  ([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)),
-  which again decides no fit at its own endpoint.
-  The certificate at `3.81` supplies the proof explained here.
+  [T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md)
+  refines the point-certificate bound to `3.8100257…`.
+  [T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md)
+  rechecks the point atoms on a finer direction net and proves `s(11) ≥ 3.8166095…`.
+  [T-025](packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md)
+  introduces point atoms plus *threshold atoms*, whose stronger budget rule carries the
+  side past the point method’s proved ceiling, and directly proves
+  `s(11) ≥ 191/50 = 3.82`. The strongest proved lower bound now stands at
+  `s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 =
+  3.8264474…`, proved from those same threshold atoms re-certified on a 1440-step
+  direction net and an exact dilation-limit argument
+  ([T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md)).
+  It is registered as `V4/C5`: machine-verified exact or interval-certified evidence
+  with passing replay, confirmed by distinct exact event-cell and interval coverage
+  methods and a mapped source-distinct review of the complete claim.
+  The explainer uses the `3.81` certificate as its visual worked example, then proves
+  the threshold-counting and dilation steps that establish the headline bound directly.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
   bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s `4.5058`,
   taken from a source rather than proved here.

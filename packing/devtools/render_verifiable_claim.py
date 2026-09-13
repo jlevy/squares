@@ -5,10 +5,11 @@ and its proof, the finite form of Condition 5, how this repository decided the b
 standard-library verifier `verify_claim.py` byte for byte, and the certificate it
 decides, byte for byte as well, so a reader can paste that one file into a coding agent
 or check it by hand without the rest of the repository. Both come from one template, so
-the shared text cannot drift between them. The proof card states the headline bound on
-one page, from the same certificate and the register, so its figures cannot drift from
-either. `--check` refuses a stale copy of any of the three; the test suite runs that
-check.
+the shared text cannot drift between them. The same renderer writes separate threshold
+claim documents for T-025 and T-026 from one threshold template and one standard-library
+verifier. The proof card states the T-018 bound on one page, from the same certificate
+and the register, so its figures cannot drift from either. `--check` refuses a stale
+copy; the test suite runs that check.
 
 Run from `packing/`:
 
@@ -19,12 +20,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import os
 import re
 import sys
 from collections.abc import Sequence
 from fractions import Fraction
 from pathlib import Path
+from typing import TypedDict, cast
 
 from strif import atomic_output_file
 
@@ -52,6 +55,7 @@ from sqpack.fractional.certificate import d4_images
 from sqpack.yamlio import safe_load
 
 TEMPLATE = TEMPLATES / "verifiable_claim.md"
+THRESHOLD_TEMPLATE = TEMPLATES / "threshold_verifiable_claim.md"
 CARD_TEMPLATE = TEMPLATES / "proof_card.md"
 CARD = CASE / "t-018-proof-card.md"
 RESULTS = PACKING / "frontier" / "results.yaml"
@@ -60,6 +64,30 @@ INTERVAL = PACKING / "src" / "sqpack" / "fractional" / "interval.py"
 GATE = PACKING / "devtools" / "decide_certificate.py"
 PINNED_VERIFIER = CASE / "minimal_verify.py"
 FIGURE = CASE / "t-018-proof-visual.svg"
+THRESHOLD_CASE = PACKING / "cases" / "n11_threshold_certificate"
+THRESHOLD_VERIFIER = THRESHOLD_CASE / "verify_claim.py"
+T025_CERTIFICATE = THRESHOLD_CASE / "certificate.json"
+T026_CERTIFICATE = THRESHOLD_CASE / "certificate-191-50-net1440.json"
+T026_LIMIT = THRESHOLD_CASE / "t-026-dilation-limit-corollary.json"
+T025_CLAIM = THRESHOLD_CASE / "t-025-verifiable-claim-191-50.md"
+T026_CLAIM = THRESHOLD_CASE / "t-026-verifiable-claim-dilation-limit.md"
+T025_MINIMUM = Fraction("100000203/100000000")
+
+
+class ThresholdFacts(TypedDict):
+    """Typed values rendered from one retained threshold certificate."""
+
+    n: int
+    L: Fraction
+    B: Fraction
+    K: int
+    D: Fraction
+    point_atoms: int
+    threshold_atoms: int
+    point_mass: Fraction
+    threshold_budget: Fraction
+    total_budget: Fraction
+
 
 #: The card quotes the certificate's digest by this many leading hex characters. The
 #: whole digest is pinned once, in `minimal_verify.py`, and `sha256sum` gives a reader
@@ -322,8 +350,263 @@ def filled(template: Path, values: dict[str, str]) -> str:
     return text
 
 
+def _record(path: Path) -> dict[str, object]:
+    """One generated-claim input, parsed as JSON after its exact bytes stay available."""
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise SystemExit(f"{path.name}: expected one JSON object")
+    return value
+
+
+def _as_fraction(record: dict[str, object], name: str) -> Fraction:
+    value = record[name]
+    if not isinstance(value, str):
+        raise SystemExit(f"{name} in the threshold certificate is not a rational string")
+    return Fraction(value)
+
+
+def _threshold_identity(path: Path) -> tuple[str, int]:
+    raw = path.read_bytes()
+    return hashlib.sha256(raw).hexdigest(), len(raw)
+
+
+def _threshold_facts(certificate: dict[str, object]) -> ThresholdFacts:
+    atoms = certificate["atoms"]
+    threshold_atoms = certificate["threshold_atoms"]
+    if not isinstance(atoms, list) or not isinstance(threshold_atoms, list):
+        raise SystemExit("threshold certificate atom families must be arrays")
+    steps = certificate["direction_steps"]
+    if not isinstance(steps, int):
+        raise SystemExit("threshold certificate direction_steps must be an integer")
+    angle_limit = _as_fraction(certificate, "angle_limit")
+    n = certificate["n"]
+    if not isinstance(n, int) or isinstance(n, bool):
+        raise SystemExit("threshold certificate n must be an integer")
+    return {
+        "n": n,
+        "L": _as_fraction(certificate, "outer_side"),
+        "B": _as_fraction(certificate, "square_side"),
+        "K": steps,
+        "D": angle_limit / steps,
+        "point_atoms": len(atoms),
+        "threshold_atoms": len(threshold_atoms),
+        "point_mass": _as_fraction(certificate, "point_mass"),
+        "threshold_budget": _as_fraction(certificate, "threshold_budget"),
+        "total_budget": _as_fraction(certificate, "total_budget"),
+    }
+
+
+def _threshold_certificate_facts(
+    facts: ThresholdFacts, *, minimum: Fraction, index: int
+) -> str:
+    side = facts["B"]
+    gap = facts["D"]
+    return f"""The embedded certificate has {facts["point_atoms"]} point atoms and
+{facts["threshold_atoms"]} threshold atoms; every threshold atom is two-of-three. Its
+container side is $L={facts["L"]}$, its core side is $B={side}$, and its net has
+${int(facts["K"]) + 1}$ directions. The largest half-gap tangent is $D={gap}$, with
+
+$$
+B(1+D)={side * (1 + gap)}<1.
+$$
+
+The point mass is ${facts["point_mass"]}$, the threshold budget is
+${facts["threshold_budget"]}$, and the total budget is
+${facts["total_budget"]}<11$. The exact sweep finds minimum charge ${minimum}$ at
+its first minimizing direction, index ${index}$. The verifier recomputes every displayed
+mathematical value and reports that first minimizing direction."""
+
+
+def _threshold_evidence(proof: Path, review: Path, certificate: Path) -> str:
+    gate = PACKING / "devtools" / "decide_threshold_certificate.py"
+    exact = PACKING / "src" / "sqpack" / "fractional" / "threshold.py"
+    interval = PACKING / "src" / "sqpack" / "fractional" / "threshold_interval.py"
+    return f"""The repository's [`{proof.name}`]({edition_file(proof)}) states the retained
+proof and measurements. [`{review.name}`]({edition_file(review)}) reviews the theorem's
+disjoint-trace budget, symmetry, net endpoint, event-cell boundaries, and
+inclusion-exclusion reduction. The retention gate
+[`{gate.name}`]({edition_file(gate)}) reads [`{certificate.name}`]({edition_file(certificate)})
+once and requires agreement between the exact sweep in
+[`threshold.py`]({edition_file(exact)}) and the directed-rounding interval decision in
+[`threshold_interval.py`]({edition_file(interval)})."""
+
+
+def render_threshold_claim(
+    path: Path, certificate_path: Path, *, limit_path: Path | None
+) -> str:
+    certificate = _record(certificate_path)
+    facts = _threshold_facts(certificate)
+    cert_digest, cert_bytes = _threshold_identity(certificate_path)
+    verifier_digest = sha256_of(THRESHOLD_VERIFIER)
+    if limit_path is None:
+        minimum, index = T025_MINIMUM, 69
+        title = "T-025 Verifiable Claim: $s(11) \\geq 191/50$"
+        opening = """The embedded threshold certificate directly proves
+
+$$
+s(11) \\geq \\frac{191}{50}=3.82.
+$$
+
+The certificate is instantiated at side $191/50$; this conclusion uses no limiting
+argument."""
+        derivation = """All five finite conditions hold for these bytes. Applying the
+finite certificate theorem with $n=11$ and $L=191/50$ gives the displayed lower bound
+directly."""
+        proof = THRESHOLD_CASE / "t-025-threshold-certificate-proof.md"
+        review = (
+            REPO / "docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md"
+        )
+        evidence = _threshold_evidence(proof, review, certificate_path)
+        scope = (
+            "The registered headline records $s(11) \\geq 191/50$. Since the minimum is "
+            "attained and this certificate excludes feasibility at $191/50$, the "
+            "elementary compactness corollary is $s(11)>191/50$; it requires no "
+            "additional computation. This claim does not bound the side from above or "
+            "decide any different atom family, shrink, or direction net."
+        )
+        limit_sentence = "It has no separate limit record."
+        limit_decision = ""
+        limit_identity = ""
+        limit_block = ""
+    else:
+        minimum, index = Fraction(1), 914
+        limit = _record(limit_path)
+        conclusion_value = limit["conclusion"]
+        family_value = limit["strict_dilation_family"]
+        sharpened_value = limit["sharpened_containment"]
+        if not all(
+            isinstance(value, dict)
+            for value in (conclusion_value, family_value, sharpened_value)
+        ):
+            raise SystemExit(f"{limit_path.name}: malformed dilation sections")
+        conclusion = cast(dict[str, object], conclusion_value)
+        family = cast(dict[str, object], family_value)
+        polynomial = str(conclusion["bounded_side_defining_polynomial"]).replace("*", r"\,")
+        title = "T-026 Verifiable Claim: the Exact Dilation-Limit Bound"
+        opening = r"""The embedded 1440-step threshold certificate and dilation record prove
+
+$$
+s(11) \geq C=
+\frac{955000\sqrt{518400042893309449}}{179696714646249}
+=3.8264474\ldots.
+$$
+
+This is an ordinary exact lower bound on $s(11)$."""
+        derivation = rf"""The embedded certificate first satisfies all five conditions at
+side $191/50$ from its own atoms and 1440-step sweep. Thus this document establishes
+that source fact directly, without invoking T-025 as a theorem.
+
+Now multiply the container side, core side, every point-atom coordinate, and every point
+in every threshold atom by a positive rational $q$. Leave weights, thresholds, and the
+direction net fixed. Inverse dilation preserves every point-membership trace, hence
+every core charge and the total budget. Write $t=\tan d$ for the angular mismatch. If
+$0\leq t\leq D<1$, then
+
+$$
+(1+D)^2(1+t^2)-(1+t)^2(1+D^2)=2(D-t)(1-Dt)\geq0.
+$$
+
+Together with $\cos d+\sin d=(1+t)/\sqrt{{1+t^2}}$, this gives strict core containment
+whenever
+
+$$
+q^2B^2(1+D)^2<1+D^2.
+$$
+
+Define the positive numbers
+
+$$
+c=\frac{{\sqrt{{1+D^2}}}}{{B(1+D)}},\qquad C=\frac{{191}}{{50}}c.
+$$
+
+The record gives $B={facts["B"]}$ and $D={facts["D"]}$. The verifier re-derives
+
+$$
+c^2={family["factor_supremum_squared"]},\qquad
+C^2={conclusion["bounded_side_squared"]},
+$$
+
+and checks that the displayed $C$ is the positive root of
+
+$$
+{polynomial}=0.
+$$
+
+Every positive rational $q<c$ satisfies the sharpened inequality. Using it in place of
+the coarse Condition 4, the same core-selection and counting proof yields a finite
+threshold certificate ruling out side $q(191/50)$. For any real $x<C$, rational density supplies
+$x/(191/50)<q<c$. A packing at side $x$ would embed in the larger container of side
+$q(191/50)$, contradicting that certificate. Hence no side below $C$ admits a packing,
+so the infimum definition gives $s(11)\geq C$. At $q=c$ the uniform containment test
+is an equality. The proof establishes the displayed `>=` theorem through the strict
+rational family; it does not assert a certificate at the endpoint or a strict `>`
+bound."""
+        proof = THRESHOLD_CASE / "t-026-dilation-limit-proof.md"
+        review = (
+            REPO / "docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md"
+        )
+        evidence = _threshold_evidence(proof, review, certificate_path)
+        corollary = PACKING / "devtools" / "dilation_corollary.py"
+        dilation_review = REPO / "docs/project/reviews/review-2026-09-06-t022-dilation-limit.md"
+        evidence += (
+            f" The [`dilation_corollary.py`]({edition_file(corollary)}) replay checks the "
+            "source declarations and re-derives the exact limit record. "
+            f"[`{dilation_review.name}`]({edition_file(dilation_review)}) reviews the "
+            "sharpened containment, density, and upward-embedding argument."
+        )
+        scope = (
+            "The source sweep was measured at about 782 seconds on two workers, and the "
+            "interval confirmation at about 154 seconds. They are exhaustive checks, "
+            "outside the pull-request fast tier. This decision does not cover another "
+            "atom family or direction net."
+        )
+        limit_digest, limit_bytes = _threshold_identity(limit_path)
+        limit_sentence = "It also embeds the exact dilation-limit record."
+        limit_decision = "It then re-derives the algebraic limit before accepting T-026."
+        limit_identity = f"Limit Record SHA-256: `{limit_digest}`; bytes: `{limit_bytes}`."
+        limit_block = f"""## Dilation Limit Record
+
+The marked block is byte-for-byte [`{limit_path.name}`]({edition_file(limit_path)}).
+
+<!-- BEGIN DILATION LIMIT RECORD -->
+```json
+{limit_path.read_text(encoding="utf-8").rstrip()}
+```
+<!-- END DILATION LIMIT RECORD -->"""
+
+    values = {
+        "TITLE": title,
+        "OPENING_CLAIM": opening,
+        "LIMIT_INPUT_SENTENCE": limit_sentence,
+        "FILE_NAME": path.name,
+        "LIMIT_DECISION_SENTENCE": limit_decision,
+        "CERT_SHA256": cert_digest,
+        "CERT_BYTES": str(cert_bytes),
+        "LIMIT_IDENTITY_LINE": limit_identity,
+        "CERTIFICATE_FACTS": _threshold_certificate_facts(facts, minimum=minimum, index=index),
+        "CLAIM_DERIVATION": derivation,
+        "EVIDENCE": evidence,
+        "SCOPE": scope,
+        "VERIFIER_URL": relative_link(THRESHOLD_VERIFIER, path),
+        "VERIFIER_SHA256": verifier_digest,
+        "VERIFIER_SOURCE": THRESHOLD_VERIFIER.read_text(encoding="utf-8").rstrip(),
+        "CERT_NAME": certificate_path.name,
+        "CERT_URL": edition_file(certificate_path),
+        "CERTIFICATE_JSON": certificate_path.read_text(encoding="utf-8").rstrip(),
+        "LIMIT_RECORD_BLOCK": limit_block,
+    }
+    sources = f"{THRESHOLD_TEMPLATE.name}, {THRESHOLD_VERIFIER.name}, {certificate_path.name}"
+    if limit_path is not None:
+        sources += f", and {limit_path.name}"
+    banner = (
+        "<!-- GENERATED by devtools.render_verifiable_claim from "
+        f"devtools/templates/{sources}. Edit those, then regenerate. -->\n\n"
+    )
+    return banner + filled(THRESHOLD_TEMPLATE, values)
+
+
 def documents() -> list[tuple[Path, str]]:
-    """Every generated document with its fresh text: both claims, then the card."""
+    """Every generated document with its fresh text: four claims, then the card."""
     facts = [derive(path) for path in WALKTHROUGH]
     if len(facts) != 2:
         raise SystemExit("each document names its one sibling; the walkthrough has to be two")
@@ -332,7 +615,14 @@ def documents() -> list[tuple[Path, str]]:
         (claim_path(f), render_claim(f, sibling, headline))
         for f, sibling in ((facts[0], facts[1]), (facts[1], facts[0]))
     ]
-    return [*claims, (CARD, render_card(headline))]
+    threshold_claims = [
+        (T025_CLAIM, render_threshold_claim(T025_CLAIM, T025_CERTIFICATE, limit_path=None)),
+        (
+            T026_CLAIM,
+            render_threshold_claim(T026_CLAIM, T026_CERTIFICATE, limit_path=T026_LIMIT),
+        ),
+    ]
+    return [*claims, *threshold_claims, (CARD, render_card(headline))]
 
 
 def main(argv: Sequence[str] | None = None) -> int:

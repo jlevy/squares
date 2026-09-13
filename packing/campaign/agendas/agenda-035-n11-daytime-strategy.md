@@ -417,9 +417,9 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: in_progress
     priority: 1
-    question: Does the standalone explainer state the point-only, threshold and weak-limit rungs accurately,
+    question: Does the standalone explainer state the point-only, threshold and dilation-limit proofs accurately,
       and does its stacked head pass independently of the inherited research base?
     budget: One parallel 30–60 minute independent mathematical, prose and rendering review, followed by one
       stack-only CI checkpoint.
@@ -429,13 +429,11 @@ agenda:
       research checkpoint and its required checks pass on that stacked head.
     bead: think-0zc1
     depends_on: [BC-334, BC-336]
-    blocked_on: The research branch must be published before PR148 can be retargeted and checked on its
-      stacked head. On its current main base, the only hosted failure is the inherited expired session099
-      deadline; every other hosted job passes.
-    next_evidence: The independent mathematical review passed after narrowing the T025 endpoint and
-      standalone-checker wording; the final audit also defined core, trace, charge, endpoint certificate and
-      weak limit before use. Retarget PR148 after the research branch is pushed, then wait for the stacked
-      hosted checks.
+    next_evidence: The independent mathematical review passed after narrowing the T025 certificate and
+      standalone-checker wording; the terminology audit states the exact proved lower bound with its V4/C5
+      assurance, identifies dilation-limit as the proof method, and distinguishes the separate stronger strict
+      inequality. The review defines core, trace and charge before use. PR154 and X-027 are merged into the PR148
+      head; local merged-head checks pass, and hosted checks are the remaining exit evidence.
     workflows: [factual-review, documentation-pass]
     program: n11-daytime-strategy
     parallel_group: explainer-review

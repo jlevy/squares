@@ -70,8 +70,10 @@ retains the detailed derivations; this document records their assessment and all
 
 The retained bracket is still
 $3.810025723614703\ldots\le s(11)\le U=3.877083590022814\ldots$.
-[T-022](../../cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) is the
-weak limit consequence of T-018, not an endpoint no-fit certificate.
+[T-022](../../cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) proves the
+ordinary exact lower bound by dilation of T-018 and a limit argument.
+The method does not establish the separate strict inequality beyond the displayed
+constant; this does not qualify the proved lower bound.
 Recent progress concerns proof structure: accepted continuous near-axis and near-45
 auxiliaries, a retained local Trump theorem, and more precise separation of support,
 optimization and compatibility obstacles.

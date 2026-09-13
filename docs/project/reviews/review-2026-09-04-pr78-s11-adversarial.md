@@ -396,9 +396,9 @@ value is the grid bound `m = 4`.
 That last inference is too strong.
 For the uniform half-tangent net with endpoint `T` and `K` gaps, `D = T/K` and the
 ceiling is `m/(1+T/K)`, which tends to `m`. A proved family of valid certificates with
-sides tending to `m` would establish the weak lower bound `s(n) ≥ m` even though no
-finite member attained `m`. The ceiling rules out one finite certificate at the grid
-bound; by itself it does not rule out a certified family plus a limit argument.
+sides tending to `m` would establish the lower bound `s(n) ≥ m` even though no finite
+member attained `m`. The ceiling rules out one finite certificate at the grid bound; by
+itself it does not rule out a certified family plus a limit argument.
 
 **Resolution:** the affected prose now states the finite scope and names the separate
 limiting-family possibility.
@@ -893,7 +893,7 @@ Assume that `n` closed unit squares with pairwise disjoint interiors fit in `K`.
 
 No packing exists at side `L`, and any packing at a smaller side would embed in
 `[0,L]²`; hence `s(n) ≥ L`. Compactness is needed only for the optional stronger
-statement `s(n) > L`, not for the claimed weak inequality.
+statement `s(n) > L`, not for the claimed non-strict inequality.
 
 ### Obligation-by-obligation disposition
 

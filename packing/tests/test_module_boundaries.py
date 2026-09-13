@@ -680,6 +680,16 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_the_stated_orbit_lightening_fails_condition_5_alone",
             "test_the_stated_benign_lightening_keeps_every_condition",
         },
+        # The threshold claim documents' shared standard-library verifier on the full
+        # retained nets. Its lazy range-add/range-min slab tree was measured at 0.16 s
+        # for one T-025 direction on 2026-09-10; the documents require 181 and 1,441
+        # directions respectively. The repository's parallel exact T-026 sweep already
+        # costs 782 s. Both full one-file decisions therefore belong at the exhaustive
+        # research checkpoint; small mixed, undercoverage, tree, drift, and algebraic
+        # controls stay in the fast tier beside them.
+        "test_verify_threshold_claim.py": {
+            "test_retained_threshold_claims_pass_the_standalone_full_sweep",
+        },
         # Measured 2026-08-30: about three minutes. It re-derives n = 40's whole
         # assessment, whose intersecting-assessor section runs 240 linear programs over
         # 400 rows and re-decides every proposal in the field.

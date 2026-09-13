@@ -1,5 +1,7 @@
 """The publication pass changes math slots, preserving the rest of the source."""
 
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
 import asyncio
@@ -12,6 +14,7 @@ from textwrap import dedent
 from typing import TYPE_CHECKING, Any, cast
 
 import pytest
+from nodejs_wheel import node
 
 if TYPE_CHECKING:
     from playwright.async_api import Route
@@ -226,6 +229,69 @@ def test_held_font_responses_all_start_before_any_waits_for_completion() -> None
         assert payloads == fonts
 
     asyncio.run(exercise())
+
+
+def test_geometry_font_gate_starts_runtime_only_after_before_snapshot() -> None:
+    """The geometry probe's own setup cannot consume KPress's timeout budget."""
+    trace = prepare_explainer_math._GEOMETRY_FONT_TRACE  # noqa: SLF001
+    exercise = dedent("""
+        const assert = require('node:assert/strict');
+        const starts = [];
+        const postReleasePromise = Promise.resolve('post-release');
+        const synchronousError = new Error('synchronous failure');
+        const rejection = new Error('post-release rejection');
+        let rejectedPromise;
+        globalThis.kpressMathText = {
+          render(source) { starts.push(['render', source, performance.now()]);
+            if (source === 'post-release') return postReleasePromise;
+            if (source === 'throw') throw synchronousError;
+            if (source === 'reject') {
+              rejectedPromise = Promise.reject(rejection); return rejectedPromise;
+            }
+            return Promise.resolve('rendered'); },
+          hydrate(source) { starts.push(['hydrate', source, performance.now()]);
+            return Promise.resolve('hydrated'); }
+        };
+        (async () => {
+          const rendered = kpressMathText.render('x');
+          const hydrated = kpressMathText.hydrate('y');
+          await Promise.resolve();
+          const beforeSnapshotCompleted = performance.now();
+          assert.deepEqual(starts, []);
+          assert.equal(__squaresGeometryFontTrace.first_math_request_ms, null);
+          assert.equal(__squaresGeometryFontTrace.queued_calls, 2);
+          assert.throws(() => __squaresReleaseGeometryFontGate(),
+            /released before the before snapshot/);
+          assert.deepEqual(starts, []);
+          __squaresMarkGeometryBeforeSnapshotComplete();
+          __squaresReleaseGeometryFontGate();
+          assert.deepEqual(starts.map(call => call.slice(0, 2)),
+            [['render', 'x'], ['hydrate', 'y']]);
+          assert.ok(starts.every(call => call[2] >= beforeSnapshotCompleted));
+          assert.ok(__squaresGeometryFontTrace.first_math_request_ms
+            >= beforeSnapshotCompleted);
+          assert.deepEqual(await Promise.all([rendered, hydrated]),
+            ['rendered', 'hydrated']);
+          assert.strictEqual(kpressMathText.render('post-release'), postReleasePromise);
+          assert.throws(() => kpressMathText.render('throw'),
+            error => error === synchronousError);
+          const observedRejection = kpressMathText.render('reject');
+          assert.strictEqual(observedRejection, rejectedPromise);
+          await assert.rejects(observedRejection, /post-release rejection/);
+          assert.deepEqual(__squaresGeometryFontTrace.rejections.map(entry => entry.source),
+            ['throw', 'reject']);
+          process.stdout.write('complete');
+        })().catch(error => { console.error(error); process.exitCode = 1; });
+    """)
+    completed = node(
+        ["-"],
+        return_completed_process=True,
+        input=trace + exercise,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert completed.stdout == "complete"
 
 
 @pytest.mark.parametrize("font_set", ["custom", "system"])

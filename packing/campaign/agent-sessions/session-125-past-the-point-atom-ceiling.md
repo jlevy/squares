@@ -95,7 +95,7 @@ session:
   progress:
     metric: The verified lower bound on s(11) in the frontier register, and the retained instruments behind it.
     before: 3.810025723614703 (T-022); the covering LP at 3.82 stops at exactly eleven on every site set; no explanation of the plateau; no certificate language past point atoms.
-    after: s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939 (T-026), reached through T-025's endpoint certificate at 191/50 = 3.82, the first result past the exact point-atom ceiling; the retained LP plateau has quantified depth violations and fixed-support cut results, without a complete diagnosis over unrestricted supports and a certificate language past point atoms exists with two independent decision routes.
+    after: s(11) >= 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939 (T-026), reached through T-025's certificate instantiated at 191/50 = 3.82, the first result past the exact point-atom ceiling; the retained LP plateau has quantified depth violations and fixed-support cut results, without a complete diagnosis over unrestricted supports and a certificate language past point atoms exists with two independent decision routes.
   delegations:
   - task: Theory of cuts and routes (lane T); the sandwich lemma and the k-fold witness lemma.
     operator: Claude Fable, high

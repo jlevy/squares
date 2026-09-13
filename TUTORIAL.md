@@ -88,24 +88,49 @@ its search strategy.
 
 |  | value | status |
 | --- | --- | --- |
-| best-known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
-| proved lower bound explained here | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), an exact weighted atomic certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
-| gap between these bounds | about `0.067084` | still open |
+| best-known packing (upper bound) | `3.8770835…` | Trump 1979, a construction |
+| strongest proved lower bound | `3.8264474…` | [T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md), proved by an exact dilation-limit argument; the point-only T-018 proof is explained [below](#how-a-weighted-atomic-lower-bound-proof-works) |
+| gap between these bounds | about `0.050636` | still open |
 
-The technical record retains the refinement `s(11) ≥ 3.816609502788862…` in the
-[T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) and
-[T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) proof
-packets. It is a weak limit bound and does not decide fit at that endpoint.
-The strongest bound proved at a container side itself is `s(11) ≥ 191/50 = 3.82`, by the
-threshold certificate of
-[T-025](packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md),
-which adds atoms of a second kind to the ones explained here.
-The strongest verified bound is
-`s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 = 3.826447410572939…`, those
-same atoms re-certified on a finer direction net and dilated
-([T-026](packing/cases/n11_threshold_certificate/t-026-dilation-limit-proof.md)), and it
-is a weak limit bound like the two above.
-The table uses the simpler certificate bound proved below.
+[T-022](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) refines
+the point-certificate bound to `3.8100257…`.
+[T-024](packing/cases/n11_fractional_certificate/t-024-dilation-limit-proof.md) rechecks
+the point atoms on a finer direction net and proves `s(11) ≥ 3.8166095…`.
+[T-025](packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md)
+introduces threshold atoms and directly proves `s(11) ≥ 191/50 = 3.82`. The strongest
+proved bound is `s(11) ≥ 955000*sqrt(518400042893309449)/179696714646249 = 3.8264474…`,
+those same atoms re-certified on a finer direction net and dilated
+([T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md)).
+T-026 checks a finite certificate on the finer net, proves that common scaling preserves
+its coverage and budget whenever the strict containment inequality holds, and uses
+rational density to establish the displayed `≥` bound.
+This is a proof of the lower bound, not a weaker kind of assertion.
+The phrase *dilation-limit proof* names how the theorem is derived; it is not an
+assurance grade.
+
+Under [this repository’s epistemic scale](epistemics.md), T-026 is `V4/C5`. `V4` means
+the result has machine-verified exact or interval-certified evidence, a frozen
+certificate, a replay command, and a passing replay.
+`C4` means the finite certificate’s coverage condition was confirmed by two distinct
+methods: an exact event-cell sweep and an interval branch-and-bound.
+They share the certificate data and theorem, so `C4` does not mean two independent
+proofs. `C5` adds a
+[mapped, non-superseded source-distinct review](docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md)
+of the complete T-026 claim, including the threshold count, finite decision, dilation,
+and endpoint inference.
+These labels describe the retained evidence and confirmation; the mathematical claim is
+the proved lower bound above.
+
+The detailed lesson below starts with the simpler point-only T-018 certificate;
+[the standalone v0.4.0 explainer](https://jlevy.github.io/squares/#proof-of-the-new-lower-bound)
+uses it as a visual worked example, then gives the threshold-counting and dilation proof
+of T-025 and T-026. The numerical `3.81` result is not a premise of T-026. Keeping the
+T-018 proof in full also gives readers an assurance bridge: its short standard-library
+checker exposes the shared geometry and counting mechanism end to end.
+That point-certificate checker does not verify the threshold certificates.
+The linked T-025 and T-026 claim documents each embed the new standard-library threshold
+verifier and the exact certificate bytes it checks; T-026 also embeds and re-derives its
+dilation record.
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** is the distance between the best upper and lower bounds, which
@@ -1239,6 +1264,7 @@ definition and the one-place list of apparently novel results.
 | Fixing the angles and every pair’s separating axis makes minimising `s` a linear program | proved | Nothing about *which* cell is best; that choice is the combinatorial hard part |
 | Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
 | [`s(11) ≥ 2 + 4/√5`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
+| [T-025](packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md) proves `s(11) ≥ 191/50 = 3.82`; [T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md) proves `s(11) ≥ 3.8264474…` | Both are `V4/C5`: machine-verified exact and interval-certified evidence with passing replay, distinct exact event-cell and interval coverage decisions, and mapped non-superseded reviews | Neither result determines `s(11)` or closes the gap to the best-known packing; V5 or external review would be a separate assurance step |
 | [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. Both this falsification and the adjacent repair are this project’s findings |
 | [Trump’s pose is locally isolated at fixed side](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Consequently, it is a strict local minimum of side in the anchored pose–side chart, modulo finite symmetries. This is not global optimality or an explicit isolation radius. Apparently novel here, not externally peer-reviewed |
 | The one-dimensional class-angle optimum is a corner, with signed one-sided derivatives of about `−0.1747` and `+0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |
@@ -1269,7 +1295,7 @@ throughput.
 `4.6755`. What is unknown is whether the named alternatives, none of which is built,
 would do better.
 
-**4. What `s(11)` actually is.** The bounds above leave a gap of about `0.067`, and
+**4. What `s(11)` actually is.** The bounds above leave a gap of about `0.050636`, and
 neither end is known to be tight.
 The upper end is a construction nobody has beaten since 1979; the lower bound excludes
 smaller containers without establishing the optimum.
@@ -1320,6 +1346,8 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 | **direction net** | The finite set of exact square orientations a certificate checks. A strict shrink condition lets a nearby net direction stand in for any orientation at all |
 | **event cell** | One open region of admissible centres on which the set of atoms a square covers is constant. Not a configuration-space cell, and never written bare |
 | **weighted fractional unavoidable-set certificate** | A finite weighted atom set whose total mass is below `n` but whose mass is at least one in every prescribed inner square; with the direction and shrink conditions, that tension is a lower bound on `s(n)` |
+| **individual-side certificate** / **dilation-limit proof** | An individual-side certificate instantiates one finite certificate at its named container side. A dilation-limit proof combines exact certificates at approaching sides with a density argument to prove the displayed `s(n) ≥ L`. Both yield proved lower bounds; the terms distinguish proof constructions, not verification levels |
+| **core** / **trace** / **charge** | A core is the shrunken closed square selected inside a physical unit square. Its trace on a finite site set `S` is the subset of `S` it contains. Its charge is the sum contributed by the point and threshold atoms it triggers |
 | **row generation** / **column generation** | Adding a deficient square-pose constraint, or adding a candidate atom site. Rows restrict the cover; columns give it more choices |
 | **dual depth** / **pricing** | The sum of dual pose weights covering one point, and the search for an absent site where that depth exceeds one |
 | **dual support** / **fractional packing** | The held poses with positive dual weight, and their interpretation as weighted, possibly overlapping squares whose depth is capped at one at the held sites. It is not a physical packing |

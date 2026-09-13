@@ -282,9 +282,11 @@ does not settle the other possible arrangements.
 
 The exact Trump construction gives the upper bound $3.877083590022814\ldots$. T018
 established the fractional certificate at 3.81; T022 refined its containment argument to
-the weak limiting lower bound $3.810025723614703\ldots$. T022 is not a no-fit
-certificate at its limiting endpoint.
-Those are the current verified bounds in the
+the lower bound $3.810025723614703\ldots$ by dilation and a limit argument.
+T022 proves this ordinary exact lower bound.
+Its method does not establish the separate strict inequality beyond the displayed
+constant; this does not qualify the proved lower bound.
+Those were the bounds retained at this review’s cutoff in the
 [n11 record](../../../packing/frontier/n-011.md).
 The recent structural explorations did not raise that lower bound again.
 

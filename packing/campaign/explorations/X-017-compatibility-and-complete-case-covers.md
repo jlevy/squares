@@ -116,8 +116,10 @@ $$
 
 Here $U$ is the side of the exact Trump construction.
 The [frontier record](../../frontier/n-011.md) owns the bracket: T-018 supplies the
-exact $3.81$ certificate and T-022 its weak limit refinement.
-The limiting endpoint has no separate no-fit certificate.
+exact $3.81$ certificate and T-022 its lower-bound refinement by dilation and a limit
+argument. T-022 proves the ordinary exact lower bound shown above.
+Its method does not establish the separate strict inequality beyond that constant; this
+does not qualify the proved lower bound.
 Neither the local results nor this intake determine $s(11)=U$.
 
 | Retained work | What it establishes | What it leaves open |

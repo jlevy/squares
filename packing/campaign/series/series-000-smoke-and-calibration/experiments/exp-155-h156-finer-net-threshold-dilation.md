@@ -23,7 +23,7 @@ experiment:
   instance: {axis: n, point: 11, role: target}
   method:
     control: The retained 720-step certificate with the same atoms, weights, crossing shrink and binding
-      physical direction; its exact weak dilation limit is 3.82534784591311198085...
+      physical direction; its exact dilation-limit lower bound is 3.82534784591311198085...
     candidate: The retained 1440-step certificate, differing from the 720-step control only in the finer
       declared direction net; both coverage routes accept it at exact least charge one
     runs_per_condition: 1
@@ -50,8 +50,8 @@ experiment:
   results:
   - shape: determination
     role: outcome
-    question: Does a frozen T-025 threshold certificate on a finer admitted net yield a verified weak lower
-      limit strictly above 3.826?
+    question: Does a frozen T-025 threshold certificate on a finer admitted net yield a proved lower
+      bound strictly above 3.826?
     outcome: criterion_met
     checked_by: The 1440-step record has exact crossing shrink 249507/250000 and both complete coverage
       routes return least charge one after rescaling. The exact dilation corollary gives
@@ -62,14 +62,15 @@ experiment:
       control without relying on a different shrink or atom weighting?
     outcome: criterion_met
     checked_by: The two retained certificates have identical atoms, scaled weights, crossing shrink and
-      binding physical direction. Halving the maximum half-gap tangent raises the exact weak limit from
+      binding physical direction. Halving the maximum half-gap tangent raises the exact lower bound from
       3.82534784591311198085... to 3.82644741057293974417....
   verdict:
     decision: accepted
-    primary_criterion: A two-route verified threshold certificate and exact weak dilation limit strictly
-      above 3.826, with the endpoint status stated separately
-    reason: T-026 proves the first disjunct of H-156. It excludes every smaller side through strict rational
-      dilations but does not decide whether eleven squares fit at the displayed limiting endpoint.
+    primary_criterion: A two-route verified threshold certificate and exact lower bound strictly above 3.826
+    reason: T-026 proves the first disjunct of H-156 at V4. Its two finite decision
+      methods supplied C4 at registration; the later mapped review of the complete
+      self-contained claim supplies its current C5. Its exact conclusion is s(11) >=
+      955000*sqrt(518400042893309449)/179696714646249.
   effort:
     timebox: Retrospective registration of one already completed bounded lane; no new target allowance
     wall_seconds: 6713.2
@@ -80,8 +81,15 @@ experiment:
 This experiment entry repairs the registry around a result already retained and merged
 as T-026. It introduces no new calculation.
 The source lane records the measurement, the two certificate files retain the exact
-finite objects, and the T-026 proof packet derives the weak limit and its endpoint
-qualification.
+finite objects, and the T-026 proof packet proves the ordinary exact lower bound
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249 =
+3.826447410572939744...` at V4/C5. The C5 promotion comes from the later mapped review;
+it does not change this experiment’s calculation or verdict.
+
+The proof uses strict rational dilations and order completeness.
+It does not establish the separate strict inequality `s(11) >
+955000*sqrt(518400042893309449)/179696714646249`; this does not qualify the proved lower
+bound.
 
 The accepted statement is the disjunction registered by H-156: one of its two proposed
 routes produces an unconditional result above `3.826`. The separate rows-complete loop

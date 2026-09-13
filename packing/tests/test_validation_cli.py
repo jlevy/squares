@@ -2058,8 +2058,9 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     registered the result, on a four-cpu host at `PACK_JOBS=1`: 618s for the 720-step
     record and 919s for the 1440-step record. They carry the same stand-in as T-024's,
     since `test_every_case_page_binds_the_certificate_its_own_evidence_names` reads the
-    `v3` threshold record beside the `v2` point one; and unlike T-024's rungs they have
-    no standalone reader behind them, because none decides a threshold certificate.
+    `v3` threshold record beside the `v2` point one. The separate standard-library
+    reader embedded in the T-025 and T-026 claim documents is also an exhaustive check;
+    it does not make either repository replay cheap enough for this tier.
 
     `slow behavioral tests` is `BC-214`. It is not a step that was never decided: it is
     the half of the behavioural suite that carries the wall, split out by measurement

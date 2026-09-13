@@ -14,7 +14,7 @@ exploration:
   brief: >-
     Combined account of unconditional certificates and conditional owner exclusions.
     T024 refines the earlier point certificate; T025 introduces threshold atoms and
-    excludes side3.82; T026 reaches weak lower bound3.826447410572939744. T023 and the
+    excludes side 3.82; T026 proves lower bound 3.826447410572939744. T023 and the
     later owner audits establish conditional and fixed-family results, not a global
     bound. The original September9 strategic narrative is retained below as historical.
     Review corrections on September10 withdraw the transfer of an unconditional core
@@ -57,10 +57,14 @@ exploration:
 The combined series gives the global bracket
 `3.826447410572939744... <= s(11) <= 3.877083590022814...` through T-026 and the
 unchanged T-011 construction.
-T-025 supplies the endpoint certificate at `3.82`; T-024 and T-026 are weak dilation
-limits with their own frozen certificates.
-The new threshold language succeeds at a fixed core domain where the retained
-D4-symmetric point cover is obstructed.
+T-025 excludes side `3.82` directly.
+T-024 and T-026 prove lower bounds by dilation and a limit argument, with their own
+frozen certificates.
+T-026 proves the ordinary exact lower bound
+`s(11) >= 955000*sqrt(518400042893309449)/179696714646249` at V4/C5. Its method does not
+establish the separate strict inequality beyond that constant; this does not qualify the
+proved lower bound. The new threshold language succeeds at a fixed core domain where the
+retained D4-symmetric point cover is obstructed.
 It has not exceeded the separately discussed unit-scale point-method cap near `3.8288`.
 
 The owner strand supplies T-023’s specified conditional exclusion at `3.84`, the
@@ -174,9 +178,9 @@ six-step ladder, with every term defined and the stopping point marked.
 
 | Result | Side | Status | Scope |
 | --- | --- | --- | --- |
-| `T-024`, the finer-net dilation limit of the frozen `T-018` atoms | `3.816609502788862` | registered, V4/C4 | unconditional weak limit; no endpoint certificate |
+| `T-024`, the finer-net dilation limit of the frozen `T-018` atoms | `3.816609502788862` | registered, V4/C4 | ordinary unconditional lower bound proved by the dilation-limit method |
 | The exact ceiling family at `191/50`: 88 closed `B`-squares at six net directions, weight `1/8` each, total exactly eleven, maximum depth one | `3.82` | EXACT, two verifiers and an independent reader | no D4-symmetric point-atom measure of mass below eleven satisfies Condition 5 at `(191/50, 9977/10000, any net containing its six directions)`; scaled to unit squares, no one-body point certificate passes unit side `3.8288` |
-| The threshold certificate at `191/50`: 584 point atoms and 320 two-of-three atoms, budget `685457679/62500000 = 10.967322864` | `3.82` | accepted by the exact sweep and by the interval route, which agree at least charge `100000203/100000000`; theorem reviewed sound; registration in progress as `T-025` | unconditional endpoint certificate `s(11) >= 191/50`; the first result past the point-method ceiling |
+| The threshold certificate at `191/50`: 584 point atoms and 320 two-of-three atoms, budget `685457679/62500000 = 10.967322864` | `3.82` | accepted by the exact sweep and by the interval route, which agree at least charge `100000203/100000000`; theorem reviewed sound; registration in progress as `T-025` | unconditional lower bound `s(11) >= 191/50` with direct exclusion at that side; the first result past the point-method ceiling |
 
 The three losses of the point certificate that X-023 separated, the shrink tax, the site
 restriction and the integrality gap, have now each been measured: the finer net recovers
