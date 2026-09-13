@@ -812,8 +812,10 @@ def check_case_interval(
 
     lower_cell = figures["lower"][0]
     exact_present = re.search(rf"(?<![\w./]){re.escape(exact)}(?![\w./])", lower_cell)
+    # Refuse a matching prefix of another number or fraction. Include the ellipsis
+    # in the boundary so backtracking cannot discard it to hide a following suffix.
     shown_lower = re.search(
-        rf"{re.escape(exact)}\s*=\s*(\d+(?:\.\d+)?)(?P<ellipsis>…|\.\.\.)?",
+        rf"{re.escape(exact)}\s*=\s*(\d+(?:\.\d+)?)(?P<ellipsis>…|\.\.\.)?(?![\w./…])",
         lower_cell,
     )
     decimal_present = bool(
