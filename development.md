@@ -735,9 +735,11 @@ The PDF command `--check-artifact` requires an existing PDF and never rewrites i
 `--check` remains available for repeated fresh-render diagnosis.
 On a reproduction disagreement, `--diagnostics-dir` retains the two raw PDFs and a
 neutral difference report in a separate directory for that invocation.
-Pages retains those diagnostics on failure, so a passing rerun does not erase the
-evidence from the failed attempt.
-Normal parameter startup and neighboring text movement are measured by
+Pages uploads those diagnostics on failure with seven-day retention.
+Download them before rerunning the job: GitHub can make a previous attempt’s artifacts
+unavailable on a rerun, even when their names differ
+([upstream report](https://github.com/actions/upload-artifact/issues/585)). Normal
+parameter startup and neighboring text movement are measured by
 `devtools.check_math_startup`; its controlled fixtures run in CI, while timing
 comparisons are retained in the
 [math startup campaign](packing/benchmarks/math-startup/README.md).
