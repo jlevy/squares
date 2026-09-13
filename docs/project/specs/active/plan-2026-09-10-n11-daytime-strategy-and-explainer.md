@@ -1,8 +1,8 @@
 # N11: Daytime Strategy Blocks and Parallel Explainer Update
 
-**Active plan, September 10, 2026.** This plan replaces the uninterrupted overnight
-schedule with shorter blocks that can start and stop during the day.
-Each research block gets its own session clock, falsifiable output, stop rule, and
+**Active plan, September 10, 2026; updated September 12.** This plan replaces the
+uninterrupted overnight schedule with shorter blocks that can start and stop during the
+day. Each research block gets its own session clock, falsifiable output, stop rule, and
 closeout. A later block is selected from the evidence produced by the earlier ones; gaps
 between blocks consume no scientific budget.
 
@@ -14,7 +14,7 @@ The research branch is `codex/n11-daytime-strategy`, based on merged PR139 at
 
 A separate W8 documentation lane runs from `codex/n11-explainer-current-bound`, also
 based directly on the PR139 merge.
-It is divided into three bounded blocks and has its own pull request and review.
+It is divided into bounded blocks and has its own pull request and review.
 Documentation work does not consume a research target’s allowance and does not change a
 scientific result.
 
@@ -47,8 +47,11 @@ These scopes remain in force throughout this plan.
 contains the later analytical mechanism synthesis.
 The draft
 [X-028 portfolio](../../../../packing/campaign/explorations/X-028-n11-strategy-portfolio-draft.md)
-preserves the broader six-route option map and reconciles it with T-026 and exp-156.
-Neither document registers a target; this plan remains the execution controller.
+preserves the broader six-route option map and reconciles it with T-026 and exp-156. The
+[source-distinct closeout audit](../../reviews/review-2026-09-12-n11-post-bc329-strategy-audit.md)
+records the exact T-025/T-026/BC329 fact ladder, the terminal meaning of each possible
+BC329 outcome, and the remaining conditional-selection obligations.
+None of these documents registers a target; this plan remains the execution controller.
 
 An **atom** is a nonnegative resource rule used by a covering certificate.
 A point atom charges a core when it contains one site.
@@ -89,7 +92,7 @@ The order reflects present source readiness and expected information value.
 It is a working allocation, not a claim that one mathematical direction is intrinsically
 more productive than another.
 Strategy intake and BC326 are complete and retained below as history.
-BC329 is the next active direct attempt to improve the global lower bound.
+BC329 is the next planned direct attempt to improve the global lower bound.
 BC337 is a secondary parent-conditioning lane that may proceed in parallel while BC329’s
 runner is being admitted.
 
@@ -279,15 +282,51 @@ raw charge below one therefore does not by itself reject the packet.
 A verified admissible core with charge at most `M/11` does reject this fixed collection
 of sites, thresholds, relative weights, core side, and net under every common rescaling.
 
-The existing refinement CLI runs adaptive core sweeps and bisection and has no process
-deadline. It does not execute this single fixed packet.
-Before registration, add and independently admit a maintained fixed-core runner with a
-hard deadline and durable partial output.
+The existing refinement CLI runs adaptive core sweeps and bisection and does not execute
+this single fixed packet.
+A maintained fixed-core runner is implemented on the publication stack.
+It binds its source bytes to the frozen Git revision and runtime, runs bounded raw and
+exact schedulers, and records the exact coordinator-observed direction sets for every
+route. Its parent preflight and supervised worker share the invocation clock; deadline
+expiry through publication and readback revokes acceptance.
+The September 12
+[preflight addendum](../../reviews/review-2026-09-10-n11-bc329-packet-preflight.md#stack-review-addendum-2026-09-12)
+records the target-free review and controls, including the process-launch enforcement
+boundary and termination grace.
+Atomic replacement prevents a reader from seeing half-written JSON after an ordinary
+worker failure or termination; the runner makes no host-crash or power-loss durability
+claim.
+Admission uses a separate `fixed-core-packet-calibration/v1` receipt and a frozen,
+analytically solved fixture unrelated to BC329. The full-shape control runs all four
+generic routes and 14,404 direction records, but its schema cannot express a scientific
+acceptance. Three fresh host runs measure operational overhead, effective workers by
+route, clocks, sampled process-group RSS, artifact bytes, and deadline headroom.
+Because the fixture is deliberately easy, its timing does not bound BC329’s computation.
+A source-distinct reader must accept those controls before registration.
+The separate calibration instrument and its controls remain unadmitted; none of the
+three full-shape host runs or their independent readbacks has occurred.
+The implemented runner repairs do not admit BC329 execution.
+
 Then register one hypothesis and one experiment, freeze the packet and normalization
 rule, measure `m_c`, and run the normalized object through the complete exact route, the
 reflected interval route, and the dilation reader’s source replay.
-A disagreement or incomplete run is unresolved.
+A timeout, incomplete direction set, or nonzero-width enclosure leaves coverage
+incomplete.
+Without an independently verified admissible core whose raw charge is at most
+`M/11`, it also leaves the packet scientifically unresolved; such a core instead rejects
+the fixed relative-weight packet even when the remaining directions are incomplete.
+A source mismatch, malformed geometry, method disagreement, or invalid witness makes the
+invocation or instrument invalid; it supplies no scientific verdict.
 A pass changes the bound only when all three readers verify the same retained bytes.
+
+The first direct follow-up depends on that terminal evidence.
+After a verified rejection, retain the low-charge witness and analyze its exact
+breakpoints across the full improving core-side interval before freezing one nearby
+packet. After acceptance, use the least-charge directions and measured budget margin to
+choose at most one smaller-core or locally refined candidate.
+After a timeout without a verified refuter, record the unfinished stage and evidence
+needed to judge whether another instrument is warranted.
+None of these outcomes ranks the wider method.
 
 ## Block 3: Changed Atoms and Support
 
@@ -298,8 +337,10 @@ K5 motif with five sites and integer multiplicities.
 Its budget is one because two disjoint cores cannot each consume four of seven labeled
 tokens. The retained reader reports charge `3/2` against A6’s family, but the production
 format and both coverage routes do not yet admit multiplicities.
-The scientific comparison is blocked on that narrow W7 admission and a maintained
-paired-program adapter.
+First admit exact traces for this one motif on a frozen core domain and compare them
+with all 80 ordinary threshold types on the same sites.
+Only a surviving geometric trace advantage justifies full W7 multiplicity-format
+expansion and a maintained paired-program adapter.
 
 The candidate must state what changes: the atom-generation rule, support-generation
 rule, core/net regime, or some combination.
@@ -331,7 +372,7 @@ That disjunction must then be joined to separate certificates for every branch.
 Literature analogues guide the formulation but do not replace the proof for congruent
 freely rotated squares.
 
-The analytic portion of Block 4 is now complete and independently reviewed.
+The fixed-angle normal-form portion of Block 4 is complete and independently reviewed.
 At every feasible fixed side, for each labelled fixed-angle connected component, there
 is a representative whose physical contact components all touch the left and bottom
 walls and whose active translation constraints contain a `2n`-row basis of genuine
@@ -347,14 +388,51 @@ The per-cell algebraic rank statement survives, while physical contacts require 
 component-wise choice of representative and separating axes.
 The proof, exact fixtures and independent audit are in the
 [structural review](../../reviews/review-2026-09-10-n11-structural-normal-forms.md).
-The next structural experiment must consume an actual contact path or snug parent and
-retain the complementary branches; it may not promote an arbitrary active LP row to a
-contact edge.
+
+The accepted
+[selection-routing analysis](../../research/research-2026-09-12-n11-selection-routing-first-principles.md)
+and its
+[source-distinct review](../../reviews/review-2026-09-12-n11-selection-routing-first-principles.md)
+state the missing transfer exactly: for every physical packing `P`, its valid selection
+set must satisfy `Gamma(P) intersect G != empty`, where `G` contains only completely
+excluded conditional selections.
+For T-023’s two certified uniform tuples, the complement has sixteen maximal
+availability products.
+These give three physical `D4` types, but ten orbits when S1’s fixed left/bottom wall
+chart is retained. The obligation reduces to two unproved lemmas: every corner offers
+label 0 or 15, and no two corners force opposing singleton types.
+
+Two path deductions are proved at their narrow scope.
+If `sigma` corner pairs split their mark owners, some shortest path between owners of
+different corners has at most `9-sigma` parents.
+A right-corner owner needs at least three parents to reach the normalized left wall,
+with the symmetric top/bottom statement.
+Exact four-parent controls satisfy eight-mark ownership and simultaneous owner
+compatibility while defeating either missing lemma.
+They do not extend to eleven parents and do not refute the selection theorem.
+
+The proposed one-corner surplus test `think-ms9l` and adjacent/opposite pair test
+`think-cexv` are unrun.
+Their dependencies keep them blocked by `think-gldo` until this accepted retention is
+integrated. A success proves only the corresponding lemma; a rejection refutes only the
+named BC303 surplus inequality on its declared domain.
+No selection theorem or new n11 bound follows yet.
+
+Any later structural experiment must retain the complementary branches and combine the
+fixed-side normal form with the seven-of-eight mark-ownership alternative and one shared
+resource account. It may not promote an arbitrary active LP row to a contact edge or
+assume a literal corner, finite angle set, short prescribed path, or complete quench.
+
+For the angle-profile lane, H131 supplies upper counts, not an exact `(9,2)`
+decomposition. A certificate normalized to `9d_0+2d_1` therefore applies only to that
+conditional exact-count branch unless the demand is minimized over every allowed count
+vector. In the simpler `n_0 <= 9` case, `d_0 <= d_1` makes `9d_0+2d_1` the worst allowed
+demand; without that order, the single normalization does not cover the count theorem.
 
 ## Parallel Documentation Blocks
 
-The documentation lane stays reviewable independently on PR148. Its three blocks have
-separate evidence and stop conditions:
+The documentation lane stays reviewable independently on PR148. Its blocks have separate
+evidence and stop conditions:
 
 | Block | Time | Deliverable and stop rule |
 | --- | --- | --- |
@@ -363,15 +441,24 @@ separate evidence and stop conditions:
 | D2b: edition and history | 30–45 min | Label the current explainer `v0.4.0`, retain `v0.3.0` as the 3.81 edition, and render a two-entry history near the top. Recover the date each label was first applied to this explainer from Git rather than substituting a theorem or deployment date; bind the version and dates to focused tests. |
 | D3: independent review and stacking | 30–60 min | Independently check the mathematics, prose and rendered output, correct findings, then stack the docs PR on the research checkpoint. Readiness requires green checks on the stacked head; inherited base failures are recorded rather than attributed to the docs change. |
 
-D1, D2 and D2b are complete on PR148 at `f7126bfc`. The mathematical, prose and local
-rendering portion of D3 is also complete: 135 focused tests, static analysis,
-prepared-output drift, the deterministic 20-page PDF and font check, and the complete
-324-case atlas gate pass.
-The remaining D3 step is operational: publish this research branch, retarget PR148 onto
-it, and require the hosted checks to pass on that stacked head.
-On the temporary `main` base, every hosted job except `validate` and its aggregate
-passes; the log attributes those failures solely to the inherited expired session099
-deadline.
+D1, D2, D2b and D3 completed their historical checkpoint on PR148 at `989fd544`,
+including its required hosted checks.
+That checkpoint retained 135 focused tests, static analysis, prepared-output drift, PDF
+and font checks, and the complete 324-case atlas gate.
+The September 12 mathematical, clarity and integration review adds corrections from
+`e8baa8ff` and checks the 22-page edition.
+Its exact source revisions and rendering evidence are recorded in the
+[T025/T026 review addendum](../../reviews/review-2026-09-10-t025-t026-verifiable-claims.md#stack-review-addendum-2026-09-12).
+BC335 records the completed historical milestone; the new review supplies evidence for
+the later stack revisions.
+
+PR149 is the separate page-diagnostic layer above PR148. Its `4d00ab68` checkpoint
+passed hosted checks and an unrestricted full research checkpoint.
+The September 12 review correction `c699a7e3` adds object-header and explicit
+render-count controls and reports exact byte-prefix relationships without inferring
+truncation. The BC329 runner and later evidence corrections are retained in PR156 above
+PR149. Every later source revision requires matching validation; earlier green
+checkpoints do not certify the later stack.
 
 The blocks share one documentation branch because they revise one reader artifact.
 Their costs and outcomes remain distinct in the agenda and beads.

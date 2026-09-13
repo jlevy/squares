@@ -49,7 +49,11 @@ from sqpack.fractional.certificate import (
     closed_form_conditions,
     verify,
 )
-from sqpack.fractional.threshold import ThresholdCertificate, verify_threshold
+from sqpack.fractional.threshold import (
+    ThresholdCertificate,
+    ThresholdSweepDeadlineError,
+    verify_threshold,
+)
 from tests.test_fractional_threshold_interval import tight_certificate
 
 #: The review's dilation, and the numbers it reports for the retained certificate.
@@ -579,6 +583,53 @@ def test_a_threshold_record_round_trips_through_update_and_check(
         "Condition 5'" in invariant
         for invariant in written["strict_dilation_family"]["invariants"]
     )
+
+
+def test_threshold_limit_record_reports_each_direction_and_preserves_the_record(
+    tmp_path: Path,
+) -> None:
+    """Optional replay controls expose landed work without changing the evidence."""
+
+    certificate = tight_certificate()
+    source = write_threshold(tmp_path / "threshold.json", threshold_record(certificate))
+    baseline = build_limit_record(source, workers=1)
+    landed: list[tuple[int, Fraction, str]] = []
+
+    controlled = build_limit_record(
+        source,
+        workers=1,
+        progress=lambda index, minimum, label: landed.append((index, minimum, label)),
+        deadline=float("inf"),
+    )
+
+    assert controlled == baseline
+    assert [index for index, _minimum, _label in landed] == list(
+        range(len(certificate.directions))
+    )
+    assert [label for _index, _minimum, label in landed] == [
+        direction.label for direction in certificate.directions
+    ]
+
+
+def test_threshold_limit_record_checks_the_deadline_after_record_assembly(
+    tmp_path: Path,
+) -> None:
+    """A replay that overruns after its final direction cannot publish a stale success."""
+
+    certificate = tight_certificate()
+    source = write_threshold(tmp_path / "threshold.json", threshold_record(certificate))
+    calls = 0
+    last_allowed_call = 2 * len(certificate.directions) + 2
+
+    def clock() -> float:
+        nonlocal calls
+        calls += 1
+        return 0.0 if calls <= last_allowed_call else 2.0
+
+    with pytest.raises(ThresholdSweepDeadlineError, match="absolute deadline"):
+        build_limit_record(source, workers=1, deadline=1.0, clock=clock)
+
+    assert calls == last_allowed_call + 1
 
 
 def test_a_point_record_still_round_trips_through_update_and_check(

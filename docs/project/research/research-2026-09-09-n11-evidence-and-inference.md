@@ -1022,20 +1022,27 @@ also verifies the corresponding A6 construction at `q >= 76569/20000 = 3.82845` 
 states the exact atom-transport premise.
 
 The exact adapter, source binder and production runner for the stronger saved-escape
-comparison have passed target-free admission.
+comparison passed target-free admission.
 They reconstruct closed, empty and degenerate parent intersections, bind the full owner
 and residual manifests and the 26-path local import closure, preserve the admitted
 symmetry maps, enforce the 90-second scientific and 120-second process bounds, and
 independently recompute any saved complete or partial result before interpretation.
-The final focused suite has 56 passing tests; the independent audit also exercised late
+The focused suite had 56 passing tests; the independent audit also exercised late
 publication, timeout, failed-readback, stale-module, duplicate-key and non-finite-number
-controls. This is **instrument admission**, not a target result.
-A clean implementation commit and prospective hypothesis and experiment record still
-precede the fixed target.
-See the
+controls. See the
 [adapter admission review](../reviews/review-2026-09-10-n11-parent-adapter-admission.md)
 and the
 [independent runner review](../reviews/review-2026-09-10-n11-parent-runner-independent.md).
+
+[Exp156](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-156-unit-parent-saved-residual.md)
+then completed its sole registered invocation.
+The fixed residual lies inside its necessary parent box.
+All 181 frames for the first selected owner, `TR / bottom-left:m1:j7`, have a strictly
+negative exact B-only maximum, confirmed by literal replay.
+Because the parent-restricted TR set is contained in the B-only set, no parent-domain
+gain is possible for that owner.
+The protocol stopped before `BL`, `BR`, and `TL`, so H158 remains unresolved and exp156
+authorizes no rerun.
 
 ### Weighted Five-Site Atoms
 
@@ -1097,7 +1104,7 @@ per-cell contact inference.
 | Fact now in hand | A valid next use | Missing bridge to a stronger `n=11` result |
 | --- | --- | --- |
 | Point obstruction has explicit individual parents from `3.82345` | Avoid repeating fixed-B point-only solves that merely tighten isolated-parent containment or refine a net while retaining the used nodes; test changed geometry, charges, or conditional owner/contact restrictions | Production admission, then a complete conditional class result; joint feasibility and global routing remain separate |
-| The 2880-step fixed-core packet has exact geometric headroom to `3.826721480476156460...` | Build a bounded fixed-core runner, freeze the raw criterion `m>M/11` and normalization `alpha=1/m`, then measure one prospectively registered packet | Coverage is unmeasured; the current adaptive CLI runs a different experiment; exact and interval agreement plus dilation replay remain required |
+| The 2880-step fixed-core packet has exact geometric headroom to `3.826721480476156460...` | Complete calibration and source-distinct admission of the built fixed-core runner; only then freeze the raw criterion `m>M/11`, normalization `alpha=1/m`, and one prospectively registered packet | Coverage is unmeasured; no BC329 target has run; exact and interval agreement plus dilation replay remain required |
 | Weighted five-site traces have an exact `4/3` abstract separation | Build and compare the multiplicity-aware certificate language on one fresh common row set | Geometric realization, exact covering on both routes, and continuum transfer |
 | Every fixed-angle feasible component has an adjacent-wall contact representative | Condition pilots on a snug parent or a genuine contact path without assuming literal corners | Certificates for every branch and a valid map from every hypothetical packing to an excluded label |
 | A preselected SAT equality need not be contact | Require strict alternatives for disjoint pairs and actual-contact controls | Correction alone produces no exclusion or bound |

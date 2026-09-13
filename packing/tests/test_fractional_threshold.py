@@ -11,11 +11,16 @@ condition the theorem needs.
 from __future__ import annotations
 
 import random
+import sys
+import threading
+from collections.abc import Callable
+from concurrent.futures import Future, ThreadPoolExecutor
 from fractions import Fraction
 from math import comb
 
 import pytest
 
+from sqpack.fractional import threshold as threshold_module
 from sqpack.fractional.certificate import Certificate, d4_images, verify
 from sqpack.fractional.generate import net_half_tangents
 from sqpack.fractional.model import Atom, rotation_from_half_tangent
@@ -31,6 +36,7 @@ from sqpack.fractional.threshold import (
     least_charged_cells,
     minimum_charge,
     rectangle_terms,
+    sweep_all_threshold_directions,
     sweep_slabs,
     threshold_weight_scale,
     verify_threshold,
@@ -194,6 +200,166 @@ def test_zero_weight_threshold_atoms_leave_the_point_verdict_unchanged() -> None
     assert threshold.worst_direction == point.worst_direction
     assert threshold.accepted == point.accepted
     assert threshold.total_mass == point.total_mass
+
+
+class _ThreadPoolAdapter:
+    """Exercise the bounded process scheduler portably with shared-state initialization."""
+
+    def __init__(
+        self,
+        *,
+        max_workers: int,
+        mp_context: object,
+        initializer: Callable[..., None] | None = None,
+        initargs: tuple[object, ...] = (),
+    ) -> None:
+        del mp_context
+        if initializer is not None:
+            initializer(*initargs)
+        self._pool = ThreadPoolExecutor(max_workers=max_workers)
+
+    def submit(
+        self, function: Callable[[int], tuple[int, Fraction, str]], index: int
+    ) -> Future[tuple[int, Fraction, str]]:
+        return self._pool.submit(function, index)
+
+    def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+        self._pool.shutdown(wait=wait, cancel_futures=cancel_futures)
+
+    def terminate_workers(self) -> None:
+        self._pool.shutdown(wait=True, cancel_futures=True)
+
+
+def test_parallel_threshold_progress_lands_out_of_order_but_returns_net_order(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _symmetric_threshold_certificate(Fraction(0))
+    release_first = threading.Event()
+    progress: list[int] = []
+
+    def direction(index: int) -> tuple[int, Fraction, str]:
+        if index == 0:
+            assert release_first.wait(timeout=2)
+        return index, Fraction(index + 1), certificate.directions[index].label
+
+    def landed(index: int, _minimum: Fraction, _label: str) -> None:
+        progress.append(index)
+        release_first.set()
+
+    monkeypatch.setattr(threshold_module.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_module, "ProcessPoolExecutor", _ThreadPoolAdapter)
+    monkeypatch.setattr(threshold_module, "_shared_direction_minimum", direction)
+    outcomes = sweep_all_threshold_directions(certificate, workers=2, progress=landed)
+
+    assert progress[0] != 0
+    assert outcomes == tuple(
+        (Fraction(index + 1), direction.label)
+        for index, direction in enumerate(certificate.directions)
+    )
+
+
+def test_parallel_threshold_callback_failure_retains_the_completed_batch(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _symmetric_threshold_certificate(Fraction(0))
+    submitted: list[int] = []
+    terminated: list[bool] = []
+
+    class ImmediateExecutor:
+        def __init__(self, **_kwargs: object) -> None:
+            pass
+
+        def submit(
+            self, function: Callable[[int], tuple[int, Fraction, str]], index: int
+        ) -> Future[tuple[int, Fraction, str]]:
+            del function
+            submitted.append(index)
+            future: Future[tuple[int, Fraction, str]] = Future()
+            future.set_result((index, Fraction(index + 1), str(index)))
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            raise AssertionError(f"unexpected normal shutdown: {wait}, {cancel_futures}")
+
+        def terminate_workers(self) -> None:
+            terminated.append(True)
+
+    progress: list[int] = []
+
+    def fail(index: int, _minimum: Fraction, _label: str) -> None:
+        progress.append(index)
+        raise RuntimeError("checkpoint deadline")
+
+    monkeypatch.setattr(threshold_module.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_module, "ProcessPoolExecutor", ImmediateExecutor)
+    with pytest.raises(RuntimeError, match="checkpoint deadline"):
+        sweep_all_threshold_directions(certificate, workers=2, progress=fail)
+
+    assert submitted == [0, 1, 2, 3]
+    assert progress == submitted
+    assert terminated == [True]
+
+
+def test_parallel_threshold_deadline_cancels_the_bounded_window(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _symmetric_threshold_certificate(Fraction(0))
+    futures: list[Future[tuple[int, Fraction, str]]] = []
+    terminated: list[bool] = []
+
+    class PendingExecutor:
+        def __init__(self, **_kwargs: object) -> None:
+            pass
+
+        def submit(
+            self, function: Callable[[int], tuple[int, Fraction, str]], index: int
+        ) -> Future[tuple[int, Fraction, str]]:
+            del function, index
+            future: Future[tuple[int, Fraction, str]] = Future()
+            futures.append(future)
+            return future
+
+        def shutdown(self, *, wait: bool, cancel_futures: bool) -> None:
+            raise AssertionError(f"unexpected normal shutdown: {wait}, {cancel_futures}")
+
+        def terminate_workers(self) -> None:
+            terminated.append(True)
+
+    monkeypatch.setattr(threshold_module.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_module, "ProcessPoolExecutor", PendingExecutor)
+    monkeypatch.setattr(
+        threshold_module, "wait", lambda *_args, **_kwargs: (set(), set(futures))
+    )
+    with pytest.raises(threshold_module.ThresholdSweepDeadlineError, match="absolute deadline"):
+        sweep_all_threshold_directions(
+            certificate,
+            workers=2,
+            deadline=1.0,
+            clock=lambda: 0.0,
+        )
+
+    assert len(futures) == 4
+    assert all(future.cancelled() for future in futures)
+    assert terminated == [True]
+
+
+def test_bounded_parallel_threshold_sweep_matches_serial(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    certificate = _symmetric_threshold_certificate(Fraction(0))
+    serial = sweep_all_threshold_directions(certificate, workers=1)
+    monkeypatch.setattr(threshold_module.sys, "platform", "linux")
+    monkeypatch.setattr(threshold_module, "ProcessPoolExecutor", _ThreadPoolAdapter)
+    parallel = sweep_all_threshold_directions(certificate, workers=2)
+    assert parallel == serial
+
+
+@pytest.mark.skipif(not sys.platform.startswith("linux"), reason="fork pool is Linux-only")
+def test_real_forked_threshold_sweep_matches_serial() -> None:
+    certificate = _symmetric_threshold_certificate(Fraction(0))
+    assert sweep_all_threshold_directions(certificate, workers=2) == (
+        sweep_all_threshold_directions(certificate, workers=1)
+    )
 
 
 def test_duplicate_threshold_atoms_are_refused() -> None:
