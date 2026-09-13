@@ -8,7 +8,7 @@ inline SVG label boxes.
 
 `--check-supporting` also asks the provenance question, in both media: whether every
 run of text on the page is drawn from a face the page ships. That is the on-screen half
-of the guard `render_explainer_pdf --check` holds the exported file to, and the two
+of the guard `render_explainer_pdf --check-artifact` holds the exported file to, and the two
 share one list of what is shipped and one list of the host faces a kpress bead is on
 its way to replacing. It is one flag rather than two because the second question is not
 optional either: a run set in the reader's own font is a different page for every

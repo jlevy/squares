@@ -31,11 +31,12 @@ font-subset tags per process, so two runs of `render_composite_pdf` differ. It i
 not a portable one, and the difference matters for what `--check` can mean. These bytes
 are a function of the Chromium build, of which binary variant ran -- the headless shell
 and full Chrome differ in about 99% of the output -- and of the fonts the host has. So
-`--check` compares two renders taken here, now, in one browser, which is exactly the
-guarantee `pages.yml` already asks of the HTML: a second render has to match the first.
-It does not compare against a recorded digest. A check that fails on the next pin bump,
-or on a contributor's laptop, is the check-that-can-never-pass this repository has been
-bitten by before, and the lesson is written into the macOS job.
+`--check` compares fresh renders taken here, now, with the same browser build. Pages uses
+`--check-artifact` instead: the exact PDF prepared for publication, including its source
+receipt, must match a fresh draw of the current page. It also checks that stored PDF's
+fonts and pagination without rewriting it. Neither mode compares against a committed
+PDF or a portable digest. `--diagnostics-dir` retains the raw comparison pair and a
+neutral report when a check fails; a successful check creates no diagnostic files.
 """
 
 from __future__ import annotations
@@ -48,6 +49,8 @@ import sys
 from collections.abc import Iterable, Sequence
 from functools import cache
 from pathlib import Path
+from tempfile import mkdtemp
+from typing import Never
 
 from strif import atomic_output_file
 
@@ -67,8 +70,9 @@ EXPECTED_PAGE_COUNT = 22
 #: every cross-reference offset after them shifts.
 _DATES = re.compile(rb"/(CreationDate|ModDate) \(D:[^)]{0,32}\)")
 
-#: What the page tells us it is ready. `math-ready` is set by the page's own script once
-#: KaTeX has typeset; `document.fonts.ready` settles when the inlined faces are applied.
+#: The page marks its submitted math work finished, including recovered failures.
+#: This marker and `document.fonts.ready` establish settlement; `_MATH_RENDERED`
+#: separately checks that the finished print DOM contains readable math.
 READY = "html.math-ready"
 
 #: Media changes and ResizeObserver callbacks can start asynchronous math renders.
@@ -80,6 +84,96 @@ SETTLED = """async () => {
   await document.fonts.ready;
   await new Promise(done => requestAnimationFrame(done));
   await globalThis.squaresMath?.settled();
+}"""
+
+#: A completed render can be a recovered failure: the host replaces a failed `.tex`
+#: formula with its source and marks it ready. Repeated PDFs then agree on raw TeX.
+#: Inspect the final print DOM as well as waiting for it. Native KPress formulas may
+#: retain readable semantic MathML, provided their source box remains hidden.
+#: Successful KaTeX keeps TeX in accessibility annotations, so source-text regexes
+#: would reject valid formulas. Geometry and clipping distinguish the painted output
+#: from hidden variants and the clipped semantic copy beside successful KaTeX.
+_MATH_RENDERED = r"""() => {
+  const exposed = node => {
+    if (!node.checkVisibility({ opacityProperty: true, visibilityProperty: true })) {
+      return false;
+    }
+    let {left, right, top, bottom} = node.getBoundingClientRect();
+    const intersect = box => {
+      left = Math.max(left, box.left); right = Math.min(right, box.right);
+      top = Math.max(top, box.top); bottom = Math.min(bottom, box.bottom);
+    };
+    for (let parent = node; parent; parent = parent.parentElement) {
+      const style = getComputedStyle(parent), box = parent.getBoundingClientRect();
+      if (/^(auto|scroll)$/.test(style.overflowX) && parent.scrollWidth > parent.clientWidth) {
+        const width = right - left;
+        left = box.left; right = Math.min(box.right, left + width);
+      }
+      if (/^(auto|scroll)$/.test(style.overflowY)
+          && parent.scrollHeight > parent.clientHeight) {
+        const height = bottom - top;
+        top = box.top; bottom = Math.min(box.bottom, top + height);
+      }
+      if (/^(hidden|clip)$/.test(style.overflowX)) {
+        left = Math.max(left, box.left); right = Math.min(right, box.right);
+      }
+      if (/^(hidden|clip)$/.test(style.overflowY)) {
+        top = Math.max(top, box.top); bottom = Math.min(bottom, box.bottom);
+      }
+      const clip = (style.clip || 'auto').match(/^rect\(([^)]+)\)$/);
+      if (clip) {
+        const defaults = [0, box.width, box.height, 0];
+        const edges = clip[1].trim().split(/[,\s]+/).map((value, i) =>
+          value === 'auto' ? defaults[i] : parseFloat(value));
+        if (edges.length !== 4 || !edges.every(Number.isFinite)) return false;
+        intersect({left: box.left + edges[3], right: box.left + edges[1],
+          top: box.top + edges[0], bottom: box.top + edges[2]});
+      }
+      const path = style.clipPath || 'none';
+      if (path !== 'none') {
+        const inset = path.match(/^inset\(([^)]+)\)$/);
+        if (!inset) return false;
+        const values = inset[1].split(/\s+round\s+/)[0].trim().split(/\s+/);
+        if (values.length < 1 || values.length > 4) return false;
+        const edges = [values[0], values[1] || values[0],
+          values[2] || values[0], values[3] || values[1] || values[0]];
+        const pixels = edges.map((value, i) => parseFloat(value) *
+          (value.endsWith('%') ? (i % 2 ? box.width : box.height) / 100 : 1));
+        if (!pixels.every(Number.isFinite)) return false;
+        intersect({left: box.left + pixels[3], right: box.right - pixels[1],
+          top: box.top + pixels[0], bottom: box.bottom - pixels[2]});
+      }
+      if (right - left <= 1 || bottom - top <= 1) return false;
+    }
+    return right - left > 1 && bottom - top > 1;
+  };
+  const selector = '.tex,.tex-d,.kpress-math,[data-squares-math-ready]';
+  const failures = [];
+  for (const [index, host] of [...document.querySelectorAll(selector)].entries()) {
+    // The outer host owns its active prepared variant and native source box. A
+    // display:none print alternative has no layout; pending visibility:hidden
+    // formulas still have layout and must pass the output checks below.
+    if (host.parentElement?.closest(selector) || !host.getClientRects().length) continue;
+    const hasVisible = query => [...host.querySelectorAll(query)].some(exposed);
+    const native = host.matches('.kpress-math');
+    const raw = host.querySelector('.kpress-math-render');
+    const semantic = hasVisible('math.kpress-math-semantic, .kpress-math-semantic math');
+    const pending = host.closest('[data-squares-math-queued]')
+      || host.querySelector('[data-squares-math-queued]');
+    const error = hasVisible('.katex-error, merror');
+    const readable = native && host.dataset.kpressMathRendered !== 'true'
+      ? semantic && (!raw || !exposed(raw))
+      : hasVisible('.katex-html') && (!native || !semantic);
+    if (!pending && !error && readable) continue;
+    const source = host.dataset.kpressMathSource || raw?.dataset.kpressMathSource
+      || host.textContent || '';
+    failures.push(`${index} (${host.className || host.tagName}): `
+      + source.replace(/\s+/g, ' ').slice(0, 160));
+  }
+  if (failures.length) {
+    throw new Error(`unrendered math in ${failures.length} printed formulas: `
+      + failures.slice(0, 8).join('; '));
+  }
 }"""
 
 #: A browser the environment supplies, for hosts that have one and cannot run
@@ -353,6 +447,10 @@ def render_pdf_bytes() -> bytes:
     `devtools.sans_instances` is where the set is declared and checked, and injecting
     the faces here rather than rendering them into the page is what keeps the served
     `index.html` and the screen on the variable font.
+
+    The final DOM check distinguishes readable math from a finished failure that
+    exposed TeX source. Native MathML fallback is permitted when readable; the later
+    PDF font guard still decides whether the host supplied an accepted face.
     """
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
@@ -374,6 +472,7 @@ def render_pdf_bytes() -> bytes:
             page.evaluate(_FACES_APPLIED, [list(_MARGIN_BOX_TOKENS), _MARGIN_BOX_SAMPLE])
             page.evaluate(_IMAGES_DECODED)
             page.evaluate(SETTLED)
+            page.evaluate(_MATH_RENDERED)
             return page.pdf(
                 print_background=True,
                 prefer_css_page_size=True,
@@ -803,63 +902,140 @@ def update() -> None:
     print(f"explainer PDF updated: {OUTPUT.name} ({len(written)} bytes)")
 
 
-def check(renders: int = 2) -> None:
-    """Renders of one page, one browser, one moment: every one has to match the first.
+def _failed_check(
+    message: str,
+    reference: bytes,
+    replay: bytes,
+    *,
+    diagnostics_dir: Path | None,
+    reference_kind: str,
+    replay_number: int,
+) -> Never:
+    """Retain the actual compared bytes without replacing an earlier failure's pair."""
+    if diagnostics_dir is not None:
+        try:
+            diagnostics_dir.mkdir(parents=True, exist_ok=True)
+            retained = Path(mkdtemp(prefix="pdf-check-", dir=diagnostics_dir))
+            report = (
+                f"reference: {reference_kind}\n"
+                f"replay: fresh draw {replay_number}\n"
+                f"raw bytes: {len(reference)} then {len(replay)}\n"
+                f"normalised bytes: {len(_normalised(reference))} then "
+                f"{len(_normalised(replay))}\n\n{message}\n"
+            )
+            for name, data in (
+                ("reference.pdf", reference),
+                ("replay.pdf", replay),
+                ("report.txt", report.encode("utf-8")),
+            ):
+                with atomic_output_file(retained / name) as temporary:
+                    temporary.write_bytes(data)
+            message += f"\nPDF diagnostics retained in {retained}"
+        except OSError as error:
+            message += f"\ncould not retain PDF diagnostics in {diagnostics_dir}: {error}"
+    raise SystemExit(message)
 
-    Not a comparison against the committed file, because there is no committed file --
-    the PDF is built in the Pages job and deployed, never checked in. What this catches
-    is the failure that would actually reach a reader: a canvas race, a face that had
-    not applied, an animation still running, anything that makes the page draw
-    differently twice. Those are the defects that produced a 440 KB spread before the
-    waiting was right.
 
-    The second question is about one render rather than about two, and no amount of
-    self-agreement would answer it: whether the glyphs are set in fonts. A page that
-    draws its sans as outline paths draws it that way every time.
-
-    `renders` is two in the Pages job, where the question is asked on every push and
-    each answer costs a draw of the currently reviewed 22-page document. Callers can
-    raise it because the earlier observation used ten consecutive renders while the
-    check only ever takes two, and a race that shows once in ten cannot be chased at
-    two: `--renders 10` repeats that protocol, and higher hunts something rarer than it.
-    """
-    first = _normalised(render_pdf_bytes())
-    for _ in range(renders - 1):
-        again = _normalised(render_pdf_bytes())
+def _check_renders(
+    reference: bytes,
+    renders: int,
+    *,
+    source: bytes | None,
+    diagnostics_dir: Path | None,
+) -> None:
+    """Compare complete files; the stored artifact's receipt participates in equality."""
+    reference_kind = "stored artifact" if source is not None else "fresh draw 1"
+    first = _normalised(reference)
+    replay = reference
+    for number in range(1, renders):
+        replay = render_pdf_bytes()
+        if source is not None:
+            replay = _with_receipt(replay, source)
+        again = _normalised(replay)
         if first != again:
             length_delta = abs(len(first) - len(again))
-            raise SystemExit(
+            _failed_check(
                 f"explainer PDF does not reproduce itself: {len(first)} then {len(again)} "
                 f"bytes, normalised; length delta {length_delta}. The cause is unknown; "
                 "D-490 records the host-qualified readiness controls. "
-                + _difference(first, again)
+                + _difference(first, again),
+                reference,
+                replay,
+                diagnostics_dir=diagnostics_dir,
+                reference_kind=reference_kind,
+                replay_number=number if source is not None else number + 1,
             )
-    findings = font_findings(first)
-    if findings:
-        raise SystemExit("\n".join(findings))
-    pages = first.count(b"/Type /Page\n") or first.count(b"/Type/Page")
+    findings = font_findings(reference)
+    pages = reference.count(b"/Type /Page\n") or reference.count(b"/Type/Page")
     if pages != EXPECTED_PAGE_COUNT:
-        raise SystemExit(
+        findings.append(
             f"explainer PDF has {pages} pages; expected {EXPECTED_PAGE_COUNT}. "
             "A layout change crossed a page boundary."
         )
-    embedded = embedded_fonts(first)
-    host = sorted(set(outline_fonts(first)))
+    if findings:
+        _failed_check(
+            "\n".join(findings),
+            reference,
+            replay,
+            diagnostics_dir=diagnostics_dir,
+            reference_kind=reference_kind,
+            replay_number=renders - 1 if source is not None else renders,
+        )
+    embedded = embedded_fonts(reference)
+    host = sorted(set(outline_fonts(reference)))
     fallbacks = ", ".join(host)
     trailer = f"; drawn as outlines from the host's own fonts: {fallbacks}" if host else ""
+    compared = (
+        f"stored artifact and {renders - 1} fresh "
+        f"{'render' if renders == 2 else 'renders'} agree"
+        if source is not None
+        else f"{renders} fresh renders agree"
+    )
     print(
-        f"explainer PDF check passed: {renders} renders agree, {len(first)} bytes, "
+        f"explainer PDF check passed: {compared}, {len(first)} bytes, "
         f"{pages} pages, {len(embedded)} embedded fonts, none of them this page's "
         f"in outline paths{trailer}"
     )
-    _, pending = provenance(first)
+    _, pending = provenance(reference)
     for family, bead in sorted(pending.items()):
         print(f"pending: {family} still comes from the host, waiting on {bead}")
-    for family, bead in atlas_faces_present(first).items():
+    for family, bead in atlas_faces_present(reference).items():
         print(
             f"accepted: {family} is the atlas figure's own, drawn by whichever machine "
             f"exported it, and stays; recorded in {bead}"
         )
+
+
+def check(renders: int = 2, *, diagnostics_dir: Path | None = None) -> None:
+    """Compare fresh draws for diagnosis, independently of any stored artifact.
+
+    Every draw must match the first except for the two PDF date fields. The first
+    draw must also pass the font and pagination guards: repeated agreement alone
+    cannot establish that fonts are embedded or the reviewed layout is intact.
+    `renders=10` repeats the historical ten-draw readiness control on the current host.
+    """
+    if renders < 2:
+        raise ValueError("at least 2 renders are required for a comparison")
+    _check_renders(render_pdf_bytes(), renders, source=None, diagnostics_dir=diagnostics_dir)
+
+
+def check_artifact(renders: int = 2, *, diagnostics_dir: Path | None = None) -> None:
+    """Validate the existing publication candidate without modifying it.
+
+    The stored file is the first of `renders` total draws, so the default adds one
+    fresh draw. The current HTML receipt is appended to every replay; missing, stale
+    or duplicate receipts on the stored file therefore fail the complete comparison.
+    There is no fallback draw when the publication candidate is missing.
+    """
+    if renders < 2:
+        raise ValueError("at least 2 renders are required for a comparison")
+    try:
+        reference = OUTPUT.read_bytes()
+    except FileNotFoundError:
+        raise SystemExit(f"{OUTPUT} is missing; run --update before --check-artifact") from None
+    _check_renders(
+        reference, renders, source=PAGE.read_bytes(), diagnostics_dir=diagnostics_dir
+    )
 
 
 def fonts() -> None:
@@ -884,17 +1060,33 @@ def main(argv: Sequence[str] | None = None) -> int:
     command = argparse.ArgumentParser(description=__doc__)
     mode = command.add_mutually_exclusive_group(required=True)
     mode.add_argument("--update", action="store_true", help="write the PDF")
-    mode.add_argument("--check", action="store_true", help="render repeatedly and compare")
+    mode.add_argument(
+        "--check", action="store_true", help="compare fresh renders for diagnosis"
+    )
+    mode.add_argument(
+        "--check-artifact",
+        action="store_true",
+        help="compare the existing PDF and its source receipt with fresh renders",
+    )
     mode.add_argument("--fonts", action="store_true", help="list the fonts the PDF embeds")
     command.add_argument(
         "--renders",
         type=int,
         metavar="N",
-        help="how many renders --check compares (default 2)",
+        help="total draws compared (default 2); --check-artifact counts the stored PDF as one",
+    )
+    command.add_argument(
+        "--diagnostics-dir",
+        type=Path,
+        metavar="PATH",
+        help="retain the raw comparison pair and report in a unique subdirectory on failure",
     )
     arguments = command.parse_args(argv)
-    if not arguments.check and arguments.renders is not None:
-        command.error("--renders is for --check, the only mode that compares renders")
+    comparing = arguments.check or arguments.check_artifact
+    if not comparing and arguments.renders is not None:
+        command.error("--renders is for --check or --check-artifact")
+    if not comparing and arguments.diagnostics_dir is not None:
+        command.error("--diagnostics-dir is for --check or --check-artifact")
     renders = arguments.renders if arguments.renders is not None else 2
     if renders < 2:
         command.error("--renders must be at least 2, which is one render against another")
@@ -904,8 +1096,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         update()
     elif arguments.fonts:
         fonts()
+    elif arguments.check_artifact:
+        check_artifact(renders, diagnostics_dir=arguments.diagnostics_dir)
     else:
-        check(renders)
+        check(renders, diagnostics_dir=arguments.diagnostics_dir)
     return 0
 
 
