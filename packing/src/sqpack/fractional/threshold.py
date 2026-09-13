@@ -2,23 +2,25 @@
 
 A point atom of weight ``w`` charges ``w`` to every core containing its point; a packing's
 pairwise disjoint cores can be charged at most once, so its budget is ``w``. A
-*threshold atom* ``(S, k, w)`` charges ``w`` to every core containing at least ``k`` of the
-points of the finite set ``S``. Disjoint cores have disjoint traces on ``S``, each of size
-at least ``k`` when charged, so at most ``floor(|S| / k)`` of them are charged: the budget
-is ``w floor(|S| / k)``. A *threshold certificate* is a nonnegative combination of point
+*threshold atom* ``(S, a, k, w)`` puts ``a_s`` positive integer tokens at each distinct
+site ``s`` of the finite set ``S`` and charges ``w`` when a core contains at least ``k``
+tokens. Write ``A = sum_s a_s``. Disjoint closed cores consume disjoint tokens, at least
+``k`` per charged core, so at most ``floor(A / k)`` cores are charged: the budget is
+``w floor(A / k)``. A *threshold certificate* is a nonnegative combination of point
 atoms and threshold atoms whose total budget is below ``n`` while every admissible core
 (every closed ``B``-square at a net direction inside the container) is charged at least
 ``1``. The counting proof of `sqpack.fractional.certificate` then goes through unchanged:
 each of ``n`` interior-disjoint unit squares holds a core charged at least ``1``, the
 cores are pairwise disjoint, and the sum of their charges is at most the budget. Point
-atoms are the case ``|S| = k = 1``; when ``k`` divides ``|S|`` the threshold inequality is
+atoms are the case ``|S| = A = k = 1``. Ordinary threshold atoms have every ``a_s = 1``;
+when ``k`` divides ``A`` the threshold inequality is
 implied by the point inequalities, so the atoms that add anything are ``2-of-3``,
 ``3-of-4``, ``2-of-5``, ``3-of-5`` and their kin -- on the dual (fractional packing) side,
-the clique and odd-cycle inequalities ``sum_{P : |P ∩ S| >= k} y_P <= floor(|S| / k)``.
+the clique and odd-cycle inequalities for ordinary, all-ones atoms.
 
 The five conditions become: ``Condition 1'`` the point atoms *and* the threshold atoms are
-D4-invariant (the image of ``(S, k, w)`` under a symmetry of the container is the atom
-``(gS, k, w)``, and it must be present with the same weight); ``Condition 2'`` the total
+D4-invariant (each token count moves with its site under a symmetry, and the image
+must be present with the same weight); ``Condition 2'`` the total
 budget is below ``n``; ``Condition 3`` and ``Condition 4`` as before; ``Condition 5'``
 every admissible core is charged at least ``1``.
 
@@ -33,14 +35,14 @@ at least the adjacent open cells' charges: the minimum is attained on an open ce
 sweep may omit boundaries, as for point atoms.
 
 A threshold atom enters the same integer difference array by inclusion--exclusion. For
-an open cell whose trace on ``S`` has ``m`` points,
+an open cell whose core contains ``m`` of the ``A`` labelled tokens,
 
     [m >= k] = sum_{j >= k} (-1)^(j-k) C(j-1, k-1) C(m, j),
 
-and ``C(m, j)`` counts the ``j``-subsets ``T`` of ``S`` with ``C ⊆ ⋂_{t ∈ T} R_t``. Each
+and ``C(m, j)`` counts the ``j``-subsets ``T`` of tokens with ``C ⊆ ⋂_{t ∈ T} R_t``.
+Tokens at the same site share a rectangle but remain distinct subset indices. Each
 intersection is a closed axis-aligned rectangle with event-coordinate corners, so the atom
-is ``sum_{j >= k} C(A, j)`` signed rectangle terms, over the ``A`` tokens of ``S``,
-whose *sum* on every open cell is the
+is ``sum_{j >= k} C(A, j)`` signed rectangle terms whose *sum* on every open cell is the
 nonnegative, monotone value ``w [m >= k]``. `sqpack.fractional.sweep` refuses signed
 *point weights* because a signed weight makes the charge non-monotone and breaks the
 counting; the signs here are internal to an exact expansion of a monotone function and
@@ -59,6 +61,7 @@ atom instead, is the independent route the tests hold it to, cell for cell.
 from __future__ import annotations
 
 import multiprocessing as mp
+import re
 import sys
 import time
 from collections.abc import Callable, Iterable
@@ -94,11 +97,16 @@ Point = tuple[Fraction, Fraction]
 #: and no mass, and `reduce_to_spans` accepts a zero weight.
 _EVENT_ONLY = Fraction(0)
 
-#: The record variant a weighted atom must declare. Readers here ignore unknown fields, so
-#: a bare ``multiplicities`` would be skipped by one that predates token counts -- and the
-#: archived ``floor_atom_columns`` reader did exactly that, coercing the field through
-#: ``int`` under a float membership slack. The marker is what makes that read fail loudly.
+#: Weighted records use this marker and `weighted_points` triples. They omit the legacy
+#: required `points` field: an older reader that ignores unknown fields must still fail.
 WEIGHTED_VARIANT = "weighted-threshold/v1"
+
+
+def _record_rational(value: object, field: str) -> Fraction:
+    """Parse the exact integer-or-fraction spelling emitted by atom records."""
+    if not isinstance(value, str) or re.fullmatch(r"-?[0-9]+(?:/[1-9][0-9]*)?", value) is None:
+        raise TypeError(f"field {field!r} must be an exact rational string, got {value!r}")
+    return Fraction(value)
 
 
 @dataclass(frozen=True, slots=True)
@@ -134,7 +142,9 @@ class ThresholdAtom:
         # downstream use then reads one materialized count per site rather than having to
         # remember a second spelling of "all ones"; `object.__setattr__` is how the other
         # frozen records here normalize (`sqpack.uniform_cell`, `sqpack.contact_assembly`).
-        multiplicities = self.multiplicities or (1,) * len(self.points)
+        multiplicities = (
+            (1,) * len(self.points) if self.multiplicities == () else self.multiplicities
+        )
         if len(multiplicities) != len(self.points):
             raise ValueError(
                 f"{len(self.points)} points carry {len(multiplicities)} multiplicities; "
@@ -256,55 +266,84 @@ class ThresholdAtom:
     def to_record(self) -> dict[str, Any]:
         """The JSON record: the legacy shape exactly when every token count is one.
 
-        A weighted atom also carries `WEIGHTED_VARIANT`. The marker is the part an older
-        reader refuses: readers here ignore fields they do not know, so a record carrying
-        only ``multiplicities`` would be read by one as a different, lighter atom.
+        Weighted records omit the legacy reader's required ``points`` field. A marker
+        added to the old shape would not stop that reader ignoring the token counts.
         """
 
-        record: dict[str, Any] = {
+        if self.token_count != self.size:
+            return {
+                "variant": WEIGHTED_VARIANT,
+                "weighted_points": [
+                    [str(x), str(y), count]
+                    for (x, y), count in zip(self.points, self.multiplicities, strict=True)
+                ],
+                "threshold": self.threshold,
+                "weight": str(self.weight),
+            }
+        return {
             "points": [[str(x), str(y)] for x, y in self.points],
             "threshold": self.threshold,
             "weight": str(self.weight),
         }
-        if self.token_count != self.size:
-            record["variant"] = WEIGHTED_VARIANT
-            record["multiplicities"] = list(self.multiplicities)
-        return record
 
     @classmethod
-    def from_record(cls, record: dict[str, Any]) -> ThresholdAtom:
-        points = tuple((Fraction(x), Fraction(y)) for x, y in record["points"])
+    def from_record(cls, record: object) -> ThresholdAtom:
+        """Read one legacy atom or one strictly separated weighted representation."""
+        if not isinstance(record, dict):
+            raise TypeError("a threshold atom record must be a JSON object")
+        if "multiplicities" in record:
+            raise ValueError(
+                "field 'multiplicities' is an unsupported additive prototype; weighted "
+                "records use 'weighted_points' triples without 'points'"
+            )
+        weighted = "variant" in record
+        if weighted:
+            variant = record["variant"]
+            if variant != WEIGHTED_VARIANT:
+                raise ValueError(
+                    f"threshold atom declares variant {variant!r}, which this "
+                    f"reader does not support; expected {WEIGHTED_VARIANT!r}"
+                )
+            if "points" in record:
+                raise ValueError("weighted records may not also carry legacy 'points'")
+            if "weighted_points" not in record:
+                raise ValueError("the weighted variant requires 'weighted_points'")
+        elif "weighted_points" in record:
+            raise ValueError("'weighted_points' without a weighted 'variant' is ambiguous")
+        field = "weighted_points" if weighted else "points"
+        rows = record.get(field)
+        if not isinstance(rows, list) or not rows:
+            raise ValueError(f"field {field!r} must be a nonempty JSON array")
+        points: list[Point] = []
+        multiplicities: list[int] = []
+        for index, row in enumerate(rows):
+            if not isinstance(row, list) or len(row) != (3 if weighted else 2):
+                raise ValueError(
+                    f"{field}[{index}] must be "
+                    + ("[x, y, token_count]" if weighted else "[x, y]")
+                )
+            points.append(
+                (
+                    _record_rational(row[0], f"{field}[{index}][0]"),
+                    _record_rational(row[1], f"{field}[{index}][1]"),
+                )
+            )
+            multiplicities.append(row[2] if weighted else 1)
         threshold = record["threshold"]
         if not isinstance(threshold, int) or isinstance(threshold, bool):
             raise TypeError("field 'threshold' must be a JSON integer")
-        variant = record.get("variant")
-        multiplicities = record.get("multiplicities")
-        if variant is not None and variant != WEIGHTED_VARIANT:
-            raise ValueError(
-                f"threshold atom declares variant {variant!r}, which this reader does not "
-                f"support; only {WEIGHTED_VARIANT!r} carries token counts"
-            )
-        if multiplicities is not None and variant is None:
-            raise ValueError(
-                "threshold atom carries 'multiplicities' without "
-                f"'variant': {WEIGHTED_VARIANT!r}; a reader that did not know the field "
-                "would ignore it and admit a different atom"
-            )
-        if variant is not None and multiplicities is None:
-            raise ValueError(
-                f"threshold atom declares variant {WEIGHTED_VARIANT!r} with no "
-                "'multiplicities'; the variant exists to carry them"
-            )
-        if multiplicities is None:
-            return cls(points, threshold, Fraction(record["weight"]))
-        if not isinstance(multiplicities, list):
-            raise TypeError("field 'multiplicities' must be a JSON array of integers")
-        return cls(points, threshold, Fraction(record["weight"]), tuple(multiplicities))
+        return cls(
+            tuple(points),
+            threshold,
+            _record_rational(record["weight"], "weight"),
+            tuple(multiplicities),
+        )
 
 
 def expansion_terms(size: int, threshold: int) -> tuple[tuple[int, int], ...]:
     """``(j, (-1)^(j-k) C(j-1, k-1))`` for ``j = k .. size``: the inclusion--exclusion
-    coefficients of ``[m >= k]`` over the ``j``-subsets of an ``m``-point trace."""
+    coefficients of ``[m >= k]`` over the ``j``-subsets of an ``m``-token trace.
+    ``size`` is the token count, including coincident tokens."""
 
     if threshold < 1 or threshold > size:
         raise ValueError("threshold outside 1..size")
@@ -553,6 +592,12 @@ def charge_grid_direct(
     `charge_grid` past the event grid, which is `reduce_to_spans`'s in both.
     """
 
+    # Charge headroom does not bound the independent token-count array: an A-of-A
+    # atom has absolute expansion mass one for arbitrarily large A. Each prefix
+    # intermediate has magnitude at most A, so bound A before any int64 arithmetic.
+    for threshold_atom in threshold_atoms:
+        if threshold_atom.token_count > np.iinfo(np.int64).max:
+            raise ValueError("token count exceeds the direct grid's int64 capacity")
     _headroom(atoms, threshold_atoms, scale)
     everything = _event_atoms(atoms, threshold_atoms)
     reduction = reduce_to_spans(everything, direction, outer_side, square_side)

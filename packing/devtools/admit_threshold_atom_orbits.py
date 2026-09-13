@@ -1,11 +1,11 @@
 """Admit threshold-atom orbit rows against a retained ceiling family exactly.
 
-The reader accepts a ``CeilingCertificate`` record and the historical threshold-orbit
-JSON shape written by the A6 lane.  It reconstructs every distinct D4 image, evaluates
-every point-in-placement membership with ``Fraction`` arithmetic, and checks
+The reader accepts a ``CeilingCertificate`` record and ordinary or weighted threshold
+orbit records. It reconstructs every distinct D4 image, evaluates exact placement
+memberships, and counts each contained site's tokens. For token total A it checks
 
-    sum_g sum_{P: |P intersect gS| >= k} y_P
-        <= |D4.S| floor(|S| / k).
+    sum_g sum_{P: tokens(P intersect gS) >= k} y_P
+        <= |D4.(S,a)| floor(A / k).
 
 This is only the threshold-row admission.  It deliberately does not decide the ceiling
 family's K0--K3 geometry and depth proof; run ``devtools.independent_ceiling_reader``
@@ -21,10 +21,10 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 from sqpack.fractional.ceiling import CeilingCertificate
-from sqpack.fractional.threshold import WEIGHTED_VARIANT, ThresholdAtom
+from sqpack.fractional.threshold import ThresholdAtom
 
 KIND = "threshold-atom-orbit-admission/v1"
 
@@ -97,11 +97,6 @@ def _family(record: Mapping[str, Any]) -> CeilingCertificate:
         certificate = CeilingCertificate.from_record(dict(record))
     except (KeyError, TypeError, ValueError, ZeroDivisionError) as error:
         raise AdmissionError(f"invalid ceiling family: {error}") from error
-    for index, placement in enumerate(certificate.placements):
-        if placement.weight < 0:
-            raise AdmissionError(
-                f"family placement {index} has negative weight {placement.weight}"
-            )
     if declared_total < 0:
         raise AdmissionError(f"family field 'total_weight' is negative: {declared_total}")
     if certificate.total_weight != declared_total:
@@ -110,42 +105,6 @@ def _family(record: Mapping[str, Any]) -> CeilingCertificate:
             f"declared {declared_total}, recomputed {certificate.total_weight}"
         )
     return certificate
-
-
-def _point(raw: Any, context: str) -> tuple[Fraction, Fraction]:
-    if not isinstance(raw, list) or len(raw) != 2:
-        raise AdmissionError(f"{context} must be a two-element JSON array")
-    return _fraction(raw[0], f"{context}[0]"), _fraction(raw[1], f"{context}[1]")
-
-
-def _multiplicities(entry: Mapping[str, Any], context: str) -> tuple[int, ...]:
-    """The declared token counts, or the empty tuple an all-ones atom means.
-
-    The variant marker is required rather than inferred, for the reason
-    `devtools.dilation_corollary` requires its own: a reader that does not know the field
-    skips it and decides a lighter object. `ThresholdAtom` refuses the same shapes, and
-    checking here too is what puts the atom's index in the message.
-    """
-
-    variant = entry.get("variant")
-    declared = entry.get("multiplicities")
-    if variant is not None and variant != WEIGHTED_VARIANT:
-        raise AdmissionError(
-            f"{context} declares variant {variant!r}, not {WEIGHTED_VARIANT!r}"
-        )
-    if declared is not None and variant is None:
-        raise AdmissionError(
-            f"{context} carries 'multiplicities' without 'variant': {WEIGHTED_VARIANT!r}"
-        )
-    if variant is not None and declared is None:
-        raise AdmissionError(
-            f"{context} declares {WEIGHTED_VARIANT!r} with no 'multiplicities'"
-        )
-    if declared is None:
-        return ()
-    if not isinstance(declared, list):
-        raise AdmissionError(f"{context} field 'multiplicities' must be a JSON array")
-    return tuple(cast(list[Any], declared))
 
 
 def _orbits(record: Mapping[str, Any], family: CeilingCertificate) -> tuple[Orbit, ...]:
@@ -170,20 +129,11 @@ def _orbits(record: Mapping[str, Any], family: CeilingCertificate) -> tuple[Orbi
     parsed: list[Orbit] = []
     for index, raw_entry in enumerate(entries):
         entry = _mapping(raw_entry, f"atom {index}")
-        raw_points = entry.get("points")
-        if not isinstance(raw_points, list):
-            raise AdmissionError(f"atom {index} field 'points' must be a JSON array")
-        points = tuple(
-            _point(raw_point, f"atom {index} point {point_index}")
-            for point_index, raw_point in enumerate(raw_points)
-        )
-        threshold = entry.get("threshold")
-        if not isinstance(threshold, int) or isinstance(threshold, bool):
-            raise AdmissionError(f"atom {index} field 'threshold' must be a JSON integer")
-        multiplicities = _multiplicities(entry, f"atom {index}")
         try:
-            atom = ThresholdAtom(points, threshold, Fraction(1), multiplicities)
-        except (TypeError, ValueError) as error:
+            # Orbit admission prices the unit inequality; an LP multiplier is not an
+            # input to that row. The model owns both strict serialized site formats.
+            atom = ThresholdAtom.from_record(dict(entry) | {"weight": "1"})
+        except (KeyError, TypeError, ValueError, ZeroDivisionError) as error:
             raise AdmissionError(f"invalid atom {index}: {error}") from error
         for point_index, (x, y) in enumerate(atom.points):
             if not (0 <= x <= outer_side and 0 <= y <= outer_side):
@@ -213,7 +163,10 @@ def _orbit_report(
     for image in orbit.images:
         charge = Fraction(0)
         for placement_index, placement in enumerate(family.placements):
-            trace = sum(memberships[point][placement_index] for point in image.points)
+            trace = sum(
+                count * memberships[point][placement_index]
+                for point, count in zip(image.points, image.multiplicities, strict=True)
+            )
             if trace >= image.threshold:
                 charge += placement.weight
         image_charges.append(charge)

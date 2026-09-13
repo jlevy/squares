@@ -446,6 +446,11 @@ def _priced_row(
         budget = DEPTH_BUDGET
         coefficients = _depth_coefficients(point, columns)
     else:
+        if any(key in identity for key in ("variant", "weighted_points", "multiplicities")):
+            raise AdmissionError(
+                f"{context} identity declares weighted fields, and this reader prices "
+                "unweighted orbit columns only"
+            )
         raw_points = _array(identity.get("points"), f"{context} identity field 'points'")
         points = tuple(
             _point(point, f"{context} atom point {index}", outer_side)
@@ -454,15 +459,6 @@ def _priced_row(
         threshold = _integer(
             identity.get("threshold"), f"{context} identity field 'threshold'", minimum=1
         )
-        # This reader prices ordinary orbit columns. A weighted atom's budget is a token
-        # budget and its orbit is keyed on the token counts, so reading one here without
-        # them would price a different column; refuse instead of guessing. Outside the
-        # `try`, because `AdmissionError` is a `ValueError` and would be relabelled.
-        if identity.get("multiplicities") is not None or identity.get("variant") is not None:
-            raise AdmissionError(
-                f"{context} identity declares token counts, and this reader prices "
-                "unweighted orbit columns only"
-            )
         try:
             atom = ThresholdAtom(points, threshold, Fraction(1))
         except (TypeError, ValueError) as error:

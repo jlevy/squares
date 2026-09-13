@@ -209,6 +209,52 @@ def test_an_inexact_number_anywhere_in_the_file_is_refused(
     assert "inexact JSON number '1.5'" in capsys.readouterr().out
 
 
+@pytest.mark.parametrize(
+    "fields",
+    [
+        {"variant": "weighted-threshold/v1", "multiplicities": []},
+        {"variant": "weighted-threshold/v1", "multiplicities": [1, 1, 1]},
+        {"variant": "weighted-threshold/v1", "multiplicities": [True, 1, 1]},
+        {"variant": None},
+        {"multiplicities": None},
+        {"weighted_points": None},
+    ],
+)
+def test_declared_weighted_fields_are_refused_before_normalization_or_coverage(
+    tmp_path: Path,
+    tight: ThresholdCertificate,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    fields: dict[str, object],
+) -> None:
+    no_routes(monkeypatch)
+    record = json.loads(json.dumps(_record(tight)))
+    record["threshold_atoms"][0].update(fields)
+    data = json.dumps(record).encode()
+    with pytest.raises(gate.FormatError, match="unweighted atoms only"):
+        load(data)
+    path = tmp_path / "weighted.json"
+    path.write_bytes(data)
+    assert decide(path, workers=1) is False
+    out = capsys.readouterr().out
+    assert "REFUSED" in out
+    assert "unweighted atoms only" in out
+    assert "RETAINABLE" not in out
+
+
+def test_a_current_weighted_model_record_cannot_enter_coverage(
+    tight: ThresholdCertificate, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    no_routes(monkeypatch)
+    first = tight.threshold_atoms[0]
+    weighted = ThresholdAtom(first.points, first.threshold, first.weight, (2, 1, 1))
+    record = json.loads(json.dumps(_record(tight)))
+    record["threshold_atoms"][0] = weighted.to_record()
+    assert "points" not in record["threshold_atoms"][0]
+    with pytest.raises(gate.FormatError, match="unweighted atoms only"):
+        load(json.dumps(record).encode())
+
+
 def test_the_command_line_runs_the_modes_and_skips_a_duplicate_path(
     tmp_path: Path, tight: ThresholdCertificate, capsys: pytest.CaptureFixture[str]
 ) -> None:

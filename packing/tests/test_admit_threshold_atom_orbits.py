@@ -168,28 +168,81 @@ def test_a_declared_input_kind_is_checked_rather_than_ignored() -> None:
 
 
 def test_the_per_image_budget_is_a_token_budget() -> None:
-    """Five sites carrying seven tokens floor to one, where five sites alone floor to one
-    as well -- so the control is the charge side too: the budget must come from tokens."""
-
+    """Five sites floor to one; their eight tokens must instead give budget two."""
     points = [["1", "1"], ["1", "13/10"], ["13/10", "1"], ["7/10", "1"], ["1", "7/10"]]
-    atoms = atom_input(points, 4)
-    entry = atoms["atoms"][0]
-    entry["variant"] = WEIGHTED_VARIANT
-    entry["multiplicities"] = [2, 2, 1, 1, 1]
     atom = ThresholdAtom(
-        tuple((Fraction(x), Fraction(y)) for x, y in points), 4, Fraction(1), (2, 2, 1, 1, 1)
+        tuple((Fraction(x), Fraction(y)) for x, y in points), 4, Fraction(1), (2, 2, 2, 1, 1)
     )
-    entry["orbit_size"] = len(atom.orbit(Fraction(2)))
+    atoms = {
+        "outer_side": "2",
+        "atoms": [atom.to_record() | {"orbit_size": len(atom.orbit(Fraction(2)))}],
+    }
     receipt = admission.admit_records(family(), atoms)
     row = receipt["atom_admission"]["orbits"][0]
     assert row["support_size"] == 5
-    assert row["token_count"] == 7
+    assert row["token_count"] == 8
     # The receipt stringifies every rational figure; this one is an integer budget.
-    assert row["per_image_budget"] == "1"
+    assert row["per_image_budget"] == "2"
+    assert row["budget"] == str(2 * row["orbit_size"])
 
 
 def test_token_counts_without_their_variant_are_refused_by_the_admitter() -> None:
     atoms = atom_input([["1", "1"], ["1", "13/10"]], 2)
     atoms["atoms"][0]["multiplicities"] = [2, 1]
-    with pytest.raises(admission.AdmissionError, match="without 'variant'"):
+    with pytest.raises(admission.AdmissionError, match="multiplicities"):
         admission.admit_records(family(), atoms)
+
+
+@pytest.mark.parametrize(
+    ("weight", "admitted", "charge", "slack"),
+    [("1", True, "4", "0"), ("3/2", False, "6", "-2")],
+)
+def test_a_heavy_site_alone_reaches_the_threshold_in_every_orbit_image(
+    *, weight: str, admitted: bool, charge: str, slack: str
+) -> None:
+    atom = ThresholdAtom(
+        ((Fraction(1), Fraction(1)), (Fraction(1), Fraction(17, 10))),
+        2,
+        Fraction(1),
+        (2, 1),
+    )
+    images = atom.orbit(Fraction(2))
+    assert len(images) == 4
+    atoms = {
+        "outer_side": "2",
+        "atoms": [atom.to_record() | {"orbit_size": len(images)}],
+    }
+    result = admission.admit_records(family(weight), atoms)["atom_admission"]
+    row = result["orbits"][0]
+    assert row["image_charges"] == [weight] * 4
+    assert row["charge"] == charge
+    assert row["budget"] == "4"
+    assert row["slack"] == slack
+    assert result["admitted"] is admitted
+
+
+@pytest.mark.parametrize(
+    "entry",
+    [
+        {"variant": WEIGHTED_VARIANT, "weighted_points": []},
+        {"variant": None, "points": [["1", "1"]]},
+        {"variant": WEIGHTED_VARIANT, "points": [["1", "1"]], "multiplicities": []},
+        {"variant": WEIGHTED_VARIANT, "weighted_points": [["1", "1", True]]},
+        {"variant": WEIGHTED_VARIANT, "weighted_points": [["1", "1", 2.0]]},
+        {"variant": WEIGHTED_VARIANT, "weighted_points": [["1", "1", 2]], "points": []},
+        {"weighted_points": [["1", "1", 2]]},
+    ],
+)
+def test_malformed_weighted_sites_refuse_with_an_indexed_reader_error(
+    entry: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    atoms = {"outer_side": "2", "atoms": [entry | {"threshold": 1, "orbit_size": 1}]}
+    with pytest.raises(admission.AdmissionError, match="invalid atom 0"):
+        admission.admit_records(family(), atoms)
+    family_path, atoms_path = tmp_path / "family.json", tmp_path / "atoms.json"
+    family_path.write_text(json.dumps(family()), encoding="utf-8")
+    atoms_path.write_text(json.dumps(atoms), encoding="utf-8")
+    assert admission.main([str(family_path), str(atoms_path)]) == 2
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["atom_admission"]["admitted"] is False
+    assert "invalid atom 0" in receipt["error"]

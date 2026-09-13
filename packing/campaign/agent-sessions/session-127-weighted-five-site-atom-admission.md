@@ -157,7 +157,8 @@ session:
   - Eleven mutation controls over the replay, including a heavy site read as light, which moves the charge while leaving the budget at one.
   - 'Ruff and ruff format clean over the tree; basedpyright reports zero errors and zero warnings.'
   - The threshold, interval, admission, certificate, dilation and plateau suites were run together; their result is recorded in the report below.
-  - 'full gate: fast at 6cb9eebd: passed (585.26s of a 600s ceiling at 4 cpus, --jobs 3 --inner-jobs 1; ALL CHECKS PASSED and 4997 tests passed; the only failing step was this declaration''s own absence, which this line supplies. Additions over that commit are records only: these rollups, the close report, and the regenerated synopsis, re-checked by a clean --records run)'
+  - 'full gate: fast at 6cb9eebd: failed (September 12 historical attempt: 585.26s of a 600s ceiling at 4 cpus, --jobs 3 --inner-jobs 1; the record reported ALL CHECKS PASSED and 4997 tests passed, but also reported a failing declaration check. A later records-tier pass did not change this invocation''s verdict. Corrected during the September 13 PR157 review.)'
+  - 'full gate: fast at fa8c3b21817ae10eef903e6c39e5b5d8753b74eb: passed (September 13 later CI evidence, not a session127 invocation: run 34741508598 passed all four fast partitions, --checks, --suite, --sweeps and --geometry. The actual checkout was merge commit 32665ad25b7caa04e9d9aeb208b4b7cdaaf8be0d; its Git tree 04062e2d39f38f11e49ac8598a31be2603620df4 is identical to this declared source revision. This run predates the review repairs and does not certify the final integrated tree.)'
   resource_rollups:
   - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
   - packing/campaign/resource-usage/agent-ac97342e4ca35e69e.yaml
@@ -169,6 +170,12 @@ session:
   next_action: Continue under think-8c9e, the weighted-atom coverage mechanics, which cover the direct, event and interval controls including the boundary and undercharged-core cases and the interval route's stall handling. Stage four's paired runner and exact common manifests are tracked separately and blocked on it.
 ---
 # Session 127 — Weighted Five-Site Threshold Atoms, Stages One and Two
+
+The account below records the September 12 implementation and its contemporaneous
+conclusions. The [September 13 review addendum](#review-addendum--september-13-2026)
+corrects the reader, validation and completion claims.
+The structured historical gate verdict above is corrected in place because tools consume
+it as evidence.
 
 This is a W7 `pipeline-improvement` block on
 [`think-zvr3`](../../../docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md),
@@ -326,6 +333,86 @@ forward and keep the target unrun, which is what the handoff now says.
 The third of those has no precedent in the repository to follow.
 A common row and point manifest is named as missing evidence in two documents and does
 not exist in code, so stage four builds it rather than extends it.
+
+## Review Addendum — September 13, 2026
+
+The [PR157 review](https://github.com/jlevy/squares/pull/157#issuecomment-5651978187)
+examined the original head `fa8c3b21` before any fixes and found implementation and
+record defects. The September 12 completion statements above describe the original
+session’s conclusions; they do not establish that every weighted consumer was correct.
+The resource inequality and labelled-token inclusion–exclusion remain valid.
+The defects concern numeric and allocation limits, readers, witness recomputation, and
+the association between replayed data and its recorded digests.
+
+**Gate evidence:** The fast invocation at `6cb9eebd` failed its declaration check.
+The original record’s 4,997 passing tests, 585.26-second wall, and later records-tier
+pass remain historical observations; they do not make that invocation a pass.
+The separate
+[September 13 CI run](https://github.com/jlevy/squares/actions/runs/34741508598) passed
+`--checks`, `--suite`, `--sweeps`, and `--geometry`, the four partitions of `--fast`.
+Its actual checkout `32665ad25b7caa04e9d9aeb208b4b7cdaaf8be0d` and PR head
+`fa8c3b21817ae10eef903e6c39e5b5d8753b74eb` have the same Git tree,
+`04062e2d39f38f11e49ac8598a31be2603620df4`. This is later evidence for the original
+source tree. Final validation of the repaired integration remains pending.
+
+**Reader contracts:** An ordinary atom retains the legacy `points`, `threshold`, and
+`weight` record. A weighted atom uses `variant: weighted-threshold/v1` and
+`weighted_points` triples containing each site’s exact coordinate strings and positive
+integer token count.
+It has neither legacy `points` nor an additive `multiplicities` field.
+The original additive marker did not make an older decoder refuse the record; the
+separate required shape does.
+An unweighted admission or publication reader refuses a declared weighted record before
+normalization, including an explicitly weighted declaration whose counts are all one.
+
+The interval route is different: its internal weighted member table supports counts
+within its declared limits.
+Its token, atom-count, and padded-table limits must be checked before expansion or
+allocation. This is a size guard, not a categorical weighted-input refusal.
+Orbit admission must sum each site’s multiplicity in its charge as well as its budget;
+an exact witness reader must independently do the same.
+These implementation repairs do not admit the unfinished three-route coverage stage.
+
+**Replay and threshold checks:** A source replay must parse and hash the same captured
+bytes for each input, compare both binary and floor charges and their violations, and
+validate the charged-placement indices, declared family counts, and any declared family
+total weight. Duplicate JSON keys are refused so each declared field has one
+interpretation. These checks bind the supplied snapshots without recovering unavailable
+historical authentication.
+The maintained producer now emits `plateau-reader/v2` with explicit `site_count` and
+`token_count` fields and no `size` alias.
+The replay accepts archived v1 receipts with their required `size` interpreted as token
+count, and checks any explicit counts also present.
+A v2 receipt requires both named counts and refuses `size`. Its replay result names
+`threshold_charge`, `floor_charge`, `threshold_violation`, and `floor_violation`
+separately. Archived receipt bytes remain unchanged.
+
+The threshold remains an input.
+The retained mutation from four to three changes $\lfloor 7/k\rfloor$ from one to two
+and is caught by the budget comparison, but thresholds four through seven all give
+budget one. Charges and placement lists supply further consistency checks; the budget
+alone does not identify the threshold.
+
+**Cost and provenance:** The five dedicated agent rollups report 434 assistant turns,
+269 tool calls, five tool errors, and 1,978.818 seconds of summed, overlapping spans.
+The refreshed parent log spans September 4–12 and is shared with earlier sessions; its
+191.28-hour span cannot be charged wholly to this block.
+All six logs retain other branch labels, so the branch-cost generator has no turns
+attributed to this branch.
+The retained schema, arithmetic and generated views were checked during review.
+The raw exports were unavailable for an independent digest and count recount, and these
+Claude receipts do not measure the September 13 Codex review and repair work.
+
+**Current handoff:** `think-8c9e` remains the weighted lane’s next entry for stage
+three. Stage four’s paired instrument and exact common manifests remain blocked behind
+it. Neither stage is admitted by this repair, and no BC327 hypothesis, experiment or
+scientific target has been registered or run.
+In parallel, PR156’s BC329 runner implementation review is complete.
+Its separate calibration instrument, three fresh full-shape host runs and
+source-distinct readbacks remain unadmitted and unrun; BC329 execution remains blocked.
+The
+[BC329 preflight addendum](../../../docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md#stack-review-addendum-2026-09-12)
+retains that implementation review and its limits.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

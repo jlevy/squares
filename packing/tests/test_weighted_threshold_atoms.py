@@ -17,8 +17,10 @@ sites the same atom reports mass ``9``, which is the failure this file exists to
 from __future__ import annotations
 
 import itertools
+import json
 from collections.abc import Callable
 from fractions import Fraction
+from typing import Any
 
 import pytest
 
@@ -93,8 +95,7 @@ def test_every_site_mask_agrees_with_explicit_token_counting() -> None:
         assert atom.trace_count(membership(inside)) == expected_tokens
         expected_charge = Fraction(1) if expected_tokens >= MOTIF_THRESHOLD else Fraction(0)
         assert atom.charge(membership(inside)) == expected_charge
-    # Four of the five sites are needed for one heavy site to be spare, so the threshold is
-    # genuinely weighted: three sites can reach it, and two never can.
+    # The two heavy sites reach the threshold; all three light sites fall short.
     assert atom.trace_count(membership(frozenset(sites[:2]))) == 4
     assert atom.trace_count(membership(frozenset(sites[2:]))) == 3
 
@@ -112,6 +113,9 @@ def test_an_all_ones_atom_is_exactly_the_unweighted_atom() -> None:
     assert implicit.key == explicit.key
     # A legacy record gains no keys, so retained records and their digests do not move.
     assert set(implicit.to_record()) == {"points", "threshold", "weight"}
+    assert json.dumps(implicit.to_record()) == json.dumps(
+        {"points": [[str(x), str(y)] for x, y in sites], "threshold": 3, "weight": "3/4"}
+    )
     assert ThresholdAtom.from_record(implicit.to_record()) == implicit
 
 
@@ -183,8 +187,48 @@ def test_a_weighted_record_declares_its_variant_and_round_trips() -> None:
     atom = _motif()
     record = atom.to_record()
     assert record["variant"] == WEIGHTED_VARIANT
-    assert record["multiplicities"] == list(MOTIF)
+    assert record == {
+        "variant": WEIGHTED_VARIANT,
+        "weighted_points": [
+            [str(x), str(y), count] for (x, y), count in zip(atom.points, MOTIF, strict=True)
+        ],
+        "threshold": 4,
+        "weight": "1",
+    }
     assert ThresholdAtom.from_record(record) == atom
+
+
+def test_the_actual_legacy_decoder_refuses_a_weighted_record() -> None:
+    """The decoder body from base 236132e7, retained without a Git runtime dependency.
+
+    An added marker alone cannot protect a reader that ignores unknown fields. Its
+    required `points` field must be absent from the new weighted representation.
+    """
+
+    def historical_decoder(record: dict[str, Any]) -> ThresholdAtom:
+        points = tuple((Fraction(x), Fraction(y)) for x, y in record["points"])
+        threshold = record["threshold"]
+        if not isinstance(threshold, int) or isinstance(threshold, bool):
+            raise TypeError("field 'threshold' must be a JSON integer")
+        return ThresholdAtom(points, threshold, Fraction(record["weight"]))
+
+    legacy = ThresholdAtom(_sites(), 4, Fraction(1))
+    assert historical_decoder(legacy.to_record()) == legacy
+    with pytest.raises(KeyError, match="points"):
+        historical_decoder(_motif().to_record())
+
+
+@pytest.mark.parametrize("record", [None, [], "record", 1])
+def test_an_atom_record_must_be_a_json_object(record: object) -> None:
+    with pytest.raises(TypeError, match="JSON object"):
+        ThresholdAtom.from_record(record)
+
+
+@pytest.mark.parametrize("rows", [None, [], "1,1", [None], [["1"]], [["1", "1", 1]]])
+def test_legacy_rows_remain_nonempty_site_pairs(rows: object) -> None:
+    record = {"points": rows, "threshold": 1, "weight": "1"}
+    with pytest.raises((TypeError, ValueError), match="points"):
+        ThresholdAtom.from_record(record)
 
 
 def test_token_counts_without_the_variant_are_refused_as_a_silent_reread() -> None:
@@ -192,7 +236,7 @@ def test_token_counts_without_the_variant_are_refused_as_a_silent_reread() -> No
 
     record = _motif().to_record()
     del record["variant"]
-    with pytest.raises(ValueError, match="would ignore it and admit a different atom"):
+    with pytest.raises(ValueError, match=r"without.*variant"):
         ThresholdAtom.from_record(record)
 
 
@@ -205,9 +249,103 @@ def test_an_unknown_variant_is_refused_rather_than_read_as_unweighted() -> None:
 
 def test_the_variant_without_its_token_counts_is_refused() -> None:
     record = _motif().to_record()
-    del record["multiplicities"]
-    with pytest.raises(ValueError, match="the variant exists to carry them"):
+    del record["weighted_points"]
+    with pytest.raises(ValueError, match="weighted_points"):
         ThresholdAtom.from_record(record)
+
+
+@pytest.mark.parametrize("variant", [None, "", "weighted-threshold/v2", False, 1])
+def test_an_explicit_invalid_variant_never_becomes_a_legacy_record(variant: object) -> None:
+    record = ThresholdAtom(_sites(), 4, Fraction(1)).to_record()
+    record["variant"] = variant
+    with pytest.raises(ValueError, match="variant"):
+        ThresholdAtom.from_record(record)
+
+
+@pytest.mark.parametrize("multiplicities", [None, [], [2, 2, 1, 1, 1]])
+def test_the_additive_prototype_is_refused_even_when_empty(multiplicities: object) -> None:
+    record = ThresholdAtom(_sites(), 4, Fraction(1)).to_record()
+    record["multiplicities"] = multiplicities
+    for marked in (False, True):
+        candidate = dict(record)
+        if marked:
+            candidate["variant"] = WEIGHTED_VARIANT
+        with pytest.raises(ValueError, match="multiplicities"):
+            ThresholdAtom.from_record(candidate)
+
+
+@pytest.mark.parametrize("field", ["points", "multiplicities"])
+def test_a_weighted_record_refuses_mixed_representations(field: str) -> None:
+    record = _motif().to_record()
+    record[field] = None
+    with pytest.raises(ValueError, match=field):
+        ThresholdAtom.from_record(record)
+
+
+@pytest.mark.parametrize(
+    "rows",
+    [None, [], {}, "1,1,2", [None], [["1", "1"]], [["1", "1", 2, 3]]],
+)
+def test_weighted_rows_are_nonempty_site_triples(rows: object) -> None:
+    record = {
+        "variant": WEIGHTED_VARIANT,
+        "weighted_points": rows,
+        "threshold": 1,
+        "weight": "1",
+    }
+    with pytest.raises((TypeError, ValueError), match="weighted_points"):
+        ThresholdAtom.from_record(record)
+
+
+@pytest.mark.parametrize("count", [True, False, 2.0, "2", None, 0, -1])
+def test_weighted_record_counts_are_positive_json_integers(count: object) -> None:
+    record = {
+        "variant": WEIGHTED_VARIANT,
+        "weighted_points": [["1", "1", count]],
+        "threshold": 1,
+        "weight": "1",
+    }
+    with pytest.raises((TypeError, ValueError), match="multiplicity"):
+        ThresholdAtom.from_record(record)
+
+
+@pytest.mark.parametrize("coordinate", [True, 1, 0.1, None, "1.5", "1/0"])
+def test_weighted_record_coordinates_remain_exact_rational_strings(coordinate: object) -> None:
+    record = {
+        "variant": WEIGHTED_VARIANT,
+        "weighted_points": [[coordinate, "1", 2]],
+        "threshold": 1,
+        "weight": "1",
+    }
+    with pytest.raises((TypeError, ValueError), match="rational string"):
+        ThresholdAtom.from_record(record)
+
+
+@pytest.mark.parametrize("tokens", [2**63 - 1, 2**63])
+def test_the_direct_grid_bounds_token_counts_independently_of_charge(tokens: int) -> None:
+    """An A-of-A atom has expansion mass one even when its token count exceeds int64."""
+    sites = ((Fraction(1), Fraction(1)), (Fraction(3, 2), Fraction(1)))
+    atom = ThresholdAtom(sites, tokens, Fraction(1), (2**62, tokens - 2**62))
+    assert absolute_expansion_sum(atom.token_count, atom.threshold) == 1
+    arguments = ((), (atom,), DIRECTIONS[0], SIDE, SQUARE)
+    if tokens == 2**63:
+        with pytest.raises(ValueError, match=r"token.*int64"):
+            charge_grid_direct(*arguments, scale=1)
+        return
+    grid = charge_grid_direct(*arguments, scale=1)
+    u, v = Fraction(5, 4), Fraction(1)
+    i = next(
+        i
+        for i in range(len(grid.reduction.u_events) - 1)
+        if grid.reduction.u_events[i] < u < grid.reduction.u_events[i + 1]
+    )
+    j = next(
+        j
+        for j in range(len(grid.reduction.v_events) - 1)
+        if grid.reduction.v_events[j] < v < grid.reduction.v_events[j + 1]
+    )
+    assert any(slab == i and bottom <= j <= top for slab, bottom, top in grid.reduction.spans)
+    assert grid.grid[i, j] == 1
 
 
 def _weighted_instance() -> tuple[tuple[Atom, ...], tuple[ThresholdAtom, ...]]:

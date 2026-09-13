@@ -8,8 +8,9 @@ terms of one integer difference array; a modelling error there -- a wrong cell s
 wrong expansion coefficient, a wrong domain polygon -- reproduces itself exactly on every
 replay. This module decides the same condition by branch and bound over boxes of square
 centres in floating-point interval arithmetic with directed rounding, never expands a
-threshold atom into anything, and counts instead: a threshold atom ``(S, k, w)`` charges
-``w`` to a box when at least ``k`` of its points are *provably* inside every core the box
+threshold atom into signed rectangles, and counts instead: a threshold atom
+``(S, a, k, w)`` charges ``w`` to a box when at least ``k`` of its tokens are
+*provably* inside every core the box
 names. Its failure modes are an enclosure too wide to resolve, a rounding step in the
 wrong direction, or a member table that names the wrong sites -- none of which is a
 failure mode of the sweep. Two methods that could only fail in the same way are what the
@@ -17,9 +18,9 @@ failure mode of the sweep. Two methods that could only fail in the same way are 
 
 What is decided. With ``n``, container side ``L``, shrink ``B``, a rational half-tangent
 net ``0 = t_0 < ... < t_K < 1``, nonnegative rational-weight point atoms and threshold
-atoms ``(S, k, w)``:
+atoms ``(S, a, k, w)``, with ``A = sum_s a_s`` positive integer tokens at distinct sites:
 
-``Condition 2'`` the total budget -- point mass plus ``w floor(|S| / k)`` over the
+``Condition 2'`` the total budget -- point mass plus ``w floor(A / k)`` over the
         threshold atoms -- is strictly below ``n``, decided in exact integers;
 ``Condition 3``  the net reaches pi/4, i.e. ``t_K^2 + 2 t_K - 1 >= 0``;
 ``Condition 4``  ``B (1 + D) < 1`` for ``D`` the largest half-gap tangent;
@@ -41,9 +42,9 @@ rotated frame ``u = c x + s y``, ``v = -s x + c y``. The closed ``B``-square cen
 let ``H(X)`` be the set of atom points whose *inner* enclosure of ``R_q`` -- the box
 ``[hi(u_q - B/2), lo(u_q + B/2)] x ...`` that surely lies inside ``R_q`` -- contains
 the whole of ``X``. Every core centred in ``X`` then contains every point of ``H(X)``,
-so its trace on ``S`` has at least ``|H(X) ∩ S|`` points, and the charge
-``w [|trace ∩ S| >= k]`` is monotone in the trace: it is at least
-``w [|H(X) ∩ S| >= k]``. Summed over atoms with nonnegative weights this is a lower
+so its trace on ``S`` contains at least ``sum_{s in H(X) ∩ S} a_s`` tokens. The charge
+``w [sum_{s in trace ∩ S} a_s >= k]`` is monotone in the trace: it is at least
+``w [sum_{s in H(X) ∩ S} a_s >= k]``. Summed over atoms with nonnegative weights this is a lower
 bound on the charge at *every* centre in ``X``, with no assumption on the size of ``X``.
 A point whose region is only partly resolved against the box is not in ``H(X)`` and is
 dropped rather than assumed, which can only lower the bound. Point atoms are the case
@@ -52,7 +53,7 @@ integers on a common scale, so the sum itself rounds nothing.
 
 The upper bound used for refutation has the same shape the other way round: the points
 whose *outer* enclosures contain a centre ``p`` are a superset of the points its core
-contains, so ``w [|outer trace ∩ S| >= k]`` is at least the true charge of that atom at
+contains, so ``w [sum_{s in outer trace ∩ S} a_s >= k]`` is at least the true charge at
 ``p``, and the sum is an upper bound. A provably admissible centre whose upper bound is
 below 1 is a genuine placement the certificate does not charge, and the search reports
 it as a refutation; `exact_charge_at_witness` then re-evaluates the charge at that
@@ -124,7 +125,7 @@ Ints = NDArray[np.int64]
 # The cap keeps the gathered block at twice the point route's mask bound and the count
 # block under it; an input past it is refused before any array exists.
 MAX_MEMBER_SLOTS = 2 * MAX_INTERVAL_ATOMS
-#: Tokens per atom. `_counts` sums a member row into one `int16`, so a row has to stay
+#: Tokens per atom. `charge` sums a member row into one `int16`, so a row has to stay
 #: inside that lane; this cap is far above any admitted atom and exists so a weighted
 #: atom fails loudly rather than overflowing a count.
 MAX_TOKENS_PER_ATOM = 4096
@@ -139,7 +140,8 @@ class ThresholdAtomData:
     ``sites`` holds every distinct atom point as a coordinate enclosure; its per-site mass
     is zero, because mass lives on the atoms here, not on the sites. Row ``a`` of
     ``members`` lists the site indices of atom ``a`` -- a point atom is one site, a
-    threshold atom its points -- padded to the table's width with ``len(sites)``, an index
+    threshold atom repeats each site index once per token -- padded to the table's width
+    with ``len(sites)``, an index
     that every gathered mask carries as a column of ``False``. ``thresholds[a]`` is the
     ``k`` of atom ``a`` (``1`` for a point atom) and ``mass[a]`` its weight on ``scale``.
     ``budget`` is ``Condition 2'``'s quantity on the same scale, summed in Python
@@ -157,45 +159,54 @@ class ThresholdAtomData:
 
     @classmethod
     def of(cls, certificate: ThresholdCertificate) -> ThresholdAtomData:
-        scale, point_masses, threshold_masses, budget = scaled_threshold_masses(certificate)
-        index: dict[Point, int] = {}
-
-        def site(point: Point) -> int:
-            return index.setdefault(point, len(index))
-
-        rows: list[list[int]] = [[site((atom.x, atom.y))] for atom in certificate.atoms]
-        # One slot per TOKEN, repeating a site's index for each of its tokens. The boolean
-        # gather at `_counts` then sums tokens rather than sites, while the interval
-        # enclosure below is still built once per distinct coordinate.
-        rows.extend(
-            [site(threshold_atom.points[s]) for s in threshold_atom.token_sites]
-            for threshold_atom in certificate.threshold_atoms
-        )
-        for threshold_atom in certificate.threshold_atoms:
-            # `_counts` accumulates this row into one `int16` per (box, atom), so the token
-            # total has to fit with the threshold it is compared against.
-            if threshold_atom.token_count > MAX_TOKENS_PER_ATOM:
-                raise IntervalInputError(
-                    f"an atom carries {threshold_atom.token_count} tokens, above the "
-                    f"{MAX_TOKENS_PER_ATOM} this verifier counts in one int16 lane"
-                )
-        if len(index) > MAX_INTERVAL_ATOMS:
-            raise IntervalInputError(
-                f"the interval verifier supports at most {MAX_INTERVAL_ATOMS} distinct sites"
-            )
-        if len(rows) > MAX_INTERVAL_ATOMS:
+        # Preflight dimensions from the compact atom records, before any token-sized
+        # row or NumPy array exists. Multiplicity can make a one-site record enormous.
+        rows = len(certificate.atoms) + len(certificate.threshold_atoms)
+        if rows > MAX_INTERVAL_ATOMS:
             raise IntervalInputError(
                 f"the interval verifier supports at most {MAX_INTERVAL_ATOMS} atoms"
             )
-        width = max((len(row) for row in rows), default=1)
-        if len(rows) * width > MAX_MEMBER_SLOTS:
+        width = 1
+        for threshold_atom in certificate.threshold_atoms:
+            tokens = threshold_atom.token_count
+            if tokens > MAX_TOKENS_PER_ATOM:
+                raise IntervalInputError(
+                    f"an atom carries {tokens} tokens, above the "
+                    f"{MAX_TOKENS_PER_ATOM} this verifier counts in one int16 lane"
+                )
+            width = max(width, tokens)
+        if rows * width > MAX_MEMBER_SLOTS:
             raise IntervalInputError(
-                f"the member table would hold {len(rows) * width} slots, above the "
+                f"the member table would hold {rows * width} slots, above the "
                 f"{MAX_MEMBER_SLOTS} this verifier gathers per batch"
             )
-        members = np.full((len(rows), width), len(index), dtype=np.intp)
-        for a, row in enumerate(rows):
-            members[a, : len(row)] = row
+        scale, point_masses, threshold_masses, budget = scaled_threshold_masses(certificate)
+        index: dict[Point, int] = {}
+
+        def site(point: Point) -> None:
+            if point not in index:
+                if len(index) >= MAX_INTERVAL_ATOMS:
+                    raise IntervalInputError(
+                        "the interval verifier supports at most "
+                        f"{MAX_INTERVAL_ATOMS} distinct sites"
+                    )
+                index[point] = len(index)
+
+        for atom in certificate.atoms:
+            site((atom.x, atom.y))
+        for atom in certificate.threshold_atoms:
+            for point in atom.points:
+                site(point)
+        members = np.full((rows, width), len(index), dtype=np.intp)
+        for a, atom in enumerate(certificate.atoms):
+            members[a, 0] = index[(atom.x, atom.y)]
+        # Build token rows directly from site counts, independently of the sweep's
+        # token-subset expansion helper. Geometry still has one enclosure per site.
+        for a, atom in enumerate(certificate.threshold_atoms, start=len(certificate.atoms)):
+            cursor = 0
+            for point, count in zip(atom.points, atom.multiplicities, strict=True):
+                members[a, cursor : cursor + count] = index[point]
+                cursor += count
         thresholds = np.array(
             [1] * len(certificate.atoms) + [t.threshold for t in certificate.threshold_atoms],
             dtype=np.int16,
@@ -231,7 +242,7 @@ def scaled_threshold_masses(
     All exact Python integers, summed here and not by NumPy, for the reason
     `sqpack.fractional.interval.scaled_atom_masses` gives: an ``int64`` sum of masses that
     individually fit can still wrap. The budget bounds every sum any array operation
-    forms -- a charge counts each atom at most once and ``floor(|S| / k) >= 1`` -- so
+    forms -- a charge counts each atom at most once and ``floor(A / k) >= 1`` -- so
     refusing a budget at or above ``INT64_MASS_LIMIT`` keeps every such sum inside
     ``int64``. The scale is checked as it grows, so pathological denominators cannot cost
     the product before the refusal.
@@ -363,7 +374,12 @@ def exact_charge_at_witness(
 
     charge = sum((a.weight for a in certificate.atoms if inside(a.x, a.y)), start=Fraction(0))
     for t in certificate.threshold_atoms:
-        if sum(1 for px, py in t.points if inside(px, py)) >= t.threshold:
+        tokens = sum(
+            count
+            for (px, py), count in zip(t.points, t.multiplicities, strict=True)
+            if inside(px, py)
+        )
+        if tokens >= t.threshold:
             charge += t.weight
     return WitnessCharge(label, witness, charge, admissible)
 
