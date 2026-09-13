@@ -12,6 +12,7 @@ import os
 import signal
 import subprocess
 import sys
+import time
 from collections.abc import Callable, Sequence
 from concurrent.futures import Future
 from contextlib import suppress
@@ -42,9 +43,11 @@ from devtools.fixed_core_packet import (
     PackageRuntimeObservation,
     PacketDeadlineError,
     PacketError,
+    PacketOperationalError,
     RawMinimum,
     RuntimeObservation,
     _direction_digest,
+    _reconstruct_dilation_directions,
     _reconstruct_exact_directions,
     _reconstruct_interval_directions,
     _reconstruct_raw_directions,
@@ -247,6 +250,42 @@ def _install_controlled_executor(
 def _missing_group_on_probe(_pid: int, signal_number: int) -> None:
     if signal_number == 0:
         raise ProcessLookupError
+
+
+def _repository_with_sources(root: Path, *extra_files: tuple[str, bytes]) -> tuple[Path, str]:
+    repository = root / "repository"
+    for relative, data in (
+        (SOURCE_PATH, SOURCE),
+        (T026_PATH, T026_BYTES),
+        *extra_files,
+    ):
+        path = repository / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+    subprocess.run(("git", "init", "-q", str(repository)), check=True)
+    subprocess.run(("git", "-C", str(repository), "add", "."), check=True)
+    subprocess.run(
+        (
+            "git",
+            "-C",
+            str(repository),
+            "-c",
+            "user.name=Fixed Core Test",
+            "-c",
+            "user.email=fixed-core@example.invalid",
+            "commit",
+            "-qm",
+            "fixture",
+        ),
+        check=True,
+    )
+    revision = subprocess.run(
+        ("git", "-C", str(repository), "rev-parse", "HEAD"),
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    return repository, revision
 
 
 def _raw_receipt(
@@ -928,6 +967,191 @@ def test_interval_readback_refuses_missing_extra_and_mislabeled_rows(tmp_path: P
             )
 
 
+def test_partial_interval_readback_binds_a_sparse_set_and_validates_unpublished_tail(
+    tmp_path: Path,
+) -> None:
+    directory = tmp_path / "interval"
+    labels = ("0", "1", "1'", "2", "2'")
+    for label in ("0", "1'", "2"):
+        _write_row(directory, label, _interval_row_for(label))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": ["0", "2"],
+        "last": _interval_row_for("2"),
+    }
+
+    assert (
+        _reconstruct_interval_directions(
+            directory, receipt, labels=labels, scale=10, complete=False
+        )
+        is None
+    )
+
+    tail = json.loads((directory / "1'.json").read_text())
+    tail["status"] = "forged"
+    _write_row(directory, "1'", tail)
+    with pytest.raises(PacketError, match="status"):
+        _reconstruct_interval_directions(
+            directory, receipt, labels=labels, scale=10, complete=False
+        )
+
+
+@pytest.mark.parametrize(
+    "completed_directions",
+    [
+        ["0"],
+        ["0", "0"],
+        ["2", "0"],
+        ["0", "missing"],
+    ],
+)
+def test_partial_interval_readback_refuses_noncanonical_or_mismatched_direction_sets(
+    tmp_path: Path, completed_directions: list[str]
+) -> None:
+    directory = tmp_path / "interval"
+    labels = ("0", "1", "2")
+    for label in labels:
+        _write_row(directory, label, _interval_row_for(label))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": completed_directions,
+        "last": _interval_row_for("0"),
+    }
+
+    with pytest.raises(PacketError, match="completed directions"):
+        _reconstruct_interval_directions(
+            directory, receipt, labels=labels, scale=10, complete=False
+        )
+
+
+def test_partial_interval_last_row_must_belong_to_the_published_set(tmp_path: Path) -> None:
+    directory = tmp_path / "interval"
+    labels = ("0", "1", "2")
+    for label in labels:
+        _write_row(directory, label, _interval_row_for(label))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": ["0", "1"],
+        "last": _interval_row_for("2"),
+    }
+
+    with pytest.raises(PacketError, match="published direction"):
+        _reconstruct_interval_directions(
+            directory, receipt, labels=labels, scale=10, complete=False
+        )
+
+
+def test_partial_interval_readback_refuses_a_missing_published_row_hidden_by_tail(
+    tmp_path: Path,
+) -> None:
+    directory = tmp_path / "interval"
+    labels = ("0", "1", "2")
+    for label in ("0", "1"):
+        _write_row(directory, label, _interval_row_for(label))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": ["0", "2"],
+        "last": _interval_row_for("0"),
+    }
+
+    with pytest.raises(PacketError, match="were not retained"):
+        _reconstruct_interval_directions(
+            directory, receipt, labels=labels, scale=10, complete=False
+        )
+
+
+def _dilation_row(index: int, label: str) -> dict[str, object]:
+    return {"direction": index, "label": label, "minimum": "1"}
+
+
+def test_partial_dilation_readback_binds_sparse_labels_and_validates_unpublished_tail(
+    tmp_path: Path,
+) -> None:
+    directory = tmp_path / "dilation"
+    labels = ("zero", "one", "two", "three")
+    for index in (0, 1, 3):
+        _write_row(directory, str(index), _dilation_row(index, labels[index]))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": ["zero", "three"],
+        "last": _dilation_row(3, "three"),
+    }
+
+    _reconstruct_dilation_directions(directory, receipt, labels=labels, complete=False)
+
+    tail = json.loads((directory / "1.json").read_text())
+    tail["minimum"] = "01"
+    _write_row(directory, "1", tail)
+    with pytest.raises(PacketError, match="canonical exact form"):
+        _reconstruct_dilation_directions(directory, receipt, labels=labels, complete=False)
+
+
+@pytest.mark.parametrize(
+    "completed_directions",
+    [
+        ["zero"],
+        ["zero", "zero"],
+        ["three", "zero"],
+        ["zero", "missing"],
+    ],
+)
+def test_partial_dilation_readback_refuses_noncanonical_or_mismatched_direction_sets(
+    tmp_path: Path, completed_directions: list[str]
+) -> None:
+    directory = tmp_path / "dilation"
+    labels = ("zero", "one", "two", "three")
+    for index, label in enumerate(labels):
+        _write_row(directory, str(index), _dilation_row(index, label))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": completed_directions,
+        "last": _dilation_row(0, "zero"),
+    }
+
+    with pytest.raises(PacketError, match="completed directions"):
+        _reconstruct_dilation_directions(directory, receipt, labels=labels, complete=False)
+
+
+def test_partial_dilation_last_row_must_belong_to_the_published_set(tmp_path: Path) -> None:
+    directory = tmp_path / "dilation"
+    labels = ("zero", "one", "two")
+    for index, label in enumerate(labels):
+        _write_row(directory, str(index), _dilation_row(index, label))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": ["zero", "one"],
+        "last": _dilation_row(2, "two"),
+    }
+
+    with pytest.raises(PacketError, match="published direction"):
+        _reconstruct_dilation_directions(directory, receipt, labels=labels, complete=False)
+
+
+def test_partial_dilation_readback_refuses_a_missing_published_row_hidden_by_tail(
+    tmp_path: Path,
+) -> None:
+    directory = tmp_path / "dilation"
+    labels = ("zero", "one", "two")
+    for index in (0, 1):
+        _write_row(directory, str(index), _dilation_row(index, labels[index]))
+    receipt: dict[str, object] = {
+        "status": "partial",
+        "directions_completed": 2,
+        "completed_directions": ["zero", "two"],
+        "last": _dilation_row(0, "zero"),
+    }
+
+    with pytest.raises(PacketError, match="were not retained"):
+        _reconstruct_dilation_directions(directory, receipt, labels=labels, complete=False)
+
+
 def test_partial_readback_uses_named_checkpoint_and_ignores_valid_unpublished_tail(
     tmp_path: Path,
 ) -> None:
@@ -1204,8 +1428,12 @@ def test_all_three_readers_bind_the_same_normalized_bytes(tmp_path: Path) -> Non
     routes = cast(dict[str, object], result["routes"])
     assert normalized["sha256"] == digest
     assert cast(dict[str, object], routes["exact"])["minimum"] == "1"
-    assert cast(dict[str, object], routes["reflected_interval"])["enclosure"] == ["1", "1"]
-    assert cast(dict[str, object], routes["dilation"])["source_sha256"] == digest
+    interval = cast(dict[str, object], routes["reflected_interval"])
+    dilation = cast(dict[str, object], routes["dilation"])
+    assert interval["enclosure"] == ["1", "1"]
+    assert dilation["source_sha256"] == digest
+    assert "completed_directions" not in interval
+    assert "completed_directions" not in dilation
 
 
 def test_route_disagreement_is_invalid_but_scientifically_unresolved(tmp_path: Path) -> None:
@@ -1254,9 +1482,42 @@ def test_interval_stall_is_incomplete_and_scientifically_unresolved(tmp_path: Pa
     assert result["scientific_decision"] == "unresolved"
 
 
+def test_interval_progress_publishes_canonical_completed_labels(tmp_path: Path) -> None:
+    def interrupted(_candidate, *, progress, log: Path, **_kwargs):
+        for label in ("2'", "0"):
+            outcome = fixed_core_packet.DirectionOutcome(
+                label,
+                "certified",
+                10,
+                10,
+                (1.25, 2.5),
+                1,
+                0,
+                budget_exhausted=False,
+            )
+            _write_row(log, label, _interval_row_for(label))
+            progress(outcome)
+        raise PacketDeadlineError("synthetic interval timeout")
+
+    _output, result = _execute(
+        tmp_path,
+        RAW_THRESHOLD + Fraction(1, 10**9),
+        interval_runner=interrupted,
+    )
+    assert result["status"] == "partial"
+    assert result["phase"] == "timeout"
+    interval = cast(
+        dict[str, object], cast(dict[str, object], result["routes"])["reflected_interval"]
+    )
+    assert interval["directions_completed"] == 2
+    assert interval["completed_directions"] == ["0", "2'"]
+    assert cast(dict[str, object], interval["last"])["label"] == "0"
+
+
 def test_dilation_progress_is_retained_before_a_deadline(tmp_path: Path) -> None:
     def interrupted(_path: Path, *, progress, **_kwargs):
-        progress(1, Fraction(1), "1")
+        progress(2, Fraction(1), "2")
+        progress(0, Fraction(1), "0")
         raise PacketDeadlineError("synthetic dilation timeout")
 
     output, result = _execute(
@@ -1267,10 +1528,11 @@ def test_dilation_progress_is_retained_before_a_deadline(tmp_path: Path) -> None
     assert result["status"] == "partial"
     assert result["phase"] == "timeout"
     dilation = cast(dict[str, object], cast(dict[str, object], result["routes"])["dilation"])
-    assert dilation["directions_completed"] == 1
-    assert cast(dict[str, object], dilation["last"])["direction"] == 1
-    row = json.loads((output / "dilation-directions" / "1.json").read_text())
-    assert row == {"direction": 1, "label": "1", "minimum": "1"}
+    assert dilation["directions_completed"] == 2
+    assert dilation["completed_directions"] == ["0", "2"]
+    assert cast(dict[str, object], dilation["last"])["direction"] == 0
+    row = json.loads((output / "dilation-directions" / "2.json").read_text())
+    assert row == {"direction": 2, "label": "2", "minimum": "1"}
 
 
 def test_raw_argmin_must_match_exact_admissible_membership_replay(tmp_path: Path) -> None:
@@ -1479,6 +1741,256 @@ def test_source_manifest_refuses_a_stale_revision() -> None:
         source_manifest(REPOSITORY, REVISION)
 
 
+def test_git_execution_failure_has_operational_provenance() -> None:
+    failure = subprocess.CompletedProcess(
+        ("git", "status"),
+        returncode=128,
+        stdout="",
+        stderr="synthetic repository failure\n",
+    )
+    with (
+        patch("devtools.fixed_core_packet.subprocess.run", return_value=failure),
+        pytest.raises(
+            PacketOperationalError,
+            match="git status failed with status 128: synthetic repository failure",
+        ),
+    ):
+        fixed_core_packet._git(REPOSITORY, "status")  # noqa: SLF001 -- taxonomy boundary
+
+
+@pytest.mark.parametrize("index_flag", ["--assume-unchanged", "--skip-worktree"])
+def test_source_manifest_refuses_implementation_drift_hidden_from_git_status(
+    tmp_path: Path, index_flag: str
+) -> None:
+    helper = "packing/devtools/source_guard.py"
+    repository, revision = _repository_with_sources(tmp_path, (helper, b"VALUE = 1\n"))
+    subprocess.run(
+        ("git", "-C", str(repository), "update-index", index_flag, "--", helper),
+        check=True,
+        capture_output=True,
+    )
+    (repository / helper).write_bytes(b"VALUE = 2\n")
+    assert (
+        subprocess.run(
+            ("git", "-C", str(repository), "status", "--porcelain"),
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        == ""
+    )
+
+    with (
+        patch(
+            "devtools.fixed_core_packet.discover_implementation_paths",
+            return_value=(SOURCE_PATH, T026_PATH, helper),
+        ),
+        patch("devtools.fixed_core_packet._validate_loaded_modules"),
+        pytest.raises(PacketError, match="bytes differ from the frozen Git blob"),
+    ):
+        source_manifest(repository, revision)
+
+
+@pytest.mark.parametrize("relative_result", ["result", "nested/result", "*"])
+def test_source_manifest_uses_a_literal_result_directory_exclusion(
+    tmp_path: Path, relative_result: str
+) -> None:
+    repository, revision = _repository_with_sources(tmp_path)
+    result_directory = repository / relative_result
+    result_directory.mkdir(parents=True)
+    (result_directory / "result.json").write_text("preflight\n")
+
+    with (
+        patch(
+            "devtools.fixed_core_packet.discover_implementation_paths",
+            return_value=(SOURCE_PATH, T026_PATH),
+        ),
+        patch("devtools.fixed_core_packet._validate_loaded_modules"),
+    ):
+        manifest = source_manifest(
+            repository,
+            revision,
+            result_directory=result_directory,
+        )
+        assert {row["path"] for row in manifest} == {SOURCE_PATH, T026_PATH}
+
+        (repository / "unrelated.txt").write_text("dirty\n")
+        with pytest.raises(PacketError, match="checkout must be clean"):
+            source_manifest(
+                repository,
+                revision,
+                result_directory=result_directory,
+            )
+
+
+@pytest.mark.parametrize(
+    ("tracked_path", "relative_result"),
+    [
+        ("reserved/result.json", "reserved"),
+        ("reserved", "reserved"),
+        ("reserved", "reserved/result"),
+    ],
+)
+def test_source_manifest_refuses_a_result_directory_overlapping_tracked_output(
+    tmp_path: Path, tracked_path: str, relative_result: str
+) -> None:
+    repository, revision = _repository_with_sources(
+        tmp_path, (tracked_path, b"tracked output\n")
+    )
+    tracked = repository / tracked_path
+    tracked.unlink()
+    for parent in tracked.parents:
+        if parent == repository or any(parent.iterdir()):
+            break
+        parent.rmdir()
+    result_directory = repository / relative_result
+    result_directory.mkdir(parents=True, exist_ok=True)
+    (result_directory / "result.json").write_text("preflight\n")
+
+    with (
+        patch(
+            "devtools.fixed_core_packet.discover_implementation_paths",
+            return_value=(SOURCE_PATH, T026_PATH),
+        ),
+        patch("devtools.fixed_core_packet._validate_loaded_modules"),
+        pytest.raises(PacketError, match="overlaps a path tracked"),
+    ):
+        source_manifest(
+            repository,
+            revision,
+            result_directory=result_directory,
+        )
+
+
+def test_output_guard_rejects_normal_and_linked_worktree_git_data(tmp_path: Path) -> None:
+    repository, revision = _repository_with_sources(tmp_path / "source")
+    linked = tmp_path / "linked"
+    subprocess.run(
+        ("git", "-C", str(repository), "worktree", "add", "--detach", str(linked), revision),
+        check=True,
+        capture_output=True,
+    )
+    normal_git = Path(
+        subprocess.run(
+            ("git", "-C", str(repository), "rev-parse", "--absolute-git-dir"),
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+    linked_git = Path(
+        subprocess.run(
+            ("git", "-C", str(linked), "rev-parse", "--absolute-git-dir"),
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+
+    for checkout, destination in (
+        (repository, normal_git / "refs" / "heads" / "forged"),
+        (linked, linked_git / "nested"),
+        (linked, normal_git / "worktrees" / "forged"),
+    ):
+        with pytest.raises(PacketError, match="Git administrative data"):
+            fixed_core_packet.prepare_output_dir(destination, checkout)
+        assert not destination.exists()
+
+
+def test_output_guard_rejects_separate_git_directory(tmp_path: Path) -> None:
+    checkout = tmp_path / "separate-checkout"
+    administrative = tmp_path / "separate-admin"
+    subprocess.run(
+        ("git", "init", "-q", "--separate-git-dir", str(administrative), str(checkout)),
+        check=True,
+    )
+    destination = administrative / "refs" / "heads" / "forged"
+
+    with pytest.raises(PacketError, match="Git administrative data"):
+        fixed_core_packet.prepare_output_dir(destination, checkout)
+    assert not destination.exists()
+
+
+def test_parent_output_guard_bounds_git_and_preserves_fresh_output(tmp_path: Path) -> None:
+    output = tmp_path / "result"
+    with (
+        patch("devtools.fixed_core_packet.time.perf_counter", return_value=10.0),
+        patch(
+            "devtools.fixed_core_packet.subprocess.run",
+            side_effect=subprocess.TimeoutExpired(("git", "rev-parse"), 2.0),
+        ) as git,
+        patch("devtools.fixed_core_packet.supervise_worker") as supervisor,
+        pytest.raises(PacketDeadlineError, match="Git deadline reached"),
+    ):
+        main(
+            [
+                "--repository",
+                str(REPOSITORY),
+                "--expect-implementation-revision",
+                REVISION,
+                "--output-dir",
+                str(output),
+                "--scientific-seconds",
+                "1",
+                "--external-seconds",
+                "2",
+            ]
+        )
+    assert git.call_args.kwargs["timeout"] == 2.0
+    supervisor.assert_not_called()
+    assert not output.exists()
+
+
+@pytest.mark.parametrize("readings", [[13.0], [10.0, 13.0]])
+def test_output_guard_refuses_git_outside_its_deadline(
+    tmp_path: Path, readings: list[float]
+) -> None:
+    output = tmp_path / "result"
+    with (
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=readings),
+        patch(
+            "devtools.fixed_core_packet.subprocess.run",
+            return_value=subprocess.CompletedProcess(
+                ("git", "rev-parse"), 0, stdout=str(REPOSITORY / ".git"), stderr=""
+            ),
+        ) as git,
+        pytest.raises(PacketDeadlineError, match="Git deadline reached"),
+    ):
+        fixed_core_packet.prepare_output_dir(output, REPOSITORY, deadline=12.0)
+    assert git.call_count == len(readings) - 1
+    assert not output.exists()
+
+
+def test_scientific_readback_cannot_hide_unrelated_state_with_a_metachar_output(
+    tmp_path: Path,
+) -> None:
+    packet_root = tmp_path / "packet"
+    packet_root.mkdir()
+    output, result = _execute(packet_root, RAW_THRESHOLD)
+    repository, revision = _repository_with_sources(tmp_path / "fixture")
+    result_directory = repository / "*"
+    output.rename(result_directory)
+    sources = cast(dict[str, object], result["sources"])
+    sources["implementation_revision"] = revision
+    (result_directory / "result.json").write_text(json.dumps(result, indent=2) + "\n")
+    (repository / "unrelated.txt").write_text("dirty\n")
+
+    with (
+        patch(
+            "devtools.fixed_core_packet.discover_implementation_paths",
+            return_value=(SOURCE_PATH, T026_PATH),
+        ),
+        patch("devtools.fixed_core_packet._validate_loaded_modules"),
+        pytest.raises(PacketError, match="checkout must be clean"),
+    ):
+        load_result(
+            result_directory,
+            repository=repository,
+            expected_revision=revision,
+            require_supervision=False,
+        )
+
+
 @pytest.mark.parametrize("constant", ["NaN", "Infinity", "-Infinity"])
 def test_strict_json_refuses_nonstandard_numeric_constants(constant: str) -> None:
     with pytest.raises(PacketError, match="nonstandard JSON constant"):
@@ -1531,6 +2043,54 @@ def test_direct_worker_requires_parent_deadline_attestation(tmp_path: Path) -> N
                 "--external-seconds",
                 "2",
             ]
+        )
+
+
+def test_parent_launches_supervised_preflight_before_source_or_runtime_work(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "result"
+    with (
+        patch(
+            "devtools.fixed_core_packet.source_manifest",
+            side_effect=AssertionError("parent ran source preflight"),
+        ),
+        patch(
+            "devtools.fixed_core_packet.runtime_binding",
+            side_effect=AssertionError("parent ran runtime preflight"),
+        ),
+        patch("devtools.fixed_core_packet.supervise_worker", return_value=1) as supervisor,
+    ):
+        assert (
+            main(
+                [
+                    "--repository",
+                    str(REPOSITORY),
+                    "--expect-implementation-revision",
+                    REVISION,
+                    "--output-dir",
+                    str(output),
+                    "--scientific-seconds",
+                    "10",
+                    "--external-seconds",
+                    "20",
+                ]
+            )
+            == 1
+        )
+
+    command = supervisor.call_args.args[0]
+    assert "--worker" in command
+    receipt = cast(dict[str, object], json.loads((output / "result.json").read_text()))
+    fixed_core_packet.validate_preflight_document(receipt)
+    assert receipt["status"] == "partial"
+    assert receipt["outcome"] == "preflight-pending"
+    assert receipt["scientific_decision"] == "unresolved"
+    with pytest.raises(PacketError, match="closed packet schema"):
+        load_result(
+            output,
+            repository=REPOSITORY,
+            expected_revision=REVISION,
         )
 
 
@@ -1662,7 +2222,10 @@ def test_supervisor_deducts_parent_prelaunch_time_from_external_deadline(
 
     with (
         patch("devtools.fixed_core_packet.subprocess.Popen", return_value=Process()),
-        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[12.0, 13.0]),
+        patch(
+            "devtools.fixed_core_packet.time.perf_counter",
+            side_effect=[12.0, 13.0, 14.0],
+        ),
         patch(
             "devtools.fixed_core_packet.os.killpg",
             side_effect=_missing_group_on_probe,
@@ -1679,7 +2242,65 @@ def test_supervisor_deducts_parent_prelaunch_time_from_external_deadline(
             )
             == 0
         )
-    assert waits == [8.0]
+    assert waits == [7.0]
+
+
+def test_supervisor_terminates_a_worker_when_launch_consumes_the_deadline(
+    tmp_path: Path,
+) -> None:
+    result = tmp_path / "result.json"
+    fixed_core_packet.write_result(
+        result,
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=5.0,
+            external_seconds=10.0,
+            grace_seconds=1.0,
+        ),
+    )
+
+    class Process:
+        pid = 4321
+
+        def wait(self, timeout: float | None = None) -> int:
+            assert timeout == 1.0
+            return -signal.SIGTERM
+
+    with (
+        patch("devtools.fixed_core_packet.subprocess.Popen", return_value=Process()),
+        patch(
+            "devtools.fixed_core_packet.time.perf_counter",
+            side_effect=[12.0, 21.0, 22.0, 22.0],
+        ),
+        patch(
+            "devtools.fixed_core_packet.os.killpg",
+            side_effect=_missing_group_on_probe,
+        ) as killpg,
+    ):
+        assert (
+            supervise_worker(
+                ("worker",),
+                result,
+                external_seconds=10.0,
+                grace_seconds=1.0,
+                invocation_started=10.0,
+                external_deadline=20.0,
+            )
+            == 1
+        )
+    assert [call.args for call in killpg.call_args_list] == [
+        (4321, signal.SIGTERM),
+        (4321, signal.SIGKILL),
+        (4321, 0),
+    ]
+    receipt = cast(dict[str, object], json.loads(result.read_text()))
+    assert receipt["outcome"] == "preflight-timeout"
+    assert cast(dict[str, object], receipt["supervision"]) == {
+        "status": "deadline-terminated",
+        "worker_exit_status": -signal.SIGTERM,
+        "supervisor_signal": None,
+    }
 
 
 def test_supervisor_refuses_to_launch_after_parent_deadline(tmp_path: Path) -> None:
@@ -1705,9 +2326,110 @@ def test_supervisor_refuses_to_launch_after_parent_deadline(tmp_path: Path) -> N
     assert cast(dict[str, object], saved["supervision"])["status"] == ("deadline-before-launch")
 
 
+def test_preflight_launch_failure_is_retained_as_operational_and_unresolved(
+    tmp_path: Path,
+) -> None:
+    result = tmp_path / "result.json"
+    fixed_core_packet.write_result(
+        result,
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        ),
+    )
+    with (
+        patch(
+            "devtools.fixed_core_packet.subprocess.Popen",
+            side_effect=OSError("synthetic launch failure"),
+        ),
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[11.0, 12.0]),
+    ):
+        assert (
+            supervise_worker(
+                ("worker",),
+                result,
+                external_seconds=20.0,
+                grace_seconds=2.0,
+                invocation_started=10.0,
+                external_deadline=30.0,
+            )
+            == 1
+        )
+
+    receipt = cast(dict[str, object], json.loads(result.read_text()))
+    fixed_core_packet.validate_preflight_document(receipt)
+    assert receipt["status"] == "partial"
+    assert receipt["outcome"] == "preflight-failed"
+    assert receipt["scientific_decision"] == "unresolved"
+    assert receipt["error"] == "worker process launch failed: synthetic launch failure"
+    assert cast(dict[str, object], receipt["supervision"]) == {
+        "status": "launch-failed",
+        "worker_exit_status": None,
+        "supervisor_signal": None,
+    }
+
+
+def test_non_oserror_launch_failure_retains_type_message_and_returns_one(
+    tmp_path: Path,
+) -> None:
+    result = tmp_path / "result.json"
+    fixed_core_packet.write_result(
+        result,
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        ),
+    )
+    with (
+        patch(
+            "devtools.fixed_core_packet.subprocess.Popen",
+            side_effect=MemoryError("synthetic host allocation failure"),
+        ),
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[11.0, 12.0]),
+    ):
+        status = supervise_worker(
+            ("worker",),
+            result,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+            invocation_started=10.0,
+            external_deadline=30.0,
+        )
+
+    receipt = cast(dict[str, object], json.loads(result.read_text()))
+    assert status == 1
+    assert receipt["error"] == (
+        "worker process launch failed: MemoryError: synthetic host allocation failure"
+    )
+    assert cast(dict[str, object], receipt["supervision"]) == {
+        "status": "launch-failed",
+        "worker_exit_status": None,
+        "supervisor_signal": None,
+    }
+
+
 @pytest.mark.skipif(sys.platform == "win32", reason="POSIX process groups are required")
-def test_real_process_group_termination_reaps_a_grandchild(tmp_path: Path) -> None:
+def test_stalled_preflight_process_group_termination_reaps_a_grandchild(
+    tmp_path: Path,
+) -> None:
     pids = tmp_path / "pids"
+    result = tmp_path / "result.json"
+    fixed_core_packet.write_result(
+        result,
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=0.25,
+            external_seconds=0.5,
+            grace_seconds=2.0,
+        ),
+    )
     program = (
         "import os,signal,subprocess,sys; from pathlib import Path; "
         "child=subprocess.Popen([sys.executable,'-c','import signal; signal.pause()']); "
@@ -1718,7 +2440,7 @@ def test_real_process_group_termination_reaps_a_grandchild(tmp_path: Path) -> No
     assert (
         supervise_worker(
             (sys.executable, "-c", program),
-            tmp_path / "missing.json",
+            result,
             external_seconds=0.5,
             grace_seconds=2.0,
         )
@@ -1728,6 +2450,13 @@ def test_real_process_group_termination_reaps_a_grandchild(tmp_path: Path) -> No
     for pid in (leader, child):
         with pytest.raises(ProcessLookupError):
             os.kill(pid, 0)
+    receipt = cast(dict[str, object], json.loads(result.read_text()))
+    fixed_core_packet.validate_preflight_document(receipt)
+    assert receipt["status"] == "partial"
+    assert receipt["outcome"] == "preflight-timeout"
+    assert receipt["scientific_decision"] == "unresolved"
+    assert "external deadline" in cast(str, receipt["error"])
+    assert cast(dict[str, object], receipt["supervision"])["status"] == ("deadline-terminated")
 
 
 @pytest.mark.skipif(sys.platform == "win32", reason="POSIX process groups are required")
@@ -1982,7 +2711,11 @@ def test_nonzero_worker_exit_preserves_valid_receipt_classification(
     assert saved["status"] == kind
     assert saved["outcome"] == result["outcome"]
     supervision = cast(dict[str, object], saved["supervision"])
-    assert supervision == {"status": "observed-exit", "worker_exit_status": exit_status}
+    assert supervision == {
+        "status": "observed-exit",
+        "worker_exit_status": exit_status,
+        "supervisor_signal": None,
+    }
 
 
 def test_external_kill_replaces_a_stale_partial_phase_with_timeout(tmp_path: Path) -> None:
@@ -2078,6 +2811,160 @@ def test_parent_interruption_reaps_group_and_retains_partial_receipt(tmp_path: P
     assert cast(dict[str, object], saved["supervision"])["status"] == ("supervisor-interrupted")
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX signals are required")
+@pytest.mark.parametrize(
+    ("signal_number", "delivery_phase"),
+    [(signal.SIGTERM, "waiting"), (signal.SIGHUP, "launch"), (signal.SIGINT, "launch")],
+)
+def test_posix_signal_reaps_a_live_worker_and_closes_the_preflight_receipt(
+    tmp_path: Path, signal_number: signal.Signals, delivery_phase: str
+) -> None:
+    result = tmp_path / "result.json"
+    ready_path = tmp_path / "supervisor-ready"
+    fixed_core_packet.write_result(
+        result,
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=20.0,
+            external_seconds=30.0,
+            grace_seconds=1.0,
+        ),
+    )
+    worker_program = "import signal; signal.pause()"
+    supervisor_program = "\n".join(
+        (
+            "import os, signal, subprocess, sys, time",
+            "from pathlib import Path",
+            "from devtools import fixed_core_packet as packet",
+            "real_popen = subprocess.Popen",
+            f"command = (sys.executable, '-c', {worker_program!r})",
+            f"result = Path({str(result)!r})",
+            f"ready = Path({str(ready_path)!r})",
+            f"during_launch = {delivery_phase == 'launch'!r}",
+            f"signal_number = {int(signal_number)!r}",
+            "def launch(command, *, start_new_session):",
+            "    process = real_popen(command, start_new_session=start_new_session)",
+            "    temporary = ready.with_suffix('.partial')",
+            "    temporary.write_text(str(process.pid))",
+            "    temporary.replace(ready)",
+            "    if during_launch:",
+            "        os.kill(os.getpid(), signal_number)",
+            "        time.sleep(0.05)",
+            "    return process",
+            "packet.subprocess.Popen = launch",
+            "packet.supervise_worker(command, result, external_seconds=30., grace_seconds=1.)",
+        )
+    )
+    supervisor = subprocess.Popen((sys.executable, "-c", supervisor_program))
+    worker_pid: int | None = None
+    try:
+        deadline = time.monotonic() + 5.0
+        while not ready_path.exists() and time.monotonic() < deadline:
+            time.sleep(0.01)
+        worker_pid = int(ready_path.read_text())
+        if delivery_phase == "waiting":
+            os.kill(supervisor.pid, signal_number)
+        assert supervisor.wait(timeout=5.0) == -signal_number
+        deadline = time.monotonic() + 1.0
+        while time.monotonic() < deadline:
+            try:
+                os.kill(worker_pid, 0)
+            except ProcessLookupError:
+                break
+            time.sleep(0.01)
+        with pytest.raises(ProcessLookupError):
+            os.kill(worker_pid, 0)
+    finally:
+        if supervisor.poll() is None:
+            supervisor.terminate()
+            try:
+                supervisor.wait(timeout=2.0)
+            except subprocess.TimeoutExpired:
+                supervisor.kill()
+                supervisor.wait(timeout=2.0)
+        if worker_pid is None and ready_path.exists():
+            worker_pid = int(ready_path.read_text())
+        if worker_pid is not None:
+            with suppress(ProcessLookupError):
+                os.kill(worker_pid, signal.SIGKILL)
+
+    receipt = cast(dict[str, object], json.loads(result.read_text()))
+    fixed_core_packet.validate_preflight_document(receipt)
+    assert receipt["status"] == "partial"
+    assert receipt["outcome"] == "preflight-failed"
+    assert receipt["scientific_decision"] == "unresolved"
+    assert receipt["error"] == (
+        f"supervisor interrupted by {signal_number.name} ({signal_number.value})"
+    )
+    assert cast(dict[str, object], receipt["supervision"]) == {
+        "status": "supervisor-interrupted",
+        "worker_exit_status": -signal.SIGTERM,
+        "supervisor_signal": signal_number,
+    }
+
+
+def test_signal_handler_delivery_during_cleanup_cannot_abandon_the_group(
+    tmp_path: Path,
+) -> None:
+    result = tmp_path / "result.json"
+    fixed_core_packet.write_result(
+        result,
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=1.0,
+        ),
+    )
+    previous_handler = signal.getsignal(signal.SIGTERM)
+
+    class Process:
+        pid = 4321
+
+        def __init__(self) -> None:
+            self.waits = 0
+
+        def wait(self, timeout: float | None = None) -> int:
+            del timeout
+            self.waits += 1
+            handler = signal.getsignal(signal.SIGTERM)
+            assert callable(handler)
+            # A signal received by another eligible thread can queue Python's
+            # main-thread handler even while the main thread masks that signal.
+            handler(signal.SIGTERM, None)
+            return -signal.SIGTERM
+
+    process = Process()
+    with (
+        patch("devtools.fixed_core_packet.subprocess.Popen", return_value=process),
+        patch(
+            "devtools.fixed_core_packet.os.killpg", side_effect=_missing_group_on_probe
+        ) as killpg,
+        patch("devtools.fixed_core_packet.signal.raise_signal") as reraised,
+    ):
+        assert (
+            supervise_worker(("worker",), result, external_seconds=20.0, grace_seconds=1.0)
+            == 128 + signal.SIGTERM
+        )
+    assert process.waits == 2
+    assert [call.args for call in killpg.call_args_list] == [
+        (process.pid, signal.SIGTERM),
+        (process.pid, signal.SIGKILL),
+        (process.pid, 0),
+    ]
+    reraised.assert_called_once_with(signal.SIGTERM)
+    assert signal.getsignal(signal.SIGTERM) == previous_handler
+    receipt = cast(dict[str, object], json.loads(result.read_text()))
+    assert receipt["outcome"] == "preflight-failed"
+    assert cast(dict[str, object], receipt["supervision"]) == {
+        "status": "supervisor-interrupted",
+        "worker_exit_status": -signal.SIGTERM,
+        "supervisor_signal": signal.SIGTERM,
+    }
+
+
 def test_unexpected_worker_failure_preserves_completed_direction_files(
     tmp_path: Path,
 ) -> None:
@@ -2146,6 +3033,159 @@ def test_child_source_race_reclassifies_the_seed_as_invalid(tmp_path: Path) -> N
     assert clocks["process_seconds"] == 1.0
 
 
+def test_preflight_source_failure_is_retained_without_a_packet_receipt(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "preflight-source-failure"
+    output.mkdir()
+    fixed_core_packet.write_result(
+        output / "result.json",
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        ),
+    )
+    with (
+        patch(
+            "devtools.fixed_core_packet.source_manifest",
+            side_effect=PacketError("synthetic source preflight failure"),
+        ),
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[10.0, 11.0]),
+    ):
+        status = run_worker(
+            REPOSITORY,
+            REVISION,
+            output,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        )
+
+    assert status == 2
+    receipt = cast(dict[str, object], json.loads((output / "result.json").read_text()))
+    fixed_core_packet.validate_preflight_document(receipt)
+    assert receipt["status"] == "invalid"
+    assert receipt["outcome"] == "preflight-invalid"
+    assert receipt["scientific_decision"] == "unresolved"
+    assert receipt["error"] == "synthetic source preflight failure"
+    assert receipt["clocks"] == {
+        "process_seconds": 1.0,
+        "external_lifetime_seconds": None,
+    }
+
+
+@pytest.mark.parametrize(
+    "failure",
+    [
+        OSError("synthetic source I/O failure"),
+        PacketOperationalError("synthetic Git execution failure"),
+    ],
+)
+def test_operational_preflight_failure_remains_partial_and_unresolved(
+    tmp_path: Path, failure: Exception
+) -> None:
+    output = tmp_path / "operational-preflight-failure"
+    output.mkdir()
+    fixed_core_packet.write_result(
+        output / "result.json",
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        ),
+    )
+    with (
+        patch("devtools.fixed_core_packet.source_manifest", side_effect=failure),
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[10.0, 11.0]),
+    ):
+        status = run_worker(
+            REPOSITORY,
+            REVISION,
+            output,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        )
+
+    assert status == 1
+    receipt = cast(dict[str, object], json.loads((output / "result.json").read_text()))
+    fixed_core_packet.validate_preflight_document(receipt)
+    assert receipt["status"] == "partial"
+    assert receipt["outcome"] == "preflight-failed"
+    assert receipt["scientific_decision"] == "unresolved"
+    assert receipt["error"] == (
+        f"operational preflight failure: {type(failure).__name__}: {failure}"
+    )
+    with pytest.raises(PacketError, match="closed packet schema"):
+        load_result(
+            output,
+            repository=REPOSITORY,
+            expected_revision=REVISION,
+            require_supervision=False,
+        )
+
+
+def test_uv_lock_read_oserror_stays_operational_through_worker_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    output = tmp_path / "uv-lock-io"
+    output.mkdir()
+    fixed_core_packet.write_result(
+        output / "result.json",
+        fixed_core_packet.initial_preflight_document(
+            REVISION,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        ),
+    )
+    original_read_text = Path.read_text
+    monkeypatch.setattr(fixed_core_packet, "runtime_binding", runtime_binding)
+
+    def read_text(
+        path: Path,
+        encoding: str | None = None,
+        errors: str | None = None,
+        newline: str | None = None,
+    ) -> str:
+        if path.resolve() == (REPOSITORY / "packing" / "uv.lock").resolve():
+            raise OSError("synthetic uv.lock I/O failure")
+        return original_read_text(path, encoding=encoding, errors=errors, newline=newline)
+
+    with (
+        patch("devtools.fixed_core_packet.source_manifest", return_value=MANIFEST),
+        patch.object(Path, "read_text", read_text),
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[10.0, 11.0]),
+    ):
+        status = run_worker(
+            REPOSITORY,
+            REVISION,
+            output,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+        )
+
+    receipt = cast(dict[str, object], json.loads((output / "result.json").read_text()))
+    assert status == 1
+    assert receipt["status"] == "partial"
+    assert receipt["outcome"] == "preflight-failed"
+    assert receipt["scientific_decision"] == "unresolved"
+    assert receipt["error"] == (
+        "operational preflight failure: PacketOperationalError: "
+        "could not read the bound uv.lock: OSError: synthetic uv.lock I/O failure"
+    )
+
+
 def test_worker_republishes_complete_receipt_after_readback_with_end_to_end_clock(
     tmp_path: Path,
 ) -> None:
@@ -2154,7 +3194,7 @@ def test_worker_republishes_complete_receipt_after_readback_with_end_to_end_cloc
         patch("devtools.fixed_core_packet.source_manifest", return_value=MANIFEST),
         patch("devtools.fixed_core_packet.execute_packet", return_value=complete),
         patch("devtools.fixed_core_packet.load_result", return_value=complete) as readback,
-        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[10.0, 12.0]),
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[10.0, 12.0, 12.0]),
     ):
         status = run_worker(
             REPOSITORY,
@@ -2199,6 +3239,78 @@ def test_readback_finishing_past_scientific_deadline_revokes_acceptance(
     assert saved["scientific_decision"] == "unresolved"
     assert saved["phase"] == "timeout"
     assert "independent readback" in cast(str, saved["error"])
+
+
+def test_final_receipt_publication_past_scientific_deadline_revokes_acceptance(
+    tmp_path: Path,
+) -> None:
+    output, complete = _execute(tmp_path, RAW_THRESHOLD)
+    now = 19.0
+    writes = 0
+    original_write = fixed_core_packet.write_result
+
+    def write_result(path: Path, document: dict[str, object]) -> None:
+        nonlocal now, writes
+        original_write(path, document)
+        writes += 1
+        if writes == 1:
+            now = 21.0
+
+    with (
+        patch("devtools.fixed_core_packet.source_manifest", return_value=MANIFEST),
+        patch("devtools.fixed_core_packet.execute_packet", return_value=complete),
+        patch("devtools.fixed_core_packet.load_result", return_value=complete),
+        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=lambda: now),
+        patch("devtools.fixed_core_packet.write_result", side_effect=write_result),
+    ):
+        status = run_worker(
+            REPOSITORY,
+            REVISION,
+            output,
+            workers=1,
+            scientific_seconds=10.0,
+            external_seconds=20.0,
+            grace_seconds=2.0,
+            invocation_started=10.0,
+        )
+    saved = cast(dict[str, object], json.loads((output / "result.json").read_text()))
+    assert status == 1
+    assert writes == 2
+    assert saved["status"] == "partial"
+    assert saved["scientific_decision"] == "unresolved"
+    assert saved["phase"] == "timeout"
+    assert "final receipt publication" in cast(str, saved["error"])
+    assert cast(dict[str, object], saved["clocks"])["scientific_seconds"] == 11.0
+
+
+@pytest.mark.parametrize("clock", ["scientific_seconds", "process_seconds"])
+def test_complete_receipt_refuses_an_elapsed_scientific_budget(
+    tmp_path: Path, clock: str
+) -> None:
+    _output, complete = _execute(tmp_path, RAW_THRESHOLD)
+    cast(dict[str, object], complete["clocks"])[clock] = 10.0
+    with pytest.raises(PacketError, match="complete receipt exceeds its scientific deadline"):
+        validate_result_document(complete)
+
+
+def test_raw_completion_past_the_scientific_budget_stays_unresolved(tmp_path: Path) -> None:
+    now = 0.0
+    raw_runner = _raw(RAW_THRESHOLD)
+
+    def finish_late(certificate: ThresholdCertificate, **kwargs) -> RawMinimum:
+        nonlocal now
+        result = raw_runner(certificate, **kwargs)
+        now = 11.0
+        return result
+
+    output, result = _execute(
+        tmp_path, RAW_THRESHOLD, clock=lambda: now, raw_runner=finish_late
+    )
+    assert result["status"] == "partial"
+    assert result["scientific_decision"] == "unresolved"
+    assert result["phase"] == "timeout"
+    assert "scientific deadline reached" in cast(str, result["error"])
+    assert cast(dict[str, object], json.loads((output / "result.json").read_text())) == result
 
 
 def test_unexpected_nonzero_worker_exit_revokes_a_complete_receipt(tmp_path: Path) -> None:

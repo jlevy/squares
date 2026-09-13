@@ -35,7 +35,7 @@ from contextlib import suppress
 from dataclasses import dataclass
 from fractions import Fraction
 from multiprocessing import get_context
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Literal, Protocol, cast
 
 from strif import atomic_write_text
@@ -100,8 +100,20 @@ DEFAULT_GRACE_SECONDS = 2.0
 MAX_WORKERS = 4
 IN_FLIGHT_WORK_PER_WORKER = 2
 STRIF_ATOMIC_UID_LENGTH = 13
-RESULT_SCHEMA = "fixed-core-threshold-packet/v2"
+RESULT_SCHEMA = "fixed-core-threshold-packet/v4"
+PREFLIGHT_SCHEMA = "fixed-core-threshold-packet-preflight/v2"
 NORMALIZATION_SETTING = "alpha=1/m after complete strict acceptance"
+SCIENTIFIC_DEADLINE_SCOPE = (
+    "parent invocation through supervised source and runtime preflight, source replay, "
+    "all retaining readers, publication, and independent readback; expiration revokes "
+    "acceptance"
+)
+EXTERNAL_DEADLINE_SCOPE = (
+    "clocked from parent invocation through supervised worker process-group "
+    "termination; enforcement excludes time blocked inside the operating-system "
+    "process-launch call, checks the deadline immediately before and after that call, "
+    "and allows termination grace after the deadline"
+)
 RUNTIME_ATTESTATION_SCOPE = (
     "source and observed runtime identities for this execution; no interpreter-binary, "
     "installed-wheel, operating-system, CPU, scheduling, or cross-host byte-equivalence "
@@ -121,8 +133,20 @@ class PacketError(ValueError):
     """A source, invocation, result, or reader violated the fixed packet contract."""
 
 
+class PacketOperationalError(RuntimeError):
+    """The host failed while collecting or supervising fixed packet evidence."""
+
+
+class _SupervisorSignal(BaseException):
+    """Transfer POSIX termination to the synchronous process-group cleanup path."""
+
+    def __init__(self, signum: int) -> None:
+        self.signum = signum
+        super().__init__(signum)
+
+
 class PacketDeadlineError(PacketError):
-    """The scientific deadline expired after the last atomic checkpoint."""
+    """A packet deadline expired before the next accepted checkpoint."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -269,12 +293,28 @@ class DilationRunner(Protocol):
 RawWitnessReplay = Callable[[ThresholdCertificate, RawMinimum], tuple[Fraction, bool]]
 
 
-def _git(repository: Path, *arguments: str) -> str:
-    result = subprocess.run(
-        ("git", *arguments), cwd=repository, check=False, capture_output=True, text=True
-    )
+def _git(repository: Path, *arguments: str, deadline: float | None = None) -> str:
+    remaining = None if deadline is None else deadline - time.perf_counter()
+    if remaining is not None and remaining <= 0:
+        raise PacketDeadlineError("Git deadline reached before output-guard command")
+    try:
+        result = subprocess.run(
+            ("git", *arguments),
+            cwd=repository,
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=remaining,
+        )
+    except subprocess.TimeoutExpired as error:
+        raise PacketDeadlineError("Git deadline reached during output-guard command") from error
+    if deadline is not None and time.perf_counter() >= deadline:
+        raise PacketDeadlineError("Git deadline reached during output-guard command")
     if result.returncode:
-        raise PacketError(result.stderr.strip() or f"git {' '.join(arguments)} failed")
+        detail = result.stderr.strip() or "no diagnostic"
+        raise PacketOperationalError(
+            f"git {' '.join(arguments)} failed with status {result.returncode}: {detail}"
+        )
     return result.stdout.strip()
 
 
@@ -299,7 +339,11 @@ def _local_module_path(repository: Path, module: str) -> Path | None:
 def _imported_local_modules(module: str, path: Path) -> set[str]:
     try:
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-    except (OSError, SyntaxError) as error:
+    except OSError as error:
+        raise PacketOperationalError(
+            f"could not read dependency {path}: {type(error).__name__}: {error}"
+        ) from error
+    except SyntaxError as error:
         raise PacketError(f"could not inspect dependency {path}: {error}") from error
     package = module if path.name == "__init__.py" else module.rpartition(".")[0]
     imported: set[str] = set()
@@ -378,7 +422,10 @@ def _validate_loaded_modules(repository: Path, paths: Sequence[str]) -> None:
 
 
 def source_manifest(
-    repository: Path, revision: str, *, permit_result_files: bool = False
+    repository: Path,
+    revision: str,
+    *,
+    result_directory: Path | None = None,
 ) -> list[dict[str, str]]:
     """Bind the exact source and recursive implementation closure to one clean revision."""
 
@@ -389,10 +436,34 @@ def source_manifest(
     _validate_loaded_modules(repository, paths)
     if _git(repository, "rev-parse", "HEAD") != revision:
         raise PacketError("current Git revision differs from the frozen instrument")
+    revision_paths = set(
+        _git(repository, "ls-tree", "-r", "--name-only", revision).splitlines()
+    )
     changed = _git(repository, "status", "--porcelain", "--", *paths)
     if changed:
         raise PacketError("fixed source or implementation closure is not clean")
-    if not permit_result_files and _git(repository, "status", "--porcelain"):
+    status_arguments = ["status", "--porcelain", "--untracked-files=all"]
+    if result_directory is not None:
+        resolved_result = result_directory.resolve()
+        if resolved_result.is_relative_to(repository):
+            relative_result = resolved_result.relative_to(repository).as_posix()
+            result_path = PurePosixPath(relative_result)
+            if any(
+                PurePosixPath(tracked_path).is_relative_to(result_path)
+                or result_path.is_relative_to(PurePosixPath(tracked_path))
+                for tracked_path in revision_paths
+            ):
+                raise PacketError(
+                    "result directory overlaps a path tracked at the frozen revision"
+                )
+            status_arguments.extend(
+                (
+                    "--",
+                    ".",
+                    f":(exclude,top,literal){relative_result}",
+                )
+            )
+    if _git(repository, *status_arguments):
         raise PacketError("instrument checkout must be clean before the run")
     tracked = set(
         _git(repository, "ls-tree", "-r", "--name-only", revision, "--", *paths).splitlines()
@@ -400,14 +471,28 @@ def source_manifest(
     if tracked != set(paths):
         missing = ", ".join(sorted(set(paths) - tracked))
         raise PacketError(f"frozen source or implementation closure is incomplete: {missing}")
-    manifest = [
-        {
-            "path": relative,
-            "git_blob": _git(repository, "rev-parse", f"{revision}:{relative}"),
-            "sha256": hashlib.sha256((repository / relative).read_bytes()).hexdigest(),
-        }
-        for relative in paths
-    ]
+    manifest: list[dict[str, str]] = []
+    for relative in paths:
+        blob = _git(repository, "rev-parse", f"{revision}:{relative}")
+        frozen = subprocess.run(
+            ("git", "cat-file", "blob", blob),
+            cwd=repository,
+            check=False,
+            capture_output=True,
+        )
+        if frozen.returncode:
+            detail = frozen.stderr.decode("utf-8", errors="replace").strip()
+            raise PacketOperationalError(
+                f"could not read frozen Git blob for {relative}: {detail}"
+            )
+        data = (repository / relative).read_bytes()
+        # Git status can omit tracked edits marked assume-unchanged or skip-worktree.
+        # Bind the exported digest to the actual revision bytes, independent of flags.
+        if data != frozen.stdout:
+            raise PacketError(f"{relative} bytes differ from the frozen Git blob")
+        manifest.append(
+            {"path": relative, "git_blob": blob, "sha256": hashlib.sha256(data).hexdigest()}
+        )
     identities = {row["path"]: (row["git_blob"], row["sha256"]) for row in manifest}
     if identities[SOURCE_PATH] != (SOURCE_BLOB, SOURCE_SHA256):
         raise PacketError("T-025 source identity differs from the admitted artifact")
@@ -468,7 +553,12 @@ def runtime_binding(
     expected_environment = (repository / "packing" / ".venv").resolve()
     if observation.environment.resolve() != expected_environment:
         raise PacketError("fixed-core packet must run in the repository packing/.venv")
-    expected_version = (repository / PROJECT_RUNTIME_PATHS[0]).read_text().strip()
+    try:
+        expected_version = (repository / PROJECT_RUNTIME_PATHS[0]).read_text().strip()
+    except OSError as error:
+        raise PacketOperationalError(
+            f"could not read the bound Python version: {type(error).__name__}: {error}"
+        ) from error
     if (
         observation.implementation != "cpython"
         or observation.version != expected_version
@@ -486,8 +576,14 @@ def runtime_binding(
         raise PacketError("Python executable identity is missing or inconsistent")
 
     try:
-        lock = tomllib.loads((repository / "packing" / "uv.lock").read_text())
-    except (OSError, tomllib.TOMLDecodeError) as error:
+        lock_text = (repository / "packing" / "uv.lock").read_text()
+    except OSError as error:
+        raise PacketOperationalError(
+            f"could not read the bound uv.lock: {type(error).__name__}: {error}"
+        ) from error
+    try:
+        lock = tomllib.loads(lock_text)
+    except tomllib.TOMLDecodeError as error:
         raise PacketError(f"could not read the bound uv.lock: {error}") from error
     package_rows = lock.get("package")
     if not isinstance(package_rows, list):
@@ -1114,6 +1210,64 @@ def run_dilation_replay(
         ) from error
 
 
+def _deadline_settings(
+    *,
+    workers: int,
+    scientific_seconds: float,
+    external_seconds: float,
+    grace_seconds: float,
+) -> dict[str, object]:
+    return {
+        "workers": workers,
+        "scientific_seconds": scientific_seconds,
+        "scientific_deadline_scope": SCIENTIFIC_DEADLINE_SCOPE,
+        "external_seconds": external_seconds,
+        "external_deadline_scope": EXTERNAL_DEADLINE_SCOPE,
+        "termination_grace_seconds": grace_seconds,
+    }
+
+
+def initial_preflight_document(
+    revision: str,
+    *,
+    workers: int,
+    scientific_seconds: float,
+    external_seconds: float,
+    grace_seconds: float,
+) -> dict[str, object]:
+    """Seed the only receipt available until supervised source preflight completes."""
+
+    return {
+        "schema": PREFLIGHT_SCHEMA,
+        "status": "partial",
+        "outcome": "preflight-pending",
+        "scientific_decision": "unresolved",
+        "claim_limit": CLAIM_LIMIT,
+        "sources": {
+            "implementation_revision": revision,
+            "source_path": SOURCE_PATH,
+            "t026_path": T026_PATH,
+        },
+        "settings": _deadline_settings(
+            workers=workers,
+            scientific_seconds=scientific_seconds,
+            external_seconds=external_seconds,
+            grace_seconds=grace_seconds,
+        ),
+        "clocks": {
+            "process_seconds": 0.0,
+            "external_lifetime_seconds": None,
+        },
+        "supervision": {
+            "status": "pending",
+            "worker_exit_status": None,
+            "supervisor_signal": None,
+        },
+        "phase": "preflight",
+        "error": "source and runtime preflight has not completed",
+    }
+
+
 def _initial_document(
     revision: str,
     manifest: list[dict[str, str]],
@@ -1154,18 +1308,12 @@ def _initial_document(
             "half_gap_tangent": str(PACKET_HALF_GAP),
             "raw_threshold_M_over_11": str(RAW_THRESHOLD),
             "normalization": NORMALIZATION_SETTING,
-            "workers": workers,
-            "scientific_seconds": scientific_seconds,
-            "scientific_deadline_scope": (
-                "worker invocation through source binding and replay, all readers, "
-                "publication, and independent readback"
+            **_deadline_settings(
+                workers=workers,
+                scientific_seconds=scientific_seconds,
+                external_seconds=external_seconds,
+                grace_seconds=grace_seconds,
             ),
-            "external_seconds": external_seconds,
-            "external_deadline_scope": (
-                "worker process lifetime through process-group termination; the "
-                "termination grace follows the deadline"
-            ),
-            "termination_grace_seconds": grace_seconds,
         },
         "clocks": {
             "source_seconds": 0.0,
@@ -1176,6 +1324,7 @@ def _initial_document(
         "supervision": {
             "status": "pending",
             "worker_exit_status": None,
+            "supervisor_signal": None,
         },
         "phase": "source-replay",
         "raw": {
@@ -1239,6 +1388,26 @@ def _completed_direction_indices(
     if indices != sorted(set(indices)):
         raise PacketError(f"{label} is not canonical, sorted, and unique")
     return tuple(indices)
+
+
+def _completed_direction_labels(
+    value: object,
+    *,
+    completed: int,
+    labels: Sequence[str],
+    label: str,
+) -> tuple[str, ...]:
+    if not isinstance(value, list) or len(value) != completed:
+        raise PacketError(f"{label} does not match its completed direction count")
+    positions = {direction_label: index for index, direction_label in enumerate(labels)}
+    if len(positions) != len(labels):
+        raise PacketError(f"{label} has duplicate labels in its canonical direction set")
+    if any(not isinstance(direction, str) or direction not in positions for direction in value):
+        raise PacketError(f"{label} contains an unknown direction")
+    directions = cast(list[str], value)
+    if directions != sorted(set(directions), key=positions.__getitem__):
+        raise PacketError(f"{label} is not canonical, ordered, and unique")
+    return tuple(directions)
 
 
 def _sha256(value: object, label: str) -> None:
@@ -1314,6 +1483,178 @@ def _is_raw_normalization_checkpoint(
         ("partial", "incomplete", "incomplete"),
         ("invalid", "invalid", "invalid"),
     }
+
+
+def validate_preflight_document(document: dict[str, object]) -> None:
+    """Validate a non-scientific receipt from the supervised preflight interval."""
+
+    if (
+        set(document)
+        != {
+            "schema",
+            "status",
+            "outcome",
+            "scientific_decision",
+            "claim_limit",
+            "sources",
+            "settings",
+            "clocks",
+            "supervision",
+            "phase",
+            "error",
+        }
+        or document.get("schema") != PREFLIGHT_SCHEMA
+    ):
+        raise PacketError("document does not match the closed preflight schema")
+    if (
+        document.get("claim_limit") != CLAIM_LIMIT
+        or document.get("scientific_decision") != "unresolved"
+        or document.get("phase") != "preflight"
+    ):
+        raise PacketError("preflight receipt changed its scientific scope")
+    state = (document.get("status"), document.get("outcome"))
+    if state not in {
+        ("partial", "preflight-pending"),
+        ("partial", "preflight-timeout"),
+        ("partial", "preflight-failed"),
+        ("invalid", "preflight-invalid"),
+    }:
+        raise PacketError("preflight receipt has an impossible state")
+    if not isinstance(document.get("error"), str) or not document["error"]:
+        raise PacketError("preflight receipt lacks its unresolved reason")
+
+    sources = document.get("sources")
+    if not isinstance(sources, dict) or set(sources) != {
+        "implementation_revision",
+        "source_path",
+        "t026_path",
+    }:
+        raise PacketError("preflight source fields do not match the closed schema")
+    revision = sources.get("implementation_revision")
+    if (
+        not isinstance(revision, str)
+        or len(revision) != 40
+        or any(character not in "0123456789abcdef" for character in revision)
+        or sources.get("source_path") != SOURCE_PATH
+        or sources.get("t026_path") != T026_PATH
+    ):
+        raise PacketError("preflight source request is malformed")
+
+    settings = document.get("settings")
+    if not isinstance(settings, dict) or set(settings) != {
+        "workers",
+        "scientific_seconds",
+        "scientific_deadline_scope",
+        "external_seconds",
+        "external_deadline_scope",
+        "termination_grace_seconds",
+    }:
+        raise PacketError("preflight settings do not match the closed schema")
+    workers = settings.get("workers")
+    scientific = settings.get("scientific_seconds")
+    external = settings.get("external_seconds")
+    grace = settings.get("termination_grace_seconds")
+    if (
+        type(workers) is not int
+        or not 1 <= cast(int, workers) <= MAX_WORKERS
+        or not isinstance(scientific, (int, float))
+        or isinstance(scientific, bool)
+        or not isinstance(external, (int, float))
+        or isinstance(external, bool)
+        or not isinstance(grace, (int, float))
+        or isinstance(grace, bool)
+        or not all(math.isfinite(float(value)) for value in (scientific, external, grace))
+        or not 0 < scientific <= external
+        or grace <= 0
+        or settings.get("scientific_deadline_scope") != SCIENTIFIC_DEADLINE_SCOPE
+        or settings.get("external_deadline_scope") != EXTERNAL_DEADLINE_SCOPE
+    ):
+        raise PacketError("preflight deadline settings are malformed")
+
+    clocks = document.get("clocks")
+    if not isinstance(clocks, dict) or set(clocks) != {
+        "process_seconds",
+        "external_lifetime_seconds",
+    }:
+        raise PacketError("preflight clocks do not match the closed schema")
+    process_seconds = clocks.get("process_seconds")
+    external_lifetime = clocks.get("external_lifetime_seconds")
+    if (
+        not isinstance(process_seconds, (int, float))
+        or isinstance(process_seconds, bool)
+        or not math.isfinite(process_seconds)
+        or process_seconds < 0
+        or (
+            external_lifetime is not None
+            and (
+                not isinstance(external_lifetime, (int, float))
+                or isinstance(external_lifetime, bool)
+                or not math.isfinite(external_lifetime)
+                or external_lifetime < 0
+            )
+        )
+    ):
+        raise PacketError("preflight clocks are malformed")
+
+    supervision = document.get("supervision")
+    if not isinstance(supervision, dict) or set(supervision) != {
+        "status",
+        "worker_exit_status",
+        "supervisor_signal",
+    }:
+        raise PacketError("preflight supervision fields do not match the closed schema")
+    supervision_status = supervision.get("status")
+    worker_status = supervision.get("worker_exit_status")
+    supervisor_signal = supervision.get("supervisor_signal")
+    if supervision_status not in {
+        "pending",
+        "observed-exit",
+        "deadline-before-launch",
+        "deadline-terminated",
+        "launch-failed",
+        "supervisor-interrupted",
+    } or (worker_status is not None and type(worker_status) is not int):
+        raise PacketError("preflight supervision is malformed")
+    if supervisor_signal is not None and (
+        type(supervisor_signal) is not int
+        or supervisor_signal not in {signal.SIGHUP, signal.SIGTERM, signal.SIGINT}
+    ):
+        raise PacketError("preflight supervisor signal is malformed")
+    if supervision_status != "supervisor-interrupted" and supervisor_signal is not None:
+        raise PacketError("preflight signal provenance lacks an interrupted supervisor")
+    if supervision_status == "pending" and (
+        worker_status is not None or external_lifetime is not None
+    ):
+        raise PacketError("pending preflight supervision carries a completed observation")
+    if supervision_status != "pending" and external_lifetime is None:
+        raise PacketError("completed preflight supervision lacks external lifetime")
+    if supervision_status == "observed-exit" and worker_status is None:
+        raise PacketError("observed preflight exit lacks its status")
+    if supervision_status in {"deadline-before-launch", "launch-failed"} and (
+        worker_status is not None
+    ):
+        raise PacketError("prelaunch supervision cannot carry a worker exit status")
+    if state == ("partial", "preflight-pending") and supervision_status != "pending":
+        raise PacketError("completed supervision retained a pending preflight state")
+    if state == ("partial", "preflight-timeout") and supervision_status not in {
+        "deadline-before-launch",
+        "deadline-terminated",
+    }:
+        raise PacketError("preflight timeout lacks deadline supervision")
+    if state == ("partial", "preflight-failed") and supervision_status not in {
+        "pending",
+        "observed-exit",
+        "launch-failed",
+        "supervisor-interrupted",
+    }:
+        raise PacketError("preflight failure has incompatible supervision")
+    if state == ("invalid", "preflight-invalid") and supervision_status not in {
+        "pending",
+        "observed-exit",
+        "deadline-terminated",
+        "supervisor-interrupted",
+    }:
+        raise PacketError("invalid preflight has incompatible supervision")
 
 
 def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
@@ -1550,16 +1891,8 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
         or settings.get("half_gap_tangent") != str(PACKET_HALF_GAP)
         or settings.get("raw_threshold_M_over_11") != str(RAW_THRESHOLD)
         or settings.get("normalization") != NORMALIZATION_SETTING
-        or settings.get("scientific_deadline_scope")
-        != (
-            "worker invocation through source binding and replay, all readers, "
-            "publication, and independent readback"
-        )
-        or settings.get("external_deadline_scope")
-        != (
-            "worker process lifetime through process-group termination; the "
-            "termination grace follows the deadline"
-        )
+        or settings.get("scientific_deadline_scope") != SCIENTIFIC_DEADLINE_SCOPE
+        or settings.get("external_deadline_scope") != EXTERNAL_DEADLINE_SCOPE
     ):
         raise PacketError("fixed packet settings changed")
     workers = settings.get("workers")
@@ -1603,14 +1936,21 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
         or external_lifetime < 0
     ):
         raise PacketError("external lifetime clock is malformed")
+    if status == "complete" and any(
+        cast(float, clocks[key]) >= scientific
+        for key in ("scientific_seconds", "process_seconds")
+    ):
+        raise PacketError("complete receipt exceeds its scientific deadline")
     supervision = document["supervision"]
     if not isinstance(supervision, dict) or set(supervision) != {
         "status",
         "worker_exit_status",
+        "supervisor_signal",
     }:
         raise PacketError("supervision fields do not match the closed packet schema")
     supervision_status = supervision.get("status")
     worker_exit_status = supervision.get("worker_exit_status")
+    supervisor_signal = supervision.get("supervisor_signal")
     if supervision_status not in {
         "pending",
         "observed-exit",
@@ -1622,6 +1962,13 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
         raise PacketError("supervision status is malformed")
     if worker_exit_status is not None and type(worker_exit_status) is not int:
         raise PacketError("supervised worker exit status is malformed")
+    if supervisor_signal is not None and (
+        type(supervisor_signal) is not int
+        or supervisor_signal not in {signal.SIGHUP, signal.SIGTERM, signal.SIGINT}
+    ):
+        raise PacketError("supervisor signal is malformed")
+    if supervision_status != "supervisor-interrupted" and supervisor_signal is not None:
+        raise PacketError("signal provenance lacks an interrupted supervisor")
     if supervision_status == "pending" and (
         worker_exit_status is not None or external_lifetime is not None
     ):
@@ -1838,6 +2185,7 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
                 "source_sha256",
                 "directions_expected",
                 "directions_completed",
+                "completed_directions",
                 "last",
             }
         )
@@ -1866,8 +2214,23 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
             if type(interval.get("accepted")) is not bool:
                 raise PacketError("interval acceptance flag is malformed")
             _sha256(interval.get("directions_sha256"), "interval retained-direction digest")
-        elif not isinstance(interval.get("last"), dict):
-            raise PacketError("partial interval route lacks its last retained direction")
+        else:
+            interval_labels = tuple(str(index) for index in range(PACKET_STEPS + 1)) + tuple(
+                f"{index}'" for index in range(1, PACKET_STEPS + 1)
+            )
+            interval_completed_labels = _completed_direction_labels(
+                interval.get("completed_directions"),
+                completed=cast(int, interval_completed),
+                labels=interval_labels,
+                label="interval completed directions",
+            )
+            last = interval.get("last")
+            if not isinstance(last, dict):
+                raise PacketError("partial interval route lacks its last retained direction")
+            if last.get("label") not in interval_completed_labels:
+                raise PacketError(
+                    "partial interval last row is absent from completed directions"
+                )
     normalized_digest = normalized.get("sha256") if isinstance(normalized, dict) else None
     if isinstance(exact, dict) and exact.get("source_sha256") != normalized_digest:
         raise PacketError("exact route names different normalized bytes")
@@ -1898,6 +2261,7 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
                 "source_sha256",
                 "directions_expected",
                 "directions_completed",
+                "completed_directions",
                 "last",
             }
         )
@@ -1924,8 +2288,20 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
             _exact_rational(dilation.get("bounded_side_squared"), "dilation squared side")
             if dilation.get("strictly_above_t026") is not True:
                 raise PacketError("dilation comparison flag is malformed")
-        elif not isinstance(dilation.get("last"), dict):
-            raise PacketError("partial dilation replay lacks its last retained direction")
+        else:
+            dilation_completed_labels = _completed_direction_labels(
+                dilation.get("completed_directions"),
+                completed=cast(int, dilation_completed),
+                labels=tuple(str(index) for index in range(RAW_DIRECTIONS)),
+                label="dilation completed directions",
+            )
+            last = dilation.get("last")
+            if not isinstance(last, dict):
+                raise PacketError("partial dilation replay lacks its last retained direction")
+            if last.get("label") not in dilation_completed_labels:
+                raise PacketError(
+                    "partial dilation last row is absent from completed directions"
+                )
     if interval is not None and not (
         isinstance(exact, dict) and exact.get("status") == "complete"
     ):
@@ -1984,7 +2360,10 @@ def validate_result_document(document: dict[str, object]) -> None:  # noqa: C901
 
 
 def write_result(path: Path, document: dict[str, object]) -> None:
-    validate_result_document(document)
+    if document.get("schema") == PREFLIGHT_SCHEMA:
+        validate_preflight_document(document)
+    else:
+        validate_result_document(document)
     atomic_write_text(path, json.dumps(document, indent=2, allow_nan=False) + "\n")
 
 
@@ -2202,7 +2581,7 @@ def execute_packet(  # noqa: PLR0911
     t026 = load_t026_reference(t026_source)
     packet, source_record = load_packet_source(source)
     source_finished = clock()
-    # The scientific deadline starts at worker invocation, before source binding and
+    # The scientific deadline starts at parent invocation, before source binding and
     # replay. ``source_seconds`` names just the in-function byte replay/parsing slice;
     # ``scientific_seconds`` and ``process_seconds`` use the invocation clock.
     cast(dict[str, object], document["clocks"])["source_seconds"] = (
@@ -2307,6 +2686,7 @@ def execute_packet(  # noqa: PLR0911
                 }
             )
             record_elapsed()
+            _expired(deadline, clock, "before complete receipt publication")
             publisher(result_path, document)
             return document
 
@@ -2477,16 +2857,30 @@ def execute_packet(  # noqa: PLR0911
         publisher(result_path, document)
         _expired(deadline, clock, "before reflected interval route")
 
-        interval_completed = 0
+        interval_labels = tuple(str(index) for index in range(PACKET_STEPS + 1)) + tuple(
+            f"{index}'" for index in range(1, PACKET_STEPS + 1)
+        )
+        interval_label_positions = {label: index for index, label in enumerate(interval_labels)}
+        interval_completed_labels: set[str] = set()
 
         def interval_progress(outcome: DirectionOutcome) -> None:
-            nonlocal interval_completed
-            interval_completed += 1
+            _require(
+                outcome.label in interval_label_positions,
+                "interval progress named an unknown direction",
+            )
+            _require(
+                outcome.label not in interval_completed_labels,
+                "interval progress repeated a completed direction",
+            )
+            interval_completed_labels.add(outcome.label)
             _routes(document)["reflected_interval"] = {
                 "status": "partial",
                 "source_sha256": candidate_sha,
                 "directions_expected": INTERVAL_DIRECTIONS,
-                "directions_completed": interval_completed,
+                "directions_completed": len(interval_completed_labels),
+                "completed_directions": sorted(
+                    interval_completed_labels, key=interval_label_positions.__getitem__
+                ),
                 "last": _interval_row(outcome),
             }
             record_elapsed()
@@ -2525,10 +2919,7 @@ def execute_packet(  # noqa: PLR0911
             "directions_sha256": _direction_digest(
                 tuple(
                     output_dir / "normalized-interval-directions" / f"{label}.json"
-                    for label in (
-                        tuple(str(index) for index in range(PACKET_STEPS + 1))
-                        + tuple(f"{index}'" for index in range(1, PACKET_STEPS + 1))
-                    )
+                    for label in interval_labels
                 )
             ),
         }
@@ -2577,11 +2968,24 @@ def execute_packet(  # noqa: PLR0911
         record_elapsed()
         publisher(result_path, document)
         _expired(deadline, clock, "before dilation replay")
-        dilation_completed = 0
+        dilation_labels = tuple(direction.label for direction in normalized.directions)
+        dilation_label_positions = {label: index for index, label in enumerate(dilation_labels)}
+        _require(
+            len(dilation_label_positions) == len(dilation_labels),
+            "dilation direction labels are not unique",
+        )
+        dilation_completed_labels: set[str] = set()
 
         def dilation_progress(index: int, minimum: Fraction, label: str) -> None:
-            nonlocal dilation_completed
-            dilation_completed += 1
+            _require(
+                0 <= index < len(dilation_labels) and dilation_labels[index] == label,
+                "dilation progress named the wrong direction",
+            )
+            _require(
+                label not in dilation_completed_labels,
+                "dilation progress repeated a completed direction",
+            )
+            dilation_completed_labels.add(label)
             row: dict[str, object] = {
                 "direction": index,
                 "label": label,
@@ -2592,7 +2996,10 @@ def execute_packet(  # noqa: PLR0911
                 "status": "partial",
                 "source_sha256": candidate_sha,
                 "directions_expected": RAW_DIRECTIONS,
-                "directions_completed": dilation_completed,
+                "directions_completed": len(dilation_completed_labels),
+                "completed_directions": sorted(
+                    dilation_completed_labels, key=dilation_label_positions.__getitem__
+                ),
                 "last": row,
             }
             record_elapsed()
@@ -2656,6 +3063,7 @@ def execute_packet(  # noqa: PLR0911
             }
         )
         record_elapsed()
+        _expired(deadline, clock, "before complete receipt publication")
         publisher(result_path, document)
         return document  # noqa: TRY300 -- the two exception classes publish distinct receipts
     except PacketDeadlineError as error:
@@ -3074,10 +3482,18 @@ def _reconstruct_interval_directions(
     if receipt is None:
         return None
     if receipt.get("status") != "complete":
+        completed_labels = _completed_direction_labels(
+            receipt.get("completed_directions"),
+            completed=reported,
+            labels=labels,
+            label="interval completed directions",
+        )
+        if not set(completed_labels).issubset(actual):
+            raise PacketError("receipt reports interval directions that were not retained")
         last = cast(dict[str, object], receipt["last"])
         last_label = last.get("label")
-        if not isinstance(last_label, str) or last_label not in rows:
-            raise PacketError("partial interval receipt does not name a retained direction")
+        if not isinstance(last_label, str) or last_label not in completed_labels:
+            raise PacketError("partial interval receipt does not name a published direction")
         _interval_row_readback(last, last_label, "partial interval receipt")
         if last != _strict_json(files[last_label]):
             raise PacketError("partial interval last row differs from retained bytes")
@@ -3163,10 +3579,21 @@ def _reconstruct_dilation_directions(
     if receipt is None:
         return
     if not complete:
+        completed_labels = _completed_direction_labels(
+            receipt.get("completed_directions"),
+            completed=reported,
+            labels=labels,
+            label="dilation completed directions",
+        )
+        retained_labels = {cast(str, row["label"]) for row in rows.values()}
+        if not set(completed_labels).issubset(retained_labels):
+            raise PacketError("receipt reports dilation directions that were not retained")
         last = cast(dict[str, object], receipt["last"])
         last_index = last.get("direction")
         if type(last_index) is not int or last_index not in rows:
             raise PacketError("partial dilation receipt does not name a retained direction")
+        if last.get("label") not in completed_labels:
+            raise PacketError("partial dilation receipt does not name a published direction")
         if last != rows[cast(int, last_index)]:
             raise PacketError("partial dilation last row differs from retained bytes")
         return
@@ -3209,7 +3636,11 @@ def load_result(
     sources = _source_record(document)
     if sources.get("implementation_revision") != expected_revision:
         raise PacketError("result revision differs from the requested readback revision")
-    manifest = source_manifest(repository, expected_revision, permit_result_files=True)
+    manifest = source_manifest(
+        repository,
+        expected_revision,
+        result_directory=output_dir,
+    )
     if sources.get("manifest") != manifest:
         raise PacketError("result source or implementation manifest differs on readback")
     if sources.get("runtime") != runtime_binding(repository):
@@ -3383,10 +3814,25 @@ def load_result(
     return document
 
 
-def prepare_output_dir(output_dir: Path, repository: Path) -> Path:
+def prepare_output_dir(
+    output_dir: Path, repository: Path, *, deadline: float | None = None
+) -> Path:
+    repository = repository.resolve()
     resolved = output_dir.resolve()
     if resolved.exists():
         raise PacketError("output directory must be fresh")
+    git_directory = Path(
+        _git(repository, "rev-parse", "--absolute-git-dir", deadline=deadline)
+    ).resolve()
+    common_text = _git(repository, "rev-parse", "--git-common-dir", deadline=deadline)
+    common_directory = Path(common_text)
+    if not common_directory.is_absolute():
+        common_directory = repository / common_directory
+    git_control_directories = {git_directory, common_directory.resolve()}
+    if any(
+        resolved == path or resolved.is_relative_to(path) for path in git_control_directories
+    ):
+        raise PacketError("output directory cannot be inside Git administrative data")
     protected = (
         repository / "packing" / "devtools",
         repository / "packing" / "src",
@@ -3403,12 +3849,22 @@ def prepare_output_dir(output_dir: Path, repository: Path) -> Path:
     return resolved
 
 
+def _supervision_receipt(path: Path) -> tuple[dict[str, object], bool]:
+    document = _strict_json(path)
+    if document.get("schema") == PREFLIGHT_SCHEMA:
+        validate_preflight_document(document)
+        return document, True
+    validate_result_document(document)
+    return document, False
+
+
 def _record_external_timeout(
     path: Path,
     error: str,
     elapsed: float,
     *,
     worker_status: int | None = None,
+    supervisor_signal: int | None = None,
     supervision_status: Literal[
         "deadline-before-launch",
         "deadline-terminated",
@@ -3419,9 +3875,33 @@ def _record_external_timeout(
     """Record an outer kill without erasing a valid invalid-run classification."""
 
     try:
-        document = _strict_json(path)
-        validate_result_document(document)
+        document, preflight = _supervision_receipt(path)
     except PacketError:
+        return
+    if preflight:
+        cast(dict[str, object], document["clocks"])["external_lifetime_seconds"] = elapsed
+        cast(dict[str, object], document["supervision"]).update(
+            {
+                "status": supervision_status,
+                "worker_exit_status": worker_status,
+                "supervisor_signal": supervisor_signal,
+            }
+        )
+        if document["status"] != "invalid":
+            timeout = supervision_status in {
+                "deadline-before-launch",
+                "deadline-terminated",
+            }
+            document.update(
+                {
+                    "status": "partial",
+                    "outcome": "preflight-timeout" if timeout else "preflight-failed",
+                    "scientific_decision": "unresolved",
+                    "phase": "preflight",
+                    "error": error,
+                }
+            )
+        write_result(path, document)
         return
     preserve_classification = document["status"] == "invalid" or (
         document["status"] == "partial"
@@ -3433,6 +3913,7 @@ def _record_external_timeout(
         {
             "status": supervision_status,
             "worker_exit_status": worker_status,
+            "supervisor_signal": supervisor_signal,
         }
     )
     if preserve_classification:
@@ -3458,14 +3939,31 @@ def _record_worker_exit(path: Path, status: int, elapsed: float) -> None:
     """Attest a worker exit and preserve only classifications its exit supports."""
 
     try:
-        document = _strict_json(path)
-        validate_result_document(document)
+        document, preflight = _supervision_receipt(path)
     except PacketError:
         return
     cast(dict[str, object], document["clocks"])["external_lifetime_seconds"] = elapsed
     cast(dict[str, object], document["supervision"]).update(
-        {"status": "observed-exit", "worker_exit_status": status}
+        {
+            "status": "observed-exit",
+            "worker_exit_status": status,
+            "supervisor_signal": None,
+        }
     )
+    if preflight:
+        expected = 2 if document["status"] == "invalid" else 1
+        if document["outcome"] == "preflight-pending" or status != expected:
+            document.update(
+                {
+                    "status": "partial",
+                    "outcome": "preflight-failed",
+                    "scientific_decision": "unresolved",
+                    "phase": "preflight",
+                    "error": f"worker exited before completing preflight with status {status}",
+                }
+            )
+        write_result(path, document)
+        return
     expected = (
         0 if document["status"] == "complete" else 2 if document["status"] == "invalid" else 1
     )
@@ -3482,7 +3980,7 @@ def _record_worker_exit(path: Path, status: int, elapsed: float) -> None:
     write_result(path, document)
 
 
-def supervise_worker(
+def supervise_worker(  # noqa: PLR0911
     command: Sequence[str],
     result_path: Path,
     *,
@@ -3495,30 +3993,32 @@ def supervise_worker(
 
     started = time.perf_counter() if invocation_started is None else invocation_started
     deadline = started + external_seconds if external_deadline is None else external_deadline
-    remaining = deadline - time.perf_counter()
-    if remaining <= 0:
-        _record_external_timeout(
-            result_path,
-            (
-                "worker process group exceeded the "
-                f"{external_seconds:g}-second external deadline before launch"
-            ),
-            time.perf_counter() - started,
-            supervision_status="deadline-before-launch",
-        )
-        return 1
-    try:
-        process = subprocess.Popen(command, start_new_session=True)
-    except OSError as error:
-        _record_external_timeout(
-            result_path,
-            f"worker process launch failed: {error}",
-            time.perf_counter() - started,
-            supervision_status="launch-failed",
-        )
-        return 1
+    handled_signals = (signal.SIGTERM, signal.SIGHUP, signal.SIGINT)
+    previous_mask = signal.pthread_sigmask(signal.SIG_BLOCK, handled_signals)
+    previous_handlers: dict[signal.Signals, Any] = {}
+    process: subprocess.Popen[bytes] | None = None
+    interrupted_signal: int | None = None
+    launching = False
+    handling_interruption = False
+
+    def handle_signal(signum: int, _frame: object) -> None:
+        nonlocal interrupted_signal
+        if interrupted_signal is not None:
+            return
+        interrupted_signal = signum
+        # Deferral belongs in the handler: another eligible thread can receive a
+        # process-directed signal while this thread masks it. Finish handle adoption
+        # and cleanup before allowing a queued handler to unwind their owners.
+        if not launching and not handling_interruption:
+            raise _SupervisorSignal(signum)
+
+    def raise_if_interrupted() -> None:
+        if interrupted_signal is not None:
+            raise _SupervisorSignal(interrupted_signal)
 
     def group_exists() -> bool:
+        if process is None:
+            return False
         try:
             os.killpg(process.pid, 0)
         except ProcessLookupError:
@@ -3535,6 +4035,8 @@ def supervise_worker(
         return True
 
     def reap_descendants_after_leader_exit() -> None:
+        if process is None:
+            return
         if not group_exists():
             return
         with suppress(ProcessLookupError):
@@ -3546,7 +4048,9 @@ def supervise_worker(
         if not wait_for_group_absence():
             raise PacketError("worker process group remained alive after SIGKILL")
 
-    def terminate_group() -> int:
+    def terminate_group() -> int | None:
+        if process is None:
+            return None
         with suppress(ProcessLookupError):
             os.killpg(process.pid, signal.SIGTERM)
         worker_status: int | None = None
@@ -3562,20 +4066,98 @@ def supervise_worker(
         return status
 
     try:
-        status = process.wait(timeout=remaining)
-        reap_descendants_after_leader_exit()
-        _record_worker_exit(result_path, status, time.perf_counter() - started)
-        return status  # noqa: TRY300 -- timeout has a separate process-group cleanup path
-    except subprocess.TimeoutExpired:
+        for signal_number in handled_signals:
+            previous_handlers[signal_number] = signal.signal(signal_number, handle_signal)
+        signal.pthread_sigmask(signal.SIG_SETMASK, previous_mask)
+        raise_if_interrupted()
+        remaining = deadline - time.perf_counter()
+        if remaining <= 0:
+            _record_external_timeout(
+                result_path,
+                (
+                    "worker process group exceeded the "
+                    f"{external_seconds:g}-second external deadline before launch"
+                ),
+                time.perf_counter() - started,
+                supervision_status="deadline-before-launch",
+            )
+            return 1
+
+        launch_error: str | None = None
+        launching = True
+        try:
+            process = subprocess.Popen(command, start_new_session=True)
+        except OSError as error:
+            launch_error = str(error)
+        except Exception as error:  # noqa: BLE001 -- ordinary launch failures are operational
+            launch_error = f"{type(error).__name__}: {error}"
+        finally:
+            launching = False
+        raise_if_interrupted()
+        if launch_error is not None:
+            _record_external_timeout(
+                result_path,
+                f"worker process launch failed: {launch_error}",
+                time.perf_counter() - started,
+                supervision_status="launch-failed",
+            )
+            return 1
+        if process is None:
+            _record_external_timeout(
+                result_path,
+                "worker process launch returned no process handle",
+                time.perf_counter() - started,
+                supervision_status="launch-failed",
+            )
+            return 1
+
+        remaining = deadline - time.perf_counter()
+        if remaining <= 0:
+            worker_status = terminate_group()
+            _record_external_timeout(
+                result_path,
+                (
+                    "worker process group exceeded the "
+                    f"{external_seconds:g}-second external deadline"
+                ),
+                time.perf_counter() - started,
+                worker_status=worker_status,
+            )
+            return 1
+        try:
+            status = process.wait(timeout=remaining)
+            reap_descendants_after_leader_exit()
+            _record_worker_exit(result_path, status, time.perf_counter() - started)
+            return status  # noqa: TRY300 -- timeout has a process-group cleanup path
+        except subprocess.TimeoutExpired:
+            worker_status = terminate_group()
+            _record_external_timeout(
+                result_path,
+                (
+                    "worker process group exceeded the "
+                    f"{external_seconds:g}-second external deadline"
+                ),
+                time.perf_counter() - started,
+                worker_status=worker_status,
+            )
+            return 1
+    except _SupervisorSignal as error:
+        handling_interruption = True
+        signal.pthread_sigmask(signal.SIG_BLOCK, handled_signals)
         worker_status = terminate_group()
+        signal_number = signal.Signals(interrupted_signal or error.signum)
         _record_external_timeout(
             result_path,
-            f"worker process group exceeded the {external_seconds:g}-second external deadline",
+            f"supervisor interrupted by {signal_number.name} ({signal_number.value})",
             time.perf_counter() - started,
             worker_status=worker_status,
+            supervisor_signal=signal_number.value,
+            supervision_status="supervisor-interrupted",
         )
-        return 1
+        interrupted_signal = signal_number.value
     except BaseException as error:  # parent interruption must still reap the process group
+        handling_interruption = True
+        signal.pthread_sigmask(signal.SIG_BLOCK, handled_signals)
         worker_status = terminate_group()
         _record_external_timeout(
             result_path,
@@ -3585,6 +4167,57 @@ def supervise_worker(
             supervision_status="supervisor-interrupted",
         )
         raise
+    finally:
+        signal.pthread_sigmask(signal.SIG_BLOCK, handled_signals)
+        for signal_number, previous_handler in previous_handlers.items():
+            signal.signal(signal_number, previous_handler)
+        signal.pthread_sigmask(signal.SIG_SETMASK, previous_mask)
+
+    if interrupted_signal is not None:
+        signal.raise_signal(interrupted_signal)
+        return 128 + interrupted_signal
+    raise AssertionError("supervisor left its process state without an outcome")
+
+
+def _record_worker_failure(
+    path: Path,
+    *,
+    error: str,
+    elapsed: float,
+    invalid: bool,
+) -> bool:
+    """Retain a worker failure in whichever closed receipt schema is available."""
+
+    try:
+        document, preflight = _supervision_receipt(path)
+    except PacketError:
+        return False
+    if preflight:
+        document.update(
+            {
+                "status": "invalid" if invalid else "partial",
+                "outcome": "preflight-invalid" if invalid else "preflight-failed",
+                "scientific_decision": "unresolved",
+                "phase": "preflight",
+                "error": error,
+            }
+        )
+        cast(dict[str, object], document["clocks"])["process_seconds"] = elapsed
+    else:
+        document.update(
+            {
+                "status": "invalid" if invalid else "partial",
+                "outcome": "invalid" if invalid else "incomplete",
+                "scientific_decision": "unresolved",
+                "phase": "invalid" if invalid else "incomplete",
+                "error": error,
+            }
+        )
+        clocks = cast(dict[str, object], document["clocks"])
+        clocks["scientific_seconds"] = elapsed
+        clocks["process_seconds"] = elapsed
+    write_result(path, document)
+    return True
 
 
 def run_worker(  # noqa: PLR0911
@@ -3610,10 +4243,33 @@ def run_worker(  # noqa: PLR0911
         worker_started + external_seconds if external_deadline is None else external_deadline
     )
     try:
-        manifest = source_manifest(repository, revision, permit_result_files=True)
+        manifest = source_manifest(
+            repository,
+            revision,
+            result_directory=output_dir,
+        )
         runtime = runtime_binding(repository)
         source = (repository / SOURCE_PATH).read_bytes()
         t026 = (repository / T026_PATH).read_bytes()
+    except PacketError as error:
+        elapsed = time.perf_counter() - worker_started
+        _record_worker_failure(
+            output_dir / "result.json",
+            error=str(error),
+            elapsed=elapsed,
+            invalid=True,
+        )
+        return 2
+    except Exception as error:  # noqa: BLE001 -- preflight host failures are unresolved
+        elapsed = time.perf_counter() - worker_started
+        _record_worker_failure(
+            output_dir / "result.json",
+            error=f"operational preflight failure: {type(error).__name__}: {error}",
+            elapsed=elapsed,
+            invalid=False,
+        )
+        return 1
+    try:
         document = execute_packet(
             source,
             t026,
@@ -3628,47 +4284,23 @@ def run_worker(  # noqa: PLR0911
             process_deadline=min(scientific_deadline, external_deadline),
             invocation_started=worker_started,
         )
-    except (PacketError, OSError, ValueError, TypeError) as error:
-        try:
-            document = _strict_json(output_dir / "result.json")
-            validate_result_document(document)
-        except PacketError:
-            return 2
-        document.update(
-            {
-                "status": "invalid",
-                "outcome": "invalid",
-                "scientific_decision": "unresolved",
-                "phase": "invalid",
-                "error": str(error),
-            }
-        )
-        clocks = cast(dict[str, object], document["clocks"])
+    except PacketError as error:
         elapsed = time.perf_counter() - worker_started
-        clocks["scientific_seconds"] = elapsed
-        clocks["process_seconds"] = elapsed
-        write_result(output_dir / "result.json", document)
+        _record_worker_failure(
+            output_dir / "result.json",
+            error=str(error),
+            elapsed=elapsed,
+            invalid=True,
+        )
         return 2
     except Exception as error:  # noqa: BLE001 -- operational failures retain partial evidence
-        try:
-            document = _strict_json(output_dir / "result.json")
-            validate_result_document(document)
-        except PacketError:
-            return 1
-        document.update(
-            {
-                "status": "partial",
-                "outcome": "incomplete",
-                "scientific_decision": "unresolved",
-                "phase": "incomplete",
-                "error": f"unexpected worker failure: {type(error).__name__}: {error}",
-            }
-        )
-        clocks = cast(dict[str, object], document["clocks"])
         elapsed = time.perf_counter() - worker_started
-        clocks["scientific_seconds"] = elapsed
-        clocks["process_seconds"] = elapsed
-        write_result(output_dir / "result.json", document)
+        _record_worker_failure(
+            output_dir / "result.json",
+            error=f"unexpected worker failure: {type(error).__name__}: {error}",
+            elapsed=elapsed,
+            invalid=False,
+        )
         return 1
     if document["status"] == "complete":
         try:
@@ -3713,6 +4345,24 @@ def run_worker(  # noqa: PLR0911
                 }
             )
         write_result(output_dir / "result.json", document)
+        if document["status"] == "complete":
+            published = time.perf_counter()
+            if published >= scientific_deadline:
+                # The embedded clock precedes its own atomic publication. Supervision
+                # remains pending until this post-publication check permits success.
+                document.update(
+                    {
+                        "status": "partial",
+                        "outcome": "incomplete",
+                        "scientific_decision": "unresolved",
+                        "phase": "timeout",
+                        "error": "scientific deadline reached during final receipt publication",
+                    }
+                )
+                elapsed = published - worker_started
+                clocks["scientific_seconds"] = elapsed
+                clocks["process_seconds"] = elapsed
+                write_result(output_dir / "result.json", document)
     else:
         clocks = cast(dict[str, object], document["clocks"])
         elapsed = time.perf_counter() - worker_started
@@ -3745,6 +4395,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     options = _parser().parse_args(argv)
     repository = options.repository.resolve()
     revision = cast(str, options.expect_implementation_revision)
+    if len(revision) != 40 or any(c not in "0123456789abcdef" for c in revision):
+        raise PacketError("expected revision must be 40 lowercase hexadecimal digits")
     if not 1 <= options.workers <= MAX_WORKERS:
         raise PacketError(f"workers must be between 1 and {MAX_WORKERS}")
     if not all(
@@ -3801,19 +4453,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise PacketError("parent-only invocation cannot accept inherited deadline fields")
     scientific_deadline = invocation_started + options.scientific_seconds
     external_deadline = invocation_started + options.external_seconds
-    manifest = source_manifest(repository, revision)
-    runtime = runtime_binding(repository)
-    output = prepare_output_dir(options.output_dir, repository)
-    seed = _initial_document(
+    output = prepare_output_dir(options.output_dir, repository, deadline=external_deadline)
+    seed = initial_preflight_document(
         revision,
-        manifest,
-        runtime,
         workers=options.workers,
         scientific_seconds=options.scientific_seconds,
         external_seconds=options.external_seconds,
         grace_seconds=options.grace_seconds,
     )
-    seed["error"] = "worker has not completed source replay"
     write_result(output / "result.json", seed)
     command = [
         sys.executable,
@@ -3852,15 +4499,18 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 __all__ = [
+    "PREFLIGHT_SCHEMA",
     "ExactRoute",
     "IntervalRoute",
     "PackageRuntimeObservation",
     "PacketDeadlineError",
     "PacketError",
+    "PacketOperationalError",
     "RawMinimum",
     "RuntimeObservation",
     "discover_implementation_paths",
     "execute_packet",
+    "initial_preflight_document",
     "load_packet_source",
     "load_result",
     "load_t026_reference",
@@ -3871,6 +4521,7 @@ __all__ = [
     "runtime_binding",
     "source_manifest",
     "supervise_worker",
+    "validate_preflight_document",
     "validate_result_document",
 ]
 
