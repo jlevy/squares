@@ -3,9 +3,9 @@ type: is
 id: is-01m2ckztpy58ydg71fkvwz7f0v
 title: Establish the workbench package shell and immediate source-gate coverage
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-phase-0
@@ -31,6 +31,6 @@ dependencies:
     target: is-01m2cmf6vy26q99h0pa25g518w
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-13T05:31:38.075Z
-updated_at: 2026-09-13T05:43:44.479Z
+updated_at: 2026-09-13T06:00:01.138Z
 ---
 Create top-level packages/workbench as the only destination for new workbench source during repair phases. Add locked package scripts and strict compiler/lint bases, package-local tests/probes/tools ownership, and extend repository layout docs, Python discovery, browser configuration, hooks and PR selection to the root package. Flowmark remains sole Markdown formatter. This is a small shell, not bulk extraction. Acceptance: real minimal TS/JS/Python fixtures are discovered by their applicable existing gates; deliberate excluded-source and relaxed-config controls fail; no broad suppressions or new spike/devtools application modules.
