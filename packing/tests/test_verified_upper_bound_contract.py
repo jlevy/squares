@@ -268,7 +268,6 @@ def trailing_ceilings(loaded_cases: dict[int, dict]) -> dict[int, tuple[Decimal,
     return trailing
 
 
-@pytest.mark.slow
 def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> None:
     loaded_cases = cases()
     trailing = trailing_ceilings(loaded_cases)

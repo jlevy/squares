@@ -488,12 +488,14 @@ class MathFontRejection(TypedDict):
 class FontRequestTrace(TypedDict):
     time_origin_ms: float
     first_math_request_ms: float | None
+    root_watchdog_paused: bool
     rejections: list[MathFontRejection]
 
 
 class FontHoldTiming(TypedDict):
     first_math_request_ms: float | None
     first_font_request_ms: float | None
+    root_watchdog_paused: bool
     release_started_ms: float
     release_completed_ms: float
     held_ms: float | None
@@ -554,16 +556,31 @@ def geometry_findings(
     before: list[GeometryBox],
     after: list[GeometryBox],
     *,
+    root_watchdog_paused: bool,
     tolerance: float = 1.0,
     early_ready: frozenset[int] = frozenset(),
+    exposed_early: frozenset[int] | None = None,
 ) -> list[str]:
-    """Compare the same boxes and their line breaks across actual font arrival."""
+    """Compare the same boxes and their line breaks across actual font arrival.
+
+    `exposed_early` and `early_ready` describe the same observation: the boxes visible
+    when their font evidence was gathered. Keeping those sets together prevents a later
+    probe state from changing the exposure question. The root-watchdog flag separately
+    proves that the artificial setup did not consume the page's recovery timeout.
+    """
     findings: list[str] = []
+    if not root_watchdog_paused:
+        findings.append("the geometry probe did not pause the root math watchdog")
     old = {box["key"]: box for box in before}
     new = {box["key"]: box for box in after}
     if not old or old.keys() != new.keys():
         findings.append("prepared math boxes disappeared or were never measured")
-    if before and any(not box["hidden"] and box["key"] not in early_ready for box in before):
+    exposed = (
+        exposed_early
+        if exposed_early is not None
+        else frozenset(box["key"] for box in before if not box["hidden"])
+    )
+    if before and exposed - early_ready:
         findings.append("math was exposed while its font requests were held")
     if before and not any(box["hidden"] for box in before):
         findings.append("no hidden prepared math was observed before fonts arrived")
@@ -819,10 +836,25 @@ _GEOMETRY_FONT_TRACE = dedent("""
     (() => {
       const trace = globalThis.__squaresGeometryFontTrace = {
         time_origin_ms: performance.timeOrigin, first_math_request_ms: null,
-        before_snapshot_complete: false, queued_calls: 0, rejections: []
+        before_snapshot_complete: false, root_watchdog_paused: false,
+        queued_calls: 0, rejections: []
       };
       const waiting = [];
       let released = false;
+      // This control delays entry into kpressMathText while it constructs the
+      // altered before-state. Pause the independent root fallback or that test
+      // setup can expose dynamic prepared formulas before the real runtime gets
+      // the synchronous call that hides them. Watchdog expiry has its own control.
+      let rootWatchdog;
+      Object.defineProperty(globalThis, 'kpressMathPendingTimer', {
+        configurable: true,
+        get() { return rootWatchdog; },
+        set(timer) {
+          rootWatchdog = timer;
+          clearTimeout(timer);
+          trace.root_watchdog_paused = true;
+        }
+      });
       globalThis.__squaresMarkGeometryBeforeSnapshotComplete = () => {
         trace.before_snapshot_complete = true;
       };
@@ -1371,7 +1403,16 @@ async def _check_geometry_async(
             for request in box["requests"]
         )
     )
-    findings = geometry_findings(before, after, early_ready=early_ready)
+    findings = geometry_findings(
+        before,
+        after,
+        early_ready=early_ready,
+        root_watchdog_paused=font_trace["root_watchdog_paused"],
+        # `_GEOMETRY_EARLY_READY` skips hidden boxes, so its keys are exactly what was
+        # visible when it weighed each box's faces -- the one observation the exposure
+        # rule and its exemptions can share.
+        exposed_early=frozenset(box["key"] for box in early_visible),
+    )
     findings.extend(coverage_findings(coverage_before))
     findings.extend(coverage_findings(coverage_after))
     if not held_count:
@@ -1400,6 +1441,7 @@ async def _check_geometry_async(
                 if first_request is not None
                 else None
             ),
+            "root_watchdog_paused": font_trace["root_watchdog_paused"],
             "release_started_ms": release_started - font_trace["time_origin_ms"],
             "release_completed_ms": release_completed - font_trace["time_origin_ms"],
             "held_ms": release_started - first_request if first_request is not None else None,

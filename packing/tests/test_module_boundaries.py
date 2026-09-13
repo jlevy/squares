@@ -991,10 +991,6 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_run_timeout_terminates_child_and_reports_captured_output",  # 2.3s
             "test_run_selected_interrupt_stops_detached_production_process",  # 2.0s
         },
-        # 6s of call time across 1.
-        "test_verified_upper_bound_contract.py": {
-            "test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports",  # 6.0s
-        },
     }
     declared: dict[str, set[str]] = {}
     marker = "pytest.mark.slow"

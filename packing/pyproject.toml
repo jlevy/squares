@@ -258,6 +258,11 @@ max-complexity = 57
 "cases/n050_producer_refusal/harness.py" = ["BLE001"]
 "tests/test_n050_producer_refusal_independent.py" = ["PT007"]
 "tests/test_reachable_tests.py" = ["SLF001"]
+# `_difference` reports where two renders of the explainer stopped agreeing, and it is
+# private because what a failure says is the check's business and nobody else's. Tested
+# directly because the message is the whole deliverable: a browser would exercise the
+# path that passes, never the one the Pages job reads on the day it fails.
+"tests/test_render_explainer_pdf.py" = ["SLF001"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"

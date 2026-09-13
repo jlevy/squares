@@ -26,6 +26,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/tests/test_pdf_math_browser.py
       - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
@@ -64,6 +65,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/tests/test_pdf_math_browser.py
       - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
@@ -207,16 +209,28 @@ jobs:
       - name: Check the print faces cover every sans weight the page requests
         run: uv run --frozen --group dev python -m devtools.sans_instances --check
 
+      - name: Check PDF math and real font-failure controls
+        env:
+          SQPACK_PDF_MATH_BROWSER: "1"
+        run: uv run --frozen --group dev pytest -q tests/test_pdf_math_browser.py
+
       - name: Draw the PDF of the page
         run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --update
 
-      # The same question the render answers above, asked of the PDF: two draws in one
-      # browser have to agree. Not a comparison against a recorded digest -- the bytes
-      # depend on the Chromium build and on the host's fonts, so a recorded digest would
-      # fail on the next pin bump and on every contributor's machine, which is the
-      # check-that-can-never-pass this repository has already been bitten by.
-      - name: Check the PDF reproduces itself
-        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --check
+      # Compare the saved PDF, including its HTML source receipt, to a fresh draw with
+      # this runner's browser and fonts. Keep both raw PDFs outside the published site
+      # if they disagree; the checker never rewrites the artifact it checks.
+      - name: Check the PDF artifact that will be published
+        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --check-artifact --diagnostics-dir /tmp/explainer-pdf-check
+
+      - name: Retain PDF mismatch diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: explainer-pdf-check
+          path: /tmp/explainer-pdf-check
+          if-no-files-found: ignore
+          retention-days: 7
 
       # Reproducibility is not correctness: the check above would have passed on all
       # three print defects a reader found in the finished PDF, because two identical
