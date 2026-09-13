@@ -1,5 +1,6 @@
-# Node tooling: this repo carries a tooling-only package.json for lefthook.
+# Pinned Node tooling and generated package build output.
 node_modules/
+/packages/workbench/dist/
 
 # Local scratch area, by repo convention.
 /attic/

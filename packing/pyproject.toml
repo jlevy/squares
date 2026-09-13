@@ -27,6 +27,7 @@ packing-witness = "sqpack.cli.witness:main"
 
 [project.optional-dependencies]
 symbolic = ["sympy>=1.13"]
+workbench = ["squares-workbench-tools"]
 
 [dependency-groups]
 dev = [
@@ -128,6 +129,7 @@ dev = [
 # the point of vendoring it rather than pinning a release.
 [tool.uv.sources]
 kpress = { path = "../vendor/kpress", editable = true }
+squares-workbench-tools = { path = "../packages/workbench", editable = true }
 
 [build-system]
 requires = ["hatchling"]
@@ -300,6 +302,9 @@ include = [
     # the same floor as everything else here. `print` stays waived for them under
     # `per-file-ignores`, because they are tools and printing is their interface.
     "atlas/known-best/video/spikes",
+    # Workbench-specific Python adapters live with the top-level browser package. The
+    # validation entry point gives Ruff the same repository-relative tree explicitly.
+    "../packages/workbench",
     # The hand-written skill assets at the repository root are project Python too; the
     # gate runs from this directory, so they are reached by a parent path. `.claude/skills`
     # is a byte-identical mirror kept by `make skills-sync`, so it is not listed twice.

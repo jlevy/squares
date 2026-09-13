@@ -718,6 +718,8 @@ lives in KPress, alongside the shared runtime’s public API documentation.
 The prepare job shares one page artifact with the Chromium print checks and the
 Firefox/WebKit loading checks.
 Deployment waits for all of them.
+The build job selects Node 24.18.0, installs the root lockfile with scripts disabled,
+and builds the typed workbench package into the self-contained `/workbench/` page.
 Normal parameter startup and neighboring text movement are measured by
 `devtools.check_math_startup`; its controlled fixtures run in CI, while timing
 comparisons are retained in the
@@ -734,9 +736,10 @@ from the checkout:
 uv run --frozen --all-extras --group dev python -m devtools.check_published_site --commit <merge commit>
 ```
 
-It fetches the live page, the Markdown edition, the PDF and the assets, and checks that
-the edition stamp is the one `sqpack.release` names, that every repository link names
-that commit and resolves on GitHub, and that the PDF is a PDF.
+It fetches the live page, the Markdown edition, the PDF, the assets, and the workbench.
+It checks the explainer edition and repository links, validates the PDF, requires the
+workbench’s exact source revision, starts its public API in pinned Chromium, and follows
+its project-relative link back to the explainer.
 
 **The stamp in the credits has two parts, and they move on different clocks.** The
 version (`v0.3.0`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
@@ -773,13 +776,17 @@ Use direct tools when their output is the point of the edit:
 
 ```shell
 uv run --frozen --all-extras --group dev pytest -q
-uv run --frozen --all-extras --group dev ruff check .
-uv run --frozen --all-extras --group dev ruff format --check .
+uv run --frozen --all-extras --group dev ruff check --config pyproject.toml . ../packages/workbench
+uv run --frozen --all-extras --group dev ruff format --check --config pyproject.toml . ../packages/workbench
 uv run --frozen --all-extras --group dev basedpyright
 
 cargo test --locked --manifest-path sqsearch/Cargo.toml
 cargo clippy --locked --release --all-targets --manifest-path sqsearch/Cargo.toml -- -D warnings
 cargo fmt --manifest-path sqsearch/Cargo.toml --check
+
+cd ..
+npm ci --ignore-scripts
+npm run check --workspace @squares/workbench
 ```
 
 Ruff must be clean. BasedPyright runs in standard mode and must report zero diagnostics
@@ -793,8 +800,8 @@ and exception chaining.
 The enabled rule families include the pytest-style, unused-argument, blind-except,
 commented-out-code, refurb, f-string and complexity-ratchet families, each argued for
 beside its entry in `pyproject.toml`; printing is waived only where the tools live, so a
-library module reports through `logging`. The one Python outside `packing/` is the
-hand-written skill assets under `.agents/skills`, which the same two floors reach.
+library module reports through `logging`. Python under `packages/workbench/` and the
+hand-written skill assets under `.agents/skills` are also under the same two floors.
 Comments explain non-obvious intent, invariants, units, evidence limits, and rejected
 alternatives—not a line-by-line translation of the code.
 

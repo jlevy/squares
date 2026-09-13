@@ -462,16 +462,14 @@
     announce(`Loaded deterministic setup for ${n} squares with seed ${seed}.`);
   }
 
-  byId("new-pose-button").addEventListener("click", async () => {
+  byId("new-pose-button").addEventListener("click", () => {
     seedInput.value = String(Number(seedInput.value) + 1);
-    try {
-      await loadScenario();
-    } catch (error) {
+    void loadScenario().catch((error) => {
       announce(`Could not load setup: ${/** @type {Error} */ (error).message}`);
-    }
+    });
   });
 
-  byId("randomize-all-button").addEventListener("click", async () => {
+  byId("randomize-all-button").addEventListener("click", () => {
     const seed = Number(seedInput.value) + 1;
     const magnitude = Math.abs(Math.trunc(seed));
     const n = 3 + ((magnitude * 17 + 5) % 9);
@@ -479,11 +477,9 @@
     seedInput.value = String(seed);
     nInput.value = String(n);
     sideInput.value = side.toFixed(2);
-    try {
-      await loadScenario();
-    } catch (error) {
+    void loadScenario().catch((error) => {
       announce(`Could not load setup: ${/** @type {Error} */ (error).message}`);
-    }
+    });
   });
 
   byId("reset-button").addEventListener("click", () => {
@@ -716,7 +712,7 @@
       `${trace.events.length} retained events; autoplay samples ${playbackIndices.length}, preserving every accepted rotation, cell change, setup, and stop. Slider and step controls reach every event. Side ${result.side.toPrecision(9)}; ${result.reason}; ${result.converged ? "converged" : "not converged"}.`;
   }
 
-  runButton.addEventListener("click", async () => {
+  async function runQuench() {
     stopPlayback();
     const request = editor.releaseQuenchRequest(
       state,
@@ -756,6 +752,10 @@
       runButton.disabled = false;
       runButton.textContent = "Release + run quench";
     }
+  }
+
+  runButton.addEventListener("click", () => {
+    void runQuench();
   });
 
   downloadButton.addEventListener("click", () => {

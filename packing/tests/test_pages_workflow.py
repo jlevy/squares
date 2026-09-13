@@ -40,6 +40,20 @@ def test_deployment_waits_for_the_cross_browser_loading_checks() -> None:
     assert any("devtools.check_math_loading" in step.get("run", "") for step in checks["steps"])
 
 
+def test_live_verification_waits_for_the_exact_deployed_revision() -> None:
+    """The source gate cannot prove that Pages serves the artifact it accepted."""
+    workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))
+    deploy = workflow["jobs"]["deploy"]
+    verify = workflow["jobs"]["verify-deployment"]
+    assert deploy["outputs"]["page-url"] == "${{ steps.deployment.outputs.page_url }}"
+    assert verify["needs"] == "deploy"
+    commands = "\n".join(step.get("run", "") for step in verify["steps"])
+    assert "python -m devtools.check_published_site" in commands
+    assert '--site "${{ needs.deploy.outputs.page-url }}"' in commands
+    assert '--commit "${{ github.sha }}"' in commands
+    assert "--no-browser" not in commands
+
+
 def test_every_browser_checks_the_same_prepared_publication() -> None:
     """A raw re-render in one job would leave the actual published boxes untested."""
     workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))

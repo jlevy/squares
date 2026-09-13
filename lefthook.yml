@@ -41,6 +41,6 @@ pre-commit:
     # `biome.json` from the repository root whatever paths it is given, so passing explicit
     # files does not bypass the exclusion list.
     biome:
-      glob: "*.{js,mjs,cjs,css,json}"
+      glob: "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,css,json}"
       run: ./node_modules/.bin/biome check --write --unsafe --no-errors-on-unmatched {staged_files}
       stage_fixed: true

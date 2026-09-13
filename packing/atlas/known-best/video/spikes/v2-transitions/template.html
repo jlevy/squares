@@ -13,8 +13,11 @@ __WORKBENCH_CSS__
 <body>
 <div id="viewport">
   <div id="stage-wrap">
-    <div id="stage" aria-label="Animated transition between consecutive best known packings">
-      <svg id="packing-svg" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true">
+    <div id="stage" role="region" tabindex="0" aria-labelledby="stage-accessible-title" aria-describedby="stage-accessible-description stage-keyboard-help">
+      <h1 class="sr-only" id="stage-accessible-title">Square packing workbench</h1>
+      <p class="sr-only" id="stage-accessible-description"></p>
+      <p class="sr-only" id="stage-keyboard-help">Press Enter to focus a square in Pack mode. Use the arrow keys to move it, hold Shift for larger moves, use Q and E to rotate it, and press Escape to return to the stage. Space controls playback when the stage itself has focus.</p>
+      <svg id="packing-svg" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Packing squares">
         <g id="world" transform="scale(1 -1)">
           <rect id="container" x="0" y="0" width="1" height="1" fill="none" stroke="#000000" stroke-width="2" vector-effect="non-scaling-stroke" />
           <g id="squares"></g>
@@ -270,7 +273,7 @@ __WORKBENCH_CSS__
     </div>
   </div>
 </div>
-<div class="sr-only" aria-live="polite" id="live"></div>
+<div class="sr-only" aria-live="polite" aria-atomic="true" id="live"></div>
 <script id="atlas-data" type="application/json">__DATA__</script>
 <script>
 __WORKBENCH_JS__

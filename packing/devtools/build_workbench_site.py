@@ -37,17 +37,35 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+REPO = ROOT.parent
 SPIKE = ROOT / "atlas/known-best/video/spikes/v2-transitions"
+WORKBENCH_PACKAGE = REPO / "packages/workbench"
 OUT = ROOT / "site/workbench"
 
 RENDER_INPUTS = (
     Path(__file__),
+    ROOT / "devtools/render_explainer.py",
+    ROOT / "src/sqpack/render",
+    ROOT / "pyproject.toml",
+    ROOT / "uv.lock",
     SPIKE / "build_candidate.py",
     SPIKE / "template.html",
     SPIKE / "assets/workbench.css",
     SPIKE / "assets/workbench.js",
-    SPIKE / "transition-stats.json",
+    ROOT / "witnesses/known-best",
+    ROOT / "atlas/known-best/rendering",
     ROOT / "atlas/known-best/manifest.json",
+    ROOT / "atlas/known-best/composite-figure.json",
+    REPO / "vendor/kpress",
+    REPO / "package.json",
+    REPO / "package-lock.json",
+    REPO / ".node-version",
+    WORKBENCH_PACKAGE / "package.json",
+    WORKBENCH_PACKAGE / "src",
+    WORKBENCH_PACKAGE / "tools/bundle-browser.ts",
+    WORKBENCH_PACKAGE / "tools/build-assets.ts",
+    WORKBENCH_PACKAGE / "tools/check-candidate-corpus.ts",
+    WORKBENCH_PACKAGE / "probes/bench-annealing.ts",
 )
 """Everything the page is built from. The Pages workflow's path filter has to cover this
 list, and `test_the_pages_filter_covers_every_render_input` is what says so -- which is what
@@ -64,13 +82,13 @@ body.capture #site-note { display: none; }
 </style>
 <div id="site-note">
 The animation model is still moving, so a number here is not evidence
-&mdash; <a href="/">the explainer</a> is the published work.
+&mdash; <a href="../">the explainer</a> is the published work.
 </div>"""
 """The one thing a reader of the published page has to know, said once and quietly.
 
 It is **injected here rather than written into the template** because it is a property of
-the published page and not of the page: the link goes to `/`, which exists on Pages and
-nowhere else, and a local build has nothing for it to point at.
+the published page and not of the page. The relative link reaches the project root from
+`/squares/workbench/`, from a local static server, and from any other deployment subpath.
 
 Where it sits and how it looks are both deliberate, and both are corrections. It was a
 full-width strip in warning yellow at the top of `<body>` -- which put it outside
@@ -86,9 +104,32 @@ EXTERNAL = re.compile(
     r"""(?:<script[^>]+\bsrc=|<link[^>]+\bhref=|@import\b|url\((?!['"]?data:))""",
     re.IGNORECASE,
 )
+REVISION = re.compile(r"[0-9a-f]{40}")
 
 
-def build(out: Path) -> str:
+def source_revision() -> str:
+    """The exact checkout revision whose sources the page embeds."""
+    found = subprocess.run(
+        ("git", "rev-parse", "HEAD"),
+        cwd=REPO,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    revision = found.stdout.strip()
+    if found.returncode != 0 or REVISION.fullmatch(revision) is None:
+        raise ValueError("could not determine the workbench source revision")
+    return revision
+
+
+def build_metadata(revision: str) -> str:
+    """The machine-readable source identity checked after deployment."""
+    if REVISION.fullmatch(revision) is None:
+        raise ValueError(f"invalid workbench source revision: {revision!r}")
+    return f'<meta name="squares-workbench-revision" content="{revision}">'
+
+
+def build(out: Path, *, revision: str | None = None) -> str:
     """Generate the page and return its text, refusing anything that reaches outside itself."""
     with tempfile.TemporaryDirectory() as scratch:
         # Captured so a working build stays quiet, but reported on failure: `check=True`
@@ -109,7 +150,26 @@ def build(out: Path) -> str:
                 f"--- stdout ---\n{built.stdout.strip() or '(empty)'}"
             )
             raise ValueError(msg)
-        page = (Path(scratch) / "workbench.html").read_text(encoding="utf-8")
+        candidate = Path(scratch) / "workbench.html"
+        checked = subprocess.run(
+            (
+                "node",
+                str(WORKBENCH_PACKAGE / "tools/check-candidate-corpus.ts"),
+                str(candidate),
+            ),
+            cwd=REPO,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if checked.returncode != 0:
+            msg = (
+                f"generated workbench corpus check exited {checked.returncode}\n"
+                f"--- stderr ---\n{checked.stderr.strip() or '(empty)'}\n"
+                f"--- stdout ---\n{checked.stdout.strip() or '(empty)'}"
+            )
+            raise ValueError(msg)
+        page = candidate.read_text(encoding="utf-8")
 
     reaching_out = EXTERNAL.findall(page)
     if reaching_out:
@@ -119,9 +179,14 @@ def build(out: Path) -> str:
         )
         raise ValueError(msg)
 
+    identity = build_metadata(revision or source_revision())
+    marked = page.replace("</head>", f"{identity}\n</head>", 1)
+    if identity not in marked:
+        raise ValueError("could not stamp the page; it has no </head> to close")
+
     # At the end of the body, so it is inside `#viewport`'s stacking context and after the
     # stylesheet that defines the custom properties it borrows.
-    marked = page.replace("</body>", f"{NOTE}</body>", 1)
+    marked = marked.replace("</body>", f"{NOTE}</body>", 1)
     if NOTE not in marked:
         msg = "could not place the page's note; the page has no </body> to close"
         raise ValueError(msg)
@@ -135,11 +200,13 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--check", action="store_true", help="rebuild and require byte equality")
+    ap.add_argument("--revision", help="full source commit to stamp (default: checkout HEAD)")
     o = ap.parse_args()
 
-    first = build(o.out)
+    revision = o.revision or source_revision()
+    first = build(o.out, revision=revision)
     if o.check:
-        again = build(o.out)
+        again = build(o.out, revision=revision)
         if again != first:
             msg = (
                 "the workbench did not reproduce itself; a published page must be deterministic"

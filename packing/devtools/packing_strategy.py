@@ -23,12 +23,21 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import secrets
+from collections.abc import Callable
+from copy import deepcopy
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 import jsonschema
 import numpy as np
+from workbench_tools.packing_contracts import (
+    DEFAULT_VALIDITY_TOLERANCE,
+    GeometryCheck,
+    GeometryIssue,
+    check_unit_square_packing,
+)
 
 from devtools.divide_and_concur import Array, violation
 from devtools.known_structure import (
@@ -47,6 +56,15 @@ from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = ROOT / "strategies/packing-strategy.schema.yaml"
+UINT32_MAX = 2**32 - 1
+
+
+@dataclass(frozen=True, slots=True)
+class TraceSnapshot:
+    """One pose set together with the container in force when it was produced."""
+
+    side: float
+    poses: Array
 
 
 @dataclass
@@ -56,24 +74,32 @@ class State:
     n: int
     poses: Array
     side: float
+    seed: int
+    capture_trace: bool = False
     contacts: list[tuple[int, int]] | None = None
     classes: list[list[int]] | None = None
     walls: list[int] | None = None
     rung: str = "none"
-    trace: list[Array] = field(default_factory=list)
+    guided: bool = False
+    answer_sources: set[str] = field(default_factory=set)
+    trace: list[TraceSnapshot] = field(default_factory=list)
     animation: list[dict[str, Any]] = field(default_factory=list)
     log: list[dict[str, Any]] = field(default_factory=list)
 
 
 def _structure(state: State, spec: dict[str, Any], rng: np.random.Generator) -> None:
     """Read a rung of the ladder onto the state, with its control if one is asked for."""
+    source = spec.get("source", "record")
+    if source != "record":
+        raise ValueError(f"structure source {source!r} is not implemented")
     rung = spec["rung"]
     state.rung = rung
+    state.contacts, state.classes, state.walls = None, None, None
     if rung == "none":
-        state.contacts, state.classes, state.walls = None, None, None
         return
 
     poses, side = record(state.n)
+    state.answer_sources.add(f"record-structure:{rung}")
     edges = contact_edges(poses)
     kinds = contact_kinds(poses)
     control = spec.get("control", "none")
@@ -105,22 +131,31 @@ def _structure(state: State, spec: dict[str, Any], rng: np.random.Generator) -> 
 def _side_for(state: State, spec: dict[str, Any] | None) -> float:
     if not spec:
         return state.side
+    relative_to = spec.get("relative_to", "current")
+    if relative_to == "record":
+        state.answer_sources.add("record-side")
     base = {
         "record": lambda: record(state.n)[1],
         "grid": lambda: float(math.ceil(math.sqrt(state.n))),
         "current": lambda: state.side,
-    }[spec.get("relative_to", "current")]()
+    }[relative_to]()
     return base * float(spec.get("factor", 1.0))
 
 
 def _grid_poses(n: int, side: float) -> Array:
-    k = round(side)
+    if not math.isfinite(side) or side <= 0:
+        raise ValueError("grid side must be finite and positive")
+    k = math.floor(side)
+    if k * k < n:
+        raise ValueError(f"grid side {side} has {k * k} cells for {n} squares")
     cells = [(i, j) for j in range(k) for i in range(k)][:n]
-    return np.array([[i + 0.5, j + 0.5, 0.0] for i, j in cells])
+    return np.array([[i + 0.5, j + 0.5, 0.0] for i, j in cells], dtype=np.float64)
 
 
 def _run_scatter(state: State, phase: dict[str, Any], rng: np.random.Generator) -> None:
     side = _side_for(state, phase.get("side"))
+    if side < 1:
+        raise ValueError("scatter side must be at least one unit")
     state.side = side
     state.poses = np.stack(
         [
@@ -147,6 +182,7 @@ def _run_assemble(state: State, phase: dict[str, Any], rng: np.random.Generator)
     45-degree lattice with two undeclared squares 0.012 apart.
     """
     poses, _ = record(state.n)
+    state.answer_sources.add("record-assembly")
     state.side = _side_for(state, phase.get("side"))
     state.poses = assemble_from_faces(
         state.n, contact_edges(poses), contact_kinds(poses), state.side, rng
@@ -163,6 +199,7 @@ def _run_project(state: State, phase: dict[str, Any], rng: np.random.Generator) 
     c = phase.get("constraints") or {}
     steps, stalled = _stop(phase)
     state.side = _side_for(state, phase.get("side"))
+    trace: list[Array] | None = [] if state.capture_trace else None
     out = solve(
         state.n,
         state.side,
@@ -176,7 +213,10 @@ def _run_project(state: State, phase: dict[str, Any], rng: np.random.Generator) 
         contacts=state.contacts,
         walls=state.walls,
         start=state.poses,
-        trace=state.trace,
+        trace=trace,
+    )
+    state.trace.extend(
+        TraceSnapshot(side=state.side, poses=poses.copy()) for poses in trace or ()
     )
     state.poses = out.poses
     state.log[-1] |= {"solved": bool(out.solved), "steps": out.steps}
@@ -191,6 +231,8 @@ def _run_relax(state: State, phase: dict[str, Any], rng: np.random.Generator) ->
     packing optimal.
     """
     state.contacts, state.classes, state.walls = None, None, None
+    state.rung = "none"
+    state.log[-1]["rung"] = state.rung
     _run_project(state, phase, rng)
 
 
@@ -230,9 +272,11 @@ def _run_guide(state: State, phase: dict[str, Any], _rng: np.random.Generator) -
     """
     t = phase.get("target") or {}
     targets, side = record(state.n)
+    state.answer_sources.add("record-target")
     if t.get("match", "by-motion") == "by-motion":
         targets, _spare = match_targets(state.poses, targets)
     state.side = side
+    trace: list[Array] | None = [] if state.capture_trace else None
     landed, _frames = guide_home(
         state.n,
         side,
@@ -240,9 +284,11 @@ def _run_guide(state: State, phase: dict[str, Any], _rng: np.random.Generator) -
         targets,
         steps=int(t.get("steps", 400)),
         pull_to=float(t.get("pull", 5.0)),
-        trace=state.trace,
+        trace=trace,
     )
+    state.trace.extend(TraceSnapshot(side=side, poses=poses.copy()) for poses in trace or ())
     state.poses = landed
+    state.guided = True
     state.log[-1] |= {
         "guided": True,
         "residual": float(np.abs(landed[:, :2] - targets[:, :2]).max()),
@@ -279,7 +325,8 @@ def _run_container(state: State, phase: dict[str, Any], _rng: np.random.Generato
         side_now = was + ease * (state.side - was)
         between[:, :2] = (state.poses[:, :2] - state.side / 2) * (side_now / state.side)
         between[:, :2] += side_now / 2
-        state.trace.append(between)
+        if state.capture_trace:
+            state.trace.append(TraceSnapshot(side=side_now, poses=between))
 
 
 MECHANISMS = {
@@ -305,12 +352,138 @@ def load(path: Path) -> dict[str, Any]:
     return strategy
 
 
+_PHASE_FIELDS: dict[str, frozenset[str]] = {
+    "scatter": frozenset({"mechanism", "label", "side"}),
+    "grid": frozenset({"mechanism", "label", "side"}),
+    "assemble": frozenset({"mechanism", "label", "structure", "side"}),
+    "project": frozenset(
+        {"mechanism", "label", "relaxation", "structure", "constraints", "until", "side"}
+    ),
+    "relax": frozenset({"mechanism", "label", "relaxation", "until", "side"}),
+    "ratchet": frozenset(
+        {"mechanism", "label", "relaxation", "structure", "constraints", "until", "schedule"}
+    ),
+    "guide": frozenset({"mechanism", "label", "target"}),
+    "container": frozenset({"mechanism", "label", "side", "until"}),
+}
+
+
+def _validate_capabilities(strategy: dict[str, Any]) -> None:
+    """Reject schema-valid fields that this executor cannot honor."""
+    for phase in strategy["phases"]:
+        mechanism = str(phase["mechanism"])
+        unsupported = sorted(set(phase) - _PHASE_FIELDS[mechanism])
+        if unsupported:
+            raise ValueError(
+                f"{mechanism} does not support phase field(s): {', '.join(unsupported)}"
+            )
+        structure = phase.get("structure") or {}
+        source = structure.get("source", "record")
+        if source != "record":
+            raise ValueError(f"structure source {source!r} is not implemented")
+        if "keep" in structure and structure.get("control", "none") == "none":
+            raise ValueError("structure keep requires a thinned or rewired control")
+        if mechanism == "assemble":
+            if not structure or structure.get("rung") != "contact-graph-with-types":
+                raise ValueError("assemble requires record contact-graph-with-types structure")
+            if structure.get("control", "none") != "none":
+                raise ValueError("assemble does not implement structure controls")
+
+        until = phase.get("until") or {}
+        if "feasible" in until:
+            raise ValueError("until.feasible is not implemented by the Python executor")
+        supported_until = {"frames"} if mechanism == "container" else {"steps", "stalled_for"}
+        unsupported_until = sorted(set(until) - supported_until)
+        if unsupported_until:
+            raise ValueError(
+                f"{mechanism} does not support until field(s): {', '.join(unsupported_until)}"
+            )
+
+        schedule = phase.get("schedule") or {}
+        if "start" in schedule:
+            raise ValueError("schedule.start is not implemented by the Python executor")
+        if schedule.get("halve_on_failure", True) is not True:
+            raise ValueError("schedule.halve_on_failure=false is not implemented")
+
+
+def _seed_for(strategy: dict[str, Any], seed_source: Callable[[], int] | None) -> int:
+    chosen = strategy.get("seed")
+    if chosen is None:
+        chosen = secrets.randbits(32) if seed_source is None else seed_source()
+    if isinstance(chosen, bool) or not isinstance(chosen, int) or not 0 <= chosen <= UINT32_MAX:
+        raise ValueError("strategy seed must be an unsigned 32-bit integer")
+    return chosen
+
+
+def _effective_configuration(strategy: dict[str, Any], seed: int) -> dict[str, Any]:
+    """Materialize every executor default needed to replay the declared phases."""
+    configured = deepcopy(strategy)
+    configured["seed"] = seed
+    n = int(configured["n"])
+    for phase in configured["phases"]:
+        mechanism = phase["mechanism"]
+        if "side" in phase:
+            phase["side"].setdefault("relative_to", "current")
+            phase["side"].setdefault("factor", 1.0)
+        if "structure" in phase:
+            structure = phase["structure"]
+            structure.setdefault("source", "record")
+            structure.setdefault("control", "none")
+            if structure["control"] != "none" and "keep" not in structure:
+                edge_count = len(contact_edges(record(n)[0]))
+                divisor = 2 if structure["control"] == "thinned" else 4
+                structure["keep"] = edge_count // divisor
+        if mechanism in {"project", "relax", "ratchet"}:
+            phase.setdefault("relaxation", 0.1)
+            until = phase.setdefault("until", {})
+            until.setdefault("steps", 6000)
+            until.setdefault("stalled_for", max(1, int(until["steps"]) // 3))
+        if mechanism in {"project", "ratchet"}:
+            constraints = phase.setdefault("constraints", {})
+            constraints.setdefault("band", 0.02)
+            constraints.setdefault("weight", 1.0)
+        if mechanism == "ratchet":
+            schedule = phase.setdefault("schedule", {})
+            schedule.setdefault("halve_on_failure", True)
+            schedule.setdefault("floor", 1e-3)
+            schedule.setdefault("attempts", 5)
+            schedule.setdefault("attempts_ceiling", 24)
+            schedule.setdefault("cold", 0.0)
+        if mechanism == "guide":
+            target = phase.setdefault("target", {})
+            target.setdefault("source", "record")
+            target.setdefault("match", "by-motion")
+            target.setdefault("steps", 400)
+            target.setdefault("pull", 5.0)
+        if mechanism == "container":
+            phase.setdefault("until", {}).setdefault("frames", 24)
+    return configured
+
+
+def _require_finite_geometry(check: GeometryCheck, *, label: str) -> None:
+    malformed = {GeometryIssue.SHAPE, GeometryIssue.COUNT, GeometryIssue.NONFINITE}
+    if malformed.intersection(check.issues):
+        raise ValueError(f"{label} must contain exactly the declared finite square poses")
+
+
+def _check_state(state: State, *, label: str) -> GeometryCheck:
+    check = check_unit_square_packing(
+        state.poses,
+        side=state.side,
+        expected_count=state.n,
+        tolerance=DEFAULT_VALIDITY_TOLERANCE,
+    )
+    _require_finite_geometry(check, label=label)
+    return check
+
+
 def run(
     strategy: dict[str, Any],
     *,
     keep_trace: bool = False,
     start: Array | None = None,
     start_side: float | None = None,
+    seed_source: Callable[[], int] | None = None,
 ) -> State:
     """Execute the phases in order, threading one arrangement through them.
 
@@ -318,16 +491,27 @@ def run(
     rather than from the grid, which is the whole point of a film that adds one square at a
     time. Without it each step would restart and the squares would teleport between steps.
     """
+    jsonschema.validate(strategy, safe_load(SCHEMA.read_text(encoding="utf-8")))
+    _validate_capabilities(strategy)
     n = int(strategy["n"])
-    seed = int(strategy.get("seed", 0))
+    seed = _seed_for(strategy, seed_source)
     rng = np.random.default_rng(seed)
+    side = float(math.ceil(math.sqrt(n))) if start_side is None else start_side
+    poses = _grid_poses(n, side) if start is None else start
+    start_check = check_unit_square_packing(
+        poses,
+        side=side,
+        expected_count=n,
+        tolerance=DEFAULT_VALIDITY_TOLERANCE,
+    )
+    _require_finite_geometry(start_check, label="strategy start")
     state = State(
         n=n,
-        poses=_grid_poses(n, float(math.ceil(math.sqrt(n)))) if start is None else start,
-        side=float(math.ceil(math.sqrt(n))) if start_side is None else start_side,
+        poses=np.asarray(poses, dtype=np.float64).copy(),
+        side=float(side),
+        seed=seed,
+        capture_trace=keep_trace,
     )
-    if not keep_trace:
-        state.trace = []
 
     for index, phase in enumerate(strategy["phases"]):
         mechanism = phase["mechanism"]
@@ -344,23 +528,32 @@ def run(
             state.log[-1]["rung"] = state.rung
         before = len(state.trace)
         MECHANISMS[mechanism](state, phase, rng)
+        phase_check = _check_state(state, label=f"{mechanism} phase result")
         # Frames are tagged with the phase that produced them as they arrive, because
         # afterwards nothing can tell them apart -- and whether a frame was guided is the
         # one thing an exporter is required to carry.
-        guided = bool(state.log[-1].get("guided"))
-        for poses in state.trace[before:]:
+        for snapshot in state.trace[before:]:
+            trace_check = check_unit_square_packing(
+                snapshot.poses,
+                side=snapshot.side,
+                expected_count=state.n,
+                tolerance=DEFAULT_VALIDITY_TOLERANCE,
+            )
+            _require_finite_geometry(trace_check, label=f"{mechanism} trace frame")
             state.animation.append(
                 {
-                    "side": state.side,
-                    "squares": [[float(v) for v in pose] for pose in poses],
+                    "side": snapshot.side,
+                    "squares": [[float(v) for v in pose] for pose in snapshot.poses],
+                    "square_ids": list(range(1, state.n + 1)),
                     "phase": phase.get("label", mechanism),
-                    "guided": guided,
-                    "feasible": violation(poses, state.side) <= 1e-9,
+                    "guided": state.guided,
+                    "feasible": trace_check.passed,
                 }
             )
         state.log[-1] |= {
             "side": state.side,
             "violation": violation(state.poses, state.side),
+            "packing_valid": phase_check.passed,
             "frames": len(state.trace) - before,
         }
     return state
@@ -376,22 +569,32 @@ def animation_document(
     equally interesting to watch, and pacing by iteration count would give the whole screen
     to whichever mechanism happened to be slowest.
     """
+    final_check = _check_state(state, label="animation final frame")
     frames = state.animation or [
         {
             "side": state.side,
             "squares": [[float(v) for v in pose] for pose in state.poses],
+            "square_ids": list(range(1, state.n + 1)),
             "phase": "final",
-            "guided": any(p.get("guided") for p in state.log),
-            "feasible": violation(state.poses, state.side) <= 1e-9,
+            "guided": state.guided,
+            "feasible": final_check.passed,
         }
     ]
     span = max(1, len(frames) - 1)
     known = record(state.n)[1]
+    configuration = _effective_configuration(strategy, state.seed)
+    sources: dict[str, Any] = {
+        "strategy": strategy["name"],
+        "seed": state.seed,
+        "configuration": configuration,
+    }
+    if state.answer_sources:
+        sources["records"] = [state.n]
     return {
         "name": strategy["name"],
         "n": state.n,
-        "guided": any(f["guided"] for f in frames),
-        "source": {"strategy": strategy["name"]},
+        "guided": state.guided,
+        "source": sources,
         "duration_seconds": duration_seconds,
         "palette": {"hue": "angle-class", "shade": "full-side-contact"},
         "reference": {"best_known": float(known)},

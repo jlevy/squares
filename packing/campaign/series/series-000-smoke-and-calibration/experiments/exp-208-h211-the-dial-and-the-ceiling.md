@@ -107,6 +107,17 @@ unresolved.
 
 ## Original account
 
+**Cohort annotation — 2026-09-13:** The retained `a8-deep.jsonl` summary has only n11,
+with 16,319 recorded rows, rather than four completed 20,000-trial cells.
+Five n17 level-8/inflate sweep cells have 2,000 rows each and `resolved: false`. The
+deep n17/26/29 level-8 values below cannot be recovered from the retained artifacts.
+The largest retained case is n29, and normalized versus absolute ordering does not
+establish a size-driven difficulty gradient.
+The package’s `workbench_tools.historical_summary_audit` and the
+[cohort reconciliation](../../../../../docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md#retained-cohort-reconciliation--2026-09-13)
+record the exact cells.
+The original table remains a historical account, with the current verdict unresolved.
+
 ## The sweet spot
 
 Best-of-1000 `closed`, 54,000 valid trials:

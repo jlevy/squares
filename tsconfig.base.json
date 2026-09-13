@@ -4,11 +4,11 @@
   // runtime or build tool. Every program in this repository extends this and relaxes only
   // what it demonstrably cannot meet yet, over its own file list, with a tracked issue.
   //
-  // Everything here is checked JavaScript -- there is no TypeScript in this repository and
-  // no build step for the browser code. `allowJs` + `checkJs` + `noEmit` is how a
-  // JavaScript-only project gets floor rule 3's separate type gate.
+  // The retained browser programs are checked JavaScript, while new workbench modules are
+  // TypeScript. `allowJs` + `checkJs` keeps the legacy programs under this same floor.
   "compilerOptions": {
     "allowJs": true,
+    "allowImportingTsExtensions": true,
     "checkJs": true,
     "noEmit": true,
     "target": "ES2022",

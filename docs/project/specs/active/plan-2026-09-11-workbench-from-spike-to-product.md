@@ -7,9 +7,10 @@ author: Claude and Codex agents, for the repository maintainer
 
 **Date:** 2026-09-11
 
-**Updated:** 2026-09-12
+**Updated:** 2026-09-13
 
-**Status:** Active; evidence and correctness repairs precede package extraction
+**Status:** Active; package foundation and correctness repairs implemented, broad
+migration in progress
 
 **Workflow:** W7 pipeline improvement
 
@@ -53,9 +54,9 @@ Workbench-specific build, benchmark, capture, and Python adapters live inside th
 package. Existing general-purpose `sqpack` libraries remain dependencies.
 
 The package shell starts in Phase 0; broad live-source consolidation starts only after
-the evidence, correctness, and quality checkpoint in Phase 2. Search remains deferred
-until the annealing record reports valid distributions and the page and benchmark use
-the same packing-validity contract.
+the evidence, correctness, and strict-new-source checkpoint in Phase 2. Search remains
+deferred until the annealing record reports valid distributions and the page and
+benchmark use the same packing-validity contract.
 
 ## Required Final Outcomes
 
@@ -98,6 +99,43 @@ current caller of the new seed API. The manually maintained API declaration cons
 omits `setSeed` and `seed` while the browser type check remains green.
 
 ## Product Semantics
+
+### Implementation Checkpoint — 2026-09-13
+
+The leaf incorporates PR #125 at `27d2f8cc`. PR #155 now carries the historical record
+repairs through `e13ff926`; its required hosted checks, Pages build and browser jobs
+pass. The package implementation is being prepared as the third and final PR in this
+stack.
+
+The foundation introduces the private `@squares/workbench` workspace, strict module
+build, package-local Python adapters and immediate source discovery.
+Implemented repairs include animation/strategy admission, canonical benchmark references
+and execution receipts, exact uint32 seeds, and post-step optimizer snapshot validation.
+The actual page consumes strict API, force-law, navigation, corpus and timeline modules.
+Its palette and shades come from `sqpack.render`; the workbench’s separately named 0.5°
+angle-clustering input is not the renderer’s 1e-6-radian tolerance.
+
+The reporter joins explicit seed/status/work manifests, keeps failed and unfinished
+slots in disjoint blocks, checks source/reference/budget agreement, and reports
+denominated rates and conditional distributions.
+The historical-summary inventory documents missing raw inputs and the exact disputed
+cells; it does not recreate them.
+See the review’s
+[cohort reconciliation](../../reviews/review-2026-09-12-workbench-stack-architecture.md#retained-cohort-reconciliation--2026-09-13).
+
+These repairs do not complete Phase 3. Most legacy app, painter and simulation code
+still lives in the retained script and inherits four documented compiler relaxations.
+After typed boundaries were introduced, its strict audit reports 1,246 diagnostics; that
+inventory must reach zero before `think-4ylo` or merge readiness closes.
+The next disjoint migration slices are colour/view helpers, shared geometry/contact,
+cached trajectories, live optimizer, painter, then the app/controller.
+The package build still reads the retained spike until those consumers move under
+`think-g0lh`. The focused accessibility checks also need a durable behavioral CI entry
+point before `think-y9pw` closes.
+Arbitrary-n Pack, shared bounded Resolve, trace editing/capture, Search/calibration and
+actual release remain open under the phases below.
+
+### Mode Contracts
 
 The product has three aspects with one set of computational building blocks:
 
@@ -286,23 +324,33 @@ Historical claims may be dispositioned without a new campaign.
 A new measured round requires its own hypothesis, budget, inputs and acceptance rule
 under the annealing plan.
 
-### Phase 2: Complete the Quality and Behavior Floor
+### Phase 2: Repair Behavior and Establish Strict Module Gates
 
 | Bead | Deliverable | Done when |
 | --- | --- | --- |
 | `think-7f3p` | Remove remaining executable JS/HTML literals (R8). | Trial, guard, build and probe programs are ordinary checked package files; shared runtime calls replace copied simulation, with independent verification preserved where useful. |
 | `think-gxxc` | One public API/type contract (R8). | Runtime and declarations agree, including `setSeed`/`seed`; negative key/shape controls fail the normal gate. |
-| `think-4ylo` | Full tbd Python and TS/JS floor (R8). | Ruff/BasedPyright and strict compiler/lint/promise checks have zero findings across all retained live code and all new files; no broad exclusions, suppressions or legacy flag inheritance. |
+| `think-4ylo` | Establish the full tbd Python and TS/JS gate; complete graduation during Phase 3. | Every new module passes strict compiler/lint/promise checks immediately. After live-source migration, Ruff/BasedPyright and compiler/lint/promise checks have zero findings across all retained live code, with no broad exclusions, suppressions or legacy flag inheritance. |
 | `think-nals` | Shared validity and bounded Resolve. | Raw and repaired states remain separate; finite/count/pair/wall checks agree; repair succeeds only after post-validation and reports stalled/budget/nonfinite outcomes honestly. |
 | `think-y9pw` | Accessible stage and controls. | Current descriptions, focus, keyboard manipulation/transport and reduced-motion behavior pass served-page assertions. |
 | `think-kpvc` | Measured behavioral PR coverage (R8). | Startup, run/reset, modes, validity, seed replay and frame provenance reach the appropriate existing tiers; a broken behavior fails CI, and the builder’s inaccurate gate claim is corrected. |
-| `think-109t` | Repair checkpoint. | The refreshed commit and named repair/gate receipts establish the entry conditions for broad package extraction. |
+| `think-109t` | Correctness and strict-new-source checkpoint. | The refreshed commit, executable repairs, semantic checks and strict new-source gates pass. The remaining legacy typing inventory is explicit; final graduation belongs to `think-4ylo`, before merge readiness. |
 
 The Python parent-floor change is integrated, not recreated.
 The closed browser-floor adoption bead `think-4cwy` remains historical; `think-4ylo`
 owns all remaining strict flags.
 Fast checks join PR validation as soon as the source appears.
 Measure slower capture/trajectory checks before assigning their tier.
+
+The 2026-09-13 strict audit measured 1,030 errors in the legacy workbench and 249 in 124
+probe files. Most are implicit types, nullable DOM references and unchecked indexes.
+Typing and coherent module extraction therefore proceed together; a separate pass adding
+1,279 local annotations before moving the same code would preserve its poor boundaries.
+This revises the original sequencing, not the final floor: `think-109t` no longer waits
+for `think-4ylo`; final migration `think-g0lh` precedes `think-4ylo`, which explicitly
+blocks `think-9sdr`. Existing legacy lists may only shrink.
+New modules never inherit their relaxed flags, and behavior/assurance repairs remain
+prerequisites for broad extraction.
 
 Pages runtime (`think-l6l4`) and project-subpath navigation (`think-5wnw`) can be
 repaired alongside these tasks.
@@ -311,6 +359,12 @@ Their final integration is checked after the package build moves.
 ### Phase 3: Consolidate the Live Package
 
 `think-zisr` groups these slices.
+Each promoted domain is strict TypeScript, with explicit imports and an executable
+contract at its caller boundary.
+Promote core/API, data/simulation, view/timeline, then application wiring and probes;
+the build consumes the package bundle throughout.
+`think-4ylo` closes only after the last retained source has graduated, before the Phase
+4 merge-readiness checkpoint.
 Each executable child is blocked by the repair checkpoint or by children that already
 depend on it; the epic’s own blockers are not the scheduling mechanism.
 

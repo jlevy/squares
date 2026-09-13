@@ -102,10 +102,10 @@ slow, and its target is two to two and a half minutes.
 
 ### The JavaScript and CSS floor
 
-**Biome owns the browser code, and `tsc` type-checks it.** The JavaScript this
-repository serves — the workbench’s script, the checkers’ probes, the motion lab’s
-assets — is under the same shape of floor the Python is: zero findings, verify-only in
-CI, fixed at commit.
+**Biome owns browser formatting and general lint, type-aware ESLint owns the retained
+JavaScript promise rules, and `tsc` owns types.** The workbench package and the
+JavaScript this repository still serves directly are under the same shape of floor as
+Python: zero findings, verify-only in CI, fixed at commit.
 The rules come from `tbd guidelines typescript-lint-format-rules`, Profile B, and
 `packing/tests/test_browser_floor_contract.py` is what proves they are live rather than
 merely written down.
@@ -118,12 +118,12 @@ packing-validate --only "browser floor"   # verify, which is what CI runs
 
 Three things worth knowing before changing any of it:
 
-- **There is no TypeScript here and no build step for the browser code.** It is checked
-  JavaScript: `allowJs` + `checkJs` + `noEmit`, with types from JSDoc.
-  `tsconfig.base.json` holds the floor and each `tsconfig.*.json` names **one program**,
-  because the assets are concatenated into pages rather than imported as modules — one
-  `include` covering all of them would put every file in one global scope and invent
-  collisions.
+- `packages/workbench/` is strict TypeScript and uses pinned esbuild to emit classic
+  browser bundles. The retained scripts remain checked JavaScript with `allowJs` +
+  `checkJs` + `noEmit` and JSDoc types.
+  `tsconfig.base.json` holds the shared floor; each retained global program has its own
+  `tsconfig.*.json`, while the package has a strict module program.
+  The browser-floor step also runs the package’s Node tests.
 - **A relaxed compiler flag names the bead tracking its removal.** That is the ratchet
   from the shared floor’s rule 8, and the contract test fails a config that relaxes one
   without naming a tracker.
@@ -190,11 +190,12 @@ The repository is split by audience rather than by topic.
 [`development.md`](development.md), the generated [`defects.md`](defects.md), and
 `docs/project/` for reports, reviews, specs and postmortems.
 
-**[`packing/`](packing/) holds everything that is code, data, or research record**: the
+**[`packing/`](packing/) holds the general library, data, and research record**: the
 `sqpack` package and its tests, the developer tools, the Rust search engine, the
 literature archive, the frontier register, the atlas, the witnesses, and the campaign.
-Keeping that one level down is what stops the root from becoming unreadable, and it is
-also the build root — `pyproject.toml`, `uv.lock` and `.python-version` live there.
+The interactive product is the focused exception: strict browser source, probes, tests,
+and build tools live in [`packages/workbench/`](packages/workbench/). The Python build
+root remains `packing/`, where `pyproject.toml`, `uv.lock` and `.python-version` live.
 
 Two rules follow from the split, and both exist because a path now has two plausible
 meanings:
@@ -217,8 +218,8 @@ packing, live in [jlevy/thinking](https://github.com/jlevy/thinking).
 
 - **The project is self-contained.** Its documents, sources, and code live in this
   repository and link to each other with relative paths.
-  Reader-facing prose belongs at the root; code, data, and the research record belong
-  under `packing/`. Do not add a third top-level tree for either.
+  Reader-facing prose belongs at the root; general code, data, and the research record
+  belong under `packing/`; the workbench product belongs under `packages/workbench/`.
 - **Reports separate claims by evidential status** — proved, computationally verified,
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.

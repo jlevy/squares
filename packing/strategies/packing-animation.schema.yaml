@@ -26,7 +26,7 @@ properties:
   n:
     type: integer
     minimum: 1
-    description: Squares in the final frame. A frame may hold fewer while one arrives.
+    description: Squares in every frame. Waiting squares remain present but unlocked.
   guided:
     type: boolean
     default: false
@@ -42,6 +42,10 @@ properties:
       strategy: {type: string, description: Path to the PackingStrategy document.}
       records: {type: array, items: {type: integer}, description: Retained records used as targets.}
       commit: {type: string}
+      seed: {type: integer, minimum: 0, maximum: 4294967295}
+      configuration:
+        type: object
+        description: The complete effective strategy, including its chosen seed.
   duration_seconds: {type: number, exclusiveMinimum: 0}
   palette:
     type: object
@@ -61,6 +65,18 @@ properties:
     properties:
       best_known: {type: number, exclusiveMinimum: 0}
       proved_lower_bound: {type: number, exclusiveMinimum: 0}
+  fair_reach:
+    type: array
+    description: Optional ascent measurements retained for the report beside the animation.
+    items:
+      type: object
+      additionalProperties: false
+      required: [n, fair_side, record, excess_pct]
+      properties:
+        n: {type: integer, minimum: 1}
+        fair_side: {type: number, exclusiveMinimum: 0}
+        record: {type: number, exclusiveMinimum: 0}
+        excess_pct: {type: number}
   frames:
     type: array
     minItems: 1
@@ -86,12 +102,19 @@ $defs:
         description: Container side at this frame. It may change between frames.
       squares:
         type: array
+        minItems: 1
         description: One `[x, y, theta]` per square, centre and angle in radians.
         items:
           type: array
           minItems: 3
           maxItems: 3
           items: {type: number}
+      square_ids:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items: {type: integer, minimum: 1}
+        description: Stable square identities in the same order as `squares`.
       record:
         type: integer
         minimum: 1

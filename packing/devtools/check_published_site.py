@@ -15,10 +15,12 @@ the last deploy built from once `git fetch` has run. One line per check, `ok` or
 - every repository link in the page and in the Markdown edition names the expected
   commit, and each resolves on GitHub;
 - the Markdown edition, the PDF and the composite assets are served beside the page,
-  and the PDF is a PDF with the expected page count.
+  and the PDF is a PDF with the expected page count;
+- the workbench names the expected source commit, starts its public API in the pinned
+  browser, and links back to this project's root rather than the account site's root.
 
-Network only, so nothing here is a step of the gate; `tests/test_check_published_site.py`
-covers the parsing on fixtures.
+This checks a live deployment, so it is not a step of the source gate;
+`tests/test_check_published_site.py` covers its parsing and failure controls on fixtures.
 """
 
 from __future__ import annotations
@@ -30,6 +32,10 @@ import sys
 import urllib.error
 import urllib.request
 from collections.abc import Sequence
+from urllib.parse import urljoin
+
+from playwright.sync_api import Error as PlaywrightError
+from playwright.sync_api import sync_playwright
 
 from devtools.render_explainer import (
     COMPOSITE_ASSETS,
@@ -55,6 +61,11 @@ SERVED = (
 )
 
 USER_AGENT = "squares-check-published-site (+https://github.com/jlevy/squares)"
+WORKBENCH_PATH = "workbench/"
+WORKBENCH_REVISION = re.compile(
+    r'<meta\s+name="squares-workbench-revision"\s+content="([0-9a-f]{40})">'
+)
+WORKBENCH_HOME = re.compile(r'<a\s+href="([^"]+)">the explainer</a>')
 
 
 def repository_links(text: str) -> set[tuple[str, str, str]]:
@@ -102,7 +113,41 @@ def expected_commit() -> str:
     return found.stdout.strip()
 
 
-def check(site: str, commit: str, *, timeout: float) -> list[tuple[bool, str]]:
+def workbench_startup(url: str, project_root: str, *, timeout: float) -> tuple[bool, str]:
+    """Start the deployed page and require its public API and project-root navigation."""
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch()
+            try:
+                page = browser.new_page()
+                page.goto(url, wait_until="load", timeout=timeout * 1000)
+                page.wait_for_function(
+                    "() => typeof window.atlasTransitions?.pairs === 'function'",
+                    timeout=timeout * 1000,
+                )
+                observed = page.evaluate(
+                    """() => ({
+                      pairs: window.atlasTransitions.pairs().length,
+                      home: document.querySelector('#site-note a')?.href ?? null,
+                    })"""
+                )
+            finally:
+                browser.close()
+    except PlaywrightError as error:
+        return False, f"workbench startup failed: {error}"
+    pairs = observed.get("pairs") if isinstance(observed, dict) else None
+    home = observed.get("home") if isinstance(observed, dict) else None
+    passed = isinstance(pairs, int) and pairs > 0 and home == project_root
+    return passed, f"workbench API started with {pairs!r} pairs; home resolved to {home!r}"
+
+
+def check(
+    site: str,
+    commit: str,
+    *,
+    timeout: float,
+    browser: bool = True,
+) -> list[tuple[bool, str]]:
     """Every check as (passed, line), in the order they are printed."""
     results: list[tuple[bool, str]] = []
     site = site.rstrip("/") + "/"
@@ -160,6 +205,35 @@ def check(site: str, commit: str, *, timeout: float) -> list[tuple[bool, str]]:
             ok = ok and pages == EXPECTED_PAGE_COUNT
             line += f", {len(body)} bytes, {pages} pages (expected {EXPECTED_PAGE_COUNT})"
         results.append((ok, line))
+
+    workbench_url = site + WORKBENCH_PATH
+    status, workbench = fetch(workbench_url, timeout=timeout)
+    workbench_text = workbench.decode("utf-8", errors="replace")
+    results.append(
+        (
+            status == 200,
+            f"workbench {workbench_url}: HTTP {status}, {len(workbench)} bytes",
+        )
+    )
+    stamped = WORKBENCH_REVISION.search(workbench_text)
+    observed_revision = stamped.group(1) if stamped is not None else None
+    results.append(
+        (
+            observed_revision == commit,
+            f"workbench source revision {observed_revision!r} against expected {commit}",
+        )
+    )
+    home = WORKBENCH_HOME.search(workbench_text)
+    home_href = home.group(1) if home is not None else ""
+    resolved_home = urljoin(workbench_url, home_href) if home_href else None
+    results.append(
+        (
+            resolved_home == site,
+            f"workbench home resolves to {resolved_home!r} against project root {site!r}",
+        )
+    )
+    if browser:
+        results.append(workbench_startup(workbench_url, site, timeout=timeout))
     return results
 
 
@@ -170,9 +244,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--commit", help="the full commit the deploy should have built from")
     parser.add_argument("--timeout", type=float, default=30.0, help="seconds per request")
+    parser.add_argument(
+        "--no-browser",
+        action="store_true",
+        help="skip the browser API startup check (HTTP identity checks still run)",
+    )
     args = parser.parse_args(argv)
     commit = args.commit or expected_commit()
-    results = check(args.site, commit, timeout=args.timeout)
+    results = check(args.site, commit, timeout=args.timeout, browser=not args.no_browser)
     failed = 0
     for passed, line in results:
         print(f"{'ok  ' if passed else 'FAIL'} {line}", flush=True)

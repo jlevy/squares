@@ -150,6 +150,19 @@ exploration is entitled to.
 
 ## 3a. Correction: Sections 2 and 3 Were Not About Packings
 
+**Cohort annotation — 2026-09-13:** The correction below is also a historical account,
+not a current admission receipt.
+The retained level-6 summaries include n29, so n26 is not the largest measured case.
+n17 has five level-8 sweep cells, all marked unresolved; the retained deep level-8
+summary contains n11 only (16,319 rows).
+The supplied disjoint-block table has no retained raw inputs and cannot be reconstructed
+from prefix best-of-k summaries.
+Size-dependent difficulty, exact unique trial totals, and deep four-case level-8
+coverage remain unestablished.
+See the
+[retained-cohort reconciliation](../../../docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md#retained-cohort-reconciliation--2026-09-13)
+for the actual cells and absolute/normalized comparisons.
+
 **Added the same night, after the guard was built.** The sections above stand as a
 record of what was measured and are wrong about what was being measured.
 

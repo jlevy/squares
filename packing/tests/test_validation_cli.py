@@ -669,7 +669,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *validate.BEHAVIORAL_TEST_ROOTS,
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -780,7 +780,7 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *validate.BEHAVIORAL_TEST_ROOTS,
         "-m",
         "slow and not exhaustive_exact",
         "-n",
@@ -859,6 +859,7 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
 
     monkeypatch.setattr(validate, "_run", run_here)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
+    monkeypatch.setattr(validate, "BEHAVIORAL_TEST_ROOTS", ("tests",))
     environment = os.environ.copy()
     for name in ("PYTEST_ADDOPTS", "PYTEST_XDIST_WORKER", "PACKING_VALIDATION_ARTIFACT_DIR"):
         environment.pop(name, None)
@@ -1188,7 +1189,7 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *validate.BEHAVIORAL_TEST_ROOTS,
         "-m",
         "exhaustive_exact",
         "--durations=0",

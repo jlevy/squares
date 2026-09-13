@@ -1,0 +1,25 @@
+{
+  "name": "@squares/workbench",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Interactive packing workbench",
+  "engines": {
+    "node": ">=24.18.0 <25"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "esbuild": "0.28.2",
+    "eslint": "10.9.0",
+    "typescript": "6.0.2",
+    "typescript-eslint": "8.68.0"
+  },
+  "scripts": {
+    "build": "node tools/build-assets.ts",
+    "check": "npm run build && npm run lint && npm run typecheck && npm test",
+    "lint": "cd ../.. && biome ci --error-on-warnings packages/workbench && npm run lint:legacy-promises --workspace @squares/workbench",
+    "lint:legacy-promises": "cd ../.. && eslint packing/atlas/known-best/video/spikes/v2-transitions/assets packing/atlas/known-best/video/spikes/v2-transitions/probes packing/src/sqpack/motion_lab/assets packing/atlas/known-best/video/spikes/v1-slideshow --config packages/workbench/eslint.config.js --max-warnings 0",
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  }
+}
