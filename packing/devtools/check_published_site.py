@@ -15,7 +15,8 @@ the last deploy built from once `git fetch` has run. One line per check, `ok` or
 - every repository link in the page and in the Markdown edition names the expected
   commit, and each resolves on GitHub;
 - the Markdown edition, the PDF and the composite assets are served beside the page,
-  and the PDF is a PDF with the expected page count.
+  and the PDF is a PDF with the expected page count and a source receipt matching the
+  exact HTML bytes the site serves.
 
 Network only, so nothing here is a step of the gate; `tests/test_check_published_site.py`
 covers the parsing on fixtures.
@@ -24,6 +25,7 @@ covers the parsing on fixtures.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import subprocess
 import sys
@@ -70,6 +72,16 @@ def pdf_pages(data: bytes) -> int:
     if not data.startswith(b"%PDF"):
         return 0
     return len(re.findall(rb"/Type\s*/Page(?![s])", data))
+
+
+def pdf_source_matches(data: bytes, page: bytes) -> bool:
+    """Whether the PDF's unique trailing source receipt names the exact fetched HTML."""
+    receipt = re.search(rb"\n%sqpack-source-html-sha256: ([0-9a-f]{64})\n\Z", data)
+    return (
+        receipt is not None
+        and data.count(b"%sqpack-source-html-sha256:") == 1
+        and receipt[1] == hashlib.sha256(page).hexdigest().encode()
+    )
 
 
 def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
@@ -157,8 +169,14 @@ def check(site: str, commit: str, *, timeout: float) -> list[tuple[bool, str]]:
         ok = status == 200
         if name == PDF_OUTPUT.name:
             pages = pdf_pages(body)
-            ok = ok and pages == EXPECTED_PAGE_COUNT
+            source_matches = pdf_source_matches(body, page)
+            ok = ok and pages == EXPECTED_PAGE_COUNT and source_matches
             line += f", {len(body)} bytes, {pages} pages (expected {EXPECTED_PAGE_COUNT})"
+            line += ", source HTML receipt " + (
+                "matches fetched page"
+                if source_matches
+                else "missing, malformed, or mismatched"
+            )
         results.append((ok, line))
     return results
 

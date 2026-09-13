@@ -159,15 +159,15 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 31 of 73 | 300 s | 11.0 s |
+| `--records` | contributor, before touching a registry; also every pull request | 32 of 74 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; a broad diff selects the whole suite and needs `--jobs 1`, see below |
-| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 73 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 73 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 73 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 73 | 275 s | 183.4 s on CI, one reading of the lane as it now stands |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 73 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 73 of 73 | 3600 s | split across four jobs; not clocked whole |
+| `--fast` | contributor, at a block boundary; the union of the four tiers below | 63 of 74 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 49 of 74 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 74 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 74 | 275 s | 183.4 s on CI, one reading of the lane as it now stands |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 74 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 74 of 74 | 3600 s | split across four jobs; not clocked whole |
 
 `--geometry`’s cost is a geometric mean of four readings at the reference shape.
 `--suite`’s is a single reading, because the lane it measures is new: merging PR 137
@@ -202,10 +202,12 @@ representation.
 **The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
 together, run as four concurrent CI jobs**, so a pull request waits for the longest of
 the four rather than for their sum.
-All four feed the single required `packing-required` context, and
-`test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks that
-they are pairwise disjoint and that they cover every step of `--fast` — so the split
-cannot lose a check the way a set of independent filters could.
+All four feed the stable `packing-required` aggregate context.
+Repository protection settings determine whether GitHub requires that context before a
+merge; the workflow does not configure those settings.
+The test `test_the_pull_request_jobs_partition_the_surface` reads the workflow and
+checks that they are pairwise disjoint and that they cover every step of `--fast` — so
+the split cannot lose a check the way a set of independent filters could.
 
 The merged [PR95](https://github.com/jlevy/squares/pull/95) implementation pools the
 known-best census and prospective-atlas rebuilds through the shared worker policy.
@@ -692,11 +694,14 @@ on exactly that edge.
 The explainer at <https://jlevy.github.io/squares/> is not checked in.
 GitHub Pages builds it from `main` in `.github/workflows/pages.yml`, on every push that
 touches one of the renderer’s declared inputs (`RENDER_INPUTS` in
-`devtools/render_explainer.py`, which a test keeps equal to the workflow’s path filter).
-The build renders the page (`site/index.html`), the Markdown edition
+`devtools/render_explainer.py`, which a test ensures the workflow’s path filter covers).
+The build writes the page (`site/index.html`), the Markdown edition
 (`site/t-018-explainer.md`), the PDF (`site/t-018-explainer.pdf`, drawn by Playwright’s
-Chromium) and the composite assets beside them, renders each twice and requires the two
-to agree, checks the print layout, and only then deploys.
+Chromium), and the composite assets beside them.
+It checks that the prepared HTML reproduces itself and compares the stored PDF with a
+fresh render, including the receipt that binds it to the HTML source.
+Font and page-count checks inspect that stored PDF. The workflow uploads the checked
+bytes unchanged; deployment waits for the print-layout and browser checks.
 A pull request runs the same build without deploying, so a render that breaks fails
 review rather than the next deploy.
 
@@ -718,7 +723,23 @@ lives in KPress, alongside the shared runtime’s public API documentation.
 The prepare job shares one page artifact with the Chromium print checks and the
 Firefox/WebKit loading checks.
 Deployment waits for all of them.
-Normal parameter startup and neighboring text movement are measured by
+Before drawing PDF bytes, the exporter checks that visible math is typeset; a completed
+font-error fallback that exposes literal TeX fails this check.
+Readable native MathML fallback is accepted by that check and remains subject to the
+separate PDF font policy.
+Pages exercises the production exporter with normal math and injected font errors and
+timeouts before it draws the publication candidate.
+These browser controls require the prepared page and pinned Chromium in Pages; the
+Python-only validation jobs leave them to that dedicated invocation.
+The PDF command `--check-artifact` requires an existing PDF and never rewrites it;
+`--check` remains available for repeated fresh-render diagnosis.
+On a reproduction disagreement, `--diagnostics-dir` retains the two raw PDFs and a
+neutral difference report in a separate directory for that invocation.
+Pages uploads those diagnostics on failure with seven-day retention.
+Download them before rerunning the job: GitHub can make a previous attempt’s artifacts
+unavailable on a rerun, even when their names differ
+([upstream report](https://github.com/actions/upload-artifact/issues/585)). Normal
+parameter startup and neighboring text movement are measured by
 `devtools.check_math_startup`; its controlled fixtures run in CI, while timing
 comparisons are retained in the
 [math startup campaign](packing/benchmarks/math-startup/README.md).
@@ -736,7 +757,9 @@ uv run --frozen --all-extras --group dev python -m devtools.check_published_site
 
 It fetches the live page, the Markdown edition, the PDF and the assets, and checks that
 the edition stamp is the one `sqpack.release` names, that every repository link names
-that commit and resolves on GitHub, and that the PDF is a PDF.
+that commit and resolves on GitHub, and that the PDF has the expected page count and a
+source receipt matching the served HTML bytes.
+The receipt detects stale or mixed publication artifacts; it is not a tamper guarantee.
 
 **The stamp in the credits has two parts, and they move on different clocks.** The
 current version and publication date come from the first entry in `PUBLICATION_HISTORY`

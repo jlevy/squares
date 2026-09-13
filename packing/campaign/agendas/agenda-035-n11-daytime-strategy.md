@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-035
   title: N11 Daytime Strategy and Research Blocks
-  updated: '2026-09-10'
+  updated: '2026-09-12'
   status: active
   objective: Select and execute short, high-information blocks across distinct routes to a stronger n11
     result. Preserve exact scope, put the most direct theorem paths first, and keep the standalone explainer
@@ -244,19 +244,24 @@ agenda:
     question: Can one changed strict-core and direction-net packet yield a verified dilation limit above T026?
     budget: One runner-admission block followed by one 90–120 minute target block, one declared fixed-core
       packet, both coverage routes, and dilation replay.
-    entry: A maintained fixed-core runner has a hard process deadline and durable partial output; the exact
-      T025 source scale, raw-minimum threshold and deterministic normalization rule are registered; and BC325
-      has disposed of the fixed-B point-only parent-box alternative analytically.
+    entry: A maintained fixed-core runner has a supervised worker-process deadline, bounded parent-side
+      preflight, atomic process-level partial output, and exact published direction sets for every route; a
+      separate full-shape, non-scientific positive control has been independently admitted; the exact T025
+      source scale, raw-minimum threshold and deterministic normalization rule are registered; and BC325 has
+      disposed of the fixed-B point-only parent-box alternative analytically.
     exit: A raw minimum strictly above M/11 followed by one normalized, two-route verified certificate and a
       valid stronger dilation limit; one independently verified core of raw charge at most M/11; or an
       unresolved timeout or incomplete gate.
     bead: think-17qa
     depends_on: [BC-325]
-    blocked_on: The existing adaptive refinement CLI does not execute the declared fixed-core packet and has
-      no process deadline. Child bead think-qw9w owns the maintained bounded runner and its independent
-      admission before registration and execution.
-    next_evidence: Build and independently admit that fixed-core runner. Then prospectively register one
-      packet retaining T025's sites and relative weights with a 2880-step net, B=9981/10000,
+    blocked_on: The separate full-shape calibration instrument and controls are not admitted. The runner
+      now bounds parent preflight and publishes exact partial direction sets, but neither three fresh
+      14,404-record host controls nor their source-distinct readback has run. Child bead think-qw9w owns
+      this admission boundary before target registration and execution.
+    next_evidence: Publish the reviewed runner checkpoint, admit the separate full-shape calibration
+      instrument, then run and independently read three controls under fixed-core-packet-calibration/v1.
+      Only after those gates pass, prospectively register one packet retaining T025's sites and relative
+      weights with a 2880-step net, B=9981/10000,
       D=207107/1440000000, raw acceptance threshold M/11=685457679/687500000, and normalization alpha=1/m.
       Require complete exact and interval agreement plus dilation replay on the same normalized bytes.
     workflows: [research-loop]
@@ -351,8 +356,10 @@ agenda:
       checks, and no unsupported scientific claim.
     bead: think-gv5a
     depends_on: [BC-332]
-    next_evidence: PR148 at f7126bfc implements the section and v0.4.0 edition and has passed the complete
-      local documentation block. BC335 owns the stack-only hosted checkpoint.
+    next_evidence: The implementation and historical hosted checkpoint are complete at PR148 revision
+      989fd544. The September 12 review corrections start at e8baa8ff; the dated T025/T026 review addendum
+      records the subsequent source checks and 22-page rendering evidence. These are later validation of
+      the completed documentation milestone.
     workflows: [documentation-pass]
     program: n11-daytime-strategy
     parallel_group: explainer
@@ -363,13 +370,15 @@ agenda:
     outcomes:
     - scope: Can the current bound be added without replacing or mislabelling the T018 worked proof?
       classification: achieved
-      result: PR148 derives the current bracket and T025/T026 section from retained inputs, preserves the
-        seven point-only figures and checker, and renders a deterministic 20-page PDF. The 135 focused tests,
-        Ruff, BasedPyright, prepared-output, print, font and complete 324-case atlas checks pass locally.
+      result: PR148 derives the current bracket and T025/T026 section from retained inputs and preserves the
+        seven point-only figures and checker. At the 989fd544 checkpoint, the 135 focused tests, Ruff,
+        BasedPyright, prepared-output, print, font and complete 324-case atlas checks passed. The September
+        12 review uses the 22-page edition and records its source and validation in the dated review addendum.
       evidence:
       - packing/devtools/templates/explainer-article.md
       - packing/devtools/render_explainer.py
       - TUTORIAL.md
+      - docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md
       disposition: retire-success
       follow_up: null
   - id: BC-336
@@ -417,7 +426,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: Does the standalone explainer state the point-only, threshold and dilation-limit proofs accurately,
       and does its stacked head pass independently of the inherited research base?
@@ -429,14 +438,27 @@ agenda:
       research checkpoint and its required checks pass on that stacked head.
     bead: think-0zc1
     depends_on: [BC-334, BC-336]
-    next_evidence: The independent mathematical review passed after narrowing the T025 certificate and
-      standalone-checker wording; the terminology audit states the exact proved lower bound with its V4/C5
-      assurance, identifies dilation-limit as the proof method, and distinguishes the separate stronger strict
-      inequality. The review defines core, trace and charge before use. PR154 and X-027 are merged into the PR148
-      head; local merged-head checks pass, and hosted checks are the remaining exit evidence.
+    next_evidence: The historical D3 checkpoint passed on PR148 at 989fd544. The September 12 mathematical,
+      clarity and integration review is recorded separately in the T025/T026 review addendum; later stack
+      revisions require their own validation and do not change the completed milestone's evidence source.
     workflows: [factual-review, documentation-pass]
     program: n11-daytime-strategy
     parallel_group: explainer-review
+    artifacts:
+    - docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md
+    outcomes:
+    - scope: Does the explainer state the point-only, threshold and dilation-limit proofs accurately, and
+        does the historical stacked PR148 head pass its required checks?
+      classification: achieved
+      result: The independent mathematical review narrowed the T025 certificate and standalone-checker
+        wording, distinguished the exact V4/C5 lower bound from the separate stronger strict inequality,
+        and defined core, trace and charge before use. PR154 and X-027 were integrated; the local and hosted
+        checks passed at 989fd544. The September 12 review is a subsequent audit of that completed milestone.
+      evidence:
+      - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+      - docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md
+      disposition: retire-success
+      follow_up: null
   - id: BC-333
     purpose: measurement_validation
     owner_focus: efficiency
@@ -463,12 +485,14 @@ Its result selects the next block, and the branch publishes a resumable checkpoi
 before another target begins.
 The explainer is the sole parallel write lane and has its own checkout and pull request.
 
-BC325 reconciles two independent rankings.
-The direct lower-bound route is a changed atom/support program, but it cannot run until
-it has a new atom rule and a reconstructable common row manifest.
-The parent-domain target has the shorter admitted path and tests a premise absent from
-the old owner relaxation.
-BC326 therefore starts first unless BC327 closes those readiness gaps during the intake.
+BC325 reconciled two independent rankings and selected BC326 first.
+BC326’s sole invocation found TR already incompatible under the old B-only model and
+retired that protocol; H158 remains unresolved.
+BC329 is now the first planned direct lower-bound target, pending its separate
+calibration admission.
+BC337 is the secondary parent-conditioning lane.
+BC327 still needs multiplicity admission, a paired-program adapter and a fresh common
+row manifest before its changed-atom comparison can run.
 
 The analytic `76469/20000` translation threshold does more than place the obstruction in
 the conservative box: every translated core has an explicit individually contained

@@ -258,27 +258,44 @@ extend to a physical packing.
 These quantifiers are why X-026’s named neutral classes do not refute conditioning as a
 strategy.
 
+The accepted
+[first-principles routing analysis](../../../docs/project/research/research-2026-09-12-n11-selection-routing-first-principles.md)
+and its
+[source-distinct review](../../../docs/project/reviews/review-2026-09-12-n11-selection-routing-first-principles.md)
+make the finite remainder exact for T-023’s two certified uniform tuples.
+Avoiding their family `G0` has sixteen maximal availability products.
+They form three physical `D4` types, but a proof in S1’s fixed left/bottom wall chart
+has ten orbits under the chart’s two-element stabilizer.
+The remaining selection theorem separates into two missing lemmas: every corner offers
+label 0 or 15, and no two corners force the opposing singleton types 0 and 15.
+
 The
 [structural-helper report](../../../docs/project/research/research-2026-09-10-x027-structural-helpers.md)
 adds seven-of-eight mark ownership, shared surplus accounting, and at most three
 physical contact components after fixed-angle normalization at $96/25$. Owners selected
 after that normalization give a contact path between different corners.
+The accepted routing analysis proves two narrower path bounds: for `sigma` split mark
+pairs, some shortest path between owners of different corners uses at most `9-sigma`
+parents; a right-corner owner needs a path of at least three parents to the normalized
+left wall, and the top/bottom statement is symmetric.
 These are useful analytical premises, but they imply no short path, finite angle set, or
-rigidity. The 80 abstract mark-incidence patterns still contain continuous geometric
-obligations.
+rigidity for prescribed owners.
+The 80 abstract mark-incidence patterns still contain continuous geometric obligations.
 
-**Discriminator.** Select one of X-027’s two nearer comparisons: a source-bound co-owner
-geometry with its full parents and common surplus, or two disjoint residuals with
-positive unary controls followed by a complete common-owner test.
-Exp149 and exp151 cannot stand in for the latter: their cores intersect, and exp151
-already fails the TR unary control.
-Co-ownership alone also has a retained neutral counterexample.
+Exact four-parent controls realize all four corner roles simultaneously while either one
+corner offers neither selected label or two corners force opposing singleton types.
+They show that eight-mark ownership and joint compatibility alone prove neither missing
+lemma. They are synthetic four-parent controls, not eleven-square packings or
+counterexamples to the global routing theorem.
 
-A routing graph or hypergraph remains a useful proposal instrument once its labels,
-coverage, and geometric implications are justified.
-Begin with the seven-mark availability patterns and the already excluded selections,
-then choose one surviving geometric obligation.
-Broad contact enumeration has not earned priority over that smaller comparison.
+**Discriminator.** `think-ms9l` proposes the complete one-corner BC303 surplus
+inequality for local availability.
+`think-cexv` proposes the adjacent and opposite two-corner inequalities for forced-type
+consistency. Both tests are unrun and remain blocked by `think-gldo` until the accepted
+analysis and review are retained.
+A successful complete inequality discharges only its named missing lemma.
+A rejecting exact witness refutes only that surplus mechanism on its declared domain;
+stronger domains and different resources or arguments remain open.
 
 **Stop and scope.** One frozen comparison with complete domain decisions.
 A fixed-pose exclusion can justify a positive-width owner cell; it is not that cell’s
@@ -290,6 +307,8 @@ the missing resource inequality.
 Other retained structural inputs include the snug-parent/contact-path alternative and
 [H-134’s ten-segment unavoidable set](../hypotheses/H-134-eleven-mark-ownership-set.md).
 Neither supplies an exclusion without its own complete geometric argument.
+No selection theorem or new n11 bound follows from the accepted reduction, controls, or
+unrun tests.
 
 ### 5. Threshold Charges on a Residual Domain
 

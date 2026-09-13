@@ -60,11 +60,11 @@ from __future__ import annotations
 
 import multiprocessing as mp
 import sys
+import time
 from collections.abc import Callable, Iterable
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import FIRST_COMPLETED, Future, ProcessPoolExecutor, wait
 from dataclasses import dataclass
 from fractions import Fraction
-from functools import partial
 from itertools import combinations
 from math import comb, lcm
 from typing import Any
@@ -872,25 +872,158 @@ def _direction_minimum(
     return minimum, direction.label
 
 
+ThresholdSweepClock = Callable[[], float]
+ThresholdSweepProgress = Callable[[int, Fraction, str], None]
+
+
+class ThresholdSweepDeadlineError(TimeoutError):
+    """The absolute deadline expired before the threshold sweep completed."""
+
+
+@dataclass(slots=True)
+class _ThresholdSweepWorker:
+    certificate: ThresholdCertificate | None = None
+
+
+_THRESHOLD_SWEEP_WORKER = _ThresholdSweepWorker()
+
+
+def _install_threshold_sweep(certificate: ThresholdCertificate) -> None:
+    """Install one fork-inherited certificate for index-only worker tasks."""
+
+    _THRESHOLD_SWEEP_WORKER.certificate = certificate
+
+
+def _shared_direction_minimum(index: int) -> tuple[int, Fraction, str]:
+    certificate = _THRESHOLD_SWEEP_WORKER.certificate
+    if certificate is None:
+        raise RuntimeError("threshold sweep worker has no installed certificate")
+    minimum, label = _direction_minimum(certificate, certificate.directions[index])
+    return index, minimum, label
+
+
+def _deadline_remaining(deadline: float | None, clock: ThresholdSweepClock) -> float | None:
+    if deadline is None:
+        return None
+    remaining = deadline - clock()
+    if remaining <= 0:
+        raise ThresholdSweepDeadlineError("threshold sweep reached its absolute deadline")
+    return remaining
+
+
 def sweep_all_threshold_directions(
-    certificate: ThresholdCertificate, *, workers: int = 1
+    certificate: ThresholdCertificate,
+    *,
+    workers: int = 1,
+    progress: ThresholdSweepProgress | None = None,
+    deadline: float | None = None,
+    clock: ThresholdSweepClock = time.perf_counter,
 ) -> tuple[tuple[Fraction, str], ...]:
-    """The least charge at every net direction, in net order; ``workers > 1`` forks."""
+    """The least charge at every net direction, in deterministic net order.
+
+    On Linux, ``workers > 1`` installs the certificate once per forked worker and submits
+    only direction indices, with at most twice the worker count outstanding. ``progress``
+    observes completed directions without net-order blocking. Any non-complete exit
+    requests worker termination; the outer supervisor owns the hard process-tree guarantee.
+    """
 
     directions = certificate.directions
     if workers <= 1 or len(directions) < 2 or not sys.platform.startswith("linux"):
-        return tuple(_direction_minimum(certificate, d) for d in directions)
-    with ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context("fork")) as pool:
-        return tuple(pool.map(partial(_direction_minimum, certificate), directions))
+        serial_outcomes: list[tuple[Fraction, str]] = []
+        for index, direction in enumerate(directions):
+            _deadline_remaining(deadline, clock)
+            minimum, label = _direction_minimum(certificate, direction)
+            serial_outcomes.append((minimum, label))
+            if progress is not None:
+                progress(index, minimum, label)
+            _deadline_remaining(deadline, clock)
+        return tuple(serial_outcomes)
+
+    max_workers = min(workers, len(directions))
+    pool = ProcessPoolExecutor(
+        max_workers=max_workers,
+        mp_context=mp.get_context("fork"),
+        initializer=_install_threshold_sweep,
+        initargs=(certificate,),
+    )
+    in_flight_limit = 2 * max_workers
+    pending: dict[Future[tuple[int, Fraction, str]], int] = {}
+    landed: dict[int, tuple[Fraction, str]] = {}
+    next_index = 0
+    complete = False
+
+    def submit_available() -> None:
+        nonlocal next_index
+        _deadline_remaining(deadline, clock)
+        while next_index < len(directions) and len(pending) < in_flight_limit:
+            future = pool.submit(_shared_direction_minimum, next_index)
+            pending[future] = next_index
+            next_index += 1
+
+    try:
+        submit_available()
+        while pending:
+            timeout = _deadline_remaining(deadline, clock)
+            done, _ = wait(tuple(pending), timeout=timeout, return_when=FIRST_COMPLETED)
+            if not done:
+                raise ThresholdSweepDeadlineError(
+                    "threshold sweep reached its absolute deadline"
+                )
+            batch_error: Exception | None = None
+            for future in sorted(done, key=pending.__getitem__):
+                submitted_index = pending.pop(future)
+                try:
+                    index, minimum, label = future.result()
+                except Exception as error:  # noqa: BLE001 -- retain other landed results first
+                    if batch_error is None:
+                        batch_error = error
+                    continue
+                if index != submitted_index:
+                    raise RuntimeError("threshold sweep worker returned the wrong direction")
+                landed[index] = (minimum, label)
+                if progress is not None:
+                    try:
+                        progress(index, minimum, label)
+                    except Exception as error:  # noqa: BLE001 -- retain this completed batch
+                        if batch_error is None:
+                            batch_error = error
+            if batch_error is not None:
+                raise batch_error
+            _deadline_remaining(deadline, clock)
+            submit_available()
+
+        ordered_outcomes = tuple(landed[index] for index in range(len(directions)))
+        complete = True
+        return ordered_outcomes
+    finally:
+        for future in pending:
+            future.cancel()
+        if complete:
+            pool.shutdown(wait=True, cancel_futures=True)
+        else:
+            pool.terminate_workers()
 
 
-def verify_threshold(certificate: ThresholdCertificate, *, workers: int = 1) -> Verdict:
+def verify_threshold(
+    certificate: ThresholdCertificate,
+    *,
+    workers: int = 1,
+    progress: ThresholdSweepProgress | None = None,
+    deadline: float | None = None,
+    clock: ThresholdSweepClock = time.perf_counter,
+) -> Verdict:
     """Decide Conditions 1', 2', 3, 4 and 5'. Exact; never short-circuits."""
 
     conditions = list(closed_form_threshold_conditions(certificate))
     worst: Fraction | None = None
     worst_label: str | None = None
-    for minimum, label in sweep_all_threshold_directions(certificate, workers=workers):
+    for minimum, label in sweep_all_threshold_directions(
+        certificate,
+        workers=workers,
+        progress=progress,
+        deadline=deadline,
+        clock=clock,
+    ):
         if worst is None or minimum < worst:
             worst, worst_label = minimum, label
     conditions.append(
@@ -910,6 +1043,9 @@ __all__ = [
     "Terms",
     "ThresholdAtom",
     "ThresholdCertificate",
+    "ThresholdSweepClock",
+    "ThresholdSweepDeadlineError",
+    "ThresholdSweepProgress",
     "absolute_expansion_sum",
     "charge_grid",
     "charge_grid_direct",

@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **8** in_progress, **17** ready, **11** tentative, **64** blocked, **57** stopped, **169** complete.
+- **7** in_progress, **17** ready, **11** tentative, **64** blocked, **57** stopped, **170** complete.
 
 - **23 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -53,7 +53,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
-| agenda-035 | `BC-335` | in_progress | 1 | correctness | tool_validation | Does the standalone explainer state the point-only, threshold and dilation-limit proofs accurately, and does… | `think-0zc1` |
 | agenda-035 | `BC-331` | ready | 2 | insight | research | Does full-support pricing expose an absent D4 site orbit missed by the first 32 positive dual rows? | `think-lkvd` |
 | agenda-035 | `BC-333` | ready | 2 | efficiency | measurement_validation | Are the selected blocks producing reusable evidence without repeated parsing, gates or source repair? | `think-1ydi` |
 
@@ -123,7 +122,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-028 | `BC-270` | 0 | — | no | A natural finite same-domain geometric baseline and exact LP survival witness are missing; the accepted central… |
 | agenda-028 | `BC-271` | 1 | `BC-270`, `BC-261` | no | — |
 | agenda-031 | `BC-306` | 1 | — | no | Fresh forward launch allocation after the owner-prioritized BC-309 pilot; exp-134 was never invoked and its original… |
-| agenda-035 | `BC-329` | 1 | `BC-325` | yes | The existing adaptive refinement CLI does not execute the declared fixed-core packet and has no process deadline. Child… |
+| agenda-035 | `BC-329` | 1 | `BC-325` | yes | The separate full-shape calibration instrument and controls are not admitted. The runner now bounds parent preflight… |
 | agenda-035 | `BC-337` | 2 | `BC-326` | yes | No admitted source-bound constructor derives K_TR from all 181 frames and eight signed SAT axes per frame, and no… |
 | agenda-035 | `BC-327` | 2 | `BC-325` | yes | Multiplicity semantics are not admitted across the producer, loader, capacity reader and both coverage routes; the… |
 | agenda-035 | `BC-330` | 2 | — | no | The restricted-domain threshold gate and complete matched point baseline are not admitted. |
@@ -183,7 +182,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-031 | paused |  |  |  | 1 | 2 | 2 | 5 |
 | agenda-032 | completed |  |  |  |  |  | 6 | 6 |
 | agenda-033 | completed |  |  |  |  | 1 | 8 | 9 |
-| agenda-035 | active | 1 | 2 |  | 4 |  | 6 | 13 |
+| agenda-035 | active |  | 2 |  | 4 |  | 7 | 13 |
 
 ## By program
 
@@ -281,10 +280,10 @@ Open frontier: `BC-261`, `BC-262`, `BC-263`, `BC-264`, `BC-266`, `BC-267`, `BC-2
 | agenda-035 | `BC-333` | ready | Are the selected blocks producing reusable evidence without repeated parsing, gates or source… |
 | agenda-035 | `BC-334` | complete | Can the selected incremental architecture be rendered as a self-contained explainer whose headline… |
 | agenda-035 | `BC-336` | complete | Can the current explainer be labeled v0.4.0 with a concise, source-bound history of the v0.3.0 and… |
-| agenda-035 | `BC-335` | in_progress | Does the standalone explainer state the point-only, threshold and dilation-limit proofs accurately,… |
+| agenda-035 | `BC-335` | complete | Does the standalone explainer state the point-only, threshold and dilation-limit proofs accurately,… |
 | agenda-035 | `BC-337` | blocked | Does substituting the exact TR all-owner-incompatible centre-space obstacle K_TR for the control… |
 
-Open frontier: `BC-327`, `BC-329`, `BC-330`, `BC-331`, `BC-333`, `BC-335`, `BC-337`.
+Open frontier: `BC-327`, `BC-329`, `BC-330`, `BC-331`, `BC-333`, `BC-337`.
 
 ### `n11-density-stationarity-trump-capture`
 

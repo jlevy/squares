@@ -40,6 +40,108 @@ def test_deployment_waits_for_the_cross_browser_loading_checks() -> None:
     assert any("devtools.check_math_loading" in step.get("run", "") for step in checks["steps"])
 
 
+def test_pages_runs_real_math_failure_controls_before_drawing_the_pdf() -> None:
+    """The real-browser controls must run, rather than silently taking their default skip."""
+    workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))
+    job = workflow["jobs"]["build"]
+    steps = job["steps"]
+    test_path = "tests/test_pdf_math_browser.py"
+    controls = [
+        (index, step) for index, step in enumerate(steps) if test_path in step.get("run", "")
+    ]
+    assert len(controls) == 1
+    index, step = controls[0]
+    assert job["defaults"]["run"]["working-directory"] == "packing"
+    assert step["env"]["SQPACK_PDF_MATH_BROWSER"] == "1"
+    assert shlex.split(step["run"]) == [
+        "uv",
+        "run",
+        "--frozen",
+        "--group",
+        "dev",
+        "pytest",
+        "-q",
+        test_path,
+    ]
+    assert not step.get("if")
+    assert not step.get("continue-on-error")
+    downloads = [
+        before
+        for before, candidate in enumerate(steps)
+        if candidate.get("uses", "").startswith("actions/download-artifact@")
+        and candidate["with"] == {"name": "prepared-page", "path": "packing/site"}
+    ]
+    installs = [
+        before
+        for before, candidate in enumerate(steps)
+        if "playwright install --only-shell chromium" in candidate.get("run", "")
+    ]
+    draws = [
+        after
+        for after, candidate in enumerate(steps)
+        if "devtools.render_explainer_pdf --update" in candidate.get("run", "")
+    ]
+    assert downloads
+    assert installs
+    assert draws
+    assert max(downloads + installs) < index < min(draws)
+    assert (REPO / "packing" / test_path).is_file()
+    for event in ("push", "pull_request"):
+        assert any(
+            fnmatchcase(f"packing/{test_path}", pattern)
+            for pattern in workflow["on"][event]["paths"]
+        ), f"{event}: editing the browser controls must run them"
+
+
+def test_pages_checks_the_pdf_it_uploads_and_retains_mismatch_evidence() -> None:
+    """A later pair of fresh draws must not stand in for the artifact being published."""
+    workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))
+    steps = workflow["jobs"]["build"]["steps"]
+    module = "devtools.render_explainer_pdf"
+    commands = [
+        (index, shlex.split(line))
+        for index, step in enumerate(steps)
+        for line in step.get("run", "").splitlines()
+        if f"python -m {module} " in line
+    ]
+    assert len(commands) == 2, (
+        "the PDF must be drawn once and then checked without rewriting it"
+    )
+    (draw_index, draw), (check_index, check) = commands
+    assert draw[draw.index(module) + 1 :] == ["--update"]
+    assert check[check.index(module) + 1 :] == [
+        "--check-artifact",
+        "--diagnostics-dir",
+        "/tmp/explainer-pdf-check",
+    ]
+    assert not steps[check_index].get("if"), "the artifact check must run on every build"
+    assert not steps[check_index].get("continue-on-error")
+    uploads = [
+        index
+        for index, step in enumerate(steps)
+        if step.get("uses", "").startswith("actions/upload-pages-artifact@")
+    ]
+    assert len(uploads) == 1
+    assert draw_index < check_index < uploads[0]
+    assert steps[uploads[0]]["with"]["path"] == "packing/site"
+    diagnostics = [
+        (index, step)
+        for index, step in enumerate(steps)
+        if step.get("with", {}).get("path") == "/tmp/explainer-pdf-check"
+    ]
+    assert len(diagnostics) == 1
+    index, diagnostic_step = diagnostics[0]
+    assert check_index < index < uploads[0]
+    assert diagnostic_step["if"] == "failure()"
+    assert re.fullmatch(r"actions/upload-artifact@[0-9a-f]{40}", diagnostic_step["uses"])
+    assert diagnostic_step["with"] == {
+        "name": "explainer-pdf-check",
+        "path": "/tmp/explainer-pdf-check",
+        "if-no-files-found": "ignore",
+        "retention-days": 7,
+    }
+
+
 def test_every_browser_checks_the_same_prepared_publication() -> None:
     """A raw re-render in one job would leave the actual published boxes untested."""
     workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))

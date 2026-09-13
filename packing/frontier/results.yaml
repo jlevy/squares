@@ -1462,10 +1462,12 @@ results:
         frozen T-025 atoms; no atom was re-optimised and no new theorem was needed,
         since Conditions 1, 1', 2' and 3 are untouched by common scaling and Condition
         5' is preserved by inverse dilation of placements exactly as Condition 5 is.
-        What the same measurement shows is where this route ends: the rescaled budget is
-        5483661432/498684619 = 10.996251384 against the eleven a certificate may not
-        reach, so a further doubling of the net would have to be paid for out of 0.0037
-        of budget, and net refinement alone is near exhausted on these atoms.
+        For this fixed certificate, the rescaled budget is 5483661432/498684619 =
+        10.996251384 against the eleven a certificate may not reach, leaving about
+        0.0037 of budget. The measured 720- and 1440-step nets share the same crossing
+        shrink and least unscaled charge. These finite measurements leave the effect of
+        another net, a different core side, re-optimized weights, changed sites, and
+        richer charge atoms unresolved.
       scored: '2026-09-09'
       by: repository replay of the two-route retention gate and the corollary tool, with a mapped source-distinct review
     novelty: apparently-novel

@@ -88,12 +88,13 @@ from __future__ import annotations
 
 import multiprocessing as mp
 import sys
-from collections.abc import Iterator
-from concurrent.futures import ProcessPoolExecutor
+from collections.abc import Callable, Iterator
+from concurrent.futures import Future, ProcessPoolExecutor
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import partial
 from math import lcm
+from queue import Empty, SimpleQueue
 
 import numpy as np
 from numpy.typing import NDArray
@@ -445,12 +446,18 @@ def _search_directions(
     *,
     prune_at: int | None,
     workers: int,
+    progress: Callable[[DirectionOutcome], None] | None = None,
 ) -> list[DirectionOutcome]:
     """Every rotation's outcome in net order, stopping after the first refutation.
 
-    ``workers > 1`` forks a pool on Linux; the outcomes are consumed in net order and the
-    pool is shut down at the first refutation, so the list is the same whichever
-    schedule ran it.
+    ``workers > 1`` forks a pool on Linux. A bounded set of futures lets ``progress``
+    observe directions in completed batches without waiting behind an earlier slow
+    direction, while the returned list retains net order and ends at the first refutation
+    in that order. A failure is raised once every earlier direction has resolved, unless
+    an earlier refutation has already put it beyond the retained prefix. On failure or
+    early refutation, queued work is cancelled and worker termination is requested. A
+    caller that needs a hard process-tree guarantee must own an outer process boundary
+    and reap that group.
     """
     outer = Interval.of(certificate.outer_side)
     square = Interval.of(certificate.square_side)
@@ -459,19 +466,87 @@ def _search_directions(
     if workers <= 1 or len(rotations) < 2 or not sys.platform.startswith("linux"):
         for rotation in rotations:
             outcomes.append(task(rotation))
+            if progress is not None:
+                progress(outcomes[-1])
             if outcomes[-1].status == "refuted":
                 break
         return outcomes
-    pool = ProcessPoolExecutor(
-        max_workers=min(workers, len(rotations)), mp_context=mp.get_context("fork")
-    )
+    max_workers = min(workers, len(rotations))
+    pool = ProcessPoolExecutor(max_workers=max_workers, mp_context=mp.get_context("fork"))
+    in_flight_limit = 2 * max_workers
+    pending: dict[Future[DirectionOutcome], int] = {}
+    completion_queue: SimpleQueue[Future[DirectionOutcome]] = SimpleQueue()
+    landed: dict[int, DirectionOutcome] = {}
+    failures: dict[int, Exception] = {}
+    next_index = 0
+    cutoff = len(rotations)
+    complete = False
+
+    def submit_available() -> None:
+        nonlocal next_index
+        while (
+            next_index < len(rotations)
+            and next_index <= cutoff
+            and len(pending) < in_flight_limit
+        ):
+            future = pool.submit(task, rotations[next_index])
+            pending[future] = next_index
+            future.add_done_callback(completion_queue.put)
+            next_index += 1
+
     try:
-        for outcome in pool.map(task, rotations):
-            outcomes.append(outcome)
-            if outcome.status == "refuted":
-                break
+        submit_available()
+        while pending:
+            done = [completion_queue.get()]
+            while True:
+                try:
+                    done.append(completion_queue.get_nowait())
+                except Empty:
+                    break
+            for future in done:
+                if future not in pending:
+                    continue
+                index = pending.pop(future)
+                try:
+                    outcome = future.result()
+                except Exception as error:  # noqa: BLE001 -- retain other landed results first
+                    failures.setdefault(index, error)
+                    continue
+                landed[index] = outcome
+                if progress is not None:
+                    try:
+                        progress(outcome)
+                    except Exception as error:  # noqa: BLE001 -- drain this landed batch
+                        failures.setdefault(index, error)
+                if outcome.status == "refuted":
+                    cutoff = min(cutoff, index)
+
+            if cutoff < len(rotations):
+                for future, index in tuple(pending.items()):
+                    if index > cutoff:
+                        future.cancel()
+                        del pending[future]
+
+            retained_failures = [index for index in failures if index <= cutoff]
+            if retained_failures:
+                first_failure = min(retained_failures)
+                earlier_resolved = all(
+                    index in landed or index in failures for index in range(first_failure)
+                )
+                if earlier_resolved:
+                    raise failures[first_failure]
+            submit_available()
+
+        stop = len(rotations) if cutoff == len(rotations) else cutoff + 1
+        outcomes.extend(landed[index] for index in range(stop))
+        complete = cutoff == len(rotations)
     finally:
-        pool.shutdown(wait=True, cancel_futures=True)
+        for future in pending:
+            future.cancel()
+        if complete:
+            pool.shutdown(wait=True, cancel_futures=True)
+        else:
+            pool.terminate_workers()
     return outcomes
 
 
@@ -481,13 +556,16 @@ def verify_threshold_by_intervals(
     enclose: bool = False,
     directions: tuple[str, ...] | None = None,
     workers: int = 1,
+    progress: Callable[[DirectionOutcome], None] | None = None,
 ) -> ThresholdIntervalVerdict:
     """Decide the certificate; ``enclose`` also pins the least charge.
 
     ``directions`` restricts ``Condition 5'`` to the named labels of the doubled net (a
     sub-net decides a weaker statement and is for controls, not for claims). ``workers``
     is the number of forked processes the directions are shared among; the verdict does
-    not depend on it.
+    not depend on it. In parallel, ``progress`` receives each outcome drained by the
+    coordinator in completion order. After an early refutation, the scheduler cancels
+    or discards work beyond the deterministic net prefix.
     """
     if any(t >= 1 for t in certificate.half_tangents):
         raise IntervalInputError(
@@ -511,6 +589,7 @@ def verify_threshold_by_intervals(
         rotations,
         prune_at=None if enclose else data.scale,
         workers=workers,
+        progress=progress,
     )
     # A refutation is a float upper bound below 1 at a provably admissible centre: a
     # direction the pruned search refuted outright, or -- under ``enclose``, where the
