@@ -14,6 +14,10 @@ existing refinement CLI performs a different, adaptive experiment.
 No scientific target, coverage sweep, or certificate replay was run for this preflight.
 No repository file was changed.
 
+The original arithmetic and conditional verdict are retained below.
+The [September 12 addendum](#stack-review-addendum-2026-09-12) records the later runner
+review and the calibration gates that still prevent target registration.
+
 ## 1. The Candidate and the Question
 
 A **core** is a closed square of side `B` inside the container `[0,L]^2`. Its
@@ -250,8 +254,8 @@ decisions:
    source identities, and retained logs.
 6. A supervised worker-process deadline and atomic process-level partial output,
    including the normalized gate and the dilation record’s additional source replay.
-   The parent-side Git, runtime, and source preflight currently precedes that clock and
-   must be bounded before target registration.
+   The maintained runner includes parent-side Git, runtime, and source preflight in the
+   invocation clock; the addendum records its reviewed enforcement boundary.
    Any staged deadlines must be fixed before the target; an incomplete stage cannot
    silently acquire another budget.
 7. The outcome table below and the scope of any rejection.
@@ -274,18 +278,20 @@ project runtime, and complete local implementation manifest; keeps raw and exact
 submissions bounded; retains coordinator-observed direction rows; checks the normalized
 candidate through exact, interval, and dilation routes; and rejects incomplete evidence
 as scientifically unresolved.
-Its target-free controls currently pass 156 tests with three platform skips, and an
-independent source review found no acceptance-safety blocker in the current
-implementation. That establishes the implementation checkpoint only.
+The initial implementation checkpoint was reported as 156 target-free tests passing with
+three platform skips and an independent source review finding no acceptance-safety
+blocker. Those figures describe that checkpoint; the addendum names the later review and
+its test selection.
 
 The older `packing/devtools/measure_threshold_net_refinement.py:main` remains an
 adaptive core-sweep and bisection tool.
 Running it with `--nets 2880` does not execute this one fixed packet.
 Before the fixed-packet runner is admitted for BC329, the separate full-shape
 calibration must pass three host runs and source-distinct readback.
-The parent preflight must gain a bounded clock, and partial interval and dilation
-receipts must name their exact published direction sets.
-None of those remaining tasks asks the BC329 coverage question.
+Parent preflight now has a bounded clock, and partial interval and dilation receipts
+name their exact published direction sets.
+The separate calibration instrument and its controls remain unadmitted.
+Calibration does not ask the BC329 coverage question.
 
 The raw sweep should precede the normalized retention gate.
 Feeding the original weights directly to `decide_threshold_certificate` and treating its
@@ -342,6 +348,51 @@ BC329 coverage, normalization by its measured minimum, two-route retention, and
 dilation-source replay remain unrun.
 The packet becomes suitable for prospective registration only after the remaining
 admission tasks above are resolved.
+
+## Stack Review Addendum, 2026-09-12
+
+The mathematical preflight still supports the conditional packet described above.
+Independent review accepts the maintained runner implementation at
+`421c344545873647dd26f856320d93dbfd59413a` after the following repairs:
+
+- The source manifest compares each retained file’s bytes with its frozen Git blob.
+  A clean index report alone cannot hide modified source through Git’s index flags.
+- Parent preflight and the supervised worker use deadlines measured from the same parent
+  invocation. The output-directory guard gives each Git subprocess the remaining external
+  allowance and checks the clock before and after the call.
+- Every partial route receipt names its exact published direction set, including the
+  interval and dilation routes.
+  Independent readers check those sets against the retained direction records.
+- SIGINT and repeated termination signals preserve the launched child’s identity and run
+  the process-group cleanup path.
+  Deadline checks bracket process launch.
+- The worker checks the scientific deadline after final publication and revokes a
+  completed acceptance if that write crosses the deadline.
+  The reader also refuses a complete receipt whose recorded clocks exceed the allowance.
+
+The external enforcement boundary excludes time blocked inside the operating system’s
+process-launch call, checks the clock immediately before and after it, and allows the
+declared termination grace.
+The output-directory guard runs before a safe result location exists, so a timeout there
+creates no result directory or receipt.
+These limits are stated in the runner’s deadline contract.
+
+The final `test_fixed_core_packet.py` suite passed 128 tests in 32.25 seconds; Ruff’s
+check and format check passed, and BasedPyright reported no errors or warnings.
+The source-distinct reviewer separately passed 24 source and partial-set controls, 19
+helper controls, and 11 final deadline and signal regressions; these selections overlap
+the implementation tests and are not an additional disjoint test count.
+The runner and tests are
+[`fixed_core_packet.py`](../../../packing/devtools/fixed_core_packet.py) and
+[`test_fixed_core_packet.py`](../../../packing/tests/test_fixed_core_packet.py).
+
+This closes the runner source-review repairs and leaves calibration admission open.
+The separate `fixed-core-packet-calibration/v1` instrument must be admitted, run three
+times on the intended host with the full 14,404-record shape, and pass source-distinct
+readback before BC329 is prospectively registered.
+None of those calibration runs occurred in this review.
+BC329 coverage, measured-minimum normalization, two-route retention, and dilation-source
+replay remain unrun; no stronger lower bound or scientific rejection is recorded.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

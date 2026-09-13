@@ -1,8 +1,8 @@
 # N11: Daytime Strategy Blocks and Parallel Explainer Update
 
-**Active plan, September 10, 2026.** This plan replaces the uninterrupted overnight
-schedule with shorter blocks that can start and stop during the day.
-Each research block gets its own session clock, falsifiable output, stop rule, and
+**Active plan, September 10, 2026; updated September 12.** This plan replaces the
+uninterrupted overnight schedule with shorter blocks that can start and stop during the
+day. Each research block gets its own session clock, falsifiable output, stop rule, and
 closeout. A later block is selected from the evidence produced by the earlier ones; gaps
 between blocks consume no scientific budget.
 
@@ -14,7 +14,7 @@ The research branch is `codex/n11-daytime-strategy`, based on merged PR139 at
 
 A separate W8 documentation lane runs from `codex/n11-explainer-current-bound`, also
 based directly on the PR139 merge.
-It is divided into three bounded blocks and has its own pull request and review.
+It is divided into bounded blocks and has its own pull request and review.
 Documentation work does not consume a research target’s allowance and does not change a
 scientific result.
 
@@ -92,7 +92,7 @@ The order reflects present source readiness and expected information value.
 It is a working allocation, not a claim that one mathematical direction is intrinsically
 more productive than another.
 Strategy intake and BC326 are complete and retained below as history.
-BC329 is the next active direct attempt to improve the global lower bound.
+BC329 is the next planned direct attempt to improve the global lower bound.
 BC337 is a secondary parent-conditioning lane that may proceed in parallel while BC329’s
 runner is being admitted.
 
@@ -284,13 +284,15 @@ of sites, thresholds, relative weights, core side, and net under every common re
 
 The existing refinement CLI runs adaptive core sweeps and bisection and does not execute
 this single fixed packet.
-A maintained fixed-core runner is now implemented on the publication stack.
-It binds its source and runtime, runs bounded raw and exact schedulers, records
-coordinator-observed direction evidence, and supervises the worker process group under a
-hard deadline. Target-free controls pass and an independent source review found no
-acceptance-safety blocker in the current implementation.
-The parent-side Git, runtime, and source preflight still needs a bounded clock before
-target registration.
+A maintained fixed-core runner is implemented on the publication stack.
+It binds its source bytes to the frozen Git revision and runtime, runs bounded raw and
+exact schedulers, and records the exact coordinator-observed direction sets for every
+route. Its parent preflight and supervised worker share the invocation clock; deadline
+expiry through publication and readback revokes acceptance.
+The September 12
+[preflight addendum](../../reviews/review-2026-09-10-n11-bc329-packet-preflight.md#stack-review-addendum-2026-09-12)
+records the target-free review and controls, including the process-launch enforcement
+boundary and termination grace.
 Atomic replacement prevents a reader from seeing half-written JSON after an ordinary
 worker failure or termination; the runner makes no host-crash or power-loss durability
 claim.
@@ -301,9 +303,9 @@ acceptance. Three fresh host runs measure operational overhead, effective worker
 route, clocks, sampled process-group RSS, artifact bytes, and deadline headroom.
 Because the fixture is deliberately easy, its timing does not bound BC329’s computation.
 A source-distinct reader must accept those controls before registration.
-Partial interval and dilation receipts must also name the exact direction set bound to
-each published checkpoint; their current count-and-last form cannot yield a scientific
-acceptance, but it is less precise for interrupted-run recovery.
+The separate calibration instrument and its controls remain unadmitted; none of the
+three full-shape host runs or their independent readbacks has occurred.
+The implemented runner repairs do not admit BC329 execution.
 
 Then register one hypothesis and one experiment, freeze the packet and normalization
 rule, measure `m_c`, and run the normalized object through the complete exact route, the
@@ -429,8 +431,8 @@ demand; without that order, the single normalization does not cover the count th
 
 ## Parallel Documentation Blocks
 
-The documentation lane stays reviewable independently on PR148. Its three blocks have
-separate evidence and stop conditions:
+The documentation lane stays reviewable independently on PR148. Its blocks have separate
+evidence and stop conditions:
 
 | Block | Time | Deliverable and stop rule |
 | --- | --- | --- |
@@ -439,17 +441,24 @@ separate evidence and stop conditions:
 | D2b: edition and history | 30–45 min | Label the current explainer `v0.4.0`, retain `v0.3.0` as the 3.81 edition, and render a two-entry history near the top. Recover the date each label was first applied to this explainer from Git rather than substituting a theorem or deployment date; bind the version and dates to focused tests. |
 | D3: independent review and stacking | 30–60 min | Independently check the mathematics, prose and rendered output, correct findings, then stack the docs PR on the research checkpoint. Readiness requires green checks on the stacked head; inherited base failures are recorded rather than attributed to the docs change. |
 
-D1, D2, D2b and D3 are complete on PR148 at `989fd544`. The pull request is open,
-non-draft, mergeable into `main`, and all hosted checks pass.
-Its mathematical, prose and rendering review includes 135 focused tests, static
-analysis, prepared-output drift, the deterministic 20-page PDF and font check, and the
-complete 324-case atlas gate.
+D1, D2, D2b and D3 completed their historical checkpoint on PR148 at `989fd544`,
+including its required hosted checks.
+That checkpoint retained 135 focused tests, static analysis, prepared-output drift, PDF
+and font checks, and the complete 324-case atlas gate.
+The September 12 mathematical, clarity and integration review adds corrections from
+`e8baa8ff` and checks the 22-page edition.
+Its exact source revisions and rendering evidence are recorded in the
+[T025/T026 review addendum](../../reviews/review-2026-09-10-t025-t026-verifiable-claims.md#stack-review-addendum-2026-09-12).
+BC335 records the completed historical milestone; the new review supplies evidence for
+the later stack revisions.
 
-PR149 is the separate page-diagnostic layer above PR148. It is open, non-draft and
-mergeable at `4d00ab68`; every hosted check passes, as does its unrestricted full
-research checkpoint.
-The BC329 runner and later evidence corrections continue as draft PR156 above PR149.
-Those later layers do not reopen the completed explainer milestone.
+PR149 is the separate page-diagnostic layer above PR148. Its `4d00ab68` checkpoint
+passed hosted checks and an unrestricted full research checkpoint.
+The September 12 review correction `c699a7e3` adds object-header and explicit
+render-count controls and reports exact byte-prefix relationships without inferring
+truncation. The BC329 runner and later evidence corrections are retained in PR156 above
+PR149. Every later source revision requires matching validation; earlier green
+checkpoints do not certify the later stack.
 
 The blocks share one documentation branch because they revise one reader artifact.
 Their costs and outcomes remain distinct in the agenda and beads.
