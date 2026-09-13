@@ -5,7 +5,7 @@ title: Verify the clean Pack and Animate package before merge
 kind: task
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-phase-4
@@ -17,10 +17,10 @@ dependencies:
     target: is-01m2ckzy45b1b28pvt1nbh4gdm
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-13T05:31:47.352Z
-updated_at: 2026-09-13T21:23:42.295Z
+updated_at: 2026-09-13T21:31:09.119Z
 ---
 Run the workbench plan's complete Pack/Animate acceptance journey on a pinned integrated commit after migration and consumer removal. Check package build/test/lint/type/benchmark commands, arbitrary-n Pack, solver-free Animate/capture, versioned IO, strict source coverage, responsive/accessibility behavior, no live spike consumers, and deterministic self-contained Pages output under /squares/workbench/. Require review findings repaired or explicitly dispositioned with evidence, records/required PR lanes and full checkpoint passing. Record only implemented feature claims; keep Search hidden until phase 5. This creates a reviewable merge decision, not automatic merge authorization.
 
 ## Notes
 
-2026-09-13 PR #160 checkpoint cdcd5149: all GitHub CI checks pass, branch merges into main, and package build/lint/typecheck/112 Node tests plus focused browser checks pass. Keep draft and bead open: versioned Pack receipt/replay (think-adlf), strict retained-source graduation (think-4ylo), obsolete-consumer retirement (think-cqfc), complete O1/O2/O4/O6/O7 review and full checkpoint remain. Bounded Search preview is visible and labelled experimental, as permitted by governing plan; historical keep-hidden phrase is superseded.
+2026-09-13 PR #160 checkpoint cdcd5149: all 12 active GitHub CI checks pass, including required packing aggregate, frontend, build and suite. Local broad push tier passed Ruff, BasedPyright, browser floor and 5178 Python tests; seven process/loopback tests failed only in the restricted sandbox, then all seven passed with host permissions. Keep draft and bead open: versioned Pack receipt/replay (think-adlf), strict retained-source graduation (think-4ylo), obsolete-consumer retirement (think-cqfc), full O1/O2/O4/O6/O7 review and final checkpoint remain. Bounded Search preview is visible and labelled experimental per governing plan.
