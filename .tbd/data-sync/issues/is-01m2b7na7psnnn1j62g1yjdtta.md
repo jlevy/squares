@@ -5,7 +5,7 @@ title: The page can tell a packing from an overlap, and resolve one into the oth
 kind: feature
 status: open
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -20,8 +20,10 @@ dependencies:
   - type: blocks
     target: is-01m2chr65cx0jhfd1gsmx3r31y
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
+child_order_hints:
+  - is-01m2dvhzr8f87mgtghjv28rn55
 created_at: 2026-09-12T16:36:56.180Z
-updated_at: 2026-09-13T05:43:46.788Z
+updated_at: 2026-09-13T17:03:07.527Z
 ---
 Phase 2: expose one fail-closed count/finite/pair/wall validity contract and bounded Resolve operation shared by Pack and the headless harness. Preserve raw and repaired states, score the geometry actually displayed, report tolerance/work/termination, and validate the repaired output. Translation-only repair does not guarantee improvement, convergence or global feasibility. Resolve is an explicit action or phase, not work repeated on every paint. Acceptance: valid retained controls and invalid/nonfinite/count/wall/pair controls agree across clients; budget exhaustion is explicit; a repaired score never labels a raw frame. Historical speed and success observations are evidence to reconcile, not required outcomes.
 
