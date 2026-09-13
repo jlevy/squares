@@ -5,13 +5,13 @@ title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 10
+version: 11
 labels: []
 dependencies:
   - type: blocks
     target: is-01m2e2kbf4hhhr7j158zctpbzn
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-13T23:44:40.664Z
+updated_at: 2026-09-13T23:52:35.551Z
 ---
 On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 
@@ -40,3 +40,5 @@ The later PR157 correction preserves additional quoted /Rect windows, but those 
 September 13 new retained occurrence: Pages run34774787868 attempt1 failed on PR157 cadbf7e149b65215724daf813add78d80879d327 at the stored-artifact vs fresh-draw check. All six browser/math failure controls passed first. Actual reference.pdf/replay.pdf and neutral report were downloaded before any retry from explainer-pdf-check artifact10323137895 into /private/tmp/pr157-ci-cadbf7e1/pages-artifacts/explainer-pdf-check/pdf-check-644lkxd1. Both raw/normalized lengths843157; normalized first differing byte524772 in object156. Reference SHA256 ea8a21929c8e7fe9b4a401b22e521e4fae9351617d0fb317ee5144a70f17b70e; replay e76ca05a908f8beef6bbea6a6d6237c951b38ca1a0d480499d304b5ee78fea32. Exact prepared HTML also retained. Independent byte/stream and content/visual reviews are in progress; cause is not yet established. No retry or normalization change has been made.
 
 September 13 PR125 occurrence after refreshing onto main: Pages run 34790001091 build failed at --check-artifact, with both normalized PDFs 843168 bytes and first byte difference 511882 in object 137. Diagnostics were downloaded before any rerun from artifact explainer-pdf-check/pdf-check-j5f4o0dc into /private/tmp/squares-pr125-pdf-diagnostics; SHA256 reference d141f788ca6622d6b39e07aff8cf568749683ba77ad247643e156b8b54a52b15, replay 3adda4a7a8db72c43e74d0183363392ce4e13961e737b0ba759f70d6ba4dfc12. The report states cause unknown. No rerun or root-cause claim made.
+
+PR125 run 34790001091 attempt 2 completed successfully after the failure pair had been downloaded. This passing retry does not establish a cause or resolve D-490.
