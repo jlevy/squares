@@ -5,7 +5,7 @@ title: "Address review: PR #157 — weighted five-site threshold atoms, changes 
 kind: task
 status: open
 priority: 1
-version: 21
+version: 22
 labels:
   - n11
 dependencies: []
@@ -30,7 +30,8 @@ child_order_hints:
   - is-01m2cv9dq93ydszsmkyhzjn1mf
   - is-01m2bmgw7cc1mqnmeb0h9wk3hk
   - is-01m2bmgwstxv2rcj2xpte71d2k
+  - is-01m2cx3155gpjrj1gvh6g2g89t
 created_at: 2026-09-13T07:38:03.630Z
-updated_at: 2026-09-13T07:39:31.162Z
+updated_at: 2026-09-13T08:10:40.164Z
 ---
 Owner review of PR157 at fa8c3b21 against merge base 236132e7, verdict: changes required. 16 findings (2 High, 12 Medium, 2 Low) plus a serialization repair format and a stack reordering to PR148 -> PR149 -> PR156 -> PR157. Review comment: https://github.com/jlevy/squares/pull/157#issuecomment-5648800000 (issue_comment.created 2026-09-13T07:36Z). Every finding gets an explicit disposition per tbd shortcut address-pr-review.
