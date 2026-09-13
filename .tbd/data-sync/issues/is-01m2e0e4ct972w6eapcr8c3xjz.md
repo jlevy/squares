@@ -3,9 +3,9 @@ type: is
 id: is-01m2e0e4ct972w6eapcr8c3xjz
 title: Publish the PR156 draft checkpoint with exact local gates and final hosted CI
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 21
+version: 22
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: codex@spud10.local
 labels:
@@ -31,8 +31,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-13T18:28:24.089Z
-updated_at: 2026-09-13T23:07:30.884Z
+updated_at: 2026-09-13T23:14:25.176Z
 started_at: 2026-09-13T18:35:26.795Z
+closed_at: 2026-09-13T23:14:25.175Z
+close_reason: Published PR156 at 2f8925b2 with origin/main merged, cost-first exact-head body, scoped local validation evidence, and final green hosted CI (required packing, suite, Pages and mergeability). PR intentionally remains draft because calibration profiles, integrated scientific admission and BC329 target are unrun. The separate macOS local pre-push EPERM/contention defect remains open as think-hsq6.
+resolution: null
+duplicate_of: null
 ---
 Review and commit durable reviews, run-sheet status, records, and accepted source changes; reconcile origin/main with the merge-upstream shortcut; run required push gate; push PR156 as draft; update body with unique cost, exact head, admitted/refused contracts and remaining gates; wait for final hosted CI and sync beads. Do not mark ready while coordinator and run-sheet admission remain refused.
 

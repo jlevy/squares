@@ -5,7 +5,7 @@ title: Review and integrate PR157 weighted threshold atoms into the reviewed sta
 kind: task
 status: in_progress
 priority: 1
-version: 34
+version: 35
 assignee: root
 delegate: root
 labels: []
@@ -35,7 +35,7 @@ child_order_hints:
   - is-01m2e2kbf4hhhr7j158zctpbzn
   - is-01m2e60sxv8kxk26am7ydbpceg
 created_at: 2026-09-13T07:16:00.865Z
-updated_at: 2026-09-13T22:15:25.672Z
+updated_at: 2026-09-13T23:45:53.991Z
 ---
 Review all PR157 code, mathematics, persisted formats, source replay, prose, and integration with PR148/149/156. Publish structured findings as a PR comment before delegating fixes using address-pr-review. Track dispositions, merge current stack ancestors, validate exact mathematics and end-to-end CI, push and verify final heads. No main merge or deployment.
 
@@ -68,3 +68,5 @@ September 13 20:15Z root checkpoint: optional trace and preserved original faile
 2026-09-13 21:13Z budget wrap checkpoint: user requested a resumable stop with context in beads, active plan, and PRs. PR148 b43d3011 and PR149 8d0a3ff2 reviews are posted. PR156 owner pushed clean reviewed local 9c56e901 to its draft PR and updated think-4ovs/body; standalone reachable rerun passed 5511, 9 skipped, but prior full --push failure remains and hosted Packing run 34782594805 suite/packing-required failed, cause pending owner diagnosis. PR157 remains at published 876c5945 plus four-file optional PDF control/treatment diagnostic diff; Sol implementation and Astra independent review accepted it (75 focused tests pass, Ruff/BasedPyright clean). Current required --push gate started 20:54:30Z and remains active in /private/tmp/pr157-pdf-control-push-artifacts; do not call it passed yet. Local Mac full-Chrome two-draw control and treatment both passed, earlier intermediate control failed; this is inconclusive, with Linux causal experiment pending. Proof Astra reviewed anticipated 9c/876 merge: no new math defect, but PR157 changes five PR156 source-closure paths and run-sheet binding fix think-99bz remains necessary. Root is preparing a plan checkpoint and PR157 body/comment; no combined merge, full current 74-step checkpoint, deployment, or scientific target has occurred.
 
 2026-09-13 21:30Z published wrap: PR157 source diagnostic commit a481ec24 and active-plan handoff d819d564e72d2a030dcf64d45e9d73b5b8800c4e pushed to claude/n11-w7-weighted-atom-admission; tree clean. Source pre-push 46/46 passed, 5478 behavioral tests passed/9 skipped in 1392.38s; final wording-focused exporter/workflow selection 75 passed. Plan-only pre-push 46/46 passed, 989 reachable tests passed in 288.71s. PR157 body updated at https://github.com/jlevy/squares/pull/157 and 20-item review disposition comment posted https://github.com/jlevy/squares/pull/157#issuecomment-5656274648. PR156 draft published at 9c56e901 but hosted Packing 34782594805 suite/packing-required failed; owner think-4ovs has exact status. Current PR157 ordinary CI on d819 is pending and final combined PR156 merge, INTEGRATION-01 run-sheet patch/rereview, full 74-step checkpoint and Pages remain open. No main merge/deploy/positive profile/BC329 target. User requested this budget-aware handoff; do not close parent as merge-ready.
+
+2026-09-13 23:45 UTC integration checkpoint: PR148 and PR149 were merged to main f2e24e07 and deployed; their PR bodies and closeout comments are corrected (PR149 also supersedes timer/glyph claims against D-491). PR156 is published at 2f8925b2 as a draft with hosted Packing/Pages green; independent PR156 review comment 5657094528 records the 23-path closure and unrun profiles/BC329. PR157 commits 53578447 (PR156 merge plus reviewed launch supplement) and 786154bd (dated plan checkpoint) are local, clean, and await push. Astra independent math review accepted combined MATH05 preflight ordering and 23-path source closure; Astra independently accepted supplement blob 81d30993 after adding packet-boundary control and exact-head gate reassessment. Local edit tier 45/74, records tier 32/74, and 12 focused MATH05 cases passed. Required --push gate is running on 786154bd; full/deep and hosted CI remain. PR157 body draft correctly counts 54 files, +6486/-815 against PR156 2f8925b2 but is not published until head push and validation receipts. No positive calibration profile, BC329 target, stage-3/4 admission, or PDF-cause claim. Clean patch-equivalent PR156 timing worktree and published PR148/149 closeout scratch moved to Trash; active PR156 research worktrees retained for their owner.

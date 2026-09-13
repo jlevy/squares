@@ -5,7 +5,7 @@ title: Publish reviewed BC303 T2 geometry as a separate draft exploration PR
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -20,7 +20,7 @@ dependencies:
     target: is-01m2eeb7adc0784cx52qfa9qtk
 parent_id: is-01m2b4ywxym84rgf3b254v4jw6
 created_at: 2026-09-13T18:33:27.415Z
-updated_at: 2026-09-13T22:31:28.845Z
+updated_at: 2026-09-13T23:20:16.462Z
 ---
 After independent acceptance, retain the exact BC303 T2 geometry analysis and rational controls as a scoped draft exploration in a separately costed PR stacked above the then-current research leaf. Preserve source revision, uncomputed charges, T1 reader refusal, unresolved V3 source, and all global-routing gaps. Do not report a new s(11) bound or a T2 verdict.
 
@@ -33,3 +33,5 @@ Scoped X-029 BC303 T2 geometry draft and exact control committed at isolated 4f8
 2026-09-13 review and cost draft: clean T2 geometry/method branch head 820e5355 (base 9c56e901) now adds durable source-distinct charge-bridge review linked from companion note, map, and Synopsis. Unique diff is 10 files, 1515 insertions, 1 deletion; no record ID reservations. Post-review documentation map covers 1169 files with links/footers; README pass; full-tree Flowmark check, frozen six-source diff, exact X-029 blob, and git diff check pass. Records tier 32/74 passed in 127.4s; edit tier 45/74 passed in 135.8s. Cost scope at /private/tmp/bc303-t2-task-cost-scope.md and cost-first draft PR body at /private/tmp/bc303-t2-pr-body-draft.md. Three SQLite-confirmed sibling T2 task roots have privacy-reduced native snapshots through 2026-09-13T20:38:55Z: 2591.663s summed agent-active, stack root live; coordinator, earlier geometry, T1, and PR156 excluded. No AgentSession declares branch attribution, so no branch token figure is claimed. The draft remains geometry/method only, with no atom charge run, T2 verdict, V3 alignment, global routing, or new n11 bound. Publication gates remain PR156 reachable-test diagnosis/base settlement, refreshed cost/diff, T2 --push/full, remote PR, and hosted CI.
 
 2026-09-13 independent exact-head publication review: ACCEPT clean 820e5355bdeaea122705e69f244c15725e66ec51 atop 9c56e9019b97be0511d5afe590790b362b93e9e4 as scoped T2 geometry/method draft. Unique diff 10 files +1515/-1, frozen six-source paths unchanged from 39714308, X-029 blob identical to reviewed 4f897b7b. README/Synopsis/map/ledger links and reviews consistent; no atom charge, C/S threshold determination, T2 verdict, V3 alignment, global routing, or new s(11) bound. Cost-first draft PR body faithfully describes three disjoint local task snapshots totaling 2591.663s through 20:38:55Z, excludes earlier work and branch token attribution, and says refresh after stack/base settle. Minor non-blocking duplicated 'closed-domain' in bridge note. Keep bead open until PR156 base settled, T2 push/full gate, stacked draft PR, and hosted CI.
+
+2026-09-13 23:19 UTC: clean T2 geometry branch codex/bc303-t2-draft-pr156-stack HEAD 92320abf is aligned above T1 ac6f39b8. Unique diff remains 10 geometry/method files (+1515/-1), no charge target. Exact-head --push gate is running; refreshed cost-first body, push, stacked draft PR and hosted CI remain open.
