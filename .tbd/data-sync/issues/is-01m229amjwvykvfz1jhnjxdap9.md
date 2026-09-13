@@ -5,13 +5,17 @@ title: Add restart, a best-known start, and a re-randomising random to the workb
 kind: task
 status: open
 priority: 2
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - packing
-dependencies: []
-parent_id: is-01m1z68hzazv9yjs9k7cddmf82
+  - workbench-roadmap
+  - workbench-phase-3
+dependencies:
+  - type: blocks
+    target: is-01m28p88qyq83eek30pja3np54
+parent_id: is-01m2b7n9tyq13n0zw4tkq4rfss
 created_at: 2026-09-09T05:12:53.595Z
-updated_at: 2026-09-09T05:12:53.595Z
+updated_at: 2026-09-13T05:43:47.984Z
 ---
-In packing/atlas/known-best/video/spikes/v2-transitions/. Restart beside play and pause, defined as returning to the beginning of whatever play would play: in Pack the initial arrangement with settings kept, in Animate the first step of the range. Distinct from the existing reset, which restores parameters to defaults. Add a best-known start that loads the record's own packing for the current n; its purpose is diagnostic rather than a common start, so report drift from the loaded record. Change random to re-randomise on every press with the seed shown and typeable; it is currently seeded from n and so gives the same scatter every time, which is right for reproducibility and wrong for exploring.
+Phase 3 package start/transport controls. Preserve existing restart and best-known behavior after checking the refreshed source; finish effective seed display/editing and a new random draw on request. Restart reproduces the current initial state/configuration, reset restores defaults, and random selects and records a new seed. Known-best start is optional and reports provenance/drift. Acceptance: shared Pack API receives effective configuration, restart is exact, repeatable random seeds replay, and controls do not inherit Animate transition semantics. Location: packages/workbench.

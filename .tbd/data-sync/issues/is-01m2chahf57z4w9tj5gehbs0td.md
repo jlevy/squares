@@ -5,7 +5,7 @@ title: Consolidate the workbench into a standalone package after cleanup
 kind: epic
 status: open
 priority: 1
-version: 7
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies:
@@ -17,10 +17,15 @@ parent_id: is-01m28p7h39vcykq99dgjmvwv98
 child_order_hints:
   - is-01m28p88qyq83eek30pja3np54
   - is-01m229an1fw0az9jgk0wcbg8c4
+  - is-01m2ckzwew659djys62jdwq0fc
+  - is-01m2ckzwx4cbwvs1ewec005c2k
+  - is-01m2ckzxahng9d3m19w6bp5hfa
+  - is-01m26vyt1neawsx8w6t295mwft
+  - is-01m24pase6ebcw856v6d8mbvnk
 created_at: 2026-09-13T04:45:03.321Z
-updated_at: 2026-09-13T05:09:53.042Z
+updated_at: 2026-09-13T05:42:43.489Z
 ---
-Owner-selected follow-on phase at TOP-LEVEL packages/workbench/. All workbench-specific app, geometry/simulation, animation, view, IO, probes/tests, build, benchmark and capture tooling live in this one package. Package-local Python adapters may call general-purpose sqpack libraries; no second application tree in packing/devtools or spikes. Temporary compatibility wrappers need named consumers/removal conditions. Integrate current parent and repair records/evidence/strategy/benchmark/seed first; complete strict tbd Python and TS/JS floor with full source coverage and behavioral CI. Extract a pure browser/Node run API and deterministic animation consumers, versioned catalogue inputs, standalone scripts and static Pages output. Update layout docs, Python discovery, browser configs, hooks/gate selection and Pages filters for the root package. Search remains deferred until package and obsolete-consumer cleanup complete.
+Phase 3 live-package consolidation under the governing workbench plan, after the small package shell (think-l9z0) and repair checkpoint (think-109t). Explicit children: think-nubm kernel; think-w0a1 data; think-ywj4 timeline/view/capture; think-6qxx mechanism registry; think-883t trace UI; think-tcns headless benchmark; think-g0lh final app/tool/build consumer migration. Related mode/start adapters are think-8cti and think-rdee. Parent dependencies do not gate children: each executable task has explicit prerequisites. Acceptance: standalone strict package commands, browser/Node parity, solver-free illustrations, versioned data, complete root-source discovery and deterministic Pages artifact. Deletion follows via think-cqfc; arbitrary-n Pack and final release/experimental Search have their own downstream acceptance tasks.
 
 ## Notes
 

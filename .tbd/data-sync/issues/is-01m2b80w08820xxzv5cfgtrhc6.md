@@ -5,14 +5,22 @@ title: The campaign gate fails 15 ways on the overnight round, id collision firs
 kind: bug
 status: open
 priority: 0
-version: 3
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
-labels: []
+labels:
+  - workbench-roadmap
+  - workbench-phase-1
 dependencies:
   - type: blocks
     target: is-01m2chahf57z4w9tj5gehbs0td
+  - type: blocks
+    target: is-01m2ckzvnsawqg79z9ybspc3yt
+  - type: blocks
+    target: is-01m2b80wcx8cm9vb2m97cx7s4s
+  - type: blocks
+    target: is-01m2chkqr9wvm46hk56ehfzrqw
 created_at: 2026-09-12T16:43:14.823Z
-updated_at: 2026-09-13T04:52:33.674Z
+updated_at: 2026-09-13T05:43:45.191Z
 ---
 `packing-ledger check` fails 15 ways on the overnight annealing work. The campaign has a drift gate and the round was recorded without running it, so four experiments sit in the tree outside the record they claim to be part of.
 

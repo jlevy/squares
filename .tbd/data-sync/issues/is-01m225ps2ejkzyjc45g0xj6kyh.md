@@ -3,16 +3,20 @@ type: is
 id: is-01m225ps2ejkzyjc45g0xj6kyh
 title: "Build Calibrate: sweep the strategy over known records with a held-out split"
 kind: feature
-status: open
+status: closed
 priority: 2
-version: 2
+version: 4
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:09:37.101Z
-updated_at: 2026-09-13T05:02:03.076Z
+updated_at: 2026-09-13T05:42:45.058Z
+closed_at: 2026-09-13T05:42:45.056Z
+close_reason: "Superseded by think-3yma: one calibration/held-out Search preset implementation with the complete manifest and reporting contract. Historical research framing is retained; no feature is claimed shipped."
+resolution: null
+duplicate_of: null
 ---
 Not built. Deferred until Pack and Animate are clean, which is a sequencing decision and not a lack of interest.
 
@@ -32,4 +36,4 @@ Reuse rather than start parallel machinery: the campaign's hypothesis records, p
 
 ## Notes
 
-2026-09-12 plan disposition: retain held-out calibration methodology as a Search preset under think-vhgz, not a separate tab or run engine. See updated annealing and workbench plans; Search is deferred until records, metrics, shared semantics, strict floors and packages/workbench extraction pass.
+Implementation superseded by think-3yma under the governing workbench plan. It preserves campaign-level predeclared tuning/held-out partitions, individual versus configuration-level outcomes, equal work and manifest replay. The old motion/stability prerequisites remain scientific/behavioral obligations to disposition in think-a9gt and the kernel acceptance, not instructions to create another tab or UI loop.

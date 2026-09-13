@@ -3,9 +3,9 @@ type: is
 id: is-01m2as8hsq3d7dxy1z185zxeah
 title: Bound the BC329 parent-side source and runtime preflight
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 21
+version: 22
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh isolated implementation; root integration
 labels:
@@ -31,7 +31,11 @@ child_order_hints:
   - is-01m2b2etdnh14vgy3h8x79y5dj
   - is-01m2b3mn50tv03ktcns071x9m9
 created_at: 2026-09-12T12:25:17.878Z
-updated_at: 2026-09-12T16:11:32.761Z
+updated_at: 2026-09-13T05:13:28.200Z
+closed_at: 2026-09-13T05:13:28.200Z
+close_reason: Reviewed corrections integrated and published in the stack. Fresh T025/T026 exact replays pass; PR149 delta gate passes46steps/1109tests; final PR156 gate passes46steps/1284tests. Runner source and independent mathematical reviews accept the repairs. Final hosted checkpoint and overall readiness remain open under think-0adb; BC329 calibration/execution remains blocked separately.
+resolution: null
+duplicate_of: null
 ---
 The external deadline currently begins at worker launch; parent-side Git, runtime, and source-manifest preflight runs before supervision, and _git has no timeout. The receipt states that scope accurately, but a command can still hang before the worker starts. Before the BC329 scientific target, either bring parent preflight under an end-to-end deadline or add bounded subprocess timeouts with explicit prelaunch failure records, and keep documentation precise about the measured boundary.
 

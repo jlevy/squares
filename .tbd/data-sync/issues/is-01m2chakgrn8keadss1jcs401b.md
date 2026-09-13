@@ -5,17 +5,21 @@ title: Retire obsolete spike probes and duplicate entry points by consumer audit
 kind: task
 status: open
 priority: 2
-version: 3
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
-labels: []
+labels:
+  - workbench-roadmap
+  - workbench-phase-4
 dependencies:
   - type: blocks
     target: is-01m2b7nakccj4tf1tgs4k86nar
+  - type: blocks
+    target: is-01m2cm03rtrjcg98ejb9y56jn6
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-13T04:45:05.422Z
-updated_at: 2026-09-13T05:02:01.604Z
+updated_at: 2026-09-13T05:43:48.775Z
 ---
-Inventory active product sources, unique semantic tests, superseded revision probes, standalone research instruments and retained records. Remove spurious or duplicate code only after proving no build/gate/doc/capture/benchmark consumers and replacing any unique assertions. Keep archived source, negative experiments, summaries and reproduction provenance. Move live sources into standalone workbench package; keep Python CLI wrappers thin and grouped. Avoid moving all spike files wholesale into flat devtools.
+Phase 4 deletion only. The early consumer/assertion inventory is think-a9gt and is completed before extraction. After think-zisr migrates live sources and unique coverage, remove only obsolete spike entry points, duplicate/revision probes, and temporary devtools wrappers whose consumers have migrated. Acceptance: every deletion cites the inventory disposition and replacement coverage or no-consumer evidence; no build/CI/capture/benchmark/documented invocation depends on the old tree. Retain research records, source archives, negative experiments and their reproduction tools. Consolidate workbench-specific surviving tools under packages/workbench.
 
 ## Notes
 

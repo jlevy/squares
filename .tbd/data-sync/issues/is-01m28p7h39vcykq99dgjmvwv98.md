@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m28p7h39vcykq99dgjmvwv98
-title: "[epic] Phase 6: the workbench stops being a prototype"
+title: Ship a clean standalone packing workbench
 kind: epic
 status: open
 priority: 1
-version: 30
+version: 39
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -36,12 +36,20 @@ child_order_hints:
   - is-01m2chr65cx0jhfd1gsmx3r31y
   - is-01m2chvkkmv158bkmqg9444jn8
   - is-01m2cj9hf5v77se0yyzbr5jqd6
+  - is-01m2ckve44dr18jrbqajj3tjpw
+  - is-01m2ckzsvafkecaad6hh20gbvz
+  - is-01m2ckztpy58ydg71fkvwz7f0v
+  - is-01m2ckzvnsawqg79z9ybspc3yt
+  - is-01m2cm03rtrjcg98ejb9y56jn6
+  - is-01m2b7n9tyq13n0zw4tkq4rfss
+  - is-01m2b7na7psnnn1j62g1yjdtta
+  - is-01m2cmf6vy26q99h0pa25g518w
 created_at: 2026-09-11T16:53:49.786Z
-updated_at: 2026-09-13T05:07:45.124Z
+updated_at: 2026-09-13T05:40:02.043Z
 ---
-Current plan: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md, revised by the 2026-09-12 architecture review. The shared palette, ordinary source extraction, initial Biome/TypeScript adoption, and Pages builder have landed. Behavioral CI, full strict type coverage, evidence/strategy correctness, and package ownership remain incomplete; a banner change is not an acceptance gate.
+Governing source of truth: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md. Deliver a single top-level packages/workbench containing all application, core simulation, illustration timeline, IO, tests/probes and workbench-specific tools, with Pack, Animate and later Search using the same typed run/receipt contracts. The architecture review is evidence and resolution tracking, not a second roadmap. Supporting annealing, shared-contract and video plans supply detail.
 
-Ordered work: refresh PR 155 from the current PR 125 tip (think-5pv0); repair records and numerical/strategy boundaries (think-3eha, think-sdmi, think-karf, think-1fpa); finish shared resolution, seed semantics, strict Python and TS/JS floors, and behavioral CI (think-nals, think-dq1l, think-4ylo, think-kpvc); extract all workbench-specific code and tooling into top-level packages/workbench (think-zisr); remove obsolete spike consumers only after coverage migrates (think-cqfc). Accessibility and Pages repairs proceed alongside those phases. Search remains deferred. General-purpose sqpack libraries remain explicit dependencies; no permanent parallel workbench source tree in packing/devtools or spikes.
+Phases 0-2 refresh and inventory, establish an immediately strict package shell, repair evidence/strategy/benchmark/seed semantics and quality gates. Phase 3 consolidates data, browser/Node kernel, timeline, app and build/capture tools. Phase 4 completes arbitrary-n Pack, cleans obsolete consumers, documents operation, and validates a safe Pack/Animate release. Phase 5 completes experimental strategies, Search and calibration, with an end-to-end acceptance checkpoint. Search is deferred by dependencies, not dropped. Optional Python/Rust services and new mathematical campaigns are separate work. Existing palette/source separation and initial browser-floor adoption are retained accomplishments; legacy bead status is reconciled under think-a9gt.
 
 ## Notes
 

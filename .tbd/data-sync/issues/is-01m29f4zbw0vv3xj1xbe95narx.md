@@ -1,22 +1,20 @@
 ---
 type: is
 id: is-01m29f4zbw0vv3xj1xbe95narx
-title: "P4: nothing checks the page after it deploys"
+title: Wire post-deployment checks for the packaged workbench
 kind: task
 status: open
 priority: 3
-version: 1
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
-labels: []
-dependencies: []
+labels:
+  - workbench-roadmap
+  - workbench-phase-4
+dependencies:
+  - type: blocks
+    target: is-01m2cm03rtrjcg98ejb9y56jn6
 parent_id: is-01m29f3zcv8kfcf70ra7fpkd1j
 created_at: 2026-09-12T00:09:20.507Z
-updated_at: 2026-09-12T00:09:20.507Z
+updated_at: 2026-09-13T05:43:48.784Z
 ---
-`pages.yml` proves a great deal about the page it BUILDS -- deterministic, self-contained, no external references -- and nothing at all about the page that ends up at the URL.
-
-The gap is small but it is the one that bites: an artifact-upload path that is subtly wrong, a Pages configuration that serves a different directory, a deploy that half-succeeds. Every one of those leaves a green workflow and a broken or stale URL.
-
-A post-deploy smoke check closes it cheaply: fetch `/workbench/`, confirm it returns 200, confirm the body carries `window.atlasTransitions`, and confirm its sha256 matches the artifact that was uploaded. The explainer at `/` deserves the same and may already have it -- check before adding a second mechanism.
-
-Low priority because the failure is visible the moment anyone opens the link. Worth doing because 'anyone opens the link' is not a gate.
+Implement the post-deploy workbench check before the phase-4 release checkpoint. Verify /squares/workbench/ returns the expected deployed source/build identity and can start its public app API, with project-relative navigation and required static assets. Extend the existing published-site mechanism; do not assume the future API keeps window.atlasTransitions or add repository-integrity checksums. Test against a served package artifact and negative wrong/stale/missing artifact controls. The actual live deployment receipt is recorded by think-tn6s after authorized release, so this implementation task does not depend on the deployment it enables.
