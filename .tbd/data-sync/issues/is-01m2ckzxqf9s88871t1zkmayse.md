@@ -5,7 +5,7 @@ title: Make Pack independent of atlas transition pairs
 kind: task
 status: open
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-phase-4
@@ -17,10 +17,10 @@ dependencies:
     target: is-01m2e8zk17m11sn44109h5vxwf
 parent_id: is-01m2b7n9tyq13n0zw4tkq4rfss
 created_at: 2026-09-13T05:31:41.166Z
-updated_at: 2026-09-13T20:58:26.775Z
+updated_at: 2026-09-13T21:03:10.902Z
 ---
 Use the packaged run API for one chosen n without requiring an n-1 to n atlas pair. Provide generic grid/random/given starts, optional known-best start when a record exists, all n active squares at rest, direct manipulation, explicit Run/Pause/Restart/Reset/Resolve semantics, visible editable seed and run receipt import/export. Reject unsupported n with measured resource limits visible in UI. Reuse think-8cti mode separation and think-rdee start controls. Acceptance: n with and without a catalogue entry works; same seed/config replays; raw and repaired geometry/score stay paired; cancelled/restarted runs cannot publish stale state.
 
 ## Notes
 
-2026-09-13: independent Pack panel is exposed for chosen n without atlas transition pair. Full O2 acceptance remains open pending resource, controls, receipt/replay, fixed-seed parity and validation. See think-adlf.
+2026-09-13 checkpoint: independent Pack UI for n=1..400, seeded starts, run/pause/restart, Resolve, import/export, drag/keyboard, and separate scene implemented in PR #160. Browser Pack contract passes. Versioned single-trial receipt/replay remains think-adlf; do not mark full Phase 4 readiness.

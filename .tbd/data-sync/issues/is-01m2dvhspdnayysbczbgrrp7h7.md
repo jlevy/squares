@@ -5,7 +5,7 @@ title: Search ledgers can be decoded and re-checked, and one nonfinite partial d
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -14,6 +14,10 @@ dependencies:
     target: is-01m2b7nakccj4tf1tgs4k86nar
 parent_id: is-01m2ckzy45b1b28pvt1nbh4gdm
 created_at: 2026-09-13T17:03:01.324Z
-updated_at: 2026-09-13T20:58:32.124Z
+updated_at: 2026-09-13T21:03:09.170Z
 ---
 Review 2026-09-13: summary.ts takes block, budget and n from each outcome rather than from the plan (~97-107); there is no decodeSearchOutcomes, so a saved ledger cannot be re-admitted; a nonfinite partial result makes encodeSearchOutcomes throw for the whole ledger. Growth settings are also inert in Search because every start uses unit squares, so configurations differing only in growth run identically; either exclude growth from Search configuration or make it effective. Acceptance: decoder with negative controls, summary derived from the plan, per-outcome encoding failure isolated, growth either rejected or exercised.
+
+## Notes
+
+2026-09-13 checkpoint: Search ledger decoding and re-admission now recompute geometry and bind outcomes to plan-derived objective, seed and policy; negative Node controls pass. Keep open for isolated nonfinite partial encoding failure, growth semantics, and final browser/headless acceptance. Historical description records the pre-fix finding.

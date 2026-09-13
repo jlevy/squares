@@ -5,7 +5,7 @@ title: Pack reports stationarity while the container shrinks
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-phase-3
@@ -15,6 +15,10 @@ dependencies:
     target: is-01m2cm03rtrjcg98ejb9y56jn6
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-13T20:33:37.448Z
-updated_at: 2026-09-13T20:34:39.408Z
+updated_at: 2026-09-13T21:03:10.576Z
 ---
 The live Pack run can report a stationary state while its container schedule is still shrinking. Separate pose-motion residual from container/forcing motion and require a declared threshold/window after forcing has settled. Acceptance: a shrinking-container fixture never reports stationary; an actually settled valid control does; timeout, cancellation and completed-work receipts retain distinct termination reasons across browser and headless callers.
+
+## Notes
+
+2026-09-13 checkpoint: Pack stationarity now accounts for moving container/square sides and held squares; shrinking-container Node control implemented in PR #160. Keep open until positive settled control and browser/headless acceptance on pinned commit.
