@@ -3,9 +3,9 @@ type: is
 id: is-01m2e9etf82fvg7xz4xg6dn4zc
 title: Independently admit the BC303 T2 charge reader before exp-158
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max mathematics plus Sol source replay
 labels:
@@ -20,7 +20,11 @@ dependencies:
     target: is-01m2eeb7adc0784cx52qfa9qtk
 parent_id: is-01m2e6e4j1ee5nre22gp7fyyrc
 created_at: 2026-09-13T21:06:03.879Z
-updated_at: 2026-09-13T22:31:56.105Z
+updated_at: 2026-09-13T22:42:43.997Z
+closed_at: 2026-09-13T22:42:43.995Z
+close_reason: Source-distinct Astra Max readmission ACCEPTS repaired exact reader 0f20fdcdd5bac7e0734b29cd0b0efef4ffea3699 after R1/R2 fixes, with 20 maintained and 198 independent target-free controls. Six frozen source files, 377 atoms/182 charts and H160/exp158 criteria remain unchanged; no target charge ran. Dated review, control source and two logs committed at clean 0d729486 on isolated branch codex/bc303-t2-charge-reader-repair; docs map/synopsis, records 32/74, edit 45/74, Ruff/Flowmark and source checks pass. Instrument readiness on the final integrated stack, PR publication and H160/exp158 target remain separate under think-rtsz and think-b0eh.
+resolution: null
+duplicate_of: null
 ---
 Review exact clean cdf854e2 charge-reader branch source-bound identity, 377 atoms and 182 charts, C clipped/coincident event sweep, closed witness replay, S strict first-owner strip, adversarial reference controls, and H-160/exp-158 frozen thresholds against accepted X-029/charge bridge. Retain ACCEPT/REFUSE with exact source blobs and conditions. Do not run target until reader admission; no global T2 or s11 claim.
 
