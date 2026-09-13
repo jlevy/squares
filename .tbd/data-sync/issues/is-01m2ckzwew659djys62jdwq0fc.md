@@ -5,7 +5,7 @@ title: Extract one browser and Node simulation kernel with mode adapters
 kind: task
 status: open
 priority: 1
-version: 9
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-phase-3
@@ -21,10 +21,14 @@ dependencies:
     target: is-01m229an1fw0az9jgk0wcbg8c4
   - type: blocks
     target: is-01m28rzfz3nnrjrqw0zdg5xvxm
+  - type: blocks
+    target: is-01m2e7k93s5pqy51e9e725cphb
+  - type: blocks
+    target: is-01m2e7kdn9wzf25atpz85gzdyb
 parent_id: is-01m2chahf57z4w9tj5gehbs0td
 child_order_hints:
   - is-01m2dvhy0rjcpcz3jcjaxp3vxx
 created_at: 2026-09-13T05:31:39.867Z
-updated_at: 2026-09-13T17:03:05.749Z
+updated_at: 2026-09-13T20:33:37.448Z
 ---
 Implement the Phase 3 kernel and adapters exactly as specified in the governing workbench plan. Share geometry/contact/wall/broad-phase/integration code across browser and Node; separate cached Animate and live Pack state machines. Receipt includes exact poses/size/container, effective seed/config, arithmetic/timestep, work, final velocities or pose-delta residual, forcing state and termination reason. Validate the exact returned snapshot before scoring. Feasible may be transient; convergence/stationarity needs its own declared threshold/window and continuation control. Preserve independent verification. Acceptance: DOM-free import, fixed-seed pre/post parity, browser/Node receipt parity, valid/invalid/nonfinite/growth/termination controls, no copied harness physics.

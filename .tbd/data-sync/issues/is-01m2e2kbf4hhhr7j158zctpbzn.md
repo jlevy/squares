@@ -5,14 +5,14 @@ title: "PR157: resolve failing PDF build check before merge"
 kind: bug
 status: in_progress
 priority: 1
-version: 4
+version: 5
 assignee: root
-delegate: root
+delegate: pdf_control_sol
 labels: []
 dependencies: []
 parent_id: is-01m2csyyq4nzfqppqj639avs51
 created_at: 2026-09-13T19:06:12.323Z
-updated_at: 2026-09-13T20:03:17.725Z
+updated_at: 2026-09-13T20:32:59.474Z
 ---
 At remote head cadbf7e1 on 2026-09-13, certificate-page build job 103770982964 failed at render_explainer_pdf --check-artifact: two normalized 843157-byte PDFs differ first at byte 524772 in object 156. CI reports cause unknown and retains /tmp/explainer-pdf-check/pdf-check-644lkxd1 diagnostics. This is an occurrence of tracked D-490 (think-ptit), not evidence that PR157 source caused it. Retrieve artifacts, diagnose or rerun with evidence, then push and wait full hosted CI; keep separate from PR156 admission.
 

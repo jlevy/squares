@@ -5,7 +5,7 @@ title: Ship a clean standalone packing workbench
 kind: epic
 status: in_progress
 priority: 1
-version: 40
+version: 42
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -44,8 +44,10 @@ child_order_hints:
   - is-01m2b7n9tyq13n0zw4tkq4rfss
   - is-01m2b7na7psnnn1j62g1yjdtta
   - is-01m2cmf6vy26q99h0pa25g518w
+  - is-01m2e7k93s5pqy51e9e725cphb
+  - is-01m2e7kdn9wzf25atpz85gzdyb
 created_at: 2026-09-11T16:53:49.786Z
-updated_at: 2026-09-13T05:48:30.727Z
+updated_at: 2026-09-13T20:33:37.448Z
 ---
 Governing source of truth: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md. Deliver a single top-level packages/workbench containing all application, core simulation, illustration timeline, IO, tests/probes and workbench-specific tools, with Pack, Animate and later Search using the same typed run/receipt contracts. The architecture review is evidence and resolution tracking, not a second roadmap. Supporting annealing, shared-contract and video plans supply detail.
 
