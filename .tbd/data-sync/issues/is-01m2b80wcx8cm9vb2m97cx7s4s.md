@@ -3,9 +3,9 @@ type: is
 id: is-01m2b80wcx8cm9vb2m97cx7s4s
 title: Best-of-k is one draw with no spread; report it over disjoint blocks
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels:
   - workbench-roadmap
@@ -18,7 +18,11 @@ dependencies:
   - type: blocks
     target: is-01m2ckzy45b1b28pvt1nbh4gdm
 created_at: 2026-09-12T16:43:15.228Z
-updated_at: 2026-09-13T06:39:04.484Z
+updated_at: 2026-09-13T08:32:22.816Z
+closed_at: 2026-09-13T08:32:22.815Z
+close_reason: "Implemented in f9099096 and completed at 15d97a59: strict cohort manifests and disjoint-block reporter retain every planned slot, rejected/unfinished counts, explicit denominators and uncertainty intervals. Clean-source six-trial raw JSONL, manifest and expected output retained under benchmark-foundation with CLI replay regression. This is instrument validation; missing historical trial results remain withdrawn."
+resolution: null
+duplicate_of: null
 ---
 Phase 1 measurement repair. Implement a committed reporter for attempted/completed/accepted/rejected counts, explicitly denominated rates, absolute/relative excess and guarded grid-to-reference normalization, CPU work, and disjoint-block best-of-k distributions with block counts and uncertainty. Include unsuccessful blocks rather than silently resampling accepted trials; label conditional metrics and prefix observations. Recover raw inputs or a compact lossless/durable equivalent before claiming old numerical tables reproduce; retained summaries cannot reconstruct disjoint blocks. Acceptance: recorded seed/block/work manifest and known synthetic mixed/empty/zero-gap controls reproduce expected results. The supplied handoff tables remain unverified observations until durable inputs support them.
 
