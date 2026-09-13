@@ -3,9 +3,9 @@ type: is
 id: is-01m2b1h8ra857ksmj3dd8peqy8
 title: Publish calibration success only after bounded terminal readback
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 15
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation or source-distinct review; root integration
 labels:
@@ -18,7 +18,11 @@ dependencies:
     target: is-01m2b4yfx3th5wcdaw9apr0vn5
 parent_id: is-01m2app5e71qnp9z5vfp9vppbp
 created_at: 2026-09-12T14:49:52.138Z
-updated_at: 2026-09-13T05:47:38.908Z
+updated_at: 2026-09-13T07:21:28.679Z
+closed_at: 2026-09-13T07:21:28.678Z
+close_reason: CAL-5 is independently accepted at exact implementation head fcb538c29b846fb5e7c33bd962772ada9c21aedd. Source-distinct Astra Max review replayed 54 signal/staging/adoption/deadline controls, 10 fixture/source/readback controls, four real launch controls, and all prior CAL-1 through CAL-7 evidence; 192 tests passed with zero Ruff or BasedPyright findings. Acceptance is retained at calibration commit cd02a0cd. No positive profile or BC329 target ran.
+resolution: null
+duplicate_of: null
 ---
 CAL-5 from the Astra Max source-distinct review. The supervisor publishes calibration-passed before its final readback and deadline check; KeyboardInterrupt at that boundary leaves a false terminal success, and unbounded observer/readback calls sit outside the measured lifetime. Keep the receipt nonterminal through bounded readback and observation, make final success the last transaction, retain complete admission duration, and test interruption and expiry at the boundary. This blocks calibration admission.
 

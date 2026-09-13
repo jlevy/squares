@@ -5,7 +5,7 @@ title: Build the separate fixed-core packet calibration command
 kind: feature
 status: in_progress
 priority: 1
-version: 26
+version: 27
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max design; Sol implementation after admission
 labels:
@@ -31,10 +31,10 @@ child_order_hints:
   - is-01m2b4yfx3th5wcdaw9apr0vn5
   - is-01m2b883mnsa3g9ap94gy5aj0q
 created_at: 2026-09-12T11:40:18.235Z
-updated_at: 2026-09-13T05:47:39.651Z
+updated_at: 2026-09-13T07:21:29.001Z
 ---
 Add a maintained calibrate_fixed_core_packet command with strict fixed-core-packet-calibration/v1 receipt semantics. It must remain outside the BC329 scientific state machine, use a frozen analytically solved positive fixture, call the real raw, normalized-exact, reflected-interval, dilation, publication, and strict per-direction readback kernels, and never emit packet-accepted or scientific evidence. Freeze and independently verify the fixture argument and exact answers; preserve truthful fixture provenance rather than T025 ancestry. Add cross-schema refusal, known-answer, row/witness mutation, source-separation, byte-binding, lifecycle, and metrics controls. Do not run the BC329 source or target.
 
 ## Notes
 
-Calibration implementation now includes second CAL-5 repair at fcb538c2 (code 85d3f529): handler-level deferral through staging ownership and exception-safe descriptor adoption. Author evidence is 192 target-free tests, clean Ruff/BasedPyright, and passing edit tier. Admission remains pending source-distinct think-1arg. Worker-topology evidence is separately in progress under think-gscz; coordinator under think-5dql. No positive profile or BC329 target ran.
+The complete target-free calibration implementation is independently accepted through exact implementation head fcb538c29b846fb5e7c33bd962772ada9c21aedd and durable acceptance commit cd02a0cd. The source-distinct review replayed 54 lifecycle controls, 10 fixture/source/readback controls, four real launch controls, and prior CAL-1 through CAL-7 evidence; 192 tests and static gates passed. Integration into the current PR156 leaf is next. Operational admission still depends on integrated worker-topology, coordinator, source-distinct reader, and run-sheet beads think-gscz, think-5dql, think-n4gh, and think-pp3j. No positive profile or BC329 target ran.
