@@ -82,9 +82,9 @@ New-square rule: lowest total matching cost after removal from n+1, then fewest 
 
 Arrival overlap census (the new square at its final pose against the squares of n before they move): 158 of 323 pairs, 588 squares covered in all; max 6 in one pair; mean over the overlapping pairs 3.72
 
-Full 1..324 run at dwell 0.8 s, move 0.8 s, settle 0.8 s: 776.0 s = 12.9 min (323 transitions plus a closing dwell)
-Per-kind schedule, static appends at dwell 0.5 s, move 0.0 s, settle 0.4 s (no move): 158 × 2.4 + 165 × 0.9 + 0.8 = 528.5 s = 8.8 min
-Per-kind schedule, static appends at dwell 0.5 s, move 0.4 s, settle 0.3 s (short move): 158 × 2.4 + 165 × 1.2 + 0.8 = 578.0 s = 9.6 min
+Full 1..324 run at dwell 0.8 s, move 0.55 s, settle 0.8 s: 695.3 s = 11.6 min (323 transitions plus a closing dwell)
+Per-kind schedule, static appends at dwell 0.5 s, move 0.0 s, settle 0.4 s (no move): 158 × 2.2 + 165 × 0.9 + 0.8 = 489.0 s = 8.2 min
+Per-kind schedule, static appends at dwell 0.5 s, move 0.4 s, settle 0.3 s (short move): 158 × 2.2 + 165 × 1.2 + 0.8 = 538.5 s = 9.0 min
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

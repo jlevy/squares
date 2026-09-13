@@ -39,6 +39,7 @@ import time
 from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import yaml
@@ -48,13 +49,14 @@ from scipy.sparse.csgraph import connected_components
 
 HERE = Path(__file__).resolve().parent
 # This file lives at packing/atlas/known-best/video/spikes/v2-transitions, so `packing` is five
-# levels up -- the depth `compare_palette.py` and `grade_motion.py` beside it already use. Derived
-# rather than written out: it carried an ABSOLUTE path to one worktree, which meant the build ran
-# only from that checkout, ran silently against the wrong tree from any other, and failed on CI.
+# levels up -- the depth `compare_palette.py` and `grade_motion.py` beside it already use.
+# Derived rather than written out: it carried an ABSOLUTE path to one worktree, which meant the
+# build ran only from that checkout, ran silently against the wrong tree from any other, and
+# failed on CI.
 PACKING = HERE.parents[4]
 REPO = PACKING.parent
-# `devtools` is imported for the explainer's KaTeX inliner and its self-containment check, so the
-# packing root has to be importable: this file is run as a script, not as a module.
+# `devtools` is imported for the explainer's KaTeX inliner and its self-containment check, so
+# the packing root has to be importable: this file is run as a script, not as a module.
 if str(PACKING) not in sys.path:
     sys.path.insert(0, str(PACKING))
 WITNESSES = PACKING / "witnesses" / "known-best"
@@ -76,7 +78,8 @@ ANGLE_WEIGHT = 1.0
 ROTATION_TOLERANCE_DEG = 0.05
 CROSSING_DISTANCE = 0.7  # centre distance below which two moving unit squares overlap badly
 CROSSING_SAMPLES = 21
-MOVE_TOLERANCE = 0.01  # a square that travels less than this and turns less than the rotation tolerance is stationary
+# A square that travels less than this and turns less than the rotation tolerance is stationary.
+MOVE_TOLERANCE = 0.01
 
 # Block-aware matching, revision 5. A frame is clustered into blocks: side-by-side squares
 # (centres within 1 + CLUSTER_GAP_TOL) whose tilts agree within CLUSTER_ANGLE_TOL, joined with
@@ -101,10 +104,15 @@ BLOCK_RESIDUAL_TOL = (
     0.35  # unit squares: a transform carries a square if it lands within this of a target
 )
 BLOCK_MIN = 2  # squares a transform must carry to count as a block
-BLOCK_SLIDE_MAX = 1.5  # unit squares: a block's pivot may travel this far; further is a relabelling, not a move
-BLOCK_DRIFT_TOL = 0.75  # unit squares: a square of the same cluster rides a block whose transform lands it within this of its target
+# Unit squares: a block's pivot may travel this far; further is a relabelling, not a move.
+BLOCK_SLIDE_MAX = 1.5
+# Unit squares: a square of the same cluster rides a block whose transform lands it within this
+# of its target.
+BLOCK_DRIFT_TOL = 0.75
 BLOCK_DISCOUNT = 0.1  # travel inside a block costs this fraction of the same travel alone
-INDIVIDUAL_PENALTY = 1.0  # unit squares squared: what a square pays to move alone at all (blocks and staying put pay nothing)
+# Unit squares squared: what a square pays to move alone at all (blocks and staying put pay
+# nothing).
+INDIVIDUAL_PENALTY = 1.0
 BLOCK_HOUGH_TOP = 6  # candidate offsets examined per search
 BLOCK_REFIT_ROUNDS = 4  # Procrustes refit and recount rounds per candidate
 BLOCK_MAX_TRANSFORMS = 6  # transforms searched per cluster pair
@@ -115,13 +123,16 @@ NEW_BONUS = (
 CONTACT_BADNESS = (
     1000.0  # one full-side contact outweighs any position difference in the tie-break
 )
-NEW_RULE = "lowest total matching cost after removal from n+1, then fewest full-side contacts, then highest position (y, then x)"
+NEW_RULE = (
+    "lowest total matching cost after removal from n+1, then fewest full-side contacts, "
+    "then highest position (y, then x)"
+)
 
 # Timeline defaults, seconds. Revision 2: a little faster (was 1.2 / 1.6 / 0.5).
 # The single-step beat, even: a beat to read the packing, a beat to rearrange it, a beat to
 # settle. The owner's pacing.
-#: The footer `devtools/check_documentation.py` requires on durable Markdown. Written here rather
-#: than added by hand afterwards, because this file is regenerated on every build.
+#: The footer `devtools/check_documentation.py` requires on durable Markdown. Written here
+#: rather than added by hand afterwards, because this file is regenerated on every build.
 #: The banner `devtools/check_generated_markdown.py` requires on a generated view, so that gate
 #: can enforce the file's exemption from the auto-formatter rather than trust it. Without it the
 #: formatter rewraps what the generator writes unwrapped, and the two never agree again.
@@ -151,14 +162,16 @@ MOTION_PHASES = [
     "slide-first",
 ]
 # The per-kind schedule NOTES computes for the 165 static appends (prefix and shared-picture),
-# which have nothing to move: no move at all, and with a short move for the new square's fade-in.
+# which have nothing to move: no move at all, and with a short move for the new square's
+# fade-in.
 STATIC_APPEND_TIMINGS = {
     "no move": {"dwell": 0.5, "move": 0.0, "settle": 0.4},
     "short move": {"dwell": 0.5, "move": 0.4, "settle": 0.3},
 }
 
 # The poster's badge vocabulary, exactly as composite-figure.json states it (glyph, style); the
-# star is `lower.first_proved_here`. A badge outside this set fails the build rather than being drawn.
+# star is `lower.first_proved_here`. A badge outside this set fails the build rather than being
+# drawn.
 BADGE_VOCABULARY = {
     ("O", "solid"): "proved optimal",
     ("=", "solid"): "exact value known",
@@ -167,8 +180,8 @@ BADGE_VOCABULARY = {
     ("R", "muted"): "annotated rigid by the catalogue",
 }
 # SUMMARY_STAR_POINTS from packing/devtools/build_known_best_atlas.py: the five-pointed star the
-# poster draws as a polygon, apex up, about its own centre, with its inset and the span it fills of
-# a badge box. test_candidate.py checks these against the atlas source.
+# poster draws as a polygon, apex up, about its own centre, with its inset and the span it fills
+# of a badge box. test_candidate.py checks these against the atlas source.
 STAR_POINTS = [
     (0, -6),
     (1.411, -1.942),
@@ -187,7 +200,8 @@ BADGE_SIZE = 19
 BADGE_FONT_SIZE = 15
 # The approximately-equal badge glyph is KaTeX_Main's U+2248 (the embedded latin subsets carry
 # none), drawn as a path at a smaller size because its wave is wider than Source Sans's equals,
-# and thickened by a stroke in font units to match the weight-650 letters; as the slideshow does.
+# and thickened by a stroke in font units to match the weight-650 letters; as the slideshow
+# does.
 APPROX_FONT_SIZE = 13
 APPROX_STROKE_UNITS = 26
 # The type scale, revision 4: four sizes on the 1920 x 1080 stage and nothing below 28 px, so
@@ -201,8 +215,8 @@ NUMERAL_WEIGHT = 400
 N_LINE_PX = 96  # .nline, the same size as the numeral it labels
 N_LINE_LEFT_PX = 6  # .nline left, the panel's text edge
 #: The space between the `=` of `n =` and the first digit beside it, ink to ink. The headline is
-#: one line, so this is a word space rather than a line break: 16 px at 96 px is a sixth of an em,
-#: tighter than the face's own space, which is what makes `n = 11` read as one statement.
+#: one line, so this is a word space rather than a line break: 16 px at 96 px is a sixth of an
+#: em, tighter than the face's own space, which is what makes `n = 11` read as one statement.
 HEADLINE_GAP_PX = 16
 
 #: TeX fragments, written as constants so no escaping has to survive an f-string.
@@ -278,7 +292,7 @@ def load_witness(n: int) -> dict:
             cy = float(sum(y for _, y in corners) / 4)
             (x0, y0), (x1, y1) = corners[0], corners[1]
             angle = math.degrees(math.atan2(float(y1 - y0), float(x1 - x0))) % 90.0
-            keys.append(("co",) + tuple(v for pair in square["corners"] for v in pair))
+            keys.append(("co", *(v for pair in square["corners"] for v in pair)))
         squares.append((cx, cy, angle))
     xy = np.array([(x, y) for x, y, _ in squares], dtype=float).reshape(len(squares), 2)
     angles = np.array([a for _, _, a in squares], dtype=float)
@@ -328,7 +342,8 @@ def load_rendering(n: int) -> list[dict]:
 
 
 def angle_delta(a: float, b: float) -> float:
-    """Shortest signed rotation from a to b modulo 90 degrees, in (-45, 45]; ties turn counter-clockwise."""
+    """Shortest signed rotation from a to b modulo 90 degrees, in (-45, 45]; ties turn
+    counter-clockwise."""
     d = (b - a) % 90.0
     if d > 45.0 + 1e-9:
         d -= 90.0
@@ -336,7 +351,8 @@ def angle_delta(a: float, b: float) -> float:
 
 
 def circular_mean_angle(angles: np.ndarray) -> float:
-    """The mean tilt of a set of squares, modulo 90 degrees (a square has four-fold symmetry)."""
+    """The mean tilt of a set of squares, modulo 90 degrees (a square has four-fold
+    symmetry)."""
     a = np.radians(angles * 4.0)
     return float(
         np.degrees(math.atan2(float(np.sin(a).mean()), float(np.cos(a).mean()))) / 4.0 % 90.0
@@ -367,7 +383,7 @@ def frame_clusters(witness: dict, rendering: list[dict]) -> list[list[int]]:
         for j in row["contact_ids"]:
             if rendering[j]["angle_class"] == row["angle_class"]:
                 adj[i, j] = adj[j, i] = True
-    np.fill_diagonal(adj, False)
+    np.fill_diagonal(adj, val=False)
     count, labels = connected_components(csr_matrix(adj), directed=False)
     clusters = [sorted(np.flatnonzero(labels == k).tolist()) for k in range(count)]
     clusters.sort(key=lambda c: (-len(c), c[0]))
@@ -414,13 +430,13 @@ def rigid_links(
     search repeats on the squares left over, so one cluster pair can yield several blocks."""
     links = []
     free_src, free_dst = np.array(src), np.array(dst)
-    R = rotation(turn)
+    rot = rotation(turn)
     for _ in range(BLOCK_MAX_TRANSFORMS):
         if len(free_src) < BLOCK_MIN or len(free_dst) < BLOCK_MIN:
             break
-        P = p[free_src] @ R.T
-        Q = q[free_dst]
-        offsets = Q[None, :, :] - P[:, None, :]
+        src_rot = p[free_src] @ rot.T
+        dst_pts = q[free_dst]
+        offsets = dst_pts[None, :, :] - src_rot[:, None, :]
         travel_of = np.sqrt(
             ((q[free_dst][None, :, :] - p[free_src][:, None, :]) ** 2).sum(-1)
         ).ravel()
@@ -430,8 +446,9 @@ def rigid_links(
         # Only transforms that carry the block a short way are moves; a lattice shift of several
         # squares gathers votes too but is a relabelling. The pivot shift a cell implies is
         # measured on its own voters: the mean of their targets less the mean of their sources
-        # (the whole cluster's centroid would be wrong for a sub-block off the cluster's centre,
-        # which a rotation about the origin carries a long way even when the sub-block stays put).
+        # (the whole cluster's centroid would be wrong for a sub-block off the cluster's
+        # centre, which a rotation about the origin carries a long way even when the sub-block
+        # stays put).
         src_of_vote = np.repeat(np.arange(len(free_src)), len(free_dst))
         dst_of_vote = np.tile(np.arange(len(free_dst)), len(free_src))
         mean_src = np.stack(
@@ -463,7 +480,7 @@ def rigid_links(
             kx, ky = int(key // (1 << 21)) - (1 << 20), int(key % (1 << 21)) - (1 << 20)
             near = (np.abs(cells[..., 0] - kx) <= 1) & (np.abs(cells[..., 1] - ky) <= 1)
             t = offsets[near].mean(axis=0)
-            pairs = nearest_inliers(P + t, Q)
+            pairs = nearest_inliers(src_rot + t, dst_pts)
             if len(pairs) < BLOCK_MIN:
                 continue
             ia = free_src[[a for a, _ in pairs]]
@@ -471,7 +488,7 @@ def rigid_links(
             phi, cp, cq = procrustes(p[ia], q[jb])
             # Refit and recount until the inlier set stops growing (a few rounds at most).
             for _round in range(BLOCK_REFIT_ROUNDS):
-                refit = nearest_inliers(apply_rigid(p[free_src], phi, cp, cq), Q)
+                refit = nearest_inliers(apply_rigid(p[free_src], phi, cp, cq), dst_pts)
                 if len(refit) < len(pairs) or refit == pairs:
                     break
                 pairs = refit
@@ -482,7 +499,8 @@ def rigid_links(
                 continue
             # The transform is final; keep only the pairs it lands within tolerance (the last
             # refit moved it a little from the transform that chose them), so every member of a
-            # block lands within BLOCK_RESIDUAL_TOL of its target under the block's own transform.
+            # block lands within BLOCK_RESIDUAL_TOL of its target under the block's own
+            # transform.
             residual = np.sqrt(((q[jb] - apply_rigid(p[ia], phi, cp, cq)) ** 2).sum(-1))
             keep = residual <= BLOCK_RESIDUAL_TOL
             if int(keep.sum()) < BLOCK_MIN:
@@ -523,16 +541,16 @@ def block_links(
 ) -> tuple[list[dict], list[list[int]], list[list[int]]]:
     """Every rigid transform between reachable cluster pairs of the two frames, each tagged
     with its source cluster, and the two frames' clusters."""
-    A = frame_clusters(prev, prev_render)
-    B = frame_clusters(nxt, nxt_render)
+    clusters_from = frame_clusters(prev, prev_render)
+    clusters_to = frame_clusters(nxt, nxt_render)
     p, q = prev["xy"], nxt["xy"]
     links = []
-    for index_a, a in enumerate(A):
+    for index_a, a in enumerate(clusters_from):
         if len(a) < BLOCK_MIN:
             continue
         ca, ra = cluster_extent(p, a)
         theta_a = circular_mean_angle(prev["angles"][a])
-        for b in B:
+        for b in clusters_to:
             if len(b) < BLOCK_MIN:
                 continue
             cb, rb = cluster_extent(q, b)
@@ -542,7 +560,7 @@ def block_links(
             for link in rigid_links(p, q, a, b, turn):
                 link["cluster"] = index_a
                 links.append(link)
-    return links, A, B
+    return links, clusters_from, clusters_to
 
 
 # --------------------------------------------------------------------------- matching
@@ -560,7 +578,8 @@ def base_cost(prev: dict, nxt: dict) -> tuple[np.ndarray, float, np.ndarray]:
 
 
 #: A swap has to save more than this, in the normalised cost's own units, to be taken. It is
-#: there only to stop churn on exact ties: any real saving is a shorter journey and is worth having.
+#: there only to stop churn on exact ties: any real saving is a shorter journey and is worth
+#: having.
 CROSSING_TOL = 1e-12
 
 
@@ -569,26 +588,26 @@ def repair_crossings(mapping: list[int], base: np.ndarray) -> tuple[list[int], i
 
     **The assignment does not minimise travel, and it is not meant to.** A block pairing is
     discounted so a shingled row lands as one rigid group, and a square that moves alone pays a
-    penalty on top of its distance; both are worth having. But either can buy its coherence with a
-    detour, and a detour that two squares take past each other is a swap -- which is what a viewer
-    sees, and the one thing the motion cannot explain. At `n = 10 -> 11` the discount sent square 1
-    to target 8, 1.425 unit sides away, and square 8 to target 9, 0.872 away; in each other's place
-    they travel 0.586 and 0.248. Two squares crossing the packing to trade positions, for 2.3 unit
-    sides of motion that buys nothing.
+    penalty on top of its distance; both are worth having. But either can buy its coherence
+    with a detour, and a detour that two squares take past each other is a swap -- which is what
+    a viewer sees, and the one thing the motion cannot explain. At `n = 10 -> 11` the discount
+    sent square 1 to target 8, 1.425 unit sides away, and square 8 to target 9, 0.872 away; in
+    each other's place they travel 0.586 and 0.248. Two squares crossing the packing to trade
+    positions, for 2.3 unit sides of motion that buys nothing.
 
-    So every pair of squares is offered the exchange, and it is taken whenever it shortens the two
-    journeys together. The measure is `base`, the cost before any discount or penalty: squared
-    centre distance plus the angle term, which is what "minimal relative to where the square is"
-    means when a square can also turn.
+    So every pair of squares is offered the exchange, and it is taken whenever it shortens the
+    two journeys together. The measure is `base`, the cost before any discount or penalty:
+    squared centre distance plus the angle term, which is what "minimal relative to where the
+    square is" means when a square can also turn.
 
     A block survives this untouched unless it was the thing causing the crossing. Swapping two
     members of a row that shifts by one cell sends each further, not nearer, so the exchange is
-    refused; and the blocks are rebuilt from the repaired mapping by the caller, so a member that
-    was swapped out simply is not one any more.
+    refused; and the blocks are rebuilt from the repaired mapping by the caller, so a member
+    that was swapped out simply is not one any more.
 
-    The leftover column cannot change: an exchange moves two assigned targets between two squares
-    and never touches the one no square took, so which square is *new* is decided before this runs
-    and is unaffected by it.
+    The leftover column cannot change: an exchange moves two assigned targets between two
+    squares and never touches the one no square took, so which square is *new* is decided before
+    this runs and is unaffected by it.
     """
     order = list(mapping)
     swaps = 0
@@ -610,7 +629,7 @@ def exclusion_costs(cost: np.ndarray, rows: np.ndarray, cols: np.ndarray) -> np.
     """For every column c, the least total cost of an assignment that leaves c out, from the
     optimal one: the cost of the shortest alternating path from c to the free column, found
     by relaxation over the columns (no negative cycles exist at optimality)."""
-    n, m = cost.shape
+    _n, m = cost.shape
     source_of = np.full(m, -1)
     source_of[cols] = rows
     (free,) = np.flatnonzero(source_of < 0)
@@ -692,8 +711,8 @@ def match_pair(
 
     base, scale, moves = base_cost(prev, nxt)
     # Revision 4's assignment, kept for the comparison the notes report.
-    h_rows, h_cols = linear_sum_assignment(base)
-    (hungarian_new,) = sorted(set(range(n + 1)) - set(int(c) for c in h_cols))
+    _h_rows, h_cols = linear_sum_assignment(base)
+    (hungarian_new,) = sorted(set(range(n + 1)) - {int(c) for c in h_cols})
 
     links, clusters_a, clusters_b = block_links(prev, nxt, prev_render, nxt_render)
     # Blocks first, then staying put, then moving alone: a square that moves alone pays the
@@ -705,8 +724,8 @@ def match_pair(
             cost[i, j] = BLOCK_DISCOUNT * base[i, j] + (float(r) / scale) ** 2
             link_of[(i, j)] = k
     # The tie-break, as an infinitesimal bonus on every column: the leftover column pays its own
-    # badness, so among exactly tied choices the assignment leaves out the square with the fewest
-    # full-side contacts, then the highest, then the rightmost.
+    # badness, so among exactly tied choices the assignment leaves out the square with the
+    # fewest full-side contacts, then the highest, then the rightmost.
     side = nxt["side"]
     badness = np.array(
         [
@@ -720,8 +739,9 @@ def match_pair(
     for r, c in zip(rows, cols, strict=True):
         mapping[int(r)] = int(c)
     (new_index,) = sorted(set(range(n + 1)) - set(mapping))
-    # Before anything is derived from it: no two squares may be shorter off in each other's place.
-    # The blocks below are built by walking this mapping, so a repaired pairing rebuilds them.
+    # Before anything is derived from it: no two squares may be shorter off in each other's
+    # place. The blocks below are built by walking this mapping, so a repaired pairing rebuilds
+    # them.
     mapping, crossings_undone = repair_crossings(mapping, base)
     exclusion = exclusion_costs(cost, rows, cols)
     tied = sorted(
@@ -738,10 +758,10 @@ def match_pair(
             else "lowest cost, fewest contacts, highest position"
         )
 
-    # The blocks that survive the assignment: a link's members that were assigned along it, under
-    # the link's own transform (its pivot travels at most BLOCK_SLIDE_MAX and every member lands
-    # within BLOCK_RESIDUAL_TOL, both by construction); fewer than BLOCK_MIN members is not a
-    # block and moves alone.
+    # The blocks that survive the assignment: a link's members that were assigned along it,
+    # under the link's own transform (its pivot travels at most BLOCK_SLIDE_MAX and every
+    # member lands within BLOCK_RESIDUAL_TOL, both by construction); fewer than BLOCK_MIN
+    # members is not a block and moves alone.
     members_of: dict[int, list[int]] = {}
     for i, j in enumerate(mapping):
         k = link_of.get((i, j))
@@ -814,7 +834,7 @@ def match_pair(
     }
 
 
-# --------------------------------------------------------------------------- motion and statistics
+# ------------------------------------------------------------------------ motion and statistics
 
 
 def block_pose(a: tuple, b: tuple, block: dict | None, u: float) -> tuple[float, float, float]:
@@ -899,7 +919,8 @@ def square_corners(x: float, y: float, angle: float) -> np.ndarray:
 
 
 def squares_overlap(a: tuple, b: tuple, depth: float = 1e-6) -> bool:
-    """Two unit squares overlap with positive area (separating-axis test; touching does not count)."""
+    """Two unit squares overlap with positive area (separating-axis test; touching does not
+    count)."""
     ca, cb = square_corners(*a), square_corners(*b)
     for angle in (a[2], b[2]):
         for axis_angle in (angle, angle + 90.0):
@@ -1018,7 +1039,8 @@ def identity_chain(matches: dict[int, dict]) -> dict[int, list[int]]:
 FRACTION_RE = re.compile(r"\((\d+)/(\d+)\)")
 SQRT_RE = re.compile(r"\s*sqrt\((\d+)\)")
 VULGAR = {"1/2": "½", "1/3": "⅓", "2/3": "⅔", "1/4": "¼", "3/4": "¾"}
-# `side.display` and `lower.display` as the composite record writes them: s(n), a relation, a value.
+# `side.display` and `lower.display` as the composite record writes them: s(n), a relation, a
+# value.
 SIDE_DISPLAY = re.compile(r"^s\((\d+)\) ([=≤≥]) (.+)$")
 
 
@@ -1029,11 +1051,12 @@ def pretty_exact(form: str | None) -> str | None:
 
     def fraction(m: re.Match) -> str:
         key = f"{m.group(1)}/{m.group(2)}"
-        return VULGAR.get(key, f"({m.group(1)}⁄{m.group(2)})")
+        # U+2044 FRACTION SLASH and, below, U+2212 MINUS SIGN: the typography the page
+        # draws. ASCII substitutes would change the rendered bytes.
+        return VULGAR.get(key, f"({m.group(1)}⁄{m.group(2)})")  # noqa: RUF001
 
     text = FRACTION_RE.sub(fraction, text)
-    text = text.replace(" + ", " + ").replace(" - ", " − ")
-    return text
+    return text.replace(" + ", " + ").replace(" - ", " − ")  # noqa: RUF001
 
 
 def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
@@ -1050,11 +1073,12 @@ def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
             or (match.group(2) == "=") != (relation == "=")
         ):
             raise ValueError(
-                f"n={n}: side display {side['display']!r} does not read as s({n}) with its relation"
+                f"n={n}: side display {side['display']!r} does not read as s({n}) with its "
+                f"relation"
             )
         value_text = match.group(3)
-        # The proved lower bound, read as the slideshow reads it: shown for every open n, and the
-        # record's own display must read `s(n) ≥ value`. Proved n leave the slot empty.
+        # The proved lower bound, read as the slideshow reads it: shown for every open n, and
+        # the record's own display must read `s(n) ≥ value`. Proved n leave the slot empty.
         lower = entry["lower"]
         lower_value = None
         if lower["shown"]:
@@ -1091,9 +1115,10 @@ def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
             #
             # **One chained inequality, not two lines.** `4.59 <= s(17) <= 4.67553` is what is
             # known about s(17), and writing it as two statements made a reader assemble it --
-            # and put the lower bound, which is the harder half to prove, second. Where the value
-            # is known exactly there is nothing to chain and nothing to distinguish, so the
-            # equality is stated alone and in ink: a colour there would imply a bound it is not.
+            # and put the lower bound, which is the harder half to prove, second. Where the
+            # value is known exactly there is nothing to chain and nothing to distinguish, so
+            # the equality is stated alone and in ink: a colour there would imply a bound it is
+            # not.
             #
             # Only the VALUES take a colour, never `s(n)` or a relation. `s(n)` names the same
             # quantity throughout and colouring it would say two different things were meant.
@@ -1126,10 +1151,10 @@ def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
     rendered = katex_html([facts[n][key] for n, key in order])
     for (n, key), html in zip(order, rendered, strict=True):
         facts[n][key.replace("tex_", "html_")] = html
-    for n in facts:
+    for fact in facts.values():
         for key in keys:
-            facts[n].setdefault(key.replace("tex_", "html_"), None)
-            del facts[n][key]
+            fact.setdefault(key.replace("tex_", "html_"), None)
+            del fact[key]
     return facts
 
 
@@ -1157,7 +1182,10 @@ def approx_outline() -> dict:
     from fontTools.pens.svgPathPen import SVGPathPen  # noqa: PLC0415
     from fontTools.ttLib import TTFont  # noqa: PLC0415
 
-    katex = TTFont(KATEX_FONTS / "KaTeX_Main-Regular.woff2")
+    # Read untyped, as `glyph_bounds` and `left_bearing` below also read their fonts: fontTools
+    # fills a table's fields in when it decompiles it, so the stubs declare none of them and
+    # `getBestCmap` is typed as optional even though a face without a cmap cannot be loaded.
+    katex: Any = TTFont(KATEX_FONTS / "KaTeX_Main-Regular.woff2")
     if katex["head"].unitsPerEm != 1000:
         raise ValueError("KaTeX_Main is not on a 1000-unit em")
     glyph_set = katex.getGlyphSet()
@@ -1201,7 +1229,9 @@ def type_metrics() -> dict:
     """
     from fontTools.ttLib import TTFont  # noqa: PLC0415
 
-    sans = TTFont(FONTS / "source-sans-3-latin-wght-normal.woff2")
+    # Untyped for the same reason as in `approx_glyph`: `OS/2.sCapHeight` and `head.unitsPerEm`
+    # are set when fontTools decompiles those tables, not declared by the stubs.
+    sans: Any = TTFont(FONTS / "source-sans-3-latin-wght-normal.woff2")
     serif = TTFont(FONTS / f"pt-serif-latin-{NUMERAL_WEIGHT}-normal.woff2")
     italic = TTFont(FONTS / "pt-serif-latin-400-italic.woff2")
 
@@ -1253,15 +1283,17 @@ def katex_css() -> str:
     """KaTeX's stylesheets, through the explainer's own inliner.
 
     **Reused rather than rewritten, and the reuse is the point.** `render_explainer.katex_css`
-    already does this for the paper: it takes kpress's two stylesheets in kpress's order, inlines
-    the faces the page can actually reach and drops the rest (every face is 30-40 kB), and it
-    includes `katex-text-face.css` -- the composite that draws the letters and digits of mathematics
-    from PT Serif and leaves the rest to the KaTeX faces. That composite is what makes the paper's
-    mathematics look like the paper rather than like generic KaTeX, and it is exactly what the owner
-    asked this panel to match. A second implementation here would have been a second thing to keep
-    in step with kpress, and would have got the visual match wrong by leaving it out.
+    already does this for the paper: it takes kpress's two stylesheets in kpress's order,
+    inlines the faces the page can actually reach and drops the rest (every face is 30-40 kB),
+    and it includes `katex-text-face.css` -- the composite that draws the letters and digits of
+    mathematics from PT Serif and leaves the rest to the KaTeX faces. That composite is what
+    makes the paper's mathematics look like the paper rather than like generic KaTeX, and it is
+    exactly what the owner asked this panel to match. A second implementation here would have
+    been a second thing to keep in step with kpress, and would have got the visual match wrong
+    by leaving it out.
     """
-    from devtools.render_explainer import katex_css as inline_katex, kpress_static  # noqa: PLC0415
+    from devtools.render_explainer import katex_css as inline_katex  # noqa: PLC0415
+    from devtools.render_explainer import kpress_static  # noqa: PLC0415
 
     return inline_katex(kpress_static())
 
@@ -1284,16 +1316,16 @@ def bound_tex(n: int, relation: str, value: str, lower: str | None) -> str:
 def tex_of_exact(form: str) -> str:
     """The recorded closed form as TeX.
 
-    The composite writes these in a plain algebraic notation -- `(7/2) + (3/2)sqrt(2)` -- which is
-    readable and is not typeset. This is the one translation between the two: a parenthesised
+    The composite writes these in a plain algebraic notation -- `(7/2) + (3/2)sqrt(2)` -- which
+    is readable and is not typeset. This is the one translation between the two: a parenthesised
     quotient becomes a fraction and `sqrt(x)` becomes a radical. Everything else passes through
     because everything else is already TeX-safe: digits, signs and spaces.
     """
 
     def fraction(match: re.Match[str]) -> str:
-        # `\dfrac`, not `\frac`. Inline style compresses a fraction to script size and squeezes it
-        # between the lines around it, which on a poster reads as a smudge rather than as a number.
-        # Display style gives it its full height, which is what the line has room for.
+        # `\dfrac`, not `\frac`. Inline style compresses a fraction to script size and squeezes
+        # it between the lines around it, which on a poster reads as a smudge rather than as a
+        # number. Display style gives it its full height, which is what the line has room for.
         return "\\dfrac{" + match.group(1) + "}{" + match.group(2) + "}"
 
     def radical(match: re.Match[str]) -> str:
@@ -1306,13 +1338,14 @@ def tex_of_exact(form: str) -> str:
 def katex_html(sources: list[str]) -> list[str]:
     """Render every expression once, through the vendored KaTeX, at build time.
 
-    **Build time, not run time, and this is the point of it.** The panel's expressions are a fixed
-    set -- three per n -- so there is nothing to render while anyone is watching, and the page does
-    not have to carry a 280 kB typesetting engine to show them. It carries the answers.
+    **Build time, not run time, and this is the point of it.** The panel's expressions are a
+    fixed set -- three per n -- so there is nothing to render while anyone is watching, and the
+    page does not have to carry a 280 kB typesetting engine to show them. It carries the
+    answers.
 
-    It is the same KaTeX the explainer sets its mathematics with, from the same vendored copy, so
-    the panel's `s(11) <= 3.877084` is set the way the paper's is rather than approximated with
-    hand-placed spans in a face that happens to have a relation glyph.
+    It is the same KaTeX the explainer sets its mathematics with, from the same vendored copy,
+    so the panel's `s(11) <= 3.877084` is set the way the paper's is rather than approximated
+    with hand-placed spans in a face that happens to have a relation glyph.
     """
     if not sources:
         return []
@@ -1370,10 +1403,10 @@ def asset(name: str) -> str:
     """The text of `assets/<name>`, without its final newline.
 
     The page's stylesheet and script live beside the template rather than inside it, because
-    nothing could read them where they were: 395 lines of CSS and 5,079 of JavaScript sealed in an
-    HTML file that is itself composed by Python string operations, so no formatter indented them,
-    no linter parsed them and no editor coloured them as code. Each is now a file in the language
-    it is written in, and every tool for that language applies to it.
+    nothing could read them where they were: 395 lines of CSS and 5,079 of JavaScript sealed in
+    an HTML file that is itself composed by Python string operations, so no formatter indented
+    them, no linter parsed them and no editor coloured them as code. Each is now a file in the
+    language it is written in, and every tool for that language applies to it.
 
     They are inlined here the way the faces are -- a `__TOKEN__` alone on a line, replaced with
     `str.replace`. **`str.replace` and not `%` or `.format`,** which is not a preference: the
@@ -1382,18 +1415,20 @@ def asset(name: str) -> str:
     from an f-string into the rendered page and broke a line of mathematics in two.
 
     The final newline goes because the token's own line supplies it. The split was required to
-    leave the built page byte-for-byte what it was, and the newline is where that is won or lost.
+    leave the built page byte-for-byte what it was, and the newline is where that is won or
+    lost.
     """
     return (HERE / "assets" / name).read_text(encoding="utf-8").removesuffix("\n")
 
 
 def build_html(template: str, payload: dict) -> str:
     data = json.dumps(payload, separators=(",", ":"), sort_keys=True, ensure_ascii=False)
-    # A closing script tag inside JSON would end the data block early; there is none, but be safe.
+    # A closing script tag inside JSON would end the data block early; there is none, but be
+    # safe.
     data = data.replace("</", "<\\/")
     html = (
-        # The page is assembled before it is filled: the stylesheet and the script go in first, so
-        # a face, KaTeX or data token is substituted wherever it ends up standing.
+        # The page is assembled before it is filled: the stylesheet and the script go in first,
+        # so a face, KaTeX or data token is substituted wherever it ends up standing.
         template.replace("__WORKBENCH_CSS__", asset("workbench.css"))
         .replace("__WORKBENCH_JS__", asset("workbench.js"))
         .replace("__FONT_CSS__", font_css())
@@ -1401,9 +1436,9 @@ def build_html(template: str, payload: dict) -> str:
         .replace("__DATA__", data)
     )
     # The explainer's own check, not a substring search for "http". KaTeX draws a radical as an
-    # inline SVG, and an SVG carries `xmlns="http://www.w3.org/2000/svg"` -- a namespace name, which
-    # is read and never fetched. `EXTERNAL_REFERENCE` matches the four things that do fetch: a
-    # script's src, a link's href, an @import, and a url() that is not a data URI.
+    # inline SVG, and an SVG carries `xmlns="http://www.w3.org/2000/svg"` -- a namespace name,
+    # which is read and never fetched. `EXTERNAL_REFERENCE` matches the four things that do
+    # fetch: a script's src, a link's href, an @import, and a url() that is not a data URI.
     from devtools.render_explainer import EXTERNAL_REFERENCE  # noqa: PLC0415
 
     found = EXTERNAL_REFERENCE.search(html)
@@ -1440,7 +1475,8 @@ def summary_text(stats: list[dict]) -> str:
     for s in stats:
         kinds.setdefault(s["kind"], []).append(s)
     lines.append(
-        "| kind | pairs | mean of max displacement | max of max displacement | pairs with any rotation | mean crossings |"
+        "| kind | pairs | mean of max displacement | max of max displacement | "
+        "pairs with any rotation | mean crossings |"
     )
     lines.append("| --- | ---: | ---: | ---: | ---: | ---: |")
     for kind in ("prefix", "shared-picture", "matched"):
@@ -1448,21 +1484,27 @@ def summary_text(stats: list[dict]) -> str:
         if not rows:
             continue
         lines.append(
-            f"| {kind} | {len(rows)} | {sum(r['max_displacement'] for r in rows) / len(rows):.3f} | "
+            f"| {kind} | {len(rows)} | "
+            f"{sum(r['max_displacement'] for r in rows) / len(rows):.3f} | "
             f"{max(r['max_displacement'] for r in rows):.3f} | "
             f"{sum(1 for r in rows if r['rotated'] > 0)} | "
             f"{sum(r['crossings'] for r in rows) / len(rows):.1f} |"
         )
     lines.append("")
     total = len(stats)
-    under = lambda x: sum(1 for s in stats if s["max_displacement"] < x)
+
+    def under(x: float) -> int:
+        return sum(1 for s in stats if s["max_displacement"] < x)
+
     lines.append(f"Pairs with max displacement under 1 unit: {under(1.0)} of {total}")
     lines.append(f"Pairs with max displacement under 3 units: {under(3.0)} of {total}")
     lines.append(
-        f"Pairs with max displacement over 5 units: {sum(1 for s in stats if s['max_displacement'] > 5.0)} of {total}"
+        f"Pairs with max displacement over 5 units: "
+        f"{sum(1 for s in stats if s['max_displacement'] > 5.0)} of {total}"
     )
     lines.append(
-        f"Pairs with max displacement over 10 units: {sum(1 for s in stats if s['max_displacement'] > 10.0)} of {total}"
+        f"Pairs with max displacement over 10 units: "
+        f"{sum(1 for s in stats if s['max_displacement'] > 10.0)} of {total}"
     )
     lines.append("")
     lines.append(
@@ -1499,37 +1541,43 @@ def summary_text(stats: list[dict]) -> str:
     lines.append("Most chaotic pairs (by maximum displacement):")
     lines.append("")
     lines.append(
-        "| pair | side | max disp | mean disp | moved >1 | rotated | crossings | blocks | moving in blocks | alone |"
+        "| pair | side | max disp | mean disp | moved >1 | rotated | crossings | blocks | "
+        "moving in blocks | alone |"
     )
     lines.append("| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
-    for s in matched[:15]:
-        lines.append(
-            f"| {s['n']}→{s['n'] + 1} | {s['side_from']:.3f}→{s['side_to']:.3f} | {s['max_displacement']:.2f} | "
-            f"{s['mean_displacement']:.2f} | {s['moved_over_1_0']} | {s['rotated']} | {s['crossings']} | "
-            f"{s['block_count']} | {s['moving_in_block']} | {s['moving_individually']} |"
-        )
+    lines.extend(
+        f"| {s['n']}→{s['n'] + 1} | {s['side_from']:.3f}→{s['side_to']:.3f} | "
+        f"{s['max_displacement']:.2f} | {s['mean_displacement']:.2f} | "
+        f"{s['moved_over_1_0']} | {s['rotated']} | {s['crossings']} | "
+        f"{s['block_count']} | {s['moving_in_block']} | {s['moving_individually']} |"
+        for s in matched[:15]
+    )
     lines.append("")
     graceful = sorted(kinds.get("matched", []), key=lambda s: s["max_displacement"])
     lines.append("Most graceful matched pairs (by maximum displacement):")
     lines.append("")
     lines.append(
-        "| pair | side | max disp | mean disp | moved >1 | rotated | crossings | blocks | moving in blocks | alone |"
+        "| pair | side | max disp | mean disp | moved >1 | rotated | crossings | blocks | "
+        "moving in blocks | alone |"
     )
     lines.append("| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
-    for s in graceful[:12]:
-        lines.append(
-            f"| {s['n']}→{s['n'] + 1} | {s['side_from']:.3f}→{s['side_to']:.3f} | {s['max_displacement']:.2f} | "
-            f"{s['mean_displacement']:.2f} | {s['moved_over_1_0']} | {s['rotated']} | {s['crossings']} | "
-            f"{s['block_count']} | {s['moving_in_block']} | {s['moving_individually']} |"
-        )
+    lines.extend(
+        f"| {s['n']}→{s['n'] + 1} | {s['side_from']:.3f}→{s['side_to']:.3f} | "
+        f"{s['max_displacement']:.2f} | {s['mean_displacement']:.2f} | "
+        f"{s['moved_over_1_0']} | {s['rotated']} | {s['crossings']} | "
+        f"{s['block_count']} | {s['moving_in_block']} | {s['moving_individually']} |"
+        for s in graceful[:12]
+    )
     lines.append("")
     by_rot = max(stats, key=lambda s: (s["rotated"], s["n"]))
     by_disp = max(stats, key=lambda s: (s["max_displacement"], s["n"]))
     lines.append(
-        f"Largest matched rotation count: {by_rot['n']}→{by_rot['n'] + 1} ({by_rot['rotated']} squares rotate)"
+        f"Largest matched rotation count: {by_rot['n']}→{by_rot['n'] + 1} "
+        f"({by_rot['rotated']} squares rotate)"
     )
     lines.append(
-        f"Largest maximum displacement: {by_disp['n']}→{by_disp['n'] + 1} ({by_disp['max_displacement']:.2f} units)"
+        f"Largest maximum displacement: {by_disp['n']}→{by_disp['n'] + 1} "
+        f"({by_disp['max_displacement']:.2f} units)"
     )
     lines.append("")
     lines.extend(block_summary_lines(kinds.get("matched", []), stats))
@@ -1537,8 +1585,9 @@ def summary_text(stats: list[dict]) -> str:
     per_pair = TIMING["dwell"] + TIMING["move"] + TIMING["settle"]
     total_seconds = per_pair * total + TIMING["dwell"]
     lines.append(
-        f"Full 1..324 run at dwell {TIMING['dwell']} s, move {TIMING['move']} s, settle {TIMING['settle']} s: "
-        f"{total_seconds:.1f} s = {total_seconds / 60:.1f} min ({total} transitions plus a closing dwell)"
+        f"Full 1..324 run at dwell {TIMING['dwell']} s, move {TIMING['move']} s, "
+        f"settle {TIMING['settle']} s: {total_seconds:.1f} s = {total_seconds / 60:.1f} min "
+        f"({total} transitions plus a closing dwell)"
     )
     static = sum(1 for s in stats if s["kind"] != "matched")
     moving = total - static
@@ -1546,8 +1595,10 @@ def summary_text(stats: list[dict]) -> str:
         static_pair = timing["dwell"] + timing["move"] + timing["settle"]
         seconds = per_pair * moving + static_pair * static + TIMING["dwell"]
         lines.append(
-            f"Per-kind schedule, static appends at dwell {timing['dwell']} s, move {timing['move']} s, "
-            f"settle {timing['settle']} s ({name}): {moving} × {per_pair:.1f} + {static} × {static_pair:.1f} + "
+            f"Per-kind schedule, static appends at dwell {timing['dwell']} s, "
+            f"move {timing['move']} s, settle {timing['settle']} s ({name}): "
+            # U+00D7 MULTIPLICATION SIGN: the character the summary prints.
+            f"{moving} × {per_pair:.1f} + {static} × {static_pair:.1f} + "  # noqa: RUF001
             f"{TIMING['dwell']} = {seconds:.1f} s = {seconds / 60:.1f} min"
         )
     return "\n".join(lines)
@@ -1561,7 +1612,9 @@ def block_summary_lines(matched: list[dict], stats: list[dict]) -> list[str]:
     moving = sum(s["moving"] for s in matched)
     in_blocks = sum(s["moving_in_block"] for s in matched)
     lines.append(
-        f"Block matching over the {m} assignment pairs (clusters within {CLUSTER_ANGLE_TOL:g} degrees and a gap of {CLUSTER_GAP_TOL:g}, residual tolerance {BLOCK_RESIDUAL_TOL:g}, discount {BLOCK_DISCOUNT:g}):"
+        f"Block matching over the {m} assignment pairs "
+        f"(clusters within {CLUSTER_ANGLE_TOL:g} degrees and a gap of {CLUSTER_GAP_TOL:g}, "
+        f"residual tolerance {BLOCK_RESIDUAL_TOL:g}, discount {BLOCK_DISCOUNT:g}):"
     )
     lines.append("")
     mostly = sum(
@@ -1573,23 +1626,33 @@ def block_summary_lines(matched: list[dict], stats: list[dict]) -> list[str]:
     entirely = sum(1 for s in matched if s["moving"] and s["moving_individually"] == 0)
     fallback = sum(1 for s in matched if s["moving_individually"] > 0)
     lines.append(
-        f"- Moving squares carried by a block: {in_blocks} of {moving} ({100 * in_blocks / moving:.1f}%)"
+        f"- Moving squares carried by a block: {in_blocks} of {moving} "
+        f"({100 * in_blocks / moving:.1f}%)"
     )
     lines.append(
-        f"- Pairs whose moving squares are at least half in blocks: {mostly} of {m}; at least nine in ten: {nearly_all}; all of them: {entirely}"
+        f"- Pairs whose moving squares are at least half in blocks: {mostly} of {m}; "
+        f"at least nine in ten: {nearly_all}; all of them: {entirely}"
     )
     lines.append(
         f"- Pairs where some moving square fell back to a square-level move: {fallback} of {m}"
     )
     lines.append(
-        f"- Blocks per pair: mean {sum(s['block_count'] for s in matched) / m:.1f}, max {max(s['block_count'] for s in matched)}; clusters per frame (from, to): mean {sum(s['clusters_from'] for s in matched) / m:.1f}, {sum(s['clusters_to'] for s in matched) / m:.1f}"
+        f"- Blocks per pair: mean {sum(s['block_count'] for s in matched) / m:.1f}, "
+        f"max {max(s['block_count'] for s in matched)}; "
+        f"clusters per frame (from, to): "
+        f"mean {sum(s['clusters_from'] for s in matched) / m:.1f}, "
+        f"{sum(s['clusters_to'] for s in matched) / m:.1f}"
     )
     with_blocks = [s for s in matched if s["block_count"]]
     mean_res = sum(s["block_residual_mean"] * s["in_block"] for s in with_blocks) / max(
         1, sum(s["in_block"] for s in with_blocks)
     )
     lines.append(
-        f"- Residual after the block transform, over block members: mean {mean_res:.3f} units, max {max((s['block_residual_max'] for s in with_blocks), default=0):.3f}; pairs with a max residual over 0.2: {sum(1 for s in with_blocks if s['block_residual_max'] > 0.2)}"
+        f"- Residual after the block transform, over block members: "
+        f"mean {mean_res:.3f} units, "
+        f"max {max((s['block_residual_max'] for s in with_blocks), default=0):.3f}; "
+        f"pairs with a max residual over 0.2: "
+        f"{sum(1 for s in with_blocks if s['block_residual_max'] > 0.2)}"
     )
     lines.append("")
     lines.append(f"New-square rule: {NEW_RULE}.")
@@ -1602,12 +1665,18 @@ def block_summary_lines(matched: list[dict], stats: list[dict]) -> list[str]:
     differs = [s["n"] for s in matched if s["new_choice_differs"]]
     lines.append(f"- choice differs from revision 4's leftover: {len(differs)} of {m} pairs")
     lines.append(
-        f"- tie sets larger than one: {sum(1 for s in matched if s['new_tied'] > 1)} pairs, the largest {max(s['new_tied'] for s in matched)} candidates"
+        f"- tie sets larger than one: {sum(1 for s in matched if s['new_tied'] > 1)} pairs, "
+        f"the largest {max(s['new_tied'] for s in matched)} candidates"
     )
     lines.append("")
     overlapping = [s for s in stats if s["arrival_overlaps"]]
     lines.append(
-        f"Arrival overlap census (the new square at its final pose against the squares of n before they move): {len(overlapping)} of {len(stats)} pairs, {sum(s['arrival_overlaps'] for s in overlapping)} squares covered in all; max {max((s['arrival_overlaps'] for s in stats), default=0)} in one pair; mean over the overlapping pairs {sum(s['arrival_overlaps'] for s in overlapping) / max(1, len(overlapping)):.2f}"
+        f"Arrival overlap census (the new square at its final pose against the squares of n "
+        f"before they move): {len(overlapping)} of {len(stats)} pairs, "
+        f"{sum(s['arrival_overlaps'] for s in overlapping)} squares covered in all; "
+        f"max {max((s['arrival_overlaps'] for s in stats), default=0)} in one pair; "
+        f"mean over the overlapping pairs "
+        f"{sum(s['arrival_overlaps'] for s in overlapping) / max(1, len(overlapping)):.2f}"
     )
     return lines
 
@@ -1620,9 +1689,9 @@ class Stopwatch:
 
     Every stage here is at least O(n^2) in the number of squares and one of them is a Hungarian
     assignment, which is cubic; the corpus runs them 323 times. A change that makes one of them
-    quadratically worse would still finish, just slowly, and would be noticed as "the build feels
-    slow" some weeks later. The timings go into the stats record beside the measurements they
-    produced, so a regression is a diff rather than a memory.
+    quadratically worse would still finish, just slowly, and would be noticed as "the build
+    feels slow" some weeks later. The timings go into the stats record beside the measurements
+    they produced, so a regression is a diff rather than a memory.
     """
 
     def __init__(self) -> None:
@@ -1704,9 +1773,10 @@ def main(argv: list[str] | None = None) -> int:
         "rotation_tolerance_deg": ROTATION_TOLERANCE_DEG,
         "crossing_distance": CROSSING_DISTANCE,
         # The build's own timings are deliberately NOT recorded here. They are a measurement of
-        # this machine on this run, and writing them into a tracked artifact made two runs differ
-        # in bytes -- against this generator's "two runs give identical bytes" -- and churned a
-        # file that `pages.yml` and `build_workbench_site.py` both declare as a render input.
+        # this machine on this run, and writing them into a tracked artifact made two runs
+        # differ in bytes -- against this generator's "two runs give identical bytes" -- and
+        # churned a file that `pages.yml` and `build_workbench_site.py` both declare as a
+        # render input.
         # They are printed to stdout instead, where a measurement of the run belongs.
         "block_matching": {
             "cluster_angle_tol_deg": CLUSTER_ANGLE_TOL,
@@ -1728,8 +1798,9 @@ def main(argv: list[str] | None = None) -> int:
     }
     (out / "transition-stats.json").write_text(compact_json(stats_doc))
     # The footer the documentation floor requires on every durable Markdown file. It was being
-    # maintained by HAND on a generated file, so every rebuild silently dropped it and the floor
-    # only noticed on the next commit. A generated document's footer is the generator's to write.
+    # maintained by HAND on a generated file, so every rebuild silently dropped it and the
+    # floor only noticed on the next commit. A generated document's footer is the generator's to
+    # write.
     (out / "stats-summary.md").write_text(STATS_BANNER + summary + "\n\n" + DOC_FOOTER)
 
     template = (HERE / "template.html").read_text()
@@ -1754,13 +1825,14 @@ def main(argv: list[str] | None = None) -> int:
                         {
                             k: v
                             for k, v in b.items()
-                            if k != "residual_mean" and k != "residual_max"
+                            if k not in {"residual_mean", "residual_max"}
                         }
                         for b in matches[n]["blocks"]
                     ],
                     "block_of": matches[n]["block_of"],
-                    # The square of frame n that arrived in the pair before: it keeps its scarlet
-                    # outline through this pair's dwell. Known for every n from the full matching.
+                    # The square of frame n that arrived in the pair before: it keeps its
+                    # scarlet outline through this pair's dwell. Known for every n from the
+                    # full matching.
                     "prev_new": matches[n - 1]["new"] if n > 1 else None,
                     "stats": {
                         k: stats[n - 1][k]
@@ -1804,8 +1876,9 @@ def main(argv: list[str] | None = None) -> int:
         (out / "index-all.html").write_text(html_all)
         print(f"index-all.html: {len(html_all.encode('utf-8'))} bytes, 323 pairs embedded")
         # Revision 8: the workbench is the all-pairs build under the name the owner opens. The
-        # sequence tab defaults to 1..100 and the single-step tab to 16 -> 17, and neither exists in
-        # the 25-pair demo, so the file with everything in it is the one that should be obvious.
+        # sequence tab defaults to 1..100 and the single-step tab to 16 -> 17, and neither
+        # exists in the 25-pair demo, so the file with everything in it is the one that should
+        # be obvious.
         (out / "workbench.html").write_text(html_all)
         print(
             f"workbench.html: the same {len(html_all.encode('utf-8'))} bytes, the file to open"

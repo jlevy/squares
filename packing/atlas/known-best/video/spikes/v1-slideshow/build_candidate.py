@@ -204,6 +204,22 @@ SOURCE_LABELS = {
 }
 
 
+# ---------------------------------------------------------------------------- match
+
+
+def require_match(match: re.Match[str] | None, what: str) -> re.Match[str]:
+    """The match, or a failure naming what was being matched.
+
+    Every pattern here reads a shape the record and the renderer guarantee, so a miss
+    means an input changed. Fail at the miss, with the name of what was sought, rather
+    than on an attribute of `None` ten frames further on.
+    """
+    if match is None:
+        message = f"no match for {what}"
+        raise ValueError(message)
+    return match
+
+
 # --------------------------------------------------------------------------- record
 
 
@@ -271,14 +287,14 @@ def extract_geometry(svg_text: str, n: int, coordinate) -> tuple[list[str], list
     polygons: list[str] = []
     fills: list[str] = []
     for attrs in POLYGON.findall(svg_text):
-        points = POINTS.search(attrs).group(1).split()
+        points = require_match(POINTS.search(attrs), f"n={n}: polygon points").group(1).split()
         assert len(points) == 4, f"n={n}: polygon with {len(points)} points"
         corners = []
         for pair in points:
             px, py = pair.split(",")
             corners.append(coordinate(px) + "," + coordinate(py))
         polygons.append(" ".join(corners))
-        fills.append(FILL.search(attrs).group(1).lower())
+        fills.append(require_match(FILL.search(attrs), f"n={n}: polygon fill").group(1).lower())
     assert len(polygons) == n, f"n={n}: {len(polygons)} fill polygons"
     return polygons, fills
 
@@ -336,8 +352,10 @@ def parse_exact_form(text: str):
 
     def product():
         factors = [factor()]
-        while peek() is not None and (peek() == "sqrt(" or peek() == "(" or peek().isdigit()):
+        head = peek()
+        while head is not None and (head in ("sqrt(", "(") or head.isdigit()):
             factors.append(factor())
+            head = peek()
         return factors[0] if len(factors) == 1 else ("prod", factors)
 
     def factor():
@@ -505,7 +523,13 @@ def badge_glyph_outlines(repo: Path) -> dict[str, tuple[str, Decimal, Decimal, D
 
     def outline(font: TTFont, char: str) -> tuple[str, Decimal, Decimal, Decimal]:
         glyph_set = font.getGlyphSet()
-        name = font.getBestCmap()[ord(char)]
+        # `getBestCmap` is None only for a font carrying no unicode cmap. Both faces
+        # here carry one; say so by failing on the name rather than on a subscript.
+        cmap = font.getBestCmap()
+        if cmap is None:
+            message = f"no unicode cmap in the font asked for {char!r}"
+            raise ValueError(message)
+        name = cmap[ord(char)]
         pen = SVGPathPen(glyph_set, ntos=ntos)
         glyph_set[name].draw(pen)
         bounds = BoundsPen(glyph_set)
@@ -522,10 +546,14 @@ def badge_glyph_outlines(repo: Path) -> dict[str, tuple[str, Decimal, Decimal, D
         TTFont(repo / FONT_DIR / "source-sans-3-latin-wght-normal.woff2"),
         {"wght": BADGE_WEIGHT},
     )
-    assert sans["head"].unitsPerEm == 1000
+    # fontTools builds a table's fields at run time from the binary it decompiles, so
+    # `unitsPerEm` on `head` and `sCapHeight` on `OS/2` exist only on the loaded font
+    # and are invisible to a static checker. The three reads below are ignored for that
+    # reason; the asserts are what check the values are the ones this build assumes.
+    assert sans["head"].unitsPerEm == 1000  # pyright: ignore[reportAttributeAccessIssue]
     katex = TTFont(repo / KATEX_FONT_DIR / "KaTeX_Main-Regular.woff2")
-    assert katex["head"].unitsPerEm == 1000
-    cap_height = Decimal(sans["OS/2"].sCapHeight)
+    assert katex["head"].unitsPerEm == 1000  # pyright: ignore[reportAttributeAccessIssue]
+    cap_height = Decimal(sans["OS/2"].sCapHeight)  # pyright: ignore[reportAttributeAccessIssue]
     outlines = {char: outline(sans, char) for char in "O=R?"}
     outlines["≈"] = outline(katex, "≈")
     outlines["cap"] = ("", cap_height, Decimal(0), Decimal(0))
@@ -708,14 +736,20 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
         who = join_names(reported_lower["proved_by"])
         proved_year = reported_lower["proved_year"]
         year = "" if proved_year is None else str(proved_year)
-        kind = LOWER_KIND_LABELS.get(reported_lower["kind"], reported_lower["kind"])
+        # The record's own kind string is the fallback label, so the lookup never
+        # yields None; annotating it says so where the checker can see it.
+        kind_key: str = reported_lower["kind"]
+        kind = LOWER_KIND_LABELS.get(kind_key, kind_key)
         pieces = [p for p in (who, year) if p]
         text = kind if not pieces else f"{', '.join(pieces)} ({kind})"
         rows.append(("Lower bound", text, text))
     # No minimal-polynomial row: at 28px the shortest that printed (n = 302, 38
     # characters) takes two lines and its label alone is 309px wide; the degree
     # note under the exact line carries what the row would add.
-    source_label = SOURCE_LABELS.get(upper["source_key"], upper["source_key"].strip("[]"))
+    # As with the lower-bound kind: the key itself, debracketed, is the fallback, so
+    # the lookup always returns a string.
+    source_key: str = upper["source_key"]
+    source_label = SOURCE_LABELS.get(source_key, source_key.strip("[]"))
     source_url = manifest["source"].get("url")
     if not source_url:
         for resource in frontier["resources"]:
@@ -1358,9 +1392,7 @@ def assemble(fonts_css: str, symbols: str, facts_templates: list[str], data_json
         '<div id="live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>\n'
         "<noscript>This slideshow needs JavaScript to step through the packings.</noscript>\n"
         '<template id="proto"><svg><g class="squares">'
-        "<polygon></polygon></g></svg></template>\n"
-        + "\n".join(facts_templates)
-        + "\n"
+        "<polygon></polygon></g></svg></template>\n" + "\n".join(facts_templates) + "\n"
         '<script id="atlas-data" type="application/json">' + data_json + "</script>\n"
         "<script>" + JS + "</script>\n"
         "</body>\n"

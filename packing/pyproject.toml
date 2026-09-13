@@ -158,12 +158,6 @@ extend-exclude = [
   # someone else's style, importing nothing from this project, and checked by being
   # run rather than by being linted. Reformatting it would defeat the point.
   "cases/n12_fractional_certificate/independent_verify.py",
-  # Retained video spikes: prototype generators kept as evidence for the atlas video
-  # plan's Phase 0 decisions, not as project code. They are excluded rather than
-  # cleaned because the plan's Phases 1 and 3 re-implement them under project
-  # conventions, and a thousand findings' worth of tidying a throwaway prototype
-  # would buy nothing. Nothing imports them; their own tests run them.
-  "atlas/known-best/video/spikes",
 ]
 
 [tool.ruff.lint]
@@ -301,6 +295,11 @@ include = [
     "benchmarks",
     "tests",
     "frankensim-probe",
+    # The retained video spikes. They were excluded from both gates while they were
+    # throwaway prototypes; the workbench they grew into is shipped, so they are held to
+    # the same floor as everything else here. `print` stays waived for them under
+    # `per-file-ignores`, because they are tools and printing is their interface.
+    "atlas/known-best/video/spikes",
     # The hand-written skill assets at the repository root are project Python too; the
     # gate runs from this directory, so they are reached by a parent path. `.claude/skills`
     # is a byte-identical mirror kept by `make skills-sync`, so it is not listed twice.
