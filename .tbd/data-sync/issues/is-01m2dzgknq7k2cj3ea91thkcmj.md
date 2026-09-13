@@ -5,7 +5,7 @@ title: Publish independently accepted BC303 T1 reader as a separate stacked PR
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -14,9 +14,11 @@ labels:
 dependencies:
   - type: blocks
     target: is-01m2eddtqbpv11d9g5yk0s8cv0
+  - type: blocks
+    target: is-01m2edr5vf9vba530c9ntyd3t1
 parent_id: is-01m2b8watk22ejr9s0zhgrdd17
 created_at: 2026-09-13T18:12:16.695Z
-updated_at: 2026-09-13T22:15:25.672Z
+updated_at: 2026-09-13T22:21:04.750Z
 ---
 After think-3jsz reaches exact-head acceptance, base a new research branch on the current PR156 head, cherry-pick or port only the T1 source-bound replay, retained review, and narrow research record. Open a separate PR stacked above PR156, measure its unique diff and validation/cost separately, and keep the local counterexample distinct from BC329 calibration. Do not claim T2/global owner routing or a stronger n11 bound.
 
