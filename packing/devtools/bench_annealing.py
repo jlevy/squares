@@ -30,19 +30,45 @@ stops at `--budget` seconds with a partial result rather than a lost one.
 from __future__ import annotations
 
 import argparse
-import json
+import hashlib
+import importlib.metadata
 import math
 import os
+import platform
 import statistics
+import subprocess
 import sys
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from tempfile import TemporaryDirectory
+from typing import TYPE_CHECKING
+
+from workbench_tools.trial_records import (
+    SourceReceipt,
+    Trial,
+    partition_trials,
+    trial_from_json,
+    trial_from_probe,
+    trial_from_row,
+    trial_to_json,
+    valid,
+)
+
+if TYPE_CHECKING:
+    from playwright.sync_api import Browser, Playwright
+
+__all__ = ["Trial", "trial_from_row", "valid"]
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+REPO = PROJECT_ROOT.parent
 PAGE = PROJECT_ROOT / "site/workbench/index.html"
 RESULTS = PROJECT_ROOT / "campaign/results/annealing"
+WORKBENCH_PACKAGE = REPO / "packages/workbench"
+BUILD_ASSETS = WORKBENCH_PACKAGE / "tools/build-assets.ts"
+BENCHMARK_SOURCE = WORKBENCH_PACKAGE / "probes/bench-annealing.ts"
+VIEWPORT_WIDTH = 1920
+VIEWPORT_HEIGHT = 1080
 
 #: How close a run's container side has to come to the record to count as having found it.
 #:
@@ -74,252 +100,43 @@ OUTCOME = "closed"
 #: the ladder is what shows whether more budget is still buying anything.
 BEST_OF = (1, 10, 100, 1000, 10_000)
 
-#: How deep two squares may overlap in the final arrangement before the trial is INVALID
-#: rather than merely poor.
-#:
-#: This is the guard, and it is the reason the first sweep's headline was wrong. Thirty cells
-#: reported a best-of-k `closed` above 1 -- a container BELOW the known-best side, which is
-#: either a new record or a run whose squares are inside each other. It is the second: the
-#: side is the bounding box of the final poses, and a box can be made arbitrarily small by
-#: letting the squares intersect. A search that is allowed to cheat reports cheating as
-#: progress.
-#:
-#: **The number is measured, not chosen.** Run the same check over the SNAPPED trajectory,
-#: which ends on the record's own poses by construction, and the deepest pair overlap is
-#: 5.5e-7 at n = 5, 1.0e-6 at n = 11 and 7.3e-7 at n = 17 -- the float noise the stored poses
-#: carry. A blind run at the same n scores 0.091, 0.035 and 0.095. Two orders of magnitude
-#: separate the noise from the smallest real overlap, so 1e-5 refuses overlaps without
-#: refusing arithmetic, and the control is what says so rather than a guess about precision.
-VALID_OVERLAP = 1e-5
+
+PROBE_EXPRESSION = "(options) => SquaresWorkbenchBench.runTrial(options)"
+GUARD_EXPRESSION = "() => SquaresWorkbenchBench.guard()"
 
 
-def gap_closed(n: int, record: float, excess: float) -> float:
-    """How much of the record-to-grid gap a run closed: 1 reached the record, 0 the grid.
-
-    `ceil(sqrt(n))` is the trivial grid and no best known packing exceeds it, checked over the
-    whole corpus. It is the honest zero for this search: the blind run has to beat the grid
-    before it has done anything at all.
-    """
-    grid = math.ceil(math.sqrt(n))
-    gap = (grid / record - 1) * 100
-    if gap <= 0:
-        return float("nan")
-    return 1 - excess / gap
-
-
-@dataclass
-class Trial:
-    """One blind run: what it was asked, and what came back."""
-
-    n: int
-    seed: int
-    style: str
-    excess: float
-    side: float
-    record: float
-    closed: float
-    overlap: float
-    resolved_side: float
-    resolved_closed: float
-    resolved_overlap: float
-    steps: int
-    ms: float
-    centre: float
-    angle: float
-    params: dict[str, Any] = field(default_factory=dict)
-
-    def row(self) -> dict[str, Any]:
-        return {
-            "n": self.n,
-            "seed": self.seed,
-            "style": self.style,
-            "excess": self.excess,
-            "closed": self.closed,
-            "overlap": self.overlap,
-            "resolved_side": self.resolved_side,
-            "resolved_closed": self.resolved_closed,
-            "resolved_overlap": self.resolved_overlap,
-            "side": self.side,
-            "record": self.record,
-            "steps": self.steps,
-            "ms": self.ms,
-            "centre": self.centre,
-            "angle": self.angle,
-            **({"params": self.params} if self.params else {}),
-        }
-
-
-#: Runs one blind trial in the page and returns its miss record. Kept here rather than in a
-#: probe file because this tool is the only caller and the probe directory belongs to the
-#: workbench's own checkers.
-TRIAL_JS = """
-(o) => {
-  const A = window.atlasTransitions;
-  A.setSeed(o.seed);
-  if (o.inflate !== null) { A.setBlindInflate(o.inflate); }
-  if (o.anneal !== null) { A.setAnneal(o.anneal); }
-  const index = A.pairs().findIndex((q) => q.n + 1 === o.n);
-  if (index < 0) { return { error: `the page carries no pair into n = ${o.n}` }; }
-  const started = performance.now();
-  const r = A.physics(index, o.style, "blind");
-
-  // **The validity check, written here rather than read off the simulation.**
-  //
-  // The deepest overlap between any two squares in the FINAL arrangement, by the separating
-  // axis theorem: two convex polygons are disjoint exactly when some edge normal separates
-  // them, and for squares the four candidate axes are the two edge directions of each. The
-  // depth is the smallest overlap across those axes, and it is zero the moment one separates.
-  //
-  // It is computed from the poses the run ended on, with none of the page's own bookkeeping,
-  // because the thing being checked is whether the page's answer is a packing at all. The
-  // simulation reports `maxPenetration` over the whole trajectory, which says how deep the
-  // squares went at any instant and nothing about where they stopped.
-  const poses = r.final;
-  const N = poses.length;
-  const axesOf = (a) => {
-    const t = (a * Math.PI) / 180;
-    return [[Math.cos(t), Math.sin(t)], [-Math.sin(t), Math.cos(t)]];
-  };
-  const cornersOf = (p) => {
-    const t = (p[2] * Math.PI) / 180;
-    const c = Math.cos(t) / 2, s = Math.sin(t) / 2;
-    return [
-      [p[0] + c - s, p[1] + s + c],
-      [p[0] - c - s, p[1] - s + c],
-      [p[0] - c + s, p[1] - s - c],
-      [p[0] + c + s, p[1] + s - c],
-    ];
-  };
-  const spanOn = (pts, ax) => {
-    let lo = Infinity, hi = -Infinity;
-    for (const q of pts) {
-      const v = q[0] * ax[0] + q[1] * ax[1];
-      if (v < lo) { lo = v; }
-      if (v > hi) { hi = v; }
-    }
-    return [lo, hi];
-  };
-  let deepest = 0;
-  const corners = poses.map(cornersOf);
-  for (let i = 0; i < N; i++) {
-    for (let j = i + 1; j < N; j++) {
-      if (Math.hypot(poses[i][0] - poses[j][0], poses[i][1] - poses[j][1]) > 1.4143) {
-        continue;
-      }
-      let depth = Infinity;
-      for (const ax of [...axesOf(poses[i][2]), ...axesOf(poses[j][2])]) {
-        const [al, ah] = spanOn(corners[i], ax);
-        const [bl, bh] = spanOn(corners[j], ax);
-        const over = Math.min(ah, bh) - Math.max(al, bl);
-        if (over <= 0) { depth = 0; break; }
-        if (over < depth) { depth = over; }
-      }
-      if (depth > deepest) { deepest = depth; }
-    }
-  }
-
-  // **The resolution phase: what container does this arrangement actually need?**
-  //
-  // A run that ends overlapping has not found a container, it has found a number. Pushing
-  // the squares apart until no pair overlaps -- translation only, angles held, each pair
-  // separated along its own minimum-penetration axis -- turns that number into one about a
-  // packing. The box that fits the separated arrangement is the honest answer.
-  //
-  // This is a projection rather than a search: it never improves an arrangement, it only
-  // stops it cheating. `resolvedSide` is therefore always at least the raw side, and the
-  // difference between them is how much of the raw result was overlap.
-  const rp = poses.map((q) => [q[0], q[1], q[2]]);
-  let unresolved = true;
-  let sweeps = 0;
-  for (; sweeps < 400 && unresolved; sweeps++) {
-    unresolved = false;
-    const cs = rp.map(cornersOf);
-    for (let i = 0; i < N; i++) {
-      for (let j = i + 1; j < N; j++) {
-        if (Math.hypot(rp[i][0] - rp[j][0], rp[i][1] - rp[j][1]) > 1.4143) { continue; }
-        let depth = Infinity, best = null, sign = 1;
-        for (const ax of [...axesOf(rp[i][2]), ...axesOf(rp[j][2])]) {
-          const [al, ah] = spanOn(cs[i], ax);
-          const [bl, bh] = spanOn(cs[j], ax);
-          const over = Math.min(ah, bh) - Math.max(al, bl);
-          if (over <= 0) { depth = 0; break; }
-          if (over < depth) {
-            depth = over;
-            best = ax;
-            sign = ah - bh > 0 ? 1 : -1;
-          }
-        }
-        if (depth > 1e-9 && best !== null) {
-          unresolved = true;
-          const push = (depth / 2 + 1e-9) * sign;
-          rp[i][0] += best[0] * push; rp[i][1] += best[1] * push;
-          rp[j][0] -= best[0] * push; rp[j][1] -= best[1] * push;
-          cs[i] = cornersOf(rp[i]); cs[j] = cornersOf(rp[j]);
-        }
-      }
-    }
-  }
-  let rx0 = Infinity, rx1 = -Infinity, ry0 = Infinity, ry1 = -Infinity;
-  for (const q of rp) {
-    for (const c of cornersOf(q)) {
-      if (c[0] < rx0) { rx0 = c[0]; }
-      if (c[0] > rx1) { rx1 = c[0]; }
-      if (c[1] < ry0) { ry0 = c[1]; }
-      if (c[1] > ry1) { ry1 = c[1]; }
-    }
-  }
-  const resolvedSide = Math.max(rx1 - rx0, ry1 - ry0);
-  let resolvedOverlap = 0;
-  const rcs = rp.map(cornersOf);
-  for (let i = 0; i < N; i++) {
-    for (let j = i + 1; j < N; j++) {
-      let depth = Infinity;
-      for (const ax of [...axesOf(rp[i][2]), ...axesOf(rp[j][2])]) {
-        const [al, ah] = spanOn(rcs[i], ax);
-        const [bl, bh] = spanOn(rcs[j], ax);
-        const over = Math.min(ah, bh) - Math.max(al, bl);
-        if (over <= 0) { depth = 0; break; }
-        if (over < depth) { depth = over; }
-      }
-      if (depth > resolvedOverlap) { resolvedOverlap = depth; }
-    }
-  }
-
-  return {
-    excess: r.miss.excess,
-    side: r.miss.side,
-    record: r.miss.record,
-    centre: r.miss.centre,
-    angle: r.miss.angle,
-    overlap: deepest,
-    resolvedSide,
-    resolvedOverlap,
-    sweeps,
-    steps: r.steps,
-    ms: performance.now() - started,
-  };
-}
-"""
-
-#: Asserts the instrument was measuring something before any of its numbers are believed.
-#: Six runs in another campaign were taken in a 0x0 browser pane and produced plausible
-#: timings measured against nothing; the guard here is the same idea -- a page with no API,
-#: no pairs, or a record of zero is not a page this tool may report on.
-GUARD_JS = """
-() => {
-  const A = window.atlasTransitions;
-  if (!A || typeof A.physics !== "function") { return { ok: false, why: "no page API" }; }
-  if (typeof A.setSeed !== "function") { return { ok: false, why: "the page has no seed" }; }
-  const pairs = A.pairs();
-  if (!pairs || pairs.length === 0) { return { ok: false, why: "the page carries no pairs" }; }
-  return { ok: true, pairs: pairs.length, seed: A.seed() };
-}
-"""
-
-
-def _launch(playwright: Any) -> Any:
+def _launch(playwright: Playwright) -> Browser:
     """The pinned headless shell if the environment names one, else Playwright's own."""
     return playwright.chromium.launch(executable_path=os.environ.get("SQPACK_CHROMIUM"))
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _git(*arguments: str) -> str:
+    return subprocess.check_output(
+        ["git", *arguments], cwd=REPO, text=True, encoding="utf-8"
+    ).strip()
+
+
+def _source_receipt(browser: Browser) -> SourceReceipt:
+    executable = os.environ.get("SQPACK_CHROMIUM") or browser.browser_type.executable_path
+    return SourceReceipt(
+        commit=_git("rev-parse", "HEAD"),
+        dirty=bool(_git("status", "--porcelain", "--untracked-files=all")),
+        page=PAGE.relative_to(REPO).as_posix(),
+        page_sha256=_sha256(PAGE),
+        benchmark=BENCHMARK_SOURCE.relative_to(REPO).as_posix(),
+        browser=browser.browser_type.name,
+        browser_version=browser.version,
+        browser_executable=str(Path(executable).resolve()),
+        playwright_version=importlib.metadata.version("playwright"),
+        python_version=platform.python_version(),
+        platform=platform.platform(),
+        viewport_width=VIEWPORT_WIDTH,
+        viewport_height=VIEWPORT_HEIGHT,
+    )
 
 
 @dataclass(frozen=True)
@@ -339,7 +156,7 @@ class Run:
     out: Path
 
     @property
-    def params(self) -> dict[str, Any]:
+    def params(self) -> dict[str, float | int]:
         """The parameter overrides, for the row each trial writes."""
         return {
             key: value
@@ -355,78 +172,79 @@ def run_trials(run: Run) -> list[Trial]:
     trials: list[Trial] = []
     started = time.monotonic()
     stopped_early = False
-    with sync_playwright() as driver:
-        browser = _launch(driver)
-        page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        failures: list[str] = []
-        page.on("pageerror", lambda e: failures.append(str(e)))
-        page.goto(PAGE.as_uri())
-        page.wait_for_function("window.atlasTransitions !== undefined", timeout=60_000)
-        guard = page.evaluate(GUARD_JS)
-        if not guard["ok"]:
-            msg = f"the instrument is not measuring anything: {guard['why']}"
-            raise RuntimeError(msg)
-        print(f"# page: {guard['pairs']} pairs, seed {guard['seed']}, {PAGE}")
-        with run.out.open("w", encoding="utf-8") as sink:
-            for n in run.sizes:
-                for seed in run.seeds:
-                    if time.monotonic() - started > run.budget:
-                        stopped_early = True
+    with TemporaryDirectory(prefix="squares-workbench-bench-") as asset_directory:
+        subprocess.run(
+            ["node", str(BUILD_ASSETS), asset_directory],
+            check=True,
+            cwd=REPO,
+        )
+        benchmark_bundle = Path(asset_directory) / "bench-annealing.js"
+        with sync_playwright() as driver:
+            browser = _launch(driver)
+            page = browser.new_page(
+                viewport={"width": VIEWPORT_WIDTH, "height": VIEWPORT_HEIGHT}
+            )
+            failures: list[str] = []
+            page.on("pageerror", lambda error: failures.append(str(error)))
+            page.goto(PAGE.as_uri())
+            page.wait_for_function("window.atlasTransitions !== undefined", timeout=60_000)
+            page.add_script_tag(path=str(benchmark_bundle))
+            guard: object = page.evaluate(GUARD_EXPRESSION)
+            if not isinstance(guard, dict):
+                raise TypeError("the benchmark guard returned a malformed receipt")
+            if guard.get("ok") is not True:
+                why = guard.get("why")
+                raise RuntimeError(f"the instrument is not measuring anything: {why}")
+            pairs = guard.get("pairs")
+            initial_seed = guard.get("seed")
+            if not isinstance(pairs, int) or not isinstance(initial_seed, int):
+                raise TypeError("the benchmark guard omitted its pair or seed count")
+            print(f"# page: {pairs} pairs, seed {initial_seed}, {PAGE}")
+            source = _source_receipt(browser)
+            with run.out.open("w", encoding="utf-8") as sink:
+                for n in run.sizes:
+                    for seed in run.seeds:
+                        if time.monotonic() - started > run.budget:
+                            stopped_early = True
+                            break
+                        got: object = page.evaluate(
+                            PROBE_EXPRESSION,
+                            {
+                                "n": n,
+                                "seed": seed,
+                                "style": run.style,
+                                "inflate": run.inflate,
+                                "anneal": run.anneal,
+                            },
+                        )
+                        if isinstance(got, dict) and isinstance(got.get("error"), str):
+                            print(f"# skipped n = {n}: {got['error']}")
+                            break
+                        trial = trial_from_probe(
+                            got,
+                            n=n,
+                            seed=seed,
+                            style=run.style,
+                            params=run.params,
+                            source=source,
+                        )
+                        trials.append(trial)
+                        sink.write(trial_to_json(trial) + "\n")
+                        sink.flush()
+                    if stopped_early:
                         break
-                    got = page.evaluate(
-                        TRIAL_JS,
-                        {
-                            "n": n,
-                            "seed": seed,
-                            "style": run.style,
-                            "inflate": run.inflate,
-                            "anneal": run.anneal,
-                        },
-                    )
-                    if "error" in got:
-                        print(f"# skipped n = {n}: {got['error']}")
-                        break
-                    trial = Trial(
-                        n=n,
-                        seed=seed,
-                        style=run.style,
-                        excess=got["excess"],
-                        closed=gap_closed(n, got["record"], got["excess"]),
-                        overlap=got["overlap"],
-                        resolved_side=got["resolvedSide"],
-                        resolved_closed=gap_closed(
-                            n, got["record"], (got["resolvedSide"] / got["record"] - 1) * 100
-                        ),
-                        resolved_overlap=got["resolvedOverlap"],
-                        side=got["side"],
-                        record=got["record"],
-                        steps=got["steps"],
-                        ms=got["ms"],
-                        centre=got["centre"],
-                        angle=got["angle"],
-                        params=run.params,
-                    )
-                    trials.append(trial)
-                    sink.write(json.dumps(trial.row()) + "\n")
-                    sink.flush()
-                if stopped_early:
-                    break
-        if failures:
-            print(f"# {len(failures)} page error(s), first: {failures[0][:120]}")
-        browser.close()
+            if failures:
+                print(f"# {len(failures)} page error(s), first: {failures[0][:120]}")
+            browser.close()
     if stopped_early:
         print(f"# budget of {run.budget:g}s spent; {len(trials)} trial(s) recorded")
     return trials
 
 
-def valid(trials: list[Trial]) -> list[Trial]:
-    """The trials whose final arrangement is a packing.
-
-    A run whose squares end up inside each other has not found a smaller container, it has
-    found a smaller number. Refused here rather than annotated, because an invalid run is not
-    a poor result -- it is not a result.
-    """
-    return [t for t in trials if not (t.resolved_overlap > VALID_OVERLAP)]
+def _report_refusals(total: int, refused: dict[str, int]) -> None:
+    if refused:
+        counts = ", ".join(f"{reason}={count}" for reason, count in sorted(refused.items()))
+        print(f"  REFUSED {sum(refused.values())} of {total} trials: {counts}")
 
 
 def report(trials: list[Trial]) -> int:
@@ -434,15 +252,8 @@ def report(trials: list[Trial]) -> int:
     if not trials:
         print("no trials")
         return 1
-    kept = valid(trials)
-    refused = len(trials) - len(kept)
-    if refused:
-        worst = max(t.resolved_overlap for t in trials if t.resolved_overlap > VALID_OVERLAP)
-        print(
-            f"\n  REFUSED {refused} of {len(trials)} trials as invalid: squares overlapping by "
-            f"up to {worst:.4f}\n  of a unit side. They are not poor results, they are not "
-            "results."
-        )
+    kept, refused = partition_trials(trials)
+    _report_refusals(len(trials), refused)
     if not kept:
         print("  every trial was invalid")
         return 1
@@ -465,11 +276,12 @@ def report(trials: list[Trial]) -> int:
         for name in names:
             hits = sum(1 for e in excess if e <= TOLERANCES[name])
             rates.append(f"{hits / len(excess):>6.1%} ")
-        closed = statistics.median(t.resolved_closed for t in rows)
+        normalized = [value for t in rows if (value := t.resolved_closed) is not None]
+        closed = f"{statistics.median(normalized):.3f}" if normalized else "-"
         print(
             f"  {n:>3}  {len(rows):>6}  "
             + "  ".join(rates)
-            + f"  {closed:>7.3f}  {excess[0]:>8.4f}  {statistics.median(excess):>8.4f}  "
+            + f"  {closed:>7}  {excess[0]:>8.4f}  {statistics.median(excess):>8.4f}  "
             f"{excess[-1]:>8.4f}  {statistics.median(t.ms for t in rows):>9.1f}"
         )
     # **Best-of-k, which is the number that matters and the one nobody was reporting.**
@@ -485,21 +297,25 @@ def report(trials: list[Trial]) -> int:
             if k > len(ordered):
                 line += f"{'-':>12}"
                 continue
-            line += f"{max(t.resolved_closed for t in ordered[:k]):>12.3f}"
+            prefix = [value for t in ordered[:k] if (value := t.resolved_closed) is not None]
+            line += f"{max(prefix):>12.3f}" if prefix else f"{'-':>12}"
         print(line)
     print("  (closed at the best trial of the first k seeds)")
 
-    every = sorted(t.resolved_closed for t in trials)
+    every = sorted(value for t in trials if (value := t.resolved_closed) is not None)
     print(
         "\n  closed is the fraction of the record-to-grid gap the run closed: 1 reached the "
         "record,\n  0 got no further than ceil(sqrt(n)). It is the only column that compares "
         "across n.\n  excess is (side / record - 1) x 100. Tolerances: "
         + ", ".join(f"{k} <= {v:g}%" for k, v in TOLERANCES.items())
     )
-    print(
-        f"\n  over all {len(every)} trials: closed median {statistics.median(every):.3f}, "
-        f"range {every[0]:.3f} to {every[-1]:.3f}"
-    )
+    if every:
+        print(
+            f"\n  over all {len(every)} defined scores: closed median "
+            f"{statistics.median(every):.3f}, range {every[0]:.3f} to {every[-1]:.3f}"
+        )
+    else:
+        print("\n  closed is undefined for every zero reference-gap control in this report")
     return 0
 
 
@@ -509,8 +325,10 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--seeds", type=int, default=20, help="trials per n")
     parser.add_argument("--seed-from", type=int, default=0, help="first seed")
     parser.add_argument("--style", default="bodies", choices=["physics", "bodies"])
-    parser.add_argument("--inflate", type=float, default=None, help="BLIND.inflate override")
-    parser.add_argument("--anneal", type=int, default=None, help="the shake dial, 0..10")
+    parser.add_argument("--inflate", type=_inflate, default=None, help="BLIND.inflate override")
+    parser.add_argument(
+        "--anneal", type=int, choices=range(11), default=None, help="the shake dial, 0..10"
+    )
     parser.add_argument(
         "--budget",
         type=float,
@@ -526,7 +344,23 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         metavar="KEY=V,V,V",
         help="parameter grid, e.g. --sweep anneal=0,3,6,10 inflate=1.05,1.12,1.25",
     )
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if any(n < 1 for n in args.n):
+        parser.error("every n must be positive")
+    if args.seeds < 1:
+        parser.error("seeds must be positive")
+    if args.seed_from < 0 or args.seed_from + args.seeds - 1 > 0xFFFF_FFFF:
+        parser.error("the requested seed interval must fit uint32")
+    if not math.isfinite(args.budget) or args.budget <= 0:
+        parser.error("budget must be finite and positive")
+    return args
+
+
+def _inflate(value: str) -> float:
+    number = float(value)
+    if not 1 <= number <= 2:
+        raise argparse.ArgumentTypeError("inflate must be between 1 and 2")
+    return number
 
 
 def parse_grid(spec: list[str]) -> list[dict[str, float | int]]:
@@ -537,15 +371,28 @@ def parse_grid(spec: list[str]) -> list[dict[str, float | int]]:
     loose one, and only the cross says so.
     """
     axes: list[tuple[str, list[float | int]]] = []
+    seen: set[str] = set()
     for entry in spec:
         key, _, values = entry.partition("=")
         if not values:
             msg = f"a sweep axis needs values: {entry!r}"
             raise ValueError(msg)
+        if key not in {"anneal", "inflate"}:
+            raise ValueError(f"unsupported sweep axis {key!r}")
+        if key in seen:
+            raise ValueError(f"duplicate sweep axis {key!r}")
+        seen.add(key)
+        parsed: list[float | int]
+        if key == "anneal":
+            parsed = [int(value) for value in values.split(",")]
+            if any(not 0 <= value <= 10 for value in parsed):
+                raise ValueError("anneal sweep values must be integers from 0 through 10")
+        else:
+            parsed = [_inflate(value) for value in values.split(",")]
         axes.append(
             (
                 key,
-                [int(v) if key == "anneal" else float(v) for v in values.split(",")],
+                parsed,
             )
         )
     cells: list[dict[str, float | int]] = [{}]
@@ -574,7 +421,9 @@ def sweep(args: argparse.Namespace, seeds: list[int], stamp: str) -> int:
             )
         )
         by_n: dict[int, list[Trial]] = {}
-        for trial in trials:
+        admitted, refused = partition_trials(trials)
+        _report_refusals(len(trials), refused)
+        for trial in admitted:
             by_n.setdefault(trial.n, []).append(trial)
         table.extend((cell, n, by_n[n]) for n in sorted(by_n))
     if not table:
@@ -587,55 +436,27 @@ def sweep(args: argparse.Namespace, seeds: list[int], stamp: str) -> int:
     for cell, n, rows in table:
         ordered = sorted(rows, key=lambda t: t.seed)
         line = "  " + "".join(f"{cell[k]:>9}" for k in keys)
-        line += (
-            f"{n:>5}{len(rows):>8}{statistics.median(t.resolved_closed for t in rows):>9.3f}"
-        )
+        normalized = [value for t in rows if (value := t.resolved_closed) is not None]
+        median = f"{statistics.median(normalized):.3f}" if normalized else "-"
+        line += f"{n:>5}{len(rows):>8}{median:>9}"
         for k in BEST_OF:
             if k > len(seeds):
                 continue
-            line += f"{max(t.resolved_closed for t in ordered[:k]):>11.3f}"
+            prefix = [value for t in ordered[:k] if (value := t.resolved_closed) is not None]
+            line += f"{max(prefix):>11.3f}" if prefix else f"{'-':>11}"
         print(line)
     print("\n  median and best-of-k are both `closed`: 1 is the record, 0 the grid.")
     return 0
 
 
-def _trial_of(row: dict[str, Any]) -> Trial:
-    """One recorded row as a `Trial`.
-
-    Rows written before `closed` existed are still readable: the fraction is derived from n
-    and the record, both of which every row has always carried. The record is corrected,
-    not rewritten, so an old file keeps its numbers and gains the new column here.
-    """
-    n = int(row["n"])
-    record = float(row["record"])
-    excess = float(row["excess"])
-    return Trial(
-        n=n,
-        seed=int(row["seed"]),
-        style=str(row["style"]),
-        excess=excess,
-        side=float(row["side"]),
-        record=record,
-        closed=float(row["closed"]) if "closed" in row else gap_closed(n, record, excess),
-        overlap=float(row.get("overlap", float("nan"))),
-        resolved_side=float(row.get("resolved_side", float("nan"))),
-        resolved_closed=float(row.get("resolved_closed", float("nan"))),
-        resolved_overlap=float(row.get("resolved_overlap", float("nan"))),
-        steps=int(row["steps"]),
-        ms=float(row["ms"]),
-        centre=float(row["centre"]),
-        angle=float(row["angle"]),
-        params=dict(row.get("params", {})),
-    )
-
-
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(sys.argv[1:] if argv is None else argv)
     if args.replay is not None:
-        rows = [
-            json.loads(line) for line in args.replay.read_text(encoding="utf-8").splitlines()
+        trials = [
+            trial_from_json(line)
+            for line in args.replay.read_text(encoding="utf-8").splitlines()
         ]
-        return report([_trial_of(row) for row in rows])
+        return report(trials)
     if not PAGE.is_file():
         print(f"no built page at {PAGE}; run `python -m devtools.build_workbench_site` first")
         return 1

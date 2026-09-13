@@ -211,6 +211,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Square-packing workbench](packages/workbench/README.md) | component scope and use | current | maintained | — |
 | [Workbench Consumer and Legacy-Task Inventory](docs/project/reviews/review-2026-09-13-workbench-consumer-inventory.md) | dated review record | record | retained | — |
 | [The annealing benchmark’s runbook](packing/campaign/results/annealing/README.md) | W6 experiment mechanics | current | maintained | — |
 | [Workbench Stack Review and Cleanup Map](docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md) | dated review record | record | retained | — |

@@ -11,7 +11,12 @@
       "**/*.mjs",
       "**/*.cjs",
       "**/*.ts",
+      "**/*.tsx",
+      "**/*.mts",
+      "**/*.cts",
+      "**/*.jsx",
       "**/*.css",
+      "packages/workbench/**/*.json",
       "package.json",
       "package-lock.json",
       "biome.json",
@@ -45,6 +50,11 @@
       "correctness": {
         "noUnusedVariables": "error",
         "noUnusedImports": "error"
+      },
+      "nursery": {
+        "noFloatingPromises": "error",
+        "noMisusedPromises": "error",
+        "useAwaitThenable": "error"
       }
     }
   },

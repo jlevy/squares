@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "verbatimModuleSyntax": true
+  },
+  "include": ["eslint.config.js", "src/**/*.ts", "tests/**/*.ts", "probes/**/*.ts", "tools/**/*.ts"]
+}

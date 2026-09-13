@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packages/workbench/README.md, role: component-guide, authority: current, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-13-workbench-consumer-inventory.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/results/annealing/README.md, role: research-runbook, authority: current, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md, role: review, authority: record, lifecycle: retained}

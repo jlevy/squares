@@ -92,6 +92,7 @@ SAMPLED_SCREEN_RECORDS = sampled_numbers(KNOWN_BEST_CORPUS, SCREEN_SAMPLE_STRIDE
 
 PROJECT_ROOT = configured_project_root()
 REPOSITORY_ROOT = PROJECT_ROOT.parent
+WORKBENCH_ROOT = REPOSITORY_ROOT / "packages/workbench"
 ENGINE = PROJECT_ROOT / "sqsearch/target/release/sqsearch"
 RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
 ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"
@@ -138,6 +139,7 @@ FAST_SUITE_BUDGET_SECONDS = 1800.0
 QUICK_TESTS = "not exhaustive_exact and not slow"
 SLOW_TESTS = "slow and not exhaustive_exact"
 EXHAUSTIVE_TESTS = "exhaustive_exact"
+BEHAVIORAL_TEST_ROOTS = ("tests", "../packages/workbench/tests")
 #: The pull-request surface's per-test ceiling, in seconds of pytest `call` time.
 #:
 #: This is the boundary between `QUICK_TESTS` and `SLOW_TESTS`, and it is a rule rather
@@ -1250,7 +1252,7 @@ def _quick_lane_command(jobs: int) -> tuple[str, ...]:
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *BEHAVIORAL_TEST_ROOTS,
         "-m",
         QUICK_TESTS,
         *distribution,
@@ -1300,7 +1302,7 @@ def _slow_tests(context: Context) -> str:
                 "-m",
                 "pytest",
                 "-q",
-                "tests",
+                *BEHAVIORAL_TEST_ROOTS,
                 "-m",
                 SLOW_TESTS,
                 *_xdist_distribution(context.jobs),
@@ -1322,7 +1324,7 @@ def _slow_tests(context: Context) -> str:
                     "-m",
                     "pytest",
                     "-q",
-                    "tests",
+                    *BEHAVIORAL_TEST_ROOTS,
                     "-m",
                     SLOW_TESTS,
                     "--collect-only",
@@ -1370,7 +1372,7 @@ def _exhaustive_exact_tests(context: Context) -> str:
             "-m",
             "pytest",
             "-q",
-            "tests",
+            *BEHAVIORAL_TEST_ROOTS,
             "-m",
             EXHAUSTIVE_TESTS,
             "--durations=0",
@@ -1424,19 +1426,26 @@ def _lint_floor(context: Context) -> str:
     registry bug: the duplicated declared-consumer key behind one of D-369's CI
     failures was an `F601`. Measured under a second against basedpyright's 36.
 
-    The second target is the hand-written skill assets at the repository root, the one
-    place project Python lives outside this directory; basedpyright reaches them
-    through its `include` list instead."""
+    The other targets are the top-level workbench package and hand-written skill assets;
+    BasedPyright reaches the same trees through its `include` list."""
     ruff = _required_tool(context, "ruff")
-    skills = [str(path) for path in _handwritten_skill_directories()]
+    targets = [
+        ".",
+        str(WORKBENCH_ROOT),
+        *(str(path) for path in _handwritten_skill_directories()),
+    ]
+    config = str(PROJECT_ROOT / "pyproject.toml")
     return _commands(
         context,
-        ((ruff, "check", ".", *skills), (ruff, "format", "--check", ".", *skills)),
+        (
+            (ruff, "check", "--config", config, *targets),
+            (ruff, "format", "--check", "--config", config, *targets),
+        ),
     )
 
 
 def _browser_floor(context: Context) -> str:
-    """Biome and `tsc` over the JavaScript and CSS this repository serves to a browser.
+    """Biome, the promise overlay, `tsc`, and Node tests over browser source.
 
     The counterpart to `_lint_floor` and `_type_floor`, and it exists for the same reason
     they do: until this ran, five thousand lines of published JavaScript had no checker at
@@ -1447,33 +1456,47 @@ def _browser_floor(context: Context) -> str:
     warning-severity rules. Fixing is `npm run lint:fix`, at a commit hook or by hand.
 
     The type gate is separate from the lint gate (floor rule 3) and runs once per program:
-    the workbench's script, the checkers' probes, and the motion lab's assets are three
-    independent programs that happen to share a language, and one `include` covering all of
-    them would have them collide in one global scope.
+    each legacy global program remains separate so unrelated assets do not collide. The
+    module-based workbench package has its own strict program.
 
     Node is not a `uv` dependency, so this asks for the pinned local binaries rather than
     anything on PATH. `npm ci` at the repository root is what puts them there.
     """
     biome = REPOSITORY_ROOT / "node_modules/.bin/biome"
+    eslint = REPOSITORY_ROOT / "node_modules/.bin/eslint"
     tsc = REPOSITORY_ROOT / "node_modules/.bin/tsc"
-    missing = [str(tool) for tool in (biome, tsc) if not tool.is_file()]
+    npm = _required_tool(context, "npm")
+    missing = [str(tool) for tool in (biome, eslint, tsc) if not tool.is_file()]
     if missing:
         raise StepFailureError(
             f"the browser floor's pinned tools are not installed: {missing}; "
             "run `npm ci` at the repository root"
         )
+    type_programs = sorted(REPOSITORY_ROOT.glob("tsconfig*.json")) + sorted(
+        WORKBENCH_ROOT.glob("tsconfig*.json")
+    )
+    base = REPOSITORY_ROOT / "tsconfig.base.json"
     return _commands(
         context,
         (
             (str(biome), "ci", "--error-on-warnings", "."),
-            *(
-                (str(tsc), "-p", name)
-                for name in (
-                    "tsconfig.json",
-                    "tsconfig.probes.json",
-                    "tsconfig.motion-lab.json",
-                )
+            (
+                str(eslint),
+                "packing/atlas/known-best/video/spikes/v2-transitions/assets",
+                "packing/atlas/known-best/video/spikes/v2-transitions/probes",
+                "packing/src/sqpack/motion_lab/assets",
+                "packing/atlas/known-best/video/spikes/v1-slideshow",
+                "--config",
+                "packages/workbench/eslint.config.js",
+                "--max-warnings",
+                "0",
             ),
+            *(
+                (str(tsc), "-p", str(path.relative_to(REPOSITORY_ROOT)))
+                for path in type_programs
+                if path != base
+            ),
+            (npm, "test", "--workspace", "@squares/workbench"),
         ),
         cwd=REPOSITORY_ROOT,
     )
@@ -2922,14 +2945,24 @@ STEPS: tuple[Step, ...] = (
     # type-check programs are small. Cheap enough for the edit tier, but `fast` rather
     # than unconditional because it needs a Node toolchain the Python tiers do not.
     Step(
-        "browser floor (biome, tsc)",
+        "browser floor (biome, eslint, tsc, node:test)",
         _browser_floor,
         fast=True,
         touches=(
             "biome.json",
             "tsconfig*.json",
             "package.json",
+            "package-lock.json",
+            "packages/workbench/package.json",
+            "packages/workbench/tsconfig*.json",
             "**/*.js",
+            "**/*.jsx",
+            "**/*.mjs",
+            "**/*.cjs",
+            "**/*.ts",
+            "**/*.tsx",
+            "**/*.mts",
+            "**/*.cts",
             "**/*.css",
         ),
     ),

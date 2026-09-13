@@ -1,8 +1,72 @@
+// The strict package bundle is emitted immediately before this retained application script.
+// Keeping the dependency explicit lets core and simulation modules graduate one domain at a time
+// while the remaining UI code continues to run as one classic script.
+/** @type {typeof globalThis & { SquaresWorkbench?: typeof import("../../../../../../../packages/workbench/src/api/browser-entry.js") }} */
+const workbenchGlobal = globalThis;
+const workbenchBundle = workbenchGlobal.SquaresWorkbench;
+if (workbenchBundle === undefined) {
+  throw new Error("SquaresWorkbench bundle must load before the application script");
+}
+const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
+
 (() => {
   // Not redundant: the generator inlines this file into a plain `<script>` with no
   // `type="module"`, so nothing else puts the page in strict mode.
   "use strict";
-  const DATA = JSON.parse(document.getElementById("atlas-data").textContent);
+  if (typeof document === "undefined") {
+    return;
+  }
+  const {
+    parseUint32Seed,
+    mixUint32Seed,
+    seededRandom,
+    packingSnapshot,
+    assessPackingSnapshot,
+    admitBestPacking,
+  } = SQUARES_WORKBENCH_CORE;
+  const {
+    forceAtGap: forceOf,
+    forceLawAttracts: attractsOf,
+    forceLawSteep: steepOf,
+    forceLawSubsteps,
+  } = workbenchBundle.simulation;
+  const {
+    availableStyles,
+    nearestSupportedIndex,
+    normalizeRange,
+    planAspectTransition,
+    rangeIndexBounds,
+    transportIntent,
+  } = workbenchBundle.navigation;
+  const { reducedMotionAction, stageDescription, stageKeyCommand } = workbenchBundle.accessibility;
+  const { decodeCorpus } = workbenchBundle.data;
+  const {
+    displayedCount,
+    isStillPair: timelineIsStillPair,
+    pairDuration: timelinePairDuration,
+    pairSchedule,
+    pairTiming: timelinePairTiming,
+    phaseProgress: timelinePhaseProgress,
+    ramp: timelineRamp,
+    rangeDuration: timelineRangeDuration,
+    rangeProgress,
+    seekSequence: timelineSeekSequence,
+    sequenceDuration: timelineSequenceDuration,
+  } = workbenchBundle.timeline;
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasAspect} AtlasAspect */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasGrowth} AtlasGrowth */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasGrowthRule} AtlasGrowthRule */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasInitial} AtlasInitial */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasLaw} AtlasLaw */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasLawBounds} AtlasLawBounds */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasPaintScheme} AtlasPaintScheme */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasRelationshipKind} AtlasRelationshipKind */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasScheme} AtlasScheme */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasStyle} AtlasStyle */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasTargetFrom} AtlasTargetFrom */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasTargetSource} AtlasTargetSource */
+  /** @typedef {import("../../../../../../../packages/workbench/src/api/workbench-api.js").AtlasTransitions} WorkbenchApi */
+  const DATA = decodeCorpus(JSON.parse(document.getElementById("atlas-data").textContent));
   const FRAMES = DATA.frames;
   const PAIRS = DATA.pairs;
   const FACTS = DATA.facts;
@@ -124,6 +188,7 @@
       settle: DATA.timing.settle,
     },
     phase: PHASES[0],
+    /** @type {AtlasStyle} */
     style: "tween", // 'tween' (style A, the block tween), 'physics' (B) or 'bodies' (C)
     desaturate: true, // drain the fills' chroma while the pair moves, lock the colour back in over the settle
     snap: true, // blend the physics onto the record's poses over the last of the move, and end on them exactly
@@ -139,6 +204,7 @@
     // Revision 10: which of the two aspects the page is showing. 'pack' is one fixed n, played as
     // the open-ended optimisation; 'animate' is a range, played end to end. The range below is still
     // the one spine: Pack is that range with its two ends equal.
+    /** @type {AtlasAspect} */
     mode: "pack",
     // The range Animate was last left on, so switching to Pack and back does not lose it. Null until
     // Animate has been entered once, when it opens on the whole corpus.
@@ -167,6 +233,7 @@
     // different draw of the same distribution.
     seed: 0,
     // Revision 9: what an open-ended Optimize run starts from, and whether one is on the stage.
+    /** @type {AtlasInitial} */
     initial: "previous",
     optimizing: false,
     liveN: null,
@@ -323,64 +390,16 @@
   // One colouring, always on, no rule to choose. **Hue is a function of the angle**, and shade is
   // the square's full-side contact count, darkest at four, exactly as the atlas shades.
   //
-  // The palette is SQUARE_HUE_PALETTE from sqpack/render/style.py, in its own order: slot 0 the
-  // teal that the house pins to right angles, slot 1 the citron it pins to 45 degree tilts, slot 2
-  // the mauve pink that starts the sequence of the others.
-  const PALETTE = [
-    "#1faa8e",
-    "#c3c45f",
-    "#aa5585",
-    "#166eac",
-    "#b3543b",
-    "#c9a13a",
-    "#23b4e8",
-    "#158655",
-    "#a7539d",
-    "#75951c",
-    "#c8691e",
-    "#1990a2",
-    "#714fad",
-    "#67b45c",
-    "#e26e82",
-    "#8286e9",
-    "#ce871b",
-    "#147e7c",
-    "#4571c9",
-    "#a86cc6",
-  ];
-  // Five shades a slot, taken from the atlas's own generator rather than re-derived here:
-  // `square_fill_palette(hue_count=20, shades_per_hue=5)` in sqpack/render/color.py, whose two
-  // pinned families ramp perceptually in OkLCh and whose other eighteen ramp in HSL. Index 0 is the
-  // four-contact dark end and index 4 the no-contact light end, which is the order
-  // `_contact_shade` puts them in.
-  const SHADES = [
-    ["#257260", "#36816e", "#4b9582", "#5fa995", "#74bda9"],
-    ["#9f9f1c", "#aead1f", "#c1c13c", "#d4d453", "#e8e868"],
-    ["#ad3a7b", "#c23f89", "#cb5698", "#d46ea8", "#dd87b8"],
-    ["#14669f", "#1574b8", "#1588d8", "#2399ec", "#3fa8f1"],
-    ["#a34c36", "#b8543a", "#c8654b", "#d27a63", "#da8f7b"],
-    ["#b89332", "#cba239", "#d4af51", "#dcbc6a", "#e4c984"],
-    ["#17a7da", "#20b5eb", "#3cc1f0", "#58cbf5", "#76d6f8"],
-    ["#147e50", "#15965e", "#17b571", "#18d583", "#26e994"],
-    ["#aa399d", "#bf3db0", "#ca53bc", "#d36bc7", "#dc84d2"],
-    ["#6d8b1a", "#7fa21c", "#96c11f", "#addf22", "#b9e53c"],
-    ["#b6601b", "#cf6b1c", "#e57b28", "#eb8d43", "#f09f5f"],
-    ["#178596", "#189bae", "#1ab6ce", "#23cde6", "#3ed5ec"],
-    ["#6239ab", "#6d3ec0", "#7f55cb", "#926cd4", "#a585dd"],
-    ["#4db83d", "#59c54a", "#6fcf62", "#85d87a", "#9ce092"],
-    ["#dc5068", "#e26379", "#e97e90", "#ef99a8", "#f4b5c0"],
-    ["#6065e3", "#7478e9", "#8f93ee", "#abaef4", "#c7c9f8"],
-    ["#bc7b19", "#d58a19", "#e99c26", "#eeaa42", "#f3b85e"],
-    ["#137776", "#158f8d", "#17aeab", "#18cecb", "#1fe8e4"],
-    ["#3764bd", "#4270cb", "#5b83d4", "#7496dc", "#8daae4"],
-    ["#9d4ec4", "#a860cc", "#b678d5", "#c490de", "#d2a9e7"],
-  ];
+  // The package boundary validates the generated palette against the schema. Python derives these
+  // families from sqpack.render, so the browser never carries a second rendering source.
+  const PALETTE = DATA.colour.palette;
+  const SHADES = DATA.colour.shades;
   // Angles are compared modulo a quarter turn, as sqpack/render/color.py compares them, and two are
   // the same tilt when they are within the tolerance the page already uses to say a packing has
   // reached the record's angles (GAP_MET.angle, half a degree). Measured against the corpus, that
   // tolerance leaves the record's own classes alone — n = 17 still has three, n = 29 five — while
   // absorbing the tenth-of-a-degree jitter a live physics run carries.
-  const ANGLE_TOL = 0.5;
+  const ANGLE_TOL = DATA.colour.angleToleranceDegrees;
   const foldAngle = (a) => ((a % 90) + 90) % 90;
   const angleGap = (a, b) => {
     const d = Math.abs(a - b);
@@ -646,7 +665,9 @@
   // stage, it is the atlas's own answer for a finished picture, and Animate's resting frame is
   // the only place it applies. Offering it as a choice would invite it onto a moving frame,
   // where "which class is biggest" changes under the viewer and squares would swap hues.
+  /** @type {AtlasScheme[]} */
   const COLOR_SCHEMES = ["identity", "angle-stable", "angle-continuous"];
+  /** @type {AtlasScheme} */
   let colorScheme = "identity";
   // The Animate exception, and it belongs to Animate alone. In Animate the *resting* frame may be
   // repainted in the standard angle map, so the frame a viewer is left looking at matches the atlas
@@ -1004,7 +1025,9 @@
   // record's own poses with the same full-side test the colouring shades by, and then relabelled
   // into the run's square order through the pair's correspondence. `setTargetGraph` takes a
   // different one, so a graph from anywhere can be tried without touching this code.
+  /** @type {AtlasRelationshipKind[]} */
   const RELATIONSHIPS = ["general", "groups", "contact"];
+  /** @type {AtlasRelationshipKind} */
   let relKind = "general";
   let targetEdges = null; // a graph supplied from outside, or null to derive it from the record
   // Revision 12: the target graph is pluggable by design, so a graph drawn by hand on the stage is
@@ -1014,9 +1037,12 @@
   //           different square at a different n. This is where a random or enumerated graph would
   //           arrive too: `setEdges(pairs)` takes one, and nothing in the physics has to change.
   //   given   whatever `setTargetGraph(edges)` was handed, which overrides both.
+  /** @type {AtlasTargetSource[]} */
   const TARGET_SOURCES = ["record", "drawn"];
+  /** @type {AtlasTargetSource} */
   let targetSource = "record";
   const drawnGraphs = new Map(); // packing size -> flat index pairs, a < b, in the order drawn
+  /** @returns {AtlasTargetFrom} */
   const targetFrom = () => (targetEdges !== null ? "given" : targetSource);
   const drawnKeyFor = (pairIndex) => PAIRS[pairIndex].n + 1;
   const drawnFor = (pairIndex) => drawnGraphs.get(drawnKeyFor(pairIndex)) || [];
@@ -1162,6 +1188,8 @@
 
   // ---------------------------------------------------------------- DOM
   const svg = document.getElementById("packing-svg");
+  const stage = document.getElementById("stage");
+  const stageDescriptionNode = document.getElementById("stage-accessible-description");
   const containerRect = document.getElementById("container");
   const linksGroup = document.getElementById("links");
   const maskGroup = document.getElementById("mask-links");
@@ -1174,6 +1202,7 @@
   const factsB = document.getElementById("facts-b");
   const kindTag = document.getElementById("kind-tag");
   const live = document.getElementById("live");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SVG_NS = svg.namespaceURI;
   // One measurement of one numeral gives the figure width; the numerals are tabular, so every
   // label's width follows from its digit count and no frame ever has to ask the layout engine. A
@@ -1482,6 +1511,7 @@
     poseY = null,
     poseA = null;
   let sceneSide = 0; // the container side the last frame drew, which is where a drag picks the run up
+  let keyboardSquare = 0;
   let tgtX = null,
     tgtY = null,
     tgtA = null;
@@ -1624,6 +1654,7 @@
     pool.forEach((g, id) => {
       g.style.display = id <= p.n + 1 ? "" : "none";
       g.removeAttribute("opacity");
+      g.removeAttribute("data-square-index");
     });
     for (let i = 0; i < p.n; i++) {
       const a = A.squares[i],
@@ -1634,6 +1665,7 @@
         throw new Error(`identity chain broken at ${p.n} -> ${p.n + 1}, square ${i}`);
       }
       const node = nodeFor(id);
+      node.setAttribute("data-square-index", String(i));
       // Revision 12: the identity is carried on the motion entry as well as on the element, because
       // the painter asks for it every frame and the colour is keyed by it.
       const m = {
@@ -1739,6 +1771,7 @@
       throw new Error(`the new square of ${p.n} -> ${p.n + 1} is not identity ${p.n + 1}`);
     }
     newNode = nodeFor(p.n + 1);
+    newNode.setAttribute("data-square-index", String(p.n));
     newRect = newNode.firstElementChild;
     // The square that arrived in the pair before is identity n; it keeps its outline through the dwell.
     prevIndex = p.n > 1 ? A.ident.indexOf(p.n) : -1;
@@ -1764,22 +1797,48 @@
   }
 
   // ---------------------------------------------------------------- timeline
+  function timelineConfiguration() {
+    return {
+      pairs: PAIRS,
+      timing: state.timing,
+      continuous: {
+        on: state.continuous.on,
+        fullBeat: state.continuous.fullBeat,
+        beat: {
+          dwell: CONTINUOUS.dwell,
+          move: CONTINUOUS.move,
+          correct: CONTINUOUS.correct,
+          settle: CONTINUOUS.settle,
+        },
+        staticBeat: {
+          dwell: CONTINUOUS.staticDwell,
+          move: CONTINUOUS.staticMove,
+          correct: CONTINUOUS.staticCorrect,
+          settle: CONTINUOUS.staticSettle,
+        },
+      },
+      anneal: state.anneal,
+      phase: state.phase,
+      arrivalFraction: ARRIVAL_FRACTION,
+      newFraction: NEW_FRACTION,
+      rollMax: ROLL_MAX,
+    };
+  }
   // The timing that governs one pair: the controls' three values, or, under continuous play, the
   // sequence's own beat, which depends on the pair's kind (revision 6, feature 4).
   // The annealing dial lengthens the move for the two physical styles, and only for them: style A
   // is an interpolation with no shake to prolong. At the default level the factor is exactly 1, so
   // the beat is the revision-6 beat unless the dial is moved.
-  function annealSpan(style) {
-    return isPhysical(style === undefined ? state.style : style) ? ANNEAL.span(state.anneal) : 1;
-  }
   // The beat one pair takes under continuous play, whether or not a run is on. Split out in
   // revision 8 so the sequence tab can price a range before the owner presses play: `timing` is
   // exactly what it was, and this is the branch it takes while a run is going.
   // A pair where the arrangement does not rearrange: the new square is appended to a picture the
   // previous n already had. Named here because both the beat and the drain ask the question.
   function isStillPair(pairIndex) {
-    const p = PAIRS[pairIndex === undefined ? state.pair : pairIndex];
-    return p.kind === "prefix" || p.kind === "shared-picture";
+    return timelineIsStillPair(
+      timelineConfiguration(),
+      pairIndex === undefined ? state.pair : pairIndex,
+    );
   }
   // **Every beat carries all four spans.** The anneal dial and the continuous beat each build a
   // fresh object here, and when `correct` was added they were left at three keys -- so
@@ -1790,41 +1849,19 @@
   // A static append has no landing to speak of, but it still gets a `correct` in proportion:
   // the beat is a shape, and a span that is sometimes absent is a span every caller has to
   // remember.
-  function continuousTiming(pairIndex, style) {
-    const span = annealSpan(style);
-    if (isStillPair(pairIndex) && !state.continuous.fullBeat) {
-      return {
-        dwell: CONTINUOUS.staticDwell,
-        move: CONTINUOUS.staticMove,
-        correct: CONTINUOUS.staticCorrect,
-        settle: CONTINUOUS.staticSettle,
-      };
-    }
-    return {
-      dwell: CONTINUOUS.dwell,
-      move: CONTINUOUS.move * span,
-      correct: CONTINUOUS.correct * span,
-      settle: CONTINUOUS.settle,
-    };
-  }
   function timing(pairIndex, style) {
-    const span = annealSpan(style);
-    if (!state.continuous.on) {
-      return span === 1
-        ? state.timing
-        : {
-            dwell: state.timing.dwell,
-            move: state.timing.move * span,
-            correct: state.timing.correct * span,
-            settle: state.timing.settle,
-          };
-    }
-    return continuousTiming(pairIndex, style);
+    return timelinePairTiming(
+      timelineConfiguration(),
+      pairIndex === undefined ? state.pair : pairIndex,
+      style === undefined ? state.style : style,
+    );
   }
   function duration(pairIndex) {
-    const tm = timing(pairIndex);
-    // Four spans, not three: the correction has its own time now and it is part of the beat.
-    return tm.dwell + tm.move + tm.correct + tm.settle;
+    return timelinePairDuration(
+      timelineConfiguration(),
+      pairIndex === undefined ? state.pair : pairIndex,
+      state.style,
+    );
   }
   // The instants of one pair. In the default staging the new square arrives over the first
   // ARRIVAL_FRACTION of the move (`arrive` to `arrived`) while the container grows, and the
@@ -1836,51 +1873,15 @@
   // roll, and the next one after that. One function, so the panel's numeral, the announcement and
   // the gap bar cannot disagree about which packing is on screen.
   function rollingN(p, sc, t, optimizing) {
-    if (optimizing) {
-      return p.n + 1;
-    }
-    const q = sc.roll > 0 ? clamp01((t - sc.arrive) / sc.roll) : t >= sc.arrive ? 1 : 0;
-    return q >= 0.5 ? p.n + 1 : p.n;
+    return displayedCount(p.n, sc, t, optimizing);
   }
   function schedule() {
-    const tm = timing();
-    // The moving span is the rearrangement and the correction together: one continuous run of
-    // the physics, divided by `correctionShape` rather than by a break in the clock.
-    const span = tm.move + tm.correct;
-    const moveStart = tm.dwell;
-    const moveEnd = tm.dwell + span;
-    const end = moveEnd + tm.settle;
-    let arrive, arrived, blocksStart, blocksEnd;
-    if (state.phase === "add-then-move") {
-      arrive = moveStart;
-      arrived = moveStart + span * ARRIVAL_FRACTION;
-      blocksStart = arrived;
-      blocksEnd = moveEnd;
-    } else if (state.phase === "move-then-add") {
-      blocksStart = moveStart;
-      blocksEnd = moveStart + span * (1 - ARRIVAL_FRACTION);
-      arrive = blocksEnd;
-      arrived = moveEnd;
-    } else {
-      blocksStart = moveStart;
-      blocksEnd = moveEnd;
-      arrive = moveStart + span * (1 - NEW_FRACTION);
-      arrived = moveEnd;
-    }
-    const roll = Math.min(ROLL_MAX, end - arrive);
-    return { moveStart, moveEnd, end, arrive, arrived, blocksStart, blocksEnd, roll };
+    return pairSchedule(timelineConfiguration(), state.pair, state.style);
   }
   function phaseProgress(u) {
-    const e = easeInOut(u);
-    if (state.phase === "rotate-first") {
-      return { rot: easeInOut(clamp01(u / 0.6)), slide: easeInOut(clamp01((u - 0.4) / 0.6)), e };
-    }
-    if (state.phase === "slide-first") {
-      return { rot: easeInOut(clamp01((u - 0.4) / 0.6)), slide: easeInOut(clamp01(u / 0.6)), e };
-    }
-    return { rot: e, slide: e, e };
+    return timelinePhaseProgress(state.phase, u);
   }
-  const ramp = (t, from, to) => (to > from ? clamp01((t - from) / (to - from)) : t >= from ? 1 : 0);
+  const ramp = timelineRamp;
   // How much chroma the fills carry at t: all of it through the dwell, drained over the first
   // DESAT_IN of the move, held through the motion, and back over the LAST part of the settle --
   // after the hue has finished moving, which is the whole point of the split. A zero-length move
@@ -1923,28 +1924,12 @@
   }
   // Revision 9: which steps playback is allowed to run over — always the range, there being one view.
   // The ends are values of n stepped into, so RANGE_MIN is the first n the page can arrive at.
-  const RANGE_MIN = PAIRS[0].n + 1;
-  const RANGE_MAX = PAIRS[PAIRS.length - 1].n + 1;
+  /** @type {number[]} */
+  const SUPPORTED_STEP_NS = PAIRS.map((pair) => pair.n + 1);
+  const RANGE_MIN = SUPPORTED_STEP_NS[0];
+  const RANGE_MAX = SUPPORTED_STEP_NS[SUPPORTED_STEP_NS.length - 1];
   function rangeBounds() {
-    let first = -1,
-      last = -1;
-    for (let i = 0; i < PAIRS.length; i++) {
-      const into = PAIRS[i].n + 1;
-      if (into >= state.range.from && into <= state.range.to) {
-        if (first < 0) {
-          first = i;
-        }
-        last = i;
-      }
-    }
-    // A range can miss every step a sparse page carries (`index.html` has nothing between 11 and 17,
-    // so 13 to 14 selects nothing). The scope is then the one nearest step, not the whole page: a
-    // run over an empty range should be short, never the entire sequence.
-    if (first < 0) {
-      first = pairForStepN(state.range.to);
-      last = first;
-    }
-    return { first, last };
+    return rangeIndexBounds(SUPPORTED_STEP_NS, state.range);
   }
   function scopeBounds() {
     return rangeBounds();
@@ -1953,20 +1938,20 @@
   // it steps into, so the whole corpus is the shipped 1..324 scale and a single step is its own two
   // numerals. `progress` is measured against the same span, so the fill, the cursor and the riding n
   // all read against the numerals actually drawn.
-  function scaleSpanWanted() {
-    return { lo: state.range.from - 1, hi: state.range.to };
-  }
   // Where the sequence stands, 0 at the start of the range's first step and 1 at the end of its
   // last: a pure function of the pair and the clock. The scale it used to be drawn on is gone --
   // the owner found it distracting, and the stage carries facts about the packing rather than
   // apparatus about the playback -- but the number is still what `progress()` reports, and the
   // transport and the checkers read it.
   function progress() {
-    const span = scaleSpanWanted();
-    const d = duration();
-    // An open-ended run has no position inside the step: it is the step's own n, done arriving.
-    const within = state.optimizing ? 1 : d > 0 ? clamp01(state.t / d) : 0;
-    return clamp01((PAIRS[state.pair].n + within - span.lo) / Math.max(1, span.hi - span.lo));
+    return rangeProgress(
+      timelineConfiguration(),
+      state.range,
+      state.pair,
+      state.t,
+      state.style,
+      state.optimizing,
+    );
   }
 
   // ---------------------------------------------------------------- styles B and C: physics, bodies
@@ -2063,7 +2048,7 @@
   // past it — so rigidity 0.15 (the old `contactCap`) with steep 0 reproduces it to the bit, which
   // is why the four defaults below are what they are and why every cached trajectory, every blind
   // run and every measurement in revisions 6 to 10 is unchanged until the law is touched.
-  // Below the shipped rigidity the slope past the knee climbs linearly to LAW_STEEP_MAX, so the
+  // Below the shipped rigidity the shared law's slope past the knee climbs linearly, so the
   // hardest setting is a knee at two thousandths of a side with eight times the stiffness past it:
   // effectively rigid at this timestep, and measured stable.
   // ------------------------------------------------------------------ the laws, declared once
@@ -2110,9 +2095,9 @@
     },
   ];
   const LAW_KEYS = LAW_PARAMS.map((d) => d.key);
-  const LAW_TOL0 = 0.15,
-    LAW_STEEP_MAX = 8;
+  /** @type {AtlasLaw} */
   const LAW_DEFAULT = { rigidity: 0.15, repulsion: 2500, attraction: 0, range: 0 };
+  /** @type {AtlasLawBounds} */
   const LAW_BOUNDS = {
     rigidity: [0.002, 0.4], // the penetration tolerated before the repulsion climbs steeply
     repulsion: [200, 8000], // the push per unit of tolerated penetration
@@ -2141,26 +2126,13 @@
   // different numbers, so the shape takes the law it is evaluating rather than reading one global.
   // The owner's reasoning: a wall is not a neighbour, so borrowing the pair's settings for it was
   // a coincidence of implementation rather than a claim about the physics.
-  const steepOf = (L) => LAW_STEEP_MAX * Math.max(0, 1 - L.rigidity / LAW_TOL0);
-  const attractsOf = (L) => L.attraction > 0 && L.range > 0;
-  function forceOf(L, d) {
-    if (d <= 0) {
-      const p = -d,
-        tol = L.rigidity;
-      return L.repulsion * (Math.min(p, tol) + steepOf(L) * Math.max(0, p - tol));
-    }
-    if (!attractsOf(L) || d >= L.range) {
-      return 0;
-    }
-    const u = d / L.range;
-    return -L.attraction * 4 * u * (1 - u);
-  }
   const lawSteep = () => steepOf(LAW);
   const lawAttracts = () => attractsOf(LAW);
   const lawForce = (d) => forceOf(LAW, d);
   // The walls' own law. The defaults reproduce the shipped behaviour exactly: the old wall was
   // `PHYS.wall * min(overhang, PHYS.wallCap)`, which is this shape with a knee at the cap and no
-  // steepening past it, since a rigidity above LAW_TOL0 gives a slope of zero there. Attraction is
+  // steepening past it, since a rigidity at the shared reference gives a slope of zero there.
+  // Attraction is
   // off, so a wall still only pushes until the owner asks otherwise.
   const WALL_DEFAULT = { rigidity: 0.25, repulsion: 2500, attraction: 0, range: 0 };
   const WALL_BOUNDS = {
@@ -2248,14 +2220,6 @@
   // shipped trajectory is unchanged to the bit. A true rigid contact is a constraint rather than
   // a stiff spring and wants projection instead (think-r2qd); this makes the spring honest in the
   // meantime rather than letting the slider reach settings the integrator cannot hold.
-  const LAW_SUB_CONTACTS = 4; // contacts one square may carry, whose stiffnesses add
-  const LAW_SUB_MAX = 12; // a run stays interactive; past here the law is reported as beyond the step
-  function lawSubsteps(dt) {
-    const slope = LAW.repulsion * Math.max(1, lawSteep());
-    const omega = Math.sqrt((slope * LAW_SUB_CONTACTS) / 1); // unit mass
-    const limit = 2 / omega;
-    return Math.max(1, Math.min(LAW_SUB_MAX, Math.ceil(dt / limit)));
-  }
   // How the moving span divides. `tightenFrom` is where the correction starts, which is just
   // the two timings' ratio; `blend` is the last part of the correction, at the share it has
   // always had of it -- 0.12 of a span whose correction was 0.32 is three eighths of the
@@ -2288,7 +2252,10 @@
     gridStep: 0.25, // the coarse grid of candidate centres for the new square
   };
   const PAD_MIN = 0.012; // the least breathing room the held view keeps around the growing container
+  /** @type {AtlasStyle[]} */
   const STYLES = ["tween", "physics", "bodies"];
+  /** @param {string} value @returns {value is AtlasStyle} */
+  const isAtlasStyle = (value) => STYLES.some((style) => style === value);
   const isPhysical = (style) => style === "physics" || style === "bodies";
   const physicsCache = new Map();
   const PHYS_CACHE_MAX = 16;
@@ -2539,11 +2506,7 @@
     const newBody = BODY[n];
     // Numerical Recipes' LCG, seeded from the pair's n (so a pair jiggles the same way in index.html
     // and index-all.html); the page never draws from the browser's random source.
-    let seed = (Math.imul(withSeed(p.n), 2654435761) + 0x9e3779b9) >>> 0;
-    const rnd = () => {
-      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      return seed / 4294967296;
-    };
+    const rnd = seededRandom(withSeed(p.n));
     const [hzLo, hzHi] = PHYS.jiggleHz;
     for (let b = 0; b < NB; b++) {
       FQX[b] = 2 * Math.PI * lerp(hzLo, hzHi, rnd());
@@ -3581,6 +3544,7 @@
   // The drawn graph of the n on the stage, as pairs.
   function drawnEdges() {
     const flat = drawnFor(state.pair);
+    /** @type {[number, number][]} */
     const out = [];
     for (let i = 0; i + 1 < flat.length; i += 2) {
       out.push([flat[i], flat[i + 1]]);
@@ -3678,6 +3642,7 @@
     const m = Math.max(4, Math.round(Number(count) || 60));
     const lo = -Math.max(LAW.rigidity * 2, 0.08);
     const hi = Math.max(lawAttracts() ? LAW.range : 0, 0.08);
+    /** @type {[number, number][]} */
     const out = [];
     for (let i = 0; i <= m; i++) {
       const d = lerp(lo, hi, i / m);
@@ -4107,8 +4072,11 @@
   //   clean     it climbs only while the deepest overlap is inside `OPT.squeezeTol`, the same
   //             tolerance the walls' own squeeze is gated on, so growth and contraction stall
   //             together rather than fighting each other.
+  /** @type {AtlasGrowthRule[]} */
   const GROWTH_RULES = ["constant", "clean"];
+  /** @type {Pick<AtlasGrowth, "on" | "size" | "rate" | "rule">} */
   const GROWTH_DEFAULT = { on: false, size: 1, rate: 0.05, rule: "constant" };
+  /** @type {AtlasGrowth["bounds"]} */
   const GROWTH_BOUNDS = { size: [0.3, 1], rate: [0.005, 0.3] };
   const GROWTH = Object.assign({}, GROWTH_DEFAULT);
   const growKey = () =>
@@ -4120,6 +4088,7 @@
   // it. A law that slides off a packing nobody can beat is telling you about itself, not about
   // the packing. (The two-sided form, which distinguishes a rigid record from one with rattlers,
   // is think-dpmt; this is the button that makes it a thing you can do by hand.)
+  /** @type {AtlasInitial[]} */
   const INITIALS = ["previous", "random", "grid", "record"];
   const OPT = {
     stepsPerSecond: 120, // the simulated rate, the same dt the cached simulator integrates at
@@ -4164,16 +4133,7 @@
   // constant from the same family as the LCG's, so successive seeds land far apart rather
   // than in neighbouring streams; at `state.seed === 0` it adds nothing, which is what keeps
   // the default bit-identical to every run recorded before seeds existed.
-  const withSeed = (base) => base + state.seed * 0x9e3779b1;
-  // The page's own generator, seeded so a start is reproducible from n, the kind and the seed.
-  function seededRandom(seedN) {
-    let seed = (Math.imul(seedN, 2654435761) + 0x9e3779b9) >>> 0;
-    return () => {
-      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      return seed / 4294967296;
-    };
-  }
-
+  const withSeed = (base) => mixUint32Seed(base, state.seed);
   // The arrangement of N = n + 1 squares an open-ended run starts from, in the renderer's own square
   // order (square i of n, then the arriving square last), and the box it starts in.
   //   previous  the retained packing of n with the new square added, which is what the page has
@@ -4290,6 +4250,7 @@
       PHT: new Float64Array(N),
       side: start.side,
       startSide: start.side,
+      seed: state.seed,
       // Revision 11: every square's side, a fraction of a unit. 1 is the shipped behaviour and
       // leaves every arithmetic below exactly what it was.
       size: GROWTH.size,
@@ -4302,6 +4263,12 @@
       best: Infinity,
       bestAt: 0,
       bestPen: 0,
+      bestWallPen: 0,
+      bestPacking: null,
+      exactPen: Infinity,
+      wallPen: Infinity,
+      packingValid: false,
+      invalidReason: "not-measured",
       edited: false,
       held: -1,
       heldX: 0,
@@ -4341,46 +4308,32 @@
   // The side of the smallest axis-aligned box that holds the arrangement, and the deepest overlap in
   // it: the two numbers that say how good it is. Taken at chunk boundaries, not per step.
   function measureOptimizer(o) {
-    let x0 = Infinity,
-      x1 = -Infinity,
-      y0 = Infinity,
-      y1 = -Infinity;
-    const h = o.size / 2;
-    for (let i = 0; i < o.n; i++) {
-      const cs = Math.cos(o.TH[i]) * h,
-        sn = Math.sin(o.TH[i]) * h;
-      for (let q = 0; q < 4; q++) {
-        const s1 = q & 1 ? -1 : 1,
-          s2 = q & 2 ? -1 : 1;
-        const vx = o.X[i] + s1 * cs - s2 * sn,
-          vy = o.Y[i] + s1 * sn + s2 * cs;
-        if (vx < x0) {
-          x0 = vx;
-        }
-        if (vx > x1) {
-          x1 = vx;
-        }
-        if (vy < y0) {
-          y0 = vy;
-        }
-        if (vy > y1) {
-          y1 = vy;
-        }
-      }
-    }
-    o.required = Math.max(x1 - x0, y1 - y0);
+    const snapshot = packingSnapshot(o.X, o.Y, o.TH, o.size, {
+      originX: 0,
+      originY: 0,
+      side: o.side,
+    });
+    const assessed = assessPackingSnapshot(snapshot, o.n);
+    o.required = assessed.requiredSide;
     // Kept as well as the side: a square dragged outside the walls still has to be drawn, so the
     // view is sized on the union of the box and whatever the hand has put outside it.
-    o.bx0 = x0;
-    o.bx1 = x1;
-    o.by0 = y0;
-    o.by1 = y1;
+    o.bx0 = assessed.bounds.minX;
+    o.bx1 = assessed.bounds.maxX;
+    o.by0 = assessed.bounds.minY;
+    o.by1 = assessed.bounds.maxY;
+    o.exactPen = assessed.maxPairOverlap;
+    o.wallPen = assessed.maxWallOverlap;
+    o.packingValid = assessed.valid;
+    o.invalidReason = assessed.reason;
     // "Best" is the smallest box the run has held the squares in without them overlapping, which is
     // the only figure that is a packing rather than a picture of one.
-    if (o.pen <= OPT.feasible && o.required < o.best) {
-      o.best = o.required;
-      o.bestAt = o.time;
-      o.bestPen = o.pen;
+    const admitted = admitBestPacking(o.bestPacking, assessed, o.time);
+    if (admitted !== o.bestPacking) {
+      o.bestPacking = admitted;
+      o.best = admitted.requiredSide;
+      o.bestAt = admitted.at;
+      o.bestPen = admitted.maxPairOverlap;
+      o.bestWallPen = admitted.maxWallOverlap;
     }
     return o.required;
   }
@@ -4391,7 +4344,7 @@
     // Substepping keeps the simulated time identical and only divides how it is taken, so a
     // chunk still advances `steps / stepsPerSecond` seconds. `o.steps` stays in base units so the
     // readout counts what the owner asked for rather than what stability cost.
-    const sub = lawSubsteps(1 / OPT.stepsPerSecond);
+    const sub = forceLawSubsteps(LAW, 1 / OPT.stepsPerSecond);
     o.sub = sub;
     const dt = 1 / (OPT.stepsPerSecond * sub);
     steps = steps * sub;
@@ -4915,6 +4868,26 @@
     render();
     return i;
   }
+  function adjustSquareFromKeyboard(index, command) {
+    if (poseX === null || poseY === null || poseA === null) {
+      return;
+    }
+    const x = poseX[index],
+      y = poseY[index];
+    if (x === undefined || y === undefined || grab(index, x, y) < 0 || opt === null) {
+      return;
+    }
+    keyboardSquare = index;
+    if (command.kind === "move-square") {
+      dragTo(x + command.dx, y + command.dy, false);
+    } else if (command.kind === "rotate-square") {
+      opt.heldTH = opt.TH[index] + command.degrees * DEG;
+      opt.TH[index] = opt.heldTH;
+      opt.W[index] = 0;
+      measureOptimizer(opt);
+    }
+    release();
+  }
   function hand() {
     return {
       held: opt === null ? -1 : opt.held,
@@ -4926,11 +4899,25 @@
     if (opt === null) {
       return { on: false, initial: state.initial, edited: false };
     }
+    const bestPacking =
+      opt.bestPacking === null
+        ? null
+        : {
+            seed: opt.seed,
+            at: opt.bestPacking.at,
+            required: opt.bestPacking.requiredSide,
+            squareSide: opt.bestPacking.squareSide,
+            container: { ...opt.bestPacking.container },
+            poses: opt.bestPacking.poses.map((pose) => [pose.x, pose.y, pose.angle / DEG]),
+            maxPairOverlap: opt.bestPacking.maxPairOverlap,
+            maxWallOverlap: opt.bestPacking.maxWallOverlap,
+          };
     return {
       on: state.optimizing,
       running: state.playing,
       initial: opt.kind,
       springs: opt.springs,
+      seed: opt.seed,
       n: opt.n,
       pair: opt.pair,
       time: opt.time,
@@ -4941,10 +4928,20 @@
       best: opt.best === Infinity ? null : opt.best,
       bestAt: opt.bestAt,
       bestPenetration: opt.best === Infinity ? null : opt.bestPen,
+      bestWallPenetration: opt.best === Infinity ? null : opt.bestWallPen,
+      bestPacking,
       feasible: OPT.feasible,
       record: opt.record,
       excess: (opt.required / opt.record - 1) * 100,
       penetration: Number.isFinite(opt.pen) ? opt.pen : null,
+      exactPenetration: Number.isFinite(opt.exactPen) ? opt.exactPen : null,
+      wallPenetration: Number.isFinite(opt.wallPen) ? opt.wallPen : null,
+      packing: opt.packingValid && opt.size === 1,
+      invalidReason: opt.packingValid
+        ? opt.size === 1
+          ? null
+          : "non-unit-square"
+        : opt.invalidReason,
       near: opt.near,
       edited: opt.edited,
       held: opt.held,
@@ -5114,6 +5111,7 @@
     sizes: [],
     slots: [],
     contacts: [],
+    /** @type {AtlasPaintScheme} */
     scheme: "identity",
     // The frame's own answer to "is this a packing": the summed penetration in unit sides, the
     // deepest single one, and how many pairs are inside each other. Zero on a valid packing.
@@ -5499,6 +5497,7 @@
       live.textContent = `n = ${state.liveN}`;
     }
 
+    syncStageAccessibility();
     updateChrome();
   }
 
@@ -5618,11 +5617,53 @@
   // ---------------------------------------------------------------- chrome
   const playButton = document.getElementById("play");
   const clock = document.getElementById("clock");
-  const stage = document.getElementById("stage");
   const stageWrap = document.getElementById("stage-wrap");
   const controls = document.getElementById("controls");
   const continuousInfo = document.getElementById("continuous-info");
   const optimizeButton = document.getElementById("optimize");
+
+  function squareNodeAt(index) {
+    return index < motion.length ? motion[index]?.node : index === motion.length ? newNode : null;
+  }
+  function syncStageAccessibility() {
+    const count = poseX === null ? 0 : poseX.length;
+    const interactive = state.mode === "pack" && !state.capture && count > 0;
+    keyboardSquare = Math.max(0, Math.min(count - 1, keyboardSquare));
+    for (let index = 0; index < count; index++) {
+      const node = squareNodeAt(index);
+      if (node === null || node === undefined) {
+        continue;
+      }
+      if (interactive) {
+        node.setAttribute("role", "button");
+        node.setAttribute("tabindex", index === keyboardSquare ? "0" : "-1");
+        node.setAttribute(
+          "aria-label",
+          `Square ${index + 1} of ${count}; use arrow keys to move and Q or E to rotate`,
+        );
+      } else {
+        node.removeAttribute("role");
+        node.removeAttribute("tabindex");
+        node.removeAttribute("aria-label");
+      }
+    }
+    if (!interactive && document.activeElement?.classList.contains("sq")) {
+      stage.focus();
+    }
+    const shownN = state.liveN === null ? stepN() : state.liveN;
+    const description = stageDescription({
+      aspect: state.mode,
+      n: shownN,
+      squareCount: shownN,
+      containerSide: sceneSide,
+      playing: state.playing,
+      edited: opt?.edited === true,
+    });
+    if (stageDescriptionNode.textContent !== description) {
+      stageDescriptionNode.textContent = description;
+    }
+    svg.setAttribute("aria-label", `${shownN} packing squares`);
+  }
 
   // Revision 10: the timeline scrubber is gone. It drew an open-ended optimisation as if it had a
   // fixed length, which is exactly what it has not got. What replaces it is a counter: in Pack the
@@ -5749,7 +5790,7 @@
       solverNote = TWEEN_NOTE;
     }
     Array.from(styleSelect.options).forEach((o) => {
-      const ok = offered.includes(o.value);
+      const ok = isAtlasStyle(o.value) && offered.includes(o.value);
       o.hidden = !ok;
       o.disabled = !ok;
     });
@@ -5913,7 +5954,16 @@
     // The transport keeps its two glyphs in the markup and swaps which is drawn; its accessible name
     // is set here, because the button carries no text of its own.
     playButton.classList.toggle("is-playing", state.playing);
-    playButton.setAttribute("aria-label", state.playing ? "Pause" : "Play");
+    playButton.setAttribute(
+      "aria-label",
+      reduceMotion
+        ? state.mode === "pack"
+          ? "Advance the packing strategy by one second"
+          : "Advance one packing transition"
+        : state.playing
+          ? "Pause"
+          : "Play",
+    );
     // The second button does two different things and should say which. Paused, it skips back to
     // the start, so it draws the skip-to-start bar. Running, what it actually does is restart the
     // run, so it draws a circling arrow. Same button, same action, honest glyph.
@@ -5944,16 +5994,7 @@
   // The pair that arrives at n, or the nearest one this page carries (the 25-pair demo build carries
   // 25 of the 323 steps, so a chip there lands on the closest step it has).
   function pairForStepN(n) {
-    let best = 0,
-      dist = Infinity;
-    for (let i = 0; i < PAIRS.length; i++) {
-      const d = Math.abs(PAIRS[i].n + 1 - n);
-      if (d < dist) {
-        dist = d;
-        best = i;
-      }
-    }
-    return best;
+    return nearestSupportedIndex(SUPPORTED_STEP_NS, n);
   }
   // Choosing one n is the range collapsed onto it: the old Single step tab, with nothing else to it.
   function setStepN(n) {
@@ -6302,8 +6343,7 @@
   // readout under the select — once, until the next thing the owner chooses.
   const TWEEN_NOTE = "tween is Animate’s: using physics";
   let solverNote = "";
-  const solversFor = (mode) =>
-    mode === "pack" ? STYLES.filter((s) => s !== "tween") : STYLES.slice();
+  const solversFor = availableStyles;
   function setStyle(style) {
     markGapBar();
     let next = STYLES.includes(style) ? style : STYLES[0];
@@ -6333,6 +6373,7 @@
     const tr = ensureTrajectory(index, style, mode);
     const N = tr.n + 1;
     const o = tr.steps * N * 3;
+    /** @type {[number, number, number][]} */
     const final = [];
     for (let i = 0; i < N; i++) {
       final.push([tr.states[o + i * 3], tr.states[o + i * 3 + 1], tr.states[o + i * 3 + 2] / DEG]);
@@ -6435,11 +6476,11 @@
   // The run's seed. An integer; anything else is ignored rather than silently turned into
   // NaN, which would make every generator produce the same degenerate stream.
   function setSeed(value) {
-    const k = Math.round(Number(value));
-    if (!Number.isFinite(k)) {
+    const k = parseUint32Seed(value);
+    if (k === null) {
       return state.seed;
     }
-    state.seed = k >>> 0;
+    state.seed = k;
     // A new seed is a new run: the staged arrangement and any cached trajectory belong to the
     // old one.
     if (state.optimizing) {
@@ -6495,23 +6536,18 @@
   // The whole run, pair by pair: under continuous play the pairs do not all last the same time, so
   // both of these walk the sequence rather than multiplying.
   function sequenceDuration() {
-    let s = 0;
-    for (let i = 0; i < PAIRS.length; i++) {
-      s += duration(i);
-    }
-    return s;
+    return timelineSequenceDuration(timelineConfiguration(), state.style);
   }
   function seekSequence(seconds) {
-    let s = Math.max(0, Math.min(sequenceDuration(), Number(seconds) || 0));
-    let index = 0;
-    while (index < PAIRS.length - 1 && s >= duration(index)) {
-      s -= duration(index);
-      index++;
+    const position = timelineSeekSequence(
+      timelineConfiguration(),
+      state.style,
+      Number(seconds) || 0,
+    );
+    if (position.index !== state.pair) {
+      select(position.index);
     }
-    if (index !== state.pair) {
-      select(index);
-    }
-    seek(s);
+    seek(position.time);
   }
   // Continuous play: every pair from here to the last, back to back, keeping the style, the colour
   // rule, the snap, the blind run and the desaturation, on the sequence's own beat.
@@ -6585,30 +6621,16 @@
   // scopes four things — which pairs a run may play, how long the run is, what the progress bar's
   // scale spans, and which step the stage is on when the current one falls outside it.
   function setRange(from, to) {
-    let lo = Math.round(Number(from));
-    let hi = Math.round(Number(to));
-    if (!Number.isFinite(lo)) {
-      lo = state.range.from;
-    }
-    if (!Number.isFinite(hi)) {
-      hi = state.range.to;
-    }
-    lo = Math.max(RANGE_MIN, Math.min(RANGE_MAX, lo));
-    hi = Math.max(lo, Math.min(RANGE_MAX, hi));
-    const collapsed = lo === hi;
-    // A one-step range names a step the page actually carries: the demo build has 25 of the 323, so
-    // a chip for 272 collapses onto the nearest step it has rather than pointing at nothing.
-    if (collapsed) {
-      lo = hi = PAIRS[pairForStepN(lo)].n + 1;
-    }
+    const normalized = normalizeRange(SUPPORTED_STEP_NS, state.range, from, to);
+    const { from: lo, to: hi, collapsed, forcedAspect } = normalized;
     state.range.from = lo;
     state.range.to = hi;
     // Revision 10: the range and the mode are the same fact seen twice, so setting one sets the
     // other where they would otherwise disagree. A range wider than one step is something Pack
     // cannot show, so it puts the page in Animate; a collapsed range is legal in both and never
     // forces a mode, since `setRange(17, 17)` in Animate is how one step animation is played.
-    if (lo !== hi) {
-      state.mode = "animate";
+    if (forcedAspect !== null) {
+      state.mode = forcedAspect;
     }
     // A one-step range is not a continuous run: the three timing boxes govern again.
     if (collapsed && state.continuous.on) {
@@ -6629,13 +6651,7 @@
   // How long the range takes at the current settings: the sequence's own beat, pair by pair, since
   // a static append is shorter than a matched pair and the annealing dial lengthens the move.
   function rangeDuration() {
-    const b = rangeBounds();
-    let s = 0;
-    for (let i = b.first; i <= b.last; i++) {
-      const tm = continuousTiming(i);
-      s += tm.dwell + tm.move + tm.correct + tm.settle;
-    }
-    return s;
+    return timelineRangeDuration(timelineConfiguration(), state.range, state.style);
   }
   function rangeState() {
     const b = rangeBounds();
@@ -6694,17 +6710,22 @@
   // Pack(17) again, and Animate always opens at the first step of its range rather than wherever
   // Pack happened to leave the stage.
   function setMode(next) {
-    const want = next === "animate" || next === "sweep" ? "animate" : "pack";
-    if (want === state.mode) {
+    const transition = planAspectTransition({
+      currentAspect: state.mode,
+      currentRange: state.range,
+      currentStepN: stepN(),
+      rememberedPackN: state.packN,
+      rememberedAnimateRange: state.animate,
+      supportedSteps: SUPPORTED_STEP_NS,
+      target: next,
+    });
+    if (!transition.changed) {
       updateSegments();
       return state.mode;
     } // updateSegments coerces the style
-    if (state.mode === "animate") {
-      state.animate = { from: state.range.from, to: state.range.to };
-    } else {
-      state.packN = stepN();
-    }
-    state.mode = want;
+    state.animate = transition.rememberedAnimateRange;
+    state.packN = transition.rememberedPackN;
+    state.mode = transition.aspect;
     // The reset itself: nothing that belonged to the mode being left survives into the one being
     // entered. `opt` is the open-ended run, `state.t` the animation clock.
     pause();
@@ -6714,57 +6735,102 @@
     // Revision 14: the tween is Animate's, so entering Pack with it selected falls back to the
     // physics and leaves the reason under the select; leaving Pack clears the note, the choice
     // being available again.
-    if (want === "pack" && state.style === "tween") {
+    if (transition.aspect === "pack" && state.style === "tween") {
       state.style = "physics";
       solverNote = TWEEN_NOTE;
     }
-    if (want === "animate") {
+    if (transition.aspect === "animate") {
       solverNote = "";
     }
-    if (want === "pack") {
+    if (transition.aspect === "pack") {
       // Revision 13: Pack is where the starting size lives. Revision 14: and where all n squares are
       // on the stage from the first frame, so entering Pack always stages the arrangement --
       // `setRange` collapsed onto one n selects that pair, which is what stages it.
-      const n = state.packN === null ? stepN() : state.packN;
-      setRange(n, n);
+      setRange(transition.range.from, transition.range.to);
       stagePack();
     } else {
-      const kept = state.animate;
-      setRange(kept === null ? RANGE_MIN : kept.from, kept === null ? RANGE_MAX : kept.to);
+      setRange(transition.range.from, transition.range.to);
       // Animate opens at the first step of its range, so the header, the bar and the stage are all
       // describing the same n from the first frame.
-      select(rangeBounds().first);
+      select(transition.pairIndex);
     }
     updateSegments();
     render();
     return state.mode;
   }
+  function advanceReducedMotion() {
+    const b = rangeBounds();
+    const action = reducedMotionAction({
+      aspect: state.mode,
+      optimizing: state.optimizing && opt !== null,
+      pairIndex: state.pair,
+      firstPairIndex: b.first,
+      lastPairIndex: b.last,
+      atPairEnd: state.t >= duration(),
+    });
+    pause();
+    state.continuous.on = false;
+    switch (action) {
+      case "initialize-pack":
+        optimize(true);
+        pause();
+        optimizeStep(OPT.stepsPerSecond);
+        live.textContent = "Reduced-motion mode advanced the packing strategy by one second.";
+        return;
+      case "step-pack":
+        optimizeStep(OPT.stepsPerSecond);
+        live.textContent = "Reduced-motion mode advanced the packing strategy by one second.";
+        return;
+      case "finish-pair":
+        seek(duration());
+        live.textContent = `Reduced-motion mode advanced to n = ${state.liveN}.`;
+        return;
+      case "finish-next-pair":
+        select(state.pair + 1);
+        seek(duration());
+        live.textContent = `Reduced-motion mode advanced to n = ${state.liveN}.`;
+        return;
+      case "restart-and-finish":
+        select(b.first);
+        seek(duration());
+        live.textContent = `Reduced-motion mode restarted at n = ${state.liveN}.`;
+        return;
+    }
+  }
   // Revision 9: one transport button for one view. Revision 10: what it plays is the mode's own
   // playback — the open-ended run in Pack, the range in Animate — and pause stops it where it stands.
   // A range run that has reached its end starts again from the top.
   function transport() {
-    if (state.playing) {
-      pause();
-      return;
-    }
-    // An open-ended run is resumed where it stands, never restarted and never scoped to a range.
-    if (state.optimizing && opt !== null) {
-      play();
-      return;
-    }
-    // Pack has nothing of a fixed length to play, so play *is* the optimisation.
-    if (state.mode === "pack") {
-      optimize(true);
+    if (reduceMotion) {
+      advanceReducedMotion();
       return;
     }
     const b = rangeBounds();
-    if (b.last > b.first) {
-      if (!state.continuous.on || (state.pair >= b.last && state.t >= duration())) {
+    const action = transportIntent({
+      aspect: state.mode,
+      playing: state.playing,
+      optimizing: state.optimizing && opt !== null,
+      continuous: state.continuous.on,
+      pairIndex: state.pair,
+      firstPairIndex: b.first,
+      lastPairIndex: b.last,
+      atEnd: state.t >= duration(),
+    });
+    switch (action) {
+      case "pause":
+        pause();
+        return;
+      case "start-pack":
+        optimize(true);
+        return;
+      case "start-range":
         playRange();
         return;
-      }
+      case "resume-pack":
+      case "resume-animation":
+        play();
+        return;
     }
-    play();
   }
   // Revision 14: **restart is return to the beginning of whatever play would play.** The owner
   // asked for it beside play and pause, and then for the thought behind it: "perhaps the restart
@@ -6814,6 +6880,7 @@
   }
   // Revision 9: the range is the only span, so the tabs are gone from the page. These stay on the
   // API as no-ops for anything that still calls them.
+  /** @returns {"single"} */
   function setTab() {
     return "single";
   }
@@ -6848,10 +6915,10 @@
   // The workbench's API, hung on the page's own global: one handle for the probes, the capture
   // script and the console. The type library's `Window` knows nothing of `atlasTransitions`, so the
   // property is named here, once, rather than at each of the two places that touch it.
-  /** @typedef {Record<string, Function>} WorkbenchApi */
   /** @typedef {Window & typeof globalThis & { atlasTransitions: WorkbenchApi }} PageWindow */
   const win = /** @type {PageWindow} */ (window);
-  win.atlasTransitions = {
+  /** @type {WorkbenchApi} */
+  const atlasTransitions = {
     // Revision 9: the tabs are gone; these are no-ops kept so nothing that called them breaks.
     setTab,
     tab: () => "single",
@@ -7069,9 +7136,11 @@
       speed: state.speed,
       initial: state.initial,
       optimizing: state.optimizing,
+      seed: state.seed,
       shownN: state.liveN,
     }),
   };
+  win.atlasTransitions = atlasTransitions;
 
   // ---------------------------------------------------------------- wiring
   // Previous and next move the step the stage is on. Where the range is one step they carry it with
@@ -7246,6 +7315,38 @@
     const pt = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(inv);
     return [pt.x, pt.y];
   }
+  stage.addEventListener("keydown", (ev) => {
+    const target = ev.target instanceof Element ? ev.target : null;
+    const rawIndex = target?.getAttribute("data-square-index");
+    const squareIndex = rawIndex === null || rawIndex === undefined ? -1 : Number(rawIndex);
+    const squareFocused = Number.isInteger(squareIndex) && squareIndex >= 0;
+    const command = stageKeyCommand(ev.key, ev.shiftKey, squareFocused);
+    if (command === null) {
+      return;
+    }
+    ev.preventDefault();
+    ev.stopPropagation();
+    if (command.kind === "focus-square") {
+      if (state.mode !== "pack") {
+        live.textContent = "Square editing is available in Pack mode.";
+        return;
+      }
+      squareNodeAt(keyboardSquare)?.focus();
+      return;
+    }
+    if (command.kind === "leave-square") {
+      stage.focus();
+      live.textContent = "Returned to the packing stage.";
+      return;
+    }
+    keyboardSquare = squareIndex;
+    adjustSquareFromKeyboard(squareIndex, command);
+    squareNodeAt(squareIndex)?.focus();
+    live.textContent =
+      command.kind === "move-square"
+        ? `Square ${squareIndex + 1} moved by keyboard.`
+        : `Square ${squareIndex + 1} rotated by keyboard.`;
+  });
   // Revision 12: the two gestures on the stage are the same press, drag and release, so the toggle
   // decides which of them a press starts and nothing is ever ambiguous. With `draw links` on no
   // square is picked up at all; with it off the drawing code is never entered.
@@ -7262,6 +7363,7 @@
       return;
     }
     ev.preventDefault();
+    keyboardSquare = i;
     svg.setPointerCapture(ev.pointerId);
     if (state.drawing) {
       linkStart(i);
@@ -7416,12 +7518,12 @@
   document.getElementById("gapbar-grid").innerHTML = METRICS.bound_html.grid;
   measureDigit();
   measureHeadline();
-  if (document.fonts?.ready) {
+  if ("fonts" in document) {
     // `layout()` again, not only `measureDigit()`: the panel's height is what the stage's scale is
     // computed from, and with revision 11's six control boxes the faces landing changes how much the
     // rows wrap. Measured before this line: a fresh load left the controls 45 px taller than the
     // scale had allowed for and `overflow: hidden` clipped the bottom row until the window resized.
-    document.fonts.ready.then(() => {
+    void document.fonts.ready.then(() => {
       measureDigit();
       measureHeadline();
       layout();

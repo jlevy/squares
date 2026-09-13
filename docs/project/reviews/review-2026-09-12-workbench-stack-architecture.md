@@ -144,6 +144,48 @@ regenerate the owning views.
 Never invent effort or source fields to satisfy a schema.
 **Beads:** `think-5pv0`, then `think-3eha`.
 
+### Retained-cohort reconciliation — 2026-09-13
+
+The package tool `workbench_tools.historical_summary_audit` inventories all 59 files and
+275 cells in the retained `summaries.json` without treating its flags as fresh packing
+validation. It reproduces the following dispositions for `think-jdgu`:
+
+| Retained artifact/cell | Recorded rows | Stored resolved flag | Disposition |
+| --- | ---: | --- | --- |
+| `20260912T013025-sweep-anneal8-inflate{1.02,1.06,1.12,1.25,1.5}.jsonl`, n17 | 2,000 each | false | Five level-8 cells exist. They do not establish a valid resolved level-8 result. |
+| `a8-deep.jsonl`, n11 | 16,319 | true | The retained deep level-8 artifact contains n11 only; 20,000 was a planned count. |
+| `deep-n5-n10.jsonl`, n5 | 39,871 | true | Despite its filename, the retained summary contains n5 only. |
+| `resolved-5k-a6.jsonl`, n5/10/11/17/26/29 | 5,000 each | true | Six retained cells at level 6. Raw geometry and seed identities are absent. |
+
+For the last artifact, the stored normalized medians and reconstructed absolute/relative
+excess are shown together.
+The excess columns are arithmetic reconstructions from rounded summary values, not newly
+measured packings:
+
+| n | Median gap closed | Median absolute excess | Median relative excess |
+| ---: | ---: | ---: | ---: |
+| 5 | −0.073654 | 0.314466 | 11.6163% |
+| 10 | −0.098970 | 0.321881 | 8.6828% |
+| 11 | −0.106898 | 0.136056 | 3.5092% |
+| 17 | −0.103850 | 0.358166 | 7.6604% |
+| 26 | −0.101157 | 0.416986 | 7.4179% |
+| 29 | −0.857133 | 0.122880 | 2.0708% |
+
+n29 is the largest retained case; n26 is not.
+Normalized and absolute ordering differ because the reference-to-grid gap differs.
+Neither ordering identifies size as a cause.
+The pasted 34/39, 1/5, 13/16, 0/5 and 5/5 disjoint-block claims remain unavailable for
+independent replay: rounded prefix summaries do not recover their input seeds or block
+extrema. Row totals across files are not unique-trial counts because seed overlap is
+unrecorded. Claims of 611,796 total trials or 468,606 pre-guard trials therefore remain
+historical counts, not reconstructed unique populations.
+
+The exact command is documented in the annealing runbook.
+The tool’s controls preserve the n17 resolved flags, actual deep-cell count, largest n,
+and undefined block evidence.
+A new run belongs to a separately registered research round; this correction does not
+silently rerun a campaign or choose a new winning preset.
+
 ### R5 — Medium: accepted large seeds alias in JavaScript
 
 [workbench.js](../../../packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js),
@@ -289,8 +331,8 @@ The
 [governing workbench plan](../specs/active/plan-2026-09-11-workbench-from-spike-to-product.md)
 owns final outcomes and implementation phases.
 This register tracks how the reviewed findings are addressed.
-All rows below are **open**: mapping is complete, but no source repair is claimed by
-this planning pass.
+The resolution column distinguishes completed record repairs from source work still
+awaiting its implementing commit and verification receipt.
 
 When a repair lands, keep the finding’s baseline text and update its row with the
 implementing revision, named check/artifact, and one of: fixed, superseded with
@@ -306,7 +348,7 @@ A bead being created or closed without that evidence is not a review resolution.
 | R5 — Seed aliases | `think-dq1l` | 1 | Exact mixer/domain, reproduced alias regression and effective-seed browser/headless replay. | Open |
 | R6 — Missing compaction instrument | `think-3hb7` | 1 | Recovered committed tool/controls or dated annotation withdrawing the unsupported ceiling claim. | Dispositioned 2026-09-13: `exp-209`, X-028 and the runbook mark the discarded program/output unreproducible; current verdict is unresolved and the resolver-ceiling exclusion is withdrawn. Original observations are retained. No replacement experiment is claimed. |
 | R7 — Project-subpath navigation | `think-5wnw`, `think-9x0m`, `think-tn6s` | 2–4 | Served `/squares/` path test, checker negative controls, then a deployed navigation receipt. | Open |
-| R8 — Incomplete quality gates | `think-7f3p`, `think-gxxc`, `think-4ylo`, `think-kpvc`, `think-y9pw` | 2 | Checked source/API, strict zero-finding language gates, negative discovery controls, semantic CI and accessibility checks. | Open |
+| R8 — Incomplete quality gates | `think-7f3p`, `think-gxxc`, `think-4ylo`, `think-kpvc`, `think-y9pw` | 2–3 | Checked source/API, strict zero-finding language gates, negative discovery controls, semantic CI and accessibility checks. | Open. The strict audit found 1,030 workbench and 249 probe errors; the plan now combines typing with coherent TS module migration. Final strict graduation remains a pre-merge gate. |
 | R9 — Ambient Node runtime | `think-l6l4`, `think-9x0m`, `think-tn6s` | 2–4 | Explicit runtime selection across package/CI/Pages; artifact and deployed revision verification. | Open |
 | R10 — Optimizer snapshot mismatch | `think-6hqs`, `think-nals` | 1–2 | Exact returned-pose validation, unit-size semantics, overlap-crossing regression and retained valid-snapshot control. | Open |
 

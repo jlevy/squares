@@ -5,11 +5,24 @@ from __future__ import annotations
 import pytest
 
 from devtools import check_published_site
-from devtools.check_published_site import SERVED, pdf_pages, repository_links
+from devtools.check_published_site import (
+    SERVED,
+    WORKBENCH_HOME,
+    WORKBENCH_REVISION,
+    pdf_pages,
+    repository_links,
+)
 from devtools.render_explainer import COMPOSITE_ASSETS, MARKDOWN_OUTPUT, REPO_URL
 from devtools.render_explainer_pdf import EXPECTED_PAGE_COUNT
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
 from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
+
+
+def workbench_page(commit: str, *, home: str = "../") -> bytes:
+    return (
+        f'<meta name="squares-workbench-revision" content="{commit}">'
+        f'<div id="site-note"><a href="{home}">the explainer</a></div>'
+    ).encode()
 
 
 def test_repository_links_are_read_from_markup_and_markdown_but_not_from_scripts() -> None:
@@ -52,19 +65,25 @@ def test_check_accepts_the_requested_build_and_rejects_a_stale_stamp(
 
     def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
         assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
         if url.endswith(".pdf"):
             pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
             return 200, b"%PDF-1.7\n" + pages + b"%%EOF"
         return 200, b"" if head else page
 
     monkeypatch.setattr(check_published_site, "fetch", fetch)
-    results = check_published_site.check("https://example.org", commit, timeout=1)
+    results = check_published_site.check(
+        "https://example.org", commit, timeout=1, browser=False
+    )
     assert all(passed for passed, _ in results), results
 
     page = f"<p>({stamp.replace(commit[:8], 'deadbeef')})</p>{link}".encode()
     failures = [
         line
-        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        for passed, line in check_published_site.check(
+            "https://example.org", commit, timeout=1, browser=False
+        )
         if not passed
     ]
     assert len(failures) == 1
@@ -84,6 +103,8 @@ def test_check_rejects_a_deployed_pdf_that_crossed_a_page_boundary(
 
     def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
         assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
         if url.endswith(".pdf"):
             pages = b"1 0 obj << /Type /Page >> endobj\n" * (EXPECTED_PAGE_COUNT + 1)
             return 200, b"%PDF-1.7\n" + pages + b"%%EOF"
@@ -92,8 +113,88 @@ def test_check_rejects_a_deployed_pdf_that_crossed_a_page_boundary(
     monkeypatch.setattr(check_published_site, "fetch", fetch)
     failures = [
         line
-        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        for passed, line in check_published_site.check(
+            "https://example.org", commit, timeout=1, browser=False
+        )
         if not passed
     ]
     assert len(failures) == 1
     assert f"{EXPECTED_PAGE_COUNT + 1} pages (expected {EXPECTED_PAGE_COUNT})" in failures[0]
+
+
+def test_workbench_receipt_parses_exact_revision_and_project_relative_home() -> None:
+    commit = "0123456789abcdef0123456789abcdef01234567"
+    text = workbench_page(commit).decode()
+    revision = WORKBENCH_REVISION.search(text)
+    home = WORKBENCH_HOME.search(text)
+    assert revision is not None
+    assert revision.group(1) == commit
+    assert home is not None
+    assert home.group(1) == "../"
+
+
+def test_check_rejects_a_stale_workbench_or_account_root_navigation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    commit = "0123456789abcdef0123456789abcdef01234567"
+    stamp = " ".join(
+        part for part in (PUBLICATION_STATUS, f"{PUBLICATION_VERSION}-{commit[:8]}") if part
+    )
+    page = (
+        f'<p>({stamp})</p><a href="{REPO_URL}/blob/{commit}/README.md">Repository</a>'
+    ).encode()
+
+    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page("f" * 40, home="/")
+        if url.endswith(".pdf"):
+            pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
+            return 200, b"%PDF-1.7\n" + pages + b"%%EOF"
+        return 200, b"" if head else page
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    failures = [
+        line
+        for passed, line in check_published_site.check(
+            "https://example.org/squares", commit, timeout=1, browser=False
+        )
+        if not passed
+    ]
+    assert len(failures) == 2
+    assert "workbench source revision" in failures[0]
+    assert "workbench home resolves" in failures[1]
+
+
+def test_check_requires_the_workbench_browser_api_to_start(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    commit = "0123456789abcdef0123456789abcdef01234567"
+    stamp = " ".join(
+        part for part in (PUBLICATION_STATUS, f"{PUBLICATION_VERSION}-{commit[:8]}") if part
+    )
+    page = (
+        f'<p>({stamp})</p><a href="{REPO_URL}/blob/{commit}/README.md">Repository</a>'
+    ).encode()
+
+    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
+        if url.endswith(".pdf"):
+            pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
+            return 200, b"%PDF-1.7\n" + pages + b"%%EOF"
+        return 200, b"" if head else page
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    monkeypatch.setattr(
+        check_published_site,
+        "workbench_startup",
+        lambda _url, _root, *, timeout: (False, f"API missing after {timeout}s"),
+    )
+    failures = [
+        line
+        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        if not passed
+    ]
+    assert failures == ["API missing after 1s"]

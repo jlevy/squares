@@ -36,7 +36,7 @@ format-check:
 ## Install the browser floor's pinned tools and the git hooks. Run once after cloning.
 ##
 ## `npm ci --ignore-scripts` installs exactly what package-lock.json pins -- lefthook,
-## Biome and TypeScript -- and fails if the lockfile and package.json disagree, which is
+## the workbench package -- and fails if the lockfile and package.json disagree, which is
 ## what makes "pinned" mean anything. The hook install then runs the LOCAL lefthook rather
 ## than fetching one, so the binary that installs the hook is the binary the lockfile
 ## names.

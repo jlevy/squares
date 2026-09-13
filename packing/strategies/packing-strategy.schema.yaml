@@ -31,6 +31,8 @@ properties:
     description: How many unit squares.
   seed:
     type: integer
+    minimum: 0
+    maximum: 4294967295
     description: Fixes the run. Omitted means the executor chooses and records one.
   phases:
     type: array
@@ -105,6 +107,10 @@ $defs:
           Elser's m-monotonicity: abandon once the error has failed to improve for
           this many iterations. A stop condition on evidence rather than a
           self-declared budget.
+      frames:
+        type: integer
+        minimum: 1
+        description: Number of interpolation frames for a container resize.
   phase:
     type: object
     additionalProperties: false
@@ -148,6 +154,10 @@ $defs:
           halve_on_failure: {type: boolean, default: true}
           floor: {type: number, exclusiveMinimum: 0}
           attempts: {type: integer, minimum: 1}
+          attempts_ceiling:
+            type: integer
+            minimum: 1
+            description: Maximum continuation steps in the ratchet schedule.
           cold:
             type: number
             minimum: 0

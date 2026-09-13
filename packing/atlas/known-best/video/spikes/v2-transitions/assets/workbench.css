@@ -658,6 +658,20 @@ input[type="number"] {
 button:hover {
   background: #f3f5f7;
 }
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+#stage:focus-visible {
+  outline: 2px solid var(--new);
+  outline-offset: 2px;
+}
+#squares .sq[tabindex="0"]:focus-visible {
+  outline: none;
+}
+#squares .sq[tabindex="0"]:focus-visible rect {
+  stroke: var(--new);
+  stroke-width: 3;
+}
 button.primary {
   background: var(--ink);
   color: var(--paper);
@@ -1096,4 +1110,13 @@ input[type="number"] {
 .range-figure strong {
   color: var(--ink);
   font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto;
+    transition: none;
+  }
 }

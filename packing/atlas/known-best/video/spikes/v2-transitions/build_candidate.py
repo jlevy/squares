@@ -55,6 +55,7 @@ HERE = Path(__file__).resolve().parent
 # failed on CI.
 PACKING = HERE.parents[4]
 REPO = PACKING.parent
+WORKBENCH_PACKAGE = REPO / "packages" / "workbench"
 # `devtools` is imported for the explainer's KaTeX inliner and its self-containment check, so
 # the packing root has to be importable: this file is run as a script, not as a module.
 if str(PACKING) not in sys.path:
@@ -214,6 +215,7 @@ NUMERAL_PX = 96  # .n-val
 NUMERAL_WEIGHT = 400
 N_LINE_PX = 96  # .nline, the same size as the numeral it labels
 N_LINE_LEFT_PX = 6  # .nline left, the panel's text edge
+COLOUR_ANGLE_TOLERANCE_DEGREES = 0.5
 #: The space between the `=` of `n =` and the first digit beside it, ink to ink. The headline is
 #: one line, so this is a word space rather than a line break: 16 px at 96 px is a sixth of an
 #: em, tighter than the face's own space, which is what makes `n = 11` read as one statement.
@@ -1399,6 +1401,22 @@ def compact_frame(witness: dict, rendering: list[dict], identities: list[int]) -
     return {"side": round(witness["side"], 9), "squares": squares, "ident": identities}
 
 
+def colour_contract() -> dict:
+    """The workbench colour inputs, derived from the shared renderer once per payload."""
+    from sqpack.render.color import square_fill_palette  # noqa: PLC0415
+    from sqpack.render.style import SQUARE_HUE_PALETTE  # noqa: PLC0415
+
+    shades = square_fill_palette(
+        hue_count=len(SQUARE_HUE_PALETTE),
+        shades_per_hue=5,
+    )
+    return {
+        "palette": SQUARE_HUE_PALETTE,
+        "shades": shades,
+        "angleToleranceDegrees": COLOUR_ANGLE_TOLERANCE_DEGREES,
+    }
+
+
 def asset(name: str) -> str:
     """The text of `assets/<name>`, without its final newline.
 
@@ -1421,6 +1439,34 @@ def asset(name: str) -> str:
     return (HERE / "assets" / name).read_text(encoding="utf-8").removesuffix("\n")
 
 
+def workbench_script() -> str:
+    """The package-built classic browser application.
+
+    The package build places its strict module bundle immediately before the retained
+    application and also compiles the browser benchmark probe. Building into a private temporary
+    directory keeps generated assets out of the source tree and lets this generator continue
+    producing one self-contained page.
+    """
+    tool = WORKBENCH_PACKAGE / "tools" / "build-assets.ts"
+    with tempfile.TemporaryDirectory(prefix="squares-workbench-bundle-") as scratch:
+        output = Path(scratch) / "workbench.js"
+        built = subprocess.run(
+            ("node", str(tool), scratch),
+            cwd=REPO,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if built.returncode != 0:
+            msg = (
+                f"workbench asset build exited {built.returncode}\n"
+                f"--- stderr ---\n{built.stderr.strip() or '(empty)'}\n"
+                f"--- stdout ---\n{built.stdout.strip() or '(empty)'}"
+            )
+            raise ValueError(msg)
+        return output.read_text(encoding="utf-8").removesuffix("\n")
+
+
 def build_html(template: str, payload: dict) -> str:
     data = json.dumps(payload, separators=(",", ":"), sort_keys=True, ensure_ascii=False)
     # A closing script tag inside JSON would end the data block early; there is none, but be
@@ -1430,7 +1476,10 @@ def build_html(template: str, payload: dict) -> str:
         # The page is assembled before it is filled: the stylesheet and the script go in first,
         # so a face, KaTeX or data token is substituted wherever it ends up standing.
         template.replace("__WORKBENCH_CSS__", asset("workbench.css"))
-        .replace("__WORKBENCH_JS__", asset("workbench.js"))
+        .replace(
+            "__WORKBENCH_JS__",
+            workbench_script(),
+        )
         .replace("__FONT_CSS__", font_css())
         .replace("__KATEX_CSS__", katex_css())
         .replace("__DATA__", data)
@@ -1809,6 +1858,8 @@ def main(argv: list[str] | None = None) -> int:
     def payload_for(pair_ns: list[int]) -> dict:
         frame_ns = sorted({n for p in pair_ns for n in (p, p + 1)})
         return {
+            "schema": "squares.workbench.corpus/v1",
+            "colour": colour_contract(),
             "frames": {
                 str(n): compact_frame(witnesses[n], renderings[n], identities[n])
                 for n in frame_ns

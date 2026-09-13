@@ -254,6 +254,8 @@ CACHE_PROBE_ROOT = ROOT / ".negative-control-cache-probe"
 # byte assertion below fails. The other direction is covered by the containment check
 # in the test, so a fourth cache kind cannot join the set unprobed.
 CACHE_PROBE_DIRECTORIES = (
+    "node_modules",
+    "nested/dist",
     "__pycache__",
     ".pytest_cache",
     ".ruff_cache",

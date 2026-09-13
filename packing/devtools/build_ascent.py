@@ -31,11 +31,13 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+from workbench_tools.packing_contracts import check_unit_square_packing
 
 from devtools.export_animation_svg import export_svg
 from devtools.known_structure import record
 from devtools.lock_order import lock_order
 from devtools.packing_strategy import run
+from devtools.run_projection_ratchet import match_targets
 
 
 def step_strategy(n: int, *, fair_steps: int = 3000, seed: int = 11) -> dict[str, Any]:
@@ -146,11 +148,35 @@ def render_ascent(first: int, last: int, *, fair_steps: int = 2000) -> dict[str,
                 }
             )
 
+        # A record-labelled frame carries the record's actual geometry. The guide lands
+        # close to its target but does not establish that it reached it, so preserve its
+        # last candidate frame and add one explicit guided endpoint at the retained poses.
+        target_poses, target_side = record(n)
+        target_poses, _assignment = match_targets(state.poses, target_poses)
+        target_check = check_unit_square_packing(
+            target_poses,
+            side=target_side,
+            expected_count=n,
+        )
+        if not target_check.passed:
+            raise ValueError(f"retained n={n} endpoint failed the independent packing check")
+        state.poses = target_poses
+        state.side = target_side
+        state.animation.append(
+            {
+                "side": target_side,
+                "squares": [[float(value) for value in pose] for pose in target_poses],
+                "square_ids": list(range(1, n + 1)),
+                "phase": "retained record",
+                "guided": True,
+                "feasible": True,
+            }
+        )
+
         # Each square takes its colour as it reaches its place, outside in and
         # axis-aligned first. The order is the geometry's, not the run's: a viewer can
         # predict where a square square to the wall belongs, so those locking first is
         # both the clearest thing to watch and the least surprising.
-        target_poses, _ = record(n)
         order = lock_order(target_poses, target_side)
         produced = list(state.animation)
         for index, entry in enumerate(produced):
@@ -176,7 +202,11 @@ def render_ascent(first: int, last: int, *, fair_steps: int = 2000) -> dict[str,
     for frame in frames:
         missing = last - len(frame["squares"])
         if missing > 0:
+            present = len(frame["squares"])
             frame["squares"] = frame["squares"] + [[corner, corner, 0.0]] * missing
+            frame["square_ids"] = list(frame.get("square_ids", range(1, present + 1))) + list(
+                range(present + 1, last + 1)
+            )
             # A square that has not arrived has certainly not locked.
             frame["locked"] = list(frame.get("locked", [])) + [False] * missing
 

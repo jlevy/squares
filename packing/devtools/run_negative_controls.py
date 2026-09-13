@@ -274,10 +274,12 @@ PRUNE = frozenset(
 # stale co-located `.pyc` in place and getting the mutation, not the cache. The copies
 # were dead weight in every worker, about a fifth of each tree.
 #
-# The set is the three kinds this repository's toolchain actually writes, measured
-# rather than guessed. Adding a fourth is cheap and should still be done against a
-# measurement, not a precaution.
-BUILD_CACHES = frozenset({"__pycache__", ".pytest_cache", ".ruff_cache"})
+# The workbench adds generated `dist` (348 KiB) and installed `node_modules`
+# (5,988 KiB) beneath its package in the measured 2026-09-13 checkout. Neither is
+# tracked source or a mutation target; package source must still enter every snapshot.
+BUILD_CACHES = frozenset(
+    {"__pycache__", ".pytest_cache", ".ruff_cache", "dist", "node_modules"}
+)
 LINK_BACK = (Path(".venv"), Path("sqsearch/target"))
 COPY_SEPARATELY = (ROOT / "resources/README.md", REPO / ".flowmarkignore")
 # The reader-facing documents live at the repository root now, and the controls reach
@@ -302,6 +304,7 @@ ROOT_DOCUMENTS = (
     REPO / "operating-rules.md",
     REPO / "AGENTS.md",
     REPO / "docs",
+    REPO / "packages",
 )
 # Keep a bounded portable fallback with enough headroom for source, schemas, and
 # manifests after generator-owned prospective geometry is pruned above.
@@ -516,7 +519,11 @@ def linked_pruned_targets() -> list[Path]:
     documents = list((ROOT / "campaign").rglob("*.md"))
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
-            documents.extend(document.rglob("*.md"))
+            documents.extend(
+                path
+                for path in document.rglob("*.md")
+                if not _inside_build_cache(path, below=document)
+            )
         elif document.is_file() and document.suffix == ".md":
             documents.append(document)
     targets: set[Path] = set()
@@ -598,7 +605,12 @@ def clone_tree(dest: Path) -> None:
 
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
-            shutil.copytree(document, dest / document.name, dirs_exist_ok=True)
+            shutil.copytree(
+                document,
+                dest / document.name,
+                dirs_exist_ok=True,
+                ignore=shutil.ignore_patterns(*BUILD_CACHES),
+            )
         elif document.is_file():
             shutil.copy2(document, dest / document.name)
 
@@ -656,7 +668,11 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
         # editable project from a temporary snapshot, which disappears after this run
         # and leaves the developer environment broken. Snapshot imports must still win.
         env["UV_NO_SYNC"] = "1"
-        import_roots = (str(work / "src"), str(work))
+        import_roots = (
+            str(work / "src"),
+            str(work),
+            str(tree / "packages/workbench/tools"),
+        )
         env["PYTHONPATH"] = os.pathsep.join(
             (*import_roots, env["PYTHONPATH"]) if env.get("PYTHONPATH") else import_roots
         )

@@ -37,7 +37,8 @@ name: Certificate page
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
-      - packing/atlas/known-best/rendering/n-011.svg
+      - packing/atlas/known-best/rendering/**
+      - packing/witnesses/known-best/**
       - packing/devtools/templates/explainer-shell.html
       - packing/devtools/templates/explainer-article.md
       - packing/devtools/templates/fonts/**
@@ -51,12 +52,16 @@ name: Certificate page
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
+      - .node-version
+      - package.json
+      - package-lock.json
+      - packages/workbench/**
       - packing/devtools/build_workbench_site.py
+      - packing/devtools/check_published_site.py
       - packing/atlas/known-best/video/spikes/v2-transitions/build_candidate.py
       - packing/atlas/known-best/video/spikes/v2-transitions/template.html
       - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.css
       - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js
-      - packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
   # On a pull request the page is built but not deployed, so a change that
@@ -81,7 +86,8 @@ name: Certificate page
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
-      - packing/atlas/known-best/rendering/n-011.svg
+      - packing/atlas/known-best/rendering/**
+      - packing/witnesses/known-best/**
       - packing/devtools/templates/explainer-shell.html
       - packing/devtools/templates/explainer-article.md
       - packing/devtools/templates/fonts/**
@@ -95,12 +101,16 @@ name: Certificate page
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
+      - .node-version
+      - package.json
+      - package-lock.json
+      - packages/workbench/**
       - packing/devtools/build_workbench_site.py
+      - packing/devtools/check_published_site.py
       - packing/atlas/known-best/video/spikes/v2-transitions/build_candidate.py
       - packing/atlas/known-best/video/spikes/v2-transitions/template.html
       - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.css
       - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js
-      - packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
 
@@ -134,6 +144,13 @@ jobs:
           working-directory: packing
           enable-cache: true
           cache-dependency-glob: uv.lock
+
+      # The math renderer shells out to Node for one batched KaTeX pass. Select the same
+      # runtime as validation instead of inheriting the mutable ubuntu-latest image.
+      - name: Install Node 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
 
       # Geometry is measured using the pinned browser during publication. Every
       # browser check below consumes this one artifact, including its reserved boxes.
@@ -193,6 +210,18 @@ jobs:
           working-directory: packing
           enable-cache: true
           cache-dependency-glob: uv.lock
+
+      # The workbench builder invokes Node too; keep publication on the validation pin.
+      - name: Install Node 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install the pinned workbench build toolchain
+        working-directory: .
+        run: npm ci --ignore-scripts
 
       - name: Use the prepared page
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
@@ -323,7 +352,7 @@ jobs:
       # leaves the explainer where it is, at `/`, which readers may already have linked.
       # After the download, not before: that step writes `packing/site` and would erase it.
       - name: Build the workbench at its own URL
-        run: uv run --frozen --group dev python -m devtools.build_workbench_site --check
+        run: uv run --frozen --group dev python -m devtools.build_workbench_site --check --revision "${{ github.sha }}"
 
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -489,6 +518,8 @@ jobs:
     needs: [build, font-loading]
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    outputs:
+      page-url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write
       id-token: write
@@ -505,3 +536,39 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  verify-deployment:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned browser and its system libraries
+        working-directory: packing
+        run: uv run --frozen --group dev python -m playwright install --with-deps chromium
+
+      - name: Verify the deployed explainer and workbench
+        working-directory: packing
+        run: >-
+          uv run --frozen --group dev python -m devtools.check_published_site
+          --site "${{ needs.deploy.outputs.page-url }}"
+          --commit "${{ github.sha }}"

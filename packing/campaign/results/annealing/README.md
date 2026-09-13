@@ -90,7 +90,20 @@ Continue from [H-206 through H-211](../../ideas.md#workbench-physics-as-a-search
 Do not repeat the old monotone difficulty claim or the claim that n=17 was tested only
 at shake 6; retained summaries include unresolved n=17 level-8 cells, while the retained
 deep level-8 artifact contains n=11 only.
-The plan assigns the detailed cohort reconciliation to `think-jdgu`.
+The
+[review’s cohort reconciliation](../../../../docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md#retained-cohort-reconciliation--2026-09-13)
+records exact file/cell counts and dispositions under `think-jdgu`. Reproduce that
+inventory from `packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m workbench_tools.historical_summary_audit \
+    campaign/results/annealing/summaries.json --out /tmp/annealing-summary-audit.json
+```
+
+The output preserves resolved flags, missing overrides, and prefix observations.
+Its excess reconstruction uses rounded stored values.
+It does not recover raw geometry, unique seed populations, disjoint blocks, or elapsed
+time.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

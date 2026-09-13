@@ -1,17 +1,24 @@
 {
   "name": "thinking-scratchpad",
   "private": true,
-  "description": "Tooling-only root package for git hooks (lefthook). See docs/ for research reports and explorations/ for self-contained project directories with their own sources, code, and literature archives.",
+  "description": "Pinned repository tooling and the private workbench workspace.",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=24.18.0 <25"
+  },
+  "workspaces": [
+    "packages/workbench"
+  ],
   "devDependencies": {
     "@biomejs/biome": "2.5.11",
     "lefthook": "2.1.10",
-    "typescript": "7.0.2"
+    "typescript": "6.0.2"
   },
   "scripts": {
-    "lint": "biome ci --error-on-warnings .",
+    "lint": "biome ci --error-on-warnings . && npm run lint:promises",
     "lint:fix": "biome check --write --unsafe .",
+    "lint:promises": "npm run lint:legacy-promises --workspace @squares/workbench",
     "format:check": "biome format .",
-    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.probes.json && tsc -p tsconfig.motion-lab.json"
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.probes.json && tsc -p tsconfig.motion-lab.json && npm run typecheck --workspace @squares/workbench"
   }
 }
