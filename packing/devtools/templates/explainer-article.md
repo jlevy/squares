@@ -63,10 +63,11 @@ in 1979 (Figure 1), shows
 A **core** is a smaller square selected strictly inside one of the packed unit squares.
 We explain the proof in three stages:
 
-1. **T-018: weighted points reach $3.81$.** This is the visual proof developed in detail
-   below. It places {{HEADLINE_N_ATOMS}} rationally weighted points in the container,
-   checks a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized directions, and
-   derives a counting contradiction from five exact conditions.
+1. **T-018: weighted points reach ${{HEADLINE_L_DEC}}$.** This is the visual proof
+   developed in detail below.
+   It places {{HEADLINE_N_ATOMS}} rationally weighted points in the container, checks a
+   net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized directions, and derives a
+   counting contradiction from five exact conditions.
 
 2. **T-025: threshold atoms reach $3.82$.** Each threshold atom specifies a small set of
    points, a minimum count, and a weight.
@@ -74,22 +75,21 @@ We explain the proof in three stages:
    points. This stronger counting rule directly excludes the container side
    $191/50=3.82$.
 
-3. **T-026: finer directions and scaling reach $L$.** The threshold atoms are rechecked
-   with a larger core on a finer direction net, their weights are rescaled, and an exact
-   dilation argument proves $s(11)\ge L$.
+3. **[T-026: finer directions and scaling reach $L$](#proof-of-the-new-lower-bound).**
+   The threshold atoms are rechecked with a larger core on a finer direction net, their
+   weights are rescaled, and an exact dilation argument proves $s(11)\ge L$.
 
 All three stages use the same contradiction: each of eleven disjoint cores would receive
 at least one unit of weight, while all the available weights can contribute less than
-eleven in total. The fully illustrated T-018 proof teaches that argument; the final
-section explains exactly what T-025 and T-026 add.
-The numerical $3.81$ result is not a premise of T-026: the stronger theorem uses its own
-threshold certificate and dilation record, while reusing the general core-selection and
-counting ideas.<!--BEGIN:CLAIM--> Keeping T-018 in full also serves as an assurance
-bridge: [verification](#verifiable-claim) of the point certificate uses exact rational
-arithmetic, and its one-file standard-library checker,
-{{PINNED_VERIFIER_LINES}}
-and short enough to read in one sitting, lets a reader audit that shared geometry and
-counting mechanism end to end.
+eleven in total. The fully illustrated T-018 proof teaches that argument;
+[Proof of the New Lower Bound](#proof-of-the-new-lower-bound) explains what T-025 and
+T-026 add. The numerical $3.81$ result is not a premise of T-026: the stronger theorem
+uses its own threshold certificate and dilation record, while reusing the general
+core-selection and counting ideas.<!--BEGIN:CLAIM--> Keeping T-018 in full also serves
+as an assurance bridge: [verification](#verifiable-claim) of the point certificate uses
+exact rational arithmetic, and its one-file standard-library checker,
+{{PINNED_VERIFIER_LINES}} long and short enough to read in one sitting, lets a reader
+audit that shared geometry and counting mechanism end to end.
 It decides the certificate file of
 {{HEADLINE_N_ATOMS}} weighted points in {{HEADLINE_PINNED_RUNTIME}}. The checker does
 not verify the threshold certificates.
@@ -158,14 +158,15 @@ open.
 
 For values of $n$ where $s(n)$ is still unknown, results generally take the form of
 upper or lower bounds.
+Write $L_0$ for a container side under consideration.
 An **upper bound** is constructive: an arrangement of $n$ unit squares in a square of
-side $L$ shows that $s(n) \le L$. Trump’s packing for $n = 11$ in Figure 1 is one
+side $L_0$ shows that $s(n) \le L_0$. Trump’s packing for $n = 11$ in Figure 1 is one
 example. Such constructions may be specified with approximate numerical coordinates or
 derived exactly by solving the geometric relationships between touching squares.
 Approximate coordinates alone do not constitute a formal proof of the upper bound.
 
-A **lower bound** proves that $s(n) \ge L$ by ruling out every arrangement in a
-container of side less than $L$. This requires an argument covering all possible
+A **lower bound** proves that $s(n) \ge L_0$ by ruling out every arrangement in a
+container of side less than $L_0$. This requires an argument covering all possible
 placements and rotations of the squares.
 Such arguments range from simple area comparisons to detailed geometric proofs and
 computer-assisted certificates.
@@ -238,7 +239,7 @@ The five conditions below follow the finite certificate method used by Burns and
 Massaccesi.[^burns][^massaccesi][^lineage]
 
 The proof uses a finite **certificate**: for $n$ unit squares in a container of side
-$L$, a finite set of points in the container, each with a nonnegative rational weight
+$L_0$, a finite set of points in the container, each with a nonnegative rational weight
 (the atoms; every weight in this certificate is positive), a net of directions
 $\theta_k = 2\arctan t_k$ with rational half-tangents
 $0 = t_0 \lt t_1 \lt \cdots \lt t_K$, and a shrink $B$, such that:
@@ -264,7 +265,7 @@ inside the container covers mass at least $1$.
 
 Conditions 1 to 4 are exact rational comparisons.
 Condition 5 is one exact sweep per direction.
-Together the five prove $s(n) \ge L$. The certificate is [`{{ID}}`]({{CERT_URL}}) (a
+Together the five prove $s(n) \ge L_0$. The certificate is [`{{ID}}`]({{CERT_URL}}) (a
 weaker but simpler one is at [`{{DEFAULT_ID}}`]({{DEFAULT_CERT_URL}})). Every figure
 below is [computed]({{RENDERER_URL}}) from the certificate it shows.
 
@@ -318,7 +319,7 @@ reflects onto that arc and covers the same mass.
     </div>
   </div>
   <div class="mass-line">
-    <div>Total mass in the container<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
+    <div>Total mass in the container<span class="v tex">\mu\!\left([0,L_0]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
     <div>Mass eleven packed unit squares would need<span class="v tex">{{N}}</span></div>
     <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
   </div>
@@ -580,7 +581,7 @@ cover at most the container’s total mass.
 Then
 
 $$
-{{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},
+{{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L_0]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},
 $$
 
 where the last step is Condition 2. The two ends contradict each other, so no such
@@ -638,9 +639,9 @@ $$
 An exact event-cell sweep over {{T025_DIRECTIONS}} net directions finds that every core
 receives total weight at least $1+{{T025_LEAST_EXCESS}}>1$. A separate interval
 calculation checks
-{{T025_INTERVAL_DIRECTIONS}} canonical directions.
-The same shrink-and-snap argument used above selects a legal core inside every physical
-square, and the threshold budget then gives the same contradiction.
+{{T025_INTERVAL_DIRECTIONS}} canonical directions, including the net and its
+reflections. The same shrink-and-snap argument used above selects a legal core inside
+every physical square, and the threshold budget then gives the same contradiction.
 Thus T-025 proves $s(11)\ge {{CURRENT_ENDPOINT_FRAC}}={{CURRENT_ENDPOINT_DEC}}$
 directly. The [self-contained claim]({{T025_CLAIM_URL}}) gives the theorem, exact
 arithmetic, and both verification routes.
@@ -653,15 +654,15 @@ raises the core side to $B={{T026_FINE_B}}$, and rescales every weight by one co
 rational factor, ${{T026_NORMALIZATION}}$. The minimum total assigned to any core is
 exactly $1$, while the total budget remains
 ${{T026_TOTAL_BUDGET}} = {{T026_TOTAL_DEC}} < 11$. A second method checks all
-{{T026_INTERVAL_DIRECTIONS}} directions.
+{{T026_INTERVAL_DIRECTIONS}} directions, again including the reflected net.
 These facts are recorded in the [finer-net certificate]({{T026_CERT_URL}}).
 
 Now scale the container, the core, and every atom point together by a positive rational
-factor $q$. Containment traces do not change, so neither the assigned totals nor the
-budget changes. For this net, let $D={{T026_HALF_GAP}}$ be the tangent of its widest
-angular half-gap. If $d$ is the mismatch between a physical square and its selected net
-direction, then $\tan d\le D$. The exact identity
-$\cos d+\sin d=(1+\tan d)/\sqrt{1+\tan^2d}$ gives
+factor $q$, while the physical squares remain unit squares.
+Containment traces do not change, so neither the assigned totals nor the budget changes.
+For this net, let $D={{T026_HALF_GAP}}$ be the tangent of its widest angular half-gap.
+If $d$ is the mismatch between a physical square and its selected net direction, then
+$\tan d\le D$. The exact identity $\cos d+\sin d=(1+\tan d)/\sqrt{1+\tan^2d}$ gives
 
 $$
 qB(\cos d+\sin d)
@@ -702,7 +703,7 @@ in orbits of $\mathbf{D}_4$. The weights, one per orbit, come from the covering 
 program
 
 $$
-\tau^*(A, \Theta; L, B) \;=\; \min_{w \,\ge\, 0}\; \sum_{a \in A} w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
+\tau^*(A, \Theta; L_0, B) \;=\; \min_{w \,\ge\, 0}\; \sum_{a \in A} w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
 $$
 
 with one constraint per placement of a side-$B$ square at a direction of the net
@@ -745,7 +746,7 @@ importing anything else from the repository.
 
 <!--BEGIN:COMPARISON-->
 
-(It decides the looser of the two bounds, not the headline one.)
+(It checks the simpler point example at $19/5$.)
 
 <!--END:COMPARISON-->
 

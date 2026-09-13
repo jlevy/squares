@@ -151,6 +151,15 @@ def test_the_object_is_named_by_its_subtype_rather_than_its_type() -> None:
     assert "object 417, Image" in report
 
 
+@pytest.mark.parametrize("prefix", [b"", _document(b"0.5 rg")], ids=["first", "later"])
+def test_a_difference_in_an_object_header_belongs_to_that_object(prefix: bytes) -> None:
+    report = pdf._difference(
+        prefix + _document(b"aaa", number=417, declared=b"/Type /XObject /Subtype /Image"),
+        prefix + _document(b"aaa", number=418, declared=b"/Type /XObject /Subtype /Image"),
+    )
+    assert "in object 417, Image:" in report
+
+
 def test_a_short_untyped_object_does_not_borrow_the_next_object_type() -> None:
     """Measured on the real document: of its 1160 objects, 33 declare no type of their own
     while sitting inside the 400-byte window, and an unbounded read labelled every one of
@@ -205,17 +214,23 @@ def test_a_difference_before_the_first_object_names_the_file_header() -> None:
     assert "in the file header" in report
 
 
-def test_a_render_cut_short_is_reported_as_cut_short() -> None:
-    """The one failure a first-differing-byte scan cannot find, because there isn't one."""
+@pytest.mark.parametrize("trailing", [False, True], ids=["shortened", "appended"])
+def test_an_exact_prefix_is_reported_without_assigning_a_cause(*, trailing: bool) -> None:
+    """A prefix can come from either missing bytes or additional trailing bytes."""
     whole = _document(b"0.5 rg")
-    report = pdf._difference(whole[: len(whole) - 10], whole)
-    assert "cut short" in report
+    first, second = (
+        (whole, whole + b"% trailing comment\n") if trailing else (whole[:-10], whole)
+    )
+    report = pdf._difference(first, second)
+    assert f"first {len(first)} bytes" in report
+    assert "exact prefix" in report
+    assert "cut short" not in report
 
 
 def test_two_renders_that_agree_are_not_given_an_invented_difference() -> None:
     """Unreachable from `check`, which only asks about renders it has found to differ.
-    Reported honestly anyway: the prefix message would otherwise announce a truncation
-    on two identical files, and send the next reader after a bug that is not there."""
+    Reported honestly anyway: the prefix message would otherwise announce an unequal
+    length on two identical files, and send the reader after a bug that is not there."""
     report = pdf._difference(_document(b"0.5 rg"), _document(b"0.5 rg"))
     assert "no byte differs" in report
     assert "cut short" not in report
@@ -275,11 +290,15 @@ def test_one_render_is_refused_because_it_compares_nothing(
     assert refused.value.code == 2
 
 
+@pytest.mark.parametrize("mode", ["--update", "--fonts"])
+@pytest.mark.parametrize("renders", ["2", "10"])
 def test_the_count_is_refused_in_the_modes_that_do_not_compare(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mode: str, renders: str
 ) -> None:
-    """`--update --renders 10` asks for something no mode does; silence would look done."""
+    """An explicit render count must not be silently ignored, even at the default value."""
     _page(monkeypatch, tmp_path)
+    monkeypatch.setattr(pdf, "update", lambda: None)
+    monkeypatch.setattr(pdf, "fonts", lambda: None)
     with pytest.raises(SystemExit) as refused:
-        pdf.main(["--update", "--renders", "10"])
+        pdf.main([mode, "--renders", renders])
     assert refused.value.code == 2

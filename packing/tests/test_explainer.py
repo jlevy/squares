@@ -118,7 +118,7 @@ def test_certificate_comparisons_match_the_rendered_certificates(
     rendered = render(paths)
     document = " ".join(rendered.markdown.split())
     assert ("simpler certificate for the weaker bound" in document) is comparison
-    assert ("looser of the two bounds" in document) is comparison
+    assert ("It checks the simpler point example at $19/5$." in document) is comparison
     assert ("The figures below illustrate this certificate." in document) is not comparison
     assert "the theorem written out, the 19/5 certificate as plain data" in document
     assert ("one-file checker" in document) is pinned_check
@@ -136,6 +136,7 @@ def test_certificate_comparisons_match_the_rendered_certificates(
     facts = render_explainer.derive(paths[0])
     assert f"{len(facts.atoms):,} rationally weighted points" in document
     assert f"{facts.steps + 1} rationally parameterized" in document
+    assert f"weighted points reach ${render_explainer.decimal(facts.outer_side)}$" in document
 
 
 def test_the_page_is_self_contained(page: str) -> None:

@@ -16,6 +16,7 @@ from typing import cast
 
 import pytest
 
+from devtools.dilation_corollary import build_limit_record
 from sqpack.fractional.model import Atom, rotation_from_half_tangent
 from sqpack.fractional.threshold import ThresholdAtom, minimum_charge
 
@@ -334,6 +335,36 @@ def test_t026_rederives_its_limit_without_invoking_t025(capsys) -> None:
     assert "Dilation limit holds" in capsys.readouterr().out
     claim = T026_CLAIM.read_text(encoding="utf-8")
     assert "without invoking T-025 as a theorem" in claim
+
+
+def test_generated_unit_coefficient_limit_is_accepted(tmp_path: Path) -> None:
+    """The producer and portable reader agree when a radical has no coefficient."""
+    record = small_certificate()
+    record.update(
+        n=2,
+        claim="s(2) >= 1/50",
+        outer_side="1/50",
+        square_side="1/71",
+        direction_steps=1,
+        atoms=[["1/100", "1/100", "1"]],
+        threshold_atoms=[],
+        point_mass="1",
+        threshold_budget="0",
+        total_budget="1",
+        least_cell_charge="1",
+    )
+    source = tmp_path / "certificate.json"
+    raw = encoded(record)
+    source.write_bytes(raw)
+    limit = build_limit_record(source, workers=1)
+    family = limit["strict_dilation_family"]
+    assert isinstance(family, dict)
+    assert family["factor_supremum"] == "sqrt(2941)"
+    verifier = load_verifier()
+    accepted, certificate, facts = verifier.check_certificate(raw)
+    assert accepted
+    accepted_limit, _ = verifier.check_limit_record(encoded(limit), raw, certificate, facts)
+    assert accepted_limit
 
 
 def test_t026_data_are_an_exact_rescaling_and_the_sharp_family_is_larger() -> None:

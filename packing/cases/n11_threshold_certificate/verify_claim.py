@@ -530,7 +530,8 @@ def reduced_polynomial(square):
 
 def canonical_radical(coefficient, radicand):
     if coefficient.denominator == 1:
-        return f"{coefficient.numerator}*sqrt({radicand})"
+        prefix = "" if coefficient.numerator == 1 else f"{coefficient.numerator}*"
+        return f"{prefix}sqrt({radicand})"
     return f"{coefficient.numerator}*sqrt({radicand})/{coefficient.denominator}"
 
 
