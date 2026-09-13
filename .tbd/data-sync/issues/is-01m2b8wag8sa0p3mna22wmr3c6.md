@@ -5,7 +5,7 @@ title: Maintain and independently replay the literal-corner T1 witness
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol high implementation; Astra source-distinct review
 labels:
@@ -23,13 +23,13 @@ parent_id: is-01m2agbya33mh3sbs5jn8xss56
 child_order_hints:
   - is-01m2dz8pe5q7v6s8pkykp2qpg2
   - is-01m2dz8pw9m2wpsz4xgds5vtkz
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-09-12T16:58:14.407Z
-updated_at: 2026-09-13T18:13:46.891Z
+updated_at: 2026-09-13T19:42:12.486Z
 ---
 After mathematical admission, build the smallest maintained source-bound reader needed to replay the known literal BL parent and selected axis core directly from all 377 frozen BC303 atoms. Recompute closed membership, captured atom indices and weights, the complete signed-frame label set, parent/core containment, source identity, and exact charge 800003/800000. Include mutation controls and independent replay; retain the determination that this rejects only the named one-corner BC303 surplus inequality. Do not describe the witness as search-discovered or infer failure of local availability/global routing.
 
 ## Notes
 
-Astra Max review at 88d54d85 ACCEPTED the literal 377-atom arithmetic and REFUSED T1 instrument admission for missing per-row source binding and executing-reader provenance. Sol high prepared precise R1/R2 repairs/tests but automatic approval review rejected its source patch as lacking explicit trusted user authorization, instructing no workaround; no files changed. Explicit authorization has been requested. Child beads think-fvvt and think-9buk are on hold. No T2/global routing or new n11 bound claimed.
+Prior Astra Max review at 88d54d85 accepted literal 377-atom finite witness arithmetic but refused T1 reader source-row and executing-implementation binding. User subsequently authorized completion. Sol max repair 74ec773c fixed both, 11 focused tests passed; independent Astra Max exact-head review ACCEPTED the repaired instrument after 377-row independent reconstruction, 17 retained-record mutations, and 10 provenance controls. Child beads think-fvvt and think-9buk closed. This is a known literal candidate only; campaign determination and PR publication remain under think-3jsz/think-uula. No T2/global routing or stronger s(11) bound.
