@@ -3,13 +3,13 @@ type: is
 id: is-01m26ba97xs2scftryvmghp97r
 title: The PDF reproduction check validates a fresh pair, not the artifact it ships
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:04:36.861Z
-updated_at: 2026-09-10T19:04:36.861Z
+updated_at: 2026-09-13T06:18:27.330Z
 ---
 `render_explainer_pdf --check` draws two fresh renders and compares them. The PDF that is
 published is neither of those: `--update` runs first and writes its own render, with a

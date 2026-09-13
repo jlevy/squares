@@ -3,9 +3,9 @@ type: is
 id: is-01m292rgtadddppyrzfkjz1sn4
 title: Remove remaining embedded workbench JavaScript and HTML
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -19,7 +19,7 @@ parent_id: is-01m28p7h39vcykq99dgjmvwv98
 child_order_hints:
   - is-01m298ns08hd103tjq6et26685
 created_at: 2026-09-11T20:32:49.481Z
-updated_at: 2026-09-13T05:43:46.556Z
+updated_at: 2026-09-13T06:17:28.946Z
 ---
 Phase 2: preserve the ordinary source extraction already landed; finish remaining executable JS/HTML literals including bench_annealing TRIAL_JS/GUARD_JS and the build-time KaTeX program. New checked modules/probes/templates live in packages/workbench from their first commit. Use shared runtime APIs for simulation/repair and retain a separate finite/count/wall/pair verifier only where it provides independent assurance. Acceptance: no live executable JS/HTML is hidden from the applicable type/lint program; behavior and diagnostic assertions are retained without source-string-only gates. Probe naming/duplicates are inventoried now and removed under think-cqfc.
 
