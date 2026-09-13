@@ -3,9 +3,9 @@ type: is
 id: is-01m2b883mnsa3g9ap94gy5aj0q
 title: Retain observed worker topology in BC329 calibration profiles
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation; source-distinct review
 labels:
@@ -19,6 +19,10 @@ dependencies:
     target: is-01m2appdgg1p32xwgxptcqqb2x
 parent_id: is-01m2app5e71qnp9z5vfp9vppbp
 created_at: 2026-09-12T16:47:12.009Z
-updated_at: 2026-09-12T16:47:29.641Z
+updated_at: 2026-09-13T05:47:39.998Z
 ---
 Run-sheet review F-1. Before any positive full-shape profile, extend the maintained fixed-core-packet-calibration/v1 measurement contract to distinguish configured route workers from observed execution. Retain the supervised coordinator PID and per-sample PID/PPID/PGID/phase data, or an equivalent route-scoped worker lifecycle record; derive and validate observed child count and maximum simultaneous children for raw and normalized-exact phases. Refuse metrics admission if the parallel phase has no observation capable of checking worker execution. Keep RSS explicitly a sampled process-group sum with missed-peak/shared-page limits. Add focused mutation and lifecycle tests, source-distinct review, and do not run a profile or BC329.
+
+## Notes
+
+In progress on isolated branch codex/bc329-observed-worker-topology in /private/tmp/squares-bc329-worker-topology. Sol xhigh owns implementation and has a source-distinct read-only contract reviewer. Do not run profiles or BC329; commit only after focused topology mutation/lifecycle tests and clean static checks.
