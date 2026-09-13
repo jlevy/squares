@@ -1,41 +1,27 @@
 ---
 type: is
 id: is-01m26ba8qvrh7v5ebkqvt13ktz
-title: The explainer page drew differently twice in CI and the cause is unknown
+title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-13T05:36:24.023Z
+updated_at: 2026-09-13T06:10:14.568Z
 ---
-On 2026-09-10, run 34453706991 (main's push run at 3a18a05a), the `build` job of the
-Pages workflow failed at `render_explainer_pdf --check`: `786119 then 786117 bytes,
-normalised`. 786119 is the size every other CI render of that page produced, and the
-receipt `_with_receipt` adds is exactly 94 bytes on all four runs checked, so it was the
-second render of the pair that came up two bytes short. The job passed on a re-run and
-the same content had passed on its pull-request run (34449286960 at 0c4c41b4), so this is
-a race rather than a regression in the page.
+On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 
-What is known:
+The original investigation reported a 94-byte publication receipt on all four examined runs and a usual normalized size of 786119 bytes. Those observations do not identify the contents of the differing pair. No retained byte comparison rules out a clock-related or other runtime cause.
 
-- A clock outside the two fields `_normalised` neutralises is ruled out by the pass rate,
-  not by the log: the two renders are about nine seconds apart, so an unnormalised
-  timestamp would fail every run rather than once.
-- Forty consecutive renders in a container agreed byte for byte, 863873 bytes each in
-  1m54s, using the preinstalled headless shell. That extends the module docstring's
-  ten-render claim and does not reproduce the failure. The host's fonts differ from CI's:
-  863873 bytes against 786119, 19 embedded faces against 18.
-- D-490 recorded the occurrence and fixed the instrument rather than the cause:
-  `_difference` now names the object, its declared subtype and a window of each render, so
-  the next occurrence arrives diagnosable.
+Forty consecutive same-host container renders agreed at 863873 bytes in 1m54s using the preinstalled headless shell. That study did not reproduce the CI failure. Its host used 19 embedded faces versus CI's 18, so it is not evidence of identical behavior on the CI runner.
 
-Next step is to wait for the next occurrence and read what the object is, rather than to
-guess. If it recurs often enough to chase, `--renders N` is the tool: raise it in a
-throwaway workflow run on a CI runner, where the fonts and the machine are CI's, rather
-than locally where forty renders agree.
+PR149's D-490 changes provide bounded difference diagnostics and `--renders N`. An exact-prefix report states only the byte relationship; otherwise the diagnostic identifies the first offset, its containing object or outside-object section, declared type where available, and byte windows. The image-readiness and reduced-motion guards close separate known hazards, but neither is established as the cause of these incidents.
+
+The September 12 stack review observed another disagreement in PR148 before these diagnostics were inherited; the notes retain its run and unchanged-rerun evidence. All three final stack heads passed their first-attempt PDF checks. The root-cause issue remains open.
+
+On the next occurrence with the diagnostics present, inspect the reported difference before proposing a causal repair. If repeated CI draws are needed, use the maintained `--renders N` option on a CI host. A passing rerun is validation of that rerun, not proof that the intermittent cause was fixed.
 
 ## Notes
 
