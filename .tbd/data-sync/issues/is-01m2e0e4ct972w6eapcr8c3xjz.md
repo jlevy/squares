@@ -5,7 +5,7 @@ title: Publish the PR156 draft checkpoint with exact local gates and final hoste
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: codex@spud10.local
 labels:
@@ -26,11 +26,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-13T18:28:24.089Z
-updated_at: 2026-09-13T21:13:24.640Z
+updated_at: 2026-09-13T21:15:01.651Z
 started_at: 2026-09-13T18:35:26.795Z
 ---
 Review and commit durable reviews, run-sheet status, records, and accepted source changes; reconcile origin/main with the merge-upstream shortcut; run required push gate; push PR156 as draft; update body with unique cost, exact head, admitted/refused contracts and remaining gates; wait for final hosted CI and sync beads. Do not mark ready while coordinator and run-sheet admission remain refused.
 
 ## Notes
 
-2026-09-13 21:11 UTC CI final on exact pushed 9c56e901: https://github.com/jlevy/squares/actions/runs/34782594805 required suite FAILED after 7m51s; packing-required aggregate failed as consequence. Geometry, sweeps, macOS portability, validate, mergeability, Pages build, Firefox and WebKit passed on that exact head. PR156 draft body updated to state the failure and no readiness. GitHub job metadata identifies failed step 5 Run the required pull-request behavioral lane, job https://github.com/jlevy/squares/actions/runs/34782594805/job/103792203850. Precise failing test trace is not yet retained: `gh run view --log-failed` and job-log API intermittently returned api.github.com connection errors during retrieval. Do not infer source cause from the separate standalone pass. Next coordinator: retrieve exact failed log, repair or document environment cause, rerun local push gate and hosted CI, then revisit operational profile admission; PR157 old-base green checks do not admit combined head.
+2026-09-13 21:13 UTC correction to the CI handoff: exact job log /private/tmp/pr156-suite-failed.log was retrieved. The 9c hosted required suite failed the explicit time budget: 436.36s total vs 275s ceiling and 183.44s recorded reference (2.38x). Two test calls >12s were 28.02s coherent mathematical/operational mutations and 12.32s exact method witness/closed boundary, both in test_read_fixed_core_calibration_profile.py. The job reports no assertion failure; its only failed validation step is fast behavioral tests due elapsed time. See think-bpy8 for targeted fix. The other 9c required checks and Pages passed. PR body is being updated; PR stays draft/unready; no calibration profile or BC329 target ran.
