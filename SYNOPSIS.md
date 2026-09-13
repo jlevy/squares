@@ -142,7 +142,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives twenty-six confirmed hypotheses, twenty-five
-refuted hypotheses, two open hypotheses, twenty-six open questions, and forty-six
+refuted hypotheses, five open hypotheses, twenty-six open questions, and forty-six
 blocked hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036
 remains unresolved. H-125 is blocked after exp129 missed its launch cutoff without
 scientific invocation; this does not refute its claim.
@@ -211,6 +211,10 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Workbench Consumer and Legacy-Task Inventory](docs/project/reviews/review-2026-09-13-workbench-consumer-inventory.md) | dated review record | record | retained | — |
+| [The annealing benchmark’s runbook](packing/campaign/results/annealing/README.md) | W6 experiment mechanics | current | maintained | — |
+| [Workbench Stack Review and Cleanup Map](docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md) | dated review record | record | retained | — |
+| [Feature: Annealing as Search](docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md) | implementation plan | current | transient | — |
 | [Fractional Packing, Duality, and the Next $n=11$ Discriminators](docs/project/research/research-2026-09-10-x027-fractional-duality.md) | research synthesis | record | retained | — |
 | [X027: Seven Corner Marks, Contact Components, and Relational Helpers](docs/project/research/research-2026-09-10-x027-structural-helpers.md) | research synthesis | record | retained | — |
 | [Certificate Mechanisms After the $n=11$ Fractional Ceilings](docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md) | research synthesis | record | retained | — |
@@ -3587,6 +3591,12 @@ round that names the hypothesis, control roles included.
 | [H-203](packing/campaign/hypotheses/H-203-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart at an equal budget of refined local optima | 1 | 81.2m wall |
 | [H-204](packing/campaign/hypotheses/H-204-cooling-schedule-length.md) | refuted | A tenfold anneal length moves three cells of eleven against the six declared | 1 | 71.3m wall |
 | [H-205](packing/campaign/hypotheses/H-205-projection-search-reaches-feasibility.md) | unresolved | Every run ends on an exactly feasible packing, 28 of 28 against 0 of 48 for the penalty physics, but only one cell of four comes within a per cent | 1 | 15.6m wall |
+| [H-206](packing/campaign/hypotheses/H-206-half-the-gap-regularity.md) | open | the blind physics closes a constant fraction of the record-to-grid gap; historical evidence requires re-admission | 0 | — |
+| [H-207](packing/campaign/hypotheses/H-207-restarts-beat-schedule.md) | unresolved | restarts beat schedule tuning at equal cost; historical evidence requires re-admission | 1 | 1 round unrecorded |
+| [H-208](packing/campaign/hypotheses/H-208-the-drop-decides.md) | open | the initial drop decides the answer, not the annealing; historical evidence requires re-admission | 0 | — |
+| [H-209](packing/campaign/hypotheses/H-209-no-parameters-reach-a-record.md) | open | no parameter set in the workbench’s own space reaches a record; historical evidence requires re-admission | 0 | — |
+| [H-210](packing/campaign/hypotheses/H-210-no-valid-packing.md) | unresolved | the blind physics never settles to a valid packing; historical evidence requires re-admission | 1 | 1 round unrecorded |
+| [H-211](packing/campaign/hypotheses/H-211-the-shake-has-a-sweet-spot.md) | unresolved | the shake has a sweet spot, and the shipped value is far below it; historical evidence requires re-admission | 2 | 2 rounds unrecorded |
 
 ### Confirmed
 
@@ -3874,9 +3884,11 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 118 rounds registered in `series-000`.
+There are 122 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 1798.2 wall-minutes.
+These totals exclude four historical annealing rounds with unrecorded timing; their wall
+and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
 time; its source-free development and review costs belong to Session097. Exp-114
 completed its one target and independent replay.
@@ -4034,6 +4046,10 @@ archive beside it.
 | [exp-204](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-204-basin-hopping.md) | 11 | target | H-203 | Basin hopping against multistart over the LP-in-cell quench | Basin hopping reaches a lower median best side at an equal budget of refined optima | accepted |
 | [exp-205](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-205-round-1-schedule.md) | 11 | target | H-204 | Anneal length crossed with move set, two levels each | Both factors move the result and combine; the first factorial crossing found for this problem | rejected |
 | [exp-206](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-206-projection-search.md) | 11 | target | H-205 | Divide and concur with relaxed-reflect-reflect over a bounded container | The first search here whose every output is a packing an independent oracle confirms | unresolved |
+| [exp-207](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-207-h207-the-tail-saturates.md) | 5 | calibration | H-207 | Restarts are the whole of the method, and the tail saturates near 0.98 | Historical summary retained; the raw geometry and exact-check receipts are absent from the reachable branch. Prefix best-of-k and incomplete cohort metadata do not establish the registered comparison. Re-admission requires reproducible valid trials and disjoint-block reporting. | unresolved |
+| [exp-208](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-208-h211-the-dial-and-the-ceiling.md) | 11 | target | H-211 | The dial’s sweet spot, and the ceiling it reveals | Historical summary retained; the raw geometry and exact-check receipts are absent from the reachable branch. Prefix best-of-k and incomplete cohort metadata do not establish the registered comparison. Re-admission requires reproducible valid trials and disjoint-block reporting. | unresolved |
+| [exp-209](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-209-h211-the-resolver-is-not-the-ceiling.md) | 11 | target | H-211 | The resolver is not the ceiling | The historical compaction program and outputs were not retained, so its null result and the inference that the resolver is not the ceiling cannot be reproduced or used to exclude an optimization. | unresolved |
+| [exp-210](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-210-h210-blind-runs-are-not-packings.md) | 11 | target | H-210 | Every blind run of the workbench’s physics ends overlapping | Historical summary retained; the raw geometry and exact-check receipts are absent from the reachable branch. Prefix best-of-k and incomplete cohort metadata do not establish the registered comparison. Re-admission requires reproducible valid trials and disjoint-block reporting. | unresolved |
 
 ### Cost and provenance
 
@@ -4157,10 +4173,14 @@ archive beside it.
 | exp-204 | 20 refined optima per seed, seeds 1-5 | 4871.0 s | 40 m | criterion | `9ae7700` |
 | exp-205 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 4281.0 s | 45 m | criterion | `9ae7700` |
 | exp-206 | 48 to 95 solver calls per ratchet run, 28 runs over two arms | 937.0 s | 95 m | criterion | `ffa6d01` |
+| exp-207 | Historical budget/account retained in the artifact | unrecorded | unrecorded | dependency: missing receipt | `e9d13c1d` (mapped source) |
+| exp-208 | Historical budget/account retained in the artifact | unrecorded | unrecorded | dependency: missing receipt | `88d452f1` (mapped source) |
+| exp-209 | Historical budget/account retained in the artifact | unrecorded | unrecorded | dependency: missing receipt | `f91fc7d4` (mapped source) |
+| exp-210 | Historical budget/account retained in the artifact | unrecorded | unrecorded | dependency: missing receipt | `d3c3a778` (mapped source) |
 
-### What the 118 rounds jointly establish
+### What the 122 rounds jointly establish
 
-The 118 rounds use 2512.1 agent-minutes and 1798.2 wall-minutes under the campaign’s
+The 122 rounds use 2512.1 agent-minutes and 1798.2 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

@@ -167,9 +167,17 @@ properties:
           Declaring it is what makes stopping an outcome rather than a loss of nerve,
           and it is what a resumed round is measured against.
       wall_seconds:
-        type: number
-        minimum: 0
-        description: Wall-clock seconds actually spent measuring, from the run data.
+        anyOf:
+          - {type: number, minimum: 0}
+          - {const: unrecorded-historical}
+        description: >-
+          Wall-clock seconds actually spent measuring, from the run data. The historical
+          marker is confined by ledger.py to the four annealing records migrated on
+          2026-09-13; it is never zero and requires a dated migration annotation.
+      migration_annotation:
+        type: string
+        minLength: 1
+        description: Dated explanation of a retained historical timing gap.
       agent_minutes:
         type: number
         minimum: 0

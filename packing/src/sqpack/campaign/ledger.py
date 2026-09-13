@@ -877,6 +877,18 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
             else:
                 if "wall_seconds" not in effort:
                     problems.append(f"{name}: terminal round without effort.wall_seconds")
+                elif effort["wall_seconds"] == "unrecorded-historical":
+                    # These four pre-gate records lost their timing receipts. A named
+                    # migration preserves that gap without excusing new experiments.
+                    annotation = effort.get("migration_annotation")
+                    if experiment["id"] not in {"exp-207", "exp-208", "exp-209", "exp-210"}:
+                        problems.append(f"{name}: historical effort requires a named migration")
+                    if not isinstance(annotation, str) or not re.match(
+                        r"^2026-09-13: .+", annotation
+                    ):
+                        problems.append(
+                            f"{name}: historical effort requires a dated annotation"
+                        )
                 stopped = effort.get("stopped_by")
                 if stopped == "timebox" and not effort.get("timebox"):
                     problems.append(f"{name}: stopped_by timebox but no timebox was declared")
@@ -1298,20 +1310,27 @@ def sweep_coverage(hypothesis: dict, rounds: list[dict]) -> str:
 def effort_of(rounds: list[dict]) -> tuple[float, float]:
     """Cumulative (agent_minutes, wall_seconds) over a set of rounds."""
     minutes = sum((r.get("effort") or {}).get("agent_minutes") or 0 for r in rounds)
-    seconds = sum((r.get("effort") or {}).get("wall_seconds") or 0 for r in rounds)
+    seconds = sum(
+        value
+        for r in rounds
+        if isinstance(value := (r.get("effort") or {}).get("wall_seconds"), (int, float))
+    )
     return minutes, seconds
 
 
 def spent(rounds: list[dict]) -> str:
     """How much has gone into a claim so far, in the two units that decide what next."""
     minutes, seconds = effort_of(rounds)
-    if not minutes and not seconds:
-        return ""
     parts = []
     if minutes:
         parts.append(f"{minutes:g}m agent")
     if seconds:
         parts.append(f"{seconds / 60:.1f}m wall" if seconds >= 60 else f"{seconds:.0f}s wall")
+    unrecorded = sum(
+        (r.get("effort") or {}).get("wall_seconds") == "unrecorded-historical" for r in rounds
+    )
+    if unrecorded:
+        parts.append(f"{unrecorded} round{'s' if unrecorded != 1 else ''} unrecorded")
     return " + ".join(parts)
 
 
@@ -1597,6 +1616,18 @@ def render(
             ),
             "",
         ]
+        unrecorded = sum(
+            (e.get("effort") or {}).get("wall_seconds") == "unrecorded-historical"
+            for e in experiments
+        )
+        if unrecorded:
+            lines += [
+                (
+                    f"These totals exclude {unrecorded} historical rounds with "
+                    "unrecorded timing; their cost is unknown, not zero."
+                ),
+                "",
+            ]
 
     unmined = [x for x in explorations if not x.get("proposes")]
     if unmined:

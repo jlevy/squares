@@ -267,12 +267,14 @@ def _experiment_problems(
     results: list[dict[str, object]],
     lease: dict[str, str] | None,
     commit: dt.datetime,
+    effort: dict[str, object] | None = None,
+    experiment_id: str = "exp-999",
 ) -> list[str]:
     """Run experiment cross-field invariants without repository link state."""
     monkeypatch.setattr(ledger, "dead_links", list)
     monkeypatch.setattr(ledger, "board_ids", _empty_board_ids)
     experiment: dict[str, object] = {
-        "id": "exp-999",
+        "id": experiment_id,
         "_path": Path("exp-999-contract-test.md"),
         "series": "series-999",
         "hypotheses": ["H-999"],
@@ -282,7 +284,9 @@ def _experiment_problems(
         "verdict": {"decision": decision},
     }
     if decision != "in-progress":
-        experiment["effort"] = {"stopped_by": "dependency", "wall_seconds": 0}
+        experiment["effort"] = (
+            effort if effort is not None else {"stopped_by": "dependency", "wall_seconds": 0}
+        )
     if lease is not None:
         experiment["lease"] = lease
     return ledger.check(
@@ -586,6 +590,49 @@ def test_terminal_round_requires_a_real_result(
     )
 
     assert "exp-999-contract-test.md: terminal round without results" in problems
+
+
+@pytest.mark.parametrize(
+    ("experiment_id", "annotation", "accepted"),
+    [
+        ("exp-209", "2026-09-13: the original run retained no timing receipt.", True),
+        ("exp-209", "", False),
+        ("exp-209", "timing was lost", False),
+        ("exp-999", "2026-09-13: no timing receipt.", False),
+    ],
+)
+def test_missing_historical_effort_is_explicit_and_bounded(
+    monkeypatch: pytest.MonkeyPatch,
+    experiment_id: str,
+    annotation: str,
+    *,
+    accepted: bool,
+) -> None:
+    problems = _experiment_problems(
+        monkeypatch,
+        decision="unresolved",
+        results=[
+            {"shape": "determination", "question": "historical claim", "outcome": "no_progress"}
+        ],
+        lease=None,
+        commit=dt.datetime(2026, 9, 13, tzinfo=dt.UTC),
+        effort={
+            "stopped_by": "dependency",
+            "wall_seconds": "unrecorded-historical",
+            "migration_annotation": annotation,
+        },
+        experiment_id=experiment_id,
+    )
+    assert (not any("historical effort" in problem for problem in problems)) is accepted
+
+
+def test_effort_view_does_not_present_missing_measurements_as_zero() -> None:
+    rounds = [
+        {"effort": {"wall_seconds": 60}},
+        {"effort": {"wall_seconds": "unrecorded-historical"}},
+    ]
+    assert ledger.spent(rounds) == "1.0m wall + 1 round unrecorded"
+    assert ledger.spent(rounds[1:]) == "1 round unrecorded"
 
 
 def test_active_phase_and_delegation_reject_expired_slice_deadlines(

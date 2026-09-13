@@ -32,3 +32,9 @@ packing/atlas/known-best/video/spikes/**/index*.html
 packing/atlas/known-best/video/spikes/**/workbench.html
 packing/atlas/known-best/video/spikes/**/review/
 packing/atlas/known-best/video/spikes/**/frames/
+
+# The annealing benchmark's raw trials. One JSON line per trial, and a round is tens of
+# thousands of them -- 185 MB across the first night, which is not what git is for. The
+# summaries beside them are kept, and every run is reproducible from the command and the
+# seed range its experiment artifact records, which is what the seed work bought.
+/packing/campaign/results/annealing/*.jsonl

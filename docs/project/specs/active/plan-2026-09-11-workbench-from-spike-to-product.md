@@ -1,338 +1,459 @@
 ---
 title: The Workbench, From Spike to Product
-description: Converting the retained v2-transitions prototype into project code, without changing what it draws or how it deploys
-author: Claude (agent), for the repository maintainer
+description: Repairing the current workbench and consolidating its live code into a standalone package
+author: Claude and Codex agents, for the repository maintainer
 ---
 # Feature: The Workbench, From Spike to Product
 
 **Date:** 2026-09-11
 
-**Author:** Claude (agent), for the repository maintainer
+**Updated:** 2026-09-12
 
-**Status:** Planned; no chunk started
+**Status:** Active; evidence and correctness repairs precede package extraction
 
 **Workflow:** W7 pipeline improvement
 
-**Tracking:** `think-ooi2` (epic)
+**Tracking:** `think-ooi2` (product epic), `think-zisr` (standalone package)
 
-## Overview
+**Reviewed baseline:** `6e191a35`, with findings in the
+[2026-09-12 workbench stack architecture review](../../reviews/review-2026-09-12-workbench-stack-architecture.md)
 
-The workbench is the page the owner uses, the page the video is captured from, and the
-page published at `/workbench/`. It is also a retained spike: excluded from the lint
-floor, run by hand, drawing with its own copy of the palette, and carrying a banner that
-says so. Those two facts cannot both keep being true, and this is the work that ends the
-second one.
+## Authority and Implementation Entry Point
 
-**Nothing here changes what the page draws.** Every chunk is a move, a generation or a
-check; the rendered page is expected to stay byte-identical through all of them except
-where a chunk says otherwise, and `build_workbench_site.py --check` is what says it did.
+This plan is the top-level source of truth for the finished workbench, the required
+outcomes, and their delivery order.
+The review records findings and resolution evidence; beads carry implementation status,
+prerequisites, and closure receipts.
+The [annealing](plan-2026-09-11-annealing-as-a-search.md),
+[shared-contract](plan-2026-09-09-packing-strategies-as-a-shared-language.md), and
+[video](plan-2026-09-07-known-best-atlas-video.md) plans provide detailed contracts and
+research or illustration deliverables under this sequence.
+They do not independently advance the workbench’s release phase.
 
-## Non-Goals
+Start with `think-5pv0` (refresh the reviewed stack) and `think-a9gt` (consumer and
+legacy-task inventory).
+These can proceed independently.
+Then `think-l9z0` establishes the package shell and source discovery before any repair
+introduces new workbench files.
+Take the next unblocked implementation task in the current phase; an epic being ready
+does not mean its children have passed their prerequisites.
 
-- **No redesign.** The panel’s layout, the colour scheme, the physics and the beat are
-  out of scope. Design changes are cheaper in one template than across split modules, so
-  they belong before this work or after it, not during.
-- **No change to how it deploys.** See below: the deployment is already the one we want.
+Update this plan when a requirement or phase changes.
+When fixing a review finding, update its resolution row with the implementing commit and
+check, and close the owning bead with that evidence.
+Creating a bead or moving a file does not resolve a finding.
 
-## Background
+## Outcome
 
-### The deployment is already the real one
+The workbench becomes a standalone browser package at `packages/workbench/`. It owns the
+Pack and Animate application, reusable geometry and simulation code, the animation
+timeline and rendering, a browser-free Node API, package-local checks, and a
+deterministic static build.
+Workbench-specific build, benchmark, capture, and Python adapters live inside the same
+package. Existing general-purpose `sqpack` libraries remain dependencies.
 
-Worth stating first, because “still a spike” and “not really deployed” sound like the
-same problem and are not.
+The package shell starts in Phase 0; broad live-source consolidation starts only after
+the evidence, correctness, and quality checkpoint in Phase 2. Search remains deferred
+until the annealing record reports valid distributions and the page and benchmark use
+the same packing-validity contract.
 
-`devtools/build_workbench_site.py` writes the page into `site/workbench/`;
-`.github/workflows/pages.yml` builds it with `--check` before the artifact upload, so it
-must reproduce itself byte for byte and pass its own self-containment check; Pages
-serves `packing/site` whole, so it lands at `/workbench/` while the explainer keeps `/`;
-and the workflow’s path filter names the page’s inputs, held there by two tests.
+## Required Final Outcomes
 
-**This work changes what feeds that pipeline, not the pipeline.**
-
-What the pipeline does *not* do on its own is publish, and that is mapped below rather
-than assumed.
-
-### What it costs, measured
-
-| file | lines |
-| --- | ---: |
-| `template.html` | 5,704 — 5,046 script, 393 style, 265 markup |
-| `check_workbench.py` | 2,516 |
-| `build_candidate.py` | 1,512 |
-| `test_candidate.py` | 1,032 |
-| eight instruments and checkers | ~1,850 |
-| **total** | **~13,700** |
-
-**The lint number is mostly noise.** Dropping the exclusion reports **1,691 findings**,
-of which **1,426 are `E501 line-too-long`** and **168 are `T201 print`**. Both are
-settings rather than work: `print` is already allowed in `devtools`, `cases`, `tests`
-and the console scripts, and this is exactly that kind of tooling; line length is the
-formatter’s. That leaves about **97 real findings**, and their top categories are
-mechanical — `zip` without `strict`, non-lowercase locals, manual list comprehensions,
-boolean positional arguments.
-Ruff fixes 12 directly and 209 more under `--unsafe-fixes`.
-
-**The palette is 120 literals**: 20 hues and a 100-entry shade ramp, copied from
-`sqpack.render.style` and `sqpack.render.color` and kept in step by hand.
-`compare_palette.py` measures that they still agree, which is a check standing in for a
-guarantee.
-
-### The one genuinely hard part, and it is not the line count
-
-**JavaScript and HTML live inside Python, in both directions.** `build_candidate.py`
-emits the page’s markup from Python strings, and the five checkers embed about two and a
-half thousand lines of JavaScript in Python string literals to drive the page.
-
-That is why no checker can lint the page’s script, and it is not theoretical: a `\le`
-written as `\\le` inside an f-string reached the rendered page and set `s(11)` on one
-line and its own bound on the next, because nothing between the author and the browser
-could read the string as code.
-Several edits in the session that produced this plan broke on the same seam.
-
-**No auto-fix touches this.** It is the bulk of the work and it gets its own chunks.
-
-## Design
-
-### Five chunks, lettered as the beads letter them
-
-Chunks A, B, C and E were already beads before this spec; D is new, and it is the one
-the owner named as a rule rather than as an option.
-Each chunk owns a disjoint set of files, so three of them can run at once.
-The rule for delegated work is the project’s: **a delegate owns its file list, writes no
-commits, and the coordinator re-verifies and commits.**
-
-**D — no JavaScript or HTML inside Python** (`think-7f3p`). Two halves, each landing on
-its own.
-
-- **D1, the page’s script and styles leave the HTML.** `template.html` keeps its 265
-  lines of markup and gains `assets/workbench.js` and `assets/workbench.css`;
-  `build_candidate.py` inlines them at build time exactly as it inlines the faces.
-  Owns: `template.html`, `build_candidate.py`, `assets/*`. Done when: the built page is
-  byte-identical to the one before the split, and the script is a file a checker could
-  read.
-- **D2, the checkers’ probes leave Python.** Every `page.evaluate("() => { ... }")`
-  becomes a `.js` file the checker loads.
-  Owns: `check_workbench.py`, `check_revision6.py`, `check_revision7.py`,
-  `check_legend.py`, `test_candidate.py`, `probes/*.js`. Done when: each checker reports
-  the same result and the same printed measurements as before, and no JavaScript is
-  written inside a Python literal.
-
-**B — the Python comes under the floors** (`think-vi3v`). The spike’s exclusion goes and
-what falls out gets fixed; ruff’s own `--fix` and `--unsafe-fixes` do most of it.
-Owns: the ten instruments — `compare_palette.py`, `grade_motion.py`, `measure_law.py`,
-`measure_greens.py`, `capture_stills.py`, `smoke_capture.py`, `smoke_styles.py`,
-`dump_fills.py` and the two `experiment_*.py`. Done when: `packing-validate --edit`
-covers the workbench’s Python.
-
-**A — one source for the palette** (`think-fk8h`). The 120 literals are emitted from
-`sqpack.render.style` and `sqpack.render.color` at build time, so a palette change
-reaches the workbench the way it reaches every other drawing.
-Runs after D1, because it edits the extracted script rather than the template.
-Owns: `build_candidate.py`, `assets/workbench.js`. Done when: no colour constant in the
-page’s source is written by hand, and `compare_palette.py` still reports every sampled n
-reproducing its rendering exactly.
-
-**C — the gates run where gates run** (`think-tmqs`). `check_workbench.py` becomes a
-step in `packing-validate --fast` with a declared budget, like every other.
-Owns: `src/sqpack/cli/validate.py`. Done when: a change to the page that breaks the
-colouring fails a pull request.
-
-**E — it lives where the code lives, and the banner comes off** (`think-g0lh`). The
-generator becomes `devtools/build_workbench.py`, run with `python -m`; the instruments
-become `devtools` modules; the exclusion in `pyproject.toml` goes; the prototype banner
-comes off. Owns: `pyproject.toml`, `.github/workflows/pages.yml`, the tree move.
-
-**The banner is last on purpose.** It is what makes the current state honest, and taking
-it off before the rest would make the page claim something that is not yet true.
-
-### What could go wrong, and what catches it
-
-| risk | what catches it |
-| --- | --- |
-| The split changes the rendered page | `build_workbench_site.py --check` plus a byte comparison against the pre-split build |
-| A checker’s probe changes meaning when it leaves Python | each checker reports the same pass and the same printed measurements as before |
-| The palette emitter disagrees with the copy it replaces | `compare_palette.py --per-n`, which already compares the page against the renderings |
-| The move breaks the Pages build | `pages.yml` builds on pull requests, where nothing deploys |
-| Three agents collide | disjoint owned-file lists, and no delegate commits |
-
-## Implementation Map
-
-| # | chunk | bead | owns | change |
-| --- | --- | --- | --- | --- |
-| 1 | D1 | `think-7f3p` | `template.html`, `build_candidate.py`, `assets/*` | Script and styles out of the HTML; the build inlines them. |
-| 2 | D2 | `think-7f3p` | the five checkers, `probes/*.js` | Every embedded probe becomes a file. |
-| 3 | B | `think-vi3v` | the ten instruments | Under ruff and BasedPyright. |
-| 4 | A | `think-fk8h` | `build_candidate.py`, `assets/workbench.js` | 120 colour literals emitted from `sqpack`. |
-| 5 | C | `think-tmqs` | `src/sqpack/cli/validate.py` | The page’s gate joins `--fast`. |
-| 6 | E | `think-g0lh` | `pyproject.toml`, `pages.yml`, the tree | Into `devtools`, banner off. |
-
-Two and three run beside one; four waits on one; five and six are last.
-
-## Publishing It
-
-Tracked as `think-fyje`. Four items, and only the second is strictly required.
-
-What already works, and needs nothing: `build_workbench_site.py` writes
-`site/workbench/`; `pages.yml` builds it with `--check`, so it must reproduce itself
-byte for byte and pass its own self-containment check; the upload takes `packing/site`
-**whole**, so a subdirectory is a URL — the workbench lands at `/workbench/` and the
-explainer keeps `/`; and the path filter names every input, held there by
-`test_the_pages_filter_covers_every_render_input`, which is what made it gain the two
-asset files when the script left the HTML.
-
-**P1 — the Pages build depends on a Node nobody declared** (`think-l6l4`). The build job
-pins Python to 3.14.7 and uv to 0.12.8 and says nothing about Node, but
-`build_candidate.py:1152` runs `["node", entry]` to render about a thousand KaTeX
-expressions in one call.
-It works today only because `ubuntu-latest` happens to ship a Node.
-A runner-image change, or a KaTeX upgrade wanting a newer runtime, breaks the publish
-with no warning and an error that will read as a KaTeX problem rather than a toolchain
-one. Fix: `actions/setup-node` at the pin `packing-validation.yml` and the vendored
-kpress already use, so the repository has one answer to “which Node”.
-No `npm ci` is needed there — Pages needs the runtime, not the pinned tools, and the
-tools run in the validation workflow, which is the right separation.
-
-**P2 — the branch has to reach main** (`think-tn6s`). Both gates are the same condition:
-the artifact upload and the `deploy` job are each
-`if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'`. A pull
-request *builds* the page — so a broken render fails review rather than the next deploy
-— and deploys nothing.
-Today that is [PR #125](https://github.com/jlevy/squares/pull/125), 94 commits ahead of
-`main`. Merging it publishes the workbench, because the path filter already names the
-workbench’s inputs. P1 belongs in the same branch: a first deploy that fails on an
-undeclared toolchain is the worst kind.
-
-**P3 — what the published page says while it is still a prototype** (`think-yuvc`). A
-decision, not a defect, and it should be made rather than inherited.
-The banner injected at build time says the workbench “is excluded from the repository’s
-lint floor” — **which is no longer true.** Its JavaScript and CSS are at zero under
-Biome, its script type-checks, and its gates run in `packing-validate`. What remains
-true is that the animation model is still moving and that figures it draws are not
-evidence. Three separable questions: whether the banner is rewritten to what is still
-true or removed outright (removal is the last chunk and waits on the rest); whether `/`
-links to `/workbench/` at all, since today nothing links either way except the banner’s
-own link back; and whether the page is meant to be shareable yet, since it is public the
-moment it deploys.
-
-**P4 — nothing checks the page after it deploys** (`think-9x0m`). The workflow proves a
-great deal about the page it *builds* and nothing about the page at the URL. An upload
-path that is subtly wrong, a Pages configuration serving a different directory, a
-half-successful deploy: each leaves a green workflow and a broken link.
-A post-deploy fetch of `/workbench/` — 200, body carries `window.atlasTransitions`,
-digest matches the uploaded artifact — closes it.
-Low priority because the failure is visible the moment anyone opens the link, worth
-doing because “anyone opens the link” is not a gate.
-
-## The Layer Model, and the Research Layer
-
-Tracked as `think-dpyh`. This is the one piece of remaining work that is a **design**
-rather than a conversion, so it is written out here before it is built.
-
-### What the owner asked for
-
-Three messages that are one idea: a `Sources:` block carrying the citations behind each
-n’s bounds, in the explainer’s own styling, condensed and complete; a scarlet star where
-the lower bound is this project’s own; and — the structural part — “a layer which is the
-research layer and the bounds layer, enabled/hidden as a layer in both the Pack and
-Animate tabs in an appropriate way”.
-
-The third changes the other two.
-Without it, sources are a feature: one more block, always on, competing for panel
-height. With it, the page has a **depth**, and the same build is a bare animation, a
-bounds display, or a cited research view.
-
-### What the layers probably are, and what is not settled
-
-The obvious cut is three:
-
-| layer | what it draws | who it is for |
+| Outcome | What the user or maintainer can do | Completion evidence |
 | --- | --- | --- |
-| stage | the packing and the `n = k` headline | a pure animation, and the video |
-| bounds | the gap bar, `s(n) ≤ …`, `s(n) ≥ …` | someone comparing one n against another |
-| research | the sources, the star, the exact/rigid badges, the OPEN block | someone checking a claim |
+| O1 — One owned package | Build and maintain the application, numerical core, animation, tests, probes, and workbench-specific tools in `packages/workbench/`. | Package commands run independently; all live consumers have migrated; no production build or command reads the spike tree. |
+| O2 — Usable Pack | Choose any `n` in a declared measured range, start from generic or supplied poses, manipulate squares, run, pause, restart, reset, resolve, and replay a visible seed. A known record is optional. | Cases with and without catalogue records work; exactly `n` squares are present; raw and repaired scores match displayed geometry; stale/cancelled runs cannot overwrite current state. |
+| O3 — Reusable experiments | Change proposal, contact/force model, annealing or container schedule, repair, objective, and run budget through typed configurations; compare runs under equal work. | Browser and headless callers use one kernel and effective configuration; two strategy variants run through it; receipts retain work, seed, validity and provenance. No better packing is promised as a software acceptance condition. |
+| O4 — Clean illustration engine | Replay a trace or author an illustration, seek deterministically, draw SVG, and capture frames/video with explicit timing, arrival, side and rotation. | Drawing a frame needs no solver; seek and capture agree; direct and physically generated motion retain their labels; illustrative frames never acquire numerical assurance. |
+| O5 — Experimental Search | Run many Pack trials, cancel with honest partial accounting, inspect the best valid arrangement and outcome distributions, and use calibration/held-out presets. | The same trial matches Pack and headless output; manifests reproduce disjoint-block reports; invalid outcomes never rank; tuning and held-out cohorts are explicit. Search ships after the clean Pack/Animate release boundary. |
+| O6 — Clear, accessible UI | Use mode-specific controls and presentation/research layers, readable responsive layout, keyboard interaction and reduced-motion playback. | Browser checks exercise startup, tab switches, focus, transport, labels and representative viewport sizes; the consumer audit dispositions existing UI defects and preserves working behavior. |
+| O7 — Reproducible publication and maintenance | Follow a package quickstart, build a static Pages artifact, and verify the deployed workbench under `/squares/workbench/`. | Strict Python/TS/JS floors discover all live source; required CI and full checkpoint pass; source/build identity and post-deploy behavior agree; the explainer link stays under `/squares/`. |
 
-**Two things are genuinely unsettled and should not be guessed at.** Whether *bounds*
-and *research* are two layers or two depths of one — they nest rather than compose,
-which is an argument for depth.
-And where the badges and the OPEN block go: they are claims about evidential status,
-which sounds like research, but a reader watching bounds probably wants to know an upper
-bound is only the best known.
-Settle both with the panel in front of you.
+The Phase 4 checkpoint delivers O1, O2, O4, O6 and O7 with a reusable single-run core.
+Phase 5 completes O3 and O5 and reruns the complete outcome set.
+Local Python/Rust services, universal cross-language trajectory identity, new
+mathematical discoveries, and unbounded resource support are separate future work; the
+browser exposes only the capabilities implemented by its static build.
 
-### The constraints the page already imposes
+## Current Baseline
 
-These are the reason this is not a checkbox, and each has bitten something already:
+The first conversion plan has mostly landed.
+Git history keeps its retired chunk plan; this document now records the work that
+remains.
 
-- **Every fact on the panel is absolutely positioned at a fixed top.** Hiding one leaves
-  a hole. The layer model needs a layout answer, not a `display: none`.
-- **`setMode` is a reset**, so a layer choice has to live with `state.style` and the
-  colour scheme — settings that survive a switch — and not with the run, which does not.
-- **“Appropriate in both tabs” probably means different defaults, not different
-  capabilities.** Pack is one n examined and can afford words; Animate is a sweep
-  watched and probably wants fewer.
-- **`body.capture` already hides the controls for a capture.** A layer choice has to
-  compose with that rather than fight it, and the capture pipeline will want to name a
-  layer set.
-- **The API needs `setLayers` and `layers`**, so a capture and the checkers can drive
-  it.
+| Surface | State at `6e191a35` |
+| --- | --- |
+| Browser source | The HTML template, 7,431-line `workbench.js`, 1,099-line stylesheet, and ordinary checker probes are separate files. |
+| Browser floor | Biome checks JavaScript and CSS. `tsc` checks the workbench, probes, and Motion Lab as separate global programs with four legacy flags relaxed. That browser floor runs in `packing-validate`; the behavioral workbench scripts do not. |
+| Python floor | The retained spike tree is still excluded from Ruff and is outside BasedPyright’s include set. Parent PR #125 removes that exclusion at `ee60689b`, but PR #155’s reviewed head does not contain that commit. Python moved into `devtools` is checked, while JavaScript embedded in its strings remains invisible to the browser floor. |
+| Palette | The browser still carries literal copies of the `sqpack.render` palette, shades and angle tolerance. The Phase 0 inventory corrects the earlier statement that generation had landed; `think-fk8h` remains required under `think-w0a1`. |
+| Publication | `devtools.build_workbench_site` still invokes the retained spike builder. At this baseline it reproduces a self-contained 4.4 MB page at `/workbench/`. The old unchecked-prototype banner has been replaced by a quiet evidence warning. |
+| Product shape | Pack runs one interactive trajectory. Animate plays a range of retained atlas records and illustrative transitions. The page has no Search mode and Pack still depends on atlas transition pairs instead of accepting an independent `n`. |
+| Runtime shape | One IIFE owns application state, geometry, two related physics loops, timeline, SVG rendering, facts, controls, and the public API. The cached transition simulator and live optimizer repeat collision, wall, broad-phase, and integration logic. |
 
-### The sources block, before it is designed
+One regression crosses the completed extraction boundary: `devtools/bench_annealing.py`
+contains `TRIAL_JS` and `GUARD_JS` Python strings.
+Its trial string also carries a third separating-axis implementation and the only
+current caller of the new seed API. The manually maintained API declaration consequently
+omits `setSeed` and `seed` while the browser type check remains green.
 
-One thing decides the rest: **what the record actually holds.** The composite figure
-record and the frontier register carry provenance for the known-best sides, and
-`devtools/render_explainer.py` already formats references for the published paper.
-Both get reused — the generator reads the record rather than restating it, and a second
-citation style invented here would be a second thing to keep right.
+## Product Semantics
 
-Find out what is there per n *first*. “All the pages where we have details” says the
-owner expects it to be partial, and a block designed for complete data that is mostly
-absent is a worse outcome than one designed for absence.
+The product has three aspects with one set of computational building blocks:
 
-## Testing Strategy
+- **Pack** accepts one `n`, one seed, one starting arrangement, and one parameter set.
+  It runs a single trajectory and supports direct manipulation.
+  `n` is independent of the presence of an atlas transition pair; the supported resource
+  envelope is explicit and tested.
+- **Search** asks Pack’s browser-free trial function for many seeded runs and summarizes
+  validity, best-of-k, and the outcome distribution.
+  It does not have its own physics engine.
+  Search ships only after the annealing plan’s measurements and resolver are in order.
+- **Animate** presents imported records and deterministic trajectories on a timeline.
+  Retained record poses remain authoritative at integer frames.
+  Any simulated motion between them is labelled illustrative and cannot create numerical
+  evidence.
 
-The page’s own checkers are the test suite and they already exist: `check_workbench.py`
-(about 90 seconds, the current gate), `check_revision6.py`, `check_revision7.py`,
-`check_legend.py` and `test_candidate.py`. Every chunk runs all five before it is
-committed.
+The older unbuilt **Calibrate** concept becomes a set of Search presets, such as a
+parameter sweep over cases with known records.
+There is no Calibrate tab, controller, or loop engine.
 
-Two additional checks belong to this work specifically:
+## Package Boundary
 
-- **A byte comparison of the built page** across D1, which is the only chunk that could
-  silently change what is drawn.
-- **`compare_palette.py --per-n`** across A, which is the only chunk that could silently
-  change a colour.
+Use top-level `packages/workbench/`, as the owner explicitly requested on 2026-09-12.
+This is a deliberate exception to the existing rule placing code under `packing/`. The
+migration must update that layout rule and all path-sensitive tooling together.
+All new workbench-specific source belongs here; neither `packing/devtools/` nor the
+spike tree is a second home for the application.
+Contract repairs may edit existing live files in place, but every newly introduced
+workbench file starts in this package with lint, type, and test discovery wired in the
+same change. Phase 3 completes the migration; it is not a reason to scatter temporary
+modules elsewhere during Phases 1 and 2.
 
-## What the Owner Found on the Built Page
+The target package has these ownership boundaries:
 
-Not part of the conversion, but found while it was being planned, and worth recording
-here because two of the three were caused by the same thing the conversion is for — a
-page whose script nothing can read.
+```text
+packages/workbench/
+  package.json
+  src/
+    core/          geometry, packing metrics, resolver, seeded random streams
+    simulation/    one step kernel, force laws, trajectory and live-run adapters
+    animation/     timeline, interpolation, playback and reduced-motion policy
+    view/          SVG stage, facts, gap bar and accessible descriptions
+    app/           state, controls and Pack/Animate tab composition
+    data/          versioned import validation and normalized frame adapters
+    api/           browser and browser-free public entry points
+  tests/           unit, contract, parity and deterministic-frame checks
+  probes/          browser behavior probes grouped by public contract
+  tools/           workbench build, benchmark, capture and optional Python adapters
+```
 
-- **`think-lkbk`, fixed.** The bar’s lower-bound numeral came out in the panel’s 48 px
-  serif. The SVG text carried `class="gapbar-num lower"` and the facts panel has a bare
-  `.lower` rule; same specificity, later in the sheet, so it won.
-  The modifiers are now `is-lower` and `is-record`.
-- **`think-uy41`, fixed.** The bound arrows were clipped at the low end, because the
-  rail’s ends were also the scale’s ends and an arrow centred on either is half outside
-  the viewBox. The rail now runs the full width and the scale’s ends are ticks inset into
-  it.
-- **`think-9yzq`, fixed.** Switching Pack and Animate carried the run across, so the
-  page described one thing and drew another — `showing the step 10 -> 11` over eleven
-  squares pushed around for 110 steps.
-  Switching is now a reset, and each mode keeps its own n.
-- **`think-2m96`, open.** At the first frame of every step the incoming square sits
-  exactly on the existing arrangement, a measured overlap of 1.0, so the bar’s pointer
-  hides. How long it lasts is the first thing to establish.
+The package build bundles typed or checked modules into a self-contained page.
+The build must resolve module dependencies explicitly; independent source files must not
+depend on accidental concatenation order.
+Write new reusable modules in TypeScript.
+A migrated legacy fragment may remain checked JavaScript only while it has complete
+JSDoc types and passes the same strict compiler flags.
+Each source file enters a package-local type-check program.
 
-## Open Questions
+### Source Floor
 
-- **What lints the page’s script once it is a file?** The honest options are a pinned
-  `biome` or `eslint` in the build, or type-checking it with `tsc --checkJs` and JSDoc.
-  The first is cheaper; the second would have caught the `\\le` bug.
-  Decide at D1, when the file exists and its shape is known.
-- **Does `test_candidate.py`’s full sweep belong in the fast tier or the deep gate?** It
-  walks 324 pairs at two instants; `check_workbench.py` does not.
-  Measure at C.
+The closed `think-4cwy` adoption recorded four flags relaxed for the legacy global
+programs. `think-4ylo` owns their removal from retained live workbench code and requires
+them for every promoted module: `noImplicitAny`, `strictNullChecks`,
+`noUncheckedIndexedAccess`, and `exactOptionalPropertyTypes`. The package also inherits
+the strict base flags, including `noImplicitOverride`, `noImplicitReturns`,
+`noFallthroughCasesInSwitch`, and consistent filename casing.
+
+Biome formats and checks all TypeScript, JavaScript, JSON, and CSS with zero warnings.
+Its type-domain promise rules cover TypeScript.
+If any checked JavaScript remains, a focused type-aware ESLint overlay enforces
+`no-floating-promises`, `no-misused-promises`, and `await-thenable`, because Biome does
+not enforce those rules for JavaScript.
+Gate configuration tests enumerate every live source extension and fail when a source,
+test, or probe is outside lint or type coverage.
+
+No slice may add `any`, `@ts-ignore`, a global rule switch, a relaxed compiler flag, or
+a source exclusion to make the gate pass.
+Package-local Python adapters use typed records and pass the project’s Ruff and
+BasedPyright gates at zero findings and warnings.
+Extend Python source discovery to `packages/workbench/`; a file outside `packing/` must
+not escape the floor.
+
+### Browser-Free API
+
+The Node entry point has no DOM dependency and exposes the same numerical operations the
+browser uses:
+
+- validate and normalize a frame or starting arrangement
+- measure walls, pair gaps, deepest overlap, and required container side
+- resolve an overlapping arrangement without claiming an improvement
+- advance one seeded simulation and collect a trajectory
+- run one Pack trial and return its receipt
+
+The browser supplies clocks, events, SVG nodes, and paint scheduling through adapters.
+The command-line benchmark calls this entry point directly, so it measures simulation
+cost without loading Playwright or copying physics into a probe.
+
+### Simulation Boundary
+
+One pure step kernel owns contact detection, wall forces, broad-phase selection, force
+accumulation, and integration.
+The cached Animate trajectory and the live Pack run use separate adapters because their
+state machines differ: Animate targets a retained end frame and collects samples; Pack
+supports growth, open-ended execution, and a held square.
+Search calls the Pack adapter repeatedly.
+The adapters must not reimplement the kernel.
+
+### Data and Evidence Boundary
+
+The package never reaches into `atlas/`, `campaign/`, witnesses, or Python solver
+modules by relative path.
+A package-local assembler may use general-purpose `sqpack` APIs to validate those
+sources and emit a versioned JSON input.
+Catalogue export is an explicit integration step; the built browser and ordinary
+headless trial API do not require Python.
+The package rejects unknown versions, nonfinite geometry, wrong square counts, unstable
+identities, unsupported evidence values, and missing provenance before rendering or
+simulation.
+
+Reuse the Motion Lab contract’s useful invariants:
+
+- stable, ordered square IDs; finite centers and angles; and a finite positive container
+  side
+- explicit frame kind, solver phase, evidence status, and typed overlays
+- separate scenario-runner and capability declarations, so the UI exposes only
+  operations a scenario supports
+- declared limits for square count, sweeps, and time budget rather than silent clamps
+
+The normalized package frame uses radians and stable IDs.
+Legacy workbench arrays in degrees enter through an adapter.
+Motion Lab’s Python quench, snapping implementation, and evidence records remain
+separate scientific components.
+Shared JavaScript geometry is adopted only after common contract vectors prove parity
+across the workbench, Motion Lab, and the Python verifier.
+
+## Ordered Delivery
+
+The phase numbers below govern implementation.
+The research and contract plans retain their local section names for detail.
+A task may start only after its own blocker dependencies pass; parent membership alone
+does not enforce this ordering.
+Implementation started on 2026-09-13 via the `implement-beads` shortcut.
+The parent refresh is complete at `27d2f8cc`: PR #125 `0281a508` is integrated with PR
+#155 `6e191a35` and planning commit `24bca6ae`. The refreshed records gate passes Ruff
+and schema checks and reproduces only the documented campaign/documentation failures,
+owned by `think-3eha`. Earlier prototype accomplishments remain in the baseline and are
+audited before being redone.
+
+### Phase 0: Establish the Integration and Package Foundation
+
+| Bead | Deliverable | Done when |
+| --- | --- | --- |
+| `think-5pv0` | Refresh the leaf from the current PR #125 parent. | Record parent/leaf revisions; include `ee60689b` and `0281a508` or verified equivalents; preserve #155 records and reproduce its known failures before repairs. |
+| `think-a9gt` | Inventory sources, consumers, unique assertions and legacy tasks. | Every build, CI, capture, benchmark, documented CLI and research reproduction route has a move/retain/replace/remove disposition and a task owner. |
+| `think-l9z0` | Create the small root package shell and immediate gate coverage. | Locked package scripts and strict source discovery cover real TS and Python shell inputs plus the existing JS controls; no package JavaScript is introduced before its promise overlay; layout rules, hooks and validation selection cover the new root; deliberately missed source/config fixtures fail. |
+
+Refresh and inventory are independent.
+The shell depends on both.
+The completed
+[consumer inventory](../../reviews/review-2026-09-13-workbench-consumer-inventory.md)
+records 211 v2 files, 23 Python entry points and 180 probes with replacement owners.
+It also requires `think-g0lh` to replace the incomplete Pages input list with the actual
+catalogue, witnesses, rendering, fonts, assembler, package source and lockfile inputs.
+Record annotations can proceed after refresh; source repairs that introduce workbench
+files use the shell.
+This separates a minimal destination from the later migration of the live application.
+
+### Phase 1: Repair Evidence and Executable Contracts
+
+| Bead | Deliverable | Done when |
+| --- | --- | --- |
+| `think-3eha` | Repair campaign integration and provenance (R4). | Unique experiment IDs, actual numerical/effort fields, source references, index, footers and generated views pass their existing gates; unavailable historical evidence is annotated, never invented. |
+| `think-sdmi` | Validate animation imports (R1). | Coincident/out-of-bounds/nonfinite/wrong-count imports cannot acquire checked status; a valid retained control carries the actual validator/tolerance/provenance. |
+| `think-karf` | Enforce strategy and trace semantics (R2). | Grid phases preserve exactly `n`; unsupported sources/fields fail; effective seed/config, per-frame side/time/identity and guidance ancestry survive execution/export. |
+| `think-1fpa` | Apply one admission rule to run/replay/report/sweep (R3). | Missing/nonfinite/invalid results never rank; empty admitted populations are explicit; all attempts and rejection causes are counted. |
+| `think-dq1l` | Define exact seed semantics (R5). | Boundary seeds and the reproduced alias pair behave under the declared integer mix; effective seed receipts and browser/headless replay agree. |
+| `think-6hqs` | Validate the live optimizer’s exact returned snapshot (R10). | Post-step poses/angles/size are checked before ranking; best receipts retain the checked geometry; growth and convergence are not confused with unit-square feasibility. |
+| `think-4z7d` | Repair distribution reporting and durable inputs. | Disjoint blocks, uncertainty, rates and work reproduce from a manifest; prefix observations stay labelled; missing raw inputs remain a declared limitation. |
+| `think-jdgu` | Reconcile the n17/deep-cohort and difficulty narrative. | Every statement names the actual retained parameter cell and resolved status, or is annotated unsupported; normalized and absolute comparisons cannot imply a causal size result. |
+| `think-3hb7` | Recover or disposition the compaction instrument (R6). | Committed instrument/controls reproduce the result, or the historical negative is marked unreproducible and no longer used to settle the resolver question. |
+
+Record repair and geometry/strategy repairs have separate deliverables and can run in
+parallel. Distribution reporting follows admission repair and record reconciliation;
+narrative correction follows the reporter.
+Historical claims may be dispositioned without a new campaign.
+A new measured round requires its own hypothesis, budget, inputs and acceptance rule
+under the annealing plan.
+
+### Phase 2: Complete the Quality and Behavior Floor
+
+| Bead | Deliverable | Done when |
+| --- | --- | --- |
+| `think-7f3p` | Remove remaining executable JS/HTML literals (R8). | Trial, guard, build and probe programs are ordinary checked package files; shared runtime calls replace copied simulation, with independent verification preserved where useful. |
+| `think-gxxc` | One public API/type contract (R8). | Runtime and declarations agree, including `setSeed`/`seed`; negative key/shape controls fail the normal gate. |
+| `think-4ylo` | Full tbd Python and TS/JS floor (R8). | Ruff/BasedPyright and strict compiler/lint/promise checks have zero findings across all retained live code and all new files; no broad exclusions, suppressions or legacy flag inheritance. |
+| `think-nals` | Shared validity and bounded Resolve. | Raw and repaired states remain separate; finite/count/pair/wall checks agree; repair succeeds only after post-validation and reports stalled/budget/nonfinite outcomes honestly. |
+| `think-y9pw` | Accessible stage and controls. | Current descriptions, focus, keyboard manipulation/transport and reduced-motion behavior pass served-page assertions. |
+| `think-kpvc` | Measured behavioral PR coverage (R8). | Startup, run/reset, modes, validity, seed replay and frame provenance reach the appropriate existing tiers; a broken behavior fails CI, and the builder’s inaccurate gate claim is corrected. |
+| `think-109t` | Repair checkpoint. | The refreshed commit and named repair/gate receipts establish the entry conditions for broad package extraction. |
+
+The Python parent-floor change is integrated, not recreated.
+The closed browser-floor adoption bead `think-4cwy` remains historical; `think-4ylo`
+owns all remaining strict flags.
+Fast checks join PR validation as soon as the source appears.
+Measure slower capture/trajectory checks before assigning their tier.
+
+Pages runtime (`think-l6l4`) and project-subpath navigation (`think-5wnw`) can be
+repaired alongside these tasks.
+Their final integration is checked after the package build moves.
+
+### Phase 3: Consolidate the Live Package
+
+`think-zisr` groups these slices.
+Each executable child is blocked by the repair checkpoint or by children that already
+depend on it; the epic’s own blockers are not the scheduling mechanism.
+
+| Bead | Deliverable | Depends on |
+| --- | --- | --- |
+| `think-nubm` | One DOM-free geometry/simulation kernel, typed configuration and Pack/trajectory adapters. | `think-109t` |
+| `think-w0a1` | Versioned frame, strategy, catalogue/palette and IO adapters. | `think-109t` |
+| `think-ywj4` | Pure timeline, view and capture adapters; explicit arrival and evidence. | `think-w0a1` |
+| `think-6qxx` | Versioned proposal/force/schedule/repair/objective interfaces, mechanism registry and declared capabilities. | `think-nubm`, `think-w0a1` |
+| `think-883t` | Strategy/trace import, editing, replay and export in the app. | `think-6qxx`, `think-ywj4` |
+| `think-8cti`, `think-rdee` | Mode composition and start/transport controls, preserving verified prototype behavior. | Kernel plus the applicable timeline/data adapter |
+| `think-iqvm` | Direct illustration versus physically generated trajectory choice and receipts. | Timeline and mode composition |
+| `think-tcns` | Repeatable headless throughput benchmark with work counters. | `think-nubm` |
+| `think-g0lh` | Switch app, build, capture, probes and tools to package sources; migrate consumers. | App/trace/mode adapters, runtime and navigation repairs |
+
+The kernel receipt separates **feasibility**, **termination**, and **stationarity**. It
+records arithmetic, timestep, configuration, steps/work, final motion residuals and
+termination reason. A feasible state at a work limit is not necessarily converged.
+A stationary label needs a declared threshold/window, with continuation controls after
+forcing decays. The benchmark reports warmup, repetitions, source/runtime/host and
+effective configuration; throughput alone proves neither feasibility nor convergence.
+
+**Package acceptance:** build, lint, typecheck, tests and headless benchmark run from
+the package directory; Node imports need no DOM; fixed-seed metrics/frames agree before
+and after each extraction slice.
+Browser and Node use the same implementation.
+Python projection and browser contact physics agree only on declared shared invariants
+unless their algorithm definitions are actually equivalent.
+
+Data adapters reject unknown versions, nonfinite poses, count/identity/time errors,
+unsupported capabilities and false evidence.
+Generic Pack does not require catalogue data.
+Drawing and replay need no solver.
+The root Pages workflow receives deterministic, self-contained output under
+`packing/site/workbench/`; it does not own application source.
+Quickstart, package scripts, input formats and optional dependencies are documented with
+the migration.
+
+### Phase 4: Finish Pack, Remove Obsolete Consumers, and Release
+
+| Bead | Deliverable | Done when |
+| --- | --- | --- |
+| `think-uhqw` | Complete arbitrary-n Pack. | Generic and supplied starts work without an atlas pair; optional record start, effective seed, direct manipulation, import/export and cancellation obey O2 within measured limits. |
+| `think-cqfc` | Retire obsolete sources after migration. | The Phase 0 inventory proves each old entry point and duplicate/revision assertion is replaced or unused; no live consumer reads the spike tree. |
+| `think-9x0m` | Implement post-deploy verification. | The checker passes against a served package artifact and rejects wrong/missing/stale output; it is wired after deployment without depending on an actual merge to be implemented. |
+| `think-9sdr` | Record Pack/Animate merge readiness. | O1/O2/O4/O6/O7, review dispositions, package gates, record checks, hosted required checks and the full checkpoint pass on one integrated revision. |
+| `think-tn6s` | Execute release and verify the live page. | After the merge decision, the validated artifact is deployed and the published source identity, startup and `/squares/` navigation pass; retain the URL/revision/check receipt. |
+
+`think-9sdr` depends on migrated consumers, arbitrary-n Pack, direct animation, headless
+benchmark, Pages fixes/checker, and evidence reconciliation.
+It produces a concrete merge decision.
+`think-tn6s` follows it; a live success receipt is never required before the checker can
+be implemented. Pull requests build/test and do not deploy.
+
+The inventory must disposition current UI work too: responsive stage/controls, facts and
+source layers, numeric formatting, gap-bar labels, mode-state persistence and stale
+checker/instrument paths.
+Preserve delivered behavior, fix confirmed defects in this phase, and explicitly
+identify optional additions.
+A legacy bead’s unchecked description is not proof that its feature is absent; verify
+before reimplementing it.
+The release checkpoint cannot pass with an unassigned required outcome.
+
+Retain archives, negative results and reproducible research instruments.
+Temporary old-path wrappers require a named live consumer and a retirement condition.
+Git retains discarded prototype code; neither a flat devtools move nor a second package
+tree constitutes consolidation.
+Search remains unavailable at this release boundary.
+
+### Phase 5: Complete Experimental Search and Calibration
+
+| Bead | Deliverable | Done when |
+| --- | --- | --- |
+| `think-gfqt` | Bounded experimental multi-run scheduler. | Configurations from `think-6qxx` vary proposal, force/contact model, annealing/container schedule, repair and objective; repeated Pack runs report progress, cancellation and exact work/seed manifests without blocking interaction. |
+| `think-vhgz` | Search tab over that scheduler. | Best valid poses, rates, status counts, disjoint-block distributions and replay/export agree with headless output; empty or interrupted cohorts are explicit. |
+| `think-3yma` | Calibration and held-out presets. | Campaign manifest fixes tuning/held-out partitions before execution; configuration-level distributions and individual best poses are distinguished; replay preserves the partition. |
+| `think-wln2` | Final end-to-end acceptance. | Every O1–O7 journey passes, documentation matches the product, required/full checks pass, and the released revision has a live smoke receipt. |
+
+`think-gfqt` starts after Phase 4 readiness and the corrected reporter/registry;
+`think-vhgz` follows it, calibration follows Search, and final acceptance follows both
+calibration and release verification.
+The existing research harness `think-k2fr`, hypothesis work `think-a87q`, and later
+sweeps `think-fj07` consume these contracts rather than adding another engine.
+Research run authorization and pre-registration remain separate from shipping the
+instruments.
+
+The objective always reports absolute side for valid geometry.
+Reference-relative metrics require an identified finite reference and a positive
+grid-to-reference gap; omit or reject undefined normalization.
+State whether feasible but nonstationary runs can rank; invalid and cancelled results
+cannot. Terminal-status counts remain separate from validity counts.
+Compare completed work over fixed seed blocks, and preserve unsuccessful blocks in
+budget-success statistics.
+
+### Legacy Task Reconciliation
+
+`think-a9gt` owns reconciliation, not speculative bulk closure.
+It records one of: verified delivered, superseded with a named successor, required
+repair in a phase above, or explicitly deferred feature/research work.
+A superseded bead is closed as superseded, never as implemented.
+
+| Existing scope | Current owner/disposition |
+| --- | --- |
+| `think-fk8h` palette and `think-izpq` phase timing | Verify retained implementation; preserve it through data/timeline extraction. |
+| `think-vi3v`, `think-gnl7`, closed `think-4cwy` | Preserve parent/adoption changes; strict completion is `think-4ylo`. |
+| `think-tmqs` manual behavior gates | Current implementation owner is `think-kpvc`. |
+| `think-kbwb` initial seed API | Verify the introduced API; remaining exact mixing and declaration work belongs to `think-dq1l` and `think-gxxc`. |
+| `think-gjcl` duplicated collision logic | Consolidation owner is `think-nubm`; preserve any unique regression assertion. |
+| `think-x406`, `think-tn0j`, `think-i15w`, `think-ekst`, `think-lmf5`, `think-2c3z` | Inventory live consumers and unique checks in Phase 0; migrate coverage in Phase 3 and retire obsolete code under `think-cqfc`. |
+| `think-6wd6`, `think-dpyh`, `think-cz99`, `think-xp8b`, `think-67b5`, `think-4bgm`, `think-hk37`, `think-2m96` | Verify the refreshed UI; required layout/state/metric defects join O2/O6 acceptance, while additional layers or visual options get an explicit disposition. |
+| `think-wffa` older Calibrate proposal | Preserve its held-out requirements in `think-3yma`; one Search preset implementation. |
+| `think-3quo`, `think-cttv`, `think-0rgh` | Feasible-path experiments, full atlas films, and optional local scientific backends remain separately tracked supporting work; no automatic projection on every paint or backend dependency in the static build. |
+
+## Completion and Review Tracking
+
+The
+[review resolution register](../../reviews/review-2026-09-12-workbench-stack-architecture.md#resolution-register)
+maps R1–R10 to the tasks above and records their actual repair evidence.
+Keep the original finding text as the reviewed baseline; append the source revision,
+checks and resulting disposition when it changes.
+tbd is authoritative for live task status.
+This plan owns required outcomes and ordering, including any decision to defer scope.
+
+Close `think-zisr` only after its implementation children and package acceptance pass.
+Close the Pages epic after observed release verification.
+Close product delivery only after `think-wln2` verifies O1–O7; completing the narrower
+Phase 4 release does not imply Search is delivered.
+No unresolved required outcome may survive merely as an unnamed follow-up in prose.
+
+## Risks and Controls
+
+| Risk | Control |
+| --- | --- |
+| Extraction changes the published picture or timing | Fixed-seed frame comparisons, retained workbench probes, and deterministic capture at each slice |
+| A shared kernel erases real differences between Pack and Animate | Share numerical primitives and the step kernel; keep mode-specific adapters and receipts |
+| Browser and benchmark results drift | One DOM-free API, browser/Node parity vectors, and one exact seed contract |
+| Invalid geometry acquires evidential status | Versioned import validation plus frame-level evidence and provenance checks |
+| “Arbitrary n” hides an accidental resource limit | Declare, measure, expose, and test the supported envelope; reject values outside it |
+| Cleanup deletes a unique check or reproduction route | Consumer inventory, replacement assertion, and full validation before each deletion slice |
+
+Run the full `packing-validate` tier and the documentation guidelines pass at each phase
+boundary. Fast package checks join the pull-request surface as soon as their source is
+introduced.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
