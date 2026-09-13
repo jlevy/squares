@@ -155,6 +155,14 @@ def load(data: bytes) -> tuple[ThresholdCertificate, dict[str, object]]:
         if not isinstance(entry, dict):
             raise FormatError(f"threshold_atoms[{index}] must be a JSON object")
         item = cast(dict[str, object], entry)
+        if any(key in item for key in ("variant", "weighted_points", "multiplicities")):
+            # Refuse the declared representation before parsing can normalize a malformed
+            # count list or an explicitly tagged all-ones atom into the ordinary shape.
+            raise FormatError(
+                f"threshold_atoms[{index}] declares weighted fields, and variant "
+                f"{VARIANT!r} decides unweighted atoms only; weighted coverage needs its "
+                "own admitted variant"
+            )
         points_record = item.get("points")
         if not isinstance(points_record, list):
             raise FormatError(f"threshold_atoms[{index}].points must be a JSON array")
@@ -177,7 +185,7 @@ def load(data: bytes) -> tuple[ThresholdCertificate, dict[str, object]]:
                     _rational(item.get("weight"), f"threshold_atoms[{index}].weight"),
                 )
             )
-        except ValueError as error:
+        except (TypeError, ValueError) as error:
             raise FormatError(f"threshold_atoms[{index}]: {error}") from None
     try:
         certificate = ThresholdCertificate(

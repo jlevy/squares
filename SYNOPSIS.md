@@ -742,16 +742,43 @@ notation, and identify their imported premises and supplied results.
 [Session126](packing/campaign/agent-sessions/session-126-stromquist-analytical-exploration.md)
 retains the analytical work, independent reviews, and validation.
 
-**Selected next entry:** `think-qw9w`, the existing BC329 bounded fixed-core runner
-admission. With total charge budget $M$ and least core charge $m$, it preserves the
-frozen relative-weight scale, checks $m>M/11$, and uses $\alpha=1/m$ only after
-acceptance. The scientific packet remains unrun; the
-[packet preflight](docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md)
-and
-[daytime plan](docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
-state its admission and prospective-run requirements.
-This follows X-027’s first-ranked direct-bound continuation without reopening the
-completed interpretation audit.
+**Weighted atoms now exist in production:**
+[Session127](packing/campaign/agent-sessions/session-127-weighted-five-site-atom-admission.md)
+implemented the representation and source replay from the first two stages of the
+[weighted-atom admission](docs/project/reviews/review-2026-09-10-n11-weighted-five-site-atoms.md).
+Its
+[review addendum](packing/campaign/agent-sessions/session-127-weighted-five-site-atom-admission.md#review-addendum--september-13-2026)
+records the consumer corrections and the remaining validation boundary.
+`ThresholdAtom` carries an explicit positive integer token count per distinct site.
+Geometry uses one membership rectangle per site; the threshold and resource budget count
+tokens. For total token count $A$, threshold $k$, and nonnegative atom weight $w$, the
+budget is $w\lfloor A/k\rfloor$. The D4 orbit key preserves each site’s count, and the
+inclusion–exclusion expansion runs over labelled tokens.
+The retained seven-token, threshold-four motif $(2,2,1,1,1)$ expands over 64 token
+subsets with absolute coefficient mass 209, where the same atom read as five sites
+reports 9, so the `int64` headroom bound now reads the token count.
+All four retained receipts reproduce their declared token total, budget, charge $3/2$
+and exact charged-placement lists from family geometry, on rational coordinates up to
+965 characters wide.
+Replay digests bind the supplied inputs; no retained historical digest authenticates
+their pairing. Unweighted admission and publication readers refuse declared weighted
+records. The internal interval route supports weighted member counts within its size
+limits; that support does not admit certificate coverage.
+No hypothesis, experiment or scientific target was registered or run, and the frontier
+is unchanged.
+
+**Selected next entry:** `think-8c9e`, the weighted-atom coverage mechanics.
+The agreeing direct, event and interval controls on weighted atoms remain, including the
+closed-boundary and undercharged-core cases and the interval route’s stall handling,
+which is unresolved rather than a refuted atom or a failed budget proof.
+Certificate coverage admission stays blocked until they pass, and the paired instrument
+with its exact common row and point manifests is tracked separately behind it.
+The parallel BC329 lane has completed its bounded fixed-core runner implementation
+review in PR156. Its separate calibration instrument, three fresh full-shape host runs
+and source-distinct readbacks remain unadmitted and unrun, so BC329 execution remains
+blocked. The
+[preflight addendum](docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md#stack-review-addendum-2026-09-12)
+records the implemented controls and the remaining admission requirements.
 
 **Current combined reader entry:**
 [the consolidated PR-series takeaways](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md#12-the-combined-series-takeaways-and-open-comparisons),
@@ -3746,9 +3773,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 124 | 33,276 | 18,198 | 381 | 3,043 | 196.61 h |
+| claimed by a session | 129 | 40,048 | 21,835 | 440 | 3,461 | 370.08 h |
 | claimed by none | 60 | 11,110 | 6,539 | 156 | 946 | 51.75 h |
-| **measured** | **184** | **44,386** | **24,737** | **537** | **3,989** | **248.36 h** |
+| **measured** | **189** | **51,158** | **28,374** | **596** | **4,407** | **421.83 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3788,7 +3815,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-108](packing/campaign/agent-sessions/session-108-anchors-at-q.md) | 1 | 1 | 128 | 52 | 0 | 0.57 h |
 | [session-109](packing/campaign/agent-sessions/session-109-corner-class-at-q.md) | 1 | 1 | 156 | 67 | 0 | 0.53 h |
 | [session-125](packing/campaign/agent-sessions/session-125-past-the-point-atom-ceiling.md) | 4 | 1 | 1,721 | 695 | 16 | 17.59 h |
-| *shared by 36 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| [session-127](packing/campaign/agent-sessions/session-127-weighted-five-site-atom-admission.md) | 2 | 5 | 434 | 269 | 5 | 0.54 h |
+| *shared by 37 sessions* | — | 6 | 22,990 | 12,497 | 280 | 293.24 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3847,9 +3875,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 81 |
+| measured | 82 |
 | unmeasured | 45 |
-| **total** | **126** |
+| **total** | **127** |
 
 <!-- END GENERATED: session-close-report -->
 

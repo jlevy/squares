@@ -23,7 +23,7 @@ import threading
 from collections.abc import Callable
 from concurrent.futures import Future, ProcessPoolExecutor, ThreadPoolExecutor
 from fractions import Fraction
-from itertools import combinations
+from itertools import combinations, product
 from multiprocessing.process import BaseProcess
 from typing import Literal, cast
 from unittest.mock import patch
@@ -125,7 +125,8 @@ def _cluster_certificate(
     grid = [Fraction(1, 2) + Fraction(2, 5) * i for i in range(6)]
     representatives = ((0, 0), (1, 1), (2, 2), (0, 1), (0, 2), (1, 2))
     shapes = ((3, 2), (4, 3), (5, 2), (3, 2), (4, 3), (5, 4))
-    seen: dict[tuple[tuple[tuple[Fraction, Fraction], ...], int], ThresholdAtom] = {}
+    # The orbit key carries each site's token count, so it is a triple per site.
+    seen: dict[tuple[tuple[tuple[Fraction, Fraction, int], ...], int], ThresholdAtom] = {}
     for (i, j), (size, threshold) in zip(representatives, shapes, strict=True):
         points: list[tuple[Fraction, Fraction]] = []
         while len(points) < size:
@@ -159,7 +160,7 @@ def rescaled(certificate: ThresholdCertificate, factor: Fraction) -> ThresholdCe
         square_side=certificate.square_side,
         atoms=tuple(Atom(a.label, a.x, a.y, a.weight * factor) for a in certificate.atoms),
         threshold_atoms=tuple(
-            ThresholdAtom(t.points, t.threshold, t.weight * factor)
+            ThresholdAtom(t.points, t.threshold, t.weight * factor, t.multiplicities)
             for t in certificate.threshold_atoms
         ),
         half_tangents=certificate.half_tangents,
@@ -292,6 +293,72 @@ def test_the_witness_charge_is_the_theorem_definition_at_a_float_centre() -> Non
                 _membership(certificate, label, centre),
             )
             assert exact_charge_at_witness(certificate, label, witness).charge == expected
+
+
+def test_the_exact_witness_counts_all_tokens_at_a_site() -> None:
+    """Two heavy sites reach threshold four at an ordinary interior witness."""
+    atom = ThresholdAtom(
+        ((Fraction(1), Fraction(1)), (Fraction(3, 2), Fraction(1))),
+        4,
+        Fraction(1),
+        (2, 2),
+    )
+    certificate = ThresholdCertificate(
+        n=3,
+        outer_side=SIDE,
+        square_side=SQUARE,
+        atoms=(),
+        threshold_atoms=(atom,),
+        half_tangents=NET,
+    )
+    result = exact_charge_at_witness(certificate, "0", (1.25, 1.0))
+    assert result.admissible
+    assert result.charge == 1
+
+
+def test_interval_member_rows_charge_weighted_masks_without_the_sweep_expansion(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """All motif masks, including mixed row widths, use token counts and exact masses."""
+    points = tuple((Fraction(4 + k, 4), Fraction(1)) for k in range(5))
+    certificate = ThresholdCertificate(
+        n=3,
+        outer_side=SIDE,
+        square_side=SQUARE,
+        atoms=(Atom("point", *points[0], Fraction(1, 3)),),
+        threshold_atoms=(
+            ThresholdAtom(points, 4, Fraction(2, 3), (2, 2, 1, 1, 1)),
+            ThresholdAtom(points[2:4], 1, Fraction(1, 6)),
+        ),
+        half_tangents=NET,
+    )
+
+    def no_expansion(_: ThresholdAtom) -> tuple[int, ...]:
+        pytest.fail("the interval count must stay independent of token-subset expansion")
+
+    monkeypatch.setattr(ThresholdAtom, "token_sites", property(no_expansion))
+    search = _search(certificate, "0")
+    assert search.scale == 6
+    masks = tuple(product((False, True), repeat=5))
+    expected = [
+        2 * a + 4 * (2 * a + 2 * b + c + d + e >= 4) + (c or d) for a, b, c, d, e in masks
+    ]
+    np.testing.assert_array_equal(search.charge(np.array(masks, dtype=bool)), expected)
+
+
+def test_interval_counts_and_member_table_accept_their_exact_caps() -> None:
+    """One 4096-token row plus a padded point row exactly fills the 8192-slot table."""
+    point = (Fraction(1), Fraction(1))
+    certificate = ThresholdCertificate(
+        n=3,
+        outer_side=SIDE,
+        square_side=SQUARE,
+        atoms=(Atom("point", *point, Fraction(1)),),
+        threshold_atoms=(ThresholdAtom((point,), 4096, Fraction(1), (4096,)),),
+        half_tangents=NET,
+    )
+    search = _search(certificate, "0")
+    np.testing.assert_array_equal(search.charge(np.array([[False], [True]])), [0, 2])
 
 
 def test_exact_rotations_are_the_net_and_its_reflection() -> None:
@@ -438,7 +505,12 @@ def test_a_lowered_threshold_weight_is_refused_and_the_witness_is_exact() -> Non
     assert charged, "the tightest cell should be carried by a threshold atom"
     lightened = charged[0]
     threshold_atoms = tuple(
-        ThresholdAtom(t.points, t.threshold, t.weight - Fraction(1, 10000))
+        ThresholdAtom(
+            t.points,
+            t.threshold,
+            t.weight - Fraction(1, 10000),
+            t.multiplicities,
+        )
         if t is lightened
         else t
         for t in certificate.threshold_atoms
@@ -1155,7 +1227,9 @@ def test_a_budget_that_would_wrap_int64_is_refused_before_numpy_sees_it() -> Non
         verify_threshold_by_intervals(certificate, directions=("0",))
 
 
-def test_a_member_table_past_the_gather_cap_is_refused_before_any_allocation() -> None:
+def test_a_member_table_past_the_gather_cap_is_refused_before_any_allocation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     pool = [(Fraction(k, 100), Fraction(1)) for k in range(100)]
     atoms = tuple(
         ThresholdAtom(tuple(pool[i] for i in chosen), 2, Fraction(1, 8))
@@ -1170,7 +1244,36 @@ def test_a_member_table_past_the_gather_cap_is_refused_before_any_allocation() -
         threshold_atoms=atoms,
         half_tangents=NET,
     )
+
+    def no_expansion(_: ThresholdAtom) -> tuple[int, ...]:
+        pytest.fail("oversized member rows must be refused before token expansion")
+
+    monkeypatch.setattr(ThresholdAtom, "token_sites", property(no_expansion))
     with pytest.raises(IntervalInputError, match="member table"):
+        ThresholdAtomData.of(certificate)
+
+
+def test_an_oversized_token_count_is_refused_before_expansion_or_numpy(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    atom = ThresholdAtom(((Fraction(1), Fraction(1)),), 4097, Fraction(1), (4097,))
+    certificate = ThresholdCertificate(
+        n=3,
+        outer_side=SIDE,
+        square_side=SQUARE,
+        atoms=(),
+        threshold_atoms=(atom,),
+        half_tangents=NET,
+    )
+
+    def no_expansion(_: ThresholdAtom) -> tuple[int, ...]:
+        pytest.fail("the token cap must run before expansion")
+
+    monkeypatch.setattr(ThresholdAtom, "token_sites", property(no_expansion))
+    with (
+        patch.object(np, "full", side_effect=AssertionError("allocated before token cap")),
+        pytest.raises(IntervalInputError, match="4097 tokens"),
+    ):
         ThresholdAtomData.of(certificate)
 
 

@@ -153,6 +153,10 @@ def test_verify_atom_counts_multiplicities_and_floors() -> None:
     assert verdict.budget == 1
     assert verdict.threshold_charge == 1
     assert verdict.floor_charge == 1
+    record = verdict.record()
+    assert record["site_count"] == 2
+    assert record["token_count"] == 3
+    assert "size" not in record
     floor = pr.verify_atom(fam, [pr.WeightedPoint((F(1), F(1)), 4)], 2, label="test")
     assert floor.budget == 2
     assert floor.threshold_charge == 1
@@ -304,7 +308,7 @@ def test_the_non_helly_triple_report_ranks_its_violations(
         == 0
     )
     written = json.loads(out.read_text())
-    assert written["kind"] == "plateau-reader/v1"
+    assert written["kind"] == "plateau-reader/v2"
     assert written["k4_two_of_three"]["max_charge"] == "3/2"
     assert written["violated_atoms"]
 

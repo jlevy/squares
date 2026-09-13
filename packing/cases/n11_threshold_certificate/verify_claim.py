@@ -177,6 +177,10 @@ def load_certificate(raw):
     if len(record["threshold_atoms"]) > MAX_THRESHOLD_ATOMS:
         raise ValueError("too many threshold atoms")
     for item in record["threshold_atoms"]:
+        if isinstance(item, dict) and any(
+            key in item for key in ("variant", "multiplicities", "weighted_points")
+        ):
+            raise ValueError("this verifier accepts only unweighted threshold atoms")
         if not isinstance(item, dict) or not isinstance(item.get("points"), list):
             raise TypeError("each threshold atom must be an object with a points array")
         if any(not isinstance(p, list) or len(p) != 2 for p in item["points"]):

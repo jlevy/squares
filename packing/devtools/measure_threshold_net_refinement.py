@@ -448,6 +448,13 @@ def rescaled_record(
         elif key == "threshold_atoms":
             entries: list[dict[str, Any]] = []
             for entry in value:
+                if any(
+                    key in entry for key in ("variant", "multiplicities", "weighted_points")
+                ):
+                    raise ValueError(
+                        "net refinement accepts unweighted threshold records only; "
+                        "weighted coverage has not been admitted"
+                    )
                 weight = Fraction(entry["weight"]) * factor
                 threshold_budget += weight * (len(entry["points"]) // entry["threshold"])
                 entries.append(

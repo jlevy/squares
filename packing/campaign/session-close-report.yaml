@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 126
+count: 127
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 81
+  sessions_measured: 82
   sessions_unmeasured: 45
   attributed:
-    rollups: 124
-    turns: 33276
-    tool_calls: 18198
-    tool_errors: 381
-    one_off_code: 3043
-    wall_hours: 196.61
+    rollups: 129
+    turns: 40048
+    tool_calls: 21835
+    tool_errors: 440
+    one_off_code: 3461
+    wall_hours: 370.08
   unattributed:
     rollups: 60
     turns: 11110
@@ -28,12 +28,12 @@ totals:
     one_off_code: 946
     wall_hours: 51.75
   measured:
-    rollups: 184
-    turns: 44386
-    tool_calls: 24737
-    tool_errors: 537
-    one_off_code: 3989
-    wall_hours: 248.36
+    rollups: 189
+    turns: 51158
+    tool_calls: 28374
+    tool_errors: 596
+    one_off_code: 4407
+    wall_hours: 421.83
 codex_receipts:
   attributed: 50
   unattributed: 2
@@ -1341,11 +1341,11 @@ sessions:
   measured: true
   rollups:
   - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
-  turns: 1053
-  tool_calls: 568
-  tool_errors: 22
-  one_off_code: 96
-  wall_hours: 18.35
+  turns: 7391
+  tool_calls: 3936
+  tool_errors: 76
+  one_off_code: 498
+  wall_hours: 191.28
   codex_receipts: []
 - id: session-087
   title: "The agenda 022 continuation and the PR 83 gate"
@@ -1355,11 +1355,11 @@ sessions:
   measured: true
   rollups:
   - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
-  turns: 1053
-  tool_calls: 568
-  tool_errors: 22
-  one_off_code: 96
-  wall_hours: 18.35
+  turns: 7391
+  tool_calls: 3936
+  tool_errors: 76
+  one_off_code: 498
+  wall_hours: 191.28
   codex_receipts: []
 - id: session-088
   title: "Validation efficiency implementation and integrated fast checkpoint"
@@ -2112,3 +2112,22 @@ sessions:
     active_union_hours: 2.39
     wall_hours: 2.39
     snapshot_incomplete: true
+- id: session-127
+  title: "Weighted Five-Site Threshold Atoms, Stages One and Two"
+  status: completed
+  primary_bead: think-zvr3
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
+  - packing/campaign/resource-usage/agent-ac97342e4ca35e69e.yaml
+  - packing/campaign/resource-usage/agent-ab1bed639a6db6acc.yaml
+  - packing/campaign/resource-usage/agent-a9b644d4541443deb.yaml
+  - packing/campaign/resource-usage/agent-a4306d8d044623c7c.yaml
+  - packing/campaign/resource-usage/agent-a106b43671ede9c00.yaml
+  turns: 7825
+  tool_calls: 4205
+  tool_errors: 81
+  one_off_code: 514
+  wall_hours: 191.82
+  codex_receipts: []

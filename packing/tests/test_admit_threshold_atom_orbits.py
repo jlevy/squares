@@ -11,7 +11,7 @@ from typing import Any
 import pytest
 
 from devtools import admit_threshold_atom_orbits as admission
-from sqpack.fractional.threshold import ThresholdAtom
+from sqpack.fractional.threshold import WEIGHTED_VARIANT, ThresholdAtom
 
 
 def family(
@@ -149,3 +149,100 @@ def test_cli_serializes_exact_receipt_and_keeps_ceiling_proof_separate(
     }
     assert receipt["ceiling_proof"]["checked"] is False
     assert "K0--K3" in receipt["ceiling_proof"]["obligation"]
+
+
+def test_a_declared_input_kind_is_checked_rather_than_ignored() -> None:
+    """The receipt stamped its own kind from the start but read no declared one.
+
+    A record of another shape whose field names happen to line up was admitted without
+    complaint, which is an admission receipt attesting to an object nobody chose. The
+    sibling `devtools.admit_fixed_support_dual` has always checked.
+    """
+
+    atoms = atom_input([["1", "1"]], 1)
+    atoms["kind"] = "something-else/v9"
+    with pytest.raises(admission.AdmissionError, match="does not accept"):
+        admission.admit_records(family(), atoms)
+    # An undeclared kind stays readable: the retained inputs carry none.
+    assert "kind" not in atom_input([["1", "1"]], 1)
+
+
+def test_the_per_image_budget_is_a_token_budget() -> None:
+    """Five sites floor to one; their eight tokens must instead give budget two."""
+    points = [["1", "1"], ["1", "13/10"], ["13/10", "1"], ["7/10", "1"], ["1", "7/10"]]
+    atom = ThresholdAtom(
+        tuple((Fraction(x), Fraction(y)) for x, y in points), 4, Fraction(1), (2, 2, 2, 1, 1)
+    )
+    atoms = {
+        "outer_side": "2",
+        "atoms": [atom.to_record() | {"orbit_size": len(atom.orbit(Fraction(2)))}],
+    }
+    receipt = admission.admit_records(family(), atoms)
+    row = receipt["atom_admission"]["orbits"][0]
+    assert row["support_size"] == 5
+    assert row["token_count"] == 8
+    # The receipt stringifies every rational figure; this one is an integer budget.
+    assert row["per_image_budget"] == "2"
+    assert row["budget"] == str(2 * row["orbit_size"])
+
+
+def test_token_counts_without_their_variant_are_refused_by_the_admitter() -> None:
+    atoms = atom_input([["1", "1"], ["1", "13/10"]], 2)
+    atoms["atoms"][0]["multiplicities"] = [2, 1]
+    with pytest.raises(admission.AdmissionError, match="multiplicities"):
+        admission.admit_records(family(), atoms)
+
+
+@pytest.mark.parametrize(
+    ("weight", "admitted", "charge", "slack"),
+    [("1", True, "4", "0"), ("3/2", False, "6", "-2")],
+)
+def test_a_heavy_site_alone_reaches_the_threshold_in_every_orbit_image(
+    *, weight: str, admitted: bool, charge: str, slack: str
+) -> None:
+    atom = ThresholdAtom(
+        ((Fraction(1), Fraction(1)), (Fraction(1), Fraction(17, 10))),
+        2,
+        Fraction(1),
+        (2, 1),
+    )
+    images = atom.orbit(Fraction(2))
+    assert len(images) == 4
+    atoms = {
+        "outer_side": "2",
+        "atoms": [atom.to_record() | {"orbit_size": len(images)}],
+    }
+    result = admission.admit_records(family(weight), atoms)["atom_admission"]
+    row = result["orbits"][0]
+    assert row["image_charges"] == [weight] * 4
+    assert row["charge"] == charge
+    assert row["budget"] == "4"
+    assert row["slack"] == slack
+    assert result["admitted"] is admitted
+
+
+@pytest.mark.parametrize(
+    "entry",
+    [
+        {"variant": WEIGHTED_VARIANT, "weighted_points": []},
+        {"variant": None, "points": [["1", "1"]]},
+        {"variant": WEIGHTED_VARIANT, "points": [["1", "1"]], "multiplicities": []},
+        {"variant": WEIGHTED_VARIANT, "weighted_points": [["1", "1", True]]},
+        {"variant": WEIGHTED_VARIANT, "weighted_points": [["1", "1", 2.0]]},
+        {"variant": WEIGHTED_VARIANT, "weighted_points": [["1", "1", 2]], "points": []},
+        {"weighted_points": [["1", "1", 2]]},
+    ],
+)
+def test_malformed_weighted_sites_refuse_with_an_indexed_reader_error(
+    entry: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    atoms = {"outer_side": "2", "atoms": [entry | {"threshold": 1, "orbit_size": 1}]}
+    with pytest.raises(admission.AdmissionError, match="invalid atom 0"):
+        admission.admit_records(family(), atoms)
+    family_path, atoms_path = tmp_path / "family.json", tmp_path / "atoms.json"
+    family_path.write_text(json.dumps(family()), encoding="utf-8")
+    atoms_path.write_text(json.dumps(atoms), encoding="utf-8")
+    assert admission.main([str(family_path), str(atoms_path)]) == 2
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["atom_admission"]["admitted"] is False
+    assert "invalid atom 0" in receipt["error"]
