@@ -211,6 +211,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Workbench Stack Review and Cleanup Map](docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md) | dated review record | record | retained | — |
+| [Feature: Annealing as Search](docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md) | implementation plan | current | transient | — |
 | [Fractional Packing, Duality, and the Next $n=11$ Discriminators](docs/project/research/research-2026-09-10-x027-fractional-duality.md) | research synthesis | record | retained | — |
 | [X027: Seven Corner Marks, Contact Components, and Relational Helpers](docs/project/research/research-2026-09-10-x027-structural-helpers.md) | research synthesis | record | retained | — |
 | [Certificate Mechanisms After the $n=11$ Fractional Ceilings](docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md) | research synthesis | record | retained | — |

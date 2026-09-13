@@ -4,7 +4,8 @@
 
 **Author:** Joshua Levy, with Claude Fable 5.1 assistance
 
-**Status:** Draft, owner-directed; the open questions below await the owner.
+**Status:** Partially implemented; remaining video and capture work follows the
+2026-09-12 stack review and cleanup phases.
 Epic `think-hsdj` is created by this plan.
 It runs beside the atlas expansion (`think-0juv`,
 [session-099](../../../../packing/campaign/agent-sessions/session-099-atlas-expansion-to-324.md),
@@ -29,8 +30,37 @@ which the
 the page’s design system, which the vendored kpress owns; any claim about a packing,
 which stays with the frontier register; and, from 2026-09-08, the solver workbench Phase
 0 grew — the force law, the relationship graph, growth, the annealing dial, hand editing
-and the unbuilt Calibrate mode — which belongs to
+and the deferred Search mode (including calibration presets) — which belongs to
 [`X-025`](../../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md).
+
+## Current Phase Routing
+
+The
+[2026-09-12 stack review](../../reviews/review-2026-09-12-workbench-stack-architecture.md)
+is the current integration checkpoint.
+The spike findings below retain their dated context; they do not establish current
+solver validity or completion of the product.
+
+The [workbench plan](plan-2026-09-11-workbench-from-spike-to-product.md) is the
+top-level source of truth for product outcomes, implementation phases and release
+acceptance. It integrates the [annealing](plan-2026-09-11-annealing-as-a-search.md) and
+[shared-contract](plan-2026-09-09-packing-strategies-as-a-shared-language.md) repairs,
+then consolidates the live application and tools in top-level `packages/workbench/`. The
+review tracks findings and their resolution; this video plan supplies illustration and
+capture requirements under that sequence.
+
+Use the package’s Animate tab, deterministic clock and export adapters for illustrations
+and films. `think-ywj4`, `think-iqvm`, `think-883t` and `think-g0lh` own the shared
+timeline, source labels, trace playback and capture migration.
+The longer atlas-ascent film (`think-cttv`) remains a separately tracked content
+deliverable after those APIs; it does not require another animation engine.
+
+Historical revision probes and duplicate entry points are inventoried under
+`think-cqfc`. Preserve their unique checks before removal, and retain the notes and
+negative research results.
+Source removal is a cleanup phase, not part of this review’s documentation changes.
+Calibrate will be a Search preset sharing its run engine; it is not a separate
+application or solver.
 
 ## Overview
 
@@ -1061,7 +1091,9 @@ must settle before Phases 1 and 3 re-implement anything from it.
 
 - `think-dpmt` Test that a force law holds known optima still, which is the strongest
   first test of a law because it is a necessary condition needing no discovery.
-- `think-3yma` Build Calibrate, deferred until Pack and Animate settle.
+- `think-3yma` Add calibration presets to Search after the record, shared kernel,
+  package, and consumer-cleanup phases.
+  This supersedes the former Calibrate-tab scope.
 
 **Deferred defects, each with its reason recorded on the bead**: `think-7vlx` the stale
 mark-stroke needle, `think-esdm` the asymmetric contact test, `think-gjcl` the

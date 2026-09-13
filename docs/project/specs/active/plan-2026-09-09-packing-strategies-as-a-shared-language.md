@@ -1,651 +1,180 @@
 ---
 title: Packing Strategies as a Shared Language
-description: One declarative document describing a sequence of optimisation strategies, executed by the Python tools, animated by the workbench, and later run by the Rust engine
-author: Joshua Levy (github.com/jlevy) with Claude Opus 5 assistance
+description: Contracts for executable strategies, checked results, and illustrative animation across the workbench and research tools
+author: Joshua Levy with agent assistance
 ---
 # Feature: Packing Strategies as a Shared Language
 
-**Date:** 2026-09-09
-
-**Author:** Joshua Levy, with Claude Opus 5 assistance
-
-**Status:** Draft
-
-## Overview
-
-A **packing strategy** is a small declarative document naming a sequence of optimisation
-phases: what to do first, what to do next, and when to stop each one.
-Nothing hard-codes a sequence; a strategy is data, and the same document is executed by
-the Python search tools, animated by the workbench, and — once it earns the cost — run
-by the Rust engine.
-
-This is the companion to the
-[atlas video plan](plan-2026-09-07-known-best-atlas-video.md).
-That plan is about what a viewer *sees*; this one is about what a run *is*. The
-workbench becomes the place a strategy is watched and edited rather than a place where
-an animation style is chosen from a fixed menu.
-
-The shape comes from a measured decomposition.
-Finding a good packing splits into two problems that want different mechanisms:
-
-1. **Assembly.** Given a rough grouping or contact graph, put the squares into roughly
-   that arrangement — the right neighbours touching, not yet the right angles.
-2. **Tightening.** Given something roughly correct, squeeze it toward the smallest
-   container, letting every angle drift as it must.
-
-Both are measured below, and a single mechanism is good at one or the other, never both.
-
-## Goals
-
-- One JSON Schema for a strategy, in the repository’s existing `softschema` convention,
-  so a strategy validates identically in Python, JavaScript and Rust.
-- A mechanism registry that is the only place knowing how to run a phase, so a new
-  mechanism or a faster backend is one entry rather than a rewrite.
-- Strategies runnable headless for experiments and playable in the workbench for
-  inspection, from the same document and the same recorded trace.
-- Sweeps over *strategies*, not only over parameters: which sequence of strategies gets
-  closest, measured against the known records.
-
-## Non-Goals
-
-- Not a new schema convention.
-  The repository already validates `packing.squares:X/vN` contracts with `jsonschema`,
-  and ships `jsonschema-rs` for the Rust side.
-  Pydantic would be a third convention and a Python-first bias for a document whose
-  whole point is being language-neutral.
-- Not a rewrite of `sqsearch`. The Rust engine gains a strategy reader when the Python
-  executor has proved which phases are worth having.
-- Not a claim that any strategy reaches a record.
-  Nothing here has crossed 1.2 per cent above the best known at `n = 11`.
-
-## Background
-
-### What has been measured
-
-Every number below is from this branch and is reproducible from the tools named.
-
-**A penalty force cannot produce a packing at all.** Across 48 runs of the workbench
-physics, zero ended feasible; the least overlap anywhere was `0.0042` of a unit side,
-and thirteen times the steps moved it from `0.004578` to `0.004570`. A penalty settles
-where the springs balance the walls, and the residue there is pressure over stiffness.
-
-**A projection always does.** Divide and concur searched with relaxed-reflect-reflect
-ended on an exactly feasible packing in 28 of 28 runs, each re-checked out of process by
-`sqpack.verify`. At `n = 5` it reached `2.7082031` against the proved `2.7071068`.
-
-**Every mechanism tried is trapped by the trivial grid.** Each failed ratchet run used
-exactly 48 solver calls — eight step halvings at six attempts, no acceptance between.
-A grid of `k` squares in a row needs a container of exactly `k`, so the first tightening
-makes the whole topology infeasible at once, with no small repair.
-
-**Structure declared from a random start only costs.** Walking the constraint ladder
-cold at `n = 11`: nothing packed 4 runs of 4, three declared edges packed 2, seven
-packed 1, all fourteen packed none, and no rung ever reached tighter than 4 per cent
-above the record. The control settles it — the true graph and a *rewired* graph of the
-same size with wrong edges are indistinguishable, so only the constraint count was
-registering.
-
-**Because the search realises a contact graph degenerately.** Given `n = 11`’s graph and
-a slack container, all fourteen declared contacts are satisfied and the result is
-useless: every angle collapses to about 44 degrees and two *undeclared* squares end up
-`0.012` apart, essentially stacked.
-The graph is realised inside a 45-degree lattice.
-Contacts made and worst overlap were identical at weights 1, 2 and 3, so this is not a
-weighting problem.
-
-**Building the groups inverts that.** A face-to-face contact is unambiguous — shared
-orientation, centres one unit apart along a face normal — so the edge-edge subgraph can
-be walked and laid out.
-That builds 7 of 8 face contacts exactly at `n = 11` and 11 of 13 at `n = 17` before any
-relaxation. Handing it to the same solver with the same declared contacts at the same
-sides, changing only where the run starts:
-
-| side | excess | random start | built groups | face contacts kept |
-| ---: | ---: | :---: | :---: | :---: |
-| 4.264792 | +10 % | 1/8 | **5/8** | 8 of 8 |
-| 4.109709 | +6 % | 2/8 | **4/8** | 8 of 8 |
-| 4.032167 | +4 % | 2/8 | **4/8** | 8 of 8 |
-
-**And tightening is a separate problem that construction does not touch.** At +2 per
-cent both arms are 0 of 8. That wall belongs to the *protocol*, not the search: a
-fixed-side cold solve has no continuation, while the container ratchet, which tightens
-gradually and carries each packing forward, had already reached `3.9234` (+1.2 per
-cent). The two are not comparable, which is exactly why a strategy needs more than one
-phase.
-
-### What the records look like, which constrains what a phase may assume
-
-- **Contact kinds carry the most information per bit.** An edge-edge contact pins a
-  pair’s relative orientation to a quarter turn without naming an angle; a corner
-  contact joins nothing.
-  `n = 11` is 8 edge-edge of 14, `n = 17` is 13 of 24, `n = 26` is 42 of 50.
-- **Orientations at the records are exact, not approximate.** Allowing half a degree,
-  two degrees or five degrees collapses the angle-class count on only one of ten records
-  tested.
-- **Perturbed faces are real but not universal.** At `n = 5, 10, 11, 17, 26, 40` every
-  corner contact joins squares 36 to 45 degrees apart — genuinely tilted.
-  Slipped faces appear at the untidy records: seven of `n = 29`’s corner contacts sit at
-  0.3 to 4.5 degrees, and two of `n = 37`’s at 2.9. A phase that assumes a perturbation
-  will find none at 11 and 17.
-- **Constraints must be bands, never equalities.** Declared exactly, the record becomes
-  a *repelling* fixed point: from Trump’s own `n = 11` packing with its contacts
-  declared, the drift is 0.0000 at 200 steps, 0.0012 at 1,000 and 0.2839 at 4,000,
-  deterministically, at every relaxation above 0.1. Exact tangency makes the constraint
-  sets meet non-transversally, the degenerate case the flow-limit result excludes.
-
-## Design
-
-### Approach
-
-A strategy is a list of phases.
-Each phase names a mechanism, carries that mechanism’s own parameters, and declares when
-it stops. The executor threads one state — poses, container side, and the declared
-structure — from phase to phase, and records a trace so the same run can be replayed.
-
-```yaml
-softschema:
-  contract: packing.squares:PackingStrategy/v1
-strategy:
-  name: assemble-then-tighten
-  n: 11
-  phases:
-    - mechanism: assemble
-      structure: {source: record, use: face-contacts}
-      side: {relative_to: record, factor: 1.12}
-    - mechanism: project
-      constraints: {contacts: face-contacts, band: 0.02, weight: 2.0}
-      relaxation: 0.1
-      until: {feasible: true, or_steps: 6000, or_stalled_for: 2000}
-    - mechanism: ratchet
-      constraints: {contacts: face-contacts, band: 0.02, weight: 2.0}
-      schedule: {start: 0.05, halve_on_failure: true, floor: 1.0e-3}
-      until: {stalled_for: 24}
-    - mechanism: relax
-      constraints: {band: 0.05, weight: 1.0}
-      until: {stalled_for: 2000}
-```
-
-The `structure` block is the constraint ladder, and its rung is a field rather than a
-separate code path: `partition`, `contact-graph`, `contact-graph-with-types`,
-`with-wall-contacts`. A strategy says how much it was told, which is what makes a
-comparison between strategies honest.
-
-### Components
-
-| Component | What it is |
-| --- | --- |
-| `packing/strategies/packing-strategy.schema.yaml` | What to do. Draft 2020-12, `oneOf` on `mechanism` so each phase validates against its own parameters. |
-| `packing/strategies/packing-animation.schema.yaml` | What happened. Frames of poses and a container side on logical time 0 to 1, what the colours should mean but never the colours, and both reference bounds so a gap bar draws without consulting a register. |
-| `packing/strategies/lab-components.yaml` and its schema | The lab’s parts and what each reads. `environment` is load-bearing: seven are `static` and embed in a scriptless SVG, two are `interactive` and are excluded from the export by construction. |
-| `devtools/packing_strategy.py` | Loads, validates, executes. Holds the mechanism registry — the one table that knows how to run a phase. |
-| `devtools/known_structure.py` | Already built. Reads any of the 324 witnesses and yields a rung: contact edges, contact kinds, wall contacts, angle classes, thinned and rewired controls, and the constructive face assembly. |
-| `devtools/divide_and_concur.py`, `run_projection_ratchet.py` | Already built. The `project` and `ratchet` strategies. |
-| The workbench template | Reads a strategy and a trace, plays the phases with their own labels, and lets a phase be edited and re-run. |
-| `sqsearch` | Later. Gains a strategy reader through `serde`; `jsonschema-rs` is already a dependency. |
-
-### The registry is the seam
-
-A mechanism is one entry: a name, a parameter schema fragment, and a function from state
-to state. Adding the LP quench, an annealing phase, or a Rust-backed `project` is an
-entry rather than a change to the executor, and the workbench discovers the available
-phases from the schema rather than from a hard-coded menu.
-
-That is also how the performance path stays honest.
-A high-performance backend is a *different implementation of the same phase*, selected
-by a field, so a strategy can be run in Python and in Rust and the two compared on the
-same document.
-
-### API Changes
-
-`solve()` gains an optional trace sink, already added, so a run can be replayed frame by
-frame. `ratchet()` already accepts `start_from`/`start_side`, which is what lets one
-phase hand its arrangement to the next.
-
-## Implementation Plan
-
-### Phase 1: the contract and the Python executor
-
-- [ ] Write `packing-strategy.schema.yaml` with the four phases that exist today —
-  `assemble`, `project`, `ratchet`, `relax` — and the structure-ladder rungs as an enum.
-- [ ] Build `devtools/packing_strategy.py`: load, validate, execute, record a trace, and
-  emit a run record naming the strategy, the rung, the side reached and the excess over
-  the record.
-- [ ] Port the four measurements above into strategies, and check each reproduces its
-  number. A strategy that cannot restate a result already measured is not yet a
-  description of it.
-- [ ] Sweep strategies rather than parameters at `n = 11` and `n = 17`, with the rewired
-  and thinned controls beside every structured strategy.
-
-### Phase 2: the workbench plays a strategy
-
-- [ ] Load a strategy and its trace; play phases in sequence with per-phase labels and
-  the container side shown against the record and the proved lower bound.
-- [ ] Edit a phase and re-run, so a strategy can be explored by hand — which is the
-  workbench’s original argument, since hand construction found 21 of the 36 non-grid
-  cases below 100.
-- [ ] Export an edited strategy back out as the same document the headless tools read.
-
-### Phase 3: the atlas ascent, one square at a time
-
-A single directed animation from `n = 1` to `n = 100`, adding one square per step and
-landing each time on the retained record.
-Directed on purpose: it is not a search, it uses the known endpoints, and the point is
-that it is clean, legible and always arrives.
-
-Every frame of it comes from a `guide` phase, so **every frame is labelled guided and
-none of it is a search result**. That rule is not decoration.
-The same instruments that make this animation possible are the ones used to report what
-a search reached, and the two must never be confusable.
-
-**The beat, per step from `n` to `n + 1`.** Not a fade.
-The step should look like the packing being *found*: the new square arrives, everything
-jiggles, and the arrangement settles into the optimum.
-Most of that should actually be true.
-
-| beat | what happens | honest? |
-| --- | --- | :---: |
-| **Hold** | the packing at rest, labelled with `n`, its side, whether it beats the grid | — |
-| **Enter** | the new square arrives from outside the container edge | — |
-| **Open** | the container grows to whichever side is larger | — |
-| **Settle** | the projection runs for real, unguided, from the arrangement it inherited | **yes** |
-| **Close in** | the guided phase takes it the rest of the way onto the record | no |
-| **Land** | the container contracts to the new record’s side | — |
-
-**The fair stretch and the thumb on the scale, kept apart and both reported.** *Settle*
-is an ordinary `project` phase with no target: whatever it reaches, it reached.
-*Close in* is a `guide` phase, and every frame of it carries `guided: true` so a
-renderer can show the handoff rather than hide it.
-What the animation then shows is a plausible route to the optimum, with the point where
-plausibility ran out marked on it.
-
-That handoff is worth measuring rather than merely admitting, and it is the same number
-the campaign already reports: **how close the honest phase got before the guide took
-over**. Per step, that is one figure -- the excess over the record at the end of
-*Settle* -- and across `n = 1..100` it is a curve.
-A step where the physics arrives on its own has an empty guided stretch and should say
-so; a step where it does not is exactly as interesting, and the film is better for
-showing which is which.
-
-**How much fair time to give it** is a dial, not a constant.
-Too little and every step is mostly thumb; too much and the film is long and the physics
-visibly stalls, since the measured cliff is around two per cent above a record and no
-budget yet crosses it.
-The strategy document carries the budget, so the answer is swept rather than guessed.
-
-**The defect this beat exists to fix, stated plainly.** A guided transition between two
-*different* `n` is smooth and lands exactly -- residual `0.0004` to `0.0007`, largest
-per-frame motion `0.013` to `0.016` -- but squares pass through each other on the way:
-peak overlap `0.83` at 10 to 11, `0.49` at 11 to 12, `0.35` at 16 to 17, `0.86` at 17 to
-18, with roughly 100 frames of 126 carrying some overlap.
-Between two arrangements of the *same* `n` the same machinery is perfectly clean -- peak
-overlap `0.0000` across every frame -- so the transit overlap is not the mechanism.
-It is that adding a square is a genuine rearrangement with nowhere to do it.
-**Open** and **Close** give it somewhere.
-
-**What has to be built.**
-
-- [ ] A `container` mechanism, so the side is a phase rather than a side effect of
-  another one. **Open** and **Close** are that mechanism run twice with different
-  targets.
-- [ ] Correspondence across a change of `n`: 100 squares matched against 101 targets.
-  The rectangular assignment already handles the shape; what it needs is a rule for
-  which square is *new*, and the honest one is whichever target the assignment leaves
-  over.
-- [ ] The ascent as one strategy document per step, generated for `n = 1..100`, so the
-  whole film is data and a single step can be re-run and re-watched on its own.
-- [ ] Capture end to end: play the trace in the workbench’s Animate tab, record it, and
-  write a receipt naming every strategy document and the record each step landed on.
-- [ ] A guard in the capture path that refuses to export a frame from a guided phase
-  without its label.
-
-**What is deliberately not in it.** No search.
-No claim about any `n`. The ascent shows what is known, and the
-[video plan](plan-2026-09-07-known-best-atlas-video.md) owns how it looks; this phase
-owns only that each step is a correct, clean, repeatable transition between two retained
-packings.
-
-### Phase 4: use the renderer that exists, and lift the two limits that stop it
-
-The first draft of this phase said to extract a renderer.
-That was wrong, and checking before building is what caught it: `sqpack.render` **is**
-the renderer -- `render_packing_svg` with its own colour, style, contact and number
-modules -- and `sqpack.render.motion` already emits **CSS-keyframe animated SVG** from a
-`PackingTrajectory`, which is very close to the embeddable artifact this phase wants.
-
-What is actually wrong is that the prototypes bypassed it.
-The v1 slideshow copies the poster’s colours and draws its own panels; the v2 workbench
-embeds pose JSON and draws in JavaScript at run time.
-The motion lab uses `sqpack.render.numbers` and little else.
-So the defect is not a missing renderer, it is four surfaces declining to share the one
-that exists.
-
-**Two restrictions block reuse, and they are stated in the code rather than implied.**
-`validate_translation_only_trajectory` refuses a trajectory whose container side
-changes, and refuses any frame where a square’s angle differs from its final angle --
-*“trajectory rendering does not yet support rotation”*. Both are fatal here.
-Squares rotate: six of `n = 11`’s fourteen contacts join squares 40.2 degrees apart.
-And the atlas ascent changes the container at every step, by construction.
-
-**So the work, in order.**
-
-- [x] Lift rotation. Done: `validate_motion_trajectory` (renamed from
-  `validate_translation_only_trajectory`), `square_keyframes` emitting `rotate` beside
-  `translate`, and `short_quarter_turn` for the choice of which way round — squares have
-  a 90-degree symmetry, so the short way is never more than 45 degrees.
-- [x] Lift the constant-container restriction, so a trajectory may resize.
-  Done, and it is the `container` mechanism from Phase 3 seen from the rendering side.
-- [x] Feed a `PackingStrategy` trace into `PackingTrajectory`. Done:
-  `devtools/animation_from_trace.py`. A frame that *is* a retained record is built the
-  way the atlas builds it, from the witness and with no pose attached — attaching a
-  float pose changes what the renderer draws, because full-side contact shading needs
-  two edges exactly parallel and a float angle is not exactly anything.
-- [x] Then the embeddable component: a trace in, one self-contained animated `.svg` out,
-  no build step and no JavaScript, so it drops into the explainer page or any other.
-  Done: `devtools/export_animation_svg.py`. **This first, not a whole embedded motion
-  lab** -- a component that can be dropped in is worth more than a lab that has to be
-  hosted, and it is the smaller thing.
-- [ ] A simplified interactive lab on the explainer page comes after, once there is
-  something worth playing with.
-- [x] The video path, at a fixed size and rate, then an encoder, then a receipt.
-  Done: `devtools/capture_video.py`, though **from the workbench page rather than from a
-  trace** -- which is the stronger claim, since a captured frame is then the frame the
-  page draws rather than a second rendering that agrees.
-  Measured end to end at 1080p / 24 fps: 59 ms per frame including the encode, against
-  the 42 ms per frame the capture alone was measured at.
-- [ ] A guard on both exporters refusing a frame from a `guide` phase without its label.
-
-### Three ways of presenting this, and what each one costs
-
-The same work has three audiences, and they need different subsets of it.
-Naming them apart is what keeps the component split honest.
-
-|  | hosted workbench | embedded animation | standalone video |
-| --- | --- | --- | --- |
-| where | `/workbench/` on Pages | the explainer, or anyone’s page | a file to upload |
-| components | all nine | the seven `static` ones | the seven `static` ones |
-| script | yes | **none** | none at render time |
-| runs the mechanisms | **yes, live** | no, replays frames | no, replays frames |
-| what it consumes | a `PackingStrategy` | a `PackingAnimation` | a `PackingAnimation` |
-
-The second and third are the same path twice: static components, a finished animation,
-no mechanism executed.
-One emits SVG and the other emits frames for an encoder.
-That is why the embed is the thing to build first -- the video is nearly free once it
-exists.
-
-**The first is different, and this is the part the plan had not pinned down.** GitHub
-Pages serves static files and runs no backend, so a hosted workbench that lets a visitor
-*change* a setting and see what happens has to execute the mechanisms **in the
-browser**. The current prototype already does -- `optimizeStep`, `annealState` and the
-force law are JavaScript in `template.html` -- so nothing needs inventing.
-But it means there are two implementations of the same mechanisms, in two languages, and
-they will drift.
-
-**That is exactly what the shared contract is for**, and it is the strongest argument
-for having written one.
-`PackingStrategy` is the format both read: the Python executor runs a document
-headlessly for the campaign, the JavaScript runs the same document live for a visitor,
-and the two can be checked against each other by running one document through both and
-comparing the animation each produces.
-Without the contract, two implementations of “the physics” is a liability; with it, it
-is a testable agreement.
-
-- [ ] A JavaScript mechanism registry mirroring `MECHANISMS`, reading the same schema,
-  so the hosted workbench executes strategy documents rather than its own hard-coded
-  modes.
-- [ ] A conformance check: one strategy document, both implementations, and the two
-  `PackingAnimation` outputs compared within a declared tolerance.
-  This is the test that keeps the Rust backend honest later, for the same reason.
-
-### Phase 5: publishing, which is nearly free
-
-**Yes, and most of it already runs.** `.github/workflows/pages.yml` builds and deploys
-today, the repository is public, and the site lives at
-`https://jlevy.github.io/squares/`. `packing/site/` is gitignored, so the page is
-rendered in CI and deployed rather than committed -- which is the same rule the spikes
-follow, and the reason nothing here needs a policy change to publish multi-megabyte
-artifacts.
-
-**The explainer keeps its URL, and that is a requirement rather than a convenience.** It
-is already published at `https://jlevy.github.io/squares/` and may be linked from
-elsewhere, so nothing here moves `site/index.html`. Everything new is a *sibling
-directory* beneath it, which leaves the existing page byte-identical and its address
-untouched.
-
-`upload-pages-artifact` takes `packing/site` whole, so **a subdirectory is a URL**:
-
-| path | what | size today |
-| --- | --- | ---: |
-| `/` | the explainer | 1.1 MB |
-| `/workbench/` | the workbench, its own URL | 3.1 MB |
-| `/atlas/` | the slideshow | 3.5 MB |
-| `/embed/n-011.svg` | one embeddable animation per case | small |
-
-About eight megabytes against a soft limit of a gigabyte, so size is not the question.
-
-**Three existing constraints decide the work, and all three are already enforced.**
-
-*Self-containment.* The renderer refuses a page that references anything outside itself
--- no external script or stylesheet, no CSS import, no `url()` that is not a data URI.
-The workbench is already one self-contained file, and the embeddable SVG is designed to
-be, so both clear it.
-It is also the reason the embed can be dropped into someone else’s site at all.
-
-*Determinism.* The build renders twice and fails unless the two agree byte for byte.
-Both spike generators already assert byte-identical regeneration, so this costs nothing
-to adopt and is what makes a published animation reproducible rather than merely
-repeatable.
-
-*The path filter.* The workflow only rebuilds when an input changes, and
-`test_the_pages_filter_covers_every_render_input` compares that filter against
-`RENDER_INPUTS` declared in the renderer.
-**A new generator must declare its inputs**, or the test fails and names what is
-missing. That is a constraint worth having: it is what stops a published page from going
-stale when the data under it moves.
-
-**What has to be built.**
-
-- [x] A `site/workbench/` build step, writing into the same tree the artifact already
-  uploads and never touching `site/index.html`. **Built as a step inside `build`, not as
-  a separate job**: the artifact is uploaded from that job, so a separate job would have
-  to hand its output back through a second artifact round trip to be included at all.
-  The ordering gives the same protection — it runs after every explainer check, so a
-  workbench failure stops the deploy without ever having touched the explainer.
-  It runs on pull requests too, where nothing deploys, so a broken build fails review.
-  `site/atlas/` is still to do.
-- [ ] A link from the explainer to `/workbench/`, which is the only change the existing
-  page needs and the reason to give the workbench a stable address at all.
-- [x] `RENDER_INPUTS` for the workbench generator and its data, and both `paths:` lists
-  extended to match. Two tests hold it there, the explainer’s comparison asked of the
-  other page: `test_the_pages_filter_covers_every_workbench_input` and
-  `test_every_declared_workbench_input_exists`. The slideshow generator still needs its
-  own.
-- [ ] The embed directory, one SVG per case, generated from traces.
-
-**The one real caveat.** A 3.1 MB single file is a slow first load on a phone, and the
-workbench carries all 323 transitions whether or not a visitor opens one.
-Splitting the data from the page would fix it and would break self-containment, so if it
-matters the answer is a smaller default payload -- the twenty-five-pair build already
-exists at 714 kB -- rather than an external fetch.
-
-### Phase 6: the workbench stops being a prototype
-
-The page carries a banner calling itself a prototype, and the banner is honest: it is a
-retained spike, excluded from the lint floor, run by hand, and drawing with its own copy
-of the palette. It is also, now, the thing the owner uses and the thing the video is
-captured from. Those two facts cannot both keep being true.
-
-**What makes it a spike is five specific things, not its age**, and each is a chunk of
-work that can land on its own:
-
-**A. One source for the palette.** The page has its own `PALETTE` and `SHADES` tables,
-copied from `sqpack/render/style.py` and kept in step by hand.
-`compare_palette.py` measures that they still agree, which is a check standing in for a
-guarantee. The build should emit them into the page from `sqpack.render.style` and
-`sqpack.render.color` at generation time, so a palette change reaches the workbench the
-way it reaches every other drawing.
-The same for the shade ramp and the angle-class contract.
-
-**B. The floors.** `build_candidate.py`, the checkers and the measurement tools are
-outside ruff and BasedPyright.
-The page’s five thousand lines of JavaScript have no checker at all.
-Bringing the Python under the floors is mechanical; the JavaScript needs a decision, and
-the honest options are a linter in the build or extracting the logic into modules the
-build inlines.
-
-**C. The gates run where gates run.** `check_workbench.py`, `check_revision6.py`,
-`check_revision7.py` and `test_candidate.py` are run by hand, which means they are run
-when someone remembers.
-They belong on the pull-request surface with the rest, under `packing-validate`, with
-the trajectory-cost ceiling among them.
-
-**D. It reads the contracts.** The page embeds its own pose JSON and hard-codes its
-modes. Phase 2 is what makes it read a `PackingStrategy` and play a `PackingAnimation`,
-and until it does, the contract is a format nothing consumes.
-
-**E. It lives where the code lives.** The generator is a script run by path; the
-instruments (`compare_palette.py`, `grade_motion.py`, `measure_law.py`,
-`measure_greens.py`) sit beside it in the spike tree.
-They become `devtools` modules run with `python -m`, and the banner comes off — which
-should be the *last* step, because the banner is what makes the current state honest.
-
-### The deployment is already the real one, and the conversion does not touch it
-
-Worth saying plainly, because “still a spike” and “not really deployed” sound like the
-same problem and are not.
-
-**What reaches a reader is already the path we want.**
-`devtools/build_workbench_site.py` writes the page into `site/workbench/`;
-`.github/workflows/pages.yml` builds it with `--check` before the artifact upload, so it
-has to reproduce itself byte for byte and pass its own self-containment check; Pages
-serves `packing/site` whole, so it lands at `/workbench/` while the explainer keeps `/`;
-and the workflow’s path filter names the page’s inputs, held there by two tests.
-None of that is a prototype.
-Converting the spike changes what *feeds* that pipeline, not the pipeline.
-
-So the conversion is a swap behind a stable seam:
-
-|  | today | after Phase 6 |
+**Updated:** 2026-09-12, against PR #155 head `6e191a35`, stacked on PR #125.
+
+**Status:** Python executor and SVG adapters exist; shared browser execution and
+semantic conformance are incomplete.
+Contract repairs precede package extraction.
+
+**Workflow:** W7 pipeline-improvement.
+The [stack review](../../reviews/review-2026-09-12-workbench-stack-architecture.md)
+records the findings and cross-plan sequence.
+
+## Ownership and Current State
+
+This plan owns what a strategy requests, what a run records, and how those records reach
+a renderer. The workbench plan is the governing source for final product outcomes,
+implementation order, and release acceptance.
+Local phases here specify the contract work within that sequence, not an alternative
+roadmap. The [workbench plan](plan-2026-09-11-workbench-from-spike-to-product.md) owns
+the application and standalone package; the
+[annealing plan](plan-2026-09-11-annealing-as-a-search.md) owns benchmark validity,
+statistics, and the deferred Search mode; the
+[video plan](plan-2026-09-07-known-best-atlas-video.md) owns illustration design and
+capture deliverables.
+
+| Surface | Present at the reviewed head | Remaining work |
 | --- | --- | --- |
-| the page’s source | `atlas/.../v2-transitions/template.html` | a template under `devtools/templates/` |
-| its generator | `build_candidate.py`, run by path | `devtools/build_workbench.py`, run with `python -m` |
-| its palette | a hand-kept copy of `SQUARE_HUE_PALETTE` | emitted from `sqpack.render.style` |
-| its instruments | `compare_palette.py`, `grade_motion.py`, … beside it | `devtools` modules |
-| its gates | run by hand | steps in `packing-validate` |
-| **what publishes it** | **`build_workbench_site.py` → `site/workbench/` → Pages** | **unchanged** |
+| Strategy description | `packing/strategies/packing-strategy.schema.yaml`, examples, and `devtools.packing_strategy.MECHANISMS` | Enforce accepted fields and record the complete executed configuration. |
+| Python mechanisms | Scatter, grid, assemble, project, ratchet, relax, guide, container | Extract reusable algorithms from devtools; reject unsupported capabilities. |
+| Animation interchange | `packing-animation.schema.yaml`, `animation_from_trace`, `export_animation_svg` | Validate geometry and provenance before assigning evidence; enforce time, identity, and cardinality. |
+| Renderer | `sqpack.render` supports rotation and changing container side | Reuse its model, palette, and evidence distinctions through browser adapters. |
+| Capture | `devtools.capture_video` captures the workbench page | Trace playback and page simulation are distinct paths; receipts must identify the path used. |
+| Browser | Workbench and Motion Lab have their own runtime models | Workbench does not yet execute the shared strategy schema. |
+| Rust | Search engine and experimental controls exist | No shared strategy executor is delivered by this stack. |
 
-**The first seam is already cut.** The panel’s mathematics is set by
-`render_explainer.katex_css` and guarded by `render_explainer.EXTERNAL_REFERENCE` — the
-spike now *imports project code* rather than carrying its own copy of it, which is the
-direction every remaining chunk goes in.
-It also found the thing that made the spike unimportable: `build_candidate.py` held an
-absolute path to one worktree, so it only ran from that checkout.
+A schema file does not establish agreement among implementations.
+In particular, `structure.source` accepts `record`, `given`, and `random`, while the
+Python executor loads the retained record for every nonempty structure request.
+Browser and Rust strategy readers remain future work.
 
-**The order matters and the banner is the marker.** A through D can land in any order
-and each is independently checkable; E is last, because taking the prototype banner off
-before the rest would make the page claim something that is not yet true.
+## Phase 1: Repair the Contracts Before Reuse
 
-### Phase 7: grade the motion, not just the answer
+**Beads:** `think-sdmi` and `think-karf`. These precede standalone package extraction,
+`think-zisr`.
 
-**A physics configuration is graded on both halves of what it is asked to do, and
-neither alone.** A run graded only on where it ends up can thrash across the stage and
-still score well, because the lock-in carries whatever is left; one graded only on the
-journey can glide smoothly to somewhere wrong.
+### Checked results and imported animation
 
-`grade_motion.py` reports the two families separately and combines them only at the end,
-with the weights written down:
+`animation_from_trace.py` treats omitted `feasible` as true and creates a passing
+numerical receipt. An import containing two coincident squares consequently exports with
+`numerically-checked` metadata.
+Imported claims must not create their own evidence.
 
-| family | measure | what it catches |
-| --- | --- | --- |
-| outcome | `residual`, `mean`, `turn` | the run did not arrive, and the lock-in is carrying it |
-| motion | `wander` | a square strays from the straight line between its ends — thrashing, as against travel |
-| motion | `jerk` | the worst single-frame step — a jump, as against a glide |
-| motion | `overlap` | squares passing through each other, which is the physics failing rather than looking bad |
+- Validate finite coordinates, active square count, container side, pair separation, and
+  wall containment before assigning numerical evidence.
+- Keep unverified frames illustrative or candidate.
+  Record the actual validator, arithmetic, tolerance, and result with checked frames.
+- Distinguish raw simulation, repaired geometry, retained witness, and guided
+  illustration. A repaired score belongs to the repaired arrangement.
+- Validate retained-record references; a reference must not silently replace unrelated
+  supplied geometry with a known answer.
+- Preserve square identity, each frame’s own side, and monotone time.
+  Adding a square needs explicit presence/arrival semantics.
+  Padding an illustration with coincident waiting squares must not preserve a claim of
+  feasibility.
 
-Measured over eight matched steps at the shipped defaults: residual 0.044 sides, turn
-1.16 degrees, wander 0.696, jerk 0.429, overlap 0.157, grade 0.292. **The outcome half
-is solved and the motion half is not**, which is a finding the combined number alone
-would have hidden.
+Acceptance includes coincident squares, wall escape, omitted feasibility, nonfinite
+poses, mismatched counts, and a retained valid packing as a positive control.
+SVG and browser imports must refuse false evidence consistently.
 
-Ranking six configurations by grade puts `physics, anneal 0` first at 0.302 and every
-`bodies` setting last, and says the annealing dial buys nothing the grade values — the
-shake was there to reach the record, and the tightening phase now does that.
-That is exactly the use the instrument is for: picking physics and annealing parameters
-against a number rather than against an impression.
+### Executable strategy semantics
 
-**The method is the point, and it generalises.** Sampling frames through a run and
-measuring how the arrangement approaches the optimum is how the physics gets understood,
-not only how the film gets tuned.
-Every parameter this project can turn — the force law, the wall law, the annealing dial,
-the tightening, the container’s breath — has a grade attached to it now, and a sweep
-over them is the same instrument run more times.
+- Reject `source: given` and `source: random` until implemented, or implement them with
+  explicit inputs. Record the source actually used.
+- Enforce exactly `n` active poses at solver boundaries.
+  A grid request whose side is too small must fail or return an explicitly infeasible
+  arrangement of all `n` squares; it must not drop squares to fit.
+- Audit admitted phase fields against their consumers, including stop conditions,
+  targets, structural hints, and trace options.
+  Unsupported choices fail before a run.
+- Resolve the mismatch between the schema’s promised generated seed and the executor’s
+  default zero. Record the actual seed, parameters, implementation, source revision,
+  termination reason, and work counters; a strategy name cannot reproduce a run.
+- Preserve use of guidance or retained answers through downstream phases.
+  A relax phase cannot turn a guided start into an independent discovery.
+- Keep intermediate container sizes in traces.
+  The executor currently overwrites them with the final phase side when it constructs
+  animation frames.
 
-## Implementation Map
+Acceptance is a small matrix of schema-valid requests that either execute as declared or
+produce an explicit unsupported-capability error, plus adapter round trips.
+Tests check behavior rather than the spelling of source code.
 
-Every row names something that exists unless marked new.
-Ordered by dependency: nothing below can be checked until the row above it works.
+## Phase 2: Extract Algorithms and Adapters
 
-| # | bead | file | function or object | change |
-| --- | --- | --- | --- | --- |
-| 1 | `think-cdvd` | `src/sqpack/render/motion.py` | `validate_translation_only_trajectory` | Split. Keep poses-exist and non-decreasing `logical_time`; drop the two clauses rejecting rotation and a changing side. Rename to `validate_trajectory`; both motion-lab renderers move with it. |
-| 2 | `think-cdvd` | same | `square_keyframes` | Append `rotate(D deg)` after the existing `translate`, `D` being the frame’s angle less the final angle wrapped to the short way round a quarter turn. |
-| 3 | `think-cdvd` | same | `append_square_motion` | Set `transform-box:fill-box;transform-origin:center` on the node, or CSS rotates the square about the viewport origin and it swings instead of spinning. |
-| 4 | `think-cdvd` | same | `container_keyframes` | Emits only `opacity:1` today. Add a scale track, `scale(side_final / side_frame)`, on a wrapping group so box and squares move together and square offsets stay in the units row 2 uses. |
-| 5 | `think-cdvd` | `tests/test_render_motion.py` (new) | — | A rotating two-square trajectory and a resizing one, each asserting the emitted CSS contains the rotation and scale it should. Both are cases the current validator rejects, so they fail before rows 1 to 4 and pass after. |
-| 6 | `think-9jqn` | `devtools/animation_from_trace.py` (new) | `trajectory_from_animation` | One function, `PackingAnimation` document to `PackingTrajectory`: `[x, y, theta]` to `SquareGeometry` with a pose, `side` to `container_side`, `t` to `logical_time`, `guided` and `feasible` into the frame label so no renderer can drop them. |
-| 7 | `think-9jqn` | `devtools/export_animation_svg.py` (new) | `export_svg` | Trace in, one scriptless `.svg` out: `render_packing_svg` for the final frame, `append_motion_styles` for the motion. Refuses when any frame has `guided` and no label component is present. |
-| 8 | `think-dekm` | `devtools/packing_strategy.py` | `run`, `main` | Emit a `PackingAnimation` document rather than today’s ad-hoc `{"frames": [...]}`, with `guided` set per frame from the phase that produced it. |
-| 9 | ~~`think-pfn9`~~ | `devtools/packing_strategy.py` | `MECHANISMS`, `_run_container` | **Done.** A `container` mechanism, so the side is a phase; centres scale about the box’s middle so a square against a wall stays against it. *Open* and *Close* are it run twice. |
-| 10 | ~~`think-5hd4`~~ | `devtools/run_projection_ratchet.py` | `match_targets` | **Done.** Unequal counts accepted, returning `(ordered, spare)`: the targets in travel order plus the indices the rectangular assignment left over, which is the rule for which target is new. |
-| 11 | `think-cttv` | `devtools/build_ascent.py` (new) | `ascent_strategies` | One strategy document per step for `n = 1..100`, six phases each, so a single step re-runs and re-watches alone. |
-| 12 | `think-e74w` | same | `fair_reach` | The excess over the record at the end of *Settle*, per step, into the receipt beside the film. |
-| 13 | `think-zvor` | `devtools/capture_video.py` (new) | `main`, `_capture`, `_encode` | **Mostly done, by a different route.** Frames come from the *built workbench page* driven through its own clock, not from a trace: a captured frame is the frame the page draws. Declared size (1080p or 4K) and frame rate, ffmpeg to H.264, and a receipt naming the page by digest and, per step, the record it aimed at and whether it landed. Measured on `n = 2..8` at 24 fps: 476 frames, 19.8 s, 1.2 MB, 28 s end to end, all seven on the record. **Remaining:** the receipt names records rather than strategy documents, and there is no guide-phase label guard, both because the page does not yet play a `PackingStrategy` (row 14). |
-| 14 | `think-6qxx` | the workbench template | a JS `MECHANISMS` | Mirror the Python registry, reading the same schema, so the hosted page executes documents rather than hard-coded modes. |
-| 15 | `think-6qxx` | `tests/test_mechanism_conformance.py` (new) | — | One strategy document through both implementations; the two animations compared within a declared tolerance. |
-| 17 | `think-fk8h` | `build_candidate.py`, the page’s `PALETTE` / `SHADES` | the colour tables | Phase 6A. Emit them from `sqpack.render.style` and `sqpack.render.color` at generation time, so there is one source rather than two kept in step by hand. |
-| 18 | `think-vi3v` | the spike’s Python and its JavaScript | the exclusions | Phase 6B. Drop the lint exclusion and fix what falls out; decide what checks the page’s script. |
-| 19 | `think-tmqs` | `src/sqpack/cli/validate.py` | a new step | Phase 6C. `check_workbench.py` on the pull-request surface with a declared budget. |
-| 20 | `think-g0lh` | the spike tree, `devtools/` | the generator and the instruments | Phase 6E. They become `devtools` modules; the prototype banner comes off last. |
-| 21 | ~~`think-ovei`~~ | `grade_motion.py` (new) | `grade`, `measure` | **Done.** Phase 7. Outcome and motion graded separately and combined with declared weights; six configurations ranked. |
-| 16 | ~~`think-n0e0`~~ | `.github/workflows/pages.yml`, `devtools/build_workbench_site.py` | `RENDER_INPUTS`, both `paths:` lists | **Done.** A `site/workbench/` build step inside `build`, running `--check` so the page must reproduce itself and pass its own self-containment check before the upload; `site/index.html` is untouched. Its inputs are declared and the filter covers them, held by two tests of its own. |
+**Depends on:** Phase 1 and the annealing plan’s record repairs.
 
-Rows 1 to 5 are the only ones with no prerequisite, and nothing is watchable until they
-land.
+The standalone package will live at `packages/workbench/` (`think-zisr`). The workbench
+plan owns its tree and build acceptance.
+Its boundary with Python is:
 
-## Testing Strategy
+- Browser and Node consumers import the same JavaScript simulation modules.
+  They accept plain state/configuration and produce state/events without a DOM.
+- Python algorithms belong under `packing/src/sqpack/`, following its existing
+  `research`, `render`, and `motion_lab` boundaries.
+  Extract reusable functions from `divide_and_concur.py`, `run_projection_ratchet.py`,
+  `known_structure.py`, and `packing_strategy.py` where current consumers justify them.
+- Workbench-specific command parsing, benchmarks, capture, and build adapters move into
+  `packages/workbench/tools/`. General-purpose research orchestration remains outside
+  the package. Keep an old devtools wrapper only for a named consumer during migration,
+  with an explicit removal condition.
+- Export catalogue and palette data into an explicit, versioned input bundle.
+  Ordinary browser and headless runs must not traverse spike paths or need a Python
+  checkout.
+- Adapt existing `sqpack.render.PackingTrajectory` and Motion Lab contracts at their
+  boundaries rather than adding a third competing definition of evidence or identity.
 
-Every phase asserts the invariant it is responsible for, not an arrangement that
-happened to come out of a run — the fault that broke five checks earlier on this branch.
-`assemble` asserts the declared face contacts are exact before relaxation.
-`project` asserts that whatever it calls solved is feasible under `sqpack.verify` out of
-process. `ratchet` asserts the reported side is one at which a packing was found, never
-smaller. Strategies in the repository are validated against the schema in the fast tier,
-and the four reproduction strategies run in the slow tier.
+Python projection and browser soft-contact simulation are different algorithms today.
+Give each implementation an identifier and capabilities; a shared schema does not
+promise identical trajectories.
+Cross-implementation checks establish common invariants where the methods coincide.
+The same JavaScript engine should have exact browser/Node parity for a fixed supported
+runtime, seed, and step sequence.
 
-## Open Questions
+## Phase 3: Animation Consumes Finished Frames
 
-- Where does the LP quench enter — as a terminal phase on every strategy, or as a
-  mechanism a strategy may schedule?
-  The survey is explicit that the projection loop should not be asked for the final
-  digits, and `n = 5`’s residual `0.0011` is entirely the ratchet’s floor.
-- Should a phase be able to *fail over* to another, rather than a strategy being a
-  straight line? The grid trap argues for it and nothing else does yet.
-- Is there a phase between assembly and tightening that repairs the cycles greedy
-  placement cannot close — 1 of 8 at `n = 11`, 2 of 13 at `n = 17`?
-- Memory (`think-dh4k`) is a phase that needs a permutation-invariant coordinate before
-  it can exist. Which of the contact-graph signature, angle-class census or chunk
-  taxonomy is it?
+The animation engine consumes checked or explicitly illustrative sequences without
+invoking a solver while drawing a frame.
+Its clock is independent of wall time, so seeking, scrubbing, capture, and playback
+request the same state.
 
-## References
+Presentation controls include correspondence, easing, dwell/move/correct/settle timing,
+palette, overlays, viewport, captions, and guided landing.
+Run configuration includes proposals, force law, annealing schedule, repair policy, and
+restart seed. An illustration may depict physics or interpolate retained records while
+retaining its provenance.
 
-- [The atlas video plan](plan-2026-09-07-known-best-atlas-video.md), whose workbench
-  this gives something to play
-- [Simulation mechanisms survey](../../research/research-2026-09-09-simulation-mechanisms-for-packing.md)
-- [Annealing survey](../../research/research-2026-09-08-annealing-for-square-packing.md)
-- [exp-206](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-206-projection-search.md),
-  the projection search’s first measurements
-- [X-025](../../../../packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md),
-  which carries the constraint ladder and the memory thread
+Acceptance:
+
+- Replay a recorded run without loading the solver.
+- Draw a hand-authored illustration without requiring a benchmark record.
+- Produce the same frame through seek and capture at the same time.
+- Preserve feasibility and guidance in visible labels or the export’s accessible
+  description.
+- Represent changes in `n`, container side, and orientation explicitly.
+
+## Phase 4: Optional Backends and New Mechanisms
+
+After the portable engine and run contract pass, expose additional mechanisms through
+adapters. The existing Python LP quench, projection/ratchet search, and Rust search are
+candidates. Browser builds offer only methods that actually run there; local-service
+methods are separately declared capabilities.
+
+GitHub Pages serves the package build at `https://jlevy.github.io/squares/workbench/`.
+It cannot execute Python or start a Rust process.
+A local backend or future browser-compatible backend is optional, with a visible
+capability check. Neither is a prerequisite for browser packing or replay.
+
+New physics and optimization experiments follow the annealing plan.
+Search remains deferred until record/statistics repairs, shared resolution, and package
+extraction are complete.
+
+## Validation and Migration Limits
+
+Preserve browser lint/type checks, focused geometry controls, Pages build checks, and
+renderer tests.
+Add boundary tests for the defects above and route fast tests through the
+existing [validation tiers](../../../../development.md#validation-tiers).
+
+Keep temporary CLI wrappers until their consumers and reproduction commands migrate.
+Remove obsolete probes through `think-cqfc`’s consumer audit.
+Source archives, negative results, and research provenance remain research records;
+generated pages, video, caches, and large raw trial streams remain outside Git.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
