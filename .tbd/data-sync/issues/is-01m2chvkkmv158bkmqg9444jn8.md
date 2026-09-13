@@ -5,7 +5,7 @@ title: Complete the strict Python and TypeScript/JavaScript floor for retained w
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -18,10 +18,10 @@ dependencies:
     target: is-01m2cm03rtrjcg98ejb9y56jn6
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-13T04:54:22.572Z
-updated_at: 2026-09-13T21:08:29.479Z
+updated_at: 2026-09-13T21:23:43.265Z
 ---
 Owner explicitly requires tbd best-practice floor across all new code and retained live spike code. Integrate parent Python coverage first. Python: pinned3.14, Ruff formatting/lint and BasedPyright with zero warnings/errors, precise public types and no blanket exclusions. TS/JS: zero-warning Biome, separate tsc noEmit with full tsconfig.base flags, checkedJS allowJs/checkJs as needed; new/package sources may not inherit the4 legacy relaxations. Retire relaxed flags on promoted workbench sources and keep untouched legacy exceptions explicit and shrinking. Existing think-4cwy is CLOSED and its xxxx followups are not a completion plan. Add type-aware promise checking for JS per tbd overlay (or actual TS coverage), config negative controls, and import/source-extension coverage. Flowmark remains sole Markdown formatter and existing nonblocking Markdown CI policy remains. No global suppressions or broad any to reach green.
 
 ## Notes
 
-2026-09-13 PR #160 checkpoint: new Pack/Search TypeScript is strict; retained JavaScript probes had explicit-any cleanup and package Biome/ESLint/tsc gate passes with 112 Node tests. The legacy live application still inherits compiler relaxations and the repository-wide zero-finding graduation remains open.
+2026-09-13 PR #160 checkpoint cdcd5149: new Pack/Search TypeScript is strict; retained JavaScript probes had explicit-any cleanup. Package Biome/ESLint/tsc gate and 112 Node tests pass locally and in GitHub frontend CI; all required CI checks pass. Legacy live application still inherits compiler relaxations; repository-wide zero-finding graduation remains open.
