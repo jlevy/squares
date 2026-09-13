@@ -5,7 +5,7 @@ title: Review and integrate PR157 weighted threshold atoms into the reviewed sta
 kind: task
 status: in_progress
 priority: 1
-version: 26
+version: 27
 assignee: root
 delegate: root
 labels: []
@@ -31,7 +31,7 @@ child_order_hints:
   - is-01m2bmgwstxv2rcj2xpte71d2k
   - is-01m2dsb0gcc16vphwzskanfxvw
 created_at: 2026-09-13T07:16:00.865Z
-updated_at: 2026-09-13T18:22:19.264Z
+updated_at: 2026-09-13T18:58:16.293Z
 ---
 Review all PR157 code, mathematics, persisted formats, source replay, prose, and integration with PR148/149/156. Publish structured findings as a PR comment before delegating fixes using address-pr-review. Track dispositions, merge current stack ancestors, validate exact mathematics and end-to-end CI, push and verify final heads. No main merge or deployment.
 
@@ -54,3 +54,5 @@ Inherited MATH05 patch independently accepted by proof and verifier lanes, with 
 Duplicate review tree reconciled: gwxh is duplicate of zo70; MATH05 duplicate7bfa transferred to6dca, DOC04 duplicate2pot to i17o; format7pjl and stack-order f0wg completed from e0 evidence. Existing8frj/ur2b now parented here. User workspace now owns the stack on codex/pr157-reviewed-stack; unrelated private BC329 calibration edits in another worktree are preserved and are not part of published PR156. Current fetched heads remain main d507f5c7, PR148 b43d3011, PR149 8d0a3ff2, PR156 52e4ab65, PR157 e0a1a65e before this repair push.
 
 Inherited local validation problems were resolved by moving the nested baseline checkout and generated pytest scratch trees out of the repository (preserved under /private/tmp/squares-math05-*) and setting the existing Cairo library path. Clean records gate32/32 passed. Session127 now records e0 checkpoint and independently accepted MATH05 repair with final validation explicitly pending. Required pre-push gate is running against e0a1a65e with proper Python3.14 and native dependencies. Remaining: commit/push repair, fresh ordinary CI and full checkpoint, final evidence record and publication, disposition comments on all4 PRs, close i17o/6dca/zo70 and sync issues. No main merge or deployment authorized by the readiness request.
+
+Current integration checkpoint, September 13: PR157 repair committed and pushed as cadbf7e149b65215724daf813add78d80879d327; pre-push46/46 steps passed in349.41 seconds,1282 tests passed with3 platform skips. Ordinary CI running. Important scope update confirmed by PR156 coordinator thread01a082b3-057c-7c62-905c-1a543979e33a: they actively own the unpublished calibration continuation, now7e4d2487 and22 commits above remote52e4ab65, plus review/run-sheet docs. PR156 deliberatelydraft; coordinator and run-sheet admission remain refused. They will send the eventual reviewed/pushed head andCI disposition. Root retains PR157/whole-stack integration ownership, will merge that new156head and rerun full checkpoint on combinedsource. Do not treat older remote CI as coverage of unpublished156changes. Three reused Astra Max lanes now audit merge-specific math, reader/source-closure and handoff interactions read-only while the separate owner completes156. No positive calibration profile or BC329 target has run per owner confirmation. Root is not taking over their working tree or discarding their edits.

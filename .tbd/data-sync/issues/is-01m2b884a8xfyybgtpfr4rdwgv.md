@@ -5,7 +5,7 @@ title: Build and admit the source-distinct calibration receipt reader
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max mathematical contract; Sol implementation
 labels:
@@ -30,8 +30,9 @@ child_order_hints:
   - is-01m2e19ncq107301gs2q7rg8b6
   - is-01m2e19nqwvrfv91ak14mra1hj
   - is-01m2e19p36hn9ks8b2er46jw3m
+  - is-01m2e23g7whep3daw5rnryg8by
 created_at: 2026-09-12T16:47:12.711Z
-updated_at: 2026-09-13T18:43:56.156Z
+updated_at: 2026-09-13T18:57:32.923Z
 ---
 Run-sheet review F-4 and the existing think-1mma obligation. Add a maintained reader that is source-distinct from the calibration producer and checks every retained row and digest, independently derives the exact fixture geometry, normalization and dilation answers, reconstructs resources and route counts, enforces schema separation, and includes coherent-tampering controls. Bind both reader revision and execution revision; provide a literal per-profile command whose stdout, stderr and exit status are retained. Independently admit the reader before it is used to admit profiles. Do not run BC329.
 
