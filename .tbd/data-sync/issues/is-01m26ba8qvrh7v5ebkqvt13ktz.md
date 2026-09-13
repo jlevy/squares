@@ -5,11 +5,11 @@ title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 6
+version: 7
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-13T07:50:39.175Z
+updated_at: 2026-09-13T18:24:25.917Z
 ---
 On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 
@@ -30,3 +30,7 @@ Operational caution from the owner's 2026-09-13T07:44Z correction on PR157 (issu
 This bites directly on this bead's own standing instruction ('On the next occurrence with the diagnostics present, inspect the reported difference before proposing a causal repair'). The diagnostics only help if the artifacts are fetched before anyone re-runs the job. Treat a re-run as destructive to evidence until the artifacts are saved.
 
 Note the two corrections on PR157 are complementary, not duplicates. The owner's states what the comparisons do not establish and what PR149 does close. Mine (issuecomment-5652038473) additionally quotes the occurrence-B byte windows from inside a /Link /Rect -- right edge 496.48898 against 491.23911, a 5.25pt text-measurement difference rather than content going missing -- which is evidence their review says was not available to it. Object attribution in my report remains unreliable (pre-hardening locator); the byte windows stand alone.
+
+September 13, 2026 resumed review clarification:
+
+The later PR157 correction preserves additional quoted /Rect windows, but those windows establish only the reported numeric annotation difference. They do not establish identical prepared HTML or rule out absent content elsewhere. The earlier note's phrase 'a text-measurement difference rather than content going missing' overstates what the retained evidence proves. Current disposition remains unknown cause. PR149's artifact/source/math guards close independently reproduced publication gaps, without establishing or fixing this historical cause. Save future failure diagnostics before rerunning an Actions attempt; leave this issue open.

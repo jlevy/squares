@@ -5,13 +5,13 @@ title: "D-490: two new occurrences, one naming a link rectangle that moved 5.25p
 kind: bug
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - n11
   - research-tooling
 dependencies: []
 created_at: 2026-09-13T05:27:16.199Z
-updated_at: 2026-09-13T07:10:55.344Z
+updated_at: 2026-09-13T18:24:25.594Z
 ---
 D-490's record says 'Another occurrence must preserve the new location report before any hypothesis can be selected.' PR 157 produced two, on the same commit 74e4d653, in runs 34717875498 (original and re-run). Both predate the _difference hardening on PR 149, so treat the OBJECT ATTRIBUTION as unreliable -- that is the header-matching bug those commits fixed -- but the quoted byte windows come straight from the two renders and stand on their own.
 
@@ -41,3 +41,7 @@ Two things this does NOT establish, and they should not be conflated:
 2. It does not retroactively repair the object attribution in either occurrence. Both reports still predate the _difference hardening, so the object numbers (152, 159) remain unreliable; the quoted byte windows still stand on their own.
 
 Status for the defect owner: the occurrence data this bead was asked to supply is unchanged, and there is now a mechanism-specific guard upstream of it. Selecting a hypothesis remains the owner's call.
+
+September 13, 2026 resumed review clarification:
+
+The quoted byte windows establish a difference in a /Rect numeric value: right edges 496.48898 and 491.23911 differ by 5.24987 points. They do not independently establish identical prepared HTML, that no content is absent, which font or text run changed, or that the overall length delta was caused by that rectangle. The old containing-object attribution remains unreliable. PR149's final-DOM guard is demonstrated against visible raw/failed math; it is not an established control or repair for this historical rectangle difference. Preserve the quoted observations and prior hypotheses as history, with the current cause unresolved under think-ptit. No new causal hypothesis is selected here.
