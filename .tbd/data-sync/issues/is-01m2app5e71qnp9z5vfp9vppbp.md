@@ -5,7 +5,7 @@ title: Build the separate fixed-core packet calibration command
 kind: feature
 status: in_progress
 priority: 1
-version: 27
+version: 28
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max design; Sol implementation after admission
 labels:
@@ -30,8 +30,9 @@ child_order_hints:
   - is-01m2b1nkj1qfxr53zgc5wkv8kq
   - is-01m2b4yfx3th5wcdaw9apr0vn5
   - is-01m2b883mnsa3g9ap94gy5aj0q
+  - is-01m2ctdap5jwdr8h4qb8dxwt8z
 created_at: 2026-09-12T11:40:18.235Z
-updated_at: 2026-09-13T07:21:29.001Z
+updated_at: 2026-09-13T07:23:51.876Z
 ---
 Add a maintained calibrate_fixed_core_packet command with strict fixed-core-packet-calibration/v1 receipt semantics. It must remain outside the BC329 scientific state machine, use a frozen analytically solved positive fixture, call the real raw, normalized-exact, reflected-interval, dilation, publication, and strict per-direction readback kernels, and never emit packet-accepted or scientific evidence. Freeze and independently verify the fixture argument and exact answers; preserve truthful fixture provenance rather than T025 ancestry. Add cross-schema refusal, known-answer, row/witness mutation, source-separation, byte-binding, lifecycle, and metrics controls. Do not run the BC329 source or target.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m2b80wrktzpknr73k8s3vkwm
 title: Reconcile annealing difficulty claims with retained per-cell evidence
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels:
   - workbench-roadmap
@@ -16,7 +16,11 @@ dependencies:
   - type: blocks
     target: is-01m2cm03rtrjcg98ejb9y56jn6
 created_at: 2026-09-12T16:43:15.602Z
-updated_at: 2026-09-13T05:43:45.330Z
+updated_at: 2026-09-13T07:41:44.246Z
+closed_at: 2026-09-13T07:41:44.245Z
+close_reason: "Reconciled at f9099096: reusable historical_summary_audit audits59files/275cells/maxn29, with exact unresolved n17 anneal8 sweep cells and actual deep n5/n11 counts. Dated X-028 and exp-208 corrections preserve source observations, absolute/relative/grid-gap metrics, and unavailable raw/block data without a causal difficulty or resolver-ceiling claim."
+resolution: null
+duplicate_of: null
 ---
 Phase 1 evidence reconciliation. Compare experiment commands and retained cells, completed counts, resolved flags and guard versions before annotating X-028 and exp-208. Summaries include n17/shake8 unresolved sweep cells, but do not substantiate the claimed resolved deep n17 cohort; n26 is not the largest measured because n29 exists. Preserve dated corrections and absolute/normalized metrics side by side without inventing a causal size explanation. Acceptance: every retained claim is supported by a precise artifact/cohort or marked unavailable/historical; pasted block numbers are not asserted independently verified. Missing data may be explicitly dispositioned; any rerun is a separately registered research round, not an implicit repair step.
 
