@@ -5,7 +5,9 @@ title: Review and integrate PR157 weighted threshold atoms into the reviewed sta
 kind: task
 status: in_progress
 priority: 1
-version: 24
+version: 25
+assignee: root
+delegate: root
 labels: []
 dependencies: []
 child_order_hints:
@@ -29,7 +31,7 @@ child_order_hints:
   - is-01m2bmgwstxv2rcj2xpte71d2k
   - is-01m2dsb0gcc16vphwzskanfxvw
 created_at: 2026-09-13T07:16:00.865Z
-updated_at: 2026-09-13T16:27:13.795Z
+updated_at: 2026-09-13T18:18:51.258Z
 ---
 Review all PR157 code, mathematics, persisted formats, source replay, prose, and integration with PR148/149/156. Publish structured findings as a PR comment before delegating fixes using address-pr-review. Track dispositions, merge current stack ancestors, validate exact mathematics and end-to-end CI, push and verify final heads. No main merge or deployment.
 

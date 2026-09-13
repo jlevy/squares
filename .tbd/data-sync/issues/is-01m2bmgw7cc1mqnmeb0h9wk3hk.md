@@ -5,14 +5,14 @@ title: "admit_threshold_atom_orbits: the negative-weight branch is unreachable"
 kind: bug
 status: closed
 priority: 3
-version: 5
+version: 6
 delegate: verifier_review
 labels:
   - research-tooling
 dependencies: []
-parent_id: is-01m2cv7affzce4qkz704rp2kvv
+parent_id: is-01m2csyyq4nzfqppqj639avs51
 created_at: 2026-09-12T20:21:42.251Z
-updated_at: 2026-09-13T08:19:32.957Z
+updated_at: 2026-09-13T18:19:06.639Z
 closed_at: 2026-09-13T08:19:32.956Z
 close_reason: "Fixed: the unreachable branch was the per-placement weight check in _family (admit_threshold_atom_orbits.py:96). Placement.__post_init__ (ceiling.py:115) already raises 'placement weights must be non-negative', and CeilingCertificate.from_record builds Placements, so certificate.placements can never carry a negative weight. Verified: from_record refuses first and the admitter's message is 'invalid ceiling family: placement weights must be non-negative' -- which is exactly what the retained test already matched ('non-negative', not the dead branch's 'has negative weight'), so the branch was never the thing under test. Loop removed; the constructor check and the control stay, and the test now documents that the refusal is the constructor's."
 resolution: null

@@ -5,15 +5,15 @@ title: "One word, two quantities: 'size' means tokens in receipts and sites in t
 kind: bug
 status: closed
 priority: 3
-version: 5
+version: 6
 delegate: verifier_review
 labels:
   - n11
   - research-tooling
 dependencies: []
-parent_id: is-01m2cv7affzce4qkz704rp2kvv
+parent_id: is-01m2csyyq4nzfqppqj639avs51
 created_at: 2026-09-12T20:21:42.842Z
-updated_at: 2026-09-13T07:57:31.920Z
+updated_at: 2026-09-13T18:19:07.519Z
 closed_at: 2026-09-13T07:57:31.920Z
 close_reason: "Fixed in the PR157 working tree and accepted by independent cross-review. Orbit token charges, parsed-byte replay digests, all declared charges and family totals, duplicate-key rejection, and v1/v2 explicit count records are covered. Owned suite: 132 passed in 13.65s; Ruff, format, and BasedPyright clean. No archived JSON changed."
 resolution: null

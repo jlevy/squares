@@ -3,9 +3,9 @@ type: is
 id: is-01m2cv7affzce4qkz704rp2kvv
 title: "Address review: PR #157 — weighted five-site threshold atoms, changes required"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 22
+version: 23
 labels:
   - n11
 dependencies: []
@@ -32,6 +32,10 @@ child_order_hints:
   - is-01m2bmgwstxv2rcj2xpte71d2k
   - is-01m2cx3155gpjrj1gvh6g2g89t
 created_at: 2026-09-13T07:38:03.630Z
-updated_at: 2026-09-13T08:10:40.164Z
+updated_at: 2026-09-13T18:19:07.799Z
+closed_at: 2026-09-13T18:19:07.798Z
+close_reason: Consolidated into canonical stack review think-zo70. Published original review is https://github.com/jlevy/squares/pull/157#issuecomment-5651978187; the former description URL ending5648800000 was invalid. All duplicate children are closed or transferred, and existing issues8frj/ur2b are reparented tozo70. Canonical DOC04 i17o and MATH05 6dca remain in progress; this duplicate closure is not a merge-readiness claim.
+resolution: duplicate
+duplicate_of: is-01m2csyyq4nzfqppqj639avs51
 ---
 Owner review of PR157 at fa8c3b21 against merge base 236132e7, verdict: changes required. 16 findings (2 High, 12 Medium, 2 Low) plus a serialization repair format and a stack reordering to PR148 -> PR149 -> PR156 -> PR157. Review comment: https://github.com/jlevy/squares/pull/157#issuecomment-5648800000 (issue_comment.created 2026-09-13T07:36Z). Every finding gets an explicit disposition per tbd shortcut address-pr-review.

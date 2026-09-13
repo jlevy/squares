@@ -3,15 +3,19 @@ type: is
 id: is-01m2cx3155gpjrj1gvh6g2g89t
 title: The sweep route has no token cap, so a heavy threshold atom hangs the headroom check
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels:
   - n11
 dependencies: []
 parent_id: is-01m2cv7affzce4qkz704rp2kvv
 created_at: 2026-09-13T08:10:40.164Z
-updated_at: 2026-09-13T08:10:40.164Z
+updated_at: 2026-09-13T18:18:51.647Z
+closed_at: 2026-09-13T18:18:51.647Z
+close_reason: Transferred to canonical PR157-MATH-05 finding think-6dca, which carries published addendum 5654506997. The canonical issue remains in progress until the reviewed repair is pushed and its final CI passes.
+resolution: duplicate
+duplicate_of: is-01m2dsb0gcc16vphwzskanfxvw
 ---
 Found while fixing PR157 review MATH-01. Not in the review; the review's own reproduction is the one case where this check happens to be cheap, which is why the overflow was reachable there at all.
 
