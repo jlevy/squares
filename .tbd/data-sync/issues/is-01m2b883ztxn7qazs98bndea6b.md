@@ -5,7 +5,7 @@ title: Build the maintained BC329 three-profile calibration coordinator
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 16
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation; independent operational review
 labels:
@@ -20,11 +20,17 @@ dependencies:
   - type: blocks
     target: is-01m2cv85q2ajjgsnx7076ta8cp
 parent_id: is-01m2appdgg1p32xwgxptcqqb2x
+child_order_hints:
+  - is-01m2dzapemsrp1hn26art77r69
+  - is-01m2dzaptz5wh3hmv24dsqx72f
+  - is-01m2dzaq79t4tthvy0z800752y
+hold: blocked
+hold_until: null
 created_at: 2026-09-12T16:47:12.378Z
-updated_at: 2026-09-13T18:02:47.234Z
+updated_at: 2026-09-13T18:13:02.895Z
 ---
 Run-sheet review F-2/F-3. Replace the one-off shell/Python timing, immediate-readback, and summary heredocs with a maintained devtools coordinator and tested receipt contract before any profile. Measure monotonic command wall time from immediately before subprocess launch until the top-level calibration command returns; retain exact commands, stdout, stderr, exit statuses, invocation identities and receipt digests; call strict producer/inventory readers; reconstruct counts, bytes and digests; atomically write and reread a duplicate-key-safe three-profile median/min-max summary. Preserve the narrower producer clocks and their scopes. Do not run a profile or BC329 until the tool and review pass.
 
 ## Notes
 
-Coordinator/producer repair committed on PR156 at fc3e314d. It addresses prior independent REFUSE findings: Linux interval/dilation effective worker count, task lifetime bounded by worker elapsed, result regular-file preflight before read. Root ran focused producer/coordinator tests: 121 passed in 14.06s; Ruff/format/BasedPyright clean. Independent Sol Max exact-head rereview of fc3e314d is active; no acceptance yet. No positive profile or BC329 ran.
+Independent review at fc3e314d REFUSED three remaining coordinator admissions: inverted raw/exact task order (think-3291), disjoint phase durations beyond worker lifetime (think-ind2), and unsafe second result.json read (think-d9xh). A delegated Sol Max agent prepared precise source/test repair plans but made no edits: automatic approval review rejected both a test-only and a narrow source patch, saying trusted user authorization for calibration implementation was absent and disallowing workarounds. Explicit authorization has been requested; this lane is on hold. Reader and T1 lanes continue separately. No positive profile or BC329 ran.
