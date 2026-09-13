@@ -48,3 +48,7 @@ finely.
 changes what the contraction has to do.
 A clean test needs a start that varies with the container held fixed, which the page
 cannot do today — so this may end `blocked` rather than measured.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

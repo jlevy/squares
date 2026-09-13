@@ -46,3 +46,7 @@ where the gap is unusually large or small.
 **Why it matters more than it looks.** If difficulty is a property of the gap rather
 than of the arrangement, then the method has no structural blind spot to fix, and the
 effort belongs in the tail rather than in the schedule.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

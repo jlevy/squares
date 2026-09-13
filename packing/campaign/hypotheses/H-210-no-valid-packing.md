@@ -62,3 +62,7 @@ bounding boxes rather than packings, and the instrument needs a resolution phase
 final stage that pushes squares apart until no pair overlaps, and reports the container
 that arrangement actually needs -- before any of its numbers are about packing at all.
 That is a change to the method, not to its dials.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -10,37 +10,50 @@ experiment:
   series: series-000
   title: The dial's sweet spot, and the ceiling it reveals
   date: '2026-09-12'
-  hypotheses: [H-211]
+  hypotheses:
+  - H-211
   tier: exploratory
   subject:
     label: the workbench's blind physics at six shake levels, resolved to packings
     engine: workbench page, branch claude/annealing-search-benchmark
-    engine_commit: 7de8b688
+    engine_commit: 88d452f1
     assurance: numerically-checked
     method: numerical-f64
     tolerance: 1e-5 of a unit side of deepest pairwise overlap, measured from the snapped control
     host_system: macOS on Apple silicon, one headless Chromium
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    migration_annotation: '2026-09-13: source reference mapped from pre-purge 7de8b688 to reachable
+      88d452f1; the retained harness and workbench source trees compare equal in Git. Original
+      run provenance was not recaptured.'
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
     operator: claude-opus-5, unattended
     control: the page's shipped dial level, 3
     candidate: levels 0, 2, 4, 6, 8 and 10
     trials: 134000
     interleaved: false
-    commit: 7de8b688
+    commit: 88d452f1
     entry_point: packing/devtools/bench_annealing.py
-    command: >-
-      python -m devtools.bench_annealing --n 5 10 11 --seeds 3000 --sweep
-      anneal=0,2,4,6,8,10 ; then --n 11 17 26 29 --seeds 20000 --anneal 8
+    command: python -m devtools.bench_annealing --n 5 10 11 --seeds 3000 --sweep anneal=0,2,4,6,8,10
+      ; then --n 11 17 26 29 --seeds 20000 --anneal 8
     record: packing/campaign/results/annealing/
   results:
   - shape: conditions
     metric: closed at the best of a thousand valid runs, n = 5
     control_median: -0.018
     candidate_median: 0.974
-    control_range: [-0.082, -0.018]
-    candidate_range: [0.864, 0.974]
+    control_range:
+    - -0.082
+    - -0.018
+    candidate_range:
+    - 0.864
+    - 0.974
     change_pct: 5511.0
     overlapping: false
   - shape: record
@@ -55,15 +68,44 @@ experiment:
     lines_changed: 0
     notes: A measurement of the existing dial; nothing in the method changed.
   verdict:
-    decision: accepted
+    decision: unresolved
     primary_criterion: closed at the best of a thousand valid runs
-    reason: >-
-      Below level 6 the tail never clears the trivial grid at any n measured; at 6 to 8 it
-      reaches 0.95 to 0.98 at n = 5 and 10, so the shipped level of 3 is below the useful
-      range entirely.
-    commit: 7de8b688
+    reason: Historical summary retained; the raw geometry and exact-check receipts are absent
+      from the reachable branch. Prefix best-of-k and incomplete cohort metadata do not establish
+      the registered comparison. Re-admission requires reproducible valid trials and disjoint-block
+      reporting.
+    commit: 88d452f1
+  effort:
+    stopped_by: dependency
+    wall_seconds: unrecorded-historical
+    migration_annotation: '2026-09-13: no complete elapsed-time receipt was retained. Per-trial
+      median milliseconds and approximate prose budgets cannot recover total wall or operator
+      time. This marker records missing history and is unavailable to new experiments.'
 ---
 # exp-208 — the dial’s sweet spot, and the ceiling it reveals
+
+## Correction — 2026-09-13
+
+The retained summaries lack raw geometry and exact-check receipts, and best-of-k is a
+single prefix rather than a distribution over independent blocks.
+These values remain historical observations and are not admitted evidence for the
+registered comparison.
+The original selftest flag describes the original account; no historical run has been
+replayed in this repair.
+
+The source reference `7de8b688` was rewritten when raw JSONL files were removed from the
+branch. Its retained harness and workbench source compare equal to reachable `88d452f1`
+with `git diff`; the metadata now uses that reachable source.
+This is a source mapping, not a reconstructed run receipt.
+Timing is explicitly unrecorded rather than estimated or entered as zero.
+
+The original verdict was **accepted**: Below level 6 the tail never clears the trivial
+grid at any n measured; at 6 to 8 it reaches 0.95 to 0.98 at n = 5 and 10, so the
+shipped level of 3 is below the useful range entirely.
+The original account below is preserved for provenance; the current verdict is
+unresolved.
+
+## Original account
 
 ## The sweet spot
 
@@ -114,3 +156,7 @@ So the dial was worth finding and is not worth much: the ceiling is set by somet
 else. The candidates, in the order they are worth testing, are the resolver (which only
 translates, so every number here is a lower bound), the proposal (one coarse-grid drop
 per run), and the contact law itself.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

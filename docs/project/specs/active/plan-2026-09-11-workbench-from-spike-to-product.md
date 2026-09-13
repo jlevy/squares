@@ -86,7 +86,7 @@ remains.
 | Browser source | The HTML template, 7,431-line `workbench.js`, 1,099-line stylesheet, and ordinary checker probes are separate files. |
 | Browser floor | Biome checks JavaScript and CSS. `tsc` checks the workbench, probes, and Motion Lab as separate global programs with four legacy flags relaxed. That browser floor runs in `packing-validate`; the behavioral workbench scripts do not. |
 | Python floor | The retained spike tree is still excluded from Ruff and is outside BasedPyright’s include set. Parent PR #125 removes that exclusion at `ee60689b`, but PR #155’s reviewed head does not contain that commit. Python moved into `devtools` is checked, while JavaScript embedded in its strings remains invisible to the browser floor. |
-| Palette | The build emits the shared `sqpack.render` palette; the old hand-maintained copy is gone. |
+| Palette | The browser still carries literal copies of the `sqpack.render` palette, shades and angle tolerance. The Phase 0 inventory corrects the earlier statement that generation had landed; `think-fk8h` remains required under `think-w0a1`. |
 | Publication | `devtools.build_workbench_site` still invokes the retained spike builder. At this baseline it reproduces a self-contained 4.4 MB page at `/workbench/`. The old unchecked-prototype banner has been replaced by a quiet evidence warning. |
 | Product shape | Pack runs one interactive trajectory. Animate plays a range of retained atlas records and illustrative transitions. The page has no Search mode and Pack still depends on atlas transition pairs instead of accepting an independent `n`. |
 | Runtime shape | One IIFE owns application state, geometry, two related physics loops, timeline, SVG rendering, facts, controls, and the public API. The cached transition simulator and live optimizer repeat collision, wall, broad-phase, and integration logic. |
@@ -239,9 +239,12 @@ The phase numbers below govern implementation.
 The research and contract plans retain their local section names for detail.
 A task may start only after its own blocker dependencies pass; parent membership alone
 does not enforce this ordering.
-All implementation work below is open at this planning checkpoint.
-Earlier prototype accomplishments remain in the baseline and are audited before being
-redone.
+Implementation started on 2026-09-13 via the `implement-beads` shortcut.
+The parent refresh is complete at `27d2f8cc`: PR #125 `0281a508` is integrated with PR
+#155 `6e191a35` and planning commit `24bca6ae`. The refreshed records gate passes Ruff
+and schema checks and reproduces only the documented campaign/documentation failures,
+owned by `think-3eha`. Earlier prototype accomplishments remain in the baseline and are
+audited before being redone.
 
 ### Phase 0: Establish the Integration and Package Foundation
 
@@ -249,10 +252,15 @@ redone.
 | --- | --- | --- |
 | `think-5pv0` | Refresh the leaf from the current PR #125 parent. | Record parent/leaf revisions; include `ee60689b` and `0281a508` or verified equivalents; preserve #155 records and reproduce its known failures before repairs. |
 | `think-a9gt` | Inventory sources, consumers, unique assertions and legacy tasks. | Every build, CI, capture, benchmark, documented CLI and research reproduction route has a move/retain/replace/remove disposition and a task owner. |
-| `think-l9z0` | Create the small root package shell and immediate gate coverage. | Locked package scripts and strict source discovery work for applicable TS/JS/CSS/Python files; layout rules, hooks and validation selection cover the new root; deliberately missed source/config fixtures fail. |
+| `think-l9z0` | Create the small root package shell and immediate gate coverage. | Locked package scripts and strict source discovery cover real TS and Python shell inputs plus the existing JS controls; no package JavaScript is introduced before its promise overlay; layout rules, hooks and validation selection cover the new root; deliberately missed source/config fixtures fail. |
 
 Refresh and inventory are independent.
 The shell depends on both.
+The completed
+[consumer inventory](../../reviews/review-2026-09-13-workbench-consumer-inventory.md)
+records 211 v2 files, 23 Python entry points and 180 probes with replacement owners.
+It also requires `think-g0lh` to replace the incomplete Pages input list with the actual
+catalogue, witnesses, rendering, fonts, assembler, package source and lockfile inputs.
 Record annotations can proceed after refresh; source repairs that introduce workbench
 files use the shell.
 This separates a minimal destination from the later migration of the live application.

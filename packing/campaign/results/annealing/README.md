@@ -1,84 +1,97 @@
 # The annealing benchmark’s runbook
 
-How to run one round of `think-7umw`, and what makes a round valid.
-The record it produces is the `.jsonl` files beside this one, the hypotheses under
-`../../hypotheses/`, and the experiment artifacts under `../../series/`.
+The campaign asks which declared packing strategies improve the distribution of valid
+outcomes under equal work on cases not used for tuning.
+The
+[workbench plan](../../../../docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md)
+governs implementation; the
+[annealing plan](../../../../docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md)
+defines the experimental comparison.
+
+## Retained record and current limits
+
+`summaries.json` contains the summaries retained when 185 MB of raw JSONL was removed
+from the branch at `6e191a35`. The raw files named inside it are not present in this
+checkout. A summary is insufficient to replay exact geometry, reconstruct disjoint
+blocks, or recover total elapsed time.
+Do not pass it to the raw-trial replay command or treat its `best_of` values as
+distributions.
+
+The old divide-and-concur experiment keeps `exp-206`. The colliding blind-run record is
+now `exp-210`; `exp-207` through `exp-210` carry dated corrections, reachable source
+mappings and explicit unrecorded timing.
+Their original accounts remain visible, but their verdicts are unresolved pending
+reproducible evidence.
+The discarded compaction pass in `exp-209` cannot exclude translation or rotation repair
+as an improvement.
 
 ## One round
 
+1. Choose a registered hypothesis, control, candidate, held-out cases, seed blocks and
+   work budget before running.
+   Declare the accept rule and stop condition.
+
+2. Run the instrument’s guards, including finite geometry, exact square count, positive
+   container side, pair and wall checks.
+   Record source revision, dirty state, configuration version, effective seed,
+   environment and measured elapsed time.
+
+3. Retain the raw trial receipt and displayed geometry, with separate raw and repaired
+   checks. Repair may stall or exhaust its budget; it is not guaranteed to produce a
+   packing. Invalid or incomplete outcomes never enter ranking.
+
+4. Replay the retained receipt through the same admission contract.
+   Group equal-work trials into disjoint seed blocks and report best-of-k median, range,
+   valid/refused counts, leftover trials and cost.
+   One prefix best-of-k is one observation.
+
+5. Write the experiment artifact, preserving negative results and the original
+   criterion. Record the raw artifact location; if too large for Git, retain an
+   accessible immutable artifact reference and manifest rather than deleting the only
+   inputs to the report.
+
+6. Regenerate and validate the record immediately, from `packing/`:
+
+   ```bash
+   uv run --frozen --all-extras --group dev packing-ledger render
+   uv run --frozen --all-extras --group dev packing-ledger check
+   uv run --frozen --all-extras --group dev packing-validate --records
+   ```
+
+The current legacy harness can be invoked from `packing/`:
+
 ```bash
-# from packing/
 uv run --frozen --all-extras --group dev python -m devtools.bench_annealing \
     --n 5 10 11 17 26 29 --seeds 2000 --anneal 6
-```
-
-A grid, in one invocation and one table:
-
-```bash
 uv run --frozen --all-extras --group dev python -m devtools.bench_annealing \
-    --n 5 11 --seeds 3000 --sweep anneal=0,3,6,10 inflate=1.06,1.12,1.25
+    --replay /path/to/retained-trials.jsonl
 ```
 
-Re-report an existing file without re-running it:
+The Phase 1 admission repair and Phase 3 shared kernel replace this legacy instrument
+before new comparative conclusions are accepted.
+Existing commands are reproduction routes, not evidence that their known defects are
+fixed.
 
-```bash
-uv run --frozen --all-extras --group dev python -m devtools.bench_annealing \
-    --replay campaign/results/annealing/<file>.jsonl
-```
+## Metrics and acceptance
 
-A trial costs half a millisecond plus the resolver, so a hundred thousand of them is a
-couple of minutes. Budget is not the constraint here; asking the right question is.
+`closed = (grid - side) / (grid - record)` is the fraction of the record-to-grid gap
+closed by a checked arrangement.
+One is the record, zero is the grid and a negative value is worse than the grid.
+Cases where the denominator is zero need an absolute side metric instead.
+A numerically checked improvement is not a proved new bound.
 
-## What makes a round valid
+Compare control and candidate distributions at equal declared work and report their
+spread. Keep tuning and held-out cases separate.
+A better median, a single lucky seed, or a visually flat tail does not by itself
+establish the registered claim.
 
-**Three things, and the first is the one this campaign learnt the hard way.**
+Continue from [H-206 through H-211](../../ideas.md#workbench-physics-as-a-search), the
+[ledger](../../ledger.md), and the governing plan.
+Do not repeat the old monotone difficulty claim or the claim that n=17 was tested only
+at shake 6; retained summaries include unresolved n=17 level-8 cells, while the retained
+deep level-8 artifact contains n=11 only.
+The plan assigns the detailed cohort reconciliation to `think-jdgu`.
 
-1. **The arrangement has to be a packing.** The harness projects every run to one and
-   scores the projection; a trial whose resolved arrangement still overlaps by more than
-   `VALID_OVERLAP` is *refused*, not recorded as poor.
-   Two entire rounds were run before this existed and every number in them was a
-   bounding box around overlapping squares.
-2. **The tolerance is measured, not chosen.** `VALID_OVERLAP` is 1e-5 because the
-   snapped trajectory — which ends on the record’s own poses by construction — scores
-   5.5e-7 to 1.0e-6, and the smallest real overlap is two orders above that.
-   Re-measure it if the page’s pose precision changes.
-3. **The instrument has to prove it was measuring something.** `GUARD_JS` refuses a page
-   with no API, no `setSeed` or no pairs before any trial runs.
-
-## The metric
-
-`closed` — the fraction of the record-to-grid gap a **resolved** run closes.
-1 is the record, 0 is the trivial grid `ceil(sqrt(n))`, negative is worse than the grid.
-
-It is the only column that compares across n. Raw excess cannot: at `n = 29` the grid is
-1.1% above the record and at `n = 5` it is 10.8%, so the same excess means opposite
-things.
-
-## The accept rule
-
-A parameter set beats the shipped defaults when its **best-of-k at equal k** is higher
-on a set of n it was not tuned on, with the trials valid and the cost reported beside
-it. A better median is not a result on its own: the median is below the grid everywhere,
-so a method is only worth running as restarts.
-
-## Resuming
-
-Everything needed to pick this up mid-stream is in three places, and nothing is only in
-someone’s head:
-
-- **What to try next and why** — the hypotheses `H-206` … `H-210` under
-  `../../hypotheses/`.
-- **What has been tried** — `exp-206` and `exp-207` under
-  `../../series/series-000-smoke-and-calibration/experiments/`, and `X-028` under
-  `../../explorations/`.
-- **How to run one round** — this file.
-
-## What is open
-
-- Whether a resolver that **rotates** scores these same runs higher.
-  Every number recorded so far is a lower bound, because the resolver only translates.
-- Whether the physics can be given a **resolution phase of its own**, which would make
-  the animation honest as well as the search — the blind and free styles currently draw
-  arrangements that are not packings.
-- `H-208`, whether the drop or the schedule decides, which is now cheap to test and was
-  not tested while the numbers were invalid.
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -43,3 +43,7 @@ why it is worth a full grid rather than an assumption.
 **What would refute it.** One trial, at any cell, inside the tolerance.
 A single counterexample settles it, which makes this the cheapest claim in the registry
 to disprove and the most expensive to confirm.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

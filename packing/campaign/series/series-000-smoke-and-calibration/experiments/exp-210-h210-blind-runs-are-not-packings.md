@@ -1,72 +1,114 @@
 ---
-title: exp-206 — every blind run of the workbench's physics ends overlapping
+title: exp-210 — every blind run of the workbench's physics ends overlapping
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
 experiment:
-  id: exp-206
+  id: exp-210
   series: series-000
   title: Every blind run of the workbench's physics ends overlapping
   date: '2026-09-12'
-  hypotheses: [H-210]
+  hypotheses:
+  - H-210
   tier: exploratory
   subject:
     label: the workbench's contact-and-jiggle simulation in blind mode
     engine: workbench page, build 4.4 MB, branch claude/annealing-search-benchmark
-    engine_commit: ee27f8e3
+    engine_commit: d3c3a778
     assurance: numerically-checked
     method: numerical-f64
-    tolerance: >-
-      1e-5 of a unit side of deepest pairwise overlap, taken from the snapped run's own
-      float noise rather than chosen
+    tolerance: 1e-5 of a unit side of deepest pairwise overlap, taken from the snapped run's
+      own float noise rather than chosen
     host_system: macOS on Apple silicon, one headless Chromium
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    migration_annotation: '2026-09-13: source reference mapped from pre-purge ee27f8e3 to reachable
+      d3c3a778; the retained harness and workbench source trees compare equal in Git. Original
+      run provenance was not recaptured.'
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
     operator: claude-opus-5, unattended
     control: the snapped trajectory, which ends on the record's poses by construction
     candidate: the blind trajectory, told nothing about the target
     trials: 15000
     interleaved: false
-    commit: ee27f8e3
+    commit: d3c3a778
     entry_point: packing/devtools/bench_annealing.py
     command: python -m devtools.bench_annealing --n 5 10 11 17 26 29 --seeds 2000 --anneal 6
     record: packing/campaign/results/annealing/
   results:
   - shape: determination
-    question: >-
-      does any blind run end on an arrangement with no overlapping squares, checked by a
-      separating-axis test over the final poses written in the harness rather than read off
-      the simulation
+    question: does any blind run end on an arrangement with no overlapping squares, checked
+      by a separating-axis test over the final poses written in the harness rather than read
+      off the simulation
     role: guard
     outcome: invalid
   - shape: conditions
     metric: deepest pairwise overlap in the final arrangement, unit sides
-    control_median: 0.0000010
-    candidate_median: 0.0351460
-    control_range: [0.00000055, 0.00000101]
-    candidate_range: [0.0351460, 0.0861890]
+    control_median: 1.0e-06
+    candidate_median: 0.035146
+    control_range:
+    - 5.5e-07
+    - 1.01e-06
+    candidate_range:
+    - 0.035146
+    - 0.086189
     change_pct: 3400000.0
     overlapping: false
   complexity:
     lines_changed: 96
     new_failure_modes:
     - a trial can now be refused as invalid rather than recorded as poor
-    notes: >-
-      The guard is the change; the simulation was not touched. Adding it turned every
-      previously recorded result in this campaign into a measurement of something else.
+    notes: The guard is the change; the simulation was not touched. Adding it turned every previously
+      recorded result in this campaign into a measurement of something else.
   verdict:
-    decision: accepted
+    decision: unresolved
     primary_criterion: the deepest pairwise overlap in the final arrangement
-    reason: >-
-      15,000 of 15,000 blind trials end with squares inside each other by 0.03 to 0.12 of a
-      unit side, at every n and every shake level including zero, against a snapped control
-      that scores 1e-6.
-    commit: ee27f8e3
+    reason: Historical summary retained; the raw geometry and exact-check receipts are absent
+      from the reachable branch. Prefix best-of-k and incomplete cohort metadata do not establish
+      the registered comparison. Re-admission requires reproducible valid trials and disjoint-block
+      reporting.
+    commit: d3c3a778
+  effort:
+    stopped_by: dependency
+    wall_seconds: unrecorded-historical
+    migration_annotation: '2026-09-13: no complete elapsed-time receipt was retained. Per-trial
+      median milliseconds and approximate prose budgets cannot recover total wall or operator
+      time. This marker records missing history and is unavailable to new experiments.'
 ---
-# exp-206 — every blind run of the workbench’s physics ends overlapping
+# exp-210 — every blind run of the workbench’s physics ends overlapping
+
+## Correction — 2026-09-13
+
+The retained summaries lack raw geometry and exact-check receipts, and best-of-k is a
+single prefix rather than a distribution over independent blocks.
+These values remain historical observations and are not admitted evidence for the
+registered comparison.
+The original selftest flag describes the original account; no historical run has been
+replayed in this repair.
+The declared 15,000 trials disagree with the command, which requests 6 × 2,000 = 12,000;
+no retained manifest resolves that difference.
+The older divide-and-concur experiment keeps exp-206; this record is renumbered exp-210.
+
+The source reference `ee27f8e3` was rewritten when raw JSONL files were removed from the
+branch. Its retained harness and workbench source compare equal to reachable `d3c3a778`
+with `git diff`; the metadata now uses that reachable source.
+This is a source mapping, not a reconstructed run receipt.
+Timing is explicitly unrecorded rather than estimated or entered as zero.
+
+The original verdict was **accepted**: 15,000 of 15,000 blind trials end with squares
+inside each other by 0.03 to 0.12 of a unit side, at every n and every shake level
+including zero, against a snapped control that scores 1e-6. The original account below
+is preserved for provenance; the current verdict is unresolved.
+
+## Original account
 
 ## What was measured
 
@@ -118,3 +160,7 @@ squares and reports the container the separated arrangement actually needs — b
 number from it is about packing.
 That is a change to the method rather than to its dials, and it is what the next round
 builds.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

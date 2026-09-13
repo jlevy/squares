@@ -10,25 +10,35 @@ experiment:
   series: series-000
   title: Restarts are the whole of the method, and the tail saturates near 0.98
   date: '2026-09-12'
-  hypotheses: [H-207]
+  hypotheses:
+  - H-207
   tier: exploratory
   subject:
     label: the workbench's blind physics, resolved to a packing before scoring
     engine: workbench page, branch claude/annealing-search-benchmark
-    engine_commit: 1eab3313
+    engine_commit: e9d13c1d
     assurance: numerically-checked
     method: numerical-f64
     tolerance: 1e-5 of a unit side of deepest pairwise overlap, measured from the snapped control
     host_system: macOS on Apple silicon, one headless Chromium
     selftest_passed: true
-  instance: {axis: n, point: 5, role: calibration}
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    migration_annotation: '2026-09-13: source reference mapped from pre-purge 1eab3313 to reachable
+      e9d13c1d; the retained harness and workbench source trees compare equal in Git. Original
+      run provenance was not recaptured.'
+  instance:
+    axis: n
+    point: 5
+    role: calibration
   method:
     operator: claude-opus-5, unattended
     control: one blind run, the method as the page ships it
     candidate: the best of k blind runs at the same parameters
     trials: 80000
     interleaved: false
-    commit: 1eab3313
+    commit: e9d13c1d
     entry_point: packing/devtools/bench_annealing.py
     command: python -m devtools.bench_annealing --n 5 10 --seeds 40000 --anneal 6
     budget: 40,000 seeds per n, about two minutes
@@ -46,24 +56,57 @@ experiment:
     metric: closed at the best of k, n = 5
     control_median: -0.084
     candidate_median: 0.977
-    control_range: [-0.286, -0.015]
-    candidate_range: [0.974, 0.986]
+    control_range:
+    - -0.286
+    - -0.015
+    candidate_range:
+    - 0.974
+    - 0.986
     change_pct: 1263.0
     overlapping: false
   complexity:
     lines_changed: 0
-    notes: >-
-      No change to the method; the round is a measurement of what budget buys. The resolver
-      and the guard landed in exp-206.
+    notes: No change to the method; the round is a measurement of what budget buys. The resolver
+      and the guard landed in exp-210.
   verdict:
-    decision: accepted
+    decision: unresolved
     primary_criterion: closed at the best of k against closed at k = 1
-    reason: >-
-      One run scores below the trivial grid at every n while the best of a thousand reaches
-      0.974 at n = 5, so restarts are not an improvement to the method, they are the method.
-    commit: 1eab3313
+    reason: Historical summary retained; the raw geometry and exact-check receipts are absent
+      from the reachable branch. Prefix best-of-k and incomplete cohort metadata do not establish
+      the registered comparison. Re-admission requires reproducible valid trials and disjoint-block
+      reporting.
+    commit: e9d13c1d
+  effort:
+    stopped_by: dependency
+    wall_seconds: unrecorded-historical
+    migration_annotation: '2026-09-13: no complete elapsed-time receipt was retained. Per-trial
+      median milliseconds and approximate prose budgets cannot recover total wall or operator
+      time. This marker records missing history and is unavailable to new experiments.'
 ---
 # exp-207 — restarts are the whole of the method, and the tail saturates near 0.98
+
+## Correction — 2026-09-13
+
+The retained summaries lack raw geometry and exact-check receipts, and best-of-k is a
+single prefix rather than a distribution over independent blocks.
+These values remain historical observations and are not admitted evidence for the
+registered comparison.
+The original selftest flag describes the original account; no historical run has been
+replayed in this repair.
+
+The source reference `1eab3313` was rewritten when raw JSONL files were removed from the
+branch. Its retained harness and workbench source compare equal to reachable `e9d13c1d`
+with `git diff`; the metadata now uses that reachable source.
+This is a source mapping, not a reconstructed run receipt.
+Timing is explicitly unrecorded rather than estimated or entered as zero.
+
+The original verdict was **accepted**: One run scores below the trivial grid at every n
+while the best of a thousand reaches 0.974 at n = 5, so restarts are not an improvement
+to the method, they are the method.
+The original account below is preserved for provenance; the current verdict is
+unresolved.
+
+## Original account
 
 ## What the budget buys
 
@@ -107,3 +150,7 @@ The resolver only translates; angles are held.
 A resolver that could rotate, or that solved for the smallest enclosing square directly,
 would score these same runs higher — so 0.986 is a lower bound on what the physics
 found, not a measurement of it.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

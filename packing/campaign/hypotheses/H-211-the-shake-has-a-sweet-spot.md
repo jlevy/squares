@@ -56,3 +56,7 @@ The dial is therefore a search parameter that the page sets for a presentational
 **What would refute it.** A level between 0 and 4 whose best-of-k matches 6 to 8’s on a
 set of n it was not tuned on; or a maximum that moves with n far enough that “6 to 8” is
 not a sweet spot but an artefact of the three n measured.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

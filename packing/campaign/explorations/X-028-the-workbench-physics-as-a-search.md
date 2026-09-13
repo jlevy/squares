@@ -20,9 +20,36 @@ exploration:
   - packing/atlas/known-best/video/spikes/v2-transitions/assets/workbench.js
   - packing/devtools/bench_annealing.py
   - docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
-  proposes: []
+  proposes: [H-206, H-207, H-208, H-209, H-210, H-211]
 ---
 # X-028: The Workbench’s Blind Physics, Measured as a Search
+
+## Correction — 2026-09-13
+
+This account retains the original exploration, including claims subsequently found
+unsupported. The repaired experiment records `exp-207` through `exp-210` now carry
+unresolved verdicts.
+`exp-210` is the renumbered blind-run experiment; the older divide-and-concur record
+keeps `exp-206`.
+
+The retained `summaries.json` stores prefix best-of-k observations, not distributions
+over disjoint blocks, and omits the raw geometry needed for current admission checks.
+The later agent’s disjoint-block table is a supplied historical report until its raw
+inputs and reporter reproduce it.
+Size alone is not an established cause of difficulty.
+There are unresolved n=17 level-8 sweep cells; the retained deep level-8 summary
+contains n=11 only. Neither “n=17 ran only at level 6” nor the claimed four-case deep
+level-8 coverage is supported by that retained layout.
+
+The compaction pass in `exp-209` was discarded with its outputs.
+Its claimed null result is unreproducible and cannot rule out translation or rotation
+repair or establish stationarity.
+The original account below remains a research record, not the current workbench’s
+evidence contract. The
+[workbench plan](../../../docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md)
+owns the admission, reporting and source repairs.
+
+## Original account
 
 The workbench draws each step of the atlas by simulating it.
 In its **blind** mode the simulation is told nothing about the target: it starts from
@@ -205,3 +232,7 @@ The hypotheses this compresses into are registered separately; the ones worth na
 here are whether the initial drop or the schedule decides the answer, whether the rare
 basin at `n = 5` is reachable more often by restarting rather than shaking, and whether
 the half-the-gap regularity survives `n` outside the six sampled.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

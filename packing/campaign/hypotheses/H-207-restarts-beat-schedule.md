@@ -44,3 +44,7 @@ not.
 
 **The trap to avoid.** Cost has to be counted in steps, not in wall clock, or the
 comparison measures the harness’s overhead rather than the method.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
