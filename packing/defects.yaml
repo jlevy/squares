@@ -16307,7 +16307,7 @@ defects:
     of the Pages workflow at 08:12:03Z.
 
     The second reported length was two bytes smaller. 786119 matches the size produced by
-    other CI renders of that page, but the lost pair does not establish which output
+    other CI renders of that page, but the length difference does not establish which output
     represented a complete or stable draw. The receipt `_with_receipt` writes is exactly 94
     bytes on every run measured: 786213/786119 at 3a18a05a and again at 1c1db463,
     786221/786127 at 93af1e4d, 817917/817823 on PR 148's branch, 786210/786116 on PR 125's,
@@ -16338,8 +16338,13 @@ defects:
     closes two bugs found before it shipped: an unbounded scan made 33 of this document's
     1160 untyped objects eligible to borrow a later object's declaration, and a scan through
     stream data could mistake payload bytes such as `/Type /Link` for the containing object's
-    type. `--renders N` makes the count the caller's, so the earlier ten-render protocol can
-    be repeated; the Pages job still pays for two.
+    type. A difference inside an object-number header belongs to that object; the scan
+    includes the containing header even when its match ends after the differing byte.
+    Exact-prefix renders are reported as sharing the shorter file's bytes, without
+    inferring truncation: either missing bytes or appended bytes can produce that
+    relationship. `--renders N` makes the count the caller's, so the earlier ten-render
+    protocol can be repeated; the Pages job still pays for two. An explicitly supplied
+    count is refused outside `--check`, including when its value is the default two.
 
     The failure line now reports the two sizes, their length delta, and the location without
     assigning a cause. In one container, forty consecutive renders of the shipped
@@ -16376,14 +16381,16 @@ defects:
     43 bytes and 36 bare `/ca` graphics states in objects 3 to 143. Another occurrence must
     preserve the new location report before any hypothesis can be selected.
   regression: >-
-    `tests/test_render_explainer_pdf.py`, nineteen cases over synthetic documents in the
+    `tests/test_render_explainer_pdf.py` covers synthetic documents in the
     shapes the writer emits and the exact image-wait JavaScript under Node. They pin that a
     disagreement names its object or outside-object section and quotes both windows, that
     `/Subtype` beats `/Type` where both are present, that a short untyped object does not
     borrow a later object's type or a type-like name from its own stream payload, that
     cross-reference, trailer and inter-object differences do not borrow the preceding object,
-    that truncated and equal renders are reported honestly, that the CLI count reaches
-    `check`, and that capture refuses an image with no drawable current request. Nothing here
+    that changed object-number headers identify their own object, that shortened and
+    appended exact-prefix renders receive no causal diagnosis, that equal renders are
+    reported as equal, that the CLI count reaches `check` and is refused in other modes,
+    and that capture refuses an image with no drawable current request. Nothing here
     prevents the race, which is what contained means: the guard is that the next occurrence
     arrives diagnosable.
   recorded_in: packing/devtools/render_explainer_pdf.py

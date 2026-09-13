@@ -261,19 +261,19 @@ The certificate identities checked in those runs are:
 - T-026 limit record: 3,965 bytes, SHA-256
   `04fd6bbca1941671ddbabbe359219011b8217818b0a291f4c9a00f5fa7834f8e`.
 
-Both definitive runs used the current checker, SHA-256
+The original audit recorded both definitive runs as using checker SHA-256
 `3be3ec677cd7e49b87b8bf7a4957d3c4a5b41c11bf9505e31c70265dbcd64b28`. T-025’s receipt
 records 87.50 seconds of user CPU time.
 T-026’s definitive receipt records 718.60 seconds of user CPU time and 750.00 seconds
 elapsed. It accepts all 1,441 directions, the exact minimum and declarations, and the
 factor, side, polynomial, strict-family, and endpoint fields.
 
-I checked that the final T-026 document has SHA-256
-`2e18708c83f883bc5ae5d11010d6c9b1823dedd39dc3131d67a1c475edcb40f4` and that the current
-checker has the digest above.
-After reading the completed receipt, I reran the generated-byte and renderer-freshness
-tests: **3 passed**. Both claims embed the current checker and their exact certificate
-data.
+It also recorded T-026 document SHA-256
+`2e18708c83f883bc5ae5d11010d6c9b1823dedd39dc3131d67a1c475edcb40f4` and a subsequent
+generated-byte and renderer-freshness check: **3 passed**. These are historical reported
+identities, not identities of the later reviewed branch.
+The [stack-review addendum](#stack-review-addendum-2026-09-12) corrects that provenance
+gap with fresh, revision-bound replays.
 
 ## Assurance Decision and Remaining Limits
 
@@ -291,6 +291,64 @@ LP, optimality of the shrink, or inability of further refinement to improve the 
 The 720-step control and the numerical value of an earlier theorem are not necessary to
 either accepted conclusion.
 Formal proof-assistant verification and external review remain separate assurance steps.
+
+## Stack Review Addendum, 2026-09-12
+
+The stack review began at PR148 revision `989fd5442112474bf8d4b2b6708210cf48ddf398`. Its
+standalone checker did not have the digest recorded in the historical receipts above:
+its SHA-256 was `7f349aab274ffa2375421d7181ae7a54024df948979d2fd6e14e264547272732`. The
+retained historical stdout confirms the reported minima, direction counts, event-cell
+counts, and acceptance results, but does not identify the checker bytes that produced
+it. Those receipts therefore cannot establish the later checker’s source identity.
+
+Independent mathematical and implementation reviews found no soundness defect in the
+finite certificate theorem, exact sweep, dilation, or endpoint argument.
+They did find a producer/reader interoperability defect: the producer writes a
+unit-coefficient radical as `sqrt(r)`, while the standalone reader expected `1*sqrt(r)`.
+Revision `e8baa8ffecf6281cf47ebd208d5db44ab185240a` makes the standalone reader accept
+the producer’s canonical spelling and regenerates both embedded checkers.
+A regression constructs a valid small certificate and its limit record through the real
+producer; it failed before the repair and passes afterward.
+
+The fresh standalone replays use that revision’s checker, 28,021 bytes with SHA-256
+`9ec3d5125e5f545b660822234c288e6e516022a177625cc54e4ecc8e127449fd`. Each invocation
+reads the corresponding generated claim document and verifies all its certificate
+declarations; T-026 also re-derives the complete limit record.
+The certificate and limit-record identities are unchanged from the table above.
+
+| Claim | Directions | Reachable event cells | Least charge | First minimizing index | Result |
+| --- | --- | --- | --- | --- | --- |
+| T-025 | 181 | 1,044,374,137 | $100000203/100000000$ | 69 | `VERIFIED: s(11) >= 191/50` |
+| T-026 | 1,441 | 8,344,684,609 | $1$ | 914 | Exact dilation limit verified |
+
+T-025 used 98.64 seconds of user CPU time and 231.63 seconds elapsed on the shared
+review host.
+T-026 used 810.78 seconds of user CPU time and 1,571.12 seconds elapsed; its
+factor, side, polynomial, strict-family, and endpoint checks all passed.
+These fresh receipts replace the historical receipts’ unsupported binding to the later
+checker revision. Both claims retain V4/C5. Both commands use the project’s CPython
+3.14.7 environment and the standard-library checker directly:
+
+```bash
+cd packing
+.venv/bin/python3 cases/n11_threshold_certificate/verify_claim.py \
+  cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md
+.venv/bin/python3 cases/n11_threshold_certificate/verify_claim.py \
+  cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md
+```
+
+The explainer review also corrects the selected-certificate roadmap, reserves $L$ for
+the headline and $L_0$ for a tested container side, explains the reflected direction
+counts, and states that the physical squares remain unit squares under dilation.
+At integrated PR149 revision `d8f3d8cd`, the exporter produces 22 pages; two normalized
+renders agree at 863,583 bytes with 24 embedded fonts.
+Visual inspection of the title and proof pages found no clipped text or mathematics.
+
+The already reviewed T-025 compactness clarification is included in PR148 so its scope
+is correct before later stack layers merge: the minimum $s(11)$ is attained, and the
+certificate excludes feasibility at $191/50$, hence $s(11)>191/50$. This prose
+clarification changes no verifier or certificate bytes and needs no new computation.
+T-026’s limiting endpoint retains the stated non-strict lower bound.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

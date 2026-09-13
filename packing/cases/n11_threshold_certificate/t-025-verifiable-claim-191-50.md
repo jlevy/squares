@@ -152,12 +152,12 @@ once and requires agreement between the exact sweep in
 The verifier is an additional standard-library implementation of the exact event-cell
 decision. It uses the same certificate and theorem.
 The retained exact sweep and interval branch-and-bound remain separate repository
-decisions. This claim does not bound the side from above, prove a strict inequality at $191/50$, or decide any different atom family, shrink, or direction net.
+decisions. The registered headline records $s(11) \geq 191/50$. Since the minimum is attained and this certificate excludes feasibility at $191/50$, the elementary compactness corollary is $s(11)>191/50$; it requires no additional computation. This claim does not bound the side from above or decide any different atom family, shrink, or direction net.
 
 ## Verifier
 
 The following block is byte-for-byte [`verify_claim.py`](verify_claim.py), SHA-256
-`7f349aab274ffa2375421d7181ae7a54024df948979d2fd6e14e264547272732`.
+`9ec3d5125e5f545b660822234c288e6e516022a177625cc54e4ecc8e127449fd`.
 
 ```python
 #!/usr/bin/env python3
@@ -692,7 +692,8 @@ def reduced_polynomial(square):
 
 def canonical_radical(coefficient, radicand):
     if coefficient.denominator == 1:
-        return f"{coefficient.numerator}*sqrt({radicand})"
+        prefix = "" if coefficient.numerator == 1 else f"{coefficient.numerator}*"
+        return f"{prefix}sqrt({radicand})"
     return f"{coefficient.numerator}*sqrt({radicand})/{coefficient.denominator}"
 
 

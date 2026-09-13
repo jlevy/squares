@@ -278,18 +278,21 @@ def _difference(first: bytes, second: bytes) -> str:
     location.
 
     Called on renders that have already been found to differ. Handed two that do not it
-    says so rather than inventing a disagreement, because the alternative -- reporting
-    the shorter-prefix case unconditionally -- would have it announce a truncation on two
-    identical files.
+    says so rather than inventing a disagreement. The exact-prefix case reports only the
+    byte relationship: that observation cannot distinguish truncation from appended bytes.
     """
     limit = min(len(first), len(second))
     offset = next((at for at in range(limit) if first[at] != second[at]), limit)
     if offset == limit and len(first) == len(second):
         return "no byte differs, so the renders this was handed did not disagree"
     if offset == limit:
-        return f"one render is the first {limit} bytes of the other, so one was cut short"
+        return f"one render is an exact prefix of the other, sharing its first {limit} bytes"
+    # A changed object number lies inside the header itself. Restricting the regex's
+    # end position to that byte would prevent its containing header from matching.
     header = max(
-        _OBJECT_HEADER.finditer(first, 0, offset), key=lambda found: found.start(), default=None
+        (found for found in _OBJECT_HEADER.finditer(first) if found.start() <= offset),
+        key=lambda found: found.start(),
+        default=None,
     )
     if header is None:
         where = "the file header"
@@ -886,14 +889,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     command.add_argument(
         "--renders",
         type=int,
-        default=2,
         metavar="N",
         help="how many renders --check compares (default 2)",
     )
     arguments = command.parse_args(argv)
-    if not arguments.check and arguments.renders != 2:
+    if not arguments.check and arguments.renders is not None:
         command.error("--renders is for --check, the only mode that compares renders")
-    if arguments.renders < 2:
+    renders = arguments.renders if arguments.renders is not None else 2
+    if renders < 2:
         command.error("--renders must be at least 2, which is one render against another")
     if not PAGE.is_file():
         raise SystemExit(f"{PAGE.relative_to(ROOT)} is missing; render the page first")
@@ -902,7 +905,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif arguments.fonts:
         fonts()
     else:
-        check(arguments.renders)
+        check(renders)
     return 0
 
 

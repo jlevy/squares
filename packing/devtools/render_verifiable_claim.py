@@ -458,8 +458,11 @@ directly."""
         )
         evidence = _threshold_evidence(proof, review, certificate_path)
         scope = (
-            "This claim does not bound the side from above, prove a strict inequality at "
-            "$191/50$, or decide any different atom family, shrink, or direction net."
+            "The registered headline records $s(11) \\geq 191/50$. Since the minimum is "
+            "attained and this certificate excludes feasibility at $191/50$, the "
+            "elementary compactness corollary is $s(11)>191/50$; it requires no "
+            "additional computation. This claim does not bound the side from above or "
+            "decide any different atom family, shrink, or direction net."
         )
         limit_sentence = "It has no separate limit record."
         limit_decision = ""

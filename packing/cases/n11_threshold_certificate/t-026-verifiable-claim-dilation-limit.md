@@ -204,7 +204,7 @@ decisions. The source sweep was measured at about 782 seconds on two workers, an
 ## Verifier
 
 The following block is byte-for-byte [`verify_claim.py`](verify_claim.py), SHA-256
-`7f349aab274ffa2375421d7181ae7a54024df948979d2fd6e14e264547272732`.
+`9ec3d5125e5f545b660822234c288e6e516022a177625cc54e4ecc8e127449fd`.
 
 ```python
 #!/usr/bin/env python3
@@ -739,7 +739,8 @@ def reduced_polynomial(square):
 
 def canonical_radical(coefficient, radicand):
     if coefficient.denominator == 1:
-        return f"{coefficient.numerator}*sqrt({radicand})"
+        prefix = "" if coefficient.numerator == 1 else f"{coefficient.numerator}*"
+        return f"{prefix}sqrt({radicand})"
     return f"{coefficient.numerator}*sqrt({radicand})/{coefficient.denominator}"
 
 
