@@ -5,13 +5,13 @@ title: A harness that reports a defensible success rate
 kind: task
 status: open
 priority: 1
-version: 2
-spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-12T01:29:34.907Z
-updated_at: 2026-09-12T01:30:09.691Z
+updated_at: 2026-09-13T04:52:33.124Z
 ---
 The first chunk, and nothing downstream means anything without it.
 

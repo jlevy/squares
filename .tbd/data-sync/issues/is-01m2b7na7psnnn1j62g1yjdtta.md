@@ -5,12 +5,16 @@ title: The page can tell a packing from an overlap, and resolve one into the oth
 kind: feature
 status: open
 priority: 1
-version: 1
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m2b7nakccj4tf1tgs4k86nar
+  - type: blocks
+    target: is-01m2chahf57z4w9tj5gehbs0td
 created_at: 2026-09-12T16:36:56.180Z
-updated_at: 2026-09-12T16:36:56.180Z
+updated_at: 2026-09-13T05:00:45.971Z
 ---
 **The foundational chunk, and it is worth doing even if the Search tab never ships.**
 
@@ -28,3 +32,7 @@ Both are cheap: 15 to 56 sweeps, sub-millisecond at these n.
 **The control that must come with it.** The snapped trajectory ends on the record's own poses by construction and scores 5.5e-7 to 1.0e-6 of overlap. Any implementation that does not pass that control is wrong, and the checker should assert it.
 
 Measured numbers this must reproduce, from the harness: blind runs at n = 5, 11, 17 score 8.4e-2, 3.5e-2, 8.6e-2 deepest overlap; resolving makes 120 of 120 valid.
+
+## Notes
+
+2026-09-12 review: preserve raw and repaired arrangements separately; compute finite pair AND wall checks with an explicit metric/tolerance, then validate repaired output. Repair is not a guarantee of best-side monotonicity or global validity. Do not compute resolution on every paint or imply the displayed raw frame has the repaired score. Introduce explicit Resolve action/phase, bounds on effort and refusal status, then same implementation for Pack/headless/Search.

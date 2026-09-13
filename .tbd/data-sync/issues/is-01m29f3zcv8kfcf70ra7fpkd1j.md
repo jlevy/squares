@@ -5,7 +5,7 @@ title: "[epic] Publish the workbench at /workbench/"
 kind: epic
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -15,8 +15,9 @@ child_order_hints:
   - is-01m29f4yh0z5hdhnyeeqfm3dxj
   - is-01m29f4yy9ppm258n8yxd8910s
   - is-01m29f4zbw0vv3xj1xbe95narx
+  - is-01m2chkrt876774phbaj1pa836
 created_at: 2026-09-12T00:08:47.762Z
-updated_at: 2026-09-12T00:09:32.223Z
+updated_at: 2026-09-13T04:50:05.765Z
 ---
 The pipeline exists and is correct; what stands between it and a live page is short and worth naming rather than assuming.
 

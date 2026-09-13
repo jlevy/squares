@@ -5,7 +5,7 @@ title: "[epic] Phase 6: the workbench stops being a prototype"
 kind: epic
 status: open
 priority: 1
-version: 20
+version: 30
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -27,18 +27,21 @@ child_order_hints:
   - is-01m29gkhfkt1sv50caesct8q0x
   - is-01m29gs5z48h1ztmc5h659hd6b
   - is-01m29hy2bcnwej20dfv7c9ydrp
+  - is-01m2chae7ahgc8nf7vb33wkhj7
+  - is-01m2chag118qjnczfj2zbrtx3b
+  - is-01m2chahf57z4w9tj5gehbs0td
+  - is-01m2chakgrn8keadss1jcs401b
+  - is-01m2chkpvbrqv1h9nttp8rrtqb
+  - is-01m2chr5bvzvbmzhsph4jcnrf9
+  - is-01m2chr65cx0jhfd1gsmx3r31y
+  - is-01m2chvkkmv158bkmqg9444jn8
+  - is-01m2cj9hf5v77se0yyzbr5jqd6
 created_at: 2026-09-11T16:53:49.786Z
-updated_at: 2026-09-12T00:57:59.915Z
+updated_at: 2026-09-13T05:07:45.124Z
 ---
-The page carries a banner calling itself a prototype and the banner is honest: a retained spike, excluded from the lint floor, run by hand, drawing with its own copy of the palette. It is also the thing the owner uses and the thing the video is captured from, and those two facts cannot both keep being true.
+Current plan: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md, revised by the 2026-09-12 architecture review. The shared palette, ordinary source extraction, initial Biome/TypeScript adoption, and Pages builder have landed. Behavioral CI, full strict type coverage, evidence/strategy correctness, and package ownership remain incomplete; a banner change is not an acceptance gate.
 
-Five chunks, each landing on its own, in this order. The banner comes off LAST, because it is what makes the current state honest.
-
-A. One source for the palette
-B. The floors (ruff, BasedPyright, and a decision about the JavaScript)
-C. The gates run where gates run
-D. It reads the contracts
-E. It lives where the code lives, and the banner comes off
+Ordered work: refresh PR 155 from the current PR 125 tip (think-5pv0); repair records and numerical/strategy boundaries (think-3eha, think-sdmi, think-karf, think-1fpa); finish shared resolution, seed semantics, strict Python and TS/JS floors, and behavioral CI (think-nals, think-dq1l, think-4ylo, think-kpvc); extract all workbench-specific code and tooling into top-level packages/workbench (think-zisr); remove obsolete spike consumers only after coverage migrates (think-cqfc). Accessibility and Pages repairs proceed alongside those phases. Search remains deferred. General-purpose sqpack libraries remain explicit dependencies; no permanent parallel workbench source tree in packing/devtools or spikes.
 
 ## Notes
 
