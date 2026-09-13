@@ -3,9 +3,9 @@ type: is
 id: is-01m2dzapemsrp1hn26art77r69
 title: "Coordinator: require raw tasks to precede normalized exact tasks"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 3
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -13,10 +13,14 @@ labels:
   - admission
 dependencies: []
 parent_id: is-01m2b883ztxn7qazs98bndea6b
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-09-13T18:09:02.932Z
-updated_at: 2026-09-13T19:17:51.825Z
+updated_at: 2026-09-13T19:30:09.094Z
+closed_at: 2026-09-13T19:30:09.093Z
+close_reason: Independent exact-head review at dbbf8495 accepted the targeted digest-consistent cross-route chronology and result.json replacement controls. Later arithmetic admission findings are separate beads think-dgfk and think-0osz; no profile or target ran.
+resolution: null
+duplicate_of: null
 ---
 Independent exact-head review at fc3e314 found coherent swapped task/child times with republished digests accepted. Enforce cross-route chronology against producer phase observations and preserve legal touching boundaries.
 

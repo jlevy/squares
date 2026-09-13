@@ -3,14 +3,18 @@ type: is
 id: is-01m2e3ehdf6s735hrnswcxd2xg
 title: "Coordinator: reject parsed or derived infinite deadline identity"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m2b883ztxn7qazs98bndea6b
 created_at: 2026-09-13T19:21:03.132Z
-updated_at: 2026-09-13T19:21:03.132Z
+updated_at: 2026-09-13T19:34:24.351Z
+closed_at: 2026-09-13T19:34:24.351Z
+close_reason: Isolated repair 30f69dca integrated as 775c71d5; independent exact-head review accepted producer/coordinator domain refusals for finite phase-sum OverflowError and JSON/derived infinite deadlines. Supervised terminal now retains invalid/metrics-refused, finite near-limit controls pass, 141 focused tests passed. No positive profile/BC329 target.
+resolution: null
+duplicate_of: null
 ---
 Independent coordinator review at dbbf8495 found a digest/count-consistent synthetic receipt with finite origin=1e308, calibration_seconds=1e308, external_seconds=1.1e308 and deadline JSON numerals 1e999 accepted by real inventory_profile. Python json parses 1e999 to inf; expected origin+allowance also overflows to inf, so equality passes. Confirm producer parity and refuse nonfinite parsed or derived deadlines before matching. This is a preexisting boundary, not evidence the dbbf repair caused it. Add target-free control; no positive profile/BC329 target.
