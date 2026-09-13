@@ -5,28 +5,25 @@ title: "[epic] Three aspects, one set of building blocks: Pack, Search, Animate"
 kind: epic
 status: open
 priority: 1
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
+version: 11
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
+parent_id: is-01m28p7h39vcykq99dgjmvwv98
+child_order_hints:
+  - is-01m2ckzxqf9s88871t1zkmayse
+  - is-01m2ckzy45b1b28pvt1nbh4gdm
+  - is-01m2cm04t1enrq3zreb3rjjhpd
+  - is-01m229am4r6vrcj7djyt78e85w
+  - is-01m229amjwvykvfz1jhnjxdap9
+  - is-01m291gkje2c7x07x2ah4fdpxn
+  - is-01m2b7nakccj4tf1tgs4k86nar
+  - is-01m229c25xgrtk9hh5nd1brnxn
 created_at: 2026-09-12T16:36:55.773Z
-updated_at: 2026-09-12T16:36:55.773Z
+updated_at: 2026-09-13T05:36:42.680Z
 ---
-Owner, 2026-09-12: "we have to have everything exposed in the workbench in a way that you can show this to me. It may be that we have another tab called Search and organize it logically. Packing could be more prescriptive and have various settings for a single run. Search would be for many runs. Animation is a completely different thing. But they're built from the same building blocks."
+Owner direction, 2026-09-12: Pack handles one n and one prescriptive run; Search handles many runs and their outcome distributions; Animate presents records or illustrative frames. All three use shared computational building blocks.
 
-Three aspects, one set of parts:
+The 2026-09-12 review corrects the original claim that one common engine is already established: cached transition simulation, live optimization, and benchmark guards still duplicate parts of the physics. Sharing one browser/headless step kernel and run contract is an acceptance criterion.
 
-- **Pack** -- one n, one run, prescriptive. The settings that shape a single trajectory.
-- **Search** -- one n, many runs. The settings that shape a campaign: how many trials, what varies between them, and what the distribution of outcomes looks like.
-- **Animate** -- a range of n played end to end. A presentation of finished records, not a computation.
-
-They already share the machinery: one physics, one force law, one seed, one beat. What is missing is that two of the three have no home on the page. Everything the first night's benchmark measured -- validity, best-of-k, the distribution, the parameter sweep -- lives in a Python harness and is invisible in the thing the owner actually looks at.
-
-**The foundational chunk is not the tab.** It is the resolver (think-r8kp): the page has no way to say whether an arrangement is a packing, and its blind and free styles draw arrangements that are not. Until the page can separate overlapping squares and report the container the separated arrangement needs, a Search tab would display the same invalid numbers the first two benchmark rounds did. Moving it into the page fixes the animation as well as the search.
-
-Chunks:
-- **think-r8kp** -- the page can tell a packing from an overlap, and resolve one into the other.
-- **think-e2mq** -- Search as a third mode, with its own controls and its own readout.
-- **think-9h5d** -- the controls reorganised so each group belongs to a mode, which is think-cz99 with a third mode to place them in.
-
-What must not happen: three copies of the physics. The modes differ in how many runs they ask for and what they show, never in what a run is.
+The resolver is think-nals and the Search UI is think-vhgz; older references to think-r8kp and think-e2mq are superseded. First repair record/evidence/strategy/benchmark validity and seed semantics; complete strict language floors and behavioral CI; consolidate source and all workbench-specific tools in top-level packages/workbench through think-zisr; audit and remove obsolete consumers through think-cqfc. Then expose Search as a third mode. Calibrate becomes Search presets. Pack accepts a chosen n within explicit measured limits without an atlas-transition dependency. Animate uses a deterministic timeline and never grants numerical assurance. No separate simulation implementation for a tab.

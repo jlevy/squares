@@ -5,13 +5,13 @@ title: Seven hypotheses about why the annealing does or does not find a packing
 kind: task
 status: open
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-12T01:30:08.151Z
-updated_at: 2026-09-12T08:54:26.164Z
+updated_at: 2026-09-13T04:52:33.124Z
 ---
 **Written before the sweeps, so the sweep tests them rather than generating them.** A hypothesis found in the data after the fact is a description of the data.
 

@@ -3,16 +3,20 @@ type: is
 id: is-01m225ps2ejkzyjc45g0xj6kyh
 title: "Build Calibrate: sweep the strategy over known records with a held-out split"
 kind: feature
-status: open
+status: closed
 priority: 2
-version: 1
+version: 4
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:09:37.101Z
-updated_at: 2026-09-09T04:09:37.101Z
+updated_at: 2026-09-13T05:42:45.058Z
+closed_at: 2026-09-13T05:42:45.056Z
+close_reason: "Superseded by think-3yma: one calibration/held-out Search preset implementation with the complete manifest and reporting contract. Historical research framing is retained; no feature is claimed shipped."
+resolution: null
+duplicate_of: null
 ---
 Not built. Deferred until Pack and Animate are clean, which is a sequencing decision and not a lack of interest.
 
@@ -29,3 +33,7 @@ Open, and the owner's, and it must be answered before the build: is the split de
 Prerequisites already tracked: think-7v26 (the rigidity slider reaches settings the timestep cannot hold, and a sweep would visit them with nobody watching), think-tswc (steps per second under Node, which prices a sweep before it is committed to), and the C0d stationarity test, which is the necessary condition every hit rate here depends on.
 
 Reuse rather than start parallel machinery: the campaign's hypothesis records, pre-declared accept rules and devtools/run_arm_sweep.py are the same shape. Research framing: X-025, candidate C0b.
+
+## Notes
+
+Implementation superseded by think-3yma under the governing workbench plan. It preserves campaign-level predeclared tuning/held-out partitions, individual versus configuration-level outcomes, equal work and manifest replay. The old motion/stability prerequisites remain scientific/behavioral obligations to disposition in think-a9gt and the kernel acceptance, not instructions to create another tab or UI loop.

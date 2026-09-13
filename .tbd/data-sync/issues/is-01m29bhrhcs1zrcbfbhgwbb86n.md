@@ -1,23 +1,22 @@
 ---
 type: is
 id: is-01m29bhrhcs1zrcbfbhgwbb86n
-title: Two descriptions of the workbench API, and they will drift
+title: Make the public workbench API and its types agree
 kind: chore
 status: open
 priority: 3
-version: 1
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
-labels: []
-dependencies: []
+labels:
+  - workbench-roadmap
+  - workbench-phase-2
+dependencies:
+  - type: blocks
+    target: is-01m2chvkkmv158bkmqg9444jn8
+  - type: blocks
+    target: is-01m2chr65cx0jhfd1gsmx3r31y
 parent_id: is-01m299tcsrh44b8n8m1c6jpgcb
 created_at: 2026-09-11T23:06:25.195Z
-updated_at: 2026-09-11T23:06:25.195Z
+updated_at: 2026-09-13T05:43:46.628Z
 ---
-The type gate produced the same knowledge twice, in parallel:
-
-- `probes/atlas-transitions.d.ts` -- 643 lines, ~30 named interfaces, string-literal unions read off the page's own whitelists, cross-checked key by key against the object the page exports (114 keys, all declared, nothing declared that is not there).
-- a `WorkbenchApi` JSDoc typedef inside `assets/workbench.js`, written by the other lane for its own `window.atlasTransitions` handle.
-
-They agree today -- the 114-key cross-check was re-run after both landed -- and they are in different type programs, so nothing makes them agree tomorrow.
-
-The .d.ts is the fuller description and the one derived from the source, so it should be the single reference: have `workbench.js` point at it rather than restate it, or generate the typedef from it. Whatever the shape, add the key cross-check to `check_probes.py` or to the browser floor so a drift is a failure rather than a discovery.
+Phase 2, review R8: setSeed/seed are present at runtime but missing in the probe declaration. Use one authoritative type definition, remove duplicated API knowledge, and test runtime versus declared keys plus semantic parameter/result shapes. New source and assertions belong under packages/workbench. Acceptance: a deliberate missing/extra API key or incompatible parameter/result fails a normal gate; setSeed reports the effective seed under think-dq1l. Phase 3 exports typed browser/headless entry points from this contract.

@@ -3,14 +3,28 @@ type: is
 id: is-01m2b80w08820xxzv5cfgtrhc6
 title: The campaign gate fails 15 ways on the overnight round, id collision first
 kind: bug
-status: open
+status: closed
 priority: 0
-version: 1
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
-labels: []
-dependencies: []
+labels:
+  - workbench-roadmap
+  - workbench-phase-1
+dependencies:
+  - type: blocks
+    target: is-01m2chahf57z4w9tj5gehbs0td
+  - type: blocks
+    target: is-01m2ckzvnsawqg79z9ybspc3yt
+  - type: blocks
+    target: is-01m2b80wcx8cm9vb2m97cx7s4s
+  - type: blocks
+    target: is-01m2chkqr9wvm46hk56ehfzrqw
 created_at: 2026-09-12T16:43:14.823Z
-updated_at: 2026-09-12T16:43:14.823Z
+updated_at: 2026-09-13T06:08:59.121Z
+closed_at: 2026-09-13T06:08:59.120Z
+close_reason: Completed in91722c3a after parent merge27d2f8cc. New collision movedtoexp210; four source mappings verifiedequal withgit; measuredprecisionorhistoricalannotation; honest bounded unknown-timing migration with negative tests; six hypotheses indexed; ledger,SYNOPSIS,map,footers/runbookreconciled. Schema,campaign,documentation gatespass;47campaigntests+BasedPyrightpass. Raw historical evidence notinvented.
+resolution: null
+duplicate_of: null
 ---
 `packing-ledger check` fails 15 ways on the overnight annealing work. The campaign has a drift gate and the round was recorded without running it, so four experiments sit in the tree outside the record they claim to be part of.
 
@@ -27,3 +41,7 @@ FAIL ledger.md is stale; run `packing-ledger render`
 The rest are the schema doing its job: a numerical experiment must declare precision, rounding and tolerance, and a terminal round must account for its effort. Both were skipped because nothing ran the gate.
 
 **The process fix is the point, not the fifteen repairs.** The gate exists; the overnight round never called it. It belongs in the runbook's round loop beside `--replay`, so recording an experiment and validating it are one step.
+
+## Notes
+
+2026-09-12 stack review at 6e191a35 confirms hosted validate and suite failures. Include missing/unmapped annealing plan and results README, common-doc footers, unreachable exp-206 source commit ee27f8e3, duplicate ID, missing numerical/effort blocks, ideas index, ledger and SYNOPSIS baseline. Current planning pass registers its own new/edited docs but leaves experiment repairs to this bead. Review doc: docs/project/reviews/review-2026-09-12-workbench-stack-architecture.md.

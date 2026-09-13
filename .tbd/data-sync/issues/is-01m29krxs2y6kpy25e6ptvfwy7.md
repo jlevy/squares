@@ -5,13 +5,13 @@ title: Sweep the parameters the hypotheses name, not a grid
 kind: task
 status: open
 priority: 1
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
+version: 2
+spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-12T01:30:08.545Z
-updated_at: 2026-09-12T01:30:08.545Z
+updated_at: 2026-09-13T04:52:33.124Z
 ---
 The sweep, and it only begins once the harness reports a defensible number (think-k2fr) and the hypotheses are written down (think-3zt6).
 

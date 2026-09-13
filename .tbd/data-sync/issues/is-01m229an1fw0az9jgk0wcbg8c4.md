@@ -5,13 +5,21 @@ title: Benchmark the workbench simulator from the command line, without a browse
 kind: task
 status: open
 priority: 2
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - packing
-dependencies: []
-parent_id: is-01m1z68hzazv9yjs9k7cddmf82
+  - workbench-roadmap
+  - workbench-phase-3
+dependencies:
+  - type: blocks
+    target: is-01m2cm03rtrjcg98ejb9y56jn6
+parent_id: is-01m2chahf57z4w9tj5gehbs0td
 created_at: 2026-09-09T05:12:54.062Z
-updated_at: 2026-09-09T05:12:54.062Z
+updated_at: 2026-09-13T05:43:48.002Z
 ---
-A browser reading conflates algorithm cost, paint cost and machine load. Measured context so nobody chases a phantom: the page is not slow. Headless it holds 120 frames per second at both n=17 and n=272, worst frame 10 ms, 358 DOM nodes, 10.7 MB heap, every API call under 2 ms; apparent sluggishness coincided with a five-minute load average of 116 caused by another session. Build a benchmark that runs the simulator's step function under Node with no DOM, the way packing/tests/test_motion_lab.py runs the motion lab's model with the nodejs-wheel-binaries dependency. Report steps per second and pair tests per second at n = 5, 17, 100, 272 for the physics and bodies solvers, fixed step count and seed. Write the table into the prototype's NOTES.md so a future regression can be attributed rather than argued about.
+Phase 3 under think-zisr. Benchmark the extracted DOM-free package API from packages/workbench/tools with fixed seed/configuration and declared runtime. Report steps and pair tests per second plus objective/validity/work receipts at representative n including 5, 17, 100 and 272 within measured limits. Output a retained package benchmark artifact; do not write new results into spike NOTES or drive a page through Playwright. Acceptance: no DOM dependency or copied physics; deterministic replay and browser/Node parity controls; same-work comparisons separate algorithm cost from rendering.
+
+## Notes
+
+2026-09-12 review: this benchmark belongs inside packages/workbench/tools and calls the DOM-free shared step API. Keep fixed seeds and reported step/pair-test work at representative n. Preserve the original measured context as historical evidence; new baseline results belong to a retained package benchmark artifact, not the spike NOTES. Validate replay and browser/Node parity before removing the old caller.

@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m28p7h39vcykq99dgjmvwv98
-title: "[epic] Phase 6: the workbench stops being a prototype"
+title: Ship a clean standalone packing workbench
 kind: epic
-status: open
+status: in_progress
 priority: 1
-version: 20
+version: 40
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -27,18 +27,29 @@ child_order_hints:
   - is-01m29gkhfkt1sv50caesct8q0x
   - is-01m29gs5z48h1ztmc5h659hd6b
   - is-01m29hy2bcnwej20dfv7c9ydrp
+  - is-01m2chae7ahgc8nf7vb33wkhj7
+  - is-01m2chag118qjnczfj2zbrtx3b
+  - is-01m2chahf57z4w9tj5gehbs0td
+  - is-01m2chakgrn8keadss1jcs401b
+  - is-01m2chkpvbrqv1h9nttp8rrtqb
+  - is-01m2chr5bvzvbmzhsph4jcnrf9
+  - is-01m2chr65cx0jhfd1gsmx3r31y
+  - is-01m2chvkkmv158bkmqg9444jn8
+  - is-01m2cj9hf5v77se0yyzbr5jqd6
+  - is-01m2ckve44dr18jrbqajj3tjpw
+  - is-01m2ckzsvafkecaad6hh20gbvz
+  - is-01m2ckztpy58ydg71fkvwz7f0v
+  - is-01m2ckzvnsawqg79z9ybspc3yt
+  - is-01m2cm03rtrjcg98ejb9y56jn6
+  - is-01m2b7n9tyq13n0zw4tkq4rfss
+  - is-01m2b7na7psnnn1j62g1yjdtta
+  - is-01m2cmf6vy26q99h0pa25g518w
 created_at: 2026-09-11T16:53:49.786Z
-updated_at: 2026-09-12T00:57:59.915Z
+updated_at: 2026-09-13T05:48:30.727Z
 ---
-The page carries a banner calling itself a prototype and the banner is honest: a retained spike, excluded from the lint floor, run by hand, drawing with its own copy of the palette. It is also the thing the owner uses and the thing the video is captured from, and those two facts cannot both keep being true.
+Governing source of truth: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md. Deliver a single top-level packages/workbench containing all application, core simulation, illustration timeline, IO, tests/probes and workbench-specific tools, with Pack, Animate and later Search using the same typed run/receipt contracts. The architecture review is evidence and resolution tracking, not a second roadmap. Supporting annealing, shared-contract and video plans supply detail.
 
-Five chunks, each landing on its own, in this order. The banner comes off LAST, because it is what makes the current state honest.
-
-A. One source for the palette
-B. The floors (ruff, BasedPyright, and a decision about the JavaScript)
-C. The gates run where gates run
-D. It reads the contracts
-E. It lives where the code lives, and the banner comes off
+Phases 0-2 refresh and inventory, establish an immediately strict package shell, repair evidence/strategy/benchmark/seed semantics and quality gates. Phase 3 consolidates data, browser/Node kernel, timeline, app and build/capture tools. Phase 4 completes arbitrary-n Pack, cleans obsolete consumers, documents operation, and validates a safe Pack/Animate release. Phase 5 completes experimental strategies, Search and calibration, with an end-to-end acceptance checkpoint. Search is deferred by dependencies, not dropped. Optional Python/Rust services and new mathematical campaigns are separate work. Existing palette/source separation and initial browser-floor adoption are retained accomplishments; legacy bead status is reconciled under think-a9gt.
 
 ## Notes
 
