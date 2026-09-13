@@ -5,7 +5,7 @@ title: Build the maintained BC329 three-profile calibration coordinator
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation; independent operational review
 labels:
@@ -21,10 +21,10 @@ dependencies:
     target: is-01m2cv85q2ajjgsnx7076ta8cp
 parent_id: is-01m2appdgg1p32xwgxptcqqb2x
 created_at: 2026-09-12T16:47:12.378Z
-updated_at: 2026-09-13T17:45:43.903Z
+updated_at: 2026-09-13T18:02:47.234Z
 ---
 Run-sheet review F-2/F-3. Replace the one-off shell/Python timing, immediate-readback, and summary heredocs with a maintained devtools coordinator and tested receipt contract before any profile. Measure monotonic command wall time from immediately before subprocess launch until the top-level calibration command returns; retain exact commands, stdout, stderr, exit statuses, invocation identities and receipt digests; call strict producer/inventory readers; reconstruct counts, bytes and digests; atomically write and reread a duplicate-key-safe three-profile median/min-max summary. Preserve the narrower producer clocks and their scopes. Do not run a profile or BC329 until the tool and review pass.
 
 ## Notes
 
-Integrated coordinator at 212e0dfc passed 250 target-free tests and static checks, but independent exact-head review found two definite admission defects: Linux interval/dilation effective-workers mismatch with producer; coherent topology task/child lifetimes can lie beyond worker_elapsed_seconds and still pass inventory. Repairs, mutation controls, and new exact-head review required before profile execution. No profile or BC329 ran.
+Coordinator/producer repair committed on PR156 at fc3e314d. It addresses prior independent REFUSE findings: Linux interval/dilation effective worker count, task lifetime bounded by worker elapsed, result regular-file preflight before read. Root ran focused producer/coordinator tests: 121 passed in 14.06s; Ruff/format/BasedPyright clean. Independent Sol Max exact-head rereview of fc3e314d is active; no acceptance yet. No positive profile or BC329 ran.
