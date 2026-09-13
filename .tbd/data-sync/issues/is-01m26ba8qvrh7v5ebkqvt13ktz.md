@@ -5,11 +5,11 @@ title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 4
+version: 5
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-13T06:10:14.568Z
+updated_at: 2026-09-13T07:07:22.037Z
 ---
 On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 
@@ -25,4 +25,4 @@ On the next occurrence with the diagnostics present, inspect the reported differ
 
 ## Notes
 
-September 12 stack review: PR148 at a072723bac956d4438a21c57565cc066b760f7fa failed PDF self-reproduction in run 34739859995, attempt 1: 843074 then 843073 normalized bytes. The failing pair and object offset were not retained, so no cause can be inferred. An independent Astra Max review found no evidence identifying PR149 readiness guards as this incident’s remedy. Attempt 2 passed on the unchanged revision: two renders agreed at 843074 bytes, 22 pages, and 18 embedded fonts; the full Pages build passed. PR149 and PR156 also passed their initial hosted PDF checks with the diagnostic and readiness changes. This issue remains open. A future occurrence with the PR149 diagnostics should identify the byte location/object before another causal fix is proposed.
+September 12 stack review: PR148 at a072723bac956d4438a21c57565cc066b760f7fa failed PDF self-reproduction in run 34739859995 attempt 1 (843074 versus 843073 normalized bytes), then passed on the unchanged revision. No failing pair was retained, so no cause is inferred. Final September 13 publication heads 8d0a3ff2 and 52e4ab65 passed first-attempt stored-artifact checks at 843154 and 843171 normalized bytes respectively, both 22 pages and 18 embedded fonts. The implemented --check-artifact compares the actual published PDF and receipt with a fresh draw, and --diagnostics-dir preserves a raw reference/replay pair and neutral report on failure. Pages uploads that evidence with seven-day retention. Download the failing artifact before rerunning: upstream actions/upload-artifact issue 585 documents prior-attempt artifacts becoming unavailable even with unique names. Inspect the retained byte/object difference before proposing a causal fix; these controls do not resolve this unknown cause.
