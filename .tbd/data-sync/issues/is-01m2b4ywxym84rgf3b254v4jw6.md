@@ -5,7 +5,7 @@ title: Test adjacent and opposite forced-type BC303 pair surplus inequalities
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max mathematics; Sol implementation only after mathematical preregistration
 labels:
@@ -19,8 +19,10 @@ child_order_hints:
   - is-01m2b8wb515946enwhcp3qg0ng
   - is-01m2e0e3zx86jzce3mef90mdrj
   - is-01m2e0qcksvn1sygh0tn3kj11d
+  - is-01m2e6drt4x4x9jqaymx700ncb
+  - is-01m2e6e4j1ee5nre22gp7fyyrc
 created_at: 2026-09-12T15:49:44.509Z
-updated_at: 2026-09-13T19:03:32.180Z
+updated_at: 2026-09-13T20:13:15.712Z
 ---
 Freeze the BC303 measure and one ordered adjacent or opposite corner pair. Require the first corner's viable-label set to be exactly `{0}` and the second's to be exactly `{15}`; include every local mark-incidence role, all distinct owners, and simultaneous full-parent compatibility across both corners. Test exactly whether every admitted realization is empty or has total owner surplus greater than `epsilon - u_local*w`. Run adjacent and opposite domains separately. Accept only with complete continuous-domain proof for both physical pair types; reject the named two-corner surplus mechanism with an exact simultaneous witness at or below the allowance. A rejection does not rule out shared residuals, contact paths, other resources, or a larger tuple family. Retain source-bound inputs, exact witnesses, independent replay, and unresolved branches.
 
