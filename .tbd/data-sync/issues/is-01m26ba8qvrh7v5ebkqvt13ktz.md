@@ -5,11 +5,11 @@ title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 7
+version: 8
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-13T18:24:25.917Z
+updated_at: 2026-09-13T19:00:13.740Z
 ---
 On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 
@@ -34,3 +34,5 @@ Note the two corrections on PR157 are complementary, not duplicates. The owner's
 September 13, 2026 resumed review clarification:
 
 The later PR157 correction preserves additional quoted /Rect windows, but those windows establish only the reported numeric annotation difference. They do not establish identical prepared HTML or rule out absent content elsewhere. The earlier note's phrase 'a text-measurement difference rather than content going missing' overstates what the retained evidence proves. Current disposition remains unknown cause. PR149's artifact/source/math guards close independently reproduced publication gaps, without establishing or fixing this historical cause. Save future failure diagnostics before rerunning an Actions attempt; leave this issue open.
+
+September 13 new retained occurrence: Pages run34774787868 attempt1 failed on PR157 cadbf7e149b65215724daf813add78d80879d327 at the stored-artifact vs fresh-draw check. All six browser/math failure controls passed first. Actual reference.pdf/replay.pdf and neutral report were downloaded before any retry from explainer-pdf-check artifact10323137895 into /private/tmp/pr157-ci-cadbf7e1/pages-artifacts/explainer-pdf-check/pdf-check-644lkxd1. Both raw/normalized lengths843157; normalized first differing byte524772 in object156. Reference SHA256 ea8a21929c8e7fe9b4a401b22e521e4fae9351617d0fb317ee5144a70f17b70e; replay e76ca05a908f8beef6bbea6a6d6237c951b38ca1a0d480499d304b5ee78fea32. Exact prepared HTML also retained. Independent byte/stream and content/visual reviews are in progress; cause is not yet established. No retry or normalization change has been made.
