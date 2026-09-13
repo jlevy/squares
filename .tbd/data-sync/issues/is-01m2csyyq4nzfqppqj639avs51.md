@@ -5,7 +5,7 @@ title: Review and integrate PR157 weighted threshold atoms into the reviewed sta
 kind: task
 status: in_progress
 priority: 1
-version: 30
+version: 31
 assignee: root
 delegate: root
 labels: []
@@ -33,7 +33,7 @@ child_order_hints:
   - is-01m2e2kbf4hhhr7j158zctpbzn
   - is-01m2e60sxv8kxk26am7ydbpceg
 created_at: 2026-09-13T07:16:00.865Z
-updated_at: 2026-09-13T20:05:58.841Z
+updated_at: 2026-09-13T20:16:19.779Z
 ---
 Review all PR157 code, mathematics, persisted formats, source replay, prose, and integration with PR148/149/156. Publish structured findings as a PR comment before delegating fixes using address-pr-review. Track dispositions, merge current stack ancestors, validate exact mathematics and end-to-end CI, push and verify final heads. No main merge or deployment.
 
@@ -60,3 +60,5 @@ Inherited local validation problems were resolved by moving the nested baseline 
 Current integration checkpoint, September 13: PR157 repair committed and pushed as cadbf7e149b65215724daf813add78d80879d327; pre-push46/46 steps passed in349.41 seconds,1282 tests passed with3 platform skips. Ordinary CI running. Important scope update confirmed by PR156 coordinator thread01a082b3-057c-7c62-905c-1a543979e33a: they actively own the unpublished calibration continuation, now7e4d2487 and22 commits above remote52e4ab65, plus review/run-sheet docs. PR156 deliberatelydraft; coordinator and run-sheet admission remain refused. They will send the eventual reviewed/pushed head andCI disposition. Root retains PR157/whole-stack integration ownership, will merge that new156head and rerun full checkpoint on combinedsource. Do not treat older remote CI as coverage of unpublished156changes. Three reused Astra Max lanes now audit merge-specific math, reader/source-closure and handoff interactions read-only while the separate owner completes156. No positive calibration profile or BC329 target has run per owner confirmation. Root is not taking over their working tree or discarding their edits.
 
 September 13 publication checkpoint: completed lower-layer reviews are now posted on PR148 (issuecomment-5655488385, head b43d3011) and PR149 (issuecomment-5655488459, head 8d0a3ff2). Both preserve their own exact CI scopes and explicitly hold final stack readiness for the new PR156 continuation, the retained current PDF failure, and final integrated validation. The MATH05 fix at cadbf7e1 remains independently accepted. PDF observer implementation is review-complete in its owner lane and independently under final review; a saved-HTML macOS trace succeeded but is not a Linux reproduction or causal repair. Root owns current failure bead think-v38h. No PR156 branch or draft ownership was changed.
+
+September 13 20:15Z root checkpoint: optional trace and preserved original failed PDF pair are committed/pushed as 876c594521ba61840cf68d732b0a795f8d24e378. Required pre-push passed all46 selected checks in844.1087s, including5466 tests with9 browser/platform skips; receipt /private/tmp/pr157-pdf-trace-push.json and artifacts directory beside it. Coverage ledger closing/review-coverage-current.md binds59 published-stack source/config/test paths to review evidence, with no gap. Ordinary Pages34778775193 passed. Packing34778775206 attempt1 passed every correctness check but exceeded the195s timing ceiling by0.2s; all five timing artifacts and logs were saved before failed-job retry, and attempt2 passed. Diagnostic Pages34778996709 is preserved and was not rerun: ordinary artifact check passed, traced draws0-7 agreed and draw8 shifted one numeral upward0.164095pt. Independent text/font/visual review found no mathematical content difference. Sampled glyph/box geometry and font-state sequences match across all nine draws and do not explain internal pagination. Cause remains unknown. Root and verifier are implementing a separate optional unchanged-text reconstruction diagnostic control, with default production path and exact comparison preserved; not a claimed fix. PR156 owner remains responsible for local9c56e901 and its push/CI, remote still52e4ab65. New published PR157-INTEGRATION-01 (comment5655786544, think-99bz) requires narrowly reviewed combined-head launch instructions; proof lane prepares an ignored patch pending integration. No profile, target, main merge, or deployment ran.
