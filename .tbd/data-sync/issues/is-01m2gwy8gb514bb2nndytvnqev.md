@@ -3,15 +3,19 @@ type: is
 id: is-01m2gwy8gb514bb2nndytvnqev
 title: Throw away the confused annealing material; keep only what survived checking
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-14T21:25:01.570Z
-updated_at: 2026-09-14T21:25:15.346Z
+updated_at: 2026-09-14T22:16:24.377Z
+closed_at: 2026-09-14T22:16:24.375Z
+close_reason: Done and pushed. 4c93a6c8 rewrote X-029, exp-207..210, H-207..211 and the runbook to what survived checking, retired H-206, and renamed the slugs. 4a01f589 replaced the guessed overlap mechanism with the blind contraction's 0.08 tolerance. 6933b62d recorded that the snap control was never code, gave the overlap range from 123,190 local rows, and noted bodies-style blocks. Ledger, SYNOPSIS and schema gates pass.
+resolution: null
+duplicate_of: null
 ---
 Owner, 2026-09-14: "let's thoroughly edit and throw away the confused information, and make sure none of the code that was making that mistake about not checking the run arrangement as a packing is removed."
 

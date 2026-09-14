@@ -3,14 +3,18 @@ type: is
 id: is-01m2gyhzmdg3h1ptq6b2h74z4q
 title: Remove the kind tag at the top-left of the stage
 kind: task
-status: open
+status: closed
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m2gyhqfmr0xpcjsr34na3acq
 created_at: 2026-09-14T21:53:16.429Z
-updated_at: 2026-09-14T21:53:51.930Z
+updated_at: 2026-09-14T22:16:24.028Z
+closed_at: 2026-09-14T22:16:24.027Z
+close_reason: "Fixed in c94054c4: #kind-tag is removed from the stage, template, CSS and JS; transition statistics remain in transition-stats.json. check_workbench.py asserts it is absent, and the two probes that only read it (modes/step-header, dom/hidden) are removed."
+resolution: null
+duplicate_of: null
 ---
 Owner, 2026-09-14: "the labels at the top like this can just go away."
 
