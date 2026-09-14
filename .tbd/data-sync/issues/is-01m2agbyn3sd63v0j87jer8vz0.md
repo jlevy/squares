@@ -5,7 +5,7 @@ title: Reduce the seven-mark selection theorem to one explicit routing obligatio
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 17
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max first-principles selection-theorem analysis; root integration
 labels:
@@ -19,8 +19,13 @@ child_order_hints:
   - is-01m2agbya33mh3sbs5jn8xss56
   - is-01m2b8wa5e63nnraa2dpe1m3v3
   - is-01m2eq4xag3kr37dvmd9py7mmd
+  - is-01m2erafvq162xtk7d5ngs5k44
+  - is-01m2eraxx79g771qkgm3qzcwps
+  - is-01m2eray9ae7g38emjwcedm49j
+  - is-01m2eraymw72npp61s5sbdb32d
+  - is-01m2erbhvg9kcfptzwrnsbmkd9
 created_at: 2026-09-12T09:49:52.162Z
-updated_at: 2026-09-14T01:05:19.183Z
+updated_at: 2026-09-14T01:26:25.391Z
 closed_at: 2026-09-12T16:41:51.374Z
 close_reason: "Exact owner-selection obligation and finite remainder are now durably defined and independently reviewed at 39714308: 16 maximal avoiding products, 3 physical versus 10 fixed-chart orbits, two missing lemmas, scoped path deductions, and exact narrow controls. No global selection theorem or new n11 bound is claimed."
 resolution: null
