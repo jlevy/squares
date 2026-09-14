@@ -1,0 +1,60 @@
+name: Linux fork-worker diagnostic
+
+# A new workflow cannot receive workflow_dispatch until it exists on the default branch.
+# A push to this scratch branch runs only the one real-fork regression control.
+"on":
+  push:
+    branches: [codex/think-glad-linux-diagnostic]
+
+permissions:
+  contents: read
+
+jobs:
+  fork-worker:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        xdist-workers: [0, 4]
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the exact diagnostic branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Repeat the real-fork callback-failure control
+        env:
+          XDIST_WORKERS: ${{ matrix.xdist-workers }}
+        run: |
+          failures=0
+          for attempt in $(seq 1 10); do
+            echo "::group::xdist -n ${XDIST_WORKERS}, attempt ${attempt}/10"
+            if uv run --frozen --all-extras --group dev \
+              pytest -q -s -n "${XDIST_WORKERS}" \
+              tests/test_fractional_threshold_interval.py::test_real_forked_callback_failure_requests_and_observes_worker_exit; then
+              echo "PASS: attempt ${attempt}"
+            else
+              echo "FAIL: attempt ${attempt}"
+              failures=$((failures + 1))
+            fi
+            echo "::endgroup::"
+          done
+          echo "xdist -n ${XDIST_WORKERS}: ${failures}/10 failures"
+          test "${failures}" -eq 0

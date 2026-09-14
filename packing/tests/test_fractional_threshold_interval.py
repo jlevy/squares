@@ -20,11 +20,14 @@ from __future__ import annotations
 import random
 import sys
 import threading
+import time
 from collections.abc import Callable
 from concurrent.futures import Future, ProcessPoolExecutor, ThreadPoolExecutor
+from contextlib import suppress
 from fractions import Fraction
 from itertools import combinations
 from multiprocessing.process import BaseProcess
+from pathlib import Path
 from typing import Literal, cast
 from unittest.mock import patch
 
@@ -851,32 +854,90 @@ def test_real_forked_callback_failure_requests_and_observes_worker_exit() -> Non
     data = ThresholdAtomData.of(certificate)
     rotations = doubled_net(certificate.half_tangents)[:8]
     worker_processes: list[BaseProcess] = []
+    termination_attempts: list[tuple[int | None, float]] = []
+    last_observation: dict[str, object] = {}
+    original_terminate = BaseProcess.terminate
+
+    def record_terminate(process: BaseProcess) -> None:
+        termination_attempts.append((process.pid, time.monotonic()))
+        original_terminate(process)
+
+    def linux_process_status(pid: int | None) -> dict[str, str]:
+        if pid is None:
+            return {"error": "worker has no PID"}
+        try:
+            status = Path(f"/proc/{pid}/status").read_text(encoding="utf-8")
+        except OSError as error:
+            return {"error": f"{type(error).__name__}: {error}"}
+        fields = {"State", "Threads", "SigPnd", "ShdPnd", "SigBlk", "SigIgn", "SigCgt"}
+        return {
+            key: value.strip()
+            for line in status.splitlines()
+            for key, separator, value in (line.partition(":"),)
+            if separator and key in fields
+        }
 
     class TrackingExecutor(ProcessPoolExecutor):
         def terminate_workers(self) -> None:
             worker_processes.extend(self._processes.values())
-            super().terminate_workers()
+            with patch.object(BaseProcess, "terminate", record_terminate):
+                super().terminate_workers()
 
     def fail(_outcome: DirectionOutcome) -> None:
         raise RuntimeError("synthetic callback failure")
 
-    with (
-        patch.object(threshold_interval, "ProcessPoolExecutor", TrackingExecutor),
-        pytest.raises(RuntimeError, match="synthetic callback failure"),
-    ):
-        threshold_interval._search_directions(  # noqa: SLF001
-            certificate,
-            data,
-            rotations,
-            prune_at=None,
-            workers=2,
-            progress=fail,
-        )
+    try:
+        with (
+            patch.object(threshold_interval, "ProcessPoolExecutor", TrackingExecutor),
+            pytest.raises(RuntimeError, match="synthetic callback failure"),
+        ):
+            threshold_interval._search_directions(  # noqa: SLF001
+                certificate,
+                data,
+                rotations,
+                prune_at=None,
+                workers=2,
+                progress=fail,
+            )
 
-    assert worker_processes
-    for process in worker_processes:
-        process.join(timeout=5)
-        assert not process.is_alive()
+        assert worker_processes
+        for process in worker_processes:
+            wait_started = time.monotonic()
+            process.join(timeout=5)
+            observed_at = time.monotonic()
+            alive = process.is_alive()
+            diagnostic = {
+                "worker_pid": process.pid,
+                "exitcode": process.exitcode,
+                "parent_threads": threading.active_count(),
+                "wait_seconds": observed_at - wait_started,
+                "terminate_attempts": [
+                    {"pid": pid, "seconds_before_observation": observed_at - when}
+                    for pid, when in termination_attempts
+                ],
+                "proc_status": linux_process_status(process.pid) if alive else {},
+            }
+            last_observation = diagnostic
+            assert not alive, diagnostic
+    finally:
+        cleanup_survivors: list[dict[str, object]] = []
+        for process in worker_processes:
+            if process.is_alive():
+                with suppress(ProcessLookupError):
+                    process.kill()
+            process.join(timeout=5)
+            if process.is_alive():
+                cleanup_survivors.append(
+                    {
+                        "pid": process.pid,
+                        "exitcode": process.exitcode,
+                        "proc_status": linux_process_status(process.pid),
+                    }
+                )
+        assert not cleanup_survivors, {
+            "cleanup_survivors": cleanup_survivors,
+            "last_observation": last_observation,
+        }
 
 
 def test_parallel_worker_failure_retains_other_completed_results(
