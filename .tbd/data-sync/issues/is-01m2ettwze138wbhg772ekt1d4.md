@@ -3,9 +3,9 @@ type: is
 id: is-01m2ettwze138wbhg772ekt1d4
 title: "Land sibling PR #157 on main after the stack merge"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -14,7 +14,11 @@ labels:
 dependencies: []
 parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
 created_at: 2026-09-14T02:09:45.451Z
-updated_at: 2026-09-14T02:27:12.838Z
+updated_at: 2026-09-14T04:27:42.154Z
+closed_at: 2026-09-14T04:27:42.153Z
+close_reason: "PR #157 merged into main at 620e4731 after the stack merge (2f8865b6); the full checkpoint covered the combined tree, and main^{tree} equals checkpoint tree ab823fe4. SYNOPSIS next-entry reconciliation moved to think-uqa4."
+resolution: null
+duplicate_of: null
 ---
 Land sibling #157 (weighted five-site threshold atoms, stages 1–2; head 382944dd) after the stack merge retargets it to main.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m2csyyq4nzfqppqj639avs51
 title: Review and integrate PR157 weighted threshold atoms into the reviewed stack
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 38
+version: 39
 assignee: root
 delegate: root
 labels: []
@@ -37,7 +37,11 @@ child_order_hints:
   - is-01m2e2kbf4hhhr7j158zctpbzn
   - is-01m2e60sxv8kxk26am7ydbpceg
 created_at: 2026-09-13T07:16:00.865Z
-updated_at: 2026-09-14T02:09:45.451Z
+updated_at: 2026-09-14T04:27:42.488Z
+closed_at: 2026-09-14T04:27:42.487Z
+close_reason: "PR #157 reviewed (18+2 findings dispositioned, exact-head audit comment 5657540559), integrated, checkpointed with the stack, and merged into main at 620e4731 on 2026-09-14."
+resolution: null
+duplicate_of: null
 ---
 Review all PR157 code, mathematics, persisted formats, source replay, prose, and integration with PR148/149/156. Publish structured findings as a PR comment before delegating fixes using address-pr-review. Track dispositions, merge current stack ancestors, validate exact mathematics and end-to-end CI, push and verify final heads. No main merge or deployment.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m2ett16m2gz30tsat10zhshr
 title: Run the full merge checkpoint on the frozen n11 stack top
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -18,7 +18,11 @@ dependencies:
     target: is-01m2ettfz0drj6x542rqxghvqa
 parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
 created_at: 2026-09-14T02:09:17.010Z
-updated_at: 2026-09-14T03:09:16.690Z
+updated_at: 2026-09-14T04:27:41.491Z
+closed_at: 2026-09-14T04:27:41.490Z
+close_reason: "Full merge checkpoint passed on landing tree ab823fe4 (#166 + #168 + #157): Packing validation workflow_dispatch run 34801493553 (slow-lane, exhaustive, screen, validate, macOS all success) and PR surface on draft checkpoint PR #169 (suite 5,638 passed, 185.6 s of 275 s; checks 191.5 s of 195 s; geometry, sweeps, Pages build and font loading green). Independent review accepted #168 and the #157 integration merge. After landing, main^{tree} == ab823fe4^{tree}."
+resolution: null
+duplicate_of: null
 ---
 Run one full merge checkpoint on the frozen stack top and record it.
 
