@@ -5,7 +5,7 @@ title: Publish the reviewed post-T1 strategy map and parent-union lemma in the r
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -15,7 +15,7 @@ dependencies:
   - type: blocks
     target: is-01m2eddtqbpv11d9g5yk0s8cv0
 created_at: 2026-09-13T21:06:59.021Z
-updated_at: 2026-09-13T23:20:19.220Z
+updated_at: 2026-09-14T00:26:39.269Z
 ---
 Preserve /private/tmp/n11-post-t1-strategy-2026-09-13.md and /private/tmp/bc303-parent-union-math-review-2026-09-13.md as durable repository documents on a clean branch after PR156/BC303 stack order settles. Apply practical-prose/Flowmark, replace local absolute links with repo-relative source links, distinguish independently accepted inequality (P) from still-unrun parent-mass target, and map next exact discriminators without premature route judgments. Run document/record gates, obtain source-distinct publication review, update the appropriate stacked draft PR and cost account. Do not alter the T-026 bound or claim a new one.
 
@@ -26,3 +26,5 @@ Preserve /private/tmp/n11-post-t1-strategy-2026-09-13.md and /private/tmp/bc303-
 2026-09-13 23:01 UTC integration: X030 and active daytime plan are committed on clean 5909b531 after merging H161 and the independently accepted target-free T2 admission head 771d4805. X030 now reports H161's exact N=4000015 and four-copy 16000060 with 1048233 units slack, no extension/global inference; it distinguishes a low C physical-parent refuter from a low S first-owner failure of only the sufficient filter. The plan has an explicit 2T H160/exp158 lane with frozen thresholds and one 30-minute target allowance. Practical Prose/Flowmark, source links, document map (1182 docs), ledger, and precommit records 32/74 passed. Exact-head edit is running; separately costed X030 draft PR, final stack merge, push/full gate, hosted CI and source-distinct publication review remain open. No new n11 bound.
 
 2026-09-13 23:19 UTC: clean X030 documentation branch codex/n11-post-t1-strategy-exploration HEAD bfceca46 is aligned above target-free T2 admission be477f20. Unique diff is 7 documentation/record files (+614/-4), including durable draft X030 and independent parent-union math review. It records H161's bounded negative, T2's unrun target and limits on inference; plan says separately verified PR usage and unresolved V3 source. Exact-head --push, cost-first draft PR, hosted CI and source-distinct publication review remain open.
+
+2026-09-14 00:26 UTC: PR #165 draft at 93c5e217 on #164 be477f20, X030 strategy/docs 8 files +666/-4. Source-distinct publication review and exact --push 46/74, 1,302 tests. Hosted CI running; keep open until green and ready. No target/new bound.

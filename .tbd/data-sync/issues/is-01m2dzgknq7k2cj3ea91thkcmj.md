@@ -3,9 +3,9 @@ type: is
 id: is-01m2dzgknq7k2cj3ea91thkcmj
 title: Publish independently accepted BC303 T1 reader as a separate stacked PR
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -18,7 +18,11 @@ dependencies:
     target: is-01m2edr5vf9vba530c9ntyd3t1
 parent_id: is-01m2b8watk22ejr9s0zhgrdd17
 created_at: 2026-09-13T18:12:16.695Z
-updated_at: 2026-09-13T23:20:15.588Z
+updated_at: 2026-09-14T00:26:36.474Z
+closed_at: 2026-09-14T00:26:36.473Z
+close_reason: "PR #161 ready at ac6f39b8 on #156 2f8925b2. Exact --push 46/74, 1,412 tests; hosted CI green. Cost-first body contains disjoint T1-only native lower-bound snapshot and one exp157 literal negative; no T2/global claim."
+resolution: null
+duplicate_of: null
 ---
 After think-3jsz reaches exact-head acceptance, base a new research branch on the current PR156 head, cherry-pick or port only the T1 source-bound replay, retained review, and narrow research record. Open a separate PR stacked above PR156, measure its unique diff and validation/cost separately, and keep the local counterexample distinct from BC329 calibration. Do not claim T2/global owner routing or a stronger n11 bound.
 
@@ -35,3 +39,5 @@ Local milestone committed as a93b57add884640f512af59e6bf099aaefefdfcc on codex/n
 2026-09-13 README publication rereview: independent reviewer ACCEPTED clean T1 head 375c7bc1d49c506636a5abf71d37a8455888ff42. The only new scientific-scope correction is README.md:411: the Reports table now links exp-157's rejection of the T1 bottom-left role-C inequality and says T2 remains unrun; no source, receipt, hypothesis, experiment, or registry file changed. Post-correction records tier passed 32/74 in 62.52s, edit tier 45/74 in 82.64s, pinned Flowmark and git diff --check passed. Unique diff against PR156 9c56e901 is now 4 commits, 15 files, +7172/-20 lines. Refreshed cost-first PR body /private/tmp/bc303-t1-pr-body-draft.md, cost account /private/tmp/bc303-t1-branch-cost-and-validation.md, and live task snapshot /private/tmp/bc303-t1-stacked-task-tree-snapshot.yaml through 20:36:15 UTC; no formal branch token cost. Publication remains pending PR156 and T1 --push/full/hosted gates; keep think-uula in progress.
 
 2026-09-13 23:19 UTC: PR156 is published and hosted green at 2f8925b2. Clean T1 branch codex/n11-bc303-t1-pr156-stack HEAD ac6f39b8 merges that published base; unique diff is 15 T1 files (+7172/-20), with no inherited PR156 timing patch counted. Exact-head records 32/74 and diff check pass. Cost-first body and isolated T1-only lower-bound usage account are prepared at /private/tmp/t1-pr156-published-base-pr-draft.md and /private/tmp/t1-pr156-published-base-accounting.md. Exact-head --push gate is running; push, draft PR and hosted CI remain open.
+
+2026-09-14 00:26 UTC: PR #161 ready at ac6f39b8 on #156 2f8925b2. Exact --push 46/74, 1,412 tests; hosted CI green. Cost-first body contains disjoint T1-only native lower-bound snapshot and one exp157 literal negative; no T2/global claim.
