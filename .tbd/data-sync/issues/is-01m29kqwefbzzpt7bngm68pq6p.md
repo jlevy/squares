@@ -5,7 +5,7 @@ title: "[epic] Benchmark the annealing as a search, and improve it"
 kind: epic
 status: open
 priority: 1
-version: 9
+version: 15
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
@@ -16,8 +16,14 @@ child_order_hints:
   - is-01m29n9q19bfnmxmyknc927dt1
   - is-01m2chknz8861931tannzahgvh
   - is-01m2chkqr9wvm46hk56ehfzrqw
+  - is-01m2gwy8gb514bb2nndytvnqev
+  - is-01m2gxkhmczffa661vb6emdxz5
+  - is-01m2gxxkh5msmctek525ahbsmb
+  - is-01m2gxxnjp4wp3zxzc759d9yxm
+  - is-01m2gxxqtm13wn0rk7a4aj0dtr
+  - is-01m2gxxsm5wf85jh9zmrwdqbmj
 created_at: 2026-09-12T01:29:34.406Z
-updated_at: 2026-09-13T04:52:31.788Z
+updated_at: 2026-09-14T21:42:44.318Z
 ---
 Owner, 2026-09-11: "iteratively improve the simulated annealing and physics simulations and similar, to try to improve their quality... make a list of hypotheses and then iteratively improve to see if we can figure out how to accurately benchmark and improve the search for n = 11, n = 17, and a few other minimal ones below 100... see if we can find parameters that work accurately... we need to set up a full test harness for this and then iteratively improve it."
 

@@ -3,22 +3,22 @@ type: is
 id: is-01m1b29r4pe1vvj5vzp2kqpsxt
 title: "Lane A3: a bespoke certified lower bound at n = 12 (H-039, with H-006's generator)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 4
+version: 5
 spec_path: packing/campaign/explorations/X-010-two-lanes-two-ladders.md
 delegate: claude-code@vm
 labels:
   - x-010
   - lane-a
 dependencies: []
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-08-31T04:47:32.501Z
-updated_at: 2026-08-31T10:11:59.319Z
+updated_at: 2026-09-14T22:04:08.712Z
 started_at: 2026-08-31T10:08:44.767Z
 ---
-s(12)'s best lower bound is a theorem about n = 11, inherited by monotonicity: any bespoke certified bound above 2 + 4/sqrt(5) ~ 3.7889 is the first result specific to n = 12, a continuum of outcomes between nothing and s(12) = 4. Shape: eleven resources unavoidable at side above 2 + 4/sqrt(5), by counterexample-guided synthesis -- A0 certifier + think-yrvm falsifier as the loop, H-006's LP duals as the candidate generator, H-039 the registered target with its fixed-threshold rule. Run the H-034-style tau* diagnostic at n = 12 side 4 - eps early: it says whether pure points can suffice or thresholds/segments are forced, and is a result about the method either way. Supersedes think-at4f's framing; see also think-iwlr. X-010 Lane A rung 3.
+Candidate Route N under H-039: test a proof architecture that could establish s(12) = 4, rather than resume the obsolete decimal-ladder or fixed-threshold framing. The retained 3.83 point pilot is historical method evidence, not a bound and not the current target. After W10/BC-346 selects this route, freeze one uniform boundary-capacity or deformation lemma for L = 4 - epsilon over a nontrivial epsilon interval, with n=6 and n=13 as solved controls and the flexible side-four n=12 family included in the domain. The first result must be a stable finite case reduction or exact parameterized inequality. Park the mechanism if a legal flex or boundary degeneration defeats uniformity. Reuse H-039 and this task; do not register a duplicate n=12 exact-value hypothesis.
 
 ## Notes
 

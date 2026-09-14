@@ -5,13 +5,13 @@ title: The controls are one register, and each group is addressable
 kind: feature
 status: open
 priority: 1
-version: 1
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m29g1hhddhwsqfr0fz4r175e
 created_at: 2026-09-12T00:34:46.894Z
-updated_at: 2026-09-12T00:34:46.894Z
+updated_at: 2026-09-14T21:54:16.142Z
 ---
 Owner, 2026-09-11: "fix all the dashboard controls below the tab to be separable. There's no particular reason to make some in the white box and some in the main container. They're mostly the same anyway, and they'll be different on each tab regardless."
 
