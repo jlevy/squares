@@ -1,7 +1,7 @@
-name: Linux fork-worker diagnostic
+name: Linux fork-worker full-suite diagnostic
 
 # A new workflow cannot receive workflow_dispatch until it exists on the default branch.
-# A push to this scratch branch runs only the one real-fork regression control.
+# A push to this scratch branch runs the normal hosted suite with instrumented cleanup.
 "on":
   push:
     branches: [codex/think-glad-linux-diagnostic]
@@ -9,14 +9,13 @@ name: Linux fork-worker diagnostic
 permissions:
   contents: read
 
+env:
+  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-validation-artifacts
+
 jobs:
-  fork-worker:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        xdist-workers: [0, 4]
+  suite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: packing
@@ -39,22 +38,16 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      - name: Repeat the real-fork callback-failure control
-        env:
-          XDIST_WORKERS: ${{ matrix.xdist-workers }}
-        run: |
-          failures=0
-          for attempt in $(seq 1 10); do
-            echo "::group::xdist -n ${XDIST_WORKERS}, attempt ${attempt}/10"
-            if uv run --frozen --all-extras --group dev \
-              pytest -q -s -n "${XDIST_WORKERS}" \
-              tests/test_fractional_threshold_interval.py::test_real_forked_callback_failure_requests_and_observes_worker_exit; then
-              echo "PASS: attempt ${attempt}"
-            else
-              echo "FAIL: attempt ${attempt}"
-              failures=$((failures + 1))
-            fi
-            echo "::endgroup::"
-          done
-          echo "xdist -n ${XDIST_WORKERS}: ${failures}/10 failures"
-          test "${failures}" -eq 0
+      - name: Run the required pull-request behavioral lane
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --suite --jobs 1 --inner-jobs 1
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
