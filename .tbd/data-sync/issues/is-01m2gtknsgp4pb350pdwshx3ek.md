@@ -5,7 +5,7 @@ title: Run the post-roll-up n11 route-selection block
 kind: task
 status: open
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -25,6 +25,6 @@ dependencies:
     target: is-01m2ey0dsfhs4cfjqhy7098m7h
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-14T20:44:17.583Z
-updated_at: 2026-09-14T21:05:00.668Z
+updated_at: 2026-09-14T21:20:09.308Z
 ---
-After the checked research-state roll-up lands, run one W10 planning block over Routes A, B, S, C and D and the due validation-efficiency checkpoint. Reconcile dependency readiness, expected information value, stop rules and resource cost, then select exactly one next execution entry. This block performs no scientific target.
+After BC-339 lands the checked research-state structure and BC-347/think-oj12 completes the delegated Astra Max mathematical audit, run one W10 planning block over the enlarged source-bound route set and any validation-efficiency checkpoint that the reconstructed cadence shows is due. Reconcile dependency readiness, expected information value, material upside, stop rules, and resource cost, then select exactly one next execution entry. This block performs no scientific target.

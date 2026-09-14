@@ -5,7 +5,7 @@ title: "N11 strategy reset: significant bound improvements or a much simpler pro
 kind: epic
 status: open
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -21,9 +21,9 @@ child_order_hints:
   - is-01m2gtknsgp4pb350pdwshx3ek
   - is-01m2gw5w0az878mbj2j4tyg6as
 created_at: 2026-09-14T03:04:47.426Z
-updated_at: 2026-09-14T21:11:42.344Z
+updated_at: 2026-09-14T21:20:14.574Z
 ---
-Owner direction, 2026-09-14: stop heavy computer-assisted work aimed at microscopic lower-bound gains. Prefer routes likely to improve the n=11 bounds materially or simplify the proof of s(11) >= 3.82 substantially. The merged T-026 bound is the scientific cutoff; the checked current-state account is SYNOPSIS.md. BC-339/think-uqa4 performs the roll-up, then BC-346/think-9y7p selects exactly one next entry from a possible W5 efficiency checkpoint and Routes A (systematic case split), B (pairwise SDP), S (certificate compression), C (orientation structure), and D (upper-bound search). No route is authorized before that W10 selection.
+Owner direction, 2026-09-14: stop heavy computer-assisted work aimed at microscopic lower-bound gains. Prefer routes likely to improve the n=11 bounds materially or simplify the proof of s(11) >= 3.82 substantially, including techniques transferable to other small n. BC-339/think-uqa4 performs the checked roll-up; BC-347/think-oj12 is a delegated Astra Max mathematical audit of Routes A, B, S, C, D and additional hypotheses; BC-346/think-9y7p then selects exactly one execution entry from the audited set and any W5 checkpoint the reconstructed cadence shows is due. No scientific route is authorized before that W10 selection.
 
 ## Notes
 
