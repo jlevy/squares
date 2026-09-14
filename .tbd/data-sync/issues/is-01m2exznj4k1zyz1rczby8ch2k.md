@@ -5,7 +5,7 @@ title: "N11 strategy reset: significant bound improvements or a much simpler pro
 kind: epic
 status: open
 priority: 1
-version: 5
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -17,16 +17,13 @@ child_order_hints:
   - is-01m2ey0c330crgmbpxncejahnx
   - is-01m2ey0d8smw4f4w72hyay9070
   - is-01m2ey0dsfhs4cfjqhy7098m7h
+  - is-01m2gt509a6wa4kqwbxjrq6exd
+  - is-01m2gtknsgp4pb350pdwshx3ek
 created_at: 2026-09-14T03:04:47.426Z
-updated_at: 2026-09-14T03:05:12.238Z
+updated_at: 2026-09-14T21:09:03.090Z
 ---
-Owner direction, 2026-09-14: stop heavy computer-assisted proof work aimed at very small bound improvements. Pursue routes likely to significantly improve n=11 results, or to significantly simplify the proof of s(11) >= 3.82.
+Owner direction, 2026-09-14: stop heavy computer-assisted work aimed at microscopic lower-bound gains. Prefer routes likely to improve the n=11 bounds materially or simplify the proof of s(11) >= 3.82 substantially. The merged T-026 bound is the scientific cutoff; the checked current-state account is SYNOPSIS.md. BC-339/think-uqa4 performs the roll-up, then BC-346/think-9y7p selects exactly one next entry from a possible W5 efficiency checkpoint and Routes A (systematic case split), B (pairwise SDP), S (certificate compression), C (orientation structure), and D (upper-bound search). No route is authorized before that W10 selection.
 
-Where things stand (evidence gathered 2026-09-14, lane reports in the landing worktree attic/n11-stack-landing/):
-- Proved lower bound T-026 s(11) >= 3.8264474 (computer-assisted, exact, unpublished); previous published bound Stromquist 2+4/sqrt(5) = 3.7889 (printed Figure 14 false, repaired by exp-017); best upper bound Trump 1979, 3.8770836, conjectured optimal, never beaten. About 43% of the 3.7889–3.8771 gap closed; no bound change since 2026-09-09 despite 17 n=11 PRs.
-- Proved ceiling: every pure point/density certificate is blocked at L* = 38200/9977 ≈ 3.8288 (X-027); T-026 is 0.0024 below it. Threshold atoms have no proved ceiling, but recent gains were 1e-5 to 3e-4 (BC329 +0.000274). Weighted atoms (#157) have no quantified gain.
-- Literature pattern: every hard exact s(n) value (6, 7, 10, 13, 46, ...) needed a forcing or helper step beyond point sets; Stromquist (email 2026-09-07) says helper arguments "may be essential".
-- BC303 targets s(11) > 3.84 but its local-availability lemma has no candidate proof; T1 and H-161 were negative.
-- No human-readable proof above 3.79 exists on record; the smallest certificate at 3.80 has 425 atoms on 181 directions.
+## Notes
 
-Candidate routes (children): systematic case split at 3.85; pairwise SDP bound with an n=6 control; orientation-class structure theorem; a serious upper-bound search. Select the main lane from the first cheap tests. Paused: BC329 lane (think-zwlf), weighted-atom stages 3–4, BC303 T2 charge tests pending a routing idea.
+Current controller, 2026-09-14: PRs #156, #157, and #161-#167 are merged. BC-339/think-uqa4 is the checked research-state roll-up and remains the current W7/W8 session until its exact-revision gate is retained. BC-346/think-9y7p depends on it and is the separate W10 planning successor. The planning set is the possible W5 efficiency checkpoint plus Route A systematic case split, Route B pairwise SDP, Route S T-025/T-026 certificate compression, Route C orientation structure, and Route D upper-bound search. Every execution candidate depends on think-9y7p; H-160/H-162, weighted stages 3-4, BC329, and the old H135 reserve remain paused unless W10 reselects them.
