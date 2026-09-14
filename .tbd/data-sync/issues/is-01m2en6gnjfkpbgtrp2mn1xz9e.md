@@ -3,9 +3,9 @@ type: is
 id: is-01m2en6gnjfkpbgtrp2mn1xz9e
 title: Preregister H-162 floor-normalized BC303 T2 analysis before exp-158
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -16,6 +16,10 @@ dependencies:
     target: is-01m2e6e4j1ee5nre22gp7fyyrc
 parent_id: is-01m2b4ywxym84rgf3b254v4jw6
 created_at: 2026-09-14T00:31:14.609Z
-updated_at: 2026-09-14T00:36:47.989Z
+updated_at: 2026-09-14T00:48:59.729Z
 ---
-After the independent X-031 mathematical audit, freeze a separate prospective H-162 analysis contract before reading any exp-158 target receipt. State the imported core floor g=3/800000, E=1048233/4000000, exact complete C and actual jointly realizable S criteria (4524132 and 8524147 integer mass), the sufficient-only S first-owner strip cutoff 4524132, and all success/failure/incomplete branches. Bind source blobs, 377 atoms, all 182 eligible C/S first-owner charts with both axis aliases, and every admitted compatible actual-S second-owner chart; include parent/label/boundary replay and executing revision. Do not alter H-160 thresholds or exp-158 registration, run a target, infer actual S from a low strip cell, or claim global s(11) progress. Retain source-distinct mathematical acceptance and pass records/edit validation; only then admit prospective reuse of the one future exp-158 exact-minima receipt.
+Before inspecting or running the exp-158 target, register H-162 as the separate floor-normalized sufficient filter: on the frozen BC293 377-atom measure across all 182 eligible C and S first-owner charts including both axis aliases, the exact C minimum and exact S first-owner strip minimum are both at least 4524132 integer mass. Bind the full source blobs, executing revision, closed membership, physical-parent/label replay, complete coverage, and the unchanged H-160/exp-158 criteria. Freeze ordered outcomes: admitted low C with rational replay rejects H-162 and the normalized helper; both minima passing accepts H-162 and proves the helper; C passing with admitted low S strip rejects only H-162 and leaves actual S/helper unresolved; incomplete or refused instruments yield no verdict. X-031 retains the complete actual-S cutoff 8524147 and its second-owner quantifier over every compatible admitted chart, including charts outside the 182 first-owner manifest. Any later joint-S method needs a separate registration and cannot reverse H-162 filter verdict. Retain the source-distinct Astra Max audit, pass pre/post registry gates, and do not alter H-160 or rerun exp-158 for this analysis.
+
+## Notes
+
+2026-09-14 00:41 UTC: Source-distinct Astra Max audit /private/tmp/h162-preregistration-math-audit.md ACCEPTS final X031 head 21d511f8 and recommends H162 be the measurable C+S-strip sufficient filter, with the full actual-S theorem retained in X031. The 182-chart restriction is only C and S first owner; second owner ranges over every compatible admitted chart. Exp158 retains raw minima and can support prospective receipt-only comparison without rerun after its own admission. No target has run.
