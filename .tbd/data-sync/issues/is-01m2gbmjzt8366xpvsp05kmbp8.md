@@ -3,13 +3,17 @@ type: is
 id: is-01m2gbmjzt8366xpvsp05kmbp8
 title: "PR #167: publish exp-160 output atomically and refuse input/output alias"
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 3
 labels: []
 dependencies: []
-parent_id: is-01m2gbcm4afdzz4r8x790g898q
+parent_id: is-01m2gce39ed9awfhdpaq8ed3rt
 created_at: 2026-09-14T16:22:38.821Z
-updated_at: 2026-09-14T16:22:38.821Z
+updated_at: 2026-09-14T17:03:56.224Z
 ---
 In packing/devtools/analyze_bc303_h162_receipt.py:199-202, direct Path.write_text truncates durable experiment output in place; interruption can leave partial JSON, and the CLI permits --input and --output to resolve to the same file, destroying the admitted exp-158 receipt. Use atomic same-directory publication and explicitly reject input/output alias; decide and enforce overwrite policy.
+
+## Notes
+
+Fixed in ed68f644; focused tests and static checks pass. Awaiting clean checkpoint and hosted CI before closure.
