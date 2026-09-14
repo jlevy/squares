@@ -3,14 +3,18 @@ type: is
 id: is-01m2h0qefn5vq2a94cz26em504
 title: The facts panel fades only what changes, in a quick crossfade
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m2gyhqfmr0xpcjsr34na3acq
 created_at: 2026-09-14T22:31:12.628Z
-updated_at: 2026-09-14T22:31:19.811Z
+updated_at: 2026-09-14T22:36:20.688Z
+closed_at: 2026-09-14T22:36:20.685Z
+close_reason: "Fixed in a63da6cd and pushed. The facts panel hands over per slot and per glyph: unchanged text is held, and changed glyphs crossfade over at most 0.2 s with opacities summing to one. The headline number crossfades in place. The container went 971 to 954 px, with the headline raised 8 px, so the moving drawing clears the headline by 8.4 px; space above and below is 54/54. check_workbench.py asserts the handover (probe facts/handover) and the clearance (probe stage/lowest-drawn). All page checkers pass."
+resolution: null
+duplicate_of: null
 ---
 Owner, 2026-09-14: "the animations fade away the text and then put it back, even when the text stays the same. That's kind of ugly. They should fade in with a little more of a clean, rapid transition. If the thing isn't changing, then it shouldn't fade away and fade back."
 
