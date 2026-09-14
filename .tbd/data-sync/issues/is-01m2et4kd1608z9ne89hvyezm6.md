@@ -5,7 +5,7 @@ title: Adopt the owner's 2026-09-13 workbench defaults
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m2et4qhaset54bd7ce0239nx
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-14T01:57:34.750Z
-updated_at: 2026-09-14T02:05:07.671Z
+updated_at: 2026-09-14T03:01:05.762Z
 ---
 Owner-chosen defaults for the retained workbench controls, on PR #160's head 4a1bf3b8:
 - pair law: rigidity 0.35, repulsion 950, attraction 80, range 0.15 (was 0.15 / 2500 / 0 / 0; wall law unchanged)
@@ -26,4 +26,4 @@ Done when the package check, workbench pytest, check_frontend pass on a rebuilt 
 
 ## Notes
 
-2026-09-13: edits uncommitted in .claude/worktrees/pr160-workbench on 4a1bf3b8. check_animation_editor now asserts the law, dial (9 of 0..20), beat (0.6/0.5/0.4/0.3 in the inputs and continuous beat) and 0.08 floor on the built page and passes. Package check (114 Node tests), workbench pytest (124), root typecheck, Ruff and BasedPyright pass. Remaining: commit and push after owner review; think-7sw8 carries the historical checkers.
+2026-09-13: work moved from a detached HEAD onto local branch claude/workbench-defaults-and-bounds (worktree .claude/worktrees/pr160-workbench), created at PR #160 head 4a1bf3b8 with upstream origin/codex/review-workbench-stack. Still uncommitted and unpushed pending owner review.
