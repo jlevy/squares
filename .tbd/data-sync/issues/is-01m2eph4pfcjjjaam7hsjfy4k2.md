@@ -5,7 +5,7 @@ title: Stabilize Linux fork-worker exit assertion in hosted suite
 kind: bug
 status: in_progress
 priority: 2
-version: 7
+version: 10
 spec_path: development.md
 refs:
   - kind: other
@@ -16,7 +16,7 @@ labels:
   - linux
 dependencies: []
 created_at: 2026-09-14T00:54:31.373Z
-updated_at: 2026-09-14T01:28:55.369Z
+updated_at: 2026-09-14T02:27:31.091Z
 ---
 PR #166 hosted suite attempt on exact documentation-only head 21d511f8 failed tests/test_fractional_threshold_interval.py::test_real_forked_callback_failure_requests_and_observes_worker_exit at line 879: after a synthetic callback failure and process.join(timeout=5), one ForkProcess remained is_alive. The same run passed 5,398 tests and other required jobs; PR #165 at the identical code base and the PR166 exact local push gate passed. GitHub run 34793833499, suite job 103822994286, first attempt; a failed-job rerun was requested. Diagnose whether fork from an xdist worker with live threads, cleanup sequencing, or a genuinely leaked child explains this; retain a test that checks termination without an arbitrary timing race. Do not weaken worker-reaping guarantees or misattribute this docs-only PR as changing the behavior.
 
@@ -27,3 +27,6 @@ PR #166 hosted suite attempt on exact documentation-only head 21d511f8 failed te
 2026-09-14 diagnostic scratch branch codex/think-glad-linux-diagnostic from exact PR166 21d511f8: commit 47a68e52 added only failing-test instrumentation (record BaseProcess.terminate PID/time, original 5-second real-exit assertion, /proc state on failure, bounded kill/join cleanup) plus push-only Linux diagnostic workflow. Run 34795020799: isolated exact test passed 10/10 -n0 and 10/10 -n4; -n4 still warned about fork from multithreaded worker. Workflow follow-up commit 351f14f4 changed only scratch workflow to one normal hosted suite command, with 20-minute bound and retained validation artifacts. Run 34795179214 suite job 103826750568: 5,399 passed, 6 skipped, 12 warnings in 246.22s; the fork test ran and its original assertion did not reproduce. Passing log does not reveal whether BaseProcess.terminate was called because recorded attempts render only on failure. This is one full-suite nonreproduction, not clearance of two PR166 hosted failures. PR166 untouched. See /private/tmp/think-glad-linux-n0.log, /private/tmp/think-glad-linux-n4.log, /private/tmp/think-glad-linux-full-suite.log and run URLs above.
 
 Disposition recommendation after one scratch full pass: rerun failed suite once on unchanged original PR166 head 21d511f8. If green and all other required contexts remain green, docs-only PR can be marked ready while think-glad stays open for a separate test stabilization PR; if it fails again, retain the third failure and stabilize first. This does not prove no leak. Minimal stabilization: use multiprocessing.connection.wait on the captured workers' Process.sentinel values with one monotonic deadline grounded in the existing 12-second quick-lane call ceiling (proposed 10 seconds total), join/reap each ready worker, assert every sentinel observed and process dead, report actual terminate calls plus /proc status at timeout, and SIGKILL/bounded-join stragglers in finally. Keep real Linux fork/callback failure and OS exit assertion; never replace with mock-only request assertion. The successful scratch full-suite run did not emit terminate-call records, so invocation on that pass is unknown.
+
+
+2026-09-14 corrected diagnosis (n11 stack landing, think-dc10): after pool.terminate_workers(), CPython 3.14.7's executor manager thread runs terminate_broken/_join_executor_internals and p.join()s the same worker Process objects the test joins. popen_fork.poll() maps the losing waitpid's ECHILD to None without setting returncode, so is_alive() reports a dead worker alive. Local diagnostic (attic, two threads joining one forked child): false 'alive' after join in 640/2000 and 549/2000 trials; joining the other reaper first: 0/2000. The earlier sentinel-wait proposal would not remove the race (its closing join/is_alive still races the manager). Fix on branch claude/n11-stack-ci-stabilization commit 717291d8: capture the manager thread, join it under a 10 s bound, then require every worker exit code; stragglers killed in finally. Close when merged into the stack top.

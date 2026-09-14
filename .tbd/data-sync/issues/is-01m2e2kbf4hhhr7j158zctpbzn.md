@@ -3,16 +3,20 @@ type: is
 id: is-01m2e2kbf4hhhr7j158zctpbzn
 title: "PR157: resolve failing PDF build check before merge"
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 assignee: root
 delegate: pdf_control_sol
 labels: []
 dependencies: []
 parent_id: is-01m2csyyq4nzfqppqj639avs51
 created_at: 2026-09-13T19:06:12.323Z
-updated_at: 2026-09-13T21:30:20.573Z
+updated_at: 2026-09-14T02:25:17.904Z
+closed_at: 2026-09-14T02:25:17.875Z
+close_reason: "The PDF build failure seen at cadbf7e1 is superseded: Pages run 34791046951 passed at PR #157 head 382944dd. The unexplained intermittent PDF byte disagreement and the Linux two-arm diagnostic remain under think-ptit."
+resolution: null
+duplicate_of: null
 ---
 At remote head cadbf7e1 on 2026-09-13, certificate-page build job 103770982964 failed at render_explainer_pdf --check-artifact: two normalized 843157-byte PDFs differ first at byte 524772 in object 156. CI reports cause unknown and retains /tmp/explainer-pdf-check/pdf-check-644lkxd1 diagnostics. This is an occurrence of tracked D-490 (think-ptit), not evidence that PR157 source caused it. Retrieve artifacts, diagnose or rerun with evidence, then push and wait full hosted CI; keep separate from PR156 admission.
 

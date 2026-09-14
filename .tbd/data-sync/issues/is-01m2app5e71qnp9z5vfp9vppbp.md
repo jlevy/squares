@@ -5,7 +5,7 @@ title: Build the separate fixed-core packet calibration command
 kind: feature
 status: in_progress
 priority: 1
-version: 28
+version: 29
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max design; Sol implementation after admission
 labels:
@@ -31,11 +31,15 @@ child_order_hints:
   - is-01m2b4yfx3th5wcdaw9apr0vn5
   - is-01m2b883mnsa3g9ap94gy5aj0q
   - is-01m2ctdap5jwdr8h4qb8dxwt8z
+hold: paused
+hold_until: null
 created_at: 2026-09-12T11:40:18.235Z
-updated_at: 2026-09-13T07:23:51.876Z
+updated_at: 2026-09-14T02:28:52.577Z
 ---
 Add a maintained calibrate_fixed_core_packet command with strict fixed-core-packet-calibration/v1 receipt semantics. It must remain outside the BC329 scientific state machine, use a frozen analytically solved positive fixture, call the real raw, normalized-exact, reflected-interval, dilation, publication, and strict per-direction readback kernels, and never emit packet-accepted or scientific evidence. Freeze and independently verify the fixture argument and exact answers; preserve truthful fixture provenance rather than T025 ancestry. Add cross-schema refusal, known-answer, row/witness mutation, source-separation, byte-binding, lifecycle, and metrics controls. Do not run the BC329 source or target.
 
 ## Notes
 
 The complete target-free calibration implementation is independently accepted through exact implementation head fcb538c29b846fb5e7c33bd962772ada9c21aedd and durable acceptance commit cd02a0cd. The source-distinct review replayed 54 lifecycle controls, 10 fixture/source/readback controls, four real launch controls, and prior CAL-1 through CAL-7 evidence; 192 tests and static gates passed. Integration into the current PR156 leaf is next. Operational admission still depends on integrated worker-topology, coordinator, source-distinct reader, and run-sheet beads think-gscz, think-5dql, think-n4gh, and think-pp3j. No positive profile or BC329 target ran.
+
+Paused: 2026-09-14 owner hold (think-zwlf): BC329's prospective gain is about 0.000274 over T-026 s(11) >= 3.8264474, and heavy computer-assisted work for very small improvements is paused while the program re-strategizes toward significant n=11 improvements or a much simpler proof. The runner, reader, verifier and run sheet land as retained, unexecuted machinery with PR #156 (think-j007). Resume only by an explicit owner decision.

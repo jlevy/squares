@@ -3,9 +3,9 @@ type: is
 id: is-01m2b8wag8sa0p3mna22wmr3c6
 title: Maintain and independently replay the literal-corner T1 witness
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 15
+version: 16
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol high implementation; Astra source-distinct review
 labels:
@@ -26,7 +26,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-12T16:58:14.407Z
-updated_at: 2026-09-13T20:16:57.466Z
+updated_at: 2026-09-14T02:25:13.785Z
+closed_at: 2026-09-14T02:25:13.780Z
+close_reason: "The literal T1 reader, receipt and H-159/exp-157 determination (a93b57ad, execution revision 81898608) are in PR #161 head ac6f39b8, ready since 2026-09-13 23:52Z with hosted CI green; independent replay recorded in docs/project/reviews/review-2026-09-13-n11-bc303-t1-reader-final-math.md."
+resolution: null
+duplicate_of: null
 ---
 After mathematical admission, build the smallest maintained source-bound reader needed to replay the known literal BL parent and selected axis core directly from all 377 frozen BC303 atoms. Recompute closed membership, captured atom indices and weights, the complete signed-frame label set, parent/core containment, source identity, and exact charge 800003/800000. Include mutation controls and independent replay; retain the determination that this rejects only the named one-corner BC303 surplus inequality. Do not describe the witness as search-discovered or infer failure of local availability/global routing.
 

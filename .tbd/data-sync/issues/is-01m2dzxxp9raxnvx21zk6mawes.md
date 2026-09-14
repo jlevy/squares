@@ -3,9 +3,9 @@ type: is
 id: is-01m2dzxxp9raxnvx21zk6mawes
 title: "Run sheet: verify run-root bytes stay unchanged through retention"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -19,7 +19,11 @@ child_order_hints:
   - is-01m2e2tw14t5k03r87ssbpan0p
   - is-01m2e2zxfmfxgd5tb2zcbzn9rr
 created_at: 2026-09-13T18:19:32.936Z
-updated_at: 2026-09-13T19:13:03.988Z
+updated_at: 2026-09-14T02:25:12.192Z
+closed_at: 2026-09-14T02:25:12.192Z
+close_reason: Verifier blob cd17583c was accepted in docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier-r3-final.md (R2 refusals repaired, R3 ACCEPT, R4 staged-index control), is unchanged at 2f8925b2, and closed think-s4nx wired it into the run sheet. Evidence-commit OID and positive-run bytes are execution-time checks under think-pp3j.
+resolution: null
+duplicate_of: null
 ---
 Independent operational review R3: maintained byte/type inventory at coordinator return and comparison after readers, before/after tar, and against archive content; refuse added/removed/replaced/changed files and bind copied summary. Retain inventory with evidence.
 

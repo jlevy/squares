@@ -5,13 +5,11 @@ title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 11
+version: 12
 labels: []
-dependencies:
-  - type: blocks
-    target: is-01m2e2kbf4hhhr7j158zctpbzn
+dependencies: []
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-13T23:52:35.551Z
+updated_at: 2026-09-14T02:25:16.172Z
 ---
 On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 

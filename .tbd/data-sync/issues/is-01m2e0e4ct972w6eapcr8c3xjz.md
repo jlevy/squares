@@ -5,7 +5,7 @@ title: Publish the PR156 draft checkpoint with exact local gates and final hoste
 kind: task
 status: closed
 priority: 1
-version: 22
+version: 23
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: codex@spud10.local
 labels:
@@ -31,7 +31,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-13T18:28:24.089Z
-updated_at: 2026-09-13T23:14:25.176Z
+updated_at: 2026-09-14T02:25:38.667Z
 started_at: 2026-09-13T18:35:26.795Z
 closed_at: 2026-09-13T23:14:25.175Z
 close_reason: Published PR156 at 2f8925b2 with origin/main merged, cost-first exact-head body, scoped local validation evidence, and final green hosted CI (required packing, suite, Pages and mergeability). PR intentionally remains draft because calibration profiles, integrated scientific admission and BC329 target are unrun. The separate macOS local pre-push EPERM/contention defect remains open as think-hsq6.
@@ -45,3 +45,6 @@ Review and commit durable reviews, run-sheet status, records, and accepted sourc
 2026-09-13 21:13 UTC correction to the CI handoff: exact job log /private/tmp/pr156-suite-failed.log was retrieved. The 9c hosted required suite failed the explicit time budget: 436.36s total vs 275s ceiling and 183.44s recorded reference (2.38x). Two test calls >12s were 28.02s coherent mathematical/operational mutations and 12.32s exact method witness/closed boundary, both in test_read_fixed_core_calibration_profile.py. The job reports no assertion failure; its only failed validation step is fast behavioral tests due elapsed time. See think-bpy8 for targeted fix. The other 9c required checks and Pages passed. PR body is being updated; PR stays draft/unready; no calibration profile or BC329 target ran.
 
 2026-09-13 23:07 UTC publication checkpoint: origin/main f2e24e07 is merged into clean local PR156 head 2f8925b2 and verified already up to date by the merge-upstream shortcut. Pushed 2f8925b2 to PR #156; cost-first body updated with 57-file diff (+31868/-169), conservative 50-root/97-session selected usage subtotal and explicit exclusions, three local --push attempts, and pending hosted CI. Required run 34788680067 and Pages run 34788680064 are underway; gh pr checks --watch is active. Three calibration profiles and BC329 target unrun; PR remains draft. Local two-job reachable lane passed 1593/3 skipped once with missing Ruff/Pyright PATH; corrected environment passed floors but local process-group EPERM and nested timeout caused two test failures, each later passed in isolation. No single green local --push receipt.
+
+
+2026-09-14: PR #156 was marked ready at 00:44:06Z on unchanged head 2f8925b2, superseding 'intentionally remains draft' in this close reason. The owner then decided (think-bt5b) to land the machinery before any BC329 result, with limitations stated.

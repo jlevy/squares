@@ -3,9 +3,9 @@ type: is
 id: is-01m2b883ztxn7qazs98bndea6b
 title: Build the maintained BC329 three-profile calibration coordinator
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 19
+version: 20
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation; independent operational review
 labels:
@@ -28,7 +28,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-12T16:47:12.378Z
-updated_at: 2026-09-13T19:47:40.686Z
+updated_at: 2026-09-14T02:25:20.874Z
+closed_at: 2026-09-14T02:25:20.870Z
+close_reason: Coordinator arithmetic ACCEPT at 775c71d5 (docs/project/reviews/review-2026-09-13-n11-bc329-coordinator-arithmetic-final.md), unchanged at 2f8925b2. Positive profiles belong to think-vy5i/think-pp3j, both on hold under think-zwlf's deferral.
+resolution: null
+duplicate_of: null
 ---
 Run-sheet review F-2/F-3. Replace the one-off shell/Python timing, immediate-readback, and summary heredocs with a maintained devtools coordinator and tested receipt contract before any profile. Measure monotonic command wall time from immediately before subprocess launch until the top-level calibration command returns; retain exact commands, stdout, stderr, exit statuses, invocation identities and receipt digests; call strict producer/inventory readers; reconstruct counts, bytes and digests; atomically write and reread a duplicate-key-safe three-profile median/min-max summary. Preserve the narrower producer clocks and their scopes. Do not run a profile or BC329 until the tool and review pass.
 

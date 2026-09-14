@@ -5,7 +5,7 @@ title: Close the post-merge n11 research and publication checkpoint
 kind: task
 status: open
 priority: 1
-version: 6
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -16,10 +16,14 @@ child_order_hints:
   - is-01m2enn4fcsg3g3702tfcfmgan
   - is-01m2eqa7epcaj1xzx4tmbdbwjt
   - is-01m2erbj7yqbnd61dzbj4v86wt
+  - is-01m2esvxnqagfs5m1k3bvwqy3t
+  - is-01m2etn0tv2s2h3nrzdwjvptrb
+  - is-01m2etzktsakvvpah673qa5nes
+  - is-01m2evbgakwhyytm7h5m8y0mst
 created_at: 2026-09-13T22:15:25.672Z
-updated_at: 2026-09-14T01:26:25.789Z
+updated_at: 2026-09-14T02:18:49.554Z
 ---
-Reconcile the merged PR148/149 baseline with current PR156 and PR157 heads; finish exact-head local and hosted CI, source-distinct scientific admissions, T1/T2 separate stacked PRs and usage accounts, the H161 scoped negative, and the updated X030 strategy document. Make every current result reviewable on its PR with exact source identity, gates, open proof obligations and cost. Check the active V3/daytime plan and 30-minute continuation handoff against the final bead graph. Close only when each dependency has an explicit disposition; do not claim a stronger bound or merge an unready PR.
+Close the post-merge n11 publication checkpoint by reconciling the merged PR148/149 baseline with ready PR156, separate ready sibling PR157, the linear T1/T2/H161/reader/X030/X031 stack PR161-166, draft H162 PR167, and the X032 corner-equipment exploration layer. Record exact heads, local and hosted gates, source-distinct review, no-target versus measured outcomes, and separate usage accounts. Keep the BC329 three-profile/direct-bound lane and the one preregistered H160/exp158 target explicit. Update the active daytime plan, agenda, and thirty-minute continuation handoff. Close only when each publication and experiment dependency has a terminal disposition; do not claim a stronger bound or merge an unready PR.
 
 ## Notes
 
