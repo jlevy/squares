@@ -3,9 +3,9 @@ type: is
 id: is-01m2eph4pfcjjjaam7hsjfy4k2
 title: Stabilize Linux fork-worker exit assertion in hosted suite
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 10
+version: 11
 spec_path: development.md
 refs:
   - kind: other
@@ -16,7 +16,11 @@ labels:
   - linux
 dependencies: []
 created_at: 2026-09-14T00:54:31.373Z
-updated_at: 2026-09-14T02:27:31.091Z
+updated_at: 2026-09-14T03:09:14.352Z
+closed_at: 2026-09-14T03:09:14.351Z
+close_reason: "Fixed by PR #168 (commit 717291d8), merged into the #166 stack top at 1ea28da4 on 2026-09-14. Root cause: CPython's executor manager thread and the test both reaped the same workers; ECHILD made a dead worker read alive. #168's hosted Linux suite passed with the corrected control."
+resolution: null
+duplicate_of: null
 ---
 PR #166 hosted suite attempt on exact documentation-only head 21d511f8 failed tests/test_fractional_threshold_interval.py::test_real_forked_callback_failure_requests_and_observes_worker_exit at line 879: after a synthetic callback failure and process.join(timeout=5), one ForkProcess remained is_alive. The same run passed 5,398 tests and other required jobs; PR #165 at the identical code base and the PR166 exact local push gate passed. GitHub run 34793833499, suite job 103822994286, first attempt; a failed-job rerun was requested. Diagnose whether fork from an xdist worker with live threads, cleanup sequencing, or a genuinely leaked child explains this; retain a test that checks termination without an arbitrary timing race. Do not weaken worker-reaping guarantees or misattribute this docs-only PR as changing the behavior.
 
