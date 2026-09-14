@@ -255,13 +255,21 @@ def load_certificate(path: Path) -> CertificateFigures | None:
     if not isinstance(record, dict) or "outer_side" not in record or "atoms" not in record:
         return None
     atoms = record["atoms"]
-    if not isinstance(atoms, list) or not atoms:
-        return None
     # Not type-checked ahead of the arithmetic: anything that is not a list of atom
     # records fails inside the `try` below, on the same "unreadable file is not a
     # certificate" path as every other malformed field, and one fewer early return keeps
     # this readable.
     thresholds = record.get("threshold_atoms", [])
+    if isinstance(thresholds, list) and any(
+        isinstance(atom, dict)
+        and any(key in atom for key in ("variant", "multiplicities", "weighted_points"))
+        for atom in thresholds
+    ):
+        # A declared unsupported certificate must stop publication, not disappear among
+        # the unrelated artifacts this reader normally skips.
+        raise ValueError(f"{path.name}: weighted threshold publication has not been admitted")
+    if not isinstance(atoms, list) or not atoms:
+        return None
     try:
         n = int(record["n"])
         outer_side = Fraction(str(record["outer_side"]))

@@ -70,6 +70,7 @@ from sqpack.fractional.threshold import (
     closed_form_threshold_conditions,
     exact_charge,
     minimum_charge,
+    preflight_expansion,
 )
 from sqpack.fractional.threshold_interval import (
     exact_charge_at_witness,
@@ -155,6 +156,14 @@ def load(data: bytes) -> tuple[ThresholdCertificate, dict[str, object]]:
         if not isinstance(entry, dict):
             raise FormatError(f"threshold_atoms[{index}] must be a JSON object")
         item = cast(dict[str, object], entry)
+        if any(key in item for key in ("variant", "weighted_points", "multiplicities")):
+            # Refuse the declared representation before parsing can normalize a malformed
+            # count list or an explicitly tagged all-ones atom into the ordinary shape.
+            raise FormatError(
+                f"threshold_atoms[{index}] declares weighted fields, and variant "
+                f"{VARIANT!r} decides unweighted atoms only; weighted coverage needs its "
+                "own admitted variant"
+            )
         points_record = item.get("points")
         if not isinstance(points_record, list):
             raise FormatError(f"threshold_atoms[{index}].points must be a JSON array")
@@ -177,7 +186,7 @@ def load(data: bytes) -> tuple[ThresholdCertificate, dict[str, object]]:
                     _rational(item.get("weight"), f"threshold_atoms[{index}].weight"),
                 )
             )
-        except ValueError as error:
+        except (TypeError, ValueError) as error:
             raise FormatError(f"threshold_atoms[{index}]: {error}") from None
     try:
         certificate = ThresholdCertificate(
@@ -329,6 +338,10 @@ def _exact_route(
     certificate: ThresholdCertificate, *, workers: int
 ) -> tuple[Fraction | None, list[str]]:
     """Run the exact sweep two ways; return the least charge and every objection."""
+    try:
+        preflight_expansion(certificate.threshold_atoms)
+    except ValueError as error:
+        return None, [f"the exact route could not decide it: {error}"]
     problems: list[str] = []
     start = time.perf_counter()
     directions = certificate.directions

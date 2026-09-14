@@ -23,8 +23,12 @@ Node against small image-element stand-ins. The file belongs in the quick lane.
 
 from __future__ import annotations
 
+import hashlib
+import json
+from contextlib import nullcontext
 from pathlib import Path
 from textwrap import dedent
+from types import SimpleNamespace
 
 import pytest
 from nodejs_wheel import node
@@ -476,3 +480,401 @@ def test_comparison_options_are_refused_in_the_modes_that_do_not_compare(
     with pytest.raises(SystemExit) as refused:
         pdf.main([mode, *option])
     assert refused.value.code == 2
+
+
+@pytest.mark.parametrize("mode", ["--check", "--check-artifact"])
+@pytest.mark.parametrize("disagree", [False, True])
+def test_math_trace_retains_the_exact_draws_and_marks_unobserved_stored_dom(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mode: str, *, disagree: bool
+) -> None:
+    raw = _HEADER + _pages(pdf.EXPECTED_PAGE_COUNT)
+    stored = _artifact(monkeypatch, tmp_path, raw)
+    draws: list[bytes] = []
+
+    def render(*, math_trace: dict[str, object]) -> bytes:
+        draw = raw + (b"changed" if disagree and (draws or mode == "--check-artifact") else b"")
+        draws.append(draw)
+        math_trace.update(browser_version="test-browser", snapshots=[{"phase": "before-pdf"}])
+        return draw
+
+    monkeypatch.setattr(pdf, "render_pdf_bytes", render)
+    monkeypatch.setattr(pdf, "font_findings", lambda _: [])
+    directory = tmp_path / "diagnostics"
+    args = [mode, "--renders", "2", "--trace-math", "--diagnostics-dir", str(directory)]
+    if disagree:
+        with pytest.raises(SystemExit, match="does not reproduce itself"):
+            pdf.main(args)
+    else:
+        assert pdf.main(args) == 0
+    runs = list(directory.glob("pdf-math-trace-*"))
+    assert len(runs) == 1
+    run = runs[0]
+    assert (run / "source.html").read_bytes() == pdf.PAGE.read_bytes()
+    records = [json.loads(p.read_text()) for p in sorted(run.glob("draw-*.json"))]
+    assert len(records) == 2
+    assert records[0]["origin"] == (
+        "stored artifact" if mode == "--check-artifact" else "fresh"
+    )
+    if mode == "--check-artifact":
+        assert records[0]["observations"] is None
+    else:
+        assert records[0]["observations"]["browser_version"] == "test-browser"
+    for index, record in enumerate(records):
+        data = (run / f"draw-{index}.pdf").read_bytes()
+        assert record["pdf_sha256"] == hashlib.sha256(data).hexdigest()
+        source_digest = hashlib.sha256(pdf.PAGE.read_bytes()).hexdigest()
+        assert record["current_source_html_sha256"] == source_digest
+        assert record["pdf_source_html_receipts"] == (
+            [source_digest] if mode == "--check-artifact" else []
+        )
+    assert (run / "draw-0.pdf").read_bytes() == (
+        stored if mode == "--check-artifact" else draws[0]
+    )
+    assert (run / "draw-1.pdf").read_bytes() == (
+        pdf._with_receipt(draws[-1], pdf.PAGE.read_bytes())
+        if mode == "--check-artifact"
+        else draws[-1]
+    )
+    assert pdf.OUTPUT.read_bytes() == stored
+
+
+@pytest.mark.parametrize("args", [["--check"], ["--update"], ["--fonts"]])
+def test_math_trace_requires_a_comparison_and_explicit_destination(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, args: list[str]
+) -> None:
+    _page(monkeypatch, tmp_path)
+    with pytest.raises(SystemExit) as refused:
+        pdf.main([*args, "--trace-math"])
+    assert refused.value.code == 2
+
+
+@pytest.mark.parametrize(
+    "args",
+    [
+        ["--check"],
+        ["--check", "--trace-math"],
+        ["--check", "--diagnostics-dir", "trace"],
+        ["--check-artifact", "--trace-math", "--diagnostics-dir", "trace"],
+        ["--update", "--trace-math", "--diagnostics-dir", "trace"],
+        ["--fonts", "--trace-math", "--diagnostics-dir", "trace"],
+    ],
+)
+def test_prepared_text_replacement_refuses_uncontrolled_modes(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, args: list[str]
+) -> None:
+    _page(monkeypatch, tmp_path)
+    with pytest.raises(SystemExit) as refused:
+        pdf.main([*args, "--rebuild-prepared-text"])
+    assert refused.value.code == 2
+
+
+def test_prepared_text_treatment_forwards_every_draw_and_retains_failure(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    check = pdf.check
+    _page(monkeypatch, tmp_path)
+    calls: list[bool] = []
+    raw = _HEADER + _pages(pdf.EXPECTED_PAGE_COUNT)
+
+    def render(*, math_trace: dict[str, object], rebuild_prepared_text: bool) -> bytes:
+        calls.append(rebuild_prepared_text)
+        math_trace["prepared_text_intervention"] = {
+            "requested": True,
+            "applied": True,
+            "status": "applied",
+            "selected_count": 1,
+            "mutated_count": 1,
+        }
+        return raw + (b"different" if len(calls) == 2 else b"")
+
+    monkeypatch.setattr(pdf, "render_pdf_bytes", render)
+    directory = tmp_path / "diagnostics"
+    with pytest.raises(SystemExit, match="does not reproduce itself"):
+        check(20, diagnostics_dir=directory, trace_math=True, rebuild_prepared_text=True)
+    assert calls == [True, True]
+    run = next(directory.glob("pdf-math-trace-*"))
+    records = [json.loads(path.read_text()) for path in sorted(run.glob("draw-*.json"))]
+    assert len(records) == 2
+    assert all(
+        record["observations"]["prepared_text_intervention"]["applied"] for record in records
+    )
+    assert (run / "draw-0.pdf").read_bytes() == raw
+    assert (run / "draw-1.pdf").read_bytes() == raw + b"different"
+
+
+def test_direct_prepared_text_treatment_requires_trace_and_destination(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    render_pdf_bytes = pdf.render_pdf_bytes
+    monkeypatch.setattr(pdf, "render_pdf_bytes", lambda **_: pytest.fail("must not render"))
+    with pytest.raises(ValueError, match="requires --trace-math and --diagnostics-dir"):
+        pdf.check(rebuild_prepared_text=True)
+    with pytest.raises(ValueError, match="requires --trace-math and --diagnostics-dir"):
+        pdf.check(trace_math=True, rebuild_prepared_text=True)
+    with pytest.raises(ValueError, match="requires a math trace"):
+        render_pdf_bytes(rebuild_prepared_text=True)
+    assert not (tmp_path / "diagnostics").exists()
+
+
+@pytest.mark.parametrize("requested", [False, True])
+def test_early_browser_failure_records_requested_arm_without_claiming_mutation(
+    monkeypatch: pytest.MonkeyPatch, *, requested: bool
+) -> None:
+    import playwright.sync_api as playwright  # noqa: PLC0415
+
+    def unavailable() -> None:
+        raise RuntimeError("browser did not start")
+
+    monkeypatch.setattr(playwright, "sync_playwright", unavailable)
+    observations: dict[str, object] = {}
+    with pytest.raises(RuntimeError, match="browser did not start"):
+        pdf.render_pdf_bytes(math_trace=observations, rebuild_prepared_text=requested)
+    assert observations["prepared_text_intervention"] == {
+        "requested": requested,
+        "applied": False,
+        "status": "not-reached",
+        "selected_count": 0,
+        "selected": [],
+        "mutated_count": 0,
+        "mutated": [],
+        "html_unchanged": None,
+    }
+
+
+def test_interrupted_evaluate_keeps_mutation_outcome_unknown(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import playwright.sync_api as playwright  # noqa: PLC0415
+
+    from devtools import sans_instances  # noqa: PLC0415
+
+    def evaluate(script: str, *_: object) -> list[dict[str, str]] | None:
+        if script == pdf._TRACED_SETTLED:
+            return [{"phase": "settled"}]
+        if script == pdf._PREPARED_TEXT_INTERVENTION:
+            raise RuntimeError("evaluation interrupted after possible mutation")
+        return None
+
+    page = SimpleNamespace(
+        viewport_size={"width": 1280, "height": 720},
+        emulate_media=lambda **_: None,
+        goto=lambda *_, **__: None,
+        wait_for_selector=lambda *_, **__: None,
+        evaluate=evaluate,
+        add_style_tag=lambda **_: None,
+        pdf=lambda **_: pytest.fail("must not capture PDF"),
+    )
+    session = SimpleNamespace(send=lambda _: {}, detach=lambda: None)
+    browser = SimpleNamespace(
+        version="test-browser",
+        new_browser_cdp_session=lambda: session,
+        new_page=lambda: page,
+        close=lambda: None,
+    )
+    driver = SimpleNamespace(chromium=SimpleNamespace(launch=lambda **_: browser))
+    monkeypatch.setattr(playwright, "sync_playwright", lambda: nullcontext(driver))
+    monkeypatch.setattr(sans_instances, "print_face_css", lambda: "")
+    observations: dict[str, object] = {}
+    with pytest.raises(RuntimeError, match="evaluation interrupted after possible mutation"):
+        pdf.render_pdf_bytes(math_trace=observations, rebuild_prepared_text=True)
+    assert observations["snapshots"] == [{"phase": "settled"}]
+    assert observations["prepared_text_intervention"] == {
+        "requested": True,
+        "applied": None,
+        "status": "interrupted",
+        "selected_count": None,
+        "selected": None,
+        "mutated_count": None,
+        "mutated": None,
+        "html_unchanged": None,
+    }
+
+
+def test_math_trace_retains_available_observations_when_a_draw_fails(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    check = pdf.check
+    _page(monkeypatch, tmp_path)
+
+    def render(*, math_trace: dict[str, object]) -> bytes:
+        math_trace["browser_version"] = "test-browser"
+        raise RuntimeError("test PDF capture failed")
+
+    monkeypatch.setattr(pdf, "render_pdf_bytes", render)
+    directory = tmp_path / "diagnostics"
+    with pytest.raises(RuntimeError, match="test PDF capture failed"):
+        check(trace_math=True, diagnostics_dir=directory)
+    run = next(directory.glob("pdf-math-trace-*"))
+    record = json.loads((run / "draw-0.json").read_text())
+    assert record["pdf_sha256"] is None
+    assert record["render_error"] == "test PDF capture failed"
+    assert record["observations"]["browser_version"] == "test-browser"
+    assert not (run / "draw-0.pdf").exists()
+
+
+def test_traced_settlement_uses_the_existing_frames_and_font_waits() -> None:
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        const events = [];
+        let frames = 0;
+        globalThis.requestAnimationFrame = callback => { frames++; callback(); };
+        globalThis.document = {
+          documentElement: {get offsetHeight() { events.push('layout'); return 100; }},
+          fonts: {get ready() { events.push('fonts'); return Promise.resolve(); }},
+        };
+        globalThis.squaresMath = {async settled() { events.push('math'); }};
+    """)
+    script += f"const settle = {pdf.SETTLED};\n"
+    script += dedent("""
+        (async () => {
+          const phases = [];
+          await settle(phase => phases.push(phase));
+          assert.equal(frames, 3);
+          assert.deepEqual(events, ['layout', 'math', 'fonts', 'math']);
+          assert.deepEqual(phases, [
+            'before-final-frames', 'final-frame-1', 'final-frame-2',
+            'after-fonts', 'final-frame-3', 'settled',
+          ]);
+          frames = 0; events.length = 0;
+          await settle();
+          assert.equal(frames, 3);
+          assert.deepEqual(events, ['layout', 'math', 'fonts', 'math']);
+        })().catch(error => { console.error(error); process.exit(1); });
+    """)
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
+@pytest.mark.parametrize("overflow", [False, True])
+def test_math_snapshot_tracks_visible_text_without_hiding_omissions(*, overflow: bool) -> None:
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        const box = {x:10, y:20.21875, width:24, height:16};
+        const style = {display:'inline', height:'20.08336px', fontFamily:'PT Serif',
+          fontSize:'16px', lineHeight:'0px', verticalAlign:'baseline', fontWeight:'400',
+          fontStyle:'normal', position:'static', textRendering:'auto', fontKerning:'auto'};
+        globalThis.getComputedStyle = () => style;
+        const element = (parent, shown = true) => {
+          const result = {tagName:'SPAN', className:'mop', parentElement:parent, children:[],
+            checkVisibility:() => shown, getBoundingClientRect:() => box};
+          parent?.children.push(result);
+          return result;
+        };
+        const host = element(null), html = element(host), owner = element(html);
+        const hidden = element(html, false);
+        host.dataset = {kpressMathSource:'\\\\tan d \\\\le D'};
+        host.querySelector = () => html;
+        html.querySelectorAll = () => [owner];
+        const text = (value, parent = owner, boxes = [box]) => ({
+          data:value, textContent:value, parentElement:parent, parentNode:parent, boxes});
+        const nodes = [text(' '), text('hidden', hidden), text('tan'),
+          text('clipped', owner, [])];
+        owner.replaceChild = (replacement, original) => {
+          const index = nodes.indexOf(original);
+          assert.ok(index >= 0);
+          replacement.parentNode = owner;
+          replacement.parentElement = owner;
+          nodes[index] = replacement;
+        };
+        const fonts = [{family:'PT Serif', style:'normal', weight:'400', stretch:'normal',
+          status:'loaded', unicodeRange:'U+0-10FFFF'}];
+        fonts.status = 'loaded';
+        globalThis.NodeFilter = {SHOW_TEXT:4};
+        globalThis.document = {
+          querySelectorAll:() => [{querySelector:() => null}, host], fonts,
+          documentElement: {get outerHTML() {
+            return '<html>' + nodes.map(node => node.data).join('') + '</html>';
+          }},
+          createTreeWalker:() => {
+            let next = 0;
+            return {nextNode:() => nodes[next++] || null};
+          },
+          createTextNode:value => text(value),
+          createRange:() => ({selectNodeContents(node) { this.node = node; },
+            getClientRects() { return this.node.boxes; }}),
+        };
+    """)
+    if overflow:
+        script += "nodes.push(...Array.from({length:10000}, () => text('x'.repeat(513))));\n"
+    script += f"const snapshot = ({pdf._MATH_SNAPSHOT})('before-pdf');\n"
+    script += f"const intervene = {pdf._PREPARED_TEXT_INTERVENTION};\n"
+    script += dedent("""
+        assert.equal(snapshot.phase, 'before-pdf');
+        assert.equal(snapshot.font_status, 'loaded');
+        assert.equal(snapshot.fonts[0].family, 'PT Serif');
+        assert.equal(snapshot.formulas[0].formula, 1);
+        assert.equal(snapshot.formulas[0].source, '\\\\tan d \\\\le D');
+        assert.equal(snapshot.formulas[0].boxes[0].rect.y, 20.21875);
+        assert.equal(snapshot.formulas[0].boxes[0].vertical_align, 'baseline');
+        assert.equal(snapshot.formulas[0].bases[0].line_height, '0px');
+        assert.equal(snapshot.formulas[0].struts[0].height, '20.08336px');
+        assert.deepEqual(snapshot.tokens[0], {
+          formula:1, token:2, path:'span:1/span:1', text:'tan', text_truncated:false,
+          class_name:'mop', element_rect:box, text_rects:[box], font_family:'PT Serif',
+          font_size:'16px', font_weight:'400', font_style:'normal', line_height:'0px',
+          vertical_align:'baseline', position:'static', text_rendering:'auto',
+          font_kerning:'auto',
+        });
+    """)
+    if overflow:
+        script += dedent("""
+            assert.equal(snapshot.truncated, true);
+            assert.equal(snapshot.tokens.length, snapshot.token_limit);
+            assert.equal(snapshot.tokens[1].text.length, 512);
+            assert.equal(snapshot.tokens[1].text_truncated, true);
+            const original = [...nodes];
+            const refused = intervene(true);
+            assert.match(refused.error, /truncated before replacement/);
+            assert.equal(refused.intervention.status, 'refused');
+            assert.equal(refused.intervention.mutated_count, 0);
+            assert.equal(refused.snapshots.length, 1);
+            assert.deepEqual(nodes, original);
+        """)
+    else:
+        script += dedent("""
+            assert.equal(snapshot.truncated, false);
+            assert.equal(snapshot.tokens.length, 1);
+            const original = [...nodes];
+            const control = intervene(false);
+            assert.equal(control.error, undefined);
+            assert.equal(control.intervention.status, 'control');
+            assert.equal(control.intervention.applied, false);
+            assert.equal(control.intervention.selected_count, 1);
+            assert.equal(control.intervention.mutated_count, 0);
+            assert.equal(control.intervention.html_unchanged, true);
+            assert.deepEqual(control.intervention.selected, [{
+              formula:1, token:2, path:'span:1/span:1', text:'tan',
+            }]);
+            assert.deepEqual(nodes, original);
+            assert.deepEqual(control.snapshots.map(s => s.phase),
+              ['before-intervention', 'after-intervention']);
+            const treatment = intervene(true);
+            assert.equal(treatment.error, undefined);
+            assert.equal(treatment.intervention.status, 'applied');
+            assert.equal(treatment.intervention.applied, true);
+            assert.equal(treatment.intervention.selected_count, 1);
+            assert.equal(treatment.intervention.mutated_count, 1);
+            assert.equal(treatment.intervention.html_unchanged, true);
+            assert.deepEqual(treatment.intervention.mutated,
+              control.intervention.selected);
+            assert.deepEqual(treatment.intervention.after_selected,
+              control.intervention.selected);
+            assert.notEqual(nodes[2], original[2]);
+            for (const index of [0, 1, 3]) assert.equal(nodes[index], original[index]);
+            assert.equal(nodes.map(node => node.data).join('|'),
+              original.map(node => node.data).join('|'));
+            assert.deepEqual(treatment.snapshots.map(s => s.phase),
+              ['before-intervention', 'after-intervention']);
+            nodes.length = 0;
+            const noTargets = intervene(true);
+            assert.match(noTargets.error, /no visible prepared-text nodes selected/);
+            assert.equal(noTargets.intervention.status, 'no-targets');
+            assert.equal(noTargets.intervention.applied, false);
+            assert.equal(noTargets.intervention.mutated_count, 0);
+        """)
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr

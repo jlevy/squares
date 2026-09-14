@@ -448,7 +448,8 @@ class AtomVerdict:
                 for p in self.points
             ],
             "threshold": self.threshold,
-            "size": sum(p.multiplicity for p in self.points),
+            "site_count": len(self.points),
+            "token_count": sum(p.multiplicity for p in self.points),
             "budget": self.budget,
             "threshold_charge": _f(self.threshold_charge),
             "floor_charge": _f(self.floor_charge),
@@ -1747,7 +1748,7 @@ class PlateauReport:
         arrangement = self.arrangement
         verdict = self.verdict
         base: dict[str, Any] = {
-            "kind": "plateau-reader/v1",
+            "kind": "plateau-reader/v2",
             "family": {
                 "placements": len(verdict.conditions) and None,
                 "total_weight": _f(verdict.total_weight),

@@ -19,7 +19,7 @@ from contextlib import suppress
 from fractions import Fraction
 from pathlib import Path
 from types import SimpleNamespace
-from typing import cast
+from typing import Never, cast
 from unittest.mock import patch
 
 import pytest
@@ -69,7 +69,7 @@ from devtools.fixed_core_packet import (
     supervise_worker,
     validate_result_document,
 )
-from sqpack.fractional.threshold import ThresholdCertificate
+from sqpack.fractional.threshold import ThresholdAtom, ThresholdCertificate
 
 REPOSITORY = Path(__file__).resolve().parents[2]
 SOURCE = (REPOSITORY / SOURCE_PATH).read_bytes()
@@ -562,6 +562,53 @@ def test_exact_runner_retains_both_reader_witnesses(
     assert row["slab_witness"] == ["2", "4"]
     assert raised.value.direction == 0
     assert raised.value.completed == 1
+
+
+@pytest.mark.parametrize("runner", [run_raw_sweep, run_exact_route])
+@pytest.mark.parametrize("workers", [1, 2])
+@pytest.mark.parametrize(("tokens", "threshold"), [(10**12, 10**12), (40, 20)])
+def test_packet_sweeps_refuse_expansion_before_shared_state_workers_or_receipts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    runner: Callable[..., RawMinimum | ExactRoute],
+    workers: int,
+    tokens: int,
+    threshold: int,
+) -> None:
+    atom = ThresholdAtom(((Fraction(3, 2), Fraction(3, 2)),), threshold, Fraction(1), (tokens,))
+    certificate = ThresholdCertificate(
+        n=2,
+        outer_side=Fraction(3),
+        square_side=Fraction(1),
+        atoms=(),
+        threshold_atoms=(atom,),
+        half_tangents=(Fraction(0), Fraction(1, 5)),
+    )
+    monkeypatch.setattr(fixed_core_packet.SHARED_PACKET, "certificate", None)
+
+    def bomb(*_args: object, **_kwargs: object) -> Never:
+        raise AssertionError("a refused expansion reached a worker or published a receipt")
+
+    for name in (
+        "ProcessPoolExecutor",
+        "_raw_direction",
+        "_exact_direction",
+        "_write_direction",
+    ):
+        monkeypatch.setattr(fixed_core_packet, name, bomb)
+    log = tmp_path / "directions"
+    with pytest.raises(ValueError, match="event-grid route expands"):
+        runner(
+            certificate,
+            workers=workers,
+            deadline=10.0,
+            clock=lambda: 0.0,
+            progress=bomb,
+            log=log,
+        )
+    assert fixed_core_packet.SHARED_PACKET.certificate is None
+    assert not log.exists()
 
 
 def test_parallel_raw_scheduler_bounds_submission_and_selects_lowest_tied_index(

@@ -1470,6 +1470,12 @@ def current_bound_facts() -> CurrentBoundFacts:
     """Read and cross-check the retained T-025 certificate and T-026 corollary."""
     coarse = json.loads(THRESHOLD_CERTIFICATE.read_text(encoding="utf-8"))
     fine = json.loads(THRESHOLD_FINE_CERTIFICATE.read_text(encoding="utf-8"))
+    if any(
+        any(key in atom for key in ("variant", "multiplicities", "weighted_points"))
+        for record in (coarse, fine)
+        for atom in record["threshold_atoms"]
+    ):
+        raise SystemExit("weighted threshold publication has not been admitted")
     limit = json.loads(CURRENT_BOUND_RECORD.read_text(encoding="utf-8"))
     threshold_proof = THRESHOLD_PROOF.read_text(encoding="utf-8")
     source = limit["source"]

@@ -61,6 +61,7 @@ from sqpack.fractional.threshold import (
     closed_form_threshold_conditions,
     exact_charge,
     minimum_charge,
+    preflight_expansion,
 )
 from sqpack.fractional.threshold_interval import (
     scaled_threshold_masses,
@@ -937,6 +938,7 @@ def run_raw_sweep(
 ) -> RawMinimum:
     """Sweep all raw directions, publishing only an observed upper bound until complete."""
 
+    preflight_expansion(certificate.threshold_atoms)
     worst: Fraction | None = None
     worst_index = -1
     worst_witness: Point | None = None
@@ -1052,6 +1054,7 @@ def run_exact_route(
 ) -> ExactRoute:
     """Run dense and slab exact coverage on every normalized net direction."""
 
+    preflight_expansion(certificate.threshold_atoms)
     SHARED_PACKET.certificate = certificate
     total = len(certificate.directions)
     pool: ProcessPoolExecutor | None = None

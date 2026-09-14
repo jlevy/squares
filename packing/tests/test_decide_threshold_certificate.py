@@ -12,6 +12,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Callable
+from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
 from typing import Never
@@ -20,7 +21,13 @@ import pytest
 
 import devtools.decide_threshold_certificate as gate
 from devtools.decide_threshold_certificate import decide, load, main
-from sqpack.fractional.threshold import ThresholdAtom, ThresholdCertificate
+from sqpack.fractional.certificate import d4_images
+from sqpack.fractional.threshold import (
+    MAX_EXPANSION_SUBSETS,
+    ThresholdAtom,
+    ThresholdCertificate,
+    closed_form_threshold_conditions,
+)
 from tests.test_fractional_threshold_interval import rescaled, tight_certificate
 
 
@@ -209,6 +216,52 @@ def test_an_inexact_number_anywhere_in_the_file_is_refused(
     assert "inexact JSON number '1.5'" in capsys.readouterr().out
 
 
+@pytest.mark.parametrize(
+    "fields",
+    [
+        {"variant": "weighted-threshold/v1", "multiplicities": []},
+        {"variant": "weighted-threshold/v1", "multiplicities": [1, 1, 1]},
+        {"variant": "weighted-threshold/v1", "multiplicities": [True, 1, 1]},
+        {"variant": None},
+        {"multiplicities": None},
+        {"weighted_points": None},
+    ],
+)
+def test_declared_weighted_fields_are_refused_before_normalization_or_coverage(
+    tmp_path: Path,
+    tight: ThresholdCertificate,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    fields: dict[str, object],
+) -> None:
+    no_routes(monkeypatch)
+    record = json.loads(json.dumps(_record(tight)))
+    record["threshold_atoms"][0].update(fields)
+    data = json.dumps(record).encode()
+    with pytest.raises(gate.FormatError, match="unweighted atoms only"):
+        load(data)
+    path = tmp_path / "weighted.json"
+    path.write_bytes(data)
+    assert decide(path, workers=1) is False
+    out = capsys.readouterr().out
+    assert "REFUSED" in out
+    assert "unweighted atoms only" in out
+    assert "RETAINABLE" not in out
+
+
+def test_a_current_weighted_model_record_cannot_enter_coverage(
+    tight: ThresholdCertificate, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    no_routes(monkeypatch)
+    first = tight.threshold_atoms[0]
+    weighted = ThresholdAtom(first.points, first.threshold, first.weight, (2, 1, 1))
+    record = json.loads(json.dumps(_record(tight)))
+    record["threshold_atoms"][0] = weighted.to_record()
+    assert "points" not in record["threshold_atoms"][0]
+    with pytest.raises(gate.FormatError, match="unweighted atoms only"):
+        load(json.dumps(record).encode())
+
+
 def test_the_command_line_runs_the_modes_and_skips_a_duplicate_path(
     tmp_path: Path, tight: ThresholdCertificate, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -221,3 +274,55 @@ def test_the_command_line_runs_the_modes_and_skips_a_duplicate_path(
     assert "one exact route" in capsys.readouterr().out
     assert main([str(tmp_path / "missing.json")]) == 1
     assert "REFUSED" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("workers", [1, 2])
+@pytest.mark.parametrize("mode", ["both", "exact-only"])
+def test_the_command_refuses_subset_work_before_a_direction_or_pool(
+    tmp_path: Path,
+    tight: ThresholdCertificate,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    workers: int,
+    mode: str,
+) -> None:
+    """A valid ordinary record can pass headroom yet request 6.2e11 subsets."""
+
+    points = tuple(
+        sorted(
+            {
+                image
+                for i in range(5)
+                for image in d4_images(
+                    tight.outer_side * Fraction(i + 1, 100),
+                    tight.outer_side * Fraction(23, 100),
+                    tight.outer_side,
+                )
+            }
+        )
+    )
+    assert len(points) == 40
+    explosive = ThresholdAtom(points, 20, Fraction(1, 1000))
+    certificate = replace(tight, threshold_atoms=(*tight.threshold_atoms, explosive))
+    assert all(report.holds for report in closed_form_threshold_conditions(certificate))
+    path = write(tmp_path, certificate)
+    monkeypatch.setattr(gate, "minimum_charge", bomb)
+    monkeypatch.setattr(gate, "ProcessPoolExecutor", bomb)
+
+    def accepted_interval(
+        _certificate: ThresholdCertificate, *, workers: int
+    ) -> tuple[Fraction, list[str]]:
+        assert workers >= 1
+        return Fraction(1), []
+
+    monkeypatch.setattr(gate, "_interval_route", accepted_interval if mode == "both" else bomb)
+    args = ["--workers", str(workers), str(path)]
+    if mode == "exact-only":
+        args.insert(0, "--exact-only")
+    assert main(args) == 1
+    output = capsys.readouterr().out
+    assert "REFUSED: the exact route could not decide it:" in output
+    assert f"{MAX_EXPANSION_SUBSETS} per direction" in output
+    assert "ACCEPTED" not in output
+    assert "RETAINABLE" not in output

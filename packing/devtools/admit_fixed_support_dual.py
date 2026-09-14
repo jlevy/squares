@@ -446,6 +446,11 @@ def _priced_row(
         budget = DEPTH_BUDGET
         coefficients = _depth_coefficients(point, columns)
     else:
+        if any(key in identity for key in ("variant", "weighted_points", "multiplicities")):
+            raise AdmissionError(
+                f"{context} identity declares weighted fields, and this reader prices "
+                "unweighted orbit columns only"
+            )
         raw_points = _array(identity.get("points"), f"{context} identity field 'points'")
         points = tuple(
             _point(point, f"{context} atom point {index}", outer_side)
@@ -469,7 +474,8 @@ def _priced_row(
                 f"{context} atom orbit_size is {declared_orbit_size}, "
                 f"exact D4 size is {len(images)}"
             )
-        budget = Fraction(len(images) * (atom.size // atom.threshold))
+        # `token_count`, not `size`: see `ThresholdAtom.budget`.
+        budget = Fraction(len(images) * (atom.token_count // atom.threshold))
         coefficients = _atom_coefficients(atom, images, columns)
 
     declared_budget = _fraction(row.get("budget"), f"{context} field 'budget'")

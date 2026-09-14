@@ -1292,9 +1292,9 @@ controls:
 
 - name: synopsis handoff - selected entry is replaced by another bead
   file: ../SYNOPSIS.md
-  replace: ["**Selected next entry:** `think-qw9w`", "**Selected next entry:** `think-cyko`"]
+  replace: ["**Selected next entry:** `think-8c9e`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
-  expect: "exactly one canonical Selected next entry marker for think-qw9w"
+  expect: "exactly one canonical Selected next entry marker for think-8c9e"
 
 # --- the gate's own declared cost (agenda-023 BC-216) ---
 #

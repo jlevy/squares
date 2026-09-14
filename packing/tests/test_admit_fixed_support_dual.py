@@ -12,6 +12,7 @@ import pytest
 
 from devtools import admit_fixed_support_dual as reader
 from sqpack.fractional import ceiling
+from sqpack.fractional.threshold import ThresholdAtom
 
 PACKING = Path(ceiling.__file__).resolve().parents[3]
 RESULTS = (
@@ -226,3 +227,26 @@ def test_cli_refuses_a_bad_certificate_without_a_success_receipt(
     assert captured.out == ""
     assert '"admitted": false' in captured.err
     assert "Traceback" not in captured.err
+
+
+@pytest.mark.parametrize("field", ["variant", "weighted_points", "multiplicities"])
+def test_even_empty_weighted_identity_fields_refuse_before_pricing(field: str) -> None:
+    certificate, support = records()
+    certificate["dual"]["priced_rows"][-1]["identity"][field] = None
+    with pytest.raises(reader.AdmissionError, match="unweighted orbit columns only"):
+        reader.admit_records(certificate, support)
+
+
+def test_current_weighted_sites_refuse_before_the_fixed_support_row_is_priced() -> None:
+    certificate, support = records()
+    row = certificate["dual"]["priced_rows"][-1]
+    identity = row["identity"]
+    points = tuple((Fraction(x), Fraction(y)) for x, y in identity["points"])
+    weighted = ThresholdAtom(points, identity["threshold"], Fraction(1), (2, 1, 1, 1, 1))
+    row["identity"] = weighted.to_record() | {
+        "kind": identity["kind"],
+        "orbit_size": len(weighted.orbit(Fraction(support["outer_side"]))),
+    }
+    assert "points" not in row["identity"]
+    with pytest.raises(reader.AdmissionError, match="unweighted orbit columns only"):
+        reader.admit_records(certificate, support)

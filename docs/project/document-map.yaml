@@ -20,6 +20,7 @@ documents:
   - {path: docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md, role: review, authority: record, lifecycle: retained}
@@ -114,6 +115,7 @@ documents:
   - {path: docs/project/reviews/review-2026-09-08-pr127-research-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-10-t025-t026-verifiable-claims.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-13-explainer-pdf-comparison.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-08-extending-s11-lower-bound-note.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-07-n26-best-known-audit.md, role: research-report, authority: supporting, lifecycle: maintained}

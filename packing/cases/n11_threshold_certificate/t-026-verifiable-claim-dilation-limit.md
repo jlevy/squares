@@ -204,7 +204,7 @@ decisions. The source sweep was measured at about 782 seconds on two workers, an
 ## Verifier
 
 The following block is byte-for-byte [`verify_claim.py`](verify_claim.py), SHA-256
-`9ec3d5125e5f545b660822234c288e6e516022a177625cc54e4ecc8e127449fd`.
+`26549c20bf6ec4ef2f08034b439405a1ca859d7c21a87a842fd5144c7b578e77`.
 
 ```python
 #!/usr/bin/env python3
@@ -386,6 +386,10 @@ def load_certificate(raw):
     if len(record["threshold_atoms"]) > MAX_THRESHOLD_ATOMS:
         raise ValueError("too many threshold atoms")
     for item in record["threshold_atoms"]:
+        if isinstance(item, dict) and any(
+            key in item for key in ("variant", "multiplicities", "weighted_points")
+        ):
+            raise ValueError("this verifier accepts only unweighted threshold atoms")
         if not isinstance(item, dict) or not isinstance(item.get("points"), list):
             raise TypeError("each threshold atom must be an object with a points array")
         if any(not isinstance(p, list) or len(p) != 2 for p in item["points"]):

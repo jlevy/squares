@@ -237,6 +237,24 @@ def test_hostile_small_certificates_are_refused(mutate, refusal, capsys) -> None
         assert refusal in capsys.readouterr().out
 
 
+@pytest.mark.parametrize(
+    "fields",
+    [
+        {"variant": "weighted-threshold/v1", "multiplicities": [2, 1, 1]},
+        {"multiplicities": []},
+        {"variant": None},
+        {"weighted_points": [["0", "0", 2]]},
+    ],
+)
+def test_standalone_parser_refuses_weighted_declarations(fields: dict[str, object]) -> None:
+    verifier = load_verifier()
+    record = small_certificate()
+    threshold_atoms = cast(list[dict[str, object]], record["threshold_atoms"])
+    threshold_atoms[0].update(fields)
+    with pytest.raises(ValueError, match="unweighted"):
+        verifier.load_certificate(encoded(record))
+
+
 def test_malformed_shapes_and_duplicate_keys_are_refused(tmp_path: Path) -> None:
     verifier = load_verifier()
     for index, raw in enumerate((b"[]", b'{"variant":"threshold","variant":"threshold"}')):

@@ -82,7 +82,12 @@ from devtools.measure_net_refinement import (
     uniform_net,
 )
 from sqpack.fractional.model import Direction
-from sqpack.fractional.threshold import Point, ThresholdCertificate, minimum_charge
+from sqpack.fractional.threshold import (
+    Point,
+    ThresholdCertificate,
+    minimum_charge,
+    preflight_expansion,
+)
 
 PACKING = Path(__file__).resolve().parents[1]
 """The build root, `packing/`; the frozen source is named relative to it, not to a cwd."""
@@ -242,6 +247,7 @@ def sweep(
     threshold: a failure is one direction's, a pass is every direction's.
     """
 
+    preflight_expansion(certificate.threshold_atoms)
     started = time.monotonic()
     SHARED.certificate = certificate
     SHARED.directions = certificate.directions
@@ -448,6 +454,13 @@ def rescaled_record(
         elif key == "threshold_atoms":
             entries: list[dict[str, Any]] = []
             for entry in value:
+                if any(
+                    key in entry for key in ("variant", "multiplicities", "weighted_points")
+                ):
+                    raise ValueError(
+                        "net refinement accepts unweighted threshold records only; "
+                        "weighted coverage has not been admitted"
+                    )
                 weight = Fraction(entry["weight"]) * factor
                 threshold_budget += weight * (len(entry["points"]) // entry["threshold"])
                 entries.append(

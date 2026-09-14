@@ -375,6 +375,12 @@ def _threshold_facts(certificate: dict[str, object]) -> ThresholdFacts:
     threshold_atoms = certificate["threshold_atoms"]
     if not isinstance(atoms, list) or not isinstance(threshold_atoms, list):
         raise SystemExit("threshold certificate atom families must be arrays")
+    if any(
+        isinstance(atom, dict)
+        and any(key in atom for key in ("variant", "multiplicities", "weighted_points"))
+        for atom in threshold_atoms
+    ):
+        raise SystemExit("weighted threshold publication has not been admitted")
     steps = certificate["direction_steps"]
     if not isinstance(steps, int):
         raise SystemExit("threshold certificate direction_steps must be an integer")

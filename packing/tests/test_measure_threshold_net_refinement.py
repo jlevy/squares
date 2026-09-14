@@ -26,9 +26,14 @@ threshold sweep and not the point sweep.
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
+from typing import Never
 
+import pytest
+
+import devtools.measure_threshold_net_refinement as refinement
 from devtools.decide_threshold_certificate import _declarations, _exact_route, load
 from devtools.dilation_corollary import sharp_dilation_ceiling
 from devtools.measure_net_refinement import (
@@ -44,6 +49,7 @@ from devtools.measure_threshold_net_refinement import (
     dilation_supremum,
     full_sweep,
     rescaled_record,
+    sweep,
 )
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
@@ -229,3 +235,44 @@ def test_dilation_supremum_agrees_with_the_repository_form() -> None:
 def test_decimal_places_truncates_a_known_root() -> None:
     assert decimal_places(Fraction(2), 20) == "1.41421356237309504880"
     assert decimal_places(Fraction(4), 5) == "2.00000"
+
+
+@pytest.mark.parametrize("workers", [1, 2])
+@pytest.mark.parametrize(("tokens", "threshold"), [(10**12, 10**12), (40, 20)])
+def test_a_refused_expansion_creates_no_pool_log_or_shared_state(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    workers: int,
+    tokens: int,
+    threshold: int,
+) -> None:
+    """Compact input is refused in the parent before any sweep side effect."""
+
+    original = fixture(LOWER, 4)
+    atom = ThresholdAtom(((Fraction(1, 2), Fraction(1, 2)),), threshold, Fraction(1), (tokens,))
+    certificate = replace(original, threshold_atoms=(atom,))
+    knowledge = Knowledge(FIXTURE_THRESHOLD)
+    log = tmp_path / "directions.jsonl"
+    monkeypatch.setattr(refinement.SHARED, "certificate", original)
+    monkeypatch.setattr(refinement.SHARED, "directions", original.directions)
+    previous_directions = refinement.SHARED.directions
+
+    def bomb(*_args: object, **_kwargs: object) -> Never:
+        raise AssertionError("a refused expansion reached a direction or worker pool")
+
+    monkeypatch.setattr(refinement, "minimum_at", bomb)
+    monkeypatch.setattr(refinement, "ProcessPoolExecutor", bomb)
+    with pytest.raises(ValueError, match="event-grid route expands"):
+        sweep(
+            certificate,
+            [0, 1],
+            knowledge,
+            log,
+            workers=workers,
+            stop_on_failure=False,
+        )
+    assert not log.exists()
+    assert refinement.SHARED.certificate is original
+    assert refinement.SHARED.directions is previous_directions
+    assert knowledge.minima == {}
+    assert knowledge.passing_at == {}

@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "explainer-pdf-check": {
+      "id": 10323137895
+    },
+    "prepared-page": {
+      "id": 10322424640
+    }
+  },
+  "files": {
+    "index.html.gz": {
+      "bytes": 1049937,
+      "compression": "gzip",
+      "gzip_compresslevel": 9,
+      "gzip_mtime": 0,
+      "sha256": "690eb144e1fac7392a0f955103b37992366bc32f202a219c1b7f9a8dcded8f80",
+      "source_artifact": "prepared-page",
+      "source_path": "index.html",
+      "uncompressed_bytes": 3172118,
+      "uncompressed_sha256": "955ad1ec8e161c3db5a0cbd4ce4479db6663340d9903c8a0f9b7882384d4d0d1"
+    },
+    "reference.pdf": {
+      "bytes": 843157,
+      "sha256": "ea8a21929c8e7fe9b4a401b22e521e4fae9351617d0fb317ee5144a70f17b70e",
+      "source_artifact": "explainer-pdf-check",
+      "source_path": "pdf-check-644lkxd1/reference.pdf"
+    },
+    "replay.pdf": {
+      "bytes": 843157,
+      "sha256": "e76ca05a908f8beef6bbea6a6d6237c951b38ca1a0d480499d304b5ee78fea32",
+      "source_artifact": "explainer-pdf-check",
+      "source_path": "pdf-check-644lkxd1/replay.pdf"
+    },
+    "report.txt": {
+      "bytes": 712,
+      "sha256": "805612d7f4d49b5d88eef36134c833dd12308ab982d41847f151037faeeb452e",
+      "source_artifact": "explainer-pdf-check",
+      "source_path": "pdf-check-644lkxd1/report.txt"
+    }
+  },
+  "purpose": "Retain the original external inputs for the failed explainer PDF comparison; no causal attribution.",
+  "scope": "The PDFs and diagnostic are copied without modification. index.html.gz is deterministic gzip of the exact prepared HTML. This retained pair establishes one text-position difference, not its upstream cause or the cause of older failed comparisons.",
+  "source": {
+    "checkout_revision": "a62d695d80df3ebae58106a095ef68c882a573fa",
+    "git_tree": "0233d5a96df43194d2a5be08296aad44969f8377",
+    "pr_head_revision": "cadbf7e149b65215724daf813add78d80879d327",
+    "prepared_html_sha256": "955ad1ec8e161c3db5a0cbd4ce4479db6663340d9903c8a0f9b7882384d4d0d1"
+  },
+  "workflow": {
+    "attempt": 1,
+    "conclusion": "failure",
+    "event": "pull_request",
+    "name": "Certificate page",
+    "repository": "jlevy/squares",
+    "run_id": 34774787868,
+    "url": "https://github.com/jlevy/squares/actions/runs/34774787868"
+  }
+}

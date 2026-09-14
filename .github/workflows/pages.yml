@@ -1,7 +1,16 @@
 name: Certificate page
 
 "on":
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      trace_pdf:
+        description: Retain math geometry and repeated PDF draws for diagnosis
+        type: boolean
+        default: false
+      rebuild_pdf_math_text:
+        description: Also test unchanged math text reconstruction (requires trace_pdf)
+        type: boolean
+        default: false
   # The page is rendered from the retained certificate, so it is republished
   # whenever that certificate, the renderer, or the template moves.
   # The list is every input the renderer reads or imports: the case directory
@@ -222,6 +231,36 @@ jobs:
       # if they disagree; the checker never rewrites the artifact it checks.
       - name: Check the PDF artifact that will be published
         run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --check-artifact --diagnostics-dir /tmp/explainer-pdf-check
+
+      # This opt-in observation can perturb timing. It supplements the ordinary,
+      # uninstrumented artifact check above and never replaces its verdict.
+      - name: Trace repeated PDF math layout
+        if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' && inputs.trace_pdf }}
+        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --check --renders 20 --trace-math --diagnostics-dir /tmp/explainer-pdf-trace
+
+      - name: Retain PDF math trace
+        if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.trace_pdf }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: explainer-pdf-trace
+          path: /tmp/explainer-pdf-trace
+          if-no-files-found: error
+          retention-days: 7
+
+      # Use the same prepared HTML and runner for both arms. This intervention is
+      # diagnostic only; the earlier control failure remains a workflow failure.
+      - name: Test prepared math text reconstruction
+        if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' && inputs.trace_pdf && inputs.rebuild_pdf_math_text }}
+        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --check --renders 20 --trace-math --rebuild-prepared-text --diagnostics-dir /tmp/explainer-pdf-rebuild
+
+      - name: Retain PDF text reconstruction trace
+        if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.trace_pdf && inputs.rebuild_pdf_math_text }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: explainer-pdf-rebuild
+          path: /tmp/explainer-pdf-rebuild
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Retain PDF mismatch diagnostics
         if: failure()
