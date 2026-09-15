@@ -5,12 +5,12 @@ title: Biome and ESLint floors with no overrides
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:07.150Z
-updated_at: 2026-09-15T00:24:22.426Z
+updated_at: 2026-09-15T02:41:48.853Z
 ---
 The Biome and ESLint floors with no overrides, and auto-formatting on all JavaScript.
 
@@ -21,3 +21,7 @@ The Biome and ESLint floors with no overrides, and auto-formatting on all JavaSc
 - Remove the file-specific relaxed rule sets for `application.js` and the probes in `packages/workbench/eslint.config.js`.
 - Confirm Biome's includes reach every JavaScript and TypeScript file we own, and that nothing we own is excluded. Vendored third-party code under `vendor/` and minified files may stay excluded; say so explicitly.
 - Extend `packing/tests/test_browser_floor_contract.py` so a reintroduced override or a relaxed ESLint block fails.
+
+## Notes
+
+2026-09-14, PR #160 review lane D-tools (D54, commit f7a640a2): `test_browser_floor_contract.py` declares the two tolerated Biome overrides exactly, naming this bead, and fails any other override. Remove each entry from `DECLARED_BIOME_OVERRIDES` as its override goes.

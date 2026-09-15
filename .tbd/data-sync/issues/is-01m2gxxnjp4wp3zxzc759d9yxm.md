@@ -5,13 +5,13 @@ title: Display and export paths still show a side for unchecked arrangements
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-14T21:42:10.769Z
-updated_at: 2026-09-14T21:42:35.109Z
+updated_at: 2026-09-15T02:41:43.927Z
 ---
 The owner asked that no code still reports a run's arrangement without checking that it is a packing. The benchmark's ranking paths are fixed on PR #160, with tests (`test_sweep_cannot_rank_an_invalid_high_score`, `test_nonfinite_ranked_values_are_refused`). The 2026-09-14 audit found display and export paths that still show a side or excess for an unchecked state, on both BASE and #160:
 
@@ -23,3 +23,7 @@ The owner asked that no code still reports a run's arrangement without checking 
 - `historical_summary_audit.py:29-87` re-exports `closed_median`, excess and best-of prefixes for `resolved: false` cells, labelled but not filtered.
 
 Fix: every one either requires the shared validity check first or labels the value as unchecked in the same field it prints. The gap bar moves to the deepest-pair rule under think-nals. Each fix carries a negative test with an overlapping arrangement.
+
+## Notes
+
+2026-09-14, PR #160 review lane D-tools (D61, bead think-qajp, closed at e90187c8): the tool paths are fixed. The ascent's `FairReach` carries `packing_valid` with a null side and excess when the settle fails the unit-square check (Python record, schema, browser decoder), and `ascent` and `strategy_execution` print "not a packing" instead of a side. The page paths (D11) and benchmark exports (D42) remain with lanes D-page and C.

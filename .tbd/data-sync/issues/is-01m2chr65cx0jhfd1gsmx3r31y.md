@@ -5,7 +5,7 @@ title: Put workbench behavioral checks on the PR validation surface
 kind: task
 status: open
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -19,10 +19,12 @@ dependencies:
     target: is-01m2chakgrn8keadss1jcs401b
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-13T04:52:30.506Z
-updated_at: 2026-09-13T21:31:10.847Z
+updated_at: 2026-09-15T02:41:42.211Z
 ---
 Review: build_workbench_site claims workbench checkers run in packing-validate, but reviewed leaf only wires Biome/tsc; workbench Python Playwright programs are outside default tests and validation. Choose a small semantic suite for startup, run/reset/mode transitions, finite validity, shared seed replay, raw/repaired results and frame/export provenance. Wire into the existing tier partition with measured budgets and config-contract tests. Preserve unique spike assertions during package migration; do not gate source-string/revision checks by default.
 
 ## Notes
 
 2026-09-13 PR #160 checkpoint cdcd5149: focused Pack, Search, Animate, and accessibility built-page checks pass locally and in GitHub frontend CI; all 12 active CI checks pass. First CI attempt exposed Pack checker resize-event timing race, fixed at cdcd5149. Local broad push tier had seven sandbox-bound process/loopback failures; all seven passed with host permissions. Keep open for final tier/disposition requirements and historical check_workbench retirement.
+
+2026-09-14, PR #160 review lane D-tools (D13, bead think-rj9v, closed): `check_probes` now runs on the PR surface as the first command of the frontend step (`workbench browser behavior in Chromium`, commit c78a9b31), and it resolves every constant name handed to the probe loader or a wrapper of it. The port of `check_workbench`'s unique gap-bar assertion into `check_frontend` (D13 remainder) and D60 are lane D-page's.

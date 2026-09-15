@@ -5,7 +5,7 @@ title: Migrate workbench app composition, builders and tools into the package
 kind: task
 status: open
 priority: 2
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -23,10 +23,12 @@ parent_id: is-01m2chahf57z4w9tj5gehbs0td
 child_order_hints:
   - is-01m2dvj2pnfsj5cqwf221bmw3m
 created_at: 2026-09-11T16:54:14.013Z
-updated_at: 2026-09-13T17:03:10.548Z
+updated_at: 2026-09-15T02:41:45.552Z
 ---
 Phase 3 under think-zisr: assemble the extracted kernel, data, timeline and mode controls into packages/workbench; move all workbench-specific Python/JS builders, capture and benchmark adapters, fixtures and browser probes there. Replace the old script-by-path build with package commands and update root Pages integration and all path-sensitive gates. General sqpack libraries remain dependencies. Acceptance: package build/test/typecheck/lint and capture use package sources only; self-contained artifact and deterministic receipts agree; no app code newly placed in flat devtools. Temporary compatibility wrappers require named consumers and retirement through think-cqfc. Banner removal follows accurate evidence labels, not an old Phase 6 checklist.
 
 ## Notes
 
 Phase0 consumer inventory at docs/project/reviews/review-2026-09-13-workbench-consumer-inventory.md adds a required publication input closure repair: current RENDER_INPUTS omits324witnesses/renderings,composite,kpress and render_explainer while including regenerated transitionstats. Package build must declare actual inputs and bothPagesfilters; negative contract control omits representative inputclass.
+
+2026-09-14, PR #160 review lane D-tools (D57, bead think-707j, closed at bcf0113d): `tools/render-katex.ts` is declared in `build_site.RENDER_INPUTS`, `packing/devtools/render_explainer.py` in `_WORKBENCH_INPUTS`, and `packages/workbench/tests/test_build_site_inputs.py` derives the builder's inputs from its source and requires the declaration to cover them.

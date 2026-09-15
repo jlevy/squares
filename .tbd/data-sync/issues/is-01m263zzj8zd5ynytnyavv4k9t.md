@@ -5,12 +5,12 @@ title: Capture a trace to an uploadable video file
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T16:56:39.239Z
-updated_at: 2026-09-11T05:23:01.692Z
+updated_at: 2026-09-15T02:41:42.803Z
 ---
 Phase 4. Trace in, frames out at a declared size and frame rate, then an encoder, then a receipt naming the strategy documents and the record each step landed on. The end product is a file the owner can upload.
 
@@ -23,3 +23,5 @@ Must refuse to emit a frame from a guide phase without its label. Depends on the
 Substantially built by a different route than this bead assumed. devtools/capture_video.py drives the BUILT WORKBENCH PAGE in the pinned headless browser through its own clock (select/duration/seek), screenshots every frame at a declared size (1080p or 4K) and frame rate, encodes with ffmpeg to H.264 (yuv420p, even dimensions, so it actually plays), and writes a receipt beside the file: page digest, range, fps, size, and per step the record the step aimed at, what it reached, and whether it landed. Measured n=2..8 at 24fps: 476 frames, 19.8s, 1.2MB, 28s to capture and encode, all seven on the record.
 
 Two parts of this bead remain, both because the workbench does not yet play a PackingStrategy document (think-883t): the receipt names records rather than strategy documents, and there is no guide-phase label guard because the workbench path has no guide phases. Close this only when 883t lands and the receipt names documents.
+
+2026-09-14, PR #160 review lane D-tools (D50, bead think-pyat, closed at a093ec7a): `capture_video` now prices steps on the continuous beat and checks them against the page's `range().duration`, samples one clock with no boundary repeats, writes plan D9's receipt fields (`transitions_are_packings: false` with reason, `intermediate_frames: illustrative-tween`, commit, dirty, Playwright, browser and ffmpeg versions), encodes with `+faststart` and a metadata comment, draws no on-frame mark, and encodes atomically. Found while doing it, not fixed: a real capture cannot run at the #160 head, because `prepare` in `src/api/capture-control.ts:84-103` sets Pack mode and then calls `setRange`, which the `atlasTransitions` proxy refuses while the Pack panel is visible (`application.js:5372`); `capture_stills` and `smoke_capture` call `prepare` too. Tracked as the new bead named in the PR #160 lane D-tools report.

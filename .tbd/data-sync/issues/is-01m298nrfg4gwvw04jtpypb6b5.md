@@ -5,13 +5,13 @@ title: test_candidate.py is stale against the page in two independent ways
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-11T22:16:10.467Z
-updated_at: 2026-09-11T22:16:10.467Z
+updated_at: 2026-09-15T02:41:46.656Z
 ---
 `test_candidate.py` exits 1 against the current page, and has for some time. Two separate failures, and the second is the serious one.
 
@@ -34,3 +34,7 @@ Several are demonstrably the checker's fault rather than the page's: `id="progre
 **And `browser_checks` never runs.** `main()` returns on the static failures before reaching it, so the browser half of this checker -- where most of its 129 probes live -- has not executed in a long time. Driven directly it throws on `#facts-a .n-val` at the facts-layer check, which is another element the headline change removed.
 
 Do the static half first, since it is what gates the rest; then run the browser half and find out what else has drifted. Related: think-lmf5, the same shape in smoke_styles.py.
+
+## Notes
+
+2026-09-14, PR #160 review lane D-tools (D67, commit 9baad048): `check_candidate` builds with `--all`, the false facts-layer opacity loop and its probe are removed, and it no longer claims the frozen spike views. It still fails on 15 stale text needles, and its browser checks stop at the first call because `atlasTransitions` refuses calls outside the Animate view (think-7sw8).

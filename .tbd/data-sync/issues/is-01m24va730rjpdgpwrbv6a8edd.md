@@ -5,12 +5,12 @@ title: "The atlas ascent: animate n = 1 to 100, one square at a time"
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T05:05:43.007Z
-updated_at: 2026-09-10T23:56:45.991Z
+updated_at: 2026-09-15T02:41:45.010Z
 ---
 Phase 3 of the packing-strategies spec. A single directed animation from n=1 to n=100, adding one square per step and landing each time on the retained record. Directed on purpose: not a search, uses the known endpoints, clean and always arrives. Every frame comes from a guide phase and every frame is labelled guided -- the same instruments report what searches reach, and the two must never be confusable.
 
@@ -21,3 +21,7 @@ Open and Close exist to fix a measured defect. A guided transition between two d
 To build: a container mechanism so the side is a phase rather than a side effect; correspondence across a change of n (the rectangular assignment already handles 100 squares against 101 targets -- it needs a rule for which square is new, and the honest one is whichever target the assignment leaves over); the ascent as one strategy document per step generated for n=1..100; capture end to end through the workbench Animate tab with a receipt naming every document and the record each step landed on; and a guard in the capture path refusing to export a guided frame without its label.
 
 Depends on think-316d (schema and executor, now built) and think-883t (workbench plays a strategy).
+
+## Notes
+
+2026-09-14, PR #160 review lane D-tools, commit e90187c8: padded ascent frames are no longer marked feasible (D15, think-2ujr), the no-op Open phase is removed (D53, think-fvhn), and the ascent's outputs are written atomically (D84). Known and not fixed: the box still steps from the previous record's side to the new one where one step ends and the next begins; `lock_order`'s docstring says corners lock before edges, but squares at equal wall distance are ordered by x.

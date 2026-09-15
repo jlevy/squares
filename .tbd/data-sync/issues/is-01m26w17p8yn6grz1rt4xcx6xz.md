@@ -5,12 +5,12 @@ title: Measure the fair reach per step of the ascent
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T23:56:46.151Z
-updated_at: 2026-09-10T23:56:46.151Z
+updated_at: 2026-09-15T02:41:44.461Z
 ---
 The ascent's transitions are hybrids: a Settle phase where the projection runs for real and unguided from the arrangement it inherited, then a Close-in guide phase that takes it the rest of the way onto the record. Every frame of the guided stretch carries guided: true, so a renderer shows the handoff rather than hiding it.
 
@@ -19,3 +19,7 @@ The handoff point is worth measuring rather than merely admitting, and it is the
 A step where the physics arrives on its own has an empty guided stretch and should say so. A step where it does not is exactly as interesting. The film is better for showing which is which, and the curve is a real result about where this problem gets hard.
 
 How much fair time to give each step is a dial rather than a constant: too little and every step is mostly thumb, too much and the film is long while the physics visibly stalls, since the measured cliff sits around two per cent above a record and no budget yet crosses it. The strategy document carries the budget, so sweep it rather than guess.
+
+## Notes
+
+2026-09-14, PR #160 review lane D-tools (D61, bead think-qajp, closed at e90187c8): each fair-reach row now records `packing_valid` from the settle receipt's geometry check, and a settle that is not a packing stores no side or excess, so the measured fair reach is only ever a checked packing's side.

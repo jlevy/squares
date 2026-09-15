@@ -5,13 +5,13 @@ title: tsc strict for every JavaScript program; the think-4cwy ratchet ends
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:25:03.631Z
-updated_at: 2026-09-15T01:17:56.938Z
+updated_at: 2026-09-15T02:41:48.319Z
 ---
 `tsc` strict for every JavaScript program, which removes the ratchet `think-4cwy` adopted.
 
@@ -28,3 +28,5 @@ PR #175 (head 1ec9ea7b) repoints the relaxation comments in tsconfig.json, tscon
 test_browser_floor_contract.py does not pin a tracker id: it accepts any think-XXXX match. It does not check that the tracker is open, which is how the stale think-4cwy survived. Add that check when removing the relaxations.
 
 The two new programs in #175, tsconfig.packing-probes.json and tsconfig.devtools-node.json, are strict with no relaxations.
+
+2026-09-14, PR #160 review lane D-tools (D54, commit f7a640a2): `test_browser_floor_contract.py` now fails a relaxation whose tracker is not a live bead (read from the tbd sync worktree or the `tbd-sync` branch), and fails any relaxed floor flag outside the four ratchet flags regardless of tracker. The three `tsconfig` comments name this bead on #160 in #175's exact wording. When a relaxation is removed, shrink `RATCHET_FLAGS` in that test.
