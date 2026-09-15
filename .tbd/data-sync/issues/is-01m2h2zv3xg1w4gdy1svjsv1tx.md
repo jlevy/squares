@@ -5,11 +5,11 @@ title: "Consolidate the workbench stack: #155 into #160 into #171"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-09-14T23:10:44.859Z
-updated_at: 2026-09-15T00:19:27.221Z
+updated_at: 2026-09-15T00:35:04.025Z
 ---
 Owner, 2026-09-14: "Can you review and consolidate if we have duplicate work on other branches? Check https://github.com/jlevy/squares/pull/171" and "Let's review carefully and see what the best strategy here is to merge everything together."
 
@@ -30,14 +30,11 @@ Recommendation: push both merges, fold #171 into #160, then land #125, #155 and 
 
 ## Notes
 
-2026-09-14 progress, owner: "map out what you think needs to happen, and let's merge it together in sequence so the stack is clean" and "delegate to sub-agents to do a review on any PRs that have not had full reviews, and make sure we've addressed all the review comments using the shortcut to address PR reviews... full history on PRs."
+2026-09-14: the #125 review is posted (https://github.com/jlevy/squares/pull/125#pullrequestreview-5204313901): 39 findings (2 Blocker, 8 High, 21 Medium, 8 Low), pinned to 7b06254c, verdict "changes required before merge". Seven are carried from the 2026-09-12 architecture review (R1, R2, R7, R8, R9, R10) and the consumer inventory.
 
-Stack refreshed bottom-up and pushed, each level a fast-forward and each validated before its push:
-- #125 claude/known-best-atlas-video-spec at 79cac315: main 1d367d6a merged; README, SYNOPSIS, document map, ledger and controls anchors resolved.
-- #155 claude/annealing-search-benchmark at d46b86a5: #125 merged; X-029 renumbered to X-034 and ideas 164-169 to 169-174 after collisions with main.
-- #160 codex/review-workbench-stack at 72629c03: 6094ae5a (the #155 port) plus the refresh.
-- #171 claude/workbench-defaults-and-bounds at bb3f7c99: 44fc7320 plus the 26d44ee5 retune plus the refresh.
+Addressing rule for the stack, decided before any addresser starts: **fix each defect at the lowest PR where its code exists in its final form.**
+- Most of #125's page, export, capture and strategy findings live in spike or devtools files that #160 moves into packages/workbench, and some (R1, R10) are already stronger there.
+- Those get a disposition on #125 pointing at the #160 (or #171) commit that fixes them, after verification, not a second fix in code the stack deletes.
+- Findings in code that persists through the stack (CI, gates, docs, the Rust engine, motion-lab assets, devtools #160 does not move) are fixed on #125 and merged up.
 
-Stack-maintenance comments are posted on all four PRs. Agent reviews are running for #125 (pinned 7b06254c), #155 (d46b86a5), #160 (72629c03) and #171 (bb3f7c99), each publishing through review-github-pr.
-
-Next: address each review with address-pr-review, bottom-up, propagating merges after each level; fold #171 into #160 after its review is addressed; update the PR descriptions; merges into main await the owner.
+To avoid fixing one defect twice, wait for the #155, #160 and #171 reviews, dedupe findings across the stack into one triage map (finding, PR, final code location, owning lane), then run addressers by lane with address-pr-review, each posting per-finding "Addressed ... in <commit>" replies on the PR whose review raised the finding.
