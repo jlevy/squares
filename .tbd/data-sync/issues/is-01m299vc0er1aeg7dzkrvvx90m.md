@@ -5,13 +5,13 @@ title: "J3: the type gate, adopted through the ratchet"
 kind: task
 status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
-parent_id: is-01m299tcsrh44b8n8m1c6jpgcb
+parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-11T22:36:42.893Z
-updated_at: 2026-09-11T23:08:50.182Z
+updated_at: 2026-09-15T00:24:25.642Z
 closed_at: 2026-09-11T23:08:50.166Z
 close_reason: "Zero across all three programs: the workbench's script 1,145 -> 109 -> 0, the 180 probes 446 -> 170 -> 0, the motion lab and slideshow 506 -> 62 -> 0. No flag relaxed beyond the four the ratchet declares, no @ts-ignore and no blanket any anywhere. probes/atlas-transitions.d.ts writes the page's API down -- 114 keys, cross-checked against what the page exports. Landed as c803f848; the ratchet itself (the four flags) stays open as think-xxxx follow-ups when JSDoc arrives."
 resolution: null
