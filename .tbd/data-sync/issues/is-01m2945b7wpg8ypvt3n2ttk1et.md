@@ -3,15 +3,19 @@ type: is
 id: is-01m2945b7wpg8ypvt3n2ttk1et
 title: measure_law.py points at a page that does not exist
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-11T20:57:18.330Z
-updated_at: 2026-09-11T20:57:18.330Z
+updated_at: 2026-09-15T02:42:54.711Z
+closed_at: 2026-09-15T02:42:54.710Z
+close_reason: "Fixed on #160: measure_law.py defaults to the built workbench at packing/site/workbench/index.html (a3d6813f) and accepts --page (2cc60f7e); the other seven instruments with the stale default now default to the built page too (a3d6813f). PR #160 review D89, bead think-h4kl."
+resolution: null
+duplicate_of: null
 ---
 `measure_law.py` hard-codes `PAGE = HERE / "workbench.html"` and takes no argument to override it. That file is not what the generator writes beside it -- the built page there is `index.html` -- so the instrument cannot run as shipped. It was only measured during Phase 6B by patching `PAGE` from a wrapper.
 

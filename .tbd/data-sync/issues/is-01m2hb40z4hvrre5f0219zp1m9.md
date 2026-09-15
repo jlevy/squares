@@ -5,7 +5,7 @@ title: "Address review: PR #160 — workbench package review stack"
 kind: task
 status: open
 priority: 1
-version: 20
+version: 22
 labels: []
 dependencies: []
 parent_id: is-01m2h2zv3xg1w4gdy1svjsv1tx
@@ -29,6 +29,8 @@ child_order_hints:
   - is-01m2hez0ffh7ve77dx0bqjm069
   - is-01m2hez0twqd9jhkqdd2qxr54y
   - is-01m2hez16qm2y57ppeabmewzjr
+  - is-01m2hf4av2aarz9brnc0xghyxb
+  - is-01m2hf4b7raa0yecm3dcepmgb7
 created_at: 2026-09-15T01:32:50.529Z
-updated_at: 2026-09-15T02:40:01.239Z
+updated_at: 2026-09-15T02:42:55.351Z
 ---
