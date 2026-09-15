@@ -764,6 +764,10 @@ jobs:
     if: "!cancelled() && github.event_name == 'pull_request'"
     needs: [validate, frontend, geometry, suite, sweeps]
     runs-on: ubuntu-latest
+    # `actions: read` is what lets the wall check below read this run's job timings.
+    permissions:
+      contents: read
+      actions: read
     steps:
       - name: Require every pull-request prerequisite
         env:
@@ -778,6 +782,31 @@ jobs:
           test "$GEOMETRY_RESULT" = "success"
           test "$SUITE_RESULT" = "success"
           test "$SWEEPS_RESULT" = "success"
+
+      # `OR-14`'s number, checked on the run it describes. Every tier above has its own
+      # ceiling, and all of them held while this check's wall went from a 154 s median on
+      # 2026-09-06 to 288 s on 2026-09-15 (think-xfqk): the wall is the longest job with its
+      # checkout, toolchain and queue, and no tier sees that. `check_pr_wall.py` reads this
+      # run's jobs from the API and fails over the 180 s budget or 1.2x the recorded median
+      # in `pull_request_walls` in gate-budgets.yaml. This job cannot see its own
+      # completion, so the wall ends at this job's start. It runs only once every
+      # prerequisite passed, since a failed job's wall is not the wall of the surface.
+      #
+      # The runner's own `python3` and PyYAML, and a checkout of the two files it reads, so
+      # the check costs this job seconds rather than an environment sync.
+      - name: Check out the wall budget and its register
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            packing/devtools/check_pr_wall.py
+            packing/devtools/gate-budgets.yaml
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Hold the pull request's wall to its budget
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 packing/devtools/check_pr_wall.py --workflow packing-validation
 
   macos-portability:
     # A second-architecture smoke check, deliberately minimal.

@@ -559,6 +559,39 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  pr-wall:
+    # `OR-14`'s number for this workflow. A pull request that touches a page input waits
+    # for this run, and its wall went from 37 s on 2026-09-06 to a 464 s median on
+    # 2026-09-15 with nothing measuring it (think-xfqk). `check_pr_wall.py` reads the
+    # run's jobs from the API and fails over the 180 s budget or 1.2x the recorded median
+    # in `pull_request_walls` in gate-budgets.yaml, and says so when it cannot judge -- a
+    # failed or cancelled prerequisite -- rather than passing. `needs` names the jobs that
+    # finish last, so the wall ends at this job's start, after all of them.
+    #
+    # Neither file is a page input, so neither is in the path filters above: the tool's
+    # own tests run in Packing validation on every pull request, and naming the register
+    # here would run this whole workflow for every edit to it.
+    needs: [build, font-loading]
+    if: "!cancelled() && github.event_name == 'pull_request'"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Check out the wall budget and its register
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            packing/devtools/check_pr_wall.py
+            packing/devtools/gate-budgets.yaml
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Hold the pull request's wall to its budget
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 packing/devtools/check_pr_wall.py --workflow certificate-page
+
   deploy:
     needs: [build, font-loading]
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
