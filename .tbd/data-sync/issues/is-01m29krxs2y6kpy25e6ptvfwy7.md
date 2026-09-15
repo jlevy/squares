@@ -5,13 +5,13 @@ title: Sweep the parameters the hypotheses name, not a grid
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-12T01:30:08.545Z
-updated_at: 2026-09-13T04:52:33.124Z
+updated_at: 2026-09-15T02:56:24.622Z
 ---
 The sweep, and it only begins once the harness reports a defensible number (think-k2fr) and the hypotheses are written down (think-3zt6).
 
@@ -29,3 +29,7 @@ The sweep, and it only begins once the harness reports a defensible number (thin
 Report per cell: success rate with an interval, the failure distribution, cost, and the seeds. A cell that wins by running longer is not a better parameter set and the report has to make that visible.
 
 **What counts as a result.** A parameter set that beats the shipped defaults on success rate at equal cost, reproduced on a held-out set of n that was not swept over. Anything else is a hypothesis for the next round.
+
+## Notes
+
+2026-09-14, PR #155 review lane B (D05, think-fji7): H-207, H-208 and H-209 now set `instrument_ready: false` and name the instrument each test needs: schedule parameters budgeted in simulated steps (H-207), a drop that varies at a fixed container (H-208), and the force law's four terms and the step count, refused when they cannot be set and recorded as run (H-209). This sweep is what would make them ready. PR #160's package benchmark refuses unknown keys but still sweeps only `anneal` and `inflate`, with a wall-clock budget.

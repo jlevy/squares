@@ -5,12 +5,12 @@ title: Reproduce the measured results as plans
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T03:38:36.818Z
-updated_at: 2026-09-10T03:53:00.078Z
+updated_at: 2026-09-15T02:56:25.473Z
 ---
 A plan that cannot restate a result already measured is not yet a description of it. Port these four into plan documents and check each reproduces its number:
 
@@ -20,3 +20,7 @@ A plan that cannot restate a result already measured is not yet a description of
 4. Contacts declared as equalities from Trump's own n=11 packing: drift 0.0000 at 200 steps, 0.2839 at 4000 -- the record is a repelling fixed point unless the constraint is a band.
 
 Each plan carries its rung so the comparison is honest, and the rewired and thinned controls sit beside every structured plan.
+
+## Notes
+
+2026-09-14, PR #155 review lane B (D36, think-zuuv): re-homed. The shared-language plan's 2026-09-14 rewrite had removed its only reference. The plan's "Guidance Is Part of the Format" section now names it as the test of the format against what is already measured: four projection results written as documents, each checked to reproduce its number.

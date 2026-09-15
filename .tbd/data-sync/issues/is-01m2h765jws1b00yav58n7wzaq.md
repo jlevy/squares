@@ -5,12 +5,12 @@ title: Extract JavaScript from the workbench package checkers
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:06.491Z
-updated_at: 2026-09-15T02:41:49.439Z
+updated_at: 2026-09-15T03:02:12.732Z
 ---
 Extract the remaining JavaScript strings in `packages/workbench/tools/workbench_tools/` (about 50 lines over 8 files) into the package's `probes/`.
 
@@ -21,3 +21,5 @@ Do this after PRs #160 and #171 have had their reviews addressed, because the sa
 ## Notes
 
 2026-09-14, PR #160 review lane D-tools (D56, commit 269fefcc): the published workbench now carries a Content-Security-Policy, and it grants `'unsafe-eval'` only because Playwright evaluates this package's expression-string `wait_for_function` predicates with `eval` (`check_pack_panel` failed without it). When those predicates are probe files, remove `'unsafe-eval'` from `build_site.CONTENT_SECURITY_POLICY` and its test.
+
+2026-09-14, PR #160 review lane D-tools, correction to the note above (commit d4891db4): the published policy no longer grants `'unsafe-eval'`. Instead `check_pack_panel.check` opens its page with `bypass_csp=True`, because its mobile-fit `wait_for_function` predicate is an expression string, which Playwright compiles inside the page. Measured: a function-shaped predicate, including a probe file's text, runs under the policy. So `bypass_csp` can go once that predicate is a probe file. `check_page_policy` loads the page without the bypass, and `benchmark.py`'s expression predicate passes today only because it is already true at its first poll.

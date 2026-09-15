@@ -5,12 +5,12 @@ title: Capture a trace to an uploadable video file
 kind: task
 status: open
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T16:56:39.239Z
-updated_at: 2026-09-15T02:43:03.131Z
+updated_at: 2026-09-15T02:56:26.457Z
 ---
 Phase 4. Trace in, frames out at a declared size and frame rate, then an encoder, then a receipt naming the strategy documents and the record each step landed on. The end product is a file the owner can upload.
 
@@ -25,3 +25,5 @@ Substantially built by a different route than this bead assumed. devtools/captur
 Two parts of this bead remain, both because the workbench does not yet play a PackingStrategy document (think-883t): the receipt names records rather than strategy documents, and there is no guide-phase label guard because the workbench path has no guide phases. Close this only when 883t lands and the receipt names documents.
 
 2026-09-14, PR #160 review lane D-tools (D50, bead think-pyat, closed at a093ec7a): `capture_video` now prices steps on the continuous beat and checks them against the page's `range().duration`, samples one clock with no boundary repeats, writes plan D9's receipt fields (`transitions_are_packings: false` with reason, `intermediate_frames: illustrative-tween`, commit, dirty, Playwright, browser and ffmpeg versions), encodes with `+faststart` and a metadata comment, draws no on-frame mark, and encodes atomically. Found while doing it, not fixed: a real capture cannot run at the #160 head, because `prepare` in `src/api/capture-control.ts:84-103` sets Pack mode and then calls `setRange`, which the `atlasTransitions` proxy refuses while the Pack panel is visible (`application.js:5372`); `capture_stills` and `smoke_capture` call `prepare` too. Tracked as think-z9gm.
+
+2026-09-14, PR #155 review lane B (D36, think-zuuv): re-homed. The shared-language plan's rewrite had removed its only reference; its Capture row now says receipts must name the strategy documents, which is this bead's remaining part.

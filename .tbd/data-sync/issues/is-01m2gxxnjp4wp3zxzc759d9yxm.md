@@ -5,13 +5,13 @@ title: Display and export paths still show a side for unchecked arrangements
 kind: bug
 status: open
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-14T21:42:10.769Z
-updated_at: 2026-09-15T02:41:43.927Z
+updated_at: 2026-09-15T02:59:20.409Z
 ---
 The owner asked that no code still reports a run's arrangement without checking that it is a packing. The benchmark's ranking paths are fixed on PR #160, with tests (`test_sweep_cannot_rank_an_invalid_high_score`, `test_nonfinite_ranked_values_are_refused`). The 2026-09-14 audit found display and export paths that still show a side or excess for an unchecked state, on both BASE and #160:
 
@@ -27,3 +27,5 @@ Fix: every one either requires the shared validity check first or labels the val
 ## Notes
 
 2026-09-14, PR #160 review lane D-tools (D61, bead think-qajp, closed at e90187c8): the tool paths are fixed. The ascent's `FairReach` carries `packing_valid` with a null side and excess when the settle fails the unit-square check (Python record, schema, browser decoder), and `ascent` and `strategy_execution` print "not a packing" instead of a side. The page paths (D11) and benchmark exports (D42) remain with lanes D-page and C.
+
+2026-09-14, PR #160 review lane C (D42, #160 R12 audit item; #155 R22 Trial.row item), 6e0e7ffc: `historical_summary_audit` marks the 243 unresolved cells `void` and exports no metric for them; a written trial row carries `raw_valid` and `resolved_valid`. The page and Pack items are D11 (lane D-page); the ascent and strategy tool items are D61 (lane D-tools).

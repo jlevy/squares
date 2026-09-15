@@ -5,13 +5,13 @@ title: Build the compaction pass as a retained instrument, with its scatter cont
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-15T02:24:42.581Z
-updated_at: 2026-09-15T02:24:42.581Z
+updated_at: 2026-09-15T02:56:34.779Z
 ---
 Build the compaction pass that exp-209 describes as a retained instrument, with its control and outputs, before anything relies on its observation.
 
@@ -21,5 +21,6 @@ exp-209 records an inline pass: after repair, each square walks toward the centr
 
 Done when:
 - the pass and its scatter control are committed code that reads regenerated benchmark rows or trial receipts (on #160 and above, the package benchmark's receipts), with a test that fails if the control does not shrink a scattered arrangement;
-- a separately registered round, not a repair of exp-209, runs it with its outputs retained;
-- the annealing plan and exp-209 name this bead instead of think-3hb7.
+- a separately registered round, not a repair of exp-209, runs it with its outputs retained.
+
+The annealing plan and exp-209 already name this bead (PR #155 review lane B, D31, think-nrkz).

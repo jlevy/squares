@@ -5,7 +5,7 @@ title: The page can tell a packing from an overlap, and resolve one into the oth
 kind: feature
 status: open
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -25,10 +25,12 @@ parent_id: is-01m28p7h39vcykq99dgjmvwv98
 child_order_hints:
   - is-01m2dvhzr8f87mgtghjv28rn55
 created_at: 2026-09-12T16:36:56.180Z
-updated_at: 2026-09-14T21:41:16.246Z
+updated_at: 2026-09-15T02:59:19.565Z
 ---
 Phase 2: expose one fail-closed count/finite/pair/wall validity contract and bounded Resolve operation shared by Pack and the headless harness. Preserve raw and repaired states, score the geometry actually displayed, report tolerance/work/termination, and validate the repaired output. Translation-only repair does not guarantee improvement, convergence or global feasibility. Resolve is an explicit action or phase, not work repeated on every paint. Acceptance: valid retained controls and invalid/nonfinite/count/wall/pair controls agree across clients; budget exhaustion is explicit; a repaired score never labels a raw frame. Historical speed and success observations are evidence to reconcile, not required outcomes.
 
 ## Notes
 
 2026-09-12 review: preserve raw and repaired arrangements separately; compute finite pair AND wall checks with an explicit metric/tolerance, then validate repaired output. Repair is not a guarantee of best-side monotonicity or global validity. Do not compute resolution on every paint or imply the displayed raw frame has the repaired score. Introduce explicit Resolve action/phase, bounds on effort and refusal status, then same implementation for Pack/headless/Search.
+
+2026-09-14, PR #160 review lane C (D07, #160 R2; D09, #160 R4): the one validity contract now exists. `PACKING_VALIDITY` in `packages/workbench/src/core/runtime-contracts.ts` (count, nonfinite, dimensions, pair and wall penetration at 1e-9, area-bound, magnitude within 2^16, unit size; first failing clause reported, tolerance recorded) is mirrored by `tools/workbench_tools/packing_contracts.py`, and `tests/fixtures/packing-validity.json` is read by both `node --test` and pytest (ec0a0604, 78c338be). `CATALOGUE_PRECISION` (4e-6) is the one declared exception, for stored catalogue frames only (`assessCataloguePrecisionFrame`; 147 of 324 frames need it, re-measured by `tests/test_catalogue_precision.py`). Pack, Resolve, Search and the benchmark probe consume it. Still open here: the page consumers (gap bar, growth readout, PackController labels), which are D11 on lane D-page.

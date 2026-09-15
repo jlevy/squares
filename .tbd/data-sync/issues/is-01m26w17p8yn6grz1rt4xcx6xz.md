@@ -5,12 +5,12 @@ title: Measure the fair reach per step of the ascent
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T23:56:46.151Z
-updated_at: 2026-09-15T02:41:44.461Z
+updated_at: 2026-09-15T02:56:25.998Z
 ---
 The ascent's transitions are hybrids: a Settle phase where the projection runs for real and unguided from the arrangement it inherited, then a Close-in guide phase that takes it the rest of the way onto the record. Every frame of the guided stretch carries guided: true, so a renderer shows the handoff rather than hiding it.
 
@@ -23,3 +23,5 @@ How much fair time to give each step is a dial rather than a constant: too littl
 ## Notes
 
 2026-09-14, PR #160 review lane D-tools (D61, bead think-qajp, closed at e90187c8): each fair-reach row now records `packing_valid` from the settle receipt's geometry check, and a settle that is not a packing stores no side or excess, so the measured fair reach is only ever a checked packing's side.
+
+2026-09-14, PR #155 review lane B (D36, think-zuuv): re-homed. The shared-language plan's rewrite had removed its only reference; its Phase 3 acceptance list now records, per ascent step, how close the unguided phase came before a guide took over.
