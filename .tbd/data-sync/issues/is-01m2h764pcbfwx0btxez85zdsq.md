@@ -5,12 +5,12 @@ title: Extract JavaScript from the explainer, print and math tools and their tes
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:05.578Z
-updated_at: 2026-09-15T01:18:09.979Z
+updated_at: 2026-09-15T05:04:56.798Z
 ---
 Extract every JavaScript string from the explainer, print and math tooling into probe files, with behaviour unchanged. About 1,700 lines in:
 
@@ -30,3 +30,5 @@ Two files need a decision rather than a probe: test_browser_floor_contract.py (m
 check_math_startup.py is 5 sites, not 3 lines: a ~400-line init script built by .replace from constants in check_math_loading and render_explainer_pdf. Start with those two modules. For add_init_script with values, use sqpack.probes.applied.
 
 check_published_site.py is already done in #175.
+
+2026-09-15, #175 merge-up of the reviewed stack (#171 at b7627cef) into 9f88e4a7: the guard's inventory still counts 324 sites in 25 files for this bead. The stack added no site here and removed none. The whole allowlist is now 460 sites in 42 files, down from 477 in 48. The name check on devtools.check_probes is stricter now: every literal handed to a loader beside packing/tests/probes or packing/devtools/probes must name a file, so a test that needs a missing name holds it in a variable.
