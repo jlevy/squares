@@ -5,17 +5,19 @@ title: "Route S: admit sparse T-025 orbit compression"
 kind: task
 status: in_progress
 priority: 0
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
+child_order_hints:
+  - is-01m2k79x7hsjbtddk51nhehcpf
 hold: null
 hold_until: null
 created_at: 2026-09-14T20:36:16.810Z
-updated_at: 2026-09-15T18:42:54.147Z
+updated_at: 2026-09-15T19:04:37.872Z
 ---
 Admit a fixed-geometry support-sparse subfamily of T-025 before any target runs: select and exactly reweight complete D4 orbits from the frozen 119-orbit support, with at most 23 positive orbit representatives, unchanged geometry and threshold semantics, exact budget below 11, and later two-route coverage replay. Treat T-026 only as a support/rescaling provenance control during admission. A target may begin only after the admission PR merges.
 
