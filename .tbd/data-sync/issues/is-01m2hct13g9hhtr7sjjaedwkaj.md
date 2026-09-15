@@ -3,14 +3,18 @@ type: is
 id: is-01m2hct13g9hhtr7sjjaedwkaj
 title: "PR #125 review D28: the PR description misstates evidence and scope"
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb401yy3ph99cfn5mhpcv4
 created_at: 2026-09-15T02:02:20.143Z
-updated_at: 2026-09-15T02:02:20.143Z
+updated_at: 2026-09-15T02:51:01.565Z
+closed_at: 2026-09-15T02:51:01.541Z
+close_reason: "Corrected full PR #125 description written to the coordinator's attic/reviews/pr-bodies/pr125.md (evidence restated as numerically-checked pose checks, current identifiers and counts, scope and this review round); lanes do not edit PRs."
+resolution: null
+duplicate_of: null
 ---
 Review source: PR #125 review F31 (Medium); triage row D28.
 
