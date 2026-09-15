@@ -3,14 +3,18 @@ type: is
 id: is-01m2hf8dqrw7gqp7a2nwv4w2hz
 title: "PR #155 review D05: H-207..H-209 declare instrument_ready for sweeps the harness cannot run"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb40g8vbnq8914rkt7p87c
 created_at: 2026-09-15T02:45:08.983Z
-updated_at: 2026-09-15T02:45:08.983Z
+updated_at: 2026-09-15T03:09:09.317Z
+closed_at: 2026-09-15T03:09:09.316Z
+close_reason: "Fixed in e586ed48 on #155: H-207..H-209 set instrument_ready false and name the instrument each test needs; ledger and SYNOPSIS rows regenerated. Code half fixed on #160 at f9099096. Instrument work stays with think-fj07."
+resolution: null
+duplicate_of: null
 ---
 Review: attic/reviews/pr155/review-pr155-d46b86a5.md (PR #155 review at d46b86a5). Parent: think-xqc3.
 

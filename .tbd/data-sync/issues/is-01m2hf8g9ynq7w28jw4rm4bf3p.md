@@ -3,14 +3,18 @@ type: is
 id: is-01m2hf8g9ynq7w28jw4rm4bf3p
 title: "PR #155 review D34: identity record incomplete after renumbering to X-034 and ideas 169-174"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb40g8vbnq8914rkt7p87c
 created_at: 2026-09-15T02:45:11.614Z
-updated_at: 2026-09-15T02:45:11.614Z
+updated_at: 2026-09-15T03:09:11.179Z
+closed_at: 2026-09-15T03:09:11.178Z
+close_reason: "Fixed in 10a9ba35 on #155: exp-210 renumbering line, derived_from identity notes, H-206 named with a checked retired-ids board declaration, idea mapping, dated notes on both reviews. PR body written to attic/reviews/pr-bodies/pr155.md for the coordinator."
+resolution: null
+duplicate_of: null
 ---
 Review: attic/reviews/pr155/review-pr155-d46b86a5.md (PR #155 review at d46b86a5). Parent: think-xqc3.
 

@@ -3,14 +3,18 @@ type: is
 id: is-01m2hf8f7705bxxakff3rs35cy
 title: "PR #155 review D31: historical rounds assert selftest_passed and exp-209's withdrawn results; compaction instrument unowned"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb40g8vbnq8914rkt7p87c
 created_at: 2026-09-15T02:45:10.502Z
-updated_at: 2026-09-15T02:45:10.502Z
+updated_at: 2026-09-15T03:09:10.384Z
+closed_at: 2026-09-15T03:09:10.384Z
+close_reason: "Fixed in 761a2d26 (selftest_passed false; exp-209 reduced to one invalid determination; think-na2i owns the compaction instrument) and 6122619d (exp-209 relinked from H-211 to open question H-212) on #155."
+resolution: null
+duplicate_of: null
 ---
 Review: attic/reviews/pr155/review-pr155-d46b86a5.md (PR #155 review at d46b86a5). Parent: think-xqc3.
 

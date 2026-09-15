@@ -3,14 +3,18 @@ type: is
 id: is-01m2hf8e3rqkr9zzr5tvztjrq6
 title: "PR #155 review D06: summariser, resolved definition and rows missing; README, .gitignore and X-034 disagree"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb40g8vbnq8914rkt7p87c
 created_at: 2026-09-15T02:45:09.367Z
-updated_at: 2026-09-15T02:45:09.367Z
+updated_at: 2026-09-15T03:09:09.580Z
+closed_at: 2026-09-15T03:09:09.579Z
+close_reason: "Fixed in 8a0f9a61 on #155: devtools/summarize_annealing.py (recovered 2026-09-12 summariser, byte-identical output on local rows) with fixture test and mutations; runbook, .gitignore, X-034, exp-210 and H-210 agree that rows are unretained, regenerable and re-checkable; resolved-5k-a6.jsonl regenerated and matched."
+resolution: null
+duplicate_of: null
 ---
 Review: attic/reviews/pr155/review-pr155-d46b86a5.md (PR #155 review at d46b86a5). Parent: think-xqc3.
 

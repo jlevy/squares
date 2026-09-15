@@ -3,14 +3,18 @@ type: is
 id: is-01m2hf8evmyf13znnvydtqqs67
 title: "PR #155 review D30: prefix ladders recorded as control and candidate distributions; commands omit --budget"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb40g8vbnq8914rkt7p87c
 created_at: 2026-09-15T02:45:10.131Z
-updated_at: 2026-09-15T02:45:10.131Z
+updated_at: 2026-09-15T03:09:10.116Z
+closed_at: 2026-09-15T03:09:10.115Z
+close_reason: "Fixed in 14097138 on #155: prefix ladders re-expressed as per-k and per-level record results lifted from summaries.json; exp-210 conditions block dropped; --budget 900 added to recorded commands."
+resolution: null
+duplicate_of: null
 ---
 Review: attic/reviews/pr155/review-pr155-d46b86a5.md (PR #155 review at d46b86a5). Parent: think-xqc3.
 
