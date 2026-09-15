@@ -3,14 +3,18 @@ type: is
 id: is-01m2h7667fbtgmwgtwpq0hdtmw
 title: Biome and ESLint floors with no overrides
 kind: task
-status: open
+status: closed
 priority: 1
-version: 3
+version: 5
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:07.150Z
-updated_at: 2026-09-15T02:41:48.853Z
+updated_at: 2026-09-15T17:22:14.954Z
+closed_at: 2026-09-15T17:22:14.952Z
+close_reason: "Delivered in PR #180 (https://github.com/jlevy/squares/pull/180): no Biome override or exclusion, one ESLint configuration for every owned script, a contract test that fails on either, formatting verified at hook and gate, and a green page, motion lab and floor."
+resolution: null
+duplicate_of: null
 ---
 The Biome and ESLint floors with no overrides, and auto-formatting on all JavaScript.
 
@@ -25,3 +29,12 @@ The Biome and ESLint floors with no overrides, and auto-formatting on all JavaSc
 ## Notes
 
 2026-09-14, PR #160 review lane D-tools (D54, commit f7a640a2): `test_browser_floor_contract.py` declares the two tolerated Biome overrides exactly, naming this bead, and fails any other override. Remove each entry from `DECLARED_BIOME_OVERRIDES` as its override goes.
+
+2026-09-15, branch claude/js-floor-no-overrides (PR https://github.com/jlevy/squares/pull/180, head 564ed2a3), based on claude/no-js-explainer-tools after merging #179 and that branch:
+- Biome: both overrides removed. application.js is the ES-module entry of the page bundle (esbuild emits the strict directive; application-build.test.ts requires it). Each Motion Lab page runs its model and page script as separate module scripts; exact-n5-model.js publishes globalThis.MotionLabModel. tsconfig.base.json sets moduleDetection "force". noUnusedFunctionParameters in the old override was a no-op.
+- Measured alternatives: bundling the motion lab needs Node+esbuild at render time in npm-less CI jobs (rejected); a "type": "commonjs" package.json leaves the four unused-function findings (rejected); deleting application.js's directive alone passes Biome but leaves the incoherent script (rejected).
+- ESLint: one block for all owned JS, typed by every type-gate program (root tsconfig*.json found by name + PACKAGE_PROGRAMS). 184 files resolved to 6 configurations at #175; 433 resolve to 1 after both merges. Gates lint `.`. New tree = one tsconfig include line.
+- Contract test: DECLARED_BIOME_OVERRIDES removed; any override or rule below error fails; devtools/node/eslint-file-configs.mjs reads ESLint's resolution for every tracked file and fails any difference; reintroduced overrides/blocks fail live; hook glob and biome ci formatting verdict checked.
+- New devtools.check_motion_lab_pages (in the Chromium step): 48-state report byte-identical before/after.
+- At the explainer merge: its Biome exclusion for packing/tests/fixtures/browser-floor was removed and the three liveness samples renamed *.js.txt (data, not source; tests copy them as sample.js); any files.includes exclusion beyond node_modules/vendor/.venv/*.min.js now fails. exact-model-projection.mjs reads globalThis.MotionLabModel.
+- think-n711 stacks on this: application.js is a module in the bundle graph, and moduleDetection force is in the base.
