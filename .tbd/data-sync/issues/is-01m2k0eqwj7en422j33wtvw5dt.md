@@ -5,11 +5,14 @@ title: "[epic] PR CI back under OR-14: aggressive speed review, 2026-09-15"
 kind: epic
 status: open
 priority: 1
-version: 2
+version: 4
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m2kam88w7r9959zvwcswccx3
+  - is-01m2kanffw38jyd10dxqqh8831
 created_at: 2026-09-15T17:04:56.205Z
-updated_at: 2026-09-15T20:00:58.203Z
+updated_at: 2026-09-15T20:03:22.746Z
 ---
 Owner, 2026-09-15: "this looks like it's taking a long time to do PR CI checks can you do an aggressive review to see what can be sped up to make sure that they're as fast as reasonable? We already have done work on this, and we should revisit it. I am concerned if it spiraled again."
 
