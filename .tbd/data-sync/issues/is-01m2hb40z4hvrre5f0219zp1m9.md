@@ -3,9 +3,9 @@ type: is
 id: is-01m2hb40z4hvrre5f0219zp1m9
 title: "Address review: PR #160 — workbench package review stack"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 43
+version: 44
 labels: []
 dependencies: []
 parent_id: is-01m2h2zv3xg1w4gdy1svjsv1tx
@@ -53,5 +53,9 @@ child_order_hints:
   - is-01m2hh8r0vqvby95nbztxdr1bv
   - is-01m2hk8dj4wk3367885hpnxawp
 created_at: 2026-09-15T01:32:50.529Z
-updated_at: 2026-09-15T03:55:03.108Z
+updated_at: 2026-09-15T04:05:13.384Z
+closed_at: 2026-09-15T04:05:13.383Z
+close_reason: "All 27 findings of the #160 review have dispositions: https://github.com/jlevy/squares/pull/160#issuecomment-5674559981 (25 fixed on #160 through b2588268, R24 on #175, R1 not a code defect). CI green at b2588268. Follow-ups: think-dmcm, think-a11q, think-jblb."
+resolution: null
+duplicate_of: null
 ---
