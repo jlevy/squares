@@ -5,11 +5,11 @@ title: "Consolidate the workbench stack: #155 into #160 into #171"
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-14T23:10:44.859Z
-updated_at: 2026-09-14T23:10:49.148Z
+updated_at: 2026-09-15T00:19:27.221Z
 ---
 Owner, 2026-09-14: "Can you review and consolidate if we have duplicate work on other branches? Check https://github.com/jlevy/squares/pull/171" and "Let's review carefully and see what the best strategy here is to merge everything together."
 
@@ -27,3 +27,17 @@ Done locally in `.claude/worktrees/consolidate-stack`, nothing pushed:
 - Checks pass on the combined tree: npm run check (117), package pytest (124), Biome, tsc, check_probes (186), build_site, check_frontend, ledger, synopsis. check_workbench stops where it did on #160 (think-7sw8).
 
 Recommendation: push both merges, fold #171 into #160, then land #125, #155 and #160 in order. From now on, page work happens only in packages/workbench on the tip.
+
+## Notes
+
+2026-09-14 progress, owner: "map out what you think needs to happen, and let's merge it together in sequence so the stack is clean" and "delegate to sub-agents to do a review on any PRs that have not had full reviews, and make sure we've addressed all the review comments using the shortcut to address PR reviews... full history on PRs."
+
+Stack refreshed bottom-up and pushed, each level a fast-forward and each validated before its push:
+- #125 claude/known-best-atlas-video-spec at 79cac315: main 1d367d6a merged; README, SYNOPSIS, document map, ledger and controls anchors resolved.
+- #155 claude/annealing-search-benchmark at d46b86a5: #125 merged; X-029 renumbered to X-034 and ideas 164-169 to 169-174 after collisions with main.
+- #160 codex/review-workbench-stack at 72629c03: 6094ae5a (the #155 port) plus the refresh.
+- #171 claude/workbench-defaults-and-bounds at bb3f7c99: 44fc7320 plus the 26d44ee5 retune plus the refresh.
+
+Stack-maintenance comments are posted on all four PRs. Agent reviews are running for #125 (pinned 7b06254c), #155 (d46b86a5), #160 (72629c03) and #171 (bb3f7c99), each publishing through review-github-pr.
+
+Next: address each review with address-pr-review, bottom-up, propagating merges after each level; fold #171 into #160 after its review is addressed; update the PR descriptions; merges into main await the owner.
