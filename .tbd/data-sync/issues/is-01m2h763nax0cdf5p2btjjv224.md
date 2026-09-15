@@ -5,7 +5,7 @@ title: "Guard: JavaScript in a Python string fails the build"
 kind: feature
 status: open
 priority: 1
-version: 5
+version: 6
 labels: []
 dependencies:
   - type: blocks
@@ -14,9 +14,11 @@ dependencies:
     target: is-01m2h765488h9hcy6c3zpp4abx
   - type: blocks
     target: is-01m2h765jws1b00yav58n7wzaq
+  - type: blocks
+    target: is-01m2h7667fbtgmwgtwpq0hdtmw
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:04.521Z
-updated_at: 2026-09-15T00:24:27.443Z
+updated_at: 2026-09-15T00:25:26.690Z
 ---
 A check that makes JavaScript in Python impossible to merge.
 

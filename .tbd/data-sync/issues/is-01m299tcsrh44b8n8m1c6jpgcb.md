@@ -5,7 +5,7 @@ title: "[epic] The workbench's JavaScript and CSS come under the standard floor"
 kind: epic
 status: open
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -18,8 +18,9 @@ child_order_hints:
   - is-01m299vctfygccsbspy01xqj97
   - is-01m29bhr1chn5zb60pd7jfy01b
   - is-01m29bhrhcs1zrcbfbhgwbb86n
+  - is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-11T22:36:10.935Z
-updated_at: 2026-09-11T23:08:51.049Z
+updated_at: 2026-09-15T00:25:03.418Z
 ---
 Phase 6D made the page's script a file. This is what reads it.
 

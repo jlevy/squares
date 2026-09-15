@@ -5,9 +5,11 @@ title: "[epic] No JavaScript in Python, and one JavaScript floor with no excepti
 kind: epic
 status: open
 priority: 1
-version: 8
+version: 10
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
+parent_id: is-01m299tcsrh44b8n8m1c6jpgcb
 child_order_hints:
   - is-01m2h763nax0cdf5p2btjjv224
   - is-01m2h7644r8f4ckfg0d93cgygq
@@ -16,8 +18,9 @@ child_order_hints:
   - is-01m2h765jws1b00yav58n7wzaq
   - is-01m2h7667fbtgmwgtwpq0hdtmw
   - is-01m299vc0er1aeg7dzkrvvx90m
+  - is-01m2h77xckv2kewqdqhqj652sh
 created_at: 2026-09-15T00:24:03.974Z
-updated_at: 2026-09-15T00:24:25.682Z
+updated_at: 2026-09-15T00:25:26.037Z
 ---
 Owner, 2026-09-14: "it looked like there was more JavaScript embedded in Python. This should be strictly forbidden. We should pull out everything and follow our high lint floors. We should create beads to track all of this tech debt and make sure that it's being addressed separately on another branch, another work tree, and land it as clean PRs stacked on top of these. We should be following the high biome and lint floors with auto formatting on all JavaScript, no exceptions."
 
