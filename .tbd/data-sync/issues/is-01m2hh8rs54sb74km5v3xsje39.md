@@ -3,14 +3,18 @@ type: is
 id: is-01m2hh8rs54sb74km5v3xsje39
 title: Decide whether the step chips belong in Animate
 kind: task
-status: open
+status: closed
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2gyhqfmr0xpcjsr34na3acq
 created_at: 2026-09-15T03:20:17.444Z
-updated_at: 2026-09-15T03:20:17.444Z
+updated_at: 2026-09-15T03:35:35.050Z
+closed_at: 2026-09-15T03:35:35.049Z
+close_reason: "Duplicate of think-72gg: the step-chips hidden-versus-drawn question is recorded in think-72gg's 2026-09-14 note, where the step row across tabs is decided."
+resolution: null
+duplicate_of: null
 ---
 Found 2026-09-14 by lane D-page's port of the legacy checkers; an owner question, not a review finding.
 

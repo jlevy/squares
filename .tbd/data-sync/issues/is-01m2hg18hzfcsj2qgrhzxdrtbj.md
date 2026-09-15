@@ -3,14 +3,18 @@ type: is
 id: is-01m2hg18hzfcsj2qgrhzxdrtbj
 title: "PR #160 review D43: tests do not pin the admission geometry or what their titles claim"
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb40z4hvrre5f0219zp1m9
 created_at: 2026-09-15T02:58:42.878Z
-updated_at: 2026-09-15T02:58:42.878Z
+updated_at: 2026-09-15T03:43:39.572Z
+closed_at: 2026-09-15T03:43:39.571Z
+close_reason: "Fixed on PR #160: admission-geometry and sweep-fixture tests in fbc74c0e, forgery coverage in 78c338be, runner, batch-invariance, scheduler-clock and Search-checker cases in 8be6ef1f."
+resolution: null
+duplicate_of: null
 ---
 Canonical defect D43 from the 2026-09-14 stack triage. Source finding: #160 R17 (Medium): admission, runner, scheduler and Search-checker items. (R17's Pack key-map item is D62 and its check_pack_panel item belongs to lane D-page.)
 
