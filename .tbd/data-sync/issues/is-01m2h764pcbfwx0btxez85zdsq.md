@@ -5,12 +5,12 @@ title: Extract JavaScript from the explainer, print and math tools and their tes
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:05.578Z
-updated_at: 2026-09-15T00:24:18.478Z
+updated_at: 2026-09-15T01:18:09.979Z
 ---
 Extract every JavaScript string from the explainer, print and math tooling into probe files, with behaviour unchanged. About 1,700 lines in:
 
@@ -18,3 +18,15 @@ Extract every JavaScript string from the explainer, print and math tooling into 
 - `packing/tests/`: `test_check_print_layout.py` (121) and `test_pdf_math_browser.py` (87).
 
 Acceptance: these files leave the guard's allowlist; the render and print checks produce byte-identical output where they are deterministic; the affected tests pass; and each new probe is formatted and linted by Biome and type-checked.
+
+## Notes
+
+PR #175's guard measures this bead's scope at 324 sites in 25 files, not the 15 files listed above. The allowlist in packing/devtools/embedded-javascript.yaml is authoritative, and 'python -m devtools.check_no_embedded_js --inventory' lists every site.
+
+Beyond the listed files it adds Node scripts inside tests (test_math_loading, test_render_explainer_pdf, test_render_explainer_fonts, test_motion_lab, test_motion_lab_interactive, test_prepare_explainer_math, test_sans_instances, test_math_startup) and test_check_published_site.
+
+Two files need a decision rather than a probe: test_browser_floor_contract.py (must-fail JavaScript fixtures for Biome and tsc) and test_codex_log_rollup.py (Codex code-mode payloads, which belong in a JSONL fixture).
+
+check_math_startup.py is 5 sites, not 3 lines: a ~400-line init script built by .replace from constants in check_math_loading and render_explainer_pdf. Start with those two modules. For add_init_script with values, use sqpack.probes.applied.
+
+check_published_site.py is already done in #175.
