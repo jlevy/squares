@@ -3,14 +3,18 @@ type: is
 id: is-01m2h765jws1b00yav58n7wzaq
 title: Extract JavaScript from the workbench package checkers
 kind: task
-status: open
+status: closed
 priority: 1
-version: 6
+version: 8
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:06.491Z
-updated_at: 2026-09-15T05:04:57.598Z
+updated_at: 2026-09-15T16:05:27.344Z
+closed_at: 2026-09-15T16:05:27.343Z
+close_reason: "PR #178 (https://github.com/jlevy/squares/pull/178): all 13 embedded-JavaScript sites in the workbench package's 4 files are removed and their allowlist entries dropped; check_probes covers the 5 new probes (181 total); check_frontend and the package tests pass."
+resolution: null
+duplicate_of: null
 ---
 Extract the remaining JavaScript strings in `packages/workbench/tools/workbench_tools/` (about 50 lines over 8 files) into the package's `probes/`.
 
@@ -35,3 +39,10 @@ Do this after PRs #160 and #171 have had their reviews addressed, because the sa
 - check_page_policy now imports sqpack.probes.applied.
 
 Remaining: check_pack_panel.py (7), check_candidate.py (3), check_accessibility.py (2), tests/test_self_contained.py (1, a script body in a fixture).
+
+2026-09-15, PR #178 (claude/no-js-workbench-checkers, head 98afc346, base claude/no-js-in-python-guard at 9f88e4a7): all 13 sites in the 4 files are gone, and the four allowlist entries are removed. The guard reports 447 sites in 38 files, none in packages/workbench.
+- check_accessibility (2): new probe accessibility/active-pack-index. Its 500 ms load wait is now benchmark/page-api-ready (S5, noted on think-kpvc).
+- check_pack_panel (7): new probes dom/transforms, pack/scene-matches-snapshot, api/refusal and layout/scroll-width, plus the existing pack/apply.
+- check_candidate (3): the stale needles were deleted with their assertions preserved. The API check is now a page-api-ready probe, and the angle tolerance is checked on the page's data (noted on think-tn0j).
+- test_self_contained (1): tests/fixtures/self-contained/allowed/blob-object-url.html. Biome's includes name no *.html, and the guard reads only *.py.
+Evidence: both checkers' output is byte-identical on one built page, and on 7 page mutants the old and new checkers give the same failure text, except check_accessibility on the no-API page, which now fails at the new wait. check_probes reports 181 probes; check_frontend, npm lint, typecheck and the workspace check pass. The shared "Now 460 sites in 42 files" comment in embedded-javascript.yaml was left for the coordinator.

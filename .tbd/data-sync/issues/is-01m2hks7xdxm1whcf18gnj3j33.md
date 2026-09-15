@@ -5,11 +5,11 @@ title: The suite tier runs at its 275 s ceiling on main and the stack; fix it by
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-15T04:04:14.381Z
-updated_at: 2026-09-15T04:59:29.984Z
+updated_at: 2026-09-15T05:20:00.624Z
 ---
 The pull-request `suite` job (`packing-validate --suite`, one step: `fast behavioral tests`) runs against its 275 s ceiling on `main`'s own PRs and across the workbench stack. Its recorded cost, 183.44 s, is stale.
 
@@ -40,3 +40,5 @@ This is `main`'s infrastructure. The stack only adds tests, so the fix belongs o
 ## Notes
 
 **2026-09-14, the same test count at 72%.** #171 at `b7627cef` (run 34930296150) ran the same 6,041 tests in 198.22 s (72%), an hour after #160's 274.81 s (100%). The spread on one test count is 77 s, 28% of the ceiling, so the ceiling is inside runner variance. That argues for sharding or a second runner rather than trimming tests.
+
+**2026-09-15, the first failure.** #175 at `9f88e4a7` (run 34931704686): 6,095 tests passed in 276.39 s against 275 s (101%), so `suite` and `packing-required` failed with every test green. The failed jobs were rerun once, to separate this from the code under review. The ceiling itself still needs the measured fix.
