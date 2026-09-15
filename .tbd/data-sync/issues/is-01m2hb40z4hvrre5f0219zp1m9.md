@@ -5,7 +5,7 @@ title: "Address review: PR #160 — workbench package review stack"
 kind: task
 status: open
 priority: 1
-version: 27
+version: 42
 labels: []
 dependencies: []
 parent_id: is-01m2h2zv3xg1w4gdy1svjsv1tx
@@ -36,6 +36,21 @@ child_order_hints:
   - is-01m2hg18hzfcsj2qgrhzxdrtbj
   - is-01m2hg18x3hznx5j54ha38b6gq
   - is-01m2hg19822846nd0hn9n91qy5
+  - is-01m2hh6zjhk7bdw2edsytjvhkz
+  - is-01m2hh8eqnpbkh6w7x3pk1vgw4
+  - is-01m2hh8fgdmf1h23j7d1d9xghv
+  - is-01m2hh8g86ctytmqn4nd95s08m
+  - is-01m2hh8gy4w3eyzrtzs7e0a854
+  - is-01m2hh8hjwj7sfydazzkenes78
+  - is-01m2hh8ja7yhzapce2vvxabdmx
+  - is-01m2hh8jyq6jwcrm939mky9jpc
+  - is-01m2hh8kmk39sz2661674brzb0
+  - is-01m2hh8mbabpzhgym1f8zjmjeq
+  - is-01m2hh8n3bwddd60kfgws6hq5n
+  - is-01m2hh8nt1cje574hb2fbcke4m
+  - is-01m2hh8pjg3amavhy97ycwyat9
+  - is-01m2hh8q8m73b1zqc39tje43ce
+  - is-01m2hh8r0vqvby95nbztxdr1bv
 created_at: 2026-09-15T01:32:50.529Z
-updated_at: 2026-09-15T02:58:43.585Z
+updated_at: 2026-09-15T03:20:16.665Z
 ---
