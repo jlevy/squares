@@ -3,14 +3,18 @@ type: is
 id: is-01m2hk24qpbm21qn8tqqqr7ycz
 title: "PR #171 review D17: the Animation studio (and Pack) draw no container and a stale catalogue box"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb41hy7fx18dy67asht84d
 created_at: 2026-09-15T03:51:37.461Z
-updated_at: 2026-09-15T03:51:37.461Z
+updated_at: 2026-09-15T04:16:19.829Z
+closed_at: 2026-09-15T04:16:19.828Z
+close_reason: "Fixed on PR #171 in 5bb067a0: while body.pack-independent or body.trace-active is set the stylesheet hides #bound-box and #bound-trace and strokes #container 2 px black; the stage/bounds probe checks the studio after import, Pack on arrival and the box back in Animate (both failed before)."
+resolution: null
+duplicate_of: null
 ---
 Canonical defect D17 from the 2026-09-14 stack triage (High). Source: #171 R1.
 

@@ -3,14 +3,18 @@ type: is
 id: is-01m2hk2612f0adb43rkb2tq0e8
 title: "PR #171 review D70: H-211 and X-034 imply the level-9 default sits in a measured range"
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb41hy7fx18dy67asht84d
 created_at: 2026-09-15T03:51:38.786Z
-updated_at: 2026-09-15T03:51:38.786Z
+updated_at: 2026-09-15T04:16:20.876Z
+closed_at: 2026-09-15T04:16:20.875Z
+close_reason: "Fixed on PR #171 in 1ef0e4e8: H-211 and X-034 say the cells ran under the previous law (0.15/2500/0/0) and 0.8 s moving span at 88d452f1, that #171 ships level 9 under 0.35/950/80/0.15 and a 0.9 s span, and that nothing has been measured under the new defaults."
+resolution: null
+duplicate_of: null
 ---
 Canonical defect D70 from the 2026-09-14 stack triage (Medium). Sources: #171 R6 (doc item); #155 R8 (reviewer note on #171's sentence).
 

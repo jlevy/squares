@@ -3,14 +3,18 @@ type: is
 id: is-01m2hk251zfs45hh35aj52bmj2
 title: "PR #171 review D18: the box and its gap-bar pointer turn locked mid-move"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb41hy7fx18dy67asht84d
 created_at: 2026-09-15T03:51:37.790Z
-updated_at: 2026-09-15T03:51:37.790Z
+updated_at: 2026-09-15T04:16:20.091Z
+closed_at: 2026-09-15T04:16:20.090Z
+close_reason: "Fixed on PR #171 in ac49b452: the box and pointer lock only at rest (dwell, from move end, or a step whose box does not change size) at the best known side of state.liveN within PACKING_VALIDITY.penetrationTolerance; stage/box-locks sweeps every step (72 of 2,271 samples failed before, on the 17 steps the review named)."
+resolution: null
+duplicate_of: null
 ---
 Canonical defect D18 from the 2026-09-14 stack triage (High). Source: #171 R2.
 

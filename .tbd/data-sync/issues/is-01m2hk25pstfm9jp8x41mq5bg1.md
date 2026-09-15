@@ -3,14 +3,18 @@ type: is
 id: is-01m2hk25pstfm9jp8x41mq5bg1
 title: "PR #171 review D69: the separator's Home and End also rewind or finish the step"
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb41hy7fx18dy67asht84d
 created_at: 2026-09-15T03:51:38.456Z
-updated_at: 2026-09-15T03:51:38.456Z
+updated_at: 2026-09-15T04:16:20.352Z
+closed_at: 2026-09-15T04:16:20.351Z
+close_reason: "Fixed on PR #171 in 009ebb3c: the separator stops propagation of every key it handles; check_stage_resize requires the playhead and an imported animation unchanged after its keys (both failed before)."
+resolution: null
+duplicate_of: null
 ---
 Canonical defect D69 from the 2026-09-14 stack triage (Medium). Source: #171 R5.
 

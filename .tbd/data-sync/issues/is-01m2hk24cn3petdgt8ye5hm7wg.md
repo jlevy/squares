@@ -3,14 +3,18 @@ type: is
 id: is-01m2hk24cn3petdgt8ye5hm7wg
 title: "PR #171 review D16: stage height and headline clearance measured on geometry the SVG clips"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2hb41hy7fx18dy67asht84d
 created_at: 2026-09-15T03:51:37.108Z
-updated_at: 2026-09-15T03:51:37.108Z
+updated_at: 2026-09-15T04:16:19.559Z
+closed_at: 2026-09-15T04:16:19.559Z
+close_reason: "Fixed on PR #171 in 8fe4749e: stage/lowest-drawn counts only displayed, painted shapes with half their stroke, cut at the SVG's floor where it clips, over 97 instants (agrees with screenshot ink to 1 px). The stage is 979 px with the headline at bottom 7: 41 px above and below, the deepest moving frames cut at 991, 3 px above the headline ink. check_animate_view's stage_clearance reads the probe and fails with the clip ignored or overflow visible."
+resolution: null
+duplicate_of: null
 ---
 Canonical defect D16 from the 2026-09-14 stack triage (High). Sources: #155 R3; #171 R4.
 
