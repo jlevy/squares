@@ -5,7 +5,7 @@ title: "N11 strategy reset: significant bound improvements or a much simpler pro
 kind: epic
 status: open
 priority: 1
-version: 21
+version: 22
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -27,10 +27,10 @@ child_order_hints:
   - is-01m2h4xzkgqqhsy4tf19gys41f
   - is-01m2hcvb50hvx8m8x7pbasnr3f
 created_at: 2026-09-14T03:04:47.426Z
-updated_at: 2026-09-15T02:12:02.889Z
+updated_at: 2026-09-15T16:21:39.482Z
 ---
 Owner direction, 2026-09-14: stop heavy computer-assisted work aimed at microscopic lower-bound gains. Prefer routes capable of a material n=11 bound improvement, a substantially simpler proof of s(11) >= 3.82, or a transferable technique that could resolve another small n. BC-339/think-uqa4 owns the checked roll-up, BC-347/think-oj12 owns the completed Astra Max audit, and BC-346/think-9y7p selected the due BC-340/think-1ydi W5 checkpoint. No scientific route is authorized before W5 closes and the fresh post-W5 W10 under think-d3h5 selects one.
 
 ## Notes
 
-Current controller, 2026-09-14: PR 174 merged W5/VE-005 at cdb088142f596c468b910a6d44c7915e26ea02e1. BC-353/think-d3h5 is running in PR 176 from that exact main. Three Astra Max reviews converge on Route A admission at q=96/25, with Route S as the explicit fallback; no scientific target has run. The draft creates BC-354/think-0t5y as a separate no-target admission block before BC-341/think-9y6q. E remains a cheap whole-face gate, F1 the cheapest changed-language alternative, B high-upside but unadmitted, and N/C/D/G paused behind named premises. H-160/H-162, weighted stages 3-4, BC329, and the old H135 reserve remain paused unless a later W10 reselects them.
+Current controller, 2026-09-15: PR 176 merged the post-W5 Route A selection at a9de8a705d785e5b7b6ac46f28c11b6f5a45d7c6. BC-354/think-0t5y then completed its no-target admission decision in PR 177 and parked the current Route A representation: the complete 80-stratum negative-root producer, shared-variable conditional gate, rows-complete matched exact baseline, and independent replay remain absent. No target ran and no physical root closed. BC-343/think-a1e8 is the sole next entry, beginning with a separate no-target Route S admission PR that freezes T-025/T-026, the at-most-23 orbit ceiling or another predeclared metric, one template family, controls, and verdict rules. BC-341/think-9y6q is paused pending a future W10 and the named Route A prerequisites.
