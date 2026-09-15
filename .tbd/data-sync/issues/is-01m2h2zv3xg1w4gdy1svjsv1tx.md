@@ -5,7 +5,7 @@ title: "Consolidate the workbench stack: #155 into #160 into #171"
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 11
 labels: []
 dependencies: []
 child_order_hints:
@@ -15,7 +15,7 @@ child_order_hints:
   - is-01m2hb40z4hvrre5f0219zp1m9
   - is-01m2hb41hy7fx18dy67asht84d
 created_at: 2026-09-14T23:10:44.859Z
-updated_at: 2026-09-15T01:32:51.133Z
+updated_at: 2026-09-15T01:52:18.236Z
 ---
 Owner, 2026-09-14: "Can you review and consolidate if we have duplicate work on other branches? Check https://github.com/jlevy/squares/pull/171" and "Let's review carefully and see what the best strategy here is to merge everything together."
 
@@ -44,3 +44,27 @@ Addressing rule for the stack, decided before any addresser starts: **fix each d
 - Findings in code that persists through the stack (CI, gates, docs, the Rust engine, motion-lab assets, devtools #160 does not move) are fixed on #125 and merged up.
 
 To avoid fixing one defect twice, wait for the #155, #160 and #171 reviews, dedupe findings across the stack into one triage map (finding, PR, final code location, owning lane), then run addressers by lane with address-pr-review, each posting per-finding "Addressed ... in <commit>" replies on the PR whose review raised the finding.
+
+**2026-09-14, review addressing under way.**
+- Triage map: `attic/reviews/triage-stack-2026-09-14.md` in the squares-viz-explanations worktree. It reduces the 96 findings to 91 defects; section 5 holds the coordinator's decisions.
+- Main #173 was merged up the stack. The new heads are #125 `6f30d5b7`, #155 `c131b76f`, #160 `f3874426`, #171 `fcfd0d7a` and #175 `d723c847`.
+
+Wave 1 lanes, one worktree each:
+
+| Lane | PR | Worktree | Branch |
+| --- | --- | --- | --- |
+| A | #125 | `stack-125` | `stack/125` |
+| B | #155 | `squares-viz-explanations-4ae624` | |
+| C | #160 | `consolidate-stack` | `lane/c` |
+| D-page | #160 | `nojs-guard` | `lane/d-page` |
+| D-tools | #160 | `lane-d-tools` | `lane/d-tools` |
+
+Each PR has a parent bead: `think-6c2j`, `think-xqc3`, `think-jp7o` and `think-kuau`.
+
+Lanes write dispositions to `attic/reviews/dispositions/`; the coordinator posts one reply per PR. Next:
+1. Merge A up the stack.
+2. Merge B into #160, then send C the `D10` runbook citation, and D-tools `D68` and the `D89` plan line.
+3. Send D-page `D11` and the `D12` keyboard case once C's `D07` lands.
+4. Merge #160 into #171, then run lane E.
+5. Merge #171 into #175.
+6. Post the dispositions, update every PR body and watch CI.
