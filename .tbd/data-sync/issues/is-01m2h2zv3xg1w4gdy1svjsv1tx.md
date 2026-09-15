@@ -5,11 +5,13 @@ title: "Consolidate the workbench stack: #155 into #160 into #171"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m2h8cc6m0w30p7vd0g5r6161
 created_at: 2026-09-14T23:10:44.859Z
-updated_at: 2026-09-15T00:35:04.025Z
+updated_at: 2026-09-15T00:45:04.103Z
 ---
 Owner, 2026-09-14: "Can you review and consolidate if we have duplicate work on other branches? Check https://github.com/jlevy/squares/pull/171" and "Let's review carefully and see what the best strategy here is to merge everything together."
 
