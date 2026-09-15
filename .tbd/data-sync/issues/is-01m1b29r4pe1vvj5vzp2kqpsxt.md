@@ -5,7 +5,7 @@ title: "Lane A3: a bespoke certified lower bound at n = 12 (H-039, with H-006's 
 kind: task
 status: open
 priority: 1
-version: 5
+version: 6
 spec_path: packing/campaign/explorations/X-010-two-lanes-two-ladders.md
 delegate: claude-code@vm
 labels:
@@ -15,10 +15,10 @@ dependencies: []
 hold: paused
 hold_until: null
 created_at: 2026-08-31T04:47:32.501Z
-updated_at: 2026-09-14T22:04:08.712Z
+updated_at: 2026-09-15T00:38:14.241Z
 started_at: 2026-08-31T10:08:44.767Z
 ---
-Candidate Route N under H-039: test a proof architecture that could establish s(12) = 4, rather than resume the obsolete decimal-ladder or fixed-threshold framing. The retained 3.83 point pilot is historical method evidence, not a bound and not the current target. After W10/BC-346 selects this route, freeze one uniform boundary-capacity or deformation lemma for L = 4 - epsilon over a nontrivial epsilon interval, with n=6 and n=13 as solved controls and the flexible side-four n=12 family included in the domain. The first result must be a stable finite case reduction or exact parameterized inequality. Park the mechanism if a legal flex or boundary degeneration defeats uniformity. Reuse H-039 and this task; do not register a duplicate n=12 exact-value hypothesis.
+Candidate Route N under H-039: test a proof architecture that could establish s(12) = 4, rather than resume the obsolete decimal-ladder or fixed-threshold framing. The retained 3.83 point pilot is historical method evidence, not a bound and not the current target. After W10/BC-353 selects this route, freeze one uniform boundary-capacity or deformation lemma for L = 4 - epsilon over a nontrivial epsilon interval, with n=6 and n=13 as solved controls and the flexible side-four n=12 family included in the domain. The first result must be a stable finite case reduction or exact parameterized inequality. Park the mechanism if a legal flex or boundary degeneration defeats uniformity. Reuse H-039 and this task; do not register a duplicate n=12 exact-value hypothesis.
 
 ## Notes
 

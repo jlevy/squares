@@ -5,7 +5,7 @@ title: Run the post-roll-up n11 route-selection block
 kind: task
 status: closed
 priority: 1
-version: 30
+version: 31
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m24tw6gbrcrtf2msvtckq7xs
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-14T20:44:17.583Z
-updated_at: 2026-09-15T00:22:39.333Z
+updated_at: 2026-09-15T00:38:14.552Z
 closed_at: 2026-09-15T00:22:39.332Z
 close_reason: "BC-346 completed: PR #173 source 1b2c911c passed GitHub Actions run 34912062104 attempt 2; W5 think-1ydi is the sole next entry and no scientific target ran."
 resolution: null
@@ -25,4 +25,4 @@ Run one W10 planning block after the checked roll-up and completed Astra Max aud
 
 ## Notes
 
-W10 decision, 2026-09-14: a conservative OR-12 reconstruction finds eight substantive non-W5 blocks after Session 116/BC-322, so BC-340/think-1ydi is selected next. All scientific candidates and legacy think-yc80 have been routed through the new post-W5 W10 think-d3h5, which depends on W5. Route A at 3.84 is the presumptive first scientific choice and Route S the admission fallback, but neither is authorized. The planning source is awaiting exact-revision certification and PR #173 merge.
+W10 decision certified and closed, 2026-09-14: PR #173 source 1b2c911c passed GitHub Actions run 34912062104 attempt 2. BC-340/think-1ydi is the sole next entry. Every scientific candidate remains behind BC-353/think-d3h5; Route A at 3.84 is presumptive only and no scientific target ran.
