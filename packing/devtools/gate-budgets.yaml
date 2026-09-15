@@ -29,6 +29,37 @@
 # noisy. Rules 1, 3 and 4 need a clock and are enforced only on a run whose shape matches
 # the tier's `reference`; every other run reports and does not fail. See the `policy`
 # block below for what that buys and what it costs.
+#
+# The register stopped the first spiral and not the second. From 2026-09-06 to
+# 2026-09-15 the required pull-request wall went from a 154 s median to 284 s and the
+# certificate page's pull-request run from 37 s to 464 s, and nothing here fired
+# (think-xfqk). Three rules were added for the three ways that happened:
+#
+#   5. unrecorded   a tier a pull-request job runs has no recorded
+#                   cost, or a record that names no hosted run   -> the DECLARATION fails
+#   6. ratchet      a record rises past max_unattributed_rise of
+#                   the lowest record since the last attributed
+#                   one, and carries no `attribution:`           -> the DECLARATION fails
+#   7. wall         a pull request's wall exceeds its budget, or
+#                   regression_ratio of its recorded median      -> the RUN fails
+#
+# Rule 5 is the gap the second spiral used first. An empty record switches rules 2, 3
+# and 4 off together and leaves one absolute ceiling, and on 2026-09-15 three of the five
+# pull-request tiers had one: `checks` had failed its ceiling at least nine times in the
+# eight days since its record was cleared, with every step green.
+# Rule 6 is the one it used second. `suite`'s record went 102.83 -> 162.62 -> 118.72 ->
+# 183.44 s in three days and its ceiling followed, 205 -> 260 -> 237 -> 275 s. Every move
+# cited a real hosted reading, and 2.4x of growth went through a 1.5x drift rule because
+# each reading became the next baseline. So each entry keeps its `history:`, and a rise
+# must say which steps or test files grew and why.
+# Rule 7 is the number `OR-14` is about, which no tier sees: a pull request waits for its
+# longest job with that job's checkout, toolchain and queue. `pull_request_walls` at the
+# end of this file declares it, and `devtools/check_pr_wall.py` enforces it on every run.
+#
+# Rules 5 and 6 and the wiring of rule 7 are checked by devtools/check_gate_budgets.py.
+# Record a tier with `python -m devtools.read_tier_walls --run-id ...`, which reads the
+# gate's own verdicts out of hosted logs, and a wall with
+# `python -m devtools.check_pr_wall --workflow ... --sample --run-id ...`.
 policy:
   # A ceiling more than this multiple of the tier's own recorded cost is not a ceiling.
   # 2.0 is chosen against the incident: it catches a 2.65x regression with margin, and it
@@ -54,6 +85,29 @@ policy:
   # Under this wall, the ratios are measuring scheduler noise rather than the tier. The
   # ceiling still applies; the drift and stale ratios do not.
   min_wall_seconds: 20.0
+  # Rule 6. How far a record may rise above the lowest record since its last attributed
+  # one before it must carry an `attribution:` -- the steps or test files that grew, by
+  # how much, from which runs, and the named cause. Measured from the lowest record and
+  # not the last, so a ratchet of small moves adds up the way `suite`'s large ones did.
+  # A fall needs nothing.
+  #
+  # 1.2 is below the 1.5x drift ratio, so a record cannot be re-based across a drift
+  # failure without saying what grew, which is the whole of `suite`'s story. It is not
+  # above what runner speed can do to a mean of few readings, and is not meant to be:
+  # `geometry`'s two readings on the evening of 2026-09-15 sit 1.31x under the five from
+  # that morning, on the same steps. A record taken from few fast runs is the record an
+  # honest later one outgrows, and the attribution that answers it is the per-step table
+  # showing every step moved together, which is what a slower runner looks like. Seven
+  # readings, as the 2026-09-15 records use, keep that rare. `read_tier_walls
+  # --baseline-run-id` prints the block for a step tier, and `check_gate_budgets
+  # --attribute-files` for `suite` from per-file test costs.
+  max_unattributed_rise: 1.2
+  # Records dated before this are shown by the check and not failed. The rule did not
+  # exist when they were written, and inventing attributions for them now would be the
+  # record edited to look tidy (conventions.md section 7). They remain baselines for
+  # every record after them, which is what makes `suite`'s next rise answer for the whole
+  # 1.78x rather than for the last step of it.
+  attribution_required_from: '2026-09-15'
 
 # One entry per tier `packing-validate` can select as a whole. A tier with no entry here
 # fails `devtools.check_gate_budgets`, so a new tier cannot arrive without a ceiling.
@@ -164,6 +218,15 @@ tiers:
   measured_seconds: null
   measured_on: null
   measured_where: null
+  # The records this entry has held on `main`, kept since rule 6 so the register shows
+  # its own history. Earlier figures -- 1369.60 s, 409.0 s, 177.02 s -- were held only on
+  # branches and are argued in the comments above.
+  history:
+  - measured_seconds: 502.3
+    measured_on: '2026-09-06'
+    measured_where: >-
+      CI run for commit 5cad7540, job `validate`, at `--jobs 3 --inner-jobs 1`. Cleared on
+      2026-09-07 when the corpus widened and two sweeps left the tier.
   # The reference moves with the invocation it describes. A record taken at `--jobs 3`
   # cannot be compared against a `--jobs 2` reference, and leaving the old one here is how
   # a band stays permanently unenforced: every run reports "not the reference shape" and
@@ -313,9 +376,50 @@ tiers:
   # reading at the reference shape of the tier this change replaced, so recording it
   # would arm the stale rule against every honest run of the new one. The gate prints the
   # line to paste the first time a run at the reference shape measures the new tier.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  #
+  # 2026-09-15: recorded, by rule 5. The gate printed that line on every pull request for
+  # eight days and nobody wrote it (think-gsz0), while the tier failed this ceiling at
+  # least nine times with every step green. The readings are every successful
+  # pull-request run since #174 landed whose gate had `main`'s current 76 steps -- the
+  # #160 and #171 branches that became `main` -- read by `devtools.read_tier_walls`.
+  # The record is 1.46x the 99.39 s it replaces, so it carries rule 6's attribution:
+  # `exact verification` and the type floor account for 120 s of the 150 s of listed
+  # growth, and the grid replay that left on 2026-09-07 went the other way.
+  measured_seconds: 145.53
+  measured_on: '2026-09-15'
+  measured_where: >-
+    The geometric mean of seven readings at the reference shape -- 150.89, 152.60,
+    141.70, 147.87, 140.88, 144.10 and 141.17 -- across runs 34924677097, 34925616821,
+    34926777301, 34929890466, 34930296150, 35012847055 and 35013703659, each selecting
+    49 of the gate's 76 steps. Observed spread 1.08x.
+  attribution:
+    cause: >-
+      Two steps. `exact verification` gained `devtools.dilation_corollary`: absent from
+      the four baseline runs' logs, 47.11 s in run 34064274054 on 2026-09-06 and 60.87 s
+      in run 34997018168 on 2026-09-15. The type floor grew with the code it checks, and
+      on 2026-09-13 (f9099096) its include list gained `../packages/workbench` and the
+      retained video spikes. Neither is one regression, and neither is runner noise: the
+      tier's spread across the seven readings is 1.08x.
+    unit: step-seconds
+    source: >-
+      python -m devtools.read_tier_walls --tier checks --baseline-run-id 34023002068
+      34032566385 34037168378 34040196689 --run-id 34924677097 34925616821 34926777301
+      34929890466 34930296150 35012847055 35013703659; the logs list each run's eight
+      slowest steps, so a step outside them reads 0.
+    grew:
+    - {name: exact verification, before: 50.15, after: 119.21}
+    - {name: type floor (basedpyright), before: 51.31, after: 102.50}
+    - {name: bead tree, before: 5.69, after: 14.32}
+    - {name: soft-schema validation, before: 7.88, after: 14.23}
+    - {name: soundness perimeter, before: 65.15, after: 70.88}
+    - {name: synopsis agrees with the artifacts, before: 0.0, after: 5.40}
+  history:
+  - measured_seconds: 99.39
+    measured_on: '2026-09-06'
+    measured_where: >-
+      The geometric mean of four readings at the reference shape -- 106.35, 106.02, 80.62
+      and 107.33 -- across runs 34023002068, 34032566385, 34037168378 and 34040196689.
+      Cleared on 2026-09-07 when the corpus widened and the grid replay was deferred.
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
     The part of the pull-request surface that is none of the other three: every floor,
@@ -348,10 +452,19 @@ tiers:
   # runner setup variance. `measured_seconds` remains empty until this exact partition
   # runs on its reference runner; the first hosted result supplies the record and tests
   # the estimate instead of being made to agree with it.
+  #
+  # 2026-09-15: that result is in, recorded by rule 5 from the same seven runs as
+  # `checks`. The estimate held: 150 s is 1.96x the 76.66 s mean, inside rule 2's 2.0x,
+  # so it stands. The spread is 1.92x, the widest on the surface, and it is the reason
+  # this is a mean of seven rather than of the two readings of the tier's first day.
   ceiling_seconds: 150.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  measured_seconds: 76.66
+  measured_on: '2026-09-15'
+  measured_where: >-
+    The geometric mean of seven readings at the reference shape -- 65.85, 79.34, 49.75,
+    95.49, 94.50, 83.92 and 79.04 -- across runs 34924677097, 34925616821, 34926777301,
+    34929890466, 34930296150, 35012847055 and 35013703659, each selecting 2 of the
+    gate's 76 steps. Observed spread 1.92x.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     The source and built-page contracts for the top-level workbench package: Biome,
@@ -389,17 +502,26 @@ tiers:
   # actually for.
   ceiling_seconds: 180.0
   # Hosted samples at the reference shape establish the baseline below.
-  measured_seconds: 91.55
-  measured_on: '2026-09-06'
+  #
+  # 2026-09-15: refreshed from the seven runs `checks` was recorded from, nine days after
+  # the entry asked for it. 1.12x the record it replaces, inside rule 6's 1.2x, so no
+  # attribution is owed; the step that moved is `deterministic SVG rendering`.
+  measured_seconds: 102.73
+  measured_on: '2026-09-15'
   measured_where: >-
-    The geometric mean of four readings at the reference shape -- 104.12, 106.07, 76.76 and 82.86 --
-    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
-    Observed spread 1.38x. The centre of the band, not an edge: recording the
-    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
-    fast runner, because a record at the top of the band starves that rule by as much
-    as it feeds the drift rule. At four samples every margin is at least 1.25x.
-    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
-    the argument for `think-be1s` rather than a property of these numbers.
+    The geometric mean of seven readings at the reference shape -- 111.17, 110.47,
+    105.79, 114.21, 113.94, 84.17 and 84.84 -- across runs 34924677097, 34925616821,
+    34926777301, 34929890466, 34930296150, 35012847055 and 35013703659, each selecting
+    9 of the gate's 76 steps. Observed spread 1.36x.
+  history:
+  - measured_seconds: 91.55
+    measured_on: '2026-09-06'
+    measured_where: >-
+      The geometric mean of four readings at the reference shape -- 104.12, 106.07, 76.76
+      and 82.86 -- across runs 34023002068, 34032566385, 34037168378 and 34040196689.
+      Observed spread 1.38x. The centre of the band, not an edge: recording the maximum
+      was tried first and left `geometry` 1.21x from failing the stale rule on a fast
+      runner.
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
     The nine steps that re-derive geometry without the engine: the basin atlas and its
@@ -506,6 +628,29 @@ tiers:
     The earlier four-sample mean of 102.83s described the hundred-case corpus.
     `think-uwow` tracks this refresh; `think-be1s` retains the policy follow-up to
     represent observed variation as a band. Refresh the mean as comparable samples accrue.
+  # The ratchet, as data. Each of these was a real hosted reading and each became the
+  # next baseline after the drift rule fired on it; together they are 1.78x, and the
+  # lane read 210.21 s on 2026-09-15 across the seven runs `checks` is recorded from.
+  # They predate rule 6, so the check shows them rather than failing them, and they stay
+  # the baseline: the next record above 123.40 s -- 1.2x of 102.83 s -- carries an
+  # attribution from per-file test costs.
+  history:
+  - measured_seconds: 102.83
+    measured_on: '2026-09-06'
+    measured_where: >-
+      The geometric mean of four readings -- 102.50, 123.53, 108.44 and 81.43 -- across
+      runs 34023002068, 34032566385, 34037168378 and 34040196689, over the hundred-case
+      corpus.
+  - measured_seconds: 162.62
+    measured_on: '2026-09-07'
+    measured_where: >-
+      One reading, run 34133437296, the first hosted run of the lane over the 324-case
+      corpus; it failed the drift rule against 102.83 s at 1.58x and became the record.
+  - measured_seconds: 118.72
+    measured_on: '2026-09-08'
+    measured_where: >-
+      The geometric mean of 158.64 s (run 34285770932) and 88.84 s (run 34288782986) over
+      4,283 tests; the second failed the stale rule against 162.62 s.
   # `inner_jobs: 1`, not 4, because that is what the workflow passes. The xdist worker
   # count comes from `--jobs` through `_pytest_workers`, not from `--inner-jobs`, and a
   # reference that named the worker count instead of the invocation would match no run
@@ -634,9 +779,25 @@ tiers:
   # new names running different work, so 107.05s is not a record of this tier, and
   # leaving it here would fail the stale rule on every honest run of the new one. The
   # gate prints the line to paste the first time it runs at the reference shape.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  #
+  # 2026-09-15: recorded, by rule 5, from the seven runs `checks` was recorded from. The
+  # "near 90s" the argument below predicted is 1.33x low, and 210 s is 1.75x the reading,
+  # inside rule 2. Against the 107.05 s record `main` last held it is 1.12x, inside rule
+  # 6; the 97.07 s mean of six in #116 was dropped at its merge and never held here.
+  measured_seconds: 119.72
+  measured_on: '2026-09-15'
+  measured_where: >-
+    The geometric mean of seven readings at the reference shape -- 111.63, 137.76,
+    127.28, 139.41, 131.41, 97.75 and 100.58 -- across runs 34924677097, 34925616821,
+    34926777301, 34929890466, 34930296150, 35012847055 and 35013703659, each selecting
+    4 of the gate's 76 steps. Observed spread 1.43x.
+  history:
+  - measured_seconds: 107.05
+    measured_on: '2026-09-06'
+    measured_where: >-
+      The geometric mean of four readings -- 108.91, 108.62, 106.15 and 104.57 -- across
+      runs 34023002068, 34032566385, 34037168378 and 34040196689, over the n=1..100
+      workload. Cleared on 2026-09-07 when two of the four steps were split.
   reference: {jobs: 4, inner_jobs: 2, cpus: 4}
   argument: >-
     The pull request's record sweeps, on their own runner: the known-best atlas's record
@@ -690,3 +851,164 @@ tiers:
     at 892s on the same runner (run 33932095609), the slow lane BC-214 moved here, and the
     rest. 3600s is roughly twice that sum, which is the room a tier growing one
     certificate at a time needs before anyone has clocked it whole.
+
+# ------------------------------------------------------------------------------------
+# Rule 7: the pull request's wall.
+#
+# Every tier above is a gate step's wall, and on 2026-09-15 no tier was out of band while a
+# pull request waited 280-330 s for Packing validation and 380-510 s for the certificate
+# page. The wall is what `OR-14` targets: from the run starting to the moment its
+# aggregating job can start, which includes each job's queue, checkout, toolchain and
+# uploads as well as its gate step. `devtools/check_pr_wall.py` reads it from the GitHub
+# API on every pull-request run, in the job named `aggregator`, and fails the run on
+# either rule below. It cannot see its own completion, so the wall ends at the
+# aggregator's start; a run measured afterwards ends at the same place.
+pull_request_walls:
+  policy:
+    # A run this multiple of the recorded median for its workflow and kind fails, whatever
+    # the budget says. The budget is `OR-14`'s edge; this is the rule around what is
+    # measured, which is the other half of `OR-14` ("set the ceiling around what is
+    # measured"). 1.2 against the noise it has to clear: of the 21 `main` Packing
+    # validation runs recorded below the slowest is 1.16x their median, and of the 21
+    # certificate-page runs 1.10x. The drift the register missed was a day's growth of
+    # about 10 per cent for eight days; 1.2 fails the second day of that, and the budget
+    # fails what 1.2 lets through slowly.
+    regression_ratio: 1.2
+    # Fewer recorded runs than this and the regression rule is not applied, and the run
+    # says so as a warning rather than passing silently. Runner speed is bimodal -- about
+    # 70 per cent of `suite` jobs land on the slow class (think-xfqk's audit) -- so a small
+    # sample's median can sit in the fast mode and fail every ordinary run. At 15 runs the
+    # chance of that is about 5 per cent; the records below hold 21 where the runs exist.
+    min_samples: 15
+    main_branch: main
+    # A step is setup when its name matches one of these; everything else is work. Setup
+    # includes the post-job teardown and artifact transfer, which a pull request waits
+    # through as surely as it waits through checkout.
+    setup_steps:
+    - '^(Set up job|Complete job)$'
+    - '^Post '
+    - '^Check out '
+    - '^Install '
+    - '^Synchroni[sz]e '
+    - '^Cache '
+    - '^(Use|Share) the prepared '
+    - '^Download '
+    - '^(Preserve|Retain|Upload) '
+  workflows:
+  - id: packing-validation
+    file: .github/workflows/packing-validation.yml
+    aggregator: packing-required
+    # A second-architecture smoke check that `packing-required` does not wait on.
+    not_gating: [macos-portability]
+    # `OR-14`: "Its target is two to two and a half minutes; three is the outer edge of
+    # acceptable. Above that the slowness is a defect with a number attached." So the
+    # budget is the edge, not the target. It fails today: the 21 runs below have a 288 s
+    # median, and every one but a 173 s run on 2026-09-15 is over it. That is not a ceiling
+    # advertising an aspiration -- `OR-14` names a wall above 180 s a defect, and this is
+    # the check that says so on the run. The surface held a 154 s median on 2026-09-06,
+    # the day the jobs split, and crossed 180 s on 2026-09-08; this budget would have failed
+    # that day's runs and every one since. `think-xfqk`'s lanes 1 and 2 bring it under.
+    budget_seconds: 180.0
+    argument: >-
+      The required pull-request check, `packing-required`, which waits on every Linux
+      job of the pull-request surface. Its wall is the longest of those jobs plus the
+      run's start and the aggregator's queue, so it is what a contributor waits for on
+      every push. `check_gate_budgets` refuses a budget above `OR-14`'s 180 s and an
+      aggregator that stops running the check.
+    kinds:
+    # The 21 most recent successful pull-request runs into `main` on 2026-09-15, measured
+    # by `check_pr_wall --sample`. The kind is read from each pull request's current base,
+    # and a stacked pull request retargeted to `main` after its parent merged reads as
+    # `main` afterwards; in CI the base is exact.
+    - kind: main
+      median_seconds: 288
+      measured_on: '2026-09-15'
+      samples:
+      - {run: 35013703659, seconds: 322}
+      - {run: 35012847055, seconds: 221}
+      - {run: 35012059930, seconds: 295}
+      - {run: 35012038975, seconds: 285}
+      - {run: 35011132771, seconds: 288}
+      - {run: 35007836208, seconds: 275}
+      - {run: 35001715106, seconds: 289}
+      - {run: 34997018168, seconds: 283}
+      - {run: 34995673723, seconds: 201}
+      - {run: 34931704686, seconds: 307}
+      - {run: 34930296150, seconds: 247}
+      - {run: 34929890466, seconds: 320}
+      - {run: 34926777301, seconds: 334}
+      - {run: 34925616821, seconds: 214}
+      - {run: 34924677097, seconds: 214}
+      - {run: 34924361314, seconds: 305}
+      - {run: 34923097435, seconds: 305}
+      - {run: 34921505934, seconds: 295}
+      - {run: 34921194157, seconds: 225}
+      - {run: 34919064379, seconds: 288}
+      - {run: 34918609400, seconds: 173}
+    # Every successful stacked run the last hundred include: fewer than `min_samples`, so
+    # the regression rule is reported as not applied on a stacked pull request until more
+    # accumulate. The budget applies regardless.
+    - kind: stacked
+      median_seconds: 275
+      measured_on: '2026-09-15'
+      samples:
+      - {run: 35016339128, seconds: 349}
+      - {run: 35015130860, seconds: 258}
+      - {run: 35014747347, seconds: 247}
+      - {run: 35000813909, seconds: 228}
+      - {run: 34993754171, seconds: 305}
+      - {run: 34992699055, seconds: 254}
+      - {run: 34801478428, seconds: 292}
+      - {run: 34801108161, seconds: 292}
+  - id: certificate-page
+    file: .github/workflows/pages.yml
+    aggregator: pr-wall
+    not_gating: []
+    # The same edge, for the same reason. The page's pull-request run is not a required
+    # check, but it runs on every pull request that touches a page input and a reviewer
+    # waits for it: 37 s on 2026-09-06, a 464 s median on the 21 runs below. `think-xfqk`'s
+    # lane 1 is what brings it under.
+    budget_seconds: 180.0
+    argument: >-
+      The certificate page's pull-request build, measured to the start of its trailing
+      `pr-wall` job, which waits on every job that runs on a pull request. The runs
+      recorded below predate that job, so they end at their last job's completion
+      instead, a difference of that job's queue.
+    kinds:
+    - kind: main
+      median_seconds: 464
+      measured_on: '2026-09-15'
+      samples:
+      - {run: 35014107646, seconds: 488}
+      - {run: 35013704067, seconds: 474}
+      - {run: 35012847066, seconds: 464}
+      - {run: 35012060080, seconds: 383}
+      - {run: 35012038974, seconds: 315}
+      - {run: 35011133034, seconds: 430}
+      - {run: 35010528613, seconds: 397}
+      - {run: 35007836969, seconds: 464}
+      - {run: 34931704732, seconds: 473}
+      - {run: 34930296177, seconds: 465}
+      - {run: 34928177677, seconds: 470}
+      - {run: 34926777282, seconds: 439}
+      - {run: 34926688199, seconds: 466}
+      - {run: 34926076712, seconds: 478}
+      - {run: 34924677037, seconds: 456}
+      - {run: 34924361276, seconds: 451}
+      - {run: 34923097432, seconds: 480}
+      - {run: 34919064349, seconds: 330}
+      - {run: 34918609212, seconds: 509}
+      - {run: 34918449775, seconds: 352}
+      - {run: 34918365705, seconds: 381}
+    - kind: stacked
+      median_seconds: 475
+      measured_on: '2026-09-15'
+      samples:
+      - {run: 35017207126, seconds: 477}
+      - {run: 35016339140, seconds: 470}
+      - {run: 35015130825, seconds: 475}
+      - {run: 35014747398, seconds: 383}
+      - {run: 35001279226, seconds: 396}
+      - {run: 35000813975, seconds: 490}
+      - {run: 34993754160, seconds: 543}
+      - {run: 34992698960, seconds: 475}
