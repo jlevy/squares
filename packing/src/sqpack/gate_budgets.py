@@ -16,6 +16,14 @@ ceiling and the recorded cost, not just the ceiling:
 * `judge` is dynamic. It compares one finished run's wall against the same register and
   fails a run over the ceiling, a run that has drifted above the record, or a run far
   enough under the record that the record is the thing that is now wrong.
+* `ratchet_problems` is static too, and it exists because the drift rule was defeated
+  without being broken. Between 2026-09-06 and 2026-09-09 `suite` tripped 1.5x three
+  times and each time its record was re-based to the new reading -- 102.83, 162.62,
+  118.72, 183.44 s -- with the ceiling following at 205, 260, 237 and 275 s. Every step
+  cited a real hosted reading and 2.4x of growth went through. So a record keeps its
+  history in the register, and a record that rises past `max_unattributed_rise` of the
+  lowest record since the last attributed one must carry an attribution: the per-step
+  or per-file costs that grew, and a named cause.
 
 Bounding the record from both sides is what stops a person having to remember it. The
 figure to write is printed by the run that discovers it.
@@ -75,6 +83,35 @@ class Reference:
 
 
 @dataclass(frozen=True)
+class Growth:
+    """One step's or one test file's cost before and after a record moved."""
+
+    name: str
+    before: float
+    after: float
+
+
+@dataclass(frozen=True)
+class Attribution:
+    """Why a record rose: what grew, by how much, measured where, and the named cause."""
+
+    cause: str
+    unit: str
+    source: str
+    grew: tuple[Growth, ...]
+
+
+@dataclass(frozen=True)
+class Record:
+    """One recorded cost in a tier's history, oldest first, the current record last."""
+
+    seconds: float
+    on: str
+    where: str | None = None
+    attribution: Attribution | None = None
+
+
+@dataclass(frozen=True)
 class TierBudget:
     """One tier's declared ceiling and the cost that justifies it."""
 
@@ -86,6 +123,20 @@ class TierBudget:
     measured_seconds: float | None = None
     measured_on: str | None = None
     measured_where: str | None = None
+    #: Superseded records, oldest first. A cleared record leaves its history in place.
+    history: tuple[Record, ...] = ()
+    #: Why the current record is higher than the records before it, when it is.
+    attribution: Attribution | None = None
+
+    @property
+    def records(self) -> tuple[Record, ...]:
+        """Every record this tier has held, oldest first, ending with the current one."""
+        if self.measured_seconds is None or self.measured_on is None:
+            return self.history
+        current = Record(
+            self.measured_seconds, self.measured_on, self.measured_where, self.attribution
+        )
+        return (*self.history, current)
 
     @property
     def headroom(self) -> float | None:
@@ -103,6 +154,11 @@ class Policy:
     drift_ratio: float
     stale_ratio: float
     min_wall_seconds: float
+    #: How far a record may rise above the lowest record since its last attributed one
+    #: before it must say what grew. `None` only in a register that predates the rule.
+    max_unattributed_rise: float | None = None
+    #: Records dated before this are history the rule did not exist for: shown, not failed.
+    attribution_required_from: str | None = None
 
 
 @dataclass(frozen=True)
@@ -174,6 +230,75 @@ def _optional_text(value: object, what: str) -> str | None:
     return None if value is None else _text(value, what)
 
 
+ATTRIBUTION_UNITS = ("step-seconds", "test-seconds", "job-seconds")
+
+
+def _attribution_from(raw: object, where: str) -> Attribution | None:
+    if raw is None:
+        return None
+    entry = _require_mapping(raw, where)
+    unit = _text(entry.get("unit"), f"{where}.unit")
+    if unit not in ATTRIBUTION_UNITS:
+        raise BudgetError(f"{where}.unit is {unit!r}; expected one of {ATTRIBUTION_UNITS}")
+    raw_grew = entry.get("grew")
+    if not isinstance(raw_grew, list) or not raw_grew:
+        raise BudgetError(
+            f"{where}.grew must name the steps or files that grew; a cause with no costs is "
+            "a story, not an attribution"
+        )
+    grew: list[Growth] = []
+    for position, item in enumerate(raw_grew):
+        row = _require_mapping(item, f"{where}.grew[{position}]")
+        before = row.get("before")
+        if isinstance(before, bool) or not isinstance(before, (int, float)) or before < 0:
+            raise BudgetError(
+                f"{where}.grew[{position}].before must be a cost, found {before!r}"
+            )
+        grew.append(
+            Growth(
+                name=_text(row.get("name"), f"{where}.grew[{position}].name"),
+                before=float(before),
+                after=_positive(row.get("after"), f"{where}.grew[{position}].after"),
+            )
+        )
+    if sum(item.after - item.before for item in grew) <= 0:
+        raise BudgetError(f"{where}.grew names no growth, so it attributes no rise")
+    return Attribution(
+        cause=_text(entry.get("cause"), f"{where}.cause"),
+        unit=unit,
+        source=_text(entry.get("source"), f"{where}.source"),
+        grew=tuple(grew),
+    )
+
+
+def _history_from(raw: object, where: str) -> tuple[Record, ...]:
+    if raw is None:
+        return ()
+    if not isinstance(raw, list):
+        raise BudgetError(f"{where}.history must be a list of superseded records")
+    records: list[Record] = []
+    for position, item in enumerate(raw):
+        entry = _require_mapping(item, f"{where}.history[{position}]")
+        records.append(
+            # The same three keys the current record uses, so a record moves into history
+            # by being cut and pasted rather than retyped.
+            Record(
+                seconds=_positive(
+                    entry.get("measured_seconds"),
+                    f"{where}.history[{position}].measured_seconds",
+                ),
+                on=_text(entry.get("measured_on"), f"{where}.history[{position}].measured_on"),
+                where=_optional_text(
+                    entry.get("measured_where"), f"{where}.history[{position}].measured_where"
+                ),
+                attribution=_attribution_from(
+                    entry.get("attribution"), f"{where}.history[{position}].attribution"
+                ),
+            )
+        )
+    return tuple(records)
+
+
 def _tier_from(raw: object, index: int) -> TierBudget:
     entry = _require_mapping(raw, f"tiers[{index}]")
     tier_id = _text(entry.get("id"), f"tiers[{index}].id")
@@ -201,6 +326,8 @@ def _tier_from(raw: object, index: int) -> TierBudget:
         measured_seconds=measured,
         measured_on=measured_on,
         measured_where=_optional_text(entry.get("measured_where"), f"{where}.measured_where"),
+        history=_history_from(entry.get("history"), where),
+        attribution=_attribution_from(entry.get("attribution"), f"{where}.attribution"),
     )
 
 
@@ -219,6 +346,12 @@ def load(path: Path | None = None) -> Register:
         stale_ratio=_positive(policy_entry.get("stale_ratio"), "policy.stale_ratio"),
         min_wall_seconds=_positive(
             policy_entry.get("min_wall_seconds"), "policy.min_wall_seconds"
+        ),
+        max_unattributed_rise=_optional_positive(
+            policy_entry.get("max_unattributed_rise"), "policy.max_unattributed_rise"
+        ),
+        attribution_required_from=_optional_text(
+            policy_entry.get("attribution_required_from"), "policy.attribution_required_from"
         ),
     )
     raw_tiers = document.get("tiers")
@@ -277,6 +410,72 @@ def declaration_problems(register: Register) -> list[str]:
                 "time it runs"
             )
     return problems
+
+
+def rise_findings(
+    label: str, records: tuple[Record, ...], policy: Policy
+) -> tuple[list[str], list[str]]:
+    """(problems, grandfathered) for one record history: the ratchet rule.
+
+    Each record is compared with the lowest record since the last attributed one, not only
+    with its predecessor, so a ratchet of small steps adds up the way the large one did. A
+    fall needs no attribution; a rise past `max_unattributed_rise` does. An attributed
+    record starts the comparison afresh from itself.
+
+    A rise dated before `attribution_required_from` is returned in the second list rather
+    than the first: the register shows it, the rule did not exist for it, and it stays a
+    baseline for what comes after.
+    """
+    problems: list[str] = []
+    grandfathered: list[str] = []
+    ratio = policy.max_unattributed_rise
+    if ratio is None:
+        return [
+            f"{label}: policy.max_unattributed_rise is not declared, so no rise is checked"
+        ], []
+    for earlier, later in zip(records, records[1:], strict=False):
+        if later.on < earlier.on:
+            problems.append(
+                f"{label}: the record of {later.on} follows one of {earlier.on}; history is "
+                "oldest first, or no rise in it can be read"
+            )
+    base = 0
+    for index in range(1, len(records)):
+        record = records[index]
+        if records[index - 1].attribution is not None:
+            base = index - 1
+        floor = min(earlier.seconds for earlier in records[base:index])
+        rise = record.seconds / floor
+        if rise <= ratio or record.attribution is not None:
+            continue
+        finding = (
+            f"{label}: {record.seconds:g}s on {record.on} is {rise:.2f}x the lowest record "
+            f"since the last attributed one ({floor:g}s), where {ratio:g}x is the most a "
+            "record may rise without naming the per-step or per-file costs that grew and why"
+        )
+        required = policy.attribution_required_from
+        if required is not None and record.on < required:
+            grandfathered.append(f"{finding} -- dated before {required}, so shown, not failed")
+        else:
+            problems.append(
+                f"{finding}. Add an `attribution:` block (devtools.read_tier_walls)"
+            )
+    return problems, grandfathered
+
+
+def ratchet_problems(register: Register) -> tuple[list[str], list[str]]:
+    """The ratchet rule over every tier's record history."""
+    if register.policy.max_unattributed_rise is None:
+        return [
+            "policy.max_unattributed_rise is not declared, so no record's rise is checked"
+        ], []
+    problems: list[str] = []
+    grandfathered: list[str] = []
+    for tier in register.tiers:
+        found, old = rise_findings(f"tier {tier.id!r}", tier.records, register.policy)
+        problems.extend(found)
+        grandfathered.extend(old)
+    return problems, grandfathered
 
 
 def _named_steps(

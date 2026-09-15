@@ -2580,11 +2580,14 @@ def _pr_rollup(context: Context) -> str:
 
 
 def _gate_budgets(context: Context) -> str:
-    # Sub-second: it reads one register and compares two sets. Records tier because it
-    # checks the declaration rather than the clock -- that every tier this command can
-    # select carries a ceiling, and that no ceiling has drifted more than the declared
-    # headroom above the cost recorded for its tier. The run's own wall is checked
-    # separately, by `gate_budgets.judge`, at the end of every whole-tier run.
+    # Sub-second: it reads one register and two workflows. Records tier because it checks
+    # the declaration rather than the clock -- that every tier this command can select
+    # carries a ceiling, that no ceiling has drifted more than the declared headroom above
+    # the cost recorded for its tier, that every pull-request tier has a recorded cost,
+    # that no record rose without attribution, and that each pull-request wall budget is
+    # inside `OR-14` and still run. The run's own wall is checked separately, by
+    # `gate_budgets.judge` at the end of every whole-tier run and by
+    # `devtools/check_pr_wall.py` in each workflow's aggregating job.
     output = _module(context, "devtools.check_gate_budgets")
     _require_text(output, "gate budget declaration passed")
     return output
@@ -3791,10 +3794,15 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/check_gate_budgets.py",
+            "packing/devtools/check_pr_wall.py",
             "packing/devtools/gate-budgets.yaml",
             # The step also checks that the guide still names every tier, so editing the
             # guide has to be able to fail it.
             "development.md",
+            # And it reads which tiers a pull request runs, and whether each aggregator
+            # still runs the wall check, from the workflows themselves.
+            ".github/workflows/packing-validation.yml",
+            ".github/workflows/pages.yml",
         ),
     ),
     Step(
