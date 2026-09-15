@@ -3,14 +3,18 @@ type: is
 id: is-01m2h764pcbfwx0btxez85zdsq
 title: Extract JavaScript from the explainer, print and math tools and their tests
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 6
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:05.578Z
-updated_at: 2026-09-15T05:04:56.798Z
+updated_at: 2026-09-15T17:26:45.038Z
+closed_at: 2026-09-15T17:26:45.037Z
+close_reason: "Done in PR #181 (https://github.com/jlevy/squares/pull/181): 324 sites in 25 files extracted, allowlist entries removed, identity evidence in the PR"
+resolution: null
+duplicate_of: null
 ---
 Extract every JavaScript string from the explainer, print and math tooling into probe files, with behaviour unchanged. About 1,700 lines in:
 
@@ -32,3 +36,5 @@ check_math_startup.py is 5 sites, not 3 lines: a ~400-line init script built by 
 check_published_site.py is already done in #175.
 
 2026-09-15, #175 merge-up of the reviewed stack (#171 at b7627cef) into 9f88e4a7: the guard's inventory still counts 324 sites in 25 files for this bead. The stack added no site here and removed none. The whole allowlist is now 460 sites in 42 files, down from 477 in 48. The name check on devtools.check_probes is stricter now: every literal handed to a loader beside packing/tests/probes or packing/devtools/probes must name a file, so a test that needs a missing name holds it in a variable.
+
+2026-09-15, PR #181 (claude/no-js-explainer-tools, stacked on #179): all 324 sites in the 25 files are gone and their allowlist entries removed; with #178 and #179 the allowlist is empty. 138 probe files, 37 Node scripts (packing/tests/node/, devtools/node/check-katex.mjs), 7 fixtures. Shared helpers are one reference probe, probes/math/library.js, passed as a JSHandle or installed for init scripts by MATH_LIBRARY_INIT; composition never splices text. Identity: prepare_math_html output byte-identical (d473772b); the final page differs only by the host adapter's Biome-formatted text (restoring the old text reproduces d473772b); the PDF from the base page is byte-identical and from the final page differs only in its source-HTML receipt; print-layout, typography, sans-instance, math-font, reload and KaTeX reports byte-identical after path normalisation; timing reports differ only in named timing fields. Floor exception: packing/tests/fixtures/browser-floor (three must-fail samples), declared in DECLARED_BIOME_EXCLUSIONS with a single biome.json includes entry. Nothing deleted instead of extracted. Left open: the shell template's inline page scripts (explainer-shell.html) are outside Biome, as before.
