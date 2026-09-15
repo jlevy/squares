@@ -5,11 +5,11 @@ title: The suite tier runs at its 275 s ceiling on main and the stack; fix it by
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-15T04:04:14.381Z
-updated_at: 2026-09-15T04:04:14.381Z
+updated_at: 2026-09-15T04:59:29.984Z
 ---
 The pull-request `suite` job (`packing-validate --suite`, one step: `fast behavioral tests`) runs against its 275 s ceiling on `main`'s own PRs and across the workbench stack. Its recorded cost, 183.44 s, is stale.
 
@@ -36,3 +36,7 @@ Fix by measurement, per `OR-13` and `OR-14`, not by rerunning until it passes:
 3. Record the new reading in `packing/devtools/gate-budgets.yaml`.
 
 This is `main`'s infrastructure. The stack only adds tests, so the fix belongs on `main` (see also `think-lrs0` for the `checks` tier, fixed there by #174).
+
+## Notes
+
+**2026-09-14, the same test count at 72%.** #171 at `b7627cef` (run 34930296150) ran the same 6,041 tests in 198.22 s (72%), an hour after #160's 274.81 s (100%). The spread on one test count is 77 s, 28% of the ceiling, so the ceiling is inside runner variance. That argues for sharding or a second runner rather than trimming tests.
