@@ -167,16 +167,35 @@ class Poly:
     # -- calculus and evaluation -------------------------------------------
 
     def evaluate(self, point: Sequence[FieldElement]) -> FieldElement:
-        """Exact value at one chart point."""
+        """Exact value at one chart point.
+
+        A term carrying a positive power of an exactly-zero coordinate is exactly zero, so
+        it is skipped rather than multiplied out, and each power is computed once per call.
+        Neither changes the value, because field arithmetic is exact and its coefficients
+        are canonical. Both matter because most points the audit and the probe evaluate
+        are the origin with one or two coordinates moved. Evaluation was 55s of the 61s
+        `assess` profile behind the `determination` fixture in `test_n5_local_rigidity.py`
+        (28-37s on CI); with this, `assess` ran in 4.8s against 54s back to back on one
+        machine, and its receipt digest did not move.
+        """
         if len(point) != self.arity:
             raise ArityError(f"point has {len(point)} coordinates, not {self.arity}")
+        zero = [coordinate.is_zero() for coordinate in point]
+        powers: dict[tuple[int, int], FieldElement] = {}
         total = self.field.zero
         for exponents, coefficient in self.terms.items():
             term = coefficient
             for index, power in enumerate(exponents):
-                if power:
-                    term = term * (point[index] ** power)
-            total = total + term
+                if not power:
+                    continue
+                if zero[index]:
+                    break
+                factor = powers.get((index, power))
+                if factor is None:
+                    factor = powers[index, power] = point[index] ** power
+                term = term * factor
+            else:
+                total = total + term
         return total
 
     def derivative(self, index: int) -> Poly:

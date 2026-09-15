@@ -530,7 +530,6 @@ def test_the_local_reduction_agrees_with_full_feasibility_inside_the_neighborhoo
     assert "boundary" in audit.sample_is_not_adversarial
 
 
-@pytest.mark.usefixtures("determination")
 def test_the_mathematical_inputs_are_declared_rather_than_implied() -> None:
     """The boundary between what is computed and what is cited is written down."""
     from sqpack.local_rigidity.instrument import (  # noqa: PLC0415 - record, not behaviour

@@ -7,13 +7,16 @@
 from __future__ import annotations
 
 import ast
+import functools
 import hashlib
 import importlib.util
 import json
 import math
 import os
+import re
 import subprocess
 import sys
+from collections.abc import Iterator, Sequence
 from copy import deepcopy
 from fractions import Fraction
 from pathlib import Path
@@ -259,6 +262,33 @@ def _set_path(root: dict[str, object], path: tuple[str | int, ...], value: objec
         cast(list[object], current)[cast(int, path[-1])] = value
 
 
+def _execution_blobs(paths: Sequence[str]) -> list[tuple[str, bytes]]:
+    """Each path's object id and bytes at the execution revision, from one `git` process.
+
+    One `cat-file --batch` stands in for a `show` and a `rev-parse` per path, which were 46
+    processes in every xdist worker's build of the profile.
+    """
+    request = "".join(f"{EXECUTION_REVISION}:{path}\n" for path in paths).encode()
+    stream = subprocess.run(
+        ("git", "cat-file", "--batch"),
+        cwd=REPOSITORY,
+        input=request,
+        check=True,
+        capture_output=True,
+    ).stdout
+    blobs: list[tuple[str, bytes]] = []
+    offset = 0
+    for path in paths:
+        header_end = stream.index(b"\n", offset)
+        blob, kind, size = stream[offset:header_end].decode().split(" ")
+        assert kind == "blob", path
+        start = header_end + 1
+        blobs.append((blob, stream[start : start + int(size)]))
+        offset = start + int(size) + 1
+    assert offset == len(stream)
+    return blobs
+
+
 def _build_profile(output: Path) -> dict[str, object]:
     output.mkdir()
     candidate_data = _write(output / "candidate.json", _candidate(), indent=1)
@@ -352,28 +382,12 @@ def _build_profile(output: Path) -> dict[str, object]:
             "record_path": filename,
             "record_sha256": hashlib.sha256(data).hexdigest(),
         }
-    manifest = []
-    for relative in SOURCE_PATHS:
-        frozen = subprocess.run(
-            ("git", "show", f"{EXECUTION_REVISION}:{relative}"),
-            cwd=REPOSITORY,
-            check=True,
-            capture_output=True,
-        ).stdout
-        blob = subprocess.run(
-            ("git", "rev-parse", f"{EXECUTION_REVISION}:{relative}"),
-            cwd=REPOSITORY,
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
-        manifest.append(
-            {
-                "path": relative,
-                "git_blob": blob,
-                "sha256": hashlib.sha256(frozen).hexdigest(),
-            }
+    manifest = [
+        {"path": relative, "git_blob": blob, "sha256": hashlib.sha256(frozen).hexdigest()}
+        for relative, (blob, frozen) in zip(
+            SOURCE_PATHS, _execution_blobs(SOURCE_PATHS), strict=True
         )
+    ]
     origin = 10.0
     settings = {
         "requested_workers": 1,
@@ -605,6 +619,41 @@ def _build_profile(output: Path) -> dict[str, object]:
     (output / "result.json").touch()
     _publish_receipt(output, receipt)
     return receipt
+
+
+_OBJECT_ADDRESSED = re.compile(r"[0-9a-f]{40}(?::.+)?")
+
+
+@pytest.fixture(scope="module", autouse=True)
+def _share_pure_reader_lookups() -> Iterator[None]:
+    """Memoize the reader's two pure lookups across this module's reads, and nothing else.
+
+    A full read spawns about seventy `git` processes, all but one naming an object by id,
+    and replays 14,404 membership charges that every mutated copy shares with the baseline.
+    Sixteen quick tests make such a read, at 3.4-5.8s each on CI. Both lookups are
+    functions of immutable inputs, so sharing them changes no outcome: a refusal raises
+    before anything is stored, a query naming `HEAD` is never stored, and each worker's
+    first read runs every lookup for real, so a defect in either is what gets shared.
+    Deliberately defective charges and a disabled reader-bytes binding both still fail
+    this module with the memo in place.
+
+    What is not shared is every read of the profile's files, since the tests rewrite them.
+    """
+    git = reader._git
+
+    @functools.cache
+    def pinned(repository: Path, arguments: tuple[str, ...], *, binary: bool) -> bytes | str:
+        return git(repository, *arguments, binary=binary)
+
+    def shared(repository: Path, *arguments: str, binary: bool = False) -> bytes | str:
+        if _OBJECT_ADDRESSED.fullmatch(arguments[-1]):
+            return pinned(repository, arguments, binary=binary)
+        return git(repository, *arguments, binary=binary)
+
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(reader, "_git", shared)
+        patch.setattr(reader, "_charge", functools.cache(reader._charge))
+        yield
 
 
 @pytest.fixture(scope="module")
