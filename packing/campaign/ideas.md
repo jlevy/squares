@@ -567,6 +567,18 @@ prospectively compare complete C and S first-owner strip minima from one admitte
 exp-158 receipt. They do not register the complete actual-S condition.
 H-160/exp-158 remain frozen and unrun.
 
+## Route S Fixed-Support Compression — X-032
+
+[X-032](explorations/X-032-route-s-threshold-compression.md) freezes Route S before any
+compression target. T-025 supplies one exact support universe with 79 point-atom and 40
+two-of-three threshold-atom D4 orbits; weights may change or become zero, while every
+coordinate, threshold triple, domain parameter, and symmetry image remains fixed.
+T-026 is only a support-and-rescaling provenance sentinel.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 166 | Compress T-025 on its exact support universe to at most 23 positive D4 orbits | registered | [H-163](hypotheses/H-163-route-s-threshold-compression.md) | A literal fivefold reduction from T-025’s 119 positive orbit representatives requires `N+ <= 23`. Confirmation also requires exact budget below eleven, agreement of the unchanged complete coverage routes, deterministic decompression, and source-distinct replay. The admission branch allocates no experiment and runs no target. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

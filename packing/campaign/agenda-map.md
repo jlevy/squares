@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **7** in_progress, **16** ready, **20** tentative, **64** blocked, **59** stopped, **177** complete.
+- **8** in_progress, **15** ready, **20** tentative, **64** blocked, **59** stopped, **177** complete.
 
 - **23 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -53,7 +53,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
-| agenda-036 | `BC-343` | ready | 0 | insight | research | Can the T-025/T-026 witness at side 3.82 be compressed into a small exact certificate described by a few… | `think-a1e8` |
+| agenda-036 | `BC-343` | in_progress | 0 | insight | research | Does T-025's exact atom-support universe admit a certificate at side 3.82 with at most 23 positive D4-orbit… | `think-a1e8` |
 | agenda-036 | `BC-341` | tentative | 1 | insight | research | At side 3.84, can one complete difficult occupancy or wall-contact root family be closed by proved capacity… | `think-9y6q` |
 | agenda-036 | `BC-342` | tentative | 1 | insight | research | Does a sound theta-prime or level-two pairwise relaxation pass the n=6 formulation controls and improve… | `think-ol1z` |
 | agenda-036 | `BC-348` | tentative | 1 | insight | research | Do H-131's proved aggregate angle-count caps, admitted as coherent global resources, remove the retained… | `think-u15l` |
@@ -191,7 +191,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-032 | completed |  |  |  |  |  | 6 | 6 |
 | agenda-033 | completed |  |  |  |  | 1 | 8 | 9 |
 | agenda-035 | paused |  |  |  | 4 | 2 | 8 | 14 |
-| agenda-036 | active |  | 1 | 9 |  |  | 6 | 16 |
+| agenda-036 | active | 1 |  | 9 |  |  | 6 | 16 |
 
 ## By program
 
@@ -363,7 +363,6 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-036 | `BC-340` | complete | Does the four-to-eight-block cadence make an efficiency checkpoint due, and if so what one… |
 | agenda-036 | `BC-353` | complete | After the due efficiency checkpoint, which one scientific route has the highest information value… |
 | agenda-036 | `BC-342` | tentative | Does a sound theta-prime or level-two pairwise relaxation pass the n=6 formulation controls and… |
-| agenda-036 | `BC-343` | ready | Can the T-025/T-026 witness at side 3.82 be compressed into a small exact certificate described by… |
 | agenda-036 | `BC-344` | tentative | Can a robust orientation-class theorem rule out every two-orientation packing below Trump's… |
 | agenda-036 | `BC-345` | tentative | What competing local optima appear under a serious orientation-profile-organized n=11 search, and… |
 | agenda-036 | `BC-348` | tentative | Do H-131's proved aggregate angle-count caps, admitted as coherent global resources, remove the… |
@@ -373,8 +372,9 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-036 | `BC-352` | tentative | Can joint-parent geometry lower the ordinary budget of one atom by proving that two simultaneous… |
 | agenda-036 | `BC-354` | complete | Can one complete same-corner availability-blocker root at side 96/25 be frozen with shared physical… |
 | agenda-036 | `BC-341` | tentative | At side 3.84, can one complete difficult occupancy or wall-contact root family be closed by proved… |
+| agenda-036 | `BC-343` | in_progress | Does T-025's exact atom-support universe admit a certificate at side 3.82 with at most 23 positive… |
 
-Open frontier: `BC-342`, `BC-343`, `BC-344`, `BC-345`, `BC-348`, `BC-349`, `BC-350`, `BC-351`, `BC-352`, `BC-341`.
+Open frontier: `BC-342`, `BC-344`, `BC-345`, `BC-348`, `BC-349`, `BC-350`, `BC-351`, `BC-352`, `BC-341`, `BC-343`.
 
 ### `n11-structure-and-conditional-dots`
 

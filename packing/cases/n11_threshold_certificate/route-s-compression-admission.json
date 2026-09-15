@@ -1,0 +1,59 @@
+{
+  "control": {
+    "atoms": 904,
+    "catalog_sha256": "8de1d9646efef5c49367b679a78ff20961f7f5c1d43b11ff28b5f9a6b41f0e75",
+    "n": 11,
+    "orbits": 119,
+    "outer_side": "191/50",
+    "path": "packing/cases/n11_threshold_certificate/certificate.json",
+    "point_atoms": 584,
+    "point_orbits": 79,
+    "role": "matched T-025 control",
+    "sha256": "3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f4bad5c",
+    "square_side": "9977/10000",
+    "symmetry": "D4",
+    "threshold_atoms": 320,
+    "threshold_orbits": 40,
+    "total_budget": "685457679/62500000"
+  },
+  "execution_boundary": {
+    "candidate_created": false,
+    "coverage_ran": false,
+    "experiment_created": false,
+    "optimizer_ran": false,
+    "target_ran": false
+  },
+  "family": {
+    "baseline_orbits": 119,
+    "catalog_schema": "packing.squares:ThresholdOrbitCatalog/v1",
+    "geometry_rule": "select source orbit representatives without moving sites",
+    "kind": "fixed-source-support D4-orbit selection",
+    "max_orbits": 23,
+    "minimum_compression_factor": "5",
+    "park_rule": "park only this fixed-source-support family after exact infeasibility or retained counterexample cells; do not refute Route S",
+    "selection_unit": "one complete source D4 orbit",
+    "success_rule": "at most 23 selected orbits and compression factor at least 5, followed on a later branch by unchanged exact budget and complete coverage replay",
+    "weight_rule": "one positive exact rational weight per selected orbit"
+  },
+  "quantization_control": {
+    "budget_below_n": true,
+    "denominator": 30000,
+    "direction": "upward",
+    "role": "arithmetic control only; not support-compression success",
+    "rounded_budget": "82373/7500"
+  },
+  "schema": "packing.squares:ThresholdCompressionAdmission/v1",
+  "sentinel": {
+    "catalog_sha256": "43c2b94f932bb233c71191940447a6d761387041637dab72c9a1a5ed89aea925",
+    "common_weight_scale": "500000000/498684619",
+    "path": "packing/cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json",
+    "point_support_equal": true,
+    "role": "T-026 support and rescaling sentinel",
+    "sha256": "04fd6bbca1941671ddbabbe359219011b8217818b0a291f4c9a00f5fa7834f8e",
+    "source_path": "packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json",
+    "source_sha256": "dc2da20c75d952690c93d67fb4b3eb8552e879585902fde98eedc9b3179ed3d0",
+    "support_equal": true,
+    "threshold_support_equal": true,
+    "weights_have_common_scale": true
+  }
+}

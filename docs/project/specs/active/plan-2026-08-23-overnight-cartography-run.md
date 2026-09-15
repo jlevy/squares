@@ -341,15 +341,15 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, run BC-343 under `think-a1e8` as a separate
-no-target Route S admission pull request.
-BC-354 stopped at Route A’s representation boundary without running a target or closing
-a physical root. The Route S admission must freeze T-025/T-026 as the unchanged control,
-an at-most-23 active-orbit ceiling or another independently quantified complexity
-metric, one template family, mutation controls, unchanged exact replays, and an
-accept-or-park rule before optimization.
-BC-341 remains tentative behind a future W10 reselection and the complete Route A
-representation it still lacks.
+For the next supervised exact-research goal, continue BC-343 through `think-r55v`, its
+guard-discharge and certification child, on the separate no-target Route S admission
+pull request. BC-354 stopped at Route A’s representation boundary without running a
+target or closing a physical root.
+The Route S admission must freeze T-025/T-026 as the unchanged control, an at-most-23
+active-orbit ceiling or another independently quantified complexity metric, one template
+family, mutation controls, unchanged exact replays, and an accept-or-park rule before
+optimization. BC-341 remains tentative behind a future W10 reselection and the complete
+Route A representation it still lacks.
 The current evidence, candidate dispositions, and post-W5 scientific order are in the
 synopsis’s
 [Research Program Status and Roadmap](../../../../SYNOPSIS.md#research-program-status-and-roadmap),

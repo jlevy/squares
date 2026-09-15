@@ -2185,6 +2185,13 @@ def _threshold_limit_record_1440(context: Context) -> str:
     return _threshold_limit_record(context, 1440, "t-026-dilation-limit-corollary.json")
 
 
+def _threshold_compression_admission(context: Context) -> str:
+    """Replay Route S's cheap, target-blind admission contract."""
+    output = _module(context, "devtools.admit_threshold_compression", "--check")
+    _require_text(output, "Route S compression checkpoint check passed")
+    return output
+
+
 def _verifier_limits(context: Context) -> str:
     output = _module(context, "cases.trump11.verifier_limits")
     _require_text(output, "delta = 1e-100  REJECT", "tol=1e-09")
@@ -3290,6 +3297,20 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/decide_certificate.py",
             "packing/devtools/generate_known_best_n011_rational_control.py",
             "packing/devtools/check_rational_witness_independent.py",
+        ),
+    ),
+    Step(
+        "Route S compression admission checkpoint is consistent",
+        _threshold_compression_admission,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/cases/n11_threshold_certificate/certificate.json",
+            "packing/cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json",
+            "packing/cases/n11_threshold_certificate/route-s-compression-admission.json",
+            "packing/cases/n11_threshold_certificate/route-s-compression-admission-receipt.json",
+            "packing/devtools/admit_threshold_compression.py",
         ),
     ),
     # The whole grid replay, off the pull-request surface since 2026-09-07 and on its own

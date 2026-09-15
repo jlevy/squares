@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "path": "packing/cases/n11_threshold_certificate/route-s-compression-admission.json",
+    "sha256": "47af305e008e56dea6aab64ad17da887a300f455de7da9b848fc87734e0fccb1"
+  },
+  "admission_blockers": [
+    "pin all T-025/T-026 digests outside the mutable admission record",
+    "bind both the 720-step and 1440-step T-026 provenance sentinels",
+    "admit a canonical selection-manifest parser and serializer",
+    "exercise every mutation refusal declared by X-032"
+  ],
+  "candidate_created": false,
+  "control": {
+    "atoms": 904,
+    "catalog_sha256": "8de1d9646efef5c49367b679a78ff20961f7f5c1d43b11ff28b5f9a6b41f0e75",
+    "decompressor_roundtrip": {
+      "atoms": 904,
+      "canonical_equivalent": true,
+      "catalog_sha256": "8de1d9646efef5c49367b679a78ff20961f7f5c1d43b11ff28b5f9a6b41f0e75",
+      "orbits": 119,
+      "role": "full authenticated T-025 decompressor control",
+      "total_budget": "685457679/62500000"
+    },
+    "orbits": 119,
+    "path": "packing/cases/n11_threshold_certificate/certificate.json",
+    "reproduced": true,
+    "sha256": "3935651af614eb3e9a1926179925f98643beb17ed1764a323fe83a527f4bad5c",
+    "support_keys": 119,
+    "total_budget": "685457679/62500000"
+  },
+  "coverage_ran": false,
+  "experiment_created": false,
+  "optimizer_ran": false,
+  "quantization_control": {
+    "budget_below_n": true,
+    "denominator": 30000,
+    "research_success": false,
+    "rounded_budget": "82373/7500",
+    "support_changed": false
+  },
+  "schema": "packing.squares:ThresholdCompressionAdmissionReceipt/v1",
+  "scope": "Incomplete instrument checkpoint only. Admission is blocked; no coverage, optimizer, candidate certificate, compression verdict, or improved n=11 bound is established.",
+  "sentinel": {
+    "common_weight_scale": "500000000/498684619",
+    "path": "packing/cases/n11_threshold_certificate/t-026-dilation-limit-corollary.json",
+    "point_support_equal": true,
+    "reproduced": true,
+    "sha256": "04fd6bbca1941671ddbabbe359219011b8217818b0a291f4c9a00f5fa7834f8e",
+    "source_path": "packing/cases/n11_threshold_certificate/certificate-191-50-net1440.json",
+    "source_sha256": "dc2da20c75d952690c93d67fb4b3eb8552e879585902fde98eedc9b3179ed3d0",
+    "support_equal": true,
+    "threshold_support_equal": true,
+    "weights_have_common_scale": true
+  },
+  "status": "blocked",
+  "synthetic_decompressor": {
+    "baseline_orbits": 119,
+    "compression_factor": "119/23",
+    "coordinate_parameters": 50,
+    "decompressed_budget": "23/3750",
+    "decompressed_point_atoms": 176,
+    "decompressed_threshold_atoms": 8,
+    "distinct_weights": 1,
+    "expanded_atoms": 184,
+    "meets_compression_factor": true,
+    "point_orbits": 22,
+    "role": "target-blind decompressor control",
+    "satisfies_policy": true,
+    "selected_orbits": 23,
+    "synthetic_weight": "1/30000",
+    "threshold_orbits": 1,
+    "threshold_templates": 1,
+    "within_orbit_ceiling": true
+  },
+  "target_ran": false
+}

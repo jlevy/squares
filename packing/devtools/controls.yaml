@@ -213,7 +213,7 @@ controls:
 
 - name: synopsis - hypothesis status row drifting from the ledger
   file: ../SYNOPSIS.md
-  replace: ["| Hypotheses | 138 |", "| Hypotheses | 0 |"]
+  replace: ["| Hypotheses | 139 |", "| Hypotheses | 0 |"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "research-status row 'Hypotheses'"
 
@@ -1292,9 +1292,9 @@ controls:
 
 - name: synopsis handoff - selected entry is replaced by another bead
   file: ../SYNOPSIS.md
-  replace: ["**Selected next entry:** `think-a1e8`", "**Selected next entry:** `think-cyko`"]
+  replace: ["**Selected next entry:** `think-r55v`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
-  expect: "exactly one canonical Selected next entry marker for think-a1e8"
+  expect: "exactly one canonical Selected next entry marker for think-r55v"
 
 - name: session handoff - observed end precedes its start
   file: campaign/agent-sessions/session-128-research-state-rollup.md

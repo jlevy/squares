@@ -1,6 +1,6 @@
 # N11: Daytime Strategy Blocks and Parallel Explainer Update
 
-**Active plan, September 10, 2026; updated September 14.** This plan replaces the
+**Active plan, September 10, 2026; updated September 15.** This plan replaces the
 uninterrupted overnight schedule with shorter blocks that can start and stop during the
 day. Each research block gets its own session clock, falsifiable output, stop rule, and
 closeout. A later block is selected from the evidence produced by the earlier ones; gaps
@@ -122,11 +122,20 @@ BC-353 selected Route A and is terminal.
 BC-354 stopped at Route A’s representation boundary without running a target or closing
 a physical root; the complete 80-stratum negative-root producer, matched exact baseline,
 conditional gate, and independent replay remain absent.
-BC-343 / `think-a1e8` is the sole next entry.
-Its first pull request is a no-target Route S admission that freezes T-025/T-026 as the
-unchanged control, the at-most-23 active-orbit ceiling or another predeclared metric,
-one template family, mutation controls, unchanged exact replays, and the accept-or-park
-rule before optimization.
+BC-343 / `think-a1e8` remains the active research commitment; its guard-discharge and
+certification child `think-r55v` is the sole next entry.
+Its first pull request is a no-target Route S admission.
+[X-032](../../../../packing/campaign/explorations/X-032-route-s-threshold-compression.md)
+freezes T-025 as the sole matched control, its exact 79 point-orbit and 40
+two-of-three-threshold-orbit support universe, and the at-most-23 positive-orbit
+criterion.
+[H-163](../../../../packing/campaign/hypotheses/H-163-route-s-threshold-compression.md)
+registers the later scientific claim.
+T-026 is only a support-and-rescaling provenance sentinel.
+Session 134’s independent review refused the first admission checkpoint pending
+immutable T-025/T-026 digest anchors, both T-026 sentinels, a canonical
+selection-manifest boundary, and the complete X-032 mutation matrix.
+The draft admission PR contains no optimizer, candidate, coverage target, or `exp-161`.
 BC-341 remains tentative behind a future W10 reselection and the missing Route A
 representation.
 

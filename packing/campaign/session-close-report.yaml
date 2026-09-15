@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 133
+count: 134
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 85
+  sessions_measured: 86
   sessions_unmeasured: 48
   attributed:
     rollups: 129
@@ -35,9 +35,9 @@ totals:
     one_off_code: 4407
     wall_hours: 421.83
 codex_receipts:
-  attributed: 53
+  attributed: 54
   unattributed: 2
-  measured: 55
+  measured: 56
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -2220,4 +2220,24 @@ sessions:
     agent_hours: 0.37
     active_union_hours: 0.2
     wall_hours: 13.6
+    snapshot_incomplete: true
+- id: session-134
+  title: "N11 Route S Compression Admission"
+  status: stopped
+  primary_bead: think-a1e8
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-134.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-134.yaml
+    model_responses: 497
+    agent_hours: 4.88
+    active_union_hours: 1.21
+    wall_hours: 1.21
     snapshot_incomplete: true
