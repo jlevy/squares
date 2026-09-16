@@ -5,12 +5,15 @@ title: "Workbench motion: gentle, smooth, chunking, and a setting for the append
 kind: task
 status: open
 priority: 1
-version: 2
+version: 5
 labels: []
 dependencies: []
 parent_id: is-01m2gyhqfmr0xpcjsr34na3acq
+child_order_hints:
+  - is-01m2nhc3zsdr07t84vxt8xy3qf
+  - is-01m2nhcg6g9a6k67dsz5n7363v
 created_at: 2026-09-16T03:08:21.501Z
-updated_at: 2026-09-16T03:10:49.081Z
+updated_at: 2026-09-16T16:40:06.780Z
 ---
 Owner feedback on the published page, 2026-09-15:
 
@@ -44,4 +47,8 @@ Changing these defaults moves the physics again: X-034 and H-211 already say no 
 
 ## Notes
 
-**2026-09-16:** `attic/motion-measure.js` lives in a gitignored directory, so it dies with the worktree. When this work resumes, commit the measurement as a probe file under the package's `probes/` (the repository forbids JavaScript in Python, and a measurement tool is a tool: `OR-1`), so the before-and-after numbers can be reproduced by anyone.
+2026-09-16: attic/motion-measure.js lives in a gitignored directory, so it dies with the worktree. When this work resumes, commit the measurement as a probe file under the package probes directory; OR-1 requires a reusable tool.
+
+2026-09-16 current-main diagnosis at a4f801e8: Not fixed. PRs #180 and #181 did not change the simulation. Pack uses force-law substeps, but Animate buildTrajectory does not. Current-corpus reproduction: 16 to 17 rigid reaches 0.3699 square widths per stored step, 0.7399 second difference, 945 reversals and 0.6484 penetration; the helper-required two finer steps reduce this to 0.1617, 0.0754, zero reversals and 0.0558. 89 to 90 falls from 7,832 reversals to 3. The cap-to-cap pattern identifies stiff-spring ringing plus maxSpeed, not missing renderer interpolation.
+
+Two mergeable children own the fix: think-o4wo stabilizes Animate and adds continuity budgets; think-5tyy makes the controls truthful and setting changes continuous. The architectural constraint/projection follow-up remains think-r2qd.
