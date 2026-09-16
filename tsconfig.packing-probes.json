@@ -1,0 +1,16 @@
+{
+  // The probes the Python tools under `packing/` run in a page: one JavaScript expression per
+  // file, loaded by `sqpack.probes`. They share a program because none of them declares
+  // anything at the top level, so no two can collide. Page globals a probe reads are declared
+  // in a `.d.ts` beside it; `window.atlasTransitions` is the workbench's own declaration,
+  // read from where the workbench's probes are checked against it.
+  //
+  // No relaxations: these files are new, and new files land under the strict floor
+  // (floor rule 8). The relaxed programs are the ones files move out of.
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "packing/**/probes/**/*.js",
+    "packing/**/probes/**/*.d.ts",
+    "packages/workbench/probes/atlas-transitions.d.ts"
+  ]
+}

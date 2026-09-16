@@ -68,6 +68,7 @@ name: Certificate page
       - package-lock.json
       - packages/workbench/**
       - packing/devtools/check_published_site.py
+      - packing/devtools/probes/check_published_site/**
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
   # On a pull request the page is built but not deployed, so a change that
@@ -114,6 +115,7 @@ name: Certificate page
       - package-lock.json
       - packages/workbench/**
       - packing/devtools/check_published_site.py
+      - packing/devtools/probes/check_published_site/**
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
 

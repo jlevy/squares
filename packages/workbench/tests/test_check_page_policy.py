@@ -8,11 +8,11 @@ from __future__ import annotations
 
 import pytest
 
+from sqpack.probes import applied
 from workbench_tools.build_site import CONTENT_SECURITY_POLICY, POLICY_META
 from workbench_tools.check_page_policy import (
     FONTS_REFUSED,
     PolicyRun,
-    applied,
     faults,
     with_policy,
 )

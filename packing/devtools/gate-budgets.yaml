@@ -171,11 +171,11 @@ tiers:
   # quick lane sizes itself from, not what the tier of machine is nominally sold as.
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
-    Since 2026-09-06 no CI job runs this tier whole: a pull request runs `checks`,
-    `suite` and `sweeps` concurrently and this is their union, so the record below is the
-    last figure CI took of it and the three parts are where the live bands now are. It is
+    Since 2026-09-06 no CI job runs this tier whole: a pull request now runs `checks`,
+    `frontend`, `geometry`, `suite_a`, `suite_b`, and `sweeps` concurrently, and this is
+    their union. The six parts are where the live bands now are. It is
     still a real tier -- it is what a contributor runs before a block boundary, and it is
-    the thing the three parts have to add up to -- which is why it keeps a ceiling rather
+    the thing the six parts have to add up to -- which is why it keeps a ceiling rather
     than being retired.
     The edit tier plus the behavioural tests under the per-test ceiling: every floor,
     every record check, and the quick lane. What it excludes is a rule rather than a list
@@ -210,8 +210,9 @@ tiers:
   # Re-argued twice on 2026-09-06, and the second time is the one worth reading, because
   # it is the reading that refused the obvious move.
   #
-  # When the behavioural lane left for `suite` this tier was 57 steps of pure
-  # outer-parallel work with nothing large enough to floor it, so it was given the freed
+  # When the behavioural lane first left for the former `suite` job, this tier was 57
+  # steps of pure outer-parallel work with nothing large enough to floor it, so it was
+  # given the freed
   # cpu: `--jobs 4` on a four-cpu runner. Run 34016999060 priced that at 198.22s of tier
   # wall over roughly 790 worker-seconds, against 221.70s for the three-worker job that
   # still had the 142.43s lane inside it. Removing the largest step on the surface and
@@ -318,17 +319,17 @@ tiers:
   measured_where: null
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
-    The part of the pull-request surface that is none of the other three: every floor,
+    The part of the pull-request surface that is none of the other five: every floor,
     every record check, and everything that needs the Rust engine. That last clause is a
     rule rather than an accident -- `_build_engine` puts a serial `cargo build --release`
     in front of every step of any job that selects an engine step, so keeping all three
-    engine steps and the Rust lint floor here is what stops the fourth job paying for a
-    toolchain it never uses. It is 48 steps of pure outer-parallel work at `--jobs 3`,
+    engine steps and the Rust lint floor here stops every other job paying for a toolchain
+    it never uses. It is 50 steps of pure outer-parallel work at `--jobs 3`,
     which is three units on four cpus and one cpu of headroom, and its wall is step time
-    divided rather than any one step's own cost. `checks`, `geometry`, `suite` and
-    `sweeps` are a partition of `--fast` by construction in `_select_steps`, and
-    `test_the_pull_request_jobs_partition_the_surface` checks that the workflow really
-    invokes all four. What the fourth job bought is on the `geometry` entry below.
+    divided rather than any one step's own cost. `checks`, `frontend`, `geometry`,
+    `suite_a`, `suite_b`, and `sweeps` are a partition of `--fast` by construction in
+    `_select_steps`, and `test_the_pull_request_jobs_partition_the_surface` checks that
+    the workflow invokes all six. What the geometry split bought is on its entry below.
 
 - id: frontend
   command: packing-validate --frontend
@@ -417,112 +418,43 @@ tiers:
     `test_the_pull_request_runs_its_sweeps_and_its_suite_apart` is where a tenth name has
     to be typed next to a number.
 
-- id: suite
-  command: packing-validate --suite
-  # One step, so this ceiling is a step's ceiling and not a queue's. On CI (run
-  # 34010470187) the lane cost 142.43s inside `checks` at two xdist workers, which is what
-  # `_pytest_workers`' `cpus - jobs + 1` gives it beside 57 other steps at `--jobs 3`. On
-  # its own runner at `--jobs 1` the same formula gives four workers and nothing to
-  # contend with, and BC-218's measurement of the same lane on a four-core box was 306.4s
-  # in one process against 135.0s at `-n 4`. So this job should land near 90-110s on CI.
-  #
-  # 240s is the band, and it is set against the *old* figure rather than the new
-  # prediction on purpose: 1.68x of the 142.43s this step already cost in a slower
-  # configuration. A lane that ever runs longer with twice the workers than it did with
-  # two has regressed in a way worth failing for, and a lane that grows a test at a time
-  # has room before it gets there. It is also under the 306s the lane costs in one
-  # process, so losing xdist altogether fails here rather than passing quietly.
-  #
-  # Local, 2026-09-06, at this shape on a four-cpu box with other agent lanes running
-  # beside it: 99.83s over 2,146 tests and 130.08s over 2,152 an hour later, both with no
-  # test at or above the per-test ceiling. That last part is the second thing this
-  # configuration had to prove and the more important one, since `BC-218`'s objection to
-  # four workers was the ceiling rather than the clock: nineteen ordinary tests went over
-  # it when the lane asked for every cpu beside two other steps, and none does when it
-  # asks for every cpu with nothing beside it.
-  #
-  # The same lane on the same box measured 256.00s at one worker and 205.22s at two, so
-  # four are worth about 2.6x against one here. The two readings 30 per cent apart are
-  # why 240s is not tightened to the faster of them: that is what a shared box does to a
-  # wall, and a band set to a good day fails on an ordinary one.
-  #
-  # 2026-09-07: the corpus tripled (n = 1..324) and the lane's tests that iterate it grew
-  # with it. The first hosted reading at the reference shape, run 34133437296, was
-  # 162.62s, all tests passing, which failed the drift rule against the 102.83s record
-  # (1.58x) rather than the ceiling. The record became that reading; the ceiling moved
-  # to 260s, 1.6x the reading and under the 2x headroom rule, because the same lane had
-  # shown a 1.52x hosted spread and a band set to one reading fails on an ordinary day.
-  #
-  # 2026-09-08 (think-uwow): two consecutive hosted runs of the then 4,283-test lane
-  # cost 158.64s and 88.84s at the reference shape. The geometric mean is 118.72s;
-  # 237s rounds down from twice that mean. The unchanged drift rule fails above 178.08s
-  # and the stale rule below 71.232s, so both observations fit without weakening policy.
-  #
-  # 2026-09-09: the lane is not that lane any more. Merging PR 137 brought sixteen test
-  # files, and this branch added the three threshold ones, so the selection grew from
-  # 4,283 to 4,639 tests. Run 34326478984, job `suite`, at the reference shape and at
-  # 683fb800, passed all 4,635 it selected there in 183.44s -- 1.55x of the 118.72s
-  # record, which the drift rule fails at 1.5x. Nothing regressed: the growth is
-  # aggregate rather than one test, and the per-test ceiling is untouched. A local
-  # reading of the same selection on a two-cpu box at two xdist workers was 193.09s over
-  # 4,639 tests with no `call` phase above 5.82s, the only phase over the 12s backstop
-  # being a 16.26s module-scoped setup that no marker can move -- so no test was deferred
-  # for this, and the record moves instead.
-  #
-  # 275s is the band: 1.499x of the new record, just under the drift rule's 275.16s so
-  # the ceiling never speaks after the record-relative rule, and well inside rule 2's
-  # slack (366.88s). What it does not have yet is a second sample of this selection at
-  # the reference shape, so the record is one reading rather than a mean, as it was on
-  # 2026-09-07 for the same reason. The stale rule now fails below 110.06s, and this lane
-  # has shown a 1.79x hosted spread, so an unusually fast runner could fail for being
-  # quick; `think-be1s` holds the policy follow-up that would record a band instead of a
-  # point, and the next comparable hosted reading should be folded in as a geometric mean.
-  ceiling_seconds: 275.0
-  measured_seconds: 183.44
-  measured_on: '2026-09-09'
-  measured_where: >-
-    Run 34326478984, job `suite`, on 2026-09-09 at 683fb800: 183.44s at the reference
-    shape, all 4,635 selected tests passing. It is one reading rather than a mean
-    because it is the first at this selection: the merge of PR 137 added sixteen test
-    files and this branch's threshold work three more
-    (test_fractional_threshold.py, test_fractional_threshold_interval.py,
-    test_decide_threshold_certificate.py, and now test_n11_threshold_certificate.py),
-    taking the lane from 4,283 to 4,639 collected quick tests. Cross-checked locally the
-    same day: 193.09s over 4,639 tests at two xdist workers on a contended two-cpu box,
-    every `call` phase under 6s. Refresh as a geometric mean when a second hosted reading
-    of this selection lands.
-    The superseded 2026-09-08 record, kept as history of the previous selection:
-    geometric mean of two consecutive observations,
-    158.64s in run 34285770932/job 102260892830 at dfa0a422f6dcd22dda7ed00ddb4763b65f4aac75,
-    and 88.84s in run 34288782986/job 102270405743 at a10569d1ccf47522d6ef2de8e6ddf39a42b0c095.
-    Both passed all 4,283 selected tests with Python 3.14.7, four reported CPUs, and
-    `packing-validate --suite --jobs 1 --inner-jobs 1`, which supplies four xdist workers.
-    The gate walls include pytest startup; pytest itself reported 157.76s and 88.23s.
-    Workflow, dependency lock, and selection code were unchanged between the two commits.
-    The Ubuntu 24.04 runner images were 20260831.293.1 and 20260907.300.1 respectively;
-    this 1.79x spread records hosted variation and does not establish a code speedup.
-    The previous 162.62s observation in run 34133437296 on 2026-09-07 remains history
-    of the first post-corpus-growth lane, outside this mean of the current selection.
-    The earlier four-sample mean of 102.83s described the hundred-case corpus.
-    `think-uwow` tracks this refresh; `think-be1s` retains the policy follow-up to
-    represent observed variation as a band. Refresh the mean as comparable samples accrue.
-  # `inner_jobs: 1`, not 4, because that is what the workflow passes. The xdist worker
-  # count comes from `--jobs` through `_pytest_workers`, not from `--inner-jobs`, and a
-  # reference that named the worker count instead of the invocation would match no run
-  # CI ever makes -- so every run would report "not the reference shape" and the band
-  # would never be enforced. `test_every_tier_band_is_declared_for_the_shape_ci_runs`
-  # is what keeps this honest.
+- id: suite_a
+  command: packing-validate --suite-a
+  ceiling_seconds: 180.0
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
-    The pull request's quick behavioural lane, alone on a runner. It is one step, and it
-    is a tier for two reasons that are the same reason: a job cannot be shorter than its
-    longest step, and this step was 142.43s of a 221.70s job it shared with 57 others. On
-    its own it stops setting that job's wall and it stops being throttled to two xdist
-    workers, because `_pytest_workers` sizes the lane to what the runner has free. What
-    it is not is a coverage change -- the step runs on every pull request either way,
-    which `test_the_pull_request_surface_defers_only_what_was_measured` re-checks from
-    the workflow. `--suite` rather than `--fast --only` because a slice of a tier has no
-    declared cost and this job needed one, which is `D-466`.
+    Whole-module shard A of the quick behavioural lane. Both shard jobs collect the same
+    selection and a deterministic largest-first assignment gives each module to exactly
+    one shard. Run 35014107573 retained 915.58 worker-seconds across 315 modules; replaying
+    this assignment over that exact collection allocates 419.69s here and 495.89s to
+    shard B, whose ideal four-worker floors are 104.92s and 123.97s. The unsplit job had
+    failed at 280.83s and 278.93s. Scheduler-only alternatives did not solve it:
+    loadscope took 318.54s and worksteal 323.69s against the 302.70s default. The 180s
+    ceiling is therefore a premeasurement bound, not a claimed reading; the null baseline
+    prevents relative drift checks until an exact-shape hosted run exists. The reference
+    matches CI's `--jobs 1 --inner-jobs 1` four-cpu invocation, and `packing-required`
+    preserves coverage by requiring both shard jobs.
+
+- id: suite_b
+  command: packing-validate --suite-b
+  ceiling_seconds: 180.0
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 1, inner_jobs: 1, cpus: 4}
+  argument: >-
+    Whole-module shard B under the same complete and disjoint assignment as shard A.
+    Run 35014107573 retained 915.58 worker-seconds across 315 modules; the exact replay
+    assigns 495.89s to this shard and 419.69s to shard A, for ideal four-worker floors of
+    123.97s and 104.92s. `--dist=loadfile` preserves module-scoped fixture reuse, while
+    collection-derived membership places every new module in exactly one shard. The 180s
+    ceiling is a premeasurement bound above the larger ideal floor, not a baseline. The
+    null measurement disables relative rules until an exact-shape hosted reading exists;
+    the reference matches CI's `--jobs 1 --inner-jobs 1` four-cpu invocation, and
+    `packing-required` requires both shards so aggregation cannot hide lost coverage.
 
 - id: sweeps
   command: packing-validate --sweeps

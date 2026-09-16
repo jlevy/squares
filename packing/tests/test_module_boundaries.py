@@ -292,7 +292,14 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
 
-    for job_name in ("validate", "suite", "exhaustive", "screen", "macos-portability"):
+    for job_name in (
+        "validate",
+        "suite-a",
+        "suite-b",
+        "exhaustive",
+        "screen",
+        "macos-portability",
+    ):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]
@@ -343,11 +350,12 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     validate_steps = _mapping(jobs["validate"])["steps"]
     assert isinstance(validate_steps, list)
-    # The pull-request surface is concurrent jobs, four since 2026-09-06 and five since
-    # the workbench package took its frontend contracts out of the checks queue:
+    # The pull-request surface is six concurrent jobs after the workbench package took
+    # its frontend contracts out of the checks queue and the suite became two shards:
     # `--checks` here, `--frontend` in the `frontend` job, `--geometry` in the `geometry`
-    # job, `--suite` in the `suite` job and `--sweeps` in the `sweeps` job, so a pull
-    # request waits for the longest of them rather than their sum. That they partition
+    # job, `--suite-a` and `--suite-b` in their shard jobs, and `--sweeps` in the
+    # `sweeps` job, so a pull request waits for the longest of them rather than their sum.
+    # That they partition
     # `--fast` is proved against the CLI's own selector by
     # `test_the_pull_request_jobs_partition_the_surface`; what is pinned here is only that
     # the commands in the file are the ones that test resolves.
@@ -359,9 +367,9 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     #   headroom. `--jobs 4` was tried on run 34016999060 and refused -- saturating the
     #   runner inflated every step by thirty to eighty per cent, so four workers over 790
     #   worker-seconds finished no sooner than three over 470;
-    # * `--jobs 1` in the `suite` job is what hands the behavioural lane four xdist
-    #   workers instead of two -- `_pytest_workers` sizes itself to `cpus - jobs + 1`, so
-    #   a larger number there is a quieter, slower job;
+    # * `--jobs 1` in each suite-shard job hands the behavioural lane four xdist workers
+    #   instead of two -- `_pytest_workers` sizes itself to `cpus - jobs + 1`, so a
+    #   larger number there is a quieter, slower job;
     # * `--inner-jobs 2` sets the escape screen's PACK_JOBS cap. The chunk census and
     #   prospective atlas remain serial unless explicitly given their own --jobs.
     required_step = next(
@@ -400,36 +408,36 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         "uv run --frozen --all-extras --group dev packing-validate --geometry "
         "--jobs 3 --inner-jobs 1"
     )
-    # Shallow, like `sweeps` and unlike `validate` and `suite`. The step that needs full
-    # history is `provenance`, and it is in the `validate` half; a job that cloned deep
-    # for no reason would pay for it on every pull request.
+    # Shallow, like `sweeps` and unlike `validate` and the suite shards. The step that
+    # needs full history is `provenance`, and it is in the `validate` half; a job that
+    # cloned deep for no reason would pay for it on every pull request.
     geometry_checkout = next(
         _mapping(step)
         for step in geometry_steps
         if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
     )
     assert "fetch-depth" not in _mapping(geometry_checkout["with"])
-    suite_job = _mapping(jobs["suite"])
-    assert suite_job["if"] == "github.event_name == 'pull_request'"
-    suite_steps = suite_job["steps"]
-    assert isinstance(suite_steps, list)
-    suite_step = next(
-        _mapping(step)
-        for step in suite_steps
-        if _mapping(step).get("name") == "Run the required pull-request behavioral lane"
-    )
-    assert " ".join(str(suite_step["run"]).split()) == (
-        "uv run --frozen --all-extras --group dev packing-validate --suite "
-        "--jobs 1 --inner-jobs 1"
-    )
-    # Full history, like `validate` and unlike `sweeps`: the behavioural lane includes
-    # tests that shell out to git, and they read whatever the checkout gave them.
-    suite_checkout = next(
-        _mapping(step)
-        for step in suite_steps
-        if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
-    )
-    assert _mapping(suite_checkout["with"])["fetch-depth"] == 0
+    for suffix in ("a", "b"):
+        suite_job = _mapping(jobs[f"suite-{suffix}"])
+        assert suite_job["if"] == "github.event_name == 'pull_request'"
+        suite_steps = suite_job["steps"]
+        assert isinstance(suite_steps, list)
+        suite_step = next(
+            _mapping(step)
+            for step in suite_steps
+            if _mapping(step).get("name")
+            == f"Run required pull-request behavioral shard {suffix.upper()}"
+        )
+        assert " ".join(str(suite_step["run"]).split()) == (
+            "uv run --frozen --all-extras --group dev "
+            f"packing-validate --suite-{suffix} --jobs 1 --inner-jobs 1"
+        )
+        suite_checkout = next(
+            _mapping(step)
+            for step in suite_steps
+            if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
+        )
+        assert _mapping(suite_checkout["with"])["fetch-depth"] == 0
     sweep_steps = _mapping(jobs["sweeps"])["steps"]
     assert isinstance(sweep_steps, list)
     sweep_step = next(
@@ -507,10 +515,17 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     required_job = _mapping(jobs["packing-required"])
     # Every part of the pull-request surface, and this is the assertion that keeps them
     # mandatory. Splitting `--fast` across concurrent jobs buys wall time only if a pull
-    # request still cannot merge without all of them, so a `needs` naming four of the
-    # five would turn the fifth into an advisory check that nothing blocks on -- the
+    # request still cannot merge without all of them, so a `needs` naming five of the
+    # six would turn the sixth into an advisory check that nothing blocks on -- the
     # failure mode the split is otherwise a clean win against.
-    assert required_job["needs"] == ["validate", "frontend", "geometry", "suite", "sweeps"]
+    assert required_job["needs"] == [
+        "validate",
+        "frontend",
+        "geometry",
+        "suite-a",
+        "suite-b",
+        "sweeps",
+    ]
     # `!cancelled()`, not `always()`, and the difference is D-380. With `always()` a run
     # superseded by the next push -- routine, since the workflow sets
     # `cancel-in-progress: true` and OR-3 says to push and keep working -- reached this job
@@ -522,14 +537,15 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert "continue-on-error" not in required_job
     required_job_steps = required_job["steps"]
     assert isinstance(required_job_steps, list)
-    # One `test` per prerequisite, and all five of them, because `needs` alone does not
+    # One `test` per prerequisite, and all six of them, because `needs` alone does not
     # make a job's failure fatal here: this job runs under `!cancelled()`, so it is reached
     # even when a prerequisite failed, and it is the shell that decides. A missing line
     # would leave that part of the surface green whatever it reported.
     required_command = " ".join(str(_mapping(required_job_steps[0])["run"]).split())
     assert required_command == (
         'test "$VALIDATE_RESULT" = "success" test "$FRONTEND_RESULT" = "success" '
-        'test "$GEOMETRY_RESULT" = "success" test "$SUITE_RESULT" = "success" '
+        'test "$GEOMETRY_RESULT" = "success" test "$SUITE_A_RESULT" = "success" '
+        'test "$SUITE_B_RESULT" = "success" '
         'test "$SWEEPS_RESULT" = "success"'
     )
     required_env = _mapping(_mapping(required_job_steps[0])["env"])
@@ -537,7 +553,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         "VALIDATE_RESULT": "${{ needs.validate.result }}",
         "FRONTEND_RESULT": "${{ needs.frontend.result }}",
         "GEOMETRY_RESULT": "${{ needs.geometry.result }}",
-        "SUITE_RESULT": "${{ needs.suite.result }}",
+        "SUITE_A_RESULT": "${{ needs.suite-a.result }}",
+        "SUITE_B_RESULT": "${{ needs.suite-b.result }}",
         "SWEEPS_RESULT": "${{ needs.sweeps.result }}",
     }
 

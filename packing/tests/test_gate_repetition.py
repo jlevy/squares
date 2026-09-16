@@ -181,7 +181,7 @@ def test_an_unattributed_step_is_never_counted_as_repeated() -> None:
 def test_the_wall_floor_is_the_longest_step_that_still_runs() -> None:
     """Work saved and wall saved are different numbers, and only one of them is the
     number a scheduling change can deliver."""
-    prices = _unit_prices() | {"fast behavioral tests": 400.0}
+    prices = _unit_prices() | {"fast behavioral tests, shard A": 400.0}
     row = repetition_for_changes(TRIGGER, "dead", ("packing/src/sqpack/verify.py",), prices)
     assert row.wall_floor_seconds == pytest.approx(400.0)
 

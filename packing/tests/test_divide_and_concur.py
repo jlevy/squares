@@ -138,7 +138,7 @@ def test_a_solved_run_reports_an_exactly_feasible_packing(beta: float) -> None:
     """
     side = (2 + 1 / math.sqrt(2)) * 1.05
     for seed in range(30):
-        out = solve(5, side, np.random.default_rng(seed), beta=beta, iters=8000, monotone=2000)
+        out = solve(5, side, np.random.default_rng(seed), beta=beta)
         if out.solved:
             # Asked of `sqpack.verify`, which the search does not share. Re-asking
             # `violation` would repeat the very predicate `solve` stopped on.

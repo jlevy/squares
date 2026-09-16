@@ -229,12 +229,9 @@ def check(page_path: Path) -> str:
         browser = playwright.chromium.launch(
             headless=True, executable_path=os.environ.get("SQUARES_BROWSER_EXECUTABLE")
         )
-        # `bypass_csp`: the mobile-fit wait below is an expression-string predicate, which
-        # Playwright compiles inside the page, and the published policy grants no
-        # `'unsafe-eval'`. `check_page_policy` loads the page without the bypass. It can go
-        # once that predicate is a probe file (think-xvjf).
+        # No `bypass_csp`: the page runs under its published policy, as the public loads it.
         page = browser.new_page(
-            reduced_motion="reduce", viewport={"width": 1440, "height": 1000}, bypass_csp=True
+            reduced_motion="reduce", viewport={"width": 1440, "height": 1000}
         )
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto(page_path.resolve().as_uri())
@@ -374,9 +371,7 @@ def check(page_path: Path) -> str:
         page.set_viewport_size({"width": 390, "height": 844})
         # Chromium delivers the resize event after set_viewport_size returns. Wait for
         # the stage's JS scale to reflect the new viewport before testing overflow.
-        page.wait_for_function(
-            "document.querySelector('#stage-wrap').getBoundingClientRect().width <= innerWidth"
-        )
+        page.wait_for_function(probe("pack/stage-fits-viewport"))
         width = page.evaluate("document.documentElement.scrollWidth")
         require(width <= 390, f"Pack overflows the mobile viewport: {width}px")
         _check_quiet_live_regions(browser, page_path, errors)

@@ -690,9 +690,11 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── package.json            Pinned tooling and private npm workspace declaration
 ├── package-lock.json       Root and workbench workspace lockfile
 ├── tsconfig.base.json      The shared TypeScript type floor every program extends
+├── tsconfig.devtools-node.json  The Node scripts the Python devtools run
 ├── tsconfig.json           The retained workbench script during package migration
 ├── tsconfig.motion-lab.json  The motion lab's assets and the slideshow harness
-└── tsconfig.probes.json    The checkers' probes
+├── tsconfig.packing-probes.json  The probes Python tools under packing/ run in a page
+└── tsconfig.probes.json    The workbench checkers' probes
 ```
 
 An optional, Git-ignored `attic/` holds intake and scratch files.

@@ -52,6 +52,26 @@ export default [
     rules: promiseRules,
   },
   {
+    // The probes the Python tools under `packing/` load through `sqpack.probes`, and the Node
+    // scripts those tools run. Both programs are strict; neither inherits a relaxation.
+    files: ["packing/**/probes/**/*.js"],
+    languageOptions: {
+      parser,
+      parserOptions: { project: "./tsconfig.packing-probes.json" },
+    },
+    plugins,
+    rules: promiseRules,
+  },
+  {
+    files: ["packing/devtools/node/**/*.mjs"],
+    languageOptions: {
+      parser,
+      parserOptions: { project: "./tsconfig.devtools-node.json" },
+    },
+    plugins,
+    rules: promiseRules,
+  },
+  {
     files: [
       "packing/src/sqpack/motion_lab/assets/**/*.js",
       "packing/atlas/known-best/video/spikes/v1-slideshow/*.js",

@@ -398,7 +398,8 @@ def _jobs_without_node(document: Mapping[str, Any], step_name: str) -> list[str]
                 checks=namespace.checks,
                 frontend=namespace.frontend,
                 sweeps=namespace.sweeps,
-                suite=namespace.suite,
+                suite_a=namespace.suite_a,
+                suite_b=namespace.suite_b,
                 geometry=namespace.geometry,
             )
             if step_name in {chosen.name for chosen in selected} and not (node and npm):
@@ -591,23 +592,25 @@ def test_the_package_program_is_required_for_package_typescript() -> None:
 
 
 def test_every_job_running_the_liveness_tests_installs_node() -> None:
-    """The liveness tests below run in `fast behavioral tests` and fail under `CI` without
-    Node, so every job that selects that step must install the pinned toolchain first."""
+    """Both behavioral shards may own liveness modules and therefore install Node."""
     for workflow in WORKFLOWS:
         document = safe_load(workflow.read_text(encoding="utf-8"))
-        assert _jobs_without_node(document, "fast behavioral tests") == [], workflow.name
+        for shard in ("fast behavioral tests, shard A", "fast behavioral tests, shard B"):
+            assert _jobs_without_node(document, shard) == [], workflow.name
 
 
-def test_a_behavioral_job_without_node_is_detected() -> None:
-    """The negative control: the pull-request `suite` job with its Node steps removed."""
+@pytest.mark.parametrize("job_name", ["suite-a", "suite-b"])
+def test_a_behavioral_job_without_node_is_detected(job_name: str) -> None:
+    """The negative control: either behavioral job without Node is detected."""
     document = safe_load(WORKFLOWS[0].read_text(encoding="utf-8"))
-    document["jobs"]["suite"]["steps"] = [
+    document["jobs"][job_name]["steps"] = [
         step
-        for step in document["jobs"]["suite"]["steps"]
+        for step in document["jobs"][job_name]["steps"]
         if "setup-node" not in str(step.get("uses", ""))
         and "npm ci" not in str(step.get("run"))
     ]
-    assert _jobs_without_node(document, "fast behavioral tests") == ["suite"]
+    shard = "A" if job_name == "suite-a" else "B"
+    assert _jobs_without_node(document, f"fast behavioral tests, shard {shard}") == [job_name]
 
 
 def test_a_missing_tool_fails_under_ci_and_skips_locally(
@@ -662,6 +665,8 @@ def test_the_checked_javascript_promise_overlay_is_effective() -> None:
     representatives = (
         "packages/workbench/src/application.js",
         "packages/workbench/probes/api/apply.js",
+        "packing/devtools/probes/check_published_site/startup.js",
+        "packing/devtools/node/inspect-probes.mjs",
         "packing/src/sqpack/motion_lab/assets/free-quench.js",
         "packing/atlas/known-best/video/spikes/v1-slideshow/timeline_harness.js",
     )

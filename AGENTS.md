@@ -115,9 +115,20 @@ merely written down.
 make hooks-install        # once after cloning: npm ci, then the git hooks
 make lint-fix             # fix in place; the commit hook does this for staged files
 packing-validate --only "browser floor"   # verify, which is what CI runs
+packing-validate --only "browser code lives in files"   # no JavaScript in Python
 ```
 
-Three things worth knowing before changing any of it:
+Four things worth knowing before changing any of it:
+
+- **No JavaScript in a Python string, with no exceptions.** Browser code lives in `.js`
+  and `.ts` files under Biome and `tsc`, tests and spikes included.
+  A Python tool that drives a page loads a probe — one expression per file in a
+  `probes/` directory beside the tool — with `sqpack.probes.probe(root, name)`, and
+  passes values as its one argument, never by formatting them into the text.
+  `devtools.check_no_embedded_js` fails the gate on a script string anywhere, and its
+  allowlist in `packing/devtools/embedded-javascript.yaml` only shrinks.
+  [development.md → Browser Code Lives in Files](development.md#browser-code-lives-in-files)
+  is how to add a probe.
 
 - `packages/workbench/` is strict TypeScript and uses pinned esbuild to emit classic
   browser bundles. The retained scripts remain checked JavaScript with `allowJs` +
@@ -125,9 +136,11 @@ Three things worth knowing before changing any of it:
   `tsconfig.base.json` holds the shared floor; each retained global program has its own
   `tsconfig.*.json`, while the package has a strict module program.
   The browser-floor step also runs the package’s Node tests.
+
 - **A relaxed compiler flag names the bead tracking its removal.** That is the ratchet
   from the shared floor’s rule 8, and the contract test fails a config that relaxes one
   without naming a tracker.
+
 - **Formatting the workbench’s script changes the published page’s bytes**, since the
   generator inlines it.
   That is expected; what says the page is unharmed is `check_frontend`, not a hash.

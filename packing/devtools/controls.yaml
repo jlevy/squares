@@ -1422,3 +1422,31 @@ controls:
   replace: ["full gate: full at ", "full gate ran at "]
   run: python3 -m devtools.check_session_gate
   expect: "terminal session names no full-gate run"
+
+# --- no JavaScript in Python (think-ax7z) ---
+#
+# The guard and the probe check are proved live in `tests/test_no_embedded_js_contract.py`
+# against planted modules. These three corrupt the real tree instead: a JavaScript string
+# put back into a tool that was extracted, an allowlist count lowered below what its file
+# holds, and a probe name that no longer matches its file.
+- name: embedded JavaScript - a script string back in an extracted tool
+  file: devtools/check_published_site.py
+  replace:
+    - 'page.evaluate(probe(PROBES, "check_published_site/startup"))'
+    - 'page.evaluate("() => document.title")'
+  run: python3 -m devtools.check_no_embedded_js
+  expect: "packing/devtools/check_published_site.py: 1 site(s) of JavaScript in Python"
+
+- name: embedded JavaScript - an allowlist count below the file's sites
+  file: devtools/embedded-javascript.yaml
+  replace:
+    - "  - path: packing/devtools/check_print_layout.py\n    sites: 37\n"
+    - "  - path: packing/devtools/check_print_layout.py\n    sites: 36\n"
+  run: python3 -m devtools.check_no_embedded_js
+  expect: "check_print_layout.py: 37 site(s), the allowlist records 36"
+
+- name: probe files - a probe name with no file
+  file: devtools/check_published_site.py
+  replace: ['"check_published_site/api-ready"', '"check_published_site/api-readied"']
+  run: python3 -m devtools.check_probes
+  expect: "check_published_site/api-readied.js: named by a Python file beside packing/devtools/probes"

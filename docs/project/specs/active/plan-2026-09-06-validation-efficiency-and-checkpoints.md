@@ -98,6 +98,34 @@ worker-boundary or CPU-attribution regression.
 The original PR95 findings preceded its final exhaustive run; a passing exhaustive suite
 on the buggy revision is not established by that chronology.
 
+### September 15 quick-lane recovery
+
+The quick lane grew to 6,096 passing tests after the baseline above.
+Two exact-head hosted runs completed the functional suite but exceeded the 275-second
+`--suite` ceiling, at 280.83 seconds and 278.93 seconds; the second also reported six
+skips. The earlier 183.44-second record covered 4,635 tests, so it remains historical
+evidence rather than a baseline for the larger selection.
+
+Scheduler-only changes were measured and rejected locally.
+The default scheduler took 302.70 seconds, `loadscope` took 318.54 seconds, and
+`worksteal` took 323.69 seconds.
+The alternatives were 5.2 and 6.9 percent slower than the default, respectively, and did
+not address the one-job wall.
+
+The current recovery splits the quick lane into `suite-a` and `suite-b`. Each job
+collects the complete selection; a deterministic largest-first assignment by collected
+item count places every module in exactly one shard.
+This makes the shards complete and disjoint without a maintained file list, admits new
+modules automatically, and preserves module-scoped fixture reuse through
+`--dist=loadfile`.
+
+The ordinary gate now has 78 steps, 67 of them on the PR fast surface: 50 checks, two
+frontend steps, nine geometry steps, one step in each suite shard, and four sweeps.
+The six jobs all feed the existing `packing-required` aggregate.
+Each suite shard has a 180-second premeasurement ceiling and no recorded baseline; the
+first exact-head hosted runs establish those baselines and decide whether the split is
+admissible. The local observations motivate the design but do not establish a speedup.
+
 ## Design
 
 ### Review value before changing coverage
@@ -209,15 +237,16 @@ is implemented and validated.
 
 | Term | Meaning and existing interface |
 | --- | --- |
-| PR fast surface | `--fast`, partitioned into `--checks`, `--geometry`, `--suite`, and `--sweeps` |
+| PR fast surface | `--fast`, partitioned into `--checks`, `--frontend`, `--geometry`, `--suite-a`, `--suite-b`, and `--sweeps` |
 | Full checkpoint | All ordinary steps, selected by the default command |
 | Deferred checkpoint | Four steps outside PR fast coverage; the `Deferred checkpoint` workflow, retaining the `deep-gate` label and filename |
 | Golden rebuild | `--deep`; fresh golden basin-map production and comparison |
 | Strict checkpoint | `--strict`; full checkpoint, golden rebuild, and refusal of skips |
 
-Preserve existing CLI flags and stable check contexts.
-Prefer clearer displayed workflow names and help text to adding equivalent flags.
-Any justified alias shares one selection implementation and tests equivalent behavior.
+Preserve stable aggregate check contexts.
+A partition change migrates the CLI flags, workflow jobs, budgets, tests, and
+documentation together; do not retain an obsolete alias without an external consumer.
+Prefer clearer displayed workflow names and help text to adding equivalent entry points.
 
 [development.md](../../../../development.md#validation-loops) owns the contributor
 matrix. [Operating rules](../../../../operating-rules.md) own the efficiency principle:
@@ -376,7 +405,8 @@ producers merely to refresh a summary.
 
 Land coherent changes through a PR from `codex/validation-efficiency-block`, with
 measured results, coverage mappings, unresolved cases, and the final command matrix.
-Existing entry points remain usable during naming cleanup.
+The coordinated suite migration replaces `--suite` with `--suite-a` and `--suite-b`; the
+`packing-required` aggregate remains the stable merge context.
 Settings changes and other open PRs remain separately attributable work.
 
 ## Open Questions

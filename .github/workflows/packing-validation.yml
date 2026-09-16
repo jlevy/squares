@@ -166,10 +166,10 @@ jobs:
       # 501.97s at commit `30706bcb`, of which `known-best n=1..100 atlas` was 254.92s and
       # `prospective n=101..324 source map and safe seed` 213.19s. Reverting the promotion
       # was refused on coverage grounds, so the cost is bought with more runners instead:
-      # `--checks` here, `--geometry`, `--suite` and `--sweeps` in the three jobs below.
-      # The four are a partition of `--fast`, they run concurrently, and a pull request
-      # waits for the longest of them rather than for their sum. All four are required
-      # through `packing-required`.
+      # `--checks` here, then `--frontend`, `--geometry`, `--suite-a`, `--suite-b`, and
+      # `--sweeps` below. The six are a partition of `--fast`, they run concurrently, and
+      # a pull request waits for the longest of them rather than for their sum. All six
+      # are required through `packing-required`.
       #
       # **Two runners were not enough, and the second cut is measured too.** Run
       # 34010470187 on the two-job surface: `checks` 221.70s against `sweeps` 110.66s.
@@ -220,7 +220,7 @@ jobs:
       # measured, so a second core of headroom would cost this job more than the fourth
       # worker ever cost it.
       #
-      # Nothing left the surface to buy any of this. The five jobs still select every
+      # Nothing left the surface to buy any of this. The six jobs still select every
       # step `--fast` does, which is what
       # `test_the_pull_request_jobs_partition_the_surface` checks -- `OR-13`, and the
       # same refusal recorded two paragraphs up.
@@ -230,15 +230,15 @@ jobs:
       # been judged against `--fast`'s recorded 502.3s and failed for finishing early;
       # `--only` reports no tier at all and would have left every part of the
       # pull-request surface with no declared ceiling, which is `D-466` exactly.
-      # `--checks`, `--frontend`, `--geometry`, `--suite` and `--sweeps` each carry an entry in
-      # `devtools/gate-budgets.yaml`.
+      # `--checks`, `--frontend`, `--geometry`, `--suite-a`, `--suite-b`, and `--sweeps`
+      # each carry an entry in `devtools/gate-budgets.yaml`.
       #
       # `test_the_pull_request_jobs_partition_the_surface` reads this file, parses these
-      # five commands with the CLI's own parser and resolves them through its own
-      # selector, and requires the five selections to be pairwise disjoint and to cover
+      # six commands with the CLI's own parser and resolves them through its own
+      # selector, and requires the six selections to be pairwise disjoint and to cover
       # every step outside the four
       # `test_the_pull_request_surface_defers_only_what_was_measured` pins. A step added
-      # tomorrow lands in one of the five jobs or fails that test.
+      # tomorrow lands in one of the six jobs or fails that test.
       - name: Run the required pull-request checks
         if: "github.event_name == 'pull_request'"
         run: >-
@@ -322,25 +322,13 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-  suite:
-    # The pull request's behavioural lane, alone on a runner, and the arithmetic for that
-    # is one sentence: a job cannot be shorter than its longest step, and this step was
-    # 142.43s of the 221.70s `checks` job on run 34010470187 -- the longest single unit
-    # anywhere on the surface.
-    #
-    # `--jobs 1` is not a throttle, it is what buys the workers. `_pytest_workers` sizes
-    # xdist to `cpus - jobs + 1` because a lane that grabs every cpu beside two other
-    # steps fails ordinary tests against its own 5s per-test ceiling on contention alone
-    # (`BC-218`, nineteen of them). Beside 57 steps at `--jobs 3` that formula gave two
-    # workers. Alone at `--jobs 1` it gives four, with nothing else on the runner to
-    # contend with, so the ceiling goes on measuring tests rather than neighbours.
-    # `--inner-jobs 1` for the same reason: `PACK_JOBS` is the per-step process cap, and
-    # a step already running four xdist workers must not have each of them fan out again.
-    #
-    # Full history, unlike the shallow jobs below. This job runs about 2,100 tests and
-    # several of them shell out to git; `--fast` reached them from the `validate` job's
-    # `fetch-depth: 0`, and moving the lane to a shallow runner would change what those
-    # tests see. The clone is a few seconds against a job that is minutes.
+  suite-a:
+    # Both behavioural jobs collect the complete quick lane. The pytest plugin assigns
+    # whole modules by deterministic largest-first item count, so the selections are
+    # complete and disjoint without a maintained file list. Keeping modules whole
+    # preserves module-scoped fixture reuse; `--dist=loadfile` preserves it within each
+    # shard. Scheduling-only variants were refused by measurement: default 302.70s,
+    # loadscope 318.54s, worksteal 323.69s.
     if: "github.event_name == 'pull_request'"
     runs-on: ubuntu-latest
     defaults:
@@ -384,10 +372,60 @@ jobs:
         working-directory: .
         run: npm ci --ignore-scripts
 
-      - name: Run the required pull-request behavioral lane
+      - name: Run required pull-request behavioral shard A
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --suite --jobs 1 --inner-jobs 1
+          packing-validate --suite-a --jobs 1 --inner-jobs 1
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  suite-b:
+    if: "github.event_name == 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Install Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install the pinned browser toolchain
+        working-directory: .
+        run: npm ci --ignore-scripts
+
+      - name: Run required pull-request behavioral shard B
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --suite-b --jobs 1 --inner-jobs 1
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -530,7 +568,7 @@ jobs:
 
   sweeps:
     # One part of the pull-request surface, on its own runner and at the same time as
-    # the other four.
+    # the other five.
     #
     # Four steps, all of one kind: each re-derives a retained atlas from the witnesses
     # under it and compares the result byte for byte. They are the class `D-369` measured
@@ -755,14 +793,14 @@ jobs:
     # single required context is the reason the split is allowed to exist: `BC-218` set
     # that as the condition for any fan-out, because `D-380` records what a fan-out of
     # separately required checks did to this repository once. A reviewer still watches one
-    # context; it just has five prerequisites now.
+    # context; it just has six prerequisites now.
     #
     # `needs` alone is not enough, which is why every prerequisite also has a `test` line
     # below. This job runs under `!cancelled()`, so it is reached even when a prerequisite
     # failed, and it is the shell that decides -- a job named in `needs` and missing from
     # the script is an advisory check nothing blocks on.
     if: "!cancelled() && github.event_name == 'pull_request'"
-    needs: [validate, frontend, geometry, suite, sweeps]
+    needs: [validate, frontend, geometry, suite-a, suite-b, sweeps]
     runs-on: ubuntu-latest
     steps:
       - name: Require every pull-request prerequisite
@@ -770,13 +808,15 @@ jobs:
           VALIDATE_RESULT: ${{ needs.validate.result }}
           FRONTEND_RESULT: ${{ needs.frontend.result }}
           GEOMETRY_RESULT: ${{ needs.geometry.result }}
-          SUITE_RESULT: ${{ needs.suite.result }}
+          SUITE_A_RESULT: ${{ needs.suite-a.result }}
+          SUITE_B_RESULT: ${{ needs.suite-b.result }}
           SWEEPS_RESULT: ${{ needs.sweeps.result }}
         run: |
           test "$VALIDATE_RESULT" = "success"
           test "$FRONTEND_RESULT" = "success"
           test "$GEOMETRY_RESULT" = "success"
-          test "$SUITE_RESULT" = "success"
+          test "$SUITE_A_RESULT" = "success"
+          test "$SUITE_B_RESULT" = "success"
           test "$SWEEPS_RESULT" = "success"
 
   macos-portability:

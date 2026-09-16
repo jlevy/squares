@@ -109,9 +109,10 @@ the video.
 #: The browser enforces it; `self_contained` is the build-time half (#125 F21).
 #:
 #: No `'unsafe-eval'`: the page does not evaluate strings, and the public page is not
-#: loosened for test tooling. A checker that hands Playwright an expression-string predicate,
-#: which Playwright compiles in the page, opens its context with `bypass_csp`, and
-#: `check_page_policy` loads the page without it to hold this policy to what the page needs.
+#: loosened for test tooling. Playwright compiles an expression-string `wait_for_function`
+#: predicate inside the page, which this policy refuses, so every checker's predicates are
+#: probe functions and no checker opens the page with `bypass_csp`. `check_page_policy`
+#: holds this policy to what the page needs.
 CONTENT_SECURITY_POLICY = (
     "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
     "img-src data: blob:; font-src data:; base-uri 'none'; form-action 'none'"

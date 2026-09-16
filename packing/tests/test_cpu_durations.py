@@ -260,4 +260,4 @@ def test_reaping_setup_cpu_does_not_fail_a_cheap_call(
     context = validate.Context(
         deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
     )
-    assert validate._fast_tests(context) == output  # noqa: SLF001 - exercise the real gate
+    assert validate._fast_tests(context, shard=0) == output  # noqa: SLF001 - real gate

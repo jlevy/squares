@@ -1,0 +1,11 @@
+{
+  // The Node scripts the Python devtools run: Node's globals and no DOM, so a script that
+  // reaches for `document` fails here rather than at run time. No relaxations; new files land
+  // under the strict floor (floor rule 8).
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["node"]
+  },
+  "include": ["packing/devtools/node/**/*.mjs"]
+}

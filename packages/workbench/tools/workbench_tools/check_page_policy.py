@@ -4,11 +4,12 @@
     uv run --frozen --all-extras --group dev python -m workbench_tools.check_page_policy [PAGE]
 
 `build_site` publishes the page with a `default-src 'none'` policy, so the browser refuses
-anything the page was not built to need. A checker that hands Playwright a `wait_for_function`
-predicate written as an expression string opens its page with `bypass_csp`, because
-Playwright compiles such a predicate inside the page, and the policy grants no
-`'unsafe-eval'` for test tooling. Something therefore has to load the page as the public
-does. This does, without any bypass:
+anything the page was not built to need. The policy grants no `'unsafe-eval'` for test
+tooling, so a `wait_for_function` predicate written as an expression string, which
+Playwright compiles inside the page, would be refused; the checkers' predicates are probe
+functions, and none opens the page with `bypass_csp`. The other checkers exercise features,
+though, and something has to hold the policy itself to what the page needs. This loads the
+page as the public does:
 
 1. It installs the `policy/record-violations` init probe, which keeps every
    `securitypolicyviolation` the document reports from before the page's own scripts run,
@@ -39,6 +40,7 @@ from typing import Any
 
 from playwright.sync_api import ConsoleMessage, sync_playwright
 
+from sqpack.probes import applied
 from workbench_tools.build_site import OUT, POLICY_META
 from workbench_tools.probes import probe
 
@@ -58,17 +60,6 @@ class PolicyRun:
     started: dict[str, Any]
     violations: list[dict[str, str]] | None
     errors: list[str] = field(default_factory=list)
-
-
-def applied(source: str) -> str:
-    """A probe's source called with no argument, as one script for `add_init_script`.
-
-    `add_init_script` runs a script rather than calling a function, so an init probe is
-    called here, in one place. It is the same boundary `sqpack.probes.applied` draws on the
-    no-JavaScript-in-Python branch (#175), and becomes that import when #175 merges up.
-    """
-    expression = source.strip().removesuffix(";")
-    return f"({expression}\n)();\n"
 
 
 def with_policy(page_text: str, meta: str) -> str:

@@ -35,6 +35,7 @@ import time
 import urllib.error
 import urllib.request
 from collections.abc import Callable, Sequence
+from pathlib import Path
 from urllib.parse import urljoin
 
 from playwright.sync_api import Error as PlaywrightError
@@ -50,7 +51,11 @@ from devtools.render_explainer import (
 )
 from devtools.render_explainer_pdf import EXPECTED_PAGE_COUNT
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
+from sqpack.probes import probe
 from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
+
+#: The JavaScript this runs in the deployed workbench, as files (`sqpack.probes`).
+PROBES = Path(__file__).resolve().parent / "probes"
 
 #: A link into this repository as GitHub spells one: the ref, then the path, under
 #: `blob/` for a file and `tree/` for a directory.
@@ -165,15 +170,10 @@ def workbench_startup(url: str, project_root: str, *, timeout: float) -> tuple[b
                 page = browser.new_page()
                 page.goto(url, wait_until="load", timeout=timeout * 1000)
                 page.wait_for_function(
-                    "() => typeof window.atlasTransitions?.pairs === 'function'",
+                    probe(PROBES, "check_published_site/api-ready"),
                     timeout=timeout * 1000,
                 )
-                observed = page.evaluate(
-                    """() => ({
-                      pairs: window.atlasTransitions.pairs().length,
-                      home: document.querySelector('#site-note a')?.href ?? null,
-                    })"""
-                )
+                observed = page.evaluate(probe(PROBES, "check_published_site/startup"))
             finally:
                 browser.close()
     except PlaywrightError as error:
