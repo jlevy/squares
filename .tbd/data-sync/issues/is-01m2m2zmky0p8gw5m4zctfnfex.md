@@ -5,12 +5,12 @@ title: "Workbench motion: gentle, smooth, chunking, and a setting for the append
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2gyhqfmr0xpcjsr34na3acq
 created_at: 2026-09-16T03:08:21.501Z
-updated_at: 2026-09-16T03:08:21.501Z
+updated_at: 2026-09-16T03:10:49.081Z
 ---
 Owner feedback on the published page, 2026-09-15:
 
@@ -41,3 +41,7 @@ Three findings:
 **State:** branch `claude/workbench-motion-and-step-timing` exists off `main` at `21a68102` with the measurement script at `attic/motion-measure.js`; no implementation yet. The delegated session was cut off by a rate limit before its first commit.
 
 Changing these defaults moves the physics again: X-034 and H-211 already say no shake level has been measured under the current ones, and this needs a dated note when it lands.
+
+## Notes
+
+**2026-09-16:** `attic/motion-measure.js` lives in a gitignored directory, so it dies with the worktree. When this work resumes, commit the measurement as a probe file under the package's `probes/` (the repository forbids JavaScript in Python, and a measurement tool is a tool: `OR-1`), so the before-and-after numbers can be reproduced by anyone.
