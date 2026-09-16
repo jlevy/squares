@@ -606,7 +606,7 @@ def github_token() -> str | None:
         completed = subprocess.run(
             ["gh", "auth", "token"], capture_output=True, text=True, check=False, timeout=10
         )
-    except (OSError, subprocess.SubprocessError):
+    except OSError, subprocess.SubprocessError:
         return None
     return completed.stdout.strip() or None
 
