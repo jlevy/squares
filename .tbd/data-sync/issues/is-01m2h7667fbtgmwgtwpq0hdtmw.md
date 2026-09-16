@@ -3,16 +3,16 @@ type: is
 id: is-01m2h7667fbtgmwgtwpq0hdtmw
 title: Biome and ESLint floors with no overrides
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 labels: []
 dependencies: []
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T00:24:07.150Z
-updated_at: 2026-09-15T19:24:43.397Z
-closed_at: 2026-09-15T17:22:14.952Z
-close_reason: "Delivered in PR #180 (https://github.com/jlevy/squares/pull/180): no Biome override or exclusion, one ESLint configuration for every owned script, a contract test that fails on either, formatting verified at hook and gate, and a green page, motion lab and floor."
+updated_at: 2026-09-16T10:03:35.681Z
+closed_at: 2026-09-16T10:03:35.680Z
+close_reason: "Delivered on main by PR #180 merge a4f801e8: no Biome override/exclusion, one effective ESLint configuration for every owned script, repository-wide reachability, live negative controls, and fully green exact-head required/Page/deep gates."
 resolution: null
 duplicate_of: null
 ---
