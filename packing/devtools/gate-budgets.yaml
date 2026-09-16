@@ -303,7 +303,7 @@ tiers:
   # `frontend` and the ceiling stayed, because raising it would turn the check that
   # caught this into slack. `measured_seconds` stays empty: those readings include a
   # step this tier no longer runs.
-  ceiling_seconds: 195.0
+  ceiling_seconds: 180.0
   # Cleared, on the same rule that cleared 1369.60s and 409.0s from the `fast` entry and
   # 107.05s from `sweeps`: the figure measures a tier that no longer exists. It measured
   # this one twice over -- the four readings predate the corpus widening, and the widened
@@ -311,11 +311,15 @@ tiers:
   # would fail the drift rule on the tier as it was and the stale rule on the tier as it
   # is. The 189.09s CI reading is not written here either, and deliberately: it is a
   # reading at the reference shape of the tier this change replaced, so recording it
-  # would arm the stale rule against every honest run of the new one. The gate prints the
-  # line to paste the first time a run at the reference shape measures the new tier.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  # would arm the stale rule against every honest run of the new one. The hosted reading
+  # below is the first measurement of the replacement tier.
+  measured_seconds: 91.3
+  measured_on: '2026-09-16'
+  measured_where: >-
+    Run 35050021006, job `validate`, at 9fc36b5f: 91.33s at the reference shape.
+    This is the first hosted reading of the current 48-step selection, so it is one
+    reading rather than a geometric mean. Refresh it when another comparable sample
+    lands.
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
     The part of the pull-request surface that is none of the other three: every floor,
@@ -343,11 +347,8 @@ tiers:
   # Keeping those two frontend units in `checks` made that lane's existing ceiling
   # impossible; appending them to the 160s behavioural suite would create the same queue.
   #
-  # 150s is an initial fail-safe, not a hosted baseline. It is four times the observed
-  # source floor and leaves a similar amount for the build/browser contract plus ordinary
-  # runner setup variance. `measured_seconds` remains empty until this exact partition
-  # runs on its reference runner; the first hosted result supplies the record and tests
-  # the estimate instead of being made to agree with it.
+  # 150s began as an initial fail-safe. The hosted reading below now establishes the
+  # baseline for this exact partition and reference shape.
   #
   # --- 2026-09-15: a third step, and two slots to run it in -------------------------
   #
@@ -358,9 +359,12 @@ tiers:
   # the reference below moves with the invocation. The ceiling stays at 150s: the step
   # that arrived is about a tenth of it and does not extend the tier's longest unit.
   ceiling_seconds: 150.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  measured_seconds: 84.9
+  measured_on: '2026-09-16'
+  measured_where: >-
+    Run 35050021006, job `frontend`, at 9fc36b5f: 84.88s at the reference shape.
+    This is the first hosted reading of the three-step selection; refresh it when a
+    second comparable sample lands.
   reference: {jobs: 2, inner_jobs: 1, cpus: 4}
   argument: >-
     The source and built-page contracts for the top-level workbench package: Biome,
@@ -546,14 +550,15 @@ tiers:
   # partition of the per-file medians on slow runners: 138s of pytest over 441
   # test-seconds, with the lane's measured model `13.3s + 0.2824 x test-seconds`.
   #
-  # 200s until a hosted reading exists at this shape: it clears the slow-runner
-  # prediction by 1.45x and is below the 275s the whole lane was failing, so a shard that
-  # stopped dividing the lane fails here. The first run at the reference shape prints the
-  # line to write, and rule 2 then re-argues this number against a real one.
+  # 200s clears the hosted reading below by 1.62x and is below the 275s the whole lane
+  # was failing, so a shard that stopped dividing the lane fails here.
   ceiling_seconds: 200.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  measured_seconds: 123.2
+  measured_on: '2026-09-16'
+  measured_where: >-
+    Run 35050021006, job `suite-1-of-2`, at 9fc36b5f: 123.15s at the reference shape,
+    with all 2,477 selected tests passing. This is the first hosted reading; refresh it
+    when a second comparable sample lands.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     One of the two shards of `fast behavioral tests`. They exist because the lane grew by
@@ -569,9 +574,12 @@ tiers:
   # The other half; the argument and the prediction are on `suite-1-of-2`. The audit's
   # partition put this side at 134s of pytest over 428 test-seconds.
   ceiling_seconds: 200.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  measured_seconds: 138.8
+  measured_on: '2026-09-16'
+  measured_where: >-
+    Run 35050021006, job `suite-2-of-2`, at 9fc36b5f: 138.83s at the reference shape,
+    with 3,572 tests passing and 6 skipped. This is the first hosted reading; refresh it
+    when a second comparable sample lands.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     The second shard of `fast behavioral tests`; see `suite-1-of-2`. The two differ only
@@ -583,13 +591,14 @@ tiers:
   # step time on PRs into `main` and 104s on the workbench stack, beside two other slots
   # on a four-cpu runner; a local `--stats` run put 87 per cent of it in the Check phase.
   #
-  # 150s until a hosted reading exists at this shape: about 1.9x the contended `main`
-  # reading, which a runner a third slower still clears, and a regression of a half on
-  # what that job paid fails here.
-  ceiling_seconds: 150.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  # 130s is 1.97x the hosted reading below: enough ordinary runner headroom while still
+  # satisfying the declaration's 2x maximum-headroom rule.
+  ceiling_seconds: 130.0
+  measured_seconds: 65.9
+  measured_on: '2026-09-16'
+  measured_where: >-
+    Run 35050021006, job `typecheck`, at 9fc36b5f: 65.90s at the reference shape.
+    This is the first hosted reading; refresh it when a second comparable sample lands.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     The type floor, moved off the `checks` queue because it was one of that queue's two
@@ -701,14 +710,15 @@ tiers:
   # the work rather than adding any, and `--check` still passed, which is what makes the
   # parallel build byte-identical rather than merely fast.
   ceiling_seconds: 210.0
-  # Cleared, and the reason is the one that cleared 1369.60s and 409.0s from the `fast`
-  # entry: the figure measured a tier that no longer exists. Two of these four steps are
-  # new names running different work, so 107.05s is not a record of this tier, and
-  # leaving it here would fail the stale rule on every honest run of the new one. The
-  # gate prints the line to paste the first time it runs at the reference shape.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  # The former 107.05s record was cleared because it measured a tier that no longer
+  # exists. Two of these four steps are new names running different work. The hosted
+  # reading below is the first measurement of the replacement tier.
+  measured_seconds: 141.9
+  measured_on: '2026-09-16'
+  measured_where: >-
+    Run 35050021006, job `sweeps`, at 9fc36b5f: 141.90s at the reference shape.
+    This is the first hosted reading of the current four-step selection; refresh it when
+    a second comparable sample lands.
   reference: {jobs: 4, inner_jobs: 2, cpus: 4}
   argument: >-
     The pull request's record sweeps, on their own runner: the known-best atlas's record
