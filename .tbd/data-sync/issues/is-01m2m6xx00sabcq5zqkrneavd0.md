@@ -5,7 +5,7 @@ title: "Address review: PR #181 — explainer extraction and probe floor"
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 labels: []
 dependencies:
   - type: blocks
@@ -29,10 +29,10 @@ child_order_hints:
   - is-01m2mh0gs7dt8125xkejfm4r7n
   - is-01m2mhgr14dpfm2tmtw1n87x1g
 created_at: 2026-09-16T04:17:18.847Z
-updated_at: 2026-09-16T07:22:22.115Z
+updated_at: 2026-09-16T07:36:41.308Z
 ---
 Track and disposition every published review and addendum finding on PR #181. Reuse think-7f3p/think-li0h for the inline-program blocker; create children only for distinct remaining findings. Completion requires fixes or explicit rebuttal/defer, current-parent propagation, exact-head CI, and a published disposition map.
 
 ## Notes
 
-Published review channels: formal reviews 5218234305 and 5218320169; addenda 5691675367 and 5691680797. R1 is deduplicated into think-7f3p and think-li0h. Distinct remaining findings are children think-oxy2, think-qtsg, think-qn5t, think-uegl, think-xls7, think-166h, and think-7kj7. Current implementation agent owns R1 first; remaining children follow on the resulting head.
+PR #181 merged to main as 398e59e4 from exact reviewed head 0d658716. Independent senior review and post-#183 re-review found no remaining code blocker after all published findings were disposed. Exact hosted head was CLEAN and fully green: merges-into-main, packing-required, pages-required, validate, suite-a/b, frontend, geometry, sweeps, macOS, workbench, PDF, print, typography, screen, Chromium geometry including host self-test, and Firefox/WebKit font and geometry. Hosted CI exposed and we fixed child think-04qh: formatted extracted JS had invalidated a source-spelling negative-control constructor; file-backed fault probes now prove both host regressions reject. This review bead remains open only because its declared reverse blockers think-7f3p/think-li0h cover residual stack work that lands with #180; PR #181 itself is complete and merged.
