@@ -5,7 +5,7 @@ title: "Address review: PR #180 — no-exception browser floor"
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 labels: []
 dependencies:
   - type: blocks
@@ -20,8 +20,9 @@ child_order_hints:
   - is-01m2m6zrysz50dnrmahfmh4cf7
   - is-01m2m6zsddpzdefgjcjh1xmrq9
   - is-01m2mpez5qemp0vvh47wfbdq7p
+  - is-01m2mqv1tthpq9pb8r1m7d4c0e
 created_at: 2026-09-16T04:17:26.555Z
-updated_at: 2026-09-16T09:07:30.319Z
+updated_at: 2026-09-16T09:12:51.289Z
 ---
 Track and disposition every published review and addendum finding on PR #180. Reuse think-7o6d for the effective-tsc-coverage fix; create children only for distinct remaining findings. Completion requires fixes or explicit rebuttal/defer, propagation from the final PR #181 head, exact-head CI, and a published disposition map.
 
