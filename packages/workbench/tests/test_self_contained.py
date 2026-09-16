@@ -46,7 +46,6 @@ def test_external_resource_is_refused(fragment: str) -> None:
 @pytest.mark.parametrize(
     "fragment",
     [
-        '<script>URL.createObjectURL(new Blob(["ok"]));</script>',
         '<link rel="canonical" href="https://example.test/workbench/">',
         '<a href="https://example.test/explainer/">explainer</a>',
         "<style>.font { src: url(data:font/woff2;base64,AAAA); }</style>",
@@ -86,7 +85,7 @@ def test_a_script_that_requests_nothing_is_allowed(fixture: Path) -> None:
 
 def test_the_script_fixtures_are_present() -> None:
     assert len(list((FIXTURES / "refused").glob("*.html"))) == 8
-    assert len(list((FIXTURES / "allowed").glob("*.html"))) == 2
+    assert len(list((FIXTURES / "allowed").glob("*.html"))) == 3
 
 
 def test_the_published_page_carries_a_policy_that_grants_no_network_source() -> None:

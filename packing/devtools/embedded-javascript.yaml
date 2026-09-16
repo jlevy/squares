@@ -57,18 +57,6 @@ script_code: '[A-Za-z_$][\w$]*\s*[(.=;]'
 #   think-53dt  the video spikes                          123 sites in 13 files
 #   think-xvjf  packages/workbench tools and tests         13 sites in  4 files
 allowlist:
-  - path: packages/workbench/tests/test_self_contained.py
-    sites: 1
-    bead: think-xvjf
-  - path: packages/workbench/tools/workbench_tools/check_accessibility.py
-    sites: 2
-    bead: think-xvjf
-  - path: packages/workbench/tools/workbench_tools/check_candidate.py
-    sites: 3
-    bead: think-xvjf
-  - path: packages/workbench/tools/workbench_tools/check_pack_panel.py
-    sites: 7
-    bead: think-xvjf
   - path: packing/atlas/known-best/video/spikes/v1-slideshow/build_candidate.py
     sites: 1
     bead: think-53dt

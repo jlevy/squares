@@ -51,7 +51,8 @@ def check(page_path: Path) -> str:
         )
         page.on("pageerror", lambda error: errors.append(f"pageerror: {error}"))
         page.goto(page_path.resolve().as_uri())
-        page.wait_for_timeout(500)
+        # The page's script installs its API as it loads; wait on that, not on a fixed time.
+        page.wait_for_function(probe("benchmark/page-api-ready"))
         # The page opens on Animate; the stage's editing semantics below are Pack's.
         page.locator("#mode-pack").click()
 
@@ -72,7 +73,7 @@ def check(page_path: Path) -> str:
         stage.focus()
         page.keyboard.press("Enter")
         require(
-            page.evaluate("document.activeElement?.getAttribute('data-pack-index')") == "0",
+            _look(page, "accessibility/active-pack-index") == "0",
             "Enter did not focus square 1",
         )
         before = page.locator("#pack-squares > g").first.get_attribute("transform")
@@ -80,7 +81,7 @@ def check(page_path: Path) -> str:
         after = page.locator("#pack-squares > g").first.get_attribute("transform")
         require(after != before, "ArrowRight did not edit the focused square")
         require(
-            page.evaluate("document.activeElement?.getAttribute('data-pack-index')") == "0",
+            _look(page, "accessibility/active-pack-index") == "0",
             "keyboard editing lost the focused square",
         )
         page.keyboard.press("Escape")
