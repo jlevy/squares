@@ -720,6 +720,12 @@ Font and page-count checks inspect that stored PDF. The workflow uploads the che
 bytes unchanged; deployment waits for the print-layout and browser checks.
 A pull request runs the same build without deploying, so a render that breaks fails
 review rather than the next deploy.
+It builds only the pages its changes can affect: the workflow’s `scope` job runs
+`devtools.pages_scope`, which reads each builder’s `RENDER_INPUTS` and the tools the
+workflow runs for that page, and a page none of the changed files touches is skipped by
+a job named for the reason.
+`pages-required` is the aggregate a branch rule would require; it passes such a skip and
+nothing else.
 
 Publication uses `python -m devtools.render_explainer --prepare-math` after installing
 the locked Playwright Chromium.
@@ -736,17 +742,22 @@ not need a browser. The canonical
 [font and math loading architecture](vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md)
 lives in KPress, alongside the shared runtime’s public API documentation.
 
-The prepare job shares one page artifact with the Chromium print checks and the
-Firefox/WebKit loading checks.
+The prepare job renders the page twice at once, requires the two renders to agree, and
+shares one page artifact with the Chromium PDF, print, typography, screen and geometry
+jobs and the Firefox/WebKit loading and geometry jobs, which run in parallel.
 Deployment waits for all of them.
-The build job selects Node 24.18.0, installs the root lockfile with scripts disabled,
-and builds the typed workbench package into the self-contained `/workbench/` page.
+The workbench job selects Node 24.18.0, installs the root lockfile with scripts
+disabled, and builds the typed workbench package into the self-contained `/workbench/`
+page, beside `prepare` rather than after it.
+The publish job puts the prepared page, the checked PDF and the workbench back into one
+tree; only a push to `main` uploads that tree to Pages.
 Before drawing PDF bytes, the exporter checks that visible math is typeset; a completed
 font-error fallback that exposes literal TeX fails this check.
 Readable native MathML fallback is accepted by that check and remains subject to the
 separate PDF font policy.
 Pages exercises the production exporter with normal math and injected font errors and
-timeouts before it draws the publication candidate.
+timeouts once it has drawn the publication candidate: the normal-math control reads that
+PDF rather than drawing it again, and each fault control drives a draw of its own.
 These browser controls require the prepared page and pinned Chromium in Pages; the
 Python-only validation jobs leave them to that dedicated invocation.
 The PDF command `--check-artifact` requires an existing PDF and never rewrites it;

@@ -17,6 +17,23 @@ carries one quiet line saying what a reader does have to know -- that the animat
 still moving, so a number it draws is not evidence -- and that line goes when the model
 settles, which is a different question from where the code lives.
 
+`--check` is the page's determinism contract: two independent full builds, compared byte for
+byte. **The two run at once**, the published one into `--out` and its twin into a temporary
+directory, so they never write one file, and the check costs one build's wall time rather
+than two. A build is almost entirely child processes -- `build_candidate`, then the Node
+corpus check -- so the threads waiting on them do not contend for the GIL.
+
+Concurrency drops one thing the sequential form exercised: a second build that started after
+the first had finished, and could read whatever the first left behind. Nothing is left
+behind that a build reads (2026-09-15, from the code and from one watched run):
+`build_candidate` and the Node tools it runs write only into their own temporary directories,
+Node's compile cache is not enabled, and esbuild's build API keeps no disk cache; the run left
+nothing in the checkout but CPython's `__pycache__` bytecode, which is derived from the source
+rather than an input to the page. A future build that filled a cache and then read it would
+show both twins the same cold cache, so `--check` would not see a cold build and a warm one
+diverge. In exchange, a build that wrote to a fixed path now collides with its twin rather
+than passing.
+
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m workbench_tools.build_site
     uv run --frozen --all-extras --group dev python -m workbench_tools.build_site --check
@@ -29,6 +46,8 @@ import re
 import subprocess
 import sys
 import tempfile
+from collections.abc import Sequence
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from workbench_tools.self_contained import assert_self_contained_html
@@ -253,18 +272,41 @@ def build(
     return marked
 
 
-def main() -> int:
+def check_builds(out: Path, *, revision: str, dirty: bool) -> tuple[str, str]:
+    """Build the page twice at once and return both texts, the published one first.
+
+    Each build has its own directory -- `out` for the published page, a temporary directory
+    for its twin, removed on return -- so neither reads or overwrites the other's
+    `index.html`, and `out` is the only place a page is kept. Both are given one `revision`
+    and one `dirty`, looked up once by the caller, so the stamps cannot differ and any byte
+    difference is the build's own.
+
+    The builds' child processes used the same CPU either way on a local reading (37.6 s one
+    after the other, 34.9 s at once), so running them together adds no work; the wall it
+    saves is the Pages workflow's to measure, where the sequential pair cost about 48 s.
+    """
+    with (
+        tempfile.TemporaryDirectory(prefix="squares-workbench-twin-") as scratch,
+        ThreadPoolExecutor(max_workers=2) as pool,
+    ):
+        published = pool.submit(build, out, revision=revision, dirty=dirty)
+        twin = pool.submit(build, Path(scratch), revision=revision, dirty=dirty)
+        return published.result(), twin.result()
+
+
+def main(argv: Sequence[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", type=Path, default=OUT)
-    ap.add_argument("--check", action="store_true", help="rebuild and require byte equality")
+    ap.add_argument(
+        "--check", action="store_true", help="build twice at once and require byte equality"
+    )
     ap.add_argument("--revision", help="full source commit to stamp (default: checkout HEAD)")
-    o = ap.parse_args()
+    o = ap.parse_args(argv)
 
     revision = o.revision or source_revision()
     dirty = source_dirty()
-    first = build(o.out, revision=revision, dirty=dirty)
     if o.check:
-        again = build(o.out, revision=revision, dirty=dirty)
+        first, again = check_builds(o.out, revision=revision, dirty=dirty)
         if again != first:
             msg = (
                 "the workbench did not reproduce itself; a published page must be deterministic"
@@ -273,6 +315,7 @@ def main() -> int:
         print(f"deterministic, self-contained, {len(first) / 1024 / 1024:.1f} MB")
         return 0
 
+    first = build(o.out, revision=revision, dirty=dirty)
     print(f"{o.out / 'index.html'}: {len(first) / 1024 / 1024:.1f} MB, no external references")
     return 0
 

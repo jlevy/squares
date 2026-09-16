@@ -1,13 +1,14 @@
 """Real PDF math controls, run by Pages with SQPACK_PDF_MATH_BROWSER=1.
 
-These tests consume the prepared publication page and pinned Chromium. Python-only
-jobs skip them; the dedicated Pages invocation requires both inputs and fails if
-either is absent. Faults change one rendered FontFace, leaving the actual KPress
-runtime, host fallback, export waits, and final DOM guard in use.
+These tests consume the prepared publication page, the PDF Pages drew from it, and
+pinned Chromium. Python-only jobs skip them; the dedicated Pages invocation requires
+all three and fails if any is absent. Faults change one rendered FontFace, leaving the
+actual KPress runtime, host fallback, export waits, and final DOM guard in use.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from dataclasses import dataclass, field
@@ -140,12 +141,23 @@ def observe_export(
     return observed
 
 
-def test_production_pdf_accepts_typeset_math(monkeypatch: pytest.MonkeyPatch) -> None:
-    observed = observe_export(monkeypatch)
-    document = pdf.render_pdf_bytes()
+def test_production_pdf_accepts_typeset_math() -> None:
+    """The normal-math control, asserted on the PDF Pages publishes rather than a new draw.
+
+    Pages draws the publication PDF with `render_explainer_pdf --update` before these
+    controls run, and that draw is this control's subject: the production exporter on the
+    unfaulted page, which waits for `html.math-ready` and refuses unrendered math before
+    it draws. Drawing the same PDF again here to watch it succeed cost 4.5 s of every run
+    and asserted nothing the publication draw had not already done. What is asserted is
+    what the draw does not check about its own output -- a PDF, bound by its receipt to
+    the prepared page it was drawn from, with no font finding.
+    """
+    assert pdf.PAGE.is_file(), "Pages must provide its prepared site/index.html"
+    assert pdf.OUTPUT.is_file(), "Pages must draw the publication PDF before these controls"
+    document = pdf.OUTPUT.read_bytes()
     assert document.startswith(b"%PDF-")
-    assert observed.draws == 1
-    assert observed.state["math_ready"] is True
+    digest = hashlib.sha256(pdf.PAGE.read_bytes()).hexdigest()
+    assert document.endswith(f"\n%sqpack-source-html-sha256: {digest}\n".encode())
     assert pdf.font_findings(document) == []
 
 

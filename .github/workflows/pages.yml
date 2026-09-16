@@ -68,54 +68,16 @@ name: Certificate page
       - package-lock.json
       - packages/workbench/**
       - packing/devtools/check_published_site.py
+      - packing/devtools/pages_scope.py
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
-  # On a pull request the page is built but not deployed, so a change that
-  # breaks the render fails review rather than the next deploy.
+  # A pull request builds and checks the pages without deploying them, so a change that
+  # breaks a render fails review rather than the next deploy. It has no `paths:` filter:
+  # the `scope` job below decides, per page, from each builder's declared inputs, and a
+  # page it skips is skipped by a named job that says why. A filter here would be a third
+  # hand-kept list of the same inputs, and a pull request it excluded would carry no
+  # Certificate page checks at all, which a reader cannot tell from a missing run.
   pull_request:
-    paths:
-      - packing/cases/n11_fractional_certificate/**
-      - packing/cases/n11_threshold_certificate/**
-      - packing/devtools/render_explainer.py
-      - packing/devtools/prepare_explainer_math.py
-      - packing/devtools/measure_net_coarsening.py
-      - packing/devtools/build_composite_figure_data.py
-      - packing/devtools/render_explainer_pdf.py
-      - packing/tests/test_pdf_math_browser.py
-      - packing/devtools/sans_instances.py
-      - packing/devtools/check_print_layout.py
-      - packing/devtools/inspect_explainer_typography.py
-      - packing/devtools/check_math_faces.py
-      - packing/devtools/check_math_loading.py
-      - packing/devtools/check_math_startup.py
-      - packing/devtools/check_scroll_restoration.py
-      - packing/devtools/compare_math_fonts.py
-      - packing/devtools/sans_instances.py
-      - packing/src/sqpack/**
-      - packing/frontier/results.yaml
-      - packing/atlas/known-best/composite-figure.json
-      - packing/atlas/known-best/rendering/**
-      - packing/witnesses/known-best/**
-      - packing/devtools/templates/explainer-shell.html
-      - packing/devtools/templates/explainer-article.md
-      - packing/devtools/templates/fonts/**
-      - packing/atlas/known-best/known-best-1-100.svg
-      - packing/atlas/known-best/known-best-1-100.png
-      - packing/atlas/known-best/known-best-1-100.pdf
-      - packing/atlas/known-best/known-best-1-100-card.png
-      - packing/atlas/known-best/known-best-1-324.svg
-      - packing/atlas/known-best/known-best-1-324.png
-      - packing/atlas/known-best/known-best-1-324.pdf
-      - vendor/kpress
-      - packing/pyproject.toml
-      - packing/uv.lock
-      - .node-version
-      - package.json
-      - package-lock.json
-      - packages/workbench/**
-      - packing/devtools/check_published_site.py
-      - packing/atlas/known-best/manifest.json
-      - .github/workflows/pages.yml
 
 permissions:
   contents: read
@@ -125,9 +87,49 @@ concurrency:
   # A superseded pull-request build is cancelled; a deployment in flight on main is not.
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+# The job graph, and why it has this shape.
+#
+#   scope ─┬─ explainer-unchanged                  (only when the explainer is skipped)
+#          ├─ workbench-unchanged                  (only when the workbench is skipped)
+#          ├─ workbench ───────────────────────────────┐
+#          └─ prepare ─┬─ pdf ─────────────────────────┼─ publish ─┐
+#                      ├─ print-layout                 │           ├─ pages-required ─ (pr-wall)
+#                      ├─ typography                   │           │
+#                      ├─ screen                       │           │
+#                      ├─ geometry                     │           │
+#                      ├─ font-loading (ff, wk)        │           │
+#                      ├─ browser-geometry (ff, wk)    │           │
+#                      └─ startup-timing (dispatch)    │           │
+#                                                      └───────────┴─ deploy ─ verify-deployment
+#
+# A pull request waits for its slowest job, so what sets its wall is the longest chain,
+# and until 2026-09-15 that chain was `prepare` then one `build` job running about 300 s
+# of Chromium checks one after another on a four-cpu runner: 472 s median on the
+# workbench stack's pull requests, 381 s on pull requests into `main`, and 471 s on the
+# push to `main` that merged the stack (run 35017781374). None of those checks reads
+# another's result -- each loads the one prepared page -- so they are split into jobs
+# balanced by their measured step times, and the long pole is now `scope`, `prepare` and
+# one check job. Every check that ran before still runs, on the same prepared artifact;
+# nothing moved off the pull request (`OR-13`).
 jobs:
-  prepare:
+  # Which of the two pages this change can affect. A pull request that touches neither
+  # page's inputs does no browser work at all, and a workbench-only change no longer
+  # pays for the explainer's checks (#178 did: ten workbench probe files, about 330 s of
+  # explainer Chromium). `devtools.pages_scope` derives each half's inputs from the
+  # builder's own `RENDER_INPUTS` and from the tools the jobs below run; see its
+  # docstring for the rule and its tests for the comparison.
+  #
+  # It sits on the critical path, so it checks out without `packing/resources` and
+  # `packing/campaign` (523 MB of a 665 MB tree) and fetches no blob it does not read.
+  # The depth of two is what makes the merge commit's first parent -- the base as GitHub
+  # merged it -- available to diff against.
+  scope:
     runs-on: ubuntu-latest
+    outputs:
+      explainer: ${{ steps.scope.outputs.explainer }}
+      explainer_reason: ${{ steps.scope.outputs.explainer_reason }}
+      workbench: ${{ steps.scope.outputs.workbench }}
+      workbench_reason: ${{ steps.scope.outputs.workbench_reason }}
     defaults:
       run:
         working-directory: packing
@@ -135,9 +137,96 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # The declared inputs are read by importing the two builders, and kpress is
+          # installed from the submodule.
+          submodules: true
+          persist-credentials: false
+          fetch-depth: 2
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Decide which pages this change has to build
+        id: scope
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = pull_request ]; then
+            uv run --frozen --all-extras --group dev python -m devtools.pages_scope --diff HEAD^1 HEAD
+          else
+            uv run --frozen --all-extras --group dev python -m devtools.pages_scope --all "a $EVENT event"
+          fi
+
+  # A skipped page is skipped by a job with a name, not by a row of grey checks a reader
+  # has to interpret. These run only when their page is out of scope, and they fail if
+  # the scope job gave no reason, so an empty output cannot pass for a decision.
+  explainer-unchanged:
+    name: "explainer: no declared input changed, its build and browser checks are skipped"
+    needs: scope
+    if: needs.scope.outputs.explainer != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say why the explainer is not built
+        env:
+          REASON: ${{ needs.scope.outputs.explainer_reason }}
+        run: |
+          test -n "$REASON"
+          echo "The explainer is not built or checked on this run: $REASON."
+          echo "The explainer is not built or checked on this run: $REASON." >> "$GITHUB_STEP_SUMMARY"
+
+  workbench-unchanged:
+    name: "workbench: no declared input changed, its build is skipped"
+    needs: scope
+    if: needs.scope.outputs.workbench != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say why the workbench is not built
+        env:
+          REASON: ${{ needs.scope.outputs.workbench_reason }}
+        run: |
+          test -n "$REASON"
+          echo "The workbench is not built on this run: $REASON."
+          echo "The workbench is not built on this run: $REASON." >> "$GITHUB_STEP_SUMMARY"
+
+  prepare:
+    needs: scope
+    if: needs.scope.outputs.explainer == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      # Without `packing/resources` and `packing/campaign`, but not without the two
+      # directories: the renderer links the literature archive as a GitHub `tree/` URL
+      # because `packing/resources` is a directory, and would write `blob/` if it were
+      # missing, so each keeps its top-level files. Nothing else in the render's import
+      # closure reads under either tree (2026-09-15, every module loaded by
+      # `render_explainer` and `prepare_explainer_math`, searched for reads and walks).
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
           # kpress is vendored at vendor/kpress and installed from that path, so
           # the page cannot be rendered without the submodule checked out.
           submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -166,23 +255,32 @@ jobs:
       - name: Install the browser that measures the mathematics
         run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
-      # The renderer re-decides Conditions 1 through 4 before it writes anything,
-      # so a certificate those conditions refuse fails the build instead of being
-      # published with an explanation of a bound it does not carry. Condition 5 is
-      # a sweep per direction and the case replay gate owns it.
-      - name: Render the page from the retained certificate
-        run: uv run --frozen --group dev python -m devtools.render_explainer --prepare-math
-
+      # The renderer re-decides Conditions 1 through 4 before it writes anything, so a
+      # certificate those conditions refuse fails the build instead of being published
+      # with an explanation of a bound it does not carry. Condition 5 is a sweep per
+      # direction and the case replay gate owns it. The renderer also refuses a page that
+      # references anything outside itself (a script or stylesheet source, a CSS import, a
+      # url() that is not a data URI), so self-containment is the renderer's check.
+      #
       # The page is not checked in, so this is where a render that did not reproduce
-      # itself byte for byte would show: a second render has to match the first. The
-      # renderer also refuses a page that references anything outside itself (a script
-      # or stylesheet source, a CSS import, a url() that is not a data URI), so the
-      # self-containment check is the renderer's, not a grep here.
-      - name: Check the render is deterministic and self-contained
+      # itself byte for byte would show: two independent renders have to agree on every
+      # file they write. They used to run one after the other, 18 s and then 16 s on the
+      # critical path of every run; they now run at once on this four-cpu runner, and the
+      # second writes outside `site/` so neither can read or overwrite the other's output.
+      # What the concurrent pair no longer re-tests is a second render that starts after
+      # the first has finished and reads something it left behind -- and nothing in the
+      # render leaves anything behind: its only writes are the output files (2026-09-15,
+      # the render's import closure searched for writes and caches).
+      - name: Render the page twice and require the renders to agree
         run: |
-          uv run --frozen --group dev python -m devtools.render_explainer --prepare-math --check
+          twin="$RUNNER_TEMP/render-twin"
+          uv run --frozen --group dev python -m devtools.render_explainer --prepare-math --output "$twin/index.html" &
+          twin_pid=$!
+          uv run --frozen --group dev python -m devtools.render_explainer --prepare-math
+          wait "$twin_pid"
+          diff --recursive site "$twin"
           test -s site/index.html
-          echo "one file, $(du -h site/index.html | cut -f1)"
+          echo "two renders agree; one file, $(du -h site/index.html | cut -f1)"
 
       - name: Share the prepared page with all browser checks
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -192,8 +290,15 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  build:
-    needs: prepare
+  # The workbench is a second page inside the same artifact, and it reads nothing the
+  # explainer's jobs produce, so it builds beside `prepare` rather than at the end of a
+  # queue of explainer checks where it used to sit. It does no browser work. Its checkout
+  # is the whole tree, as before: the builder stamps whether the checkout is dirty into
+  # the published page, and that is not a reading to change for a few seconds of a job
+  # that is not on the critical path.
+  workbench:
+    needs: scope
+    if: needs.scope.outputs.workbench == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -226,23 +331,83 @@ jobs:
         working-directory: .
         run: npm ci --ignore-scripts
 
+      # Pages takes `packing/site` whole, so a subdirectory is a URL: this puts the
+      # workbench at `/workbench/` and leaves the explainer where it is, at `/`, which
+      # readers may already have linked. `--check` builds it twice, at once, and requires
+      # the two builds to agree byte for byte.
+      - name: Build the workbench at its own URL
+        run: uv run --frozen --all-extras --group dev python -m workbench_tools.build_site --check --revision "${{ github.sha }}"
+
+      - name: Share the workbench with the publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: workbench-page
+          path: packing/site/workbench
+          if-no-files-found: error
+          retention-days: 7
+
+  # The five Chromium check jobs below were one `build` job of about 300 s. Their split is
+  # by measured step time, and the readings are this workflow's own -- run 35039923396,
+  # the second run of the split shape -- rather than the queue's they replaced:
+  #
+  #   pdf           print faces 9, PDF draw 4, PDF controls 22, artifact check 6,
+  #                 print geometry 4 x 4.3                                            58 s
+  #   print-layout  print layout 35, the page-width overflow control 31               66 s
+  #   typography    typography 33, comparison variants 1, startup controls 17,
+  #                 mobile screen geometry 4 x 5                                       70 s
+  #   screen        math faces 29, font loading 18, reload 9                          56 s
+  #   geometry      controls 41, three desktop settings and the alternate
+  #                 certificate 4 x 5                                                 61 s
+  #
+  # on 15 to 30 s of setup each. The grouping follows the measurement where it has to:
+  # the startup controls are a screen check, and the fourteen geometry configurations are
+  # spread over three jobs, because balanced by cost is what keeps the longest job short.
+  # Each job downloads the one prepared page, so all of them check the bytes that are
+  # published, and a failure now names its job rather than a step in a 388 s queue.
+
+  # Everything the PDF is: drawn once, from the prepared page, then checked in place and
+  # handed to `publish` unchanged.
+  pdf:
+    needs: prepare
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
       - name: Use the prepared page
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: prepared-page
           path: packing/site
 
-      # Playwright's own Chromium, at the revision its pinned wheel names -- so the
-      # browser moves when someone bumps that pin and not when a runner image rolls.
-      # `--only-shell` is what `chromium.launch()` actually starts: 109 MB against the
-      # 291 MB a full `install chromium` pulls, for a binary the exporter never uses.
       - name: Cache the Playwright browser
         uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
 
-      - name: Install the browser the exporter draws with
+      - name: Install the pinned Chromium headless shell
         run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
       # After the page, not beside it: the exporter loads `site/index.html` from disk,
@@ -251,13 +416,18 @@ jobs:
       - name: Check the print faces cover every sans weight the page requests
         run: uv run --frozen --group dev python -m devtools.sans_instances --check
 
+      - name: Draw the PDF of the page
+        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --update
+
+      # The production exporter with normal math and with injected font errors and
+      # timeouts. The normal-math control reads the PDF drawn above instead of drawing the
+      # same production PDF a second time (4.5 s, one of the seven draws this job made);
+      # the four fault controls still drive the exporter themselves, because a fault has to
+      # be injected into a draw.
       - name: Check PDF math and real font-failure controls
         env:
           SQPACK_PDF_MATH_BROWSER: "1"
         run: uv run --frozen --group dev pytest -q tests/test_pdf_math_browser.py
-
-      - name: Draw the PDF of the page
-        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --update
 
       # Compare the saved PDF, including its HTML source receipt, to a fresh draw with
       # this runner's browser and fonts. Keep both raw PDFs outside the published site
@@ -304,16 +474,139 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      # Reproducibility is not correctness: the check above would have passed on all
-      # three print defects a reader found in the finished PDF, because two identical
+      # The print half of the saved-setting geometry; the screen half is `geometry`.
+      # The trap is what lets a cancelled run stop here: `uv run` turns the runner's
+      # interrupt into an ordinary exit status, which `|| geometry_status=1` absorbed, so
+      # a superseded run kept measuring one setting after another for about 50 s and held
+      # the concurrency group for all of it (run 34993121513). The trap exits once the
+      # command in flight returns.
+      - name: Check reserved print geometry under every saved font setting
+        run: |
+          trap 'exit 130' INT TERM
+          mkdir -p /tmp/math-geometry
+          geometry_status=0
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --print --output /tmp/math-geometry/chromium-1280-custom-serif-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --print --output /tmp/math-geometry/chromium-1280-custom-sans-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --print --output /tmp/math-geometry/chromium-1280-system-serif-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --print --output /tmp/math-geometry/chromium-1280-system-sans-print.json || geometry_status=1
+          exit "$geometry_status"
+
+      - name: Retain Chromium print geometry observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-geometry-chromium-print
+          path: /tmp/math-geometry
+          if-no-files-found: error
+          retention-days: 7
+
+      # The checked bytes, unchanged: `publish` puts this file beside the prepared page.
+      - name: Share the checked PDF with the publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: explainer-pdf
+          path: packing/site/t-018-explainer.pdf
+          if-no-files-found: error
+          retention-days: 7
+
+  print-layout:
+    needs: prepare
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
+      # Reproducibility is not correctness: the PDF artifact check would have passed on
+      # all three print defects a reader found in the finished PDF, because two identical
       # renders of a wrong page still agree. This one measures the print layout -- the
       # blocks the page declares centred, where the list markers sit, whether a footnote
-      # reference opens a line -- at the column the PDF actually has.
+      # reference opens a line -- at the column the PDF actually has, and the second
+      # measures the same thing on a page mutated to overflow, so the probe is held to
+      # catching what it exists to catch.
       - name: Check the print layout
         run: uv run --frozen --group dev python -m devtools.check_print_layout
 
       - name: Check the print-layout probe still catches a page-width overflow
         run: uv run --frozen --group dev python -m devtools.check_print_layout --self-check
+
+  typography:
+    needs: prepare
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
       - name: Check every comparison variant measures the font it draws
         run: uv run --frozen --group dev python -m devtools.compare_math_fonts check
@@ -323,6 +616,82 @@ jobs:
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --self-test
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --check-math --theme light
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --check-math --theme dark --width 390
+
+      # Timings remain descriptive: machine speed is not a correctness gate. The
+      # probe's retained controls make missing targets or unobserved content fail.
+      - name: Check normal math startup and the measurement controls
+        run: |
+          uv run --frozen --group dev python -m devtools.check_math_startup --self-test
+          uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --self-test
+          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --output /tmp/math-startup-desktop.json
+          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --width 390 --output /tmp/math-startup-mobile.json
+
+      # The mobile half of the saved-setting screen geometry, here rather than in
+      # `geometry` because that job's nine configurations were 80 s of its 100 against
+      # this job's 50 (run 35039923396). The trap: see `geometry`.
+      - name: Check reserved math geometry at 390 px under every saved font setting
+        run: |
+          trap 'exit 130' INT TERM
+          mkdir -p /tmp/math-geometry
+          geometry_status=0
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --width 390 --output /tmp/math-geometry/chromium-390-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --width 390 --output /tmp/math-geometry/chromium-390-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-system-sans-screen.json || geometry_status=1
+          exit "$geometry_status"
+
+      - name: Retain Chromium mobile geometry observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-geometry-chromium-390
+          path: /tmp/math-geometry
+          if-no-files-found: error
+          retention-days: 7
+
+  # Math faces, font loading and the reading position, all on the prepared page.
+  screen:
+    needs: prepare
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
       # Which composite draws each expression, which metric table laid it out, and
       # whether the faces were loaded before the first one was painted. None of the three
@@ -339,15 +708,6 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_math_loading --self-test
           uv run --frozen --group dev python -m devtools.check_math_loading
 
-      # Timings remain descriptive: machine speed is not a correctness gate. The
-      # probe's retained controls make missing targets or unobserved content fail.
-      - name: Check normal math startup and the measurement controls
-        run: |
-          uv run --frozen --group dev python -m devtools.check_math_startup --self-test
-          uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --self-test
-          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --output /tmp/math-startup-desktop.json
-          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --width 390 --output /tmp/math-startup-mobile.json
-
       - name: Check reload preserves the reading position
         run: |
           uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --self-test --output /tmp/scroll-restoration/chromium-1280.json
@@ -362,24 +722,63 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      # Saved font settings select different prepared variants before the page
-      # hydrates. Every setting must retain its own geometry on this same artifact.
+  # Saved font settings select different prepared variants before the page hydrates, and
+  # every setting must retain its own geometry on this same artifact. The first setting
+  # carries the host check and the negative controls, about 41 s of this job's 61; the
+  # mobile settings run in `typography` and the print settings in `pdf`.
+  geometry:
+    needs: prepare
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
+      # The trap: see the print geometry step in `typography`.
       - name: Check reserved math geometry under every saved font setting
         run: |
+          trap 'exit 130' INT TERM
           mkdir -p /tmp/math-geometry
           geometry_status=0
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --host-check --self-test --output /tmp/math-geometry/chromium-1280-custom-serif-screen-controls.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --width 390 --output /tmp/math-geometry/chromium-390-custom-serif-screen.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --output /tmp/math-geometry/chromium-1280-custom-sans-screen.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-custom-sans-screen.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --output /tmp/math-geometry/chromium-1280-system-serif-screen.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --width 390 --output /tmp/math-geometry/chromium-390-system-serif-screen.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --output /tmp/math-geometry/chromium-1280-system-sans-screen.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-system-sans-screen.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --print --output /tmp/math-geometry/chromium-1280-custom-serif-print.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --print --output /tmp/math-geometry/chromium-1280-custom-sans-print.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --print --output /tmp/math-geometry/chromium-1280-system-serif-print.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --print --output /tmp/math-geometry/chromium-1280-system-sans-print.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --alternate-certificate --output /tmp/math-geometry/chromium-1280-custom-serif-screen-alternate-certificate.json || geometry_status=1
           exit "$geometry_status"
 
@@ -392,19 +791,12 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      # The workbench is a second page inside the same artifact. Pages takes `packing/site`
-      # whole, so a subdirectory is a URL: this puts the workbench at `/workbench/` and
-      # leaves the explainer where it is, at `/`, which readers may already have linked.
-      # After the download, not before: that step writes `packing/site` and would erase it.
-      - name: Build the workbench at its own URL
-        run: uv run --frozen --all-extras --group dev python -m workbench_tools.build_site --check --revision "${{ github.sha }}"
-
-      - name: Upload the page artifact
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: packing/site
-
+  # The same prepared page in Firefox and WebKit: mobile font loading and the saved font
+  # settings at 1280 px here, the 390 px settings and the reload position in
+  # `browser-geometry`. WebKit's page loads are about 7 s against Firefox's 5, and the
+  # eight settings in one job made WebKit the longest job of run 35039248281 at 120 s;
+  # split this way its two jobs are about 80 s each, on top of an install that the
+  # package cache below takes from 30 s to about 14 s.
   font-loading:
     needs: prepare
     runs-on: ubuntu-latest
@@ -421,6 +813,12 @@ jobs:
         with:
           submodules: true
           persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -437,8 +835,37 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('packing/uv.lock') }}
 
+      # The browser binary was always cached; its system libraries were not. WebKit's are
+      # 181 packages, 114 MB, fetched in 24.7 s of a 46 s install in run 34993754160, and
+      # Firefox's 40 packages, 49 MB, in 8.9 s. apt now keeps what it downloads in a
+      # directory the Actions cache saves, keyed on the runner image (whose package lists
+      # decide the versions) and the lock (which pins Playwright and so the package list);
+      # an older image's archives are restored as a start and apt fetches only what moved.
+      # dpkg's per-file fsync and the man-db trigger are switched off for the unpack, on a
+      # runner that is discarded when the job ends. The same packages at the same versions
+      # are installed either way, so no browser sees a different system.
+      - name: Name the runner image the system packages belong to
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache the browser's system packages
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-${{ matrix.browser }}-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-${{ matrix.browser }}-${{ steps.image.outputs.image }}-
+            apt-${{ matrix.browser }}-
+
       - name: Install the pinned browser and its system libraries
-        run: uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
+        run: |
+          mkdir -p ~/apt-archives/partial
+          echo "Dir::Cache::Archives \"$HOME/apt-archives/\";" | sudo tee /etc/apt/apt.conf.d/90-pages-archives > /dev/null
+          echo force-unsafe-io | sudo tee /etc/dpkg/dpkg.cfg.d/90-pages-unsafe-io > /dev/null
+          sudo rm -f /etc/apt/apt.conf.d/docker-clean /var/lib/man-db/auto-update
+          uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
+          sudo rm -rf ~/apt-archives/partial ~/apt-archives/lock
+          sudo chown -R "$(id -u):$(id -g)" ~/apt-archives
 
       - name: Use the prepared page
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
@@ -449,6 +876,103 @@ jobs:
       - name: Check mobile font loading on the published artifact
         run: |
           uv run --frozen --group dev python -m devtools.check_math_loading --browser ${{ matrix.browser }} --width 390
+
+      # The trap: see the print geometry step in `typography`.
+      - name: Check saved font settings retain geometry at 1280 px
+        run: |
+          trap 'exit 130' INT TERM
+          mkdir -p /tmp/math-geometry
+          geometry_status=0
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 1280 --host-check --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-sans-screen.json || geometry_status=1
+          exit "$geometry_status"
+
+      - name: Retain browser geometry observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-geometry-${{ matrix.browser }}
+          path: /tmp/math-geometry
+          if-no-files-found: error
+          retention-days: 7
+
+  browser-geometry:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [firefox, webkit]
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('packing/uv.lock') }}
+
+      # The browser binary was always cached; its system libraries were not. WebKit's are
+      # 181 packages, 114 MB, fetched in 24.7 s of a 46 s install in run 34993754160, and
+      # Firefox's 40 packages, 49 MB, in 8.9 s. apt now keeps what it downloads in a
+      # directory the Actions cache saves, keyed on the runner image (whose package lists
+      # decide the versions) and the lock (which pins Playwright and so the package list);
+      # an older image's archives are restored as a start and apt fetches only what moved.
+      # dpkg's per-file fsync and the man-db trigger are switched off for the unpack, on a
+      # runner that is discarded when the job ends. The same packages at the same versions
+      # are installed either way, so no browser sees a different system.
+      - name: Name the runner image the system packages belong to
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache the browser's system packages
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-${{ matrix.browser }}-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-${{ matrix.browser }}-${{ steps.image.outputs.image }}-
+            apt-${{ matrix.browser }}-
+
+      - name: Install the pinned browser and its system libraries
+        run: |
+          mkdir -p ~/apt-archives/partial
+          echo "Dir::Cache::Archives \"$HOME/apt-archives/\";" | sudo tee /etc/apt/apt.conf.d/90-pages-archives > /dev/null
+          echo force-unsafe-io | sudo tee /etc/dpkg/dpkg.cfg.d/90-pages-unsafe-io > /dev/null
+          sudo rm -f /etc/apt/apt.conf.d/docker-clean /var/lib/man-db/auto-update
+          uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
+          sudo rm -rf ~/apt-archives/partial ~/apt-archives/lock
+          sudo chown -R "$(id -u):$(id -g)" ~/apt-archives
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
 
       - name: Check reload preserves the reading position in both viewports
         run: |
@@ -464,17 +988,15 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Check saved font settings retain geometry in both viewports
+      # The trap: see the print geometry step in `typography`.
+      - name: Check saved font settings retain geometry at 390 px
         run: |
+          trap 'exit 130' INT TERM
           mkdir -p /tmp/math-geometry
           geometry_status=0
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 1280 --host-check --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-serif-screen.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-custom-serif-screen.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-sans-screen.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --prose-font sans --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-custom-sans-screen.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-serif-screen.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-system-serif-screen.json || geometry_status=1
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-sans-screen.json || geometry_status=1
           uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --prose-font sans --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-system-sans-screen.json || geometry_status=1
           exit "$geometry_status"
 
@@ -482,7 +1004,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: math-geometry-${{ matrix.browser }}
+          name: math-geometry-${{ matrix.browser }}-390
           path: /tmp/math-geometry
           if-no-files-found: error
           retention-days: 7
@@ -503,6 +1025,12 @@ jobs:
         with:
           submodules: true
           persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -559,8 +1087,90 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  # What the deployment publishes, assembled from the three jobs that produce it: the
+  # prepared page and its Markdown edition and composite assets (`prepare`), the checked
+  # PDF (`pdf`), and the workbench at `/workbench/` (`workbench`). That is the same tree
+  # `build` uploaded when all three were written in one job. It runs on pull requests too
+  # -- a missing artifact fails review rather than the next deploy -- and lists every file
+  # with its size and digest so the tree can be compared across runs; only a push to
+  # `main` uploads it for Pages. It needs the producers and not the checks, so on a pull
+  # request it finishes beside the checks rather than after them.
+  publish:
+    needs: [prepare, pdf, workbench]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Use the checked PDF
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: explainer-pdf
+          path: packing/site
+
+      - name: Use the workbench
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: workbench-page
+          path: packing/site/workbench
+
+      - name: List what the publication holds
+        working-directory: packing/site
+        run: find . -type f -printf '%P\n' | sort | while read -r file; do printf '%10s  %s  %s\n' "$(stat -c %s "$file")" "$(sha256sum "$file" | cut -c1-16)" "$file"; done
+
+      - name: Upload the page artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: packing/site
+
+  # The one context a branch rule would require. It passes when every job this run needed
+  # passed, and when a job was skipped because its page was out of scope; it fails on any
+  # failure or cancellation, and on a skip whose cause was an upstream failure -- that
+  # upstream job is also needed here, so its own failure is what fails the aggregate. The
+  # scope's two outputs must be exactly `true` or `false`, so a scope that wrote nothing
+  # cannot pass as a decision to skip everything.
+  pages-required:
+    if: always()
+    needs:
+      - scope
+      - explainer-unchanged
+      - workbench-unchanged
+      - prepare
+      - workbench
+      - pdf
+      - print-layout
+      - typography
+      - screen
+      - geometry
+      - font-loading
+      - browser-geometry
+      - startup-timing
+      - publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every page this run builds to pass
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          jq -r 'to_entries[] | "\(.value.result)\t\(.key)"' <<< "$NEEDS"
+          jq -e '
+            .scope.result == "success"
+            and ([.scope.outputs.explainer, .scope.outputs.workbench] | all(. == "true" or . == "false"))
+            and ([.[].result] | all(. == "success" or . == "skipped"))
+          ' <<< "$NEEDS" > /dev/null
+
+  # Lane 3 of think-xfqk (`claude/ci-wall-budget`) adds `pr-wall` here: a trailing job with
+  # `needs: pages-required` and `if: always() && github.event_name == 'pull_request'`
+  # that reads this run's job timings and holds the pull-request wall to its budget.
+  # `pages-required` needs every job a pull request runs, so a job that needs it is the
+  # last one in the graph; nothing below this comment runs on a pull request.
+
   deploy:
-    needs: [build, font-loading]
+    needs: [publish, pages-required]
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     outputs:

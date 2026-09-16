@@ -488,7 +488,7 @@ def pages_filters() -> dict[str, list[str]]:
 def test_pages_selects_the_validation_node_runtime_before_rendering() -> None:
     workflow = safe_load((REPO / ".github" / "workflows" / "pages.yml").read_text("utf-8"))
     setup_node = "actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e"
-    for job_name in ("prepare", "build"):
+    for job_name in ("prepare", "workbench"):
         steps = workflow["jobs"][job_name]["steps"]
         selected = [step for step in steps if step.get("uses") == setup_node]
         assert len(selected) == 1, f"{job_name} must select one pinned Node runtime"
@@ -497,7 +497,7 @@ def test_pages_selects_the_validation_node_runtime_before_rendering() -> None:
 
 def test_pages_installs_the_locked_package_before_building_the_workbench() -> None:
     workflow = safe_load((REPO / ".github" / "workflows" / "pages.yml").read_text("utf-8"))
-    steps = workflow["jobs"]["build"]["steps"]
+    steps = workflow["jobs"]["workbench"]["steps"]
     node = next(
         i
         for i, step in enumerate(steps)
@@ -562,12 +562,14 @@ def test_the_pages_filter_covers_every_render_input() -> None:
     changed on main and left the deployed page showing the previous render, with every
     check passing, which is the shape of D-455 rather than a new one.
 
-    Both events are checked. A pull request that builds the page is the only review a
-    render change gets, so a filter that publishes on an input but does not build it on
-    the pull request is the same gap seen from the other side.
+    Only the deploy's filter is a list. A pull request that builds the page is the only
+    review a render change gets, and it has no filter since 2026-09-15: the scope job
+    reads `RENDER_INPUTS` itself, and `test_pages_scope` holds it to this declaration --
+    so the gap seen from the pull request's side is closed by construction rather than by
+    a second comparison here.
     """
     filters = pages_filters()
-    assert set(filters) == {"push", "pull_request"}, sorted(filters)
+    assert set(filters) == {"push"}, sorted(filters)
     for event, patterns in filters.items():
         missing = [
             declared.relative_to(REPO).as_posix()
