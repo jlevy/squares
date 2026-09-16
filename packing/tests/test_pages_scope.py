@@ -246,3 +246,5 @@ def test_an_identical_pair_of_revisions_changes_nothing() -> None:
     assert pages_scope.changed_paths("HEAD", "HEAD") == []
     with pytest.raises(SystemExit, match="git diff"):
         pages_scope.changed_paths("HEAD", "no-such-revision-anywhere")
+
+# A throwaway commit, on a throwaway branch, to watch the scope skip both pages.
