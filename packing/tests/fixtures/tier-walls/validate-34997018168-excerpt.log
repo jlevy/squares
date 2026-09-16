@@ -1,0 +1,17 @@
+2026-09-15T16:46:08.8231793Z ##[group]Run uv run --frozen --all-extras --group dev packing-validate --checks --jobs 3 --inner-jobs 1
+2026-09-15T16:46:08.8232551Z [36;1muv run --frozen --all-extras --group dev packing-validate --checks --jobs 3 --inner-jobs 1[0m
+2026-09-15T16:48:26.9918271Z == where the time went ==
+2026-09-15T16:48:26.9918530Z    116.00s  exact verification
+2026-09-15T16:48:26.9918802Z     79.22s  type floor (basedpyright)
+2026-09-15T16:48:26.9919080Z     69.27s  soundness perimeter
+2026-09-15T16:48:26.9919330Z     17.18s  bead tree
+2026-09-15T16:48:26.9919561Z     15.52s  soft-schema validation
+2026-09-15T16:48:26.9919853Z     10.64s  every session's cost is attributed
+2026-09-15T16:48:26.9920143Z      5.78s  basin identity
+2026-09-15T16:48:26.9920399Z      5.06s  synopsis agrees with the artifacts
+2026-09-15T16:48:26.9920699Z    135.71s  TOTAL (wall)
+2026-09-15T16:48:26.9920953Z == the tier against its ceiling ==
+2026-09-15T16:48:26.9921291Z    135.71s  wall of a 195s ceiling (70%), never recorded at this shape
+2026-09-15T16:48:26.9922197Z   note: no cost is recorded for the checks tier at 4 cpus, --jobs 3 --inner-jobs 1; write `measured_seconds: 135.7` into /home/runner/work/squares/squares/packing/devtools/gate-budgets.yaml to arm the drift rule
+2026-09-15T16:48:26.9922884Z 
+2026-09-15T16:48:26.9923043Z 49 of 74 STEPS PASSED (a named tier; this is not the full gate)

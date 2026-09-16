@@ -242,12 +242,17 @@ def attribute_files(before: Path, after: Path) -> list[str]:
         reverse=True,
     )
     added = [name for name in new if name not in old]
+    old_tests, new_tests = sum(t for t, _ in old.values()), sum(t for t, _ in new.values())
+    old_cost, new_cost = sum(s for _, s in old.values()), sum(s for _, s in new.values())
     lines = [
-        f"added test files: {len(added)}, {sum(new[name][0] for name in added)} tests, "
-        f"{sum(new[name][1] for name in added):.1f} test-seconds",
-        f"all files: {sum(t for t, _ in old.values())} -> {sum(t for t, _ in new.values())} "
-        f"tests, {sum(s for _, s in old.values()):.1f} -> {sum(s for _, s in new.values()):.1f} "
-        "test-seconds",
+        (
+            f"added test files: {len(added)}, {sum(new[name][0] for name in added)} tests, "
+            f"{sum(new[name][1] for name in added):.1f} test-seconds"
+        ),
+        (
+            f"all files: {old_tests} -> {new_tests} tests, "
+            f"{old_cost:.1f} -> {new_cost:.1f} test-seconds"
+        ),
         "attribution:",
         "  cause: >-",
         "    NAME THE CAUSE",

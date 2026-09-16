@@ -34,6 +34,7 @@ Nothing here prints or exits; `sqpack.cli.validate` renders the verdict and
 
 from __future__ import annotations
 
+import itertools
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -433,7 +434,7 @@ def rise_findings(
         return [
             f"{label}: policy.max_unattributed_rise is not declared, so no rise is checked"
         ], []
-    for earlier, later in zip(records, records[1:], strict=False):
+    for earlier, later in itertools.pairwise(records):
         if later.on < earlier.on:
             problems.append(
                 f"{label}: the record of {later.on} follows one of {earlier.on}; history is "

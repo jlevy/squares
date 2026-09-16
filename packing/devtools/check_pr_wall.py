@@ -294,7 +294,7 @@ def kind_of(base_ref: str | None, main_branch: str) -> str | None:
 def _instant(value: object) -> datetime | None:
     if not isinstance(value, str) or not value:
         return None
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return datetime.fromisoformat(value)
 
 
 def _span(start: object, end: object) -> float | None:
@@ -480,10 +480,14 @@ def _seconds(value: float | None, missing: str) -> str:
 def render(measurement: Measurement, verdict: WallVerdict) -> list[str]:
     """The verdict and the per-job table, as lines."""
     lines = [
-        f"== pull-request wall: {measurement.workflow} run {measurement.run_id}, kind "
-        f"{measurement.kind or 'unknown'} ==",
-        f"  {_seconds(measurement.wall_seconds, 'unmeasured')}s from the run's start to "
-        f"{measurement.ends_at}",
+        (
+            f"== pull-request wall: {measurement.workflow} run {measurement.run_id}, kind "
+            f"{measurement.kind or 'unknown'} =="
+        ),
+        (
+            f"  {_seconds(measurement.wall_seconds, 'unmeasured')}s from the run's start to "
+            f"{measurement.ends_at}"
+        ),
         f"  {'job':<34} {'queue':>6} {'setup':>6} {'work':>6} {'wall':>6}",
     ]
     lines.extend(
@@ -503,8 +507,10 @@ def summary_markdown(measurement: Measurement, verdict: WallVerdict) -> str:
     rows = [
         f"### Pull-request wall: {verdict.status}",
         "",
-        f"{_seconds(measurement.wall_seconds, 'unmeasured')} s from the run's start to "
-        f"{measurement.ends_at} (kind `{measurement.kind or 'unknown'}`).",
+        (
+            f"{_seconds(measurement.wall_seconds, 'unmeasured')} s from the run's start to "
+            f"{measurement.ends_at} (kind `{measurement.kind or 'unknown'}`)."
+        ),
         "",
         "| Job | Queue | Setup | Work | Wall |",
         "| --- | ---: | ---: | ---: | ---: |",
@@ -671,6 +677,24 @@ def _annotate(measurement: Measurement, verdict: WallVerdict) -> None:
             handle.write(summary_markdown(measurement, verdict))
 
 
+def _running_run(workflow: WorkflowWall) -> int:
+    """The run this job belongs to, refusing a job that is not the declared aggregator.
+
+    A wall measured from a job that is not the one every other job feeds would end
+    somewhere in the middle of the run, which is worse than not measuring it.
+    """
+    run_id = os.environ.get("GITHUB_RUN_ID")
+    if not run_id:
+        raise WallError("no --run-id was given and GITHUB_RUN_ID is not set")
+    job = os.environ.get("GITHUB_JOB")
+    if job != workflow.aggregator:
+        raise WallError(
+            f"this job is `{job}` but the register names `{workflow.aggregator}` as "
+            f"{workflow.id}'s aggregator, so the wall would end in the wrong place"
+        )
+    return int(run_id)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     try:
@@ -681,15 +705,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _sample(client, register, workflow, arguments)
         in_run = not arguments.run_id
         if in_run:
-            if not os.environ.get("GITHUB_RUN_ID"):
-                raise WallError("no --run-id was given and GITHUB_RUN_ID is not set")
-            job = os.environ.get("GITHUB_JOB")
-            if job != workflow.aggregator:
-                raise WallError(
-                    f"this job is `{job}` but the register names `{workflow.aggregator}` as "
-                    f"{workflow.id}'s aggregator, so the wall would end in the wrong place"
-                )
-            arguments.run_id = [int(os.environ["GITHUB_RUN_ID"])]
+            arguments.run_id = [_running_run(workflow)]
         status = 0
         for run_id in arguments.run_id:
             run = client.run(run_id)

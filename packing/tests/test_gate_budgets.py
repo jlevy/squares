@@ -22,12 +22,20 @@ Those are history and cannot drift.
 # pyright: reportPrivateUsage=false
 from __future__ import annotations
 
+import json
 from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
-from devtools.check_gate_budgets import coverage_problems
+from devtools.check_gate_budgets import (
+    OR_14_OUTER_EDGE_SECONDS,
+    attribute_files,
+    coverage_problems,
+    pull_request_tiers,
+    unrecorded_problems,
+    wall_problems,
+)
 from sqpack import gate_budgets
 from sqpack.cli import validate
 from sqpack.gate_budgets import BudgetError, Register, TierBudget
@@ -366,3 +374,205 @@ def test_a_run_over_its_ceiling_fails_the_command_even_with_every_step_green(
     printed = capsys.readouterr().out
     assert "THE TIER IS OUTSIDE ITS DECLARED COST BAND" in printed
     assert SLOW_STEP in printed
+
+
+# --- the three rules added on 2026-09-15, each named for how the second spiral got past --
+
+
+def a_record(seconds: float, on: str, *, attributed: bool = False) -> gate_budgets.Record:
+    """One record in a history, with or without the attribution a rise needs."""
+    attribution = (
+        gate_budgets.Attribution(
+            cause="a fabricated cause",
+            unit="step-seconds",
+            source="a fabricated source",
+            grew=(gate_budgets.Growth(name=SLOW_STEP, before=1.0, after=2.0),),
+        )
+        if attributed
+        else None
+    )
+    return gate_budgets.Record(
+        seconds=seconds, on=on, where="fabricated", attribution=attribution
+    )
+
+
+def rises(records: tuple[gate_budgets.Record, ...]) -> tuple[list[str], list[str]]:
+    return gate_budgets.rise_findings("a fabricated tier", records, live().policy)
+
+
+def test_a_tier_a_pull_request_runs_may_not_have_an_empty_record() -> None:
+    """Rule 5, and the gap the second spiral used first.
+
+    An empty record switches rules 2, 3 and 4 off together and leaves one absolute
+    ceiling. `checks` and `sweeps` sat empty for eight days and `checks` failed its
+    ceiling at least nine times in them with every step green.
+    """
+    register = live()
+    tier = recorded_tier(register)
+    emptied = with_tier(register, replace(tier, measured_seconds=None, measured_on=None))
+    problems = unrecorded_problems(emptied, {tier.id: "a job"})
+    assert any("no recorded cost" in problem for problem in problems)
+    assert unrecorded_problems(register, {tier.id: "a job"}) == []
+
+
+def test_a_pull_request_record_must_name_the_run_it_was_read_from() -> None:
+    """A reading nobody can re-take is a number, and the register is not for numbers."""
+    register = live()
+    tier = recorded_tier(register)
+    prose = with_tier(register, replace(tier, measured_where="measured on a good day"))
+    problems = unrecorded_problems(prose, {tier.id: "a job"})
+    assert any("names no hosted run" in problem for problem in problems)
+
+
+def test_every_tier_the_workflow_runs_on_a_pull_request_is_recorded() -> None:
+    """The live statement of rule 5, read from the workflow rather than from a list."""
+    tiers = pull_request_tiers()
+    assert set(tiers) <= set(live().ids)
+    assert tiers, "no pull-request job runs a whole tier"
+    assert unrecorded_problems(live(), tiers) == []
+
+
+def test_a_record_that_rises_without_attribution_is_refused() -> None:
+    """Rule 6, and the gap the second spiral used second.
+
+    `suite`'s record moved 102.83 -> 162.62 -> 118.72 -> 183.44 s in three days, each move
+    a real hosted reading, and 2.4x of growth went through a 1.5x drift rule because every
+    reading became the next baseline.
+    """
+    policy = live().policy
+    assert policy.max_unattributed_rise is not None
+    rise = policy.max_unattributed_rise
+    history = (a_record(100.0, "2026-12-01"), a_record(100.0 * rise * 1.1, "2026-12-02"))
+    problems, grandfathered = rises(history)
+    assert grandfathered == []
+    assert any(
+        "without naming the per-step or per-file costs" in problem for problem in problems
+    )
+
+
+def test_an_attributed_rise_passes_and_becomes_the_new_baseline() -> None:
+    """The rule asks for an argument, not for the tier to stop growing."""
+    policy = live().policy
+    assert policy.max_unattributed_rise is not None
+    rise = policy.max_unattributed_rise
+    attributed = a_record(100.0 * rise * 1.1, "2026-12-02", attributed=True)
+    problems, _ = rises((a_record(100.0, "2026-12-01"), attributed))
+    assert problems == []
+    after = a_record(attributed.seconds * 1.05, "2026-12-03")
+    problems, _ = rises((a_record(100.0, "2026-12-01"), attributed, after))
+    assert problems == [], "an attributed record starts the comparison again from itself"
+
+
+def test_a_ratchet_of_small_rises_is_measured_from_the_lowest_record() -> None:
+    """Each step inside the ratio, and the sum outside it: the failure the rule is for."""
+    policy = live().policy
+    assert policy.max_unattributed_rise is not None
+    step = (policy.max_unattributed_rise - 1.0) / 2 + 1.0
+    history = tuple(
+        a_record(100.0 * step**index, f"2026-12-0{index + 1}") for index in range(4)
+    )
+    problems, _ = rises(history)
+    assert problems, "four rises of half the allowance each are still a ratchet"
+
+
+def test_a_record_that_falls_needs_no_attribution() -> None:
+    """Rule 4 is what answers a record that falls; this rule is only about rises."""
+    problems, grandfathered = rises(
+        (a_record(200.0, "2026-12-01"), a_record(100.0, "2026-12-02"))
+    )
+    assert (problems, grandfathered) == ([], [])
+
+
+def test_the_ratchet_before_the_rule_is_shown_and_not_failed() -> None:
+    """The register shows 102 -> 183 rather than being edited to look tidy.
+
+    `conventions.md` section 7: the record is corrected by addition. The rule did not exist
+    when those records were written, so the check reports them, and they stay the baseline
+    the next rise answers for.
+    """
+    register = live()
+    problems, grandfathered = gate_budgets.ratchet_problems(register)
+    assert problems == []
+    suite = register.tier("suite")
+    assert suite is not None
+    assert len(suite.records) >= 2
+    first, last = suite.records[0], suite.records[-1]
+    assert last.seconds > first.seconds * (register.policy.max_unattributed_rise or 1.0)
+    assert any("suite" in note for note in grandfathered)
+
+
+def test_a_wall_budget_past_or14s_outer_edge_is_refused(tmp_path: Path) -> None:
+    """`OR-14` sets the edge; a budget past it is a different rule, not a looser one."""
+    register = tmp_path / "gate-budgets.yaml"
+    register.write_text(
+        "pull_request_walls:\n"
+        "  policy:\n"
+        "    regression_ratio: 1.2\n"
+        "    min_samples: 15\n"
+        "    main_branch: main\n"
+        "    setup_steps: ['^Set up job$']\n"
+        "  workflows:\n"
+        "  - id: packing-validation\n"
+        "    file: .github/workflows/packing-validation.yml\n"
+        "    aggregator: packing-required\n"
+        "    not_gating: [macos-portability]\n"
+        f"    budget_seconds: {OR_14_OUTER_EDGE_SECONDS * 2}\n"
+        "    argument: a fabricated register\n",
+        encoding="utf-8",
+    )
+    problems = wall_problems(register)
+    assert any("outer edge" in problem for problem in problems)
+
+
+def test_each_workflow_still_runs_the_wall_check_it_declares() -> None:
+    """Rule 7's wiring: a budget nothing runs is a budget nothing enforces.
+
+    Both job graphs are being restructured as this lands, so the check is that each
+    workflow's declared aggregator still invokes the tool -- not that the graph has a
+    particular shape.
+    """
+    assert wall_problems() == []
+
+
+def test_an_attribution_that_names_no_growth_is_refused(tmp_path: Path) -> None:
+    """A cause with no costs is a story. The rule asks for what grew, and by how much."""
+    spec = fabricated(tmp_path, ceiling=200.0, measured="100.0")
+    spec.write_text(
+        spec.read_text(encoding="utf-8") + "  attribution:\n"
+        "    cause: the tier got slower\n"
+        "    unit: step-seconds\n"
+        "    source: a fabricated source\n"
+        "    grew:\n"
+        "    - {name: a step, before: 10.0, after: 10.0}\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(BudgetError, match="no growth"):
+        gate_budgets.load(spec)
+
+
+def test_a_suite_record_can_be_attributed_from_two_per_file_reports(tmp_path: Path) -> None:
+    """G5's consumer: `suite` grows by many small files, so its attribution is per file.
+
+    115 new test files added 281 s of junit time between 2026-09-08 and 2026-09-14 and
+    nothing priced them. This turns two per-file reports into the block a raised record
+    has to carry, and says what the second one added.
+    """
+    before = tmp_path / "before.json"
+    after = tmp_path / "after.json"
+    before.write_text(
+        json.dumps([{"file": "tests/test_old.py", "tests": 4, "seconds": 2.0}]),
+        encoding="utf-8",
+    )
+    after.write_text(
+        json.dumps(
+            [
+                {"file": "tests/test_old.py", "tests": 4, "seconds": 2.5},
+                {"file": "tests/test_new.py", "tests": 9, "seconds": 30.0},
+            ]
+        ),
+        encoding="utf-8",
+    )
+    lines = attribute_files(before, after)
+    assert "added test files: 1, 9 tests, 30.0 test-seconds" in lines[0]
+    assert any("test_new.py" in line and "after: 30.00" in line for line in lines)
+    assert any("test_old.py" in line and "before: 2.00" in line for line in lines)
