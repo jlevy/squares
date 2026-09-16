@@ -5,7 +5,7 @@ title: "Address review: PR #175 — the guard, the ratchet and the probe loader"
 kind: task
 status: open
 priority: 1
-version: 15
+version: 17
 labels: []
 dependencies: []
 child_order_hints:
@@ -23,6 +23,8 @@ child_order_hints:
   - is-01m2m4jn8rggcnd09kz4y5qfkx
   - is-01m2m4jq6zqjsb031svc45t74f
   - is-01m2m4jsgp20vf60gqr245265w
+  - is-01m2m66z2th383fhep5zh67yfe
+  - is-01m2m66zx2kaa04dgecjgzvj8b
 created_at: 2026-09-16T03:31:52.789Z
-updated_at: 2026-09-16T03:36:17.681Z
+updated_at: 2026-09-16T04:04:48.161Z
 ---
