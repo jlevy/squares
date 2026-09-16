@@ -3,16 +3,16 @@ type: is
 id: is-01m2m6zqkgrbwg2j352gjpf6m6
 title: "PR #180 review R3: make motion-lab identity evidence executable"
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 8
 labels: []
 dependencies: []
 parent_id: is-01m2m6y4gw224dgrwf37bgqnhd
 created_at: 2026-09-16T04:18:18.863Z
-updated_at: 2026-09-16T07:18:55.859Z
-closed_at: null
-close_reason: null
+updated_at: 2026-09-16T08:08:30.677Z
+closed_at: 2026-09-16T08:08:30.676Z
+close_reason: "Paint-level Motion Lab invariant, opacity-zero/transparent-paint negative controls, committed golden, exact-head integration, and installed-Chrome 36+12-state validation are complete on the reviewed PR #180 line."
 resolution: null
 duplicate_of: null
 ---
@@ -20,4 +20,4 @@ Store and check the deterministic 48-state motion-lab report and add a drawing-l
 
 ## Notes
 
-Independent review at 7db71dd627ec4c544323f7948bd9f2e7c87e70b7 reproduced the residual failure with installed Google Chrome through the project Python 3.14 environment. Both labs' visible geometry was made fully transparent by CSS; devtools.check_motion_lab_pages still reported 'OK: exact lab drove 36 states and the general lab 12, with visible drawings matching the committed report'. Evidence points to packing/devtools/check_motion_lab_pages.py:85-90, 128-132, 189-198: inner_html is unaffected and locator.is_visible() does not reject opacity zero. Add a paint-level invariant (including ancestor opacity/display/visibility and nontransparent representative drawing marks, or an equally stable rendered-pixel check) and retain this exact mutant as the negative control.
+Fixed on the integrated PR #180 line: 7439c19e adds same-session SVG-stage screenshot differentials for both Motion Lab pages, removes each representative square layer under a file-backed probe, and requires restoration; live ancestor-opacity and transparent-paint mutants are retained as negative controls. After integrating final #181/main, installed Google Chrome drove all 36 exact and 12 general states and passed the committed golden with painted=true for both pages. Focused checker/browser-floor contracts passed, and the branch-owned mutation-snapshot regression from the 280,487-byte golden is fixed in 84ca6cf3 with an executable no-control-reference assertion and change-scope contract.

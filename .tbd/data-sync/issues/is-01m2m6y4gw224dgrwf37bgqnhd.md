@@ -5,7 +5,7 @@ title: "Address review: PR #180 — no-exception browser floor"
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 labels: []
 dependencies:
   - type: blocks
@@ -20,10 +20,10 @@ child_order_hints:
   - is-01m2m6zrysz50dnrmahfmh4cf7
   - is-01m2m6zsddpzdefgjcjh1xmrq9
 created_at: 2026-09-16T04:17:26.555Z
-updated_at: 2026-09-16T05:39:07.742Z
+updated_at: 2026-09-16T08:08:45.308Z
 ---
 Track and disposition every published review and addendum finding on PR #180. Reuse think-7o6d for the effective-tsc-coverage fix; create children only for distinct remaining findings. Completion requires fixes or explicit rebuttal/defer, propagation from the final PR #181 head, exact-head CI, and a published disposition map.
 
 ## Notes
 
-Review implementation is on PR #180 at 7db71dd6: 969f5642 closes suppression census, package-mode inventory, Biome configuration/info-rule bypasses, live noFloatingPromises, and executable Motion Lab golden findings; 7db71dd6 closes A2 with exact two-sided fixture/exclusion censuses and exact tsc diagnostic liveness. Focused browser-floor evidence is green (49 contract tests, Ruff, BasedPyright 0/0/0, embedded-JS over 908 files); hosted CI is running. Remaining review work is metadata only: update the PR body/disposition for think-vfqc and think-b490 after final #181 parent propagation, then require exact-head CI.
+PR #180 review remediation is integrated locally through 84ca6cf3 on parent main 398e59e4 (merge ba2cde3b; no push). think-7z01 is closed: both Motion Labs have a rendered-pixel paint invariant, file-backed layer removal/restoration probe, live opacity-zero and transparent-paint mutants, and an installed-Chrome 36+12-state committed-golden pass. The final #181 probe-type isolation is preserved while #180 keeps one effective ESLint configuration and repository-wide invocation. Root npm typecheck includes tsconfig.explainer.json with parity coverage (think-b9qy updated but remains open for command deduplication). The 280,487-byte golden's branch-owned mutation-snapshot cap regression is fixed by excluding that generated/non-control input, with executable control-census and change-scope tests. Integrated evidence: 192 focused tests; browser floor over 552 files plus isolated probe gate and 146 Node tests; npm run typecheck; Ruff 1,963 files; BasedPyright 0/0/0; full workbench Chrome check; Motion Lab Chrome check. Full fast reached 3,139/3,138 tests per shard; remaining failures were sandbox/editable-install artifacts or the inherited PR182 closed-debt baseline. The unrelated session-record hotfix is intentionally excluded and will be integrated from main before publication. Remaining: integrate that main hotfix, rerun exact focused/fast surfaces, update PR body/dispositions, and require exact-head hosted CI.

@@ -5,11 +5,11 @@ title: "Define the browser floor's commands once: npm scripts and validate.py di
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-15T04:54:40.615Z
-updated_at: 2026-09-15T04:54:40.615Z
+updated_at: 2026-09-16T08:08:24.326Z
 ---
 From the PR #125 review (`attic/reviews/pr125-review-7b06254c.md`, pinned `7b06254c`), non-blocking suggestion 4, "Duplicate floor commands": the browser floor's commands exist both in `package.json` (`lint`, `typecheck`) and in `validate.py`; have one call the other.
 
@@ -22,3 +22,7 @@ Still true at `91cf28d6` (#171, `claude/workbench-defaults-and-bounds`), and the
 So a new `tsconfig.*.json` is checked by the gate but not by `npm run typecheck`, and a change to the ESLint paths must be made in three places.
 
 Not cheap as a one-liner: the program discovery is a Python glob that npm scripts cannot express, and `packing/tests/test_browser_floor_contract.py` pins the gate's command shape. Options: `validate.py` runs `npm run lint`, `npm run typecheck` and `npm test` and the contract test reads the scripts; or one small Node entry point both call. Related: think-m0zb (one JavaScript floor), think-6o9n, think-4ylo.
+
+## Notes
+
+PR #180 integration at ba2cde3b fixed the newly observed partial-command symptom: root npm run typecheck now names final #181's tsconfig.explainer.json, and test_the_root_typecheck_script_names_every_root_type_program requires parity with every root tsconfig program plus the isolated probe and workbench commands. Direct npm run typecheck and the official dynamic browser-floor gate both pass. Keep this bead open: the larger requested consolidation (one command definition shared by npm and validate.py, including Node tests) remains.
