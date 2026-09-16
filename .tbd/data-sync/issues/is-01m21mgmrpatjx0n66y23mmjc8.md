@@ -5,13 +5,13 @@ title: Refresh the CI suite timing baseline from current hosted runs
 kind: bug
 status: open
 priority: 2
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
-parent_id: is-01m2k0eqwj7en422j33wtvw5dt
+parent_id: is-01m2kb4xhaqh3bv0cnnqnqvvsp
 created_at: 2026-09-08T23:09:10.292Z
-updated_at: 2026-09-16T00:27:53.335Z
+updated_at: 2026-09-16T03:00:08.866Z
 closed_at: null
 close_reason: null
 resolution: null
