@@ -207,6 +207,25 @@ agenda:
       - packing/campaign/agent-sessions/session-131-n11-w5-validation-efficiency.md
       disposition: retire-success
       follow_up: think-d3h5
+    - scope: >-
+        Correction of 2026-09-15, by addition. The checks-tier measured baseline the
+        outcome above says is still owed, and who owns it.
+      classification: never-opened
+      result: >-
+        The outcome above names think-d3h5 as its follow-up, which is the next scientific
+        route-selection block and carries no measurement obligation; the baseline it says
+        further hosted readings are required for was owned only by the older think-gsz0.
+        It was still unwritten eight days later, during which the checks tier failed its
+        195-second ceiling at least nine times with every step green. think-z121, the
+        guardrail lane of think-xfqk, records it: 145.53 seconds, the geometric mean of
+        seven pull-request runs of 2026-09-15 at the tier's reference shape, with the
+        attribution its 1.46x rise over the 99.39-second record of 2026-09-06 requires,
+        and a register rule that fails any pull-request tier left without a recorded cost.
+      evidence:
+      - packing/devtools/gate-budgets.yaml
+      - packing/devtools/read_tier_walls.py
+      disposition: defer-dependency
+      follow_up: think-gsz0
   - id: BC-353
     purpose: tool_validation
     owner_focus: process

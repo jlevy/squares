@@ -166,11 +166,11 @@ alone is not full pre-merge evidence.
 | `--edit` | contributor, in the edit loop | 46 of 76 | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; a broad diff selects the whole suite and needs `--jobs 1`, see below |
 | `--fast` | contributor, at a block boundary; the union of the five tiers below | 65 of 76 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 49 of 76 | 195 s | composition changed after two PR 160 runs exceeded the ceiling, which did not end the overruns (`think-lrs0`); only the ceiling applies |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 2 of 76 | 150 s | new partition; the first hosted run establishes its baseline |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 76 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 49 of 76 | 195 s | 145.5 s on CI, the mean of seven readings of 2026-09-15 |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 2 of 76 | 150 s | 76.7 s on CI, the mean of seven readings of 2026-09-15 |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 76 | 180 s | 102.7 s on CI, the mean of seven readings of 2026-09-15 |
 | `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 76 | 275 s | 183.4 s on CI, one reading of the lane as it now stands |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 76 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 76 | 210 s | 119.7 s on CI, the mean of seven readings of 2026-09-15 |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 76 of 76 | 3600 s | split across four jobs; not clocked whole |
 
 `--geometry`’s cost is a geometric mean of four readings at the reference shape.
@@ -189,7 +189,23 @@ whose 1.79x spread was runner variation rather than a code speedup — stays in 
 register as history of the previous selection.
 Refresh the means as comparable measurements accumulate; a recorded band would represent
 that variation better than a point.
-`--sweeps`, `--checks`, and `--frontend` have no recorded cost.
+**Every tier a pull request runs now carries a recorded cost, and one that does not
+fails `devtools.check_gate_budgets`.** `--checks`, `--frontend` and `--sweeps` had none
+between 2026-09-07 and 2026-09-15, and an empty record switches the drift, stale and
+headroom rules off together, leaving one absolute ceiling — which is how `--checks`
+failed that ceiling at least nine times in those eight days with every step green.
+The four figures above are geometric means of seven readings each, taken by
+`devtools.read_tier_walls` from the pull-request runs whose gate had `main`’s current 76
+steps ([34924677097](https://github.com/jlevy/squares/actions/runs/34924677097),
+34925616821, 34926777301, 34929890466, 34930296150, 35012847055 and
+[35013703659](https://github.com/jlevy/squares/actions/runs/35013703659)); the register
+carries each reading and its spread.
+`--checks` is 1.46x the 99.39 s it replaces, so its entry carries the attribution a rise
+needs: `exact verification` went 50.15 s to 119.21 s after `devtools.dilation_corollary`
+joined it, and the type floor 51.31 s to 102.50 s as its include list gained the
+workbench and the video spikes.
+
+What follows is the history those records replace.
 The corpus widening of 2026-09-07 invalidated the first two baselines.
 Two of the sweeps tier’s four steps were split that day, so the tier those readings
 measured no longer exists.
@@ -211,7 +227,6 @@ After `main` merged into the stack, #160 read 200.68 s and 199.74 s at `72629c03
 - the branch cost rollup’s render step, at 45 to 61 s, which `main` fixed at `65a5c001`;
 - type-floor time from the Python #160 adds.
   With `main`’s fix merged, #125 read 146.04 s of 195 s at `bca21da0` (run 34923097435).
-  #160 has not been re-read since, and `think-lrs0` stays open until it is.
   [D-472](defects.md) retains the calibration history, and `think-be1s` tracks the band
   representation.
 
@@ -242,8 +257,54 @@ comparisons:
 
 All three runs are from 2026-09-06. The durations are observations, not necessary lower
 bounds or enforced tier baselines.
-The [tier table](#the-tiers) lists the current declarations: `--geometry` and `--suite`
-have measured baselines; `--checks`, `--frontend`, and `--sweeps` remain unmeasured.
+The [tier table](#the-tiers) lists the current declarations; every tier a pull request
+runs has a measured baseline since 2026-09-15.
+
+### The pull-request wall, and the rules that keep a record honest
+
+A tier’s ceiling bounds a gate step.
+**What `OR-14` targets is the wall**: from the run starting to the moment the
+aggregating job can start, which includes every job’s queue, checkout, toolchain and
+uploads. Nothing measured it until 2026-09-15, and that is how every tier stayed inside
+its ceiling while the required wall went from a 154 s median on 2026-09-06 to 288 s, and
+the certificate page’s pull-request run from 37 s to a 464 s median.
+
+`packing/devtools/check_pr_wall.py` measures it on every pull-request run, in
+`packing-required` and in the certificate page’s trailing `pr-wall` job, from the GitHub
+API. It fails the run when the wall is over the budget declared in `pull_request_walls`
+in [`gate-budgets.yaml`](packing/devtools/gate-budgets.yaml) — **180 s, `OR-14`’s outer
+edge** — or when it is 1.2x or more of the median recorded for that workflow and that
+kind of pull request (`main` or `stacked`), over at least fifteen recorded runs.
+When it cannot judge a run — a cancelled or failed prerequisite, a kind with no record,
+too few recorded runs — it says so as a GitHub warning and in the step summary rather
+than passing silently.
+It also prints each job’s queue, setup and work, because “CI is slow” is not actionable
+and “`suite` finished last, setup 35 s, work 250 s” is.
+
+Three rules over the register, all static and all checked by
+`devtools.check_gate_budgets`, exist because the second spiral got past the four above:
+
+1. **A tier a pull-request job runs may not have an empty record.** Which tiers those
+   are is read from the workflow, so a new pull-request job cannot arrive without one,
+   and the record must cite the hosted run it was read from.
+2. **A record may not rise past 1.2x of the lowest record since its last attributed one
+   without an `attribution:`** naming the per-step or per-file costs that grew and the
+   cause. `--suite`’s record moved 102.83 → 162.62 → 118.72 → 183.44 s in three days,
+   each move a real reading, and 2.4x of growth went through the 1.5x drift rule because
+   every reading became the next baseline.
+   Each entry now keeps its `history:`, records dated before the rule are shown rather
+   than failed, and they stay the baseline the next rise answers for.
+   `read_tier_walls --baseline-run-id` prints the block for a step tier and
+   `check_gate_budgets --attribute-files` prints it for `--suite` from two per-file
+   test-cost reports.
+3. **A wall budget may not be looser than `OR-14`’s outer edge, and its aggregator must
+   still run the check.** Raising the budget past 180 s is a change to `OR-14`, and the
+   place to argue it is [`operating-rules.md`](operating-rules.md).
+
+Re-record a tier with
+`uv run --frozen --all-extras --group dev python -m devtools.read_tier_walls --run-id …`,
+and a wall with `… python -m devtools.check_pr_wall --workflow … --sample --recent 40`;
+both print the block to paste.
 
 ### The behavioural lanes
 

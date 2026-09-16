@@ -522,6 +522,24 @@ than the tier’s own wall produces **no completed run at all** — three runs o
 were cancelled that way before the pattern was seen.
 On 2026-09-05 a single test fix cost twenty-three minutes to verify, four times over.
 
+**It spiralled a second time, and the register that was built to stop the first did not
+object, because nothing it checks is this rule’s number.** The required pull-request
+wall was a 154 s median on 2026-09-06, the day the surface was split across concurrent
+jobs; it crossed 180 s on 2026-09-08 and was 288 s by 2026-09-15, while the certificate
+page’s pull-request run went from 37 s to a 464 s median.
+Every tier stayed inside its own ceiling throughout, because a tier’s ceiling bounds a
+gate step and the wall is the longest job with its queue, checkout and toolchain.
+Three ways through were found and closed on 2026-09-15, each now a rule the gate
+applies: an empty record for a tier a pull request runs, which switches the drift, stale
+and headroom rules off together and left `--checks` failing its ceiling nine times in
+eight days with every step green; a record re-based to each new reading, which took
+`--suite` 102.83 → 162.62 → 118.72 → 183.44 s through a 1.5x drift rule; and the absence
+of any budget on the wall itself.
+`packing/devtools/check_pr_wall.py` now measures the wall on every pull-request run and
+fails it over 180 s -- the outer edge above -- or 1.2x a recorded median, and says so
+rather than passing when it cannot judge.
+[development.md](development.md#validation-tiers) states all three.
+
 The target applies to ordinary PR feedback.
 A full final checkpoint may take longer, but its measured duration is still open to
 improvement. Twenty-seven minutes observed on one checkpoint is not a necessary minimum.
@@ -570,6 +588,17 @@ What this rule requires in practice:
   aspiration, and a gate that goes red for reasons unrelated to any regression is one
   people learn to ignore.
   The target belongs in the agenda; the ceiling belongs around the measurement.
+  The exception is this rule’s own outer edge: a wall above three minutes is a defect by
+  the sentence above, so the budget on the wall is the edge and the rule around what was
+  measured is a ratio against the recorded median beside it.
+- **Budget the wall, not only the steps.** Every part of a surface can be in band while
+  the thing a contributor waits for doubles.
+  Measure the whole wait -- queue, setup and execution apart -- on the run it describes,
+  and give it a number a machine reads.
+- **Raise a record only with attribution.** A drift rule answered by re-recording the
+  new reading is a ratchet: each move is measured, and the growth still compounds.
+  Say which steps or test files grew, by how much, and why, and keep the history in the
+  register so the sum is visible.
 
 ### OR-15: Outcome over ceremony, and process is revised on a cadence rather than on irritation
 
