@@ -5,16 +5,18 @@ title: "[task] Lane 1: Certificate page PR wall under OR-14 (parallel check jobs
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 labels: []
 dependencies:
   - type: blocks
     target: is-01m2m5ad594cv9k37w6nm9e533
+  - type: blocks
+    target: is-01m2m5zjmj7dsycs1x6yxwcwwt
 parent_id: is-01m2k0eqwj7en422j33wtvw5dt
 child_order_hints:
   - is-01m2m59rqzb3m4qjs4h3qca405
 created_at: 2026-09-15T20:03:22.746Z
-updated_at: 2026-09-16T04:03:13.613Z
+updated_at: 2026-09-16T04:18:36.232Z
 ---
 Lane 1 of epic think-xfqk. Branch claude/ci-pages-parallel in worktree lane-d-tools, PR into main. Items P1-P5 and the Pages section of gate-budgets.yaml (G4 with lane 3), from attic/ci-review/pages.md and synthesis.md in the squares-viz-explanations worktree. Before: 472 s median on stack PRs, about 381 s on PRs into main. Target: a full run in about 3 min and no browser work on PRs outside the workflow's inputs.
 

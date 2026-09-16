@@ -3,13 +3,17 @@ type: is
 id: is-01m2m4b864y4skq152a8dnxev4
 title: "PR #175 review R2: the allowlist ratchets counts but not membership"
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2m4aptpzqgmmhqxgxz3vba5
 created_at: 2026-09-16T03:32:10.562Z
-updated_at: 2026-09-16T03:32:10.562Z
+updated_at: 2026-09-16T04:10:14.014Z
+closed_at: 2026-09-16T04:10:14.014Z
+close_reason: "Fixed on PR #175 in commit 0ab75b7c, each with a check watched failing on the pre-fix source first."
+resolution: null
+duplicate_of: null
 ---
 check_no_embedded_js.py:206 (BEAD.match) and :547 (ratchet). A bead: entry naming a nonexistent bead loads. Fix: resolve every bead through LIVE_BEAD_STATES as test_every_relaxed_flag_names_an_open_tracker does; plus a base comparison on --since. (PR #175, review 5218208204)

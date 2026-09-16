@@ -5,13 +5,15 @@ title: Page scripts inside HTML shells come under Biome
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m2m6xx00sabcq5zqkrneavd0
 parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-15T17:27:59.530Z
-updated_at: 2026-09-15T17:27:59.530Z
+updated_at: 2026-09-16T04:18:35.568Z
 ---
 Found by PR #181 (think-3pox): some of the explainer page's script (the kpress wrapper and the atom declarations) lives in `explainer-shell.html`, and Biome reads no `*.html`, so that JavaScript is outside the floor. It was outside the floor before #181 too; #181 moved some script frames there. The same may hold for other HTML shells or templates (the workbench's `assets/template.html`, the motion-lab pages).
 
