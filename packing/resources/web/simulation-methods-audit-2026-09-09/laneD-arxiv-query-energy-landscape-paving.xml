@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/PTV/LB9G75rXbBx8yJYrudoS9Gs</id>
+  <title>arXiv Query: search_query=all:"energy landscape paving"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:26:39Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22energy+landscape+paving%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1107.2010v1</id>
+    <title>Subtle pH differences trigger single residue motions for moderating conformations of calmodulin</title>
+    <updated>2011-07-11T12:25:20Z</updated>
+    <link href="https://arxiv.org/abs/1107.2010v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1107.2010v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study reveals the essence of ligand recognition mechanisms by which calmodulin (CaM) controls a variety of Ca2+ signaling processes. We study eight forms of calcium-loaded CaM each with distinct conformational states. Reducing the structure to two degrees of freedom conveniently describes main features of conformational changes of CaM via simultaneous twist-bend motions of the two lobes. We utilize perturbation-response scanning (PRS) technique, coupled with molecular dynamics simulations to analyze conformational preferences of calcium-loaded CaM, initially in extended form. PRS is comprised of sequential application of directed forces on residues followed by recording the resulting coordinates. We show that manipulation of a single residue, E31 located in one of the EF hand motifs, reproduces structural changes to compact forms, and the flexible linker acts as a transducer of binding information to distant parts of the protein. Independently, using four different pKa calculation strategies, we find E31 to be the charged residue (out of 52), whose ionization state is most sensitive to subtle pH variations in the physiological range. It is proposed that at relatively low pH, CaM structure is less flexible. By gaining charged states at specific sites at a pH value around 7, local conformational changes in the protein will lead to shifts in the energy landscape, paving the way to other conformational states. These findings are in accordance with FRET measured shifts in conformational distributions towards more compact forms with decreased pH. They also corroborate mutational studies and proteolysis results which point to the significant role of E31 in CaM dynamics.</summary>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.BM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-07-11T12:25:20Z</published>
+    <arxiv:comment>47 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.bio-ph"/>
+    <author>
+      <name>Ali Rana Atilgan</name>
+    </author>
+    <author>
+      <name>Ayse Ozlem Aykut</name>
+    </author>
+    <author>
+      <name>Canan Atilgan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0201054v1</id>
+    <title>Global Optimization by Energy Landscape Paving</title>
+    <updated>2002-01-27T23:07:58Z</updated>
+    <link href="https://arxiv.org/abs/physics/0201054v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0201054v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We introduce a novel heuristic global optimization method, energy landscape paving (ELP), which combines core ideas from energy surface deformation and tabu search. In appropriate limits, ELP reduces to existing techniques. The approach is very general and flexible and is illustrated here on two protein folding problems. For these examples, the technique gives faster convergence to the global minimum than previous approaches.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-01-27T23:07:58Z</published>
+    <arxiv:comment>to appear in Phys. Rev. Lett. (2002)</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 88 (2002) 068105</arxiv:journal_ref>
+    <author>
+      <name>Luc T. Wille</name>
+      <arxiv:affiliation>FAU</arxiv:affiliation>
+    </author>
+    <author>
+      <name>U. H. E. Hansmann</name>
+      <arxiv:affiliation>MTU</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.88.068105</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.88.068105" title="doi"/>
+  </entry>
+</feed>

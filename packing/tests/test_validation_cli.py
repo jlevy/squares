@@ -222,14 +222,19 @@ def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
             steps = job.get("steps", [])
             if not any("packing-validate" in str(step.get("run", "")) for step in steps):
                 continue
+            # Exactly one upload of the timing artifact, and it runs whatever the job did
+            # -- a job that uploads its receipts only when it passes is a job whose
+            # failures cannot be priced. Other uploads are allowed and are selected out by
+            # path: the pull-request `validate` job also publishes the tree id it
+            # validated, which is what licenses the post-merge skip.
             upload = [
                 step
                 for step in steps
                 if str(step.get("uses", "")).startswith("actions/upload-artifact@")
+                and step["with"]["path"] == "${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}"
             ]
             assert len(upload) == 1, name
             assert upload[0]["if"] == "always()", name
-            assert upload[0]["with"]["path"] == "${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}"
 
 
 def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
@@ -676,13 +681,20 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *validate.BEHAVIORAL_TEST_ROOTS,
+        # The browser floor's liveness tests are the one file this lane does not collect:
+        # they need the pinned Node toolchain and run in the `frontend` job instead, which
+        # installs it. `test_the_liveness_tests_run_in_one_job` is the other half.
+        f"--ignore={validate.BROWSER_FLOOR_LIVENESS_TESTS}",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
         "4",
-        # The plugin that prints the cpu section, loaded by name across the subprocess
-        # boundary because `sqpack.cli` may not import `devtools`.
+        # The plugin that divides the lane by file and writes the per-file cost report,
+        # and the one that prints the cpu section, both loaded by name across the
+        # subprocess boundary because `sqpack.cli` may not import `devtools`.
+        "-p",
+        "devtools.suite_files",
         "-p",
         "devtools.cpu_durations",
         # Wall time enforces the ceiling; the CPU threshold only filters diagnostics.
@@ -799,7 +811,7 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *validate.BEHAVIORAL_TEST_ROOTS,
         "-m",
         "slow and not exhaustive_exact",
         "-n",
@@ -878,6 +890,7 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
 
     monkeypatch.setattr(validate, "_run", run_here)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
+    monkeypatch.setattr(validate, "BEHAVIORAL_TEST_ROOTS", ("tests",))
     environment = os.environ.copy()
     for name in ("PYTEST_ADDOPTS", "PYTEST_XDIST_WORKER", "PACKING_VALIDATION_ARTIFACT_DIR"):
         environment.pop(name, None)
@@ -1207,7 +1220,7 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *validate.BEHAVIORAL_TEST_ROOTS,
         "-m",
         "exhaustive_exact",
         "--durations=0",
@@ -1266,6 +1279,7 @@ def test_invalid_worker_count_and_unmatched_selection_are_actionable() -> None:
         ("--records",),
         ("--edit",),
         ("--checks",),
+        ("--frontend",),
         ("--geometry",),
         ("--suite",),
         ("--sweeps",),
@@ -1918,6 +1932,7 @@ def test_the_edit_tier_cannot_under_run() -> None:
     edit = names(fast=False, edit=True)
     records = names(fast=True, records=True)
     checks = names(fast=False, checks=True)
+    frontend = names(fast=False, frontend=True)
     sweeps = names(fast=False, sweeps=True)
     suite = names(fast=False, suite=True)
     geometry = names(fast=False, geometry=True)
@@ -1927,25 +1942,31 @@ def test_the_edit_tier_cannot_under_run() -> None:
     assert fast - edit == {step.name for step in validate.STEPS if step.broad}, (
         "the only steps --fast adds over --edit are the ones marked broad"
     )
-    # The pull request's five jobs of steps are a partition of `--fast` and not five
-    # filters, which is what makes it safe to run them on separate runners: no step can be
-    # in two and none in none.
-    parts = [checks, typecheck, geometry, suite, sweeps]
+    # The pull request's jobs are a partition of `--fast` rather than independent filters,
+    # which is what makes it safe to run them on separate runners: no step can be in two
+    # and none in none.
+    parts = [checks, frontend, typecheck, geometry, suite, sweeps]
     assert set().union(*parts) == fast
     for index, part in enumerate(parts):
         for other in parts[index + 1 :]:
             assert not part & other
-    # `--edit` lands inside `--checks` and `--typecheck` together, and since 2026-09-06
-    # that is a rule rather than an accident. Every sweep and the behavioural lane are
+    # `--edit` lands inside `--checks`, `--frontend` and `--typecheck` together, and which
+    # steps may sit outside `--checks` while staying in `--edit` is pinned rather than left
+    # open. Every sweep, the behavioural lane and the full-page browser contract are
     # `broad`, and `Step.geometry` may be carried only by a `broad` step for exactly this
     # reason: a contributor's edit loop never spans the pull request's geometry, suite or
-    # sweeps runners. The type floor is the one argued exception, since 2026-09-15: it is
-    # in `--edit`, it has a runner of its own because no `--jobs` divides it, and it is
-    # pinned to exactly that one step so the exception cannot quietly widen.
-    assert edit <= checks | typecheck
-    assert typecheck == {"type floor (basedpyright)"}, (
-        "the type floor is the only edit-tier step allowed off the checks runner"
-    )
+    # sweeps runners. Two steps are the argued exceptions -- the cheap browser source
+    # floor, which needs a Node toolchain the Python tiers do not have, and since
+    # 2026-09-15 the type floor, which is one process no `--jobs` divides.
+    assert edit <= checks | frontend | typecheck
+    assert {
+        step.name
+        for step in validate.STEPS
+        if (step.frontend or step.typecheck) and not step.broad
+    } == {
+        "browser floor (biome, eslint, tsc, node:test)",
+        "type floor (basedpyright)",
+    }
     assert all(step.broad for step in validate.STEPS if step.geometry), (
         "a non-broad step in --geometry would put part of --edit on a second runner"
     )
@@ -2180,8 +2201,8 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
 def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     """Which steps leave the `checks` job for a runner of their own, and why each did.
 
-    `sweep`, `suite` and `geometry` decide which of the pull request's four jobs runs a
-    step, and all three default to False, so the failure mode of forgetting one is a
+    `frontend`, `sweep`, `suite` and `geometry` decide which pull-request job runs a
+    step, and all four default to False, so the failure mode of forgetting one is a
     slower `checks` job rather than a step nobody runs -- the safe direction, as with
     `broad` and `touches`. What needs a guard is the other direction: a step moved out to
     make the `checks` job look fast. Adding a name below means typing a number next to it.
@@ -2283,6 +2304,15 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     assert {step.name for step in validate.STEPS if step.typecheck} == {
         "type floor (basedpyright)",
     }
+    assert {step.name for step in validate.STEPS if step.frontend} == {
+        "browser floor (biome, eslint, tsc, node:test)",
+        # Moved here from the quick lane on 2026-09-15: 15s of tests that need the pinned
+        # toolchain, which was making every behavioural job install Node for 8s of setup
+        # -- twice over, once the lane was sharded. `BROWSER_FLOOR_LIVENESS_TESTS` is the
+        # path the lane ignores and this step runs.
+        "browser floor liveness tests",
+        "workbench browser behavior in Chromium",
+    }
     assert {step.name for step in validate.STEPS if step.geometry} == {
         "D-034's n=5 identity pair still reproduces",
         "historical regressions",
@@ -2299,6 +2329,7 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     # rather than in this one. Carrying two of the flags would put one step in two jobs,
     # which is a bill paid twice.
     marks = [
+        {step.name for step in validate.STEPS if step.frontend},
         {step.name for step in validate.STEPS if step.sweep},
         {step.name for step in validate.STEPS if step.suite},
         {step.name for step in validate.STEPS if step.geometry},
@@ -2307,7 +2338,7 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     assert all(
         step.fast
         for step in validate.STEPS
-        if step.sweep or step.suite or step.geometry or step.typecheck
+        if step.frontend or step.sweep or step.suite or step.geometry or step.typecheck
     )
     for index, marked in enumerate(marks):
         for other in marks[index + 1 :]:
@@ -2370,6 +2401,7 @@ def _workflow_selections(*, pull_request: bool) -> dict[str, set[str]]:
                     records=namespace.records,
                     edit=namespace.edit,
                     checks=namespace.checks,
+                    frontend=namespace.frontend,
                     sweeps=namespace.sweeps,
                     suite=namespace.suite,
                     geometry=namespace.geometry,
@@ -2394,12 +2426,13 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
     shape is shortened by cpus and by nothing else.
 
     What a split like this risks is the gap `D-455` came through in the other direction --
-    a step in no selection, run by nobody, reported by nothing -- so the four commands are
+    a step in no selection, run by nobody, reported by nothing -- so the five commands are
     read from the workflow and checked to be a partition rather than trusted to be.
 
-    `--checks`, `--geometry`, `--suite` and `--sweeps` are a partition in `_select_steps`
-    by construction, so this is really a check on the YAML: that the workflow invokes all
-    four, on a pull request, and narrows none of them with `--only` or `--skip`.
+    `--checks`, `--frontend`, `--geometry`, `--suite` and `--sweeps` are a partition in
+    `_select_steps` by construction, so this is really a check on the YAML: that the
+    workflow invokes all five, on a pull request, and narrows none of them with `--only`
+    or `--skip`.
 
     Pairwise disjointness is asserted rather than inferred from the union. Two jobs make
     those the same statement; more than two do not, and the case they differ on -- one
@@ -2410,7 +2443,14 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
     commands = _workflow_commands(pull_request=True)
     shard_jobs = {f"suite-{index}-of-{validate.SUITE_SHARDS}" for index in _shard_indexes()}
 
-    assert set(selections) == {"validate", "typecheck", "geometry", "sweeps", *shard_jobs}
+    assert set(selections) == {
+        "validate",
+        "frontend",
+        "typecheck",
+        "geometry",
+        "sweeps",
+        *shard_jobs,
+    }
     # The shards are the one pair that shares a step, and they share exactly the lane they
     # divide: each selects the behavioural lane and nothing else, the shard numbers are
     # every shard once, and `test_the_suite_shards_partition_every_test_file` is what
@@ -2433,6 +2473,7 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
     assert selections["sweeps"] == {step.name for step in validate.STEPS if step.sweep}
     assert selections["geometry"] == {step.name for step in validate.STEPS if step.geometry}
     assert selections["typecheck"] == {step.name for step in validate.STEPS if step.typecheck}
+    assert selections["frontend"] == {step.name for step in validate.STEPS if step.frontend}
 
 
 def _shard_indexes() -> range:
@@ -2554,6 +2595,7 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
             checked.add(tier_id)
     assert checked == {
         "checks",
+        "frontend",
         "typecheck",
         "geometry",
         *validate.SUITE_SHARD_TIER_IDS,
@@ -2705,6 +2747,10 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
     assert validate.Step("probe", lambda _context: "", fast=True).broad is False
     assert {step.name for step in validate.STEPS if step.broad} == {
         "fast behavioral tests",
+        "workbench browser behavior in Chromium",
+        # 15s of pytest spawning the pinned Node toolchain, which is not an edit-loop
+        # cost; it moved out of the quick lane on 2026-09-15 and stayed out of `--edit`.
+        "browser floor liveness tests",
         # Measured 2026-08-30: 31.6s in CI against a 43s edit tier, so carrying it there
         # would nearly double the tier for a record that changes when a witness is
         # retained -- which is to say rarely, and never from an edit. It still runs in

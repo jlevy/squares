@@ -9,6 +9,7 @@ fails by surprise.
 from __future__ import annotations
 
 import subprocess
+import sys
 import tomllib
 from pathlib import Path
 from typing import cast
@@ -16,6 +17,7 @@ from typing import cast
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = PROJECT_ROOT.parent
 PYPROJECT = PROJECT_ROOT / "pyproject.toml"
+WORKBENCH_ROOT = REPOSITORY_ROOT / "packages/workbench"
 
 #: Rule families the floor enables, each argued for in `pyproject.toml` beside its entry.
 REQUIRED_FAMILIES = {
@@ -51,9 +53,18 @@ def _tool(name: str) -> dict[str, object]:
     return _mapping(_mapping(_config()["tool"])[name])
 
 
-def _tracked_python() -> list[str]:
+def _project_python() -> list[str]:
     listing = subprocess.run(
-        ["git", "ls-files", "--", "*.py", "*.pyi"],
+        [
+            "git",
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "--",
+            "*.py",
+            "*.pyi",
+        ],
         cwd=REPOSITORY_ROOT,
         capture_output=True,
         text=True,
@@ -104,6 +115,15 @@ def test_the_rule_families_are_enabled_and_print_is_a_checked_boundary() -> None
         "src/sqpack/cli/*",
         "src/sqpack/campaign/runner.py",
         "src/sqpack/campaign/ledger.py",
+        # The retained video spikes are tools of the same kind -- generators, measurement
+        # scripts and browser checks whose interface is what they print -- and were waived
+        # wholesale when the lint floor was raised over them. `**` rather than `*` because
+        # they sit two directories below `packing/`.
+        "atlas/known-best/video/spikes/**",
+        # The workbench's command modules, moved out of that spike into their own package:
+        # the same tools, whose progress and receipts are what they print. Written from
+        # `packing/` because ruff resolves per-file patterns against this config's root.
+        "../packages/workbench/tools/**/*.py",
     }
     ceiling = _mapping(lint["mccabe"])["max-complexity"]
     assert isinstance(ceiling, int)
@@ -128,32 +148,76 @@ def test_every_tracked_python_file_is_under_a_gate_or_named() -> None:
     pyright_excluded = [
         f"packing/{entry}" for entry in exclude if not entry.startswith((".", "**"))
     ]
-    skills = [f".agents/skills/{name}" for name in _handwritten_skills()]
+    lint_roots = [
+        "packing/",
+        "packages/workbench/",
+        *(f".agents/skills/{name}" for name in _handwritten_skills()),
+    ]
 
     def under(path: str, roots: list[str]) -> bool:
         return any(path == root or path.startswith(root.rstrip("/") + "/") for root in roots)
 
     unreached: list[str] = []
-    for path in _tracked_python():
+    project_python = _project_python()
+    for path in project_python:
         if path.startswith("vendor/"):
             continue  # submodules carry their own tooling
         named = under(path, list(NAMED_EXCLUSIONS))
-        linted = (path.startswith("packing/") and not under(path, ruff_excluded)) or under(
-            path, skills
-        )
+        linted = under(path, lint_roots) and not under(path, ruff_excluded)
         typed = under(path, pyright_included) and not under(path, pyright_excluded)
         if not named and not (linted and typed):
             unreached.append(path)
     assert unreached == []
 
     # A named exclusion that names nothing tracked is a stale entry, not a contract.
-    tracked = _tracked_python()
     for exclusion in NAMED_EXCLUSIONS:
-        assert any(under(path, [exclusion]) for path in tracked), exclusion
+        assert any(under(path, [exclusion]) for path in project_python), exclusion
     for exclusion in ruff_excluded + pyright_excluded:
-        assert any(under(path, [exclusion]) for path in tracked), exclusion
+        assert any(under(path, [exclusion]) for path in project_python), exclusion
     # And every named exclusion is also an exclusion or non-target of both gates.
     for exclusion in NAMED_EXCLUSIONS:
         assert not (
             exclusion.startswith("packing/") and not under(exclusion, ruff_excluded)
         ) or (exclusion in ruff_excluded), exclusion
+
+    workbench_marker = "packages/workbench/tools/workbench_tools/__init__.py"
+    assert workbench_marker in project_python
+    assert under(workbench_marker, lint_roots)
+    assert under(workbench_marker, pyright_included)
+
+
+def test_the_workbench_python_floor_rejects_a_print_statement() -> None:
+    """The package target uses the packing Ruff configuration, including its T20 floor.
+
+    The sample reaches Ruff on stdin under a package path, so the configuration's own
+    per-file rules decide what applies and nothing is written into the source tree, where a
+    transient file could race another test's inventory under xdist (#160 R18). The tools
+    directory, where `print` is allowed, is the control: the same text passes there.
+    """
+    ruff = Path(sys.executable).with_name("ruff")
+    assert ruff.is_file(), "run this contract through the packing development environment"
+
+    def check(path: Path) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            [
+                str(ruff),
+                "check",
+                "--config",
+                str(PYPROJECT),
+                "--stdin-filename",
+                str(path),
+                "-",
+            ],
+            input='print("this must remain a tool-only exception")\n',
+            check=False,
+            capture_output=True,
+            text=True,
+            cwd=PROJECT_ROOT,
+        )
+
+    done = check(WORKBENCH_ROOT / "floor_violation.py")
+    assert done.returncode != 0, "Ruff accepted a package violation below the project floor"
+    assert "T201" in done.stdout + done.stderr
+    tool = check(WORKBENCH_ROOT / "tools/workbench_tools/floor_violation.py")
+    assert tool.returncode == 0, tool.stdout + tool.stderr
+    assert not (WORKBENCH_ROOT / "floor_violation.py").exists()

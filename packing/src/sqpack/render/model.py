@@ -110,6 +110,13 @@ class SquareGeometry:
     corners: tuple[Point2, ...]
     pose: RigidPose | None = None
     label: str | None = None
+    locked: bool = True
+    """Whether this square has reached its final place in this frame.
+
+    Per square and per frame, which is what it has to be: an animation that locks the
+    outside squares first and the tilted core last needs to colour them one at a time.
+    Default true so a still, which is every frame of an atlas figure, is fully coloured
+    without anyone having to say so."""
 
 
 @dataclass(frozen=True)
@@ -368,8 +375,13 @@ def validate_trajectory(trajectory: PackingTrajectory) -> None:
     for frame in trajectory.frames:
         if tuple(square.square_id for square in frame.squares) != reference:
             raise ValueError("trajectory square identity or order changed")
-        if any(square.pose is None for square in frame.squares):
-            raise ValueError("trajectory squares require poses")
+        # Corners are enough. A frame built from a retained witness carries exact corners
+        # and no pose, and it has to stay that way: attaching a float pose changes what the
+        # renderer draws, because full-side contact shading needs two edges exactly
+        # parallel and a float angle is not exactly anything. The motion model derives the
+        # centre and angle it needs from the corners when a pose is absent.
+        if any(len(square.corners) < 2 for square in frame.squares):
+            raise ValueError("trajectory squares require corners or poses")
         if frame is not trajectory.frames[0] and frame.logical_time <= previous:
             raise ValueError("trajectory times must increase")
         previous = frame.logical_time

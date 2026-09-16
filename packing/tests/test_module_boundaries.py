@@ -350,13 +350,15 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     validate_steps = _mapping(jobs["validate"])["steps"]
     assert isinstance(validate_steps, list)
-    # The pull-request surface is concurrent jobs since 2026-09-06: `--checks` here,
-    # `--geometry` in the `geometry` job, `--sweeps` in the `sweeps` job, and since
-    # 2026-09-15 `--typecheck` in the `typecheck` job and `--suite` divided by `--shard`
-    # across `suite-1-of-2` and `suite-2-of-2`, so a pull request waits for the longest of
-    # them rather than their sum. That they partition `--fast` is proved against the CLI's own
-    # selector by `test_the_pull_request_jobs_partition_the_surface`; what is pinned here
-    # is only that the commands in the file are the ones that test resolves.
+    # The pull-request surface is concurrent jobs, four since 2026-09-06, five since the
+    # workbench package took its frontend contracts out of the checks queue, and seven
+    # since 2026-09-15: `--checks` here, `--frontend` in the `frontend` job, `--typecheck`
+    # in the `typecheck` job, `--geometry` in the `geometry` job, `--sweeps` in the
+    # `sweeps` job, and `--suite` divided by `--shard` across `suite-1-of-2` and
+    # `suite-2-of-2`, so a pull request waits for the longest of them rather than their
+    # sum. That they partition `--fast` is proved against the CLI's own selector by
+    # `test_the_pull_request_jobs_partition_the_surface`; what is pinned here is only that
+    # the commands in the file are the ones that test resolves.
     #
     # The `--jobs` and `--inner-jobs` figures are part of the pin because they are not
     # decoration, and every one of them is a measurement someone took:
@@ -379,6 +381,22 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert " ".join(str(required_step["run"]).split()) == (
         "uv run --frozen --all-extras --group dev packing-validate --checks "
         "--jobs 3 --inner-jobs 1"
+    )
+    frontend_job = _mapping(jobs["frontend"])
+    assert frontend_job["if"] == "github.event_name == 'pull_request'"
+    frontend_steps = frontend_job["steps"]
+    assert isinstance(frontend_steps, list)
+    frontend_step = next(
+        _mapping(step)
+        for step in frontend_steps
+        if _mapping(step).get("name") == "Run the frontend source and built-page contracts"
+    )
+    # `--jobs 2` since the browser floor's liveness tests moved here from the quick lane:
+    # two slots put them and the source floor beside the Chromium contract, which is the
+    # unit that sets this tier's wall, rather than after it.
+    assert " ".join(str(frontend_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --frontend "
+        "--jobs 2 --inner-jobs 1"
     )
     geometry_job = _mapping(jobs["geometry"])
     assert geometry_job["if"] == "github.event_name == 'pull_request'"
@@ -515,11 +533,11 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     required_job = _mapping(jobs["packing-required"])
     # Every part of the pull-request surface, and this is the assertion that keeps them
     # mandatory. Splitting `--fast` across concurrent jobs buys wall time only if a pull
-    # request still cannot merge without all of them, so a `needs` naming three of the
-    # four would turn the fourth into an advisory check that nothing blocks on -- the
-    # failure mode the split is otherwise a clean win against. Derived from the jobs that
-    # run on a pull request rather than typed, so a job added to the surface without
-    # being added here fails this line.
+    # request still cannot merge without all of them, so a `needs` naming all but one
+    # would turn that one into an advisory check that nothing blocks on -- the failure
+    # mode the split is otherwise a clean win against. Derived from the jobs that run on
+    # a pull request rather than typed, so a job added to the surface without being added
+    # here fails this line.
     # `validate` carries no `if`, because it also runs the post-merge surface.
     pull_request_jobs = {
         name
@@ -540,7 +558,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert "continue-on-error" not in required_job
     required_job_steps = required_job["steps"]
     assert isinstance(required_job_steps, list)
-    # One `test` per prerequisite, and all four of them, because `needs` alone does not
+    # One `test` per prerequisite, and every one of them, because `needs` alone does not
     # make a job's failure fatal here: this job runs under `!cancelled()`, so it is reached
     # even when a prerequisite failed, and it is the shell that decides. A missing line
     # would leave that part of the surface green whatever it reported.

@@ -2981,7 +2981,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="sweep every direction before rendering; the case replay gate decides the same "
         "condition, so this is for a release build rather than an edit loop",
     )
+    parser.add_argument(
+        "--emit-katex-css",
+        action="store_true",
+        help="write the self-contained, pruned KaTeX CSS used by repository pages",
+    )
     args = parser.parse_args(argv)
+
+    # The workbench package shares the explainer's exact font-pruning contract. Expose it
+    # through a process boundary so a package-installed builder can run from any working
+    # directory without making the repository's uninstalled `devtools` tree importable.
+    if args.emit_katex_css:
+        sys.stdout.write(katex_css(kpress_static()))
+        return 0
 
     # Paths are resolved here, once: a relative `--certificate` or `--output`
     # used to render the whole page and then fail on `relative_to`.

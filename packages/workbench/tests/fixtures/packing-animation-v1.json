@@ -1,0 +1,52 @@
+{
+  "contract": "packing.squares:PackingAnimation/v1",
+  "name": "shared-animation-contract",
+  "n": 2,
+  "guided": false,
+  "duration_seconds": 3.5,
+  "palette": {
+    "hue": "identity",
+    "shade": "evidence"
+  },
+  "reference": {
+    "best_known": 2.0,
+    "proved_lower_bound": 1.0
+  },
+  "fair_reach": [
+    {
+      "n": 2,
+      "fair_side": 2.0,
+      "record": 2.0,
+      "excess_pct": 0.0
+    }
+  ],
+  "frames": [
+    {
+      "t": 0.0,
+      "side": 2.0,
+      "squares": [[1.5, 0.5, 0.0], [0.5, 0.5, 0.0]],
+      "square_ids": [2, 1],
+      "phase": "free",
+      "guided": false,
+      "feasible": true
+    },
+    {
+      "t": 0.5,
+      "side": 2.0,
+      "squares": [[1.0, 0.5, 0.0], [1.0, 0.5, 0.0]],
+      "square_ids": [2, 1],
+      "phase": "guide begins",
+      "guided": true,
+      "feasible": true
+    },
+    {
+      "t": 1.0,
+      "side": 2.0,
+      "squares": [[1.5, 0.5, 0.0], [0.5, 0.5, 0.0]],
+      "square_ids": [2, 1],
+      "phase": "guided continuation",
+      "guided": false,
+      "feasible": true
+    }
+  ]
+}

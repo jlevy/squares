@@ -238,7 +238,7 @@ def expected_document() -> dict:
                 },
                 {
                     "access": "public-http-svg",
-                    "acquisition_status": "eligible-after-retention-control",
+                    "acquisition_status": "derived-facts-acquisition-approved-2026-09-10",
                     "evidence_path": "resources/web/unitsquare-release1-2026/results.json",
                     "format": "json-index-and-svg-geometry",
                     "key": "unitsquare-release-1",

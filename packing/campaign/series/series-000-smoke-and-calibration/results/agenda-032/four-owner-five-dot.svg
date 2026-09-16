@@ -3,7 +3,7 @@
   <title id="figure-title">Five dots exclude one four-owner case</title>
   <desc id="figure-description">The square container of side 3.84 contains four teal patches guaranteed to lie inside four distinct owner squares. Blue diamonds are their ownership marks. Five red dots meet every remaining selected inner core. Distinct cores cannot share a dot, so at most five further squares fit, while eleven total need seven. An inset shows the half-side square intersection that forces each patch. The result excludes this specified owner case, not every eleven-square packing.</desc>
   <metadata>
-    <sqpack:profile version="7">
+    <sqpack:profile version="8">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="analytic-transfer">packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md</sqpack:value>
       <sqpack:value name="branch">four reflected bottom-left:m1:j0 owner conditions</sqpack:value>

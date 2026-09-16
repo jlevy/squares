@@ -6,6 +6,7 @@ import http.client
 import json
 import math
 import random
+import re
 import threading
 from typing import cast
 
@@ -330,3 +331,18 @@ def test_live_profile_declares_the_palette_size_the_browser_indexes_into() -> No
     assert f'data-palette-size="{len(SQUARE_FILL_PALETTE)}"' in html
     assert "% 20" not in asset_text("free-quench.js")
     assert len(SQUARE_FILL_PALETTE) >= MAX_INTERACTIVE_SQUARES
+
+
+def test_reduced_motion_outranks_every_transition_in_the_stylesheet() -> None:
+    """A request for reduced motion has to beat every transition, whatever its selector.
+
+    The reduced-motion block matches `*`, the lowest specificity there is, so without
+    `!important` a rule such as `select, button { transition: ... }` still animates for a
+    viewer who asked for no motion.
+    """
+    css = asset_text("motion-lab.css")
+    ordinary, marker, reduced = css.partition("@media (prefers-reduced-motion: reduce)")
+    assert marker, "the stylesheet has no reduced-motion block"
+    for name in ("transition", "animation", "scroll-behavior"):
+        if re.search(rf"(?<![-\w]){name}\s*:", ordinary):
+            assert re.search(rf"(?<![-\w]){name}\s*:[^;]*!important", reduced), name

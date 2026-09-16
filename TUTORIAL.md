@@ -1140,8 +1140,8 @@ this project actually adopted.
 
 ### The catalogue
 
-Twenty search strategies in four families, each cited by the hypotheses that use them,
-so the ledger can report which whole families remain untried:
+Twenty-eight search strategies in four families, each cited by the hypotheses that use
+them, so the ledger can report which whole families remain untried:
 
 - **Constructive:** grids, hand geometric insight, `45°` tilted families, diagonal
   strips, strip-plus-L augmentation, rational-slope tilts, composition and

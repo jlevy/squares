@@ -216,7 +216,7 @@ def test_the_plugin_collects_each_file_in_exactly_one_shard_and_reports_its_cost
         (["--shard", "1/2"], "use it with --suite"),
         (["--suite", "--shard", "3/3"], "is not one of"),
         (["--suite", "--shard", "1/2", "--only", "fast"], "takes no --only"),
-        (["--checks", "--typecheck"], "five parts"),
+        (["--checks", "--typecheck"], "six parts"),
     ],
 )
 def test_the_cli_refuses_a_shard_it_has_no_ceiling_for(

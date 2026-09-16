@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/nCK8bjBi5/NgNrD/d+xypM2HdZ8</id>
+  <title>arXiv Query: search_query=all:"alternating projections" AND all:"packing"&amp;id_list=&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-09T07:31:11Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22alternating+projections%22+AND+all:%22packing%22&amp;start=0&amp;max_results=40&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2501.06178v3</id>
+    <title>Precoding Design for Limited-Feedback MIMO Systems via Character-Polynomial Codes</title>
+    <updated>2026-08-20T19:27:28Z</updated>
+    <link href="https://arxiv.org/abs/2501.06178v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.06178v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a precoding codebook design for limited-feedback multiple-input multiple-output (MIMO) systems under the equal-gain transmission (EGT) constraint. In particular, we demonstrate that character--polynomial (CP) codes provide a structured solution that achieves constant-envelope transmission, low storage complexity, and Grassmannian packing without dependence on array geometry or channel statistics. In contrast to geometry-dependent discrete Fourier transform (DFT) codebooks used in current 5G systems and unstructured Grassmannian codebooks with high storage complexity, CP codebooks combine practical implementation advantages with near-optimal packing performance. For multiple-input single-output (MISO) systems, we derive an upper bound on the mean squared quantization error and show that the distortion relative to the EGT baseline vanishes asymptotically as the number of transmit antennas increases and the code rate approaches one. For MIMO systems with two receive antennas, we develop an iterative method to establish the EGT baseline. Simulation results under Rayleigh, correlated, and clustered delay line (CDL) channel models show that CP codebooks approach the EGT baseline across all channel conditions while outperforming phase shift keying (PSK) and 5G DFT codebooks in several operating regimes, and, in the Rayleigh fading case, incur negligible packing loss relative to numerically optimized Grassmannian codebooks obtained via the alternating projection (AP) method.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-10T18:58:22Z</published>
+    <arxiv:comment>Extended version of a paper presented at IEEE ICC 2025. Submitted to IEEE Transactions on Communications, July 2026</arxiv:comment>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Siva Aditya Gooty</name>
+    </author>
+    <author>
+      <name>Samin Riasat</name>
+    </author>
+    <author>
+      <name>Hessam Mahdavifar</name>
+    </author>
+    <author>
+      <name>Robert W. Heath</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0709.0535v1</id>
+    <title>Constructing packings in Grassmannian manifolds via alternating projection</title>
+    <updated>2007-09-04T20:23:40Z</updated>
+    <link href="https://arxiv.org/abs/0709.0535v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0709.0535v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  This paper describes a numerical method for finding good packings in Grassmannian manifolds equipped with various metrics. This investigation also encompasses packing in projective spaces. In each case, producing a good packing is equivalent to constructing a matrix that has certain structural and spectral properties. By alternately enforcing the structural condition and then the spectral condition, it is often possible to reach a matrix that satisfies both. One may then extract a packing from this matrix.
+  This approach is both powerful and versatile. In cases where experiments have been performed, the alternating projection method yields packings that compete with the best packings recorded. It also extends to problems that have not been studied numerically. For example, it can be used to produce packings of subspaces in real and complex Grassmannian spaces equipped with the Fubini--Study distance; these packings are valuable in wireless communications. One can prove that some of the novel configurations constructed by the algorithm have packing diameters that are nearly optimal.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-09-04T20:23:40Z</published>
+    <arxiv:comment>41 pages, 7 tables, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Exper. Math., Vol. 17, num. 1, pp. 9--35, 2008</arxiv:journal_ref>
+    <author>
+      <name>I. S. Dhillon</name>
+    </author>
+    <author>
+      <name>R. W. Heath</name>
+    </author>
+    <author>
+      <name>T. Strohmer</name>
+    </author>
+    <author>
+      <name>J. A. Tropp</name>
+    </author>
+  </entry>
+</feed>

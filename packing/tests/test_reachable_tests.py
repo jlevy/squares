@@ -43,6 +43,19 @@ def test_a_changed_test_file_selects_itself() -> None:
     assert "packing/tests/test_reachable_tests.py" in selection.tests
 
 
+def test_a_workbench_tool_change_selects_its_package_tests() -> None:
+    selection = select_tests(["packages/workbench/tools/workbench_tools/packing_contracts.py"])
+    assert not selection.everything
+    assert "packages/workbench/tests/test_python_contract_repairs.py" in selection.tests
+
+
+def test_a_changed_workbench_test_file_selects_itself() -> None:
+    path = "packages/workbench/tests/test_benchmark_admission.py"
+    selection = select_tests([path])
+    assert not selection.everything
+    assert path in selection.tests
+
+
 def test_nothing_determined_selects_everything() -> None:
     assert select_tests([]).everything
 
@@ -73,6 +86,7 @@ def test_an_unmapped_python_root_is_still_refused_into_everything() -> None:
         "packing/uv.lock",
         "packing/tests/conftest.py",
         "packing/.python-version",
+        "packages/workbench/pyproject.toml",
         ".github/workflows/packing-validation.yml",
         ".github/workflows/pages.yml",
         "pyproject.toml",
@@ -93,6 +107,7 @@ def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
         tests=(
             "packing/tests/test_reachable_tests.py",
             "packing/tests/test_validation_cli.py",
+            "packages/workbench/tests/test_benchmark_admission.py",
         ),
     )
     monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: ["changed"])
@@ -110,9 +125,13 @@ def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
     monkeypatch.setattr(reachable_tests.subprocess, "run", capture)
     assert reachable_tests.main(["--run", "--numprocesses", str(workers)]) == 7
     targets = (
-        ("tests",)
+        reachable_tests.BEHAVIORAL_TEST_ROOTS
         if everything
-        else ("tests/test_reachable_tests.py", "tests/test_validation_cli.py")
+        else (
+            "tests/test_reachable_tests.py",
+            "tests/test_validation_cli.py",
+            "../packages/workbench/tests/test_benchmark_admission.py",
+        )
     )
     assert commands == [
         (

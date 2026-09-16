@@ -1,0 +1,25 @@
+[project]
+name = "squares-workbench-tools"
+version = "0.0.0"
+description = "Python adapters and developer tools for the square-packing workbench"
+requires-python = ">=3.14,<3.15"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+squares-workbench-build = "workbench_tools.build_site:main"
+squares-workbench-capture = "workbench_tools.capture_video:main"
+squares-workbench-benchmark = "workbench_tools.benchmark:main"
+squares-workbench-summarize-annealing = "workbench_tools.summarize_annealing:main"
+squares-workbench-ascent = "workbench_tools.ascent:main"
+squares-workbench-strategy = "workbench_tools.strategy_execution:main"
+squares-workbench-recover = "workbench_tools.recover_records:main"
+squares-workbench-export-svg = "workbench_tools.export_animation_svg:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tools/workbench_tools"]
+
+[tool.ruff]
+extend = "../../packing/pyproject.toml"

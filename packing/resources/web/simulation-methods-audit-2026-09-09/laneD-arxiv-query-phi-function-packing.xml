@@ -1,0 +1,997 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/w0leOK5sFLmbixCdaVzB/obdqXw</id>
+  <title>arXiv Query: search_query=all:"phi-function" OR all:"phi function" AND all:"packing"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:59Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22phi-function%22+OR+(all:%22phi+function%22+AND+all:%22packing%22)&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>54</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.23227v2</id>
+    <title>Properties of the matrix functions arising in exponential integrators with applications to stochastic simulations of PDEs</title>
+    <updated>2026-06-27T03:07:38Z</updated>
+    <link href="https://arxiv.org/abs/2606.23227v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.23227v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The matrix exponential and the closely related matrix phi-functions play a fundamental role in the solution of first-order systems of ordinary differential equations (ODEs). In particular, they appear in exact solutions of certain linear ODE systems, and in exponential integrators, a class of explicit time discretisation methods for computing approximate solutions of stiff semi-linear ODE systems. Fundamental properties of the matrix exponential include that it is nonnegative if the matrix is essentially nonnegative and stochastic if the matrix is a transition-rate matrix. In this paper, we study related properties for the matrix phi-functions. Using these properties, we then provide insights into deterministic solutions of linear and semi-linear ODE systems and outline how such solutions can be used to generate stochastic simulations to quantify variability in model predictions. The paper concludes with some illustrative examples exploring the theory for some ODE systems arising from spatial discretisation of PDEs of diffusion, advection-diffusion, Fisher-KPP and Allen-Cahn type.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-22T12:16:05Z</published>
+    <arxiv:comment>16 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <author>
+      <name>Elliot J. Carr</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.18937v1</id>
+    <title>Structure-preserving Krylov Subspace Approximations for the Matrix Exponential of Hamiltonian Matrices: A Comparative Study</title>
+    <updated>2026-02-21T19:05:58Z</updated>
+    <link href="https://arxiv.org/abs/2602.18937v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.18937v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study structure-preserving Krylov subspace methods for approximating the matrix-vector products f(H)b, where H is a large Hamiltonian matrix and f denotes either the matrix exponential or the related phi-function. Such computations are central to exponential integrators for Hamiltonian systems. Standard Krylov methods generally destroy the Hamiltonian structure under projection, motivating the use of Krylov bases with J-orthogonal columns that yield Hamiltonian projected matrices and symplectic reduced exponentials. We compare several such structure-preserving Krylov methods on representative Hamiltonian test problems, focusing on accuracy, efficiency, and structure preservation, and briefly discuss adaptive strategies for selecting the Krylov subspace dimension.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-21T19:05:58Z</published>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Peter Benner</name>
+    </author>
+    <author>
+      <name>Heike Faßbender</name>
+    </author>
+    <author>
+      <name>Michel-Niklas Senn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.06210v1</id>
+    <title>Refined Upper Bounds for $L(1,χ)$</title>
+    <updated>2025-03-08T13:28:08Z</updated>
+    <link href="https://arxiv.org/abs/2503.06210v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.06210v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $χ$ be a non-principal Dirichlet character of modulus $q$ with associated \textit{L}-function $L(s,χ)$. We prove that $$|L(1,χ)|\le\left(\frac{1}{2}+O\Big(\frac{\log\log q}{\log q}\Big)\right)\frac{\varphi(q)}{q}\log q\,,$$ where $\varphi(\cdot)$ is Euler's phi function. This refines known bounds of the form $(c+o(1))\log q $ or $(c+O(\frac{1}{\log q}))\log q $ and is relevant for prime-rich moduli. It follows from Mertens' third theorem and the prime number theorem that $\inf_{q&gt;2}\max_{χ\neχ_0\,(\mod q)}\frac{|L(1,χ)|}{\log q/\log\log q}\le\frac{1}{2}e^{-γ}$.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-08T13:28:08Z</published>
+    <arxiv:comment>5 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Jeffery Ezearn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.13997v2</id>
+    <title>The distribution of $\gcd(n,φ(n))$</title>
+    <updated>2025-01-23T18:44:53Z</updated>
+    <link href="https://arxiv.org/abs/2402.13997v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.13997v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $φ(n)$denote Euler's phi function. We study the distribution of the numbers $gcd(n,φ(n))$ and their divisors. Our results generalize previous results of Erdős and Pollack.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-21T18:31:24Z</published>
+    <arxiv:comment>25 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Joshua Stucky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.11497v1</id>
+    <title>Transitive and non-transitive subgroups of permutation groups</title>
+    <updated>2023-11-20T02:48:54Z</updated>
+    <link href="https://arxiv.org/abs/2311.11497v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.11497v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We treat the problem of finding transitive subgroups G of S_n containing normal subgroups N_1 and N_2, with N_1 transitive and N_2 not transitive, such that G/N_1 is isomorphic G/N_2. We show that such G exist whenever n has a prime factor that also divides the Euler-phi function of n. We show that no such G exist when n = pq for p &lt; q with p not dividing q-1.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-20T02:48:54Z</published>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>Arda Demirhan</name>
+    </author>
+    <author>
+      <name>Jacob Miller</name>
+    </author>
+    <author>
+      <name>Yixu Qiu</name>
+    </author>
+    <author>
+      <name>Thomas J. Tucker</name>
+    </author>
+    <author>
+      <name>Zheng Zhu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.12139v2</id>
+    <title>Robust Exponential Runge-Kutta Embedded Pairs</title>
+    <updated>2023-03-26T17:19:03Z</updated>
+    <link href="https://arxiv.org/abs/2303.12139v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.12139v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Exponential integrators are explicit methods for solving ordinary differential equations that treat linear behaviour exactly. The stiff-order conditions for exponential integrators derived in a Banach space framework by Hochbruck and Ostermann are solved symbolically by expressing the Runge--Kutta weights as unknown linear combinations of phi functions. Of particular interest are embedded exponential pairs that efficiently generate both a high- and low-order estimate, allowing for dynamic adjustment of the time step. A key requirement is that the pair be robust: if the nonlinear source function has nonzero total time derivatives, the order of the low-order estimate should never exceed its design value. Robust exponential Runge--Kutta (3,2) and (4,3) embedded pairs that are well-suited to initial value problems with a dominant linearity are constructed.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-21T18:57:03Z</published>
+    <arxiv:comment>24 pages, 8 figures. The Mathematica scripts mentioned in the paper can be found in: https://github.com/stiffode/expint/</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <author>
+      <name>Thoma Zoto</name>
+    </author>
+    <author>
+      <name>John C. Bowman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.11437v1</id>
+    <title>Self-intersection of the relative dualizing sheaf on modular curves X(N)</title>
+    <updated>2022-05-23T16:28:46Z</updated>
+    <link href="https://arxiv.org/abs/2205.11437v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.11437v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $N\geq 3$ be a composite, odd, and square-free integer and let $Γ$ be the principal congruence subgroup of level $N$. Let $X(N)$ be the modular curve of genus $g_Γ$ associated to $Γ$. In this article, we study the Arakelov invariant $e(Γ)=\barω^2/\varphi(N)$, with $\barω^2$ denoting the self-intersection of the relative dualizing sheaf for the minimal regular model of $X(N)$, equipped with the Arakelov metric, and $\varphi(N)$ is the Euler's phi function. Our main result is the asymptotics $e(Γ) = 2g_Γ\log(N) + o(g_Γ\log(N))$, as the level $N$ tends to infinity.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-23T16:28:46Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Miguel Grados</name>
+    </author>
+    <author>
+      <name>Anna-Maria von Pippich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.13474v1</id>
+    <title>On The Generalized Multiplicative Euler Phi Function</title>
+    <updated>2021-11-26T12:42:57Z</updated>
+    <link href="https://arxiv.org/abs/2111.13474v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.13474v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The generalized group of units of the ring modulo $n$ was first introduced by El-Kassar and Chehade, written as $U^k(Z_n)$. This allows us to formulate a new generalization to the Euler phi function $\varphi(n)$, that represents the order of $% U^k(Z_n)$ and it is denoted by $\varphi ^{k}(n).$ In this paper, we introduce this newly defined function, where we compute its explicit form and examine some of its properties similar to that of $\varphi (n)$. In addition, we study some generalized equations involving $\varphi ^{k}(n)$ where complete solution is given for some equations by considering the general case and others for some particular cases.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-26T12:42:57Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Mohammad El-Hindi</name>
+    </author>
+    <author>
+      <name>Therrar Kadri</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.00790v2</id>
+    <title>Euler Totient Function And The Largest Integer Function Over The Shifted Primes</title>
+    <updated>2021-06-30T19:08:20Z</updated>
+    <link href="https://arxiv.org/abs/2105.00790v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.00790v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $ x\geq 1 $ be a large number, let $ [x]=x-\{x\} $ be the largest integer function, and let $ \varphi(n)$ be the Euler totient function. The asymptotic formula for the new finite sum over the primes $ \sum_{p\leq x}\varphi([x/p])=(6/π^2)x\log \log x+c_0x+O\left (x(\log x)^{-1}\right) $, where $c_0$ is a constant, is evaluated in this note.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-30T13:34:34Z</published>
+    <arxiv:comment>Nine Pages. Keywords: Shifted prime; Multiplicative function; Euler phi function; Average orders; Largest integer function</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>N. A. Carella</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.02540v2</id>
+    <title>j-invariant and Borcherds Phi-function</title>
+    <updated>2021-04-07T05:22:31Z</updated>
+    <link href="https://arxiv.org/abs/2103.02540v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.02540v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give a formula that relates the difference of the j-invariants with the Borcherds Phi-function, an automorphic form on the period domain for Enriques surfaces characterizing the discriminant divisor.</summary>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-03T17:25:56Z</published>
+    <arxiv:comment>Section 8 added, references updated and added</arxiv:comment>
+    <arxiv:primary_category term="math.AG"/>
+    <author>
+      <name>Shu Kawaguchi</name>
+    </author>
+    <author>
+      <name>Shigeru Mukai</name>
+    </author>
+    <author>
+      <name>Ken-Ichi Yoshikawa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.10428v1</id>
+    <title>A Linear Division-Based Recursion with Number Theoretic Applications</title>
+    <updated>2021-01-25T21:39:24Z</updated>
+    <link href="https://arxiv.org/abs/2101.10428v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.10428v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A simple remark on infinite series is presented. This applies to a particular recursion scenario, which in turn has applications related to a classical theorem on Euler's phi-function and to recent work by Ron Brown on natural density of square-free numbers.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-01-25T21:39:24Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Jonathan L. Merzel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.02248v2</id>
+    <title>Average Orders of the Euler Phi Function, The Dedekind Psi Function, The Sum of Divisors Function, And The Largest Integer Function</title>
+    <updated>2021-04-09T15:09:52Z</updated>
+    <link href="https://arxiv.org/abs/2101.02248v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.02248v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $ x\geq 1 $ be a large number, let $ [x]=x-\{x\} $ be the largest integer function, and let $ \varphi(n)$ be the Euler totient function. The result $ \sum_{n\leq x}\varphi([x/n])=(6/π^2)x\log x+O\left ( x(\log x)^{2/3}(\log\log x)^{1/3}\right ) $ was proved very recently. This note presents a short elementary proof, and sharpen the error term to $ \sum_{n\leq x}\varphi([x/n])=(6/π^2)x\log x+O(x) $. In addition, the first proofs of the asymptotics formulas for the finite sums $ \sum_{n\leq x}ψ([x/n])=(15/π^2)x\log x+O(x\log \log x) $, and $ \sum_{n\leq x}σ([x/n])=(π^2/6)x\log x+O(x \log \log x) $ are also evaluated here.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-01-06T20:02:22Z</published>
+    <arxiv:comment>Thirteen Pages. Keywords: Multiplicative function; Average orders; Euler phi function; Dedekind psi function, Sum of divisors function; Largest integer function</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>N. A. Carella</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2012.11081v1</id>
+    <title>To count clean triangles we count on $imph(n)$</title>
+    <updated>2020-12-21T02:09:06Z</updated>
+    <link href="https://arxiv.org/abs/2012.11081v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2012.11081v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A clean lattice triangle in ${\mathbb R}^2$ is a triangle that does not contain any lattice points on its sides other than its vertices. The central goal of this paper is to count the number of clean triangles of a given area up to unimodular equivalence. In doing so we use a variant of the Euler phi function which we call $imph(n)$ (imitation phi).</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-12-21T02:09:06Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Mizan R. Khan</name>
+    </author>
+    <author>
+      <name>Riaz R. Khan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.14468v1</id>
+    <title>Arnoldi algorithms with structured orthogonalization</title>
+    <updated>2020-05-29T09:30:29Z</updated>
+    <link href="https://arxiv.org/abs/2005.14468v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.14468v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study a stability preserved Arnoldi algorithm for matrix exponential in the time domain simulation of large-scale power delivery networks (PDN), which are formulated as semi-explicit differential algebraic equations (DAEs). The solution can be decomposed to a sum of two projections, one in the range of the system operator and the other in its null space. The range projection can be computed with one shift-and -invert Krylov subspace method. The other projection can be computed with the algebraic equations. Differing from the ordinary Arnoldi method, the orthogonality in the Krylov subspace is replaced with the semi-inner product induced by the positive semi-definite system operator. With proper adjustment, numerical ranges of the Krylov operator lie in the right half plane, and we obtain theoretical convergence analysis for the modified Arnoldi algorithm in computing phi-functions. Lastly, simulations on RLC networks are demonstrated to validate the effectiveness of the Arnoldi algorithm with structured-orthogonalization.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-29T09:30:29Z</published>
+    <arxiv:comment>30 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <arxiv:journal_ref>SIAM Journal on Numerical Analysis, Volume 59, Issue 1, Page 370-400, January 2021</arxiv:journal_ref>
+    <author>
+      <name>Pengwen Chen</name>
+    </author>
+    <author>
+      <name>Chung-Kuan Cheng</name>
+    </author>
+    <author>
+      <name>Xinyuan Wang</name>
+    </author>
+    <arxiv:doi>10.1137/20m1336667</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1137/20m1336667" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.03117v3</id>
+    <title>Cycles and Patterns in the Sieve of Eratosthenes</title>
+    <updated>2019-10-28T19:55:06Z</updated>
+    <link href="https://arxiv.org/abs/1905.03117v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.03117v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe recurring patterns of numbers that survive each wave of the Sieve of Eratosthenes, including symmetries, uniform subdivisions, and quantifiable, predictive cycles that characterize their distribution across the number line. We generalize these results to numbers that are relatively prime to arbitrary sets of prime numbers and derive additional insights about the distribution of integers counted by Euler's phi-function.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-03T06:31:22Z</published>
+    <arxiv:comment>18 pages</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>George Grob</name>
+    </author>
+    <author>
+      <name>Matthias Schmitt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1902.03483v2</id>
+    <title>An Euler phi function for the Eisenstein integers and some applications</title>
+    <updated>2020-01-06T21:53:53Z</updated>
+    <link href="https://arxiv.org/abs/1902.03483v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1902.03483v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Euler phi function on a given integer $n$ yields the number of positive integers less than $n$ that are relatively prime to $n$. Equivalently, it gives the order of the group of units in the quotient ring $\mathbb{Z}/(n)$. We generalize the Euler phi function to the Eisenstein integer ring $\mathbb{Z}[ρ]$ where $ρ$ is the primitive third root of unity $e^{2πi/3}$ by finding the order of the group of units in the ring $\mathbb{Z}[ρ]/(θ)$ for any given Eisenstein integer $θ$. As one application we investigate a sufficiency criterion for when certain unit groups $\left(\mathbb{Z}[ρ]/(γ^n)\right)^\times$ are cyclic where $γ$ is prime in $\mathbb{Z}[ρ]$ and $n \in \mathbb{N}$, thereby generalizing well-known results of similar applications in the integers and some lesser known results in the Gaussian integers. As another application, we prove that the celebrated Euler-Fermat theorem holds for the Eisenstein integers.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-02-09T20:30:08Z</published>
+    <arxiv:comment>27 pages, 5 figures. Version 2 is the final revision to appear in INTEGERS: Electronic Journal of Combinatorial Number Theory</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Electronic Journal of Combinatorial Number Theory, 20, Paper No. A20 (2020), 28pp</arxiv:journal_ref>
+    <author>
+      <name>Emily Gullerud</name>
+    </author>
+    <author>
+      <name>Aba Mbirika</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1901.11135v1</id>
+    <title>On Derivative Euler Phi Function Set-Graphs</title>
+    <updated>2019-01-28T02:06:26Z</updated>
+    <link href="https://arxiv.org/abs/1901.11135v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1901.11135v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we study some graph theoretical properties of two derivative Euler Phi function set-graphs. For the Euler Phi function $φ(n)$, $n\in \mathbb{N}$, the set $S_φ(n) =\{i:\gcd(i,n)=1, 1\leq i \leq n\}$ and the vertex set is $\{v_i:i\in S_φ(n)\}$. Two graphs $G_d(S_φ(n))$ and $G_p(S_φ(n))$, defined with respect to divisibility adjacency and relatively prime adjacency conditions, are studied.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-01-28T02:06:26Z</published>
+    <arxiv:comment>12 Pages, 3 Figures</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>Johan Kok</name>
+    </author>
+    <author>
+      <name>Eunice Gogo Mphako-Banda</name>
+    </author>
+    <author>
+      <name>Sudev Naduvath</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.01149v1</id>
+    <title>Asymptotic evaluation of Euler-phi sums of various residue classes</title>
+    <updated>2018-06-04T14:32:28Z</updated>
+    <link href="https://arxiv.org/abs/1806.01149v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.01149v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This note contains some asymptotic formulas for the sums of various residue classes of Euler's phi-function.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-04T14:32:28Z</published>
+    <arxiv:comment>7 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Amrik Singh Nimbran</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.02144v2</id>
+    <title>Further development of efficient and accurate time integration schemes for meteorological models</title>
+    <updated>2018-10-09T21:29:25Z</updated>
+    <link href="https://arxiv.org/abs/1805.02144v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.02144v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we investigate the use of higher-order exponential Rosenbrock time integration methods on the shallow water equations on the sphere. This stiff, nonlinear model provides a testing ground for accurate and stable time integration methods in weather modeling, serving as the focus for exploration of novel methods for many years. We therefore identify a candidate set of three recent exponential Rosenbrock methods of orders four and five (exprb42, pexprb43 and exprb53) for use on this model. Based on their multi-stage structure, we propose a set of modifications to the phipm_IOM2 algorithm for efficiently calculating the matrix phi-functions. We then investigate the performance of these methods on a suite of four challenging test problems, comparing them against the epi3 method investigated previously in [1, 2] on these problems. In all cases, the proposed methods enable accurate solutions at much longer time-steps than epi3, proving considerably more efficient as either the desired solution error decreases, or as the test problem nonlinearity increases.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-06T03:41:34Z</published>
+    <arxiv:comment>44 pages, 11 figures, 7 tables (accepted version), Journal of Computational Physics</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <arxiv:journal_ref>Journal of Computational Physics (2018)</arxiv:journal_ref>
+    <author>
+      <name>Vu Thai Luan</name>
+    </author>
+    <author>
+      <name>Janusz A. Pudykiewicz</name>
+    </author>
+    <author>
+      <name>Daniel R. Reynolds</name>
+    </author>
+    <arxiv:doi>10.1016/j.jcp.2018.10.018</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jcp.2018.10.018" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.05759v2</id>
+    <title>A Krylov subspace method for the approximation of bivariate matrix functions</title>
+    <updated>2018-02-20T23:17:00Z</updated>
+    <link href="https://arxiv.org/abs/1802.05759v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.05759v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Bivariate matrix functions provide a unified framework for various tasks in numerical linear algebra, including the solution of linear matrix equations and the application of the Fréchet derivative. In this work, we propose a novel tensorized Krylov subspace method for approximating such bivariate matrix functions and analyze its convergence. While this method is already known for some instances, our analysis appears to result in new convergence estimates and insights for all but one instance, Sylvester matrix equations.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-15T20:51:06Z</published>
+    <arxiv:comment>Revised version contains polynomial approximation results for phi function in appendix</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Daniel Kressner</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1710.10517v2</id>
+    <title>The asymptotic properties of $φ(n)$ and a problem related to visibility of Lattice points</title>
+    <updated>2017-10-31T18:03:51Z</updated>
+    <link href="https://arxiv.org/abs/1710.10517v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1710.10517v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We look at the average sum of the Euler's phi function $φ{(n)}$ and it's relation with the visibility of a point from the origin.We show that $\forall{\hspace{0.05in}{k} \ge{1}},k\in\mathbb{N},\exists$ a $k$$\times$$k$ grid in the 2D space such that no point inside it is visible from the origin.We define visibility of a lattice point from a set and try to find a bound for the cardinality of the smallest set S such that for a given $n$ $\in\mathbb{N}$,all points from the $n$$\times$$n$ grid are visible from S.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-10-28T19:32:07Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Debmalya Basak</name>
+      <arxiv:affiliation>Indian Institute of Science Education and Research, Kolkata</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.06812v2</id>
+    <title>The set of $k$-units modulo $n$</title>
+    <updated>2017-09-01T15:28:40Z</updated>
+    <link href="https://arxiv.org/abs/1708.06812v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.06812v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $R$ be a ring with identity, $\mathcal{U}(R)$ the group of units of $R$ and $k$ a positive integer. We say that $a\in \mathcal{U}(R)$ is $k$-unit if $a^k=1$. Particularly, if the ring $R$ is $\mathbb{Z}_n$, for a positive integer $n$, we will say that $a$ is a $k$-unit modulo $n$. We denote with $\mathcal{U}_k(n)$ the set of $k$-units modulo $n$. By $\text{du}_k(n)$ we represent the number of $k$-units modulo $n$ and with $\text{rdu}_k(n)=\frac{φ(n)}{\text{du}_k(n)}$ the ratio of $k$-units modulo $n$, where $φ$ is the Euler phi function. Recently, S. K. Chebolu proved that the solutions of the equation $\text{rdu}_2(n)=1$ are the divisors of $24$. The main result of this work, is that for a given $k$, we find the positive integers $n$ such that $\text{rdu}_k(n)=1$. Finally, we give some connections of this equation with Carmichael's numbers and two of its generalizations: Knödel numbers and generalized Carmichael numbers.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-22T20:46:06Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Involve 15 (2022) 367-378</arxiv:journal_ref>
+    <author>
+      <name>John H. Castillo</name>
+    </author>
+    <author>
+      <name>Jhony Fernando Caranguay Mainguez</name>
+    </author>
+    <arxiv:doi>10.2140/involve.2022.15.367</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.2140/involve.2022.15.367" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1705.01363v2</id>
+    <title>Expansions of arithmetic functions of several variables with respect to certain modified unitary Ramanujan sums</title>
+    <updated>2018-06-11T15:53:01Z</updated>
+    <link href="https://arxiv.org/abs/1705.01363v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1705.01363v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce new analogues of the Ramanujan sums, denoted by $\widetilde{c}_q(n)$, associated with unitary divisors, and obtain results concerning the expansions of arithmetic functions of several variables with respect to the sums $\widetilde{c}_q(n)$. We apply these results to certain functions associated with $σ^*(n)$ and $φ^*(n)$, representing the unitary sigma function and unitary phi function, respectively.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-05-03T11:17:18Z</published>
+    <arxiv:comment>11 pages, 1 table, revised. arXiv admin note: text overlap with arXiv:1704.02881</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Bull. Math. Soc. Sci. Math. Roumanie 61 (109) No. 2, 2018, 213-223</arxiv:journal_ref>
+    <author>
+      <name>László Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1701.06257v2</id>
+    <title>New Recurrence Relations and Matrix Equations for Arithmetic Functions Generated by Lambert Series</title>
+    <updated>2017-07-05T15:48:42Z</updated>
+    <link href="https://arxiv.org/abs/1701.06257v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1701.06257v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider relations between the pairs of sequences, $(f, g_f)$, generated by the Lambert series expansions, $L_f(q) = \sum_{n \geq 1} f(n) q^n / (1-q^n)$, in $q$. In particular, we prove new forms of recurrence relations and matrix equations defining these sequences for all $n \in \mathbb{Z}^{+}$. The key ingredient to the proof of these results is given by the statement of Euler's pentagonal number theorem expanding the series for the infinite $q$-Pochhammer product, $(q; q)_{\infty}$, and for the first $n$ terms of the partial products, $(q; q)_n$, forming the denominators of the rational $n^{th}$ partial sums of $L_f(q)$. Examples of the new results given in the article include new exact formulas for and applications to the Euler phi function, $φ(n)$, the Möbius function, $μ(n)$, the sum of divisors functions, $σ_1(n)$ and $σ_α(n)$, for $α\geq 0$, and to Liouville's lambda function, $λ(n)$.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-01-23T02:50:14Z</published>
+    <arxiv:comment>Keywords: Lambert series; matrix factorization; Möbius function; Euler totient function; generalized sum-of-divisors function; Liouville's function. Subject Class (2010): 11A25; 05A15; 11N64; 11Y70; 05A30</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Maxie D. Schmidt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1605.04933v2</id>
+    <title>The average number of divisors of the Euler function</title>
+    <updated>2017-02-22T04:58:39Z</updated>
+    <link href="https://arxiv.org/abs/1605.04933v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1605.04933v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The upper bound and the lower bound of average numbers of divisors of Euler Phi function and Carmichael Lambda function are obtained by Luca and Pomerance (see \cite{LP}). We improve the lower bound and provide a heuristic argument which suggests that the upper bound given by \cite{LP} is indeed close to the truth.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-05-16T20:21:31Z</published>
+    <arxiv:comment>20 pages, submitted</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Sungjin Kim</name>
+    </author>
+    <arxiv:doi>10.1007/s11139-017-9897-2</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s11139-017-9897-2" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1308.6454v1</id>
+    <title>Resultants and the Borcherds Phi-function</title>
+    <updated>2013-08-29T12:58:12Z</updated>
+    <link href="https://arxiv.org/abs/1308.6454v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1308.6454v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Borcherds Phi-function is the automorphic form on the moduli space of Enriques surfaces characterizing the discriminant locus. In this paper, we give an algebro-geometric construction of the Borcherds Phi-function.</summary>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-08-29T12:58:12Z</published>
+    <arxiv:primary_category term="math.AG"/>
+    <author>
+      <name>Shu Kawaguchi</name>
+    </author>
+    <author>
+      <name>Shigeru Mukai</name>
+    </author>
+    <author>
+      <name>Ken-Ichi Yoshikawa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1304.4927v1</id>
+    <title>Homogeneous Weights and Möbius Functions on Finite Rings</title>
+    <updated>2013-04-17T19:38:28Z</updated>
+    <link href="https://arxiv.org/abs/1304.4927v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1304.4927v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The homogeneous weights and the Möbius functions and Euler phi-functions on finite rings are discussed; some computational formulas for these functions on finite principal ideal rings are characterized; for the residue rings of integers, they are reduced to the classical number-theoretical Möbius functions and the classical number-theoretical Euler phi-functions.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-04-17T19:38:28Z</published>
+    <arxiv:comment>This paper has been published in a Chinese journal, see below; here is the English version</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <arxiv:journal_ref>Y. Fan and H. Liu, Homogeneous weights of finite rings and Möbius functions(Chinese), Math. Ann.(Chinese), 31A (2010), 355-364</arxiv:journal_ref>
+    <author>
+      <name>Yun Fan</name>
+    </author>
+    <author>
+      <name>Hongwei Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1211.2025v7</id>
+    <title>A Golden Product Identity for $e$</title>
+    <updated>2014-04-19T04:11:22Z</updated>
+    <link href="https://arxiv.org/abs/1211.2025v7" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1211.2025v7" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove an infinite product representation for the constant $e$ involving the golden ratio, the Möbius function and the Euler phi function - prominent players in number theory.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.HO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-11-09T02:06:21Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Mathematics Magazine, Vol. 87, No. 2 (2014), 132-134</arxiv:journal_ref>
+    <author>
+      <name>Robert P. Schneider</name>
+    </author>
+    <arxiv:doi>10.4169/math.mag.87.2.132</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.4169/math.mag.87.2.132" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1210.2001v1</id>
+    <title>Radically weakening the Lehmer and Carmichael conditions</title>
+    <updated>2012-10-06T21:06:59Z</updated>
+    <link href="https://arxiv.org/abs/1210.2001v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1210.2001v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lehmer's totient problem asks if there exist composite integers n satisfying the condition phi(n)|(n-1), (where phi is the Euler-phi function) while Carmichael numbers satisfy the weaker condition lambda(n)|(n-1) (where lambda is the Carmichael universal exponent function). We weaken the condition further, looking at those composite n where each prime divisor of phi(n) also divides n-1. (So rad(phi(n))|(n-1).) While these numbers appear to be far more numerous than the Carmichael numbers, we show that their distribution has the same rough upper bound as that of the Carmichael numbers, a bound which is heuristically tight.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-10-06T21:06:59Z</published>
+    <arxiv:comment>10 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Int. J. Number Theory 09 (2013) 1215-1224</arxiv:journal_ref>
+    <author>
+      <name>Nathan McNew</name>
+    </author>
+    <arxiv:doi>10.1142/S1793042113500218</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1142/S1793042113500218" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1208.4812v1</id>
+    <title>Parametric Solution Of Certain Nonlinear Differential Equations In Cosmology II</title>
+    <updated>2012-08-23T17:41:47Z</updated>
+    <link href="https://arxiv.org/abs/1208.4812v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1208.4812v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper continues earlier work where an explicit parametrized solution of a particular nonlinear ordinary differential equation was obtained in terms of the Weierstrass elliptic phi-function, sigma function and zeta function -- work which therefore generalized that of G. Lemaitre. Further study of this solution and applications to cosmology are presented.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-08-23T17:41:47Z</published>
+    <arxiv:primary_category term="gr-qc"/>
+    <author>
+      <name>Jennie D'Ambroise</name>
+    </author>
+    <author>
+      <name>Floyd L. Williams</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1206.2792v5</id>
+    <title>The Error Term of the Summatory Euler Phi Function</title>
+    <updated>2017-07-26T16:30:26Z</updated>
+    <link href="https://arxiv.org/abs/1206.2792v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1206.2792v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A sharper estimate for the summatory Euler phi function $\sum_{n \leq x} \varphi(n)$ is presented in this work. It improves the established estimate in the current mathematical literature. In addition, an estimate for its reciprocal $\sum_{n \leq x} 1/\varphi(n)$ is also determined.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-06-12T14:51:36Z</published>
+    <arxiv:comment>Sixteen Pages. Keywords: Euler Totient Function, Error Term, Arithmetic Function</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>N. A. Carella</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1201.0931v3</id>
+    <title>On the periodicity of a class of arithmetic functions associated with multiplicative functions</title>
+    <updated>2013-02-22T15:25:03Z</updated>
+    <link href="https://arxiv.org/abs/1201.0931v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1201.0931v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $k\ge 1,a\ge 1,b\ge 0$ and $ c\ge 1$ be integers. Let $f$ be a multiplicative function with $f(n)\ne 0$ for all positive integers $n$. We define the arithmetic function $g_{k,f}$ for any positive integer $n$ by $g_{k,f}(n):=\frac{\prod_{i=0}^k f(b+a(n+ic))} {f({\rm lcm}_{0\le i\le k} \{b+a(n+ic)\})}$. We first show that $g_{k,f}$ is periodic and $c {\rm lcm}(1,...,k)$ is its period. Consequently, we provide a detailed local analysis to the periodic function $g_{k,\varphi}$, and determine the smallest period of $g_{k,\varphi}$, where $\varphi$ is the Euler phi function.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-01-04T16:06:47Z</published>
+    <arxiv:comment>16 pages. To appear in Journal of Number Theory</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Journal of Number Theory 133 (2013), 2005-2020</arxiv:journal_ref>
+    <author>
+      <name>Guoyou Qian</name>
+    </author>
+    <author>
+      <name>Qianrong Tan</name>
+    </author>
+    <author>
+      <name>Shaofang Hong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1109.1232v1</id>
+    <title>A critical look at the role of the bare parameters in the renormalization of Phi-derivable approximations</title>
+    <updated>2011-09-06T17:10:28Z</updated>
+    <link href="https://arxiv.org/abs/1109.1232v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1109.1232v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We revisit the renormalization of Phi-derivable approximations from a slightly different point of view than the one which is usually followed in previous works. We pay particular attention to the question of the existence of a solution to the self-consistent equation that defines the two-point function in the Cornwall-Jackiw-Tomboulis formalism and to the fact that some of the ultraviolet divergences which appear if one formally expands the solution in powers of the bare coupling do not always appear as divergences at the level of the solution itself. We discuss these issues using a particular truncation of the Phi functional, namely the simplest truncation which brings non-trivial momentum and field dependence to the two-point function.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-09-06T17:10:28Z</published>
+    <arxiv:comment>30 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <author>
+      <name>Urko Reinosa</name>
+    </author>
+    <author>
+      <name>Zsolt Szép</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.85.045034</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.85.045034" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1108.3805v3</id>
+    <title>Values of the Euler phi-function not divisible by a given odd prime, and the distribution of Euler-Kronecker constants for cyclotomic fields</title>
+    <updated>2012-08-26T14:50:01Z</updated>
+    <link href="https://arxiv.org/abs/1108.3805v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1108.3805v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For a fixed odd prime q we investigate the first and second order terms of the asymptotic series expansion for the number of n\le x such that q does not divide phi(n). Part of the analysis involves a careful study of the Euler-Kronecker constants for cyclotomic fields. In particular, we show that the prime k-tuples conjecture and a conjecture of Ihara about the distribution of these Euler-Kronecker constants cannot be both true.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-08-18T18:23:57Z</published>
+    <arxiv:comment>v3, final version. 31 pages. A few small typos and misprints corrected. To appear in Math. Comp</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Math. Comp. 83 (2014), no. 287, 1447-1476</arxiv:journal_ref>
+    <author>
+      <name>Kevin Ford</name>
+    </author>
+    <author>
+      <name>Florian Luca</name>
+    </author>
+    <author>
+      <name>Pieter Moree</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1104.3831v1</id>
+    <title>Existence of a Unique group of finite order</title>
+    <updated>2011-04-17T17:50:38Z</updated>
+    <link href="https://arxiv.org/abs/1104.3831v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.3831v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $n$ be a positive integer. Then cyclic group $Z_n$ of order $n$ is the only group of order $n$ iff g.c.d. $(n,φ(n))=1$, where $φ$ denotes the Euler-phi function. In this article we have given another proof of this result using the knowledge of semi direct product and induction.</summary>
+    <category term="math.HO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-17T17:50:38Z</published>
+    <arxiv:primary_category term="math.HO"/>
+    <author>
+      <name>Sumit Kumar Upadhyay</name>
+    </author>
+    <author>
+      <name>Shiv Datt Kumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1011.4368v1</id>
+    <title>Normal coverings of finite symmetric and alternating groups</title>
+    <updated>2010-11-19T08:34:50Z</updated>
+    <link href="https://arxiv.org/abs/1011.4368v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1011.4368v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we investigate the minimum number of maximal subgroups H_i for i=1 ...k of the symmetric group S_n (or the alternating group A_n) such that each element in the group S_n (respectively A_n) lies in some conjugate of one of the H_i. We prove that this number lies between a.phi(n) and bn for certain constants a, b, where phi(n) is the Euler phi-function, and we show that the number depends on the arithmetical complexity of n. Moreover in the case where n is divisible by at most two primes, we obtain an upper bound of 2+phi(n)/2, and we determine the exact value for S_n when n is odd and for A_n when n is even.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-11-19T08:34:50Z</published>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>Daniela Bubboloni</name>
+    </author>
+    <author>
+      <name>Cheryl Praeger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1002.3254v1</id>
+    <title>Combinatorial Identities Via Phi Functions and Relatively Prime Subsets</title>
+    <updated>2010-02-17T12:33:53Z</updated>
+    <link href="https://arxiv.org/abs/1002.3254v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1002.3254v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Let $n$ be a positive integer and let $A$ be nonempty finite set of positive integers. We say that $A$ is relatively prime if $\gcd(A) =1$ and that $A$ is relatively prime to $n$ if $\gcd(A,n)=1$. In this work we count the number of nonempty subsets of $A$ which are relatively prime and the number of nonempty subsets of $A$ which are relatively prime to $n$. Related formulas are also obtained for the number of such subsets having some fixed cardinality. This extends previous work for the cases where $A$ is an interval or a set in arithmetic progression. Applications include: a) An exact formula is obtained for the number of elements of $A$ which are co-prime to $n$; note that this number is $φ(n)$ if $A=[1,n]$. b) Algebraic characterizations are found for a nonempty finite set of positive integers to have elements which are all pairwise co-prime and consequently a formula is given for the number of nonempty subsets of $A$ whose elements are pairwise co-prime. c) We provide combinatorial formulas involving Mertens function.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-02-17T12:33:53Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Mohamed El Bachraoui</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0912.4116v2</id>
+    <title>On the use of the variable change w=exp(u) to establish novel integral representations of the Riemann zeta(s,a) -function, incomplete gamma- function, confluent hypergeometric Phi-function and beta function</title>
+    <updated>2010-01-15T13:58:49Z</updated>
+    <link href="https://arxiv.org/abs/0912.4116v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0912.4116v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The variable change w=exp(u) is applied to establish novel integral representations of the incomplete gamma-function, hypergeometric F-function,confluent hypergeometric /Phi-function and beta-function, and to analyze these functionsas as well as the Riemann /zeta(s,a)-function. In particular, using these representations we give a pedagogically instructive proof of the well known approximate functional relation for the Riemann /zeta-function and derive Hurwitz representation of the /zeta(s,a)-function.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-12-21T09:35:38Z</published>
+    <arxiv:primary_category term="math.FA"/>
+    <author>
+      <name>Sergey K. Sekatskii</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0909.2983v2</id>
+    <title>Combinatorial Identities Involving the Mobius Function</title>
+    <updated>2009-10-20T07:44:04Z</updated>
+    <link href="https://arxiv.org/abs/0909.2983v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0909.2983v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper we derive some identities and inequalities on the Möbius mu function. Our main tool is phi functions for intervals of positive integers and their unions.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-09-16T11:19:10Z</published>
+    <arxiv:comment>7 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Mohamed El bachraoui</name>
+    </author>
+    <author>
+      <name>Mohamed Salim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0907.4631v2</id>
+    <title>A Krylov subspace algorithm for evaluating the phi-functions appearing in exponential integrators</title>
+    <updated>2010-11-11T13:00:23Z</updated>
+    <link href="https://arxiv.org/abs/0907.4631v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0907.4631v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop an algorithm for computing the solution of a large system of linear ordinary differential equations (ODEs) with polynomial inhomogeneity. This is equivalent to computing the action of a certain matrix function on the vector representing the initial condition. The matrix function is a linear combination of the matrix exponential and other functions related to the exponential (the so-called phi-functions). Such computations are the major computational burden in the implementation of exponential integrators, which can solve general ODEs. Our approach is to compute the action of the matrix function by constructing a Krylov subspace using Arnoldi or Lanczos iteration and projecting the function on this subspace. This is combined with time-stepping to prevent the Krylov subspace from growing too large. The algorithm is fully adaptive: it varies both the size of the time steps and the dimension of the Krylov subspace to reach the required accuracy. We implement this algorithm in the Matlab function phipm and we give instructions on how to obtain and use this function. Various numerical experiments show that the phipm function is often significantly more efficient than the state-of-the-art.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-07-27T14:24:29Z</published>
+    <arxiv:comment>20 pages, 3 colour figures, code available from http://www.maths.leeds.ac.uk/~jitse/software.html . v2: Various changes to improve presentation as suggested by the referee</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <arxiv:journal_ref>ACM Trans. Math. Software 38 (2012) Article 22</arxiv:journal_ref>
+    <author>
+      <name>Jitse Niesen</name>
+    </author>
+    <author>
+      <name>Will M. Wright</name>
+    </author>
+    <arxiv:doi>10.1145/2168773.2168781</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/2168773.2168781" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0711.4736v2</id>
+    <title>Beam spin asymmetry in deep and exclusive pi0 electroproduction</title>
+    <updated>2007-12-04T13:48:06Z</updated>
+    <link href="https://arxiv.org/abs/0711.4736v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0711.4736v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The beam spin asymmetry (BSA) in the exclusive reaction ep-&gt;ep pi0 was measured with the CEBAF 5.77 GeV polarized electron beam and Large Acceptance Spectrometer(CLAS). The xB, Q2, t and phi dependences of the pi0 BSA are presented in the deep inelastic regime. The asymmetries are fitted with a sin(phi) function and their amplitudes are extracted. Overall, they are of the order of 0.04 - 0.11 and roughly independent of t. This is the signature of a non-zero longitudinal-transverse interference. The implications concerning the applicability of a formalism based on generalized parton distributions, as well as the extension of a Regge formalism at high photon virtualities, are discussed.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-11-29T14:39:16Z</published>
+    <arxiv:comment>5 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys.Rev.C77:042201,2008</arxiv:journal_ref>
+    <author>
+      <name> CLAS Collaboration</name>
+    </author>
+    <author>
+      <name>R. De Masi</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevC.77.042201</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevC.77.042201" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0709.2930v1</id>
+    <title>Asymptotic estimates for phi functions for subsets of {m+1, m+2,...,n}</title>
+    <updated>2007-09-18T22:30:48Z</updated>
+    <link href="https://arxiv.org/abs/0709.2930v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0709.2930v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Let f(m,n) denote the number of relatively prime subsets of {m+1,m+2,...,n}, and let Phi(m,n) denote the number of subsets A of {m+1,m+2,...,n} such that gcd(A) is relatively prime to n. Let f_k(m,n) and Phi_k(m,n) be the analogous counting functions restricted to sets of cardinality k. Simple explicit formulas and asymptotic estimates are obtained for these four functions.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-09-18T22:30:48Z</published>
+    <arxiv:comment>5 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Integers 7 (2007), A54, 1--5</arxiv:journal_ref>
+    <author>
+      <name>Melvyn B. Nathanson</name>
+    </author>
+    <author>
+      <name>Brooke Orosz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0705.3929v1</id>
+    <title>Speculations on some characteristic properties of numbers</title>
+    <updated>2007-05-27T04:53:42Z</updated>
+    <link href="https://arxiv.org/abs/0705.3929v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0705.3929v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Translation of the Latin original "Speculationes circa quasdam insignes proprietates numerorum" (1784). E564 in the Enestrom index. In this paper Euler talks about Farey sequences and proves some results about the phi function, the number of positive integers less than and relatively prime to an integer. Euler uses the notation pi instead of phi.</summary>
+    <category term="math.HO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-05-27T04:53:42Z</published>
+    <arxiv:comment>9 pages</arxiv:comment>
+    <arxiv:primary_category term="math.HO"/>
+    <author>
+      <name>Leonhard Euler</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0611509v1</id>
+    <title>Values of the Euler phi function not divisible by a prescribed odd prime</title>
+    <updated>2006-11-16T17:57:08Z</updated>
+    <link href="https://arxiv.org/abs/math/0611509v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0611509v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Let phi denote Euler's phi function. For a fixed odd prime we give an asymptotic series expansion in the sense of Poincare for the number E_q(x) of n&lt;=x such that q does not divide phi(n). Thereby we improve on a recent theorem of B.K. Spearman and K.S. Williams [Ark. Mat. 44 (2006), 166-181]. Furthermore we resolve, under the Generalized Riemann Hypothesis, which of two approximations to E_q(x) is asymptotically superior using recent results of Y. Ihara on the Euler-Kronecker constant of a number field.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-11-16T17:57:08Z</published>
+    <arxiv:comment>20 pages, 2 tables (each of them page filling)</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Pieter Moree</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0608150v3</id>
+    <title>Primitive sets and an Euler phi function for subsets of {1,2,...,n}</title>
+    <updated>2007-09-16T16:02:59Z</updated>
+    <link href="https://arxiv.org/abs/math/0608150v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0608150v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A nonempty subset A of {1,2,...,n} is called primitive if gcd(A)=1. Let f(n) and f_k(n) denote, respectively, the number of primitive subsets and the number of primitive subsets of cardinality k of {1,2,...,n}. Recursion formulas and asymptotic estimates are obtained for both functions.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-08-06T17:26:50Z</published>
+    <arxiv:comment>This paper, revised and retitled "Affine invariants, relatively prime sets, and a phi function for subsets of {1,2,...,n}," has been published in Integers 7 (2007), A!, pages 1-7</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Melvyn B. Nathanson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/0608053v1</id>
+    <title>Quasi-Particle Description of Strongly Interacting Matter: Towards a Foundation</title>
+    <updated>2006-08-04T13:40:09Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/0608053v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/0608053v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We confront our quasi-particle model for the equation of state of strongly interacting matter with recent first-principle QCD calculations. In particular, we test its applicability at finite baryon densities by comparing with Taylor expansion coefficients of the pressure for two quark flavours. We outline a chain of approximations starting from the Phi-functional approach to QCD which motivates the quasi-particle picture.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-08-04T13:40:09Z</published>
+    <arxiv:comment>Aug 2006. 6 pp. Invited Talk given at Hot Quarks 2006, Villasimius, Sardinia, Italy, 15-20 May 2006</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Eur.Phys.J.C49:205-211,2007</arxiv:journal_ref>
+    <author>
+      <name>Marcus Bluhm</name>
+      <arxiv:affiliation>Rossendorf, Forschungszentrum</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Burkhard Kampfer</name>
+      <arxiv:affiliation>Rossendorf, Forschungszentrum &amp; Dresden, Tech. U.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Schulze</name>
+      <arxiv:affiliation>Dresden, Tech. U.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Daniel Seipt</name>
+      <arxiv:affiliation>Dresden, Tech. U.</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-006-0056-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-006-0056-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0603053v1</id>
+    <title>Simultaneous inequalities among values of the Euler phi-function</title>
+    <updated>2006-03-02T18:24:53Z</updated>
+    <link href="https://arxiv.org/abs/math/0603053v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0603053v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  This paper concerns the values of the Euler phi-function evaluated simultaneously on k arithmetic progressions a_1 n + b_1, a_2 n + b_2, ..., a_k n + b_k. Assuming the necessary condition that no two of the polynomials a_i x + b_i are constant multiples of each other, we show that there are infinitely many integers n for which phi(a_1 n + b_1) &gt; phi(a_2 n + b_2) &gt; ... &gt; phi(a_k n + b_k). In particular, there exist infinitely many strings of k consecutive integers whose phi-values are arranged from largest to smallest in any prescribed manner. Also, under the necessary condition ad \ne bc, any inequality of the form phi(an+b) &lt; phi(cn+d) infinitely often has k consecutive solutions. In fact, we prove that the sets of solutions to these inequalities have positive lower density.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-03-02T18:24:53Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Greg Martin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0601428v1</id>
+    <title>Real $K3$ surfaces without real points, equivariant determinant of the Laplacian, and the Borcherds Phi-function</title>
+    <updated>2006-01-18T05:48:26Z</updated>
+    <link href="https://arxiv.org/abs/math/0601428v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0601428v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We consider an equivariant analogue of a conjecture of Borcherds. Let $Y$ be a real $K3$ surface without real points. Let $g$ be a Ricci-flat Kaehler metric on $Y$ invariant under the complex conjugation. We shall prove that the equivariant determinant of the Laplacian of $(Y,g)$ with respect to the complex conjugation is expressed as the norm of the Borcherds Phi-function at the "period point". Here the period is not the one in algebraic geometry.</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-01-18T05:48:26Z</published>
+    <arxiv:primary_category term="math.DG"/>
+    <author>
+      <name>Ken-Ichi Yoshikawa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0508396v1</id>
+    <title>Group actions in number theory</title>
+    <updated>2005-08-21T21:34:25Z</updated>
+    <link href="https://arxiv.org/abs/math/0508396v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0508396v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Students having had a semester course in abstract algebra are exposed to the elegant way in which finite group theory leads to proofs of familiar facts in elementary number theory. In this note we offer two examples of such group theoretical proofs using the action of a group on a set. The first is Fermat's little theorem and the second concerns a well known identity involving the famous Euler phi function. The tools that we use to establish both results are sometimes seen in a second semester algebra course in which group actions are studied. Specifically, we will use the class equation of a group action and Burnside's theorem.</summary>
+    <category term="math.HO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-08-21T21:34:25Z</published>
+    <arxiv:comment>5 pages</arxiv:comment>
+    <arxiv:primary_category term="math.HO"/>
+    <author>
+      <name>Benjamin V. Holt</name>
+    </author>
+    <author>
+      <name>Tyler J. Evans</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0503246v1</id>
+    <title>Smooth values of the iterates of the Euler's Phi function</title>
+    <updated>2005-03-13T20:10:07Z</updated>
+    <link href="https://arxiv.org/abs/math/0503246v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0503246v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Let $φ(n)$ be the Euler-phi function, define $φ_0(n) = n$ and $φ_{k+1}(n)=φ(φ_{k}(n))$ for all $k\geq 0$. We will determine an asymptotic formula for the set of integers $n$ less than $x$ for which $φ_k(n)$ is $y$-smooth, conditionally on a weak form of the Elliott-Halberstam conjecture.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-03-13T20:10:07Z</published>
+    <arxiv:comment>20 pages, see also http://www.dms.umontreal.ca/~lamzouri</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Canad. J. Math. 59 (2007), 127-147</arxiv:journal_ref>
+    <author>
+      <name>Youness Lamzouri</name>
+      <arxiv:affiliation>Universite de Montreal</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0411087v1</id>
+    <title>Recurrence relations for the Lerch Phi function and applications</title>
+    <updated>2004-11-04T13:48:54Z</updated>
+    <link href="https://arxiv.org/abs/math/0411087v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0411087v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper we present a simple method for deriving recurrence relations and we apply it to obtain two equations involving the Lerch Phi function and sums of Bernoulli and Euler polynomials. Connections between these results and those obtained in a paper of H.M. Srivastava, M.L. Glasser and V. Adamchik are pointed out, emphasizing the usefulness of this approach with some meaningful examples.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-11-04T13:48:54Z</published>
+    <arxiv:comment>11 pages. To appear in ZAA</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Marco Dalai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0404116v3</id>
+    <title>Complexity of Inverting the Euler Function</title>
+    <updated>2004-04-23T19:00:38Z</updated>
+    <link href="https://arxiv.org/abs/math/0404116v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0404116v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We present an algorithm to invert the Euler function $φ(m)$. The algorithm, for a given $n \geq 1$, in polynomial time ``on average'', finds the set $Ψ(n)$ of all solutions $m$ to $φ(m) = n$. In fact, in the worst case, $Ψ(n)$ is exponentially large, and cannot be computed in polynomial time. In the opposite direction, we show, under a widely accepted number theoretic conjecture, that there is a polynomial time reduction of the Partition Problem, an NP-complete problem, to the problem of deciding whether $φ(m) = n$ has a solution for a small set of integers n. This shows that the problem of deciding whether a given finite set of integers S contains a totient is NP-complete. A totient is an integer n that lies in the image of the phi function; that is, an integer n for which there exists an integer m solving phi(m) = n. Finally, we establish close links between of inverting the Euler function and the integer factorization problem.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-04-06T01:33:34Z</published>
+    <arxiv:comment>Slight restatement of results in introduction and in section 4</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Scott Contini</name>
+    </author>
+    <author>
+      <name>Ernie Croot</name>
+    </author>
+    <author>
+      <name>Igor Shparlinski</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/9808129v3</id>
+    <title>K3 Surfaces with Involution and Analytic Torsion</title>
+    <updated>1999-07-29T14:10:38Z</updated>
+    <link href="https://arxiv.org/abs/math/9808129v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/9808129v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  This is the abstruct of the revised paper. We study the equivariant analytic torsion for K3 surfaces with an anti-symplectic involution with the invariant lattice M (such a surface is called a 2-elementary K3 surface of type M in this paper), and show that it (together with the analytic torsion of the fixed curves) can be identified with the automorphic form on the moduli space characterizing the discriminant locus. Three lattices A_1, II_{1,1}(2), II_{1,9}(2) are of particular interest, because they consist of the building blocks of 2-elementary lattices. An explicit formula is given for them. In particular, if M is twice the Enriques lattice, the automorphic form coincides with Borcherds's Phi-function which confirms an observation by Jorgenson-Todorov and Harvey-Moore. Some other examples are shown to be related to Borcherds's product and generalized Kac-Moody algebras.</summary>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1998-08-31T08:05:53Z</published>
+    <arxiv:comment>AMS-Tex, no figure, new title</arxiv:comment>
+    <arxiv:primary_category term="math.AG"/>
+    <author>
+      <name>Ken-Ichi Yoshikawa</name>
+      <arxiv:affiliation>Nagoya University</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/9807351v1</id>
+    <title>Self-Consistent Approximations to Non-Equilibrium Many-Body Theory</title>
+    <updated>1998-07-13T09:56:01Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/9807351v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/9807351v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Within the non-equilibrium Green's function technique on the real time contour, the Phi-functional method of Baym is reviewed and generalized to arbitrary non-equilibrium many-particle systems. The scheme may be closed at any desired order in the number of loops or vertices of the generating functional. It defines effective theories, which provide a closed set of coupled classical field and Dyson equations, which are self-consistent, conserving and thermodynamically consistent. The approach permits to include unstable particles and therefore unifies the description of resonances with all other particles, which obtain a mass width by collisions, decays or creation processes in dense matter. The inclusion of classical fields enables the treatment of soft modes and phase instabilities. The method can be taken as a starting point for adequate and consistent quantum improvements of the in-medium rates in transport theories.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nucl-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1998-07-13T09:56:01Z</published>
+    <arxiv:comment>31 pages, Latex elsart-style</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Nucl.Phys.A657:413-445,1999</arxiv:journal_ref>
+    <author>
+      <name>Yu. B. Ivanov</name>
+    </author>
+    <author>
+      <name>J. Knoll</name>
+    </author>
+    <author>
+      <name>D. N. Voskresensky</name>
+    </author>
+    <arxiv:doi>10.1016/S0375-9474(99)00313-9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/S0375-9474(99)00313-9" title="doi"/>
+  </entry>
+</feed>

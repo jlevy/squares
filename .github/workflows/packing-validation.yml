@@ -100,6 +100,46 @@ jobs:
           retention-days: 30
           overwrite: true
 
+      # The browser floor's tools. Node is on the runner already, but pinned here for the
+      # same reason the Python version is: a floor that moves under you is not a floor. The
+      # version is the one the vendored kpress pins, so the repository has one answer to
+      # "which Node".
+      # On a pull request this job runs `--checks`, which contains no browser step: the
+      # floor is `--frontend`'s and the page contracts are the `frontend` job's, and
+      # `browser code lives in files` reaches Node through the `nodejs_wheel` package
+      # rather than through this install. So the toolchain is installed only where the
+      # complete surface runs it, which takes 8s off the pull-request critical path.
+      - name: Install Node
+        if: "github.event_name != 'pull_request'"
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      # `npm ci` rather than `npm install`: it installs exactly the lockfile and fails if
+      # the lockfile and `package.json` disagree, which is what makes the pinned Biome and
+      # TypeScript versions mean anything. At the repository root, where they live, and with
+      # `--ignore-scripts`, which `.npmrc` also sets by default: a package's install script
+      # is arbitrary code from the supply chain.
+      - name: Install the pinned browser toolchain
+        if: "github.event_name != 'pull_request'"
+        working-directory: .
+        run: npm ci --ignore-scripts
+
+      - name: Cache the Playwright browser for the complete post-merge gate
+        if: "github.event_name != 'pull_request'"
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install Chromium for the complete post-merge gate
+        if: "github.event_name != 'pull_request'"
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m playwright install --with-deps --only-shell chromium
+
       # Only this job builds the engine, and `_build_engine` runs it *before* the executor
       # rather than inside it, so `cargo build --locked --release` is a serial prefix on
       # this job's whole wall.
@@ -249,7 +289,7 @@ jobs:
       # runs its subprocesses concurrently inside this job's free cpus. The readings are in
       # `devtools/gate-budgets.yaml`, one entry per part.
       #
-      # Nothing left the surface to buy any of this. The six jobs still select every
+      # Nothing left the surface to buy any of this. The seven jobs still select every
       # step `--fast` does, and the two shards run every test the lane selects exactly
       # once, which is what `test_the_pull_request_jobs_partition_the_surface` checks --
       # `OR-13`, and the same refusal recorded two paragraphs up.
@@ -259,8 +299,8 @@ jobs:
       # been judged against `--fast`'s recorded 502.3s and failed for finishing early;
       # `--only` reports no tier at all and would have left every part of the
       # pull-request surface with no declared ceiling, which is `D-466` exactly.
-      # `--checks`, `--geometry`, `--typecheck`, `--sweeps` and each `--suite --shard`
-      # carry their own entry in `devtools/gate-budgets.yaml`.
+      # `--checks`, `--frontend`, `--geometry`, `--typecheck`, `--sweeps` and each
+      # `--suite --shard` carry their own entry in `devtools/gate-budgets.yaml`.
       #
       # `test_the_pull_request_jobs_partition_the_surface` reads this file, parses these
       # commands with the CLI's own parser and resolves them through its own selector, and
@@ -440,6 +480,13 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
+      # No Node here since 2026-09-15. The browser floor's liveness tests
+      # (`test_browser_floor_contract.py`) ran in this lane and needed the pinned
+      # toolchain, which cost 8s of setup on the critical path in every shard; they now
+      # run in the `frontend` job, which installs Node for the floor itself, and the quick
+      # lane ignores that file (`BROWSER_FLOOR_LIVENESS_TESTS`). They still fail rather
+      # than skip under `CI`, and `test_every_job_running_the_liveness_tests_installs_node`
+      # follows them to whichever job selects them.
       - name: Run shard 1 of the required pull-request behavioral lane
         run: >-
           uv run --frozen --all-extras --group dev
@@ -548,6 +595,84 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --typecheck --jobs 1 --inner-jobs 1
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  frontend:
+    # Run the package source floor and the full-page accessibility contract together.
+    # On PR #160 the source floor cost 37.31s inside a 195.15s checks queue whose
+    # ceiling is 195s. The page build and browser behavior add another independent
+    # unit, so keeping either in that queue would make its existing budget impossible.
+    if: "github.event_name == 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          submodules: true
+          # This job runs npm-installed binaries, so the checkout keeps no token they
+          # could read from the git config (#160 R26).
+          persist-credentials: false
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Install Node 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install the pinned browser toolchain
+        working-directory: .
+        run: npm ci --ignore-scripts
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium shell
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m playwright install --with-deps --only-shell chromium
+
+      # `--jobs 2` since 2026-09-15, and the reason is the third step rather than a
+      # preference. The browser floor's liveness tests moved here from the quick lane
+      # (`BROWSER_FLOOR_LIVENESS_TESTS`), where they had been making every behavioural job
+      # install Node for 15s of tests; run serially after the Chromium contract they would
+      # have added their 15s to this job's wall on a job about to become the critical path
+      # once the lane was sharded. Two slots on four cpus put them beside the Chromium
+      # step, which is the unit that sets this tier's wall, so the move costs this job
+      # nothing. Not more than two: the Chromium shell and the pinned toolchain are the
+      # only real units here, and a third slot would only buy the oversubscription the
+      # `validate` job's table above prices.
+      - name: Run the frontend source and built-page contracts
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --frontend --jobs 2 --inner-jobs 1
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -847,19 +972,21 @@ jobs:
     # single required context is the reason the split is allowed to exist: `BC-218` set
     # that as the condition for any fan-out, because `D-380` records what a fan-out of
     # separately required checks did to this repository once. A reviewer still watches one
-    # context; it just has six prerequisites now.
+    # context; it just has seven prerequisites now.
     #
     # `needs` alone is not enough, which is why every prerequisite also has a `test` line
     # below. This job runs under `!cancelled()`, so it is reached even when a prerequisite
     # failed, and it is the shell that decides -- a job named in `needs` and missing from
     # the script is an advisory check nothing blocks on.
     if: "!cancelled() && github.event_name == 'pull_request'"
-    needs: [validate, typecheck, geometry, suite-1-of-2, suite-2-of-2, sweeps]
+    needs:
+      [validate, frontend, typecheck, geometry, suite-1-of-2, suite-2-of-2, sweeps]
     runs-on: ubuntu-latest
     steps:
       - name: Require every pull-request prerequisite
         env:
           VALIDATE_RESULT: ${{ needs.validate.result }}
+          FRONTEND_RESULT: ${{ needs.frontend.result }}
           TYPECHECK_RESULT: ${{ needs.typecheck.result }}
           GEOMETRY_RESULT: ${{ needs.geometry.result }}
           SUITE_1_OF_2_RESULT: ${{ needs.suite-1-of-2.result }}
@@ -867,6 +994,7 @@ jobs:
           SWEEPS_RESULT: ${{ needs.sweeps.result }}
         run: |
           test "$VALIDATE_RESULT" = "success"
+          test "$FRONTEND_RESULT" = "success"
           test "$TYPECHECK_RESULT" = "success"
           test "$GEOMETRY_RESULT" = "success"
           test "$SUITE_1_OF_2_RESULT" = "success"

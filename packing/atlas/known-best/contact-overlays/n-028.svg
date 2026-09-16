@@ -3,7 +3,7 @@
   <title id="figure-title">Known-best n=28: descriptive contact census</title>
   <desc id="figure-description">House rendering of known-best n=28 with dashed graph edges for contacts detected at angle tolerance 1e-06 radians and contact tolerance 0.001. Lines join square centres or centres to walls; they are descriptive graph incidence, not exact physical contact loci or rigidity certificates.</desc>
   <metadata>
-    <sqpack:profile version="7">
+    <sqpack:profile version="8">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
       <sqpack:value name="check-arithmetic">mpmath arbitrary precision</sqpack:value>

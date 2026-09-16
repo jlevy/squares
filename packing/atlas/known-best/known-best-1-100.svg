@@ -3,7 +3,7 @@
   <title id="figure-title">Best known packings of one through one hundred unit squares</title>
   <desc id="figure-description">A ten-by-ten atlas of the retained best known unit-square packings for n equals 1 through 100. Each tile is normalized to its own container and labeled with n, the best known upper bound on the container side and, where the value is not yet settled, the best proved lower bound beneath it. A star in crimson marks a lower bound first proved by this project. Badges mark which side lengths are proved optimal, and whether a side length is pinned exactly by a radical or a minimal polynomial rather than only by a decimal.</desc>
   <metadata>
-    <sqpack:profile version="7">
+    <sqpack:profile version="8">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="angle-class-contract">tolerance-seeded; strict-full-side contacts merged</sqpack:value>
       <sqpack:value name="color-angle-tolerance-radians">0.000001</sqpack:value>

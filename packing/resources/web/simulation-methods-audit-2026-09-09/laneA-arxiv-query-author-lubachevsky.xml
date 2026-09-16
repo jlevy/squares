@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/IwKBAGPQkZ9oTXSuohb0umxiYlw</id>
+  <title>arXiv Query: search_query=au:"Lubachevsky"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:24:44Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=au:%22Lubachevsky%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>16</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1104.0198v1</id>
+    <title>Why The Results of Parallel and Serial Monte Carlo Simulations May Differ</title>
+    <updated>2011-04-01T15:26:43Z</updated>
+    <link href="https://arxiv.org/abs/1104.0198v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.0198v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Parallel Monte Carlo simulations often expose faults in random number generators</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-01T15:26:43Z</published>
+    <arxiv:comment>2 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cs/0607007v4</id>
+    <title>Theory of sexes by Geodakian as it is advanced by Iskrin</title>
+    <updated>2009-10-04T15:23:16Z</updated>
+    <link href="https://arxiv.org/abs/cs/0607007v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cs/0607007v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In 1960s V.Geodakian proposed a theory that explains sexes as a mechanism for evolutionary adaptation of the species to changing environmental conditions. In 2001 V.Iskrin refined and augmented the concepts of Geodakian and gave a new and interesting explanation to several phenomena which involve sex, and sex ratio, including the war-years phenomena. He also introduced a new concept of the "catastrophic sex ratio." This note is an attempt to digest technical aspects of the new ideas by Iskrin.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-07-03T04:03:23Z</published>
+    <arxiv:comment>9 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0503627v2</id>
+    <title>How to Simulate Billiards and Similar Systems</title>
+    <updated>2006-07-28T20:25:06Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0503627v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0503627v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  An N-component continuous-time dynamic system is considered whose components evolve autonomously all the time except for in discrete asynchronous instances of pairwise interactions. Examples include chaotically colliding billiard balls and combat models. A new efficient serial event-driven algorithm is described for simulating such systems. Rather than maintaining and updating the global state of the system, the algorithm tries to examine only essential events, i.e., component interactions. The events are processed in a non-decreasing order of time; new interactions are scheduled on the basis of the examined interactions using preintegrated equations of the evolutions of the components. If the components are distributed uniformly enough in the evolution space, so that this space can be subdivided into small sectors such that only O(1) sectors and O(1)$components are in the neighborhood of a sector, then the algorithm spends time O (log N) for processing an event which is the asymptotical minimum. The algorithm uses a simple strategy for handling data: only two states are maintained for each simulated component. Fast data access in this strategy assures the practical efficiency of the algorithm. It works noticeably faster than other algorithms proposed for this model.
+  Key phrases: collision detection, dense packing, molecular dynamics, hard spheres, granular flow</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-03-26T16:15:36Z</published>
+    <arxiv:comment>29 pages. 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Journal of Computational Physics, v.94 n.2, p.255-283, June 1991</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+    <arxiv:doi>10.1016/0021-9991(91)90222-7</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/0021-9991(91)90222-7" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cs/0502039v1</id>
+    <title>Efficient Parallel Simulations of Asynchronous Cellular Arrays</title>
+    <updated>2005-02-08T00:32:33Z</updated>
+    <link href="https://arxiv.org/abs/cs/0502039v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cs/0502039v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A definition for a class of asynchronous cellular arrays is proposed. An example of such asynchrony would be independent Poisson arrivals of cell iterations. The Ising model in the continuous time formulation of Glauber falls into this class. Also proposed are efficient parallel algorithms for simulating these asynchronous cellular arrays. In the algorithms, one or several cells are assigned to a processing element (PE), local times for different PEs can be different. Although the standard serial algorithm by Metropolis, Rosenbluth, Rosenbluth, Teller, and Teller can simulate such arrays, it is usually believed to be without an efficient parallel counterpart. However, the proposed parallel algorithms contradict this belief proving to be both efficient and able to perform the same task as the standard algorithm. The results of experiments with the new algorithms are encouraging: the speed-up is greater than 16 using 25 PEs on a shared memory MIMD bus computer, and greater than 1900 using 2**14 PEs on a SIMD computer. The algorithm by Bortz, Kalos, and Lebowitz can be incorporated in the proposed parallel algorithms, further contributing to speed-up. [In this paper I invented the update-cites-of-local-time-minima parallel simulation scheme. Now the scheme is becoming popular. Many misprints of the original 1987 Complex Systems publication are corrected here.-B.L.]</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.PF" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-02-08T00:32:33Z</published>
+    <arxiv:comment>26 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <arxiv:journal_ref>Complex Systems, vol.1, no.6, December 1987, pp.1099--1123, S. Wolfram, (ed.)</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0412443v4</id>
+    <title>Minimum Perimeter Rectangles That Enclose Congruent Non-Overlapping Circles</title>
+    <updated>2008-05-30T09:34:10Z</updated>
+    <link href="https://arxiv.org/abs/math/0412443v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0412443v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We use computational experiments to find the rectangles of minimum perimeter into which a given number n of non-overlapping congruent circles can be packed. No assumption is made on the shape of the rectangles. In many of the packings found, the circles form the usual regular square-grid or hexagonal patterns or their hybrids. However, for most values of n in the tested range n =&lt; 5000, e.g., for n = 7, 13, 17, 21, 22, 26, 31, 37, 38, 41, 43...,4997, 4998, 4999, 5000, we prove that the optimum cannot possibly be achieved by such regular arrangements. Usually, the irregularities in the best packings found for such n are small, localized modifications to regular patterns; those irregularities are usually easy to predict. Yet for some such irregular n, the best packings found show substantial, extended irregularities which we did not anticipate. In the range we explored carefully, the optimal packings were substantially irregular only for n of the form n = k(k+1)+1, k = 3, 4, 5, 6, 7, i.e., for n = 13, 21, 31, 43, and 57. Also, we prove that the height-to-width ratio of rectangles of minimum perimeter containing packings of n congruent circles tends to 1 as n tends to infinity.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-12-22T03:35:00Z</published>
+    <arxiv:comment>existence of irregular minimum perimeter packings for n not of the form (10) is conjectured; smallest such n is n=66; existence of irregular minimum area packings is conjectured, e.g. for n=453; locally optimal packings for the two minimization criteria are conjecturally the same (p.22, line 5); 27 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Mathematics, vol.309 (28 April 2009), 1947-1962</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+    <author>
+      <name>Ronald L. Graham</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0406394v1</id>
+    <title>Repeated Patterns of Dense Packings of Equal Disks in a Square</title>
+    <updated>2004-06-21T00:00:25Z</updated>
+    <link href="https://arxiv.org/abs/math/0406394v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0406394v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We examine sequences of dense packings of n congruent non-overlapping disks inside a square which follow specific patterns as n increases along certain values, n = n(1), n(2),... n(k),.... Extending and improving previous work of Nurmela and Ostergard where previous patterns for n = n(k) of the form k*k, k*k-1, k*k-3, k(k+1), and 4k*k+k were observed, we identify new patterns for n = k*k-2 and n = k*k+[k/2]. We also find denser packings than those in [Nurmela, Ostergard] for n =21, 28, 34, 40, 43, 44, 45, and 47. In addition, we produce what we conjecture to be optimal packings for n =51, 52, 54, 55, 56, 60, and 61. Finally, for each identified sequence n(1), n(2),... n(k),... which corresponds to some specific repeated pattern, we identify a threshold index k_0, for which the packing appears to be optimal for k =&lt; k_0, but for which the packing is not optimal (or does not exist) for k &gt; k_0.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-06-21T00:00:25Z</published>
+    <arxiv:comment>For n=32, 37, 48, and 50, record dense packings reported here were later improved, see http://arXiv.org/abs/math.MG/0405310</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>The Electronic Journal of Combinatorics 3 (1996), #R16</arxiv:journal_ref>
+    <author>
+      <name>Ronald L. Graham</name>
+    </author>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0406252v1</id>
+    <title>Dense Packings of Equal Disks in an Equilateral Triangle: From 22 to 34 and Beyond</title>
+    <updated>2004-06-12T20:28:31Z</updated>
+    <link href="https://arxiv.org/abs/math/0406252v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0406252v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Previously published packings of equal disks in an equilateral triangle have dealt with up to 21 disks. We use a new discrete-event simulation algorithm to produce packings for up to 34 disks. For each n in the range 22 =&lt; n =&lt; 34 we present what we believe to be the densest possible packing of n equal disks in an equilateral triangle. For these n we also list the second, often the third and sometimes the fourth best packings among those that we found. In each case, the structure of the packing implies that the minimum distance d(n) between disk centers is the root of polynomial P_n with integer coefficients. In most cases we do not explicitly compute P_n but in all cases we do compute and report d(n) to 15 significant decimal digits. Disk packings in equilateral triangles differ from those in squares or circles in that for triangles there are an infinite number of values of n for which the exact value of d(n) is known, namely, when n is of the form Delta(k) := k(k+1)/2. It has also been conjectured that d(n-1) = d(n) in this case. Based on our computations, we present conjectured optimal packings for seven other infinite classes of n, namely n = Delta(2k)+1, Delta(2k+1)+1, Delta(k+2)-2, Delta(2k+3)-3, Delta(3k+1)+2, 4*Delta(k) and 2*Delta(k+1)+2*Delta(k)-1. We also report the best packings we found for other values of n in these forms which are larger than 34, namely, n=37, 40, 42, 43, 46, 49, 56, 57, 60, 63, 67, 71, 79, 84, 92, 93, 106, 112, 121, and 254, and also for n=58, 95, 108, 175, 255, 256, 258, and 260. We say that an infinite class of packings of n disks, n=n(1), n(2),...n(k),..., is tight, if 1/d(n(k)+1) - 1/d(n(k)) is bounded away from zero as k goes to infinity. We conjecture that some of our infinite classes are tight, others are not tight, and that there are infinitely many tight classes.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-06-12T20:28:31Z</published>
+    <arxiv:comment>39 pages, 30 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>The Electronic Journal of Combinatorics 2 (1995), #A1</arxiv:journal_ref>
+    <author>
+      <name>R. L. Graham B. D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0406098v1</id>
+    <title>Curved Hexagonal Packings of Equal Disks in a Circle</title>
+    <updated>2004-06-06T06:09:11Z</updated>
+    <link href="https://arxiv.org/abs/math/0406098v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0406098v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  For each k &gt;= 1 and corresponding hexagonal number h(k) = 3k(k+1)+1, we introduce m(k) = max[(k-1)!/ 2, 1] packings of h(k) equal disks inside a circle which we call "the curved hexagonal packings". The curved hexagonal packing of 7 disks (k = 1, m(1)=1) is well known and the one of 19 disks (k = 2, m(2)=1) has been previously conjectured to be optimal. New curved hexagonal packings of 37, 61, and 91 disks (k = 3, 4, and 5, m(3)=1, m(4)=3, and m(5)=12) were the densest we obtained on a computer using a so-called "billiards" simulation algorithm. A curved hexagonal packing pattern is invariant under a 60 degree rotation. For k tending to infinity, the density (covering fraction) of curved hexagonal packings tends to pi*pi/12. The limit is smaller than the density of the known optimum disk packing in the infinite plane. We found disk configurations that are denser than curved hexagonal packings for 127, 169, and 217 disks (k = 6, 7, and 8). In addition to new packings for h(k) disks, we present new packings we found for h(k)+1 and h(k)-1 disks for k up to 5, i.e., for 36, 38, 60, 62, 90, and 92 disks. The additional packings show the ``tightness'' of the curved hexagonal pattern for k =&lt; 5: deleting a disk does not change the optimum packing and its quality significantly, but adding a disk causes a substantial rearrangement in the optimum packing and substantially decreases the quality.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-06-06T06:09:11Z</published>
+    <arxiv:comment>10 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete &amp; Computational Geometry, 18:179-194 (1997)</arxiv:journal_ref>
+    <author>
+      <name>B. D. Lubachevsky</name>
+    </author>
+    <author>
+      <name>R. L. Graham</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0405650v5</id>
+    <title>Epitaxial Frustration in Deposited Packings of Rigid Disks and Spheres</title>
+    <updated>2004-07-14T23:05:39Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0405650v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0405650v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We use numerical simulation to investigate and analyze the way that rigid disks and spheres arrange themselves when compressed next to incommensurate substrates. For disks, a movable set is pressed into a jammed state against an ordered fixed line of larger disks, where the diameter ratio of movable to fixed disks is 0.8. The corresponding diameter ratio for the sphere simulations is 0.7, where the fixed substrate has the structure of a (001) plane of a face-centered cubic array. Results obtained for both disks and spheres exhibit various forms of density-reducing packing frustration next to the incommensurate substrate, including some cases displaying disorder that extends far from the substrate. The disk system calculations strongly suggest that the most efficient (highest density) packings involve configurations that are periodic in the lateral direction parallel to the substrate, with substantial geometric disruption only occurring near the substrate. Some evidence has also emerged suggesting that for the sphere systems a corresponding structure doubly periodic in the lateral directions would yield the highest packing density; however all of the sphere simulations completed thus far produced some residual "bulk" disorder not obviously resulting from substrate mismatch. In view of the fact that the cases studied here represent only a small subset of all that eventually deserve attention, we end with discussion of the directions in which first extensions of the present simulations might profitably be pursued.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-27T18:26:20Z</published>
+    <arxiv:comment>28 pages, 14 figures; typos fixed; a sentence added to 4th paragraph of sect 5 in responce to a referee's comments</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Phys. Rev. E 70, 041604 (2004)</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.70.041604</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.70.041604" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cs/0405077v2</id>
+    <title>Fast Simulation of Multicomponent Dynamic Systems</title>
+    <updated>2006-07-28T20:52:52Z</updated>
+    <link href="https://arxiv.org/abs/cs/0405077v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cs/0405077v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A computer simulation has to be fast to be helpful, if it is employed to study the behavior of a multicomponent dynamic system. This paper discusses modeling concepts and algorithmic techniques useful for creating such fast simulations. Concrete examples of simulations that range from econometric modeling to communications to material science are used to illustrate these techniques and concepts. The algorithmic and modeling methods discussed include event-driven processing, ``anticipating'' data structures, and ``lazy'' evaluation, Poisson dispenser, parallel processing by cautious advancements and by synchronous relaxations. The paper gives examples of how these techniques and models are employed in assessing efficiency of capacity management methods in wireless and wired networks, in studies of magnetization, crystalline structure, and sediment formation in material science, in studies of competition in economics.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-22T16:51:48Z</published>
+    <arxiv:comment>38 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <arxiv:journal_ref>Bell Labs Technical Journal, Vol.5, No.2, April-June 2000, pp.134-156</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cs/0405053v1</id>
+    <title>Synchronous Relaxation for Parallel Ising Spin Simulations</title>
+    <updated>2004-05-17T01:32:16Z</updated>
+    <link href="https://arxiv.org/abs/cs/0405053v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cs/0405053v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A new parallel algorithm for simulating Ising spin systems is presented. The sequential prototype is the n-fold way algorithm cite{BKL75}, which is efficient but is hard to parallelize using conservative methods. Our parallel algorithm is optimistic. Unlike other optimistic algorithms, e.g., Time Warp, our algorithm is synchronous. It also belongs to the class of simulations known as ``relaxation'' cite{CS8 hence it is named ``synchronous relaxation.'' We derive performance guarantees for this algorithm. If N is the number of PEs, then under weak assumptions we show that the number of correct events processed per unit of time is, on average, at least of order N/log(N). All communication delays, processing time, and busy waits are taken into account.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-17T01:32:16Z</published>
+    <arxiv:comment>Extended abstract. Conference version. The full paper in preparation</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <arxiv:journal_ref>15th Workshop on Parallel and Distributed Simulation, Lake Arrowhead, California, May 2001, pp.185-192</arxiv:journal_ref>
+    <author>
+      <name>Boris Lubachevsky</name>
+    </author>
+    <author>
+      <name>Alan Weiss</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0405310v1</id>
+    <title>Improving Dense Packings of Equal Disks in a Square</title>
+    <updated>2004-05-15T17:00:58Z</updated>
+    <link href="https://arxiv.org/abs/math/0405310v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0405310v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We describe a new numerical procedure for generating dense packings of disks and spheres inside various geometric shapes. We believe that in some of the smaller cases, these packings are in fact optimal. When applied to the previously studied cases of packing n equal disks in a square, the procedure confirms all the previous record packings except for n = 32, 37, 48, and 50 disks, where better packings than those previously recorded are found. For n = 32 and 48, the new packings are minor variations of the previous record packings. However, for n = 37 and 50, the new patterns differ substantially. For example, they are mirror-symmetric, while the previous record packings are not.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-15T17:00:58Z</published>
+    <arxiv:comment>9 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>The Electronic Journal of Combinatorics, vol 7 (1), 2000, #R46</arxiv:journal_ref>
+    <author>
+      <name>David W. Boll</name>
+    </author>
+    <author>
+      <name>Jerry Donovan</name>
+    </author>
+    <author>
+      <name>Ronald L. Graham</name>
+    </author>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0405148v2</id>
+    <title>Dense Packings of Congruent Circles in Rectangles with a Variable Aspect Ratio</title>
+    <updated>2004-05-17T03:14:07Z</updated>
+    <link href="https://arxiv.org/abs/math/0405148v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0405148v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We use computational experiments to find the rectangles of minimum area into which a given number n of non-overlapping congruent circles can be packed. No assumption is made on the shape of the rectangles. Most of the packings found have the usual regular square or hexagonal pattern. However, for 1495 values of n in the tested range n =&lt; 5000, specifically, for n = 49, 61, 79, 97, 107,... 4999, we prove that the optimum cannot possibly be achieved by such regular arrangements. The evidence suggests that the limiting height-to-width ratio of rectangles containing an optimal hexagonal packing of circles tends to 2-sqrt(3) as n tends to infinity, if the limit exists.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-09T14:43:50Z</published>
+    <arxiv:comment>21 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>"Discrete and Computational Geometry. The Goodman-Pollack Festschrift" Aronov etc. eds., Springer, 2003. isbn 3-540-00371-1</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+    <author>
+      <name>Ronald Graham</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0107023v1</id>
+    <title>The Structure of The Group of Polynomial Matrices Unitary in The Indefinite Metric of Index 1</title>
+    <updated>2001-07-04T02:14:47Z</updated>
+    <link href="https://arxiv.org/abs/math/0107023v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0107023v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We consider the group M of all polynomial matrices U(z) = U0 + U1*z + U2*z*z +...+Uk*z*...*z, k=0,1,... that satisfy equation U(z)*D*U(z)" = D with the diagonal n*n matrix D=diag{-1,1,1,...1}. Here n &gt; 1, U(z)" = U0" + U1"*z + U2"*z*z + ..., and symbol A" for a constant matrix A denotes the Hermitiean conjugate of A. We show that the subgroup M0 of those U(z) in M, that are normalized by the condition U(0)=I, is the free product of certain groups. The matrices in each group-multiples are explicitly and uniquely parametrized so that every U=U(z) in M0 can be represented in the form U = G1 * G2 * ... * Gs with n*n polynomial matrix multiples G1, G2, ..., each of which belong to its group-multiple, and so that any two consecutive Gi and G(i+1) belong to two different group-multiples. The uniqueness of such parametrization for a given U includes the number of multiples s, their particular sequence G1,G2,... and the multiples themselves with their respective parametrization; all these items can be defined in only one way once the U is given.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2001-07-04T02:14:47Z</published>
+    <arxiv:primary_category term="math.GR"/>
+    <arxiv:journal_ref>Doklady Akademii Nauk SSSR, 1971</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0104118v1</id>
+    <title>The Structure of the Inverse to the Sylvester Resultant Matrix</title>
+    <updated>2001-04-11T02:49:56Z</updated>
+    <link href="https://arxiv.org/abs/math/0104118v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0104118v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Given polynomials a(z) of degree m and b(z) of degree n, we represent the inverse to the Sylvester resultant matrix of a(z) and b(z), if this inverse exists, as a canonical sum of m+n dyadic matrices each of which is a rational function of zeros of a(z) and b(z). As a result, we obtain the polynomial solutions X(z) of degree n-1 and Y(z) of degree m-1 to the equation a(z)X(z)+b(z)Y(z)=c(z), where c(z) is a given polynomial of degree m+n-1, as follows: X(z) is a Lagrange interpolation polynomial for the function c(z)/a(z) over the set of zeros of b(z) and Y(z) is the one for the function c(z)/b(z) over the set of zeros of a(z).</summary>
+    <category term="math.RA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2001-04-11T02:49:56Z</published>
+    <arxiv:comment>11 pages</arxiv:comment>
+    <arxiv:primary_category term="math.RA"/>
+    <arxiv:journal_ref>Linear Algebra and Its Applications 85:191-202 (1987)</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9207014v1</id>
+    <title>Morphology of Amorphous Layers Ballistically Deposited on a Planar Substrate</title>
+    <updated>1992-07-15T12:01:03Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9207014v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9207014v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We report numerical simulation of the deposition of spherical particles on a planar surface, by ballistic, straight-line trajectory transport, and assuming irreversible adhesion on contact with the surface or previously deposited particles. Our data indicate that the deposit formed has a loosely layered structure within few diameters from the surface. This structure can be explained by a model of growth via chain formation. Away from the surface we found evidence of a monotonic, power-law approach to the bulk density. Both density and contact-statistics results suggest that the deposit formed is sparse: the space-filling fraction is about 15%, and the average number of contacts is 2. The morphology of the deposit both near the surface and in the bulk seems to be a result of competition of screening and branching; nearly half of all the spheres are either single-contact dangling ends, or branching nodes with more than two contacts.</summary>
+    <category term="cond-mat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1992-07-15T12:01:03Z</published>
+    <arxiv:comment>20 pages, TeX (plain)</arxiv:comment>
+    <arxiv:primary_category term="cond-mat"/>
+    <arxiv:journal_ref>Phys.Rev.E47:48-53,1993</arxiv:journal_ref>
+    <author>
+      <name>B. D. Lubachevsky</name>
+    </author>
+    <author>
+      <name>V. Privman</name>
+    </author>
+    <author>
+      <name>S. C. Roy</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.47.48</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.47.48" title="doi"/>
+  </entry>
+</feed>

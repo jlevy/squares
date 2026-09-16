@@ -681,7 +681,9 @@ code {
   *,
   *::before,
   *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: `*` has the lowest specificity, so only !important beats `select, button { transition }` for a viewer who asked for no motion. */
     scroll-behavior: auto !important;
+    /* biome-ignore lint/complexity/noImportantStyles: as above; without it the controls still animate under reduced motion. */
     transition: none !important;
   }
 }

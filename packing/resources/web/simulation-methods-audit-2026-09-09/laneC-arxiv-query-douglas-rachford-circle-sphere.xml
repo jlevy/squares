@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/LQSdDnx+4m10MhaTuQIfKwgC3Ns</id>
+  <title>arXiv Query: search_query=abs:"Douglas-Rachford" AND (abs:"circle" OR abs:"sphere" OR abs:"packing")&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:30:08Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22Douglas-Rachford%22+AND+(abs:%22circle%22+OR+(abs:%22sphere%22+OR+abs:%22packing%22))&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>8</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2412.00512v1</id>
+    <title>Finite Convergence of Circumcentered-Reflection Method on Closed Polyhedral Cones in Euclidean Spaces</title>
+    <updated>2024-11-30T15:43:52Z</updated>
+    <link href="https://arxiv.org/abs/2412.00512v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.00512v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Circumcentered Reflection Method (CRM) is a recently developed projection method for solving convex feasibility problems. It offers preferable convergence properties compared to classic methods such as the Douglas-Rachford and the alternating projections method. In this study, our first main theorem establishes that CRM can identify a feasible point in the intersection of two closed convex cones in \(\mathbb{R}^2\) from any starting point in the Euclidean plane. We then apply this theorem to intersections of two polyhedral sets in \(\mathbb{R}^2\) and two wedge-like sets in \(\mathbb{R}^n\), proving that CRM converges to a point in the intersection from any initial position finitely. Additionally, we introduce a modified technique based on CRM, called the Sphere-Centered Reflection Method. With the help of this technique, we demonstrate that CRM can locate a feasible point in finitely many iterations in the intersection of two proper polyhedral cones in \(\mathbb{R}^3\) when the initial point lies in a subset of the complement of the intersection's polar cone. Lastly, we provide an example illustrating that finite convergence may fail for the intersection of two proper polyhedral cones in \(\mathbb{R}^3\) if the initial guess is outside the designated set.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-30T15:43:52Z</published>
+    <arxiv:comment>15 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Hongzhi Liao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.17077v1</id>
+    <title>Douglas--Rachford is the best projection method</title>
+    <updated>2023-10-26T00:42:57Z</updated>
+    <link href="https://arxiv.org/abs/2310.17077v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.17077v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the Douglas--Rachford method applied to two closed convex cones in the Euclidean plane converges in finitely many steps if and only if the set of fixed points of the Douglas--Rachford operator is nontrivial. We analyze this special case using circle dynamics.
+  We also construct explicit examples for a broad family of projection methods for which the set of fixed points of the relevant projection method operator is nontrivial, but the convergence is not finite. This three-parametric family is well known in the projection method literature and includes both the Douglas--Rachford method and the classic method of alternating projections.
+  Even though our setting is fairly elementary, this work contributes in a new way to the body of theoretical research justifying the superior performance of the Douglas--Rachford method compared to other techniques. Moreover, our result leads to a neat sufficient condition for finite convergence of the Douglas--Rachford method in the locally polyhedral case on the plane, unifying and expanding several special cases available in the literature.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-26T00:42:57Z</published>
+    <arxiv:comment>18 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Minh N. Dao</name>
+    </author>
+    <author>
+      <name>Mareike Dressler</name>
+    </author>
+    <author>
+      <name>Hongzhi Liao</name>
+    </author>
+    <author>
+      <name>Vera Roshchina</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.04384v4</id>
+    <title>Circumcentering Reflection Methods for Nonconvex Feasibility Problems</title>
+    <updated>2021-12-27T10:07:02Z</updated>
+    <link href="https://arxiv.org/abs/1910.04384v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.04384v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, circumcentering reflection method (CRM) has been introduced for solving the feasibility problem of finding a point in the intersection of closed constraint sets. It is closely related with Douglas--Rachford method (DR). We prove local convergence of CRM in the same prototypical settings of most theoretical analysis of regular nonconvex DR, whose consideration is made natural by the geometry of the phase retrieval problem. For the purpose, we show that CRM is related to the method of subgradient projections. For many cases when DR is known to converge to a feasible point, we establish that CRM locally provides a better convergence rate. As a root finder, we show that CRM has local convergence whenever Newton--Raphson method does, has quadratic rate whenever Newton--Raphson method does, and exhibits superlinear convergence in many cases when Newton--Raphson method fails to converge at all. We also obtain explicit regions of convergence. As an interesting aside, we demonstrate local convergence of CRM to feasible points in cases when DR converges to fixed points that are not feasible. We demonstrate an extension in higher dimensions, and use it to obtain convergence rate guarantees for sphere and subspace feasibility problems. Armed with these guarantees, we experimentally discover that CRM is highly sensitive to compounding numerical error that may cause it to achieve worse rates than those guaranteed by theory. We then introduce a numerical modification that enables CRM to achieve the theoretically guaranteed rates. Any future works that study CRM for product space formulations of feasibility problems should take note of this sensitivity and account for it in numerical implementations.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-10T06:25:22Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Neil Dizon</name>
+    </author>
+    <author>
+      <name>Jeffrey Hogan</name>
+    </author>
+    <author>
+      <name>Scott B. Lindstrom</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.02893v1</id>
+    <title>Optimization on Spheres: Models and Proximal Algorithms with Computational Performance Comparisons</title>
+    <updated>2018-10-05T21:36:25Z</updated>
+    <link href="https://arxiv.org/abs/1810.02893v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.02893v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a unified treatment of the abstract problem of finding the best approximation between a cone and spheres in the image of affine transformations. Prominent instances of this problem are phase retrieval and source localization. The common geometry binding these problems permits a generic application of algorithmic ideas and abstract convergence results for nonconvex optimization. We organize variational models for this problem into three different classes and derive the main algorithmic approaches within these classes (13 in all). We identify the central ideas underlying these methods and provide thorough numerical benchmarks comparing their performance on synthetic and laboratory data. The software and data of our experiments are all publicly accessible. We also introduce one new algorithm, a cyclic relaxed Douglas-Rachford algorithm, which outperforms all other algorithms by every measure: speed, stability and accuracy. The analysis of this algorithm remains open.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-05T21:36:25Z</published>
+    <arxiv:comment>23 pages, 11 benchmarking studies</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <arxiv:journal_ref>SIAM J. Mathematics of Data Science, 1(3), 408-445 (2019)</arxiv:journal_ref>
+    <author>
+      <name>D. Russell Luke</name>
+    </author>
+    <author>
+      <name>Shoham Sabach</name>
+    </author>
+    <author>
+      <name>Marc Teboulle</name>
+    </author>
+    <arxiv:doi>10.1137/18M1193025</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1137/18M1193025" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.09068v1</id>
+    <title>Ergodic behaviour of a Douglas-Rachford operator away from the origin</title>
+    <updated>2017-08-30T00:16:48Z</updated>
+    <link href="https://arxiv.org/abs/1708.09068v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.09068v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is shown that away from the origin, the Douglas-Rachford operator with respect to a sphere and a convex set in a Hilbert space can be approximated by a another operator which satisfies a weak ergodic theorem. Similar results for other projection and reflection operators are also discussed.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-30T00:16:48Z</published>
+    <arxiv:comment>To appear in Journal of Nonlinear and Convex Analysis</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Jonathan M. Borwein</name>
+    </author>
+    <author>
+      <name>Ohad Giladi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1610.03975v3</id>
+    <title>Dynamics of the Douglas-Rachford Method for Ellipses and p-Spheres</title>
+    <updated>2018-09-17T10:01:54Z</updated>
+    <link href="https://arxiv.org/abs/1610.03975v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1610.03975v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We expand upon previous work that examined behavior of the iterated Douglas-Rachford method for a line and a circle by considering two generalizations: that of a line and an ellipse and that of a line together with a $p$-sphere. With computer assistance we discover a beautiful geometry that illustrates phenomena which may affect the behavior of the iterates by slowing or inhibiting convergence for feasible cases. We prove local convergence near feasible points, and---seeking a better understanding of the behavior---we employ parallelization in order to study behavior graphically. Motivated by the computer-assisted discoveries, we prove a result about behavior of the method in infeasible cases.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-10-13T08:27:36Z</published>
+    <arxiv:primary_category term="math.FA"/>
+    <arxiv:journal_ref>Set-Valued Var. Anal (2018) 26:385--403</arxiv:journal_ref>
+    <author>
+      <name>Jonathan M. Borwein</name>
+    </author>
+    <author>
+      <name>Scott B. Lindstrom</name>
+    </author>
+    <author>
+      <name>Brailey Sims</name>
+    </author>
+    <author>
+      <name>Anna Schneider</name>
+    </author>
+    <author>
+      <name>Matthew P. Skerritt</name>
+    </author>
+    <arxiv:doi>10.1007/s11228-017-0457-0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s11228-017-0457-0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1609.08751v1</id>
+    <title>A remark on the convergence of the Douglas-Rachford iteration in a non-convex setting</title>
+    <updated>2016-09-28T03:25:19Z</updated>
+    <link href="https://arxiv.org/abs/1609.08751v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1609.08751v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using the construction of a Lyapunov function, it is shown that the Douglas-Rachford iteration with respect to a sphere and a line in $\mathbb R^d$ is robustly $\mathcal{KL}$-stable. This implies a convergence which is stronger than uniform convergence on compact sets.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-09-28T03:25:19Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Ohad Giladi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1203.2392v2</id>
+    <title>Global convergence of a non-convex Douglas-Rachford iteration</title>
+    <updated>2014-11-27T09:27:18Z</updated>
+    <link href="https://arxiv.org/abs/1203.2392v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1203.2392v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We establish a region of convergence for the proto-typical non-convex Douglas-Rachford iteration which finds a point on the intersection of a line and a circle. Previous work on the non-convex iteration [2] was only able to establish local convergence, and was ineffective in that no explicit region of convergence could be given.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-03-12T01:49:39Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <arxiv:journal_ref>Journal of Global Optimization 57 (2013), Issue 3, 753-769</arxiv:journal_ref>
+    <author>
+      <name>Francisco J. Aragón Artacho</name>
+    </author>
+    <author>
+      <name>Jonathan M. Borwein</name>
+    </author>
+    <arxiv:doi>10.1007/s10898-012-9958-4</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10898-012-9958-4" title="doi"/>
+  </entry>
+</feed>

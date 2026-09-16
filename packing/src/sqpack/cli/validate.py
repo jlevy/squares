@@ -92,6 +92,7 @@ SAMPLED_SCREEN_RECORDS = sampled_numbers(KNOWN_BEST_CORPUS, SCREEN_SAMPLE_STRIDE
 
 PROJECT_ROOT = configured_project_root()
 REPOSITORY_ROOT = PROJECT_ROOT.parent
+WORKBENCH_ROOT = REPOSITORY_ROOT / "packages/workbench"
 ENGINE = PROJECT_ROOT / "sqsearch/target/release/sqsearch"
 RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
 ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"
@@ -115,6 +116,7 @@ TIER_FLAGS = (
     "push",
     "records",
     "edit",
+    "frontend",
     "suite",
     "checks",
     "sweeps",
@@ -176,8 +178,25 @@ FAST_SUITE_BUDGET_SECONDS = 1800.0
 #: the detection was, and deferring the whole lane would have thrown away nearly all of
 #: the value for nearly none of the cost.
 QUICK_TESTS = "not exhaustive_exact and not slow"
+#: The one test file the quick lane does not collect, and the step that collects it instead.
+#:
+#: Its tests are liveness tests for the browser floor: they run the pinned Biome, ESLint
+#: and `tsc` and prove each rejects a violation, so they need the Node toolchain, and
+#: under `CI` they fail rather than skip without it. That made every job running the quick
+#: lane install Node -- 8s of setup on the pull request's critical path, and twice over
+#: once the lane was sharded -- for 15s of junit time that belongs beside the floor it
+#: checks. Since 2026-09-15 they run as `browser floor liveness tests` in the `frontend`
+#: job, which installs that toolchain for the floor itself.
+#:
+#: A path rather than a marker, because the lanes are marker expressions that partition
+#: every test and a third marker would have to be argued into that partition for one
+#: file. This is a move between jobs instead: the file is ignored by the quick lane and
+#: named by exactly one step, and `test_the_liveness_tests_run_in_one_job` reads both from
+#: this constant so the two cannot drift.
+BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 SLOW_TESTS = "slow and not exhaustive_exact"
 EXHAUSTIVE_TESTS = "exhaustive_exact"
+BEHAVIORAL_TEST_ROOTS = ("tests", "../packages/workbench/tests")
 #: The pull-request surface's per-test ceiling, in seconds of pytest `call` time.
 #:
 #: This is the boundary between `QUICK_TESTS` and `SLOW_TESTS`, and it is a rule rather
@@ -495,12 +514,21 @@ class Step:
     Broad steps remain in their declared fast or full tier when excluded from `--edit`.
     Pull-request CI runs the fast surface; full checkpoints also run deferred checks."""
 
+    frontend: bool = False
+    """Runs browser-source and built-page contracts on the frontend CI runner.
+
+    This is a scheduling boundary within ``--fast``. It moves the browser floor out of
+    the saturated ``--checks`` queue and gives the full-page accessibility contract the
+    pinned Node and Playwright runtimes it needs. It does not change ``--edit``: cheap
+    frontend floors still run there, while the full-corpus browser check is broad.
+    """
+
     sweep: bool = False
     """This step re-derives a retained atlas from its witnesses, and it is expensive
     enough that the pull request runs it on its own runner rather than beside the rest.
 
     `fast` says *whether* a pull request runs a step; this, `suite` and `geometry` say
-    *which of the pull request's four jobs* runs it. Every sweep is also `fast`, the four
+    *which pull-request job* runs it. Every sweep is also `fast`, the five
     selections are complements within `--fast`, and
     `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks all
     four against what CI actually invokes -- so a step cannot land in no job, and no
@@ -726,7 +754,9 @@ class Step:
     @property
     def tags(self) -> str:
         tags = ["fast" if self.fast else "full"]
-        if self.sweep:
+        if self.frontend:
+            tags.append("frontend")
+        elif self.sweep:
             tags.append("sweeps")
         elif self.suite:
             tags.append("suite")
@@ -1399,7 +1429,8 @@ def _quick_lane_command(jobs: int, shard: tuple[int, int] | None = None) -> tupl
         "-m",
         "pytest",
         "-q",
-        "tests",
+        *BEHAVIORAL_TEST_ROOTS,
+        f"--ignore={BROWSER_FLOOR_LIVENESS_TESTS}",
         "-m",
         QUICK_TESTS,
         *distribution,
@@ -1452,7 +1483,7 @@ def _slow_tests(context: Context) -> str:
                 "-m",
                 "pytest",
                 "-q",
-                "tests",
+                *BEHAVIORAL_TEST_ROOTS,
                 "-m",
                 SLOW_TESTS,
                 *_xdist_distribution(context.jobs),
@@ -1474,7 +1505,7 @@ def _slow_tests(context: Context) -> str:
                     "-m",
                     "pytest",
                     "-q",
-                    "tests",
+                    *BEHAVIORAL_TEST_ROOTS,
                     "-m",
                     SLOW_TESTS,
                     "--collect-only",
@@ -1522,7 +1553,7 @@ def _exhaustive_exact_tests(context: Context) -> str:
             "-m",
             "pytest",
             "-q",
-            "tests",
+            *BEHAVIORAL_TEST_ROOTS,
             "-m",
             EXHAUSTIVE_TESTS,
             "--durations=0",
@@ -1576,14 +1607,125 @@ def _lint_floor(context: Context) -> str:
     registry bug: the duplicated declared-consumer key behind one of D-369's CI
     failures was an `F601`. Measured under a second against basedpyright's 36.
 
-    The second target is the hand-written skill assets at the repository root, the one
-    place project Python lives outside this directory; basedpyright reaches them
-    through its `include` list instead."""
+    The other targets are the top-level workbench package and hand-written skill assets;
+    BasedPyright reaches the same trees through its `include` list."""
     ruff = _required_tool(context, "ruff")
-    skills = [str(path) for path in _handwritten_skill_directories()]
+    targets = [
+        ".",
+        str(WORKBENCH_ROOT),
+        *(str(path) for path in _handwritten_skill_directories()),
+    ]
+    config = str(PROJECT_ROOT / "pyproject.toml")
     return _commands(
         context,
-        ((ruff, "check", ".", *skills), (ruff, "format", "--check", ".", *skills)),
+        (
+            (ruff, "check", "--config", config, *targets),
+            (ruff, "format", "--check", "--config", config, *targets),
+        ),
+    )
+
+
+def _browser_floor(context: Context) -> str:
+    """Biome, the promise overlay, `tsc`, and Node tests over browser source.
+
+    The counterpart to `_lint_floor` and `_type_floor`, and it exists for the same reason
+    they do: until this ran, five thousand lines of published JavaScript had no checker at
+    all, and the one bug that reached a rendered page came in through exactly that gap.
+
+    `biome ci` rather than `biome check`: verify-only, never fixing, and
+    `--error-on-warnings` because plain `ci` passes on warnings and this floor configures
+    warning-severity rules. Fixing is `npm run lint:fix`, at a commit hook or by hand.
+
+    The type gate is separate from the lint gate (floor rule 3) and runs once per program:
+    each legacy global program remains separate so unrelated assets do not collide. The
+    module-based workbench package has its own strict program.
+
+    Node is not a `uv` dependency, so this asks for the pinned local binaries rather than
+    anything on PATH. `npm ci` at the repository root is what puts them there.
+    """
+    biome = REPOSITORY_ROOT / "node_modules/.bin/biome"
+    eslint = REPOSITORY_ROOT / "node_modules/.bin/eslint"
+    tsc = REPOSITORY_ROOT / "node_modules/.bin/tsc"
+    npm = _required_tool(context, "npm")
+    missing = [str(tool) for tool in (biome, eslint, tsc) if not tool.is_file()]
+    if missing:
+        raise StepFailureError(
+            f"the browser floor's pinned tools are not installed: {missing}; "
+            "run `npm ci` at the repository root"
+        )
+    type_programs = sorted(REPOSITORY_ROOT.glob("tsconfig*.json")) + sorted(
+        WORKBENCH_ROOT.glob("tsconfig*.json")
+    )
+    base = REPOSITORY_ROOT / "tsconfig.base.json"
+    return _commands(
+        context,
+        (
+            (str(biome), "ci", "--error-on-warnings", "."),
+            (
+                str(eslint),
+                # The whole package: its config types every workbench JavaScript file, so
+                # naming files here would leave a new one outside the promise floor.
+                "packages/workbench",
+                "packing/src/sqpack/motion_lab/assets",
+                "packing/atlas/known-best/video/spikes/v1-slideshow",
+                "--config",
+                "packages/workbench/eslint.config.js",
+                "--max-warnings",
+                "0",
+            ),
+            *(
+                (str(tsc), "-p", str(path.relative_to(REPOSITORY_ROOT)))
+                for path in type_programs
+                if path != base
+            ),
+            (npm, "test", "--workspace", "@squares/workbench"),
+        ),
+        cwd=REPOSITORY_ROOT,
+    )
+
+
+def _browser_floor_liveness(context: Context) -> str:
+    """The floor's liveness tests, where the floor's toolchain already is.
+
+    `tests/test_browser_floor_contract.py` runs the pinned Biome, ESLint and `tsc` against
+    deliberate violations and requires each to reject them, so it needs Node and fails
+    rather than skips under `CI`. It ran in the quick behavioural lane, which meant every
+    job running that lane installed the toolchain: 8s of setup on the pull request's
+    critical path for 15s of tests, and twice over once the lane was sharded. Here it is
+    one step beside the floor it exercises, on the job that installs Node anyway.
+
+    This moves a job, not a surface. The file runs on every pull request either way, and
+    `BROWSER_FLOOR_LIVENESS_TESTS` is the single name the quick lane ignores and this step
+    selects.
+    """
+    return _run(
+        context,
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            BROWSER_FLOOR_LIVENESS_TESTS,
+        ),
+    )
+
+
+def _workbench_frontend(context: Context) -> str:
+    """Check the probe files, then build once and exercise the page in Chromium.
+
+    `check_probes` goes first because it needs no browser and takes under a second: a probe
+    that does not parse, is not a function, or is named by a checker with no file behind it
+    fails here rather than at the far end of the browser run. It was run by no gate until
+    the #160 review (D13), so a missing probe could sit in the tree unnoticed.
+    """
+    return _commands(
+        context,
+        (
+            (sys.executable, "-m", "workbench_tools.check_probes"),
+            (sys.executable, "-m", "workbench_tools.check_frontend"),
+        ),
     )
 
 
@@ -2456,7 +2598,7 @@ def _generated_tables(context: Context) -> str:
 
 def _strategy_catalogues(_context: Context) -> str:
     lines: list[str] = []
-    for kind, field_name, expected in (("search", "outcome", 20), ("proof", "status", 30)):
+    for kind, field_name, expected in (("search", "outcome", 28), ("proof", "status", 30)):
         path = PROJECT_ROOT / "frontier" / f"{kind}-strategies.yaml"
         data = safe_load(path.read_text(encoding="utf-8"))
         strategies = data["strategies"]
@@ -2912,6 +3054,21 @@ _CASES = ("packing/cases/*",)
 # The retained replay archives. Whole subtree, not the named files: several steps
 # discover which archives to replay by globbing, so adding one changes what runs.
 _RESULTS = ("packing/campaign/series/*",)
+# `build_site.RENDER_INPUTS` is the builder's own declaration and this is the gate's copy,
+# which cannot import the optional package; `test_change_scoped_selection.py` requires every
+# declared render input to select the step that checks the page.
+_WORKBENCH_INPUTS = (
+    "packages/workbench/*",
+    "packing/src/sqpack/render/*",
+    "packing/devtools/render_explainer.py",
+    "packing/witnesses/known-best/*",
+    "packing/atlas/known-best/*",
+    "package.json",
+    "package-lock.json",
+    ".node-version",
+    "vendor/kpress/*",
+    *_TOOLCHAIN,
+)
 
 # What `fast` means since 2026-09-05: the tier a pull request runs, and therefore the
 # tier that has to hold everything a merge would otherwise be the first to check. Since
@@ -3045,6 +3202,57 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         typecheck=True,
         touches=_ANY_PYTHON,
+    ),
+    # Under two seconds for 190 files: Biome is one compiled binary and the three
+    # type-check programs are small. Cheap enough for the edit tier, but `fast` rather
+    # than unconditional because it needs a Node toolchain the Python tiers do not.
+    Step(
+        "browser floor (biome, eslint, tsc, node:test)",
+        _browser_floor,
+        fast=True,
+        frontend=True,
+        touches=(
+            "biome.json",
+            "tsconfig*.json",
+            "package.json",
+            "package-lock.json",
+            "packages/workbench/package.json",
+            "packages/workbench/tsconfig*.json",
+            "**/*.js",
+            "**/*.jsx",
+            "**/*.mjs",
+            "**/*.cjs",
+            "**/*.ts",
+            "**/*.tsx",
+            "**/*.mts",
+            "**/*.cts",
+            "**/*.css",
+        ),
+    ),
+    # 15s of junit time, and `broad` so the edit tier stays what it was: these tests spawn
+    # the pinned toolchain several times over, which is not an edit-loop cost.
+    Step(
+        "browser floor liveness tests",
+        _browser_floor_liveness,
+        fast=True,
+        broad=True,
+        frontend=True,
+        touches=(
+            "packing/tests/test_browser_floor_contract.py",
+            "biome.json",
+            "packages/workbench/eslint.config.js",
+            "tsconfig*.json",
+            "package.json",
+            "package-lock.json",
+        ),
+    ),
+    Step(
+        "workbench browser behavior in Chromium",
+        _workbench_frontend,
+        fast=True,
+        broad=True,
+        frontend=True,
+        touches=_WORKBENCH_INPUTS,
     ),
     # 9.63s.
     Step(
@@ -4183,6 +4391,7 @@ def _select_steps(
     records: bool = False,
     edit: bool = False,
     checks: bool = False,
+    frontend: bool = False,
     sweeps: bool = False,
     suite: bool = False,
     geometry: bool = False,
@@ -4191,11 +4400,12 @@ def _select_steps(
 ) -> list[Step]:
     """The steps a tier and its name filters select.
 
-    `--typecheck` joined the four parts below on 2026-09-15 and is the fifth, selected the
-    same way: the fast steps marked `typecheck`, which `--checks` then leaves out.
+    `--typecheck` joined the parts below on 2026-09-15 and is selected the same way: the
+    fast steps marked `typecheck`, which `--checks` then leaves out.
 
-    `--checks`, `--suite`, `--sweeps` and `--geometry` are the four parts of `--fast`,
-    and they exist because the pull request runs them as four concurrent GitHub jobs.
+    `--checks`, `--frontend`, `--typecheck`, `--suite`, `--sweeps` and `--geometry` are
+    the six parts of `--fast`, and they exist because the pull request runs them as
+    concurrent GitHub jobs.
     They are a partition by construction here -- one takes the fast steps marked `sweep`,
     one the fast steps marked `suite`, one the fast steps marked `geometry`, and
     `--checks` takes the fast steps marked none of the three -- so no step can be in two
@@ -4229,7 +4439,9 @@ def _select_steps(
     is refused rather than silently ignored, which is the honest answer to a request this
     selector cannot carry out.
     """
-    if sweeps:
+    if frontend:
+        selected = [step for step in STEPS if step.frontend]
+    elif sweeps:
         selected = [step for step in STEPS if step.sweep]
     elif suite:
         selected = [step for step in STEPS if step.suite]
@@ -4241,7 +4453,10 @@ def _select_steps(
         selected = [
             step
             for step in STEPS
-            if step.fast and not (step.sweep or step.suite or step.geometry or step.typecheck)
+            if step.fast
+            and not (
+                step.frontend or step.sweep or step.suite or step.geometry or step.typecheck
+            )
         ]
     else:
         selected = [step for step in STEPS if not (fast or edit) or step.fast]
@@ -4657,8 +4872,16 @@ def _parser() -> ArgumentParser:
         "--checks",
         action="store_true",
         help=(
-            "run the part of --fast that is none of the other three: the floors, the "
+            "run the part of --fast that is none of the other four: the Python and Rust "
             "record checks, and everything that needs the Rust engine"
+        ),
+    )
+    parser.add_argument(
+        "--frontend",
+        action="store_true",
+        help=(
+            "run the browser-source and built-page part of --fast; the pull request "
+            "gives it a pinned Node and Playwright runner"
         ),
     )
     parser.add_argument(
@@ -4788,6 +5011,7 @@ def _validate_invocation(
     records: bool = False,
     edit: bool = False,
     checks: bool = False,
+    frontend: bool = False,
     sweeps: bool = False,
     suite: bool = False,
     geometry: bool = False,
@@ -4797,27 +5021,28 @@ def _validate_invocation(
     push: bool = False,
     skip: Sequence[str] = (),
 ) -> None:
-    parts = checks or sweeps or suite or geometry or typecheck
+    parts = checks or frontend or sweeps or suite or geometry or typecheck
     narrowed = only or skip or fast or records or edit or parts or since or push
     if strict and narrowed:
         raise UsageError(
             "--strict cannot be combined with --only, --skip, --fast, --checks, "
-            "--suite, --sweeps, --geometry, --typecheck, --records, --edit, --push, "
-            "or --since"
+            "--frontend, --suite, --sweeps, --geometry, --typecheck, --records, --edit, "
+            "--push, or --since"
         )
     if edit and fast:
         raise UsageError(
             "--edit and --fast select different tiers; --fast is the wider of the two"
         )
-    if [checks, sweeps, suite, geometry, typecheck].count(True) > 1:
+    if [checks, frontend, sweeps, suite, geometry, typecheck].count(True) > 1:
         raise UsageError(
-            "--checks, --geometry, --suite, --sweeps and --typecheck are the five parts of "
-            "--fast; ask for --fast to run them all, or for one of them to run that part"
+            "--checks, --frontend, --geometry, --suite, --sweeps and --typecheck are the "
+            "six parts of --fast; ask for --fast to run them all, or for one of them to "
+            "run that part"
         )
     if parts and (fast or records or edit or push):
         raise UsageError(
-            "--checks, --geometry, --suite, --sweeps and --typecheck are parts of --fast "
-            "and are not combined with another tier; --fast is all five of them"
+            "--checks, --frontend, --geometry, --suite, --sweeps and --typecheck are "
+            "parts of --fast and are not combined with another tier; --fast is all six"
         )
     if shard is not None:
         if not suite:
@@ -4869,6 +5094,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             records=namespace.records,
             edit=namespace.edit,
             checks=namespace.checks,
+            frontend=namespace.frontend,
             sweeps=namespace.sweeps,
             suite=namespace.suite,
             geometry=namespace.geometry,
@@ -4910,6 +5136,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             records=namespace.records,
             edit=namespace.edit or namespace.push,
             checks=namespace.checks,
+            frontend=namespace.frontend,
             sweeps=namespace.sweeps,
             suite=namespace.suite,
             geometry=namespace.geometry,

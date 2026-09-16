@@ -1,0 +1,27 @@
+{
+  "schema": "squares.workbench.cohort/v1",
+  "source_commit": "4ae3a8ee6ff6cb23dc4672b40e3176efaf199aa5",
+  "reference_source": "packing/witnesses/known-best",
+  "instrument": "packages/workbench/probes/bench-annealing.ts",
+  "purpose": "software-validation",
+  "cohorts": [
+    {
+      "id": "foundation-n5",
+      "n": 5,
+      "style": "bodies",
+      "params": { "anneal": 3, "inflate": 1.12 },
+      "partition": "exploratory",
+      "block_size": 2,
+      "max_steps": 96,
+      "repair_budget": 400,
+      "attempts": [
+        { "seed": 0, "status": "completed" },
+        { "seed": 1, "status": "completed" },
+        { "seed": 2, "status": "completed" },
+        { "seed": 3, "status": "completed" },
+        { "seed": 4, "status": "completed" },
+        { "seed": 5, "status": "completed" }
+      ]
+    }
+  ]
+}

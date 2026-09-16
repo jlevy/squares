@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/iGyh2BrWC0VoPKEd30YsCY0h3EU</id>
+  <title>arXiv Query: search_query=all:"packing" AND all:"perturbation" AND all:"local search"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-08T16:40:46Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22packing%22+AND+(all:%22perturbation%22+AND+all:%22local+search%22)&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2509.07576v3</id>
+    <title>Optimizing a Worldwide-Scale Shipper Transportation Planning in a Carmaker Inbound Supply Chain</title>
+    <updated>2026-04-02T16:47:07Z</updated>
+    <link href="https://arxiv.org/abs/2509.07576v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.07576v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the shipper-side design of large-scale inbound transportation networks, motivated by the global supply chain of the carmaker Renault. We formalize the Shipper Transportation Planning Problem (STPP), which integrates discrete flow consolidation via explicit bin-packing, time-expanded routing, and operational regularity constraints. To solve this high-complexity combinatorial problem at an industrial scale, we propose a tailored Iterated Local Search (ILS) metaheuristic. The algorithm combines large-neighborhood search with MILP-based perturbations and leverages bundle-specific decompositions to obtain scalable lower bounds and effective search guidance. Computational experiments on real industrial data involving more than 700,000 commodities and 1.2 million arcs demonstrate that the ILS achieves an average gap of 7.9% to the best available lower bound. The results reveal a 23.2% cost-reduction potential compared to legacy planning benchmarks. Most significantly, the proposed framework is currently deployed in production at Renault, where it supports weekly strategic decisions and generates realized cost savings estimated at approximately 20 million euros per year. Our analysis yields key managerial insights: we demonstrate that explicit 1D bin-packing is a critical step forward for realistic consolidation modeling, that transport regularity offers a robust balance between cost and stability, and that high-volume global networks benefit significantly from in-house strategic planning over third-party outsourcing. To the best of our knowledge, this is the first work to successfully solve a shipper-side transportation design problem at this magnitude.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-09T10:39:49Z</published>
+    <arxiv:comment>40 pages, 27 figures, 9 tables</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Mathis Brichet</name>
+    </author>
+    <author>
+      <name>Maximilian Schiffer</name>
+    </author>
+    <author>
+      <name>Axel Parmentier</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.05971v1</id>
+    <title>Probability Learning based Tabu Search for the Budgeted Maximum Coverage Problem</title>
+    <updated>2020-07-12T12:11:59Z</updated>
+    <link href="https://arxiv.org/abs/2007.05971v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.05971v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Knapsack problems are classic models that can formulate a wide range of applications. In this work, we deal with the Budgeted Maximum Coverage Problem (BMCP), which is a generalized 0-1 knapsack problem. Given a set of items with nonnegative weights and a set of elements with nonnegative profits, where each item is composed of a subset of elements, BMCP aims to pack a subset of items in a capacity-constrained knapsack such that the total weight of the selected items does not exceed the knapsack capacity, and the total profit of the associated elements is maximized. Note that each element is counted once even if it is covered multiple times. BMCP is closely related to the Set-Union Knapsack Problem (SUKP) that is well studied in recent years. As the counterpart problem of SUKP, however, BMCP was introduced early in 1999 but since then it has been rarely studied, especially there is no practical algorithm proposed. By combining the reinforcement learning technique to the local search procedure, we propose a probability learning based tabu search (PLTS) algorithm for addressing this NP-hard problem. The proposed algorithm iterates through two distinct phases, namely a tabu search phase and a probability learning based perturbation phase. As there is no benchmark instances proposed in the literature, we generate 30 benchmark instances with varied properties. Experimental results demonstrate that our PLTS algorithm significantly outperforms the general CPLEX solver for solving the challenging BMCP in terms of the solution quality.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-12T12:11:59Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Liwen Li</name>
+    </author>
+    <author>
+      <name>Zequn Wei</name>
+    </author>
+    <author>
+      <name>Jin-Kao Hao</name>
+    </author>
+    <author>
+      <name>Kun He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1306.0694v1</id>
+    <title>Iterated Tabu Search Algorithm for Packing Unequal Circles in a Circle</title>
+    <updated>2013-06-04T08:04:10Z</updated>
+    <link href="https://arxiv.org/abs/1306.0694v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1306.0694v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents an Iterated Tabu Search algorithm (denoted by ITS-PUCC) for solving the problem of Packing Unequal Circles in a Circle. The algorithm exploits the continuous and combinatorial nature of the unequal circles packing problem. It uses a continuous local optimization method to generate locally optimal packings. Meanwhile, it builds a neighborhood structure on the set of local minimum via two appropriate perturbation moves and integrates two combinatorial optimization methods, Tabu Search and Iterated Local Search, to systematically search for good local minima. Computational experiments on two sets of widely-used test instances prove its effectiveness and efficiency. For the first set of 46 instances coming from the famous circle packing contest and the second set of 24 instances widely used in the literature, the algorithm is able to discover respectively 14 and 16 better solutions than the previous best-known records.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-06-04T08:04:10Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Tao Ye</name>
+    </author>
+    <author>
+      <name>Wenqi Huang</name>
+    </author>
+    <author>
+      <name>Zhipeng Lu</name>
+    </author>
+  </entry>
+</feed>

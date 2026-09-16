@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/PijlV2ep9FeH+Q6NrnrWIP4hsO0</id>
+  <title>arXiv Query: search_query=all:"Lubachevsky" AND all:"Stillinger"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:24:21Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Lubachevsky%22+AND+all:%22Stillinger%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>10</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.23628v1</id>
+    <title>Two-dimensional stealthy hyperuniform polycrystalline disk packings</title>
+    <updated>2026-06-22T17:22:09Z</updated>
+    <link href="https://arxiv.org/abs/2606.23628v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.23628v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Polycrystals consist of grains of local crystalline order separated by grain boundaries. Their structure is not hyperuniform, even though perfect crystals are, because polycrystals consist of randomly sized and oriented grains that generate appreciable long-wavelength density fluctuations. In this paper, we use a collective-coordinate optimization procedure to generate two-dimensional polycrystalline packings composed of identical disks arranged in a pattern that is ultradense, stealthy, and hyperuniform (hereafter named SHU). We compare them with polycrystalline disk packings obtained via a modified Lubachevsky--Stillinger rapid compression algorithm (hereafter named LS), a molecular dynamics protocol that serves as a standard reference model describing realistic, nonhyperuniform polycrystalline microstructures. We carry out an extensive comparison of polycrystalline SHU and LS packings that includes differences in two-point statistics, grain size, specific surface area, diffusion spreadability, and optical response as quantified by the imaginary part of the effective dynamic dielectric constant. We find that the polycrystalline SHU packings exhibit a distinctive grain-size distribution, a consequence of long-range correlations between different grains that is absent in the nonhyperuniform case. Within the nonlocal strong-contrast expansion, we confirm that polycrystalline SHU packings made of dielectric material are perfectly transparent to electromagnetic waves at small wave vectors, in contrast to LS packings. Moreover, polycrystalline SHU packings offer enhanced diffusion spreadability. Although polycrystalline SHU packings are not expected to form spontaneously in nature, they may be created for applications as metamaterials via nanolithography or 3D printing that take advantage of their distinctive optical and transport properties.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-22T17:22:09Z</published>
+    <arxiv:comment>12 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Carlo Vanoni</name>
+    </author>
+    <author>
+      <name>Paul J. Steinhardt</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.16521v2</id>
+    <title>Ultrastable jammed sphere packings with a wide range of particle dispersities</title>
+    <updated>2025-08-12T20:18:40Z</updated>
+    <link href="https://arxiv.org/abs/2506.16521v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.16521v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that for a standard continuously-polydisperse model with particle-diameter distribution $P(σ) \propto σ^{-3}$ and polydispersity index $Δ$, employing a combination of standard SWAP moves and transient degree of freedom (TDOF) moves during a Lubachevsky-Stillinger-like particle-growth process dramatically increases the generated packings' jamming densities $φ_{\rm J}(Δ)$ and coordination numbers $Z_{\rm J}(Δ)$, for a wide range of $Δ$. The fractional increase in $φ_{\rm J}(Δ)$ obtained by employing these moves first increases rapidly with $Δ$, then plateaus at $6-7\%$ over the range $0.10 \lesssim Δ\leq 50$; the obtained $φ_{\rm J}$ are as high as $0.747$ (for $Δ= 0.50$). These density increases are achieved without producing clearly-noticeable crystallization or increased fractionation, despite the fact that the packings are quite hyperstatic for all $Δ&gt; 0$. SWAP and TDOF moves also reduce packings' rattler populations by as much as 99% and increase their bulk moduli by as much as 80%.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-19T18:04:38Z</published>
+    <arxiv:comment>Extensively revised in response to reviewer comments</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Robert S. Hoy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.19196v1</id>
+    <title>Generating ultradense jammed ellipse packings using biased SWAP</title>
+    <updated>2024-09-28T00:53:34Z</updated>
+    <link href="https://arxiv.org/abs/2409.19196v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.19196v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using a Lubachevsky-Stillinger-like growth algorithm combined with biased SWAP Monte Carlo and transient degrees of freedom, we generate ultradense disordered jammed ellipse packings. For all aspect ratios $α$, these packings exhibit significantly smaller intermediate-wavelength density fluctuations and greater local nematic order than their less-dense counterparts. The densest packings are disordered despite having packing fractions $φ_{\rm J}(α)$ that are within less than 0.5% of that of the monodisperse-ellipse crystal [$φ_{\rm xtal} = π/(2\sqrt{3}) \simeq .9069$] over the range $1.25 \lesssim α\lesssim 1.4$ and coordination numbers $Z_{\rm J}(α)$ that are within less than 0.5% of isostaticity [$Z_{\rm iso} = 6$] over the range $1.3 \lesssim α\lesssim 2.0$. Lower-$α$ packings are strongly fractionated and consist of polycrystals of intermediate-size particles, with the largest and smallest particles isolated at the grain boundaries. Higher-$α$ packings are also fractionated, but in a qualitatively-different fashion; they are composed of increasingly-large locally-nematic domains reminiscent of liquid glasses.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-28T00:53:34Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Robert S. Hoy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.09286v1</id>
+    <title>Inherent Structure Landscape of Hard Spheres Confined to Narrow Cylindrical Channels</title>
+    <updated>2021-08-20T17:22:08Z</updated>
+    <link href="https://arxiv.org/abs/2108.09286v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.09286v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The inherent structure landscape for a system of hard spheres confined to a hard cylindrical channel, such that spheres can only contact their first and second neighbours, is studied using an analytical model that extends previous results [Phys. Rev. Lett. 115, 025702 (2015)] to provide a comprehensive picture of jammed packings over a range of packing densities. In the model, a packing is described as an arrangement of $k$ helical sections, separated by defects, that have alternating helical twist directions and where all spheres satisfy local jamming constraints. The structure of each helical section is determined by a single helical twist angle, and a jammed packing is obtained by minimizing the length of the channel per particle with respect to the $k$ helical section angles. An analysis of a small system of $N=20$ spheres shows that the basins on the inherent structure landscape associated with these helical arrangements split into a number of distinct jammed states separated by low barriers giving rise to a degree of hierarchical organization. The model accurately predicts the geometric properties of packings generated using the Lubachevsky and Stillinger compression scheme ($N=10^4$) and provides insight into the nature of the probability distribution of helical section lengths.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-20T17:22:08Z</published>
+    <arxiv:comment>11 Figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Mahdi Zarif</name>
+    </author>
+    <author>
+      <name>Raymond J. Spiteri</name>
+    </author>
+    <author>
+      <name>Richard K. Bowles</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.104.064602</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.104.064602" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1608.03347v1</id>
+    <title>Static Structural Signatures of Nearly Jammed Disordered and Ordered Hard-Sphere Packings: Direct Correlation Function</title>
+    <updated>2016-08-11T02:06:50Z</updated>
+    <link href="https://arxiv.org/abs/1608.03347v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1608.03347v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dynamical signatures are known to precede jamming in hard-particle systems, but static structural signatures have proven more elusive. The observation that compressing hard-particle packings towards jamming causes growing hyperuniformity has paved the way for the analysis of jamming as an "inverted critical point" in which the direct correlation function $c(r)$ diverges. We establish quantitative relationships between various singularities in $c(r)$ and the total correlation function $h(r)$ that provide a concrete means of identifying features that must be expressed in $c(r)$ if one hopes to reproduce details in the pair correlation function accurately. We also analyze systems of three-dimensional monodisperse hard-spheres of diameter $D$ as they approach ordered and disordered jammed configurations. For the latter, we use the Lubachevsky-Stillinger (LS) and Torquato-Jiao (TJ) packing algorithms, which both generate disordered packings, but can show perceptible structural differences. We identify a short-ranged scaling $c(r) \propto -1/r$ as $r \rightarrow 0$ and show that this, along with the developing delta function at $c(D)$, is a consequence of the growing long-rangedness in $c(r)$. Near the freezing density, we identify qualitative differences in the structure factor $S(k)$ as well as $c(r)$ between TJ- and LS-generated configurations and link them to differences in the protocols' packing dynamics. Configurations from both algorithms have structure factors that approach zero in the low-wavenumber limit as jamming is approached and are shown to exhibit a corresponding power-law decay in $c(r)$ for large $r$ as a consequence. Our work advances the notion that static signatures are exhibited by hard-particle packings as they approach jamming and underscores the utility of the direct correlation function as a means of monitoring for an incipient rigid network.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-08-11T02:06:50Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Steven Atkinson</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.94.032902</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.94.032902" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1312.6037v2</id>
+    <title>Static and dynamical properties of a hard-disk fluid confined to a narrow channel</title>
+    <updated>2014-03-14T11:31:50Z</updated>
+    <link href="https://arxiv.org/abs/1312.6037v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1312.6037v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The thermodynamic properties of disks moving in a channel sufficiently narrow that they can collide only with their nearest neighbors can be solved exactly by determining the eigenvalues and eigenfunctions of an integral equation. Using it we have determined the correlation length $ξ$ of this system. We have developed an approximate solution which becomes exact in the high density limit. It describes the system in terms of defects in the regular zigzag arrangement of disks found in the high-density limit. The correlation length is then effectively the spacing between the defects. The time scales for defect creation and annihilation are determined with the help of transition-state theory, as is the diffusion coefficient of the defects, and these results are found to be in good agreement with molecular dynamics simulations. On compressing the system with the Lubachevsky--Stillinger procedure, jammed states are obtained whose packing fractions $φ_J$ are a function of the compression rate $γ$. We find a quantitative explanation of this dependence by making use of the Kibble--Zurek hypothesis. We have also determined the point-to-set length scale $ξ_{PS}$ for this system. At a packing fraction $φ$ close to its largest value $φ_{\text{max}}$, $ξ_{PS}$ has a simple power law divergence, $ξ_{PS} \sim 1/(1-φ/φ_{\text{max}})$, while $ξ$ diverges much faster, $\ln(ξ) \sim 1/(1-φ/φ_{\text{max}})$.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-12-20T16:47:49Z</published>
+    <arxiv:comment>10 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 89, 032111 (2014)</arxiv:journal_ref>
+    <author>
+      <name>M. J. Godfrey</name>
+    </author>
+    <author>
+      <name>M. A. Moore</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.89.032111</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.89.032111" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1207.7260v3</id>
+    <title>Modeling of random bimodal structures of composites (application to solid propellants): I. Simulation of random packs</title>
+    <updated>2012-09-21T01:01:59Z</updated>
+    <link href="https://arxiv.org/abs/1207.7260v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1207.7260v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a composite medium, which consists of a homogeneous matrix containing a statistically homogeneous set of multimodal spherical inclusions. This model is used to represent the morphology of heterogeneous solid propellants (HSP) that are widely used in the rocket industry. The Lubachevsky-Stillinger algorithm is used to generate morphological models of HSP with large polydisperse packs of spherical inclusions. We modify the algorithm by proposing a random shaking procedure that leads to the stabilization of a statistical distribution of the simulated structure that is homogeneous, highly mixed, and protocol independent (in sense that the statistical parameters estimated do not depend on the basic simulation algorithm). Increasing the number of shaking has a twofold effect. First, the system becomes more homogeneous and well-mixed. Second, the stochastic fluctuations of statistical parameters (such as e.g. radial distribution function, RDF), estimated by averaging of these structures, tend to diminish.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-07-31T14:36:21Z</published>
+    <arxiv:comment>24 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>V. A. Buryachenko</name>
+    </author>
+    <author>
+      <name>T. L. Jackson</name>
+    </author>
+    <author>
+      <name>G. Amadio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1201.6570v2</id>
+    <title>Jammed Spheres: Minkowski Tensors Reveal Onset of Local Crystallinity</title>
+    <updated>2012-04-11T15:19:54Z</updated>
+    <link href="https://arxiv.org/abs/1201.6570v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1201.6570v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The local structure of disordered jammed packings of monodisperse spheres without friction, generated by the Lubachevsky-Stillinger algorithm, is studied for packing fractions above and below 64%. The structural similarity of the particle environments to fcc or hcp crystalline packings (local crystallinity) is quantified by order metrics based on rank-four Minkowski tensors. We find a critical packing fraction φ_c \approx 0.649, distinctly higher than previously reported values for the contested random close packing limit. At φ_c, the probability of finding local crystalline configurations first becomes finite and, for larger packing fractions, increases by several orders of magnitude. This provides quantitative evidence of an abrupt onset of local crystallinity at φ_c. We demonstrate that the identification of local crystallinity by the frequently used local bond-orientational order metric q_6 produces false positives, and thus conceals the abrupt onset of local crystallinity. Since the critical packing fraction is significantly above results from mean-field analysis of the mechanical contacts for frictionless spheres, it is suggested that dynamic arrest due to isostaticity and the alleged geometric phase transition in the Edwards framework may be disconnected phenomena.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-01-31T15:13:54Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Physical Review E 85(3), 030301 (2012)</arxiv:journal_ref>
+    <author>
+      <name>Sebastian C. Kapfer</name>
+    </author>
+    <author>
+      <name>Walter Mickel</name>
+    </author>
+    <author>
+      <name>Klaus Mecke</name>
+    </author>
+    <author>
+      <name>Gerd E. Schröder-Turk</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.85.030301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.85.030301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0405650v5</id>
+    <title>Epitaxial Frustration in Deposited Packings of Rigid Disks and Spheres</title>
+    <updated>2004-07-14T23:05:39Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0405650v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0405650v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We use numerical simulation to investigate and analyze the way that rigid disks and spheres arrange themselves when compressed next to incommensurate substrates. For disks, a movable set is pressed into a jammed state against an ordered fixed line of larger disks, where the diameter ratio of movable to fixed disks is 0.8. The corresponding diameter ratio for the sphere simulations is 0.7, where the fixed substrate has the structure of a (001) plane of a face-centered cubic array. Results obtained for both disks and spheres exhibit various forms of density-reducing packing frustration next to the incommensurate substrate, including some cases displaying disorder that extends far from the substrate. The disk system calculations strongly suggest that the most efficient (highest density) packings involve configurations that are periodic in the lateral direction parallel to the substrate, with substantial geometric disruption only occurring near the substrate. Some evidence has also emerged suggesting that for the sphere systems a corresponding structure doubly periodic in the lateral directions would yield the highest packing density; however all of the sphere simulations completed thus far produced some residual "bulk" disorder not obviously resulting from substrate mismatch. In view of the fact that the cases studied here represent only a small subset of all that eventually deserve attention, we end with discussion of the directions in which first extensions of the present simulations might profitably be pursued.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-27T18:26:20Z</published>
+    <arxiv:comment>28 pages, 14 figures; typos fixed; a sentence added to 4th paragraph of sect 5 in responce to a referee's comments</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Phys. Rev. E 70, 041604 (2004)</arxiv:journal_ref>
+    <author>
+      <name>Boris D. Lubachevsky</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.70.041604</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.70.041604" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0003416v1</id>
+    <title>Is Random Close Packing of Spheres Well Defined?</title>
+    <updated>2000-03-25T22:22:02Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0003416v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0003416v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Despite its long history, there are many fundamental issues concerning random packings of spheres that remain elusive, including a precise definition of random close packing (RCP). We argue that the current picture of RCP cannot be made mathematically precise and support this conclusion via a molecular dynamics study of hard spheres using the Lubachevsky-Stillinger compression algorithm. We suggest that this impasse can be broken by introducing the new concept of a maximally random jammed state, which can be made precise.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2000-03-25T22:22:02Z</published>
+    <arxiv:comment>6 pages total, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Physical Review Letters 84, 2064-2067 (2000)</arxiv:journal_ref>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <author>
+      <name>Thomas M. Truskett</name>
+    </author>
+    <author>
+      <name>Pablo G. Debenedetti</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.84.2064</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.84.2064" title="doi"/>
+  </entry>
+</feed>

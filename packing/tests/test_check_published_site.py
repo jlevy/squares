@@ -9,11 +9,24 @@ import pytest
 
 from devtools import check_published_site
 from devtools import render_explainer_pdf as pdf
-from devtools.check_published_site import SERVED, pdf_pages, repository_links
+from devtools.check_published_site import (
+    SERVED,
+    WORKBENCH_HOME,
+    WORKBENCH_REVISION,
+    pdf_pages,
+    repository_links,
+)
 from devtools.render_explainer import COMPOSITE_ASSETS, MARKDOWN_OUTPUT, REPO_URL
 from devtools.render_explainer_pdf import EXPECTED_PAGE_COUNT
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
 from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
+
+
+def workbench_page(commit: str, *, home: str = "../") -> bytes:
+    return (
+        f'<meta name="squares-workbench-revision" content="{commit}">'
+        f'<div id="site-note"><a href="{home}">the explainer</a></div>'
+    ).encode()
 
 
 def source_receipt(page: bytes) -> bytes:
@@ -73,19 +86,25 @@ def test_check_accepts_the_requested_build_and_rejects_a_stale_stamp(
 
     def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
         assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
         if url.endswith(".pdf"):
             pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
             return 200, b"%PDF-1.7\n" + pages + b"%%EOF" + source_receipt(page)
         return 200, b"" if head else page
 
     monkeypatch.setattr(check_published_site, "fetch", fetch)
-    results = check_published_site.check("https://example.org", commit, timeout=1)
+    results = check_published_site.check(
+        "https://example.org", commit, timeout=1, browser=False
+    )
     assert all(passed for passed, _ in results), results
 
     page = f"<p>({stamp.replace(commit[:8], 'deadbeef')})</p>{link}".encode()
     failures = [
         line
-        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        for passed, line in check_published_site.check(
+            "https://example.org", commit, timeout=1, browser=False
+        )
         if not passed
     ]
     assert len(failures) == 1
@@ -105,6 +124,8 @@ def test_check_rejects_a_deployed_pdf_that_crossed_a_page_boundary(
 
     def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
         assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
         if url.endswith(".pdf"):
             pages = b"1 0 obj << /Type /Page >> endobj\n" * (EXPECTED_PAGE_COUNT + 1)
             return 200, b"%PDF-1.7\n" + pages + b"%%EOF" + source_receipt(page)
@@ -113,11 +134,91 @@ def test_check_rejects_a_deployed_pdf_that_crossed_a_page_boundary(
     monkeypatch.setattr(check_published_site, "fetch", fetch)
     failures = [
         line
-        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        for passed, line in check_published_site.check(
+            "https://example.org", commit, timeout=1, browser=False
+        )
         if not passed
     ]
     assert len(failures) == 1
     assert f"{EXPECTED_PAGE_COUNT + 1} pages (expected {EXPECTED_PAGE_COUNT})" in failures[0]
+
+
+def test_workbench_receipt_parses_exact_revision_and_project_relative_home() -> None:
+    commit = "0123456789abcdef0123456789abcdef01234567"
+    text = workbench_page(commit).decode()
+    revision = WORKBENCH_REVISION.search(text)
+    home = WORKBENCH_HOME.search(text)
+    assert revision is not None
+    assert revision.group(1) == commit
+    assert home is not None
+    assert home.group(1) == "../"
+
+
+def test_check_rejects_a_stale_workbench_or_account_root_navigation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    commit = "0123456789abcdef0123456789abcdef01234567"
+    stamp = " ".join(
+        part for part in (PUBLICATION_STATUS, f"{PUBLICATION_VERSION}-{commit[:8]}") if part
+    )
+    page = (
+        f'<p>({stamp})</p><a href="{REPO_URL}/blob/{commit}/README.md">Repository</a>'
+    ).encode()
+
+    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page("f" * 40, home="/")
+        if url.endswith(".pdf"):
+            pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
+            return 200, b"%PDF-1.7\n" + pages + b"%%EOF" + source_receipt(page)
+        return 200, b"" if head else page
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    failures = [
+        line
+        for passed, line in check_published_site.check(
+            "https://example.org/squares", commit, timeout=1, browser=False
+        )
+        if not passed
+    ]
+    assert len(failures) == 2
+    assert "workbench source revision" in failures[0]
+    assert "workbench home resolves" in failures[1]
+
+
+def test_check_requires_the_workbench_browser_api_to_start(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    commit = "0123456789abcdef0123456789abcdef01234567"
+    stamp = " ".join(
+        part for part in (PUBLICATION_STATUS, f"{PUBLICATION_VERSION}-{commit[:8]}") if part
+    )
+    page = (
+        f'<p>({stamp})</p><a href="{REPO_URL}/blob/{commit}/README.md">Repository</a>'
+    ).encode()
+
+    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
+        if url.endswith(".pdf"):
+            pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
+            return 200, b"%PDF-1.7\n" + pages + b"%%EOF" + source_receipt(page)
+        return 200, b"" if head else page
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    monkeypatch.setattr(
+        check_published_site,
+        "workbench_startup",
+        lambda _url, _root, *, timeout: (False, f"API missing after {timeout}s"),
+    )
+    failures = [
+        line
+        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        if not passed
+    ]
+    assert failures == ["API missing after 1s"]
 
 
 @pytest.mark.parametrize(
@@ -146,6 +247,8 @@ def test_check_rejects_a_pdf_without_the_deployed_html_source_receipt(
 
     def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
         assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
         if url.endswith(".pdf"):
             pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
             return 200, b"%PDF-1.7\n" + pages + b"%%EOF" + receipt
@@ -154,7 +257,9 @@ def test_check_rejects_a_pdf_without_the_deployed_html_source_receipt(
     monkeypatch.setattr(check_published_site, "fetch", fetch)
     failures = [
         line
-        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        for passed, line in check_published_site.check(
+            "https://example.org", commit, timeout=1, browser=False
+        )
         if not passed
     ]
     assert len(failures) == 1
@@ -174,11 +279,48 @@ def test_check_compares_the_exact_fetched_html_bytes(
 
     def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
         assert timeout == 1
+        if url.endswith("/workbench/"):
+            return 200, workbench_page(commit)
         if url.endswith(".pdf"):
             pages = b"1 0 obj << /Type /Page >> endobj\n" * EXPECTED_PAGE_COUNT
             return 200, b"%PDF-1.7\n" + pages + b"%%EOF" + source_receipt(page)
         return 200, b"" if head else page
 
     monkeypatch.setattr(check_published_site, "fetch", fetch)
-    results = check_published_site.check("https://example.org", commit, timeout=1)
+    results = check_published_site.check(
+        "https://example.org", commit, timeout=1, browser=False
+    )
     assert all(passed for passed, _ in results), results
+
+
+def test_fetch_retries_a_transient_answer_before_reporting_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Pages can answer 404 or 5xx for a short while after a deploy reports success, and
+    the check runs straight after it (#160 R26). A lasting answer is still reported."""
+    answers = [(404, b""), (503, b""), (200, b"page")]
+    pauses: list[float] = []
+    monkeypatch.setattr(
+        check_published_site, "fetch_once", lambda _url, **_kwargs: answers.pop(0)
+    )
+    status = check_published_site.fetch(
+        "https://example.org/", timeout=1, delays=(1.0, 2.0, 4.0), sleep=pauses.append
+    )
+    assert status == (200, b"page")
+    assert pauses == [1.0, 2.0]
+
+    pauses.clear()
+    monkeypatch.setattr(check_published_site, "fetch_once", lambda _url, **_kwargs: (0, b""))
+    status = check_published_site.fetch(
+        "https://example.org/", timeout=1, delays=(1.0, 2.0), sleep=pauses.append
+    )
+    assert status == (0, b"")
+    assert pauses == [1.0, 2.0]
+
+    pauses.clear()
+    monkeypatch.setattr(check_published_site, "fetch_once", lambda _url, **_kwargs: (403, b""))
+    status = check_published_site.fetch(
+        "https://example.org/", timeout=1, delays=(1.0, 2.0), sleep=pauses.append
+    )
+    assert status == (403, b"")
+    assert pauses == [], "a refusal is an answer, not a deploy still settling"

@@ -288,6 +288,21 @@ tiers:
   # prediction rather than a reading is what `OR-14` calls advertising an aspiration --
   # and the first run at the reference shape prints the line to write, at which point
   # rule 2 re-argues this number against a real one.
+  #
+  # 2026-09-13: the first ceiling failure was a regression, so 195s still stands. PR
+  # #160 failed this tier twice at `f9099096`: 197.56s (run 34745318688, attempt 1)
+  # and 195.15s (attempt 2). Its direct parent `e13ff926` read 177.36s (run
+  # 34742738884), and the 44 pull-request readings since the tier took its 49- and
+  # 50-step form have a geometric mean of 166.46s and a maximum of 186.63s (run
+  # 34634071600), so both #160 readings sit above every earlier one. The cause was the
+  # browser floor, which went from below the eighth-ranked step to 40.63s and 37.31s:
+  # type-aware ESLint, `node --test`, and `typescript-eslint`'s peer range moving every
+  # `tsc -p` from the native 7.0.2 compiler to 6.0.2 (locally 7.79s over 15.0 cpu-s
+  # against 2.80s over 5.5). Exact verification rose 11% with no change to its inputs,
+  # which is contention for the runner rather than new work. The step moved to
+  # `frontend` and the ceiling stayed, because raising it would turn the check that
+  # caught this into slack. `measured_seconds` stays empty: those readings include a
+  # step this tier no longer runs.
   ceiling_seconds: 195.0
   # Cleared, on the same rule that cleared 1369.60s and 409.0s from the `fast` entry and
   # 107.05s from `sweeps`: the figure measures a tier that no longer exists. It measured
@@ -314,6 +329,48 @@ tiers:
     `sweeps` are a partition of `--fast` by construction in `_select_steps`, and
     `test_the_pull_request_jobs_partition_the_surface` checks that the workflow really
     invokes all four. What the fourth job bought is on the `geometry` entry below.
+
+- id: frontend
+  command: packing-validate --frontend
+  # This tier was split from `checks` after two consecutive hosted readings of the
+  # foundation revision exceeded that tier's 195s ceiling: 197.56s and 195.15s. On the
+  # second run the browser floor was 37.31s, behind exact verification at 132.21s,
+  # BasedPyright at 106.34s and the soundness perimeter at 62.74s. The floor's growth
+  # came from type-aware ESLint, Node tests, and the TypeScript 7.0.2-to-6.0.2
+  # downgrade that `typescript-eslint` required, which roughly tripled `tsc` time; the
+  # `checks` entry carries the readings. The new full-page
+  # accessibility contract also needs a Chromium runtime and a fresh 4.4 MB build.
+  # Keeping those two frontend units in `checks` made that lane's existing ceiling
+  # impossible; appending them to the 160s behavioural suite would create the same queue.
+  #
+  # 150s is an initial fail-safe, not a hosted baseline. It is four times the observed
+  # source floor and leaves a similar amount for the build/browser contract plus ordinary
+  # runner setup variance. `measured_seconds` remains empty until this exact partition
+  # runs on its reference runner; the first hosted result supplies the record and tests
+  # the estimate instead of being made to agree with it.
+  #
+  # --- 2026-09-15: a third step, and two slots to run it in -------------------------
+  #
+  # `browser floor liveness tests` moved here from the quick behavioural lane, where its
+  # 15s of tests were making every behavioural job install Node. The job now runs
+  # `--frontend --jobs 2`, so the liveness tests and the source floor run beside the
+  # Chromium contract -- the unit that sets this tier's wall -- rather than after it, and
+  # the reference below moves with the invocation. The ceiling stays at 150s: the step
+  # that arrived is about a tenth of it and does not extend the tier's longest unit.
+  ceiling_seconds: 150.0
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 2, inner_jobs: 1, cpus: 4}
+  argument: >-
+    The source and built-page contracts for the top-level workbench package: Biome,
+    type-aware ESLint, every TypeScript program, Node tests, deterministic package build,
+    keyboard navigation and reduced-motion transport in the pinned Chromium shell. It is
+    a separate pull-request job because PR #160 measured the existing checks queue at
+    195.15s against its 195s ceiling, including 37.31s for the source floor, before the
+    full-page contract was added. Both steps remain in `--fast`; the cheap source floor
+    remains in `--edit`; the workflow partition test proves the new runner neither drops
+    nor duplicates either verdict.
 
 - id: geometry
   command: packing-validate --geometry

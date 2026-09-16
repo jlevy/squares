@@ -37,6 +37,9 @@ FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 # repository-relative because the reader-facing tree now sits above packing/.
 REPO = FRONTIER.parent.parent
 WITNESSES = FRONTIER.parent / "witnesses"
+#: The strategy documents, which declare `status: enforced` and so belong to this corpus.
+#: Until 2026-09-14 nothing loaded them, so `enforced` was a claim (#125 F17).
+STRATEGIES = FRONTIER.parent / "strategies"
 RESOURCE_USAGE = FRONTIER.parent / "campaign" / "resource-usage"
 SESSION_CLOSE_REPORT = RESOURCE_USAGE.parent / "session-close-report.yaml"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
@@ -306,6 +309,9 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     # because a report that silently dropped an unmeasured session would total a fraction
     # of the campaign and read as all of it.
     datasets.append(SESSION_CLOSE_REPORT)
+    datasets += sorted(
+        path for path in STRATEGIES.glob("*.yaml") if not path.name.endswith(".schema.yaml")
+    )
     return md, datasets
 
 

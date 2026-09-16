@@ -113,6 +113,8 @@ particular upstream claims awaiting codification, not a worker’s future namesp
 No such comments are currently active; Agenda 024 records known pending transports.
 Name an uncreated record without linking to a nonexistent file.
 Publishing a record consumes its ID permanently, even if the research is later retired.
+A retired hypothesis ID is declared in a `retired-ids` comment on the board, which lets
+the board name it where it records the retirement and makes reusing it a check failure.
 Superseded launch drafts do not reserve speculative future blocks.
 Missing numbers are not automatically free: preserve pending upstream work and check
 known parallel assignments.
@@ -384,6 +386,31 @@ a reader crossing between them is warned.
 
 ## 6. Provenance
 
+**A source’s licence governs its bytes, not the mathematics they describe.**
+[convention, owner decision 2026-09-10] Two things are held apart everywhere in this
+project, and conflating them is a defect in both directions.
+
+*Acquisition and retention of source material* honours whatever the source asks.
+A page or an SVG is fetched under its own terms, retained only where those terms allow
+it, and never redistributed where they do not.
+`raw_asset_retained` records which way that went, per source, and the archive’s receipts
+record the fetch.
+
+*The mathematical facts extracted from it* -- a packing’s centre-and-angle coordinates,
+its container side, which squares touch -- are not encumbered by the source’s copyright,
+whatever that copyright is.
+They are facts about a geometric object, reshaped into this project’s own structures,
+and they carry no licence forward.
+**This holds regardless of source**: the same reading applies to a catalogue page with
+no stated terms, to a CC-BY-4.0 dataset, and to a paper’s figure.
+
+Sources are cited anyway, everywhere, and that is not a licensing obligation being
+discharged.
+It is what [Section 4](#4-evidence) requires of any claim: a reader has to be
+able to see where a number came from and go check it.
+Attribution is an evidence rule here, and it survives the licence question being
+answered either way.
+
 **Numbers are lifted from run data, never retyped.**
 [convention, spot-checked by review] The tables in a round’s body are derived from its
 archive.
@@ -412,9 +439,14 @@ maintained across hundreds of millions of updates.
 
 ## 7. Corrections
 
-**The record is corrected by addition, never rewritten.** [convention] A defective
-artifact gets a dated annotation stating what still stands and what does not.
-`exp-001` carries three.
+**A landed record is corrected by addition; an unlanded one is a draft.**
+[convention, 2026-09-14] Until a record reaches `main` it may be rewritten, and a
+superseded claim is removed rather than annotated, with the commit that holds the
+previous text named.
+Once on `main`, a defective artifact gets a dated annotation stating what still stands
+and what does not; `exp-001` carries three.
+Either way, assigned ids and renumberings are identity (§1): a rewrite keeps them, and
+the renumbering is recorded on the affected artifacts.
 
 **Views are generated and never hand-edited.** [checked: drift] `campaign/ledger.md` and
 the frontier tables inside the research documents rebuild from their artifacts; the gate

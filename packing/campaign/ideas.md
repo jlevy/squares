@@ -106,7 +106,7 @@ finite-refiner residual motivates H-021 through H-023 but is not a runnable basi
 experiment. It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a
 structural prior an unconstrained search does not exploit.
 
-The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 20 search
+The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 28 search
 families drawn from this problem and adjacent optimization practice; it is a working
 map, not an exhaustive history.
 `strategy_refs` on each hypothesis cites into it, so the ledger can report which whole
@@ -274,6 +274,15 @@ Row 86 belongs to the pending refined-core transport.
 | 116 | Cover both-band squares outside the forced diamond | registered | [H-122](hypotheses/H-122-diamond-conditional-nine-point-cover.md) | Exp122 refutes this fixed-obstacle cover; full-square compatibility remains open. |
 | 117 | Localize all P10-avoiding near45 squares | registered | [H-123](hypotheses/H-123-near45-coordinate-localization.md) | Exp123 accepts the reviewed two-mark reduction through an independent four-guard certificate. |
 | 118 | Keep the full distinguished square in the conditional nine-point cover | registered | [H-124](hypotheses/H-124-full-distinguished-square-compatibility.md) | A complete compatibility proof would close H036 using H106 and H123; a bounded fixed-S discriminator first tests whether this stronger sufficient route survives. |
+| 175 | Put Gensane’s simultaneous all-square perturbation on the ordinary move menu | registered | [H-201](hypotheses/H-201-simultaneous-perturbation-move.md) | The cheapest structural repair for the plateau the 2026-09-08 annealing survey diagnoses; a flag on sqsearch rather than a formulation change. |
+| 176 | Give every square a nonzero derivative with an aggregate wall-pressure term | registered | [H-202](hypotheses/H-202-wall-pressure-dense-objective.md) | The cheap surrogate for the inflation formulation, ablatable against it; the reported side stays required_side so the term can never flatter a result. |
+| 177 | Spend the budget in refined local optima rather than moves | registered | [H-203](hypotheses/H-203-basin-hopping-over-the-lp-quench.md) | Basin hopping against multistart over the LP-in-cell quench, in the currency Ellsworth’s published statistics use. |
+| 178 | Separate cooling-schedule LENGTH from cooling-schedule SHAPE | registered | [H-204](hypotheses/H-204-cooling-schedule-length.md) | Registered mid-calibration after the ablation meant to refute a schedule explanation produced one; four temperature changes did nothing and a tenfold anneal length left the grid. |
+| 179 | Search by projection instead of by an objective | registered | [H-205](hypotheses/H-205-projection-search-reaches-feasibility.md) | The one mechanism in the 2026-09-09 simulation survey with a cold whole-benchmark result on the sibling problem, and the only search here whose output is a packing by construction rather than by tolerance. |
+
+Ideas 175–179 were numbered 119–123 until 2026-09-14, when merging main showed that main
+had already published 119–123 for H-125 to H-129 on 2026-09-07, and the workbench ideas
+stacked above this branch hold 169–174. Their hypothesis ids are unchanged.
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.
@@ -533,6 +542,33 @@ in the finite optimum.
 | 163 | Compose globally valid integer charges before a higher-rank search | shaped |  | A floor of a nonnegative rational combination of valid integer charges has the correspondingly rounded global budget. Retain an explicitly separating charge and complete pose evaluator before expanding the format; finite-support validity alone is insufficient. |
 | 164 | Sweep BC303 C and S first-owner charges under the accepted T2 domains | registered | [H-160](hypotheses/H-160-bc303-t2-charge-filters.md) | [X-029](explorations/X-029-bc303-t2-exact-geometry-draft.md) and the accepted charge bridge give complete open-cell C and sufficient first-owner S tests. A low C cell needs physical-parent replay to refute opposite T2; a low S strip cell only defeats the sufficient filter. |
 | 165 | Charge the exact BC303 literal parent union | registered; rejected by exp-159 | [H-161](hypotheses/H-161-bc303-literal-parent-union.md) | The source-bound closed Q0 mass is `N=4000015`, below both frozen cutoffs. Each necessary budget retains `1048233` units of slack, so this resource test excludes neither the literal parent nor its four-corner tuple. Idea 164 belongs to the parallel T2 branch. |
+
+## Workbench physics as a search
+
+| # | Idea | Status | H | Source | Crux |
+| --- | --- | --- | --- | --- | --- |
+| 170 | restarts beat schedule tuning at equal cost | registered | [H-207](hypotheses/H-207-restarts-beat-schedule.md) | [X-034](explorations/X-034-the-workbench-physics-as-a-search.md) | Re-measure with retained final poses and disjoint seed blocks before reusing any number. |
+| 171 | the initial drop decides the answer, not the annealing | registered | [H-208](hypotheses/H-208-the-drop-decides.md) | [X-034](explorations/X-034-the-workbench-physics-as-a-search.md) | Re-measure with retained final poses and disjoint seed blocks before reusing any number. |
+| 172 | no parameter set in the workbench’s own space reaches a record | registered | [H-209](hypotheses/H-209-no-parameters-reach-a-record.md) | [X-034](explorations/X-034-the-workbench-physics-as-a-search.md) | Re-measure with retained final poses and disjoint seed blocks before reusing any number. |
+| 173 | the blind physics never settles to a valid packing | registered | [H-210](hypotheses/H-210-no-valid-packing.md) | [X-034](explorations/X-034-the-workbench-physics-as-a-search.md) | Re-measure with retained final poses and disjoint seed blocks before reusing any number. |
+| 174 | the shake has a sweet spot, and the shipped value is far below it | registered | [H-211](hypotheses/H-211-the-shake-has-a-sweet-spot.md) | [X-034](explorations/X-034-the-workbench-physics-as-a-search.md) | Re-measure with retained final poses and disjoint seed blocks before reusing any number. |
+
+[H-212](hypotheses/H-212-the-workbench-physics-as-a-search.md) is the open question
+X-034 explored, not an idea.
+It holds exp-208, exp-209 and exp-210, the exploratory rounds H-210 and H-211 were
+registered from, so neither of those has been tested.
+
+Idea 169, that the blind physics closes a constant fraction of the record-to-grid gap,
+was retired on 2026-09-14. Its premise came from arrangements that were never checked to
+be packings; once runs were repaired, a single run scored below the grid at every `n`.
+Its hypothesis, H-206, was retired with it, and the id stays consumed.
+<!-- retired-ids: H-206 -->
+
+These ideas were numbered 164–169 until 2026-09-14, when main had landed 164 and 165 and
+parallel n = 11 branches held 166–168. Each moved up by five: 164, the retired idea, is
+now 169, and 165–169 are now 170–174 (H-207 to H-211). An idea number written before
+then is five lower than the same idea’s number here, so the shake dial, once idea 169,
+is idea 174.
 
 ## Reconciled Daytime Portfolio — X-028
 

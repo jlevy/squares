@@ -415,7 +415,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These 18 research reports are the durable topical syntheses:
+These 20 research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -435,6 +435,8 @@ These 18 research reports are the durable topical syntheses:
 | [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | Basin cartography, structural diversity, relaxation ladders, and search strategy |
 | [Public Sources Beyond n = 100](docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md) | Which catalogues carry geometry above 100, their reuse terms, and why 324 is a source boundary |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | Historical corrections, the three memo arguments, and a reusable conditional counting control |
+| [Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | What “solve to `n = 100`” actually asks for, what the record engines do, and why the move set rather than the cooling schedule is the binding constraint |
+| [Physics and Simulation Mechanisms for Square Packing](docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md) | Inflation, shrinking cells, constraint projection, contact solvers, smoothing continuation and differentiable simulation, and which of them could recover a record cold |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | Exact verification, comparison with the current record, source attribution, and bounded follow-up |
 | [The Best-Known n = 26 Packing](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | Dated literature and source search, exact score normalization, and the limits of the best-known claim |
 
@@ -678,13 +680,19 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 │   ├── defects.yaml        Structured defect log
 │   ├── defects.schema.yaml Defect-log contract
 │   └── frankensim-probe/   Focused experiments against FrankenSim
+├── packages/workbench/     Typed workbench source, tests, probes, and build tools
 ├── vendor/kpress/          Vendored kpress submodule: the page's rendering layer
 ├── AGENTS.md               Project instructions for agents
 ├── CLAUDE.md               Bridge to AGENTS.md
 ├── Makefile                Markdown formatting, hooks, and skill mirroring
+├── biome.json              Biome lint and format config for the browser sources
 ├── lefthook.yml            Pre-commit Markdown formatter hook
-├── package.json            Tooling-only lefthook package
-└── package-lock.json       Tooling lockfile
+├── package.json            Pinned tooling and private npm workspace declaration
+├── package-lock.json       Root and workbench workspace lockfile
+├── tsconfig.base.json      The shared TypeScript type floor every program extends
+├── tsconfig.json           The retained workbench script during package migration
+├── tsconfig.motion-lab.json  The motion lab's assets and the slideshow harness
+└── tsconfig.probes.json    The checkers' probes
 ```
 
 An optional, Git-ignored `attic/` holds intake and scratch files.

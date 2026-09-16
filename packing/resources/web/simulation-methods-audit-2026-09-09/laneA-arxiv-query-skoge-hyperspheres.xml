@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/eA9UsZI5rcolccQ8C+NHJHY42OY</id>
+  <title>arXiv Query: search_query=ti:"Packing hyperspheres in high-dimensional Euclidean spaces"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-09T07:31:19Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Packing+hyperspheres+in+high-dimensional+Euclidean+spaces%22&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0608362v1</id>
+    <title>Packing Hyperspheres in High-Dimensional Euclidean Spaces</title>
+    <updated>2006-08-16T18:44:40Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0608362v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0608362v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We present the first study of disordered jammed hard-sphere packings in four-, five- and six-dimensional Euclidean spaces. Using a collision-driven packing generation algorithm, we obtain the first estimates for the packing fractions of the maximally random jammed (MRJ) states for space dimensions $d=4$, 5 and 6 to be $φ_{MRJ} \simeq 0.46$, 0.31 and 0.20, respectively. To a good approximation, the MRJ density obeys the scaling form $φ_{MRJ}= c_1/2^d+(c_2 d)/2^d$, where $c_1=-2.72$ and $c_2=2.56$, which appears to be consistent with high-dimensional asymptotic limit, albeit with different coefficients. Calculations of the pair correlation function $g_{2}(r)$ and structure factor $S(k)$ for these states show that short-range ordering appreciably decreases with increasing dimension, consistent with a recently proposed ``decorrelation principle,'' which, among othe things, states that unconstrained correlations diminish as the dimension increases and vanish entirely in the limit $d \to \infty$. As in three dimensions (where $φ_{MRJ} \simeq 0.64$), the packings show no signs of crystallization, are isostatic, and have a power-law divergence in $g_{2}(r)$ at contact with power-law exponent $\simeq 0.4$. Across dimensions, the cumulative number of neighbors equals the kissing number of the conjectured densest packing close to where $g_{2}(r)$ has its first minimum. We obtain estimates for the freezing and melting desnities for the equilibrium hard-sphere fluid-solid transition, $φ_F \simeq 0.32$ and $φ_M \simeq 0.39$, respectively, for $d=4$, and $φ_F \simeq 0.19$ and $φ_M \simeq 0.24$, respectively, for $d=5$.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-08-16T18:44:40Z</published>
+    <arxiv:comment>28 pages, 9 figures. To appear in Physical Review E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>M. Skoge</name>
+    </author>
+    <author>
+      <name>A. Donev</name>
+    </author>
+    <author>
+      <name>F. H. Stillinger</name>
+    </author>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.74.041127</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.74.041127" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0609132v2</id>
+    <title>Comment to "Packing Hyperspheres in High-Dimensional Euclidean Space"</title>
+    <updated>2007-02-25T19:26:28Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0609132v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0609132v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  It is shown that the numerical data in cond-mat/0608362 are in very good agreement with the predictions of cond-mat/0601573.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-09-06T12:49:13Z</published>
+    <arxiv:comment>comment to cond-mat/0608362; 3 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <arxiv:journal_ref>Phys.Rev.E 75, 043101 (2007)</arxiv:journal_ref>
+    <author>
+      <name>F. Zamponi</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.75.043101</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.75.043101" title="doi"/>
+  </entry>
+</feed>

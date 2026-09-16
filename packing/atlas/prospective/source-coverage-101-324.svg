@@ -3,7 +3,7 @@
   <title id="figure-title">Source coverage for square packings beyond one hundred</title>
   <desc id="figure-description">An audited grid for n equals 101 through 324. Ninety-seven exact grids and four licensed SVG constructions are retained locally. Public SVG geometry was located and parsed for the other 123 cases; their derived numerical facts are approved for acquisition under the known-best retention policy as of 2026-09-07, and raw SVGs stay unretained. No case in the audited range lacks selected geometry.</desc>
   <metadata>
-    <sqpack:profile version="7">
+    <sqpack:profile version="8">
       <sqpack:coordinates>document-grid; row-major n=101..324</sqpack:coordinates>
       <sqpack:value name="audit-checked-at">2026-08-26T06:03:34-07:00</sqpack:value>
       <sqpack:value name="claim-status">source-availability-only-no-annotations</sqpack:value>

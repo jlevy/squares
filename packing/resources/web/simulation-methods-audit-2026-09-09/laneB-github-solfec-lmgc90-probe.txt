@@ -1,0 +1,12 @@
+== parmes org repos
+   parmes/parmes.github.io | HTML | None | pushed 2025-07-16T13:10:21Z | PARMES website
+   parmes/solfec-1.0 | Python | None | pushed 2020-11-26T20:17:27Z | Parallel Non-Smooth Contact Dynamics using MPI, C and Python
+   parmes/dynlb | C | MIT | pushed 2017-11-02T14:29:25Z | Dynamic load balancer for points using MPI, C and ISPC
+   parmes/parmes | TeX | MIT | pushed 2022-03-08T20:29:30Z | PARMES website source
+   parmes/parmec | C++ | MIT | pushed 2025-10-21T07:41:39Z | Particulate media code prototype using ISPC
+   parmes/parmes_multitest | Python | MIT | pushed 2017-11-14T11:58:52Z | PARMES software multi-variant compilation testing scripts
+   parmes/solfec-2.0 | C++ | MIT | pushed 2019-11-07T13:03:35Z | Rewrite of Solfec-1.0
+== solfec-1.0 license file head
+404: Not Found== LMGC90 git site
+HTTP=200 CT=text/html; charset=utf-8
+<title>LMGC90 / LMGC90_user · GitLab

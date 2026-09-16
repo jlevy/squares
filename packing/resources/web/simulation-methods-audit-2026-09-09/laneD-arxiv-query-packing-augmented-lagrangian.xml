@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/A1DPsZ81CiKwub4GMgen4LYZXlA</id>
+  <title>arXiv Query: search_query=all:"packing" AND all:"augmented Lagrangian"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:55Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22packing%22+AND+all:%22augmented+Lagrangian%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2604.12643v2</id>
+    <title>Sharp inf-sup estimate for the Stokes equation in tight domains with periodic pillars and some numerical implications</title>
+    <updated>2026-05-23T09:59:35Z</updated>
+    <link href="https://arxiv.org/abs/2604.12643v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.12643v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The predictive simulation of fluid dynamics in densely packed microfluidic devices, such as Deterministic Lateral Displacement (DLD) arrays, stagnates with standard iterative solvers. We show that this failure is not algorithmic but rooted in the pre-asymptotic degradation of the pressure-velocity coupling stability. For periodic pillar geometries in a generalized lattice framework, we prove that the continuous Ladyzhenskaya-Babuška-Brezzi (LBB) condition, also called the inf-sup constant, deteriorates exactly as $m^{-1}$ up to a positive multiplicative constant, where $m$ is the pillar density (the number of pillars per unit length). This induces a priori error amplification proportional to $m$ and a pressure Schur complement condition number scaling as $\mathcal{O}(m^2)$. To overcome this theoretical limit, we propose a parameter-free, adaptively scaled Augmented Lagrangian (AL) stabilization strategy with penalty $γ\propto m^2$. Numerical experiments on both standard square and asymmetric DLD arrays validate the theoretical bounds: the AL method reduces outer FGMRES iterations from 437 to 22 on a 1.85M-DoF square array and from 687 to 24 on a 1.77M-DoF DLD array.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-14T12:13:06Z</published>
+    <arxiv:comment>20 pages</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Qi Xin</name>
+    </author>
+    <author>
+      <name>Shihua Gong</name>
+    </author>
+    <author>
+      <name>Jinchao Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.16468v2</id>
+    <title>Unified Integrated Sensing and Communication Signal Design: A Sphere Packing Perspective</title>
+    <updated>2024-08-04T09:42:15Z</updated>
+    <link href="https://arxiv.org/abs/2403.16468v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.16468v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The design of communication signal sets is fundamentally a sphere packing problem. It aims to identify a set of M points in an N -dimensional space, with the objective of maximizing the separability of points that represent different bits.In contrast, signals used for sensing targets should ideally be asdeterministic as possible. This paper explores the inherent conflict and trade-off between communication and sensing when these functions are combined within the same signal set. We present a unified approach to signal design in the time, frequency, and space domains for integrated sensing and communication (ISAC), framing it as a modified sphere packing problem. Through adept formula manipulation, this problem is transformed into a large-scale quadratic constrained quadratic programming (QCQP) challenge. We propose an augmented Lagrangian and dual ascent (ALDA) algorithm for iterative problem-solving. The computational complexity of this approach is analyzed and found to be daunting for large, high-dimensional signal set designs. To address this, we introduce a bit-dimension-power splitting (BDPS) method. This method decomposes the large-scale QCQP into a series of smaller-scale problems that can be solved more efficiently and in parallel, significantly reducing the overall computational load. Extensive simulations have been conducted to validate the effectiveness of our proposed signal design methods in the context of ISAC.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-25T06:48:56Z</published>
+    <arxiv:comment>Accepted by IEEE TCOM</arxiv:comment>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Shuaishuai Guo</name>
+    </author>
+    <author>
+      <name>Kaiqian Qu</name>
+    </author>
+    <arxiv:doi>10.1109/TCOMM.2024.3439436</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TCOMM.2024.3439436" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12678v2</id>
+    <title>QAL-BP: An Augmented Lagrangian Quantum Approach for Bin Packing</title>
+    <updated>2024-01-15T20:10:40Z</updated>
+    <link href="https://arxiv.org/abs/2309.12678v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12678v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The bin packing is a well-known NP-Hard problem in the domain of artificial intelligence, posing significant challenges in finding efficient solutions. Conversely, recent advancements in quantum technologies have shown promising potential for achieving substantial computational speedup, particularly in certain problem classes, such as combinatorial optimization. In this study, we introduce QAL-BP, a novel Quadratic Unconstrained Binary Optimization (QUBO) formulation designed specifically for bin packing and suitable for quantum computation. QAL-BP utilizes the Augmented Lagrangian method to incorporate the bin packing constraints into the objective function while also facilitating an analytical estimation of heuristic, but empirically robust, penalty multipliers. This approach leads to a more versatile and generalizable model that eliminates the need for empirically calculating instance-dependent Lagrangian coefficients, a requirement commonly encountered in alternative QUBO formulations for similar problems. To assess the effectiveness of our proposed approach, we conduct experiments on a set of bin packing instances using a real Quantum Annealing device. Additionally, we compare the results with those obtained from two different classical solvers, namely simulated annealing and Gurobi. The experimental findings not only confirm the correctness of the proposed formulation but also demonstrate the potential of quantum computation in effectively solving the bin packing problem, particularly as more reliable quantum technology becomes available.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-22T07:37:20Z</published>
+    <arxiv:comment>18 pages, 8 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Lorenzo Cellini</name>
+    </author>
+    <author>
+      <name>Antonio Macaluso</name>
+    </author>
+    <author>
+      <name>Michele Lombardi</name>
+    </author>
+  </entry>
+</feed>

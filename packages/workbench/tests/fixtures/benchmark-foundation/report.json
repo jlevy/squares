@@ -1,0 +1,177 @@
+{
+  "schema": "squares.workbench.block-report/v1",
+  "source_commit": "4ae3a8ee6ff6cb23dc4672b40e3176efaf199aa5",
+  "reference_source": "packing/witnesses/known-best",
+  "instrument": "packages/workbench/probes/bench-annealing.ts",
+  "purpose": "software-validation",
+  "interval_assumption": "Wilson 95%; interpretable as sampling uncertainty only for independent blocks",
+  "cohorts": [
+    {
+      "id": "foundation-n5",
+      "n": 5,
+      "style": "bodies",
+      "params": {
+        "anneal": 3.0,
+        "inflate": 1.12
+      },
+      "effective_configuration": {
+        "contract": "packing.squares:AnnealingConfiguration/v2",
+        "style": "bodies",
+        "mode": "blind",
+        "inflate": 1.12,
+        "anneal": 3,
+        "pair_law": {
+          "rigidity": 0.15,
+          "repulsion": 2500.0,
+          "attraction": 0.0,
+          "range": 0.0
+        },
+        "wall_law": {
+          "rigidity": 0.25,
+          "repulsion": 2500.0,
+          "attraction": 0.0,
+          "range": 0.0
+        },
+        "timing": {
+          "dwell": 0.8,
+          "move": 0.55,
+          "correct": 0.25,
+          "settle": 0.8
+        },
+        "anneal_span": 1.0
+      },
+      "partition": "exploratory",
+      "tolerance_pct": 0.0001,
+      "counts": {
+        "planned": 6,
+        "attempted": 6,
+        "completed": 6,
+        "failed": 0,
+        "cancelled": 0,
+        "not-started": 0,
+        "accepted": 6,
+        "rejected": 0
+      },
+      "rejection_reasons": {},
+      "trial_success_per_attempt": {
+        "hits": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson_95": [0.0, 0.3903342879021653]
+      },
+      "trial_success_conditional_on_validity": {
+        "hits": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson_95": [0.0, 0.3903342879021653]
+      },
+      "work": {
+        "max_steps_per_attempt": 96,
+        "repair_budget": 400,
+        "measured_steps": 576,
+        "attempts_with_unknown_steps": 0,
+        "measured_milliseconds": 16.0,
+        "attempts_with_unknown_time": 0,
+        "measured_repair_sweeps": 90,
+        "measured_physics_milliseconds": 12.500000238418579,
+        "measured_repair_milliseconds": 0.9999997615814209,
+        "attempts_with_unknown_repair": 0
+      },
+      "block_size": 2,
+      "blocks": [
+        {
+          "index": 0,
+          "seeds": [0, 1],
+          "statuses": ["completed", "completed"],
+          "accepted": 2,
+          "best_seed": 1,
+          "best": {
+            "absolute_excess": 0.3154533258183516,
+            "relative_excess_pct": 11.652784738022923,
+            "grid_gap_closed": -0.07702502261874278
+          },
+          "success": false,
+          "complete": true
+        },
+        {
+          "index": 1,
+          "seeds": [2, 3],
+          "statuses": ["completed", "completed"],
+          "accepted": 2,
+          "best_seed": 3,
+          "best": {
+            "absolute_excess": 0.3121114253941122,
+            "relative_excess_pct": 11.52933558383016,
+            "grid_gap_closed": -0.06561506087347135
+          },
+          "success": false,
+          "complete": true
+        },
+        {
+          "index": 2,
+          "seeds": [4, 5],
+          "statuses": ["completed", "completed"],
+          "accepted": 2,
+          "best_seed": 5,
+          "best": {
+            "absolute_excess": 0.315569065596907,
+            "relative_excess_pct": 11.65706014301868,
+            "grid_gap_closed": -0.07742018294014108
+          },
+          "success": false,
+          "complete": true
+        }
+      ],
+      "trailing_partial_block_seeds": [],
+      "block_success_per_planned_block": {
+        "hits": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson_95": [0.0, 0.5614970317550454]
+      },
+      "block_success_per_started_block": {
+        "hits": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson_95": [0.0, 0.5614970317550454]
+      },
+      "block_success_per_completed_block": {
+        "hits": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson_95": [0.0, 0.5614970317550454]
+      },
+      "blocks_without_valid_result": 0,
+      "best_relative_excess_pct_conditional_on_validity": {
+        "count": 3,
+        "min": 11.52933558383016,
+        "median": 11.652784738022923,
+        "max": 11.65706014301868
+      },
+      "best_grid_gap_closed_conditional_on_defined_score": {
+        "count": 3,
+        "min": -0.07742018294014108,
+        "median": -0.07702502261874278,
+        "max": -0.06561506087347135
+      },
+      "source": {
+        "contract": "packing.squares:WorkbenchSource/v1",
+        "commit": "4ae3a8ee6ff6cb23dc4672b40e3176efaf199aa5",
+        "dirty": false,
+        "page": "packing/site/workbench/index.html",
+        "page_sha256": "01700057ec67b45ec1c5c62e5981087ae519ebb38bf4e3305f1e6c5a1031bee8",
+        "benchmark": "packages/workbench/probes/bench-annealing.ts",
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "browser_executable": "/Users/levy/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+        "playwright_version": "1.62.0",
+        "python_version": "3.14.7",
+        "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        }
+      }
+    }
+  ]
+}

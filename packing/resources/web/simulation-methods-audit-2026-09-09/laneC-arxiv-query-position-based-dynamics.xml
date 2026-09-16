@@ -1,0 +1,1151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ma3BMdkgBbaRlJ0BXwnahwB2WzA</id>
+  <title>arXiv Query: search_query=all:"position based dynamics"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:25:13Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22position+based+dynamics%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>43</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.23606v1</id>
+    <title>Orientation in Extended Position-Based Dynamics: Application to Rigid Bodies and Cosserat Rods</title>
+    <updated>2026-08-21T02:20:55Z</updated>
+    <link href="https://arxiv.org/abs/2608.23606v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.23606v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rotational degrees of freedom in Extended Position-Based Dynamics (XPBD) require computations on the nonlinear manifold of 3D rotations. We show that Lie theory provides a clean, unified framework for expressing rotations, constraints, interpolation, and differentiation in XPBD, enabling both improved rigid-body constraints and higher-order finite-element Cosserat rods. We derive explicit Lie-theoretic constraint formulations and their gradients for rigid-body simulation, improving the dynamic consistency of constrained rigid-body simulations in XPBD by a factor of over $10^4$ compared to the state-of-the-art. Our framework naturally extends to finite-element Cosserat rods by enabling on-manifold interpolation of nodal rotations. Linear finite elements outperform the conventional chain-of-rigid-bodies discretization, while higher-order basis functions provide even smoother solutions and faster convergence. Utility is demonstrated in a variety of examples with large deformations and contact.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-21T02:20:55Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Samuel Tobin</name>
+    </author>
+    <author>
+      <name>Caleb Rucker</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.08559v1</id>
+    <title>Differentiate the Solver, Not the Equation: Reverse-Sweep Adjoints for Block Implicit Simulation</title>
+    <updated>2026-08-09T08:03:02Z</updated>
+    <link href="https://arxiv.org/abs/2608.08559v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.08559v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Differentiable simulation is a key component in learning, control, and inverse problems, where gradients through nonlinear implicit solvers are required. Existing approaches either rely on unrolled automatic differentiation, whose memory grows with solver depth, or on equation-level implicit differentiation, which assembles global Jacobians and solves large sparse adjoint systems, discarding the locality of the forward solver -- and differentiating the converged equation rather than the finite computation that actually ran. We propose solver-level differentiation, which differentiates the executed solver itself. When a solver is composed of block implicit updates, its discrete adjoint is obtained by applying the corresponding adjoint updates in reverse order, yielding a reverse-sweep formulation whose backward pass mirrors the forward solver. From an operator perspective, the forward pass realizes an approximate inverse through ordered local solves, and the backward applies its transpose through reverse local adjoint solves, constructing no global system. We instantiate this idea on Vertex Block Descent, yielding a differentiable solver whose reverse colored Gauss-Seidel sweeps are composed entirely of local $3\times 3$ adjoint solves. The backward matches automatic differentiation through the identical executed forward to machine precision at every solver depth, where the equation-level adjoint is off by 37% after one sweep; in a controlled same-codebase, same-GPU comparison it is 33x faster and uses 71x less memory than unrolled automatic differentiation; and the same construction is exact on projective dynamics and extended position-based dynamics. We scale differentiable elastodynamics to $10^6$ contact-coupled soft bodies (8M vertices) on one GPU. Overall, this work highlights solver structure as a practical organizing principle for efficient differentiable simulation.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-09T08:03:02Z</published>
+    <arxiv:comment>21 pages, 14 figures, 9 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Lei Shu</name>
+    </author>
+    <author>
+      <name>Ying Jiang</name>
+    </author>
+    <author>
+      <name>Kui Wu</name>
+    </author>
+    <author>
+      <name>Yin Yang</name>
+    </author>
+    <author>
+      <name>Leonidas Guibas</name>
+    </author>
+    <author>
+      <name>Chenfanfu Jiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.27494v1</id>
+    <title>Simulation of Surgical Suturing Using Position-Based Dynamics and the Material Point Method for Robot Reinforcement Learning</title>
+    <updated>2026-07-29T22:20:34Z</updated>
+    <link href="https://arxiv.org/abs/2607.27494v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.27494v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in robotics research have created a strong demand for high-performance simulators. Surgical robotics simulation faces unique challenges due to the need to model diverse objects, such as rigid instruments, soft tissue, and fluids. While many studies simulate sutures or soft tissue independently, only a few have considered the complete soft-tissue suturing scenario, including the contact between sutures and deformable tissue during suture insertion. Building on previous work, this paper presents a novel suturing simulation environment using sutures modelled by position-based dynamics (PBD) and soft bodies modelled by the material point method (MPM) while considering two-way contact with frictional and drag forces. We introduce a contact coupling method between the PBD suture and the MPM soft tissue, enabling visually plausible suture-tissue interactions. The simulator is optimized for GPU execution with parallel scenes using multiple CUDA streams, and we present a Reinforcement Learning (RL) environment for autonomous suturing sub-tasks, including needle insertion, driving, and extraction. Using ML-Agents, RL agents trained in the simulator show stable learning and achieve 80% and 68% success rates in needle insertion and extraction, respectively, under the strictest distance threshold.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-29T22:20:34Z</published>
+    <arxiv:comment>7 pages, 9 figures, accepted for the IEEE RAS/EMBS 11th International Conference on Biomedical Robotics and Biomechatronics (BioRob 2026)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Tleukhan Mussin</name>
+    </author>
+    <author>
+      <name>Yafei Ou</name>
+    </author>
+    <author>
+      <name>Mahdi Tavakoli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.26901v1</id>
+    <title>Convex Collision-Free Regions</title>
+    <updated>2026-07-29T13:33:37Z</updated>
+    <link href="https://arxiv.org/abs/2607.26901v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.26901v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Convex Collision-Free Regions (CCFR) is a collision handling method that explicitly represents local convex feasible regions to enforce non-penetration. Each feasible region is constructed from surrounding mesh primitive configurations, including edge-edge and vertex-face interactions. The resulting convex region represents admissible non-penetrating vertex displacements at the current configuration. Existing collision handling methods for deformable body simulation have largely relied on implicit representations of feasibility, resulting in either compromised robustness for secondary collisions and codimensional contacts or tight coupling with specific nonlinear optimization schemes. Our formulation constructs feasible regions independently for each vertex, defined prior to penetration, inherently accounts not only for primary collisions but also for secondary collisions and codimensional contacts, enabling highly scalable and parallelizable collision handling. These feasible regions encode geometric non-penetration constraints independently of physical contact response models. CCFR does not rely on nonlinear optimization and is compatible with simulation frameworks such as Extended Position-Based Dynamics (XPBD) that do not explicitly maintain interior feasibility during iterative updates. The effectiveness of CCFR is demonstrated across cloth, hair, wire, particle systems, and codimensional contact scenarios, showing versatile and efficient collision handling.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-29T13:33:37Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Tomoyo Kikuchi</name>
+    </author>
+    <author>
+      <name>Takashi Kanai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.29389v1</id>
+    <title>Automated design of soft-rigid hybrid robots for dynamic locomotion</title>
+    <updated>2026-05-28T05:42:32Z</updated>
+    <link href="https://arxiv.org/abs/2605.29389v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.29389v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rigid-bodied robots often lack compliance needed to adapt to unstructured environments, while fully soft robots, though highly adaptable, struggle with scalability and load capacity. In nature, musculoskeletal systems balance strength and flexibility by integrating hard and soft tissues. Inspired by this principle, we present an automated design method for soft-rigid hybrids that optimizes a freeform soft-body shape, a stiff truss layout, and multi-channel actuation. Our differentiable simulator couples the material point method (MPM) for deformable bodies with extended position-based dynamics (XPBD) for truss elements, enabling gradient-based search. The optimization generates truss skeletons that transmit actuation forces to the soft body. We fabricate the optimized design and evaluate it on a walking task. Experiments reproduce the walking mode predicted by the optimization, which does not emerge without the skeleton. Modal analysis further suggests that the skeleton enables deformation modes near the actuation frequency that promote effective stride generation.</summary>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-28T05:42:32Z</published>
+    <arxiv:comment>26 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CE"/>
+    <author>
+      <name>Hiroki Kobayashi</name>
+    </author>
+    <author>
+      <name>Yuki Takaha</name>
+    </author>
+    <author>
+      <name>Changyoung Yuhn</name>
+    </author>
+    <author>
+      <name>Yuki Sato</name>
+    </author>
+    <author>
+      <name>Sunao Tomita</name>
+    </author>
+    <author>
+      <name>Atsushi Kawamoto</name>
+    </author>
+    <author>
+      <name>Tsuyoshi Nomura</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.16043v1</id>
+    <title>Learning Sim-Grounded Policies for Bimanual Rope Manipulation from Human Teleoperation Data</title>
+    <updated>2026-05-15T15:15:12Z</updated>
+    <link href="https://arxiv.org/abs/2605.16043v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.16043v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deformable Linear Objects (DLOs) such as ropes and cables are widely encountered in both household and industrial applications, yet remain challenging to manipulate due to their infinite-dimensional configuration space and frequent self-occlusion. Imitation learning from teleoperation offers a practical path to bimanual DLO manipulation, but its scalability is limited by human effort, making the choice of observation space critical for generalization from small datasets. In this study, we investigate whether the lack of generalization in egocentric visual policies for the knot-untangling task stems from the observation space itself, rather than from the policy architecture or data scale. We compare two Action Chunking with Transformers policies trained on the same bimanual teleoperation data: a vision-based policy conditioned on two egocentric RGB streams from wrist-mounted cameras, and a state-based policy conditioned on the DLO's 3D particle state, extracted from an initial observation via multi-view fusion and evolved in a particle-based eXtended Position-Based Dynamics simulation. Evaluated open-loop on an unseen rope configuration, the state-based policy outperforms its visual counterpart with a 30.8% reduction in L1 error when predicting the initial grasp-and-pull action, quantifying the observability gap between pixels and physics-consistent state, and pointing toward more data-efficient robot learning for the DLO manipulation task from limited human demonstrations.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-15T15:15:12Z</published>
+    <arxiv:comment>Accepted to the Beyond Teleoperation Workshop at ICRA 2026, 5 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Gina Wigginghaus</name>
+    </author>
+    <author>
+      <name>Tim Missal</name>
+    </author>
+    <author>
+      <name>Berk Guler</name>
+    </author>
+    <author>
+      <name>Simon Manschitz</name>
+    </author>
+    <author>
+      <name>Jan Peters</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.14782v1</id>
+    <title>One-shot Compositional 3D Head Avatars with Deformable Hair</title>
+    <updated>2026-04-16T08:39:37Z</updated>
+    <link href="https://arxiv.org/abs/2604.14782v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.14782v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a compositional method for constructing a complete 3D head avatar from a single image. Prior one-shot holistic approaches frequently fail to produce realistic hair dynamics during animation, largely due to inadequate decoupling of hair from the facial region, resulting in entangled geometry and unnatural deformations. Our method explicitly decouples hair from the face, modeling these components using distinct deformation paradigms while integrating them into a unified rendering pipeline. Furthermore, by leveraging image-to-3D lifting techniques, we preserve fine-grained textures from the input image to the greatest extent possible, effectively mitigating the common issue of high-frequency information loss in generalized models. Specifically, given a frontal portrait image, we first perform hair removal to obtain a bald image. Both the original image and the bald image are then lifted to dense, detail-rich 3D Gaussian Splatting (3DGS) representations. For the bald 3DGS, we rig it to a FLAME mesh via non-rigid registration with a prior model, enabling natural deformation that follows the mesh triangles during animation. For the hair component, we employ semantic label supervision combined with a boundary-aware reassignment strategy to extract a clean and isolated set of hair Gaussians. To control hair deformation, we introduce a cage structure that supports Position-Based Dynamics (PBD) simulation, allowing realistic and physically plausible transformations of the hair Gaussian primitives under head motion, gravity, and inertial effects. Striking qualitative results, including dynamic animations under diverse head motions, gravity effects, and expressions, showcase substantially more realistic hair behavior alongside faithfully preserved facial details, outperforming state-of-the-art one-shot methods in perceptual realism.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-16T08:39:37Z</published>
+    <arxiv:comment>project page: https://yuansun-xjtu.github.io/CompHairHead.io</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yuan Sun</name>
+    </author>
+    <author>
+      <name>Xuan Wang</name>
+    </author>
+    <author>
+      <name>WeiLi Zhang</name>
+    </author>
+    <author>
+      <name>Wenxuan Zhang</name>
+    </author>
+    <author>
+      <name>Yu Guo</name>
+    </author>
+    <author>
+      <name>Fei Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.26814v1</id>
+    <title>arg-VU: Affordance Reasoning with Physics-Aware 3D Geometry for Visual Understanding in Robotic Surgery</title>
+    <updated>2026-03-26T17:14:28Z</updated>
+    <link href="https://arxiv.org/abs/2603.26814v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.26814v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Affordance reasoning provides a principled link between perception and action, yet remains underexplored in surgical robotics, where tissues are highly deformable, compliant, and dynamically coupled with tool motion. We present arg-VU, a physics-aware affordance reasoning framework that integrates temporally consistent geometry tracking with constraint-induced mechanical modeling for surgical visual understanding. Surgical scenes are reconstructed using 3D Gaussian Splatting (3DGS) and converted into a temporally tracked surface representation. Extended Position-Based Dynamics (XPBD) embeds local deformation constraints and produces representative geometry points (RGPs) whose constraint sensitivities define anisotropic stiffness metrics capturing the local constraint-manifold geometry. Robotic tool poses in SE(3) are incorporated to compute rigidly induced displacements at RGPs, from which we derive two complementary measures: a physics-aware compliance energy that evaluates mechanical feasibility with respect to local deformation constraints, and a positional agreement score that captures motion alignment (as kinematic motion baseline). Experiments on surgical video datasets show that arg-VU yields more stable, physically consistent, and interpretable affordance predictions than kinematic baselines. These results demonstrate that physics-aware geometric representations enable reliable affordance reasoning for deformable surgical environments and support embodied robotic interaction.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-26T17:14:28Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Nan Xiao</name>
+    </author>
+    <author>
+      <name>Yunxin Fan</name>
+    </author>
+    <author>
+      <name>Farong Wang</name>
+    </author>
+    <author>
+      <name>Fei Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.14634v3</id>
+    <title>Physically Accurate Rigid-Body Dynamics in Particle-Based Simulation</title>
+    <updated>2026-04-14T03:21:31Z</updated>
+    <link href="https://arxiv.org/abs/2603.14634v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.14634v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Robotics demands simulation that can reason about the diversity of real-world physical interactions, from rigid to deformable objects and fluids. Current simulators address this by stitching together multiple subsolvers for different material types, resulting in a compositional architecture that complicates physical reasoning. Particle-based simulators offer a compelling alternative, representing all materials through a single unified formulation that enables seamless cross-material interactions. Among particle-based simulators, position-based dynamics (PBD) is a popular solver known for its computational efficiency and visual plausibility. However, its lack of physical accuracy has limited its adoption in robotics. To leverage the benefits of particle-based solvers while meeting the physical fidelity demands of robotics, we introduce PBD-R, a revised PBD formulation that enforces physically accurate rigid-body dynamics through a novel momentum-conservation constraint and a modified velocity update. Additionally, we introduce a solver-agnostic benchmark with analytical solutions to evaluate physical accuracy. Using this benchmark, we show that PBD-R significantly outperforms PBD and achieves competitive accuracy with MuJoCo while requiring less computation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-15T22:09:42Z</published>
+    <arxiv:comment>Submitted to IROS 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Ava Abderezaei</name>
+    </author>
+    <author>
+      <name>Nataliya Nechyporenko</name>
+    </author>
+    <author>
+      <name>Joseph Miceli</name>
+    </author>
+    <author>
+      <name>Gilberto Briscoe-Martinez</name>
+    </author>
+    <author>
+      <name>Alessandro Roncone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.05108v1</id>
+    <title>GaussTwin: Unified Simulation and Correction with Gaussian Splatting for Robotic Digital Twins</title>
+    <updated>2026-03-05T12:27:05Z</updated>
+    <link href="https://arxiv.org/abs/2603.05108v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.05108v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Digital twins promise to enhance robotic manipulation by maintaining a consistent link between real-world perception and simulation. However, most existing systems struggle with the lack of a unified model, complex dynamic interactions, and the real-to-sim gap, which limits downstream applications such as model predictive control. Thus, we propose GaussTwin, a real-time digital twin that combines position-based dynamics with discrete Cosserat rod formulations for physically grounded simulation, and Gaussian splatting for efficient rendering and visual correction. By anchoring Gaussians to physical primitives and enforcing coherent SE(3) updates driven by photometric error and segmentation masks, GaussTwin achieves stable prediction-correction while preserving physical fidelity. Through experiments in both simulation and on a Franka Research 3 platform, we show that GaussTwin consistently improves tracking accuracy and robustness compared to shape-matching and rigid-only baselines, while also enabling downstream tasks such as push-based planning. These results highlight GaussTwin as a step toward unified, physically meaningful digital twins that can support closed-loop robotic interaction and learning.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-05T12:27:05Z</published>
+    <arxiv:comment>8 pages, 4 figures, 3 tables, ICRA 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yichen Cai</name>
+    </author>
+    <author>
+      <name>Paul Jansonnie</name>
+    </author>
+    <author>
+      <name>Cristiana de Farias</name>
+    </author>
+    <author>
+      <name>Oleg Arenz</name>
+    </author>
+    <author>
+      <name>Jan Peters</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.01881v1</id>
+    <title>ProxyImg: Towards Highly-Controllable Image Representation via Hierarchical Disentangled Proxy Embedding</title>
+    <updated>2026-02-02T09:53:45Z</updated>
+    <link href="https://arxiv.org/abs/2602.01881v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.01881v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Prevailing image representation methods, including explicit representations such as raster images and Gaussian primitives, as well as implicit representations such as latent images, either suffer from representation redundancy that leads to heavy manual editing effort, or lack a direct mapping from latent variables to semantic instances or parts, making fine-grained manipulation difficult. These limitations hinder efficient and controllable image and video editing. To address these issues, we propose a hierarchical proxy-based parametric image representation that disentangles semantic, geometric, and textural attributes into independent and manipulable parameter spaces. Based on a semantic-aware decomposition of the input image, our representation constructs hierarchical proxy geometries through adaptive Bezier fitting and iterative internal region subdivision and meshing. Multi-scale implicit texture parameters are embedded into the resulting geometry-aware distributed proxy nodes, enabling continuous high-fidelity reconstruction in the pixel domain and instance- or part-independent semantic editing. In addition, we introduce a locality-adaptive feature indexing mechanism to ensure spatial texture coherence, which further supports high-quality background completion without relying on generative models. Extensive experiments on image reconstruction and editing benchmarks, including ImageNet, OIR-Bench, and HumanEdit, demonstrate that our method achieves state-of-the-art rendering fidelity with significantly fewer parameters, while enabling intuitive, interactive, and physically plausible manipulation. Moreover, by integrating proxy nodes with Position-Based Dynamics, our framework supports real-time physics-driven animation using lightweight implicit rendering, achieving superior temporal consistency and visual realism compared with generative approaches.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-02T09:53:45Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ye Chen</name>
+    </author>
+    <author>
+      <name>Yupeng Zhu</name>
+    </author>
+    <author>
+      <name>Xiongzhen Zhang</name>
+    </author>
+    <author>
+      <name>Zhewen Wan</name>
+    </author>
+    <author>
+      <name>Yingzhe Li</name>
+    </author>
+    <author>
+      <name>Wenjun Zhang</name>
+    </author>
+    <author>
+      <name>Bingbing Ni</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.01501v4</id>
+    <title>A Unified Architecture for N-Dimensional Visualization and Simulation: 4D Implementation and Evaluation including Boolean Operations</title>
+    <updated>2026-04-04T12:55:58Z</updated>
+    <link href="https://arxiv.org/abs/2512.01501v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.01501v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a unified software architecture for visualization and simulation based on a design targeting an N-dimensional space. The contributions of this study are twofold. First, it presents an architectural configuration that integrates multiple processes into a single software architecture: Quickhull-based convex hull mesh generation, Boolean operations, coordinate transformations for high-dimensional exploration (pose transformation and view transformation), and hyperplane slicing for visualization. Second, it defines "Plex" (.plex) as a file format intended for the exchange of N-dimensional mesh data. The proposed approach adopts an approximate implementation that tolerates numerical errors and prioritizes implementation transparency over guarantees of numerical rigor. The experimental results and evaluations presented in this paper are limited to a 4D implementation; no evaluation is conducted for N &gt; 4, and the discussion is restricted to stating that the architecture itself has a dimension-independent structure. This paper also proposes an interaction design for high-dimensional exploration based on FPS navigation. As an input example involving shape changes over time, a non-rigid body simulation based on XPBD (Extended Position Based Dynamics) is integrated into the 4D implementation. Experimental results confirm that the 4D implementation runs on a single PC.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-01T10:26:23Z</published>
+    <arxiv:comment>18 pages, 9 figures, 5 tables v4: Clarified scope (4D evaluation) and fixed some expression. Under review at IEEE Access</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Hirohito Arai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.23131v1</id>
+    <title>Towards Generalized Position-Based Dynamics</title>
+    <updated>2025-11-28T12:25:33Z</updated>
+    <link href="https://arxiv.org/abs/2511.23131v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.23131v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The position-based dynamics (PBD) algorithm is a popular and versatile technique for real-time simulation of deformable bodies, but is only applicable to forces that can be expressed as linearly compliant constraints. In this work, we explore a generalization of PBD that is applicable to arbitrary nonlinear force models. We do this by reformulating the implicit time integration equations in terms of the individual forces in the system, to which applying Gauss-Seidel iterations naturally leads to a PBD-type algorithm. As we demonstrate, our method allows simulation of data-driven cloth models [Sperl et al. 2020] that cannot be represented by existing variations of position-based dynamics, enabling performance improvements over the baseline Newton-based solver for high mesh resolutions. We also show our method's applicability to volumetric neo-Hookean elasticity with an inversion barrier.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-28T12:25:33Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Manas Chaudhary</name>
+    </author>
+    <author>
+      <name>Chandradeep Pokhariya</name>
+    </author>
+    <author>
+      <name>Rahul Narain</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.19909v1</id>
+    <title>Motion Marionette: Rethinking Rigid Motion Transfer via Prior Guidance</title>
+    <updated>2025-11-25T04:34:42Z</updated>
+    <link href="https://arxiv.org/abs/2511.19909v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.19909v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Motion Marionette, a zero-shot framework for rigid motion transfer from monocular source videos to single-view target images. Previous works typically employ geometric, generative, or simulation priors to guide the transfer process, but these external priors introduce auxiliary constraints that lead to trade-offs between generalizability and temporal consistency. To address these limitations, we propose guiding the motion transfer process through an internal prior that exclusively captures the spatial-temporal transformations and is shared between the source video and any transferred target video. Specifically, we first lift both the source video and the target image into a unified 3D representation space. Motion trajectories are then extracted from the source video to construct a spatial-temporal (SpaT) prior that is independent of object geometry and semantics, encoding relative spatial variations over time. This prior is further integrated with the target object to synthesize a controllable velocity field, which is subsequently refined using Position-Based Dynamics to mitigate artifacts and enhance visual coherence. The resulting velocity field can be flexibly employed for efficient video production. Empirical results demonstrate that Motion Marionette generalizes across diverse objects, produces temporally consistent videos that align well with the source motion, and supports controllable video generation.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-25T04:34:42Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Haoxuan Wang</name>
+    </author>
+    <author>
+      <name>Jiachen Tao</name>
+    </author>
+    <author>
+      <name>Junyi Wu</name>
+    </author>
+    <author>
+      <name>Gaowen Liu</name>
+    </author>
+    <author>
+      <name>Ramana Rao Kompella</name>
+    </author>
+    <author>
+      <name>Yan Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.13390v1</id>
+    <title>MGPBD: A Multigrid Accelerated Global XPBD Solver</title>
+    <updated>2025-05-19T17:31:47Z</updated>
+    <link href="https://arxiv.org/abs/2505.13390v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.13390v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a novel Unsmoothed Aggregation (UA) Algebraic Multigrid (AMG) method combined with Preconditioned Conjugate Gradient (PCG) to overcome the limitations of Extended Position-Based Dynamics (XPBD) in high-resolution and high-stiffness simulations. While XPBD excels in simulating deformable objects due to its speed and simplicity, its nonlinear Gauss-Seidel (GS) solver often struggles with low-frequency errors, leading to instability and stalling issues, especially in high-resolution, high-stiffness simulations. Our multigrid approach addresses these issues efficiently by leveraging AMG. To reduce the computational overhead of traditional AMG, where prolongator construction can consume up to two-thirds of the runtime, we propose a lazy setup strategy that reuses prolongators across iterations based on matrix structure and physical significance. Furthermore, we introduce a simplified method for constructing near-kernel components by applying a few sweeps of iterative methods to the homogeneous equation, achieving convergence rates comparable to adaptive smoothed aggregation (adaptive-SA) at a lower computational cost. Experimental results demonstrate that our method significantly improves convergence rates and numerical stability, enabling efficient and stable high-resolution simulations of deformable objects.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-19T17:31:47Z</published>
+    <arxiv:comment>SIGGRAPH 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Chunlei Li</name>
+    </author>
+    <author>
+      <name>Peng Yu</name>
+    </author>
+    <author>
+      <name>Tiantian Liu</name>
+    </author>
+    <author>
+      <name>Siyuan Yu</name>
+    </author>
+    <author>
+      <name>Yuting Xiao</name>
+    </author>
+    <author>
+      <name>Shuai Li</name>
+    </author>
+    <author>
+      <name>Aimin Hao</name>
+    </author>
+    <author>
+      <name>Yang Gao</name>
+    </author>
+    <author>
+      <name>Qinping Zhao</name>
+    </author>
+    <arxiv:doi>10.1145/3721238.3730720</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3721238.3730720" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.08644v2</id>
+    <title>DLO-Splatting: Tracking Deformable Linear Objects Using 3D Gaussian Splatting</title>
+    <updated>2025-05-21T12:32:36Z</updated>
+    <link href="https://arxiv.org/abs/2505.08644v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.08644v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work presents DLO-Splatting, an algorithm for estimating the 3D shape of Deformable Linear Objects (DLOs) from multi-view RGB images and gripper state information through prediction-update filtering. The DLO-Splatting algorithm uses a position-based dynamics model with shape smoothness and rigidity dampening corrections to predict the object shape. Optimization with a 3D Gaussian Splatting-based rendering loss iteratively renders and refines the prediction to align it with the visual observations in the update step. Initial experiments demonstrate promising results in a knot tying scenario, which is challenging for existing vision-only methods.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-13T15:03:40Z</published>
+    <arxiv:comment>5 pages, 2 figures, presented at the 2025 5th Workshop: Reflections on Representations and Manipulating Deformable Objects at the IEEE International Conference on Robotics and Automation. RMDO workshop (https://deformable-workshop.github.io/icra2025/). Video (https://www.youtube.com/watch?v=CG4WDWumGXA). Poster (https://hollydinkel.github.io/assets/pdf/ICRA2025RMDO_poster.pdf)</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Holly Dinkel</name>
+    </author>
+    <author>
+      <name>Marcel Büsching</name>
+    </author>
+    <author>
+      <name>Alberta Longhini</name>
+    </author>
+    <author>
+      <name>Brian Coltin</name>
+    </author>
+    <author>
+      <name>Trey Smith</name>
+    </author>
+    <author>
+      <name>Danica Kragic</name>
+    </author>
+    <author>
+      <name>Mårten Björkman</name>
+    </author>
+    <author>
+      <name>Timothy Bretl</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.04007v1</id>
+    <title>Planning and Control for Deformable Linear Object Manipulation</title>
+    <updated>2025-03-06T01:44:36Z</updated>
+    <link href="https://arxiv.org/abs/2503.04007v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.04007v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Manipulating a deformable linear object (DLO) such as wire, cable, and rope is a common yet challenging task due to their high degrees of freedom and complex deformation behaviors, especially in an environment with obstacles. Existing local control methods are efficient but prone to failure in complex scenarios, while precise global planners are computationally intensive and difficult to deploy. This paper presents an efficient, easy-to-deploy framework for collision-free DLO manipulation using mobile manipulators. We demonstrate the effectiveness of leveraging standard planning tools for high-dimensional DLO manipulation without requiring custom planners or extensive data-driven models. Our approach combines an off-the-shelf global planner with a real-time local controller. The global planner approximates the DLO as a series of rigid links connected by spherical joints, enabling rapid path planning without the need for problem-specific planners or large datasets. The local controller employs control barrier functions (CBFs) to enforce safety constraints, maintain the DLO integrity, prevent overstress, and handle obstacle avoidance. It compensates for modeling inaccuracies by using a state-of-the-art position-based dynamics technique that approximates physical properties like Young's and shear moduli. We validate our framework through extensive simulations and real-world demonstrations. In complex obstacle scenarios-including tent pole transport, corridor navigation, and tasks requiring varied stiffness-our method achieves a 100% success rate over thousands of trials, with significantly reduced planning times compared to state-of-the-art techniques. Real-world experiments include transportation of a tent pole and a rope using mobile manipulators. We share our ROS-based implementation to facilitate adoption in various applications.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-06T01:44:36Z</published>
+    <arxiv:comment>SUBMITTED TO IEEE TRANSACTIONS ON AUTOMATION SCIENCE AND ENGINEERING (T-ASE)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Burak Aksoy</name>
+    </author>
+    <author>
+      <name>John Wen</name>
+    </author>
+    <arxiv:doi>10.1109/TASE.2025.3635685</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TASE.2025.3635685" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.16735v1</id>
+    <title>FlameForge: Combustion of Generalized Wooden Structures</title>
+    <updated>2024-12-21T18:55:36Z</updated>
+    <link href="https://arxiv.org/abs/2412.16735v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.16735v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a unified volumetric combustion simulator that supports general wooden structures capturing the multi-phase combustion of charring materials. Complex geometric structures can conveniently be represented in a voxel grid for the effective evaluation of volumetric effects. In addition, a signed distance field is introduced to efficiently query the surface information required to compute the insulating effect caused by the char layer. Non-charring materials such as acrylic glass or non-combustible materials such as stone can also be modeled in the simulator. Adaptive data structures are utilized to enable memory-efficient computations within our multiresolution approach. The simulator is qualitatively validated by showcasing the numerical simulation of a variety of scenes covering different kinds of structural configurations and materials. Two-way coupling of our combustion simulator and position-based dynamics is demonstrated capturing characteristic mechanical deformations caused by the combustion process. The volumetric combustion process of wooden structures is further quantitatively assessed by comparing our simulated results to sub-surface measurements of a real-world combustion experiment.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-21T18:55:36Z</published>
+    <arxiv:comment>12 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Daoming Liu</name>
+    </author>
+    <author>
+      <name>Jonathan Klein</name>
+    </author>
+    <author>
+      <name>Florian Rist</name>
+    </author>
+    <author>
+      <name>Wojciech Pałubicki</name>
+    </author>
+    <author>
+      <name>Sören Pirk</name>
+    </author>
+    <author>
+      <name>Dominik L. Michels</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.04433v2</id>
+    <title>PBDyG: Position Based Dynamic Gaussians for Motion-Aware Clothed Human Avatars</title>
+    <updated>2024-12-06T22:51:43Z</updated>
+    <link href="https://arxiv.org/abs/2412.04433v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.04433v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper introduces a novel clothed human model that can be learned from multiview RGB videos, with a particular emphasis on recovering physically accurate body and cloth movements. Our method, Position Based Dynamic Gaussians (PBDyG), realizes ``movement-dependent'' cloth deformation via physical simulation, rather than merely relying on ``pose-dependent'' rigid transformations. We model the clothed human holistically but with two distinct physical entities in contact: clothing modeled as 3D Gaussians, which are attached to a skinned SMPL body that follows the movement of the person in the input videos. The articulation of the SMPL body also drives physically-based simulation of the clothes' Gaussians to transform the avatar to novel poses. In order to run position based dynamics simulation, physical properties including mass and material stiffness are estimated from the RGB videos through Dynamic 3D Gaussian Splatting. Experiments demonstrate that our method not only accurately reproduces appearance but also enables the reconstruction of avatars wearing highly deformable garments, such as skirts or coats, which have been challenging to reconstruct using existing methods.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-05T18:53:06Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Shota Sasaki</name>
+    </author>
+    <author>
+      <name>Jane Wu</name>
+    </author>
+    <author>
+      <name>Ko Nishino</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.15880v1</id>
+    <title>Droplet Simulations in Computer Graphics: Theories, Methods and Applications</title>
+    <updated>2024-11-24T15:39:05Z</updated>
+    <link href="https://arxiv.org/abs/2411.15880v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.15880v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Creating realistic droplet simulations and animations has long been a formidable challenge for researchers and developers due to the inherent complexity of fluid dynamics. Achieving lifelike droplet splash simulations while managing computational resources has often resulted in sacrifices compromising the realism of visualizations. Nevertheless, significant progress has been made in the past two decades, driven by advancements in particle-based methods such as Position-Based Dynamics (PBD) and Smoothed-Particle Hydrodynamics (SPH). These methods have enabled the simulation of droplet splash behaviour with increasing accuracy and reduced computational complexity. Integrating features like surface tensions, fluid incompressibility, and liquid-wall interactions has further enhanced the realism of the simulations. This paper provides an in-depth exploration of the theoretical foundations and methodologies employed in droplet simulations and how they have evolved over time. Accurate droplet interaction visualization holds immense potential across diverse applications, including gaming, animation, medical simulations, and engineering scenarios like 3D printing simulations.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-24T15:39:05Z</published>
+    <arxiv:comment>15 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Hossein Keshtkar</name>
+    </author>
+    <author>
+      <name>Nadine Aburumman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.11694v2</id>
+    <title>XPBI: Position-Based Dynamics with Smoothing Kernels Handles Continuum Inelasticity</title>
+    <updated>2024-09-14T08:58:25Z</updated>
+    <link href="https://arxiv.org/abs/2405.11694v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.11694v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>PBD and its extension, XPBD, have been predominantly applied to compliant constrained elastodynamics, with their potential in finite strain (visco-) elastoplasticity remaining underexplored. XPBD is often perceived to stand in contrast to other meshless methods, such as the MPM. MPM is based on discretizing the weak form of governing partial differential equations within a continuum domain, coupled with a hybrid Lagrangian-Eulerian method for tracking deformation gradients. In contrast, XPBD formulates specific constraints, whether hard or compliant, to positional degrees of freedom. We revisit this perception by investigating the potential of XPBD in handling inelastic materials that are described with classical continuum mechanics-based yield surfaces and elastoplastic flow rules. Our inspiration is that a robust estimation of the velocity gradient is a sufficiently useful key to effectively tracking deformation gradients in XPBD simulations. By further incorporating implicit inelastic constitutive relationships, we introduce a plasticity in-the-loop updated Lagrangian augmentation to XPBD. This enhancement enables the simulation of elastoplastic, viscoplastic, and granular substances following their standard constitutive laws. We demonstrate the effectiveness of our method through high-resolution and real-time simulations of diverse materials such as snow, sand, and plasticine, and its integration with standard XPBD simulations of cloth and water.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-19T22:51:22Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Chang Yu</name>
+    </author>
+    <author>
+      <name>Xuan Li</name>
+    </author>
+    <author>
+      <name>Lei Lan</name>
+    </author>
+    <author>
+      <name>Yin Yang</name>
+    </author>
+    <author>
+      <name>Chenfanfu Jiang</name>
+    </author>
+    <arxiv:doi>10.1145/3680528.3687577</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3680528.3687577" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.16560v1</id>
+    <title>Collaborative Manipulation of Deformable Objects with Predictive Obstacle Avoidance</title>
+    <updated>2024-01-29T20:56:09Z</updated>
+    <link href="https://arxiv.org/abs/2401.16560v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.16560v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Manipulating deformable objects arises in daily life and numerous applications. Despite phenomenal advances in industrial robotics, manipulation of deformable objects remains mostly a manual task. This is because of the high number of internal degrees of freedom and the complexity of predicting its motion. In this paper, we apply the computationally efficient position-based dynamics method to predict object motion and distance to obstacles. This distance is incorporated in a control barrier function for the resolved motion kinematic control for one or more robots to adjust their motion to avoid colliding with the obstacles. The controller has been applied in simulations to 1D and 2D deformable objects with varying numbers of assistant agents, demonstrating its versatility across different object types and multi-agent systems. Results indicate the feasibility of real-time collision avoidance through deformable object simulation, minimizing path tracking error while maintaining a predefined minimum distance from obstacles and preventing overstretching of the deformable object. The implementation is performed in ROS, allowing ready portability to different applications.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-29T20:56:09Z</published>
+    <arxiv:comment>Accepted to 2024 IEEE International Conference on Robotics and Automation (ICRA 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Burak Aksoy</name>
+    </author>
+    <author>
+      <name>John Wen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.15318v2</id>
+    <title>Gaussian Splashing: Unified Particles for Versatile Motion Synthesis and Rendering</title>
+    <updated>2024-07-23T04:05:53Z</updated>
+    <link href="https://arxiv.org/abs/2401.15318v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.15318v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We demonstrate the feasibility of integrating physics-based animations of solids and fluids with 3D Gaussian Splatting (3DGS) to create novel effects in virtual scenes reconstructed using 3DGS. Leveraging the coherence of the Gaussian Splatting and Position-Based Dynamics (PBD) in the underlying representation, we manage rendering, view synthesis, and the dynamics of solids and fluids in a cohesive manner. Similar to GaussianShader, we enhance each Gaussian kernel with an added normal, aligning the kernel's orientation with the surface normal to refine the PBD simulation. This approach effectively eliminates spiky noises that arise from rotational deformation in solids. It also allows us to integrate physically based rendering to augment the dynamic surface reflections on fluids. Consequently, our framework is capable of realistically reproducing surface highlights on dynamic fluids and facilitating interactions between scene objects and fluids from new views. For more information, please visit our project page at \url{https://gaussiansplashing.github.io/}.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-27T06:45:22Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Yutao Feng</name>
+    </author>
+    <author>
+      <name>Xiang Feng</name>
+    </author>
+    <author>
+      <name>Yintong Shang</name>
+    </author>
+    <author>
+      <name>Ying Jiang</name>
+    </author>
+    <author>
+      <name>Chang Yu</name>
+    </author>
+    <author>
+      <name>Zeshun Zong</name>
+    </author>
+    <author>
+      <name>Tianjia Shao</name>
+    </author>
+    <author>
+      <name>Hongzhi Wu</name>
+    </author>
+    <author>
+      <name>Kun Zhou</name>
+    </author>
+    <author>
+      <name>Chenfanfu Jiang</name>
+    </author>
+    <author>
+      <name>Yin Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.09327v1</id>
+    <title>Survey of Rigid Body Simulation with Extended Position Based Dynamics</title>
+    <updated>2023-11-15T19:35:16Z</updated>
+    <link href="https://arxiv.org/abs/2311.09327v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.09327v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Interactive real-time rigid body simulation is a crucial tool in any modern game engine or 3D authoring tool. The quest for fast, robust and accurate simulations is ever evolving. PBRBD (Position Based Rigid Body Dynamics), a recent expansion of PBD (Position Based Dynamics), is a novel approach for this issue. This work aims at providing a comprehensible state-of-the art comparison between Position Based methods and other real-time simulation methods used for rigid body dynamics using a custom 3D physics engine for benchmarking and comparing PBRBD (Position Based Rigid Body Dynamics), and some variants, with state-of-the-art simulators commonly used in the gaming industry, PhysX and Havok. Showing that PBRBD can produce simulations that are accurate and stable, excelling at maintaining stable energy levels, and allowing for a variety of constraints, but is limited in its handling of stable stacks of rigid bodies.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-15T19:35:16Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Miguel Luis Nunes Seabra</name>
+    </author>
+    <author>
+      <name>Daniel Simões Lopes</name>
+    </author>
+    <author>
+      <name>João Madeiras Pereira</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.01215v2</id>
+    <title>Convergence proof for first-order position-based dynamics: An efficient scheme for inequality constrained ODEs</title>
+    <updated>2023-10-03T08:56:36Z</updated>
+    <link href="https://arxiv.org/abs/2310.01215v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.01215v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>NVIDIA researchers have pioneered an explicit method, position-based dynamics (PBD), for simulating systems with contact forces, gaining widespread use in computer graphics and animation. While the method yields visually compelling real-time simulations with surprising numerical stability, its scientific validity has been questioned due to a lack of rigorous analysis.
+  In this paper, we introduce a new mathematical convergence analysis specifically tailored for PBD applied to first-order dynamics. Utilizing newly derived bounds for projections onto uniformly prox-regular sets, our proof extends classical compactness arguments. Our work paves the way for the reliable application of PBD in various scientific and engineering fields, including particle simulations with volume exclusion, agent-based models in mathematical biology or inequality-constrained gradient-flow models.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-02T13:58:15Z</published>
+    <arxiv:comment>37 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Steffen Plunder</name>
+    </author>
+    <author>
+      <name>Sara Merino-Aceituno</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.16670v2</id>
+    <title>Decaf: Monocular Deformation Capture for Face and Hand Interactions</title>
+    <updated>2023-10-13T15:45:13Z</updated>
+    <link href="https://arxiv.org/abs/2309.16670v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.16670v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing methods for 3D tracking from monocular RGB videos predominantly consider articulated and rigid objects. Modelling dense non-rigid object deformations in this setting remained largely unaddressed so far, although such effects can improve the realism of the downstream applications such as AR/VR and avatar communications. This is due to the severe ill-posedness of the monocular view setting and the associated challenges. While it is possible to naively track multiple non-rigid objects independently using 3D templates or parametric 3D models, such an approach would suffer from multiple artefacts in the resulting 3D estimates such as depth ambiguity, unnatural intra-object collisions and missing or implausible deformations. Hence, this paper introduces the first method that addresses the fundamental challenges depicted above and that allows tracking human hands interacting with human faces in 3D from single monocular RGB videos. We model hands as articulated objects inducing non-rigid face deformations during an active interaction. Our method relies on a new hand-face motion and interaction capture dataset with realistic face deformations acquired with a markerless multi-view camera system. As a pivotal step in its creation, we process the reconstructed raw 3D shapes with position-based dynamics and an approach for non-uniform stiffness estimation of the head tissues, which results in plausible annotations of the surface deformations, hand-face contact regions and head-hand positions. At the core of our neural approach are a variational auto-encoder supplying the hand-face depth prior and modules that guide the 3D tracking by estimating the contacts and the deformations. Our final 3D hand and face reconstructions are realistic and more plausible compared to several baselines applicable in our setting, both quantitatively and qualitatively. https://vcai.mpi-inf.mpg.de/projects/Decaf</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-28T17:59:51Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Soshi Shimada</name>
+    </author>
+    <author>
+      <name>Vladislav Golyanik</name>
+    </author>
+    <author>
+      <name>Patrick Pérez</name>
+    </author>
+    <author>
+      <name>Christian Theobalt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.13863v3</id>
+    <title>SuPerPM: A Surgical Perception Framework Based on Deep Point Matching Learned from Physical Constrained Simulation Data</title>
+    <updated>2025-08-02T23:42:47Z</updated>
+    <link href="https://arxiv.org/abs/2309.13863v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.13863v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A major source of endoscopic tissue tracking errors during deformations stems from wrong data association between observed sensor measurements with previously tracked scene. To mitigate this issue, we present a surgical perception framework, SuPerPM, that leverages learning-based non-rigid point cloud matching for data association, thus accommodating larger deformations than previous approaches which relied on Iterative Closest Point (ICP) for point associations. The learning models typically require training data with ground truth point cloud correspondences, which is challenging or even impractical to collect in surgical environments. Thus, for tuning the learning model, we gather endoscopic data of soft tissue being manipulated by a surgical robot and then establish correspondences between point clouds at different time points to serve as ground truth. This was achieved by employing a position-based dynamics (PBD) simulation to ensure that the correspondences adhered to physical constraints. The proposed framework is demonstrated on several challenging surgical datasets that are characterized by large deformations, achieving superior performance over advanced surgical scene tracking algorithms.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-25T04:27:06Z</published>
+    <arxiv:comment>2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Shan Lin</name>
+    </author>
+    <author>
+      <name>Albert J. Miao</name>
+    </author>
+    <author>
+      <name>Ali Alabiad</name>
+    </author>
+    <author>
+      <name>Fei Liu</name>
+    </author>
+    <author>
+      <name>Kaiyuan Wang</name>
+    </author>
+    <author>
+      <name>Jingpei Lu</name>
+    </author>
+    <author>
+      <name>Florian Richter</name>
+    </author>
+    <author>
+      <name>Michael C. Yip</name>
+    </author>
+    <arxiv:doi>10.1109/IROS58592.2024.10802079</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/IROS58592.2024.10802079" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.11655v1</id>
+    <title>Achieving Autonomous Cloth Manipulation with Optimal Control via Differentiable Physics-Aware Regularization and Safety Constraints</title>
+    <updated>2023-09-20T21:41:01Z</updated>
+    <link href="https://arxiv.org/abs/2309.11655v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.11655v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cloth manipulation is a category of deformable object manipulation of great interest to the robotics community, from applications of automated laundry-folding and home organizing and cleaning to textiles and flexible manufacturing. Despite the desire for automated cloth manipulation, the thin-shell dynamics and under-actuation nature of cloth present significant challenges for robots to effectively interact with them. Many recent works omit explicit modeling in favor of learning-based methods that may yield control policies directly. However, these methods require large training sets that must be collected and curated. In this regard, we create a framework for differentiable modeling of cloth dynamics leveraging an Extended Position-based Dynamics (XPBD) algorithm. Together with the desired control objective, physics-aware regularization terms are designed for better results, including trajectory smoothness and elastic potential energy. In addition, safety constraints, such as avoiding obstacles, can be specified using signed distance functions (SDFs). We formulate the cloth manipulation task with safety constraints as a constrained optimization problem, which can be effectively solved by mainstream gradient-based optimizers thanks to the end-to-end differentiability of our framework. Finally, we assess the proposed framework for manipulation tasks with various safety thresholds and demonstrate the feasibility of result trajectories on a surgical robot. The effects of the regularization terms are analyzed in an additional ablation study.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-20T21:41:01Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yutong Zhang</name>
+    </author>
+    <author>
+      <name>Fei Liu</name>
+    </author>
+    <author>
+      <name>Xiao Liang</name>
+    </author>
+    <author>
+      <name>Michael Yip</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.09021v1</id>
+    <title>Position-Based Nonlinear Gauss-Seidel for Quasistatic Hyperelasticity</title>
+    <updated>2023-06-15T10:28:12Z</updated>
+    <link href="https://arxiv.org/abs/2306.09021v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.09021v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Position based dynamics is a powerful technique for simulating a variety of materials. Its primary strength is its robustness when run with limited computational budget. We develop a novel approach to address problems with PBD for quasistatic hyperelastic materials. Even though PBD is based on the projection of static constraints, PBD is best suited for dynamic simulations. This is particularly relevant since the efficient creation of large data sets of plausible, but not necessarily accurate elastic equilibria is of increasing importance with the emergence of quasistatic neural networks. Furthermore, PBD projects one constraint at a time. We show that ignoring the effects of neighboring constraints limits its convergence and stability properties. Recent works have shown that PBD can be related to the Gauss-Seidel approximation of a Lagrange multiplier formulation of backward Euler time stepping, where each constraint is solved/projected independently of the others in an iterative fashion. We show that a position-based, rather than constraint-based nonlinear Gauss-Seidel approach solves these problems. Our approach retains the essential PBD feature of stable behavior with constrained computational budgets, but also allows for convergent behavior with expanded budgets. We demonstrate the efficacy of our method on a variety of representative hyperelastic problems and show that both successive over relaxation (SOR) and Chebyshev acceleration can be easily applied.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-15T10:28:12Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Yizhou Chen</name>
+    </author>
+    <author>
+      <name>Yushan Han</name>
+    </author>
+    <author>
+      <name>Jingyu Chen</name>
+    </author>
+    <author>
+      <name>Joseph Teran</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.05060v1</id>
+    <title>Differentiable Physics Simulations with Contacts: Do They Have Correct Gradients w.r.t. Position, Velocity and Control?</title>
+    <updated>2022-07-08T19:30:09Z</updated>
+    <link href="https://arxiv.org/abs/2207.05060v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.05060v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, an increasing amount of work has focused on differentiable physics simulation and has produced a set of open source projects such as Tiny Differentiable Simulator, Nimble Physics, diffTaichi, Brax, Warp, Dojo and DiffCoSim. By making physics simulations end-to-end differentiable, we can perform gradient-based optimization and learning tasks. A majority of differentiable simulators consider collisions and contacts between objects, but they use different contact models for differentiability. In this paper, we overview four kinds of differentiable contact formulations - linear complementarity problems (LCP), convex optimization models, compliant models and position-based dynamics (PBD). We analyze and compare the gradients calculated by these models and show that the gradients are not always correct. We also demonstrate their ability to learn an optimal control strategy by comparing the learned strategies with the optimal strategy in an analytical form. The codebase to reproduce the experiment results is available at https://github.com/DesmondZhong/diff_sim_grads.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-08T19:30:09Z</published>
+    <arxiv:comment>2nd AI4Science Workshop at ICML 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yaofeng Desmond Zhong</name>
+    </author>
+    <author>
+      <name>Jiequn Han</name>
+    </author>
+    <author>
+      <name>Georgia Olympia Brikis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.09714v1</id>
+    <title>Differentiable Robotic Manipulation of Deformable Rope-like Objects Using Compliant Position-based Dynamics</title>
+    <updated>2022-02-20T02:27:58Z</updated>
+    <link href="https://arxiv.org/abs/2202.09714v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.09714v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Robot manipulation of rope-like objects is an interesting problem that has some critical applications, such as autonomous robotic suturing. Solving for and controlling rope is difficult due to the complexity of rope physics and the challenge of building fast and accurate models of deformable materials. While more data-driven approaches have become more popular for finding controllers that learn to do a single task, there is still a strong motivation for a model-based method that could be used to solve a large variety of optimization problems. Towards this end, we introduced compliant, position-based dynamics (XPBD) to model rope-like objects. Using geometric constraints, the model can represent the coupling of shear/stretch and bend/twist effects. Of crucial importance is that our formulation is differentiable, which can solve parameter estimation problems and improve the matching of rope physics to real-life scenarios (i.e., the real-to-sim problem). For the generality of rope-like objects, two different solvers are proposed to handle the inextensible and extensible effects of varied material stiffness for the rope. We demonstrate our framework's robustness and accuracy on real-to-sim experimental setups using the Baxter robot and the da Vinci research kit (DVRK). Our work leads to a new path for robotic manipulation of the deformable rope-like object taking advantage of the ready-to-use gradients.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-20T02:27:58Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Fei Liu</name>
+    </author>
+    <author>
+      <name>Entong Su</name>
+    </author>
+    <author>
+      <name>Jingpei Lu</name>
+    </author>
+    <author>
+      <name>Mingen Li</name>
+    </author>
+    <author>
+      <name>Michael C. Yip</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.05753v1</id>
+    <title>Parameter Identification and Motion Control for Articulated Rigid Body Robots Using Differentiable Position-based Dynamics</title>
+    <updated>2022-01-15T04:07:51Z</updated>
+    <link href="https://arxiv.org/abs/2201.05753v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.05753v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Simulation modeling of robots, objects, and environments is the backbone for all model-based control and learning. It is leveraged broadly across dynamic programming and model-predictive control, as well as data generation for imitation, transfer, and reinforcement learning. In addition to fidelity, key features of models in these control and learning contexts are speed, stability, and native differentiability. However, many popular simulation platforms for robotics today lack at least one of the features above. More recently, position-based dynamics (PBD) has become a very popular simulation tool for modeling complex scenes of rigid and non-rigid object interactions, due to its speed and stability, and is starting to gain significant interest in robotics for its potential use in model-based control and learning. Thus, in this paper, we present a mathematical formulation for coupling position-based dynamics (PBD) simulation and optimal robot design, model-based motion control and system identification. Our framework breaks down PBD definitions and derivations for various types of joint-based articulated rigid bodies. We present a back-propagation method with automatic differentiation, which can integrate both positional and angular geometric constraints. Our framework can critically provide the native gradient information and perform gradient-based optimization tasks. We also propose articulated joint model representations and simulation workflow for our differentiable framework. We demonstrate the capability of the framework in efficient optimal robot design, accurate trajectory torque estimation and supporting spring stiffness estimation, where we achieve minor errors. We also implement impedance control in real robots to demonstrate the potential of our differentiable framework in human-in-the-loop applications.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-15T04:07:51Z</published>
+    <arxiv:comment>15pages, 14 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Fei Liu</name>
+    </author>
+    <author>
+      <name>Mingen Li</name>
+    </author>
+    <author>
+      <name>Jingpei Lu</name>
+    </author>
+    <author>
+      <name>Entong Su</name>
+    </author>
+    <author>
+      <name>Michael C. Yip</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.10206v1</id>
+    <title>Position-based Dynamics Simulator of Brain Deformations for Path Planning and Intra-Operative Control in Keyhole Neurosurgery</title>
+    <updated>2021-06-18T16:19:07Z</updated>
+    <link href="https://arxiv.org/abs/2106.10206v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.10206v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many tasks in robot-assisted surgery require planning and controlling manipulators' motions that interact with highly deformable objects. This study proposes a realistic, time-bounded simulator based on Position-based Dynamics (PBD) simulation that mocks brain deformations due to catheter insertion for pre-operative path planning and intra-operative guidance in keyhole surgical procedures. It maximizes the probability of success by accounting for uncertainty in deformation models, noisy sensing, and unpredictable actuation. The PBD deformation parameters were initialized on a parallelepiped-shaped simulated phantom to obtain a reasonable starting guess for the brain white matter. They were calibrated by comparing the obtained displacements with deformation data for catheter insertion in a composite hydrogel phantom. Knowing the gray matter brain structures' different behaviors, the parameters were fine-tuned to obtain a generalized human brain model. The brain structures' average displacement was compared with values in the literature. The simulator's numerical model uses a novel approach with respect to the literature, and it has proved to be a close match with real brain deformations through validation using recorded deformation data of in-vivo animal trials with a mean mismatch of 4.73$\pm$2.15%. The stability, accuracy, and real-time performance make this model suitable for creating a dynamic environment for KN path planning, pre-operative path planning, and intra-operative guidance.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-18T16:19:07Z</published>
+    <arxiv:comment>8 pages, 8 figures. This article has been accepted for publication in a future issue of IEEE Robotics and Automation Letters, but has not been fully edited. Content may change prior to final publication. 2377-3766 (c) 2021 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. A. Segato and C. Di Vece equally contributed</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Robotics and Automation Letters, vol. 6, no. 3, pp. 6061-6067, July 2021</arxiv:journal_ref>
+    <author>
+      <name>Alice Segato</name>
+    </author>
+    <author>
+      <name>Chiara Di Vece</name>
+    </author>
+    <author>
+      <name>Sara Zucchelli</name>
+    </author>
+    <author>
+      <name>Marco Di Marzo</name>
+    </author>
+    <author>
+      <name>Thomas Wendler</name>
+    </author>
+    <author>
+      <name>Mohammad Farid Azampour</name>
+    </author>
+    <author>
+      <name>Stefano Galvan</name>
+    </author>
+    <author>
+      <name>Riccardo Secoli</name>
+    </author>
+    <author>
+      <name>Elena De Momi</name>
+    </author>
+    <arxiv:doi>10.1109/LRA.2021.3090016</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LRA.2021.3090016" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.02533v1</id>
+    <title>Learning to Manipulate Amorphous Materials</title>
+    <updated>2021-03-03T17:17:32Z</updated>
+    <link href="https://arxiv.org/abs/2103.02533v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.02533v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a method of training character manipulation of amorphous materials such as those often used in cooking. Common examples of amorphous materials include granular materials (salt, uncooked rice), fluids (honey), and visco-plastic materials (sticky rice, softened butter). A typical task is to spread a given material out across a flat surface using a tool such as a scraper or knife. We use reinforcement learning to train our controllers to manipulate materials in various ways. The training is performed in a physics simulator that uses position-based dynamics of particles to simulate the materials to be manipulated. The neural network control policy is given observations of the material (e.g. a low-resolution density map), and the policy outputs actions such as rotating and translating the knife. We demonstrate policies that have been successfully trained to carry out the following tasks: spreading, gathering, and flipping. We produce a final animation by using inverse kinematics to guide a character's arm and hand to match the motion of the manipulation tool such as a knife or a frying pan.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-03T17:17:32Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Yunbo Zhang</name>
+    </author>
+    <author>
+      <name>Wenhao Yu</name>
+    </author>
+    <author>
+      <name>C. Karen Liu</name>
+    </author>
+    <author>
+      <name>Charles C. Kemp</name>
+    </author>
+    <author>
+      <name>Greg Turk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2011.12074v1</id>
+    <title>An Optimal Triangle Projector with Prescribed Area and Orientation, Application to Position-Based Dynamics</title>
+    <updated>2020-11-24T13:22:03Z</updated>
+    <link href="https://arxiv.org/abs/2011.12074v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2011.12074v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The vast majority of mesh-based modelling applications iteratively transform the mesh vertices under prescribed geometric conditions. This occurs in particular in methods cycling through the constraint set such as Position-Based Dynamics (PBD). A common case is the approximate local area preservation of triangular 2D meshes under external editing constraints. At the constraint level, this yields the nonconvex optimal triangle projection under prescribed area problem, for which there does not currently exist a direct solution method. In current PBD implementations, the area preservation constraint is linearised. The solution comes out through the iterations, without a guarantee of optimality, and the process may fail for degenerate inputs where the vertices are colinear or colocated. We propose a closed-form solution method and its numerically robust algebraic implementation. Our method handles degenerate inputs through a two-case analysis of the problem's generic ambiguities. We show in a series of experiments in area-based 2D mesh editing that using optimal projection in place of area constraint linearisation in PBD speeds up and stabilises convergence.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-11-24T13:22:03Z</published>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Carlos Arango Duque</name>
+    </author>
+    <author>
+      <name>Adrien Bartoli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2011.00800v3</id>
+    <title>Real-to-Sim Registration of Deformable Soft Tissue with Position-Based Dynamics for Surgical Robot Autonomy</title>
+    <updated>2021-04-30T05:11:55Z</updated>
+    <link href="https://arxiv.org/abs/2011.00800v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2011.00800v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomy in robotic surgery is very challenging in unstructured environments, especially when interacting with deformable soft tissues. The main difficulty is to generate model-based control methods that account for deformation dynamics during tissue manipulation. Previous works in vision-based perception can capture the geometric changes within the scene, however, model-based controllers integrated with dynamic properties, a more accurate and safe approach, has not been studied before. Considering the mechanic coupling between the robot and the environment, it is crucial to develop a registered, simulated dynamical model. In this work, we propose an online, continuous, real-to-sim registration method to bridge 3D visual perception with position-based dynamics (PBD) modeling of tissues. The PBD method is employed to simulate soft tissue dynamics as well as rigid tool interactions for model-based control. Meanwhile, a vision-based strategy is used to generate 3D reconstructed point cloud surfaces based on real-world manipulation, so as to register and update the simulation. To verify this real-to-sim approach, tissue experiments have been conducted on the da Vinci Research Kit. Our real-to-sim approach successfully reduces registration error online, which is especially important for safety during autonomous control. Moreover, it achieves higher accuracy in occluded areas than fusion-based reconstruction.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-11-02T07:59:55Z</published>
+    <arxiv:comment>Fei Liu and Zihan Li contributed equally to this work. Final version of this paper is going to be published in ICRA 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Fei Liu</name>
+    </author>
+    <author>
+      <name>Zihan Li</name>
+    </author>
+    <author>
+      <name>Yunhai Han</name>
+    </author>
+    <author>
+      <name>Jingpei Lu</name>
+    </author>
+    <author>
+      <name>Florian Richter</name>
+    </author>
+    <author>
+      <name>Michael C. Yip</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.12745v2</id>
+    <title>Learning Physical Constraints with Neural Projections</title>
+    <updated>2020-12-12T23:08:33Z</updated>
+    <link href="https://arxiv.org/abs/2006.12745v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.12745v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a new family of neural networks to predict the behaviors of physical systems by learning their underpinning constraints. A neural projection operator lies at the heart of our approach, composed of a lightweight network with an embedded recursive architecture that interactively enforces learned underpinning constraints and predicts the various governed behaviors of different physical systems. Our neural projection operator is motivated by the position-based dynamics model that has been used widely in game and visual effects industries to unify the various fast physics simulators. Our method can automatically and effectively uncover a broad range of constraints from observation point data, such as length, angle, bending, collision, boundary effects, and their arbitrary combinations, without any connectivity priors. We provide a multi-group point representation in conjunction with a configurable network connection mechanism to incorporate prior inputs for processing complex physical systems. We demonstrated the efficacy of our approach by learning a set of challenging physical systems all in a unified and simple fashion including: rigid bodies with complex geometries, ropes with varying length and bending, articulated soft and rigid bodies, and multi-object collisions with complex boundaries.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-23T04:19:04Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Shuqi Yang</name>
+    </author>
+    <author>
+      <name>Xingzhe He</name>
+    </author>
+    <author>
+      <name>Bo Zhu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2006.03897v2</id>
+    <title>Accurately Solving Physical Systems with Graph Learning</title>
+    <updated>2021-01-13T10:49:45Z</updated>
+    <link href="https://arxiv.org/abs/2006.03897v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.03897v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Iterative solvers are widely used to accurately simulate physical systems. These solvers require initial guesses to generate a sequence of improving approximate solutions. In this contribution, we introduce a novel method to accelerate iterative solvers for physical systems with graph networks (GNs) by predicting the initial guesses to reduce the number of iterations. Unlike existing methods that aim to learn physical systems in an end-to-end manner, our approach guarantees long-term stability and therefore leads to more accurate solutions. Furthermore, our method improves the run time performance of traditional iterative solvers. To explore our method we make use of position-based dynamics (PBD) as a common solver for physical systems and evaluate it by simulating the dynamics of elastic rods. Our approach is able to generalize across different initial conditions, discretizations, and realistic material properties. Finally, we demonstrate that our method also performs well when taking discontinuous effects into account such as collisions between individual rods. Finally, to illustrate the scalability of our approach, we simulate complex 3D tree models composed of over a thousand individual branch segments swaying in wind fields. A video showing dynamic results of our graph learning assisted simulations of elastic rods can be found on the project website available at http://computationalsciences.org/publications/shao-2021-physical-systems-graph-learning.html .</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-06T15:48:34Z</published>
+    <arxiv:comment>This work has been supported by KAUST under individual baseline and center partnership funding</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <author>
+      <name>Han Shao</name>
+    </author>
+    <author>
+      <name>Tassilo Kugelstadt</name>
+    </author>
+    <author>
+      <name>Torsten Hädrich</name>
+    </author>
+    <author>
+      <name>Wojciech Pałubicki</name>
+    </author>
+    <author>
+      <name>Jan Bender</name>
+    </author>
+    <author>
+      <name>Sören Pirk</name>
+    </author>
+    <author>
+      <name>Dominik L. Michels</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.02975v1</id>
+    <title>Swarm robotics and complex behaviour of continuum material</title>
+    <updated>2020-04-01T08:36:34Z</updated>
+    <link href="https://arxiv.org/abs/2004.02975v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.02975v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In swarm robotics, just as for an animal swarm in Nature, one of the aims is to reach and maintain a desired configuration. One of the possibilities for the team, to reach this aim, is to see what its neighbours are doing. This approach generates a rules system governing the movement of the single robot just by reference to neighbour's motion. The same approach is used in position based dynamics to simulate behaviour of complex continuum materials under deformation. Therefore, in some previous works, we have considered a two-dimensional lattice of particles and calculated its time evolution by using a rules system derived from our experience in swarm robotics. The new position of a particle, like the element of a swarm, is determined by the spatial position of the other particles. No dynamic is considered, but it can be thought as being hidden in the behaviour rules. This method has given good results in some simple situations reproducing the behaviour of deformable bodies under imposed strain. In this paper we try to stress our model to highlight its limits and how they can be improved. Some other, more complex, examples are computed and discussed. Shear test, different lattice, different fracture mechanism and ASTM shape sample behaviour have been investigated by the software tool we have developed.</summary>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-01T08:36:34Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:2003.11908</arxiv:comment>
+    <arxiv:primary_category term="cs.CE"/>
+    <author>
+      <name>R. dell'Erba</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.11908v1</id>
+    <title>Position based dynamic of a particle system: a configurable algorithm to describe complex behaviour of continuum material starting from swarm robotics</title>
+    <updated>2020-03-24T07:07:17Z</updated>
+    <link href="https://arxiv.org/abs/2003.11908v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.11908v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In a previous work we considered a two-dimensional lattice of particles and calculated its time evolution by using an interaction law based on the spatial position of the particles themselves. The model reproduced the behaviour of deformable bodies both according to the standard Cauchy model and second gradient theory; this success led us to use this method in more complex cases. This work is intended as the natural evolution of the previous one in which we shall consider both energy aspects, coherence with the principle of Saint Venant and we start to manage a more general tool that can be adapted to different physical phenomena, supporting complex effects like lateral contraction, anisotropy or elastoplasticity.</summary>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-24T07:07:17Z</published>
+    <arxiv:primary_category term="cs.CE"/>
+    <author>
+      <name>Ramiro dell'Erba</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1906.05260v1</id>
+    <title>VIPER: Volume Invariant Position-based Elastic Rods</title>
+    <updated>2019-06-12T17:37:21Z</updated>
+    <link href="https://arxiv.org/abs/1906.05260v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1906.05260v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We extend the formulation of position-based rods to include elastic volumetric deformations. We achieve this by introducing an additional degree of freedom per vertex -- isotropic scale (and its velocity). Including scale enriches the space of possible deformations, allowing the simulation of volumetric effects, such as a reduction in cross-sectional area when a rod is stretched. We rigorously derive the continuous formulation of its elastic energy potentials, and hence its associated position-based dynamics (PBD) updates to realize this model, enabling the simulation of up to 26000 DOFs at 140 Hz in our GPU implementation. We further show how rods can provide a compact alternative to tetrahedral meshes for the representation of complex muscle deformations, as well as providing a convenient representation for collision detection. This is achieved by modeling a muscle as a bundle of rods, for which we also introduce a technique to automatically convert a muscle surface mesh into a rods-bundle. Finally, we show how rods and/or bundles can be skinned to a surface mesh to drive its deformation, resulting in an alternative to cages for real-time volumetric deformation.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-06-12T17:37:21Z</published>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Baptiste Angles</name>
+    </author>
+    <author>
+      <name>Daniel Rebain</name>
+    </author>
+    <author>
+      <name>Miles Macklin</name>
+    </author>
+    <author>
+      <name>Brian Wyvill</name>
+    </author>
+    <author>
+      <name>Loic Barthe</name>
+    </author>
+    <author>
+      <name>JP Lewis</name>
+    </author>
+    <author>
+      <name>Javier von der Pahlen</name>
+    </author>
+    <author>
+      <name>Shahram Izadi</name>
+    </author>
+    <author>
+      <name>Julien Valentin</name>
+    </author>
+    <author>
+      <name>Sofien Bouaziz</name>
+    </author>
+    <author>
+      <name>Andrea Tagliasacchi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.04691v1</id>
+    <title>Active Perception and Modeling of Deformable Surfaces using Gaussian Processes and Position-based Dynamics</title>
+    <updated>2018-02-13T15:49:09Z</updated>
+    <link href="https://arxiv.org/abs/1802.04691v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.04691v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Exploring and modeling heterogeneous elastic surfaces requires multiple interactions with the environment and a complex selection of physical material parameters. The most common approaches model deformable properties from sets of offline observations using computationally expensive force-based simulators. In this work we present an online probabilistic framework for autonomous estimation of a deformability distribution map of heterogeneous elastic surfaces from few physical interactions. The method takes advantage of Gaussian Processes for constructing a model of the environment geometry surrounding a robot. A fast Position-based Dynamics simulator uses focused environmental observations in order to model the elastic behavior of portions of the environment. Gaussian Process Regression maps the local deformability on the whole environment in order to generate a deformability distribution map. We show experimental results using a PrimeSense camera, a Kinova Jaco2 robotic arm and an Optoforce sensor on different deformable surfaces.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-13T15:49:09Z</published>
+    <arxiv:comment>8 pages, video of an experiment available at https://youtu.be/mDNSDZz7Qzs</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>2016 IEEE-RAS 16th International Conference on Humanoid Robots (Humanoids)</arxiv:journal_ref>
+    <author>
+      <name>Sergio Caccamo</name>
+    </author>
+    <author>
+      <name>Püren Güler</name>
+    </author>
+    <author>
+      <name>Hedvig Kjellström</name>
+    </author>
+    <author>
+      <name>Danica Kragic</name>
+    </author>
+    <arxiv:doi>10.1109/HUMANOIDS.2016.7803326</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/HUMANOIDS.2016.7803326" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.02673v2</id>
+    <title>Position-Based Multi-Agent Dynamics for Real-Time Crowd Simulation (MiG paper)</title>
+    <updated>2018-02-20T01:58:15Z</updated>
+    <link href="https://arxiv.org/abs/1802.02673v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.02673v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Exploiting the efficiency and stability of Position-Based Dynamics (PBD), we introduce a novel crowd simulation method that runs at interactive rates for hundreds of thousands of agents. Our method enables the detailed modeling of per-agent behavior in a Lagrangian formulation. We model short-range and long-range collision avoidance to simulate both sparse and dense crowds. On the particles representing agents, we formulate a set of positional constraints that can be readily integrated into a standard PBD solver. We augment the tentative particle motions with planning velocities to determine the preferred velocities of agents, and project the positions onto the constraint manifold to eliminate colliding configurations. The local short-range interaction is represented with collision and frictional contact between agents, as in the discrete simulation of granular materials. We incorporate a cohesion model for modeling collective behaviors and propose a new constraint for dealing with potential future collisions. Our new method is suitable for use in interactive games.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-07T23:37:20Z</published>
+    <arxiv:comment>9 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.GR"/>
+    <arxiv:journal_ref>MIG 2017 Proceedings of the Tenth International Conference on Motion in Games</arxiv:journal_ref>
+    <author>
+      <name>Tomer Weiss</name>
+    </author>
+    <author>
+      <name>Alan Litteneker</name>
+    </author>
+    <author>
+      <name>Chenfanfu Jiang</name>
+    </author>
+    <author>
+      <name>Demetri Terzopoulos</name>
+    </author>
+    <arxiv:doi>10.1145/3136457.3136462</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3136457.3136462" title="doi"/>
+  </entry>
+</feed>

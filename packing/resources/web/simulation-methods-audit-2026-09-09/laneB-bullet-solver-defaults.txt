@@ -1,0 +1,63 @@
+=== BULLET: contact breaking threshold + solver defaults ===
+26:btScalar gContactBreakingThreshold = btScalar(0.02);
+--- btContactSolverInfo defaults ---
+struct btContactSolverInfoData
+{
+	btScalar m_tau;
+	btScalar m_damping;  //global non-contact constraint damping, can be locally overridden by constraints during 'getInfo2'.
+	btScalar m_friction;
+	btScalar m_timeStep;
+	btScalar m_restitution;
+	int m_numIterations;
+	btScalar m_maxErrorReduction;
+	btScalar m_sor;          //successive over-relaxation term
+	btScalar m_erp;          //error reduction for non-contact constraints
+	btScalar m_erp2;         //error reduction for contact constraints
+	btScalar m_deformable_erp;          //error reduction for deformable constraints
+	btScalar m_deformable_cfm;          //constraint force mixing for deformable constraints
+	btScalar m_deformable_maxErrorReduction; // maxErrorReduction for deformable contact
+	btScalar m_globalCfm;    //constraint force mixing for contacts and non-contacts
+	btScalar m_frictionERP;  //error reduction for friction constraints
+	btScalar m_frictionCFM;  //constraint force mixing for friction constraints
+
+	int m_splitImpulse;
+	btScalar m_splitImpulsePenetrationThreshold;
+	btScalar m_splitImpulseTurnErp;
+	btScalar m_linearSlop;
+	btScalar m_warmstartingFactor;
+	btScalar m_articulatedWarmstartingFactor;
+	int m_solverMode;
+	int m_restingContactRestitutionThreshold;
+	int m_minimumSolverBatchSize;
+	btScalar m_maxGyroscopicForce;
+	btScalar m_singleAxisRollingFrictionThreshold;
+	btScalar m_leastSquaresResidualThreshold;
+	btScalar m_restitutionVelocityThreshold;
+	bool m_jointFeedbackInWorldSpace;
+	bool m_jointFeedbackInJointFrame;
+	int m_reportSolverAnalytics;
+	int m_numNonContactInnerIterations;
+};
+struct btContactSolverInfo : public btContactSolverInfoData
+{
+	inline btContactSolverInfo()
+	{
+		m_tau = btScalar(0.6);
+		m_damping = btScalar(1.0);
+		m_friction = btScalar(0.3);
+		m_timeStep = btScalar(1.f / 60.f);
+		m_restitution = btScalar(0.);
+		m_maxErrorReduction = btScalar(20.);
+		m_numIterations = 10;
+		m_erp = btScalar(0.2);
+		m_erp2 = btScalar(0.2);
+		m_deformable_erp = btScalar(0.06);
+		m_deformable_cfm = btScalar(0.01);
+		m_deformable_maxErrorReduction = btScalar(0.1);
+		m_globalCfm = btScalar(0.);
+		m_frictionERP = btScalar(0.2);  //positional friction 'anchors' are disabled by default
+		m_frictionCFM = btScalar(0.);
+		m_sor = btScalar(1.);
+		m_splitImpulse = true;
+		m_splitImpulsePenetrationThreshold = -.04f;
+		m_splitImpulseTurnErp = 0.1f;

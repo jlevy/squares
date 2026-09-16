@@ -1,0 +1,527 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/nFyi2XeYr1G0+1R7eY3pIP6pYI4</id>
+  <title>arXiv Query: search_query=all:"quasi-physical"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:26:35Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22quasi-physical%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>22</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.23082v1</id>
+    <title>A fast improved quasi-physical dynamic algorithm for efficient wireless coverage in convex polygonal regions</title>
+    <updated>2026-08-24T10:44:28Z</updated>
+    <link href="https://arxiv.org/abs/2608.23082v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.23082v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deploying wireless nodes to maximize coverage area within a given region is an important challenge in wireless sensor networks, UAV path planning, base station placement and other industrial fields. This practical problem can be mathematically equivalent to an optimal circle covering problem. Although theoretical optimal configurations exist for simple cases in mathematics, the NP-hard nature of this problem makes it computationally prohibitive for complex polygons with numerous nodes. Existing approaches are usually designed for regular domains, while those applicable to irregular polygons often suffer from poor initialization, excessive coverage overlap and failure to constrain nodes within the boundary, leading to low coverage efficiency and long runtime. To address these issues, we propose an improved quasi-physical dynamic algorithm (IQPD) for wireless node deployment in arbitrary convex polygons. Our contributions are threefold: (1) proposing a structure-preserving initialization that maps a hexagonal close packing pattern into the target polygon via scaling and affine transformation, ensuring near-optimal initial node distribution; (2) constructing a refined virtual force model by incorporating friction and a radius-expansion optimization mechanism to reduce coverage area overlap; (3) developing a boundary encircling strategy leveraging normal and tangential gradients to reposition nodes deployed outside boundaries after initial optimization. Extensive experimental results demonstrate that our method consistently outperforms other new metaheuristic algorithms across diverse convex polygon shapes, including randomly generated data and real-world scenarios. Our method achieves the highest coverage rate and node utilization rate among all compared algorithms, greatly improving wireless coverage efficiency.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-24T10:44:28Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Zeping Yi</name>
+    </author>
+    <author>
+      <name>Yongjun Wanga</name>
+    </author>
+    <author>
+      <name>Baoshan Wang</name>
+    </author>
+    <author>
+      <name>Jian Zhang</name>
+    </author>
+    <author>
+      <name>Songyi Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.18742v1</id>
+    <title>Regularised Iterative Generalised Least Squares with Optimal Selection of the Hyper-Parameter for Identifying Nonlinear Phenomenological Models</title>
+    <updated>2026-08-19T09:50:46Z</updated>
+    <link href="https://arxiv.org/abs/2608.18742v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.18742v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In some fields currently dominated by empirical approaches, such as state of health (SoH) prediction for lithium-ion batteries, phenomenological models motivated by quasi-physical thinking contain parameters to be estimated from experimental data. Often the structure of such models yields fully or partially confounded parameters, which are difficult or even impossible to estimate reliably. To preserve the desired model formulation and simultaneously improve the numerical conditioning for the problem we introduce a ridge regression scheme. An automated method is provided, based on information theoretic measures of model performance, which optimises the ridge regression hyper-parameter at each iteration. The formulae presented require fixed point iteration to solve for the hyper-parameter. Given a suitable starting value, analysis demonstrates convergence is very rapid. The optimal hyper-parameter selection mechanism is incorporated within an efficient regularised iterative generalised least squares mechanism, capable of fitting both heteroscedastic and serially correlated data as required. Simulation confirms the efficacy of the overall method.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-19T09:50:46Z</published>
+    <arxiv:comment>18 pages, 5 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Mark Cary</name>
+    </author>
+    <author>
+      <name>Charles Bokor</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.31304v1</id>
+    <title>A parametric signal plus noise inference framework for short duration non-Gaussian noise transients</title>
+    <updated>2026-06-30T08:17:02Z</updated>
+    <link href="https://arxiv.org/abs/2606.31304v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.31304v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Gravitational waves are now routinely detected with ground-based observatories, and, through a process known as Bayesian inference, their source properties are inferred. However, terrestrial noise artifacts, often referred to as glitches, commonly overlap astrophysical signals. This invalidates a fundamental assumption of gravitational wave analyses: the noise is no longer stationary and Gaussian. As a result, traditional techniques can provide biased inferences in realistic data. One method for mitigating the effect of glitches is to jointly analyse both the signal and noise in a single framework. In this work, we introduce bilby-antiglitch to infer the astrophysical signal properties in non-Gaussian noise. By additionally including a quasi-physical glitch model to describe short duration non-Gaussian noise transients, we show that unlike traditional techniques, we infer the true source properties of simulated signals contaminated with loud glitches. We also show that bilby-antiglitch prevents false violation claims of General Relativity, and validates the exceptional nature of gravitational wave signals in spurious data.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-30T08:17:02Z</published>
+    <arxiv:comment>10 pages, 7 figures, 1 appendix</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <author>
+      <name>Charlie Hoy</name>
+    </author>
+    <author>
+      <name>Ruxandra Bondarescu</name>
+    </author>
+    <author>
+      <name>Andrew Lundgren</name>
+    </author>
+    <author>
+      <name>Laura K. Nuttall</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.20783v1</id>
+    <title>Generalized Phase Diagrams for Graphene CVD growth on Copper</title>
+    <updated>2026-05-20T06:24:06Z</updated>
+    <link href="https://arxiv.org/abs/2605.20783v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.20783v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Understanding the competition between first-layer lateral expansion and second-layer nucleation is essential for layer-controlled graphene growth via chemical vapor deposition (CVD). Building on our previous phase diagram framework based on the dimensionless parameters $α$ and $Γ$, we develop an enhanced model incorporating two previously neglected effects: thermal-expansion-induced substrate strain and chemical desorption of carbon monomers via reverse dehydrogenation. First-principles calculations are employed to determine the strain-dependent diffusion and attachment barriers on both exposed and graphene-covered Cu(111) surfaces. By mapping the multi-step CVD process into an effective quasi-physical vapor deposition, we construct a generalized phase diagram characterized by the coupled effects of $α$, $Γ$, and a newly introduced desorption parameter $Z$. Our results show that tensile strain expands the bilayer graphene (BLG) growth window for critical nucleus sizes $i^*&gt;1$. In contrast, chemical desorption suppresses BLG formation in the high-$Γ$ regime via $Z$-dependent monomer depletion. This unified framework provides a predictive guide for the rational synthesis of high-quality bilayer graphene by linking macroscopic growth parameters to microscopic layer-selection mechanisms.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-20T06:24:06Z</published>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Tongtong Wang</name>
+    </author>
+    <author>
+      <name>Ke Jin</name>
+    </author>
+    <author>
+      <name>Yishi Zhang</name>
+    </author>
+    <author>
+      <name>Dajun Shu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.02570v1</id>
+    <title>An Improved Quasi-Physical Dynamic Algorithm for Efficient Circular Coverage in Arbitrary Convex</title>
+    <updated>2026-01-31T04:03:04Z</updated>
+    <link href="https://arxiv.org/abs/2602.02570v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.02570v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The optimal circle coverage problem aims to find a configuration of circles that maximizes the covered area within a given region. Although theoretical optimal solutions exist for simple cases, the problem's NP-hard characteristic makes the problem computationally intractable for complex polygons with numerous circles. Prevailing methods are largely confined to regular domains, while the few algorithms designed for irregular polygons suffer from poor initialization, unmanaged boundary effects, and excessive overlap among circles, resulting in low coverage efficiency. Consequently, we propose an Improved Quasi-Physical Dynamic(IQPD) algorithm for arbitrary convex polygons. Our core contributions are threefold: (1) proposing a structure-preserving initialization strategy that maps a hexagonal close-packing of circles into the target polygon via scaling and affine transformation; (2) constructing a virtual force field incorporating friction and a radius-expansion optimization iteration model; (3) designing a boundary-surrounding strategy based on normal and tangential gradients to retrieve overflowing circles. Experimental results demonstrate that our algorithm significantly outperforms four state-of-the-art methods on seven metrics across a variety of convex polygons. This work could provide a more efficient solution for operational optimization or resource allocation in practical applications.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-31T04:03:04Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Zeping Yi</name>
+    </author>
+    <author>
+      <name>Yongjun Wang</name>
+    </author>
+    <author>
+      <name>Baoshan Wang</name>
+    </author>
+    <author>
+      <name>Songyi Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.09861v2</id>
+    <title>The Limits of Line Broadening: Modeling Stellar Spectra and Formation Temperatures at High Resolution</title>
+    <updated>2026-07-07T14:21:02Z</updated>
+    <link href="https://arxiv.org/abs/2512.09861v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.09861v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The modeling of stellar spectra is pervasive in astronomy. Conventionally, the shapes of absorption lines are modeled by convolving thermal profiles (computed given some model stellar atmosphere and line list) with broadening kernels intended to account for the effects of rotation and other nonthermal sources of broadening (i.e., macroturbulence). Here, we show that the assumptions that permit this convolution can break down at high spectral resolution and produce appreciable errors in the modeled flux. We then consider the effects of rotation, microturbulence, and macroturbulence on the intensity and flux contribution functions, which astronomers use to map individual spectral segments to quasi-physical formation "locations" in the stellar atmosphere. We show that proper consideration of 1) the distinction between intensity and flux and 2) the inclusion of rotation and macroturbulence in the contribution function can dramatically change the modeled formation temperatures. To complement this analysis, we provide a package -- FormationTemperatures -- which quickly computes model line contribution functions and formation parameters given bulk stellar properties as input. In closing, we emphasize the assumptions inherent to this analysis, consider in which regimes the convolution expression for flux should be avoided, and caution how the concept of a singular "formation temperature" can oversimplify some realities of radiative transfer.</summary>
+    <category term="astro-ph.SR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-10T17:48:14Z</published>
+    <arxiv:comment>15 pages, 9 figures, 1 table; accepted to ApJ</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.SR"/>
+    <author>
+      <name>Michael L. Palumbo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.08046v2</id>
+    <title>Deep learning solutions to telescope pointing and guiding</title>
+    <updated>2024-11-05T22:00:59Z</updated>
+    <link href="https://arxiv.org/abs/2407.08046v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.08046v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The WIYN 3.5m Telescope at Kitt Peak National Observatory hosts a suite of optical and near infrared instruments, including an extreme precision, optical spectrograph, NEID, built for exoplanet radial velocity studies. In order to achieve sub ms precision, NEID has strict requirements on survey efficiency, stellar image positioning, and guiding performance, which have exceeded the native capabilities of the telescope's original pointing and tracking system. In order to improve the operational efficiency of the telescope we have developed a novel telescope pointing system, built on a recurrent neural network, that does not rely on the usual pointing models (TPoint or other quasi physical bases). We discuss the development of this system, how the intrinsic properties of the pointing problem inform our network design, and show preliminary results from our best models. We also discuss plans for the generalization of this framework, so that it can be applied at other sites.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-10T20:55:59Z</published>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Jackson Zariski</name>
+    </author>
+    <author>
+      <name>Kaitlin Kratter</name>
+    </author>
+    <author>
+      <name>Sarah Logsdon</name>
+    </author>
+    <author>
+      <name>Chad Bender</name>
+    </author>
+    <author>
+      <name>Dan Li</name>
+    </author>
+    <author>
+      <name>Heidi Schweiker</name>
+    </author>
+    <author>
+      <name>Jayadev Rajagopal</name>
+    </author>
+    <author>
+      <name>Bill McBride</name>
+    </author>
+    <author>
+      <name>Emily Hunting</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.07988v2</id>
+    <title>QuasiSim: Parameterized Quasi-Physical Simulators for Dexterous Manipulations Transfer</title>
+    <updated>2024-07-21T06:56:12Z</updated>
+    <link href="https://arxiv.org/abs/2404.07988v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.07988v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore the dexterous manipulation transfer problem by designing simulators. The task wishes to transfer human manipulations to dexterous robot hand simulations and is inherently difficult due to its intricate, highly-constrained, and discontinuous dynamics and the need to control a dexterous hand with a DoF to accurately replicate human manipulations. Previous approaches that optimize in high-fidelity black-box simulators or a modified one with relaxed constraints only demonstrate limited capabilities or are restricted by insufficient simulation fidelity. We introduce parameterized quasi-physical simulators and a physics curriculum to overcome these limitations. The key ideas are 1) balancing between fidelity and optimizability of the simulation via a curriculum of parameterized simulators, and 2) solving the problem in each of the simulators from the curriculum, with properties ranging from high task optimizability to high fidelity. We successfully enable a dexterous hand to track complex and diverse manipulations in high-fidelity simulated environments, boosting the success rate by 11\%+ from the best-performed baseline. The project website is available at https://meowuu7.github.io/QuasiSim/.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-11T17:59:40Z</published>
+    <arxiv:comment>Accepted to ECCV 2024. Project website: https://meowuu7.github.io/QuasiSim/ Code: https://github.com/Meowuu7/QuasiSim Hugging Face Demo: https://huggingface.co/spaces/xymeow7/quasi-physical-sims</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Xueyi Liu</name>
+    </author>
+    <author>
+      <name>Kangbo Lyu</name>
+    </author>
+    <author>
+      <name>Jieqiong Zhang</name>
+    </author>
+    <author>
+      <name>Tao Du</name>
+    </author>
+    <author>
+      <name>Li Yi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.07977v2</id>
+    <title>Modeling non-genetic information dynamics in cells using reservoir computing</title>
+    <updated>2024-03-14T19:26:00Z</updated>
+    <link href="https://arxiv.org/abs/2312.07977v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.07977v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Virtually all cells use energy and ion-specific membrane pumps to maintain large transmembrane gradients of Na$^+$, K$^+$, Cl$^-$, Mg$^{++}$, and Ca$^{++}$. Although they consume up to 1/3 of a cell's energy budget, the corresponding evolutionary benefit of transmembrane ion gradients remain unclear. Here, we propose that ion gradients enable a dynamic and versatile biological system that acquires, analyzes, and responds to environmental information. We hypothesize environmental signals are transmitted into the cell by ion fluxes along pre-existing gradients through gated ion-specific membrane channels. The consequent changes of cytoplasmic ion concentration can generate a local response and orchestrate global or regional responses through wire-like ion fluxes along pre-existing and self-assembling cytoskeleton to engage the endoplasmic reticulum, mitochondria, and nucleus.
+  Here, we frame our hypothesis through a quasi-physical (Cell-Reservoir) model that treats intra-cellular ion-based information dynamics as a sub-cellular process permitting spatiotemporally resolved cellular response that is also capable of learning complex nonlinear dynamical cellular behavior. We demonstrate the proposed ion dynamics permits rapid dissemination of response to information extrinsic perturbations that is consistent with experimental observations.</summary>
+    <category term="q-bio.CB" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-13T08:47:50Z</published>
+    <arxiv:comment>Main text: 18 pages, 1 table, and 8 figures; Supplementary materials: 14 pages, 18 figures; Link to Source code and Data included</arxiv:comment>
+    <arxiv:primary_category term="q-bio.CB"/>
+    <author>
+      <name>Dipesh Niraula</name>
+      <arxiv:affiliation>Department of Machine Learning, Moffitt Cancer Center, Tampa, FL, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Issam El Naqa</name>
+      <arxiv:affiliation>Department of Machine Learning, Moffitt Cancer Center, Tampa, FL, USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jack Adam Tuszynski</name>
+      <arxiv:affiliation>Departments of Physics and Oncology, University of Alberta, Edmonton, AB, CAN</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert A. Gatenby</name>
+      <arxiv:affiliation>Departments of Radiology and Integrated Mathematical Oncology, Moffitt Cancer Center, Tampa, FL, USA</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.06594v1</id>
+    <title>Antiglitch: a Quasi-physical Model for Removing Short Glitches from LIGO and Virgo Data</title>
+    <updated>2023-09-12T20:47:24Z</updated>
+    <link href="https://arxiv.org/abs/2309.06594v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.06594v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Gravitational-wave observatories become more sensitive with each observing run, increasing the number of detected gravitational-wave signals. A limiting factor in identifying these signals is the presence of transient non-Gaussian noise, which generates glitches that can mimic gravitational wave signals. Our work provides a quasi-physical model waveform for the four most common types of short transient glitches, which are particularly problematic in the search for high-mass black hole binaries. Our model has only a few, physically interpretable parameters: central frequency, bandwidth, phase, amplitude and time. We demonstrate the accuracy of this model by fitting and removing a large sample of glitches from a month of LIGO and Virgo data from the O3 observing run. We can effectively remove three of the four types of short transients. We finally map the ability of these glitches to mimic binary black hole signals.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-12T20:47:24Z</published>
+    <arxiv:comment>13 pages, 14 Figures, Submitted to Phys.Rev.D</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <author>
+      <name>Ruxandra Bondarescu</name>
+    </author>
+    <author>
+      <name>Andrew Lundgren</name>
+    </author>
+    <author>
+      <name>Ronaldas Macas</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2008.09430v2</id>
+    <title>Background Independent Field Quantization with Sequences of Gravity-Coupled Approximants</title>
+    <updated>2020-11-09T14:41:38Z</updated>
+    <link href="https://arxiv.org/abs/2008.09430v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2008.09430v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We outline, test, and apply a new scheme for nonpertubative analyses of quantized field systems in contact with dynamical gravity. While gravity is treated classically in the present paper, the approach lends itself for a generalization to full Quantum Gravity. We advocate the point of view that quantum field theories should be regularized by sequences of quasi-physical systems comprising a well defined number of the field's degrees of freedom. In dependence on this number, each system backreacts autonomously and self-consistently on the gravitational field. In this approach, the limit which removes the regularization automatically generates the physically correct spacetime geometry, i.e., the metric the quantum states of the field prefer to "live" in. We apply the scheme to a Gaussian scalar field on maximally symmetric spacetimes, thereby confronting it with the standard approaches. As an application, the results are used to elucidate the cosmological constant problem allegedly arising from the vacuum fluctuations of quantum matter fields. An explicit calculation shows that the problem disappears if the pertinent continuum limit is performed in the improved way advocated here. A further application concerns the thermodynamics of de Sitter space where the approach offers a natural interpretation of the micro-states that are counted by the Bekenstein-Hawking entropy.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-08-21T11:49:36Z</published>
+    <arxiv:comment>53 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <author>
+      <name>Maximilian Becker</name>
+    </author>
+    <author>
+      <name>Martin Reuter</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.102.125001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.102.125001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2001.01506v1</id>
+    <title>Deceiving Image-to-Image Translation Networks for Autonomous Driving with Adversarial Perturbations</title>
+    <updated>2020-01-06T11:51:04Z</updated>
+    <link href="https://arxiv.org/abs/2001.01506v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2001.01506v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep neural networks (DNNs) have achieved impressive performance on handling computer vision problems, however, it has been found that DNNs are vulnerable to adversarial examples. For such reason, adversarial perturbations have been recently studied in several respects. However, most previous works have focused on image classification tasks, and it has never been studied regarding adversarial perturbations on Image-to-image (Im2Im) translation tasks, showing great success in handling paired and/or unpaired mapping problems in the field of autonomous driving and robotics. This paper examines different types of adversarial perturbations that can fool Im2Im frameworks for autonomous driving purpose. We propose both quasi-physical and digital adversarial perturbations that can make Im2Im models yield unexpected results. We then empirically analyze these perturbations and show that they generalize well under both paired for image synthesis and unpaired settings for style transfer. We also validate that there exist some perturbation thresholds over which the Im2Im mapping is disrupted or impossible. The existence of these perturbations reveals that there exist crucial weaknesses in Im2Im models. Lastly, we show that our methods illustrate how perturbations affect the quality of outputs, pioneering the improvement of the robustness of current SOTA networks for autonomous driving.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-01-06T11:51:04Z</published>
+    <arxiv:comment>8pages, Accepted on IEEE Robotics and Automation Letters (RAL)</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Lin Wang</name>
+    </author>
+    <author>
+      <name>Wonjune Cho</name>
+    </author>
+    <author>
+      <name>Kuk-Jin Yoon</name>
+    </author>
+    <arxiv:doi>10.1109/LRA.2020.2967289</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LRA.2020.2967289" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1808.06014v1</id>
+    <title>Data-driven framework for real-time thermospheric density estimation</title>
+    <updated>2018-08-17T22:27:54Z</updated>
+    <link href="https://arxiv.org/abs/1808.06014v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1808.06014v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we demonstrate a new data-driven framework for real-time neutral density estimation via model-data fusion in quasi-physical ionosphere-thermosphere models. The framework has two main components: (i) the development of a quasi-physical dynamic reduced order model (ROM) that uses a linear approximation of the underlying dynamics and effect of the drivers, and (ii) dynamic calibration of the ROM through estimation of the ROM coefficients that represent the model parameters. We have previously demonstrated the development of a quasi-physical ROM using simulation output from a physical model and assimilation of non-operational density estimates derived from accelerometer measurements along a single orbit. In this paper, we demonstrate the potential of the framework for use with operational measurements. We use simulated GPS-derived orbit ephemerides with 5 minute resolution as measurements. The framework is a first of its kind, simple yet robust and accurate method with high potential for providing real-time operational updates to the state of the upper atmosphere using quasi-physical models with inherent forecasting/predictive capabilities.</summary>
+    <category term="physics.space-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-08-17T22:27:54Z</published>
+    <arxiv:primary_category term="physics.space-ph"/>
+    <author>
+      <name>Piyush M. Mehta</name>
+    </author>
+    <author>
+      <name>Richard Linares</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.04088v1</id>
+    <title>A new transformative framework for data assimilation and calibration of physical ionosphere-thermosphere models</title>
+    <updated>2018-04-08T18:34:02Z</updated>
+    <link href="https://arxiv.org/abs/1804.04088v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.04088v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate specification and prediction of the ionosphere-thermosphere (IT) environment, driven by external forcing, is crucial to the space community. In this work, we present a new transformative framework for data assimilation and calibration of the physical IT models. The framework has two main components: (i) the development of a quasi-physical dynamic reduced order model (ROM) that uses a linear approximation of the underlying dynamics and effect of the drivers, and (ii) data assimilation and calibration of the ROM through estimation of the ROM coefficients that represent the model parameters. A reduced order surrogate for thermospheric mass density from the Thermosphere Ionosphere Electrodynamic General Circulation Model (TIE-GCM) was developed in previous work. This work concentrates on the second component of the framework - data assimilation and calibration of the TIE-GCM ROM. The new framework has two major advantages: (i) a dynamic ROM that combines the speed of empirical models for real-time capabilities with the predictive capabilities of physical models which has the potential to facilitate improved uncertainty quantification (UQ) using large ensembles, and (ii) estimation of model parameters rather than the driver(s)/input(s) which allows calibration of the model, thus avoiding degradation of model performance in the absence of continuous data. We validate the framework using accelerometer-derived density estimates from CHAMP and GOCE. The framework is a first of its kind, simple yet robust and accurate method with high potential for providing real-time operational updates to the state of the upper atmosphere in the context of drag modeling for Space Situational Awareness and Space Traffic Management.</summary>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.space-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-08T18:34:02Z</published>
+    <arxiv:primary_category term="physics.ao-ph"/>
+    <author>
+      <name>Piyush M. Mehta</name>
+    </author>
+    <author>
+      <name>Richard Linares</name>
+    </author>
+    <arxiv:doi>10.1029/2018SW001875</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1029/2018SW001875" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.08901v3</id>
+    <title>A quasi-physical dynamic reduced order model for thermospheric mass density via Hermitian Space Dynamic Mode Decomposition</title>
+    <updated>2018-03-19T16:18:31Z</updated>
+    <link href="https://arxiv.org/abs/1802.08901v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.08901v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Thermospheric mass density is a major driver of satellite drag, the largest source of uncertainty in accurately predicting the orbit of satellites in low Earth orbit (LEO) pertinent to space situational awareness. Most existing models for thermosphere are either physics-based or empirical. Physics-based models offer the potential for good predictive/forecast capabilities but require dedicated parallel resources for real-time evaluation and data assimilative capabilities that have yet to be developed. Empirical models are fast to evaluate, but offer very limited forecasting abilities. This paper presents a methodology of developing a reduced-order dynamic model from high-dimensional physics-based models by capturing the underlying dynamical behavior. This work develops a quasi-physical reduced order model (ROM) for thermospheric mass density using simulated output from NCAR's Thermosphere-Ionosphere-Electrodynamics General Circular Model (TIE-GCM). The ROM is derived using a dynamic system formulation from a large dataset of TIE-GCM simulations spanning 12 years and covering a complete solar cycle. Towards this end, a new reduced order modeling approach, based on Dynamic Mode Decomposition with control (DMDc), that uses the Hermitian space of the problem to derive the dynamics and input matrices in a tractable manner is developed. Results show that the ROM performs well in serving as a reduced order surrogate for TIE-GCM while almost always maintaining the forecast error to within 5\% of the simulated densities after 24 hours.</summary>
+    <category term="physics.space-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-24T19:29:21Z</published>
+    <arxiv:primary_category term="physics.space-ph"/>
+    <author>
+      <name>Piyush M. Mehta</name>
+    </author>
+    <author>
+      <name>Richard Linares</name>
+    </author>
+    <author>
+      <name>Eric K. Sutton</name>
+    </author>
+    <arxiv:doi>10.1029/2018SW001840</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1029/2018SW001840" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1611.02323v2</id>
+    <title>An Efficient Quasi-physical Quasi-human Algorithm for Packing Equal Circles in a Circular Container</title>
+    <updated>2017-04-13T02:42:03Z</updated>
+    <link href="https://arxiv.org/abs/1611.02323v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1611.02323v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper addresses the equal circle packing problem, and proposes an efficient Quasi-physical Quasi-human (QPQH) algorithm. QPQH is based on a modified Broyden-Fletcher-Goldfarb-Shanno (BFGS) algorithm which we call the local BFGS and a new basin hopping strategy based on a Chinese idiom: alternate tension with relaxation. Starting from a random initial layout, we apply the local BFGS algorithm to reach a local minimum layout. The local BFGS algorithm fully utilizes the neighborhood information of each circle to considerably speed up the running time of the gradient descent process, and the efficiency is very apparent for large scale instances. When yielding a local minimum layout, the new basin-hopping strategy is to shrink the container size to different extent to generate several new layouts. Experimental results indicate that the new basin-hopping strategy is very efficient, especially for a type of layout with comparatively dense packing in the center and comparatively sparse packing around the boundary of the container. We test QPQH on the instances of n = 1,2,...,320, and obtain 66 new layouts which have smaller container sizes than the current best-known results reported in literature.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-08-02T04:18:40Z</published>
+    <arxiv:comment>19 pages, 16 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Kun He</name>
+    </author>
+    <author>
+      <name>Hui Ye</name>
+    </author>
+    <author>
+      <name>Zhengli Wang</name>
+    </author>
+    <author>
+      <name>Jingfa Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0706.4130v1</id>
+    <title>A review of wildland fire spread modelling, 1990-present 3: Mathematical analogues and simulation models</title>
+    <updated>2007-06-28T01:15:11Z</updated>
+    <link href="https://arxiv.org/abs/0706.4130v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0706.4130v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In recent years, advances in computational power and spatial data analysis (GIS, remote sensing, etc) have led to an increase in attempts to model the spread and behvaiour of wildland fires across the landscape. This series of review papers endeavours to critically and comprehensively review all types of surface fire spread models developed since 1990. This paper reviews models of a simulation or mathematical analogue nature. Most simulation models are implementations of existing empirical or quasi-empirical models and their primary function is to convert these generally one dimensional models to two dimensions and then propagate a fire perimeter across a modelled landscape. Mathematical analogue models are those that are based on some mathematical conceit (rather than a physical representation of fire spread) that coincidentally simulates the spread of fire. Other papers in the series review models of an physical or quasi-physical nature and empirical or quasi-empirical nature. Many models are extensions or refinements of models developed before 1990. Where this is the case, these models are also discussed but much less comprehensively.</summary>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-06-28T01:15:11Z</published>
+    <arxiv:comment>20 pages + 9 pages references + 1 page figures. Submitted to the International Journal of Wildland Fire</arxiv:comment>
+    <arxiv:primary_category term="physics.geo-ph"/>
+    <arxiv:journal_ref>Sullivan, A. L. 2009. Wildland surface fire spread modelling, 1990-2007. 3: Simulation and mathematical analogue models. International Journal of Wildland Fire, 18, 387-403</arxiv:journal_ref>
+    <author>
+      <name>A. L. Sullivan</name>
+    </author>
+    <arxiv:doi>10.1071/WF06144</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1071/WF06144" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0706.4128v1</id>
+    <title>A review of wildland fire spread modelling, 1990-present 2: Empirical and quasi-empirical models</title>
+    <updated>2007-06-28T01:07:24Z</updated>
+    <link href="https://arxiv.org/abs/0706.4128v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0706.4128v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In recent years, advances in computational power and spatial data analysis (GIS, remote sensing, etc) have led to an increase in attempts to model the spread and behaviour of wildland fires across the landscape. This series of review papers endeavours to critically and comprehensively review all types of surface fire spread models developed since 1990. This paper reviews models of an empirical or quasi-empirical nature. These models are based solely on the statistical analysis of experimentally obtained data with or without some physical framework for the basis of the relations. Other papers in the series review models of a physical or quasi-physical nature, and mathematical analogues and simulation models. The main relations of empirical models are that of wind speed and fuel moisture content with rate of forward spread. Comparisons are made of the different functional relationships selected by various authors for these variables.</summary>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-06-28T01:07:24Z</published>
+    <arxiv:comment>22 pages + 7 pages references + 2 pages tables + 2 pages figures. Submitted to International Journal of Wildland Fire</arxiv:comment>
+    <arxiv:primary_category term="physics.geo-ph"/>
+    <arxiv:journal_ref>Sullivan, A. L. 2009. Wildland surface fire spread modelling, 1990-2007. 2: Empirical and quasi-empirical models. International Journal of Wildland Fire 18, 369-386</arxiv:journal_ref>
+    <author>
+      <name>A. L. Sullivan</name>
+    </author>
+    <arxiv:doi>10.1071/WF06142</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1071/WF06142" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0706.3074v1</id>
+    <title>A review of wildland fire spread modelling, 1990-present, 1: Physical and quasi-physical models</title>
+    <updated>2007-06-21T02:12:42Z</updated>
+    <link href="https://arxiv.org/abs/0706.3074v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0706.3074v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In recent years, advances in computational power and spatial data analysis (GIS, remote sensing, etc) have led to an increase in attempts to model the spread and behaviour of wildland fires across the landscape. This series of review papers endeavours to critically and comprehensively review all types of surface fire spread models developed since 1990. This paper reviews models of a physical or quasi-physical nature. These models are based on the fundamental chemistry and/or physics of combustion and fire spread. Other papers in the series review models of an empirical or quasi-empirical nature, and mathematical analogues and simulation models. Many models are extensions or refinements of models developed before 1990. Where this is the case, these models are also discussed but much less comprehensively.</summary>
+    <category term="physics.geo-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-06-21T02:12:42Z</published>
+    <arxiv:comment>31 pages + 8 pages references + 2 figures + 5 tables. Submitted to International Journal of Wildland Fire</arxiv:comment>
+    <arxiv:primary_category term="physics.geo-ph"/>
+    <arxiv:journal_ref>Sullivan, A. L. 2009. Wildland surface fire spread modelling, 1990-2007. 1: Physical and quasi-physical models. International Journal of Wildland Fire 18, 349-368</arxiv:journal_ref>
+    <author>
+      <name>A. L. Sullivan</name>
+    </author>
+    <arxiv:doi>10.1071/WF06143</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1071/WF06143" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/gr-qc/0405090v3</id>
+    <title>A quasi-physical family of gravity-wave templates for precessing binaries of spinning compact objects: Application to double-spin precessing binaries</title>
+    <updated>2006-07-26T15:38:04Z</updated>
+    <link href="https://arxiv.org/abs/gr-qc/0405090v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/gr-qc/0405090v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The gravitational waveforms emitted during the adiabatic inspiral of precessing binaries with two spinning compact bodies of comparable masses, evaluated within the post-Newtonian approximation, can be reproduced rather accurately by the waveforms obtained by setting one of the two spins to zero, at least for the purpose of detection by ground-based gravitational-wave interferometers. Here we propose to use this quasi-physical family of single-spin templates to search for the signals emitted by double-spin precessing binaries, and we find that its signal-matching performance is satisfactory for source masses (m1,m2) in [3,15]Msun x [3,15]Msun. For this mass range, using the LIGO-I design sensitivity, we estimate that the number of templates required to yield a minimum match of 0.97 is ~320,000. We discuss also the accuracy to which the single-spin template family can be used to estimate the parameters of the original double-spin precessing binaries.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-05-17T18:02:41Z</published>
+    <arxiv:comment>REVTeX4, 11 EPS figures; a sequel to gr-qc/0310034; final PRD version; small corrections to GW flux terms as per Blanchet et al., PRD 71, 129902(E)-129904(E) (2005)</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <arxiv:journal_ref>Phys.Rev.D70:104003,2004; Erratum-ibid.D74:029902,2006</arxiv:journal_ref>
+    <author>
+      <name>Alessandra Buonanno</name>
+    </author>
+    <author>
+      <name>Yanbei Chen</name>
+    </author>
+    <author>
+      <name>Yi Pan</name>
+    </author>
+    <author>
+      <name>Michele Vallisneri</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.70.104003</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.70.104003" title="doi"/>
+    <arxiv:doi>10.1103/PhysRevD.74.029902</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.74.029902" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/0007042v1</id>
+    <title>A realistic quasi-physical model of the 100 metre dash</title>
+    <updated>2000-07-13T23:38:24Z</updated>
+    <link href="https://arxiv.org/abs/physics/0007042v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/0007042v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  A quasi-physical model (having both physical and mathematical roots) of sprint performances is presented, accounting for the influence of drag modification via wind and altitude variations. The race time corrections for both men and women sprinters are discussed, and theoretical estimates for the associated drag areas are presented. The corrections are consistent with constant-wind estimates of previous authors, however those for variable wind are more accentuated for this model. As a practical example, the nullified World Record and 1988 Olympic 100 m race of Ben Johnson is studied, and compared with the present World Record of 9.79 s.</summary>
+    <category term="physics.pop-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2000-07-13T23:38:24Z</published>
+    <arxiv:comment>27 pp., 7 postscript figures</arxiv:comment>
+    <arxiv:primary_category term="physics.pop-ph"/>
+    <arxiv:journal_ref>Can. J. Phys. 79, 697-713 (2001)</arxiv:journal_ref>
+    <author>
+      <name>J. R. Mureika</name>
+      <arxiv:affiliation>Department of Physics, University of Toronto</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1139/cjp-79-4-697</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1139/cjp-79-4-697" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/9805201v2</id>
+    <title>Mixing of two-level unstable systems</title>
+    <updated>1998-05-06T15:56:06Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/9805201v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/9805201v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Unstable particles can be consistently described in the framework of quantum field theory. Starting from the full S-matrix amplitudes of B^+ --&gt; (2 pi, 3 pi) l nu decays as examples in the energy region where the rho-omega resonances are dominating, we propose a prescription for the mixing of two quasi `physical' unstable states that differs from the one obtained from the diagonalization of the M -i*Gamma/2 non-hermitian hamiltonian. We discuss some important consequences for CP violation in the K_L - K_S system.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1998-05-01T01:21:56Z</published>
+    <arxiv:comment>7 pages, Latex. A factor 1/2 removed from r.h.s. of Eqs. (12)-(15). Conclusions unchanged</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Eur.Phys.J.C9:409-411,1999</arxiv:journal_ref>
+    <author>
+      <name>G. Lopez Castro</name>
+    </author>
+    <author>
+      <name>J. H. Munoz</name>
+    </author>
+    <author>
+      <name>J. Pestieau</name>
+    </author>
+    <arxiv:doi>10.1007/s100529900041</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s100529900041" title="doi"/>
+  </entry>
+</feed>

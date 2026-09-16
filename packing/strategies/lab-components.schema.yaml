@@ -1,0 +1,38 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/jlevy/squares/packing/strategies/lab-components.schema.yaml
+title: LabComponents
+description: >
+  The motion lab's parts, declared so they stay separable. A component is a
+  function from PackingAnimation data to markup; writing down what each one needs
+  is what stops it from quietly reaching for the host page instead.
+type: object
+additionalProperties: false
+required: [description, parts]
+properties:
+  description: {type: string, minLength: 1}
+  parts:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [name, role, environment]
+      properties:
+        name: {type: string, pattern: "^[a-z][a-z0-9-]*$"}
+        role: {type: string, minLength: 1}
+        needs:
+          type: array
+          items:
+            enum: [frames, palette, reference, guided, duration_seconds, source]
+          description: >
+            Which top-level fields of a PackingAnimation the component reads. A
+            component that needs something not on this list is reaching outside
+            the format, which is the coupling this file exists to prevent.
+        environment:
+          enum: [static, interactive]
+          description: >
+            `static` renders in a self-contained SVG with no script, so it can be
+            embedded in any website page. `interactive` needs a host that runs
+            JavaScript, so it can never be part of the embeddable export and must
+            not become a dependency of anything that is.
+        notes: {type: string}

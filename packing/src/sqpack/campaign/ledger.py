@@ -199,22 +199,51 @@ def offset_timestamp(value: object) -> dt.datetime | None:
 
 
 def board_ids() -> tuple[set[str], set[str]] | None:
-    """(H-ids named on the board, H-ids the board declares reserved).
+    """(H-ids named on the board, H-ids the board declares reserved or retired).
 
     A reserved id is one held for a claim that exists somewhere upstream -- another
     campaign's register, a paper, a review -- but has not been codified here yet.
-    Naming it on the board is how the two numberings stay aligned and how nobody
-    reuses it; it is not a dangling reference. Declare them with a line like:
+    A retired id was published and then withdrawn; it stays consumed, so the board may
+    name it where it records the retirement. Naming either on the board is how nobody
+    reuses it; it is not a dangling reference. Declare them with lines like:
 
         <!-- reserved-ids: H-003 H-004 H-013 -->
+        <!-- retired-ids: H-206 -->
     """
     if not IDEAS.exists():
         return None
     text = IDEAS.read_text()
-    reserved = set()
-    for line in re.findall(r"<!--\s*reserved-ids:([^>]*?)-->", text):
-        reserved |= set(re.findall(r"\bH-[0-9]{3}\b", line))
-    return set(re.findall(r"\bH-[0-9]{3}\b", text)), reserved
+    declared = set()
+    for line in re.findall(r"<!--\s*(?:reserved|retired)-ids:([^>]*?)-->", text):
+        declared |= set(re.findall(r"\bH-[0-9]{3}\b", line))
+    return set(re.findall(r"\bH-[0-9]{3}\b", text)), declared
+
+
+def idea_number_collisions(text: str) -> list[str]:
+    """Idea numbers that more than one row of the board claims.
+
+    Two branches can each take the next free number, and a merge keeps both rows. The
+    id reconciliation cannot see it, because the rows name different hypotheses; main
+    and the annealing branch shared ideas 119 to 123 through two merges this way.
+    A row counts when it sits under a table header whose first cell is `#`, including a
+    row the formatter split away from its table, until the next header or heading.
+    """
+    rows: Counter[str] = Counter()
+    lines = text.splitlines()
+    in_board = False
+    for index, line in enumerate(lines):
+        following = lines[index + 1] if index + 1 < len(lines) else ""
+        if line.startswith("#"):
+            in_board = False
+        elif line.startswith("|") and re.match(r"\|\s*:?-{3,}", following):
+            in_board = re.match(r"\|\s*#\s*\|", line) is not None
+        elif in_board and (row := re.match(r"\|\s*(\d+[a-z]?)\s*\|", line)):
+            rows[row.group(1)] += 1
+    return [
+        f"ideas.md: idea {number} is numbered on {count} rows"
+        for number, count in rows.items()
+        if count > 1
+    ]
 
 
 def naming(
@@ -798,10 +827,12 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
         for hypothesis_id in sorted(known - on_board):
             problems.append(f"ideas.md: does not mention {hypothesis_id}")
         # A reservation that has been fulfilled is stale and must be retired, or the
-        # board keeps claiming an id is unwritten after it has been written.
+        # board keeps claiming an id is unwritten after it has been written. A retired id
+        # back in the registry is worse: an id reused.
         for hypothesis_id in sorted(reserved & known):
             problems.append(
-                f"ideas.md: {hypothesis_id} is declared reserved but is now in the registry"
+                f"ideas.md: {hypothesis_id} is declared reserved or retired but is now in "
+                "the registry"
             )
         # Reserved ids are exempt from the dangling-reference check, which means a
         # LINK to one would otherwise pass silently -- the board would assert a
@@ -811,6 +842,7 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
             problems.append(
                 f"ideas.md: {hypothesis_id} is reserved, so it must not be a link target"
             )
+        problems += idea_number_collisions(IDEAS.read_text())
 
     # Cross-field verdict rules. These could be `allOf` conditionals in the schema
     # (softschema 0.8.0 lifted the old 0.6.2 refusal), and stay here by the
@@ -877,6 +909,29 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
             else:
                 if "wall_seconds" not in effort:
                     problems.append(f"{name}: terminal round without effort.wall_seconds")
+                elif effort["wall_seconds"] == "unrecorded-historical":
+                    # A round whose timing receipt was lost declares the defect it carries
+                    # (D-067, a terminal round missing from wall-time accounting) instead of
+                    # being named here. The dated migration must come after the round, so
+                    # a new round cannot declare the gap about itself.
+                    annotation = effort.get("migration_annotation")
+                    migrated = (
+                        re.match(r"^(\d{4}-\d{2}-\d{2}): .+", annotation)
+                        if isinstance(annotation, str)
+                        else None
+                    )
+                    if "D-067" not in declared:
+                        problems.append(
+                            f"{name}: historical effort requires known_defects to declare D-067"
+                        )
+                    if migrated is None:
+                        problems.append(
+                            f"{name}: historical effort requires a dated annotation"
+                        )
+                    elif migrated.group(1) <= str(experiment.get("date") or ""):
+                        problems.append(
+                            f"{name}: historical effort migration must be dated after the round"
+                        )
                 stopped = effort.get("stopped_by")
                 if stopped == "timebox" and not effort.get("timebox"):
                     problems.append(f"{name}: stopped_by timebox but no timebox was declared")
@@ -1311,20 +1366,27 @@ def sweep_coverage(hypothesis: dict, rounds: list[dict]) -> str:
 def effort_of(rounds: list[dict]) -> tuple[float, float]:
     """Cumulative (agent_minutes, wall_seconds) over a set of rounds."""
     minutes = sum((r.get("effort") or {}).get("agent_minutes") or 0 for r in rounds)
-    seconds = sum((r.get("effort") or {}).get("wall_seconds") or 0 for r in rounds)
+    seconds = sum(
+        value
+        for r in rounds
+        if isinstance(value := (r.get("effort") or {}).get("wall_seconds"), (int, float))
+    )
     return minutes, seconds
 
 
 def spent(rounds: list[dict]) -> str:
     """How much has gone into a claim so far, in the two units that decide what next."""
     minutes, seconds = effort_of(rounds)
-    if not minutes and not seconds:
-        return ""
     parts = []
     if minutes:
         parts.append(f"{minutes:g}m agent")
     if seconds:
         parts.append(f"{seconds / 60:.1f}m wall" if seconds >= 60 else f"{seconds:.0f}s wall")
+    unrecorded = sum(
+        (r.get("effort") or {}).get("wall_seconds") == "unrecorded-historical" for r in rounds
+    )
+    if unrecorded:
+        parts.append(f"{unrecorded} round{'s' if unrecorded != 1 else ''} unrecorded")
     return " + ".join(parts)
 
 
@@ -1610,6 +1672,18 @@ def render(
             ),
             "",
         ]
+        unrecorded = sum(
+            (e.get("effort") or {}).get("wall_seconds") == "unrecorded-historical"
+            for e in experiments
+        )
+        if unrecorded:
+            lines += [
+                (
+                    f"These totals exclude {unrecorded} historical rounds with "
+                    "unrecorded timing; their cost is unknown, not zero."
+                ),
+                "",
+            ]
 
     unmined = [x for x in explorations if not x.get("proposes")]
     if unmined:

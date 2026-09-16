@@ -163,6 +163,41 @@ pub fn required_side(c: &Config) -> f64 {
     (hix - lox).max(hiy - loy)
 }
 
+/// Mean squared distance of the centres from the centre of their bounding box.
+///
+/// The wall-pressure surrogate. `required_side` is a max over the two to four
+/// squares attaining the binding span, so every *other* single-square translation
+/// leaves it exactly unchanged and the annealer walks a plateau bounded only by
+/// the overlap rejection. This term is an aggregate over all `n` squares, so every
+/// square has a nonzero derivative of the energy: it is a uniform inward pressure
+/// from the walls, in the sense that lowering it compacts the configuration.
+///
+/// It is a *surrogate* for the inflation formulation, not the formulation itself.
+/// Inflation replaces the max over extremes with a min over the active contact set;
+/// this replaces nothing and adds a dense term alongside. The search reports
+/// `required_side` regardless, so a pressure weight can never flatter a result.
+pub fn spread(c: &Config) -> f64 {
+    if c.n == 0 {
+        return 0.0;
+    }
+    let (mut lox, mut hix, mut loy, mut hiy) = (f64::MAX, f64::MIN, f64::MAX, f64::MIN);
+    for k in 0..c.n {
+        let e = HALF * (c.cos[k].abs() + c.sin[k].abs());
+        lox = lox.min(c.x[k] - e);
+        hix = hix.max(c.x[k] + e);
+        loy = loy.min(c.y[k] - e);
+        hiy = hiy.max(c.y[k] + e);
+    }
+    let (cx, cy) = (HALF * (lox + hix), HALF * (loy + hiy));
+    let mut total = 0.0;
+    for k in 0..c.n {
+        let dx = c.x[k] - cx;
+        let dy = c.y[k] - cy;
+        total += dx * dx + dy * dy;
+    }
+    total / c.n as f64
+}
+
 /// Total overlap depth over all pairs. Zero exactly when the packing is valid.
 pub fn total_overlap(c: &Config) -> f64 {
     let mut pair_tests = 0;

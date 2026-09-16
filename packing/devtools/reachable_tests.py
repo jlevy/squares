@@ -13,10 +13,10 @@ Reachability is computed from evidence, not convention, and every rule errs towa
 inclusion:
 
 - **Import closure.** A static import graph over `src/sqpack`, `devtools`, `cases`,
-  `benchmarks` and `tests` (AST, relative imports resolved); a test reaches a changed
-  module if it imports it transitively. `benchmarks` joined the map in agenda-015
-  `BC-142`, after the agenda-014 push tier selected all 1,302 tests for a change whose
-  only Python lived there.
+  `benchmarks`, the top-level workbench package and both Python test roots (AST,
+  relative imports resolved); a test reaches a changed module if it imports it
+  transitively. `benchmarks` joined the map in agenda-015 `BC-142`, after the agenda-014
+  push tier selected all 1,302 tests for a change whose only Python lived there.
 - **Text mention.** A test that names a changed module's dotted path, or a changed
   file's basename, is selected even without an import edge. This is what catches the
   `D-381` class: a test pinning a literal string emitted by code it exercises through a
@@ -42,6 +42,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import os
 import subprocess
 import sys
 from collections.abc import Sequence
@@ -49,10 +50,11 @@ from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
 
-from sqpack.cli.validate import changed_paths
+from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, changed_paths
 
 ROOT = Path(__file__).resolve().parent.parent
-TESTS = ROOT / "tests"
+REPO = ROOT.parent
+TEST_ROOTS = tuple((ROOT / path).resolve() for path in BEHAVIORAL_TEST_ROOTS)
 
 #: Package roots the import graph maps, as (top-level package name, directory).
 #: `sqpack` is installed from `src/`, the rest resolve via pytest's `pythonpath = ["."]`.
@@ -62,6 +64,11 @@ PACKAGE_ROOTS: tuple[tuple[str, Path], ...] = (
     ("cases", ROOT / "cases"),
     ("benchmarks", ROOT / "benchmarks"),
     ("tests", ROOT / "tests"),
+    (
+        "workbench_tools",
+        REPO / "packages" / "workbench" / "tools" / "workbench_tools",
+    ),
+    ("workbench_tests", REPO / "packages" / "workbench" / "tests"),
 )
 
 #: A changed path equal to or under any of these selects the whole suite: they configure
@@ -71,6 +78,7 @@ SUITE_WIDE = (
     "packing/uv.lock",
     "packing/tests/conftest.py",
     "packing/.python-version",
+    "packages/workbench/pyproject.toml",
     # Keep root-level configuration conservative if it is added to this checkout.
     "pyproject.toml",
     "uv.lock",
@@ -183,7 +191,7 @@ def select_tests(changed: list[str]) -> TestSelection:
     for path in changed:
         if path in SUITE_WIDE or path.startswith(".github/"):
             return TestSelection(everything=True, reason=f"{path} configures the suite")
-        resolved = (ROOT.parent / path).resolve()
+        resolved = (REPO / path).resolve()
         if path.endswith(".py") and _module_name(resolved) is None:
             return TestSelection(
                 everything=True, reason=f"{path} is Python outside the mapped roots"
@@ -201,7 +209,7 @@ def select_tests(changed: list[str]) -> TestSelection:
     changed_basenames: set[str] = set()
     changed_dotted: set[str] = set()
     for path in changed:
-        resolved = (ROOT.parent / path).resolve()
+        resolved = (REPO / path).resolve()
         name = _module_name(resolved) if path.endswith(".py") else None
         if name is not None:
             changed_modules.add(name)
@@ -220,9 +228,9 @@ def select_tests(changed: list[str]) -> TestSelection:
 
     selected: dict[str, str] = {}
     for name, file in modules.items():
-        if file.parent != TESTS or not file.name.startswith("test_"):
+        if file.parent not in TEST_ROOTS or not file.name.startswith("test_"):
             continue
-        relative = str(file.relative_to(ROOT.parent))
+        relative = str(file.relative_to(REPO))
         if name in changed_modules:
             selected.setdefault(relative, "import closure")
             continue
@@ -237,7 +245,7 @@ def select_tests(changed: list[str]) -> TestSelection:
             selected.setdefault(relative, "names a changed file")
 
     tests = tuple(sorted(selected))
-    total = sum(1 for _ in TESTS.glob("test_*.py"))
+    total = sum(1 for directory in TEST_ROOTS for _ in directory.glob("test_*.py"))
     if len(tests) >= total:
         return TestSelection(everything=True, reason="every test file is reachable")
     reason = f"{len(tests)} of {total} test files reachable"
@@ -317,9 +325,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     targets = (
-        ["tests"]
+        list(BEHAVIORAL_TEST_ROOTS)
         if selection.everything
-        else [str((ROOT.parent / test).relative_to(ROOT)) for test in selection.tests]
+        else [os.path.relpath(REPO / test, start=ROOT) for test in selection.tests]
     )
     # `not exhaustive_exact`, which keeps the `slow` lane in. That is deliberate and it
     # is the difference between this tier and the pull-request surface: `--fast` defers

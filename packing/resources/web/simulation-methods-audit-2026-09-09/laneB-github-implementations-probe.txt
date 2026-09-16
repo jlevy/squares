@@ -1,0 +1,22 @@
+== siconos/siconos
+   siconos/siconos | C | license: Apache-2.0 | stars 187 | pushed 2026-09-07T11:21:21Z
+   Simulation framework for nonsmooth dynamical systems
+   https://github.com/siconos/siconos
+== projectchrono/chrono
+   projectchrono/chrono | C++ | license: BSD-3-Clause | stars 3018 | pushed 2026-09-08T20:21:48Z
+   High-performance C++ library for multiphysics and multibody dynamics simulations
+   https://github.com/projectchrono/chrono
+== erincatto/box2d
+   erincatto/box2d | C | license: MIT | stars 10332 | pushed 2026-09-09T06:23:23Z
+   Box2D is a 2D physics engine for games
+   https://github.com/erincatto/box2d
+== bulletphysics/bullet3
+   bulletphysics/bullet3 | C++ | license: NOASSERTION | stars 14719 | pushed 2025-10-22T02:13:14Z
+   Bullet Physics SDK: real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.
+   https://github.com/bulletphysics/bullet3
+== tkoziara/solfec
+   parmes/solfec-1.0 | Python | license: None | stars 9 | pushed 2020-11-26T20:17:27Z
+   Parallel Non-Smooth Contact Dynamics using MPI, C and Python
+   https://github.com/parmes/solfec-1.0
+== tkoziara/solfec-1.0
+  ERR: Not Found

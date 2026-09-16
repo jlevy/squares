@@ -1,0 +1,849 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/cbRjQB5Vu2WbErhAqdztAo2mj7c</id>
+  <title>arXiv Query: search_query=all:"simulated annealing" AND all:packing&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-08T16:41:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22simulated+annealing%22+AND+all:packing&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>35</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.04570v1</id>
+    <title>Dynamic Adaptation of the LLM Context for Generating Routines with Coupled Semantics</title>
+    <updated>2026-09-03T23:56:18Z</updated>
+    <link href="https://arxiv.org/abs/2609.04570v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.04570v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM-based code generation fails when correctness depends on execution-dependent coupling: the meaning of one routine is defined by the runtime behavior of another, a relationship that cannot be resolved from textual descriptions alone. This limitation, which we call static binding, is not confined to explicitly coupled problems; it appears to varying degrees whenever correctness depends on joint execution behavior across components, from explicit cross-coupled optimizers to subtler joint constraints in packing, routing, and symbolic search. This paper proposes dynamic context adaptation, a sample-efficient validation-generation loop designed for this setting. A validation agent extracts structured diagnostic information from execution traces, providing gradient-like guidance to a generation agent that proposes multiple candidates per iteration. A knowledge graph derived from the problem description supplies semantic constraints to the generation agent. Simulated annealing selects among candidates to avoid greedy collapse. Our method outperforms zero-shot, Reflexion, and OpenEvolve on seven of eight problems at both 300 and 600 evaluations (p &lt; 0.01), a regime where population-based search has not yet accumulated sufficient diversity to compete. Notably, on the primary motivating problem (cross-coupled optimization), our method also achieves the best score at 1000 evaluations, consistent with the hypothesis that structured execution feedback is most beneficial when correctness depends on runtime coupling. Ablation results confirm that structured execution feedback is the primary driver.</summary>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-03T23:56:18Z</published>
+    <arxiv:comment>Accepted at ICANN 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.SE"/>
+    <author>
+      <name>Gnaneswar Villuri</name>
+    </author>
+    <author>
+      <name>Hashmath Shaik</name>
+    </author>
+    <author>
+      <name>Alex Doboli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.16333v2</id>
+    <title>Differentiable Packing of Irregular 3D Objects with Adaptive Container Estimation</title>
+    <updated>2026-06-23T09:37:12Z</updated>
+    <link href="https://arxiv.org/abs/2606.16333v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.16333v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most existing approaches either fix the container in advance or optimize only a single container dimension through an outer search loop, leaving the remaining dimensions as a manual tuning problem. We present a differentiable packing framework that jointly optimizes all 6N object pose parameters and all three container side lengths inside a single gradient-based loop. The formulation combines six physics-inspired, differentiable loss terms computed directly on triangle meshes through axis-aligned bounding-box proxies. An adaptive squeezing mechanism periodically tightens the container whenever the overlap loss falls below a pair-count-scaled threshold, producing a large initial drop in container volume, followed by small refinements. All pairwise computations are written in tensor-broadcasting form, giving a 3.4 to 54 times speedup over a reference loop-based implementation. The pipeline is implemented in Python and PyTorch, with no physics engine, FFT library, or convex decomposition. On multiple object categories, the method produces containers that are 11 to 32 percent smaller than time-matched DBLF and simulated-annealing baselines at N =100, while running in under 4 minutes per instance on a single consumer GPU.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-15T07:36:51Z</published>
+    <arxiv:comment>20 pages, 8 figures, 5 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Palak Gupta</name>
+    </author>
+    <author>
+      <name>Shanmuganathan Raman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.07913v2</id>
+    <title>Multi-Agent Route Planning as a QUBO Problem</title>
+    <updated>2026-06-29T16:00:14Z</updated>
+    <link href="https://arxiv.org/abs/2602.07913v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.07913v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-Agent Route Planning considers selecting vehicles, each associated with a single predefined route, such that route-level coverage utility is maximized while redundant spatial overlaps are limited. This paper gives a formal problem definition, proves NP-hardness by reduction from the Weighted Set Packing problem, and derives a Quadratic Unconstrained Binary Optimization formulation whose coefficients directly encode route utility rewards and pairwise overlap penalties. A single penalty parameter $λ$ controls the coverage--overlap trade-off. We distinguish between a soft regime, which supports multi-objective exploration, and a hard regime, in which the penalty is strong enough to effectively enforce near-disjoint routes. We describe a practical pipeline for generating city instances, constructing candidate routes, building the QUBO matrix, and solving it with a binary quadratic programming baseline (Gurobi), simulated annealing, and D-Wave hybrid quantum annealing. Experiments on Barcelona instances with up to $10{,}000$ vehicles reveal a clear coverage--overlap knee and show that Pareto-optimal solutions are mainly obtained under the hard-penalty regime, while D-Wave hybrid solvers and Gurobi achieve very similar objective values on matching configurations with only minor runtime differences as problem size grows.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-08T11:18:45Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Renáta Rusnáková</name>
+    </author>
+    <author>
+      <name>Martin Chovanec</name>
+    </author>
+    <author>
+      <name>Juraj Gazda</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.15316v1</id>
+    <title>Capturing Protein Free Energy Landscape using Efficient Quantum Encoding</title>
+    <updated>2025-10-17T05:06:43Z</updated>
+    <link href="https://arxiv.org/abs/2510.15316v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.15316v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Protein folding is one of the age-old biological problems that refers to the mechanism of understanding and predicting how a protein's linear sequence of amino acids folds into its specific three dimensional structure.This structure is critical, as a protein's functionality is inherently linked to its final folded form. Misfolding can lead to severe diseases such as Alzheimer's and cystic fibrosis, highlighting the biological and clinical importance of understanding protein folding mechanisms. This work presents a novel turn based encoding optimization algorithm for predicting the folded structures of peptides and small proteins. Our approach builds upon our previous research, where our objective function focused on hydrophobic collapse, a fundamental phenomenon underlying the protein folding process. In this work, we extend that framework by not only incorporating hydrophobic interactions but also including all non bonded interactions modeled using the Miyazawa Jernigan potential. We constructed a Hamiltonian from the defined objective function that encodes the folding process on a three dimensional face centered cubic lattice, offering superior packing efficiency and a realistic representation of protein conformations. This Hamiltonian is then solved using classical and quantum solvers to explore the vast conformational space of proteins. To identify the lowest-energy folded configurations, we utilize the Variational Quantum Eigensolver implemented on IBM 133 qubit hardware. The predicted structures are validated against experimental data using root mean square deviation as a metric and compared against classical simulated annealing and molecular dynamics simulation results. Our findings highlight the promise of hybrid classical and quantum approaches in advancing protein folding predictions, particularly for sequences with low homology.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-17T05:06:43Z</published>
+    <arxiv:comment>20 pages, 7 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Ashwini Kannan</name>
+    </author>
+    <author>
+      <name>Jaya Vasavi Pamidimukkala</name>
+    </author>
+    <author>
+      <name>Avinash Dakshinamoorthy</name>
+    </author>
+    <author>
+      <name>Soham Bopardikar</name>
+    </author>
+    <author>
+      <name>Kalyan Dasgupta</name>
+    </author>
+    <author>
+      <name>Sanjib Senapati</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.15457v1</id>
+    <title>Optimization of Activity Batching Policies in Business Processes</title>
+    <updated>2025-07-21T10:11:51Z</updated>
+    <link href="https://arxiv.org/abs/2507.15457v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.15457v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In business processes, activity batching refers to packing multiple activity instances for joint execution. Batching allows managers to trade off cost and processing effort against waiting time. Larger and less frequent batches may lower costs by reducing processing effort and amortizing fixed costs, but they create longer waiting times. In contrast, smaller and more frequent batches reduce waiting times but increase fixed costs and processing effort. A batching policy defines how activity instances are grouped into batches and when each batch is activated. This paper addresses the problem of discovering batching policies that strike optimal trade-offs between waiting time, processing effort, and cost. The paper proposes a Pareto optimization approach that starts from a given set (possibly empty) of activity batching policies and generates alternative policies for each batched activity via intervention heuristics. Each heuristic identifies an opportunity to improve an activity's batching policy with respect to a metric (waiting time, processing time, cost, or resource utilization) and an associated adjustment to the activity's batching policy (the intervention). The impact of each intervention is evaluated via simulation. The intervention heuristics are embedded in an optimization meta-heuristic that triggers interventions to iteratively update the Pareto front of the interventions identified so far. The paper considers three meta-heuristics: hill-climbing, simulated annealing, and reinforcement learning. An experimental evaluation compares the proposed approach based on intervention heuristics against the same (non-heuristic guided) meta-heuristics baseline regarding convergence, diversity, and cycle time gain of Pareto-optimal policies.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-21T10:11:51Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Orlenys López-Pintado</name>
+    </author>
+    <author>
+      <name>Jannis Rosenbaum</name>
+    </author>
+    <author>
+      <name>Marlon Dumas</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.16633v1</id>
+    <title>DiffChip: Thermally Aware Chip Placement with Automatic Differentiation</title>
+    <updated>2025-02-23T16:20:12Z</updated>
+    <link href="https://arxiv.org/abs/2502.16633v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.16633v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Chiplets are modular integrated circuits that can be combined to form a larger system, offering flexibility and performance enhancements. However, their dense packing often leads to significant thermal management challenges, requiring careful floorplanning to ensure efficient heat distribution. To address thermal considerations, layout optimization algorithms concurrently minimize the total wirelength and the maximum temperature. However, these efforts employ gradient-free approaches, such as simulated annealing, which suffer from poor scaling and slow convergence. In this paper, we propose DiffChip, a chiplet placement algorithm based on automatic differentiation (AD). The proposed framework relies on a differentiable thermal solver that computes the sensitivity of the temperature map with respect to the positions of the chiplets. Regularization strategies for peak temperature, heat sources, and material properties enable end-to-end differentiability, allowing for gradient-based optimization. We apply DiffChip to optimize a layout where the total wirelength is minimized while keeping the maximum temperature below a desired threshold. By leveraging AD and physics-aware optimization, our approach accelerates the design process of microelectronic systems, exceeding traditional trial-and-error and gradient-free methods.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-23T16:20:12Z</published>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <author>
+      <name>Giuseppe Romano</name>
+    </author>
+    <author>
+      <name>Aakrati Jain</name>
+    </author>
+    <author>
+      <name>Nima Dehmamy</name>
+    </author>
+    <author>
+      <name>Cheng Chi</name>
+    </author>
+    <author>
+      <name>Xin Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.17725v1</id>
+    <title>Using Code Generation to Solve Open Instances of Combinatorial Design Problems</title>
+    <updated>2025-01-29T15:57:43Z</updated>
+    <link href="https://arxiv.org/abs/2501.17725v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.17725v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Handbook of Combinatorial Designs catalogs many types of combinatorial designs, together with lists of open instances for which existence has not yet been determined. We develop a constructive protocol CPro1, which uses Large Language Models (LLMs) to generate code that constructs combinatorial designs and resolves some of these open instances. The protocol starts from a definition of a particular type of design, and a verifier that reliably confirms whether a proposed design is valid. The LLM selects strategies and implements them in code, and scaffolding provides automated hyperparameter tuning and execution feedback using the verifier. Most generated code fails, but by generating many candidates, the protocol automates exploration of a variety of standard methods (e.g. simulated annealing, genetic algorithms) and experimentation with variations (e.g. cost functions) to find successful approaches. Testing on 16 different types of designs, CPro1 constructs solutions to open instances for 6 of them: Symmetric and Skew Weighing Matrices, Equidistant Permutation Arrays, Packing Arrays, Balanced Ternary Designs, and Florentine Rectangles.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-29T15:57:43Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Christopher D. Rosin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.08430v1</id>
+    <title>Testing Quantum and Simulated Annealers on the Drone Delivery Packing Problem</title>
+    <updated>2024-06-12T17:16:02Z</updated>
+    <link href="https://arxiv.org/abs/2406.08430v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.08430v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Using drones to perform human-related tasks can play a key role in various fields, such as defense, disaster response, agriculture, healthcare, and many others. The drone delivery packing problem (DDPP) arises in the context of logistics in response to an increasing demand in the delivery process along with the necessity of lowering human intervention. The DDPP is usually formulated as a combinatorial optimization problem, aiming to minimize drone usage with specific battery constraints while ensuring timely consistent deliveries with fixed locations and energy budget. In this work, we propose two alternative formulations of the DDPP as a quadratic unconstrained binary optimization (QUBO) problem, in order to test the performance of classical and quantum annealing (QA) approaches. We perform extensive experiments showing the advantages as well as the limitations of quantum annealers for this optimization problem, as compared to simulated annealing (SA) and classical state-of-the-art commercial tools for global optimization.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-12T17:16:02Z</published>
+    <arxiv:comment>16 pages, 6 figures, 7 tables</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Quantum Mach. Intell. 8, 14 (2026)</arxiv:journal_ref>
+    <author>
+      <name>Sara Tarquini</name>
+    </author>
+    <author>
+      <name>Daniele Dragoni</name>
+    </author>
+    <author>
+      <name>Matteo Vandelli</name>
+    </author>
+    <author>
+      <name>Francesco Tudisco</name>
+    </author>
+    <arxiv:doi>10.1007/s42484-026-00362-z</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s42484-026-00362-z" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.06271v2</id>
+    <title>Nanospheres with Patches Arranged in Polyhedrons from Self-Assembly of Solution-State Diblock Copolymers under Spherical Confinement</title>
+    <updated>2023-12-19T11:54:24Z</updated>
+    <link href="https://arxiv.org/abs/2312.06271v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.06271v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Self-assembly of sphere-forming solution-state amphiphilic diblock copolymers under spherical nanopore confinement is investigated using a simulated annealing technique. For two types of cases of different pore-surface/copolymer interactions, sequences of self-assembled patchy nanospheres are obtained, and phase diagrams are constructed. Self-assembled patchy nanospheres with 1-21 solvophobic domains are observed. The outermost solvophobic domains (patches) are packed into various polyhedrons when their number is larger than 3, where three Platonic solids of a regular tetrahedron, an octahedron, and an icosahedron and seven Johnson solids of J12, J13, J17, J50, J51, J86, and J87 are identified. In addition, another Johnson solid of J84 is identified in a structure with two categories of B-domains. These polyhedrons have all or most of their faces in a triangular shape, and hence, they are closer to spherical in shape, which may relieve the chain stretching. Nanospheres with 1, 4, 6, 9, and 12 numbers of patches occur in relatively large windows in the phase diagrams of both types of cases. In one of the two types of cases, all nanospheres with any number of 1-14 patches occur in the phase diagram, whereas in the other type of cases, nanospheres with 2, 3, 5, 11, and 13 numbers of patches are absent in the phase diagram. Furthermore, at a given pore size, the number of patches changes nonmonotonically or is unchanged with an increase in the strength of the pore-surface/copolymer interactions for one type or the other type of case, respectively. Quantitative calculations are performed to elucidate mechanisms of the window size in the phase diagrams of nanospheres with different numbers of patches and structure details.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-11T10:15:51Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Macromolecules 56 (1), 335-348 (2023)</arxiv:journal_ref>
+    <author>
+      <name>Jiaping Wu</name>
+    </author>
+    <author>
+      <name>Xin Wang</name>
+    </author>
+    <author>
+      <name>Zheng Wang</name>
+    </author>
+    <author>
+      <name>Yuhua Yin</name>
+    </author>
+    <author>
+      <name>Run Jiang</name>
+    </author>
+    <author>
+      <name>Yao Li</name>
+    </author>
+    <author>
+      <name>Baohui Li</name>
+    </author>
+    <arxiv:doi>10.1021/acs.macromol.2c02166</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1021/acs.macromol.2c02166" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.06314v1</id>
+    <title>Constraint programming methods in three-dimensional container packing</title>
+    <updated>2023-11-09T21:39:38Z</updated>
+    <link href="https://arxiv.org/abs/2311.06314v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.06314v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cutting and packing problems are present in many, at first glance unconnected, areas, therefore it's beneficial to have a good understanding of their underlying structure, to select proper techniques for finding solutions. Cutting and packing problems are a class of combinatorial problems in which there are specified two classes of objects: big and small items and the task is to place the small items within big items. Even in the 1-dimensional case, bin-packing is strongly NP-hard (Garey 1978), which suggests, that exact solutions may not be found in a reasonable time for bigger instances. In the literature, there are presented many various approaches to packing problems, e.g. mixed-integer programming, approximation algorithms, heuristic solutions, and local search algorithms, including metaheuristic approaches like Tabu Search or Simulated Annealing.
+  The main goal of this work is to review existing solutions, survey the variants arising from the industry applications, present a solution based on constraint programming and compare its performance with the results in the literature. Optimization with constraint programming is a method searching for the global optima, hence it may require a higher workload compared to the heuristic and local search approaches, which may finish in a local optimum. The performance of the presented model will be measured on test data used in the literature, which were used in many articles presenting a variety of approaches to three-dimensional container packing, which will allow us to compare the efficiency of the constraint programming model with other methods used in the operational research.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-09T21:39:38Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Szymon Wróbel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12678v2</id>
+    <title>QAL-BP: An Augmented Lagrangian Quantum Approach for Bin Packing</title>
+    <updated>2024-01-15T20:10:40Z</updated>
+    <link href="https://arxiv.org/abs/2309.12678v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12678v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The bin packing is a well-known NP-Hard problem in the domain of artificial intelligence, posing significant challenges in finding efficient solutions. Conversely, recent advancements in quantum technologies have shown promising potential for achieving substantial computational speedup, particularly in certain problem classes, such as combinatorial optimization. In this study, we introduce QAL-BP, a novel Quadratic Unconstrained Binary Optimization (QUBO) formulation designed specifically for bin packing and suitable for quantum computation. QAL-BP utilizes the Augmented Lagrangian method to incorporate the bin packing constraints into the objective function while also facilitating an analytical estimation of heuristic, but empirically robust, penalty multipliers. This approach leads to a more versatile and generalizable model that eliminates the need for empirically calculating instance-dependent Lagrangian coefficients, a requirement commonly encountered in alternative QUBO formulations for similar problems. To assess the effectiveness of our proposed approach, we conduct experiments on a set of bin packing instances using a real Quantum Annealing device. Additionally, we compare the results with those obtained from two different classical solvers, namely simulated annealing and Gurobi. The experimental findings not only confirm the correctness of the proposed formulation but also demonstrate the potential of quantum computation in effectively solving the bin packing problem, particularly as more reliable quantum technology becomes available.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-22T07:37:20Z</published>
+    <arxiv:comment>18 pages, 8 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Lorenzo Cellini</name>
+    </author>
+    <author>
+      <name>Antonio Macaluso</name>
+    </author>
+    <author>
+      <name>Michele Lombardi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.09353v1</id>
+    <title>Batched matrix operations on distributed GPUs with application in theoretical physics</title>
+    <updated>2022-03-17T14:34:20Z</updated>
+    <link href="https://arxiv.org/abs/2203.09353v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.09353v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>One of the most important and commonly used operations in many linear algebra functions is matrix-matrix multiplication (GEMM), which is also a key component in obtaining high performance of many scientific codes. It is a computationally intensive function requiring $O(n^3)$ operations, and its high computational intensity makes it well-suited to be significantly accelerated with GPUs. Today, many research problems require solving a very large number of relatively small GEMM operations that cannot utilise the entire GPU. To overcome this bottleneck, special functions have been developed that pack several GEMM operations into one and then compute them simultaneously on a GPU, which is called a batch operation. In this research work, we have proposed a different approach based on linking multiple GEMM operations to MPI ranks and then binding multiple MPI ranks to a single GPU. To increase GPU utilisation, more MPI ranks (i.e. GEMM operations) are added. We implement and test this approach in the field of theoretical physics to compute entanglement properties through simulated annealing Monte Carlo simulation of quantum spin chains. For the specific use case, we were able to simulate a much larger spin system and achieve a speed-up of up to $35\times$ compared to the parallel CPU-only version.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-17T14:34:20Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Nenad Mijić</name>
+    </author>
+    <author>
+      <name>Davor Davidović</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.02201v1</id>
+    <title>Neural Simulated Annealing</title>
+    <updated>2022-03-04T09:19:28Z</updated>
+    <link href="https://arxiv.org/abs/2203.02201v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.02201v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Simulated annealing (SA) is a stochastic global optimisation technique applicable to a wide range of discrete and continuous variable problems. Despite its simplicity, the development of an effective SA optimiser for a given problem hinges on a handful of carefully handpicked components; namely, neighbour proposal distribution and temperature annealing schedule. In this work, we view SA from a reinforcement learning perspective and frame the proposal distribution as a policy, which can be optimised for higher solution quality given a fixed computational budget. We demonstrate that this Neural SA with such a learnt proposal distribution, parametrised by small equivariant neural networks, outperforms SA baselines on a number of problems: Rosenbrock's function, the Knapsack problem, the Bin Packing problem, and the Travelling Salesperson problem. We also show that Neural SA scales well to large problems - generalising to significantly larger problems than the ones seen during training - while achieving comparable performance to popular off-the-shelf solvers and other machine learning methods in terms of solution quality and wall-clock time.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-04T09:19:28Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proceedings of The 26th International Conference on Artificial Intelligence and Statistics, PMLR 206:4946-4962, 2023</arxiv:journal_ref>
+    <author>
+      <name>Alvaro H. C. Correia</name>
+    </author>
+    <author>
+      <name>Daniel E. Worrall</name>
+    </author>
+    <author>
+      <name>Roberto Bondesan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.07030v2</id>
+    <title>Cooperative Multi-UAV Coverage Mission Planning Platform for Remote Sensing Applications</title>
+    <updated>2022-01-19T09:22:42Z</updated>
+    <link href="https://arxiv.org/abs/2201.07030v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.07030v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a novel mission planning platform, capable of efficiently deploying a team of UAVs to cover complex-shaped areas, in various remote sensing applications. Under the hood lies a novel optimization scheme for grid-based methods, utilizing Simulated Annealing algorithm, that significantly increases the achieved percentage of coverage and improves the qualitative features of the generated paths. Extensive simulated evaluation in comparison with a state-of-the-art alternative methodology, for coverage path planning (CPP) operations, establishes the performance gains in terms of achieved coverage and overall duration of the generated missions. On top of that, DARP algorithm is employed to allocate sub-tasks to each member of the swarm, taking into account each UAV's sensing and operational capabilities, their initial positions and any no-fly-zones possibly defined inside the operational area. This feature is of paramount importance in real-life applications, as it has the potential to achieve tremendous performance improvements in terms of time demanded to complete a mission, while at the same time it unlocks a wide new range of applications, that was previously not feasible due to the limited battery life of UAVs. In order to investigate the actual efficiency gains that are introduced by the multi-UAV utilization, a simulated study is performed as well. All of these capabilities are packed inside an end-to-end platform that eases the utilization of UAVs' swarms in remote sensing applications. Its versatility is demonstrated via two different real-life applications: (i) a photogrametry for precision agriculture and (ii) an indicative search and rescue for first responders missions, that were performed utilizing a swarm of commercial UAVs. The source code can be found at: https://github.com/savvas-ap/mCPP-optimized-DARP</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-18T14:56:23Z</published>
+    <arxiv:comment>An implementation of the mCPP methodology introduced in this work, as well as a link for a demonstrative video and a link for a fully functional, on-line hosted instance of the presented platform can be found here: https://github.com/savvas-ap/mCPP-optimized-DARP</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>Autonomous Robots, 1-28 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Savvas D. Apostolidis</name>
+    </author>
+    <author>
+      <name>Pavlos Ch. Kapoutsis</name>
+    </author>
+    <author>
+      <name>Athanasios Ch. Kapoutsis</name>
+    </author>
+    <author>
+      <name>Elias B. Kosmatopoulos</name>
+    </author>
+    <arxiv:doi>10.1007/s10514-021-10028-3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10514-021-10028-3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.06291v4</id>
+    <title>Optimal Layout Plan of Stands at the Macao Food Festival via Minimizing the Electrostatic Potential Energy with the Effective Charge as Popularity of Stands</title>
+    <updated>2022-02-16T08:34:53Z</updated>
+    <link href="https://arxiv.org/abs/2201.06291v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.06291v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We proposed a mathematical model for designing the layout diagram of stand locations at the Macao Food Festival. The optimal layout diagram may be defined in such a way that, while requiring the distance between every pair of stands should not be too far away from each other, the crowd control is well managed so that people may patronize stands more effectively. More popular stands may have larger patronage, resulting in higher pedestrian flow nearby. Therefore, to avoid customers from packing shoulder to shoulder around more popular stands, we may treat every stand as a charged particle carrying an effective charge: the more popular a stand is, the higher the effective charge it carries. Under this assumption, the problem is then converted to the minimization problem of Coulomb electrostatic potential energy on a specific configuration of charge locations, with which the global minimum may be found by the Simulated Annealing and Metropolis Algorithm. Electrostatic energy density is interpreted as density of customers, while electric field the reversed crowd flow. Therefore, at a certain location we are able to predict the customer density by calculating the energy density and the net crowd flow with electric field lines. We also concluded that even though the required computation time to obtain a configuration of stand locations with the energy value close to the global minimum with a tolerable difference may be irrelevant to the randomly generated initial configuration of stand locations, setting up an appropriate initial configuration could be one of the key issues to find out the actual global minimum.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-17T09:13:45Z</published>
+    <arxiv:comment>37 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <author>
+      <name>Ka Ian Im</name>
+    </author>
+    <author>
+      <name>In Kio Choi</name>
+    </author>
+    <author>
+      <name>Pak Kio Lei</name>
+    </author>
+    <author>
+      <name>Hou Fai Chan</name>
+    </author>
+    <author>
+      <name>U In Ian</name>
+    </author>
+    <author>
+      <name>Wei Shan Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.03203v1</id>
+    <title>Adaptive Simulated Annealing with Greedy Search for the Circle Bin Packing Problem</title>
+    <updated>2021-08-06T16:57:57Z</updated>
+    <link href="https://arxiv.org/abs/2108.03203v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.03203v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a new bin packing problem, termed the circle bin packing problem with circular items (CBPP-CI). The problem involves packing all the circular items into multiple identical circle bins as compact as possible with the objective of minimizing the number of used bins. We first define the tangent occupying action (TOA) and propose a constructive greedy algorithm that sequentially packs the items into places tangent to the packed items or the bin boundaries. Moreover, to avoid falling into a local minimum trap and efficiently judge whether an optimal solution has been established, we continue to present the adaptive simulated annealing with greedy search (ASA-GS) algorithm that explores and exploits the search space efficiently. Specifically, we offer two novel local perturbation strategies to jump out of the local optimum and incorporate the greedy search to achieve faster convergence. The parameters of ASA-GS are adaptive according to the number of items so that they can be size-agnostic across the problem scale. We design two sets of new benchmark instances, and the empirical results show that ASA-GS completely outperforms the constructive greedy algorithm. Moreover, the packing density of ASA-GS on the top few dense bins is much higher than that of the state-of-the-art algorithm for the single circle packing problem, inferring the high quality of the packing solutions for CBPP-CI.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-06T16:57:57Z</published>
+    <arxiv:comment>14 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Yong Yuan</name>
+    </author>
+    <author>
+      <name>Kevin Tole</name>
+    </author>
+    <author>
+      <name>Fei Ni</name>
+    </author>
+    <author>
+      <name>Kun He</name>
+    </author>
+    <author>
+      <name>Zhengda Xiong</name>
+    </author>
+    <author>
+      <name>Jinfa Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.04871v1</id>
+    <title>The Factory Must Grow: Automation in Factorio</title>
+    <updated>2021-02-09T15:14:27Z</updated>
+    <link href="https://arxiv.org/abs/2102.04871v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.04871v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Efficient optimization of resources is paramount to success in many problems faced today. In the field of operational research the efficient scheduling of employees; packing of vans; routing of vehicles; logistics of airlines and transport of materials can be the difference between emission reduction or excess, profits or losses and feasibility or unworkable solutions. The video game Factorio, by Wube Software, has a myriad of problems which are analogous to such real-world problems, and is a useful simulator for developing solutions for these problems. In this paper we define the logistic transport belt problem and define mathematical integer programming model of it. We developed an interface to allow optimizers in any programming language to interact with Factorio, and we provide an initial benchmark of logistic transport belt problems. We present results for Simulated Annealing, quick Genetic Programming and Evolutionary Reinforcement Learning, three different meta-heuristic techniques to optimize this novel problem.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-09T15:14:27Z</published>
+    <arxiv:comment>Submitted to GECCO 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Kenneth N. Reid</name>
+    </author>
+    <author>
+      <name>Iliya Miralavy</name>
+    </author>
+    <author>
+      <name>Stephen Kelly</name>
+    </author>
+    <author>
+      <name>Wolfgang Banzhaf</name>
+    </author>
+    <author>
+      <name>Cedric Gondro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.12449v1</id>
+    <title>Evolutionary Bin Packing for Memory-Efficient Dataflow Inference Acceleration on FPGA</title>
+    <updated>2020-03-24T09:55:08Z</updated>
+    <link href="https://arxiv.org/abs/2003.12449v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.12449v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Convolutional neural network (CNN) dataflow inference accelerators implemented in Field Programmable Gate Arrays (FPGAs) have demonstrated increased energy efficiency and lower latency compared to CNN execution on CPUs or GPUs. However, the complex shapes of CNN parameter memories do not typically map well to FPGA on-chip memories (OCM), which results in poor OCM utilization and ultimately limits the size and types of CNNs which can be effectively accelerated on FPGAs. In this work, we present a design methodology that improves the mapping efficiency of CNN parameters to FPGA OCM. We frame the mapping as a bin packing problem and determine that traditional bin packing algorithms are not well suited to solve the problem within FPGA- and CNN-specific constraints. We hybridize genetic algorithms and simulated annealing with traditional bin packing heuristics to create flexible mappers capable of grouping parameter memories such that each group optimally fits FPGA on-chip memories. We evaluate these algorithms on a variety of FPGA inference accelerators. Our hybrid mappers converge to optimal solutions in a matter of seconds for all CNN use-cases, achieve an increase of up to 65% in OCM utilization efficiency for deep CNNs, and are up to 200$\times$ faster than current state-of-the-art simulated annealing approaches.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-24T09:55:08Z</published>
+    <arxiv:comment>To appear in GECCO 2020 Proceedings</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Mairin Kroes</name>
+    </author>
+    <author>
+      <name>Lucian Petrica</name>
+    </author>
+    <author>
+      <name>Sorin Cotofana</name>
+    </author>
+    <author>
+      <name>Michaela Blott</name>
+    </author>
+    <arxiv:doi>10.1145/3377930.3389808</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3377930.3389808" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2001.07709v1</id>
+    <title>Adaptive Large Neighborhood Search for Circle Bin Packing Problem</title>
+    <updated>2020-01-20T10:14:15Z</updated>
+    <link href="https://arxiv.org/abs/2001.07709v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2001.07709v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We address a new variant of packing problem called the circle bin packing problem (CBPP), which is to find a dense packing of circle items to multiple square bins so as to minimize the number of used bins. To this end, we propose an adaptive large neighborhood search (ALNS) algorithm, which uses our Greedy Algorithm with Corner Occupying Action (GACOA) to construct an initial layout. The greedy solution is usually in a local optimum trap, and ALNS enables multiple neighborhood search that depends on the stochastic annealing schedule to avoid getting stuck in local minimum traps. Specifically, ALNS perturbs the current layout to jump out of a local optimum by iteratively reassigns some circles and accepts the new layout with some probability during the search. The acceptance probability is adjusted adaptively using simulated annealing that fine-tunes the search direction in order to reach the global optimum. We benchmark computational results against GACOA in heterogeneous instances. ALNS always outperforms GACOA in improving the objective function, and in several cases, there is a significant reduction on the number of bins used in the packing.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-01-20T10:14:15Z</published>
+    <arxiv:comment>13 pages, 6 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Kun He</name>
+    </author>
+    <author>
+      <name>Kevin Tole</name>
+    </author>
+    <author>
+      <name>Fei Ni</name>
+    </author>
+    <author>
+      <name>Yong Yuan</name>
+    </author>
+    <author>
+      <name>Linyun Liao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.01193v1</id>
+    <title>Rectangle Blanket Problem: Binary integer linear programming formulation and solution algorithms</title>
+    <updated>2019-10-02T19:59:21Z</updated>
+    <link href="https://arxiv.org/abs/1910.01193v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.01193v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A rectangle blanket is a set of non-overlapping axis-aligned rectangles, used to approximately represent the two dimensional image of a shape approximately. The use of a rectangle blanket is a widely considered strategy for speeding-up the computations in many computer vision applications. Since neither the rectangles nor the image have to be fully covered by the other, the blanket becomes more precise as the non-overlapping area of the image and the blanket decreases. In this work, we focus on the rectangle blanket problem, which involves the determination of an optimum blanket minimizing the non-overlapping area with a given image subject to an upper bound on the total number of rectangles the blanket can include. This problem has similarities with rectangle covering, rectangle partitioning and cutting / packing problems. The image replaces an irregular master object by an approximating set of smaller axis-aligned rectangles. The union of these rectangles, namely, the rectangle blanket, is neither restricted to remain entirely within the master object, nor required to cover the master object completely. We first develop a binary integer linear programming formulation of the problem. Then, we introduce four methods for its solution. The first one is a branch-and-price algorithm that computes an exact optimal solution. The second one is a new constrained simulated annealing heuristic. The last two are heuristics adopting ideas available in the literature for other computer vision related problems. Finally, we realize extensive computational tests and report results on the performances of these algorithms.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-02T19:59:21Z</published>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Barış Evrim Demiröz</name>
+    </author>
+    <author>
+      <name>Kuban Altınel</name>
+    </author>
+    <author>
+      <name>Lale Akarun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1906.06639v1</id>
+    <title>Reinforcement Learning Driven Heuristic Optimization</title>
+    <updated>2019-06-16T03:28:24Z</updated>
+    <link href="https://arxiv.org/abs/1906.06639v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1906.06639v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Heuristic algorithms such as simulated annealing, Concorde, and METIS are effective and widely used approaches to find solutions to combinatorial optimization problems. However, they are limited by the high sample complexity required to reach a reasonable solution from a cold-start. In this paper, we introduce a novel framework to generate better initial solutions for heuristic algorithms using reinforcement learning (RL), named RLHO. We augment the ability of heuristic algorithms to greedily improve upon an existing initial solution generated by RL, and demonstrate novel results where RL is able to leverage the performance of heuristics as a learning signal to generate better initialization.
+  We apply this framework to Proximal Policy Optimization (PPO) and Simulated Annealing (SA). We conduct a series of experiments on the well-known NP-complete bin packing problem, and show that the RLHO method outperforms our baselines. We show that on the bin packing problem, RL can learn to help heuristics perform even better, allowing us to combine the best parts of both approaches.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-06-16T03:28:24Z</published>
+    <arxiv:comment>DRL4KDD'19</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Qingpeng Cai</name>
+    </author>
+    <author>
+      <name>Will Hang</name>
+    </author>
+    <author>
+      <name>Azalia Mirhoseini</name>
+    </author>
+    <author>
+      <name>George Tucker</name>
+    </author>
+    <author>
+      <name>Jingtao Wang</name>
+    </author>
+    <author>
+      <name>Wei Wei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1701.00263v2</id>
+    <title>Population Annealing Simulations of a Binary Hard Sphere Mixture</title>
+    <updated>2017-07-26T02:36:50Z</updated>
+    <link href="https://arxiv.org/abs/1701.00263v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1701.00263v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Population annealing is a sequential Monte Carlo scheme well-suited to simulating equilibrium states of systems with rough free energy landscapes. Here we use population annealing to study a binary mixture of hard spheres. Population annealing is a parallel version of simulated annealing with an extra resampling step that ensures that a population of replicas of the system represents the equilibrium ensemble at every packing fraction in an annealing schedule. The algorithm and its equilibration properties are described and results are presented for a glass-forming fluid composed of a 50/50 mixture of hard spheres with diameter ratio of 1.4:1. For this system, we obtain precise results for the equation of state in the glassy regime up to packing fractions $\varphi \approx 0.60$ and study deviations from the BMCSL equation of state. For higher packing fractions, the algorithm falls out of equilibrium and a free volume fit predicts jamming at packing fraction $\varphi \approx 0.667$. We conclude that population annealing is an effective tool for studying equilibrium glassy fluids and the jamming transition.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-01-01T17:09:10Z</published>
+    <arxiv:comment>13 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 95, 063315 (2017)</arxiv:journal_ref>
+    <author>
+      <name>Jared Callaham</name>
+    </author>
+    <author>
+      <name>Jon Machta</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.95.063315</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.95.063315" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1606.00609v1</id>
+    <title>Multiscale approach to equilibrating model polymer melts</title>
+    <updated>2016-06-02T10:26:13Z</updated>
+    <link href="https://arxiv.org/abs/1606.00609v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1606.00609v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present an effective and simple multiscale method for equilibrating Kremer Grest model polymer melts of varying stiffness. In our approach, we progressively equilibrate the melt structure above the tube scale, inside the tube and finally at the monomeric scale. We make use of models designed to be computationally effective at each scale. Density fluctuations in the melt structure above the tube scale are minimized through a Monte Carlo simulated annealing of a lattice polymer model. Subsequently the melt structure below the tube scale is equilibrated via the Rouse dynamics of a force-capped Kremer-Grest model that allows chains to partially interpenetrate. Finally the Kremer-Grest force field is introduced to freeze the topological state and enforce correct monomer packing. We generate $15$ melts of $500$ chains of $10.000$ beads for varying chain stiffness as well as a number of melts with $1.000$ chains of $15.000$ monomers. To validate the equilibration process we study the time evolution of bulk, collective and single-chain observables at the monomeric, mesoscopic and macroscopic length scales. Extension of the present method to longer, branched or polydisperse chains and/or larger system sizes is straight forward.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-06-02T10:26:13Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Phys. Rev. E 94, 032502 (2016)</arxiv:journal_ref>
+    <author>
+      <name>Carsten Svaneborg</name>
+    </author>
+    <author>
+      <name>Hossein Ali Karimi-Varzaneh</name>
+    </author>
+    <author>
+      <name>Nils Hojdis</name>
+    </author>
+    <author>
+      <name>Frank Fleck</name>
+    </author>
+    <author>
+      <name>Ralf Everaers</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.94.032502</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.94.032502" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1602.07610v2</id>
+    <title>Close packing of rods on spherical surfaces</title>
+    <updated>2016-03-07T14:34:31Z</updated>
+    <link href="https://arxiv.org/abs/1602.07610v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1602.07610v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the optimal packing of short, hard spherocylinders confined to lie tangential to a spherical surface, using simulated annealing and molecular dynamics simulations. For clusters of up to twelve particles, we map out the changes in the geometry of the closest-packed configuration as a function of the aspect ratio $L/D$, where $L$ is the cylinder length and $D$ the diameter of the rods. We find a rich variety of cluster structures. For larger clusters, we find that the best-packed configurations up to around 100 particles are highly dependent on the exact number of particles and aspect ratio. For even larger clusters, we find largely disordered clusters for very short rods ($L/D = 0.25$), while slightly longer rods ($L/D = 0.5$ or $1$) prefer a global baseball-like geometry of smectic-like domains, similar to the behavior of large-scale nematic shells. Our results provide predictions for experimentally realizable systems of colloidal rods trapped at the interface of emulsion droplets.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-02-24T17:33:50Z</published>
+    <arxiv:comment>(corrected Table 2)</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Frank Smallenburg</name>
+    </author>
+    <author>
+      <name>Hartmut Löwen</name>
+    </author>
+    <arxiv:doi>10.1063/1.4947256</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.4947256" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1207.5672v1</id>
+    <title>Bin Packing/Covering with Delivery: Some variations, theoretical results and efficient offline algorithms</title>
+    <updated>2012-07-24T12:11:36Z</updated>
+    <link href="https://arxiv.org/abs/1207.5672v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1207.5672v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the recent paper \cite{BDT10} we introduced a new problem that we call Bin Packing/Covering with Delivery, or BP/CD for short. Mainly we mean under this expression that we look for not only a good, but a "good and fast" packing or covering. In that paper we mainly dealt with only one possible online BP/CD model, and proposed a new method that we call the Evolution of Algorithms. In case of such methods a neighborhood structure is defined among algorithms, and using a metaheuristic (for example simulated annealing) in some sense the best algorithm is chosen to solve the problem. Now we turn to investigate the offline case. We define several ways to treat such a BP/CD problem, although we investigate only one of them here. For the analysis, a novel view on "offline optimum" is introduced, which appears to be relevant concerning all problems where a final solution is ordering-dependent. We prove that if the item sizes are not allowed to be arbitrarily close to zero, then an optimal offline solution can be found in polynomial time. On the other hand, for unrestricted problem instances, no polynomial-time algorithm can achieve an approximation ratio better than 6/7 if $P\ne NP$.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-07-24T12:11:36Z</published>
+    <arxiv:comment>16 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Gyorgy Dosa</name>
+    </author>
+    <author>
+      <name>Zsolt Tuza</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1203.3373v2</id>
+    <title>Dense packings of spheres in cylinders I. Simulations</title>
+    <updated>2012-05-09T13:39:45Z</updated>
+    <link href="https://arxiv.org/abs/1203.3373v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1203.3373v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the optimal packing of hard spheres in an infinitely long cylinder, using simulated annealing, and compare our results with the analogous problem of packing disks on the unrolled surface of a cylinder. The densest structures are described and tabulated in detail up to D/d=2.873 (ratio of cylinder and sphere diameters). This extends previous computations into the range of structures which include internal spheres that are not in contact with the cylinder.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-03-15T14:42:48Z</published>
+    <arxiv:comment>18 pages, 14 figures, 1 table, to be submitted to PRE</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>A. Mughal</name>
+    </author>
+    <author>
+      <name>H. K. Chan</name>
+    </author>
+    <author>
+      <name>D. Weaire</name>
+    </author>
+    <author>
+      <name>S. Hutzler</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.85.051305</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.85.051305" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1110.5348v2</id>
+    <title>Packing Squares in a Torus</title>
+    <updated>2012-03-19T17:55:32Z</updated>
+    <link href="https://arxiv.org/abs/1110.5348v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1110.5348v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The densest packings of N unit squares in a torus are studied using analytical methods as well as simulated annealing. A rich array of dense packing solutions are found: density-one packings when N is the sum of two square integers; a family of "gapped bricklayer" Bravais lattice solutions with density N/(N+1); and some surprising non-Bravais lattice configurations, including lattices of holes as well as a configuration for N=23 in which not all squares share the same orientation. The entropy of some of these configurations and the frequency and orientation of density-one solutions as N goes to infinity are discussed.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-10-24T20:33:35Z</published>
+    <arxiv:comment>14 pages, 9 figures; v2 reflects minor changes in published version</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>JSTAT, P01018 (2012)</arxiv:journal_ref>
+    <author>
+      <name>Don Blair</name>
+    </author>
+    <author>
+      <name>Christian D. Santangelo</name>
+    </author>
+    <author>
+      <name>Jon Machta</name>
+    </author>
+    <arxiv:doi>10.1088/1742-5468/2012/01/P01018</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1742-5468/2012/01/P01018" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1007.1632v1</id>
+    <title>Submodular Maximization by Simulated Annealing</title>
+    <updated>2010-07-09T17:31:43Z</updated>
+    <link href="https://arxiv.org/abs/1007.1632v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1007.1632v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the problem of maximizing a nonnegative (possibly non-monotone) submodular set function with or without constraints. Feige et al. [FOCS'07] showed a 2/5-approximation for the unconstrained problem and also proved that no approximation better than 1/2 is possible in the value oracle model. Constant-factor approximation was also given for submodular maximization subject to a matroid independence constraint (a factor of 0.309 Vondrak [FOCS'09]) and for submodular maximization subject to a matroid base constraint, provided that the fractional base packing number is at least 2 (a 1/4-approximation, Vondrak [FOCS'09]).
+  In this paper, we propose a new algorithm for submodular maximization which is based on the idea of {\em simulated annealing}. We prove that this algorithm achieves improved approximation for two problems: a 0.41-approximation for unconstrained submodular maximization, and a 0.325-approximation for submodular maximization subject to a matroid independence constraint.
+  On the hardness side, we show that in the value oracle model it is impossible to achieve a 0.478-approximation for submodular maximization subject to a matroid independence constraint, or a 0.394-approximation subject to a matroid base constraint in matroids with two disjoint bases. Even for the special case of cardinality constraint, we prove it is impossible to achieve a 0.491-approximation. (Previously it was conceivable that a 1/2-approximation exists for these problems.) It is still an open question whether a 1/2-approximation is possible for unconstrained submodular maximization.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-07-09T17:31:43Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Shayan Oveis Gharan</name>
+    </author>
+    <author>
+      <name>Jan Vondrák</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0809.5005v1</id>
+    <title>Simulated annealing for weighted polygon packing</title>
+    <updated>2008-09-29T16:22:28Z</updated>
+    <link href="https://arxiv.org/abs/0809.5005v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0809.5005v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper we present a new algorithm for a layout optimization problem: this concerns the placement of weighted polygons inside a circular container, the two objectives being to minimize imbalance of mass and to minimize the radius of the container. This problem carries real practical significance in industrial applications (such as the design of satellites), as well as being of significant theoretical interest. Previous work has dealt with circular or rectangular objects, but here we deal with the more realistic case where objects may be represented as polygons and the polygons are allowed to rotate. We present a solution based on simulated annealing and first test it on instances with known optima. Our results show that the algorithm obtains container radii that are close to optimal. We also compare our method with existing algorithms for the (special) rectangular case. Experimental results show that our approach out-performs these methods in terms of solution quality.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-09-29T16:22:28Z</published>
+    <arxiv:comment>Submitted to Engineering Optimization. 13 pages, 7 figures, 5 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Yi-Chun Xu</name>
+    </author>
+    <author>
+      <name>Ren-Bin Xiao</name>
+    </author>
+    <author>
+      <name>Martyn Amos</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0801.0222v1</id>
+    <title>Divide and concur: A general approach to constraint satisfaction</title>
+    <updated>2007-12-31T17:30:40Z</updated>
+    <link href="https://arxiv.org/abs/0801.0222v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0801.0222v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Many difficult computational problems involve the simultaneous satisfaction of multiple constraints which are individually easy to satisfy. Such problems occur in diffractive imaging, protein folding, constrained optimization (e.g., spin glasses), and satisfiability testing. We present a simple geometric framework to express and solve such problems and apply it to two benchmarks. In the first application (3SAT, a boolean satisfaction problem), the resulting method exhibits similar performance scaling as a leading context-specific algorithm (walksat). In the second application (sphere packing), the method allowed us to find improved solutions to some old and well-studied optimization problems. Based upon its simplicity and observed efficiency, we argue that this framework provides a competitive alternative to stochastic methods such as simulated annealing.</summary>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-12-31T17:30:40Z</published>
+    <arxiv:comment>4 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.comp-ph"/>
+    <arxiv:journal_ref>Phys. Rev. E 78, 036706 (2008)</arxiv:journal_ref>
+    <author>
+      <name>Simon Gravel</name>
+    </author>
+    <author>
+      <name>Veit Elser</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.78.036706</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.78.036706" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/q-bio/0505014v4</id>
+    <title>Structure calculation strategies for helical membrane proteins; a comparison study</title>
+    <updated>2005-08-21T15:06:46Z</updated>
+    <link href="https://arxiv.org/abs/q-bio/0505014v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/q-bio/0505014v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Structure predictions of helical membrane proteins have been designed to take advantage of the structural autonomy of secondary structure elements, as postulated by the two-stage model of Engelman and Popot. In this context, we investigate structure calculation strategies for two membrane proteins with different functions, sizes, aminoacid compositions, and topologies: the glycophorin A homodimer (a paradigm for close inter-helical packing in membrane proteins) and aquaporin (a channel protein). Our structure calculations are based on two alternative folding schemes: a one-step simulated annealing from an extended chain conformation, and a two-step procedure inspired by the grid-search methods traditionally used in membrane protein predictions. In this framework, we investigate rationales for the utilization of sparse NMR data such as distance-based restraints and residual dipolar couplings in structure calculations of helical membrane proteins.</summary>
+    <category term="q-bio.BM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-05-06T18:25:11Z</published>
+    <arxiv:primary_category term="q-bio.BM"/>
+    <author>
+      <name>Ileana Stoica</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0504628v1</id>
+    <title>Structure-dependent ferroelectricity of niobium clusters (NbN, N=2-52)</title>
+    <updated>2005-04-25T10:52:46Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0504628v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0504628v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The ground-state structures and ferroelectric properties of NbN (N=2-52) have been investigated by a combination of density-functional theory (DFT) in the generalized gradient approximation (GGA) and an unbiased global search with the guided simulated annealing. It is found that the electric dipole moment (EDM) exists in the most of NbN and varies considerably with their sizes. And the larger NbN (N&gt;=25) prefer the amorphous packing. Most importantly, our numerical EDM values of NbN (N&gt;=38) exhibit an extraordinary even-odd oscillation, which is well consistent with the experimental observation, showing a close relationship with the geometrical structures of NbN. Finally, an inverse coordination number (ICN) function is proposed to account for the structural relation of the EDM values, especially their even-odd oscillations starting from Nb38.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.other" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-04-25T10:52:46Z</published>
+    <arxiv:comment>11 pages and 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <author>
+      <name>Wei Fa</name>
+    </author>
+    <author>
+      <name>Chuanfu Luo</name>
+    </author>
+    <author>
+      <name>Jinming Dong</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevB.71.245415</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevB.71.245415" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0301268v1</id>
+    <title>Improving Search Algorithms by Using Intelligent Coordinates</title>
+    <updated>2003-01-23T20:22:02Z</updated>
+    <link href="https://arxiv.org/abs/math/0301268v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0301268v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We consider the problem of designing a set of computational agents so that as they all pursue their self-interests a global function G of the collective system is optimized. Three factors govern the quality of such design. The first relates to conventional exploration-exploitation search algorithms for finding the maxima of such a global function, e.g., simulated annealing. Game-theoretic algorithms instead are related to the second of those factors, and the third is related to techniques from the field of machine learning. Here we demonstrate how to exploit all three factors by modifying the search algorithm's exploration stage so that rather than by random sampling, each coordinate of the underlying search space is controlled by an associated machine-learning-based ``player'' engaged in a non-cooperative game. Experiments demonstrate that this modification improves SA by up to an order of magnitude for bin-packing and for a model of an economic process run over an underlying network. These experiments also reveal novel small worlds phenomena.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="nlin.AO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2003-01-23T20:22:02Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>David Wolpert</name>
+    </author>
+    <author>
+      <name>Kagan Tumer</name>
+    </author>
+    <author>
+      <name>Esfandiar Bandari</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.69.017701</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.69.017701" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/chem-ph/9502007v1</id>
+    <title>A Variational Approach for Minimizing Lennard-Jones Energies</title>
+    <updated>1995-02-17T12:54:23Z</updated>
+    <link href="https://arxiv.org/abs/chem-ph/9502007v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/chem-ph/9502007v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A variational method for computing conformational properties of molecules with Lennard-Jones potentials for the monomer-monomer interactions is presented. The approach is tailored to deal with angular degrees of freedom, {\it rotors}, and consists in the iterative solution of a set of deterministic equations with annealing in temperature. The singular short-distance behaviour of the Lennard-Jones potential is adiabatically switched on in order to obtain stable convergence. As testbeds for the approach two distinct ensembles of molecules are used, characterized by a roughly dense-packed ore a more elongated ground state. For the latter, problems are generated from natural frequencies of occurrence of amino acids and phenomenologically determined potential parameters; they seem to represent less disorder than was previously assumed in synthetic protein studies. For the dense-packed problems in particular, the variational algorithm clearly outperforms a gradient descent method in terms of minimal energies. Although it cannot compete with a careful simulating annealing algorithm, the variational approach requires only a tiny fraction of the computer time. Issues and results when applying the method to polyelectrolytes at a finite temperature are also briefly discussed.</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1995-02-17T12:54:23Z</published>
+    <arxiv:comment>14 pages, uuencoded compressed postscript file</arxiv:comment>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <author>
+      <name>Carsten Peterson</name>
+    </author>
+    <author>
+      <name>Ola Sommelius</name>
+    </author>
+    <author>
+      <name>Bo Söderberg</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.53.1725</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.53.1725" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/chem-ph/9411002v1</id>
+    <title>Packing Transitions in Nanosized Li Clusters</title>
+    <updated>1994-11-04T15:42:14Z</updated>
+    <link href="https://arxiv.org/abs/chem-ph/9411002v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/chem-ph/9411002v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Packing transitions in the lowest energy structures of Li clusters as a function of size have been identified via simulated annealing. For N&gt;21, the large $p$ character of Li leads to unexpected ionic structures. At N~25, a packing pattern based on interpenetrating 13-atom icosahedra and similar to that of Na and K appears. This pattern persists until at N=55, where another transition to a structure based on a Mackay icosahedron occurs. For clusters of size 55 and 147, the optimized FCC structure representative of the bulk is still slightly higher in energy than the optimal MIC. (RK-94-03)</summary>
+    <category term="physics.chem-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1994-11-04T15:42:14Z</published>
+    <arxiv:comment>4 pages. Postscript figures not included. RevTeX. A complete postscript file including figures is available at ftp://ftp.phy.uab.edu:/pub/publications/kawai/RK-94-03.ps</arxiv:comment>
+    <arxiv:primary_category term="physics.chem-ph"/>
+    <author>
+      <name>Ming Wen Sung</name>
+      <arxiv:affiliation>University of California, San Diego</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ryoichi Kawai</name>
+      <arxiv:affiliation>University of Alabama at Birmingham</arxiv:affiliation>
+    </author>
+    <author>
+      <name>John H. Weare</name>
+      <arxiv:affiliation>University of California, San Diego</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.73.3552</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.73.3552" title="doi"/>
+  </entry>
+</feed>

@@ -58,7 +58,7 @@ uv run --frozen python -m devtools.render_research_tables --check
 ```
 
 Five reader views are generated this way: [`STATUS.md`](STATUS.md), the open frontier
-(265 rows), the solved cases (59), and the search and proof strategy catalogues (20 and
+(265 rows), the solved cases (59), and the search and proof strategy catalogues (28 and
 30). Editing a fact means editing the data here and re-rendering; editing a generated
 table by hand will be caught.
 
@@ -205,7 +205,7 @@ This is an audit of those named sources, not every publication.
 
 [`search-strategies.yaml`](search-strategies.yaml) and
 [`proof-strategies.yaml`](proof-strategies.yaml) carry two working inventories of the
-field and adjacent methods: 20 search strategies and 30 proof strategies or candidates.
+field and adjacent methods: 28 search strategies and 30 proof strategies or candidates.
 They are broad research maps, not claims of an exhaustive history; several entries are
 explicitly unused on this problem.
 Each entry has an `id`, `name`, `mechanism`, `family`, a status (`outcome` for search,

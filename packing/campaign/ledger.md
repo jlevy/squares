@@ -761,7 +761,7 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 116 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 126 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -905,6 +905,17 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | H-160 | blocked | proof | On the frozen BC293 377-atom measure and every one of the 182 eligible |  | 1 |  |  |
 | H-161 | refuted | proof | In the frozen BC303 377-atom measure, the closed literal parent Q0=[0, |  | 1 |  | 0s wall |
 | H-162 | blocked | proof | On the frozen BC293 377-atom measure and every one of the 182 eligible |  | 1 |  |  |
+| H-201 | refuted | search | With a simultaneous perturbation proposal added to the ordinary move m | n: 5 10 11* 17 19 26 27 29 37 50 52 | 2 |  | 155m agent + 105.7m wall |
+| H-202 | refuted | search | Adding an aggregate inward wall-pressure term to the annealing energy, | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 25m agent + 39.1m wall |
+| H-203 | confirmed | search | At an equal budget of refined local optima, basin hopping -- perturbin | n: 5 10 11* 17 19 | 1 |  | 40m agent + 81.2m wall |
+| H-204 | refuted | search | Raising only the anneal length from 400,000 to 4,000,000 steps per res | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 45m agent + 71.3m wall |
+| H-205 | unresolved | search | Divide and concur searched with relaxed-reflect-reflect, run cold over | n: 5 10 11* 17 | 1 |  | 95m agent + 15.6m wall |
+| H-207 | unresolved | search | At equal total cost, running k independent blind trials and taking the | n: 5* 11 17 29 | 1 |  | 1 round unrecorded |
+| H-208 | blocked | search | Where a blind run ends is decided by where the new square is dropped a | n: 5 10 11 17 26 29 | 0 |  |  |
+| H-209 | blocked | search | No combination of the workbench's exposed parameters -- the shake dial | n: 5 10 11 17 26 29 | 0 |  |  |
+| H-210 | open | search | No blind run of the workbench's physics ends on a valid packing. At ev | n: 5 10 11 17 26 29 | 0 |  |  |
+| H-211 | open | search | The workbench's shake dial has a maximum for search quality between le | n: 5 10 11 17 26 29 | 0 |  |  |
+| H-212 | open question | search | What does the workbench's blind physics do when its runs are measured  |  | 3 |  | 3 rounds unrecorded |
 
 ## Needs review — held for a human, not decided
 
@@ -914,7 +925,7 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 
 ## Rounds
 
-### rejected (29)
+### rejected (32)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -947,6 +958,9 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | exp-154 | series-000 | 11 | Claude Opus 5 measurement lane, coordinated by Claude Fable | H-157 | Six refined subclasses still read exactly 10, so the case split as posed is not closed by refinement and H-157 is refuted on its own registered direction. |
 | exp-157 | series-000 | 11 | Codex Sol implementation and record; source-distinct mathematical review at the original reader head by Astra Max | H-159 | The fixed parent has S(X)=3/800000 < epsilon=524199/2000000, so the named universal local inequality is false; no continuous-domain or global claim follows. |
 | exp-159 | series-000 | 11 | Codex source-distinct reviewer, then exact target operator | H-161 | N=4000015 is below both first-rejecting integers, so the literal four-corner and one-parent resource tests survive with 1048233 units of slack each; neither extension is established. |
+| exp-202 | series-000 | 11 | claude-opus-5 | H-201 | The criterion was measured and missed: three cells of eleven meet both clauses and four meet the threshold, against the six declared -- but the four where it works it works by 0.017 to 0.29, and the six where it does nothing it does exactly nothing, so the move is not weak, it is inapplicable above n = 26 at this budget. |
+| exp-203 | series-000 | 11 | claude-opus-5 | H-202 | The criterion was measured and missed in the wrong direction: one cell of eleven improves and three regress, including both proved controls, so the aggregate compaction surrogate is not a weak version of the inflation formulation but a different and worse objective, and it should not be carried. |
+| exp-205 | series-000 | 11 | claude-opus-5 | H-204 | The criterion was measured and missed -- three cells of eleven against the six declared -- but a parameter that costs nothing to carry recovers three quarters of what the new move family recovers, which contradicts the design input hard enough that the schedule axis has to be swept properly before any further move is built. |
 
 ### abandoned (2)
 
@@ -955,7 +969,7 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (25)
+### unresolved (30)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -984,6 +998,11 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Process exit0 preserved a valid partial receipt, but it did not mean scientific completion: only unrestricted converged. Point exhausted60 rounds without convergence, triangle and endpoint were not run, and the primary difference was not measured. The partial point objective is not a covering value or negative result for H139. |
 | exp-148 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-146 | The seed-stage guard expired before any complete seed direction or candidate check. Two valid retained escapes give reusable negative evidence for49152 labels, but neither a new cover nor an all-label refutation was completed. |
 | exp-156 | series-000 | 11 | Codex root coordinator; prospective strategy independently audited by GPT-6 Astra Max | H-158 | The sole run found that the old B-only model already excludes the first selected owner, making parent-domain gain impossible there by set inclusion. The later owners were not tested, so this complete fixed-protocol result neither accepts nor rejects H-158. |
+| exp-206 | series-000 | 11 | claude-opus-5 | H-205 | The guard clause is met decisively and is the point of the round: 16 of 16 runs end on packings that an independent oracle confirms, against 0 of 48 for the penalty physics, which settles the precondition the 2026-09-08 calibration failed. The accuracy clause is missed by three cells of four. The failure is localised rather than diffuse -- every failed run failed at the first tightening and never moved -- so the repair is in the container schedule and the restart policy, not in the projections. |
+| exp-207 | series-000 | 5 | claude-opus-5, unattended | H-207 | At n = 5 the best of the first 1,000 repaired runs is 0.28% above the record while a single run is worse than the grid, but these are prefix values from one seed stream with no spread, and no schedule was compared at equal cost, so H-207's criterion was not tested. |
+| exp-208 | series-000 | 11 | claude-opus-5, unattended | H-212 | At levels 0, 2 and 4 no repaired run in 3,000 beat the grid at n = 5, 10 or 11, and at levels 6, 8 and 10 the best run did in eight of nine cells, the ninth within 5,000 seeds, but each value is one prefix from one seed stream and the page's own level 3 was not measured on repaired runs. |
+| exp-209 | series-000 | 11 | claude-opus-5, unattended | H-212 | The compaction program, its inputs and its outputs were not kept, so the observation cannot be reproduced and supports no conclusion about whether repaired arrangements are locally compact. |
+| exp-210 | series-000 | 11 | claude-opus-5, unattended | H-212 | Every blind run observed ended overlapping, but the snapped control was measured once with a probe variant that was not kept, and neither the trials nor their final poses are in the repository, so the observation cannot be re-checked from it. |
 
 ### blocked (11)
 
@@ -1001,7 +1020,7 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | exp-158 | series-000 | 11 | Codex BC303 T2 charge-sweep agent | H-160 | The September 14 strategy reset paused this route before the target charge ran; no target receipt or scientific verdict exists. |
 | exp-160 | series-000 | 11 | Codex BC303 H-162 retained-receipt analyst | H-162 | The September 14 strategy reset paused this route with no exp-158 target receipt; no H-162 comparison or scientific verdict exists. |
 
-### accepted (38)
+### accepted (39)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1043,8 +1062,9 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | exp-146 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-144 | All sixteen classes completed with exact nesting; twelve wall-aware footprints properly contain their old endpoint footprints. Four are equal and none is impossible. This accepts the frozen geometric mechanism, without an extra covered tuple or a global bound change. |
 | exp-152 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-150 | A nonempty two-dimensional four-vertex region survives the two necessary core constraints. This accepts only the two-witness screen, not any all-direction cover or tuple exclusion. |
 | exp-155 | series-000 | 11 | Claude Fable measurement lane; retrospectively registered from the retained exact lane and T-026 proof packet without a new run | H-156 | T-026 proves the first disjunct of H-156 at V4. Its two finite decision methods supplied C4 at registration; the later mapped review of the complete self-contained claim supplies its current C5. Its exact conclusion is s(11) >= 955000*sqrt(518400042893309449)/179696714646249. |
+| exp-204 | series-000 | 11 | claude-opus-5 | H-203 | The proposal structure is worth its complexity at this budget: H-203 declared three of five cells improving by 0.01 and four did, two of them with disjoint seed ranges, but the other two overlap and no run came within 1e-2 of any record, so this accepts a proposer and settles nothing about record-finding. |
 
-### baseline (11)
+### baseline (12)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1059,6 +1079,7 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
+| exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1080,10 +1101,16 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | exp-148 | H-146 | 1.2m wall | timebox | Exp149 tests the separately registered explicit tuple(0,0,0, |  |
 | exp-158 | H-160 |  | dependency |  |  |
 | exp-160 | H-162 |  | dependency |  |  |
+| exp-207 | H-207 | 1 round unrecorded | dependency |  |  |
+| exp-208 | H-212 | 1 round unrecorded | dependency |  |  |
+| exp-209 | H-212 | 1 round unrecorded | dependency |  |  |
+| exp-210 | H-212 | 1 round unrecorded | dependency |  |  |
 
 ## Effort
 
-116 rounds, 2152.1 agent-minutes, 1485.2 wall-minutes.
+126 rounds, 2512.1 agent-minutes, 1798.3 wall-minutes.
+
+These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 
 ## Exploration reports not yet codified
 
@@ -1094,6 +1121,7 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-015 — The map and the three programs: where significant progress is likeliest next
+- X-025 — Hunting by Hand, and the Threads the Move-Set Round Opened
 - X-027 — Fractional Obstructions and Structural Proof Mechanisms
 - X-028 — Draft N11 Strategy Portfolio After the Daytime Explorations
 - X-029 — BC303 T2 Exact Geometry and Open Threshold Tests

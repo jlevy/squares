@@ -3,7 +3,7 @@
   <title id="figure-title">How the T-018 weighted-atom lower-bound certificate works</title>
   <desc id="figure-description">The left panel plots all 1,121 rationally weighted atoms in the side-381/100 container. A grey pin marks every atom site; coloured disk area is proportional to exact weight. Orange identifies the 84 atoms in an exact side-9977/10000 Condition 5 witness centred at 27/50 in both coordinates, whose mass is 4001/4000. The right panel is an explicitly enlarged schematic of the concentric shrink-and-snap step, followed by the exact containment inequality.</desc>
   <metadata>
-    <sqpack:profile version="7">
+    <sqpack:profile version="8">
       <sqpack:coordinates>left panel mathematical-y-up; right panel explanatory schematic</sqpack:coordinates>
       <sqpack:value name="atom-count">1121</sqpack:value>
       <sqpack:value name="certificate-id">C-n011-fractional-381-100</sqpack:value>

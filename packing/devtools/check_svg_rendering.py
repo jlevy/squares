@@ -629,7 +629,7 @@ def run_geometry_controls() -> dict[str, bool]:
 def run_animation_controls() -> dict[str, bool]:
     from devtools.packing_render_adapters import trajectory_from_n5_equal_side_face
     from sqpack.render import RenderSpec, ViewLevel, render_packing_svg
-    from sqpack.render.numbers import scalar_from_float
+    from sqpack.render.numbers import scalar_from_float, scalar_from_fraction
 
     trajectory = trajectory_from_n5_equal_side_face()
     text = render_packing_svg(
@@ -665,13 +665,37 @@ def run_animation_controls() -> dict[str, bool]:
             *trajectory.frames[1:],
         ),
     )
+    # An exact side, so the evidence rule -- certified frames need rational or exact
+    # sources -- cannot be why the container control below passes or fails.
     changing_container = replace(
         trajectory,
         frames=(
-            replace(trajectory.frames[0], container_side=scalar_from_float(3.0)),
+            replace(trajectory.frames[0], container_side=scalar_from_fraction(Fraction(3))),
             *trajectory.frames[1:],
         ),
     )
+    try:
+        changing_text = render_packing_svg(
+            trajectory.frames[-1],
+            trajectory=changing_container,
+            spec=RenderSpec(view=ViewLevel.TRAJECTORY),
+        )
+    except TypeError, ValueError:
+        changing_text = ""
+    changing_outlines = re.findall(
+        r'<rect\b[^>]*data-feature="container-outline"[^>]*>', changing_text
+    )
+    rotating_text = render_packing_svg(
+        trajectory.frames[-1],
+        trajectory=rotating,
+        spec=RenderSpec(view=ViewLevel.TRAJECTORY),
+    )
+    rendered_turns = {
+        float(value) for value in re.findall(r"rotate\(([-0-9.]+)deg\)", rotating_text)
+    }
+    # The square above starts 0.1 rad off its final pose, and the keyframes carry it back,
+    # so the turn the renderer must emit is that angle negated, in degrees.
+    expected_turn = -math.degrees(0.1)
     return {
         "motion_is_reduced_motion_scoped": "prefers-reduced-motion: no-preference" in text,
         "no_smil": "<animate" not in text,
@@ -691,18 +715,24 @@ def run_animation_controls() -> dict[str, bool]:
             trajectory=trajectory,
             spec=RenderSpec(view=ViewLevel.TRAJECTORY, duration_seconds=Decimal(0)),
         ),
-        "unsupported_rotation_is_rejected": _rejects(
-            render_packing_svg,
-            trajectory.frames[-1],
-            trajectory=rotating,
-            spec=RenderSpec(view=ViewLevel.TRAJECTORY),
+        # Trajectory rendering used to refuse rotation outright, and this control asserted
+        # the refusal. It now carries a square through the shortest quarter-turn-reduced
+        # angle, so the thing worth pinning is that the turn arrives at its true size: a
+        # rejection here, or a turn of the wrong size, both mean the feature is broken.
+        "rotation_renders_at_its_true_size": any(
+            abs(turn - expected_turn) < 1e-9 for turn in rendered_turns
         ),
-        "unsupported_container_change_is_rejected": _rejects(
-            render_packing_svg,
-            trajectory.frames[-1],
-            trajectory=changing_container,
-            spec=RenderSpec(view=ViewLevel.TRAJECTORY),
-        ),
+        # A changing side is accepted, because an ascent resizes the container at every
+        # step, but the outline does not animate: it is drawn once, at the final frame's
+        # side. Byte equality with the render whose side never changes is what pins "at
+        # the final side": the outline rect alone cannot, since the panel scale follows
+        # whichever side is drawn. A refusal, a second outline, an outline at another
+        # side, or container motion all fail this.
+        "container_change_renders_one_outline_at_the_final_side": bool(changing_text)
+        and len(changing_outlines) == 1
+        and changing_text == text
+        and "motion-container" not in changing_text
+        and "sqpack-container" not in changing_text,
     }
 
 

@@ -21,14 +21,18 @@ Pull requests run the bounded Linux fast surface; integration events run the ord
 full checkpoint on Linux and four focused portability checks on macOS. The Rust search
 engine uses the stable Cargo toolchain.
 
-From this directory:
+From the repository root, then from `packing/`:
 
 ```shell
+npm ci --ignore-scripts
+cd packing
 uv sync --frozen --all-extras --group dev
 uv run --frozen --all-extras --group dev python --version
 uv run --frozen --all-extras --group dev packing-validate --fast
 ```
 
+`npm ci` installs the pinned Node tools the browser-floor step runs; without them that
+step fails. `make hooks-install` runs the same install and then the Git hooks.
 The version command must report Python 3.14.7. Do not run a bare `pip install`, commit a
 second requirements file, or rely on packages from a global interpreter.
 Use uv 0.12 or newer to bootstrap the pinned interpreter; uv 0.8.17 cannot install
@@ -134,7 +138,6 @@ process execution.
 <a id="validation-tiers"></a>
 
 A **tier** selects validation steps; a **lane** selects tests within a behavioural step.
-The ordinary full checkpoint has 74 steps.
 The
 [validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
 owns the current W5 work on cost, naming, and checkpoint placement.
@@ -159,17 +162,18 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 32 of 74 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
+| `--records` | contributor, before touching a registry; also every pull request | 32 of 76 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 46 of 76 | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; a broad diff selects the whole suite and needs `--jobs 1`, see below |
-| `--fast` | contributor, at a block boundary; the union of the five tiers below | 63 of 74 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 74 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 74 | 150 s | new on 2026-09-15; only the ceiling applies until CI clocks it |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 74 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | contributor, to run the quick lane whole; CI divides it into the two shards below | 1 of 74 | 275 s | 183.4 s on CI at 4,635 tests, the last whole-lane reading |
+| `--fast` | contributor, at a block boundary; the union of the tiers below | 65 of 76 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 76 | 195 s | composition changed after two PR 160 runs exceeded the ceiling, which did not end the overruns (`think-lrs0`); only the ceiling applies |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 2 of 76 | 150 s | new partition; the first hosted run establishes its baseline |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 76 | 150 s | new on 2026-09-15; only the ceiling applies until CI clocks it |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 76 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--suite` | contributor, to run the quick lane whole; CI divides it into the two shards below | 1 of 76 | 275 s | 183.4 s on CI at 4,635 tests, the last whole-lane reading |
 | `--suite --shard 1/2`, `--suite --shard 2/2` | **CI, on every pull request**, in the `suite-1-of-2` and `suite-2-of-2` jobs, concurrently | the lane’s test files, divided | 200 s each | new on 2026-09-15; only the ceilings apply until CI clocks them |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 74 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 74 of 74 | 3600 s | split across four jobs; not clocked whole |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 76 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 76 of 76 | 3600 s | split across the jobs above; not clocked whole |
 
 `--geometry`’s cost is a geometric mean of four readings at the reference shape.
 `--suite`’s is a single reading, because the lane it measures is new: merging PR 137
@@ -187,8 +191,8 @@ whose 1.79x spread was runner variation rather than a code speedup — stays in 
 register as history of the previous selection.
 Refresh the means as comparable measurements accumulate; a recorded band would represent
 that variation better than a point.
-The other two, `--sweeps` and `--checks`, have no recorded cost, and the corpus widening
-of 2026-09-07 is why both times.
+`--sweeps`, `--checks`, and `--frontend` have no recorded cost.
+The corpus widening of 2026-09-07 invalidated the first two baselines.
 Two of the sweeps tier’s four steps were split that day, so the tier those readings
 measured no longer exists.
 The `checks` record was cleared the same day and by its own rule firing rather than by
@@ -196,20 +200,31 @@ hand: at n = 1..324 the tier ran 189.09 s against a recorded 99.39 s — 1.90x, 
 fails — and the gate’s verdict named `exact verification` as 133.4 s of it.
 The grid replay inside that step was the corpus-scaling member and is now deferred; the
 [readings are retained](packing/benchmarks/gate-cost-at-324/README.md).
-Only the ceilings apply on both until CI clocks the new tiers, and the gate prints the
-line to write when it does.
-[D-472](defects.md) retains the calibration history, and `think-be1s` tracks the band
-representation.
+Two PR 160 attempts then measured `--checks` at 197.56 s and 195.15 s against its 195 s
+ceiling. The second run spent 132.21 s in exact verification, 106.34 s in BasedPyright,
+62.74 s in the soundness perimeter, and 37.31 s in the browser floor.
+The browser floor and the new full-page accessibility check now form `--frontend`,
+leaving every verdict in `--fast` while removing that work from the saturated queue.
+The first hosted run of each changed partition supplies its new baseline.
+That change did not end the overruns.
+After `main` merged into the stack, #160 read 200.68 s and 199.74 s at `72629c03`.
+`think-lrs0` records three causes:
+- runner speed, which moved every step of one branch by about 1.3x together;
+- the branch cost rollup’s render step, at 45 to 61 s, which `main` fixed at `65a5c001`;
+- type-floor time from the Python #160 adds.
+  With `main`’s fix merged, #125 read 146.04 s of 195 s at `bca21da0` (run 34923097435).
+  #160 has not been re-read since, and `think-lrs0` stays open until it is.
+  [D-472](defects.md) retains the calibration history, and `think-be1s` tracks the band
+  representation.
 
-**The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
-together, run as four concurrent CI jobs**, so a pull request waits for the longest of
-the four rather than for their sum.
-All four feed the stable `packing-required` aggregate context.
+**The pull-request surface is `--checks`, `--frontend`, `--geometry`, `--suite` and
+`--sweeps` together, run as five concurrent CI jobs**, so a pull request waits for the
+longest part rather than for their sum.
+All five feed the stable `packing-required` aggregate context.
 Repository protection settings determine whether GitHub requires that context before a
-merge; the workflow does not configure those settings.
-The test `test_the_pull_request_jobs_partition_the_surface` reads the workflow and
-checks that they are pairwise disjoint and that they cover every step of `--fast` — so
-the split cannot lose a check the way a set of independent filters could.
+merge. `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks
+that they are pairwise disjoint and that they cover every step of `--fast` — so the
+split cannot lose a check the way a set of independent filters could.
 
 The merged [PR95](https://github.com/jlevy/squares/pull/95) implementation pools the
 known-best census and prospective-atlas rebuilds through the shared worker policy.
@@ -230,7 +245,7 @@ comparisons:
 All three runs are from 2026-09-06. The durations are observations, not necessary lower
 bounds or enforced tier baselines.
 The [tier table](#the-tiers) lists the current declarations: `--geometry` and `--suite`
-have measured baselines; `--checks` and `--sweeps` remain unmeasured.
+have measured baselines; `--checks`, `--frontend`, and `--sweeps` remain unmeasured.
 
 ### The behavioural lanes
 
@@ -401,13 +416,14 @@ uv run --frozen --all-extras --group dev packing-validate --edit
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # The pull-request surface: the edit tier plus every behavioral test under the
-# per-test ceiling. CI runs it as the four parts below, one per runner; run it whole
+# per-test ceiling. CI runs it as the five parts below, one per runner; run it whole
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
 # The five parts CI runs concurrently on a pull request. They partition --fast, so
 # running all five is running the surface and running one is running a part of it.
 uv run --frozen --all-extras --group dev packing-validate --checks
+uv run --frozen --all-extras --group dev packing-validate --frontend
 uv run --frozen --all-extras --group dev packing-validate --typecheck
 uv run --frozen --all-extras --group dev packing-validate --geometry
 uv run --frozen --all-extras --group dev packing-validate --suite
@@ -731,6 +747,8 @@ lives in KPress, alongside the shared runtime’s public API documentation.
 The prepare job shares one page artifact with the Chromium print checks and the
 Firefox/WebKit loading checks.
 Deployment waits for all of them.
+The build job selects Node 24.18.0, installs the root lockfile with scripts disabled,
+and builds the typed workbench package into the self-contained `/workbench/` page.
 Before drawing PDF bytes, the exporter checks that visible math is typeset; a completed
 font-error fallback that exposes literal TeX fails this check.
 Readable native MathML fallback is accepted by that check and remains subject to the
@@ -763,11 +781,12 @@ from the checkout:
 uv run --frozen --all-extras --group dev python -m devtools.check_published_site --commit <merge commit>
 ```
 
-It fetches the live page, the Markdown edition, the PDF and the assets, and checks that
-the edition stamp is the one `sqpack.release` names, that every repository link names
-that commit and resolves on GitHub, and that the PDF has the expected page count and a
-source receipt matching the served HTML bytes.
-The receipt detects stale or mixed publication artifacts; it is not a tamper guarantee.
+It fetches the live page, Markdown edition, PDF, assets, and workbench.
+It checks the explainer edition, verifies that repository links name and resolve at the
+expected commit, and requires the PDF source receipt to match the exact served HTML
+bytes and its page count to match the publication.
+It also requires the workbench’s exact source revision, starts its public API in pinned
+Chromium, and follows its project-relative link to the explainer.
 
 **The stamp in the credits has two parts, and they move on different clocks.** The
 current version and publication date come from the first entry in `PUBLICATION_HISTORY`
@@ -809,13 +828,17 @@ Use direct tools when their output is the point of the edit:
 
 ```shell
 uv run --frozen --all-extras --group dev pytest -q
-uv run --frozen --all-extras --group dev ruff check .
-uv run --frozen --all-extras --group dev ruff format --check .
+uv run --frozen --all-extras --group dev ruff check --config pyproject.toml . ../packages/workbench
+uv run --frozen --all-extras --group dev ruff format --check --config pyproject.toml . ../packages/workbench
 uv run --frozen --all-extras --group dev basedpyright
 
 cargo test --locked --manifest-path sqsearch/Cargo.toml
 cargo clippy --locked --release --all-targets --manifest-path sqsearch/Cargo.toml -- -D warnings
 cargo fmt --manifest-path sqsearch/Cargo.toml --check
+
+cd ..
+npm ci --ignore-scripts
+npm run check --workspace @squares/workbench
 ```
 
 Ruff must be clean. BasedPyright runs in standard mode and must report zero diagnostics
@@ -829,8 +852,8 @@ and exception chaining.
 The enabled rule families include the pytest-style, unused-argument, blind-except,
 commented-out-code, refurb, f-string and complexity-ratchet families, each argued for
 beside its entry in `pyproject.toml`; printing is waived only where the tools live, so a
-library module reports through `logging`. The one Python outside `packing/` is the
-hand-written skill assets under `.agents/skills`, which the same two floors reach.
+library module reports through `logging`. Python under `packages/workbench/` and the
+hand-written skill assets under `.agents/skills` are also under the same two floors.
 Comments explain non-obvious intent, invariants, units, evidence limits, and rejected
 alternatives—not a line-by-line translation of the code.
 

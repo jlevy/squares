@@ -63,7 +63,7 @@ correct. A report that they do not parse is a report that the wrong interpreter 
 — see [`D-397`](defects.md), and `OR-2` for the three occurrences before it.
 
 The repository is mostly prose.
-The only repo-wide tooling is Markdown formatting.
+The only repo-wide tooling is Markdown formatting and the browser floor.
 
 ```bash
 make hooks-install   # once after cloning: installs the lefthook pre-commit hook
@@ -73,9 +73,11 @@ make format-check    # report drift without writing
 
 Ruff and BasedPyright run at zero findings over every tracked Python file, the
 hand-written skill assets at the repository root included; `print` is allowed only in
-the tools (`devtools`, `cases`, `tests`, `benchmarks`, the console scripts), and the two
-standalone verifiers under `packing/cases/n11_fractional_certificate/` run on any
-CPython 3.12 or later by design.
+the tools (`devtools`, `cases`, `tests`, `benchmarks`, the console scripts, the retained
+video spikes under `packing/atlas/known-best/video/spikes/`, whose generators and
+browser checks report by printing, and the workbench command modules under
+`packages/workbench/tools/`), and the two standalone verifiers under
+`packing/cases/n11_fractional_certificate/` run on any CPython 3.12 or later by design.
 Python, Rust, and research validation are documented in
 [`development.md`](development.md); **the five validation tiers and the three behavioral
 lanes are tabulated in
@@ -98,6 +100,37 @@ live:
 surface, and only the unavoidably slow ones leave it, each on its own measurement.
 `OR-14` is why the surface is kept quick — a development cycle is never artificially
 slow, and its target is two to two and a half minutes.
+
+### The JavaScript and CSS floor
+
+**Biome owns browser formatting and general lint, type-aware ESLint owns the retained
+JavaScript promise rules, and `tsc` owns types.** The workbench package and the
+JavaScript this repository still serves directly are under the same shape of floor as
+Python: zero findings, verify-only in CI, fixed at commit.
+The rules come from `tbd guidelines typescript-lint-format-rules`, Profile B, and
+`packing/tests/test_browser_floor_contract.py` is what proves they are live rather than
+merely written down.
+
+```bash
+make hooks-install        # once after cloning: npm ci, then the git hooks
+make lint-fix             # fix in place; the commit hook does this for staged files
+packing-validate --only "browser floor"   # verify, which is what CI runs
+```
+
+Three things worth knowing before changing any of it:
+
+- `packages/workbench/` is strict TypeScript and uses pinned esbuild to emit classic
+  browser bundles. The retained scripts remain checked JavaScript with `allowJs` +
+  `checkJs` + `noEmit` and JSDoc types.
+  `tsconfig.base.json` holds the shared floor; each retained global program has its own
+  `tsconfig.*.json`, while the package has a strict module program.
+  The browser-floor step also runs the package’s Node tests.
+- **A relaxed compiler flag names the bead tracking its removal.** That is the ratchet
+  from the shared floor’s rule 8, and the contract test fails a config that relaxes one
+  without naming a tracker.
+- **Formatting the workbench’s script changes the published page’s bytes**, since the
+  generator inlines it.
+  That is expected; what says the page is unharmed is `check_frontend`, not a hash.
 
 ### Markdown formatting
 
@@ -158,11 +191,12 @@ The repository is split by audience rather than by topic.
 [`development.md`](development.md), the generated [`defects.md`](defects.md), and
 `docs/project/` for reports, reviews, specs and postmortems.
 
-**[`packing/`](packing/) holds everything that is code, data, or research record**: the
+**[`packing/`](packing/) holds the general library, data, and research record**: the
 `sqpack` package and its tests, the developer tools, the Rust search engine, the
 literature archive, the frontier register, the atlas, the witnesses, and the campaign.
-Keeping that one level down is what stops the root from becoming unreadable, and it is
-also the build root — `pyproject.toml`, `uv.lock` and `.python-version` live there.
+The interactive product is the focused exception: strict browser source, probes, tests,
+and build tools live in [`packages/workbench/`](packages/workbench/). The Python build
+root remains `packing/`, where `pyproject.toml`, `uv.lock` and `.python-version` live.
 
 Two rules follow from the split, and both exist because a path now has two plausible
 meanings:
@@ -185,8 +219,8 @@ packing, live in [jlevy/thinking](https://github.com/jlevy/thinking).
 
 - **The project is self-contained.** Its documents, sources, and code live in this
   repository and link to each other with relative paths.
-  Reader-facing prose belongs at the root; code, data, and the research record belong
-  under `packing/`. Do not add a third top-level tree for either.
+  Reader-facing prose belongs at the root; general code, data, and the research record
+  belong under `packing/`; the workbench product belongs under `packages/workbench/`.
 - **Reports separate claims by evidential status** — proved, computationally verified,
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.

@@ -11,7 +11,9 @@ from __future__ import annotations
 
 import re
 import subprocess
+from fnmatch import fnmatchcase
 from pathlib import Path
+from urllib.parse import urljoin
 
 import pytest
 import tinycss2
@@ -48,6 +50,9 @@ from devtools.render_explainer import load_certificate as load
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
 from sqpack.release import PUBLICATION_HISTORY, PUBLICATION_STATUS, PUBLICATION_VERSION
 from sqpack.yamlio import safe_load
+from workbench_tools.build_site import NOTE as WORKBENCH_NOTE
+from workbench_tools.build_site import RENDER_INPUTS as WORKBENCH_INPUTS
+from workbench_tools.build_site import build_metadata as workbench_build_metadata
 
 
 @pytest.fixture(scope="module")
@@ -480,6 +485,54 @@ def pages_filters() -> dict[str, list[str]]:
     }
 
 
+def test_pages_selects_the_validation_node_runtime_before_rendering() -> None:
+    workflow = safe_load((REPO / ".github" / "workflows" / "pages.yml").read_text("utf-8"))
+    setup_node = "actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e"
+    for job_name in ("prepare", "build"):
+        steps = workflow["jobs"][job_name]["steps"]
+        selected = [step for step in steps if step.get("uses") == setup_node]
+        assert len(selected) == 1, f"{job_name} must select one pinned Node runtime"
+        assert selected[0]["with"]["node-version"] == "24.18.0"
+
+
+def test_pages_installs_the_locked_package_before_building_the_workbench() -> None:
+    workflow = safe_load((REPO / ".github" / "workflows" / "pages.yml").read_text("utf-8"))
+    steps = workflow["jobs"]["build"]["steps"]
+    node = next(
+        i
+        for i, step in enumerate(steps)
+        if step.get("uses", "").startswith("actions/setup-node@")
+    )
+    install = next(
+        i for i, step in enumerate(steps) if step.get("run") == "npm ci --ignore-scripts"
+    )
+    build = next(
+        i
+        for i, step in enumerate(steps)
+        if "python -m workbench_tools.build_site" in step.get("run", "")
+    )
+    assert node < install < build
+    assert steps[install]["working-directory"] == "."
+
+
+def test_workbench_navigation_resolves_to_the_pages_project_root() -> None:
+    href = re.search(r'<a href="([^"]+)">the explainer</a>', WORKBENCH_NOTE)
+    assert href is not None
+    workbench = "https://jlevy.github.io/squares/workbench/"
+    assert urljoin(workbench, href.group(1)) == "https://jlevy.github.io/squares/"
+    assert href.group(1) == "../"
+
+
+def test_workbench_build_identity_requires_an_exact_commit() -> None:
+    revision = "0123456789abcdef0123456789abcdef01234567"
+    assert workbench_build_metadata(revision) == (
+        f'<meta name="squares-workbench-revision" content="{revision}">'
+    )
+    for invalid in ("main", revision[:8], f"{revision}0", "g" * 40):
+        with pytest.raises(ValueError, match="invalid workbench source revision"):
+            workbench_build_metadata(invalid)
+
+
 def covered(path: Path, patterns: list[str]) -> bool:
     """Whether a GitHub `paths:` filter republishes on a change under `path`.
 
@@ -490,7 +543,10 @@ def covered(path: Path, patterns: list[str]) -> bool:
     """
     relative = path.relative_to(REPO).as_posix()
     return any(
-        pattern == relative or pattern.rstrip("/*") in (relative, relative.rstrip("/"))
+        pattern == relative
+        or fnmatchcase(relative, pattern)
+        or (path.is_dir() and fnmatchcase(f"{relative}/__render_input__", pattern))
+        or pattern.rstrip("/*") == relative.rstrip("/")
         for pattern in patterns
     )
 
@@ -519,6 +575,55 @@ def test_the_pages_filter_covers_every_render_input() -> None:
             if not covered(declared, patterns)
         ]
         assert not missing, f"{event}: RENDER_INPUTS not covered by paths: {missing}"
+
+
+def test_the_pages_filter_covers_every_workbench_input() -> None:
+    """The workbench is published by the same workflow, so it needs the same guard.
+
+    `packing/site` is uploaded whole and the workbench is a subdirectory of it, which is
+    what gives it its own URL -- and also what makes a stale workbench invisible: the
+    explainer would rebuild, the artifact would upload, and `/workbench/` would keep
+    serving the previous build with every check green. The comparison is the explainer's,
+    asked of the other page's declared inputs.
+    """
+    filters = pages_filters()
+    for event, patterns in filters.items():
+        missing = [
+            declared.relative_to(REPO).as_posix()
+            for declared in WORKBENCH_INPUTS
+            if not covered(declared, patterns)
+        ]
+        assert not missing, f"{event}: workbench inputs not covered by paths: {missing}"
+
+
+def test_the_workbench_input_guard_detects_an_omitted_input_class() -> None:
+    """The filter comparison must fail when one whole source class is absent.
+
+    The old declaration omitted every witness while its builder read all 324. Removing the
+    witness pattern from the real filter recreates that failure and proves the comparison sees
+    the directory as an input, rather than only comparing two mutually incomplete file lists.
+    """
+    witnesses = REPO / "packing/witnesses/known-best"
+    for event, patterns in pages_filters().items():
+        without_witnesses = [
+            pattern for pattern in patterns if "witnesses/known-best" not in pattern
+        ]
+        missing = [
+            declared
+            for declared in WORKBENCH_INPUTS
+            if not covered(declared, without_witnesses)
+        ]
+        assert witnesses in missing, f"{event}: omitted witnesses were not detected"
+
+
+def test_every_declared_workbench_input_exists() -> None:
+    """The other half, for the workbench: a filter entry naming a file that is gone."""
+    for declared in WORKBENCH_INPUTS:
+        assert declared.exists(), declared.relative_to(REPO).as_posix()
+
+
+def test_generated_workbench_palette_declares_its_renderer_source() -> None:
+    assert REPO / "packing/src/sqpack/render" in WORKBENCH_INPUTS
 
 
 def test_every_declared_render_input_exists() -> None:

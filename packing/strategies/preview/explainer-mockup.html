@@ -1,0 +1,45 @@
+<!doctype html><meta charset=utf-8><title>Explainer (mockup) — square packing</title>
+<style>
+:root{--ink:#17202a;--muted:#5a6572;--rule:#e3e6ea}
+body{font:17px/1.65 Georgia,'Iowan Old Style',serif;color:var(--ink);margin:0 auto;max-width:40rem;padding:2rem 1.25rem 5rem}
+nav{font:13px/1 system-ui;margin-bottom:2.5rem;padding-bottom:1rem;border-bottom:1px solid var(--rule)}
+nav a{margin-right:1.25rem;color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--ink)}
+h1{font-size:1.9rem;line-height:1.2;margin:0 0 .4rem}
+.sub{color:var(--muted);font-size:15px;margin:0 0 2.5rem}
+figure{margin:2.5rem 0}
+figure img{width:100%;border:1px solid var(--rule)}
+figcaption{font:13px/1.5 system-ui;color:var(--muted);margin-top:.6rem}
+.note{background:#fbfbf8;border-left:3px solid var(--rule);padding:.8rem 1rem;font:14px/1.55 system-ui;color:var(--muted)}
+</style>
+<nav><a href="/">explainer</a><a href="/workbench/">workbench</a><a href="/atlas/">atlas</a><a href="/embed/">embeds</a></nav>
+
+<h1>Packing unit squares in a square</h1>
+<p class=sub>A mockup standing in for the real explainer, to test how an animation reads inside article prose.</p>
+
+<p>How small can a square container be if it must hold <em>n</em> unit squares without
+overlap? For most <em>n</em> the answer is the obvious grid. For a few it is not, and those
+few are where the problem becomes interesting.</p>
+
+<figure>
+  <img src="/embed/ascent-002-006.svg" alt="An animation adding one unit square at a time from two to six">
+  <figcaption><strong>Figure 1.</strong> One square added per step, each landing on the
+  best known packing. Full colour marks a frame that is a valid packing; muted marks a
+  frame in transit, which is not one. At <em>n</em> = 5 the grid is beaten for the first
+  time, and the fifth square sits at forty-five degrees.</figcaption>
+</figure>
+
+<p>The animation above is a single SVG file with no JavaScript. It is the same renderer
+that draws the atlas figures, so the last frame of the film and the atlas picture for
+that <em>n</em> are the same drawing rather than two that resemble each other.</p>
+
+<figure>
+  <img src="/embed/n-011.svg" alt="An animation settling eleven unit squares">
+  <figcaption><strong>Figure 2.</strong> Eleven squares settling onto Trump's 1979
+  packing. Every frame here is guided rather than found, and is marked as such.</figcaption>
+</figure>
+
+<p class=note><strong>This page is a mockup.</strong> The real explainer is rendered in CI
+by <code>render_explainer.py</code>, which stamps font geometry before it draws; a local
+copy of that build renders wrong, which is why it is not shown here. What this page tests
+is only whether an embedded animation sits correctly in a column of prose.</p>

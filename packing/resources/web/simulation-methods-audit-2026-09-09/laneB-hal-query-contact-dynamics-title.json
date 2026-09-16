@@ -1,0 +1,435 @@
+{
+  "response":{
+    "numFound":102,
+    "start":0,
+    "maxScore":8.919451,
+    "numFoundExact":true,
+    "docs":[{
+      "docid":"479979",
+      "label_s":"Michel Jean. Contact dynamics method. Farhang Radjaï; Frédéric Dubois. Discrete numerical modelling of granular materials, ISTE Wiley, 2011, 978-1-848-21260-2. &#x27E8;hal-00479979&#x27E9;",
+      "authFullName_s":["Michel Jean"],
+      "uri_s":"https://hal.science/hal-00479979v1",
+      "producedDateY_i":2011
+    },{
+      "docid":"759642",
+      "label_s":"Farhang Radjai. Contact dynamics method. European Journal of Environmental and Civil Engineering, 2008, 12, pp.871--900. &#x27E8;10.1080/19648189.2008.9693052&#x27E9;. &#x27E8;hal-00759642&#x27E9;",
+      "authFullName_s":["Farhang Radjai"],
+      "uri_s":"https://hal.science/hal-00759642v1",
+      "doiId_s":"10.1080/19648189.2008.9693052",
+      "producedDateY_i":2008
+    },{
+      "docid":"759757",
+      "label_s":"Farhang Radjai. Contact Dynamics Method. Thematic meeting on numerical simulations, Mar 2005, Paris, France. &#x27E8;hal-00759757&#x27E9;",
+      "authFullName_s":["Farhang Radjai"],
+      "uri_s":"https://hal.science/hal-00759757v1",
+      "producedDateY_i":2005
+    },{
+      "docid":"759767",
+      "label_s":"Farhang Radjai. Contact dynamics and its applications. DPG-Schüle für Physik 2001 : compu- tational physics, Apr 2001, Bad Honnef, Germany. &#x27E8;hal-00759767&#x27E9;",
+      "authFullName_s":["Farhang Radjai"],
+      "uri_s":"https://hal.science/hal-00759767v1",
+      "producedDateY_i":2001
+    },{
+      "docid":"4648819",
+      "label_s":"Stephan Brunßen, Stefan Hüeber, Barbara Wohlmuth. Contact Dynamics with Lagrange Multipliers. IUTAM Symposium on Computational Methods in Contact Mechanics, 2007, Hannovre, Germany. pp.17-32, &#x27E8;10.1007/978-1-4020-6405-0_2&#x27E9;. &#x27E8;hal-04648810&#x27E9;",
+      "authFullName_s":["Stephan Brunßen","Stefan Hüeber","Barbara Wohlmuth"],
+      "uri_s":"https://hal.science/hal-04648810v1",
+      "doiId_s":"10.1007/978-1-4020-6405-0_2",
+      "producedDateY_i":2007,
+      "files_s":["https://hal.science/hal-04648810/file/Contact_Dynamics_with_Lagrange_Multipliers.pdf"]
+    },{
+      "docid":"1390459",
+      "label_s":"Michel Jean. The non-smooth contact dynamics method. Computer Methods in Applied Mechanics and Engineering, 1999, 177 (3-4), pp.235-257. &#x27E8;10.1016/S0045-7825(98)00383-1&#x27E9;. &#x27E8;hal-01390459&#x27E9;",
+      "authFullName_s":["Michel Jean"],
+      "uri_s":"https://hal.science/hal-01390459v1",
+      "doiId_s":"10.1016/S0045-7825(98)00383-1",
+      "producedDateY_i":1999,
+      "files_s":["https://hal.science/hal-01390459/file/MJ.pdf"]
+    },{
+      "docid":"685175",
+      "label_s":"Viet Hung Nhu, Aurélien Saulot, Mathieu Renouf. Influence of Wear Particles on Contact Dynamics. International Joint Tribology Congress, Oct 2011, Los Angeles, United States. &#x27E8;hal-00685175&#x27E9;",
+      "authFullName_s":["Viet Hung Nhu","Aurélien Saulot","Mathieu Renouf"],
+      "uri_s":"https://hal.science/hal-00685175v1",
+      "producedDateY_i":2011
+    },{
+      "docid":"5442297",
+      "label_s":"Lydie Staron, Fanshuo Ma, Pierre-Yves Lagrée. Stability of cohesive granular heaps: Contact Dynamics simulations. Powders & Grains 2025, Dec 2025, Candolim, Goa, India. pp.02023, &#x27E8;10.1051/epjconf/202534002023&#x27E9;. &#x27E8;hal-05442297&#x27E9;",
+      "authFullName_s":["Lydie Staron","Fanshuo Ma","Pierre-Yves Lagrée"],
+      "uri_s":"https://hal.science/hal-05442297v1",
+      "doiId_s":"10.1051/epjconf/202534002023",
+      "producedDateY_i":2025,
+      "files_s":["https://hal.science/hal-05442297/file/epjconf_PnG2025_02023.pdf"]
+    },{
+      "docid":"689866",
+      "label_s":"Farhang Radjai, Richefeu Vincent. Contact dynamics as a nonsmooth discrete element method. Mechanics of Materials, 2009, 41, pp.715--728. &#x27E8;10.1016/j.mechmat.2009.01.028&#x27E9;. &#x27E8;hal-00689866&#x27E9;",
+      "authFullName_s":["Farhang Radjai","Richefeu Vincent"],
+      "uri_s":"https://hal.science/hal-00689866v1",
+      "doiId_s":"10.1016/j.mechmat.2009.01.028",
+      "producedDateY_i":2009,
+      "files_s":["https://hal.science/hal-00689866/file/CD_MM.pdf"]
+    },{
+      "docid":"1632694",
+      "label_s":"Caishan Liu, Hongjian Zhang, Zhao Zhen, Bernard Brogliato. Impact-contact dynamics in a disc-ball system. Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences, 2013, 469 (2152), pp.20. &#x27E8;10.1098/rspa.2012.0741&#x27E9;. &#x27E8;hal-00825597&#x27E9;",
+      "authFullName_s":["Caishan Liu","Hongjian Zhang","Zhao Zhen","Bernard Brogliato"],
+      "uri_s":"https://inria.hal.science/hal-00825597v1",
+      "doiId_s":"10.1098/rspa.2012.0741",
+      "producedDateY_i":2013,
+      "files_s":["https://inria.hal.science/hal-00825597/file/liu2013.pdf"]
+    },{
+      "docid":"580797",
+      "label_s":"Frédéric Dubois. Fracturation as a non smooth contact dynamics problem. 8th International Conference on Computational Plasticity, 2005, France. &#x27E8;hal-00580797&#x27E9;",
+      "authFullName_s":["Frédéric Dubois"],
+      "uri_s":"https://hal.science/hal-00580797v1",
+      "producedDateY_i":2005
+    },{
+      "docid":"1793645",
+      "label_s":"Jean Jacques Moreau. Application des algorithmes \"Contact Dynamics\" aux milieux granulaires. 14e Congrès Français de Mécanique, 1999, Toulouse, France. &#x27E8;hal-01793645&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau"],
+      "uri_s":"https://hal.science/hal-01793645v1",
+      "producedDateY_i":1999,
+      "files_s":["https://hal.science/hal-01793645/file/Application_algorithmes_milieux_granulaires_Moreau_CFM_1999.pdf"]
+    },{
+      "docid":"1311014",
+      "label_s":"Michel Jean, Vincent Acary, Yann Monerie. Non-smooth contact dynamics approach of cohesive materials. Philosophical Transactions of the Royal Society of London. Series A, Mathematical and Physical Sciences (1934–1990), 2001, 359 (1789), pp.2497-2518. &#x27E8;10.1098/rsta.2001.0906&#x27E9;. &#x27E8;inria-00423556&#x27E9;",
+      "authFullName_s":["Michel Jean","Vincent Acary","Yann Monerie"],
+      "uri_s":"https://inria.hal.science/inria-00423556v1",
+      "doiId_s":"10.1098/rsta.2001.0906",
+      "producedDateY_i":2001,
+      "files_s":["https://inria.hal.science/inria-00423556/file/JAMHaL.pdf"]
+    },{
+      "docid":"2095116",
+      "label_s":"Farhang Radjai. Multi-periodic boundary conditions and the Contact Dynamics method. Comptes Rendus. Mécanique, 2018, 346 (3), pp.263-277. &#x27E8;10.1016/j.crme.2017.12.007&#x27E9;. &#x27E8;hal-02095116&#x27E9;",
+      "authFullName_s":["Farhang Radjai"],
+      "uri_s":"https://hal.science/hal-02095116v1",
+      "doiId_s":"10.1016/j.crme.2017.12.007",
+      "producedDateY_i":2018,
+      "files_s":["https://hal.science/hal-02095116/file/Art_Radjai_CR-Mecanique_2018.pdf"]
+    },{
+      "docid":"1895094",
+      "label_s":"Rohan Budhiraja, Justin Carpentier, Carlos Mastalli, Nicolas Mansard. Differential Dynamic Programming for Multi-Phase Rigid Contact Dynamics. IEEE-RAS International Conference on Humanoid Robots (Humanoids 2018), Nov 2018, Beijing, China. &#x27E8;10.1109/HUMANOIDS.2018.8624925&#x27E9;. &#x27E8;hal-01851596v2&#x27E9;",
+      "authFullName_s":["Rohan Budhiraja","Justin Carpentier","Carlos Mastalli","Nicolas Mansard"],
+      "uri_s":"https://hal.science/hal-01851596v2",
+      "doiId_s":"10.1109/HUMANOIDS.2018.8624925",
+      "producedDateY_i":2018,
+      "files_s":["https://hal.science/hal-01851596/file/root.pdf"]
+    },{
+      "docid":"759762",
+      "label_s":"Farhang Radjai. Contact dynamics and quasi-static rheology of granular materials. Geometry and Mechanics of Structured Materials, Sep 2002, Dresden, Germany. &#x27E8;hal-00759762&#x27E9;",
+      "authFullName_s":["Farhang Radjai"],
+      "uri_s":"https://hal.science/hal-00759762v1",
+      "producedDateY_i":2002
+    },{
+      "docid":"425359",
+      "label_s":"Vincent Acary, Michel Jean. Numerical simulation of monuments by the contact dynamics method. Monument-98, Workshop on seismic perfomance of monuments, Laboratório Nacional de engenharia Civil (LNEC), Lisboa, Portugal, Nov 1998, Lisbon, Portugal. pp.69-78. &#x27E8;inria-00425359&#x27E9;",
+      "authFullName_s":["Vincent Acary","Michel Jean"],
+      "uri_s":"https://inria.hal.science/inria-00425359v1",
+      "producedDateY_i":1998,
+      "files_s":["https://inria.hal.science/inria-00425359/file/Lisbon98.pdf"]
+    },{
+      "docid":"2436601",
+      "label_s":"Popa Mihaela, Sylvie Descartes, Yves Berthier, Laurent Guy, Francesca Peditto. Contact dynamics analysis during toothbrushing with oral-care silica. 45th annual meeting of the American Association for Dental Research, AADR 2016, Mar 2016, Los Angeles, United States. &#x27E8;hal-02436601&#x27E9;",
+      "authFullName_s":["Popa Mihaela","Sylvie Descartes","Yves Berthier","Laurent Guy","Francesca Peditto"],
+      "uri_s":"https://hal.science/hal-02436601v1",
+      "producedDateY_i":2016
+    },{
+      "docid":"5473297",
+      "label_s":"Juan Carlos Quezada, Pierre Breul, Gilles Saussine, Farhang Radjai. Penetration test in coarse granular material using contact dynamics method. Computers and Geotechnics, 2014, 55, pp.248-253. &#x27E8;10.1016/j.compgeo.2013.09.006&#x27E9;. &#x27E8;hal-05473297&#x27E9;",
+      "authFullName_s":["Juan Carlos Quezada","Pierre Breul","Gilles Saussine","Farhang Radjai"],
+      "uri_s":"https://univoak.hal.science/hal-05473297v1",
+      "doiId_s":"10.1016/j.compgeo.2013.09.006",
+      "producedDateY_i":2014
+    },{
+      "docid":"4799017",
+      "label_s":"Vo Anh Thuong Nguyen, Stéphane Abide, Mikaël Barboteu, Serge Dumont. An improved normal compliance method for non-smooth contact dynamics. 30e Séminaire Franco-Polonais de Mécanique, LAMPS, May 2024, Perpignan, France. &#x27E8;hal-04799017&#x27E9;",
+      "authFullName_s":["Vo Anh Thuong Nguyen","Stéphane Abide","Mikaël Barboteu","Serge Dumont"],
+      "uri_s":"https://hal.science/hal-04799017v1",
+      "producedDateY_i":2024
+    },{
+      "docid":"368443",
+      "label_s":"Laurent Baillet, Salvatore d'Errico, Yves Berthier. Influence of sliding contact dynamics on macroscopic friction coefficient variation. Revue Européenne des Éléments Finis, 2005, pp.305-321. &#x27E8;hal-00368443&#x27E9;",
+      "authFullName_s":["Laurent Baillet","Salvatore d'Errico","Yves Berthier"],
+      "uri_s":"https://hal.science/hal-00368443v1",
+      "producedDateY_i":2005
+    },{
+      "docid":"759755",
+      "label_s":"Farhang Radjai. The contact dynamics method and plastic properties of granular materials. SIAM Conference on Mathematical and Computational Issues in Geosciences, Jun 2005, Avignon, France. &#x27E8;hal-00759755&#x27E9;",
+      "authFullName_s":["Farhang Radjai"],
+      "uri_s":"https://hal.science/hal-00759755v1",
+      "producedDateY_i":2005
+    },{
+      "docid":"2396341",
+      "label_s":"Juan Carlos Quezada Guajardo, Loba Sagnol, Cyrille Chazallon. Shear test on viscoelastic granular material using Contact Dynamics simulations. 8th International Conference on Micromechanics on Granular Media, Jul 2017, Montpellier, France. &#x27E8;10.1051/epjconf/201714008009&#x27E9;. &#x27E8;hal-02396341&#x27E9;",
+      "authFullName_s":["Juan Carlos Quezada Guajardo","Loba Sagnol","Cyrille Chazallon"],
+      "uri_s":"https://hal.science/hal-02396341v1",
+      "doiId_s":"10.1051/epjconf/201714008009",
+      "producedDateY_i":2017,
+      "files_s":["https://hal.science/hal-02396341/file/islandora_71319.pdf"]
+    },{
+      "docid":"2153754",
+      "label_s":"Francesco Pinotti, Eric Fleury, Didier Guillemot, Pierre-Yves Böelle, Chiara Poletto. Host contact dynamics shapes richness and dominance of pathogen strains. PLoS Computational Biology, 2019, 15 (5), pp.e1006530. &#x27E8;10.1371/journal.pcbi.1006530&#x27E9;. &#x27E8;inserm-02153754&#x27E9;",
+      "authFullName_s":["Francesco Pinotti","Eric Fleury","Didier Guillemot","Pierre-Yves Böelle","Chiara Poletto"],
+      "uri_s":"https://inserm.hal.science/inserm-02153754v1",
+      "doiId_s":"10.1371/journal.pcbi.1006530",
+      "producedDateY_i":2019,
+      "files_s":["https://inserm.hal.science/inserm-02153754/file/journal.pcbi.1006530.pdf"]
+    },{
+      "docid":"4791107",
+      "label_s":"Vo Anh Thuong Nguyen, Stéphane Abide, Mikaël Barboteu, Serge Dumont. An improved normal compliance method for non-smooth contact dynamics. Banach Center Publications, 2024, 127, pp.191-217. &#x27E8;10.4064/bc127-9&#x27E9;. &#x27E8;hal-04791107&#x27E9;",
+      "authFullName_s":["Vo Anh Thuong Nguyen","Stéphane Abide","Mikaël Barboteu","Serge Dumont"],
+      "uri_s":"https://hal.science/hal-04791107v1",
+      "doiId_s":"10.4064/bc127-9",
+      "producedDateY_i":2024
+    },{
+      "docid":"3756348",
+      "label_s":"Laura Gaillard, Juan Carlos Quezada Guajardo, Cyrille Chazallon, Pierre Hornych. Resilient modulus prediction of RAP using the Contact Dynamics Method. Transportation Geotechnics, 2020, 24, pp.100371. &#x27E8;10.1016/j.trgeo.2020.100371&#x27E9;. &#x27E8;hal-03083247&#x27E9;",
+      "authFullName_s":["Laura Gaillard","Juan Carlos Quezada Guajardo","Cyrille Chazallon","Pierre Hornych"],
+      "uri_s":"https://hal.science/hal-03083247v1",
+      "doiId_s":"10.1016/j.trgeo.2020.100371",
+      "producedDateY_i":2020,
+      "files_s":["https://hal.science/hal-03083247/file/S2214391220302592.pdf"]
+    },{
+      "docid":"3028725",
+      "label_s":"Quezada Juan Carlos, Pierre Breul, Gilles Saussine, Farhang Radjai. Penetration test in coarse granular material using Contact Dynamics Method. Computers and Geotechnics, 2014. &#x27E8;hal-03028725&#x27E9;",
+      "authFullName_s":["Quezada Juan Carlos","Pierre Breul","Gilles Saussine","Farhang Radjai"],
+      "uri_s":"https://uca.hal.science/hal-03028725v1",
+      "producedDateY_i":2014
+    },{
+      "docid":"776135",
+      "label_s":"Vincent Visseq, Alexandre Martin, David Dureisseix, Pierre Alart. Issues in domain decomposition method dedicated to non-smooth contact dynamics. Euromech 514: New trends in Contact Mechanics, Mar 2012, Cargèse, France. &#x27E8;hal-00776135&#x27E9;",
+      "authFullName_s":["Vincent Visseq","Alexandre Martin","David Dureisseix","Pierre Alart"],
+      "uri_s":"https://hal.science/hal-00776135v1",
+      "producedDateY_i":2012,
+      "files_s":["https://hal.science/hal-00776135/file/Issues_domain_decomposition_Visseq_al.pdf"]
+    },{
+      "docid":"1390313",
+      "label_s":"Vincent Visseq, Pierre Alart, David Dureisseix. High performance computing of discrete nonsmooth contact dynamics with domain decomposition. International Journal for Numerical Methods in Engineering, 2013, 96 (9), pp.584-598. &#x27E8;10.1002/nme.4578&#x27E9;. &#x27E8;hal-00918064&#x27E9;",
+      "authFullName_s":["Vincent Visseq","Pierre Alart","David Dureisseix"],
+      "uri_s":"https://hal.science/hal-00918064v1",
+      "doiId_s":"10.1002/nme.4578",
+      "producedDateY_i":2013,
+      "files_s":["https://hal.science/hal-00918064/file/VVPADD2013preprint.pdf"]
+    },{
+      "docid":"3327179",
+      "label_s":"Juan-Carlos Quezada-Guajardo, Cyrille Chazallon. Contact Dynamics modeling of viscoelastic granular materials using irregular polyhedral particles. Powders and Grains 2021 – 9th International Conference on Micromechanics on Granular Media, Jul 2021, En ligne, Argentina. &#x27E8;10.1051/epjconf/202124911014&#x27E9;. &#x27E8;hal-03327179&#x27E9;",
+      "authFullName_s":["Juan-Carlos Quezada-Guajardo","Cyrille Chazallon"],
+      "uri_s":"https://hal.science/hal-03327179v1",
+      "doiId_s":"10.1051/epjconf/202124911014",
+      "producedDateY_i":2021,
+      "files_s":["https://hal.science/hal-03327179/file/islandora_119675.pdf"]
+    },{
+      "docid":"1825208",
+      "label_s":"Jean Jacques Moreau, Michel Jean. Numerical treatment of contact and friction : the contact dynamics method. Engineering Systems Design and Analysis Conference, 1996, New York, United States. pp.201 - 208. &#x27E8;hal-01825208&#x27E9;",
+      "authFullName_s":["Jean Jacques Moreau","Michel Jean"],
+      "uri_s":"https://hal.science/hal-01825208v1",
+      "producedDateY_i":1996,
+      "files_s":["https://hal.science/hal-01825208/file/Numerical_treatment_contact_friction_Moreau_Jean_1996.pdf"]
+    },{
+      "docid":"2570097",
+      "label_s":"Anaïs Abramian, Lydie Staron. Time Steps v.s. Cohesion in Non-Smooth Contact Dynamics Algorithm. 2020. &#x27E8;hal-02570097&#x27E9;",
+      "authFullName_s":["Anaïs Abramian","Lydie Staron"],
+      "uri_s":"https://hal.science/hal-02570097v1",
+      "producedDateY_i":2020,
+      "files_s":["https://hal.science/hal-02570097/file/Main-CoTimeStep.pdf"]
+    },{
+      "docid":"3373887",
+      "label_s":"L. Staron, A. Abramian. TIME STEPS V.S COHESION IN NON-SMOOTH CONTACT DYNAMICS ALGORITHM. 14th WCCM-ECCOMAS Congress, WCCM - ECCOMAS, Jan 2021, virtual Congress, France. &#x27E8;10.23967/wccm-eccomas.2020.100&#x27E9;. &#x27E8;hal-03373887&#x27E9;",
+      "authFullName_s":["L. Staron","A. Abramian"],
+      "uri_s":"https://hal.science/hal-03373887v1",
+      "doiId_s":"10.23967/wccm-eccomas.2020.100",
+      "producedDateY_i":2021,
+      "files_s":["https://hal.science/hal-03373887/file/WCCM-StaronAbramian.pdf"]
+    },{
+      "docid":"1538944",
+      "label_s":"Vincent Visseq, Pierre Alart, David Dureisseix. Towards an augmented domain decomposition method for nonsmooth contact dynamics models. Computational Particle Mechanics, 2014, 1 (1), pp.15-26. &#x27E8;10.1007/s40571-014-0005-8&#x27E9;. &#x27E8;hal-00998116v2&#x27E9;",
+      "authFullName_s":["Vincent Visseq","Pierre Alart","David Dureisseix"],
+      "uri_s":"https://hal.science/hal-00998116v2",
+      "doiId_s":"10.1007/s40571-014-0005-8",
+      "producedDateY_i":2014,
+      "files_s":["https://hal.science/hal-00998116/file/article2preprint.pdf"]
+    },{
+      "docid":"1614470",
+      "label_s":"Frédéric Perales, Frédéric Dubois, Yann Monerie, Bruno Piar, Laurent Stainier. A NonSmooth Contact Dynamics-based multi-domain solver. Revue Européenne de Mécanique Numérique/European Journal of Computational Mechanics, 2010, 21 (3-6), pp.242-253. &#x27E8;10.3166/ejcm.19.389-417&#x27E9;. &#x27E8;hal-00806626&#x27E9;",
+      "authFullName_s":["Frédéric Perales","Frédéric Dubois","Yann Monerie","Bruno Piar","Laurent Stainier"],
+      "uri_s":"https://hal.science/hal-00806626v1",
+      "doiId_s":"10.3166/ejcm.19.389-417",
+      "producedDateY_i":2010,
+      "files_s":["https://hal.science/hal-00806626/file/PDMPA.pdf"]
+    },{
+      "docid":"416795",
+      "label_s":"Laurent Baillet, Yves Berthier, Aurélien Saulot, Claire Vayssiere, G. Roche. Analysis of the consequences of the wear flows on local contact dynamics. 36th Leeds-Lyon Symposium on Tribology \"Multi-facets of tribology\", Sep 2009, Villeurbanne, France. &#x27E8;hal-00416795&#x27E9;",
+      "authFullName_s":["Laurent Baillet","Yves Berthier","Aurélien Saulot","Claire Vayssiere","G. Roche"],
+      "uri_s":"https://hal.science/hal-00416795v1",
+      "producedDateY_i":2009
+    },{
+      "docid":"1826761",
+      "label_s":"Lei Peng, Zhi-Qiang Feng, Pierre Joli. A semi-explicit algorithm for solving multibody contact dynamics with large deformation. International Journal of Non-Linear Mechanics, 2018, 103, pp.82-92. &#x27E8;10.1016/j.ijnonlinmec.2018.05.001&#x27E9;. &#x27E8;hal-01803486&#x27E9;",
+      "authFullName_s":["Lei Peng","Zhi-Qiang Feng","Pierre Joli"],
+      "uri_s":"https://hal.science/hal-01803486v1",
+      "doiId_s":"10.1016/j.ijnonlinmec.2018.05.001",
+      "producedDateY_i":2018,
+      "files_s":["https://hal.science/hal-01803486/file/peng2018.pdf"]
+    },{
+      "docid":"5449452",
+      "label_s":"Daria Koliesnikova, Alejandro Mota, Irina Tezaur, Hoy Jonathan. Coupled approach to contact dynamics via the Dirichlet-Neumann Schwarz alternating method. CMIS 2024 - 11th Contact Mechanics International Symposium, May 2024, Lyon, France. &#x27E8;cea-05449452&#x27E9;",
+      "authFullName_s":["Daria Koliesnikova","Alejandro Mota","Irina Tezaur","Hoy Jonathan"],
+      "uri_s":"https://cea.hal.science/cea-05449452v1",
+      "producedDateY_i":2024
+    },{
+      "docid":"844256",
+      "label_s":"Farhang Radjai, Vincent Topin, Yann Monerie, Frédéric Perales, Anthony Wachs, et al.. Contact Dynamics with hydrodynamic interactions applied to granular collapse in a fluid. Earth Surface Sedimentary Flows, Apr 2011, Bristol, United Kingdom. &#x27E8;hal-00844256&#x27E9;",
+      "authFullName_s":["Farhang Radjai","Vincent Topin","Yann Monerie","Frédéric Perales","Anthony Wachs","Frédéric Dubois"],
+      "uri_s":"https://hal.science/hal-00844256v1",
+      "producedDateY_i":2011
+    },{
+      "docid":"1403832",
+      "label_s":"Ugo Andreaus, Luca Placidi, Giuseppe Rega. Numerical simulation of the soft contact dynamics of an impacting bilinear oscillator. Communications in Nonlinear Science and Numerical Simulation, 2010, 15 (9), pp.2603 - 2616. &#x27E8;10.1016/j.cnsns.2009.10.015&#x27E9;. &#x27E8;hal-01403832&#x27E9;",
+      "authFullName_s":["Ugo Andreaus","Luca Placidi","Giuseppe Rega"],
+      "uri_s":"https://hal.science/hal-01403832v1",
+      "doiId_s":"10.1016/j.cnsns.2009.10.015",
+      "producedDateY_i":2010,
+      "files_s":["https://hal.science/hal-01403832/file/APR.pdf"]
+    },{
+      "docid":"4710449",
+      "label_s":"M. Di Bartolomeo, F. Massi, L. Baillet, A. Culla, A. Fregolent. On the role of local contact dynamics in the macroscopical frictional behaviour. PROCEEDINGS OF INTERNATIONAL CONFERENCE ON NOISE AND VIBRATION ENGINEERING (ISMA2014) AND INTERNATIONAL CONFERENCE ON UNCERTAINTY IN STRUCTURAL DYNAMICS (USD2014), Sep 2014, CELESTIJNENLAAN 300B, HEVERLEE, B-3001, Belgium. pp.1853-1865. &#x27E8;hal-04710449&#x27E9;",
+      "authFullName_s":["M. Di Bartolomeo","F. Massi","L. Baillet","A. Culla","A. Fregolent"],
+      "uri_s":"https://hal.science/hal-04710449v1",
+      "producedDateY_i":2014
+    },{
+      "docid":"685192",
+      "label_s":"Aurélien Saulot, Claire Vayssiere, Laurent Baillet, Georges Roche, Yves Berthier. Analysis of the consequences of the wear flows on local contact dynamics. 4th World Tribology Congress, Sep 2009, Kyoto, Japan. &#x27E8;hal-00685192&#x27E9;",
+      "authFullName_s":["Aurélien Saulot","Claire Vayssiere","Laurent Baillet","Georges Roche","Yves Berthier"],
+      "uri_s":"https://hal.science/hal-00685192v1",
+      "producedDateY_i":2009
+    },{
+      "docid":"3891147",
+      "label_s":"Frédéric Dubois, David Dureisseix. NSCD (Non Smooth Contact Dynamics) État de l'art et points durs. Journée CSMA Simulation numérique du contact en dynamique, Apr 2008, Nantes, France. &#x27E8;hal-01722818&#x27E9;",
+      "authFullName_s":["Frédéric Dubois","David Dureisseix"],
+      "uri_s":"https://hal.science/hal-01722818v1",
+      "producedDateY_i":2008
+    },{
+      "docid":"3446417",
+      "label_s":"Rémy Mozul, Frédéric Dubois. La méthode \"Non Smooth Contact Dynamics\", application à la modélisation des milieux divisés. CFM 2015 - 22ème Congrès Français de Mécanique, Aug 2015, Lyon, France. &#x27E8;hal-03446417&#x27E9;",
+      "authFullName_s":["Rémy Mozul","Frédéric Dubois"],
+      "uri_s":"https://hal.science/hal-03446417v1",
+      "producedDateY_i":2015,
+      "files_s":["https://hal.science/hal-03446417/file/bitstream_117502.pdf"]
+    },{
+      "docid":"1508684",
+      "label_s":"Alexander Lozovskiy, Frédéric Dubois. The method of a floating frame of reference for non-smooth contact dynamics. European Journal of Mechanics - A/Solids, 2016, 58, pp.89 - 101. &#x27E8;10.1016/j.euromechsol.2016.01.007&#x27E9;. &#x27E8;hal-01508684&#x27E9;",
+      "authFullName_s":["Alexander Lozovskiy","Frédéric Dubois"],
+      "uri_s":"https://hal.science/hal-01508684v1",
+      "doiId_s":"10.1016/j.euromechsol.2016.01.007",
+      "producedDateY_i":2016,
+      "files_s":["https://hal.science/hal-01508684/file/Art_Method_floating_frame_Lozovskiy_Dubois_2016.pdf"]
+    },{
+      "docid":"3433011",
+      "label_s":"Frédéric Dubois, Michel Jean. The non smooth contact dynamics method: recent LMGC90 software developments and application. 4th Contact Mechanics International Symposium, Jul 2005, Hannover, Germany. &#x27E8;10.1007/3-540-31761-9_44&#x27E9;. &#x27E8;hal-00580798&#x27E9;",
+      "authFullName_s":["Frédéric Dubois","Michel Jean"],
+      "uri_s":"https://hal.science/hal-00580798v1",
+      "doiId_s":"10.1007/3-540-31761-9_44",
+      "producedDateY_i":2005,
+      "files_s":["https://hal.science/hal-00580798/file/Dubois-Jean2006.pdf"]
+    },{
+      "docid":"2002555",
+      "label_s":"Yuancan Huang, Philippe Souères, Jian Li. Contact Dynamics and Coupled Stability of Massage Compliant Robotic Arm With Impedance Controller. IEEE International Conference on Robotics and Automation, IEEE, May 2014, Hong-Kong, China. &#x27E8;hal-02002555&#x27E9;",
+      "authFullName_s":["Yuancan Huang","Philippe Souères","Jian Li"],
+      "uri_s":"https://laas.hal.science/hal-02002555v1",
+      "producedDateY_i":2014,
+      "files_s":["https://laas.hal.science/hal-02002555/file/Huang-et-al-2014.pdf"]
+    },{
+      "docid":"2928561",
+      "label_s":"Luisa Fernanda Orozco, Jean-Yves Delenne, Farhang Radjai, Philippe Sornay. Numerical simulations of particle grinding inside 2D ball mills by Contact Dynamics. Powders and Granular Materials Challenges and Future Trends, Jun 2019, Montpellier, France. &#x27E8;hal-02928561&#x27E9;",
+      "authFullName_s":["Luisa Fernanda Orozco","Jean-Yves Delenne","Farhang Radjai","Philippe Sornay"],
+      "uri_s":"https://hal.inrae.fr/hal-02928561v1",
+      "producedDateY_i":2019
+    },{
+      "docid":"1816345",
+      "label_s":"Clara Issanchou, Vincent Acary, Franck Pérignon, Cyril Touzé, Jean-Loic Le Carrou. Nonsmooth contact dynamics for the numerical simulation of collisions in musical string instruments. Journal of the Acoustical Society of America, 2018, 143 (5), pp.1-13. &#x27E8;10.1121/1.5039740&#x27E9;. &#x27E8;hal-01806133v2&#x27E9;",
+      "authFullName_s":["Clara Issanchou","Vincent Acary","Franck Pérignon","Cyril Touzé","Jean-Loic Le Carrou"],
+      "uri_s":"https://ensta.hal.science/hal-01806133v2",
+      "doiId_s":"10.1121/1.5039740",
+      "producedDateY_i":2018,
+      "files_s":["https://ensta.hal.science/hal-01806133/file/2018_NonsmoothStringHAL.pdf"]
+    },{
+      "docid":"782620",
+      "label_s":"Alexander Lozovskiy, Loïc Daridon, Frédéric Dubois, Stéphane Pagano. The method of a floating frame of reference for non-smooth contact dynamics. [Research Report] Université Montpellier 2. 2013. &#x27E8;hal-00782620&#x27E9;",
+      "authFullName_s":["Alexander Lozovskiy","Loïc Daridon","Frédéric Dubois","Stéphane Pagano"],
+      "uri_s":"https://hal.science/hal-00782620v1",
+      "producedDateY_i":2013,
+      "files_s":["https://hal.science/hal-00782620/file/Decomposition_Lozovski_al.pdf"]
+    },{
+      "docid":"2305329",
+      "label_s":"Jean-Jacques Sinou, Olivier Chiello, Lucien Charroyer. Non Smooth Contact Dynamics Approach for Mechanical Systems Subjected to Friction-Induced Vibration. Lubricants, 2019, Tribology and Contact Dynamics, 7 (7), pp.59. &#x27E8;10.3390/lubricants7070059&#x27E9;. &#x27E8;hal-02305329&#x27E9;",
+      "authFullName_s":["Jean-Jacques Sinou","Olivier Chiello","Lucien Charroyer"],
+      "uri_s":"https://hal.science/hal-02305329v1",
+      "doiId_s":"10.3390/lubricants7070059",
+      "producedDateY_i":2019,
+      "files_s":["https://hal.science/hal-02305329/file/doc00030856.pdf"]
+    },{
+      "docid":"5363751",
+      "label_s":"Alexandre Journeaux, Julie Veschambre, Maxime Lecomte, Ethan Uzan, Jean Dalibard, et al.. Two-Body Contact Dynamics in a Bose Gas near a Fano-Feshbach Resonance. 2025. &#x27E8;hal-05363751&#x27E9;",
+      "authFullName_s":["Alexandre Journeaux","Julie Veschambre","Maxime Lecomte","Ethan Uzan","Jean Dalibard","Félix Werner","Dmitry Petrov","Raphael Lopes"],
+      "uri_s":"https://hal.science/hal-05363751v1",
+      "doiId_s":"10.1103/prf8-3q27",
+      "producedDateY_i":2025
+    },{
+      "docid":"5041618",
+      "label_s":"Dario Mangoni, Alessandro Tasora, Rinaldo Garziera. A primal–dual predictor–corrector interior point method for non-smooth contact dynamics. Computer Methods in Applied Mechanics and Engineering, 2018, 330, pp.351-367. &#x27E8;10.1016/j.cma.2017.10.030&#x27E9;. &#x27E8;hal-05041611&#x27E9;",
+      "authFullName_s":["Dario Mangoni","Alessandro Tasora","Rinaldo Garziera"],
+      "uri_s":"https://hal.science/hal-05041611v1",
+      "doiId_s":"10.1016/j.cma.2017.10.030",
+      "producedDateY_i":2018,
+      "files_s":["https://hal.science/hal-05041611/file/mangoni2018.pdf"]
+    },{
+      "docid":"5588760",
+      "label_s":"Alexandre Journeaux, Julie Veschambre, Maxime Lecomte, Ethan Uzan, Jean Dalibard, et al.. Two-Body Contact Dynamics in a Bose Gas near a Fano-Feshbach Resonance. Physical Review Letters, 2026, 136 (8), pp.083404. &#x27E8;10.1103/prf8-3q27&#x27E9;. &#x27E8;hal-05588760&#x27E9;",
+      "authFullName_s":["Alexandre Journeaux","Julie Veschambre","Maxime Lecomte","Ethan Uzan","Jean Dalibard","Félix Werner","Dmitry Petrov","Raphael Lopes"],
+      "uri_s":"https://hal.science/hal-05588760v1",
+      "doiId_s":"10.1103/prf8-3q27",
+      "producedDateY_i":2026
+    },{
+      "docid":"4670478",
+      "label_s":"M. Di Bartolomeo, F. Massi, L. Baillet, A. Culla, A. Fregolent. Interplay Between Local Frictional Contact Dynamics and Global Dynamics of a Mechanical System. NONLINEAR DYNAMICS, VOL 1, Feb 2015, GEWERBESTRASSE 11, CHAM, CH-6330, Switzerland. pp.1-10, &#x27E8;10.1007/978-3-319-15221-9\\_1&#x27E9;. &#x27E8;hal-04670478&#x27E9;",
+      "authFullName_s":["M. Di Bartolomeo","F. Massi","L. Baillet","A. Culla","A. Fregolent"],
+      "uri_s":"https://hal.science/hal-04670478v1",
+      "doiId_s":"10.1007/978-3-319-15221-9\\_1",
+      "producedDateY_i":2015
+    },{
+      "docid":"2055185",
+      "label_s":"Lei Peng, Zhiqiang Feng, Pierre Joli, Christine Renaud. LiToTac: An Interactive-Interface Software for Finite Element Analysis of Multiple Contact Dynamics. Computer Modeling in Engineering and Sciences, 2019, 118 (1), pp.111--137. &#x27E8;10.31614/cmes.2018.04556&#x27E9;. &#x27E8;hal-02055185&#x27E9;",
+      "authFullName_s":["Lei Peng","Zhiqiang Feng","Pierre Joli","Christine Renaud"],
+      "uri_s":"https://hal.science/hal-02055185v1",
+      "doiId_s":"10.31614/cmes.2018.04556",
+      "producedDateY_i":2019
+    },{
+      "docid":"3424867",
+      "label_s":"R. Laniel, O. Mouraille, Stéphane Pagano, Frédéric Dubois, Pierre Alart. Numerical modelling of reinforced geomaterials by wires using the Non Smooth Contact Dynamics. 3rd Contact Mechanical International Symposium, 2005, Hanovre, Germany. pp.289-296, &#x27E8;10.1007/3-540-31761-9_32&#x27E9;. &#x27E8;hal-00514583&#x27E9;",
+      "authFullName_s":["R. Laniel","O. Mouraille","Stéphane Pagano","Frédéric Dubois","Pierre Alart"],
+      "uri_s":"https://hal.science/hal-00514583v1",
+      "doiId_s":"10.1007/3-540-31761-9_32",
+      "producedDateY_i":2005,
+      "files_s":["https://hal.science/hal-00514583/file/Laniel2006.pdf"]
+    },{
+      "docid":"3078897",
+      "label_s":"Juan Carlos Quezada, Cyrille Chazallon. Complex modulus modeling of asphalt concrete mixes using the Non-Smooth Contact Dynamics method. Computers and Geotechnics, 2020, 117, pp.103255. &#x27E8;10.1016/j.compgeo.2019.103255&#x27E9;. &#x27E8;hal-03078897&#x27E9;",
+      "authFullName_s":["Juan Carlos Quezada","Cyrille Chazallon"],
+      "uri_s":"https://hal.science/hal-03078897v1",
+      "doiId_s":"10.1016/j.compgeo.2019.103255",
+      "producedDateY_i":2020,
+      "files_s":["https://hal.science/hal-03078897/file/islandora_107578.pdf"]
+    },{
+      "docid":"479990",
+      "label_s":"Michel Jean. The non smooth contact dynamics method: application to granular material and other divided materials. 18 th Annual Conference of the Association of Computational mechanics in Engineering (ACME 2010), Mar 2010, Southampton, United Kingdom. &#x27E8;hal-00479990&#x27E9;",
+      "authFullName_s":["Michel Jean"],
+      "uri_s":"https://hal.science/hal-00479990v1",
+      "producedDateY_i":2010
+    },{
+      "docid":"2659296",
+      "label_s":"Nathalie Dubois Peyrard Peyrard, Ulf Dieckmann, Alain Franc. Long-range correlations improve understanding of the influence of network structure on contact dynamics. Theoretical Population Biology, 2008, 73 (3), pp.383-394. &#x27E8;10.1016/j.tpb.2007.12.006&#x27E9;. &#x27E8;hal-02659296&#x27E9;",
+      "authFullName_s":["Nathalie Dubois Peyrard Peyrard","Ulf Dieckmann","Alain Franc"],
+      "uri_s":"https://hal.inrae.fr/hal-02659296v1",
+      "doiId_s":"10.1016/j.tpb.2007.12.006",
+      "producedDateY_i":2008
+    }]
+  }
+}

@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/TfpDMFuNgicq30r4FqgfrxAspl4</id>
+  <title>arXiv Query: search_query=all:"linear complementarity" AND all:"rigid body"&amp;id_list=&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-09T07:29:26Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22linear+complementarity%22+AND+all:%22rigid+body%22&amp;start=0&amp;max_results=40&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>11</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2506.14097v2</id>
+    <title>Smooth-Rigid-Body Contact as a ReLCP: A Recursively Generated Linear Complementarity Problem</title>
+    <updated>2026-05-11T19:34:40Z</updated>
+    <link href="https://arxiv.org/abs/2506.14097v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.14097v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper reformulates complementarity-based time-stepping for frictionless nonsmooth contact between smooth rigid bodies as a recursively generated linear complementarity problem (ReLCP), involving a sequence of LCPs of increasing dimension. Starting from a classical single-constraint shared-normal signed-distance (SNSD) LCP, the method adds unilateral constraints only when the discrete-time update predicted by the current contact set would violate nonpenetration of the underlying smooth surfaces. The resulting procedure acts directly on smooth geometry, enforces nonpenetration to a prescribed tolerance, and avoids the oversampling inherent to proxy-surface contact models such as tessellations or multi-sphere decompositions, for which improved geometric fidelity can drive rapid growth in constraint count and cost. For strictly convex bodies, we prove that an initially overlap free configuration with sufficiently small timestep sizes, imply finite termination of the adaptive augmentation, and yield a unique discrete-time velocity update. In the small timestep limit and for any fixed overlap-free discrete state with a fixed geometric overlap tolerance, we prove that the recursion terminates after the initial solve, reducing the method to the classical single-constraint SNSD LCP and retaining the usual consistency of complementarity time-stepping with the underlying differential variational inequality. Numerical tests on colliding ellipsoids, compacting ellipsoid suspensions, growing bacterial colonies, and taut chainmail networks demonstrate stable large-timestep behavior, bounded interpenetration without discretization-induced surface roughness, and substantial reductions in both active constraint counts and runtime relative to representative discrete-surface complementarity formulations.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-17T01:25:14Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Bryce Palmer</name>
+    </author>
+    <author>
+      <name>Hasan Metin Aktulga</name>
+    </author>
+    <author>
+      <name>Tong Gao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.15714v3</id>
+    <title>Set-Valued Rigid Body Dynamics for Simultaneous, Inelastic, Frictional Impacts</title>
+    <updated>2023-08-14T18:02:53Z</updated>
+    <link href="https://arxiv.org/abs/2103.15714v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.15714v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Robotic manipulation and locomotion often entail nearly-simultaneous collisions -- such as heel and toe strikes during a foot step -- with outcomes that are extremely sensitive to the order in which impacts occur. Robotic simulators commonly lack the accuracy to predict this ordering, and instead pick one with a heuristic. This discrepancy degrades performance when model-based controllers and policies learned in simulation are placed on a real robot. We reconcile this issue with a set-valued rigid-body model which generates a broad set of physically reasonable outcomes of simultaneous frictional impacts. We first extend Routh's impact model to multiple impacts by reformulating it as a differential inclusion (DI), and show that any solution will resolve all impacts in finite time. By considering time as a state, we embed this model into another DI which captures the continuous-time evolution of rigid body dynamics, and guarantee existence of solutions. We finally cast simulation of simultaneous impacts as a linear complementarity problem (LCP), and develop an algorithm for tight approximation of the post-impact velocity set with probabilistic guarantees. We demonstrate our approach on several examples drawn from manipulation and legged locomotion.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-29T15:56:45Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Mathew Halm</name>
+    </author>
+    <author>
+      <name>Michael Posa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.09873v1</id>
+    <title>Sparsity Exploitation of Accelerated Modulus-Based Gauss-Seidel Method for Interactive Rigid Body Simulations</title>
+    <updated>2019-10-22T10:03:58Z</updated>
+    <link href="https://arxiv.org/abs/1910.09873v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.09873v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large-scale linear complementarity problems (LCPs) are repeatedly solved in interactive rigid-body simulations. The projected Gauss-Seidel method is often employed for LCPs, since it has advantages in computation time, numerical robustness, and memory use. Zheng and Yin (2013) proposed modulus-based matrix splitting iteration methods and showed their effectiveness for large problems, but a simple application of their approach to large-scale LCPs in interactive rigid-body simulations is not effective since such a simple application demands large matrix multiplications.
+  In this paper, we propose a novel method derived from accelerated modulus-based matrix splitting iteration methods that fits LCPs arising in interactive rigid-body simulations. To improve the computation time, we exploit sparsity structures related to the generalized velocity vector of rigid bodies. We discuss the convergence of the proposed method for an important case that the coefficient matrix of a given LCP is a positive definite matrix. Numerical experiments show that the proposed method is more efficient than the simple application of the accelerated modulus-based Gauss-Seidel method and that the accuracy in each step of the proposed method is superior to that of the projected Gauss-Seidel method.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-22T10:03:58Z</published>
+    <arxiv:comment>10 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Shugo Miyamoto</name>
+    </author>
+    <author>
+      <name>Makoto Yamashita</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.14245v1</id>
+    <title>Strongly coupled simulation of incompressible fluid and rigid bodies with velocity-based constraints using particle method</title>
+    <updated>2023-02-28T02:02:22Z</updated>
+    <link href="https://arxiv.org/abs/2302.14245v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.14245v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a novel particle method to compute strongly coupled incompressible fluid and rigid bodies. The method adopts a velocity-based formulation and utilizes the linear complementarity problem for the incompressibility constraint. Since all the constraints for incompressibility, inter-rigid-body contacts, and interaction between incompressible fluid and rigid bodies are mathematically compatible, strongly coupled simulation is achieved using the method, where the shapes of the rigid bodies are represented by particles as well. The abstract concept of velocity-based constraints is presented, which generalizes the formulations of the incompressibility constraint and inter-rigid-body contacts and provides a generic way to achieve strongly coupled simulation. Several numerical examples are presented to verify the method, which includes rigid-body computation, hydrostatic pressure, dam-break computation, and circular parch computation for incompressible fluid, buoyancy and seesaw computation for interaction of incompressible fluid and rigid bodies, and complex-scene computation for overall behavior and stability.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-28T02:02:22Z</published>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Shugo Miyamoto</name>
+    </author>
+    <author>
+      <name>Seiichi Koshizuka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.16021v3</id>
+    <title>Fast and Feature-Complete Differentiable Physics for Articulated Rigid Bodies with Contact</title>
+    <updated>2021-06-22T23:36:54Z</updated>
+    <link href="https://arxiv.org/abs/2103.16021v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.16021v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a fast and feature-complete differentiable physics engine, Nimble (nimblephysics.org), that supports Lagrangian dynamics and hard contact constraints for articulated rigid body simulation. Our differentiable physics engine offers a complete set of features that are typically only available in non-differentiable physics simulators commonly used by robotics applications. We solve contact constraints precisely using linear complementarity problems (LCPs). We present efficient and novel analytical gradients through the LCP formulation of inelastic contact that exploit the sparsity of the LCP solution. We support complex contact geometry, and gradients approximating continuous-time elastic collision. We also introduce a novel method to compute complementarity-aware gradients that help downstream optimization tasks avoid stalling in saddle points. We show that an implementation of this combination in an existing physics engine (DART) is capable of a 87x single-core speedup over finite-differencing in computing analytical Jacobians for a single timestep, while preserving all the expressiveness of original DART.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-30T01:48:29Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Keenon Werling</name>
+    </author>
+    <author>
+      <name>Dalton Omens</name>
+    </author>
+    <author>
+      <name>Jeongseok Lee</name>
+    </author>
+    <author>
+      <name>Ioannis Exarchos</name>
+    </author>
+    <author>
+      <name>C. Karen Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.04710v1</id>
+    <title>Jade: A Differentiable Physics Engine for Articulated Rigid Bodies with Intersection-Free Frictional Contact</title>
+    <updated>2023-09-09T07:39:36Z</updated>
+    <link href="https://arxiv.org/abs/2309.04710v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.04710v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Jade, a differentiable physics engine for articulated rigid bodies. Jade models contacts as the Linear Complementarity Problem (LCP). Compared to existing differentiable simulations, Jade offers features including intersection-free collision simulation and stable LCP solutions for multiple frictional contacts. We use continuous collision detection to detect the time of impact and adopt the backtracking strategy to prevent intersection between bodies with complex geometry shapes. We derive the gradient calculation to ensure the whole simulation process is differentiable under the backtracking mechanism. We modify the popular Dantzig algorithm to get valid solutions under multiple frictional contacts. We conduct extensive experiments to demonstrate the effectiveness of our differentiable physics simulation over a variety of contact-rich tasks.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-09T07:39:36Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Gang Yang</name>
+    </author>
+    <author>
+      <name>Siyuan Luo</name>
+    </author>
+    <author>
+      <name>Lin Shao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.08141v2</id>
+    <title>Variational quantum and neural quantum states algorithms for the linear complementarity problem</title>
+    <updated>2025-04-17T10:44:22Z</updated>
+    <link href="https://arxiv.org/abs/2504.08141v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.08141v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Variational quantum algorithms (VQAs) are promising hybrid quantum-classical methods designed to leverage the computational advantages of quantum computing while mitigating the limitations of current noisy intermediate-scale quantum (NISQ) hardware. Although VQAs have been demonstrated as proofs of concept, their practical utility in solving real-world problems -- and whether quantum-inspired classical algorithms can match their performance -- remains an open question. We present a novel application of the variational quantum linear solver (VQLS) and its classical neural quantum states-based counterpart, the variational neural linear solver (VNLS), as key components within a minimum map Newton solver for a complementarity-based rigid body contact model. We demonstrate using the VNLS that our solver accurately simulates the dynamics of rigid spherical bodies during collision events. These results suggest that quantum and quantum-inspired linear algebra algorithms can serve as viable alternatives to standard linear algebra solvers for modeling certain physical systems.</summary>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-10T22:03:14Z</published>
+    <arxiv:comment>13 pages, 5 figures, to appear in Philosophical Transactions of the Royal Society A</arxiv:comment>
+    <arxiv:primary_category term="cs.CE"/>
+    <author>
+      <name>Saibal De</name>
+    </author>
+    <author>
+      <name>Oliver Knitter</name>
+    </author>
+    <author>
+      <name>Rohan Kodati</name>
+    </author>
+    <author>
+      <name>Paramsothy Jayakumar</name>
+    </author>
+    <author>
+      <name>James Stokes</name>
+    </author>
+    <author>
+      <name>Shravan Veerapaneni</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1705.07640v1</id>
+    <title>Dynamics Based 3D Skeletal Hand Tracking</title>
+    <updated>2017-05-22T10:01:39Z</updated>
+    <link href="https://arxiv.org/abs/1705.07640v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1705.07640v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tracking the full skeletal pose of the hands and fingers is a challenging problem that has a plethora of applications for user interaction. Existing techniques either require wearable hardware, add restrictions to user pose, or require significant computation resources. This research explores a new approach to tracking hands, or any articulated model, by using an augmented rigid body simulation. This allows us to phrase 3D object tracking as a linear complementarity problem with a well-defined solution. Based on a depth sensor's samples, the system generates constraints that limit motion orthogonal to the rigid body model's surface. These constraints, along with prior motion, collision/contact constraints, and joint mechanics, are resolved with a projected Gauss-Seidel solver. Due to camera noise properties and attachment errors, the numerous surface constraints are impulse capped to avoid overpowering mechanical constraints. To improve tracking accuracy, multiple simulations are spawned at each frame and fed a variety of heuristics, constraints and poses. A 3D error metric selects the best-fit simulation, helping the system handle challenging hand motions. Such an approach enables real-time, robust, and accurate 3D skeletal tracking of a user's hand on a variety of depth cameras, while only utilizing a single x86 CPU core for processing.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-05-22T10:01:39Z</published>
+    <arxiv:comment>Published in Graphics Interface 2013</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Stan Melax</name>
+    </author>
+    <author>
+      <name>Leonid Keselman</name>
+    </author>
+    <author>
+      <name>Sterling Orsten</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1807.04198v1</id>
+    <title>Using Contact to Increase Robot Performance for Glovebox D&amp;D Tasks</title>
+    <updated>2018-07-11T15:36:10Z</updated>
+    <link href="https://arxiv.org/abs/1807.04198v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1807.04198v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Glovebox decommissioning tasks usually require manipulating relatively heavy objects in a highly constrained environment. Thus, contact with the surroundings becomes inevitable. In order to allow the robot to interact with the environment in a natural way, we present a contact-implicit motion planning framework. This framework enables the system, without the specification in advance of a contact plan, to make and break contacts to maintain stability while performing a manipulation task. In this method, we use linear complementarity constraints to model rigid body contacts and find a locally optimal solution for joint displacements and magnitudes of support forces. Then, joint torques are calculated such that the support forces have the highest priority. We evaluate our framework in a 2.5D, quasi-static simulation in which a humanoid robot with planar arms manipulates a heavy object. Our results suggest that the proposed method provides the robot with the ability to balance itself by generating support forces on the environment while simultaneously performing the manipulation task.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-07-11T15:36:10Z</published>
+    <arxiv:comment>11 pages, 5 figures; Accepted for publication in Waste Management Symposia 2018</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Aykut Onol</name>
+    </author>
+    <author>
+      <name>Philip Long</name>
+    </author>
+    <author>
+      <name>Taskin Padir</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.21078v1</id>
+    <title>Impact-Aware Model Predictive Control for UAV Landing on a Heaving Platform</title>
+    <updated>2026-04-22T20:41:58Z</updated>
+    <link href="https://arxiv.org/abs/2604.21078v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.21078v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Landing UAVs on heaving marine platforms is challenging because relative vertical motion can generate large impact forces and cause rebound on touchdown. To address this, we develop an impact-aware Model Predictive Control (MPC) framework that models landing as a velocity-level rigid-body impact governed by Newton's restitution law. We embed this as a linear complementarity problem (LCP) within the MPC dynamics to predict the discontinuous post-impact velocity and suppress rebound. In simulation, restitution-aware prediction reduces pre-impact relative velocity and improves landing robustness. Experiments on a heaving-deck testbed show an 86.2% reduction in post-impact deflection compared to a tracking MPC.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-22T20:41:58Z</published>
+    <arxiv:comment>To be published in the proceedings of International Federation of Automatic Control (IFAC) World Congress 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Jess Stephenson</name>
+    </author>
+    <author>
+      <name>Melissa Greeff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.06623v2</id>
+    <title>A scalable computational platform for particulate Stokes suspensions</title>
+    <updated>2020-05-15T17:19:44Z</updated>
+    <link href="https://arxiv.org/abs/1909.06623v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.06623v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe a computational framework for simulating suspensions of rigid particles in Newtonian Stokes flow. One central building block is a collision-resolution algorithm that overcomes the numerical constraints arising from particle collisions. This algorithm extends the well-known complementarity method for non-smooth multi-body dynamics to resolve collisions in dense rigid body suspensions. This approach formulates the collision resolution problem as a linear complementarity problem with geometric `non-overlapping' constraints imposed at each timestep. It is then reformulated as a constrained quadratic programming problem and the Barzilai-Borwein projected gradient descent method is applied for its solution. This framework is designed to be applicable for any convex particle shape, e.g., spheres and spherocylinders, and applicable to any Stokes mobility solver, including the Rotne-Prager-Yamakawa approximation, Stokesian Dynamics, and PDE solvers (e.g., boundary integral and immersed boundary methods). In particular, this method imposes Newton's Third Law and records the entire contact network. Further, we describe a fast, parallel, and spectrally-accurate boundary integral method tailored for spherical particles, capable of resolving lubrication effects. We show weak and strong parallel scalings up to $8\times 10^4$ particles with approximately $4\times 10^7$ degrees of freedom on $1792$ cores. We demonstrate the versatility of this framework with several examples, including sedimentation of particle clusters, and active matter systems composed of ensembles of particles driven to rotate.</summary>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.comp-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-14T16:18:13Z</published>
+    <arxiv:primary_category term="cs.CE"/>
+    <author>
+      <name>Wen Yan</name>
+    </author>
+    <author>
+      <name>Eduardo Corona</name>
+    </author>
+    <author>
+      <name>Dhairya Malhotra</name>
+    </author>
+    <author>
+      <name>Shravan Veerapaneni</name>
+    </author>
+    <author>
+      <name>Michael Shelley</name>
+    </author>
+    <arxiv:doi>10.1016/j.jcp.2020.109524</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jcp.2020.109524" title="doi"/>
+  </entry>
+</feed>

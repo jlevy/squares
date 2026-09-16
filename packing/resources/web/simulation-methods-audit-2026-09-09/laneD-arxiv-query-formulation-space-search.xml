@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/t57Hj0g0wwAKkIAYJehy6D8B3ZA</id>
+  <title>arXiv Query: search_query=all:"formulation space search" OR all:"reformulation descent"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:26:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22formulation+space+search%22+OR+all:%22reformulation+descent%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2408.03895v1</id>
+    <title>Variable Landscape Search: A Novel Metaheuristic Paradigm for Unlocking Hidden Dimensions in Global Optimization</title>
+    <updated>2024-08-07T16:48:32Z</updated>
+    <link href="https://arxiv.org/abs/2408.03895v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.03895v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents the Variable Landscape Search (VLS), a novel metaheuristic designed to globally optimize complex problems by dynamically altering the objective function landscape. Unlike traditional methods that operate within a static search space, VLS introduces an additional level of flexibility and diversity to the global optimization process. It does this by continuously and iteratively varying the objective function landscape through slight modifications to the problem formulation, the input data, or both. The innovation of the VLS metaheuristic stems from its unique capability to seamlessly fuse dynamic adaptations in problem formulation with modifications in input data. This dual-modality approach enables continuous exploration of interconnected and evolving search spaces, significantly enhancing the potential for discovering optimal solutions in complex, multi-faceted optimization scenarios, making it adaptable across various domains. In this paper, one of the theoretical results is obtained in the form of a generalization of the following three alternative metaheuristics, which have been reduced to special cases of VLS: Variable Formulation Search (VFS), Formulation Space Search (FSS), and Variable Search Space (VSS). As a practical application, the paper demonstrates the superior efficiency of a recent big data clustering algorithm through its conceptualization using the VLS paradigm.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-07T16:48:32Z</published>
+    <arxiv:comment>Manuscript submitted to Information Fusion</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Rustam Mussabayev</name>
+    </author>
+    <author>
+      <name>Ravil Mussabayev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.00622v1</id>
+    <title>Packing a fixed number of identical circles in a circular container with circular prohibited areas</title>
+    <updated>2018-11-01T20:19:32Z</updated>
+    <link href="https://arxiv.org/abs/1811.00622v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.00622v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we consider the problem of packing a fixed number of identical circles inside the unit circle container, where the packing is complicated by the presence of fixed size circular prohibited areas. Here the objective is to maximise the radius of the identical circles. We present a heuristic for the problem based upon formulation space search. Computational results are given for six test problems involving the packing of up to 100 circles. One test problem has a single prohibited area made up from the union of circles of different sizes. Four test problems are annular containers, which have a single inner circular prohibited area. One test problem has circular prohibited areas that are disconnected.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-01T20:19:32Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>C. O. Lopez</name>
+    </author>
+    <author>
+      <name>J. E. Beasley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.07519v1</id>
+    <title>Packing unequal rectangles and squares in a fixed size circular container using formulation space search</title>
+    <updated>2018-02-21T11:22:38Z</updated>
+    <link href="https://arxiv.org/abs/1802.07519v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.07519v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we formulate the problem of packing unequal rectangles/squares into a fixed size circular container as a mixed-integer nonlinear program. Here we pack rectangles so as to maximise some objective (e.g. maximise the number of rectangles packed or maximise the total area of the rectangles packed). We show how we can eliminate a nonlinear maximisation term that arises in one of the constraints in our formulation. We indicate the amendments that can be made to the formulation for the special case where we are maximising the number of squares packed. A formulation space search heuristic is presented and computational results given for publicly available test problems involving up to 30 rectangles/squares. Our heuristic deals with the case where the rectangles are of fixed orientation (so cannot be rotated) and with the case where the rectangles can be rotated through ninety degrees.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-21T11:22:38Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>C. O. López</name>
+    </author>
+    <author>
+      <name>J. E. Beasley</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,87 @@
+softschema:
+  contract: packing.squares:LabComponents/v1
+  schema: lab-components.schema.yaml
+  envelope: components
+  status: enforced
+components:
+  description: >
+    The motion lab's parts, each named, each with what it needs and where it can
+    run. The point of writing them down is that they must be separable: a
+    component is a function from animation data to markup, so the same one draws
+    inside the workbench, inside a standalone SVG file, inside the explainer
+    page, and inside a headless capture without knowing which it is in.
+
+    "Environment" is the load-bearing column. A component that is `static` can
+    appear in a self-contained `.svg` with no script at all, which is what makes
+    it embeddable in any website page. A component that is `interactive` needs a
+    host that runs JavaScript, so it can never be part of the embeddable export
+    and must not become a dependency of anything that is.
+  parts:
+  - name: packing-view
+    role: The squares and their container at one frame. Everything else is optional beside it.
+    needs: [frames, palette]
+    environment: static
+    notes: >
+      The only component the video and the embed strictly require. Its renderer is
+      sqpack.render.render_packing_svg, which already exists and which the two
+      prototypes bypassed.
+
+  - name: container-frame
+    role: The box outline and its side, drawn so a changing side reads as motion rather than a jump.
+    needs: [frames]
+    environment: static
+    notes: >
+      Blocked today by sqpack.render.motion, which refuses a trajectory whose
+      container side changes. Lifting that is the second task of Phase 4.
+
+  - name: gap-bar
+    role: The reached side against the best known and the proved lower bound, green when it matches.
+    needs: [frames, reference]
+    environment: static
+    notes: >
+      Reads only `reference`, which carries both bounds, so it never consults a
+      register at draw time and can be exported.
+
+  - name: phase-label
+    role: Which phase is running, and whether the frame was guided rather than found.
+    needs: [frames, guided]
+    environment: static
+    notes: >
+      Carries the guided badge. An exporter that drops this is producing something
+      that can be mistaken for a search result, so both exporters refuse without it.
+
+  - name: feasibility-mark
+    role: Whether the frame on screen is an actual packing.
+    needs: [frames]
+    environment: static
+    notes: >
+      Intermediate frames of a transition usually are not packings. The plan
+      requires saying so rather than letting a viewer assume every frame is a
+      result.
+
+  - name: contact-overlay
+    role: The contact graph, when a strategy declared one.
+    needs: [frames]
+    environment: static
+
+  - name: legend
+    role: What the colours mean under the animation's own palette rule.
+    needs: [palette]
+    environment: static
+
+  - name: transport
+    role: Play, pause, restart, and a seconds counter.
+    needs: [duration_seconds]
+    environment: interactive
+    notes: >
+      Interactive by nature, so it is excluded from the embeddable export by
+      construction rather than by remembering to leave it out.
+
+  - name: strategy-editor
+    role: Edit a phase and re-run it.
+    needs: [source]
+    environment: interactive
+    notes: >
+      The workbench's reason to exist, and the one part that needs the backend.
+      A simplified read-only form could reach the explainer page later; the
+      editable form cannot.

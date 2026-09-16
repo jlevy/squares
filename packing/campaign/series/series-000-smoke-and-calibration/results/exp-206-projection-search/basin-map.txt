@@ -1,0 +1,26 @@
+basin around the best-known packing, 3000 iterations per trial, container at 1.005 of the record
+   n                            setting    moved   turned  holds   basin    contacts
+   5                    bare projection   0.0000    0.00    yes    0.12    4 of 4  
+   5         faces, band 0.02, weight 1   0.0000    0.00    yes    0.12    4 of 4  
+   5         faces, band 0.02, weight 4   0.0000    0.00    yes    0.12    4 of 4  
+   5        faces, band 0.02, weight 10   0.0000    0.00    yes    0.12    4 of 4  
+   5  all contacts, band 0.02, weight 4   0.0000    0.00    yes    0.06    4 of 4  
+   5   all contacts, EQUALITY, weight 4   0.0000    0.00    yes    0.06    4 of 4  
+  10                    bare projection   0.0000    0.00    yes    0.01   11 of 11 
+  10         faces, band 0.02, weight 1   0.0000    0.00    yes    0.01   11 of 11 
+  10         faces, band 0.02, weight 4   0.0224    6.14    yes    0.01   11 of 11 
+  10        faces, band 0.02, weight 10   0.0000    0.00    yes    0.01   11 of 11 
+  10  all contacts, band 0.02, weight 4   0.0000    0.00    yes    0.01   11 of 11 
+  10   all contacts, EQUALITY, weight 4   0.0000    0.00    yes    none   11 of 11 
+  11                    bare projection   0.0000    0.00    yes    0.12   14 of 14 
+  11         faces, band 0.02, weight 1   0.0499    6.02    yes    none   13 of 14 
+  11         faces, band 0.02, weight 4   0.0487    6.17    yes    none   13 of 14 
+  11        faces, band 0.02, weight 10   0.0446    6.30     NO    none   13 of 14 
+  11  all contacts, band 0.02, weight 4   0.0000    0.00    yes    0.01   14 of 14 
+  11   all contacts, EQUALITY, weight 4   0.0000    0.00    yes    none   14 of 14 
+  17                    bare projection   0.0000    0.00    yes    0.06   24 of 24 
+  17         faces, band 0.02, weight 1   0.0000    0.00    yes    0.03   24 of 24 
+  17         faces, band 0.02, weight 4   0.0000    0.00    yes    0.03   24 of 24 
+  17        faces, band 0.02, weight 10   0.0000    0.00    yes    0.03   24 of 24 
+  17  all contacts, band 0.02, weight 4   0.0000    0.00    yes    0.01   24 of 24 
+  17   all contacts, EQUALITY, weight 4   0.0000    0.00    yes    none   24 of 24 

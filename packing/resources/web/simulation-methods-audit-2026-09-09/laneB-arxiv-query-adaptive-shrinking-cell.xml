@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/bFhRrVy3E+hlNeQyalKfWXdXUQM</id>
+  <title>arXiv Query: search_query=all:"adaptive shrinking cell"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:24:09Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22adaptive+shrinking+cell%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>7</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2103.06290v1</id>
+    <title>Kinetic Frustration Effects on Dense Two-Dimensional Packings of Convex Particles and Their Structural Characteristics</title>
+    <updated>2021-03-10T19:00:06Z</updated>
+    <link href="https://arxiv.org/abs/2103.06290v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.06290v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The study of hard-particle packings is of fundamental importance in physics, chemistry, cell biology, and discrete geometry. Much of the previous work on hard-particle packings concerns their densest possible arrangements. By contrast, we examine kinetic effects inevitably present in both numerical and experimental packing protocols. Specifically, we determine how changing the compression/shear rate of a two-dimensional packing of noncircular particles causes it to deviate from its densest possible configuration, which is always periodic. The adaptive shrinking cell (ASC) optimization scheme maximizes the packing fraction of a hard-particle packing by first applying random translations and rotations to the particles and then isotropically compressing and shearing the simulation box repeatedly until a possibly jammed state is reached. We use a stochastic implementation of the ASC optimization scheme to mimic different effective time scales by varying the number of particle moves between compressions/shears. We generate dense, effectively jammed, monodisperse, two-dimensional packings of obtuse scalene triangle, rhombus, curved triangle, lens, and "ice cream cone" (a semicircle grafted onto an isosceles triangle) shaped particles, with a wide range of packing fractions and degrees of order. To quantify these kinetic effects, we introduce the kinetic frustration index $K$, which measures the deviation of a packing from its maximum possible packing fraction. To investigate how kinetics affect short- and long-range ordering in these packings, we compute their spectral densities and characterize their contact networks. We find that kinetic effects are most significant when the particles have greater asphericity, less curvature, and less rotational symmetry. This work may be relevant to the design of laboratory packing protocols.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-10T19:00:06Z</published>
+    <arxiv:comment>25 pages, 18 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Charles Emmett Maher</name>
+    </author>
+    <author>
+      <name>Frank H. Stillinger</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1021/acs.jpcb.1c00497</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1021/acs.jpcb.1c00497" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1511.08472v1</id>
+    <title>Hard sphere packings within cylinders</title>
+    <updated>2015-11-26T18:29:44Z</updated>
+    <link href="https://arxiv.org/abs/1511.08472v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1511.08472v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The packing of hard spheres (HS) of diameter $σ$ in a cylinder has been used to model experimental systems, such as fullerenes in nanotubes and colloidal wire assembly. Finding the densest packings of HS under this type of confinement, however, grows increasingly complex with the cylinder diameter, $D$. Little is thus known about the densest achievable packings for $D&gt;2.873σ$. In this work, we extend the identification of the packings up to $D=4.00σ$ by adapting Torquato-Jiao's adaptive-shrinking-cell formulation and sequential-linear-programming (SLP) technique. We identify 17 new structures, almost all of them chiral. Beyond $D\approx2.85σ$, most of the structures consist of an outer shell and an inner core that compete for being close packed. In some cases, the shell adopts its own maximum density configuration, and the stacking of core spheres within it is quasiperiodic. In other cases, an interplay between the two components is observed, which may result in simple periodic structures. In yet other cases, the very distinction between core and shell vanishes, resulting in more exotic packing geometries, including some that are three-dimensional extensions of structures obtained from packing hard disks in a circle.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-11-26T18:29:44Z</published>
+    <arxiv:comment>11 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Soft Matter 12, 2505-2514 (2016)</arxiv:journal_ref>
+    <author>
+      <name>Lin Fu</name>
+    </author>
+    <author>
+      <name>William Steinhardt</name>
+    </author>
+    <author>
+      <name>Hao Zhao</name>
+    </author>
+    <author>
+      <name>Joshua E. S. Socolar</name>
+    </author>
+    <author>
+      <name>Patrick Charbonneau</name>
+    </author>
+    <arxiv:doi>10.1039/C5SM02875B</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1039/C5SM02875B" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1406.1535v1</id>
+    <title>Equilibrium Phase Behavior and Maximally Random Jammed State of Truncated Tetrahedra</title>
+    <updated>2014-06-05T22:13:32Z</updated>
+    <link href="https://arxiv.org/abs/1406.1535v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1406.1535v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Systems of hard nonspherical particles exhibit a variety of stable phases with different degrees of translational and orientational order, including isotropic liquid, solid crystal, rotator and a variety of liquid crystal phases. In this paper, we employ a Monte Carlo implementation of the adaptive-shrinking-cell (ASC) numerical scheme and free-energy calculations to ascertain with high precision the equilibrium phase behavior of systems of congruent Archimedean truncated tetrahedra over the entire range of possible densities up to the maximal nearly space-filling density. In particular, we find that the system undergoes two first-order phase transitions as the density increases: first a liquid-solid transition and then a solid-solid transition. The isotropic liquid phase coexists with the Conway-Torquato (CT) crystal phase at intermediate densities. At higher densities, we find that the CT phase undergoes another first-order phase transition to one associated with the densest-known crystal. We find no evidence for stable rotator (or plastic) or nematic phases. We also generate the maximally random jammed (MRJ) packings of truncated tetrahedra, which may be regarded to be the glassy end state of a rapid compression of the liquid. We find that such MRJ packings are hyperuniform with an average packing fraction of 0.770, which is considerably larger than the corresponding value for identical spheres (about 0.64). We conclude with some simple observations concerning what types of phase transitions might be expected in general hard-particle systems based on the particle shape and which would be good glass formers.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-06-05T22:13:32Z</published>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>J. Phys. Chem. B, 118(2014), 7981-7992</arxiv:journal_ref>
+    <author>
+      <name>Duyu Chen</name>
+    </author>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1021/jp5010133</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1021/jp5010133" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1405.0245v1</id>
+    <title>Maximally dense packings of two-dimensional convex and concave noncircular particles</title>
+    <updated>2014-05-01T18:26:01Z</updated>
+    <link href="https://arxiv.org/abs/1405.0245v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1405.0245v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dense packings of hard particles have important applications in many fields, including condensed matter physics, discrete geometry and cell biology. In this paper, we employ a stochastic search implementation of the Torquato-Jiao Adaptive-Shrinking-Cell optimization scheme [Nature 460, 876 (2009)] to find maximally dense particle packings in d-dimensional Euclidean space $\mathbb{R}^d$. While the original implementation was designed to study spheres and convex polyhedra in $d\ge3$, our implementation focuses on $d=2$ and extends the algorithm to include both concave polygons and certain convex or concave non-polygonal particle shapes. We verify the robustness of this packing protocol by successfully reproducing the known putative optimal packings of congruent copies of regular pentagons and octagons, then employ it to suggest dense packing arrangements of congruent copies of certain families of concave crosses, convex and concave curved triangles (incorporating shapes resembling the Mercedes-Benz logo), and "moon-like" shapes. Analytical constructions are determined subsequently to obtain the densest known packings of these particle shapes. For the examples considered, we find that the densest packings of both convex and concave particles with central symmetry are achieved by their corresponding optimal Bravais lattice packings; for particles lacking central symmetry, the densest packings obtained are non-lattice periodic packings, which are consistent with recently-proposed general organizing principles for hard particles. Moreover, we find that the densest known packings of certain curved triangles are periodic with a four-particle basis, and we find that the densest known periodic packings of certain moon-like shapes possess no inherent symmetries. Our work adds to the growing evidence that particle shape can be used as a tuning parameter to achieve a diversity of packing structures.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-05-01T18:26:01Z</published>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E 86, 031302 (2012)</arxiv:journal_ref>
+    <author>
+      <name>Steven Atkinson</name>
+    </author>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <author>
+      <name>Salvatore Torquato</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.86.031302</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.86.031302" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1008.2747v2</id>
+    <title>Robust Algorithm to Generate a Diverse Class of Dense Disordered and Ordered Sphere Packings via Linear Programming</title>
+    <updated>2010-12-14T20:19:10Z</updated>
+    <link href="https://arxiv.org/abs/1008.2747v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1008.2747v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We have formulated the problem of generating periodic dense paritcle packings as an optimization problem called the Adaptive Shrinking Cell (ASC) formulation [S. Torquato and Y. Jiao, Phys. Rev. E {\bf 80}, 041104 (2009)]. Because the objective function and impenetrability constraints can be exactly linearized for sphere packings with a size distribution in $d$-dimensional Euclidean space $\mathbb{R}^d$, it is most suitable and natural to solve the corresponding ASC optimization problem using sequential linear programming (SLP) techniques. We implement an SLP solution to produce robustly a wide spectrum of jammed sphere packings in $\mathbb{R}^d$ for $d=2,3,4,5$ and $6$ with a diversity of disorder and densities up to the maximally densities. This deterministic algorithm can produce a broad range of inherent structures besides the usual disordered ones with very small computational cost by tuning the radius of the {\it influence sphere}. In three dimensions, we show that it can produce with high probability a variety of strictly jammed packings with a packing density anywhere in the wide range $[0.6, 0.7408...]$. We also apply the algorithm to generate various disordered packings as well as the maximally dense packings for $d=2,3, 4,5$ and 6. Compared to the LS procedure, our SLP protocol is able to ensure that the final packings are truly jammed, produces disordered jammed packings with anomalously low densities, and is appreciably more robust and computationally faster at generating maximally dense packings, especially as the space dimension increases.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-08-16T19:42:32Z</published>
+    <arxiv:comment>34 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Physical Review E 82, 061302 (2010)</arxiv:journal_ref>
+    <author>
+      <name>Sal Torquato</name>
+    </author>
+    <author>
+      <name>Yang Jiao</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.82.061302</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.82.061302" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0909.0940v3</id>
+    <title>Dense Packings of Polyhedra: Platonic and Archimedean Solids</title>
+    <updated>2009-09-09T21:59:40Z</updated>
+    <link href="https://arxiv.org/abs/0909.0940v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0909.0940v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We formulate the problem of generating dense packings of nonoverlapping, non-tiling polyhedra within an adaptive fundamental cell subject to periodic boundary conditions as an optimization problem, which we call the Adaptive Shrinking Cell (ASC) scheme. This novel optimization problem is solved here (using a variety of multi-particle initial configurations) to find the dense packings of each of the Platonic solids in three-dimensional Euclidean space R3 , except for the cube, which is the only Platonic solid that tiles space. We find the densest known packings of tetrahedra, icosahedra, dodecahedra, and octahedra with densities 0.823, 0.836, 0.904, and 0.947, respectively. It is noteworthy that the densest tetrahedral packing possesses no long-range order. Unlike the densest tetrahedral packing, which must not be a Bravais lattice packing, the densest packings of the other non-tiling Platonic solids that we obtain are their previously known optimal (Bravais) lattice packings. We also derive a simple upper bound on the maximal density of packings of congruent nonspherical particles, and apply it to Platonic solids, Archimedean solids, superballs and ellipsoids. Our simulation results, rigorous upper bounds, and other theoretical arguments lead us to the conjecture that the densest packings of Platonic and Archimedean solids with central symmetry are given by their corresponding densest lattice packings. In addition, we conjecture that the optimal packing of any convex, congruent polyhedron without central symmetry generally is not a lattice packing.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-09-04T19:43:51Z</published>
+    <arxiv:comment>To appear in Phys. Rev. E. The paper is a sequel of a recent Nature paper, i.e., Nature 460, 876 (2009). In this paper, we reported a new packing of tetrahedra with higher density 0.823 than that reported in Nature (0.782). The paper is 52 pages, including 14 figures and 4 tables</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.80.041104</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.80.041104" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0908.4107v1</id>
+    <title>Dense Packings of the Platonic and Archimedean Solids</title>
+    <updated>2009-08-27T23:05:48Z</updated>
+    <link href="https://arxiv.org/abs/0908.4107v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0908.4107v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Dense packings have served as useful models of the structure of liquid, glassy and crystal states of matter, granular media, heterogeneous materials, and biological systems. Probing the symmetries and other mathematical properties of the densest packings is a problem of long-standing interest in discrete geometry and number theory. The preponderance of previous work has focused on spherical particles, and very little is known about dense polyhedral packings. We formulate the problem of generating dense packings of polyhedra within an adaptive fundamental cell subject to periodic boundary conditions as an optimization problem, which we call the Adaptive Shrinking Cell (ASC) scheme. This novel optimization problem is solved here (using a variety of multi-particle initial configurations) to find dense packings of each of the Platonic solids in three-dimensional Euclidean space. We find the densest known packings of tetrahedra, octahedra, dodecahedra and icosahedra with densities $0.782...$, $0.947...$, $0.904...$, and $0.836...$, respectively. Unlike the densest tetrahedral packing, which must be a non-Bravais lattice packing, the densest packings of the other non-tiling Platonic solids that we obtain are their previously known optimal (Bravais) lattice packings. Our simulations results, rigorous upper bounds that we derive, and theoretical arguments lead us to the strong conjecture that the densest packings of the Platonic and Archimedean solids with central symmetry are given by their corresponding densest lattice packings. This is the analog of Kepler's sphere conjecture for these solids.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-08-27T23:05:48Z</published>
+    <arxiv:comment>18 pages, 4 figures. In the published version of this paper in Nature (described below), "P6" should be "A1" in Figure 1</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Nature, vol. 460, 876-879 (2009)</arxiv:journal_ref>
+    <author>
+      <name>S. Torquato</name>
+    </author>
+    <author>
+      <name>Y. Jiao</name>
+    </author>
+    <arxiv:doi>10.1038/nature08239</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/nature08239" title="doi"/>
+  </entry>
+</feed>

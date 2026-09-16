@@ -17,7 +17,13 @@ and a check that silently stops running.
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from sqpack.cli.validate import STEPS, Step, select_for_paths
+from workbench_tools.build_site import RENDER_INPUTS, REPO
+
+WORKBENCH_STEP = "workbench browser behavior in Chromium"
+BROWSER_FLOOR_STEP = "browser floor (biome, eslint, tsc, node:test)"
 
 # One representative path per source region. Every step must be selected by at least one
 # of these; a step selected by none has a pattern set that matches nothing real, which is
@@ -53,6 +59,8 @@ PATTERN_PROBES = (
     "packing/atlas/known-best/manifest.json",
     "packing/atlas/prospective/manifest.json",
     "packing/atlas/enumerated/contact-scaffolds-size5.json",
+    "packages/workbench/src/application.js",
+    "packages/workbench/probes/atlas-transitions.d.ts",
     "packing/cases/trump11/packing.py",
     "packing/cases/stromquist/printed_cover.py",
     "packing/resources/papers/kingbird-square-29-provenance.svg",
@@ -215,3 +223,52 @@ def test_a_narrowed_tier_reports_its_own_universe() -> None:
 def test_an_explicitly_empty_universe_is_not_the_whole_gate() -> None:
     """An empty list passed on purpose meant "all steps", which reads backwards."""
     assert select_for_paths(["packing/frontier/STATUS.md"], []).steps == ()
+
+
+def _selects(path: str, step_name: str, patterns: tuple[str, ...] | None = None) -> bool:
+    if patterns is None:
+        return step_name in {step.name for step in select_for_paths([path]).steps}
+    return Step(step_name, lambda _c: "", touches=patterns).reachable_from(path)
+
+
+def _render_input_probe(declared: Path) -> str:
+    """A repository-relative path that stands for one declared render input."""
+    relative = declared.relative_to(REPO).as_posix()
+    return f"{relative}/__render_input__" if declared.is_dir() else relative
+
+
+def test_every_workbench_render_input_selects_the_workbench_check() -> None:
+    """`_WORKBENCH_INPUTS` is a hand list beside the builder's own declaration.
+
+    Compared here rather than trusted: it omitted `packing/devtools/render_explainer.py`,
+    which the builder runs for the KaTeX stylesheet, so a `--since` run over that file
+    skipped the page check (#160 R26).
+    """
+    unselected = [
+        _render_input_probe(declared)
+        for declared in RENDER_INPUTS
+        if not _selects(_render_input_probe(declared), WORKBENCH_STEP)
+    ]
+    assert unselected == [], f"render inputs that do not select {WORKBENCH_STEP!r}"
+
+
+def test_an_omitted_workbench_input_is_detected() -> None:
+    """The negative control: the step's patterns without the explainer renderer."""
+    (step,) = [step for step in STEPS if step.name == WORKBENCH_STEP]
+    without = tuple(pattern for pattern in step.touches if "render_explainer" not in pattern)
+    explainer = REPO / "packing/devtools/render_explainer.py"
+    assert explainer in RENDER_INPUTS
+    assert not _selects(_render_input_probe(explainer), WORKBENCH_STEP, without)
+
+
+def test_browser_floor_inputs_select_the_browser_floor() -> None:
+    """A type declaration or a module script is browser-floor input like any `.js`
+    (#125 F36): editing one must select the floor on a `--since` run."""
+    for path in (
+        "packages/workbench/probes/atlas-transitions.d.ts",
+        "packing/atlas/known-best/video/spikes/v1-slideshow/node-harness.d.ts",
+        "packing/devtools/node/inspect-probes.mjs",
+        "packages/workbench/tools/render-katex.ts",
+        "packages/workbench/assets/workbench.css",
+    ):
+        assert _selects(path, BROWSER_FLOOR_STEP), path

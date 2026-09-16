@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ApAZFCjc9pWr+q9opjgcWXoyYQ8</id>
+  <title>arXiv Query: search_query=au:"Azema E"&amp;id_list=&amp;start=0&amp;max_results=60</title>
+  <updated>2026-09-09T07:37:40Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=au:%22Azema+E%22&amp;start=0&amp;max_results=60&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>60</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1208.0499v1</id>
+    <title>Particle shape dependence in 2D granular media</title>
+    <updated>2012-08-02T14:25:40Z</updated>
+    <link href="https://arxiv.org/abs/1208.0499v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1208.0499v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Particle shape is a key to the space-filling and strength properties of granular matter. We consider a shape parameter $η$ describing the degree of distortion from a perfectly spherical shape. Encompassing most specific shape characteristics such as elongation, angularity and nonconvexity, $η$ is a low-order but generic parameter that we used in a numerical benchmark test for a systematic investigation of shape-dependence in sheared granular packings composed of particles of different shapes. We find that the shear strength is an increasing function of $η$ with nearly the same trend for all shapes, the differences appearing thus to be of second order compared to $η$. We also observe a nontrivial behavior of packing fraction which, for all our simulated shapes, increases with $η$ from the random close packing fraction for disks, reaches a peak considerably higher than that for disks, and subsequently declines as $η$ is further increased. These findings suggest that a low-order description of particle shape accounts for the principal trends of packing fraction and shear strength. Hence, the effect of second-order shape parameters may be investigated by considering different shapes at the same level of $η$.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-08-02T14:25:40Z</published>
+    <arxiv:comment>5 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <arxiv:journal_ref>Europhysics Letters, Vol. 98, Number 4, p 44008, 2012</arxiv:journal_ref>
+    <author>
+      <name>B. Saint-Cyr</name>
+    </author>
+    <author>
+      <name>K. Szarf</name>
+    </author>
+    <author>
+      <name>C. Voivret</name>
+    </author>
+    <author>
+      <name>E. Azéma</name>
+    </author>
+    <author>
+      <name>V. Richefeu</name>
+    </author>
+    <author>
+      <name>J. -Y. Delenne</name>
+    </author>
+    <author>
+      <name>G. Combe</name>
+    </author>
+    <author>
+      <name>C. Nouguier-Lehon</name>
+    </author>
+    <author>
+      <name>P. Villard</name>
+    </author>
+    <author>
+      <name>P. Sornay</name>
+    </author>
+    <author>
+      <name>M. Chaze</name>
+    </author>
+    <author>
+      <name>F. Radjaï</name>
+    </author>
+    <arxiv:doi>10.1209/0295-5075/98/44008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1209/0295-5075/98/44008" title="doi"/>
+  </entry>
+</feed>

@@ -3,7 +3,7 @@
   <title id="figure-title">Known-best packing of 72 unit squares</title>
   <desc id="figure-description">The retained known-best n=72 construction, normalized to Witness/v2 and rendered with the repository's deterministic house renderer.</desc>
   <metadata>
-    <sqpack:profile version="7">
+    <sqpack:profile version="8">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
       <sqpack:value name="check-detail">Verifies this known-best upper-bound construction, not uniqueness; optimality comes only from the separately cited frontier lower bound.</sqpack:value>

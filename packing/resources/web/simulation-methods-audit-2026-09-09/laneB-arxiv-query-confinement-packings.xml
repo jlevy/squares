@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/5ckg2Y0R3eBGXdboDN1aFXcWCZ8</id>
+  <title>arXiv Query: search_query=all:"cylindrical confinement" AND all:packings&amp;id_list=&amp;start=0&amp;max_results=30</title>
+  <updated>2026-09-09T07:39:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22cylindrical+confinement%22+AND+all:packings&amp;start=0&amp;max_results=30&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>30</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2306.04134v2</id>
+    <title>Thermodynamics, structure and dynamics of cylindrically confined hard spheres: The role of excess helical twist</title>
+    <updated>2024-12-16T03:25:23Z</updated>
+    <link href="https://arxiv.org/abs/2306.04134v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.04134v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hard spheres confined to narrow quasi-one-dimensional cylindrical channels form perfect helical structures at close packing. Here, we use molecular dynamics simulation to show that the thermodynamics, structure and dynamics of the fluid below close packing are dominated by the presence of topological defects that reverse the local twist direction of the helix. When compressed from a random, low density state, or decompressed from high density ordered states with zero excess helical twist, the system equilibrates to an achiral fluid that exhibits two heat capacity maxima along the equation of state. The low density heat capacity maximum corresponds to the onset of helix formation and the high density maximum occurs when the system rapidly loses defects in a Schottky-like anomaly. The local twist auto-correlation function in the achiral fluid exhibits a stretched exponential decay and the structural relaxation times undergo a fragile-to-strong crossover located at the high density heat capacity maximum. We also study the effect of excess helical twist by using initial starting configurations consisting of two helical domains with opposite twist directions of different lengths. This leads to the formation of topologically protected states that are characterized by the presence of loosely bound defect pairs which become more tightly bound with increasing excess helical twist. The local twist auto-correlation function in the chiral fluid decays as a power law at long times. The possible kinetic or thermodynamic origin of this topological protection is discussed.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-07T04:11:47Z</published>
+    <arxiv:comment>New results, extended discussion. 13 figures, 16 pages</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>Mahdi Zarif</name>
+    </author>
+    <author>
+      <name>Richard K. Bowles</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.09270v1</id>
+    <title>Segregation of polymers under cylindrical confinement: Effects of polymer topology and crowding</title>
+    <updated>2018-05-23T16:40:19Z</updated>
+    <link href="https://arxiv.org/abs/1805.09270v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.09270v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Monte Carlo computer simulations are used to study the segregation behaviour of two polymers under cylindrical confinement. Using a multiple-histogram method, the conformational free energy, F, of the polymers was measured as a function of the centre-of-mass separation distance, λ. We examined the scaling of the free energy functions with the polymer length, the length and diameter of the confining cylinder, the polymer topology (i.e. linear vs ring polymers), and the packing fraction and size of mobile crowding agents. In the absence of crowders, the observed scaling of F(λ) is similar to that predicted using a simple model employing the de~Gennes blob model and the approximation that the free energy of overlapping chains in a tube is equal to that of two isolated chains each in a tube of half the cross-sectional area. Simulations were used to test the latter approximation and reveal that it yields poor quantitative predictions. This, along with generic finite-size effects, likely gives rise to the discrepancies between the predicted and measured values of scaling exponents for F(λ). For segregation in the presence of crowding agents, the free energy barrier generally decreases with increasing crowder packing fraction, thus reducing the entropic forces driving segregation. However, for fixed packing fraction, the barrier increases as the crowder/monomer size ratio decreases.</summary>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-23T16:40:19Z</published>
+    <arxiv:comment>13 pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.soft"/>
+    <author>
+      <name>James M. Polson</name>
+    </author>
+    <author>
+      <name>Deanna R. -M. Kerry</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1302.6405v3</id>
+    <title>A hybrid helical structure of hard sphere packing from sequential deposition</title>
+    <updated>2013-04-26T21:10:41Z</updated>
+    <link href="https://arxiv.org/abs/1302.6405v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1302.6405v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A hybrid helical structure of equal-sized hard spheres in cylindrical confinement was discovered as a 'by-product' of the recently developed sequential deposition approach [Physical Review E 84, 050302(R) (2011)] for constructing the densest possible packings of such systems. Unlike the conventional triple-helix structure where its three strands of spheres are packed densely to form triads of close-packed, mutually touching spheres, in this novel helical phase only two of its three strands of spheres are packed in this densest arrangement and the overall structure resembles a hybrid of the single and the double helix. This article explains how this previously unknown structure can be constructed via the abovementioned sequential deposition of spheres, which involves manipulating the positions of a few spheres to create a template for the deposition process. The findings show that it is possible to discover new structures through varying only the configuration of few spheres within the template, where this approach relies on a sensitive dependence of the deposition-generated structures on the template.</summary>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.soft" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-02-26T11:44:50Z</published>
+    <arxiv:comment>This manuscript has been accepted for publication in Philosophical Magazine - Special issue: International Workshop on Packing. Please click the following link for a 3D view of this new structure: http://www.youtube.com/watch?v=YeALU4Vyx-4</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mtrl-sci"/>
+    <arxiv:journal_ref>Philosophical Magazine, Vol. 93, Special Issue: International Workshop on Packing Problems, Pg. 4057 - 4069 (2013)</arxiv:journal_ref>
+    <author>
+      <name>Ho-Kei Chan</name>
+    </author>
+    <arxiv:doi>10.1080/14786435.2013.801568</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1080/14786435.2013.801568" title="doi"/>
+  </entry>
+</feed>

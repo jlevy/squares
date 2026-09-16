@@ -167,9 +167,18 @@ properties:
           Declaring it is what makes stopping an outcome rather than a loss of nerve,
           and it is what a resumed round is measured against.
       wall_seconds:
-        type: number
-        minimum: 0
-        description: Wall-clock seconds actually spent measuring, from the run data.
+        anyOf:
+          - {type: number, minimum: 0}
+          - {const: unrecorded-historical}
+        description: >-
+          Wall-clock seconds actually spent measuring, from the run data. The historical
+          marker is for a round whose timing receipt was lost: ledger.py accepts it only
+          when the round declares D-067 in known_defects and carries a migration annotation
+          dated after the round. It is never zero.
+      migration_annotation:
+        type: string
+        minLength: 1
+        description: Dated explanation of a retained historical timing gap.
       agent_minutes:
         type: number
         minimum: 0
