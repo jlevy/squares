@@ -3,9 +3,9 @@ type: is
 id: is-01m2m4aptpzqgmmhqxgxz3vba5
 title: "Address review: PR #175 — the guard, the ratchet and the probe loader"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 17
+version: 19
 labels: []
 dependencies: []
 child_order_hints:
@@ -26,5 +26,9 @@ child_order_hints:
   - is-01m2m66z2th383fhep5zh67yfe
   - is-01m2m66zx2kaa04dgecjgzvj8b
 created_at: 2026-09-16T03:31:52.789Z
-updated_at: 2026-09-16T04:04:48.161Z
+updated_at: 2026-09-16T05:02:58.200Z
 ---
+
+## Notes
+
+2026-09-16 recovery audit: recovered comprehensive R1-R8 commit 0ab75b7c was a sibling of remote PR head 582d384a; e4d96b6f was correctly one commit on top of 582d384a, not a sibling. Reconciliation head 0dfcd70b now preserves both lineages: 7eb20ffd applies the e4d delta onto 0ab, and merge commit 0dfcd70b records e4d/582 ancestry. Focused evidence is green (109 guard tests, 23 browser-floor contract tests, Ruff, live guard over 912 files / 469 allowlisted sites, and 177 probe declarations). Required pre-push validation is running before the integrated head is pushed and propagated through #178/#179/#181/#180.
