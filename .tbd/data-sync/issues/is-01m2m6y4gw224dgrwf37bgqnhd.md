@@ -5,7 +5,7 @@ title: "Address review: PR #180 — no-exception browser floor"
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 19
 labels: []
 dependencies:
   - type: blocks
@@ -22,10 +22,10 @@ child_order_hints:
   - is-01m2mpez5qemp0vvh47wfbdq7p
   - is-01m2mqv1tthpq9pb8r1m7d4c0e
 created_at: 2026-09-16T04:17:26.555Z
-updated_at: 2026-09-16T09:12:51.289Z
+updated_at: 2026-09-16T09:21:40.456Z
 ---
 Track and disposition every published review and addendum finding on PR #180. Reuse think-7o6d for the effective-tsc-coverage fix; create children only for distinct remaining findings. Completion requires fixes or explicit rebuttal/defer, propagation from the final PR #181 head, exact-head CI, and a published disposition map.
 
 ## Notes
 
-PR #180 review remediation is integrated locally at exact HEAD d7c07bf7 (parent 3a9bb2f6, which conflict-free integrates exact main b1b2d30f). think-7z01 remains closed: both Motion Labs enforce rendered-pixel paint, ancestor display/visibility/opacity, representative geometry, file-backed restoration, and opacity-zero/transparent-paint live negative controls with committed golden coverage. Hosted frontend run 35075455272 exposed one follow-up: raw restored PNG bytes differed on Linux although browser floor and 146 Node tests passed. think-ai8a is closed at d7c07bf7: the checker decodes RGB pixels to int16, ignores channel deltas through 8, requires at least 10,000 material paint pixels, permits at most 256 restoration pixels, fails closed on screenshot dimensions, and prints measured diagnostics. Local Chrome measured 184,060 exact and 176,572 general positive pixels, zero for all four live mutants, and zero restoration pixels; 10 consecutive full checks passed 36 exact plus 12 general states. Focused 100/100, browser floor over 552 files plus 146 Node tests, canonical Ruff/Rust lint, BasedPyright 0/0/0, uv lock check, and git diff check pass. Independent senior review approved the four-file diff with no finding. Earlier 213-test integrated run, all 33 records steps, full workbench Chrome, and behavioral shard dispositions remain valid. Root typecheck parity is fixed; think-b9qy remains open only for broader command deduplication. Golden snapshot-cap census and replay coverage remain fixed. No remaining local review finding; remaining external evidence is the hosted Linux exact-head rerun and deferred checkpoint after the parent pushes.
+PR #180 is now exact HEAD f4cfa5be26cc73f552537963b8689040d2ca1694. All required hosted checks are green on this head: mergeability; packing validate, suite-a (2m49s), suite-b, frontend (2m46s), geometry, sweeps, macOS, packing-required; and Pages workbench, PDF, print, typography, screen, Chromium/Firefox/WebKit geometry/font, pages-required. Hosted suite-a cost regression think-9j8d was fixed without changing the 12s guard and is closed. Final deep dispatch 35078581840 is running against synthetic merge 699b84b6a6f36237e540b6989ea971821a8dd348, whose parents are exact main b1b2d30f0aeebaf53cbe4b3acc70938a1864c0a3 and exact PR head f4cfa5be26cc73f552537963b8689040d2ca1694. No remaining review or required-CI finding; close only after all four deep jobs and aggregate pass.
