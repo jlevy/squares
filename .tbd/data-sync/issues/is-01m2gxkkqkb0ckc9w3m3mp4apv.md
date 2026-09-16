@@ -5,7 +5,7 @@ title: Extract each rung's hint from a record at declared tolerances, one implem
 kind: feature
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies:
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m2gxkzqdxb01e2h4tpkvczw7
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:36:41.202Z
-updated_at: 2026-09-14T21:41:19.563Z
+updated_at: 2026-09-16T21:23:37.216Z
 ---
 One implementation that turns a record's poses into each rung's hint, at declared tolerances, retained as data per n and shared by the Python search lane and the workbench.
 
@@ -33,3 +33,7 @@ Per record:
 Acceptance: fixture records n = 5, 11, 17, 29 reproduce the exact counts where they are known; tolerances are recorded with the output; the same data is readable from Python and TypeScript.
 
 Also feeds think-hk37: the same extraction is what decides rigidity marks.
+
+## Notes
+
+2026-09-16 requirement transfer from duplicate think-1han: extraction must include oriented face-pair targets, symmetry/correspondence rules, declared ambiguity handling, and refusal when a target cannot be interpreted uniquely enough for the requested rung. Reuse the contact atlas feature representation.

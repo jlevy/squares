@@ -5,8 +5,12 @@ title: "[epic] Strategies with declared guidance, compared in one evaluation loo
 kind: epic
 status: open
 priority: 1
-version: 11
+version: 14
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
+refs:
+  - kind: pr
+    url: https://github.com/jlevy/squares/pull/190
+    at: 2026-09-16T22:15:34.937Z
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
@@ -19,8 +23,9 @@ child_order_hints:
   - is-01m2gxkzqdxb01e2h4tpkvczw7
   - is-01m2gyp18kcxq2g8gq7hjacg3n
   - is-01m2gyp41nh48d2kc155rrvzy7
+  - is-01m2p0xq9nac6ftmr19978krh3
 created_at: 2026-09-14T21:36:39.047Z
-updated_at: 2026-09-14T21:55:49.975Z
+updated_at: 2026-09-16T22:15:34.938Z
 ---
 Owner, 2026-09-14: "the likeliness of how well this works is going to depend very much on how the structure and strategy work, and there are many midpoints that are not fully blind nor fully guided... different levels of configuration mapped everywhere, from just partitioning the connected components to the contact graphs to the contacts where the sides are flush, to simplified contact graphs where the touching components are simplified to be parallel initially... by contracting further, they could pull apart... build the simplified, highly efficient versions of each of these and use those as intermediate targets that are not fully blind but not fully showing the optimal solution."
 
@@ -35,3 +40,7 @@ What is already known (verified 2026-09-14; details in the annealing plan's "The
 Design rules those facts impose: structure constructs and stages a run and is not held as a constraint; bands, never equalities; every structural rung is run beside rewired and thinned controls of the same size; a result names its rung and never claims discovery.
 
 Children: extraction, kernel mechanics, start construction, benchmark cells, the rung in Pack and Search, hypotheses before the first round.
+
+## Notes
+
+2026-09-16 continuation: this existing epic is the authoritative owner for the newly requested graded guidance program. Add workbench Phase 5A and compare none, touching-component partitions, contact graphs, and oriented face assignments through one shared backend/browser contract. Keep ordinary global stickiness distinct from structural guidance; require continuous strength and schedules, known-answer calibration, held-out controls, deterministic replay, and retained accepted/rejected/invalid rounds. The first systematic sweep is think-0epc.

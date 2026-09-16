@@ -5,7 +5,7 @@ title: Express the workbench physics and every guidance use in the PackingStrate
 kind: feature
 status: open
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies:
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m2gxkp2c5hk981zhv3aejfga
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:55:29.169Z
-updated_at: 2026-09-14T21:55:51.387Z
+updated_at: 2026-09-16T21:23:36.916Z
 ---
 Owner, 2026-09-14: "Each of these approaches to stitching things together should be a sort of strategy that we keep track of when we map out the way that we optimize and what level of guidance is given during the optimization process. We could then have code that tries these different paths. Ideally, each of the strategies for packing would be expressible in our format and could then be evaluated across a loop to see how the different strategies compare for a given n or across different n."
 
@@ -32,3 +32,7 @@ Extend the format so every approach is a document:
 - **Catalogue link**: each document names its `frontier/search-strategies.yaml` entry (`search:N`), so results roll up by family and hypotheses reference them through `strategy_refs`.
 
 Related: think-karf (executable strategy semantics), think-rey9 (extraction the rungs read).
+
+## Notes
+
+2026-09-16 requirement transfer from duplicate think-1han: define one JSON-safe GuidanceTarget/v1 plus a separate guidance-application configuration for strength, schedule, use, and non-target policy. Cover none, touching-component partition, contact graph, and oriented face-pair assignments. Guidance must constrain relative structure without fixing absolute poses.

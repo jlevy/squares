@@ -5,13 +5,13 @@ title: "Strategies in Pack and Search: pick, run and compare, labelled by guidan
 kind: feature
 status: open
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:36:51.040Z
-updated_at: 2026-09-14T21:55:47.426Z
+updated_at: 2026-09-16T21:23:38.192Z
 ---
 The rung and its use become visible, labelled settings in the workbench, because a structure-informed run must never read as discovery.
 
@@ -20,3 +20,7 @@ The rung and its use become visible, labelled settings in the workbench, because
 - **Labels**: every readout names its rung, for example "given the contact graph and the record side".
 
 Depends on the Search mode (think-vhgz) and the benchmark cells.
+
+## Notes
+
+2026-09-16 requirement transfer from duplicate think-v9jy: expose the shared guidance tier, strength, schedule, and target source in Pack/Search. Overlay component membership, requested versus realized contacts, oriented face assignments, mismatches, and active guidance forces. A retained CLI configuration must replay the same trajectory/metrics in the browser, with a declared render-cost bound and truthful disabled states.

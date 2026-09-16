@@ -5,15 +5,17 @@ title: "Kernel mechanics for staged structure: weld and release, aligning torque
 kind: feature
 status: open
 priority: 1
-version: 3
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m2gxkvbndg46r6pjy3352cb8
+  - type: blocks
+    target: is-01m2p0xq9nac6ftmr19978krh3
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:36:43.591Z
-updated_at: 2026-09-14T21:41:16.154Z
+updated_at: 2026-09-16T21:24:04.975Z
 ---
 The mechanics a staged, structure-informed run needs and no engine has (survey 2026-09-14):
 
@@ -25,3 +27,7 @@ The mechanics a staged, structure-informed run needs and no engine has (survey 2
 - constraints as **bands, never equalities**: exact tangency repels, which X-025 measured.
 
 Each is a parameter of a Pack run, so Pack, Search and Animate share it. Every mechanic ships with a unit test in the package, and a snapped control must still end on the record.
+
+## Notes
+
+2026-09-16 requirement transfer from duplicate think-t0g7: compose scheduled guidance explicitly with ordinary stickiness, collision, containment, and annealing. Require strength zero to reproduce the unguided trajectory and receipt exactly; add positive, negative, symmetry, malformed-target, and schedule-transition tests.
