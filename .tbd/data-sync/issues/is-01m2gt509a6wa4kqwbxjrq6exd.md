@@ -5,7 +5,7 @@ title: "Route S: admit sparse T-025 orbit compression"
 kind: task
 status: closed
 priority: 0
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-14T20:36:16.810Z
-updated_at: 2026-09-16T07:25:17.875Z
+updated_at: 2026-09-16T07:25:59.204Z
 closed_at: 2026-09-16T07:25:17.875Z
 close_reason: "PR #182 merged at 1d9c49c4 after independent exact-head review, 59 focused Route S tests, complete records validation, and green hosted fast/Pages checks. The target-blind instrument is admitted; H-163 remains open and untested, exp-161 remains unallocated, and no scientific target ran."
 resolution: null
@@ -28,4 +28,4 @@ Admit a fixed-geometry support-sparse subfamily of T-025 before any target runs:
 
 ## Notes
 
-PR 177 merged at 5ce2839f17b2f5a337260dc3f649e05ab974bd25 after fast and deferred full gates passed. Session 134 opened draft PR 182 as a no-target Route S admission checkpoint. Session 135 discharged all four source-distinct guards: checker-owned T-025 and T-026 digests, both 720-step and 1440-step T-026 sentinels, a canonical source-bound nonempty selection manifest, and the full X-032 mutation matrix. An independent re-audit returned ADMIT after a symlink-alias boundary repair. The retained receipt, 63 focused tests, schemas, records, Ruff, and BasedPyright pass locally. Exact-head hosted certification and merge now belong solely to think-so4g. H-163 is open but untested, exp-161 remains unallocated, and no optimizer, candidate, coverage target, or scientific verdict ran.
+Completed by PR #182, merged as 1d9c49c4 with reviewed head 609d7d62. The target-blind Route S instrument is admitted with the at-most-23 orbit policy, canonical selection manifest, two T-026 provenance sentinels, complete-content Git revision/path bindings, and snapshot-safe parsing. Exact-head validation passed: 59 focused tests, records and 167 controls, Ruff, BasedPyright, hosted fast checks, and Pages. H-163 remains open and untested; exp-161 is unallocated; no scientific target ran.
