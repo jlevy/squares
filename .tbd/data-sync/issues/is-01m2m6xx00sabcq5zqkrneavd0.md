@@ -5,7 +5,7 @@ title: "Address review: PR #181 — explainer extraction and probe floor"
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 15
 labels: []
 dependencies:
   - type: blocks
@@ -21,8 +21,11 @@ child_order_hints:
   - is-01m2m6z4jh56brnqfhyhgev557
   - is-01m2m6z4yhajge7d5shep5m3pt
   - is-01m2m6z5acvj7axezc8j83hjbj
+  - is-01m2mf52c9mepx064y90g1ahvd
+  - is-01m2mfw0zymw5zsgzwmwza12ep
+  - is-01m2mfw1154paq3b5wa0773qhh
 created_at: 2026-09-16T04:17:18.847Z
-updated_at: 2026-09-16T04:19:04.181Z
+updated_at: 2026-09-16T06:53:34.627Z
 ---
 Track and disposition every published review and addendum finding on PR #181. Reuse think-7f3p/think-li0h for the inline-program blocker; create children only for distinct remaining findings. Completion requires fixes or explicit rebuttal/defer, current-parent propagation, exact-head CI, and a published disposition map.
 

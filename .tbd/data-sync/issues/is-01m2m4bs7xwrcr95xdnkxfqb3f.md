@@ -3,13 +3,17 @@ type: is
 id: is-01m2m4bs7xwrcr95xdnkxfqb3f
 title: "PR #178 review R2: the API-exposure assertion is unreachable through the tool"
 kind: bug
-status: open
+status: deferred
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m2m4brc46s3a2pqbaqthnyz7
 created_at: 2026-09-16T03:32:28.028Z
-updated_at: 2026-09-16T03:32:28.028Z
+updated_at: 2026-09-16T06:17:02.240Z
 ---
 packages/workbench/tools/workbench_tools/check_candidate.py:746 and :1629. main() reaches browser_checks only when the static half is clean; ten stale static failures under think-tn0j. Recorded so the change closing tn0j re-runs the tool end to end. (PR #178, review 5218208269)
+
+## Notes
+
+Non-blocking and intentionally deferred to think-tn0j: the tool reaches browser_checks only after the existing ten stale static failures are retired. PR #178 does not worsen this boundary; rerun end to end when think-tn0j closes.

@@ -3,13 +3,17 @@ type: is
 id: is-01m2m6zrghb5dv2vjgbzhgxfn9
 title: "PR #180 addendum A1: close resolved-Biome configuration bypasses"
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m2m6y4gw224dgrwf37bgqnhd
 created_at: 2026-09-16T04:18:19.792Z
-updated_at: 2026-09-16T04:18:54.355Z
+updated_at: 2026-09-16T05:38:59.604Z
+closed_at: 2026-09-16T05:38:59.548Z
+close_reason: Root/nested Biome configuration bypasses, info-level recommended rules, and live TypeScript floating-promise control were closed at 969f5642.
+resolution: null
+duplicate_of: null
 ---
 The no-overrides contract must reject root extends and nested biome.json rule relaxations, make info diagnostics blocking or pin their severities, and include a live TypeScript noFloatingPromises rejection. Tests must reproduce the published bypasses before the fix.
