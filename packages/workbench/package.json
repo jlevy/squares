@@ -17,8 +17,8 @@
   "scripts": {
     "build": "node tools/build-assets.ts",
     "check": "npm run build && npm run lint && npm run typecheck && npm test",
-    "lint": "cd ../.. && biome ci --error-on-warnings packages/workbench && npm run lint:legacy-promises --workspace @squares/workbench",
-    "lint:legacy-promises": "cd ../.. && eslint packages/workbench packing/src/sqpack/motion_lab/assets packing/atlas/known-best/video/spikes/v1-slideshow --config packages/workbench/eslint.config.js --max-warnings 0",
+    "lint": "cd ../.. && biome ci --error-on-warnings packages/workbench && npm run lint:promises --workspace @squares/workbench",
+    "lint:promises": "cd ../.. && eslint . --config packages/workbench/eslint.config.js --max-warnings 0",
     "test": "node --test tests/*.test.ts",
     "typecheck": "tsc -p tsconfig.json"
   }

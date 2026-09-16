@@ -1435,10 +1435,10 @@ def asset(name: str) -> str:
 def workbench_script() -> str:
     """The package-built classic browser application.
 
-    The package build places its strict module bundle immediately before the retained
-    application and also compiles the browser benchmark probe. Building into a private temporary
-    directory keeps generated assets out of the source tree and lets this generator continue
-    producing one self-contained page.
+    The package build bundles `src/application.js` and the typed modules it imports into one
+    strict script, and also compiles the browser benchmark probe. Building into a private
+    temporary directory keeps generated assets out of the source tree and lets this generator
+    continue producing one self-contained page.
     """
     tool = WORKBENCH_PACKAGE / "tools" / "build-assets.ts"
     with tempfile.TemporaryDirectory(prefix="squares-workbench-bundle-") as scratch:

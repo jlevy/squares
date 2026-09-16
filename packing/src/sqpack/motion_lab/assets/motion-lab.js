@@ -1,3 +1,11 @@
+// The exact n=5 lab's page script. It runs as a module script after `exact-n5-model.js`, and the
+// model's functions are the ones that file publishes, read here by name.
+const model = globalThis.MotionLabModel;
+if (!model) {
+  throw new Error("Motion Lab exact n=5 model is unavailable");
+}
+const { parameterValueText, phaseAt, posesAt, scalar, sceneControlState, stageDescriptionText } =
+  model;
 const byId = (id) => document.getElementById(id);
 const scenarioRegistry = JSON.parse(byId("scenario-registry").textContent);
 const scenarioDefinition = scenarioRegistry.scenarios.find(

@@ -1,90 +1,59 @@
+import { readdirSync } from "node:fs";
+import { resolve } from "node:path";
 import tseslint from "typescript-eslint";
 
-const promiseRules = {
-  "@typescript-eslint/await-thenable": "error",
-  "@typescript-eslint/no-floating-promises": "error",
-  "@typescript-eslint/no-misused-promises": "error",
-};
+// The promise floor for checked JavaScript (`tbd guidelines typescript-lint-format-rules`, "Biome
+// and Checked JavaScript"). Biome formats and lints every file, but its promise rules do not reach
+// plain JavaScript, so ESLint adds exactly these three, type-aware, and nothing else.
+//
+// **One block for all of it.** Every JavaScript file the repository owns gets the same rules, the
+// same parser and the same type information: no file has a block of its own, whether to relax a
+// rule or to type it differently, and no owned file is ignored. `test_browser_floor_contract.py`
+// reads the configuration ESLint resolves for every tracked file and fails any difference.
+//
+// **Types come from the type gate's programs**: every `tsconfig*.json` at the root but the shared
+// base, found here rather than listed, and each package program below. A file is typed as `tsc`
+// checks it, and a file in no program fails to parse, as it would be missing from the type gate.
+//
+// **To bring a new tree under the floor**, add it to the `include` of the type program that
+// should check it: one line, in that `tsconfig`, and nothing here. A new root program is found
+// without an edit; a new package program is one line in `PACKAGE_PROGRAMS`.
+//
+// The ignores are what is not ours (`vendor/`) and the git-ignored directories that hold
+// JavaScript nobody wrote here: dependencies, virtual environments, build output, scratch space
+// and agent worktrees. Biome reads `.gitignore` itself; ESLint cannot, so they are named, one a
+// line.
 
-const parser = tseslint.parser;
-const plugins = { "@typescript-eslint": tseslint.plugin };
+const REPOSITORY = resolve(import.meta.dirname, "../..");
+const PACKAGE_PROGRAMS = ["packages/workbench/tsconfig.json"];
+const TYPE_PROGRAMS = [
+  ...readdirSync(REPOSITORY)
+    .filter((name) => /^tsconfig(\..+)?\.json$/.test(name) && name !== "tsconfig.base.json")
+    .sort(),
+  ...PACKAGE_PROGRAMS,
+];
+const NOT_OURS = [
+  "vendor/**",
+  "**/node_modules/**",
+  "**/.venv/**",
+  "packages/workbench/dist/**",
+  "attic/**",
+  ".claude/**",
+];
 
 export default [
+  { ignores: NOT_OURS },
   {
-    ignores: ["node_modules/**", "vendor/**", "packages/workbench/dist/**"],
-  },
-  {
-    // Every workbench JavaScript file outside the two legacy programs below, so no package
-    // JavaScript escapes the promise floor. A file a package tsconfig includes is typed by
-    // that program; one no program includes yet is typed at the shared strict floor rather
-    // than skipped. typescript-eslint refuses `**` in `allowDefaultProject`, so the globs
-    // name depths: a file deeper than they reach fails to parse, which fails the lint.
-    files: ["packages/workbench/**/*.js"],
-    ignores: ["packages/workbench/src/application.js", "packages/workbench/probes/**"],
+    files: ["**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs"],
     languageOptions: {
-      parser,
-      parserOptions: {
-        projectService: {
-          allowDefaultProject: ["packages/workbench/*/*.js", "packages/workbench/*/*/*.js"],
-          defaultProject: "tsconfig.base.json",
-        },
-      },
+      parser: tseslint.parser,
+      parserOptions: { project: TYPE_PROGRAMS, tsconfigRootDir: REPOSITORY },
     },
-    plugins,
-    rules: promiseRules,
-  },
-  {
-    files: ["packages/workbench/src/application.js"],
-    languageOptions: {
-      parser,
-      parserOptions: { project: "./tsconfig.json" },
+    plugins: { "@typescript-eslint": tseslint.plugin },
+    rules: {
+      "@typescript-eslint/await-thenable": "error",
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/no-misused-promises": "error",
     },
-    plugins,
-    rules: promiseRules,
-  },
-  {
-    files: ["packages/workbench/probes/**/*.js"],
-    languageOptions: {
-      parser,
-      parserOptions: { project: "./tsconfig.probes.json" },
-    },
-    plugins,
-    rules: promiseRules,
-  },
-  {
-    // The probes the Python tools under `packing/` load through `sqpack.probes`, with the v1
-    // slideshow's page script that shares their program, and the Node scripts those tools run.
-    // Both programs are strict; neither inherits a relaxation.
-    files: [
-      "packing/**/probes/**/*.js",
-      "packing/atlas/known-best/video/spikes/v1-slideshow/assets/*.js",
-    ],
-    languageOptions: {
-      parser,
-      parserOptions: { project: "./tsconfig.packing-probes.json" },
-    },
-    plugins,
-    rules: promiseRules,
-  },
-  {
-    files: ["packing/devtools/node/**/*.mjs", "packing/tests/node/**/*.mjs"],
-    languageOptions: {
-      parser,
-      parserOptions: { project: "./tsconfig.devtools-node.json" },
-    },
-    plugins,
-    rules: promiseRules,
-  },
-  {
-    files: [
-      "packing/src/sqpack/motion_lab/assets/**/*.js",
-      "packing/atlas/known-best/video/spikes/v1-slideshow/*.js",
-    ],
-    languageOptions: {
-      parser,
-      parserOptions: { project: "./tsconfig.motion-lab.json" },
-    },
-    plugins,
-    rules: promiseRules,
   },
 ];

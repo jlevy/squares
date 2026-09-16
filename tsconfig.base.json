@@ -6,10 +6,20 @@
   //
   // The retained browser programs are checked JavaScript, while new workbench modules are
   // TypeScript. `allowJs` + `checkJs` keeps the legacy programs under this same floor.
+  //
+  // `moduleDetection: "force"` gives every file its own scope, with no import or export needed.
+  // Under the default, a file with no import is a script whose top-level names every other script
+  // in the program can see, so two files could share a function by scope while every tool passed
+  // -- the coupling the motion lab's Biome overrides existed for. A name one file gives another
+  // is an import, or a property of `globalThis` its owner assigns. Biome parses `.js` as a module
+  // too, except beside a `"type": "commonjs"` package.json, which is how a classic page script
+  // such as the v1 slideshow's keeps its `"use strict"`; such a script declares nothing at the
+  // top level, so its own scope here costs it nothing.
   "compilerOptions": {
     "allowJs": true,
     "allowImportingTsExtensions": true,
     "checkJs": true,
+    "moduleDetection": "force",
     "noEmit": true,
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],

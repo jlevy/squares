@@ -1,6 +1,6 @@
 {
-  // The workbench's own script and stylesheet: one program, one 5,079-line IIFE, inlined
-  // into the published page by the generator.
+  // The workbench's application module: the entry of the page's bundle, inlined into the
+  // published page by the generator, and typed here with the package modules it imports.
   //
   // **The ratchet (floor rule 8).** At the full floor this program reports 1,145 errors and
   // with the four flags below relaxed it reports 109, so the four are off and the 109 are

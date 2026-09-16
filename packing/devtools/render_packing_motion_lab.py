@@ -140,8 +140,11 @@ def _static_svg(manifest: dict[str, object]) -> str:
 
 
 CSS = motion_lab_css()
+#: The page's two scripts, each run as its own module script: the model publishes its API as
+#: `globalThis.MotionLabModel` and the page script reads it from there. Neither is concatenated
+#: into the other, so each runs in the browser exactly as Biome and `tsc` read it.
 MOTION_MODEL_JAVASCRIPT = asset_text("exact-n5-model.js")
-JAVASCRIPT = MOTION_MODEL_JAVASCRIPT + asset_text("motion-lab.js")
+MOTION_PAGE_JAVASCRIPT = asset_text("motion-lab.js")
 
 
 def render_motion_lab() -> str:
@@ -267,7 +270,8 @@ def render_motion_lab() -> str:
   </main>
   <script id="scenario-registry" type="application/json">{registry_data}</script>
   <script id="motion-data" type="application/json">{data}</script>
-  <script>{JAVASCRIPT}</script>
+  <script type="module">{MOTION_MODEL_JAVASCRIPT}</script>
+  <script type="module">{MOTION_PAGE_JAVASCRIPT}</script>
 </body>
 </html>
 """

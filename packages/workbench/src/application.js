@@ -1,18 +1,18 @@
-// The strict package bundle is emitted immediately before this retained application script.
-// Keeping the dependency explicit lets core and simulation modules graduate one domain at a time
-// while the remaining UI code continues to run as one classic script.
-/** @type {typeof globalThis & { SquaresWorkbench?: typeof import("./api/browser-entry.js") }} */
-const workbenchGlobal = globalThis;
-const workbenchBundle = workbenchGlobal.SquaresWorkbench;
-if (workbenchBundle === undefined) {
-  throw new Error("SquaresWorkbench bundle must load before the application script");
-}
+// The page's entry module. `tools/build-assets.ts` bundles it and everything it imports into the
+// one classic script the page inlines, and publishes its exports -- the package's typed API -- as
+// the page's `SquaresWorkbench` global, which is how the checkers' probes reach that API.
+//
+// It is a module rather than a script concatenated after the bundle, so what it uses is an import
+// the bundler resolves and `tsc` follows, and a domain leaves this file by moving into a typed
+// module that this one imports. Strict mode is a module's, and the bundle keeps it: esbuild opens
+// the script with the directive, and `application-build.test.ts` holds the build to that.
+import * as workbenchBundle from "./api/browser-entry.js";
+
+export * from "./api/browser-entry.js";
+
 const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
 
 (() => {
-  // Not redundant: the generator inlines this file into a plain `<script>` with no
-  // `type="module"`, so nothing else puts the page in strict mode.
-  "use strict";
   if (typeof document === "undefined") {
     return;
   }

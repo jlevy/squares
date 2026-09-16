@@ -1,6 +1,4 @@
 (() => {
-  "use strict";
-
   const editor = globalThis.MotionLabEditor;
   if (!editor) {
     throw new Error("Motion Lab editor model is unavailable");

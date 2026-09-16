@@ -12,18 +12,20 @@ import { runInThisContext } from "node:vm";
 
 /** @type {{ model: string, manifest: { scenes: Scene[] } }} */
 const { model, manifest } = JSON.parse(readFileSync(0, "utf8"));
-// A classic script: its top-level functions become this realm's globals, as on the page.
+// The model publishes its API as `globalThis.MotionLabModel`, which is all the page script
+// reads from it: on the page the two are separate module scripts sharing nothing by scope.
 runInThisContext(model, { filename: "exact-n5-model.js" });
-/** @type {(scene: Scene, progress: number, tangent: boolean) => unknown} */
-const posesAt = Reflect.get(globalThis, "posesAt");
-/** @type {(scene: Scene, progress: number) => unknown} */
-const phaseAt = Reflect.get(globalThis, "phaseAt");
-/** @type {(scene: Scene) => unknown} */
-const sceneControlState = Reflect.get(globalThis, "sceneControlState");
-/** @type {(scene: Scene, progress: number) => unknown} */
-const parameterValueText = Reflect.get(globalThis, "parameterValueText");
-/** @type {(scene: Scene, progress: number) => unknown} */
-const stageDescriptionText = Reflect.get(globalThis, "stageDescriptionText");
+/**
+ * @type {{
+ *   posesAt: (scene: Scene, progress: number, tangent: boolean) => unknown,
+ *   phaseAt: (scene: Scene, progress: number) => unknown,
+ *   sceneControlState: (scene: Scene) => unknown,
+ *   parameterValueText: (scene: Scene, progress: number) => unknown,
+ *   stageDescriptionText: (scene: Scene, progress: number) => unknown,
+ * }}
+ */
+const { posesAt, phaseAt, sceneControlState, parameterValueText, stageDescriptionText } =
+  Reflect.get(globalThis, "MotionLabModel");
 
 const progressValues = [0, 0.5, 1];
 /** @type {Record<string, object>} */

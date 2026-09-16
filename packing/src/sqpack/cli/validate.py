@@ -1505,8 +1505,8 @@ def _browser_floor(context: Context) -> str:
     warning-severity rules. Fixing is `npm run lint:fix`, at a commit hook or by hand.
 
     The type gate is separate from the lint gate (floor rule 3) and runs once per program:
-    each legacy global program remains separate so unrelated assets do not collide. The
-    module-based workbench package has its own strict program.
+    the relaxed legacy programs stay separate so that no relaxation reaches a file outside
+    them, and the module-based workbench package has its own strict program.
 
     Node is not a `uv` dependency, so this asks for the pinned local binaries rather than
     anything on PATH. `npm ci` at the repository root is what puts them there.
@@ -1531,16 +1531,13 @@ def _browser_floor(context: Context) -> str:
             (str(biome), "ci", "--error-on-warnings", "."),
             (
                 str(eslint),
-                # The whole package: its config types every workbench JavaScript file, so
-                # naming files here would leave a new one outside the promise floor.
-                "packages/workbench",
-                "packing/src/sqpack/motion_lab/assets",
-                "packing/atlas/known-best/video/spikes/v1-slideshow",
-                "packing/atlas/known-best/video/spikes/v2-transitions/probes",
-                "packing/devtools/probes",
-                "packing/devtools/node",
-                "packing/tests/node",
-                "packing/tests/probes",
+                # The whole repository, as Biome is given it. The config holds every owned
+                # JavaScript file to one block and ignores only what is not ours. A list of
+                # directories here had to grow with every new tree -- the spike and
+                # explainer extractions added two -- and a tree it missed was outside the
+                # promise floor with the gate green: `npm run lint`'s shorter copy named
+                # three of the eight.
+                ".",
                 "--config",
                 "packages/workbench/eslint.config.js",
                 "--max-warnings",
@@ -1586,12 +1583,16 @@ def _workbench_frontend(context: Context) -> str:
     the repository without a hand-kept list of callers; the `browser code lives in files`
     step runs it too, so the edit tier sees it, and this run keeps the frontend job's own
     early failure.
+
+    The Motion Lab pages run here too, because this is the job with Chromium: four seconds
+    for both labs, and until think-6o9n nothing loaded them in a browser at all.
     """
     return _commands(
         context,
         (
             (sys.executable, "-m", "devtools.check_probes"),
             (sys.executable, "-m", "workbench_tools.check_frontend"),
+            (sys.executable, "-m", "devtools.check_motion_lab_pages"),
         ),
     )
 
@@ -2924,6 +2925,12 @@ _WORKBENCH_INPUTS = (
     "package-lock.json",
     ".node-version",
     "vendor/kpress/*",
+    # The Motion Lab pages the same step drives: their assets, renderers and checker.
+    "packing/src/sqpack/motion_lab/*",
+    "packing/devtools/render_packing_motion_lab.py",
+    "packing/devtools/render_general_motion_lab.py",
+    "packing/devtools/packing_motion_studies.py",
+    "packing/devtools/check_motion_lab_pages.py",
     *_TOOLCHAIN,
 )
 

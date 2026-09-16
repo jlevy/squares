@@ -4104,7 +4104,9 @@ code {
   },
   "title": "n=5 square-packing motion lab"
 }</script>
-  <script>"use strict";
+  <script type="module">// The exact n=5 motion model: pure functions of a scene, and no DOM. The page runs this file and
+// `motion-lab.js` as two module scripts, so neither shares anything with the other by scope. What
+// the page script uses is the API this file publishes as `globalThis.MotionLabModel`, below.
 function scalar(value) {
   return Number(value.decimal);
 }
@@ -4175,6 +4177,24 @@ function stageDescriptionText(scene, progress) {
     `Active contact pairs: ${contacts}.`
   );
 }
+
+globalThis.MotionLabModel = Object.freeze({
+  parameterValueText,
+  phaseAt,
+  posesAt,
+  scalar,
+  sceneControlState,
+  stageDescriptionText,
+});
+</script>
+  <script type="module">// The exact n=5 lab's page script. It runs as a module script after `exact-n5-model.js`, and the
+// model's functions are the ones that file publishes, read here by name.
+const model = globalThis.MotionLabModel;
+if (!model) {
+  throw new Error("Motion Lab exact n=5 model is unavailable");
+}
+const { parameterValueText, phaseAt, posesAt, scalar, sceneControlState, stageDescriptionText } =
+  model;
 const byId = (id) => document.getElementById(id);
 const scenarioRegistry = JSON.parse(byId("scenario-registry").textContent);
 const scenarioDefinition = scenarioRegistry.scenarios.find(

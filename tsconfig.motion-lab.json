@@ -1,8 +1,8 @@
 {
-  // The motion lab's assets and the slideshow's harness. The motion-lab files are fragments
-  // concatenated into one page -- `exact-n5-model.js` defines what `motion-lab.js` calls --
-  // so they are one program here for the same reason Biome's unused-symbol rules are scoped
-  // off for them. Same ratchet, same tracker: think-n711.
+  // The motion lab's assets and the slideshow's harness. Each motion-lab page runs a model and a
+  // page script as two module scripts; the model publishes its API on `globalThis` and the page
+  // script reads it, which is why they share a program: `tsc` types the one from the other's
+  // assignment. Same ratchet, same tracker: think-n711.
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "noImplicitAny": false,

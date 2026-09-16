@@ -6,24 +6,19 @@ import { test } from "node:test";
 import { runInNewContext } from "node:vm";
 import { APPLICATION_BUNDLE, BENCHMARK_BUNDLE, buildAssets } from "../tools/build-assets.ts";
 
-const REPOSITORY_ROOT = resolve(import.meta.dirname, "../../..");
-const APPLICATION_SOURCE = resolve(REPOSITORY_ROOT, "packages/workbench/src/application.js");
-
-test("the retained application refuses to run before its package bundle", async () => {
-  const application = await readFile(APPLICATION_SOURCE, "utf8");
-  assert.throws(
-    () => runInNewContext(application, {}),
-    /SquaresWorkbench bundle must load before the application script/,
-  );
-});
-
-test("the package build orders the typed namespace before the retained application", async () => {
+test("the page bundle is one strict script that publishes the typed namespace", async () => {
   const scratch = await mkdtemp(join(tmpdir(), "squares-workbench-assets-"));
   try {
     await buildAssets(scratch);
     const application = await readFile(resolve(scratch, APPLICATION_BUNDLE), "utf8");
     const benchmark = await readFile(resolve(scratch, BENCHMARK_BUNDLE), "utf8");
 
+    // The page inlines the bundle as a classic script, so its strict mode is this directive and
+    // nothing else: `src/application.js` is a module and carries none of its own.
+    assert.ok(
+      application.startsWith('"use strict";\n'),
+      "the page bundle does not open with the strict-mode directive",
+    );
     const applicationContext: Record<string, unknown> = {};
     runInNewContext(application, applicationContext, { filename: APPLICATION_BUNDLE });
     const namespace = applicationContext.SquaresWorkbench;

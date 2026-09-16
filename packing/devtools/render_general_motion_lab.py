@@ -22,7 +22,10 @@ def render_general_motion_lab(*, n: int, seed: int, side: float) -> str:
         "</", "<\\/"
     )
     css = motion_lab_css()
-    javascript = asset_text("free-quench-model.js") + asset_text("free-quench.js")
+    # Two module scripts, in order: the editor model publishes `globalThis.MotionLabEditor`,
+    # and the page script reads it. Neither is concatenated into the other.
+    model = asset_text("free-quench-model.js")
+    page = asset_text("free-quench.js")
     return f"""<!doctype html>
 <html lang="en" data-contract="packing.squares:GeneralMotionLab/v1"
   data-shell-contract="packing.squares:MotionLabShell/v1"
@@ -159,7 +162,8 @@ def render_general_motion_lab(*, n: int, seed: int, side: float) -> str:
     <p id="live-region" class="fine-print" role="status" aria-live="polite"></p>
   </main>
   <script id="free-scenario" type="application/json">{scenario_data}</script>
-  <script>{javascript}</script>
+  <script type="module">{model}</script>
+  <script type="module">{page}</script>
 </body>
 </html>
 """

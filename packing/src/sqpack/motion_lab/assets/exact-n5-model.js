@@ -1,4 +1,6 @@
-"use strict";
+// The exact n=5 motion model: pure functions of a scene, and no DOM. The page runs this file and
+// `motion-lab.js` as two module scripts, so neither shares anything with the other by scope. What
+// the page script uses is the API this file publishes as `globalThis.MotionLabModel`, below.
 function scalar(value) {
   return Number(value.decimal);
 }
@@ -69,3 +71,12 @@ function stageDescriptionText(scene, progress) {
     `Active contact pairs: ${contacts}.`
   );
 }
+
+globalThis.MotionLabModel = Object.freeze({
+  parameterValueText,
+  phaseAt,
+  posesAt,
+  scalar,
+  sceneControlState,
+  stageDescriptionText,
+});
