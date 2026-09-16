@@ -5,13 +5,13 @@ title: Refresh the CI suite timing baseline from current hosted runs
 kind: bug
 status: open
 priority: 2
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
-parent_id: is-01m20v1mq20k9d9p1wg9s5qdsq
+parent_id: is-01m2k0eqwj7en422j33wtvw5dt
 created_at: 2026-09-08T23:09:10.292Z
-updated_at: 2026-09-16T00:19:23.119Z
+updated_at: 2026-09-16T00:27:53.335Z
 closed_at: null
 close_reason: null
 resolution: null
@@ -25,3 +25,5 @@ CI baseline refresh verified on merged-main integration131b9758: all Squares che
 
 
 2026-09-15 (think-z121): reopening at P2, because this bead's done-when is contradicted by its own lane. The 118.72 s record written here was superseded the same week by 183.44 s, and on 2026-09-15 `packing/devtools/read_tier_walls.py` read `suite` at 210.21 s across seven hosted pull-request runs (34924677097, 34925616821, 34926777301, 34929890466, 34930296150, 35012847055, 35013703659) -- 1.15x the standing record, on a lane that has grown from 4,639 to about 5,700 quick tests since this closed. The baseline is stale again in exactly the way this bead existed to stop. Lane 2 (think-t7zm) shards `suite` and owns the new record; under rule 6 that think-z121 adds to `packing/devtools/check_gate_budgets.py`, the next record above 123.40 s -- 1.2x of the 102.83 s that heads this tier's history -- has to carry per-file test-cost attribution rather than another re-base.
+
+2026-09-15 (think-z121): moved under think-xfqk, the CI speed epic, because its old parent -- the closed math-startup rendering epic -- is terminal and an open bead under a closed parent fails the repository's bead-tree record check (D-025). The obligation is a CI one now: the suite record is stale in the unflattering direction and lane 2 (think-t7zm) writes the next one.
