@@ -792,8 +792,9 @@ jobs:
       # completion, so the wall ends at this job's start. It runs only once every
       # prerequisite passed, since a failed job's wall is not the wall of the surface.
       #
-      # The runner's own `python3` and PyYAML, and a checkout of the two files it reads, so
-      # the check costs this job seconds rather than an environment sync.
+      # The pinned interpreter and one exact dependency, with a checkout of the two files
+      # the tool reads. This avoids syncing the project environment while keeping the
+      # required check independent of the mutable runner image.
       - name: Check out the wall budget and its register
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -803,10 +804,19 @@ jobs:
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          enable-cache: false
+
       - name: Hold the pull request's wall to its budget
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python3 packing/devtools/check_pr_wall.py --workflow packing-validation
+        run: >-
+          uv run --no-project --python 3.14.7 --with PyYAML==6.0.3 python
+          packing/devtools/check_pr_wall.py --workflow packing-validation
 
   macos-portability:
     # A second-architecture smoke check, deliberately minimal.

@@ -13,5 +13,5 @@
 2026-09-15T16:48:26.9920953Z == the tier against its ceiling ==
 2026-09-15T16:48:26.9921291Z    135.71s  wall of a 195s ceiling (70%), never recorded at this shape
 2026-09-15T16:48:26.9922197Z   note: no cost is recorded for the checks tier at 4 cpus, --jobs 3 --inner-jobs 1; write `measured_seconds: 135.7` into /home/runner/work/squares/squares/packing/devtools/gate-budgets.yaml to arm the drift rule
-2026-09-15T16:48:26.9922884Z 
+2026-09-15T16:48:26.9922884Z
 2026-09-15T16:48:26.9923043Z 49 of 74 STEPS PASSED (a named tier; this is not the full gate)

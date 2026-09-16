@@ -32,6 +32,7 @@ from devtools import check_pr_wall
 from devtools.check_pr_wall import (
     WallError,
     WorkflowWall,
+    exit_status,
     judge,
     kind_of,
     load_walls,
@@ -39,6 +40,7 @@ from devtools.check_pr_wall import (
     render,
     summary_markdown,
 )
+from sqpack.yamlio import safe_load
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "pr-wall"
 IN_BAND = 34023121156
@@ -163,6 +165,14 @@ def test_a_cancelled_run_is_not_judged_and_says_so(tmp_path: Path) -> None:
     assert any(
         "neither the budget nor the regression rule" in note for note in verdict.unjudged
     )
+    assert exit_status(verdict) == 1
+
+
+def test_only_a_measured_passing_verdict_exits_successfully(tmp_path: Path) -> None:
+    _, passed = verdict_of(register(tmp_path), IN_BAND)
+    _, failed = verdict_of(register(tmp_path), OVER_BUDGET)
+    assert exit_status(passed) == 0
+    assert exit_status(failed) == 1
 
 
 def test_too_few_recorded_runs_leaves_the_regression_rule_unapplied(tmp_path: Path) -> None:
@@ -353,3 +363,32 @@ def test_the_live_register_declares_a_wall_for_both_workflows() -> None:
         for record in workflow.kinds:
             assert len(record.samples) >= 1
             assert record.median_seconds > 0
+
+
+def test_wall_jobs_pin_the_interpreter_and_their_only_dependency() -> None:
+    repository = Path(__file__).resolve().parents[2]
+    jobs = []
+    for path, name in (
+        (repository / ".github/workflows/pages.yml", "pr-wall"),
+        (repository / ".github/workflows/packing-validation.yml", "packing-required"),
+    ):
+        document = safe_load(path.read_text(encoding="utf-8"))
+        jobs.append(document["jobs"][name])
+
+    for job in jobs:
+        steps = job["steps"]
+        setup = next(step for step in steps if step.get("name") == "Install uv and Python 3.14")
+        assert setup["with"] == {
+            "version": "0.12.8",
+            "python-version": "3.14.7",
+            "enable-cache": False,
+        }
+        command = next(
+            step["run"]
+            for step in steps
+            if step.get("name") == "Hold the pull request's wall to its budget"
+        )
+        assert command.startswith(
+            "uv run --no-project --python 3.14.7 --with PyYAML==6.0.3 python "
+        )
+        assert "python3 " not in command

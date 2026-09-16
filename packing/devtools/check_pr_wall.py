@@ -26,11 +26,12 @@ another branch). When the regression cannot be judged -- too few recorded runs, 
 record for the kind, or a run that was cancelled or failed -- it says so, as a GitHub
 warning annotation and in the step summary, and does not pass silently.
 
-It runs on the runner's own `python3` with nothing but PyYAML, so the aggregator pays a
-sparse checkout and not an environment sync.
+It runs under the project's pinned Python through `uv`, with an exact PyYAML version and
+a sparse checkout, so the aggregator does not sync the project environment.
 
 Usage, in CI (the run, repository and aggregator come from the environment):
-    python3 packing/devtools/check_pr_wall.py --workflow packing-validation
+    uv run --no-project --python 3.14.7 --with PyYAML==6.0.3 python \
+        packing/devtools/check_pr_wall.py --workflow packing-validation
 
 Afterwards, from `packing/`, on any run:
     uv run --frozen --all-extras --group dev python -m devtools.check_pr_wall \
@@ -237,7 +238,12 @@ def _kind_from(raw: object, where: str) -> KindRecord:
 def load_walls(path: Path = REGISTER) -> WallRegister:
     """Read `pull_request_walls` from the register, refusing what no rule could apply to."""
     try:
-        document = _mapping(yaml.safe_load(path.read_text(encoding="utf-8")), str(path))
+        loader = getattr(yaml, "CSafeLoader", None)
+        if loader is None:
+            raise WallError("PyYAML has no C safe loader; refusing the slow fallback")
+        document = _mapping(
+            yaml.load(path.read_text(encoding="utf-8"), Loader=loader), str(path)
+        )
     except OSError as error:
         raise WallError(f"the register is unreadable at {path}: {error}") from error
     section = _mapping(document.get("pull_request_walls"), "pull_request_walls")
@@ -600,7 +606,7 @@ def github_token() -> str | None:
         completed = subprocess.run(
             ["gh", "auth", "token"], capture_output=True, text=True, check=False, timeout=10
         )
-    except OSError, subprocess.SubprocessError:
+    except (OSError, subprocess.SubprocessError):
         return None
     return completed.stdout.strip() or None
 
@@ -616,6 +622,11 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--recent", type=int, default=0, help="with --sample: the last N runs")
     parser.add_argument("--dump", action="store_true", help="print the trimmed API payload")
     return parser
+
+
+def exit_status(verdict: WallVerdict) -> int:
+    """A run the tool could not measure is not a successful wall check."""
+    return 0 if verdict.status == "passed" else 1
 
 
 def _settled_jobs(client: Client, run_id: int, workflow: WorkflowWall) -> list[dict[str, Any]]:
@@ -721,7 +732,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             verdict = judge(measurement, workflow, register.policy)
             print("\n".join(render(measurement, verdict)))
             _annotate(measurement, verdict)
-            status = max(status, 1 if verdict.status == "failed" else 0)
+            status = max(status, exit_status(verdict))
     except WallError as error:
         print(f"check_pr_wall: {error}", file=sys.stderr)
         return 2
