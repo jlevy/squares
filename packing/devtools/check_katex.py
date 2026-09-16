@@ -46,26 +46,9 @@ class Span(TypedDict):
     display: bool
 
 
-PARSE = r"""
-const fs = require('node:fs');
-const input = JSON.parse(fs.readFileSync(0, 'utf8'));
-const katex = require(input.bundle);
-const files = input.files.map(file => {
-  const errors = [];
-  file.spans.forEach((span, index) => {
-    const source = span.source;
-    try {
-      katex.renderToString(source, {
-        displayMode: span.display, throwOnError: true, strict: 'error', trust: false
-      });
-    } catch (error) {
-      errors.push({span: index + 1, source, error: String(error)});
-    }
-  });
-  return {path: file.path, spans: file.spans.length, errors};
-});
-process.stdout.write(JSON.stringify({version: katex.version, files}));
-"""
+#: The Node script that parses every span: it reads the spans as JSON on stdin and writes
+#: the report as JSON on stdout.
+PARSE = Path(__file__).resolve().parent / "node" / "check-katex.mjs"
 
 
 def check_files(paths: Sequence[Path]) -> Report:
@@ -86,7 +69,7 @@ def check_files(paths: Sequence[Path]) -> Report:
         raise ValueError("Node.js is required to run the pinned KaTeX bundle")
     bundle = kpress_static() / "katex" / "katex.min.js"
     result = subprocess.run(
-        [node, "-e", PARSE],
+        [node, str(PARSE)],
         input=json.dumps({"bundle": str(bundle), "files": files}),
         text=True,
         capture_output=True,

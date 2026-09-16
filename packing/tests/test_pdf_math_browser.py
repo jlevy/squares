@@ -8,16 +8,18 @@ runtime, host fallback, export waits, and final DOM guard in use.
 
 from __future__ import annotations
 
-import json
 import os
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Literal
 
 import pytest
 from playwright.sync_api import Browser, Error, Page, sync_playwright
 
 from devtools import render_explainer_pdf as pdf
+from devtools.check_math_loading import MATH_LIBRARY
 from devtools.render_explainer_pdf import _MATH_RENDERED  # pyright: ignore[reportPrivateUsage]
+from sqpack.probes import applied, probe
 
 pytestmark = pytest.mark.skipif(
     os.environ.get("SQPACK_PDF_MATH_BROWSER") != "1",
@@ -25,73 +27,15 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-#: The error is a real invalid FontFace response. The timeout holds the matching
-#: FontFaceSet request beyond KPress's own deadline, rather than replacing its render
-#: promise with a synthetic rejection. Only one printed formula is affected.
-FONT_FAULT = r"""(() => {
-  const wrapper = %s;
-  const mode = %s;
-  const family = 'PDF Math Fault Control';
-  let selected;
-  document.fonts.add(new FontFace(family, 'url(data:font/woff2;base64,AA==)'));
-  if (mode === 'timeout') {
-    const fontSet = Object.getPrototypeOf(document.fonts), load = fontSet.load;
-    fontSet.load = function(spec, text) {
-      if (spec.includes(family)) return new Promise(() => {});
-      return load.call(this, spec, text);
-    };
-  }
-  Object.defineProperty(globalThis, 'kpressMathText', {
-    configurable: true,
-    set(api) {
-      for (const key of ['render', 'hydrate']) {
-        const original = api[key];
-        api[key] = function(source, node, ...args) {
-          const owner = node.closest(wrapper === 'tex' ? '.tex' : '.kpress-math');
-          const wanted = wrapper === 'native'
-            || (owner?.closest('figcaption') && source.includes('\\'));
-          if (owner?.getClientRects().length && wanted && !selected) {
-            selected = owner;
-            selected.dataset.pdfMathFault = wrapper;
-            globalThis.pdfMathFaultSource = source;
-            const style = document.createElement('style');
-            style.textContent = '[data-pdf-math-fault] .katex-html * '
-              + '{ font-family: "PDF Math Fault Control" !important; }';
-            document.head.appendChild(style);
-          }
-          return original.call(this, source, node, ...args);
-        };
-      }
-      delete globalThis.kpressMathText;
-      globalThis.kpressMathText = api;
-    }
-  });
-})();"""
+#: The probes this module hands the page, one file each under `probes/pdf_math_browser/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 
+#: Breaks the math font of exactly one printed formula, as an init script taking the
+#: wrapper and the failure mode (`font_fault.js`).
+FONT_FAULT = probe(PROBES, "pdf_math_browser/font_fault")
 
-FAULT_STATE = r"""() => {
-  const target = document.querySelector('[data-pdf-math-fault]');
-  const semantic = target?.querySelector('.kpress-math-semantic math');
-  const render = target?.querySelector('.kpress-math-render');
-  const visible = node => !!node
-    && node.checkVisibility({opacityProperty: true, visibilityProperty: true})
-    && !!node.getClientRects().length;
-  return {
-    target_found: !!target,
-    source: globalThis.pdfMathFaultSource,
-    math_ready: document.documentElement.classList.contains('math-ready'),
-    host_ready: (render || target)?.dataset.squaresMathReady,
-    visible: visible(target),
-    semantic_visible: visible(semantic),
-    raw_box_visible: visible(render),
-    visible_text: target?.innerText,
-    raw_text: target?.textContent,
-    katex_count: target?.querySelectorAll('.katex').length,
-    waits: (globalThis.kpressMathFaceWait || [])
-      .filter(entry => entry.request.includes('PDF Math Fault Control'))
-      .map(entry => entry.outcome)
-  };
-}"""
+#: The faulted formula as the exporter left it.
+FAULT_STATE = probe(PROBES, "pdf_math_browser/fault_state")
 
 
 @dataclass
@@ -119,7 +63,7 @@ def observe_export(
     def observed_new_page(browser: Browser, **kwargs: Any) -> Page:
         page = new_page(browser, **kwargs)
         if wrapper is not None:
-            page.add_init_script(script=FONT_FAULT % (json.dumps(wrapper), json.dumps(mode)))
+            page.add_init_script(script=applied(FONT_FAULT, {"wrapper": wrapper, "mode": mode}))
         opened.append(page)
         return page
 
@@ -203,79 +147,26 @@ def test_final_math_guard_distinguishes_hidden_alternatives_and_render_errors() 
             page.goto(pdf.PAGE.as_uri(), wait_until="load")
             page.wait_for_selector(pdf.READY, timeout=60_000)
             page.evaluate(pdf.SETTLED)
-            page.evaluate(_MATH_RENDERED)
-            page.evaluate("""() => {
-              const printed = selector => [...document.querySelectorAll(selector)]
-                .find(node => node.getClientRects().length
-                  && node.querySelector('.katex-html'));
-              const fixture = document.createElement('div');
-              fixture.id = 'pdf-math-guard-control';
-              document.querySelector('.cert-page').appendChild(fixture);
-              globalThis.pdfMathGuardNodes = {
-                tex: printed('.tex').cloneNode(true),
-                native: printed('.kpress-math').cloneNode(true)
-              };
-              globalThis.resetPdfMathGuardNode = kind => {
-                fixture.replaceChildren(globalThis.pdfMathGuardNodes[kind].cloneNode(true));
-                return fixture.firstElementChild;
-              };
-            }""")
+            math = {"math": page.evaluate_handle(MATH_LIBRARY)}
+            page.evaluate(_MATH_RENDERED, math)
+            page.evaluate(probe(PROBES, "pdf_math_browser/guard_fixture"))
 
             # A dormant prepared profile may retain raw source. Its visible sibling
             # supplies the printed formula; clipped semantic copies elsewhere on the
             # real page remain beside their successfully rendered KaTeX too.
-            assert page.evaluate(r"""() => {
-              const host = resetPdfMathGuardNode('tex');
-              const alternative = document.createElement('span');
-              alternative.className = 'squares-math-variant';
-              alternative.dataset.squaresMathContexts = 'system-sans';
-              alternative.textContent = '\\frac{1}{2}';
-              host.appendChild(alternative);
-              return alternative.getClientRects().length === 0;
-            }""")
-            page.evaluate(_MATH_RENDERED)
+            assert page.evaluate(probe(PROBES, "pdf_math_browser/hidden_alternative"))
+            page.evaluate(_MATH_RENDERED, math)
 
             faults = [
-                """() => {
-                  const host = resetPdfMathGuardNode('tex');
-                  host.dataset.squaresMathQueued = 'true';
-                  return host.getClientRects().length > 0;
-                }""",
-                """() => {
-                  const host = resetPdfMathGuardNode('tex');
-                  const error = document.createElement('span');
-                  error.className = 'katex-error';
-                  error.textContent = 'unparsed formula';
-                  host.appendChild(error);
-                  return error.checkVisibility();
-                }""",
-                """() => {
-                  const host = resetPdfMathGuardNode('native');
-                  delete host.dataset.kpressMathRendered;
-                  const semantic = host.querySelector('.kpress-math-semantic');
-                  semantic.style.cssText = 'clip:rect(0px,0px,0px,0px); '
-                    + 'clip-path:inset(50%); width:1px; height:1px; '
-                    + 'overflow:hidden; position:absolute';
-                  return !!semantic.querySelector('math');
-                }""",
-                """() => {
-                  const host = resetPdfMathGuardNode('native');
-                  delete host.dataset.kpressMathRendered;
-                  const math = host.querySelector('.kpress-math-semantic math');
-                  math.innerHTML = '<merror><mtext>unparsed formula</mtext></merror>';
-                  return math.checkVisibility();
-                }""",
-                r"""() => {
-                  const host = resetPdfMathGuardNode('tex');
-                  host.className = '';
-                  host.dataset.squaresMathReady = 'true';
-                  host.textContent = '\\frac{1}{2}';
-                  return host.checkVisibility();
-                }""",
+                probe(PROBES, "pdf_math_browser/fault_queued"),
+                probe(PROBES, "pdf_math_browser/fault_katex_error"),
+                probe(PROBES, "pdf_math_browser/fault_clipped_native"),
+                probe(PROBES, "pdf_math_browser/fault_merror"),
+                probe(PROBES, "pdf_math_browser/fault_raw_tex"),
             ]
             for fault in faults:
                 assert page.evaluate(fault), "the intended fault must be present in the DOM"
                 with pytest.raises(Error, match="unrendered math"):
-                    page.evaluate(_MATH_RENDERED)
+                    page.evaluate(_MATH_RENDERED, math)
         finally:
             browser.close()

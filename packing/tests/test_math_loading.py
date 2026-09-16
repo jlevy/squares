@@ -1,24 +1,18 @@
-"""Known observations that the browser loading guard must refuse."""
+"""Known observations that the browser loading guard must refuse.
+
+The probes are exercised against stand-ins by the Node scripts in `tests/node/math_loading/`,
+one per test below; each script loads the probe files it tests.
+"""
 
 from __future__ import annotations
 
 from pathlib import Path
-from textwrap import dedent
 
 import pytest
 from nodejs_wheel import node
 
 from devtools import check_math_faces
 from devtools.check_math_loading import (
-    ACTIVE_MATH_VARIANT,
-    EARLY_EVENTS,
-    EXPOSED,
-    FIRST_PAINT_SCRIPT,
-    FONT_LOAD_OBSERVER,
-    HOLD_FONTS_SCRIPT,
-    MUTATED_MATH,
-    READOUTS,
-    REQUIRED_FONTS,
     LoadingReport,
     Readout,
     loading_findings,
@@ -27,100 +21,26 @@ from devtools.check_math_loading import (
     readout_findings,
 )
 
+NODE = Path(__file__).resolve().parent / "node" / "math_loading"
+
 
 def run_node(script: str) -> None:
     completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+        [str(NODE / script)], return_completed_process=True, capture_output=True, text=True
     )
     assert completed.returncode == 0, completed.stderr
 
 
 def test_saved_font_variants_do_not_discard_hidden_certificates_or_bad_metadata() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const document = {documentElement: {dataset: {}}};
-        const plain = {hidden: true, closest: () => null};
-        const variant = (contexts, parent = plain) => ({
-          dataset: {squaresMathContexts: contexts}, parentElement: parent,
-          closest() { return this; }
-        });
-    """)
-    script += f"const active = {ACTIVE_MATH_VARIANT};\n"
-    script += dedent("""
-        for (const fontSet of ['custom', 'system']) for (const proseFont of ['serif', 'sans']) {
-          document.documentElement.dataset = {
-            kpressFontSet: fontSet, kpressProseFont: proseFont};
-          const key = `${fontSet}-${proseFont}`;
-          const choices = ['custom-serif', 'custom-sans', 'system-serif', 'system-sans'];
-          for (const context of choices) {
-            assert.equal(active(variant(context)), context === key);
-          }
-          assert.equal(active(variant(choices.join(' '))), true);
-          assert.equal(active(plain), true, 'hidden certificates remain intended math');
-        }
-        for (const contexts of ['', undefined, 'custom-mono', 'system-serif unknown']) {
-          assert.throws(() => active(variant(contexts)), /malformed saved-font math variant/);
-        }
-        document.documentElement.dataset = {
-          kpressFontSet: 'invalid', kpressProseFont: 'invalid'};
-        assert.equal(active(variant('custom-serif')), true, 'invalid settings use defaults');
-    """)
-    run_node(script)
+    run_node("saved-font-variants.mjs")
 
 
 def test_first_exposure_discovery_never_requests_dormant_variant_fonts() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const checked = [];
-        const variant = contexts => ({
-          dataset: {squaresMathContexts: contexts}, parentElement: null});
-        const formula = (id, contexts) => ({id,
-          closest: () => contexts ? variant(contexts) : null,
-          checkVisibility() { throw new Error('discovery must preserve hidden staging'); }});
-        const maths = [formula('plain-hidden-certificate'), formula('selected', 'custom-serif'),
-          formula('dormant', 'custom-sans')];
-        const document = {documentElement: {dataset: {}}, querySelectorAll: () => maths};
-        const MutationObserver = class { observe() {} };
-        const requestAnimationFrame = () => {};
-    """)
-    script += FIRST_PAINT_SCRIPT.replace(
-        REQUIRED_FONTS, "math => { checked.push(math.id); return []; }"
-    )
-    script += "assert.deepEqual(checked, ['plain-hidden-certificate', 'selected']);\n"
-    run_node(script)
+    run_node("first-exposure-discovery.mjs")
 
 
 def test_mutation_discovery_rescans_only_affected_math_and_global_style_changes() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const first = {id: 'first'}, second = {id: 'second'};
-        let fullScans = 0;
-        const document = {querySelectorAll() { fullScans++; return [first, second]; }};
-        const element = (math = null, descendants = []) => ({nodeType: 1,
-          closest(selector) { return selector === '.katex' ? math : null; },
-          querySelectorAll() { return descendants; }});
-        const wrapper = element(null, [first]);
-        const glyph = element(first);
-        const text = {nodeType: 3, parentElement: glyph};
-    """)
-    script += f"const affected = {MUTATED_MATH};\n"
-    script += dedent("""
-        assert.deepEqual([...affected()], [first, second]);
-        assert.deepEqual([...affected([{type: 'attributes', target: wrapper}])], [first]);
-        assert.deepEqual([...affected([{type: 'characterData', target: text}])], [first]);
-        assert.deepEqual([...affected([{type: 'childList', target: element(),
-          addedNodes: [wrapper, glyph], removedNodes: []}])], [first]);
-        assert.deepEqual([...affected([{type: 'attributes', target: element()}])], []);
-        assert.equal(fullScans, 1, 'unrelated canvas and local formula mutations stay local');
-        const root = element(null, [first, second]);
-        assert.deepEqual([...affected([{type: 'attributes', target: root}])], [first, second]);
-        const stylesheet = element();
-        stylesheet.closest = selector => selector.includes('style') ? stylesheet : null;
-        assert.deepEqual([...affected([{type: 'characterData',
-          target: {nodeType: 3, parentElement: stylesheet}}])], [first, second]);
-        assert.equal(fullScans, 2, 'stylesheet edits invalidate the complete cascade');
-    """)
-    run_node(script)
+    run_node("mutation-discovery.mjs")
 
 
 def clean_report() -> LoadingReport:
@@ -227,142 +147,15 @@ def test_a_vacuous_or_incomplete_probe_cannot_pass() -> None:
 
 
 def test_font_hold_intercepts_both_apis_without_a_fontfaceset_global() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const calls = [];
-        globalThis.FontFace = class {
-          load(...args) { calls.push(['face', ...args]); return Promise.resolve(this); }
-        };
-        const document = {fonts: new class {
-          load(...args) {
-            calls.push(['set', ...args]);
-            return Promise.resolve(args[0].includes('excluded') ? [] : ['matched face']);
-          }
-          check(spec, text) { return spec === '16px test' && text === 'x'; }
-        }};
-        assert.equal(typeof FontFaceSet, 'undefined');
-    """)
-    script += HOLD_FONTS_SCRIPT
-    script += dedent("""
-        (async () => {
-        let matchedDone = false, emptyDone = false;
-        const requests = [new FontFace().load('face argument'),
-          document.fonts.load('12px test').then(() => { matchedDone = true; }),
-          document.fonts.load('12px excluded').then(() => { emptyDone = true; })];
-        assert.equal(document.fonts.check('16px test', 'x'), true);
-        assert.deepEqual(await __mathLoadControl.nativeLoad('16px test'), ['matched face'],
-          'the independent observer bypasses the test gate');
-        await Promise.resolve();
-        assert.equal(__mathLoadControl.heldLoads, 2);
-        assert.equal(matchedDone, false);
-        assert.equal(emptyDone, true, 'excluded Unicode/system families must not be held');
-        assert.equal(calls.some(([kind]) => kind === 'face'), false);
-        __mathLoadControl.release();
-        await Promise.all(requests);
-        assert.equal(matchedDone, true);
-        assert.equal(document.fonts.check('16px missing', 'x'), false);
-        assert.deepEqual(calls, [['set', '12px test'], ['set', '12px excluded'],
-          ['set', '16px test'], ['face', 'face argument']]);
-        })().catch(error => { console.error(error); process.exitCode = 1; });
-    """)
-    run_node(script)
+    run_node("font-hold.mjs")
 
 
 def test_required_fonts_split_families_and_include_hidden_staging() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const NodeFilter = {SHOW_TEXT: 4};
-        const parent = family => ({
-          style: {fontStyle: 'normal', fontWeight: '400', fontSize: '16px', fontFamily: family},
-          checkVisibility: () => false,
-        });
-        const composite = '"KPress Math, Text Sans",KaTeX_Main,serif';
-        const nodes = [
-          {textContent: 'x1', parentElement: parent(composite)},
-          {textContent: '1≈', parentElement: parent(composite)},
-          {textContent: '∑', parentElement: parent('KaTeX_Size2')},
-        ];
-        const getComputedStyle = node => node.style;
-        const html = {};
-        const document = {createTreeWalker(node) {
-          assert.equal(node, html);
-          let index = -1;
-          return {nextNode() { return ++index < nodes.length; },
-            get currentNode() { return nodes[index]; }};
-        }};
-        const math = {querySelector: selector => {
-          assert.equal(selector, '.katex-html'); return html;
-        }};
-        const checked = [];
-        const observe = (spec, text) => {
-          checked.push({spec, text}); return {ready: !spec.includes('KaTeX_Main')};
-        };
-    """)
-    script += f"const result = ({REQUIRED_FONTS})(math, observe);\n"
-    script += dedent("""
-        assert.deepEqual(checked, [
-          {spec: 'normal 400 16px "KPress Math, Text Sans"', text: 'x1≈'},
-          {spec: 'normal 400 16px KaTeX_Main', text: 'x1≈'},
-          {spec: 'normal 400 16px serif', text: 'x1≈'},
-          {spec: 'normal 400 16px KaTeX_Size2', text: '∑'},
-        ]);
-        assert.equal(result[0].ready, true);
-        assert.equal(result[1].ready, false,
-          'a loaded first family cannot hide a pending later relation face');
-        assert.equal(result[2].ready, true);
-        assert.equal(result[3].ready, true);
-    """)
-    run_node(script)
+    run_node("required-fonts.mjs")
 
 
 def test_the_font_oracle_observes_promises_instead_of_a_lying_check_api() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const requests = [];
-        const load = (spec, text) => new Promise((resolve, reject) => {
-          requests.push({spec, text, resolve, reject});
-        });
-        const document = {fonts: {check: () => true}};
-        const face = {family: 'KaTeX_Main', style: 'normal', weight: '400',
-          unicodeRange: 'U+2265', status: 'error'};
-    """)
-    script += f"const observe = ({FONT_LOAD_OBSERVER})(load);\n"
-    script += dedent("""
-        (async () => {
-        const spec = 'normal 400 16px "KaTeX_Main"';
-        assert.equal(observe(spec, '≥').ready, false);
-        assert.equal(observe(spec, '≥').outcome, 'pending');
-        assert.equal(requests.length, 1, 'identical descriptions share an observed promise');
-        assert.equal(document.fonts.check(spec, '≥'), true,
-          'the WebKit false-positive must not make the oracle ready');
-        requests[0].resolve([face]);
-        await Promise.resolve();
-        assert.equal(observe(spec, '≥').ready, false,
-          'a resolved promise with an error face is still unavailable');
-        assert.equal(observe(spec, '≥').faces[0].status, 'error');
-        face.status = 'loaded';
-        assert.equal(observe(spec, '≥').ready, true);
-
-        assert.equal(observe('normal 400 16px serif', '≥').ready, false);
-        requests[1].resolve([]);
-        await Promise.resolve();
-        assert.equal(observe('normal 400 16px serif', '≥').ready, true,
-          'a system family or excluded Unicode range needs no declared face');
-
-        observe(spec, '≈');
-        requests[2].reject(new Error('required face failed'));
-        await Promise.resolve();
-        assert.equal(observe(spec, '≈').ready, false);
-        assert.equal(observe(spec, '≈').outcome, 'rejected');
-        assert.match(observe(spec, '≈').error, /required face failed/);
-        observe('italic 400 16px "KaTeX_Main"', '≥');
-        observe('normal 700 16px "KaTeX_Main"', '≥');
-        observe('normal 400 18px "KaTeX_Main"', '≥');
-        observe('normal 400 16px "KaTeX_AMS"', '≥');
-        assert.equal(requests.length, 7, 'style, weight, size, family, and text key the cache');
-        })().catch(error => { console.error(error); process.exitCode = 1; });
-    """)
-    run_node(script)
+    run_node("font-oracle.mjs")
 
 
 @pytest.mark.parametrize("kind", ["raw_tex", "native_math", "prepared_math"])
@@ -379,66 +172,11 @@ def test_one_visible_fallback_does_not_cover_another_clipped_formula() -> None:
 
 
 def test_early_targets_survive_boot_resets_and_end_at_distinct_values() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const sliders = ['kslider-one', 'phi-one', 'kslider-two', 'phi-two'].map(id => ({
-          id, min: '0', max: '450', step: '1', value: id.startsWith('phi-') ? '196' : '0',
-          events: [], dispatchEvent() { this.events.push(this.value); }
-        }));
-        const initial = sliders.map(slider => slider.value);
-        const document = {querySelectorAll: () => sliders};
-        const window = {dispatchEvent() {
-          sliders.forEach((slider, i) => { slider.value = initial[i]; });
-        }};
-    """)
-    script += f"const targets = ({EARLY_EVENTS})();\n"
-    script += dedent("""
-        assert.equal(Object.isFrozen(targets), true);
-        assert.equal(new Set(targets.map(target => target.value)).size, sliders.length);
-        for (const [i, target] of targets.entries()) {
-          assert.equal(Object.isFrozen(target), true);
-          assert.notEqual(target.value, initial[i], 'dropping all input must change output');
-          assert.notEqual(target.value, sliders[i].value,
-            'boot resets cannot revise expectations');
-          assert.equal(sliders[i].events.length, 2);
-          assert.notEqual(sliders[i].events[0], sliders[i].events[1]);
-          assert.equal(sliders[i].events[1], target.value);
-        }
-    """)
-    run_node(script)
+    run_node("early-targets.mjs")
 
 
 def test_readout_probe_uses_frozen_values_for_angles_and_directions() -> None:
-    script = dedent(r"""
-        const assert = require('node:assert/strict');
-        const sans = {closest: selector => selector.includes('kpress-math-face') ? {} : null};
-        const dormant = {dataset: {squaresMathContexts: 'system-sans'}, parentElement: null};
-        const output = text => ({querySelectorAll: selector => selector === '.katex'
-          ? [{closest: () => dormant}, sans]
-          : [{textContent: 'stale dormant source', closest: () => dormant},
-            {textContent: text, closest: () => null}]});
-        const elements = {
-          'phi-example': {value: '196'},
-          'kslider-example': {value: '123', getAttribute: () => 'Direction 123 of 448'},
-          's-phi-example': output('19.600^{\\circ}'),
-          'kval-example': output('k = 123')
-        };
-        const document = {getElementById: id => elements[id], documentElement: {dataset: {}}};
-        const targets = [{id: 'phi-example', value: '412'},
-          {id: 'kslider-example', value: '7'}];
-    """)
-    script += f"const readouts = ({READOUTS})(targets);\n"
-    script += dedent(r"""
-        assert.equal(readouts[0].expected_source, '41.200^{\\circ}');
-        assert.equal(readouts[0].actual_value, '196');
-        assert.equal(readouts[0].source, '19.600^{\\circ}');
-        assert.equal(readouts[1].expected_source, 'k = 7');
-        assert.equal(readouts[1].actual_value, '123');
-        assert.equal(readouts[1].source, 'k = 123');
-        assert.equal(readouts[1].state_matches, false);
-        assert.ok(readouts.every(readout => readout.sans && readout.supported));
-    """)
-    run_node(script)
+    run_node("readouts.mjs")
 
 
 @pytest.mark.parametrize(
@@ -469,36 +207,4 @@ def test_each_readout_contract_is_checked(field: str, value: object, message: st
 
 
 def test_visibility_requires_readable_geometry_after_ancestor_clipping() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const getComputedStyle = node => node.style;
-        const element = (style = {}, width = 100, height = 20, parent = null) => ({
-          style, parentElement: parent,
-          checkVisibility(options) {
-            assert.equal(options.opacityProperty, true);
-            assert.equal(options.visibilityProperty, true);
-            return true;
-          },
-          getBoundingClientRect: () => ({left: 0, top: 0, right: width, bottom: height,
-            width, height})
-        });
-    """)
-    script += f"const exposed = {EXPOSED};\n"
-    script += dedent("""
-        assert.equal(exposed(element()), true);
-        assert.equal(exposed(element({}, 1, 1)), false,
-          'clipped accessibility text is not visible');
-        assert.equal(exposed(element({clipPath: 'inset(50%)'})), false);
-        assert.equal(exposed(element({clipPath: 'inset(0px)'})), true);
-        assert.equal(exposed(element({clip: 'rect(0px, 0px, 0px, 0px)'})), false);
-        assert.equal(exposed(element({}, 100, 20, element({overflowX: 'hidden'}, 1))), false);
-        assert.equal(exposed(element({}, 100, 20, element({clipPath: 'inset(50%)'}))), false);
-        const frame = element({overflowY: 'hidden'}, 100, 720);
-        const scroll = element({overflowY: 'auto'}, 100, 720, frame);
-        scroll.scrollHeight = 10000; scroll.clientHeight = 720;
-        const belowFold = element({}, 100, 20, scroll);
-        belowFold.getBoundingClientRect = () => ({left: 0, top: 1000, right: 100,
-          bottom: 1020, width: 100, height: 20});
-        assert.equal(exposed(belowFold), true, 'scrolling can expose readable fallback');
-    """)
-    run_node(script)
+    run_node("visibility.mjs")

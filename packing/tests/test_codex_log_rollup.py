@@ -11,6 +11,20 @@ import pytest
 from devtools.codex_log_rollup import build_rollup, render_markdown
 from devtools.codex_task_tree_delta import build_delta
 
+#: Code-mode tool calls as Codex records them, keyed by call id. A code-mode call's input is
+#: the JavaScript the model sent, so the records are data in a fixture, not strings here.
+FIXTURES = Path(__file__).resolve().parent / "fixtures" / "codex_log_rollup"
+CODE_MODE_CALLS = FIXTURES / "code-mode-tool-calls.jsonl"
+
+
+def _code_mode_call(call_id: str) -> dict[str, object]:
+    """The fixture's `custom_tool_call` record for `call_id`, as a fresh dictionary."""
+    for line in CODE_MODE_CALLS.read_text(encoding="utf-8").splitlines():
+        record = json.loads(line)
+        if record["payload"]["call_id"] == call_id:
+            return record
+    raise KeyError(call_id)
+
 
 def _write_log(path: Path, records: list[dict[str, object]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -151,16 +165,7 @@ def test_rollup_subtracts_tools_and_groups_model_responses_by_model_and_effort(
                 started_ms=1_001_000,
                 completed_ms=1_004_000,
             ),
-            {
-                "timestamp": "2026-08-25T00:00:05.000Z",
-                "type": "response_item",
-                "payload": {
-                    "type": "custom_tool_call",
-                    "name": "exec",
-                    "call_id": "call-1",
-                    "input": "const r = await tools.exec_command({cmd: 'pytest'});",
-                },
-            },
+            _code_mode_call("call-1"),
             _item(
                 "CommandExecution",
                 timestamp="2026-08-25T00:00:07.000Z",
@@ -838,18 +843,7 @@ def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
                 model="gpt-legacy",
                 effort="medium",
             ),
-            {
-                "timestamp": "2026-08-25T00:00:04.000Z",
-                "type": "response_item",
-                "payload": {
-                    "type": "custom_tool_call",
-                    "name": "exec",
-                    "call_id": "legacy-command",
-                    "input": (
-                        'const r = await tools.exec_command({"cmd":"uv run pytest -q"});'
-                    ),
-                },
-            },
+            _code_mode_call("legacy-command"),
             {
                 "timestamp": "2026-08-25T00:00:05.000Z",
                 "type": "response_item",
@@ -859,16 +853,7 @@ def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
                     "output": [{"type": "input_text", "text": '{"session_id":42}'}],
                 },
             },
-            {
-                "timestamp": "2026-08-25T00:00:05.000Z",
-                "type": "response_item",
-                "payload": {
-                    "type": "custom_tool_call",
-                    "name": "exec",
-                    "call_id": "legacy-poll",
-                    "input": ("const r = await tools.write_stdin({session_id:42,chars:''});"),
-                },
-            },
+            _code_mode_call("legacy-poll"),
             {
                 "timestamp": "2026-08-25T00:00:07.000Z",
                 "type": "response_item",

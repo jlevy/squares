@@ -9,27 +9,21 @@ itself from.
 
 So each check is exercised here against a measurement built to trip it, and against one
 built not to. The first-line probe and the overflow culprit scan also run in Node against
-retained browser rectangle measurements, so the grouping in the one and the exclusions in
-the other are tested without requiring a browser installation. Only the browser can
-establish that the retained rectangles are still what the page lays out, and
-`check_print_layout --self-check` is where that is asked.
+retained browser rectangle measurements (`tests/node/check_print_layout/`), so the grouping
+in the one and the exclusions in the other are tested without requiring a browser
+installation. Only the browser can establish that the retained rectangles are still what
+the page lays out, and `check_print_layout --self-check` is where that is asked.
 """
 
 from __future__ import annotations
 
 import json
-import re
-from textwrap import dedent
+from pathlib import Path
 
 import pytest
 from nodejs_wheel import node
 
 from devtools.check_print_layout import (
-    _ACTIVE_MATH_TEXT,  # pyright: ignore[reportPrivateUsage]
-    _PROBE,  # pyright: ignore[reportPrivateUsage]
-    _PROVER_LAYOUT,  # pyright: ignore[reportPrivateUsage]
-    _READOUT_TEXT,  # pyright: ignore[reportPrivateUsage]
-    _ROTATION_TARGET,  # pyright: ignore[reportPrivateUsage]
     BOXED_TOLERANCE_PX,
     TOLERANCE_PX,
     Boxed,
@@ -41,32 +35,18 @@ from devtools.check_print_layout import (
     Probe,
     findings,
 )
-from devtools.render_explainer_pdf import SETTLED
+
+#: The Node scripts that run this module's probes against stand-ins.
+NODE = Path(__file__).resolve().parent / "node" / "check_print_layout"
 
 
 def test_layout_settlement_waits_for_pending_math() -> None:
     """Two animation frames cannot finish a readout still waiting for its font."""
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        let finish;
-        const pendingMath = new Promise(resolve => { finish = resolve; });
-        const document = {documentElement: {offsetHeight: 100},
-          fonts: {ready: Promise.resolve()}};
-        const requestAnimationFrame = callback => queueMicrotask(callback);
-        globalThis.squaresMath = {settled: () => pendingMath};
-        let done = false;
-    """)
-    script += f"const settled = ({SETTLED})().then(() => {{ done = true; }});\n"
-    script += dedent("""
-        setImmediate(async () => {
-          assert.equal(done, false, 'math is still pending after the layout frames');
-          finish();
-          await settled;
-          assert.equal(done, true);
-        });
-    """)
     completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+        [str(NODE / "settlement-waits-for-math.mjs")],
+        return_completed_process=True,
+        capture_output=True,
+        text=True,
     )
     assert completed.returncode == 0, completed.stderr
 
@@ -198,52 +178,26 @@ def test_centered_bullets_must_still_be_visible_squares() -> None:
         assert all("ul[0] > li[0]" in line for line in found)
 
 
-def probe_function(name: str) -> str:
-    """One helper's shipped source, so what runs here is what runs in the browser."""
-    source = re.search(rf"  function {name}\([^)]*\) \{{.*?\n  \}}", _PROBE, re.DOTALL)
-    assert source is not None, f"{name} is no longer a helper of its own in the probe"
-    return source.group() + "\n"
-
-
-def run_node(script: str) -> str | bytes:
-    """What the script printed, or its stderr as the failure."""
+def run_node(script: str, *arguments: str) -> str | bytes:
+    """What one of the `NODE` scripts printed, or its stderr as the failure."""
     completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+        [str(NODE / script), *arguments],
+        return_completed_process=True,
+        capture_output=True,
+        text=True,
     )
     assert completed.returncode == 0, completed.stderr
     return completed.stdout
 
 
-def first_line_box(setup: str) -> dict[str, float]:
+def first_line_box(script: str, *arguments: str) -> dict[str, float]:
     """Run the shipped probe against retained Range geometry, without browser setup."""
-    script = (
-        dedent(setup)
-        + probe_function("firstLineBox")
-        + "\nconsole.log(JSON.stringify(firstLineBox(el)));\n"
-    )
-    return json.loads(run_node(script))
+    return json.loads(run_node(script, *arguments))
 
 
 def test_bullet_probe_measures_boxes_and_keeps_missing_markers() -> None:
     """A missing pseudo-element must reach the guard; ordered and hidden items must not."""
-    script = dedent("""
-        const sig = () => 'ul[0] > li[0]';
-        const round = value => Math.round((value || 0) * 100) / 100;
-        const item = {parentElement: {tagName: 'UL'}, getClientRects: () => [{}]};
-        const square = {content: '\"\"', display: 'block', visibility: 'visible',
-          opacity: '1', backgroundColor: 'rgb(10, 10, 10)', width: '3.3px', height: '3.3px'};
-    """) + probe_function("bulletBox")
-    script += dedent("""
-        const variants = [square, {...square, height: '25px'},
-          {...square, content: 'none', width: 'auto', height: 'auto'},
-          {...square, display: 'none'}, {...square, backgroundColor: 'rgba(0, 0, 0, 0)'}];
-        console.log(JSON.stringify({
-          boxes: variants.map(before => bulletBox(item, before)),
-          ordered: bulletBox({...item, parentElement: {tagName: 'OL'}}, square),
-          hidden: bulletBox({...item, getClientRects: () => []}, square),
-        }));
-    """)
-    result = json.loads(run_node(script))
+    result = json.loads(run_node("bullet-box.mjs"))
     assert result["ordered"] is None
     assert result["hidden"] is None
     square, *broken = result["boxes"]
@@ -258,20 +212,7 @@ def test_bullet_probe_measures_boxes_and_keeps_missing_markers() -> None:
 
 def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() -> None:
     """The printed mass-condition bullets have inline tops at -1, 0, 2 and 3px."""
-    line = first_line_box("""
-            const rects = [
-              {top: 0, bottom: 22, height: 22, width: 100},
-              {top: 0, bottom: 22.390625, height: 22.390625, width: 20},
-              {top: -1, bottom: 19, height: 20, width: 10},
-              {top: 2, bottom: 22, height: 20, width: 10},
-              {top: 3, bottom: 21, height: 18, width: 10},
-              {top: 22.390625, bottom: 44.390625, height: 22, width: 100},
-            ];
-            const document = {createRange: () => ({
-              selectNodeContents() {}, getClientRects: () => rects,
-            })};
-            const el = {querySelectorAll: () => []};
-        """)
+    line = first_line_box("mixed-inline-boxes.mjs")
     assert line == {"top": -1, "bottom": 22.390625}
     normal = marker(markerCentre=22.390625 / 2, lineCentre=(line["top"] + line["bottom"]) / 2)
     assert not findings(both(markers=[normal]))
@@ -283,31 +224,7 @@ def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() 
 
 def test_zero_line_height_footnote_ink_does_not_move_the_marker_line() -> None:
     """Chrome print rectangles from Further Reading, relative to the list item's top."""
-    setup = """
-        const reference = {lineHeight: '0px', rects: [
-          {top: -8.515625, bottom: 13.484375, height: 22, width: 10.390625,
-           left: 519.625, right: 530.015625},
-          {top: -8.515625, bottom: 13.484375, height: 22, width: 6.40625,
-           left: 520.421875, right: 526.828125},
-        ]};
-        const el = {querySelectorAll: () => [reference], rects: [
-          {top: 0, bottom: 20, height: 20, width: 462.03125,
-           left: 57.59375, right: 519.625},
-          ...reference.rects,
-          {top: 21.25, bottom: 41.25, height: 20, width: 200,
-           left: 57.59375, right: 257.59375},
-        ]};
-        const getComputedStyle = el => ({lineHeight: el.lineHeight});
-        const document = {createRange: () => {
-          let selected;
-          return {
-            selectNodeContents(el) { selected = el; },
-            selectNode(el) { selected = el; },
-            getClientRects: () => selected.rects,
-          };
-        }};
-        """
-    line = first_line_box(setup)
+    line = first_line_box("zero-line-height-footnote.mjs", "0px")
     assert line == {"top": 0, "bottom": 20}
     normal = marker(markerCentre=10.63, lineCentre=(line["top"] + line["bottom"]) / 2)
     assert not findings(both(markers=[normal]))
@@ -316,34 +233,13 @@ def test_zero_line_height_footnote_ink_does_not_move_the_marker_line() -> None:
     assert len(found) == 2
     assert all("+4.63px" in finding for finding in found)
     # Only zero-height references are overlays; a normal inline must still contribute.
-    contributing = first_line_box(setup.replace("lineHeight: '0px'", "lineHeight: '22px'"))
+    contributing = first_line_box("zero-line-height-footnote.mjs", "22px")
     assert contributing == {"top": -8.515625, "bottom": 20}
 
 
 def test_clipped_mathml_does_not_move_the_marker_line_but_visible_fallback_does() -> None:
     """Retained mass-condition geometry: hidden MathML rises above the real line."""
-    setup = """
-        const semantic = {style: {position: 'absolute', clip: 'rect(1px, 1px, 1px, 1px)',
-          clipPath: 'none'}, rects: [
-          {top: 1, bottom: 2, height: 1, width: 1, left: 600, right: 601},
-          {top: -3.6875, bottom: 18.3125, height: 22, width: 9, left: 600, right: 609},
-        ]};
-        const el = {querySelectorAll: selector => selector.startsWith('sup') ? [] : [semantic],
-          rects: [
-          {top: 1, bottom: 25, height: 24, width: 600, left: 0, right: 600},
-          {top: 1, bottom: 26.1875, height: 25.1875, width: 12, left: 600, right: 612},
-          ...semantic.rects,
-          {top: 4.015625, bottom: 25.609375, height: 21.59375, width: 9,
-            left: 600, right: 609},
-        ]};
-        const getComputedStyle = node => node.style;
-        const document = {createRange: () => {
-          let selected;
-          return {selectNodeContents(node) {selected = node;},
-            selectNode(node) {selected = node;}, getClientRects: () => selected.rects};
-        }};
-    """
-    line = first_line_box(setup)
+    line = first_line_box("clipped-mathml-line.mjs", "absolute")
     assert line == {"top": 1, "bottom": 26.1875}
     unchanged = marker(
         markerCentre=14.217525,
@@ -354,7 +250,7 @@ def test_clipped_mathml_does_not_move_the_marker_line_but_visible_fallback_does(
     assert not findings(both(markers=[unchanged]))
     shifted = {**unchanged, "markerCentre": unchanged["markerCentre"] + 4}
     assert len(findings(both(markers=[shifted]))) == 2
-    visible = first_line_box(setup.replace("position: 'absolute'", "position: 'static'"))
+    visible = first_line_box("clipped-mathml-line.mjs", "static")
     assert visible == {"top": -3.6875, "bottom": 26.1875}
 
 
@@ -439,41 +335,7 @@ def test_prover_layout_probe_accepts_valid_boxes_and_rejects_known_defects(
     refuses the earlier side panel, small fraction, broken math, and ignored hidden
     attribute without requiring every pytest host to install a browser.
     """
-    script = (
-        f"const broken = {json.dumps(broken)};\n"
-        r"""
-const panel = {getBoundingClientRect: () => ({top: broken ? 20 : 300, left: 0, right: 400})};
-const stage = {getBoundingClientRect: () => ({bottom: 300})};
-const item = {
-  whiteSpace: broken ? 'normal' : 'nowrap',
-  closest: () => null,
-  getBoundingClientRect: () => ({left: broken ? -20 : 20, right: broken ? 450 : 380}),
-  querySelector: selector => selector === '.katex' ? mass : item,
-  querySelectorAll: selector => [selector === '.katex' ? mass : item],
-};
-const digit = {children: [], textContent: '4001', fontSize: broken ? '14px' : '20px'};
-const mass = {fontSize: '20px', closest: () => null,
-  querySelectorAll: () => [digit], querySelector: () => ({})};
-const hidden = {getClientRects: () => broken ? [{}] : []};
-const figure = {
-  getClientRects: () => [{}],
-  querySelector: selector => ({
-    '.panel': panel, '.stage': stage, '.math-item': item, '.mass-val .katex': mass,
-  })[selector],
-  querySelectorAll: selector => ({
-    '.math-item': [item], '.mass-val .katex': [mass], '[hidden]': [hidden],
-  })[selector],
-};
-const document = {documentElement: {dataset: {}}, querySelectorAll: () => [figure]};
-const getComputedStyle = el => el;
-"""
-        f"\nprocess.stdout.write(JSON.stringify(({_PROVER_LAYOUT})()));\n"
-    )
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
-    measured: list[str] = json.loads(completed.stdout)
+    measured: list[str] = json.loads(run_node("prover-layout.mjs", json.dumps(broken)))
     if not broken:
         assert measured == []
         return
@@ -489,106 +351,19 @@ const getComputedStyle = el => el;
 
 def test_minimum_mass_reads_only_the_selected_semantic_fraction() -> None:
     """Clipped active MathML survives; inactive font variants cannot add extra terms."""
-    script = r"""
-const assert = require('node:assert/strict');
-const document = {documentElement: {dataset: {}}};
-const make = (contexts, textContent) => ({textContent, closest: () => ({
-  dataset: {squaresMathContexts: contexts}, parentElement: null,
-})});
-const nodes = [
-  make('custom-serif custom-sans', '7'), make('custom-serif custom-sans', '8'),
-  make('system-serif system-sans', '9'), make('system-serif system-sans', '10'),
-];
-"""
-    script += f"const terms = ({_ACTIVE_MATH_TEXT});\n"
-    script += r"""
-for (const prose of ['serif', 'sans']) {
-  document.documentElement.dataset.kpressProseFont = prose;
-  document.documentElement.dataset.kpressFontSet = 'custom';
-  assert.deepEqual(terms(nodes), ['7', '8']);
-  document.documentElement.dataset.kpressFontSet = 'system';
-  assert.deepEqual(terms(nodes), ['9', '10']);
-}
-// Wrong active content must remain observable to the certificate comparison.
-nodes[2].textContent = '999';
-assert.deepEqual(terms(nodes), ['999', '10']);
-"""
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
+    run_node("minimum-mass-terms.mjs")
 
 
 def test_readout_text_excludes_dormant_variants_and_semantics_but_keeps_fallback() -> None:
     """Hidden expected values cannot mask a wrong active readout or replace its glyphs."""
-    script = r"""
-const assert = require('node:assert/strict');
-const NodeFilter = {SHOW_TEXT: 4};
-const document = {
-  documentElement: {dataset: {}},
-  createTreeWalker: el => {
-    const nodes = el.nodes[Symbol.iterator]();
-    return {nextNode: () => nodes.next().value || null};
-  },
-};
-const make = (contexts, textContent, semantic = false) => ({
-  textContent,
-  parentElement: {closest: selector => selector === '.katex-mathml'
-    ? (semantic ? {} : null)
-    : (contexts ? {dataset: {squaresMathContexts: contexts}, parentElement: null} : null)},
-});
-const active = make('custom-serif custom-sans', 'wrong visible value');
-const readout = {nodes: [
-  make(null, 'direction: '), active,
-  make('custom-serif custom-sans', '12219313/45000000 30.3836', true),
-  make('system-serif system-sans', '12219313/45000000 30.3836'),
-]};
-"""
-    script += f"const text = ({_READOUT_TEXT});\n"
-    script += r"""
-for (const prose of ['serif', 'sans']) {
-  document.documentElement.dataset.kpressProseFont = prose;
-  document.documentElement.dataset.kpressFontSet = 'custom';
-  assert.equal(text(readout), 'direction: wrong visible value');
-  document.documentElement.dataset.kpressFontSet = 'system';
-  assert.equal(text(readout), 'direction: 12219313/45000000 30.3836');
-}
-// A fresh client render has no profile wrapper; a failed render preserves raw TeX.
-assert.equal(text({nodes: [make(null, 'x=2')]}), 'x=2');
-assert.equal(text({nodes: [make(null, String.raw`\frac{7}{8}`)]}), String.raw`\frac{7}{8}`);
-assert.equal(text({nodes: []}), '');
-"""
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
+    run_node("readout-text.mjs")
 
 
 @pytest.mark.parametrize("broken", [False, True], ids=["usable", "known-touch-defects"])
 def test_rotation_target_probe_requires_a_large_named_unobstructed_touch_target(
     *, broken: bool
 ) -> None:
-    script = (
-        f"const broken = {json.dumps(broken)};\n"
-        r"""
-const handle = {
-  getBoundingClientRect: () => ({x: 10, y: 20, width: broken ? 43 : 44, height: 44}),
-  tagName: broken ? 'DIV' : 'BUTTON',
-  getAttribute: () => broken ? '' : 'Rotate the unit square',
-  contains: () => !broken,
-  touchAction: broken ? 'pan-y' : 'none',
-  closest: () => ({querySelector: () => ({touchAction: broken ? 'none' : 'pan-y'})}),
-};
-const document = {elementFromPoint: () => handle};
-const getComputedStyle = el => el;
-"""
-        f"\nprocess.stdout.write(JSON.stringify(({_ROTATION_TARGET})(handle)));\n"
-    )
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
-    measured: list[str] = json.loads(completed.stdout)
+    measured: list[str] = json.loads(run_node("rotation-target.mjs", json.dumps(broken)))
     if not broken:
         assert measured == []
         return
@@ -625,63 +400,23 @@ def test_screen_overflow_alone_is_not_a_page_finding() -> None:
     assert findings(measured) == []
 
 
-#: Enough of a DOM for the culprit scan to walk: a rectangle, a parent, and the computed
-#: properties `inkRight` reads. `sig` and `round` are stubbed rather than taken from the
-#: probe, the shipped `sig` wanting a real `classList` and `children`; the scan itself is
-#: the shipped one. Geometry goes in as rectangles retained from the browser.
-_DOM = """
-const plain = {position: 'static', overflowX: 'visible', clip: 'auto', clipPath: 'none'};
-const el = (name, left, right, style) => ({
-  name, textContent: name, closest: () => null, parentElement: null,
-  style: {...plain, ...style},
-  getBoundingClientRect: () => ({left, right, width: right - left}),
-});
-const stack = (...nodes) => {
-  for (let i = 0; i < nodes.length - 1; i++) nodes[i].parentElement = nodes[i + 1];
-  return nodes[0];
-};
-const root = {clientWidth: 576};
-const getComputedStyle = (node) => node.style;
-const sig = (node) => node.name;
-const round = (v) => Math.round((v || 0) * 100) / 100;
-"""
+def widest_run(scene: str, style: dict[str, str]) -> dict[str, object] | None:
+    """Run the shipped culprit scan over retained geometry, without browser setup.
+
+    `scene` is one of `widest-run.mjs`'s element chains, and `style` the computed style of
+    the ancestor whose clipping decides the answer: `.katex-mathml` in `mathml`, and the
+    clipping block in `escaping`.
+    """
+    return json.loads(run_node("widest-run.mjs", scene, json.dumps(style)))
 
 
-def widest_run(setup: str) -> dict[str, object] | None:
-    """Run the shipped culprit scan over retained geometry, without browser setup."""
-    script = (
-        _DOM
-        + dedent(setup)
-        + probe_function("widestRun")
-        + probe_function("inkRight")
-        + "\nconsole.log(JSON.stringify(widestRun(root) ?? null));\n"
-    )
-    return json.loads(run_node(script))
-
-
-#: The tau* equation's MathML chain and `--self-check`'s injected block, as the rendered
-#: explainer lays them out under `emulateMedia('print')` in a 576px column. KaTeX puts a
-#: MathML transcription of every formula in a `.katex-mathml` span that is 1px wide with
-#: `overflow: hidden`, and the boxes inside it keep their natural width: the `mrow` ends
-#: at 812.77px, 236.77px past a page that its ink never reaches.
-_CLIPPED_MATHML = """
-const html = el('html.math-ready', 0, 576);
-const body = el('body.kpress-frame', 0, 576);
-const main = el('main.kpress-viewport', 0, 576, {position: 'relative'});
-const column = el('div.kpress', 0, 576);
-const render = el('div.kpress-math-render', 0, 576);
-const display = el('span.katex-display', 0, 576);
-const katex = el('span.katex', 0, 576, {position: 'relative'});
-const mathml = el('span.katex-mathml', 288, 289,
-  {position: 'absolute', overflowX: 'hidden', clip: 'rect(1px, 1px, 1px, 1px)'});
-const math = el('math', 288, 289);
-const semantics = el('semantics', 288, 289);
-const mrow = el('mrow', 288, 812.765625);
-const injected = el('div.print-layout-self-check', 0, 618);
-stack(mrow, semantics, math, mathml, katex, display, render, column, main, body, html);
-stack(injected, column);
-const document = {querySelectorAll: () => [mrow, semantics, math, mathml, injected]};
-"""
+#: `.katex-mathml` as the rendered explainer lays it out under print: absolutely positioned,
+#: 1px wide with `overflow: hidden`, and clipped to a pixel.
+CLIPPED_MATHML = {
+    "position": "absolute",
+    "overflowX": "hidden",
+    "clip": "rect(1px, 1px, 1px, 1px)",
+}
 
 
 def test_the_named_culprit_is_the_block_that_widens_the_page_not_a_clipped_one() -> None:
@@ -693,7 +428,7 @@ def test_the_named_culprit_is_the_block_that_widens_the_page_not_a_clipped_one()
     equals the page's -- it is 1px of ink inside `.katex-mathml` and cannot widen
     anything -- and it outbid a genuinely overflowing block by nearly six to one.
     """
-    widest = widest_run(_CLIPPED_MATHML)
+    widest = widest_run("mathml", CLIPPED_MATHML)
     assert widest is not None
     assert widest["path"] == "div.print-layout-self-check"
     assert widest["over"] == 42
@@ -705,36 +440,23 @@ def test_the_culprit_scan_excludes_by_what_clips_and_not_by_what_the_element_is(
     Which pins the criterion rather than the outcome: nothing here knows about KaTeX,
     and a figure given its own scroll is excluded by the same rule that excludes this.
     """
-    unclipped = _CLIPPED_MATHML.replace("overflowX: 'hidden',", "").replace(
-        "clip: 'rect(1px, 1px, 1px, 1px)'", "clip: 'auto'"
-    )
-    widest = widest_run(unclipped)
+    unclipped = {"position": "absolute", "clip": "auto"}
+    widest = widest_run("mathml", unclipped)
     assert widest is not None
     assert widest["path"] == "mrow"
     assert widest["over"] == 236.77
 
 
-#: Synthesized rather than retained: this page has no such box. An absolutely positioned
-#: element is laid out in its containing block, so a clipping ancestor below that block
-#: does not cut it, and it really does widen the document.
-_ESCAPING = """
-const html = el('html', 0, 576);
-const body = el('body', 0, 576);
-const clipper = el('div.clipper', 0, 576, {overflowX: 'hidden'});
-const escapee = el('div.escapee', 0, 618, {position: 'absolute'});
-stack(escapee, clipper, body, html);
-const document = {querySelectorAll: () => [escapee]};
-"""
+#: A clipping block with a box absolutely positioned inside it, in `escaping`.
+CLIPPER = {"overflowX": "hidden"}
 
 
 def test_a_box_that_escapes_the_clipping_ancestor_is_still_named() -> None:
     """Only ancestors that are laid out around a box get to cut it back."""
-    widest = widest_run(_ESCAPING)
+    widest = widest_run("escaping", CLIPPER)
     assert widest is not None
     assert widest["path"] == "div.escapee"
     assert widest["over"] == 42
     # The same clipper, positioned, is the escapee's containing block and does clip it.
-    containing = _ESCAPING.replace(
-        "{overflowX: 'hidden'}", "{overflowX: 'hidden', position: 'relative'}"
-    )
-    assert widest_run(containing) is None
+    containing = {**CLIPPER, "position": "relative"}
+    assert widest_run("escaping", containing) is None

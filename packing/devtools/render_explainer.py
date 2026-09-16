@@ -65,6 +65,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
+from sqpack.probes import applied, probe
 from sqpack.release import (
     PUBLICATION_DATE,
     PUBLICATION_HISTORY,
@@ -95,6 +96,8 @@ RESULT_ID = "t-018"
 TEMPLATES = Path(__file__).with_name("templates")
 TEMPLATE = TEMPLATES / "explainer-shell.html"
 MARKDOWN = TEMPLATES / "explainer-article.md"
+#: The browser code this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 VERIFIER_CLAIM = CASE / "verify_claim.py"
 #: The one-file checker pinned by digest to the headline certificate; the opening says
 #: how long it is, so a reader knows the whole check is a short read before deciding
@@ -772,7 +775,7 @@ _MODULE_ONLY = (
     ),
 )
 
-# The three names the epilogue below reaches for, and the module each is
+# The three names the shell's epilogue reaches for, and the module each is
 # kpress's public API from. Checked against what that module exports rather than
 # against what it happens to declare: an upstream that stops exporting one of
 # these is retiring it, whatever the flattened scope would still resolve.
@@ -782,37 +785,55 @@ KPRESS_API = {
     "code-copy.js": "initKpressCodeCopy",
 }
 
-# What the flattened script hands the page, and why it hands over only half of
-# what kpress registers. Overriding a behavior with a no-op bind is kpress's own
-# seam (`behaviors.override`), and running it here — at script evaluation, before
-# the runtime's ready pass — is what keeps the built-in link previews from ever
-# binding.
-KPRESS_EPILOGUE = """
-/* This page wants footnote previews and nothing else. kpress's tooltips module
-   registers two behaviors at import — hover previews for internal links, and
-   footnote previews — and the runtime binds both once the document is ready,
-   which here would hang a preview reading "1" off every footnote's back-arrow.
-   The link behavior is overridden with a no-op bind before that pass runs; the
-   footnote one is left alone, and the page boots it explicitly as well. The
-   copy button is kpress's own too: its behavior binds itself at the runtime's
-   ready pass, and the boot below runs it earlier so the control is there before
-   the reader can reach the block. */
-behaviors.override("tooltip", () => undefined);
-window.kpressInitTooltips = initKpressTooltips;
-window.kpressInitCodeCopy = initKpressCodeCopy;
-"""
+# The script element the flattened modules land in is written by the shell, around this
+# placeholder: the strict-mode IIFE they share, and the epilogue after them that hands the
+# page only half of what kpress registers. Overriding a behavior with a no-op bind is
+# kpress's own seam (`behaviors.override`), and running it there -- at script evaluation,
+# before the runtime's ready pass -- is what keeps the built-in link previews from ever
+# binding. The render still owns every refusal, so `kpress_client_js` reads that frame
+# back out of the shell and holds all of it to the `</script` rule, not only the modules.
+CLIENT_PLACEHOLDER = "{{KPRESS_CLIENT_JS}}"
+
+
+def kpress_client_modules() -> str:
+    """The modules the shell's comment names as the client script's sources, in order."""
+    return ", ".join(f"js/{name}" for name in KPRESS_MODULES)
+
+
+def client_script_frame() -> tuple[str, str]:
+    """The shell's own text inside the script element the flattened modules land in.
+
+    Before the placeholder, from the element's opening tag; after it, up to the last
+    closing tag before the next element opens. Read that far rather than to the first
+    closing tag, because a stray `</script` in the shell's own frame would be that first
+    one: a browser ends the element there, and a frame cut at the same place would hide
+    the text it cuts off instead of refusing it.
+    """
+    shell = TEMPLATE.read_text(encoding="utf-8")
+    if shell.count(CLIENT_PLACEHOLDER) != 1:
+        raise SystemExit(f"{TEMPLATE.name} must carry {CLIENT_PLACEHOLDER} exactly once")
+    at = shell.index(CLIENT_PLACEHOLDER)
+    after = at + len(CLIENT_PLACEHOLDER)
+    following = shell.find("<script", after)
+    opening = shell.rfind("<script>", 0, at)
+    closing = shell.rfind("</script>", after, len(shell) if following == -1 else following)
+    if opening == -1 or closing == -1:
+        raise SystemExit(f"{TEMPLATE.name}: {CLIENT_PLACEHOLDER} is outside any script element")
+    return shell[opening + len("<script>") : at], shell[after:closing]
 
 
 def kpress_client_js(static: Path) -> str:
-    """kpress's client modules as one classic script, exposing the two boots.
+    """kpress's client modules as the body of one classic script, which the shell wraps.
 
-    Concatenates `KPRESS_MODULES` in order into one IIFE, dropping the imports
-    (every name they bind is already in scope by the time it is used) and the
-    `export` keyword. Refuses to produce a bundle it cannot vouch for: an import
-    or export form it does not rewrite, an imported name the source module no
-    longer exports, a module-only construct, a `KPRESS_API` name that is gone,
-    or two modules declaring the same top-level name — which sharing one scope
-    would silently resolve to whichever came last.
+    Concatenates `KPRESS_MODULES` in order, dropping the imports (every name they
+    bind is already in scope by the time it is used) and the `export` keyword. The
+    shell writes the rest of the script around `{{KPRESS_CLIENT_JS}}`: the IIFE the
+    modules share and the epilogue that exposes the two boots. Refuses to produce a
+    bundle it cannot vouch for: an import or export form it does not rewrite, an
+    imported name the source module no longer exports, a module-only construct, a
+    `KPRESS_API` name that is gone, two modules declaring the same top-level name —
+    which sharing one scope would silently resolve to whichever came last — or a
+    `</script` anywhere in the element, the shell's own frame included.
     """
     exported: dict[str, set[str]] = {}
     declared: dict[str, str] = {}
@@ -883,11 +904,14 @@ def kpress_client_js(static: Path) -> str:
                 f"js/{module} no longer exports `{wanted}`; the page cannot boot it"
             )
 
-    modules = ", ".join(f"js/{name}" for name in KPRESS_MODULES)
-    bundle = f"/* kpress client behaviors, flattened from {modules} */\n(() => {{\n"
-    bundle += '"use strict";\n' + "\n".join(parts) + KPRESS_EPILOGUE + "})();\n"
-    if re.search(r"</script", bundle, re.IGNORECASE):
-        raise SystemExit("a kpress client module carries `</script`; it cannot be inlined")
+    bundle = "\n".join(parts)
+    before, after = client_script_frame()
+    element = before.replace("{{KPRESS_CLIENT_MODULES}}", kpress_client_modules())
+    if re.search(r"</script", element + bundle + after, re.IGNORECASE):
+        raise SystemExit(
+            "the kpress client script carries `</script`, in a module or in the shell's "
+            "frame; it cannot be inlined"
+        )
     return bundle
 
 
@@ -1276,102 +1300,14 @@ def relation_face_css(static: Path) -> str:
 KATEX_RUNTIME = "katex/katex-math-runtime.js"
 MATH_WRAPPERS = ".katex, .kpress-math, .kpress-math-render, .tex, .tex-d, .squares-math-variant"
 
-HOST_MATH_INIT = r"""
-(() => {
-  const wrappers = "%(wrappers)s";
-  const firstFamily = value => (value || "").split(",")[0].trim().replace(/^["']|["']$/g, "");
-  const context = {
-    isSansContext(node) {
-      let el = node;
-      while (el && el.matches && el.matches(wrappers)) el = el.parentElement;
-      if (!el || el.nodeType !== 1) return false;
-      const style = getComputedStyle(el);
-      const sans = firstFamily(style.getPropertyValue("--kpress-font-sans"));
-      return !!sans && firstFamily(style.fontFamily) === sans;
-    },
-  };
-  // The same one-mu spacing the SVG labels use for an italic function name.
-  const kern = source => String(source).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-  const pending = new Set();
-  const submitting = new Set();
-  const versions = new WeakMap();
-  function track(result, waiting = pending) {
-    waiting.add(result);
-    result.then(() => waiting.delete(result), () => waiting.delete(result));
-    return result;
-  }
-  // Reserve work before its producer runs, including later certificate scripts.
-  function reserve() {
-    let release;
-    const result = new Promise(resolve => { release = resolve; });
-    track(result);
-    track(result, submitting);
-    return release;
-  }
-  function nextTask() {
-    return new Promise(resolve => {
-      const channel = new MessageChannel();
-      channel.port1.onmessage = () => {
-        channel.port1.close(); channel.port2.close(); resolve();
-      };
-      channel.port2.postMessage(null);
-    });
-  }
-  function batch(jobs) {
-    const finishSubmission = reserve();
-    // Register the whole queue before its first job runs. A task boundary lets
-    // completed formulas reveal while later formulas are still being submitted.
-    return track(Promise.resolve().then(async () => {
-      const issued = [];
-      try {
-        for (let start = 0; start < jobs.length; start += 16) {
-          if (start) await nextTask();
-          for (const job of jobs.slice(start, start + 16)) issued.push(job());
-        }
-      } finally {
-        finishSubmission();
-      }
-      await Promise.all(issued);
-    }));
-  }
-  function render(el, source, display) {
-    const version = (versions.get(el) || 0) + 1;
-    versions.set(el, version);
-    const root = document.documentElement.dataset;
-    const preference = (root.kpressFontSet === 'system' ? 'system' : 'custom') + '-'
-      + (root.kpressProseFont === 'sans' ? 'sans' : 'serif');
-    const variants = [...el.querySelectorAll(':scope > .squares-math-variant')];
-    const target = variants.find(node =>
-      node.dataset.squaresMathContexts.split(' ').includes(preference)) || el;
-    const renderMath = target.dataset.kpressMathPrepared === 'true'
-      ? kpressMathText.hydrate : kpressMathText.render;
-    const result = renderMath(kern(source), target,
-      { displayMode: !!display, throwOnError: false }, context).then(() => {
-      if (versions.get(el) !== version) return true;
-      target.dataset.squaresMathReady = 'true';
-      el.dataset.squaresMathReady = 'true';
-      return true;
-    }, () => {
-      if (versions.get(el) !== version) return true;
-      el.textContent = source;
-      el.dataset.squaresMathReady = 'true';
-      return false;
-    });
-    return track(result);
-  }
-  async function drain(waiting) {
-    while (waiting.size) await Promise.all([...waiting]);
-  }
-  const submitted = () => drain(submitting);
-  const settled = () => drain(pending);
-  globalThis.squaresMath = { render, reserve, batch, submitted, settled, context };
-})();
-"""
-
 
 def host_math_init() -> str:
-    """Adapt the paper's custom math wrappers and spacing to KPress's shared runtime."""
-    return HOST_MATH_INIT % {"wrappers": MATH_WRAPPERS}
+    """Adapt the paper's custom math wrappers and spacing to KPress's shared runtime.
+
+    The adapter is `probes/render_explainer/host_math_init.js`, applied to the wrappers
+    selector, so the page carries it as one call that installs `squaresMath`.
+    """
+    return applied(probe(PROBES, "render_explainer/host_math_init"), MATH_WRAPPERS)
 
 
 def katex_js(static: Path) -> str:
@@ -1694,7 +1630,8 @@ def atom_array(facts: Facts) -> str:
     covered mass it reports is exact rather than a float total. Coordinates go
     the same way so a hovered atom can name the rational the certificate holds
     rather than a rounding of it; the float pair every draw call needs is
-    derived once at load.
+    derived once at load. These are the rows only: the certificate script in the
+    shell declares `ATOM_Q` around `{{ATOMS}}` and derives `ATOMS` from it.
     """
     rows = []
     for atom in facts.atoms:
@@ -1704,10 +1641,7 @@ def atom_array(facts: Facts) -> str:
             f"[{atom.x.numerator},{atom.x.denominator},"
             f"{atom.y.numerator},{atom.y.denominator},{weight.numerator}]"
         )
-    return (
-        "const ATOM_Q=[" + ",".join(rows) + "];\n"
-        "const ATOMS=ATOM_Q.map(([xn,xd,yn,yd,w])=>[xn/xd,yn/yd,w]);"
-    )
+    return ",".join(rows)
 
 
 def best_packing_svg() -> str:
@@ -2323,6 +2257,7 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
         "RELATION_CSS": relation_face_css(static),
         "THEME_BOOTSTRAP": theme_bootstrap(static),
         "KATEX_JS": katex_js(static),
+        "KPRESS_CLIENT_MODULES": kpress_client_modules(),
         "KPRESS_CLIENT_JS": kpress_client_js(static),
         **shared,
         "BODY_HTML": body,
@@ -2551,6 +2486,7 @@ RENDER_INPUTS = (
     PACKING / "devtools" / "render_explainer_pdf.py",
     PACKING / "devtools" / "sans_instances.py",
     PACKING / "devtools" / "check_print_layout.py",
+    PACKING / "devtools" / "probes",
     PACKING / "src" / "sqpack",
     PACKING / "frontier" / "results.yaml",
     PACKING / "atlas" / "known-best" / "composite-figure.json",

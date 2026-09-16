@@ -20,6 +20,7 @@ from tempfile import TemporaryDirectory
 from typing import Literal, TypedDict
 
 from devtools.render_explainer_pdf import PAGE
+from sqpack.probes import applied, probe
 
 
 class Position(TypedDict):
@@ -45,18 +46,17 @@ class ReloadReport(TypedDict):
     findings: list[str]
 
 
-POSITION = """() => {
-  const viewport = document.querySelector('[data-kpress-viewport]')
-    || document.scrollingElement;
-  return {top: viewport.scrollTop, document_top: scrollY,
-    native: viewport === document.scrollingElement,
-    restoration: history.scrollRestoration, hash: location.hash};
-}"""
-SETTLE = """async () => {
-  await globalThis.squaresMath?.settled?.();
-  await document.fonts.ready;
-  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-}"""
+#: The probes this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
+
+POSITION = probe(PROBES, "check_scroll_restoration/position")
+SETTLE = probe(PROBES, "check_scroll_restoration/settle")
+_SCROLL_TO_READING_POSITION = probe(
+    PROBES, "check_scroll_restoration/scroll_to_reading_position"
+)
+_RELOAD = probe(PROBES, "check_scroll_restoration/reload")
+_NAVIGATION_TYPE = probe(PROBES, "check_scroll_restoration/navigation_type")
+_DISABLE_RESTORATION = probe(PROBES, "check_scroll_restoration/disable_restoration")
 
 
 class _QuietHandler(SimpleHTTPRequestHandler):
@@ -118,17 +118,12 @@ def check_reload(
             page.goto(url + ("#" + fragment if fragment else ""), wait_until="load")
             if javascript:
                 page.evaluate(SETTLE)
-            page.evaluate("""() => {
-              const viewport = document.querySelector('[data-kpress-viewport]')
-                || document.scrollingElement;
-              viewport.scrollTo({top: Math.min(3000,
-                (viewport.scrollHeight - viewport.clientHeight) * .6), behavior: 'instant'});
-            }""")
+            page.evaluate(_SCROLL_TO_READING_POSITION)
             if javascript:
                 page.evaluate(SETTLE)
             before: Position = page.evaluate(POSITION)
             with page.expect_navigation(wait_until="load"):
-                page.evaluate("location.reload()")
+                page.evaluate(_RELOAD)
             if javascript:
                 page.evaluate(SETTLE)
             after: Position = page.evaluate(POSITION)
@@ -139,9 +134,7 @@ def check_reload(
                 "width": width,
                 "before": before,
                 "after": after,
-                "navigation_type": page.evaluate(
-                    "performance.getEntriesByType('navigation')[0].type"
-                ),
+                "navigation_type": page.evaluate(_NAVIGATION_TYPE),
                 "findings": [],
             }
             report["findings"] = findings(report)
@@ -185,7 +178,7 @@ def main() -> int:
             negative = root / "disabled.html"
             negative.write_text(
                 control.replace(
-                    "<body>", "<body><script>history.scrollRestoration='manual'</script>"
+                    "<body>", f"<body><script>{applied(_DISABLE_RESTORATION)}</script>"
                 )
             )
             good = check_reload(positive, browser_name=args.browser, width=args.width)

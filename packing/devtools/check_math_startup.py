@@ -40,8 +40,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any, Literal
 
-from devtools.check_math_loading import ACTIVE_MATH_VARIANT, EXPOSED, page_url
-from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
+from devtools.check_math_loading import MATH_LIBRARY_INIT, page_url
+from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED_REFERENCE
+from sqpack.probes import applied, probe
 
 type BrowserName = Literal["chromium", "firefox", "webkit"]
 type MeasurementMode = Literal["full", "parameters"]
@@ -49,414 +50,15 @@ type JsonRecord = dict[str, Any]
 
 EXPECTED_PARAMETERS = 14
 
-#: Installed before parsing. Wrappers observe the original calls and return their
-#: original promises, preserving resolution order and rejection behavior. No waits,
-#: styles, input events, or rendering mutations are introduced by the instrument.
-_STARTUP_SCRIPT = r"""
-(() => {
-  const mode = '__MODE__', full = mode === 'full';
-  const clock = () => performance.now();
-  const state = globalThis.__mathStartup = {
-    mode,
-    metrics: {instrumentation_installed_ms: clock()},
-    counters: {frames: 0, font_hooks: 0, katex_hooks: 0, runtime_hooks: 0,
-      katex_calls: 0, ready_calls: 0, render_calls: 0, hydrate_calls: 0,
-      hydrate_hooks: 0, anchor_samples: 0},
-    capabilities: {longtask: false, layout_shift: false},
-    fonts: [], ready: [], renders: [], hydrates: [], katex: [], longtasks: [], shifts: [],
-    targets: [], anchors: [], snapshots: [], errors: [], stop: false,
-    pre_reveal_frame_observed: false, pending_observed: false,
-  };
-  const metrics = state.metrics;
-  const first = (name, value = clock()) => {
-    if (metrics[name] == null) metrics[name] = value;
-  };
-  const observed = (promise, record) => {
-    // Returning this exact promise matters: observation must not become a font gate.
-    if (promise && typeof promise.then === 'function') promise.then(
-      () => { record.end_ms = clock(); record.outcome = 'resolved'; },
-      error => { record.end_ms = clock(); record.outcome = 'rejected';
-        record.error = String(error); });
-    return promise;
-  };
-  const originals = [];
-  function wrap(owner, key, make) {
-    const original = owner?.[key];
-    if (typeof original !== 'function') return false;
-    owner[key] = make(original);
-    originals.push(() => { owner[key] = original; });
-    return true;
-  }
-  const fontOwners = [globalThis.FontFace?.prototype,
-    document.fonts && Object.getPrototypeOf(document.fonts)];
-  for (const [index, owner] of fontOwners.entries()) {
-    if (wrap(owner, 'load', original => function(...args) {
-      if (state.stop) return original.apply(this, args);
-      const record = {kind: index === 0 ? 'face' : 'set', start_ms: clock(),
-        request: index === 0 ? `${this.family} ${this.style} ${this.weight}` : String(args[0]),
-        outcome: 'pending'};
-      state.fonts.push(record);
-      try { return observed(original.apply(this, args), record); }
-      catch (error) { record.end_ms = clock(); record.outcome = 'threw'; throw error; }
-    })) state.counters.font_hooks++;
-  }
-  if (document.fonts) {
-    document.fonts.addEventListener('loading', () => first('font_loading_event_ms'));
-    document.fonts.addEventListener('loadingdone', () => {
-      metrics.font_loading_done_ms = clock();
-    });
-  }
-  const sources = new WeakMap();
-  function globalObject(name, install) {
-    let value = globalThis[name];
-    const installed = new WeakSet();
-    const accept = object => {
-      if (object && !installed.has(object)) { installed.add(object); install(object); }
-    };
-    Object.defineProperty(globalThis, name, {configurable: true, enumerable: true,
-      get: () => value, set: object => { value = object; accept(object); }});
-    accept(value);
-  }
-  globalObject('katex', api => {
-    first('katex_available_ms');
-    if (wrap(api, 'render', original => function(...args) {
-      if (state.stop) return original.apply(this, args);
-      const record = {start_ms: clock(), source: String(args[0]),
-        target: args[1]?.id || null};
-      state.counters.katex_calls++;
-      try { return original.apply(this, args); }
-      finally { record.duration_ms = clock() - record.start_ms; state.katex.push(record); }
-    })) state.counters.katex_hooks++;
-  });
-  globalObject('kpressMathText', api => {
-    first('runtime_available_ms');
-    if (wrap(api, 'ready', original => function(...args) {
-      first('first_ready_call_ms'); state.counters.ready_calls++;
-      const record = {start_ms: clock(), outcome: 'pending'};
-      state.ready.push(record);
-      return observed(original.apply(this, args), record);
-    })) state.counters.runtime_hooks++;
-    if (wrap(api, 'hydrate', original => function(...args) {
-      state.counters.hydrate_calls++;
-      const [source, node] = args;
-      const record = {start_ms: clock(), source: String(source), target: node?.id || null,
-        outcome: 'pending'};
-      if (node) sources.set(node, record);
-      state.hydrates.push(record);
-      return observed(original.apply(this, args), record);
-    })) state.counters.hydrate_hooks++;
-    if (wrap(api, 'render', original => function(...args) {
-      state.counters.render_calls++;
-      const [source, node] = args;
-      const record = {start_ms: clock(), source: String(source), target: node?.id || null,
-        outcome: 'pending'};
-      if (node) sources.set(node, record);
-      state.renders.push(record);
-      return observed(original.apply(this, args), record);
-    })) state.counters.runtime_hooks++;
-  });
-  const observers = [], drainObservers = [];
-  for (const [type, capability, records] of [
-    ['longtask', 'longtask', state.longtasks], ['layout-shift', 'layout_shift', state.shifts],
-  ]) {
-    if (!globalThis.PerformanceObserver?.supportedEntryTypes?.includes(type)) continue;
-    state.capabilities[capability] = true;
-    const receive = entries => {
-      for (const entry of entries) records.push(type === 'longtask'
-        ? {start_ms: entry.startTime, duration_ms: entry.duration}
-        : {start_ms: entry.startTime, value: entry.value,
-          had_recent_input: entry.hadRecentInput,
-          sources: (entry.sources || []).map(source => ({
-            node: source.node?.id || source.node?.tagName || null,
-            previous: source.previousRect.toJSON(), current: source.currentRect.toJSON(),
-          }))});
-    };
-    const observer = new PerformanceObserver(list => {
-      if (!state.stop) receive(list.getEntries());
-    });
-    observer.observe({type, buffered: true}); observers.push(observer);
-    drainObservers.push(() => receive(observer.takeRecords()));
-  }
-  document.addEventListener('DOMContentLoaded', () => first('dom_content_loaded_observed_ms'));
-  window.addEventListener('load', () => first('load_observed_ms'));
-  const pending = () => {
-    const root = document.documentElement;
-    if (!root) return;
-    if (root.hasAttribute('data-kpress-math-pending')) {
-      state.pending_observed = true; first('pending_set_ms');
-    } else if (state.pending_observed) first('pending_cleared_ms');
-    if (root.classList.contains('math-ready')) first('math_ready_marker_ms');
-  };
-  let dirty = true;
-  const mutations = new MutationObserver(() => { dirty = true; pending(); });
-  mutations.observe(document, {subtree: true, childList: true, attributes: true,
-    attributeFilter: ['data-kpress-math-pending', 'class', 'hidden']});
-  const exposed = __EXPOSED__;
-  const activeVariant = __ACTIVE_MATH_VARIANT__;
-  const mathWrapper = '.katex,.kpress-math,.kpress-math-render,'
-    + '.kpress-math-semantic,.tex,.tex-d,.squares-math-variant';
-  const normalized = text => (text || '').replace(/\s+/g, '').replace(/\\mkern1mu/g, '');
-  const annotation = node => [...node.querySelectorAll(
-    'annotation[encoding="application/x-tex"]')]
-    .filter(activeVariant).map(part => part.textContent.trim());
-  const visibleMath = node => {
-    const maths = [...node.querySelectorAll('.katex')].filter(activeVariant);
-    return maths.length > 0 && ![...node.querySelectorAll('.katex-error')]
-      .some(activeVariant) && maths.every(math => {
-      // The publication's pending rule necessarily hides these targets. Avoid
-      // forcing prepared-page layout merely to measure an invisible formula.
-      // Eligible targets still undergo the same actual exposure checks below.
-      if (!full && document.documentElement.hasAttribute('data-kpress-math-pending')) {
-        const target = math.closest('.tex,.tex-d,[data-kpress-math-prepared="true"]');
-        if (target && target.dataset.squaresMathReady !== 'true') return false;
-      }
-      const html = math.querySelector('.katex-html');
-      return html && html.textContent.trim() && exposed(html) && annotation(math).every(Boolean)
-        && annotation(math).length > 0;
-    });
-  };
-  const active = node => !node.closest('.cert-figure[hidden]') && exposed(node);
-  const slugOf = node => node.closest('.cert-figure')?.dataset.cert || null;
-  const snapshot = () => {
-    const viewport = document.querySelector('[data-kpress-viewport]')
-      || document.scrollingElement;
-    return {at_ms: clock(), width: innerWidth, height: innerHeight,
-      scroll_x: viewport?.scrollLeft || 0, scroll_y: viewport?.scrollTop || 0,
-      document_scroll_x: scrollX, document_scroll_y: scrollY,
-      visibility: document.visibilityState, focused: document.hasFocus(), hash: location.hash,
-      document_ready_state: document.readyState,
-      math_ready: document.documentElement.classList.contains('math-ready'),
-      certificate_elements: document.querySelectorAll('.cert-figure').length,
-      active_certificates: [...new Set([...document.querySelectorAll('.cert-figure')]
-        .filter(node => full ? active(node) : !node.closest('[hidden]'))
-        .map(node => node.dataset.cert))]};
-  };
-  let prose = [], captions = [], parameters = [];
-  const targetTimes = new WeakMap(), anchorNodes = new WeakMap(), tracked = [];
-  const blockEdges = new WeakMap();
-  const expectedLabels = ['\\varphi', 'K', '\\varphi', '\\theta', 'd', 'D', 'B',
-    'B(\\cos d + \\sin d)'];
-  function correctTarget(node, index) {
-    if (!visibleMath(node)) return false;
-    const texts = annotation(node);
-    if (index < 8 && normalized(texts.join('')) !== normalized(expectedLabels[index])) {
-      return false;
-    }
-    if (node.id.startsWith('s-phi-')) {
-      const slider = document.getElementById(node.id.slice(2));
-      if (!slider || normalized(texts[0]) !== normalized(
-        (Number(slider.value) / 10).toFixed(3) + '^{\\circ}')) return false;
-    }
-    const containers = [node, ...node.querySelectorAll(mathWrapper)].filter(activeVariant);
-    return containers.every(container => {
-      const request = sources.get(container);
-      return !request || annotation(container)
-        .some(text => normalized(text) === normalized(request.source));
-    });
-  }
-  function discoverAnchors() {
-    const blocks = document.querySelectorAll(
-      '.kpress-prose p, .kpress-figcaption, figcaption, figure[data-figure="6"] .caps, '
-      + 'figure[data-figure="6"] dt');
-    for (const block of blocks) {
-      const previous = blockEdges.get(block);
-      if (previous && previous.last === block.lastChild
-          && previous.count === block.childNodes.length) continue;
-      if (!block.querySelector(mathWrapper) || !active(block)) continue;
-      blockEdges.set(block, {last: block.lastChild, count: block.childNodes.length});
-      const category = block.closest('.kpress-figcaption,figcaption') ? 'caption'
-        : block.closest('figure[data-figure="6"]') ? 'parameter' : 'prose';
-      const walker = document.createTreeWalker(block,
-        NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {acceptNode(node) {
-          // Reject whole math subtrees. Prepared markup must not cost the observer
-          // a walk through thousands of glyph spans that the control lacks.
-          if (node.nodeType === Node.ELEMENT_NODE) return node.matches(mathWrapper)
-            ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_SKIP;
-          return node.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-        }});
-      const texts = [];
-      while (walker.nextNode()) {
-        const node = walker.currentNode;
-        texts.push(node);
-      }
-      // At most four persistent characters per block. The outside edges detect
-      // rewrapping without walking every KaTeX glyph on every frame.
-      for (const text of new Set([texts[0], texts.at(-1)].filter(Boolean))) {
-        if (anchorNodes.has(text)) continue;
-        const value = text.textContent;
-        const offsets = new Set([value.search(/\S/), value.search(/\s*$/) - 1]);
-        const anchors = [];
-        for (const offset of offsets) {
-          if (offset < 0) continue;
-          const range = document.createRange();
-          range.setStart(text, offset); range.setEnd(text, offset + 1);
-          const record = {id: `anchor-${tracked.length}`, category,
-            text: value.trim().replace(/\s+/g, ' ').slice(0, 100), character: value[offset],
-            offset, block: block.id || block.tagName.toLowerCase(), samples: 0,
-            initial: null, final: null, max_absolute_px: 0, max_local_px: 0,
-            max_start_x_px: 0, max_start_y_px: 0, max_bottom_px: 0};
-          tracked.push({node: text, block, range, record}); anchors.push(record);
-          state.anchors.push(record);
-        }
-        anchorNodes.set(text, anchors);
-      }
-    }
-  }
-  function discover() {
-    if (full) {
-      prose = [...document.querySelectorAll('.kpress-prose p')].filter(node =>
-        !node.closest('.cert-figure,figcaption,.kpress-figcaption') && active(node));
-      captions = [...document.querySelectorAll('.kpress-figcaption,figcaption')].filter(active);
-    }
-    const figure = [...document.querySelectorAll('figure[data-figure="6"]')]
-      .find(node => full ? active(node) : !node.closest('[hidden]'));
-    // Keep labels before readouts so the eight published label contracts are stable.
-    parameters = figure ? [...figure.querySelectorAll('.panel .ctl .caps, .panel .kv dt'),
-      ...figure.querySelectorAll('.panel .kv dd')] : [];
-    if (full) discoverAnchors();
-    dirty = false;
-  }
-  function sampleAnchors(at) {
-    const blocks = new Map();
-    for (const {node, block, range, record} of tracked) {
-      if (!node.isConnected) continue;
-      if (!blocks.has(block)) {
-        blocks.set(block, active(block) ? block.getBoundingClientRect() : null);
-      }
-      const box = blocks.get(block);
-      if (!box) continue;
-      if (!node.parentElement.checkVisibility(
-        {opacityProperty: true, visibilityProperty: true})) continue;
-      const rect = range.getBoundingClientRect();
-      if (rect.width <= 0 || rect.height <= 1) continue;
-      const position = {at_ms: at, x: rect.x, y: rect.y, bottom: rect.bottom,
-        local_x: rect.x - box.x, local_y: rect.y - box.y, local_bottom: rect.bottom - box.y};
-      record.initial ||= position; record.final = position; record.samples++;
-      record.bounds ||= {};
-      for (const key of ['x', 'y', 'bottom', 'local_x', 'local_y', 'local_bottom']) {
-        const bounds = record.bounds[key] ||= {min: position[key], max: position[key]};
-        bounds.min = Math.min(bounds.min, position[key]);
-        bounds.max = Math.max(bounds.max, position[key]);
-      }
-      const span = key => record.bounds[key].max - record.bounds[key].min;
-      record.max_start_x_px = span('x'); record.max_start_y_px = span('y');
-      record.max_bottom_px = span('bottom');
-      record.max_absolute_px = Math.max(record.max_absolute_px, record.max_start_x_px,
-        record.max_start_y_px, record.max_bottom_px);
-      record.max_local_px = Math.max(span('local_x'), span('local_y'), span('local_bottom'));
-      state.counters.anchor_samples++;
-    }
-  }
-  function sample() {
-    if (state.stop) return;
-    const start = clock(); state.counters.frames++; first('first_frame_ms', start);
-    pending(); if (dirty) discover();
-    if (full) sampleAnchors(start);
-    if (full && state.anchors.some(anchor => anchor.samples)) {
-      first('first_anchor_frame_ms', start);
-      const current = snapshot(), previous = state.snapshots.at(-1);
-      const changed = !previous || Object.keys(current).some(key => key !== 'at_ms'
-        && JSON.stringify(current[key]) !== JSON.stringify(previous[key]));
-      if (changed) state.snapshots.push(current);
-    }
-    if (metrics.first_prose_math_ms == null && prose.some(visibleMath)) {
-      first('first_prose_math_ms', start);
-    }
-    if (metrics.first_caption_math_ms == null && captions.some(visibleMath)) {
-      first('first_caption_math_ms', start);
-    }
-    const ready = parameters.map((node, index) => {
-      const correct = correctTarget(node, index);
-      if (correct && !targetTimes.has(node)) targetTimes.set(node, start);
-      return correct;
-    });
-    if (ready.some(Boolean)) first('first_parameter_math_ms', start);
-    // Scroll offsets can flush layout too. In parameter mode take the first
-    // state snapshot only after a target already required an exposure check.
-    if (!full && ready.some(Boolean) && !state.snapshots.length) {
-      state.snapshots.push(snapshot());
-    }
-    if (parameters.length === 14 && ready.every(Boolean)) first('parameters_ready_ms', start);
-    else if (state.anchors.some(anchor => anchor.samples)) {
-      state.pre_reveal_frame_observed = true;
-    }
-    const duration = clock() - start;
-    metrics.sampler_total_ms = (metrics.sampler_total_ms || 0) + duration;
-    metrics.sampler_max_ms = Math.max(metrics.sampler_max_ms || 0, duration);
-    if (full || metrics.parameters_ready_ms == null) requestAnimationFrame(sample);
-  }
-  requestAnimationFrame(sample);
-  state.finish = () => {
-    const validationStart = clock();
-    drainObservers.forEach(drain => drain());
-    state.stop = true; pending(); mutations.disconnect();
-    observers.forEach(observer => observer.disconnect());
-    originals.forEach(restore => restore());
-    // Parameter-mode sampling stopped at first readiness. Re-read final coverage
-    // so a later addition, removal, or reclassification cannot evade validation.
-    discover();
-    state.snapshots.push(snapshot());
-    first('observation_end_ms');
-    state.targets = parameters.map((node, index) => ({
-      id: node.id || `figure6-${slugOf(node)}-label-${index}`, slug: slugOf(node),
-      source: annotation(node), first_visible_ms: targetTimes.get(node) ?? null,
-      correct: correctTarget(node, index), exposed: active(node),
-      in_viewport: node.getBoundingClientRect().top < innerHeight
-        && node.getBoundingClientRect().bottom > 0,
-    }));
-    const nav = performance.getEntriesByType('navigation')[0];
-    if (nav) for (const [metric, key] of Object.entries({response_start_ms: 'responseStart',
-      response_end_ms: 'responseEnd', dom_interactive_ms: 'domInteractive',
-      dom_content_loaded_ms: 'domContentLoadedEventEnd', load_event_ms: 'loadEventEnd'})) {
-      metrics[metric] = nav[key] || null;
-    }
-    const paints = performance.getEntriesByType('paint');
-    for (const entry of paints) {
-      metrics[entry.name.replaceAll('-', '_') + '_ms'] = entry.startTime;
-    }
-    metrics.initial_ready_end_ms = state.ready[0]?.end_ms ?? null;
-    metrics.initial_ready_wait_ms = state.ready[0]?.end_ms != null
-      ? state.ready[0].end_ms - state.ready[0].start_ms : null;
-    metrics.last_font_end_ms = state.fonts
-      .reduce((max, entry) => Math.max(max, entry.end_ms || 0), 0) || null;
-    metrics.katex_total_ms = state.katex.reduce((sum, entry) => sum + entry.duration_ms, 0);
-    metrics.katex_max_ms = Math.max(0, ...state.katex.map(entry => entry.duration_ms));
-    metrics.first_katex_call_ms = state.katex[0]?.start_ms ?? null;
-    metrics.last_katex_end_ms = state.katex.length
-      ? Math.max(...state.katex.map(entry => entry.start_ms + entry.duration_ms)) : null;
-    metrics.first_render_call_ms = state.renders[0]?.start_ms ?? null;
-    metrics.last_render_end_ms = state.renders.length
-      ? Math.max(...state.renders.map(entry => entry.end_ms || 0)) || null : null;
-    metrics.first_hydrate_call_ms = state.hydrates[0]?.start_ms ?? null;
-    metrics.last_hydrate_end_ms = state.hydrates.length
-      ? Math.max(...state.hydrates.map(entry => entry.end_ms || 0)) || null : null;
-    metrics.post_ready_to_first_katex_ms = metrics.first_katex_call_ms != null
-      && metrics.initial_ready_end_ms != null
-      ? metrics.first_katex_call_ms - metrics.initial_ready_end_ms : null;
-    metrics.longtask_total_ms = state.capabilities.longtask
-      ? state.longtasks.reduce((sum, entry) => sum + entry.duration_ms, 0) : null;
-    metrics.layout_shift_score = state.capabilities.layout_shift
-      ? state.shifts.filter(entry => !entry.had_recent_input)
-        .reduce((sum, entry) => sum + entry.value, 0) : null;
-    const anchorMax = key => Math.max(0, ...state.anchors.map(anchor => anchor[key]));
-    metrics.anchor_max_displacement_px = anchorMax('max_absolute_px');
-    metrics.anchor_max_local_displacement_px = anchorMax('max_local_px');
-    metrics.anchor_max_start_x_px = anchorMax('max_start_x_px');
-    metrics.anchor_max_start_y_px = anchorMax('max_start_y_px');
-    metrics.anchor_max_bottom_px = anchorMax('max_bottom_px');
-    if (!full) for (const name of ['anchor_max_displacement_px',
-      'anchor_max_local_displacement_px', 'anchor_max_start_x_px',
-      'anchor_max_start_y_px', 'anchor_max_bottom_px']) metrics[name] = null;
-    state.source = {url: location.href, title: document.title,
-      revision_url: document.querySelector(
-        'a[href*="github.com/jlevy/squares/blob/"]')?.href || null};
-    metrics.finish_validation_ms = clock() - validationStart;
-    return {...state, finish: undefined};
-  };
-})();
-""".replace("__EXPOSED__", EXPOSED).replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
+#: The probes this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 
-STARTUP_SCRIPT = _STARTUP_SCRIPT.replace("__MODE__", "full")
+#: The instrument, installed before parsing after `MATH_LIBRARY_INIT`, applied with the mode.
+_STARTUP = probe(PROBES, "check_math_startup/startup")
+_SETTLEMENT_DONE = probe(PROBES, "check_math_startup/settlement_done")
+_FINISH = probe(PROBES, "check_math_startup/finish")
+_FIXTURE_PENDING = applied(probe(PROBES, "check_math_startup/fixture_pending"))
+_FIXTURE_PAGE = probe(PROBES, "check_math_startup/fixture_page")
 
 
 def startup_findings(report: JsonRecord, *, width: int, height: int) -> list[str]:
@@ -567,7 +169,8 @@ def measure_startup(
             page.set_default_timeout(timeout_ms)
             errors: list[str] = []
             page.on("pageerror", lambda error: errors.append(str(error)))
-            page.add_init_script(_STARTUP_SCRIPT.replace("__MODE__", mode))
+            page.add_init_script(MATH_LIBRARY_INIT)
+            page.add_init_script(applied(_STARTUP, {"mode": mode}))
             timeout: str | None = None
             try:
                 page.goto(page_url(path), wait_until="domcontentloaded")
@@ -576,18 +179,13 @@ def measure_startup(
                 # real settlement promise without awaiting it in that call, then
                 # use the bounded wait API so broken pages still retain a report.
                 page.evaluate(
-                    "() => { const state = globalThis.__mathStartup;"
-                    " state.settlement_state = 'pending';"
-                    f" ({SETTLED})().then(() => {{ state.settlement_state = 'resolved'; }},"
-                    " error => { state.errors.push(String(error));"
-                    " state.settlement_state = 'rejected'; }); }"
+                    probe(PROBES, "check_math_startup/start_settlement"),
+                    {"settled": page.evaluate_handle(SETTLED_REFERENCE)},
                 )
-                page.wait_for_function(
-                    "globalThis.__mathStartup.settlement_state !== 'pending'"
-                )
+                page.wait_for_function(_SETTLEMENT_DONE)
             except PlaywrightTimeoutError as error:
                 timeout = str(error).splitlines()[0]
-            report: JsonRecord = page.evaluate("() => globalThis.__mathStartup.finish()")
+            report: JsonRecord = page.evaluate(_FINISH)
             report["errors"].extend(errors)
             report["environment"] = {
                 "browser": browser_name,
@@ -701,7 +299,8 @@ def browser_fixture(mode: str) -> str:
     alter page behavior. These small controls isolate the observer from publication
     changes and do not need external fonts, images, or a generated site artifact.
     """
-    return r"""<!doctype html>
+    return (
+        r"""<!doctype html>
 <html><head><meta charset="utf-8"><title>Math startup observer control</title>
 <style>
 body {font:16px serif; margin:20px}
@@ -713,7 +312,9 @@ dt, dd {height:24px; margin:0} dt {float:left; width:240px} dd {width:480px}
 .squares-math-variant {display:none}
 .squares-math-variant[data-squares-math-contexts~="custom-serif"] {display:inline}
 </style>
-<script>document.documentElement.dataset.kpressMathPending = 'true';</script>
+<script>"""
+        + _FIXTURE_PENDING
+        + r"""</script>
 </head><body>
 <main class="kpress-prose" data-kpress-viewport>
 <p id="prose" class="shift">Before <span class="tex">x</span> after the formula.</p>
@@ -734,69 +335,10 @@ dt, dd {height:24px; margin:0} dt {float:left; width:240px} dd {width:480px}
 <span class="tex">x</span> after math.</figcaption>
 </figure></div></main>
 <script>
-const mode = '__MODE__';
-if (mode === 'missing-anchors') {
-  const paragraph = document.getElementById('prose');
-  paragraph.replaceChildren(paragraph.querySelector('.tex'));
-}
-if (mode === 'missing-counters') globalThis.__mathStartup.counters.font_hooks = 0;
-globalThis.katex = {render(source, node) {
-  const katex = document.createElement('span'); katex.className = 'katex';
-  const hidden = document.createElement('span'); hidden.className = 'katex-mathml';
-  const annotation = document.createElement('annotation');
-  annotation.setAttribute('encoding', 'application/x-tex'); annotation.textContent = source;
-  hidden.append(annotation); katex.append(hidden);
-  const html = document.createElement('span'); html.className = 'katex-html';
-  html.textContent = source; katex.append(html); node.replaceChildren(katex);
-}};
-const gate = mode === 'delayed' || mode === 'width-change'
-  ? new Promise(resolve => setTimeout(resolve, 300)) : Promise.resolve();
-globalThis.kpressMathText = {
-  ready() { return gate; },
-  render(source, node) { katex.render(source, node); return Promise.resolve(); },
-  complete() { delete document.documentElement.dataset.kpressMathPending; }
-};
-const ready = mode === 'no-warmup' ? gate : kpressMathText.ready();
-let releaseLateTarget;
-const lateTarget = mode === 'late-target'
-  ? new Promise(resolve => { releaseLateTarget = resolve; }) : Promise.resolve();
-globalThis.squaresMath = {ready, settled: () => lateTarget};
-document.fonts.load('16px serif');
-ready.then(async () => {
-  for (const node of document.querySelectorAll('.tex')) {
-    await kpressMathText.render(node.textContent, node);
-  }
-  for (const [key, source] of Object.entries({phi: '19.600^{\\circ}', theta: '15.000^{\\circ}',
-    d: '4.600^{\\circ}', D: '0.1', B: '0.9', prod: '0.97'})) {
-    if (mode === 'missing-math' && key === 'phi') continue;
-    await kpressMathText.render(source, document.getElementById(`s-${key}-test`));
-  }
-  if (mode === 'variants' || mode === 'wrong-active-variant') {
-    for (const math of document.querySelectorAll('.katex')) {
-      const active = document.createElement('span'), dormant = document.createElement('span');
-      active.className = dormant.className = 'squares-math-variant';
-      active.dataset.squaresMathContexts = 'custom-serif';
-      dormant.dataset.squaresMathContexts = 'custom-sans system-serif system-sans';
-      const copy = math.cloneNode(true);
-      (mode === 'variants' ? copy : math).querySelector('annotation').textContent = 'wrong';
-      dormant.append(copy); math.replaceWith(dormant, active); active.append(math);
-    }
-  }
-  if (mode === 'width-change') document.querySelector('.shift .tex').style.width = '180px';
-  kpressMathText.complete(); document.documentElement.classList.add('math-ready');
-  if (mode === 'late-target') {
-    const addAfterFirstReadiness = () => {
-      if (globalThis.__mathStartup.metrics.parameters_ready_ms == null) {
-        requestAnimationFrame(addAfterFirstReadiness); return;
-      }
-      const extra = document.createElement('dd'); extra.id = 'late-target';
-      document.querySelector('.panel .kv').append(extra);
-      kpressMathText.render('0', extra).then(releaseLateTarget);
-    };
-    requestAnimationFrame(addAfterFirstReadiness);
-  }
-});
-</script></body></html>""".replace("__MODE__", mode)
+"""
+        + applied(_FIXTURE_PAGE, {"mode": mode})
+        + "</script></body></html>"
+    )
 
 
 def self_test(

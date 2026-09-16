@@ -947,11 +947,26 @@ A Python tool that drives a page uses a **probe**:
    `devtools.check_probes` reads names from string literals, and a probe no literal
    names fails as unused.
 
+**One probe that needs another’s function takes a handle to it, never its text.**
+Playwright calls a function-valued evaluation, so a probe other probes compose is a
+*reference probe* whose file returns the function, or an object of functions, rather
+than being one. A composer receives it in its argument as
+`page.evaluate_handle(REFERENCE)`, and a direct caller evaluates `applied(REFERENCE)`,
+which is the function itself.
+`probes/math/library.js` is the explainer’s: `activeVariant`, `exposed`,
+`requiredFonts`, `fontLoadObserver` and `mutatedMath`, written once for every checker.
+An init script takes no argument and so no handle; it reads the global an earlier init
+script installs, as `check_math_loading.MATH_LIBRARY_INIT` installs the library for
+`FIRST_PAINT_SCRIPT`.
+
 The probes are in Biome’s scope, in the strict `tsconfig.packing-probes.json` program,
 and under the ESLint promise overlay.
-A Node script a Python tool runs goes in `packing/devtools/node/`, under
-`tsconfig.devtools-node.json`. The workbench package’s `workbench_tools.probes` is the
-same loader bound to `packages/workbench/probes/`.
+A Node script a Python tool runs goes in `packing/devtools/node/`, and one a test runs
+goes in `packing/tests/node/<test module>/`, both under `tsconfig.devtools-node.json`. A
+test script that exercises a probe against stand-ins loads the probe file itself through
+`packing/tests/node/probe.mjs`, so what runs under Node is what runs in the page.
+The workbench package’s `workbench_tools.probes` is the same loader bound to
+`packages/workbench/probes/`.
 
 Two checks hold the rule, and both run in `--edit` and on every pull request as the
 `browser code lives in files` step:

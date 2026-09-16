@@ -1539,6 +1539,7 @@ def _browser_floor(context: Context) -> str:
                 "packing/atlas/known-best/video/spikes/v2-transitions/probes",
                 "packing/devtools/probes",
                 "packing/devtools/node",
+                "packing/tests/node",
                 "packing/tests/probes",
                 "--config",
                 "packages/workbench/eslint.config.js",

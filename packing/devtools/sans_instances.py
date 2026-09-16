@@ -80,9 +80,13 @@ from pathlib import Path
 from typing import NotRequired, Protocol, TypedDict, cast
 
 from devtools.render_explainer import data_uri, kpress_static
-from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
+from devtools.render_explainer_pdf import BROWSER_OVERRIDE, FONTS_READY, PAGE, READY
+from sqpack.probes import probe as load_probe
 
 PACKING = Path(__file__).resolve().parents[1]
+
+#: The probes this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 REPO = PACKING.parent
 
 #: Where the instances live: beside the template they are printed with, since they are
@@ -214,130 +218,15 @@ SCREEN_SANS = "Source Sans 3 Variable"
 #: the test that runs the shipped rule can name the same three.
 PSEUDO_ELEMENTS: tuple[str, ...] = ("::before", "::after", "::marker")
 
-#: What the page asks for, taken from the page rather than read out of the stylesheet.
-#: A run is counted when the first family in its computed stack is one of the two sans
-#: names the probe is handed: the print family kpress declares its instances under, and
-#: `SCREEN_SANS`. Runs the print stylesheet hides are skipped -- a `display: none` block
-#: still reports a computed weight, and counting it would declare an instance for text
-#: no reader ever sees.
-#:
-#: Two passes, because a tree walk sees only half the type. Text nodes are the first;
-#: generated content is the second, and it is not hypothetical here -- kpress numbers
-#: footnote items with `li.kpress-footnote-item::before`, a real sans run in no text
-#: node on the page.
-_PROBE = r"""([families, pseudos]) => {
-  const sans = new Set(families);
-  const found = new Map();
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-    if (!node.nodeValue || !node.nodeValue.trim()) continue;
-    const el = node.parentElement;
-    if (!el || !el.getClientRects().length) continue;
-    record(getComputedStyle(el), sig(el));
-  }
-  for (const el of document.body.querySelectorAll('*')) {
-    if (!el.getClientRects().length) continue;
-    for (const pseudo of pseudos) {
-      const style = getComputedStyle(el, pseudo);
-      if (!draws(style.content)) continue;
-      record(style, sig(el) + pseudo);
-    }
-  }
-  return [...found.values()].sort((a, b) =>
-    a.weight - b.weight || a.style.localeCompare(b.style));
+#: What the page asks for under print, taken from the page rather than the stylesheet.
+_PROBE = load_probe(PROBES, "sans_instances/requests")
 
-  /* Whether a computed `content` puts glyphs on the page. `none` is no pseudo-element
-     at all and `normal` is the default -- which for `::marker` is a bullet drawn in the
-     list item's own font, already counted through its text. An empty string is a box
-     with no type in it: a rule, a spacer, a clearfix. None of the four asks for a face. */
-  function draws(content) {
-    return Boolean(content) && !['none', 'normal', '""', "''"].includes(content);
-  }
+#: Every family, weight and style the page draws text in, with the elements that ask.
+_WEIGHTS_PROBE = load_probe(PROBES, "sans_instances/weights")
 
-  /* One request, recorded once per weight and style. The first element to ask for a
-     pair is the one a failure names, and the text pass runs first, so a run a reader
-     can point at is preferred over generated content that says the same thing. */
-  function record(style, path) {
-    const family = style.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '');
-    if (!sans.has(family)) return;
-    const weight = parseInt(style.fontWeight, 10);
-    const key = `${weight}/${style.fontStyle}`;
-    if (!found.has(key)) {
-      found.set(key, {weight, style: style.fontStyle, path});
-    }
-  }
-  {{SIG}}
-}"""
-
-#: A name for an element that is readable in a failure: the tag, its classes, and its
-#: index among its siblings, up to the page wrapper. The same shape `check_print_layout`
-#: reports its findings with, so two print findings about one element read alike.
-#: Spliced into both probes here rather than written twice, so a path in the listing and
-#: a path in a `--check` failure name the same element the same way.
-_SIG = r"""
-  function sig(el) {
-    const steps = [];
-    for (let node = el, depth = 0; node && depth < 3; node = node.parentElement, depth++) {
-      const parent = node.parentElement;
-      const nth = parent ? [...parent.children].indexOf(node) : 0;
-      const cls = [...node.classList].join('.');
-      steps.unshift(`${node.tagName.toLowerCase()}${cls ? '.' + cls : ''}[${nth}]`);
-      if (node.classList.contains('kpress')) break;
-    }
-    return steps.join(' > ');
-  }"""
-
-#: Every distinct family, weight and style the page draws text in, with a run count and
-#: the first few elements that ask for it, each stamped with a marker the matched-rule
-#: walk finds it by. Not scoped to the sans: the question the listing answers is whether
-#: one bold and one medium serve the whole design system, and the serif's own bold is
-#: part of that answer. Hidden runs are skipped for the reason `_PROBE` skips them -- a
-#: weight nobody sees is not a weight the design has to reconcile.
-#:
-#: Several elements per combination, not one, because one is the wrong number for the
-#: question. `.doc-links .chip` and the caption's label are both the sans at 550, and a
-#: listing that reported the first would say the medium had one source when it had two.
-#: The markers are cleared first: the same page is probed under both media, and a marker
-#: the screen pass left behind would be found instead of the element the print pass just
-#: stamped, since `DOM.querySelector` answers with the first match in document order.
-_WEIGHTS_PROBE = r"""({attribute, samples}) => {
-  for (const stale of document.querySelectorAll(`[${attribute}]`))
-    stale.removeAttribute(attribute);
-  const found = new Map();
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  let next = 0;
-  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-    if (!node.nodeValue || !node.nodeValue.trim()) continue;
-    const el = node.parentElement;
-    if (!el || !el.getClientRects().length) continue;
-    const style = getComputedStyle(el);
-    const family = style.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '');
-    const weight = parseInt(style.fontWeight, 10);
-    const key = `${family}/${weight}/${style.fontStyle}`;
-    if (!found.has(key))
-      found.set(key, {family, weight, style: style.fontStyle, runs: 0, seen: []});
-    const row = found.get(key);
-    row.runs++;
-    if (row.seen.length < samples && !el.hasAttribute(attribute)) {
-      el.setAttribute(attribute, String(next));
-      row.seen.push({marker: next, path: sig(el)});
-      next++;
-    }
-  }
-  return [...found.values()].sort((a, b) =>
-    a.family.localeCompare(b.family) || a.weight - b.weight
-    || a.style.localeCompare(b.style));
-  {{SIG}}
-}"""
-
-
-def _spliced(probe_source: str) -> str:
-    """One probe with the shared element-path helper in it."""
-    return probe_source.replace("{{SIG}}", _SIG)
-
-
-_PROBE = _spliced(_PROBE)
-_WEIGHTS_PROBE = _spliced(_WEIGHTS_PROBE)
+#: The element path both probes name elements with, handed to each as `sig` through a
+#: handle rather than written into each, so the two name one element the same way.
+_SIG = load_probe(PROBES, "sans_instances/element_path")
 
 
 def probe(page_path: Path) -> list[Requested]:
@@ -363,9 +252,14 @@ def probe(page_path: Path) -> list[Requested]:
             page.goto(page_path.resolve().as_uri(), wait_until="load")
             page.wait_for_selector(READY, timeout=60_000)
             page.set_viewport_size(PRINT_VIEWPORT)
-            page.evaluate("document.fonts.ready")
+            page.evaluate(FONTS_READY)
             rows: list[Requested] = page.evaluate(
-                _PROBE, [[print_family(), SCREEN_SANS], list(PSEUDO_ELEMENTS)]
+                _PROBE,
+                [
+                    [print_family(), SCREEN_SANS],
+                    list(PSEUDO_ELEMENTS),
+                    page.evaluate_handle(_SIG),
+                ],
             )
             return rows
         finally:
@@ -547,9 +441,14 @@ def weights(page_path: Path) -> dict[str, list[Declared]]:
                 if medium == "print":
                     page.emulate_media(media="print")
                     page.set_viewport_size(PRINT_VIEWPORT)
-                page.evaluate("document.fonts.ready")
+                page.evaluate(FONTS_READY)
                 rows: list[Declared] = page.evaluate(
-                    _WEIGHTS_PROBE, {"attribute": MARKER, "samples": SAMPLES}
+                    _WEIGHTS_PROBE,
+                    {
+                        "attribute": MARKER,
+                        "samples": SAMPLES,
+                        "sig": page.evaluate_handle(_SIG),
+                    },
                 )
                 listed[medium] = _attributed(page, rows)
             return listed

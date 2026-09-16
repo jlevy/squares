@@ -36,6 +36,7 @@ name: Certificate page
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
       - packing/tests/test_pdf_math_browser.py
+      - packing/tests/probes/pdf_math_browser/**
       - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
@@ -68,7 +69,7 @@ name: Certificate page
       - package-lock.json
       - packages/workbench/**
       - packing/devtools/check_published_site.py
-      - packing/devtools/probes/check_published_site/**
+      - packing/devtools/probes/**
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
   # On a pull request the page is built but not deployed, so a change that
@@ -83,6 +84,7 @@ name: Certificate page
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
       - packing/tests/test_pdf_math_browser.py
+      - packing/tests/probes/pdf_math_browser/**
       - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
@@ -115,7 +117,7 @@ name: Certificate page
       - package-lock.json
       - packages/workbench/**
       - packing/devtools/check_published_site.py
-      - packing/devtools/probes/check_published_site/**
+      - packing/devtools/probes/**
       - packing/atlas/known-best/manifest.json
       - .github/workflows/pages.yml
 

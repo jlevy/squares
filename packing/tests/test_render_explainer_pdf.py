@@ -17,8 +17,9 @@ looks exactly like a count that works. The image wait initially discarded every 
 rejection, which could let two PDFs agree on the same absent figure.
 
 Nothing here launches a browser. `render_pdf_bytes` is replaced with synthetic
-documents in the shapes Chromium writes, and the exact image-wait JavaScript runs under
-Node against small image-element stand-ins. The file belongs in the quick lane.
+documents in the shapes Chromium writes, and the exact image-wait, settlement and math
+trace probes run under Node against small stand-ins, in the scripts under
+`tests/node/render_explainer_pdf/`. The file belongs in the quick lane.
 """
 
 from __future__ import annotations
@@ -27,13 +28,25 @@ import hashlib
 import json
 from contextlib import nullcontext
 from pathlib import Path
-from textwrap import dedent
 from types import SimpleNamespace
 
 import pytest
 from nodejs_wheel import node
 
 from devtools import render_explainer_pdf as pdf
+
+NODE = Path(__file__).resolve().parent / "node" / "render_explainer_pdf"
+
+
+def _run_node(script: str, *arguments: str) -> None:
+    completed = node(
+        [str(NODE / script), *arguments],
+        return_completed_process=True,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+
 
 #: A document with one object, in the shape the writer emits: the header at a line start,
 #: the dictionary declaring what the object is, and a body that the cases below vary.
@@ -42,76 +55,20 @@ _HEADER = b"%PDF-1.4\n"
 
 def _run_image_wait(case: str) -> None:
     """Run the exact browser-side image wait against small image-element stand-ins."""
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        let document;
-    """)
-    script += f"const waitForImages = {pdf._IMAGES_DECODED};\n"
-    script += dedent(f"""
-        (async () => {{
-          {case}
-        }})().catch((error) => {{
-          console.error(error.stack || error);
-          process.exit(1);
-        }});
-    """)
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
+    _run_node("image-wait.mjs", case)
 
 
 def test_the_image_wait_forces_lazy_images_eager_before_decode() -> None:
-    _run_image_wait("""
-        const calls = [];
-        const image = {
-          loading: 'lazy', complete: true, naturalWidth: 640, naturalHeight: 480,
-          currentSrc: 'file:///atlas.svg',
-          async decode() { calls.push(this.loading); },
-        };
-        document = {images: [image]};
-        await waitForImages();
-        assert.deepEqual(calls, ['eager']);
-    """)
+    _run_image_wait("lazy-images-go-eager")
 
 
 def test_a_decode_rejection_is_safe_only_for_an_available_image() -> None:
     """A changed request may reject while its replacement is already drawable."""
-    _run_image_wait("""
-        const image = {
-          loading: 'lazy', complete: true, naturalWidth: 640, naturalHeight: 480,
-          currentSrc: 'file:///atlas.svg',
-          async decode() { throw new Error('the request changed'); },
-        };
-        document = {images: [image]};
-        await waitForImages();
-    """)
+    _run_image_wait("rejection-of-an-available-image")
 
 
 def test_an_image_without_a_drawable_current_request_refuses_the_render() -> None:
-    _run_image_wait("""
-        document = {images: [
-          {
-            loading: 'lazy', complete: false, naturalWidth: 0, naturalHeight: 0,
-            currentSrc: '', src: 'file:///missing-atlas.svg',
-            async decode() { throw new Error('request failed'); },
-          },
-          {
-            loading: 'eager', complete: true, naturalWidth: 0, naturalHeight: 0,
-            currentSrc: 'file:///empty-atlas.svg', src: 'file:///empty-atlas.svg',
-            async decode() {},
-          },
-        ]};
-        await assert.rejects(waitForImages(), (error) => {
-          assert.match(error.message, /2 required images are not drawable after decode/);
-          assert.match(
-            error.message,
-            /missing-atlas[.]svg.*complete=false.*0x0.*request failed/,
-          );
-          assert.match(error.message, /empty-atlas[.]svg.*complete=true.*0x0/);
-          return true;
-        });
-    """)
+    _run_image_wait("no-drawable-current-request")
 
 
 def _pages(count: int) -> bytes:
@@ -661,6 +618,7 @@ def test_interrupted_evaluate_keeps_mutation_outcome_unknown(
         goto=lambda *_, **__: None,
         wait_for_selector=lambda *_, **__: None,
         evaluate=evaluate,
+        evaluate_handle=lambda *_: object(),
         add_style_tag=lambda **_: None,
         pdf=lambda **_: pytest.fail("must not capture PDF"),
     )
@@ -713,168 +671,9 @@ def test_math_trace_retains_available_observations_when_a_draw_fails(
 
 
 def test_traced_settlement_uses_the_existing_frames_and_font_waits() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const events = [];
-        let frames = 0;
-        globalThis.requestAnimationFrame = callback => { frames++; callback(); };
-        globalThis.document = {
-          documentElement: {get offsetHeight() { events.push('layout'); return 100; }},
-          fonts: {get ready() { events.push('fonts'); return Promise.resolve(); }},
-        };
-        globalThis.squaresMath = {async settled() { events.push('math'); }};
-    """)
-    script += f"const settle = {pdf.SETTLED};\n"
-    script += dedent("""
-        (async () => {
-          const phases = [];
-          await settle(phase => phases.push(phase));
-          assert.equal(frames, 3);
-          assert.deepEqual(events, ['layout', 'math', 'fonts', 'math']);
-          assert.deepEqual(phases, [
-            'before-final-frames', 'final-frame-1', 'final-frame-2',
-            'after-fonts', 'final-frame-3', 'settled',
-          ]);
-          frames = 0; events.length = 0;
-          await settle();
-          assert.equal(frames, 3);
-          assert.deepEqual(events, ['layout', 'math', 'fonts', 'math']);
-        })().catch(error => { console.error(error); process.exit(1); });
-    """)
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
+    _run_node("settled.mjs")
 
 
 @pytest.mark.parametrize("overflow", [False, True])
 def test_math_snapshot_tracks_visible_text_without_hiding_omissions(*, overflow: bool) -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        const box = {x:10, y:20.21875, width:24, height:16};
-        const style = {display:'inline', height:'20.08336px', fontFamily:'PT Serif',
-          fontSize:'16px', lineHeight:'0px', verticalAlign:'baseline', fontWeight:'400',
-          fontStyle:'normal', position:'static', textRendering:'auto', fontKerning:'auto'};
-        globalThis.getComputedStyle = () => style;
-        const element = (parent, shown = true) => {
-          const result = {tagName:'SPAN', className:'mop', parentElement:parent, children:[],
-            checkVisibility:() => shown, getBoundingClientRect:() => box};
-          parent?.children.push(result);
-          return result;
-        };
-        const host = element(null), html = element(host), owner = element(html);
-        const hidden = element(html, false);
-        host.dataset = {kpressMathSource:'\\\\tan d \\\\le D'};
-        host.querySelector = () => html;
-        html.querySelectorAll = () => [owner];
-        const text = (value, parent = owner, boxes = [box]) => ({
-          data:value, textContent:value, parentElement:parent, parentNode:parent, boxes});
-        const nodes = [text(' '), text('hidden', hidden), text('tan'),
-          text('clipped', owner, [])];
-        owner.replaceChild = (replacement, original) => {
-          const index = nodes.indexOf(original);
-          assert.ok(index >= 0);
-          replacement.parentNode = owner;
-          replacement.parentElement = owner;
-          nodes[index] = replacement;
-        };
-        const fonts = [{family:'PT Serif', style:'normal', weight:'400', stretch:'normal',
-          status:'loaded', unicodeRange:'U+0-10FFFF'}];
-        fonts.status = 'loaded';
-        globalThis.NodeFilter = {SHOW_TEXT:4};
-        globalThis.document = {
-          querySelectorAll:() => [{querySelector:() => null}, host], fonts,
-          documentElement: {get outerHTML() {
-            return '<html>' + nodes.map(node => node.data).join('') + '</html>';
-          }},
-          createTreeWalker:() => {
-            let next = 0;
-            return {nextNode:() => nodes[next++] || null};
-          },
-          createTextNode:value => text(value),
-          createRange:() => ({selectNodeContents(node) { this.node = node; },
-            getClientRects() { return this.node.boxes; }}),
-        };
-    """)
-    if overflow:
-        script += "nodes.push(...Array.from({length:10000}, () => text('x'.repeat(513))));\n"
-    script += f"const snapshot = ({pdf._MATH_SNAPSHOT})('before-pdf');\n"
-    script += f"const intervene = {pdf._PREPARED_TEXT_INTERVENTION};\n"
-    script += dedent("""
-        assert.equal(snapshot.phase, 'before-pdf');
-        assert.equal(snapshot.font_status, 'loaded');
-        assert.equal(snapshot.fonts[0].family, 'PT Serif');
-        assert.equal(snapshot.formulas[0].formula, 1);
-        assert.equal(snapshot.formulas[0].source, '\\\\tan d \\\\le D');
-        assert.equal(snapshot.formulas[0].boxes[0].rect.y, 20.21875);
-        assert.equal(snapshot.formulas[0].boxes[0].vertical_align, 'baseline');
-        assert.equal(snapshot.formulas[0].bases[0].line_height, '0px');
-        assert.equal(snapshot.formulas[0].struts[0].height, '20.08336px');
-        assert.deepEqual(snapshot.tokens[0], {
-          formula:1, token:2, path:'span:1/span:1', text:'tan', text_truncated:false,
-          class_name:'mop', element_rect:box, text_rects:[box], font_family:'PT Serif',
-          font_size:'16px', font_weight:'400', font_style:'normal', line_height:'0px',
-          vertical_align:'baseline', position:'static', text_rendering:'auto',
-          font_kerning:'auto',
-        });
-    """)
-    if overflow:
-        script += dedent("""
-            assert.equal(snapshot.truncated, true);
-            assert.equal(snapshot.tokens.length, snapshot.token_limit);
-            assert.equal(snapshot.tokens[1].text.length, 512);
-            assert.equal(snapshot.tokens[1].text_truncated, true);
-            const original = [...nodes];
-            const refused = intervene(true);
-            assert.match(refused.error, /truncated before replacement/);
-            assert.equal(refused.intervention.status, 'refused');
-            assert.equal(refused.intervention.mutated_count, 0);
-            assert.equal(refused.snapshots.length, 1);
-            assert.deepEqual(nodes, original);
-        """)
-    else:
-        script += dedent("""
-            assert.equal(snapshot.truncated, false);
-            assert.equal(snapshot.tokens.length, 1);
-            const original = [...nodes];
-            const control = intervene(false);
-            assert.equal(control.error, undefined);
-            assert.equal(control.intervention.status, 'control');
-            assert.equal(control.intervention.applied, false);
-            assert.equal(control.intervention.selected_count, 1);
-            assert.equal(control.intervention.mutated_count, 0);
-            assert.equal(control.intervention.html_unchanged, true);
-            assert.deepEqual(control.intervention.selected, [{
-              formula:1, token:2, path:'span:1/span:1', text:'tan',
-            }]);
-            assert.deepEqual(nodes, original);
-            assert.deepEqual(control.snapshots.map(s => s.phase),
-              ['before-intervention', 'after-intervention']);
-            const treatment = intervene(true);
-            assert.equal(treatment.error, undefined);
-            assert.equal(treatment.intervention.status, 'applied');
-            assert.equal(treatment.intervention.applied, true);
-            assert.equal(treatment.intervention.selected_count, 1);
-            assert.equal(treatment.intervention.mutated_count, 1);
-            assert.equal(treatment.intervention.html_unchanged, true);
-            assert.deepEqual(treatment.intervention.mutated,
-              control.intervention.selected);
-            assert.deepEqual(treatment.intervention.after_selected,
-              control.intervention.selected);
-            assert.notEqual(nodes[2], original[2]);
-            for (const index of [0, 1, 3]) assert.equal(nodes[index], original[index]);
-            assert.equal(nodes.map(node => node.data).join('|'),
-              original.map(node => node.data).join('|'));
-            assert.deepEqual(treatment.snapshots.map(s => s.phase),
-              ['before-intervention', 'after-intervention']);
-            nodes.length = 0;
-            const noTargets = intervene(true);
-            assert.match(noTargets.error, /no visible prepared-text nodes selected/);
-            assert.equal(noTargets.intervention.status, 'no-targets');
-            assert.equal(noTargets.intervention.applied, false);
-            assert.equal(noTargets.intervention.mutated_count, 0);
-        """)
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
+    _run_node("math-snapshot.mjs", *(["overflow"] if overflow else []))

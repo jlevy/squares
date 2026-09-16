@@ -10,7 +10,6 @@ import json
 import re
 from io import BytesIO
 from pathlib import Path
-from textwrap import dedent
 from typing import TYPE_CHECKING, Any, cast
 
 import pytest
@@ -35,15 +34,15 @@ from devtools.prepare_explainer_math import (
     prepared_html,
 )
 
+TESTS = Path(__file__).resolve().parent
+FIXTURES = TESTS / "fixtures" / "prepare_explainer_math"
+NODE = TESTS / "node" / "prepare_explainer_math"
+
 
 def test_math_slots_preserve_nested_semantics_and_ignore_script_examples() -> None:
-    source = dedent("""
-        <html><head><script>const example = '<span class="tex">x</span>';</script></head>
-        <body><p>Before <span class="tex">x &lt; 2</span> after.</p>
-        <span class="kpress-math"><span class="kpress-math-render">\\(y\\)</span>
-        <span class="kpress-math-semantic"><math><mi>y</mi></math></span></span>
-        <dd id="s-phi-19-5"></dd><div id="kval-381-100"></div></body></html>
-    """)
+    source = (FIXTURES / "script-example.html").read_text(encoding="utf-8")
+    script = source[source.index("<script>") : source.index("</script>") + len("</script>")]
+    assert '<span class="tex">x</span>' in script
     slots = math_slots(source)
     assert len(slots) == 4
     fragments: list[PreparedFragment] = [
@@ -51,7 +50,7 @@ def test_math_slots_preserve_nested_semantics_and_ignore_script_examples() -> No
         for index in range(len(slots))
     ]
     result = prepared_html(source, slots, fragments)
-    assert "<script>const example = '<span class=\"tex\">x</span>';</script>" in result
+    assert script in result
     assert '<p>Before <span class="tex">reserved 0</span> after.</p>' in result
     assert '<span class="kpress-math">reserved 1</span>' in result
     assert '<dd id="s-phi-19-5">reserved 2</dd>' in result
@@ -304,67 +303,9 @@ def test_held_font_responses_all_start_before_any_waits_for_completion() -> None
 
 def test_geometry_font_gate_starts_runtime_only_after_before_snapshot() -> None:
     """The geometry probe's own setup cannot consume KPress's timeout budget."""
-    trace = prepare_explainer_math._GEOMETRY_FONT_TRACE  # noqa: SLF001
-    exercise = dedent("""
-        const assert = require('node:assert/strict');
-        const starts = [];
-        const postReleasePromise = Promise.resolve('post-release');
-        const synchronousError = new Error('synchronous failure');
-        const rejection = new Error('post-release rejection');
-        let rejectedPromise;
-        const document = {documentElement: {dataset: {kpressMathPending: 'true'}}};
-        globalThis.kpressMathText = {
-          render(source) { starts.push(['render', source, performance.now()]);
-            if (source === 'post-release') return postReleasePromise;
-            if (source === 'throw') throw synchronousError;
-            if (source === 'reject') {
-              rejectedPromise = Promise.reject(rejection); return rejectedPromise;
-            }
-            return Promise.resolve('rendered'); },
-          hydrate(source) { starts.push(['hydrate', source, performance.now()]);
-            return Promise.resolve('hydrated'); }
-        };
-        (async () => {
-          globalThis.kpressMathPendingTimer = setTimeout(() => {
-            delete document.documentElement.dataset.kpressMathPending;
-          }, 0);
-          await new Promise(resolve => setTimeout(resolve, 10));
-          assert.equal(document.documentElement.dataset.kpressMathPending, 'true');
-          assert.equal(__squaresGeometryFontTrace.root_watchdog_paused, true);
-          const rendered = kpressMathText.render('x');
-          const hydrated = kpressMathText.hydrate('y');
-          await Promise.resolve();
-          const beforeSnapshotCompleted = performance.now();
-          assert.deepEqual(starts, []);
-          assert.equal(__squaresGeometryFontTrace.first_math_request_ms, null);
-          assert.equal(__squaresGeometryFontTrace.queued_calls, 2);
-          assert.throws(() => __squaresReleaseGeometryFontGate(),
-            /released before the before snapshot/);
-          assert.deepEqual(starts, []);
-          __squaresMarkGeometryBeforeSnapshotComplete();
-          __squaresReleaseGeometryFontGate();
-          assert.deepEqual(starts.map(call => call.slice(0, 2)),
-            [['render', 'x'], ['hydrate', 'y']]);
-          assert.ok(starts.every(call => call[2] >= beforeSnapshotCompleted));
-          assert.ok(__squaresGeometryFontTrace.first_math_request_ms
-            >= beforeSnapshotCompleted);
-          assert.deepEqual(await Promise.all([rendered, hydrated]),
-            ['rendered', 'hydrated']);
-          assert.strictEqual(kpressMathText.render('post-release'), postReleasePromise);
-          assert.throws(() => kpressMathText.render('throw'),
-            error => error === synchronousError);
-          const observedRejection = kpressMathText.render('reject');
-          assert.strictEqual(observedRejection, rejectedPromise);
-          await assert.rejects(observedRejection, /post-release rejection/);
-          assert.deepEqual(__squaresGeometryFontTrace.rejections.map(entry => entry.source),
-            ['throw', 'reject']);
-          process.stdout.write('complete');
-        })().catch(error => { console.error(error); process.exitCode = 1; });
-    """)
     completed = node(
-        ["-"],
+        [str(NODE / "geometry-font-gate.mjs")],
         return_completed_process=True,
-        input=trace + exercise,
         capture_output=True,
         text=True,
     )
@@ -377,10 +318,23 @@ def test_geometry_font_gate_starts_runtime_only_after_before_snapshot() -> None:
 def test_font_preferences_apply_before_bootstrap_and_math(
     font_set: str, prose_font: str
 ) -> None:
-    source = "<html><head><script>bootstrap()</script></head><body>math</body></html>"
+    bootstrap = '<script src="bootstrap.js"></script>'
+    source = f"<html><head>{bootstrap}</head><body>math</body></html>"
     output = font_preference_html(source, prose_font=prose_font, font_set=font_set)
-    assert output.index(f'kpressProseFont = "{prose_font}"') < output.index("bootstrap()")
-    assert output.index(f'kpressFontSet = "{font_set}"') < output.index("bootstrap()")
+    preferences = output[output.index("<script>") + len("<script>") : output.index("</script>")]
+    assert output.index(preferences) < output.index(bootstrap)
+    completed = node(
+        [str(NODE / "font-preferences.mjs")],
+        return_completed_process=True,
+        input=preferences,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout) == {
+        "kpressProseFont": prose_font,
+        "kpressFontSet": font_set,
+    }
     assert output.endswith("<body>math</body></html>")
     with pytest.raises(ValueError, match="unsupported"):
         font_preference_html(source, prose_font="unmeasured", font_set=font_set)

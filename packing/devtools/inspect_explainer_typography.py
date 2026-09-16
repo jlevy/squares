@@ -34,6 +34,10 @@ from devtools.render_explainer_pdf import (
     host_font_bead,
     shipped,
 )
+from sqpack.probes import probe as load_probe
+
+#: The probes this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 
 
 class FontUse(TypedDict):
@@ -110,57 +114,8 @@ class InlineCodeContext(TypedDict):
     padding_bottom: float
 
 
-_CODE_CONTEXTS = r"""crops => {
-  const selected = new Set();
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  const inkBottom = style => {
-    context.font = `${style.fontStyle} ${style.fontWeight} `
-      + `${style.fontSize} ${style.fontFamily}`;
-    return context.measureText('Hnx').actualBoundingBoxDescent;
-  };
-  const marker = () => {
-    const span = document.createElement('span');
-    span.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;'
-      + 'border:0;line-height:0;vertical-align:baseline;visibility:hidden;';
-    return span;
-  };
-  return [...document.querySelectorAll('code:not(pre code)')].flatMap(code => {
-    const style = getComputedStyle(code);
-    if (!code.getClientRects().length || style.visibility !== 'visible') return [];
-    const surrounding = getComputedStyle(code.parentElement);
-    if (crops) {
-      const role = code.closest('.kpress-figcaption, .kpress-footnotes') ? 'support' : 'prose';
-      if (!selected.has(role)) {
-        (code.closest('p') || code.parentElement).dataset.squaresCodeCrop = role;
-        selected.add(role);
-      }
-    }
-    const inner = marker(), outer = marker();
-    code.append(inner);
-    code.after(outer);
-    const offset = inner.getBoundingClientRect().top - outer.getBoundingClientRect().top;
-    inner.remove();
-    outer.remove();
-    const role = code.closest('.kpress-figcaption, .kpress-footnotes')
-      ? 'support' : 'prose';
-    return [{role, source: code.textContent, family: style.fontFamily,
-      context_family: surrounding.fontFamily,
-      weight: style.fontWeight, color: style.color, context_color: surrounding.color,
-      size: parseFloat(style.fontSize), context_size: parseFloat(surrounding.fontSize),
-      background_color: style.backgroundColor,
-      border_styles: [style.borderTopStyle, style.borderRightStyle,
-        style.borderBottomStyle, style.borderLeftStyle],
-      border_widths: [style.borderTopWidth, style.borderRightWidth,
-        style.borderBottomWidth, style.borderLeftWidth].map(parseFloat),
-      white_space: style.whiteSpace, overflow_wrap: style.overflowWrap,
-      word_break: style.wordBreak,
-      baseline_offset: offset, ink_bottom: inkBottom(style),
-      context_ink_bottom: inkBottom(surrounding),
-      padding_top: parseFloat(style.paddingTop),
-      padding_bottom: parseFloat(style.paddingBottom)}];
-  });
-}"""
+#: Inline code against the text around it: baseline, ink, paint, type and wrapping.
+_CODE_CONTEXTS = load_probe(PROBES, "inspect_explainer_typography/code_contexts")
 
 
 def code_baseline_findings(rows: list[InlineCodeContext]) -> list[str]:
@@ -260,76 +215,8 @@ def math_baseline_findings(rows: list[MathContext]) -> list[str]:
     return findings
 
 
-_MATH_CONTEXTS = r"""({wrappers, crops}) => {
-  const selected = new Set();
-  const rows = [];
-  const marker = () => {
-    const span = document.createElement('span');
-    span.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;'
-      + 'border:0;line-height:0;vertical-align:baseline;visibility:hidden;';
-    return span;
-  };
-  const baseline = (math, wrapper) => {
-    const last = [...math.querySelectorAll('.katex-html .base')].at(-1);
-    if (!last) return null;
-    const inner = marker(), outer = marker();
-    last.append(inner);
-    wrapper.after(outer);
-    const offset = inner.getBoundingClientRect().top - outer.getBoundingClientRect().top;
-    inner.remove();
-    outer.remove();
-    return offset;
-  };
-  for (const math of document.querySelectorAll('.katex')) {
-    if (!math.getClientRects().length || getComputedStyle(math).visibility !== 'visible'
-        || math.closest('[hidden]')) continue;
-    let context = math.parentElement;
-    while (context && context.matches(wrappers + ', .katex-display'))
-      context = context.parentElement;
-    if (!context) continue;
-    const display = !!math.closest('.katex-display, .tex-d, .kpress-math-display');
-    const role = math.closest('.kpress-figcaption') ? 'caption'
-      : display ? 'display' : 'inline';
-    const style = getComputedStyle(math), surrounding = getComputedStyle(context);
-    const row = {role, display_math: display,
-      source: math.querySelector('annotation')?.textContent || math.textContent,
-      size: parseFloat(style.fontSize), context_size: parseFloat(surrounding.fontSize),
-      family: style.fontFamily, context_family: surrounding.fontFamily,
-      weight: style.fontWeight, context_weight: surrounding.fontWeight,
-      text_rendering: style.textRendering, context_text_rendering: surrounding.textRendering};
-    if (role === 'caption' && !display) {
-      row.caption = math.closest('.kpress-figcaption').textContent.trim().slice(0, 180);
-      row.baseline_prepared = !!math.closest('[data-kpress-math-prepared="true"]');
-      let wrapper = math;
-      while (wrapper.parentElement?.matches(wrappers)) wrapper = wrapper.parentElement;
-      row.baseline_offset = baseline(math, wrapper);
-      if (row.baseline_prepared) {
-        const copy = wrapper.cloneNode(true);
-        copy.removeAttribute('data-kpress-math-prepared');
-        copy.removeAttribute('data-squares-math-key');
-        copy.querySelectorAll('[data-kpress-math-prepared]').forEach(
-          element => element.removeAttribute('data-kpress-math-prepared'));
-        for (const box of copy.querySelectorAll('.squares-math-box')) {
-          const base = box.firstElementChild;
-          for (const property of ['position', 'left', 'top']) base.style[property] = '';
-          box.replaceWith(base);
-        }
-        wrapper.replaceWith(copy);
-        const candidate = copy.matches('.katex') ? copy : [...copy.querySelectorAll('.katex')]
-          .find(element => element.getClientRects().length);
-        row.unboxed_baseline_offset = candidate ? baseline(candidate, copy) : null;
-        copy.replaceWith(wrapper);
-      }
-    }
-    rows.push(row);
-    if (crops && !selected.has(role)) {
-      const block = math.closest('p, figcaption, .tex-d, .kpress-math-display') || context;
-      block.dataset.squaresTypographyCrop = role;
-      selected.add(role);
-    }
-  }
-  return rows;
-}"""
+#: Every visible formula's outer em against its context, and caption baselines.
+_MATH_CONTEXTS = load_probe(PROBES, "inspect_explainer_typography/math_contexts")
 
 
 SUPPORTING_SELECTOR = (
@@ -487,94 +374,29 @@ def _node(tree: dict[str, object], node_id: int) -> dict[str, object] | None:
     return None
 
 
-_PROBE = r"""({selector, supporting, check}) => {
-  const groups = new Map();
-  const findings = new Set();
-  let checked = 0;
-  const visible = el => getComputedStyle(el).visibility === 'visible'
-    && el.getClientRects().length && !el.closest('[hidden]');
-  const caption = [...document.querySelectorAll('.kpress-figcaption')].find(visible);
-  const figure = [...document.querySelectorAll('.mass-line')].find(visible);
-  const noteStyle = caption ? getComputedStyle(caption) : null;
-  const figureStyle = figure ? getComputedStyle(figure) : noteStyle;
-  const exceptions = 'a, .katex, math, .tex, .tex-d, code, pre, '
-    + 'h1, h2, h3, h4, h5, h6, .verdict, .hi, .mass-val, .tag';
-  if (check && !noteStyle)
-    findings.add('no visible caption to establish supporting typography');
-  const round = x => Math.round(x * 10000) / 10000;
-  const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const node = walker.currentNode, el = node.parentElement;
-    const text = node.textContent.replace(/\s+/g, ' ').trim();
-    if (!text || !el) continue;
-    if (selector && !el.closest(selector)) continue;
-    if (el.closest('script, style, title, desc, .kpress-math-semantic')) continue;
-    const css = getComputedStyle(el);
-    if (!visible(el)) continue;
-    const svgText = el.closest('svg text');
-    const color = svgText ? css.fill : css.color;
-    const size = Number.parseFloat(css.fontSize);
-    // The transformed vertical em measures displayed letter size, even where
-    // the SVG has a rotated or non-uniformly scaled coordinate system.
-    const ctm = svgText ? el.getScreenCTM() : null;
-    const effective = round(size * (ctm ? Math.hypot(ctm.c, ctm.d) : 1));
-    const key = [css.fontFamily, css.fontWeight, css.fontStyle, color].join('|');
-    if (!groups.has(key)) groups.set(key, {
-      family: css.fontFamily, weight: css.fontWeight, style: css.fontStyle, color,
-      sizes: [], effective_sizes: [], samples: [],
-    });
-    const group = groups.get(key);
-    if (!group.sizes.includes(size)) group.sizes.push(size);
-    if (!group.effective_sizes.includes(effective)) group.effective_sizes.push(effective);
-    const sample = `${el.tagName.toLowerCase()}: ${text.slice(0, 100)}`;
-    if (group.samples.length < 5 && !group.samples.includes(sample)) group.samples.push(sample);
-    const expected = el.closest('.kpress-figcaption, .kpress-footnotes')
-      ? noteStyle : figureStyle;
-    if (check && expected && el.closest(supporting) && !el.closest(exceptions)) {
-      checked++;
-      const differences = [];
-      if (Math.abs(effective - Number.parseFloat(expected.fontSize)) > 0.1)
-        differences.push(`size ${effective}px (expected ${expected.fontSize})`);
-      if (css.fontFamily !== expected.fontFamily)
-        differences.push(`family ${css.fontFamily} (expected ${expected.fontFamily})`);
-      if (color !== expected.color && !el.closest('button[aria-pressed="true"]'))
-        differences.push(`color ${color} (expected ${expected.color})`);
-      if (differences.length) findings.add(`${sample}: ${differences.join('; ')}`);
-    }
-  }
-  if (check && noteStyle && !checked)
-    findings.add('no ordinary supporting text matched the requested selector');
-  if (check) {
-    for (const link of document.querySelectorAll('.cert-page a')) {
-      if (visible(link) && getComputedStyle(link).textDecorationLine !== 'none')
-        findings.add(`persistent link decoration: ${link.textContent.trim().slice(0, 80)}`);
-    }
-    for (const svg of document.querySelectorAll('.line-fig svg, .chart svg')) {
-      if (!visible(svg) || (selector && !svg.closest(selector) && !svg.querySelector(selector)))
-        continue;
-      const labels = [...svg.querySelectorAll('text')].filter(visible);
-      for (let i = 0; i < labels.length; i++) {
-        const a = labels[i].getBoundingClientRect();
-        for (let j = i + 1; j < labels.length; j++) {
-          const b = labels[j].getBoundingClientRect();
-          const width = Math.min(a.right, b.right) - Math.max(a.left, b.left);
-          const height = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
-          if (width > 1 && height > 1) findings.add('SVG label boxes overlap: '
-            + `${labels[i].textContent.trim()} / ${labels[j].textContent.trim()} `
-            + `(${round(width)} x ${round(height)}px)`);
-        }
-      }
-    }
-  }
-  return {
-    fonts: [...groups.values()].map(g => ({...g,
-      sizes: g.sizes.sort((a, b) => a - b),
-      effective_sizes: g.effective_sizes.sort((a, b) => a - b),
-    })).sort((a, b) => a.family.localeCompare(b.family)
-      || Number(a.weight) - Number(b.weight) || a.color.localeCompare(b.color)),
-    findings: [...findings],
-  };
-}"""
+#: The computed typography of every visible run, and the supporting-text checks.
+_PROBE = load_probe(PROBES, "inspect_explainer_typography/typography")
+
+#: The screen theme forced as the reader's toggle would, and the crop markers cleared.
+_FORCE_THEME = load_probe(PROBES, "inspect_explainer_typography/force_theme")
+_CLEAR_CROP_MARKERS = load_probe(PROBES, "inspect_explainer_typography/clear_crop_markers")
+
+#: The self-test's changes to its fixtures: known violations put in, a caption removed or
+#: hidden, and the real-KaTeX baseline fixture built, prepared, broken and restored.
+_RAISE_CODE = load_probe(PROBES, "inspect_explainer_typography/raise_code")
+_BREAK_SUPPORTING_FIXTURE = load_probe(
+    PROBES, "inspect_explainer_typography/break_supporting_fixture"
+)
+_REMOVE_ELEMENT = load_probe(PROBES, "inspect_explainer_typography/remove_element")
+_HIDE_ELEMENT = load_probe(PROBES, "inspect_explainer_typography/hide_element")
+_RENDER_BASELINE_FIXTURE = load_probe(
+    PROBES, "inspect_explainer_typography/render_baseline_fixture"
+)
+_APPLY_FRAGMENTS = load_probe(PROBES, "inspect_explainer_typography/apply_fragments")
+_RESTORE_ORIGINAL_STRUTS = load_probe(
+    PROBES, "inspect_explainer_typography/restore_original_struts"
+)
+_SET_INNER_HTML = load_probe(PROBES, "inspect_explainer_typography/set_inner_html")
 
 
 def inspect(
@@ -606,15 +428,7 @@ def inspect(
             if page.locator(".cert-page").count():
                 page.wait_for_selector(READY, timeout=60_000)
             if theme:
-                page.evaluate(
-                    """theme => {
-                      document.documentElement.dataset.kpressTheme = theme;
-                      const scopes = document.querySelectorAll('[data-kpress-resolved-theme]');
-                      for (const el of scopes)
-                        el.dataset.kpressResolvedTheme = theme;
-                    }""",
-                    theme,
-                )
+                page.evaluate(_FORCE_THEME, theme)
             for medium in ("screen", "print"):
                 if medium == "print":
                     page.emulate_media(media="print")
@@ -661,12 +475,7 @@ def inspect(
                         crop = page.locator(f'[data-squares-code-crop="{role}"]')
                         if crop.count():
                             crop.screenshot(path=math_crops / f"{medium}-code-{role}.png")
-                    page.evaluate(
-                        "document.querySelectorAll('[data-squares-typography-crop]')"
-                        ".forEach(el => delete el.dataset.squaresTypographyCrop);"
-                        "document.querySelectorAll('[data-squares-code-crop]')"
-                        ".forEach(el => delete el.dataset.squaresCodeCrop)"
-                    )
+                    page.evaluate(_CLEAR_CROP_MARKERS)
                 if check_supporting:
                     findings.extend(
                         f"{medium}: {finding}" for finding in provenance_findings(page)
@@ -719,23 +528,11 @@ def self_test(path: Path = PAGE) -> None:
             code_rows: list[InlineCodeContext] = page.evaluate(_CODE_CONTEXTS, arg=False)
             if len(code_rows) != 1 or code_baseline_findings(code_rows):
                 raise SystemExit("code-baseline self-test rejected the aligned fixture")
-            page.locator("code").evaluate(
-                "el => { el.style.position = 'relative'; el.style.top = '-2px'; }"
-            )
+            page.locator("code").evaluate(_RAISE_CODE)
             raised_code: list[InlineCodeContext] = page.evaluate(_CODE_CONTEXTS, arg=False)
             if not code_baseline_findings(raised_code):
                 raise SystemExit("code-baseline self-test missed raised inline code")
-            page.evaluate(
-                """() => {
-                  const footnote = document.querySelector('#footnote');
-                  footnote.style.fontSize = '24px';
-                  footnote.style.color = '#f00';
-                  document.querySelector('a').style.textDecoration = 'underline';
-                  const labels = document.querySelectorAll('svg text');
-                  labels[1].setAttribute('x', '10');
-                  labels[1].setAttribute('y', '40');
-                }"""
-            )
+            page.evaluate(_BREAK_SUPPORTING_FIXTURE)
             invalid: Probe = page.evaluate(_PROBE, arguments)
             required = (
                 "size 24px",
@@ -751,7 +548,7 @@ def self_test(path: Path = PAGE) -> None:
             if missing:
                 raise SystemExit(f"typography self-test missed known violations: {missing}")
             page.set_content(fixture)
-            page.locator(".kpress-figcaption").evaluate("el => el.remove()")
+            page.locator(".kpress-figcaption").evaluate(_REMOVE_ELEMENT)
             no_caption: Probe = page.evaluate(_PROBE, arguments)
             if not any(
                 finding.startswith("no visible caption") for finding in no_caption["findings"]
@@ -784,7 +581,7 @@ def self_test(path: Path = PAGE) -> None:
                 raise SystemExit(
                     "math-size self-test missed enlarged inline, display, or caption math"
                 )
-            page.locator("figcaption").evaluate("node => { node.hidden = true; }")
+            page.locator("figcaption").evaluate(_HIDE_ELEMENT)
             hidden: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
             if "no visible caption math to verify" not in math_size_findings(
                 hidden, require_roles=True
@@ -811,40 +608,9 @@ def self_test(path: Path = PAGE) -> None:
                 r"\smash{x}",
                 r"\quad",
             ]
-            page.evaluate(
-                r"""async sources => {
-                  const caption = document.createElement('figcaption');
-                  caption.className = 'kpress-figcaption';
-                  caption.dataset.baselineFixture = 'true';
-                  document.querySelector('.cert-page').append(caption);
-                  globalThis.baselineOriginalStruts = [];
-                  for (const [index, source] of sources.entries()) {
-                    const target = document.createElement('span');
-                    target.className = 'tex';
-                    target.dataset.squaresMathKey = String(index);
-                    caption.append('Reference ', target, ' text.',
-                      document.createElement('br'));
-                    await squaresMath.render(target, source, false);
-                    baselineOriginalStruts.push([...target.querySelectorAll('.base > .strut')]
-                      .map(strut => strut.getAttribute('style')));
-                  }
-                }""",
-                sources,
-            )
+            page.evaluate(_RENDER_BASELINE_FIXTURE, sources)
             fragments = page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES))
-            page.evaluate(
-                """fragments => {
-                  for (const fragment of fragments) {
-                    const target = document.querySelector(
-                      '[data-squares-math-key="' + fragment.key + '"]');
-                    target.innerHTML = fragment.html;
-                    for (const [name, value] of Object.entries(fragment.attributes))
-                      target.setAttribute(name, value);
-                    target.removeAttribute('data-squares-math-key');
-                  }
-                }""",
-                fragments,
-            )
+            page.evaluate(_APPLY_FRAGMENTS, fragments)
             for medium in ("screen", "print"):
                 page.emulate_media(media=medium)
                 page.evaluate(SETTLED)
@@ -858,25 +624,11 @@ def self_test(path: Path = PAGE) -> None:
                     raise SystemExit("baseline self-test did not observe every real KaTeX case")
             fixture_caption = page.locator("[data-baseline-fixture]")
             prepared_fixture = fixture_caption.inner_html()
-            fixture_caption.evaluate(
-                """caption => {
-                  const targets = [...caption.querySelectorAll('.tex')];
-                  for (const [index, target] of targets.entries()) {
-                    const bases = [...target.querySelectorAll('.base')];
-                    for (const [part, base] of bases.entries()) {
-                      base.style.setProperty('line-height', '1.2', 'important');
-                      base.querySelector(':scope > .strut').setAttribute(
-                        'style', baselineOriginalStruts[index][part]);
-                    }
-                  }
-                }"""
-            )
+            fixture_caption.evaluate(_RESTORE_ORIGINAL_STRUTS)
             old_strut: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
             if not math_baseline_findings(old_strut):
                 raise SystemExit("baseline self-test accepted the original font-line-strut bug")
-            fixture_caption.evaluate(
-                "(caption, html) => { caption.innerHTML = html; }", prepared_fixture
-            )
+            fixture_caption.evaluate(_SET_INNER_HTML, prepared_fixture)
             page.add_style_tag(
                 content="[data-baseline-fixture] .base { transform: translateY(-2px) }"
             )

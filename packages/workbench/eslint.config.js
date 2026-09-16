@@ -67,7 +67,7 @@ export default [
     rules: promiseRules,
   },
   {
-    files: ["packing/devtools/node/**/*.mjs"],
+    files: ["packing/devtools/node/**/*.mjs", "packing/tests/node/**/*.mjs"],
     languageOptions: {
       parser,
       parserOptions: { project: "./tsconfig.devtools-node.json" },

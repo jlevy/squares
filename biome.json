@@ -21,6 +21,7 @@
       "package-lock.json",
       "biome.json",
       "tsconfig.json",
+      "!packing/tests/fixtures/browser-floor",
       "!**/node_modules",
       "!vendor",
       "!**/.venv",

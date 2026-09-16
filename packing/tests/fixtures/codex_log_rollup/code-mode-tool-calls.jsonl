@@ -1,0 +1,3 @@
+{"timestamp": "2026-08-25T00:00:05.000Z", "type": "response_item", "payload": {"type": "custom_tool_call", "name": "exec", "call_id": "call-1", "input": "const r = await tools.exec_command({cmd: 'pytest'});"}}
+{"timestamp": "2026-08-25T00:00:04.000Z", "type": "response_item", "payload": {"type": "custom_tool_call", "name": "exec", "call_id": "legacy-command", "input": "const r = await tools.exec_command({\"cmd\":\"uv run pytest -q\"});"}}
+{"timestamp": "2026-08-25T00:00:05.000Z", "type": "response_item", "payload": {"type": "custom_tool_call", "name": "exec", "call_id": "legacy-poll", "input": "const r = await tools.write_stdin({session_id:42,chars:''});"}}

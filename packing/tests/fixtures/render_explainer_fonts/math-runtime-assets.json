@@ -1,0 +1,6 @@
+{
+  "katex/katex.min.js": "/* vendor bundle */",
+  "katex/katex-text-metrics.js": "/* profile tables */",
+  "katex/katex-math-runtime.js": "/* shared runtime */\nconst changedShape = {\n  ready: true,\n};",
+  "katex/katex-init.js": "/* native auto-render loop */"
+}

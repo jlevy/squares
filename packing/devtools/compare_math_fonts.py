@@ -95,10 +95,14 @@ from fontTools.pens.boundsPen import BoundsPen
 from fontTools.ttLib import TTFont
 from strif import atomic_output_file
 
-from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
+from devtools.render_explainer_pdf import BROWSER_OVERRIDE, FONTS_READY, PAGE, READY
+from sqpack.probes import probe
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
+
+#: The probes this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 
 #: kpress's static tree, which is where both sides of the pairing are shipped from.
 STATIC = REPO / "vendor" / "kpress" / "src" / "kpress" / "format" / "static"
@@ -1197,13 +1201,7 @@ MATH_BEARING = (("caption", ".kpress-figcaption"), ("massline", ".mass-line"), (
 #: whose numerator clips without patched metrics is among them.
 DISPLAY_BLOCKS = 3
 
-_MARK_PARAGRAPH = """({key, start}) => {
-  const found = [...document.querySelectorAll('.cert-page p')].find(
-    p => p.getBoundingClientRect().width > 0 && p.textContent.includes(start));
-  if (!found) return false;
-  found.setAttribute('data-shot', key);
-  return true;
-}"""
+_MARK_PARAGRAPH = probe(PROBES, "compare_math_fonts/mark_paragraph")
 
 
 #: `built_in_variants` needs faces only to build CSS; the names and the order it returns
@@ -1269,7 +1267,7 @@ def take_shots(
                 name = source.stem
                 page.goto(source.resolve().as_uri(), wait_until="load")
                 page.wait_for_selector(READY, timeout=60_000)
-                page.evaluate("document.fonts.ready")
+                page.evaluate(FONTS_READY)
                 for key, start in PARAGRAPH_STARTS.items():
                     if not page.evaluate(_MARK_PARAGRAPH, {"key": key, "start": start}):
                         print(f"{name}: no paragraph containing {start!r}")
@@ -1379,52 +1377,8 @@ VERIFY_INPUTS: tuple[str, ...] = (
 #: out. The threshold sits an order of magnitude clear of each side of that gap.
 VERIFY_TOLERANCE_EM = 0.01
 
-#: Draw each input into the page and read back both numbers: the advance the browser
-#: actually inked, and the width KaTeX summed from its own table to place it. Both come
-#: from one call, on the page's own KaTeX build, inside the column so that the rules and
-#: the size the page sets are the ones in force -- a measurement taken in a bare document
-#: would compare fonts nobody is looking at.
-_ADVANCES = r"""(inputs) => {
-  const column = document.querySelector('.kpress');
-  const host = document.createElement('span');
-  column.appendChild(host);
-  const measured = [];
-  try {
-    for (const input of inputs) {
-      host.textContent = '';
-      const tree = katex.__renderToDomTree(input, {throwOnError: true, displayMode: false});
-      host.appendChild(tree.toNode());
-      const drawn = host.firstElementChild;
-      const size = parseFloat(getComputedStyle(drawn).fontSize);
-      measured.push({
-        input,
-        /* The sum of the leaves' own boxes: KaTeX's table is per glyph, and what it
-           places is the run, so the run is what compares with the drawn advance. */
-        metric: leaves(tree),
-        drawn: drawn.getBoundingClientRect().width / size,
-      });
-    }
-  } finally {
-    host.remove();
-  }
-  return measured;
-
-  /* A symbol's box is its advance plus its italic correction, because that is what
-     KaTeX draws: `SymbolNode.toNode` puts the correction on the node as a right margin,
-     and an inline margin widens the box the browser reports for the run around it. The
-     two numbers are separate rows in the metric table and the patch rewrites both. */
-  function leaves(node) {
-    if (typeof node.width === 'number' && typeof node.text === 'string') {
-      if ([...node.text].length > 1) {
-        throw new Error(
-          'KaTeX merged ' + JSON.stringify(node.text) + ' into one node, whose declared '
-          + 'width is only its first character: pick a single-character input');
-      }
-      return node.width + (node.italic || 0);
-    }
-    return (node.children || []).reduce((sum, child) => sum + leaves(child), 0);
-  }
-}"""
+#: Each input's drawn advance and the width KaTeX placed it in, read on the page itself.
+_ADVANCES = probe(PROBES, "compare_math_fonts/advances")
 
 
 def verify_advances(variants_dir: Path, only: Sequence[str] = ()) -> list[str]:
@@ -1452,7 +1406,7 @@ def verify_advances(variants_dir: Path, only: Sequence[str] = ()) -> list[str]:
             for source in pages:
                 page.goto(source.resolve().as_uri(), wait_until="load")
                 page.wait_for_selector(READY, timeout=60_000)
-                page.evaluate("document.fonts.ready")
+                page.evaluate(FONTS_READY)
                 rows: list[dict[str, Any]] = page.evaluate(_ADVANCES, list(VERIFY_INPUTS))
                 for row in rows:
                     off = abs(float(row["drawn"]) - float(row["metric"]))

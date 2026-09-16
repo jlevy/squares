@@ -58,10 +58,19 @@ import os
 from pathlib import Path
 from typing import Literal, NotRequired, TypedDict
 
-from devtools.check_math_loading import ACTIVE_MATH_VARIANT, FIRST_PAINT_SCRIPT, page_url
+from devtools.check_math_loading import (
+    FIRST_PAINT_SCRIPT,
+    MATH_LIBRARY,
+    MATH_LIBRARY_INIT,
+    page_url,
+)
 from devtools.check_print_layout import PRINT_VIEWPORT
 from devtools.render_explainer import MATH_WRAPPERS
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
+from sqpack.probes import applied, probe
+
+#: The probes this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 
 #: The faces the composites draw their Latin and digits from, by the prefix Blink answers
 #: `CSS.getPlatformFontsForNode` with. A variable face comes back as the instance it is at
@@ -83,31 +92,8 @@ PROBE_ARGUMENTS: dict[str, object] = {
 }
 
 
-#: The same measurement strategy as pinned KPress's tests/math_font_probe.py. Linux
-#: Chromium can snap a normal-size glyph's advance to a whole pixel, which erased the
-#: difference between the 400 and 650 D. Copy the resolved face into a large hidden
-#: sample and measure in em; the actual formula keeps its original layout and size.
-FONT_ADVANCE = r"""(element) => {
-  const size = 4096;
-  const style = getComputedStyle(element);
-  const probe = document.createElement('span');
-  probe.textContent = element.textContent;
-  Object.assign(probe.style, {
-    position: 'fixed', visibility: 'hidden', display: 'inline-block',
-    whiteSpace: 'pre', width: 'max-content', maxWidth: 'none',
-    fontFamily: style.fontFamily, fontStyle: style.fontStyle,
-    fontWeight: style.fontWeight, fontStretch: style.fontStretch,
-    fontKerning: style.fontKerning, fontFeatureSettings: style.fontFeatureSettings,
-    fontVariationSettings: style.fontVariationSettings,
-    fontSize: `${size}px`,
-  });
-  document.body.append(probe);
-  try {
-    return probe.getBoundingClientRect().width / size;
-  } finally {
-    probe.remove();
-  }
-}"""
+#: A reference probe returning the measurement of one run's advance, in em.
+FONT_ADVANCE = probe(PROBES, "check_math_faces/font_advance")
 
 
 class Report(TypedDict):
@@ -123,201 +109,30 @@ class Report(TypedDict):
     findings: list[str]
 
 
-#: The walk. Returns one `{ nodes, marked, tables, findings }` per medium.
-#:
-#: The face of the WORDS around an expression is read off the nearest ancestor that is not
-#: part of the math markup. kpress's `.kpress-math` and `.kpress-math-render` wrappers
-#: declare the prose face themselves, and `.katex` is where `katex-text-face.css` puts the
-#: composite, so asking any of those would answer with the choice already made rather than
-#: with the sentence the formula sits in.
-#:
-#: Sans or prose is decided by comparing that container's computed `font-family` against
-#: both of the tokens in scope on it, `--kpress-font-sans` and `--kpress-font-prose`. Both
-#: sides come from the same medium's computed values, so the test reads the print stack
-#: under print and the screen stack on screen without naming either, and a container that
-#: matches neither is reported rather than guessed at.
-#:
-#: The re-typeset comparison recovers each expression's own TeX from the annotation KaTeX
-#: writes into its MathML copy, so it needs no source of its own and covers whatever the
-#: page happens to contain. The probe span is appended to the same container, so it
-#: inherits the same font stack and the same size, and it is removed again; nothing here
-#: leaves a mark on the page beyond the marks the page itself made.
-PROBE = r"""({ wrappers, advance_tolerance }) => {
-  const findings = [];
-  const boldAdvances = [];
-  const fontAdvance = __FONT_ADVANCE_FUNCTION__;
-  const activeVariant = __ACTIVE_MATH_VARIANT__;
-  const nodes = [...document.querySelectorAll('.katex')].filter(activeVariant);
-  const sans = (node) => !!node.closest('[data-kpress-math-face="sans"]');
-  const marked = nodes.filter(sans);
-  const first = (value) => (value || '').split(',')[0].trim().replace(/^["']|["']$/g, '');
+#: The walk (`probes/check_math_faces/faces.js`), for the medium the page is in.
+PROBE = probe(PROBES, "check_math_faces/faces")
+_STOP_LOADING_SAMPLER = probe(PROBES, "check_math_faces/stop_loading_sampler")
+_MARK_LATIN_RUN = probe(PROBES, "check_math_faces/mark_latin_run")
+_UNMARK_RUN = probe(PROBES, "check_math_faces/unmark_run")
+_PRINT_MATCHES = probe(PROBES, "check_math_faces/print_matches")
+_SAVE_PROSE_FONT = probe(PROBES, "check_math_faces/save_prose_font")
+_PROSE_FONT_SELECTED = probe(PROBES, "check_math_faces/prose_font_selected")
+_FIRST_PAINT_SUMMARY = probe(PROBES, "check_math_faces/first_paint_summary")
 
-  const container = (node) => {
-    let el = node.parentElement;
-    while (el && el.matches(wrappers)) el = el.parentElement;
-    return el;
-  };
-  const where = (el) => {
-    const parts = [];
-    for (let e = el; e && e !== document.body; e = e.parentElement) {
-      const cls = typeof e.className === 'string' && e.className.trim()
-        ? '.' + e.className.trim().split(/\s+/).join('.') : '';
-      parts.unshift(e.tagName.toLowerCase() + cls);
-      if (parts.length > 3) break;
-    }
-    return parts.join(' > ');
-  };
 
-  const seam = globalThis.kpressMathText;
-  if (!seam || typeof seam.installTablesFor !== 'function') {
-    findings.push('the page installed no math text seam; its init did not run');
-    return { nodes: nodes.length, marked: marked.length, tables: [],
-      bold_advances: boldAdvances, findings };
-  }
-  if (nodes.length === 0) findings.push('the page rendered no mathematics at all');
+def _walk(page: object, arguments: dict[str, object]) -> Report:
+    """Run the walk on the page as it is, with the math helpers it takes as handles."""
+    from playwright.sync_api import Page  # noqa: PLC0415
 
-  for (const node of nodes) {
-    const words = container(node);
-    if (!words) continue;
-    const style = getComputedStyle(words);
-    const drawn = first(style.fontFamily);
-    const isSans = drawn === first(style.getPropertyValue('--kpress-font-sans'));
-    const isProse = drawn === first(style.getPropertyValue('--kpress-font-prose'));
-    const at = where(node) + ' [' + drawn + ']';
-    if (!isSans && !isProse) {
-      findings.push('mathematics in words set in neither the sans nor the prose: ' + at);
-    } else if (isSans && !sans(node)) {
-      findings.push('sans words, serif mathematics: ' + at);
-    } else if (isProse && !isSans && sans(node)) {
-      findings.push('serif words, sans mathematics: ' + at);
-    }
-  }
-
-  /* Read the emitted declarations, not the renderer's pruning table: a saved sans
-     preference moves prose's bold mathematics into this family too. CSS can synthesize
-     a missing bold slot without reporting a font load failure, but the resulting glyphs
-     no longer match KaTeX's 650 metrics. `.textbf` requests upstream's 700, which CSS
-     matches to the composite's pinned 650 slot. */
-  const sansSlots = new Set([...document.fonts]
-    .filter(face => first(face.family) === 'KPress Math Text Sans')
-    .map(face => face.style + ' ' + face.weight));
-  for (const node of marked) {
-    for (const run of node.querySelectorAll('.mathbf, .boldsymbol, .textbf')) {
-      const style = getComputedStyle(run);
-      const slot = style.fontStyle + ' 650';
-      if (!sansSlots.has(slot)) {
-        findings.push('sans mathematics requests an undeclared ' + slot + ' slot: '
-          + where(run));
-      }
-      /* A declared family alone cannot tell a real 650 instance from synthetic bold.
-         Compare its resolved face with the 650 advance in KPress's table. The enlarged
-         sample preserves the distinction when small glyphs are snapped to whole pixels. */
-      if (style.fontStyle === 'normal' && /^[A-Za-z]$/.test(run.textContent)
-          && run.checkVisibility({ visibilityProperty: true })) {
-        const table = globalThis.kpressKatexTextMetrics?.sans?.['Main-Bold'];
-        const metric = table?.[run.textContent.codePointAt(0)];
-        if (!metric) {
-          findings.push('no 650 metric for sans bold ' + run.textContent);
-          continue;
-        }
-        const actual = fontAdvance(run);
-        const expected = metric[4];
-        boldAdvances.push(run.textContent + ': ' + actual + 'em | 650: ' + expected + 'em');
-        if (Math.abs(actual - expected) > advance_tolerance) {
-          findings.push('sans bold glyph does not match its 650 metrics: '
-            + run.textContent + ' draws ' + actual + 'em, expected ' + expected + 'em');
-        }
-      }
-    }
-  }
-
-  /* One expression of each kind, re-typeset from its own source under both sets. */
-  const tables = [];
-  const source = (node) => {
-    const tex = node.querySelector('annotation[encoding="application/x-tex"]');
-    return tex ? tex.textContent : null;
-  };
-  const geometry = (el) =>
-    [...el.querySelectorAll('.vlist')].map((v) => v.style.height).join('|');
-  const under = (node, host) => {
-    const probe = document.createElement('span');
-    probe.style.position = 'absolute';
-    probe.style.visibility = 'hidden';
-    container(node).appendChild(probe);
-    /* The seam picks the set from the element it is handed, so it is handed one that
-       lives where the set under test does; `probe` then only has to be somewhere the
-       size and the stack are the node's own. */
-    seam.installTablesFor(host, globalThis.squaresMath?.context);
-    try {
-      katex.render(source(node), probe, {
-        throwOnError: false,
-        displayMode: !!node.closest('.katex-display'),
-      });
-    } catch (error) {
-      probe.textContent = '';
-    }
-    const measured = geometry(probe);
-    probe.remove();
-    return measured;
-  };
-
-  /* Detached control hosts select either table without inheriting the reader's global
-     preference. The measured formula itself stays attached under its actual cascade. */
-  const sansHost = document.createElement('span');
-  sansHost.className = 'sans-text';
-  const proseHost = document.createElement('span');
-  const contexts = [
-    ['supporting', marked.filter(node => !node.closest('.kpress-prose > p'))],
-    ['prose', nodes.filter(node => node.closest('.kpress-prose > p'))],
-  ];
-  for (const [label, pool] of contexts) {
-    const node = pool.find((n) => n.querySelector('.vlist') && source(n));
-    if (!node) {
-      findings.push('no ' + label + ' fraction to check the metric table on');
-      continue;
-    }
-    const live = geometry(node);
-    const asSans = under(node, sansHost);
-    const asProse = under(node, proseHost);
-    tables.push(label + ': live ' + live + ' | sans ' + asSans + ' | prose ' + asProse);
-    if (asSans === asProse) {
-      findings.push(label + ': the two metric sets lay this expression out identically, '
-        + 'so the comparison proves nothing');
-    } else if (live !== (sans(node) ? asSans : asProse)) {
-      findings.push(label + ': laid out from the wrong metric table -- live ' + live
-        + ', sans ' + asSans + ', prose ' + asProse);
-    }
-  }
-  seam.restore();
-
-  /* Only the glyphs an exposed formula uses must be ready. Unused registered
-     styles may remain unloaded; demanding them would restore the startup barrier. */
-  const paint = globalThis.__mathFirstPaint;
-  if (!paint) {
-    findings.push('nothing recorded the first mathematics node; the init script did not run');
-  } else {
-    if (!Array.isArray(paint.required) || !paint.required.length) {
-      findings.push('first mathematics paint has no required-glyph observations');
-    }
-    const late = (paint.required || [])
-      .filter(face => !face.ready).map(face => face.spec + ' [' + face.text + ']');
-    if (late.length) {
-      findings.push('mathematics was painted before ' + late.length + ' of its faces: '
-        + late.join(', '));
-    }
-  }
-  const loading = globalThis.__mathLoadingState;
-  if (!loading || !(loading.mathFontChecks > 0)) {
-    findings.push('no first-visible-frame glyph font checks ran');
-  }
-  for (const failure of loading?.unreadyMath || []) {
-    findings.push('a formula appeared before its required glyph fonts: ' + failure);
-  }
-  return { nodes: nodes.length, marked: marked.length, tables,
-    bold_advances: boldAdvances, findings };
-}""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE).replace(
-    "__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT
-)
+    assert isinstance(page, Page)
+    return page.evaluate(
+        PROBE,
+        {
+            **arguments,
+            "math": page.evaluate_handle(MATH_LIBRARY),
+            "fontAdvance": page.evaluate_handle(FONT_ADVANCE),
+        },
+    )
 
 
 def _run(page: object, findings: list[str], medium: str) -> Report:
@@ -326,31 +141,10 @@ def _run(page: object, findings: list[str], medium: str) -> Report:
 
     assert isinstance(page, Page)
     page.evaluate(SETTLED)
-    page.evaluate(
-        "globalThis.__mathLoadingState && (globalThis.__mathLoadingState.stop = true)"
-    )
-    probe: Report = page.evaluate(PROBE, PROBE_ARGUMENTS)
+    page.evaluate(_STOP_LOADING_SAMPLER)
+    probe: Report = _walk(page, PROBE_ARGUMENTS)
     findings.extend(f"{medium}: {finding}" for finding in probe["findings"])
     return probe
-
-
-#: One letter or digit of a formula, marked so CDP can find it. The composite claims the
-#: Latin ranges and the digits and nothing else, so a run of operators or Greek would
-#: answer with a KaTeX face whichever composite is in force and prove nothing.
-_MARK = """({ scope, mark }) => {
-  const activeVariant = __ACTIVE_MATH_VARIANT__;
-  for (const node of document.querySelectorAll(scope)) {
-    if (!activeVariant(node)) continue;
-    if (!node.checkVisibility({ visibilityProperty: true })) continue;
-    for (const run of node.querySelectorAll('.mord')) {
-      if (run.children.length === 0 && /^[0-9A-Za-z.]+$/.test(run.textContent.trim())) {
-        run.id = mark;
-        return run.textContent.trim();
-      }
-    }
-  }
-  return null;
-}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 
 def _drawn_face(page: object, session: object, *, scope: str) -> tuple[str | None, list[str]]:
@@ -366,7 +160,10 @@ def _drawn_face(page: object, session: object, *, scope: str) -> tuple[str | Non
     assert isinstance(page, Page)
     assert isinstance(session, CDPSession)
     mark = "kpress-math-face-probe"
-    text = page.evaluate(_MARK, {"scope": scope, "mark": mark})
+    text = page.evaluate(
+        _MARK_LATIN_RUN,
+        {"scope": scope, "mark": mark, "math": page.evaluate_handle(MATH_LIBRARY)},
+    )
     if text is None:
         return None, []
     try:
@@ -375,11 +172,7 @@ def _drawn_face(page: object, session: object, *, scope: str) -> tuple[str | Non
         fonts = session.send("CSS.getPlatformFontsForNode", {"nodeId": node["nodeId"]})
         return text, [str(font["familyName"]) for font in fonts.get("fonts", [])]
     finally:
-        page.evaluate(
-            "mark => { const el = document.getElementById(mark);"
-            " if (el) el.removeAttribute('id'); }",
-            mark,
-        )
+        page.evaluate(_UNMARK_RUN, mark)
 
 
 def _check_drawn(
@@ -420,7 +213,7 @@ def _check_drawn(
         session.send("DOM.enable")
         session.send("CSS.enable")
         for kind, scope, wanted in contexts:
-            is_print = page.evaluate("matchMedia('print').matches")
+            is_print = page.evaluate(_PRINT_MATCHES)
             actual_medium = "print" if is_print else "screen"
             if actual_medium != medium:
                 findings.append(f"{medium}: {kind} font sampled in {actual_medium} mode")
@@ -465,13 +258,12 @@ def check(path: Path | str = PAGE, *, width: int = 1280) -> Report:
                 try:
                     errors: list[str] = []
                     page.on("pageerror", lambda error, errors=errors: errors.append(str(error)))
-                    page.add_init_script(
-                        f"localStorage.setItem('kpress.proseFont', {json.dumps(prose_font)});"
-                    )
+                    page.add_init_script(applied(_SAVE_PROSE_FONT, {"proseFont": prose_font}))
+                    page.add_init_script(MATH_LIBRARY_INIT)
                     page.add_init_script(FIRST_PAINT_SCRIPT)
                     page.goto(page_url(path), wait_until="load")
                     page.wait_for_selector(READY, timeout=60_000)
-                    selected = page.evaluate("document.documentElement.dataset.kpressProseFont")
+                    selected = page.evaluate(_PROSE_FONT_SELECTED)
                     if selected != prose_font:
                         findings.append(
                             f"{prose_font}: saved reading preference was not applied"
@@ -506,13 +298,7 @@ def check(path: Path | str = PAGE, *, width: int = 1280) -> Report:
                             )
                         )
                         findings.extend(f"{prose_font} {finding}" for finding in drawn_findings)
-                    paint = page.evaluate(
-                        "() => globalThis.__mathFirstPaint && { "
-                        "at: globalThis.__mathFirstPaint.at, "
-                        "faces: globalThis.__mathFirstPaint.faces.length, "
-                        "required: globalThis.__mathFirstPaint.required, "
-                        "math_font_checks: globalThis.__mathLoadingState.mathFontChecks }"
-                    )
+                    paint = page.evaluate(_FIRST_PAINT_SUMMARY)
                     report["first_paint"][prose_font] = paint or {}
                     # A reference error can leave a plausible page with the wrong tables.
                     findings.extend(f"{prose_font} page error: {error}" for error in errors)
@@ -539,6 +325,20 @@ SELF_TEST_FIXTURE = f"""<!doctype html><html><head><style>
 </body></html>"""
 
 
+_INSTALL_SEAM_STUB = probe(PROBES, "check_math_faces/install_seam_stub")
+_ADD_DORMANT_AND_HIDDEN_MATH = probe(PROBES, "check_math_faces/add_dormant_and_hidden_math")
+_MARK_BOTH_SANS = probe(PROBES, "check_math_faces/mark_both_sans")
+_ADD_BOLD_RUN = probe(PROBES, "check_math_faces/add_bold_run")
+_FAKE_FIRST_PAINT = probe(PROBES, "check_math_faces/fake_first_paint")
+_UNREADY_FIRST_REQUIRED = probe(PROBES, "check_math_faces/unready_first_required")
+_LATE_FORMULA_FAILURE = probe(PROBES, "check_math_faces/late_formula_failure")
+_CLEAR_UNREADY_MATH = probe(PROBES, "check_math_faces/clear_unready_math")
+_SUPPORT_SANS_BOLD = probe(PROBES, "check_math_faces/support_sans_bold")
+_MATCHING_BOLD_METRIC = probe(PROBES, "check_math_faces/matching_bold_metric")
+_WIDEN_BOLD_METRIC = probe(PROBES, "check_math_faces/widen_bold_metric")
+_PRINT_SAMPLING_FIXTURE = probe(PROBES, "check_math_faces/print_sampling_fixture")
+
+
 def self_test() -> None:
     """Check that the walk objects to each disagreement it exists to find."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
@@ -549,29 +349,13 @@ def self_test() -> None:
         try:
             page = browser.new_page()
             page.set_content(SELF_TEST_FIXTURE)
-            bare: Report = page.evaluate(PROBE, arguments)
+            bare: Report = _walk(page, arguments)
             if not any("its init did not run" in f for f in bare["findings"]):
                 raise SystemExit("math face self-test accepted a page with no init")
             # With a seam in place, the sans paragraph's unmarked formula is the defect.
-            page.evaluate(
-                "() => { globalThis.kpressMathText = "
-                "{ installTablesFor: () => null, restore: () => undefined }; }"
-            )
-            page.evaluate(
-                """() => {
-                  const dormant = document.createElement('span');
-                  dormant.className = 'squares-math-variant';
-                  dormant.dataset.squaresMathContexts = 'custom-sans';
-                  dormant.style.display = 'none';
-                  dormant.innerHTML = '<span class="katex">dormant</span>';
-                  const certificate = document.createElement('div');
-                  certificate.hidden = true;
-                  certificate.innerHTML = '<p class="sans"><span class="katex" '
-                    + 'data-kpress-math-face="sans">hidden certificate</span></p>';
-                  document.body.append(dormant, certificate);
-                }"""
-            )
-            unmarked: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_INSTALL_SEAM_STUB)
+            page.evaluate(_ADD_DORMANT_AND_HIDDEN_MATH)
+            unmarked: Report = _walk(page, arguments)
             if unmarked["nodes"] != 3:
                 raise SystemExit(
                     "math face self-test lost hidden certificate math "
@@ -579,87 +363,45 @@ def self_test() -> None:
                 )
             if not any("sans words, serif mathematics" in f for f in unmarked["findings"]):
                 raise SystemExit("math face self-test accepted serif math under sans words")
-            page.evaluate(
-                "() => { document.querySelector('#a').dataset.kpressMathFace = 'sans'; "
-                "document.querySelector('#b').dataset.kpressMathFace = 'sans'; }"
-            )
-            marked: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_MARK_BOTH_SANS)
+            marked: Report = _walk(page, arguments)
             if not any("serif words, sans mathematics" in f for f in marked["findings"]):
                 raise SystemExit("math face self-test accepted sans math under serif words")
-            page.evaluate(
-                """() => {
-                  const bold = document.createElement('span');
-                  bold.className = 'mathbf';
-                  document.querySelector('#b .katex').appendChild(bold);
-                }"""
-            )
-            bold: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_ADD_BOLD_RUN)
+            bold: Report = _walk(page, arguments)
             if not any("undeclared normal 650 slot" in f for f in bold["findings"]):
                 raise SystemExit("math face self-test accepted bold math in a sans context")
-            page.evaluate(
-                """() => {
-                  globalThis.__mathFirstPaint = {
-                    faces: [{family: 'KaTeX_Main', status: 'unloaded', weight: '700'}],
-                    required: [{spec: '16px serif', text: 'x', ready: true}]
-                  };
-                  globalThis.__mathLoadingState = {mathFontChecks: 1, unreadyMath: []};
-                }"""
-            )
-            unused: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_FAKE_FIRST_PAINT)
+            unused: Report = _walk(page, arguments)
             if any("was painted before" in f for f in unused["findings"]):
                 raise SystemExit("math face self-test rejected an unused unloaded font")
-            page.evaluate("__mathFirstPaint.required[0].ready = false")
-            required: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_UNREADY_FIRST_REQUIRED)
+            required: Report = _walk(page, arguments)
             if not any("was painted before" in f for f in required["findings"]):
                 raise SystemExit("math face self-test accepted an unavailable required font")
-            page.evaluate(
-                "__mathFirstPaint.required[0].ready = true; "
-                "__mathLoadingState.unreadyMath.push('late expression')"
-            )
-            later: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_LATE_FORMULA_FAILURE)
+            later: Report = _walk(page, arguments)
             if not any("a formula appeared before" in f for f in later["findings"]):
                 raise SystemExit("math face self-test missed a later formula's font failure")
-            page.evaluate("__mathLoadingState.unreadyMath = []")
-            page.evaluate(
-                """() => {
-                  document.fonts.add(new FontFace('KPress Math Text Sans', 'local(Arial)',
-                    {weight: '650'}));
-                  document.body.style.setProperty('--kpress-font-prose',
-                    '\"Source Sans 3 Variable\", sans-serif');
-                  document.querySelector('#a').className = 'sans';
-                }"""
-            )
-            supported: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_CLEAR_UNREADY_MATH)
+            page.evaluate(_SUPPORT_SANS_BOLD)
+            supported: Report = _walk(page, arguments)
             if any(
                 "undeclared" in f or "serif words, sans mathematics" in f
                 for f in supported["findings"]
             ):
                 raise SystemExit("math face self-test rejected the supported sans reading face")
             page.evaluate(
-                """() => {
-                  const bold = document.querySelector('.mathbf');
-                  bold.textContent = 'D';
-                  // Reproduce Linux's small-glyph rounding without depending on the
-                  // host rasterizer. Measuring the original run again must not pass.
-                  const bounding = bold.getBoundingClientRect.bind(bold);
-                  bold.getBoundingClientRect = () => {
-                    const rect = bounding();
-                    return new DOMRect(rect.x, rect.y, Math.round(rect.width), rect.height);
-                  };
-                  const advance = (__FONT_ADVANCE_FUNCTION__)(bold);
-                  globalThis.kpressKatexTextMetrics = {
-                    sans: {'Main-Bold': {68: [0, 0, 0, 0, advance]}}
-                  };
-                }""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE)
+                _MATCHING_BOLD_METRIC, {"fontAdvance": page.evaluate_handle(FONT_ADVANCE)}
             )
-            matching_advance: Report = page.evaluate(PROBE, arguments)
+            matching_advance: Report = _walk(page, arguments)
             if not matching_advance.get("bold_advances") or any(
                 "does not match its 650 metrics" in finding
                 for finding in matching_advance["findings"]
             ):
                 raise SystemExit("math face self-test rejected matching bold glyph metrics")
-            page.evaluate("globalThis.kpressKatexTextMetrics.sans['Main-Bold'][68][4] += 0.25")
-            wrong_advance: Report = page.evaluate(PROBE, arguments)
+            page.evaluate(_WIDEN_BOLD_METRIC)
+            wrong_advance: Report = _walk(page, arguments)
             if not any(
                 "does not match its 650 metrics" in finding
                 for finding in wrong_advance["findings"]
@@ -667,22 +409,14 @@ def self_test() -> None:
                 raise SystemExit(
                     "math face self-test accepted a declared face at wrong metrics"
                 )
-            page.evaluate(
-                """() => {
-                  document.body.classList.add('kpress-prose');
-                  document.querySelector('#b').parentElement.classList.add('kpress-figcaption');
-                  document.querySelectorAll('.katex').forEach(node => {
-                    node.innerHTML = '<span class="mord">x</span>';
-                  });
-                }"""
-            )
+            page.evaluate(_PRINT_SAMPLING_FIXTURE)
             page.emulate_media(media="print")
             sampled_findings: list[str] = []
             samples = _check_drawn(page, sampled_findings, "print")
             if (
                 len(samples) != 2
                 or any("font sampled in" in f for f in sampled_findings)
-                or not page.evaluate("matchMedia('print').matches")
+                or not page.evaluate(_PRINT_MATCHES)
             ):
                 raise SystemExit("math face self-test lost print emulation across font samples")
         finally:

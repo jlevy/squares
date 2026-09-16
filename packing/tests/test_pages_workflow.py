@@ -32,6 +32,25 @@ def test_pages_filters_cover_the_developer_tools_its_jobs_run() -> None:
         assert not missing, f"{event}: page tools outside the workflow path filter: {missing}"
 
 
+def test_pages_filters_cover_the_probes_its_tools_and_controls_load() -> None:
+    """The page's tools and its PDF controls hand the browser JavaScript from probe files, and
+    the render inlines some of them; an edit to one is an edit to the tool that loads it."""
+    workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))
+    probes = sorted(
+        path.relative_to(REPO).as_posix()
+        for tree in ("packing/devtools/probes", "packing/tests/probes/pdf_math_browser")
+        for path in (REPO / tree).rglob("*")
+        if path.is_file()
+    )
+    assert probes
+    for event in ("push", "pull_request"):
+        patterns = workflow["on"][event]["paths"]
+        missing = [
+            probe for probe in probes if not any(fnmatchcase(probe, p) for p in patterns)
+        ]
+        assert not missing, f"{event}: probes outside the workflow path filter: {missing}"
+
+
 def test_deployment_waits_for_the_cross_browser_loading_checks() -> None:
     workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))
     checks = workflow["jobs"]["font-loading"]

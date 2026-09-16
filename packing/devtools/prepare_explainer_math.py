@@ -40,14 +40,14 @@ from html.parser import HTMLParser
 from io import BytesIO
 from itertools import pairwise
 from pathlib import Path
-from textwrap import dedent
 from typing import TYPE_CHECKING, Any, NotRequired, TypedDict, cast, override
 
 if TYPE_CHECKING:
     from playwright.async_api import Route
 
-from devtools.check_math_loading import ACTIVE_MATH_VARIANT, EXPOSED, OBSERVATION_MS
+from devtools.check_math_loading import MATH_LIBRARY, OBSERVATION_MS
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
+from sqpack.probes import applied, probe
 
 _MATH_CLASSES = frozenset({"tex", "tex-d", "kpress-math"})
 _READOUT_ID = re.compile(r"(?:mv|md|kval|s-(?:phi|theta|d|D|B|prod))-\d+-\d+\Z")
@@ -85,6 +85,9 @@ _FONT_CONTEXTS = tuple(
     for font_set in ("custom", "system")
     for prose_font in ("serif", "sans")
 )
+
+#: The probes this module hands the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
 
 
 @dataclass(frozen=True)
@@ -184,199 +187,25 @@ def prepared_html(source: str, slots: list[MathSlot], fragments: list[PreparedFr
     return result
 
 
-_LINEAR_BASE_GEOMETRY = dedent("""
-    (base) => {
-      const style = getComputedStyle(base);
-      const fontSize = parseFloat(style.fontSize);
-      const width = base.getBoundingClientRect().width;
-      const native = document.documentElement.dataset.squaresNativeMathMetrics === 'true';
-      if (style.textRendering.toLowerCase() !== 'geometricprecision'
-          && !(native && style.textRendering === 'auto')) {
-        throw new Error('math preparation requires geometricPrecision '
-          + 'or native linear metrics, got '
-          + style.textRendering + ': ' + base.textContent);
-      }
-      const scale = 16;
-      // A fresh same-parent sample keeps selector context and leaves the live
-      // formula and its layout untouched.
-      const probe = base.cloneNode(true);
-      probe.style.setProperty('font-size', (fontSize * scale) + 'px', 'important');
-      probe.style.position = 'absolute';
-      probe.style.visibility = 'hidden';
-      base.after(probe);
-      let linearWidth, scaledFontSize;
-      try {
-        scaledFontSize = parseFloat(getComputedStyle(probe).fontSize);
-        linearWidth = probe.getBoundingClientRect().width / scale;
-      } finally {
-        probe.remove();
-      }
-      if (!(fontSize > 0 && width > 0 && linearWidth > 0)) {
-        throw new Error('empty or hidden linear math geometry: ' + base.textContent);
-      }
-      if (Math.abs(scaledFontSize - fontSize * scale) > 0.01) {
-        throw new Error('math scaling sample did not use the requested font size: '
-          + scaledFontSize + 'px instead of ' + (fontSize * scale) + 'px');
-      }
-      if (Math.abs(width - linearWidth) > 1) {
-        throw new Error('math width does not scale linearly: ' + width + 'px at '
-          + fontSize + 'px versus ' + linearWidth + 'px normalized from '
-          + scaledFontSize + 'px: ' + base.textContent);
-      }
-      return {fontSize, width, linearWidth, textRendering: style.textRendering};
-    }
-""")
+#: A reference probe: it returns the slot measurement, which carries its measurement of one
+#: base as `linearGeometry`. A probe that needs either takes a handle to it in its argument.
+_MEASURE_MATH_REFERENCE = probe(PROBES, "prepare_explainer_math/measure_math")
+
+#: The slot measurement itself, called with the sorted math attribute names.
+_MEASURE_MATH = applied(_MEASURE_MATH_REFERENCE)
 
 
-_MEASURE_MATH = dedent(r"""
-    (attributeNames) => {
-      const linearGeometry = __LINEAR_BASE_GEOMETRY__;
-      const fixed = value => {
-        if (!Number.isFinite(value)) throw new Error('non-finite math geometry');
-        return Number(value.toFixed(8)) + 'em';
-      };
-      const result = [];
-      for (const target of document.querySelectorAll('[data-squares-math-key]')) {
-        const clone = target.cloneNode(true);
-        const actualNodes = element => element.matches('.kpress-math')
-          ? [element.querySelector('.kpress-math-render')]
-          : element.id.startsWith('kval-')
-            ? [...element.querySelectorAll('.math-item')]
-            : [element];
-        const nodes = actualNodes(target), copies = actualNodes(clone);
-        if (!nodes.length || nodes.length !== copies.length) {
-          throw new Error('missing initial parameter math: ' + target.outerHTML.slice(0, 200));
-        }
-        for (let index = 0; index < nodes.length; index++) {
-          const node = nodes[index], copy = copies[index];
-          if (!node || !copy || !node.querySelector('.katex')
-              || !node.hasAttribute('data-kpress-math-source')) {
-            throw new Error('math did not finish preparing: ' + target.outerHTML.slice(0, 200));
-          }
-          const bases = [...node.querySelectorAll('.katex-html > .base')];
-          const clonedBases = [...copy.querySelectorAll('.katex-html > .base')];
-          if (!bases.length) throw new Error('KaTeX emitted no measurable base');
-          for (let part = 0; part < bases.length; part++) {
-            const base = bases[part], child = clonedBases[part];
-            const measured = linearGeometry(base);
-            const fontSize = measured.fontSize;
-            const parentSize = parseFloat(getComputedStyle(base.parentElement).fontSize);
-            const marker = document.createElement('span');
-            marker.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;'
-              + 'border:0;line-height:0;vertical-align:baseline;';
-            base.append(marker);
-            const rect = base.getBoundingClientRect();
-            const baseline = marker.getBoundingClientRect().top;
-            marker.remove();
-            if (!(rect.width > 0 && rect.height > 0 && fontSize > 0 && parentSize > 0)) {
-              throw new Error('empty or hidden math geometry: ' + node.textContent);
-            }
-            const box = document.createElement('span');
-            box.className = 'squares-math-box';
-            box.style.cssText = 'display:inline-block;position:relative;'
-              + 'font-size:' + fixed(fontSize / parentSize) + ';'
-              + 'width:' + fixed(rect.width / fontSize) + ';'
-              + 'height:' + fixed(rect.height / fontSize) + ';'
-              + 'vertical-align:' + fixed((baseline - rect.bottom) / fontSize) + ';';
-            // The same em strut must anchor the actual glyphs and their reserved
-            // box. A font's line strut rounds differently at print sizes; keep
-            // its measured extent explicitly, including short punctuation bases.
-            const strut = child.querySelector(':scope > .strut');
-            if (!strut) throw new Error('KaTeX emitted no baseline strut');
-            strut.style.height = fixed(rect.height / fontSize);
-            strut.style.verticalAlign = fixed((baseline - rect.bottom) / fontSize);
-            child.replaceWith(box);
-            box.append(child);
-            child.style.position = 'absolute';
-            child.style.left = '0';
-            child.style.top = '0';
-          }
-          copy.dataset.kpressMathPrepared = 'true';
-          delete copy.dataset.squaresMathReady;
-          delete copy.dataset.done;
-        }
-        clone.removeAttribute('data-squares-math-key');
-        const attributes = {};
-        for (const name of attributeNames) {
-          if (clone.hasAttribute(name)) attributes[name] = clone.getAttribute(name);
-        }
-        result.push({
-          key: Number(target.dataset.squaresMathKey), html: clone.innerHTML, attributes
-        });
-      }
-      return result;
-    }
-""").replace("__LINEAR_BASE_GEOMETRY__", _LINEAR_BASE_GEOMETRY)
-
-
-_COMBINE_MATH_VARIANTS = dedent("""
-    ({contexts, attributeNames}) => {
-      const actualNodes = element => element.matches('.kpress-math')
-        ? [element.querySelector('.kpress-math-render')]
-        : element.id.startsWith('kval-')
-          ? [...element.querySelectorAll('.math-item')]
-          : [element];
-      const attributes = node => Object.fromEntries(attributeNames.filter(name =>
-        node.hasAttribute(name)).map(name => [name, node.getAttribute(name)]));
-      return contexts[0].fragments.map((fragment, slot) => {
-        const original = document.querySelector('[data-squares-math-key="' + slot + '"]');
-        const copies = contexts.map(context => {
-          const measured = context.fragments[slot];
-          if (measured.key !== fragment.key) throw new Error('math variant keys differ');
-          const copy = original.cloneNode(false);
-          for (const name of attributeNames) copy.removeAttribute(name);
-          for (const [name, value] of Object.entries(measured.attributes)) {
-            copy.setAttribute(name, value);
-          }
-          copy.innerHTML = measured.html;
-          return copy;
-        });
-        const nodes = copies.map(actualNodes);
-        for (let index = 0; index < nodes[0].length; index++) {
-          const versions = new Map();
-          contexts.forEach((context, offset) => {
-            const node = nodes[offset][index];
-            if (!node) throw new Error('math variant nodes differ');
-            const signature = JSON.stringify([attributes(node), node.innerHTML]);
-            const version = versions.get(signature) || {node, contexts: []};
-            version.contexts.push(context.name);
-            versions.set(signature, version);
-          });
-          if (versions.size === 1) continue;
-          const parent = nodes[0][index];
-          const variants = [...versions.values()].map(({node, contexts}) => {
-            const variant = document.createElement('span');
-            variant.className = 'squares-math-variant';
-            variant.dataset.squaresMathContexts = contexts.join(' ');
-            for (const [name, value] of Object.entries(attributes(node))) {
-              variant.setAttribute(name, value);
-            }
-            variant.innerHTML = node.innerHTML;
-            return variant;
-          });
-          // The source stays on the original host target. Font/profile state belongs
-          // to the selected child, so an inactive serif ancestor cannot override it.
-          for (const name of ['data-kpress-math-face', 'data-kpress-math-profile',
-              'data-kpress-math-prepared']) parent.removeAttribute(name);
-          parent.replaceChildren(...variants);
-        }
-        return {key: fragment.key, html: copies[0].innerHTML,
-          attributes: attributes(copies[0])};
-      });
-    }
-""")
+_COMBINE_MATH_VARIANTS = probe(PROBES, "prepare_explainer_math/combine_math_variants")
+_FONT_PREFERENCES = probe(PROBES, "prepare_explainer_math/font_preferences")
+_REVEAL_CERTIFICATES = probe(PROBES, "prepare_explainer_math/reveal_certificates")
 
 
 def font_preference_html(source: str, *, prose_font: str, font_set: str) -> str:
     """Set the same pre-paint attributes as saved preferences in a fresh browser."""
     if (font_set, prose_font) not in _FONT_CONTEXTS:
         raise ValueError("unsupported explainer font preferences")
-    # set_content() has no persistent origin. Assign the attributes in the head,
-    # before the normal bootstrap and body; do not change them after math renders.
     return _head_script(
-        source,
-        f'document.documentElement.dataset.kpressProseFont = "{prose_font}";'
-        f'document.documentElement.dataset.kpressFontSet = "{font_set}";',
+        source, applied(_FONT_PREFERENCES, {"proseFont": prose_font, "fontSet": font_set})
     )
 
 
@@ -419,10 +248,7 @@ def prepare_math_html(source: str) -> str:
                     wait_until="load",
                 )
                 page.wait_for_selector(READY, timeout=60_000)
-                # Hidden certificate copies need their own measured context too.
-                page.evaluate(
-                    "document.querySelectorAll('.cert-figure').forEach(el => el.hidden = false)"
-                )
+                page.evaluate(_REVEAL_CERTIFICATES)
                 page.evaluate(SETTLED)
                 contexts.append(
                     {
@@ -644,22 +470,7 @@ def held_math_fonts(source: str) -> tuple[str, dict[str, bytes]]:
     return _FONT_BLOCK.sub(replace, source), fonts
 
 
-_GEOMETRY_SETUP = dedent("""
-    () => {
-      let group = 0;
-      for (const formula of document.querySelectorAll('.katex-html')) {
-        for (const box of formula.querySelectorAll(':scope > .squares-math-box')) {
-          box.dataset.squaresGeometryGroup = String(group);
-        }
-        group++;
-      }
-      globalThis.__squaresGeometryBoxes = [...document.querySelectorAll('.squares-math-box')]
-        .filter(box => box.getBoundingClientRect().width > 0);
-      globalThis.__squaresGeometryBoxes.forEach((box, key) => {
-        box.dataset.squaresGeometryKey = String(key);
-      });
-    }
-""")
+_GEOMETRY_SETUP = probe(PROBES, "prepare_explainer_math/geometry_setup")
 
 
 def carrier_font_css(source: str) -> str:
@@ -701,70 +512,10 @@ def carrier_font_css(source: str) -> str:
     raise ValueError("no shipped prose face for the carrier-metrics control")
 
 
-_GEOMETRY_SNAPSHOT = dedent("""
-    () => globalThis.__squaresGeometryBoxes.filter(box => box.isConnected).map(box => {
-      const rect = box.getBoundingClientRect(), style = getComputedStyle(box);
-      const base = box.firstElementChild, baseStyle = getComputedStyle(base);
-      return {key: Number(box.dataset.squaresGeometryKey),
-        group: Number(box.dataset.squaresGeometryGroup), x: rect.x, y: rect.y,
-        width: rect.width, height: rect.height,
-        baseline: rect.bottom + parseFloat(style.verticalAlign),
-        intrinsic_width: base.getBoundingClientRect().width,
-        text: base.textContent, font_size: parseFloat(baseStyle.fontSize),
-        text_rendering: baseStyle.textRendering,
-        native_linear_metrics:
-          document.documentElement.dataset.squaresNativeMathMetrics === 'true',
-        hidden: style.visibility === 'hidden'};
-    })
-""")
+_GEOMETRY_SNAPSHOT = probe(PROBES, "prepare_explainer_math/geometry_snapshot")
 
 
-_MATH_COVERAGE = dedent("""
-    () => {
-      const root = document.documentElement.dataset;
-      const preference = (root.kpressFontSet === 'system' ? 'system' : 'custom') + '-'
-        + (root.kpressProseFont === 'sans' ? 'sans' : 'serif');
-      const parents = new Set([...document.querySelectorAll('.squares-math-variant')]
-        .map(node => node.parentElement));
-      const variant_errors = [];
-      for (const parent of parents) {
-        const displayed = [...parent.querySelectorAll(':scope > .squares-math-variant')]
-          .filter(node => getComputedStyle(node).display !== 'none');
-        if (displayed.length !== 1 || !displayed[0].dataset.squaresMathContexts
-            ?.split(/\\s+/).includes(preference)) {
-          variant_errors.push(parent.dataset.kpressMathSource || parent.id);
-        }
-      }
-      const ids = new Set(), duplicate_ids = [];
-      for (const node of document.querySelectorAll('[id]')) {
-        if (ids.has(node.id)) duplicate_ids.push(node.id);
-        ids.add(node.id);
-      }
-      const targets = [...document.querySelectorAll('[data-kpress-math-source]')]
-        .filter(node => node.getClientRects().length);
-      const formulas = [...new Set(targets.flatMap(node =>
-        [...node.querySelectorAll('.katex-html')].filter(formula =>
-          formula.getClientRects().length)))];
-      const missing = targets.filter(node => !formulas.some(formula => node.contains(formula)))
-        .map(node => node.dataset.kpressMathSource);
-      const unreserved = [];
-      let bases = 0;
-      for (const formula of formulas) {
-        const parts = [...formula.querySelectorAll('.base')];
-        if (!parts.length) missing.push(formula.textContent);
-        for (const base of parts) {
-          bases++;
-          const box = base.parentElement;
-          if (!box.classList.contains('squares-math-box') || box.parentElement !== formula) {
-            unreserved.push(formula.closest('[data-kpress-math-source]')
-              ?.dataset.kpressMathSource || formula.textContent);
-          }
-        }
-      }
-      return {targets: targets.length, formulas: formulas.length, bases, missing, unreserved,
-        variant_errors, duplicate_ids};
-    }
-""")
+_MATH_COVERAGE = probe(PROBES, "prepare_explainer_math/math_coverage")
 
 
 def coverage_findings(coverage: MathCoverage) -> list[str]:
@@ -783,232 +534,24 @@ def coverage_findings(coverage: MathCoverage) -> list[str]:
     return findings
 
 
-_GEOMETRY_EARLY_READY = dedent("""
-    async () => {
-      const result = [];
-      const familyName = name => name.trim().replace(/^["']|["']$/g, '');
-      for (const box of globalThis.__squaresGeometryBoxes) {
-        if (getComputedStyle(box).visibility === 'hidden') continue;
-        const requests = new Map();
-        const walker = document.createTreeWalker(box, NodeFilter.SHOW_TEXT);
-        for (let text = walker.nextNode(); text; text = walker.nextNode()) {
-          if (!text.textContent || !text.parentElement) continue;
-          const style = getComputedStyle(text.parentElement);
-          const spec = `${style.fontStyle} ${style.fontWeight} `
-            + `${style.fontSize} ${style.fontFamily}`;
-          const request = requests.get(spec) || {text: '',
-            families: style.fontFamily.split(',').map(familyName)};
-          request.text += text.textContent;
-          requests.set(spec, request);
-        }
-        const evidence = [];
-        for (const [spec, request] of requests) {
-          const {text, families} = request;
-          const check = document.fonts.check(spec, text);
-          const declared = [...document.fonts]
-            .filter(face => families.includes(familyName(face.family)))
-            .map(face => ({family: face.family, status: face.status,
-              style: face.style, weight: face.weight, unicode_range: face.unicodeRange}));
-          let faces = [], timer;
-          if (check) {
-            // A reported-ready glyph must resolve to an actually loaded declared
-            // face, without releasing any transfer held by the geometry probe.
-            try {
-              faces = await Promise.race([
-                document.fonts.load(spec, text),
-                new Promise(resolve => { timer = setTimeout(() => resolve([]), 500); })
-              ]);
-            } finally { clearTimeout(timer); }
-          }
-          evidence.push({spec, text, check, declared_faces: declared,
-            faces: faces.map(face => ({family: face.family, status: face.status}))});
-        }
-        result.push({key: Number(box.dataset.squaresGeometryKey),
-          source: box.closest('[data-kpress-math-source]')?.dataset.kpressMathSource || '',
-          requests: evidence});
-      }
-      return result;
-    }
-""")
+_GEOMETRY_EARLY_READY = probe(PROBES, "prepare_explainer_math/geometry_early_ready")
 
 
-_GEOMETRY_FONT_TRACE = dedent("""
-    (() => {
-      const trace = globalThis.__squaresGeometryFontTrace = {
-        time_origin_ms: performance.timeOrigin, first_math_request_ms: null,
-        before_snapshot_complete: false, root_watchdog_paused: false,
-        queued_calls: 0, rejections: []
-      };
-      const waiting = [];
-      let released = false;
-      // This control delays entry into kpressMathText while it constructs the
-      // altered before-state. Pause the independent root fallback or that test
-      // setup can expose dynamic prepared formulas before the real runtime gets
-      // the synchronous call that hides them. Watchdog expiry has its own control.
-      let rootWatchdog;
-      Object.defineProperty(globalThis, 'kpressMathPendingTimer', {
-        configurable: true,
-        get() { return rootWatchdog; },
-        set(timer) {
-          rootWatchdog = timer;
-          clearTimeout(timer);
-          trace.root_watchdog_paused = true;
-        }
-      });
-      globalThis.__squaresMarkGeometryBeforeSnapshotComplete = () => {
-        trace.before_snapshot_complete = true;
-      };
-      globalThis.__squaresReleaseGeometryFontGate = () => {
-        if (!trace.before_snapshot_complete) {
-          throw new Error('geometry font gate released before the before snapshot');
-        }
-        if (released) return;
-        released = true;
-        for (const invoke of waiting.splice(0)) invoke();
-      };
-      const invoke = (original, receiver, args) => {
-        const start = performance.now();
-        trace.first_math_request_ms ??= start;
-        let result;
-        try {
-          result = original.apply(receiver, args);
-        } catch (error) {
-          trace.rejections.push({source: String(args[0]),
-            elapsed_ms: performance.now() - start, reason: String(error)});
-          throw error;
-        }
-        Promise.resolve(result).then(undefined, error => {
-          trace.rejections.push({source: String(args[0]),
-            elapsed_ms: performance.now() - start, reason: String(error)});
-        });
-        return result;
-      };
-      let runtime;
-      Object.defineProperty(globalThis, 'kpressMathText', {
-        configurable: true,
-        get() { return runtime; },
-        set(api) {
-          runtime = api;
-          for (const name of ['render', 'hydrate']) {
-            const original = api[name];
-            api[name] = function(...args) {
-              const receiver = this;
-              if (released) return invoke(original, receiver, args);
-              return new Promise((resolve, reject) => {
-                trace.queued_calls++;
-                waiting.push(() => {
-                  try {
-                    Promise.resolve(invoke(original, receiver, args)).then(resolve, reject);
-                  } catch (error) {
-                    reject(error);
-                  }
-                });
-              });
-            };
-          }
-        }
-      });
-    })();
-""")
+#: Installed in the head: holds the math runtime's calls until the before snapshot.
+_GEOMETRY_FONT_TRACE = applied(probe(PROBES, "prepare_explainer_math/geometry_font_trace"))
 
 
-_MATH_VISIBILITY_STATE = dedent("""
-    () => {
-      const active = __ACTIVE__;
-      const maths = [...document.querySelectorAll('.katex,.squares-math-box')].filter(active)
-        .filter(node => node.getClientRects().length);
-      const hidden = maths.filter(node => getComputedStyle(node).visibility === 'hidden');
-      return {at_ms: performance.now(), root: {...document.documentElement.dataset},
-        queued: document.querySelectorAll('[data-squares-math-queued]').length,
-        pending: document.querySelectorAll('[data-kpress-math-pending]').length,
-        hidden: hidden.length,
-        fonts: [...document.fonts].map(face => ({family: face.family,
-          weight: face.weight, style: face.style, status: face.status})),
-        samples: hidden.slice(0, 3).map(math => {
-          const chain = [];
-          for (let node = math; node && node !== document.body; node = node.parentElement) {
-            const style = getComputedStyle(node);
-            chain.push({classes: node.className, style: node.getAttribute('style'),
-              data: {...node.dataset}, visibility: style.visibility, family: style.fontFamily});
-          }
-          return {text: math.textContent.slice(0, 100), chain};
-        })};
-    }
-""").replace("__ACTIVE__", ACTIVE_MATH_VARIANT)
+_MATH_VISIBILITY_STATE = probe(PROBES, "prepare_explainer_math/math_visibility_state")
 
 
-_QUEUE_WATCHDOG_HOLD = dedent("""
-    (() => {
-      let runtime;
-      const posted = [];
-      globalThis.__squaresQueueControl = {
-        get count() { return posted.length; },
-        release() { for (const post of posted.splice(0)) post(); }
-      };
-      // Delay the public producer before its first static job. The host must
-      // protect every queued wrapper before handing any work to the scheduler.
-      Object.defineProperty(globalThis, 'squaresMath', {
-        configurable: true,
-        get() { return runtime; },
-        set(api) {
-          runtime = api;
-          const batch = api.batch;
-          api.batch = function(jobs) {
-            return new Promise((resolve, reject) => {
-              posted.push(() => Promise.resolve(batch.call(this, jobs)).then(resolve, reject));
-            });
-          };
-        }
-      });
-    })();
-""")
+#: Installed in the head: holds the host's batches until released.
+_QUEUE_WATCHDOG_HOLD = applied(probe(PROBES, "prepare_explainer_math/queue_watchdog_hold"))
 
-_QUEUE_WATCHDOG_OBSERVE = (
-    dedent("""
-    async broken => {
-      // The real head watchdog has expired while initial work and font
-      // transfers remain held. Its fallback must not expose queued math.
-      if (broken) for (const node of document.querySelectorAll('[data-squares-math-queued]')) {
-        delete node.dataset.squaresMathQueued;
-      }
-      const active = __ACTIVE__;
-      const exposed = __EXPOSED__;
-      const waiting = [...document.querySelectorAll('.tex, .tex-d, .kpress-math')]
-        .filter(node => {
-          const box = node.classList.contains('kpress-math')
-            ? node.querySelector('.kpress-math-render') : node;
-          return box && !box.dataset.done && node.getClientRects().length
-            && !box.matches('[data-kpress-math-pending]')
-            && !box.querySelector('[data-kpress-math-pending]');
-        });
-      globalThis.__squaresQueuedControlNodes = waiting;
-      const visible = new Set();
-      const end = performance.now() + __OBSERVATION_MS__;
-      let frames = 0;
-      do {
-        await new Promise(done => requestAnimationFrame(done));
-        frames++;
-        for (const node of waiting) {
-          const formulas = [...node.querySelectorAll('.katex,.kpress-math-semantic')]
-            .filter(active);
-          if (formulas.some(exposed)) visible.add(node);
-        }
-      } while (performance.now() < end);
-      return {delayed_batches: __squaresQueueControl.count,
-        root_pending: document.documentElement.hasAttribute('data-kpress-math-pending'),
-        unsubmitted_formulas: waiting.length, observed_ms: performance.now(),
-        frames,
-        target_classes: Object.fromEntries(['tex', 'tex-d', 'kpress-math'].map(name =>
-          [name, waiting.filter(node => node.classList.contains(name)).length])),
-        exposed: [...visible].map(node =>
-          node.dataset.kpressMathSource || node.querySelector('.kpress-math-render')
-            ?.dataset.kpressMathSource || node.textContent.trim().slice(0, 100))};
-    }
-""")
-    .replace("__ACTIVE__", ACTIVE_MATH_VARIANT)
-    .replace("__EXPOSED__", EXPOSED)
-    .replace("__OBSERVATION_MS__", str(OBSERVATION_MS))
-)
+_QUEUE_WATCHDOG_OBSERVE = probe(PROBES, "prepare_explainer_math/queue_watchdog_observe")
+_MATH_NOT_PENDING = probe(PROBES, "prepare_explainer_math/math_not_pending")
+_RELEASE_QUEUE = probe(PROBES, "prepare_explainer_math/release_queue")
+_QUEUED_COUNT = probe(PROBES, "prepare_explainer_math/queued_count")
+_UNREADABLE_AFTER = probe(PROBES, "prepare_explainer_math/unreadable_after")
 
 
 class QueueObservation(TypedDict):
@@ -1094,39 +637,29 @@ async def _check_queue_watchdog_async(
             await page.emulate_media(reduced_motion="reduce", color_scheme="light")
             await page.route(f"{_FONT_URL}*", route_font)
             await page.set_content(instrumented, wait_until="domcontentloaded")
-            await page.wait_for_function(
-                "!document.documentElement.hasAttribute('data-kpress-math-pending')",
-                timeout=5000,
-            )
+            await page.wait_for_function(_MATH_NOT_PENDING, timeout=5000)
             before = cast(
-                "QueueObservation", await page.evaluate(_QUEUE_WATCHDOG_OBSERVE, break_queue)
+                "QueueObservation",
+                await page.evaluate(
+                    _QUEUE_WATCHDOG_OBSERVE,
+                    {
+                        "broken": break_queue,
+                        "math": await page.evaluate_handle(MATH_LIBRARY),
+                        "observationMs": OBSERVATION_MS,
+                    },
+                ),
             )
             held_count = len(held)
             released = True
             await release_held_fonts(held, font_data)
-            await page.evaluate("__squaresQueueControl.release()")
+            await page.evaluate(_RELEASE_QUEUE)
             await page.wait_for_selector(READY)
             await page.evaluate(SETTLED)
-            queued_remaining = cast(
-                "int",
-                await page.evaluate(
-                    "document.querySelectorAll('[data-squares-math-queued]').length"
-                ),
-            )
+            queued_remaining = cast("int", await page.evaluate(_QUEUED_COUNT))
             unreadable_after = cast(
                 "list[str]",
                 await page.evaluate(
-                    "() => { const exposed = "
-                    + EXPOSED
-                    + "; const active = "
-                    + ACTIVE_MATH_VARIANT
-                    + "; return __squaresQueuedControlNodes.filter(node => {"
-                    " const formulas = [...node.querySelectorAll("
-                    " '.katex,.kpress-math-semantic')]"
-                    " .filter(active); return formulas.length ? !formulas.some(exposed)"
-                    " : !node.textContent.trim() || !exposed(node);"
-                    " }).map(node => node.dataset.kpressMathSource"
-                    " || node.textContent.slice(0,80)); }"
+                    _UNREADABLE_AFTER, {"math": await page.evaluate_handle(MATH_LIBRARY)}
                 ),
             )
         finally:
@@ -1170,6 +703,24 @@ async def release_held_fonts(held: list[Route], font_data: dict[str, bytes]) -> 
             for route in held
         )
     )
+
+
+_CLICK = probe(PROBES, "prepare_explainer_math/click")
+_MATH_SUBMITTED = probe(PROBES, "prepare_explainer_math/math_submitted")
+_PROSE_FONTS_SETTLED = probe(PROBES, "prepare_explainer_math/prose_fonts_settled")
+_REMOVE_FIRST_RESERVATION = probe(PROBES, "prepare_explainer_math/remove_first_reservation")
+_SOURCE_IDENTITY = probe(PROBES, "prepare_explainer_math/source_identity")
+_WIDEN_FIRST_RESERVATION = probe(PROBES, "prepare_explainer_math/widen_first_reservation")
+_CARRIER_FONT_LOADED = probe(PROBES, "prepare_explainer_math/carrier_font_loaded")
+_BREAK_FIRST_RESERVATION = probe(PROBES, "prepare_explainer_math/break_first_reservation")
+_REMOVE_NODE = probe(PROBES, "prepare_explainer_math/remove_node")
+_RESTORE_FIRST_RESERVATION = probe(PROBES, "prepare_explainer_math/restore_first_reservation")
+_MARK_BEFORE_SNAPSHOT_COMPLETE = probe(
+    PROBES, "prepare_explainer_math/mark_before_snapshot_complete"
+)
+_RELEASE_GEOMETRY_FONT_GATE = probe(PROBES, "prepare_explainer_math/release_geometry_font_gate")
+_GEOMETRY_BOXES_VISIBLE = probe(PROBES, "prepare_explainer_math/geometry_boxes_visible")
+_GEOMETRY_FONT_TRACE_REPORT = probe(PROBES, "prepare_explainer_math/geometry_font_trace_report")
 
 
 def check_geometry(
@@ -1267,65 +818,25 @@ async def _check_geometry_async(
             await page.set_content(instrumented, wait_until="domcontentloaded")
             if alternate_certificate:
                 await page.locator('.cert-toggle button[aria-pressed="false"]').first.evaluate(
-                    "button => button.click()"
+                    _CLICK
                 )
             # Every queued hydration must inspect the real computed font before the
             # temporary monospace override below. Submission does not wait for the
             # font responses held here; older artifacts submitted synchronously.
-            await page.evaluate("() => globalThis.squaresMath?.submitted?.()")
-            # Reading fonts can change ordinary prose widths too. Settle those first,
-            # without waiting for the math requests deliberately held by this probe.
-            await page.evaluate(
-                dedent("""
-                async () => {
-                  await Promise.all([...document.fonts].filter(face =>
-                    !/^(?:["']?KaTeX_|["']?KPress Math Text)/.test(face.family)
-                  ).map(face => face.load()));
-                  await new Promise(done => requestAnimationFrame(() =>
-                    requestAnimationFrame(done)));
-                }
-            """)
-            )
+            await page.evaluate(_MATH_SUBMITTED)
+            await page.evaluate(_PROSE_FONTS_SETTLED)
             if missing_reservation:
-                # Remove a complete reservation before discovery. A checker that
-                # measures only surviving boxes would silently accept this subset.
-                await page.evaluate(
-                    "const box = [...document.querySelectorAll('.squares-math-box')]"
-                    ".find(node => node.getBoundingClientRect().width > 0);"
-                    "const base = box.firstElementChild; base.style.position = '';"
-                    "box.replaceWith(base)"
-                )
+                await page.evaluate(_REMOVE_FIRST_RESERVATION)
             coverage_before = cast("MathCoverage", await page.evaluate(_MATH_COVERAGE))
             await page.evaluate(_GEOMETRY_SETUP)
-            source_identity = cast(
-                "PageIdentity",
-                await page.evaluate(
-                    dedent("""
-                    () => ({title: document.title,
-                      publication_date: document.querySelector(
-                        '.publication-date')?.textContent || null,
-                      revision_url: document.querySelector(
-                        'a[href*="github.com/jlevy/squares/blob/"]')?.href || null})
-                """)
-                ),
-            )
+            source_identity = cast("PageIdentity", await page.evaluate(_SOURCE_IDENTITY))
             early_visible = cast(
                 "list[ReadyMathBox]", await page.evaluate(_GEOMETRY_EARLY_READY)
             )
             if wrong_reservation:
-                await page.evaluate(
-                    "const box = globalThis.__squaresGeometryBoxes[0]; "
-                    "box.style.width = (box.getBoundingClientRect().width + 12) + 'px'"
-                )
+                await page.evaluate(_WIDEN_FIRST_RESERVATION)
             carrier_style = await page.add_style_tag(content=carrier_font_css(source))
-            await page.evaluate(
-                """async () => {
-                  const faces = await document.fonts.load('16px "Squares Carrier Control"');
-                  if (faces.length !== 1 || faces[0].status !== 'loaded') {
-                    throw new Error('the carrier-metrics control did not load');
-                  }
-                }"""
-            )
+            await page.evaluate(_CARRIER_FONT_LOADED)
             substitution = await page.add_style_tag(
                 content=(
                     '.katex, .katex-html { font-family: "Squares Carrier Control" '
@@ -1335,35 +846,17 @@ async def _check_geometry_async(
                 )
             )
             if break_reservation:
-                await page.evaluate(
-                    dedent("""
-                    () => {
-                      const box = globalThis.__squaresGeometryBoxes[0];
-                      globalThis.__brokenGeometry = [box, box.style.cssText,
-                        box.firstElementChild.style.cssText];
-                      box.style.width = 'auto';
-                      box.firstElementChild.style.position = 'relative';
-                    }
-                """)
-                )
+                await page.evaluate(_BREAK_FIRST_RESERVATION)
             before = cast("list[GeometryBox]", await page.evaluate(_GEOMETRY_SNAPSHOT))
-            await substitution.evaluate("node => node.remove()")
-            await carrier_style.evaluate("node => node.remove()")
+            await substitution.evaluate(_REMOVE_NODE)
+            await carrier_style.evaluate(_REMOVE_NODE)
             if break_reservation:
-                await page.evaluate(
-                    dedent("""
-                    () => {
-                      const [box, style, childStyle] = globalThis.__brokenGeometry;
-                      box.style.cssText = style;
-                      box.firstElementChild.style.cssText = childStyle;
-                    }
-                """)
-                )
+                await page.evaluate(_RESTORE_FIRST_RESERVATION)
             # The trace gate keeps KPress's production timeout clock stopped while
             # this probe constructs and measures its deliberately altered before
             # state. Start the real runtime only after those test styles are gone.
-            await page.evaluate("__squaresMarkGeometryBeforeSnapshotComplete()")
-            await page.evaluate("__squaresReleaseGeometryFontGate()")
+            await page.evaluate(_MARK_BEFORE_SNAPSHOT_COMPLETE)
+            await page.evaluate(_RELEASE_GEOMETRY_FONT_GATE)
             await asyncio.wait_for(first_held_request.wait(), timeout=5)
             held_count = len(held)
             released = True
@@ -1377,18 +870,17 @@ async def _check_geometry_async(
             # Keep a failing after-state in the raw report; hidden boxes still
             # fail the unchanged geometry predicate below.
             with suppress(PlaywrightTimeoutError):
-                await page.wait_for_function(
-                    "__squaresGeometryBoxes.filter(box => box.isConnected).every("
-                    "box => getComputedStyle(box).visibility !== 'hidden')",
-                    timeout=5000,
-                )
+                await page.wait_for_function(_GEOMETRY_BOXES_VISIBLE, timeout=5000)
             after = cast("list[GeometryBox]", await page.evaluate(_GEOMETRY_SNAPSHOT))
             visibility_after = cast(
-                "dict[str, object]", await page.evaluate(_MATH_VISIBILITY_STATE)
+                "dict[str, object]",
+                await page.evaluate(
+                    _MATH_VISIBILITY_STATE, {"math": await page.evaluate_handle(MATH_LIBRARY)}
+                ),
             )
             coverage_after = cast("MathCoverage", await page.evaluate(_MATH_COVERAGE))
             font_trace = cast(
-                "FontRequestTrace", await page.evaluate("__squaresGeometryFontTrace")
+                "FontRequestTrace", await page.evaluate(_GEOMETRY_FONT_TRACE_REPORT)
             )
         finally:
             await browser.close()
@@ -1474,33 +966,18 @@ class HostMathReport(TypedDict):
     findings: list[str]
 
 
-_HEAT_DRAW_PROBE = dedent("""
-    (() => {
-      const draw = CanvasRenderingContext2D.prototype.drawImage;
-      globalThis.__squaresHeatDraws = [];
-      CanvasRenderingContext2D.prototype.drawImage = function(...args) {
-        if (this.canvas.id.startsWith('prove-')) __squaresHeatDraws.push(this.canvas.id);
-        return draw.apply(this, args);
-      };
-    })();
-""")
+#: Installed in the head: records the heat-map canvases drawn into.
+_HEAT_DRAW_PROBE = applied(probe(PROBES, "prepare_explainer_math/heat_draws"))
 
-_REQUIRED_FONT_FAILURE = dedent("""
-    (() => {
-      const fonts = Object.getPrototypeOf(document.fonts);
-      const check = fonts.check, load = fonts.load;
-      const required = spec => /KPress Math Text|KaTeX_/.test(spec);
-      globalThis.__squaresRejectedFonts = 0;
-      fonts.check = function(spec, text) {
-        return required(spec) ? false : check.call(this, spec, text);
-      };
-      fonts.load = function(spec, text) {
-        if (!required(spec)) return load.call(this, spec, text);
-        __squaresRejectedFonts++;
-        return Promise.reject(new Error('required math-font failure control'));
-      };
-    })();
-""")
+#: Installed in the head: every required math face fails to load.
+_REQUIRED_FONT_FAILURE = applied(probe(PROBES, "prepare_explainer_math/required_font_failure"))
+_CLEAR_HEAT_DRAWS = probe(PROBES, "prepare_explainer_math/clear_heat_draws")
+_DISPATCH_BEFOREPRINT = probe(PROBES, "prepare_explainer_math/dispatch_beforeprint")
+_VISIBLE_HEAT_CANVASES = probe(PROBES, "prepare_explainer_math/visible_heat_canvases")
+_HEAT_DRAWS_REPORT = probe(PROBES, "prepare_explainer_math/heat_draws_report")
+_REJECTED_FONTS = probe(PROBES, "prepare_explainer_math/rejected_fonts")
+_NATIVE_FALLBACKS = probe(PROBES, "prepare_explainer_math/native_fallbacks")
+_PREPARATION_METRICS = probe(PROBES, "prepare_explainer_math/preparation_metrics")
 
 
 def _head_script(source: str, script: str) -> str:
@@ -1530,40 +1007,19 @@ def check_host_math(source: str, *, browser_name: str = "chromium") -> HostMathR
             page.evaluate(SETTLED)
             # Exclude any screen task already queued before the media change. The
             # explicit print event must repaint the canvas CSS actually puts on paper.
-            page.evaluate("__squaresHeatDraws.length = 0")
-            page.evaluate("dispatchEvent(new Event('beforeprint'))")
+            page.evaluate(_CLEAR_HEAT_DRAWS)
+            page.evaluate(_DISPATCH_BEFOREPRINT)
             page.evaluate(SETTLED)
-            visible = cast(
-                "list[str]",
-                page.evaluate(
-                    "[...document.querySelectorAll('canvas[id^=prove-]')]"
-                    ".filter(node => node.getClientRects().length).map(node => node.id)"
-                ),
-            )
-            drawn = cast("list[str]", page.evaluate("__squaresHeatDraws"))
+            visible = cast("list[str]", page.evaluate(_VISIBLE_HEAT_CANVASES))
+            drawn = cast("list[str]", page.evaluate(_HEAT_DRAWS_REPORT))
             if not visible or set(visible) != set(drawn):
                 findings.append("print heat map does not match the CSS-visible certificate")
             page.close()
             page = browser.new_page()
             page.set_content(_head_script(source, _REQUIRED_FONT_FAILURE), wait_until="load")
             page.wait_for_selector(READY)
-            rejected = cast("int", page.evaluate("__squaresRejectedFonts"))
-            fallbacks = cast(
-                "list[bool]",
-                page.evaluate(
-                    dedent("""
-                    [...document.querySelectorAll('.kpress-math')].slice(0, 3).map(node => {
-                      const semantic = node.querySelector('.kpress-math-semantic');
-                      if (!semantic) return false;
-                      const style = getComputedStyle(semantic);
-                      const box = semantic.getBoundingClientRect();
-                      return !node.dataset.kpressMathRendered && !node.querySelector('.katex')
-                        && style.clipPath === 'none' && style.visibility !== 'hidden'
-                        && box.width > 1 && box.height > 1;
-                    })
-                """)
-                ),
-            )
+            rejected = cast("int", page.evaluate(_REJECTED_FONTS))
+            fallbacks = cast("list[bool]", page.evaluate(_NATIVE_FALLBACKS))
             if not rejected or len(fallbacks) != 3 or not all(fallbacks):
                 findings.append("required-font failure did not restore native semantic MathML")
         finally:
@@ -1596,29 +1052,8 @@ def check_preparation_metrics(*, browser_name: str = "chromium") -> dict[str, ob
             result = cast(
                 "dict[str, object]",
                 page.evaluate(
-                    dedent("""
-                    () => {
-                      const measure = __LINEAR_BASE_GEOMETRY__;
-                      const base = document.querySelector('#base');
-                      const positive = measure(base);
-                      const controls = {};
-                      for (const [name, property, value] of [
-                        ['hinted_metrics', 'textRendering', 'auto'],
-                        ['nonlinear_scaling', 'paddingLeft', '8px']
-                      ]) {
-                        const old = base.style[property];
-                        base.style[property] = value;
-                        try {
-                          controls[name] = {measurement: measure(base), error: null};
-                        } catch (error) {
-                          controls[name] = {error: String(error)};
-                        } finally {
-                          base.style[property] = old;
-                        }
-                      }
-                      return {positive, controls};
-                    }
-                    """).replace("__LINEAR_BASE_GEOMETRY__", _LINEAR_BASE_GEOMETRY)
+                    _PREPARATION_METRICS,
+                    {"measureMath": page.evaluate_handle(_MEASURE_MATH_REFERENCE)},
                 ),
             )
             return {"browser": browser_name, "browser_version": browser.version, **result}

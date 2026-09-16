@@ -18,10 +18,11 @@ So the three are exercised directly:
   font in at all -- because the second is the one that would otherwise look like a pass.
   The scan's two ways of reading the wrong thing are here beside them: a face the file
   only names, and an object number that also occurs inside a stream.
-- the probe's generated-content rule, run as the shipped JavaScript under node against
-  the `content` values a browser computes. Type on this page comes from pseudo-elements
-  as well as from text nodes -- `li.kpress-footnote-item::before` numbers the footnotes
-  -- and this is the rule that decides which of those count as a request.
+- the probe's generated-content rule, run as the shipped probe under node against the
+  `content` values a browser computes (`tests/node/sans_instances/generated-content.mjs`).
+  Type on this page comes from pseudo-elements as well as from text nodes --
+  `li.kpress-footnote-item::before` numbers the footnotes -- and this is the rule that
+  decides which of those count as a request.
 
 Nothing here launches a browser or reads a real font: the fixture writes stand-in files
 of a few bytes, and the whole file runs in milliseconds.
@@ -52,7 +53,6 @@ from devtools.render_explainer_pdf import (
     shipped,
 )
 from devtools.sans_instances import (
-    _PROBE,  # pyright: ignore[reportPrivateUsage]
     PRINT_FACES,
     PSEUDO_ELEMENTS,
     Declared,
@@ -611,24 +611,29 @@ def test_a_weight_no_rule_sets_is_reported_as_inherited_or_unset() -> None:
     assert _attribution({}) == "unset (the initial 400)"
 
 
-def probe_function(name: str) -> str:
-    """One helper's shipped source, so what runs here is what runs in the browser."""
-    source = re.search(rf"  function {name}\([^)]*\) \{{.*?\n  \}}", _PROBE, re.DOTALL)
-    assert source is not None, f"{name} is no longer a helper of its own in the probe"
-    return source.group() + "\n"
+#: Runs the shipped request probe over one element whose pseudo-elements compute a given
+#: `content`, and reports what it recorded and which pseudo-elements it read.
+GENERATED_CONTENT = (
+    Path(__file__).resolve().parent / "node" / "sans_instances" / "generated-content.mjs"
+)
+
+
+def generated_content(content: str, pseudos: tuple[str, ...]) -> dict[str, list[object]]:
+    """The probe's requests and reads for one element, under node, without browser setup."""
+    argument = json.dumps({"content": content, "pseudos": list(pseudos)})
+    completed = node(
+        [str(GENERATED_CONTENT), argument],
+        return_completed_process=True,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    return json.loads(completed.stdout)
 
 
 def draws(content: str) -> bool:
-    """Run the shipped generated-content rule under node, without browser setup."""
-    script = (
-        probe_function("draws")
-        + f"\nconsole.log(JSON.stringify(draws({json.dumps(content)})));\n"
-    )
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
-    return bool(json.loads(completed.stdout))
+    """Whether the shipped probe records a request for generated content computing this."""
+    return bool(generated_content(content, ("::before",))["rows"])
 
 
 #: What `getComputedStyle(el, pseudo).content` returns, and whether it puts type on the
@@ -666,4 +671,4 @@ def test_only_generated_content_that_sets_type_counts_as_a_request(
 def test_the_probe_reads_every_pseudo_element_that_can_carry_type() -> None:
     """The three the page can put a face on, handed in rather than spelled in the JS."""
     assert PSEUDO_ELEMENTS == ("::before", "::after", "::marker")
-    assert "getComputedStyle(el, pseudo)" in _PROBE
+    assert generated_content("none", PSEUDO_ELEMENTS)["read"] == list(PSEUDO_ELEMENTS)

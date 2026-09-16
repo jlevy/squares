@@ -1427,8 +1427,8 @@ controls:
 #
 # The guard and the probe check are proved live in `tests/test_no_embedded_js_contract.py`
 # against planted modules. These three corrupt the real tree instead: a JavaScript string
-# put back into a tool that was extracted, an allowlist count lowered below what its file
-# holds, and a probe name that no longer matches its file.
+# put back into a tool that was extracted, an allowlist entry kept for a tool that no longer
+# holds any, and a probe name that no longer matches its file.
 - name: embedded JavaScript - a script string back in an extracted tool
   file: devtools/check_published_site.py
   replace:
@@ -1437,13 +1437,13 @@ controls:
   run: python3 -m devtools.check_no_embedded_js
   expect: "packing/devtools/check_published_site.py: 1 site(s) of JavaScript in Python"
 
-- name: embedded JavaScript - an allowlist count below the file's sites
+- name: embedded JavaScript - an allowlist entry for a tool with none left
   file: devtools/embedded-javascript.yaml
   replace:
-    - "  - path: packing/devtools/check_print_layout.py\n    sites: 37\n"
-    - "  - path: packing/devtools/check_print_layout.py\n    sites: 36\n"
+    - "\nallowlist:\n"
+    - "\nallowlist:\n  - path: packing/devtools/check_print_layout.py\n    sites: 37\n    bead: think-3pox\n"
   run: python3 -m devtools.check_no_embedded_js
-  expect: "check_print_layout.py: 37 site(s), the allowlist records 36"
+  expect: "check_print_layout.py: no JavaScript left, the allowlist still records 37"
 
 - name: probe files - a probe name with no file
   file: devtools/check_published_site.py

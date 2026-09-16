@@ -21,6 +21,16 @@ from devtools.render_explainer_pdf import EXPECTED_PAGE_COUNT
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
 from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
 
+#: A page's text linking into the repository four ways: from markup, from Markdown, from plain
+#: text, and from inside a script, which the check must not read. `{{REPO_URL}}` and `{{SHA}}`
+#: are filled in by the test; the script makes it a page, so it is a fixture and not a string.
+REPOSITORY_LINKS = (
+    Path(__file__).resolve().parent
+    / "fixtures"
+    / "check_published_site"
+    / "repository-links.html"
+)
+
 
 def workbench_page(commit: str, *, home: str = "../") -> bytes:
     return (
@@ -36,10 +46,9 @@ def source_receipt(page: bytes) -> bytes:
 def test_repository_links_are_read_from_markup_and_markdown_but_not_from_scripts() -> None:
     sha = "0123456789abcdef0123456789abcdef01234567"
     text = (
-        f'<a href="{REPO_URL}/blob/{sha}/packing/a.py">a</a>\n'
-        f"[atlas]({REPO_URL}/tree/{sha}/packing/atlas/known-best/)\n"
-        f'<script>const u = "{REPO_URL}/blob/main/packing/hidden.py";</script>\n'
-        f"plain {REPO_URL}/blob/main/README.md text\n"
+        REPOSITORY_LINKS.read_text(encoding="utf-8")
+        .replace("{{REPO_URL}}", REPO_URL)
+        .replace("{{SHA}}", sha)
     )
     assert repository_links(text) == {
         ("blob", sha, "packing/a.py"),

@@ -1150,7 +1150,24 @@ html[data-kpress-math-pending]
 <script>
 const finishMathBootstrap = squaresMath.reserve();
 </script>
-<script>{{KPRESS_CLIENT_JS}}</script>
+<script>/* kpress client behaviors, flattened from {{KPRESS_CLIENT_MODULES}} */
+(() => {
+"use strict";
+{{KPRESS_CLIENT_JS}}
+/* This page wants footnote previews and nothing else. kpress's tooltips module
+   registers two behaviors at import — hover previews for internal links, and
+   footnote previews — and the runtime binds both once the document is ready,
+   which here would hang a preview reading "1" off every footnote's back-arrow.
+   The link behavior is overridden with a no-op bind before that pass runs; the
+   footnote one is left alone, and the page boots it explicitly as well. The
+   copy button is kpress's own too: its behavior binds itself at the runtime's
+   ready pass, and the boot below runs it earlier so the control is there before
+   the reader can reach the block. */
+behaviors.override("tooltip", () => undefined);
+window.kpressInitTooltips = initKpressTooltips;
+window.kpressInitCodeCopy = initKpressCodeCopy;
+})();
+</script>
 <script>
 /* ---------- shared: certificate picker and queued static math ---------- */
 (() => {
@@ -1269,7 +1286,8 @@ const finishMathBootstrap = squaresMath.reserve();
 <script>
 (() => {
 /* Certificate {{ID}} */
-{{ATOMS}}
+const ATOM_Q=[{{ATOMS}}];
+const ATOMS=ATOM_Q.map(([xn,xd,yn,yd,w])=>[xn/xd,yn/yd,w]);
 const SCALE = {{SCALE_JS}}, L = {{L_JS}}, B = {{B_JS}}, HALF = B / 2;
 const LIMIT_N = {{LIMIT_NUM}}, LIMIT_D = {{LIMIT_DEN}}, LIMIT = LIMIT_N / LIMIT_D, STEPS = {{N_DIRECTIONS_MAX}};
 

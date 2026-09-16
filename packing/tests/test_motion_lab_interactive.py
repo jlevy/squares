@@ -8,6 +8,7 @@ import math
 import random
 import re
 import threading
+from pathlib import Path
 from typing import cast
 
 import pytest
@@ -25,61 +26,28 @@ from sqpack.motion_lab.snap import (
 )
 from sqpack.render.style import SQUARE_FILL_PALETTE
 
+#: The Node scripts that run the live lab's browser model against stand-in states.
+NODE = Path(__file__).resolve().parent / "node" / "motion_lab_interactive"
 
-def test_free_quench_browser_model_uses_one_reducer_for_snap_rotate_and_release() -> None:
-    probe = (
-        asset_text("free-quench-model.js")
-        + r"""
-const editor = globalThis.MotionLabEditor;
-const baseline = {
-  side: 3,
-  squares: [
-    {square_id: 0, x: 0.5, y: 1.5, theta: 0},
-    {square_id: 1, x: 1.51, y: 1.5, theta: 0},
-  ],
-  groups: [[0], [1]],
-  snapping_enabled: true,
-};
-const snapped = editor.applyBestSnap(baseline, 1, 0.05);
-const before = Math.hypot(
-  snapped.state.squares[0].x - snapped.state.squares[1].x,
-  snapped.state.squares[0].y - snapped.state.squares[1].y,
-);
-const rotated = editor.rotateGroup(snapped.state, 1, Math.PI / 3);
-const after = Math.hypot(
-  rotated.squares[0].x - rotated.squares[1].x,
-  rotated.squares[0].y - rotated.squares[1].y,
-);
-const request = editor.releaseQuenchRequest(rotated, 3, 4);
-const longEvents = Array.from({length: 2651}, (_, index) => {
-  let phase = index % 2 ? "fixed-angle-lp" : "angular-probe";
-  if (index === 0) phase = "setup";
-  if (index === 177) phase = "angle-accepted";
-  if (index === 2650) phase = "stop";
-  return {phase};
-});
-const playback = editor.selectPlaybackIndices(longEvents, 160);
-const windowed = editor.timelineWindow(longEvents.length, 1300, 20);
-process.stdout.write(JSON.stringify({
-  snapped,
-  before,
-  after,
-  request,
-  fixed: editor.phasePresentation({phase: "fixed-angle-lp"}),
-  probe: editor.phasePresentation({phase: "angular-probe", outcome: "rejected"}),
-  playback,
-  windowed,
-}));
-"""
-    )
+
+def _run_model(script: str, **inputs: object) -> str:
+    """Run a Node script on `free-quench-model.js` as the page inlines it, and `inputs`.
+
+    Returns what the script printed, once it has exited cleanly.
+    """
     completed = node(
-        ["-e", probe],
+        [str(NODE / script)],
         return_completed_process=True,
+        input=json.dumps({"model": asset_text("free-quench-model.js"), **inputs}),
         capture_output=True,
         text=True,
     )
     assert completed.returncode == 0, completed.stderr
-    result = cast(dict[str, object], json.loads(completed.stdout))
+    return cast(str, completed.stdout)
+
+
+def test_free_quench_browser_model_uses_one_reducer_for_snap_rotate_and_release() -> None:
+    result = cast(dict[str, object], json.loads(_run_model("free-quench-reducer.mjs")))
     snapped = cast(dict[str, object], result["snapped"])
     state = cast(dict[str, object], snapped["state"])
     assert state["groups"] == [[0, 1]]
@@ -250,29 +218,9 @@ def test_browser_reducer_matches_its_python_reference_on_generated_states() -> N
             }
         )
 
-    probe = (
-        asset_text("free-quench-model.js")
-        + r"""
-const editor = globalThis.MotionLabEditor;
-process.stdout.write(JSON.stringify(JSON.parse(process.argv[1]).map((entry) => {
-  const got = editor.applyBestSnap(entry.state, entry.moving, entry.threshold);
-  return {
-    groups: got.state.groups,
-    x: got.state.squares.map((square) => square.x),
-    y: got.state.squares.map((square) => square.y),
-    target: got.result ? [got.result.target_kind, got.result.target_id] : null,
-  };
-})));
-"""
+    observed = cast(
+        list[dict[str, object]], json.loads(_run_model("snap-reference-cases.mjs", cases=cases))
     )
-    completed = node(
-        ["-e", probe, "--", json.dumps(cases)],
-        return_completed_process=True,
-        capture_output=True,
-        text=True,
-    )
-    assert completed.returncode == 0, completed.stderr
-    observed = cast(list[dict[str, object]], json.loads(completed.stdout))
 
     assert len(observed) == len(cases)
     for case, got in zip(cases, observed, strict=True):
@@ -288,29 +236,7 @@ process.stdout.write(JSON.stringify(JSON.parse(process.argv[1]).map((entry) => {
 
 
 def test_browser_reducer_mirrors_the_python_snapping_toggle() -> None:
-    probe = (
-        asset_text("free-quench-model.js")
-        + r"""
-const editor = globalThis.MotionLabEditor;
-const base = {
-  side: 3,
-  squares: [{square_id: 0, x: 0.5, y: 0.5, theta: 0}],
-  groups: [[0]],
-  snapping_enabled: true,
-};
-const off = editor.setSnapping(base, false);
-process.stdout.write(JSON.stringify({
-  off: off.snapping_enabled,
-  sourceUntouched: base.snapping_enabled,
-  back: editor.setSnapping(off, true).snapping_enabled,
-}));
-"""
-    )
-    completed = node(
-        ["-e", probe], return_completed_process=True, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
-    result = cast(dict[str, bool], json.loads(completed.stdout))
+    result = cast(dict[str, bool], json.loads(_run_model("snapping-toggle.mjs")))
 
     reference = EditorState.with_singletons(
         side=3.0, squares=(EditorSquare(square_id=0, x=0.5, y=0.5, theta=0.0),)

@@ -4,19 +4,19 @@ from __future__ import annotations
 
 import math
 from pathlib import Path
-from textwrap import dedent
 
 import pytest
 from nodejs_wheel import node
 
 from devtools import check_math_startup
 from devtools.check_math_startup import (
-    STARTUP_SCRIPT,
     JsonRecord,
     run_measurements,
     startup_findings,
     summarize,
 )
+
+NODE = Path(__file__).resolve().parent / "node" / "math_startup"
 
 
 def clean_report() -> JsonRecord:
@@ -249,62 +249,11 @@ def test_parameter_mode_is_forwarded_and_retained_in_paired_reports(
 
 
 def test_pass_through_instrumentation_keeps_native_promises_and_return_values() -> None:
-    script = dedent("""
-        const assert = require('node:assert/strict');
-        let resolveFace, resolveSet, resolveReady, resolveRender;
-        const facePromise = new Promise(resolve => { resolveFace = resolve; });
-        const setPromise = new Promise(resolve => { resolveSet = resolve; });
-        const readyPromise = new Promise(resolve => { resolveReady = resolve; });
-        const renderPromise = new Promise(resolve => { resolveRender = resolve; });
-        globalThis.FontFace = class {
-          family = 'probe'; style = 'normal'; weight = '400';
-          load() { assert.equal(this.family, 'probe'); return facePromise; }
-        };
-        globalThis.document = {fonts: new class {
-          load(value) { assert.equal(value, '16px probe'); return setPromise; }
-          addEventListener() {}
-        }, addEventListener() {}};
-        globalThis.window = globalThis;
-        globalThis.addEventListener = () => {};
-        globalThis.requestAnimationFrame = () => {};
-        globalThis.MutationObserver = class { observe() {} };
-        assert.equal(typeof FontFaceSet, 'undefined');
-    """)
-    script += STARTUP_SCRIPT
-    script += dedent("""
-        const katexResult = Symbol('katex result');
-        globalThis.katex = {render(source, target) {
-          assert.equal(source, 'x'); assert.equal(target.id, 'math'); return katexResult;
-        }};
-        globalThis.kpressMathText = {
-          ready() { return readyPromise; }, render() { return renderPromise; },
-          hydrate() { return renderPromise; }
-        };
-        const target = {id: 'math'};
-        assert.equal(new FontFace().load(), facePromise);
-        assert.equal(document.fonts.load('16px probe'), setPromise);
-        assert.equal(kpressMathText.ready(), readyPromise);
-        assert.equal(kpressMathText.render('x', target), renderPromise);
-        assert.equal(kpressMathText.hydrate('x', target), renderPromise);
-        assert.equal(katex.render('x', target), katexResult);
-        assert.equal(__mathStartup.counters.font_hooks, 2);
-        assert.equal(__mathStartup.counters.runtime_hooks, 2);
-        assert.equal(__mathStartup.counters.hydrate_hooks, 1);
-        assert.equal(__mathStartup.counters.hydrate_calls, 1);
-        assert.equal(__mathStartup.counters.katex_calls, 1);
-        assert.ok(__mathStartup.katex[0].duration_ms >= 0);
-        assert.equal(__mathStartup.fonts[0].outcome, 'pending');
-        resolveFace(); resolveSet(); resolveReady(); resolveRender();
-        Promise.resolve().then(() => {
-          assert.ok(__mathStartup.fonts.every(record => record.outcome === 'resolved'));
-          assert.equal(__mathStartup.ready[0].outcome, 'resolved');
-          assert.equal(__mathStartup.renders[0].outcome, 'resolved');
-          assert.equal(__mathStartup.hydrates[0].outcome, 'resolved');
-          assert.ok(__mathStartup.fonts.every(record => record.end_ms >= record.start_ms));
-        });
-    """)
     completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+        [str(NODE / "pass-through-instrumentation.mjs")],
+        return_completed_process=True,
+        capture_output=True,
+        text=True,
     )
     assert completed.returncode == 0, completed.stderr
 

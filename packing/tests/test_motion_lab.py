@@ -27,6 +27,9 @@ from devtools.packing_motion_studies import (
 from devtools.render_packing_motion_lab import MOTION_MODEL_JAVASCRIPT, render_motion_lab
 from sqpack.field import FieldElement
 
+#: The Node script that runs the browser model this page inlines, on the manifest.
+NODE = Path(__file__).resolve().parent / "node" / "motion_lab"
+
 
 @pytest.fixture(scope="module")
 def manifest() -> dict[str, object]:
@@ -88,31 +91,12 @@ def test_release_projection_reproduces_exact_case_functions(
 def test_embedded_javascript_model_matches_python_projection_and_controls(
     manifest: dict[str, object],
 ) -> None:
-    probe = (
-        MOTION_MODEL_JAVASCRIPT
-        + r"""
-const fs = require("fs");
-const manifest = JSON.parse(fs.readFileSync(0, "utf8"));
-const progressValues = [0, 0.5, 1];
-const result = {};
-for (const scene of manifest.scenes) {
-  const useTangent = scene.mode === "second-order-obstruction";
-  result[scene.id] = {
-    projected: progressValues.map((progress) => posesAt(scene, progress, useTangent)),
-    predictor: progressValues.map((progress) => posesAt(scene, progress, true)),
-    phases: progressValues.map((progress) => phaseAt(scene, progress)),
-    controls: sceneControlState(scene),
-    parameterValueText: progressValues.map((progress) => parameterValueText(scene, progress)),
-    stageDescriptions: progressValues.map((progress) => stageDescriptionText(scene, progress)),
-  };
-}
-process.stdout.write(JSON.stringify(result));
-"""
-    )
     completed = node(
-        ["-e", probe],
+        [str(NODE / "exact-model-projection.mjs")],
         return_completed_process=True,
-        input=json.dumps(manifest, sort_keys=True),
+        input=json.dumps(
+            {"model": MOTION_MODEL_JAVASCRIPT, "manifest": manifest}, sort_keys=True
+        ),
         capture_output=True,
         text=True,
     )

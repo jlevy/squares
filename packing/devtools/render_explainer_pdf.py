@@ -61,6 +61,8 @@ from typing import Never
 
 from strif import atomic_output_file
 
+from sqpack.probes import applied, probe
+
 ROOT = Path(__file__).resolve().parent.parent
 PAGE = ROOT / "site" / "index.html"
 OUTPUT = ROOT / "site" / "t-018-explainer.pdf"
@@ -82,221 +84,40 @@ _DATES = re.compile(rb"/(CreationDate|ModDate) \(D:[^)]{0,32}\)")
 #: separately checks that the finished print DOM contains readable math.
 READY = "html.math-ready"
 
+#: The probes this module and its importers hand the page, one file each under `probes/`.
+PROBES = Path(__file__).resolve().parent / "probes"
+
 #: Media changes and ResizeObserver callbacks can start asynchronous math renders.
 #: Let layout dispatch them, then await those renders and the faces they request.
-SETTLED = """async (observe) => {
-  observe?.('before-final-frames');
-  void document.documentElement.offsetHeight;
-  await new Promise(done => requestAnimationFrame(() => {
-    observe?.('final-frame-1');
-    requestAnimationFrame(() => { observe?.('final-frame-2'); done(); });
-  }));
-  await globalThis.squaresMath?.settled();
-  await document.fonts.ready;
-  observe?.('after-fonts');
-  await new Promise(done => requestAnimationFrame(() => {
-    observe?.('final-frame-3'); done();
-  }));
-  await globalThis.squaresMath?.settled();
-  observe?.('settled');
-}"""
+#: `probes/render_explainer_pdf/settled.js` returns the settlement function, so a probe
+#: that composes it takes `page.evaluate_handle(SETTLED_REFERENCE)` in its argument;
+#: `SETTLED` is that function applied, and evaluates as the function itself.
+SETTLED_REFERENCE = probe(PROBES, "render_explainer_pdf/settled")
+SETTLED = applied(SETTLED_REFERENCE)
 
-#: Diagnostic only: text-node ranges distinguish a moving operator baseline from its
-#: unchanged reserved box. DOM-order formula/token indices include hidden nodes, so
-#: identities do not shift merely because a print alternative becomes visible. FontFace
-#: status lists available faces; computed font-family is not proof of the selected face.
-_MATH_SNAPSHOT = r"""(phase, selected = null) => {
-  const rect = r => ({x:r.x, y:r.y, width:r.width, height:r.height});
-  const visible = element => element.checkVisibility({
-    opacityProperty:true, visibilityProperty:true});
-  const metrics = element => {
-    const style = getComputedStyle(element);
-    return {class_name:element.className, rect:rect(element.getBoundingClientRect()),
-      display:style.display, height:style.height, font_size:style.fontSize,
-      line_height:style.lineHeight, vertical_align:style.verticalAlign,
-      position:style.position, inline_style:element.style?.cssText || ''};
-  };
-  const tokens = [], prepared = [], limit = 10000;
-  let truncated = false;
-  const formulas = [...document.querySelectorAll('[data-kpress-math-prepared="true"]')];
-  outer: for (const [formula, host] of formulas.entries()) {
-    const html = host.querySelector('.katex-html');
-    if (!html || !visible(html)) continue;
-    const source = host.dataset.kpressMathSource || '';
-    prepared.push({formula, source:source.slice(0,4096), source_truncated:source.length > 4096,
-      contexts:host.dataset.squaresMathContexts || '', host:metrics(host),
-      boxes:[...html.querySelectorAll('.squares-math-box')].map(metrics),
-      bases:[...html.querySelectorAll('.base')].map(metrics),
-      struts:[...html.querySelectorAll('.strut')].map(metrics)});
-    const walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT);
-    let node, token = -1;
-    while ((node = walker.nextNode())) {
-      token++;
-      const owner = node.parentElement;
-      if (!node.textContent.trim() || !owner
-          || !visible(owner)) continue;
-      const range = document.createRange();
-      range.selectNodeContents(node);
-      const boxes = [...range.getClientRects()].filter(r => r.width > 0 && r.height > 0);
-      if (!boxes.length) continue;
-      if (tokens.length === limit) { truncated = true; break outer; }
-      const style = getComputedStyle(owner), path = [];
-      for (let element = owner; element && element !== host; element = element.parentElement) {
-        path.unshift(element.tagName.toLowerCase() + ':'
-          + ([...element.parentElement.children].indexOf(element) + 1));
-      }
-      const identity = {formula, token, path:path.join('/')};
-      if (selected !== null) selected.push({node, ...identity});
-      tokens.push({...identity,
-        text:node.textContent.slice(0,512), text_truncated:node.textContent.length > 512,
-        class_name:owner.className, element_rect:rect(owner.getBoundingClientRect()),
-        text_rects:boxes.map(rect), font_family:style.fontFamily, font_size:style.fontSize,
-        font_weight:style.fontWeight, font_style:style.fontStyle, line_height:style.lineHeight,
-        vertical_align:style.verticalAlign, position:style.position,
-        text_rendering:style.textRendering, font_kerning:style.fontKerning});
-    }
-  }
-  return {phase, time_ms:performance.now(), font_status:document.fonts.status,
-    fonts:[...document.fonts].map(face => ({family:face.family, style:face.style,
-      weight:face.weight, stretch:face.stretch, status:face.status,
-      unicode_range:face.unicodeRange})),
-    token_limit:limit, truncated, formulas:prepared, tokens};
-}"""
+#: `document.fonts.ready`, as a probe the other print and font checkers share.
+FONTS_READY = probe(PROBES, "render_explainer_pdf/fonts_ready")
 
-#: Diagnostic control and treatment use the snapshot's visible-text traversal.
-#: Both arms select and observe the same nodes after settlement; only the treatment
-#: replaces each selected Text node with a new Text node containing its exact data.
-#: Refuse a truncated selection before changing the DOM, since a partial intervention
-#: could look stable while leaving the omitted prepared text untouched.
-_PREPARED_TEXT_INTERVENTION = (
-    "(rebuild) => { const snapshot = " + _MATH_SNAPSHOT + "; "
-    "const selected = []; const before = snapshot('before-intervention', selected); "
-    "const beforeHtml = document.documentElement.outerHTML; "
-    "const identities = nodes => nodes.map(({node, formula, token, path}) => "
-    "({formula, token, path, text:node.data})); "
-    "const intervention = {requested:rebuild, applied:false, "
-    "status:'control', selected_count:selected.length, selected:identities(selected), "
-    "mutated_count:0, mutated:[]}; "
-    "if (before.truncated) { intervention.status = 'refused'; "
-    "return {snapshots:[before], intervention, "
-    "error:'prepared-text selection truncated before replacement'}; } "
-    "if (!selected.length) { intervention.status = 'no-targets'; "
-    "return {snapshots:[before], intervention, "
-    "error:'no visible prepared-text nodes selected'}; } "
-    "if (rebuild) { for (const {node, formula, token, path} of selected) { "
-    "const text = node.data; "
-    "node.parentNode.replaceChild(document.createTextNode(text), node); "
-    "intervention.mutated.push({formula, token, path, text}); } "
-    "intervention.mutated_count = intervention.mutated.length; "
-    "intervention.applied = true; intervention.status = 'applied'; } "
-    "const afterSelected = []; "
-    "const after = snapshot('after-intervention', afterSelected); "
-    "const afterIdentities = identities(afterSelected); "
-    "intervention.after_selected_count = afterSelected.length; "
-    "intervention.after_selected = afterIdentities; "
-    "intervention.html_unchanged = beforeHtml === document.documentElement.outerHTML; "
-    "const same = JSON.stringify(intervention.selected) === JSON.stringify(afterIdentities); "
-    "if (after.truncated || !same || !intervention.html_unchanged) { "
-    "intervention.status = 'verification-failed'; "
-    "return {snapshots:[before, after], intervention, "
-    "error:'prepared-text identities changed during diagnostic intervention'}; } "
-    "return {snapshots:[before, after], intervention}; }"
-)
+#: The shared math helpers, `probes/math/library.js`; `_MATH_RENDERED` uses its `exposed`.
+_MATH_LIBRARY = probe(PROBES, "math/library")
 
-_TRACED_SETTLED = (
-    "async () => { const snapshots = []; const capture = " + _MATH_SNAPSHOT + "; "
-    "await (" + SETTLED + ")(phase => snapshots.push(capture(phase))); return snapshots; }"
-)
+#: Diagnostic only: the visible prepared math at one phase, text-node ranges included
+#: (`probes/render_explainer_pdf/math_snapshot.js`, a reference probe). `_MATH_SNAPSHOT`
+#: evaluates it directly; the trace probes take a handle to it.
+_MATH_SNAPSHOT_REFERENCE = probe(PROBES, "render_explainer_pdf/math_snapshot")
+_MATH_SNAPSHOT = applied(_MATH_SNAPSHOT_REFERENCE)
 
-#: A completed render can be a recovered failure: the host replaces a failed `.tex`
-#: formula with its source and marks it ready. Repeated PDFs then agree on raw TeX.
-#: Inspect the final print DOM as well as waiting for it. Native KPress formulas may
-#: retain readable semantic MathML, provided their source box remains hidden.
-#: Successful KaTeX keeps TeX in accessibility annotations, so source-text regexes
-#: would reject valid formulas. Geometry and clipping distinguish the painted output
-#: from hidden variants and the clipped semantic copy beside successful KaTeX.
-_MATH_RENDERED = r"""() => {
-  const exposed = node => {
-    if (!node.checkVisibility({ opacityProperty: true, visibilityProperty: true })) {
-      return false;
-    }
-    let {left, right, top, bottom} = node.getBoundingClientRect();
-    const intersect = box => {
-      left = Math.max(left, box.left); right = Math.min(right, box.right);
-      top = Math.max(top, box.top); bottom = Math.min(bottom, box.bottom);
-    };
-    for (let parent = node; parent; parent = parent.parentElement) {
-      const style = getComputedStyle(parent), box = parent.getBoundingClientRect();
-      if (/^(auto|scroll)$/.test(style.overflowX) && parent.scrollWidth > parent.clientWidth) {
-        const width = right - left;
-        left = box.left; right = Math.min(box.right, left + width);
-      }
-      if (/^(auto|scroll)$/.test(style.overflowY)
-          && parent.scrollHeight > parent.clientHeight) {
-        const height = bottom - top;
-        top = box.top; bottom = Math.min(box.bottom, top + height);
-      }
-      if (/^(hidden|clip)$/.test(style.overflowX)) {
-        left = Math.max(left, box.left); right = Math.min(right, box.right);
-      }
-      if (/^(hidden|clip)$/.test(style.overflowY)) {
-        top = Math.max(top, box.top); bottom = Math.min(bottom, box.bottom);
-      }
-      const clip = (style.clip || 'auto').match(/^rect\(([^)]+)\)$/);
-      if (clip) {
-        const defaults = [0, box.width, box.height, 0];
-        const edges = clip[1].trim().split(/[,\s]+/).map((value, i) =>
-          value === 'auto' ? defaults[i] : parseFloat(value));
-        if (edges.length !== 4 || !edges.every(Number.isFinite)) return false;
-        intersect({left: box.left + edges[3], right: box.left + edges[1],
-          top: box.top + edges[0], bottom: box.top + edges[2]});
-      }
-      const path = style.clipPath || 'none';
-      if (path !== 'none') {
-        const inset = path.match(/^inset\(([^)]+)\)$/);
-        if (!inset) return false;
-        const values = inset[1].split(/\s+round\s+/)[0].trim().split(/\s+/);
-        if (values.length < 1 || values.length > 4) return false;
-        const edges = [values[0], values[1] || values[0],
-          values[2] || values[0], values[3] || values[1] || values[0]];
-        const pixels = edges.map((value, i) => parseFloat(value) *
-          (value.endsWith('%') ? (i % 2 ? box.width : box.height) / 100 : 1));
-        if (!pixels.every(Number.isFinite)) return false;
-        intersect({left: box.left + pixels[3], right: box.right - pixels[1],
-          top: box.top + pixels[0], bottom: box.bottom - pixels[2]});
-      }
-      if (right - left <= 1 || bottom - top <= 1) return false;
-    }
-    return right - left > 1 && bottom - top > 1;
-  };
-  const selector = '.tex,.tex-d,.kpress-math,[data-squares-math-ready]';
-  const failures = [];
-  for (const [index, host] of [...document.querySelectorAll(selector)].entries()) {
-    // The outer host owns its active prepared variant and native source box. A
-    // display:none print alternative has no layout; pending visibility:hidden
-    // formulas still have layout and must pass the output checks below.
-    if (host.parentElement?.closest(selector) || !host.getClientRects().length) continue;
-    const hasVisible = query => [...host.querySelectorAll(query)].some(exposed);
-    const native = host.matches('.kpress-math');
-    const raw = host.querySelector('.kpress-math-render');
-    const semantic = hasVisible('math.kpress-math-semantic, .kpress-math-semantic math');
-    const pending = host.closest('[data-squares-math-queued]')
-      || host.querySelector('[data-squares-math-queued]');
-    const error = hasVisible('.katex-error, merror');
-    const readable = native && host.dataset.kpressMathRendered !== 'true'
-      ? semantic && (!raw || !exposed(raw))
-      : hasVisible('.katex-html') && (!native || !semantic);
-    if (!pending && !error && readable) continue;
-    const source = host.dataset.kpressMathSource || raw?.dataset.kpressMathSource
-      || host.textContent || '';
-    failures.push(`${index} (${host.className || host.tagName}): `
-      + source.replace(/\s+/g, ' ').slice(0, 160));
-  }
-  if (failures.length) {
-    throw new Error(`unrendered math in ${failures.length} printed formulas: `
-      + failures.slice(0, 8).join('; '));
-  }
-}"""
+#: Diagnostic control and treatment over the snapshot's visible prepared text nodes; only
+#: the treatment replaces each with a fresh Text node holding its exact data.
+_PREPARED_TEXT_INTERVENTION = probe(PROBES, "render_explainer_pdf/prepared_text_intervention")
+
+#: Settlement with a math snapshot at every phase it passes through.
+_TRACED_SETTLED = probe(PROBES, "render_explainer_pdf/traced_settled")
+
+#: Refuses a finished print DOM whose math is a recovered failure rather than readable
+#: output, which repeated renders would otherwise agree on.
+_MATH_RENDERED = probe(PROBES, "render_explainer_pdf/math_rendered")
+
 
 #: A browser the environment supplies, for hosts that have one and cannot run
 #: `playwright install` -- a sandbox with a preloaded cache, a distribution package, a CI
@@ -323,14 +144,7 @@ SITE_URL = "https://jlevy.github.io/squares/"
 #: would also send the composite the figure shows to the network, and a render that
 #: fetches is a render that can differ. Anchors only; `img` and `link` keep resolving
 #: beside the file.
-_ABSOLUTE_LINKS = """(site) => {
-  for (const a of document.querySelectorAll('a[href]')) {
-    const href = a.getAttribute('href');
-    if (!href || /^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('#')) continue;
-    a.setAttribute('href', new URL(href, site).href);
-  }
-}"""
-
+_ABSOLUTE_LINKS = probe(PROBES, "render_explainer_pdf/absolute_links")
 
 #: The family and weight properties KPress's `@page` margin boxes read, and a
 #: sample every face answers with its `unicode-range` so `document.fonts.load` actually
@@ -360,30 +174,7 @@ _MARGIN_BOX_SAMPLE = "Aa Gg 0123"
 #: image contract makes that state an available paint source; `complete` alone is not enough,
 #: because it is also true for a broken request. Every other rejection, and a resolved decode
 #: that still leaves no drawable image, refuses the export with the source and state.
-_IMAGES_DECODED = """async () => {
-  const images = [...document.images];
-  for (const image of images) image.loading = 'eager';
-  const failures = (await Promise.all(images.map(async (image, index) => {
-    let rejection = null;
-    try {
-      await image.decode();
-    } catch (error) {
-      rejection = error instanceof Error ? error.message : String(error);
-    }
-    if (image.complete && image.naturalWidth > 0 && image.naturalHeight > 0) return null;
-    const source = image.currentSrc || image.src || `image ${index + 1}`;
-    const reason = rejection === null
-      ? 'decode resolved without a drawable current request'
-      : `decode rejected: ${rejection}`;
-    return `${source}: complete=${image.complete}, `
-      + `natural=${image.naturalWidth}x${image.naturalHeight}, ${reason}`;
-  }))).filter((failure) => failure !== null);
-  if (failures.length > 0) {
-    const noun = failures.length === 1 ? 'image is' : 'images are';
-    throw new Error(`${failures.length} required ${noun} not drawable after decode: `
-      + failures.join('; '));
-  }
-}"""
+_IMAGES_DECODED = probe(PROBES, "render_explainer_pdf/images_decoded")
 
 #: The added faces, settled -- both the ones the document tree asks for and the ones
 #: only an `@page` margin box does.
@@ -411,25 +202,7 @@ _IMAGES_DECODED = """async () => {
 #: dropped: kpress races one because a host page can name a face it fetches, while every
 #: face here is already a data URI in a document loaded from `file://`, and Playwright's
 #: own evaluate timeout is the backstop.
-_FACES_APPLIED = """async ([tokens, sample]) => {
-  void document.documentElement.offsetHeight;
-  await new Promise((frame) => requestAnimationFrame(() => requestAnimationFrame(frame)));
-  await document.fonts.ready;
-  const root = getComputedStyle(document.documentElement);
-  const stacks = tokens
-    .map(([familyToken, weightToken]) => ({
-      family: root.getPropertyValue(familyToken).trim(),
-      weight: root.getPropertyValue(weightToken).trim() || root.fontWeight || '400',
-    }))
-    .filter((stack) => stack.family.length > 0);
-  await Promise.all(stacks.map(
-    (stack) => document.fonts.load(`${stack.weight} 1rem ${stack.family}`, sample)
-      .catch(() => undefined),
-  ));
-  await document.fonts.ready;
-  void document.documentElement.offsetHeight;
-  return document.fonts.status;
-}"""
+_FACES_APPLIED = probe(PROBES, "render_explainer_pdf/faces_applied")
 
 
 def _normalised(pdf: bytes) -> bytes:
@@ -624,7 +397,7 @@ def render_pdf_bytes(
             page.emulate_media(media="print", reduced_motion="reduce")
             page.goto(PAGE.as_uri(), wait_until="load")
             page.wait_for_selector(READY, timeout=60_000)
-            page.evaluate("document.fonts.ready")
+            page.evaluate(FONTS_READY)
             page.evaluate(_ABSOLUTE_LINKS, SITE_URL)
             page.add_style_tag(content=print_face_css())
             page.evaluate(_FACES_APPLIED, [list(_MARGIN_BOX_TOKENS), _MARGIN_BOX_SAMPLE])
@@ -634,7 +407,16 @@ def render_pdf_bytes(
                 page.evaluate(SETTLED)
             else:
                 math_trace["snapshots"] = snapshots
-                snapshots.extend(page.evaluate(_TRACED_SETTLED))
+                snapshot = page.evaluate_handle(_MATH_SNAPSHOT_REFERENCE)
+                snapshots.extend(
+                    page.evaluate(
+                        _TRACED_SETTLED,
+                        {
+                            "settled": page.evaluate_handle(SETTLED_REFERENCE),
+                            "snapshot": snapshot,
+                        },
+                    )
+                )
                 # Evaluation can throw after replacing some Text nodes. Mark the
                 # intervention's outcome unknown until its full receipt returns.
                 math_trace["prepared_text_intervention"] = {
@@ -647,12 +429,15 @@ def render_pdf_bytes(
                     "mutated": None,
                     "html_unchanged": None,
                 }
-                intervention = page.evaluate(_PREPARED_TEXT_INTERVENTION, rebuild_prepared_text)
+                intervention = page.evaluate(
+                    _PREPARED_TEXT_INTERVENTION,
+                    {"rebuild": rebuild_prepared_text, "snapshot": snapshot},
+                )
                 snapshots.extend(intervention["snapshots"])
                 math_trace["prepared_text_intervention"] = intervention["intervention"]
                 if error := intervention.get("error"):
                     raise RuntimeError(error)
-            page.evaluate(_MATH_RENDERED)
+            page.evaluate(_MATH_RENDERED, {"math": page.evaluate_handle(_MATH_LIBRARY)})
             if math_trace is not None:
                 snapshots.append(page.evaluate(_MATH_SNAPSHOT, "before-pdf"))
             drawn = page.pdf(
