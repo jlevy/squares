@@ -3,13 +3,21 @@ type: is
 id: is-01m2hks7xdxm1whcf18gnj3j33
 title: The suite tier runs at its 275 s ceiling on main and the stack; fix it by measurement
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 5
+version: 7
+refs:
+  - kind: pr
+    url: https://github.com/jlevy/squares/pull/185
+    at: 2026-09-16T03:50:02.379Z
 labels: []
 dependencies: []
 created_at: 2026-09-15T04:04:14.381Z
-updated_at: 2026-09-16T03:09:02.973Z
+updated_at: 2026-09-16T03:50:02.381Z
+closed_at: 2026-09-16T03:49:31.364Z
+close_reason: "Completed by PR #185. The hosted exact-head artifacts were recorded in f462ccbb: shards 123.2s/138.8s, typecheck 65.9s, checks 91.3s, frontend 84.9s, sweeps 141.9s; the per-file registry now carries run 35050021006 provenance and both shards pack to 423.44 test-seconds."
+resolution: null
+duplicate_of: null
 ---
 The pull-request `suite` job (`packing-validate --suite`, one step: `fast behavioral tests`) runs against its 275 s ceiling on `main`'s own PRs and across the workbench stack. Its recorded cost, 183.44 s, is stale.
 

@@ -5,7 +5,7 @@ title: "Lane 3: CI guardrail -- PR-wall budget, no empty PR-tier records, no rec
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 7
 labels:
   - validation
   - ci
@@ -13,8 +13,10 @@ dependencies: []
 parent_id: is-01m2k0eqwj7en422j33wtvw5dt
 child_order_hints:
   - is-01m21mgmrpatjx0n66y23mmjc8
+  - is-01m2m5a2v1gwa2he9nvev4csqb
+  - is-01m2m5ad594cv9k37w6nm9e533
 created_at: 2026-09-15T20:11:48.648Z
-updated_at: 2026-09-16T03:09:02.250Z
+updated_at: 2026-09-16T03:49:32.238Z
 ---
 Lane 3 of think-xfqk (2026-09-15). The register that was built to stop the first CI spiral (gate-budgets.yaml, check_gate_budgets.py, gate_budgets.judge) let the second through: seven of nine tiers had no record, suite's record was re-based three times (102.83 -> 162.62 -> 118.72 -> 183.44 s) while its ceiling followed (205 -> 260 -> 237 -> 275 s), and nothing budgets the PR wall OR-14 targets (154 s median on 09-06, 284-298 s on 09-15).
 
@@ -27,4 +29,4 @@ Deliverables, branch claude/ci-wall-budget, PR into main:
 
 ## Notes
 
-**2026-09-16:** pushed as PR #186. `check_pr_wall.py` and `read_tier_walls.py` with tests over four recorded runs; the three register rules (no empty pull-request record, no unattributed rise, history kept); records written for `checks` (145.53 s, seven runs, with its 1.46x attribution), `frontend` and `sweeps`; and the rules written into `OR-14`, `development.md` and agenda 036's BC-352 correction. Not done: no hosted run has exercised the wall check yet, four commits are still labelled `wip`, the per-file test-cost feed comes from lane 2, and the rest of the bead hygiene in `attic/ci-review/prior-work.md` is outstanding. `think-uwow` was reopened and is now parented here.
+2026-09-16 review repair: PR #186's first hosted wall attempt never parsed under runner Python and its unmeasurable verdict exited zero. ba34637b pins uv 0.12.8/Python 3.14.7/PyYAML 6.0.3 in both jobs, uses the C safe loader, fails closed, removes fixture whitespace, and adds exit/workflow negative controls (62 focused tests; exact standalone command starts). The PR is still not merge-ready: it conflicts semantically with #183/#185 and the 180s budget has no observed variance margin (Pages 173/185s; validation 180s). Rebase after both land, refresh medians, and require a fully green integrated run; tracked as think-3919.
